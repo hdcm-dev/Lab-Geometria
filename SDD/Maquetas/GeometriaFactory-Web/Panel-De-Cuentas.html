@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de cuentas — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Panel-De-Cuentas" data-shell="trabajo"
+      data-papel="administrador" data-destino="cuentas" data-estado-inicial="con-datos">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<div class="mq-shell">
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+
+  <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
+
+    <div class="mq-encabezado">
+      <div>
+        <h1>Cuentas de la comisión</h1>
+        <p class="mq-subtitulo">Habilitá las cuentas que se registran y controlá el acceso.</p>
+      </div>
+    </div>
+
+    <!-- Orientación posterior: sólo la primera vez, tras el aprovisionamiento.
+         Orienta, no bloquea: no es un asistente ni una lista de tareas. -->
+    <div data-mq-estado="orientacion-posterior">
+      <p class="mq-banda mq-banda--confirmacion" role="status">
+        Tu cuenta de administrador quedó creada. El laboratorio ya está en marcha.
+      </p>
+      <ul class="mq-grilla-acceso" style="list-style:none;padding:0;margin:0 0 24px" data-mq-orientacion></ul>
+    </div>
+
+    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito">
+      La operación se aplicó y la lista se volvió a pedir.
+    </p>
+    <!-- Operación puntual en curso: el control de esa fila queda inhabilitado
+         con indicador, sin bloquear la lista entera. -->
+    <p class="mq-banda mq-banda--info" role="status" data-mq-estado="aplicando-situacion">
+      <span class="mq-spinner" aria-hidden="true"></span>
+      <span>Aplicando el cambio de situación. El control de esa fila queda inhabilitado con su
+      indicador y previene el doble disparo; el resto de la lista sigue operable. La fila se repinta
+      con la situación que devuelve el servicio, no con la que la pantalla supone.</span>
+    </p>
+    <p class="mq-banda mq-banda--info" role="status" data-mq-estado="ejecutando-baja">
+      <span class="mq-spinner" aria-hidden="true"></span>
+      <span>Ejecutando la baja. La acción del diálogo queda inhabilitada con su indicador.</span>
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="cuenta-inexistente">
+      Esa cuenta ya no existe. La lista se recargó: volvé a intentar sobre la lista actualizada.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="administrador-ya-configurado">
+      Este laboratorio ya tiene su cuenta de administrador. <a href="Ingreso.html">Ir a ingresar</a>.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="baja-no-coincide">
+      El correo que escribiste no es el de la cuenta. La baja no procedió.
+    </p>
+
+    <section class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" aria-labelledby="pc-indisp-h">
+      <h2 id="pc-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>Ahora no podemos traer las cuentas</h2>
+      <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+         Probá de nuevo en un rato.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer las cuentas</button>
+    </section>
+
+    <!-- Barra de filtros: filtra sobre lo ya recibido. -->
+    <div class="mq-filtros" data-mq-estado="con-datos filtrado-sin-resultados aplicando-situacion confirmando-baja baja-no-coincide ejecutando-baja exito cuenta-inexistente administrador-ya-configurado orientacion-posterior reconectando">
+      <div class="mq-campo mq-campo-busqueda">
+        <label for="pc-buscar">Buscar por correo o nombre</label>
+        <span data-mq-ico-buscar></span>
+        <input class="mq-input" id="pc-buscar" type="search" placeholder="por ejemplo, ana">
+      </div>
+      <div class="mq-campo">
+        <!-- «Situación» y no «estado», para no colisionar con el estado del trabajo. -->
+        <label for="pc-situacion">Situación de la cuenta</label>
+        <select class="mq-select" id="pc-situacion">
+          <option>todas</option><option>Pendiente</option><option>Habilitada</option><option>Bloqueada</option>
+        </select>
+      </div>
+    </div>
+
+    <div data-mq-estado="cargando" aria-hidden="true">
+      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto" style="height:42px"></div>
+    </div>
+
+    <!-- Vacío: sin ofrecer una acción de crear. El administrador no crea
+         cuentas de alumno. -->
+    <section class="mq-vacio" data-mq-estado="vacio" aria-labelledby="pc-vacio-h">
+      <span data-mq-ico-vacio aria-hidden="true"></span>
+      <h2 id="pc-vacio-h">Todavía no hay ninguna cuenta de alumno</h2>
+      <p>Las cuentas aparecen acá cuando los alumnos se registran. Después las habilitás vos.</p>
+    </section>
+
+    <section class="mq-vacio" data-mq-estado="filtrado-sin-resultados" aria-labelledby="pc-filtro-h">
+      <span data-mq-ico-vacio aria-hidden="true"></span>
+      <h2 id="pc-filtro-h">Ninguna cuenta coincide con el filtro</h2>
+      <p>Hay cuentas registradas, pero ninguna responde a lo que buscaste.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:16px">Limpiar el filtro</button>
+    </section>
+
+    <div data-mq-estado="con-datos aplicando-situacion confirmando-baja baja-no-coincide ejecutando-baja exito cuenta-inexistente administrador-ya-configurado orientacion-posterior reconectando">
+      <div class="mq-tabla-envoltorio">
+        <table class="mq-tabla">
+          <caption class="mq-sr-only">Cuentas de la comisión, con su situación y la operación que esa situación admite</caption>
+          <thead>
+            <tr>
+              <th scope="col">Cuenta</th><th scope="col">Correo</th><th scope="col">Situación</th>
+              <th scope="col">Fecha de registro</th><th scope="col" class="mq-td-acciones">Operaciones</th>
+            </tr>
+          </thead>
+          <tbody data-mq-filas-cuentas></tbody>
+        </table>
+      </div>
+      <div class="mq-tarjetas-apiladas" data-mq-tarjetas-cuentas role="list"></div>
+    </div>
+
+  </main></div>
+</div>
+
+<!-- Diálogo de baja con confirmación escrita. El aviso de arrastre va en el
+     MISMO lugar donde se pide la confirmación, y se asocia por descripción
+     accesible al campo, para que se anuncie antes de que la persona escriba. -->
+<dialog class="mq-dialogo" id="pc-dlg-baja" aria-labelledby="pc-dlg-h">
+  <h2 id="pc-dlg-h">Dar de baja la cuenta de <span data-mq-dlg-cuenta></span></h2>
+  <p class="mq-banda mq-banda--atencion" id="pc-arrastre" data-mq-aviso-arrastre></p>
+  <div class="mq-campo">
+    <label for="pc-confirmacion">Para confirmar, escribí el correo de la cuenta:
+      <strong data-mq-dlg-correo></strong></label>
+    <input class="mq-input" id="pc-confirmacion" type="email" autocomplete="off"
+           aria-describedby="pc-arrastre">
+  </div>
+  <div class="mq-acciones-pie">
+    <button type="button" class="mq-btn mq-btn--secundario" data-mq-cierra-dialogo>Cancelar</button>
+    <!-- Permanece inhabilitada hasta que lo escrito coincide. -->
+    <button type="button" class="mq-btn mq-btn--destructivo" disabled data-mq-dlg-baja>Dar de baja</button>
+  </div>
+</dialog>
+
+<div data-mq-barra-validacion></div>
+
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$('[data-mq-ico-buscar]').outerHTML = M.icono('buscar');
+  M.$$('[data-mq-ico-vacio]').forEach(function (el) { el.outerHTML = M.icono('vacio', 'mq-ico--24'); });
+  M.$('[data-mq-ico-alerta]').outerHTML = M.icono('alerta', 'mq-ico--20');
+  M.$('[data-mq-aviso-arrastre]').textContent = D.textos.avisoArrastre;
+
+  // Se ofrece la transición que la situación admite, no las tres a la vez.
+  var VERBO = { 'Pendiente': 'Habilitar', 'Habilitada': 'Bloquear', 'Bloqueada': 'Rehabilitar' };
+
+  // Ninguna de las cuatro operaciones procede sobre la cuenta de administrador.
+  var cuentas = D.cuentas.filter(function (c) { return c.papel === 'Alumno'; });
+
+  function acciones(c) {
+    var quien = ' la cuenta de ' + c.nombre + ' ' + c.apellido;
+    return '<button type="button" class="mq-btn mq-btn--secundario" aria-label="' +
+             M.esc(VERBO[c.etiquetaSituacion] + quien) + '">' + M.esc(VERBO[c.etiquetaSituacion]) + '</button>' +
+           '<button type="button" class="mq-btn mq-btn--destructivo" data-mq-baja="' + c.id +
+             '" aria-label="' + M.esc('Dar de baja' + quien) + '">' + M.icono('eliminar') + 'Dar de baja</button>';
+  }
+
+  M.$('[data-mq-filas-cuentas]').innerHTML = cuentas.map(function (c) {
+    return '<tr>' +
+      '<th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:inherit">' +
+        '<span class="mq-iniciales" aria-hidden="true">' + M.esc(c.iniciales) + '</span> ' +
+        M.esc(c.nombre + ' ' + c.apellido) + '</th>' +
+      '<td>' + M.esc(c.correo) + '</td>' +
+      '<td>' + M.insignia(c.etiquetaSituacion) + '</td>' +
+      '<td class="mq-num">' + M.esc(c.fechaRegistro) + '</td>' +
+      '<td class="mq-td-acciones"><span class="mq-acciones-fila">' + acciones(c) + '</span></td>' +
+    '</tr>';
+  }).join('');
+
+  M.$('[data-mq-tarjetas-cuentas]').innerHTML = cuentas.map(function (c) {
+    return '<article class="mq-tarjeta-fila" role="listitem">' +
+      '<div class="mq-tarjeta-fila-cabecera">' +
+        '<h3 class="mq-body-strong"><span class="mq-iniciales" aria-hidden="true">' + M.esc(c.iniciales) +
+        '</span> ' + M.esc(c.nombre + ' ' + c.apellido) + '</h3>' + M.insignia(c.etiquetaSituacion) +
+      '</div>' +
+      '<p class="mq-caption" style="margin:8px 0 0">' + M.esc(c.correo) + ' · registro ' +
+        M.esc(c.fechaRegistro) + '</p>' +
+      '<div class="mq-acciones-fila">' + acciones(c) + '</div></article>';
+  }).join('');
+
+  // Orientación posterior: tres tarjetas de acceso. Ninguna es obligatoria.
+  var TARJETAS = [
+    { i: 'cuentas',  t: 'Cuentas',      d: 'Habilitá a los alumnos que se registren.', h: 'Panel-De-Cuentas.html' },
+    { i: 'comision', t: 'Entrega',      d: 'Recorré los trabajos de la comisión.',     h: 'Listado-De-La-Comision.html' },
+    { i: 'llave',    t: 'Mi contraseña', d: 'Cambiá tu contraseña cuando quieras.',    h: 'Credencial-Propia.html?estado=curso-cambio' }
+  ];
+  M.$('[data-mq-orientacion]').innerHTML = TARJETAS.map(function (t) {
+    return '<li><div class="mq-tarjeta-acceso-modulo">' +
+      '<span class="mq-ico-contenedor">' + M.icono(t.i, 'mq-ico--20') + '</span>' +
+      '<h3 class="mq-body-strong">' + M.esc(t.t) + '</h3>' +
+      '<p class="mq-caption" style="margin:0">' + M.esc(t.d) + '</p>' +
+      '<a class="mq-btn mq-btn--secundario" href="' + t.h + '" style="margin-top:auto">Abrir</a>' +
+    '</div></li>';
+  }).join('');
+
+  // Confirmación escrita: la acción destructiva se habilita SÓLO cuando lo
+  // escrito coincide con el correo de la cuenta.
+  var campo = M.$('#pc-confirmacion');
+  var confirmar = M.$('[data-mq-dlg-baja]');
+  var esperado = '';
+  M.$$('[data-mq-baja]').forEach(function (b) {
+    var c = D.cuenta(b.getAttribute('data-mq-baja'));
+    b.setAttribute('data-mq-abre-dialogo', 'pc-dlg-baja');
+    b.addEventListener('click', function () {
+      esperado = c.correo;
+      M.$('[data-mq-dlg-cuenta]').textContent = c.nombre + ' ' + c.apellido;
+      M.$('[data-mq-dlg-correo]').textContent = c.correo;
+      campo.value = '';
+      confirmar.disabled = true;
+    });
+  });
+  campo.addEventListener('input', function () {
+    confirmar.disabled = campo.value.trim() !== esperado;
+  });
+
+  window.alCambiarEstado = function (id) {
+    var dlg = document.getElementById('pc-dlg-baja');
+    if (dlg && dlg.open) { dlg.close(); }
+    if (id === 'confirmando-baja') { M.$('[data-mq-baja]').click(); }
+  };
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

@@ -1,0 +1,775 @@
+/* ============================================================================
+   Estilos-Maqueta.css — Maqueta de validación visual · GeometriaFactory-Web
+   Fase B2 · Modelo UX-UI: catálogo base de References/Design/
+
+   Todo valor visual de esta hoja es un token del catálogo de diseño,
+   materializado como variable CSS con el nombre semántico del catálogo:
+     - Design-Rules-Web-Generico.md §2 (color, tipografía, espaciado, radios)
+     - Design-Rules-Identidad-De-Version.md §4 (sello y diagnóstico)
+     - Design-Rules-Primer-Arranque.md §4 (tarjeta de acceso, banda de resultado)
+   No hay literales visuales ad hoc: cualquier valor nuevo se promueve al
+   catálogo antes de usarse acá.
+   ============================================================================ */
+
+:root {
+  /* --- color · superficies, texto y bordes (base §2.1) ------------------- */
+  --color-background-primary:   #FFFFFF;
+  --color-background-secondary: #F1F1EF;
+  --color-background-tertiary:  #F7F6F4;
+  --color-text-primary:         #1A1A18;
+  --color-text-secondary:       #5C5C57;
+  --color-text-tertiary:        #8A8A82;
+  --color-text-danger:          #A03030;
+  --color-border-secondary:     #D9D9D4;
+  --color-border-tertiary:      #E6E6E1;
+  --color-border-danger:        #E0B4B4;
+
+  /* --- color · rampa de marca y acentos por módulo (base §2.1) ----------- */
+  --color-brand-primary:        #0F6E56;
+  --color-brand-primary-dark:   #04342C;
+  --color-brand-primary-tint:   #E1F5EE;
+  --color-accent-module-a:      #0F6E56;
+  --color-accent-module-b:      #534AB7;
+  --color-accent-module-c:      #854F0B;
+  --color-accent-module-d:      #185FA5;
+
+  /* --- color · estados semánticos, siempre par texto + tint (base §2.1) -- */
+  --color-text-success:         #0F6E56;
+  --color-background-success:   #E1F5EE;
+  --color-text-warning:         #854F0B;
+  --color-background-warning:   #FAEEDA;
+  --color-text-error:           #993556;
+  --color-background-error:     #FBEAF0;
+  --color-text-info:            #185FA5;
+  --color-background-info:      #E7F0F9;
+  --color-border-info:          #BBD4EA;
+
+  /* --- tipografía (base §2.2) ------------------------------------------- */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --type-title-size:        17px; --type-title-weight:        500;
+  --type-body-strong-size:  14px; --type-body-strong-weight:  500;
+  --type-body-size:         13px; --type-body-weight:         400;
+  --type-caption-size:      12px; --type-caption-weight:      400;
+  --type-meta-size:         11px; --type-meta-weight:         500;
+
+  /* --- espaciado (base §2.3, escala base 4) ------------------------------ */
+  --space-1:  4px; --space-2:  8px; --space-3: 12px; --space-4: 14px;
+  --space-5: 16px; --space-6: 18px; --space-7: 20px; --space-8: 22px;
+  --space-9: 28px;
+
+  /* --- radios y bordes (base §2.3) --------------------------------------- */
+  --radius-md:   9px;
+  --radius-lg:  13px;
+  --radius-pill: 20px;
+  --radius-icon: 12px;
+  --border-hairline: 1px solid var(--color-border-tertiary);
+  --border-control:  1px solid var(--color-border-secondary);
+
+  /* --- movimiento (base §8) ---------------------------------------------- */
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --motion-ease: ease;
+
+  /* --- layout del shell (base §3.1) -------------------------------------- */
+  --shell-sidebar-width: 168px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ============================================================================
+   Base
+   ============================================================================ */
+
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body.mq-body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--type-body-size);
+  line-height: 1.45;
+  color: var(--color-text-primary);
+  background: var(--color-background-tertiary);
+  /* espacio para la barra de validación fija al pie */
+  padding-bottom: 92px;
+}
+
+/* Escala tipográfica del catálogo también para los encabezados desnudos:
+   sin esto manda la escala del framework de grilla y la jerarquía se rompe. */
+h1 { margin: 0; line-height: 1.2; font-size: var(--type-title-size); font-weight: var(--type-title-weight); }
+h2, h3, h4 { margin: 0; line-height: 1.2; font-size: var(--type-body-strong-size); font-weight: var(--type-body-strong-weight); }
+h2.mq-title, h3.mq-title { font-size: var(--type-title-size); font-weight: var(--type-title-weight); }
+h2.mq-meta, h3.mq-meta { font-size: var(--type-meta-size); font-weight: var(--type-meta-weight); }
+p { margin: 0 0 var(--space-3); }
+
+a { color: var(--color-brand-primary); }
+
+/* Foco visible en todo elemento interactivo (base §7): anillo de 2px que no
+   depende sólo del color. */
+:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+.mq-shell-sidebar :focus-visible { outline-color: var(--color-background-primary); }
+
+.mq-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.mq-skip {
+  position: absolute; left: var(--space-2); top: -60px; z-index: 60;
+  background: var(--color-background-primary); color: var(--color-brand-primary);
+  border: var(--border-control); border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3); font-size: var(--type-body-size);
+  transition: top var(--motion-fast) var(--motion-ease);
+}
+.mq-skip:focus { top: var(--space-2); }
+
+/* Tipografía semántica */
+.mq-title       { font-size: var(--type-title-size);       font-weight: var(--type-title-weight); }
+.mq-body-strong { font-size: var(--type-body-strong-size); font-weight: var(--type-body-strong-weight); }
+.mq-body        { font-size: var(--type-body-size);        font-weight: var(--type-body-weight); }
+.mq-caption     { font-size: var(--type-caption-size);     font-weight: var(--type-caption-weight); color: var(--color-text-secondary); }
+.mq-meta        { font-size: var(--type-meta-size);        font-weight: var(--type-meta-weight);
+                  letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
+.mq-num         { font-variant-numeric: tabular-nums; }
+
+/* Iconos SVG inline, heredan color por currentColor (base §6.1) */
+.mq-ico { width: 1em; height: 1em; flex: none; vertical-align: -0.125em; }
+.mq-ico--24 { width: 24px; height: 24px; }
+.mq-ico--20 { width: 20px; height: 20px; }
+.mq-ico--16 { width: 16px; height: 16px; }
+
+/* ============================================================================
+   Shell de acceso (Experiencia-De-Uso §3.2 · Primer arranque §4.1)
+   Sin barra lateral, sin barra superior, sin navegación.
+   ============================================================================ */
+
+.mq-lienzo {
+  /* Se descuenta la barra de validación fija, que no forma parte del producto. */
+  min-height: calc(100vh - 92px);
+  display: flex; flex-direction: column; align-items: center;
+  padding: var(--space-9) var(--space-5) var(--space-7);
+  background: var(--color-background-tertiary);
+}
+
+/* Anclada a la franja superior, nunca centrada verticalmente. */
+.mq-tarjeta-acceso {
+  width: 100%; max-width: 380px;
+  background: var(--color-background-primary);
+  border: var(--border-hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7);
+}
+
+.mq-identidad {
+  display: flex; align-items: center; gap: var(--space-2);
+  color: var(--color-brand-primary);
+  font-size: var(--type-body-strong-size); font-weight: var(--type-body-strong-weight);
+  margin-bottom: var(--space-5);
+}
+
+.mq-tarjeta-acceso h1 { font-size: var(--type-title-size); font-weight: var(--type-title-weight); }
+.mq-subtitulo {
+  margin: var(--space-2) 0 var(--space-5);
+  font-size: var(--type-caption-size); color: var(--color-text-secondary);
+}
+
+/* ============================================================================
+   Shell de trabajo (Experiencia-De-Uso §3.2 · base §3.1)
+   ============================================================================ */
+
+.mq-shell { display: flex; min-height: calc(100vh - 92px); align-items: stretch; }
+
+.mq-shell-sidebar {
+  width: var(--shell-sidebar-width); flex: none;
+  background: var(--color-brand-primary-dark);
+  color: var(--color-background-primary);
+  display: flex; flex-direction: column;
+  padding: var(--space-5) var(--space-3);
+}
+.mq-shell-sidebar .mq-identidad { color: var(--color-background-primary); }
+
+.mq-nav { display: flex; flex-direction: column; gap: var(--space-1); }
+.mq-nav a {
+  display: flex; align-items: center; gap: var(--space-2);
+  min-height: 40px; padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md); text-decoration: none;
+  font-size: var(--type-body-size);
+  color: var(--color-background-primary); opacity: .72;
+}
+.mq-nav a:hover { opacity: 1; }
+.mq-nav a[aria-current="page"] { background: var(--color-brand-primary); opacity: 1; }
+
+.mq-sidebar-pie {
+  margin-top: auto; padding-top: var(--space-4);
+  border-top: 1px solid rgba(255,255,255,.18);
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+.mq-sidebar-persona { font-size: var(--type-body-size); }
+.mq-sidebar-papel   { font-size: var(--type-meta-size); opacity: .78; }
+
+.mq-shell-contenido {
+  flex: 1 1 auto; min-width: 0;
+  padding: var(--space-6) var(--space-7);
+  background: var(--color-background-tertiary);
+}
+
+.mq-encabezado {
+  display: flex; flex-wrap: wrap; gap: var(--space-3);
+  align-items: flex-start; justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+.mq-encabezado h1 { font-size: var(--type-title-size); font-weight: var(--type-title-weight); }
+.mq-encabezado .mq-subtitulo { margin: var(--space-1) 0 0; max-width: 62ch; }
+
+.mq-separador { border: 0; border-top: 1px solid var(--color-border-tertiary); margin: var(--space-5) 0; }
+
+/* ============================================================================
+   Controles de formulario (base §4.6)
+   ============================================================================ */
+
+.mq-campo { margin-bottom: var(--space-4); }
+.mq-campo label {
+  display: block; margin-bottom: var(--space-1);
+  font-size: var(--type-caption-size); color: var(--color-text-secondary);
+}
+.mq-input, .mq-select, .mq-textarea {
+  width: 100%; min-height: 38px;
+  padding: var(--space-2) var(--space-3);
+  font-family: inherit; font-size: var(--type-body-size); color: var(--color-text-primary);
+  background: var(--color-background-primary);
+  border: var(--border-control); border-radius: var(--radius-md);
+}
+.mq-input::placeholder, .mq-textarea::placeholder { color: var(--color-text-tertiary); }
+.mq-textarea { min-height: 132px; resize: vertical; }
+.mq-textarea--texto-trabajo {
+  font-family: var(--font-mono); font-size: var(--type-caption-size); line-height: 1.5;
+  white-space: pre; overflow: auto;
+}
+.mq-requisito {
+  display: block; margin-top: var(--space-1);
+  font-size: var(--type-caption-size); color: var(--color-text-secondary);
+}
+.mq-campo--error .mq-input,
+.mq-campo--error .mq-textarea { border-color: var(--color-border-danger); border-width: 2px; }
+.mq-campo--error .mq-requisito { color: var(--color-text-danger); }
+
+.mq-campo-busqueda { position: relative; }
+.mq-campo-busqueda .mq-ico {
+  position: absolute; left: var(--space-3); top: 50%; transform: translateY(-50%);
+  color: var(--color-text-secondary); pointer-events: none;
+}
+.mq-campo-busqueda .mq-input { padding-left: calc(var(--space-3) * 2 + 16px); }
+
+.mq-filtros {
+  display: flex; flex-wrap: wrap; gap: var(--space-3);
+  align-items: flex-end; margin-bottom: var(--space-4);
+}
+.mq-filtros .mq-campo { margin-bottom: 0; min-width: 180px; }
+
+/* ============================================================================
+   Botones (base §4.9)
+   ============================================================================ */
+
+.mq-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 34px; min-width: 34px;
+  padding: var(--space-2) var(--space-4);
+  font-family: inherit; font-size: var(--type-body-size); font-weight: 500;
+  border-radius: var(--radius-md); border: 1px solid transparent;
+  cursor: pointer; text-decoration: none;
+  transition: background var(--motion-fast) var(--motion-ease);
+}
+.mq-btn--primario   { background: var(--color-brand-primary); color: #FFFFFF; }
+.mq-btn--primario:hover { background: var(--color-brand-primary-dark); color: #FFFFFF; }
+.mq-btn--secundario { background: var(--color-background-primary); color: var(--color-text-secondary); border-color: var(--color-border-secondary); }
+.mq-btn--destructivo{ background: var(--color-background-primary); color: var(--color-text-danger); border-color: var(--color-border-danger); }
+.mq-btn--pill       { background: var(--color-background-primary); color: var(--color-text-secondary);
+                      border-color: var(--color-border-secondary); border-radius: var(--radius-pill); }
+.mq-btn--ancho      { width: 100%; }
+.mq-btn[disabled], .mq-btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+
+.mq-acciones-fila { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: flex-end; }
+.mq-acciones-pie  { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: flex-end; margin-top: var(--space-5); }
+
+/* Indicador de operación en curso, dentro del propio control */
+.mq-spinner {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid currentColor; border-top-color: transparent;
+  animation: mq-giro 700ms linear infinite;
+}
+@keyframes mq-giro { to { transform: rotate(360deg); } }
+
+/* ============================================================================
+   Insignias y chips de estado (base §4.8 · Representacion-Fila-De-Trabajo §2)
+   El texto está siempre presente; el color es refuerzo.
+   ============================================================================ */
+
+.mq-insignia {
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  padding: 2px var(--space-3); border-radius: var(--radius-pill);
+  font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
+  white-space: nowrap;
+}
+.mq-insignia--neutro    { background: var(--color-background-secondary); color: var(--color-text-secondary); }
+.mq-insignia--atencion  { background: var(--color-background-warning);   color: var(--color-text-warning); }
+.mq-insignia--exito     { background: var(--color-background-success);   color: var(--color-text-success); }
+.mq-insignia--peligro   { background: var(--color-background-error);     color: var(--color-text-error); }
+.mq-insignia--info      { background: var(--color-background-info);      color: var(--color-text-info); }
+
+/* ============================================================================
+   Bandas de resultado (Primer arranque §4.4)
+   ============================================================================ */
+
+.mq-banda {
+  display: flex; gap: var(--space-3); align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md); border: 1px solid transparent;
+  font-size: var(--type-body-size);
+  margin-bottom: var(--space-5);
+}
+.mq-banda--error        { background: var(--color-background-error);   color: var(--color-text-error);   border-color: var(--color-border-danger); }
+.mq-banda--confirmacion { background: var(--color-background-success); color: var(--color-text-success); border-color: var(--color-brand-primary-tint); }
+.mq-banda--atencion     { background: var(--color-background-warning); color: var(--color-text-warning); border-color: #E8D3AE; }
+.mq-banda--info         { background: var(--color-background-info);    color: var(--color-text-info);    border-color: var(--color-border-info); }
+
+/* ============================================================================
+   Tarjetas, bloques y grillas
+   ============================================================================ */
+
+.mq-tarjeta {
+  background: var(--color-background-primary);
+  border: var(--border-hairline); border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.mq-tarjeta + .mq-tarjeta { margin-top: var(--space-4); }
+
+.mq-bloque { margin-bottom: var(--space-5); }
+.mq-bloque > h2 { margin-bottom: var(--space-3); }
+
+.mq-grilla-acceso {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--space-4);
+}
+.mq-tarjeta-acceso-modulo {
+  background: var(--color-background-primary); border: var(--border-hairline);
+  border-radius: var(--radius-lg); padding: var(--space-5);
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+.mq-ico-contenedor {
+  width: 36px; height: 36px; border-radius: var(--radius-icon);
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--color-brand-primary-tint); color: var(--color-brand-primary);
+}
+
+.mq-clave-valor { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-2) var(--space-4); }
+.mq-clave-valor dt { font-size: var(--type-caption-size); color: var(--color-text-secondary); margin: 0; }
+.mq-clave-valor dd { margin: 0; font-size: var(--type-body-size); }
+
+/* ============================================================================
+   Grilla de listado (base §4.3)
+   ============================================================================ */
+
+.mq-tabla-envoltorio { overflow-x: auto; }
+.mq-tabla { width: 100%; border-collapse: collapse; background: var(--color-background-primary); }
+.mq-tabla caption { text-align: left; padding: var(--space-2) var(--space-4); font-size: var(--type-caption-size); color: var(--color-text-secondary); }
+.mq-tabla th {
+  text-align: left; padding: var(--space-2) var(--space-4);
+  font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--color-text-secondary);
+  background: var(--color-background-tertiary);
+  border-bottom: var(--border-hairline);
+}
+.mq-tabla td { padding: var(--space-3) var(--space-4); border-bottom: var(--border-hairline); vertical-align: middle; }
+.mq-tabla tbody tr:hover { background: #F4F9F7; }
+.mq-tabla .mq-td-acciones { text-align: right; white-space: nowrap; }
+
+.mq-iniciales {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--color-brand-primary-tint); color: var(--color-brand-primary);
+  font-size: var(--type-meta-size); font-weight: 600;
+}
+
+.mq-grupo { border: var(--border-hairline); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: var(--space-4); background: var(--color-background-primary); }
+.mq-grupo-cabecera {
+  width: 100%; display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4); background: var(--color-background-tertiary);
+  border: 0; border-bottom: var(--border-hairline); text-align: left;
+  font-family: inherit; font-size: var(--type-body-strong-size); font-weight: 500; cursor: pointer;
+}
+.mq-grupo-recuento { margin-left: auto; font-size: var(--type-caption-size); color: var(--color-text-secondary); }
+
+/* Tarjetas apiladas: versión angosta de la fila de trabajo y de cuenta */
+.mq-tarjetas-apiladas { display: none; flex-direction: column; gap: var(--space-3); }
+.mq-tarjeta-fila {
+  background: var(--color-background-primary); border: var(--border-hairline);
+  border-radius: var(--radius-lg); padding: var(--space-4);
+}
+.mq-tarjeta-fila-cabecera { display: flex; gap: var(--space-3); align-items: center; justify-content: space-between; }
+.mq-tarjeta-fila .mq-acciones-fila { justify-content: stretch; margin-top: var(--space-3); }
+.mq-tarjeta-fila .mq-acciones-fila .mq-btn { flex: 1 1 120px; }
+
+/* ============================================================================
+   Estado vacío (base §5) — invitación, no hueco
+   ============================================================================ */
+
+.mq-vacio {
+  text-align: center; padding: var(--space-9) var(--space-5);
+  background: var(--color-background-primary);
+  border: var(--border-hairline); border-radius: var(--radius-lg);
+}
+.mq-vacio svg { width: 96px; height: 96px; color: var(--color-border-secondary); }
+.mq-vacio h2 { margin: var(--space-4) 0 var(--space-2); font-size: var(--type-body-strong-size); }
+.mq-vacio p  { color: var(--color-text-secondary); font-size: var(--type-caption-size); max-width: 46ch; margin-inline: auto; }
+
+/* Aviso de indisponibilidad (Estado degradado §3) */
+.mq-aviso-indisponible {
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-danger); border-left-width: 4px;
+  border-radius: var(--radius-lg); padding: var(--space-5);
+}
+.mq-aviso-indisponible h2 {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--type-body-strong-size); color: var(--color-text-danger); margin-bottom: var(--space-2);
+}
+.mq-aviso-indisponible p { color: var(--color-text-secondary); font-size: var(--type-caption-size); max-width: 62ch; }
+
+/* Cartel de reconexión: banda superpuesta en el borde superior, no empuja */
+.mq-cartel-reconexion {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-background-warning); color: var(--color-text-warning);
+  border-bottom: 1px solid #E8D3AE;
+  font-size: var(--type-body-size);
+}
+body.mq-inerte .mq-shell,
+body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity(.7); }
+
+/* Esqueletos de carga (base §5) */
+.mq-esqueleto {
+  background: linear-gradient(90deg, var(--color-background-secondary) 25%, var(--color-background-tertiary) 37%, var(--color-background-secondary) 63%);
+  background-size: 400% 100%; animation: mq-brillo 1.4s ease infinite;
+  border-radius: var(--radius-md); height: 14px; margin-bottom: var(--space-3);
+}
+.mq-esqueleto--alto { height: 132px; }
+.mq-esqueleto--campo { height: 38px; }
+@keyframes mq-brillo { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+
+.mq-barra-indeterminada {
+  height: 4px; width: 100%; border-radius: var(--radius-pill);
+  background: var(--color-background-secondary); overflow: hidden; position: relative;
+}
+.mq-barra-indeterminada::after {
+  content: ""; position: absolute; inset: 0; width: 35%;
+  background: var(--color-brand-primary); animation: mq-recorrido 1.2s ease-in-out infinite;
+}
+@keyframes mq-recorrido { 0% { left: -35%; } 100% { left: 100%; } }
+
+/* ============================================================================
+   Vista de trabajo: cuatro partes (Wireframes-Vista-De-Trabajo §2)
+   Izquierda ~1/3 (datos y texto) · derecha ~2/3 (escena arriba, árbol abajo).
+   Disposición decidida aguas arriba y probada en el aula: no se rediseña.
+   ============================================================================ */
+
+.mq-dos-columnas {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-5);
+  align-items: start;
+}
+.mq-columna { min-width: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+
+/* Bloque de la escena: relación de aspecto próxima a 4:3 [ASUNCIÓN de 03] */
+.mq-escena {
+  position: relative; width: 100%; aspect-ratio: 4 / 3; min-height: 240px;
+  background: var(--color-background-primary);
+  border: var(--border-hairline); border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.mq-escena svg { width: 100%; height: 100%; display: block; }
+
+/* Lienzo del visor real (assets/js/Visor-Tridimensional.js). Ocupa el área
+   entera; el rótulo y la leyenda quedan por encima. */
+.mq-escena-lienzo {
+  position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; display: block;
+  border-radius: var(--radius-lg); cursor: grab; touch-action: none;
+}
+.mq-escena-lienzo:active { cursor: grabbing; }
+/* Las dos casillas de movimiento automático, al pie del área de dibujo. Son
+   preferencias de quien mira la escena, no instrumento de validación: por eso
+   viven acá y no en el panel del contrato. */
+.mq-escena-movimiento {
+  position: absolute; left: var(--space-3); bottom: var(--space-3); right: var(--space-3); z-index: 1;
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4);
+  font-size: var(--type-caption-size); color: var(--color-text-secondary);
+  background: var(--color-background-tertiary);
+  border: var(--border-hairline); border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-3);
+}
+.mq-escena-movimiento[hidden] { display: none; }
+.mq-escena-movimiento__opcion { display: inline-flex; align-items: center; gap: var(--space-2); }
+.mq-escena-movimiento__opcion input { width: 16px; height: 16px; margin: 0; accent-color: var(--color-brand-primary); }
+/* Objetivo de toque de al menos 24 px sin agrandar el recuadro visible. */
+.mq-escena-movimiento__opcion label { cursor: pointer; padding: var(--space-1) 0; min-height: 24px; display: inline-flex; align-items: center; }
+.mq-escena-movimiento__nota { color: var(--color-text-tertiary); }
+
+.mq-escena-leyenda {
+  position: absolute; left: 50%; top: 50%; z-index: 1; transform: translate(-50%, -50%);
+  margin: 0; max-width: 80%; text-align: center;
+  font-size: var(--type-caption-size); color: var(--color-text-secondary);
+}
+.mq-escena-rotulo {
+  position: absolute; left: var(--space-3); top: var(--space-3); z-index: 1;
+  font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
+  color: var(--color-text-secondary); background: var(--color-background-tertiary);
+  border: var(--border-hairline); border-radius: var(--radius-pill);
+  padding: 2px var(--space-3);
+}
+.mq-pieza { cursor: pointer; }
+.mq-pieza .mq-pieza-cuerpo {
+  fill: var(--color-background-secondary);
+  stroke: var(--color-text-secondary); stroke-width: 1.5;
+  transition: fill var(--motion-fast) var(--motion-ease);
+}
+.mq-pieza[aria-pressed="true"] .mq-pieza-cuerpo {
+  fill: var(--color-brand-primary-tint); stroke: var(--color-brand-primary); stroke-width: 2.5;
+}
+.mq-pieza-etiqueta { font-size: 11px; fill: var(--color-text-secondary); }
+.mq-pieza[aria-pressed="true"] .mq-pieza-etiqueta { fill: var(--color-brand-primary); font-weight: 600; }
+
+/* Árbol de la estructura */
+.mq-arbol { list-style: none; margin: 0; padding: 0; font-size: var(--type-body-size); }
+.mq-arbol ul { list-style: none; margin: 0; padding-left: var(--space-5); }
+.mq-nodo {
+  display: flex; align-items: center; gap: var(--space-2);
+  width: 100%; min-height: 28px; padding: var(--space-1) var(--space-2);
+  border: 0; background: transparent; border-radius: var(--radius-md);
+  font-family: inherit; font-size: var(--type-body-size); color: var(--color-text-primary);
+  text-align: left; cursor: pointer;
+}
+.mq-nodo:hover { background: var(--color-background-tertiary); }
+.mq-nodo[aria-selected="true"] { background: var(--color-brand-primary-tint); color: var(--color-brand-primary); font-weight: 500; }
+.mq-nodo-indice { font-variant-numeric: tabular-nums; color: var(--color-text-secondary); }
+.mq-nodo[aria-selected="true"] .mq-nodo-indice { color: inherit; }
+
+/* Recorrido colapsable, absorbido del árbol del visor original. La flecha es
+   el control de despliegue; en el nodo de pieza el resto del botón sigue
+   siendo la selección por índice. */
+.mq-nodo--rama, .mq-nodo--hoja { font-family: var(--font-mono); font-size: var(--type-caption-size); }
+.mq-nodo--hoja { cursor: default; }
+.mq-nodo-flecha {
+  flex: 0 0 auto; width: 14px; height: 14px; display: inline-block; position: relative;
+  transition: transform var(--motion-fast) var(--motion-ease);
+}
+.mq-nodo-flecha::before {
+  content: ""; position: absolute; left: 3px; top: 3px;
+  width: 6px; height: 6px; border-right: 1.5px solid var(--color-text-secondary);
+  border-bottom: 1.5px solid var(--color-text-secondary); transform: rotate(-45deg);
+}
+.mq-nodo[aria-expanded="true"] .mq-nodo-flecha { transform: rotate(90deg); }
+.mq-arbol-hijos[hidden] { display: none; }
+.mq-json-clave  { color: var(--color-accent-module-d); font-weight: 500; }
+.mq-json-cuenta { color: var(--color-text-tertiary); margin-left: var(--space-1); }
+.mq-json-cadena { color: var(--color-accent-module-c); }
+.mq-json-numero { color: var(--color-accent-module-b); font-variant-numeric: tabular-nums; }
+.mq-json-otro   { color: var(--color-text-secondary); }
+.mq-caja-desplazable { max-height: 420px; overflow: auto; }
+
+/* Lista de observaciones (Representacion-Lista-De-Observaciones §2) */
+.mq-observaciones { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.mq-observacion { display: flex; gap: var(--space-3); align-items: flex-start; }
+.mq-observacion-cuerpo { min-width: 0; }
+.mq-observacion-ubicacion { font-size: var(--type-caption-size); color: var(--color-text-secondary); }
+.mq-valores { display: grid; grid-template-columns: max-content max-content; gap: 2px var(--space-4); margin-top: var(--space-1); }
+.mq-valores dt { font-size: var(--type-caption-size); color: var(--color-text-secondary); margin: 0; }
+.mq-valores dd { margin: 0; font-variant-numeric: tabular-nums; font-size: var(--type-body-size); }
+
+/* Bloque de comentario del docente: contenedor propio, tono neutro, sin severidad */
+.mq-comentario {
+  background: var(--color-background-secondary);
+  border: var(--border-hairline); border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+/* Texto original, colapsado por omisión */
+.mq-texto-original {
+  font-family: var(--font-mono); font-size: var(--type-caption-size); line-height: 1.5;
+  white-space: pre; overflow: auto; max-height: 260px;
+  background: var(--color-background-tertiary);
+  border: var(--border-hairline); border-radius: var(--radius-md);
+  padding: var(--space-3); margin: var(--space-2) 0 0;
+}
+.mq-disclosure summary {
+  cursor: pointer; font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
+  letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary);
+}
+
+/* ============================================================================
+   Panel del contrato de fachada del visor
+   Instrumento de validación de GeometriaFactory-Visor, que no tiene pantallas
+   propias. Se marca como instrumento con el mismo borde punteado y el mismo
+   acento que la barra de validación, para que no se confunda con el producto.
+   ============================================================================ */
+
+.mq-panel-fachada {
+  background: var(--color-background-secondary);
+  border: 2px dashed var(--color-accent-module-c);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.mq-panel-fachada__rotulo {
+  display: flex; align-items: center; gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--color-text-warning);
+}
+
+.mq-fa-linea {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.mq-fa-acciones {
+  display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;
+  margin-top: var(--space-3);
+}
+.mq-fa-acciones .mq-btn { font-family: var(--font-mono); font-size: var(--type-caption-size); }
+
+.mq-fa-recuentos { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+
+.mq-fa-propiedades { list-style: none; margin: var(--space-2) 0 0; padding: 0; }
+.mq-fa-propiedades > li {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border-tertiary);
+  font-size: var(--type-body-size);
+}
+.mq-fa-propiedades > li:last-child { border-bottom: 0; }
+
+.mq-fa-bitacora {
+  margin: var(--space-2) 0 0; padding-left: var(--space-6);
+  max-height: 180px; overflow: auto;
+  font-size: var(--type-caption-size); color: var(--color-text-secondary);
+}
+.mq-fa-bitacora code { color: var(--color-text-primary); }
+
+.mq-panel-fachada .mq-tabla { background: var(--color-background-primary); }
+
+/* ============================================================================
+   Diálogos de confirmación (base §4.4)
+   ============================================================================ */
+
+.mq-dialogo {
+  border: var(--border-hairline); border-radius: var(--radius-lg);
+  padding: var(--space-6); max-width: 520px; width: calc(100% - var(--space-7));
+  background: var(--color-background-primary); color: var(--color-text-primary);
+}
+.mq-dialogo::backdrop { background: rgba(26, 26, 24, .45); }
+.mq-dialogo h2 { font-size: var(--type-title-size); margin-bottom: var(--space-3); }
+.mq-dialogo p  { font-size: var(--type-body-size); color: var(--color-text-secondary); }
+
+/* ============================================================================
+   Sello de versión (Representacion-Sello-De-Version §2)
+   Jerarquía baja, pero contraste AA: usa color.text.secondary y no tertiary.
+   ============================================================================ */
+
+.mq-sello {
+  display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;
+  font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
+  color: var(--color-text-secondary);
+}
+.mq-lienzo .mq-sello { margin-top: var(--space-6); justify-content: center; }
+.mq-shell-sidebar .mq-sello { color: rgba(255,255,255,.85); }
+.mq-sello-boton {
+  background: transparent; border: 0; padding: 2px var(--space-1); margin-left: -4px;
+  font: inherit; color: inherit; cursor: pointer; text-decoration: underline dotted;
+  border-radius: var(--radius-md);
+}
+.mq-diagnostico {
+  margin-top: var(--space-2); padding: var(--space-3);
+  background: var(--color-background-primary); border: var(--border-hairline);
+  border-radius: var(--radius-md); color: var(--color-text-primary);
+  font-size: var(--type-caption-size); font-weight: 400; text-transform: none; letter-spacing: 0;
+  max-width: 320px;
+}
+.mq-shell-sidebar .mq-diagnostico { color: var(--color-text-primary); }
+
+/* ============================================================================
+   Sello de la maqueta (Maqueta-Rules §4.6) y barra de validación (§4.3)
+   Instrumento de la maqueta: NO forma parte del producto.
+   ============================================================================ */
+
+.mq-sello-maqueta {
+  font-size: var(--type-meta-size); color: var(--color-text-secondary);
+  text-align: center; padding: var(--space-4) var(--space-5) 0;
+}
+
+.mq-barra-validacion {
+  position: fixed; inset: auto 0 0 0; z-index: 55;
+  background: var(--color-brand-primary-dark); color: #FFFFFF;
+  border-top: 3px dashed var(--color-accent-module-c);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--type-caption-size);
+}
+.mq-barra-validacion__rotulo {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
+  letter-spacing: .04em; text-transform: uppercase; color: #FFD9A6;
+  margin-bottom: var(--space-1);
+}
+.mq-barra-validacion__fila { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.mq-barra-validacion label { color: #FFFFFF; font-size: var(--type-caption-size); }
+.mq-barra-validacion select {
+  min-height: 30px; padding: 2px var(--space-2);
+  background: #FFFFFF; color: var(--color-text-primary);
+  border: var(--border-control); border-radius: var(--radius-md);
+  font-family: inherit; font-size: var(--type-caption-size); max-width: 380px;
+}
+.mq-barra-validacion .mq-conmutador { display: inline-flex; align-items: center; gap: var(--space-2); }
+.mq-barra-validacion .mq-nota { color: #CFE6DE; font-size: var(--type-meta-size); }
+.mq-barra-validacion :focus-visible { outline-color: #FFFFFF; }
+
+/* ============================================================================
+   Portada de la maqueta
+   ============================================================================ */
+
+.mq-portada { max-width: 1040px; margin-inline: auto; padding: var(--space-9) var(--space-5); }
+.mq-portada h1 { font-size: 24px; font-weight: 600; }
+.mq-lista-superficies { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); list-style: none; padding: 0; margin: var(--space-6) 0 0; }
+.mq-lista-superficies a { display: block; height: 100%; text-decoration: none; color: inherit; }
+.mq-lista-superficies a:hover .mq-tarjeta-acceso-modulo { border-color: var(--color-brand-primary); }
+
+/* ============================================================================
+   Versión angosta · punto de quiebre principal 768 px [ASUNCIÓN de 03]
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .mq-shell { flex-direction: column; }
+  .mq-shell-sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); }
+  .mq-shell-sidebar .mq-identidad { margin-bottom: 0; }
+  .mq-nav { flex-direction: row; flex-wrap: wrap; }
+  .mq-sidebar-pie { margin-top: 0; width: 100%; border-top: 0; padding-top: 0; flex-direction: row; align-items: center; gap: var(--space-4); }
+  .mq-shell-contenido { padding: var(--space-5) var(--space-4); }
+
+  /* Las filas dejan de ser filas de tabla y pasan a tarjetas apiladas */
+  .mq-tabla-envoltorio { display: none; }
+  .mq-tarjetas-apiladas { display: flex; }
+
+  /* Vista de trabajo: una sola columna, con la escena en primer lugar */
+  .mq-dos-columnas { grid-template-columns: minmax(0, 1fr); }
+  .mq-columna--escena { order: 1; }
+  .mq-columna--datos  { order: 2; }
+  /* Envío de trabajo: acá la previsualización NO sube al primer lugar */
+  .mq-dos-columnas--envio .mq-columna--escena { order: 2; }
+  .mq-dos-columnas--envio .mq-columna--datos  { order: 1; }
+
+  .mq-acciones-pie { flex-direction: column-reverse; }
+  .mq-acciones-pie .mq-btn { width: 100%; }
+  .mq-filtros .mq-campo { min-width: 100%; }
+}

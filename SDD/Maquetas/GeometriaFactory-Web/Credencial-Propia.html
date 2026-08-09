@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Credencial propia — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Credencial-Propia" data-shell="mixto"
+      data-papel="alumno" data-destino="mi-contrasena" data-estado-inicial="curso-establecimiento">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<!-- ==========================================================================
+     CURSO DE ESTABLECIMIENTO · shell de acceso, sin navegación.
+     La persona todavía no tiene sesión. No hay «cancelar»: no existe estado
+     previo al que volver y abandonar la deja fuera.
+     ========================================================================== -->
+<div class="mq-lienzo"
+     data-mq-estado="curso-establecimiento cargando enviando error-entrada confirmacion-no-coincidente exito-establecimiento cuenta-bloqueada indisponible reconectando vacio">
+  <main id="mq-main" class="mq-tarjeta-acceso">
+    <span class="mq-identidad" data-mq-marca></span>
+    <h1>Elegí tu contraseña</h1>
+    <p class="mq-subtitulo">
+      Es la primera vez que entrás. El laboratorio nunca te envió una contraseña: la elegís vos ahora.
+    </p>
+
+    <p class="mq-banda mq-banda--info" data-mq-estado="vacio">
+      <strong>No aplica.</strong> Esta superficie no presenta ninguna colección.
+    </p>
+
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-entrada">
+      Completá los dos campos.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="confirmacion-no-coincidente">
+      Las dos contraseñas no coinciden. Escribí la misma en los dos campos.
+      No salió ninguna solicitud hacia el servicio de datos.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="cuenta-bloqueada">
+      Tu cuenta dejó de estar habilitada mientras completabas este paso. No se estableció ninguna
+      contraseña. <a href="Ingreso.html">Volver a ingresar</a>.
+    </p>
+    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito-establecimiento">
+      Tu contraseña quedó guardada. Este es el camino de entrada a partir de ahora.
+      <a href="Ingreso.html?estado=confirmacion-contrasena">Ir a ingresar</a>.
+    </p>
+
+    <div class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" style="margin-bottom:16px">
+      <h2>No pudimos guardar tu contraseña</h2>
+      <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos. Probá de nuevo.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el guardado</button>
+    </div>
+
+    <div data-mq-estado="cargando" aria-hidden="true">
+      <div class="mq-esqueleto" style="width:40%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+      <div class="mq-esqueleto" style="width:46%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+    </div>
+
+    <form data-mq-estado="curso-establecimiento enviando error-entrada confirmacion-no-coincidente cuenta-bloqueada indisponible reconectando vacio" novalidate>
+      <div class="mq-campo">
+        <label for="cp-nueva">Contraseña nueva</label>
+        <input class="mq-input" id="cp-nueva" type="password" autocomplete="new-password"
+               aria-describedby="cp-requisito">
+        <span class="mq-requisito" id="cp-requisito" data-mq-requisito></span>
+      </div>
+      <div class="mq-campo">
+        <label for="cp-nueva-2">Repetir contraseña nueva</label>
+        <input class="mq-input" id="cp-nueva-2" type="password" autocomplete="new-password">
+      </div>
+
+      <button type="button" class="mq-btn mq-btn--primario mq-btn--ancho"
+              data-mq-estado="curso-establecimiento error-entrada confirmacion-no-coincidente cuenta-bloqueada indisponible reconectando vacio">
+        Guardar contraseña
+      </button>
+      <button type="button" class="mq-btn mq-btn--primario mq-btn--ancho" disabled data-mq-estado="enviando">
+        <span class="mq-spinner"></span> Guardando…
+      </button>
+    </form>
+  </main>
+
+  <div data-mq-sello-acceso></div>
+</div>
+
+<!-- ==========================================================================
+     CURSO DE CAMBIO · shell de trabajo, con la barra lateral del papel.
+     Acá sí hay «cancelar»: hay un panel al que volver y la salida es legítima.
+     ========================================================================== -->
+<div class="mq-shell" data-mq-estado="curso-cambio actual-rechazada exito-cambio">
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+  <div class="mq-shell-contenido"><main id="mq-main-cambio" tabindex="-1">
+    <div class="mq-encabezado">
+      <div>
+        <h1>Mi contraseña</h1>
+        <p class="mq-subtitulo">Para cambiarla tenés que escribir la que usás hoy.</p>
+      </div>
+    </div>
+
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="actual-rechazada" style="max-width:520px">
+      La contraseña que usás hoy no corresponde. El cambio no se aplicó.
+    </p>
+    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito-cambio" style="max-width:520px">
+      Tu contraseña quedó reemplazada. Tu sesión sigue vigente y la anterior deja de servir.
+    </p>
+
+    <section class="mq-tarjeta" style="max-width:520px" aria-labelledby="cp-cambio-h">
+      <h2 id="cp-cambio-h" class="mq-sr-only">Cambiar la contraseña</h2>
+      <form novalidate>
+        <div class="mq-campo">
+          <label for="cp-actual">Contraseña actual</label>
+          <input class="mq-input" id="cp-actual" type="password" autocomplete="current-password">
+        </div>
+        <div class="mq-campo">
+          <label for="cp-cambio-nueva">Contraseña nueva</label>
+          <input class="mq-input" id="cp-cambio-nueva" type="password" autocomplete="new-password"
+                 aria-describedby="cp-requisito-2">
+          <span class="mq-requisito" id="cp-requisito-2" data-mq-requisito></span>
+        </div>
+        <div class="mq-campo">
+          <label for="cp-cambio-nueva-2">Repetir contraseña nueva</label>
+          <input class="mq-input" id="cp-cambio-nueva-2" type="password" autocomplete="new-password">
+        </div>
+        <div class="mq-acciones-pie">
+          <a class="mq-btn mq-btn--secundario" href="Panel-De-Trabajos-Del-Alumno.html" data-mq-cancelar>Cancelar</a>
+          <button type="button" class="mq-btn mq-btn--primario">Guardar contraseña</button>
+        </div>
+      </form>
+    </section>
+  </main></div>
+</div>
+
+<div data-mq-barra-validacion></div>
+
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$$('[data-mq-marca]').forEach(function (el) {
+    el.innerHTML = M.icono('marca', 'mq-ico--24') + M.esc(D.textos.producto);
+  });
+  M.$$('[data-mq-requisito]').forEach(function (el) {
+    el.textContent = D.textos.requisitoContrasena;
+  });
+
+  // Cancelar vuelve al panel de la persona, que depende de su papel.
+  M.$('[data-mq-cancelar]').setAttribute('href', M.listadoDelPapel(M.papelVigente()));
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

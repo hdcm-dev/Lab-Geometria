@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estado degradado y reconexión — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Estado-Degradado-Y-Reconexion" data-shell="trabajo"
+      data-papel="alumno" data-destino="mis-trabajos" data-estado-inicial="indisponible">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<div class="mq-shell">
+  <!-- El armazón sigue entero y navegable: lo que falta son los datos. -->
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+
+  <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
+
+    <div class="mq-encabezado">
+      <div>
+        <h1>Mis trabajos</h1>
+        <p class="mq-subtitulo">
+          Superficie transversal: el estado degradado se superpone a las otras diez en lugar de
+          reemplazarlas. Acá se demuestra sobre el panel del alumno.
+        </p>
+      </div>
+      <a class="mq-btn mq-btn--primario" href="Envio-De-Trabajo.html" data-mq-nuevo>Trabajo nuevo</a>
+    </div>
+
+    <!-- Tabla comparativa: los dos tramos independientes y sus dos avisos.
+         Confundirlos es el error de lectura más probable del diseño. -->
+    <details class="mq-tarjeta" style="margin-bottom:16px">
+      <summary class="mq-meta" style="cursor:pointer">Los dos tramos, y por qué se avisan distinto</summary>
+      <div class="mq-tabla-envoltorio" style="margin-top:12px">
+        <table class="mq-tabla">
+          <thead><tr><th scope="col"></th><th scope="col">Cartel de reconexión</th>
+            <th scope="col">Aviso de indisponibilidad</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Qué tramo se cortó</th>
+              <td>Navegador ↔ pieza pública</td><td>Pieza pública → pieza de datos</td></tr>
+            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Dónde se dibuja</th>
+              <td>Banda superpuesta en el borde superior</td><td>Dentro del área de contenido</td></tr>
+            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Qué pasa con el resto</th>
+              <td>La página queda inerte hasta que vuelve</td><td>El armazón sigue entero y navegable</td></tr>
+            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Qué se ofrece</th>
+              <td>Reintentar la conexión</td><td>Reintentar la acción que falló</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- Estado: con datos. Sin aviso. -->
+    <div data-mq-estado="con-datos reconectando reconectado transporte-replegado" data-mq-listado>
+      <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="reconectado">
+        La conexión volvió y se retomó donde estabas. La sesión sigue vigente: la credencial nunca
+        vivió en el navegador, así que no hace falta volver a ingresar.
+      </p>
+      <!-- El repliegue del transporte NO es motivo de aviso: alarmar sin
+           darle a nadie nada que hacer es peor que callar. -->
+      <p class="mq-banda mq-banda--info" data-mq-estado="transporte-replegado">
+        <strong>Ningún aviso, y es deliberado.</strong> El circuito negoció un transporte de mayor
+        latencia: la escritura se siente más lenta y la aplicación sigue funcionando. Este recuadro
+        es una nota de la maqueta; el producto no dibuja nada acá.
+      </p>
+      <div class="mq-tabla-envoltorio">
+        <table class="mq-tabla">
+          <caption class="mq-sr-only">Mis trabajos</caption>
+          <thead><tr><th scope="col">Trabajo</th><th scope="col">Fecha del trabajo</th>
+            <th scope="col">Estado</th><th scope="col">Piezas</th><th scope="col">Advertencias</th>
+            <th scope="col" class="mq-td-acciones">Acciones</th></tr></thead>
+          <tbody data-mq-filas></tbody>
+        </table>
+      </div>
+      <div class="mq-tarjetas-apiladas" data-mq-tarjetas role="list"></div>
+    </div>
+
+    <div data-mq-estado="cargando" aria-hidden="true">
+      <div class="mq-esqueleto" style="height:42px"></div><div class="mq-esqueleto" style="height:42px"></div>
+    </div>
+
+    <!-- Estado: vacío. NO es ninguno de los dos avisos y se dibuja acá sólo
+         para fijar la diferencia. Se distingue por el TIPO recibido, no por
+         el conteo: éste tiene ilustración y acción de avance; el aviso tiene
+         encabezado de falla y acción de reintento. -->
+    <section class="mq-vacio" data-mq-estado="vacio" aria-labelledby="ed-vacio-h">
+      <span data-mq-ico-vacio aria-hidden="true"></span>
+      <h2 id="ed-vacio-h">Todavía no cargaste ningún trabajo</h2>
+      <p>La colección llegó con cero elementos y el servicio está disponible.</p>
+      <a class="mq-btn mq-btn--primario" href="Envio-De-Trabajo.html" style="margin-top:16px">
+        Cargar mi primer trabajo</a>
+    </section>
+
+    <!-- Estado: indisponible. Reemplaza el contenido, no el armazón. -->
+    <section class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" aria-labelledby="ed-indisp-h">
+      <h2 id="ed-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span><span data-mq-indisponible-titulo></span></h2>
+      <p data-mq-indisponible-cuerpo></p>
+      <!-- La acción nombra la acción concreta, no «Reintentar» a secas. -->
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer mis trabajos</button>
+    </section>
+
+    <!-- Estado: fallo no clasificado. Mismo aviso: es la garantía de que
+         ningún fallo llega sin representación. -->
+    <section class="mq-aviso-indisponible" data-mq-estado="fallo-no-clasificado" role="alert" aria-labelledby="ed-fallo-h">
+      <h2 id="ed-fallo-h"><span data-mq-ico-alerta-2 aria-hidden="true"></span>No pudimos completar la acción</h2>
+      <p>Algo no funcionó y el laboratorio sigue en pie. Probá de nuevo en un rato.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar la acción</button>
+    </section>
+
+    <!-- Estado: indisponible con contenido conservado. El aviso va ARRIBA
+         del formulario, y lo escrito sigue a la vista sin guardarse en
+         ningún lado. -->
+    <div data-mq-estado="indisponible-conservado">
+      <section class="mq-aviso-indisponible" role="alert" aria-labelledby="ed-cons-h">
+        <h2 id="ed-cons-h"><span data-mq-ico-alerta-3 aria-hidden="true"></span>No pudimos enviar tu trabajo</h2>
+        <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos.
+           Lo que escribiste sigue acá: probá de nuevo.</p>
+        <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el envío</button>
+      </section>
+      <section class="mq-tarjeta" style="margin-top:14px" aria-labelledby="ed-form-h">
+        <h2 id="ed-form-h" class="mq-meta">Lo que escribiste, intacto</h2>
+        <div class="mq-campo" style="margin-top:12px">
+          <label for="ed-nombre">Nombre</label>
+          <input class="mq-input" id="ed-nombre" type="text" data-mq-campo="nombre">
+        </div>
+        <div class="mq-campo">
+          <label for="ed-texto">Texto del trabajo</label>
+          <textarea class="mq-textarea mq-textarea--texto-trabajo" id="ed-texto"
+                    spellcheck="false" data-mq-campo="textoOriginal"></textarea>
+        </div>
+      </section>
+    </div>
+
+    <!-- Estado: sesión no restablecible. -->
+    <section class="mq-tarjeta" data-mq-estado="sesion-no-restablecible" role="alert" aria-labelledby="ed-ses-h">
+      <h2 id="ed-ses-h" class="mq-title">Tu sesión no se pudo restablecer</h2>
+      <p class="mq-caption" style="margin-top:8px">
+        La conexión volvió, pero la sesión no. Volvés a la superficie de ingreso con el motivo
+        declarado, y no a una pantalla rota ni a un error arbitrario en una acción cualquiera.
+      </p>
+      <a class="mq-btn mq-btn--primario" href="Ingreso.html?estado=sesion-no-restablecible"
+         style="margin-top:12px">Ir a ingresar</a>
+    </section>
+
+    <!-- Estado: escena no disponible. No es indisponibilidad del laboratorio. -->
+    <section class="mq-tarjeta" data-mq-estado="escena-no-disponible" aria-labelledby="ed-esc-h">
+      <h2 id="ed-esc-h" class="mq-title">La escena no está disponible en este navegador</h2>
+      <p class="mq-caption" style="margin-top:8px">
+        No es una indisponibilidad del laboratorio: es una limitación del navegador. El resto del
+        producto sigue disponible, y su tratamiento vive en las superficies que dibujan.
+      </p>
+    </section>
+
+    <!-- Estado: recuperado. -->
+    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="recuperado">
+      El servicio volvió, la acción procedió y el aviso desapareció. No hizo falta volver a ingresar.
+    </p>
+
+    <p class="mq-caption" style="margin-top:20px">
+      Lo que ningún mensaje de esta superficie contiene: la dirección de un servicio interno, el
+      nombre de un archivo de datos, una traza, un código de error, un tiempo estimado de recuperación
+      y un canal de soporte. El producto no tiene mesa de ayuda. Lo que sí hay para un reporte es el
+      detalle de diagnóstico del sello de versión, en la barra lateral.
+    </p>
+
+  </main></div>
+</div>
+
+<div data-mq-barra-validacion></div>
+
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$$('[data-mq-ico-vacio]').forEach(function (el) { el.outerHTML = M.icono('vacio', 'mq-ico--24'); });
+  ['[data-mq-ico-alerta]', '[data-mq-ico-alerta-2]', '[data-mq-ico-alerta-3]'].forEach(function (s) {
+    var el = M.$(s); if (el) { el.outerHTML = M.icono('alerta', 'mq-ico--20'); }
+  });
+  M.$('[data-mq-nuevo]').innerHTML = M.icono('nuevo') + 'Trabajo nuevo';
+  M.$('[data-mq-indisponible-titulo]').textContent = D.textos.indisponibleTitulo;
+  M.$('[data-mq-indisponible-cuerpo]').textContent = D.textos.indisponibleCuerpo;
+
+  M.renderListadoDeTrabajos(M.$('[data-mq-listado]'), D.trabajosDe('C-1'), 'alumno', 'mis-trabajos');
+
+  var b = D.borradorDeEnvio;
+  M.$$('[data-mq-campo]').forEach(function (el) {
+    el.value = b[el.getAttribute('data-mq-campo')] || '';
+  });
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

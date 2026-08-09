@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resolución del trabajo — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Resolucion-Del-Trabajo" data-shell="trabajo"
+      data-papel="administrador" data-destino="entrega-comision" data-estado-inicial="resoluble">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<div class="mq-shell">
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+
+  <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
+
+    <a class="mq-btn mq-btn--pill" href="Listado-De-La-Comision.html" data-mq-volver
+       style="margin-bottom:14px"></a>
+
+    <!-- Cabecera del trabajo que aloja el bloque. La resolución no tiene ruta
+         propia: es este mismo trabajo, con su bloque de decisión y sus cuatro
+         partes. Esta dirección es el punto de entrada que la maqueta usa para
+         demostrar el mapa de estados del bloque como recorrido. -->
+    <header style="margin-bottom:16px">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <h1 data-mq-nombre></h1>
+        <span data-mq-insignia></span>
+      </div>
+      <p class="mq-caption mq-num" style="margin:4px 0 0" data-mq-meta></p>
+    </header>
+
+    <p class="mq-banda mq-banda--info" data-mq-estado="vacio">
+      <strong>No aplica.</strong> Este bloque no presenta ninguna colección. Se declara para que la
+      ausencia sea deliberada.
+    </p>
+
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-operacion">
+      Ese trabajo ya no está a la espera de revisión. Su estado actual es <strong>Rechazado</strong>,
+      que es terminal: no hay camino para revertirlo. La lista se volvió a pedir.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="desenlace-no-administrador">
+      Esa acción no procede. Volviste al panel desde el que la pediste.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="trabajo-ajeno">
+      No encontramos ese trabajo. Volviste al listado de la comisión.
+    </p>
+    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito-desenlace">
+      La entrega quedó en estado <strong>Finalizado</strong>. El bloque deja de ofrecer las dos
+      decisiones sobre este trabajo.
+    </p>
+    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito-retiro">
+      El trabajo dejó de existir y desapareció también del listado del alumno.
+    </p>
+
+    <section class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" aria-labelledby="rt-indisp-h">
+      <h2 id="rt-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>No pudimos resolver la entrega</h2>
+      <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos. El trabajo conserva el
+         estado que tenía. Probá de nuevo.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el desenlace</button>
+    </section>
+
+    <div data-mq-estado="cargando" aria-hidden="true"><div class="mq-esqueleto" style="height:150px"></div></div>
+
+    <!-- Bloque de decisión, con sus tres formas de «con datos»: resoluble,
+         no resoluble por papel y no resoluble por estado. Su armado vive en
+         Maqueta.js, que es la fuente única que comparte con la vista de
+         trabajo. -->
+    <div data-mq-bloque-decision style="margin-bottom:16px"></div>
+
+    <!-- Y debajo, las cuatro partes del trabajo que se está resolviendo: el
+         docente lee el trabajo y decide en el mismo lugar, sin saltar a otra
+         superficie. -->
+    <div data-mq-cuatro-partes
+         data-mq-estado="resoluble no-resoluble-papel no-resoluble-estado confirmando-desenlace aplicando exito-desenlace confirmando-retiro exito-retiro error-operacion desenlace-no-administrador trabajo-ajeno reconectando vacio"></div>
+
+  </main></div>
+</div>
+
+<div data-mq-barra-validacion></div>
+
+<!-- Three.js por red de distribución, igual que el framework de grilla: sin
+     compilación y sin gestor de paquetes (Maqueta-Rules.md §4.1). -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/js/Visor-Tridimensional.js"></script>
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$('[data-mq-ico-alerta]').outerHTML = M.icono('alerta', 'mq-ico--20');
+
+  // Trabajo en estado Pendiente: el único que admite desenlace.
+  var base = M.trabajoVigente('T-1');
+  var resuelto = D.trabajo('T-4');       // ya tiene desenlace, para su estado
+
+  var volver = M.$('[data-mq-volver]');
+  volver.setAttribute('href', M.destinoDeRegreso('administrador'));
+  volver.innerHTML = M.icono('volver') + M.esc(M.rotuloDeRegreso('administrador'));
+
+  function pintar(id) {
+    // El estado «no resoluble por estado» se demuestra sobre un trabajo que
+    // ya tiene desenlace; los demás, sobre el que está a la espera.
+    var t = (id === 'no-resoluble-estado' || id === 'exito-desenlace') ? resuelto : base;
+    var duenio = D.cuenta(t.cuentaId);
+    var nombreDuenio = (duenio.nombre + ' ' + duenio.apellido).trim();
+
+    M.$('[data-mq-nombre]').textContent = t.nombre;
+    M.$('[data-mq-insignia]').innerHTML = M.insignia(t.estado);
+    M.$('[data-mq-meta]').textContent =
+      t.fechaTrabajo + ' · ' + nombreDuenio + ' · ' +
+      M.plural(t.piezas, 'pieza', 'piezas') + ' · ' + M.plural(t.advertencias, 'advertencia', 'advertencias');
+
+    M.pintarBloqueDeDecision(M.$('[data-mq-bloque-decision]'), t,
+      { papel: 'administrador', conEstados: true });
+
+    // Las cuatro partes, sin los estados de la vista de trabajo: acá los
+    // estados que se demuestran son los del bloque de decisión.
+    M.pintarCuatroPartes(M.$('[data-mq-cuatro-partes]'), t, { conEstados: false });
+  }
+
+  pintar('resoluble');
+
+  window.alCambiarEstado = function (id) {
+    ['rt-dlg-desenlace', 'rt-dlg-retiro'].forEach(function (n) {
+      var dlg = document.getElementById(n);
+      if (dlg && dlg.open) { dlg.close(); }
+    });
+    pintar(id);
+    // Los dos estados de confirmación abren su diálogo desde la barra de validación.
+    var decidir = M.$('[data-mq-decision]');
+    var retirar = M.$('[data-mq-retirar]');
+    if (id === 'confirmando-desenlace' && decidir) { decidir.click(); }
+    if (id === 'confirmando-retiro' && retirar)    { retirar.click(); }
+  };
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

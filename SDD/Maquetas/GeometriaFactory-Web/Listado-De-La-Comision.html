@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listado de la comisión — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Listado-De-La-Comision" data-shell="trabajo"
+      data-papel="administrador" data-destino="entrega-comision" data-estado-inicial="con-datos">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<div class="mq-shell">
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+
+  <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
+
+    <div class="mq-encabezado">
+      <div>
+        <h1>Entrega de la comisión</h1>
+        <!-- El recorte se declara en el subtítulo: los borradores no aparecen. -->
+        <p class="mq-subtitulo">
+          Los trabajos entregados, agrupados por alumno. Los borradores que los alumnos están armando
+          no aparecen acá.
+        </p>
+      </div>
+    </div>
+
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="alumno-filtro-inexistente">
+      Ese alumno ya no existe. La lista se recargó sin filtro.
+    </p>
+    <p class="mq-banda mq-banda--info" role="status" data-mq-estado="cero-borradores">
+      <strong>Estado permanente de la superficie.</strong> Ningún trabajo en estado
+      <em>Borrador</em> figura en ningún grupo, y el recorte lo decide el servicio de datos según el
+      papel de quien pide: esta superficie no filtra por su cuenta. Se verifica por recuento con
+      umbral 0.
+    </p>
+
+    <section class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" aria-labelledby="lc-indisp-h">
+      <h2 id="lc-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>Ahora no podemos traer la entrega</h2>
+      <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+         Probá de nuevo en un rato.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer la entrega</button>
+    </section>
+
+    <div class="mq-filtros" data-mq-estado="con-datos filtrado-sin-resultados grupo-colapsado alumno-filtro-inexistente cero-borradores resumen-abierto reconectando">
+      <div class="mq-campo">
+        <!-- El filtro por alumno vuelve a pedir la colección; el de estado
+             acota lo ya recibido. -->
+        <label for="lc-alumno">Alumno</label>
+        <select class="mq-select" id="lc-alumno" data-mq-select-alumno><option>todos</option></select>
+      </div>
+      <div class="mq-campo">
+        <label for="lc-estado">Estado del trabajo</label>
+        <select class="mq-select" id="lc-estado">
+          <option>todos</option><option>Pendiente</option><option>Finalizado</option><option>Rechazado</option>
+        </select>
+      </div>
+      <button type="button" class="mq-btn mq-btn--secundario" data-mq-resumen>Resumen</button>
+    </div>
+
+    <!-- Panel de resumen: capacidad de prioridad menor, con su lugar ya
+         fijado para que incorporarla no obligue a rediseñar la superficie. -->
+    <section class="mq-tarjeta" data-mq-estado="resumen-abierto" aria-labelledby="lc-resumen-h" style="margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <h2 id="lc-resumen-h" class="mq-title">Resumen por alumno</h2>
+        <button type="button" class="mq-btn mq-btn--secundario" style="margin-left:auto"
+                data-mq-cerrar-resumen>Cerrar</button>
+      </div>
+      <div class="mq-tabla-envoltorio" style="margin-top:12px">
+        <table class="mq-tabla">
+          <thead><tr><th scope="col">Alumno</th><th scope="col">Pendientes</th>
+            <th scope="col">Finalizados</th><th scope="col">Rechazados</th></tr></thead>
+          <tbody data-mq-resumen-filas></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div data-mq-estado="cargando" aria-hidden="true">
+      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto" style="height:42px"></div>
+    </div>
+
+    <section class="mq-vacio" data-mq-estado="vacio" aria-labelledby="lc-vacio-h">
+      <span data-mq-ico-vacio aria-hidden="true"></span>
+      <h2 id="lc-vacio-h">Todavía no hay ningún trabajo entregado</h2>
+      <p>Los trabajos aparecen acá cuando los alumnos los envían.</p>
+    </section>
+
+    <section class="mq-vacio" data-mq-estado="filtrado-sin-resultados" aria-labelledby="lc-filtro-h">
+      <span data-mq-ico-vacio aria-hidden="true"></span>
+      <h2 id="lc-filtro-h">Ningún trabajo coincide con el filtro</h2>
+      <p>Hay trabajos entregados, pero ninguno responde a lo que buscaste.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:16px">Limpiar el filtro</button>
+    </section>
+
+    <div data-mq-estado="con-datos grupo-colapsado alumno-filtro-inexistente cero-borradores resumen-abierto reconectando"
+         data-mq-grupos></div>
+
+    <!-- Nota de ausencia: evita que un alumno sin trabajos se lea como un
+         trabajo perdido. Resuelve una pregunta que el docente se hace siempre. -->
+    <p class="mq-caption" style="margin-top:16px"
+       data-mq-estado="con-datos grupo-colapsado alumno-filtro-inexistente cero-borradores resumen-abierto reconectando"
+       data-mq-nota-ausencia></p>
+
+  </main></div>
+</div>
+
+<div data-mq-barra-validacion></div>
+
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$$('[data-mq-ico-vacio]').forEach(function (el) { el.outerHTML = M.icono('vacio', 'mq-ico--24'); });
+  M.$('[data-mq-ico-alerta]').outerHTML = M.icono('alerta', 'mq-ico--20');
+  M.$('[data-mq-nota-ausencia]').textContent = D.textos.notaAusencia;
+
+  // Sólo figuran los alumnos CON trabajos entregados. Ningún Borrador.
+  var entregados = D.trabajosEntregados();
+  var porAlumno = {};
+  entregados.forEach(function (t) { (porAlumno[t.cuentaId] = porAlumno[t.cuentaId] || []).push(t); });
+
+  M.$('[data-mq-select-alumno]').innerHTML = '<option>todos</option>' +
+    Object.keys(porAlumno).map(function (id) {
+      var c = D.cuenta(id);
+      return '<option>' + M.esc(c.nombre + ' ' + c.apellido) + '</option>';
+    }).join('');
+
+  M.$('[data-mq-grupos]').innerHTML = Object.keys(porAlumno).map(function (id, n) {
+    var c = D.cuenta(id);
+    var ts = porAlumno[id];
+    var nombre = c.nombre + ' ' + c.apellido;
+    var idGrupo = 'lc-grupo-' + n;
+    var filas = ts.map(function (t) {
+      return '<tr>' +
+        '<th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:inherit">' +
+          M.esc(t.nombre) + '</th>' +
+        '<td class="mq-num">' + M.esc(t.fechaTrabajo) + '</td>' +
+        '<td>' + M.insignia(t.estado) + '</td>' +
+        '<td class="mq-num">' + t.piezas + '</td>' +
+        '<td class="mq-num">' + t.advertencias + '</td>' +
+        '<td class="mq-td-acciones"><a class="mq-btn mq-btn--secundario" href="' +
+          M.hrefTrabajo(t.id, 'administrador', 'comision') + '">' + M.icono('abrir') +
+          'Abrir<span class="mq-sr-only"> «' + M.esc(t.nombre) + '»</span></a></td></tr>';
+    }).join('');
+    var tarjetas = ts.map(function (t) {
+      return '<article class="mq-tarjeta-fila" role="listitem">' +
+        '<div class="mq-tarjeta-fila-cabecera"><h4 class="mq-body-strong">' + M.esc(t.nombre) +
+        '</h4>' + M.insignia(t.estado) + '</div>' +
+        '<p class="mq-caption mq-num" style="margin:8px 0 0">' + M.esc(t.fechaTrabajo) + ' · ' +
+        M.plural(t.piezas, 'pieza', 'piezas') + ' · ' + M.plural(t.advertencias, 'advertencia', 'advertencias') + '</p>' +
+        '<div class="mq-acciones-fila"><a class="mq-btn mq-btn--secundario" href="' +
+        M.hrefTrabajo(t.id, 'administrador', 'comision') + '">Abrir<span class="mq-sr-only"> «' +
+        M.esc(t.nombre) + '»</span></a></div></article>';
+    }).join('');
+
+    return '<section class="mq-grupo" aria-label="Trabajos de ' + M.esc(nombre) + '">' +
+      '<h2><button type="button" class="mq-grupo-cabecera" aria-expanded="true" aria-controls="' + idGrupo + '">' +
+        '<span class="mq-iniciales" aria-hidden="true">' + M.esc(c.iniciales) + '</span>' +
+        M.esc(nombre) + ' — ' + M.esc(c.correo) +
+        '<span class="mq-grupo-recuento mq-num">' + ts.length + (ts.length === 1 ? ' trabajo' : ' trabajos') +
+      '</span></button></h2>' +
+      '<div id="' + idGrupo + '">' +
+        '<div class="mq-tabla-envoltorio"><table class="mq-tabla">' +
+          '<caption class="mq-sr-only">Trabajos entregados por ' + M.esc(nombre) + '</caption>' +
+          '<thead><tr><th scope="col">Trabajo</th><th scope="col">Fecha del trabajo</th>' +
+          '<th scope="col">Estado</th><th scope="col">Piezas</th><th scope="col">Advertencias</th>' +
+          '<th scope="col" class="mq-td-acciones">Acciones</th></tr></thead>' +
+          '<tbody>' + filas + '</tbody></table></div>' +
+        '<div class="mq-tarjetas-apiladas" role="list" style="padding:14px">' + tarjetas + '</div>' +
+      '</div></section>';
+  }).join('');
+
+  // El grupo colapsado conserva su recuento a la vista.
+  M.$$('.mq-grupo-cabecera').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var abierto = b.getAttribute('aria-expanded') === 'true';
+      b.setAttribute('aria-expanded', String(!abierto));
+      document.getElementById(b.getAttribute('aria-controls')).hidden = abierto;
+    });
+  });
+
+  M.$('[data-mq-resumen-filas]').innerHTML = Object.keys(porAlumno).map(function (id) {
+    var c = D.cuenta(id), ts = porAlumno[id];
+    function n(e) { return ts.filter(function (t) { return t.estado === e; }).length; }
+    return '<tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;font-weight:500;color:inherit">' +
+      M.esc(c.nombre + ' ' + c.apellido) + '</th><td class="mq-num">' + n('Pendiente') +
+      '</td><td class="mq-num">' + n('Finalizado') + '</td><td class="mq-num">' + n('Rechazado') + '</td></tr>';
+  }).join('');
+
+  M.$('[data-mq-resumen]').addEventListener('click', function () { M.aplicarEstado('resumen-abierto'); });
+  M.$('[data-mq-cerrar-resumen]').addEventListener('click', function () { M.aplicarEstado('con-datos'); });
+
+  window.alCambiarEstado = function (id) {
+    var colapsar = (id === 'grupo-colapsado');
+    M.$$('.mq-grupo-cabecera').forEach(function (b, i) {
+      if (i !== 0) { return; }              // sólo el primer grupo, para que se vea la diferencia
+      b.setAttribute('aria-expanded', String(!colapsar));
+      document.getElementById(b.getAttribute('aria-controls')).hidden = colapsar;
+    });
+  };
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de trabajos del alumno — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Panel-De-Trabajos-Del-Alumno" data-shell="trabajo"
+      data-papel="alumno" data-destino="mis-trabajos" data-estado-inicial="con-datos">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<div class="mq-shell">
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+
+  <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
+
+    <div class="mq-encabezado">
+      <div>
+        <h1>Mis trabajos</h1>
+        <p class="mq-subtitulo">Todo lo que cargaste, con el estado en que está.</p>
+      </div>
+      <!-- Acción primaria presente en todos los estados, incluido el vacío. -->
+      <a class="mq-btn mq-btn--primario" href="Envio-De-Trabajo.html" data-mq-nuevo>Trabajo nuevo</a>
+    </div>
+
+    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito">
+      El trabajo dejó de existir. El listado se volvió a pedir y ya no figura.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-operacion">
+      Ese trabajo ya no está en borrador y no se puede eliminar. Su estado actual es
+      <strong>Pendiente</strong>. El listado se volvió a pedir.
+    </p>
+    <!-- Mensaje neutro que no distingue el trabajo ajeno del inexistente. -->
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="trabajo-ajeno">
+      No encontramos ese trabajo. Volviste a tu listado, que no cambió.
+    </p>
+
+    <!-- Barra de filtros: filtra sobre lo ya recibido, no consulta al
+         servicio de datos. -->
+    <div class="mq-filtros" data-mq-estado="con-datos filtrado-sin-resultados confirmando-eliminacion eliminando exito error-operacion trabajo-ajeno reconectando">
+      <div class="mq-campo mq-campo-busqueda">
+        <label for="pt-buscar">Buscar por nombre</label>
+        <span data-mq-ico-buscar></span>
+        <input class="mq-input" id="pt-buscar" type="search" placeholder="por ejemplo, cubo">
+      </div>
+      <div class="mq-campo">
+        <label for="pt-estado">Estado</label>
+        <select class="mq-select" id="pt-estado">
+          <option>todos</option><option>Borrador</option><option>Pendiente</option>
+          <option>Finalizado</option><option>Rechazado</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Estado: cargando. Esqueleto por fila, nunca una tabla vacía. -->
+    <div data-mq-estado="cargando" aria-hidden="true">
+      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto" style="height:42px"></div>
+    </div>
+
+    <!-- Estado: vacío. Invitación, no hueco. Se distingue del aviso de
+         indisponibilidad por el tipo recibido, no por el conteo. -->
+    <section class="mq-vacio" data-mq-estado="vacio" aria-labelledby="pt-vacio-h">
+      <span data-mq-ico-vacio aria-hidden="true"></span>
+      <h2 id="pt-vacio-h">Todavía no cargaste ningún trabajo</h2>
+      <p>Cargá el texto que produjo tu programa de la Actividad 1 y mirálo dibujado.</p>
+      <a class="mq-btn mq-btn--primario" href="Envio-De-Trabajo.html" style="margin-top:16px">
+        Cargar mi primer trabajo</a>
+    </section>
+
+    <!-- Estado: filtrado sin resultados. Distinto del vacío de colección:
+         acá sí hay trabajos. -->
+    <section class="mq-vacio" data-mq-estado="filtrado-sin-resultados" aria-labelledby="pt-filtro-h">
+      <span data-mq-ico-vacio aria-hidden="true"></span>
+      <h2 id="pt-filtro-h">Ningún trabajo coincide con el filtro</h2>
+      <p>Tenés trabajos cargados, pero ninguno responde a lo que buscaste.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:16px">Limpiar el filtro</button>
+    </section>
+
+    <!-- Estado: indisponible. Reemplaza el listado; no se muestran datos viejos. -->
+    <section class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" aria-labelledby="pt-indisp-h">
+      <h2 id="pt-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span><span data-mq-indisponible-titulo></span></h2>
+      <p data-mq-indisponible-cuerpo></p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer mis trabajos</button>
+    </section>
+
+    <!-- Estado: con datos -->
+    <div data-mq-estado="con-datos confirmando-eliminacion eliminando exito error-operacion trabajo-ajeno reconectando" data-mq-listado>
+      <div class="mq-tabla-envoltorio">
+        <table class="mq-tabla">
+          <caption class="mq-sr-only">Mis trabajos, con su estado y las acciones que ese estado admite</caption>
+          <thead>
+            <tr>
+              <th scope="col">Trabajo</th><th scope="col">Fecha del trabajo</th><th scope="col">Estado</th>
+              <th scope="col">Piezas</th><th scope="col">Advertencias</th>
+              <th scope="col" class="mq-td-acciones">Acciones</th>
+            </tr>
+          </thead>
+          <tbody data-mq-filas></tbody>
+        </table>
+      </div>
+      <!-- Versión angosta: las filas pasan a tarjetas apiladas. -->
+      <div class="mq-tarjetas-apiladas" data-mq-tarjetas role="list"></div>
+    </div>
+
+  </main></div>
+</div>
+
+<!-- Diálogo de confirmación de eliminación. Sólo se abre desde una fila en
+     estado Borrador. -->
+<dialog class="mq-dialogo" id="pt-dialogo-eliminar" aria-labelledby="pt-dlg-h">
+  <h2 id="pt-dlg-h">Eliminar «<span data-mq-dlg-nombre></span>»</h2>
+  <p>El trabajo deja de existir. Sólo se puede eliminar mientras está en borrador.</p>
+  <div class="mq-acciones-pie">
+    <button type="button" class="mq-btn mq-btn--secundario" data-mq-cierra-dialogo>Cancelar</button>
+    <button type="button" class="mq-btn mq-btn--destructivo">Eliminar</button>
+  </div>
+</dialog>
+
+<div data-mq-barra-validacion></div>
+
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$('[data-mq-ico-buscar]').outerHTML = M.icono('buscar');
+  M.$$('[data-mq-ico-vacio]').forEach(function (el) { el.outerHTML = M.icono('vacio', 'mq-ico--24'); });
+  M.$('[data-mq-ico-alerta]').outerHTML = M.icono('alerta', 'mq-ico--20');
+  M.$('[data-mq-nuevo]').innerHTML = M.icono('nuevo') + 'Trabajo nuevo';
+  M.$('[data-mq-indisponible-titulo]').textContent = D.textos.indisponibleTitulo;
+  M.$('[data-mq-indisponible-cuerpo]').textContent = D.textos.indisponibleCuerpo;
+
+  // El alumno ve TODOS sus trabajos, incluidos los borradores, que son suyos.
+  var mios = D.trabajosDe('C-1');
+  M.renderListadoDeTrabajos(M.$('[data-mq-listado]'), mios, 'alumno', 'mis-trabajos');
+
+  M.$$('[data-mq-eliminar]').forEach(function (b) {
+    var t = D.trabajo(b.getAttribute('data-mq-eliminar'));
+    b.setAttribute('data-mq-abre-dialogo', 'pt-dialogo-eliminar');
+    b.addEventListener('click', function () {
+      M.$('[data-mq-dlg-nombre]').textContent = t ? t.nombre : '';
+    });
+  });
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>
