@@ -249,11 +249,15 @@ validación, y por eso viven junto al dibujo y no en el panel del contrato.
 - Los dos **se detienen mientras la persona arrastra** la cámara, como en el original, y también con
   la pestaña oculta.
 - Si el sistema declara **preferencia de movimiento reducido**, los dos arrancan **destildados** y el
-  propio control lo dice: «arrancan apagados: tu sistema pide movimiento reducido».
+  propio control lo dice: «arrancan apagados: tu sistema pide movimiento reducido». **Quien consulta
+  `prefers-reduced-motion` es la página, no el visor**: ver la frontera más abajo.
 - El estado se **persiste**, con las claves `mq-orbita-de-camara` y `mq-giro-de-figuras`. El prefijo
   `mq-` no es decorativo: el panel mide «cero persistencia» contando las claves que **no** empiezan
   con `mq-`, así que una clave sin prefijo haría fallar esa medición.
 - La interacción con el mouse no cambia: **arrastrar** gira la cámara, **la rueda** acerca y aleja.
+  La rueda **sólo se captura cuando el lienzo tiene el foco**: si no, la página se desplaza normal.
+- Con el lienzo enfocado, el teclado hace lo mismo: **flechas** para orbitar, **`+`** y **`-`** para
+  acercar y alejar, **Inicio** para volver a la vista de partida.
 - **Ninguno de los dos afecta el determinismo**, que es de la **posición** y no de la orientación:
   cada pieza sigue cayendo en la celda que le da su índice. Verificado en las cuatro combinaciones.
 
@@ -263,6 +267,19 @@ validación, y por eso viven junto al dibujo y no en el panel del contrato.
 > visual**, y queda **pendiente de propagar a la documentación de la categoría 03 del proyecto de
 > código del visor y a su contrato de fachada**. La órbita de la cámara, en cambio, sí está en el
 > original y sólo se le agregó el control para prenderla y apagarla.
+
+> **La frontera entre el bundle y el anfitrión, tal como la fija el contrato.**
+> `Definicion-Contrato-De-Fachada.md` §3.3 y §4.1 son explícitos y la maqueta los cumple: el visor
+> **no dibuja el control, no conserva la elección y no consulta configuración propia** —hacerlo
+> violaría la garantía G-3—, y con las opciones **ausentes o parciales arranca con los dos
+> movimientos apagados**. Quien lee `prefers-reduced-motion` es **esta página**, que es el componente
+> anfitrión: lo traduce a **dos valores de verdad**, uno por movimiento, y se los pasa al bundle por
+> `crear(elemento, opciones)` y después por `orbitar()` y `girarFiguras()`. El bundle no expone
+> ninguna función que consulte el entorno.
+>
+> Hasta la ronda de corrección de la auditoría, la maqueta hacía lo contrario en las dos cosas: el
+> bundle traía `prefiereMovimientoReducido()` y las opciones ausentes lo hacían nacer **prendido**.
+> Quedó corregido, y la corrección **no afloja el contrato**: lo aplica.
 
 ### Representación de respaldo
 
@@ -298,11 +315,19 @@ El **panel del contrato de fachada** vive en la columna de escena y árbol de `V
 «instrumento de validación, no forma parte del producto». En el producto real el componente anfitrión
 invoca las cinco funciones sin exhibirlas: este panel existe para que el contrato se pueda juzgar.
 
+> **El contrato tiene seis funciones y este panel demuestra cinco.** La sexta,
+> `establecerMovimiento(id, opciones)`, se decidió **después** de que el Product Owner aprobó la
+> validación visual, y **no fue validada visualmente**. En la maqueta el gobierno del movimiento se
+> resuelve con dos métodos de instancia —`orbitar(v)` y `girarFiguras(v)`—, que hacen lo mismo pero
+> no son la sexta función plana del contrato. Está declarado así, con su fecha, en
+> `Linea-Base-Visual.md` §6 y en la sonda `SD-43`, para que nadie lea el panel como si fuera el
+> inventario completo de la superficie pública.
+
 **Qué hace visible:**
 
 | Qué | Cómo se ve |
 | --- | --- |
-| Las **cinco funciones** | Un botón por función: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir`. Cada invocación cambia lo que se ve y queda anotada en la bitácora con su resultado |
+| **Cinco de las seis funciones** | Un botón por función: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir`. Cada invocación cambia lo que se ve y queda anotada en la bitácora con su resultado. **`establecerMovimiento` no tiene botón**: se decidió después de la aprobación y no se validó visualmente |
 | El **ciclo de vida** | Una insignia con `Inexistente` → `Viva` → `Liberada`, y el identificador de instancia. Antes de inicializar no hay identificador; después de inicializar hay instancia viva **sin ninguna pieza dibujada**; al destruir, la escena queda vacía y el identificador deja de ser válido |
 | El **resultado de dibujo** | Cuatro recuentos: conjunto raíz, dibujadas, no dibujadas enumeradas y **sin registro**. El último tiene que ser siempre 0 |
 | Las **siete condiciones** | Una tabla desplegable con código, curso, cuándo y efecto, y un estado en la barra de validación por cada una |
@@ -394,11 +419,29 @@ validador humano a aprobar una superficie inaccesible.
 - Objetivos de toque de al menos 24×24 px en todas las acciones por fila.
 - `prefers-reduced-motion` respetado, incluidos los **dos movimientos automáticos** del visor: con
   esa preferencia activa las dos casillas arrancan destildadas, el control declara por qué, y la
-  escena sólo se mueve cuando la persona la arrastra.
+  escena sólo se mueve cuando la persona la arrastra. **La preferencia la lee la página**, no el
+  visor, que es lo que el contrato de fachada exige.
 - Las dos casillas de movimiento son controles de formulario reales, con etiqueta visible y asociada
-  por `for`, operables por teclado, agrupadas con nombre, y su cambio se anuncia como región activa.
+  por `for`, operables por teclado, agrupadas con nombre, con su ayuda asociada por
+  `aria-describedby` —y no sólo en `title`—, y su cambio se anuncia como región activa.
+- **La escena se opera por teclado.** El lienzo recibe foco (`tabindex="0"`) y responde a las flechas
+  —orbitar—, a `+` y `-` —acercar y alejar— y a Inicio —vista de partida—. La rueda del mouse sólo se
+  captura con el lienzo enfocado, para no atrapar el desplazamiento de la página. La **elección** de
+  pieza tiene además su ruta accesible completa en el árbol, que es lo que declara `SD-50`.
+- **El árbol tiene un solo portador de rol por nodo.** El `<li role="treeitem">` lleva el rol,
+  `aria-selected`, `aria-expanded` y el foco, con **tabindex móvil** —un solo nodo tabable por
+  árbol—; el interior es presentación. Flechas arriba y abajo recorren los nodos visibles, derecha e
+  izquierda despliegan y pliegan, Inicio y Fin van a los extremos, y Entrar o espacio seleccionan.
+- **El panel del contrato de fachada devuelve el foco.** Las dos comprobaciones a mano reescriben la
+  lista que las contiene; después del refresco el foco vuelve al mismo control y no cae al `<body>`.
 - El sello de versión usa `color.text.secondary` y no `color.text.tertiary`, para cumplir el
   contraste de 4.5:1 pese a su jerarquía baja. Ver el hallazgo H-1 de la devolución.
+- **La barra de validación también está medida**, porque es el instrumento con el que se valida la
+  accesibilidad del resto: sobre `--color-brand-primary-dark` sus tres pares dan 11.94:1, 12.07:1 y
+  13.70:1. Los dos colores propios que tenía —inventados fuera del catálogo y sin medir— se
+  reemplazaron por tokens existentes.
+- **Ningún HTML ni guion de la maqueta lleva un atributo `style=` en línea.** Lo que era estilo en
+  línea vive en clases con nombre que sólo materializan tokens del catálogo.
 
 ---
 

@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2, §4.1, §4.2 (invariante candidato INV-08, propuesto y no vigente), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; CU-01 §4, §5, §6 y §8; CU-12 §1, §3, §4, §5, §6 y §8; CU-02 §5 y §6; CU-03 §6; CU-04 §5 y §6; CU-05 §5 y §6; CU-06 §5 y §6; CU-07 §5 y §6; CU-08 §4, §5 y §6; CU-09 §5 y §6; CU-10 §5 y §6; CU-11 §5 y §6; RN-01 a RN-11; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9 (puntos abiertos); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.1, §17.1.P.2, §17.1.P.4, §17.1.P.5, §17.1.P.6, §17.1.P.10, §17.1.P.11, §4.1, §4.2, §16
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2, §4.1, §4.2 (recorrido de adopción de INV-08), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; CU-01 §4, §5, §6 y §8; CU-12 §1, §3, §4, §5, §6 y §8; CU-02 §5 y §6; CU-03 §6; CU-04 §5 y §6; CU-05 §5 y §6; CU-06 §5 y §6; CU-07 §5 y §6; CU-08 §4, §5 y §6; CU-09 §5 y §6; CU-10 §5 y §6; CU-11 §5 y §6; CU-13 §1, §5, §6 y §10; RN-01 a RN-13; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9 (puntos abiertos); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.1, §17.1.P.2, §17.1.P.4, §17.1.P.5, §17.1.P.6, §17.1.P.10, §17.1.P.11, §4.1, §4.2, §16
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -26,7 +26,7 @@
 - [5. Próximos pasos](#5-próximos-pasos)
 - [6. Control de cambios](#6-control-de-cambios)
 - [7. Dónde va una regla nueva](#7-dónde-va-una-regla-nueva)
-  - [7.1 Once reglas, siete invariantes](#71-once-reglas-siete-invariantes)
+  - [7.1 Trece reglas, nueve invariantes](#71-trece-reglas-nueve-invariantes)
   - [7.2 Por qué cuatro reglas no tienen invariante](#72-por-qué-cuatro-reglas-no-tienen-invariante)
   - [7.3 El procedimiento de decisión](#73-el-procedimiento-de-decisión)
 
@@ -131,7 +131,7 @@ Ningún estado vuelve a `Pendiente`. El administrador habilita, bloquea y rehabi
 
 **Las cuatro operaciones alcanzan sólo a las cuentas con papel `Alumno`**, y no es una decisión del modelo: es el enunciado literal de la capacidad F-03, «habilitar, bloquear, rehabilitar y dar de baja física cuentas **de alumno**». Sobre la cuenta del administrador no procede ninguna de las cuatro, y el dominio las rechaza con `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`. El motivo es la contracara del anterior: **la cuenta que habilita a las demás no puede quedar en un estado del que nadie pueda sacarla**. Y el efecto no se agota en el acceso —que ya sería grave por INV-06—: **sin administrador nadie aprueba ni rechaza**, así que todo trabajo enviado queda en estado `Pendiente` para siempre y el circuito de revisión entero se detiene (RN-10).
 
-Las dos guardas, la del alta y la del ciclo de vida, son la misma familia vista en dos momentos, y es la propiedad que el invariante candidato **INV-08** propone enunciar de una sola vez. Sigue **propuesto y no vigente**: los invariantes vigentes son los siete de §7.1.
+Las dos guardas, la del alta y la del ciclo de vida, son la misma familia vista en dos momentos, y es la propiedad que **INV-08** enuncia de una sola vez. **Está adoptado desde `PRODUCT-INTAKE` §17.1.P.2** y se cuenta entre los nueve invariantes vigentes de §7.1; la guía lo citaba como candidato y esa cita quedó desactualizada.
 
 **Trabajo.** Cuatro estados: `Borrador`, `Pendiente`, `Finalizado`, `Rechazado`. Dos propiedades gobiernan lo demás:
 
@@ -174,7 +174,7 @@ Los cuatro modos de documentación, con el orden en que conviene visitarlos desp
 | Modo | Ir a | Cuándo |
 | --- | --- | --- |
 | Tutorial | Esta guía | Es la que se acaba de recorrer. No hay otra |
-| How-to | [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), los doce contratos de uso | Cuando hay que invocar una operación concreta y saber qué resolver antes |
+| How-to | [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), los trece contratos de uso | Cuando hay que invocar una operación concreta y saber qué resolver antes |
 | Reference | [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) para entidades y transiciones; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones de error; [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../02-Especificacion-Funcional/Glosario-Funcional.md) para el vocabulario | Cuando hace falta un dato puntual |
 | Explanation | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.2 y §1.3; `Definicion-Modelo-De-Dominio.md` §4, §6 y §7; la §7 de esta guía | Cuando la pregunta es «por qué está así» |
 
@@ -192,11 +192,11 @@ Punto de entrada recomendado de la sección de especificación funcional: su `RE
 
 Este es el tramo de una hora y el que más rinde a largo plazo. La pregunta que responde es: aparece una regla nueva, ¿va como guarda de una entidad de este proyecto de código, o va en otra capa?
 
-### 7.1 Once reglas, siete invariantes
+### 7.1 Trece reglas, nueve invariantes
 
-Los invariantes **no son reglas distintas** de las once del negocio: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca, sin importar la operación ni quién la ejecute, aunque la petición llegue por fuera de la interfaz.
+Los invariantes **no son reglas distintas** de las trece del negocio: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca, sin importar la operación ni quién la ejecute, aunque la petición llegue por fuera de la interfaz.
 
-Siete de las once reglas tienen invariante asociado y cuatro no. La correspondencia es la de `Definicion-Modelo-De-Dominio.md` §4.3 y se transcribe acá porque es el corazón de este tramo:
+Nueve de las trece reglas tienen invariante asociado y cuatro no; **RN-12 y RN-13 comparten INV-09**, que es el único invariante que sostiene dos reglas. La correspondencia es la de `Definicion-Modelo-De-Dominio.md` §4.3 y se transcribe acá porque es el corazón de este tramo:
 
 | Regla | Enunciado abreviado | Invariante que la expresa como condición permanente |
 | --- | --- | --- |
@@ -238,3 +238,4 @@ Ante una regla nueva, en este orden:
 4. **Si la regla entra:** sube el enunciado a `02-Especificacion-Funcional/`, obtiene su identificador `RN-XX` y su `INV-XX` si corresponde, aparece en el §6 de algún caso de uso como código de condición, y **recién entonces** entra al catálogo de [`DX-Error-Messages.md`](DX-Error-Messages.md). El catálogo no inventa condiciones: las deriva.
 
 La tabla de fronteras de `Definicion-Modelo-De-Dominio.md` §7 es la referencia rápida del paso 3: enumera las ocho responsabilidades que este proyecto de código no tiene y dónde vive cada una.
+| 1.3 | 2026-08-09 | Alineación con `PRODUCT-INTAKE` **1.7** y con la categoría 02 en su versión 1.4. §7.1 pasa de «once reglas, siete invariantes» a **trece reglas, nueve invariantes**, con **RN-12** y **RN-13** compartiendo **INV-09** —el único invariante que sostiene dos reglas— y con **INV-08 declarado adoptado**, que esta guía venía citando como candidato no vigente. §5 actualiza el how-to a trece contratos de uso y la cabecera suma CU-13. La distinción entre resetear y dar de baja se lee en [`DX-Error-Messages.md`](DX-Error-Messages.md) §1.5, que es donde vive el catálogo. |

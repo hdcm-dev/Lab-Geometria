@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** DX-Error-Messages.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los diez casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-10), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3 (los cuatro puertos, los metadatos de orquestación y la cantidad de figuras del conjunto raíz), §4 (las tres comprobaciones, sus cuatro precisiones y la equivalencia de la negativa de facultad), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-11 y las §6 de los doce casos de uso de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-01, NB-02, NB-03, NB-04, NB-05, NB-09); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1, §4.2, §15, §17.2.P.3, §17.2.P.5, §17.2.P.10, §17.2.P.11, §17.2.P.12
+**Trazabilidad upstream:** §6 de los once casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-11), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3 (los cuatro puertos, los metadatos de orquestación y la cantidad de figuras del conjunto raíz), §4 (**las cuatro comprobaciones**, sus **cinco** precisiones y la equivalencia de la negativa de facultad), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-11 y las §6 de los doce casos de uso de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`, más **RN-12** y **RN-13** del `PRODUCT-INTAKE` **1.7** §4.1 y el invariante **INV-09** de su §17.1.P.2; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-01, NB-02, NB-03, NB-04, NB-05, NB-09); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.7**, §4 (F-26), §4.1, §4.2, §15, §17.1.P.2, §17.2.P.3, §17.2.P.5, §17.2.P.10, §17.2.P.11, §17.2.P.12
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
 
 ---
@@ -37,6 +37,7 @@
   - [3.8 CU-08 Dar desenlace a un trabajo](#38-cu-08-dar-desenlace-a-un-trabajo)
   - [3.9 CU-09 Eliminar un trabajo](#39-cu-09-eliminar-un-trabajo)
   - [3.10 CU-10 Configurar la cuenta de administrador](#310-cu-10-configurar-la-cuenta-de-administrador)
+  - [3.11 CU-11 Resetear la contraseña de un alumno](#311-cu-11-resetear-la-contraseña-de-un-alumno)
 - [4. Tono y voz](#4-tono-y-voz)
 - [5. Localización](#5-localización)
 - [6. Control de cambios](#6-control-de-cambios)
@@ -112,8 +113,8 @@ Por eso es **el único motivo del catálogo que lleva fila completa en dos subse
 | --- | --- | --- |
 | **Entrada inválida** | El dato que llega está ausente, vacío, no admitido en este camino, o no pertenece a un conjunto cerrado declarado | 13 |
 | **Recurso ausente** | Lo que la operación referencia no existe, no existe **para quien lo pide**, o todavía no tiene valor | 4 |
-| **Conflicto de estado** | La operación es legítima, pero el estado actual de la cuenta, del trabajo o del conjunto de cuentas no la admite | 11 |
-| **Conflicto de facultad** | La operación es legítima y el estado la admitiría, pero el papel declarado por **quien pide** no la ejerce | 2 |
+| **Conflicto de estado** | La operación es legítima, pero el estado actual de la cuenta, del trabajo o del conjunto de cuentas no la admite | 12 |
+| **Conflicto de facultad** | La operación es legítima y el estado la admitiría, pero el papel declarado por **quien pide** no la ejerce, o el papel de la **cuenta destino** no admite la operación | 3 |
 | **Conflicto de alcance** | La operación es legítima y el papel la ejerce, pero el trabajo pedido está fuera de lo que ese papel ve | 1 |
 | **Error transitorio** | Un puerto no pudo completar lo que se le pidió, por una causa que no depende de lo que el consumidor pidió | 1 |
 | **Error interno** | Un adaptador de puerto devolvió algo que el contrato no admite. No es un defecto del caso de uso ni del consumidor | 2 |
@@ -125,7 +126,7 @@ Dos categorías se agregan a la enumeración de referencia y conviene justificar
 
 **Una divergencia deliberada de clasificación con el proyecto de código hermano, declarada para que no se lea como descuido.** El motivo `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` está clasificado allá como conflicto de facultad y acá como **entrada inválida**. El fundamento es uno solo, y es que el referente cambia con la capa: en el dominio el papel llega como pretensión de constituir una entidad reservada; acá el papel es **un dato del pedido de alta**, no la facultad de quien pide. Nadie está ejerciendo una facultad que no tiene, y **CU-01 no verifica facultad ni pertenencia** —el auto-registro lo ejerce una persona que todavía no tiene cuenta (CU-01 §10)—: lo que se rechaza es un valor del pedido, exactamente como en `PAPEL_NO_RECONOCIDO`, que esta capa clasifica igual.
 
-Y lo que esta divergencia **no** invoca, escrito acá para que nadie lo reponga: **no hay correspondencia uno a uno entre la categoría de conflicto de facultad y la negativa por facultad de §2.4**. La categoría tiene dos miembros —`FACULTAD_DE_ADMINISTRADOR_REQUERIDA` y `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA`— y la negativa es una sola. Son cosas de distinto orden: la categoría es taxonómica y la negativa es una de las tres comprobaciones de autorización. La clasificación de este motivo se sostiene por el referente del papel y por nada más.
+Y lo que esta divergencia **no** invoca, escrito acá para que nadie lo reponga: **no hay correspondencia uno a uno entre la categoría de conflicto de facultad y la negativa por facultad de §2.4**. La categoría tiene tres miembros —`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO`— y las negativas de autorización son cuatro, de las cuales sólo la primera de esas tres es una. Son cosas de distinto orden: la categoría es taxonómica y la negativa es una de las tres comprobaciones de autorización. La clasificación de este motivo se sostiene por el referente del papel y por nada más.
 
 ### 2.2 Las dos categorías que el proyecto de código hermano declaró vacías
 
@@ -152,20 +153,22 @@ La diferencia importa: ante una negativa sin escritura el consumidor corrige la 
 
 ### 2.4 Las tres negativas de autorización
 
-Esta es la sección que justifica que `tiene_auth` valga true en este proyecto de código, y la que hay que dejar imposible de confundir. Las tres comprobaciones transversales de `Especificacion-Funcional.md` §4 producen tres negativas, y **confundir las dos primeras es el error más caro que un consumidor puede cometer contra esta capa**: confirmar que un recurso ajeno existe habilita averiguar por tanteo qué identificadores existen.
+Esta es la sección que justifica que `tiene_auth` valga true en este proyecto de código, y la que hay que dejar imposible de confundir. Las **cuatro** comprobaciones transversales de `Especificacion-Funcional.md` §4 producen cuatro negativas, y **confundir las dos primeras es el error más caro que un consumidor puede cometer contra esta capa**: confirmar que un recurso ajeno existe habilita averiguar por tanteo qué identificadores existen.
 
 | Negativa | Motivo | Qué se preguntó | ¿Oculta la existencia del recurso? | Traducción del consumidor |
 | --- | --- | --- | --- | --- |
 | **Pertenencia** | `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | ¿Este trabajo es del alumno que lo pide? | **Sí, deliberadamente.** El trabajo ajeno y el identificador inexistente comparten motivo por diseño | «No encontrado», y **nunca** «no autorizado» |
 | **Facultad** | `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | ¿Quien pide esta operación reservada tiene el papel `Administrador`? | **No, y no tiene por qué.** No hay recurso ajeno cuya existencia proteger: se preguntó por una facultad, no por un recurso | Explícita: la operación requiere la facultad de administrador |
 | **Alcance** | `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | ¿Este trabajo entra en lo que el administrador ve? | **No.** Expresa que el trabajo está fuera de su flujo de trabajo, no que no exista | Explícita: los trabajos en `Borrador` no forman parte de la revisión |
+| **Cambio de contraseña pendiente** | `CAMBIO_DE_CONTRASENA_PENDIENTE` | ¿La cuenta que pide fue reseteada por el administrador y todavía no cambió su clave? | **No, y no debe.** La persona sabe perfectamente que le resetearon la clave: ocultarlo la dejaría sin saber qué hacer | Explícita, y **con el camino**: hay que cambiar la contraseña antes de cualquier otra cosa |
 
-Las cuatro precisiones que rigen en toda la categoría, transcriptas de `Especificacion-Funcional.md` §4 porque son el insumo directo de este catálogo:
+Las **cinco** precisiones que rigen en toda la categoría, transcriptas de `Especificacion-Funcional.md` §4 porque son el insumo directo de este catálogo:
 
 1. **El papel no reemplaza a la pertenencia.** Son dos comprobaciones distintas: un alumno autenticado no debe poder leer el trabajo de otro cambiando el identificador de la petición, y ningún papel resuelve eso.
 2. **La negativa por pertenencia y la negativa por facultad no se confunden.** La primera oculta la existencia del recurso; la segunda no tiene nada que ocultar.
 3. **La comprobación se hace sobre el dato recuperado y antes de escribir.** No se resuelve ocultando un control en la pantalla, y por eso es verificable con dobles sin base de datos.
 4. **El trabajo ajeno y el identificador inexistente comparten motivo por diseño.** Distinguirlos permitiría averiguar por tanteo qué identificadores existen.
+5. **La cuarta comprobación corta antes que las otras tres y tiene una sola excepción.** Una cuenta marcada por un reseteo no ejerce ninguna capacidad —ni las que su papel y su pertenencia admitirían— salvo cambiar su propia contraseña, que es el reemplazo de CU-03 FA-05. La marca la pone únicamente CU-11 y la levanta únicamente ese cambio (INV-09). **Para el consumidor esto tiene una consecuencia operativa**: ante `CAMBIO_DE_CONTRASENA_PENDIENTE` no hay dato que corregir ni papel que cambiar, hay una sola ruta a la que llevar a la persona.
 
 **Una sola negativa de facultad, y dos motivos del dominio detrás.** El dominio declara dos motivos distintos para la misma negativa —uno en su resolución de desenlace y otro en la de alcance del administrador— y esta capa emite uno solo: corta con su propia verificación **antes** de invocar al dominio, de modo que ninguno de los dos llega a producirse (`Especificacion-Funcional.md` §4, CU-08 §10, CU-09 §10). Quien lea las dos capas no debe leer tres negativas de facultad donde hay una.
 
@@ -173,6 +176,7 @@ Las cuatro precisiones que rigen en toda la categoría, transcriptas de `Especif
 
 1. **¿La pregunta fue por un recurso concreto que puede ser de otra persona?** Si es sí, la negativa oculta: mismo motivo para el ajeno y para el inexistente, y traducción a «no encontrado». Termina acá.
 2. **¿La pregunta fue por una facultad, sin recurso ajeno de por medio?** Entonces la negativa puede ser explícita: no hay nada que ocultar, y ocultarla sólo haría más difícil el diagnóstico.
+3. **¿La cuenta que pide está marcada como con cambio de contraseña pendiente?** Entonces ninguna de las dos preguntas anteriores llega a hacerse: la negativa es explícita y encamina al cambio.
 3. **¿La pregunta fue por un recurso que el papel sí puede ver en general, pero éste en particular queda fuera de su alcance?** Entonces la negativa es explícita y **no oculta**: el administrador ve todo lo que no es borrador, y decirle que un borrador está fuera de su alcance no le revela nada que no supiera.
 
 **Traducciones prohibidas.** Ninguna de estas cuatro es admisible en `GeometriaFactory-Api` ni en ninguna superficie aguas abajo, y la métrica que las cuenta tiene objetivo cero ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §6):
@@ -209,9 +213,9 @@ Dos consecuencias para quien implementa:
 
 ## 3. Catálogo
 
-Treinta y cuatro condiciones, derivadas una por una de la §6 de los diez casos de uso. Ninguna se inventó y ninguna quedó afuera; el recuento y la verificación mecánica están en §7.
+Treinta y seis condiciones, derivadas una por una de la §6 de los once casos de uso. Ninguna se inventó y ninguna quedó afuera; el recuento y la verificación mecánica están en §7.
 
-Nueve condiciones se declaran en más de un caso de uso. **Ocho conservan la misma causa en todos** y llevan una sola entrada, en el caso de uso donde aparecen primero, con la nota de sus apariciones restantes. La novena, `ESTADO_INICIAL_NO_NEGOCIABLE`, lleva **fila completa en §3.1 y en §3.10** porque sus dos causas son opuestas según el camino de alta: el motivo está en §1.4. Es la única fila excedente del catálogo: 35 filas de tabla para 34 condiciones.
+Doce condiciones se declaran en más de un caso de uso. **Once conservan la misma causa en todos** y llevan una sola entrada, en el caso de uso donde aparecen primero, con la nota de sus apariciones restantes. La duodécima, `ESTADO_INICIAL_NO_NEGOCIABLE`, lleva **fila completa en §3.1 y en §3.10** porque sus dos causas son opuestas según el camino de alta: el motivo está en §1.4. Es la única fila excedente del catálogo: 37 filas de tabla para 36 condiciones.
 
 ### 3.1 CU-01 Registrar el alta de una cuenta
 
@@ -249,7 +253,8 @@ Dos formas conviven: la consulta de admisibilidad es **motivo de resultado** —
 | `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | Conflicto de estado | La credencial derivada sólo se fija o se reemplaza con la cuenta habilitada | Se intentó fijar o reemplazar sobre una cuenta `Pendiente` o `Bloqueado` | Habilitar o rehabilitar la cuenta primero, por CU-02. Esta capa propaga el rechazo del dominio y conserva la credencial como estaba |
 | `CREDENCIAL_VIGENTE_NO_VERIFICADA` | Entrada inválida | El reemplazo exige declarar verificada la credencial vigente | Se pidió el reemplazo sin esa declaración | Verificar la credencial vigente en la capa que sí puede compararla —`GeometriaFactory-Infrastructure`— y **declararlo al invocar**. Esta capa no compara credenciales: exige que la verificación se declare, que es la forma en que la regla se hace exigible sin conocer el mecanismo |
 | `CREDENCIAL_YA_FIJADA` | Conflicto de estado | La credencial derivada ya tiene valor | Se pidió fijar por primera vez algo que ya está fijado | Usar el camino de reemplazo, declarando verificada la credencial vigente. El valor anterior se reemplaza y no se conserva historial. Es el motivo que recibe siempre la cuenta del administrador si se intenta fijarle credencial, porque nace con una |
-| `VALOR_DERIVADO_VACIO` | Entrada inválida | El valor de credencial derivada llegó vacío | Se invocó la fijación o el reemplazo con un valor sin contenido | Aportar el valor **ya derivado**. Esta capa no deriva la contraseña y nunca la conoce en claro; conserva la credencial como estaba |
+| `VALOR_DERIVADO_VACIO` | Entrada inválida | El valor de credencial derivada llegó vacío | Se invocó la fijación o el reemplazo con un valor sin contenido | Aportar el valor **ya derivado**. Esta capa no deriva la contraseña y nunca la conoce en claro; conserva la credencial como estaba. Esta condición vuelve a declararse en CU-11, con la misma causa: allá el valor vacío es el de la contraseña provisoria |
+| `CAMBIO_DE_CONTRASENA_PENDIENTE` | Conflicto de estado | La cuenta tiene que cambiar su contraseña antes de hacer cualquier otra cosa | La cuenta fue reseteada por el administrador en CU-11 y todavía no cambió la provisoria (RN-13, INV-09) | **No es un fallo y no se responde con un rechazo genérico**: encaminar al cambio de contraseña, que es la única ruta disponible para esa cuenta. **Es la cuarta comprobación transversal de `Especificacion-Funcional.md` §4** y por lo tanto la puede devolver cualquier caso de uso; su entrada vive acá porque acá está su única excepción, el reemplazo de FA-05, que es lo que la levanta. No hay dato que corregir ni papel que cambiar |
 
 **La cuenta inexistente en la consulta de admisibilidad.** `CUENTA_INEXISTENTE` tiene su entrada única en §3.2, pero su tratamiento acá es distinto y es una de las reglas de ocultamiento del producto: cuando el puerto de repositorio no encuentra el correo, el caso de uso devuelve **no admisible sin distinguir el motivo hacia afuera**, para no revelar qué correos están registrados (CU-03 §6, CA-05). Es el mismo criterio con el que un trabajo ajeno es indistinguible de uno inexistente, aplicado a la cuenta.
 
@@ -353,6 +358,24 @@ Es la **configuración del administrador en el primer arranque**, el otro camino
 
 **Un criterio de este caso de uso que conviene conocer aunque no produzca ninguna condición.** CA-02 encadena la configuración con la consulta de admisibilidad de CU-03 y exige que devuelva admisible **con 0 motivos**: el administrador entra inmediatamente después de configurarse. Es la prueba de que el primer arranque es recorrible de punta a punta, y el defecto que la partición en dos caminos de alta vino a cerrar.
 
+### 3.11 CU-11 Resetear la contraseña de un alumno
+
+Es el **reseteo de contraseña por el administrador** (F-26 del `PRODUCT-INTAKE` 1.7). Forma de terminación: negativa sin escritura. Ninguna deja efecto parcial: el reseteo escribe credencial, marca y sello, o no escribe nada. **En ningún caso se retira un trabajo**: resetear no es dar de baja y no dispara RN-07.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` | Conflicto de facultad | El reseteo se ejerce sobre cuentas con papel `Alumno` | Se pidió resetear la cuenta con papel `Administrador` | No hay camino por acá: el administrador administra su propia credencial por el reemplazo de CU-03, declarando verificada la vigente. El acotamiento es una **decisión derivada** de esta capa, declarada con su fundamento en CU-11 §10: un reseteo sobre sí mismo dejaría al único administrador confinado por INV-09, con la instancia sin gobierno y sin ninguna otra cuenta que pudiera resolverlo |
+
+**Las cinco negativas que este caso de uso comparte con otros**, con entrada única donde aparecen primero y la misma causa acá:
+
+- `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` (§3.2): quien pide el reseteo no tiene el papel. No se recupera la cuenta destino ni se toca ninguna credencial.
+- `CUENTA_INEXISTENTE` (§3.2): el puerto no encuentra la cuenta destino. **Acá tampoco oculta nada**, por el mismo motivo que en CU-02: la operación ya exigió la facultad de administrador.
+- `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` (§3.3): la cuenta destino está `Pendiente` o `Bloqueado`. El remedio es habilitarla o rehabilitarla por CU-02, y recién después resetear. RN-12 declara que el reseteo **conserva** el estado de habilitación, no que lo cambie.
+- `CREDENCIAL_NO_ESTABLECIDA` (§3.3): la cuenta está habilitada y nunca fijó credencial. **No hay nada que resetear**, y el camino ya está abierto: el alumno la fija en su primer ingreso efectivo, por CU-03 FA-02. Es la única aparición de este motivo como **negativa sin escritura**; en CU-03 es motivo de resultado.
+- `VALOR_DERIVADO_VACIO` (§3.3): la contraseña provisoria llegó vacía. Esta capa nunca la conoce en claro.
+
+**Un criterio de este caso de uso que conviene conocer aunque no produzca ninguna condición.** La declaración de credencial vigente verificada que el dominio exige para todo reemplazo la sostiene acá **la verificación de facultad**, y no una comparación de contraseñas: el administrador no conoce la del alumno y no la conocerá. Es la única invocación del reemplazo en la que esa declaración no nace de comparar credenciales, y está declarada en CU-11 §10 para que nadie la lea como un atajo.
+
 ## 4. Tono y voz
 
 Coherente con la guía de estilo del producto: español rioplatense neutro técnico, sin marketing y sin emojis.
@@ -383,6 +406,7 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. Cataloga las 27 condiciones distintas derivadas de la §6 de los nueve casos de uso de entonces, sobre 37 filas declaradas. Declara la distinción entre condición de error, observación y comentario; la taxonomía con «conflicto de facultad» y «conflicto de alcance» agregadas y justificadas; la forma de terminación como dimensión ortogonal; y la §2.4 con las tres negativas de autorización, su tabla de traducciones prohibidas y su procedimiento de decisión. |
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **Alineación con el 02 corregido**: el catálogo pasa de **27 a 34 condiciones distintas** sobre **48 filas y diez casos de uso**, con §3.10 nueva para CU-10, la configuración del administrador. Altas: `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `CONFIGURACION_SIN_CREDENCIAL`, `CREDENCIAL_YA_FIJADA`, `VALOR_DERIVADO_VACIO`, `TEXTO_ORIGINAL_ALTERADO` y `CONJUNTO_DE_PIEZAS_MAL_FORMADO`; `TRANSICION_DESDE_ESTADO_TERMINAL` pasa a declararse también en CU-05 y su entrada se muda a §3.5, que es donde aparece primero; `ADMINISTRADOR_YA_CONFIGURADO` se muda de §3.1 a §3.10; `ENVIO_FUERA_DE_BORRADOR` acota su causa al estado `Pendiente`; `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` se acota al auto-registro. **§1.4 nueva**: los dos caminos de alta con sus cinco rasgos opuestos, y el tratamiento del motivo con **causas opuestas**, que lleva fila completa en dos subsecciones con remisión mutua, **adoptando la misma forma que el proyecto de código hermano**. **§2.5 nueva**: los rechazos del dominio que esta capa no puede producir —inalcanzables por construcción, equivalentes o agregados—, con su lugar de declaración en la 02 y las dos consecuencias para quien implementa. §3.5 transmite además la **cantidad de figuras del conjunto raíz** y por qué no es derivable de las piezas adoptadas. **H-08**: la fila de `DATO_OBLIGATORIO_AUSENTE` en §3.4 pasa a nota de prosa, y el preámbulo de §3 declara que la única fila excedente es la del motivo con causas opuestas: 35 filas para 34 condiciones. **H-09**: «Control de cambios» vuelve a §6 y «Cobertura y trazabilidad» pasa a §7, unificando la convención con `Guia-Onboarding-Developer.md`. **H-10**: «dentro de la misma solución de código» en §1.3. §2.1 declara además la **divergencia deliberada de clasificación** de `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` respecto del proyecto de código hermano, con su motivo. |
+| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26** con sus reglas **RN-12** y **RN-13** y el invariante **INV-09**. El catálogo pasa de **34 a 36 condiciones distintas** sobre **55 filas y once casos de uso**, con **§3.11 nueva** para CU-11, el reseteo de contraseña por el administrador. Altas: `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO`, con la **decisión derivada** que lo funda, y `CAMBIO_DE_CONTRASENA_PENDIENTE`, cuya entrada vive en §3.3 porque ahí está su única excepción. **§2.4** pasa de tres a **cuatro negativas de autorización**, con la precisión 5 nueva y un tercer paso en el procedimiento de decisión. **§2.1** actualiza dos recuentos de categoría —conflicto de estado de 11 a 12, conflicto de facultad de 2 a 3— y la nota de divergencia deja de declarar dos miembros donde ahora hay tres. **§3.3** declara que `CREDENCIAL_NO_ESTABLECIDA`, `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` y `VALOR_DERIVADO_VACIO` reaparecen en CU-11, y que la primera **cambia de forma de terminación** entre los dos. §7 rehace los cuatro recuentos y la verificación mecánica en las dos direcciones. Sube minor: agrega dos condiciones y una sección de catálogo, sin cambiar la semántica de ninguna existente. |
 | 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-18**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. §2.1 **retira el argumento auxiliar inválido** con el que cerraba la divergencia de clasificación de `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`: no existe la «correspondencia uno a uno» invocada entre la categoría de conflicto de facultad, que tiene dos miembros, y la negativa por facultad de §2.4, que es una sola. **La clasificación no cambia y el fundamento principal se conserva**, reforzado: el referente del papel cambia con la capa —acá es un dato del pedido de alta y no la facultad de quien pide, y CU-01 no verifica facultad ni pertenencia—, con el paralelo explícito a `PAPEL_NO_RECONOCIDO`, que esta capa clasifica igual. Se agrega en su lugar la declaración de lo que la divergencia **no** se apoya, para que una ronda posterior no reponga el argumento retirado ni revierta por él la clasificación entera. |
 
 ## 7. Cobertura y trazabilidad
@@ -391,17 +415,17 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 
 | Magnitud | Valor |
 | --- | --- |
-| Casos de uso de los que deriva el catálogo | 10 (CU-01 a CU-10) |
-| Filas de condición declaradas en la §6 de los diez casos de uso | 48 |
-| Condiciones declaradas en más de un caso de uso | 9 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`) |
-| Reapariciones, sobre esas nueve | 14 |
-| **Condiciones distintas catalogadas** | **34** |
-| Filas de tabla en §3 | 35. La única excedente es `ESTADO_INICIAL_NO_NEGOCIABLE`, con fila completa en §3.1 y §3.10 por causas opuestas (§1.4) |
+| Casos de uso de los que deriva el catálogo | 11 (CU-01 a CU-11) |
+| Filas de condición declaradas en la §6 de los once casos de uso | 55 |
+| Condiciones declaradas en más de un caso de uso | 12 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`, y las tres que CU-11 comparte con CU-03: `CUENTA_NO_HABILITADA_PARA_CREDENCIAL`, `CREDENCIAL_NO_ESTABLECIDA` y `VALOR_DERIVADO_VACIO`) |
+| Reapariciones, sobre esas doce | 19 |
+| **Condiciones distintas catalogadas** | **36** |
+| Filas de tabla en §3 | 37. La única excedente es `ESTADO_INICIAL_NO_NEGOCIABLE`, con fila completa en §3.1 y §3.10 por causas opuestas (§1.4) |
 | Condiciones inventadas por esta categoría | **0** |
 | Condiciones de los casos de uso sin entrada en el catálogo | **0** |
 | Rechazos del dominio sin condición propia acá, declarados en §2.5 | 16, ninguno de ellos condición de este catálogo |
 
-Cuadre: 34 + 14 = 48.
+Cuadre: 36 + 19 = 55.
 
 ### 7.2 Verificación mecánica de cobertura
 
@@ -411,7 +435,7 @@ La verificación se hizo en las dos direcciones, caso de uso por caso de uso, y 
 | --- | --- | --- | --- | --- |
 | CU-01 | 5 | 5 | 0 | 5 |
 | CU-02 | 5 | 5 | 0 | 5 |
-| CU-03 | 8 | 7 | 1 (`CUENTA_INEXISTENTE`) | 8 |
+| CU-03 | 9 | 8 | 1 (`CUENTA_INEXISTENTE`) | 9 |
 | CU-04 | 5 | 4 | 1 (`DATO_OBLIGATORIO_AUSENTE`) | 5 |
 | CU-05 | 6 | 5 | 1 (`TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`) | 6 |
 | CU-06 | 2 | 1 | 1 (`TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`) | 2 |
@@ -419,16 +443,17 @@ La verificación se hizo en las dos direcciones, caso de uso por caso de uso, y 
 | CU-08 | 5 | 2 | 3 (`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`) | 5 |
 | CU-09 | 4 | 1 | 3 (`TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`) | 4 |
 | CU-10 | 5 | 2 | 3 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`) | 5 |
-| **Total** | **48** | **34** | **14** | **48** |
+| CU-11 | 6 | 1 | 5 (`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `CUENTA_NO_HABILITADA_PARA_CREDENCIAL`, `CREDENCIAL_NO_ESTABLECIDA`, `VALOR_DERIVADO_VACIO`) | 6 |
+| **Total** | **55** | **36** | **19** | **55** |
 
 `ESTADO_INICIAL_NO_NEGOCIABLE` se cuenta como entrada nueva en CU-01 y como reaparición en CU-10, igual que las otras ocho repetidas: **la segunda fila de tabla de §3.10 no altera el recuento de condiciones distintas**, sólo el de filas de tabla.
 
 Las dos comprobaciones que cierran la verificación:
 
-- **De caso de uso a catálogo.** Ninguna de las 48 filas quedó sin entrada: 34 dieron entrada nueva y 14 son reapariciones de una condición ya catalogada, cada una anotada con su caso de uso adicional.
-- **De catálogo a caso de uso.** Ninguna de las 34 entradas de §3 existe sin una fila que la respalde en la §6 del caso de uso que la titula. **No hay ninguna condición inventada por esta categoría**, y en particular no se agregó ninguna a partir de los flujos alternativos: se recorrieron las **diecisiete citas de motivo** que aparecen en las §5 de los diez casos de uso y todas corresponden a un motivo ya declarado en la §6 del mismo caso de uso. Tampoco se agregó ninguna a partir de §2.5: los dieciséis rechazos del dominio que esa sección enumera **no son condiciones de este catálogo** y no entran en ningún recuento.
+- **De caso de uso a catálogo.** Ninguna de las 55 filas quedó sin entrada: 36 dieron entrada nueva y 19 son reapariciones de una condición ya catalogada, cada una anotada con su caso de uso adicional.
+- **De catálogo a caso de uso.** Ninguna de las 36 entradas de §3 existe sin una fila que la respalde en la §6 del caso de uso que la titula. **No hay ninguna condición inventada por esta categoría**, y en particular no se agregó ninguna a partir de los flujos alternativos: se recorrieron las **veintiuna citas de motivo** que aparecen en las §5 de los once casos de uso y todas corresponden a un motivo ya declarado en la §6 del mismo caso de uso. Tampoco se agregó ninguna a partir de §2.5: los dieciséis rechazos del dominio que esa sección enumera **no son condiciones de este catálogo** y no entran en ningún recuento.
 
-Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su precisión propia** cuando el caso de uso agrega una: la negativa por pertenencia que no invoca al validador (§3.5), la negativa por facultad que no consulta el repositorio de trabajos (§3.7), la facultad que no se delega ni sobre el trabajo propio y el alcance comprobado antes que el estado (§3.8), el tratamiento distinto de la cuenta inexistente en la consulta de admisibilidad (§3.3), el otro alcance del dato obligatorio ausente (§3.4) y las dos negativas compartidas entre los dos caminos de alta (§3.10).
+Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su precisión propia** cuando el caso de uso agrega una: la negativa por pertenencia que no invoca al validador (§3.5), la negativa por facultad que no consulta el repositorio de trabajos (§3.7), la facultad que no se delega ni sobre el trabajo propio y el alcance comprobado antes que el estado (§3.8), el tratamiento distinto de la cuenta inexistente en la consulta de admisibilidad (§3.3), el otro alcance del dato obligatorio ausente (§3.4), las dos negativas compartidas entre los dos caminos de alta (§3.10) y las cinco que el reseteo comparte con CU-02 y CU-03, entre ellas `CREDENCIAL_NO_ESTABLECIDA`, que **cambia de forma de terminación** —motivo de resultado en CU-03, negativa sin escritura en CU-11— (§3.11).
 
 ### 7.3 Tabla de cobertura
 
@@ -443,11 +468,13 @@ Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su prec
 | `CONFIRMACION_DE_BAJA_NO_COINCIDE` | CU-02 | RN-07 | Entrada inválida | Negativa sin escritura |
 | `TRANSICION_DE_CUENTA_NO_ADMITIDA` | CU-02 | — | Conflicto de estado | Negativa sin escritura |
 | `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` | CU-02 | RN-01 | Conflicto de facultad | Negativa sin escritura |
-| `CUENTA_INEXISTENTE` | CU-02, CU-03 | — | Recurso ausente | Negativa sin escritura y motivo de resultado, según el caso de uso |
+| `CUENTA_INEXISTENTE` | CU-02, CU-03, CU-11 | — | Recurso ausente | Negativa sin escritura y motivo de resultado, según el caso de uso |
 | `CUENTA_PENDIENTE` | CU-03 | RN-06 | Conflicto de estado | Motivo de resultado |
 | `CUENTA_BLOQUEADA` | CU-03 | RN-06 | Conflicto de estado | Motivo de resultado |
-| `CREDENCIAL_NO_ESTABLECIDA` | CU-03 | RN-06 | Recurso ausente | Motivo de resultado |
-| `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | CU-03 | RN-06 | Conflicto de estado | Negativa sin escritura |
+| `CREDENCIAL_NO_ESTABLECIDA` | CU-03, CU-11 | RN-06 | Recurso ausente | Motivo de resultado en CU-03, negativa sin escritura en CU-11 |
+| `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | CU-03, CU-11 | RN-06 | Conflicto de estado | Negativa sin escritura |
+| `CAMBIO_DE_CONTRASENA_PENDIENTE` | CU-03, y **cualquiera** por la comprobación transversal de §4 | RN-13, INV-09 | Conflicto de estado | Negativa sin escritura |
+| `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` | CU-11 | RN-01 | Conflicto de facultad | Negativa sin escritura |
 | `CREDENCIAL_VIGENTE_NO_VERIFICADA` | CU-03 | — | Entrada inválida | Negativa sin escritura |
 | `CREDENCIAL_YA_FIJADA` | CU-03 | — | Conflicto de estado | Negativa sin escritura |
 | `VALOR_DERIVADO_VACIO` | CU-03 | — | Entrada inválida | Negativa sin escritura |
@@ -484,7 +511,7 @@ Tres notas sobre las columnas, para que nadie las complete con atribuciones inve
 | Dimensión | Referencia |
 | --- | --- |
 | Rol de intervención | Integrador por casos de uso, implementador de puertos y mantenedor de la capa ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.1) |
-| Superficie pública que se documenta | Las 34 condiciones de error de los diez contratos de uso, y las tres comprobaciones transversales de `Especificacion-Funcional.md` §4 |
+| Superficie pública que se documenta | Las 36 condiciones de error de los once contratos de uso, y las cuatro comprobaciones transversales de `Especificacion-Funcional.md` §4 |
 | CU origen | CU-01 a CU-10, §6 de cada uno |
 | Reglas de negocio relevantes | RN-01 a RN-11 de `GeometriaFactory-Domain`, con la correspondencia de §7.3 |
 | Necesidades de negocio | NB-01, NB-02, NB-03, NB-04, NB-05, NB-09 |

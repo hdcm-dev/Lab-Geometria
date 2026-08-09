@@ -23,7 +23,11 @@
   var SELLO_MAQUETA = {
     proyectoDeCodigo: 'GeometriaFactory-Web',
     modelo: 'Catálogo base — Design-Rules-Web-Generico + Primer-Arranque + Identidad-De-Version',
-    fechaIteracion: '2026-08-09'
+    fechaIteracion: '2026-08-09',
+    /* Ronda de corrección posterior a la aprobación: cierra los hallazgos de
+       `SDD/Docs/Audit/B2-Maqueta-GeometriaFactory-Web-r1.md`. No es una
+       iteración de validación con el Product Owner. */
+    revision: 'r1-correccion-de-auditoria'
   };
 
   /* ==========================================================================
@@ -174,7 +178,7 @@
 
     nav.innerHTML =
       '<span class="mq-identidad">' + icono('marca', 'mq-ico--24') + esc(D.textos.producto) + '</span>' +
-      '<ul class="mq-nav" style="list-style:none;margin:0;padding:0">' +
+      '<ul class="mq-nav mq-lista-plana--sin-hueco">' +
         items.map(function (i) {
           var activo = i.id === destinoActivo ? ' aria-current="page"' : '';
           // «Mi contraseña» desde el shell de trabajo es el curso de cambio, y
@@ -219,7 +223,7 @@
           '<dt>Construcción</dt><dd>' + esc(v.identificadorDeConstruccion) + '</dd>' +
           '<dt>Origen</dt><dd>' + esc(v.origen) + '</dd>' +
         '</dl>' +
-        '<button type="button" class="mq-btn mq-btn--secundario" data-mq-copiar style="margin-top:8px">' +
+        '<button type="button" class="mq-btn mq-btn--secundario mq-mt-2" data-mq-copiar>' +
           icono('copiar') + 'Copiar para reportar</button>' +
         '<p class="mq-sr-only" role="status" data-mq-copiado></p>' +
       '</div>' +
@@ -431,7 +435,7 @@
             '<label for="mq-recarga">Recarga automática</label>' +
           '</span>' +
           '<span class="mq-nota" data-mq-recarga-nota></span>' +
-          '<a class="mq-nota" href="index.html" style="color:#CFE6DE">Volver a la portada de la maqueta</a>' +
+          '<a class="mq-nota" href="index.html">Volver a la portada de la maqueta</a>' +
         '</div>' +
         '<p class="mq-sr-only" role="status" data-mq-anuncio-estado></p>' +
       '</aside>';
@@ -562,12 +566,15 @@
      - **Giro de las figuras.** Cada pieza rota sobre su eje vertical, en su
        lugar. ATENCIÓN: esto NO existe en el visor original. Es comportamiento
        nuevo, decidido por el Product Owner al mirar la maqueta, y está anotado
-       como hallazgo H-2 en README.md §6 para el paso 6 de retroalimentación.
+       como hallazgo H-6 en README.md §6 para el paso 6 de retroalimentación.
 
      Son del producto y no del instrumento, así que van junto al área de dibujo
      y no en el panel del contrato. Prendidos por omisión los dos; apagados de
      arranque si el sistema declara preferencia de movimiento reducido, y en ese
-     caso el propio control lo dice.
+     caso el propio control lo dice. **Esa decisión es del anfitrión, no del
+     bundle**: el visor arranca los dos movimientos apagados ante opciones
+     ausentes (§4.1 del contrato) y esta página le manda siempre los dos valores
+     de verdad ya resueltos.
 
      Las preferencias se persisten con el prefijo `mq-`, que es la convención de
      claves del instrumento de la maqueta. Importa: el panel mide «cero
@@ -591,9 +598,15 @@
              'Se detiene mientras arrastrás.' }
   ];
 
+  /* LA PREFERENCIA DEL SISTEMA LA LEE EL ANFITRIÓN, NUNCA EL VISOR. Es la
+     frontera que fija `Definicion-Contrato-De-Fachada.md` §3.3: la fachada no
+     dibuja el control, no conserva la elección y no consulta configuración
+     propia —hacerlo violaría G-3—. Esta página es el componente anfitrión: acá
+     se consulta `prefers-reduced-motion`, acá se persiste la elección con
+     claves `mq-`, y al bundle le llegan **dos valores de verdad**, uno por
+     movimiento, por `crear(elemento, opciones)` y después por `orbitar()` y
+     `girarFiguras()`. */
   function movimientoReducido() {
-    var V = Visor();
-    if (V && V.prefiereMovimientoReducido) { return V.prefiereMovimientoReducido(); }
     try { return !!global.matchMedia('(prefers-reduced-motion: reduce)').matches; }
     catch (e) { return false; }
   }
@@ -620,9 +633,14 @@
            'aria-label="Movimiento automático de la escena">' +
         MOVIMIENTOS.map(function (m) {
           var id = 'mq-mov-' + (++secuenciaDeMovimiento);
+          /* La ayuda va en un elemento propio asociado por `aria-describedby`,
+             no sólo en `title`: el texto de `title` no llega ni al teclado ni a
+             buena parte de los lectores de pantalla. */
           return '<span class="mq-escena-movimiento__opcion">' +
-            '<input type="checkbox" id="' + id + '" data-mq-mov="' + m.campo + '">' +
-            '<label for="' + id + '" title="' + esc(m.ayuda) + '">' + esc(m.rotulo) + '</label>' +
+            '<input type="checkbox" id="' + id + '" data-mq-mov="' + m.campo + '" ' +
+                   'aria-describedby="' + id + '-ayuda">' +
+            '<label for="' + id + '">' + esc(m.rotulo) + '</label>' +
+            '<span class="mq-sr-only" id="' + id + '-ayuda">' + esc(m.ayuda) + '</span>' +
           '</span>';
         }).join('') +
         (movimientoReducido()
@@ -723,14 +741,14 @@
       var h = s * 0.42, y = y0 - 2 * h;
       return '<path class="mq-pieza-cuerpo" d="M' + x + ' ' + (y - s) + ' l' + s + ' ' + h +
              ' l0 ' + s + ' l-' + s + ' ' + h + ' l-' + s + ' -' + h + ' l0 -' + s + ' z"/>' +
-             '<path class="mq-pieza-cuerpo" style="fill:none" d="M' + (x - s) + ' ' + (y - s + h) +
+             '<path class="mq-pieza-cuerpo mq-pieza-cuerpo--contorno" d="M' + (x - s) + ' ' + (y - s + h) +
              ' l' + s + ' ' + h + ' l' + s + ' -' + h + ' M' + x + ' ' + (y - s + 2 * h) + ' l0 ' + s + '"/>';
     },
     ortoedro: function (x, y0, s) {
       var h = s * 0.42, alto = s * 1.7, y = y0 - 2 * h;
       return '<path class="mq-pieza-cuerpo" d="M' + x + ' ' + (y - alto) + ' l' + s + ' ' + h +
              ' l0 ' + alto + ' l-' + s + ' ' + h + ' l-' + s + ' -' + h + ' l0 -' + alto + ' z"/>' +
-             '<path class="mq-pieza-cuerpo" style="fill:none" d="M' + (x - s) + ' ' + (y - alto + h) +
+             '<path class="mq-pieza-cuerpo mq-pieza-cuerpo--contorno" d="M' + (x - s) + ' ' + (y - alto + h) +
              ' l' + s + ' ' + h + ' l' + s + ' -' + h + ' M' + x + ' ' + (y - alto + 2 * h) + ' l0 ' + alto + '"/>';
     },
     cilindro: function (x, y0, s) {
@@ -1067,7 +1085,13 @@
   }
 
   /* Cero persistencia: ninguna clave de la fachada en el almacenamiento. Las
-     claves de la maqueta (`mq-…`) son del instrumento y no del visor. */
+     claves de la maqueta (`mq-…`) son del instrumento y no del visor.
+
+     LIMITACIÓN CONOCIDA, QUE NO SE HEREDA AL SISTEMA CONSTRUIDO: la exclusión
+     es por PREFIJO y no por espacio de nombres, así que una clave de un tercero
+     que empezara con `mq-` quedaría fuera del recuento. En esta maqueta no hay
+     terceros y es inocuo; donde `SD-47` mida lo mismo sobre el sistema
+     construido, la exclusión tiene que ser por espacio de nombres declarado. */
   function clavesDeLaFachada() {
     var n = 0;
     [localStorage, sessionStorage].forEach(function (almacen) {
@@ -1108,19 +1132,25 @@
         : Object.keys(valor).map(function (k) { return ramaDeValor(k, valor[k], profundidad + 1); })
       ).join('');
       var idRama = 'mq-rama-' + (++secuenciaDeRama);
-      return '<li role="treeitem" aria-expanded="false">' +
-        '<button type="button" class="mq-nodo mq-nodo--rama" data-mq-rama="' + idRama + '" aria-expanded="false">' +
-          '<span class="mq-nodo-flecha" aria-hidden="true"></span>' +
+      /* UN SOLO PORTADOR DE ROL Y DE ESTADO: el `<li role="treeitem">`. Antes el
+         `aria-expanded` y el `aria-selected` estaban a la vez en el `<li>` y en
+         un `<button>` interno, con lo que el lector de pantalla anunciaba dos
+         elementos por nodo. El interior pasa a ser un `<span>` de presentación y
+         el foco lo lleva el `<li>`, con tabindex móvil. */
+      return '<li role="treeitem" aria-expanded="false" tabindex="-1" ' +
+                 'data-mq-rama="' + idRama + '">' +
+        '<span class="mq-nodo mq-nodo--rama">' +
+          '<span class="mq-nodo-flecha" data-mq-flecha aria-hidden="true"></span>' +
           '<span class="mq-json-clave">' + esc(clave) + '</span>' +
           '<span class="mq-json-cuenta">' + (esArreglo ? '[' + valor.length + ']' : '{…}') + '</span>' +
-        '</button>' +
+        '</span>' +
         '<ul role="group" id="' + idRama + '" class="mq-arbol-hijos" hidden>' + hijos + '</ul>' +
       '</li>';
     }
     var clase = typeof valor === 'string' ? 'mq-json-cadena'
               : typeof valor === 'number' ? 'mq-json-numero' : 'mq-json-otro';
     var texto = typeof valor === 'string' ? '"' + valor + '"' : String(valor);
-    return '<li role="treeitem"><span class="mq-nodo mq-nodo--hoja">' +
+    return '<li role="treeitem" tabindex="-1"><span class="mq-nodo mq-nodo--hoja">' +
              '<span class="mq-json-clave">' + esc(clave) + ':</span> ' +
              '<span class="' + clase + '">' + esc(texto) + '</span>' +
            '</span></li>';
@@ -1139,7 +1169,7 @@
 
     contenedor.innerHTML =
       '<ul class="mq-arbol" role="tree" aria-label="Árbol de la estructura del trabajo">' +
-        '<li role="none"><span class="mq-caption" style="padding-left:8px">conjunto (' + arbol.length + ')</span>' +
+        '<li role="none"><span class="mq-caption mq-sangria-2">conjunto (' + arbol.length + ')</span>' +
         '<ul role="group">' +
         arbol.map(function (n) {
           /* Los hijos salen del valor crudo de la pieza cuando el visor lo
@@ -1147,7 +1177,7 @@
           var hijos = n.datos
             ? Object.keys(n.datos).map(function (k) { return ramaDeValor(k, n.datos[k], 1); }).join('')
             : (n.hijos || []).map(function (h) {
-                return '<li role="treeitem"><span class="mq-nodo mq-nodo--hoja">' +
+                return '<li role="treeitem" tabindex="-1"><span class="mq-nodo mq-nodo--hoja">' +
                        '<span class="mq-json-clave">' + esc(h.etiqueta) + '</span></span></li>';
               }).join('');
           var cond = condicionDe(n.indice);
@@ -1156,40 +1186,63 @@
               'no dibujada · ' + esc(cond.codigo) + '</span>'
             : '';
           var idRama = 'mq-rama-' + (++secuenciaDeRama);
-          return '<li role="treeitem" aria-selected="false" aria-expanded="false">' +
-                   '<button type="button" class="mq-nodo" data-mq-nodo="' + n.indice + '" ' +
-                     'data-mq-rama="' + idRama + '" aria-selected="false" aria-expanded="false">' +
-                     '<span class="mq-nodo-flecha" aria-hidden="true"></span>' +
+          return '<li role="treeitem" aria-selected="false" tabindex="-1" ' +
+                     'data-mq-nodo="' + n.indice + '"' +
+                     (hijos ? ' aria-expanded="false" data-mq-rama="' + idRama + '"' : '') + '>' +
+                   '<span class="mq-nodo">' +
+                     (hijos ? '<span class="mq-nodo-flecha" data-mq-flecha aria-hidden="true"></span>' : '') +
                      '<span class="mq-nodo-indice">[' + n.indice + ']</span> ' + esc(n.tipo) + marca +
-                   '</button>' +
+                   '</span>' +
                    (hijos ? '<ul role="group" id="' + idRama + '" class="mq-arbol-hijos" hidden>' + hijos + '</ul>' : '') +
                  '</li>';
         }).join('') +
         '</ul></li></ul>';
 
-    /* Colapsar y expandir. En el nodo de pieza el despliegue va en la flecha,
-       para que el resto del botón siga siendo la selección por índice. */
-    $$('[data-mq-rama]', contenedor).forEach(function (b) {
-      var lista = document.getElementById(b.getAttribute('data-mq-rama'));
+    /* Recorrido por teclado del árbol, con TABINDEX MÓVIL: un solo nodo tabable
+       por árbol, y las flechas mueven el foco entre los nodos visibles. En el
+       nodo de pieza el despliegue va en la flecha, para que el resto del nodo
+       siga siendo la selección por índice. */
+    var raizArbol = $('[role="tree"]', contenedor);
+    if (!raizArbol) { return; }
+
+    function itemsDelArbol() { return $$('[role="treeitem"]', raizArbol); }
+    function itemsVisibles() {
+      return itemsDelArbol().filter(function (o) { return !o.closest('.mq-arbol-hijos[hidden]'); });
+    }
+    function enfocar(li) {
+      if (!li) { return; }
+      itemsDelArbol().forEach(function (o) { o.setAttribute('tabindex', o === li ? '0' : '-1'); });
+      li.focus();
+    }
+    function alternar(li) {
+      var idLista = li.getAttribute('data-mq-rama');
+      var lista = idLista ? document.getElementById(idLista) : null;
       if (!lista) { return; }
-      function alternar() {
-        var abierto = b.getAttribute('aria-expanded') === 'true';
-        b.setAttribute('aria-expanded', String(!abierto));
-        b.parentNode.setAttribute('aria-expanded', String(!abierto));
-        lista.hidden = abierto;
-      }
-      if (b.hasAttribute('data-mq-nodo')) {
-        var flecha = $('.mq-nodo-flecha', b);
-        if (flecha) {
-          flecha.addEventListener('click', function (ev) { ev.stopPropagation(); alternar(); });
-        }
-        b.addEventListener('keydown', function (ev) {
-          if (ev.key === 'ArrowRight' && b.getAttribute('aria-expanded') === 'false') { ev.preventDefault(); alternar(); }
-          if (ev.key === 'ArrowLeft' && b.getAttribute('aria-expanded') === 'true') { ev.preventDefault(); alternar(); }
-        });
-      } else {
-        b.addEventListener('click', alternar);
-      }
+      var abierto = li.getAttribute('aria-expanded') === 'true';
+      li.setAttribute('aria-expanded', String(!abierto));
+      lista.hidden = abierto;
+    }
+
+    var todos = itemsDelArbol();
+    if (todos.length) { todos[0].setAttribute('tabindex', '0'); }
+
+    raizArbol.addEventListener('click', function (ev) {
+      var li = ev.target.closest ? ev.target.closest('[role="treeitem"]') : null;
+      if (!li || !raizArbol.contains(li)) { return; }
+      enfocar(li);
+      if (!li.hasAttribute('data-mq-nodo') || ev.target.closest('[data-mq-flecha]')) { alternar(li); }
+    });
+
+    raizArbol.addEventListener('keydown', function (ev) {
+      var li = ev.target.closest ? ev.target.closest('[role="treeitem"]') : null;
+      if (!li || !raizArbol.contains(li)) { return; }
+      var visibles = itemsVisibles(), i = visibles.indexOf(li);
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); enfocar(visibles[(i + 1) % visibles.length]); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); enfocar(visibles[(i - 1 + visibles.length) % visibles.length]); }
+      else if (ev.key === 'Home') { ev.preventDefault(); enfocar(visibles[0]); }
+      else if (ev.key === 'End') { ev.preventDefault(); enfocar(visibles[visibles.length - 1]); }
+      else if (ev.key === 'ArrowRight' && li.getAttribute('aria-expanded') === 'false') { ev.preventDefault(); alternar(li); }
+      else if (ev.key === 'ArrowLeft' && li.getAttribute('aria-expanded') === 'true') { ev.preventDefault(); alternar(li); }
     });
   }
 
@@ -1204,7 +1257,6 @@
       nodos.forEach(function (b) {
         var activo = b.getAttribute('data-mq-nodo') === String(indice);
         b.setAttribute('aria-selected', String(activo));
-        b.parentNode.setAttribute('aria-selected', String(activo));
       });
       /* Con escena real el resaltado va sobre la malla; el respaldo plano
          sigue funcionando cuando no hay capacidad gráfica. */
@@ -1229,14 +1281,15 @@
        faltaba de la sincronización por índice, ahora en los dos sentidos. */
     alElegirEnLaEscena = function (indice) { seleccionar(indice, 'escena'); };
 
-    nodos.forEach(function (b, i) {
+    /* El recorrido con flechas lo gobierna `pintarArbol`, que es el dueño del
+       tabindex móvil. Acá queda sólo lo que es SELECCIÓN: pinchar el nodo, o
+       activarlo con Entrar o con la barra espaciadora. */
+    nodos.forEach(function (b) {
       b.addEventListener('click', function () { seleccionar(b.getAttribute('data-mq-nodo'), 'arbol'); });
       b.addEventListener('keydown', function (ev) {
-        var salto = ev.key === 'ArrowDown' ? 1 : ev.key === 'ArrowUp' ? -1 : 0;
-        if (!salto) { return; }
+        if (ev.key !== 'Enter' && ev.key !== ' ') { return; }
         ev.preventDefault();
-        var destino = nodos[(i + salto + nodos.length) % nodos.length];
-        destino.focus();
+        seleccionar(b.getAttribute('data-mq-nodo'), 'arbol');
       });
     });
 
@@ -1268,7 +1321,7 @@
 
   function filaDeTrabajo(t, papel, desde) {
     return '<tr>' +
-      '<th scope="row" class="mq-body-strong" style="font-weight:500;background:transparent;text-transform:none;letter-spacing:0;font-size:14px;color:inherit">' + esc(t.nombre) + '</th>' +
+      '<th scope="row" class="mq-body-strong mq-th-plano mq-th-plano--cuerpo">' + esc(t.nombre) + '</th>' +
       '<td class="mq-num">' + esc(t.fechaTrabajo) + '</td>' +
       '<td>' + insignia(t.estado) + '</td>' +
       '<td class="mq-num">' + t.piezas + '</td>' +
@@ -1282,7 +1335,7 @@
       '<div class="mq-tarjeta-fila-cabecera">' +
         '<h3 class="mq-body-strong">' + esc(t.nombre) + '</h3>' + insignia(t.estado) +
       '</div>' +
-      '<p class="mq-caption mq-num" style="margin:8px 0 0">' + esc(t.fechaTrabajo) + ' · ' +
+      '<p class="mq-caption mq-num mq-margen-arriba-2">' + esc(t.fechaTrabajo) + ' · ' +
         plural(t.piezas, 'pieza', 'piezas') + ' · ' +
         plural(t.advertencias, 'advertencia', 'advertencias') + '</p>' +
       '<div class="mq-acciones-fila">' + accionesDeTrabajo(t, papel, desde) + '</div>' +
@@ -1313,10 +1366,10 @@
         ? '<dl class="mq-valores"><dt>declarado</dt><dd>' + esc(o.declarado) + '</dd>' +
           '<dt>derivado</dt><dd>' + esc(o.derivado) + '</dd></dl>'
         : '';
-      var texto = o.texto ? '<p class="mq-caption" style="margin:4px 0 0">' + esc(o.texto) + '</p>' : '';
+      var texto = o.texto ? '<p class="mq-caption mq-margen-arriba-1">' + esc(o.texto) + '</p>' : '';
       return '<li class="mq-observacion">' + chip +
         '<div class="mq-observacion-cuerpo">' +
-          '<p class="mq-observacion-ubicacion" style="margin:0">figura ' + o.figura + ' · campo ' + esc(o.campo) + '</p>' +
+          '<p class="mq-observacion-ubicacion mq-sin-margen">figura ' + o.figura + ' · campo ' + esc(o.campo) + '</p>' +
           texto + valores +
         '</div></li>';
     }).join('');
@@ -1375,7 +1428,7 @@
 
           '<section class="mq-tarjeta" aria-labelledby="vt-datos-h">' +
             '<h2 id="vt-datos-h" class="mq-meta">Datos del trabajo</h2>' +
-            '<dl class="mq-clave-valor" style="margin-top:12px">' +
+            '<dl class="mq-clave-valor mq-mt-3">' +
               '<dt>Nombre</dt><dd>' + esc(t.nombre) + '</dd>' +
               '<dt>Fecha del trabajo</dt><dd>' + esc(t.fechaTrabajo) + '</dd>' +
               '<dt>Estado</dt><dd>' + insignia(t.estado) + '</dd>' +
@@ -1393,14 +1446,14 @@
           (t.comentario
             ? '<section class="mq-comentario" aria-labelledby="vt-com-h">' +
                 '<h2 id="vt-com-h" class="mq-meta">Comentario del docente</h2>' +
-                '<p style="margin:8px 0 0">' + esc(t.comentario) + '</p>' +
+                '<p class="mq-margen-arriba-2">' + esc(t.comentario) + '</p>' +
               '</section>'
             : '') +
 
           '<section class="mq-tarjeta" aria-labelledby="vt-obs-h">' +
             '<h2 id="vt-obs-h" class="mq-meta">Observaciones' +
               '<span data-mq-observaciones-recuento></span></h2>' +
-            '<ul class="mq-observaciones" style="margin-top:12px" data-mq-observaciones></ul>' +
+            '<ul class="mq-observaciones mq-mt-3" data-mq-observaciones></ul>' +
           '</section>' +
 
           '<section class="mq-tarjeta" aria-labelledby="vt-texto-h">' +
@@ -1415,38 +1468,38 @@
         '<div class="mq-columna mq-columna--escena">' +
           '<section aria-labelledby="vt-escena-h">' +
             '<h2 id="vt-escena-h" class="mq-meta">Escena</h2>' +
-            '<div class="mq-escena" data-mq-escena style="margin-top:8px"' + est(estadosBase) + '></div>' +
+            '<div class="mq-escena mq-mt-2" data-mq-escena' + est(estadosBase) + '></div>' +
 
             (conEstados
-              ? '<div class="mq-tarjeta" data-mq-estado="escena-no-disponible" style="margin-top:8px">' +
+              ? '<div class="mq-tarjeta mq-mt-2" data-mq-estado="escena-no-disponible">' +
                   '<h3 class="mq-body-strong">La escena no está disponible en este navegador</h3>' +
-                  '<p class="mq-caption" style="margin:8px 0 0">Tu navegador no ofrece la capacidad ' +
+                  '<p class="mq-caption mq-margen-arriba-2">Tu navegador no ofrece la capacidad ' +
                   'gráfica que el dibujo necesita. Los datos, el texto y el árbol de la estructura ' +
                   'siguen disponibles acá abajo.</p></div>' +
-                '<div class="mq-tarjeta" data-mq-estado="elemento-sin-tamano" style="margin-top:8px">' +
+                '<div class="mq-tarjeta mq-mt-2" data-mq-estado="elemento-sin-tamano">' +
                   '<h3 class="mq-body-strong">La escena no está disponible</h3>' +
-                  '<p class="mq-caption" style="margin:8px 0 0">El espacio disponible para el dibujo ' +
+                  '<p class="mq-caption mq-margen-arriba-2">El espacio disponible para el dibujo ' +
                   'quedó sin tamaño. Las otras tres partes se conservan, y la escena se vuelve a armar ' +
                   'cuando el espacio se recupera.</p></div>' +
-                '<p class="mq-banda mq-banda--atencion" role="status" data-mq-estado="texto-no-legible" ' +
-                  'style="margin-top:8px">De este texto no se obtuvo ninguna pieza, así que la escena ' +
+                '<p class="mq-banda mq-banda--atencion mq-mt-2" role="status" ' +
+                  'data-mq-estado="texto-no-legible">De este texto no se obtuvo ninguna pieza, así que la escena ' +
                   'quedó vacía. El árbol y las observaciones se muestran igual.</p>'
               : '') +
 
             /* Piezas no dibujadas: al lado de la escena, nunca encima y nunca
                en la lista de observaciones. Ninguna pieza desaparece sin
                quedar enumerada en texto. */
-            '<div data-mq-no-dibujadas style="margin-top:8px">' +
+            '<div data-mq-no-dibujadas class="mq-mt-2">' +
               '<h3 class="mq-meta">No se dibujaron</h3>' +
-              '<ul class="mq-caption" data-mq-no-dibujadas-lista style="margin:4px 0 0;padding-left:18px"></ul>' +
+              '<ul class="mq-caption mq-lista-anidada" data-mq-no-dibujadas-lista></ul>' +
             '</div>' +
           '</section>' +
 
           '<section aria-labelledby="vt-arbol-h">' +
             '<h2 id="vt-arbol-h" class="mq-meta">Árbol de la estructura</h2>' +
-            '<div class="mq-tarjeta mq-caja-desplazable" style="margin-top:8px" data-mq-arbol></div>' +
+            '<div class="mq-tarjeta mq-caja-desplazable mq-mt-2" data-mq-arbol></div>' +
             '<p class="mq-sr-only" role="status" data-mq-seleccion></p>' +
-            '<p class="mq-caption" style="margin-top:8px">Elegí un nodo de pieza y la escena resalta ' +
+            '<p class="mq-caption mq-mt-2">Elegí un nodo de pieza y la escena resalta ' +
             'esa pieza y sólo esa. Elegí una pieza de la escena y el nodo queda marcado, por el ' +
             'mismo índice.</p>' +
           '</section>' +
@@ -1512,7 +1565,10 @@
      Instrumento de validación de `GeometriaFactory-Visor`, que no tiene
      pantallas propias. Se rotula como instrumento, igual que la barra de
      validación, y no forma parte del producto: en el producto, el componente
-     anfitrión invoca las cinco funciones sin exhibirlas.
+     anfitrión invoca las seis funciones sin exhibirlas. Este panel demuestra
+     CINCO: `establecerMovimiento` se decidió después de que el Product Owner
+     aprobó la maqueta y no fue validada visualmente. Está declarado en
+     `Linea-Base-Visual.md` §6.1 y en la sonda `SD-43`.
      ========================================================================== */
 
   var estadoDelPanel = {
@@ -1531,9 +1587,12 @@
       '<section class="mq-panel-fachada" aria-labelledby="fa-h">' +
         '<p class="mq-panel-fachada__rotulo">' + icono('alerta') +
           'Contrato de fachada del visor — instrumento de validación, no forma parte del producto</p>' +
-        '<h2 id="fa-h" class="mq-title">GeometriaFactory-Visor · las cinco funciones</h2>' +
-        '<p class="mq-caption" style="margin:6px 0 0">El visor no tiene pantallas propias: su ' +
-        'superficie pública son cinco funciones que este componente anfitrión invoca. Acá se ve qué ' +
+        '<h2 id="fa-h" class="mq-title">GeometriaFactory-Visor · cinco de las seis funciones</h2>' +
+        '<p class="mq-caption mq-margen-arriba-2">El visor no tiene pantallas propias: su ' +
+        'superficie pública son seis funciones que este componente anfitrión invoca. Acá se ven cinco: ' +
+        '<strong>establecerMovimiento se decidió después de la aprobación de la maqueta y no fue ' +
+        'validada visualmente</strong>; el movimiento se gobierna con las dos casillas del área de ' +
+        'dibujo. Acá se ve qué ' +
         'cambia en pantalla cuando cada una ocurre, y qué garantiza el contrato.</p>' +
 
         /* --- ciclo de vida --------------------------------------------- */
@@ -1543,11 +1602,11 @@
           '<span class="mq-caption" data-mq-fa-id></span>' +
         '</div>' +
 
-        /* --- las cinco funciones como acciones ------------------------- */
-        '<div class="mq-fa-acciones" role="group" aria-label="Las cinco funciones de la fachada">' +
+        /* --- cinco de las seis funciones, como acciones ----------------- */
+        '<div class="mq-fa-acciones" role="group" aria-label="Cinco de las seis funciones de la fachada">' +
           '<button type="button" class="mq-btn mq-btn--secundario" data-mq-fa="inicializar">inicializar</button>' +
           '<label class="mq-sr-only" for="fa-texto">Texto a cargar</label>' +
-          '<select class="mq-select" id="fa-texto" data-mq-fa-texto style="max-width:280px">' +
+          '<select class="mq-select mq-ancho-corto" id="fa-texto" data-mq-fa-texto>' +
             ejercicios.map(function (e) {
               return '<option value="' + esc(e.id) + '">' + esc(e.rotulo) + '</option>';
             }).join('') +
@@ -1562,34 +1621,34 @@
         '<div class="mq-fa-recuentos" data-mq-fa-resultado></div>' +
 
         /* --- las seis propiedades transversales ------------------------- */
-        '<h3 class="mq-meta" style="margin-top:16px">Las seis propiedades transversales</h3>' +
+        '<h3 class="mq-meta mq-mt-5">Las seis propiedades transversales</h3>' +
         '<ul class="mq-fa-propiedades" data-mq-fa-propiedades></ul>' +
 
         /* --- bitácora de invocaciones ----------------------------------- */
-        '<h3 class="mq-meta" style="margin-top:16px">Bitácora de invocaciones</h3>' +
+        '<h3 class="mq-meta mq-mt-5">Bitácora de invocaciones</h3>' +
         '<ol class="mq-fa-bitacora" data-mq-fa-bitacora aria-live="polite"></ol>' +
 
         /* --- las siete condiciones -------------------------------------- */
-        '<details style="margin-top:16px"><summary class="mq-meta" style="cursor:pointer">' +
+        '<details class="mq-mt-5"><summary class="mq-meta mq-clicable">' +
           'Las siete condiciones del contrato, y con qué estado se demuestra cada una</summary>' +
-          '<div class="mq-tabla-envoltorio" style="margin-top:10px"><table class="mq-tabla">' +
+          '<div class="mq-tabla-envoltorio mq-mt-2"><table class="mq-tabla">' +
             '<thead><tr><th scope="col">Código</th><th scope="col">Curso</th>' +
             '<th scope="col">Cuándo</th><th scope="col">Efecto sobre la instancia</th></tr></thead>' +
             '<tbody>' + D.condicionesDeLaFachada.map(function (c) {
-              return '<tr><th scope="row" style="background:transparent;text-transform:none;' +
-                'letter-spacing:0;font-size:12px;color:inherit"><code>' + esc(c.codigo) + '</code></th>' +
+              return '<tr><th scope="row" class="mq-th-plano mq-th-plano--breve">' +
+                '<code>' + esc(c.codigo) + '</code></th>' +
                 '<td class="mq-caption">' + esc(c.curso) + '</td>' +
                 '<td class="mq-caption">' + esc(c.cuando) + '</td>' +
                 '<td class="mq-caption">' + esc(c.efecto) + '</td></tr>';
             }).join('') + '</tbody></table></div>' +
-          '<p class="mq-caption" style="margin-top:8px">Las ocho filas son siete códigos: ' +
+          '<p class="mq-caption mq-mt-2">Las ocho filas son siete códigos: ' +
           '<code>ELEMENTO_DE_DIBUJO_INVALIDO</code> tiene dos cursos y no dos códigos. Cada una se ' +
           'alterna desde la barra de validación del pie.</p>' +
         '</details>' +
 
-        '<details style="margin-top:10px"><summary class="mq-meta" style="cursor:pointer">' +
+        '<details class="mq-mt-2"><summary class="mq-meta mq-clicable">' +
           'Qué garantiza cada función</summary>' +
-          '<dl class="mq-clave-valor" style="margin-top:10px">' +
+          '<dl class="mq-clave-valor mq-mt-2">' +
             D.funcionesDeLaFachada.map(function (f) {
               return '<dt><code>' + esc(f.firma) + '</code></dt><dd class="mq-caption">' +
                      esc(f.efecto) + ' <em>(' + esc(f.cu) + ')</em></dd>';
@@ -1671,7 +1730,33 @@
     });
   }
 
+  /* Atributos que identifican a los controles que este panel reemplaza por
+     `innerHTML`. Se usan para devolver el foco al mismo control después de
+     refrescar: sin esto, pulsar una de las dos comprobaciones a mano destruía
+     el elemento enfocado y el foco caía al `<body>`. */
+  var ATRIBUTOS_DE_FOCO = ['data-mq-fa-determinismo', 'data-mq-fa-recorridos', 'data-mq-fa'];
+
+  function marcaDeFoco(host) {
+    var activo = document.activeElement;
+    if (!activo || !host.contains(activo)) { return null; }
+    for (var i = 0; i < ATRIBUTOS_DE_FOCO.length; i++) {
+      var at = ATRIBUTOS_DE_FOCO[i];
+      if (activo.hasAttribute(at)) {
+        var v = activo.getAttribute(at);
+        return v ? '[' + at + '="' + v + '"]' : '[' + at + ']';
+      }
+    }
+    return null;
+  }
+
+  function devolverFoco(host, marca) {
+    if (!marca) { return; }
+    var destino = $(marca, host);
+    if (destino && destino.focus) { destino.focus(); }
+  }
+
   function refrescarPanelDeFachada(host) {
+    var marcaFoco = marcaDeFoco(host);
     var id = estadoDelPanel.id;
     var inst = id ? Fachada.instancia(id) : null;
     var viva = !!(inst && inst.viva);
@@ -1695,7 +1780,7 @@
        cuenta que cierra la ausencia de fallo silencioso. */
     var cont = $('[data-mq-fa-resultado]', host);
     if (!res) {
-      cont.innerHTML = '<p class="mq-caption" style="margin:0">Sin resultado de dibujo: ' +
+      cont.innerHTML = '<p class="mq-caption mq-sin-margen">Sin resultado de dibujo: ' +
         'todavía no se cargó ningún texto en esta instancia.</p>';
     } else {
       var d = res.dibujadas.length, nd = res.noDibujadas.length, raiz = res.raiz || (d + nd);
@@ -1758,10 +1843,10 @@
         '<span class="mq-insignia ' + (m.ok ? 'mq-insignia--exito' : 'mq-insignia--peligro') + '">' +
           (m.ok ? 'cumple' : 'no cumple') + '</span> ' +
         '<strong>' + esc(pr.nombre) + '</strong> — <span class="mq-caption">' + esc(m.valor) + '</span>' +
-        '<br><span class="mq-caption" style="opacity:.85">Umbral: ' + esc(pr.umbral) + '</span>' +
+        '<br><span class="mq-caption mq-atenuado">Umbral: ' + esc(pr.umbral) + '</span>' +
       '</li>';
     }).join('') +
-      '<li style="margin-top:8px">' +
+      '<li class="mq-mt-2">' +
         '<button type="button" class="mq-btn mq-btn--secundario" data-mq-fa-determinismo>' +
           'Volver a cargar el mismo texto y comparar</button> ' +
         '<button type="button" class="mq-btn mq-btn--secundario" data-mq-fa-recorridos>' +
@@ -1826,6 +1911,9 @@
       pintarArbol(arbol, [], []);
       refrescarPanelDeFachada(host);
     });
+
+    /* El foco vuelve al control que disparó el refresco. */
+    devolverFoco(host, marcaFoco);
   }
 
   /* Las tres condiciones que no cambian la superficie y sólo se observan en la
@@ -1912,16 +2000,16 @@
       '<section class="mq-tarjeta" aria-labelledby="rt-res-h"' +
         est('resoluble confirmando-desenlace aplicando confirmando-retiro reconectando') + '>' +
         '<h2 id="rt-res-h" class="mq-title">Resolver esta entrega</h2>' +
-        '<div class="mq-campo" style="margin-top:14px;max-width:640px">' +
+        '<div class="mq-campo mq-mt-4 mq-ancho-ancho">' +
           /* La palabra «opcional» va en la ETIQUETA y no sólo en el texto de
              apoyo: un lector de pantalla que anuncie sólo la etiqueta tiene
              que enterarse igual. */
           '<label for="rt-comentario">Comentario para el alumno (opcional)</label>' +
-          '<textarea class="mq-textarea" id="rt-comentario" style="min-height:72px" ' +
+          '<textarea class="mq-textarea mq-textarea--media" id="rt-comentario" ' +
             'aria-describedby="rt-destino"></textarea>' +
           '<span class="mq-requisito" id="rt-destino">' + esc(D.textos.notaDestinoComentario) + '</span>' +
         '</div>' +
-        '<div class="mq-acciones-pie" style="justify-content:flex-start">' +
+        '<div class="mq-acciones-pie mq-justificar-inicio">' +
           '<button type="button" class="mq-btn mq-btn--primario" data-mq-decision="Aprobar"' +
             est('resoluble confirmando-desenlace confirmando-retiro reconectando') + '>Aprobar</button>' +
           /* Rechazar es una decisión legítima, no una destrucción: no es un
@@ -1935,7 +2023,7 @@
             : '') +
           /* La acción de retirar queda visualmente separada de las dos
              decisiones, con su color de peligro y su propio diálogo. */
-          '<span style="flex:1 1 40px"></span>' +
+          '<span class="mq-flexible"></span>' +
           '<button type="button" class="mq-btn mq-btn--destructivo" data-mq-retirar ' +
             'aria-label="Retirar el trabajo «' + esc(t.nombre) + '»">Retirar</button>' +
         '</div>' +
@@ -1947,9 +2035,9 @@
         '<h2 id="rt-resuelto-h" class="mq-title">Resuelto el ' +
           '<span class="mq-num">' + esc(t.fechaDesenlace || '—') + '</span> · ' +
           insignia(t.estado === 'Pendiente' ? 'Finalizado' : t.estado) + '</h2>' +
-        '<p class="mq-caption" style="margin-top:8px">Esta entrega ya tiene desenlace y no se ' +
+        '<p class="mq-caption mq-mt-2">Esta entrega ya tiene desenlace y no se ' +
         'puede cambiar.</p>' +
-        '<div class="mq-acciones-pie" style="justify-content:flex-start">' +
+        '<div class="mq-acciones-pie mq-justificar-inicio">' +
           '<button type="button" class="mq-btn mq-btn--destructivo" data-mq-retirar ' +
             'aria-label="Retirar el trabajo «' + esc(t.nombre) + '»">Retirar</button>' +
         '</div>' +
@@ -2086,7 +2174,8 @@
     pie.className = 'mq-sello-maqueta';
     pie.innerHTML = 'Maqueta de validación visual · <strong>' + esc(SELLO_MAQUETA.proyectoDeCodigo) +
       '</strong> · modelo: ' + esc(SELLO_MAQUETA.modelo) +
-      ' · iteración del ' + esc(SELLO_MAQUETA.fechaIteracion);
+      ' · iteración del ' + esc(SELLO_MAQUETA.fechaIteracion) +
+      ' · ' + esc(SELLO_MAQUETA.revision);
     document.body.appendChild(pie);
   }
 
@@ -2115,7 +2204,7 @@
     if (!$('[data-mq-cartel-reconexion]')) {
       var cartel = crear('<div class="mq-cartel-reconexion" data-mq-cartel-reconexion role="status" hidden>' +
         icono('reintentar', 'mq-ico--20') + '<span>' + esc(D.textos.reconexion) + '</span>' +
-        '<button type="button" class="mq-btn mq-btn--secundario" style="margin-left:auto">Reintentar la conexión</button></div>');
+        '<button type="button" class="mq-btn mq-btn--secundario mq-ml-auto">Reintentar la conexión</button></div>');
       b.insertBefore(cartel, b.firstChild);
     }
 

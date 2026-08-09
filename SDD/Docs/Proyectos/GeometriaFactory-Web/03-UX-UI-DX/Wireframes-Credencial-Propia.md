@@ -2,12 +2,12 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Wireframes-Credencial-Propia.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md` íntegro; `../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md` FA-02; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-02, RT-03, RT-06); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (segundo y cuarto criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-04, F-05), §6 (flujo 1), §9 (X-1, X-2), §11 (RN-B6), §17.6 P.5; `Design-Rules-Web-Generico.md` §3.1, §4.4, §4.6, §4.9, §5, §7; `Design-Rules-Primer-Arranque.md` §4.5; `Design-Rules-Blazor-Mudblazor.md` §4.2
+**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md` íntegro; `../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md` FA-02 y **FA-07**; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-02, RT-03, RT-06, **RT-12**); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (segundo y cuarto criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.7**, §4 (F-04, F-05, **F-26**), §4.1 (**RN-13**), §6 (flujo 1), §7 (**CL-7 reescrito**), §9 (X-1, **X-2 retirada**), §11 (RN-B6), §17.1.P.2 (**INV-09**), §17.6 P.5; `Design-Rules-Web-Generico.md` §3.1, §4.4, §4.6, §4.9, §5, §7; `Design-Rules-Primer-Arranque.md` §4.5; `Design-Rules-Blazor-Mudblazor.md` §4.2
 **Trazabilidad downstream:** Fase B2 de validación visual de maqueta; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
 
 ---
@@ -30,14 +30,17 @@
 
 **Nombre canónico de superficie: `Credencial-Propia`.**
 
-La persona fija su contraseña por primera vez, o la reemplaza presentando la vigente. Es la **única** forma que tiene de administrar su credencial dentro del laboratorio: no hay recuperación y no hay canal de correo.
+La persona fija su contraseña por primera vez, o la reemplaza presentando la vigente, o la reemplaza **obligada** después de que el administrador se la reseteó. Es la **única** forma que tiene de administrar su credencial dentro del laboratorio: no hay canal de correo y **no hay recuperación autónoma**.
 
-**Una superficie con dos cursos y no dos superficies.** Es el mismo objeto —la credencial propia—, el mismo actor y el mismo formulario salvo un campo. Lo que sí cambia entre los dos cursos es el **shell**, y por eso los dos se declaran acá con su propio recorrido:
+**Una superficie con tres cursos y no tres superficies.** Es el mismo objeto —la credencial propia—, el mismo actor y el mismo formulario salvo un campo. Lo que sí cambia entre los cursos es el **shell**, y por eso los tres se declaran acá con su propio recorrido:
 
 | Curso | Cuándo | Shell | Cómo se llega | A dónde va al terminar |
 | --- | --- | --- | --- | --- |
 | **Establecimiento** | Primer ingreso efectivo de una cuenta ya habilitada, todavía sin contraseña | **Acceso**, sin navegación: la persona todavía no tiene sesión | Derivada desde `Ingreso` | A `Ingreso`, con banda de confirmación |
 | **Cambio** | La persona ya está dentro y quiere reemplazarla | **Trabajo**, con la barra lateral de su papel | Destino «Mi contraseña» de la barra lateral | Al panel de la persona, **con la sesión vigente** |
+| **Cambio forzado** | El administrador le reseteó la contraseña y la persona entró con la provisoria | **Acceso**, aunque **sí tenga sesión**: sin barra lateral y sin ninguna otra salida, porque ninguna otra ruta está disponible | Derivada desde `Ingreso`, o desde cualquier ruta que la persona intente | Al panel de la persona, **con la sesión vigente y la marca levantada** |
+
+**Por qué el cambio forzado lleva el shell de acceso teniendo sesión, que es la decisión de esta versión.** La barra lateral es la promesa de que hay a dónde ir, y acá no lo hay: mientras la marca esté puesta, **ninguna otra ruta se arma** (RT-12, RN-13). Dibujarla y que todos sus destinos devuelvan a esta misma superficie sería mentir con la disposición y dejar a la persona probando puertas cerradas. La sesión existe —la persona entró—, pero lo único que puede hacer con ella es esto.
 
 ## 2. Layout
 
@@ -84,23 +87,50 @@ Curso de cambio, sobre el shell de trabajo:
 +----------+----------------------------------------------------------+
 ```
 
-**El curso de establecimiento no tiene «cancelar» y el de cambio sí.** En el establecimiento no hay estado previo al que volver: la persona no tiene sesión y abandonar la deja fuera. En el cambio hay un panel al que volver, y la salida es legítima.
+Curso de cambio forzado, sobre el shell de acceso y **con sesión iniciada**:
+
+```text
++---------------------- lienzo, sin chrome ------------------------+
+|              +-------- ancho acotado ~380px --------+            |
+|              |  [ico] Fábrica de Geometría          |            |
+|              |  Elegí una contraseña nueva          |  h1        |
+|              |  El docente te reseteó la clave. La  |  por qué   |
+|              |  que te pasó sirve sólo para esto:   |  está acá  |
+|              |  para que elijas la tuya ahora. Él   |            |
+|              |  no va a saber cuál elegís.          |            |
+|              |  [ banda de resultado  rol=alerta  ] |            |
+|              |  Contraseña provisoria               |            |
+|              |  [____________________________]      |            |
+|              |  Contraseña nueva                    |            |
+|              |  [____________________________]      |            |
+|              |  <requisito declarado>               |  §4.5      |
+|              |  Repetir contraseña nueva            |            |
+|              |  [____________________________]      |            |
+|              |  [====== Guardar contraseña ======]  |            |
+|              |  Cerrar sesión                       |  enlace    |
+|              +--------------------------------------+            |
+|                    Versión 1.4.2                                 |
++------------------------------------------------------------------+
+```
+
+**El curso de establecimiento no tiene «cancelar», el de cambio sí, y el forzado tampoco.** En el establecimiento no hay estado previo al que volver: la persona no tiene sesión y abandonar la deja fuera. En el cambio hay un panel al que volver, y la salida es legítima. En el forzado **hay sesión pero no hay a dónde volver**, y por eso lo único que se ofrece es **cerrar sesión**: no es una cancelación —no deja a la persona adentro—, es la salida honesta de quien prefiere resolverlo después. **La marca no se levanta por cerrar sesión**: el próximo ingreso con la provisoria vuelve acá.
 
 ## 3. Componentes principales
 
 | Componente | Patrón del catálogo | Propósito | Datos que muestra | Comportamiento |
 | --- | --- | --- | --- | --- |
 | Tarjeta de credencial | Primer arranque §4.2 / Base §4.4 | Contener el formulario | — | Ancho acotado en los dos cursos |
-| Subtítulo de motivo | Base §2.2 | Explicar **por qué** la persona está acá | Texto distinto por curso | Inerte. En el establecimiento declara que el laboratorio nunca envió una contraseña |
+| Subtítulo de motivo | Base §2.2 | Explicar **por qué** la persona está acá | Texto distinto por curso | Inerte. En el establecimiento declara que el laboratorio nunca envió una contraseña; en el forzado, que el docente reseteó la clave y que **no va a conocer la nueva** |
 | Banda de resultado | Primer arranque §4.4 | Comunicar el resultado | Texto resuelto desde el código del contrato | Condicional, rol de alerta |
-| Campo de contraseña actual | Base §4.6 | Presentar la vigente | Enmascarado | **Sólo en el curso de cambio. Es obligatorio por contrato** |
+| Campo de contraseña actual | Base §4.6 | Presentar la vigente | Enmascarado | **En el curso de cambio y en el forzado. Es obligatorio por contrato.** En el forzado se rotula «Contraseña provisoria», que es lo que la persona tiene en la mano, y no «actual» |
 | Campos de contraseña nueva y repetición | Base §4.6 | Fijar la credencial | Enmascarados, con conmutador de visibilidad | La coincidencia se verifica **antes** de salir hacia el servicio de datos |
 | Requisito declarado | Primer arranque §4.5 | Enunciar la regla de forma **antes** de que la persona escriba | Texto derivado de la política del sistema | Asociado al campo. **No aparece recién al fallar** |
 | Acción primaria | Base §4.9 | Guardar | Verbo exacto: «Guardar contraseña» | Se inhabilita con indicador durante el envío |
-| Acción secundaria | Base §4.9 | Volver sin cambiar nada | «Cancelar» | **Sólo en el curso de cambio** |
+| Acción secundaria | Base §4.9 | Volver sin cambiar nada | «Cancelar» | **Sólo en el curso de cambio.** El forzado no la lleva: no hay estado al que volver |
+| Salida de sesión | Base §4.9, terciaria | Irse sin resolverlo ahora | «Cerrar sesión» | **Sólo en el curso forzado.** No es una cancelación: deja a la persona afuera, y **la marca sigue puesta** para el próximo ingreso |
 | Sello de versión | [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) | Identificar la instancia | Versión legible | Al pie de la tarjeta en el establecimiento; en la barra lateral en el cambio |
 
-**Lo que esta superficie no dibuja:** ningún medidor de fortaleza que prometa una política que el producto no fija, ninguna opción de «recordarme», ningún enlace de recuperación.
+**Lo que esta superficie no dibuja:** ningún medidor de fortaleza que prometa una política que el producto no fija, ninguna opción de «recordarme», ningún enlace de recuperación autónoma —que el producto sigue sin tener—, y, en el curso forzado, **ninguna barra lateral y ningún atajo a ninguna otra ruta**: no existen mientras la marca esté puesta.
 
 Sobre el requisito declarado: **las exigencias de forma de la contraseña no las fija esta categoría.** Si el producto adopta alguna, se declara aguas abajo y se hace cumplir del lado del servicio de datos; el requisito de la superficie **se deriva de esa política y no se transcribe como literal en la vista**. Mientras no haya política declarada, la línea enuncia la única regla que sí existe hoy: que no hay forma de recuperarla.
 
@@ -115,6 +145,10 @@ Sobre el requisito declarado: **las exigencias de forma de la contraseña no las
 | Cancelar el cambio | Acción secundaria | Vuelve al panel sin tocar la credencial | Curso de cambio |
 | Abandonar el establecimiento | Navegación fuera | **No queda nada guardado**: la cuenta sigue habilitada y sin contraseña, y el próximo intento de ingreso vuelve a derivar acá | Curso de establecimiento |
 | Cambiar con la contraseña actual equivocada | Acción primaria | El cambio **no se aplica** y el mensaje señala el campo de contraseña actual. Terminación controlada | Curso de cambio |
+| Llegar al cambio forzado | Derivación desde `Ingreso` tras entrar con la provisoria, o desde cualquier ruta intentada | La superficie se arma sobre el shell de acceso, **con sesión**, y declara por qué | Cuenta con cambio de contraseña pendiente |
+| Intentar cualquier otra ruta | Dirección directa, atajo del navegador, historial | **Vuelve acá**, sin revelar qué contenía la ruta pedida y **sin presentarse como error**: es la situación esperada | Curso forzado |
+| Guardar en el curso forzado | Acción primaria | La contraseña queda reemplazada, **la marca se levanta** y la persona continúa a su panel **con la sesión vigente**, sin volver a ingresar. Sus trabajos siguen todos ahí | Los tres campos completos |
+| Cerrar sesión desde el curso forzado | Salida de sesión | Vuelve a `Ingreso`. **La marca no se levanta**: el próximo ingreso con la provisoria vuelve acá | Curso forzado |
 
 ## 5. Estados
 
@@ -126,6 +160,9 @@ Sobre el requisito declarado: **las exigencias de forma de la contraseña no las
 | **Enviando** | El cambio está en curso | Acción inhabilitada con indicador. **Previene el doble envío** |
 | **Curso de establecimiento** | Cuenta habilitada sin contraseña | Dos campos, sin «cancelar», sobre el shell de acceso |
 | **Curso de cambio** | Persona con sesión | Tres campos, con «cancelar», sobre el shell de trabajo |
+| **Curso de cambio forzado** | Persona con sesión y **cambio de contraseña pendiente** | Tres campos, **sin «cancelar» y sin barra lateral**, sobre el shell de acceso, con el subtítulo que declara el reseteo y la salida de sesión al pie |
+| **Provisoria rechazada** | Lo escrito como provisoria no corresponde | Mensaje **sobre el campo de la provisoria**. El cambio no se aplica y **la marca sigue puesta** |
+| **Éxito de cambio forzado** | La contraseña quedó reemplazada y la marca levantada | Continuación al panel de la persona con confirmación. **La sesión vigente se conserva**, la provisoria deja de servir y el administrador **no conoce** la contraseña nueva |
 | **Requisito no cumplido** | Falta un campo | Borde de peligro en el campo y banda de error |
 | **Confirmación no coincidente** | Las dos escrituras de la nueva difieren | Banda de error que declara la discrepancia y qué hacer. **No sale ninguna solicitud hacia el servicio de datos** |
 | **Contraseña actual rechazada** | La vigente no corresponde, o llegó ausente | Mensaje **sobre el campo de contraseña actual**. El cambio no se aplica |
@@ -140,12 +177,12 @@ Sobre el requisito declarado: **las exigencias de forma de la contraseña no las
 - La tarjeta toma el ancho disponible menos un margen. En el curso de establecimiento conserva el anclaje superior y **no se centra verticalmente**, por el teclado en pantalla.
 - En el curso de cambio, las dos acciones del pie pasan a ancho completo apiladas, con la primaria **arriba**: es la que se busca, y dejarla debajo del pliegue en pantalla baja obliga a desplazarse para completar la tarea.
 - **El requisito declarado no se colapsa.** Es lo que evita el juego de adivinanzas al fallar.
-- La barra lateral colapsa según el patrón del documento base en el curso de cambio.
+- La barra lateral colapsa según el patrón del documento base en el curso de cambio. **En el forzado no hay barra lateral que colapsar**, y el subtítulo que declara por qué la persona está ahí **no se colapsa ni se recorta**: sin él, la pantalla se lee como un pedido arbitrario.
 - Legible sin desplazamiento horizontal a 320 px.
 
 ## 7. Notas de implementación
 
-**Accesibilidad.** Encabezado de primer nivel en los dos cursos. El requisito declarado se asocia a su campo por descripción accesible, para que se anuncie **junto al control y antes del intento**. La banda de error se anuncia como alerta y la confirmación como estado. Foco inicial en el primer campo; tras un error, en el primer campo inválido. Los tres campos declaran su propósito —contraseña vigente y contraseña nueva— para que el gestor del navegador colabore en vez de ofrecer la anterior. El conmutador de visibilidad declara su estado.
+**Accesibilidad.** Encabezado de primer nivel en los tres cursos. El requisito declarado se asocia a su campo por descripción accesible, para que se anuncie **junto al control y antes del intento**. La banda de error se anuncia como alerta y la confirmación como estado. Foco inicial en el primer campo; tras un error, en el primer campo inválido. Los tres campos declaran su propósito —contraseña vigente y contraseña nueva— para que el gestor del navegador colabore en vez de ofrecer la anterior. **En el curso forzado, la llegada se anuncia como estado**: quien no ve la pantalla tiene que enterarse de que fue derivado y por qué, y no descubrirlo por la ausencia de la barra lateral. El conmutador de visibilidad declara su estado.
 
 **Performance percibida.** Acción inhabilitada con indicador desde el primer instante.
 
@@ -158,14 +195,14 @@ Sobre el requisito declarado: **las exigencias de forma de la contraseña no las
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | Alumno y docente por igual |
-| CU origen | [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) íntegro, con [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) FA-02 como vía de llegada |
-| Reglas de negocio relevantes | `RN-06` (cuenta pendiente o bloqueada sin acceso) |
-| Restricciones transversales | `RT-02`, `RT-03`, `RT-06` |
+| CU origen | [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) íntegro, con [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) FA-02 y **FA-07** como vías de llegada |
+| Reglas de negocio relevantes | `RN-06` (cuenta pendiente o bloqueada sin acceso) y **`RN-13`** (la provisoria confina hasta que se cambie), del `PRODUCT-INTAKE` 1.7 §4.1 |
+| Restricciones transversales | `RT-02`, `RT-03`, `RT-06`, **`RT-12`** |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.4, §4.1, §8 |
 | Representaciones que invoca | [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) |
 | Catálogo de diseño aplicado | `Design-Rules-Web-Generico.md`, `Design-Rules-Primer-Arranque.md` §4.5, `Design-Rules-Blazor-Mudblazor.md` §4.2 |
-| US a generar en 06 | `US-06`, `US-07` |
-| Tests previstos en 08 | Guion de demostración de la etapa `d` para el establecimiento en el primer ingreso efectivo, y de la etapa `c` para el cambio exigiendo la vigente; dos escrituras distintas sin solicitud emitida; inspección del navegador sin contraseña observable; recorrido por teclado |
+| US a generar en 06 | `US-06`, `US-07`, `US-28`, `US-29` |
+| Tests previstos en 08 | Guion de demostración de la etapa `d` para el establecimiento en el primer ingreso efectivo, para el **cambio forzado** —incluida la ruta pedida por dirección directa, que vuelve acá— y de la etapa `c` para el cambio exigiendo la vigente; dos escrituras distintas sin solicitud emitida; inspección del navegador sin contraseña observable; recorrido por teclado |
 
 ## 9. Control de cambios
 
@@ -173,3 +210,4 @@ Sobre el requisito declarado: **las exigencias de forma de la contraseña no las
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. Una superficie con dos cursos y dos shells, con la tabla que declara cuándo rige cada uno y por qué sólo el de cambio tiene salida. Requisito declarado antes del intento y derivado de la política del sistema en lugar de transcrito, enumeración de lo que la superficie no dibuja, y catorce estados declarados para la Fase B2. |
 | 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: la `NB-02` de la cabecera pasa a citarse con sección y criterio —§1, §5 (segundo y cuarto criterio)—, con la forma que ya usan los casos de uso de la categoría 02. |
+| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26** con su regla **RN-13** y el invariante **INV-09**. La superficie pasa de **dos a tres cursos**, con el **cambio forzado** de quien fue reseteado. **§1**: tabla de cursos ampliada y **decisión de esta versión declarada**: el forzado lleva el **shell de acceso aunque haya sesión**, porque la barra lateral prometería destinos que no existen mientras la marca esté puesta. **§2**: esquema nuevo, y el enunciado de «cancelar» pasa a cubrir los tres cursos, con la salida de sesión como única salida del forzado y con la aclaración de que **cerrar sesión no levanta la marca**. **§3**: componente nuevo, el campo de la provisoria rotulado como tal, y la enumeración de lo que la superficie no dibuja se precisa: lo que no existe es la recuperación **autónoma**. **§4**: cuatro interacciones nuevas. **§5**: cuatro estados nuevos. **§6** y **§7**: versión angosta y accesibilidad del curso forzado, con la llegada anunciada como estado. **§8**: RN-13 y RT-12 nuevas. Sube minor: agrega un curso a la superficie, sin cambiar ninguno de los dos existentes. |

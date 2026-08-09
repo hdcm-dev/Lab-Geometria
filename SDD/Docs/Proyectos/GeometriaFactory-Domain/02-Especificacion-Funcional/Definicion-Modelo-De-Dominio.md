@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Definicion-Modelo-De-Dominio.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (capacidades **F-01**, F-02, F-07, F-08, F-12, F-21, F-22, F-23 y F-24), §15 (etapa `c`), §4.1 (las once reglas de negocio con su enunciado), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §17.1.P.1, §17.1.P.2 (los siete invariantes con su enunciado), §17.1.P.3, §17.1.P.4, §17.1.P.5, §17.1.P.11, §14 (contratos entre proyectos de código), §6 (flujos 2 y 2.1), §7 (casos límite), §20 (escenarios E-1 a E-7); `00-Contexto/Vision-Producto.md` §9; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.7 §4 (capacidades **F-01**, F-02, F-07, F-08, F-12, F-21, F-22, F-23, F-24 y **F-26**), §15 (etapa `c`), §4.1 (las **trece** reglas de negocio con su enunciado, con **RN-12** y **RN-13** nuevas), §7 (**CL-7** reescrito), §9 (**X-2** retirada), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §17.1.P.1, §17.1.P.2 (los **nueve** invariantes con su enunciado, con **INV-08** adoptado e **INV-09** nuevo), §17.1.P.3, §17.1.P.4, §17.1.P.5, §17.1.P.11, §14 (contratos entre proyectos de código), §6 (flujos 2 y 2.1), §7 (casos límite), §20 (escenarios E-1 a E-7); `00-Contexto/Vision-Producto.md` §9; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -23,12 +23,13 @@
   - [2.5 Observación](#25-observación)
 - [3. Relaciones y cardinalidades](#3-relaciones-y-cardinalidades)
 - [4. Invariantes del dominio](#4-invariantes-del-dominio)
-  - [4.1 Los siete invariantes](#41-los-siete-invariantes)
-  - [4.2 Invariante candidato, propuesto y no adoptado](#42-invariante-candidato-propuesto-y-no-adoptado)
-  - [4.3 Correspondencia con las once reglas de negocio](#43-correspondencia-con-las-once-reglas-de-negocio)
+  - [4.1 Los nueve invariantes vigentes](#41-los-nueve-invariantes-vigentes)
+  - [4.2 INV-08, del candidato de esta categoría al invariante adoptado](#42-inv-08-del-candidato-de-esta-categoría-al-invariante-adoptado)
+  - [4.3 Correspondencia con las trece reglas de negocio](#43-correspondencia-con-las-trece-reglas-de-negocio)
 - [5. Transiciones de estado](#5-transiciones-de-estado)
   - [5.1 Estado de la cuenta del alumno](#51-estado-de-la-cuenta-del-alumno)
   - [5.2 Estado del trabajo](#52-estado-del-trabajo)
+  - [5.3 Marca de cambio de contraseña pendiente](#53-marca-de-cambio-de-contraseña-pendiente)
 - [6. Semántica derivada y semántica guardada](#6-semántica-derivada-y-semántica-guardada)
 - [7. Fronteras del dominio](#7-fronteras-del-dominio)
 - [8. Referencia al glosario](#8-referencia-al-glosario)
@@ -64,11 +65,16 @@ Persona de la comisión que obtiene identidad propia dentro del laboratorio y a 
 | Papel | `Alumno` o `Administrador`. Son dos papeles fijos, sin permisos configurables | Conjunto cerrado (RN-01, INV-05) |
 | Estado de cuenta | `Pendiente`, `Habilitado` o `Bloqueado` | Conjunto cerrado. **El valor inicial depende del camino de alta**: `Pendiente` en el auto-registro del alumno y `Habilitado` en la configuración del administrador (§5.1) |
 | Credencial derivada | Valor derivado de la contraseña, que el dominio recibe ya derivado y nunca en claro | En el auto-registro, sin valor hasta el primer ingreso efectivo, y sólo se fija estando `Habilitado`. En la configuración del administrador **nace con valor**, porque ese acto incluye su contraseña |
+| Cambio de contraseña pendiente | **Marca** que declara que la credencial vigente de la cuenta es una **contraseña provisoria** que fijó el administrador y que la cuenta todavía no reemplazó | Puesta o levantada, sin valores intermedios. Nace **levantada** en los dos caminos de alta. La pone **únicamente** el reseteo del administrador (CU-13) y la levanta **únicamente** el reemplazo hecho por la propia cuenta (CU-03). Mientras está puesta, la cuenta no ejerce ninguna otra capacidad (INV-09, RN-13) |
 | Fecha de alta | Momento en que la cuenta se constituyó | La provee el consumidor: el dominio no lee el reloj |
+
+**Sobre el nombre de la marca.** El intake la nombra en prosa —la cuenta «queda marcada como *con cambio de contraseña pendiente*» (§4.1, RN-12)— y no le da nombre de atributo. **Decisión derivada de esta categoría**: se adopta como nombre del atributo la misma forma con la que la fuente la nombra, «cambio de contraseña pendiente», para no acuñar un término nuevo donde el producto ya tiene uno. Su forma calificada obligatoria es «marca de cambio de contraseña pendiente» cuando se habla del atributo, porque `Pendiente` a secas nombra un estado de cuenta y un estado de trabajo (`Vision-Producto.md` §9.2).
 
 **Ejemplo de instancia.** Una alumna se registra con su correo, su nombre y su apellido y no elige contraseña: queda con papel `Alumno`, cuenta `Pendiente`, credencial derivada sin valor y ningún trabajo (PRODUCT-INTAKE §6, flujo 1).
 
-**Segundo ejemplo, el del otro camino.** En el primer arranque de la instancia, el docente configura su cuenta con su correo, su nombre, su apellido y su contraseña: queda con papel `Administrador`, cuenta **`Habilitado`**, credencial derivada con valor y ningún trabajo, y entra en el acto (PRODUCT-INTAKE §4, F-01, y §15, etapa `c`).
+**Segundo ejemplo, el del otro camino.** En el primer arranque de la instancia, el docente configura su cuenta con su correo, su nombre, su apellido y su contraseña: queda con papel `Administrador`, cuenta **`Habilitado`**, credencial derivada con valor, marca de cambio de contraseña pendiente levantada y ningún trabajo, y entra en el acto (PRODUCT-INTAKE §4, F-01, y §15, etapa `c`).
+
+**Tercer ejemplo, el del reseteo.** Una alumna con cuenta `Habilitado` y tres trabajos —uno en `Borrador`, uno en `Rechazado` con su comentario y uno en `Finalizado`— olvida su contraseña. El administrador le fija una provisoria: la cuenta conserva su identificador, su correo, su nombre, su apellido, su papel, su estado `Habilitado` y **los tres trabajos con sus estados y sus comentarios**; lo único que cambia es la credencial derivada, que pasa a la provisoria, y la marca de cambio de contraseña pendiente, que queda puesta (PRODUCT-INTAKE §4, F-26; §4.1, RN-12; §7, CL-7).
 
 ### 2.2 Trabajo
 
@@ -169,9 +175,9 @@ Un trabajo sin piezas y sin observaciones es un estado normal: es el trabajo rec
 
 Un invariante es una afirmación que tiene que ser verdadera **siempre**, sin importar la operación ni quién la ejecute; es lo que el dominio hace cumplir aunque la petición llegue por fuera de la interfaz (PRODUCT-INTAKE §17.1.P.2). Su verificación sin infraestructura es exactamente lo que el intake declara como motivo para no adoptar un modelo anémico.
 
-### 4.1 Los siete invariantes
+### 4.1 Los nueve invariantes vigentes
 
-Transcriptos de PRODUCT-INTAKE §17.1.P.2, que a su vez los toma de RT §7.3.
+Transcriptos de PRODUCT-INTAKE §17.1.P.2, que a su vez toma los siete primeros de RT §7.3 y agrega los dos últimos por decisión del Product Owner del 2026-08-09.
 
 | Id | Enunciado | Regla que sostiene | Dónde se ejerce en esta categoría |
 | --- | --- | --- | --- |
@@ -182,25 +188,28 @@ Transcriptos de PRODUCT-INTAKE §17.1.P.2, que a su vez los toma de RT §7.3.
 | INV-05 | Existe exactamente un administrador configurado; su alta sólo es posible mientras no exista ninguno | RN-01 | CU-12, CU-02 |
 | INV-06 | Un alumno con cuenta `Pendiente` o `Bloqueado` no obtiene acceso | RN-06 | CU-04 |
 | INV-07 | Un trabajo en `Finalizado` o en `Rechazado` no cambia de estado ni de contenido | RN-10 | CU-08, CU-10 |
+| INV-08 | La cuenta con papel `Administrador` está **siempre** `Habilitado`: nace habilitada, ninguna operación la lleva a `Pendiente` ni a `Bloqueado`, y no admite baja. Toda cuenta con papel `Alumno` nace `Pendiente` | RN-01, RN-06 | CU-01, CU-02, CU-12, CU-13 |
+| INV-09 | Una cuenta con la marca de **cambio de contraseña pendiente** no ejerce ninguna capacidad del sistema salvo cambiar su propia contraseña. La marca la pone **únicamente** el reseteo del administrador, y la levanta **únicamente** el cambio efectivo hecho por la propia cuenta | RN-12, RN-13 | CU-13, CU-03, CU-04 |
 
-Dos precisiones de ubicación, para que ninguna capa busque en el lugar equivocado:
+Tres precisiones de ubicación, para que ninguna capa busque en el lugar equivocado:
 
 - **INV-01 es del sistema y el dominio no lo puede verificar solo.** La unicidad se afirma sobre el conjunto de alumnos, y una entidad no conoce a ese conjunto. El dominio declara la condición y exige que el consumidor la haya resuelto; quien la ejerce efectivamente es `GeometriaFactory-Application` con el puerto de repositorio.
 - **INV-06 se cumple aunque el acceso se materialice afuera.** El dominio modela **la condición**; el mecanismo por el que el acceso se emite vive en `GeometriaFactory-Infrastructure` y en `GeometriaFactory-Api`.
+- **INV-09 se ejerce en un solo lugar del dominio, y es una decisión derivada declarada.** El enunciado alcanza a *todas* las capacidades del sistema, y el dominio no tiene una puerta única por la que pasen todas. La decisión de esta categoría es concentrar la guarda en **CU-04**, la evaluación de admisibilidad: una cuenta con la marca puesta **no es admisible**, de modo que ninguna otra capacidad llega a ejercerse porque ninguna se ejerce sin admisión resuelta. El fundamento es el mismo con el que INV-06 vive en CU-04 y no repetido en cada caso de uso. **Consecuencia para la capa que expone**: si alguna vez existiera un camino que ejerza una capacidad sin pasar por la admisibilidad, ese camino tendría que volver a comprobar la marca, y esa comprobación no sería del dominio.
 
 INV-03 está deliberadamente acotado a la eliminación **por parte de un alumno**: el administrador elimina cualquier trabajo que ve, en cualquier estado, de modo que un enunciado sin ese recorte sería falso (PRODUCT-INTAKE §17.1.P.2, decisión del 2026-08-08).
 
-### 4.2 Invariante candidato, propuesto y no adoptado
+### 4.2 INV-08, del candidato de esta categoría al invariante adoptado
 
-**INV-08 no existe en el intake.** Se propone acá y **no se cuenta entre los invariantes vigentes**, que siguen siendo los siete de §4.1. Se declara como candidato porque el modelo sostiene una propiedad permanente que ninguno de los siete enuncia, y **la familia de defectos que esa ausencia habilita ya se abrió dos veces, por dos puertas distintas**: el P0, que dejaba nacer `Pendiente` a la cuenta de administrador, y el P1 de la ronda r3, que permitía bloquearla después. Los dos terminan en la misma condición sin salida.
+**INV-08 lo propuso esta categoría y el Product Owner lo adoptó.** Nació acá como candidato, declarado no vigente y no proveniente de ninguna fuente, porque el modelo sostenía una propiedad permanente que ninguno de los siete invariantes de entonces enunciaba, y **la familia de defectos que esa ausencia habilitaba ya se había abierto dos veces por dos puertas distintas**: el P0, que dejaba nacer `Pendiente` a la cuenta de administrador, y el P1 de la ronda r3, que permitía bloquearla después. Los dos terminaban en la misma condición sin salida.
 
-| Id | Enunciado propuesto | Qué expresa | Estado |
-| --- | --- | --- | --- |
-| INV-08 | La cuenta con papel `Administrador` está **siempre** `Habilitado`: nace habilitada, ninguna operación la lleva a `Pendiente` ni a `Bloqueado`, y no admite baja. Toda cuenta con papel `Alumno` nace `Pendiente` | Que el estado admisible de una cuenta depende de su papel, en todo momento y no sólo en el alta. Cubre de una sola vez el alta —ningún camino puede tomar el estado inicial del otro— y el ciclo de vida posterior —ninguna operación puede dejar a la instancia sin una cuenta capaz de habilitar, desbloquear y revisar— | **Propuesto, no vigente.** Requiere decisión del Product Owner y su incorporación a `PRODUCT-INTAKE` §17.1.P.2 |
+`PRODUCT-INTAKE` §17.1.P.2 lo incorpora con su enunciado ampliado al ciclo de vida completo y lo rotula «**adoptado**», con la evidencia de las dos puertas como fundamento. **Desde esa incorporación es un invariante vigente y figura en la tabla de §4.1**; esta subsección se conserva —en lugar de borrarse— para dejar registrada la trazabilidad del recorrido, porque varias categorías aguas abajo todavía lo citan como «candidato no vigente» y la corrección tiene que poder verificarse contra un lugar concreto.
 
-Mientras no se adopte, la propiedad se sostiene operación por operación: CU-01 y CU-12 fijan cada uno su estado inicial y rechazan el del otro, CU-02 rechaza las cuatro operaciones sobre la cuenta de administrador, y la máquina de estados de §5.1 declara el papel al que alcanza cada transición. El modelo es correcto así; lo que el candidato agrega es **cerrar la familia en lugar de tapar cada puerta**, que es lo que dos rondas de auditoría mostraron necesario.
+Lo que cambia en la práctica: la propiedad deja de sostenerse sólo operación por operación —CU-01 y CU-12 fijando cada uno su estado inicial y rechazando el del otro, y CU-02 rechazando las cuatro operaciones sobre la cuenta de administrador— y pasa a ser una condición permanente que **cierra la familia entera en lugar de tapar cada puerta**. Las guardas de cada caso de uso no se retiran: siguen siendo el lugar donde el invariante se ejerce.
 
-### 4.3 Correspondencia con las once reglas de negocio
+**Ningún invariante candidato queda abierto en esta versión.** Si esta categoría propusiera otro, iría acá con el mismo tratamiento: enunciado, qué expresa y estado.
+
+### 4.3 Correspondencia con las trece reglas de negocio
 
 Los invariantes **no son reglas distintas** de las de PRODUCT-INTAKE §4.1: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca.
 
@@ -213,8 +222,14 @@ Los invariantes **no son reglas distintas** de las de PRODUCT-INTAKE §4.1: son 
 | RN-05 | INV-04 |
 | RN-06 | INV-06 |
 | RN-10 | INV-07 |
+| RN-12 | INV-09 |
+| RN-13 | INV-09 |
 | RN-07, RN-08, RN-09 | **Ninguno.** Describen comportamientos —la baja física, la conservación del texto, la ubicación del error— y no condiciones permanentes sobre el estado |
 | RN-11 | **Ninguno.** Es una regla de alcance de consulta, no una condición sobre los datos |
+
+**Un invariante para dos reglas, y no es un error de la tabla.** INV-09 sostiene a RN-12 y a RN-13 a la vez, y así lo declara `PRODUCT-INTAKE` §17.1.P.2 en su columna de regla sostenida. Son las dos mitades de una misma condición: RN-12 dice qué **conserva** el reseteo —la cuenta, su habilitación, su papel y todos sus trabajos— y RN-13 dice qué **no puede** la cuenta mientras la marca esté puesta. El invariante enuncia la segunda mitad como condición permanente, y la primera queda enunciada por diferencia: si lo único que la marca impide es ejercer capacidades, entonces nada más se pierde en el reseteo.
+
+**RN-01 e INV-08.** La tabla asigna INV-05 a RN-01 porque es el invariante que expresa su núcleo, la unicidad del administrador. INV-08 la sostiene también, en su otra mitad —el estado permanente de esa cuenta—, y `PRODUCT-INTAKE` §17.1.P.2 lo declara sobre RN-01 y RN-06. Ninguna de las dos asignaciones desplaza a la otra.
 
 ## 5. Transiciones de estado
 
@@ -246,6 +261,8 @@ stateDiagram-v2
 | `Habilitado` | `Bloqueado` | **Papel `Alumno`** | El administrador | Acto explícito (F-03). **No procede sobre la cuenta de administrador** |
 | `Bloqueado` | `Habilitado` | **Papel `Alumno`** | El administrador | Acto explícito de rehabilitación (F-03). **No procede sobre la cuenta de administrador**, que nunca puede estar en ese estado |
 | Cualquiera | (deja de existir) | **Papel `Alumno`** | El administrador | Baja, que arrastra los trabajos del alumno (RN-07, F-03). **No procede sobre la cuenta de administrador** (RN-01) |
+
+**El reseteo de contraseña no es una transición de esta máquina**, y conviene decirlo acá porque es donde se lo va a buscar. El administrador que resetea la contraseña de un alumno **no cambia su estado de cuenta**: la cuenta queda exactamente en el estado en que estaba —`Pendiente`, `Habilitado` o `Bloqueado`— y conserva su papel, su identidad y todos sus trabajos con sus estados y sus comentarios. Lo que el reseteo cambia son dos atributos de la cuenta y ninguno de esta máquina: la credencial derivada, que pasa a la provisoria, y la marca de cambio de contraseña pendiente, que queda puesta (RN-12, F-26, CU-13). **Resetear no es dar de baja y no dispara RN-07**: ningún trabajo se elimina.
 
 Transiciones inadmisibles: de cuenta `Pendiente` a `Bloqueado` sin haber pasado por `Habilitado` no está declarada, y el dominio no la admite; ningún estado transiciona hacia `Pendiente`; **ninguna cuenta de alumno nace `Habilitado`**, como ninguna cuenta de administrador nace `Pendiente`; y **ninguna de las cuatro operaciones procede sobre la cuenta de administrador**, que no se habilita porque ya lo está, no se bloquea, no se rehabilita y no se da de baja.
 
@@ -296,6 +313,28 @@ Quién puede qué en cada estado, tomado literal de PRODUCT-INTAKE §4.2:
 
 Transiciones inadmisibles: cualquier salida de `Finalizado` o de `Rechazado` que no sea la eliminación por el administrador; el paso a estado `Pendiente` con al menos una observación de especie error de validación; la aprobación o el rechazo por parte de un alumno; la reedición o la eliminación por el alumno fuera de `Borrador`; y el retorno de `Pendiente` a `Borrador`, que ninguna fuente declara.
 
+### 5.3 Marca de cambio de contraseña pendiente
+
+Es la tercera máquina del modelo y la más chica: dos valores y dos transiciones. Se declara aparte de §5.1 porque **es ortogonal al estado de cuenta**: la marca se pone y se levanta sin que el estado de cuenta cambie, y el estado de cuenta cambia sin que la marca se toque.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Levantada: alta de la cuenta<br/>(los dos caminos)
+    Levantada --> Puesta: el administrador resetea<br/>la contraseña (F-26, CU-13)
+    Puesta --> Levantada: la propia cuenta reemplaza<br/>su credencial (CU-03)
+```
+
+| Desde | Hacia | Sujeto de la regla | Condición |
+| --- | --- | --- | --- |
+| — | Levantada | El alumno que se auto-registra, o el docente que configura la instancia | Valor inicial en los dos caminos de alta: ninguna cuenta nace con contraseña provisoria |
+| Levantada | Puesta | El administrador | Reseteo de la contraseña de una **cuenta de alumno** (F-26, RN-12). Es el único acto que la pone |
+| Puesta | Levantada | La propia cuenta | Reemplazo efectivo de la credencial derivada, hecho por quien presenta la vigente (RN-13, CU-03). Es el único acto que la levanta |
+| Puesta | Puesta | El administrador | Un segundo reseteo sobre una cuenta ya reseteada es admisible y sin efecto sobre la marca: cambia la contraseña provisoria y la marca sigue puesta |
+
+Transiciones inadmisibles, y las tres importan: **la marca no la levanta el administrador**, porque la contraseña nueva la elige el alumno y el administrador no la conoce (RN-13); **no la levanta el paso del tiempo**, porque ninguna fuente declara vencimiento de la provisoria; y **no la pone ninguna de las cuatro operaciones de ciclo de vida** de CU-02, porque habilitar, bloquear, rehabilitar y dar de baja no tocan la credencial.
+
+**Qué puede una cuenta con la marca puesta.** Exactamente una cosa: reemplazar su propia credencial derivada. Cualquier otra capacidad queda fuera de su alcance mientras la marca no se levante, y el dominio lo materializa devolviendo **no admisible** en CU-04 (INV-09, §4.1).
+
 ## 6. Semántica derivada y semántica guardada
 
 Tres decisiones de modelado están tomadas aguas arriba y este documento las fija como semántica del dominio:
@@ -325,7 +364,7 @@ Lo que este proyecto de código **no** hace, declarado acá para que ninguna cat
 
 ## 8. Referencia al glosario
 
-El vocabulario de esta categoría vive en [`Glosario-Funcional.md`](Glosario-Funcional.md) y no acá. Los términos del modelo que ese glosario declara o referencia son: alumno, trabajo, pieza, componente, observación, advertencia, error de validación, valor declarado, valor derivado, estado del trabajo, estado de cuenta, credencial derivada, texto original, posición de pieza, familia plana o volumétrica, papel, enviar, aprobar, rechazar y comentario.
+El vocabulario de esta categoría vive en [`Glosario-Funcional.md`](Glosario-Funcional.md) y no acá. Los términos del modelo que ese glosario declara o referencia son: alumno, trabajo, pieza, componente, observación, advertencia, error de validación, valor declarado, valor derivado, estado del trabajo, estado de cuenta, credencial derivada, **contraseña provisoria**, **marca de cambio de contraseña pendiente**, **reseteo de contraseña**, texto original, posición de pieza, familia plana o volumétrica, papel, enviar, aprobar, rechazar y comentario.
 
 Los términos que ya declara `00-Contexto/Vision-Producto.md` §9 se **referencian** y no se redefinen; entre ellos, los cuatro estados del trabajo, «enviar», «aprobar / rechazar», «comentario» y la forma calificada obligatoria de `Pendiente`.
 
@@ -333,7 +372,7 @@ Los términos que ya declara `00-Contexto/Vision-Producto.md` §9 se **referenci
 
 | Entidad | Casos de uso que la consumen | Reglas de negocio que la restringen |
 | --- | --- | --- |
-| Alumno | CU-01, CU-02, CU-03, CU-04, CU-09, CU-12 | RN-01, RN-02, RN-06, RN-07 |
+| Alumno | CU-01, CU-02, CU-03, CU-04, CU-09, CU-12, CU-13 | RN-01, RN-02, RN-06, RN-07, RN-12, RN-13 |
 | Trabajo | CU-05, CU-06, CU-07, CU-08, CU-09, CU-10 | RN-03, RN-04, RN-05, RN-08, RN-10, RN-11 |
 | Pieza | CU-06, CU-07 | RN-08, RN-09 |
 | Componente | CU-06 | RN-08 |
@@ -341,8 +380,8 @@ Los términos que ya declara `00-Contexto/Vision-Producto.md` §9 se **referenci
 
 | Necesidad de negocio | Elemento del modelo que la sostiene |
 | --- | --- |
-| NB-01 | Estado de cuenta, sus **dos transiciones iniciales** y el resto de su máquina; papel del administrador y la ventana única de su configuración |
-| NB-02 | Alumno, correo único, credencial derivada, INV-06 |
+| NB-01 | Estado de cuenta, sus **dos transiciones iniciales** y el resto de su máquina; papel del administrador y la ventana única de su configuración; el reseteo de contraseña como acto del administrador que **no** toca esa máquina |
+| NB-02 | Alumno, correo único, credencial derivada, marca de cambio de contraseña pendiente, INV-06, INV-09 |
 | NB-03 | Trabajo, su dueño, su estado de cuatro valores y su identidad propia |
 | NB-04 | Pieza, componente, observación de especie error de validación y la transición de envío |
 | NB-05 | Valor declarado y valor derivado guardados por separado; observación de especie advertencia |
@@ -357,3 +396,4 @@ Los términos que ya declara `00-Contexto/Vision-Producto.md` §9 se **referenci
 | 1.1 | 2026-08-09 | Absorbe el circuito de revisión del administrador de `PRODUCT-INTAKE` 1.3 y la resolución de las dos ambigüedades que esta categoría había elevado. **Sube minor y archiva el estado anterior** porque el documento ya es citado como insumo por otras categorías (`Master-Prompt.md` §5). **§4 reescrita**: los invariantes pasan de cuatro enunciados y dos identificadores sin enunciado a **los siete transcriptos** de §17.1.P.2, y §4.2 pasa de registrar la ambigüedad a declarar la correspondencia con las once reglas y las cuatro que no tienen invariante. **Corrige la atribución de INV-04**, que el intake anterior daba como «el texto original se conserva íntegro»: INV-04 enuncia que un trabajo `Finalizado` tiene el texto interpretado sin errores y sostiene a RN-05; RN-08 queda sin invariante asociado. **§5.2 reescrita**: cuatro estados con `Rechazado`, envío como única acción de guardado, terminalidad de los dos desenlaces, eliminación por el alumno sólo en `Borrador` y por el administrador en los tres estados que ve, más la tabla de quién puede qué. **§2.2** suma el comentario del administrador y el estado de cuatro valores; **§2.1** suma la unicidad del correo; **§2.5** ajusta el efecto de las dos especies al momento del envío y distingue observación de comentario. **§3** suma la cardinalidad del comentario; **§7** suma las fronteras de la consulta y de la unicidad del correo; **§8** y **§9** incorporan los términos nuevos, CU-10 y NB-09. Toda ocurrencia de `Pendiente` queda calificada según `Vision-Producto.md` §9.2. **Corrección de la ronda r1 del audit, hallazgo P1-01**: §2.3 y §6 precisan que la posición de la pieza es la de su figura **en el texto** y no se recalcula, de modo que una figura no reconstruida deja su **posición reservada** y el conjunto de piezas adoptadas admite huecos; §2.2 suma el atributo «cantidad de figuras del conjunto raíz», que es el rango contra el que se valida una posición y sin el cual una observación sobre una figura no reconstruida no tendría contra qué comprobarse; y §2.5 precisa que la posición de la observación pertenece a ese rango. Es lo que hace consistente al escenario E-5, insignia de RN-09, con la reconstrucción parcial. |
 | 1.2 | 2026-08-09 | **Corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`. La versión anterior declaraba un único estado inicial de cuenta —«Estado inicial, no negociable»— y «no hay habilitación automática» sin acotarlos al auto-registro, de modo que la cuenta del administrador nacía `Pendiente`, no obtenía acceso por INV-06 y no había ninguna cuenta capaz de habilitarla: la instancia quedaba inutilizable en el primer arranque. **§5.1 se reescribe con los dos caminos de alta**, el auto-registro del alumno que nace `Pendiente` (RF-03, F-02) y la configuración del administrador que nace `Habilitado` (F-01, con origen en RF-01 y RF-02), con las dos transiciones iniciales en el diagrama, el fundamento de cada una y el párrafo que explica por qué la distinción hace arrancable a la instancia. **§2.1** deja el estado inicial y la credencial condicionados al camino y suma el ejemplo de instancia del administrador. **§4.2 nueva** propone el invariante candidato **INV-08**, que **no viene del intake** y no se cuenta entre los siete vigentes; la correspondencia con las reglas pasa a §4.3. **§4.1** reasigna INV-05 e INV-01 a CU-12, y §9 incorpora CU-12. La cita de INV-05 como fundamento del estado inicial se retira: ese invariante habla de la unicidad del administrador y de su ventana de alta, no del estado con el que nace. |
 | 1.3 | 2026-08-09 | Correcciones de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`. **H-01**: §5.1 declaraba las transiciones de habilitación, bloqueo, rehabilitación y baja **sin acotar el papel de la cuenta sobre la que operan**, de modo que nada impedía bloquear la del administrador y llegar por otra puerta a la condición sin salida del P0. No era una decisión de diseño abierta sino una **transcripción incompleta**: la capacidad F-03 del intake ya dice «habilitar, bloquear, rehabilitar y dar de baja física cuentas **de alumno**». Se agrega la cita como fundamento, se acotan las cuatro transiciones —incluida la inversa `Bloqueado` → `Habilitado`, que estaba igual de desacotada—, y se declara el efecto completo: sin administrador nadie aprueba ni rechaza y el circuito de revisión entero se detiene. **H-01 / INV-08**: §4.2 amplía el enunciado propuesto del alta al ciclo de vida completo, con la evidencia de que la familia ya se abrió dos veces por puertas distintas. **H-06**: el párrafo de §5.1 dejaba entrecomillada como transcripción una transición que ninguna fuente accesible enuncia; se reapoya en F-02 y en el flujo 1 de §6, y se declara que la lectura es de esta categoría. |
+| 1.4 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**: la capacidad **F-26**, reseteo de contraseña por el administrador; las reglas **RN-12** y **RN-13** de §4.1; el invariante **INV-09** de §17.1.P.2; el retiro de la exclusión **X-2** y la reescritura del caso límite **CL-7**. Sube minor porque agrega elementos al modelo sin invalidar ninguno de los declarados. **§2.1** da de alta el atributo **«cambio de contraseña pendiente»** de la cuenta, con su semántica de marca, su valor inicial levantado en los dos caminos de alta y los dos únicos actos que la mueven; declara como **decisión derivada** que el nombre del atributo se toma de la prosa con la que RN-12 nombra la condición, en lugar de acuñar uno nuevo, y suma el tercer ejemplo de instancia, el del reseteo que conserva los tres trabajos con sus comentarios. **§4.1 pasa de siete a nueve invariantes vigentes**: entra **INV-09** con su enunciado transcripto, y entra **INV-08**, que esta categoría había propuesto y que `PRODUCT-INTAKE` §17.1.P.2 rotula «adoptado». Suma la tercera precisión de ubicación, que declara como **decisión derivada** que INV-09 se ejerce en un solo lugar del dominio, la admisibilidad de CU-04, con su fundamento y con la consecuencia para la capa que expone. **§4.2 se reescribe**: deja de declarar a INV-08 candidato no vigente y registra el recorrido de su adopción, para que la corrección sea verificable desde las categorías que todavía lo citan como propuesto. **§4.3** suma RN-12 y RN-13, las dos con INV-09, y explica por qué un invariante sostiene dos reglas y por qué INV-08 no desplaza a INV-05 sobre RN-01. **§5.1** declara que el reseteo **no es una transición de la máquina de la cuenta**: no cambia el estado, no es una baja y no dispara RN-07. **§5.3 nueva**: la máquina de la marca, con sus dos valores, sus dos transiciones, el segundo reseteo sin efecto sobre la marca y las tres transiciones inadmisibles —el administrador no la levanta, el tiempo no la levanta y las cuatro operaciones de CU-02 no la ponen—. §8 y §9 incorporan el vocabulario nuevo, CU-13 y las dos reglas nuevas. |

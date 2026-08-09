@@ -329,13 +329,13 @@
 
   var recursosVivos = { geometrias: 0, materiales: 0, contextos: 0 };
 
-  /* Preferencia de movimiento del sistema. Es lo único que el visor consulta
-     del entorno, y no es configuración propia: es una preferencia de
-     accesibilidad del navegador. */
-  function prefiereMovimientoReducido() {
-    try { return !!global.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-    catch (e) { return false; }
-  }
+  /* EL VISOR NO CONSULTA NADA DEL ENTORNO fuera de la capacidad gráfica del
+     elemento que le dan. En particular NO lee `prefers-reduced-motion`: hacerlo
+     sería leer configuración por su cuenta y violaría la garantía G-3 del
+     contrato de fachada (`Definicion-Contrato-De-Fachada.md` §3.3). Quien lee la
+     preferencia del sistema es el componente anfitrión, que la traduce a los dos
+     valores de verdad que le pasa a `crear` —uno por movimiento— y a
+     `orbitar()` / `girarFiguras()` después. */
 
   function hayCapacidadGrafica() {
     if (typeof global.THREE === 'undefined') { return false; }
@@ -364,6 +364,13 @@
        interior de la escena. Acá sólo se declara el rol. */
     lienzo.setAttribute('role', 'img');
     lienzo.setAttribute('aria-label', 'Escena tridimensional sin ninguna pieza dibujada.');
+    /* El lienzo ES alcanzable por teclado: recibe foco y se opera con las
+       flechas —orbitar—, con `+`/`-` —acercar y alejar— y con Inicio —volver
+       a la vista de partida—. Sin esto la manipulación de la vista quedaba
+       reservada al puntero, que es la barrera que `Maqueta-Rules.md` §4.5
+       prohíbe. La ELECCIÓN de pieza sigue teniendo su ruta accesible completa
+       en el árbol, que es lo que declara la sonda `SD-50`. */
+    lienzo.setAttribute('tabindex', '0');
     elemento.appendChild(lienzo);
 
     var escena = new THREE.Scene();
@@ -412,8 +419,9 @@
 
     /* Los dos movimientos automáticos, independientes entre sí. Son
        PREFERENCIAS de quien mira, y el llamador las gobierna con `orbitar()` y
-       `girarFiguras()`. Si no dice nada, manda la preferencia de movimiento del
-       sistema.
+       `girarFiguras()`. **Si no dice nada, arrancan APAGADOS**, que es lo que
+       fija §4.1 del contrato para opciones ausentes o parciales: el visor no
+       adivina la preferencia de nadie y no consulta el sistema.
 
        - Órbita de la cámara: del original. Incrementa el azimut y reposiciona
          la cámara; las piezas quedan quietas.
@@ -423,12 +431,8 @@
        Ninguno de los dos toca la POSICIÓN de las piezas: la celda de cada una
        sale de su índice y no del tiempo, así que la disposición no se ve
        afectada por ninguna combinación de los dos. */
-    var orbitaCamara = (opciones.orbitaCamara === undefined)
-      ? !prefiereMovimientoReducido()
-      : !!opciones.orbitaCamara;
-    var giroDeFiguras = (opciones.giroDeFiguras === undefined)
-      ? !prefiereMovimientoReducido()
-      : !!opciones.giroDeFiguras;
+    var orbitaCamara = !!opciones.orbitaCamara;
+    var giroDeFiguras = !!opciones.giroDeFiguras;
 
     function ubicarCamara() {
       camara.position.set(
@@ -606,9 +610,38 @@
       ultimoX = ev.clientX; ultimoY = ev.clientY;
       ubicarCamara();
     }
+    function acercar(factor) {
+      distancia = Math.max(4, Math.min(160, distancia * factor));
+      ubicarCamara();
+    }
+
+    /* La rueda SÓLO se captura cuando el lienzo tiene el foco. Si no, la página
+       sigue desplazándose con normalidad: una zona que se traga la rueda al
+       pasar por encima es una trampa de desplazamiento. */
     function alRodar(ev) {
+      if (document.activeElement !== lienzo) { return; }
       ev.preventDefault();
-      distancia = Math.max(4, Math.min(160, distancia * (ev.deltaY > 0 ? 1.1 : 0.9)));
+      acercar(ev.deltaY > 0 ? 1.1 : 0.9);
+    }
+
+    /* Órbita, acercamiento y vuelta a la vista de partida por teclado. Es el
+       equivalente de teclado del arrastre y de la rueda. */
+    var PASO_ANGULO = 0.08;
+    function alTeclear(ev) {
+      if (ev.altKey || ev.ctrlKey || ev.metaKey) { return; }
+      var manejada = true;
+      switch (ev.key) {
+        case 'ArrowLeft':  anguloY -= PASO_ANGULO; break;
+        case 'ArrowRight': anguloY += PASO_ANGULO; break;
+        case 'ArrowUp':    anguloX = Math.min(Math.PI / 2 - 0.1, anguloX + PASO_ANGULO); break;
+        case 'ArrowDown':  anguloX = Math.max(-Math.PI / 2 + 0.1, anguloX - PASO_ANGULO); break;
+        case '+': case '=': acercar(0.9); break;
+        case '-': case '_': acercar(1.1); break;
+        case 'Home': anguloX = 0.42; anguloY = 0.6; distancia = 25; break;
+        default: manejada = false;
+      }
+      if (!manejada) { return; }
+      ev.preventDefault();
       ubicarCamara();
     }
 
@@ -641,6 +674,7 @@
     lienzo.addEventListener('mouseup', alSoltar);
     lienzo.addEventListener('mouseleave', alSoltar);
     lienzo.addEventListener('wheel', alRodar, { passive: false });
+    lienzo.addEventListener('keydown', alTeclear);
     lienzo.addEventListener('click', alPinchar);
 
     /* --- bucle de dibujo -------------------------------------------------- */
@@ -679,6 +713,7 @@
       lienzo.removeEventListener('mouseup', alSoltar);
       lienzo.removeEventListener('mouseleave', alSoltar);
       lienzo.removeEventListener('wheel', alRodar);
+      lienzo.removeEventListener('keydown', alTeclear);
       lienzo.removeEventListener('click', alPinchar);
 
       vaciar();                                  // geometrías y materiales
@@ -729,7 +764,6 @@
     describirPieza: describirPieza,
     disponerPorIndice: disponerPorIndice,
     hayCapacidadGrafica: hayCapacidadGrafica,
-    prefiereMovimientoReducido: prefiereMovimientoReducido,
     crear: crear,
     tiposDibujables: TIPOS_DIBUJABLES.slice(),
     /* Lo que permite decir si `destruir` liberó de verdad, sin abrir la escena. */

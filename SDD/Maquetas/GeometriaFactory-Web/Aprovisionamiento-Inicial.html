@@ -17,7 +17,7 @@
 
   <!-- Estado: resolviendo destino. Barra indeterminada sobre el lienzo, sin
        texto, anunciada como región activa. -->
-  <div data-mq-estado="resolviendo-destino" style="width:100%;max-width:380px" role="status">
+  <div data-mq-estado="resolviendo-destino" role="status" class="mq-ancho-campo">
     <div class="mq-barra-indeterminada"></div>
     <p class="mq-sr-only">Resolviendo a qué superficie corresponde ir.</p>
   </div>
@@ -26,7 +26,7 @@
   <div data-mq-estado="ya-aprovisionado" class="mq-tarjeta-acceso" role="status">
     <span class="mq-identidad" data-mq-marca></span>
     <div class="mq-barra-indeterminada"></div>
-    <p class="mq-caption" style="margin-top:12px">
+    <p class="mq-caption mq-mt-3">
       Redirigiendo a la superficie de ingreso. La redirección es neutra: no se explica el motivo.
     </p>
   </div>
@@ -63,18 +63,18 @@
     </div>
 
     <!-- Aviso de indisponibilidad, dentro de la tarjeta, conservando lo escrito -->
-    <div class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" style="margin-bottom:16px">
+    <div class="mq-aviso-indisponible mq-mb-5" data-mq-estado="indisponible" role="alert">
       <h2>No pudimos crear la cuenta</h2>
       <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
          Lo que escribiste sigue acá, salvo las contraseñas, que se vuelven a pedir.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar la creación</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar la creación</button>
     </div>
 
     <!-- Estado: cargando. Esqueleto de tres campos. -->
     <div data-mq-estado="cargando" aria-hidden="true">
-      <div class="mq-esqueleto" style="width:30%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
-      <div class="mq-esqueleto" style="width:40%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
-      <div class="mq-esqueleto" style="width:45%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+      <div class="mq-esqueleto mq-ancho-30"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+      <div class="mq-esqueleto mq-ancho-40"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+      <div class="mq-esqueleto mq-ancho-45"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
     </div>
 
     <form data-mq-estado="con-datos enviando error-entrada confirmacion-no-coincidente error-operacion indisponible reconectando vacio version-preliminar origen-indeterminado" novalidate>

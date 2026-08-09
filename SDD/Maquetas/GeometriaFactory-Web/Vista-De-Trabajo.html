@@ -18,8 +18,7 @@
 
     <!-- Vuelve al listado de donde vino la persona: el propio si es el alumno,
          el de la comisión si es el administrador. -->
-    <a class="mq-btn mq-btn--pill" href="Panel-De-Trabajos-Del-Alumno.html" data-mq-volver
-       style="margin-bottom:14px"></a>
+    <a class="mq-btn mq-btn--pill mq-mb-4" href="Panel-De-Trabajos-Del-Alumno.html" data-mq-volver></a>
 
     <p class="mq-banda mq-banda--info" data-mq-estado="vacio">
       <strong>No aplica al trabajo.</strong> Una superficie de detalle siempre tiene un trabajo o no
@@ -38,15 +37,15 @@
       <h2 id="vt-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>Ahora no podemos traer este trabajo</h2>
       <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
          Probá de nuevo en un rato.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer el trabajo</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar traer el trabajo</button>
     </section>
 
     <!-- Estado: cargando. Esqueleto en las cuatro partes. -->
     <div data-mq-estado="cargando" aria-hidden="true">
-      <div class="mq-barra-indeterminada" style="margin-bottom:16px"></div>
+      <div class="mq-barra-indeterminada mq-mb-5"></div>
       <div class="mq-dos-columnas">
         <div class="mq-columna"><div class="mq-esqueleto mq-esqueleto--alto"></div><div class="mq-esqueleto mq-esqueleto--alto"></div></div>
-        <div class="mq-columna"><div class="mq-esqueleto" style="height:260px"></div><div class="mq-esqueleto mq-esqueleto--alto"></div></div>
+        <div class="mq-columna"><div class="mq-esqueleto mq-esqueleto--escena"></div><div class="mq-esqueleto mq-esqueleto--alto"></div></div>
       </div>
     </div>
 
@@ -57,18 +56,18 @@
          ================================================================== -->
     <div data-mq-estado="con-datos sin-observaciones sin-comentario con-comentario piezas-no-dibujadas borrador-con-errores texto-no-legible escena-no-disponible elemento-sin-tamano elemento-sin-tamano-ajuste instancia-desconocida dimension-no-legible indice-sin-representacion reconectando">
 
-      <header style="margin-bottom:16px">
-        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <header class="mq-mb-5">
+        <div class="mq-fila-flex mq-fila-flex--envuelve">
           <h1 data-mq-nombre></h1>
           <span data-mq-insignia></span>
         </div>
-        <p class="mq-caption mq-num" style="margin:4px 0 0" data-mq-meta></p>
+        <p class="mq-caption mq-num mq-margen-arriba-1" data-mq-meta></p>
       </header>
 
       <!-- Bloque de decisión, alojado acá: debajo de la cabecera y antes de
            las cuatro partes. Su armado vive en Maqueta.js, que es la única
            fuente que comparten esta superficie y la de resolución. -->
-      <div data-mq-bloque-decision style="margin-bottom:16px"></div>
+      <div data-mq-bloque-decision class="mq-mb-5"></div>
 
       <!-- Dos condiciones de la fachada que el producto deliberadamente NO
            avisa a la persona: se observan sólo en la bitácora del panel. -->

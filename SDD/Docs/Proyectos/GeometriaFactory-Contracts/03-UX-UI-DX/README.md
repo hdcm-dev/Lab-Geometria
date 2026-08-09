@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
@@ -30,7 +30,7 @@
 | --- | --- | --- |
 | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) | Marco DX: rol de intervención, la regla de exposición, los tres tramos de onboarding, el quick-start dentro del contenedor de desarrollo, el plan de Diátaxis, las dos clases de error, las métricas y el lazo de retroalimentación. **Es el punto de entrada** | Propuesto |
 | [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) | El recorrido de la primera hora, paso a paso y con hitos verificables. Es el modo tutorial | Propuesto |
-| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de errores en sus dos clases —doce entradas de construcción del contrato y catorce códigos transportados—, más las tres señales declaradas que no son error, con diagnóstico accionable por entrada. Es el modo how-to para quien llega con un síntoma | Propuesto |
+| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de errores en sus dos clases —**catorce** entradas de construcción del contrato y **dieciséis** códigos transportados—, más las tres señales declaradas que no son error, con diagnóstico accionable por entrada. Es el modo how-to para quien llega con un síntoma | Propuesto |
 | [`Glosario-UX.md`](Glosario-UX.md) | Vocabulario que esta categoría acuña, la resolución de «error» con sus tres referentes y los términos que se referencian sin redefinir | Propuesto |
 | `README.md` | Este archivo: índice navegable, variante aplicada, orden de lectura y declaración de las omisiones | Propuesto |
 
@@ -82,7 +82,7 @@ Los demás criterios de §6 aplican y se cumplen: variante declarada en cada cab
 
 ## 6. Notas de uso de esta sección
 
-- **Autoridad.** Esta sección no origina ninguna capacidad, prioridad ni exclusión. Todo se deriva de los siete contratos de uso de `02-Especificacion-Funcional/`, de las nueve restricciones transversales `RT-01` a `RT-09` y del `PRODUCT-INTAKE` 1.3, y traza a su sección de origen.
+- **Autoridad.** Esta sección no origina ninguna capacidad, prioridad ni exclusión. Todo se deriva de los ocho contratos de uso de `02-Especificacion-Funcional/`, de las once restricciones transversales `RT-01` a `RT-11` y del `PRODUCT-INTAKE` 1.7, y traza a su sección de origen.
 - **Fronteras.** La arquitectura y los ADR son de `05-Arquitectura-Tecnica`; las historias de usuario, de `06-Backlog-Tecnico`; el pipeline y la automatización de los quality gates, de `09`; los samples y sus contratos de verificación, de `10-Examples`; el cuerpo documental de entrega, de `11-Documentacion`. Esta sección refiere y delega, no redacta.
 - **Samples.** `PRODUCT-INTAKE` §16.1 declara que este proyecto de código **no produce samples propios**, porque no lo consumen integradores externos: su verificación vive en `tests/`. Por eso el quick-start no incluye un fragmento que instancie un tipo de transferencia, y lo declara explícitamente en lugar de dejar el hueco sin explicar.
 - **Entorno.** Ningún paso de esta documentación asume herramientas en el host de desarrollo. El ciclo entero ocurre dentro del contenedor de desarrollo, y esa restricción es del producto, no una preferencia de esta categoría.
@@ -95,3 +95,4 @@ Los demás criterios de §6 aplican y se cumplen: variante declarada en cada cab
 | --- | --- | --- | --- |
 | 1.1 | 2026-08-09 | **Actualización por contenido nuevo aguas arriba**: `PRODUCT-INTAKE` 1.3 incorporó el circuito de revisión del administrador, 00 y 01 pasaron a 1.1 con `NB-09`, y la categoría 02 emitió `CU-07`, `RT-08` y `RT-09`. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. Cambian los conteos y las notas, no la estructura: §1 describe el catálogo con sus doce entradas de construcción, catorce códigos transportados y tres señales; §3 suma §3.3 al orden de lectura; §6 pasa a siete contratos de uso y nueve restricciones, declara la forma calificada de `Pendiente` con sus dos excepciones y la regla de que el comentario no se nombra como observación ni como calificación, y registra el archivado en `_legacy/2026-08-09/`. **Las ocho omisiones y los seis criterios no aplicables de §4 y §5 no cambian**: el circuito de revisión no altera ningún flag del proyecto de código, que sigue siendo `library` con `tiene_ui_final`, `tiene_portal_developers` y `requiere_maqueta` en false. | DX Lead (AG-03) |
 | 1.0 | 2026-08-08 | Emisión inicial del índice de la sección. Enumera los cuatro documentos emitidos más este README, declara la variante DX con su fundamento y el destinatario real de la documentación, fija el orden de lectura, declara las ocho omisiones con la regla que las admite y su motivo, declara los seis criterios de §6 que son de la variante UX/UI como no aplicables, y las notas de autoridad, fronteras, samples, entorno, vocabulario y nombres de archivo. | DX Lead (AG-03) |
+| 1.2 | 2026-08-09 | **Actualización por contenido nuevo aguas arriba**: `PRODUCT-INTAKE` **1.7** incorpora la capacidad **F-26** y la categoría 02 emite **CU-08** y las restricciones transversales `RT-10` y `RT-11`. §2 actualiza el catálogo de errores a **catorce** entradas de construcción y **dieciséis** códigos transportados, con las tres señales declaradas sin cambio; §5 actualiza la nota de autoridad a ocho contratos de uso, once restricciones transversales y el intake 1.7. Ningún artefacto se agrega ni se omite. | DX Lead (AG-03) |

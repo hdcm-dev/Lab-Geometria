@@ -29,7 +29,10 @@
       <p class="mq-banda mq-banda--confirmacion" role="status">
         Tu cuenta de administrador quedó creada. El laboratorio ya está en marcha.
       </p>
-      <ul class="mq-grilla-acceso" style="list-style:none;padding:0;margin:0 0 24px" data-mq-orientacion></ul>
+      <!-- Encabezado de segundo nivel: las tres tarjetas llevan <h3> y sin este
+           <h2> el salto desde el <h1> de la superficie rompe la jerarquía. -->
+      <h2 class="mq-title mq-mb-4">Por dónde seguir</h2>
+      <ul class="mq-grilla-acceso mq-lista-plana" data-mq-orientacion></ul>
     </div>
 
     <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito">
@@ -61,7 +64,7 @@
       <h2 id="pc-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>Ahora no podemos traer las cuentas</h2>
       <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
          Probá de nuevo en un rato.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer las cuentas</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar traer las cuentas</button>
     </section>
 
     <!-- Barra de filtros: filtra sobre lo ya recibido. -->
@@ -69,7 +72,7 @@
       <div class="mq-campo mq-campo-busqueda">
         <label for="pc-buscar">Buscar por correo o nombre</label>
         <span data-mq-ico-buscar></span>
-        <input class="mq-input" id="pc-buscar" type="search" placeholder="por ejemplo, ana">
+        <input class="mq-input" id="pc-buscar" type="search" placeholder="nombre, apellido o correo">
       </div>
       <div class="mq-campo">
         <!-- «Situación» y no «estado», para no colisionar con el estado del trabajo. -->
@@ -81,9 +84,9 @@
     </div>
 
     <div data-mq-estado="cargando" aria-hidden="true">
-      <div class="mq-esqueleto" style="height:42px"></div>
-      <div class="mq-esqueleto" style="height:42px"></div>
-      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
     </div>
 
     <!-- Vacío: sin ofrecer una acción de crear. El administrador no crea
@@ -98,7 +101,7 @@
       <span data-mq-ico-vacio aria-hidden="true"></span>
       <h2 id="pc-filtro-h">Ninguna cuenta coincide con el filtro</h2>
       <p>Hay cuentas registradas, pero ninguna responde a lo que buscaste.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:16px">Limpiar el filtro</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-5">Limpiar el filtro</button>
     </section>
 
     <div data-mq-estado="con-datos aplicando-situacion confirmando-baja baja-no-coincide ejecutando-baja exito cuenta-inexistente administrador-ya-configurado orientacion-posterior reconectando">
@@ -165,7 +168,7 @@ window.renderSuperficie = function (M, D) {
 
   M.$('[data-mq-filas-cuentas]').innerHTML = cuentas.map(function (c) {
     return '<tr>' +
-      '<th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:inherit">' +
+      '<th scope="row" class="mq-th-plano mq-th-plano--cuerpo">' +
         '<span class="mq-iniciales" aria-hidden="true">' + M.esc(c.iniciales) + '</span> ' +
         M.esc(c.nombre + ' ' + c.apellido) + '</th>' +
       '<td>' + M.esc(c.correo) + '</td>' +
@@ -181,7 +184,7 @@ window.renderSuperficie = function (M, D) {
         '<h3 class="mq-body-strong"><span class="mq-iniciales" aria-hidden="true">' + M.esc(c.iniciales) +
         '</span> ' + M.esc(c.nombre + ' ' + c.apellido) + '</h3>' + M.insignia(c.etiquetaSituacion) +
       '</div>' +
-      '<p class="mq-caption" style="margin:8px 0 0">' + M.esc(c.correo) + ' · registro ' +
+      '<p class="mq-caption mq-margen-arriba-2">' + M.esc(c.correo) + ' · registro ' +
         M.esc(c.fechaRegistro) + '</p>' +
       '<div class="mq-acciones-fila">' + acciones(c) + '</div></article>';
   }).join('');
@@ -196,8 +199,8 @@ window.renderSuperficie = function (M, D) {
     return '<li><div class="mq-tarjeta-acceso-modulo">' +
       '<span class="mq-ico-contenedor">' + M.icono(t.i, 'mq-ico--20') + '</span>' +
       '<h3 class="mq-body-strong">' + M.esc(t.t) + '</h3>' +
-      '<p class="mq-caption" style="margin:0">' + M.esc(t.d) + '</p>' +
-      '<a class="mq-btn mq-btn--secundario" href="' + t.h + '" style="margin-top:auto">Abrir</a>' +
+      '<p class="mq-caption mq-sin-margen">' + M.esc(t.d) + '</p>' +
+      '<a class="mq-btn mq-btn--secundario mq-mt-auto" href="' + t.h + '">Abrir</a>' +
     '</div></li>';
   }).join('');
 

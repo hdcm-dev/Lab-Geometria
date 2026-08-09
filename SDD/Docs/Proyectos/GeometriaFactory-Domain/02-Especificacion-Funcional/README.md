@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** README.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -15,8 +15,8 @@
 ## Tabla de contenido
 
 - [1. Qué hay en esta carpeta](#1-qué-hay-en-esta-carpeta)
-- [2. Los doce casos de uso](#2-los-doce-casos-de-uso)
-- [3. Las once reglas de negocio](#3-las-once-reglas-de-negocio)
+- [2. Los trece casos de uso](#2-los-trece-casos-de-uso)
+- [3. Las trece reglas de negocio](#3-las-trece-reglas-de-negocio)
 - [4. Orden de lectura sugerido](#4-orden-de-lectura-sugerido)
 - [5. Artefactos omitidos y su motivo](#5-artefactos-omitidos-y-su-motivo)
 - [6. Notas de uso de esta sección](#6-notas-de-uso-de-esta-sección)
@@ -29,15 +29,15 @@
 | Documento | Propósito | Estado |
 | --- | --- | --- |
 | [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro: catálogos, matriz NB → CU → RN → US, criterio de recorte, omisiones y puntos abiertos. **Es el punto de entrada** | Propuesto |
-| [`Definicion-Modelo-De-Dominio.md`](Definicion-Modelo-De-Dominio.md) | Documento de concepto central: cinco entidades, siete invariantes, dos máquinas de estado y fronteras del dominio | Propuesto |
+| [`Definicion-Modelo-De-Dominio.md`](Definicion-Modelo-De-Dominio.md) | Documento de concepto central: cinco entidades, nueve invariantes vigentes, tres máquinas de estado y fronteras del dominio | Propuesto |
 | [`Glosario-Funcional.md`](Glosario-Funcional.md) | Vocabulario que esta categoría acuña y términos con más de un referente | Propuesto |
-| `Casos-De-Uso/` | Doce casos de uso, uno por archivo | Propuesto |
-| `Reglas-De-Negocio/` | Once reglas de negocio, una por archivo | Propuesto |
+| `Casos-De-Uso/` | Trece casos de uso, uno por archivo | Propuesto |
+| `Reglas-De-Negocio/` | Trece reglas de negocio, una por archivo | Propuesto |
 | `README.md` | Este archivo: índice navegable, orden de lectura y omisiones | Propuesto |
 
 Las carpetas `_legacy/` de `Casos-De-Uso/` y de `Reglas-De-Negocio/` conservan las copias de la emisión del 2026-08-08 con su sufijo de versión. No se editan.
 
-## 2. Los doce casos de uso
+## 2. Los trece casos de uso
 
 Todos describen un **contrato de uso de la superficie pública**. El actor primario es siempre el proyecto de código que consume la biblioteca; el alumno y el administrador son sujetos de las reglas, no actores.
 
@@ -55,10 +55,11 @@ Todos describen un **contrato de uso de la superficie pública**. El actor prima
 | CU-10 | [Resolver el desenlace del trabajo](Casos-De-Uso/CU-10-Resolver-El-Desenlace-Del-Trabajo.md) | NB-09, NB-03 |
 | CU-11 | [Resolver el alcance del administrador sobre un trabajo](Casos-De-Uso/CU-11-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) | NB-09, NB-07 |
 | CU-12 | [Configurar la cuenta de administrador en el primer arranque](Casos-De-Uso/CU-12-Configurar-La-Cuenta-De-Administrador.md) | NB-01 |
+| CU-13 | [Resetear la contraseña de una cuenta de alumno](Casos-De-Uso/CU-13-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) | NB-01, NB-02 |
 
-## 3. Las once reglas de negocio
+## 3. Las trece reglas de negocio
 
-La serie es **contigua de RN-01 a RN-11**. La columna del invariante es la correspondencia que declara `PRODUCT-INTAKE` §17.1.P.2: los invariantes no son reglas distintas, son las mismas vistas desde el dominio.
+La serie es **contigua de RN-01 a RN-13**. La columna del invariante es la correspondencia que declara `PRODUCT-INTAKE` §17.1.P.2: los invariantes no son reglas distintas, son las mismas vistas desde el dominio.
 
 | RN | Título | Invariante que la expresa |
 | --- | --- | --- |
@@ -73,16 +74,18 @@ La serie es **contigua de RN-01 a RN-11**. La columna del invariante es la corre
 | RN-09 | [Toda observación de error indica la posición de la pieza y el campo](Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) | — |
 | RN-10 | [El desenlace es exclusivo del administrador y es terminal](Reglas-De-Negocio/RN-10-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | INV-07 |
 | RN-11 | [El administrador no ve los trabajos en borrador](Reglas-De-Negocio/RN-11-El-Administrador-No-Ve-Los-Borradores.md) | — |
+| RN-12 | [El reseteo de contraseña conserva la cuenta y sus trabajos](Reglas-De-Negocio/RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | INV-09 |
+| RN-13 | [Con la contraseña provisoria sin cambiar, la cuenta no llega a ninguna otra parte](Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | INV-09 |
 
-Las cuatro sin invariante lo están por un motivo declarado en `PRODUCT-INTAKE` §17.1.P.2: RN-07, RN-08 y RN-09 describen comportamientos y no condiciones permanentes, y RN-11 es una regla de alcance de consulta.
+Las cuatro sin invariante lo están por un motivo declarado en `PRODUCT-INTAKE` §17.1.P.2: RN-07, RN-08 y RN-09 describen comportamientos y no condiciones permanentes, y RN-11 es una regla de alcance de consulta. **RN-12 y RN-13 comparten INV-09**, y así lo declara la misma sección del intake: son las dos mitades de la misma condición.
 
 **Dos nombres de archivo conservan un slug que ya no describe del todo su enunciado** —`RN-04-Eliminacion-Acotada-Al-Borrador.md` y `RN-05-Finalizacion-Sin-Errores-De-Validacion.md`—, porque otras categorías ya los citan por esa ruta. La decisión está declarada en `Especificacion-Funcional.md` §8.
 
 ## 4. Orden de lectura sugerido
 
 1. **`Especificacion-Funcional.md`** — primero siempre: da el alcance, la matriz y el criterio de recorte.
-2. **`Definicion-Modelo-De-Dominio.md`** — las entidades, los siete invariantes y las dos máquinas de estado. Los doce casos de uso se leen sobre él, y en particular §5.2, que es donde vive el ciclo de vida completo del trabajo.
-3. **CU-12 y CU-01 a CU-04** — el ciclo de vida de la cuenta: primero la configuración del administrador, que es la que arranca la instancia, y después el auto-registro del alumno, sus transiciones, su credencial y su admisibilidad. **Son dos caminos de alta con estado inicial distinto** y conviene leerlos en ese orden.
+2. **`Definicion-Modelo-De-Dominio.md`** — las entidades, los nueve invariantes vigentes y las tres máquinas de estado, incluida la de la marca de cambio de contraseña pendiente en §5.3. Los trece casos de uso se leen sobre él, y en particular §5.2, que es donde vive el ciclo de vida completo del trabajo.
+3. **CU-12, CU-01 a CU-04 y CU-13** — el ciclo de vida de la cuenta: primero la configuración del administrador, que es la que arranca la instancia, y después el auto-registro del alumno, sus transiciones, su credencial y su admisibilidad. **Son dos caminos de alta con estado inicial distinto** y conviene leerlos en ese orden. **CU-13 va último de este bloque**: el reseteo se entiende sobre la credencial de CU-03 y sobre la admisibilidad de CU-04, que es donde se ejerce la guarda que pone.
 4. **CU-05 a CU-08** — el ciclo de vida del trabajo hasta el envío: constitución, interpretación, observaciones y estado.
 5. **CU-10** — el desenlace, que cierra el recorrido del trabajo.
 6. **CU-09 y CU-11** — el par simétrico de alcance: qué puede el alumno sobre un trabajo y qué puede el administrador.
@@ -94,7 +97,7 @@ Las cuatro sin invariante lo están por un motivo declarado en `PRODUCT-INTAKE` 
 | Artefacto | Motivo de la omisión |
 | --- | --- |
 | `Modelo-Datos/Modelo-Conceptual.md` | La regla de la categoría lo omite para el tipo `library` y el flag `tiene_persistencia` de este proyecto de código es false. El intake declara «no aplica» en §17.1.P.4: el dominio no conoce el motor de persistencia, que materializa `GeometriaFactory-Infrastructure`. El concepto central se documenta en `Definicion-Modelo-De-Dominio.md`, que **no** es un modelo de persistencia |
-| `Modelo-Datos/reglas-conceptuales-de-modelo/RC-XX-<Nombre>.md` | La regla las omite para `library` y dependen del modelo conceptual, que está omitido. Las restricciones de integridad del dominio están declaradas como los siete invariantes y como las once reglas de negocio |
+| `Modelo-Datos/reglas-conceptuales-de-modelo/RC-XX-<Nombre>.md` | La regla las omite para `library` y dependen del modelo conceptual, que está omitido. Las restricciones de integridad del dominio están declaradas como los nueve invariantes y como las trece reglas de negocio |
 
 ## 6. Notas de uso de esta sección
 
@@ -112,3 +115,4 @@ Las cuatro sin invariante lo están por un motivo declarado en `PRODUCT-INTAKE` 
 | 1.2 | 2026-08-09 | **Corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`: se emite **CU-12**, el caso de uso de la capacidad F-01 que faltaba, y el catálogo pasa a **doce**. La cuenta del administrador nace `Habilitado` y con credencial, y la del alumno sigue naciendo `Pendiente`: son dos caminos de alta y la versión anterior los resolvía con un solo estado inicial, con lo que la instancia quedaba inutilizable en el primer arranque. §2 suma CU-12, §3 mantiene las once reglas con RN-01 y RN-02 reasignadas, y §4 reordena el recorrido de lectura del ciclo de vida de la cuenta. |
 | 1.3 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-07**: §4 conservaba un «once casos de uso» en prosa viva, que la emisión de CU-12 dejó desactualizado. |
 | 1.1 | 2026-08-09 | Absorbe el circuito de revisión de `PRODUCT-INTAKE` 1.3 y la resolución de las dos ambigüedades que esta categoría había elevado. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. Los casos de uso pasan de nueve a **once** y las reglas de siete a **once contiguas**, con su invariante y con las cuatro que no tienen ninguno. **Corrige la atribución de INV-04**, que la versión anterior daba como el invariante de RN-08. El orden de lectura incorpora el desenlace y el par simétrico de alcance; §1 registra las carpetas `_legacy/`; §3 declara los dos nombres de archivo que se conservan por estabilidad de citación; y §6 remite al glosario raíz por los términos nuevos y por la forma calificada de `Pendiente`. |
+| 1.4 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**, que incorpora la capacidad **F-26** —reseteo de contraseña por el administrador—, las reglas **RN-12** y **RN-13** y el invariante **INV-09**. §2 pasa de doce a **trece casos de uso** con **CU-13**; §3 pasa de once a **trece reglas contiguas**, con las dos nuevas compartiendo INV-09; §1, §4 y §5 actualizan los recuentos de invariantes —de siete a **nueve vigentes**, con INV-08 ya adoptado por el intake— y de máquinas de estado, que pasan a **tres** con la de la marca de cambio de contraseña pendiente. §4 ubica CU-13 al final del bloque del ciclo de vida de la cuenta, con su motivo. |

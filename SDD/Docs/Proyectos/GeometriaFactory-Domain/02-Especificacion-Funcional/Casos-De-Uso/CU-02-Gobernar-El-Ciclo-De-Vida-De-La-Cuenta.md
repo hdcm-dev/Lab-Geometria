@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-01 y RN-07), §17.1.P.2 (INV-05), §17.1.P.5, §7 (CL-6), §9 (X-3), §11 (RN-B6)
+**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.7 §4 (F-03, **F-26**), §4.1 (RN-01, RN-07 y **RN-12**), §17.1.P.2 (INV-05, INV-08), §17.1.P.5, §7 (CL-6, **CL-7** reescrito), §9 (X-3, **X-2 retirada**), §11 (RN-B6)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -34,6 +34,8 @@
 Sostener las cuatro operaciones que el administrador ejerce sobre una **cuenta de alumno** —habilitar, bloquear, rehabilitar y dar de baja— como transiciones verificables del dominio, admitiendo únicamente las que la máquina de estados declara. Las cuatro forman un solo contrato de uso porque son el mismo acto de admisión visto en cuatro momentos de la vida de la cuenta (`NB-01` §5, criterio de cobertura de las cuatro operaciones).
 
 **Las cuatro alcanzan sólo a las cuentas con papel `Alumno`**, y no es una restricción de este documento: es el enunciado literal de la capacidad, «F-03 · Habilitar, bloquear, rehabilitar y dar de baja física cuentas **de alumno** desde el panel del administrador» (PRODUCT-INTAKE §4). Sobre la cuenta de administrador no procede ninguna de las cuatro.
+
+**El reseteo de contraseña no es una quinta operación de este contrato.** Desde `PRODUCT-INTAKE` 1.7, el administrador también resetea la contraseña de un alumno (F-26), y ese acto vive en [CU-13](CU-13-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) y no acá, por tres motivos: no cambia el estado de cuenta, **no dispara RN-07** y su efecto propio es poner una marca que ninguna de estas cuatro operaciones toca. La distinción no es formal: es la que separa la operación que **elimina** todos los trabajos del alumno de la que los **conserva**.
 
 ## 2. Actores
 
@@ -115,6 +117,7 @@ Los tres rechazos son terminaciones controladas: la cuenta queda exactamente com
 - La baja es física y no un estado: por eso no aparece en la máquina de estados como destino, sino como salida del ciclo de vida.
 - La pérdida de los trabajos de la cuenta dada de baja es un riesgo residual declarado y aceptado aguas arriba (`Vision-Producto.md` §8, RG-06). Alcanza también a los trabajos en estado `Finalizado` y `Rechazado`: la terminalidad de esos dos estados impide que cambien de estado o de contenido (INV-07), no que la baja de la cuenta los arrastre.
 - La eliminación de **un** trabajo, sea por su dueño o por el administrador, no es esta operación: vive en CU-09 y en CU-11.
+- **La baja dejó de ser la salida ante una contraseña olvidada.** Era el único camino declarado hasta `PRODUCT-INTAKE` 1.6, y por RN-07 costaba todos los trabajos del alumno. El intake 1.7 incorpora **F-26**, retira la exclusión **X-2** y reescribe **CL-7** sobre el reseteo de CU-13, que conserva la cuenta y sus trabajos (RN-12). La justificación de RN-07 quedó actualizada en consecuencia: la baja sigue siendo destructiva e irreversible, pero ya no es frecuente por este motivo.
 - **Por qué las cuatro operaciones se cierran sobre la cuenta de administrador.** Bloquearla produce el mismo efecto que darla de baja: por INV-06 no obtendría acceso, y como es única (RN-01) nadie podría desbloquearla. El daño va más allá de que una persona no entre: sin administrador nadie aprueba ni rechaza —CU-10 y CU-11 exigen ese papel—, de modo que **todos los trabajos quedarían en estado `Pendiente` para siempre y el circuito de revisión completo se detendría**. Habilitarla y rehabilitarla no procede por otro motivo: ya está `Habilitado` y nunca sale de ahí.
 
 ## 11. Control de cambios
@@ -125,6 +128,7 @@ Los tres rechazos son terminaciones controladas: la cuenta queda exactamente com
 | 1.1 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` 1.3 y la resolución de la ambigüedad de los invariantes. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. Precisa que la baja arrastra los trabajos **en cualquier estado**, incluidos los dos terminales que el modelo de estados nuevo introduce, y distingue ese arrastre de la terminalidad de INV-07. Cita el enunciado de RN-01 y RN-07 de §4.1 y el de INV-05 de §17.1.P.2. Se califican las ocurrencias de `Pendiente` según `Vision-Producto.md` §9.2. **Correcciones de la ronda r1 del audit**: hallazgo **P3-01**, §9 suma **RN-06** e INV-06, que ya listaban a este caso de uso porque es acá donde el estado de cuenta cambia; hallazgo **P3-04**, la sección opcional se numera §17, como fija `Rules-Especificacion-Funcional.md` §4.3. |
 | 1.2 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-01**. §6 rechazaba únicamente la **baja** de la cuenta de administrador y dejaba las otras tres operaciones sin guarda: nada impedía **bloquearla**, y una cuenta bloqueada no obtiene acceso por INV-06, de modo que se alcanzaba por otra puerta la misma condición sin salida del P0. La corrección no es una decisión de diseño sino una transcripción que faltaba: la capacidad **F-03** del intake ya declara las cuatro operaciones sobre «cuentas **de alumno**», y esa cita queda escrita en §1 como fundamento para que nadie la revierta creyéndola inventada. §1, §3 y el paso 2 del flujo acotan el papel de la cuenta; el código `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` se **retira** y lo reemplaza `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, que cubre las cuatro, con su fila de retiro declarada y sin reciclar el identificador; se suman los criterios CA-06 y CA-07, que cierran el bloqueo y las dos operaciones restantes; y §10 declara el efecto completo, que no se agota en el acceso: sin administrador el circuito de revisión entero se detiene. |
 
+| 1.3 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**, que incorpora la capacidad **F-26** y la regla **RN-12**. **Ninguna de las cuatro operaciones de este contrato cambia** y no se agrega ninguna condición de rechazo. §1 declara que el **reseteo de contraseña no es una quinta operación** de este contrato y vive en **CU-13**, con los tres motivos que lo separan: no cambia el estado de cuenta, no dispara RN-07 y pone una marca que estas cuatro no tocan. §10 registra que **la baja dejó de ser la salida ante una contraseña olvidada**, con el retiro de X-2 y la reescritura de CL-7. |
 ## 17. Compatibilidad de la superficie pública
 
 Agregar un estado de cuenta al conjunto cerrado, o una transición nueva, es un cambio de alcance de este caso de uso y sube la versión mayor del documento. Quitar una transición admitida es un cambio incompatible para `GeometriaFactory-Application`, que la invoca por referencia de proyecto de código.

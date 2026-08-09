@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** Glosario-UX.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
@@ -91,7 +91,7 @@ Y la distinción que completa el cuadro, aunque no sea polisemia de la palabra: 
 
 | Referente | Forma que corresponde | Evidencia de colisión |
 | --- | --- | --- |
-| El resultado de una de las tres comprobaciones de autorización: pertenencia, facultad o alcance | **Siempre calificada**: «negativa por pertenencia», «negativa por facultad», «negativa por alcance». Es el uso que domina la sección | `DX-Error-Messages.md` §2.4 y `DX-Developer-Experience.md` §1.4 usan los dos referentes en la misma sección: enumeran las tres calificadas y hablan además de la negativa como forma de terminación |
+| El resultado de una de las **cuatro** comprobaciones de autorización: pertenencia, facultad, alcance o cambio de contraseña pendiente | **Siempre calificada**: «negativa por pertenencia», «negativa por facultad», «negativa por alcance», «negativa por cambio de contraseña pendiente». Es el uso que domina la sección | `DX-Error-Messages.md` §2.4 y `DX-Developer-Experience.md` §1.4 usan los dos referentes en la misma sección: enumeran las cuatro calificadas y hablan además de la negativa como forma de terminación |
 | Cualquier terminación en la que el caso de uso no hace lo que se le pidió, incluidas las que nada tienen que ver con autorización | **«negativa sin escritura»** cuando se habla de la forma de terminación, que es donde el término aparece sin calificar por comprobación | `DX-Error-Messages.md` §2.3 declara la forma, y §2.4 declara las tres calificadas |
 
 La forma desnuda «negativa» sólo se admite cuando la calificación aparece en la misma oración y el referente ya quedó fijado.
@@ -165,3 +165,4 @@ Los seis términos normativos del framework —producto, unidad de entrega, mód
 | 1.0 | 2026-08-09 | Emisión inicial. Declara los veintitrés términos que esta categoría acuña para la superficie pública de dos caras y el recorrido de integración, entre ellos las tres negativas de autorización, la traducción prohibida, la frontera de autorización, la terminación degradada y el adaptador de puerto; los dos términos con más de un referente dentro de la sección —«error», con sus cuatro referentes y la prohibición de la forma desnuda, y «negativa», con sus dos—, cada uno con su evidencia de colisión verificada por sección; los tres casos que deliberadamente no se corrigen, entre ellos la superordinación de «observación» con la precisión de que el comentario del administrador no lo es, y la de «puerto», cuyos contextos son disjuntos; y los términos referenciados de las tres fuentes aguas arriba —el glosario raíz de 00, el glosario funcional de 02 de este proyecto de código y el de `GeometriaFactory-Domain`—, que no se redefinen. |
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **Alineación con el 02 corregido**: la cifra de condiciones catalogadas pasa de 27 a **34** y el upstream, de CU-01 a CU-10. §2 da de alta dos términos que la sección nueva de rechazos del dominio acuñó —**«condición agregada»** y **«rechazo inalcanzable por construcción»**, con la distinción frente al rechazo equivalente— y llega a **veinticinco**. §4.2 suma como **referenciados y no redefinidos** los dos términos que la categoría 02 acuñó en su propia corrección, «camino de alta» y «metadato de orquestación», y «cantidad de figuras del conjunto raíz», que 02 referencia del modelo del dominio y esta sección referencia igual. |
 | 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-16**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. El puntero al puerto de reloj en §4.2 conservaba la nomenclatura anterior a los **sellos** —«por donde obtiene la fecha»— y pasa a la forma vigente del glosario de 02, con los tres sellos nombrados. Es el único cambio: el término no se redefine, sólo se corrige el resumen de una línea del término referenciado. |
+| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26**. §3 actualiza el primer referente de «negativa»: las comprobaciones de autorización pasan de **tres a cuatro** con la del cambio de contraseña pendiente, y la forma calificada suma «negativa por cambio de contraseña pendiente». |

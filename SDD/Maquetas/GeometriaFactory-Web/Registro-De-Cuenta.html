@@ -16,9 +16,9 @@
 
     <!-- Bloque de éxito: reemplaza el formulario y cierra el lazo. -->
     <div data-mq-estado="exito" role="status">
-      <span class="mq-ico-contenedor" style="background:var(--color-background-success);color:var(--color-text-success)"
+      <span class="mq-ico-contenedor mq-ico-contenedor--exito"
             aria-hidden="true" data-mq-check></span>
-      <h1 style="margin-top:12px">Tu cuenta quedó registrada</h1>
+      <h1 class="mq-mt-3">Tu cuenta quedó registrada</h1>
       <p class="mq-subtitulo">
         Todavía no podés ingresar: el docente tiene que habilitarla. No vas a recibir ningún correo.
       </p>
@@ -50,17 +50,17 @@
         La solicitud llegó incompleta. Revisá el campo señalado y volvé a intentar.
       </p>
 
-      <div class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" style="margin-bottom:16px">
+      <div class="mq-aviso-indisponible mq-mb-5" data-mq-estado="indisponible" role="alert">
         <h2>No pudimos registrar tu cuenta</h2>
         <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos.
            Lo que escribiste sigue acá: probá de nuevo.</p>
-        <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el registro</button>
+        <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar el registro</button>
       </div>
 
       <div data-mq-estado="cargando" aria-hidden="true">
-        <div class="mq-esqueleto" style="width:30%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
-        <div class="mq-esqueleto" style="width:34%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
-        <div class="mq-esqueleto" style="width:38%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+        <div class="mq-esqueleto mq-ancho-30"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+        <div class="mq-esqueleto mq-ancho-34"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+        <div class="mq-esqueleto mq-ancho-38"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
       </div>
 
       <!-- Tres campos y ningún campo de contraseña. La ausencia es la
@@ -94,7 +94,7 @@
 
       <!-- Única salida de la superficie. No hay enlace de recuperación:
            no existe recuperación en este producto. -->
-      <p class="mq-caption" style="margin-top:16px">¿Ya tenés cuenta? <a href="Ingreso.html">Ingresar</a></p>
+      <p class="mq-caption mq-mt-5">¿Ya tenés cuenta? <a href="Ingreso.html">Ingresar</a></p>
     </div>
   </main>
 

@@ -12,13 +12,13 @@
 
 <main id="mq-main" class="mq-portada">
   <h1>Maqueta de validación visual — Fábrica de Geometría</h1>
-  <p class="mq-subtitulo" style="max-width:70ch">
+  <p class="mq-subtitulo mq-prosa">
     Once superficies del proyecto de código <strong>GeometriaFactory-Web</strong>, una por wireframe de la
     categoría 03. Cada una demuestra sus estados desde la barra de validación del pie, que es un
     instrumento de la maqueta y no forma parte del producto.
   </p>
 
-  <div class="mq-banda mq-banda--info" style="max-width:70ch">
+  <div class="mq-banda mq-banda--info mq-prosa">
     <span>
       <strong>Cuenta de administrador de prueba.</strong> Correo <code data-mq-correo-admin></code>,
       contraseña <code data-mq-clave-admin></code>. Es una credencial de la maqueta, no del producto:
@@ -26,16 +26,16 @@
     </span>
   </div>
 
-  <h2 class="mq-title" style="margin-top:28px">Shell de acceso</h2>
+  <h2 class="mq-title mq-mt-9">Shell de acceso</h2>
   <ul class="mq-lista-superficies" data-mq-lista="acceso"></ul>
 
-  <h2 class="mq-title" style="margin-top:28px">Shell de trabajo</h2>
+  <h2 class="mq-title mq-mt-9">Shell de trabajo</h2>
   <ul class="mq-lista-superficies" data-mq-lista="trabajo"></ul>
 
-  <h2 class="mq-title" style="margin-top:28px">Transversal</h2>
+  <h2 class="mq-title mq-mt-9">Transversal</h2>
   <ul class="mq-lista-superficies" data-mq-lista="transversal"></ul>
 
-  <div class="mq-banda mq-banda--info" style="max-width:70ch;margin-top:24px">
+  <div class="mq-banda mq-banda--info mq-prosa mq-mt-9">
     <span>
       <strong>La resolución del trabajo no tiene ruta propia.</strong> Es un bloque alojado dentro de
       la vista de trabajo, que aparece sólo para el administrador y sólo mientras el trabajo está en
@@ -45,7 +45,7 @@
     </span>
   </div>
 
-  <h2 class="mq-title" style="margin-top:28px">Contrato de campos que la maqueta exhibe</h2>
+  <h2 class="mq-title mq-mt-9">Contrato de campos que la maqueta exhibe</h2>
   <p class="mq-subtitulo">
     Cada campo con su tipo, su ejemplo y el documento del que sale. Los datos viven exclusivamente en
     <code>assets/js/Datos-Maqueta.js</code>: ningún HTML los hardcodea.
@@ -57,7 +57,7 @@
     </table>
   </div>
 
-  <h2 class="mq-title" style="margin-top:28px">Lo que esta maqueta no puede contradecir</h2>
+  <h2 class="mq-title mq-mt-9">Lo que esta maqueta no puede contradecir</h2>
   <ul class="mq-body" data-mq-invariantes></ul>
 </main>
 
@@ -90,7 +90,7 @@ window.renderSuperficie = function (M, D) {
       return '<li><a href="' + s.h + '"><div class="mq-tarjeta-acceso-modulo">' +
         '<span class="mq-ico-contenedor">' + M.icono(s.i, 'mq-ico--20') + '</span>' +
         '<h3 class="mq-body-strong">' + M.esc(s.t) + '</h3>' +
-        '<p class="mq-caption" style="margin:0">' + M.esc(s.d) + '</p>' +
+        '<p class="mq-caption mq-sin-margen">' + M.esc(s.d) + '</p>' +
       '</div></a></li>';
     }).join('');
   });
@@ -99,7 +99,7 @@ window.renderSuperficie = function (M, D) {
   M.$('[data-mq-clave-admin]').textContent = D.credencialDeMaqueta.contrasena;
 
   M.$('[data-mq-contrato]').innerHTML = D.contratoDeCampos.map(function (c) {
-    return '<tr><td>' + M.esc(c.entidad) + '</td><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;font-weight:500;color:inherit">' +
+    return '<tr><td>' + M.esc(c.entidad) + '</td><th scope="row" class="mq-th-plano mq-th-plano--fuerte">' +
       M.esc(c.campo) + '</th><td>' + M.esc(c.tipo) + '</td><td><code>' + M.esc(c.ejemplo) + '</code></td>' +
       '<td class="mq-caption">' + M.esc(c.origen) + '</td></tr>';
   }).join('');

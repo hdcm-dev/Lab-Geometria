@@ -586,7 +586,9 @@
       // Rechazado CON comentario. Texto: Wireframes-Resolucion-Del-Trabajo.md §2.
       comentario: 'Revisá el área del cubo.',
       fechaDesenlace: '13/08/2026',
-      origen: 'Wireframes-Listado-De-La-Comision.md §2 + intake §20.E-3'
+      // El dueño declarado del conjunto de datos de ejemplo del alumno es
+      // Wireframes-Panel-De-Trabajos-Del-Alumno.md §2, por la resolución de H-3.
+      origen: 'Wireframes-Panel-De-Trabajos-Del-Alumno.md §2 + intake §20.E-3'
     },
     {
       id: 'T-5',
@@ -623,7 +625,13 @@
       { severidad: 'Advertencia', etiqueta: 'advertencia', figura: 0, campo: 'Volumen',
         declarado: '343.00', derivado: '1029.00' }
     ],
-    origen: 'intake §20.E-2'
+    /* La pieza que el esquema del wireframe muestra bajo «No se dibujaron»,
+       para que la superficie pueda demostrar la lista aunque el texto de
+       partida dibuje todo. Es dato del dominio: vive acá y no en el HTML. */
+    piezasNoDibujadas: [
+      { indice: 1, motivo: 'tipo no dibujable' }
+    ],
+    origen: 'intake §20.E-2; la pieza no dibujada, de Wireframes-Envio-De-Trabajo.md §2'
   };
 
   /* ==========================================================================

@@ -2,11 +2,11 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
-**Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (tercer, cuarto y quinto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §5 (segundo criterio); `../../../../00-Contexto/Vision-Producto.md` §9.2 (pieza en su segundo referente, forma calificada de `Pendiente`); `../../../../00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-05), §4.1 (RN-01, RN-06), §6 (flujo 1), §14 (RA-01, RA-03), §17.6 P.3, **P.5**, P.11 punto 1
+**Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (tercer, cuarto y quinto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §5 (segundo criterio); `../../../../00-Contexto/Vision-Producto.md` §9.2 (pieza en su segundo referente, forma calificada de `Pendiente`); `../../../../00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.7**, §4 (F-05, **F-26**), §4.1 (RN-01, RN-06, **RN-13**), §6 (flujo 1), §9 (**X-2 retirada**), §14 (RA-01, RA-03), §17.1.P.2 (**INV-09**), §17.6 P.3, **P.5**, P.11 punto 1
 **Trazabilidad downstream:** `03-UX-UI-DX` de este proyecto de código; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
 
 ---
@@ -67,6 +67,7 @@ El actor primario es uno solo. El papel que la persona ejerce —alumno o admini
 | FA-03 | La persona que ingresa es el administrador | El canje es idéntico y sólo cambia el valor del papel. La pieza pública arma el panel del administrador | El flujo continúa en el paso 7 |
 | FA-04 | La persona pide una ruta del panel sin tener sesión | La pieza pública no arma la ruta y devuelve a la de ingreso, sin revelar qué había en la ruta pedida | El flujo vuelve al paso 1 |
 | FA-05 | Un alumno con sesión pide una ruta del panel del administrador | La pieza pública no arma la ruta y devuelve al panel del alumno, sin revelar qué había en la ruta pedida | El flujo vuelve al paso 7 |
+| FA-07 | La cuenta está habilitada y con contraseña, y el administrador se la **reseteó**: llega con la marca de cambio de contraseña pendiente | El canje **procede** —la persona ingresa, y la credencial de sesión se custodia igual que siempre—, pero la pieza pública la lleva al **cambio forzado** de CU-03 en lugar de al panel de su papel, y ninguna otra ruta queda disponible hasta que lo complete (RN-13, INV-09). **No es un rechazo de ingreso**: distinguirlo importa, porque la persona sí tiene que poder entrar para poder cambiarla | El flujo continúa en CU-03, FA-04 |
 | FA-06 | El circuito se corta y se restablece | La pieza pública muestra su cartel de reconexión y, al restablecerse, la sesión sigue vigente porque la credencial nunca vivió en el navegador. El tratamiento del cartel es de CU-10 | El flujo vuelve al punto donde la persona estaba |
 
 ## 6. Excepciones y errores
@@ -76,6 +77,7 @@ El actor primario es uno solo. El papel que la persona ejerce —alumno o admini
 | `CONTRATO_CREDENCIAL_INVALIDA` | El correo o la contraseña no corresponden a ninguna cuenta | La pieza pública muestra un único mensaje que **no declara cuál de los dos campos falló**. Terminación controlada: no hay reintento automático |
 | `CONTRATO_CUENTA_NO_HABILITADA` | La cuenta está `Pendiente` o bloqueada | Handoff a FA-01: se muestra el motivo y no se otorga sesión |
 | `CONTRATO_CONTRASENA_NO_ESTABLECIDA` | Primer ingreso efectivo de una cuenta ya habilitada | Handoff a FA-02, que deriva a CU-03 |
+| `CONTRATO_CAMBIO_DE_CONTRASENA_PENDIENTE` [PENDIENTE, CU-04 §10] | La cuenta fue reseteada por el administrador y todavía no cambió la provisoria | Handoff a FA-07: **se otorga sesión** y la persona queda confinada al cambio forzado. Es la diferencia con `CONTRATO_CUENTA_NO_HABILITADA`, donde no hay sesión de ningún tipo |
 | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | Falta el correo o la contraseña | La pieza pública señala el campo faltante. Recuperación por corrección y reintento |
 | `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Handoff a CU-10: estado degradado explícito, sin dirección de servicio interno en el mensaje, y sin excepción sin manejar |
 
@@ -97,6 +99,7 @@ El actor primario es uno solo. El papel que la persona ejerce —alumno o admini
 | CA-05 | Un alumno con sesión iniciada | Pide por dirección directa una ruta del panel del administrador | La pieza pública no arma esa ruta, lo devuelve a su propio panel y no revela qué contenía |
 | CA-06 | Una sesión iniciada | La persona cierra sesión y vuelve a pedir una ruta del panel | Es devuelta a la ruta de ingreso; la credencial de sesión ya no está en el estado del circuito |
 | CA-07 | Un recorrido completo de ingreso y navegación por el panel | Se inspecciona el tráfico de red del navegador | Cero peticiones del navegador hacia la pieza de datos, y ningún mensaje visible contiene una dirección de servicio interno |
+| CA-08 | Una cuenta habilitada a la que el administrador le reseteó la contraseña | La persona ingresa con la provisoria | **Obtiene sesión** y aterriza en el cambio forzado de CU-03, no en el panel de su papel. Ninguna otra ruta de su papel se arma hasta que lo complete |
 
 ## 9. Trazabilidad
 
@@ -115,10 +118,11 @@ El actor primario es uno solo. El papel que la persona ejerce —alumno o admini
 - **CA-02 es el criterio que materializa la decisión más consecuente del producto.** El intake lo declara verificable con las herramientas de desarrollo (§17.6 P.5), y es la razón por la que la llamada a la pieza de datos la hace el servidor de la pieza pública y no el navegador: sin eso vuelven el contenido mixto, la negociación de origen cruzado y la exposición de la dirección del servidor propio.
 - El tramo entre la pieza pública y la pieza de datos puede viajar sin cifrar, y el riesgo está **aceptado por escrito** aguas arriba (`PRODUCT-INTAKE` §11, RN-B5). Este caso de uso no lo reabre ni propone mitigarlo: esa decisión es de 05-Arquitectura-Tecnica.
 - La protección de rutas de FA-04 y FA-05 es necesaria pero no suficiente: la pertenencia y el papel los verifica la pieza de datos en cada solicitud. Ocultar una ruta no es hacer cumplir una regla.
-- No hay recuperación de contraseña olvidada, por la exclusión X-2. La resuelve el administrador en CU-04, con la consecuencia declarada de que la baja arrastra los trabajos.
+- **No hay recuperación autónoma de contraseña olvidada**, porque no hay canal de correo (X-1). Lo que sí hay desde el `PRODUCT-INTAKE` 1.7, que **retiró la exclusión X-2**, es el **reseteo por el administrador** de CU-04 FA-06: fija una provisoria, se la comunica al alumno y **la cuenta conserva todos sus trabajos** (RN-12). La consecuencia que este caso de uso declaraba —que el remedio arrastraba los trabajos— **dejó de ser cierta** y no debe seguir citándose.
 
 ## 11. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
+| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26** con su regla **RN-13** y el invariante **INV-09**. **§5**: **FA-07** nueva, el ingreso de una cuenta reseteada, que **sí obtiene sesión** y queda confinada al cambio forzado de CU-03; se declara explícitamente por qué no es un rechazo de ingreso. **§6**: `CONTRATO_CAMBIO_DE_CONTRASENA_PENDIENTE`, rotulado **pendiente**, con la distinción frente a `CONTRATO_CUENTA_NO_HABILITADA`: en aquél no hay sesión de ningún tipo. **§8**: CA-08 nueva. **§10**: la nota sobre la ausencia de recuperación **se reescribe**: X-2 quedó retirada, lo que sigue excluido es la recuperación autónoma por correo, y la afirmación de que el remedio arrastra los trabajos dejó de ser cierta. Sube minor: agrega un flujo alternativo, un código y un criterio de aceptación, sin invalidar ninguna decisión previa. |

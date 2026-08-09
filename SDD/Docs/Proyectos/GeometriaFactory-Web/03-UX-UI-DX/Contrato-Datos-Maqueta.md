@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Contrato-Datos-Maqueta.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Maquetador de validación visual (AG-03M)
@@ -67,9 +67,9 @@ El insumo directo es el arreglo `CONTRATO_DE_CAMPOS` de `Datos-Maqueta.js`, que 
 | `DM-24` | Pieza | `tipo` | Discriminante declarado en el texto | Sí | `Ortoedro` | `SUP-06`, `SUP-07`, `SUP-08` | `Pieza` · Tipo | Seis tipos dibujables. Un tipo fuera del conjunto conocido produce observación de especie error de validación (RN-09) y condición `TIPO_NO_DIBUJABLE` de la fachada |
 | `DM-25` | Condición del dibujo | `indice` | Índice entero | Sí | `1` | `SUP-06`, `SUP-07`, `SUP-08` | Del resultado de dibujo de la fachada, no del modelo de dominio | Se presenta **junto a la escena, nunca en la lista de observaciones**: no es un error del trabajo |
 | `DM-26` | Condición del dibujo | `motivo` | Texto derivado del código de condición | Sí | `tipo no dibujable` | `SUP-06`, `SUP-07`, `SUP-08` | Realización de presentación de los códigos de `Definicion-Contrato-De-Fachada.md` §6 | Ningún mensaje visible incluye el código en crudo (RA-03) |
-| `DM-27` | Identidad de versión | `versionLegible` | Cadena ya formada | Sí | `Versión 1.4.2` | Las once superficies, en el sello de versión | `Design-Rules-Identidad-De-Version.md` §2 | Llega ya formada: **no se compone en la vista** |
-| `DM-28` | Identidad de versión | `identificadorDeConstruccion` | Referencia opaca | Sí | `a3f81c6` | `SUP-01`, `SUP-03`, y el detalle de diagnóstico | Ídem | Es identidad del artefacto y **nunca topología** |
-| `DM-29` | Identidad de versión | `esPreliminar` / `origenIndeterminado` | Booleanos | Sí | `false` / `false` | `SUP-01`, `SUP-03` | Ídem | Gobiernan los estados `EST-13` y `EST-14` de la línea de base visual |
+| `DM-27` | Identidad de versión | `versionLegible` | Cadena ya formada | Sí | `Versión 1.4.2` | Las once superficies, en el sello de versión | **No es un atributo del modelo conceptual**: la identidad de versión es del artefacto desplegado, no del dominio | Llega ya formada: **no se compone en la vista**. La rige `Design-Rules-Identidad-De-Version.md` §2 |
+| `DM-28` | Identidad de versión | `identificadorDeConstruccion` | Referencia opaca | Sí | `a3f81c6` | `SUP-01`, `SUP-03`, y el detalle de diagnóstico | Ídem: **no es un atributo del modelo conceptual** | Es identidad del artefacto y **nunca topología**. Ídem `Design-Rules-Identidad-De-Version.md` §2 |
+| `DM-29` | Identidad de versión | `esPreliminar` / `origenIndeterminado` | Booleanos | Sí | `false` / `false` | `SUP-01`, `SUP-03` | Ídem: **no es un atributo del modelo conceptual** | Gobiernan los estados `EST-13` y `EST-14` de la línea de base visual. Ídem `Design-Rules-Identidad-De-Version.md` §2 |
 
 ## 3. Formato de presentación, que también es contrato
 
@@ -133,4 +133,5 @@ Son las que la maqueta respeta y que el sensado de deriva verifica:
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-09 | Corrección del hallazgo **`AB2-17`** de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`: `DM-27` a `DM-29` ponían una regla del framework —`Design-Rules-Identidad-De-Version.md` §2— en la columna de correspondencia con el modelo conceptual, donde las demás filas ponen entidad y atributo. Las tres pasan a declarar, como ya lo hacen `DM-07` y `DM-16`, que **no son atributos del modelo conceptual**, y la referencia a la regla se mueve a la columna de nota. Ningún campo, tipo, obligatoriedad ni superficie cambia. |
 | 1.0 | 2026-08-09 | Emisión inicial, al cierre de la Fase B2 con la maqueta aprobada por el Product Owner. Veintinueve campos exhibidos con su tipo, su obligatoriedad, su ejemplo, sus superficies y su correspondencia con el modelo conceptual del dominio; el formato de presentación como parte del contrato; ocho entradas de campos del modelo conceptual que ninguna superficie exhibe, con su motivo; los cuatro valores compuestos para la maqueta con su situación al cierre de la fase; siete invariantes de datos; y cinco evidencias. |

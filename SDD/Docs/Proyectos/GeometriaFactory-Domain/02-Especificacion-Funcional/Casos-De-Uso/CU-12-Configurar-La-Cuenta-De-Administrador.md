@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-12-Configurar-La-Cuenta-De-Administrador.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -105,7 +105,7 @@ Los cinco rechazos terminan de forma controlada: el dominio no construye la enti
 | --- | --- |
 | Necesidad de negocio | NB-01, en su criterio de unicidad de la cuenta de administrador |
 | Reglas de negocio aplicables | [RN-01](../Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [RN-02](../Reglas-De-Negocio/RN-02-Correo-Del-Alumno-Unico.md) |
-| Invariantes | INV-05, INV-01. Ver además el **invariante candidato INV-08** propuesto en [`Definicion-Modelo-De-Dominio.md`](../Definicion-Modelo-De-Dominio.md) §4.2, que expresa la propiedad que este caso de uso sostiene y que **no viene del intake** |
+| Invariantes | INV-05, INV-01 e **INV-08**, que es el que expresa como condición permanente la propiedad que este caso de uso sostiene: la cuenta con papel `Administrador` está siempre `Habilitado`. Lo propuso esta categoría como candidato y `PRODUCT-INTAKE` §17.1.P.2 lo **adoptó**; el recorrido está en [`Definicion-Modelo-De-Dominio.md`](../Definicion-Modelo-De-Dominio.md) §4.2 |
 | Historias de usuario a generar en 06 | US de configuración del administrador en el primer arranque, US de rechazo de la segunda configuración |
 | Componentes esperados en 05 | Camino de alta propio en la entidad de alumno, distinto del auto-registro, con su estado inicial |
 | Tests previstos en 08 | Pruebas unitarias puras de la configuración y de los cinco rechazos, más la prueba de recorrido de la etapa `c`: configurar y consultar admisibilidad en la misma batería, que es la que habría detectado el defecto |
@@ -125,6 +125,7 @@ Los cinco rechazos terminan de forma controlada: el dominio no construye la enti
 | 1.0 | 2026-08-09 | Emisión inicial. Nace de la corrección del **P0** que la auditoría de `GeometriaFactory-Application` detectó y que el informe `B-02-03-GeometriaFactory-Application-r1.md` reporta: la versión anterior de esta categoría no tenía caso de uso para la capacidad **F-01** y resolvía la configuración del administrador como un flujo alternativo de CU-01, que fija el estado inicial en `Pendiente` para toda cuenta. Con eso la cuenta del administrador nacía `Pendiente`, no podía obtener acceso por INV-06 y no había ninguna otra cuenta que pudiera habilitarla: la instancia quedaba inutilizable en el primer arranque. Este documento separa el segundo camino de alta, con su estado inicial `Habilitado`, su credencial fijada en el acto y su ventana de alta única. `NB-01` §7 ya lo preveía como caso de uso propio. |
 | 1.1 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-02**. §9 remitía a §4.3 de `Definicion-Modelo-De-Dominio.md` a buscar el invariante candidato INV-08, que vive en **§4.2**: la remisión se escribió con la numeración previa a la inserción de esa subsección. Alcanzado además por **H-01**: §10 citaba el código retirado `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y pasa a citar el que lo reemplaza, con las cuatro operaciones en lugar de sólo la baja. |
 
+| 1.2 | 2026-08-09 | Corrección de una afirmación que quedó falsa aguas arriba, alcanzada al propagar `PRODUCT-INTAKE` **1.7**. §9 declaraba a **INV-08** como «invariante candidato… que no viene del intake», y §17.1.P.2 lo incorpora rotulado «**adoptado**». La fila de invariantes pasa a declararlo vigente, junto con INV-05 e INV-01. **Ningún flujo, código ni criterio de aceptación de este caso de uso cambia**, y el reseteo de contraseña de F-26 no lo toca: no procede sobre la cuenta de administrador (CU-13 §6). |
 ## 17. Compatibilidad de la superficie pública
 
 Los dos caminos de alta son parte del contrato y no se fusionan: fusionarlos reintroduce el defecto que este documento corrige. Agregar un dato obligatorio a la configuración es un cambio incompatible para `GeometriaFactory-Application`, que la invoca por referencia de proyecto de código.

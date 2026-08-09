@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/) completo (diez casos de uso, `Especificacion-Funcional.md` con su §3 de puertos y su §4 de comprobaciones transversales, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` §9 y `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/` (RN-01 a RN-11 y los doce casos de uso que esta capa orquesta); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.2, §4.1, §4.2 y §16
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/) completo (once casos de uso, `Especificacion-Funcional.md` con su §3 de puertos y su §4 de comprobaciones transversales, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` §9 y `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/` (RN-01 a RN-11 y los doce casos de uso que esta capa orquesta; RN-12 y RN-13 todavía sin archivo allá); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.2, §4.1, §4.2 y §16
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
 
 ---
@@ -41,7 +41,7 @@ Y lo segundo, que es la razón de que `tiene_auth` valga true: **esta capa no au
 | --- | --- | --- |
 | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) | Marco DX: rol de intervención, qué es la superficie pública de dos caras, la frontera entre autorizar y autenticar, las tres negativas, onboarding en tres tramos, quick-start, ubicación de los cuatro modos de Diátaxis, principios de error, métricas y lazo de retroalimentación. **Es el punto de entrada** | Propuesto |
 | [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) | Recorrido de la primera hora: prerrequisitos, primer ejemplo con dobles, cómo leer una negativa, veintitrés diagnósticos frecuentes y, al final, la inversión de dependencias en la práctica con los cuatro puertos y el procedimiento de dónde va algo nuevo | Propuesto |
-| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de las **34 condiciones de error** derivadas una por una de la §6 de los diez casos de uso, con su categoría, su forma de terminación y su diagnóstico accionable, más el tratamiento de las tres negativas de autorización y la verificación mecánica de cobertura | Propuesto |
+| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de las **36 condiciones de error** derivadas una por una de la §6 de los once casos de uso, con su categoría, su forma de terminación y su diagnóstico accionable, más el tratamiento de las **cuatro** negativas de autorización y la verificación mecánica de cobertura | Propuesto |
 | [`Glosario-UX.md`](Glosario-UX.md) | Vocabulario que esta categoría acuña, los dos términos con más de un referente y los que se referencian sin redefinir | Propuesto |
 | `README.md` | Este archivo: índice navegable, orden de lectura, omisiones y criterios no aplicables | Propuesto |
 
@@ -55,7 +55,7 @@ No hay carpeta `_legacy/`: esta categoría nunca se había emitido para este pro
 4. **[`Glosario-UX.md`](Glosario-UX.md)** — conviene tenerlo a mano desde el principio si el lector viene de otra categoría, sobre todo por la regla de que «error» a secas no se escribe acá y por la polisemia de «repositorio», que 02 ya había declarado.
 5. **[`DX-Developer-Experience.md`](DX-Developer-Experience.md) §4 a §7** — Diátaxis, métricas y retroalimentación, que son las decisiones de mantenimiento de la sección.
 
-La sección aguas arriba, [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), tiene su propio orden de lectura de cinco pasos en su [`README.md`](../02-Especificacion-Funcional/README.md), y esta sección no lo duplica: lo referencia. Su recomendación vale también acá: **sin §3 y §4 de `Especificacion-Funcional.md`, los diez casos de uso se leen mal.**
+La sección aguas arriba, [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), tiene su propio orden de lectura de cinco pasos en su [`README.md`](../02-Especificacion-Funcional/README.md), y esta sección no lo duplica: lo referencia. Su recomendación vale también acá: **sin §3 y §4 de `Especificacion-Funcional.md`, los once casos de uso se leen mal.**
 
 ## 4. Artefactos omitidos y su motivo
 
@@ -106,3 +106,4 @@ Los criterios siguientes de `Rules-UX-UI-DX.md` §6 son de la variante UX/UI o e
 | 1.0 | 2026-08-09 | Emisión inicial del índice de la sección, que nunca se había emitido para este proyecto de código. Enumera los cuatro artefactos DX vigentes con su propósito y su estado, la variante aplicada con su justificación y los dos rasgos que hacen específica a la sección —la inversión de dependencias y la frontera entre autorizar y autenticar con sus tres negativas—, el orden de lectura de cinco pasos, las ocho omisiones con su motivo declarado, los siete criterios de aceptación de la variante UX/UI declarados no aplicables sin darlos por cumplidos, y la declaración de no aplicabilidad del quick-start en el catálogo de errores por ser del modo reference. Deja citado el punto abierto del identificador del puerto de repositorio de cuentas sin reabrirlo. |
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **Alineación con el 02 corregido**: diez casos de uso y **34 condiciones** en lugar de nueve y 27, veintitrés diagnósticos en la guía en lugar de dieciocho, y el orden de lectura remite además a §1.4 —los dos caminos de alta— y a §2.5 —los rechazos del dominio que acá no ocurren— del catálogo. Los puntos abiertos citados y no reabiertos pasan de cuatro a **cinco**, con el de los sellos de alta, de modificación y de desenlace, que el modelo del dominio no declara como atributos. Las referencias internas al catálogo se corrigen tras la renumeración de **H-09**: la verificación mecánica es su §7.2 y la declaración de no aplicabilidad del quick-start, su §7.4. |
 | 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-15**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. La cabecera de trazabilidad decía **once** casos de uso de `GeometriaFactory-Domain` y son **doce** desde que ese proyecto de código emitió su CU-12; el catálogo de esta misma sección ya decía doce, de modo que la sección se contradecía consigo misma. Es el único cambio. |
+| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26**. Los recuentos de la sección aguas arriba pasan a **once casos de uso**, el catálogo de condiciones de **34 a 36**, y las negativas de autorización de **tres a cuatro**. |

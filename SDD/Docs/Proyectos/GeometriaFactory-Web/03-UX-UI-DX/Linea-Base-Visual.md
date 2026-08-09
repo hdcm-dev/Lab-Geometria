@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Linea-Base-Visual.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Maquetador de validación visual (AG-03M)
@@ -20,6 +20,7 @@
 - [4. Estados (`EST-XX`)](#4-estados-est-xx)
 - [5. Rutas de navegación (`NAV-XX`)](#5-rutas-de-navegación-nav-xx)
 - [6. Lo que la maqueta exhibe y no forma parte de la línea de base](#6-lo-que-la-maqueta-exhibe-y-no-forma-parte-de-la-línea-de-base)
+  - [6.1 Lo que el contrato declara y esta línea de base no validó visualmente](#61-lo-que-el-contrato-declara-y-esta-línea-de-base-no-validó-visualmente)
 - [7. Evidencia](#7-evidencia)
 - [8. Control de cambios](#8-control-de-cambios)
 
@@ -137,8 +138,8 @@ Setenta y tres componentes, tomados de la sección 3 de los once wireframes y ve
 | `CMP-68` | Bloque de comentario | `Vista-De-Trabajo` | Texto libre, a lo sumo uno | **Bloque propio, separado de las observaciones.** Sin severidad, sin índice, sin campo señalado, sin tono de alerta. **No se dibuja si no viene poblado** | — |
 | `CMP-69` | Lista de observaciones | `Vista-De-Trabajo` | Severidad, índice de figura, campo señalado, y el par declarado/derivado en las advertencias | **Sin filtrar por severidad.** Con cero elementos, muestra «Sin observaciones» y no un hueco | [`Representacion-Lista-De-Observaciones.md`](Representacion-Lista-De-Observaciones.md) |
 | `CMP-70` | Bloque de texto original | `Vista-De-Trabajo` | El texto **íntegro, carácter por carácter** | Colapsable, colapsado por omisión. Solo lectura y sin reescritura de ningún carácter | Base §4.6, divulgación progresiva |
-| `CMP-71` | Bloque de la escena | `Vista-De-Trabajo` | La escena de la instancia del visualizador | Es el **componente anfitrión**: provee el elemento, invoca las cinco funciones y opera el ciclo de vida | — |
-| `CMP-72` | Controles de movimiento automático | `Vista-De-Trabajo` | Dos casillas independientes, con etiqueta visible: **«Órbita de la cámara»** y **«Giro de las figuras»** | **Al pie del área de dibujo, no en un panel aparte**: son preferencias de quien mira. Se tildan por separado y pueden estar tildadas las dos a la vez. Tildadas por omisión, salvo preferencia de movimiento reducido declarada por el sistema, en cuyo caso **arrancan destildadas y el control declara por qué**. La elección se conserva entre trabajos. Los dos se detienen mientras la persona arrastra y con la pestaña oculta. **Ninguno de los dos altera la disposición de las piezas** | Base §4.6, grupo de casillas |
+| `CMP-71` | Bloque de la escena | `Vista-De-Trabajo` | La escena de la instancia del visualizador | Es el **componente anfitrión**: provee el elemento, invoca las **seis** funciones de la fachada —`inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `establecerMovimiento` y `destruir`— y opera el ciclo de vida. Es además quien **consulta la preferencia de movimiento reducido del sistema** y quien **conserva la elección**: la fachada no hace ninguna de las dos cosas. **La sexta función no fue validada visualmente**: ver §6 | — |
+| `CMP-72` | Controles de movimiento automático | `Vista-De-Trabajo` | Dos casillas independientes, con etiqueta visible: **«Órbita de la cámara»** y **«Giro de las figuras»** | **Al pie del área de dibujo, no en un panel aparte**: son preferencias de quien mira. Se tildan por separado y pueden estar tildadas las dos a la vez. Tildadas por omisión, salvo preferencia de movimiento reducido declarada por el sistema, en cuyo caso **arrancan destildadas y el control declara por qué**. **Esa decisión la toma el componente anfitrión**, que lee la preferencia y le manda a la fachada dos valores de verdad, uno por movimiento; con opciones ausentes o parciales la instancia arranca con los dos apagados. La elección se conserva entre trabajos. Los dos se detienen mientras la persona arrastra y con la pestaña oculta. **Ninguno de los dos altera la disposición de las piezas** | Base §4.6, grupo de casillas |
 | `CMP-73` | Árbol de la estructura | `Vista-De-Trabajo` | La estructura que devuelve la fachada | Colapsable por nodo. El nodo de una pieza lleva su índice a la vista | — |
 
 ## 4. Estados (`EST-XX`)
@@ -264,10 +265,20 @@ Se declara para que nadie lo construya creyendo que fue aprobado como producto:
 | Qué | Por qué no entra |
 | --- | --- |
 | La **barra de validación de maqueta** con su selector de estado, su interruptor de recarga automática y su vuelta a la portada | Instrumento de la maqueta, rotulado como tal (`Maqueta-Rules.md` §4.3). No se traslada ni a la especificación ni al código |
-| El **panel del contrato de fachada** del visor, con los botones de las cinco funciones, la insignia de ciclo de vida, los cuatro recuentos, la tabla de las siete condiciones, las seis propiedades transversales y las dos comprobaciones a mano | Instrumento de validación, rotulado como tal. En el producto el componente anfitrión invoca las cinco funciones **sin exhibirlas** |
+| El **panel del contrato de fachada** del visor, con los botones de **cinco de las seis** funciones, la insignia de ciclo de vida, los cuatro recuentos, la tabla de las siete condiciones, las seis propiedades transversales y las dos comprobaciones a mano | Instrumento de validación, rotulado como tal. En el producto el componente anfitrión invoca las seis funciones **sin exhibirlas** |
 | `index.html`, la portada de la maqueta con el índice de las once superficies y el contrato de campos | Punto de entrada de la maqueta, no superficie del producto |
 | La **credencial de la cuenta de administrador de prueba** exhibida a la vista | Instrumento de la maqueta, compuesto para que el Product Owner pudiera recorrer el ingreso |
 | La **representación plana de respaldo** de la escena, cuando el navegador no ofrece capacidad gráfica tridimensional | Sí forma parte del producto, pero como realización del estado `EST-25` y no como componente propio: `Wireframes-Vista-De-Trabajo.md` §5 la especifica |
+
+### 6.1 Lo que el contrato declara y esta línea de base **no** validó visualmente
+
+Se declara acá, con su fecha, porque una línea de base que calla un desfase deja de servir como punto de comparación.
+
+| Qué | Cuándo se decidió | Qué se validó el 2026-08-09 | Qué quedó fuera de esa validación |
+| --- | --- | --- | --- |
+| **`establecerMovimiento(id, opciones)`**, la sexta función de la superficie pública de la fachada de `GeometriaFactory-Visor` | **Después** de la aprobación de la maqueta, en la ronda de decisiones que el `PRODUCT-INTAKE` absorbió en su versión 1.6 y que `Definicion-Contrato-De-Fachada.md` §4.6 especifica | El Product Owner miró y aprobó **los dos movimientos automáticos y su gobierno**: las dos casillas independientes de `CMP-72`, el arranque destildado con preferencia de movimiento reducido, la detención al arrastrar y con la pestaña oculta, la vuelta a la orientación de partida al apagar el giro, y que ninguna combinación altera la disposición | **La función plana en sí.** La maqueta gobierna el movimiento con dos métodos de instancia —`orbitar(v)` y `girarFiguras(v)`—, y el panel del contrato de fachada exhibe cinco botones. `establecerMovimiento` **no aparece en ningún archivo de la maqueta** y **nadie la miró en pantalla** |
+
+**Qué significa para quien construya.** La superficie pública que el sistema construido tiene que respetar es la de `Definicion-Contrato-De-Fachada.md` §4, que declara **seis** funciones; `CMP-71` y la sonda `SD-43` están escritos contra esas seis. Lo que esta línea de base **no** puede afirmar es que la sexta se haya visto funcionando: su semántica está declarada en el contrato —opciones parciales conservan el movimiento no nombrado, no abre código de condición nuevo— y no en una validación visual. Si el Product Owner quiere cerrar el desfase, corresponde una **iteración 5** sobre la maqueta y una reemisión de esta línea de base, y no una edición silenciosa de esta tabla.
 
 ## 7. Evidencia
 
@@ -283,4 +294,5 @@ Se declara para que nadie lo construya creyendo que fue aprobado como producto:
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-09 | Corrección del hallazgo **`AB2-02`** de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`: `CMP-71` y §6 declaraban **cinco** funciones de la fachada contra un contrato que declara **seis** desde que el intake 1.6 incorporó `establecerMovimiento`. `CMP-71` pasa a seis y suma la atribución al anfitrión de consultar la preferencia de movimiento reducido y de conservar la elección; §6 pasa a decir «cinco de las seis»; y se agrega **§6.1**, que declara explícitamente el desfase: qué se validó el 2026-08-09, cuándo se decidió la sexta función y qué quedó fuera de esa validación. Se precisa además `CMP-72` con la frontera entre el componente anfitrión y la fachada —dos valores de verdad, arranque apagado ante opciones ausentes o parciales—, que es la que `Definicion-Contrato-De-Fachada.md` §3.3 y §4.1 fijan y que la maqueta contradecía (`AB2-05`). Ningún identificador se retira ni se renumera. |
 | 1.0 | 2026-08-09 | Emisión inicial, al cierre de la Fase B2 con la maqueta aprobada por el Product Owner. Inventario identificado de once superficies, setenta y tres componentes, setenta y cuatro estados y veinticuatro rutas de navegación, con la declaración de la única superficie alojada, la enumeración de lo que la maqueta exhibe como instrumento y no forma parte de la línea de base, y las cinco evidencias de §7. |

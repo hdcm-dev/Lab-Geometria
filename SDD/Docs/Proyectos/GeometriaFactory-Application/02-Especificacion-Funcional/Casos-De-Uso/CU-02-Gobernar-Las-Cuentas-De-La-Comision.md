@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-02-Gobernar-Las-Cuentas-De-La-Comision.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5 (admisión explícita, cobertura de las cuatro operaciones, protección de la operación destructiva, advertencia previa a la baja); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-01, RN-06, RN-07), §7 (CL-6), §17.2.P.5; orquesta [`CU-02` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md)
+**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5 (admisión explícita, cobertura de las cuatro operaciones, protección de la operación destructiva, advertencia previa a la baja); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.7**, §4 (F-03, F-26), §4.1 (RN-01, RN-06, RN-07, RN-12), §7 (CL-6, CL-7 reescrito), §17.2.P.5; orquesta [`CU-02` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Application
 
 ---
@@ -32,6 +32,8 @@
 ## 1. Propósito
 
 Orquestar las cuatro operaciones que el administrador ejerce sobre una cuenta de alumno —habilitar, bloquear, rehabilitar y dar de baja—, verificando en cada una que quien las pide tenga la facultad, y arrastrando en la baja todos los trabajos de esa cuenta dentro de la misma unidad de trabajo. Las cuatro forman un solo contrato porque son el mismo acto de admisión en cuatro momentos de la vida de la cuenta.
+
+**La quinta operación que el administrador ejerce desde el mismo panel —el reseteo de la contraseña (F-26)— no es de este caso de uso, y es CU-11.** No es un cambio de estado de la cuenta: no toca la máquina de estados, escribe la credencial derivada, consume el puerto de reloj —que este caso de uso no consume— y deja una marca que ninguna de las cuatro operaciones de acá conoce. Se declara la frontera para que la ausencia no se lea como olvido.
 
 ## 2. Actores
 
@@ -114,6 +116,8 @@ Ninguno deja efecto parcial: la baja escribe todo o no escribe nada.
 - La advertencia previa que le muestra al administrador qué se elimina es una decisión de presentación y vive en `03-UX-UI-DX`; acá vive la exigencia de la confirmación escrita.
 - Una cuenta `Bloqueado` conserva sus trabajos: la baja es la única operación destructiva.
 - La eliminación de **un** trabajo por parte del administrador no es este caso de uso: es CU-09.
+- **La baja dejó de ser el remedio del olvido de contraseña.** Hasta el `PRODUCT-INTAKE` 1.6 el único camino declarado era dar de baja y volver a dar de alta, con el arrastre de FA-02 como consecuencia aceptada; desde 1.7 el remedio es el **reseteo** de CU-11, que conserva la cuenta y todos sus trabajos (RN-12, CL-7 reescrito, exclusión X-2 retirada). Quien lea FA-02 no debe seguir leyéndola como la salida de un olvido.
+- **Las cuatro operaciones no tocan la marca de cambio de contraseña pendiente.** Habilitar, bloquear y rehabilitar la conservan tal cual estaba; la baja se lleva la cuenta entera, marca incluida. La pone CU-11 y la levanta CU-03 FA-05, y nada más (INV-09).
 
 ## 11. Control de cambios
 
@@ -121,7 +125,10 @@ Ninguno deja efecto parcial: la baja escribe todo o no escribe nada.
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **H-07**: §9 suma RN-04, que el índice maestro ya declaraba ejercida acá en el arrastre de la baja. **H-05**: §10 declara explícitamente que este caso de uso **no consume el puerto de reloj** y por qué, que es la lectura que el índice maestro atribuía mal. **H-14**: §10 nombra `BAJA_SIN_ARRASTRE_DE_TRABAJOS` y declara que es inalcanzable por construcción, en lugar de aludirlo sin nombrarlo. |
+| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26**. **§1** declara la frontera con **CU-11**: el reseteo de contraseña se ejerce desde el mismo panel del administrador pero **no es este caso de uso**, y se enumeran los cuatro rasgos que lo separan de las cuatro operaciones de acá. **§10** suma dos notas: la baja **dejó de ser el remedio del olvido de contraseña** —CL-7 reescrito y X-2 retirada—, de modo que FA-02 ya no se lee así; y las cuatro operaciones **no tocan la marca** de cambio de contraseña pendiente. Sube minor: declara una frontera nueva y corrige la lectura de un flujo alternativo, sin cambiar ningún flujo, motivo ni criterio de aceptación. |
 
 ## 17. Compatibilidad de la superficie pública
 
 Agregar una operación al conjunto es compatible mientras las cuatro existentes conserven su semántica. Quitar la confirmación escrita de la baja, o dejar de arrastrar los trabajos, contradicen RN-07 y son cambios de alcance.
+
+El **reseteo** de CU-11 no entra a este conjunto: agregarlo acá obligaría a un solo contrato a mezclar transiciones de estado con escritura de credencial, que es la fusión que §8 del índice maestro desaconseja con el mismo criterio con el que separó los dos caminos de alta.
