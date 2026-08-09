@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vista de trabajo — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Vista-De-Trabajo" data-shell="trabajo"
+      data-papel="alumno" data-destino="mis-trabajos" data-estado-inicial="con-datos">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<div class="mq-shell">
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+
+  <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
+
+    <!-- Vuelve al listado de donde vino la persona: el propio si es el alumno,
+         el de la comisión si es el administrador. -->
+    <a class="mq-btn mq-btn--pill" href="Panel-De-Trabajos-Del-Alumno.html" data-mq-volver
+       style="margin-bottom:14px"></a>
+
+    <p class="mq-banda mq-banda--info" data-mq-estado="vacio">
+      <strong>No aplica al trabajo.</strong> Una superficie de detalle siempre tiene un trabajo o no
+      tiene superficie. Los vacíos internos —sin observaciones, sin comentario, sin piezas
+      dibujadas— sí aplican y se demuestran en sus propios estados.
+    </p>
+
+    <!-- Estado: error de operación. Mensaje neutro que no distingue el
+         trabajo ajeno del inexistente. -->
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-operacion">
+      No encontramos ese trabajo. Volviste al listado desde el que lo pediste.
+    </p>
+
+    <!-- Estado: indisponible. No se arma ni la escena ni el árbol. -->
+    <section class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" aria-labelledby="vt-indisp-h">
+      <h2 id="vt-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>Ahora no podemos traer este trabajo</h2>
+      <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+         Probá de nuevo en un rato.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer el trabajo</button>
+    </section>
+
+    <!-- Estado: cargando. Esqueleto en las cuatro partes. -->
+    <div data-mq-estado="cargando" aria-hidden="true">
+      <div class="mq-barra-indeterminada" style="margin-bottom:16px"></div>
+      <div class="mq-dos-columnas">
+        <div class="mq-columna"><div class="mq-esqueleto mq-esqueleto--alto"></div><div class="mq-esqueleto mq-esqueleto--alto"></div></div>
+        <div class="mq-columna"><div class="mq-esqueleto" style="height:260px"></div><div class="mq-esqueleto mq-esqueleto--alto"></div></div>
+      </div>
+    </div>
+
+    <!-- ==================================================================
+         Con datos. La cabecera identifica el trabajo abierto; debajo, el
+         bloque de decisión si quien mira es el administrador y el trabajo
+         está en estado Pendiente; y después las cuatro partes.
+         ================================================================== -->
+    <div data-mq-estado="con-datos sin-observaciones sin-comentario con-comentario piezas-no-dibujadas borrador-con-errores texto-no-legible escena-no-disponible elemento-sin-tamano elemento-sin-tamano-ajuste instancia-desconocida dimension-no-legible indice-sin-representacion reconectando">
+
+      <header style="margin-bottom:16px">
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <h1 data-mq-nombre></h1>
+          <span data-mq-insignia></span>
+        </div>
+        <p class="mq-caption mq-num" style="margin:4px 0 0" data-mq-meta></p>
+      </header>
+
+      <!-- Bloque de decisión, alojado acá: debajo de la cabecera y antes de
+           las cuatro partes. Su armado vive en Maqueta.js, que es la única
+           fuente que comparten esta superficie y la de resolución. -->
+      <div data-mq-bloque-decision style="margin-bottom:16px"></div>
+
+      <!-- Dos condiciones de la fachada que el producto deliberadamente NO
+           avisa a la persona: se observan sólo en la bitácora del panel. -->
+      <p class="mq-banda mq-banda--info" data-mq-estado="elemento-sin-tamano-ajuste">
+        <span><strong>Sin aviso a la persona, y es deliberado.</strong> El elemento de dibujo pasó a
+        tamaño cero al pedir el ajuste. La instancia sigue viva, con su escena y su selección
+        intactas, y una invocación posterior ajusta cuando el elemento vuelva a tener tamaño. Mirá la
+        bitácora del panel de fachada: ahí figura <code>ELEMENTO_DE_DIBUJO_INVALIDO</code> en su
+        segundo curso. Este recuadro es una nota de la maqueta.</span>
+      </p>
+      <p class="mq-banda mq-banda--info" data-mq-estado="instancia-desconocida">
+        <span><strong>Sin efecto y sin aviso.</strong> Se invocó la fachada con un identificador que
+        ya no corresponde a ninguna instancia viva. Ninguna instancia cambia y la que sí existe no se
+        rompe. Mirá la bitácora del panel: ahí figura <code>INSTANCIA_DESCONOCIDA</code>. Este
+        recuadro es una nota de la maqueta.</span>
+      </p>
+
+      <!-- Las cuatro partes -->
+      <div data-mq-cuatro-partes></div>
+    </div>
+
+  </main></div>
+</div>
+
+<div data-mq-barra-validacion></div>
+
+<!-- Three.js por red de distribución, igual que el framework de grilla: sin
+     compilación y sin gestor de paquetes (Maqueta-Rules.md §4.1). -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/js/Visor-Tridimensional.js"></script>
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$('[data-mq-ico-alerta]').outerHTML = M.icono('alerta', 'mq-ico--20');
+
+  var papel = M.papelVigente();
+
+  // Qué trabajo alimenta cada estado de demostración. Los cinco salen de
+  // Datos-Maqueta.js y por lo tanto de los escenarios del intake §20. Si la
+  // dirección trae ?t=, ése es el trabajo de partida y manda en el resto.
+  var PORESTADO = {
+    'sin-observaciones': 'T-3',         // §20.E-4 · cero observaciones
+    'sin-comentario': 'T-3',
+    'con-comentario': 'T-4',            // rechazado con comentario
+    'borrador-con-errores': 'T-2',      // §20.E-5 · error con figura y campo
+    'piezas-no-dibujadas': 'T-2',
+    'indice-sin-representacion': 'T-2'
+  };
+
+  var base = M.trabajoVigente('T-1');   // §20.E-1 · 3 piezas y 2 advertencias
+
+  // El regreso lleva a donde vino la persona.
+  var volver = M.$('[data-mq-volver]');
+  volver.setAttribute('href', M.destinoDeRegreso(papel));
+  volver.innerHTML = M.icono('volver') + M.esc(M.rotuloDeRegreso(papel));
+
+  function pintar(id) {
+    var t = D.trabajo(PORESTADO[id]) || base;
+    var duenio = D.cuenta(t.cuentaId);
+    var nombreDuenio = (duenio.nombre + ' ' + duenio.apellido).trim();
+
+    M.$('[data-mq-nombre]').textContent = t.nombre;
+    M.$('[data-mq-insignia]').innerHTML = M.insignia(t.estado);
+    M.$('[data-mq-meta]').textContent =
+      t.fechaTrabajo + ' · ' + nombreDuenio + ' · ' +
+      M.plural(t.piezas, 'pieza', 'piezas') + ' · ' +
+      M.plural(t.advertencias, 'advertencia', 'advertencias');
+
+    // Sólo para el administrador y sólo en estado Pendiente. En cualquier
+    // otro caso el bloque no se dibuja, ni siquiera inhabilitado.
+    M.pintarBloqueDeDecision(M.$('[data-mq-bloque-decision]'), t,
+      { papel: papel, conEstados: false });
+
+    M.pintarCuatroPartes(M.$('[data-mq-cuatro-partes]'), t,
+      { conEstados: true, escenaVacia: id === 'texto-no-legible' });
+  }
+
+  pintar('con-datos');
+
+  // Las condiciones de la fachada actúan sobre la instancia viva y no vuelven
+  // a armar las cuatro partes: si lo hicieran, se perdería el recorrido.
+  var CONDICIONES_DE_FACHADA = ['dimension-no-legible', 'instancia-desconocida',
+                                'elemento-sin-tamano-ajuste'];
+
+  window.alCambiarEstado = function (id) {
+    if (CONDICIONES_DE_FACHADA.indexOf(id) !== -1) {
+      M.demostrarCondicionDeFachada(id);
+      return;
+    }
+    pintar(id);
+  };
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

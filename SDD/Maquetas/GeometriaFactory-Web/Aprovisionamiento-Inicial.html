@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aprovisionamiento inicial — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Aprovisionamiento-Inicial" data-shell="acceso" data-estado-inicial="con-datos">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<!-- Shell de acceso: sin barra lateral, sin barra superior y sin navegación.
+     Mientras el sistema no está aprovisionado no hay a dónde ir, y ofrecer
+     destinos sería mostrar puertas que no abren. -->
+<div class="mq-lienzo">
+
+  <!-- Estado: resolviendo destino. Barra indeterminada sobre el lienzo, sin
+       texto, anunciada como región activa. -->
+  <div data-mq-estado="resolviendo-destino" style="width:100%;max-width:380px" role="status">
+    <div class="mq-barra-indeterminada"></div>
+    <p class="mq-sr-only">Resolviendo a qué superficie corresponde ir.</p>
+  </div>
+
+  <!-- Estado: ya aprovisionado. La superficie no arma formulario. -->
+  <div data-mq-estado="ya-aprovisionado" class="mq-tarjeta-acceso" role="status">
+    <span class="mq-identidad" data-mq-marca></span>
+    <div class="mq-barra-indeterminada"></div>
+    <p class="mq-caption" style="margin-top:12px">
+      Redirigiendo a la superficie de ingreso. La redirección es neutra: no se explica el motivo.
+    </p>
+  </div>
+
+  <main id="mq-main" class="mq-tarjeta-acceso" data-mq-estado="con-datos cargando enviando error-entrada confirmacion-no-coincidente error-operacion exito indisponible reconectando vacio version-preliminar origen-indeterminado">
+    <span class="mq-identidad" data-mq-marca></span>
+
+    <h1>Configurar el laboratorio</h1>
+    <p class="mq-subtitulo">
+      Vas a crear la única cuenta de administrador de este laboratorio. No se puede crear otra después.
+    </p>
+
+    <!-- Estado: vacío. Se declara para que la ausencia sea deliberada. -->
+    <p class="mq-banda mq-banda--info" data-mq-estado="vacio">
+      <strong>No aplica.</strong> Esta superficie no presenta ninguna colección, de modo que no tiene
+      estado vacío. Se declara para que la ausencia sea deliberada.
+    </p>
+
+    <!-- Bandas de resultado -->
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-entrada">
+      Completá los tres campos. Vas a usar la contraseña para entrar; no hay forma de recuperarla.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="confirmacion-no-coincidente">
+      Las dos contraseñas no coinciden. Escribí la misma en los dos campos.
+      No salió ninguna solicitud hacia el servicio de datos.
+    </p>
+    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-operacion">
+      Este laboratorio ya tiene su cuenta de administrador. Entrá con ella desde la superficie de ingreso.
+    </p>
+    <div class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito">
+      <span>La cuenta de administrador quedó creada. Ahora entrá con ella.
+      <a href="Ingreso.html?estado=confirmacion-aprovisionamiento">Ir a ingresar</a>.
+      El lazo lo cierra la superficie siguiente, no ésta.</span>
+    </div>
+
+    <!-- Aviso de indisponibilidad, dentro de la tarjeta, conservando lo escrito -->
+    <div class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" style="margin-bottom:16px">
+      <h2>No pudimos crear la cuenta</h2>
+      <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+         Lo que escribiste sigue acá, salvo las contraseñas, que se vuelven a pedir.</p>
+      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar la creación</button>
+    </div>
+
+    <!-- Estado: cargando. Esqueleto de tres campos. -->
+    <div data-mq-estado="cargando" aria-hidden="true">
+      <div class="mq-esqueleto" style="width:30%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+      <div class="mq-esqueleto" style="width:40%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+      <div class="mq-esqueleto" style="width:45%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+    </div>
+
+    <form data-mq-estado="con-datos enviando error-entrada confirmacion-no-coincidente error-operacion indisponible reconectando vacio version-preliminar origen-indeterminado" novalidate>
+      <div class="mq-campo">
+        <label for="ap-correo">Correo</label>
+        <input class="mq-input" id="ap-correo" name="correo" type="email" autocomplete="username">
+      </div>
+
+      <div class="mq-campo">
+        <label for="ap-clave">Contraseña</label>
+        <input class="mq-input" id="ap-clave" name="clave" type="password"
+               autocomplete="new-password" aria-describedby="ap-requisito">
+        <!-- Requisito declarado antes del intento, no recién al fallar. -->
+        <span class="mq-requisito" id="ap-requisito" data-mq-requisito></span>
+      </div>
+
+      <div class="mq-campo">
+        <label for="ap-clave-2">Repetir contraseña</label>
+        <input class="mq-input" id="ap-clave-2" name="clave2" type="password" autocomplete="new-password">
+      </div>
+
+      <!-- No hay acción secundaria y no hay «cancelar»: en el primer arranque
+           no existe un estado previo al que volver. -->
+      <button type="button" class="mq-btn mq-btn--primario mq-btn--ancho"
+              data-mq-estado="con-datos error-entrada confirmacion-no-coincidente error-operacion indisponible reconectando vacio version-preliminar origen-indeterminado">
+        Crear la cuenta de administrador
+      </button>
+      <button type="button" class="mq-btn mq-btn--primario mq-btn--ancho" disabled data-mq-estado="enviando">
+        <span class="mq-spinner"></span> Creando la cuenta…
+      </button>
+    </form>
+  </main>
+
+  <!-- Sello de versión: primera de las dos ubicaciones obligatorias. -->
+  <div data-mq-sello-acceso></div>
+</div>
+
+<div data-mq-barra-validacion></div>
+
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$('[data-mq-requisito]').textContent = D.textos.requisitoContrasena;
+  M.$$('[data-mq-marca]').forEach(function (el) {
+    el.innerHTML = M.icono('marca', 'mq-ico--24') + M.esc(D.textos.producto);
+  });
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

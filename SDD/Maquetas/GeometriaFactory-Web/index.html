@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maqueta de validación visual — GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Portada">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<main id="mq-main" class="mq-portada">
+  <h1>Maqueta de validación visual — Fábrica de Geometría</h1>
+  <p class="mq-subtitulo" style="max-width:70ch">
+    Once superficies del proyecto de código <strong>GeometriaFactory-Web</strong>, una por wireframe de la
+    categoría 03. Cada una demuestra sus estados desde la barra de validación del pie, que es un
+    instrumento de la maqueta y no forma parte del producto.
+  </p>
+
+  <div class="mq-banda mq-banda--info" style="max-width:70ch">
+    <span>
+      <strong>Cuenta de administrador de prueba.</strong> Correo <code data-mq-correo-admin></code>,
+      contraseña <code data-mq-clave-admin></code>. Es una credencial de la maqueta, no del producto:
+      existe para que puedas recorrer el ingreso.
+    </span>
+  </div>
+
+  <h2 class="mq-title" style="margin-top:28px">Shell de acceso</h2>
+  <ul class="mq-lista-superficies" data-mq-lista="acceso"></ul>
+
+  <h2 class="mq-title" style="margin-top:28px">Shell de trabajo</h2>
+  <ul class="mq-lista-superficies" data-mq-lista="trabajo"></ul>
+
+  <h2 class="mq-title" style="margin-top:28px">Transversal</h2>
+  <ul class="mq-lista-superficies" data-mq-lista="transversal"></ul>
+
+  <div class="mq-banda mq-banda--info" style="max-width:70ch;margin-top:24px">
+    <span>
+      <strong>La resolución del trabajo no tiene ruta propia.</strong> Es un bloque alojado dentro de
+      la vista de trabajo, que aparece sólo para el administrador y sólo mientras el trabajo está en
+      estado <em>Pendiente</em>. Su archivo propio existe para demostrar su mapa de estados como
+      recorrido, y muestra el trabajo completo debajo del bloque. El camino del producto es
+      <a href="Listado-De-La-Comision.html">entrega de la comisión</a> → abrir un trabajo.
+    </span>
+  </div>
+
+  <h2 class="mq-title" style="margin-top:28px">Contrato de campos que la maqueta exhibe</h2>
+  <p class="mq-subtitulo">
+    Cada campo con su tipo, su ejemplo y el documento del que sale. Los datos viven exclusivamente en
+    <code>assets/js/Datos-Maqueta.js</code>: ningún HTML los hardcodea.
+  </p>
+  <div class="mq-tabla-envoltorio">
+    <table class="mq-tabla">
+      <thead><tr><th scope="col">Entidad</th><th scope="col">Campo</th><th scope="col">Tipo</th><th scope="col">Ejemplo</th><th scope="col">Origen</th></tr></thead>
+      <tbody data-mq-contrato></tbody>
+    </table>
+  </div>
+
+  <h2 class="mq-title" style="margin-top:28px">Lo que esta maqueta no puede contradecir</h2>
+  <ul class="mq-body" data-mq-invariantes></ul>
+</main>
+
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+var SUPERFICIES = {
+  acceso: [
+    { h: 'Aprovisionamiento-Inicial.html', t: 'Aprovisionamiento inicial', d: 'La única puerta de un laboratorio recién desplegado. Crea la única cuenta de administrador.', i: 'laboratorio' },
+    { h: 'Registro-De-Cuenta.html',        t: 'Registro de cuenta',        d: 'Tres campos y ningún campo de contraseña. Evita que el alumno espere un correo que no llega.', i: 'cuentas' },
+    { h: 'Ingreso.html',                   t: 'Ingreso',                   d: 'Acusa recibo de los tres actos que ocurren fuera de ella. No hay recuperación de contraseña.', i: 'llave' },
+    { h: 'Credencial-Propia.html',         t: 'Credencial propia',         d: 'Una superficie con dos cursos y dos shells: establecimiento y cambio.', i: 'llave' }
+  ],
+  trabajo: [
+    { h: 'Panel-De-Trabajos-Del-Alumno.html', t: 'Panel de trabajos del alumno', d: 'Los cuatro estados del trabajo, con las acciones que cada estado admite.', i: 'trabajos' },
+    { h: 'Envio-De-Trabajo.html',             t: 'Envío de trabajo',             d: 'La única acción de guardado del producto. La previsualización dibuja y no verifica.', i: 'nuevo' },
+    { h: 'Vista-De-Trabajo.html?t=T-1&papel=alumno&desde=mis-trabajos', t: 'Vista de trabajo', d: 'Cuatro partes: datos y texto a la izquierda; área de dibujo arriba y árbol abajo, a la derecha.', i: 'cubo' },
+    { h: 'Resolucion-Del-Trabajo.html?t=T-1', t: 'Resolución del trabajo', d: 'Bloque de decisión alojado en la vista de trabajo, con el trabajo a la vista. No tiene ruta propia en el producto.', i: 'aprobar' },
+    { h: 'Panel-De-Cuentas.html',             t: 'Panel de cuentas',             d: 'Las cuatro operaciones sobre la cuenta y la baja con confirmación escrita.', i: 'cuentas' },
+    { h: 'Listado-De-La-Comision.html',       t: 'Listado de la comisión',       d: 'Agrupado por alumno, sin ningún trabajo en estado Borrador.', i: 'comision' }
+  ],
+  transversal: [
+    { h: 'Estado-Degradado-Y-Reconexion.html', t: 'Estado degradado y reconexión', d: 'Dos tramos independientes y dos avisos distintos. El estado degradado es una superficie, no un error.', i: 'alerta' }
+  ]
+};
+
+window.renderSuperficie = function (M, D) {
+  Object.keys(SUPERFICIES).forEach(function (grupo) {
+    var ul = M.$('[data-mq-lista="' + grupo + '"]');
+    ul.innerHTML = SUPERFICIES[grupo].map(function (s) {
+      return '<li><a href="' + s.h + '"><div class="mq-tarjeta-acceso-modulo">' +
+        '<span class="mq-ico-contenedor">' + M.icono(s.i, 'mq-ico--20') + '</span>' +
+        '<h3 class="mq-body-strong">' + M.esc(s.t) + '</h3>' +
+        '<p class="mq-caption" style="margin:0">' + M.esc(s.d) + '</p>' +
+      '</div></a></li>';
+    }).join('');
+  });
+
+  M.$('[data-mq-correo-admin]').textContent = D.credencialDeMaqueta.correo;
+  M.$('[data-mq-clave-admin]').textContent = D.credencialDeMaqueta.contrasena;
+
+  M.$('[data-mq-contrato]').innerHTML = D.contratoDeCampos.map(function (c) {
+    return '<tr><td>' + M.esc(c.entidad) + '</td><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;font-weight:500;color:inherit">' +
+      M.esc(c.campo) + '</th><td>' + M.esc(c.tipo) + '</td><td><code>' + M.esc(c.ejemplo) + '</code></td>' +
+      '<td class="mq-caption">' + M.esc(c.origen) + '</td></tr>';
+  }).join('');
+
+  M.$('[data-mq-invariantes]').innerHTML = D.invariantes.map(function (i) {
+    return '<li>' + M.esc(i) + '</li>';
+  }).join('');
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>

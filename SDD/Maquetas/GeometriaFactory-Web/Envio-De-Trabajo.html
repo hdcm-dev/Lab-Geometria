@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Envío de trabajo — Maqueta GeometriaFactory-Web</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Estilos-Maqueta.css">
+</head>
+<body class="mq-body" data-superficie="Envio-De-Trabajo" data-shell="trabajo"
+      data-papel="alumno" data-destino="trabajo-nuevo" data-estado-inicial="con-datos">
+<a class="mq-skip" href="#mq-main">Ir al contenido</a>
+
+<div class="mq-shell">
+  <nav class="mq-shell-sidebar" aria-label="Navegación del laboratorio" data-mq-sidebar></nav>
+
+  <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
+
+    <a class="mq-btn mq-btn--pill" href="Panel-De-Trabajos-Del-Alumno.html" data-mq-volver
+       style="margin-bottom:14px">Volver a mis trabajos</a>
+
+    <div class="mq-encabezado">
+      <div>
+        <h1 data-mq-titulo>Trabajo nuevo</h1>
+        <p class="mq-subtitulo">
+          Pegá el texto tal como lo devolvió tu programa. No hace falta que le cambies nada.
+        </p>
+      </div>
+    </div>
+
+    <!-- ==================================================================
+         Bloque de resultado. Reemplaza el contenido tras el envío. Se
+         anuncia como región activa: es el desenlace de la acción más
+         importante del producto.
+         ================================================================== -->
+    <section class="mq-tarjeta" data-mq-estado="verifico verifico-con-advertencias no-verifico"
+             role="status" aria-labelledby="ev-res-h" tabindex="-1">
+      <h2 id="ev-res-h" class="mq-title" data-mq-estado="verifico verifico-con-advertencias">
+        Tu trabajo quedó en estado <span data-mq-insignia-pendiente></span>
+      </h2>
+      <p class="mq-caption" data-mq-estado="verifico verifico-con-advertencias">
+        Ya está entregado. No lo podés editar ni eliminar.
+      </p>
+
+      <h2 class="mq-title" data-mq-estado="no-verifico">
+        Tu trabajo quedó en estado <span data-mq-insignia-borrador></span>
+      </h2>
+      <!-- El envío no falla: el texto no verificó y el trabajo queda en
+           borrador, con sus datos y su texto tal como estaban. -->
+      <p class="mq-caption" data-mq-estado="no-verifico">
+        El texto no verificó. Corregí tu programa, volvé a pegar el texto y reenvialo cuantas veces
+        haga falta.
+      </p>
+
+      <h3 class="mq-meta" style="margin-top:18px">Observaciones<span data-mq-observaciones-recuento></span></h3>
+      <ul class="mq-observaciones" data-mq-observaciones></ul>
+
+      <p class="mq-caption" data-mq-estado="verifico-con-advertencias" style="margin-top:14px"
+         data-mq-nota-advertencias></p>
+
+      <div class="mq-acciones-pie">
+        <a class="mq-btn mq-btn--secundario" href="Panel-De-Trabajos-Del-Alumno.html">Volver a mis trabajos</a>
+        <a class="mq-btn mq-btn--primario" href="Vista-De-Trabajo.html" data-mq-ver-trabajo>Ver el trabajo</a>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         Formulario. Dos columnas que anticipan la disposición de la vista
+         de trabajo. En pantalla angosta la previsualización NO sube al
+         primer lugar: acá la tarea es cargar y enviar.
+         ================================================================== -->
+    <div data-mq-estado="con-datos vacio cargando previsualizado enviando error-entrada escena-no-disponible texto-no-legible piezas-no-dibujadas elemento-sin-tamano trabajo-ajeno indisponible-conservado reconectando">
+
+      <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-entrada">
+        Falta el nombre, la fecha o el texto del trabajo. El texto vacío es un campo sin completar, no
+        un texto que no verifica.
+      </p>
+      <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="trabajo-ajeno">
+        No encontramos ese trabajo. Volviste a tu listado.
+      </p>
+
+      <!-- Indisponible con contenido conservado: el aviso va ARRIBA del
+           formulario, para que se lea antes de volver a escribir. -->
+      <section class="mq-aviso-indisponible" data-mq-estado="indisponible-conservado" role="alert"
+               aria-labelledby="ev-indisp-h" style="margin-bottom:16px">
+        <h2 id="ev-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>No pudimos enviar tu trabajo</h2>
+        <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos.
+           Lo que escribiste sigue acá: probá de nuevo.</p>
+        <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el envío</button>
+      </section>
+
+      <form class="mq-dos-columnas mq-dos-columnas--envio" novalidate>
+
+        <!-- Columna de datos y texto -->
+        <div class="mq-columna mq-columna--datos">
+          <section class="mq-tarjeta" aria-labelledby="ev-datos-h">
+            <h2 id="ev-datos-h" class="mq-meta">Datos del trabajo</h2>
+
+            <div data-mq-estado="cargando" aria-hidden="true" style="margin-top:12px">
+              <div class="mq-esqueleto mq-esqueleto--campo"></div>
+              <div class="mq-esqueleto mq-esqueleto--campo"></div>
+              <div class="mq-esqueleto mq-esqueleto--alto"></div>
+            </div>
+
+            <div data-mq-estado="con-datos vacio previsualizado enviando error-entrada escena-no-disponible texto-no-legible piezas-no-dibujadas elemento-sin-tamano trabajo-ajeno indisponible-conservado reconectando" style="margin-top:12px">
+              <div class="mq-campo">
+                <label for="ev-nombre">Nombre</label>
+                <input class="mq-input" id="ev-nombre" type="text" data-mq-campo="nombre">
+              </div>
+              <div class="mq-campo">
+                <!-- La fecha la declara el alumno y se rotula como tal. -->
+                <label for="ev-fecha">Fecha del trabajo, la que declarás vos</label>
+                <input class="mq-input" id="ev-fecha" type="text" inputmode="numeric"
+                       placeholder="dd/mm/aaaa" data-mq-campo="fechaTrabajo">
+              </div>
+              <div class="mq-campo">
+                <label for="ev-descripcion">Descripción</label>
+                <textarea class="mq-textarea" id="ev-descripcion" style="min-height:64px"
+                          data-mq-campo="descripcion"></textarea>
+              </div>
+              <div class="mq-campo">
+                <label for="ev-texto">Texto del trabajo</label>
+                <!-- El texto entra sin ninguna transformación: no se
+                     normaliza, no se reordena y no se le quita ningún
+                     carácter. Sin corrección ortográfica ni autocapitalización. -->
+                <textarea class="mq-textarea mq-textarea--texto-trabajo" id="ev-texto"
+                          spellcheck="false" autocapitalize="off" autocorrect="off"
+                          data-mq-campo="textoOriginal"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="ev-enviar-h">
+            <h2 id="ev-enviar-h" class="mq-sr-only">Enviar el trabajo</h2>
+            <button type="button" class="mq-btn mq-btn--primario mq-btn--ancho"
+                    aria-describedby="ev-nota-unica"
+                    data-mq-estado="con-datos vacio previsualizado error-entrada escena-no-disponible texto-no-legible piezas-no-dibujadas elemento-sin-tamano trabajo-ajeno indisponible-conservado reconectando cargando">
+              Enviar
+            </button>
+            <button type="button" class="mq-btn mq-btn--primario mq-btn--ancho" disabled data-mq-estado="enviando">
+              <span class="mq-spinner"></span> Interpretando tu trabajo…
+            </button>
+            <!-- Nota de acción única, contigua a la acción primaria. -->
+            <p class="mq-caption" id="ev-nota-unica" style="margin-top:8px" data-mq-nota-unica></p>
+          </section>
+        </div>
+
+        <!-- Columna de previsualización -->
+        <div class="mq-columna mq-columna--escena">
+          <section aria-labelledby="ev-prev-h">
+            <h2 id="ev-prev-h" class="mq-meta">Previsualización</h2>
+
+            <!-- Área de dibujo. Monta el visor real portado en
+                 assets/js/Visor-Tridimensional.js. Ver README §6. -->
+            <div class="mq-escena" data-mq-escena style="margin-top:8px"
+                 data-mq-estado="con-datos vacio cargando previsualizado enviando error-entrada texto-no-legible piezas-no-dibujadas trabajo-ajeno indisponible-conservado reconectando"></div>
+
+            <!-- Escena no disponible: el bloque se reemplaza por un bloque
+                 explicativo. El envío sigue disponible: no depende del dibujo. -->
+            <div class="mq-tarjeta" data-mq-estado="escena-no-disponible" style="margin-top:8px">
+              <h3 class="mq-body-strong">La previsualización no está disponible en este navegador</h3>
+              <p class="mq-caption" style="margin:8px 0 0">
+                Tu navegador no ofrece la capacidad gráfica que el dibujo necesita. Podés cargar y
+                enviar el trabajo igual: el envío no depende del dibujo.
+              </p>
+            </div>
+            <div class="mq-tarjeta" data-mq-estado="elemento-sin-tamano" style="margin-top:8px">
+              <h3 class="mq-body-strong">La previsualización no está disponible</h3>
+              <p class="mq-caption" style="margin:8px 0 0">
+                El espacio disponible para el dibujo quedó sin tamaño y no se pudo crear la escena.
+                El resto de la superficie se conserva.
+              </p>
+            </div>
+
+            <p class="mq-banda mq-banda--atencion" role="status" data-mq-estado="texto-no-legible" style="margin-top:8px">
+              La previsualización no pudo dibujar nada con este texto. De eso no se deduce ningún
+              estado de tu trabajo: el dibujo no verifica.
+            </p>
+
+            <!-- Lista de piezas no dibujadas: junto a la escena, nunca como
+                 observación del trabajo. -->
+            <div data-mq-no-dibujadas data-mq-estado="piezas-no-dibujadas" style="margin-top:8px">
+              <h3 class="mq-meta">No se dibujaron</h3>
+              <ul class="mq-caption" data-mq-no-dibujadas-lista style="margin:4px 0 0;padding-left:18px"></ul>
+            </div>
+
+            <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px"
+                    aria-describedby="ev-nota-alcance"
+                    data-mq-estado="con-datos vacio previsualizado error-entrada texto-no-legible piezas-no-dibujadas trabajo-ajeno indisponible-conservado reconectando cargando enviando">
+              Previsualizar
+            </button>
+            <!-- Nota de alcance: el dibujo no verifica. -->
+            <p class="mq-caption" id="ev-nota-alcance" style="margin-top:8px" data-mq-nota-alcance></p>
+          </section>
+        </div>
+      </form>
+    </div>
+
+  </main></div>
+</div>
+
+<div data-mq-barra-validacion></div>
+
+<!-- Three.js por red de distribución, igual que el framework de grilla: sin
+     compilación y sin gestor de paquetes (Maqueta-Rules.md §4.1). -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/js/Visor-Tridimensional.js"></script>
+<script src="assets/js/Datos-Maqueta.js"></script>
+<script>
+window.renderSuperficie = function (M, D) {
+  M.$('[data-mq-volver]').innerHTML = M.icono('volver') + 'Volver a mis trabajos';
+  M.$('[data-mq-ico-alerta]').outerHTML = M.icono('alerta', 'mq-ico--20');
+  M.$('[data-mq-nota-unica]').textContent = D.textos.notaAccionUnica;
+  M.$('[data-mq-nota-alcance]').textContent = D.textos.notaPrevisualizacion;
+  M.$('[data-mq-nota-advertencias]').textContent = D.textos.notaAdvertenciasNoBloquean;
+  M.$('[data-mq-insignia-pendiente]').outerHTML = M.insignia('Pendiente');
+  M.$('[data-mq-insignia-borrador]').outerHTML = M.insignia('Borrador');
+
+  // Dos cursos sobre la misma disposición. Con ?t= la superficie se abre en
+  // el curso de reedición y trae el borrador tal como quedó; sin ?t=, en el
+  // curso de creación, con el texto de partida del intake §20.E-2.
+  var b = M.trabajoVigente(null) || D.borradorDeEnvio;
+  var enReedicion = !!M.parametro('t');
+  M.$('[data-mq-titulo]').textContent = enReedicion ? 'Volver sobre tu borrador' : 'Trabajo nuevo';
+
+  // El envío es la única acción de guardado, y su resultado lleva al trabajo
+  // o al listado propio, que es donde el trabajo ya figura.
+  M.$('[data-mq-ver-trabajo]').setAttribute('href',
+    M.hrefTrabajo(b.id || 'T-1', 'alumno', 'envio'));
+  M.$$('[data-mq-campo]').forEach(function (el) {
+    el.value = b[el.getAttribute('data-mq-campo')] || '';
+  });
+
+  // La previsualización monta el visor real sobre el texto pegado: es el
+  // mismo lector tolerante que la vista de trabajo, así que el ortoedro con
+  // clave «Tapas» que emite el programa del alumno se dibuja acá también.
+  var lectura = M.nodosDeTexto(b.textoOriginal, b.arbol);
+  M.dibujarEscena(M.$('[data-mq-escena]'), lectura.nodos);
+  M.renderObservaciones(document, b.observaciones);
+  // Piezas no dibujadas: las que el propio lector enumera; si no hay ninguna,
+  // la del esquema de Wireframes-Envio-De-Trabajo.md §2.
+  var noDibujadas = lectura.nodos.filter(function (n) { return !n.forma; })
+    .map(function (n) { return { indice: n.indice, motivo: n.motivo, codigo: n.codigo }; });
+  M.renderPiezasNoDibujadas(document,
+    noDibujadas.length ? noDibujadas : [{ indice: 1, motivo: 'tipo no dibujable' }]);
+
+  // El estado «vacío» de esta superficie es el formulario recién abierto en el
+  // curso de creación: campos vacíos y área de dibujo con su leyenda.
+  window.alCambiarEstado = function (id) {
+    var vacio = (id === 'vacio');
+    M.$$('[data-mq-campo]').forEach(function (el) {
+      el.value = vacio ? '' : (b[el.getAttribute('data-mq-campo')] || '');
+    });
+    M.dibujarEscena(M.$('[data-mq-escena]'),
+      (vacio || id === 'texto-no-legible') ? [] : lectura.nodos);
+    M.sincronizar(document);
+  };
+};
+</script>
+<script src="assets/js/Maqueta.js"></script>
+</body>
+</html>
