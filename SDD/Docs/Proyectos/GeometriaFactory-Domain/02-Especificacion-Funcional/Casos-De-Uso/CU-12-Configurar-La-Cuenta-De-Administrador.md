@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-12-Configurar-La-Cuenta-De-Administrador.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -124,8 +124,8 @@ Los cinco rechazos terminan de forma controlada: el dominio no construye la enti
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. Nace de la corrección del **P0** que la auditoría de `GeometriaFactory-Application` detectó y que el informe `B-02-03-GeometriaFactory-Application-r1.md` reporta: la versión anterior de esta categoría no tenía caso de uso para la capacidad **F-01** y resolvía la configuración del administrador como un flujo alternativo de CU-01, que fija el estado inicial en `Pendiente` para toda cuenta. Con eso la cuenta del administrador nacía `Pendiente`, no podía obtener acceso por INV-06 y no había ninguna otra cuenta que pudiera habilitarla: la instancia quedaba inutilizable en el primer arranque. Este documento separa el segundo camino de alta, con su estado inicial `Habilitado`, su credencial fijada en el acto y su ventana de alta única. `NB-01` §7 ya lo preveía como caso de uso propio. |
 | 1.1 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-02**. §9 remitía a §4.3 de `Definicion-Modelo-De-Dominio.md` a buscar el invariante candidato INV-08, que vive en **§4.2**: la remisión se escribió con la numeración previa a la inserción de esa subsección. Alcanzado además por **H-01**: §10 citaba el código retirado `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y pasa a citar el que lo reemplaza, con las cuatro operaciones en lugar de sólo la baja. |
-
 | 1.2 | 2026-08-09 | Corrección de una afirmación que quedó falsa aguas arriba, alcanzada al propagar `PRODUCT-INTAKE` **1.7**. §9 declaraba a **INV-08** como «invariante candidato… que no viene del intake», y §17.1.P.2 lo incorpora rotulado «**adoptado**». La fila de invariantes pasa a declararlo vigente, junto con INV-05 e INV-01. **Ningún flujo, código ni criterio de aceptación de este caso de uso cambia**, y el reseteo de contraseña de F-26 no lo toca: no procede sobre la cuenta de administrador (CU-13 §6). |
+| 1.3 | 2026-08-09 | **Cierra la parte del hallazgo `F26-27`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo: una **línea en blanco partía la tabla** de este control de cambios y dejaba fuera de ella las filas que la seguían. Se retira, **sin tocar el texto de ninguna fila**. **Ninguna sección de este contrato de uso se toca**, y ningún flujo, código de rechazo, postcondición ni criterio de aceptación cambia. Sube minor: repara el renderizado de una tabla. |
 ## 17. Compatibilidad de la superficie pública
 
 Los dos caminos de alta son parte del contrato y no se fusionan: fusionarlos reintroduce el defecto que este documento corrige. Agregar un dato obligatorio a la configuración es un cambio incompatible para `GeometriaFactory-Application`, que la invoca por referencia de proyecto de código.

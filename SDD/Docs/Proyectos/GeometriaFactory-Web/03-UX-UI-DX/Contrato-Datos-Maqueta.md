@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Contrato-Datos-Maqueta.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Maquetador de validación visual (AG-03M)
@@ -105,7 +105,7 @@ Cuatro valores que la documentación no declaraba y que el Product Owner autoriz
 | La credencial de la cuenta de administrador de prueba, exhibida a la vista | **Instrumento de la maqueta.** No se traslada ni a la especificación ni al código |
 | La cuarta cuenta de alumno, en situación `Pendiente`, necesaria para que las tres situaciones de cuenta convivan con dos alumnos que además tienen trabajos | **Dato de ejemplo de la maqueta.** No agrega ningún campo: usa `DM-01` a `DM-07` |
 | El nombre del quinto trabajo, `Segundo intento`, necesario para mostrar el rechazo **sin** comentario escrito | **Propagado**: `Wireframes-Listado-De-La-Comision.md` §2 lo incorporó al retroalimentarse, con su origen declarado. No agrega ningún campo |
-| El texto del escenario `E-7` sin el `Radio` del círculo, para demostrar la condición `DIMENSION_NO_LEGIBLE` de la fachada | **Punto abierto del `PRODUCT-INTAKE` 1.5**: es la única de las siete condiciones sin escenario propio en §20 ni fila en §21. Corresponde al Product Owner decidir si se incorpora un escenario `E-8` o si la condición queda declarada sin dato de prueba. **Esta línea de base no lo resuelve** |
+| El texto del escenario `E-7` sin el `Radio` del círculo, para demostrar la condición `DIMENSION_NO_LEGIBLE` de la fachada | **Punto abierto resuelto por el Product Owner.** Era la única de las siete condiciones sin escenario propio, y el `PRODUCT-INTAKE` **1.7** incorporó **§20.E-8** —dimensión no legible: la pieza no se dibuja y se enumera— y lo mapeó en su §21. `Bitacora-Validacion-Maqueta.md` lo registra como `H-5`, «Resuelto por el Product Owner». El valor de la maqueta deja de ser un compuesto sin respaldo y pasa a tener **escenario propio en la fuente** |
 
 ## 6. Invariantes de los datos que el sistema construido no puede contradecir
 
@@ -133,5 +133,6 @@ Son las que la maqueta respeta y que el sensado de deriva verifica:
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.2 | 2026-08-09 | **Cierra el hallazgo `F26-23`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.10**. §5 declaraba el texto del escenario `E-7` sin el `Radio` del círculo como **«punto abierto del `PRODUCT-INTAKE` 1.5»**, con la decisión de incorporar o no un escenario `E-8` pendiente del Product Owner. El intake lo cerró en su versión **1.7**: **§20.E-8** existe —dimensión no legible, la pieza no se dibuja y se enumera— y su §21 lo mapea, y `Bitacora-Validacion-Maqueta.md` ya lo registra como `H-5`, «Resuelto por el Product Owner». La celda pasa a declarar el punto **resuelto**, con el número de versión que lo resolvió y con la consecuencia: el valor de la maqueta deja de ser un compuesto sin respaldo y pasa a tener escenario propio en la fuente. **Ningún dato de la maqueta, ningún campo `DM-XX` y ningún invariante de §6 cambia.** Sube minor: cierra un punto abierto que ya estaba resuelto aguas arriba. |
 | 1.1 | 2026-08-09 | Corrección del hallazgo **`AB2-17`** de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`: `DM-27` a `DM-29` ponían una regla del framework —`Design-Rules-Identidad-De-Version.md` §2— en la columna de correspondencia con el modelo conceptual, donde las demás filas ponen entidad y atributo. Las tres pasan a declarar, como ya lo hacen `DM-07` y `DM-16`, que **no son atributos del modelo conceptual**, y la referencia a la regla se mueve a la columna de nota. Ningún campo, tipo, obligatoriedad ni superficie cambia. |
 | 1.0 | 2026-08-09 | Emisión inicial, al cierre de la Fase B2 con la maqueta aprobada por el Product Owner. Veintinueve campos exhibidos con su tipo, su obligatoriedad, su ejemplo, sus superficies y su correspondencia con el modelo conceptual del dominio; el formato de presentación como parte del contrato; ocho entradas de campos del modelo conceptual que ninguna superficie exhibe, con su motivo; los cuatro valores compuestos para la maqueta con su situación al cierre de la fase; siete invariantes de datos; y cinco evidencias. |

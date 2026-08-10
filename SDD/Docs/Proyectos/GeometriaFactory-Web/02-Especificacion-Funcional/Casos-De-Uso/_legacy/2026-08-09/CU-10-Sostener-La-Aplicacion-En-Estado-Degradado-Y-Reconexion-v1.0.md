@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md
-**Versión:** 1.1
+**Versión:** 1.0
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -103,7 +103,7 @@ El actor primario es uno solo y no distingue papeles: el tratamiento es el mismo
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md) |
-| Reglas de negocio aplicables | **Ninguna, y con motivo.** Las quince reglas del producto restringen el dominio —cuentas, trabajos, estados y observaciones— y este caso de uso no toca ninguno de esos objetos: gobierna la presentación de la indisponibilidad. Lo que sí lo restringe es la regla de arquitectura de nivel producto RA-03, verificada en CA-02, y su enunciado vive en `PRODUCT-INTAKE` §14. Inventar una `RN-XX` acá sería redactar una regla que no existe aguas arriba |
+| Reglas de negocio aplicables | **Ninguna, y con motivo.** Las once reglas del producto restringen el dominio —cuentas, trabajos, estados y observaciones— y este caso de uso no toca ninguno de esos objetos: gobierna la presentación de la indisponibilidad. Lo que sí lo restringe es la regla de arquitectura de nivel producto RA-03, verificada en CA-02, y su enunciado vive en `PRODUCT-INTAKE` §14. Inventar una `RN-XX` acá sería redactar una regla que no existe aguas arriba |
 | Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-06](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) completo, en particular sus códigos `CONTRATO_SERVICIO_NO_DISPONIBLE` y `CONTRATO_ERROR_NO_CLASIFICADO` |
 | Fachada del visualizador | Ninguna función. El bundle no hace red y por eso no participa de ningún tramo |
 | Historias de usuario a generar en 06 | US-26, US-27 |
@@ -122,7 +122,6 @@ El actor primario es uno solo y no distingue papeles: el tratamiento es el mismo
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
-| 1.1 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: la fila «Reglas de negocio aplicables» de §9 fundamenta su **ninguna** sobre el recuento de reglas del producto, que pasó de once a **quince**. El fundamento no cambia —las reglas restringen el dominio y este caso de uso no toca ninguno de esos objetos, mientras que lo que sí lo restringe es la regla de arquitectura **RA-03**—; lo que se corrige es el número. **Ningún flujo, estado, criterio de aceptación ni verificación de este caso de uso cambia.** Sube minor. |
 
 ## 13. Interacción multiusuario y concurrencia
 

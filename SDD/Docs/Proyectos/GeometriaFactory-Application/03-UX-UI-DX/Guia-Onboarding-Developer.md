@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §7.4, §8 y §11; CU-01 §4, §5, §6, §8 y §10; CU-02 §5, §6 y §10; CU-03 §5, §6 y §10; CU-04 §4, §5, §6, §8 y §10; CU-05 §4, §5, §6, §8 y §10; CU-06 §4, §6, §8 y §10; CU-07 §4, §5, §6 y §10; CU-08 §5, §6 y §10; CU-09 §4, §5, §6 y §10; CU-10 §1, §6 y §10; **CU-11 §1, §4, §5, §6 y §10**; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-11 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, más **RN-12** y **RN-13** del `PRODUCT-INTAKE` **1.7** §4.1 y el invariante **INV-09** de su §17.1.P.2; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.2.P.1, §17.2.P.2, §17.2.P.4, §17.2.P.5, §17.2.P.6, §17.2.P.8, §17.2.P.10, §17.2.P.11, §17.2.P.12, §4.1, §4.2 y §16
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §7.4, §8 y §11; CU-01 §4, §5, §6, §8 y §10; CU-02 §5, §6 y §10; CU-03 §5, §6 y §10; CU-04 §4, §5, §6, §8 y §10; CU-05 §4, §5, §6, §8 y §10; CU-06 §4, §6, §8 y §10; CU-07 §4, §5, §6 y §10; CU-08 §5, §6 y §10; CU-09 §4, §5, §6 y §10; CU-10 §1, §6 y §10; **CU-11 §1, §4, §5, §6 y §10**; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-15 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, más **RN-12** y **RN-13** del `PRODUCT-INTAKE` **1.7** §4.1, **RN-14** y **RN-15** del **1.10** §4.1, y el invariante **INV-09** de su §17.1.P.2; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.2.P.1, §17.2.P.2, §17.2.P.4, §17.2.P.5, §17.2.P.6, §17.2.P.8, §17.2.P.10, §17.2.P.11, §17.2.P.12, §4.1, §4.2 y §16
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
 
 ---
@@ -22,7 +22,7 @@
   - [3.2 Los pasos](#32-los-pasos)
   - [3.3 El primer ejemplo con sentido de aplicación](#33-el-primer-ejemplo-con-sentido-de-aplicación)
   - [3.4 Leer una negativa](#34-leer-una-negativa)
-  - [3.5 Las tres negativas, en diez minutos](#35-las-tres-negativas-en-diez-minutos)
+  - [3.5 Las cuatro negativas, en diez minutos](#35-las-cuatro-negativas-en-diez-minutos)
 - [4. Diagnóstico de problemas frecuentes en la primera hora](#4-diagnóstico-de-problemas-frecuentes-en-la-primera-hora)
 - [5. Próximos pasos](#5-próximos-pasos)
 - [6. Control de cambios](#6-control-de-cambios)
@@ -134,7 +134,7 @@ Cuatro saltos, todos con enlace. Si en alguna negativa la cadena se corta, es un
 
 Y la observación que le da sentido al ejercicio: **el caso de uso no arregló nada.** No consultó de más, no reintentó y no corrigió el pedido. Devolvió el motivo y dejó el repositorio como estaba. Quien tiene que decidir qué hacer —y sobre todo **cómo traducirlo hacia afuera**— es el consumidor.
 
-### 3.5 Las tres negativas, en diez minutos
+### 3.5 Las cuatro negativas, en diez minutos
 
 Es el tramo que más rinde de la primera media hora, y el que se evalúa en el tramo de 30 minutos de [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §2. La tabla completa está en [`DX-Error-Messages.md`](DX-Error-Messages.md) §2.4; lo que hay que retener es esto:
 
@@ -143,8 +143,9 @@ Es el tramo que más rinde de la primera media hora, y el que se evalúa en el t
 | Un recurso que puede ser de otra persona | `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | **Sí, deliberadamente** | «No encontrado», **nunca** «no autorizado» |
 | Una facultad | `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | No, y no tiene por qué | Un mensaje explícito |
 | Un recurso fuera del alcance del papel | `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | No | Un mensaje explícito |
+| Cualquier cosa, desde una cuenta reseteada que no cambió su provisoria | `CAMBIO_DE_CONTRASENA_PENDIENTE` | No, y **corta antes que las otras tres** | La derivación al cambio de contraseña, que es lo único que esa cuenta puede hacer (INV-09, RN-13) |
 
-La frase que resume todo y conviene poder recitar: **el papel no reemplaza a la pertenencia, y la pertenencia no se confiesa.**
+La frase que resume todo y conviene poder recitar: **el papel no reemplaza a la pertenencia, y la pertenencia no se confiesa.** Y antes que las tres, la cuarta: **una cuenta con la provisoria sin cambiar no ejerce ninguna capacidad**, ni siquiera las que su papel y su pertenencia admitirían.
 
 Por qué importa tanto: confirmar que un trabajo ajeno existe permite averiguar por tanteo qué identificadores existen. Por eso el trabajo ajeno y el identificador inexistente comparten motivo **por diseño**, y por eso hay dos criterios de aceptación —CA-03 de CU-06 y CA-03 de CU-09— cuyo único propósito es verificar que los dos motivos son el mismo.
 
@@ -178,7 +179,7 @@ Dos distinciones más que conviene fijar antes de seguir, porque confundirlas es
 | Se busca cómo corregir un trabajo `Rechazado` y todo rebota | `Rechazado` es terminal por decisión aceptada por escrito. Corregir un rechazo significa cargar un trabajo nuevo | CU-08 FA-03. El rechazado queda como registro del intento y sólo el administrador puede quitarlo, por CU-09 |
 | Un alta rechaza con `CORREO_YA_REGISTRADO` aunque la consulta previa dijo que estaba libre | Es el camino declarado de CU-01 FA-03: **la verificación previa no es una garantía por sí sola**, y la unicidad efectiva la sostiene también la capa que guarda | No materializar nada y devolver el motivo. Sin informar el estado ni el papel de la cuenta que ocupa el correo |
 | Dos correos que parecen el mismo se tratan como distintos | El criterio con el que dos correos se consideran el mismo es un **punto abierto declarado y no bloqueante**, que viene del dominio y esta categoría no reabre | `Especificacion-Funcional.md` §11. Lo resuelve 05 junto con la capa que ejerce la verificación |
-| Se busca dónde se enuncia una regla de negocio y no está | Las **trece** reglas viven en `GeometriaFactory-Domain` y acá se **ejercen**, no se redactan. **Las trece tienen archivo allá**, incluidas RN-12 y RN-13, que entraron con el `PRODUCT-INTAKE` 1.7 | `Especificacion-Funcional.md` §6 dice, regla por regla, dónde se ejerce cada una en esta capa |
+| Se busca dónde se enuncia una regla de negocio y no está | Las **quince** reglas viven en `GeometriaFactory-Domain` y acá se **ejercen**, no se redactan. **Las quince tienen archivo allá**, incluidas RN-12 y RN-13, que entraron con el `PRODUCT-INTAKE` 1.7, y RN-14 y RN-15, que entraron con el 1.10 | `Especificacion-Funcional.md` §6 dice, regla por regla, dónde se ejerce cada una en esta capa |
 | Se busca en CU-01 el alta del administrador y no está | Son **dos caminos de alta con reglas opuestas** —estado inicial, credencial y ventana de alta—, y por eso son dos contratos: el auto-registro del alumno es CU-01 y la configuración del administrador es CU-10 | [`DX-Error-Messages.md`](DX-Error-Messages.md) §1.4, con la tabla de los cinco rasgos opuestos |
 | Un alta rechaza con `ESTADO_INICIAL_NO_NEGOCIABLE` y la causa parece contradecir a la del otro camino | No se contradicen: el enunciado es «el estado inicial de **este** camino no se elige», y cuál es ese estado lo fija el camino. `Pendiente` en el auto-registro, `Habilitado` en la configuración del administrador | Es el único motivo con fila completa en dos subsecciones del catálogo, con remisión mutua ([`DX-Error-Messages.md`](DX-Error-Messages.md) §3.1 y §3.10) |
 | Se busca la cantidad de figuras del conjunto raíz y se la intenta derivar contando piezas | **No es derivable**: el conjunto de piezas adoptadas admite huecos, porque la posición de una figura no reconstruida queda reservada. La produce el validador al interpretar | §7.1 de esta guía. Sin ese dato el dominio no tiene rango contra el cual validar la posición de una observación |
@@ -207,6 +208,7 @@ Punto de entrada recomendado de la sección de especificación funcional: su [`R
 | 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-16**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. Se retiran dos residuos de la nomenclatura anterior a los **sellos**. El más grave está en §7.2: **transcribía el criterio CA-01 de CU-01 como «fecha de alta 2026-03-15» cuando el criterio dice «sello de alta»**, y una transcripción que no coincide con el original es peor que una paráfrasis porque el lector la toma por literal; pasa a citarse sin comillas de transcripción y con el término vigente. El otro está en §3.3, tercera lección del primer ejemplo, que atribuía al reloj una «fecha de modificación». Se alinean además la consecuencia práctica de §7.2 y la cita del intake §17.2.P.11 punto 3, que conserva su redacción literal —«las fechas de alta y de modificación»— con la aclaración de que es lo que esta capa llama sellos. **No se tocó** ninguna mención a la fecha de alta del alumno ni a la «Fecha» que el alumno declara en su trabajo: las dos son atributos que el modelo del dominio sí declara. En la misma operación, la cabecera de trazabilidad suma **CU-10**, que el cuerpo ya citaba en §4 y en §7.1 desde la ronda r1 y que la cabecera no listaba. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26**. Los recuentos pasan a **once casos de uso**, con CU-11 incorporado a la trazabilidad upstream; las comprobaciones de `Especificacion-Funcional.md` §4 pasan de tres a **cuatro**, con la del cambio de contraseña pendiente; y §7 declara que las reglas son **trece** y que RN-12 y RN-13 se citan contra el intake porque su archivo aguas arriba todavía no existe. |
 | 1.2 | 2026-08-09 | **Reconciliación con lo que `GeometriaFactory-Domain` ya emitió.** §4 declaraba, en el diagnóstico de la regla que no aparece, que **RN-12 y RN-13 todavía no tenían archivo allá** y que acá se citaban contra el intake: **las trece tienen archivo**, y la fila pasa a decirlo. Ni el recorrido, ni el recuento de diagnósticos, ni el how-to cambian. |
+| 1.3 | 2026-08-09 | **Cierra la parte del hallazgo `F26-14`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este artefacto, y absorbe el `PRODUCT-INTAKE` **1.10**. **`F26-14`**: **§3.5** se titulaba «Las **tres** negativas, en diez minutos» con tabla de tres filas, y `CAMBIO_DE_CONTRASENA_PENDIENTE` **no aparecía ni una vez** en toda la guía, de modo que quien recorría entero el artefacto de onboarding terminaba sin saber que existe la negativa que **corta antes que las otras tres**. Entra la cuarta fila y el título pasa a decir **cuatro**, con la frase mnemotécnica ampliada. **Intake 1.10**: el diagnóstico de §4 sobre dónde se enuncia una regla pasa de **trece** a **quince** reglas, con RN-14 y RN-15 nombradas y su versión de entrada. **Ningún paso del quick-start, ningún tramo de onboarding y ninguna remisión cambia.** Sube minor. |
 
 ## 7. La inversión de dependencias, en la práctica
 

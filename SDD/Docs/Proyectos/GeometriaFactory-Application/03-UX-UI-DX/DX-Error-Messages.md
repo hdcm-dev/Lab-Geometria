@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** DX-Error-Messages.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los once casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-11), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3 (los cuatro puertos, los metadatos de orquestación y la cantidad de figuras del conjunto raíz), §4 (**las cuatro comprobaciones**, sus **cinco** precisiones y la equivalencia de la negativa de facultad), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-11 y las §6 de los doce casos de uso de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`, más **RN-12** y **RN-13** del `PRODUCT-INTAKE` **1.7** §4.1 y el invariante **INV-09** de su §17.1.P.2; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-01, NB-02, NB-03, NB-04, NB-05, NB-09); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.7**, §4 (F-26), §4.1, §4.2, §15, §17.1.P.2, §17.2.P.3, §17.2.P.5, §17.2.P.10, §17.2.P.11, §17.2.P.12
+**Trazabilidad upstream:** §6 de los once casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-11), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3 (los cuatro puertos, los metadatos de orquestación y la cantidad de figuras del conjunto raíz), §4 (**las cuatro comprobaciones**, sus **cinco** precisiones y la equivalencia de la negativa de facultad), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-15 y las §6 de los doce casos de uso de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`, más **RN-12** y **RN-13** del `PRODUCT-INTAKE` **1.7** §4.1 y el invariante **INV-09** de su §17.1.P.2; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-01, NB-02, NB-03, NB-04, NB-05, NB-09); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10**, §4 (F-26), §4.1, §4.2, §15, §17.1.P.2, §17.2.P.3, §17.2.P.5, §17.2.P.10, §17.2.P.11, §17.2.P.12
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
 
 ---
@@ -192,7 +192,7 @@ Las **cinco** precisiones que rigen en toda la categoría, transcriptas de `Espe
 
 ### 2.5 Lo que esta capa produce y lo que el dominio rechaza sin que acá ocurra
 
-Los once casos de uso orquestan doce casos de uso del dominio, y **el dominio declara rechazos que esta capa no puede producir**. Su ausencia del catálogo no es un olvido: la 02 los nombra uno por uno en sus §10 para que no se lea así, y acá se reúnen en una sola tabla porque para quien implementa la capa es información operativa. **Ninguna fila de esta tabla es una condición de este catálogo**, y por eso ninguna entra en los recuentos de §7.
+Los once casos de uso orquestan trece casos de uso del dominio, y **el dominio declara rechazos que esta capa no puede producir**. Su ausencia del catálogo no es un olvido: la 02 los nombra uno por uno en sus §10 para que no se lea así, y acá se reúnen en una sola tabla porque para quien implementa la capa es información operativa. **Ninguna fila de esta tabla es una condición de este catálogo**, y por eso ninguna entra en los recuentos de §7.
 
 | Rechazo del dominio | Origen | Por qué acá no ocurre | Dónde está declarado |
 | --- | --- | --- | --- |
@@ -205,6 +205,8 @@ Los once casos de uso orquestan doce casos de uso del dominio, y **el dominio de
 | `ESPECIE_DE_OBSERVACION_DESCONOCIDA`, `ERROR_SIN_UBICACION`, `ADVERTENCIA_SIN_LOS_DOS_VALORES`, `OBSERVACION_SOBRE_PIEZA_INEXISTENTE` | Dominio, registro de las observaciones | **Agregados deliberadamente** en `OBSERVACION_MAL_FORMADA`, por el mismo criterio y de forma simétrica | CU-05 §6 |
 | `DESENLACE_SIN_PAPEL_DE_ADMINISTRADOR`, `ALCANCE_SIN_PAPEL_DE_ADMINISTRADOR` | Dominio, desenlace y alcance del administrador | **No llegan a producirse.** Esta capa corta antes con su propia verificación de facultad, y emite un motivo único por los dos | `Especificacion-Funcional.md` §4, CU-08 §10, CU-09 §10 |
 | `OPERACION_DESCONOCIDA` | Dominio, acceso del alumno y alcance del administrador | **Inalcanzable por construcción.** Cada resolución se consulta con una operación fija; lo que sí puede llegar mal es el papel, y eso es `PAPEL_NO_RECONOCIDO` | CU-09 §10 |
+| `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | Dominio, reseteo de la contraseña de una cuenta de alumno | **No llega a producirse.** Esta capa corta antes con su propio acotamiento a cuentas de alumno y emite `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO`; el cierre es el mismo y su fuente es `RN-15`, que lo ancla en INV-08 | CU-11 §6 y §10 |
+| `RESETEO_CON_ARRASTRE_DE_TRABAJOS` | Dominio, reseteo de la contraseña de una cuenta de alumno | **Inalcanzable por construcción.** La invocación de esta capa **nunca declara** efecto sobre los trabajos ni sobre el estado de la cuenta: el reseteo no es una baja y no dispara RN-07 (RN-12) | CU-11 §7 y §10 |
 
 Dos consecuencias para quien implementa:
 
@@ -215,7 +217,7 @@ Dos consecuencias para quien implementa:
 
 Treinta y seis condiciones, derivadas una por una de la §6 de los once casos de uso. Ninguna se inventó y ninguna quedó afuera; el recuento y la verificación mecánica están en §7.
 
-Doce condiciones se declaran en más de un caso de uso. **Once conservan la misma causa en todos** y llevan una sola entrada, en el caso de uso donde aparecen primero, con la nota de sus apariciones restantes. La duodécima, `ESTADO_INICIAL_NO_NEGOCIABLE`, lleva **fila completa en §3.1 y en §3.10** porque sus dos causas son opuestas según el camino de alta: el motivo está en §1.4. Es la única fila excedente del catálogo: 37 filas de tabla para 36 condiciones.
+**Once** condiciones se declaran en más de un caso de uso. **Diez conservan la misma causa en todos** y llevan una sola entrada, en el caso de uso donde aparecen primero, con la nota de sus apariciones restantes. La undécima, `ESTADO_INICIAL_NO_NEGOCIABLE`, lleva **fila completa en §3.1 y en §3.10** porque sus dos causas son opuestas según el camino de alta: el motivo está en §1.4. Es la única fila excedente del catálogo: 37 filas de tabla para 36 condiciones.
 
 ### 3.1 CU-01 Registrar el alta de una cuenta
 
@@ -409,6 +411,7 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **Alineación con el 02 corregido**: el catálogo pasa de **27 a 34 condiciones distintas** sobre **48 filas y diez casos de uso**, con §3.10 nueva para CU-10, la configuración del administrador. Altas: `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `CONFIGURACION_SIN_CREDENCIAL`, `CREDENCIAL_YA_FIJADA`, `VALOR_DERIVADO_VACIO`, `TEXTO_ORIGINAL_ALTERADO` y `CONJUNTO_DE_PIEZAS_MAL_FORMADO`; `TRANSICION_DESDE_ESTADO_TERMINAL` pasa a declararse también en CU-05 y su entrada se muda a §3.5, que es donde aparece primero; `ADMINISTRADOR_YA_CONFIGURADO` se muda de §3.1 a §3.10; `ENVIO_FUERA_DE_BORRADOR` acota su causa al estado `Pendiente`; `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` se acota al auto-registro. **§1.4 nueva**: los dos caminos de alta con sus cinco rasgos opuestos, y el tratamiento del motivo con **causas opuestas**, que lleva fila completa en dos subsecciones con remisión mutua, **adoptando la misma forma que el proyecto de código hermano**. **§2.5 nueva**: los rechazos del dominio que esta capa no puede producir —inalcanzables por construcción, equivalentes o agregados—, con su lugar de declaración en la 02 y las dos consecuencias para quien implementa. §3.5 transmite además la **cantidad de figuras del conjunto raíz** y por qué no es derivable de las piezas adoptadas. **H-08**: la fila de `DATO_OBLIGATORIO_AUSENTE` en §3.4 pasa a nota de prosa, y el preámbulo de §3 declara que la única fila excedente es la del motivo con causas opuestas: 35 filas para 34 condiciones. **H-09**: «Control de cambios» vuelve a §6 y «Cobertura y trazabilidad» pasa a §7, unificando la convención con `Guia-Onboarding-Developer.md`. **H-10**: «dentro de la misma solución de código» en §1.3. §2.1 declara además la **divergencia deliberada de clasificación** de `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` respecto del proyecto de código hermano, con su motivo. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26** con sus reglas **RN-12** y **RN-13** y el invariante **INV-09**. El catálogo pasa de **34 a 36 condiciones distintas** sobre **55 filas y once casos de uso**, con **§3.11 nueva** para CU-11, el reseteo de contraseña por el administrador. Altas: `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO`, con la **decisión derivada** que lo funda, y `CAMBIO_DE_CONTRASENA_PENDIENTE`, cuya entrada vive en §3.3 porque ahí está su única excepción. **§2.4** pasa de tres a **cuatro negativas de autorización**, con la precisión 5 nueva y un tercer paso en el procedimiento de decisión. **§2.1** actualiza dos recuentos de categoría —conflicto de estado de 11 a 12, conflicto de facultad de 2 a 3— y la nota de divergencia deja de declarar dos miembros donde ahora hay tres. **§3.3** declara que `CREDENCIAL_NO_ESTABLECIDA`, `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` y `VALOR_DERIVADO_VACIO` reaparecen en CU-11, y que la primera **cambia de forma de terminación** entre los dos. §7 rehace los cuatro recuentos y la verificación mecánica en las dos direcciones. Sube minor: agrega dos condiciones y una sección de catálogo, sin cambiar la semántica de ninguna existente. |
 | 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-18**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. §2.1 **retira el argumento auxiliar inválido** con el que cerraba la divergencia de clasificación de `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`: no existe la «correspondencia uno a uno» invocada entre la categoría de conflicto de facultad, que tiene dos miembros, y la negativa por facultad de §2.4, que es una sola. **La clasificación no cambia y el fundamento principal se conserva**, reforzado: el referente del papel cambia con la capa —acá es un dato del pedido de alta y no la facultad de quien pide, y CU-01 no verifica facultad ni pertenencia—, con el paralelo explícito a `PAPEL_NO_RECONOCIDO`, que esta capa clasifica igual. Se agrega en su lugar la declaración de lo que la divergencia **no** se apoya, para que una ronda posterior no reponga el argumento retirado ni revierta por él la clasificación entera. |
+| 1.3 | 2026-08-09 | **Cierra los hallazgos `F26-18` y las filas de este archivo del `F26-20`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.10**. **`F26-18`**: **§2.5** se define como el conjunto de rechazos del dominio que esta capa **no puede producir**, y no tenía ninguno de `CU-13` pese a que `CU-11` lo orquesta desde su versión 1.2: entran `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` —no llega a producirse, porque esta capa corta antes con `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO`— y `RESETEO_CON_ARRASTRE_DE_TRABAJOS` —inalcanzable por construcción, porque la invocación nunca declara efecto sobre los trabajos—, y el recuento de §7.1 pasa de **16 a 18**. **`F26-20`**: §2.5 decía «los once casos de uso orquestan **doce** casos de uso del dominio», que son **trece**; §3 decía «**Doce** condiciones se declaran en más de un caso de uso» y su §7.1 ya declaraba **once**, con la undécima —no la duodécima— llevando fila completa por causas opuestas; el cuadre decía «36 + 19 = 55» y es **36 + 18 = 54**; **§7.3** omitía `CU-11` en dos filas, `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` y `VALOR_DERIVADO_VACIO`, que ese caso de uso sí declara en su §6; y **§7.4** citaba «CU-01 a **CU-10**» y «RN-01 a **RN-11**», que son `CU-01` a `CU-11` y `RN-01` a `RN-15`. Se anotan además las reglas nuevas donde corresponden en §7.3: `RN-14` sobre `VALOR_DERIVADO_VACIO` y `RN-15` sobre `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO`. **Ninguna entrada del catálogo se agrega ni se quita: las condiciones distintas siguen siendo 36 y las filas de §3, 37.** Sube minor. |
 
 ## 7. Cobertura y trazabilidad
 
@@ -424,9 +427,9 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 | Filas de tabla en §3 | 37. La única excedente es `ESTADO_INICIAL_NO_NEGOCIABLE`, con fila completa en §3.1 y §3.10 por causas opuestas (§1.4) |
 | Condiciones inventadas por esta categoría | **0** |
 | Condiciones de los casos de uso sin entrada en el catálogo | **0** |
-| Rechazos del dominio sin condición propia acá, declarados en §2.5 | 16, ninguno de ellos condición de este catálogo |
+| Rechazos del dominio sin condición propia acá, declarados en §2.5 | **18**, ninguno de ellos condición de este catálogo. Los dos últimos son los de `CU-13`, que entraron con la orquestación del reseteo |
 
-Cuadre: 36 + 19 = 55.
+Cuadre: 36 + 18 = 54.
 
 ### 7.2 Verificación mecánica de cobertura
 
@@ -465,7 +468,7 @@ Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su prec
 | `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` | CU-01 | — | Entrada inválida | Negativa sin escritura |
 | `ESTADO_INICIAL_NO_NEGOCIABLE` | CU-01, CU-10 | — (causas opuestas, §1.4) | Entrada inválida | Negativa sin escritura |
 | `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` | CU-01 | RN-01 | Entrada inválida (§2.1) | Negativa sin escritura |
-| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | CU-02, CU-07, CU-08 | RN-01, RN-10 | Conflicto de facultad | Negativa sin escritura y motivo de resultado, según el caso de uso |
+| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | CU-02, CU-07, CU-08, CU-11 | RN-01, RN-10 | Conflicto de facultad | Negativa sin escritura y motivo de resultado, según el caso de uso |
 | `CONFIRMACION_DE_BAJA_NO_COINCIDE` | CU-02 | RN-07 | Entrada inválida | Negativa sin escritura |
 | `TRANSICION_DE_CUENTA_NO_ADMITIDA` | CU-02 | — | Conflicto de estado | Negativa sin escritura |
 | `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` | CU-02 | RN-01 | Conflicto de facultad | Negativa sin escritura |
@@ -475,10 +478,10 @@ Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su prec
 | `CREDENCIAL_NO_ESTABLECIDA` | CU-03, CU-11 | RN-06 | Recurso ausente | Motivo de resultado en CU-03, negativa sin escritura en CU-11 |
 | `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | CU-03 | RN-06 | Conflicto de estado | Negativa sin escritura |
 | `CAMBIO_DE_CONTRASENA_PENDIENTE` | CU-03, y **cualquiera** por la comprobación transversal de §4 | RN-13, INV-09 | Conflicto de estado | Negativa sin escritura |
-| `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` | CU-11 | RN-01 | Conflicto de facultad | Negativa sin escritura |
+| `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` | CU-11 | RN-15, RN-01 | Conflicto de facultad | Negativa sin escritura |
 | `CREDENCIAL_VIGENTE_NO_VERIFICADA` | CU-03 | — | Entrada inválida | Negativa sin escritura |
 | `CREDENCIAL_YA_FIJADA` | CU-03 | — | Conflicto de estado | Negativa sin escritura |
-| `VALOR_DERIVADO_VACIO` | CU-03 | — | Entrada inválida | Negativa sin escritura |
+| `VALOR_DERIVADO_VACIO` | CU-03, CU-11 | RN-14 | Entrada inválida | Negativa sin escritura |
 | `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | CU-04, CU-05, CU-06, CU-09 | RN-03 | Recurso ausente | Negativa sin escritura y motivo de resultado, según el caso de uso |
 | `OPERACION_FUERA_DE_BORRADOR` | CU-04, CU-09 | RN-04 | Conflicto de estado | Negativa sin escritura |
 | `TEXTO_ORIGINAL_ALTERADO` | CU-04 | RN-08 | Entrada inválida | Negativa sin escritura |
@@ -501,7 +504,7 @@ Tres notas sobre las columnas, para que nadie las complete con atribuciones inve
 
 | Caso | Situación |
 | --- | --- |
-| `ESTADO_INICIAL_NO_NEGOCIABLE` sin regla de negocio | **Ninguna de las trece reglas enuncia con qué estado nace una cuenta.** La atribución a RN-01 se retiró aguas arriba: ese enunciado habla de la unicidad del administrador y de la ventana en la que su alta es posible, no del estado inicial. El origen está en el modelo de estados de cuenta del dominio y en los dos caminos de alta |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` sin regla de negocio | **Ninguna de las quince reglas enuncia con qué estado nace una cuenta.** La atribución a RN-01 se retiró aguas arriba: ese enunciado habla de la unicidad del administrador y de la ventana en la que su alta es posible, no del estado inicial. El origen está en el modelo de estados de cuenta del dominio y en los dos caminos de alta |
 | RN-08 sin condición que la haga cumplir por rechazo | Tiene una, `TEXTO_ORIGINAL_ALTERADO`, desde la corrección de esta ronda. Su otra mitad sigue siendo un **comportamiento** y no una comprobación: el texto no se reescribe, ni siquiera cuando la interpretación falla, y `INTERPRETACION_NO_DISPONIBLE` la cita como garantía y no como violación |
 | Columnas con guion | No son un vacío a completar: hay condiciones que sostienen una precondición del contrato sin que ninguna regla de negocio las enuncie por separado, como `CREDENCIAL_VIGENTE_NO_VERIFICADA`, `CREDENCIAL_YA_FIJADA` o `TRABAJO_INEXISTENTE`. Inventarles una regla sería el defecto contrario al que este catálogo evita |
 
@@ -513,8 +516,8 @@ Tres notas sobre las columnas, para que nadie las complete con atribuciones inve
 | --- | --- |
 | Rol de intervención | Integrador por casos de uso, implementador de puertos y mantenedor de la capa ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.1) |
 | Superficie pública que se documenta | Las 36 condiciones de error de los once contratos de uso, y las cuatro comprobaciones transversales de `Especificacion-Funcional.md` §4 |
-| CU origen | CU-01 a CU-10, §6 de cada uno |
-| Reglas de negocio relevantes | RN-01 a RN-11 de `GeometriaFactory-Domain`, con la correspondencia de §7.3 |
+| CU origen | CU-01 a CU-11, §6 de cada uno |
+| Reglas de negocio relevantes | RN-01 a RN-15 de `GeometriaFactory-Domain`, con la correspondencia de §7.3 |
 | Necesidades de negocio | NB-01, NB-02, NB-03, NB-04, NB-05, NB-09 |
 | Wireframes asociados | N/A. `tiene_ui_final` == false |
 | US a generar en 06 | US del catálogo mantenido junto al código; US de traducción de motivo a respuesta en `GeometriaFactory-Api`, con la tabla de traducciones prohibidas de §2.4 como criterio de aceptación; US de la indistinguibilidad de `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`; US del recorrido del primer arranque, que encadena CU-10 con la admisibilidad de CU-03 |

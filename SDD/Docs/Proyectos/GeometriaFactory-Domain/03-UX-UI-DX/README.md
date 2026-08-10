@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/` completo (**trece** casos de uso, trece reglas de negocio, `Definicion-Modelo-De-Dominio.md`, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` §9 y `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1, §4.1 y §4.2
+**Trazabilidad upstream:** `02-Especificacion-Funcional/` completo (**trece** casos de uso, **quince** reglas de negocio, `Definicion-Modelo-De-Dominio.md`, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` §9 y `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §17.1, §4.1 y §4.2
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -37,7 +37,7 @@ Lo que hace específica a esta sección, y lo que hay que llevarse si se lee una
 | Documento | Propósito | Estado |
 | --- | --- | --- |
 | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) | Marco DX: rol de intervención, qué es la superficie pública acá, la frontera de autenticación, onboarding en tres tramos, quick-start, ubicación de los cuatro modos de Diátaxis, principios de error, métricas y lazo de retroalimentación. **Es el punto de entrada** | Propuesto |
-| [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) | Recorrido de la primera hora: prerrequisitos, primer ejemplo, cómo leer una guarda, las dos máquinas de estado, dónde va una regla nueva y catorce diagnósticos frecuentes | Propuesto |
+| [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) | Recorrido de la primera hora: prerrequisitos, primer ejemplo, cómo leer una guarda, las tres máquinas de estado, dónde va una regla nueva y catorce diagnósticos frecuentes | Propuesto |
 | [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de las **43 condiciones de error** derivadas una por una de la §6 de los trece casos de uso, con su categoría, su causa y su diagnóstico accionable | Propuesto |
 | [`Glosario-UX.md`](Glosario-UX.md) | Vocabulario que esta categoría acuña, los dos términos con más de un referente y los que se referencian sin redefinir | Propuesto |
 | `README.md` | Este archivo: índice navegable, orden de lectura y omisiones declaradas | Propuesto |
@@ -98,3 +98,4 @@ Criterios de aceptación de `Rules-UX-UI-DX.md` §6 declarados **no aplicables**
 | 1.0 | 2026-08-09 | Emisión inicial del índice de la sección, que nunca se había emitido: el proyecto de código estuvo detenido esperando la resolución de dos ambigüedades, ya resueltas en `PRODUCT-INTAKE` 1.3 y absorbidas por `02-Especificacion-Funcional/` 1.1. Enumera los cuatro artefactos DX vigentes con su propósito y su estado, la variante aplicada con su justificación, el orden de lectura de cinco pasos, las ocho omisiones con su motivo declarado y los siete criterios de aceptación de la variante UX/UI declarados no aplicables sin darlos por cumplidos. **Corrección de la ronda r2 del audit, hallazgo N-04**: el recuento de los diagnósticos de `Guia-Onboarding-Developer.md` pasa de catorce a **trece**, que era la cantidad de filas de su tabla en ese momento. |
 | 1.1 | 2026-08-09 | Alineación con la **corrección del P0** que reporta `B-02-03-GeometriaFactory-Application-r1.md` y que AG-02 resolvió emitiendo **CU-12**, la configuración de la cuenta de administrador en el primer arranque. §2 actualiza el catálogo de **37 a 40 condiciones** sobre **doce** casos de uso, y los diagnósticos de la guía de trece a **catorce**, por la fila nueva del administrador constituido por el camino equivocado. La cabecera declara los doce casos de uso como upstream. Ningún artefacto se agrega ni se omite: las ocho omisiones y los siete criterios no aplicables siguen valiendo con el mismo motivo. |
 | 1.2 | 2026-08-09 | Alineación con `PRODUCT-INTAKE` **1.7** y con la categoría 02 en su versión 1.4, que emite **CU-13** —reseteo de contraseña, capacidad **F-26**— y las reglas **RN-12** y **RN-13**. §2 actualiza el catálogo de **40 a 43 condiciones** sobre **trece** casos de uso, y la cabecera declara trece casos de uso y trece reglas como upstream. Ningún artefacto se agrega ni se omite: las omisiones y los criterios no aplicables siguen valiendo con el mismo motivo. |
+| 1.3 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**, que lleva las reglas del producto de trece a **quince** con **RN-14** —la contraseña provisoria la produce el sistema, no es adivinable y no se repite— y **RN-15** —resetear no exige cuenta habilitada—, y **cierra la fila de esta sección del hallazgo `F26-20`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0. La cabecera de trazabilidad pasa a declarar **quince** reglas de negocio sobre los trece casos de uso de la categoría 02, y cita el intake 1.10. **`F26-20`**: la fila de `Guia-Onboarding-Developer.md` de §2 describía el recorrido como el de «las **dos** máquinas de estado», y son **tres** desde que `Definicion-Modelo-De-Dominio.md` §5.3 sumó la de la marca de cambio de contraseña pendiente. **Ningún artefacto, ninguna omisión declarada y ningún orden de lectura cambia.** Sube minor. |

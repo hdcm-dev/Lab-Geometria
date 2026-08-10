@@ -15,6 +15,13 @@
    como observación al catálogo del framework (hallazgo `H-7` de la bitácora),
    con destino `template`, igual que se hizo con `H-1`.
 
+   Los tres valores translúcidos que quedaban escritos en línea —el filete del
+   pie de la barra lateral, el velo del diálogo modal y el texto del sello
+   sobre la rampa de marca— se promovieron a `:root` por el hallazgo `F26-29`
+   de `SDD/Docs/Audit/F26-Propagacion-r1.md`. Ninguno es un color nuevo: son
+   `--color-text-on-brand` y `--color-text-primary` con opacidad, y con eso la
+   afirmación de arriba vuelve a ser cierta sin excepciones.
+
    CONTRASTE DE LA BARRA DE VALIDACIÓN, MEDIDO
    -------------------------------------------
    La barra es el instrumento con el que se valida la accesibilidad del resto,
@@ -61,6 +68,14 @@
      bajo el rol en el que esta hoja lo usa, para que ninguna regla escriba
      `#FFFFFF` a mano. */
   --color-text-on-brand:        #FFFFFF;
+  /* Tres valores translúcidos que la hoja usaba en línea y que se promueven
+     acá por el hallazgo `F26-29` de `SDD/Docs/Audit/F26-Propagacion-r1.md`.
+     NO son colores nuevos: los dos primeros son `--color-text-on-brand` con
+     opacidad, sobre la rampa de marca del shell; el tercero es
+     `--color-text-primary` con opacidad, como velo del diálogo modal. */
+  --color-border-on-brand:      rgba(255, 255, 255, .18);
+  --color-text-on-brand-soft:   rgba(255, 255, 255, .85);
+  --color-backdrop:             rgba(26, 26, 24, .45);
 
   /* --- tipografía (base §2.2) ------------------------------------------- */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -227,7 +242,7 @@ a { color: var(--color-brand-primary); }
 
 .mq-sidebar-pie {
   margin-top: auto; padding-top: var(--space-4);
-  border-top: 1px solid rgba(255,255,255,.18);
+  border-top: 1px solid var(--color-border-on-brand);
   display: flex; flex-direction: column; gap: var(--space-2);
 }
 .mq-sidebar-persona { font-size: var(--type-body-size); }
@@ -691,7 +706,7 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
   padding: var(--space-6); max-width: 520px; width: calc(100% - var(--space-7));
   background: var(--color-background-primary); color: var(--color-text-primary);
 }
-.mq-dialogo::backdrop { background: rgba(26, 26, 24, .45); }
+.mq-dialogo::backdrop { background: var(--color-backdrop); }
 .mq-dialogo h2 { font-size: var(--type-title-size); margin-bottom: var(--space-3); }
 .mq-dialogo p  { font-size: var(--type-body-size); color: var(--color-text-secondary); }
 
@@ -706,7 +721,7 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
   color: var(--color-text-secondary);
 }
 .mq-lienzo .mq-sello { margin-top: var(--space-6); justify-content: center; }
-.mq-shell-sidebar .mq-sello { color: rgba(255,255,255,.85); }
+.mq-shell-sidebar .mq-sello { color: var(--color-text-on-brand-soft); }
 .mq-sello-boton {
   background: transparent; border: 0; padding: 2px var(--space-1); margin-left: -4px;
   font: inherit; color: inherit; cursor: pointer; text-decoration: underline dotted;

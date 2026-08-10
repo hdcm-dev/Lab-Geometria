@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-04-Contrato-De-Listado-De-Trabajos.md
-**Versión:** 1.2
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -119,8 +119,7 @@ Se separan de la tabla anterior porque no producen respuesta de error y no forma
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Declara el elemento de listado de trabajo como proyección sin texto original ni componentes, y el tipo de resumen por alumno y por estado. |
 | 1.0 | 2026-08-08 | Correcciones absorbidas de la ronda 1 de auditoría (`Audit/B-02-03-GeometriaFactory-Contracts-r1.md`), sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-14**: `CONTRATO_LISTADO_VACIO`, que el propio texto declara que no es error, sale de la tabla de §6 y pasa a la subsección nueva §6.1 de señales declaradas que no son error, que adopta en 02 la resolución que el catálogo de 03 ya usaba. La decisión de diseño no cambia. **H-09**: la sección opcional se renumera de §12 a §17, el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna para `library`. |
-| 1.1 | 2026-08-09 | Actualización por contenido nuevo aguas arriba: `PRODUCT-INTAKE` 1.3 §4 (F-08, F-12), §4.1 (RN-11), §4.2 (modelo de estados), §6 (flujo 2.1), y `NB-07` y `NB-09` de 01. Cambios: el conjunto cerrado que el elemento de listado transporta pasa a **cuatro** estados; el paso 3 y FA-01 declaran que el alcance de la colección depende del papel y que el administrador **no recibe los trabajos en estado `Borrador`**; se agrega FA-03, la apertura de un trabajo para resolverlo con CU-07, y el recuento pasa a FA-04; CA-02 y CA-03 se reescriben sobre el modelo vigente y se agrega **CA-06**, que verifica el recorte de RN-11; §9 refiere `RN-11` y `RN-03` por identificador y suma NB-09; §10 declara por qué el comentario del administrador no viaja en el listado. **Autor:** Analista Funcional + API Designer (AG-02) |
-| 1.2 | 2026-08-09 | **Cierra la parte del hallazgo `F26-27`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo. **Cierra la parte del hallazgo `F26-27`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo: el control de cambios tenía **filas con más celdas que columnas** —la celda de autor sobrante, sobre una tabla de tres columnas—, y el texto de esas filas se conserva íntegro: el autor pasa a leerse dentro de la celda de cambios, en lugar de en una cuarta columna que la tabla no declara. **Ninguna otra sección de este contrato de uso se toca**, y ningún tipo, campo, código ni criterio de aceptación cambia. Sube minor: repara la tabla de este control de cambios sin alterar lo que sus filas dicen. |
+| 1.1 | 2026-08-09 | Actualización por contenido nuevo aguas arriba: `PRODUCT-INTAKE` 1.3 §4 (F-08, F-12), §4.1 (RN-11), §4.2 (modelo de estados), §6 (flujo 2.1), y `NB-07` y `NB-09` de 01. Cambios: el conjunto cerrado que el elemento de listado transporta pasa a **cuatro** estados; el paso 3 y FA-01 declaran que el alcance de la colección depende del papel y que el administrador **no recibe los trabajos en estado `Borrador`**; se agrega FA-03, la apertura de un trabajo para resolverlo con CU-07, y el recuento pasa a FA-04; CA-02 y CA-03 se reescriben sobre el modelo vigente y se agrega **CA-06**, que verifica el recorte de RN-11; §9 refiere `RN-11` y `RN-03` por identificador y suma NB-09; §10 declara por qué el comentario del administrador no viaja en el listado. | Analista Funcional + API Designer (AG-02) |
 
 ## 17. Compatibilidad de versión pública
 

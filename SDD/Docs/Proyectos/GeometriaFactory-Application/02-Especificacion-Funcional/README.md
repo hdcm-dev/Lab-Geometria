@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -63,7 +63,7 @@ Los tres artefactos siguientes **no se emiten**, y el motivo se declara acá y e
 | Artefacto | Motivo de la omisión |
 | --- | --- |
 | `Definicion-<Concepto-Central>.md` | **El concepto central de esta capa son los puertos, y los casos de uso ya los describen.** Cada uno declara cuáles consume y qué le pide a cada uno, y la tabla de §3 del índice los reúne. Un documento aparte repetiría eso sin agregar semántica. La regla lo declara recomendado, y no obligatorio, para `library` con superficie estrecha |
-| `Reglas-De-Negocio/RN-XX-<Nombre>.md` | **Las reglas del producto viven en `GeometriaFactory-Domain`** —trece desde el `PRODUCT-INTAKE` 1.7, **las trece con archivo allá**, de modo que acá se enlazan todas—, son atemporales y acá se **referencian**, no se redactan. Volver a enunciarlas crearía dos textos de la misma regla en la misma cadena documental, que es exactamente el defecto que la regla de no duplicación previene. §6 del índice declara, regla por regla, dónde se ejerce en esta capa |
+| `Reglas-De-Negocio/RN-XX-<Nombre>.md` | **Las reglas del producto viven en `GeometriaFactory-Domain`** —**quince** desde el `PRODUCT-INTAKE` 1.10, **las quince con archivo allá**, de modo que acá se enlazan todas—, son atemporales y acá se **referencian**, no se redactan. Volver a enunciarlas crearía dos textos de la misma regla en la misma cadena documental, que es exactamente el defecto que la regla de no duplicación previene. §6 del índice declara, regla por regla, dónde se ejerce en esta capa |
 | `Modelo-Datos/Modelo-Conceptual.md` y sus `RC-XX` | La regla de la categoría los omite para `library`, y el flag `tiene_persistencia` de este proyecto de código es false: el intake declara «no aplica directamente» en §17.2.P.4. Esta capa declara el puerto de repositorio y el alcance de la unidad de trabajo, no el modelo de datos. El modelo del dominio vive en `Definicion-Modelo-De-Dominio.md` de `GeometriaFactory-Domain` |
 
 ## 5. Notas de uso de esta sección
@@ -82,3 +82,4 @@ Los tres artefactos siguientes **no se emiten**, y el motivo se declara acá y e
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **H-01**: el índice navegable pasa de nueve a **diez** casos de uso, con **CU-10** para la configuración del administrador; el orden de lectura declara que CU-10 y CU-01 se leen juntos por ser los dos caminos de alta, y §5 declara por qué CU-10 lleva el último número. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26**. El índice navegable pasa de diez a **once** casos de uso, con **CU-11** para el reseteo de contraseña por el administrador; §3 suma CU-11 al orden de lectura de la cuenta y declara que se lee junto con CU-03, que es el único que levanta la marca que aquél pone; §4 deja de decir «once reglas» y declara que son trece desde 1.7, con dos todavía sin archivo aguas arriba; §5 extiende a CU-11 el motivo por el que lleva el último número. |
 | 1.2 | 2026-08-09 | **Reconciliación con lo que `GeometriaFactory-Domain` ya emitió.** §4 declaraba que RN-12 y RN-13 «todavía no tienen archivo allá» y que acá se citaban contra el intake: **las trece reglas tienen archivo**, y la fila pasa a decirlo. Los recuentos —once casos de uso, trece reglas— no cambian. `Especificacion-Funcional.md` sube a 1.2 en la misma reconciliación y cierra los dos puntos abiertos que esta situación sostenía. |
+| 1.3 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: las reglas del producto pasan de trece a **quince** con **RN-14** y **RN-15**, y **las quince tienen archivo** en `GeometriaFactory-Domain`, de modo que la nota de omisión de `Reglas-De-Negocio/` actualiza su recuento y su cita del intake. **Ningún documento de esta sección, ningún caso de uso y ningún recuento propio de la capa cambia.** Sube minor. |

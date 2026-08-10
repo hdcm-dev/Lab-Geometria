@@ -1965,8 +1965,13 @@
     });
     $$('[data-mq-nodo]', raiz).forEach(function (b) {
       var activo = b.getAttribute('data-mq-nodo') === String(indice);
+      /* UN SOLO PORTADOR DE ROL Y DE ESTADO: `data-mq-nodo` vive en el
+         `<li role="treeitem">`, de modo que escribir también en su
+         `parentNode` marcaría el `<ul role="group">`, que no es
+         seleccionable. Corregido por el hallazgo `F26-22` de
+         `SDD/Docs/Audit/F26-Propagacion-r1.md`; el camino gemelo
+         `seleccionar()` ya estaba bien. */
       b.setAttribute('aria-selected', String(activo));
-      b.parentNode.setAttribute('aria-selected', String(activo));
     });
   }
 
