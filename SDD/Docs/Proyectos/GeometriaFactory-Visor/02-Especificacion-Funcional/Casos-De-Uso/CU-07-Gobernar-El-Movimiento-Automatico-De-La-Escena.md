@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-07-Gobernar-El-Movimiento-Automatico-De-La-Escena.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -94,7 +94,7 @@ Permitir que el componente anfitrión prenda o apague, **por separado y con la i
 
 | Dimensión | Referencia |
 | --- | --- |
-| Necesidad de negocio | NB-06, en su parte de que la previsualización se mire con comodidad dentro del producto. La capacidad de origen es **F-25** del intake §4, `Should Have` |
+| Necesidad de negocio | NB-06, en su parte de que la previsualización se mire con comodidad dentro del producto, prevista allá como **CU-28**. La capacidad de origen es **F-25** del intake §4, **`Must Have`** desde el intake 1.7 |
 | Reglas de negocio aplicables | Ninguna. Este proyecto de código no declara RN (ver `README.md` de la sección) |
 | Historias de usuario a generar | US de gobierno en vivo de los dos movimientos automáticos, sin reconstrucción de la instancia y sin pérdida de la selección, en 06-Backlog-Tecnico |
 | Componentes esperados | Fachada plana y servicio de dibujo, en su parte de bucle de dibujo y de orientación de las mallas (capas 2 y 3 de PRODUCT-INTAKE §17.7 P.2); 05-Arquitectura-Tecnica fija la composición |
@@ -114,3 +114,4 @@ Permitir que el componente anfitrión prenda o apague, **por separado y con la i
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, originada en la **Fase B2** de validación de maqueta del proyecto de código `GeometriaFactory-Web` y en la decisión del Product Owner del 2026-08-09 de agregar una **sexta función** a la fachada. Contrato de uso de `establecerMovimiento(id, opciones)`, con cinco flujos alternativos, una sola condición de error —`INSTANCIA_DESCONOCIDA`, ya declarada— y seis criterios de aceptación. Resuelve el punto abierto que `Definicion-Contrato-De-Fachada.md` §5.5 había elevado sobre el cambio de movimiento con la instancia viva. |
+| 1.1 | 2026-08-09 | **Cierra la parte del hallazgo `F26-11`** que alcanza a este caso de uso, del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. **§9** declaraba la capacidad de origen **F-25** como `Should Have`, y el Product Owner la subió a **`Must Have`** en el intake 1.7, con la constancia escrita en la propia celda de §4 de la fuente; la fila registra además que la necesidad de negocio le prevé caso de uso propio a nivel producto, **CU-28** de `NB-06` §7. Ningún flujo, condición de error ni criterio de aceptación cambia. |

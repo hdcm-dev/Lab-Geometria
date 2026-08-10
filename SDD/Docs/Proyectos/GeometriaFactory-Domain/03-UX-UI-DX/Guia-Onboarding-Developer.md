@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 1.2
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2, §4.1, §4.2 (invariante candidato INV-08, propuesto y no vigente), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; CU-01 §4, §5, §6 y §8; CU-12 §1, §3, §4, §5, §6 y §8; CU-02 §5 y §6; CU-03 §6; CU-04 §5 y §6; CU-05 §5 y §6; CU-06 §5 y §6; CU-07 §5 y §6; CU-08 §4, §5 y §6; CU-09 §5 y §6; CU-10 §5 y §6; CU-11 §5 y §6; RN-01 a RN-11; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9 (puntos abiertos); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.1, §17.1.P.2, §17.1.P.4, §17.1.P.5, §17.1.P.6, §17.1.P.10, §17.1.P.11, §4.1, §4.2, §16
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2, §4.1, §4.2 (recorrido de adopción de INV-08), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; CU-01 §4, §5, §6 y §8; CU-12 §1, §3, §4, §5, §6 y §8; CU-02 §5 y §6; CU-03 §6; CU-04 §5 y §6; CU-05 §5 y §6; CU-06 §5 y §6; CU-07 §5 y §6; CU-08 §4, §5 y §6; CU-09 §5 y §6; CU-10 §5 y §6; CU-11 §5 y §6; CU-13 §1, §5, §6 y §10; RN-01 a RN-15; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9 (puntos abiertos); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.1, §17.1.P.2, §17.1.P.4, §17.1.P.5, §17.1.P.6, §17.1.P.10, §17.1.P.11, §4.1, §4.2, §16
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -21,13 +21,13 @@
   - [3.1 El resultado que se busca](#31-el-resultado-que-se-busca)
   - [3.2 Los pasos](#32-los-pasos)
   - [3.3 Leer la guarda que se negó](#33-leer-la-guarda-que-se-negó)
-  - [3.4 Las dos máquinas de estado, en diez minutos](#34-las-dos-máquinas-de-estado-en-diez-minutos)
+  - [3.4 Las tres máquinas de estado, en diez minutos](#34-las-tres-máquinas-de-estado-en-diez-minutos)
 - [4. Diagnóstico de problemas frecuentes en la primera hora](#4-diagnóstico-de-problemas-frecuentes-en-la-primera-hora)
 - [5. Próximos pasos](#5-próximos-pasos)
 - [6. Control de cambios](#6-control-de-cambios)
 - [7. Dónde va una regla nueva](#7-dónde-va-una-regla-nueva)
-  - [7.1 Once reglas, siete invariantes](#71-once-reglas-siete-invariantes)
-  - [7.2 Por qué cuatro reglas no tienen invariante](#72-por-qué-cuatro-reglas-no-tienen-invariante)
+  - [7.1 Quince reglas, nueve invariantes](#71-quince-reglas-nueve-invariantes)
+  - [7.2 Por qué seis reglas no tienen invariante](#72-por-qué-seis-reglas-no-tienen-invariante)
   - [7.3 El procedimiento de decisión](#73-el-procedimiento-de-decisión)
 
 ---
@@ -114,9 +114,9 @@ Cuatro saltos, todos con enlace. Si en algún rechazo la cadena se corta, es un 
 
 Y la observación que le da sentido a todo el ejercicio: **el dominio no arregló nada**. No completó el apellido, no consultó a nadie y no reintentó. Devolvió la causa y se quedó quieto. Quien tiene que decidir qué hacer es el consumidor.
 
-### 3.4 Las dos máquinas de estado, en diez minutos
+### 3.4 Las tres máquinas de estado, en diez minutos
 
-Son las dos figuras que más se consultan durante la primera hora. Están completas, con sus transiciones inadmisibles, en `Definicion-Modelo-De-Dominio.md` §5.1 y §5.2. Lo que hay que retener:
+Son las tres figuras que más se consultan durante la primera hora. Están completas, con sus transiciones inadmisibles, en `Definicion-Modelo-De-Dominio.md` §5.1, §5.2 y §5.3. Lo que hay que retener:
 
 **Cuenta.** Tres estados: `Pendiente`, `Habilitado`, `Bloqueado`. **El estado con el que nace depende del camino de alta, y hay dos**:
 
@@ -131,7 +131,7 @@ Ningún estado vuelve a `Pendiente`. El administrador habilita, bloquea y rehabi
 
 **Las cuatro operaciones alcanzan sólo a las cuentas con papel `Alumno`**, y no es una decisión del modelo: es el enunciado literal de la capacidad F-03, «habilitar, bloquear, rehabilitar y dar de baja física cuentas **de alumno**». Sobre la cuenta del administrador no procede ninguna de las cuatro, y el dominio las rechaza con `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`. El motivo es la contracara del anterior: **la cuenta que habilita a las demás no puede quedar en un estado del que nadie pueda sacarla**. Y el efecto no se agota en el acceso —que ya sería grave por INV-06—: **sin administrador nadie aprueba ni rechaza**, así que todo trabajo enviado queda en estado `Pendiente` para siempre y el circuito de revisión entero se detiene (RN-10).
 
-Las dos guardas, la del alta y la del ciclo de vida, son la misma familia vista en dos momentos, y es la propiedad que el invariante candidato **INV-08** propone enunciar de una sola vez. Sigue **propuesto y no vigente**: los invariantes vigentes son los siete de §7.1.
+Las dos guardas, la del alta y la del ciclo de vida, son la misma familia vista en dos momentos, y es la propiedad que **INV-08** enuncia de una sola vez. **Está adoptado desde `PRODUCT-INTAKE` §17.1.P.2** y se cuenta entre los nueve invariantes vigentes de §7.1; la guía lo citaba como candidato y esa cita quedó desactualizada.
 
 **Trabajo.** Cuatro estados: `Borrador`, `Pendiente`, `Finalizado`, `Rechazado`. Dos propiedades gobiernan lo demás:
 
@@ -174,7 +174,7 @@ Los cuatro modos de documentación, con el orden en que conviene visitarlos desp
 | Modo | Ir a | Cuándo |
 | --- | --- | --- |
 | Tutorial | Esta guía | Es la que se acaba de recorrer. No hay otra |
-| How-to | [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), los doce contratos de uso | Cuando hay que invocar una operación concreta y saber qué resolver antes |
+| How-to | [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), los trece contratos de uso | Cuando hay que invocar una operación concreta y saber qué resolver antes |
 | Reference | [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) para entidades y transiciones; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones de error; [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../02-Especificacion-Funcional/Glosario-Funcional.md) para el vocabulario | Cuando hace falta un dato puntual |
 | Explanation | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.2 y §1.3; `Definicion-Modelo-De-Dominio.md` §4, §6 y §7; la §7 de esta guía | Cuando la pregunta es «por qué está así» |
 
@@ -187,16 +187,17 @@ Punto de entrada recomendado de la sección de especificación funcional: su `RE
 | 1.0 | 2026-08-09 | Emisión inicial. Recorrido de la primera hora para el mantenedor y para el agente de IA, sin integradores externos. Declara los prerrequisitos reducidos a abrir el repositorio en el entorno de desarrollo contenido, el primer resultado exitoso como la batería de dominio en verde sin dobles, el primer ejemplo con sentido de dominio tomado de CA-01 y CA-02 de CU-01, el recorrido de cuatro saltos para leer una guarda, el resumen de las dos máquinas de estado y las tres distinciones que separan observación, condición de error y comentario, el procedimiento de decisión de cuatro pasos sobre dónde va una regla nueva, catorce diagnósticos de la primera hora y el enlace explícito a los cuatro modos de Diátaxis. Cita los dos puntos abiertos declarados por 02 sin reabrirlos. **Corrección de la ronda r1 del audit, sobre esta misma emisión**: el contenido «Dónde va una regla nueva», que se había insertado como §4 y desplazaba tres secciones obligatorias de `Rules-UX-UI-DX.md` §4.2.4, se reubica **al final como §7**, con la misma convención de sección opcional numerada después del control de cambios que ya usan los casos de uso de 02; las seis secciones obligatorias recuperan su numeración 1 a 6 y se corrigieron las referencias cruzadas de los dos documentos que la citaban. **Corrección de la ronda r2 del audit, hallazgos N-01 y N-04**: la afirmación anterior era incompleta y acá queda rectificada. La renumeración había dejado además **una referencia interna** a la numeración vieja, en §2, que apuntaba a §5 en lugar de a §4 para el diagnóstico; se corrigió y se barrió el documento entero en busca de otras, sin encontrar ninguna más. Se corrige también el recuento de la tabla de §4, que en ese momento tenía **trece** filas y no catorce. La tabla de §7.1 pierde la columna «Dónde se ejerce», redundante con la §9 de cada caso de uso. Los comandos y las rutas del quick-start pasan a nombrarse **por su papel** —entorno de desarrollo contenido, script de construcción, script de pruebas, comando de prueba del ecosistema— conservando su forma literal, que es la que permite ejecutarlos. |
 | 1.1 | 2026-08-09 | Alineación con la **corrección del P0** que reporta `B-02-03-GeometriaFactory-Application-r1.md` y que AG-02 resolvió emitiendo **CU-12**. **§3.4 se reescribe**: la máquina de la cuenta deja de tener un estado inicial único y pasa a declarar los **dos caminos de alta** en tabla, con el fundamento de por qué la cuenta del administrador nace `Habilitado` —es la que habilita a las demás y ninguna anterior podría habilitarla a ella— y con el reenvío a la advertencia de que `ESTADO_INICIAL_NO_NEGOCIABLE` tiene causas opuestas en cada camino. §1 suma «camino de alta» al vocabulario mínimo y §3.2 acota su ejemplo al auto-registro. **§4 suma un diagnóstico**, el del administrador constituido por el camino equivocado, y pasa de trece a **catorce** filas. §5 actualiza el how-to a doce contratos de uso. La §7 no cambia: la correspondencia entre las once reglas y los siete invariantes sigue igual, y el invariante candidato **INV-08 no es vigente**. |
 | 1.2 | 2026-08-09 | Alineación con la corrección del **P1** de la ronda r3, informe `B-02-03-GeometriaFactory-Domain-r3.md`. **Hallazgo H-02**: §7.1 remitía a §4.2 de `Definicion-Modelo-De-Dominio.md` a buscar la correspondencia entre reglas e invariantes, que vive en **§4.3**; corregida, y la cabecera declara las dos subsecciones por separado. **Hallazgo H-01**: §3.4 suma que **las cuatro operaciones de ciclo de vida alcanzan sólo a las cuentas con papel `Alumno`** —enunciado literal de la capacidad F-03—, que sobre la cuenta del administrador el dominio las rechaza con `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, y que el efecto no se agota en el acceso: **sin administrador nadie aprueba ni rechaza y el circuito de revisión entero se detiene**. Declara además que la guarda del alta y la del ciclo de vida son la misma familia en dos momentos, que es lo que el candidato **INV-08** propone enunciar de una sola vez, y que sigue no vigente. La tabla de §4 **no cambia**: sigue en catorce diagnósticos. |
+| 1.4 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10** y **cierra la fila de este archivo del hallazgo `F26-20`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0. **Intake 1.10**: **§7.1** pasa de «trece reglas» a **quince**, con **RN-14** y **RN-15** en su tabla de correspondencia, las dos **sin invariante**; el recuento del párrafo pasa de «nueve de las trece … y cuatro no» a **«nueve de las quince … y seis no»**, contado sobre la tabla, y se declara además de dónde viene la lectura que le da INV-09 a RN-12 —de la **columna** de `PRODUCT-INTAKE` §17.1.P.2 y no de su prosa—, para no repetir el hallazgo `F26-09`. **§7.2** pasa de «cuatro reglas» a **seis** y suma el motivo de cada una de las dos nuevas: RN-14 describe cómo se produce un valor **y además no se ejerce en este proyecto de código**, y RN-15 enuncia la **ausencia** de una precondición. La tabla de §7.1, que llegaba hasta RN-11, suma también **RN-12** y **RN-13**, que la versión 1.3 había contado en prosa sin agregarlos a la tabla. **`F26-20`**: **§3.4** se titulaba «Las **dos** máquinas de estado» y son **tres** desde `Definicion-Modelo-De-Dominio.md` §5.3, la de la marca de cambio de contraseña pendiente; el título, el índice y la remisión pasan a nombrar las tres. **Ningún paso del quick-start, ningún procedimiento de decisión y ningún diagnóstico cambia.** Sube minor. |
 
 ## 7. Dónde va una regla nueva
 
 Este es el tramo de una hora y el que más rinde a largo plazo. La pregunta que responde es: aparece una regla nueva, ¿va como guarda de una entidad de este proyecto de código, o va en otra capa?
 
-### 7.1 Once reglas, siete invariantes
+### 7.1 Quince reglas, nueve invariantes
 
-Los invariantes **no son reglas distintas** de las once del negocio: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca, sin importar la operación ni quién la ejecute, aunque la petición llegue por fuera de la interfaz.
+Los invariantes **no son reglas distintas** de las quince del negocio: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca, sin importar la operación ni quién la ejecute, aunque la petición llegue por fuera de la interfaz.
 
-Siete de las once reglas tienen invariante asociado y cuatro no. La correspondencia es la de `Definicion-Modelo-De-Dominio.md` §4.3 y se transcribe acá porque es el corazón de este tramo:
+Nueve de las quince reglas tienen invariante asociado y **seis** no; **RN-12 y RN-13 comparten INV-09**, que es el único invariante que sostiene dos reglas — y la lectura que sostiene esa fila es la **columna** «regla de negocio que sostiene» de `PRODUCT-INTAKE` §17.1.P.2, no su prosa, que enumera a RN-12 entre las que no tienen ninguno (`02-Especificacion-Funcional/Especificacion-Funcional.md` §4). La correspondencia es la de `Definicion-Modelo-De-Dominio.md` §4.3 y se transcribe acá porque es el corazón de este tramo:
 
 | Regla | Enunciado abreviado | Invariante que la expresa como condición permanente |
 | --- | --- | --- |
@@ -211,13 +212,19 @@ Siete de las once reglas tienen invariante asociado y cuatro no. La corresponden
 | RN-09 | Toda observación de error indica la posición de la pieza y el campo | — |
 | RN-10 | El desenlace es exclusivo del administrador y los dos estados de cierre son terminales | INV-07 |
 | RN-11 | El administrador no ve los trabajos en `Borrador` | — |
+| RN-12 | El reseteo de contraseña conserva la cuenta y todos sus trabajos | INV-09 |
+| RN-13 | Con la contraseña provisoria sin cambiar, la cuenta no llega a ninguna otra parte | INV-09 |
+| RN-14 | La contraseña provisoria la produce el sistema: no es adivinable y no se repite | — |
+| RN-15 | Resetear no exige que la cuenta esté habilitada | — |
 
-### 7.2 Por qué cuatro reglas no tienen invariante
+### 7.2 Por qué seis reglas no tienen invariante
 
 No es un olvido y no hay que «completarlas». El motivo está declarado en `PRODUCT-INTAKE` §17.1.P.2 y es el criterio que se reusa cada vez que aparece una regla nueva:
 
 - **RN-07, RN-08 y RN-09 describen comportamientos**, no condiciones permanentes sobre el estado. «La baja arrastra los trabajos», «el texto no se reescribe» y «el error indica dónde está» son cosas que el sistema **hace** en un momento; no son afirmaciones que tengan que ser verdaderas siempre sobre cualquier dato guardado.
 - **RN-11 es una regla de alcance de consulta.** Restringe qué devuelve un listado, y un listado no es un dato: no hay ningún estado que la regla vuelva imposible.
+- **RN-14 describe cómo se produce un valor**, y además **no se ejerce en este proyecto de código**: la contraseña provisoria llega al dominio ya derivada, de modo que acá no hay con qué comprobar que no sea adivinable ni que no se repita. Se ejerce donde el valor nace, en `GeometriaFactory-Application` CU-11 y en `GeometriaFactory-Contracts` CU-08.
+- **RN-15 enuncia la ausencia de una precondición.** «Resetear no exige cuenta habilitada» no vuelve imposible ningún estado: retira una comprobación. Un invariante que la expresara tendría que afirmar algo, y no hay nada que afirmar.
 
 Dos precisiones de ubicación, que evitan que alguien busque en la capa equivocada:
 
@@ -238,3 +245,4 @@ Ante una regla nueva, en este orden:
 4. **Si la regla entra:** sube el enunciado a `02-Especificacion-Funcional/`, obtiene su identificador `RN-XX` y su `INV-XX` si corresponde, aparece en el §6 de algún caso de uso como código de condición, y **recién entonces** entra al catálogo de [`DX-Error-Messages.md`](DX-Error-Messages.md). El catálogo no inventa condiciones: las deriva.
 
 La tabla de fronteras de `Definicion-Modelo-De-Dominio.md` §7 es la referencia rápida del paso 3: enumera las ocho responsabilidades que este proyecto de código no tiene y dónde vive cada una.
+| 1.3 | 2026-08-09 | Alineación con `PRODUCT-INTAKE` **1.7** y con la categoría 02 en su versión 1.4. §7.1 pasa de «once reglas, siete invariantes» a **trece reglas, nueve invariantes**, con **RN-12** y **RN-13** compartiendo **INV-09** —el único invariante que sostiene dos reglas— y con **INV-08 declarado adoptado**, que esta guía venía citando como candidato no vigente. §5 actualiza el how-to a trece contratos de uso y la cabecera suma CU-13. La distinción entre resetear y dar de baja se lee en [`DX-Error-Messages.md`](DX-Error-Messages.md) §1.5, que es donde vive el catálogo. |

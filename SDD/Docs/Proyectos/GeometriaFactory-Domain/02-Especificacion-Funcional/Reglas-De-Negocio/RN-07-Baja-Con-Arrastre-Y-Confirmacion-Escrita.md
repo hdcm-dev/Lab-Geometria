@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-07 y reglas sin invariante), §4 (F-03), §4.2 (modelo de estados del trabajo), §7 (CL-6), §11 (RN-B6), §17.1.P.2; [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §2, §4 y §5; `00-Contexto/Vision-Producto.md` §8 (RG-06)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.7 §4.1 (enunciado de RN-07, reglas sin invariante, y **RN-12**), §4 (F-03, **F-26**), §4.2 (modelo de estados del trabajo), §7 (CL-6, **CL-7** reescrito), §9 (**X-2 retirada**), §11 (RN-B6), §17.1.P.2; [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §2, §4 y §5; `00-Contexto/Vision-Producto.md` §8 (RG-06)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -30,7 +30,7 @@ La baja de una cuenta de alumno elimina la cuenta **y todos sus trabajos**, es i
 
 ## 2. Justificación
 
-Es la respuesta declarada del cliente al caso límite de la eliminación de una cuenta y de sus datos (PRODUCT-INTAKE §7, CL-6). La baja es además la única salida disponible ante una contraseña olvidada, porque el producto no tiene canal de correo, de modo que es una operación frecuente y destructiva a la vez: por eso el producto tiene que hacerla difícil de ejecutar por accidente (`NB-01` §1 y §4). La pérdida de los trabajos está declarada como riesgo residual aceptado (`Vision-Producto.md` §8, RG-06).
+Es la respuesta declarada del cliente al caso límite de la eliminación de una cuenta y de sus datos (PRODUCT-INTAKE §7, CL-6). La baja **fue** además, hasta `PRODUCT-INTAKE` 1.6, la única salida disponible ante una contraseña olvidada, de modo que era una operación frecuente y destructiva a la vez: por eso el producto tiene que hacerla difícil de ejecutar por accidente (`NB-01` §1 y §4). **Ese motivo ya no vale y la exigencia sigue en pie.** El intake 1.7 incorpora la capacidad **F-26**, retira la exclusión **X-2** y reescribe el caso límite **CL-7** sobre el reseteo de contraseña, que conserva la cuenta y todos sus trabajos (**RN-12**, CU-13). La baja deja de ser frecuente por ese motivo y sigue siendo irreversible: la confirmación escrita la protege de un accidente, no de un olvido de contraseña. La pérdida de los trabajos está declarada como riesgo residual aceptado (`Vision-Producto.md` §8, RG-06).
 
 ## 3. Ámbito de aplicación
 
@@ -39,6 +39,7 @@ Es la respuesta declarada del cliente al caso límite de la eliminación de una 
 - **Esta regla no tiene invariante asociado**, y el intake lo declara explícitamente: describe un comportamiento y no una condición permanente sobre el estado (§17.1.P.2).
 - La confirmación escrita del correo la recoge la pieza pública del producto; el dominio **exige** que la operación llegue declarada como confirmada, y esa exigencia es la que esta regla fija.
 - No se aplica a la cuenta con papel `Administrador`, cuya baja rechaza RN-01.
+- **El reseteo de contraseña no dispara esta regla**, y el intake lo dice con todas las letras: «resetear no es dar de baja» (**RN-12**). Un reseteo conserva la cuenta, su estado, su papel y todos sus trabajos con sus estados y comentarios. Confundir las dos operaciones es exactamente el defecto que F-26 viene a cerrar.
 
 ## 4. Consecuencia si se viola
 
@@ -58,3 +59,4 @@ Pruebas unitarias de dominio previstas en 08: rechazo de la baja que declara con
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe el enunciado que `PRODUCT-INTAKE` 1.3 §4.1 transcribe y el modelo de estados de §4.2. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §3 precisa que el arrastre alcanza a los cuatro estados del trabajo, incluidos los dos terminales que el modelo nuevo introduce, y distingue ese arrastre de INV-07; y declara que **esta regla no tiene invariante asociado**, según §17.1.P.2. |
+| 1.2 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**. **El enunciado de la regla no cambia**; lo que cambia es una premisa de su justificación que quedó falsa: §2 declaraba que la baja era «la única salida disponible ante una contraseña olvidada», y el intake incorpora **F-26**, retira **X-2** y reescribe **CL-7** sobre el reseteo, que conserva la cuenta y sus trabajos (**RN-12**, CU-13). Se reescribe ese párrafo dejando en pie la exigencia de confirmación escrita, cuyo fundamento es la irreversibilidad y no la frecuencia. §3 suma que **el reseteo no dispara esta regla**. |

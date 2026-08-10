@@ -4,7 +4,7 @@
 | --- | --- |
 | Producto | Fábrica de Geometría |
 | Documento | NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md |
-| Versión | 1.1 |
+| Versión | 1.2 |
 | Estado | Propuesto |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
@@ -65,7 +65,7 @@ Un alumno pega en su trabajo la salida exacta de su programa, con sus comas fina
 | Criterio | Métrica | Target | Plazo |
 | --- | --- | --- | --- |
 | Cobertura de la batería obligatoria con datos verificados | Casos de prueba obligatorios que pasan, sobre los 9 declarados | 9 de 9 | Punto de control de la etapa `f` |
-| Aceptación del dato real sin pedir correcciones | Escenarios de datos del intake que se interpretan sin que el alumno modifique una sola coma de su salida, sobre los 7 declarados | 7 de 7 | Punto de control de la etapa `f` |
+| Aceptación del dato real sin pedir correcciones | Escenarios de datos del intake que se interpretan sin que el alumno modifique una sola coma de su salida, sobre los **8** declarados —`E-1` a `E-8` de PRODUCT-INTAKE §20, con `E-8` incorporado el 2026-08-09— | **8 de 8** | Punto de control de la etapa `f` |
 | Localización del defecto | Errores de interpretación reportados sin indicar índice de figura y campo | 0 | Punto de control de la etapa `f` |
 | Límite entre lo que no verifica y la entrega | Trabajos que pasan a estado `Pendiente` teniendo errores de interpretación sin resolver | 0 | Punto de control de la etapa `f` |
 | Acción única de guardado | Acciones de guardado que el alumno tiene disponibles sobre su trabajo, sobre la 1 declarada: enviar | 1 de 1 | Punto de control de la etapa `f` |
@@ -106,3 +106,4 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §11 (RN-B3) y §15
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Articula la necesidad de interpretar el dato real del alumno y de localizar el defecto a partir de la capacidad F-09 del intake, con cinco criterios de éxito trazados a su sección de origen y dos casos de uso previstos. |
 | 1.1 | 2026-08-08 | Absorbe el circuito de revisión del administrador incorporado por el Product Owner en `PRODUCT-INTAKE` 1.3. **Sube minor y archiva el estado anterior** porque el documento ya es citado como insumo por otras categorías (`Master-Prompt.md` §5). Incorpora la capacidad **F-22**, el envío como única acción de guardado, cuyo dolor es el mismo que esta NB ya articulaba —dónde está el límite entre lo que no verifica y lo que es una entrega— y que ahora se resuelve con una sola acción. **§1** reescribe el tercer párrafo sobre el envío y el par `Borrador` / `Pendiente`; **§2**, **§3** y **§4** ajustan el ejemplo y las viñetas. **§5** reescribe el cuarto criterio, que pasa de «trabajos que se finalizan» a «trabajos que pasan a estado `Pendiente`», y suma un quinto criterio de acción única de guardado. **§7** suma CU-23, enviar un trabajo, y renombra CU-13. **§8** declara a NB-09 como dependiente. **§9** declara la agregación de F-09 y F-22, las dos Must Have. |
+| 1.2 | 2026-08-09 | **Cierra la fila de `F26-20` que alcanza a este archivo**, del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. **§5**, primer criterio: los escenarios de datos del intake pasan de **siete a ocho**, contados `E-1` a `E-8` en PRODUCT-INTAKE §20; el octavo, `E-8`, lo incorporó el Product Owner el 2026-08-09 para la condición `DIMENSION_NO_LEGIBLE`, que era la única del contrato de fachada sin escenario propio. La métrica y el sentido del criterio no cambian: cambia el denominador, que estaba desactualizado. **Sube minor y archiva el estado anterior** por `Master-Prompt.md` §5. Ninguna otra métrica, target, dependencia ni CU prevista cambia. |

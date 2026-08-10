@@ -15,66 +15,65 @@
     <span class="mq-identidad" data-mq-marca></span>
     <h1>Ingresar al laboratorio</h1>
 
-    <p class="mq-banda mq-banda--info" data-mq-estado="vacio" style="margin-top:16px">
+    <p class="mq-banda mq-banda--info mq-mt-5" data-mq-estado="vacio">
       <strong>No aplica.</strong> Esta superficie no presenta ninguna colección. Se declara para que la
       ausencia sea deliberada.
     </p>
 
     <!-- Las cuatro bandas de confirmación que acusan recibo de actos que
          ocurren fuera de esta superficie. Se anuncian como estado. -->
-    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="confirmacion-aprovisionamiento" style="margin-top:16px">
+    <p class="mq-banda mq-banda--confirmacion mq-mt-5" role="status" data-mq-estado="confirmacion-aprovisionamiento">
       Tu cuenta de administrador quedó creada. El paso siguiente es entrar con ella.
     </p>
-    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="confirmacion-registro" style="margin-top:16px">
+    <p class="mq-banda mq-banda--confirmacion mq-mt-5" role="status" data-mq-estado="confirmacion-registro">
       Tu cuenta quedó registrada. Todavía falta que el docente la habilite.
     </p>
-    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="confirmacion-contrasena" style="margin-top:16px">
+    <p class="mq-banda mq-banda--confirmacion mq-mt-5" role="status" data-mq-estado="confirmacion-contrasena">
       Tu contraseña quedó guardada. Ya podés entrar con ella.
     </p>
-    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="sesion-cerrada" style="margin-top:16px">
+    <p class="mq-banda mq-banda--confirmacion mq-mt-5" role="status" data-mq-estado="sesion-cerrada">
       Cerraste sesión. Para volver a entrar, escribí tu correo y tu contraseña.
     </p>
-    <p class="mq-banda mq-banda--atencion" role="status" data-mq-estado="sesion-no-restablecible" style="margin-top:16px">
+    <p class="mq-banda mq-banda--atencion mq-mt-5" role="status" data-mq-estado="sesion-no-restablecible">
       Tu sesión no se pudo restablecer y volviste acá. Entrá otra vez para seguir donde estabas.
     </p>
 
     <!-- Bandas de resultado, variante error -->
-    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="error-entrada" style="margin-top:16px">
+    <p class="mq-banda mq-banda--error mq-mt-5" role="alert" data-mq-estado="error-entrada">
       Completá el correo y la contraseña.
     </p>
     <!-- Un único mensaje que no declara cuál de los dos falló: distinguirlos
          confirmaría la existencia de la identidad. -->
-    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="credencial-rechazada" style="margin-top:16px">
+    <p class="mq-banda mq-banda--error mq-mt-5" role="alert" data-mq-estado="credencial-rechazada">
       El correo o la contraseña no corresponden.
     </p>
-    <p class="mq-banda mq-banda--error" role="alert" data-mq-estado="cuenta-no-habilitada" style="margin-top:16px">
+    <p class="mq-banda mq-banda--error mq-mt-5" role="alert" data-mq-estado="cuenta-no-habilitada">
       Tu cuenta está a la espera de que el docente la habilite. Todavía no podés entrar.
     </p>
     <!-- No es un error y no se presenta como tal. -->
-    <p class="mq-banda mq-banda--info" role="status" data-mq-estado="contrasena-sin-establecer" style="margin-top:16px">
+    <p class="mq-banda mq-banda--info mq-mt-5" role="status" data-mq-estado="contrasena-sin-establecer">
       Es la primera vez que entrás. Antes de seguir tenés que elegir tu contraseña.
       <a href="Credencial-Propia.html?estado=curso-establecimiento">Elegir mi contraseña</a>.
     </p>
-    <p class="mq-banda mq-banda--confirmacion" role="status" data-mq-estado="exito" style="margin-top:16px">
+    <p class="mq-banda mq-banda--confirmacion mq-mt-5" role="status" data-mq-estado="exito">
       Entraste. Vas a la ruta inicial de tu papel:
       <a href="Panel-De-Trabajos-Del-Alumno.html">el listado propio si sos alumno</a>,
       <a href="Listado-De-La-Comision.html">el de la comisión si sos el administrador</a>.
     </p>
 
-    <div class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" style="margin:16px 0">
+    <div class="mq-aviso-indisponible mq-margen-bloque-5" data-mq-estado="indisponible" role="alert">
       <h2>No pudimos verificar tus datos</h2>
       <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
          Probá de nuevo en un rato.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el ingreso</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar el ingreso</button>
     </div>
 
-    <div data-mq-estado="cargando" aria-hidden="true" style="margin-top:16px">
-      <div class="mq-esqueleto" style="width:30%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
-      <div class="mq-esqueleto" style="width:40%"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+    <div data-mq-estado="cargando" aria-hidden="true" class="mq-mt-5">
+      <div class="mq-esqueleto mq-ancho-30"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
+      <div class="mq-esqueleto mq-ancho-40"></div><div class="mq-esqueleto mq-esqueleto--campo"></div>
     </div>
 
-    <form data-mq-estado="con-datos enviando error-entrada credencial-rechazada cuenta-no-habilitada contrasena-sin-establecer confirmacion-aprovisionamiento confirmacion-registro confirmacion-contrasena sesion-cerrada sesion-no-restablecible indisponible reconectando vacio version-preliminar origen-indeterminado"
-          style="margin-top:16px" novalidate>
+    <form data-mq-estado="con-datos enviando error-entrada credencial-rechazada cuenta-no-habilitada contrasena-sin-establecer confirmacion-aprovisionamiento confirmacion-registro confirmacion-contrasena sesion-cerrada sesion-no-restablecible indisponible reconectando vacio version-preliminar origen-indeterminado" novalidate class="mq-mt-5">
       <div class="mq-campo">
         <label for="in-correo">Correo</label>
         <input class="mq-input" id="in-correo" type="email" autocomplete="username">
@@ -82,7 +81,7 @@
       <div class="mq-campo">
         <label for="in-clave">Contraseña</label>
         <input class="mq-input" id="in-clave" type="password" autocomplete="current-password">
-        <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:8px"
+        <button type="button" class="mq-btn mq-btn--secundario mq-mt-2"
                 aria-pressed="false" data-mq-ver-clave>Mostrar la contraseña</button>
       </div>
 
@@ -95,13 +94,13 @@
       </button>
     </form>
 
-    <p class="mq-caption" style="margin-top:16px">¿No tenés cuenta? <a href="Registro-De-Cuenta.html">Registrarte</a></p>
+    <p class="mq-caption mq-mt-5">¿No tenés cuenta? <a href="Registro-De-Cuenta.html">Registrarte</a></p>
 
     <!-- Nota inerte: no es un enlace y no dispara nada. Dice qué hacer y
          advierte la consecuencia, que es la parte que importa. -->
     <p class="mq-caption" data-mq-nota-olvido></p>
 
-    <p class="mq-banda mq-banda--info" style="margin-top:16px">
+    <p class="mq-banda mq-banda--info mq-mt-5">
       <span><strong>Credencial de la maqueta.</strong> Correo <code data-mq-correo-admin></code>,
       contraseña <code data-mq-clave-admin></code>. Es un instrumento de esta maqueta y no forma parte
       del producto.</span>

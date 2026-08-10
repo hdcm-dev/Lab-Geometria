@@ -4,11 +4,11 @@
 | --- | --- |
 | Producto | Fábrica de Geometría |
 | Documento | NB-01-Control-De-Admision-Al-Laboratorio.md |
-| Versión | 1.0 |
+| Versión | 1.1 |
 | Estado | Propuesto |
-| Fecha | 2026-08-08 |
+| Fecha | 2026-08-09 |
 | Autor | Analista de Negocio Senior (AG-01) |
-| Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (propuesta de valor), §4 (capacidades F-01 y F-03), §7 (caso límite CL-6), §9 (exclusión X-3), §11 (riesgo RN-B6); `Vision-Producto.md` §1, §2 y §9; `Alcance-Producto.md` §4.1 y §5 |
+| Trazabilidad upstream | PRODUCT-INTAKE 1.9 §1 (idea y problema), §3 (propuesta de valor), §4 (capacidades F-01 y F-03; **F-26**, que vive en el mismo panel y pertenece a NB-02), §4.1 (**RN-15**, que declara que el reseteo no es una transición de la máquina de estados), §7 (casos límite CL-6 y **CL-7** reescrito), §9 (exclusión X-3 vigente y **X-2 retirada**), §11 (riesgo RN-B6); `Vision-Producto.md` §1, §2, §8 (riesgo RG-06) y §9; `Alcance-Producto.md` §4.1 y §5 |
 | Trazabilidad downstream | CU-01, CU-02, CU-03 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
@@ -32,13 +32,15 @@
 
 La cátedra necesita decidir quién entra al laboratorio y quién deja de estar, y hoy no tiene ningún mecanismo para hacerlo. El circuito actual de la Actividad 1 no tiene identidad: el alumno modela, copia un texto y lo pega en una página suelta, de modo que no existe la noción de cuenta, ni de comisión, ni de permanencia (PRODUCT-INTAKE §1). Sin una puerta de entrada que alguien controle, cualquier cosa que se construya encima no distingue a un alumno de la comisión de un desconocido, y el docente no puede responder la pregunta más elemental de la administración de un curso: quiénes están adentro.
 
-La restricción que ordena esta necesidad es que **no hay canal de correo** en el producto, por decisión declarada del Product Owner (PRODUCT-INTAKE §9, exclusión X-1). Eso descarta la forma habitual de autorizar altas y obliga a que la admisión sea un acto explícito del docente sobre una lista visible. La misma decisión hace que la única forma de resolver una cuenta perdida sea darla de baja y volver a darla de alta, y que esa baja arrastre los trabajos de esa cuenta (PRODUCT-INTAKE §7, CL-6, y §11, RN-B6): es una operación destructiva que el producto tiene que hacer difícil de ejecutar por accidente.
+La restricción que ordena esta necesidad es que **no hay canal de correo** en el producto, por decisión declarada del Product Owner (PRODUCT-INTAKE §9, exclusión X-1). Eso descarta la forma habitual de autorizar altas y obliga a que la admisión sea un acto explícito del docente sobre una lista visible.
+
+La baja de una cuenta **elimina también todos sus trabajos** (PRODUCT-INTAKE §7, CL-6, y §11, RN-B6): es una operación destructiva que el producto tiene que hacer difícil de ejecutar por accidente. **Hasta el 2026-08-09 era además la única salida declarada para un alumno que olvidaba su contraseña**, y esta necesidad lo decía así. Ya no lo es: el Product Owner incorporó la capacidad **F-26**, con la que el administrador **resetea la credencial** desde este mismo panel sin tocar la cuenta ni sus trabajos, y la exclusión X-2 quedó retirada. La baja vuelve entonces a ser lo que su enunciado dice —sacar a alguien del laboratorio—, y deja de ser el remedio de un olvido. **F-26 no pertenece a esta necesidad sino a NB-02**, aunque comparta el panel: por RN-15 el reseteo opera sobre la credencial y **no es una transición de la máquina de estados de la cuenta**, de modo que no admite ni excluye a nadie; el fundamento completo está en NB-02 §9.
 
 La necesidad también fija su propio techo. El producto es deliberadamente básico: un solo administrador, dos papeles fijos y ningún esquema de permisos configurables (PRODUCT-INTAKE §9, exclusión X-3). Resolver la admisión no es construir una administración de identidades; es darle al docente el control mínimo y suficiente sobre la lista de su comisión.
 
 ## 2. Ejemplo de uso desde la perspectiva del negocio
 
-Arranca la cursada. El docente abre el laboratorio por primera vez y configura su propia cuenta de administrador; a partir de ese momento nadie más puede configurar otra. Durante la primera semana, veinticuatro alumnos se registran y quedan a la espera. El docente entra a su panel, los ve listados, reconoce a los de su comisión y los habilita; a dos que no reconoce los deja sin habilitar. Más adelante, un alumno pierde su contraseña y no hay forma de recuperarla, así que el docente da de baja la cuenta —el producto le exige escribir el correo de esa cuenta para confirmar, y le advierte que se van también los trabajos cargados— y el alumno vuelve a registrarse desde cero.
+Arranca la cursada. El docente abre el laboratorio por primera vez y configura su propia cuenta de administrador; a partir de ese momento nadie más puede configurar otra. Durante la primera semana, veinticuatro alumnos se registran y quedan a la espera. El docente entra a su panel, los ve listados, reconoce a los de su comisión y los habilita; a dos que no reconoce los deja sin habilitar. Más adelante, un alumno deja de cursar y el docente da de baja su cuenta: el producto le exige escribir el correo de esa cuenta para confirmar, y le advierte que se van también los trabajos cargados. Otro alumno, en cambio, olvida su contraseña, y ése **no** pasa por la baja: el docente le resetea la credencial desde el mismo panel y el alumno vuelve a entrar con todos sus trabajos (F-26, NB-02).
 
 ## 3. Impacto
 
@@ -46,8 +48,8 @@ Arranca la cursada. El docente abre el laboratorio por primera vez y configura s
 - Si se resuelve: toda la cadena posterior tiene sobre qué apoyarse, porque un trabajo sólo puede tener dueño si antes existe una cuenta habilitada.
 - Si se resuelve: la ausencia de canal de correo deja de ser un impedimento y pasa a ser un rasgo del circuito, resuelto con un acto explícito del docente.
 - Si queda sin resolver: no hay forma de distinguir a un alumno de la comisión de cualquier otra persona, y ninguna de las capacidades comprometidas posteriores tiene fundamento.
-- Si queda sin resolver: la única salida ante una cuenta perdida quedaría fuera del producto, y el docente volvería a depender de mirar la pantalla del alumno.
-- Riesgo residual aceptado: la baja elimina también los trabajos de la cuenta, y esa pérdida es irreversible (PRODUCT-INTAKE §11, RN-B6).
+- Si queda sin resolver: no habría panel donde ejercer ninguna de las operaciones sobre una cuenta, ni la admisión ni el reseteo de credencial que NB-02 necesita.
+- Riesgo residual aceptado: la baja elimina también los trabajos de la cuenta, y esa pérdida es irreversible (PRODUCT-INTAKE §11, RN-B6). **Desde el 2026-08-09 ese riesgo dejó de alcanzar al olvido de contraseña**, que se resuelve reseteando (F-26).
 
 ## 4. Problema específico que resuelve
 
@@ -64,7 +66,7 @@ Arranca la cursada. El docente abre el laboratorio por primera vez y configura s
 | --- | --- | --- | --- |
 | Unicidad de la cuenta de administrador | Cuentas de administrador que el producto admite configurar cuando ya existe una | 0 | Punto de control de la etapa `c` |
 | Admisión explícita | Cuentas de alumno que acceden al laboratorio sin haber sido habilitadas por el administrador | 0 | Punto de control de la etapa `d` |
-| Cobertura de las operaciones sobre una cuenta | Operaciones disponibles en el panel del administrador, sobre las 4 declaradas: habilitar, bloquear, rehabilitar y dar de baja | 4 de 4 | Punto de control de la etapa `d` |
+| Cobertura de las operaciones de admisión | Operaciones **de admisión** disponibles en el panel del administrador, sobre las 4 que esta necesidad declara: habilitar, bloquear, rehabilitar y dar de baja. El panel ofrece además una quinta operación, el **reseteo de contraseña**, que no es de admisión y se mide en NB-02 | 4 de 4 | Punto de control de la etapa `d` |
 | Protección de la operación destructiva | Bajas que se ejecutan sin que el administrador escriba el correo de la cuenta como confirmación | 0 | Punto de control de la etapa `d` |
 | Advertencia previa a la baja | Confirmaciones de baja que declaran explícitamente que se eliminan también los trabajos de esa cuenta, sobre el total de confirmaciones de baja | 100 % | Punto de control de la etapa `d` |
 
@@ -77,7 +79,7 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §4 (F-01) y de la 
 | Docente de Programación 2 (TUP), responsable de la cátedra y de la Actividad 1, en su papel de Product Owner | Propietario | Decidió que no hay canal de correo y que el producto tiene un único administrador; da el OK explícito en el punto de control de las etapas `c` y `d` |
 | Cátedra de Programación 2, como dueño del problema | Propietario | Padece hoy la ausencia de una lista de participantes del laboratorio; fija el rumbo del laboratorio |
 | El mismo docente, en su papel de equipo de desarrollo (una persona, asistida por un agente de IA) | Implementador | Construye el circuito de admisión y lo demuestra en el punto de control de cada etapa |
-| El mismo docente, en su papel de administrador del laboratorio, con la cuenta única de administrador | Beneficiario y operador | Habilita, bloquea, rehabilita y da de baja cuentas; es quien ejecuta la admisión en cada cursada |
+| El mismo docente, en su papel de administrador del laboratorio, con la cuenta única de administrador | Beneficiario y operador | Habilita, bloquea, rehabilita y da de baja cuentas; es quien ejecuta la admisión en cada cursada. Desde el mismo panel ejerce también el reseteo de contraseña, que pertenece a NB-02 |
 | Alumno de la comisión | Beneficiario | Recibe un aviso explícito de su situación —pendiente, habilitado o bloqueado— en lugar de un rechazo sin explicación |
 
 ## 7. Trazabilidad a CU
@@ -102,3 +104,4 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §4 (F-01) y de la 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Articula la necesidad de admisión y de bajas del laboratorio a partir de las capacidades F-01 y F-03 del intake, con cinco criterios de éxito trazados a su sección de origen y tres casos de uso previstos. |
+| 1.1 | 2026-08-09 | **Cierra la parte del hallazgo `F26-02` que alcanza a este archivo**, del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. La auditoría encontró que **§2 enseñaba que la única forma de resolver una cuenta perdida es darla de baja y volver a darla de alta**, que es exactamente el procedimiento que la capacidad **F-26** vino a reemplazar y que el intake ya no declara. **Sube minor y archiva el estado anterior** porque el documento ya es citado como insumo por otras categorías (`Master-Prompt.md` §5). **§1**: el párrafo de la restricción se parte en dos; la baja deja de presentarse como la salida del olvido de contraseña, se declara la incorporación de F-26 y se declara **por qué F-26 no pertenece a esta necesidad sino a NB-02** pese a compartir el panel —por RN-15 el reseteo no es una transición de la máquina de estados y no admite ni excluye a nadie—. **§2**: el ejemplo deja de resolver el olvido con una baja y distingue los dos casos, el alumno que deja de cursar y el que olvidó la clave. **§3**: se corrige el impacto de no resolver la necesidad, que citaba la salida destructiva, y el riesgo residual declara que ya no alcanza al olvido de contraseña. **§5**: el tercer criterio pasa a medir las **operaciones de admisión** y declara que el panel tiene una quinta operación, el reseteo, que se mide en NB-02; el target sigue siendo 4 de 4 y ningún otro criterio cambia. **§6**: la fila del administrador registra que ejerce el reseteo desde el mismo panel. Ninguna prioridad, dependencia ni caso de uso previsto de esta NB cambia. |

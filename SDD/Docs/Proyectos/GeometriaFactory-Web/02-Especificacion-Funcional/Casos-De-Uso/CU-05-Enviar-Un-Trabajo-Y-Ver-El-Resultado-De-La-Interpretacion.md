@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-05-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -114,7 +114,7 @@ Permitir que el alumno cargue un trabajo con su nombre, su fecha, su descripció
 | Necesidad de negocio | [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md), [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) |
 | Reglas de negocio aplicables | [`RN-05`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) —corta hoy en el envío y no en el cierre—, [`RN-08`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md), [`RN-09`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md), [`RN-03`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) |
 | Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-03](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) flujo principal, FA-01 y FA-03, y su señal §6.1; [`CU-06`](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) |
-| Fachada del visualizador | [`inicializar`, `cargarJson`, `destruir`](../../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §4.1, §4.2 y §4.5, para la previsualización previa al envío. El recorrido completo de las cinco funciones es de CU-07 |
+| Fachada del visualizador | [`inicializar`, `cargarJson`, `destruir`](../../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §4.1, §4.2 y §4.5, para la previsualización previa al envío. El recorrido completo de las **seis** funciones es de CU-07 |
 | Historias de usuario a generar en 06 | US-11, US-12, US-13, US-14 |
 | Componentes esperados en 05 | Vista de trabajo, componente anfitrión del visualizador y cliente tipado de la pieza de datos, todos del lado del servidor de la pieza pública salvo el dibujo |
 | Tests previstos en 08 | Guion de demostración de la etapa `f` con los escenarios de datos verificados del intake; batería obligatoria de nueve casos, cuya titularidad es de la pieza de datos |
@@ -131,3 +131,4 @@ Permitir que el alumno cargue un trabajo con su nombre, su fecha, su descripció
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
+| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, decisión **(b)**. §9 corrige el recuento de la fachada, que decía **cinco** funciones y son **seis** desde el intake 1.6, que incorporó `establecerMovimiento` para gobernar los dos movimientos automáticos de F-25. **Este caso de uso no la consume**: la previsualización previa al envío sigue usando `inicializar`, `cargarJson` y `destruir`, y el movimiento automático es de la vista de trabajo, CU-07. Sube minor por alineación de una referencia al contrato de fachada, sin cambiar ningún flujo. |

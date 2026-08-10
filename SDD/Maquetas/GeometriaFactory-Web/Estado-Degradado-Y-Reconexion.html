@@ -30,20 +30,20 @@
 
     <!-- Tabla comparativa: los dos tramos independientes y sus dos avisos.
          Confundirlos es el error de lectura más probable del diseño. -->
-    <details class="mq-tarjeta" style="margin-bottom:16px">
-      <summary class="mq-meta" style="cursor:pointer">Los dos tramos, y por qué se avisan distinto</summary>
-      <div class="mq-tabla-envoltorio" style="margin-top:12px">
+    <details class="mq-tarjeta mq-mb-5">
+      <summary class="mq-meta mq-clicable">Los dos tramos, y por qué se avisan distinto</summary>
+      <div class="mq-tabla-envoltorio mq-mt-3">
         <table class="mq-tabla">
           <thead><tr><th scope="col"></th><th scope="col">Cartel de reconexión</th>
             <th scope="col">Aviso de indisponibilidad</th></tr></thead>
           <tbody>
-            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Qué tramo se cortó</th>
+            <tr><th scope="row" class="mq-th-plano">Qué tramo se cortó</th>
               <td>Navegador ↔ pieza pública</td><td>Pieza pública → pieza de datos</td></tr>
-            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Dónde se dibuja</th>
+            <tr><th scope="row" class="mq-th-plano">Dónde se dibuja</th>
               <td>Banda superpuesta en el borde superior</td><td>Dentro del área de contenido</td></tr>
-            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Qué pasa con el resto</th>
+            <tr><th scope="row" class="mq-th-plano">Qué pasa con el resto</th>
               <td>La página queda inerte hasta que vuelve</td><td>El armazón sigue entero y navegable</td></tr>
-            <tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:inherit">Qué se ofrece</th>
+            <tr><th scope="row" class="mq-th-plano">Qué se ofrece</th>
               <td>Reintentar la conexión</td><td>Reintentar la acción que falló</td></tr>
           </tbody>
         </table>
@@ -76,7 +76,7 @@
     </div>
 
     <div data-mq-estado="cargando" aria-hidden="true">
-      <div class="mq-esqueleto" style="height:42px"></div><div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div><div class="mq-esqueleto mq-esqueleto--fila"></div>
     </div>
 
     <!-- Estado: vacío. NO es ninguno de los dos avisos y se dibuja acá sólo
@@ -87,7 +87,7 @@
       <span data-mq-ico-vacio aria-hidden="true"></span>
       <h2 id="ed-vacio-h">Todavía no cargaste ningún trabajo</h2>
       <p>La colección llegó con cero elementos y el servicio está disponible.</p>
-      <a class="mq-btn mq-btn--primario" href="Envio-De-Trabajo.html" style="margin-top:16px">
+      <a class="mq-btn mq-btn--primario mq-mt-5" href="Envio-De-Trabajo.html">
         Cargar mi primer trabajo</a>
     </section>
 
@@ -96,7 +96,7 @@
       <h2 id="ed-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span><span data-mq-indisponible-titulo></span></h2>
       <p data-mq-indisponible-cuerpo></p>
       <!-- La acción nombra la acción concreta, no «Reintentar» a secas. -->
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer mis trabajos</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar traer mis trabajos</button>
     </section>
 
     <!-- Estado: fallo no clasificado. Mismo aviso: es la garantía de que
@@ -104,7 +104,7 @@
     <section class="mq-aviso-indisponible" data-mq-estado="fallo-no-clasificado" role="alert" aria-labelledby="ed-fallo-h">
       <h2 id="ed-fallo-h"><span data-mq-ico-alerta-2 aria-hidden="true"></span>No pudimos completar la acción</h2>
       <p>Algo no funcionó y el laboratorio sigue en pie. Probá de nuevo en un rato.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar la acción</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar la acción</button>
     </section>
 
     <!-- Estado: indisponible con contenido conservado. El aviso va ARRIBA
@@ -115,11 +115,11 @@
         <h2 id="ed-cons-h"><span data-mq-ico-alerta-3 aria-hidden="true"></span>No pudimos enviar tu trabajo</h2>
         <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos.
            Lo que escribiste sigue acá: probá de nuevo.</p>
-        <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el envío</button>
+        <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar el envío</button>
       </section>
-      <section class="mq-tarjeta" style="margin-top:14px" aria-labelledby="ed-form-h">
+      <section class="mq-tarjeta mq-mt-4" aria-labelledby="ed-form-h">
         <h2 id="ed-form-h" class="mq-meta">Lo que escribiste, intacto</h2>
-        <div class="mq-campo" style="margin-top:12px">
+        <div class="mq-campo mq-mt-3">
           <label for="ed-nombre">Nombre</label>
           <input class="mq-input" id="ed-nombre" type="text" data-mq-campo="nombre">
         </div>
@@ -134,18 +134,17 @@
     <!-- Estado: sesión no restablecible. -->
     <section class="mq-tarjeta" data-mq-estado="sesion-no-restablecible" role="alert" aria-labelledby="ed-ses-h">
       <h2 id="ed-ses-h" class="mq-title">Tu sesión no se pudo restablecer</h2>
-      <p class="mq-caption" style="margin-top:8px">
+      <p class="mq-caption mq-mt-2">
         La conexión volvió, pero la sesión no. Volvés a la superficie de ingreso con el motivo
         declarado, y no a una pantalla rota ni a un error arbitrario en una acción cualquiera.
       </p>
-      <a class="mq-btn mq-btn--primario" href="Ingreso.html?estado=sesion-no-restablecible"
-         style="margin-top:12px">Ir a ingresar</a>
+      <a class="mq-btn mq-btn--primario mq-mt-3" href="Ingreso.html?estado=sesion-no-restablecible">Ir a ingresar</a>
     </section>
 
     <!-- Estado: escena no disponible. No es indisponibilidad del laboratorio. -->
     <section class="mq-tarjeta" data-mq-estado="escena-no-disponible" aria-labelledby="ed-esc-h">
       <h2 id="ed-esc-h" class="mq-title">La escena no está disponible en este navegador</h2>
-      <p class="mq-caption" style="margin-top:8px">
+      <p class="mq-caption mq-mt-2">
         No es una indisponibilidad del laboratorio: es una limitación del navegador. El resto del
         producto sigue disponible, y su tratamiento vive en las superficies que dibujan.
       </p>
@@ -156,7 +155,7 @@
       El servicio volvió, la acción procedió y el aviso desapareció. No hizo falta volver a ingresar.
     </p>
 
-    <p class="mq-caption" style="margin-top:20px">
+    <p class="mq-caption mq-mt-7">
       Lo que ningún mensaje de esta superficie contiene: la dirección de un servicio interno, el
       nombre de un archivo de datos, una traza, un código de error, un tiempo estimado de recuperación
       y un canal de soporte. El producto no tiene mesa de ayuda. Lo que sí hay para un reporte es el

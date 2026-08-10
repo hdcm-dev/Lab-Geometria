@@ -8,7 +8,27 @@
      - Design-Rules-Identidad-De-Version.md §4 (sello y diagnóstico)
      - Design-Rules-Primer-Arranque.md §4 (tarjeta de acceso, banda de resultado)
    No hay literales visuales ad hoc: cualquier valor nuevo se promueve al
-   catálogo antes de usarse acá.
+   catálogo antes de usarse acá. Los cuatro colores que esta hoja había
+   introducido por su cuenta —un borde de atención, un realce de fila y los dos
+   colores de la barra de validación— se reemplazaron por tokens existentes; la
+   ausencia de un token de borde para el estado de atención quedó registrada
+   como observación al catálogo del framework (hallazgo `H-7` de la bitácora),
+   con destino `template`, igual que se hizo con `H-1`.
+
+   Los tres valores translúcidos que quedaban escritos en línea —el filete del
+   pie de la barra lateral, el velo del diálogo modal y el texto del sello
+   sobre la rampa de marca— se promovieron a `:root` por el hallazgo `F26-29`
+   de `SDD/Docs/Audit/F26-Propagacion-r1.md`. Ninguno es un color nuevo: son
+   `--color-text-on-brand` y `--color-text-primary` con opacidad, y con eso la
+   afirmación de arriba vuelve a ser cierta sin excepciones.
+
+   CONTRASTE DE LA BARRA DE VALIDACIÓN, MEDIDO
+   -------------------------------------------
+   La barra es el instrumento con el que se valida la accesibilidad del resto,
+   así que sus propios pares están medidos sobre `--color-brand-primary-dark`
+   (#04342C): `--color-background-warning` 11.94:1, `--color-brand-primary-tint`
+   12.07:1 y `--color-text-on-brand` 13.70:1. Los tres superan holgadamente el
+   piso de 4.5:1, también al tamaño de `--type-meta-size`.
    ============================================================================ */
 
 :root {
@@ -43,6 +63,19 @@
   --color-text-info:            #185FA5;
   --color-background-info:      #E7F0F9;
   --color-border-info:          #BBD4EA;
+  /* Texto y contornos sobre la rampa de marca. NO es un color nuevo: es el
+     mismo valor que `--color-background-primary` del catálogo, materializado
+     bajo el rol en el que esta hoja lo usa, para que ninguna regla escriba
+     `#FFFFFF` a mano. */
+  --color-text-on-brand:        #FFFFFF;
+  /* Tres valores translúcidos que la hoja usaba en línea y que se promueven
+     acá por el hallazgo `F26-29` de `SDD/Docs/Audit/F26-Propagacion-r1.md`.
+     NO son colores nuevos: los dos primeros son `--color-text-on-brand` con
+     opacidad, sobre la rampa de marca del shell; el tercero es
+     `--color-text-primary` con opacidad, como velo del diálogo modal. */
+  --color-border-on-brand:      rgba(255, 255, 255, .18);
+  --color-text-on-brand-soft:   rgba(255, 255, 255, .85);
+  --color-backdrop:             rgba(26, 26, 24, .45);
 
   /* --- tipografía (base §2.2) ------------------------------------------- */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -209,7 +242,7 @@ a { color: var(--color-brand-primary); }
 
 .mq-sidebar-pie {
   margin-top: auto; padding-top: var(--space-4);
-  border-top: 1px solid rgba(255,255,255,.18);
+  border-top: 1px solid var(--color-border-on-brand);
   display: flex; flex-direction: column; gap: var(--space-2);
 }
 .mq-sidebar-persona { font-size: var(--type-body-size); }
@@ -287,8 +320,8 @@ a { color: var(--color-brand-primary); }
   cursor: pointer; text-decoration: none;
   transition: background var(--motion-fast) var(--motion-ease);
 }
-.mq-btn--primario   { background: var(--color-brand-primary); color: #FFFFFF; }
-.mq-btn--primario:hover { background: var(--color-brand-primary-dark); color: #FFFFFF; }
+.mq-btn--primario   { background: var(--color-brand-primary); color: var(--color-text-on-brand); }
+.mq-btn--primario:hover { background: var(--color-brand-primary-dark); color: var(--color-text-on-brand); }
 .mq-btn--secundario { background: var(--color-background-primary); color: var(--color-text-secondary); border-color: var(--color-border-secondary); }
 .mq-btn--destructivo{ background: var(--color-background-primary); color: var(--color-text-danger); border-color: var(--color-border-danger); }
 .mq-btn--pill       { background: var(--color-background-primary); color: var(--color-text-secondary);
@@ -337,7 +370,7 @@ a { color: var(--color-brand-primary); }
 }
 .mq-banda--error        { background: var(--color-background-error);   color: var(--color-text-error);   border-color: var(--color-border-danger); }
 .mq-banda--confirmacion { background: var(--color-background-success); color: var(--color-text-success); border-color: var(--color-brand-primary-tint); }
-.mq-banda--atencion     { background: var(--color-background-warning); color: var(--color-text-warning); border-color: #E8D3AE; }
+.mq-banda--atencion     { background: var(--color-background-warning); color: var(--color-text-warning); border-color: var(--color-text-warning); }
 .mq-banda--info         { background: var(--color-background-info);    color: var(--color-text-info);    border-color: var(--color-border-info); }
 
 /* ============================================================================
@@ -388,7 +421,7 @@ a { color: var(--color-brand-primary); }
   border-bottom: var(--border-hairline);
 }
 .mq-tabla td { padding: var(--space-3) var(--space-4); border-bottom: var(--border-hairline); vertical-align: middle; }
-.mq-tabla tbody tr:hover { background: #F4F9F7; }
+.mq-tabla tbody tr:hover { background: var(--color-background-tertiary); }
 .mq-tabla .mq-td-acciones { text-align: right; white-space: nowrap; }
 
 .mq-iniciales {
@@ -448,7 +481,7 @@ a { color: var(--color-brand-primary); }
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-3) var(--space-5);
   background: var(--color-background-warning); color: var(--color-text-warning);
-  border-bottom: 1px solid #E8D3AE;
+  border-bottom: 1px solid var(--color-text-warning);
   font-size: var(--type-body-size);
 }
 body.mq-inerte .mq-shell,
@@ -541,7 +574,7 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
 .mq-pieza[aria-pressed="true"] .mq-pieza-cuerpo {
   fill: var(--color-brand-primary-tint); stroke: var(--color-brand-primary); stroke-width: 2.5;
 }
-.mq-pieza-etiqueta { font-size: 11px; fill: var(--color-text-secondary); }
+.mq-pieza-etiqueta { font-size: var(--type-meta-size); fill: var(--color-text-secondary); }
 .mq-pieza[aria-pressed="true"] .mq-pieza-etiqueta { fill: var(--color-brand-primary); font-weight: 600; }
 
 /* Árbol de la estructura */
@@ -555,9 +588,12 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
   text-align: left; cursor: pointer;
 }
 .mq-nodo:hover { background: var(--color-background-tertiary); }
-.mq-nodo[aria-selected="true"] { background: var(--color-brand-primary-tint); color: var(--color-brand-primary); font-weight: 500; }
+/* El estado vive en el `<li role="treeitem">`, que es el único portador de rol
+   y el que recibe el foco; el `<span>` interior sólo lo dibuja. */
+[role="treeitem"][aria-selected="true"] > .mq-nodo { background: var(--color-brand-primary-tint); color: var(--color-brand-primary); font-weight: 500; }
 .mq-nodo-indice { font-variant-numeric: tabular-nums; color: var(--color-text-secondary); }
-.mq-nodo[aria-selected="true"] .mq-nodo-indice { color: inherit; }
+[role="treeitem"][aria-selected="true"] > .mq-nodo .mq-nodo-indice { color: inherit; }
+.mq-arbol [role="treeitem"] { outline-offset: -2px; }
 
 /* Recorrido colapsable, absorbido del árbol del visor original. La flecha es
    el control de despliegue; en el nodo de pieza el resto del botón sigue
@@ -573,7 +609,7 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
   width: 6px; height: 6px; border-right: 1.5px solid var(--color-text-secondary);
   border-bottom: 1.5px solid var(--color-text-secondary); transform: rotate(-45deg);
 }
-.mq-nodo[aria-expanded="true"] .mq-nodo-flecha { transform: rotate(90deg); }
+[role="treeitem"][aria-expanded="true"] > .mq-nodo .mq-nodo-flecha { transform: rotate(90deg); }
 .mq-arbol-hijos[hidden] { display: none; }
 .mq-json-clave  { color: var(--color-accent-module-d); font-weight: 500; }
 .mq-json-cuenta { color: var(--color-text-tertiary); margin-left: var(--space-1); }
@@ -670,7 +706,7 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
   padding: var(--space-6); max-width: 520px; width: calc(100% - var(--space-7));
   background: var(--color-background-primary); color: var(--color-text-primary);
 }
-.mq-dialogo::backdrop { background: rgba(26, 26, 24, .45); }
+.mq-dialogo::backdrop { background: var(--color-backdrop); }
 .mq-dialogo h2 { font-size: var(--type-title-size); margin-bottom: var(--space-3); }
 .mq-dialogo p  { font-size: var(--type-body-size); color: var(--color-text-secondary); }
 
@@ -685,7 +721,7 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
   color: var(--color-text-secondary);
 }
 .mq-lienzo .mq-sello { margin-top: var(--space-6); justify-content: center; }
-.mq-shell-sidebar .mq-sello { color: rgba(255,255,255,.85); }
+.mq-shell-sidebar .mq-sello { color: var(--color-text-on-brand-soft); }
 .mq-sello-boton {
   background: transparent; border: 0; padding: 2px var(--space-1); margin-left: -4px;
   font: inherit; color: inherit; cursor: pointer; text-decoration: underline dotted;
@@ -712,7 +748,7 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
 
 .mq-barra-validacion {
   position: fixed; inset: auto 0 0 0; z-index: 55;
-  background: var(--color-brand-primary-dark); color: #FFFFFF;
+  background: var(--color-brand-primary-dark); color: var(--color-text-on-brand);
   border-top: 3px dashed var(--color-accent-module-c);
   padding: var(--space-2) var(--space-5);
   font-size: var(--type-caption-size);
@@ -720,30 +756,105 @@ body.mq-inerte .mq-lienzo { pointer-events: none; filter: grayscale(.35) opacity
 .mq-barra-validacion__rotulo {
   display: flex; align-items: center; gap: var(--space-2);
   font-size: var(--type-meta-size); font-weight: var(--type-meta-weight);
-  letter-spacing: .04em; text-transform: uppercase; color: #FFD9A6;
+  letter-spacing: .04em; text-transform: uppercase; color: var(--color-background-warning);
   margin-bottom: var(--space-1);
 }
 .mq-barra-validacion__fila { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
-.mq-barra-validacion label { color: #FFFFFF; font-size: var(--type-caption-size); }
+.mq-barra-validacion label { color: var(--color-text-on-brand); font-size: var(--type-caption-size); }
 .mq-barra-validacion select {
   min-height: 30px; padding: 2px var(--space-2);
-  background: #FFFFFF; color: var(--color-text-primary);
+  background: var(--color-background-primary); color: var(--color-text-primary);
   border: var(--border-control); border-radius: var(--radius-md);
   font-family: inherit; font-size: var(--type-caption-size); max-width: 380px;
 }
 .mq-barra-validacion .mq-conmutador { display: inline-flex; align-items: center; gap: var(--space-2); }
-.mq-barra-validacion .mq-nota { color: #CFE6DE; font-size: var(--type-meta-size); }
-.mq-barra-validacion :focus-visible { outline-color: #FFFFFF; }
+.mq-barra-validacion .mq-nota { color: var(--color-brand-primary-tint); font-size: var(--type-meta-size); }
+.mq-barra-validacion :focus-visible { outline-color: var(--color-text-on-brand); }
 
 /* ============================================================================
    Portada de la maqueta
    ============================================================================ */
 
 .mq-portada { max-width: 1040px; margin-inline: auto; padding: var(--space-9) var(--space-5); }
-.mq-portada h1 { font-size: 24px; font-weight: 600; }
+.mq-portada h1 { font-size: var(--type-title-size); font-weight: var(--type-title-weight); }
 .mq-lista-superficies { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); list-style: none; padding: 0; margin: var(--space-6) 0 0; }
 .mq-lista-superficies a { display: block; height: 100%; text-decoration: none; color: inherit; }
 .mq-lista-superficies a:hover .mq-tarjeta-acceso-modulo { border-color: var(--color-brand-primary); }
+
+/* ============================================================================
+   Utilidades de composición
+
+   Existen para que ningún HTML de la maqueta lleve un atributo `style=` en
+   línea. Cada una materializa un token del catálogo —espaciado, tipografía o
+   color— y ninguna introduce un valor propio. Los pocos valores que no son
+   tokens (medidas de columna, alturas de esqueleto, medidas de lectura) viven
+   acá, en una regla con nombre, y no repartidos por doce archivos.
+   ============================================================================ */
+
+.mq-mt-2 { margin-top: var(--space-2); }
+.mq-mt-3 { margin-top: var(--space-3); }
+.mq-mt-4 { margin-top: var(--space-4); }
+.mq-mt-5 { margin-top: var(--space-5); }
+.mq-mt-6 { margin-top: var(--space-6); }
+.mq-mt-7 { margin-top: var(--space-7); }
+.mq-mt-9 { margin-top: var(--space-9); }
+.mq-mt-auto { margin-top: auto; }
+.mq-ml-auto { margin-left: auto; }
+.mq-mb-4 { margin-bottom: var(--space-4); }
+.mq-mb-5 { margin-bottom: var(--space-5); }
+.mq-sin-margen { margin: 0; }
+.mq-margen-arriba-1 { margin: var(--space-1) 0 0; }
+.mq-margen-arriba-2 { margin: var(--space-2) 0 0; }
+.mq-margen-bloque-5 { margin: var(--space-5) 0; }
+.mq-relleno-4 { padding: var(--space-4); }
+.mq-sangria-2 { padding-left: var(--space-2); }
+
+.mq-lista-anidada { margin: var(--space-1) 0 0; padding-left: var(--space-6); }
+.mq-lista-plana { list-style: none; padding: 0; margin: 0 0 var(--space-9); }
+.mq-lista-plana--sin-hueco { list-style: none; padding: 0; margin: 0; }
+
+.mq-prosa { max-width: 70ch; }
+.mq-ancho-corto { max-width: 280px; }
+.mq-ancho-campo { width: 100%; max-width: 380px; }
+.mq-ancho-medio { max-width: 520px; }
+.mq-ancho-ancho { max-width: 640px; }
+
+.mq-fila-flex { display: flex; align-items: center; gap: var(--space-3); }
+.mq-fila-flex--envuelve { flex-wrap: wrap; }
+.mq-justificar-inicio { justify-content: flex-start; }
+.mq-flexible { flex: 1 1 40px; }
+.mq-clicable { cursor: pointer; }
+.mq-atenuado { opacity: .85; }
+
+/* Encabezado de tabla que no quiere el tratamiento de encabezado: se usa
+   cuando la primera columna es una etiqueta de fila y no un rótulo de columna. */
+th.mq-th-plano {
+  background: transparent; text-transform: none; letter-spacing: 0; color: inherit;
+  font-size: var(--type-body-size); font-weight: var(--type-body-weight);
+}
+th.mq-th-plano--fuerte { font-weight: var(--type-body-strong-weight); }
+th.mq-th-plano--cuerpo { font-size: var(--type-body-strong-size); font-weight: var(--type-body-strong-weight); }
+th.mq-th-plano--breve  { font-size: var(--type-caption-size); }
+
+/* Anchos relativos de los esqueletos de carga que imitan campos y columnas. */
+.mq-ancho-30 { width: 30%; }
+.mq-ancho-34 { width: 34%; }
+.mq-ancho-38 { width: 38%; }
+.mq-ancho-40 { width: 40%; }
+.mq-ancho-45 { width: 45%; }
+.mq-ancho-46 { width: 46%; }
+
+/* Medidas de los esqueletos de carga, por lo que reemplazan. */
+.mq-esqueleto--fila   { height: 42px; }
+.mq-esqueleto--bloque { height: 150px; }
+.mq-esqueleto--escena { height: 260px; }
+
+.mq-textarea--corta { min-height: 64px; }
+.mq-textarea--media { min-height: 72px; }
+
+.mq-ico-contenedor--exito { background: var(--color-background-success); color: var(--color-text-success); }
+.mq-pieza .mq-pieza-cuerpo--contorno,
+.mq-pieza[aria-pressed="true"] .mq-pieza-cuerpo--contorno { fill: none; }
 
 /* ============================================================================
    Versión angosta · punto de quiebre principal 768 px [ASUNCIÓN de 03]

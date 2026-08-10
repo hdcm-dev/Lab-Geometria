@@ -1,0 +1,78 @@
+# 02 · Especificación Funcional — GeometriaFactory-Web
+
+**Proyecto de código:** GeometriaFactory-Web
+**Documento:** README.md
+**Versión:** 1.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-09
+**Autor:** Analista Funcional senior (AG-02)
+**Trazabilidad upstream:** [`Especificacion-Funcional.md`](Especificacion-Funcional.md) §3 (catálogo), §4 (matriz), §6 (restricciones transversales) y §9 (omisiones); `../../../00-Contexto/Vision-Producto.md` §3 y §9; `../../../00-Contexto/Alcance-Producto.md` §4.1 y §5; `../../../01-Necesidades-Negocio/Necesidades-Negocio.md` §2 y §5.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13, §14 (RA-01 a RA-03) y §17.6
+**Trazabilidad downstream:** `../03-UX-UI-DX/` de este proyecto de código, que es el downstream más directo; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
+
+---
+
+## Tabla de contenido
+
+- [1. Punto de entrada](#1-punto-de-entrada)
+- [2. Documentos vigentes](#2-documentos-vigentes)
+- [3. Artefactos omitidos, con su motivo](#3-artefactos-omitidos-con-su-motivo)
+- [4. Cómo leer esta sección](#4-cómo-leer-esta-sección)
+- [5. Control de cambios](#5-control-de-cambios)
+
+---
+
+## 1. Punto de entrada
+
+Esta sección especifica **qué hace la persona** en la pieza pública del producto Fábrica de Geometría, y **qué ve**. El punto de entrada es [`Especificacion-Funcional.md`](Especificacion-Funcional.md), con el catálogo de los diez casos de uso, la matriz NB→CU→RN→US y las once restricciones transversales.
+
+`GeometriaFactory-Web` es de tipo `web-monolith`, nivel 1 del orden topológico, y es **el único punto de contacto del navegador**. Es el primer proyecto de código del producto cuyos casos de uso tienen actores humanos: el alumno y el docente en su papel de administrador.
+
+## 2. Documentos vigentes
+
+| Documento | Propósito | Estado |
+| --- | --- | --- |
+| [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro, catálogo, criterio de recorte, matriz NB→CU→RN→US, cobertura inversa, restricciones transversales y consumo del contrato de fachada | Propuesto |
+| [`Casos-De-Uso/CU-01-Registrar-La-Cuenta-De-Alumno.md`](Casos-De-Uso/CU-01-Registrar-La-Cuenta-De-Alumno.md) | El alumno se da de alta sin elegir contraseña y sin que se envíe correo | Propuesto |
+| [`Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md`](Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) | Sesión con la credencial custodiada del lado del servidor y rutas protegidas por papel | Propuesto |
+| [`Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md`](Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) | Primer ingreso efectivo y cambio de contraseña exigiendo la vigente | Propuesto |
+| [`Casos-De-Uso/CU-04-Administrar-Las-Cuentas-De-La-Comision.md`](Casos-De-Uso/CU-04-Administrar-Las-Cuentas-De-La-Comision.md) | Las cuatro operaciones sobre una cuenta, con la confirmación escrita de la baja | Propuesto |
+| [`Casos-De-Uso/CU-05-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md`](Casos-De-Uso/CU-05-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md) | La acción única de guardado y el estado que la interpretación decide | Propuesto |
+| [`Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md`](Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md) | Los cuatro estados a la vista y las acciones acotadas al borrador | Propuesto |
+| [`Casos-De-Uso/CU-07-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md`](Casos-De-Uso/CU-07-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md) | La vista de trabajo con sus cuatro partes y el ciclo de vida completo de la fachada | Propuesto |
+| [`Casos-De-Uso/CU-08-Recorrer-La-Entrega-De-La-Comision.md`](Casos-De-Uso/CU-08-Recorrer-La-Entrega-De-La-Comision.md) | El listado del administrador, agrupado y filtrado, sin los borradores | Propuesto |
+| [`Casos-De-Uso/CU-09-Resolver-Un-Trabajo-Con-Comentario-Opcional.md`](Casos-De-Uso/CU-09-Resolver-Un-Trabajo-Con-Comentario-Opcional.md) | Aprobar o rechazar con comentario opcional, y retirar cualquier trabajo que ve | Propuesto |
+| [`Casos-De-Uso/CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md`](Casos-De-Uso/CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md) | Caso de uso transversal: los dos tramos que se cortan y cómo se avisa cada uno | Propuesto |
+| [`Glosario-Funcional.md`](Glosario-Funcional.md) | Vocabulario acuñado, términos con más de un referente y términos referenciados | Propuesto |
+
+Un solo archivo por nombre lógico y ninguna versión superada: la carpeta `Casos-De-Uso/_legacy/` no existe todavía y no corresponde crearla.
+
+## 3. Artefactos omitidos, con su motivo
+
+La tabla maestra de `Rules-Especificacion-Funcional.md` §2.1 tiene ocho filas. Se emiten cuatro artefactos y **no se emiten cuatro**, agrupados en tres filas porque el modelo conceptual y sus reglas conceptuales se omiten por el mismo motivo.
+
+| Artefacto | Motivo de la omisión |
+| --- | --- |
+| `Reglas-De-Negocio/RN-XX-<Nombre>.md` | **Las once reglas viven en `GeometriaFactory-Domain`**, que es donde se hacen cumplir. Acá se **referencian** por identificador, con enlace relativo, en la fila «Reglas de negocio aplicables» del §9 de cada caso de uso y en la tercera columna de la matriz. El motivo no es formal: **la pieza pública no puede ser la última defensa de ninguna regla, porque el navegador no es confiable.** Ocultar un botón o no armar una ruta acota lo que se ofrece y no hace cumplir nada; por eso tres criterios de aceptación de esta sección verifican la acotación forzando la solicitud sin pasar por la pantalla. Redactar acá una `RN-XX` habría producido una segunda copia de una invariante que ya tiene dueño, con el riesgo de que las dos divergieran |
+| `Modelo-Datos/Modelo-Conceptual.md` y `Modelo-Datos/reglas-conceptuales-de-modelo/RC-XX-<Nombre>.md`, que son **dos** de las ocho filas | **Omitidos como decisión técnica declarada, no por no-aplicabilidad.** `Rules-Especificacion-Funcional.md` §2.1 y §2.2 los marcan **obligatorios** para `web-monolith`, y aun así no se emiten: el flag `tiene_persistencia` de este proyecto de código es **false y eso es deliberado**. `PRODUCT-INTAKE` §17.6 P.4 lo declara: «el front no guarda estado propio: es exactamente el problema que la topología evita». Lo único que vive del lado de esta pieza es el estado del circuito, en memoria del servidor del hosting, donde reside la credencial de sesión; no es persistencia y no tiene entidades que modelar. La decisión es de las que dejan huella: **corresponde una ADR en 05-Arquitectura-Tecnica** que registre por qué un `web-monolith` de este producto no tiene modelo conceptual de datos, con su alternativa descartada —replicar o cachear datos en la pieza pública— y su consecuencia aceptada: cuando la pieza de datos no responde, no hay nada que mostrar y se declara el estado degradado |
+| `Definicion-<Concepto-Central>.md` | **El concepto central del producto ya está documentado aguas arriba.** El modelo de dominio vive en [`Definicion-Modelo-De-Dominio.md`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) de `GeometriaFactory-Domain`, y el contrato de la superficie que esta pieza invoca para dibujar vive en [`Definicion-Contrato-De-Fachada.md`](../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) de `GeometriaFactory-Visor`. Esta pieza no tiene un concepto técnico central propio y separable: lo que la caracteriza son las tres reglas de arquitectura de nivel producto, cuyo enunciado vive en `PRODUCT-INTAKE` §14 y cuya aplicación acá está declarada en `Especificacion-Funcional.md` §2 y §6. Un documento de concepto propio duplicaría lo de aguas arriba |
+
+Las tres omisiones son deliberadas y están declaradas también en `Especificacion-Funcional.md` §9. No son artefactos pendientes.
+
+## 4. Cómo leer esta sección
+
+1. Empezar por `Especificacion-Funcional.md` §2, que fija las tres reglas de arquitectura que gobiernan todo lo demás, y §6, con las once restricciones transversales y su punto de verificación. Es lo que evita el error de lectura más frecuente: suponer que un componente de esta pieza puede hablar con la pieza de datos desde el navegador, o hacer cumplir una regla por su cuenta.
+2. Seguir por los casos de uso en el orden en que la persona los recorre: CU-01 a CU-04 para el circuito de admisión, CU-05 a CU-07 para el trabajo, CU-08 y CU-09 para la revisión, y CU-10 al final, que es transversal a los nueve anteriores.
+3. Leer `Especificacion-Funcional.md` §7 antes de cualquier decisión sobre el visualizador: declara una sola vez qué función de la fachada consume cada caso de uso, y las dos consecuencias que no hay que perder.
+4. Tener a mano `Glosario-Funcional.md` si se entra por una sección suelta: es donde se resuelven las formas desnudas de «vista», «pieza» y `Pendiente`.
+
+Advertencias para las categorías aguas abajo:
+
+- **03-UX-UI-DX es el downstream más directo de esta sección**, y de él depende la fase de maqueta. Acá se declara **qué hace la persona y qué ve**, nunca cómo se ve: no hay maquetas, ni proporciones, ni tipografía, ni sistema visual. Lo único que esta categoría fija sobre la disposición es la de la vista de trabajo, y no porque la decida acá sino porque **viene decidida aguas arriba y probada en el aula**: datos y texto a la izquierda; elemento de dibujo arriba y árbol abajo, a la derecha. No se reinventa.
+- La arquitectura y los registros de decisión son de 05, incluida la ADR que el punto 3 de §3 deja pendiente. Las pruebas son de 08.
+- Los nombres de las cinco funciones de la fachada son los que declara el intake y no se cambian; los nombres internos del bundle no están fijados y no se usan acá, por la regla de aislamiento.
+
+## 5. Control de cambios
+
+| Versión | Fecha | Cambios |
+| --- | --- | --- |
+| 1.0 | 2026-08-09 | Emisión inicial. Índice navegable de los doce documentos vigentes de la categoría, declaración de las cuatro omisiones de artefacto agrupadas en tres motivos —con la del modelo conceptual declarada como decisión técnica y con la ADR que le corresponde en 05— y guía de lectura para revisores externos, con la advertencia de frontera hacia 03-UX-UI-DX. |

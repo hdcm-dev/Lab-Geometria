@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** DX-Error-Messages.md
-**Versión:** 1.2
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los **doce** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-12), de donde se deriva cada entrada, con sus §3, §5 y §9; `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2.5, §4.1, §4.2 (invariante candidato INV-08, propuesto y no vigente), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; RN-01 a RN-11 de `02-Especificacion-Funcional/Reglas-De-Negocio/`; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1, §4.2, §17.1.P.1, §17.1.P.2, §17.1.P.3, §17.1.P.5, §17.1.P.10
+**Trazabilidad upstream:** §6 de los **trece** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-13), de donde se deriva cada entrada, con sus §3, §5 y §9; `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2.1, §2.5, §4.1 (los **nueve** invariantes vigentes), §4.2 (recorrido de adopción de INV-08), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2, §5.3 y §7; RN-01 a RN-15 de `02-Especificacion-Funcional/Reglas-De-Negocio/`; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4 (**F-26**), §4.1, §4.2, §7 (**CL-7**), §9 (**X-2 retirada**), §17.1.P.1, §17.1.P.2, §17.1.P.3, §17.1.P.5, §17.1.P.10
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -20,6 +20,7 @@
   - [1.2 Una condición de error no es una observación](#12-una-condición-de-error-no-es-una-observación)
   - [1.3 Qué emite el dominio y qué compone el consumidor](#13-qué-emite-el-dominio-y-qué-compone-el-consumidor)
   - [1.4 Un mismo código con dos causas opuestas: los dos caminos de alta](#14-un-mismo-código-con-dos-causas-opuestas-los-dos-caminos-de-alta)
+  - [1.5 Resetear no es dar de baja](#15-resetear-no-es-dar-de-baja)
 - [2. Taxonomía](#2-taxonomía)
   - [2.1 Las categorías en uso](#21-las-categorías-en-uso)
   - [2.2 Las dos categorías vacías, con su motivo](#22-las-dos-categorías-vacías-con-su-motivo)
@@ -37,6 +38,7 @@
   - [3.10 CU-10 Resolver el desenlace del trabajo](#310-cu-10-resolver-el-desenlace-del-trabajo)
   - [3.11 CU-11 Resolver el alcance del administrador sobre un trabajo](#311-cu-11-resolver-el-alcance-del-administrador-sobre-un-trabajo)
   - [3.12 CU-12 Configurar la cuenta de administrador](#312-cu-12-configurar-la-cuenta-de-administrador)
+  - [3.13 CU-13 Resetear la contraseña de una cuenta de alumno](#313-cu-13-resetear-la-contraseña-de-una-cuenta-de-alumno)
 - [4. Tono y voz](#4-tono-y-voz)
 - [5. Localización](#5-localización)
 - [6. Cobertura y trazabilidad](#6-cobertura-y-trazabilidad)
@@ -110,15 +112,29 @@ Dos códigos más existen sólo para que ninguno de los dos caminos se cuele por
 
 Y el efecto no se agota en el acceso, que es lo que dimensiona el problema: **sin administrador nadie aprueba ni rechaza**, así que todo trabajo enviado queda en estado `Pendiente` para siempre y **el circuito de revisión entero se detiene** (RN-10, CU-10). La instancia sigue aceptando entregas que ya nadie puede resolver.
 
+### 1.5 Resetear no es dar de baja
+
+Es la distinción más cara de este catálogo, porque las dos operaciones las ejerce la misma persona desde el mismo panel y **una de las dos es irreversible**.
+
+| | Baja de la cuenta (CU-02) | Reseteo de contraseña (CU-13) |
+| --- | --- | --- |
+| Qué pasa con la cuenta | Deja de existir | Se conserva, con su estado, su papel y su identidad |
+| Qué pasa con los trabajos | **Se eliminan todos**, en los cuatro estados y con sus comentarios (RN-07) | **Se conservan todos**, con sus estados y sus comentarios (RN-12) |
+| Reversible | No | Sí: la cuenta cambia la provisoria y sigue operando |
+| Exige confirmación escrita | Sí, el correo de la cuenta | No, y no es un olvido: la guarda protege de un accidente destructivo |
+| Efecto sobre la marca | No aplica | La **pone**, y sólo el reemplazo de la propia cuenta la levanta (RN-13, INV-09) |
+
+Hasta `PRODUCT-INTAKE` 1.6 la baja era el único camino declarado ante una contraseña olvidada, y por eso el primer olvido costaba todos los trabajos del alumno. La capacidad **F-26** cierra ese agujero, retira la exclusión **X-2** y reescribe el caso límite **CL-7**. Un consumidor que resuelva un olvido de contraseña invocando CU-02 en lugar de CU-13 **no recibe ninguna condición de error de este catálogo**: la baja procede, y es correcta como operación. Es el mismo tipo de defecto silencioso que §1.2 describe para el trabajo que vuelve en `Borrador`, y por eso está declarado acá y no en una fila de tabla.
+
 ## 2. Taxonomía
 
 ### 2.1 Las categorías en uso
 
 | Categoría | Qué agrupa | Cuántas condiciones |
 | --- | --- | --- |
-| **Entrada inválida** | El dato que llega está ausente, vacío, no admitido en esta operación, o contradice a lo que el propio dato declara | 18 |
+| **Entrada inválida** | El dato que llega está ausente, vacío, no admitido en esta operación, o contradice a lo que el propio dato declara | 19 |
 | **Recurso ausente** | Lo que la operación referencia no existe, o todavía no tiene valor | 3 |
-| **Conflicto de estado** | La operación es legítima, pero el estado actual de la cuenta, del trabajo o de la instancia no la admite | 14 |
+| **Conflicto de estado** | La operación es legítima, pero el estado actual de la cuenta, del trabajo o de la instancia no la admite | 16 |
 | **Conflicto de facultad** | La operación es legítima y el estado la admitiría, pero el papel declarado no la ejerce, o el camino por el que se pide no es el suyo | 5 |
 
 Sobre **conflicto de facultad**, que es una categoría agregada a la enumeración de referencia: se declara aparte porque las cinco condiciones que agrupa no se resuelven mirando el dato ni el estado, sino el papel, y confundirlas con un conflicto de estado llevaría a buscar el remedio en una transición que no existe. La distinción es la misma que separa a CU-09, que responde por el alumno, de CU-11, que responde por el administrador.
@@ -138,16 +154,16 @@ Dimensión ortogonal a la categoría, y hay que leerla junto con ella porque cam
 
 | Forma | Qué significa | Dónde aparece |
 | --- | --- | --- |
-| **Rechazo** | El dominio se niega a la operación. No construye la entidad, o la deja exactamente como estaba. No hay efecto parcial ni estado intermedio, porque el dominio no guarda nada | CU-01, CU-02, CU-03, CU-05, CU-06, CU-07, CU-08, CU-10 |
+| **Rechazo** | El dominio se niega a la operación. No construye la entidad, o la deja exactamente como estaba. No hay efecto parcial ni estado intermedio, porque el dominio no guarda nada | CU-01, CU-02, CU-03, CU-05, CU-06, CU-07, CU-08, CU-10, CU-13 |
 | **Motivo de resultado** | La operación es una consulta y **siempre devuelve un resultado**; el código es el motivo por el que ese resultado es «no admisible» o «no procede». No es una excepción de programa y no modifica nada | CU-04, CU-09, CU-11 |
 
 La diferencia importa: ante un rechazo, el consumidor corrige la invocación; ante un motivo de resultado, el consumidor **informa** o **encamina** a la operación que corresponde. `CREDENCIAL_NO_ESTABLECIDA` es el ejemplo canónico: no es un fallo, es la situación esperada del primer ingreso efectivo.
 
 ## 3. Catálogo
 
-Cuarenta condiciones, derivadas una por una de la §6 de los doce casos de uso. Ninguna se inventó y ninguna quedó afuera; el recuento y la verificación están en §6.
+Cuarenta y tres condiciones, derivadas una por una de la §6 de los trece casos de uso. Ninguna se inventó y ninguna quedó afuera; el recuento y la verificación están en §6.
 
-Cinco condiciones aparecen declaradas en más de un caso de uso. Cuatro de ellas conservan la misma causa en todos y llevan **una sola entrada**, en el caso de uso donde se declaran primero, con la nota de sus otras apariciones. La quinta, `ESTADO_INICIAL_NO_NEGOCIABLE`, lleva **fila completa en §3.1 y en §3.12** porque sus dos causas son opuestas según el camino de alta: el motivo está en §1.4.
+Siete condiciones aparecen declaradas en más de un caso de uso. Seis de ellas conservan la misma causa en todos y llevan **una sola entrada**, en el caso de uso donde se declaran primero, con la nota de sus otras apariciones. La séptima, `ESTADO_INICIAL_NO_NEGOCIABLE`, lleva **fila completa en §3.1 y en §3.12** porque sus dos causas son opuestas según el camino de alta: el motivo está en §1.4.
 
 ### 3.1 CU-01 Registrar el alta de un alumno
 
@@ -184,13 +200,14 @@ Forma de terminación: rechazo. En los cuatro casos el alumno queda exactamente 
 
 ### 3.4 CU-04 Evaluar la admisibilidad de la cuenta
 
-Forma de terminación: **motivo de resultado**. Los tres son terminaciones controladas y no excepciones de programa: la evaluación siempre devuelve un resultado, y ese resultado incluye el motivo.
+Forma de terminación: **motivo de resultado**. Los cuatro son terminaciones controladas y no excepciones de programa: la evaluación siempre devuelve un resultado, y ese resultado incluye el motivo.
 
 | Código | Categoría | Mensaje | Causa probable | Acción sugerida |
 | --- | --- | --- | --- | --- |
 | `CUENTA_PENDIENTE` | Conflicto de estado | La cuenta está registrada y todavía no fue habilitada | El estado de cuenta es `Pendiente` (INV-06, RN-06) | Informar la situación con todas las letras y no con un rechazo genérico: la persona tiene que saber que espera la habilitación del administrador. No emitir acceso |
 | `CUENTA_BLOQUEADA` | Conflicto de estado | La cuenta está bloqueada | El estado de cuenta es `Bloqueado` (INV-06, RN-06) | Informar el motivo y no emitir acceso. La rehabilitación es un acto explícito del administrador, por CU-02 |
 | `CREDENCIAL_NO_ESTABLECIDA` | Recurso ausente | La cuenta está habilitada y todavía no tiene credencial derivada | Es la situación esperada del primer ingreso efectivo | **No es un fallo.** Encaminar a establecer la contraseña, que se fija por CU-03. Es el flujo de alta declarado del producto |
+| `CAMBIO_DE_CONTRASENA_PENDIENTE` | Conflicto de estado | La cuenta tiene una contraseña provisoria sin cambiar | El administrador la reseteó por CU-13 y la marca sigue puesta | **No es un fallo.** Encaminar al cambio de contraseña, que es el reemplazo de CU-03 FA-04 y **lo único** que la cuenta puede hacer hasta que la marca se levante (INV-09, RN-13). No emitir acceso, y no ofrecer ninguna otra ruta: la contraseña nueva la elige el alumno y el administrador no la conoce |
 
 ### 3.5 CU-05 Crear y reeditar un trabajo
 
@@ -279,6 +296,17 @@ Es la **configuración del administrador en el primer arranque**, el otro camino
 | `CONFIGURACION_SIN_CREDENCIAL` | Entrada inválida | La configuración del administrador exige la credencial derivada | No se aportó credencial derivada, o el valor aportado está vacío | Aportar el valor **ya derivado**, que el dominio nunca conoce en claro. Una cuenta de administrador sin credencial no podría entrar y **no hay ninguna otra cuenta que pudiera resolverlo**: por eso acá la credencial es obligatoria y en el auto-registro está prohibida |
 | `ESTADO_INICIAL_NO_NEGOCIABLE` | Entrada inválida | El estado inicial de **este camino** no se elige | Se pidió constituir la cuenta de administrador en un estado distinto de `Habilitado` | Constituir sin pedir estado. **Mismo identificador, causa opuesta en CU-01**, donde el estado impuesto es `Pendiente`: ver §3.1 y §1.4. Una cuenta de administrador `Pendiente` o `Bloqueado` dejaría a la instancia sin salida, porque por INV-06 no obtendría acceso y nadie podría habilitarla |
 
+### 3.13 CU-13 Resetear la contraseña de una cuenta de alumno
+
+Es la **operación conservadora** del administrador sobre una cuenta ajena: fija una contraseña provisoria y pone la marca, sin tocar el estado de cuenta ni ninguno de los trabajos (§1.5). Forma de terminación: rechazo. En los cuatro casos la cuenta queda exactamente como estaba, con su credencial anterior y su marca anterior.
+
+| Código | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | Conflicto de facultad | El reseteo no procede sobre la cuenta con papel `Administrador` | Se pidió resetear la contraseña del administrador de la instancia | No hay camino, y es el mismo que ya cerraba las cuatro operaciones de CU-02: **el código se reutiliza porque la causa es la misma**, una operación del administrador declarada sobre cuentas de alumno y sin nadie que la ejerza sobre la suya (RN-01, INV-05, INV-08). Su cambio de contraseña entra por el reemplazo de CU-03 FA-01. Entrada única en §3.2; ésta es su segunda declaración |
+| `RESETEO_SOBRE_CREDENCIAL_NO_FIJADA` | Conflicto de estado | No hay contraseña que resetear: la cuenta todavía no fijó ninguna | La cuenta está esperando su primer ingreso efectivo | Usar CU-03, que es donde la credencial se fija por primera vez. Poner la marca acá dejaría la cuenta sin camino declarado para levantarla, porque **la levanta únicamente el reemplazo** (RN-13). Es una **decisión derivada** de 02 y no una transcripción: su fundamento está en CU-13 §10 |
+| `RESETEO_CON_ARRASTRE_DE_TRABAJOS` | Entrada inválida | El reseteo no admite eliminar los trabajos del alumno ni cambiar su estado de cuenta | Se armó la solicitud tratando el reseteo como si fuera una baja | **Resetear no es dar de baja** (RN-12): la cuenta conserva su habilitación, su papel, su identidad y **todos** sus trabajos con sus estados y comentarios. La operación que sí los elimina es la baja de CU-02, y es irreversible. Ver §1.5 |
+| `VALOR_DERIVADO_VACIO` | Entrada inválida | El valor de credencial derivada llegó vacío | Se invocó con un valor sin contenido | Aportar el valor de la contraseña provisoria **ya derivado**. El dominio no deriva la contraseña y **nunca conoce la provisoria en claro**, que es el valor que el administrador le comunica al alumno por fuera del producto. Entrada única en §3.3; ésta es su segunda declaración |
+
 ## 4. Tono y voz
 
 Coherente con la guía de estilo del producto: español rioplatense neutro técnico, sin marketing y sin emojis.
@@ -289,6 +317,8 @@ Coherente con la guía de estilo del producto: español rioplatense neutro técn
 | Nombrar la entidad y el estado con el vocabulario del dominio | «Sólo se envía un trabajo en `Borrador`» | «El registro está en un estado no editable» |
 | Decir la acción en imperativo, del lado del consumidor | «Invocar CU-06 y CU-07 y recién después enviar» | «El sistema debería haber interpretado antes» |
 | Calificar siempre `Pendiente` | «cuenta `Pendiente`», «trabajo en estado `Pendiente`» | «pendiente» a secas |
+| Nombrar la marca con la palabra «marca» | «la marca de cambio de contraseña pendiente está puesta» | «la cuenta está pendiente» para nombrarla |
+| No llamar baja al reseteo, ni al revés | «resetear la contraseña», «dar de baja la cuenta» | «resetear la cuenta», «borrar la contraseña» |
 | No prometer lo que el dominio no hace | «No emitir acceso» | «Reintentar en unos segundos» |
 
 Una excepción declarada a la regla de calificación: **los nombres de los códigos son identificadores literales del contrato** y no se califican ni se traducen. `CUENTA_PENDIENTE` se escribe así, y su enunciado en prosa sí califica. Es la excepción que `Glosario-Funcional.md` §3.3 ya declara, y calificarla sería el falso positivo que `Vocabulario-Rules.md` §9.1 tipifica como defecto.
@@ -307,17 +337,17 @@ Una excepción declarada a la regla de calificación: **los nombres de los códi
 
 | Magnitud | Valor |
 | --- | --- |
-| Casos de uso con sección de excepciones | 12 (CU-01 a CU-12) |
-| Filas de condición declaradas en la §6 de los doce casos de uso | 46 |
-| Condiciones declaradas en más de un caso de uso | 5: `DATO_OBLIGATORIO_AUSENTE` en 3 (CU-01, CU-05, CU-12), y `UNICIDAD_DE_CORREO_NO_VERIFICADA`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `TRANSICION_DESDE_ESTADO_TERMINAL` y `OPERACION_DESCONOCIDA` en 2 cada una |
-| Filas excedentes por repetición | 6 |
-| **Condiciones distintas catalogadas** | **40** (46 − 6) |
+| Casos de uso con sección de excepciones | 13 (CU-01 a CU-13) |
+| Filas de condición declaradas en la §6 de los trece casos de uso | 51 |
+| Condiciones declaradas en más de un caso de uso | 7: `DATO_OBLIGATORIO_AUSENTE` en 3 (CU-01, CU-05, CU-12), y `UNICIDAD_DE_CORREO_NO_VERIFICADA`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `TRANSICION_DESDE_ESTADO_TERMINAL`, `OPERACION_DESCONOCIDA`, `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` (CU-02, CU-13) y `VALOR_DERIVADO_VACIO` (CU-03, CU-13) en 2 cada una |
+| Filas excedentes por repetición | 8 |
+| **Condiciones distintas catalogadas** | **43** (51 − 8) |
 | Condiciones inventadas por esta categoría | **0** |
 | Condiciones de los casos de uso sin entrada en el catálogo | **0** |
 
 Verificación: cada entrada de §3 se lee contra la §6 del caso de uso que la titula, y no hay entrada de §3 que no esté ahí ni fila de esas §6 que falte acá.
 
-**Tres identificadores retirados**, que aparecen en la cadena y que **no son condiciones de este catálogo** porque un renombre los reemplazó. La constancia va en prosa y no en tabla, deliberadamente: una fila encabezada por un identificador la lee como condición viva cualquier recuento automático sobre las tablas de este documento, y el total daría 41 en lugar de 40.
+**Tres identificadores retirados**, que aparecen en la cadena y que **no son condiciones de este catálogo** porque un renombre los reemplazó. La constancia va en prosa y no en tabla, deliberadamente: una fila encabezada por un identificador la lee como condición viva cualquier recuento automático sobre las tablas de este documento, y el total daría **46** en lugar de **43**.
 
 `RECONSTRUCCION_SOBRE_TRABAJO_FINALIZADO` fue reemplazado por `RECONSTRUCCION_SOBRE_TRABAJO_TERMINAL` en CU-06 1.1, que lo amplió para alcanzar también a `Rechazado`. `POSICION_DE_PIEZA_NO_CONTIGUA` fue reemplazado por `POSICION_DE_PIEZA_INVALIDA` en CU-06 1.1, corrección de la ronda r1: un hueco dejó de ser un defecto, porque la posición de una figura que no se pudo reconstruir queda reservada, y lo que se rechaza pasó a ser la posición repetida, negativa o fuera de rango. `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` fue reemplazado por `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` en CU-02 1.2, corrección de la ronda r3, hallazgo H-01: cubría una sola de las cuatro operaciones y dejaba las otras tres sin guarda, de modo que nada impedía bloquear al administrador.
 
@@ -330,18 +360,19 @@ Toda cita anterior de cualquiera de los tres resuelve al identificador que lo re
 | `DATO_OBLIGATORIO_AUSENTE` | CU-01, CU-05, CU-12 | — | — | Rechazo |
 | `UNICIDAD_DE_CORREO_NO_VERIFICADA` | CU-01, CU-12 | RN-02 | INV-01 | Rechazo |
 | `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` | CU-01 | — | — | Rechazo |
-| `ESTADO_INICIAL_NO_NEGOCIABLE` | CU-01, CU-12 | — | — (INV-08 candidato) | Rechazo |
-| `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` | CU-01 | RN-01 | INV-05 (INV-08 candidato) | Rechazo |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` | CU-01, CU-12 | — | INV-08 | Rechazo |
+| `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` | CU-01 | RN-01 | INV-05, INV-08 | Rechazo |
 | `TRANSICION_DE_CUENTA_NO_ADMITIDA` | CU-02 | — | — | Rechazo |
 | `BAJA_SIN_ARRASTRE_DE_TRABAJOS` | CU-02 | RN-07 | — | Rechazo |
-| `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | CU-02 | RN-01 | INV-05 (INV-08 candidato) | Rechazo |
+| `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | CU-02, CU-13 | RN-01 | INV-05, INV-08 | Rechazo |
 | `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | CU-03 | RN-06 | INV-06 | Rechazo |
 | `CREDENCIAL_YA_FIJADA` | CU-03 | — | — | Rechazo |
 | `CREDENCIAL_VIGENTE_NO_VERIFICADA` | CU-03 | — | — | Rechazo |
-| `VALOR_DERIVADO_VACIO` | CU-03 | — | — | Rechazo |
+| `VALOR_DERIVADO_VACIO` | CU-03, CU-13 | — | — | Rechazo |
 | `CUENTA_PENDIENTE` | CU-04 | RN-06 | INV-06 | Motivo de resultado |
 | `CUENTA_BLOQUEADA` | CU-04 | RN-06 | INV-06 | Motivo de resultado |
 | `CREDENCIAL_NO_ESTABLECIDA` | CU-04 | — | — | Motivo de resultado |
+| `CAMBIO_DE_CONTRASENA_PENDIENTE` | CU-04 | RN-13 | INV-09 | Motivo de resultado |
 | `TRABAJO_SIN_DUENO` | CU-05 | RN-03 | INV-02 | Rechazo |
 | `REEDICION_FUERA_DE_BORRADOR` | CU-05 | RN-04 | INV-03, INV-07 | Rechazo |
 | `TEXTO_ORIGINAL_ALTERADO` | CU-05 | RN-08 | — | Rechazo |
@@ -367,18 +398,20 @@ Toda cita anterior de cualquiera de los tres resuelve al identificador que lo re
 | `ALCANCE_SIN_PAPEL_DE_ADMINISTRADOR` | CU-11 | RN-01, RN-11 | INV-05 | Motivo de resultado |
 | `ADMINISTRADOR_YA_CONFIGURADO` | CU-12 | RN-01 | INV-05 | Rechazo |
 | `CONFIGURACION_SIN_CREDENCIAL` | CU-12 | — | — | Rechazo |
+| `RESETEO_SOBRE_CREDENCIAL_NO_FIJADA` | CU-13 | RN-13 | INV-09 | Rechazo |
+| `RESETEO_CON_ARRASTRE_DE_TRABAJOS` | CU-13 | RN-12 | INV-09 | Rechazo |
 
-Las once reglas quedan alcanzadas y los siete invariantes también. Las columnas con guion no son un vacío a completar: hay condiciones que sostienen una precondición del contrato de uso sin que ninguna regla de negocio las enuncie por separado, como `CREDENCIAL_YA_FIJADA` o `DESENLACE_DESCONOCIDO`. Inventarles una regla sería el defecto contrario al que este catálogo evita.
+Las quince reglas quedan alcanzadas y los nueve invariantes vigentes también. Las columnas con guion no son un vacío a completar: hay condiciones que sostienen una precondición del contrato de uso sin que ninguna regla de negocio las enuncie por separado, como `CREDENCIAL_YA_FIJADA` o `DESENLACE_DESCONOCIDO`. Inventarles una regla sería el defecto contrario al que este catálogo evita.
 
-Dos guiones tienen origen declarado fuera de las once reglas y conviene dejarlo escrito, porque la atribución equivocada sería fácil de reponer:
+Dos guiones tienen origen declarado fuera de las quince reglas y conviene dejarlo escrito, porque la atribución equivocada sería fácil de reponer:
 
 | Condición | Origen de la exigencia | Por qué **no** es RN-09 |
 | --- | --- | --- |
 | `POSICION_DE_PIEZA_INVALIDA` | `PRODUCT-INTAKE` §17.1.P.11 punto 2: la identidad de la pieza es su posición en el conjunto raíz | RN-09 gobierna la **ubicación de la observación**, no la identidad de la pieza. La distinción está declarada en CU-06 §9 |
-| `ADVERTENCIA_SIN_LOS_DOS_VALORES` | `NB-05` §5, tercer criterio de éxito: el 100 % de las advertencias se muestran con los dos valores expresados, el declarado y el derivado | El §3 de RN-09 **excluye explícitamente de su ámbito** a las advertencias de discrepancia de valor, que llevan su propia exigencia. Ninguna de las once reglas la enuncia |
-| `ESTADO_INICIAL_NO_NEGOCIABLE` | El estado inicial de cada camino de alta, declarado por CU-01 §4 paso 6 y por CU-12 §4, sobre `Definicion-Modelo-De-Dominio.md` §5.1 | Ninguna de las once reglas enuncia con qué estado nace una cuenta. La cita de INV-05 como fundamento se retiró en 02: ese invariante habla de la **unicidad** del administrador y de su ventana de alta, no del estado con el que nace |
+| `ADVERTENCIA_SIN_LOS_DOS_VALORES` | `NB-05` §5, tercer criterio de éxito: el 100 % de las advertencias se muestran con los dos valores expresados, el declarado y el derivado | El §3 de RN-09 **excluye explícitamente de su ámbito** a las advertencias de discrepancia de valor, que llevan su propia exigencia. Ninguna de las quince reglas la enuncia |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` | El estado inicial de cada camino de alta, declarado por CU-01 §4 paso 6 y por CU-12 §4, sobre `Definicion-Modelo-De-Dominio.md` §5.1 | Ninguna de las quince reglas enuncia con qué estado nace una cuenta, y por eso la columna de regla queda en guion. **La columna de invariante sí se llenó**: INV-08, ya adoptado, es exactamente esa condición. La cita de INV-05 como fundamento se retiró en 02: ese invariante habla de la **unicidad** del administrador y de su ventana de alta, no del estado con el que nace |
 
-**Sobre la columna de invariante y el candidato INV-08.** `Definicion-Modelo-De-Dominio.md` §4.2 **propone** un octavo invariante, con el enunciado ampliado a todo el ciclo de vida: la cuenta con papel `Administrador` está **siempre** `Habilitado` —nace habilitada, ninguna operación la lleva a los otros dos estados y no admite baja—, y toda cuenta con papel `Alumno` nace `Pendiente`. **No viene del intake, no es vigente y espera decisión del Product Owner**. Este catálogo lo anota entre paréntesis donde corresponde y **no lo cuenta**: los invariantes vigentes siguen siendo los siete de §4.1. El modelo es correcto sin él, porque la propiedad se sostiene operación por operación —CU-01 y CU-12 fijan cada uno su estado inicial y rechazan el del otro, y CU-02 rechaza las cuatro operaciones sobre la cuenta de administrador—; adoptarlo cerraría la familia entera en lugar de tapar cada puerta, que es lo que dos hallazgos de auditoría mostraron necesario.
+**Sobre la columna de invariante e INV-08.** La versión anterior de este catálogo anotaba INV-08 entre paréntesis y no lo contaba, porque `Definicion-Modelo-De-Dominio.md` §4.2 lo **proponía** como candidato no vigente. `PRODUCT-INTAKE` §17.1.P.2 lo **adoptó**, con el enunciado ampliado a todo el ciclo de vida: la cuenta con papel `Administrador` está **siempre** `Habilitado` y toda cuenta con papel `Alumno` nace `Pendiente`. En consecuencia, las tres filas que lo anotaban entre paréntesis pasan a declararlo como invariante vigente, y los invariantes alcanzados por el catálogo son **los nueve**, INV-01 a INV-09. El recorrido de la adopción queda registrado en `Definicion-Modelo-De-Dominio.md` §4.2. **INV-09 es el invariante nuevo del intake 1.7** y lo sostienen tres condiciones: el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE` de CU-04, que es donde el dominio ejerce la guarda, y los dos rechazos de CU-13.
 
 ### 6.3 Trazabilidad del artefacto
 
@@ -387,9 +420,9 @@ Dos guiones tienen origen declarado fuera de las once reglas y conviene dejarlo 
 | Dimensión | Referencia |
 | --- | --- |
 | Rol de intervención | Mantenedor del dominio e integrador de capa (`DX-Developer-Experience.md` §1.1) |
-| Superficie pública que se documenta | Las 40 condiciones de error de los doce contratos de uso |
-| CU origen | CU-01 a CU-12, §6 de cada uno |
-| Reglas de negocio relevantes | RN-01 a RN-11; invariantes INV-01 a INV-07 |
+| Superficie pública que se documenta | Las 43 condiciones de error de los trece contratos de uso |
+| CU origen | CU-01 a CU-13, §6 de cada uno |
+| Reglas de negocio relevantes | RN-01 a RN-15; invariantes INV-01 a INV-09 |
 | Necesidades de negocio | NB-01, NB-02, NB-03, NB-04, NB-05, NB-09 |
 | Wireframes asociados | N/A. `tiene_ui_final` == false |
 | US a generar en 06 | US del catálogo de condiciones mantenido junto al código, US de traducción de código a respuesta en la capa que expone, US de la indistinguibilidad de `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, US de los dos caminos de alta con su estado inicial propio |
@@ -405,3 +438,5 @@ Dos guiones tienen origen declarado fuera de las once reglas y conviene dejarlo 
 | 1.0 | 2026-08-09 | Emisión inicial. Cataloga las **37 condiciones de error distintas** derivadas una por una de la §6 de los once casos de uso, sin inventar ninguna y sin dejar ninguna sin cubrir, sobre 40 filas declaradas con 3 condiciones que aparecen en dos casos de uso. Declara la distinción entre condición de error, observación y comentario; la taxonomía en cuatro categorías en uso, con «conflicto de facultad» agregada y justificada, y dos categorías declaradas vacías con su motivo; la forma de terminación como dimensión ortogonal, que separa el rechazo del motivo de resultado; el tono y voz con la excepción de calificación de los identificadores literales; y la política de localización, que no traduce códigos y no compone mensajes acá. Registra que `RECONSTRUCCION_SOBRE_TRABAJO_FINALIZADO` fue renombrada por CU-06 1.1 y no es una condición faltante. **Corrección de la ronda r1 del audit, sobre esta misma emisión**: alineación con el cierre de AG-02 del hallazgo P1-01, que decidió que la posición de una figura que no se pudo reconstruir **queda reservada** y que el conjunto de piezas adoptadas admite huecos. En consecuencia, `POSICION_DE_PIEZA_NO_CONTIGUA` pasa a `POSICION_DE_PIEZA_INVALIDA` con su causa reescrita —posición repetida, negativa o fuera de rango— y con la advertencia de que renumerar las piezas adoptadas desplazaría el índice que el alumno ve; la causa de `OBSERVACION_SOBRE_PIEZA_INEXISTENTE` se reescribe sobre el rango del conjunto raíz interpretado, porque la redacción anterior tipificaba como defecto el caso legítimo del escenario canónico; y §6.1 pasa a registrar los dos identificadores retirados por renombre, con la constancia de que el recuento sigue en 37. **P3-02**: la columna de regla de `ADVERTENCIA_SIN_LOS_DOS_VALORES` deja de ser RN-09, cuyo §3 excluye explícitamente de su ámbito a las advertencias de discrepancia de valor, y §6.2 suma la tabla que declara el origen real de esa exigencia, `NB-05` §5 tercer criterio, y el de `POSICION_DE_PIEZA_INVALIDA`, `PRODUCT-INTAKE` §17.1.P.11 punto 2. §6.3 declara el quick-start **no aplicable con su motivo** en lugar de omitirlo en silencio. |
 | 1.1 | 2026-08-09 | Alineación con la **corrección del P0** que reporta `B-02-03-GeometriaFactory-Application-r1.md` y que AG-02 resolvió emitiendo **CU-12**, la configuración de la cuenta de administrador en el primer arranque. El catálogo pasa de **37 a 40 condiciones** sobre **doce** casos de uso y 46 filas declaradas, con 5 condiciones repetidas y 6 filas excedentes. **§1.4 nueva**: declara los dos caminos de alta con su estado inicial y su tratamiento de la credencial, el fundamento de que la cuenta del administrador nace `Habilitado` porque es la que habilita a las demás, y la advertencia de que el mismo identificador `ESTADO_INICIAL_NO_NEGOCIABLE` tiene **causas opuestas** según el camino. **§3.1** acota `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` y `ESTADO_INICIAL_NO_NEGOCIABLE` al auto-registro y da de alta `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`. **§3.12 nueva** cataloga las cinco condiciones de CU-12, con las altas `ADMINISTRADOR_YA_CONFIGURADO` y `CONFIGURACION_SIN_CREDENCIAL`. Es el primer código del catálogo con **fila completa en dos subsecciones**, y §3 declara esa excepción con su motivo. §2.1 actualiza los recuentos por categoría —18, 3, 14 y 5—; §6.1 y §6.2 el recuento y la cobertura; §6.2 suma además el origen del estado inicial, que **ninguna de las once reglas enuncia**, y la nota de que el invariante candidato **INV-08 no es vigente** y no se cuenta. |
 | 1.2 | 2026-08-09 | Alineación con la corrección del **P1** de la ronda r3, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-01**: nada impedía **bloquear** la cuenta del administrador, con lo que se alcanzaba por otra puerta la misma condición sin salida del P0. **§3.2** renombra `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, con la causa ampliada a las **cuatro** operaciones —habilitar, bloquear, rehabilitar y dar de baja—, su regla RN-01 y el fundamento citado de la capacidad F-03, que ya las declaraba sobre cuentas **de alumno**; el intro de la subsección declara ese alcance. **§1.4** suma el cierre de la familia: el alta es sólo una de las dos puertas, y el efecto no se agota en el acceso —**sin administrador nadie aprueba ni rechaza y el circuito de revisión entero se detiene**, con todo trabajo enviado en estado `Pendiente` para siempre—. **§6.1** pasa la constancia de identificadores retirados **de tabla a prosa**, para que ningún recuento automático la lea como condición viva, y suma el tercer retiro con la declaración de que ninguno se recicla. §6.2 actualiza la fila y la nota del candidato **INV-08**, cuyo enunciado se amplió a todo el ciclo de vida y que **sigue propuesto y no vigente**. **El recuento no cambia: 40 condiciones distintas**, un identificador retirado y uno nuevo. |
+| 1.3 | 2026-08-09 | Alineación con `PRODUCT-INTAKE` **1.7** y con la categoría 02 en su versión 1.4, que emite **CU-13** —reseteo de contraseña por el administrador, capacidad **F-26**—, las reglas **RN-12** y **RN-13**, el invariante **INV-09** y el flujo alternativo del cambio obligatorio en CU-03. El catálogo pasa de **40 a 43 condiciones** sobre **trece** casos de uso y 51 filas declaradas, con 7 condiciones repetidas y 8 filas excedentes. **§1.5 nueva**: la tabla que separa la baja del reseteo en cinco planos, con la advertencia de que resolver un olvido de contraseña por CU-02 **no produce ninguna condición de este catálogo** —la baja procede— y es el mismo defecto silencioso que §1.2 describe. **§3.13 nueva** cataloga las cuatro condiciones de CU-13, con las altas `RESETEO_SOBRE_CREDENCIAL_NO_FIJADA` y `RESETEO_CON_ARRASTRE_DE_TRABAJOS` y con dos códigos **reutilizados con la misma causa**, `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` y `VALOR_DERIVADO_VACIO`. **§3.4** suma el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE`, que como `CREDENCIAL_NO_ESTABLECIDA` **no es un fallo** sino un encaminamiento. §2.1 actualiza los recuentos por categoría —19, 3, 16 y 5—; §2.3 suma CU-13 a la forma de rechazo; §4 suma dos reglas de voz, la de nombrar la marca con la palabra «marca» y la de no llamar baja al reseteo. **§6.2 retira la anotación de INV-08 como candidato**: el intake lo adoptó, de modo que las tres filas que lo llevaban entre paréntesis lo declaran vigente y los invariantes alcanzados pasan a ser los nueve. |
+| 1.4 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10** y **cierra la fila de este archivo del hallazgo `F26-20`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0. **Intake 1.10**: las reglas del producto pasan de trece a **quince** con **RN-14** y **RN-15**; §6.2 y la trazabilidad de §6.3 actualizan el recuento y el rango, que pasa a **`RN-01` a `RN-15`**. **`F26-20`**: **§6.1** advertía que un recuento automático sobre las tablas daría «**41** en lugar de **40**» si los tres identificadores retirados llevaran fila propia, números que son de la versión 1.2 de este catálogo; con **43** condiciones vivas y tres retiradas, los números correctos son **46 en lugar de 43**, y así se escriben. **Ninguna condición entra ni sale del catálogo: siguen siendo 43 sobre 51 filas declaradas, con 0 inventadas y 0 sin entrada.** Sube minor. |

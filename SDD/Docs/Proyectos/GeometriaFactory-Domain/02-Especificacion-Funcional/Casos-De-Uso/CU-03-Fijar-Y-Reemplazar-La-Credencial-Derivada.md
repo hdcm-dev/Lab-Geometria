@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md
-**Versión:** 1.3
+**Versión:** 1.5
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-04 y F-05), §4.1 (RN-06), §17.1.P.2 (INV-06), §17.1.P.5, §6 (flujo 1), §9 (X-1 y X-2)
+**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.7 §4 (F-04, F-05 y **F-26**), §4.1 (RN-06, **RN-12**, **RN-13**), §17.1.P.2 (INV-06, **INV-09**), §17.1.P.5, §6 (flujo 1), §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -63,8 +63,9 @@ El alumno es el sujeto de la regla. El dominio **no maneja secretos**: la contra
 | Id | Disparador | Desarrollo | Punto de retorno |
 | --- | --- | --- | --- |
 | FA-01 | El alumno cambia su contraseña estando ya dentro del laboratorio | El dominio admite el reemplazo cuando la credencial derivada ya tiene valor y el estado es `Habilitado`, y exige que el consumidor declare que verificó la credencial vigente. El valor anterior se reemplaza y no se conserva historial: ninguna fuente declara historial de credenciales | Paso 5, con reemplazo en lugar de fijación |
-| FA-02 | El administrador resuelve el caso del alumno que olvidó su contraseña | No hay recuperación en el dominio: la salida declarada es dar de baja la cuenta y volver a darla de alta (CU-02 y CU-01). Este caso de uso no ofrece un camino de restablecimiento | Termina el caso de uso sin efecto |
+| FA-02 | El administrador resuelve el caso del alumno que olvidó su contraseña | **Este caso de uso no es el camino**: el administrador la resetea por [CU-13](CU-13-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md), que conserva la cuenta y todos sus trabajos. Lo que vuelve acá es el paso siguiente, el cambio obligatorio de FA-04. **La salida anterior —dar de baja y volver a dar de alta— dejó de ser la declarada**: `PRODUCT-INTAKE` 1.7 retira la exclusión X-2 y reescribe el caso límite CL-7 sobre el reseteo, porque aquella salida eliminaba todos los trabajos del alumno por RN-07 | Termina el caso de uso sin efecto; el camino sigue en CU-13 y vuelve por FA-04 |
 | FA-03 | El administrador cambia su contraseña después de configurarse, como pide el guion de la etapa `c` | Entra por el reemplazo de FA-01 y no por la fijación: su credencial ya tiene valor desde CU-12, de modo que el camino de fijación por primera vez le devolvería `CREDENCIAL_YA_FIJADA` | Paso 5, con reemplazo |
+| FA-04 | **El cambio obligatorio**: la cuenta tiene la marca de cambio de contraseña pendiente puesta y reemplaza su credencial provisoria | Es el mismo reemplazo de FA-01, con la misma exigencia de credencial vigente verificada —la vigente es la provisoria—, y con **un efecto adicional: el dominio levanta la marca**. Es el único acto que la levanta, y sólo lo ejerce la propia cuenta: la contraseña nueva la elige el alumno y el administrador no la conoce (RN-13, INV-09). El estado de cuenta y los trabajos no se tocan | Paso 5, con reemplazo y con la marca levantada |
 
 ## 6. Excepciones y errores
 
@@ -80,7 +81,7 @@ Los cuatro rechazos dejan al alumno exactamente como estaba.
 ## 7. Postcondiciones
 
 - **Éxito de la fijación:** el alumno tiene credencial derivada con valor y sigue en estado `Habilitado`.
-- **Éxito del reemplazo:** el alumno tiene la credencial derivada nueva y ningún otro atributo cambió.
+- **Éxito del reemplazo:** el alumno tiene la credencial derivada nueva y ningún otro atributo cambió. **Con una sola excepción declarada**: si la marca de cambio de contraseña pendiente estaba puesta, el reemplazo la levanta (FA-04). Los dos efectos son un solo acto y no hay camino por el que uno ocurra sin el otro.
 - **Fallo:** la credencial derivada conserva su valor anterior, tenga o no valor.
 
 ## 8. Criterios de aceptación
@@ -91,22 +92,24 @@ Los cuatro rechazos dejan al alumno exactamente como estaba.
 | CA-02 | Un alumno con cuenta `Pendiente` y credencial derivada sin valor | La capa de aplicación solicita fijar la credencial | El dominio rechaza con el código `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` |
 | CA-03 | Un alumno con cuenta `Habilitado` y credencial derivada ya fijada | La capa de aplicación solicita fijarla por primera vez | El dominio rechaza con el código `CREDENCIAL_YA_FIJADA` |
 | CA-04 | Un alumno con cuenta `Habilitado` y credencial derivada ya fijada | La capa de aplicación solicita reemplazarla sin declarar la verificación de la vigente | El dominio rechaza con el código `CREDENCIAL_VIGENTE_NO_VERIFICADA` y 0 cambios de credencial se aplican |
+| CA-05 | Un alumno reseteado: cuenta `Habilitado`, credencial provisoria y **marca de cambio de contraseña pendiente puesta** | La capa de aplicación solicita el reemplazo declarando verificada la provisoria | El dominio devuelve el alumno con la credencial nueva y **la marca levantada**, y la cuenta vuelve a ser admisible en CU-04 |
+| CA-06 | El mismo alumno reseteado, con la marca puesta | La capa de aplicación solicita el reemplazo **sin** declarar la verificación de la vigente | El dominio rechaza con el código `CREDENCIAL_VIGENTE_NO_VERIFICADA`, la credencial no cambia y **la marca sigue puesta**: 0 caminos levantan la marca sin un cambio efectivo |
 
 ## 9. Trazabilidad
 
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-02 |
-| Reglas de negocio aplicables | [RN-06](../Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), que es la que hace que una cuenta que no está `Habilitado` no llegue a tener credencial útil. La máquina de estados de cuenta que lo restringe está en [`Definicion-Modelo-De-Dominio.md`](../Definicion-Modelo-De-Dominio.md) §5.1 |
-| Invariantes | INV-06, por la condición de estado |
-| Historias de usuario a generar en 06 | US de establecimiento de contraseña en el primer ingreso, US de cambio de contraseña exigiendo la vigente |
+| Reglas de negocio aplicables | [RN-06](../Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), que es la que hace que una cuenta que no está `Habilitado` no llegue a tener credencial útil; y [RN-13](../Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), que es la que hace que el reemplazo de FA-04 levante la marca y que nadie más pueda levantarla. La máquina de estados de cuenta está en [`Definicion-Modelo-De-Dominio.md`](../Definicion-Modelo-De-Dominio.md) §5.1, y la de la marca en §5.3 |
+| Invariantes | INV-06, por la condición de estado; **INV-09**, por el levantamiento de la marca en FA-04 |
+| Historias de usuario a generar en 06 | US de establecimiento de contraseña en el primer ingreso, US de cambio de contraseña exigiendo la vigente, **US-27** de cambio obligatorio que levanta la marca |
 | Componentes esperados en 05 | Atributo de credencial derivada de la entidad de alumno, con su condición de estado |
-| Tests previstos en 08 | Pruebas unitarias de fijación, de reemplazo y de los cuatro rechazos, sin dobles y sin infraestructura |
+| Tests previstos en 08 | Pruebas unitarias de fijación, de reemplazo y de los cuatro rechazos, sin dobles y sin infraestructura; más el par del cambio obligatorio: reemplazo con la marca puesta que la levanta, y reemplazo rechazado que la deja puesta |
 
 ## 10. Notas y supuestos
 
 - El dominio **no deriva** la contraseña ni la compara: la derivación de clave vive en `GeometriaFactory-Infrastructure` (PRODUCT-INTAKE §17.3.P.5). Este caso de uso modela la condición, no el mecanismo.
-- No hay recuperación de contraseña olvidada, porque no hay canal de correo (`Alcance-Producto.md` §5, exclusiones X-1 y X-2).
+- **Sí hay recuperación de contraseña olvidada, y no es autónoma.** `PRODUCT-INTAKE` 1.7 §9 **retira la exclusión X-2**: el administrador resetea la contraseña por CU-13 y la cuenta cambia la provisoria por acá. Lo que sigue excluido es la recuperación **por correo**, que es lo que impide X-1: el producto no tiene canal de correo (`Alcance-Producto.md` §5). La redacción anterior de esta nota citaba las dos exclusiones juntas y quedó falsa en su primera mitad.
 - Ninguna credencial de sesión es observable desde el navegador: eso lo sostiene la pieza pública del producto y no este proyecto de código (`NB-02` §5, quinto criterio).
 
 ## 11. Control de cambios
@@ -117,7 +120,8 @@ Los cuatro rechazos dejan al alumno exactamente como estaba.
 | 1.1 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` 1.3 y la resolución de la ambigüedad de los invariantes. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §9 deja de declarar que ninguna regla lo restringe y pasa a citar **RN-06**, cuyo enunciado el intake anterior no transcribía. Se califican las ocurrencias de `Pendiente` y de los demás estados de cuenta según `Vision-Producto.md` §9.2. **Corrección de la ronda r1 del audit, hallazgo P3-04**: la sección opcional de compatibilidad se numera §17 y no §12, que es el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna a la variante `library`. |
 | 1.2 | 2026-08-09 | Alcanzado por la **corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`. Con los dos caminos de alta separados, §1 declara que la fijación por primera vez es la del auto-registro y se suma **FA-03**, que ubica el cambio de contraseña del administrador de la etapa `c` en el reemplazo de FA-01: su credencial nace fijada por CU-12, de modo que el camino de fijación le devolvería `CREDENCIAL_YA_FIJADA`. |
 | 1.3 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-07**. §5 listaba los flujos alternativos en orden FA-01, FA-03, FA-02, porque FA-03 se insertó en la versión anterior a continuación del flujo con el que se relaciona en lugar de al final de la tabla. Se restituye el orden correlativo sin cambiar ningún contenido ni ninguna numeración. |
-
+| 1.4 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**, que incorpora la capacidad **F-26**, las reglas **RN-12** y **RN-13** y el invariante **INV-09**. Se suma **FA-04, el cambio obligatorio**: el reemplazo hecho por una cuenta con la marca de cambio de contraseña pendiente puesta **levanta la marca**, y es el único acto que la levanta. §7 declara el efecto adicional como parte del mismo acto, sin camino parcial; §8 suma **CA-05** y **CA-06**, que verifican el levantamiento y que un rechazo deja la marca puesta; §9 refiere RN-13 e INV-09. **Dos afirmaciones de la versión anterior quedaron falsas y se corrigen**: FA-02 declaraba que la única salida ante una contraseña olvidada era dar de baja y volver a dar de alta, y §10 declaraba que no hay recuperación de contraseña olvidada citando X-1 y X-2 juntas. El intake **retira X-2** y reescribe **CL-7** sobre el reseteo; lo que sigue excluido es la recuperación autónoma por correo, que es X-1. |
+| 1.5 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10** y **cierra la parte del hallazgo `F26-27`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo. **Intake 1.10**: **FA-02** decía que ante una contraseña olvidada «el administrador **le fija** una contraseña provisoria por CU-13», y **RN-14** declara que **la produce el sistema**: la celda pasa a decir que el administrador **resetea**, sin cambiar nada de lo que el flujo alternativo resuelve. **`F26-27`**: una **línea en blanco partía la tabla** de este control de cambios y dejaba fuera de ella la fila siguiente; se retira, **sin tocar el texto de ninguna fila**. **Ningún flujo principal, precondición, código de rechazo ni criterio de aceptación cambia**, y **FA-04 sigue siendo el único acto que levanta la marca**. Sube minor. |
 ## 17. Compatibilidad de la superficie pública
 
 La operación recibe un valor ya derivado y no un texto en claro. Cambiar esa premisa haría que el dominio maneje secretos y contradiría §17.1.P.5 del intake: sería un cambio incompatible y de alcance, no una evolución menor.

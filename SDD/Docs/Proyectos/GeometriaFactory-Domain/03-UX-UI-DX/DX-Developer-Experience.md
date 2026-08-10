@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** DX-Developer-Experience.md
-**Versión:** 1.2
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §1, §4.1, §4.2 (invariante candidato INV-08, propuesto y no vigente), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9; los **doce** casos de uso CU-01 a CU-12 (§6 de cada uno) y las once reglas RN-01 a RN-11 de `02-Especificacion-Funcional/`; `00-Contexto/Vision-Producto.md` §9 (glosario raíz) y §7; `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-01, NB-02, NB-03, NB-04, NB-05, NB-09); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1 (P.1, P.2, P.3, P.4, P.5, P.6, P.7, P.9, P.10, P.11, P.12), §4.1, §4.2, §16
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §1, §4.1, §4.2 (recorrido de adopción de INV-08), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9; los **trece** casos de uso CU-01 a CU-13 (§6 de cada uno) y las **quince** reglas RN-01 a RN-15 de `02-Especificacion-Funcional/`; `00-Contexto/Vision-Producto.md` §9 (glosario raíz) y §7; `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-01, NB-02, NB-03, NB-04, NB-05, NB-09); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1 (P.1, P.2, P.3, P.4, P.5, P.6, P.7, P.9, P.10, P.11, P.12), §4.1, §4.2, §16
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -62,7 +62,7 @@ Tres consecuencias operativas, que gobiernan todo lo demás:
 2. **El dominio no resuelve nada por su cuenta.** No consulta, no reintenta, no lee el reloj, no interpreta el texto del alumno, no deriva contraseñas y no emite acceso. Cuando una condición se afirma sobre un conjunto de entidades —la unicidad del correo, INV-01— el dominio **la exige declarada** y quien la ejerce es la capa de aplicación con su puerto de repositorio (`Definicion-Modelo-De-Dominio.md` §4.1 y §7).
 3. **Un rechazo es una terminación controlada, no una avería.** El dominio no construye la entidad, o la deja exactamente como estaba, y devuelve la causa; no queda estado intermedio porque no guarda nada. El catálogo completo de esas causas es [`DX-Error-Messages.md`](DX-Error-Messages.md).
 
-Siete invariantes y once reglas de negocio son las dos caras de esto, y la relación entre ambos es lo que le dice al mantenedor dónde poner una regla nueva. Está desarrollada en [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) §7, con su procedimiento de decisión en §7.3, sobre la correspondencia que declara `Definicion-Modelo-De-Dominio.md` §4.3.
+Nueve invariantes vigentes y quince reglas de negocio son las dos caras de esto, y la relación entre ambos es lo que le dice al mantenedor dónde poner una regla nueva. Está desarrollada en [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) §7, con su procedimiento de decisión en §7.3, sobre la correspondencia que declara `Definicion-Modelo-De-Dominio.md` §4.3.
 
 ### 1.3 La frontera de autenticación
 
@@ -72,7 +72,7 @@ Es sutil y conviene dejarla imposible de confundir, porque un error acá se paga
 | --- | --- | --- |
 | El estado de cuenta `Pendiente`, `Habilitado`, `Bloqueado` y sus transiciones admitidas | Sí (CU-02) | — |
 | La **condición** de que una cuenta `Pendiente` o `Bloqueado` no obtiene acceso (INV-06, RN-06) | Sí (CU-04) | — |
-| La respuesta de admisibilidad con su motivo: cuenta `Pendiente`, cuenta bloqueada, credencial no establecida | Sí (CU-04 §6) | — |
+| La respuesta de admisibilidad con su motivo: cuenta `Pendiente`, cuenta bloqueada, credencial no establecida y **cambio de contraseña pendiente** | Sí (CU-04 §6) | — |
 | La exigencia de que la credencial derivada sólo se fije estando la cuenta `Habilitado`, y de que el reemplazo declare verificada la vigente | Sí (CU-03) | — |
 | La exigencia de que la cuenta del administrador nazca `Habilitado` y **con su credencial ya aportada**, porque es la que habilita a las demás y ninguna anterior podría habilitarla a ella | Sí (CU-12) | — |
 | La exigencia de que **ninguna de las cuatro operaciones** de ciclo de vida —habilitar, bloquear, rehabilitar y dar de baja— proceda sobre la cuenta del administrador: las cuatro están declaradas sobre cuentas de alumno (F-03) | Sí (CU-02) | — |
@@ -145,7 +145,7 @@ Los cuatro modos existen, pero **tres de ellos ya viven en artefactos de la cade
 | Modo | Orientación | Dónde vive | Qué responde |
 | --- | --- | --- | --- |
 | Tutorial | Aprendizaje | [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) | «Nunca trabajé contra este dominio; llevame de la mano una hora» |
-| How-to | Tarea | Los doce casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/`, cada uno con sus precondiciones, su flujo principal y sus flujos alternativos. En la etapa que corresponda, los ejemplos de uso que produzca `11-Documentacion` | «Tengo que constituir un alumno / enviar un trabajo / aplicar un desenlace: qué tengo que haber resuelto antes» |
+| How-to | Tarea | Los trece casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/`, cada uno con sus precondiciones, su flujo principal y sus flujos alternativos. En la etapa que corresponda, los ejemplos de uso que produzca `11-Documentacion` | «Tengo que constituir un alumno / enviar un trabajo / aplicar un desenlace: qué tengo que haber resuelto antes» |
 | Reference | Información | `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` para entidades, atributos, cardinalidades y transiciones; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones de error; [`Glosario-UX.md`](Glosario-UX.md) y `02-Especificacion-Funcional/Glosario-Funcional.md` para el vocabulario | «Qué atributos tiene una observación» / «qué significa `ENVIO_SIN_INTERPRETACION`» |
 | Explanation | Comprensión | §1.2 y §1.3 de este documento; `Definicion-Modelo-De-Dominio.md` §4, §6 y §7; `Guia-Onboarding-Developer.md` §7 | «Por qué el dominio no verifica la unicidad del correo si es un invariante suyo» |
 
@@ -162,7 +162,7 @@ Regla de mantenimiento, que evita el anti-patrón de documentación mezclada: **
 
 ## 5. Mensajes de error y diagnóstico
 
-Principio de redacción, aplicado sin excepción a las treinta y siete condiciones del catálogo: **qué pasó, por qué pasó, qué hacer al respecto**. La tercera parte es la que decide si el catálogo sirve, y acá tiene una forma particular:
+Principio de redacción, aplicado sin excepción a las **43** condiciones del catálogo: **qué pasó, por qué pasó, qué hacer al respecto**. La tercera parte es la que decide si el catálogo sirve, y acá tiene una forma particular:
 
 > El diagnóstico accionable de una condición de error del dominio dice siempre **qué hacer del lado del consumidor**, porque el dominio no resuelve nada por su cuenta: no consulta, no reintenta y no corrige el dato.
 
@@ -184,7 +184,7 @@ Las métricas se miden **a mano**, cronometradas sobre un clon limpio en el punt
 | TTFS | Tiempo desde abrir el repositorio hasta la batería de dominio en verde | <= 10 minutos, con el entorno de desarrollo contenido ya construido | Cronometrado a mano sobre un clon limpio, en el punto de control de la etapa |
 | TTFV | Tiempo hasta el primer valor: haber visto una guarda negándose y saber ubicar su regla o su invariante | <= 1 hora, que es el tramo largo de §2 | El objetivo verificable del tramo de 1 hora, resuelto sin abrir el intake |
 | Tasa de error en onboarding | Proporción de pasos del quick-start que fallan en la verificación del punto de control | 0 de 4 pasos | Ejecución del quick-start de §3.1 en cada punto de control |
-| Cobertura del catálogo de errores | Condiciones de error declaradas en los doce casos de uso que tienen entrada en el catálogo | 40 de 40, sin inventados | Recuento contra `DX-Error-Messages.md` §6, verificable por lectura de la §6 de cada caso de uso |
+| Cobertura del catálogo de errores | Condiciones de error declaradas en los trece casos de uso que tienen entrada en el catálogo | 43 de 43, sin inventados | Recuento contra `DX-Error-Messages.md` §6, verificable por lectura de la §6 de cada caso de uso |
 | Tiempo de diagnóstico de un rechazo | Tiempo desde ver un código de condición hasta ubicar el caso de uso, la regla y la acción esperada | <= 2 minutos | Cronometrado sobre tres códigos elegidos al azar del catálogo |
 
 Las tres primeras son las métricas DX canónicas. Las dos últimas son propias de este proyecto de código y existen porque acá el catálogo de errores **es** la superficie pública: una condición sin entrada en el catálogo es superficie no documentada.
@@ -205,9 +205,9 @@ No hay canal de issues externo ni encuesta a developers de adopción: el equipo 
 | Dimensión | Referencia |
 | --- | --- |
 | Rol de intervención | Mantenedor del dominio e integrador de capa, los dos internos al producto (`00-Contexto/Vision-Producto.md` §2.2, concentración de roles en una persona) |
-| Superficie pública que se documenta | Los doce contratos de uso de `02-Especificacion-Funcional/Casos-De-Uso/`: los **dos caminos de alta**, ciclo de vida de la cuenta, credencial derivada, admisibilidad, ciclo de vida del trabajo, reconstrucción de piezas, observaciones, envío, desenlace y los dos contratos de alcance |
+| Superficie pública que se documenta | Los trece contratos de uso de `02-Especificacion-Funcional/Casos-De-Uso/`: los **dos caminos de alta**, ciclo de vida de la cuenta, credencial derivada, **reseteo de contraseña**, admisibilidad, ciclo de vida del trabajo, reconstrucción de piezas, observaciones, envío, desenlace y los dos contratos de alcance |
 | CU origen | CU-01 a CU-12 |
-| Reglas de negocio relevantes | RN-01 a RN-11; invariantes INV-01 a INV-07 |
+| Reglas de negocio relevantes | RN-01 a RN-15; invariantes INV-01 a INV-09 |
 | Necesidades de negocio | NB-01, NB-02, NB-03, NB-04, NB-05, NB-09 |
 | Wireframes asociados | N/A. `tiene_ui_final` == false; el mínimo de wireframes para `library` es cero (`Rules-UX-UI-DX.md` §2.2) |
 | US a generar en 06 | US de documentación de la superficie pública, US del quick-start verificable en el punto de control, US del catálogo de condiciones de error como artefacto mantenido junto al código |
@@ -228,3 +228,5 @@ No hay canal de issues externo ni encuesta a developers de adopción: el equipo 
 | 1.0 | 2026-08-09 | Emisión inicial de la categoría, que nunca se había emitido. Declara el rol de intervención sin integradores externos, el enunciado de que la superficie pública de un modelo de dominio son sus guardas, la frontera de autenticación entre lo que el dominio modela y lo que no implementa, el onboarding en tres tramos con objetivo verificable, el quick-start entero dentro del entorno de desarrollo contenido con su compromiso de verificación por punto de control, la ubicación de los cuatro modos de Diátaxis sobre artefactos ya existentes de la cadena, los principios de redacción de las condiciones de error, cinco métricas DX medibles a mano sin telemetría y el lazo de retroalimentación apoyado en el punto de control de la etapa. **Corrección de la ronda r1 del audit, sobre esta misma emisión**: los pasos del quick-start pasan a nombrarse **por su papel** —entorno de desarrollo contenido, script de construcción, script de pruebas, comando de prueba del ecosistema— conservando su forma literal, porque un quick-start que no se puede ejecutar no sirve, y se declara que las rutas y los nombres salen de `PRODUCT-INTAKE` §16 y §17.1.P.6. Se corrigen las referencias cruzadas a `Guia-Onboarding-Developer.md`, cuyo contenido sobre dónde va una regla nueva pasó a §7 y cuyos próximos pasos pasaron a §5, al recuperar esa guía la numeración de sus secciones obligatorias. El recuento de la métrica de cobertura del catálogo **no cambia**: sigue en 37 de 37. |
 | 1.1 | 2026-08-09 | Alineación con la **corrección del P0** que reporta `B-02-03-GeometriaFactory-Application-r1.md` y que AG-02 resolvió emitiendo **CU-12**, la configuración de la cuenta de administrador en el primer arranque. §1.2 acota el estado inicial de la entidad devuelta al **camino de alta** que la constituyó, en lugar de presentarlo como uniforme, que es la generalización que produjo el defecto. **§1.3 suma una fila a la frontera de autenticación**: la cuenta del administrador nace `Habilitado` y con su credencial ya aportada, porque es la que habilita a las demás; el mecanismo sigue afuera. La métrica de cobertura del catálogo pasa de 37 de 37 a **40 de 40** y el how-to de Diátaxis, de once a doce casos de uso. §8 declara los doce contratos y los dos caminos de alta. |
 | 1.2 | 2026-08-09 | Alineación con la corrección del **P1** de la ronda r3, informe `B-02-03-GeometriaFactory-Domain-r3.md`. **Hallazgo H-02**: §1.2 y §2 remitían a §4.2 de `Definicion-Modelo-De-Dominio.md` a buscar la correspondencia entre reglas e invariantes, que vive en **§4.3**; §4.2 es el invariante candidato. Las dos remisiones quedan corregidas y la cabecera declara las dos subsecciones por separado. **Hallazgo H-01**: §1.3 suma a la frontera de autenticación la fila de que **ninguna de las cuatro operaciones de ciclo de vida procede sobre la cuenta del administrador** (F-03, CU-02), y la advertencia de que estas reglas no protegen sólo el acceso: sin administrador **el circuito de revisión entero se detiene** y todo trabajo enviado queda en estado `Pendiente` para siempre. La métrica de cobertura **no cambia**: sigue en 40 de 40, porque el hallazgo produjo un renombre y no una condición nueva. |
+| 1.3 | 2026-08-09 | Alineación con `PRODUCT-INTAKE` **1.7** y con la categoría 02 en su versión 1.4: capacidad **F-26**, caso de uso **CU-13** de reseteo de contraseña, reglas **RN-12** y **RN-13**, e invariante **INV-09**. Los contratos de uso pasan de doce a **trece** y las reglas de once a **trece**; la métrica de cobertura del catálogo pasa de 40 de 40 a **43 de 43**; los invariantes pasan de siete a **nueve vigentes**, porque el intake **adoptó INV-08**, que esta cadena venía citando como candidato no vigente. §1.2 y la cabecera dejan de rotularlo como propuesto. La distinción operativa nueva —**resetear no es dar de baja**— vive en [`DX-Error-Messages.md`](DX-Error-Messages.md) §1.5 y no se duplica acá. |
+| 1.4 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10** y **cierra dos filas de este archivo del hallazgo `F26-20`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0. **Intake 1.10**: las reglas del producto pasan de trece a **quince** con **RN-14** y **RN-15**; §1.2 y §8 actualizan el recuento y el rango, que pasa a **`RN-01` a `RN-15`**, y el de invariantes a **`INV-01` a `INV-09`**, que ya eran nueve. **`F26-20`**: **§5** aplicaba su principio de redacción a «las **treinta y siete** condiciones del catálogo» y son **43** desde la emisión de CU-13 —el mismo archivo dice «43 de 43» veintidós líneas más abajo—; y **§1.3** enumeraba **tres** motivos de la respuesta de admisibilidad de CU-04 y son **cuatro**: faltaba `CAMBIO_DE_CONTRASENA_PENDIENTE`, que es el que INV-09 hace exigible. **Ninguna condición del catálogo, ningún invariante y ningún contrato de uso cambia.** Sube minor. |

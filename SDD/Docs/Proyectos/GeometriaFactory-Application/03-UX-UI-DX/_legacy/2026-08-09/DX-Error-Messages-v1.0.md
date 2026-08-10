@@ -1,0 +1,496 @@
+# Catálogo de condiciones de error de los casos de uso
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Application
+**Documento:** DX-Error-Messages.md
+**Versión:** 1.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-09
+**Autor:** DX Lead (AG-03)
+**Variante:** DX
+**Trazabilidad upstream:** §6 de los diez casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-10), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3 (los cuatro puertos, los metadatos de orquestación y la cantidad de figuras del conjunto raíz), §4 (las tres comprobaciones, sus cuatro precisiones y la equivalencia de la negativa de facultad), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-11 y las §6 de los doce casos de uso de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-01, NB-02, NB-03, NB-04, NB-05, NB-09); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1, §4.2, §15, §17.2.P.3, §17.2.P.5, §17.2.P.10, §17.2.P.11, §17.2.P.12
+**Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
+
+---
+
+## Tabla de contenido
+
+- [1. Principios de redacción de errores](#1-principios-de-redacción-de-errores)
+  - [1.1 Qué pasó, por qué pasó, qué hacer](#11-qué-pasó-por-qué-pasó-qué-hacer)
+  - [1.2 Una condición de error no es una observación, y el comentario tampoco](#12-una-condición-de-error-no-es-una-observación-y-el-comentario-tampoco)
+  - [1.3 Qué emite esta capa y qué compone el consumidor](#13-qué-emite-esta-capa-y-qué-compone-el-consumidor)
+  - [1.4 Un mismo motivo con dos causas opuestas: los dos caminos de alta](#14-un-mismo-motivo-con-dos-causas-opuestas-los-dos-caminos-de-alta)
+- [2. Taxonomía](#2-taxonomía)
+  - [2.1 Las categorías en uso](#21-las-categorías-en-uso)
+  - [2.2 Las dos categorías que el proyecto de código hermano declaró vacías](#22-las-dos-categorías-que-el-proyecto-de-código-hermano-declaró-vacías)
+  - [2.3 Forma de terminación](#23-forma-de-terminación)
+  - [2.4 Las tres negativas de autorización](#24-las-tres-negativas-de-autorización)
+  - [2.5 Lo que esta capa produce y lo que el dominio rechaza sin que acá ocurra](#25-lo-que-esta-capa-produce-y-lo-que-el-dominio-rechaza-sin-que-acá-ocurra)
+- [3. Catálogo](#3-catálogo)
+  - [3.1 CU-01 Registrar el alta de una cuenta](#31-cu-01-registrar-el-alta-de-una-cuenta)
+  - [3.2 CU-02 Gobernar las cuentas de la comisión](#32-cu-02-gobernar-las-cuentas-de-la-comisión)
+  - [3.3 CU-03 Resolver el ingreso y la credencial del alumno](#33-cu-03-resolver-el-ingreso-y-la-credencial-del-alumno)
+  - [3.4 CU-04 Cargar y reeditar un trabajo propio](#34-cu-04-cargar-y-reeditar-un-trabajo-propio)
+  - [3.5 CU-05 Enviar un trabajo e interpretar su texto](#35-cu-05-enviar-un-trabajo-e-interpretar-su-texto)
+  - [3.6 CU-06 Consultar los trabajos propios del alumno](#36-cu-06-consultar-los-trabajos-propios-del-alumno)
+  - [3.7 CU-07 Revisar los trabajos de la comisión](#37-cu-07-revisar-los-trabajos-de-la-comisión)
+  - [3.8 CU-08 Dar desenlace a un trabajo](#38-cu-08-dar-desenlace-a-un-trabajo)
+  - [3.9 CU-09 Eliminar un trabajo](#39-cu-09-eliminar-un-trabajo)
+  - [3.10 CU-10 Configurar la cuenta de administrador](#310-cu-10-configurar-la-cuenta-de-administrador)
+- [4. Tono y voz](#4-tono-y-voz)
+- [5. Localización](#5-localización)
+- [6. Control de cambios](#6-control-de-cambios)
+- [7. Cobertura y trazabilidad](#7-cobertura-y-trazabilidad)
+  - [7.1 Recuento](#71-recuento)
+  - [7.2 Verificación mecánica de cobertura](#72-verificación-mecánica-de-cobertura)
+  - [7.3 Tabla de cobertura](#73-tabla-de-cobertura)
+  - [7.4 Trazabilidad del artefacto](#74-trazabilidad-del-artefacto)
+
+---
+
+## 1. Principios de redacción de errores
+
+### 1.1 Qué pasó, por qué pasó, qué hacer
+
+Las tres partes son obligatorias en cada entrada y se corresponden con las tres columnas del catálogo: **mensaje** dice qué pasó, **causa probable** dice por qué pasó, **acción sugerida** dice qué hacer al respecto.
+
+La tercera parte tiene acá dos destinatarios, y distinguirlos es lo que la hace accionable:
+
+> El diagnóstico dice **qué hacer del lado del consumidor** cuando la negativa nace de lo que el consumidor pidió, y **qué corregir del lado del adaptador del puerto** cuando nace de lo que un puerto devolvió. Confundirlos manda a corregir la capa equivocada.
+
+Cinco reglas de redacción que ninguna entrada incumple:
+
+1. **Lenguaje plano y sin culpar a nadie.** El enunciado describe la comprobación que se negó, no la torpeza de quien invocó.
+2. **Nada genérico.** No hay «operación inválida» ni «error interno». Una negativa dice qué comprobación se negó. Es la misma exigencia que RN-09 le impone al producto frente al alumno, aplicada frente al consumidor.
+3. **Nada que la regla oculte se filtra.** `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` es deliberadamente indistinguible de la inexistencia (RN-03), y la cuenta inexistente en la consulta de admisibilidad no se distingue hacia afuera para no revelar qué correos están registrados (CU-03 §6 y §10). El tratamiento completo está en §2.4.
+4. **Ningún motivo es un código de protocolo.** El motivo es un valor de una enumeración cerrada; la traducción a respuesta pertenece a `GeometriaFactory-Api` (`Glosario-Funcional.md` §2).
+5. **Ninguna condición deja efecto parcial.** El alcance transaccional declarado es un caso de uso, una unidad de trabajo (`Especificacion-Funcional.md` §3), y por eso cada entrada puede afirmar sin excepción que el repositorio de cuentas o el de trabajos quedan como estaban.
+
+### 1.2 Una condición de error no es una observación, y el comentario tampoco
+
+Es la distinción que sostiene todo lo demás, y confundirla lleva a modelar mal tres cosas a la vez. Las tres nociones son distintas y ninguna es especie de otra:
+
+| Noción | Qué es | Cuántas hay | Quién la produce | Se guarda |
+| --- | --- | --- | --- | --- |
+| **Condición de error del caso de uso** | Una comprobación que impide una operación ilegítima o imposible. Es lo que este catálogo enumera, y se identifica por un **motivo** | Una por invocación negada, y no sobrevive a la invocación | El caso de uso, al negarse, o el dominio, cuyo rechazo el caso de uso propaga | No |
+| **Observación** | Entidad del dominio con dos especies, advertencia y error de validación, que el producto emite **al interpretar el texto del alumno** y al verificar sus valores | Varias por trabajo, tantas como defectos | El validador de figuras, detrás del puerto de validación; el caso de uso la incorpora al trabajo (CU-05 §4 paso 5) | Sí, como entidad |
+| **Comentario** | Texto libre y opcional que el administrador deja al aprobar o al rechazar. **No es una observación y no es una calificación** | A lo sumo uno por trabajo | Una persona | Sí, como atributo del trabajo |
+
+Consecuencia práctica, y es la que más veces se equivoca: un trabajo que vuelve en `Borrador` porque su texto trajo un error de validación **no produjo ninguna condición de este catálogo**. Es el resultado declarado del envío (CU-05 FA-01), el estado lo resolvió el dominio y el caso de uso lo devolvió con sus observaciones localizadas. Traducirlo hacia afuera como fallo sería un defecto del consumidor.
+
+En el sentido inverso: `OBSERVACION_MAL_FORMADA` y `CONJUNTO_DE_PIEZAS_MAL_FORMADO` **sí** son condiciones de este catálogo, aunque hablen de observaciones y de piezas. Lo que se niega no es la observación ni la pieza en sí: es un conjunto mal formado que llegó del validador, y que el alumno no debe ver.
+
+### 1.3 Qué emite esta capa y qué compone el consumidor
+
+Esta capa emite un **motivo**, no un texto. No produce mensajes para personas, no los formatea y no los traduce: no cruza ninguna frontera de proceso y sus contratos son referencias de proyecto de código dentro de la misma solución de código (`PRODUCT-INTAKE` §17.2.P.3).
+
+La columna «mensaje» de este catálogo es el **enunciado canónico en lenguaje plano** de cada condición: la base sobre la que la capa que expone compone lo que una persona lee. No es una cadena que la biblioteca produzca ni un recurso que exista en el código.
+
+### 1.4 Un mismo motivo con dos causas opuestas: los dos caminos de alta
+
+El producto tiene **dos caminos de alta de cuenta**, y no son variantes de uno solo: son dos contratos con reglas opuestas. Entenderlo es condición para leer bien §3.1 y §3.10, y para no buscar en uno lo que está en el otro.
+
+| Rasgo | Auto-registro del alumno (CU-01) | Configuración del administrador (CU-10) |
+| --- | --- | --- |
+| Estado inicial que impone el dominio | `Pendiente` | `Habilitado` |
+| Credencial derivada en el alta | **Prohibida.** Se fija en el primer ingreso efectivo, por CU-03 | **Obligatoria.** La cuenta nace con credencial fijada |
+| Ventana de alta | Abierta siempre: una vez por alumno | Abierta **sólo mientras no exista ningún administrador**. Se cierra con la primera configuración y no vuelve a abrirse |
+| Papel que constituye | `Alumno` | `Administrador` |
+| Veces que se ejerce | Una por alumno | **Una sola en la vida de la instancia** |
+
+El fundamento de que la cuenta del administrador nazca `Habilitado` lo declara el dominio y esta capa no lo redacta de nuevo: si naciera `Pendiente`, la única transición que la sacaría de ahí es que un administrador la habilite, y no hay ninguno; la instancia quedaría inutilizable en el primer arranque (CU-10 §10).
+
+**Consecuencia sobre el catálogo.** El motivo `ESTADO_INICIAL_NO_NEGOCIABLE` aparece en los dos caminos con **causas opuestas**: en CU-01 rechaza constituir la cuenta del auto-registro en un estado distinto de `Pendiente`; en CU-10, en un estado distinto de `Habilitado`. No es una inconsistencia y no hay que unificarlo: el enunciado del motivo es «el estado inicial de este camino no se elige», y cuál es ese estado lo fija el camino.
+
+Por eso es **el único motivo del catálogo que lleva fila completa en dos subsecciones de §3** en lugar de una entrada única con nota, y las dos filas se leen juntas, con remisión mutua. **Es la misma forma que adoptó el proyecto de código hermano** en su propia categoría 03 para el mismo motivo, y se conserva idéntica: la consistencia entre proyectos de código hermanos vale más que la economía de una fila. Las otras ocho condiciones declaradas en más de un caso de uso conservan la misma causa en todos y siguen con entrada única.
+
+## 2. Taxonomía
+
+### 2.1 Las categorías en uso
+
+| Categoría | Qué agrupa | Cuántas condiciones |
+| --- | --- | --- |
+| **Entrada inválida** | El dato que llega está ausente, vacío, no admitido en este camino, o no pertenece a un conjunto cerrado declarado | 13 |
+| **Recurso ausente** | Lo que la operación referencia no existe, no existe **para quien lo pide**, o todavía no tiene valor | 4 |
+| **Conflicto de estado** | La operación es legítima, pero el estado actual de la cuenta, del trabajo o del conjunto de cuentas no la admite | 11 |
+| **Conflicto de facultad** | La operación es legítima y el estado la admitiría, pero el papel declarado por **quien pide** no la ejerce | 2 |
+| **Conflicto de alcance** | La operación es legítima y el papel la ejerce, pero el trabajo pedido está fuera de lo que ese papel ve | 1 |
+| **Error transitorio** | Un puerto no pudo completar lo que se le pidió, por una causa que no depende de lo que el consumidor pidió | 1 |
+| **Error interno** | Un adaptador de puerto devolvió algo que el contrato no admite. No es un defecto del caso de uso ni del consumidor | 2 |
+
+Dos categorías se agregan a la enumeración de referencia y conviene justificarlas, porque son exactamente las que esta capa existe para ejercer:
+
+- **Conflicto de facultad** se declara aparte porque no se resuelve mirando el dato ni el estado, sino el papel de quien pide. Confundirla con un conflicto de estado llevaría a buscar el remedio en una transición que no existe.
+- **Conflicto de alcance** se declara aparte de las otras dos porque su remedio también es distinto: no hay dato que corregir ni papel que cambiar, hay un trabajo que simplemente no forma parte del flujo de trabajo del administrador. Fundirla con «conflicto de estado» haría creer que existe una transición que lo trae al alcance, y no existe (RN-11).
+
+**Una divergencia deliberada de clasificación con el proyecto de código hermano, declarada para que no se lea como descuido.** El motivo `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` está clasificado allá como conflicto de facultad y acá como **entrada inválida**. El fundamento es uno solo, y es que el referente cambia con la capa: en el dominio el papel llega como pretensión de constituir una entidad reservada; acá el papel es **un dato del pedido de alta**, no la facultad de quien pide. Nadie está ejerciendo una facultad que no tiene, y **CU-01 no verifica facultad ni pertenencia** —el auto-registro lo ejerce una persona que todavía no tiene cuenta (CU-01 §10)—: lo que se rechaza es un valor del pedido, exactamente como en `PAPEL_NO_RECONOCIDO`, que esta capa clasifica igual.
+
+Y lo que esta divergencia **no** invoca, escrito acá para que nadie lo reponga: **no hay correspondencia uno a uno entre la categoría de conflicto de facultad y la negativa por facultad de §2.4**. La categoría tiene dos miembros —`FACULTAD_DE_ADMINISTRADOR_REQUERIDA` y `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA`— y la negativa es una sola. Son cosas de distinto orden: la categoría es taxonómica y la negativa es una de las tres comprobaciones de autorización. La clasificación de este motivo se sostiene por el referente del papel y por nada más.
+
+### 2.2 Las dos categorías que el proyecto de código hermano declaró vacías
+
+El proyecto de código hermano las declaró vacías con su motivo, porque el dominio no ejecuta entrada ni salida. **Acá no están vacías, y la diferencia es informativa**: es la primera capa del producto que depende de algo que puede no responder.
+
+| Categoría | Condiciones | Por qué existen acá y no en el dominio |
+| --- | --- | --- |
+| **Error transitorio** | `INTERPRETACION_NO_DISPONIBLE` | Esta capa **depende de puertos**, y un puerto puede no poder completar lo que se le pidió. La terminación es degradada y declarada: el trabajo queda en `Borrador` con su texto intacto (CU-05 §6). Aun así, **esta capa no reintenta**: devuelve el estado degradado y quien decida reintentar es el consumidor |
+| **Error interno** | `CONJUNTO_DE_PIEZAS_MAL_FORMADO`, `OBSERVACION_MAL_FORMADA` | Son los dos casos en que el motivo no denuncia lo que el consumidor pidió sino **lo que un adaptador devolvió**. El caso de uso no los puede corregir y no los puede mostrar: un conjunto mal formado es un defecto del validador y no un resultado que el alumno deba ver (CU-05 §6). Los dos son **condiciones agregadas**, y su relación con los ocho rechazos del dominio que agrupan está en §2.5 |
+
+Ninguna otra condición pertenece a estas dos categorías, y una falla no declarada tampoco: su lugar es una prueba que falla, no una entrada acá.
+
+### 2.3 Forma de terminación
+
+Dimensión ortogonal a la categoría, y hay que leerla junto con ella porque cambia lo que el consumidor tiene que hacer:
+
+| Forma | Qué significa | Dónde aparece |
+| --- | --- | --- |
+| **Negativa sin escritura** | El caso de uso se niega a una operación de escritura. No abre la unidad de trabajo, o la cierra sin efecto; el repositorio queda exactamente como estaba | CU-01, CU-02, CU-03 en sus operaciones sobre la credencial, CU-04, CU-05, CU-08, CU-09, CU-10 |
+| **Motivo de resultado** | La operación es una consulta y **siempre devuelve un resultado**; el motivo es la razón por la que ese resultado es «no admisible» o «no procede». No es una excepción de programa y no modifica nada | CU-03 en la consulta de admisibilidad, CU-06, CU-07 |
+| **Terminación degradada** | La operación no se completó por una causa que no depende del pedido, y el caso de uso lo declara en vez de fingir un resultado. Es la forma de una sola condición: `INTERPRETACION_NO_DISPONIBLE` | CU-05 |
+
+La diferencia importa: ante una negativa sin escritura el consumidor corrige la invocación; ante un motivo de resultado **informa** o **encamina** a la operación que corresponde; ante una terminación degradada informa que el servicio no está disponible y **no** presenta el trabajo como interpretado. `CREDENCIAL_NO_ESTABLECIDA` es el ejemplo canónico del segundo caso: no es un fallo, es la situación esperada del primer ingreso efectivo del alumno.
+
+### 2.4 Las tres negativas de autorización
+
+Esta es la sección que justifica que `tiene_auth` valga true en este proyecto de código, y la que hay que dejar imposible de confundir. Las tres comprobaciones transversales de `Especificacion-Funcional.md` §4 producen tres negativas, y **confundir las dos primeras es el error más caro que un consumidor puede cometer contra esta capa**: confirmar que un recurso ajeno existe habilita averiguar por tanteo qué identificadores existen.
+
+| Negativa | Motivo | Qué se preguntó | ¿Oculta la existencia del recurso? | Traducción del consumidor |
+| --- | --- | --- | --- | --- |
+| **Pertenencia** | `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | ¿Este trabajo es del alumno que lo pide? | **Sí, deliberadamente.** El trabajo ajeno y el identificador inexistente comparten motivo por diseño | «No encontrado», y **nunca** «no autorizado» |
+| **Facultad** | `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | ¿Quien pide esta operación reservada tiene el papel `Administrador`? | **No, y no tiene por qué.** No hay recurso ajeno cuya existencia proteger: se preguntó por una facultad, no por un recurso | Explícita: la operación requiere la facultad de administrador |
+| **Alcance** | `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | ¿Este trabajo entra en lo que el administrador ve? | **No.** Expresa que el trabajo está fuera de su flujo de trabajo, no que no exista | Explícita: los trabajos en `Borrador` no forman parte de la revisión |
+
+Las cuatro precisiones que rigen en toda la categoría, transcriptas de `Especificacion-Funcional.md` §4 porque son el insumo directo de este catálogo:
+
+1. **El papel no reemplaza a la pertenencia.** Son dos comprobaciones distintas: un alumno autenticado no debe poder leer el trabajo de otro cambiando el identificador de la petición, y ningún papel resuelve eso.
+2. **La negativa por pertenencia y la negativa por facultad no se confunden.** La primera oculta la existencia del recurso; la segunda no tiene nada que ocultar.
+3. **La comprobación se hace sobre el dato recuperado y antes de escribir.** No se resuelve ocultando un control en la pantalla, y por eso es verificable con dobles sin base de datos.
+4. **El trabajo ajeno y el identificador inexistente comparten motivo por diseño.** Distinguirlos permitiría averiguar por tanteo qué identificadores existen.
+
+**Una sola negativa de facultad, y dos motivos del dominio detrás.** El dominio declara dos motivos distintos para la misma negativa —uno en su resolución de desenlace y otro en la de alcance del administrador— y esta capa emite uno solo: corta con su propia verificación **antes** de invocar al dominio, de modo que ninguno de los dos llega a producirse (`Especificacion-Funcional.md` §4, CU-08 §10, CU-09 §10). Quien lea las dos capas no debe leer tres negativas de facultad donde hay una.
+
+**Procedimiento de decisión**, para el consumidor que tiene que traducir un motivo y para quien escribe un caso de uso nuevo:
+
+1. **¿La pregunta fue por un recurso concreto que puede ser de otra persona?** Si es sí, la negativa oculta: mismo motivo para el ajeno y para el inexistente, y traducción a «no encontrado». Termina acá.
+2. **¿La pregunta fue por una facultad, sin recurso ajeno de por medio?** Entonces la negativa puede ser explícita: no hay nada que ocultar, y ocultarla sólo haría más difícil el diagnóstico.
+3. **¿La pregunta fue por un recurso que el papel sí puede ver en general, pero éste en particular queda fuera de su alcance?** Entonces la negativa es explícita y **no oculta**: el administrador ve todo lo que no es borrador, y decirle que un borrador está fuera de su alcance no le revela nada que no supiera.
+
+**Traducciones prohibidas.** Ninguna de estas cuatro es admisible en `GeometriaFactory-Api` ni en ninguna superficie aguas abajo, y la métrica que las cuenta tiene objetivo cero ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §6):
+
+| Traducción prohibida | Por qué | Qué corresponde |
+| --- | --- | --- |
+| `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` → «no autorizado» | Confirma que el recurso existe y que es de otro. Es exactamente lo que RN-03 impide | «No encontrado» |
+| Devolver una respuesta distinta para el trabajo ajeno y para el identificador inexistente | La distinción por sí sola permite el tanteo, aunque los dos textos sean vagos | Una sola respuesta, indistinguible |
+| Distinguir hacia afuera la cuenta inexistente de la cuenta que no admite ingreso | Revela qué correos están registrados (CU-03 §6 y §10) | No admisible, sin distinguir el motivo hacia afuera |
+| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` → «no encontrado» | El error simétrico, y también es un defecto: oculta lo que no hace falta ocultar y deja al integrador sin diagnóstico | Explícita, tal como el motivo la declara |
+
+**Cómo se sostiene esto sin confiar en la buena memoria.** La indistinguibilidad es verificable: CA-03 de CU-06 exige que el motivo devuelto para el detalle de un trabajo ajeno sea **el mismo** que para un identificador inexistente, y CA-03 de CU-09 lo exige para la eliminación. Las dos son pruebas unitarias con repositorio simulado, y son las que impiden que una refactorización reintroduzca la distinción sin que nadie se dé cuenta.
+
+### 2.5 Lo que esta capa produce y lo que el dominio rechaza sin que acá ocurra
+
+Los diez casos de uso orquestan doce casos de uso del dominio, y **el dominio declara rechazos que esta capa no puede producir**. Su ausencia del catálogo no es un olvido: la 02 los nombra uno por uno en sus §10 para que no se lea así, y acá se reúnen en una sola tabla porque para quien implementa la capa es información operativa. **Ninguna fila de esta tabla es una condición de este catálogo**, y por eso ninguna entra en los recuentos de §7.
+
+| Rechazo del dominio | Origen | Por qué acá no ocurre | Dónde está declarado |
+| --- | --- | --- | --- |
+| `UNICIDAD_DE_CORREO_NO_VERIFICADA` | Dominio, auto-registro y configuración | **Inalcanzable por construcción.** Los dos caminos de alta consultan el correo antes y declaran siempre la verificación al invocar | CU-01 §10 |
+| `BAJA_SIN_ARRASTRE_DE_TRABAJOS` | Dominio, ciclo de vida de la cuenta | **Inalcanzable por construcción.** El flujo alternativo de la baja siempre declara el arrastre | CU-02 §10 |
+| `REEDICION_FUERA_DE_BORRADOR` | Dominio, creación y reedición del trabajo | **Equivalente**, no ausente: es la misma negativa que `OPERACION_FUERA_DE_BORRADOR`. Esta capa corta antes, con la resolución de acceso del dominio | CU-04 §10 |
+| `ENVIO_SIN_INTERPRETACION` | Dominio, gobierno del estado del trabajo | **Inalcanzable por construcción.** El envío interpreta siempre antes de invocar al dominio | CU-05 §10 |
+| `DESENLACE_NO_ADMITIDO_EN_ESTE_CONTRATO` | Dominio, gobierno del estado del trabajo | **Inalcanzable por construcción.** El envío no ofrece aprobar ni rechazar: eso es CU-08 | CU-05 §10 |
+| `TIPO_DE_PIEZA_DESCONOCIDO`, `FAMILIA_DECLARADA_CONTRADICE_AL_TIPO`, `POSICION_DE_PIEZA_INVALIDA`, `RECONSTRUCCION_SOBRE_TRABAJO_TERMINAL` | Dominio, reconstrucción del conjunto de piezas | **Agregados deliberadamente** en `CONJUNTO_DE_PIEZAS_MAL_FORMADO`. Los cuatro son defectos del validador o de la orquestación, y ninguno es un resultado que el alumno deba ver | CU-05 §6 |
+| `ESPECIE_DE_OBSERVACION_DESCONOCIDA`, `ERROR_SIN_UBICACION`, `ADVERTENCIA_SIN_LOS_DOS_VALORES`, `OBSERVACION_SOBRE_PIEZA_INEXISTENTE` | Dominio, registro de las observaciones | **Agregados deliberadamente** en `OBSERVACION_MAL_FORMADA`, por el mismo criterio y de forma simétrica | CU-05 §6 |
+| `DESENLACE_SIN_PAPEL_DE_ADMINISTRADOR`, `ALCANCE_SIN_PAPEL_DE_ADMINISTRADOR` | Dominio, desenlace y alcance del administrador | **No llegan a producirse.** Esta capa corta antes con su propia verificación de facultad, y emite un motivo único por los dos | `Especificacion-Funcional.md` §4, CU-08 §10, CU-09 §10 |
+| `OPERACION_DESCONOCIDA` | Dominio, acceso del alumno y alcance del administrador | **Inalcanzable por construcción.** Cada resolución se consulta con una operación fija; lo que sí puede llegar mal es el papel, y eso es `PAPEL_NO_RECONOCIDO` | CU-09 §10 |
+
+Dos consecuencias para quien implementa:
+
+1. **Una condición agregada esconde varias causas del dominio, y eso es deliberado.** Al depurar `CONJUNTO_DE_PIEZAS_MAL_FORMADO` o `OBSERVACION_MAL_FORMADA`, el motivo fino que hay que mirar es el que devolvió el dominio, y está en las tablas de la 02 de `GeometriaFactory-Domain`. Este catálogo no lo repite porque no es lo que esta capa emite.
+2. **Un rechazo inalcanzable que aparece en ejecución es un defecto de esta capa, no del consumidor.** Si el dominio devuelve `ENVIO_SIN_INTERPRETACION`, el caso de uso saltó un paso propio. Es la mejor señal temprana que ofrece esta frontera.
+
+## 3. Catálogo
+
+Treinta y cuatro condiciones, derivadas una por una de la §6 de los diez casos de uso. Ninguna se inventó y ninguna quedó afuera; el recuento y la verificación mecánica están en §7.
+
+Nueve condiciones se declaran en más de un caso de uso. **Ocho conservan la misma causa en todos** y llevan una sola entrada, en el caso de uso donde aparecen primero, con la nota de sus apariciones restantes. La novena, `ESTADO_INICIAL_NO_NEGOCIABLE`, lleva **fila completa en §3.1 y en §3.10** porque sus dos causas son opuestas según el camino de alta: el motivo está en §1.4. Es la única fila excedente del catálogo: 35 filas de tabla para 34 condiciones.
+
+### 3.1 CU-01 Registrar el alta de una cuenta
+
+Es el **auto-registro del alumno**, uno de los dos caminos de alta (§1.4). Forma de terminación: negativa sin escritura. En los cinco casos no se constituye ninguna cuenta y la unidad de trabajo no se abre.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `CORREO_YA_REGISTRADO` | Conflicto de estado | El correo aportado ya pertenece a una cuenta | La consulta de unicidad lo encontró ocupado, o el puerto de repositorio rechazó la materialización por una colisión que esa consulta no vio (CU-01 FA-02) | Informar que el correo está ocupado y **no informar el estado ni el papel de la cuenta que lo ocupa**. La verificación previa no es una garantía por sí sola: la unicidad efectiva la sostiene también la capa que guarda, y por eso este motivo llega por dos caminos (RN-02). Esta condición vuelve a declararse en CU-10, con la misma causa |
+| `DATO_OBLIGATORIO_AUSENTE` | Entrada inválida | Falta un dato obligatorio del alta: correo, nombre o apellido | El dominio rechazó la constitución porque uno de los tres llegó vacío | Completar el dato antes de invocar. Esta capa **propaga el motivo del dominio sin traducirlo**: no lo infiere ni lo deja en blanco. Esta condición vuelve a declararse en CU-04, sobre el nombre y la fecha del trabajo, y en CU-10, con la misma causa que acá |
+| `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` | Entrada inválida | El **auto-registro** no admite credencial derivada | El consumidor aportó una credencial derivada junto con los datos del auto-registro | Registrar sin credencial: en este camino se fija recién en el primer ingreso efectivo, por CU-03. **En la configuración del administrador la credencial sí se aporta**, y eso es CU-10: el motivo está acotado a este camino (§1.4) |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` | Entrada inválida | El estado inicial de **este camino** no se elige | Se pidió constituir la cuenta del auto-registro en un estado distinto de `Pendiente` | Invocar sin pedir estado: lo fija el dominio. Toda cuenta de alumno nace `Pendiente` y sólo el administrador la habilita, con acto explícito (CU-02). **Mismo motivo, causa opuesta en CU-10**, donde el estado impuesto es `Habilitado`: ver §3.10 y §1.4 |
+| `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` | Entrada inválida | El auto-registro no constituye cuentas con papel `Administrador` | Se pidió constituir un administrador por la vía del alumno | Usar CU-10, que es el camino declarado para la configuración del administrador. Constituirlo acá lo dejaría `Pendiente` y sin salida, porque ninguna otra cuenta podría habilitarlo (§1.4). **Sobre su categoría**, que diverge de la del proyecto de código hermano, ver §2.1 |
+
+### 3.2 CU-02 Gobernar las cuentas de la comisión
+
+Forma de terminación: negativa sin escritura. Ninguna deja efecto parcial: la baja escribe todo o no escribe nada.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | Conflicto de facultad | La operación requiere el papel `Administrador` | El papel declarado por quien pide no es `Administrador` | Comprobar el papel antes de invocar. **Es una negativa por facultad y no por pertenencia**: la existencia de la cuenta destino no se oculta, porque quien pregunta no está pidiendo un recurso ajeno sino ejerciendo una facultad que no tiene (§2.4). El caso de uso no recupera ni modifica nada. Esta condición vuelve a declararse en CU-07 y en CU-08 |
+| `CONFIRMACION_DE_BAJA_NO_COINCIDE` | Entrada inválida | El correo escrito como confirmación no es el de la cuenta destino | Se solicitó la baja con un correo de confirmación distinto | Volver a pedirle al administrador que escriba el correo exacto de la cuenta. La confirmación escrita es exigencia de RN-07 y protege la única operación destructiva del producto: no se retira ningún trabajo ni la cuenta, y la unidad de trabajo no se abre |
+| `TRANSICION_DE_CUENTA_NO_ADMITIDA` | Conflicto de estado | La transición pedida no está admitida desde el estado actual de la cuenta | El dominio rechazó el par estado actual y transición | Encadenar las transiciones declaradas por la máquina de estados de la cuenta, que vive en `GeometriaFactory-Domain`. Esta capa **propaga el motivo y conserva el estado actual**: no infiere transiciones intermedias |
+| `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` | Conflicto de facultad | La cuenta con papel `Administrador` no se da de baja | Se pidió dar de baja al administrador de la instancia | No hay camino: la instancia quedaría sin administrador (RN-01) y su alta ya no puede repetirse, porque la ventana se cerró con la primera configuración (§1.4). Esta capa propaga el rechazo del dominio |
+| `CUENTA_INEXISTENTE` | Recurso ausente | No hay ninguna cuenta con el identificador o el correo pedido | El puerto de repositorio de cuentas no la encontró | Verificar el dato con el que se invocó. **Acá no oculta nada**, porque la operación ya exigió la facultad de administrador y el administrador gobierna todas las cuentas de la comisión. Esta condición vuelve a declararse en CU-03, donde su tratamiento hacia afuera **sí** es distinto: ver §3.3 |
+
+### 3.3 CU-03 Resolver el ingreso y la credencial del alumno
+
+Dos formas conviven: la consulta de admisibilidad es **motivo de resultado** —siempre devuelve un resultado, y el motivo explica por qué no es admisible— y las operaciones sobre la credencial son negativas sin escritura, que dejan la cuenta exactamente como estaba.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `CUENTA_PENDIENTE` | Conflicto de estado | La cuenta está registrada y todavía no fue habilitada | El estado de cuenta es `Pendiente` (RN-06) | **No es un fallo y no se responde con un rechazo genérico**: informar con todas las letras que la cuenta espera la habilitación del administrador, que es lo que el producto promete al alumno sin canal de correo. No emitir acceso |
+| `CUENTA_BLOQUEADA` | Conflicto de estado | La cuenta está bloqueada | El estado de cuenta es `Bloqueado` (RN-06) | Informar el motivo y no emitir acceso. La rehabilitación es un acto explícito del administrador, por CU-02. Una cuenta bloqueada conserva sus trabajos: la baja es la única operación destructiva |
+| `CREDENCIAL_NO_ESTABLECIDA` | Recurso ausente | La cuenta está habilitada y todavía no tiene credencial derivada | Es la situación esperada del **primer ingreso efectivo del alumno** | **No es un fallo.** Encaminar al pedido de establecer la contraseña, que se fija por el flujo alternativo FA-02 de este mismo caso de uso. Es el circuito de alta declarado del producto. **La cuenta del administrador nunca produce este motivo**: nace con credencial fijada por CU-10, de modo que para ella el único camino es el reemplazo |
+| `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | Conflicto de estado | La credencial derivada sólo se fija o se reemplaza con la cuenta habilitada | Se intentó fijar o reemplazar sobre una cuenta `Pendiente` o `Bloqueado` | Habilitar o rehabilitar la cuenta primero, por CU-02. Esta capa propaga el rechazo del dominio y conserva la credencial como estaba |
+| `CREDENCIAL_VIGENTE_NO_VERIFICADA` | Entrada inválida | El reemplazo exige declarar verificada la credencial vigente | Se pidió el reemplazo sin esa declaración | Verificar la credencial vigente en la capa que sí puede compararla —`GeometriaFactory-Infrastructure`— y **declararlo al invocar**. Esta capa no compara credenciales: exige que la verificación se declare, que es la forma en que la regla se hace exigible sin conocer el mecanismo |
+| `CREDENCIAL_YA_FIJADA` | Conflicto de estado | La credencial derivada ya tiene valor | Se pidió fijar por primera vez algo que ya está fijado | Usar el camino de reemplazo, declarando verificada la credencial vigente. El valor anterior se reemplaza y no se conserva historial. Es el motivo que recibe siempre la cuenta del administrador si se intenta fijarle credencial, porque nace con una |
+| `VALOR_DERIVADO_VACIO` | Entrada inválida | El valor de credencial derivada llegó vacío | Se invocó la fijación o el reemplazo con un valor sin contenido | Aportar el valor **ya derivado**. Esta capa no deriva la contraseña y nunca la conoce en claro; conserva la credencial como estaba |
+
+**La cuenta inexistente en la consulta de admisibilidad.** `CUENTA_INEXISTENTE` tiene su entrada única en §3.2, pero su tratamiento acá es distinto y es una de las reglas de ocultamiento del producto: cuando el puerto de repositorio no encuentra el correo, el caso de uso devuelve **no admisible sin distinguir el motivo hacia afuera**, para no revelar qué correos están registrados (CU-03 §6, CA-05). Es el mismo criterio con el que un trabajo ajeno es indistinguible de uno inexistente, aplicado a la cuenta.
+
+### 3.4 CU-04 Cargar y reeditar un trabajo propio
+
+Forma de terminación: negativa sin escritura. Ninguna deja escritura parcial: la unidad de trabajo se abre recién al materializar.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | Recurso ausente | El trabajo no existe para quien lo pide | El solicitante no es el dueño del trabajo, **o el identificador no existe** | Traducirlo a «no encontrado» y **nunca** a «no autorizado». Los dos casos comparten motivo por diseño: es lo que impide averiguar por tanteo qué identificadores existen (RN-03). Ver §2.4, incluida la tabla de traducciones prohibidas. Esta condición vuelve a declararse en CU-05, CU-06 y CU-09 |
+| `OPERACION_FUERA_DE_BORRADOR` | Conflicto de estado | El dueño no reedita ni elimina un trabajo fuera de `Borrador` | Se pidió reeditar un trabajo propio en estado `Pendiente`, `Finalizado` o `Rechazado` | Informar la acotación al borrador (RN-04). **Es un motivo distinto del anterior porque acá la existencia del trabajo ya está admitida para su dueño**: quien pregunta es el dueño y no hay nada que ocultarle. **Ver** un trabajo propio sí procede en los cuatro estados. Esta condición vuelve a declararse en CU-09, sobre la eliminación, y es la misma negativa que el dominio llama `REEDICION_FUERA_DE_BORRADOR` (§2.5) |
+| `TEXTO_ORIGINAL_ALTERADO` | Entrada inválida | El texto original no admite versiones corregidas | El consumidor aportó como texto original una versión corregida del que pegó el alumno | Conservar el texto tal como el alumno lo pegó (RN-08). El producto no edita el dato del alumno, y es justamente lo que hace posible reprocesar el mismo trabajo cuando el validador mejora. La reedición cambia los datos del trabajo y el texto que el alumno **vuelve a pegar**, nunca el texto ya guardado |
+| `TRABAJO_SIN_DUENO` | Entrada inválida | El trabajo no trae la identidad del alumno solicitante | El consumidor invocó la carga sin declarar quién la pide | Aportar la identidad del solicitante, que el consumidor ya autenticó. **Un trabajo sin dueño no es un trabajo**, y la pertenencia es lo único que después va a acotar quién lo ve |
+
+**El dato obligatorio ausente en la carga.** `DATO_OBLIGATORIO_AUSENTE` tiene su entrada única en §3.1 y vuelve a declararse acá con otro alcance: lo que falta es **el nombre o la fecha del trabajo**, y la fecha en cuestión es la que **declara el alumno**, no un sello del reloj. Esta capa propaga el rechazo del dominio y no materializa nada.
+
+### 3.5 CU-05 Enviar un trabajo e interpretar su texto
+
+Conviven las tres formas de terminación, y es el único caso de uso donde eso pasa. **Ninguna condición modifica el texto original**, ni siquiera cuando la interpretación falla.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `ENVIO_FUERA_DE_BORRADOR` | Conflicto de estado | Sólo se envía un trabajo en `Borrador` | Se pidió enviar un trabajo en **estado `Pendiente`** | No reenviar. Esta capa propaga el rechazo del dominio y conserva el estado actual. Enviar es la **única acción de guardado** del alumno, y un trabajo que ya salió de sus manos no vuelve al envío. **El motivo está acotado al estado `Pendiente`**: los dos estados de cierre devuelven el de la fila siguiente |
+| `TRANSICION_DESDE_ESTADO_TERMINAL` | Conflicto de estado | De un trabajo `Finalizado` o `Rechazado` no sale ninguna transición | Se pidió enviar un trabajo que ya tuvo desenlace | No hay camino de vuelta: los dos estados de cierre no cambian de estado ni de contenido (RN-10). **Corregir un rechazo significa cargar un trabajo nuevo.** El dominio devuelve **este** motivo y no el anterior para los dos estados de cierre, y no los distingue entre sí; el criterio CA-07 lo ancla. Esta condición vuelve a declararse en CU-08, sobre un desenlace nuevo |
+| `INTERPRETACION_NO_DISPONIBLE` | Error transitorio | El puerto de validación de figuras no pudo completar la interpretación | El adaptador que implementa el puerto no respondió o no pudo resolver | Informar que la interpretación no está disponible y **no presentar el trabajo como interpretado**. El caso de uso termina de forma controlada: el trabajo queda en `Borrador` con su texto intacto y se devuelve el estado degradado. **No se inventan observaciones y no se pasa a estado `Pendiente`.** Esta capa no reintenta: si corresponde reintentar, lo decide el consumidor |
+| `CONJUNTO_DE_PIEZAS_MAL_FORMADO` | Error interno | El conjunto de piezas que devolvió el validador no es adoptable | El dominio lo rechazó por posición inválida —repetida, negativa o fuera del rango declarado—, tipo de pieza desconocido, familia que contradice al tipo, o reconstrucción sobre un trabajo terminal | **Corregir el adaptador del puerto de validación, no la invocación.** Es una **condición agregada** que reúne cuatro rechazos del dominio (§2.5); el motivo fino está en la 02 del dominio. El caso de uso no materializa nada. Atención a la causa más frecuente: **la posición se valida contra la cantidad de figuras del conjunto raíz**, que el validador declara, y no contra la cantidad de piezas adoptadas |
+| `OBSERVACION_MAL_FORMADA` | Error interno | El conjunto de observaciones que devolvió el validador no es adoptable | El dominio lo rechazó por especie desconocida, error sin ubicación, advertencia sin los dos valores u observación sobre una posición inexistente | **Corregir el adaptador del puerto de validación, no la invocación.** Es la condición agregada **simétrica** a la anterior, y reúne otros cuatro rechazos del dominio (§2.5). Un conjunto mal formado es un defecto del validador y no un resultado que el alumno deba ver. **Una posición reservada no es una posición inexistente**: la de una figura que no se pudo reconstruir sí pertenece al rango declarado y sí admite observación |
+
+**La negativa por pertenencia en el envío.** `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` tiene su entrada única en §3.4 y vuelve a declararse acá con una precisión propia que conviene no perder: cuando el solicitante no es el dueño, el caso de uso devuelve el motivo **sin invocar al validador**. El criterio de aceptación CA-05 lo verifica contando 0 invocaciones del validador doble, y es la prueba de que la comprobación ocurre antes y no después.
+
+**El dato que hace comprobable todo lo demás.** El puerto de validación devuelve, además de las piezas y las observaciones, **la cantidad de figuras del conjunto raíz**, incluidas las que no se pudieron reconstruir, y este caso de uso la hace viajar hasta el dominio (CU-05 §4 pasos 3 y 4). **No es derivable de las piezas adoptadas**, porque ésas admiten huecos, y sin ella el dominio no tiene rango contra el cual validar la posición de una observación. Las dos condiciones agregadas de este caso de uso dependen de ese rango: sin él, `OBSERVACION_MAL_FORMADA` no tendría contra qué evaluar «posición inexistente» y la posición reservada de una figura no reconstruida dejaría de ser comprobable.
+
+### 3.6 CU-06 Consultar los trabajos propios del alumno
+
+Forma de terminación: motivo de resultado. Las dos son consultas y no modifican nada.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `SOLICITANTE_NO_DECLARADO` | Entrada inválida | La consulta no trae la identidad del alumno solicitante | El consumidor pidió el listado o el detalle sin declarar quién lo pide | Aportar la identidad del solicitante, ya autenticada por la capa externa. El caso de uso **termina sin consultar el repositorio de trabajos**: un listado sin dueño declarado sería el listado de todos, y ése es exactamente el resultado que la separación entre alumnos viene a impedir |
+
+**La negativa por pertenencia en la consulta.** `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, con entrada única en §3.4, es acá donde su traducción queda declarada con más precisión: el consumidor la traduce a «no encontrado» y **nunca** a «no autorizado», porque confirmar que el recurso existe pero es ajeno ya sería informar de más (CU-06 §6). CA-03 exige que el motivo sea el mismo que devolvería para un identificador inexistente.
+
+**Un listado vacío no es una condición de error.** El alumno sin ningún trabajo recibe 0 trabajos y ningún motivo (CU-06 FA-03, CA-05). Tratarlo como error es un defecto del consumidor.
+
+### 3.7 CU-07 Revisar los trabajos de la comisión
+
+Forma de terminación: motivo de resultado. Las tres son consultas y no modifican nada.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | Conflicto de alcance | El trabajo está en `Borrador` y no entra en el alcance del administrador | Se pidió el detalle de un borrador | Excluirlo de la vista de revisión. **A diferencia de la negativa por pertenencia, ésta no oculta la existencia del trabajo**: expresa que está fuera de su flujo de trabajo (RN-11). El recorte se traslada al puerto y no se aplica después sobre un conjunto mayor, de modo que en el listado el borrador ni siquiera aparece ni se cuenta. Esta condición vuelve a declararse en CU-08 y en CU-09 |
+| `TRABAJO_INEXISTENTE` | Recurso ausente | El identificador no corresponde a ningún trabajo | El identificador pedido no existe | Verificar el identificador. **Acá no hay recurso ajeno que proteger**: el administrador ve todo lo que no es borrador, y por eso este motivo es distinto del de pertenencia y no lo reemplaza. Comparar con `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, que sí oculta, es la mejor forma de entender §2.4 |
+
+**La negativa por facultad en la revisión.** `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, con entrada única en §3.2, se declara acá con una precisión propia: el caso de uso **no consulta el repositorio de trabajos** cuando el papel no es `Administrador`, y CA-03 lo verifica contando 0 consultas. La consulta del alumno sobre sus propios trabajos es CU-06, y encaminar hacia allí es lo que corresponde.
+
+### 3.8 CU-08 Dar desenlace a un trabajo
+
+Forma de terminación: negativa sin escritura. En los cinco casos el trabajo queda exactamente como estaba, con su estado y su comentario anteriores.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `DESENLACE_FUERA_DE_PENDIENTE` | Conflicto de estado | Sólo se aprueba o se rechaza un trabajo en estado `Pendiente` | El trabajo está en otro estado | Esperar a que el trabajo sea enviado y su texto verifique. Esta capa propaga el rechazo del dominio y conserva el estado actual. Un trabajo en estado `Pendiente` es, por RN-05, uno cuyo texto no trajo errores de validación: es la precondición de todo desenlace |
+| `DESENLACE_DESCONOCIDO` | Entrada inválida | El desenlace pedido no es aprobar ni rechazar | Llegó un tercer valor | Usar uno de los dos. Aprobar lleva a `Finalizado` y rechazar a `Rechazado`; los dos admiten comentario opcional y los dos son terminales. El caso de uso termina sin tocar el trabajo |
+
+**Las otras tres negativas de este caso de uso** tienen entrada única en otras secciones y se declaran acá con su precisión propia:
+
+- `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` (§3.2): **la facultad no se delega, ni siquiera sobre el trabajo propio.** Un alumno que intente aprobar su propio trabajo recibe esta negativa, y el caso de uso no recupera ni modifica el trabajo (CA-03). Se verifica acá y no en la pantalla: un alumno que fuerce la petición contra el servicio de datos tiene que ser rechazado igual.
+- `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` (§3.7): un borrador no se aprueba ni se rechaza, **y el administrador ni siquiera lo ve** (CA-05). Este caso de uso comprueba el alcance **antes** que el desenlace, y por eso devuelve este motivo y no el de estado.
+- `TRANSICION_DESDE_ESTADO_TERMINAL` (§3.5): el trabajo ya tuvo desenlace. No se corrige una aprobación ni se revisa un rechazo; lo único que un trabajo terminal admite es que el administrador lo elimine, por CU-09.
+
+### 3.9 CU-09 Eliminar un trabajo
+
+Forma de terminación: negativa sin escritura. Ninguna deja el trabajo a medio retirar: o se va entero con sus piezas y sus observaciones, o no se toca.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `PAPEL_NO_RECONOCIDO` | Entrada inválida | El papel declarado no pertenece al conjunto cerrado de dos valores | El consumidor declaró un papel distinto de `Alumno` o `Administrador` | Declarar uno de los dos. El caso de uso **termina sin evaluar ninguna de las dos resoluciones**, porque elegir la resolución por el papel es la única decisión propia de esta capa acá, y sin papel válido no hay resolución que elegir (RN-01, papeles fijos) |
+
+**Las tres negativas restantes de este caso de uso**, con entrada única en otras secciones, y que juntas explican por qué los dos alcances conviven en un solo contrato:
+
+- `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` (§3.4): el alumno pide eliminar un trabajo ajeno, o un identificador que no existe. **No se retira nada** y el consumidor lo traduce a «no encontrado», nunca a «no autorizado». CA-03 exige que el motivo sea el mismo que para un identificador inexistente.
+- `OPERACION_FUERA_DE_BORRADOR` (§3.4): el alumno pide eliminar un trabajo propio en estado `Pendiente`, `Finalizado` o `Rechazado`. Es un motivo distinto del anterior porque acá la existencia ya está admitida para su dueño. **Un trabajo `Rechazado` queda como registro del intento**, y sólo el administrador puede quitarlo.
+- `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` (§3.7): el administrador pide eliminar un borrador. Los borradores no forman parte de su flujo de trabajo, **ni para verlos ni para quitarlos**.
+
+Los dos alcances son opuestos y por eso conviven: al alumno lo acotan la pertenencia y el borrador; al administrador lo acota exactamente lo contrario, todo menos el borrador.
+
+### 3.10 CU-10 Configurar la cuenta de administrador
+
+Es la **configuración del administrador en el primer arranque**, el otro camino de alta (§1.4). Forma de terminación: negativa sin escritura. En los cinco casos no se constituye ninguna cuenta y la instancia sigue sin administrador, de modo que este mismo contrato vuelve a estar disponible.
+
+| Motivo | Categoría | Mensaje | Causa probable | Acción sugerida |
+| --- | --- | --- | --- | --- |
+| `ADMINISTRADOR_YA_CONFIGURADO` | Conflicto de estado | Ya existe una cuenta con papel `Administrador` | Se pidió configurar un administrador habiendo uno | No hay camino: la instancia tiene exactamente uno y **la ventana de alta se cierra con la primera configuración y no vuelve a abrirse** (RN-01). El caso de uso no consulta siquiera el correo. Es también el motivo que el dominio devuelve si la ausencia de administrador no se le declara |
+| `CONFIGURACION_SIN_CREDENCIAL` | Entrada inválida | La configuración del administrador exige credencial derivada | No se aportó credencial derivada, o el valor llegó vacío | Aportar la credencial **ya derivada**: la contraseña en claro no atraviesa esta capa. **Es lo opuesto al auto-registro**, donde la credencial está prohibida (§1.4): una cuenta de administrador sin credencial no podría entrar, y no hay ninguna otra cuenta que pudiera resolverlo |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` | Entrada inválida | El estado inicial de **este camino** no se elige | Se pidió constituir la cuenta de administrador en un estado distinto de `Habilitado` | Invocar sin pedir estado: lo fija el dominio. **Mismo motivo, causa opuesta en CU-01**, donde el estado impuesto es `Pendiente`: ver §3.1 y §1.4. Una cuenta de administrador `Pendiente` o `Bloqueado` dejaría a la instancia sin salida, porque no obtendría acceso y nadie podría habilitarla |
+
+**Las dos negativas que este caso de uso comparte con el auto-registro**, con entrada única en §3.1 y la misma causa acá:
+
+- `CORREO_YA_REGISTRADO`: el correo del administrador ya pertenece a otra cuenta. No se constituye nada y **no se informa el papel ni el estado de la cuenta que lo ocupa**.
+- `DATO_OBLIGATORIO_AUSENTE`: falta el correo, el nombre o el apellido. Esta capa propaga el motivo del dominio.
+
+**Un criterio de este caso de uso que conviene conocer aunque no produzca ninguna condición.** CA-02 encadena la configuración con la consulta de admisibilidad de CU-03 y exige que devuelva admisible **con 0 motivos**: el administrador entra inmediatamente después de configurarse. Es la prueba de que el primer arranque es recorrible de punta a punta, y el defecto que la partición en dos caminos de alta vino a cerrar.
+
+## 4. Tono y voz
+
+Coherente con la guía de estilo del producto: español rioplatense neutro técnico, sin marketing y sin emojis.
+
+| Regla | Sí | No |
+| --- | --- | --- |
+| Describir la comprobación, no juzgar a quien invocó | «La operación requiere el papel `Administrador`» | «Olvidaste comprobar el papel» |
+| Nombrar la entidad y el estado con el vocabulario del dominio | «Sólo se envía un trabajo en `Borrador`» | «El registro está en un estado no editable» |
+| Decir la acción en imperativo, y del lado que corresponde | «Corregir el adaptador del puerto de validación» | «El sistema debería haber validado antes» |
+| Calificar siempre `Pendiente` | «cuenta `Pendiente`», «trabajo en estado `Pendiente`» | «pendiente» a secas |
+| No prometer lo que esta capa no hace | «Informar que la interpretación no está disponible» | «Reintentar en unos segundos» |
+| No confesar la pertenencia | «No encontrado» | «No tenés permiso sobre ese trabajo» |
+| Nombrar el camino de alta cuando la regla es opuesta en el otro | «El **auto-registro** no admite credencial derivada» | «El alta no admite credencial derivada» |
+
+Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no son defectos: **los nombres de los motivos son identificadores literales del contrato** y no se califican ni se traducen —`CUENTA_PENDIENTE` se escribe así, y su enunciado en prosa sí califica—, y las enumeraciones del conjunto cerrado de estados, donde el atributo enunciado ya fija el referente. Es la excepción que `Glosario-Funcional.md` §3.3 ya declara, y calificarla sería el falso positivo que `Vocabulario-Rules.md` §9.1 tipifica.
+
+## 5. Localización
+
+**Esta capa no localiza nada.** Política, en tres reglas:
+
+1. **Los motivos son identificadores estables**, en mayúsculas y sin acentos, y **no se traducen nunca**. Son parte de la superficie pública: renombrar uno es un cambio incompatible para los consumidores y rompe su compilación, que es la señal más temprana posible (`PRODUCT-INTAKE` §17.2.P.3). La §17 de cada caso de uso declara qué cambio sobre la enumeración es compatible: **agregar un motivo lo es si el consumidor tiene un camino por defecto**; quitar o resignificar uno, no.
+2. **El texto que una persona lee no se compone acá.** La traducción de un motivo a mensaje y a respuesta de protocolo pertenece a `GeometriaFactory-Api` y a la superficie que lo muestra. Esa traducción está sujeta a la tabla de traducciones prohibidas de §2.4, que no es una recomendación de estilo sino una regla del producto.
+3. **Un solo idioma en el producto v1**: español rioplatense. No hay compromiso de traducción y no hay catálogo de recursos que mantener. Si alguna vez lo hubiera, viviría en la capa que compone el mensaje y no acá.
+
+## 6. Control de cambios
+
+| Versión | Fecha | Cambios |
+| --- | --- | --- |
+| 1.0 | 2026-08-09 | Emisión inicial. Cataloga las 27 condiciones distintas derivadas de la §6 de los nueve casos de uso de entonces, sobre 37 filas declaradas. Declara la distinción entre condición de error, observación y comentario; la taxonomía con «conflicto de facultad» y «conflicto de alcance» agregadas y justificadas; la forma de terminación como dimensión ortogonal; y la §2.4 con las tres negativas de autorización, su tabla de traducciones prohibidas y su procedimiento de decisión. |
+| 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **Alineación con el 02 corregido**: el catálogo pasa de **27 a 34 condiciones distintas** sobre **48 filas y diez casos de uso**, con §3.10 nueva para CU-10, la configuración del administrador. Altas: `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `CONFIGURACION_SIN_CREDENCIAL`, `CREDENCIAL_YA_FIJADA`, `VALOR_DERIVADO_VACIO`, `TEXTO_ORIGINAL_ALTERADO` y `CONJUNTO_DE_PIEZAS_MAL_FORMADO`; `TRANSICION_DESDE_ESTADO_TERMINAL` pasa a declararse también en CU-05 y su entrada se muda a §3.5, que es donde aparece primero; `ADMINISTRADOR_YA_CONFIGURADO` se muda de §3.1 a §3.10; `ENVIO_FUERA_DE_BORRADOR` acota su causa al estado `Pendiente`; `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` se acota al auto-registro. **§1.4 nueva**: los dos caminos de alta con sus cinco rasgos opuestos, y el tratamiento del motivo con **causas opuestas**, que lleva fila completa en dos subsecciones con remisión mutua, **adoptando la misma forma que el proyecto de código hermano**. **§2.5 nueva**: los rechazos del dominio que esta capa no puede producir —inalcanzables por construcción, equivalentes o agregados—, con su lugar de declaración en la 02 y las dos consecuencias para quien implementa. §3.5 transmite además la **cantidad de figuras del conjunto raíz** y por qué no es derivable de las piezas adoptadas. **H-08**: la fila de `DATO_OBLIGATORIO_AUSENTE` en §3.4 pasa a nota de prosa, y el preámbulo de §3 declara que la única fila excedente es la del motivo con causas opuestas: 35 filas para 34 condiciones. **H-09**: «Control de cambios» vuelve a §6 y «Cobertura y trazabilidad» pasa a §7, unificando la convención con `Guia-Onboarding-Developer.md`. **H-10**: «dentro de la misma solución de código» en §1.3. §2.1 declara además la **divergencia deliberada de clasificación** de `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` respecto del proyecto de código hermano, con su motivo. |
+| 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-18**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. §2.1 **retira el argumento auxiliar inválido** con el que cerraba la divergencia de clasificación de `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`: no existe la «correspondencia uno a uno» invocada entre la categoría de conflicto de facultad, que tiene dos miembros, y la negativa por facultad de §2.4, que es una sola. **La clasificación no cambia y el fundamento principal se conserva**, reforzado: el referente del papel cambia con la capa —acá es un dato del pedido de alta y no la facultad de quien pide, y CU-01 no verifica facultad ni pertenencia—, con el paralelo explícito a `PAPEL_NO_RECONOCIDO`, que esta capa clasifica igual. Se agrega en su lugar la declaración de lo que la divergencia **no** se apoya, para que una ronda posterior no reponga el argumento retirado ni revierta por él la clasificación entera. |
+
+## 7. Cobertura y trazabilidad
+
+### 7.1 Recuento
+
+| Magnitud | Valor |
+| --- | --- |
+| Casos de uso de los que deriva el catálogo | 10 (CU-01 a CU-10) |
+| Filas de condición declaradas en la §6 de los diez casos de uso | 48 |
+| Condiciones declaradas en más de un caso de uso | 9 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`) |
+| Reapariciones, sobre esas nueve | 14 |
+| **Condiciones distintas catalogadas** | **34** |
+| Filas de tabla en §3 | 35. La única excedente es `ESTADO_INICIAL_NO_NEGOCIABLE`, con fila completa en §3.1 y §3.10 por causas opuestas (§1.4) |
+| Condiciones inventadas por esta categoría | **0** |
+| Condiciones de los casos de uso sin entrada en el catálogo | **0** |
+| Rechazos del dominio sin condición propia acá, declarados en §2.5 | 16, ninguno de ellos condición de este catálogo |
+
+Cuadre: 34 + 14 = 48.
+
+### 7.2 Verificación mecánica de cobertura
+
+La verificación se hizo en las dos direcciones, caso de uso por caso de uso, y su resultado se deja escrito para que una revisión posterior la pueda repetir sin rehacerla:
+
+| CU | Filas en su §6 | Entradas nuevas en §3 | Condiciones ya catalogadas que reaparecen | Suma |
+| --- | --- | --- | --- | --- |
+| CU-01 | 5 | 5 | 0 | 5 |
+| CU-02 | 5 | 5 | 0 | 5 |
+| CU-03 | 8 | 7 | 1 (`CUENTA_INEXISTENTE`) | 8 |
+| CU-04 | 5 | 4 | 1 (`DATO_OBLIGATORIO_AUSENTE`) | 5 |
+| CU-05 | 6 | 5 | 1 (`TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`) | 6 |
+| CU-06 | 2 | 1 | 1 (`TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`) | 2 |
+| CU-07 | 3 | 2 | 1 (`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`) | 3 |
+| CU-08 | 5 | 2 | 3 (`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`) | 5 |
+| CU-09 | 4 | 1 | 3 (`TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`) | 4 |
+| CU-10 | 5 | 2 | 3 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`) | 5 |
+| **Total** | **48** | **34** | **14** | **48** |
+
+`ESTADO_INICIAL_NO_NEGOCIABLE` se cuenta como entrada nueva en CU-01 y como reaparición en CU-10, igual que las otras ocho repetidas: **la segunda fila de tabla de §3.10 no altera el recuento de condiciones distintas**, sólo el de filas de tabla.
+
+Las dos comprobaciones que cierran la verificación:
+
+- **De caso de uso a catálogo.** Ninguna de las 48 filas quedó sin entrada: 34 dieron entrada nueva y 14 son reapariciones de una condición ya catalogada, cada una anotada con su caso de uso adicional.
+- **De catálogo a caso de uso.** Ninguna de las 34 entradas de §3 existe sin una fila que la respalde en la §6 del caso de uso que la titula. **No hay ninguna condición inventada por esta categoría**, y en particular no se agregó ninguna a partir de los flujos alternativos: se recorrieron las **diecisiete citas de motivo** que aparecen en las §5 de los diez casos de uso y todas corresponden a un motivo ya declarado en la §6 del mismo caso de uso. Tampoco se agregó ninguna a partir de §2.5: los dieciséis rechazos del dominio que esa sección enumera **no son condiciones de este catálogo** y no entran en ningún recuento.
+
+Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su precisión propia** cuando el caso de uso agrega una: la negativa por pertenencia que no invoca al validador (§3.5), la negativa por facultad que no consulta el repositorio de trabajos (§3.7), la facultad que no se delega ni sobre el trabajo propio y el alcance comprobado antes que el estado (§3.8), el tratamiento distinto de la cuenta inexistente en la consulta de admisibilidad (§3.3), el otro alcance del dato obligatorio ausente (§3.4) y las dos negativas compartidas entre los dos caminos de alta (§3.10).
+
+### 7.3 Tabla de cobertura
+
+| Motivo | CU que lo declara | Regla de negocio | Categoría | Forma de terminación |
+| --- | --- | --- | --- | --- |
+| `CORREO_YA_REGISTRADO` | CU-01, CU-10 | RN-02 | Conflicto de estado | Negativa sin escritura |
+| `DATO_OBLIGATORIO_AUSENTE` | CU-01, CU-04, CU-10 | — | Entrada inválida | Negativa sin escritura |
+| `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` | CU-01 | — | Entrada inválida | Negativa sin escritura |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` | CU-01, CU-10 | — (causas opuestas, §1.4) | Entrada inválida | Negativa sin escritura |
+| `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` | CU-01 | RN-01 | Entrada inválida (§2.1) | Negativa sin escritura |
+| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | CU-02, CU-07, CU-08 | RN-01, RN-10 | Conflicto de facultad | Negativa sin escritura y motivo de resultado, según el caso de uso |
+| `CONFIRMACION_DE_BAJA_NO_COINCIDE` | CU-02 | RN-07 | Entrada inválida | Negativa sin escritura |
+| `TRANSICION_DE_CUENTA_NO_ADMITIDA` | CU-02 | — | Conflicto de estado | Negativa sin escritura |
+| `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` | CU-02 | RN-01 | Conflicto de facultad | Negativa sin escritura |
+| `CUENTA_INEXISTENTE` | CU-02, CU-03 | — | Recurso ausente | Negativa sin escritura y motivo de resultado, según el caso de uso |
+| `CUENTA_PENDIENTE` | CU-03 | RN-06 | Conflicto de estado | Motivo de resultado |
+| `CUENTA_BLOQUEADA` | CU-03 | RN-06 | Conflicto de estado | Motivo de resultado |
+| `CREDENCIAL_NO_ESTABLECIDA` | CU-03 | RN-06 | Recurso ausente | Motivo de resultado |
+| `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | CU-03 | RN-06 | Conflicto de estado | Negativa sin escritura |
+| `CREDENCIAL_VIGENTE_NO_VERIFICADA` | CU-03 | — | Entrada inválida | Negativa sin escritura |
+| `CREDENCIAL_YA_FIJADA` | CU-03 | — | Conflicto de estado | Negativa sin escritura |
+| `VALOR_DERIVADO_VACIO` | CU-03 | — | Entrada inválida | Negativa sin escritura |
+| `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | CU-04, CU-05, CU-06, CU-09 | RN-03 | Recurso ausente | Negativa sin escritura y motivo de resultado, según el caso de uso |
+| `OPERACION_FUERA_DE_BORRADOR` | CU-04, CU-09 | RN-04 | Conflicto de estado | Negativa sin escritura |
+| `TEXTO_ORIGINAL_ALTERADO` | CU-04 | RN-08 | Entrada inválida | Negativa sin escritura |
+| `TRABAJO_SIN_DUENO` | CU-04 | RN-03 | Entrada inválida | Negativa sin escritura |
+| `ENVIO_FUERA_DE_BORRADOR` | CU-05 | RN-05 | Conflicto de estado | Negativa sin escritura |
+| `TRANSICION_DESDE_ESTADO_TERMINAL` | CU-05, CU-08 | RN-10 | Conflicto de estado | Negativa sin escritura |
+| `INTERPRETACION_NO_DISPONIBLE` | CU-05 | RN-08 | Error transitorio | Terminación degradada |
+| `CONJUNTO_DE_PIEZAS_MAL_FORMADO` | CU-05 | RN-09 | Error interno | Negativa sin escritura |
+| `OBSERVACION_MAL_FORMADA` | CU-05 | RN-09, RN-05 | Error interno | Negativa sin escritura |
+| `SOLICITANTE_NO_DECLARADO` | CU-06 | RN-03 | Entrada inválida | Motivo de resultado |
+| `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | CU-07, CU-08, CU-09 | RN-11, RN-04 | Conflicto de alcance | Motivo de resultado y negativa sin escritura, según el caso de uso |
+| `TRABAJO_INEXISTENTE` | CU-07 | — | Recurso ausente | Motivo de resultado |
+| `DESENLACE_FUERA_DE_PENDIENTE` | CU-08 | RN-10, RN-05 | Conflicto de estado | Negativa sin escritura |
+| `DESENLACE_DESCONOCIDO` | CU-08 | RN-10 | Entrada inválida | Negativa sin escritura |
+| `PAPEL_NO_RECONOCIDO` | CU-09 | RN-01 | Entrada inválida | Negativa sin escritura |
+| `ADMINISTRADOR_YA_CONFIGURADO` | CU-10 | RN-01 | Conflicto de estado | Negativa sin escritura |
+| `CONFIGURACION_SIN_CREDENCIAL` | CU-10 | RN-06 | Entrada inválida | Negativa sin escritura |
+
+Tres notas sobre las columnas, para que nadie las complete con atribuciones inventadas:
+
+| Caso | Situación |
+| --- | --- |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` sin regla de negocio | **Ninguna de las once reglas enuncia con qué estado nace una cuenta.** La atribución a RN-01 se retiró aguas arriba: ese enunciado habla de la unicidad del administrador y de la ventana en la que su alta es posible, no del estado inicial. El origen está en el modelo de estados de cuenta del dominio y en los dos caminos de alta |
+| RN-08 sin condición que la haga cumplir por rechazo | Tiene una, `TEXTO_ORIGINAL_ALTERADO`, desde la corrección de esta ronda. Su otra mitad sigue siendo un **comportamiento** y no una comprobación: el texto no se reescribe, ni siquiera cuando la interpretación falla, y `INTERPRETACION_NO_DISPONIBLE` la cita como garantía y no como violación |
+| Columnas con guion | No son un vacío a completar: hay condiciones que sostienen una precondición del contrato sin que ninguna regla de negocio las enuncie por separado, como `CREDENCIAL_VIGENTE_NO_VERIFICADA`, `CREDENCIAL_YA_FIJADA` o `TRABAJO_INEXISTENTE`. Inventarles una regla sería el defecto contrario al que este catálogo evita |
+
+### 7.4 Trazabilidad del artefacto
+
+**Quick-start: no aplicable en este documento, y el motivo es explícito.** El criterio de `Rules-UX-UI-DX.md` §6 pide un quick-start verificable en cada documento `dx-`; acá no corresponde porque este artefacto es del modo **reference** y se consulta por motivo, no se recorre de principio a fin: no hay una secuencia de pasos que produzca un primer resultado. El quick-start del proyecto de código es único y vive en [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §3, con su compromiso de verificación por punto de control en §3.2, y su recorrido guiado en [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) §2 y §3. Duplicarlo acá crearía una segunda fuente de verdad sobre pasos ejecutables, que es lo que se desincroniza primero. **No se da por cumplido: se declara no aplicable.**
+
+| Dimensión | Referencia |
+| --- | --- |
+| Rol de intervención | Integrador por casos de uso, implementador de puertos y mantenedor de la capa ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.1) |
+| Superficie pública que se documenta | Las 34 condiciones de error de los diez contratos de uso, y las tres comprobaciones transversales de `Especificacion-Funcional.md` §4 |
+| CU origen | CU-01 a CU-10, §6 de cada uno |
+| Reglas de negocio relevantes | RN-01 a RN-11 de `GeometriaFactory-Domain`, con la correspondencia de §7.3 |
+| Necesidades de negocio | NB-01, NB-02, NB-03, NB-04, NB-05, NB-09 |
+| Wireframes asociados | N/A. `tiene_ui_final` == false |
+| US a generar en 06 | US del catálogo mantenido junto al código; US de traducción de motivo a respuesta en `GeometriaFactory-Api`, con la tabla de traducciones prohibidas de §2.4 como criterio de aceptación; US de la indistinguibilidad de `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`; US del recorrido del primer arranque, que encadena CU-10 con la admisibilidad de CU-03 |
+| Tests previstos en 08 | Una prueba unitaria con dobles por condición, **ninguna tocando la base de datos real**; dos pruebas de indistinguibilidad derivadas de CA-03 de CU-06 y CA-03 de CU-09; y la prueba de recorrido del primer arranque derivada de CA-02 de CU-10 |
+| Catálogo de diseño aplicado | N/A para variante DX |
+| Configuración dirigida por esquema, primer arranque, acceso de operador único, identidad de versión | N/A. Ninguna de las cuatro extensiones aplica a este proyecto de código. **La configuración del administrador de CU-10 no es la extensión de primer arranque**: acá es un contrato de uso, y la superficie de aprovisionamiento, si la hubiera, viviría en la categoría 03 de la pieza pública |
+| Validación visual de maqueta y línea de base | N/A. `requiere_maqueta` == false |

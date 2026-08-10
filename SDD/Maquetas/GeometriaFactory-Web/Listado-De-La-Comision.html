@@ -41,7 +41,7 @@
       <h2 id="lc-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>Ahora no podemos traer la entrega</h2>
       <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
          Probá de nuevo en un rato.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer la entrega</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar traer la entrega</button>
     </section>
 
     <div class="mq-filtros" data-mq-estado="con-datos filtrado-sin-resultados grupo-colapsado alumno-filtro-inexistente cero-borradores resumen-abierto reconectando">
@@ -62,13 +62,13 @@
 
     <!-- Panel de resumen: capacidad de prioridad menor, con su lugar ya
          fijado para que incorporarla no obligue a rediseñar la superficie. -->
-    <section class="mq-tarjeta" data-mq-estado="resumen-abierto" aria-labelledby="lc-resumen-h" style="margin-bottom:16px">
-      <div style="display:flex;align-items:center;gap:12px">
+    <section class="mq-tarjeta mq-mb-5" data-mq-estado="resumen-abierto" aria-labelledby="lc-resumen-h">
+      <div class="mq-fila-flex">
         <h2 id="lc-resumen-h" class="mq-title">Resumen por alumno</h2>
-        <button type="button" class="mq-btn mq-btn--secundario" style="margin-left:auto"
+        <button type="button" class="mq-btn mq-btn--secundario mq-ml-auto"
                 data-mq-cerrar-resumen>Cerrar</button>
       </div>
-      <div class="mq-tabla-envoltorio" style="margin-top:12px">
+      <div class="mq-tabla-envoltorio mq-mt-3">
         <table class="mq-tabla">
           <thead><tr><th scope="col">Alumno</th><th scope="col">Pendientes</th>
             <th scope="col">Finalizados</th><th scope="col">Rechazados</th></tr></thead>
@@ -78,9 +78,9 @@
     </section>
 
     <div data-mq-estado="cargando" aria-hidden="true">
-      <div class="mq-esqueleto" style="height:42px"></div>
-      <div class="mq-esqueleto" style="height:42px"></div>
-      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
     </div>
 
     <section class="mq-vacio" data-mq-estado="vacio" aria-labelledby="lc-vacio-h">
@@ -93,7 +93,7 @@
       <span data-mq-ico-vacio aria-hidden="true"></span>
       <h2 id="lc-filtro-h">Ningún trabajo coincide con el filtro</h2>
       <p>Hay trabajos entregados, pero ninguno responde a lo que buscaste.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:16px">Limpiar el filtro</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-5">Limpiar el filtro</button>
     </section>
 
     <div data-mq-estado="con-datos grupo-colapsado alumno-filtro-inexistente cero-borradores resumen-abierto reconectando"
@@ -101,7 +101,7 @@
 
     <!-- Nota de ausencia: evita que un alumno sin trabajos se lea como un
          trabajo perdido. Resuelve una pregunta que el docente se hace siempre. -->
-    <p class="mq-caption" style="margin-top:16px"
+    <p class="mq-caption mq-mt-5"
        data-mq-estado="con-datos grupo-colapsado alumno-filtro-inexistente cero-borradores resumen-abierto reconectando"
        data-mq-nota-ausencia></p>
 
@@ -135,7 +135,7 @@ window.renderSuperficie = function (M, D) {
     var idGrupo = 'lc-grupo-' + n;
     var filas = ts.map(function (t) {
       return '<tr>' +
-        '<th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;color:inherit">' +
+        '<th scope="row" class="mq-th-plano mq-th-plano--cuerpo">' +
           M.esc(t.nombre) + '</th>' +
         '<td class="mq-num">' + M.esc(t.fechaTrabajo) + '</td>' +
         '<td>' + M.insignia(t.estado) + '</td>' +
@@ -149,7 +149,7 @@ window.renderSuperficie = function (M, D) {
       return '<article class="mq-tarjeta-fila" role="listitem">' +
         '<div class="mq-tarjeta-fila-cabecera"><h4 class="mq-body-strong">' + M.esc(t.nombre) +
         '</h4>' + M.insignia(t.estado) + '</div>' +
-        '<p class="mq-caption mq-num" style="margin:8px 0 0">' + M.esc(t.fechaTrabajo) + ' · ' +
+        '<p class="mq-caption mq-num mq-margen-arriba-2">' + M.esc(t.fechaTrabajo) + ' · ' +
         M.plural(t.piezas, 'pieza', 'piezas') + ' · ' + M.plural(t.advertencias, 'advertencia', 'advertencias') + '</p>' +
         '<div class="mq-acciones-fila"><a class="mq-btn mq-btn--secundario" href="' +
         M.hrefTrabajo(t.id, 'administrador', 'comision') + '">Abrir<span class="mq-sr-only"> «' +
@@ -169,7 +169,7 @@ window.renderSuperficie = function (M, D) {
           '<th scope="col">Estado</th><th scope="col">Piezas</th><th scope="col">Advertencias</th>' +
           '<th scope="col" class="mq-td-acciones">Acciones</th></tr></thead>' +
           '<tbody>' + filas + '</tbody></table></div>' +
-        '<div class="mq-tarjetas-apiladas" role="list" style="padding:14px">' + tarjetas + '</div>' +
+        '<div class="mq-tarjetas-apiladas mq-relleno-4" role="list">' + tarjetas + '</div>' +
       '</div></section>';
   }).join('');
 
@@ -185,7 +185,7 @@ window.renderSuperficie = function (M, D) {
   M.$('[data-mq-resumen-filas]').innerHTML = Object.keys(porAlumno).map(function (id) {
     var c = D.cuenta(id), ts = porAlumno[id];
     function n(e) { return ts.filter(function (t) { return t.estado === e; }).length; }
-    return '<tr><th scope="row" style="background:transparent;text-transform:none;letter-spacing:0;font-size:13px;font-weight:500;color:inherit">' +
+    return '<tr><th scope="row" class="mq-th-plano mq-th-plano--fuerte">' +
       M.esc(c.nombre + ' ' + c.apellido) + '</th><td class="mq-num">' + n('Pendiente') +
       '</td><td class="mq-num">' + n('Finalizado') + '</td><td class="mq-num">' + n('Rechazado') + '</td></tr>';
   }).join('');

@@ -16,19 +16,18 @@
 
   <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
 
-    <a class="mq-btn mq-btn--pill" href="Listado-De-La-Comision.html" data-mq-volver
-       style="margin-bottom:14px"></a>
+    <a class="mq-btn mq-btn--pill mq-mb-4" href="Listado-De-La-Comision.html" data-mq-volver></a>
 
     <!-- Cabecera del trabajo que aloja el bloque. La resolución no tiene ruta
          propia: es este mismo trabajo, con su bloque de decisión y sus cuatro
          partes. Esta dirección es el punto de entrada que la maqueta usa para
          demostrar el mapa de estados del bloque como recorrido. -->
-    <header style="margin-bottom:16px">
-      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+    <header class="mq-mb-5">
+      <div class="mq-fila-flex mq-fila-flex--envuelve">
         <h1 data-mq-nombre></h1>
         <span data-mq-insignia></span>
       </div>
-      <p class="mq-caption mq-num" style="margin:4px 0 0" data-mq-meta></p>
+      <p class="mq-caption mq-num mq-margen-arriba-1" data-mq-meta></p>
     </header>
 
     <p class="mq-banda mq-banda--info" data-mq-estado="vacio">
@@ -58,16 +57,16 @@
       <h2 id="rt-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>No pudimos resolver la entrega</h2>
       <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos. El trabajo conserva el
          estado que tenía. Probá de nuevo.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el desenlace</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar el desenlace</button>
     </section>
 
-    <div data-mq-estado="cargando" aria-hidden="true"><div class="mq-esqueleto" style="height:150px"></div></div>
+    <div data-mq-estado="cargando" aria-hidden="true"><div class="mq-esqueleto mq-esqueleto--bloque"></div></div>
 
     <!-- Bloque de decisión, con sus tres formas de «con datos»: resoluble,
          no resoluble por papel y no resoluble por estado. Su armado vive en
          Maqueta.js, que es la fuente única que comparte con la vista de
          trabajo. -->
-    <div data-mq-bloque-decision style="margin-bottom:16px"></div>
+    <div data-mq-bloque-decision class="mq-mb-5"></div>
 
     <!-- Y debajo, las cuatro partes del trabajo que se está resolviendo: el
          docente lee el trabajo y decide en el mismo lugar, sin saltar a otra

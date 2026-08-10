@@ -16,8 +16,7 @@
 
   <div class="mq-shell-contenido"><main id="mq-main" tabindex="-1">
 
-    <a class="mq-btn mq-btn--pill" href="Panel-De-Trabajos-Del-Alumno.html" data-mq-volver
-       style="margin-bottom:14px">Volver a mis trabajos</a>
+    <a class="mq-btn mq-btn--pill mq-mb-4" href="Panel-De-Trabajos-Del-Alumno.html" data-mq-volver>Volver a mis trabajos</a>
 
     <div class="mq-encabezado">
       <div>
@@ -52,10 +51,10 @@
         haga falta.
       </p>
 
-      <h3 class="mq-meta" style="margin-top:18px">Observaciones<span data-mq-observaciones-recuento></span></h3>
+      <h3 class="mq-meta mq-mt-6">Observaciones<span data-mq-observaciones-recuento></span></h3>
       <ul class="mq-observaciones" data-mq-observaciones></ul>
 
-      <p class="mq-caption" data-mq-estado="verifico-con-advertencias" style="margin-top:14px"
+      <p class="mq-caption mq-mt-4" data-mq-estado="verifico-con-advertencias"
          data-mq-nota-advertencias></p>
 
       <div class="mq-acciones-pie">
@@ -81,12 +80,12 @@
 
       <!-- Indisponible con contenido conservado: el aviso va ARRIBA del
            formulario, para que se lea antes de volver a escribir. -->
-      <section class="mq-aviso-indisponible" data-mq-estado="indisponible-conservado" role="alert"
-               aria-labelledby="ev-indisp-h" style="margin-bottom:16px">
+      <section class="mq-aviso-indisponible mq-mb-5" data-mq-estado="indisponible-conservado" role="alert"
+               aria-labelledby="ev-indisp-h">
         <h2 id="ev-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span>No pudimos enviar tu trabajo</h2>
         <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos.
            Lo que escribiste sigue acá: probá de nuevo.</p>
-        <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar el envío</button>
+        <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar el envío</button>
       </section>
 
       <form class="mq-dos-columnas mq-dos-columnas--envio" novalidate>
@@ -96,13 +95,13 @@
           <section class="mq-tarjeta" aria-labelledby="ev-datos-h">
             <h2 id="ev-datos-h" class="mq-meta">Datos del trabajo</h2>
 
-            <div data-mq-estado="cargando" aria-hidden="true" style="margin-top:12px">
+            <div data-mq-estado="cargando" aria-hidden="true" class="mq-mt-3">
               <div class="mq-esqueleto mq-esqueleto--campo"></div>
               <div class="mq-esqueleto mq-esqueleto--campo"></div>
               <div class="mq-esqueleto mq-esqueleto--alto"></div>
             </div>
 
-            <div data-mq-estado="con-datos vacio previsualizado enviando error-entrada escena-no-disponible texto-no-legible piezas-no-dibujadas elemento-sin-tamano trabajo-ajeno indisponible-conservado reconectando" style="margin-top:12px">
+            <div data-mq-estado="con-datos vacio previsualizado enviando error-entrada escena-no-disponible texto-no-legible piezas-no-dibujadas elemento-sin-tamano trabajo-ajeno indisponible-conservado reconectando" class="mq-mt-3">
               <div class="mq-campo">
                 <label for="ev-nombre">Nombre</label>
                 <input class="mq-input" id="ev-nombre" type="text" data-mq-campo="nombre">
@@ -115,7 +114,7 @@
               </div>
               <div class="mq-campo">
                 <label for="ev-descripcion">Descripción</label>
-                <textarea class="mq-textarea" id="ev-descripcion" style="min-height:64px"
+                <textarea class="mq-textarea mq-textarea--corta" id="ev-descripcion"
                           data-mq-campo="descripcion"></textarea>
               </div>
               <div class="mq-campo">
@@ -141,7 +140,7 @@
               <span class="mq-spinner"></span> Interpretando tu trabajo…
             </button>
             <!-- Nota de acción única, contigua a la acción primaria. -->
-            <p class="mq-caption" id="ev-nota-unica" style="margin-top:8px" data-mq-nota-unica></p>
+            <p class="mq-caption mq-mt-2" id="ev-nota-unica" data-mq-nota-unica></p>
           </section>
         </div>
 
@@ -152,45 +151,45 @@
 
             <!-- Área de dibujo. Monta el visor real portado en
                  assets/js/Visor-Tridimensional.js. Ver README §6. -->
-            <div class="mq-escena" data-mq-escena style="margin-top:8px"
+            <div class="mq-escena mq-mt-2" data-mq-escena
                  data-mq-estado="con-datos vacio cargando previsualizado enviando error-entrada texto-no-legible piezas-no-dibujadas trabajo-ajeno indisponible-conservado reconectando"></div>
 
             <!-- Escena no disponible: el bloque se reemplaza por un bloque
                  explicativo. El envío sigue disponible: no depende del dibujo. -->
-            <div class="mq-tarjeta" data-mq-estado="escena-no-disponible" style="margin-top:8px">
+            <div class="mq-tarjeta mq-mt-2" data-mq-estado="escena-no-disponible">
               <h3 class="mq-body-strong">La previsualización no está disponible en este navegador</h3>
-              <p class="mq-caption" style="margin:8px 0 0">
+              <p class="mq-caption mq-margen-arriba-2">
                 Tu navegador no ofrece la capacidad gráfica que el dibujo necesita. Podés cargar y
                 enviar el trabajo igual: el envío no depende del dibujo.
               </p>
             </div>
-            <div class="mq-tarjeta" data-mq-estado="elemento-sin-tamano" style="margin-top:8px">
+            <div class="mq-tarjeta mq-mt-2" data-mq-estado="elemento-sin-tamano">
               <h3 class="mq-body-strong">La previsualización no está disponible</h3>
-              <p class="mq-caption" style="margin:8px 0 0">
+              <p class="mq-caption mq-margen-arriba-2">
                 El espacio disponible para el dibujo quedó sin tamaño y no se pudo crear la escena.
                 El resto de la superficie se conserva.
               </p>
             </div>
 
-            <p class="mq-banda mq-banda--atencion" role="status" data-mq-estado="texto-no-legible" style="margin-top:8px">
+            <p class="mq-banda mq-banda--atencion mq-mt-2" role="status" data-mq-estado="texto-no-legible">
               La previsualización no pudo dibujar nada con este texto. De eso no se deduce ningún
               estado de tu trabajo: el dibujo no verifica.
             </p>
 
             <!-- Lista de piezas no dibujadas: junto a la escena, nunca como
                  observación del trabajo. -->
-            <div data-mq-no-dibujadas data-mq-estado="piezas-no-dibujadas" style="margin-top:8px">
+            <div data-mq-no-dibujadas data-mq-estado="piezas-no-dibujadas" class="mq-mt-2">
               <h3 class="mq-meta">No se dibujaron</h3>
-              <ul class="mq-caption" data-mq-no-dibujadas-lista style="margin:4px 0 0;padding-left:18px"></ul>
+              <ul class="mq-caption mq-lista-anidada" data-mq-no-dibujadas-lista></ul>
             </div>
 
-            <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px"
+            <button type="button" class="mq-btn mq-btn--secundario mq-mt-3"
                     aria-describedby="ev-nota-alcance"
                     data-mq-estado="con-datos vacio previsualizado error-entrada texto-no-legible piezas-no-dibujadas trabajo-ajeno indisponible-conservado reconectando cargando enviando">
               Previsualizar
             </button>
             <!-- Nota de alcance: el dibujo no verifica. -->
-            <p class="mq-caption" id="ev-nota-alcance" style="margin-top:8px" data-mq-nota-alcance></p>
+            <p class="mq-caption mq-mt-2" id="ev-nota-alcance" data-mq-nota-alcance></p>
           </section>
         </div>
       </form>
@@ -238,11 +237,13 @@ window.renderSuperficie = function (M, D) {
   M.dibujarEscena(M.$('[data-mq-escena]'), lectura.nodos);
   M.renderObservaciones(document, b.observaciones);
   // Piezas no dibujadas: las que el propio lector enumera; si no hay ninguna,
-  // la del esquema de Wireframes-Envio-De-Trabajo.md §2.
+  // la que declara Datos-Maqueta.js para este borrador, que es la del esquema
+  // de Wireframes-Envio-De-Trabajo.md §2. NINGÚN DATO DEL DOMINIO SE COMPONE
+  // ACÁ: la fuente única es Datos-Maqueta.js.
   var noDibujadas = lectura.nodos.filter(function (n) { return !n.forma; })
     .map(function (n) { return { indice: n.indice, motivo: n.motivo, codigo: n.codigo }; });
   M.renderPiezasNoDibujadas(document,
-    noDibujadas.length ? noDibujadas : [{ indice: 1, motivo: 'tipo no dibujable' }]);
+    noDibujadas.length ? noDibujadas : (b.piezasNoDibujadas || []));
 
   // El estado «vacío» de esta superficie es el formulario recién abierto en el
   // curso de creación: campos vacíos y área de dibujo con su leyenda.

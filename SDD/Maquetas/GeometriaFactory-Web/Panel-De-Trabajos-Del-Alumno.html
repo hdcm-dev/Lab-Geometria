@@ -43,7 +43,7 @@
       <div class="mq-campo mq-campo-busqueda">
         <label for="pt-buscar">Buscar por nombre</label>
         <span data-mq-ico-buscar></span>
-        <input class="mq-input" id="pt-buscar" type="search" placeholder="por ejemplo, cubo">
+        <input class="mq-input" id="pt-buscar" type="search" placeholder="nombre del trabajo">
       </div>
       <div class="mq-campo">
         <label for="pt-estado">Estado</label>
@@ -56,9 +56,9 @@
 
     <!-- Estado: cargando. Esqueleto por fila, nunca una tabla vacía. -->
     <div data-mq-estado="cargando" aria-hidden="true">
-      <div class="mq-esqueleto" style="height:42px"></div>
-      <div class="mq-esqueleto" style="height:42px"></div>
-      <div class="mq-esqueleto" style="height:42px"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
+      <div class="mq-esqueleto mq-esqueleto--fila"></div>
     </div>
 
     <!-- Estado: vacío. Invitación, no hueco. Se distingue del aviso de
@@ -67,7 +67,7 @@
       <span data-mq-ico-vacio aria-hidden="true"></span>
       <h2 id="pt-vacio-h">Todavía no cargaste ningún trabajo</h2>
       <p>Cargá el texto que produjo tu programa de la Actividad 1 y mirálo dibujado.</p>
-      <a class="mq-btn mq-btn--primario" href="Envio-De-Trabajo.html" style="margin-top:16px">
+      <a class="mq-btn mq-btn--primario mq-mt-5" href="Envio-De-Trabajo.html">
         Cargar mi primer trabajo</a>
     </section>
 
@@ -77,14 +77,14 @@
       <span data-mq-ico-vacio aria-hidden="true"></span>
       <h2 id="pt-filtro-h">Ningún trabajo coincide con el filtro</h2>
       <p>Tenés trabajos cargados, pero ninguno responde a lo que buscaste.</p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:16px">Limpiar el filtro</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-5">Limpiar el filtro</button>
     </section>
 
     <!-- Estado: indisponible. Reemplaza el listado; no se muestran datos viejos. -->
     <section class="mq-aviso-indisponible" data-mq-estado="indisponible" role="alert" aria-labelledby="pt-indisp-h">
       <h2 id="pt-indisp-h"><span data-mq-ico-alerta aria-hidden="true"></span><span data-mq-indisponible-titulo></span></h2>
       <p data-mq-indisponible-cuerpo></p>
-      <button type="button" class="mq-btn mq-btn--secundario" style="margin-top:12px">Reintentar traer mis trabajos</button>
+      <button type="button" class="mq-btn mq-btn--secundario mq-mt-3">Reintentar traer mis trabajos</button>
     </section>
 
     <!-- Estado: con datos -->
