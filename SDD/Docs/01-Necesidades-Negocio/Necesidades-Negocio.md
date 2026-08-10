@@ -10,7 +10,7 @@
 | Estado | Propuesto |
 | Fecha | 2026-08-10 |
 | Autor | Analista de Negocio Senior (AG-01) |
-| Trazabilidad upstream | PRODUCT-INTAKE 1.14 §1 (idea y problema), §2 (audiencia y stakeholders), §3 (propuesta de valor), §4 (alcance funcional pretendido con MoSCoW), §4.1 (reglas de negocio RN-01 a RN-16), §4.2 (modelo de estados del trabajo), §5 (historias de usuario), §6 (flujos típicos), §7 (casos límite), §8 (métricas de éxito), §9 (exclusiones), §10 (restricciones), §11 (riesgos), §12 (glosario del dominio), §15 (descomposición y delivery), §17.7 P.10 (el movimiento automático no altera la disposición), §20 y §21 (escenarios de datos), §22 (asunciones); `00-Contexto/Vision-Producto.md`, `00-Contexto/Alcance-Producto.md`, `00-Contexto/Roadmap-Producto.md`, `00-Contexto/Compatibilidad-Plataformas.md` |
+| Trazabilidad upstream | PRODUCT-INTAKE 1.15 §1 (idea y problema), §2 (audiencia y stakeholders), §3 (propuesta de valor), §4 (alcance funcional pretendido con MoSCoW), §4.1 (reglas de negocio RN-01 a RN-16), §4.2 (modelo de estados del trabajo), §5 (historias de usuario), §6 (flujos típicos), §7 (casos límite), §8 (métricas de éxito), §9 (exclusiones), §10 (restricciones), §11 (riesgos), §12 (glosario del dominio), §15 (descomposición y delivery), §17.7 P.10 (el movimiento automático no altera la disposición), §20 y §21 (escenarios de datos), §22 (asunciones); `00-Contexto/Vision-Producto.md`, `00-Contexto/Alcance-Producto.md`, `00-Contexto/Roadmap-Producto.md`, `00-Contexto/Compatibilidad-Plataformas.md` |
 | Trazabilidad downstream | CU-01 a CU-30 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
