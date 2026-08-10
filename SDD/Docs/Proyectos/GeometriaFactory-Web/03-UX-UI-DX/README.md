@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -36,7 +36,7 @@
 | [`Wireframes-Aprovisionamiento-Inicial.md`](Wireframes-Aprovisionamiento-Inicial.md) | Primer arranque: la única puerta de un laboratorio recién desplegado | Propuesto |
 | [`Wireframes-Registro-De-Cuenta.md`](Wireframes-Registro-De-Cuenta.md) | Alta del alumno, sin contraseña y sin correo | Propuesto |
 | [`Wireframes-Ingreso.md`](Wireframes-Ingreso.md) | Acceso, y el lugar al que vuelve todo lo que no tiene sesión | Propuesto |
-| [`Wireframes-Credencial-Propia.md`](Wireframes-Credencial-Propia.md) | Establecer y cambiar la contraseña, con sus **tres** cursos —incluido el **cambio forzado** tras un reseteo— y sus dos shells | Propuesto |
+| [`Wireframes-Credencial-Propia.md`](Wireframes-Credencial-Propia.md) | Cambiar la contraseña, con sus **tres** cursos —el primer ingreso, el cambio voluntario y el **cambio forzado** tras un reseteo— y sus dos shells. Desde `PRODUCT-INTAKE` 1.13 los tres exigen la vigente | Propuesto |
 | [`Wireframes-Panel-De-Trabajos-Del-Alumno.md`](Wireframes-Panel-De-Trabajos-Del-Alumno.md) | Listado propio con los cuatro estados y sus acciones por estado | Propuesto |
 | [`Wireframes-Envio-De-Trabajo.md`](Wireframes-Envio-De-Trabajo.md) | La acción única de guardado, con previsualización que dibuja y no verifica | Propuesto |
 | [`Wireframes-Vista-De-Trabajo.md`](Wireframes-Vista-De-Trabajo.md) | La superficie de cuatro partes, **con su disposición decidida aguas arriba** | Propuesto |
@@ -164,3 +164,4 @@ Cada superficie declara su **nombre canónico** en la sección 1 de su wireframe
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, **sin subir versión** por `Master-Prompt.md` §5. §1 pasa de diecisiete a **veinte** documentos y lista los tres artefactos de línea de base emitidos. §5 pasa de declararlos previstos a declararlos **emitidos**, con la aprobación explícita del Product Owner del 2026-08-09, y declara el cuarto artefacto que la fase emitió fuera de esta carpeta: la matriz de sensado de deriva, en `../08-Calidad-Y-Pruebas/`. El párrafo «qué le toca después» pasa a declarar qué artefactos absorbieron la retroalimentación y por qué ninguno subió versión ni requirió archivado. |
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-11`**: §5 afirmaba que «el modelo UX-UI de `Devs/Modelos-UX-UI/` no está elegido a esta fecha» en el mismo documento que declara la Fase B2 ejecutada y cerrada. Pasa a declarar el **resultado del paso 1**: el catálogo de modelos estaba vacío, la única opción ofrecible era la de por defecto, el humano eligió el **catálogo base de `References/Design/`**, y no se capitalizó ningún modelo nuevo. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, con sus dos decisiones. **(a) F-26**: §1 declara el **tercer curso** de `Credencial-Propia`, y §6 corrige la enumeración de capacidades ausentes, que decía «no hay recuperación de contraseña» sin más: lo que no hay es recuperación **autónoma**, y el reseteo por el administrador sí existe. **(b) F-25**: §6 corrige la formulación de RA-02, que declaraba **cinco** funciones del bundle y son **seis**, y suma que es la pieza pública la que consulta el entorno del navegador y manda los dos valores de verdad. **Los recuentos de la sección no cambian**: siguen siendo veinte documentos, once wireframes y once superficies; F-26 no agrega superficie, porque el cambio forzado es un curso de `Credencial-Propia` y el reseteo es una operación de `Panel-De-Cuentas`. |
+| 1.2 | 2026-08-10 | Alineación con `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**: habilitar produce la contraseña provisoria, con lo cual el curso de establecimiento **sin credencial vigente deja de existir** y el primer ingreso pasa a recorrer el mismo formulario de tres campos que los otros dos. §2 reescribe la fila de `Wireframes-Credencial-Propia.md`, que sigue teniendo **tres** cursos pero con el primero cambiado. Ningún artefacto se agrega ni se omite. (DX Lead (AG-03)). |

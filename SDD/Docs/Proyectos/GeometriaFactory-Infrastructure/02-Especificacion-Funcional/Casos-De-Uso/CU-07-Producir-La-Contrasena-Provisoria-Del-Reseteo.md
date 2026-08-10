@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md
-**Versión:** 1.1
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-26), §4.1 (**RN-14**, RN-12, RN-13, RN-15), §7 (CL-7), §9 (X-2 retirada), §17.1.P.2 (INV-09); [`RN-14`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-14-Provisoria-Producida-Por-El-Sistema.md); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §6 y §8, que declaran que **RN-14 no se ejerce allá** y que su mecanismo es de este proyecto de código; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md` §10 y **CA-10**
+**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §4 (F-26), §4.1 (**RN-14**, RN-12, RN-13, RN-15, **RN-16**), §7 (CL-7), §9 (X-2 retirada), §17.1.P.2 (INV-09); [`RN-14`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-14-Provisoria-Producida-Por-El-Sistema.md); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §6 y §8, que declaran que **RN-14 no se ejerce allá** y que su mecanismo es de este proyecto de código; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md` §10 y **CA-10**
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -31,9 +31,11 @@
 
 ## 1. Propósito
 
-Producir el valor de la **contraseña provisoria** cuando el administrador resetea la cuenta de un alumno, con las dos propiedades que la regla exige: **no es adivinable** y **no se repite** entre cuentas ni entre reseteos de la misma cuenta.
+Producir el valor de la **contraseña provisoria** cuando el administrador **habilita o resetea** la cuenta de un alumno, con las dos propiedades que la regla exige: **no es adivinable** y **no se repite** entre cuentas ni entre actos sobre la misma cuenta.
 
-**Este contrato es el destinatario declarado de una delegación explícita.** Las tres capas de arriba resolvieron todo lo demás del reseteo y dejaron el mecanismo acá con nombre: `GeometriaFactory-Application` declara que RN-14 **es la única de las quince reglas sin tramo en su capa**, porque el valor le llega ya producido y ya derivado; `GeometriaFactory-Contracts` declara que **el contrato no declara mecanismo** y que producir un valor con esas dos propiedades es de `05-Arquitectura-Tecnica` y de este proyecto de código; y `GeometriaFactory-Domain` la enuncia como regla sin invariante, porque describe cómo se produce un valor y no una condición permanente sobre el estado.
+**Este contrato tiene desde `PRODUCT-INTAKE` 1.13 dos consumidores y un solo mecanismo.** **RN-16** declara que habilitar una cuenta produce una contraseña provisoria con las mismas propiedades y el mismo tratamiento que la del reseteo, de modo que `GeometriaFactory-Application` `CU-02` pide el valor por este mismo contrato, igual que `CU-11`. **Nada de este contrato cambia por eso**, y ése es exactamente el punto: la invocación no lleva ningún dato de la cuenta ni del acto que la motiva, de modo que **no hay forma de que el valor dependa de cuál de los dos la pidió**. El nombre del documento se conserva por estabilidad de citación.
+
+**Este contrato es el destinatario declarado de una delegación explícita.** Las tres capas de arriba resolvieron todo lo demás del reseteo y dejaron el mecanismo acá con nombre: `GeometriaFactory-Application` declara que RN-14 **es la única de las dieciséis reglas sin tramo en su capa**, porque el valor le llega ya producido y ya derivado; `GeometriaFactory-Contracts` declara que **el contrato no declara mecanismo** y que producir un valor con esas dos propiedades es de `05-Arquitectura-Tecnica` y de este proyecto de código; y `GeometriaFactory-Domain` la enuncia como regla sin invariante, porque describe cómo se produce un valor y no una condición permanente sobre el estado.
 
 El fundamento de la regla está registrado aguas arriba y no se reabre acá: si la contraseña la escribe el docente, **termina siendo la misma clave para toda la comisión**.
 
@@ -41,14 +43,14 @@ El fundamento de la regla está registrado aguas arriba y no se reabre acá: si 
 
 | Actor | Tipo | Rol |
 | --- | --- | --- |
-| Consumidor (`GeometriaFactory-Application` `CU-11`, por la composición de raíz) | Primario | Pide una contraseña provisoria para un reseteo |
+| Consumidor (`GeometriaFactory-Application` `CU-02` y `CU-11`, por la composición de raíz) | Primario | Pide una contraseña provisoria para una **habilitación** o para un **reseteo**. Los dos piden lo mismo y reciben lo mismo |
 | Fuente de aleatoriedad del sistema | Sistema | Provee el material impredecible del que sale el valor |
 
 El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y comunica el valor, el otro lo usa una sola vez para cambiarlo.
 
 ## 3. Precondiciones
 
-- El consumidor ya resolvió la facultad del administrador y el acotamiento del reseteo a cuentas de alumno. **Este contrato no autoriza nada.**
+- El consumidor ya resolvió la facultad del administrador y el acotamiento de la operación a cuentas de alumno. **Este contrato no autoriza nada** y **no sabe si lo que la motivó fue una habilitación o un reseteo.**
 - **No hace falta ningún dato de la cuenta**, y es deliberado: pedirlo abriría la puerta a derivar el valor de él. La invocación no lleva correo, ni nombre, ni identificador, ni fecha.
 
 ## 4. Flujo principal
@@ -77,7 +79,7 @@ El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y c
 ## 7. Postcondiciones
 
 - **Éxito:** el consumidor recibe un valor en claro con las dos propiedades. **Este contrato no lo guarda, no lo registra en ninguna traza y no lo vuelve a producir**: no hay forma de recuperarlo si se pierde, y si se pierde se resetea de nuevo.
-- **Fallo:** el consumidor recibe el código y **ningún valor**. El reseteo no ocurre.
+- **Fallo:** el consumidor recibe el código y **ningún valor**. La operación que pidió el valor —la habilitación o el reseteo— no ocurre.
 
 ## 8. Criterios de aceptación
 
@@ -110,7 +112,7 @@ El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y c
   2. **La no repetición se verifica contra un registro de las provisorias anteriores.** Se descarta, y no por costo: exigiría **conservar las provisorias**, y el producto no guarda ninguna contraseña en claro. Una regla que existe para que la clave no quede circulando no se puede hacer cumplir guardándola.
   La decisión no es bloqueante y está registrada como punto abierto en `Especificacion-Funcional.md` §11, para que el Product Owner la confirme o la reemplace.
 - **La longitud y el alfabeto del valor son de `05-Arquitectura-Tecnica`**, y esta categoría no los fija. Sí declara la tensión que 05 tiene que resolver, porque nace del uso declarado y no de una preferencia: **la provisoria se comunica de viva voz o por escrito, del docente al alumno**, de modo que tiene que ser transcribible sin ambigüedad, y a la vez tiene que quedar lejos de lo adivinable. Un alfabeto que evite caracteres que se confunden entre sí resuelve las dos cosas a la vez. **Es una derivación de esta categoría a partir de F-26, no una cita**: ninguna fuente declara longitud, alfabeto ni forma.
-- **La provisoria no vence por tiempo.** El producto no tiene vencimiento de credencial y esta categoría no lo inventa. Lo que la vuelve provisoria es la **marca** que el reseteo deja sobre la cuenta, y que sólo el cambio efectivo hecho por la propia cuenta levanta (INV-09). Por eso el vocabulario del producto prohíbe llamarla «contraseña temporal».
+- **La provisoria no vence por tiempo.** El producto no tiene vencimiento de credencial y esta categoría no lo inventa. Lo que la vuelve provisoria es la **marca** que la habilitación (RN-16) o el reseteo (RN-14) dejan sobre la cuenta, y que sólo el cambio efectivo hecho por la propia cuenta levanta (INV-09). Por eso el vocabulario del producto prohíbe llamarla «contraseña temporal».
 - **Este contrato no deriva ni guarda.** El valor pasa por `CU-06` para derivarse y por `CU-05` para guardarse, exactamente como la contraseña que el alumno elige. **La frontera es la misma y eso es lo que hace que no haga falta un puerto nuevo**, tal como `GeometriaFactory-Application` §8 lo declara al mantener sus puertos en cuatro.
 - **El administrador no conoce la contraseña definitiva.** Ve la provisoria una vez, se la comunica y ahí termina su participación: la nueva la elige el alumno.
 
@@ -120,6 +122,8 @@ El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y c
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**: habilitar una cuenta produce una contraseña provisoria con las mismas propiedades y el mismo tratamiento que el reseteo. **Este contrato gana un segundo consumidor y no cambia nada más**, y §1 declara por qué eso no es una omisión: la invocación **no lleva ningún dato de la cuenta ni del acto**, de modo que el valor no puede depender de cuál de los dos la pidió. **§1** amplía el propósito a la habilitación; **§2** declara los dos consumidores; **§3** precisa que este contrato no sabe qué operación lo motivó. **Ningún flujo, código de terminación, postcondición ni criterio de aceptación cambia**, y las dos propiedades exigidas al valor siguen siendo las mismas. El **nombre del documento se conserva** por estabilidad de citación. Sube minor. |
+| 1.3 | 2026-08-10 | **Cierra el hallazgo `C-11` (P3) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** Dos frases atribuían al **reseteo** un origen único que **RN-16** dejó de tener: la postcondición de fallo de **§7** decía «El reseteo no ocurre» y pasa a decir que no ocurre **la operación que pidió el valor —la habilitación o el reseteo—**; y la nota de **§10** decía que la marca la deja «el reseteo» y pasa a nombrar a las **dos** operaciones que la ponen (RN-16 y RN-14, INV-09). El cuerpo normativo ya era correcto desde la emisión 1.2 —**§3** declara los dos consumidores y el mecanismo único, y la tabla de actores dice que los dos piden y reciben lo mismo—, de modo que lo que se corrige es letra de la sección de notas y no contenido. **El nombre del archivo y el del título se conservan** por estabilidad de citación, con el alcance ampliado declarado en §3, tal como el propio informe recomienda. Se corrige además el recuento de la delegación de **§3**, que decía «la única de las **quince** reglas sin tramo» y son **dieciséis** (`C-02`), y la cabecera pasa a citar el intake **1.14**. **Ninguna entrada, ninguna salida, ninguna condición de error y ningún criterio de aceptación cambia.** Sube minor. |
 
 ## 17. Compatibilidad de la superficie pública
 

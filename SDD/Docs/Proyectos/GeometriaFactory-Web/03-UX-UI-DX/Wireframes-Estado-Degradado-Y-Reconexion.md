@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Wireframes-Estado-Degradado-Y-Reconexion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -176,7 +176,7 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | --- | --- |
 | Persona objetivo | Alumno y docente por igual. **El tratamiento es el mismo para los dos y esa uniformidad es deliberada** |
 | CU origen | [`CU-10`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md) íntegro. Es transversal: los otros nueve casos de uso lo referencian |
-| Reglas de negocio relevantes | **Ninguna, y con motivo declarado aguas arriba**: las quince reglas restringen el dominio y este caso de uso no toca ninguno de esos objetos. Lo que sí lo restringe es la regla de arquitectura RA-03 |
+| Reglas de negocio relevantes | **Ninguna, y con motivo declarado aguas arriba**: las **dieciséis** reglas restringen el dominio y este caso de uso no toca ninguno de esos objetos. Lo que sí lo restringe es la regla de arquitectura RA-03 |
 | Restricciones transversales | `RT-03`, `RT-06`, `RT-07` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.8, §4.1, §8.1, §8.3 |
 | Superficies que la referencian | Las otras diez, todas |
@@ -191,3 +191,4 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | 1.0 | 2026-08-09 | Emisión inicial. El estado degradado tratado como superficie diseñada y no como error improvisado, con la tabla comparativa que separa los dos tramos independientes y sus dos avisos, la tercera condición que deliberadamente no se avisa, la conservación de lo escrito como estado propio, la distinción entre estado vacío y aviso por el tipo recibido, las tres prohibiciones de contenido de mensaje, y doce estados declarados para la Fase B2. |
 | 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: la `NB-08` de la cabecera pasa a citarse con sección y criterio —§1, §5 (tercer y cuarto criterio)—. |
 | 1.1 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: la fila «Reglas de negocio relevantes» de §9 fundamenta su **ninguna** sobre el recuento de reglas del producto, que pasó de once a **quince**. El fundamento no cambia —las reglas restringen el dominio y esta superficie no toca ninguno de esos objetos, mientras que lo que sí la restringe es la regla de arquitectura **RA-03**—; lo que se corrige es el número. **Ningún componente, estado, ruta ni criterio de esta superficie cambia.** Sube minor. |
+| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y lleva las reglas de negocio del producto de quince a **dieciséis**. §9 actualiza el recuento de las reglas del producto que esta superficie declara **no** relevantes, por el mismo motivo que su caso de uso: **RN-16 tampoco la alcanza**. **Ninguna decisión de este documento cambia.** Sube minor. |

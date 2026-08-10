@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §8 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §2, §3, §4, §5, §6, §7, §8 y §9; `02-Especificacion-Funcional/Modelo-Datos/` completo; CU-01 §4, §5, §6, §8 y §10; CU-02 §4, §5, §6, §8 y §10; CU-03 §4, §6, §8 y §10; CU-04 §6, §8 y §10; CU-05 §5, §6 y §10; CU-06 §5, §6 y §10; **CU-07 §1, §4, §6, §8 y §10**; CU-08 §6 y §10; CU-09 §6 y §10; CU-10 §5, §6, §8 y §10; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-15 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `00-Contexto/Vision-Producto.md` §9; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11, §16, §17.3 y §20
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §8 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §2, §3, §4, §5, §6, §7, §8 y §9; `02-Especificacion-Funcional/Modelo-Datos/` completo; CU-01 §4, §5, §6, §8 y §10; CU-02 §4, §5, §6, §8 y §10; CU-03 §4, §6, §8 y §10; CU-04 §6, §8 y §10; CU-05 §5, §6 y §10; CU-06 §5, §6 y §10; **CU-07 §1, §4, §6, §8 y §10**; CU-08 §6 y §10; CU-09 §6 y §10; CU-10 §5, §6, §8 y §10; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-16 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `00-Contexto/Vision-Producto.md` §9; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11, §16, §17.3 y §20
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de GeometriaFactory-Infrastructure
 
 ---
@@ -211,6 +211,7 @@ Punto de entrada recomendado de la sección de especificación funcional: su [`R
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Recorrido de la primera hora para quien implementa un adaptador, para el mantenedor y para el agente de IA, más el docente que despliega a mano. Declara los prerrequisitos, con la lectura obligatoria del documento de concepto central y su motivo; el primer resultado exitoso como la batería del validador en verde **sin almacén**; el primer ejemplo con sentido sobre el **texto real del escenario E-2**, con las tres cosas que hay que ver; el contraste **E-3 contra E-4** con la lección del criterio negativo y la del operador estricto; el recorrido de cuatro saltos para leer una condición y la pregunta previa de si es condición o resultado; **veintitrés diagnósticos** de la primera hora; el enlace a los cuatro modos de Diátaxis; y la §7 propia sobre los tres atajos que no fallan, con el procedimiento de dónde va algo nuevo. Las seis secciones obligatorias conservan su numeración 1 a 6; el contenido propio va al final como §7 y no desplaza a ninguna. |
 | 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: la fila de «dónde buscar» sobre el escenario `E-8` decía que ninguna fuente declara qué hace el validador con su texto; el intake 1.12 lo declara en §20.E-8 punto 5 y en la fila «Dimensión no legible» de §21, de modo que la fila pasa a dar el resultado —error, trabajo en `Borrador`, mensaje localizado por índice de figura y campo—, a distinguirlo de la condición `DIMENSION_NO_LEGIBLE`, que sigue siendo de la fachada del visor, y a remitir a `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y §7 y a `CU-01` CA-12 en lugar de a la tabla de puntos abiertos. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. |
+| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que el reseteo— y lleva las reglas de negocio del producto de quince a **dieciséis**. La cabecera de trazabilidad y la tabla de referencias pasan a declarar el rango **`RN-01` a `RN-16`**. **Ninguna decisión, ningún artefacto y ninguna condición de este documento cambia**: RN-16 no tiene tramo propio acá. Sube minor. |
 
 ## 7. Los tres atajos que no fallan
 
