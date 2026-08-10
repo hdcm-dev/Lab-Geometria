@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** DX-Error-Messages.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
@@ -366,15 +366,16 @@ Es el **reseteo de contraseña por el administrador** (F-26 del `PRODUCT-INTAKE`
 | --- | --- | --- | --- | --- |
 | `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` | Conflicto de facultad | El reseteo se ejerce sobre cuentas con papel `Alumno` | Se pidió resetear la cuenta con papel `Administrador` | No hay camino por acá: el administrador administra su propia credencial por el reemplazo de CU-03, declarando verificada la vigente. El acotamiento es una **decisión derivada** de esta capa, declarada con su fundamento en CU-11 §10: un reseteo sobre sí mismo dejaría al único administrador confinado por INV-09, con la instancia sin gobierno y sin ninguna otra cuenta que pudiera resolverlo |
 
-**Las cinco negativas que este caso de uso comparte con otros**, con entrada única donde aparecen primero y la misma causa acá:
+**Las cuatro negativas que este caso de uso comparte con otros**, con entrada única donde aparecen primero y la misma causa acá:
 
 - `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` (§3.2): quien pide el reseteo no tiene el papel. No se recupera la cuenta destino ni se toca ninguna credencial.
 - `CUENTA_INEXISTENTE` (§3.2): el puerto no encuentra la cuenta destino. **Acá tampoco oculta nada**, por el mismo motivo que en CU-02: la operación ya exigió la facultad de administrador.
-- `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` (§3.3): la cuenta destino está `Pendiente` o `Bloqueado`. El remedio es habilitarla o rehabilitarla por CU-02, y recién después resetear. RN-12 declara que el reseteo **conserva** el estado de habilitación, no que lo cambie.
-- `CREDENCIAL_NO_ESTABLECIDA` (§3.3): la cuenta está habilitada y nunca fijó credencial. **No hay nada que resetear**, y el camino ya está abierto: el alumno la fija en su primer ingreso efectivo, por CU-03 FA-02. Es la única aparición de este motivo como **negativa sin escritura**; en CU-03 es motivo de resultado.
-- `VALOR_DERIVADO_VACIO` (§3.3): la contraseña provisoria llegó vacía. Esta capa nunca la conoce en claro.
+- `CREDENCIAL_NO_ESTABLECIDA` (§3.3): la cuenta nunca fijó credencial. **No hay nada que resetear**, y el camino ya está abierto: el alumno la fija en su primer ingreso efectivo, por CU-03 FA-02. Es la única aparición de este motivo como **negativa sin escritura**; en CU-03 es motivo de resultado.
+- `VALOR_DERIVADO_VACIO` (§3.3): la contraseña provisoria llegó vacía. Esta capa nunca la conoce en claro. **Desde que la provisoria la produce el sistema y no la escribe el administrador, esta condición ya no puede nacer de lo que escriba una persona**, sino de un defecto de quien la produce; se conserva catalogada igual, porque suponerla imposible es como se termina escribiendo una credencial vacía.
 
-**Un criterio de este caso de uso que conviene conocer aunque no produzca ninguna condición.** La declaración de credencial vigente verificada que el dominio exige para todo reemplazo la sostiene acá **la verificación de facultad**, y no una comparación de contraseñas: el administrador no conoce la del alumno y no la conocerá. Es la única invocación del reemplazo en la que esa declaración no nace de comparar credenciales, y está declarada en CU-11 §10 para que nadie la lea como un atajo.
+**Y una negativa que este caso de uso dejó de declarar, escrita acá para que nadie la reponga.** `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` figuraba en CU-11 sobre la cuenta destino `Pendiente` o `Bloqueado`. **El Product Owner resolvió que el reseteo no exige que la cuenta esté habilitada** —es una operación sobre la credencial, no toca el estado de la cuenta, y el administrador resetea y habilita en el orden que quiera—, de modo que la condición **no se relajó ni se renombró: dejó de existir para este caso de uso**. Sigue vigente en CU-03, donde la cuenta que fija o reemplaza **su propia** credencial sí tiene que estar habilitada, y su entrada de §3.3 no cambia.
+
+**Un criterio de este caso de uso que conviene conocer aunque no produzca ninguna condición.** Este caso de uso **no invoca el reemplazo de credencial del dominio, sino su operación de reseteo**, que no exige que se declare verificada la credencial vigente y no exige estado `Habilitado`. La versión anterior de esta nota describía lo contrario —el reemplazo sostenido por la verificación de facultad en lugar de por una comparación de contraseñas—, y la corrección está en CU-11 §10, para que nadie la lea como un atajo ni la reponga: el administrador no conoce la contraseña del alumno y no la conocerá, y lo que autoriza la operación de este lado sigue siendo la facultad.
 
 ## 4. Tono y voz
 
@@ -416,9 +417,9 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 | Magnitud | Valor |
 | --- | --- |
 | Casos de uso de los que deriva el catálogo | 11 (CU-01 a CU-11) |
-| Filas de condición declaradas en la §6 de los once casos de uso | 55 |
-| Condiciones declaradas en más de un caso de uso | 12 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`, y las tres que CU-11 comparte con CU-03: `CUENTA_NO_HABILITADA_PARA_CREDENCIAL`, `CREDENCIAL_NO_ESTABLECIDA` y `VALOR_DERIVADO_VACIO`) |
-| Reapariciones, sobre esas doce | 19 |
+| Filas de condición declaradas en la §6 de los once casos de uso | 54 |
+| Condiciones declaradas en más de un caso de uso | 11 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`, `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`, y las dos que CU-11 comparte con CU-03: `CREDENCIAL_NO_ESTABLECIDA` y `VALOR_DERIVADO_VACIO`). **`CUENTA_NO_HABILITADA_PARA_CREDENCIAL` dejó de ser compartida** y vuelve a ser exclusiva de CU-03 |
+| Reapariciones, sobre esas once | 18 |
 | **Condiciones distintas catalogadas** | **36** |
 | Filas de tabla en §3 | 37. La única excedente es `ESTADO_INICIAL_NO_NEGOCIABLE`, con fila completa en §3.1 y §3.10 por causas opuestas (§1.4) |
 | Condiciones inventadas por esta categoría | **0** |
@@ -443,17 +444,17 @@ La verificación se hizo en las dos direcciones, caso de uso por caso de uso, y 
 | CU-08 | 5 | 2 | 3 (`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`, `TRANSICION_DESDE_ESTADO_TERMINAL`) | 5 |
 | CU-09 | 4 | 1 | 3 (`TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, `OPERACION_FUERA_DE_BORRADOR`, `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`) | 4 |
 | CU-10 | 5 | 2 | 3 (`CORREO_YA_REGISTRADO`, `DATO_OBLIGATORIO_AUSENTE`, `ESTADO_INICIAL_NO_NEGOCIABLE`) | 5 |
-| CU-11 | 6 | 1 | 5 (`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `CUENTA_NO_HABILITADA_PARA_CREDENCIAL`, `CREDENCIAL_NO_ESTABLECIDA`, `VALOR_DERIVADO_VACIO`) | 6 |
-| **Total** | **55** | **36** | **19** | **55** |
+| CU-11 | 5 | 1 | 4 (`FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, `CUENTA_INEXISTENTE`, `CREDENCIAL_NO_ESTABLECIDA`, `VALOR_DERIVADO_VACIO`) | 5 |
+| **Total** | **54** | **36** | **18** | **54** |
 
 `ESTADO_INICIAL_NO_NEGOCIABLE` se cuenta como entrada nueva en CU-01 y como reaparición en CU-10, igual que las otras ocho repetidas: **la segunda fila de tabla de §3.10 no altera el recuento de condiciones distintas**, sólo el de filas de tabla.
 
 Las dos comprobaciones que cierran la verificación:
 
-- **De caso de uso a catálogo.** Ninguna de las 55 filas quedó sin entrada: 36 dieron entrada nueva y 19 son reapariciones de una condición ya catalogada, cada una anotada con su caso de uso adicional.
+- **De caso de uso a catálogo.** Ninguna de las 54 filas quedó sin entrada: 36 dieron entrada nueva y 18 son reapariciones de una condición ya catalogada, cada una anotada con su caso de uso adicional.
 - **De catálogo a caso de uso.** Ninguna de las 36 entradas de §3 existe sin una fila que la respalde en la §6 del caso de uso que la titula. **No hay ninguna condición inventada por esta categoría**, y en particular no se agregó ninguna a partir de los flujos alternativos: se recorrieron las **veintiuna citas de motivo** que aparecen en las §5 de los once casos de uso y todas corresponden a un motivo ya declarado en la §6 del mismo caso de uso. Tampoco se agregó ninguna a partir de §2.5: los dieciséis rechazos del dominio que esa sección enumera **no son condiciones de este catálogo** y no entran en ningún recuento.
 
-Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su precisión propia** cuando el caso de uso agrega una: la negativa por pertenencia que no invoca al validador (§3.5), la negativa por facultad que no consulta el repositorio de trabajos (§3.7), la facultad que no se delega ni sobre el trabajo propio y el alcance comprobado antes que el estado (§3.8), el tratamiento distinto de la cuenta inexistente en la consulta de admisibilidad (§3.3), el otro alcance del dato obligatorio ausente (§3.4), las dos negativas compartidas entre los dos caminos de alta (§3.10) y las cinco que el reseteo comparte con CU-02 y CU-03, entre ellas `CREDENCIAL_NO_ESTABLECIDA`, que **cambia de forma de terminación** —motivo de resultado en CU-03, negativa sin escritura en CU-11— (§3.11).
+Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su precisión propia** cuando el caso de uso agrega una: la negativa por pertenencia que no invoca al validador (§3.5), la negativa por facultad que no consulta el repositorio de trabajos (§3.7), la facultad que no se delega ni sobre el trabajo propio y el alcance comprobado antes que el estado (§3.8), el tratamiento distinto de la cuenta inexistente en la consulta de admisibilidad (§3.3), el otro alcance del dato obligatorio ausente (§3.4), las dos negativas compartidas entre los dos caminos de alta (§3.10) y las cuatro que el reseteo comparte con CU-02 y CU-03, entre ellas `CREDENCIAL_NO_ESTABLECIDA`, que **cambia de forma de terminación** —motivo de resultado en CU-03, negativa sin escritura en CU-11— (§3.11).
 
 ### 7.3 Tabla de cobertura
 
@@ -472,7 +473,7 @@ Las apariciones adicionales no se catalogan dos veces, pero **sí llevan su prec
 | `CUENTA_PENDIENTE` | CU-03 | RN-06 | Conflicto de estado | Motivo de resultado |
 | `CUENTA_BLOQUEADA` | CU-03 | RN-06 | Conflicto de estado | Motivo de resultado |
 | `CREDENCIAL_NO_ESTABLECIDA` | CU-03, CU-11 | RN-06 | Recurso ausente | Motivo de resultado en CU-03, negativa sin escritura en CU-11 |
-| `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | CU-03, CU-11 | RN-06 | Conflicto de estado | Negativa sin escritura |
+| `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | CU-03 | RN-06 | Conflicto de estado | Negativa sin escritura |
 | `CAMBIO_DE_CONTRASENA_PENDIENTE` | CU-03, y **cualquiera** por la comprobación transversal de §4 | RN-13, INV-09 | Conflicto de estado | Negativa sin escritura |
 | `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` | CU-11 | RN-01 | Conflicto de facultad | Negativa sin escritura |
 | `CREDENCIAL_VIGENTE_NO_VERIFICADA` | CU-03 | — | Entrada inválida | Negativa sin escritura |
@@ -521,3 +522,4 @@ Tres notas sobre las columnas, para que nadie las complete con atribuciones inve
 | Catálogo de diseño aplicado | N/A para variante DX |
 | Configuración dirigida por esquema, primer arranque, acceso de operador único, identidad de versión | N/A. Ninguna de las cuatro extensiones aplica a este proyecto de código. **La configuración del administrador de CU-10 no es la extensión de primer arranque**: acá es un contrato de uso, y la superficie de aprovisionamiento, si la hubiera, viviría en la categoría 03 de la pieza pública |
 | Validación visual de maqueta y línea de base | N/A. `requiere_maqueta` == false |
+| 1.2 | 2026-08-09 | **Absorbe dos decisiones del Product Owner sobre F-26**, que `CU-11` 1.2 aplica. **Decisión A: resetear no exige que la cuenta esté habilitada**; **decisión B: la contraseña provisoria la produce el sistema y no la escribe el administrador**. **Baja de una aparición, no de una condición**: `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` **sale de CU-11** —la causa dejó de existir, no se relajó ni se renombró— y vuelve a ser exclusiva de CU-03, donde la cuenta que fija o reemplaza **su propia** credencial sí tiene que estar habilitada; su entrada de §3.3 **no cambia**. **§3.11** pasa de cinco negativas compartidas a **cuatro**, suma la nota que declara la negativa retirada para que no se reponga, precisa `VALOR_DERIVADO_VACIO` —ya no puede nacer de lo que escriba una persona— y **corrige la nota final**, que describía este caso de uso invocando el **reemplazo** del dominio sostenido por la verificación de facultad: CU-11 pasa a invocar la **operación de reseteo** del dominio, que no exige credencial vigente verificada ni estado `Habilitado`. **§7 rehace los recuentos**: filas de condición de 55 a **54**, condiciones compartidas de doce a **once**, reapariciones de 19 a **18** y la fila de CU-11 de seis a cinco. **Las condiciones distintas catalogadas siguen siendo 36 y las filas de tabla de §3, 37**: no se dio de baja ninguna entrada del catálogo. | DX Lead (AG-03) |

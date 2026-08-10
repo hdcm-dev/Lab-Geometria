@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
@@ -30,7 +30,7 @@
 | --- | --- | --- |
 | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) | Marco DX: rol de intervención, la regla de exposición, los tres tramos de onboarding, el quick-start dentro del contenedor de desarrollo, el plan de Diátaxis, las dos clases de error, las métricas y el lazo de retroalimentación. **Es el punto de entrada** | Propuesto |
 | [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) | El recorrido de la primera hora, paso a paso y con hitos verificables. Es el modo tutorial | Propuesto |
-| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de errores en sus dos clases —**catorce** entradas de construcción del contrato y **dieciséis** códigos transportados—, más las tres señales declaradas que no son error, con diagnóstico accionable por entrada. Es el modo how-to para quien llega con un síntoma | Propuesto |
+| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de errores en sus dos clases —**quince** entradas de construcción del contrato y **diecisiete** códigos transportados—, más las tres señales declaradas que no son error, con diagnóstico accionable por entrada. Es el modo how-to para quien llega con un síntoma | Propuesto |
 | [`Glosario-UX.md`](Glosario-UX.md) | Vocabulario que esta categoría acuña, la resolución de «error» con sus tres referentes y los términos que se referencian sin redefinir | Propuesto |
 | `README.md` | Este archivo: índice navegable, variante aplicada, orden de lectura y declaración de las omisiones | Propuesto |
 
@@ -96,3 +96,4 @@ Los demás criterios de §6 aplican y se cumplen: variante declarada en cada cab
 | 1.1 | 2026-08-09 | **Actualización por contenido nuevo aguas arriba**: `PRODUCT-INTAKE` 1.3 incorporó el circuito de revisión del administrador, 00 y 01 pasaron a 1.1 con `NB-09`, y la categoría 02 emitió `CU-07`, `RT-08` y `RT-09`. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. Cambian los conteos y las notas, no la estructura: §1 describe el catálogo con sus doce entradas de construcción, catorce códigos transportados y tres señales; §3 suma §3.3 al orden de lectura; §6 pasa a siete contratos de uso y nueve restricciones, declara la forma calificada de `Pendiente` con sus dos excepciones y la regla de que el comentario no se nombra como observación ni como calificación, y registra el archivado en `_legacy/2026-08-09/`. **Las ocho omisiones y los seis criterios no aplicables de §4 y §5 no cambian**: el circuito de revisión no altera ningún flag del proyecto de código, que sigue siendo `library` con `tiene_ui_final`, `tiene_portal_developers` y `requiere_maqueta` en false. | DX Lead (AG-03) |
 | 1.0 | 2026-08-08 | Emisión inicial del índice de la sección. Enumera los cuatro documentos emitidos más este README, declara la variante DX con su fundamento y el destinatario real de la documentación, fija el orden de lectura, declara las ocho omisiones con la regla que las admite y su motivo, declara los seis criterios de §6 que son de la variante UX/UI como no aplicables, y las notas de autoridad, fronteras, samples, entorno, vocabulario y nombres de archivo. | DX Lead (AG-03) |
 | 1.2 | 2026-08-09 | **Actualización por contenido nuevo aguas arriba**: `PRODUCT-INTAKE` **1.7** incorpora la capacidad **F-26** y la categoría 02 emite **CU-08** y las restricciones transversales `RT-10` y `RT-11`. §2 actualiza el catálogo de errores a **catorce** entradas de construcción y **dieciséis** códigos transportados, con las tres señales declaradas sin cambio; §5 actualiza la nota de autoridad a ocho contratos de uso, once restricciones transversales y el intake 1.7. Ningún artefacto se agrega ni se omite. | DX Lead (AG-03) |
+| 1.3 | 2026-08-09 | **Actualización por las dos decisiones del Product Owner sobre F-26** que `CU-08` 1.2 y `CU-06` 1.3 absorben: **resetear no exige que la cuenta esté habilitada**, y **la contraseña provisoria la produce el sistema y no la escribe el administrador**. §2 actualiza el catálogo de errores a **quince** entradas de construcción y **diecisiete** códigos transportados, con las tres señales declaradas sin cambio. Ningún artefacto se agrega ni se omite. | DX Lead (AG-03) |

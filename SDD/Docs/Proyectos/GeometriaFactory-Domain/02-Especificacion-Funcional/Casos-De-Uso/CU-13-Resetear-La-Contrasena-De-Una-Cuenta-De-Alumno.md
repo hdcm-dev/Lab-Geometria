@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-13-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -42,10 +42,10 @@ Lo que este caso de uso **no** hace: no cambia el estado de cuenta, no elimina n
 | Actor | Tipo | Rol |
 | --- | --- | --- |
 | Capa de casos de uso del producto (`GeometriaFactory-Application`) | Primario | Solicita el reseteo de la credencial derivada de un alumno ya constituido |
-| Capa de infraestructura (`GeometriaFactory-Infrastructure`) | Secundario | Deriva la contraseña provisoria antes de que el valor llegue al dominio y materializa el resultado |
+| Capa de infraestructura (`GeometriaFactory-Infrastructure`) | Secundario | **Genera** la contraseña provisoria y la deriva antes de que el valor llegue al dominio, y materializa el resultado |
 | Modelo de dominio de `GeometriaFactory-Domain` | Sistema | Admite o rechaza el reseteo, reemplaza la credencial derivada y pone la marca |
 
-El administrador es el **sujeto** de la regla, no el actor: quien invoca la superficie pública de esta biblioteca es el código consumidor. El dominio **no maneja secretos**: la contraseña provisoria llega ya derivada (PRODUCT-INTAKE §17.1.P.5), de modo que **el dominio no conoce el valor que el administrador le va a comunicar al alumno**.
+El administrador es el **sujeto** de la regla, no el actor: quien invoca la superficie pública de esta biblioteca es el código consumidor. El dominio **no maneja secretos**: la contraseña provisoria llega ya derivada (PRODUCT-INTAKE §17.1.P.5), de modo que **el dominio no conoce el valor que el administrador le va a comunicar al alumno**. Tampoco lo produce: **quien lo produce es el sistema y no el administrador**, por decisión del Product Owner, y la exigencia sobre ese valor vive en la capa que lo produce (§10).
 
 ## 3. Precondiciones
 
@@ -113,10 +113,10 @@ Los cuatro rechazos dejan al alumno exactamente como estaba: con su credencial a
 
 ## 10. Notas y supuestos
 
-- **El dominio no genera la contraseña provisoria y no la conoce.** La elige el administrador, la comunica por fuera del producto y llega al dominio ya derivada (PRODUCT-INTAKE §17.1.P.5). No hay canal de correo: la exclusión **X-1** sigue vigente y lo que se retiró es **X-2**, la recuperación de contraseña olvidada, que ahora tiene este camino.
+- **El dominio no genera la contraseña provisoria y no la conoce.** **La produce el sistema** —no la escribe el administrador, por decisión del Product Owner: si la escribiera, terminaría siendo la misma clave para toda la comisión—, el administrador la comunica por fuera del producto y al dominio llega ya derivada (PRODUCT-INTAKE §17.1.P.5). Que no sea adivinable y que no se repita entre cuentas son **exigencias sobre el valor generado**, y se declaran donde el valor nace: `GeometriaFactory-Application` CU-11 y su puerto, y `GeometriaFactory-Contracts` CU-08 sobre lo que el resultado devuelve. **Acá no se declaran, porque acá el valor ya llegó derivado y el dominio no puede verificarlas.** No hay canal de correo: la exclusión **X-1** sigue vigente y lo que se retiró es **X-2**, la recuperación de contraseña olvidada, que ahora tiene este camino.
 - **La provisoria es provisoria porque existe INV-09.** Sin la marca, una clave que el administrador conoce quedaría sirviendo indefinidamente para operar como el alumno. Es el fundamento que el intake declara al enunciar el invariante.
 - **Decisión derivada: el reseteo exige credencial ya fijada.** Ninguna fuente declara qué pasa si se resetea una cuenta que nunca estableció contraseña. Esta categoría lo rechaza, y el fundamento es de consistencia del modelo: la marca la levanta **únicamente** el reemplazo (RN-13), y sobre una credencial sin valor el camino disponible es la fijación de CU-03, que rechazaría con `CREDENCIAL_YA_FIJADA` si el reseteo hubiera puesto valor. Admitirlo dejaría cuentas marcadas sin ningún camino declarado para levantar la marca. Si el Product Owner prefiere admitirlo, la salida limpia es que el reseteo sobre credencial sin valor **fije** la credencial sin poner la marca, y eso es exactamente CU-03 y no este caso de uso.
-- **Decisión derivada: el reseteo no exige estado `Habilitado`.** Ninguna fuente lo condiciona al estado, y condicionarlo sería inventar una precondición. Resetear una cuenta `Bloqueado` es inocuo: la cuenta sigue sin obtener acceso por INV-06.
+- **El reseteo no exige estado `Habilitado`, y ya no es una decisión derivada: el Product Owner la ratificó.** Ninguna fuente lo condicionaba al estado y condicionarlo habría sido inventar una precondición; el Product Owner resolvió expresamente que el reseteo es una operación sobre la credencial que **no toca el estado de la cuenta**, de modo que se puede resetear una cuenta `Pendiente` o `Bloqueado` y el administrador puede resetear y habilitar **en el orden que quiera**, sin acordarse de una secuencia. Resetear una cuenta `Bloqueado` es inocuo: la cuenta sigue sin obtener acceso por INV-06. Lo que **no** cambia es el cierre sobre la cuenta de administrador de §6, que es de INV-08 y no del estado.
 - La confirmación con la que el administrador ejerce esta operación en pantalla, si la hubiera, es de la categoría 03 del proyecto de código de la pieza pública. **Este caso de uso no exige confirmación escrita**, a diferencia de la baja: RN-12 no la pide, y pedirla sería trasladar a una operación conservadora la guarda de una destructiva.
 
 ## 11. Control de cambios
@@ -124,6 +124,7 @@ Los cuatro rechazos dejan al alumno exactamente como estaba: con su credencial a
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, por la capacidad **F-26** que `PRODUCT-INTAKE` 1.7 incorpora como `Must Have`, con las reglas **RN-12** y **RN-13**, el invariante **INV-09**, el retiro de la exclusión **X-2** y la reescritura del caso límite **CL-7**. Declara el reseteo como acto que conserva la cuenta, su estado, su papel, su identidad y todos sus trabajos con sus estados y comentarios; el reemplazo de la credencial derivada y la puesta de la marca como un solo acto sin efecto parcial; los tres flujos alternativos —segundo reseteo, cuenta no habilitada y cuenta sin credencial—; y cuatro condiciones de rechazo, dos de ellas reutilizadas de CU-02 y CU-03 con la misma causa. Deja declaradas dos **decisiones derivadas** que ninguna fuente enuncia: que el reseteo exige credencial ya fijada, y que no exige estado `Habilitado`. |
+| 1.1 | 2026-08-09 | **Absorbe dos decisiones del Product Owner sobre F-26.** **Decisión A: resetear no exige que la cuenta esté habilitada.** Este caso de uso **ya lo declaraba así** —FA-02 y §7—, de modo que **ningún flujo, código de rechazo ni criterio de aceptación cambia**: lo único que cambia es el estatuto de la afirmación. La nota de §10 deja de rotularse **decisión derivada** y pasa a registrar la **ratificación del Product Owner**, con su fundamento —el administrador no tiene que acordarse de una secuencia— y con la precisión de que el cierre sobre la cuenta de administrador de §6 **no** se afloja, porque es de INV-08 y no del estado. **Decisión B: la contraseña provisoria la produce el sistema y no la escribe el administrador**, porque una provisoria escrita por el docente termina siendo la misma clave para toda la comisión. Acá corrige una afirmación que quedó **falsa**: §10 y §2 decían que la provisoria «la elige el administrador». §2 declara que la genera la infraestructura antes de derivarla, y §10 declara que **no ser adivinable y no repetirse entre cuentas son exigencias de la capa que produce el valor** —`GeometriaFactory-Application` CU-11 y `GeometriaFactory-Contracts` CU-08— y **no de ésta**, porque acá el valor llega ya derivado y el dominio no puede verificarlas. Sube minor: corrige una afirmación de contexto y ratifica otra, sin tocar la superficie del caso de uso. |
 
 ## 17. Compatibilidad de la superficie pública
 

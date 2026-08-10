@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -40,7 +40,7 @@ Es la respuesta declarada del Product Owner al caso límite de la contraseña ol
 - Alcanza a los trabajos en los **cuatro** estados, incluidos los dos terminales y sus comentarios: el reseteo no toca ninguno.
 - **No se aplica a la cuenta con papel `Administrador`**, sobre la que el reseteo no procede (CU-13 §6, RN-01, INV-08). El administrador cambia su propia contraseña por el reemplazo de CU-03.
 - **Su invariante es INV-09**, que comparte con RN-13. Las dos son las dos mitades de la misma condición: ésta declara qué conserva el reseteo, y RN-13 qué no puede la cuenta hasta cambiar la provisoria (`Definicion-Modelo-De-Dominio.md` §4.3).
-- El dominio **no conoce la contraseña provisoria**: la elige el administrador, la comunica por fuera del producto y llega ya derivada (PRODUCT-INTAKE §17.1.P.5).
+- El dominio **no conoce la contraseña provisoria y no la produce**: **la produce el sistema** —no la escribe el administrador—, el administrador la comunica por fuera del producto y al dominio llega ya derivada (PRODUCT-INTAKE §17.1.P.5).
 
 ## 4. Consecuencia si se viola
 
@@ -60,3 +60,4 @@ Pruebas unitarias de dominio previstas en 08: reseteo de una cuenta con trabajos
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, por la regla **RN-12** que `PRODUCT-INTAKE` 1.7 §4.1 transcribe junto con la capacidad **F-26**. Declara el enunciado, la justificación como cierre de un agujero de diseño con el retiro de **X-2** y la reescritura de **CL-7**, el ámbito sobre los tres estados de cuenta y los cuatro de trabajo, el cierre sobre la cuenta de administrador, la correspondencia con **INV-09** compartida con RN-13, y el código de rechazo con el que se verifica. |
+| 1.1 | 2026-08-09 | Absorbe la decisión del Product Owner sobre **quién produce la contraseña provisoria**: **la produce el sistema y no la escribe el administrador**, porque una provisoria escrita por el docente termina siendo la misma clave para toda la comisión. §3 corrige la última viñeta, que decía que «la elige el administrador» y quedó falsa. **El enunciado de la regla, su ámbito sobre los estados de cuenta, su consecuencia y su código de rechazo no cambian**; en particular, la viñeta que declara que el reseteo procede **cualquiera sea el estado de cuenta** ya era correcta y el Product Owner la ratificó. |
