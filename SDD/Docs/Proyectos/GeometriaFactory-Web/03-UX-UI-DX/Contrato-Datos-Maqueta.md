@@ -2,12 +2,12 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Contrato-Datos-Maqueta.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Maquetador de validación visual (AG-03M)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `SDD/Maquetas/GeometriaFactory-Web/assets/js/Datos-Maqueta.js`, arreglo `CONTRATO_DE_CAMPOS` y las colecciones `CUENTAS`, `TRABAJOS`, `OBSERVACIONES_*`, `ARBOL_*` e `IDENTIDAD_DE_VERSION`; `../../GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2.1 a §2.5; `../02-Especificacion-Funcional/Casos-De-Uso/` `CU-01` a `CU-10`; los once `Wireframes-*.md` y las tres `Representacion-*.md` de esta categoría; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §20 (los siete escenarios de datos) y §4.1 (RN-05, RN-08, RN-09); `Deriva-Rules.md` §2.2
+**Trazabilidad upstream:** `SDD/Maquetas/GeometriaFactory-Web/assets/js/Datos-Maqueta.js`, arreglo `CONTRATO_DE_CAMPOS` y las colecciones `CUENTAS`, `TRABAJOS`, `OBSERVACIONES_*`, `ARBOL_*` e `IDENTIDAD_DE_VERSION`; `../../GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2.1 a §2.5; `../02-Especificacion-Funcional/Casos-De-Uso/` `CU-01` a `CU-10`; los once `Wireframes-*.md` y las tres `Representacion-*.md` de esta categoría; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §20 (los **ocho** escenarios de datos) y §4.1 (RN-05, RN-08, RN-09); `Deriva-Rules.md` §2.2
 **Trazabilidad downstream:** [`Linea-Base-Visual.md`](Linea-Base-Visual.md), cuyos `SUP-XX` cita este documento; `Matriz-Sensado-Deriva.md` de `08-Calidad-Y-Pruebas`; `05-Arquitectura-Tecnica`, modelo lógico; `08-Calidad-Y-Pruebas`, casos de prueba de datos
 
 ---
@@ -127,12 +127,13 @@ Son las que la maqueta respeta y que el sensado de deriva verifica:
 | `EV-07` | `artefacto` | `SDD/Maquetas/GeometriaFactory-Web/assets/js/Datos-Maqueta.js` | Sección 10, `INVARIANTES_DE_LA_MAQUETA`, origen de §6 puntos 1 a 6 | 2026-08-09 |
 | `EV-08` | `artefacto` | `SDD/Docs/Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` | §2.1 a §2.5, contra las que se verificó campo por campo la columna de correspondencia de §2 | 2026-08-09 |
 | `EV-09` | `humano` | Aprobación explícita de la maqueta por el Product Owner | [`Bitacora-Validacion-Maqueta.md`](Bitacora-Validacion-Maqueta.md) §3, cierre de la iteración 4 | 2026-08-09 |
-| `EV-10` | `artefacto` | `SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md` | §20, los siete escenarios de datos de los que sale todo ejemplo de §2 | 2026-08-09 |
+| `EV-10` | `artefacto` | `SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md` | §20, los **ocho** escenarios de datos —`E-1` a `E-8`— de los que sale todo ejemplo de §2 | 2026-08-10 |
 
 ## 8. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.3 | 2026-08-10 | **Cierra la parte del hallazgo `N-4`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0 que alcanza a este archivo. Dos residuos de recuento: la **trazabilidad de cabecera** citaba «§20 (los siete escenarios de datos)» y la evidencia **`EV-10` de §7** declaraba haber verificado contra «§20, los siete escenarios de datos de los que sale todo ejemplo de §2». El intake §20 tiene **ocho** desde su versión 1.7, con **E-8** incorporado; contados `E-1` a `E-8` sobre la fuente viva. Los dos pasan a **ocho**, y `EV-10` enumera el rango para que el número no vuelva a quedar suelto. **`EV-10` es una declaración de evidencia y por eso se le repone la fecha**: la verificación se rehízo el 2026-08-10 contra los ocho, no contra los siete. **Ningún campo del contrato de datos, ningún invariante de datos y ningún ejemplo de §2 cambia**: E-8 es el borde del visor y no aporta forma nueva al dato de la maqueta. Sube minor: corrige un recuento derivado y rehace una evidencia. |
 | 1.2 | 2026-08-09 | **Cierra el hallazgo `F26-23`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.10**. §5 declaraba el texto del escenario `E-7` sin el `Radio` del círculo como **«punto abierto del `PRODUCT-INTAKE` 1.5»**, con la decisión de incorporar o no un escenario `E-8` pendiente del Product Owner. El intake lo cerró en su versión **1.7**: **§20.E-8** existe —dimensión no legible, la pieza no se dibuja y se enumera— y su §21 lo mapea, y `Bitacora-Validacion-Maqueta.md` ya lo registra como `H-5`, «Resuelto por el Product Owner». La celda pasa a declarar el punto **resuelto**, con el número de versión que lo resolvió y con la consecuencia: el valor de la maqueta deja de ser un compuesto sin respaldo y pasa a tener escenario propio en la fuente. **Ningún dato de la maqueta, ningún campo `DM-XX` y ningún invariante de §6 cambia.** Sube minor: cierra un punto abierto que ya estaba resuelto aguas arriba. |
 | 1.1 | 2026-08-09 | Corrección del hallazgo **`AB2-17`** de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`: `DM-27` a `DM-29` ponían una regla del framework —`Design-Rules-Identidad-De-Version.md` §2— en la columna de correspondencia con el modelo conceptual, donde las demás filas ponen entidad y atributo. Las tres pasan a declarar, como ya lo hacen `DM-07` y `DM-16`, que **no son atributos del modelo conceptual**, y la referencia a la regla se mueve a la columna de nota. Ningún campo, tipo, obligatoriedad ni superficie cambia. |
 | 1.0 | 2026-08-09 | Emisión inicial, al cierre de la Fase B2 con la maqueta aprobada por el Product Owner. Veintinueve campos exhibidos con su tipo, su obligatoriedad, su ejemplo, sus superficies y su correspondencia con el modelo conceptual del dominio; el formato de presentación como parte del contrato; ocho entradas de campos del modelo conceptual que ninguna superficie exhibe, con su motivo; los cuatro valores compuestos para la maqueta con su situación al cierre de la fase; siete invariantes de datos; y cinco evidencias. |
