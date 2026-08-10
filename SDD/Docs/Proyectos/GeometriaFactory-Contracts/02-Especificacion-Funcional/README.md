@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts (`GeometriaFactory.Contracts`, tipo `library`)
 **Documento:** README.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `Especificacion-Funcional.md` (índice maestro de esta sección); `00-Contexto/Vision-Producto.md` §9; `01-Necesidades-Negocio/Necesidades-Negocio.md` 1.1 §2 y §5.3; `PRODUCT-INTAKE` 1.3 §4, §4.1, §4.2, §17.4, §13 y §14
+**Trazabilidad upstream:** `Especificacion-Funcional.md` (índice maestro de esta sección); `00-Contexto/Vision-Producto.md` §9; `01-Necesidades-Negocio/Necesidades-Negocio.md` 1.1 §2 y §5.3; `PRODUCT-INTAKE` **1.14** §4, §4.1, §4.2, §17.4, §13 y §14
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`
 
 ---
@@ -88,3 +88,4 @@ La omisión de las `RN-XX` es la que explica que la columna RN de la matriz del 
 | 1.2 | 2026-08-09 | Actualización por contenido nuevo aguas arriba: `PRODUCT-INTAKE` **1.7** incorpora la capacidad **F-26** —reseteo de contraseña por el administrador—, las reglas **RN-12** y **RN-13** y el invariante **INV-09**, y retira la exclusión **X-2**. Cambios: §1 y §2 pasan a **ocho** casos de uso con la incorporación de **CU-08**, contrato de reseteo y de cambio obligatorio de contraseña, y la fila de CU-06 actualiza su conjunto cerrado de catorce a **dieciséis** códigos; §3 suma CU-08 al final del orden de lectura, con su motivo; §5 actualiza la nota de actor y la de numeración a ocho casos de uso. Las cuatro omisiones de §4 no cambian: siguen siendo las mismas, con el mismo fundamento. | Analista Funcional + API Designer (AG-02) |
 | 1.3 | 2026-08-09 | Actualización por las dos decisiones del Product Owner sobre **F-26** que `CU-08` 1.2 y `CU-06` 1.3 absorben: resetear **no exige** que la cuenta esté habilitada, y la contraseña provisoria **la produce el sistema**. Cambio acá: la fila de CU-06 actualiza su conjunto cerrado de dieciséis a **diecisiete** códigos. Ningún artefacto se agrega ni se omite y el orden de lectura no cambia. | Analista Funcional + API Designer (AG-02) |
 | 1.4 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**, que `CU-02` 1.4, `CU-01` 1.5, `CU-08` 1.4 y `CU-06` 1.6 absorben: habilitar una cuenta **produce su contraseña provisoria** y el producto queda sin ninguna escritura anónima. Cambio acá: la fila de CU-06 actualiza su conjunto cerrado de diecisiete a **quince** códigos. Ningún artefacto se agrega ni se omite y el orden de lectura no cambia. | Analista Funcional + API Designer (AG-02) |
+| 1.5 | 2026-08-10 | **Cierra el hallazgo `C-08` (P2) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0.** La cabecera de trazabilidad declaraba derivarse del `PRODUCT-INTAKE` **1.3**, versión archivada, y pasa a declarar la **1.14**, vigente. Entre la **1.3** y la **1.14** el intake atravesó once emisiones, entre ellas las que incorporaron **F-25**, **F-26** y las reglas **RN-12** a **RN-16**: una cabecera que declaraba 1.3 declaraba derivarse de un intake que no conocía ni el reseteo ni la habilitación con contraseña provisoria. Se revisó el cuerpo antes de mover la cabecera y **no arrastra ninguna decisión de las versiones intermedias**: no queda en él ningún recuento de «quince reglas» ni de «diecisiete códigos», ninguna cita a la exclusión **X-2** como vigente y ninguna afirmación de que la marca de cambio de contraseña pendiente la ponga únicamente el reseteo. **Ningún contenido normativo de este documento cambia: la corrección es de trazabilidad.** Sube minor. | Analista Funcional + API Designer (AG-02) |

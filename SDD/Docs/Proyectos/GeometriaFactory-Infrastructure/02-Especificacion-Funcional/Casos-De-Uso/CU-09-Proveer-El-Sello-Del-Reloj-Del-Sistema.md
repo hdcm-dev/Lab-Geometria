@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-09-Proveer-El-Sello-Del-Reloj-Del-Sistema.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -80,7 +80,7 @@ Es también el motivo por el que **no aparece en el catálogo de condiciones de 
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | Ninguna propia. Es un mecanismo transversal que sostiene la verificabilidad de los sellos de NB-01 y NB-03; su ausencia de la matriz está declarada en `Especificacion-Funcional.md` §7.2 |
-| Reglas de negocio aplicables | Ninguna. Ninguna de las quince enuncia el momento actual |
+| Reglas de negocio aplicables | Ninguna. Ninguna de las dieciséis enuncia el momento actual |
 | Puerto que implementa | Reloj del sistema |
 | Consumidor | `GeometriaFactory-Application`, sus CU-01, CU-03, CU-04, CU-05, CU-08, CU-10 y CU-11 |
 | Historias de usuario a generar en 06 | US-23 |
@@ -100,6 +100,7 @@ Es también el motivo por el que **no aparece en el catálogo de condiciones de 
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-10 | **Cierra el hallazgo `C-02` (P0) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0 en una declaración viva que el informe no registra, contra `PRODUCT-INTAKE` 1.14.** La fila «Reglas de negocio aplicables» de la trazabilidad decía «Ninguna de las **quince** enuncia el momento actual». Las reglas del producto son **dieciséis**, `RN-01` a `RN-16`, contadas sobre los archivos de `GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`. La afirmación se recontó sobre las dieciséis y **sigue siendo verdadera**: ninguna enuncia el momento actual, tampoco **RN-16**. **Ninguna entrada, ninguna salida, ninguna condición y ningún criterio de aceptación cambia.** Sube minor. |
 
 ## 17. Compatibilidad de la superficie pública
 

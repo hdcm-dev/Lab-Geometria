@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** README.md
-**Versión:** 1.7
+**Versión:** 1.8
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`Especificacion-Funcional.md`](Especificacion-Funcional.md) (índice maestro de esta categoría); `01-Necesidades-Negocio/Necesidades-Negocio.md`; `00-Contexto/Vision-Producto.md` §9
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Domain
@@ -32,7 +32,7 @@
 | [`Definicion-Modelo-De-Dominio.md`](Definicion-Modelo-De-Dominio.md) | Documento de concepto central: cinco entidades, nueve invariantes vigentes, tres máquinas de estado y fronteras del dominio | Propuesto |
 | [`Glosario-Funcional.md`](Glosario-Funcional.md) | Vocabulario que esta categoría acuña y términos con más de un referente | Propuesto |
 | `Casos-De-Uso/` | Trece casos de uso, uno por archivo | Propuesto |
-| `Reglas-De-Negocio/` | Quince reglas de negocio, una por archivo | Propuesto |
+| `Reglas-De-Negocio/` | Dieciséis reglas de negocio, una por archivo | Propuesto |
 | `README.md` | Este archivo: índice navegable, orden de lectura y omisiones | Propuesto |
 
 Las carpetas `_legacy/` de `Casos-De-Uso/` y de `Reglas-De-Negocio/` conservan las copias de la emisión del 2026-08-08 con su sufijo de versión. No se editan.
@@ -122,3 +122,4 @@ Las seis filas con guion —sobre dieciséis— lo están por un motivo declarad
 | 1.5 | 2026-08-09 | **Cierra el hallazgo `F26-09`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. **§3** afirmaba que el intake §17.1.P.2 declara que RN-12 y RN-13 comparten INV-09, cuando la prosa de esa sección enumera a RN-12 entre las reglas **sin** invariante asociado; lo que sostiene la lectura es la columna «regla de negocio que sostiene» de la fila INV-09. Se corrige la atribución, se declara que la ambigüedad es del intake y se remite a `Especificacion-Funcional.md` §8 y a `Definicion-Modelo-De-Dominio.md` §4.3, que ya la calificaba correctamente. Ningún documento de la sección, ninguna regla y ningún invariante cambia. |
 | 1.6 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**, que incorpora a §4.1 las reglas **RN-14** —la contraseña provisoria la produce el sistema, no es adivinable y no se repite— y **RN-15** —resetear no exige cuenta habilitada—, con lo que el catálogo del producto pasa de trece a **quince reglas contiguas**. **§1** y **§3** suman las dos filas nuevas, las dos **sin invariante asociado** por la prosa de `PRODUCT-INTAKE` §17.1.P.2, y la nota de §3 pasa de cuatro a **seis** filas con guion con el motivo de cada una. **§5** actualiza el recuento de las restricciones de integridad. **Los trece casos de uso no cambian**: las dos reglas nuevas no abren contrato de uso, porque ya estaban modeladas dentro de `CU-13`. Cierra además el hallazgo `F26-28` del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 en su parte de este archivo: **las filas de este control de cambios estaban fuera de orden cronológico** y se reordenan por versión, **sin tocar el texto de ninguna**. |
 | 1.7 | 2026-08-10 | Absorbe el `PRODUCT-INTAKE` **1.13**, que incorpora a §4.1 la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que el reseteo, y la deja con cambio de contraseña pendiente— y precisa la capacidad **F-04**. **§3** pasa de quince a **dieciséis reglas contiguas**, con RN-16 asociada a **INV-09**, y la nota del invariante compartido pasa de dos reglas a **tres**, con el fundamento de que RN-16 aporta un segundo origen de la marca y no una mitad nueva de la condición. **§5** actualiza el recuento de las restricciones de integridad a dieciséis. **Los trece casos de uso no cambian de número**: RN-16 no abre contrato de uso, se materializa en `CU-02` y retira una condición de `CU-04` y otra de `CU-13`. Sube minor. |
+| 1.8 | 2026-08-10 | **Cierra el hallazgo `C-02` (P0) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** La fila de `Reglas-De-Negocio/` en el inventario de **§1** declaraba «**Quince** reglas de negocio, una por archivo» sobre un directorio que tiene **dieciséis** archivos, `RN-01` a `RN-16`, serie contigua y sin huecos —contados uno por uno—: es la fila que la versión 1.7 no actualizó cuando llevó §3 y §5 a dieciséis. Pasa a **dieciséis**. Las otras dos filas de recuento de ese mismo inventario se recontaron sobre los archivos y **cierran**: trece casos de uso y nueve invariantes vigentes. **Ningún caso de uso, ninguna regla y ningún documento de la sección cambia.** Sube minor. |

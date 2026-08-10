@@ -2,12 +2,12 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Wireframes-Registro-De-Cuenta.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Registrar-La-Cuenta-De-Alumno.md` íntegro; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-01, RT-03, RT-06, RT-07); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (primero y tercer criterio); `NB-01` §1, §5 (segundo criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.7**, §4 (F-02), §4.1 (RN-02, RN-06), §6 (flujo 1), §9 (X-1, **X-2 retirada**), §17.6 P.3 y P.5; `Design-Rules-Web-Generico.md` §3.1, §4.6, §4.9, §5, §7; `Design-Rules-Blazor-Mudblazor.md` §4.2
+**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Registrar-La-Cuenta-De-Alumno.md` íntegro; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-01, RT-03, RT-06, RT-07); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (primero y tercer criterio); `NB-01` §1, §5 (segundo criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14**, §4 (F-02), §4.1 (RN-02, RN-06), §6 (flujo 1), §9 (X-1, **X-2 retirada**), §17.6 P.3 y P.5; `Design-Rules-Web-Generico.md` §3.1, §4.6, §4.9, §5, §7; `Design-Rules-Blazor-Mudblazor.md` §4.2
 **Trazabilidad downstream:** Fase B2 de validación visual de maqueta; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
 
 ---
@@ -161,3 +161,4 @@ Estado de éxito, que reemplaza el contenido de la tarjeta:
 | 1.0 | 2026-08-09 | Emisión inicial. Superficie pública de alta, con el subtítulo de expectativa que declara antes del intento que la cuenta queda a la espera y que el laboratorio no envía correos, el recuento verificable de tres campos y ningún campo de contraseña, la enumeración explícita de lo que la superficie no dibuja —incluida la ausencia de recuperación— y diez estados declarados para la Fase B2. |
 | 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-02` y `NB-01` de la cabecera pasan a citarse con sección y criterio numerado. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, que **retiró la exclusión X-2**. §3 corrige la única afirmación de este documento que 1.7 volvió falsa: decía que «no existe recuperación en este producto» y lo que no existe es la recuperación **autónoma**; el reseteo por el docente sí existe, aunque **tampoco se pide desde esta superficie**. Es el único cambio: la superficie de registro no gana ni pierde ningún componente, y sigue teniendo tres campos y ningún campo de contraseña. |
+| 1.2 | 2026-08-10 | **Cierra el hallazgo `C-08` (P2) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0.** La cabecera de trazabilidad declaraba derivarse del `PRODUCT-INTAKE` **1.7**, versión archivada, y pasa a declarar la **1.14**, vigente. La **1.7** es la versión cuya letra sobre **RN-13** e **INV-09** fue precisada en la 1.8 y corregida en la 1.14, que es exactamente el punto donde el corpus más se equivocó. Se revisó el cuerpo antes de mover la cabecera y **no arrastra ninguna decisión de las versiones intermedias**: no queda en él ningún recuento de «quince reglas» ni de «diecisiete códigos», ninguna cita a la exclusión **X-2** como vigente y ninguna afirmación de que la marca de cambio de contraseña pendiente la ponga únicamente el reseteo. **Ningún contenido normativo de este documento cambia: la corrección es de trazabilidad.** Sube minor. |

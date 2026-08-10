@@ -2,11 +2,11 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-01-Registrar-La-Cuenta-De-Alumno.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
-**Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (primero y tercer criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §1, §5 (segundo criterio); `../../../../00-Contexto/Vision-Producto.md` §9.1 y §9.2; `../../../../00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-02), §4.1 (RN-02, RN-06), §6 (flujo 1), §9 (X-1, X-2), §17.6 P.3 y P.5
+**Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (primero y tercer criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §1, §5 (segundo criterio); `../../../../00-Contexto/Vision-Producto.md` §9.1 y §9.2; `../../../../00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-02), §4.1 (RN-02, RN-06), §6 (flujo 1), §9 (**X-1** vigente y **X-2 retirada**), §17.6 P.3 y P.5
 **Trazabilidad downstream:** `03-UX-UI-DX` de este proyecto de código; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
 
 ---
@@ -102,7 +102,7 @@ Permitir que un alumno de la comisión se dé de alta en el laboratorio con su c
 
 ## 10. Notas y supuestos
 
-- La ausencia de canal de correo es decisión declarada del Product Owner (exclusiones X-1 y X-2). No existe confirmación de dirección ni contraseña provisoria: es el motivo por el que este caso de uso termina en una cuenta `Pendiente` y no en una sesión.
+- La ausencia de canal de correo es decisión declarada del Product Owner: la **exclusión X-1**, notificaciones por correo, que sigue vigente. **X-2 —recuperación de contraseña olvidada— fue retirada el 2026-08-09**, cuando el Product Owner incorporó **F-26**, el reseteo desde el panel del administrador; ya no sostiene nada acá, y lo que sigue excluido es la recuperación **autónoma** por correo, que es lo que impide X-1. En este acto no hay confirmación de dirección ni contraseña provisoria: es el motivo por el que este caso de uso termina en una cuenta `Pendiente` y no en una sesión. La contraseña provisoria del producto existe, pero la produce la **habilitación** (RN-16) y no este registro.
 - La unicidad del correo la decide la pieza de datos. La pieza pública **no puede** ser la última defensa de esa regla, porque el navegador no es confiable y la ruta de registro es pública.
 - La forma del formulario, su distribución y sus textos definitivos pertenecen a 03-UX-UI-DX. Acá sólo se declara qué campos hay y qué se le informa al alumno.
 
@@ -111,3 +111,4 @@ Permitir que un alumno de la comisión se dé de alta en el laboratorio con su c
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Cierra el hallazgo `C-06` (P1) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** La nota de **§10** fundaba la ausencia de canal de correo en «las exclusiones **X-1 y X-2**», y `PRODUCT-INTAKE` §9 muestra la fila de **X-2 tachada**, con el texto «Exclusión retirada el 2026-08-09» al incorporarse **F-26**: la nota citaba como vigente y como fundamento una exclusión que la fuente había retirado. Pasa a citar **sólo X-1**, con la constancia de que X-2 fue retirada, de qué sigue excluido —la recuperación autónoma por correo— y de que la contraseña provisoria del producto la produce la habilitación (RN-16) y no este registro. La **cabecera de trazabilidad**, que citaba «§9 (X-1, X-2)» con el mismo defecto y que el informe no registra, se corrige igual. **Ningún curso, ningún criterio de aceptación y ningún desenlace cambia**: el registro sigue terminando en una cuenta `Pendiente` y no en una sesión. Sube minor. |

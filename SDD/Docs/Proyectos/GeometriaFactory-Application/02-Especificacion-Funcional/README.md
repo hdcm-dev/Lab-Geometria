@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`Especificacion-Funcional.md`](Especificacion-Funcional.md) (índice maestro de esta categoría); `01-Necesidades-Negocio/Necesidades-Negocio.md`; `00-Contexto/Vision-Producto.md` §9; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Application
@@ -63,7 +63,7 @@ Los tres artefactos siguientes **no se emiten**, y el motivo se declara acá y e
 | Artefacto | Motivo de la omisión |
 | --- | --- |
 | `Definicion-<Concepto-Central>.md` | **El concepto central de esta capa son los puertos, y los casos de uso ya los describen.** Cada uno declara cuáles consume y qué le pide a cada uno, y la tabla de §3 del índice los reúne. Un documento aparte repetiría eso sin agregar semántica. La regla lo declara recomendado, y no obligatorio, para `library` con superficie estrecha |
-| `Reglas-De-Negocio/RN-XX-<Nombre>.md` | **Las reglas del producto viven en `GeometriaFactory-Domain`** —**quince** desde el `PRODUCT-INTAKE` 1.10, **las quince con archivo allá**, de modo que acá se enlazan todas—, son atemporales y acá se **referencian**, no se redactan. Volver a enunciarlas crearía dos textos de la misma regla en la misma cadena documental, que es exactamente el defecto que la regla de no duplicación previene. §6 del índice declara, regla por regla, dónde se ejerce en esta capa |
+| `Reglas-De-Negocio/RN-XX-<Nombre>.md` | **Las reglas del producto viven en `GeometriaFactory-Domain`** —**dieciséis** desde el `PRODUCT-INTAKE` 1.13, **las dieciséis con archivo allá**, de modo que acá se enlazan todas—, son atemporales y acá se **referencian**, no se redactan. Volver a enunciarlas crearía dos textos de la misma regla en la misma cadena documental, que es exactamente el defecto que la regla de no duplicación previene. §6 del índice declara, regla por regla, dónde se ejerce en esta capa |
 | `Modelo-Datos/Modelo-Conceptual.md` y sus `RC-XX` | La regla de la categoría los omite para `library`, y el flag `tiene_persistencia` de este proyecto de código es false: el intake declara «no aplica directamente» en §17.2.P.4. Esta capa declara el puerto de repositorio y el alcance de la unidad de trabajo, no el modelo de datos. El modelo del dominio vive en `Definicion-Modelo-De-Dominio.md` de `GeometriaFactory-Domain` |
 
 ## 5. Notas de uso de esta sección
@@ -84,3 +84,4 @@ Los tres artefactos siguientes **no se emiten**, y el motivo se declara acá y e
 | 1.2 | 2026-08-09 | **Reconciliación con lo que `GeometriaFactory-Domain` ya emitió.** §4 declaraba que RN-12 y RN-13 «todavía no tienen archivo allá» y que acá se citaban contra el intake: **las trece reglas tienen archivo**, y la fila pasa a decirlo. Los recuentos —once casos de uso, trece reglas— no cambian. `Especificacion-Funcional.md` sube a 1.2 en la misma reconciliación y cierra los dos puntos abiertos que esta situación sostenía. |
 | 1.3 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: las reglas del producto pasan de trece a **quince** con **RN-14** y **RN-15**, y **las quince tienen archivo** en `GeometriaFactory-Domain`, de modo que la nota de omisión de `Reglas-De-Negocio/` actualiza su recuento y su cita del intake. **Ningún documento de esta sección, ningún caso de uso y ningún recuento propio de la capa cambia.** Sube minor. |
 | 1.4 | 2026-08-10 | Alineación con el `PRODUCT-INTAKE` **1.13**, regla **RN-16** y precisión de **F-04**: habilitar una cuenta produce y fija su contraseña provisoria. Los **once** casos de uso no cambian de número ni de recorte; lo que cambia es el alcance de **CU-02**, que pasa a producir la provisoria y a poner la marca, y el solicitante de la fijación de **CU-03**, que deja de ser el alumno anónimo. Ningún artefacto se agrega ni se omite y el orden de lectura no cambia. (Analista Funcional + API Designer, AG-02). |
+| 1.5 | 2026-08-10 | **Cierra el hallazgo `C-02` (P0) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0 en una declaración viva que el informe no registra, contra `PRODUCT-INTAKE` 1.14.** La fila de `Reglas-De-Negocio/` decía «**quince** desde el `PRODUCT-INTAKE` 1.10, las quince con archivo allá». Las reglas del producto son **dieciséis**, `RN-01` a `RN-16`, contadas sobre los archivos de `GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`. La decimosexta, **RN-16**, entró con el intake **1.13** y tiene archivo propio como las otras quince. **Ningún documento de la sección, ningún caso de uso y ninguna omisión declarada cambia.** Sube minor. |

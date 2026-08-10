@@ -2,11 +2,11 @@
 
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-07-Contrato-De-Desenlace-De-La-Revision.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md` §1, §5; `NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §5; `00-Contexto/Vision-Producto.md` §9.1 (Estado del trabajo, Aprobar / Rechazar, Comentario) y §9.2 (`Pendiente`, forma calificada obligatoria); `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE` 1.3 §4 (F-21, F-23), §4.1 (RN-10), §4.2 (modelo de estados), §6 (flujo 2.1), §7 (CL-10, CL-11), §9 (retiro de X-5), §12 (glosario), §17.4 P.3, P.5 y P.10
+**Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md` §1, §5; `NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §5; `00-Contexto/Vision-Producto.md` §9.1 (Estado del trabajo, Aprobar / Rechazar, Comentario) y §9.2 (`Pendiente`, forma calificada obligatoria); `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE` **1.14** §4 (F-21, F-23), §4.1 (RN-10), §4.2 (modelo de estados), §6 (flujo 2.1), §7 (CL-10, CL-11), §9 (retiro de X-5), §12 (glosario), §17.4 P.3, P.5 y P.10
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de este proyecto de código; `08-Calidad-Y-Pruebas`
 
 ---
@@ -115,6 +115,7 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, derivada de la incorporación del circuito de revisión del administrador en `PRODUCT-INTAKE` 1.3 §4 (F-21, F-23), §4.1 (RN-10) y §4.2, y de `NB-09` de 01. Declara la solicitud de desenlace con su conjunto cerrado de dos valores, el comentario opcional, el resultado con el estado terminal alcanzado y los dos códigos de error nuevos del ensamblado. |
+| 1.1 | 2026-08-10 | **Cierra el hallazgo `C-08` (P2) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0.** La cabecera de trazabilidad declaraba derivarse del `PRODUCT-INTAKE` **1.3**, versión archivada, y pasa a declarar la **1.14**, vigente. Entre la **1.3** y la **1.14** el intake atravesó once emisiones, entre ellas las que incorporaron **F-25**, **F-26** y las reglas **RN-12** a **RN-16**: una cabecera que declaraba 1.3 declaraba derivarse de un intake que no conocía ni el reseteo ni la habilitación con contraseña provisoria. Se revisó el cuerpo antes de mover la cabecera y **no arrastra ninguna decisión de las versiones intermedias**: no queda en él ningún recuento de «quince reglas» ni de «diecisiete códigos», ninguna cita a la exclusión **X-2** como vigente y ninguna afirmación de que la marca de cambio de contraseña pendiente la ponga únicamente el reseteo. **Ningún contenido normativo de este documento cambia: la corrección es de trazabilidad.** Sube minor. |
 
 ## 17. Compatibilidad de versión pública
 
