@@ -35,7 +35,7 @@ Orquestar el **auto-registro de un alumno**: verificar sobre el conjunto de cuen
 
 **Este caso de uso no constituye la cuenta del administrador.** El producto tiene **dos caminos de alta** con reglas opuestas —estado inicial, credencial y ventana de alta—, y el dominio los declara en dos casos de uso distintos: el auto-registro es su CU-01 y la configuración del administrador es su CU-12. Esta capa espeja esa partición: la configuración del administrador es [CU-10](CU-10-Configurar-La-Cuenta-De-Administrador.md).
 
-Este caso de uso **no fija credencial**: el alumno la establece en su primer ingreso efectivo, que es CU-03.
+Este caso de uso **no fija credencial**. Desde **RN-16** la credencial inicial la produce el sistema **al habilitar la cuenta** (CU-02), no el alumno al entrar: el alumno recibe una contraseña provisoria y la **cambia** en su primer ingreso efectivo, que es CU-03. La cuenta nace `Pendiente` y sin credencial derivada.
 
 ## 2. Actores
 
