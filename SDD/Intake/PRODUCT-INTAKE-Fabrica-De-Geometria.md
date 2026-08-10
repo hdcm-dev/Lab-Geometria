@@ -489,7 +489,7 @@ flowchart LR
 | GeometriaFactory-Contracts | **DTOs de la API.** Es el contrato compartido entre los dos procesos desplegables y el único tipo que cruza la frontera HTTP | Api, Web |
 | GeometriaFactory-Api | Endpoints REST con `Bearer` JWT, sobre los DTOs de Contracts | Web, por HTTP |
 | GeometriaFactory-Web | Páginas y componentes. No expone contrato a nadie: es hoja del grafo y punto de entrada del usuario final | — |
-| GeometriaFactory-Visor | **Fachada plana `main.ts`**: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir`. Es todo lo que Blazor puede invocar del bundle | Web, por interoperabilidad JS |
+| GeometriaFactory-Visor | **Fachada plana `main.ts`**: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento` — **seis**, las que §17.7 P.3 declara desde 1.6. Es todo lo que Blazor puede invocar del bundle | Web, por interoperabilidad JS |
 
 **Por qué esta descomposición y no otra.**
 
