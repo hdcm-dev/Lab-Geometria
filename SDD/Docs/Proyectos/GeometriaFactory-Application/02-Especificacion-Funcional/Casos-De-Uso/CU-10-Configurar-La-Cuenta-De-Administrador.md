@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-10-Configurar-La-Cuenta-De-Administrador.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5 (unicidad de la cuenta de administrador); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01), §4.1 (RN-01, RN-02), §15 (etapa `c`: configurar el administrador en el primer arranque, entrar, cambiar contraseña y salir), §17.2.P.2, §17.2.P.5, §17.2.P.11 punto 3; orquesta [`CU-12` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-12-Configurar-La-Cuenta-De-Administrador.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Application
@@ -122,8 +122,9 @@ Los cinco terminan de forma controlada y sin escritura: la unidad de trabajo no 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, **derivada de la corrección de la ronda r1 del audit, hallazgo H-01**. Nace al partirse CU-01 en los dos caminos de alta que `GeometriaFactory-Domain` separó entre su CU-01 y su CU-12: el auto-registro del alumno y la configuración del administrador, con estado inicial, credencial y ventana de alta opuestos. Recoge los tres motivos que el dominio dio de alta —`ADMINISTRADOR_YA_CONFIGURADO`, `CONFIGURACION_SIN_CREDENCIAL` y el `ESTADO_INICIAL_NO_NEGOCIABLE` acotado a este camino— y el criterio de recorrido del primer arranque, que encadena la configuración con la admisibilidad. |
+| 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-17**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. §10 **nombra** `UNICIDAD_DE_CORREO_NO_VERIFICADA` y declara que es inalcanzable por construcción también en este camino de alta, donde antes se lo aludía sin nombrarlo. La declaración de inalcanzabilidad queda ahora en los dos caminos, que es donde el rechazo del dominio se evita. |
+| 1.1 | 2026-08-10 | **Cierra la parte del hallazgo de forma que alcanza a este archivo**, detectada al propagar `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0 contra `PRODUCT-INTAKE` **1.11**. **§11 Control de cambios**: la fila de la **corrección de la ronda r2 del audit, hallazgo H-17** —absorbida sin subir versión— estaba **fuera de la tabla**, al final del archivo, detrás de §17. Se reincorpora a la tabla de §11 a continuación de la emisión inicial, que es su lugar cronológico, **sin alterar una palabra de lo que dice**. **Ningún flujo, precondición, excepción, postcondición ni criterio de aceptación de este caso de uso cambia.** Sube minor: repara el renderizado de una tabla. |
 
 ## 17. Compatibilidad de la superficie pública
 
 Admitir una segunda configuración, constituir esta cuenta sin credencial o dejarla en un estado que no admite acceso son cambios que contradicen RN-01 y el guion del primer arranque, y exigen decisión del Product Owner.
-| 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-17**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. §10 **nombra** `UNICIDAD_DE_CORREO_NO_VERIFICADA` y declara que es inalcanzable por construcción también en este camino de alta, donde antes se lo aludía sin nombrarlo. La declaración de inalcanzabilidad queda ahora en los dos caminos, que es donde el rechazo del dominio se evita. |

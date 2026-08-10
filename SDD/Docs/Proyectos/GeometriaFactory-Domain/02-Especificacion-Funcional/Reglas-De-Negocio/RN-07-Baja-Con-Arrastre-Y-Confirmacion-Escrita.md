@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.7 §4.1 (enunciado de RN-07, reglas sin invariante, y **RN-12**), §4 (F-03, **F-26**), §4.2 (modelo de estados del trabajo), §7 (CL-6, **CL-7** reescrito), §9 (**X-2 retirada**), §11 (RN-B6), §17.1.P.2; [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §2, §4 y §5; `00-Contexto/Vision-Producto.md` §8 (RG-06)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.7 §4.1 (enunciado de RN-07, reglas sin invariante, y **RN-12**), §4 (F-03, **F-26**), §4.2 (modelo de estados del trabajo), §7 (CL-6, **CL-7** reescrito), §9 (**X-2 retirada**), §11 (**RN-B6 tachado** el 2026-08-09; lo que sostenía vive en §7 CL-6), §17.1.P.2; [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §2, §4 y §5; `00-Contexto/Vision-Producto.md` §8 (RG-06)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -60,3 +60,4 @@ Pruebas unitarias de dominio previstas en 08: rechazo de la baja que declara con
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe el enunciado que `PRODUCT-INTAKE` 1.3 §4.1 transcribe y el modelo de estados de §4.2. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §3 precisa que el arrastre alcanza a los cuatro estados del trabajo, incluidos los dos terminales que el modelo nuevo introduce, y distingue ese arrastre de INV-07; y declara que **esta regla no tiene invariante asociado**, según §17.1.P.2. |
 | 1.2 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**. **El enunciado de la regla no cambia**; lo que cambia es una premisa de su justificación que quedó falsa: §2 declaraba que la baja era «la única salida disponible ante una contraseña olvidada», y el intake incorpora **F-26**, retira **X-2** y reescribe **CL-7** sobre el reseteo, que conserva la cuenta y sus trabajos (**RN-12**, CU-13). Se reescribe ese párrafo dejando en pie la exigencia de confirmación escrita, cuyo fundamento es la irreversibilidad y no la frecuencia. §3 suma que **el reseteo no dispara esta regla**. |
+| 1.3 | 2026-08-10 | **Cierra la parte del hallazgo `N-5`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0 que alcanza a este archivo. La **trazabilidad de cabecera** citaba «§11 (RN-B6)» como riesgo vigente; el intake **1.10** lo tachó el 2026-08-09 al quedar sin objeto su mitigación, porque F-26 conserva la cuenta y sus trabajos. La cita se conserva con la constancia de que está tachada y remite a **§7 CL-6**, que es donde vive hoy lo que sostenía. **El enunciado de esta regla, su ámbito, su verificación y su relación con el reseteo no cambian**: la baja sigue arrastrando los trabajos y sigue exigiendo confirmación escrita. Sube minor: corrige una referencia a una fila retirada. |
