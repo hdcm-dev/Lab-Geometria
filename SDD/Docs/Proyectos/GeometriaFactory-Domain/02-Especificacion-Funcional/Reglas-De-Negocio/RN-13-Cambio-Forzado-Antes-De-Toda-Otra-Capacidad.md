@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.7 §4.1 (enunciado de **RN-13** y de RN-12), §4 (**F-26**), §17.1.P.2 (**INV-09**, INV-06), §17.1.P.5, §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; `00-Contexto/Vision-Producto.md` §9.2
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.8** §4.1 (enunciado precisado de **RN-13** y enunciado de RN-12), §4 (**F-26**), §17.1.P.2 (**INV-09**, INV-06), §17.1.P.5, §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; `00-Contexto/Vision-Producto.md` §9.2
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -26,7 +26,7 @@
 
 ## 1. Enunciado de la regla
 
-Mientras la contraseña provisoria no se cambie, la cuenta **no llega a ninguna otra parte del sistema**: lo único que puede hacer es cambiar su contraseña, y cualquier otra ruta la devuelve al cambio. Al cambiarla, la marca se levanta y la cuenta opera con normalidad. **La contraseña nueva la elige el alumno y el administrador no la conoce.**
+Mientras la contraseña provisoria no se cambie, la cuenta **no llega a ninguna otra parte del sistema**: **se autentica pero no obtiene sesión de trabajo** —el sistema reconoce la credencial provisoria y, en lugar de admitirla, la deriva al cambio de contraseña—, lo único que puede hacer es cambiarla, y cualquier otra ruta la devuelve al cambio. Al cambiarla, la marca se levanta y la cuenta opera con normalidad. **La contraseña nueva la elige el alumno y el administrador no la conoce.**
 
 ## 2. Justificación
 
@@ -40,6 +40,7 @@ Es además lo que sostiene la promesa de identidad propia del alumno de `NB-02` 
 - La marca la pone **únicamente** el reseteo del administrador (CU-13) y la levanta **únicamente** el reemplazo de credencial hecho por la propia cuenta (CU-03 FA-04). Ni el administrador la levanta, ni la levanta el paso del tiempo: ninguna fuente declara vencimiento de la provisoria (`Definicion-Modelo-De-Dominio.md` §5.3).
 - **Dónde la ejerce el dominio, y es una decisión derivada declarada.** El enunciado alcanza a todas las capacidades del sistema, y el dominio no tiene una puerta única por la que pasen todas: la guarda se concentra en la evaluación de admisibilidad de [CU-04](../Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md), con el fundamento de que ninguna capacidad se ejerce sin admisión resuelta. Es el mismo lugar donde vive INV-06. Está declarada en `Definicion-Modelo-De-Dominio.md` §4.1 y elevada como punto abierto en `Especificacion-Funcional.md` §9.
 - **Qué queda fuera del dominio.** «Cualquier otra ruta la devuelve al cambio» es una afirmación sobre rutas, y las rutas no son de este proyecto de código: la exigencia baja a `GeometriaFactory-Api` y a `GeometriaFactory-Web`. El dominio declara la condición; el encaminamiento lo ejerce quien atiende peticiones, exactamente como con INV-06.
+- **Sin sesión de trabajo, y es el paralelo del primer ingreso.** El intake lo precisó en su versión **1.8**: la 1.7 decía «ingresa», que se leía como que la cuenta obtenía sesión. Emitir sesión a una cuenta que por INV-09 no ejerce ninguna capacidad es contradictorio, y la diferencia es observable desde la capa que emite el acceso. Se resolvió del lado de no emitirla, que es la misma forma con la que el producto ya resuelve el primer ingreso con contraseña no fijada: `CREDENCIAL_NO_ESTABLECIDA` tampoco produce acceso y encamina al establecimiento.
 - **Su invariante es INV-09**, que comparte con RN-12 (`Definicion-Modelo-De-Dominio.md` §4.3).
 
 ## 4. Consecuencia si se viola
@@ -61,3 +62,4 @@ Pruebas unitarias de dominio previstas en 08: cuenta reseteada que se evalúa **
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, por la regla **RN-13** que `PRODUCT-INTAKE` 1.7 §4.1 transcribe junto con la capacidad **F-26** y el invariante **INV-09**. Declara el enunciado, la justificación —es lo que hace que la provisoria sea provisoria—, el ámbito con los dos únicos actos que mueven la marca, la **decisión derivada** de concentrar la guarda del dominio en CU-04, lo que queda fuera del dominio porque habla de rutas, y la consecuencia, que no es un rechazo sino un motivo de resultado y una prueba negativa. |
+| 1.1 | 2026-08-09 | **Absorbe la precisión de `PRODUCT-INTAKE` 1.8 §4.1.** El enunciado de §1 suma que la cuenta con contraseña provisoria **se autentica pero no obtiene sesión de trabajo**, que es lo que la versión 1.7 dejaba ambiguo al decir «ingresa». §3 suma el punto que declara el fundamento —emitir sesión a una cuenta que por INV-09 no ejerce ninguna capacidad es contradictorio, y la forma adoptada es el paralelo del primer ingreso con contraseña no fijada— y la cabecera cita el intake **1.8**. **Ni el ámbito, ni la consecuencia, ni los CU afectados, ni las pruebas cambian**: CU-04 ya devolvía **no admisible**. Sube minor: precisa un enunciado sin alterar lo que la regla exige. |

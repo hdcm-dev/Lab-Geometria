@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/) completo (once casos de uso, `Especificacion-Funcional.md` con su §3 de puertos y su §4 de comprobaciones transversales, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` §9 y `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/` (RN-01 a RN-11 y los doce casos de uso que esta capa orquesta; RN-12 y RN-13 todavía sin archivo allá); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.2, §4.1, §4.2 y §16
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/) completo (once casos de uso, `Especificacion-Funcional.md` con su §3 de puertos y su §4 de comprobaciones transversales, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` §9 y `00-Contexto/Alcance-Producto.md` §4.1, §4.4 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/` (RN-01 a RN-13 y los doce casos de uso que esta capa orquesta); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.2, §4.1, §4.2 y §16
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
 
 ---
@@ -107,3 +107,4 @@ Los criterios siguientes de `Rules-UX-UI-DX.md` §6 son de la variante UX/UI o e
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **Alineación con el 02 corregido**: diez casos de uso y **34 condiciones** en lugar de nueve y 27, veintitrés diagnósticos en la guía en lugar de dieciocho, y el orden de lectura remite además a §1.4 —los dos caminos de alta— y a §2.5 —los rechazos del dominio que acá no ocurren— del catálogo. Los puntos abiertos citados y no reabiertos pasan de cuatro a **cinco**, con el de los sellos de alta, de modificación y de desenlace, que el modelo del dominio no declara como atributos. Las referencias internas al catálogo se corrigen tras la renumeración de **H-09**: la verificación mecánica es su §7.2 y la declaración de no aplicabilidad del quick-start, su §7.4. |
 | 1.0 | 2026-08-09 | **Corrección de la ronda r2 del audit, hallazgo H-15**, absorbida sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. La cabecera de trazabilidad decía **once** casos de uso de `GeometriaFactory-Domain` y son **doce** desde que ese proyecto de código emitió su CU-12; el catálogo de esta misma sección ya decía doce, de modo que la sección se contradecía consigo misma. Es el único cambio. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26**. Los recuentos de la sección aguas arriba pasan a **once casos de uso**, el catálogo de condiciones de **34 a 36**, y las negativas de autorización de **tres a cuatro**. |
+| 1.2 | 2026-08-09 | **Reconciliación con lo que `GeometriaFactory-Domain` ya emitió.** La cabecera de trazabilidad declaraba que RN-12 y RN-13 estaban «todavía sin archivo allá»: **las trece reglas tienen archivo** y la cita pasa a ser `RN-01 a RN-13`. Ningún recuento de esta sección cambia. |

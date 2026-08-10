@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-11-Resetear-La-Contrasena-De-Un-Alumno.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -109,7 +109,7 @@ Ninguno deja efecto parcial: el reseteo escribe credencial, marca y sello, o no 
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-01, NB-02 |
-| Reglas de negocio aplicables | RN-12 y RN-13 del `PRODUCT-INTAKE` 1.7 §4.1, **todavía sin archivo propio en `GeometriaFactory-Domain`** (§10); [RN-01](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [RN-06](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [RN-07](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) **por contraste**: el reseteo no la dispara |
+| Reglas de negocio aplicables | [RN-12](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) y [RN-13](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), **que ya tienen archivo propio en `GeometriaFactory-Domain`** (§10); [RN-01](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [RN-06](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [RN-07](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) **por contraste**: el reseteo no la dispara |
 | Casos de uso de dominio orquestados | [CU-03](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md), en su camino de reemplazo |
 | Puertos que consume | Repositorio de cuentas, reloj del sistema |
 | Historias de usuario a generar en 06 | US-29, US-30, US-31 |
@@ -123,7 +123,7 @@ Ninguno deja efecto parcial: el reseteo escribe credencial, marca y sello, o no 
 - **La declaración de credencial vigente verificada la aporta acá la facultad del administrador y no el conocimiento de la contraseña.** El dominio exige que el reemplazo declare verificada la vigente (CU-03 FA-04, motivo `CREDENCIAL_VIGENTE_NO_VERIFICADA`), y el administrador **no conoce la contraseña del alumno ni la conocerá**: lo que sostiene el reemplazo acá es la verificación de facultad de §4 del índice maestro, ejercida antes de invocar al dominio. Es la única invocación del reemplazo en la que la declaración no nace de una comparación de credenciales, y por eso se declara acá y no se deja inferir.
 - **La contraseña nueva la elige el alumno y el administrador no la conoce** (RN-13). Lo único que el administrador conoce es la provisoria, y su vida útil termina en el primer ingreso: INV-09 es lo que hace que la provisoria sea provisoria.
 - **El reseteo no es una baja.** No retira ningún trabajo, no exige confirmación escrita del correo y no toca RN-07. La confirmación que sí corresponde —para que el administrador no resetee por accidente la cuenta equivocada— es una decisión de presentación y vive en `03-UX-UI-DX` de `GeometriaFactory-Web`.
-- **RN-12 y RN-13 todavía no tienen archivo en `GeometriaFactory-Domain`.** Entraron en el `PRODUCT-INTAKE` 1.7 y esa categoría es la que las redacta; acá se referencian por identificador contra el intake, como las once anteriores se referencian contra sus archivos. Queda declarado como punto abierto en el índice maestro §11.
+- **RN-12 y RN-13 ya tienen archivo en `GeometriaFactory-Domain`.** Entraron en el `PRODUCT-INTAKE` 1.7, esa categoría las redactó, y acá se referencian por enlace como las once anteriores. El punto abierto que el índice maestro §11 declaraba queda cerrado.
 - **La exigencia de que la provisoria sea distinta de la contraseña nueva no está declarada aguas arriba** y esta categoría **no la inventa**. Si el producto la adopta, es una exigencia de forma de la contraseña y vive donde viven las demás: `05-Arquitectura-Tecnica` y la capa que compara credenciales.
 
 ## 11. Control de cambios
@@ -131,6 +131,7 @@ Ninguno deja efecto parcial: el reseteo escribe credencial, marca y sello, o no 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, por la capacidad **F-26** del `PRODUCT-INTAKE` **1.7**, que retira la exclusión X-2 y reescribe el caso límite CL-7. Declara el contrato del reseteo con la verificación de facultad, el acotamiento a cuentas de alumno y a cuenta habilitada con credencial, la marca de cambio de contraseña pendiente de INV-09, la conservación íntegra de la cuenta y de sus trabajos de RN-12, los dos motivos nuevos y los cuatro propagados, y las dos decisiones derivadas con su fundamento. |
+| 1.1 | 2026-08-09 | **Reconciliación con lo que `GeometriaFactory-Domain` ya emitió.** §9 y §10 declaraban que **RN-12 y RN-13 todavía no tenían archivo** en esa categoría y las citaban contra el intake; los dos archivos existen —`RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md` y `RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md`— y las citas pasan a ser enlaces, como las de las once anteriores. **Punto abierto cerrado**, y el índice maestro lo retira de su §11. Ningún flujo, motivo ni criterio de aceptación de este caso de uso cambia: la precisión de RN-13 en el `PRODUCT-INTAKE` 1.8 alcanza al ingreso de la cuenta reseteada, que es CU-03, y no al acto de resetear. |
 
 ## 17. Compatibilidad de la superficie pública
 
