@@ -110,7 +110,7 @@ Darle al administrador el control mínimo y suficiente sobre la lista de su comi
 | Reglas de negocio aplicables | [`RN-01`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [`RN-06`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [`RN-07`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md), [`RN-02`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02-Correo-Del-Alumno-Unico.md), y **`RN-12`** y **`RN-13`** del `PRODUCT-INTAKE` 1.7 §4.1, **todavía sin archivo en `GeometriaFactory-Domain`** |
 | Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-02](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Contrato-De-Administracion-De-Cuentas.md) pasos 3 a 6 y FA-01 y FA-03; [`CU-06`](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) |
 | Fachada del visualizador | Ninguna función |
-| Historias de usuario a generar en 06 | US-08, US-09, US-10 |
+| Historias de usuario a generar en 06 | US-08, US-09, US-10, US-30 |
 | Componentes esperados en 05 | Ruta de configuración inicial, panel de cuentas, diálogo de confirmación escrita de la baja y diálogo de reseteo de contraseña con la comunicación de la provisoria |
 | Tests previstos en 08 | Guion de demostración de la etapa `c` para FA-03 y FA-04, y de la etapa `d` para las **cinco** operaciones, la confirmación escrita de la baja y el reseteo que conserva los tres trabajos |
 

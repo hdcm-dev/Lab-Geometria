@@ -234,7 +234,7 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.3, §3.4, §4.1, §8 |
 | Representaciones que invoca | [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) |
 | Catálogo de diseño aplicado | `Design-Rules-Web-Generico.md`, `Design-Rules-Primer-Arranque.md` §4.4 y §4.6, `Design-Rules-Blazor-Mudblazor.md` |
-| US a generar en 06 | `US-08`, `US-09`, `US-10` |
+| US a generar en 06 | `US-08`, `US-09`, `US-10`, `US-30` |
 | Tests previstos en 08 | Guion de demostración de la etapa `d`: recuento de exactamente **cinco** operaciones; reseteo que conserva la cuenta y sus tres trabajos con sus estados y comentarios; provisoria mostrada una sola vez; comparación de las dos confirmaciones, que verifica que la del reseteo no exige transcripción y no declara pérdida de trabajos; habilitación que desbloquea el establecimiento de contraseña; baja con confirmación que no coincide; lectura del aviso de arrastre antes de escribir; baja que elimina la cuenta y sus dos trabajos; ruta de cuentas pedida por un alumno con sesión; recorrido por teclado del diálogo |
 
 ## 9. Control de cambios

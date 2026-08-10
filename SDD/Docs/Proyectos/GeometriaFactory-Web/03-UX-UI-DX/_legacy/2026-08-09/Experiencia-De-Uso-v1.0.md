@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Experiencia-De-Uso.md
-**Versión:** 1.1
+**Versión:** 1.0
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -133,7 +133,7 @@ Son de nivel producto y **una superficie que las viole es un defecto**, no una a
 | Regla | Qué prohíbe en el diseño | Qué obliga en su lugar |
 | --- | --- | --- |
 | RA-01 · Ningún guion del navegador invoca la pieza de datos | Prohíbe toda actualización parcial que implique una llamada del navegador al servicio de datos: nada de autocompletado que consulte, nada de validación remota al escribir, nada de listado que se rellene solo, nada de sondeo de estado | Todo dato llega por el servidor de la pieza pública, en el ciclo de la interacción. Un listado se refresca cuando la persona vuelve a él, no solo. El estado nuevo de un trabajo aparece en el listado del alumno la próxima vez que lo pida, y eso se declara en el estado vacío y en la microcopy en lugar de simularse |
-| RA-02 · El bundle del visualizador es un visualizador puro | Prohíbe que cualquier superficie manipule el elemento de dibujo por su cuenta: nada de superponer marcas sobre la escena, nada de leer su contenido, nada de capturarla, nada de tocar su interior | La escena se opera **sólo** por las **seis** funciones, y es la pieza pública la que consulta el entorno del navegador y le manda los dos valores de verdad del movimiento automático: el bundle **no consulta nada**. El resaltado de una pieza se pide por `seleccionarPieza`; el ajuste al cambiar el tamaño disponible se pide por `redimensionar` y **no ocurre solo**; la liberación se pide por `destruir` al descartar el componente. La lista de piezas no dibujadas se presenta **al lado** de la escena, no encima |
+| RA-02 · El bundle del visualizador es un visualizador puro | Prohíbe que cualquier superficie manipule el elemento de dibujo por su cuenta: nada de superponer marcas sobre la escena, nada de leer su contenido, nada de capturarla, nada de tocar su interior | La escena se opera **sólo** por las cinco funciones. El resaltado de una pieza se pide por `seleccionarPieza`; el ajuste al cambiar el tamaño disponible se pide por `redimensionar` y **no ocurre solo**; la liberación se pide por `destruir` al descartar el componente. La lista de piezas no dibujadas se presenta **al lado** de la escena, no encima |
 | RA-03 · Todo lo que el navegador deba obtener pasa por la pieza pública | Prohíbe que un mensaje visible incluya la dirección de un servicio interno, un nombre de archivo de datos o una traza. Prohíbe también enlazar recursos a un origen que no sea el de la pieza pública | El detalle técnico de una falla vive del lado del servidor. Lo que la persona ve es qué pasó y qué puede hacer. El detalle de diagnóstico del sello de versión expone la identidad del artefacto, **no** la topología |
 
 Consecuencia de diseño que conviene tener presente al leer los wireframes: **no hay optimismo de interfaz**. Ninguna superficie muestra un resultado antes de que el servidor lo confirme, porque el ida y vuelta es el único canal que hay y adelantarlo produciría estados que después habría que retirar.
@@ -149,12 +149,12 @@ Una **superficie** es la unidad maquetable: una ruta con su conjunto propio de e
 | `Aprovisionamiento-Inicial` | [`Wireframes-Aprovisionamiento-Inicial.md`](Wireframes-Aprovisionamiento-Inicial.md) | CU-04 FA-03 y FA-04 | Acceso |
 | `Registro-De-Cuenta` | [`Wireframes-Registro-De-Cuenta.md`](Wireframes-Registro-De-Cuenta.md) | CU-01 | Acceso |
 | `Ingreso` | [`Wireframes-Ingreso.md`](Wireframes-Ingreso.md) | CU-02 | Acceso |
-| `Credencial-Propia` | [`Wireframes-Credencial-Propia.md`](Wireframes-Credencial-Propia.md) | CU-03 | Acceso en establecimiento **y en cambio forzado**, trabajo en cambio voluntario |
+| `Credencial-Propia` | [`Wireframes-Credencial-Propia.md`](Wireframes-Credencial-Propia.md) | CU-03 | Acceso en establecimiento, trabajo en cambio |
 | `Panel-De-Trabajos-Del-Alumno` | [`Wireframes-Panel-De-Trabajos-Del-Alumno.md`](Wireframes-Panel-De-Trabajos-Del-Alumno.md) | CU-06 | Trabajo |
 | `Envio-De-Trabajo` | [`Wireframes-Envio-De-Trabajo.md`](Wireframes-Envio-De-Trabajo.md) | CU-05 | Trabajo |
 | `Vista-De-Trabajo` | [`Wireframes-Vista-De-Trabajo.md`](Wireframes-Vista-De-Trabajo.md) | CU-07 | Trabajo |
 | `Resolucion-Del-Trabajo` | [`Wireframes-Resolucion-Del-Trabajo.md`](Wireframes-Resolucion-Del-Trabajo.md) | CU-09 | Trabajo, alojada en `Vista-De-Trabajo` |
-| `Panel-De-Cuentas` | [`Wireframes-Panel-De-Cuentas.md`](Wireframes-Panel-De-Cuentas.md) | CU-04 flujo principal, FA-01, FA-02, **FA-06**, **FA-07** y FA-05 | Trabajo |
+| `Panel-De-Cuentas` | [`Wireframes-Panel-De-Cuentas.md`](Wireframes-Panel-De-Cuentas.md) | CU-04 flujo principal, FA-01, FA-02 y FA-05 | Trabajo |
 | `Listado-De-La-Comision` | [`Wireframes-Listado-De-La-Comision.md`](Wireframes-Listado-De-La-Comision.md) | CU-08 | Trabajo |
 | `Estado-Degradado-Y-Reconexion` | [`Wireframes-Estado-Degradado-Y-Reconexion.md`](Wireframes-Estado-Degradado-Y-Reconexion.md) | CU-10 | Los dos, por superposición |
 
@@ -169,7 +169,7 @@ Y una fusión: **CU-09 no tiene ruta propia.** El bloque de decisión vive dentr
 
 El producto tiene exactamente dos armazones, y la frontera entre ellos es tener sesión y sistema operable. Es el **shell partido** de `Design-Rules-Primer-Arranque` §4.1, con la regla del documento base de no ofrecer puertas que todavía no abren.
 
-**Shell de acceso.** Sin barra lateral, sin barra superior, sin navegación. Lienzo con una tarjeta de ancho acotado, anclada a la franja superior y no al centro vertical, con el sello de versión al pie. Lo usan `Aprovisionamiento-Inicial`, `Registro-De-Cuenta`, `Ingreso` y `Credencial-Propia` en sus cursos de establecimiento **y de cambio forzado**. El cambio forzado es el único caso en que este shell se usa **con sesión iniciada**, y es deliberado: mientras la contraseña provisoria no se cambie **no hay ninguna otra ruta a la que ir**, y una barra lateral prometería destinos que no existen.
+**Shell de acceso.** Sin barra lateral, sin barra superior, sin navegación. Lienzo con una tarjeta de ancho acotado, anclada a la franja superior y no al centro vertical, con el sello de versión al pie. Lo usan `Aprovisionamiento-Inicial`, `Registro-De-Cuenta`, `Ingreso` y `Credencial-Propia` en su curso de establecimiento.
 
 ```text
 +------------------- lienzo, sin chrome -------------------+
@@ -231,7 +231,7 @@ Los tres destinos por papel, que aplican la ley de Hick y respetan que el produc
 **Fricción anticipada.** Tres, y las tres tienen tratamiento declarado:
 
 1. *El alumno espera un correo que no llega.* La superficie de registro declara explícitamente que el laboratorio **no envía correos** y que la habilitación la hace el docente.
-2. *El alumno olvida su contraseña.* **No hay recuperación autónoma** y ninguna superficie ofrece una: no hay canal de correo. Lo que sí hay desde el `PRODUCT-INTAKE` 1.7 es el **reseteo por el administrador** (F-26): el texto de `Ingreso` declara que hay que pedírselo al docente y que **no se pierde ningún trabajo**, `Panel-De-Cuentas` lo ofrece como quinta operación de la fila, y el alumno entra con una provisoria y elige la suya en `Credencial-Propia`, en su curso de cambio forzado. **Hasta 1.6 el único remedio era la baja y el alta nueva, que arrastraba todos los trabajos**: esa fricción era la más cara del producto y dejó de existir.
+2. *El alumno olvida su contraseña.* **No hay recuperación** y ninguna superficie ofrece una. El texto de la superficie de ingreso declara que la resuelve el administrador, y `Panel-De-Cuentas` advierte en el diálogo de baja que la baja **arrastra los trabajos**.
 3. *El alumno llega a un panel vacío y no sabe qué hacer.* El estado vacío no es un hueco: es una invitación con la acción siguiente.
 
 **Salida.** El alumno tiene identidad propia, sesión y un panel donde cargar.
@@ -310,12 +310,12 @@ Cada celda marcada es un estado que **la maqueta de la Fase B2 va a tener que de
 | `Aprovisionamiento-Inicial` | — | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Resolviendo destino; ya aprovisionado |
 | `Registro-De-Cuenta` | — | Sí | Sí | Sí | Sí | Sí | Sí | Sí | — |
 | `Ingreso` | — | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Cuenta no habilitada; contraseña sin establecer; sesión cerrada |
-| `Credencial-Propia` | — | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Establecimiento; cambio; **cambio forzado**; provisoria rechazada |
+| `Credencial-Propia` | — | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Establecimiento; cambio |
 | `Panel-De-Trabajos-Del-Alumno` | Sí | Sí | Sí | — | Sí | Sí | Sí | Sí | Acciones por estado del trabajo |
 | `Envio-De-Trabajo` | — | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Previsualizado; no verificó; verificó con advertencias; escena no disponible |
 | `Vista-De-Trabajo` | — | Sí | Sí | — | Sí | — | Sí | Sí | Sin observaciones; sin comentario; piezas no dibujadas; texto no legible; escena no disponible; índice sin representación |
 | `Resolucion-Del-Trabajo` | — | Sí | Sí | — | Sí | Sí | Sí | Sí | Resuelto; no resoluble; confirmando retiro |
-| `Panel-De-Cuentas` | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Confirmación escrita pendiente; confirmación no coincide; orientación posterior; **confirmación de reseteo pendiente; provisoria a la vista; reseteo no admitido** |
+| `Panel-De-Cuentas` | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Sí | Confirmación escrita pendiente; confirmación no coincide; orientación posterior |
 | `Listado-De-La-Comision` | Sí | Sí | Sí | — | Sí | — | Sí | Sí | Filtrado sin resultados; alumno del filtro inexistente |
 | `Estado-Degradado-Y-Reconexion` | — | — | — | — | — | Sí | Sí | Sí | Recuperado; sesión no restablecible |
 
@@ -353,7 +353,7 @@ Tres reglas de presentación que se derivan de la tabla y que valen en todas las
 | Mensajes de error asociados al campo y anunciados | El requisito declarado y el error se asocian al control que describen; la banda de error se anuncia como alerta y la de confirmación como estado |
 | Cambios dinámicos anunciados | El aviso de indisponibilidad, el cartel de reconexión, el resultado del envío y la confirmación de copiado del diagnóstico se anuncian como regiones activas. Un cambio sólo visual no alcanza |
 | El color no es el único canal | Las cuatro insignias de estado llevan texto. Las observaciones llevan su severidad escrita, no sólo su color |
-| Movimiento reducido respetado | Las transiciones no esenciales se desactivan cuando el sistema lo pide. La escena tridimensional **sí puede moverse sola** —capacidad F-25, `Must Have` desde el `PRODUCT-INTAKE` 1.7, con sus dos movimientos independientes: la órbita de la cámara y el giro de las figuras—, y por eso el movimiento ambiental se resuelve y no se evita: los dos movimientos se gobiernan con **casillas visibles al pie del área de dibujo**, se detienen mientras la persona arrastra y con la pestaña oculta, y **arrancan destildados cuando el sistema declara preferencia de movimiento reducido**, con el control declarando por qué. Con las dos destildadas la escena sólo se mueve por acción de la persona. **Quien consulta esa preferencia es la pieza pública**, que la traduce a los **dos valores de verdad** que le manda al visor por la fachada: el visor **no consulta nada** —ni esa preferencia, ni configuración, ni almacenamiento—, porque es un visualizador puro (RA-02, RT-13) |
+| Movimiento reducido respetado | Las transiciones no esenciales se desactivan cuando el sistema lo pide. La escena tridimensional **sí puede moverse sola** —capacidad F-25, con sus dos movimientos independientes: la órbita de la cámara y el giro de las figuras—, y por eso el movimiento ambiental se resuelve y no se evita: los dos movimientos se gobiernan con **casillas visibles al pie del área de dibujo**, se detienen mientras la persona arrastra y con la pestaña oculta, y **arrancan destildados cuando el sistema declara preferencia de movimiento reducido**, con el control declarando por qué. Con las dos destildadas la escena sólo se mueve por acción de la persona |
 | Foco gestionado | Foco inicial en el primer campo de las tarjetas de acceso. Tras un error, el foco vuelve a la banda o al primer campo inválido. Al abrir un diálogo, el foco entra; al cerrarlo, vuelve al control que lo abrió |
 
 ### 5.2 La escena tridimensional y su equivalente accesible
@@ -455,7 +455,7 @@ Es la aplicación directa de RA-03 y se verifica leyendo, no inspeccionando:
 | CU origen | Los diez: `CU-01` a `CU-10` de `../02-Especificacion-Funcional/Casos-De-Uso/`, más `Especificacion-Funcional.md` §6 (RT-01 a RT-11) y §7 |
 | Reglas de negocio relevantes | `RN-01` a `RN-11`, que viven en `GeometriaFactory-Domain` y se referencian por identificador. Condicionan la presentación `RN-03`, `RN-04`, `RN-05`, `RN-06`, `RN-07`, `RN-09`, `RN-10` y `RN-11` |
 | Reglas de arquitectura | `RA-01`, `RA-02` y `RA-03`, en `PRODUCT-INTAKE` §14, aplicadas en §2.4 |
-| Contrato de fachada del visualizador | `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md` §3.2 (siete garantías), §4 (**seis** funciones, incluida `establecerMovimiento` de §4.6) y §6 (siete códigos) |
+| Contrato de fachada del visualizador | `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md` §3.2 (siete garantías), §4 (cinco funciones) y §6 (siete códigos) |
 | Wireframes asociados | Los once de §3.1 |
 | Representaciones asociadas | [`Representacion-Fila-De-Trabajo.md`](Representacion-Fila-De-Trabajo.md), [`Representacion-Lista-De-Observaciones.md`](Representacion-Lista-De-Observaciones.md), [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) |
 | US a generar en 06 | `US-01` a `US-27`, según la matriz de `../02-Especificacion-Funcional/Especificacion-Funcional.md` §4 |
@@ -485,4 +485,3 @@ Es la aplicación directa de RA-03 y se verifica leyendo, no inspeccionando:
 | 1.0 | 2026-08-09 | Emisión inicial. Marco de experiencia de la primera superficie del producto con personas reales. Declara las dos personas y su contexto, nueve heurísticas y cinco leyes UX aplicadas, los cuatro documentos del catálogo de diseño aplicados y los dos que no aplican con su motivo, las tres reglas de arquitectura traducidas a restricción de diseño, el mapa de once superficies con su criterio de recorte, los dos shells, seis flujos clave, la tabla canónica de estados con cinco filas propias y el mapa de estados por superficie que la Fase B2 tiene que demostrar, el compromiso WCAG 2.2 AA con la resolución de accesibilidad de la escena tridimensional y su plan de verificación, la política de un solo idioma con la excepción de los valores declarado y derivado, los criterios de performance percibida sin optimismo de interfaz, y la taxonomía de cinco clases de error con su tono y sus tres prohibiciones de contenido. |
 | 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-04**: §3.1 deja de usar el anglicismo que el propio `Glosario-UX.md` §4 registra como prohibido; los dos diálogos de confirmación de `Resolucion-Del-Trabajo` se nombran «diálogos con flujo propio», que es la traducción que esta sección adoptó de «un modal con flujo propio» de `Rules-UX-UI-DX.md` §3.2. |
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **F-25**: §7 reescribe el criterio «Movimiento reducido respetado», que afirmaba que la escena tridimensional no gira sola en ningún momento. La capacidad nueva vuelve falsa esa afirmación, de modo que el movimiento ambiental pasa de evitarse a resolverse: dos movimientos independientes gobernados por casillas visibles, detenidos durante el arrastre y con la pestaña oculta, y destildados de arranque cuando el sistema declara preferencia de movimiento reducido. §3.1 ya declaraba a `Resolucion-Del-Trabajo` como alojada en `Vista-De-Trabajo` y no requiere corrección. |
-| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, con sus dos decisiones. **(a) F-26**: §3.1 declara el tercer curso de `Credencial-Propia` y las dos operaciones nuevas de `Panel-De-Cuentas`; §3.2 declara que el **cambio forzado es el único uso del shell de acceso con sesión iniciada**, con su fundamento; §3.4 reescribe la segunda fricción anticipada —«no hay recuperación» pasa a «no hay recuperación **autónoma**», y el remedio deja de ser la baja que arrastra los trabajos y pasa a ser el reseteo que los conserva—; §4.2 suma cuatro estados de superficie. **(b) F-25**: §7 completa el criterio de movimiento reducido con **quién consulta la preferencia** —la pieza pública, que la traduce a dos valores de verdad— y con el enunciado de que el visor **no consulta nada**, que es lo que RA-02 exige. Sube minor: agrega un curso, dos operaciones y cuatro estados al marco, y precisa un criterio de accesibilidad, sin invalidar ninguna decisión previa. |

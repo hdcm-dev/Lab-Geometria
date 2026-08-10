@@ -192,7 +192,7 @@ Las **cinco** precisiones que rigen en toda la categoría, transcriptas de `Espe
 
 ### 2.5 Lo que esta capa produce y lo que el dominio rechaza sin que acá ocurra
 
-Los diez casos de uso orquestan doce casos de uso del dominio, y **el dominio declara rechazos que esta capa no puede producir**. Su ausencia del catálogo no es un olvido: la 02 los nombra uno por uno en sus §10 para que no se lea así, y acá se reúnen en una sola tabla porque para quien implementa la capa es información operativa. **Ninguna fila de esta tabla es una condición de este catálogo**, y por eso ninguna entra en los recuentos de §7.
+Los once casos de uso orquestan doce casos de uso del dominio, y **el dominio declara rechazos que esta capa no puede producir**. Su ausencia del catálogo no es un olvido: la 02 los nombra uno por uno en sus §10 para que no se lea así, y acá se reúnen en una sola tabla porque para quien implementa la capa es información operativa. **Ninguna fila de esta tabla es una condición de este catálogo**, y por eso ninguna entra en los recuentos de §7.
 
 | Rechazo del dominio | Origen | Por qué acá no ocurre | Dónde está declarado |
 | --- | --- | --- | --- |
@@ -500,7 +500,7 @@ Tres notas sobre las columnas, para que nadie las complete con atribuciones inve
 
 | Caso | Situación |
 | --- | --- |
-| `ESTADO_INICIAL_NO_NEGOCIABLE` sin regla de negocio | **Ninguna de las once reglas enuncia con qué estado nace una cuenta.** La atribución a RN-01 se retiró aguas arriba: ese enunciado habla de la unicidad del administrador y de la ventana en la que su alta es posible, no del estado inicial. El origen está en el modelo de estados de cuenta del dominio y en los dos caminos de alta |
+| `ESTADO_INICIAL_NO_NEGOCIABLE` sin regla de negocio | **Ninguna de las trece reglas enuncia con qué estado nace una cuenta.** La atribución a RN-01 se retiró aguas arriba: ese enunciado habla de la unicidad del administrador y de la ventana en la que su alta es posible, no del estado inicial. El origen está en el modelo de estados de cuenta del dominio y en los dos caminos de alta |
 | RN-08 sin condición que la haga cumplir por rechazo | Tiene una, `TEXTO_ORIGINAL_ALTERADO`, desde la corrección de esta ronda. Su otra mitad sigue siendo un **comportamiento** y no una comprobación: el texto no se reescribe, ni siquiera cuando la interpretación falla, y `INTERPRETACION_NO_DISPONIBLE` la cita como garantía y no como violación |
 | Columnas con guion | No son un vacío a completar: hay condiciones que sostienen una precondición del contrato sin que ninguna regla de negocio las enuncie por separado, como `CREDENCIAL_VIGENTE_NO_VERIFICADA`, `CREDENCIAL_YA_FIJADA` o `TRABAJO_INEXISTENTE`. Inventarles una regla sería el defecto contrario al que este catálogo evita |
 
