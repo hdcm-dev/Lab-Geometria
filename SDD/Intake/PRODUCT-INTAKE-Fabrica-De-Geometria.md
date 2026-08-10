@@ -1463,7 +1463,7 @@ Procedencia: `Definicion-Contrato-De-Fachada.md`, condición `DIMENSION_NO_LEGIB
 3. El código es `DIMENSION_NO_LEGIBLE` y **no** `JSON_INVALIDO`: el texto es JSON sintácticamente válido, y lo que falla es la lectura de un valor. Confundir los dos códigos es el error que este escenario detecta.
 4. **La distinción de responsabilidad**: el visor informa por qué no dibujó una pieza; **decidir si el trabajo pasa a `Pendiente` es del validador**, no del bundle (RA-02).
 5. **El desenlace del envío es error, no advertencia** [DECISIÓN 2026-08-09]. El trabajo **queda en `Borrador`** y no pasa a `Pendiente`, con el mensaje localizado por índice de figura y campo que exige RN-09. El fundamento es que una dimensión ilegible **no es un valor mal calculado sino un valor que no se pudo leer**: la diferencia con las advertencias de §20.E-3 es que allá el sistema entiende lo que el alumno escribió y discrepa del resultado, y acá no lo entiende. Dejarlo pasar como advertencia entregaría al docente un trabajo con una pieza invisible, y el alumno se enteraría de que le faltaba una figura recién al ver el rechazo. Es además el modo de falla **más probable** de todos los escenarios, porque lo produce la configuración regional de la máquina y no un error de programación del alumno.
-5. El árbol del JSON **muestra las dos piezas**, incluida la que no se dibujó. Se lee lo que el alumno escribió, no lo que la escena logró representar.
+6. El árbol del JSON **muestra las dos piezas**, incluida la que no se dibujó. Se lee lo que el alumno escribió, no lo que la escena logró representar.
 
 ## §21 Anexo B — Cobertura de campos y trazabilidad de los ejemplos
 
