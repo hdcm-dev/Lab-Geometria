@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -60,7 +60,7 @@ Las dos omisiones son deliberadas y están declaradas también en `Especificacio
 3. Leer los casos de uso en el orden del ciclo de vida —CU-01, CU-02, CU-03, CU-04, CU-05, y después CU-07, que gobierna el movimiento sobre una instancia ya viva— y cerrar con CU-06, que los recorre juntos sin backend. **CU-07 lleva el número más alto y se lee antes que CU-06**: se emitió más tarde, con la sexta función, y no se renumeró para no romper referencias ya emitidas aguas abajo.
 4. Tener a mano `Glosario-Funcional.md` si se entra por una sección suelta: es donde se resuelve a qué apunta la forma desnuda «pieza».
 
-Advertencia para las categorías aguas abajo: los nombres de las cinco primeras funciones son los que declara el intake y no se cambian; el de la **sexta**, `establecerMovimiento`, lo acuña `Definicion-Contrato-De-Fachada.md` §4.6 por decisión del Product Owner del 2026-08-09 y queda sujeto a la consolidación del intake, que todavía declara cinco; los nombres de funciones internas, de clases y de campos del resultado **no están fijados acá** y se anclan en la etapa que implementa la fachada. La elección del motor de dibujo tridimensional y su versión es decisión de 05-Arquitectura-Tecnica, y la maqueta de este proyecto de código pertenece a su propia fase, posterior a esta.
+Advertencia para las categorías aguas abajo: los nombres de las cinco primeras funciones son los que declara el intake y no se cambian; el de la **sexta**, `establecerMovimiento`, lo acuñó `Definicion-Contrato-De-Fachada.md` §4.6 por decisión del Product Owner del 2026-08-09 y **el intake ya lo consolidó** en su versión 1.6, de modo que §17.7 P.3 declara las seis; los nombres de funciones internas, de clases y de campos del resultado **no están fijados acá** y se anclan en la etapa que implementa la fachada. La elección del motor de dibujo tridimensional y su versión es decisión de 05-Arquitectura-Tecnica, y la maqueta de este proyecto de código pertenece a su propia fase, posterior a esta.
 
 ## 5. Control de cambios
 
@@ -69,3 +69,4 @@ Advertencia para las categorías aguas abajo: los nombres de las cinco primeras 
 | 1.0 | 2026-08-08 | Emisión inicial. Índice navegable de los nueve documentos vigentes de la categoría, declaración de las dos omisiones de artefacto con su motivo y guía de lectura para revisores externos. |
 | 1.0 | 2026-08-08 | Corrección absorbida del audit `B-02-03-GeometriaFactory-Visor-r1.md`, sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-10**: la cabecera declaraba como upstream dos carpetas enteras, que no son vínculo verificable; pasa a citar los documentos y las secciones efectivamente consumidos. |
 | 1.0 | 2026-08-09 | Absorción de las **dos decisiones del Product Owner** de la **Fase B2**. **Sin subir versión** por `Master-Prompt.md` §5 (documento en estado `Propuesto`). §2 suma **`CU-07`**, el contrato de uso de la sexta función de la fachada, y la sección pasa a tener **diez** documentos vigentes; la descripción del concepto central pasa a **seis** funciones y declara que acuña la sexta. §4 actualiza el orden de lectura —CU-07 se lee antes que CU-06 aunque lleve número más alto, y se declara por qué no se renumera— y la advertencia aguas abajo distingue las cinco funciones que nombra el intake de la sexta, acuñada acá y **pendiente de consolidación en el intake**. Las dos omisiones de artefacto no cambian. |
+| 1.1 | 2026-08-09 | **Cierra la parte del hallazgo `F26-11`** que alcanza a este índice, del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. **§4**: la advertencia aguas abajo declaraba la sexta función «sujeta a la consolidación del intake, que todavía declara cinco», y el intake la consolidó en su versión **1.6**: §17.7 P.3 declara las seis. Se corrige la afirmación. Ningún documento de la sección, ningún caso de uso y ningún orden de lectura cambia. |

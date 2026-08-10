@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** README.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -77,7 +77,7 @@ La serie es **contigua de RN-01 a RN-13**. La columna del invariante es la corre
 | RN-12 | [El reseteo de contraseña conserva la cuenta y sus trabajos](Reglas-De-Negocio/RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | INV-09 |
 | RN-13 | [Con la contraseña provisoria sin cambiar, la cuenta no llega a ninguna otra parte](Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | INV-09 |
 
-Las cuatro sin invariante lo están por un motivo declarado en `PRODUCT-INTAKE` §17.1.P.2: RN-07, RN-08 y RN-09 describen comportamientos y no condiciones permanentes, y RN-11 es una regla de alcance de consulta. **RN-12 y RN-13 comparten INV-09**, y así lo declara la misma sección del intake: son las dos mitades de la misma condición.
+Las cuatro sin invariante lo están por un motivo declarado en `PRODUCT-INTAKE` §17.1.P.2: RN-07, RN-08 y RN-09 describen comportamientos y no condiciones permanentes, y RN-11 es una regla de alcance de consulta. **RN-12 y RN-13 comparten INV-09**: son las dos mitades de la misma condición. Esa lectura la sostiene la **columna «regla de negocio que sostiene» de la fila INV-09** de esa sección del intake, que dice «RN-12, RN-13», y **no su prosa**, que enumera a RN-12 entre las reglas sin invariante. La ambigüedad es del intake, está declarada en `Especificacion-Funcional.md` §8 y su fundamento está en `Definicion-Modelo-De-Dominio.md` §4.3.
 
 **Dos nombres de archivo conservan un slug que ya no describe del todo su enunciado** —`RN-04-Eliminacion-Acotada-Al-Borrador.md` y `RN-05-Finalizacion-Sin-Errores-De-Validacion.md`—, porque otras categorías ya los citan por esa ruta. La decisión está declarada en `Especificacion-Funcional.md` §8.
 
@@ -116,3 +116,4 @@ Las cuatro sin invariante lo están por un motivo declarado en `PRODUCT-INTAKE` 
 | 1.3 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-07**: §4 conservaba un «once casos de uso» en prosa viva, que la emisión de CU-12 dejó desactualizado. |
 | 1.1 | 2026-08-09 | Absorbe el circuito de revisión de `PRODUCT-INTAKE` 1.3 y la resolución de las dos ambigüedades que esta categoría había elevado. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. Los casos de uso pasan de nueve a **once** y las reglas de siete a **once contiguas**, con su invariante y con las cuatro que no tienen ninguno. **Corrige la atribución de INV-04**, que la versión anterior daba como el invariante de RN-08. El orden de lectura incorpora el desenlace y el par simétrico de alcance; §1 registra las carpetas `_legacy/`; §3 declara los dos nombres de archivo que se conservan por estabilidad de citación; y §6 remite al glosario raíz por los términos nuevos y por la forma calificada de `Pendiente`. |
 | 1.4 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**, que incorpora la capacidad **F-26** —reseteo de contraseña por el administrador—, las reglas **RN-12** y **RN-13** y el invariante **INV-09**. §2 pasa de doce a **trece casos de uso** con **CU-13**; §3 pasa de once a **trece reglas contiguas**, con las dos nuevas compartiendo INV-09; §1, §4 y §5 actualizan los recuentos de invariantes —de siete a **nueve vigentes**, con INV-08 ya adoptado por el intake— y de máquinas de estado, que pasan a **tres** con la de la marca de cambio de contraseña pendiente. §4 ubica CU-13 al final del bloque del ciclo de vida de la cuenta, con su motivo. |
+| 1.5 | 2026-08-09 | **Cierra el hallazgo `F26-09`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. **§3** afirmaba que el intake §17.1.P.2 declara que RN-12 y RN-13 comparten INV-09, cuando la prosa de esa sección enumera a RN-12 entre las reglas **sin** invariante asociado; lo que sostiene la lectura es la columna «regla de negocio que sostiene» de la fila INV-09. Se corrige la atribución, se declara que la ambigüedad es del intake y se remite a `Especificacion-Funcional.md` §8 y a `Definicion-Modelo-De-Dominio.md` §4.3, que ya la calificaba correctamente. Ningún documento de la sección, ninguna regla y ningún invariante cambia. |
