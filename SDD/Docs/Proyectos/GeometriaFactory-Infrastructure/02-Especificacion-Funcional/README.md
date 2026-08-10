@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -28,8 +28,8 @@
 
 | Documento | Propósito | Estado |
 | --- | --- | --- |
-| [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro: catálogo, los cuatro puertos y los dos mecanismos, la frontera entre mecanismo y decisión, la matriz NB → CU → RN → US, el criterio de recorte, las omisiones y los diez puntos abiertos. **Es el punto de entrada** | Propuesto |
-| [`Definicion-Contrato-Del-Validador-De-Figuras.md`](Definicion-Contrato-Del-Validador-De-Figuras.md) | Documento de concepto central: las cuatro trampas del formato, las siete garantías, los tipos que reconstruye, los ocho escenarios y la cobertura de la batería obligatoria de nueve casos | Propuesto |
+| [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro: catálogo, los cuatro puertos y los dos mecanismos, la frontera entre mecanismo y decisión, la matriz NB → CU → RN → US, el criterio de recorte, las omisiones y los quince puntos abiertos. **Es el punto de entrada** | Propuesto |
+| [`Definicion-Contrato-Del-Validador-De-Figuras.md`](Definicion-Contrato-Del-Validador-De-Figuras.md) | Documento de concepto central: las cuatro trampas del formato, las siete garantías, los tipos que reconstruye, los ocho escenarios y la cobertura de los nueve casos de la batería obligatoria del producto más el décimo que agrega §21 | Propuesto |
 | [`Modelo-Datos/Modelo-Conceptual.md`](Modelo-Datos/Modelo-Conceptual.md) | Las cinco entidades, sus atributos, las cuatro relaciones, los cuatro conjuntos cerrados y las nueve decisiones de almacenamiento | Propuesto |
 | `Modelo-Datos/reglas-conceptuales-de-modelo/` | Siete reglas conceptuales de modelo, una por archivo | Propuesto |
 | [`Glosario-Funcional.md`](Glosario-Funcional.md) | Vocabulario que esta categoría acuña y los cuatro términos con más de un referente | Propuesto |
@@ -93,10 +93,12 @@ Para el lector que llega desde la capa de aplicación: la tabla de §3 del índi
 - **Cada caso de uso lleva una sección §17 «Compatibilidad de la superficie pública»**, que es la sección opcional que `Rules-Especificacion-Funcional.md` §4.3 asigna al tipo `library`, con ese número. No es una sección obligatoria desplazada.
 - **Los escenarios se citan por el identificador del intake** —`E-1` a `E-8`— y las trampas del formato por el suyo —`T1` a `T4`—, sin renumerar. **Ningún dato de prueba se inventó**: es la regla de delivery del producto que prohíbe inventar textos de prueba.
 - Esta categoría **no toma decisiones de arquitectura**: los nombres de tipos, la elección de la función de derivación, el esquema físico y los ADR pertenecen a `05-Arquitectura-Tecnica`, y la estrategia de pruebas a `08-Calidad-Y-Pruebas`. Lo que acá se declara como «tests previstos» es una previsión, no un plan.
-- **Diez puntos abiertos**, ninguno bloqueante: cinco propios de esta categoría —entre ellos qué devuelve el validador ante el texto de `E-8` y cómo se sostiene que la provisoria no se repite— y cinco que vienen declarados de aguas arriba y **no se reabren**. Están en §11 del índice maestro.
+- **Quince puntos abiertos**, ninguno bloqueante: **nueve propios** de esta categoría —entre ellos cómo se sostiene que la provisoria no se repite, de dónde sale el valor derivado del área de una pieza volumétrica y la condición derivada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`— y **seis** que vienen declarados de aguas arriba y **no se reabren**. Están en §11 del índice maestro.
+- **Qué devuelve el validador ante el texto de `E-8` ya no es un punto abierto.** Lo resolvió el Product Owner y el `PRODUCT-INTAKE` **1.12** lo declara en §20.E-8 punto 5 y en la fila «Dimensión no legible» de §21: es **error**, el trabajo **queda en `Borrador`** y no pasa a `Pendiente`, con el mensaje localizado por índice de figura y campo que exige RN-09. El resultado está en `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y §7 y verificado por `CU-01` **CA-12**.
 
 ## 7. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de los diez casos de uso, de las siete reglas conceptuales de modelo y de los tres documentos transversales de la sección; orden de lectura de siete pasos, con la indicación de leer el documento de concepto central **antes** de escribir una línea de lectura de texto; la omisión de las reglas de negocio, el apartamiento declarado por el que se emite el modelo de datos y el fundamento del concepto central elegido; y las notas de uso de la sección. |
+| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: la nota de puntos abiertos deja de remitir a un punto abierto que ya no existe y declara el desenlace del envío de `E-8` que el intake 1.12 fija —error, trabajo en `Borrador`, mensaje localizado por índice de figura y campo—. **H-04**: el recuento de puntos abiertos pasa de **diez** a **quince**, nueve propios y seis heredados, tras incorporar el índice maestro los seis que declaraban documentos subordinados y salir el de `E-8`. **H-03**, por arrastre: el catálogo de §2 deja de describir la cobertura del documento de concepto central como «batería obligatoria de nueve casos» y nombra los nueve del producto más el décimo que agrega §21. |

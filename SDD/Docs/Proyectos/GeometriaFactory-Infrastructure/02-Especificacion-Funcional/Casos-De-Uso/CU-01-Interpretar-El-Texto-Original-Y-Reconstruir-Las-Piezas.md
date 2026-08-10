@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-09), §4.1 (RN-08, RN-09), §11 (RN-B3), §17.3.P.3, §17.3.P.6, §17.3.P.11 puntos 1 y 2, §20.E-1 a §20.E-7 y §21; implementa el puerto de validación de figuras que declara `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3 y consume su [`CU-05`](../../../GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md); alimenta [`CU-06`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) de GeometriaFactory-Domain
+**Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-09), §4.1 (RN-08, RN-09), §11 (RN-B3), §17.3.P.3, §17.3.P.6, §17.3.P.11 puntos 1 y 2, §20.E-1 a §20.E-8 —con §20.E-8 «Qué verificar» punto 5, el desenlace del envío que fijó el intake 1.12— y §21; implementa el puerto de validación de figuras que declara `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3 y consume su [`CU-05`](../../../GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md); alimenta [`CU-06`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) de GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -93,7 +93,7 @@ El alumno es el sujeto de la regla: es quien escribió el texto. **No es actor**
 
 ## 8. Criterios de aceptación
 
-Los seis primeros son escenarios del intake, transcriptos por su identificador y con el resultado que el propio intake declara en su §20 y en la matriz de su §21. **No se inventó ningún dato de prueba**: es la regla de delivery 5 de §15 del intake.
+Los siete primeros y CA-12 son escenarios del intake, transcriptos por su identificador y con el resultado que el propio intake declara en su §20 y en la matriz de su §21. **No se inventó ningún dato de prueba**: es la regla de delivery 5 de §15 del intake.
 
 | ID | Given | When | Then |
 | --- | --- | --- | --- |
@@ -108,6 +108,7 @@ Los seis primeros son escenarios del intake, transcriptos por su identificador y
 | CA-09 | Un texto cualquiera de los escenarios anteriores | Se interpreta y se compara el texto devuelto con el recibido | Son **idénticos carácter por carácter**: este contrato no reescribe, no reordena y no normaliza el texto del alumno (RN-08) |
 | CA-10 | Un texto que no se puede leer ni con tolerancia a comas finales | Se interpreta | Se devuelven **0 figuras, 0 piezas y 1 observación de error de validación**, y **no** el código `INTERPRETACION_NO_DISPONIBLE`: un texto ilegible es un resultado del producto, no una avería del adaptador |
 | CA-11 | Cualquiera de los textos anteriores, con la pestaña de red de un entorno de prueba observada | Se interpreta | **0 peticiones de red originadas por este contrato.** Recibe texto y devuelve observaciones (`PRODUCT-INTAKE` §17.3.P.3) |
+| CA-12 | El texto del escenario **E-8**: un ortoedro válido en la posición 0 y un cubo en la posición 1 con `"Largo": "3,50"` y `"Ancho": "3,50"` como cadenas, porque el emisor escribe la coma decimal de su cultura | Se interpreta | Se devuelve cantidad de figuras del conjunto raíz **2**, **1 pieza reconstruida** —el ortoedro de la posición 0— y **1 observación de especie error de validación que indica posición 1 y campo `Largo`**. La posición 1 queda reservada. El código **no** es `JSON_INVALIDO`: el texto es JSON sintácticamente válido y lo que falla es la lectura de un valor. Por RN-05 el trabajo **queda en `Borrador`** y no pasa a `Pendiente` (`PRODUCT-INTAKE` 1.12 §20.E-8 punto 5 y §21) |
 
 ## 9. Trazabilidad
 
@@ -117,10 +118,10 @@ Los seis primeros son escenarios del intake, transcriptos por su identificador y
 | Reglas de negocio aplicables | [RN-08](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md), [RN-09](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md), [RN-05](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) por el efecto de las observaciones que emite |
 | Puerto que implementa | Validación de figuras, en su mitad de interpretación y reconstrucción |
 | Consumidor | `GeometriaFactory-Application` [`CU-05`](../../../GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) |
-| Escenarios del intake que lo ejercitan | E-1, E-2, E-3, E-4, E-5, E-6, E-7 (§20), con la matriz de §21 |
+| Escenarios del intake que lo ejercitan | E-1, E-2, E-3, E-4, E-5, E-6, E-7 y E-8 (§20), con la matriz de §21 |
 | Historias de usuario a generar en 06 | US-01, US-02, US-03, US-04 |
 | Componentes esperados en 05 | Adaptador del puerto de validación de figuras, con la lectura tolerante y la tabla de tipos reconstruibles |
-| Tests previstos en 08 | Los ocho casos de la batería obligatoria que corresponden a la interpretación, con los textos de E-1 a E-7 como fixtures y **sin motor de persistencia**. La cobertura mínima del validador es la más alta del producto |
+| Tests previstos en 08 | Los ocho casos de la batería obligatoria que corresponden a la interpretación, con los textos de E-1 a E-8 como fixtures y **sin motor de persistencia**. La cobertura mínima del validador es la más alta del producto |
 
 ## 10. Notas y supuestos
 
@@ -128,7 +129,7 @@ Los seis primeros son escenarios del intake, transcriptos por su identificador y
 - **La familia plana o volumétrica no viaja reconstruida como dato guardado**: se deriva del `Tipo`. Es decisión pre-tomada aguas arriba y su consecuencia sobre el almacén está en `RC-04`.
 - **Una figura no reconstruida reserva su posición.** No se compacta el conjunto: si se compactara, la posición que la observación designa dejaría de coincidir con la figura que el alumno escribió, y RN-09 dejaría de servirle para encontrarla.
 - **Un error de validación no es una condición de error de este contrato.** Es un resultado, es una entidad del dominio y es lo que el alumno tiene que ver. Confundirlos es el defecto que la §1.2 del catálogo de errores de la categoría 03 previene.
-- **El escenario E-8 no es de este contrato**, y conviene decirlo porque su payload sí es interpretable acá: su texto es JSON sintácticamente válido y lo que falla es la lectura de un valor, `"3,50"` como cadena. El propio intake lo declara «el borde del visor, no el del validador» (§20) y su punto 4 dice que ese escenario **no prescribe el desenlace del envío**. Qué devuelve **este** contrato ante ese texto no está declarado por ninguna fuente y queda como punto abierto en `Especificacion-Funcional.md` §11.
+- **El escenario E-8 sí es de este contrato en cuanto al desenlace del envío, y conviene decirlo porque se lee al revés con facilidad.** El intake lo presenta como «el borde del visor, no el del validador» (§20) y la **condición** `DIMENSION_NO_LEGIBLE` es de la fachada del visor, no de acá: es el código con el que el bundle enumera la pieza que no dibujó. Pero el **desenlace del envío** lo decide el validador —lo dice el punto 4 del propio escenario— y el `PRODUCT-INTAKE` **1.12** ya declara cuál es: **error, no advertencia**, con el trabajo en `Borrador` y el mensaje localizado por índice de figura y campo que exige RN-09 (§20.E-8 punto 5, y la fila «Dimensión no legible» de §21). Su payload es interpretable acá: el texto es JSON sintácticamente válido y lo que falla es la lectura de un valor, `"3,50"` como cadena. **CA-12** lo verifica, con la misma forma que CA-04 tiene para E-5. El fundamento de que sea error es que una dimensión ilegible **no es un valor mal calculado sino un valor que no se pudo leer**: en las advertencias de E-3 el sistema entiende lo que el alumno escribió y discrepa del resultado, y acá no lo entiende.
 - **`RectanguloDesarrollado` no tiene escenario propio** y aparece sólo como componente `Lado` del cilindro, en E-1 y en E-7. Así lo emite el programa, y el intake declara en §21 que no se agregó un escenario que lo use como pieza suelta porque ninguna fuente lo documenta como salida real.
 - El tiempo de CA-08 se toma de la asunción de requerimientos no funcionales declarada aguas arriba, pendiente de confirmación del Product Owner; se usa como valor vigente.
 
@@ -137,6 +138,7 @@ Los seis primeros son escenarios del intake, transcriptos por su identificador y
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: se incorpora **CA-12** con el texto del escenario `E-8`, con la misma forma que CA-04 tiene para `E-5` —cantidad 2, 1 pieza reconstruida, 1 observación de especie error de validación con posición 1 y campo `Largo`, posición reservada y trabajo en `Borrador` por RN-05—; la nota de §10 deja de declarar el punto abierto y declara que el desenlace del envío **sí** es de este contrato, distinguiéndolo de la condición `DIMENSION_NO_LEGIBLE`, que sigue siendo de la fachada del visor; §9 suma `E-8` a los escenarios que lo ejercitan y sus fixtures pasan a ser `E-1` a `E-8`. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12** y extiende el tramo de §20 hasta `E-8`. **Corrección de recuento no señalada por la auditoría**: el encabezado de §8 decía «los seis primeros son escenarios del intake» cuando CA-01 a CA-07 transcriben **siete**; pasa a decir siete, más CA-12. |
 
 ## 17. Compatibilidad de la superficie pública
 

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Glosario-Funcional.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` y `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Glosario-Funcional.md` (vocabulario de las dos categorías de las que este proyecto de código depende); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.2, §12, §12.1, §17.3
+**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` y `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Glosario-Funcional.md` (vocabulario de las dos categorías de las que este proyecto de código depende); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.2, §12, §12.1, §17.3
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Infrastructure
 
 ---
@@ -150,3 +150,4 @@ Los seis términos normativos del framework —producto, unidad de entrega, mód
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara los diecisiete términos que esta categoría acuña —entre ellos las cuatro trampas del formato, la lectura tolerante, el criterio de existencia contra veracidad, el operador estricto, la posición reservada, la terminación degradada, el arranque detenido y la regla conceptual de modelo—, los cuatro términos con más de un referente con la forma que corresponde a cada uno y su evidencia de colisión —«validador», que es la polisemia propia de esta capa, «repositorio», que gana acá un tercer referente, «derivado», que es la que más caro sale, y `Pendiente`—, los tres casos que deliberadamente no se corrigen, y los términos que se referencian del glosario raíz y de los glosarios de `GeometriaFactory-Domain` y de `GeometriaFactory-Application` sin redefinirlos. |
+| 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |

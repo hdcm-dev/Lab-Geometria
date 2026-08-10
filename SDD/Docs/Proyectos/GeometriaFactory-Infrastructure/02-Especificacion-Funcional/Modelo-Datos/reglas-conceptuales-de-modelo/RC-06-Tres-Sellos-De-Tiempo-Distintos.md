@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** RC-06-Tres-Sellos-De-Tiempo-Distintos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §17.3.P.4, «Ampliación del 2026-08-09: sellos de tiempo del trabajo» **[DECISIÓN del Product Owner]**, y «El JSON del alumno no lleva fechas y no se le agrega ninguna» **[DECISIÓN 2026-08-09]**; §17.2.P.11 punto 3 (el reloj es un puerto); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Especificacion-Funcional.md` §9, que registra el cierre de este punto
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.3.P.4, «Ampliación del 2026-08-09: sellos de tiempo del trabajo» **[DECISIÓN del Product Owner]**, y «El JSON del alumno no lleva fechas y no se le agrega ninguna» **[DECISIÓN 2026-08-09]**; §17.2.P.11 punto 3 (el reloj es un puerto); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Especificacion-Funcional.md` §9, que registra el cierre de este punto
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -57,3 +57,4 @@ No hay rechazo del almacén: escribir el sello equivocado en la columna equivoca
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** RC-04-La-Familia-No-Se-Persiste.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §17.1.P.11 punto 4 («la familia plana/volumétrica **no se persiste**: se deriva de `Tipo` por tabla de consulta»), §20.E-7; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` (entrada «familia plana o volumétrica»)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.11 punto 4 («la familia plana/volumétrica **no se persiste**: se deriva de `Tipo` por tabla de consulta»), §20.E-7; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` (entrada «familia plana o volumétrica»)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -47,3 +47,4 @@ Por inspección del esquema: **ninguna columna del almacén guarda la familia**.
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |

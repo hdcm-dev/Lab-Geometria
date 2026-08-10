@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-03, F-24), §4.1 (RN-04, RN-07), §7 (CL-6), §17.3.P.4; implementa el retiro del puerto de repositorio de trabajos y del de cuentas de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, y materializa el arrastre que declara su [`CU-02`](../../../GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-Las-Cuentas-De-La-Comision.md)
+**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-03, F-24), §4.1 (RN-04, RN-07), §7 (CL-6), §17.3.P.4; implementa el retiro del puerto de repositorio de trabajos y del de cuentas de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, y materializa el arrastre que declara su [`CU-02`](../../../GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-Las-Cuentas-De-La-Comision.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -105,7 +105,7 @@ El alumno y el administrador son sujetos de las reglas: uno pierde sus trabajos,
 
 ## 10. Notas y supuestos
 
-- **El reseteo de contraseña no pasa por acá y es deliberado.** `CU-07` conserva la cuenta y **todos** sus trabajos: el reseteo no dispara RN-07, y separarlo del retiro es lo que impide que un olvido de contraseña cueste la cursada entera. Es la confusión que la capacidad de reseteo vino a cerrar y este contrato no la reintroduce.
+- **El reseteo de contraseña no pasa por acá y es deliberado.** Quien conserva la cuenta y **todos** sus trabajos es **RN-12**, cuyo tramo en esta capa `Especificacion-Funcional.md` §6 asigna a `CU-05` —que escribe la marca sin tocar el estado ni los trabajos— y a este `CU-04` **por contraste**. El reseteo no dispara RN-07, y separarlo del retiro es lo que impide que un olvido de contraseña cueste la cursada entera. Es la confusión que la capacidad de reseteo vino a cerrar y este contrato no la reintroduce.
 - **La confirmación escrita del correo no se comprueba acá.** Es del consumidor, y llega resuelta. Este contrato no puede protegerse solo: si le piden retirar, retira.
 - **El borrado del administrador alcanza cualquier estado que él ve.** Este contrato no distingue: quien acota el alcance es la capa de aplicación.
 - **No hay borrado lógico y no se propone.** Agregar una marca de retirado cambiaría el modelo del producto y volvería falso el criterio con el que RN-07 se verifica.
@@ -115,6 +115,7 @@ El alumno y el administrador son sujetos de las reglas: uno pierde sus trabajos,
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-05**: la primera nota de §10 atribuía a `CU-07` la conservación de la cuenta y de todos sus trabajos, que el `CU-07` local —«Producir la contraseña provisoria del reseteo»— no hace, porque no persiste, no toca la cuenta y no ve sus trabajos. La atribución pasa a **RN-12**, cuyo tramo en esta capa `Especificacion-Funcional.md` §6 asigna a `CU-05` y a este `CU-04` por contraste. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. |
 
 ## 17. Compatibilidad de la superficie pública
 

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-03-Guardar-Y-Recuperar-Los-Trabajos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.1 (RN-03, RN-08, RN-11), §7 (CL-1), §17.3.P.2, §17.3.P.4, §17.3.P.11 punto 2, §17.3.P.12; implementa el puerto de repositorio de trabajos de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; el modelo que materializa está en [`Modelo-Datos/Modelo-Conceptual.md`](../Modelo-Datos/Modelo-Conceptual.md)
+**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-03, RN-08, RN-11), §7 (CL-1), §17.3.P.2, §17.3.P.4, §17.3.P.11 punto 2, §17.3.P.12; implementa el puerto de repositorio de trabajos de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; el modelo que materializa está en [`Modelo-Datos/Modelo-Conceptual.md`](../Modelo-Datos/Modelo-Conceptual.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -121,6 +121,7 @@ Lo que este caso de uso **no** hace: no decide quién puede ver qué —eso lo r
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
 
 ## 17. Compatibilidad de la superficie pública
 

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md); [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §3 (D-2), §4 (F-10), §4.1 (RN-05, RN-08), §7 (CL-4), §17.3.P.10, §17.3.P.11 punto 1, §20.E-1 a §20.E-6 y §21; implementa la segunda mitad del puerto de validación de figuras de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; alimenta [`CU-07`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) de GeometriaFactory-Domain
+**Trazabilidad upstream:** [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md); [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §3 (D-2), §4 (F-10), §4.1 (RN-05, RN-08), §7 (CL-4), §17.3.P.10, §17.3.P.11 punto 1, §20.E-1 a §20.E-6 y §21; implementa la segunda mitad del puerto de validación de figuras de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; alimenta [`CU-07`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) de GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -75,7 +75,7 @@ El alumno es el sujeto de la regla: es quien declaró los valores.
 | --- | --- | --- |
 | `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` | Se pidió verificar sin que la reconstrucción de `CU-01` haya ocurrido | Termina sin verificar y sin emitir ninguna observación. **No se infiere un conjunto vacío**: un conjunto vacío es un resultado legítimo de la interpretación y devolver «0 advertencias» acá lo haría indistinguible de un trabajo verificado sin discrepancias |
 
-**Es la única condición de este contrato, y es una decisión derivada** —ninguna fuente la enuncia—: se declara como tal en §10 y en `Especificacion-Funcional.md` §11.
+**Es la única condición de este contrato, y es una decisión derivada** —ninguna fuente la enuncia—: se declara como tal en §10 y queda registrada como punto abierto propio de la categoría en `Especificacion-Funcional.md` §11.
 
 ## 7. Postcondiciones
 
@@ -114,9 +114,9 @@ El alumno es el sujeto de la regla: es quien declaró los valores.
 
 - **La tolerancia de 0.01 no es una asunción.** Sale de que el emisor redondea a dos decimales, y el intake la separa explícitamente de las asunciones numéricas de §22.
 - **El operador estricto sí es una decisión, y está tomada.** `PRODUCT-INTAKE` §17.3.P.10 la declara con su fundamento: sobre el escenario semilla decide si el producto devuelve las **dos** advertencias documentadas o tres. Toda implementación y todo caso de prueba lo usan.
-- **De dónde sale el valor derivado del área de una pieza volumétrica.** El intake lo muestra en dos lugares: el área del cilindro de E-1 se contrasta contra **la suma de sus componentes** (§17.3.P.10) y la del ortoedro de E-2 contra `2·49 + 4·147` (§20.E-2), que es la misma suma. En el cubo de E-3 el intake escribe la derivación como `6·l²`, que **coincide** con la suma de sus seis componentes declarados de 9.00: no hay contradicción entre las dos formas de escribirlo. El volumen, en cambio, se deriva de las dimensiones —`7·7·21`, `3³`—.
+- **De dónde sale el valor derivado del área de una pieza volumétrica.** El intake lo muestra en dos lugares: el área del cilindro de E-1 se contrasta contra **la suma de sus componentes** (§17.3.P.10) y la del ortoedro de E-2 contra `2·49 + 4·147` (§20.E-2), que es la misma suma. En el cubo de E-3 el intake escribe la derivación como `6·l²`, que **coincide** con la suma de sus seis componentes declarados de 9.00: no hay contradicción entre las dos formas de escribirlo. El volumen, en cambio, se deriva de las dimensiones —`7·7·21`, `3³`—. **Este contrato adopta la suma de componentes**, y como ninguna fuente enuncia la regla, el punto queda registrado como abierto en `Definicion-Contrato-Del-Validador-De-Figuras.md` §9 y en `Especificacion-Funcional.md` §11.
 - **Advertencia y error de validación son dos especies de la misma noción y no se confunden.** Sólo el error de validación impide el paso a estado `Pendiente`. Este contrato **nunca** emite errores de validación: los emite `CU-01`.
-- **La condición `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` es una decisión derivada de esta categoría.** Ninguna fuente la enuncia. Se declara porque la alternativa —devolver un conjunto vacío de advertencias— sería indistinguible de un trabajo verificado sin discrepancias, y eso convertiría un defecto de orquestación en un resultado creíble. Queda registrada como punto abierto.
+- **La condición `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` es una decisión derivada de esta categoría.** Ninguna fuente la enuncia. Se declara porque la alternativa —devolver un conjunto vacío de advertencias— sería indistinguible de un trabajo verificado sin discrepancias, y eso convertiría un defecto de orquestación en un resultado creíble. Queda registrada como punto abierto en `Especificacion-Funcional.md` §11.
 - **La partición frente a `CU-01` es la misma que el dominio hizo entre su `CU-06` y su `CU-07`**: trazan a necesidades distintas —NB-04 y NB-05—, con métricas distintas, y sus observaciones son de especies distintas con efectos opuestos sobre el estado del trabajo.
 
 ## 11. Control de cambios
@@ -124,6 +124,7 @@ El alumno es el sujeto de la regla: es quien declaró los valores.
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-04**: el cierre de §6 afirmaba que la condición `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` estaba declarada en `Especificacion-Funcional.md` §11 y §11 no la contenía; la afirmación se vuelve verdadera al incorporarse el punto a §11, y la remisión se reescribe para nombrar el registro que ahora existe. La nota de §10 sobre el valor derivado del área de una pieza volumétrica declara dónde queda registrado ese punto abierto —`Definicion-Contrato-Del-Validador-De-Figuras.md` §9 y `Especificacion-Funcional.md` §11—, que era el segundo de los seis que el índice maestro no recogía. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. |
 
 ## 17. Compatibilidad de la superficie pública
 

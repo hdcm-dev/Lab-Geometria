@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-10-Preparar-El-Almacen-Al-Arrancar.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §17.3.P.4, §17.3.P.7, §17.3.P.8, §17.3.P.11 punto 3, §17.5.P.4, §17.5.P.8 y §17.5.P.10 (el arranque en frío de CA-07, rotulado asunción allá); el arranque que lo invoca es responsabilidad declarada de `GeometriaFactory-Api`
+**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.3.P.4, §17.3.P.7, §17.3.P.8, §17.3.P.11 punto 3, §17.5.P.4, §17.5.P.8 y §17.5.P.10 (el arranque en frío de CA-07, rotulado asunción allá); el arranque que lo invoca es responsabilidad declarada de `GeometriaFactory-Api`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Infrastructure
 
 ---
@@ -118,6 +118,7 @@ Lo que este caso de uso **no** hace: no decide **cuándo** arrancar ni **dónde*
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
 
 ## 17. Compatibilidad de la superficie pública
 

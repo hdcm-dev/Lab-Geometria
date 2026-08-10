@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Modelo-Conceptual.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §17.3.P.4 íntegro —tabla de persistencia, modelo de datos, ampliación del 2026-08-09 sobre los sellos y ampliación del 2026-08-08 por el circuito de revisión—, §17.3.P.11, §17.3.P.12, §4.1 y §4.2 (modelo de estados del trabajo), §17.1.P.2 (invariantes); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`, que es el modelo del dominio que éste materializa
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.3.P.4 íntegro —tabla de persistencia, modelo de datos, ampliación del 2026-08-09 sobre los sellos y ampliación del 2026-08-08 por el circuito de revisión—, §17.3.P.11, §17.3.P.12, §4.1 y §4.2 (modelo de estados del trabajo), §17.1.P.2 (invariantes); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`, que es el modelo del dominio que éste materializa
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Infrastructure
 
 ---
@@ -183,3 +183,4 @@ erDiagram
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara las nueve decisiones de almacenamiento, las cinco entidades con sus atributos, las cuatro relaciones, los cuatro conjuntos cerrados, las siete reglas conceptuales de modelo con su archivo propio, la tabla de lo que no vive acá y los cuatro puntos abiertos. |
+| 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
