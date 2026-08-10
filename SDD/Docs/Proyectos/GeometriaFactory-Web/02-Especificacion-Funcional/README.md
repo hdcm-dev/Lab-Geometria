@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -34,7 +34,7 @@ Esta sección especifica **qué hace la persona** en la pieza pública del produ
 | [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro, catálogo, criterio de recorte, matriz NB→CU→RN→US, cobertura inversa, restricciones transversales y consumo del contrato de fachada | Propuesto |
 | [`Casos-De-Uso/CU-01-Registrar-La-Cuenta-De-Alumno.md`](Casos-De-Uso/CU-01-Registrar-La-Cuenta-De-Alumno.md) | El alumno se da de alta sin elegir contraseña y sin que se envíe correo | Propuesto |
 | [`Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md`](Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) | Sesión con la credencial custodiada del lado del servidor y rutas protegidas por papel | Propuesto |
-| [`Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md`](Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) | Primer ingreso efectivo y cambio de contraseña exigiendo la vigente | Propuesto |
+| [`Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md`](Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) | Primer ingreso y cambio de contraseña, **los dos exigiendo la vigente**: en el primer ingreso la vigente es la provisoria que produjo la habilitación | Propuesto |
 | [`Casos-De-Uso/CU-04-Administrar-Las-Cuentas-De-La-Comision.md`](Casos-De-Uso/CU-04-Administrar-Las-Cuentas-De-La-Comision.md) | Las **cinco** operaciones sobre una cuenta —incluido el **reseteo de contraseña**—, con la confirmación escrita de la baja | Propuesto |
 | [`Casos-De-Uso/CU-05-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md`](Casos-De-Uso/CU-05-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md) | La acción única de guardado y el estado que la interpretación decide | Propuesto |
 | [`Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md`](Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md) | Los cuatro estados a la vista y las acciones acotadas al borrador | Propuesto |
@@ -79,3 +79,4 @@ Advertencias para las categorías aguas abajo:
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**. Las restricciones transversales pasan de once a **trece** —RT-12, el confinamiento de la cuenta reseteada, y RT-13, la frontera del movimiento automático—; CU-04 pasa de cuatro a **cinco** operaciones sobre la cuenta; las reglas de negocio pasan a **trece**, con dos todavía sin archivo aguas arriba; y la fachada del visualizador pasa de cinco a **seis** funciones. |
 | 1.2 | 2026-08-09 | **Reconciliación con el `PRODUCT-INTAKE` 1.8 y con las categorías vecinas.** §4 dejaba escrito que RN-12 y RN-13 «todavía no tienen archivo» en `GeometriaFactory-Domain`: **lo tienen**, y la fila pasa a declarar que se enlazan como las otras once. El recuento de trece reglas y de trece restricciones transversales **no cambia**; lo que cambia en `Especificacion-Funcional.md` 1.2 es el enunciado de RT-12, que ahora declara que la cuenta reseteada llega al cambio **sin sesión de trabajo**, según la precisión de RN-13 en el intake 1.8. |
 | 1.3 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: las reglas del producto pasan de trece a **quince** con **RN-14** —la provisoria la produce el sistema— y **RN-15** —resetear no exige cuenta habilitada—, y las cuatro que entraron después de la emisión inicial tienen archivo en `GeometriaFactory-Domain`, de modo que la nota de omisión de `Reglas-De-Negocio/` actualiza su recuento. **Ningún documento de esta sección, ningún caso de uso y ninguna restricción transversal cambia.** Sube minor. |
+| 1.4 | 2026-08-10 | Alineación con `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**, que `CU-02` 1.3, `CU-03` 1.4 y `CU-04` 1.6 absorben: habilitar una cuenta produce su contraseña provisoria y **no queda ninguna ruta que fije una contraseña sin credencial vigente**. §1 reescribe la línea de `CU-03`. Ningún artefacto se agrega ni se omite y el orden de lectura no cambia. (Analista Funcional senior (AG-02)). |

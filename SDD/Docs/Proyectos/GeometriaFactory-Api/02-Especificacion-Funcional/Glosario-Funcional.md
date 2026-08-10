@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Glosario-Funcional.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Especificacion-Funcional.md` §3, §4 y §6 y `Definicion-Superficie-HTTP.md` completo, de este proyecto de código; los glosarios funcionales de `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Contracts` y `GeometriaFactory-Infrastructure`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §12 y §12.1; `Vocabulario-Rules.md` §2 y §9, en cuanto a los seis términos normativos y al criterio de polisemia
+**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Especificacion-Funcional.md` §3, §4 y §6 y `Definicion-Superficie-HTTP.md` completo, de este proyecto de código; los glosarios funcionales de `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Contracts` y `GeometriaFactory-Infrastructure`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §12 y §12.1; `Vocabulario-Rules.md` §2 y §9, en cuanto a los seis términos normativos y al criterio de polisemia
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `10-Examples` de GeometriaFactory-Api
 
 ---
@@ -41,10 +41,10 @@ Una precisión de vocabulario propia de esta categoría, que conviene fijar ante
 
 | Término canónico | Definición operativa | Artefactos donde aparece | Sinónimos y alias |
 | --- | --- | --- | --- |
-| **Punto de acceso** | Cada una de las **dieciséis** entradas de la superficie, identificada por `A-XX`, con su verbo, su ruta, el papel que exige y sus códigos de respuesta. **No es un caso de uso**: un caso de uso puede describir más de uno | `Definicion-Superficie-HTTP.md`, los doce casos de uso | «El punto» cuando ya está identificado. **No se dice «endpoint»** |
-| **Superficie HTTP** | El conjunto de los dieciséis puntos de acceso más las reglas que los gobiernan. **Es todo lo que este proyecto de código existe hacia afuera** | Los tres documentos y los casos de uso | «La superficie» cuando el proyecto de código está nombrado |
+| **Punto de acceso** | Cada una de las **quince** entradas de la superficie, identificada por `A-XX`, con su verbo, su ruta, el papel que exige y sus códigos de respuesta. **No es un caso de uso**: un caso de uso puede describir más de uno | `Definicion-Superficie-HTTP.md`, los doce casos de uso | «El punto» cuando ya está identificado. **No se dice «endpoint»** |
+| **Superficie HTTP** | El conjunto de los quince puntos de acceso más las reglas que los gobiernan. **Es todo lo que este proyecto de código existe hacia afuera** | Los tres documentos y los casos de uso | «La superficie» cuando el proyecto de código está nombrado |
 | **Código de respuesta** | El número con el que una petición termina. Son **diez** en toda la superficie | `Definicion-Superficie-HTTP.md`, los casos de uso | **No se dice «status» ni «status code»** |
-| **Código del contrato** | Cada uno de los **diecisiete** identificadores del conjunto cerrado que declara el ensamblado de contratos. **Esta categoría no agrega ninguno** | `Definicion-Superficie-HTTP.md`, `CU-09`, los casos de uso de puntos | «El código del conjunto cerrado». Ver §3.2 |
+| **Código del contrato** | Cada uno de los **quince** identificadores del conjunto cerrado que declara el ensamblado de contratos. **Esta categoría no agrega ninguno** | `Definicion-Superficie-HTTP.md`, `CU-09`, los casos de uso de puntos | «El código del conjunto cerrado». Ver §3.2 |
 | **Las dos traducciones** | El par de conversiones que toda terminación fallida atraviesa: de motivo interno a código del contrato, y de código del contrato a código de respuesta | `Definicion-Superficie-HTTP.md` §5, `CU-09` | — |
 | **Guardia de admisión** | La condición que las peticiones de los once puntos que exigen acceso atraviesan antes de llegar a un caso de uso: acceso, papel y marca | `CU-02`, `Definicion-Superficie-HTTP.md` | «La guardia» cuando ya está nombrada |
 | **Papel exigido** | El papel que un punto de acceso comprueba sobre el acceso firmado. **No es la autorización completa**, que se hace sobre el dato recuperado y vive en otra capa | `Definicion-Superficie-HTTP.md` §3, `CU-02` | — |
@@ -129,3 +129,4 @@ Trabajo; Pieza; Componente; Observación; Advertencia; Error de validación; Est
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara los **trece** términos que esta categoría acuña —entre ellos **punto de acceso**, **código de respuesta**, **código del contrato**, **las dos traducciones**, **la guardia de admisión**, **la ruta propuesta**, **la señal que no es un fallo** y **el hueco del conjunto cerrado**—; los **tres** términos con más de un referente con su forma obligatoria y su evidencia de colisión —«acceso», «código» y «punto»—, con las dos reglas de uso que de ahí salen; los dos casos que deliberadamente no se corrigen; y los términos referenciados del glosario raíz y de los cuatro proyectos de código vecinos, que no se redefinen, con la precisión de que **este proyecto de código sí es una unidad de entrega** en el sentido normativo. |
+| 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**. Tres entradas de §2 actualizan su recuento y ninguna cambia de referente: los **puntos de acceso** pasan de dieciséis a **quince** con el retiro de `A-04`, la **superficie HTTP** se define sobre esos quince, y los **códigos del contrato** pasan de diecisiete a **quince**. **No se acuña ningún término y no se retira ninguno.** Sube minor. |

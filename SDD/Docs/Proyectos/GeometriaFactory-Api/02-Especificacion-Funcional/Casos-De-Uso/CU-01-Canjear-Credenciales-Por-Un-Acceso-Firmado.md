@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-01-Canjear-Credenciales-Por-Un-Acceso-Firmado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-05), §4.1 (RN-06, RN-13), §14 (RA-01, RA-03), §17.5.P.3, §17.5.P.5 y su nota de seguridad, §11 (RN-B5); `Proyectos/GeometriaFactory-Contracts/.../CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md` completo; `Proyectos/GeometriaFactory-Application/.../CU-03-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md` y `CU-06-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md`
+**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (F-05, **F-04** precisada), §4.1 (RN-06, RN-13, **RN-16**), §14 (RA-01, RA-03), §17.5.P.3, §17.5.P.5 y su nota de seguridad, §11 (RN-B5); `Proyectos/GeometriaFactory-Contracts/.../CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md` completo; `Proyectos/GeometriaFactory-Application/.../CU-03-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md` y `CU-06-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -78,8 +78,8 @@ Es además el punto donde el producto acepta por escrito un riesgo: el intake §
 | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | Falta el correo o falta la contraseña. La respuesta **nombra el campo ausente**, que es un dato de la petición y no de la cuenta |
 | `CONTRATO_CREDENCIAL_INVALIDA` | `401` | El par no corresponde a ninguna cuenta. **Genérico: la respuesta no declara cuál de los dos campos falló** (intake §17.5.P.5) |
 | `CONTRATO_CUENTA_NO_HABILITADA` | `403` | La cuenta está `Pendiente` o `Bloqueado`. **Con motivo**, para que la persona sepa en qué situación está su cuenta |
-| `CONTRATO_CONTRASENA_NO_ESTABLECIDA` | `403` | La cuenta está habilitada y todavía no estableció su contraseña. Con motivo; la pieza pública lo convierte en el desvío a **A-04** |
-| `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | `403` | La cuenta tiene una provisoria sin cambiar. Con motivo; la pieza pública lo convierte en el desvío a **A-05**. **No se emite acceso** |
+| ~~`CONTRATO_CONTRASENA_NO_ESTABLECIDA`~~ | — | **Retirado del conjunto cerrado** por `PRODUCT-INTAKE` 1.13 §4.1 (**RN-16**): habilitar produce y fija la contraseña provisoria, de modo que ninguna cuenta llega a estar habilitada sin contraseña. **El identificador no se recicla**, y el desvío del primer ingreso lo cubre hoy el código de la fila siguiente. Se conserva la fila tachada para que una cita vieja no quede sin respuesta ~a **A-04** |
+| `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | `403` | La cuenta tiene una provisoria sin cambiar, **producida por la habilitación (RN-16) o por el reseteo (F-26)**: desde el intake 1.13 es también el código del **primer ingreso**. Con motivo; la pieza pública lo convierte en el desvío a **A-05**. **No se emite acceso** |
 | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | El almacén no está disponible y la admisibilidad no se pudo resolver. **La respuesta no incluye la ruta del almacén** |
 
 **Ninguna de las seis emite acceso, y ninguna deja rastro de la contraseña recibida**: ni en la respuesta, ni en el registro del servidor.
@@ -99,7 +99,7 @@ Es además el punto donde el producto acepta por escrito un riesgo: el intake §
 | CA-01 | Una cuenta de alumno habilitada, con contraseña establecida y sin marca | Se canjea con la contraseña correcta | Responde `200` y el cuerpo trae **el acceso, el identificador, el correo y el papel `Alumno`**, y **0 campos** más |
 | CA-02 | La misma cuenta | Se canjea con la contraseña equivocada, y después con un correo que no existe | Las **2** respuestas son `401` y sus cuerpos son **idénticos**: 0 diferencias que permitan distinguir cuál de los dos casos ocurrió |
 | CA-03 | Una cuenta recién registrada, en situación `Pendiente` | Se canjea | Responde `403` **con el motivo de la situación de la cuenta**, y **0 accesos emitidos** |
-| CA-04 | Una cuenta habilitada que todavía no estableció contraseña | Se canjea | Responde `403` con el motivo correspondiente, distinto del de CA-03 |
+| CA-04 | Una cuenta **recién habilitada**, que canja con la provisoria que la habilitación produjo | Se canjea | Responde `403` con el motivo de cambio requerido —**el mismo** que CA-05, y no uno propio— y **0 accesos** se emiten |
 | CA-05 | Una cuenta reseteada, con la provisoria sin cambiar, presentando **la provisoria correcta** | Se canjea | Responde `403` con el motivo de cambio requerido y **0 accesos emitidos**. La credencial se reconoce y **no se admite** |
 | CA-06 | Una petición sin el campo de contraseña | Se canjea | Responde `400` nombrando el campo ausente |
 | CA-07 | Cualquiera de las respuestas de §6, con su cuerpo y con el registro del servidor observados | Se produce la condición | **0 apariciones** de la contraseña recibida, de la clave de firma, de la ruta del almacén y de la dirección de cualquier servicio interno |
@@ -132,3 +132,4 @@ Es además el punto donde el producto acepta por escrito un riesgo: el intake §
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** Habilitar produce la contraseña provisoria, con lo cual **el primer ingreso deja de tener camino y código propios** y recorre el del cambio obligatorio. **§6**: `CONTRATO_CONTRASENA_NO_ESTABLECIDA` queda **retirado** del conjunto cerrado —su causa dejó de ser posible— y se conserva como fila tachada para que una cita vieja no quede sin respuesta; la fila del código de cambio requerido declara sus **dos orígenes**. **§8**: **CA-04** se rehace sobre la cuenta recién habilitada, que recibe el **mismo** código que la reseteada. La cabecera cita el intake **1.13**. **El punto de acceso A-01, sus reclamos y su respuesta no cambian.** Sube minor. |

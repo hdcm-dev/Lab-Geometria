@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -102,3 +102,4 @@ Para el lector que llega desde la capa de aplicación: la tabla de §3 del índi
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de los diez casos de uso, de las siete reglas conceptuales de modelo y de los tres documentos transversales de la sección; orden de lectura de siete pasos, con la indicación de leer el documento de concepto central **antes** de escribir una línea de lectura de texto; la omisión de las reglas de negocio, el apartamiento declarado por el que se emite el modelo de datos y el fundamento del concepto central elegido; y las notas de uso de la sección. |
 | 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: la nota de puntos abiertos deja de remitir a un punto abierto que ya no existe y declara el desenlace del envío de `E-8` que el intake 1.12 fija —error, trabajo en `Borrador`, mensaje localizado por índice de figura y campo—. **H-04**: el recuento de puntos abiertos pasa de **diez** a **quince**, nueve propios y seis heredados, tras incorporar el índice maestro los seis que declaraban documentos subordinados y salir el de `E-8`. **H-03**, por arrastre: el catálogo de §2 deja de describir la cobertura del documento de concepto central como «batería obligatoria de nueve casos» y nombra los nueve del producto más el décimo que agrega §21. |
+| 1.2 | 2026-08-10 | Alineación con `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**, que `CU-07` 1.2 absorbe: la contraseña provisoria la produce el mismo contrato para la **habilitación** y para el reseteo, con lo que ese caso de uso pasa a tener **dos** consumidores en la capa de aplicación. **El nombre del archivo de `CU-07` se conserva** por estabilidad de citación, aunque su propósito sea hoy más amplio que el reseteo. Los **diez** casos de uso no cambian de número ni de recorte y ningún artefacto se agrega ni se omite. (Analista Funcional + API Designer (AG-02)). |

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-05-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md), [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (**F-26**), §4.1 (RN-12, RN-13, RN-14, RN-15), §7 (CL-7), §9 (X-2 retirada), §11 (RN-B6 cerrado), §17.1.P.2 (INV-08, INV-09), §14 (RA-03); `Proyectos/GeometriaFactory-Contracts/.../CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md`; `Proyectos/GeometriaFactory-Application/.../CU-11-Resetear-La-Contrasena-De-Un-Alumno.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md`
+**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md), [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (**F-26**, F-03, **F-04** precisada), §4.1 (RN-12, RN-13, RN-14, RN-15, **RN-16**), §7 (CL-7), §9 (X-2 retirada), §11 (RN-B6 cerrado), §17.1.P.2 (INV-08, INV-09), §14 (RA-03); `Proyectos/GeometriaFactory-Contracts/.../CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md`; `Proyectos/GeometriaFactory-Application/.../CU-11-Resetear-La-Contrasena-De-Un-Alumno.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -74,7 +74,7 @@ Lo que este caso de uso **no** hace: **no produce la provisoria** —la produce 
 | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | La solicitud llega sin identificador de cuenta |
 | `CONTRATO_ALUMNO_NO_ENCONTRADO` | `404` | La cuenta referenciada no existe. **Adopción declarada**, con el mismo fundamento de `CU-04` §10 |
 | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | `409` | Se pidió el reseteo sobre la cuenta con papel `Administrador`. **No es `403`**: quien pide tiene la facultad, y lo que no procede es la operación sobre esa cuenta. El camino que sí existe es el cambio de la propia contraseña, por **A-05** |
-| `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` | `409` | La cuenta de alumno todavía no estableció su contraseña: **no hay ninguna que reemplazar**. El camino que ya existe es que la persona la establezca en su primer ingreso, por **A-04** |
+| ~~`CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA`~~ | — | **Retirado del conjunto cerrado** por `PRODUCT-INTAKE` 1.13 §4.1 (**RN-16**). Existía porque el camino declarado para una cuenta sin contraseña era el primer ingreso anónimo; suprimido ese camino, **el reseteo procede** y fija la provisoria en lugar de reemplazarla. El retiro cierra además la tensión con **RN-15**, que declara que el reseteo procede sobre `Pendiente`. **El identificador no se recicla** ~ino que ya existe es que la persona la establezca en su primer ingreso, por **A-04** |
 | `CONTRATO_ERROR_NO_CLASIFICADO` | `403` o `503` | `403` cuando el papel del acceso no alcanza y el contrato no tiene código de facultad para este camino (§10); `503` cuando el almacén no está disponible **o la fuente de material impredecible no respondió** |
 
 **Ninguna fila por cuenta no habilitada, y su ausencia es informativa.** El ensamblado de contratos lo declara explícitamente: de las dos causas de reseteo rechazado que se habían llegado a plantear, **la de la cuenta no habilitada dejó de existir** cuando el Product Owner decidió que resetear no exige habilitación. Esta superficie no la repone.
@@ -95,7 +95,7 @@ Lo que este caso de uso **no** hace: **no produce la provisoria** —la produce 
 | CA-02 | Una cuenta en situación `Bloqueado` | Se invoca A-09 | Responde `200` y la cuenta **sigue en situación `Bloqueado`**: el reseteo no la cambió |
 | CA-03 | La misma cuenta | Se invoca A-09 **dos** veces seguidas | Las 2 respuestas son `200` y las **2** provisorias son **distintas** |
 | CA-04 | La cuenta con papel `Administrador` | Se invoca A-09 sobre ella | Responde `409` con su código propio, y la credencial de esa cuenta **no cambió** |
-| CA-05 | Una cuenta de alumno habilitada que nunca estableció contraseña | Se invoca A-09 | Responde `409` con el código propio, **distinto del de CA-04** |
+| CA-05 | Una cuenta de alumno en situación `Pendiente`, que nunca fue habilitada y no tiene contraseña | Se invoca A-09 | Responde **`200`** con su provisoria y la situación `Pendiente` sin cambio: **0 respuestas `409`** se producen por la ausencia de contraseña previa |
 | CA-06 | Una cuenta reseteada | Se invoca **cualquier otro punto** que exija acceso, con un acceso obtenido antes del reseteo | Responde `403` con el código de cambio requerido: la marca corta **aunque el acceso siga siendo válido** |
 | CA-07 | La respuesta de un reseteo con éxito y el registro del servidor | Se inspeccionan | La provisoria aparece **exactamente 1 vez**, en el cuerpo de la respuesta, y **0 veces** en el registro del servidor |
 | CA-08 | La fuente de material impredecible que no responde | Se invoca A-09 | Responde con fallo, **0 provisorias producidas** y la credencial anterior **sigue vigente** |
@@ -127,3 +127,4 @@ Lo que este caso de uso **no** hace: **no produce la provisoria** —la produce 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** Habilitar produce una contraseña provisoria con **el mismo mecanismo y el mismo tratamiento** que este punto de acceso, de modo que el producto tiene un solo mecanismo de credencial inicial. **§6**: `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` queda **retirado** del conjunto cerrado —su premisa, la existencia de un camino anónimo alternativo, desapareció— y se conserva como fila tachada, con la constancia de que el retiro cierra de paso la tensión con **RN-15**. **§8**: **CA-05** se invierte: el reseteo sobre una cuenta `Pendiente` sin contraseña **procede** y responde `200`. La cabecera cita el intake **1.13**. **El punto A-09, su resultado y la exclusión de la provisoria del registro del servidor no cambian.** Sube minor. |

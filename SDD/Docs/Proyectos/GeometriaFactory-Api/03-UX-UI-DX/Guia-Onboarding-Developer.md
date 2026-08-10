@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1, §2, §3 y §5; [`DX-Error-Messages.md`](DX-Error-Messages.md) completo; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` completo; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4, §6 y §11; §4, §6 y §8 de CU-01 a CU-12; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §10 (host sin herramientas), §15 (no se inventan textos de prueba), §16, §18 y §20
+**Trazabilidad upstream:** [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1, §2, §3 y §5; [`DX-Error-Messages.md`](DX-Error-Messages.md) completo; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` completo; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4, §6 y §11; §4, §6 y §8 de CU-01 a CU-12; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §10 (host sin herramientas), §15 (no se inventan textos de prueba), §16, §18 y §20
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `10-Examples` y `11-Documentacion` de GeometriaFactory-Api
 
 ---
@@ -39,7 +39,7 @@ Esta guía es para quien va a tocar la superficie HTTP del producto: agregar o c
 
 **Lectura obligatoria antes del paso 1**, y son dos:
 
-1. [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) **§2 y §3, en ese orden**. §2 dice qué de la superficie está declarado por una fuente y qué es propuesta; §3 es la tabla de los dieciséis puntos. **Leer §3 sin §2 hace creer que las dieciséis rutas están decididas, y quince no lo están.**
+1. [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) **§2 y §3, en ese orden**. §2 dice qué de la superficie está declarado por una fuente y qué es propuesta; §3 es la tabla de los quince puntos. **Leer §3 sin §2 hace creer que las quince rutas están decididas, y quince no lo están.**
 2. [`DX-Developer-Experience.md`](DX-Developer-Experience.md) **§1.4**, dos párrafos: las dos reglas del producto que se rompen desde acá **sin que nada falle**.
 
 Lo que **no** hace falta leer para la primera hora: los doce casos de uso completos. Se consultan por tarea, cuando toque una.
@@ -117,7 +117,7 @@ Repetir el ejercicio pidiendo **eliminar** cada uno de los dos, que es el camino
 Toda respuesta de fallo de esta superficie tiene **dos identificadores** y hay que leerlos juntos:
 
 - **El código de respuesta** dice de qué clase es el fallo, y es lo que decide qué hace el consumidor: corregir y reintentar, derivar, mostrar, o pasar a estado degradado.
-- **El código del contrato** dice cuál exactamente, dentro de un conjunto cerrado de **diecisiete**.
+- **El código del contrato** dice cuál exactamente, dentro de un conjunto cerrado de **quince**.
 
 Dos excepciones declaradas, y conviene conocerlas para no buscar un código que no está: el `401` de la guardia y el `400` de una petición que no se puede leer **no llevan código del contrato**, porque ocurren antes de que haya un contrato con el que hablar.
 
@@ -173,9 +173,9 @@ Y una cuarta de la misma familia, que no es una regla de negocio sino de arquite
 
 El procedimiento, en cinco preguntas, y **en este orden**:
 
-1. **¿Existe ya?** Mirar los dieciséis. La mitad de los puntos que alguien quiere agregar son una variante de uno que ya está, y una variante en la ruta suele ser información sobre el solicitante en un lugar donde no hace falta —**es el motivo por el que la eliminación es un solo punto y no dos**—.
+1. **¿Existe ya?** Mirar los quince. La mitad de los puntos que alguien quiere agregar son una variante de uno que ya está, y una variante en la ruta suele ser información sobre el solicitante en un lugar donde no hace falta —**es el motivo por el que la eliminación es un solo punto y no dos**—.
 2. **¿Qué tipo transporta?** Si no hay un tipo del ensamblado de contratos que le sirva, **el punto no se agrega todavía**: los tipos son de aquel proyecto de código y esta capa no los declara.
-3. **¿Qué papel exige, y va bajo la guardia?** Salvo que **no pueda** exigir acceso —y hoy sólo hay una situación así, el establecimiento de la contraseña del primer ingreso—, **va bajo la guardia**. Agregarlo a la tabla de puntos y a la cuenta de la métrica es parte de agregarlo.
+3. **¿Qué papel exige, y va bajo la guardia?** Desde `PRODUCT-INTAKE` 1.13 **no queda ninguna situación en la que un punto que escribe no pueda exigir acceso**: la que había —el establecimiento de la contraseña del primer ingreso— se suprimió con **RN-16**, y los cuatro puntos que no exigen acceso firmado no fijan contraseñas. Salvo que se trate de uno de esos cuatro, **va bajo la guardia**. Agregarlo a la tabla de puntos y a la cuenta de la métrica es parte de agregarlo.
 4. **¿Qué puede fallar, y con qué código del conjunto cerrado?** Si ningún código corresponde, **no se inventa uno**: se usa el genérico y **se declara el hueco**, como están declarados los dos que hoy existen.
 5. **¿Qué agrega a la colección de peticiones?** Un punto que no se puede ejercitar desde la colección es un punto que nadie va a volver a probar.
 
@@ -184,3 +184,4 @@ El procedimiento, en cinco preguntas, y **en este orden**:
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Recorrido de la primera hora contra la superficie: prerrequisitos con **lectura obligatoria de dos documentos**, el quick-start de tres pasos dentro del entorno de desarrollo contenido, el **primer ejemplo con sentido** —el envío del escenario `E-5`, que responde con éxito y deja el trabajo en `Borrador`— y el segundo —dos respuestas que tienen que ser indistinguibles—, cómo leer una respuesta de fallo con sus dos identificadores y sus dos excepciones, **trece diagnósticos frecuentes** de la primera hora, los próximos pasos por tarea, y **las tres cosas que no fallan** con su detección por recuento, comparación e inspección, más el procedimiento de cinco preguntas para agregar un punto de acceso nuevo. |
+| 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**. §4 actualiza el conjunto cerrado de códigos de diecisiete a **quince**. §7 actualiza el procedimiento de alta de un punto de acceso: los puntos a revisar pasan de dieciséis a **quince**, y el paso 3 deja de contemplar la excepción del establecimiento de la contraseña, **que dejó de existir** —los cuatro puntos que no exigen acceso firmado no fijan contraseñas—. **Ningún paso del recorrido de la primera hora y ningún diagnóstico cambia.** Sube minor. |

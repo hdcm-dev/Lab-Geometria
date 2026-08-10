@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** DX-Error-Messages.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los **doce** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-12), con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §3, §4, §5, §6 y §8; `02-Especificacion-Funcional/Especificacion-Funcional.md` §4 (**la frontera y sus seis precisiones**), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md` §6 y §10, que declara el **conjunto cerrado de diecisiete códigos**, y la §6 de sus otros siete contratos de uso; RN-01 a RN-15 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §14 (RA-03), §17.5.P.5 y §17.5.P.10
+**Trazabilidad upstream:** §6 de los **doce** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-12), con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §3, §4, §5, §6 y §8; `02-Especificacion-Funcional/Especificacion-Funcional.md` §4 (**la frontera y sus seis precisiones**), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md` §6 y §10, que declara el **conjunto cerrado de quince códigos**, y la §6 de sus otros siete contratos de uso; RN-01 a RN-16 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §14 (RA-03), §17.5.P.5 y §17.5.P.10
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Api
 
 ---
@@ -134,7 +134,7 @@ Tres familias de respuestas dicen **menos de lo que el servicio sabe**, y en las
 
 ### 2.3 El código sin destino, y por qué
 
-Del conjunto cerrado de **diecisiete** códigos, **uno no tiene código de respuesta asignado y no puede tenerlo**: el que describe que la pieza de datos **no responde**. El ensamblado de contratos lo declara «el único que el contrato admite que produzca la propia pieza pública».
+Del conjunto cerrado de **quince** códigos, **uno no tiene código de respuesta asignado y no puede tenerlo**: el que describe que la pieza de datos **no responde**. El ensamblado de contratos lo declara «el único que el contrato admite que produzca la propia pieza pública».
 
 Una respuesta de esta superficie con ese código sería una contradicción en sus términos: **si hubo respuesta, el servicio respondió**. Lo declara `CU-09` §10 y se repite acá para que una revisión posterior no lo levante como cobertura faltante: **son dieciséis códigos con destino sobre diecisiete, y el hueco es intencional**.
 
@@ -151,7 +151,7 @@ Son la parte de este catálogo que **no se resuelve acá** y que está elevada a
 
 ## 3. Catálogo
 
-**Dieciocho entradas.** Las dieciséis primeras son los códigos del conjunto cerrado con destino en esta superficie; las dos últimas son las respuestas sin código de §2.2. **Ninguna se inventó y ninguna quedó afuera**; el recuento y su verificación están en §6.
+**Dieciséis entradas.** Las **catorce** primeras son los códigos del conjunto cerrado con destino en esta superficie; las dos últimas son las respuestas sin código de §2.2. **Ninguna se inventó y ninguna quedó afuera**; el recuento y su verificación están en §6. Eran dieciocho hasta la emisión 1.0: **RN-16** retiró dos códigos del conjunto cerrado y ninguno los reemplaza.
 
 ### 3.1 Entrada inválida
 
@@ -179,8 +179,7 @@ Respuesta `403`, **con motivo**. Es la única familia del catálogo donde el mot
 | Código del contrato | Mensaje | Causa probable | Qué hace el consumidor |
 | --- | --- | --- | --- |
 | `CONTRATO_CUENTA_NO_HABILITADA` | La cuenta todavía no fue habilitada, o está bloqueada | El administrador no la habilitó, o la bloqueó | **Mostrar la situación.** No hay nada que la persona pueda hacer sola: **depende del administrador**, y decírselo evita que siga probando |
-| `CONTRATO_CONTRASENA_NO_ESTABLECIDA` | La cuenta está habilitada y todavía no tiene contraseña | Es el **primer ingreso efectivo**, y el registro no elige contraseña | **Derivar al establecimiento de la contraseña.** Es un paso normal del alta, no un fallo del que haya que recuperarse |
-| `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | La cuenta tiene una contraseña provisoria sin cambiar | El administrador la reseteó | **Derivar al cambio de contraseña.** **Un solo código para todas las operaciones bloqueadas**, porque el trabajo que le queda al consumidor es siempre el mismo, y por eso el mensaje **no nombra la operación que se pidió** |
+| `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | La cuenta tiene una contraseña provisoria sin cambiar | **El administrador la habilitó (RN-16) o la reseteó (F-26)**: desde `PRODUCT-INTAKE` 1.13 es también el mensaje del **primer ingreso**, y por eso reemplazó al que describía la cuenta habilitada sin contraseña | **Derivar al cambio de contraseña.** **Un solo código para todas las operaciones bloqueadas**, porque el trabajo que le queda al consumidor es siempre el mismo, y por eso el mensaje **no nombra la operación que se pidió** |
 
 ### 3.4 Facultad
 
@@ -210,7 +209,6 @@ Respuesta `409`. **Seis entradas, la categoría más poblada.** Todas describen 
 | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | El estado del trabajo no habilita al solicitante a eliminarlo | El alumno pidió eliminar un trabajo suyo que ya no está en `Borrador` | **Mostrar el estado actual**, que la respuesta declara. **No se produce nunca en el camino del administrador** |
 | `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | El trabajo no está en condiciones de recibir un desenlace | O nunca estuvo en estado `Pendiente`, o **ya lo recibió y está en un estado terminal** | **Mostrar el estado actual y no ofrecer forma de revertirlo**: no existe |
 | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | La cuenta de administrador no se resetea por este camino | Se pidió el reseteo sobre ella | **Derivar al cambio de la propia contraseña**, que es el camino que sí existe |
-| `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` | No hay contraseña que reemplazar | La cuenta de alumno todavía no estableció la suya | **Mostrar lo que pasó.** El camino que ya existe es que **la persona la establezca en su primer ingreso**, y quien recibe este mensaje es el administrador, no ella |
 
 ### 3.7 No clasificado
 
@@ -290,12 +288,12 @@ Las tres comprobaciones que cierran la verificación:
 | Dimensión | Referencia |
 | --- | --- |
 | Rol de intervención | **Consumidor de la superficie**, que es quien lee este catálogo entero; implementador de la superficie; y **operador del despliegue** para las terminaciones degradadas ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.1) |
-| Superficie pública que se documenta | Las respuestas de fallo de los **dieciséis** puntos de acceso, y las dos traducciones de `Definicion-Superficie-HTTP.md` §5 |
+| Superficie pública que se documenta | Las respuestas de fallo de los **quince** puntos de acceso, y las dos traducciones de `Definicion-Superficie-HTTP.md` §5 |
 | CU origen | CU-01 a CU-12, §6 de cada uno. **CU-10, CU-11 y CU-12 no declaran ninguna** |
-| Reglas de negocio relevantes | RN-01 a RN-15. **Dos se rompen desde este catálogo**: RN-03, si dos respuestas que deben ser indistinguibles dejan de serlo, y RN-13, si un punto queda fuera de la guardia |
+| Reglas de negocio relevantes | RN-01 a RN-16. **Dos se rompen desde este catálogo**: RN-03, si dos respuestas que deben ser indistinguibles dejan de serlo, y RN-13, si un punto queda fuera de la guardia |
 | Necesidades de negocio | NB-01 a NB-09, las nueve. La correspondencia está en `../02-Especificacion-Funcional/Especificacion-Funcional.md` §7.1 |
 | Wireframes asociados | N/A. `tiene_ui_final` == false |
-| US a generar en 06 | US de la traducción completa de los dieciséis códigos; US de las tres familias empobrecidas, **con la comparación de respuestas indistinguibles como criterio de aceptación**; US de la prohibición de §1.4, con inspección del registro del servidor |
+| US a generar en 06 | US de la traducción completa de los **catorce** códigos; US de las tres familias empobrecidas, **con la comparación de respuestas indistinguibles como criterio de aceptación**; US de la prohibición de §1.4, con inspección del registro del servidor |
 | Tests previstos en 08 | **Una prueba por código del conjunto cerrado**, no una por punto de acceso; las comparaciones de respuestas indistinguibles de las tres familias; y una inspección de que ninguna respuesta ni traza contiene secretos, rutas o el texto del alumno |
 | Catálogo de diseño aplicado | N/A para variante DX |
 | Configuración dirigida por esquema, primer arranque, acceso de operador único, identidad de versión | Ver [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §8, donde dos de las cuatro se declaran pertinentes y acotadas en lugar de no aplicables |
@@ -306,3 +304,4 @@ Las tres comprobaciones que cierran la verificación:
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Cataloga las **18** entradas derivadas de la §6 de los doce casos de uso y del conjunto cerrado de **diecisiete** códigos del ensamblado de contratos: **16 códigos con destino**, **1 declarado sin destino** y **2 respuestas sin código**. Declara los **dos resultados que no son fallos** con la confusión más cara de esta capa; la prohibición de §1.4 con su contracara de registro; **las tres familias deliberadamente empobrecidas** y la prueba única que las cubre; la taxonomía de siete categorías con su reparto por código de respuesta; **los dos huecos del conjunto cerrado**, elevados al Product Owner, que son el motivo por el que el código genérico tiene cuatro destinos; y la ausencia declarada de `CU-10`, `CU-11` y `CU-12` del catálogo, con el motivo de cada una. |
+| 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**, que unifican en uno los dos mecanismos de credencial inicial del producto. El conjunto cerrado del ensamblado pasa de diecisiete a **quince** códigos y este catálogo de **dieciocho a dieciséis entradas**: salen `CONTRATO_CONTRASENA_NO_ESTABLECIDA` de §3.3 y `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` de §3.6, las dos **por imposibilidad de su causa** y no por simplificación, y **ninguna la reemplaza**. La entrada de `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` pasa a declarar los **dos orígenes** de la marca y a ser también el mensaje del primer ingreso. §2.1 y §6 actualizan los recuentos del conjunto cerrado, de los puntos de acceso —de dieciséis a **quince**, con el retiro de `A-04`— y de la US prevista. La cabecera cita el intake **1.13**. **Las tres familias empobrecidas y las dos respuestas sin código no cambian.** Sube minor. |

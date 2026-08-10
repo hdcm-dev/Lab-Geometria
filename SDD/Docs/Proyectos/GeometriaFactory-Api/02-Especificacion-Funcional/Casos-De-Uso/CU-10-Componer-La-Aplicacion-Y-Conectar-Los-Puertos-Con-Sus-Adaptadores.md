@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-10-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §13 (dependencias y orden topológico), §14 (contratos entre proyectos de código; RA-03), §17.5.P.1, §17.5.P.2 («más la composición de raíz que conecta puertos con adaptadores»), §17.5.P.4, §17.5.P.5 (secretos por variable de entorno o archivo montado), §17.5.P.8, §17.5.P.11; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2 y §3; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara **los cuatro puertos**; `Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara los cuatro adaptadores, los dos mecanismos y la responsabilidad de arranque
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §13 (dependencias y orden topológico), §14 (contratos entre proyectos de código; RA-03), §17.5.P.1, §17.5.P.2 («más la composición de raíz que conecta puertos con adaptadores»), §17.5.P.4, §17.5.P.5 (secretos por variable de entorno o archivo montado), §17.5.P.8, §17.5.P.11; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2 y §3; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara **los cuatro puertos**; `Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara los cuatro adaptadores, los dos mecanismos y la responsabilidad de arranque
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Api
 
 ---
@@ -124,3 +124,4 @@ Este contrato no produce respuestas: **falla antes de que exista ninguna petici�
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Realineación de la cita viva al `PRODUCT-INTAKE` 1.13.** Este proyecto de código se emitió contra la **1.12** y la fuente está hoy en **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y precisa la capacidad **F-04**. La cabecera de trazabilidad pasa a citar **1.13**; la cita de la emisión inicial se conserva en la fila 1.0, que es trazabilidad y no una referencia desactualizada. **Ninguna sección de este contrato de uso se toca**: la decisión de 1.13 alcanza al circuito de credenciales y este caso de uso no lo expone. Sube minor: corrige una cita de trazabilidad. |

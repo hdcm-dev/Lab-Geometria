@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 1.5
+**Versión:** 1.6
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2, §4.1, §4.2 (recorrido de adopción de INV-08), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; CU-01 §4, §5, §6 y §8; CU-12 §1, §3, §4, §5, §6 y §8; CU-02 §5 y §6; CU-03 §6; CU-04 §5 y §6; CU-05 §5 y §6; CU-06 §5 y §6; CU-07 §5 y §6; CU-08 §4, §5 y §6; CU-09 §5 y §6; CU-10 §5 y §6; CU-11 §5 y §6; CU-13 §1, §5, §6 y §10; RN-01 a RN-15; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9 (puntos abiertos); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.1, §17.1.P.2, §17.1.P.4, §17.1.P.5, §17.1.P.6, §17.1.P.10, §17.1.P.11, §4.1, §4.2, §16
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2, §4.1, §4.2 (recorrido de adopción de INV-08), §4.3 (correspondencia entre reglas e invariantes), §5.1, §5.2 y §7; CU-01 §4, §5, §6 y §8; CU-12 §1, §3, §4, §5, §6 y §8; CU-02 §5 y §6; CU-03 §6; CU-04 §5 y §6; CU-05 §5 y §6; CU-06 §5 y §6; CU-07 §5 y §6; CU-08 §4, §5 y §6; CU-09 §5 y §6; CU-10 §5 y §6; CU-11 §5 y §6; CU-13 §1, §5, §6 y §10; RN-01 a **RN-16**; `02-Especificacion-Funcional/Especificacion-Funcional.md` §9 (puntos abiertos); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.4; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.1, §17.1.P.2, §17.1.P.4, §17.1.P.5, §17.1.P.6, §17.1.P.10, §17.1.P.11, §4.1, §4.2, §16
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -26,7 +26,7 @@
 - [5. Próximos pasos](#5-próximos-pasos)
 - [6. Control de cambios](#6-control-de-cambios)
 - [7. Dónde va una regla nueva](#7-dónde-va-una-regla-nueva)
-  - [7.1 Quince reglas, nueve invariantes](#71-quince-reglas-nueve-invariantes)
+  - [7.1 Dieciséis reglas, nueve invariantes](#71-dieciséis-reglas-nueve-invariantes)
   - [7.2 Por qué seis reglas no tienen invariante](#72-por-qué-seis-reglas-no-tienen-invariante)
   - [7.3 El procedimiento de decisión](#73-el-procedimiento-de-decisión)
 
@@ -122,7 +122,7 @@ Son las tres figuras que más se consultan durante la primera hora. Están compl
 
 | Camino de alta | Caso de uso | Nace | Credencial |
 | --- | --- | --- | --- |
-| Auto-registro del alumno | CU-01 | cuenta `Pendiente` | Sin valor: se fija en el primer ingreso efectivo (CU-03) |
+| Auto-registro del alumno | CU-01 | cuenta `Pendiente` | Sin valor: se fija **en el acto de habilitación** (CU-02, que invoca la fijación de CU-03) con la contraseña provisoria que el sistema produce (RN-16) |
 | Configuración del administrador en el primer arranque | CU-12 | cuenta **`Habilitado`** | Se aporta ya derivada en el mismo acto |
 
 **La cuenta del administrador nace habilitada porque es la que habilita a las demás**: ninguna cuenta anterior podría habilitarla a ella, y si naciera `Pendiente` por INV-06 tampoco obtendría acceso, de modo que la instancia quedaría inutilizable en el primer arranque. Cada camino **rechaza el del otro**, y por eso `ESTADO_INICIAL_NO_NEGOCIABLE` tiene causas opuestas en cada uno (`DX-Error-Messages.md` §1.4).
@@ -189,17 +189,18 @@ Punto de entrada recomendado de la sección de especificación funcional: su `RE
 | 1.2 | 2026-08-09 | Alineación con la corrección del **P1** de la ronda r3, informe `B-02-03-GeometriaFactory-Domain-r3.md`. **Hallazgo H-02**: §7.1 remitía a §4.2 de `Definicion-Modelo-De-Dominio.md` a buscar la correspondencia entre reglas e invariantes, que vive en **§4.3**; corregida, y la cabecera declara las dos subsecciones por separado. **Hallazgo H-01**: §3.4 suma que **las cuatro operaciones de ciclo de vida alcanzan sólo a las cuentas con papel `Alumno`** —enunciado literal de la capacidad F-03—, que sobre la cuenta del administrador el dominio las rechaza con `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, y que el efecto no se agota en el acceso: **sin administrador nadie aprueba ni rechaza y el circuito de revisión entero se detiene**. Declara además que la guarda del alta y la del ciclo de vida son la misma familia en dos momentos, que es lo que el candidato **INV-08** propone enunciar de una sola vez, y que sigue no vigente. La tabla de §4 **no cambia**: sigue en catorce diagnósticos. |
 | 1.3 | 2026-08-09 | Alineación con `PRODUCT-INTAKE` **1.7** y con la categoría 02 en su versión 1.4. §7.1 pasa de «once reglas, siete invariantes» a **trece reglas, nueve invariantes**, con **RN-12** y **RN-13** compartiendo **INV-09** —el único invariante que sostiene dos reglas— y con **INV-08 declarado adoptado**, que esta guía venía citando como candidato no vigente. §5 actualiza el how-to a trece contratos de uso y la cabecera suma CU-13. La distinción entre resetear y dar de baja se lee en [`DX-Error-Messages.md`](DX-Error-Messages.md) §1.5, que es donde vive el catálogo. |
 | 1.4 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10** y **cierra la fila de este archivo del hallazgo `F26-20`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0. **Intake 1.10**: **§7.1** pasa de «trece reglas» a **quince**, con **RN-14** y **RN-15** en su tabla de correspondencia, las dos **sin invariante**; el recuento del párrafo pasa de «nueve de las trece … y cuatro no» a **«nueve de las quince … y seis no»**, contado sobre la tabla, y se declara además de dónde viene la lectura que le da INV-09 a RN-12 —de la **columna** de `PRODUCT-INTAKE` §17.1.P.2 y no de su prosa—, para no repetir el hallazgo `F26-09`. **§7.2** pasa de «cuatro reglas» a **seis** y suma el motivo de cada una de las dos nuevas: RN-14 describe cómo se produce un valor **y además no se ejerce en este proyecto de código**, y RN-15 enuncia la **ausencia** de una precondición. La tabla de §7.1, que llegaba hasta RN-11, suma también **RN-12** y **RN-13**, que la versión 1.3 había contado en prosa sin agregarlos a la tabla. **`F26-20`**: **§3.4** se titulaba «Las **dos** máquinas de estado» y son **tres** desde `Definicion-Modelo-De-Dominio.md` §5.3, la de la marca de cambio de contraseña pendiente; el título, el índice y la remisión pasan a nombrar las tres. **Ningún paso del quick-start, ningún procedimiento de decisión y ningún diagnóstico cambia.** Sube minor. |
+| 1.6 | 2026-08-10 | Absorbe el `PRODUCT-INTAKE` **1.13** y su regla **RN-16** —habilitar una cuenta produce y fija su contraseña provisoria y la deja con cambio de contraseña pendiente—, con la precisión de **F-04**. **§7.1** pasa de «quince reglas» a **dieciséis**, con RN-16 en la tabla de correspondencia asociada a **INV-09**, y el recuento del párrafo pasa de «nueve de las quince … y seis no» a **«diez de las dieciséis … y seis no»**, contado sobre la tabla; la nota del invariante compartido pasa de dos reglas a tres. **§7.2** suma el motivo por el que RN-16 **sí** tiene invariante, que es la contracara de las seis que no lo tienen. **§3.2** corrige la tabla de los dos caminos de alta: la credencial del auto-registro deja de fijarse en el primer ingreso efectivo y se fija en el acto de habilitación. **Ningún paso del quick-start, ningún procedimiento de decisión y ningún diagnóstico cambia.** Sube minor. |
 | 1.5 | 2026-08-10 | **Cierra la parte del hallazgo de forma que alcanza a este archivo**, detectada al propagar `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0 contra `PRODUCT-INTAKE` **1.11**. **§6 Control de cambios**: la fila **1.3** estaba **fuera de la tabla**, al final del archivo, detrás de §7, y además **después** de la 1.4. Se reincorpora a la tabla de §6 en su lugar cronológico, entre la 1.2 y la 1.4, **sin alterar una palabra de lo que dice**. **Ningún paso del recorrido, ejemplo, diagnóstico ni criterio de esta guía cambia.** Sube minor: repara el renderizado de una tabla y ordena su historial. |
 
 ## 7. Dónde va una regla nueva
 
 Este es el tramo de una hora y el que más rinde a largo plazo. La pregunta que responde es: aparece una regla nueva, ¿va como guarda de una entidad de este proyecto de código, o va en otra capa?
 
-### 7.1 Quince reglas, nueve invariantes
+### 7.1 Dieciséis reglas, nueve invariantes
 
-Los invariantes **no son reglas distintas** de las quince del negocio: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca, sin importar la operación ni quién la ejecute, aunque la petición llegue por fuera de la interfaz.
+Los invariantes **no son reglas distintas** de las **dieciséis** del negocio: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca, sin importar la operación ni quién la ejecute, aunque la petición llegue por fuera de la interfaz.
 
-Nueve de las quince reglas tienen invariante asociado y **seis** no; **RN-12 y RN-13 comparten INV-09**, que es el único invariante que sostiene dos reglas — y la lectura que sostiene esa fila es la **columna** «regla de negocio que sostiene» de `PRODUCT-INTAKE` §17.1.P.2, no su prosa, que enumera a RN-12 entre las que no tienen ninguno (`02-Especificacion-Funcional/Especificacion-Funcional.md` §4). La correspondencia es la de `Definicion-Modelo-De-Dominio.md` §4.3 y se transcribe acá porque es el corazón de este tramo:
+**Diez** de las dieciséis reglas tienen invariante asociado y **seis** no; **RN-12, RN-13 y RN-16 comparten INV-09**, que es el único invariante que sostiene más de una regla — y la lectura que sostiene esa fila es la **columna** «regla de negocio que sostiene» de `PRODUCT-INTAKE` §17.1.P.2, no su prosa, que enumera a RN-12 entre las que no tienen ninguno (`02-Especificacion-Funcional/Especificacion-Funcional.md` §4). La correspondencia es la de `Definicion-Modelo-De-Dominio.md` §4.3 y se transcribe acá porque es el corazón de este tramo:
 
 | Regla | Enunciado abreviado | Invariante que la expresa como condición permanente |
 | --- | --- | --- |
@@ -218,6 +219,7 @@ Nueve de las quince reglas tienen invariante asociado y **seis** no; **RN-12 y R
 | RN-13 | Con la contraseña provisoria sin cambiar, la cuenta no llega a ninguna otra parte | INV-09 |
 | RN-14 | La contraseña provisoria la produce el sistema: no es adivinable y no se repite | — |
 | RN-15 | Resetear no exige que la cuenta esté habilitada | — |
+| RN-16 | Habilitar una cuenta produce su contraseña provisoria | INV-09 |
 
 ### 7.2 Por qué seis reglas no tienen invariante
 
@@ -226,6 +228,7 @@ No es un olvido y no hay que «completarlas». El motivo está declarado en `PRO
 - **RN-07, RN-08 y RN-09 describen comportamientos**, no condiciones permanentes sobre el estado. «La baja arrastra los trabajos», «el texto no se reescribe» y «el error indica dónde está» son cosas que el sistema **hace** en un momento; no son afirmaciones que tengan que ser verdaderas siempre sobre cualquier dato guardado.
 - **RN-11 es una regla de alcance de consulta.** Restringe qué devuelve un listado, y un listado no es un dato: no hay ningún estado que la regla vuelva imposible.
 - **RN-14 describe cómo se produce un valor**, y además **no se ejerce en este proyecto de código**: la contraseña provisoria llega al dominio ya derivada, de modo que acá no hay con qué comprobar que no sea adivinable ni que no se repita. Se ejerce donde el valor nace, en `GeometriaFactory-Application` CU-11 y en `GeometriaFactory-Contracts` CU-08.
+- **RN-16 sí tiene invariante, y es INV-09.** No enuncia un comportamiento: enuncia una condición sobre los datos —ninguna cuenta de alumno `Habilitado` sin credencial derivada, y ninguna habilitación sin la marca puesta—. Lo que agrega a INV-09 no es una mitad nueva de la condición sino un **segundo origen** de la marca, junto al reseteo.
 - **RN-15 enuncia la ausencia de una precondición.** «Resetear no exige cuenta habilitada» no vuelve imposible ningún estado: retira una comprobación. Un invariante que la expresara tendría que afirmar algo, y no hay nada que afirmar.
 
 Dos precisiones de ubicación, que evitan que alguien busque en la capa equivocada:

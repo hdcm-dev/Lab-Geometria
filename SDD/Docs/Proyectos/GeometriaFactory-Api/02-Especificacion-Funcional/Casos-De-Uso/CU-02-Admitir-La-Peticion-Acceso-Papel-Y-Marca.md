@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-02-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-01, RN-13), §17.1.P.2 (INV-09), §17.5.P.3, §17.5.P.5 (autorización por papel **más** verificación de pertenencia), §14 (RA-01, RA-03); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4, y en particular su cuarta comprobación transversal y su precisión 5; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md`; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md`
+**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (RN-01, RN-13, **RN-16**), §4 (**F-04** precisada), §17.1.P.2 (INV-09), §17.5.P.3, §17.5.P.5 (autorización por papel **más** verificación de pertenencia), §14 (RA-01, RA-03); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4, y en particular su cuarta comprobación transversal y su precisión 5; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md`; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -68,7 +68,7 @@ Lo que este caso de uso **no** hace, y hay que dejarlo imposible de confundir: *
 | FA-01 | El punto no exige ningún papel en particular y admite los dos | Los pasos 1 a 3 y el 5 se ejercen igual; el paso 4 se satisface con cualquiera de los dos valores. **Es el caso de los puntos de lectura de trabajos y del cambio de la propia contraseña**, y no es una excepción a la guardia | Paso 6 |
 | FA-02 | La petición llega al punto de **cambio de la propia contraseña** con una cuenta marcada | Los pasos 1 a 4 se ejercen igual y **el paso 5 no rechaza**: es la **única excepción declarada**, porque cambiar la contraseña es lo único que esa cuenta puede hacer y es lo que levanta la marca | Paso 6 |
 | FA-03 | La petición llega a uno de los cuatro puntos que no exigen acceso | **La guardia no se aplica**, y se declara para que su ausencia no se lea como un hueco: el canje de credenciales, el registro de una cuenta, la configuración del administrador y la salud se ejercen sin acceso por construcción | Termina fuera de este contrato |
-| FA-04 | La petición llega al punto de **establecimiento de la contraseña inicial** | **Es el punto cuya forma de identificación está abierta** y por eso no se cuenta entre los once. Cuando se resuelva, su tratamiento por esta guardia se declara con él | Ver `CU-03` §10 |
+| FA-04 | La petición llega a **A-05**, el cambio de la propia contraseña, con una cuenta que tiene la marca puesta | **Es la única excepción declarada de esta guardia**, y desde `PRODUCT-INTAKE` 1.13 cubre también el **primer ingreso**: la cuenta recién habilitada llega acá con la provisoria que la habilitación produjo, igual que la reseteada (**RN-16**). La guardia admite la petición porque cambiar la propia contraseña es lo único que INV-09 le deja hacer | Paso siguiente, con el cambio ejercido |
 
 ## 6. Excepciones y errores
 
@@ -115,7 +115,7 @@ Lo que este caso de uso **no** hace, y hay que dejarlo imposible de confundir: *
 
 ## 10. Notas y supuestos
 
-- **El hueco del código de facultad es real y está declarado.** El conjunto cerrado de diecisiete códigos del ensamblado de contratos tiene un único código de facultad, **acotado por su enunciado al desenlace**. La capa de aplicación emite un motivo de facultad requerida también en el gobierno de cuentas, en la revisión de la comisión y en el reseteo, y para esos tres caminos **el contrato no declara ningún código**. Verificado recorriendo la §6 de los ocho contratos de uso. Esta capa **no inventa uno**: los códigos son del ensamblado. Está en el índice maestro §11 y elevado al Product Owner.
+- **El hueco del código de facultad es real y está declarado.** El conjunto cerrado de **quince** códigos del ensamblado de contratos tiene un único código de facultad, **acotado por su enunciado al desenlace**. La capa de aplicación emite un motivo de facultad requerida también en el gobierno de cuentas, en la revisión de la comisión y en el reseteo, y para esos tres caminos **el contrato no declara ningún código**. Verificado recorriendo la §6 de los ocho contratos de uso. Esta capa **no inventa uno**: los códigos son del ensamblado. Está en el índice maestro §11 y elevado al Product Owner.
 - **Exigir el papel no reemplaza a comprobar la pertenencia**, y duplicar la comprobación acá sería peor que no hacerla: crearía un segundo lugar donde la regla puede decir otra cosa. Lo que esta guardia aporta es cortar temprano lo que **ningún dato podría autorizar**.
 - **La guardia no distingue las tres causas del `401`.** Un acceso ausente, uno vencido y uno con firma que no corresponde reciben la misma respuesta, porque para la pieza pública el trabajo que queda es el mismo: volver a canjear credenciales.
 - **El punto de establecimiento de la contraseña inicial no está entre los once**, y no porque se lo haya eximido: **no puede exigir un acceso que la persona todavía no puede obtener**. Su forma es un punto abierto elevado al Product Owner y descrito en `CU-03` §10.
@@ -126,3 +126,4 @@ Lo que este caso de uso **no** hace, y hay que dejarlo imposible de confundir: *
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** El punto de acceso **A-04 se retiró** de la superficie —era el que tenía su forma de identificación abierta— y su capacidad se ejerce por A-05, bajo esta misma guardia. **§5**: **FA-04** se rehace: deja de describir un punto sin guardia definida y pasa a describir la **excepción declarada** de A-05, que desde el intake 1.13 cubre el primer ingreso además del cambio posterior a un reseteo. **§10**: el conjunto cerrado del ensamblado pasa de diecisiete a **quince** códigos. La cabecera cita el intake **1.13**. **La guardia, sus tres causas de `401` y su recuento de once puntos protegidos no cambian**, y ahora esos once son todos los que exigen acceso: no queda ninguno aparte. Sube minor. |

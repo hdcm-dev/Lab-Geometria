@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -27,8 +27,8 @@
 
 | Documento | Propósito | Estado |
 | --- | --- | --- |
-| [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro: las cinco responsabilidades, la frontera entre lo que se decide y lo que se transporta, el catálogo, la tabla de las quince reglas, la matriz NB → CU → RN → US, el criterio de recorte, las omisiones y los doce puntos abiertos. **Es el punto de entrada** | Propuesto |
-| [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) | Documento de concepto central: los dieciséis puntos de acceso, los diez códigos de respuesta, las dos traducciones, la tabla de los diecisiete códigos del contrato, las seis ausencias declaradas y lo que ninguna respuesta puede decir | Propuesto |
+| [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro: las cinco responsabilidades, la frontera entre lo que se decide y lo que se transporta, el catálogo, la tabla de las dieciséis reglas, la matriz NB → CU → RN → US, el criterio de recorte, las omisiones y los once puntos abiertos. **Es el punto de entrada** | Propuesto |
+| [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) | Documento de concepto central: los quince puntos de acceso, los diez códigos de respuesta, las dos traducciones, la tabla de los quince códigos del contrato, las **siete** ausencias declaradas y lo que ninguna respuesta puede decir | Propuesto |
 | [`Glosario-Funcional.md`](Glosario-Funcional.md) | Vocabulario que esta categoría acuña y los tres términos con más de un referente | Propuesto |
 | `Casos-De-Uso/` | Doce casos de uso, uno por archivo | Propuesto |
 | `README.md` | Este archivo: índice navegable, orden de lectura y omisiones | Propuesto |
@@ -55,7 +55,7 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 ## 3. Orden de lectura sugerido
 
 1. [`Especificacion-Funcional.md`](Especificacion-Funcional.md) §1, §3 y §4: qué es esta capa, qué responsabilidades tiene y **qué decide y qué sólo transporta**. Sin §4, los doce casos de uso se leen como si acá se tomaran decisiones de negocio, que es exactamente lo que no pasa.
-2. [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) **entero, y antes que cualquier caso de uso**, con especial atención a su **§2**: qué declara una fuente y qué es derivación de esta categoría. Leer §3 sin §2 hace creer que las dieciséis rutas están decididas, y **quince de ellas no lo están**.
+2. [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) **entero, y antes que cualquier caso de uso**, con especial atención a su **§2**: qué declara una fuente y qué es derivación de esta categoría. Leer §3 sin §2 hace creer que las quince rutas están decididas, y **quince de ellas no lo están**.
 3. **CU-02**, la guardia, antes que los puntos que gobierna. Un punto de acceso leído sin la guardia parece más abierto de lo que es.
 4. Los casos de uso de puntos, en el orden del recorrido de la persona: **CU-03** y **CU-01** —el alta y la entrada—, después **CU-06** y **CU-07** —lo que el alumno hace—, después **CU-04**, **CU-05** y **CU-08** —lo que el administrador hace—.
 5. **CU-09**, que se lee mejor después de haber visto qué puede fallar en cada punto. Su §10 es donde están los dos huecos del conjunto cerrado.
@@ -75,12 +75,12 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 ## 5. Notas de uso de esta sección
 
 - **Los identificadores `CU-XX` son locales a este proyecto de código.** No coinciden con los de `GeometriaFactory-Application`, ni con los de `GeometriaFactory-Contracts`, ni con los de `GeometriaFactory-Infrastructure`. La correspondencia se lee por §3, §7.1 y §7.4 del índice maestro, **nunca por número**.
-- **Los `A-XX` no son casos de uso.** Son los dieciséis puntos de acceso, y un caso de uso puede describir más de uno. La correspondencia está en `Definicion-Superficie-HTTP.md` §3.
-- **Quince de las dieciséis rutas son propuesta derivada de esta categoría**, rotuladas fila por fila. La única que declara una fuente es la del canje de credenciales. Leerlas como decididas es el error de lectura más probable de esta sección.
+- **Los `A-XX` no son casos de uso.** Son los quince puntos de acceso, y un caso de uso puede describir más de uno. La correspondencia está en `Definicion-Superficie-HTTP.md` §3.
+- **Catorce de las quince rutas son propuesta derivada de esta categoría**, rotuladas fila por fila. La única que declara una fuente es la del canje de credenciales. Leerlas como decididas es el error de lectura más probable de esta sección.
 - **Esta categoría no agrega ningún código al conjunto cerrado del contrato.** Donde falta uno, el hueco se **declara** y se eleva, y mientras tanto se usa el genérico. Los dos huecos están en `CU-09` §10.
 - **Esta categoría no toma decisiones de arquitectura**: las rutas definitivas, los nombres de tipos, la herramienta de configuración, el formato del archivo de la colección y los ADR pertenecen a `05-Arquitectura-Tecnica`; la estrategia de pruebas, a `08-Calidad-Y-Pruebas`; el despliegue, que el intake declara **manual y a cargo del docente**, a `09-Devops`. Lo que acá se declara como «tests previstos» es una previsión, no un plan.
 - **Ningún dato de prueba se inventó.** Los escenarios se citan por el identificador del intake —`E-1` a `E-8`— sin renumerar, y es una regla de delivery del producto, no una preferencia de esta categoría.
-- **Doce puntos abiertos**, ninguno bloqueante: **ocho propios** y **cuatro** heredados de aguas arriba que no se reabren. **Tres de los ocho son huecos de la superficie que esta categoría encontró y elevó al Product Owner**: cómo se identifica la cuenta al establecer la contraseña del primer ingreso, y los dos caminos para los que el conjunto cerrado de códigos no declara ninguno. Están en §11 del índice maestro.
+- **Once puntos abiertos**, ninguno bloqueante: **siete propios** y **cuatro** heredados de aguas arriba que no se reabren. **Dos de los siete son huecos de la superficie que esta categoría encontró y elevó al Product Owner**: cómo se identifica la cuenta al establecer la contraseña del primer ingreso, y los dos caminos para los que el conjunto cerrado de códigos no declara ninguno. Están en §11 del índice maestro.
 - **Un residuo de forma de un documento hermano**, anotado para que se absorba y no para corregirlo desde acá: `GeometriaFactory-Infrastructure` §7.2 declara ser una de las **dos** secciones del producto que cubren las nueve necesidades, y con esta emisión son **tres**. Está en §7.2 y en §11 del índice maestro.
 
 ## 6. Control de cambios
@@ -88,3 +88,4 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de los doce casos de uso y de los tres documentos transversales de la sección; orden de lectura de ocho pasos, **que insiste en leer §2 del documento de concepto central antes que su tabla de rutas**, porque quince de las dieciséis son propuesta derivada; las omisiones con su motivo, incluida la del modelo de datos pese al flag de persistencia en true y la de la sección opcional que la regla asigna a otro tipo; y las notas de uso, con los doce puntos abiertos y los tres huecos elevados al Product Owner. |
+| 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**, que **cierran el punto abierto más importante de esta categoría**: la identidad en el establecimiento de la contraseña del primer ingreso. §1 y §4 actualizan los recuentos: los puntos de acceso pasan de dieciséis a **quince** con el retiro de `A-04`, las rutas derivadas de quince a **catorce**, y los puntos abiertos de doce a **once** —siete propios y cuatro heredados—, con los huecos de superficie elevados al Product Owner de tres a **dos**. Ningún artefacto se agrega ni se omite y el orden de lectura no cambia. (Analista Funcional + API Designer (AG-02)). |

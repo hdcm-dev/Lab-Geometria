@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-09-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md), [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-03, RN-09), §7 (CL-2, CL-5, CL-8), §14 (**RA-03**), §17.5.P.5, §17.5.P.10; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md` completo, y la §6 de sus otros siete contratos de uso; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3, §2.3 y §5, que declara que la traducción de sus condiciones hacia afuera del proceso pertenece a este proyecto de código
+**Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md), [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (RN-03, RN-09, **RN-16**), §7 (CL-2, CL-5, CL-8), §14 (**RA-03**), §17.5.P.5, §17.5.P.10; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md` completo, y la §6 de sus otros siete contratos de uso; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3, §2.3 y §5, que declara que la traducción de sus condiciones hacia afuera del proceso pertenece a este proyecto de código
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -32,7 +32,7 @@
 
 Declarar **cómo un fallo se convierte en una respuesta**, que es lo que ningún punto de acceso puede declarar por su cuenta y lo que ninguna capa de adentro puede hacer.
 
-No es un punto de acceso: es una responsabilidad de **todos** ellos, y su unidad de verificación no es una ruta sino **el conjunto cerrado de diecisiete códigos** del ensamblado de contratos. Se prueba recorriéndolo entero, no ejerciendo un camino.
+No es un punto de acceso: es una responsabilidad de **todos** ellos, y su unidad de verificación no es una ruta sino **el conjunto cerrado de quince códigos** del ensamblado de contratos. Se prueba recorriéndolo entero, no ejerciendo un camino.
 
 Dos cosas se deciden acá y ninguna otra capa puede repararlas:
 
@@ -57,7 +57,7 @@ Y una tercera que es una prohibición: **nada de lo que sale por acá puede expo
 ## 4. Flujo principal
 
 1. Un punto de acceso termina con un motivo interno en lugar de un resultado.
-2. Se busca el código del contrato que le corresponde, dentro del conjunto cerrado de **diecisiete**.
+2. Se busca el código del contrato que le corresponde, dentro del conjunto cerrado de **quince**.
 3. Se busca el código de respuesta que le corresponde a ese código, en la tabla de [`Definicion-Superficie-HTTP.md`](../Definicion-Superficie-HTTP.md) §6.
 4. Se compone la respuesta de error del contrato: **código, texto neutro, detalles de ubicación cuando los hay y momento**, y nada más.
 5. Se verifica que el texto neutro **no contenga direcciones de servicio, rutas de archivo de datos ni valores de secreto**.
@@ -133,3 +133,4 @@ Este contrato no declara condiciones propias: **es el que las traduce**. Lo que 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** El conjunto cerrado de códigos del ensamblado —que es la **unidad de verificación** de este caso de uso— pasa de diecisiete a **quince**: salen `CONTRATO_CONTRASENA_NO_ESTABLECIDA` y `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA`, los dos por imposibilidad de su causa, y ninguno entra. §1 y §4 actualizan el recuento, y la prueba prevista de §9 —**una por código del conjunto cerrado**— pasa por lo tanto de diecisiete a **quince** casos. La cabecera cita el intake **1.13**. **Las dos traducciones, la tabla de destinos y las siete condiciones de §6 no cambian de forma.** Sube minor. |

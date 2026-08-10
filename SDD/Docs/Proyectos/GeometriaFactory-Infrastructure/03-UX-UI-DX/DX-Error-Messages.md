@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** DX-Error-Messages.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los **diez** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-10), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4 (**la frontera entre mecanismo y decisión** y sus cinco precisiones), §6 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §3, §4 y §8; `02-Especificacion-Funcional/Modelo-Datos/` completo; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-15 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/` §4 y §6, y su `CU-05` §6, que declara qué motivo recibe por el puerto de validación; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11 (RN-B3, RN-B5), §14 (RA-03), §17.3 íntegro
+**Trazabilidad upstream:** §6 de los **diez** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-10), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4 (**la frontera entre mecanismo y decisión** y sus cinco precisiones), §6 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §3, §4 y §8; `02-Especificacion-Funcional/Modelo-Datos/` completo; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-16 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/` §4 y §6, y su `CU-05` §6, que declara qué motivo recibe por el puerto de validación; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11 (RN-B3, RN-B5), §14 (RA-03), §17.3 íntegro
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Infrastructure
 
 ---
@@ -284,6 +284,7 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Cataloga las **17** condiciones distintas derivadas de la §6 de los diez casos de uso, sobre **19** filas declaradas y **17** filas de tabla, sin ninguna excedente. Declara los siete resultados que **no** son condiciones de error, con la confusión más cara de esta capa; la prohibición de §1.4 sobre los tres secretos y la ruta del almacén, con su contracara de registro del lado del servidor; la taxonomía con **dos categorías vacías** —conflicto de facultad y de alcance— y su motivo, que es el espejo del proyecto de código hermano; la forma de terminación **arranque detenido**, propia de esta capa, y la ausencia declarada de «motivo de resultado»; las tres condiciones que fallan hacia el lado seguro, con el atajo tentador de cada una y por qué el atajo es peor; y la ausencia declarada de `CU-09` del catálogo. |
 | 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: el punto 3 de §5 decía que qué hace el validador con el separador decimal de la cultura del alumno era un punto abierto de la categoría 02; pasa a declarar el resultado que el intake 1.12 fija en §20.E-8 punto 5 —error de validación con índice de figura y campo, y el trabajo en `Borrador`— y a remitir a `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y a `CU-01` CA-12. **H-04**: la entrada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` de §3.2 nombra dónde queda registrado el punto abierto que declara. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. Las 17 condiciones, sus recuentos de §7.1 a §7.4 y la taxonomía no cambian. |
+| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que el reseteo— y lleva las reglas de negocio del producto de quince a **dieciséis**. La cabecera de trazabilidad y la tabla de referencias pasan a declarar el rango **`RN-01` a `RN-16`**. **Ninguna decisión, ningún artefacto y ninguna condición de este documento cambia**: RN-16 no tiene tramo propio acá. Sube minor. |
 
 ## 7. Cobertura y trazabilidad
 
@@ -366,7 +367,7 @@ Tres notas sobre las columnas, para que nadie las complete con atribuciones inve
 | Rol de intervención | Implementador de adaptadores, mantenedor de la capa y **operador del despliegue**, que acá sí existe ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.1) |
 | Superficie pública que se documenta | Las 17 condiciones de error de los diez contratos, y la frontera entre mecanismo y decisión de `Especificacion-Funcional.md` §4 |
 | CU origen | CU-01 a CU-10, §6 de cada uno. **`CU-09` no declara ninguna** |
-| Reglas de negocio relevantes | RN-01 a RN-15 de `GeometriaFactory-Domain`, con la correspondencia de §7.3. **Tres tienen su tramo principal en esta capa**: RN-08, RN-09 y RN-14 |
+| Reglas de negocio relevantes | RN-01 a RN-16 de `GeometriaFactory-Domain`, con la correspondencia de §7.3. **Tres tienen su tramo principal en esta capa**: RN-08, RN-09 y RN-14 |
 | Necesidades de negocio | NB-01 a NB-09, las nueve. La correspondencia está en `Especificacion-Funcional.md` §7.1 |
 | Wireframes asociados | N/A. `tiene_ui_final` == false |
 | US a generar en 06 | US del catálogo mantenido junto al código; US de las tres condiciones que fallan hacia el lado seguro, **con el atajo prohibido como criterio de aceptación**; US de la prohibición de §1.4, con inspección del registro del servidor |

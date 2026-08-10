@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** RC-07-La-Marca-No-Es-Un-Estado-De-Cuenta.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -27,7 +27,7 @@ Dos atributos del modelo que no son lo que su vecino sugiere, y que por eso comp
 
 ## 3. Ámbito de aplicación
 
-- La marca alcanza a la entidad **cuenta**. **La pone únicamente el reseteo del administrador y la levanta únicamente el cambio efectivo hecho por la propia cuenta**, que es lo que enuncia el invariante que la sostiene.
+- La marca alcanza a la entidad **cuenta**. **La ponen la habilitación y el reseteo del administrador, y la levanta únicamente el cambio efectivo hecho por la propia cuenta.** Hasta `PRODUCT-INTAKE` 1.12 la ponía sólo el reseteo, y **RN-16** le agregó la habilitación (1.13 §4.1). **Constancia**: el enunciado de INV-09 en §17.1.P.2 del intake sigue diciendo «únicamente el reseteo», frase de la 1.7 que la propia 1.13 contradice en su §4.1; esta regla conceptual transcribe la decisión y no la letra, con el mismo criterio que `GeometriaFactory-Domain` `Definicion-Modelo-De-Dominio.md` §4.1.
 - El comentario alcanza a la entidad **trabajo**, en sus estados `Finalizado` y `Rechazado`.
 - **El almacén no comprueba ninguna de las dos guardas.** Quién puede poner la marca, quién puede levantarla y desde qué estado se comenta son decisiones del dominio y de la capa de aplicación. Lo que el modelo de datos sostiene es que **existan como atributos separados**, que es la condición para que esas decisiones se puedan tomar.
 - El **estado `Rechazado`** pertenece al conjunto cerrado de estados del trabajo desde la ampliación del circuito de revisión, junto con `Borrador`, `Pendiente` y `Finalizado`.
@@ -54,3 +54,4 @@ Modelar el comentario como entidad con historial tampoco produce rechazo: produc
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**: habilitar una cuenta produce su contraseña provisoria y deja la marca puesta. **§3** declara que la marca tiene **dos** orígenes y no uno, y deja la constancia del desfase entre el enunciado de INV-09 en §17.1.P.2 —que sigue diciendo «únicamente el reseteo»— y lo que RN-16 decide en §4.1 de la misma versión. **La regla no cambia**: la marca sigue sin ser un cuarto estado de cuenta, y sigue siendo ortogonal a la situación. Lo que cambia es cuántos actos la ponen. Sube minor. |

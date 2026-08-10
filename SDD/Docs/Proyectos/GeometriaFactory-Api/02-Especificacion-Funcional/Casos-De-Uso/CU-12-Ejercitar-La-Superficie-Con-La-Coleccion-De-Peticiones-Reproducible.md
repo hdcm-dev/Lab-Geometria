@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-12-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §16.1 (qué hay en la carpeta de muestras para el tipo `rest-api`), §18 (**S-2**, con su reproducibilidad de cinco pasos o menos), §15 (regla de delivery: **no se inventan textos de prueba**), §20 (**los ocho escenarios**, E-1 a E-8), §21 (matriz de cobertura), §17.5.P.6, §10 (host de desarrollo sin herramientas)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §16.1 (qué hay en la carpeta de muestras para el tipo `rest-api`), §18 (**S-2**, con su reproducibilidad de cinco pasos o menos), §15 (regla de delivery: **no se inventan textos de prueba**), §20 (**los ocho escenarios**, E-1 a E-8), §21 (matriz de cobertura), §17.5.P.6, §10 (host de desarrollo sin herramientas)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y **`10-Examples`** de GeometriaFactory-Api
 
 ---
@@ -64,7 +64,7 @@ El recorrido que la colección ejecuta, en orden:
 | # | Qué ejercita | Puntos de acceso |
 | --- | --- | --- |
 | 1 | Configurar la cuenta de administrador en el primer arranque, y comprobar que **un segundo intento no procede** | A-03 |
-| 2 | Registrar una cuenta de alumno, habilitarla y establecer su contraseña | A-02, A-01, A-06, A-07, A-04 |
+| 2 | Registrar una cuenta de alumno, habilitarla —lo que devuelve su contraseña provisoria— y cambiarla con esa provisoria como vigente | A-02, A-01, A-06, A-07, A-05 |
 | 3 | Canjear credenciales como alumno y como administrador | A-01 |
 | 4 | Enviar **los ocho escenarios** como cuerpo, uno por trabajo | A-10 |
 | 5 | Listar y abrir el detalle de cada uno, con los dos papeles | A-13, A-14 |
@@ -116,7 +116,7 @@ Este contrato no produce condiciones propias: **las provoca a propósito** y com
 | CA-05 | El paso 7 del recorrido | Se ejecuta | Fuerza **al menos** la eliminación de un trabajo que no está en `Borrador` por su dueño, la eliminación de un trabajo ajeno y el desenlace pedido por un alumno, y **las 3** son rechazadas por el servicio, no por una pantalla |
 | CA-06 | El paso 8 del recorrido | Se ejecuta | Después del reseteo, el listado pedido por el alumno responde con el rechazo de la guardia, y **después** del cambio de contraseña la misma petición funciona |
 | CA-07 | Los archivos de la colección | Se inspeccionan | **0 apariciones** de una clave de firma, de una contraseña real y de la dirección de un servidor de producción. Lo que contienen son datos de prueba declarados del producto |
-| CA-08 | La colección | Se recorre contra la tabla de puntos de acceso | Ejercita **14 de los 16** puntos —A-01 a A-07 y A-09 a A-15—. Los **2** que no ejercita, A-08 y A-16, se declaran en §10 con su motivo. 14 + 2 = 16 |
+| CA-08 | La colección | Se recorre contra la tabla de puntos de acceso | Ejercita **13 de los 15** puntos —A-01 a A-03, A-05 a A-07 y A-09 a A-15—. Los **2** que no ejercita, A-08 y A-16, se declaran en §10 con su motivo. 13 + 2 = 15. El punto **A-04 se retiró** de la superficie con `PRODUCT-INTAKE` 1.13 y por eso ni se ejercita ni se cuenta |
 
 ## 9. Trazabilidad
 
@@ -144,3 +144,4 @@ Este contrato no produce condiciones propias: **las provoca a propósito** y com
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**, que retiran el punto de acceso **A-04** de la superficie. **§4** rehace el guion 2 de la colección: la habilitación devuelve la provisoria y el cambio se hace por **A-05**, con esa provisoria como vigente, en lugar de establecerla por A-04. **§8** actualiza **CA-08**: la cobertura pasa de **14 de 16** a **13 de 15**, con los mismos dos puntos no ejercitados y su mismo motivo. La cabecera cita el intake **1.13**. **La reproducibilidad de cinco pasos, los ocho escenarios de datos y la prohibición de inventar textos de prueba no cambian.** Sube minor. |

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Modelo-Conceptual.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.3.P.4 íntegro —tabla de persistencia, modelo de datos, ampliación del 2026-08-09 sobre los sellos y ampliación del 2026-08-08 por el circuito de revisión—, §17.3.P.11, §17.3.P.12, §4.1 y §4.2 (modelo de estados del trabajo), §17.1.P.2 (invariantes); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`, que es el modelo del dominio que éste materializa
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §17.3.P.4 íntegro —tabla de persistencia, modelo de datos, ampliación del 2026-08-09 sobre los sellos y ampliación del 2026-08-08 por el circuito de revisión—, §17.3.P.11, §17.3.P.12, §4.1 y §4.2 (modelo de estados del trabajo), §17.1.P.2 (invariantes); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`, que es el modelo del dominio que éste materializa
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Infrastructure
 
 ---
@@ -80,7 +80,7 @@ erDiagram
 | Nombre y apellido | Datos del alta |
 | Papel | `Alumno` o `Administrador`. **Una sola cuenta con papel `Administrador` en el almacén** |
 | Estado de cuenta | `Pendiente`, `Habilitado` o `Bloqueado` |
-| Credencial derivada | **Nula hasta el primer ingreso efectivo.** Nunca en claro, nunca con resumen simple |
+| Credencial derivada | **Nula mientras la cuenta está `Pendiente`, y con valor desde el acto de habilitación**, que la fija con la provisoria que el sistema produce (**RN-16**). Nunca en claro, nunca con resumen simple |
 | Marca de cambio de contraseña pendiente | Atributo propio, **que no es un estado de cuenta** (`RC-07`) |
 | Fecha de alta | La aporta el consumidor. **No hay fecha de última modificación de la cuenta**, y el motivo está en `RC-06` |
 
@@ -184,3 +184,4 @@ erDiagram
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara las nueve decisiones de almacenamiento, las cinco entidades con sus atributos, las cuatro relaciones, los cuatro conjuntos cerrados, las siete reglas conceptuales de modelo con su archivo propio, la tabla de lo que no vive acá y los cuatro puntos abiertos. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** La fila de **credencial derivada** decía que era nula «hasta el primer ingreso efectivo», y eso dejó de ser cierto: se fija **en el acto de habilitación**, con la contraseña provisoria que el sistema produce. **Ninguna tabla, ninguna clave, ninguna cardinalidad y ninguna regla conceptual del modelo cambia**: lo que cambió es en qué momento el atributo pasa de nulo a tener valor, no su forma ni su nulabilidad. La cabecera cita el intake **1.13**. Sube minor. |

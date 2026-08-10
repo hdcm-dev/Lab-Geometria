@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** DX-Developer-Experience.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §8 y §11; §6 de los diez casos de uso CU-01 a CU-10 de `02-Especificacion-Funcional/Casos-De-Uso/`, y sus §3, §5, §9 y §10; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` completo; `02-Especificacion-Funcional/Modelo-Datos/` completo; `02-Especificacion-Funcional/Glosario-Funcional.md`; `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `00-Contexto/Alcance-Producto.md`; `01-Necesidades-Negocio/Necesidades-Negocio.md` (NB-01 a NB-09); RN-01 a RN-15 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4, §6 y §8; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11, §14 y §17.3 íntegro
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §8 y §11; §6 de los diez casos de uso CU-01 a CU-10 de `02-Especificacion-Funcional/Casos-De-Uso/`, y sus §3, §5, §9 y §10; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` completo; `02-Especificacion-Funcional/Modelo-Datos/` completo; `02-Especificacion-Funcional/Glosario-Funcional.md`; `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `00-Contexto/Alcance-Producto.md`; `01-Necesidades-Negocio/Necesidades-Negocio.md` (NB-01 a NB-09); RN-01 a RN-16 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4, §6 y §8; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11, §14 y §17.3 íntegro
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de GeometriaFactory-Infrastructure
 
 ---
@@ -99,7 +99,7 @@ Tres precisiones que la tabla no alcanza a decir sola:
 
 ### 1.4 Las tres cosas que sólo se rompen acá
 
-De las quince reglas de negocio del producto, **tres tienen su tramo principal en esta capa**, y es la única de la que eso se puede decir. La consecuencia práctica es directa: **si acá se hacen mal, ninguna capa de más adentro puede repararlas**.
+De las **dieciséis** reglas de negocio del producto, **tres tienen su tramo principal en esta capa**, y es la única de la que eso se puede decir. La consecuencia práctica es directa: **si acá se hacen mal, ninguna capa de más adentro puede repararlas**.
 
 | Regla | Qué se rompe si acá se hace mal | Dónde se verifica |
 | --- | --- | --- |
@@ -241,7 +241,7 @@ No hay canal de issues externo ni encuesta a developers de adopción: el equipo 
 | Rol de intervención | Implementador de adaptadores, mantenedor de la capa y **operador del despliegue**, los tres internos al producto. El integrador por casos de uso **no aplica** acá (§1.1) |
 | Superficie pública que se documenta | Los diez contratos de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/): los cuatro puertos que implementa, los dos mecanismos que provee y la responsabilidad de arranque |
 | CU origen | CU-01 a CU-10 de este proyecto de código |
-| Reglas de negocio relevantes | RN-01 a RN-15, con el lugar donde se ejerce cada una declarado en `Especificacion-Funcional.md` §6: **trece con tramo acá, dos sin él, y tres con su tramo principal acá** —RN-08, RN-09 y RN-14— |
+| Reglas de negocio relevantes | RN-01 a RN-16, con el lugar donde se ejerce cada una declarado en `Especificacion-Funcional.md` §6: **trece con tramo acá, dos sin él, y tres con su tramo principal acá** —RN-08, RN-09 y RN-14— |
 | Reglas conceptuales de modelo | RC-01 a RC-07, en [`../02-Especificacion-Funcional/Modelo-Datos/`](../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md) |
 | Necesidades de negocio | NB-01 a NB-09, **las nueve**, tres de ellas parcialmente. Es una de las dos secciones del producto que las tocan todas —la otra es `GeometriaFactory-Web`—, y el motivo está en `Especificacion-Funcional.md` §7.2 |
 | Wireframes asociados | N/A. `tiene_ui_final` == false; el mínimo de wireframes para `library` es cero (`Rules-UX-UI-DX.md` §2.2) |
@@ -260,3 +260,4 @@ No hay canal de issues externo ni encuesta a developers de adopción: el equipo 
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial de la categoría para este proyecto de código. Declara el rol de intervención con **tres tipos internos, entre ellos el operador del despliegue**, que las capas de adentro declaran no aplicable y que acá tiene fila propia porque seis de las diecisiete condiciones se diagnostican mirando el despliegue; el enunciado de que esta capa **no tiene superficie propia** sino la forma de los contratos que otra declaró, con sus cinco consecuencias y las dos garantías que se rompen produciendo algo válido; la frontera entre el mecanismo y la decisión en tabla, con sus tres precisiones; **las tres reglas cuyo tramo principal vive acá** —RN-08, RN-09 y RN-14— con lo que se rompe en cada caso y dónde se verifica; el onboarding en tres tramos, con el de 30 minutos dedicado al dato real del alumno; el quick-start entero dentro del entorno de desarrollo contenido, con el guion de reinicio del almacén como cuarto paso propio; la ubicación de los cuatro modos de Diátaxis; los principios de error con sus cinco precisiones, entre ellas la confusión más cara del producto; **ocho métricas DX** medibles a mano, tres de ellas con tolerancia cero; y el lazo de retroalimentación apoyado en el punto de control, en la batería obligatoria y en el despliegue a mano del docente. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y lleva las reglas de negocio del producto de quince a **dieciséis**. §3 actualiza el recuento de las reglas de negocio del producto, que esta guía cita al declarar cuáles tienen su tramo principal acá; **las tres siguen siendo las mismas** —RN-08, RN-09 y RN-14—. **Ninguna decisión de este documento cambia.** Sube minor. |

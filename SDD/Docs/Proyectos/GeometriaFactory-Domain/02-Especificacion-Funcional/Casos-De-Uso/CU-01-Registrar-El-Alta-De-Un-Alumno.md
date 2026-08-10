@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-01-Registrar-El-Alta-De-Un-Alumno.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -49,7 +49,7 @@ El alumno y el administrador **no** son actores de este caso de uso: son los suj
 
 - Correo, nombre y apellido están presentes y no vacíos.
 - El consumidor ya comprobó que el correo no está en uso por otra cuenta, porque el correo es único en todo el sistema (INV-01, RN-02) y esa comprobación exige el conjunto de alumnos.
-- No se aporta credencial derivada: **el auto-registro del alumno no incluye contraseña**, y el alumno la establece en su primer ingreso efectivo (PRODUCT-INTAKE §4, F-02 y F-04). La configuración del administrador sí la incluye, y por eso es otro caso de uso.
+- No se aporta credencial derivada: **el auto-registro del alumno no incluye contraseña** (PRODUCT-INTAKE §4, F-02). La cuenta la recibe **en el acto de habilitación**, con la contraseña provisoria que el sistema produce, y el alumno elige la suya cambiándola (F-04 precisada, **RN-16**). La configuración del administrador sí incluye la contraseña en el alta, y por eso es otro caso de uso.
 - La fecha de alta la aporta el consumidor, porque el dominio no lee el reloj.
 - **El papel con el que se constituye la cuenta es `Alumno`.** Este caso de uso no constituye cuentas de administrador: ésas son CU-12.
 
@@ -78,7 +78,7 @@ El alumno y el administrador **no** son actores de este caso de uso: son los suj
 | --- | --- | --- |
 | `DATO_OBLIGATORIO_AUSENTE` | Correo, nombre o apellido vacío o no provisto | Rechaza la constitución. No se produce ninguna instancia y no hay efecto parcial |
 | `UNICIDAD_DE_CORREO_NO_VERIFICADA` | El consumidor no declara haber comprobado que el correo esté libre | Rechaza la constitución: el dominio no admite constituir un alumno cuya unicidad de correo nadie verificó (INV-01) |
-| `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` | Se aporta una credencial derivada en el **auto-registro** | Rechaza la constitución: en este camino la credencial se fija recién en el primer ingreso efectivo (CU-03). En la configuración del administrador la credencial sí se aporta, y eso es CU-12 |
+| `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` | Se aporta una credencial derivada en el **auto-registro** | Rechaza la constitución: en este camino la credencial se fija recién en el acto de habilitación (CU-02, con la fijación de CU-03). En la configuración del administrador la credencial sí se aporta, y eso es CU-12 |
 | `ESTADO_INICIAL_NO_NEGOCIABLE` | Se solicita constituir la cuenta del **auto-registro** en un estado distinto de `Pendiente` | Rechaza la constitución. El estado inicial de este camino es siempre `Pendiente`; el del otro camino de alta es siempre `Habilitado` y lo fija CU-12 |
 | `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` | Se solicita constituir una cuenta con papel `Administrador` por el auto-registro | Rechaza la constitución y remite a CU-12, que es el camino que la fuente declara para F-01 |
 

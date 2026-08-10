@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** DX-Developer-Experience.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §8 y §11; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` completo; §6 de los doce casos de uso CU-01 a CU-12, y sus §3, §5, §9 y §10; `02-Especificacion-Funcional/Glosario-Funcional.md`; `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `00-Contexto/Alcance-Producto.md`; `01-Necesidades-Negocio/Necesidades-Negocio.md` (NB-01 a NB-09); RN-01 a RN-15 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/` §6 y su `CU-06`; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §10, §14, §16, §18 y §17.5 íntegro
+**Trazabilidad upstream:** `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4, §6, §8 y §11; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` completo; §6 de los doce casos de uso CU-01 a CU-12, y sus §3, §5, §9 y §10; `02-Especificacion-Funcional/Glosario-Funcional.md`; `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `00-Contexto/Alcance-Producto.md`; `01-Necesidades-Negocio/Necesidades-Negocio.md` (NB-01 a NB-09); RN-01 a RN-16 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/` §6 y su `CU-06`; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §10, §14, §16, §18 y §17.5 íntegro
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops`, `10-Examples` y `11-Documentacion` de GeometriaFactory-Api
 
 ---
@@ -52,12 +52,12 @@ Nivel de experiencia esperado: quien ya escribe servicios HTTP, pero **no** nece
 
 ### 1.2 Qué es la superficie pública de este proyecto de código
 
-> **Este proyecto de código no tiene otra superficie que su superficie HTTP.** No lo referencia nadie por compilación —es el nivel 3, el último del orden topológico— y no expone ningún tipo propio: los tipos son del ensamblado de contratos. **Lo único que existe de él hacia afuera son sus dieciséis puntos de acceso.**
+> **Este proyecto de código no tiene otra superficie que su superficie HTTP.** No lo referencia nadie por compilación —es el nivel 3, el último del orden topológico— y no expone ningún tipo propio: los tipos son del ensamblado de contratos. **Lo único que existe de él hacia afuera son sus quince puntos de acceso.**
 
 Cinco consecuencias operativas, que gobiernan todo lo demás:
 
 1. **Lo que no está en la superficie, no existe para nadie.** Una capacidad implementada en las tres capas de adentro y no expuesta acá es una capacidad que el producto no tiene. El mapa completo está en [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, y **es la primera lectura de esta sección**.
-2. **Quince de las dieciséis rutas son propuesta derivada.** Las únicas cosas que una fuente declara son el punto de canje de credenciales, con su ruta, y la existencia de un punto de salud, cuya ruta **la fuente no da**. Leer la tabla sin haber leído §2 de aquel documento es el error de lectura más probable de todo este proyecto de código.
+2. **Catorce de las quince rutas son propuesta derivada.** Las únicas cosas que una fuente declara son el punto de canje de credenciales, con su ruta, y la existencia de un punto de salud, cuya ruta **la fuente no da**. Leer la tabla sin haber leído §2 de aquel documento es el error de lectura más probable de todo este proyecto de código.
 3. **Acá se traduce dos veces, y traducir es decidir.** De motivo interno a código del contrato, y de código del contrato a código de respuesta. La segunda traducción es la que puede romper una regla hacia afuera sin que nada falle.
 4. **Acá está la única puerta.** Un puerto publicado hacia el enrutador es el único punto de entrada al servidor propio. Todo lo demás del backend está detrás.
 5. **Acá se aplica RA-03 en el único lugar donde se puede violar hacia afuera.** Es la última vez que un dato del backend se toca antes de salir del servidor propio.
@@ -89,7 +89,7 @@ Tres precisiones que la tabla no alcanza a decir sola:
 
 ### 1.4 Las dos cosas que sólo se rompen acá
 
-De las quince reglas de negocio del producto, **dos se pueden romper desde esta capa hacia afuera sin que ninguna capa de adentro se entere**, porque las de adentro habrían hecho su parte bien.
+De las **dieciséis** reglas de negocio del producto, **dos se pueden romper desde esta capa hacia afuera sin que ninguna capa de adentro se entere**, porque las de adentro habrían hecho su parte bien.
 
 | Regla | Qué se rompe si acá se hace mal | Dónde se verifica |
 | --- | --- | --- |
@@ -217,9 +217,9 @@ No hay canal de issues externo ni encuesta a developers de adopción. El lazo ex
 | Dimensión | Referencia |
 | --- | --- |
 | Rol de intervención | Implementador de la superficie, **consumidor de la superficie**, mantenedor de la capa y **operador del despliegue**, los cuatro internos al producto (§1.1) |
-| Superficie pública que se documenta | Los **dieciséis** puntos de acceso de [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, y las dos traducciones |
+| Superficie pública que se documenta | Los **quince** puntos de acceso de [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, y las dos traducciones |
 | CU origen | CU-01 a CU-12 de este proyecto de código |
-| Reglas de negocio relevantes | RN-01 a RN-15, con el lugar donde se ejerce cada una declarado en `Especificacion-Funcional.md` §6: **trece con tramo acá, dos sin él, y dos que esta capa puede romper hacia afuera sola** —RN-03 y RN-13— |
+| Reglas de negocio relevantes | RN-01 a RN-16, con el lugar donde se ejerce cada una declarado en `Especificacion-Funcional.md` §6: **trece con tramo acá, dos sin él, y dos que esta capa puede romper hacia afuera sola** —RN-03 y RN-13— |
 | Necesidades de negocio | NB-01 a NB-09, **las nueve**, tres de ellas parcialmente, y **NB-08 con su primer tramo propio del producto** |
 | Wireframes asociados | N/A. `tiene_ui_final` == false |
 | US a generar en 06 | US de la guardia sobre los once puntos, **con el recuento como criterio de aceptación**; US de las dos traducciones; US del arranque detenido; US de la colección reproducible en tres pasos; US del quick-start verificable en el punto de control |
@@ -236,3 +236,4 @@ No hay canal de issues externo ni encuesta a developers de adopción. El lazo ex
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial de la categoría para este proyecto de código. Declara el rol de intervención con **cuatro tipos internos**, entre ellos el **consumidor de la superficie**, que las capas de adentro declaran no aplicable, y el **operador del despliegue**; el enunciado de que **este proyecto de código no tiene otra superficie que su superficie HTTP**, con sus cinco consecuencias y las tres ausencias que RA-01 produce; la frontera entre lo que se decide y lo que se transporta, con sus tres precisiones, incluida la no aplicabilidad declarada de RA-02; **las dos reglas que esta capa puede romper hacia afuera sola** —RN-03 y RN-13— con lo que se rompe en cada caso y dónde se verifica; el onboarding en tres tramos, con el de una hora dedicado a por qué los ocho escenarios responden con éxito; el quick-start de tres pasos entero dentro del entorno de desarrollo contenido; la ubicación de los cuatro modos de Diátaxis; los principios de error con sus cinco precisiones, entre ellas la confusión más cara de esta capa y las tres familias de respuestas deliberadamente empobrecidas; **nueve métricas DX** medibles a mano, cinco con tolerancia cero; y el lazo de retroalimentación apoyado en el punto de control, en la colección, en el consumidor de la superficie y en el despliegue a mano del docente. |
+| 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**: el punto de acceso `A-04` se retira de la superficie, porque la escritura anónima que exponía dejó de existir. §1 y §8 actualizan los recuentos —de dieciséis a **quince** puntos, y de quince a **catorce** rutas derivadas—. **Ninguna métrica, ningún compromiso de verificación y ningún principio de esta guía cambia.** Sube minor. |

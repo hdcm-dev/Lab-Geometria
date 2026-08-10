@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -83,3 +83,4 @@ Los tres artefactos siguientes **no se emiten**, y el motivo se declara acá y e
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, capacidad **F-26**. El índice navegable pasa de diez a **once** casos de uso, con **CU-11** para el reseteo de contraseña por el administrador; §3 suma CU-11 al orden de lectura de la cuenta y declara que se lee junto con CU-03, que es el único que levanta la marca que aquél pone; §4 deja de decir «once reglas» y declara que son trece desde 1.7, con dos todavía sin archivo aguas arriba; §5 extiende a CU-11 el motivo por el que lleva el último número. |
 | 1.2 | 2026-08-09 | **Reconciliación con lo que `GeometriaFactory-Domain` ya emitió.** §4 declaraba que RN-12 y RN-13 «todavía no tienen archivo allá» y que acá se citaban contra el intake: **las trece reglas tienen archivo**, y la fila pasa a decirlo. Los recuentos —once casos de uso, trece reglas— no cambian. `Especificacion-Funcional.md` sube a 1.2 en la misma reconciliación y cierra los dos puntos abiertos que esta situación sostenía. |
 | 1.3 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: las reglas del producto pasan de trece a **quince** con **RN-14** y **RN-15**, y **las quince tienen archivo** en `GeometriaFactory-Domain`, de modo que la nota de omisión de `Reglas-De-Negocio/` actualiza su recuento y su cita del intake. **Ningún documento de esta sección, ningún caso de uso y ningún recuento propio de la capa cambia.** Sube minor. |
+| 1.4 | 2026-08-10 | Alineación con el `PRODUCT-INTAKE` **1.13**, regla **RN-16** y precisión de **F-04**: habilitar una cuenta produce y fija su contraseña provisoria. Los **once** casos de uso no cambian de número ni de recorte; lo que cambia es el alcance de **CU-02**, que pasa a producir la provisoria y a poner la marca, y el solicitante de la fijación de **CU-03**, que deja de ser el alumno anónimo. Ningún artefacto se agrega ni se omite y el orden de lectura no cambia. (Analista Funcional + API Designer, AG-02). |

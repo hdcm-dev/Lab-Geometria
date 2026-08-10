@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-06-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md), [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-06, F-07, F-22, F-24), §4.1 (RN-03, RN-04, RN-05, RN-08, RN-09), §4.2, §6 (flujo 2), §7 (CL-3, CL-5), §12 (entradas «Enviar» y «Error de validación»), §14 (RA-03), §17.5.P.6, §20.E-2, §20.E-5, §20.E-8, §21; `Proyectos/GeometriaFactory-Contracts/.../CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md`; `Proyectos/GeometriaFactory-Application/.../CU-04-Cargar-Y-Reeditar-Un-Trabajo-Propio.md`, `.../CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md` y `.../CU-09-Eliminar-Un-Trabajo.md`
+**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md), [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (F-06, F-07, F-22, F-24), §4.1 (RN-03, RN-04, RN-05, RN-08, RN-09), §4.2, §6 (flujo 2), §7 (CL-3, CL-5), §12 (entradas «Enviar» y «Error de validación»), §14 (RA-03), §17.5.P.6, §20.E-2, §20.E-5, §20.E-8, §21; `Proyectos/GeometriaFactory-Contracts/.../CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md`; `Proyectos/GeometriaFactory-Application/.../CU-04-Cargar-Y-Reeditar-Un-Trabajo-Propio.md`, `.../CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md` y `.../CU-09-Eliminar-Un-Trabajo.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -130,3 +130,4 @@ Este contrato lleva las dos cosas que esta capa puede arruinar sin que nada fall
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Realineación de la cita viva al `PRODUCT-INTAKE` 1.13.** Este proyecto de código se emitió contra la **1.12** y la fuente está hoy en **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y precisa la capacidad **F-04**. La cabecera de trazabilidad pasa a citar **1.13**; la cita de la emisión inicial se conserva en la fila 1.0, que es trazabilidad y no una referencia desactualizada. **Ninguna sección de este contrato de uso se toca**: la decisión de 1.13 alcanza al circuito de credenciales y este caso de uso no lo expone. Sube minor: corrige una cita de trazabilidad. |

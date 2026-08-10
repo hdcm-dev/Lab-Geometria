@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Especificacion-Funcional.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -74,7 +74,7 @@ Y **dos mecanismos que no son puertos de la capa de aplicación** y que por eso 
 
 | Mecanismo | Qué provee | CU |
 | --- | --- | --- |
-| Credenciales | Derivar una contraseña, verificar una credencial y **producir la contraseña provisoria** del reseteo | CU-06, CU-07 |
+| Credenciales | Derivar una contraseña, verificar una credencial y **producir la contraseña provisoria** de la habilitación y del reseteo | CU-06, CU-07 |
 | Acceso firmado | Emitir y verificar el acceso, con sus cuatro reclamos | CU-08 |
 
 **Y una responsabilidad que no es ni puerto ni mecanismo**: dejar el almacén en condiciones antes de que el servicio atienda su primera petición (CU-10). La invoca el arranque de `GeometriaFactory-Api` y no la invoca ningún caso de uso.
@@ -90,7 +90,7 @@ Es la frontera que hace que el flag de autenticación valga true en este proyect
 | Qué | Vive acá | Vive afuera |
 | --- | --- | --- |
 | Derivar una contraseña y verificar una credencial contra un valor derivado | **Sí** (CU-06) | — |
-| **Producir la contraseña provisoria** del reseteo, no adivinable y sin repetirse | **Sí** (CU-07). Es la delegación explícita de las tres capas de arriba | — |
+| **Producir la contraseña provisoria** de la habilitación y del reseteo, no adivinable y sin repetirse | **Sí** (CU-07). Es la delegación explícita de las tres capas de arriba | — |
 | Emitir y verificar el acceso firmado, con su clave fuera del repositorio de código y de la imagen | **Sí** (CU-08) | — |
 | Guardar y recuperar, conservando el texto original íntegro | **Sí** (CU-03, CU-05) | — |
 | Interpretar el texto del alumno y emitir observaciones con posición y campo | **Sí** (CU-01, CU-02) | — |
@@ -237,7 +237,7 @@ La numeración es una **previsión** de esta categoría, y la confirma la catego
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Reglas-De-Negocio/RN-XX-<Nombre>.md` | **Omitido** | **Las quince reglas del producto viven en `GeometriaFactory-Domain`**, las quince con archivo propio allá, y son atemporales: redactarlas de nuevo acá crearía dos enunciados de la misma regla en la misma cadena documental. Esta categoría las **referencia** por identificador y con enlace, y §6 declara dónde se ejerce cada una. Es el mismo criterio que `GeometriaFactory-Application` §9 aplica |
+| `Reglas-De-Negocio/RN-XX-<Nombre>.md` | **Omitido** | **Las dieciséis reglas del producto viven en `GeometriaFactory-Domain`**, las quince con archivo propio allá, y son atemporales: redactarlas de nuevo acá crearía dos enunciados de la misma regla en la misma cadena documental. Esta categoría las **referencia** por identificador y con enlace, y §6 declara dónde se ejerce cada una. Es el mismo criterio que `GeometriaFactory-Application` §9 aplica |
 | `Modelo-Datos/` | **Emitido, y no omitido** | Es la diferencia con los cinco proyectos de código anteriores y se declara con su fundamento. `GeometriaFactory-Domain` §7 y `GeometriaFactory-Application` §9 omiten estos artefactos con **dos** motivos: que la regla de la categoría los omite para `library`, y que su flag de persistencia es false. **Acá el segundo motivo no se cumple**: es el único `library` del producto con persistencia declarada true en el `PRODUCT-MANIFEST` §5, y el intake declara la persistencia «la responsabilidad central del proyecto de código» (§17.3.P.4). Omitirlos dejaría al producto **sin ningún documento que describa el dato guardado**. Se emiten, por lo tanto, como **apartamiento declarado de la guía del tipo**, con la misma forma con la que `GeometriaFactory-Domain` §6 declaró su apartamiento de la guía de «library con menos de diez». Si el orquestador decidiera que la guía del tipo manda sobre el flag, el contenido no se pierde: se muda al documento de concepto central |
 | `_legacy/` | `2026-08-10/` | Conserva el estado **1.0** de los veintiséis documentos que la corrección del rechazo de `B-02-03-GeometriaFactory-Infrastructure-r1.md` llevó a 1.1. La emisión inicial no lo tenía, porque no había nada superado que archivar |
 
@@ -282,3 +282,4 @@ Quince, y ninguno bloqueante. **Nueve son propios de esta categoría y seis vien
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial de la categoría para este proyecto de código, contra el `PRODUCT-INTAKE` **1.11** y el `PRODUCT-MANIFEST` **1.2**. Índice maestro de **diez** casos de uso, con la tabla de los cuatro puertos que implementa y los dos mecanismos que provee, la frontera entre el mecanismo y la decisión con sus cuatro precisiones, la tabla de las **quince** reglas de negocio referenciadas —**trece con tramo acá, dos sin él, y tres con su tramo principal acá**—, la matriz NB → CU → RN → US con la verificación bidireccional, la declaración de que **las nueve necesidades reciben caso de uso** y de que **CU-09 no traza a ninguna**, las veinticinco historias previstas, el criterio de recorte con sus particiones y fusiones, la omisión de las reglas de negocio y el **apartamiento declarado** por el que sí se emite el modelo de datos, las seis notas de numeración y los **diez puntos abiertos**, cinco propios y cinco heredados sin reabrir. |
 | 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: §11 retira el punto abierto del desenlace del envío de `E-8` y declara en su lugar la decisión del Product Owner que 1.12 lleva a §20.E-8 punto 5 y a la fila «Dimensión no legible» de §21 —**error**, el trabajo queda en `Borrador` y no pasa a `Pendiente`, con el mensaje localizado por índice de figura y campo que exige RN-09—, con su fundamento y con la observación de que es el modo de falla más probable de los ocho escenarios. **H-02**: la trazabilidad upstream pasa a citar el `PRODUCT-INTAKE` **1.12**, que archiva 1.11. **H-04**: §11 incorpora los **seis** puntos abiertos que declaraban documentos subordinados y que el índice maestro no recogía —el valor derivado del área de una pieza volumétrica, el límite de tamaño del texto, la zona horaria y precisión de los sellos, la frecuencia del respaldo, la fecha de última modificación de la cuenta y la condición derivada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`—; con la salida del de `E-8`, el recuento pasa de **diez** a **quince**, nueve propios y seis heredados. **H-06**: §4 gana una quinta precisión que declara **no aplicables RA-01 y RA-02** con su motivo, y deja RA-03 como la única de las tres con tramo acá. |
+| 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**: habilitar una cuenta produce una contraseña provisoria con el mismo mecanismo que el reseteo, de modo que **`CU-07` gana un segundo consumidor** —`GeometriaFactory-Application` `CU-02`, además de `CU-11`— y ningún adaptador se agrega. §3 y §4 amplían las dos líneas que acotaban la producción de la provisoria al reseteo. **Los diez casos de uso, los cuatro adaptadores y los dos mecanismos no cambian de número ni de recorte.** Sube minor. |

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-08-Exponer-El-Desenlace-De-La-Revision.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-21, F-23), §4.1 (RN-10, RN-11), §4.2 y sus tres consecuencias aceptadas, §6 (flujo 2.1), §7 (CL-10, CL-11), §12 (entradas «Aprobar / Rechazar» y «Comentario»), §14 (RA-03); `Proyectos/GeometriaFactory-Contracts/.../CU-07-Contrato-De-Desenlace-De-La-Revision.md`; `Proyectos/GeometriaFactory-Application/.../CU-08-Dar-Desenlace-A-Un-Trabajo.md`
+**Trazabilidad upstream:** [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (F-21, F-23), §4.1 (RN-10, RN-11), §4.2 y sus tres consecuencias aceptadas, §6 (flujo 2.1), §7 (CL-10, CL-11), §12 (entradas «Aprobar / Rechazar» y «Comentario»), §14 (RA-03); `Proyectos/GeometriaFactory-Contracts/.../CU-07-Contrato-De-Desenlace-De-La-Revision.md`; `Proyectos/GeometriaFactory-Application/.../CU-08-Dar-Desenlace-A-Un-Trabajo.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -119,3 +119,4 @@ El comentario del administrador viaja en la misma solicitud y **es opcional en l
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Realineación de la cita viva al `PRODUCT-INTAKE` 1.13.** Este proyecto de código se emitió contra la **1.12** y la fuente está hoy en **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y precisa la capacidad **F-04**. La cabecera de trazabilidad pasa a citar **1.13**; la cita de la emisión inicial se conserva en la fila 1.0, que es trazabilidad y no una referencia desactualizada. **Ninguna sección de este contrato de uso se toca**: la decisión de 1.13 alcanza al circuito de credenciales y este caso de uso no lo expone. Sube minor: corrige una cita de trazabilidad. |

@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
@@ -30,7 +30,7 @@
 | --- | --- | --- |
 | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) | Marco DX: rol de intervención, la regla de exposición, los tres tramos de onboarding, el quick-start dentro del contenedor de desarrollo, el plan de Diátaxis, las dos clases de error, las métricas y el lazo de retroalimentación. **Es el punto de entrada** | Propuesto |
 | [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) | El recorrido de la primera hora, paso a paso y con hitos verificables. Es el modo tutorial | Propuesto |
-| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de errores en sus dos clases —**quince** entradas de construcción del contrato y **diecisiete** códigos transportados—, más las tres señales declaradas que no son error, con diagnóstico accionable por entrada. Es el modo how-to para quien llega con un síntoma | Propuesto |
+| [`DX-Error-Messages.md`](DX-Error-Messages.md) | Catálogo de errores en sus dos clases —**quince** entradas de construcción del contrato y **quince** códigos transportados—, más las tres señales declaradas que no son error, con diagnóstico accionable por entrada. Es el modo how-to para quien llega con un síntoma | Propuesto |
 | [`Glosario-UX.md`](Glosario-UX.md) | Vocabulario que esta categoría acuña, la resolución de «error» con sus tres referentes y los términos que se referencian sin redefinir | Propuesto |
 | `README.md` | Este archivo: índice navegable, variante aplicada, orden de lectura y declaración de las omisiones | Propuesto |
 
@@ -98,3 +98,4 @@ Los demás criterios de §6 aplican y se cumplen: variante declarada en cada cab
 | 1.2 | 2026-08-09 | **Actualización por contenido nuevo aguas arriba**: `PRODUCT-INTAKE` **1.7** incorpora la capacidad **F-26** y la categoría 02 emite **CU-08** y las restricciones transversales `RT-10` y `RT-11`. §2 actualiza el catálogo de errores a **catorce** entradas de construcción y **dieciséis** códigos transportados, con las tres señales declaradas sin cambio; §5 actualiza la nota de autoridad a ocho contratos de uso, once restricciones transversales y el intake 1.7. Ningún artefacto se agrega ni se omite. | DX Lead (AG-03) |
 | 1.3 | 2026-08-09 | **Actualización por las dos decisiones del Product Owner sobre F-26** que `CU-08` 1.2 y `CU-06` 1.3 absorben: **resetear no exige que la cuenta esté habilitada**, y **la contraseña provisoria la produce el sistema y no la escribe el administrador**. §2 actualiza el catálogo de errores a **quince** entradas de construcción y **diecisiete** códigos transportados, con las tres señales declaradas sin cambio. Ningún artefacto se agrega ni se omite. | DX Lead (AG-03) |
 | 1.4 | 2026-08-09 | **Cierra la parte del hallazgo `F26-28`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo. El informe lo registra sobre `DX-Developer-Experience.md` y `DX-Error-Messages.md`; **este archivo tiene el mismo defecto** y se corrige en la misma pasada para que la carpeta quede pareja. **Cierra la parte del hallazgo `F26-28`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo: las filas de este control de cambios estaban **fuera de orden cronológico** (1.1, 1.0, 1.2, 1.3) y se reordenan por versión, **sin tocar el texto de ninguna**. **Ningún artefacto, recuento ni omisión declarada de esta sección cambia.** Sube minor: repara el orden de esta tabla sin alterar lo que sus filas dicen. | DX Lead (AG-03) |
+| 1.5 | 2026-08-10 | **Actualización por `PRODUCT-INTAKE` 1.13 §4.1 (RN-16)** y la precisión de **F-04**, que `CU-02` 1.4, `CU-01` 1.5, `CU-08` 1.4 y `CU-06` 1.6 absorben: habilitar una cuenta produce su contraseña provisoria y el ensamblado pierde el único tipo que expresaba una escritura anónima. §2 actualiza el catálogo de errores a **quince** entradas de construcción y **quince** códigos transportados, con las tres señales declaradas sin cambio. Ningún artefacto se agrega ni se omite. | DX Lead (AG-03) |

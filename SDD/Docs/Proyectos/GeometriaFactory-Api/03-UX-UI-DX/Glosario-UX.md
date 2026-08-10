@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Glosario-UX.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
@@ -41,7 +41,7 @@ Rigen sin excepción las resoluciones de vocabulario del producto: **`Pendiente`
 
 | Término canónico | Definición operativa | Artefactos de 03 donde aparece | Sinónimos y alias |
 | --- | --- | --- | --- |
-| Superficie pública de la pieza de datos | El conjunto de lo que este proyecto de código existe hacia afuera. **Son sus dieciséis puntos de acceso y nada más**: no lo referencia nadie por compilación | Los tres | «La superficie» cuando el proyecto de código está nombrado |
+| Superficie pública de la pieza de datos | El conjunto de lo que este proyecto de código existe hacia afuera. **Son sus quince puntos de acceso y nada más**: no lo referencia nadie por compilación | Los tres | «La superficie» cuando el proyecto de código está nombrado |
 | **Consumidor de la superficie** | El rol de intervención de quien escribe el cliente que consume estos puntos de acceso. **Existe acá y no en las capas de adentro**, y es a quien le habla el catálogo entero | `DX-Developer-Experience.md`, `DX-Error-Messages.md` | «El consumidor» cuando el rol ya está nombrado. Acá lo encarna quien escribe el cliente tipado de la pieza pública. Ver §3.2 |
 | Implementador de la superficie | El rol de intervención de quien agrega o cambia un punto de acceso | `DX-Developer-Experience.md`, `Guia-Onboarding-Developer.md` | — |
 | Mantenedor de la capa | El rol de intervención de quien sostiene este proyecto de código y vuelve sobre él sin el contexto de la etapa en que lo escribió | `DX-Developer-Experience.md` | — |
@@ -125,3 +125,4 @@ Los seis términos normativos del framework —producto, unidad de entrega, mód
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara los **dieciocho** términos que esta categoría acuña —entre ellos el **consumidor de la superficie**, que las capas hermanas declaran no aplicable, la **familia empobrecida**, **qué hace el consumidor**, **lo que no falla** y sus dos formas de detección, por recuento y por comparación—; los **dos** términos con más de un referente con su forma obligatoria y su evidencia de colisión —«error», que acá tiene un referente que las capas hermanas no tienen, y «consumidor»—; los tres casos que deliberadamente no se corrigen; y los términos referenciados del glosario raíz, del glosario funcional de 02 y de los glosarios de los proyectos de código vecinos, con la precisión de por qué **«lo que no falla» y «atajo prohibido» nombran la misma clase de defecto con sujetos distintos**. |
+| 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**. La entrada «superficie pública de la pieza de datos» de §2 actualiza su recuento de dieciséis a **quince** puntos de acceso, por el retiro de `A-04`. **No se acuña ningún término y no se retira ninguno.** Sube minor. (DX Lead (AG-03)). |

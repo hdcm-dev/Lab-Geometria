@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-07-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md), [`NB-06`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md), [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md), [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-08, F-11, F-12, F-21), §4.1 (RN-03, RN-09, RN-11), §4.2, §7 (CL-5), §14 (RA-03), §17.4.P.10, §17.5.P.10; `Proyectos/GeometriaFactory-Contracts/.../CU-04-Contrato-De-Listado-De-Trabajos.md` y `.../CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md`; `Proyectos/GeometriaFactory-Application/.../CU-06-Consultar-Los-Trabajos-Propios-Del-Alumno.md` y `.../CU-07-Revisar-Los-Trabajos-De-La-Comision.md`
+**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md), [`NB-06`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md), [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md), [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (F-08, F-11, F-12, F-21), §4.1 (RN-03, RN-09, RN-11), §4.2, §7 (CL-5), §14 (RA-03), §17.4.P.10, §17.5.P.10; `Proyectos/GeometriaFactory-Contracts/.../CU-04-Contrato-De-Listado-De-Trabajos.md` y `.../CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md`; `Proyectos/GeometriaFactory-Application/.../CU-06-Consultar-Los-Trabajos-Propios-Del-Alumno.md` y `.../CU-07-Revisar-Los-Trabajos-De-La-Comision.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -131,3 +131,4 @@ Lo que sí es propio de este contrato, y es lo que hay que poder verificar sobre
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
+| 1.1 | 2026-08-10 | **Realineación de la cita viva al `PRODUCT-INTAKE` 1.13.** Este proyecto de código se emitió contra la **1.12** y la fuente está hoy en **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y precisa la capacidad **F-04**. La cabecera de trazabilidad pasa a citar **1.13**; la cita de la emisión inicial se conserva en la fila 1.0, que es trazabilidad y no una referencia desactualizada. **Ninguna sección de este contrato de uso se toca**: la decisión de 1.13 alcanza al circuito de credenciales y este caso de uso no lo expone. Sube minor: corrige una cita de trazabilidad. |
