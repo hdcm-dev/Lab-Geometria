@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Estrategia-Testing.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.6 §6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §3.1, §4, §5 y §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.4.P.6, §18 (sample S-2), §20 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.6 §6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §3.1, §4, §5 y §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.4.P.6, §18 (sample S-2), §20 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md)
 
 ---
@@ -43,7 +43,7 @@
 
 ## 2. Cobertura mínima: por qué no es por líneas
 
-El intake §17.4.P.6 declara **«cobertura mínima: no aplica como gate propio»** y fija como gate equivalente y bloqueante que **el 100 % de los DTOs esté ejercitado por al menos una prueba de integración** [ASUNCIÓN, §22 asunción `A-4`].
+El intake §17.4.P.6 declara **«cobertura mínima: no aplica como gate propio»** y fija como **«gate equivalente y bloqueante»** que **el 100 % de los DTOs esté ejercitado por al menos una prueba de integración** [ASUNCIÓN, §22 asunción `A-4`, cuya columna «Si el Product Owner la cambia» declara que **«Cambia la forma del gate, no su carácter bloqueante»**].
 
 La partición de esta categoría es por las **ocho familias de tipos** de `05` §3.1, que son sus componentes.
 
@@ -99,7 +99,7 @@ Fixtures que esta categoría declara, todos **cuerpos de petición y de respuest
 
 ## 6. Datos de prueba
 
-**Los datos de geometría de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos y su procedencia; §21 los cruza contra la batería obligatoria de **nueve** casos de prueba.
+**Los datos de geometría de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos y su procedencia; §21 los cruza contra la batería obligatoria de **diez** casos de prueba —los **nueve** de la fuente técnica más el **décimo** que esa misma sección agregó el 2026-08-09 para la dimensión no legible—.
 
 **Qué le toca a este proyecto de código, que es una parte y no el todo.** El ensamblado **no interpreta el texto**: lo transporta como cadena, sin interpretarlo (restricción `RT-03`, intake §17.4.P.11 punto 2). De los ocho escenarios, entonces, lo que este proyecto de código verifica es que **el texto viaje íntegro en las dos direcciones** y que **el resultado de la interpretación quepa en sus tipos**.
 
@@ -132,4 +132,5 @@ Fixtures que esta categoría declara, todos **cuerpos de petición y de respuest
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** §6 afirmaba que §21 del intake cruza la batería obligatoria contra **nueve** casos de prueba; §21 la cruza contra **diez** —los nueve de la fuente técnica más el décimo que esa misma sección agregó el 2026-08-09—. Es el mismo defecto que el informe registró en `GeometriaFactory-Visor` (`H-05`) y que **también estaba acá**. **`H-02`.** §2 cita ahora la fila `A-4` de §22 completa, con su columna «Si el Product Owner la cambia», que es la que sostiene el carácter bloqueante de `QG-05`. Ningún dato de prueba ni umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara el apartamiento completo de la pirámide 80/15/5 de `Rules-Calidad-Y-Pruebas.md` §2.2, con el fundamento de que el apartamiento viene declarado del intake §17.4.P.6 y de `05` §5 y no se decide acá; el reparto 60/40 entre integración e inspección de superficie; la cobertura por las **ocho** familias de tipos en lugar de por líneas, con el gate de 100 % de tipos ejercitados rotulado [ASUNCIÓN]; la ausencia declarada de mutation score con su motivo estructural; el tooling nombrado por función; los cuatro fixtures; el uso de los **ocho** escenarios reales del intake §20 con la precisión de qué parte de cada uno le toca a un ensamblado que transporta y no interpreta; y el ambiente, con la constancia de que no se declara ningún tiempo de ejecución que ninguna fuente dé. |

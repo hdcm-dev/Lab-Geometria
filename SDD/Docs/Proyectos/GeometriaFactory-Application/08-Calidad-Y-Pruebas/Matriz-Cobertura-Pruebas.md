@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -17,6 +17,7 @@
 
 - [1. Propósito y alcance](#1-propósito-y-alcance)
 - [2. Trazabilidad CU ↔ tests](#2-trazabilidad-cu--tests)
+  - [2.1 La prueba de inspección estructural y a qué traza](#21-la-prueba-de-inspección-estructural-y-a-qué-traza)
 - [3. Trazabilidad NFR ↔ tests](#3-trazabilidad-nfr--tests)
 - [4. Trazabilidad RN ↔ tests](#4-trazabilidad-rn--tests)
 - [5. Trazabilidad comprobación de autorización ↔ tests](#5-trazabilidad-comprobación-de-autorización--tests)
@@ -53,7 +54,17 @@ Once filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificaci
 | CU-10 Configurar la cuenta de administrador | Given que el repositorio declara que no existe administrador y la credencial ya derivada, When se configura, Then nace `Habilitado`; una segunda configuración se rechaza | `TC-03` | US-03, US-28 | `Pendiente` |
 | CU-11 Resetear la contraseña de un alumno | Given una cuenta de alumno en cualquiera de sus tres estados y el administrador, When se la resetea con la provisoria ya producida y derivada, Then conserva estado, papel, identidad y **todos** sus trabajos, y queda con la marca puesta; sobre la cuenta de administrador, Then se rechaza | `TC-06`, `TC-07`, `TC-10`, `TC-11` | US-29, US-30, US-31 | `Pendiente` |
 
-**Once de once casos de uso con al menos un caso de prueba, y treinta y dos de treinta y dos historias cubiertas.** Ninguno queda huérfano y ningún `TC-XX` deja de referenciar un `CU-XX`, una `RN-XX`, un `INV-XX`, una comprobación o un NFR.
+**Once de once casos de uso con al menos un caso de prueba, y treinta y dos de treinta y dos historias cubiertas.** Ninguno queda huérfano.
+
+**Treinta de los treinta y un `TC-XX` referencian un `CU-XX`, una `RN-XX`, un `INV-XX`, una comprobación o un NFR, y tienen fila en alguna de las cinco tablas de esta matriz.** El restante es una prueba de inspección estructural cuya trazabilidad es hacia un **quality gate**, una **ADR** y un **riesgo**, y por eso no aparece en ninguna de esas cinco tablas. Está en §2.1, y **no queda sin instrumento de trazabilidad**.
+
+### 2.1 La prueba de inspección estructural y a qué traza
+
+| Caso de prueba | Qué verifica | A qué traza, según su campo «Cubre» | Estado |
+| --- | --- | --- | --- |
+| `TC-31` Ninguna condición prevista viaja como excepción | Las **36** condiciones del catálogo se devuelven como valor con su código y **0** casos de uso lanzan; la indisponibilidad de un puerto tampoco lanza y devuelve `INTERPRETACION_NO_DISPONIBLE` | `QG-11`; [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md); el quinto riesgo de `05` §9 | `Pendiente` |
+
+**Por qué no se le inventa un `CU-XX`.** Verifica una decisión de arquitectura que atraviesa los once casos de uso sin ser propiedad de ninguno; atarla a uno para que la tabla cerrara sería trazabilidad falsa. Lo que corresponde es que **esté enumerada**, y esta subsección es su instrumento.
 
 ## 3. Trazabilidad NFR ↔ tests
 
@@ -168,4 +179,5 @@ La partición es por los **ocho** componentes de `05` §3.1, no por capas de des
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-04`.** El cierre de §2 afirmaba que **ningún `TC-XX` deja de referenciar** un `CU-XX`, una `RN-XX`, un `INV-XX`, una comprobación o un NFR, y era falso en su propio documento: `TC-31` traza a `QG-11`, a `ADR-06` y al quinto riesgo de `05` §9, y no tenía fila en ninguna de las cinco tablas. La frase se reemplaza por el recuento verdadero —**30 de 31**— y se agrega **§2.1**, que lo enumera con su trazabilidad. **Ninguna cobertura, umbral ni caso cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**once** filas de caso de uso con sus **treinta y dos** historias, **nueve** de NFR y **dieciséis** de regla de negocio, ninguna agrupada—, más dos tablas propias exigidas por el NFR de ejercicio de las comprobaciones y por `05` §10.3: **cuatro** filas de comprobación de autorización y **nueve** de invariante. Declara la cobertura por los **ocho** componentes con «Sin medir» en lugar de cero y con el componente de puertos **sin umbral** por no tener líneas ejecutables. Cita los dos valores rotulados **[ASUNCIÓN]** con su rótulo y declara sus gates como condicionados; separa el mutation score, que es piso de la regla de la categoría y no del intake; y declara **seis** huecos con su plan de remediación, incluida la ausencia de matriz de sensado de deriva con su fundamento. |

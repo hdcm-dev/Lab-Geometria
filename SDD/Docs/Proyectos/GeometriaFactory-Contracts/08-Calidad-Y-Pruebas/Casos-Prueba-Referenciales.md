@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** los **ocho** contratos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) con sus criterios de aceptación; las **once** restricciones transversales de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6; las **veintidós** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); los **siete** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3.1 y §3.2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §18 y §20
+**Trazabilidad upstream:** los **ocho** contratos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) con sus criterios de aceptación; las **once** restricciones transversales de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6; las **veintidós** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); los **siete** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3.1 y §3.2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §18 y §20
 **Trazabilidad downstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Plan-Pruebas.md`](Plan-Pruebas.md)
 
 ---
@@ -292,7 +292,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Inspección sobre la matriz |
-| Cubre | `RT-07`; NFR «Tipos ejercitados por prueba de integración» **[ASUNCIÓN del intake §17.4.P.6]**; `BT-16`; `QG-05` |
+| Cubre | `RT-07`; NFR «Tipos ejercitados por prueba de integración» **[ASUNCIÓN del intake §17.4.P.6, sobre la forma del gate]**; `BT-16`; `QG-05`, **bloqueante** |
 | Setup | La matriz tipo contra prueba de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6 y la superficie pública del ensamblado |
 | Pasos | Given todos los tipos de transferencia de las **ocho** familias, When se recorre la matriz, Then cada uno tiene al menos una prueba de integración que lo ejercita contra el servicio real, y **ningún tipo queda sin fila** |
 | Salida esperada | **100 %** de los tipos con al menos una prueba. Es el gate equivalente que reemplaza a la cobertura de líneas, y su umbral viene rotulado **[ASUNCIÓN]** |
@@ -330,4 +330,5 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** El campo «Cubre» de `TC-21` califica ahora el rótulo [ASUNCIÓN] de `QG-05` como referido a **la forma del gate** y declara el gate **bloqueante**, según §17.4.P.6 y la fila `A-4` del intake §22. **Ningún caso de prueba, paso ni salida esperada cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **veintidós** casos de prueba referenciales, `TC-01` a `TC-22`, cada uno con tipo, upstream por identificador, setup, pasos en Given-When-Then, salida esperada, salida observada y estado. Diecinueve cubren los **ocho** contratos de uso y las **veintidós** historias; los tres últimos son inspecciones de superficie sobre las referencias hacia el dominio, el ejercicio de los tipos por integración y la prohibición de que el navegador invoque el servicio. Los **ocho** escenarios del intake §20 quedan alcanzados, con la precisión de qué parte de cada uno le toca a un ensamblado que transporta y no interpreta. `TC-11` se declara fuera del tramo comprometido con su motivo. Todas las salidas observadas dicen «Sin ejecutar» y todos los estados `Pendiente`. |

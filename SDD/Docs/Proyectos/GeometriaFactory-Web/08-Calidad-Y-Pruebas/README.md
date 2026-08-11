@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -27,13 +27,13 @@
 
 | Documento | Versión | Estado | Emitido por | Propósito |
 | --- | --- | --- | --- | --- |
-| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.0 | Propuesto | Fase E, AG-08 | Definición de calidad, atributos ISO 25010, **once** quality gates, **tres** puertas técnicas, papeles y cadencia |
-| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.0 | Propuesto | Fase E, AG-08 | Pirámide objetivo con su apartamiento declarado, cobertura por unidades contables, tooling, datos, y la **relación con la matriz de sensado** con la resolución de sus 61 filas |
-| [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.0 | Propuesto | Fase E, AG-08 | Alcance, criterios de entrada y salida, **diez** riesgos de calidad y plan por etapa sobre las ocho |
-| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.0 | Propuesto | Fase E, AG-08 | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, restricción transversal ↔ tests y cobertura por componente |
-| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Fase E, AG-08 | Catálogo de **treinta y cinco** casos de verificación, `TC-01` a `TC-35` |
-| [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.0 | Propuesto | Fase E, AG-08 | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter |
-| [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.0 | Propuesto | Fase E, AG-08 | **DoD canónica** del proyecto de código, en cuatro capas |
+| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.1 | Propuesto | Fase E, AG-08 | Definición de calidad, atributos ISO 25010, **once** quality gates, **tres** puertas técnicas, papeles y cadencia |
+| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Fase E, AG-08 | Pirámide objetivo con su apartamiento declarado, cobertura por unidades contables, tooling, datos, y la **relación con la matriz de sensado** con la resolución de sus 61 filas |
+| [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.1 | Propuesto | Fase E, AG-08 | Alcance, criterios de entrada y salida, **diez** riesgos de calidad y plan por etapa sobre las ocho |
+| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Fase E, AG-08 | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, restricción transversal ↔ tests y cobertura por componente |
+| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.1 | Propuesto | Fase E, AG-08 | Catálogo de **treinta y cinco** casos de verificación, `TC-01` a `TC-35` |
+| [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | Fase E, AG-08 | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter |
+| [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | Fase E, AG-08 | **DoD canónica** del proyecto de código, en cuatro capas |
 | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **1.2** | Propuesto | **Fase B2, AG-03M** | **Ya existía antes de esta fase.** Las **61** sondas `SD-01` a `SD-61` contra la línea de base visual aprobada. Ver §3 |
 
 ## 2. Orden de lectura
@@ -80,7 +80,7 @@ Los once de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3, resumidos acá
 | QG-01 | Construcción sin advertencias | Bloqueante |
 | QG-02 | Bundle generado en el mismo flujo, nunca de un artefacto viejo | Bloqueante |
 | QG-03 | El flujo termina comprobando que la dirección pública responde | Bloqueante |
-| QG-04 | 100 % de los pasos del guion de la etapa **y de todas las anteriores** **[ASUNCIÓN del intake en cuanto a la forma de la puerta]** | **Condicionado** |
+| QG-04 | 100 % de los pasos del guion de la etapa **y de todas las anteriores** **[ASUNCIÓN del intake en cuanto a la forma de la puerta]** | **Bloqueante** |
 | QG-05 | **0** peticiones del navegador hacia el servicio de datos, con los dos movimientos prendidos | Bloqueante, sin gradación |
 | QG-06 | **1** sola salida y **0** bibliotecas de guion que consulten | Bloqueante |
 | QG-07 | **0** apariciones de la credencial de sesión en el navegador | Bloqueante |
@@ -89,7 +89,7 @@ Los once de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3, resumidos acá
 | QG-10 | **0** tráfico de circuito durante la interacción; texto una sola vez por trabajo | Bloqueante |
 | QG-11 | Filas de la matriz de sensado verificadas y **ninguna deriva mayor abierta** | Bloqueante al cierre de etapa |
 
-**El gate condicionado depende del valor rotulado [ASUNCIÓN] en el intake §22**, asunción `A-4`: **lo rotulado es expresar la regla acumulativa como puerta con umbral del 100 %, no la regla en sí**. La regla acumulativa rige igual.
+**Ningún gate de este proyecto de código es condicionado.** `QG-04` lleva el valor rotulado **[ASUNCIÓN]** del intake §22, asunción `A-4`: **lo rotulado es expresar la regla acumulativa como puerta con umbral del 100 %, no la regla en sí**, y la columna «Si el Product Owner la cambia» declara que «cambia la forma del gate, no su carácter bloqueante». La regla acumulativa rige igual, y el gate **bloquea**.
 
 ## 6. Recuentos que esta sección sostiene
 
@@ -118,4 +118,5 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** La tabla de gates de §5 declaraba a `QG-04` **condicionado**. Pasa a **bloqueante**: §17.6.P.6 lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que lo que puede cambiar es la forma del gate y no su carácter. Se actualizan las versiones de los artefactos revisados. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Web`. Lista los **ocho** artefactos vigentes, **siete** emitidos por esta Fase E y uno —[`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.2— **emitido por la Fase B2 y ya existente**, con la columna que declara quién emitió cada uno. Su §3 declara qué hizo esta fase con esa matriz y qué no hizo, incluida la verificación desde este lado de la tabla de correspondencia de `GeometriaFactory-Visor`. Declara **un** artefacto omitido con su motivo, los **once** quality gates y las **tres** puertas técnicas con su carácter, y la tabla de recuentos con la fuente de cada uno. |

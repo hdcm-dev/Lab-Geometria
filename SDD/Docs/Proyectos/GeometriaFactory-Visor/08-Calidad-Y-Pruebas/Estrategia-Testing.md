@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Estrategia-Testing.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §6; [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §5.3, §5.5 y §6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §16.1, §17.7.P.6, §18 (sample S-1), §20 y §21
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §6; [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §5.3, §5.5 y §6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §16.1, §17.7.P.6, §18 (sample S-1), §20 y §21
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md), [`Guia-Testing-Extensibilidad.md`](Guia-Testing-Extensibilidad.md)
 
 ---
@@ -55,7 +55,7 @@ La partición es por los **seis** componentes de `05` §3.1, de los cuales **dos
 | Motor de dibujo tridimensional | 3, **empaquetado** | — | **No se prueba por dentro**, y es deliberado: probarlo ataría este proyecto de código a un motor concreto y lo volvería irreemplazable, que es lo contrario del punto de extensión ([`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md)) |
 | **Bundle generado** | — | Recuentos de superficie y de ausencias | **6** funciones, **1** nombre propio en el objeto global, **0** globales sueltas, **0** peticiones, **0** claves, **0** dependencias de red externa |
 
-**No hay umbral de cobertura de líneas, y su ausencia está declarada aguas arriba.** El intake §17.7.P.6 fija «gate bloqueante y verificable por inspección, **en lugar de cobertura de líneas**: cero ocurrencias de las tres formas de petición en el código fuente y en el bundle generado» [ASUNCIÓN en cuanto a expresarlo como gate automatizable; la regla es de `RA-02` y ya es criterio de aceptación de la etapa `g`]. **El rótulo [ASUNCIÓN] alcanza a la forma del gate, no a la regla**, y esta categoría lo cita con esa precisión.
+**No hay umbral de cobertura de líneas, y su ausencia está declarada aguas arriba.** El intake §17.7.P.6 fija un «gate bloqueante y verificable por inspección, **en lugar de cobertura de líneas**», y lo enuncia como **cero ocurrencias de las tres formas de petición** —que el intake nombra una por una— **en el código fuente del proyecto de código y en el bundle generado**. La sustitución de los tres nombres por su descripción es de este documento, por la convención del corpus de no nombrar tecnologías, y por eso queda **fuera de las comillas** [ASUNCIÓN en cuanto a expresarlo como gate automatizable; la regla es de `RA-02` y ya es criterio de aceptación de la etapa `g`]. **El rótulo [ASUNCIÓN] alcanza a la forma del gate, no a la regla**, y esta categoría lo cita con esa precisión.
 
 **No hay mutation score**, y su ausencia se declara en lugar de omitirse: `Rules-Calidad-Y-Pruebas.md` §2.2 lo pide para `library`, pero acá la mayor parte del valor está en propiedades medidas sobre una escena viva, y mutar el código de dibujo produciría mutantes que sólo una comparación de imágenes podría matar —justamente la técnica que §1 descarta con su motivo—. **Es la única exigencia de §2.2 que este proyecto de código no cumple.**
 
@@ -101,7 +101,7 @@ Fixtures declarados:
 
 ## 6. Datos de prueba
 
-**Los datos de geometría de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos, su procedencia y su estado declarado; §21 los cruza contra la batería obligatoria de **nueve** casos de prueba y declara, en su tabla de cobertura de invariantes, que **el contrato de fachada tiene sus siete condiciones con escenario** en `E-1` a `E-8`.
+**Los datos de geometría de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos, su procedencia y su estado declarado; §21 los cruza contra la batería obligatoria de **diez** casos de prueba —los **nueve** de la fuente técnica más el **décimo** que esa misma sección agregó el 2026-08-09 para la dimensión no legible— y declara, en su tabla de cobertura de invariantes, que **el contrato de fachada tiene sus siete condiciones con escenario** en `E-1` a `E-8`.
 
 **Este proyecto de código sí recibe el texto**, a diferencia de los otros dos de nivel 0: `cargarJson` lo procesa. Por eso los ocho escenarios entran acá **como texto y no como resultado**.
 
@@ -135,4 +135,5 @@ Fixtures declarados:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-05`.** §6 afirmaba que §21 del intake cruza los ocho escenarios contra la batería obligatoria de **nueve** casos; la tabla de §21 tiene **diez** filas desde que el intake 1.7 incorporó `E-8`, y el intake **1.20** corrigió el encabezado que decía nueve. Corregido a **diez**, con los nueve de la fuente técnica y el décimo nombrados por separado. **`H-09`.** La cita de §2 sobre el gate de §17.7.P.6 omitía palabras dentro de las comillas: la sustitución de los tres nombres de tecnología por su descripción, y el alcance «de `visor/`», quedan **fuera de las comillas** y declarados como sustitución de este documento. Ningún umbral, dato ni caso cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara el apartamiento doble de la pirámide de `Rules-Calidad-Y-Pruebas.md` §2.2 —el nivel unitario baja de 80 a 45 y el de extremo a extremo sube de 5 a 25— con el fundamento de que cuatro de las seis propiedades transversales exigen una escena viva; la cobertura por los **seis** componentes de `05` §3.1, con los dos que no son de este proyecto de código declarados; las ausencias declaradas de cobertura de líneas, de snapshot y de mutation score, cada una con su motivo; el tooling nombrado por función; el único doble admitido y su condición; los **siete** fixtures; el uso de los **ocho** escenarios reales del intake §20 **como texto y no como resultado**, con la precisión de frontera de `E-8`; y el ambiente, con la constancia de que no se declara ningún tiempo de ejecución que ninguna fuente dé. |

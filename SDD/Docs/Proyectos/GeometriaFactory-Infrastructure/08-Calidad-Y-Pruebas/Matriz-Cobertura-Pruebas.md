@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -169,7 +169,7 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 
 | Hueco | Consecuencia | Plan de remediación |
 | --- | --- | --- |
-| **El intake escribe «nueve pruebas del validador» en dos gates** —§17.3.P.8 y §17.5.P.8— **y la batería tiene diez** | Un lector del gate podría dar la puerta por cumplida con nueve casos, dejando `E-8` sin cubrir, que es justamente el escenario que cerró la única condición del contrato de fachada sin dato de prueba | El Product Owner sobre su propio documento. **Mientras tanto esta categoría aplica diez**, siguiendo `05` §8 y §10.5, y no baja la batería para que coincida con la redacción. Ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 |
+| ~~**El intake escribía «nueve pruebas del validador» en dos gates** —§17.3.P.8 y §17.5.P.8— **y la batería tiene diez**~~ **CERRADO** | Un lector del gate podía dar la puerta por cumplida con nueve casos, dejando `E-8` sin cubrir, que es justamente el escenario que cerró la única condición del contrato de fachada sin dato de prueba | **Cerrado por el intake 1.20**, que corrigió los cinco lugares que decían nueve —los dos gates, §17.3.P.6, §17.2.P.11 y el encabezado de §21— sobre el hallazgo que levantó esta categoría. Ya no hay nada derivado al Product Owner por este motivo. Esta categoría aplicó **diez** desde su emisión, siguiendo `05` §8 y §10.5, y no bajó la batería para que coincidiera con la redacción. Ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 |
 | **La medición de mutación no está en el pipeline** y su herramienta no está elegida | El umbral de 60 % no se puede exigir todavía en ninguno de los siete componentes con umbral de mutación | Elección y anclaje junto con el resto del tooling de la etapa `a`; hasta que corra, se reporta «sin medir» y no bloquea |
 | **Los tres valores rotulados [ASUNCIÓN]** —las dos coberturas y los 200 ms— siguen sin confirmar | Los gates `QG-05`, `QG-06` y `QG-14` son condicionados y no bloquean la fusión | `PA-11` de `05` §11, antes de fijar la puerta de cobertura en `09-Devops` |
 | **Cuál de las dos funciones de derivación de clave se ancla** no está decidido (`05` §11 `PA-03`) | `TC-25` y `TC-26` verifican **la forma** —parámetros versionados junto al valor derivado, sin valor por defecto silencioso— y no la función concreta. Los casos de prueba no cambian con la elección; los valores esperados de las pruebas de derivación sí | El equipo en la etapa `a`, aplicando el criterio que la ADR correspondiente declara |
@@ -181,4 +181,5 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** El primer hueco de §8 estaba **abierto con remediación pendiente del Product Owner** sobre algo que el Product Owner ya resolvió en el intake **1.20**. La fila **se conserva** —para no dejar hueco de numeración— y queda **cerrada** con su desenlace, incluidos los cinco lugares que la fuente corrigió. Siguen siendo **siete** huecos y ninguna cobertura cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**diez** filas de caso de uso con sus **veinticinco** historias, **catorce** de NFR y **dieciséis** de regla de negocio, ninguna agrupada—, más dos propias: **siete** reglas conceptuales de modelo y los **diez** casos de la batería del validador contra su escenario. Refleja el reparto de `02` §6 —catorce reglas con tramo acá y dos sin él, con caso de prueba igual para verificar que esta capa **guarda el dato y no lo comprueba**— y declara las **tres** cuyo tramo principal vive acá. Declara la cobertura por los **ocho** componentes con «Sin medir» en lugar de cero, con el piso propio de **95 %** del validador y con la única exención de mutation score justificada. Cita los tres valores rotulados **[ASUNCIÓN]** con su rótulo y separa la **tolerancia de 0.01**, que el intake §22 excluye expresamente de las asunciones. Declara **siete** huecos, el primero de ellos la divergencia entre los dos gates del intake que escriben «nueve» y la batería de **diez**. |

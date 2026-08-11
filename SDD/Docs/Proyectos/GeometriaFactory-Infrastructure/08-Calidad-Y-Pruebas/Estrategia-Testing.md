@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Estrategia-Testing.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md) §7; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4, §8 y §10.5; [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5; [`../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.3.P.6, §17.3.P.8, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md) §7; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4, §8 y §10.5; [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5; [`../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.3.P.6, §17.3.P.8, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 
 ---
@@ -170,7 +170,7 @@ Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](..
 
 **Diez casos, uno por fila, y siete de los ocho escenarios representados.** El octavo, `E-7`, **no respalda ninguno de los diez y se usa igual**, como cobertura adicional declarada: `TC-11` lo ejercita porque es el único texto que cubre los **seis** tipos reconstruibles. La afirmación no es de esta categoría: la hace `05` §10.5 y acá se hereda.
 
-**El décimo caso existe por una decisión del Product Owner.** El intake §21 lo agrega con el rótulo **[DECISIÓN 2026-08-09]** y declara que `E-8` cerró la única condición del contrato de fachada que no tenía dato de prueba. Sobre el recuento de nueve que dos gates del intake todavía escriben, ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2.
+**El décimo caso existe por una decisión del Product Owner.** El intake §21 lo agrega con el rótulo **[DECISIÓN 2026-08-09]** y declara que `E-8` cerró la única condición del contrato de fachada que no tenía dato de prueba. Sobre el recuento de **nueve** que dos gates del intake escribieron **hasta 1.19** y que el intake **1.20** corrigió a **diez**, ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2.
 
 ## 7. Ambiente de testing
 
@@ -189,4 +189,5 @@ Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](..
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** §6 afirmaba en presente que «dos gates del intake **todavía escriben**» nueve casos de batería. El intake **1.20** los corrigió a **diez**, en el mismo commit que emitió este documento. Reescrito contra el texto vivo, con el nueve ubicado **hasta 1.19**. **Es una décima ocurrencia del patrón que el informe contó en nueve pasajes.** Ningún dato de prueba, fixture, umbral ni caso cambia: la tabla de §6.1 tenía y sigue teniendo **diez** filas. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la pirámide objetivo con su redistribución acotada —85 unitario, 15 integración interna, 0 de extremo a extremo—, con la frontera precisa entre la integración interna de esta capa y la batería de integración del producto, que el intake ubica en `GeometriaFactory-Api`. Declara la cobertura por los **ocho** componentes, con el piso propio de **95 %** que el intake le asigna al validador y con el origen de cada número separado del mutation score, que es de la regla de la categoría. Declara el tooling por función, la política de dobles **mínimos y sólo del mundo** con los cuatro admitidos y lo que explícitamente no se dobla, los **ocho** escenarios reales del intake §20 **como texto entero y literal** —con el motivo por el que esta capa no puede permitirse un dato sintético— y su §6.1 cruza los ocho escenarios contra los **diez** casos de la batería, uno por fila, con el caso de prueba que materializa cada uno. Declara el ambiente, incluida la restricción de paralelismo que impone el escritor único y la constancia de que no se declara ningún tiempo de suite que ninguna fuente dé. |

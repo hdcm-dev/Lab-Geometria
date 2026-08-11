@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Criterios-Validacion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.6.P.6, §17.6.P.8, §17.6.P.10 y §22
+**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.6.P.6, §17.6.P.8, §17.6.P.10 y §22
 **Trazabilidad downstream:** [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -56,7 +56,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-10 | `PT-01.b`: transporte del circuito | Semáforo; **amarillo aceptable** documentando la latencia percibida | `TC-34` | **Puerta técnica**: sólo el rojo obliga a cambiar el modelo de front. **Un repliegue de mayor latencia no es motivo de rediseño** |
 | CV-11 | `PT-01.c`: estabilidad del proceso | **20 minutos** continuos sin reciclado, con reconexión funcional | `TC-34` | **Puerta técnica**: es el peor escenario y **no tiene mitigación en el código** |
 | CV-12 | `PT-01.d`: salida hacia el backend | Una llamada de salud devuelve **datos reales** | `TC-34` | **Puerta técnica**: si no pasa, publicar el servicio de datos en un puerto convencional |
-| CV-13 | Pasos del guion de demostración de la etapa **y de todas las anteriores** | **100 %** **[ASUNCIÓN del intake §17.6.P.6 en cuanto a expresarlo como puerta; asunción `A-4` de §22]** | `TC-35` | **Condicionado** en cuanto a la forma de la puerta. **La regla acumulativa rige igual**: no es asunción de nadie |
+| CV-13 | Pasos del guion de demostración de la etapa **y de todas las anteriores** | **100 %** **[ASUNCIÓN del intake §17.6.P.6 en cuanto a expresarlo como puerta; asunción `A-4` de §22, que declara que cambia la forma del gate y no su carácter bloqueante]** | `TC-35` | **Bloqueante.** Lo rotulado [ASUNCIÓN] es **la forma de la puerta**, y §22 declara que un cambio del Product Owner no toca su carácter. **La regla acumulativa rige igual**: no es asunción de nadie |
 | CV-14 | Peticiones del navegador hacia el servicio de datos | **0**, medidas **con los dos movimientos prendidos** | `TC-29` | **Bloqueante, sin gradación**. Una medición hecha sin la condición **no cuenta como medición** |
 | CV-15 | Salidas hacia el servicio de datos y bibliotecas de guion que consulten | **1** y **0** | `TC-30` | **Bloqueante** |
 | CV-16 | Apariciones de la credencial de sesión en el navegador | **0** | `TC-03` | **Bloqueante**. Criterio de aceptación de la etapa `c` |
@@ -100,7 +100,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-13`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**, porque lo rotulado [ASUNCIÓN] es la **forma de la puerta**. **La regla acumulativa sigue rigiendo**: ejecutar sólo el guion de la etapa en curso no es una excepción admitida | Nadie: es el tratamiento declarado, no una excepción concedida |
+| **Ningún criterio de este proyecto de código es condicionado.** `CV-13` lleva un valor rotulado [ASUNCIÓN], pero lo rotulado es **la forma de la puerta** y el intake §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante» | **No hay salida admitida**: `CV-13` no alcanzado **bloquea el cierre** como cualquier otro criterio bloqueante. Ejecutar sólo el guion de la etapa en curso no es una excepción admitida | El Product Owner, con constancia escrita, como en cualquier criterio bloqueante |
 | Criterio **no exigible** —`CV-30`— | Se declara «no aplica» con el fundamento citado. **No se reporta un número inventado** | — |
 | **Puerta técnica** que no pasa —`CV-09` a `CV-12`, `CV-19`— | **No hay excepción.** El intake §15 declara que una puerta que no pasa **detiene la planificación de las etapas que dependen de ella** y no se arrastra como deuda. La salida es la que cada puerta declara: bajar la versión objetivo del front, cambiar el modelo de front, publicar el servicio en un puerto convencional, o detener la etapa `g` | El Product Owner decide la salida, no la excepción |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner, con constancia escrita en el informe de cierre |
@@ -111,4 +111,5 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** `CV-13` pasa de **condicionado** a **bloqueante**, y la salida admitida correspondiente de §6 se reemplaza por la declaración de que **ningún criterio de este proyecto de código es condicionado**: lo rotulado [ASUNCIÓN] es la forma de la puerta, y §22 `A-4` deja a salvo su carácter. **El umbral del 100 % acumulativo no cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **treinta y cinco** criterios de validación numerados `CV-01` a `CV-35`, repartidos en funcionales, no funcionales, de regresión y deriva, y de calidad de código, cada uno con su umbral y su forma de medición. Distingue cuatro caracteres —bloqueante, condicionado, **puerta técnica sin excepción posible** y no exigible— y ata el único condicionado al valor rotulado **[ASUNCIÓN]** del intake §22, precisando que lo rotulado es la **forma de la puerta** y no la regla acumulativa. Declara que no hay criterio de cobertura de líneas ni de tiempo de respuesta, con el fundamento de cada ausencia. Incorpora los criterios de deriva sobre las **61** filas de la matriz de sensado y el criterio de que **toda acotación se verifica forzando la solicitud**. Declara las cuatro salidas admitidas y seis situaciones que explícitamente no lo son. |

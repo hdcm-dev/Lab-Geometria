@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Criterios-Validacion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.4.P.3, §17.4.P.6, §17.4.P.8 y §22
+**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.4.P.3, §17.4.P.6, §17.4.P.8 y §22
 **Trazabilidad downstream:** [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -49,7 +49,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
-| CV-08 | Todos los tipos de transferencia están ejercitados por al menos una prueba de integración contra el servicio real | **100 %** **[ASUNCIÓN del intake §17.4.P.6, asunción `A-4` de §22]** | `TC-21`, sobre la matriz §6 | **Condicionado** |
+| CV-08 | Todos los tipos de transferencia están ejercitados por al menos una prueba de integración contra el servicio real | **100 %** **[ASUNCIÓN del intake §17.4.P.6, asunción `A-4` de §22: sobre la forma del gate, no sobre su carácter]** | `TC-21`, sobre la matriz §6 | **Bloqueante** |
 | CV-09 | La proyección de listado no lleva texto original, ni componentes de pieza, ni comentario | **0**, **0** y **0** **[ASUNCIÓN derivada del intake §17.4.P.10]** | `TC-09` | **Condicionado** |
 | CV-10 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | **0** | `TC-20` | **Bloqueante** |
 | CV-11 | Ningún tipo de las **ocho** familias tiene un campo capaz de transportar el hash de la contraseña, la clave de firma, una dirección de servicio interno, una ruta de archivo de datos o una traza | **0** | `TC-15`, `TC-01`, `TC-04`, `TC-19` | **Bloqueante** |
@@ -90,7 +90,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-08`, `CV-09`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**: el umbral es un valor rotulado [ASUNCIÓN] sin confirmar (`BT-18`) | Nadie: es el tratamiento declarado |
+| Criterio **condicionado** —`CV-09`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**: el umbral es un valor rotulado [ASUNCIÓN] sin confirmar (`BT-18`) | Nadie: es el tratamiento declarado |
 | Prueba de integración **no ejecutable todavía** porque `GeometriaFactory-Api` no existe | Se declara diferida **por escrito**, con la etapa en que se ejecuta, y la inspección de superficie correspondiente **sí se ejecuta** | El Product Owner, en el punto de control, con constancia escrita |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica con la remediación y **la etapa no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner |
 | Campo nuevo que la revisión rechaza por `CV-11` | **No se admite excepción.** `05` §9 declara que agregar un campo de diagnóstico es la forma habitual en que ese defecto entra, y que entra sin que nadie lo note porque compila | — |
@@ -101,4 +101,5 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** `CV-08` pasa de **condicionado** a **bloqueante**, por el mismo fundamento de `QG-05`: §22 `A-4` deja en duda la forma del gate y no su carácter, y §17.4.P.6 lo llama «equivalente y bloqueante». La salida admitida de §6 queda con `CV-09` como único criterio condicionado. **El umbral del 100 % no cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **veinticinco** criterios de validación, `CV-01` a `CV-25`, repartidos en funcionales, no funcionales, de regresión y compatibilidad, y de calidad de código, cada uno con su umbral y su forma de comprobación. Distingue tres caracteres —bloqueante, condicionado y no aplicable declarado— y ata los condicionados a los dos valores rotulados **[ASUNCIÓN]** del intake §22, asunción `A-4`. Declara la compatibilidad como criterio de validación propio, con el fundamento de que es el mecanismo de protección que el intake §17.4.P.3 le asigna a este proyecto de código; declara explícitamente que la cobertura de líneas y el mutation score no aplican, en lugar de omitirlos; y declara **cuatro** salidas ante un criterio no cumplido, una de ellas sin excepción posible. |

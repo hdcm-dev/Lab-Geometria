@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -29,7 +29,7 @@
 | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.0 | Propuesto | Definición de calidad, atributos ISO 25010, **once** quality gates, papeles y cadencia |
 | [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.0 | Propuesto | Pirámide objetivo con su apartamiento declarado, cobertura por componente, tooling, dobles de puerto y el uso de los **ocho** escenarios reales del intake |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.0 | Propuesto | Alcance, criterios de entrada y salida, **ocho** riesgos de calidad y plan por etapa |
-| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.0 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, comprobación ↔ tests, invariante ↔ tests y cobertura por componente |
+| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, comprobación ↔ tests, invariante ↔ tests y cobertura por componente |
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y un** casos de prueba, `TC-01` a `TC-31` |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.0 | Propuesto | **Veintiocho** criterios numéricos, `CV-01` a `CV-28`, con su carácter bloqueante, condicionado o no exigible |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.0 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
@@ -97,4 +97,5 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | Actualiza la tabla de artefactos: [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) sube a **1.1**. Es de trazabilidad: la matriz declaraba que ningún `TC-XX` deja de referenciar un `CU-XX`, una `RN-XX`, un `INV-XX`, una comprobación o un NFR, y `TC-31` traza a `QG-11`, a `ADR-06` y a un riesgo de `05` §9 sin fila en ninguna de las cinco tablas. **Ningún gate, umbral, caso ni recuento de esta sección cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Application`. Lista los **siete** artefactos emitidos con su versión y su estado, el orden de lectura, los **dos** artefactos omitidos con su motivo —la guía de extensibilidad por `tiene_extensibilidad` false y la matriz de sensado de deriva por no haber Fase B2 ni categoría 10, con la condición de reapertura declarada—, los **once** quality gates con su carácter, y la tabla de recuentos que esta sección sostiene con la fuente de cada uno. |

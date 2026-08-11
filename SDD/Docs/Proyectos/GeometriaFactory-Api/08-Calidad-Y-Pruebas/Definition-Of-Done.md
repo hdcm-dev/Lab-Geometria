@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Definition-Of-Done.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.5.P.7 y §17.5.P.8
+**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.5.P.7 y §17.5.P.8
 **Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops`, que materializa sus criterios mecánicos como etapas del pipeline
 
 ---
@@ -94,7 +94,7 @@ Se aplica cada vez que el artefacto del servidor propio se construye para entreg
 | **Familia empobrecida enriquecida** | **No se admite.** La respuesta más informativa es la tentadora, y **ninguna capa de adentro puede repararla** | — | — |
 | **Cuerpo truncado en lugar de rechazado** | **No se admite.** Rompe `RN-08` en silencio | — | — |
 | **Eliminación fuera de alcance dada por verificada sin forzar la petición** | **No se admite.** Es el único criterio del producto que la fuente exige ejercer así | — | — |
-| **Batería del validador cerrada con nueve casos** | **No se admite.** Tiene **diez**, y el décimo cubre `E-8` | — | — |
+| **Batería del validador cerrada con nueve casos** | **No se admite.** Tiene **diez**, y el décimo cubre `E-8`. El intake **1.20** lo dice así en §17.5.P.8 | — | — |
 
 ## 3. Vigencia
 
@@ -111,4 +111,5 @@ Se aplica cada vez que el artefacto del servidor propio se construye para entreg
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** El caso de excepción «batería del validador cerrada con nueve casos» describía la redacción del gate del intake sin decir que ya está corregida; ahora cita el intake **1.20** §17.5.P.8, que dice **diez**. No se admite igual, y el umbral de la batería sigue siendo **10 de 10**. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la DoD en **cuatro** capas —historia, tarea técnica, **etapa** y **entrega del artefacto**—, con el fundamento de por qué la tercera no se llama sprint y la cuarta no se llama release ni despliegue. Cada criterio responde «cómo se valida» con una operación concreta. Incorpora como criterio de historia que **todo punto de acceso nuevo declare su ubicación respecto de la guardia y reejecute `TC-07`**, y que toda respuesta de fallo nueva reejecute los cuatro casos de traducción. Su §1.4 declara los criterios del artefacto, incluidos `PT-04`, la ausencia de secretos en la imagen y el volumen persistente, con la constancia de que **el artefacto queda entregado, no desplegado**. Declara **nueve** casos de excepción, **seis** de ellos sin excepción posible, y la vigencia como fuente canónica. |

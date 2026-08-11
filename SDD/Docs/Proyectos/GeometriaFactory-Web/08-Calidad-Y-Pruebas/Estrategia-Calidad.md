@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Estrategia-Calidad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.7 §2, §3 y §6; [`../03-UX-UI-DX/Linea-Base-Visual.md`](../03-UX-UI-DX/Linea-Base-Visual.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §8, §9 y §11; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**, emitida en la Fase B2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.6.P.6, §17.6.P.8, §17.6.P.10 y §22
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.7 §2, §3 y §6; [`../03-UX-UI-DX/Linea-Base-Visual.md`](../03-UX-UI-DX/Linea-Base-Visual.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §8, §9 y §11; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**, emitida en la Fase B2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.6.P.6, §17.6.P.8, §17.6.P.10 y §22
 **Trazabilidad downstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md), [`Plan-Pruebas.md`](Plan-Pruebas.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`, que materializa como etapas del flujo de publicación los quality gates de §3; `11-Documentacion`, que cita esta estrategia sin redefinirla
 
 ---
@@ -18,7 +18,7 @@
 - [1. Definición de calidad para este proyecto de código](#1-definición-de-calidad-para-este-proyecto-de-código)
 - [2. Atributos de calidad priorizados](#2-atributos-de-calidad-priorizados)
 - [3. Quality gates](#3-quality-gates)
-  - [3.1 Qué significa que un gate esté condicionado](#31-qué-significa-que-un-gate-esté-condicionado)
+  - [3.1 Ningún gate de este proyecto de código queda condicionado](#31-ningún-gate-de-este-proyecto-de-código-queda-condicionado)
   - [3.2 Las tres puertas técnicas que alcanzan a este proyecto de código](#32-las-tres-puertas-técnicas-que-alcanzan-a-este-proyecto-de-código)
 - [4. Roles de calidad dentro del equipo](#4-roles-de-calidad-dentro-del-equipo)
 - [5. Cadencia de revisión](#5-cadencia-de-revisión)
@@ -36,7 +36,7 @@ Las tres partes no son intercambiables. La primera es la razón de ser de la top
 
 ## 2. Atributos de calidad priorizados
 
-Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. El valor rotulado **[ASUNCIÓN]** viene así desde el intake y **no es un compromiso**: se usa como vigente hasta que el Product Owner lo confirme (§22 del intake, asunción `A-4`).
+Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. El valor rotulado **[ASUNCIÓN]** viene así desde el intake y **su forma no es un compromiso**: se usa como vigente hasta que el Product Owner lo confirme (§22 del intake, asunción `A-4`).
 
 | Atributo ISO 25010 | Prioridad | Métrica y origen |
 | --- | --- | --- |
@@ -59,8 +59,8 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 | --- | --- | --- | --- |
 | QG-01 | La construcción termina **sin advertencias** | Etapa de construcción del flujo de publicación | **Bloquea la fusión** (intake §17.6.P.8) |
 | QG-02 | El bundle del visor se genera **en el mismo flujo de publicación**, nunca se toma de un artefacto viejo | Inspección del flujo: el paso de generación precede al de publicación y no hay artefacto cacheado | Bloquea la publicación (intake §17.6.P.8) |
-| QG-03 | El flujo **no termina en la subida**: termina comprobando que la dirección pública responde | Comprobación al final del flujo de publicación | **Bloquea el flujo.** El intake §17.6.P.8 declara que «una subida que deja la aplicación caída y se reporta como exitosa es peor que una falla visible» |
-| QG-04 | **100 %** de los pasos del guion de demostración de la etapa **y de todas las anteriores** se ejecutan y pasan antes del punto de control | Ejecución del guion en el navegador del equipo anfitrión (`TC-35`) | **Condicionado**, ver §3.1 |
+| QG-03 | El flujo **no termina en la subida**: termina comprobando que la dirección pública responde | Comprobación al final del flujo de publicación | **Bloquea el flujo.** El intake §17.6.P.8 declara que «una subida **por FTP** que deja la aplicación caída y se reporta como exitosa es peor que una falla visible» |
+| QG-04 | **100 %** de los pasos del guion de demostración de la etapa **y de todas las anteriores** se ejecutan y pasan antes del punto de control **[ASUNCIÓN del intake §17.6.P.6 en cuanto a expresarlo como gate; sobre la forma, no sobre el carácter]** | Ejecución del guion en el navegador del equipo anfitrión (`TC-35`) | **Bloquea el punto de control, y no es condicionado.** Lo sujeto a confirmación es **la forma**, ver §3.1 |
 | QG-05 | **0** peticiones del navegador hacia el servicio de datos, contadas durante un recorrido completo **con los dos movimientos automáticos prendidos** | `TC-29`, conteo en la pestaña de red | Bloquea la fusión. Es `RA-01`, la regla que sostiene la topología |
 | QG-06 | **1** sola salida hacia el servicio de datos —el cliente tipado— y **0** bibliotecas de guion agregadas que consulten servicios por su cuenta | `TC-30`, inspección del árbol de fuentes y de las dependencias de guion | Bloquea la fusión |
 | QG-07 | **0** apariciones de la credencial de sesión en el navegador | `TC-03`, inspección del almacenamiento, de las marcas de sesión y del contenido servido | Bloquea la fusión. Es criterio de aceptación de la etapa `c` |
@@ -73,11 +73,15 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 
 **Tampoco se declara ningún gate de tiempo de respuesta.** `05` §8 lo declara expresamente: las tolerancias de **400 ms** de [`../03-UX-UI-DX/Experiencia-De-Uso.md`](../03-UX-UI-DX/Experiencia-De-Uso.md) §7 son de **diseño de la espera** —dicen a partir de cuándo se muestra un indicador— y no compromisos de tiempo de respuesta. Esta categoría hereda esa distinción y no la convierte en umbral. Queda como `PA-04` de `05` §11.
 
-### 3.1 Qué significa que un gate esté condicionado
+### 3.1 Ningún gate de este proyecto de código queda condicionado
 
-`QG-04` es el único gate condicionado, y lo es por una razón acotada: **la regla acumulativa es de la fuente y no está en duda**; lo que viene rotulado **[ASUNCIÓN]** en el intake §22 —asunción `A-4`— es **expresarla como puerta con umbral del 100 %**.
+**Los once gates de §3 bloquean** —cada uno lo que su columna de consecuencia declara: la fusión, la publicación, el flujo, el punto de control o el cierre de la etapa— **y ninguno es condicionado**. El único que lleva un valor rotulado **[ASUNCIÓN]** es `QG-04`, y **no por eso queda condicionado**.
 
-La consecuencia es la misma que en el resto del producto: la medición se hace igual y el resultado se registra; lo que queda en suspenso es la consecuencia automática hasta que el Product Owner confirme la forma de la puerta sobre su propio documento. **Condicionado no quiere decir opcional**, y en particular no habilita a ejecutar el guion de la etapa sin los de las anteriores: eso es la regla de no-regresión del intake §15, que no es asunción de nadie.
+El intake §17.6.P.6 lo escribe así: **«Gate bloqueante y numérico en lugar de cobertura de líneas: el 100 % de los pasos del guion de demostración de la etapa y de todas las anteriores se ejecuta y pasa antes del punto de control»**, con el rótulo **[ASUNCIÓN en cuanto a expresarlo como gate; la regla acumulativa es de RF §9.4]**. Y el intake §22, fila `A-4`, columna «Si el Product Owner la cambia», dice: **«Cambia la forma del gate, no su carácter bloqueante»**.
+
+Las dos fuentes dicen lo mismo y dicen exactamente qué está en duda: **cómo se expresa la puerta**, no si detiene. **La regla acumulativa es de la fuente y no está en duda**, y el carácter bloqueante tampoco. Condicionar `QG-04` habría suspendido justamente lo que la fuente puso a salvo, en el único proyecto de código del producto **sin batería automatizada propia**: sería la diferencia entre que el guion acumulativo detenga un punto de control o no lo detenga.
+
+**Qué se hace con la asunción, entonces.** El valor y la forma se usan como vigentes y **la puerta se materializa en `09-Devops` como bloqueante desde la primera etapa que la alcanza**. Si el Product Owner cambia la forma —otro umbral, otro instrumento de medición—, cambia la condición que se mide y el gate **sigue bloqueando**. En particular, nada de esto habilita a ejecutar el guion de la etapa sin los de las anteriores: eso es la regla de no-regresión del intake §15 y de RF §9.4, que no es asunción de nadie.
 
 ### 3.2 Las tres puertas técnicas que alcanzan a este proyecto de código
 
@@ -86,8 +90,8 @@ Se declaran aparte de los gates porque su consecuencia es distinta: el intake §
 | Puerta | Qué mide | Dónde se mide | Qué condiciona |
 | --- | --- | --- | --- |
 | `PT-01`, en sus **cuatro** partes | Arranque en la dirección pública, transporte del circuito, estabilidad del proceso durante **20 minutos** y salida hacia el servicio de datos | Etapa `a`, **antes que cualquier otra cosa** | El modelo de front entero. **Sólo el rojo en el transporte o la falla de estabilidad obligan a cambiarlo**; un repliegue de mayor latencia **no es motivo de rediseño** |
-| `PT-02` | Que el visor funcione embebido y que el motor de dibujo quede dentro del bundle: **0** instancias no liberadas tras **10** recorridos de ida y vuelta, medidos **con los dos movimientos prendidos** | Antes de comprometer la etapa `g` | La etapa `g` entera |
-| `PT-03` | Que el bundle cargue en una página del anfitrión, que la escena y el árbol **se sincronicen por índice** y que los recorridos no degraden | Antes de comprometer la etapa `g` | La etapa `g` entera |
+| `PT-02` | Que el visor funcione embebido: el bundle **carga en una página del anfitrión**, la escena se crea, las tres figuras de `E-1` se dibujan —ortoedro incluido—, **navegar y volver 10 veces no degrada** —**0** instancias no liberadas, medidas **con los dos movimientos prendidos**— y **el árbol y la escena se sincronizan por índice** (intake §17.7.P.8) | Antes de comprometer la etapa `g` | La etapa `g` entera |
+| `PT-03` | Que el **motor de dibujo quede dentro del bundle** y la página **funcione sin acceso a CDN externos** (intake §17.7.P.8) | Antes de comprometer la etapa `g` | La etapa `g` entera. **No tiene caso de verificación propio acá**: es propiedad del bundle y se verifica del lado de `GeometriaFactory-Visor` |
 
 **Los umbrales de las tres puertas no son asunciones**, y el intake §22 lo declara expresamente: los 20 minutos de `PT-01.c`, el semáforo de `PT-01.b` y los umbrales de las cinco puertas técnicas «están declarados en las fuentes y se transcriben sin cambio». Esta categoría los transcribe y no los mueve.
 
@@ -122,4 +126,5 @@ Se declaran aparte de los gates porque su consecuencia es distinta: el intake §
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** `QG-04` estaba **condicionado**, y no correspondía: el intake §17.6.P.6 lo escribe como «**gate bloqueante y numérico** en lugar de cobertura de líneas», con el rótulo [ASUNCIÓN] alcanzando sólo a **expresarlo como gate**, y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, **no su carácter bloqueante**». Vuelve a **bloqueante**, con la forma sujeta a confirmación; §3.1 se reescribe entera y declara que **ningún gate de este proyecto de código queda condicionado**. **`H-03`.** Las filas de `PT-02` y `PT-03` de §3.2 tenían **el contenido cruzado** respecto del intake §17.7.P.8: se reescriben las dos con la definición de la fuente. **`H-09`.** La cita de `QG-03` restituye «una subida **por FTP** que deja la aplicación caída…». Ningún umbral, caso ni decisión de prueba cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la definición de calidad en sus tres partes —las tres reglas de arquitectura sostenidas desde acá, la línea de base visual no derivada y ninguna pantalla rota—, con la constancia explícita de que este proyecto de código **no hace cumplir reglas de negocio** y de que toda acotación se verifica forzando la solicitud. Declara los ocho atributos ISO 25010 con su métrica de origen, los **once** quality gates con condición, verificación y consecuencia —uno condicionado por el rótulo [ASUNCIÓN] del intake §22 sobre la **forma** de la puerta y no sobre la regla acumulativa—, las **tres** puertas técnicas que alcanzan a este proyecto de código con la constancia de que sus umbrales **no son asunciones**, el reparto de papeles con la verificación observada declarada como tal, y la cadencia por etapa, incluida la lectura de «sprint» de la matriz de sensado como etapa. **No declara ningún gate de cobertura de líneas ni de tiempo de respuesta**, con el fundamento de cada ausencia. |

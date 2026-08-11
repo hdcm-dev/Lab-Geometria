@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** los **diez** casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) y las **trece** restricciones transversales de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6; las **treinta** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); las **once** superficies y la línea de base de [`../03-UX-UI-DX/`](../03-UX-UI-DX/); los **catorce** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8; las **61** filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §20 y §21
+**Trazabilidad upstream:** los **diez** casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) y las **trece** restricciones transversales de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6; las **treinta** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); las **once** superficies y la línea de base de [`../03-UX-UI-DX/`](../03-UX-UI-DX/); los **catorce** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8; las **61** filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §20 y §21
 **Trazabilidad downstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Plan-Pruebas.md`](Plan-Pruebas.md)
 
 ---
@@ -288,7 +288,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Campo | Valor |
 | --- | --- |
 | Tipo | Paso de guion |
-| Cubre | `CU-07`; `US-21`; `PT-03`; sondas `SD-31`, `SD-41` |
+| Cubre | `CU-07`; `US-21`; `PT-02`, cuya definición en el intake §17.7.P.8 incluye que **el árbol y la escena se sincronicen por índice**; sondas `SD-31`, `SD-41` |
 | Setup | Un trabajo con el texto de `E-1`, abierto |
 | Pasos | Given la vista abierta, When se selecciona una pieza en el árbol, Then se resalta **la misma** en la escena, y a la inversa. Then **el índice de la pieza es el mismo** en el árbol, en la escena y en el resultado de dibujo. When se carga el mismo texto dos veces, Then la disposición es **la misma**, comparable pieza por pieza |
 | Salida esperada | Selección cruzada en los dos sentidos con índices coincidentes, y disposición determinista. **Índices que dejan de coincidir es deriva mayor** por `SD-31`; disposición que cambia entre dos cargas lo es por `SD-41` |
@@ -493,7 +493,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Reglas de negocio con verificación de lo que esta pieza hace por ellas | **16 de 16** | Matriz §4 |
 | Casos que verifican **forzando la solicitud** | **6** — `TC-01`, `TC-05`, `TC-07`, `TC-15`, `TC-25`, `TC-26` | §2, columna de tipo |
 | Inspecciones estructurales | **5** — `TC-29` a `TC-33` | §2.7 |
-| Puertas técnicas con caso propio | **2** — `TC-34` para `PT-01`, `TC-21` para `PT-02`; `PT-03` se ejerce en `TC-20` y `TC-21` | §2.7 y §2.4 |
+| Puertas técnicas con caso propio | **2** — `TC-34` para `PT-01`, `TC-21` para `PT-02`; `TC-20` ejerce además la sincronización por índice que `PT-02` mide. **`PT-03` no tiene caso propio acá**: es propiedad del bundle y se verifica del lado de `GeometriaFactory-Visor` | §2.7 y §2.4 |
 | Escenarios del intake §20 usados como dato | **8 de 8** | `TC-12`, `TC-13`, `TC-20` (`E-1`); `TC-11` (`E-2`); `TC-13`, `TC-18` (`E-3`); `TC-18` (`E-4`); `TC-14`, `TC-18` (`E-5`); `TC-17` (`E-6`); `TC-17`, `TC-19` (`E-7`); `TC-14` (`E-8`) |
 | Casos de verificación deshabilitados | **0** | Ninguna fila lo declara |
 
@@ -503,4 +503,5 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-03`.** El campo «Cubre» de `TC-20` atribuía a `PT-03` la sincronización del árbol y la escena por índice, que el intake §17.7.P.8 declara parte de **`PT-02`**; y el recuento de §3 daba `PT-03` por ejercido en `TC-20` y `TC-21`. Corregidos los dos: `PT-03` —el motor dentro del bundle y la página sin acceso a CDN— **no tiene caso propio acá** y se verifica del lado de `GeometriaFactory-Visor`. **Ningún caso de prueba, paso ni salida esperada cambia**, y los **35** casos siguen siendo 35. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **treinta y cinco** casos de verificación, `TC-01` a `TC-35`, repartidos en siete grupos, cada uno con sus ocho campos y con su upstream explícito, incluidas las sondas `SD-XX` de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) que cada uno ejerce **sin redefinir su umbral**. Incluye **seis** casos que verifican **forzando la solicitud sin pasar por la pantalla**, que es obligatorio porque esta pieza no hace cumplir reglas; **cinco** inspecciones estructurales con umbral cero para `RA-01`, `RA-02` y `RA-03`; y los casos de las puertas técnicas `PT-01`, `PT-02` y `PT-03`. Todos los estados dicen `Pendiente` y todas las salidas observadas dicen «Sin ejecutar». Los **ocho** escenarios del intake §20 entran **en su forma original y completa**, sin sustituirse por datos sintéticos. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -17,6 +17,7 @@
 
 - [1. Propósito y alcance](#1-propósito-y-alcance)
 - [2. Trazabilidad CU ↔ tests](#2-trazabilidad-cu--tests)
+  - [2.1 La inspección con umbral exacto que traza a una regla de arquitectura](#21-la-inspección-con-umbral-exacto-que-traza-a-una-regla-de-arquitectura)
 - [3. Trazabilidad NFR ↔ tests](#3-trazabilidad-nfr--tests)
 - [4. Trazabilidad RN ↔ tests](#4-trazabilidad-rn--tests)
 - [5. Trazabilidad punto de acceso ↔ tests](#5-trazabilidad-punto-de-acceso--tests)
@@ -55,6 +56,16 @@ Doce filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificaci
 | CU-12 Ejercitar la superficie con la colección de peticiones reproducible | Given la colección versionada, When se la ejecuta, Then recorre la superficie en **5 pasos o menos** con **0 datos de prueba inventados** | `TC-35` | US-30 | `Pendiente` |
 
 **Doce de doce casos de uso con al menos un caso de verificación, y treinta de treinta historias cubiertas.**
+
+**Treinta y seis de los treinta y siete `TC-XX` tienen fila en alguna de las cinco tablas de trazabilidad de esta matriz.** El restante es una inspección con umbral exacto cuya trazabilidad es hacia una **regla de arquitectura de nivel producto**, un **riesgo** y un **criterio de aceptación de etapa**, y por eso no aparece en ninguna de ellas. Está en §2.1, y **no queda sin instrumento de trazabilidad**.
+
+### 2.1 La inspección con umbral exacto que traza a una regla de arquitectura
+
+| Caso de verificación | Qué verifica | A qué traza, según su campo «Cubre» | Estado |
+| --- | --- | --- | --- |
+| `TC-36` Sin canal de sesión interactiva y sin intercambio de origen cruzado | **Tres ausencias**: no expone ni requiere canal de sesión interactiva, no tiene configuración de intercambio de origen cruzado, y ningún punto de acceso está pensado para el navegador | `RA-01`; el sexto riesgo de `05` §9; criterio de aceptación de la etapa `a` | `Pendiente` |
+
+**Por qué no se le inventa un `CU-XX` ni un punto de acceso.** Lo que mide son **ausencias** en la superficie entera, no el comportamiento de un punto; reabrir cualquiera de las tres rompe `RA-01`, que es regla de nivel producto y no propiedad de un caso de uso. Lo que corresponde es que **esté enumerada**, y esta subsección es su instrumento.
 
 ## 3. Trazabilidad NFR ↔ tests
 
@@ -183,7 +194,8 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 
 | Hueco | Consecuencia | Plan de remediación |
 | --- | --- | --- |
-| **El intake escribe «nueve pruebas del validador» en el gate de este proyecto de código** —§17.5.P.8— **y esa batería tiene diez** | Un lector del gate podría dar la puerta por cumplida con nueve, dejando `E-8` sin cubrir | El Product Owner sobre su propio documento. **Mientras tanto esta categoría aplica diez**, siguiendo la Fase C de `GeometriaFactory-Infrastructure`. Ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 |
+| ~~**El intake escribía «nueve pruebas del validador» en el gate de este proyecto de código** —§17.5.P.8— **y esa batería tiene diez**~~ **CERRADO** | Un lector del gate podía dar la puerta por cumplida con nueve, dejando `E-8` sin cubrir | **Cerrado por el intake 1.20**, que corrigió §17.5.P.8 —y los otros cuatro lugares que decían nueve— sobre el hallazgo que levantó esta categoría. No queda nada derivado al Product Owner por este motivo. Esta categoría aplicó **diez** desde su emisión, siguiendo la Fase C de `GeometriaFactory-Infrastructure`. Ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 |
+| **El piso de cobertura de líneas baja el de la guía y no hay ADR** | `Rules-Calidad-Y-Pruebas.md` §2.2 fija **80 %** de aplicación para el tipo `rest-api` y este proyecto de código fija **75 %**, por el valor que el intake §17.5.P.6 declara con rótulo [ASUNCIÓN]. §2.2 exige un **ADR** para bajar cobertura, y no hay ninguna | **La categoría 05**, que es donde viven las ADR, con la constancia de que el número viene del intake y no de esta categoría. Mientras tanto la caída queda **declarada** en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 y compensada componente por componente, y **no se sube el número por cuenta propia** |
 | **La medición de mutación no está en el pipeline** y su herramienta no está elegida | El umbral de 60 % no se puede exigir todavía en los siete componentes con umbral | Elección y anclaje junto con el resto del tooling de la etapa `a`; hasta que corra, se reporta «sin medir» y no bloquea |
 | **Los valores rotulados [ASUNCIÓN]** —cobertura, forma de la pirámide, percentil, caudal y arranque en frío— siguen sin confirmar | Los gates `QG-03`, `QG-04`, `QG-13` y `QG-14` son condicionados y no bloquean la fusión | El Product Owner sobre el intake §22, antes de fijar las puertas en `09-Devops` |
 | **El formato de intercambio y su configuración** no están fijados, y **la decisión es de esta categoría 05 como productor** | `TC-29` verifica que haya **1** sola configuración; **cuál sea** no está decidido, y los dos extremos tienen que coincidir o el contrato deja de ser el mismo | La categoría 05 de este proyecto de código, con `GeometriaFactory-Web` como consumidor |
@@ -195,4 +207,5 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** El primer hueco de §8 estaba **abierto con remediación pendiente del Product Owner** sobre algo que el Product Owner ya resolvió: el intake **1.20** corrigió los cinco lugares que decían nueve. La fila **se conserva** —para no dejar hueco de numeración— y queda **cerrada** con su desenlace. **`H-04`.** `TC-36` estaba definido en el catálogo y no tenía fila en ninguna tabla de esta matriz; se agrega **§2.1** con su trazabilidad hacia `RA-01`, el sexto riesgo de `05` §9 y el criterio de aceptación de la etapa `a`. **`H-06`.** §8 suma el hueco del piso de cobertura que baja el de la guía sin ADR. Ningún caso, umbral ni decisión de prueba cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**doce** filas de caso de uso con sus **treinta** historias, **diecisiete** de NFR y **dieciséis** de regla de negocio, ninguna agrupada—, más dos propias: los **quince** puntos de acceso, que es lo que hace verificable el 100 % de puntos que la regla exige para el tipo `rest-api`, y los **nueve** invariantes. Refleja el reparto de `05` §10.2 —trece reglas con tramo acá y tres sin él, con caso de verificación igual— y señala las **dos** que esta capa puede romper sola. Declara la cobertura por los **ocho** componentes con «Sin medir» en lugar de cero, con la guardia de admisión y el traductor muy por encima del piso, y la cobertura contable que no admite promedio. Cita los valores rotulados **[ASUNCIÓN]** con su rótulo. Declara **siete** huecos, el primero de ellos la divergencia entre el gate del intake que escribe «nueve» y la batería del validador de **diez**. |

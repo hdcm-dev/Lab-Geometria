@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Estrategia-Testing.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.1.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.1.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 
 ---
@@ -109,7 +109,7 @@ Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 
 ## 6. Datos de prueba
 
-**Los datos de prueba de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos, provenientes de la aplicación de escritorio de los alumnos y de los dos ejemplos de la cátedra, cada uno con su procedencia y su estado declarado —`medido`, `derivado` o `reconstruido`—. §21 los cruza contra la batería obligatoria de **nueve** casos de prueba.
+**Los datos de prueba de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos, provenientes de la aplicación de escritorio de los alumnos y de los dos ejemplos de la cátedra, cada uno con su procedencia y su estado declarado —`medido`, `derivado` o `reconstruido`—. §21 los cruza contra la batería obligatoria de **diez** casos de prueba —los **nueve** de la fuente técnica más el **décimo** que esa misma sección agregó el 2026-08-09 para la dimensión no legible—.
 
 **Cómo los usa este proyecto de código, que es la parte que hay que decir con precisión.** El dominio **no interpreta el texto del alumno**: la interpretación es de `GeometriaFactory-Infrastructure` y la reconstrucción de piezas le llega ya producida ([`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §1). De cada escenario, entonces, lo que entra acá **no es el texto sino su resultado**: el conjunto de piezas y de observaciones que el escenario declara en su bloque «Qué verificar».
 
@@ -144,4 +144,5 @@ Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** §6 afirmaba que §21 del intake cruza los ocho escenarios contra la batería obligatoria de **nueve** casos de prueba; §21 los cruza contra **diez**. Es el mismo defecto que el informe registró en `GeometriaFactory-Visor` (`H-05`) y que **también estaba acá**. Ningún dato de prueba, fixture ni umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la pirámide objetivo con su apartamiento del reparto de `Rules-Calidad-Y-Pruebas.md` §2.2 y su justificación —el nivel unitario sube de 80 a 90 y los niveles de extremo a extremo y snapshot se declaran no aplicables—, la cobertura mínima por los cinco componentes de `05` §3.1 con el origen de cada número separado, el tooling nombrado por función, la decisión de no adoptar archivos de escenario ejecutables con su fundamento, la política de cero dobles que el intake declara, los cuatro fixtures compartidos, el uso de los **ocho** escenarios reales del intake §20 —con la precisión de que a este proyecto de código le entra el resultado de la interpretación y no el texto— y el ambiente de testing, incluida la constancia de que no se declara ningún tiempo de ejecución que ninguna fuente dé. |

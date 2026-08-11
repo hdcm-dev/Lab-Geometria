@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -26,13 +26,13 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.0 | Propuesto | Definición de calidad de un proyecto de código sin comportamiento, atributos ISO 25010 y **nueve** quality gates |
-| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.0 | Propuesto | Apartamiento declarado de la pirámide, cobertura por familia de tipos, tooling, fixtures y datos de prueba |
+| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.1 | Propuesto | Definición de calidad de un proyecto de código sin comportamiento, atributos ISO 25010 y **nueve** quality gates |
+| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Apartamiento declarado de la pirámide, cobertura por familia de tipos, tooling, fixtures y datos de prueba |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.0 | Propuesto | Alcance, criterios de entrada y salida, **ocho** riesgos y plan por etapa |
-| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.0 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, `RT-XX` ↔ tests y cobertura por familia |
-| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **veintidós** casos de prueba, `TC-01` a `TC-22` |
-| [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.0 | Propuesto | **Veinticinco** criterios, `CV-01` a `CV-25`, con su carácter |
-| [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.0 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
+| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, `RT-XX` ↔ tests y cobertura por familia |
+| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.1 | Propuesto | Catálogo de **veintidós** casos de prueba, `TC-01` a `TC-22` |
+| [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Veinticinco** criterios, `CV-01` a `CV-25`, con su carácter |
+| [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
 
 ## 2. Orden de lectura
 
@@ -62,13 +62,13 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | QG-02 | 0 referencias hacia `GeometriaFactory-Domain` | Bloqueante |
 | QG-03 | 0 campos capaces de filtrar hash, clave de firma, dirección, ruta o traza | Se rechaza aunque compile |
 | QG-04 | 15 códigos vivos y 0 producidos fuera del conjunto | Se rechaza aunque compile |
-| QG-05 | 100 % de los tipos ejercitados por integración **[ASUNCIÓN del intake]** | **Condicionado** |
+| QG-05 | 100 % de los tipos ejercitados por integración **[ASUNCIÓN del intake, sobre la forma del gate]** | **Bloqueante** |
 | QG-06 | Proyección de listado sin texto original, componentes ni comentario **[ASUNCIÓN derivada]** | **Condicionado** |
 | QG-07 | 4 campos en la respuesta de sesión y 0 que impidan operar | Se rechaza aunque compile |
 | QG-08 | Despliegue conjunto ante un cambio incompatible | Bloquea la publicación de la etapa |
 | QG-09 | 0 tipos que permitan salir de un estado terminal o que habiliten al navegador | Se rechaza aunque compile |
 
-**Los dos gates condicionados dependen de la asunción `A-4` del intake §22**: se miden y se registran, y no bloquean la fusión hasta que el Product Owner los confirme (`BT-18`).
+**El único gate condicionado es `QG-06`**, cuyo valor viene rotulado [ASUNCIÓN derivada] de §17.4.P.10: se mide y se registra, y no bloquea la fusión hasta que el Product Owner lo confirme (`BT-18`). **`QG-05` bloquea**: la fila `A-4` del intake §22 declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante», y §17.4.P.6 lo llama «el gate equivalente y bloqueante».
 
 ## 5. Recuentos que esta sección sostiene
 
@@ -94,4 +94,5 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02` y `H-08`.** La tabla de gates de §4 declaraba a `QG-05` **condicionado** y atribuía los dos condicionados a la asunción `A-4`. `QG-05` pasa a **bloqueante** —§17.4.P.6 lo llama «equivalente y bloqueante» y §22 `A-4` deja a salvo su carácter— y el único condicionado es `QG-06`, respaldado por §17.4.P.10. Se actualizan las versiones de los artefactos revisados. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Contracts`. Lista los **siete** artefactos emitidos, el orden de lectura, los **dos** omitidos con su motivo y su condición de reapertura, los **nueve** quality gates con su carácter y la tabla de recuentos con la fuente de cada uno. Declara además el precedente de forma que constituye la matriz de sensado de deriva de `GeometriaFactory-Web`, que no es de este proyecto de código y no se toca. |

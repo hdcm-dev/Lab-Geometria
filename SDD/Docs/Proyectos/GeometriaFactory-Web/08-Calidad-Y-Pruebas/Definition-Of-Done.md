@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Definition-Of-Done.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15 y §17.6.P.8
+**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.6.P.8
 **Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops`, que materializa sus criterios mecánicos como pasos del flujo de publicación
 
 ---
@@ -58,8 +58,8 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 - [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3.
 - [ ] Los **once** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen. **Se valida** con esa lista.
 - [ ] **El guion de demostración de la etapa y los de todas las anteriores pasan al 100 %, sin correcciones.** **Se valida** con `TC-35` y `CV-23`. Ejecutar sólo el de la etapa en curso **no cumple**.
-- [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-14` a `CV-18`, `CV-20` a `CV-22`, `CV-31` a `CV-35`— se cumplen. **Se valida** con el registro del flujo y con `TC-29` a `TC-33`.
-- [ ] El criterio condicionado `CV-13` **se midió y se registró**, aunque su forma de puerta siga rotulada [ASUNCIÓN]. **Se valida** con la presencia de la medición en el informe de cierre.
+- [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-13`, `CV-14` a `CV-18`, `CV-20` a `CV-22`, `CV-31` a `CV-35`— se cumplen. **Se valida** con el registro del flujo y con `TC-29` a `TC-33`.
+- [ ] `CV-13` **se cumple**, y no sólo se midió: es **bloqueante** aunque su forma de puerta siga rotulada [ASUNCIÓN], porque el intake §22 `A-4` declara que lo que puede cambiar es la forma del gate y no su carácter. **Se valida** con la presencia de la medición **y de su resultado en verde** en el informe de cierre.
 - [ ] **Las filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) que la etapa toca están verificadas, con estado y fecha, y ninguna deriva mayor queda abierta.** **Se valida** recorriendo la matriz. Una deriva mayor se resuelve **corrigiendo lo construido o actualizando la línea de base con aprobación humana explícita**, nunca por omisión.
 - [ ] Toda deriva **menor** quedó registrada aunque no bloquee. **Se valida** con `CV-27`.
 - [ ] [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró. **Se valida** comparando la matriz contra el índice de la épica.
@@ -81,7 +81,7 @@ Se aplica cada vez que el flujo de publicación corre hacia el hosting público.
 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
-| Criterio **condicionado** `CV-13` no alcanzado | Deja de bloquear el cierre, porque lo rotulado [ASUNCIÓN] es la **forma de la puerta** | Nadie: es el tratamiento declarado en [`Criterios-Validacion.md`](Criterios-Validacion.md) §6 | La medición y su distancia al umbral, en el informe de cierre |
+| **`CV-13` no alcanzado** | **Nada.** No es condicionado: lo rotulado [ASUNCIÓN] es la **forma de la puerta**, y el intake §22 `A-4` deja a salvo su carácter bloqueante | El Product Owner, con constancia escrita, como en cualquier criterio bloqueante | La medición, su distancia al umbral y la remediación, en el informe de cierre |
 | Cobertura de líneas **no exigible** | El criterio `CV-30` se declara «no aplica» mientras no exista proyecto de pruebas propio | — | El fundamento del intake §17.6.P.6 |
 | Deriva **menor** | Se registra y **no bloquea** el cierre | — | La fila de la matriz, con su estado y su fecha |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva, con la etapa en que se cierra |
@@ -104,4 +104,5 @@ Se aplica cada vez que el flujo de publicación corre hacia el hosting público.
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** `CV-13` pasa de criterio condicionado a **bloqueante**: se lo agrega a la lista de bloqueantes de la DoD de etapa y su fila de flexibilización deja de conceder nada. Ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la DoD en **cuatro** capas —historia, tarea técnica, **etapa** y **publicación**—, con el fundamento de por qué la tercera no se llama sprint y la cuarta no se llama release, dado que este proyecto de código sí se entrega pero no se versiona como paquete redistribuible. Cada criterio responde «cómo se valida» con una operación concreta. Incorpora como criterio de historia que **toda acotación se verifique forzando la solicitud**, como criterio de tarea técnica que las propiedades de ausencia se midan **en su condición declarada** —el conteo de peticiones con los dos movimientos prendidos—, y como criterio de etapa que **ninguna deriva mayor quede abierta**. Su §1.4 declara los criterios de la publicación, incluida la comprobación de que la dirección pública responde. Declara **ocho** casos de excepción, **cuatro** de ellos sin excepción posible, y la vigencia como fuente canónica, con la constancia de que los umbrales de deriva **no se cambian desde este documento**. |

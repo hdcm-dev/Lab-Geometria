@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Plan-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -78,7 +78,7 @@ Alineados con los **ocho** riesgos arquitectónicos de [`../05-Arquitectura-Tecn
 | RQ-07 | Que una consulta de listado arrastre los componentes de cada pieza o el texto original | Medio | **Media-alta**: es el comportamiento por defecto de cualquier carga completa de entidad | `TC-19`, con dos recuentos en cero para el listado y presencia completa en el detalle |
 | RQ-08 | Que la unicidad del correo se sostenga **sólo** con la consulta previa del consumidor | Alto | Media | `TC-22`, que verifica el rechazo del almacén **aunque la consulta previa no lo hubiera visto** |
 | RQ-09 | **Que un escenario del intake §20 se sustituya por un texto escrito a mano** «porque es más corto» | **Muy alto**: un texto escrito por quien conoce las cuatro trampas **las pasa sin ejercitarlas**, que es exactamente el modo en que `RQ-01` se materializa sin que nadie lo note | Media | [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 lo prohíbe; el criterio de salida exige que los ocho escenarios sigan siendo el material de `TC-01` a `TC-11` y de `TC-16` |
-| RQ-10 | **Que la batería se dé por completa con nueve casos**, siguiendo la redacción de los dos gates del intake en lugar de la tabla de §21 | Alto: dejaría `E-8` sin cubrir, que es el escenario que cerró la única condición del contrato de fachada sin dato de prueba | Media, porque la redacción del gate es lo que se lee en el pipeline | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 declara la divergencia y fija **diez**; el criterio de salida de §3 exige 10 de 10 contra la tabla de la matriz §6 |
+| RQ-10 | **Que la batería se dé por completa con nueve casos**, arrastrando la redacción que los dos gates del intake tuvieron hasta 1.19 en lugar de la tabla de §21 | Alto: dejaría `E-8` sin cubrir, que es el escenario que cerró la única condición del contrato de fachada sin dato de prueba | **Baja desde el intake 1.20**, que corrigió los dos gates a **diez**; queda como riesgo vivo sólo por las copias del texto viejo que puedan circular | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 declara el desenlace y fija **diez**; el criterio de salida de §3 exige 10 de 10 contra la tabla de la matriz §6 |
 
 ## 5. Plan por etapa
 
@@ -110,4 +110,5 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** El riesgo `RQ-10` describía en presente la redacción de los dos gates del intake como de «nueve casos»; el intake **1.20** dice **diez**. El riesgo se conserva con su probabilidad reevaluada a **baja** y el nueve ubicado **hasta 1.19**. Ningún caso ni umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara el alcance del plan sobre las **cinco** etapas que este proyecto de código toca, con las tres que no lo tocan declaradas y con la frontera precisa contra la batería de integración del producto, que vive en `GeometriaFactory-Api`. Declara **siete** criterios de entrada y **once** de salida, todos verificables; **diez** riesgos de calidad alineados con los ocho riesgos arquitectónicos de `05` §9 más dos propios de la categoría —sustituir un escenario por un texto escrito a mano, y dar la batería por completa con nueve casos—; el plan por etapa con los treinta y cinco casos repartidos y **sin fechas ni duraciones**; y los recursos, con el almacén efímero y los secretos de prueba declarados como tales. |

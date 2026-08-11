@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Plan-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
-**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.0; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md)
+**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md)
 **Trazabilidad downstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -84,7 +84,7 @@ Alineados con los **nueve** riesgos arquitectónicos de [`../05-Arquitectura-Tec
 | RQ-08 | Que el listado de la comisión crezca por encima de lo que el requerimiento de tiempo sostiene | Medio | Baja en el alcance declarado | `TC-34`, con la **condición de reingreso escrita**: cuando el percentil deje de cumplirse, entra paginación, y es cambio del ensamblado de contratos |
 | RQ-09 | Que el mecanismo de construcción de la imagen en destino no funcione y el despliegue quede sin camino | Alto: es el único canal de entrega declarado | Media, **y la fuente lo rotula [A VERIFICAR]** | Probarlo **una vez antes de depender de él**. **No es criterio de esta categoría**: el despliegue es manual y del Product Owner |
 | RQ-10 | **Que la batería de integración se dé por suficiente sin las inspecciones de umbral exacto** | Alto: las propiedades más peligrosas de este proyecto de código —los cuatro puntos exentos, los catorce códigos con destino, las tres familias— **no se ven ejerciendo el cable, se ven contándolo** | Media, porque una batería de integración verde da sensación de cobertura | Criterio de salida de §3: las **cinco** inspecciones con umbral exacto se ejecutan aparte y su resultado se registra por separado |
-| RQ-11 | **Que la batería del validador se dé por completa con nueve casos**, siguiendo la redacción del gate del intake | Alto: dejaría `E-8` sin cubrir | Media, porque la redacción del gate es lo que se lee en el pipeline | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 declara la divergencia y fija **diez**; el criterio de salida de §3 lo exige |
+| RQ-11 | **Que la batería del validador se dé por completa con nueve casos**, arrastrando la redacción que el gate del intake tuvo hasta 1.19 | Alto: dejaría `E-8` sin cubrir | **Baja desde el intake 1.20**, que corrigió el gate a **diez**; queda como riesgo vivo sólo por las copias del texto viejo que puedan circular | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 declara el desenlace y fija **diez**; el criterio de salida de §3 lo exige |
 
 ## 5. Plan por etapa
 
@@ -117,4 +117,5 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** El riesgo `RQ-11` describía en presente la redacción del gate del intake como de «nueve casos»; el intake **1.20** dice **diez**. El riesgo se conserva con su probabilidad reevaluada a **baja** y el nueve ubicado **hasta 1.19**. El riesgo no se retira porque las copias del texto viejo pueden seguir circulando. Ningún caso ni umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara el alcance del plan sobre las **seis** etapas que este proyecto de código toca, con las dos que no lo tocan declaradas, con la constancia de que **la batería de integración del producto vive acá** y con la frontera del despliegue, que es manual y del Product Owner. Declara **siete** criterios de entrada —incluido el que exige declarar la ubicación de todo punto de acceso nuevo **antes** de construirlo— y **doce** de salida; **once** riesgos de calidad alineados con los nueve riesgos arquitectónicos de `05` §9 más dos propios, entre ellos el de dar la batería de integración por suficiente sin las inspecciones de umbral exacto; el plan por etapa con los treinta y siete casos repartidos y **sin fechas ni duraciones**; y los recursos. |

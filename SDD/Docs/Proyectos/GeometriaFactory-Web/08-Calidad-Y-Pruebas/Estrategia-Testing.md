@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Estrategia-Testing.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.7 §5, §6 y §7; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §3.2, §4 y §8; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../03-UX-UI-DX/Linea-Base-Visual.md`](../03-UX-UI-DX/Linea-Base-Visual.md) y [`../03-UX-UI-DX/Contrato-Datos-Maqueta.md`](../03-UX-UI-DX/Contrato-Datos-Maqueta.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.6.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.7 §5, §6 y §7; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §3.2, §4 y §8; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../03-UX-UI-DX/Linea-Base-Visual.md`](../03-UX-UI-DX/Linea-Base-Visual.md) y [`../03-UX-UI-DX/Contrato-Datos-Maqueta.md`](../03-UX-UI-DX/Contrato-Datos-Maqueta.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.6.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 
 ---
@@ -51,7 +51,7 @@
 
 ## 2. Cobertura mínima por capa
 
-**No hay umbral de cobertura de líneas, y no es una omisión.** El intake §17.6.P.6 declara el gate «no basado en cobertura de líneas» y el intake §22 lo rotula como asunción `A-4` en cuanto a su forma. Lo que sí se cubre, y se cuenta, es esto:
+**No hay umbral de cobertura de líneas, y no es una omisión.** El intake §17.6.P.6 declara un **«gate bloqueante y numérico en lugar de cobertura de líneas»**, y el intake §22 lo rotula como asunción `A-4` en cuanto a su forma. Lo que sí se cubre, y se cuenta, es esto:
 
 | Dimensión | Unidad de cobertura | Umbral | Fuente |
 | --- | --- | --- | --- |
@@ -195,7 +195,7 @@ Las **61** filas de la matriz agrupadas por su método resuelto. La agrupación 
 | `SD-07` determinismo | `SD-41` y `SD-45` | **Verdadera.** `SD-41` compara dos cargas del mismo texto; `SD-45` compara las disposiciones en las **cuatro** combinaciones de movimiento |
 | `SD-09` siete códigos en ocho cursos | `SD-18` | **Verdadera.** `SD-18` sensa los **ocho** estados que materializan las **siete** condiciones del contrato y que **usan los códigos sin renombrarlos** |
 | `SD-11` gobierno del movimiento | `SD-44`, `SD-46` y `SD-48` | **Verdadera.** `SD-44` sensa los dos controles independientes; `SD-46`, la reposición de la orientación de partida; `SD-48`, el arranque destildado con preferencia de movimiento reducido declarada |
-| `SD-12` puertas `PT-02` y `PT-03` | `SD-42` | **Verdadera en lo que afirma, y parcial en su alcance.** `SD-42` sensa los **diez recorridos de ida y vuelta sin degradación**, que es lo que la correspondencia le atribuye. **Lo que esa fila no cubre es la otra mitad de `PT-02`** —que el motor de dibujo quede **dentro** del bundle, sin acceso a redes externas—, que es propiedad del bundle y **se sensa sólo del lado del `Visor`**. La correspondencia no afirma lo contrario: dice «acá las dos puertas enteras, allá los diez recorridos» |
+| `SD-12` puertas `PT-02` y `PT-03` | `SD-42` | **Verdadera en lo que afirma, y parcial en su alcance.** `SD-42` sensa los **diez recorridos de ida y vuelta sin degradación**, que es lo que la correspondencia le atribuye. **Lo que esa fila no cubre es la otra puerta de la correspondencia, `PT-03`** —que el motor de dibujo quede **dentro** del bundle y la página funcione **sin acceso a CDN externos**, que es como el intake §17.7.P.8 define `PT-03`—, que es propiedad del bundle y **se sensa sólo del lado del `Visor`**. La correspondencia no afirma lo contrario: dice «acá las dos puertas enteras, allá los diez recorridos» |
 
 **No hay doble sensado con umbrales distintos.** Las filas de esta matriz se anclan en identificadores de línea de base **validados visualmente**; las de la matriz del `Visor` se anclan en elementos del **contrato de la fachada**. Cuando las dos miran lo mismo, lo miran desde lados distintos, y los umbrales que declaran son compatibles: **deriva mayor sin gradación en las dos** para cero red, cero persistencia, fallo silencioso, determinismo y las puertas técnicas.
 
@@ -205,4 +205,5 @@ Las **61** filas de la matriz agrupadas por su método resuelto. La agrupación 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-03`.** La última fila de §8.2 atribuía a `PT-02` el contenido de `PT-03` en el párrafo que certifica la correspondencia con la matriz de sensado del `Visor`: lo que `SD-42` no cubre es **`PT-03`** —el motor de dibujo dentro del bundle y la página sin acceso a CDN—, que es como el intake §17.7.P.8 define esa puerta. **`H-02`.** §2 cita ahora §17.6.P.6 como «gate bloqueante y numérico». **Las ocho correspondencias siguen siendo verdaderas y ninguna se toca**; la matriz de sensado 1.2 no se modifica. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la pirámide objetivo con su apartamiento del reparto de `Rules-Calidad-Y-Pruebas.md` §2.2 y el motivo —el intake §17.6.P.6 declara que este proyecto de código **no tiene proyecto de pruebas propio** y que su verificación es el guion de demostración acumulativo—, con la consecuencia de ese apartamiento dicha sin adornos y los dos instrumentos enumerables que la compensan. Declara la cobertura por unidades contables en lugar de por líneas, el tooling nombrado por función, la política de una sola clase de sustitución admitida, el uso de los **ocho** escenarios del intake §20 **en su forma original y completa**, que es propio de este proyecto de código, y el ambiente. Su §8 declara la **relación con la matriz de sensado de deriva ya emitida en la Fase B2**: qué hace esta fase con ella y qué no, la **resolución del método de verificación de sus 61 filas por familia** con el recuento cerrado, y la **verificación desde este lado de las ocho correspondencias** que la matriz de `GeometriaFactory-Visor` declara, todas confirmadas, con la precisión de alcance de la última. |

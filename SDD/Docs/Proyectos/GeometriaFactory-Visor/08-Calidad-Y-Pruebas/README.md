@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -26,10 +26,10 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.0 | Propuesto | Definición de calidad, atributos ISO 25010, **nueve** quality gates y el carácter vinculante de las dos puertas técnicas |
-| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.0 | Propuesto | Pirámide con su apartamiento doble, cobertura por componente, tooling, fixtures y los **ocho** escenarios reales |
+| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.1 | Propuesto | Definición de calidad, atributos ISO 25010, **nueve** quality gates y el carácter vinculante de las dos puertas técnicas |
+| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Pirámide con su apartamiento doble, cobertura por componente, tooling, fixtures y los **ocho** escenarios reales |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.0 | Propuesto | Alcance por **momento del producto**, criterios de entrada y salida, **ocho** riesgos |
-| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.0 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, garantía ↔ tests, código ↔ tests y cobertura por componente |
+| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, garantía ↔ tests, código ↔ tests y cobertura por componente |
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **veintiún** casos de prueba, `TC-01` a `TC-21` |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.0 | Propuesto | **Treinta y cuatro** criterios, `CV-01` a `CV-34`, incluidos los **seis** tramos de `PT-02` y `PT-03` |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.0 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
@@ -108,4 +108,5 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | Actualiza la tabla de artefactos: [`Estrategia-Calidad.md`](Estrategia-Calidad.md), [`Estrategia-Testing.md`](Estrategia-Testing.md) y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) suben a **1.1**. Los tres son de redacción y de trazabilidad: §6 de la estrategia de testing decía que §21 del intake cruza la batería contra **nueve** casos y son **diez**; tres citas entrecomilladas del intake omitían palabras dentro de las comillas; y la matriz no tenía fila para `TC-20`, que es **la prueba de la puerta `PT-02`**. **Ningún gate, umbral, caso ni recuento de esta sección cambia**, y las dos puertas técnicas siguen siendo vinculantes y no condicionadas. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Visor`. Lista los **nueve** artefactos emitidos —los siete obligatorios más los dos que activan `tiene_extensibilidad` y `requiere_maqueta`—, el orden de lectura, la ausencia de omisiones con el fundamento de cada artefacto condicionado, los **nueve** quality gates con la constancia de que **ninguno es condicionado** y de que la única marca [ASUNCIÓN] que alcanza a este proyecto de código es sobre la forma del gate y no sobre la regla, y la tabla de recuentos con la fuente de cada uno. |

@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Definition-Of-Done.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md); [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15 y §17.4.P.3
+**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md); [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.4.P.3
 **Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops`
 
 ---
@@ -56,7 +56,7 @@
 - [ ] Todas las historias de la épica cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3.
 - [ ] Los **nueve** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen. **Se valida** con esa lista.
 - [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-10` a `CV-14`, `CV-21` a `CV-23`— se cumplen. **Se valida** con `TC-15`, `TC-16`, `TC-20` y el informe de construcción.
-- [ ] Los criterios condicionados —`CV-08`, `CV-09`— **se midieron y se registraron**, aunque no bloqueen. **Se valida** con la presencia de la medición en el informe de cierre.
+- [ ] El criterio condicionado —`CV-09`— **se midió y se registró**, aunque no bloquee. **Se valida** con la presencia de la medición en el informe de cierre.
 - [ ] **Todas** las inspecciones de superficie escritas hasta ese momento se reejecutan, y no sólo las de las familias que la etapa tocó. **Se valida** con `CV-15`.
 - [ ] Ningún `TC-XX` que estaba en verde pasó a rojo sin justificación escrita. **Se valida** con `CV-16`.
 - [ ] Si la etapa cambió un conjunto cerrado, el cambio está declarado incompatible y el despliegue conjunto está previsto. **Se valida** con `CV-18` y `CV-19`.
@@ -70,11 +70,11 @@ Se aplica cuando las **siete** etapas comprometidas que este proyecto de código
 
 - [ ] Los **veinticinco** criterios de [`Criterios-Validacion.md`](Criterios-Validacion.md) están evaluados uno por uno, con su resultado registrado.
 - [ ] **8 de 8** contratos de uso, **21 de 21** historias comprometidas y **16 de 16** reglas con caso de prueba en verde. **Se valida** con los recuentos de la matriz. `US-10` y `TC-11` quedan declarados fuera del tramo comprometido.
-- [ ] **100 %** de los tipos ejercitados por al menos una prueba de integración contra el servicio real. **Se valida** con `TC-21`. Criterio condicionado mientras el umbral siga rotulado [ASUNCIÓN].
+- [ ] **100 %** de los tipos ejercitados por al menos una prueba de integración contra el servicio real. **Se valida** con `TC-21`. **Criterio bloqueante**: el intake §17.4.P.6 lo llama «el gate equivalente y bloqueante», y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante». Lo que puede cambiar es **cómo** se expresa la condición.
 - [ ] **15** códigos vivos, **18** emitidos, **3** retirados y **0** reciclados. **Se valida** con `TC-16`.
 - [ ] **0** referencias hacia `GeometriaFactory-Domain` y **0** campos de filtración. **Se valida** con `TC-20` y `TC-15`.
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos de prueba que los usan. **Se valida** con `CV-07`.
-- [ ] Los dos valores rotulados **[ASUNCIÓN]** están confirmados, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 y el estado de `BT-18`.
+- [ ] Los dos valores rotulados **[ASUNCIÓN]** están confirmados, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 —fila `A-4`— y §17.4.P.10, más el estado de `BT-18`. **Que el de `QG-05` siga sin confirmar no lo vuelve condicionado**: el gate bloquea igual y lo sujeto a confirmación es su forma.
 - [ ] No queda ningún punto abierto de `05` §11 sin desenlace declarado. **Se valida** leyendo esa tabla, que hoy declara **tres abiertos y uno resuelto**.
 
 ## 2. Excepciones admitidas
@@ -99,4 +99,5 @@ Se aplica cuando las **siete** etapas comprometidas que este proyecto de código
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** Los tres puntos que trataban a `CV-08` como criterio condicionado pasan a tratarlo como **bloqueante**, por la fila `A-4` del intake §22 y por §17.4.P.6. Se aclara además que **que la asunción siga sin confirmar no vuelve condicionado al gate**: lo sujeto a confirmación es su forma. Ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la DoD en **cuatro** capas —historia, tarea técnica, **etapa** y entrega del proyecto de código—, con el fundamento de por qué la tercera no se llama sprint y la cuarta no se llama release. Cada criterio responde «cómo se valida» con una operación concreta, y la mayoría con un recuento sobre la superficie pública. Distingue en las cuatro capas entre las inspecciones de superficie, que no se difieren, y las pruebas de integración, que sí pueden diferirse por escrito mientras `GeometriaFactory-Api` no exista. Declara **cinco** casos de excepción, dos de ellos sin excepción posible, y la vigencia como fuente canónica con la delimitación frente a la Definition of Ready. |

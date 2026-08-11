@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -17,6 +17,7 @@
 
 - [1. Propósito y alcance](#1-propósito-y-alcance)
 - [2. Trazabilidad CU ↔ tests](#2-trazabilidad-cu--tests)
+  - [2.1 El caso de prueba de la puerta técnica `PT-02`](#21-el-caso-de-prueba-de-la-puerta-técnica-pt-02)
 - [3. Trazabilidad NFR ↔ tests](#3-trazabilidad-nfr--tests)
 - [4. Trazabilidad RN ↔ tests](#4-trazabilidad-rn--tests)
 - [5. Trazabilidad garantía ↔ tests](#5-trazabilidad-garantía--tests)
@@ -50,6 +51,16 @@ Siete filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificac
 | CU-07 Gobernar el movimiento automático | Given una instancia viva, When se prende o se apaga un movimiento, Then el cambio surte efecto **sin reconstruir la instancia** y sin perder la selección; el no nombrado conserva su estado | `TC-13`, `TC-14`, `TC-03` | Extremo a extremo | `Pendiente` |
 
 **Siete de siete casos de uso con al menos un caso de prueba.** Ninguno queda huérfano.
+
+**Veinte de los veintiún `TC-XX` tienen fila en alguna de las cinco tablas de trazabilidad de esta matriz.** El restante es `TC-20`, cuya trazabilidad primaria es una **puerta técnica** —y no un `CU-XX`, un NFR, una `RN-XX`, una garantía ni un código de condición—, y por eso no aparece en ninguna de ellas. Está en §2.1, y **no queda sin instrumento de trazabilidad**. Es el caso más sensible de la matriz, porque **es la prueba de `PT-02`** y una puerta que no pasa detiene la planificación de la etapa `g`.
+
+### 2.1 El caso de prueba de la puerta técnica `PT-02`
+
+| Caso de prueba | Qué verifica | A qué traza, según su campo «Cubre» | Estado |
+| --- | --- | --- | --- |
+| `TC-20` La puerta `PT-02`: el bundle en una página del anfitrión | Los **cinco** tramos que la puerta exige, medidos juntos: el bundle carga, la creación de instancia arma la escena, el texto de `E-1` dibuja las **tres** figuras con el ortoedro, **diez** recorridos de ida y vuelta con los dos movimientos prendidos **no degradan**, y el árbol y la escena **se sincronizan por índice** | Puerta técnica **`PT-02`** del intake §15 y §17.7.P.8; `US-01`, `US-04`, `US-09`, `US-11`; `QG-03`; `BT-14` | `Pendiente` |
+
+**Dónde están sus criterios de validación.** Los tramos se cuentan en [`Criterios-Validacion.md`](Criterios-Validacion.md) §4, que es la sección de puertas técnicas que este proyecto de código tiene y los otros dos de nivel topológico 0 no: **cuatro** criterios, `CV-20` a `CV-23`, que reparten los cinco tramos —`CV-20` toma juntos la carga del bundle y la creación de la escena—. **`TC-20` no está fuera de la trazabilidad; está en el instrumento que le corresponde**, y esta subsección lo enlaza desde la matriz para que el recorrido inverso `TC → matriz` cierre.
 
 ## 3. Trazabilidad NFR ↔ tests
 
@@ -164,4 +175,5 @@ La partición es por los **seis** componentes de `05` §3.1, dos de los cuales n
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-04`.** `TC-20` estaba definido en el catálogo y **no tenía fila en ninguna de las cinco tablas** de esta matriz, siendo **la prueba de la puerta `PT-02`**. Se agrega **§2.1**, que lo enumera con sus cinco tramos, su trazabilidad y la remisión a los criterios `CV-20` a `CV-23` de [`Criterios-Validacion.md`](Criterios-Validacion.md) §4, para que el recorrido inverso `TC → matriz` cierre. **Ninguna cobertura, umbral ni caso cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**siete** filas de caso de uso, **ocho** de NFR y **dieciséis** de regla de negocio— y dos más: las **siete** garantías del contrato de fachada y los **siete** códigos de condición en sus **ocho** filas de curso. La tabla de reglas declara de forma verificable que **ninguna de las dieciséis se verifica acá y dónde se verifica cada una**, que es el resultado correcto para un visualizador puro. Transcribe las condiciones de medición de `02` §6 sin redefinirlas y las declara vinculantes. Declara la cobertura por los **seis** componentes con «Sin medir», las tres ausencias de métrica de código con su motivo, y **cinco** huecos, incluido el umbral de fluidez que esta categoría **no inventa**. |

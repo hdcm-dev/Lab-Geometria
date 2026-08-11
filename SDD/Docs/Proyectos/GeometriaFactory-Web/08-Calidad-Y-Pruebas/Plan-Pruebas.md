@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Plan-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.0; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md)
+**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.1; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md)
 **Trazabilidad downstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -58,7 +58,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] Las cinco inspecciones estructurales —`TC-29` a `TC-33`— dan **0** en cada uno de sus recuentos, en la condición declarada.
 - [ ] Los seis casos que verifican **forzando la solicitud** —`TC-01`, `TC-05`, `TC-07`, `TC-15`, `TC-25`, `TC-26`— se ejecutaron para las acotaciones que la etapa introdujo.
 - [ ] Los gates `QG-01`, `QG-02`, `QG-03`, `QG-05`, `QG-06`, `QG-07`, `QG-08`, `QG-09`, `QG-10` y `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
-- [ ] `QG-04` **se midió y se registró**, aunque sea condicionado.
+- [ ] `QG-04` **se cumple**: el guion de la etapa y los de todas las anteriores pasan al 100 %. Es **bloqueante**, no condicionado (ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1).
 - [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró.
 - [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
 - [ ] El punto de control de la etapa tiene el OK explícito del Product Owner (intake §15, regla de delivery 2).
@@ -112,4 +112,5 @@ Sin fechas y sin duraciones, por lo declarado en §1. `TC-35` aparece en **todas
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** El criterio de salida que pedía que `QG-04` «se midiera y se registrara aunque sea condicionado» pasa a exigir que **se cumpla**: el gate es bloqueante. Ningún caso ni umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara el alcance del plan sobre las **ocho** etapas comprometidas —este es el único proyecto de código del producto que produce épica en todas—, con la constancia de que esta pieza **no verifica que una regla se cumpla** sino que forzar la solicitud la recibe rechazada del otro lado. Declara **siete** criterios de entrada —incluidas las tres puertas técnicas en su momento— y **once** de salida, todos verificables; **diez** riesgos de calidad alineados con los siete riesgos arquitectónicos de `05` §9 más tres propios, entre ellos el de dar una acotación por verificada mirando la pantalla y el de resolver una deriva mayor por omisión; el plan por etapa con los treinta y cinco casos de verificación **y las sesenta y una filas de la matriz de sensado** repartidas, **sin fechas ni duraciones**; y los recursos, con los **dos** ambientes que no son intercambiables. |

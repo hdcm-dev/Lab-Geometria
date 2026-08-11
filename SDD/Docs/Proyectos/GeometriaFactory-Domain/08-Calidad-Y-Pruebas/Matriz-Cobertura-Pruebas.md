@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -17,6 +17,7 @@
 
 - [1. Propósito y alcance](#1-propósito-y-alcance)
 - [2. Trazabilidad CU ↔ tests](#2-trazabilidad-cu--tests)
+  - [2.1 Las dos pruebas de inspección estructural y a qué trazan](#21-las-dos-pruebas-de-inspección-estructural-y-a-qué-trazan)
 - [3. Trazabilidad NFR ↔ tests](#3-trazabilidad-nfr--tests)
 - [4. Trazabilidad RN ↔ tests](#4-trazabilidad-rn--tests)
 - [5. Trazabilidad invariante ↔ tests](#5-trazabilidad-invariante--tests)
@@ -54,7 +55,18 @@ Trece filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificac
 | CU-12 Configurar la cuenta de administrador | Given la ausencia de administrador declarada y la credencial derivada, When se configura, Then nace `Habilitado`; una segunda configuración se rechaza | `TC-06` | Unit | `Pendiente` |
 | CU-13 Resetear la contraseña de una cuenta de alumno | Given una cuenta de alumno en cualquiera de sus tres estados, When se la resetea, Then conserva estado, papel, identidad y **todos** sus trabajos, y queda con la marca puesta | `TC-07`, `TC-05` | Integración interna | `Pendiente` |
 
-**Trece de trece casos de uso con al menos un caso de prueba.** Ninguno queda huérfano y ningún `TC-XX` deja de referenciar un `CU-XX`, un `RN-XX`, un `INV-XX` o un NFR.
+**Trece de trece casos de uso con al menos un caso de prueba.** Ninguno queda huérfano.
+
+**Veinticinco de los veintisiete `TC-XX` referencian un `CU-XX`, una `RN-XX`, un `INV-XX` o un NFR, y tienen fila en alguna de las cuatro tablas de esta matriz.** Los **dos** restantes son pruebas de inspección estructural cuya trazabilidad es hacia una **ADR**, una **tarea técnica** o un **quality gate**, y por eso no aparecen en ninguna de esas cuatro tablas. Están en §2.1, y **ninguno queda sin instrumento de trazabilidad**.
+
+### 2.1 Las dos pruebas de inspección estructural y a qué trazan
+
+| Caso de prueba | Qué verifica | A qué traza, según su campo «Cubre» | Estado |
+| --- | --- | --- | --- |
+| `TC-25` El dominio no lee el reloj ni el conjunto | Cero ocurrencias de lectura de reloj y de consulta de conjuntos en las operaciones públicas, y dos ejecuciones idénticas sin fijar el reloj del entorno | [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md); `BT-09`; `05` §7, filas de configuración y de zona horaria | `Pendiente` |
+| `TC-27` Ninguna condición prevista viaja como excepción | Las **42** condiciones llegan como valor de retorno tipado y **0** invocaciones lanzan; la distinción con el defecto de programación del consumidor se verifica aparte | [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md); `BT-07`; `QG-08` | `Pendiente` |
+
+**Por qué no se les inventa un `CU-XX` ni una `RN-XX`.** Las dos verifican decisiones de arquitectura, no comportamiento pedido por un caso de uso: atarlas a un identificador funcional para que la tabla cerrara sería exactamente la clase de trazabilidad falsa que esta matriz existe para evitar. Lo que sí corresponde es que **estén enumeradas**, y esta subsección es su instrumento.
 
 ## 3. Trazabilidad NFR ↔ tests
 
@@ -149,4 +161,5 @@ La partición es por los **cinco** componentes de `05` §3.1, no por capas de de
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-04`.** El cierre de §2 afirmaba que **ningún `TC-XX` deja de referenciar** un `CU-XX`, una `RN-XX`, un `INV-XX` o un NFR, y era falso en su propio documento: `TC-25` y `TC-27` trazan a una ADR, a una tarea técnica y a un quality gate, y no tenían fila en ninguna de las cuatro tablas. La frase se reemplaza por el recuento verdadero —**25 de 27**— y se agrega **§2.1**, que enumera las dos con su trazabilidad. **Ninguna cobertura, umbral ni caso cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**trece** filas de caso de uso, **seis** de NFR y **dieciséis** de regla de negocio, ninguna agrupada—, una cuarta de **nueve** invariantes exigida por el NFR de ejercicio de `05` §8, y la cobertura por los **cinco** componentes con «Sin medir» en lugar de cero. Cita los dos valores rotulados **[ASUNCIÓN]** con su rótulo y declara sus gates como condicionados; separa el mutation score, que es piso de la regla de la categoría y no del intake; y declara **cinco** huecos con su plan de remediación, incluida la ausencia de matriz de sensado de deriva con su fundamento. |

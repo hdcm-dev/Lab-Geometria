@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -26,13 +26,13 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.0 | Propuesto | Definición de calidad, atributos ISO 25010, **catorce** quality gates, y la declaración de por qué la batería tiene **diez** casos |
-| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.0 | Propuesto | Pirámide objetivo, cobertura por componente con el piso propio del validador, tooling, dobles mínimos y los **ocho** escenarios reales del intake como texto literal |
-| [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.0 | Propuesto | Alcance, criterios de entrada y salida, **diez** riesgos de calidad y plan por etapa |
-| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.0 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, regla conceptual ↔ tests, batería ↔ escenarios y cobertura por componente |
+| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.1 | Propuesto | Definición de calidad, atributos ISO 25010, **catorce** quality gates, y la declaración de por qué la batería tiene **diez** casos |
+| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Pirámide objetivo, cobertura por componente con el piso propio del validador, tooling, dobles mínimos y los **ocho** escenarios reales del intake como texto literal |
+| [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.1 | Propuesto | Alcance, criterios de entrada y salida, **diez** riesgos de calidad y plan por etapa |
+| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, regla conceptual ↔ tests, batería ↔ escenarios y cobertura por componente |
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y cinco** casos, `TC-01` a `TC-35`, cuyos **diez primeros son los diez de la batería** |
-| [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.0 | Propuesto | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter bloqueante, condicionado o no exigible |
-| [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.0 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
+| [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter bloqueante, condicionado o no exigible |
+| [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
 
 ## 2. Orden de lectura
 
@@ -105,4 +105,5 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | Actualiza la tabla de artefactos: **seis** de los siete suben a **1.1**. Todos por `H-01`: los documentos afirmaban **en presente** que el intake escribe «nueve pruebas del validador» en §17.3.P.8 y §17.5.P.8, y el **intake 1.20** dice **diez** en esos dos gates, en §17.3.P.6, en §17.2.P.11 y en el encabezado de §21 —lo corrigió en el mismo commit que emitió esta categoría, sobre el hallazgo que esta categoría levantó—. El hueco de la matriz **se conserva y queda cerrado** con su desenlace, en lugar de abierto con remediación pendiente del Product Owner. **La batería era y sigue siendo de diez**, y ningún gate, umbral, caso ni recuento de esta sección cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Infrastructure`. Lista los **siete** artefactos emitidos con su versión y su estado, el orden de lectura, los **dos** artefactos omitidos con su motivo, los **catorce** quality gates con su carácter —con la constancia de que `QG-07` **no es condicionado** porque la tolerancia de 0.01 no es asunción— y la puerta técnica que el backlog asigna a la etapa `a` de este proyecto de código, y la tabla de recuentos que esta sección sostiene con la fuente de cada uno. |

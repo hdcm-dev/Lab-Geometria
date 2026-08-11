@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Estrategia-Calidad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, §4, §5 y §6; [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md) §7; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §7.1; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §8, §9, §10.5 y §11; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.3.P.6, §17.3.P.8, §17.3.P.10, §20, §21 y §22
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, §4, §5 y §6; [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md) §7; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §7.1; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §8, §9, §10.5 y §11; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.3.P.6, §17.3.P.8, §17.3.P.10, §20, §21 y §22
 **Trazabilidad downstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md), [`Plan-Pruebas.md`](Plan-Pruebas.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`, que materializa como etapas del pipeline los quality gates de §3; `11-Documentacion`, que cita esta estrategia sin redefinirla
 
 ---
@@ -19,7 +19,7 @@
 - [2. Atributos de calidad priorizados](#2-atributos-de-calidad-priorizados)
 - [3. Quality gates](#3-quality-gates)
   - [3.1 Qué significa que un gate esté condicionado](#31-qué-significa-que-un-gate-esté-condicionado)
-  - [3.2 La batería del validador tiene diez casos y el intake escribe nueve en dos lugares](#32-la-batería-del-validador-tiene-diez-casos-y-el-intake-escribe-nueve-en-dos-lugares)
+  - [3.2 La batería del validador tiene diez casos, y el intake lo dice desde 1.20](#32-la-batería-del-validador-tiene-diez-casos-y-el-intake-lo-dice-desde-120)
 - [4. Roles de calidad dentro del equipo](#4-roles-de-calidad-dentro-del-equipo)
 - [5. Cadencia de revisión](#5-cadencia-de-revisión)
 - [6. Control de cambios](#6-control-de-cambios)
@@ -84,15 +84,16 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 
 **Lo que no es condicionado, y conviene no confundir.** `QG-07` mide un número —**0.01**— que **no está rotulado [ASUNCIÓN]**: el intake §22 lo enumera entre «lo que NO es asunción», con su fundamento. Un gate condicionado por arrastre de ese número sería un error de lectura, y esta estrategia lo declara para que no ocurra.
 
-### 3.2 La batería del validador tiene diez casos y el intake escribe nueve en dos lugares
+### 3.2 La batería del validador tiene diez casos, y el intake lo dice desde 1.20
 
 **Esta categoría aplica diez, y declara por qué.**
 
 - El intake **§21** cruza la batería obligatoria contra los escenarios y su tabla tiene **diez** filas: las nueve de la fuente técnica original más **«Dimensión no legible → `E-8`»**, que la propia fila rotula **[DECISIÓN 2026-08-09]**.
-- El intake **§17.3.P.8** escribe «las **nueve** pruebas del validador pasan», y **§17.5.P.8** repite «incluidas las **nueve** pruebas del validador» en el pipeline de `GeometriaFactory-Api`.
-- [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 y §10.5 ya resolvieron la lectura: **la batería tiene 10 casos**, «los nueve obligatorios de la fuente más el décimo que §21 agregó con `E-8`».
+- **Hasta la versión 1.19** el intake escribía «las **nueve** pruebas del validador» en §17.3.P.8 y en §17.5.P.8, y «la batería obligatoria de nueve casos» en §17.3.P.6: eran redacciones anteriores a la incorporación del décimo caso, que quedaron sin propagar. **En 1.20 los tres lugares dicen diez**, junto con §17.2.P.11 y el encabezado de §21.
+- El intake **1.20 §17.3.P.6** dice hoy «la **batería obligatoria de diez casos**», **§17.3.P.8** «las **diez** pruebas del validador pasan» y **§17.5.P.8** «incluidas las **diez** pruebas del validador» en el pipeline de `GeometriaFactory-Api`.
+- [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 y §10.5 ya habían resuelto la lectura antes de esa corrección: **la batería tiene 10 casos**, «los nueve obligatorios de la fuente más el décimo que §21 agregó con `E-8`».
 
-**Esta categoría hereda esa lectura y no la reabre.** El texto de los dos gates del intake es **anterior** a la incorporación del décimo caso y quedó sin propagar; corregirlo es del Product Owner sobre su propio documento. **Lo que esta categoría no hace es bajar la batería a nueve para que coincida con la redacción de la puerta**: el décimo caso cubre `E-8`, que §21 declara como el escenario que cerró la única condición del contrato de fachada que no tenía dato de prueba. Queda declarado como hueco en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8.
+**Esta categoría mantiene esa lectura, que la fuente ya confirmó.** La divergencia entre los gates y la tabla de §21 **está cerrada**: la levantó esta misma fase y el intake la corrigió en 1.20, de modo que no queda nada derivado al Product Owner por este motivo. **Lo que esta categoría no hizo, y sigue sin hacer, es bajar la batería a nueve para que coincidiera con la redacción de la puerta**: el décimo caso cubre `E-8`, que §21 declara como el escenario que cerró la única condición del contrato de fachada que no tenía dato de prueba. El desenlace queda registrado en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8.
 
 ## 4. Roles de calidad dentro del equipo
 
@@ -122,4 +123,5 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** §3.2 —su título, su entrada de tabla de contenido y su cuerpo— afirmaba en presente que el intake escribe «nueve pruebas del validador» en §17.3.P.8 y §17.5.P.8. **El intake 1.20 dice diez** en esos dos gates, en §17.3.P.6, en §17.2.P.11 y en el encabezado de §21, y los corrigió en el mismo commit que emitió este documento sobre el hallazgo que esta categoría levantó. La sección pasa a describir el estado vivo de la fuente, ubica el nueve **hasta 1.19** y declara la divergencia **cerrada** en lugar de derivada al Product Owner. La batería era y sigue siendo de **diez**. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la definición de calidad en sus tres partes —validador fiel al dato real, almacén sin efecto parcial y mecanismos que fallan hacia el rechazo—, con la constancia de que acá **los defectos no se notan** y de que por eso ninguna propiedad se da por buena por ausencia de síntomas. Declara los ocho atributos ISO 25010, los **catorce** quality gates con condición, verificación y consecuencia —tres condicionados por depender de un valor rotulado [ASUNCIÓN] en el intake §22— y la constancia de que **la tolerancia de 0.01 no es asunción** y su gate no es condicionado. Su §3.2 declara que **la batería del validador tiene diez casos** y que el intake escribe «nueve» en dos lugares por residuo anterior a la incorporación del décimo, sin bajar la batería para que coincida. Declara el reparto de papeles, la puerta técnica que el backlog asigna a la etapa `a` de este proyecto de código, y la cadencia por etapa sin inventar ninguna frecuencia calendaria. |

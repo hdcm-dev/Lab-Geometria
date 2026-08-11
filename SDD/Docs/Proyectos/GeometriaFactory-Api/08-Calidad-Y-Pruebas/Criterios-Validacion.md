@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Criterios-Validacion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
-**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.5.P.6, §17.5.P.8, §17.5.P.10, §21 y §22
+**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.5.P.6, §17.5.P.8, §17.5.P.10, §21 y §22
 **Trazabilidad downstream:** [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -83,7 +83,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-28 | La batería completa —unitaria y de integración— se ejecuta entera al cerrar cada etapa | 100 % de los `TC-XX` escritos hasta ese momento |
 | CV-29 | **Ningún caso de verificación que pasaba en la etapa anterior deja de pasar** sin justificación escrita | 0 regresiones sin justificar |
 | CV-30 | **`TC-07` se ejecuta en todas las etapas que agregan un punto de acceso**, y `TC-25` y `TC-26` en todas las que agregan una respuesta de fallo | Presentes en cada una. Son los tres cuyo resultado **cambia al crecer la superficie** |
-| CV-31 | **La batería del validador que corre desde acá pasa entera** en toda etapa posterior a la `f` | **10 de 10** en cada ejecución. Ver §6 sobre por qué no son nueve |
+| CV-31 | **La batería del validador que corre desde acá pasa entera** en toda etapa posterior a la `f` | **10 de 10** en cada ejecución. Ver §6 sobre el recuento |
 | CV-32 | Todo defecto cerrado generó al menos un `TC-XX` nuevo o extendió uno existente | 1 caso por defecto cerrado, como mínimo |
 
 **La regla de no regresión es acumulativa por diseño.** El intake §15, regla de delivery 1, la declara: al cerrar cada etapa deben seguir pasando los guiones de todas las anteriores, **sin correcciones**.
@@ -93,7 +93,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
 | CV-33 | Cobertura por componente cumplida, con los **ocho** reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-14` |
-| CV-34 | Mutation score | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre. **La composición de raíz queda exenta** con su fundamento |
+| CV-34 | Mutation score | **60 %**, piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija **para el tipo `library`**; la fila `rest-api`, que es la de este proyecto de código, **no pide mutation score**. **Ninguna fuente del producto lo declara.** Se adopta igual, con más exigencia que la que la guía pide | **No exigible todavía**: la herramienta no está elegida ni corre. **La composición de raíz queda exenta** con su fundamento |
 | CV-35 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-26` |
 | CV-36 | Ningún caso de verificación está deshabilitado sin motivo escrito en su fila | 0 deshabilitados sin motivo | **Bloqueante** |
 | CV-37 | Ninguna prueba de la batería de integración usa dobles: golpea **la superficie real contra el almacén real** | 0 dobles en integración | **Bloqueante**. Doblar algo ahí la convierte en otra cosa |
@@ -112,7 +112,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | **Puerta técnica que no pasa** —`PT-04`— | **No hay excepción.** El intake §15 declara que detiene la planificación de las etapas que dependen de ella y **no se arrastra como deuda** | El Product Owner decide la salida, no la excepción |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner, con constancia escrita |
 
-**Sobre `CV-31` y el recuento de la batería del validador.** El intake escribe «las **nueve** pruebas del validador» en §17.5.P.8 —y también en §17.3.P.8—, y su §21 tiene **diez** filas, la décima incorporada con `E-8` bajo el rótulo **[DECISIÓN 2026-08-09]**. La Fase C de `GeometriaFactory-Infrastructure` ya resolvió la lectura en **diez**, y este documento la hereda. **Cerrar la etapa con nueve casos amparándose en la redacción del gate no es una excepción admitida.**
+**Sobre `CV-31` y el recuento de la batería del validador.** El intake **1.20** escribe «incluidas las **diez** pruebas del validador» en §17.5.P.8 —y «las **diez** pruebas del validador pasan» en §17.3.P.8—, y su §21 tiene **diez** filas, la décima incorporada con `E-8` bajo el rótulo **[DECISIÓN 2026-08-09]**. **Hasta 1.19 los dos gates escribían nueve**; la Fase C de `GeometriaFactory-Infrastructure` ya había resuelto la lectura en **diez**, este documento la heredó, y la fuente lo confirmó en 1.20. **Cerrar la etapa con nueve casos no es una excepción admitida.**
 
 **Lo que tampoco es una excepción admitida:** agregar un punto de acceso sin declarar si queda dentro de la guardia; enriquecer una respuesta de una familia empobrecida «para que sea más útil»; truncar un cuerpo en lugar de rechazarlo; dar por verificada la eliminación fuera de alcance **sin forzar la petición**; declarar cumplido un NFR de umbral cero por no haber observado lo contrario; o dejar un secreto real en una prueba.
 
@@ -120,4 +120,5 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-01`.** La nota de §6 sobre `CV-31` afirmaba en presente que el intake escribe «nueve» en §17.3.P.8 y §17.5.P.8; el intake **1.20** dice **diez** en los dos. Reescrita contra el texto vivo, con el nueve ubicado **hasta 1.19**. **`H-08`.** `CV-34` atribuía a `Rules-Calidad-Y-Pruebas.md` §2.2 un piso de mutación que esa tabla fija para el tipo **`library`**: la fila `rest-api`, que es la de este proyecto de código, no pide mutation score. Queda declarado como exigencia adoptada por encima de la guía. Ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **cuarenta** criterios de validación numerados `CV-01` a `CV-40`, repartidos en funcionales, no funcionales, de regresión y de calidad de código, cada uno con su umbral y su forma de medición. Distingue cuatro caracteres —bloqueante, condicionado, **puerta técnica sin excepción posible** y no exigible— y ata los condicionados a los valores rotulados **[ASUNCIÓN]** del intake §22, precisando que **la inversión de la pirámide no es asunción** aunque su reparto sí lo sea. Incorpora el criterio de **15 de 15 puntos ejercidos**, que es lo que hace verificable la exigencia de la regla para el tipo `rest-api`, y el de **4 + 11 = 15** sobre la guardia. Declara que no hay criterio de disponibilidad y que los tres tiempos son del servicio y no de la suite. Su §6 declara las cuatro salidas admitidas, el tratamiento del recuento de la batería del validador y **seis** situaciones que explícitamente no son excepción. |
