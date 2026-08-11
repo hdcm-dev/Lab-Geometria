@@ -3,13 +3,13 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Guia-Publicacion-Image-Docker.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api`
 **Tipo de artefacto:** `image-docker`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5; [`../05-Arquitectura-Tecnica/Adrs/ADR-07-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-08-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-08-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) 1.0; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.4; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §16, §17.5.P.4, §17.5.P.5, §17.5.P.7, §17.5.P.8, §17.5.P.9, §17.5.P.11 y §17.5.P.12
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5; [`../05-Arquitectura-Tecnica/Adrs/ADR-07-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-08-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-08-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) 1.0; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.4; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.22** §10, §13, §15, §16, §17.5.P.4, §17.5.P.5, §17.5.P.7, §17.5.P.8, §17.5.P.9, §17.5.P.11 y §17.5.P.12
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md); `11-Documentacion` cuando se emita, que **cita esta política y no define una paralela** (`Rules-Devops.md` §0)
 
 ---
@@ -33,7 +33,7 @@
 
 Lo que sí hay es **un despliegue**, y esta guía documenta su procedimiento con la estructura que `Rules-Devops.md` §4.5 exige. Con una advertencia que ordena todo el documento:
 
-**El despliegue lo ejecuta el Product Owner, a mano.** El intake §17.5.P.8 lo declara **[DECISIÓN]**: «el agente IA entrega el `Dockerfile` y el `compose.yaml`; no ejecuta el despliegue». **Esta guía está escrita para quien lo ejecuta**, no para una canalización que lo ejecute.
+**El despliegue lo ejecuta el Product Owner, a mano.** El intake §13 lo declara **[DECISIÓN]** en su fila «Despliegue manual del backend»: «El agente IA entrega el `Dockerfile` y el `compose.yaml`; no ejecuta el despliegue». La fila `despliegue` de §17.5.P.8 lo repite: «Manual, por el docente [DECISIÓN, RT §13]». **Esta guía está escrita para quien lo ejecuta**, no para una canalización que lo ejecute.
 
 **`<tipo-artefacto>` = `image-docker`**, que es uno de los valores admitidos por `Rules-Devops.md` §3.1 y el que §2.2 fija para el tipo `rest-api`. **No se declara un tipo nuevo**, a diferencia de lo que hicieron `GeometriaFactory-Visor` y `GeometriaFactory-Web`: el artefacto **sí es** una imagen de contenedor; lo que no es convencional es su canal, que no la publica.
 
@@ -137,3 +137,4 @@ Las **seis** de [`ADR-08`](../05-Arquitectura-Tecnica/Adrs/ADR-08-Sin-Versionado
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara de entrada que **no hay publicación en ningún registro de imágenes** y que lo que documenta es el **despliegue construyendo en destino desde el repositorio**, con la advertencia de que **lo ejecuta el Product Owner a mano** y de que esta guía está escrita para quien lo ejecuta. Usa `image-docker`, valor admitido por `Rules-Devops.md` §3.1, **sin declarar un tipo nuevo**, y declara por qué el artefacto secundario que §2.2 admite para el tipo **no tiene sujeto acá**. Declara los pre-requisitos —**ninguna cuenta de registro**, la clave de firma nombrada por su función, y la salida a la red del destino como consecuencia declarada del canal—, las **dos** piezas que el agente entrega y qué ocurre en cada arranque en **dos fases**. Escribe la **prueba única del mecanismo** que la fuente exige, en **cinco** comprobaciones, con la quinta declarada como agregado propio, **sin declarar que el mecanismo funcione**. Declara **cinco** verificaciones posteriores, la reversión por reconstrucción desde la etiqueta —incluida la situación en la que **no se puede revertir sin red**— y la advertencia de que **revertir el código no revierte los datos**, y las **seis** métricas de `ADR-08` §8 sin agregar ninguna. |
+| 1.1 | 2026-08-11 | **Corrección del `H-01` de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`, en su variante de este documento.** La cita de §0 es **literal**, pero la fuente que se le atribuía era la equivocada: el texto entrecomillado es la fila «Despliegue manual del backend» del intake **§13**, no §17.5.P.8, cuya fila `despliegue` dice «Manual, por el docente [DECISIÓN, RT §13]». Se corrige la atribución y se agrega la cita literal de §17.5.P.8 al lado. Sube la trazabilidad upstream del intake de **1.21** a **1.22**. |

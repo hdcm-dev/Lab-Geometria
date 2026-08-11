@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
@@ -26,10 +26,10 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.0 | Propuesto | Los **cuatro** stages —incluido el propio de este proyecto de código—, los **catorce** gates con su carácter, triggers, matriz, caché, promoción, reversión y notificaciones |
+| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **cuatro** stages —incluido el propio de este proyecto de código—, los **catorce** gates con su carácter, triggers, matriz, caché, promoción, reversión y notificaciones |
 | [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, las clases de cambio con las **dos** que compilan, y los **dos linajes** que este proyecto de código versiona además del suyo |
-| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Por qué no hay ambientes ni canales, las **tres** exigencias sobre el ambiente ajeno, el respaldo que la fuente dejó abierto y el secreto que se recibe y no se busca |
-| [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario, firma —con la distinción entre firma de artefacto y firma de acceso—, nivel de integridad, análisis de dependencias con sujeto real, y las **dos** bibliotecas sensibles |
+| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Por qué no hay ambientes ni canales, las **tres** exigencias sobre el ambiente ajeno, el respaldo que la fuente dejó abierto y el secreto que se recibe y no se busca |
+| [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.1 | Propuesto | Inventario, firma —con la distinción entre firma de artefacto y firma de acceso—, nivel de integridad, análisis de dependencias con sujeto real, y las **dos** bibliotecas sensibles |
 
 ## 2. Orden de lectura
 
@@ -92,10 +92,11 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | Componentes | **8** | `05` §3.1, citado por `08` README §5 |
 | Criterios de salida del plan de pruebas | **11** | `08` `Plan-Pruebas.md` §3 |
 | Etapas que este proyecto de código toca | **5**: `a`, `c`, `d`, `e` y `f` | `06` `Product-Backlog.md` §2, citado por `08` README §5 |
-| Puntos abiertos de esta categoría | **4**: `PD-01` a `PD-04` | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| Puntos abiertos de esta categoría | **5**: `PD-01` a `PD-05`, el último abierto por el `H-04` de la auditoría de la ronda 1 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 
 ## 6. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Infrastructure`. Lista los **cuatro** artefactos emitidos, el orden de lectura, la omisión de la guía de publicación **con la tensión frente al criterio de aceptación de `Rules-Devops.md` §6 declarada**, el resumen de los **catorce** quality gates con el stage donde corre cada uno —incluido el **cuarto stage propio de este proyecto de código**— y la constancia de que ninguno cambió de carácter, con la precisión de que **`QG-07` lleva número y no es condicionado**. Deja registrado que la puerta técnica `PT-04` se mide en la etapa `a` de este proyecto de código y que el cuarto stage es su mitad barata, y la tabla de recuentos con la fuente de cada uno. |
+| 1.1 | 2026-08-11 | **Constancia de las correcciones de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`.** Sube a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) —`H-03`, atribución de la procedencia de los gates a §17.3.P.8, y apertura de `PD-05` por `H-04`—, [`Entornos-Deploy.md`](Entornos-Deploy.md) —`H-02`, cita del intake §17.3.P.3, y `H-04`, apartamiento del modelo de canales sin la ADR que `Rules-Devops.md` §2.2 exige— y [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) —atribución de una cita que el informe no había listado—. Los puntos abiertos de la categoría pasan de **cuatro** a **cinco**. El intake **1.22** no cambia nada de este proyecto de código: sus dos decisiones son de §17.6.P.7 y alcanzan a las dos unidades desplegables. |

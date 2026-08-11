@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
@@ -27,7 +27,7 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.0 | Propuesto | Stages, los **nueve** gates materializados, el momento de medición de las dos puertas técnicas y las **dos** plataformas |
+| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Stages, los **nueve** gates materializados, el momento de medición de las dos puertas técnicas y las **dos** plataformas |
 | [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado del **punto de extensión**, criterio de cambio de `ADR-06` y política de crecimiento de la fachada |
 | [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Ausencia de ambientes y canales, y **la resolución del punto abierto `PA-05`** |
 | [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md) | 1.0 | Propuesto | La **entrega interna** del bundle al anfitrión: pre-requisitos, comandos, verificación, reversión y métricas |
@@ -106,3 +106,4 @@
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Visor`. Lista los **cinco** artefactos emitidos —es el único de los tres proyectos de código de nivel topológico 0 con guía de publicación, y el motivo está declarado—, el orden de lectura, el resumen de los **nueve** quality gates con la constancia de que **ninguno es condicionado** y de que la única marca [ASUNCIÓN] que lo alcanza es sobre la forma del gate, y el estado de los **cinco** puntos abiertos de `05` §11 tras esta emisión: **`PA-05` cerrado**, `PA-01`, `PA-03` y `PA-04` vivos, y `PA-02` fuera del alcance de esta categoría. Cierra con la tabla de recuentos y la fuente de cada uno. |
+| 1.1 | 2026-08-11 | **Propagación de la primera decisión de despliegue del Product Owner** del intake **1.22** §17.6.P.7: el filtro de rutas del flujo que publica el front incluye ahora `src/GeometriaFactory.Contracts/`. La consecuencia cae entera dentro de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), que sube a **1.1** en §1: este proyecto de código deja de ser el único de nivel topológico 0 cuyo cambio dispara una publicación. **Las dos afirmaciones de este índice sobre lo que este proyecto de código tiene de único entre los tres de nivel topológico 0 no se tocan**: las dos son sobre la guía de publicación, y ninguna se apoyaba en el filtro de rutas. |

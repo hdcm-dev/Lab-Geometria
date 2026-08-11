@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
@@ -27,16 +27,16 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.0 | Propuesto | Los **ocho** pasos del flujo de publicación, los **once** gates con su carácter, la resolución del `PD-01` que `GeometriaFactory-Contracts` elevó, las **tres** plataformas y las **tres** puertas técnicas |
+| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **ocho** pasos del flujo de publicación, los **once** gates con su carácter, el `PD-01` que `GeometriaFactory-Contracts` elevó —hoy **cerrado** por el intake 1.22—, las **tres** plataformas y las **tres** puertas técnicas |
 | [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, las **seis** clases de cambio decididas sobre lo que la persona ve, modelo de ramas, canales y qué versiona realmente la etiqueta |
-| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Los **dos** ambientes con el apartamiento del modelo de cuatro declarado, el tramo local de la decisión sobre el bundle, configuración, secretos y qué pasa cuando la dirección del servidor propio cambia |
+| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Los **dos** ambientes con el apartamiento del modelo de cuatro declarado, el tramo local de la decisión sobre el bundle, configuración, secretos y qué pasa cuando la dirección del servidor propio cambia |
 | [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md) | 1.0 | Propuesto | Pre-requisitos, invocación del flujo, **cuatro** verificaciones posteriores, reversión y las **seis** métricas de `ADR-07` §8 |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario sobre las dos cadenas, la firma con su brecha, nivel de integridad, análisis de dependencias, análisis dinámico y las **tres** reglas de arquitectura como preocupación de cadena de suministro |
 
 ## 2. Orden de lectura
 
 1. [`Entornos-Deploy.md`](Entornos-Deploy.md) — dónde se despliega, con qué configuración y con qué secretos, y por qué hay dos ambientes y no cuatro.
-2. [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) — qué corre, qué bloquea y cómo se resolvió el despliegue conjunto con `GeometriaFactory-Api`.
+2. [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) — qué corre, qué bloquea, cómo se resolvió el despliegue conjunto con `GeometriaFactory-Api` y en qué orden salen las dos unidades.
 3. [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md) — cómo se publica, cómo se comprueba y cómo se vuelve atrás.
 4. [`Estrategia-Versionado.md`](Estrategia-Versionado.md) — qué clase de cambio es cada cosa cuando nadie compila contra vos.
 5. [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) — dónde está el riesgo real de este proyecto de código.
@@ -83,11 +83,11 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 
 | # | Decisión | Dónde está su fundamento | Estado |
 | --- | --- | --- | --- |
-| 1 | **El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`**, que hoy queda fuera aunque sea entrada de compilación de esta unidad | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2, decisión 1 | **Elevada al Product Owner** como `PD-01`: cambia lo que el intake §17.6.P.7 enumera |
+| 1 | **El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`**, que quedaba fuera aunque es entrada de compilación de esta unidad | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2, decisión 1 | Se elevó al Product Owner como `PD-01`, y **él la confirmó en el intake 1.22**: §17.6.P.7 enumera hoy las **tres** rutas. `PD-01` **cerrado** |
 | 2 | **El despliegue conjunto lo sostiene `QG-08` de `GeometriaFactory-Contracts` y no el filtro de rutas**, porque el filtro dispara una construcción y no coordina dos despliegues, y uno de los dos es manual por decisión del Product Owner | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.1 y §3.2 | Adoptada |
 | 3 | **La exclusión del bundle del control de versiones queda asignada a `BT-01`** de la etapa `a`, con el estado del repositorio verificado y fechado | [`Entornos-Deploy.md`](Entornos-Deploy.md) §2 | Asignada, registrada como `PD-02` |
 
-**Y un hallazgo que esta sección deja escrito**: con el front publicándose automáticamente al fusionar y el backend desplegándose a mano, **el despliegue conjunto es siempre un acto humano coordinado**, y ninguna decisión sobre el filtro de rutas lo vuelve automático. El mecanismo que queda es la constancia escrita antes de cerrar la etapa.
+**Y un hallazgo que esta sección deja escrito, y que el intake 1.22 confirmó en lugar de derogar**: con el front publicándose automáticamente al fusionar y el backend desplegándose a mano, **el despliegue conjunto es siempre un acto humano coordinado**, y ninguna decisión sobre el filtro de rutas lo vuelve automático. Tampoco lo vuelve automático el orden de salida que el intake §17.6.P.7 fija desde 1.22 —**primero el backend**—: el orden reduce el daño del intervalo, **no lo elimina**, y el mecanismo que queda sigue siendo la constancia escrita antes de cerrar la etapa.
 
 ## 6. Recuentos que esta sección sostiene
 
@@ -106,10 +106,11 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | Sondas de la matriz de sensado que `QG-11` recorre | **61** | `08` `Matriz-Sensado-Deriva.md` §4 |
 | Criterios de salida del plan de pruebas | **11** | `08` `Plan-Pruebas.md` §3 |
 | Etapas que este proyecto de código toca | **8**: `a` a `h`, **todas las comprometidas** | `06` `Product-Backlog.md` §2, citado por `08` README §6 |
-| Puntos abiertos de esta categoría | **5**: `PD-01` a `PD-05` | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| Puntos abiertos de esta categoría | **5** declarados, `PD-01` a `PD-05`, de los cuales **4 vigentes**: `PD-01` quedó cerrado por el intake 1.22 y conserva su fila | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 
 ## 7. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Web`, **una de las dos unidades desplegables del producto**. Lista los **cinco** artefactos emitidos —incluida la guía de publicación, que acá **no se omite**—, el orden de lectura con la precisión de que el documento bisagra es el de entornos y no el de versionado, los **tres** artefactos que no corresponden con su motivo, los **once** quality gates con dónde corre cada uno y la constancia de que **ninguno es condicionado**, las **tres decisiones derivadas** de esta sección con su estado, el hallazgo de que **el despliegue conjunto es siempre un acto humano coordinado**, y la tabla de recuentos con la fuente de cada uno. |
+| 1.1 | 2026-08-11 | **Propagación de las dos decisiones de despliegue del Product Owner** del intake **1.22** §17.6.P.7. **(a)** El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`: la decisión 1 de §5 pasa de elevada a **confirmada por la fuente** y `PD-01` queda **cerrado**, con lo que la fila de recuentos declara **5** puntos abiertos con **4 vigentes**. **(b)** Cuando front y backend salen juntos, **primero el backend**: se agrega al hallazgo de §5 con la constancia de que el orden **no vuelve automático** el despliegue conjunto y de que el intervalo se minimiza en vez de eliminarse. Actualiza a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) y [`Entornos-Deploy.md`](Entornos-Deploy.md). |

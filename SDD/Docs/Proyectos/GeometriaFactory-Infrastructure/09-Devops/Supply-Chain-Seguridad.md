@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Supply-Chain-Seguridad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §5, §8, §9 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-05-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md); [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §14, §17.3.P.1, §17.3.P.3, §17.3.P.5, §17.3.P.8 y §17.3.P.9
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §5, §8, §9 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-05-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md); [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.22** §10, §13, §14, §17.3.P.1, §17.3.P.3, §17.3.P.5, §17.3.P.8 y §17.3.P.9
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -88,7 +88,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**» | Intake §17.3.P.8; `QG-01` |
+| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**», que es la formulación de `QG-01`. El intake §17.3.P.8 la declara como «build en 0 sin advertencias» | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3, `QG-01`; intake §17.3.P.8 |
 | Estático de estructura | **Existe y bloquea**: `QG-10` sobre las proyecciones de listado, `QG-11` sobre el texto original conservado, `QG-12` sobre la emisión de accesos y `QG-13` sobre el catálogo de las **17** condiciones en las dos direcciones | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | Dinámico sobre superficie de red | **No aplica acá**: este ensamblado **no expone endpoints** y sus dos motores no hacen red. La superficie que un análisis dinámico ejercitaría es la HTTP, que expone `GeometriaFactory-Api` | Intake §17.3.P.3 |
 | **Dinámico sobre almacenamiento** | **Existe, y es propio de este proyecto de código**: el stage `verificar-transformaciones` ejercita el arranque **sobre un almacén inexistente** y comprueba que el esquema queda completo sin paso manual | `QG-04`; [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2 |
@@ -128,3 +128,4 @@ Esta sección existe porque en este proyecto de código **la cadena de suministr
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara que ninguna fuente del producto declara política de cadena de suministro y que todo lo de este documento es decisión de esta categoría, con la diferencia de que **acá el análisis de composición sí tiene sujeto**: **tres** dependencias core externas, **dos** de ellas sensibles. Declara que el inventario se emite en la unidad desplegable pero que **este proyecto de código aporta la mayor parte de sus dependencias externas**, y que las versiones exactas **no se escriben acá** porque se anclan en la etapa `a`. Separa explícitamente la **firma de artefacto**, que no aplica, de la **firma de acceso**, que es una capacidad del producto. Fija como objetivo el **primer nivel** de integridad de la construcción con su brecha. Declara que `QG-08` es un gate de composición escrito como recuento y por qué mide **las dependencias de los dos motores** y no el código propio, y que el stage de verificación de transformaciones es **análisis dinámico sobre almacenamiento**. Cierra con la sección propia: **las dos bibliotecas sensibles comparten que su compromiso no produce ningún síntoma**, y por eso el único mecanismo disponible es el anclaje explícito de versión. |
+| 1.1 | 2026-08-11 | **Corrección de atribución de cita, del mismo tipo que el `H-02` de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`, en una ocurrencia que el informe no listó.** La fila `Estático` de la tabla de análisis atribuía al intake §17.3.P.8 la formulación «en 0 y sin advertencias», que es la de `QG-01` de `08` §3; el intake §17.3.P.8 dice «build en 0 sin advertencias». Se separan las dos citas con su fuente propia. Trazabilidad upstream del intake a **1.22**, cuyas §17.3.x no cambiaron. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
@@ -26,9 +26,9 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.0 | Propuesto | Los **dos** stages, los **nueve** gates materializados, dónde corre el que este proyecto de código no puede correr solo, y la regla de despliegue conjunto |
+| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **dos** stages, los **nueve** gates materializados, dónde corre el que este proyecto de código no puede correr solo, y la regla de despliegue conjunto con su orden |
 | [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, criterio de clase de cambio de `ADR-03` con la columna de qué detecta la compilación, y política de cambios incompatibles |
-| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Por qué no hay ambientes ni canales propios, dónde viaja el ensamblado, y la superficie de exposición como regla de secretos |
+| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Por qué no hay ambientes ni canales propios, dónde viaja el ensamblado, y la superficie de exposición como regla de secretos |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario, firma, nivel de integridad, análisis, política ante vulnerabilidades, y la superficie de exposición como preocupación de cadena de suministro |
 
 ## 2. Orden de lectura
@@ -78,10 +78,11 @@
 | Contratos de uso | **8** | `02` §3, citado por `08` README §5 |
 | Clases de cambio que la compilación **no** detecta | **3**, las tres mayores | `ADR-03` §7 |
 | Etapas comprometidas que este proyecto de código toca | **7**: `a`, `c`, `d`, `e`, `f`, `g` y `h` | `08` `Definition-Of-Done.md` §1.4 |
-| Puntos abiertos de esta categoría | **4**: `PD-01` a `PD-04` | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| Puntos abiertos de esta categoría | **4** declarados, `PD-01` a `PD-04`, de los cuales **3 vigentes**: `PD-01` quedó cerrado por el intake 1.22 y conserva su fila | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 
 ## 6. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Contracts`. Lista los **cuatro** artefactos emitidos, el orden de lectura, la omisión de la guía de publicación con la tensión frente al criterio de aceptación de `Rules-Devops.md` §6 declarada, el resumen de los **nueve** quality gates con dónde corre cada uno y la constancia de que ninguno cambió de carácter —`QG-05` bloqueante, `QG-06` único condicionado—, y la tabla de recuentos con la fuente de cada uno. Deja registrado que `QG-05` es el único gate del nivel topológico 0 que depende de un proyecto de código que todavía no existe, y las tres condiciones de su diferimiento. |
+| 1.1 | 2026-08-11 | **Propagación de las dos decisiones de despliegue del Product Owner** del intake **1.22** §17.6.P.7. El `PD-01` que esta categoría había elevado —el filtro de rutas del flujo del front dejaba fuera a este ensamblado— quedó **cerrado**: §17.6.P.7 enumera hoy las **tres** rutas. La fila de recuentos pasa a declarar **4** puntos abiertos con **3 vigentes**, y se actualizan a 1.1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) y [`Entornos-Deploy.md`](Entornos-Deploy.md) en §1. |

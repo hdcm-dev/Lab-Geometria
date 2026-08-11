@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
@@ -27,10 +27,10 @@
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.0 | Propuesto | Los **cinco** stages con el quinto declarado fuera del alcance, los **quince** gates con su carácter, la matriz, la caché, la promoción en cuatro transiciones, la reversión y las **dos** puertas técnicas |
+| [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **cinco** stages con el quinto declarado fuera del alcance, los **quince** gates con su carácter, la matriz, la caché, la promoción en cuatro transiciones, la reversión y las **dos** puertas técnicas |
 | [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, las **cinco** reglas con las que `ADR-08` reemplaza al versionado de rutas, y las **tres** clases de cambio que la compilación no detecta con dónde se atrapan |
-| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Los **dos** ambientes con el apartamiento del modelo declarado, cómo llega el código al destino, **la dirección dinámica** en sus tres tramos, configuración y secretos |
-| [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md) | 1.0 | Propuesto | Pre-requisitos, procedimiento de despliegue en destino, **la prueba única del mecanismo** que la fuente exige, **cinco** verificaciones posteriores, reversión y métricas |
+| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Los **dos** ambientes con el apartamiento del modelo declarado, cómo llega el código al destino, **la dirección dinámica** en sus tres tramos, configuración y secretos |
+| [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md) | 1.1 | Propuesto | Pre-requisitos, procedimiento de despliegue en destino, **la prueba única del mecanismo** que la fuente exige, **cinco** verificaciones posteriores, reversión y métricas |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario sobre la imagen, la firma con su brecha y su desplazamiento, nivel de integridad con la brecha propia del canal, análisis, y la **superficie expuesta** como preocupación de cadena de suministro |
 
 ## 2. Orden de lectura
@@ -113,10 +113,11 @@ Es la particularidad de esta sección y conviene tenerla de un vistazo. El intak
 | Criterios de salida del plan de pruebas | **12** | `08` `Plan-Pruebas.md` §3 |
 | Puntos de la Definition of Done sobre la entrega del artefacto | **7** | `08` `Definition-Of-Done.md` §1.4 |
 | Etapas que este proyecto de código toca | **6**: `a`, `c`, `d`, `e`, `f` y `h` | `06` `Product-Backlog.md` §2, citado por `08` README §5 |
-| Puntos abiertos de esta categoría | **5**: `PD-01` a `PD-05` | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| Puntos abiertos de esta categoría | **5** declarados, `PD-01` a `PD-05`, de los cuales **4 vigentes**: `PD-05` quedó cerrado por el intake 1.22 y conserva su fila | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 
 ## 7. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Api`, **proyecto de código principal y unidad desplegable del servidor propio**. Lista los **cinco** artefactos emitidos —incluida la guía de publicación, que acá **no se omite**—, el orden de lectura que pone primero los dos documentos de despliegue con su motivo, los **tres** artefactos que no corresponden con su motivo, los **quince** quality gates con el stage donde corre cada uno y la constancia de que ninguno cambió de carácter, con la precisión de que **los cuatro rótulos de este proyecto de código son sobre umbrales** y por eso condicionan, al revés que en `GeometriaFactory-Web`. Declara **la frontera del despliegue** con qué queda de cada lado, y la tabla de recuentos con la fuente de cada uno. |
+| 1.1 | 2026-08-11 | **Propagación del intake 1.22 y constancia de las correcciones de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`.** El intake **1.22** §17.6.P.7 decide que, cuando front y backend salen juntos, sale **primero el backend**, con lo que `PD-05` queda **cerrado** y la fila de recuentos pasa a declarar **5** puntos abiertos con **4 vigentes**. Se actualizan a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) —que además corrige `H-01`, `H-03` y `H-05`—, [`Entornos-Deploy.md`](Entornos-Deploy.md) y [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md). |

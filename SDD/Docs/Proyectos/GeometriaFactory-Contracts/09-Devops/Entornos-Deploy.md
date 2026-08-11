@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Entornos-Deploy.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §5 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) 1.0; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §14, §16, §17.4.P.3, §17.4.P.4, §17.4.P.5 y §17.4.P.9
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §5 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) 1.0; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.22** §10, §13, §14, §16, §17.4.P.3, §17.4.P.4, §17.4.P.5, §17.4.P.9 y §17.6.P.7
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -55,7 +55,7 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 | El proceso del **servidor propio** | Embebido en la imagen del backend, construida desde `deploy/Dockerfile` multietapa (intake §16) | Categoría 09 de `GeometriaFactory-Api` |
 | El proceso del **hosting público** | Embebido en la publicación del front, que se sube por FTP con el flujo de trabajo que el intake §17.6.P.7 declara | Categoría 09 de `GeometriaFactory-Web` |
 
-**Los dos destinos se alcanzan desde el mismo estado del repositorio**, y esa es la propiedad que la regla de despliegue conjunto necesita: no hay versión intermedia que resolver ni artefacto publicado que pueda quedar desfasado entre los dos. Lo que puede desfasarse es **el momento de cada despliegue**, y de ahí `QG-08` y el punto abierto `PD-01` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10.
+**Los dos destinos se alcanzan desde el mismo estado del repositorio**, y esa es la propiedad que la regla de despliegue conjunto necesita: no hay versión intermedia que resolver ni artefacto publicado que pueda quedar desfasado entre los dos. Lo que puede desfasarse es **el momento de cada despliegue**, y de ahí `QG-08`. El `PD-01` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 —que un cambio de este ensamblado no disparara la publicación del front— quedó **cerrado por el intake 1.22**, que agregó `src/GeometriaFactory.Contracts/` al filtro de rutas de §17.6.P.7. **El desfase de momentos no lo cierra ese cambio**: el front sale al fusionar y el backend a mano, de modo que la coordinación sigue siendo humana. Lo que el mismo intake 1.22 sí fija es el **orden**, **primero el backend**, con el intervalo minimizado y no eliminado.
 
 ## 3. Provisión
 
@@ -96,7 +96,7 @@ La de estado del trabajo, igual que en el resto del producto, con **una transici
 | --- | --- | --- | --- |
 | Rama de etapa → rama principal | Fusión del pull request | Product Owner, con OK explícito | Informe de cierre (intake §15) |
 | Etapa fusionada → etapa cerrada | Etiqueta al fusionar | El mismo | La etiqueta |
-| **Cambio incompatible → producto desplegado** | Sólo con las **dos** unidades desplegadas desde el mismo estado del repositorio | El mismo, con constancia | La constancia del despliegue conjunto en el informe de cierre |
+| **Cambio incompatible → producto desplegado** | Sólo con las **dos** unidades desplegadas desde el mismo estado del repositorio, **primero el backend** (intake §17.6.P.7 desde 1.22) | El mismo, con constancia | La constancia del despliegue conjunto en el informe de cierre |
 
 **La tercera fila es la que hace de este proyecto de código un caso especial dentro del nivel topológico 0**: es el único cuyo gate alcanza a un acto de despliegue, aunque no despliegue nada por sí mismo.
 
@@ -105,3 +105,4 @@ La de estado del trabajo, igual que en el resto del producto, con **una transici
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara que este proyecto de código **no tiene ambientes ni canales propios** y registra el apartamiento del modelo `preview` / `stable` apoyado en `ADR-03`, que ya había descartado las tres alternativas de versionado con convivencia. Reemplaza la tabla de ambientes por la de **dónde viaja el ensamblado** —los dos procesos desplegables, con el dueño de cada despliegue nombrado— y deja claro que los dos destinos se alcanzan desde el mismo estado del repositorio. Declara la ausencia de infraestructura declarativa, de configuración y de secretos propios, con la advertencia de que el modo de falla `RI-01` del producto es el único que la compilación compartida no atrapa, y que este ensamblado es **donde se decide qué se expone**. Declara la transición de promoción propia: la que exige el despliegue conjunto. |
+| 1.1 | 2026-08-11 | **Propagación de las dos decisiones de despliegue del Product Owner** del intake **1.22** §17.6.P.7. **(a)** Registra en §2 que `PD-01` quedó cerrado porque el filtro de rutas del flujo que publica el front incluye hoy `src/GeometriaFactory.Contracts/`, con la constancia de que **eso no cierra el desfase de momentos**. **(b)** Declara el orden de salida —**primero el backend**— en §2 y en la tercera fila de la tabla de promoción, con el intervalo minimizado y no eliminado. Sube la trazabilidad upstream del intake de **1.20** a **1.22** y le agrega §17.6.P.7. |
