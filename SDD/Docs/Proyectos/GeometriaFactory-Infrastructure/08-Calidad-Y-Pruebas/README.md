@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -33,6 +33,7 @@
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y cinco** casos, `TC-01` a `TC-35`, cuyos **diez primeros son los diez de la batería** |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter bloqueante, condicionado o no exigible |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.0 | Propuesto | **Tres** sondas `VER-XX` tomadas de los contratos de verificación de [`../10-Examples/`](../10-Examples/), sin ninguna fila de línea de base visual |
 
 ## 2. Orden de lectura
 
@@ -43,13 +44,14 @@
 5. [`Plan-Pruebas.md`](Plan-Pruebas.md) — cuándo se ejecuta cada cosa, por etapa.
 6. [`Criterios-Validacion.md`](Criterios-Validacion.md) — cuándo se declara validado.
 7. [`Definition-Of-Done.md`](Definition-Of-Done.md) — cuándo se declara terminado.
+8. [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) — qué se sensa durante la codificación, y con qué comando. **Se lee al final** porque su insumo es [`../10-Examples/`](../10-Examples/) y no esta categoría.
 
 ## 3. Artefactos omitidos y su motivo
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
 | `Guia-Testing-Extensibilidad.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 lo exige para `library` **con plugins** y lo omite para los tipos sin puntos de extensión. El flag `tiene_extensibilidad` de este proyecto de código es **false** (`PRODUCT-MANIFEST` §5): el punto de extensión del producto es el contrato de la fachada del visor, y su guía vive en la categoría 08 de `GeometriaFactory-Visor` |
-| `Matriz-Sensado-Deriva.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10». Este proyecto de código cumple las dos condiciones: `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5), de modo que no ejecutó la Fase B2 y no tiene línea de base visual; y su `10-Examples` **no está emitida**, de modo que no hay ningún contrato de verificación del que tomar sondas `VER-XX`. **La omisión no es una matriz vacía**: una matriz sin filas sería un proyecto de código sin instrumento de sensado. **Cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`** y esta fila del README se retira |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Emitido el 2026-08-11**, en 1.0 | **La omisión que esta fila declaraba quedó cerrada.** Se omitía porque `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumplía las dos condiciones: `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5) y su `10-Examples` no estaba emitida. **La segunda condición dejó de cumplirse**: [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 declara **tres** contratos de verificación, `VER-01` a `VER-03`, y de ellos se toman las **tres** sondas de la matriz. La primera condición sigue en pie, y por eso la matriz **no tiene ninguna fila de línea de base visual**. Es el caso que `Deriva-Rules.md` §2.3 prevé —«cuando el proyecto de código no ejecuta Fase B2 pero sí tiene categoría 10, la matriz se emite igual: […] poblada solo con sondas `VER-XX`», con la elisión marcada; el fragmento suprimido asigna la apertura a AG-08 en la Fase E, y la matriz declara en su §1 por qué acá la abre AG-10—. La fila se conserva con su desenlace, en lugar de retirarse, para que el motivo de la omisión y el de su cierre queden legibles juntos |
 
 ## 4. Quality gates configurados
 
@@ -80,7 +82,7 @@ Los catorce de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3, resumidos a
 
 ## 5. Recuentos que esta sección sostiene
 
-Se declaran acá para que cualquier lectura posterior pueda verificarlos contra su fuente sin recorrer los siete documentos.
+Se declaran acá para que cualquier lectura posterior pueda verificarlos contra su fuente sin recorrer los ocho documentos.
 
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
@@ -105,5 +107,7 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.3 | 2026-08-11 | **Corrección del hallazgo P2-2 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** La fila de `Matriz-Sensado-Deriva.md` de §3 citaba `Deriva-Rules.md` §2.3 **elidiendo sin marca** dos fragmentos, uno de ellos «la abre AG-08 en la Fase E», que asigna la titularidad. La elisión queda ahora **marcada** y el fragmento suprimido se dice en texto llano, con la remisión a la §1 de la matriz, que declara por qué acá la abre AG-10. **Ningún gate, umbral, caso de prueba ni recuento de esta sección cambia.** Contrastado contra el texto vivo del `PRODUCT-INTAKE` **1.25**, en particular §16.1 y §18, y no contra lo que otro documento dice de ellas. Sube minor: corrige la forma de una cita. |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`.** Se emitió [`../10-Examples/`](../10-Examples/) en su pasada de diseño, con **tres** contratos de verificación, y con ellos se abrió [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que pasa a ser el **octavo** artefacto de la sección. La fila de §3 se **conserva** con su desenlace y su fecha, en lugar de retirarse: la condición «sin categoría 10» dejó de cumplirse y la condición «sin Fase B2» sigue en pie, de modo que la matriz nace **sin ninguna fila de línea de base visual**, que es el caso de `Deriva-Rules.md` §2.3. **Ningún gate, umbral, caso de prueba ni recuento de esta sección cambia**, y los **diez** casos de la batería obligatoria siguen siendo los de `tests/`: las sondas no los reemplazan. |
 | 1.1 | 2026-08-11 | Actualiza la tabla de artefactos: **seis** de los siete suben a **1.1**. Todos por `H-01`: los documentos afirmaban **en presente** que el intake escribe «nueve pruebas del validador» en §17.3.P.8 y §17.5.P.8, y el **intake 1.20** dice **diez** en esos dos gates, en §17.3.P.6, en §17.2.P.11 y en el encabezado de §21 —lo corrigió en el mismo commit que emitió esta categoría, sobre el hallazgo que esta categoría levantó—. El hueco de la matriz **se conserva y queda cerrado** con su desenlace, en lugar de abierto con remediación pendiente del Product Owner. **La batería era y sigue siendo de diez**, y ningún gate, umbral, caso ni recuento de esta sección cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Infrastructure`. Lista los **siete** artefactos emitidos con su versión y su estado, el orden de lectura, los **dos** artefactos omitidos con su motivo, los **catorce** quality gates con su carácter —con la constancia de que `QG-07` **no es condicionado** porque la tolerancia de 0.01 no es asunción— y la puerta técnica que el backlog asigna a la etapa `a` de este proyecto de código, y la tabla de recuentos que esta sección sostiene con la fuente de cada uno. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -33,6 +33,9 @@
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.1 | Propuesto | Catálogo de **veintidós** casos de prueba, `TC-01` a `TC-22` |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Veinticinco** criterios, `CV-01` a `CV-25`, con su carácter |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.0 | Propuesto | **Tres** sondas `VER-XX` tomadas de los contratos de verificación de `10-Examples`, sin ninguna fila de línea de base visual |
+
+**Ocho artefactos.** Los siete de la emisión inicial más la matriz de sensado de deriva, abierta el 2026-08-11 al emitirse `10-Examples`; §3 conserva el motivo por el que estuvo omitida.
 
 ## 2. Orden de lectura
 
@@ -43,12 +46,12 @@
 5. [`Plan-Pruebas.md`](Plan-Pruebas.md) — qué se verifica en qué etapa, y qué queda pendiente de la batería de integración.
 6. [`Criterios-Validacion.md`](Criterios-Validacion.md) y [`Definition-Of-Done.md`](Definition-Of-Done.md).
 
-## 3. Artefactos omitidos y su motivo
+## 3. Artefactos omitidos y su motivo, y los que dejaron de estarlo
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
 | `Guia-Testing-Extensibilidad.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 lo exige para `library` **con plugins**. El flag `tiene_extensibilidad` de este proyecto de código es **false** (`PRODUCT-MANIFEST` §5): el punto de extensión del producto es el contrato de la fachada del visor, no este ensamblado |
-| `Matriz-Sensado-Deriva.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumple las dos condiciones: `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5), de modo que no tiene línea de base visual ni contrato de datos de maqueta; y su `10-Examples` **no está emitida**, de modo que no hay contratos de verificación de los que tomar sondas `VER-XX`. **La omisión no es una matriz vacía**: `Deriva-Rules.md` §2.3 declara que una matriz sin filas es un proyecto de código sin instrumento de sensado, y lo que corresponde acá es declarar que las dos fuentes de sondas no existen. **Cuando se emita la categoría 10 la matriz se abre con sus filas `VER-XX`** y esta fila se retira |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Emitido el 2026-08-11**, en 1.0 | **La omisión que esta fila declaraba quedó cerrada.** Se omitía porque `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumplía las dos condiciones. **La segunda dejó de cumplirse**: [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 declara **tres** contratos de verificación, `VER-01` a `VER-03`, y de ellos salen las **tres** sondas. La primera sigue en pie —`requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5)—, y por eso la matriz **no tiene ninguna fila de línea de base visual**: es el caso que `Deriva-Rules.md` §2.3 prevé y que §6 exige. La fila se conserva con su desenlace, en lugar de retirarse, para que el motivo de la omisión y el de su cierre queden legibles juntos |
 
 **Precedente de forma dentro de esta categoría.** `GeometriaFactory-Web` tiene su `08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md` desde la Fase B2, porque ejecutó la maqueta; ese documento no es de este proyecto de código y no se toca. Su existencia es justamente lo que hace visible que la omisión de acá está condicionada por dos flags y no por una decisión de esta categoría.
 
@@ -94,5 +97,6 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`.** Se emitió [`../10-Examples/`](../10-Examples/) en su pasada de diseño, con **tres** contratos de verificación, y con ellos se abrió [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que pasa a ser el **octavo** artefacto de la sección. La fila de §3 se **conserva** con su desenlace y su fecha en lugar de retirarse. Vale una precisión propia de este proyecto de código: como su verificación no vive en `tests/` de acá sino en la batería de integración de `GeometriaFactory-Api` (`PRODUCT-INTAKE` §17.4.P.6), las tres sondas son hoy el **único** instrumento ejecutable que sensa esta superficie. **Ningún gate, umbral, caso de prueba ni recuento de esta sección cambia**, y `QG-05` sigue siendo bloqueante y sin sonda que lo sustituya. |
 | 1.1 | 2026-08-11 | **`H-02` y `H-08`.** La tabla de gates de §4 declaraba a `QG-05` **condicionado** y atribuía los dos condicionados a la asunción `A-4`. `QG-05` pasa a **bloqueante** —§17.4.P.6 lo llama «equivalente y bloqueante» y §22 `A-4` deja a salvo su carácter— y el único condicionado es `QG-06`, respaldado por §17.4.P.10. Se actualizan las versiones de los artefactos revisados. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Contracts`. Lista los **siete** artefactos emitidos, el orden de lectura, los **dos** omitidos con su motivo y su condición de reapertura, los **nueve** quality gates con su carácter y la tabla de recuentos con la fuente de cada uno. Declara además el precedente de forma que constituye la matriz de sensado de deriva de `GeometriaFactory-Web`, que no es de este proyecto de código y no se toca. |

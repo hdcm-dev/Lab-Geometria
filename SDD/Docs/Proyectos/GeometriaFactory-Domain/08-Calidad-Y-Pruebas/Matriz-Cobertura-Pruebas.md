@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -155,11 +155,12 @@ La partición es por los **cinco** componentes de `05` §3.1, no por capas de de
 | **Los dos valores rotulados [ASUNCIÓN]** —cobertura y tiempo de la batería— siguen sin confirmar | Los gates `QG-03` y `QG-07` son condicionados y no bloquean la fusión | `BT-15` del backlog técnico, antes de fijar la puerta de cobertura en `09-Devops` |
 | **El criterio de comparación de dos correos no está decidido** (`02` §9, `BT-16`) | `TC-01` y `TC-02` verifican que la unicidad llegue **declarada**, no cómo se compara. Mientras la decisión no exista, la normalización no se puede probar acá | `BT-16`, junto con la capa que ejerce la verificación, antes de cerrar la etapa `d` |
 | **El alcance efectivo de `INV-09` fuera de la admisibilidad** (`02` §9, `05` §11 `PA-03`) | `TC-10` y `TC-09` verifican la guarda **en la puerta única**. Si alguna capa de más arriba habilitara un camino que no pase por la admisibilidad, la marca tendría que volver a comprobarse ahí y esta matriz no lo detectaría | La categoría 02 de `GeometriaFactory-Api`, al fijar por dónde entra cada petición. No es bloqueante para este proyecto de código |
-| **Ninguna fila `VER-XX` y ninguna matriz de sensado de deriva** | Este proyecto de código no ejecutó la Fase B2 —`requiere_maqueta` es false— y no tiene categoría 10 emitida | `Rules-Calidad-Y-Pruebas.md` §2.1 omite la matriz para ese caso. Ver [`README.md`](README.md) §3 |
+| ~~**Ninguna fila `VER-XX` y ninguna matriz de sensado de deriva**~~ · **Cerrado el 2026-08-11** | Se declaraba porque este proyecto de código no ejecutó la Fase B2 —`requiere_maqueta` es false— y no tenía categoría 10 emitida | **Cerrado**: se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-01` a `VER-03`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que declara **tres** filas `SD-01` a `SD-03`, todas en `Sin verificar`. La matriz nace **sin ninguna fila de línea de base visual**, porque la Fase B2 sigue sin haberse ejecutado: es el caso de `Deriva-Rules.md` §2.3. La fila se conserva con su desenlace en lugar de retirarse |
 
 ## 8. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`** declarado en §7. Se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-01` a `VER-03`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0 con **tres** filas en `Sin verificar`. La fila del hueco se **conserva** con su desenlace y su fecha, en lugar de retirarse. **Ninguna de las cinco tablas de cobertura cambia**: las sondas no sustituyen a ningún caso de prueba y su alcance está declarado en §5 de la propia matriz de sensado. |
 | 1.1 | 2026-08-11 | **`H-04`.** El cierre de §2 afirmaba que **ningún `TC-XX` deja de referenciar** un `CU-XX`, una `RN-XX`, un `INV-XX` o un NFR, y era falso en su propio documento: `TC-25` y `TC-27` trazan a una ADR, a una tarea técnica y a un quality gate, y no tenían fila en ninguna de las cuatro tablas. La frase se reemplaza por el recuento verdadero —**25 de 27**— y se agrega **§2.1**, que enumera las dos con su trazabilidad. **Ninguna cobertura, umbral ni caso cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**trece** filas de caso de uso, **seis** de NFR y **dieciséis** de regla de negocio, ninguna agrupada—, una cuarta de **nueve** invariantes exigida por el NFR de ejercicio de `05` §8, y la cobertura por los **cinco** componentes con «Sin medir» en lugar de cero. Cita los dos valores rotulados **[ASUNCIÓN]** con su rótulo y declara sus gates como condicionados; separa el mutation score, que es piso de la regla de la categoría y no del intake; y declara **cinco** huecos con su plan de remediación, incluida la ausencia de matriz de sensado de deriva con su fundamento. |

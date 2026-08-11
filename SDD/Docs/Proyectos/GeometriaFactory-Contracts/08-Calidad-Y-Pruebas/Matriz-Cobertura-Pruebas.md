@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -144,11 +144,12 @@ La partición es por las **ocho** familias de `05` §3.1, que son sus componente
 | **Los dos valores rotulados [ASUNCIÓN]** —tipos ejercitados y carga útil del listado— siguen sin confirmar | **`QG-06` es condicionado** y no bloquea la fusión. **`QG-05` bloquea igual**: lo que `A-4` deja abierto es la forma del gate, no su carácter | `BT-18`, antes de fijar las puertas en `09-Devops` |
 | **`RT-06` no tiene caso de prueba** | El despliegue conjunto ante un cambio incompatible depende de la disciplina del pull request de la etapa | Gate `QG-08` y la materialización en `09-Devops`. Su detección tardía está catalogada como `DXC-08` |
 | **La zona horaria y la precisión del campo de momento no están decididas** (`05` §11 `PA-02`, `BT-05`) | Ningún caso de prueba puede afirmar nada sobre el formato de ese campo | `BT-05`, antes de cerrar la etapa `c` |
-| **Ninguna fila `VER-XX` y ninguna matriz de sensado de deriva** | Este proyecto de código no ejecutó la Fase B2 —`requiere_maqueta` es false— y no tiene categoría 10 emitida | `Rules-Calidad-Y-Pruebas.md` §2.1 omite la matriz para ese caso. Ver [`README.md`](README.md) §3 |
+| ~~**Ninguna fila `VER-XX` y ninguna matriz de sensado de deriva**~~ · **Cerrado el 2026-08-11** | Se declaraba porque este proyecto de código no ejecutó la Fase B2 —`requiere_maqueta` es false— y no tenía categoría 10 emitida | **Cerrado**: se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-01` a `VER-03`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que declara **tres** filas `SD-01` a `SD-03`, todas en `Sin verificar`. Las tres sondas **no cierran el primer hueco de esta tabla**: siguen sin golpear el servicio real, y el gate bloqueante `QG-05` sigue dependiendo de la batería de integración de `GeometriaFactory-Api`. La fila se conserva con su desenlace en lugar de retirarse |
 
 ## 8. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`** declarado en §7. Se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-01` a `VER-03`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0 con **tres** filas en `Sin verificar`. La fila del hueco se **conserva** con su desenlace y su fecha. **El primer hueco de §7 sigue abierto**: las tres sondas no golpean el servicio real y el gate bloqueante `QG-05` sigue dependiendo de la batería de integración de `GeometriaFactory-Api`. **Ninguna de las cuatro tablas de cobertura cambia.** |
 | 1.1 | 2026-08-11 | **`H-02` y `H-08`.** §3 y el hueco correspondiente de §8 declaraban a `QG-05` y `QG-06` como los dos gates condicionados de la asunción `A-4`. **Sólo `QG-06` queda condicionado**, y su respaldo es §17.4.P.10 y no `A-4`; **`QG-05` bloquea**, porque `A-4` declara que un cambio del Product Owner cambia la forma del gate y no su carácter. Ninguna fila de cobertura ni ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**ocho** filas de contrato de uso, **siete** de NFR y **dieciséis** de regla de negocio, ninguna agrupada— y una cuarta de **once** restricciones transversales, con la constancia de que la tabla de reglas declara **qué transporta** este ensamblado de cada una y no que las verifique como reglas. Declara la cobertura por las **ocho** familias de tipos con «Sin medir» en lugar de cero, la ausencia de cobertura por líneas y de mutation score con su fundamento, los dos valores rotulados **[ASUNCIÓN]** con su rótulo, y **cinco** huecos con su plan, incluida la dependencia de la batería de integración respecto de un proyecto de código de nivel 3. |

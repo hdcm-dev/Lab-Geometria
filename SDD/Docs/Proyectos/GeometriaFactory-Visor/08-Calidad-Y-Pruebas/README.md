@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -34,7 +34,7 @@
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.0 | Propuesto | **Treinta y cuatro** criterios, `CV-01` a `CV-34`, incluidos los **seis** tramos de `PT-02` y `PT-03` |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.0 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
 | [`Guia-Testing-Extensibilidad.md`](Guia-Testing-Extensibilidad.md) | 1.0 | Propuesto | Batería de aceptación de un reemplazo de la capa 3, y los **cinco** errores de prueba que romperían el punto de extensión |
-| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.0 | Propuesto | **Doce** sondas ancladas en el contrato de la fachada, con su correspondencia con la matriz de `GeometriaFactory-Web` |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.1 | Propuesto | **Quince** sondas: **doce** ancladas en el contrato de la fachada, con su correspondencia con la matriz de `GeometriaFactory-Web`, y **tres** `VER-XX` tomadas de los contratos de verificación de `10-Examples` |
 
 **Nueve artefactos: los siete obligatorios para todo tipo D8, más los dos que los flags de este proyecto de código activan.** Es el único de los tres proyectos de código de nivel topológico 0 que emite los nueve.
 
@@ -58,7 +58,7 @@
 | [`Guia-Testing-Extensibilidad.md`](Guia-Testing-Extensibilidad.md) | `tiene_extensibilidad` == **true** | `PRODUCT-MANIFEST` §5 lo declara true **sólo en este proyecto de código** de los siete del producto: el punto de extensión del producto es el contrato de la fachada del visor (`PRODUCT-INTAKE` §18) |
 | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | `requiere_maqueta` == **true** | `PRODUCT-MANIFEST` §5 lo declara true. Este proyecto de código **ejecutó su Fase B2 y quedó aprobada**, aunque **sin maqueta propia**: la validación de la fachada se integró en la maqueta de `GeometriaFactory-Web` por decisión del Product Owner, y sus tres artefactos de línea de base viven en la categoría 03 de ese proyecto de código. La matriz la abre AG-08 en la Fase E, con sus filas ancladas en el contrato |
 
-**Ninguna fila `VER-XX` todavía**, porque `10-Examples` no está emitida para este proyecto de código. Al emitirse, la matriz de sensado suma una fila por cada contrato de verificación del sample **S-1**.
+**Las filas `VER-XX` ya están, desde el 2026-08-11.** Esta sección declaraba que no había ninguna «porque `10-Examples` no está emitida para este proyecto de código». Esa categoría se emitió en su pasada de diseño, con **tres** contratos de verificación —`VER-01` a `VER-03`, las tres partes del sample **S-1**—, y [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.1 los dio de alta como `SD-13`, `SD-14` y `SD-15`, todas en `Sin verificar`. La matriz pasa de **doce** a **quince** filas. **Ninguna de las doce anteriores cambia.**
 
 ## 4. Quality gates configurados
 
@@ -108,5 +108,6 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`.** Se emitió [`../10-Examples/`](../10-Examples/) en su pasada de diseño, con **tres** contratos de verificación que son las tres partes del sample **S-1**, y [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) sube a **1.1** con las filas `SD-13` a `SD-15`, pasando de **doce** a **quince** sondas. La sección §3 conserva su declaración anterior y le agrega el desenlace con su fecha. **Los nueve artefactos y los nueve quality gates siguen siendo los mismos**, y ningún umbral cambia; lo que cambia es que siete de los nueve gates quedan además ejercidos desde afuera del pipeline por un sample, según declara [`../10-Examples/README.md`](../10-Examples/README.md) §3. |
 | 1.1 | 2026-08-11 | Actualiza la tabla de artefactos: [`Estrategia-Calidad.md`](Estrategia-Calidad.md), [`Estrategia-Testing.md`](Estrategia-Testing.md) y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) suben a **1.1**. Los tres son de redacción y de trazabilidad: §6 de la estrategia de testing decía que §21 del intake cruza la batería contra **nueve** casos y son **diez**; tres citas entrecomilladas del intake omitían palabras dentro de las comillas; y la matriz no tenía fila para `TC-20`, que es **la prueba de la puerta `PT-02`**. **Ningún gate, umbral, caso ni recuento de esta sección cambia**, y las dos puertas técnicas siguen siendo vinculantes y no condicionadas. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Visor`. Lista los **nueve** artefactos emitidos —los siete obligatorios más los dos que activan `tiene_extensibilidad` y `requiere_maqueta`—, el orden de lectura, la ausencia de omisiones con el fundamento de cada artefacto condicionado, los **nueve** quality gates con la constancia de que **ninguno es condicionado** y de que la única marca [ASUNCIÓN] que alcanza a este proyecto de código es sobre la forma del gate y no sobre la regla, y la tabla de recuentos con la fuente de cada uno. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -171,11 +171,12 @@ La partición es por los **ocho** componentes de `05` §3.1, agrupados en las **
 | **El valor rotulado [ASUNCIÓN]** —la forma de la puerta del guion— sigue sin confirmar | **Ninguna sobre el carácter del gate**: `QG-04` bloquea, porque `A-4` declara que un cambio del Product Owner cambia la forma y no el carácter. Lo que puede cambiar es **cómo** se mide. **La regla acumulativa rige**: no es asunción de nadie | El Product Owner sobre el intake §22, asunción `A-4`, antes de fijar la forma de la puerta en `09-Devops` |
 | **No hay umbral de tiempo de respuesta** (`05` §11 `PA-04`) | Ningún caso de verificación puede declarar que una pantalla tardó demasiado. Lo que sí se verifica es que el indicador de espera aparezca cuando corresponde | El Product Owner, o esta categoría al fijar su guion de medición, **después** de `PT-01`. **No se inventa uno acá**, por el mismo criterio con el que `05` §8 no lo inventó |
 | **El formato de intercambio y su configuración** no están fijados (`05` §11 `PA-03`) | `TC-31` verifica la traducción de los quince códigos, pero la forma en que llegan depende de una decisión de los dos extremos | La categoría 05 de `GeometriaFactory-Api`, como productor, con esta pieza como consumidor |
-| **Ninguna fila `VER-XX`** en la matriz de sensado | No hay sondas de contrato de verificación | `10-Examples` no está emitida para este proyecto de código, y la propia matriz lo declara. Cuando se emita, la matriz gana esas filas |
+| ~~**Ninguna fila `VER-XX`** en la matriz de sensado~~ · **Cerrado el 2026-08-11** | Se declaraba porque no había sondas de contrato de verificación | **Cerrado**: se emitió [`../10-Examples/`](../10-Examples/) con **un** contrato de verificación, `VER-01`, y con él [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.3** sumó la fila **`SD-62`**, en `Sin verificar`. Es la primera fila de esa matriz que trae **su propio comando y su propia aserción**, y no desplaza al guion de demostración de su papel. La fila se conserva con su desenlace en lugar de retirarse |
 
 ## 9. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Cierre del hueco de filas `VER-XX`** declarado en §8. Se emitió [`../10-Examples/`](../10-Examples/) con **un** contrato de verificación y con él la matriz de sensado sumó la fila **`SD-62`**. La fila del hueco se **conserva** con su desenlace y su fecha, en lugar de retirarse. **Ninguna tabla de cobertura, ningún umbral y ningún caso de prueba cambian**: la sonda no sustituye a ninguno y su alcance está declarado en §4 de la propia matriz de sensado. |
 | 1.1 | 2026-08-11 | **`H-02`.** §3 y el hueco correspondiente de §8 declaraban a `QG-04` **condicionado**. Pasa a **bloqueante**, con la forma de la puerta como lo único sujeto a confirmación, según §17.6.P.6 y la fila `A-4` del intake §22. Ninguna fila de cobertura ni ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**diez** filas de caso de uso con sus **treinta** historias, **catorce** de NFR y **dieciséis** de regla de negocio, ninguna agrupada—, más una cuarta de **trece** restricciones transversales, que es lo que este proyecto de código sí sostiene dado que **no hace cumplir ninguna regla**. Declara la cobertura por los **ocho** componentes con «No aplica» en lugar de un porcentaje inventado, y con la cobertura contable de cada uno donde la tiene. Su §7 declara la **relación con la matriz de sensado de deriva ya emitida**, sin duplicarla y sin redefinir ningún umbral. Cita el único valor rotulado **[ASUNCIÓN]** con su rótulo y declara su gate como condicionado, precisando que lo rotulado es la forma de la puerta y no la regla acumulativa. Declara **seis** huecos con su plan de remediación, incluida la ausencia de sondas para la capacidad `F-26` con el motivo por el que no se le inventan. |

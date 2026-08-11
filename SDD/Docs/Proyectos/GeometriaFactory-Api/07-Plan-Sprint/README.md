@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + API PM (AG-07)
 
 ---
@@ -53,10 +53,13 @@
 | Los **dos huecos** del conjunto cerrado de códigos | Abiertos: `PA-03` y `PA-04` del backlog, elevados con BT-15. **Esta categoría no inventa códigos** |
 | El despliegue | **Manual, por el docente** (`PRODUCT-INTAKE` §17.5.P.8). `09-Devops`, **todavía no emitida**, mide el mecanismo de construcción en destino con BT-26 |
 | La Definition of Done canónica | `08-Calidad-Y-Pruebas`, **todavía no emitida** |
-| La colección de peticiones como entregable de ejemplos | `10-Examples`, **todavía no emitida** |
+| La colección de peticiones como entregable de ejemplos | [`../10-Examples/`](../10-Examples/), **emitida el 2026-08-11** en su pasada de diseño. La colección es el sample 02, [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio.md), y su contrato de verificación `VER-02` entra a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) como fila `SD-02`. La fila se conserva con su desenlace en lugar de retirarse |
+
+**Dos filas más de esta tabla quedaron desactualizadas, y se declara acá en lugar de corregirlas desde esta categoría.** Las de `09-Devops` y `08-Calidad-Y-Pruebas` dicen «todavía no emitida», y **las dos están emitidas** desde el 2026-08-11. Actualizarlas pertenece a la categoría 07 en su próxima revisión: esta emisión sólo cierra la fila que la Fase G resuelve.
 
 ## 5. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Cierre de la fila de `10-Examples`** de §4, que decía «todavía no emitida». La categoría se emitió en su pasada de diseño y la colección de peticiones es su sample 02, con el contrato `VER-02` que entra a la matriz de sensado como `SD-02`. La fila se **conserva** con su desenlace y su fecha. Se declara además que las filas de `08-Calidad-Y-Pruebas` y de `09-Devops` de esa misma tabla **también quedaron desactualizadas** y que corregirlas pertenece a esta categoría en su próxima revisión. **Ningún tramo del plan, ninguna puerta y ningún recuento cambian.** Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Declara el único artefacto emitido, los **cuatro** que se omiten con el motivo de cada uno, el estado del plan con sus **seis** tramos, sus quince puntos de acceso y la puerta `PT-04`, y dónde vive lo que este plan no decide, incluidos los dos huecos del conjunto cerrado de códigos y las tres categorías todavía no emitidas. |

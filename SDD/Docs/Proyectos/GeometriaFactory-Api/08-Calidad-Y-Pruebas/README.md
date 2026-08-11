@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -33,6 +33,7 @@
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y siete** casos de verificación, `TC-01` a `TC-37` |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Cuarenta** criterios, `CV-01` a `CV-40`, con su carácter |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas, con la entrega del artefacto |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.0 | Propuesto | **Tres** sondas `VER-XX` tomadas de los contratos de verificación de [`../10-Examples/`](../10-Examples/), una de ellas la **colección de peticiones reproducible**, sin ninguna fila de línea de base visual |
 
 ## 2. Orden de lectura
 
@@ -43,13 +44,14 @@
 5. [`Plan-Pruebas.md`](Plan-Pruebas.md) — cuándo se ejecuta cada cosa, por etapa.
 6. [`Criterios-Validacion.md`](Criterios-Validacion.md) — cuándo se declara validado.
 7. [`Definition-Of-Done.md`](Definition-Of-Done.md) — cuándo se declara terminado.
+8. [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) — qué se sensa durante la codificación, y con qué comando. **Se lee al final** porque su insumo es [`../10-Examples/`](../10-Examples/) y no esta categoría.
 
 ## 3. Artefactos omitidos y su motivo
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
 | `Guia-Testing-Extensibilidad.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 lo recomienda para `rest-api` **con handlers externos** y lo omite para los tipos sin puntos de extensión. Este proyecto de código **no admite handlers externos**: su `tiene_extensibilidad` es **false** (`PRODUCT-MANIFEST` §5), su único cliente legítimo es `GeometriaFactory-Web` y **no hay versionado de rutas porque no hay clientes de terceros**. El punto de extensión del producto es el contrato de la fachada del visor, y su guía vive en la categoría 08 de `GeometriaFactory-Visor` |
-| `Matriz-Sensado-Deriva.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10». Este proyecto de código cumple las dos condiciones: `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5) y su `10-Examples` **no está emitida**. **La omisión no es una matriz vacía**: una matriz sin filas sería un proyecto de código sin instrumento de sensado. **Cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`** —y este proyecto de código tiene un candidato natural, la **colección de peticiones reproducible** de `CU-12`— y esta fila del README se retira |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Emitido el 2026-08-11**, en 1.0 | **La omisión que esta fila declaraba quedó cerrada, y el candidato natural que anticipaba resultó ser exactamente el que entró.** Se omitía porque `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumplía las dos condiciones: `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5) y su `10-Examples` no estaba emitida. **La segunda condición dejó de cumplirse**: [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 declara **tres** contratos de verificación, `VER-01` a `VER-03`, y el segundo **es** la colección de peticiones reproducible de `CU-12`. La primera condición sigue en pie, y por eso la matriz **no tiene ninguna fila de línea de base visual**. Es el caso que `Deriva-Rules.md` §2.3 prevé. La fila se conserva con su desenlace, en lugar de retirarse, para que el motivo de la omisión y el de su cierre queden legibles juntos |
 
 ## 4. Quality gates configurados
 
@@ -79,7 +81,7 @@ Los quince de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3, resumidos ac
 
 ## 5. Recuentos que esta sección sostiene
 
-Se declaran acá para que cualquier lectura posterior pueda verificarlos contra su fuente sin recorrer los siete documentos.
+Se declaran acá para que cualquier lectura posterior pueda verificarlos contra su fuente sin recorrer los ocho documentos.
 
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
@@ -105,5 +107,6 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`.** Se emitió [`../10-Examples/`](../10-Examples/) en su pasada de diseño, con **tres** contratos de verificación —uno de ellos la **colección de peticiones reproducible** de `CU-12`, que es el candidato natural que esta sección había anticipado—, y con ellos se abrió [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que pasa a ser el **octavo** artefacto de la sección. La fila de §3 se **conserva** con su desenlace y su fecha: la condición «sin categoría 10» dejó de cumplirse y la condición «sin Fase B2» sigue en pie, de modo que la matriz nace **sin ninguna fila de línea de base visual**, que es el caso de `Deriva-Rules.md` §2.3. **Ningún gate, umbral, caso de prueba ni recuento de esta sección cambia**, y `CU-12` §9 sigue rigiendo: la colección **no reemplaza a las pruebas de integración y no se cuenta como cobertura**. |
 | 1.1 | 2026-08-11 | Actualiza la tabla de artefactos: seis de los siete suben a **1.1**. Por `H-01`, los documentos afirmaban **en presente** que el intake escribe «nueve pruebas del validador» en §17.5.P.8, y el **intake 1.20** dice **diez**; el hueco de la matriz **se conserva y queda cerrado** con su desenlace. Por `H-06`, la estrategia de testing declara ahora que su piso de cobertura de líneas —**75 %**— **baja** el **80 %** que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `rest-api`, con qué autoridad y qué le falta. Por `H-04`, la matriz suma §2.1 con `TC-36`. Por `H-08`, el mutation score deja de atribuirse a la fila `rest-api` de §2.2, que no lo pide. **Ningún gate, umbral, caso ni recuento de esta sección cambia**: en particular el 75/70 **no se sube**. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Api`, proyecto de código **principal** del producto. Lista los **siete** artefactos emitidos con su versión y su estado, el orden de lectura, los **dos** artefactos omitidos con su motivo —con la constancia de que la matriz de sensado tendría un candidato natural en la colección de peticiones cuando se emita la categoría 10—, los **quince** quality gates con su carácter, las **dos** puertas técnicas y **la frontera del despliegue**, y la tabla de recuentos que esta sección sostiene con la fuente de cada uno. |
