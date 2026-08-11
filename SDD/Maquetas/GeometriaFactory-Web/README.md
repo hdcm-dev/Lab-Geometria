@@ -6,7 +6,7 @@
 **Modelo UX-UI aplicado:** catálogo base de `References/Design/` — `Design-Rules-Web-Generico` +
 `Design-Rules-Primer-Arranque` + `Design-Rules-Identidad-De-Version`
 **Fecha de la iteración:** 2026-08-09
-**Estado:** propuesta, a la espera de la aprobación explícita del Product Owner
+**Estado:** **Aprobada** por el Product Owner el 2026-08-11. La aprobación es un acto humano por diseño (`Master-Prompt.md` §15) y por eso la promoción documental del mismo día la dejó expresamente fuera. Se aprueba **con sus tres huecos declarados**: la sexta función de la fachada, el reseteo de contraseña y la provisoria al habilitar no fueron validados visualmente, y su vía es una iteración 5
 
 ---
 
