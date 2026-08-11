@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.1 |
+| Versión | 1.2 |
 | Fecha | 2026-08-11 |
 | Estado | **Aprobado** |
 | Autor | Orquestador SDD |
@@ -79,9 +79,32 @@ Verificar no alcanza: al encontrar un defecto hay que **diagnosticar su causa**,
 
 **La regla que ordena la tabla**: un defecto de transcripción se arregla donde se transcribió; un defecto de la fuente se arregla en la fuente **antes** de propagarlo. Cuando este producto invirtió ese orden —propagar una decisión a cuatro proyectos sin escribirla antes en el intake— el resultado fue once documentos citando como ratificado algo que la fuente contradecía.
 
+### 6.2 El plan de arreglos como cierre de tarea
+
+Propuesta del Product Owner, adoptada. Cambia **el ciclo**, no sólo el cuidado con que se ejecuta.
+
+**Cómo se venía haciendo.** Despachar, recibir el informe, incorporar, auditar, despachar la corrección. Los arreglos se despachaban **desde la conversación**: el orquestador armaba el encargo con lo que recordaba del informe y de lo que había pasado antes. Eso tiene dos costos que este producto pagó. El primero es de **deriva**: lo que el orquestador recuerda envejece y se deforma, y cuando ese recuerdo entra en un encargo, entra como si fuera dato verificado — así viajó una cifra falsa *dentro* de un encargo de auditoría (`E-7`). El segundo es de **consumo**: cada ciclo arrastra todo el contexto acumulado de los anteriores, que crece sin que su utilidad crezca.
+
+**Cómo se hace desde ahora.** La tarea **no termina cuando el subagente entrega**. Termina cuando el orquestador la evaluó y **emitió un plan de arreglos**, que es un **artefacto en disco**, no un tramo de conversación. Con el plan emitido, la tarea está cerrada y **el contexto se puede compactar sin pérdida**. El ciclo de arreglos arranca después, **leyendo el plan**, no la memoria de nadie.
+
+**Qué tiene que contener el plan para que eso funcione.** Es el punto: si el plan no se basta a sí mismo, la compactación pierde información y el ciclo siguiente vuelve a inventar.
+
+| Campo | Por qué es obligatorio |
+|---|---|
+| El hallazgo, con su **ancla verificada** —archivo y línea, o identificador— | Sin ancla, el ciclo siguiente busca de memoria; así se declaró «no reproducible» un hallazgo real (`E-5`) |
+| La **causa diagnosticada** según §6.1 | Es lo que determina a dónde va el arreglo, y no se puede reconstruir después |
+| El **destino**: qué documento se toca, o a quién se eleva | Evita que un defecto de la fuente se arregle en la hoja |
+| El **alcance contado**, no estimado | En trece tandas los alcances estimados quedaron cortos sin excepción (`E-4`) |
+| Lo que **se verificó como falso** del informe original | Si no queda escrito, el ciclo siguiente vuelve a corregir algo que estaba bien |
+
+**Criterio de cierre**: la tarea se cierra con el plan emitido, **no con los arreglos hechos**. Son dos ciclos distintos y conviene que lo sean, porque el que evalúa y el que arregla no necesitan el mismo contexto.
+
+**Qué mejora, concretamente.** El encargo del ciclo de arreglos pasa a derivarse de un artefacto verificado en vez de un recuerdo, que es el origen de `E-4`, `E-5` y `E-7`. Y el contexto de cada ciclo pasa a ser **el plan más lo que el plan ancla**, en lugar de todo lo acumulado.
+
 ## 7. Control de cambios
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.2 | 2026-08-11 | **§6.2 nueva**, propuesta del Product Owner y adoptada: la tarea no termina cuando el subagente entrega sino cuando el orquestador la evaluó y **emitió un plan de arreglos como artefacto en disco**; con el plan emitido la tarea se cierra y el contexto se puede compactar sin pérdida, y el ciclo de arreglos arranca leyendo el plan y no la memoria. Se declaran los cinco campos que el plan debe traer para bastarse a sí mismo, y los tres hechos de §3 cuyo origen es precisamente haber despachado arreglos desde la conversación. | Product Owner (propuesta) · Orquestador SDD (redacción) |
 | 1.1 | 2026-08-11 | **§6.1 nueva**, a pedido del Product Owner: verificar no alcanza si no se diagnostica la causa del defecto, porque de la causa depende quién lo arregla. Seis causas con su señal de reconocimiento, su destino y un ejemplo real de esta sesión, más la regla que las ordena. Sin esta sección la medida `C-2` era una intención sin procedimiento. | Orquestador SDD |
 | 1.0 | 2026-08-11 | Emisión inicial, a pedido del Product Owner, que observó el defecto al revisar la coordinación general del tramo de especificación. | Orquestador SDD |
