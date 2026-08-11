@@ -14,7 +14,7 @@
 | Repositorio | `https://github.com/hdcm-dev/Lab-Geometria.git` |
 | Lead técnico | El mismo docente, asistido por agente IA (Requerimientos Técnicos §1: «1 docente + agente IA») |
 | Documento | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` |
-| Versión | 1.20 |
+| Versión | 1.19 |
 | Fecha | 2026-08-08 |
 | Stack principal | .NET 10 — Blazor Interactive Server (front) + API REST con Clean Architecture (backend) + TypeScript/webpack (visor 3D) |
 | Estado | Borrador |
@@ -725,7 +725,7 @@ Idéntico a §17.1.P.8. Quality gate propio y bloqueante: **ninguna prueba de es
 El caso de uso de validación de un trabajo —el más pesado, porque recorre todas las piezas y sus componentes— **resuelve en menos de 500 ms para el JSON semilla de 3 piezas del escenario E-1** [ASUNCIÓN], medido sin acceso a base. Las consultas de listado **nunca cargan los componentes** (RT §7.2): es una decisión de modelado con efecto directo en el tiempo de respuesta del listado del administrador.
 
 ### §17.2.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
-1. **El validador de figuras es un puerto, no una dependencia concreta** (RT §4.1): es lo que permite probar los **diez** casos de la batería aislando la lógica de tolerancia de claves.
+1. **El validador de figuras es un puerto, no una dependencia concreta** (RT §4.1): es lo que permite probar los nueve casos de RT §11 aislando la lógica de tolerancia de claves.
 2. **La verificación de valores produce observaciones de dos niveles**, `Error` y `Advertencia`, y sólo el primero impide que el trabajo pase a `Pendiente` (RT §6.5, RN-05).
 3. **El reloj es un puerto** (`IRelojDelSistema`), para que las fechas de alta y modificación sean verificables en prueba.
 
@@ -780,14 +780,14 @@ El modelo de datos es el de RT §7.1: `ALUMNO`, `TRABAJO`, `PIEZA`, `COMPONENTE`
 Acá viven las dos piezas sensibles: **derivación de la contraseña** con PBKDF2 o Argon2 —nunca en claro ni con resumen simple— y **emisión del JWT** firmado con clave simétrica HS256 (RT §9.2). La **clave de firma se genera o se provee en el primer arranque y vive fuera del repositorio y fuera de la imagen**: variable de entorno o archivo montado (RT §9.2, §13). Ningún secreto entra al repositorio, ni en CI/CD (RT §16).
 
 ### §17.3.P.6 Estrategia de testing
-El validador de figuras se prueba con la **batería obligatoria de diez casos** —los nueve de RT §11 más el décimo que §21 agrega para la dimensión no legible—, con los escenarios **E-1 a E-8** de la Parte D como entrada. La persistencia real contra SQLite se prueba desde `GeometriaFactory.Integration.Tests`.
+El validador de figuras se prueba con la **batería obligatoria de nueve casos de RT §11**, con los escenarios **E-1 a E-8** de la Parte D como entrada. La persistencia real contra SQLite se prueba desde `GeometriaFactory.Integration.Tests`.
 **Cobertura mínima: 85 % de líneas y 80 % de ramas en el conjunto del proyecto de código, y 95 % de líneas en el validador de figuras** [ASUNCIÓN]. El número más alto del producto está donde RF §10 etapa `f` señala el criterio que más veces se rompe.
 
 ### §17.3.P.7 Estrategia de versionado y release
 Idéntica a §17.1.P.7. Además: **cada migración de EF Core se versiona con el código de su etapa**; no se editan migraciones ya fusionadas.
 
 ### §17.3.P.8 Pipeline CI/CD
-Stages: restore → build → test → verificación de migraciones. Quality gates bloqueantes: build en 0 sin advertencias; las **diez** pruebas del validador pasan; **las migraciones se aplican solas sobre una base inexistente** (criterio de aceptación de la etapa `c`); la cobertura alcanza los mínimos de P.6. Rollback: `scripts/reset-db.sh` reproduce el estado de primer arranque.
+Stages: restore → build → test → verificación de migraciones. Quality gates bloqueantes: build en 0 sin advertencias; las nueve pruebas del validador pasan; **las migraciones se aplican solas sobre una base inexistente** (criterio de aceptación de la etapa `c`); la cobertura alcanza los mínimos de P.6. Rollback: `scripts/reset-db.sh` reproduce el estado de primer arranque.
 
 ### §17.3.P.9 Compatibilidad y plataformas target
 `net10.0`, Linux (devcontainer y servidor propio). SQLite en su versión embebida por el proveedor de EF Core, anclada en la etapa `a`.
@@ -920,7 +920,7 @@ SemVer 2.0.0 y Conventional Commits sin excepciones. Una rama y un pull request 
 | Stage | Quality gate |
 |---|---|
 | build | `scripts/build.sh` termina en **0 y sin advertencias** |
-| test | `scripts/test.sh` pasa entero, incluidas las **diez** pruebas del validador |
+| test | `scripts/test.sh` pasa entero, incluidas las nueve pruebas del validador |
 | cobertura | Mínimos de P.6 alcanzados |
 | imagen | **PT-04**: la imagen se construye con `deploy/Dockerfile` **multietapa** y arranca desde el devcontainer, aplica migraciones sobre base vacía y responde salud |
 | despliegue | **Manual, por el docente** [DECISIÓN, RT §13]. El agente IA entrega el `Dockerfile` y el `compose.yaml` y no ejecuta el despliegue |
@@ -1468,7 +1468,7 @@ Procedencia: `Definicion-Contrato-De-Fachada.md`, condición `DIMENSION_NO_LEGIB
 
 ## §21 Anexo B — Cobertura de campos y trazabilidad de los ejemplos
 
-La matriz cruza la batería obligatoria —los **nueve** casos de RT §11 más el **décimo** que esta sección agregó el 2026-08-09 para la dimensión no legible, **diez** en total— contra el escenario de §20 que la ejercita. Se deriva de esa tabla y de los guiones de demostración de RF §10.
+La matriz cruza la batería obligatoria de nueve casos de prueba de RT §11 contra el escenario de §20 que la ejercita. Se deriva de esa tabla y de los guiones de demostración de RF §10.
 
 | Caso de prueba (RT §11) | Escenario | Resultado esperado | Dónde se ejercita |
 |---|---|---|---|
@@ -1594,7 +1594,6 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
 | 1.0 | 2026-08-08 | Intake unificado inicial del producto, integrado a partir de los Requerimientos Funcionales, los Requerimientos Técnicos y el Análisis Final Integrado del ecosistema Geometría. Declara 7 proyectos de código, los siete escenarios de datos de la Parte D transcriptos completos, y las cinco asunciones de §22. | Agente IA sobre el material del Product Owner |
-| 1.20 | 2026-08-11 | **La batería del validador quedó descrita como de nueve casos cuando tiene diez.** §21 agregó el décimo el 2026-08-09, al incorporarse el escenario **E-8**, y **cinco lugares** siguieron diciendo nueve: los dos quality gates de §17.3.P.8 y §17.5.P.8, la forma de verificación de §17.3.P.6, el fundamento del puerto en §17.3.P.4 y el encabezado de la propia §21. Lo levantó la Fase E de `GeometriaFactory-Infrastructure` y `-Api`, que **aplicaron diez y no bajaron la batería a nueve para que coincidiera con la redacción**, dejándolo declarado en sus documentos. Es el cuarto conjunto de la fuente que envejece igual, después de las funciones de la fachada, los invariantes de Domain y los rangos de escenarios, y otra vez son gates, celdas y encabezados. Ninguna decisión cambia. Sube minor y archiva: 1.19 ya fue citada como insumo. | Orquestador SDD |
 | 1.19 | 2026-08-10 | **F-13 sube de `Should Have` a `Must Have`**, decidido por el Product Owner. La sincronización árbol ⇄ escena por índice y la disposición determinista estaban declaradas diferibles mientras §17.7 P.8 las incluía en lo que **PT-02** mide antes de comprometer la etapa `g`. Una puerta que no pasa detiene la planificación, de modo que la capacidad era diferible en el papel e **indiferible en los hechos**: nadie la planificaba y sin embargo bloqueaba. Lo levantaron dos proyectos desde los dos lados de la fachada —`GeometriaFactory-Visor` en su Fase D y `GeometriaFactory-Web` como su punto abierto `PA-02`—, ninguno de los dos repriorizando por su cuenta. Es el segundo caso idéntico después de **F-25** en 1.7, y el patrón vale anotarlo: **una capacidad citada por una puerta técnica no puede ser `Should Have`**. Sube minor y archiva: 1.18 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
 | 1.18 | 2026-08-09 | **Los rangos de escenarios congelados en E-7.** Seis lugares de la fuente —§16.1, §17.3.P.4, §17.3.P.6, §18 S-3, la nota de §20 y la lista de verificación de §23— seguían diciendo «los **siete** escenarios» o «E-1 a **E-7**», cuando §20 tiene **ocho** desde que 1.7 incorporó **E-8**. Lo levantó la Fase C de `GeometriaFactory-Infrastructure`, que contó los del §20 en vez de copiar el rango. Es el tercer conjunto de la fuente que envejece del mismo modo, después de las funciones de la fachada y de los invariantes de Domain, y los seis lugares son enumeraciones y celdas: **la fuente enumera sus conjuntos en más lugares de los que actualiza cuando crecen**. Ninguna decisión cambia. Sube minor y archiva: 1.17 ya fue citada como insumo. | Orquestador SDD |
 | 1.17 | 2026-08-09 | **Segundo recuento viejo en la misma celda de §14.** La tabla «qué expone cada proyecto de código» declaraba que `GeometriaFactory-Domain` expone «invariantes **INV-01 a INV-06**», cuando §17.1.P.2 declara **nueve** desde que entraron INV-07, INV-08 e INV-09. Lo levantó la Fase C de `GeometriaFactory-Application`, que citó §17.1.P.2 en vez de propagar el rango viejo. Es el mismo defecto que 1.16 corrigió en la fila de al lado, y el hecho de que fueran **dos filas de la misma tabla** confirma el patrón: §14 es un resumen que enumera, y **todo lo que enumera envejece cada vez que crece un conjunto**. Ninguna decisión cambia. Sube minor y archiva: 1.16 ya fue citada como insumo. | Orquestador SDD |
