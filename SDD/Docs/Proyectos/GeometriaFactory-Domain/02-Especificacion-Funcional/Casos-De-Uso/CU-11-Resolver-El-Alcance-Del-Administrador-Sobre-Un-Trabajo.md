@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-11-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md) §1 y §5 (retiro de trabajos por el administrador); [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md) §5 (alcance de la vista del administrador); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-12 y F-24), §4.1 (RN-04 y RN-11), §4.2 (tabla de quién puede qué en cada estado), §17.1.P.2 (INV-03 e INV-07), §6 (flujo 2.1)

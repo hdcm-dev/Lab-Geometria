@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** RC-04-La-Familia-No-Se-Persiste.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.11 punto 4 («la familia plana/volumétrica **no se persiste**: se deriva de `Tipo` por tabla de consulta»), §20.E-7; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` (entrada «familia plana o volumétrica»)

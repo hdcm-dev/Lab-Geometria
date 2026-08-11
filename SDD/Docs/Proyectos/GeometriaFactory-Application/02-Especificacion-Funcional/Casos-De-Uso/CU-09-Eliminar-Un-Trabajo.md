@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-09-Eliminar-Un-Trabajo.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §5 (separación entre alumnos y acotación de la eliminación); [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md) §5 (retiro de trabajos por el administrador); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-07, F-24), §4.1 (RN-03, RN-04, RN-11), §4.2, §7 (CL-5, CL-10), §17.2.P.5; orquesta [`CU-09`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) y [`CU-11`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-11-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) de GeometriaFactory-Domain

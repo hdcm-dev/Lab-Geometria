@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md |
 | Versión | 1.1 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (promesa central), §4 (capacidades F-06, F-07 y F-08), §4.1 (reglas RN-03, RN-04 y RN-05), §4.2 (modelo de estados del trabajo), §6 (flujo 2), §7 (casos límite CL-3 y CL-5), §8 (métrica de entrega del alumno), §12 (glosario del dominio), §22 (asunción A-2); `Vision-Producto.md` §1, §3, §5 y §9; `Alcance-Producto.md` §4.1 y §8 |

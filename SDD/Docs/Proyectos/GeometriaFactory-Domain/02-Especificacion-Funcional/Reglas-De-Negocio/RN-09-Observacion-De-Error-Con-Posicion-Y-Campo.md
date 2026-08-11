@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-09 y reglas sin invariante), §4 (F-09), §5 (historia 4), §7 (CL-3), §17.1.P.2, §21, §20.E-5, §17.4.P.5; [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 (fallo silencioso)

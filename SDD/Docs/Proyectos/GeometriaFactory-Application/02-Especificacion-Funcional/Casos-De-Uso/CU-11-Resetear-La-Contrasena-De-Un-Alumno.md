@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-11-Resetear-La-Contrasena-De-Un-Alumno.md
 **Versión:** 1.5
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5 (las operaciones del administrador sobre la cuenta); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §5 (custodia de la credencial, laboratorio sin canal de correo); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13**, §4 (F-26, F-03, **F-04** precisada), §4.1 (RN-12, RN-13, RN-14, RN-15, **RN-16**), §7 (CL-7 reescrito), §9 (X-2 retirada), §17.1.P.2 (INV-09), §17.2.P.5; orquesta [`CU-13` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-13-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md)

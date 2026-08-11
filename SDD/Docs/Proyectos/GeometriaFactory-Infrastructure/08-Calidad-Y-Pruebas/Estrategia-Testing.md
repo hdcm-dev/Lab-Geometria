@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Estrategia-Testing.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md
 **Versión:** 1.4
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §4.1 (enunciado de RN-07, reglas sin invariante, y **RN-12**), §4 (F-03, **F-26**), §4.2 (modelo de estados del trabajo), §7 (CL-6, **CL-7** reescrito), §9 (**X-2 retirada**), §11 (**RN-B6 tachado** el 2026-08-09; lo que sostenía vive en §7 CL-6), §17.1.P.2; [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §2, §4 y §5; `00-Contexto/Vision-Producto.md` §8 (RG-06)

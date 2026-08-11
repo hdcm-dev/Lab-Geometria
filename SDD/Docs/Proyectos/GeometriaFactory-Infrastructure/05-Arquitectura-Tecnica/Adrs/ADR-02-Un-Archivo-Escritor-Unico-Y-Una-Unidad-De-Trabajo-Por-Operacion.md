@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** ADR-02-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Persistencia

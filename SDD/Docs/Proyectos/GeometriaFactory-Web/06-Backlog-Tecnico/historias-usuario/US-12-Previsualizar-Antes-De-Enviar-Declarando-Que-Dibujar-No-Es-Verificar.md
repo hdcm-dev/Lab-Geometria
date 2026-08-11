@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** US-12-Previsualizar-Antes-De-Enviar-Declarando-Que-Dibujar-No-Es-Verificar.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master (AG-06)
 **Épica:** EP-06 Interpretación y verificación del dato del alumno

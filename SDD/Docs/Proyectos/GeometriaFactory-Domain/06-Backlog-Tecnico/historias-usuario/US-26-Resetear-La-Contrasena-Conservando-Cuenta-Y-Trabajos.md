@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** US-26-Resetear-La-Contrasena-Conservando-Cuenta-Y-Trabajos.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-03 Ciclo de vida de la cuenta de alumno

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** US-17-Enviar-Un-Trabajo-Nuevo-Y-Recibir-El-Estado-Que-La-Interpretacion-Decidio.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Épica:** EP-05 Interpretación y verificación del dato del alumno

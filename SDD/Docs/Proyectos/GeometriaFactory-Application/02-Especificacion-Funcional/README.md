@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
 **Versión:** 1.5
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`Especificacion-Funcional.md`](Especificacion-Funcional.md) (índice maestro de esta categoría); `01-Necesidades-Negocio/Necesidades-Negocio.md`; `00-Contexto/Vision-Producto.md` §9; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`

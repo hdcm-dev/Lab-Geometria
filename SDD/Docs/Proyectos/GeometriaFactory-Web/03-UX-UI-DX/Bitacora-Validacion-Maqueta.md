@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Bitacora-Validacion-Maqueta.md
 **Versión:** 1.4
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Maquetador de validación visual (AG-03M)
 **Variante:** UX/UI

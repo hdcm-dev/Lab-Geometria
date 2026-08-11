@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** US-11-Reconstruir-El-Conjunto-De-Piezas-Con-Identidad-Posicional.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-05 Interpretación y verificación del dato del alumno

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-10-Configurar-La-Cuenta-De-Administrador.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5 (unicidad de la cuenta de administrador); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01), §4.1 (RN-01, RN-02), §15 (etapa `c`: configurar el administrador en el primer arranque, entrar, cambiar contraseña y salir), §17.2.P.2, §17.2.P.5, §17.2.P.11 punto 3; orquesta [`CU-12` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-12-Configurar-La-Cuenta-De-Administrador.md)

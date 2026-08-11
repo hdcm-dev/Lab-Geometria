@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-08-Gobernar-El-Estado-Del-Trabajo.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §5 (visibilidad del avance sobre los 4 estados y cierre del circuito de entrega en el estado `Pendiente` del trabajo); [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (límite entre lo que no verifica y la entrega, y acción única de guardado); [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) §5 (carácter no bloqueante); `00-Contexto/Vision-Producto.md` §9.1 (estado del trabajo, enviar) y §9.2; `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-08 y F-22), §4.1 (RN-05 y RN-10), §4.2 (modelo de estados del trabajo), §17.1.P.2 (INV-04 e INV-07), §6 (flujos 2 y 4), §7 (CL-3 y CL-4), §20.E-1, §20.E-2, §20.E-5

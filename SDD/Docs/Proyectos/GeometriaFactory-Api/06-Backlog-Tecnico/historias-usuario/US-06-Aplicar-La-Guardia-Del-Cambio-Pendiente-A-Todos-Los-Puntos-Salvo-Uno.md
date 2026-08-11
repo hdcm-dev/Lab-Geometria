@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** US-06-Aplicar-La-Guardia-Del-Cambio-Pendiente-A-Todos-Los-Puntos-Salvo-Uno.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Épica:** EP-03 Ciclo de vida de la cuenta de alumno

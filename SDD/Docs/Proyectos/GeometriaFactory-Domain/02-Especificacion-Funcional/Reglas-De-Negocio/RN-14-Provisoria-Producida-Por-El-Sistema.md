@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-14-Provisoria-Producida-Por-El-Sistema.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-14**), §4 (**F-26**, «el sistema produce una contraseña provisoria» y «el panel **no lleva campo de contraseña**»), §17.1.P.2 (las reglas sin invariante asociado), §17.1.P.5 (el dominio no maneja secretos: la contraseña llega ya derivada), §7 (**CL-7**); [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1 y §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5

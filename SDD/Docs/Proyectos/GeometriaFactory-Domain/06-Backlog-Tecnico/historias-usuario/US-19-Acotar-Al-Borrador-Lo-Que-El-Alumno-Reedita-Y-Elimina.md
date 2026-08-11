@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** US-19-Acotar-Al-Borrador-Lo-Que-El-Alumno-Reedita-Y-Elimina.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-04 Gestión del trabajo

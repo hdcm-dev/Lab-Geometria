@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Glosario-Funcional.md
-**Versión:** 1.1
-**Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Versión:** 1.2
+**Estado:** Aprobado
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Especificacion-Funcional.md` §3, §4 y §6 y `Definicion-Superficie-HTTP.md` completo, de este proyecto de código; los glosarios funcionales de `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Contracts` y `GeometriaFactory-Infrastructure`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §12 y §12.1; `Vocabulario-Rules.md` §2 y §9, en cuanto a los seis términos normativos y al criterio de polisemia
+**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Especificacion-Funcional.md` §3, §4 y §6 y `Definicion-Superficie-HTTP.md` completo, de este proyecto de código; los glosarios funcionales de `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Contracts` y `GeometriaFactory-Infrastructure`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §12 y §12.1; `Vocabulario-Rules.md` §2 y §9, en cuanto a los seis términos normativos y al criterio de polisemia
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `10-Examples` de GeometriaFactory-Api
 
 ---
@@ -130,3 +130,4 @@ Trabajo; Pieza; Componente; Observación; Advertencia; Error de validación; Est
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara los **trece** términos que esta categoría acuña —entre ellos **punto de acceso**, **código de respuesta**, **código del contrato**, **las dos traducciones**, **la guardia de admisión**, **la ruta propuesta**, **la señal que no es un fallo** y **el hueco del conjunto cerrado**—; los **tres** términos con más de un referente con su forma obligatoria y su evidencia de colisión —«acceso», «código» y «punto»—, con las dos reglas de uso que de ahí salen; los dos casos que deliberadamente no se corrigen; y los términos referenciados del glosario raíz y de los cuatro proyectos de código vecinos, que no se redefinen, con la precisión de que **este proyecto de código sí es una unidad de entrega** en el sentido normativo. |
 | 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**. Tres entradas de §2 actualizan su recuento y ninguna cambia de referente: los **puntos de acceso** pasan de dieciséis a **quince** con el retiro de `A-04`, la **superficie HTTP** se define sobre esos quince, y los **códigos del contrato** pasan de diecisiete a **quince**. **No se acuña ningún término y no se retira ninguno.** Sube minor. |
+| 1.2 | 2026-08-11 | **Cierra el hallazgo `B-API-13` (P3)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0. La cabecera citaba `PRODUCT-INTAKE` **1.13** y pasa a citar **1.26**, vigente hoy. Se abrieron §12 y §12.1 del intake 1.26 y **su contenido no cambió** en nada que este glosario afirme, de modo que ninguna definición, ninguna polisemia y ningún recuento se toca: lo que se repara es la trazabilidad, no una afirmación falsa. **Búsqueda de propagación hecha con `grep`**: los tres recuentos que este glosario declara —quince puntos de acceso, quince códigos del contrato y la superficie definida sobre esos quince— se contrastaron contra [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) §3 y §6 y **coinciden**; no hay ningún recuento envejecido en este archivo. Sube minor. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Documento:** Vision-Producto.md
 **Versión:** 1.4
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Product Manager Senior (AG-00), actuando también como Analista de Negocio Senior (AG-01) por `Rules-Contexto.md` §1.3
 **Trazabilidad upstream:** PRODUCT-INTAKE 1.9 §1 (idea y problema), §2 (audiencia y stakeholders), §3 (propuesta de valor y diferenciación), §4 (alcance funcional pretendido), §4.1 (reglas de negocio declaradas), §4.2 (modelo de estados del trabajo y colisión de vocabulario), §8 (métricas de éxito desde el negocio), §9 (exclusiones), §10 (restricciones del cliente), §11 (riesgos detectados desde el negocio), §12 y §12.1 (glosario del dominio del cliente y choque de vocabulario), §15 (etapas), §22 (supuestos declarados)

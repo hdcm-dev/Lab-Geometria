@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (enunciado precisado de **RN-13**, y enunciados de RN-12 y **RN-16**), §4 (**F-26**, F-03, **F-04** precisada), §17.1.P.2 (**INV-09**, INV-06), §17.1.P.5, §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; `00-Contexto/Vision-Producto.md` §9.2

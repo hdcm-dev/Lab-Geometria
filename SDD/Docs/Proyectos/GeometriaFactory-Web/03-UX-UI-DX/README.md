@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI

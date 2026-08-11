@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Guia-Onboarding-Developer.md
 **Versión:** 1.6
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX

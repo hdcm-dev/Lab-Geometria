@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** US-22-Recorrer-La-Entrega-De-La-Comision-Agrupada-Y-Filtrada.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master (AG-06)
 **Épica:** EP-05 Gestión del trabajo

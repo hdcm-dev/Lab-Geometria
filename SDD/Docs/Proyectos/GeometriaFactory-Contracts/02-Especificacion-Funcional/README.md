@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts (`GeometriaFactory.Contracts`, tipo `library`)
 **Documento:** README.md
 **Versión:** 1.6
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `Especificacion-Funcional.md` (índice maestro de esta sección); `00-Contexto/Vision-Producto.md` §9; `01-Necesidades-Negocio/Necesidades-Negocio.md` 1.1 §2 y §5.3; `PRODUCT-INTAKE` **1.14** §4, §4.1, §4.2, §17.4, §13 y §14

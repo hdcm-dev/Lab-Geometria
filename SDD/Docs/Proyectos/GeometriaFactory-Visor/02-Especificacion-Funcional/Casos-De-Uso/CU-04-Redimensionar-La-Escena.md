@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-04-Redimensionar-La-Escena.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §1 (descripción de la necesidad) y §5 (criterios de éxito); `00-Contexto/Vision-Producto.md` §3 (diferenciador D-4); `00-Contexto/Compatibilidad-Plataformas.md` §2.2 (plataforma del navegador) y §4 (alternativas para plataformas no soportadas); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.7 P.3, §17.7 P.10 (interacción fluida sin tráfico durante el gesto), §14 (RA-02)

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** US-09-Ver-La-Lista-De-Cuentas-Y-Habilitar-Bloquear-Y-Rehabilitar.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master (AG-06)
 **Épica:** EP-04 Ciclo de vida de la cuenta de alumno

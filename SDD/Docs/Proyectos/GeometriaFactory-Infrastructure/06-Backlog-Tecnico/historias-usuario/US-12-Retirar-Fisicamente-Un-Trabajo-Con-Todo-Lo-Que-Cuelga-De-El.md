@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** US-12-Retirar-Fisicamente-Un-Trabajo-Con-Todo-Lo-Que-Cuelga-De-El.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-04 Gestión del trabajo

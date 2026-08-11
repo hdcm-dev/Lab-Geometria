@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Definicion-Contrato-De-Fachada.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §14 (regla de arquitectura RA-02 y tabla de contratos expuestos), §17.7 P.2 (tres capas y motivo de la fachada), §17.7 P.3 (**las seis funciones declaradas**: las cinco originales más `establecerMovimiento`, que este documento acuñó por decisión del Product Owner del 2026-08-09 y que el intake consolidó en su versión 1.6), §17.7 P.4 (persistencia: prohibición explícita), §17.7 P.5 (seguridad: prohibición explícita), §17.7 P.10 (requerimientos no funcionales), §17.7 P.11 (decisiones pre-tomadas), §18 (punto de extensión y sample S-1), §20 E-1 y E-7; `00-Contexto/Vision-Producto.md` §3 (propuesta de valor) y §9 (glosario raíz); `00-Contexto/Alcance-Producto.md` §4.1 (capacidades comprometidas); `00-Contexto/Compatibilidad-Plataformas.md` §2.2 (plataforma del navegador) y §4 (alternativas para plataformas no soportadas); `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md` §1 (descripción de la necesidad), §4 (problema específico) y §5 (criterios de éxito)

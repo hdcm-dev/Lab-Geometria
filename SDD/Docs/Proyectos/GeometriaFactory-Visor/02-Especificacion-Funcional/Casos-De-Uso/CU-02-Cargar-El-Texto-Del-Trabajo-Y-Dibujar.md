@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-02-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §1, §4 y §5 (criterios primero, segundo y cuarto); `NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §4, en su parte de piezas efectivamente dibujadas; `00-Contexto/Vision-Producto.md` §3 (diferenciadores D-3 y D-4) y §9; `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.7 P.2, P.3 y P.11 (puntos 4 y 5), §14 (RA-02), §20 E-1 y §20 E-7

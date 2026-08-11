@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md` §1, §5 (tercer y cuarto criterio); `../../../../00-Contexto/Vision-Producto.md` §9.1 (fallo silencioso); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-2, CL-8, CL-9), §11 (RN-B1, RN-B2, RN-B4), §14 (RA-03), §17.6 P.4, P.9, **P.10** (PT-01.b y PT-01.c, observabilidad), P.12

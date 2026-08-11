@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** README.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Maintainer Lead (AG-07)
 

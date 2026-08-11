@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** US-15-Ver-Los-Trabajos-Propios-Con-Sus-Cuatro-Estados.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master (AG-06)
 **Épica:** EP-05 Gestión del trabajo

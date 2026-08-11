@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-03-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §5 (explicación al alumno no habilitado, custodia de la credencial vigente, alta de punta a punta); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13**, §4 (**F-04** precisada, F-05, F-03, F-26), §4.1 (RN-06, **RN-13 precisada**, RN-14, **RN-16**), §6 (flujo 1), §17.1.P.2 (INV-09), §17.2.P.5; orquesta [`CU-04`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md) y [`CU-03`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) de GeometriaFactory-Domain

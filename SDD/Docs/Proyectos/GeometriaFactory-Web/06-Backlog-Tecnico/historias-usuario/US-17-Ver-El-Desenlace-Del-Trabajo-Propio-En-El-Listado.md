@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** US-17-Ver-El-Desenlace-Del-Trabajo-Propio-En-El-Listado.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master (AG-06)
 **Épica:** EP-08 Desenlace de la entrega

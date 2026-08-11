@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** US-25-Detener-El-Arranque-En-Lugar-De-Operar-Sobre-Un-Almacen-Dudoso.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-01 Esqueleto ambulante y verificación de viabilidad

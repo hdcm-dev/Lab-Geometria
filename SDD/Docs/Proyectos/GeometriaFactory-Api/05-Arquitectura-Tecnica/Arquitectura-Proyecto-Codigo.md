@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Arquitectura-Proyecto-Codigo.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Tipo de proyecto de código (D8):** `rest-api`

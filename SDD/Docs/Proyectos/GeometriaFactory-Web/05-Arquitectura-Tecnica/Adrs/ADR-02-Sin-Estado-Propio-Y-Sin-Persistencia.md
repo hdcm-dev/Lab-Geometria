@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior (AG-05)
 **Categoría:** Persistencia

@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-02-Contrato-De-Administracion-De-Cuentas.md
 **Versión:** 1.5
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §1, §5; `NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5; `00-Contexto/Vision-Producto.md` §9; `00-Contexto/Alcance-Producto.md` §4.1 (F-01, F-02, F-03, F-04, F-05) y §5 (X-1 vigente, X-3); `PRODUCT-INTAKE` **1.13** §4.1 (RN-01, RN-02, RN-06, RN-07, **RN-12**, RN-13, RN-14 y **RN-16**), §17.1.P.2 (**INV-09**), §17.4 P.2, P.3, P.5 y P.10, §17.5 P.3 y P.5, §14 (RA-03), §4 (**F-26**, F-03, **F-04** precisada), §6 (flujo 1), §7 (CL-6, **CL-7** reescrito), §9 (**X-2 retirada**)

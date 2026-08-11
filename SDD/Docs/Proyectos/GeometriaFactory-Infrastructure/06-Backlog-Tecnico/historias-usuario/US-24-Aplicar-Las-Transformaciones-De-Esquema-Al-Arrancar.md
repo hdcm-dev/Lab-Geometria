@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** US-24-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-01 Esqueleto ambulante y verificación de viabilidad

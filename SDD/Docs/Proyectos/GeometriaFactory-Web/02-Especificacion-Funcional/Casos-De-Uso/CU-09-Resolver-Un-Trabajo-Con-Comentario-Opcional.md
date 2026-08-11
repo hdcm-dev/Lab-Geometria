@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-09-Resolver-Un-Trabajo-Con-Comentario-Opcional.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md` §1, §5 (los siete criterios); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §1; `../../../../00-Contexto/Vision-Producto.md` §9.1 (aprobar / rechazar, comentario, estado del trabajo); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-21, F-23, F-24), §4.1 (RN-04, RN-10), §4.2, §5 (historia 7.1), §6 (flujo 2.1), §7 (CL-10, CL-11), §9 (retiro de X-5)

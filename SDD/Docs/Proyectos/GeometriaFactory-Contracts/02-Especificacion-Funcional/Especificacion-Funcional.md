@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Especificacion-Funcional.md
 **Versión:** 1.6
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §3, §7 (R-03, R-04), §9; `00-Contexto/Alcance-Producto.md` §2.2, §4.1, §4.2, §5, §8; `01-Necesidades-Negocio/Necesidades-Negocio.md` 1.1 §2, §4, §5.3 y las nueve `NB-XX`; `PRODUCT-INTAKE` **1.14** §4 (con **F-26**), §4.1 (las **trece** reglas, con RN-12 y RN-13) y §4.2 (modelo de estados), §7 (**CL-7** reescrito), §9 (**X-2 retirada**), §17.1.P.2 (**INV-09**), §17.4 íntegro (P.1 a P.12), §13 y §14 (composición, contratos entre proyectos de código y reglas RA-01 a RA-03), §17.5 P.3 y P.5 (qué existe del otro lado del contrato), §4, §6, §7 y §20 (escenarios de instancia)

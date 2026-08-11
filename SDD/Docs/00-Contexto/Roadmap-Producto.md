@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Documento:** Roadmap-Producto.md
 **Versión:** 1.6
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Product Manager Senior (AG-00), actuando también como Analista de Negocio Senior (AG-01) por `Rules-Contexto.md` §1.3
 **Trazabilidad upstream:** PRODUCT-INTAKE 1.9 §4 (capacidades y su prioridad), §4.1 (reglas de negocio declaradas, RN-10 y RN-11), §4.2 (modelo de estados del trabajo), §10 (restricción de fecha y de etapas en serie), §11 (riesgos que ordenan la medición temprana), §13 (composición y orden topológico), §15 (esquema de descomposición y delivery, etapas `a` a `i`, reglas de delivery y puertas técnicas), §17 (criterios de aceptación de etapa citados por bloque técnico)

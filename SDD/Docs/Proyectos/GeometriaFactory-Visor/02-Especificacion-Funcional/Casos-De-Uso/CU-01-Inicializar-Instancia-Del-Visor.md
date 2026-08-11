@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-01-Inicializar-Instancia-Del-Visor.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §1 (descripción de la necesidad) y §5 (criterios de éxito); `00-Contexto/Vision-Producto.md` §3 (diferenciador D-4) y §9 (glosario raíz); `00-Contexto/Alcance-Producto.md` §4.1 (capacidades comprometidas); `00-Contexto/Compatibilidad-Plataformas.md` §2.2 (plataforma del navegador) y §4 (alternativas para plataformas no soportadas); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.7 P.2 y P.3, §14 (RA-02)

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Backlog-Tecnico.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Tipo de proyecto de código (D8):** `rest-api`

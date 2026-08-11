@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** US-15-No-Exigir-Ni-Comprobar-La-Situacion-De-La-Cuenta-Al-Resetear.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Épica:** EP-03 Ciclo de vida de la cuenta de alumno

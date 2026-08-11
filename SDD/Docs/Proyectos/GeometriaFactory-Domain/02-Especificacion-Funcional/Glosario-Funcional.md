@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Glosario-Funcional.md
 **Versión:** 1.8
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena), §9.1, §9.2 y §9.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §4.2 (colisión de vocabulario de `Pendiente`), §4 (**F-26**), §4.1 (**RN-12**, **RN-13**), §17.1.P.2 (**INV-09**), §12 y §12.1 (glosario del dominio del cliente y choque de vocabulario), §17.1

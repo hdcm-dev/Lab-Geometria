@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Mini-Plan.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Scrum Master + API PM (AG-07)
 **Tipo de proyecto de código (D8):** `rest-api`

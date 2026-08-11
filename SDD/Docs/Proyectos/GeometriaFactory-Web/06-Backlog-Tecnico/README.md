@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Scrum Master (AG-06)
 
@@ -62,6 +62,6 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. | Orquestador SDD |
+| 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos y la carpeta de historias, declara la ausencia de `tareas-tecnicas/` con su motivo, fija el orden de lectura, resume las ocho épicas con su etapa del producto y la constancia de que este es el único proyecto de código que toca las ocho, y nombra las tareas técnicas prioritarias con el fundamento de cada una. |
 | 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4. Las historias `Must Have` pasan de veintinueve a **treinta**, con el desenlace de `PA-02` —cerrado, con su fila conservada en `Product-Backlog.md` §6— y con la remisión al apartamiento del 100 % `Must` declarado en `Product-Backlog.md` §4.2. Ninguna épica, tarea técnica ni Definition of Ready cambia. Sube minor. |

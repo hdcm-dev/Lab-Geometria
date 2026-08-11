@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-10-Resolver-El-Desenlace-Del-Trabajo.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md) §1, §4 y §5; [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §5 (visibilidad del avance sobre los 4 estados); `00-Contexto/Vision-Producto.md` §9.1 (estado del trabajo, aprobar / rechazar, comentario) y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-21 y F-23), §4.1 (RN-10), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §17.1.P.2 (INV-04 e INV-07), §5 (historia 7.1), §6 (flujo 2.1), §12 (glosario: aprobar / rechazar, comentario)

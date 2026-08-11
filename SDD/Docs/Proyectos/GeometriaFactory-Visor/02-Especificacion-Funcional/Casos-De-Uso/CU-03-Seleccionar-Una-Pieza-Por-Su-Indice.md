@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-03-Seleccionar-Una-Pieza-Por-Su-Indice.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §1, §4 y §5 (quinto criterio, sincronización entre el árbol y la escena); `00-Contexto/Vision-Producto.md` §9 (entrada «pieza»); `00-Contexto/Alcance-Producto.md` **§4.1** (capacidad F-13, `Must Have` desde `PRODUCT-INTAKE` **1.19**); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.7 P.3, §17.7 P.8 (criterio de sincronización por índice), §14 (RA-02), §20 E-1 y §20 E-7

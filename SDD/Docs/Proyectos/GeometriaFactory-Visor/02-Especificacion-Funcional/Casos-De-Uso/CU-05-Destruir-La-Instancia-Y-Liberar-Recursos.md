@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-05-Destruir-La-Instancia-Y-Liberar-Recursos.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §5 (tercer criterio, continuidad de uso: 10 recorridos de ida y vuelta); `00-Contexto/Vision-Producto.md` §3 (diferenciador D-4); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.7 P.3, §17.7 P.4 (persistencia: prohibición explícita), §17.7 P.8 (criterio de las 10 navegaciones), §17.7 P.10, §14 (RA-02)

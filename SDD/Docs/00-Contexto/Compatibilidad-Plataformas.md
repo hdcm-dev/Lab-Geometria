@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Documento:** Compatibilidad-Plataformas.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Product Manager Senior (AG-00), actuando también como Analista de Negocio Senior (AG-01) por `Rules-Contexto.md` §1.3
 **Trazabilidad upstream:** PRODUCT-INTAKE §10 (restricciones del cliente: red, servidor propio, hosting sin estado, host de desarrollo sin SDK), §13 (los siete proyectos de código), §15 (puertas técnicas y dónde se miden), §17 P.9 de los siete bloques (compatibilidad y plataformas target), §17.5 P.8 y §17.6 P.8 (ambientes y canales de entrega), §22 (incógnitas marcadas para verificar)

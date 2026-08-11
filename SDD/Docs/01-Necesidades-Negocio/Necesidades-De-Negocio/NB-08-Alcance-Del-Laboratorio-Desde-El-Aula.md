@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md |
 | Versión | 1.1 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §4 (capacidad F-14), §7 (casos límite CL-2, CL-8 y CL-9), §10 (restricciones de red, de servidor propio y de despliegue manual), §11 (riesgos RN-B1, RN-B2 y RN-B4), §15 (puertas técnicas y dónde se miden); `Vision-Producto.md` §7 y §8; `Alcance-Producto.md` §2.2, §4.2 y §6.2; `Compatibilidad-Plataformas.md` §1.2 y §5 |

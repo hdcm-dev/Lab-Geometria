@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-16-Habilitar-Produce-La-Provisoria.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.15** §4.1 (enunciado de **RN-16** corregido, y RN-12, RN-13, RN-14 con las que forma circuito), §4 (**F-03**, **F-04** precisada, F-26), §17.1.P.2 (**INV-09**, INV-06, INV-08), §15 (etapa `d`), §7 (CL-7), §9 (X-1 vigente); [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1 y §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5

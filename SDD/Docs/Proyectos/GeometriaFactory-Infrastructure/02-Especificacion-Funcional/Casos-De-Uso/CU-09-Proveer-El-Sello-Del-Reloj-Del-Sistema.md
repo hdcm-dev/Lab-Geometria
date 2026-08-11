@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-09-Proveer-El-Sello-Del-Reloj-Del-Sistema.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.2.P.11 punto 3 (el reloj es un puerto, para que las fechas de alta y de modificación sean verificables en prueba) y §17.3.P.4 (ampliación del 2026-08-09, sellos de tiempo del trabajo); implementa el puerto de reloj del sistema de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3

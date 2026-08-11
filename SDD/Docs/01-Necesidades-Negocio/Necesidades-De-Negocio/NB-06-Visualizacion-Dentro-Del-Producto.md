@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-06-Visualizacion-Dentro-Del-Producto.md |
 | Versión | 1.5 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-11 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE **1.19** §1 (idea y problema), §3 (diferenciadores D-3 y D-4), §4 (capacidades F-11, F-13 y F-25, **las tres `Must Have`**), §4.1 (regla RN-11), §6 (flujos 2, 2.1 y 3), §15 (etapa `g` y puerta técnica `PT-02`), §17.7 P.3 (la sexta función de la fachada, que gobierna los dos movimientos), §17.7 P.8 (lo que `PT-02` mide antes de comprometer la etapa `g`, con la sincronización por índice y la disposición determinista entre sus propiedades), §17.7 P.10 (el movimiento automático no altera la disposición), §20 (escenarios E-1 y E-7); `Vision-Producto.md` §1, §3 y §9; `Alcance-Producto.md` §4.1 —donde viven las tres capacidades, F-25 desde su promoción del intake 1.7 y F-13 desde la del 1.19— y §8; `Roadmap-Producto.md` §3 y §5.2 |

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** US-07-Transportar-La-Solicitud-Unica-De-Eliminacion.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-04 Gestión del trabajo

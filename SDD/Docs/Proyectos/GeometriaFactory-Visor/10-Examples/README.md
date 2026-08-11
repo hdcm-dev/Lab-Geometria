@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `library`

@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** ADR-06-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Persistencia

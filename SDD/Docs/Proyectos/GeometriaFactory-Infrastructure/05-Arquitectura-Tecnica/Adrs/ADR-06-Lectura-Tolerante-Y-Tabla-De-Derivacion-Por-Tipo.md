@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Estilo

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** US-19-Transportar-El-Texto-Original-Sin-Normalizarlo-En-El-Borde.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Épica:** EP-04 Gestión del trabajo

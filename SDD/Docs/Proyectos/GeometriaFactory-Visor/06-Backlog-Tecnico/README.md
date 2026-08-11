@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 
@@ -56,6 +56,6 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. | Orquestador SDD |
+| 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos con su propósito, declara la ausencia de las dos carpetas de archivos individuales con su motivo, fija el orden de lectura, resume las tres épicas con su momento del producto y la constancia de que EP-02 no crea una etapa, y nombra las tareas técnicas prioritarias con el fundamento de cada una. |
 | 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4) y **cierra el hallazgo `D-06-04`** del informe [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **§1**: la nota de ausencia de las dos carpetas deja de presentarse como umbral aplicado y pasa a distinguir los dos casos —las dieciocho tareas están por debajo de toda banda, las catorce historias caen en la banda que la regla **recomienda** para archivo propio— y remite al fundamento de la elección, que se escribe en `Product-Backlog.md` §3. **§4**: las historias `Must Have` pasan de doce a **catorce**, con el desenlace de `PA-06` y con la remisión al apartamiento del 100 % `Must` declarado en `Product-Backlog.md` §4.2. Ninguna épica, tarea técnica ni Definition of Ready cambia. Sube minor. |

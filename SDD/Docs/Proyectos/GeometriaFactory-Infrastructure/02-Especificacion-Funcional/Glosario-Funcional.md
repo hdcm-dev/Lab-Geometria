@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Glosario-Funcional.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` y `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Glosario-Funcional.md` (vocabulario de las dos categorías de las que este proyecto de código depende); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.2, §12, §12.1, §17.3

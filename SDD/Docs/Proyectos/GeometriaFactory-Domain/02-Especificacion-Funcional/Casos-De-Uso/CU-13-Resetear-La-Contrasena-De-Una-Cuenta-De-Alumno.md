@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-13-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (**F-26**, F-03, **F-04** precisada), §4.1 (**RN-12**, **RN-13**, RN-01, RN-07, RN-14, RN-15, **RN-16**), §17.1.P.2 (**INV-09**, INV-05, INV-08), §17.1.P.5, §7 (**CL-7**), §9 (**X-2 retirada**, X-1 vigente), §11 (**RN-B6 tachado** el 2026-08-09 por el intake 1.10, porque F-26 dejó sin objeto su mitigación; lo que sostenía vive en §7 CL-7)

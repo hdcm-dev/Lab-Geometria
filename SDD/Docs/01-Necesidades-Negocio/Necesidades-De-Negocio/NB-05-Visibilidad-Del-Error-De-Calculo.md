@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-05-Visibilidad-Del-Error-De-Calculo.md |
 | Versión | 1.1 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (diferenciador D-2), §4 (capacidad F-10), §4.1 (regla RN-05), §4.2 (modelo de estados del trabajo), §6 (flujo 2), §7 (caso límite CL-4), §8 (métrica de valor didáctico entregado), §20 (escenarios E-1 a E-4), §22 (asunción A-2); `Vision-Producto.md` §1, §3, §5 y §9; `Alcance-Producto.md` §3 y §8 |

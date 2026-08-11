@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Glosario-Funcional.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena: §9.1 términos del dominio del cliente, §9.2 términos que esa categoría precisa, §9.3 resolución del choque de vocabulario); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1, §4.2, §12 y §12.1, §14, §17.6 P.3, P.4, P.5, P.10 y P.11; `../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Glosario-Funcional.md`; `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md` §2; `Vocabulario-Rules.md` §2, §4 y §9

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-15-Reseteo-Independiente-Del-Estado-De-Cuenta.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (enunciado de **RN-15**, RN-06, RN-12, **RN-16**), §4 (**F-26**, «el reseteo no exige que la cuenta esté habilitada»), §17.1.P.2 (**INV-06**, **INV-08**, y las reglas sin invariante asociado), §7 (**CL-7**); [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1

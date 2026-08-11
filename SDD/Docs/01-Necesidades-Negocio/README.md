@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | README.md |
 | Versión | 1.2 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-09 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | `Necesidades-Negocio.md` (índice maestro de esta categoría); `00-Contexto/Vision-Producto.md` §2 (stakeholders), `00-Contexto/README.md` §4 |

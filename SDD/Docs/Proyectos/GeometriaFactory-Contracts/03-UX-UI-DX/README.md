@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
 **Versión:** 1.7
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX

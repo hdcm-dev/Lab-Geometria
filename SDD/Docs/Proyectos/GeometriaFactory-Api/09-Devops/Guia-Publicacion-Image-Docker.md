@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Guia-Publicacion-Image-Docker.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api`

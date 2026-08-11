@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (localización del defecto, límite entre lo que no verifica y la entrega, acción única de guardado, conservación del original); [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) §5 (carácter no bloqueante, advertencia explicativa, cobertura sobre el escenario semilla); [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §5 (conservación del trabajo que no verifica); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-09, F-10, F-22), §4.1 (RN-05, RN-08, RN-09), §4.2, §6 (flujo 2 y flujo 4), §7 (CL-3, CL-4), §17.2.P.10, §17.2.P.11 puntos 1 y 2, §20.E-1; orquesta [`CU-06`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md), [`CU-07`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md), [`CU-08`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-08-Gobernar-El-Estado-Del-Trabajo.md) y [`CU-09`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) de GeometriaFactory-Domain

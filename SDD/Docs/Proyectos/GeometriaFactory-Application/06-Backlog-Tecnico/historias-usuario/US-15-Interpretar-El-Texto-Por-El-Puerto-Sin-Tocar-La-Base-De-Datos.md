@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** US-15-Interpretar-El-Texto-Por-El-Puerto-Sin-Tocar-La-Base-De-Datos.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-05 Interpretación y verificación del dato del alumno

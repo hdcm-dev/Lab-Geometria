@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Glosario-Funcional.md
 **Versión:** 1.5
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena: §9.1 términos del dominio del cliente, §9.2 términos que esa categoría precisa, §9.3 resolución del choque de vocabulario); `PRODUCT-INTAKE` **1.14** §4.1, §4.2, §12 y §12.1, §17.4 P.2, P.3, P.5, P.10 y P.11; `Vocabulario-Rules.md` §2, §4 y §9

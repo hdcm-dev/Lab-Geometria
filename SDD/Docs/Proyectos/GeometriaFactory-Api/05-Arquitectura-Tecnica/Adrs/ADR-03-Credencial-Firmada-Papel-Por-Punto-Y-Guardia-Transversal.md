@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** ADR-03-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Seguridad

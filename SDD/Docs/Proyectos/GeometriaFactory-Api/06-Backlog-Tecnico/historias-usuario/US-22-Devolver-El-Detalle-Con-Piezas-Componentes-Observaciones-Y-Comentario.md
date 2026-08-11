@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** US-22-Devolver-El-Detalle-Con-Piezas-Componentes-Observaciones-Y-Comentario.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Épica:** EP-04 Gestión del trabajo

@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `Especificacion-Funcional.md` §3 (catálogo de casos de uso) y §5 (matriz de trazabilidad); `../../../00-Contexto/Vision-Producto.md` §3 y §9; `../../../00-Contexto/Alcance-Producto.md` §4.1; `../../../00-Contexto/Compatibilidad-Plataformas.md` §2.2 y §4; `../../../01-Necesidades-Negocio/Necesidades-Negocio.md` §2; `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md` §5 y §7; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §14 (RA-02) y §17.7
