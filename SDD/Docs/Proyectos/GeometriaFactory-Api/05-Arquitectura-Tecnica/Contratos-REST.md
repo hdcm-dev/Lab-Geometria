@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -65,6 +65,8 @@ Emitir una descripción formal contra esa decisión crearía **una segunda fuent
 | Lectura de la petición | **Estricta**: un campo desconocido se rechaza con `400` | Aceptarlo en silencio deja que un extremo desactualizado envíe algo que el otro descarta sin decirlo |
 | Tamaño del cuerpo | **Un solo límite en todo el producto, tomado de configuración. El cuerpo que lo excede se rechaza con `400`. Nunca se trunca** | Truncar rompe `RN-08` **en silencio**: el trabajo queda guardado con el texto mutilado |
 | Texto original del alumno | **No se normaliza en el borde**: no se recodifica, no se recortan espacios, no se normalizan saltos de línea | El borde del proceso es el primer lugar donde el texto puede alterarse |
+
+**Ocho filas, y no son ocho reglas de formato: son seis, más dos que no lo son.** Las **seis reglas de formato** son las que numera [`ADR-02`](Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 —nombres de campo, conjuntos cerrados, campos nulos, números decimales, lectura de la petición y tamaño del cuerpo—, y **son ellas** las que están elegidas para que **ninguna dependa de que dos configuraciones coincidan**. Las otras dos filas viven en la misma tabla porque rigen la misma frontera, pero no son reglas sobre el formato: la **notación** es el formato mismo, y la **prohibición de normalizar el texto original** la declara `ADR-02` explícitamente como no siendo de formato. **6 + 1 + 1 = 8**, y el contenido de las ocho coincide punto por punto con el de la ADR.
 
 **Transporte.** Petición y respuesta, **sin estado**, con la credencial firmada en la cabecera de autorización. En desarrollo se escucha **sin certificado**, para evitar la fricción del certificado de confianza dentro del contenedor. **Un puerto publicado hacia el enrutador es el único punto de entrada al servidor propio.**
 
@@ -195,7 +197,7 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | Cambiar el papel que un punto exige, o sacarlo de la guardia | Mayor | Despliegue conjunto, **y modificación de [`ADR-03`](Adrs/ADR-03-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md)** |
 | Cambiar el código de respuesta de un código del contrato | Mayor | Despliegue conjunto |
 | Quitar un código del conjunto cerrado, o reciclar un identificador retirado | Mayor | Es del ensamblado de contratos, **y reponer un identificador retirado se rechaza aunque compile** |
-| Cambiar cualquiera de las ocho reglas de §2.2 | Mayor | **Los dos extremos a la vez**: es la clase de cambio que **no rompe ninguna compilación** |
+| Cambiar cualquiera de las ocho filas de §2.2 —las seis reglas de formato o las dos que no lo son— | Mayor | **Los dos extremos a la vez**: es la clase de cambio que **no rompe ninguna compilación** |
 | Agregar un punto de acceso | Menor | Entra a la tabla de §3 **en la misma intervención**, y la prueba de inspección de la guardia falla si no está |
 | Agregar un código al conjunto cerrado | Menor | Entra a la tabla de §5 con su destino |
 | Corregir un punto para que cumpla lo que ya declaraba | Parche | Ninguna |
@@ -225,3 +227,4 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara el apartamiento de la descripción formal de servicio con el fundamento de la fuente, **fija el formato de intercambio y su configuración para los dos extremos** con sus ocho reglas —cerrando el punto abierto que `GeometriaFactory-Contracts` reasignó y `GeometriaFactory-Web` devolvió—, adopta los quince puntos de acceso con la columna de caso de uso que cada uno ejerce, los diez códigos de respuesta con las dos ausencias informativas, y publica la **tabla de traducción con sus quince filas** —catorce con destino y una sin él—, las dos respuestas sin código, los dos huecos declarados, las dos señales que no son fallos, la prohibición de `RA-03` y la política de versionado sin versionado de rutas con las tres clases de cambio que la compilación no detecta. |
+| 1.1 | 2026-08-10 | **Cierra el hallazgo `C-05-03` (P2) del informe de auditoría [`../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0**, en su mitad de este documento. §2.2 publicaba **ocho** filas bajo la columna `Regla` y §9 hablaba de «las ocho reglas», mientras [`ADR-02`](Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 numeraba **seis**: el mismo objeto con dos recuentos en la misma ola, en el artefacto que cierra un reasignado entre capas. **No había contradicción de contenido**, y se verificó fila por fila. §2.2 agrega el cuadre explícito **6 + 1 + 1 = 8**, nombrando las **seis reglas de formato** y las **dos filas que no lo son** —la notación y la prohibición de normalizar el texto original—, y aclarando que el predicado «ninguna depende de que dos configuraciones coincidan» se predica de las seis. §9 pasa a decir «las ocho **filas** de §2.2». **Ninguna fila de la tabla, ningún punto de acceso, ningún código y ninguna política de versionado cambia.** Sube minor. |

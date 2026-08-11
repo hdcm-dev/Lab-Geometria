@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** DX-Error-Messages.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
@@ -113,15 +113,15 @@ Tres familias de respuestas dicen **menos de lo que el servicio sabe**, y en las
 | --- | --- | --- | --- |
 | **Entrada inválida** | Lo que llegó no es utilizable: falta un campo, o el que llegó no cumple lo que el contrato le pide | 3 | `400` |
 | **Credencial no admitida** | La credencial presentada no habilita | 2 | `401` |
-| **Situación de la cuenta** | La cuenta existe y su situación impide la operación. **Estas tres llevan motivo**, y es lo que permite derivar a la pantalla correcta | 3 | `403` |
+| **Situación de la cuenta** | La cuenta existe y su situación impide la operación. **Estas dos llevan motivo**, y es lo que permite derivar a la pantalla correcta | 2 | `403` |
 | **Facultad** | El papel no habilita la operación | 1 | `403` |
 | **Recurso no visible** | Lo pedido no existe, no es del solicitante o está fuera de lo que ve | 2 | `404` |
-| **Conflicto de estado** | La operación es legítima y el estado no la admite | 6 | `409` |
+| **Conflicto de estado** | La operación es legítima y el estado no la admite | 5 | `409` |
 | **No clasificado** | Lo que el conjunto cerrado no previó, o lo que el mundo no dejó completar | 1 | `403`, `409`, `500` o `503` |
 
-**Dieciocho entradas**, y el reparto por código de respuesta cierra: 3 + 2 + 3 + 1 + 2 + 6 + 1 = 18.
+**Dieciséis entradas**, y el reparto por código de respuesta cierra: 3 + 2 + 2 + 1 + 2 + 5 + 1 = 16.
 
-**La categoría de conflicto de estado es la más poblada, y es la señal más clara de dónde está esta capa.** Seis de las dieciocho entradas describen operaciones **legítimas, pedidas por quien tiene derecho a pedirlas**, que el estado del sistema no admite. Es lo que le pasa a un producto con una máquina de estados que importa: la mayoría de sus negativas no son de seguridad.
+**La categoría de conflicto de estado es la más poblada, y es la señal más clara de dónde está esta capa.** Cinco de las dieciséis entradas describen operaciones **legítimas, pedidas por quien tiene derecho a pedirlas**, que el estado del sistema no admite. Es lo que le pasa a un producto con una máquina de estados que importa: la mayoría de sus negativas no son de seguridad.
 
 ### 2.2 Las dos respuestas sin código del contrato
 
@@ -200,7 +200,7 @@ Respuesta `404`. Es la segunda familia empobrecida de §1.5, y **la que sostiene
 
 ### 3.6 Conflicto de estado
 
-Respuesta `409`. **Seis entradas, la categoría más poblada.** Todas describen operaciones legítimas que el estado del sistema no admite, y en todas **quien pide tiene derecho a pedir**.
+Respuesta `409`. **Cinco entradas, la categoría más poblada.** Todas describen operaciones legítimas que el estado del sistema no admite, y en todas **quien pide tiene derecho a pedir**.
 
 | Código del contrato | Mensaje | Causa probable | Qué hace el consumidor |
 | --- | --- | --- | --- |
@@ -248,17 +248,17 @@ Dos excepciones declaradas a la regla de calificación, que no son defectos: **l
 | --- | --- |
 | Casos de uso de los que deriva el catálogo | **12** (CU-01 a CU-12) |
 | Casos de uso **con** condiciones declaradas en su §6 | **9**. `CU-10`, `CU-11` y `CU-12` no declaran ninguna respuesta de fallo de la superficie, y §6.2 explica por qué |
-| Códigos del conjunto cerrado del ensamblado de contratos | **17** |
-| Códigos **con** destino en esta superficie | **16** |
+| Códigos del conjunto cerrado del ensamblado de contratos | **15** |
+| Códigos **con** destino en esta superficie | **14** |
 | Códigos **sin** destino, declarados | **1** — el que describe la ausencia de respuesta de esta pieza (§2.3) |
 | Respuestas **sin** código del contrato, declaradas | **2** (§2.2) |
-| **Entradas del catálogo** | **18** = 16 + 2 |
+| **Entradas del catálogo** | **16** = 14 + 2 |
 | Códigos inventados por esta categoría | **0** |
 | Códigos del conjunto cerrado sin entrada en el catálogo | **0**, salvo el declarado sin destino |
 | Resultados que **no** son fallos, reunidos en §1.2 | **2**, ninguno de ellos entrada de este catálogo |
 | Huecos del conjunto cerrado declarados y elevados | **2** (§2.4) |
 
-Cuadre: **16 + 1 = 17** códigos del conjunto cerrado, y **16 + 2 = 18** entradas del catálogo.
+Cuadre: **14 + 1 = 15** códigos del conjunto cerrado, y **14 + 2 = 16** entradas del catálogo. El conjunto cerrado vivo es el que publica la tabla de traducción de [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5, con sus **quince** filas —catorce con destino y una sin él—, y es contra ella que este recuento cuadra.
 
 ### 6.2 Verificación mecánica de cobertura
 
@@ -268,17 +268,17 @@ La verificación se hizo en las dos direcciones y su resultado se deja escrito p
 | --- | --- | --- |
 | Entrada inválida | 3 | `400` |
 | Credencial no admitida | 2 | `401` |
-| Situación de la cuenta | 3 | `403` |
+| Situación de la cuenta | 2 | `403` |
 | Facultad | 1 | `403` |
 | Recurso no visible | 2 | `404` |
-| Conflicto de estado | 6 | `409` |
+| Conflicto de estado | 5 | `409` |
 | No clasificado | 1 | `403`, `409`, `500`, `503` |
-| **Total** | **18** | **Diez códigos de respuesta distintos en toda la superficie**, contando los tres de éxito —`200`, `201`, `204`— que no son de este catálogo |
+| **Total** | **16** | **Diez códigos de respuesta distintos en toda la superficie**, contando los tres de éxito —`200`, `201`, `204`— que no son de este catálogo |
 
 Las tres comprobaciones que cierran la verificación:
 
-- **De contrato a catálogo.** Los **17** códigos del conjunto cerrado se recorrieron uno por uno: **16** tienen entrada y **1** está declarado sin destino. **0** quedaron sin tratar.
-- **De catálogo a contrato.** Las **18** entradas se recorrieron en sentido inverso: **16** citan un código que pertenece al conjunto cerrado y **2** declaran explícitamente no llevar ninguno. **0 códigos inventados**.
+- **De contrato a catálogo.** Los **15** códigos del conjunto cerrado se recorrieron uno por uno: **14** tienen entrada y **1** está declarado sin destino. **0** quedaron sin tratar.
+- **De catálogo a contrato.** Las **16** entradas se recorrieron en sentido inverso: **14** citan un código que pertenece al conjunto cerrado y **2** declaran explícitamente no llevar ninguno. **0 códigos inventados**.
 - **Los tres casos de uso sin entrada, y su ausencia declarada.** `CU-10` falla **antes de que exista ninguna petición que responder** —sus dos condiciones detienen la construcción y no producen respuesta—; `CU-11` falla **deteniendo el arranque**, que tampoco produce respuesta, y su única respuesta de fallo es la del punto de salud, que es un `503` sin código del contrato y está cubierta por la entrada de no clasificado; `CU-12` **no produce condiciones, las provoca**. Los tres se declaran para que su ausencia no se lea como cobertura faltante.
 
 ### 6.3 Trazabilidad del artefacto
@@ -306,3 +306,4 @@ Las tres comprobaciones que cierran la verificación:
 | 1.0 | 2026-08-10 | Emisión inicial. Cataloga las **18** entradas derivadas de la §6 de los doce casos de uso y del conjunto cerrado de **diecisiete** códigos del ensamblado de contratos: **16 códigos con destino**, **1 declarado sin destino** y **2 respuestas sin código**. Declara los **dos resultados que no son fallos** con la confusión más cara de esta capa; la prohibición de §1.4 con su contracara de registro; **las tres familias deliberadamente empobrecidas** y la prueba única que las cubre; la taxonomía de siete categorías con su reparto por código de respuesta; **los dos huecos del conjunto cerrado**, elevados al Product Owner, que son el motivo por el que el código genérico tiene cuatro destinos; y la ausencia declarada de `CU-10`, `CU-11` y `CU-12` del catálogo, con el motivo de cada una. |
 | 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**, que unifican en uno los dos mecanismos de credencial inicial del producto. El conjunto cerrado del ensamblado pasa de diecisiete a **quince** códigos y este catálogo de **dieciocho a dieciséis entradas**: salen `CONTRATO_CONTRASENA_NO_ESTABLECIDA` de §3.3 y `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` de §3.6, las dos **por imposibilidad de su causa** y no por simplificación, y **ninguna la reemplaza**. La entrada de `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` pasa a declarar los **dos orígenes** de la marca y a ser también el mensaje del primer ingreso. §2.1 y §6 actualizan los recuentos del conjunto cerrado, de los puntos de acceso —de dieciséis a **quince**, con el retiro de `A-04`— y de la US prevista. La cabecera cita el intake **1.13**. **Las tres familias empobrecidas y las dos respuestas sin código no cambian.** Sube minor. |
 | 1.2 | 2026-08-10 | **Cierra el hallazgo `C-04` (P1) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** La última oración de **§2.3** declaraba «son **dieciséis** códigos con destino sobre **diecisiete**» dos párrafos después de que la misma sección declarara, correctamente, un conjunto cerrado de **quince**. Pasa a «**catorce** códigos con destino sobre **quince**», que es lo que declara la fuente hermana de este mismo proyecto de código —`02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §6: «Quince códigos: catorce con destino en esta superficie y uno sin él»— y lo que da el recuento sobre la tabla de traducción, contada fila por fila. El recuento es el que la propia oración pide que una revisión posterior no levante como cobertura faltante, de modo que blindaba el número equivocado. La cabecera pasa a citar el intake **1.14**. **Ninguna entrada del catálogo, ningún código de respuesta y ningún hueco declarado cambia.** Sube minor. |
+| 1.3 | 2026-08-10 | **Cierra el hallazgo `C-05-04` (P1) del informe de auditoría [`../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0**, y con él el `C-05-05` (P2) derivado. La emisión 1.1 retiró dos entradas por **RN-16** y actualizó §2.3, §2.4 y el encabezado de §3, pero **no recontó las tablas de §2.1 ni de §6**, que siguieron declarando los números anteriores. Los cuatro bloques congelados se llevan al recuento verdadero, **contado fila por fila sobre las siete tablas de §3.1 a §3.7**: **§2.1** pasa a `Situación de la cuenta` **2** —con «estas **dos** llevan motivo»— y `Conflicto de estado` **5**, con el total en **dieciséis** y el reparto **3 + 2 + 2 + 1 + 2 + 5 + 1 = 16**, y el párrafo siguiente a «**cinco** de las **dieciséis**»; el encabezado de **§3.6** pasa de «seis entradas» a «**cinco** entradas», sin dejar de ser la categoría más poblada; **§6.1** pasa a **15** códigos del conjunto cerrado, **14** con destino, **1** sin destino, **2** respuestas sin código y **16 = 14 + 2** entradas, con el cuadre **14 + 1 = 15** y **14 + 2 = 16**, y **cita explícitamente la tabla de traducción de `../05-Arquitectura-Tecnica/Contratos-REST.md` §5 como su cuadre**, que es lo que pide `C-05-05`; **§6.2** repone la tabla de siete categorías con 2 y 5, totaliza **16**, y sus dos comprobaciones pasan a **15 / 14 / 1** y **16 / 14 / 2**. **«Diez códigos de respuesta distintos» de §6.2 se verificó aparte y es correcto: no se toca** —`400`, `401`, `403`, `404`, `409`, `500`, `503`, más `200`, `201` y `204`—. **Ninguna entrada, ningún código del contrato, ningún código de respuesta, ninguna familia empobrecida y ningún hueco declarado cambia**: lo que cambia son cuatro recuentos que describían un catálogo anterior al retiro de `RN-16`. Sube minor. |

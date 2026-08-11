@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -22,7 +22,7 @@ Motivación upstream: NB-03, NB-04, NB-09; RN-08, RN-09; `PRODUCT-INTAKE` §17.5
 
 ## 2. Decisión
 
-**El formato de intercambio es el que el intake declara —notación de objetos de texto, sobre los tipos de `GeometriaFactory-Contracts`— y su configuración se declara una sola vez, en un lugar citable por los dos extremos.** Seis reglas, y las seis son verificables:
+**El formato de intercambio es el que el intake declara —notación de objetos de texto, sobre los tipos de `GeometriaFactory-Contracts`— y su configuración se declara una sola vez, en un lugar citable por los dos extremos.** **Seis reglas de formato**, y las seis son verificables:
 
 1. **Los campos se nombran exactamente como los declara el tipo de transferencia.** No hay transformación de estilo entre el nombre del campo y el nombre en el texto. Es la única convención que **no puede desincronizarse**, porque no hay nada que configurar distinto en cada lado.
 2. **Los valores de conjunto cerrado viajan por su nombre y nunca por su posición.** El producto tiene **cuatro** conjuntos cerrados —papel de la cuenta, estado de cuenta, estado del trabajo y especie de observación— y un valor nuevo insertado en el medio cambiaría el significado de todos los datos ya emitidos si viajaran por posición. Es la regla que más silenciosamente se rompe.
@@ -35,6 +35,8 @@ Motivación upstream: NB-03, NB-04, NB-09; RN-08, RN-09; `PRODUCT-INTAKE` §17.5
 
 **Esta decisión obliga a los dos extremos.** `GeometriaFactory-Web` declaró que la adopta; la verificación de que efectivamente coinciden es la batería de integración, que golpea el servicio real.
 
+**Cómo se cuenta esto, para que no haya dos números del mismo objeto.** [`../Contratos-REST.md`](../Contratos-REST.md) §2.2 publica la tabla del formato con **ocho** filas bajo la columna `Regla`, y **son estas mismas, sin ninguna agregada ni ninguna quitada**: las **seis reglas de formato** numeradas acá, más la **notación** —que es el formato mismo y no una regla sobre él, y que esta ADR declara en su oración de encabezado—, más la **prohibición de normalizar el texto original**, que esta ADR declara explícitamente **no siendo regla de formato**. **6 + 1 + 1 = 8.** El predicado «ninguna depende de que dos configuraciones coincidan» se predica de las **seis** de formato, que son las que tienen configuración detrás.
+
 ## 3. Estado
 
 **Propuesto** desde 2026-08-10.
@@ -43,7 +45,7 @@ Motivación upstream: NB-03, NB-04, NB-09; RN-08, RN-09; `PRODUCT-INTAKE` §17.5
 
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
-| Una sola configuración declarada, con nombres literales, conjuntos por nombre, nulos emitidos, números sin cultura, lectura estricta y límite único (**adoptada**) | Cierra el trade-off que `Contracts ADR-01` aceptó por escrito; ninguna de las seis reglas depende de que los dos extremos se configuren igual **por separado** | Obliga a que un cambio de configuración se coordine entre dos proyectos de código, y la lectura estricta rompe ante un extremo desactualizado, aunque de forma ruidosa |
+| Una sola configuración declarada, con nombres literales, conjuntos por nombre, nulos emitidos, números sin cultura, lectura estricta y límite único (**adoptada**) | Cierra el trade-off que `Contracts ADR-01` aceptó por escrito; ninguna de las seis reglas de formato depende de que los dos extremos se configuren igual **por separado** | Obliga a que un cambio de configuración se coordine entre dos proyectos de código, y la lectura estricta rompe ante un extremo desactualizado, aunque de forma ruidosa |
 | No fijar nada y dejar que cada extremo se configure | Ningún acoplamiento de configuración | **Descartada.** Es exactamente el riesgo que `Contracts ADR-01` declaró aceptado y que las dos categorías 05 destinatarias tenían que cerrar. Además `GeometriaFactory-Web` ya declaró que no lo decide de un solo lado |
 | Transformar el estilo de los nombres al serializar | Es la convención habitual en superficies públicas | **Descartada.** Introduce una configuración que **puede diferir entre extremos sin romper la compilación**, y esta superficie no tiene clientes de terceros a quienes esa convención les importe. Ganancia cero, riesgo real |
 | Omitir los campos nulos | Cuerpos más chicos, que en el listado de la comisión no es despreciable | **Descartada.** La nulidad significa cosas en este producto, y el listado ya está acotado por la proyección sin componentes ni texto original, que es donde estaba el peso de verdad |
@@ -53,7 +55,7 @@ Motivación upstream: NB-03, NB-04, NB-09; RN-08, RN-09; `PRODUCT-INTAKE` §17.5
 ## 5. Consecuencias positivas
 
 1. **Cierra el punto abierto que `GeometriaFactory-Contracts` reasignó y que `GeometriaFactory-Web` devolvió a esta categoría**, sin que ninguno de los tres proyectos de código haya decidido de un solo lado.
-2. Las seis reglas están elegidas para que **ninguna dependa de que dos configuraciones coincidan**: los nombres son literales, los conjuntos viajan por nombre, la nulidad es explícita y el número no tiene cultura.
+2. Las seis reglas de formato están elegidas para que **ninguna dependa de que dos configuraciones coincidan**: los nombres son literales, los conjuntos viajan por nombre, la nulidad es explícita y el número no tiene cultura.
 3. `RN-08` queda protegida en el único lugar del backend donde el texto puede alterarse por transporte, con una prueba byte a byte.
 4. `RN-09` queda protegida al traducir: la posición y el campo cruzan la frontera sin recortarse.
 5. Un valor nuevo en cualquiera de los cuatro conjuntos cerrados no cambia el significado de ningún dato ya emitido.
@@ -87,7 +89,7 @@ Motivación upstream: NB-03, NB-04, NB-09; RN-08, RN-09; `PRODUCT-INTAKE` §17.5
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-08, RN-09), §17.4.P.3, §17.4.P.11 punto 2, §17.5.P.3 y §20.E-8.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §4.1 (RN-08, RN-09), §17.4.P.3, §17.4.P.11 punto 2, §17.5.P.3 y §20.E-8.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md`](../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) §6 punto 4, que es el trade-off que esta ADR cierra.
 - [`../../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 `PA-03`, que reasigna la decisión a esta categoría.
 - [`../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md`](../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2 punto 3, que reasigna el límite de tamaño acá con la exigencia de rechazar y no truncar.
@@ -97,4 +99,5 @@ Motivación upstream: NB-03, NB-04, NB-09; RN-08, RN-09; `PRODUCT-INTAKE` §17.5
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-10 | Emisión inicial. **Cierra el punto abierto del formato de intercambio que `GeometriaFactory-Contracts` reasignó y que `GeometriaFactory-Web` devolvió a esta categoría por ser la del productor**, con seis reglas elegidas para que ninguna dependa de que dos configuraciones coincidan, más la prohibición de normalizar el texto original en el borde. **Cierra también la forma del límite de tamaño de cuerpo que `GeometriaFactory-Infrastructure` reasignó**: uno solo, de configuración, que rechaza y nunca trunca. Evalúa seis alternativas, declara cuatro trade-offs y fija siete métricas de validación. |
+| 1.0 | 2026-08-10 | Emisión inicial. **Cierra el punto abierto del formato de intercambio que `GeometriaFactory-Contracts` reasignó y que `GeometriaFactory-Web` devolvió a esta categoría por ser la del productor**, con seis reglas de formato elegidas para que ninguna dependa de que dos configuraciones coincidan, más la prohibición de normalizar el texto original en el borde. **Cierra también la forma del límite de tamaño de cuerpo que `GeometriaFactory-Infrastructure` reasignó**: uno solo, de configuración, que rechaza y nunca trunca. Evalúa seis alternativas, declara cuatro trade-offs y fija siete métricas de validación. |
+| 1.1 | 2026-08-10 | **Cierra el hallazgo `C-05-03` (P2) del informe de auditoría [`../../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0.** El mismo objeto se contaba con dos números en la misma ola: esta ADR decía «**seis** reglas» en §2, §4 y §10, mientras [`../Contratos-REST.md`](../Contratos-REST.md) §2.2 publica **ocho** filas bajo la columna `Regla`, su §9 declara «sus **ocho** reglas» y el README de la sección dice «**ocho** reglas elegidas para que ninguna dependa de que dos configuraciones coincidan» —predicado que acá se predica de las seis—. **No había contradicción de contenido: las ocho filas del contrato son exactamente las seis numeradas de esta ADR, más la notación y más el texto original**, y coinciden punto por punto. Lo que faltaba era que el lector pudiera reconciliar los dos números sin abrir los dos archivos y hacer la resta. Se unifica **nombrando los conjuntos**: las seis pasan a llamarse **reglas de formato** en §2, §4 y §5, y §2 agrega el cuadre explícito **6 + 1 + 1 = 8** identificando las dos filas que no son reglas de formato —la **notación**, que es el formato mismo, y la **prohibición de normalizar el texto original**, que esta ADR ya declaraba como no siendo regla de formato—. La referencia del intake pasa a **1.18**. **La decisión no cambia: ninguna regla se agrega, se quita ni se reenuncia**, y las siete métricas de validación de §8 quedan intactas. Sube minor. |

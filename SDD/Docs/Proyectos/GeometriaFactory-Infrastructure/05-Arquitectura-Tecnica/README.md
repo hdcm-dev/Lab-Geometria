@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -21,7 +21,7 @@ Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los
 
 | Documento | Propósito |
 | --- | --- |
-| [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) | Documento maestro: estilo, las cuatro vistas mínimas, cross-cutting, catorce NFR, ocho riesgos, trazabilidad de las dieciséis reglas, de los nueve invariantes, de las tres reglas de arquitectura y de los ocho escenarios, y once puntos abiertos |
+| [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) | Documento maestro: estilo, las cuatro vistas mínimas, cross-cutting, catorce NFR, ocho riesgos, trazabilidad de las dieciséis reglas, de los nueve invariantes, de las tres reglas de arquitectura y de los ocho escenarios, y once puntos abiertos —diez abiertos y `PA-08` resuelto— |
 | [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) | Índice de las siete ADR, con las dos categorías de decisión que quedan vacías y la tabla de consulta rápida por preocupación |
 | [`Contratos-Abstractions.md`](Contratos-Abstractions.md) | Contrato de la superficie: siete operaciones en tres clases, qué cruza cada frontera, manejo de errores y versionado |
 | [`Modelo-Datos-Logico.md`](Modelo-Datos-Logico.md) | Esquema físico: cinco tablas, seis índices, quince restricciones y la transformación inicial. **Es el único documento del producto que describe el esquema del dato guardado** |
@@ -84,3 +84,4 @@ Siete puntos abiertos llegaron a esta categoría, y conviene decir qué pasó co
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de la sección: los seis documentos vigentes, las siete ADR con su estado, los catorce NFR en una línea, el orden de lectura de seis pasos, los artefactos emitidos como apartamiento declarado y los omitidos con su motivo, y el destino de los siete puntos abiertos que llegaron a esta categoría, cuatro resueltos, uno resuelto a medias, uno reasignado con fundamento y uno declarado no resoluble acá. |
+| 1.1 | 2026-08-10 | **Arrastre del cierre del hallazgo `C-05-01` (P1)** del informe de auditoría [`../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0. La fila de `Arquitectura-Proyecto-Codigo.md` de §2 declaraba «once puntos abiertos» sin distinguir estado; pasa a **«once puntos abiertos —diez abiertos y `PA-08` resuelto—»**, que es el reparto que el documento maestro declara desde su versión 1.1 tras cerrarse el recuento de escenarios contra `PRODUCT-INTAKE` **1.18**. **Ningún documento de la sección, ninguna ADR y ningún NFR cambia.** Sube minor. |

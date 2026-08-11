@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -70,7 +70,7 @@ Cinco puntos abiertos llegaron a esta categoría desde otras Fases C, y conviene
 
 | Punto que llegó | Qué hizo esta sección |
 | --- | --- |
-| El **formato de intercambio y su configuración**, derivado por la Fase C de `GeometriaFactory-Contracts` a las categorías 05 de este proyecto de código y de `GeometriaFactory-Web`, y devuelto por aquélla a ésta por ser la del **productor** | **Resuelto, y para los dos extremos.** [`ADR-02`](Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) y [`Contratos-REST.md`](Contratos-REST.md) §2.2: ocho reglas elegidas para que **ninguna dependa de que dos configuraciones coincidan**. `GeometriaFactory-Web` ya declaró que la adopta |
+| El **formato de intercambio y su configuración**, derivado por la Fase C de `GeometriaFactory-Contracts` a las categorías 05 de este proyecto de código y de `GeometriaFactory-Web`, y devuelto por aquélla a ésta por ser la del **productor** | **Resuelto, y para los dos extremos.** [`ADR-02`](Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) y [`Contratos-REST.md`](Contratos-REST.md) §2.2: **ocho filas**, de las cuales las **seis reglas de formato** están elegidas para que **ninguna dependa de que dos configuraciones coincidan**, y las otras dos —la notación y la prohibición de normalizar el texto original— rigen la misma frontera sin ser reglas de formato. El cuadre **6 + 1 + 1 = 8** está en `ADR-02` §2 y en `Contratos-REST.md` §2.2. `GeometriaFactory-Web` ya declaró que la adopta |
 | El **límite de tamaño del cuerpo**, reasignado por la Fase C de `GeometriaFactory-Infrastructure` con la exigencia de que el borde **rechace y nunca trunque** | **Resuelto en su forma, abierto en su número.** [`ADR-02`](Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 punto 6: **un solo límite en todo el producto**, tomado de configuración, que rechaza y nunca trunca. El valor se ancla en la etapa `a`. Sigue como `PA-05` |
 | La **vigencia exacta de la credencial firmada**, declarada abierta por `GeometriaFactory-Infrastructure` | **Resuelto en su criterio, abierto en su número.** [`ADR-03`](Adrs/ADR-03-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md) §2 punto 5: que caduque dentro de la sesión de trabajo de una clase, con renovación por reingreso. Sigue como `PA-04` |
 | Los **dos huecos del conjunto cerrado de códigos** —la facultad fuera del desenlace y el estado que no permite reenviar—, levantados por la categoría 02 | **No resueltos, y con fundamento.** [`ADR-04`](Adrs/ADR-04-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md) **no inventa códigos**: los códigos son del ensamblado de contratos, y agregarlos es del Product Owner y de aquel proyecto de código. Se usa el genérico y **el hueco se declara** como el síntoma medible de los cuatro destinos de ese código. Siguen como `PA-02` y `PA-03` |
@@ -81,3 +81,4 @@ Cinco puntos abiertos llegaron a esta categoría desde otras Fases C, y conviene
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de la sección: los cuatro documentos vigentes, las ocho ADR con su estado, los diecisiete NFR en una línea, el orden de lectura de seis pasos, los cuatro artefactos omitidos —dos de ellos con **apartamiento declarado** frente a la guía del tipo, y con el fundamento de la fuente en el caso de la descripción formal de servicio— y el destino de los cinco puntos abiertos que otras Fases C reasignaron a ésta, uno resuelto por completo, dos resueltos en su criterio y abiertos en su número, y dos declarados no resolubles acá. |
+| 1.1 | 2026-08-10 | **Arrastre del cierre del hallazgo `C-05-03` (P2)** del informe de auditoría [`../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0. La fila del formato de intercambio de §7 importaba el número **ocho** de `Contratos-REST.md` §2.2 mientras citaba el fundamento de `ADR-02`, que allí se predica de **seis**. Pasa a declarar el reparto —**ocho filas**, de las cuales seis son reglas de formato y dos no lo son— y a remitir al cuadre **6 + 1 + 1 = 8** que las dos fuentes publican desde sus versiones 1.1. **Ningún documento de la sección, ninguna ADR y ningún NFR cambia.** Sube minor. |
