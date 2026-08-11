@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Backlog-Tecnico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1 (los **cinco** componentes), §5 (etapas del pipeline), §8 (los **seis** NFR), §9 (los **cinco** riesgos) y §11 (los **cuatro** puntos abiertos); las **seis** ADR de [`../05-Arquitectura-Tecnica/Adrs/`](../05-Arquitectura-Tecnica/Adrs/); [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) 1.5 (las **42** condiciones); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §15 (etapas y reglas de delivery), §16 (estructura de repositorio) y §17.1.P.6 a P.11
@@ -134,10 +134,11 @@ Las dieciséis filas están, una por tarea técnica, sin agrupar. Los casos de u
 | BT-15 | Infraestructura compartida | — (puerta de cobertura y de tiempo) | `05` §11 PA-02 |
 | BT-16 | US-03 | CU-01 | `02` §9, punto abierto |
 
-**Cobertura inversa: los trece casos de uso tienen al menos una tarea técnica que los realiza.** CU-01 en BT-06, BT-07, BT-08, BT-09, BT-10 y BT-16; CU-02 en BT-10, BT-11 y BT-12; CU-03 en BT-07, BT-10, BT-11 y BT-14; CU-04 en BT-11 y BT-14; CU-05 en BT-06, BT-09, BT-12 y BT-13; CU-06 en BT-06 y BT-13; CU-07 en BT-06, BT-08 y BT-13; CU-08 en BT-08, BT-12 y BT-13; CU-09 en BT-12; CU-10 en BT-12; CU-11 en BT-12 y BT-14; CU-12 en BT-06, BT-10 y BT-14; CU-13 en BT-10 y BT-11.
+**Cobertura inversa: los trece casos de uso tienen al menos una tarea técnica que los realiza.** CU-01 en BT-06, BT-07, BT-08, BT-09, BT-10 y BT-16; CU-02 en BT-10, BT-11 y BT-12; CU-03 en BT-07, BT-10, BT-11 y BT-14; CU-04 en BT-11 y BT-14; CU-05 en BT-06, BT-09, BT-12 y BT-13; CU-06 en BT-06 y BT-13; CU-07 en BT-06, BT-08 y BT-13; CU-08 en BT-08, BT-12, BT-13 y BT-14; CU-09 en BT-12; CU-10 en BT-12; CU-11 en BT-12 y BT-14; CU-12 en BT-06, BT-10 y BT-14; CU-13 en BT-10 y BT-11. **La enumeración es exhaustiva**: incluye las filas de alcance general —las que declaran un rango de casos de uso— junto con las específicas, y se reconstruyó desde la matriz fila por fila en lugar de escribirse a mano.
 
 ## 5. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del backlog técnico de `GeometriaFactory-Domain`. Declara **cinco** épicas técnicas con su objetivo, su alcance, su fuente upstream y la etapa en la que corren, y **dieciséis** tareas técnicas inline —por debajo del umbral de treinta— cada una con tipo, fuente upstream por identificador, dependencias, criterios de aceptación verificables y las historias que la consumen. Convierte en trabajo los cuatro puntos abiertos que las categorías 02 y 05 dejaron declarados —nombres de tipos y espacios de nombres, herramienta de cálculo de versión, los dos valores rotulados como asunción y el criterio de comparación de correos— en lugar de resolverlos por su cuenta. Emite la matriz BT ↔ US ↔ CU con sus dieciséis filas y su cobertura inversa sobre los trece casos de uso. La estimación queda sin fijar, con el fundamento de `Product-Backlog.md` §4.1. |
+| 1.1 | 2026-08-11 | **Cierra el hallazgo `D-06-02`** del informe de auditoría [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **§4**: la enumeración de cobertura inversa atribuía a **CU-08** las tareas BT-08, BT-12 y BT-13, y omitía **BT-14**, que la fila de esa misma matriz declara sobre «CU-04, CU-08, CU-11, CU-12, CU-03». La omisión no afectaba la cobertura —la afirmación «al menos una tarea técnica» era y sigue siendo verdadera para los trece casos de uso— pero sí la exhaustividad de una enumeración que se lee como completa y lo es para todas las demás filas. Se agrega BT-14 a la entrada de CU-08 y se declara explícitamente que la enumeración **es exhaustiva** y que incluye las filas de alcance general, para que la propiedad quede afirmada y verificable en vez de supuesta. **Se recontó la matriz entera**, reconstruyendo el diccionario inverso `CU → {BT}` desde las dieciséis filas: ésta era la única discrepancia. Ninguna tarea técnica, dependencia ni criterio cambia. Sube minor. |

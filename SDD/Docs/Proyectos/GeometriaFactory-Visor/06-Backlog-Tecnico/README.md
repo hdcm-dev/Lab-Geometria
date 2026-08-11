@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 
 ---
@@ -18,7 +18,7 @@
 | [`Backlog-Tecnico.md`](Backlog-Tecnico.md) | Cuatro épicas técnicas, dieciocho tareas técnicas inline y la matriz BT ↔ US ↔ CU |
 | [`Definition-Of-Ready.md`](Definition-Of-Ready.md) | Siete criterios de entrada para las historias y cinco para las tareas técnicas |
 
-**No hay `historias-usuario/` ni `tareas-tecnicas/`**, y es decisión declarada: las **catorce** historias están por debajo del umbral de veinte y las **dieciocho** tareas por debajo del de treinta, de modo que viven inline con la misma estructura obligatoria —criterios de aceptación, trazabilidad y verificación de entrada en las historias; justificación upstream, dependencias y criterios en las tareas—.
+**No hay `historias-usuario/` ni `tareas-tecnicas/`**, y es **elección declarada, no un umbral aplicado**. Las **dieciocho** tareas técnicas están por debajo del umbral de treinta y también por debajo de la banda que la regla recomienda para archivo propio, de modo que ahí no hay nada que elegir. **Las catorce historias sí caen en la banda de diez a veinte, que `Rules-Backlog-Tecnico.md` §2.1 clasifica como recomendada para archivo propio**, y este proyecto de código elige el modo inline: el fundamento está en [`Product-Backlog.md`](Product-Backlog.md) §3, «Por qué inline y no un archivo por historia», con sus tres motivos y con la condición para revisar la elección. En los dos modos la regla exige lo mismo y acá se cumple: criterios de aceptación, trazabilidad y verificación de entrada en las historias; justificación upstream, dependencias y criterios en las tareas.
 
 ## 2. Orden de lectura
 
@@ -40,7 +40,7 @@
 
 ## 4. Historias `Must Have` del tramo comprometido
 
-**Doce de las catorce.** Las dos `Should` —US-08 y US-09— derivan de `F-13`, la única capacidad `Should Have` que toca a este proyecto de código, y **las dos están dentro de lo que la puerta `PT-02` mide**: la tensión está elevada como `PA-06` en [`Product-Backlog.md`](Product-Backlog.md) §6 y **no se resolvió reprioritizando**.
+**Las catorce.** Desde el 2026-08-10 este backlog no tiene ninguna historia no-`Must`: las dos que eran `Should` —US-08 y US-09— derivan de `F-13`, y el Product Owner **promovió esa capacidad a `Must Have`** en `PRODUCT-INTAKE` **1.19**, cerrando la tensión que este backlog había elevado como `PA-06` y que **no había resuelto reprioritizando**. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada. El 100 % `Must` resultante queda declarado como apartamiento consciente en [`Product-Backlog.md`](Product-Backlog.md) §4.2, con su motivo.
 
 **Las catorce están dentro del tramo comprometido de ocho etapas**: este proyecto de código no tiene ninguna historia de la fase `i…`.
 
@@ -57,3 +57,4 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos con su propósito, declara la ausencia de las dos carpetas de archivos individuales con su motivo, fija el orden de lectura, resume las tres épicas con su momento del producto y la constancia de que EP-02 no crea una etapa, y nombra las tareas técnicas prioritarias con el fundamento de cada una. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4) y **cierra el hallazgo `D-06-04`** del informe [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **§1**: la nota de ausencia de las dos carpetas deja de presentarse como umbral aplicado y pasa a distinguir los dos casos —las dieciocho tareas están por debajo de toda banda, las catorce historias caen en la banda que la regla **recomienda** para archivo propio— y remite al fundamento de la elección, que se escribe en `Product-Backlog.md` §3. **§4**: las historias `Must Have` pasan de doce a **catorce**, con el desenlace de `PA-06` y con la remisión al apartamiento del 100 % `Must` declarado en `Product-Backlog.md` §4.2. Ninguna épica, tarea técnica ni Definition of Ready cambia. Sube minor. |

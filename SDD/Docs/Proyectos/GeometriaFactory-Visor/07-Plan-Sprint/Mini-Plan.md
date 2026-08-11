@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Mini-Plan.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + Maintainer Lead (AG-07)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) 1.0, [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) 1.0 y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §2.2, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §2, §10, §15, §16.1, §17.7 y §18; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) 1.1 §3, §4 y §7
+**Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) **1.1**, [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) **1.1** y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §2.2, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.19** §2, §10, §15, §16.1, §17.7 y §18; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) 1.1 §3, §4 y §7
 **Trazabilidad downstream:** `08-Calidad-Y-Pruebas`, `09-Devops`, `10-Examples` y `11-Documentacion` de GeometriaFactory-Visor
 
 ---
@@ -120,7 +120,7 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 
 **Total comprometido: 14 historias y 18 tareas técnicas**, repartidas en dos etapas y un momento. **Las catorce historias están dentro del tramo comprometido de ocho etapas**: este proyecto de código no tiene ninguna de la fase `i…`.
 
-**US-08 y US-09 figuran con prioridad de ejecución `Media` y `Alta` respectivamente**, y su MoSCoW en 06 es `Should` en las dos. La diferencia tiene motivo: US-09 está dentro de lo que `PT-02` mide y por eso su ejecución no es diferible, aunque su prioridad declarada lo admita. Es la tensión que 06 elevó como `PA-06` y que este plan **no resuelve** subiéndole la prioridad.
+**US-08 y US-09 figuran con prioridad de ejecución `Media` y `Alta` respectivamente**, y su MoSCoW en 06 es **`Must` en las dos** desde el 2026-08-10. La diferencia entre las dos columnas subsiste y tiene el mismo motivo de siempre: la prioridad de ejecución ordena **dentro** de la etapa y no dice qué se difiere, de modo que dos historias igual de comprometidas pueden tener orden distinto. Lo que desapareció es la contradicción: US-09 está dentro de lo que `PT-02` mide y por eso su ejecución no era diferible **aunque su MoSCoW lo admitiera**, y esa tensión —que 06 elevó como `PA-06` y que este plan se negó a resolver subiéndole la prioridad— la **cerró el Product Owner** promoviendo `F-13` a `Must Have` en `PRODUCT-INTAKE` **1.19**.
 
 ## 4. Alcance técnico y orden de construcción
 
@@ -200,3 +200,4 @@ La bitácora se completa **al cerrar cada tramo**. Para el tramo del medio, lo q
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Visor`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`— y por qué no se declara capacidad numérica, con el fundamento propio de que la categoría 05 ya se negó a inventar el único umbral que le faltaba. Declara los **tres tramos** de este proyecto de código —etapa `a`, el **momento** de medición de `PT-02` y `PT-03`, y etapa `g`— con la constancia explícita de que el del medio **no es una etapa nueva** sino un momento que el roadmap ya declara. Compromete las **14** historias y las **18** tareas técnicas del backlog de 06 sin inventar ningún identificador, declara el orden de construcción con el anclaje del motor de dibujo temprano, y **seis** riesgos con mitigación, incluido el de comprometer la etapa `g` antes de medir sus puertas. Registra la tensión de `PA-06` sin resolverla reprioritizando. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4), que cierra la tensión de `PA-06`. La cabecera pasa a citar el intake **1.19** y las versiones **1.1** de los dos artefactos de 06 que este plan consume. **§3**: la nota de US-08 y US-09 declara que su MoSCoW es hoy `Must` en las dos, conserva el motivo por el que la prioridad de ejecución sigue siendo distinta —ordena dentro de la etapa, no dice qué se difiere— y registra el desenlace de la tensión. **Ningún tramo, ningún orden de construcción, ningún riesgo y ningún compromiso cambia**: las catorce historias ya estaban comprometidas en este plan, que es precisamente lo que hacía visible la contradicción. Sube minor. |

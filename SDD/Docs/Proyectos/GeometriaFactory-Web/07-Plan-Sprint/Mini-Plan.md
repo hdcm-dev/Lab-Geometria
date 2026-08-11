@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Mini-Plan.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master (AG-07)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) 1.0 (ocho épicas, treinta historias), [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) 1.0 (veintitrés tareas técnicas) y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §2.2, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §2, §10, §15, §16.1 y §17.6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md); [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §3
+**Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) **1.1** (ocho épicas, treinta historias), [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) 1.0 (veintitrés tareas técnicas) y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §2.2, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.19** §2, §10, §15, §16.1 y §17.6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md); [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §3
 **Trazabilidad downstream:** `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de GeometriaFactory-Web
 
 ---
@@ -141,7 +141,7 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 
 **Total comprometido: 30 historias y 23 tareas técnicas**, repartidas en las **ocho** etapas más el momento de medición de `PT-02`. La prioridad de la columna es de **ejecución dentro de la etapa** y no reemplaza a la MoSCoW del backlog.
 
-**US-21 figura con prioridad de ejecución `Alta`**, y su MoSCoW en 06 es `Should`. La diferencia tiene motivo: está dentro de lo que `PT-02` mide y por eso **su ejecución no es diferible**, aunque su prioridad declarada lo admita. Es la tensión que 06 elevó como `PA-02` y que este plan **no resuelve** subiéndole la prioridad.
+**US-21 figura con prioridad de ejecución `Alta`**, y su MoSCoW en 06 es **`Must`** desde el 2026-08-10. Era `Should` hasta esa fecha, y la contradicción era visible acá: está dentro de lo que `PT-02` mide y por eso **su ejecución no era diferible**, aunque su prioridad declarada lo admitiera. Es la tensión que 06 elevó como `PA-02` y que este plan **no resolvió** subiéndole la prioridad; la **cerró el Product Owner** promoviendo `F-13` a `Must Have` en `PRODUCT-INTAKE` **1.19**. Con eso, **las treinta historias de este plan son `Must`**, que es coherente con que este proyecto de código toque las ocho etapas comprometidas.
 
 ## 4. Alcance técnico y orden de construcción
 
@@ -238,3 +238,4 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Web`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con los cuatro omitidos— y por qué no se declara capacidad numérica, con el fundamento propio de que la categoría 05 ya se negó a inventar el umbral de tiempo de respuesta. Declara que este proyecto de código toca **las ocho** etapas comprometidas y que además participa del **momento** de medición de `PT-02` y `PT-03`, con la constancia explícita de que ese momento **no es una etapa nueva** sino uno que el roadmap §2.2 ya declara. Compromete las **30** historias y las **23** tareas técnicas del backlog de 06 sin inventar ningún identificador, declara el orden de construcción con `PT-01` medida antes que cualquier otra cosa y con las cuatro reglas de dependencia interna que ninguna tarea puede cruzar, referencia la Definition of Done por destino con la constancia de que 08 todavía no está emitida, y declara **ocho** riesgos con mitigación, incluido el que la fuente declara **sin mitigación en el código**. Registra la tensión de `PA-02` sin resolverla reprioritizando. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4), que cierra la tensión de `PA-02`. La cabecera pasa a citar el intake **1.19** y la versión **1.1** del `Product-Backlog.md` que este plan consume. **§3**: la nota de US-21 declara que su MoSCoW es hoy `Must`, conserva la constancia de que este plan **no** resolvió la tensión reprioritizando y registra quién la resolvió y cuándo. **Ninguna etapa, ningún orden de construcción, ningún riesgo y ningún compromiso cambia**: US-21 ya estaba comprometida con prioridad de ejecución `Alta`, que es lo que hacía visible la contradicción. Sube minor. |

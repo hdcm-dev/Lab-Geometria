@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Product-Backlog.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §3 (los **siete** casos de uso), §5.1 (matriz con las historias previstas), §5.3 (cobertura de las nueve necesidades) y §6 (las **seis** propiedades transversales con sus condiciones de medición); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) (las **siete** garantías y los **siete** códigos de condición); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1 (los **seis** componentes), §8 (los **ocho** NFR) y §11 (los **cinco** puntos abiertos); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §4 (capacidades `F-11`, `F-13` y `F-25`), §15 (etapas y puertas técnicas `PT-02` y `PT-03`), §16.1 y §18 (sample `S-1`), §17.7 (P.1 a P.12) y §20 (`E-1` y `E-7`); [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §2.2, §3, §4 y §5; [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) 1.1 §3 y §4
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §3 (los **siete** casos de uso), §5.1 (matriz con las historias previstas), §5.3 (cobertura de las nueve necesidades) y §6 (las **seis** propiedades transversales con sus condiciones de medición); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) (las **siete** garantías y los **siete** códigos de condición); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1 (los **seis** componentes), §8 (los **ocho** NFR) y §11 (los **cinco** puntos abiertos); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.19** §4 (capacidades `F-11`, `F-13` y `F-25`, **las tres `Must Have`**), §15 (etapas y puertas técnicas `PT-02` y `PT-03`), §16.1 y §18 (sample `S-1`), §17.7 (P.1 a P.12, con **P.8** como fundamento de la promoción de `F-13`) y §20 (`E-1` y `E-7`); [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §2.2, §3, §4 y §5; [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) 1.1 §3 y §4
 **Trazabilidad downstream:** [`Backlog-Tecnico.md`](Backlog-Tecnico.md), [`Definition-Of-Ready.md`](Definition-Of-Ready.md), `07-Plan-Sprint`, `08-Calidad-Y-Pruebas` y `10-Examples` de GeometriaFactory-Visor
 
 ---
@@ -77,7 +77,9 @@ Qué exigen exactamente las dos puertas, según `PRODUCT-INTAKE` §17.7.P.8: **`
 
 ## 3. Historias por épica
 
-Las **catorce** historias viven **inline** en este documento, porque el proyecto de código está por debajo del umbral de veinte que fija la regla de la categoría. Cada una trae su historia, sus criterios de aceptación en Given/When/Then, su trazabilidad y su verificación de entrada.
+Las **catorce** historias viven **inline** en este documento. Cada una trae su historia, sus criterios de aceptación en Given/When/Then, su trazabilidad y su verificación de entrada.
+
+**Por qué inline y no un archivo por historia.** La regla de la categoría fija el archivo propio como **obligatorio** a partir de **veinte** historias, lo **recomienda** en la banda de diez a veinte y admite el modo inline por debajo de diez (`Rules-Backlog-Tecnico.md` §2.1 y §3.3). Con catorce, este proyecto de código cae en la banda **recomendada**, de modo que el modo inline es una **elección** y no la aplicación de un umbral: corresponde declararla con su motivo, y no darla por evidente. Los motivos son tres. **Primero**, lo que el archivo propio compra —versionar cada historia por separado, asignarla a otro autor y revisarla sin abrir el resto— no se cobra acá: `equipo_n = 1`, no hay segundo autor a quien asignar ni revisión concurrente que separar. **Segundo**, las catorce historias de este proyecto de código comparten un único rol —el componente anfitrión— y se refinan **contra los mismos tres conjuntos cerrados** —las siete garantías, las siete prohibiciones y los siete códigos de condición—, según la entrada obligatoria de la sesión de §5; leerlas juntas es lo que hace visible que ninguna acuñe un código nuevo, y catorce archivos separados esconderían justamente esa propiedad. **Tercero**, la banda es recomendada y no obligatoria, y la regla exige lo mismo en los dos modos: criterios de aceptación, trazabilidad y verificación de entrada, que las catorce tienen. **La condición para revisar esta elección** es que el backlog llegue a veinte historias, donde el archivo propio pasa a ser obligatorio, o que el equipo deje de ser de una persona.
 
 La categoría 02 no numeró historias: su §5.1 las describió por contenido —«US de creación de instancia», «US de dibujo del trabajo», «US de gobierno en vivo de los dos movimientos automáticos», y así—. **Esta categoría las numera y las redacta**, que es lo que esa sección deja a la 06, y cada una declara de qué fila de la matriz proviene.
 
@@ -92,8 +94,8 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 | US-05 | Leer las dimensiones con las variantes de clave del emisor | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
 | US-06 | Enumerar toda pieza no dibujada con su índice y su condición | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
 | US-07 | Devolver la estructura del texto para que el anfitrión arme el árbol | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| US-08 | Derivar la disposición de cada pieza de su índice | Should | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| US-09 | Resaltar en exclusiva la pieza del índice indicado | Should | Sin fijar (§4.1) | Propuesta | CU-03 | EP-02 |
+| US-08 | Derivar la disposición de cada pieza de su índice | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
+| US-09 | Resaltar en exclusiva la pieza del índice indicado | Must | Sin fijar (§4.1) | Propuesta | CU-03 | EP-02 |
 | US-10 | Ajustar la escena al tamaño del elemento de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-04 | EP-03 |
 | US-11 | Liberar los recursos de la instancia y cortar su bucle de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-05 | EP-02 |
 | US-12 | Gobernar en vivo los dos movimientos automáticos sin reconstruir la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-07 | EP-03 |
@@ -158,7 +160,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Trazabilidad.** NB-06 · CU-03 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-04, BT-05, BT-08, BT-14 · Tests en 08: `PT-02`, parte de sincronización por índice.
 
-**Prioridad.** `Should` porque su capacidad de origen, `F-13`, es **`Should Have`** en `PRODUCT-INTAKE` §4. **Y sin embargo es bloqueante en la práctica**, porque `PT-02` la incluye entre lo que hay que medir antes de comprometer la etapa `g`, y una puerta que no pasa detiene la planificación de esa etapa. La tensión se declara acá en lugar de resolverse subiéndole la prioridad, que sería reprioritizar una capacidad que el Product Owner clasificó; ver §6, `PA-06`.
+**Prioridad.** `Must` porque su capacidad de origen, `F-13`, es **`Must Have`** en `PRODUCT-INTAKE` §4 desde la versión **1.19** de esa fuente. Hasta esa decisión esta historia era `Should` **y bloqueante en la práctica**, porque `PT-02` la incluye entre lo que hay que medir antes de comprometer la etapa `g` y una puerta que no pasa detiene la planificación de esa etapa. Este backlog **no la repriorizó por su cuenta**: elevó la tensión como `PA-06` y esperó. **El Product Owner la resolvió el 2026-08-10 subiendo la capacidad**, con ese mismo fundamento; ver §6, `PA-06`, cerrado.
 
 **Verificación de entrada.** Cumple los siete criterios de la DoR.
 
@@ -300,7 +302,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Trazabilidad.** NB-06 · CU-02 · Garantía `G-6` · Componentes: servicio de dibujo · BT-10 · Tests en 08: propiedad de disposición determinista con sus condiciones de medición.
 
-**Prioridad.** `Should` porque su capacidad de origen, `F-13`, es **`Should Have`** en `PRODUCT-INTAKE` §4. Es además criterio de la transición `g` → `h` del roadmap §5.2, con la precisión de que se predica de la posición y no de la orientación.
+**Prioridad.** `Must` porque su capacidad de origen, `F-13`, es **`Must Have`** en `PRODUCT-INTAKE` §4 desde la versión **1.19** de esa fuente. Era `Should` hasta esa decisión, aunque ya fuera criterio de la transición `g` → `h` del roadmap §5.2 —con la precisión de que se predica de la posición y no de la orientación— y estuviera entre lo que `PT-02` mide: esa contradicción es la que el Product Owner resolvió; ver §6, `PA-06`, cerrado.
 
 **Verificación de entrada.** Cumple los siete criterios de la DoR.
 
@@ -390,13 +392,13 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 | Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
 | --- | --- | --- | --- |
-| Must | 12 | 85,7 % | Sin fijar (§4.1) |
-| Should | 2 | 14,3 % | Sin fijar (§4.1) |
+| Must | 14 | 100 % | Sin fijar (§4.1) |
+| Should | 0 | 0 % | — |
 | Could | 0 | 0 % | — |
 | Won't (v1.0) | 0 | 0 % | — |
 | **Total** | **14** | **100 %** | **Sin fijar** |
 
-| Métrica | Valor al 2026-08-10 |
+| Métrica | Valor al 2026-08-11 |
 | --- | --- |
 | Historias en estado `Propuesta` | 14 de 14 |
 | Historias cerradas | 0 de 14 |
@@ -415,11 +417,34 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 
 ### 4.2 Por qué la distribución MoSCoW es la que es
 
-**12 `Must` y 2 `Should`**, que son US-08 y US-09:
+**14 `Must` y ninguna no-`Must`**, desde el 2026-08-10:
 
-1. **La prioridad la declara el Product Owner en el intake y esta categoría no reprioriza.** `PRODUCT-INTAKE` §4 declara `F-11` y `F-25` como `Must Have` y `F-13` como `Should Have`.
-2. **Las dos `Should` derivan de `F-13`** —sincronización árbol ⇄ escena por índice y disposición determinista entre procesados—, que es la única capacidad `Should Have` que toca a este proyecto de código.
-3. **Y hay una tensión que corresponde declarar en lugar de taparla**: las dos `Should` están **dentro de lo que `PT-02` mide antes de comprometer la etapa `g`** (`PRODUCT-INTAKE` §17.7.P.8 nombra la sincronización por índice entre lo que la puerta verifica; el roadmap §5.2 nombra la disposición determinista entre los criterios de la transición `g` → `h`). En la práctica no son diferibles, aunque su prioridad declarada admita diferirlas. **No se les sube la prioridad**, porque eso sería reprioritizar una capacidad del Product Owner; se registra la tensión como `PA-06` de §6.
+1. **La prioridad la declara el Product Owner en el intake y esta categoría no reprioriza.** `PRODUCT-INTAKE` §4 declara `F-11`, `F-13` y `F-25` como `Must Have`: `F-25` desde la versión 1.7 de esa fuente y **`F-13` desde la 1.19**. Las tres capacidades que tocan a este proyecto de código son hoy `Must Have`, y por eso sus catorce historias lo son.
+2. **Las dos historias que eran `Should` —US-08 y US-09— derivan de `F-13`**, sincronización árbol ⇄ escena por índice y disposición determinista entre procesados. Cambiaron de prioridad **porque cambió la de su capacidad de origen**, no porque este backlog las repriorizara.
+3. **Cómo se resolvió la tensión que este backlog había elevado.** Las dos historias estaban **dentro de lo que `PT-02` mide antes de comprometer la etapa `g`** (`PRODUCT-INTAKE` §17.7.P.8 nombra la sincronización por índice entre lo que la puerta verifica; el roadmap §5.2 nombra la disposición determinista entre los criterios de la transición `g` → `h`), de modo que en la práctica no eran diferibles aunque su prioridad declarada lo admitiera. Este backlog **no les subió la prioridad**: elevó la tensión como `PA-06` y la dejó en manos de quien podía resolverla. **El Product Owner la resolvió el 2026-08-10 promoviendo `F-13` a `Must Have`**, con ese mismo fundamento, y `PA-06` queda cerrado en §6. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada.
+4. **Este backlog queda en 100 % `Must`, y hay que declararlo porque la regla de la categoría lo mira con dureza.** El criterio de aceptación de `Rules-Backlog-Tecnico.md` §6 pide que la distribución **no sea 100 % `Must`**, y ésta lo es. **No es una omisión de priorización sino la consecuencia aritmética de una decisión ajena**: las tres capacidades que bajan a este proyecto de código son `Must Have` en la fuente, y este backlog no puede degradar ninguna sin reprioritizar por su cuenta, que es exactamente lo que se negó a hacer cuando la tensión estaba abierta. Inventar acá una `Should` para cumplir el reparto sería peor que el apartamiento: sería una prioridad falsa. Queda declarado como apartamiento consciente, con su motivo, y la condición para que deje de serlo es que el Product Owner clasifique con prioridad menor alguna capacidad que toque a este proyecto de código.
+
+**Sobre la regularidad de esta distribución** [AGREGADO 2026-08-11, en respuesta al hallazgo `D-06-03` de [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0]. La auditoría observó que la distribución de los siete backlogs es demasiado regular para ser casualidad, y tiene razón en que **la regularidad existe y hasta ahora no estaba declarada**. Se declara acá, con el recuento hecho de nuevo sobre las fichas y sobre los índices inline, y con su explicación.
+
+| Proyecto de código | Historias | `Must` | `Should` | `Could` |
+| --- | --- | --- | --- | --- |
+| GeometriaFactory-Domain | 27 | 26 | 1 | 0 |
+| GeometriaFactory-Contracts | 22 | 21 | 0 | 1 |
+| GeometriaFactory-Visor | 14 | 14 | 0 | 0 |
+| GeometriaFactory-Application | 32 | 31 | 1 | 0 |
+| GeometriaFactory-Web | 30 | 30 | 0 | 0 |
+| GeometriaFactory-Infrastructure | 25 | 24 | 1 | 0 |
+| GeometriaFactory-Api | 30 | 29 | 1 | 0 |
+| **Total** | **180** | **175** | **4** | **1** |
+
+**La explicación no es una cuota, y se puede verificar una por una.** El tramo comprometido —las etapas `c` a `h`— contiene **diecinueve** capacidades del intake §4, y desde `PRODUCT-INTAKE` **1.19** **las diecinueve son `Must Have`**: la única que no lo era, `F-13`, la promovió el Product Owner el 2026-08-10. De ahí se sigue mecánicamente que **ninguna historia que derive de una capacidad del tramo comprometido puede ser no-`Must`**, y que las no-`Must` que existen tienen que venir de otro lado. Vienen de dos lados, y sólo de dos:
+
+- **De una capacidad de la fase `i…`**, que este backlog no planifica pero que la frontera de tipos sí tiene que transportar: es el único caso, `US-10` de `GeometriaFactory-Contracts`, que deriva de `F-15`, `Could Have`.
+- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-12` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11), `US-16` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-23` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-30` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
+
+**Los dos proyectos de código que hoy quedan en 100 % `Must` son exactamente los dos cuya única no-`Must` derivaba de `F-13`** —el Visor y Web, desde los dos lados de la fachada—. No llegaron ahí eligiendo: llegaron porque la capacidad de la que dependían subió de prioridad, después de que los dos elevaran la tensión y **se negaran a repriorizarla por su cuenta**.
+
+**La consecuencia hay que decirla y es incómoda**: la señal de recorte que MoSCoW normalmente da **no está disponible en este backlog**. No hay una lista de historias que se puedan soltar si el trabajo aprieta, porque el Product Owner ya priorizó aguas arriba y lo que quedó del lado de este backlog está comprometido. Lo que reemplaza a esa señal es el **orden de etapas**, que es la unidad de planificación que este producto sí tiene: si algo aprieta, se difiere una etapa entera, con su punto de control, y no una historia suelta.
 
 ## 5. Refinamiento
 
@@ -443,7 +468,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 | PA-03 | **Los nombres definitivos** de las funciones internas, de las clases y de los campos del resultado de dibujo (`05` §11 `PA-02`). **Los nombres de las seis funciones de la fachada no están abiertos**: los fija `PRODUCT-INTAKE` §17.7.P.3. Convertido en trabajo como BT-17 | El equipo, en la etapa que implementa la fachada | Etapa `g` |
 | PA-04 | **El umbral numérico de fluidez de la interacción.** Ninguna fuente lo declara y `05` §8 se niega explícitamente a inventarlo. Hasta que exista, la propiedad se verifica de forma cualitativa junto con `PT-02`. Convertido en trabajo como BT-18 | El Product Owner, o la categoría 08 al fijar su guion de medición | Antes de cerrar la etapa `g` |
 | PA-05 | **La versión mínima de navegador.** La fuente no la fija: el requisito se declara **por capacidad** —capacidad gráfica tridimensional— y no por versión (`05` §11 `PA-04`). **No se convierte en trabajo**: no hay nada que construir, sólo una declaración que el Product Owner puede querer precisar | El Product Owner sobre su propio documento | Sin fecha comprometida |
-| PA-06 | **La tensión entre la prioridad declarada de `F-13` y la puerta `PT-02`**, descrita en §4.2 punto 3: las dos historias `Should` de este backlog están dentro de lo que la puerta mide antes de comprometer la etapa `g`, de modo que en la práctica no son diferibles. Este backlog **no las repriorizó**; se eleva para que el Product Owner decida si `F-13` sigue siendo `Should Have` | El Product Owner sobre `PRODUCT-INTAKE` §4 | Antes de comprometer la etapa `g` |
+| PA-06 | ~~**La tensión entre la prioridad declarada de `F-13` y la puerta `PT-02`**: las dos historias `Should` de este backlog están dentro de lo que la puerta mide antes de comprometer la etapa `g`, de modo que en la práctica no son diferibles. Este backlog **no las repriorizó**; se elevó para que el Product Owner decidiera si `F-13` seguía siendo `Should Have`.~~ **CERRADO el 2026-08-10.** Desenlace: el Product Owner **promovió `F-13` a `Must Have`** en `PRODUCT-INTAKE` **1.19** §4, con el fundamento que este backlog había elevado —§17.7 P.8 incluye las dos propiedades entre lo que `PT-02` mide antes de comprometer la etapa `g`, y una puerta que no pasa detiene la planificación—. US-08 y US-09 pasan a `Must` en consecuencia, y §4.2 recoge el desenlace. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada, como `PA-02` de su backlog, y queda cerrada por la misma decisión. **La fila se conserva para no dejar hueco de numeración** | Cerrado por el Product Owner sobre `PRODUCT-INTAKE` §4 | Cerrado el 2026-08-10 |
 | PA-07 | **Si el bundle generado se versiona en el repositorio o se ignora** (`05` §11 `PA-05`). Convertido en trabajo como BT-03 | La categoría 09 | Al emitirse 09 |
 
 ## 7. Control de cambios
@@ -451,3 +476,4 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del product backlog de `GeometriaFactory-Visor`. Declara **tres** épicas: dos apoyadas en etapas del roadmap y una tercera, EP-02, apoyada en el **momento de medición** que el roadmap §2.2 declara para `PT-02` y `PT-03`, con la constancia explícita de que **no crea una etapa nueva ni renombra ninguna**. Numera y redacta las **catorce** historias que la categoría 02 había descrito por contenido sin numerar, cada una con su fila de origen en la matriz de esa categoría, e inline por estar por debajo del umbral de veinte. Declara qué es una historia en un visualizador puro y por qué algunas tienen entregable de ausencia verificable. Declara la unidad de estimación como **punto abierto**, con el fundamento propio de que la categoría 05 ya se negó a inventar el umbral de fluidez. Eleva como `PA-06` la tensión entre la prioridad `Should Have` de `F-13` y la puerta `PT-02`, **sin reprioritizar**. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4 y en su control de cambios, y **cierra los hallazgos `D-06-03` y `D-06-04`** del informe de auditoría [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **Cabecera**: la trazabilidad upstream pasa al intake **1.19**, declara las tres capacidades como `Must Have` y señala **§17.7 P.8** como fuente del fundamento. **§3.1 y fichas `US-08` y `US-09`**: las dos historias pasan de `Should` a **`Must`**, porque cambió la prioridad de su capacidad de origen y no porque este backlog repriorizara. **§4**: el reparto pasa de 12/2 a **14 `Must` sobre 14**. **§4.2**: se reescriben los tres puntos —la tensión elevada tiene desenlace— y entra un cuarto punto que declara el **100 % `Must`** como apartamiento consciente del criterio de aceptación de `Rules-Backlog-Tecnico.md` §6, con su motivo y su condición de revisión. **§4.2 (`D-06-03`)**: entra el bloque «Sobre la regularidad de esta distribución», con el recuento de los siete proyectos de código contado de nuevo —**175 `Must`, 4 `Should`, 1 `Could`** sobre 180— y con la explicación de por qué la regularidad no es una cuota. **§3 (`D-06-04`)**: entra la subsección que declara **por qué las catorce historias van inline** y no en archivo propio. La regla `Rules-Backlog-Tecnico.md` §2.1 clasifica la banda de diez a veinte como **recomendada** para archivo propio, de modo que con catorce el modo inline es una elección y no la aplicación de un umbral; se declara con sus tres motivos —`equipo_n = 1`, el refinamiento contra tres conjuntos cerrados comunes a las catorce, y la equivalencia de contenido que la regla exige en los dos modos— y con la condición para revisarla. **§6**: `PA-06` queda **cerrado** con su desenlace y su fecha, conservando la fila para no dejar hueco de numeración. Sube minor. |

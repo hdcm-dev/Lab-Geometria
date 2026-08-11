@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Backlog-Tecnico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1 (los **seis** componentes en tres capas), §3.3 (qué se porta y qué no), §5 (pipeline y puertas), §6 (vista de datos), §8 (los **ocho** NFR), §9 (los **seis** riesgos), §10.2 (las **siete** garantías) y §11 (los **cinco** puntos abiertos); las **seis** ADR de [`../05-Arquitectura-Tecnica/Adrs/`](../05-Arquitectura-Tecnica/Adrs/); [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) y [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../05-Arquitectura-Tecnica/Flujo-Ejecucion.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) (garantías y códigos de condición); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §15 (puertas `PT-02` y `PT-03`), §16 y §16.1, §17.7.P.1 a P.11, §18 y §20
@@ -132,7 +132,7 @@ Las dieciocho filas están, una por tarea técnica, sin agrupar. Los casos de us
 | BT-17 | Infraestructura compartida | CU-01 a CU-07 | `05` §11 `PA-02` |
 | BT-18 | Infraestructura compartida | — (guion de medición) | `05` §11 `PA-03` |
 
-**Cobertura inversa: los siete casos de uso tienen al menos una tarea técnica que los realiza.** CU-01 en BT-04, BT-05, BT-06, BT-08, BT-14 y BT-16; CU-02 en BT-04, BT-06, BT-07, BT-08, BT-09, BT-10 y BT-14; CU-03 en BT-04, BT-05, BT-06 y BT-14; CU-04 en BT-04, BT-05, BT-06 y BT-08; CU-05 en BT-05, BT-06, BT-12 y BT-14; CU-06 en BT-15 y BT-16; CU-07 en BT-04, BT-06 y BT-11.
+**Cobertura inversa: los siete casos de uso tienen al menos una tarea técnica que los realiza.** CU-01 en BT-04, BT-05, BT-06, BT-08, BT-11, BT-14 y BT-16; CU-02 en BT-04, BT-06, BT-07, BT-08, BT-09, BT-10 y BT-14; CU-03 en BT-04, BT-05, BT-06 y BT-14; CU-04 en BT-04, BT-05, BT-06 y BT-08; CU-05 en BT-05, BT-06, BT-12 y BT-14; CU-06 en BT-15 y BT-16; CU-07 en BT-04, BT-06 y BT-11. **La enumeración es exhaustiva**: incluye las filas de alcance general —las que declaran un rango de casos de uso— junto con las específicas, y se reconstruyó desde la matriz fila por fila en lugar de escribirse a mano.
 
 **Cobertura de las siete garantías de `05` §10.2.** `G-1` en BT-13 y BT-16; `G-2` en BT-16; `G-3` en BT-04 y BT-11; `G-4` en BT-05 y BT-08; `G-5` en BT-06 y BT-07; `G-6` en BT-10; `G-7` en BT-04 y BT-12. **Las siete tienen tarea técnica.** Perder cualquiera de ellas es un cambio mayor aunque las seis firmas no se toquen (`05` §10.2), y por eso ninguna queda sin trabajo que la sostenga.
 
@@ -141,3 +141,4 @@ Las dieciocho filas están, una por tarea técnica, sin agrupar. Los casos de us
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del backlog técnico de `GeometriaFactory-Visor`. Declara **cuatro** épicas técnicas alineadas con las tres capas y con las puertas, y **dieciocho** tareas técnicas inline —por debajo del umbral de treinta— cada una con tipo, fuente upstream por identificador, momento, dependencias, criterios de aceptación verificables y las historias que la consumen. Declara las dos particularidades del proyecto de código: que varias tareas se verifican **sobre el bundle generado** y no sobre el código fuente, y que decidir qué del visualizador previo no se porta es trabajo y no contexto. Convierte en trabajo los cuatro puntos abiertos de la categoría 05 que lo admiten —versión del motor, nombres internos, umbral de fluidez y versionado del artefacto generado— y deja constancia de que ninguna de las salidas de BT-18 consiste en inventar un número. Emite la matriz BT ↔ US ↔ CU con sus dieciocho filas, la cobertura inversa sobre los siete casos de uso y la cobertura de las **siete** garantías. |
+| 1.1 | 2026-08-11 | **Cierra el hallazgo `D-06-02`** del informe de auditoría [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **§4**: la enumeración de cobertura inversa omitía **BT-11** en la entrada de **CU-01**, pese a que la fila de BT-11 de esa misma matriz declara «CU-01, CU-07». La omisión no afectaba la cobertura —los siete casos de uso tenían y tienen al menos una tarea técnica— pero sí la exhaustividad de una enumeración que se lee como completa. Se agrega BT-11 y se declara explícitamente que la enumeración **es exhaustiva** y que incluye las filas de alcance general, que en este proyecto de código son BT-01, BT-06 y BT-17. **Se recontó la matriz entera**, reconstruyendo el diccionario inverso `CU → {BT}` desde las dieciocho filas: ésta era la única discrepancia. Ninguna tarea técnica, dependencia ni criterio cambia. Sube minor. |
