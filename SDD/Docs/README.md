@@ -1,0 +1,202 @@
+# Fábrica de Geometría
+
+| Campo | Valor |
+| --- | --- |
+| Producto | Fábrica de Geometría |
+| Versión del documento | 1.0 |
+| Estado | Propuesto |
+| Fecha | 2026-08-11 |
+| Stack principal | C# sobre .NET 10 —Blazor Interactive Server en el front, ASP.NET Core en el servicio de datos—, Entity Framework Core sobre SQLite, y TypeScript con webpack en el visor |
+| Composición | 7 proyectos de código (ver tabla de proyectos de código) |
+| Proyecto de código principal | `GeometriaFactory-Api` |
+| Documento | README raíz del producto |
+
+---
+
+## Tabla de contenido
+
+- [1. Identidad del producto](#1-identidad-del-producto)
+- [2. Proyectos de código del producto](#2-proyectos-de-código-del-producto)
+- [3. Stack y composición](#3-stack-y-composición)
+- [4. Mapa de la documentación](#4-mapa-de-la-documentación)
+- [5. Flujo de lectura recomendado por rol de intervención](#5-flujo-de-lectura-recomendado-por-rol-de-intervención)
+- [6. Cómo contribuir y cómo regenerar la documentación](#6-cómo-contribuir-y-cómo-regenerar-la-documentación)
+- [7. Estado actual y roadmap](#7-estado-actual-y-roadmap)
+- [8. Lo que todavía no está decidido](#8-lo-que-todavía-no-está-decidido)
+- [9. Glosario rápido](#9-glosario-rápido)
+- [10. Contacto y responsables](#10-contacto-y-responsables)
+- [11. Control de cambios](#11-control-de-cambios)
+
+---
+
+## 1. Identidad del producto
+
+En la Actividad 1 de la cátedra de Programación 2, el alumno construye una aplicación que modela figuras planas y volumétricas y las describe en un texto. Para ver ese resultado en tres dimensiones existe hoy una página suelta: el alumno copia el texto, lo pega ahí y mira. Esa cadena no tiene identidad, no tiene persistencia y no tiene entrega. El trabajo vive en un portapapeles.
+
+Fábrica de Geometría cierra esa cadena dentro de un solo producto. El alumno se registra sin correo, carga su trabajo, lo envía, lo ve interpretado con sus advertencias y lo mira en tres dimensiones sin salir de la aplicación; el docente habilita cuentas, revisa lo que la comisión entregó y deja su desenlace. Hay un problema de fondo que el producto vuelve visible y que hoy pasa desapercibido: valores calculados que el programa del alumno emite mal en casos concretos y reproducibles, que el producto muestra como par de valor declarado y valor derivado sobre el trabajo del propio alumno.
+
+La audiencia son dos personas concretas del aula —el alumno de la comisión y el docente— y no hay integradores externos, no hay áreas de auditoría y no hay clientes de terceros. Esa audiencia acotada explica buena parte de las decisiones técnicas del producto: una sola instancia, un solo curso, un solo administrador, sin versionado de rutas y sin escalera de ambientes.
+
+El detalle vive en [`00-Contexto/Vision-Producto.md`](00-Contexto/Vision-Producto.md).
+
+## 2. Proyectos de código del producto
+
+Refleja [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3** §2, sin divergencias.
+
+| Proyecto de código | Tipo D8 | Rol | Dependencias | Redistribuible |
+| --- | --- | --- | --- | --- |
+| `GeometriaFactory-Api` (principal) | `rest-api` | Host en el servidor propio: puntos de acceso, credencial firmada y preparación del almacén al arrancar | `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure`, `GeometriaFactory-Contracts` | false |
+| `GeometriaFactory-Web` | `web-monolith` | Front en el hosting público; único punto de contacto del navegador | `GeometriaFactory-Contracts`, `GeometriaFactory-Visor` | false |
+| `GeometriaFactory-Domain` | `library` | Entidades e invariantes del dominio; centro de la regla de dependencias | — | false |
+| `GeometriaFactory-Application` | `library` | Casos de uso y los cuatro puertos | `GeometriaFactory-Domain` | false |
+| `GeometriaFactory-Infrastructure` | `library` | Adaptadores de los cuatro puertos, seguridad y validador de figuras | `GeometriaFactory-Application`, `GeometriaFactory-Domain` | false |
+| `GeometriaFactory-Contracts` | `library` | Tipos de transferencia; contrato compartido por los dos procesos desplegables | — | false |
+| `GeometriaFactory-Visor` | `library` | Bundle del visor 3D; visualizador puro | — | false |
+
+**Siete proyectos de código y dos unidades desplegables.** El front vive en el hosting público y el servicio de datos en el servidor propio, y esa partición responde a una restricción de red declarada en el intake §14, no a una preferencia de estilo. Las tres reglas de arquitectura de nivel producto se derivan de ahí: **RA-01**, ningún guion del navegador invoca el servicio de datos; **RA-02**, el bundle del visor es un visualizador puro, sin red, sin configuración y sin identidad; **RA-03**, todo lo que el navegador obtiene del backend pasa por el front, y ningún mensaje expone la dirección de un servicio interno.
+
+**Una excepción de nombre y de path, declarada.** `GeometriaFactory-Visor` es el único proyecto de código fuera del ecosistema .NET: su identidad de código va en minúscula con guiones y su carpeta está en la raíz y no bajo `src/`, para que las dos cadenas de herramientas no compartan raíz.
+
+El mapa completo, con el grafo, los contratos que cruzan fronteras y los riesgos de integración, está en [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md).
+
+## 3. Stack y composición
+
+| Proyecto de código | Stack | Plataforma de ejecución |
+| --- | --- | --- |
+| `GeometriaFactory-Api` | ASP.NET Core sobre .NET 10, con credencial firmada | Linux en contenedor, en el servidor propio |
+| `GeometriaFactory-Web` | ASP.NET Core sobre .NET 10 con Blazor Interactive Server y MudBlazor | Hosting público gratuito, con dominio y transporte seguro |
+| `GeometriaFactory-Domain` | C# sobre .NET 10, sin dependencias | Linux, embebido en sus consumidores |
+| `GeometriaFactory-Application` | C# sobre .NET 10, dependencia única del dominio | Linux, embebido en sus consumidores |
+| `GeometriaFactory-Infrastructure` | C# sobre .NET 10, con Entity Framework Core sobre SQLite | Linux, embebido en el servicio de datos |
+| `GeometriaFactory-Contracts` | C# sobre .NET 10, tipos de datos sin dependencias | Se carga en los **dos** procesos desplegables |
+| `GeometriaFactory-Visor` | TypeScript transpilado con webpack; el motor de dibujo entra en el bundle y no por red de distribución | El navegador, con capacidad gráfica tridimensional requerida |
+
+**La versión de plataforma del front está marcada para verificar** contra lo que soporte el hosting gratuito, y esa verificación es la puerta técnica `PT-01.a`. La matriz completa, con capacidades del navegador y restricciones justificadas, está en [`00-Contexto/Compatibilidad-Plataformas.md`](00-Contexto/Compatibilidad-Plataformas.md).
+
+## 4. Mapa de la documentación
+
+| Sección | Propósito | Responsable | Enlace |
+| --- | --- | --- | --- |
+| 00-Contexto (producto) | Visión, alcance, roadmap y compatibilidad de plataformas | AG-00 | [00-Contexto](00-Contexto/) |
+| 01-Necesidades-Negocio (producto) | Las nueve necesidades de negocio, `NB-01` a `NB-09` | AG-01 | [01-Necesidades-Negocio](01-Necesidades-Negocio/) |
+| Producto (producto) | Vista de producto, pipeline de producto y plan documental | AG-05, AG-09, AG-11 | [Producto](Producto/) |
+| Audit (producto) | Informes de auditoría independiente, uno por fase | Auditor independiente | [Audit](Audit/) |
+| Proyectos/GeometriaFactory-Api | Documentación 02 a 10 del servicio de datos | AG-02 a AG-11 | [GeometriaFactory-Api](Proyectos/GeometriaFactory-Api/) |
+| Proyectos/GeometriaFactory-Web | Documentación 02 a 10 del front | AG-02 a AG-11 | [GeometriaFactory-Web](Proyectos/GeometriaFactory-Web/) |
+| Proyectos/GeometriaFactory-Domain | Documentación 02 a 10 del dominio | AG-02 a AG-11 | [GeometriaFactory-Domain](Proyectos/GeometriaFactory-Domain/) |
+| Proyectos/GeometriaFactory-Application | Documentación 02 a 10 de los casos de uso y los puertos | AG-02 a AG-11 | [GeometriaFactory-Application](Proyectos/GeometriaFactory-Application/) |
+| Proyectos/GeometriaFactory-Infrastructure | Documentación 02 a 10 de los adaptadores y el validador | AG-02 a AG-11 | [GeometriaFactory-Infrastructure](Proyectos/GeometriaFactory-Infrastructure/) |
+| Proyectos/GeometriaFactory-Contracts | Documentación 02 a 10 del contrato compartido | AG-02 a AG-11 | [GeometriaFactory-Contracts](Proyectos/GeometriaFactory-Contracts/) |
+| Proyectos/GeometriaFactory-Visor | Documentación 02 a 10 del visor | AG-02 a AG-11 | [GeometriaFactory-Visor](Proyectos/GeometriaFactory-Visor/) |
+
+**La cadena de especificación se lee en este orden**: visión y alcance en 00, necesidades de negocio en 01, casos de uso y reglas en 02, experiencia de uso en 03, arquitectura y decisiones en 05, historias y tareas en 06, plan de trabajo en 07, calidad y pruebas en 08, canalización y publicación en 09, ejemplos verificables en 10, y cuerpo documental de entrega en 11. La categoría 04 no existe en ningún proyecto de código: ninguno usa modelos de lenguaje y su omisión está declarada en el manifiesto.
+
+## 5. Flujo de lectura recomendado por rol de intervención
+
+| Rol | Orden recomendado | Por qué |
+| --- | --- | --- |
+| Product Owner, que acá es el docente | 00 → 01 → 06 → 07 | Necesita ver la visión, las nueve necesidades de negocio y qué se comprometió para cada etapa antes de aprobar un punto de control |
+| Desarrollador que retoma el producto | 00 → `Producto/Vista-Producto.md` → 02 → 05 → 10 → 11 | Necesita el mapa del producto entero antes de entrar por un proyecto de código, porque lo que le impone el resto no está escrito en el proyecto de código por el que entra |
+| Auditor o QA | 02 → 08 → `Audit/` | Necesita los criterios verificables y la matriz de cobertura, y después el informe que ya los revisó, para no repetir lo verificado |
+| Operador, cuando haya sistema que operar | `Producto/Pipeline-Producto.md` → 09 del proyecto de código que despliega → 11 | Necesita el orden de construcción y de salida antes que el procedimiento de una unidad suelta; el despliegue de este producto es conjunto |
+
+**Cuatro roles y una advertencia común.** Ningún rol debería empezar por la categoría de un proyecto de código suelto. Este producto tiene siete proyectos de código que se condicionan entre sí, y la mayoría de los defectos que su propia auditoría registró nacieron de leer una parte y afirmar algo del todo.
+
+## 6. Cómo contribuir y cómo regenerar la documentación
+
+Esta documentación no se escribe a mano: la generan los subagentes del framework SDD, por fases, y cada fase se cierra con una auditoría independiente que no participó de su generación. La regeneración parte del intake y del manifiesto derivado, y respeta la detención obligatoria entre fases: no arranca la siguiente sin que la anterior haya devuelto aprobado.
+
+Quien intervenga sobre el corpus tiene tres obligaciones que la auditoría de este producto verificó una y otra vez, y que conviene enunciar acá porque son las que más se rompieron: **abrir la fuente original antes de citarla**, nunca a través de otro documento; **contar sobre el instrumento** cada recuento que se afirme, en lugar de heredar el número de otro documento; y **declarar lo que no está decidido** en vez de resolverlo por conveniencia.
+
+**Tres archivos satélite no se emiten, y se declara por qué en lugar de dejar el hueco.** `Root-Rules.md` §2.1 los pide cuando el proyecto de código necesita comunicarse con integradores externos al equipo. Este producto no los tiene: el intake declara que la audiencia son dos personas del aula, ningún proyecto de código es redistribuible y no hay feed de paquetes.
+
+| Archivo satélite | Estado | Fundamento |
+| --- | --- | --- |
+| `CHANGELOG.md` | No se emite | El repositorio ya lleva su bitácora de cambios en la raíz del código, declarada en el intake §16. Un segundo archivo acá sería una segunda fuente de verdad sobre lo mismo |
+| `CONTRIBUTING.md` | No se emite | No hay aportes externos que guiar: `equipo_n` es 1. Lo que un contribuyente necesitaría vive en la `Guia-Contribucion` de cada proyecto de código, planificada en la categoría 11 |
+| `LICENSE.md` | No se emite | Ninguna fuente declara licencia. Elegir una acá sería una decisión de producto tomada por un índice, y este documento no decide nada |
+
+**La omisión de `CHANGELOG.md` queda registrada como apartamiento**, porque la regla lo declara obligatorio para el tipo `rest-api` del proyecto de código principal. El fundamento está arriba; la decisión de aceptarlo o revertirlo es del Product Owner.
+
+## 7. Estado actual y roadmap
+
+El producto está **especificado y todavía no construido**. Las ocho categorías por proyecto de código están emitidas y auditadas; no hay código, no hay muestras implementadas y ninguna sonda de verificación tiene evidencia.
+
+| Categoría | Ámbito | Estado | Cierre |
+| --- | --- | --- | --- |
+| 00-Contexto | Producto | Propuesto | Fase A auditada |
+| 01-Necesidades-Negocio | Producto | Propuesto | Fase A auditada |
+| 02-Especificacion-Funcional | Los siete | Propuesto | Fase B auditada por proyecto de código, con un informe faltante (ver §8) |
+| 03-UX-UI-DX | Los siete | Propuesto | Fase B auditada; validación visual de maqueta cerrada en `GeometriaFactory-Web` |
+| 04-Prompts-AI | — | **Omitida por gating** | Ningún proyecto de código usa modelos de lenguaje |
+| 05-Arquitectura-Tecnica | Los siete | Propuesto | Fase C auditada, aprobada |
+| 06-Backlog-Tecnico | Los siete | Propuesto | Fase D auditada, aprobada |
+| 07-Plan-Sprint | Los siete | Propuesto | Fase D auditada, aprobada |
+| 08-Calidad-Y-Pruebas | Los siete | Propuesto | Fase E auditada, aprobada |
+| 09-Devops | Los siete | Propuesto | Fase F auditada, aprobada |
+| 10-Examples | Los siete | Propuesto, pasada de diseño | Fase G auditada, aprobada; las 19 sondas sin evidencia hasta que haya código |
+| 11-Documentacion | Producto y los siete | **Planificado** | Plan documental emitido en esta consolidación |
+| Vista y pipeline de producto | Producto | Propuesto | Emitidos en esta consolidación |
+
+**Las magnitudes del producto, contadas sobre el instrumento**: 71 casos de uso, 16 reglas de negocio, 9 invariantes del dominio, 45 decisiones de arquitectura, 6 contratos de superficie, 15 puntos de acceso, 15 códigos del contrato vivos sobre 18 emitidos, 6 funciones en la fachada del visor, 8 escenarios de datos, 10 casos en la batería del validador, 77 quality gates y 19 sondas de verificación.
+
+El detalle por etapa, con sus hitos internos y demostrables, está en [`00-Contexto/Roadmap-Producto.md`](00-Contexto/Roadmap-Producto.md), que es la única fuente del roadmap: este README no lo replica.
+
+## 8. Lo que todavía no está decidido
+
+Un producto que se entrega declarando lo que no está decidido vale más que uno que aparenta estar completo. Lo que sigue es el resumen de nivel producto; el detalle por proyecto de código vive en la sección de puntos abiertos de cada categoría 05 y 06.
+
+| Punto abierto | Titular | Dónde está declarado |
+| --- | --- | --- |
+| Cuántas aristas de compilación tiene el producto: el manifiesto declara ocho en §2, dibuja siete en §3 y valida siete en §4 | Product Owner | [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) §3.1 |
+| Falta el informe de auditoría de Fase B de `GeometriaFactory-Api`: hay seis para siete proyectos de código | Orquestador SDD | [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) §1.1 |
+| El nombre del cuarto puerto, el de repositorio de cuentas: el puerto existe y su identificador no está fijado | Product Owner y equipo, en la etapa `a` | `Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/` §11 |
+| El umbral numérico de fluidez del visor: ninguna fuente lo declara y ninguna categoría lo inventa | Product Owner | `Proyectos/GeometriaFactory-Visor/05-Arquitectura-Tecnica/` §11 |
+| El alcance de la colección de peticiones reproducible: la fuente lo declara en dos lugares con alcances distintos | Product Owner | `Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/` §11 |
+| Los umbrales rotulados como asunción —coberturas, latencias, caudal y arranque en frío— que condicionan gates de la canalización | Product Owner | `PRODUCT-INTAKE` §22, asunciones `A-3`, `A-4` y `A-5` |
+| Las marcas para verificar heredadas de las fuentes: capacidades del hosting, versión de la biblioteca de componentes, construcción de la imagen en destino | Se resuelven midiendo, en las etapas `a` e `i` | `PRODUCT-INTAKE` §22 |
+
+**Ninguno de estos puntos impide arrancar la construcción**, y varios están atados al punto de control de la etapa `a`, que es donde corresponde cerrarlos.
+
+## 9. Glosario rápido
+
+Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosarios de categoría: el del dominio del cliente está en [`00-Contexto/Vision-Producto.md`](00-Contexto/Vision-Producto.md) §9, y cada proyecto de código lleva el suyo en su categoría 02.
+
+| Término | Definición en una línea |
+| --- | --- |
+| Trabajo | Unidad que carga el alumno: nombre, fecha, descripción y el texto con el conjunto de piezas, con identificador propio y estado |
+| Estado del trabajo | Conjunto cerrado de cuatro valores: `Borrador`, `Pendiente`, `Finalizado` y `Rechazado` |
+| Enviar | La única acción de guardado del alumno: interpreta el texto y decide el estado; no hay una acción separada de guardar sin enviar |
+| Pieza | Cada figura del conjunto raíz del trabajo; su identidad es su posición en ese conjunto, porque el dato no trae identificador propio |
+| Componente | Figura plana que forma parte de una pieza: tapa, cara, base, lateral o lado |
+| Observación | Lo que el producto emite al interpretar el texto del alumno; agrupa dos especies, la advertencia y el error de validación |
+| Advertencia | Discrepancia entre un valor declarado y el derivado de las dimensiones; no impide que el trabajo pase a `Pendiente` |
+| Error de validación | Defecto que impide interpretar el texto como figuras; deja el trabajo en `Borrador` con sus errores localizados |
+| Valor declarado y valor derivado | El que trae el texto del alumno y el que el producto recalcula desde las dimensiones; el par es lo que hace visible el error de fórmula |
+| Aprobar y rechazar | Las dos decisiones del administrador sobre un trabajo en `Pendiente`, y su facultad exclusiva |
+| Comentario | Texto libre y opcional que el administrador deja al aprobar o al rechazar; no es una calificación ni una observación |
+| Actividad 1 | Trabajo práctico de la cátedra que emite el dato que este producto consume; no forma parte del producto |
+| Laboratorio | Nombre corriente con el que la cátedra nombra a este producto en uso |
+| Etapa | Cada tramo en que el intake descompone la construcción, con su punto de control al cierre |
+| Punto de control | Detención obligatoria al cerrar una etapa, a la espera del OK explícito del Product Owner |
+| Puerta técnica | Verificación de viabilidad que condiciona la planificación; la que no pasa detiene lo que depende de ella |
+| Proyecto de código | Unidad de compilación del producto, con su tipo, su rol y sus dependencias declaradas en el manifiesto |
+| Unidad desplegable | Proceso que se despliega por separado; este producto tiene dos, el front y el servicio de datos |
+| Puerto | Contrato que la capa de casos de uso define y que la de adaptadores implementa; la dependencia se invierte |
+| Fachada del visor | Las seis funciones que el anfitrión puede invocar del bundle; es el único punto de extensión declarado del producto |
+| Escenario | Cada uno de los ocho juegos de datos completos, `E-1` a `E-8`, que el intake transcribe y que el producto usa como material de prueba; no se inventan datos de prueba |
+
+## 10. Contacto y responsables
+
+| Rol | Responsable | Canal |
+| --- | --- | --- |
+| Product Owner | El docente de Programación 2, responsable de la cátedra y de la Actividad 1 | El punto de control de cada etapa, con OK explícito |
+| Lead técnico | El mismo docente, asistido por agente de IA | El pull request de la etapa, que **es** el punto de control |
+| Auditoría | Auditor independiente, invocado desde cero en cada fase, sin participación en la generación | Los informes de [`Audit/`](Audit/) |
+| Dueño del problema | La cátedra de Programación 2 | Consultivo, a través del Product Owner |
+
+## 11. Control de cambios
+
+| Versión | Fecha | Descripción del cambio |
+| --- | --- | --- |
+| 1.0 | 2026-08-11 | Emisión inicial, en la consolidación de la Fase H. Presenta la identidad del producto, la tabla de los **siete** proyectos de código con su tipo D8, rol y dependencias reflejando el `PRODUCT-MANIFEST` **1.3** sin divergencias, el stack y las plataformas por proyecto de código, el mapa de la documentación con las categorías de nivel producto y la carpeta de cada proyecto de código, **cuatro** flujos de lectura por rol de intervención, el proceso de regeneración con la declaración fundamentada de los **tres** archivos satélite que no se emiten, el estado por categoría con su fase de cierre, los **siete** puntos abiertos de nivel producto con su titular, un glosario rápido de **veintiún** términos y la tabla de responsables. **No decide nada y no replica el roadmap**: enlaza a `00-Contexto/Roadmap-Producto.md`. **Autor:** Arquitecto de Soluciones Senior + API Designer (AG-ROOT) |
