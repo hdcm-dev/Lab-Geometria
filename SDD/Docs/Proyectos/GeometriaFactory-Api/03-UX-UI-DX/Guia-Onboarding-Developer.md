@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1, §2, §3 y §5; [`DX-Error-Messages.md`](DX-Error-Messages.md) completo; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` completo; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4, §6 y §11; §4, §6 y §8 de CU-01 a CU-12; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §10 (host sin herramientas), §15 (no se inventan textos de prueba), §16, §18 y §20
+**Trazabilidad upstream:** [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1, §2, §3 y §5; [`DX-Error-Messages.md`](DX-Error-Messages.md) completo; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` completo; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4, §6 y §11; §4, §6 y §8 de CU-01 a CU-12; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §10 (host sin herramientas), §15 (no se inventan textos de prueba), §16, §18 y §20
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `10-Examples` y `11-Documentacion` de GeometriaFactory-Api
 
 ---
@@ -39,7 +39,7 @@ Esta guía es para quien va a tocar la superficie HTTP del producto: agregar o c
 
 **Lectura obligatoria antes del paso 1**, y son dos:
 
-1. [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) **§2 y §3, en ese orden**. §2 dice qué de la superficie está declarado por una fuente y qué es propuesta; §3 es la tabla de los quince puntos. **Leer §3 sin §2 hace creer que las quince rutas están decididas, y quince no lo están.**
+1. [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) **§2 y §3, en ese orden**. §2 dice qué de la superficie está declarado por una fuente y qué es propuesta; §3 es la tabla de los quince puntos. **Leer §3 sin §2 hace creer que las quince rutas están decididas, y catorce no lo están.**
 2. [`DX-Developer-Experience.md`](DX-Developer-Experience.md) **§1.4**, dos párrafos: las dos reglas del producto que se rompen desde acá **sin que nada falle**.
 
 Lo que **no** hace falta leer para la primera hora: los doce casos de uso completos. Se consultan por tarea, cuando toque una.
@@ -121,7 +121,7 @@ Toda respuesta de fallo de esta superficie tiene **dos identificadores** y hay q
 
 Dos excepciones declaradas, y conviene conocerlas para no buscar un código que no está: el `401` de la guardia y el `400` de una petición que no se puede leer **no llevan código del contrato**, porque ocurren antes de que haya un contrato con el que hablar.
 
-El catálogo entero, con las **18** entradas y qué hace el consumidor con cada una, está en [`DX-Error-Messages.md`](DX-Error-Messages.md) §3. **Se consulta por código, no se lee de corrido.**
+El catálogo entero, con las **16** entradas y qué hace el consumidor con cada una, está en [`DX-Error-Messages.md`](DX-Error-Messages.md) §3. **Se consulta por código, no se lee de corrido.**
 
 ## 4. Diagnóstico de problemas frecuentes en la primera hora
 
@@ -147,7 +147,7 @@ El catálogo entero, con las **18** entradas y qué hace el consumidor con cada 
 - **Para traducir un motivo nuevo**: [`../02-Especificacion-Funcional/Casos-De-Uso/CU-09-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-09-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md), **entero**, y en particular su §10.
 - **Para entender por qué la superficie es como es**: [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §5 y §7.
 - **Para el vocabulario**: [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../02-Especificacion-Funcional/Glosario-Funcional.md) §3, sobre todo por las polisemias de «acceso» y «código».
-- **Para saber qué está sin decidir**: `../02-Especificacion-Funcional/Especificacion-Funcional.md` §11, y en particular los **tres huecos elevados al Product Owner**.
+- **Para saber qué está sin decidir**: `../02-Especificacion-Funcional/Especificacion-Funcional.md` §11, y en particular los **dos huecos elevados al Product Owner**.
 
 ## 6. Las tres cosas que no fallan
 
@@ -184,4 +184,5 @@ El procedimiento, en cinco preguntas, y **en este orden**:
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Recorrido de la primera hora contra la superficie: prerrequisitos con **lectura obligatoria de dos documentos**, el quick-start de tres pasos dentro del entorno de desarrollo contenido, el **primer ejemplo con sentido** —el envío del escenario `E-5`, que responde con éxito y deja el trabajo en `Borrador`— y el segundo —dos respuestas que tienen que ser indistinguibles—, cómo leer una respuesta de fallo con sus dos identificadores y sus dos excepciones, **trece diagnósticos frecuentes** de la primera hora, los próximos pasos por tarea, y **las tres cosas que no fallan** con su detección por recuento, comparación e inspección, más el procedimiento de cinco preguntas para agregar un punto de acceso nuevo. |
-| 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**. §4 actualiza el conjunto cerrado de códigos de diecisiete a **quince**. §7 actualiza el procedimiento de alta de un punto de acceso: los puntos a revisar pasan de dieciséis a **quince**, y el paso 3 deja de contemplar la excepción del establecimiento de la contraseña, **que dejó de existir** —los cuatro puntos que no exigen acceso firmado no fijan contraseñas—. **Ningún paso del recorrido de la primera hora y ningún diagnóstico cambia.** Sube minor. |
+| 1.1 | 2026-08-10 | Actualización por `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**. §3.5 actualiza el conjunto cerrado de códigos de diecisiete a **quince**. §6.3 actualiza el procedimiento de alta de un punto de acceso: los puntos a revisar pasan de dieciséis a **quince**, y el paso 3 deja de contemplar la excepción del establecimiento de la contraseña, **que dejó de existir** —los cuatro puntos que no exigen acceso firmado no fijan contraseñas—. **Ningún paso del recorrido de la primera hora y ningún diagnóstico cambia.** Sube minor. |
+| 1.2 | 2026-08-11 | **Cierra los hallazgos `B-API-01` (P0), `B-API-10` (P2), `B-API-11` (P2), `B-API-15` (P3) y `B-API-13` (P3)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0. **§1**, lectura obligatoria 1: «las quince rutas están decididas, y **quince** no lo están» pasa a «**catorce** no lo están». La única ruta que declara una fuente es la del canje: `../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §3 rotula `A-01` **[declarada por la fuente]** y las otras catorce **[derivado]**, y su §2 habla de «los **catorce** puntos restantes». Era la única frase del corpus que decía quince, y estaba en lo primero que se lee del proyecto de código. **§3.5**, última línea: el catálogo pasa de **18** a **16** entradas, recontado sobre las siete tablas de §3 de [`DX-Error-Messages.md`](DX-Error-Messages.md) (3+2+2+1+2+5+1) y coincidente con su §6.1, **16 = 14 + 2**. **§5**, última viñeta: los huecos elevados al Product Owner pasan de **tres** a **dos**; el tercero —cómo se identifica la cuenta al establecer la contraseña del primer ingreso— quedó **cerrado** por `RN-16`, y `../02-Especificacion-Funcional/Especificacion-Funcional.md` §11 ya dice «los **dos** primeros son huecos de la superficie». **La fila 1.1 se corrige en sus dos auto-citas de sección**: el conjunto cerrado se menciona en **§3.5** y no en §4, que es la tabla de diagnósticos, y el procedimiento de alta de un punto de acceso es **§6.3** y no §7, que es este mismo control de cambios. **Cabecera**: pasa a citar `PRODUCT-INTAKE` **1.26**, vigente hoy. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**, según la condición de método del informe: «catorce de las quince rutas» aparece bien en **cuatro** lugares vivos de tres documentos —`../02-Especificacion-Funcional/README.md` §5, [`README.md`](README.md) §1 y §6, y [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.2—, más `../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §2, que habla de «los catorce puntos restantes»; ésta era la única desviada; el recuento del catálogo se citaba mal en **seis lugares de cinco documentos** y los seis se corrigen en esta tanda; «tres huecos elevados» no sobrevive en ningún otro lugar vivo. **Ningún paso del recorrido de la primera hora y ningún diagnóstico cambia.** Sube minor. |

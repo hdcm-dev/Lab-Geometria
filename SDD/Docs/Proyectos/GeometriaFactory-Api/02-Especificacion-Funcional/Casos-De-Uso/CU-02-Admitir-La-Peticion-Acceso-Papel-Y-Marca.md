@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-02-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (RN-01, RN-13, **RN-16**), §4 (**F-04** precisada), §17.1.P.2 (INV-09), §17.5.P.3, §17.5.P.5 (autorización por papel **más** verificación de pertenencia), §14 (RA-01, RA-03); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4, y en particular su cuarta comprobación transversal y su precisión 5; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md`; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md`
+**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4.1 (RN-01, RN-13, **RN-16**), §4 (**F-04** precisada), §17.1.P.2 (INV-09), §17.5.P.3, §17.5.P.5 (autorización por papel **más** verificación de pertenencia), §14 (RA-01, RA-03); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4, y en particular su cuarta comprobación transversal y su precisión 5; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md`; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -127,3 +127,4 @@ Lo que este caso de uso **no** hace, y hay que dejarlo imposible de confundir: *
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** El punto de acceso **A-04 se retiró** de la superficie —era el que tenía su forma de identificación abierta— y su capacidad se ejerce por A-05, bajo esta misma guardia. **§5**: **FA-04** se rehace: deja de describir un punto sin guardia definida y pasa a describir la **excepción declarada** de A-05, que desde el intake 1.13 cubre el primer ingreso además del cambio posterior a un reseteo. **§10**: el conjunto cerrado del ensamblado pasa de diecisiete a **quince** códigos. La cabecera cita el intake **1.13**. **La guardia, sus tres causas de `401` y su recuento de once puntos protegidos no cambian**, y ahora esos once son todos los que exigen acceso: no queda ninguno aparte. Sube minor. |
+| 1.2 | 2026-08-11 | **Cierra el hallazgo `B-API-13` (P3)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0, en la extensión que la búsqueda de propagación que el propio informe exige dejó al descubierto: la cabecera citaba `PRODUCT-INTAKE` **1.13** y pasa a citar **1.26**, vigentes hoy. El informe listaba **nueve** cabeceras envejecidas y sólo una de esta carpeta, `CU-12`; el `grep` sobre las categorías 02 y 03 devuelve **diecinueve** archivos con la cita vieja, **los doce casos de uso entre ellos**, y los diecinueve se corrigen en esta tanda. Se abrieron las secciones del intake que este caso de uso cita y **su contenido no cambió** entre 1.13 y 1.26 en nada que este documento afirme, de modo que **no había ninguna afirmación falsa**: lo que se repara es la trazabilidad. **Ningún paso, código, regla, criterio de aceptación ni recuento cambia.** Sube minor. |

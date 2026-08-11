@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-11-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §7 (CL-8), §14 (RA-03), §17.5.P.3 (punto de salud), §17.5.P.4 (**aplicar las migraciones al arrancar**), §17.5.P.8 (PT-04), §17.5.P.9, §17.5.P.10 (arranque en frío), §17.5.P.12 (ventana de indisponibilidad); `Proyectos/GeometriaFactory-Infrastructure/.../CU-10-Preparar-El-Almacen-Al-Arrancar.md`, cuya forma de terminación propia es el **arranque detenido**
+**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §7 (CL-8), §14 (RA-03), §17.5.P.3 (punto de salud), §17.5.P.4 (**aplicar las migraciones al arrancar**), §17.5.P.8 (PT-04), §17.5.P.9, §17.5.P.10 (arranque en frío), §17.5.P.12 (ventana de indisponibilidad); `Proyectos/GeometriaFactory-Infrastructure/.../CU-10-Preparar-El-Almacen-Al-Arrancar.md`, cuya forma de terminación propia es el **arranque detenido**
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Api
 
 ---
@@ -125,3 +125,4 @@ Su forma de terminación es propia y no existe en ningún otro caso de uso de es
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | **Realineación de la cita viva al `PRODUCT-INTAKE` 1.13.** Este proyecto de código se emitió contra la **1.12** y la fuente está hoy en **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y precisa la capacidad **F-04**. La cabecera de trazabilidad pasa a citar **1.13**; la cita de la emisión inicial se conserva en la fila 1.0, que es trazabilidad y no una referencia desactualizada. **Ninguna sección de este contrato de uso se toca**: la decisión de 1.13 alcanza al circuito de credenciales y este caso de uso no lo expone. Sube minor: corrige una cita de trazabilidad. |
+| 1.2 | 2026-08-11 | **Cierra el hallazgo `B-API-13` (P3)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0, en la extensión que la búsqueda de propagación que el propio informe exige dejó al descubierto: la cabecera citaba `PRODUCT-INTAKE` **1.13** y pasa a citar **1.26**, vigentes hoy. El informe listaba **nueve** cabeceras envejecidas y sólo una de esta carpeta, `CU-12`; el `grep` sobre las categorías 02 y 03 devuelve **diecinueve** archivos con la cita vieja, **los doce casos de uso entre ellos**, y los diecinueve se corrigen en esta tanda. Se abrieron las secciones del intake que este caso de uso cita y **su contenido no cambió** entre 1.13 y 1.26 en nada que este documento afirme, de modo que **no había ninguna afirmación falsa**: lo que se repara es la trazabilidad. **Ningún paso, código, regla, criterio de aceptación ni recuento cambia.** Sube minor. |

@@ -3,11 +3,11 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-04-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (F-03, **F-04** precisada), §4.1 (RN-01, RN-06, RN-07, RN-13, RN-14, **RN-16**), §17.1.P.2 (**INV-09**), §7 (CL-6), §14 (RA-03), §17.5.P.5; `Proyectos/GeometriaFactory-Contracts/.../CU-02-Contrato-De-Administracion-De-Cuentas.md`; `Proyectos/GeometriaFactory-Application/.../CU-02-Gobernar-Las-Cuentas-De-La-Comision.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md`
+**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (F-03, **F-04** precisada), §4.1 (RN-01, RN-06, RN-07, RN-13, RN-14, **RN-16**), §17.1.P.2 (**INV-09**), §7 (CL-6), §14 (RA-03), §17.5.P.5; `Proyectos/GeometriaFactory-Contracts/.../CU-02-Contrato-De-Administracion-De-Cuentas.md`; `Proyectos/GeometriaFactory-Application/.../CU-02-Gobernar-Las-Cuentas-De-La-Comision.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Api
 
 ---
@@ -127,3 +127,4 @@ Lo que este caso de uso **no** hace: no compara el correo de confirmación —es
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**: habilitar una cuenta **produce su contraseña provisoria**, con el mismo mecanismo y el mismo tratamiento que el reseteo de CU-05. **§1** declara el cambio y su consecuencia: es lo que suprime el punto de establecimiento anónimo de CU-03. **§4** paso 5 suma la producción, la fijación y la marca, con la exclusión de la provisoria del registro del servidor. **§7** parte la postcondición de A-07 según la situación pretendida. **§8** rehace CA-02 y suma **CA-08**, que verifica tres provisorias distintas, ninguna en el bloqueo y **0 apariciones** en el registro. **§10** amplía la nota del listado a los dos orígenes de la marca, suma la nota que declara que las dos provisorias son el mismo mecanismo, y actualiza el conjunto cerrado del ensamblado a **quince** códigos. La cabecera cita el intake **1.13**. **Los tres puntos de acceso, sus verbos y sus códigos de respuesta no cambian.** Sube minor. |
+| 1.2 | 2026-08-11 | **Cierra el hallazgo `B-API-13` (P3)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0, en la extensión que la búsqueda de propagación que el propio informe exige dejó al descubierto: la cabecera citaba `PRODUCT-INTAKE` **1.13** y pasa a citar **1.26**, vigentes hoy. El informe listaba **nueve** cabeceras envejecidas y sólo una de esta carpeta, `CU-12`; el `grep` sobre las categorías 02 y 03 devuelve **diecinueve** archivos con la cita vieja, **los doce casos de uso entre ellos**, y los diecinueve se corrigen en esta tanda. Se abrieron las secciones del intake que este caso de uso cita y **su contenido no cambió** entre 1.13 y 1.26 en nada que este documento afirme, de modo que **no había ninguna afirmación falsa**: lo que se repara es la trazabilidad. **Ningún paso, código, regla, criterio de aceptación ni recuento cambia.** Sube minor. |
