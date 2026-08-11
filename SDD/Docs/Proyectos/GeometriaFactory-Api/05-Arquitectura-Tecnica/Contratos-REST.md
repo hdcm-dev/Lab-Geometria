@@ -1,0 +1,227 @@
+# Contrato de la superficie HTTP — GeometriaFactory-Api
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Api
+**Documento:** Contratos-REST.md
+**Versión:** 1.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-10
+**Autor:** Arquitecto de Software Senior + API Designer (AG-05)
+
+---
+
+## Tabla de contenido
+
+- [1. Alcance del contrato](#1-alcance-del-contrato)
+- [2. Formato](#2-formato)
+  - [2.1 Por qué no hay descripción formal de servicio](#21-por-qué-no-hay-descripción-formal-de-servicio)
+  - [2.2 El formato de intercambio y su configuración](#22-el-formato-de-intercambio-y-su-configuración)
+- [3. Operaciones: los quince puntos de acceso](#3-operaciones-los-quince-puntos-de-acceso)
+- [4. Los diez códigos de respuesta](#4-los-diez-códigos-de-respuesta)
+- [5. Manejo de errores: la tabla de traducción de los quince códigos](#5-manejo-de-errores-la-tabla-de-traducción-de-los-quince-códigos)
+  - [5.1 Las dos respuestas sin código del contrato](#51-las-dos-respuestas-sin-código-del-contrato)
+  - [5.2 Los dos huecos declarados del conjunto cerrado](#52-los-dos-huecos-declarados-del-conjunto-cerrado)
+  - [5.3 Las dos señales que no son fallos](#53-las-dos-señales-que-no-son-fallos)
+  - [5.4 Lo que ninguna respuesta puede decir](#54-lo-que-ninguna-respuesta-puede-decir)
+- [6. Versionado del contrato](#6-versionado-del-contrato)
+- [7. Trazabilidad](#7-trazabilidad)
+- [8. Control de cambios](#8-control-de-cambios)
+
+---
+
+## 1. Alcance del contrato
+
+Este documento declara **qué expone `GeometriaFactory-Api` hacia afuera del proceso**, con qué compromisos y con qué códigos. Es el único contrato del producto que cruza una frontera de proceso.
+
+**Su único consumidor legítimo es `GeometriaFactory-Web`, servidor a servidor.** Es `RA-01`, regla de nivel producto: **el navegador nunca alcanza esta superficie**. De ahí salen tres ausencias que este contrato declara y que no son olvidos: no hay intercambio de origen cruzado, no hay canal bidireccional y **no hay ningún punto de acceso pensado para que lo invoque un navegador**.
+
+Los casos de uso que se materializan a través de este contrato son **once de los doce** de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5. El doceavo —la colección de peticiones reproducible— **ejercita este contrato en lugar de exponerlo**, y su lugar es el árbol de muestras del repositorio.
+
+**Este documento no redefine la superficie**: la superficie la declara [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md), con sus quince puntos y sus rutas rotuladas fila por fila como propuesta derivada. Lo que este documento agrega es lo que a la categoría 05 le toca: **el formato de intercambio y su configuración, el criterio de traducción y la política de versionado**.
+
+## 2. Formato
+
+### 2.1 Por qué no hay descripción formal de servicio
+
+**Este contrato se declara en prosa estructurada y no en una descripción formal de servicio, y es un apartamiento declarado de la guía del tipo `rest-api`.**
+
+La guía exige una descripción formal para este tipo. **La fuente decide lo contrario, por escrito y con fundamento**: `PRODUCT-INTAKE` §17.4.P.2 descarta «generar el cliente desde una descripción formal» por costo de cadena de herramientas frente a un contrato que consumen dos proyectos de código del mismo producto, y §17.4.P.12 lo cierra: «se renuncia a un contrato descrito en una notación formal y a clientes generados: **con dos consumidores compilados juntos, el costo no se paga**».
+
+Emitir una descripción formal contra esa decisión crearía **una segunda fuente de verdad sobre la misma superficie**, que envejecería sin que nada la compare, en un producto cuyo defecto documentado más repetido es exactamente ése. El contrato formal del producto **es el ensamblado de tipos de transferencia**, que los dos extremos compilan, y este documento es la superficie que lo transporta.
+
+**El apartamiento se declara acá y se registra en el README de la sección**, para que una revisión posterior no lo levante como artefacto faltante.
+
+### 2.2 El formato de intercambio y su configuración
+
+**Es lo que esta categoría fija, y lo fija para los dos extremos.** `GeometriaFactory-Contracts` decidió no imponer formato —sus tipos no referencian ninguna biblioteca de serialización— y reasignó la decisión a las categorías 05 de este proyecto de código y de `GeometriaFactory-Web`; aquélla declaró que **no la toma de un solo lado** y que la toma ésta, por ser la del productor. El detalle está en [`ADR-02`](Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md); acá va el contrato.
+
+| Regla | Decisión | Qué pasa si se rompe |
+| --- | --- | --- |
+| Notación | **Notación de objetos de texto**, sobre los tipos de `GeometriaFactory-Contracts` | Declarado por el intake §17.5.P.3 |
+| Nombres de campo | **Tal como los declara el tipo**, sin transformación de estilo | Es la única convención que no puede desincronizarse, porque no hay nada que configurar distinto en cada lado |
+| Conjuntos cerrados | **Por su nombre, nunca por su posición**. Son **cuatro**: papel de la cuenta, estado de cuenta, estado del trabajo y especie de observación | Un valor insertado en el medio cambiaría el significado de **todos** los datos ya emitidos |
+| Campos nulos | **Se emiten** | La nulidad significa cosas: una credencial nula es una cuenta `Pendiente`; un comentario nulo es un trabajo sin desenlace escrito |
+| Números decimales | **Sin cultura, con punto decimal** | Es el modo de falla que el escenario `E-8` documenta como el más probable del producto; reproducirlo en la frontera propia sería absurdo |
+| Lectura de la petición | **Estricta**: un campo desconocido se rechaza con `400` | Aceptarlo en silencio deja que un extremo desactualizado envíe algo que el otro descarta sin decirlo |
+| Tamaño del cuerpo | **Un solo límite en todo el producto, tomado de configuración. El cuerpo que lo excede se rechaza con `400`. Nunca se trunca** | Truncar rompe `RN-08` **en silencio**: el trabajo queda guardado con el texto mutilado |
+| Texto original del alumno | **No se normaliza en el borde**: no se recodifica, no se recortan espacios, no se normalizan saltos de línea | El borde del proceso es el primer lugar donde el texto puede alterarse |
+
+**Transporte.** Petición y respuesta, **sin estado**, con la credencial firmada en la cabecera de autorización. En desarrollo se escucha **sin certificado**, para evitar la fricción del certificado de confianza dentro del contenedor. **Un puerto publicado hacia el enrutador es el único punto de entrada al servidor propio.**
+
+## 3. Operaciones: los quince puntos de acceso
+
+Los quince son los de [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, y **este contrato los adopta sin cambiarlos**: las rutas siguen siendo propuesta derivada de aquella categoría, rotulada fila por fila, y su forma definitiva se valida en el punto de control de la etapa `a`. Lo que esta tabla agrega es la columna de **caso de uso de la capa de aplicación** que cada punto ejerce, que es lo que ata la superficie a lo que realmente ocurre.
+
+| Punto | Verbo | Qué hace | Papel exigido | Códigos | CU de la capa de aplicación |
+| --- | --- | --- | --- | --- | --- |
+| A-01 | `POST` | Canjear correo y contraseña por una credencial firmada | Ninguno | `200`, `400`, `401`, `403` | Consulta de admisibilidad del ingreso |
+| A-02 | `POST` | Registrar una cuenta de alumno, **sin campo de contraseña**. Es anónimo por diseño y así debe seguir | Ninguno | `201`, `400`, `409` | Alta de cuenta por auto-registro |
+| A-03 | `POST` | Configurar la cuenta de administrador, **sólo mientras no exista ninguna** | Ninguno | `201`, `400`, `409` | Configuración de la cuenta de administrador |
+| A-05 | `POST` | Cambiar la contraseña propia exigiendo la vigente. **Es el único punto que levanta la marca** | `Alumno` o `Administrador` | `200`, `400`, `401` | Reemplazo de la credencial propia |
+| A-06 | `GET` | Listar las cuentas de la comisión con su situación y su marca | `Administrador` | `200`, `401`, `403` | Gobierno de las cuentas, en su lectura |
+| A-07 | `POST` | Cambiar la situación de una cuenta. **Habilitar y rehabilitar devuelven la contraseña provisoria** (`RN-16`) | `Administrador` | `200`, `400`, `401`, `403`, `404` | Gobierno de las cuentas |
+| A-08 | `DELETE` | Dar de baja una cuenta, **transportando el correo escrito como confirmación** | `Administrador` | `204`, `400`, `401`, `403`, `404` | Gobierno de las cuentas, en su baja con arrastre |
+| A-09 | `POST` | Resetear la contraseña de un alumno y devolver la provisoria **una sola vez** | `Administrador` | `200`, `400`, `401`, `403`, `404`, `409` | Reseteo de la contraseña de un alumno |
+| A-10 | `POST` | Enviar un trabajo nuevo, con el texto original **sin normalizar** | `Alumno` | `201`, `400`, `401`, `403` | Envío del trabajo e interpretación de su texto |
+| A-11 | `POST` | Reenviar un trabajo que quedó en `Borrador` | `Alumno` | `200`, `400`, `401`, `403`, `404`, `409` | Carga y reedición, y envío |
+| A-12 | `DELETE` | Eliminar un trabajo, **con los dos alcances opuestos** | `Alumno` o `Administrador` | `204`, `401`, `403`, `404`, `409` | Eliminación de un trabajo |
+| A-13 | `GET` | Listar trabajos, con el alcance que el papel determina y **sin componentes** | `Alumno` o `Administrador` | `200`, `401`, `403`, `404` | Consulta de los trabajos propios; revisión de la comisión |
+| A-14 | `GET` | Obtener el detalle de un trabajo interpretado | `Alumno` o `Administrador` | `200`, `401`, `403`, `404` | Consulta de los trabajos propios; revisión de la comisión |
+| A-15 | `POST` | Aprobar o rechazar un trabajo en estado `Pendiente`, con comentario opcional | `Administrador` | `200`, `400`, `401`, `403`, `404`, `409` | Desenlace del trabajo |
+| A-16 | `GET` | Responder por el estado del servicio. **No exige acceso** | Ninguno | `200`, `503` | Ninguno: invoca la preparación del almacén |
+
+**Quince puntos: cuatro sin credencial firmada —A-01, A-02, A-03 y A-16— y once bajo la guardia. Cuatro más once son quince.**
+
+**El identificador `A-04` está retirado y no se recicla.** Establecía la contraseña del primer ingreso **sin credencial**, y `RN-16` suprimió la operación en lugar de resolverla: habilitar produce la provisoria y el alumno cambia la suya ya autenticado, por `A-05`. **De los cuatro puntos que no exigen credencial, ninguno fija una contraseña sobre una cuenta existente**, y ésa es la propiedad que hay que poder comprobar sobre esta tabla.
+
+## 4. Los diez códigos de respuesta
+
+| Código | Qué significa en esta superficie | Origen |
+| --- | --- | --- |
+| `200` | La operación se resolvió y hay un cuerpo con el tipo de resultado del contrato | **[derivado]** |
+| `201` | Se constituyó algo que antes no existía: una cuenta o un trabajo | **[derivado]** |
+| `204` | Se retiró algo y no hay cuerpo que devolver | **[derivado]** |
+| `400` | La petición no es utilizable: falta un campo que el contrato exige, el que llegó no es del conjunto cerrado que declara, el cuerpo no se puede leer, trae un campo desconocido, o **excede el límite de tamaño** | **[derivado]** |
+| `401` | **Ante credenciales inválidas, genérico y sin declarar cuál campo falló.** También ante la ausencia de credencial, la credencial vencida y la firma que no corresponde | **Declarado** por el intake §17.5.P.5; ampliado por derivación a los tres casos de la guardia |
+| `403` | **Con motivo**, ante la cuenta que no admite acceso, ante el papel que el punto no admite y ante la cuenta con cambio de contraseña pendiente | **Declarado** por el intake §17.5.P.5 para la cuenta `Pendiente` o `Bloqueado`; los otros dos son derivación |
+| `404` | Lo pedido no existe, **o no es del solicitante, o está fuera de lo que ve**, sin que la respuesta permita distinguir los tres casos | **[derivado en el número; la obligación es de `RN-03`]** |
+| `409` | La operación es legítima y el estado no la admite | **[derivado]** |
+| `500` | Un defecto que el producto no previó. **Nunca lleva detalle de implementación** | **[derivado]** |
+| `503` | El servicio no puede atender: el almacén no está disponible, o el arranque todavía no lo dejó en condiciones | **[derivado]** |
+
+**Diez códigos: dos de la fuente y ocho de derivación**, con el matiz declarado del `404`, cuyo **número** es derivado y cuya **obligación** no lo es.
+
+**Dos códigos que esta superficie no usa, y su ausencia es informativa.** No hay respuesta de entidad no procesable: el conjunto de causas que otro producto pondría ahí —un texto del alumno que no verifica— **no es un fallo en éste** (§5.3). Y no hay respuesta de exceso de peticiones: ninguna fuente declara límite de caudal, el previsto es de una comisión durante una clase, y agregarlo sería una decisión que nadie tomó ([`ADR-05`](Adrs/ADR-05-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md)).
+
+## 5. Manejo de errores: la tabla de traducción de los quince códigos
+
+Una petición que falla atraviesa **dos** traducciones: motivo interno a **código del contrato**, y código del contrato a **código de respuesta**. Las dos son de esta capa ([`ADR-04`](Adrs/ADR-04-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md)), y ésta es la tabla única de la segunda.
+
+El conjunto cerrado lo declara `GeometriaFactory-Contracts` y tiene **quince** códigos vivos. Sobre **dieciocho** identificadores que ese ensamblado emitió a lo largo de su historia, **tres están retirados y ninguno se recicla**. **Esta capa no agrega, no renombra y no traduce a texto ninguno.**
+
+**Las quince filas están, una por código, sin agrupar.**
+
+| Código del contrato | Código de respuesta | Fundamento |
+| --- | --- | --- |
+| `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | La petición no es utilizable, y la respuesta **nombra el campo ausente** sin agregar nada más |
+| `CONTRATO_CREDENCIAL_INVALIDA` | `401` | **Declarado por la fuente.** Genérico: la respuesta **no declara cuál de los dos campos falló** |
+| `CONTRATO_CUENTA_NO_HABILITADA` | `403` | **Declarado por la fuente**, con motivo, para que la persona sepa en qué situación está su cuenta |
+| `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | `403` | Con motivo. **Es un solo código para todas las operaciones bloqueadas y para los dos orígenes de la marca** —la habilitación y el reseteo—, y acá un solo código de respuesta para todas |
+| `CONTRATO_TRABAJO_NO_ENCONTRADO` | `404` | **`RN-03`.** Cubre el inexistente, el ajeno y el que está fuera de lo que el solicitante ve, y las tres respuestas son **indistinguibles** |
+| `CONTRATO_ALUMNO_NO_ENCONTRADO` | `404` | El filtro por alumno referencia un identificador que no existe, y —por adopción declarada de la categoría 02— la cuenta que un punto de administración referencia y no existe |
+| `CONTRATO_CORREO_YA_REGISTRADO` | `409` | El estado del conjunto no admite la operación. La respuesta **no declara la situación ni el papel** de la cuenta que ocupa el correo |
+| `CONTRATO_ADMINISTRADOR_YA_CONFIGURADO` | `409` | Ídem, y **el contrato no ofrece camino alternativo**: la respuesta no sugiere ninguno |
+| `CONTRATO_CONFIRMACION_NO_COINCIDE` | `400` | Es un campo de la petición que no cumple lo que el contrato le pide, no un estado que impida la operación. **La respuesta no devuelve el correo esperado** |
+| `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | `409` | El estado del trabajo no habilita al solicitante. La respuesta **declara el estado actual**, que es lo que el contrato ya transporta |
+| `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | `409` | Ídem, **incluido el estado terminal**, y la respuesta **no sugiere ninguna forma de revertirlo** |
+| `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | `403` | Es una negativa de facultad y **no tiene nada que ocultar**: no hay recurso ajeno cuya existencia proteger, porque el trabajo puede ser propio |
+| `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | `409` | El sujeto del reseteo no lo admite. **No es `403`**: quien pide tiene la facultad, y lo que no procede es la operación sobre esa cuenta |
+| `CONTRATO_ERROR_NO_CLASIFICADO` | `403`, `409`, `500` o `503` | **Es el único código con más de un destino, y la distinción es derivación de la categoría 02, que esta categoría adopta**: `403` cuando el papel no alcanza **en uno de los tres caminos sin código de facultad propio**; `409` cuando se fuerza un reenvío o una reedición sobre un trabajo que no está en `Borrador`, **camino que tampoco tiene código propio**; `503` cuando la causa es una terminación degradada del almacén, que no depende de lo que se pidió y puede resolverse sola; `500` cuando es un defecto no previsto |
+| `CONTRATO_SERVICIO_NO_DISPONIBLE` | **Ninguno** | **No lo produce esta capa.** El ensamblado lo declara «el único que el contrato admite que produzca la propia pieza pública, porque describe la ausencia de respuesta de la otra pieza». Una respuesta de esta superficie con este código sería una contradicción en sus términos: **si hay respuesta, el servicio respondió** |
+
+**Quince códigos: catorce con destino en esta superficie y uno sin él. Quince filas para quince códigos, ninguna excedente.**
+
+**Que el código genérico tenga cuatro destinos no es una comodidad: es el síntoma medible de los dos huecos de §5.2**, y dos de esos cuatro destinos existen **sólo** porque el conjunto cerrado no tiene un código propio para esos caminos.
+
+### 5.1 Las dos respuestas sin código del contrato
+
+| Respuesta | Cuándo | Por qué no lleva código |
+| --- | --- | --- |
+| `401` de la guardia | No hay credencial, la credencial venció, o su firma no corresponde | El conjunto cerrado **no declara ninguno** que describa una credencial ausente o inválida, y **esta capa no inventa códigos**. Lo que el consumidor necesita saber es que tiene que volver a canjear credenciales, y eso lo dice el número |
+| `400` de petición ilegible | El cuerpo no se puede leer, un valor no pertenece a un conjunto cerrado, llega un campo desconocido, o el cuerpo excede el límite | Ocurre **antes** de que la petición llegue a ser el tipo del contrato: no hay contrato con el que hablar todavía |
+
+**Las dos son deliberadas y se declaran para que su ausencia de código no se lea como un olvido.**
+
+### 5.2 Los dos huecos declarados del conjunto cerrado
+
+No se resuelven acá y están elevados al Product Owner. **Esta categoría no inventa un código para taparlos**, porque los códigos son del ensamblado de contratos.
+
+| Hueco | Qué falta | Qué se hace mientras tanto |
+| --- | --- | --- |
+| **El papel no alcanza, fuera del desenlace** | El conjunto cerrado tiene **un solo** código de facultad y su enunciado está acotado al desenlace de la revisión. La capa de aplicación emite un motivo de facultad requerida también en **el gobierno de cuentas, el reseteo y la revisión de la comisión** | El código genérico con respuesta `403`. **Dice el número correcto y no dice el motivo** con la precisión que el producto ya sabe darle en el caso vecino |
+| **El trabajo no está en `Borrador`, fuera de la eliminación** | El código análogo está acotado por su enunciado **a la eliminación y al camino del alumno**. Un envío o una reedición forzados fuera de `Borrador` no tienen dónde ir | El código genérico con respuesta `409`, con la misma pérdida de precisión |
+
+### 5.3 Las dos señales que no son fallos
+
+| Señal | Qué viaja | Por qué no es un fallo |
+| --- | --- | --- |
+| **El envío cuyo texto no verifica** | Respuesta **exitosa**, con el trabajo guardado, el estado `Borrador`, el texto conservado íntegro y las observaciones con su índice de figura y su campo | **El trabajo se guardó y su estado se decidió.** Lo que no verifica es el texto, no la petición. Un código de fallo le diría a la persona que su petición estaba mal mientras su trabajo, en realidad, quedó guardado |
+| **El listado sin elementos** | Respuesta **exitosa** con una colección vacía | Una comisión sin entregas todavía. El consumidor distingue vacío de fallo **por el tipo recibido y no por el conteo** |
+
+**Ninguna de las dos tiene código de respuesta de fallo, y ninguna figura en la tabla de §5.**
+
+### 5.4 Lo que ninguna respuesta puede decir
+
+Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afuera**: es la última vez que un dato del backend es tocado antes de salir del servidor propio.
+
+| Nunca aparece en una respuesta | Qué corresponde en su lugar |
+| --- | --- |
+| La **dirección de un servicio interno**, en cualquier forma | El motivo, sin origen |
+| La **ruta del archivo del almacén** | «El servicio no puede atender» |
+| La **clave de firma**, ni una parte de ella | «No hay credencial válida» |
+| La **contraseña en claro** ni el valor derivado de una credencial | La respuesta genérica de credenciales inválidas |
+| La **contraseña provisoria**, fuera del cuerpo del resultado del reseteo y de la habilitación | Nada: el valor viaja en el resultado, **una sola vez**, y no en ningún otro lado |
+| **Trazas de la implementación**, nombres de tipos internos o cadenas de llamada | El código genérico, con su código de respuesta |
+
+**Y la contracara, que es igual de obligatoria:** registro estructurado del lado del servidor **de cada error y de cada intento de acceso rechazado**. Sin ese registro, la prohibición de exponer se convierte en imposibilidad de diagnosticar, y el operador que despliega a mano se queda sin nada que mirar.
+
+## 6. Versionado del contrato
+
+**No se versionan las rutas, y lo que lo reemplaza es el despliegue conjunto de las dos piezas desplegables ante todo cambio de contrato** ([`ADR-08`](Adrs/ADR-08-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md)). No hay clientes de terceros: los dos extremos compilan contra el mismo ensamblado y **un cambio incompatible rompe la compilación antes de romper el tiempo de ejecución**.
+
+| Cambio sobre este contrato | Clase | Qué obliga |
+| --- | --- | --- |
+| Quitar o renombrar un punto de acceso, o cambiar su verbo | Mayor | Despliegue conjunto |
+| Cambiar el papel que un punto exige, o sacarlo de la guardia | Mayor | Despliegue conjunto, **y modificación de [`ADR-03`](Adrs/ADR-03-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md)** |
+| Cambiar el código de respuesta de un código del contrato | Mayor | Despliegue conjunto |
+| Quitar un código del conjunto cerrado, o reciclar un identificador retirado | Mayor | Es del ensamblado de contratos, **y reponer un identificador retirado se rechaza aunque compile** |
+| Cambiar cualquiera de las ocho reglas de §2.2 | Mayor | **Los dos extremos a la vez**: es la clase de cambio que **no rompe ninguna compilación** |
+| Agregar un punto de acceso | Menor | Entra a la tabla de §3 **en la misma intervención**, y la prueba de inspección de la guardia falla si no está |
+| Agregar un código al conjunto cerrado | Menor | Entra a la tabla de §5 con su destino |
+| Corregir un punto para que cumpla lo que ya declaraba | Parche | Ninguna |
+
+**Compatibilidad hacia atrás: no hay convivencia de dos versiones y no hay deprecación gradual.** La política es corregir los dos lados en la misma etapa. **Cada etapa cerrada recibe una etiqueta**, y la reversión es volver a la etiqueta anterior y reconstruir.
+
+**Tres clases de cambio que la compilación compartida no detecta**, y cada una con su mecanismo: la **configuración de intercambio**, fijada de un solo lado en §2.2; el **esquema del almacén**, verificado al arrancar con su linaje, que detiene el arranque si no cierra; y las **rutas**, ejercidas por la batería de integración contra el servicio real.
+
+## 7. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| CU que lo materializan | **Once** de los doce de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5. `CU-12` lo **ejercita** en lugar de exponerlo |
+| Puntos de acceso | **Quince**: A-01 a A-03 y A-05 a A-16. `A-04` retirado y **no reciclado** |
+| Códigos de respuesta | **Diez** distintos, de §4 |
+| Códigos del contrato | **Quince** vivos sobre **dieciocho** identificadores emitidos por `GeometriaFactory-Contracts`; **catorce con destino acá y uno sin él** |
+| CU de la capa de aplicación | Los **once**, con el reparto de la columna de §3 y la correspondencia de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.4 |
+| RN que cubre | RN-01 a RN-16, las **dieciséis**, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2. **Trece** tienen tramo acá; RN-05, RN-14 y RN-16 no. **Dos** se rompen desde acá: RN-03 y RN-13 |
+| Invariantes | INV-01 a INV-09, los **nueve**, con el aporte declarado en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
+| Reglas de arquitectura | **Las tres.** `RA-01` la sostiene y es el único que puede romperla; `RA-02` no tiene tramo acá y se declara; `RA-03` se ejerce en §5.4 |
+| ADR que lo gobiernan | ADR-02, ADR-03, ADR-04, ADR-05, ADR-08 |
+| Consumidor | **Uno solo**: `GeometriaFactory-Web`, servidor a servidor, por HTTP en tiempo de ejecución |
+| Tests previstos en 08 | **Una prueba por código del conjunto cerrado**, no una por punto de acceso; la inspección de la tabla de §5 en las dos direcciones; las tres comparaciones de respuestas indistinguibles; la prueba de texto original byte a byte y la de rechazo sin truncamiento; la de eliminación forzada en sus dos alcances; y la colección de peticiones reproducible como ejercicio de punta a punta |
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Declara el apartamiento de la descripción formal de servicio con el fundamento de la fuente, **fija el formato de intercambio y su configuración para los dos extremos** con sus ocho reglas —cerrando el punto abierto que `GeometriaFactory-Contracts` reasignó y `GeometriaFactory-Web` devolvió—, adopta los quince puntos de acceso con la columna de caso de uso que cada uno ejerce, los diez códigos de respuesta con las dos ausencias informativas, y publica la **tabla de traducción con sus quince filas** —catorce con destino y una sin él—, las dos respuestas sin código, los dos huecos declarados, las dos señales que no son fallos, la prohibición de `RA-03` y la política de versionado sin versionado de rutas con las tres clases de cambio que la compilación no detecta. |
