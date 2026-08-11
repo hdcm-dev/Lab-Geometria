@@ -1,0 +1,68 @@
+# US-01 — Canjear correo y contraseña por un acceso firmado con sus cuatro reclamos
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Api
+**Documento:** US-01-Canjear-Correo-Y-Contrasena-Por-Un-Acceso-Firmado.md
+**Versión:** 1.0
+**Estado:** Propuesta
+**Fecha:** 2026-08-10
+**Autor:** Scrum Master + API Product Owner (AG-06)
+**Épica:** EP-02 Identidad del administrador y sesión
+**Etapa del producto:** `c`
+**Punto de acceso:** `A-01`, **fuera de la guardia**: es el punto que produce el acceso
+**Prioridad MoSCoW:** Must
+**Estimación:** Sin fijar (ver [`../Product-Backlog.md`](../Product-Backlog.md) §4.1)
+
+## 1. Historia
+
+Como **código de `GeometriaFactory-Web`, servidor a servidor**, quiero **canjear el correo y la contraseña de una persona por un acceso firmado**, para **poder adjuntarlo en las peticiones siguientes sin volver a manejar la contraseña**.
+
+## 2. Contexto
+
+`NB-02` pide identidad propia del alumno. Es **el único punto de acceso que una fuente declara con su ruta** (`02` §11), y su flujo lo fija `PRODUCT-INTAKE` §17.5.P.5. El contrato de uso es [`CU-01`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Canjear-Credenciales-Por-Un-Acceso-Firmado.md).
+
+## 3. Criterios de aceptación
+
+- Given credenciales correctas de una cuenta admisible, When se las canjea, Then se devuelve un acceso firmado con sus **cuatro** reclamos: identificador, correo, **papel** y expiración.
+- Given ese acceso, When se lo usa en una petición siguiente, Then la guardia lo admite hasta su expiración.
+- Given un acceso vencido, When se lo usa, Then se rechaza: **no hay acceso de refresco** en este alcance y la renovación es reingreso.
+
+## 4. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| NB upstream | NB-02 |
+| CU cubiertos | CU-01 |
+| RN que ejerce | RN-01 en el transporte del papel, RN-06 |
+| Componente de `05` §3.1 | Superficie de acceso y credencial propia |
+| ¿Decide qué se dice? | **No.** La admisibilidad llega resuelta y el mecanismo de firma es de `GeometriaFactory-Infrastructure` |
+| Familia empobrecida | **Sí**, por su camino de rechazo: ver US-02 |
+| BT derivadas | BT-10, BT-16 |
+| Tests previstos en 08 | Batería de integración contra el servicio real |
+
+## 5. Prioridad y estimación
+
+`Must` por derivar de `F-05`, `Must Have`, y porque sin acceso firmado ninguna de las otras catorce superficies puede admitir una petición.
+
+**Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
+
+## 6. DoR check
+
+- [x] Declara al menos un caso de uso de 02
+- [x] Declara la necesidad de negocio y la etapa del roadmap
+- [x] Criterios en Given/When/Then, con camino feliz y caso de borde
+- [x] Declara el punto de acceso que la realiza y el componente de `05` §3.1 que lo aloja
+- [x] Declara si su punto está bajo la guardia, y si no lo está, cuál de las cuatro ausencias declaradas es
+- [x] Toda condición que transporta es uno de los quince códigos vivos del contrato, con su destino declarado
+- [x] Declara que no decide qué se dice
+- [x] Declara si su respuesta pertenece a una de las tres familias deliberadamente empobrecidas
+
+## 7. Notas y supuestos
+
+**La vigencia exacta sigue abierta.** El intake declara «corta» y **sin acceso de refresco** y no fija número; la ADR correspondiente fija el **criterio** —que caduque dentro de la sesión de trabajo de una clase— y toma el número de configuración. Es `PA-05` de [`../Product-Backlog.md`](../Product-Backlog.md) §6, cerrado como trabajo en BT-10.
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.3 previó con este mismo identificador y este mismo contenido. |
