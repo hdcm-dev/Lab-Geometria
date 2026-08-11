@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Matriz-Sensado-Deriva.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Variante:** Sensado de deriva por contratos de verificación
-**Trazabilidad upstream:** [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 §3 y los tres contratos de verificación de [`../10-Examples/ejemplo-01-basico.md`](../10-Examples/ejemplo-01-basico.md), [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio.md) y [`../10-Examples/ejemplo-03-avanzado.md`](../10-Examples/ejemplo-03-avanzado.md), los tres 1.0; `Deriva-Rules.md` §2.3, §2.4, §3 y §4
+**Trazabilidad upstream:** [`../10-Examples/README.md`](../10-Examples/README.md) 1.1 §3 y los tres contratos de verificación de [`../10-Examples/ejemplo-01-basico.md`](../10-Examples/ejemplo-01-basico.md), [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio.md) y [`../10-Examples/ejemplo-03-avanzado.md`](../10-Examples/ejemplo-03-avanzado.md), los tres 1.0; `Deriva-Rules.md` §2.3, §2.4, §3 y §4
 **Trazabilidad downstream:** [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7, que declaraban su ausencia y ahora la citan; `09-Devops`
 
 ---
@@ -79,4 +79,5 @@ De la fila «Contratos y comportamiento (`VER-XX`)» de `Deriva-Rules.md` §3, s
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Actualización de trazabilidad al resolver el informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** El `README.md` de [`../10-Examples/`](../10-Examples/), del que esta matriz toma sus contratos, pasó a **1.1** al corregir sus puntos abiertos falsos sobre el `PRODUCT-INTAKE` §16.1 y §18; la trazabilidad upstream lo cita ahora en esa versión. Las carpetas de `/samples` que el **P0-1** reclamaba **ya existen**, esqueletadas con su README local y su comando previsto, de modo que el «método de verificación» de cada fila apunta a una ruta que resuelve. **Ninguna fila, contrato, umbral ni estado cambia**, y las sondas siguen en `Sin verificar` sin fecha. Contrastado contra el texto vivo del `PRODUCT-INTAKE` **1.25**, en particular §16.1 y §18, y no contra lo que otro documento dice de ellas. Sube minor. |
 | 1.0 | 2026-08-11 | Emisión inicial, abierta por AG-10 al cerrar la fase que genera la categoría 10, que es el segundo momento de sensado de `Deriva-Rules.md` §4. Cierra el hueco que [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7 declararon como condicionado y temporal. Declara **tres** filas, `SD-01` a `SD-03`, una por contrato de verificación, con el comando del contrato como método, el campo `evidencia` del sample como evidencia esperada, el umbral de la fila «Contratos y comportamiento» de `Deriva-Rules.md` §3 y estado `Sin verificar` sin fecha. Declara la precisión de que estas sondas detectan el cambio que **compila igual** y cambia la frontera, no el incompatible que rompe la compilación, y qué queda fuera de su alcance, empezando por el gate bloqueante `QG-05`. |

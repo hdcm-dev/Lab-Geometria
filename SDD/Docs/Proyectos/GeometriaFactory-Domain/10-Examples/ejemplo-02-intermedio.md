@@ -3,13 +3,13 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
-**Ubicación del código:** `/samples/domain/02-intermedio/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-05` a `CU-08`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-05` a `OP-08`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-11` a `TC-18`; `PRODUCT-INTAKE` 1.22 §20, escenarios `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`
+**Ubicación del código:** [`/samples/domain/02-intermedio/`](../../../../../samples/domain/02-intermedio/), esqueletada con su README local y su comando previsto
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-05` a `CU-08`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-05` a `OP-08`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-11` a `TC-18`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02` como sonda; `11-Documentacion` cuando se emita
 
 ---
@@ -20,7 +20,7 @@ Demostrar el ciclo de vida del trabajo dentro del dominio, con los datos reales 
 
 ## 2. Nivel
 
-**Intermedio.** Supone hecho el ejemplo 01: la cuenta ya existe, está habilitada y es admisible. Agrega dos de los **cinco** componentes que aquél no tocaba —adopción de la interpretación y máquina de estados del trabajo—, e introduce los **ocho** escenarios reales del intake §20 como material de entrada.
+**Intermedio.** Supone hecho el ejemplo 01: la cuenta ya existe, está habilitada y es admisible. Agrega dos de los **cinco** componentes que aquél no tocaba —adopción de la interpretación y máquina de estados del trabajo—, e introduce **seis** de los ocho escenarios reales del intake §20 como material de entrada —`E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`—, con el motivo de los dos que no entran declarado en el §2 del [`README.md`](README.md) de la categoría.
 
 ## 3. Prerequisites
 
@@ -42,8 +42,8 @@ samples/domain/02-intermedio/
 ├── README.md                       # Copia corta de §1, §3 y §4 de este documento
 ├── Program.<ext>                   # Recorre los seis escenarios en orden
 ├── Escenarios/
-│   ├── E1.json  E3.json  E4.json   # Transcriptos del PRODUCT-INTAKE §20, sin modificación
-│   ├── E5.json  E6.json  E8.json
+│   ├── E1.txt   E3.txt   E4.txt    # Transcriptos del PRODUCT-INTAKE §20, sin modificación
+│   ├── E5.txt   E6.txt   E8.txt
 │   └── Interpretacion.<ext>        # Compone el resultado de interpretación de cada texto
 ├── Recorrido/
 │   ├── ActoConstituirTrabajo.<ext>       # OP-05
@@ -53,6 +53,8 @@ samples/domain/02-intermedio/
 └── tests/
     └── SalidaEsperada.<ext>        # Compara la salida contra el snapshot de §6
 ```
+
+**Los seis archivos de escenario llevan extensión `.txt` y no `.json`.** Es la convención de los siete proyectos de código del producto y tiene un motivo verificable: el texto de `E-2` **no es JSON estrictamente válido** —trae dos comas finales— y nombrar `.json` a un archivo de escenario invita a que una herramienta lo reformatee al abrirlo. Acá `E-2` no está entre los seis, de modo que el riesgo no se materializa en este sample; la convención se sigue igual para que la carpeta de escenarios sea la misma en los siete proyectos de código.
 
 **`Interpretacion.<ext>` no es un intérprete.** El dominio **no produce** el resultado de la interpretación: lo adopta ya producido ([`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, `OP-06` y `OP-07`). El archivo compone a mano, para cada escenario, el conjunto de piezas y observaciones que el consumidor le entregaría, y es deliberado que se vea así de explícito: es la frontera que el sample enseña.
 
@@ -135,4 +137,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Corrección del hallazgo P3-1 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** El árbol de §5 nombraba los **seis** archivos de escenario con extensión `.json` —`E1`, `E3`, `E4`, `E5`, `E6` y `E8`—, contra la convención `.txt` que declaran los otros seis proyectos de código del producto, y este proyecto de código no declaraba el fundamento en ninguna parte de su categoría 10. Se corrigen las **dos** líneas del árbol y se agrega el fundamento debajo. **Ningún dato estaba en riesgo**: el único escenario que no es JSON estrictamente válido es `E-2`, que no está entre los seis. Se corrige además, fuera del informe, la §2, que declaraba «los **ocho** escenarios reales del intake §20 como material de entrada» cuando el sample usa **seis** y su propia §5, su §6 y el `README.md` de la categoría dicen seis. Se enlaza la carpeta esqueletada de `/samples` creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento del contrato cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-05` a `CU-08` con las operaciones `OP-05` a `OP-08`, sobre los **seis** escenarios reales `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8` del `PRODUCT-INTAKE` §20, transcriptos sin modificación. El contrato `VER-02` declara seis líneas exactas de salida y **una aserción negativa** sobre el índice reportado; `evidencia` queda en `No verificado — sin código`. |

@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **ocho** contratos de uso y las **once** restricciones transversales; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, las **ocho** familias de tipos; [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **veintidós** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1, los **veintidós** casos de prueba; `PRODUCT-INTAKE` 1.22 §16.1, §18 y §20
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **ocho** contratos de uso y las **once** restricciones transversales; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, las **ocho** familias de tipos; [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **veintidós** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1, los **veintidós** casos de prueba; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma las tres sondas `VER-XX`; `11-Documentacion` cuando se emita
 
 ---
@@ -28,7 +28,7 @@
 
 ## 1. Qué hay en esta carpeta
 
-Tres markdown explicativos con sus **diez** secciones obligatorias de `Rules-Examples.md` §4.2, y este índice. Cada uno apunta a una carpeta ejecutable de `/samples/contracts/`, que esta pasada deja **esqueletada**: con su README local y su comando previsto, y sin corrida hecha.
+Tres markdown explicativos con sus **diez** secciones obligatorias de `Rules-Examples.md` §4.2, y este índice. Cada uno apunta a una carpeta ejecutable de [`/samples/contracts/`](../../../../../samples/contracts/), que esta pasada deja **esqueletada**: con su README local y su comando previsto, y sin corrida hecha. **Las tres carpetas existen** —[`01-basico/`](../../../../../samples/contracts/01-basico/), [`02-intermedio/`](../../../../../samples/contracts/02-intermedio/) y [`03-avanzado/`](../../../../../samples/contracts/03-avanzado/)—, cada una con su `README.md` local y el comando previsto de su contrato, y ninguna con código.
 
 Es la **pasada de diseño** de `Rules-Examples.md` §0.2: los tres contratos de verificación están completos salvo `evidencia`, que dice `No verificado — sin código` en los tres.
 
@@ -87,13 +87,13 @@ Dos desvíos declarados, ninguno de nomenclatura por dominio:
 1. **Un nivel de espacio de nombres por proyecto de código.** `Rules-Examples.md` §2.3 supone un proyecto de código por repositorio; este producto tiene **siete** en uno solo (`PRODUCT-INTAKE` §13 y §16). Se agrega el segmento `contracts/`, que es carpeta extra y no renombre de las base.
 2. **Los slugs son de nivel.** `basico`, `intermedio` y `avanzado`, los tres admitidos por `Rules-Examples.md` §3.1. No se usa `-con-extensiones` porque el flag `tiene_extensibilidad` de este proyecto de código es **false** (`PRODUCT-MANIFEST` §5), ni `-integracion-real` porque la integración real vive en `GeometriaFactory-Api` y no acá.
 
-**Tensión con `PRODUCT-INTAKE` §16.1, declarada y elevada.** Esa sección dice que Domain, Application, Infrastructure y Contracts van «sin samples propios: no son consumidas por integradores externos, sólo por Api. Su verificación vive en `tests/`». Esta categoría emite igual, con tres fundamentos verificables:
+**Tensión con `PRODUCT-INTAKE` §16.1, declarada, elevada y resuelta.** La redacción de §16.1 anterior al 2026-08-11 decía que Domain, Application, Infrastructure y Contracts iban «sin samples propios: no son consumidas por integradores externos, sólo por Api. Su verificación vive en `tests/`». Esta categoría emitió igual, con tres fundamentos verificables:
 
 - El motivo que §16.1 da alcanza a la **arista A** de `Rules-Examples.md` §0.1. La **arista B** tiene otro destinatario, declarado en esa misma sección: «al equipo que construye, y a los agentes de IA que codifican contra la especificación».
 - La consecuencia práctica es más fuerte acá que en cualquier otro proyecto de código del producto: la verificación de este ensamblado **no vive en `tests/` de este proyecto de código** sino en la batería de integración de `GeometriaFactory-Api`, de nivel topológico 3. Hasta que ese proyecto de código exista, los tres samples son lo **único** ejecutable que ejercita esta superficie.
 - `Deriva-Rules.md` §2.4 y §6 exigen que ningún proyecto de código con categoría 10 quede sin matriz de sensado, y los propios artefactos de `08` declararon la omisión de la suya como **condicionada y temporal** ([`../08-Calidad-Y-Pruebas/README.md`](../08-Calidad-Y-Pruebas/README.md) §3).
 
-**Lo que queda abierto:** la consolidación de `PRODUCT-INTAKE` §16.1. Corregirlo es del Product Owner sobre su propio documento, con el mismo criterio con que el `PRODUCT-MANIFEST` §5 trata el residuo de §18 sobre el número de funciones de la fachada. **Hasta que se consolide, la fuente vinculante de la estructura de `/samples/contracts/` es esta sección.**
+**El punto que quedaba abierto está cerrado, y se conserva con su desenlace.** Este README declaraba como abierta la consolidación de §16.1 y la elevaba al Product Owner. **La consolidación se hizo**: el `PRODUCT-INTAKE` **1.23** reescribió esa fila el mismo 2026-08-11, en el mismo commit que entregó esta categoría, y el **1.25** vigente le asigna a este proyecto de código carpeta propia —«**`/samples/domain/` y `/samples/contracts/`** [AMPLIADO 2026-08-11]»— con el mismo argumento de la segunda audiencia que esta sección construyó. De modo que **la fuente vinculante de la estructura de `/samples/contracts/` es §16.1 del `PRODUCT-INTAKE`**, y no esta sección. **No queda ningún punto abierto sobre §16.1 por parte de este proyecto de código**, y tampoco sobre §18: la 1.25 precisó que «las tres muestras `S-1`, `S-2` y `S-3` **no son el conjunto de las carpetas** de `/samples`».
 
 ## 6. Cómo agregar un sample nuevo
 
@@ -113,4 +113,5 @@ Los tres samples respetan la **regla de exposición de la frontera** de [`../05-
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Correcciones del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0, contrastadas contra el texto vivo del `PRODUCT-INTAKE` 1.25.** **P0-1**: las tres carpetas de [`/samples/contracts/`](../../../../../samples/contracts/) se crean de verdad, cada una con su README local y su comando previsto, y §1 lo declara con el enlace; el comando de las tres filas `VER-XX` de la matriz de sensado queda coherente con lo que existe. **P1-1**: se cierra el punto abierto sobre §16.1, que era falso —la consolidación la hizo el intake 1.23 en el mismo commit que emitió esta categoría—; la fila se conserva con su desenlace y se declara que la fuente vinculante de la estructura es §16.1 y no este README. **P1-2**: se retira la invocación del «residuo de §18 sobre el número de funciones de la fachada», que §18 no tiene: la sección vigente enumera las **seis** funciones y las rotula «las seis que §17.7 P.3 declara desde 1.6». **P1-3**: se registra que la 1.25 precisó que las tres muestras `S-X` de §18 no son el conjunto de las carpetas de `/samples`. Se actualiza la trazabilidad upstream a la versión **1.25** del intake. Ningún recuento, contrato, sample ni cobertura cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial de la categoría, en la **pasada de diseño** de `Rules-Examples.md` §0.2. Declara **tres** samples con su tabla maestra y la tabla de contratos de verificación con las sondas `VER-01` a `VER-03` en `No verificado — sin código`. Verifica **8 de 8** contratos de uso, **8 de 8** familias de tipos y **8 de 8** escenarios del `PRODUCT-INTAKE` §20, uno por uno. Declara qué gates de la categoría 08 quedan ejercidos desde afuera del pipeline y cuál —`QG-05`— no, por depender de la batería de integración de `GeometriaFactory-Api`. Declara los **dos** desvíos respecto de §2.3 y la tensión con `PRODUCT-INTAKE` §16.1, elevada al Product Owner con su fundamento. |

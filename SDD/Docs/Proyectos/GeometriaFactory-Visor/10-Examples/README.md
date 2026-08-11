@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **siete** casos de uso y el contrato de la fachada; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md); [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3, las **catorce** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0, los **veintiún** casos de prueba; `PRODUCT-INTAKE` 1.22 §15, §16.1, §17.7, §18 y §20
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **siete** casos de uso y el contrato de la fachada; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md); [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3, las **catorce** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0, los **veintiún** casos de prueba; `PRODUCT-INTAKE` **1.25** §15, §16.1, §17.7, §18 y §20
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que suma las tres sondas `VER-XX` como `SD-13` a `SD-15`; [`../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md`](../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md), que usa el sample 03 como batería de aceptación de un reemplazo; `11-Documentacion` cuando se emita
 
 ---
@@ -28,7 +28,7 @@
 
 ## 1. Qué hay en esta carpeta
 
-Tres markdown explicativos con sus **diez** secciones obligatorias de `Rules-Examples.md` §4.2, y este índice. Cada uno apunta a una carpeta ejecutable de `/samples/visor/`, que esta pasada deja **esqueletada**: con su README local y su comando previsto, y sin corrida hecha.
+Tres markdown explicativos con sus **diez** secciones obligatorias de `Rules-Examples.md` §4.2, y este índice. Cada uno apunta a una carpeta ejecutable de [`/samples/visor/`](../../../../../samples/visor/), que esta pasada deja **esqueletada**: con su README local y su comando previsto, y sin corrida hecha. **Las tres carpetas existen** —[`01-basico/`](../../../../../samples/visor/01-basico/), [`02-intermedio/`](../../../../../samples/visor/02-intermedio/) y [`03-avanzado/`](../../../../../samples/visor/03-avanzado/)—, cada una con su `README.md` local y el comando previsto de su contrato, y ninguna con código.
 
 Es la **pasada de diseño** de `Rules-Examples.md` §0.2: los tres contratos de verificación están completos salvo `evidencia`, que dice `No verificado — sin código` en los tres.
 
@@ -92,7 +92,11 @@ Tres desvíos, los tres declarados acá y ninguno de nomenclatura por dominio:
 
 **Sin tensión con `PRODUCT-INTAKE` §16.1.** A diferencia de los otros dos proyectos de código de nivel topológico 0, acá el intake **exige** el sample: §16.1 declara que `/samples` de `GeometriaFactory-Visor` lleva una «página integradora sin backend», y agrega que «es una propiedad exigida explícitamente por RT §8.3 y por el criterio de aceptación de la etapa `g`, no un agregado de conveniencia». Estos tres documentos materializan esa exigencia.
 
-**Un residuo del intake que esta categoría no corrige y sí declara.** El `PRODUCT-INTAKE` §18, al describir el punto de extensión, enumera las funciones de la fachada; el `PRODUCT-MANIFEST` §5 ya registró que esa enumeración quedó como **residuo de la fuente anterior a la versión 1.6** del intake y que la sección que lleva el contrato es §17.7.P.3, con **seis** funciones. Estos samples se escriben contra §17.7.P.3 y contra `Definicion-Contrato-De-Fachada.md` §4, que declaran las seis. **Corregir §18 es del Product Owner sobre su propio documento.**
+**El residuo del intake §18 que esta sección declaraba ya no existe, y la afirmación se retira.** La versión 1.0 de este README decía que §18, al describir el punto de extensión, arrastraba una enumeración de **cinco** funciones de la fachada, y lo tomaba del `PRODUCT-MANIFEST` §5 en lugar de abrir §18. **§18 abierto en la fuente dice otra cosa**, y desde la versión 1.11 del intake:
+
+> El punto de extensión del producto es el contrato de la fachada del visor (`inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento`, las **seis** que §17.7 P.3 declara desde 1.6).
+
+Las **seis**, por nombre y con el rótulo del recuento. §18, §17.7.P.3 y [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §4 **coinciden**, y contra las tres se escriben estos samples. **Lo que sí quedó desactualizado es el `PRODUCT-MANIFEST` §5**, que afirmaba que «la enumeración de §18 del intake sigue nombrando cinco»; esa línea se corrigió el 2026-08-11 al resolver el hallazgo **P1-2** del informe de auditoría de esta fase. **No hay nada que elevar al Product Owner sobre §18 por parte de este proyecto de código.**
 
 ## 6. Cómo agregar un sample nuevo
 
@@ -114,4 +118,5 @@ Los tres samples invocan **sólo** la fachada y no nombran ninguna primitiva del
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial de la categoría, en la **pasada de diseño** de `Rules-Examples.md` §0.2. Declara **tres** samples, que son las tres partes del sample **S-1** del `PRODUCT-INTAKE` §18, con su tabla maestra y la tabla de contratos de verificación con las sondas `VER-01` a `VER-03` en `No verificado — sin código`. Verifica **7 de 7** casos de uso, **6 de 6** funciones de la fachada, **7 de 7** garantías y **7 de 8** escenarios del intake §20, con el motivo declarado del que falta. Declara qué gates de la categoría 08 quedan ejercidos por los samples y cuáles no, los **tres** desvíos respecto de §2.3, la ausencia de tensión con §16.1 —que acá **exige** el sample— y el residuo del intake §18 sobre el número de funciones, ya registrado por el `PRODUCT-MANIFEST` §5. |
+| 1.1 | 2026-08-11 | **Correcciones del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0, contrastadas contra el texto vivo del `PRODUCT-INTAKE` 1.25.** **P0-1**: las tres carpetas de [`/samples/visor/`](../../../../../samples/visor/) se crean de verdad, cada una con su README local y su comando previsto, y §1 lo declara con el enlace; el comando de las tres filas `VER-XX` de la matriz de sensado, `SD-13` a `SD-15`, queda coherente con lo que existe. **P1-2**: se retira de §5 la afirmación de que §18 arrastra un residuo de **cinco** funciones de la fachada. Era falsa y estaba tomada del `PRODUCT-MANIFEST` §5 en lugar de la fuente: §18 abierto enumera las **seis** por nombre y las rotula «las seis que §17.7 P.3 declara desde 1.6». Se cita ahora el texto de §18 y se registra que quien quedó desactualizado era el manifiesto, ya corregido. **P1-3**: se registra que la 1.25 precisó que las tres muestras `S-X` de §18 no son el conjunto de las carpetas de `/samples`, lo que confirma —y no contradice— la lectura de esta categoría de que sus tres samples son las tres partes de **S-1**. Se actualiza la trazabilidad upstream a la versión **1.25** del intake. Ningún recuento, contrato, sample ni cobertura cambia. |
+| 1.0 | 2026-08-11 | Emisión inicial de la categoría, en la **pasada de diseño** de `Rules-Examples.md` §0.2. Declara **tres** samples, que son las tres partes del sample **S-1** del `PRODUCT-INTAKE` §18, con su tabla maestra y la tabla de contratos de verificación con las sondas `VER-01` a `VER-03` en `No verificado — sin código`. Verifica **7 de 7** casos de uso, **6 de 6** funciones de la fachada, **7 de 7** garantías y **7 de 8** escenarios del intake §20, con el motivo declarado del que falta. Declara qué gates de la categoría 08 quedan ejercidos por los samples y cuáles no, los **tres** desvíos respecto de §2.3, la ausencia de tensión con §16.1 —que acá **exige** el sample— y un supuesto residuo del intake §18 sobre el número de funciones, tomado del `PRODUCT-MANIFEST` §5. [Retirado en 1.1: §18 no tiene tal residuo.] |

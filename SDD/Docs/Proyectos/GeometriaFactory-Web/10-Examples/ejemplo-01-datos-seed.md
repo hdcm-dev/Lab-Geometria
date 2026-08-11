@@ -3,13 +3,13 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** ejemplo-01-datos-seed.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
-**Ubicación del código:** `/samples/web/01-datos-seed/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-05`, `CU-06` y `CU-08`; [`../05-Arquitectura-Tecnica/Adrs/ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md) y [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md); [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §3 y §6; `PRODUCT-INTAKE` 1.23 §16.1, §18 **S-3** y §20, los **ocho** escenarios
+**Ubicación del código:** [`/samples/web/01-datos-seed/`](../../../../../samples/web/01-datos-seed/), esqueletada con su README local y su comando previsto
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-05`, `CU-06` y `CU-08`; [`../05-Arquitectura-Tecnica/Adrs/ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md) y [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md); [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §3 y §6; `PRODUCT-INTAKE` **1.25** §16.1, §18 **S-3** y §20, los **ocho** escenarios
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-01` como fila `SD-62`; `11-Documentacion` cuando se emita
 
 ---
@@ -140,10 +140,11 @@ verificacion:
     estado: "No verificado — sin código"
 ```
 
-**Por qué el criterio incluye dos aserciones negativas.** `RN-11` y `RN-08` son las dos reglas que este seed puede violar en silencio, y las dos tienen umbral **sin gradación** en la matriz de sensado —`SD-36` para el texto y la fila de superficie del listado de la comisión para los borradores—. Un solo borrador visible o un solo carácter cambiado no es una diferencia de grado: es la falla.
+**Por qué el criterio incluye dos aserciones negativas.** `RN-11` y `RN-08` son las dos reglas que este seed puede violar en silencio, y en las dos el umbral de la matriz de sensado es **Mayor** para el supuesto que el sample verifica, sin tramo menor: `SD-36`, para el texto original, está entre las filas **sin gradación** que enumera §5 de esa matriz; `SD-10`, la superficie del listado de la comisión, **no** está en esa lista, pero declara «**Mayor**: aparece un trabajo en estado `Borrador`…», de modo que para este supuesto tampoco admite grado. Un solo borrador visible o un solo carácter cambiado no es una diferencia de grado: es la falla.
 
 ## 10. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Corrección del hallazgo P3-2 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** El párrafo de §9 sobre las aserciones negativas atribuía umbral «**sin gradación**» a las dos filas que miran lo mismo, y **`SD-10` no figura en la lista de filas sin gradación** de §5 de la matriz de sensado de este proyecto de código; `SD-36` sí. Se escribe ahora la distinción exacta —`SD-10` declara **Mayor** para ese supuesto y no tiene tramo menor, de modo que **no hay contradicción de umbral**, que era lo que había que descartar—, sin agregarle a `SD-10` una clasificación que la matriz no le da y sin tocar ninguna de sus **61** filas de línea de base. **El informe ubicaba este segundo lugar en el §3 del `README.md` de la categoría; está acá, en la §9 de este documento**, y el `README.md` no contiene la afirmación. Se enlaza además la carpeta esqueletada de [`/samples/web/01-datos-seed/`](../../../../../samples/web/01-datos-seed/) creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Declara el juego de datos seed con los **ocho** escenarios del `PRODUCT-INTAKE` §20 transcriptos sin modificación, la comisión que deja armada —**1** administrador, **2** alumnos, **8** trabajos con los cuatro estados representados— y la verificación **sin pasar por la pantalla**, con **8** comprobaciones. Declara por qué los archivos de escenario llevan extensión `.txt`, por qué el sample no viola `RA-01` ni `RA-03`, y el nivel implícito, porque la progresión de este proyecto de código es por capacidad. El contrato `VER-01` declara ocho líneas exactas de salida y **dos aserciones negativas** sobre `RN-11` y `RN-08`; `evidencia` queda en `No verificado — sin código`. |
