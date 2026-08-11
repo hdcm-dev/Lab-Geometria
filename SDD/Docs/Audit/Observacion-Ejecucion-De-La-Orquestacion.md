@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.0 |
+| Versión | 1.1 |
 | Fecha | 2026-08-11 |
 | Estado | **Aprobado** |
 | Autor | Orquestador SDD |
@@ -64,8 +64,24 @@ Rige desde el 2026-08-11 y **alcanza al tramo de construcción**, donde el mismo
 | C-4 | **Ningún cambio masivo sin diff previo revisado** | `E-6` |
 | C-5 | **Ninguna afirmación de corrección se comitea sin comprobar que la corrección se aplicó** | `E-8` |
 
+### 6.1 Cómo se decide a dónde va un arreglo
+
+Verificar no alcanza: al encontrar un defecto hay que **diagnosticar su causa**, porque de la causa depende quién lo arregla. Un arreglo mandado al lugar equivocado no arregla nada y además esconde el problema real. El diagnóstico es del orquestador y **no se delega**: el subagente que falló no es buen juez de por qué falló, y el auditor ve el síntoma, no siempre el origen.
+
+| Causa | Cómo se reconoce | A dónde va el arreglo | Ejemplo de esta sesión |
+|---|---|---|---|
+| **Defecto del subagente** | La fuente decía lo correcto y el entregable la transcribió mal, contó mal, o dejó a medias lo que declaró hacer | Vuelve al mismo alcance, con el defecto nombrado y el patrón a buscar | Un caso de prueba declaraba verificar la puerta técnica equivocada; la tabla tenía las dos definiciones intercambiadas |
+| **Ambigüedad de la fuente** | Dos partes del intake o del manifiesto dicen cosas distintas sobre lo mismo, y las dos son defendibles | **Se corrige la fuente primero**, y recién después se propaga. Nunca al revés | §16.1 negaba samples propios a `Infrastructure` mientras §18 le asignaba la muestra `S-3`; convivieron veintitrés versiones |
+| **Dato que el producto no tiene** | Ninguna fuente lo declara, y ninguna capa puede derivarlo sin inventarlo | **Se eleva al Product Owner** y se declara abierto. No se resuelve por cuenta propia | El umbral de fluidez del visor, sin valor en ninguna fuente, declarado abierto durante cinco fases |
+| **Decisión de producto no tomada** | Hay dos salidas posibles y las dos son coherentes; elegir cambia lo que el usuario ve | **Se eleva al Product Owner con las dos salidas escritas** y su consecuencia | Cómo se identifica quien establece su contraseña por primera vez: un punto anónimo, o una provisoria como en el reseteo |
+| **Defecto del propio informe de auditoría** | El hallazgo no se reproduce, su ubicación es falsa, o su recuento no cierra | **Se corrige el informe, no el documento auditado**, y se declara | Un informe declaró quince hallazgos y enumeró diecisiete; otro citó una frase que no existía en la fila que nombraba |
+| **Defecto del orquestador** | El encargo llevaba una premisa falsa, o el registro de proceso omitió un control | Se corrige el encargo y se reporta, como hace este documento | Dos controles no ejecutados; una cifra falsa que viajó dentro de un encargo de auditoría |
+
+**La regla que ordena la tabla**: un defecto de transcripción se arregla donde se transcribió; un defecto de la fuente se arregla en la fuente **antes** de propagarlo. Cuando este producto invirtió ese orden —propagar una decisión a cuatro proyectos sin escribirla antes en el intake— el resultado fue once documentos citando como ratificado algo que la fuente contradecía.
+
 ## 7. Control de cambios
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-11 | **§6.1 nueva**, a pedido del Product Owner: verificar no alcanza si no se diagnostica la causa del defecto, porque de la causa depende quién lo arregla. Seis causas con su señal de reconocimiento, su destino y un ejemplo real de esta sesión, más la regla que las ordena. Sin esta sección la medida `C-2` era una intención sin procedimiento. | Orquestador SDD |
 | 1.0 | 2026-08-11 | Emisión inicial, a pedido del Product Owner, que observó el defecto al revisar la coordinación general del tramo de especificación. | Orquestador SDD |
