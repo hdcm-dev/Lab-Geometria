@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** US-29-Confinar-La-Cuenta-Marcada-A-Una-Sola-Ruta-Sin-Sesion-De-Trabajo.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobada
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master (AG-06)
 **Épica:** EP-04 Ciclo de vida de la cuenta de alumno
 **Etapa del producto:** `d`
@@ -19,7 +19,7 @@ Como **producto**, quiero **que una cuenta con cambio de contraseña pendiente n
 
 ## 2. Contexto
 
-`RT-12` de `02` §6 lo declara con todas las letras, y `05` §10.2 lo asigna al **cuarto guardián** del armazón. Los casos de uso son [`CU-02`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) FA-07 y [`CU-03`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) FA-05. Es una de las **tres** historias que `02` §3.2 describió por contenido: «confinamiento de la cuenta reseteada».
+`RT-12` de `02` §6 lo declara con todas las letras, y `05` §10.2 lo asigna al **cuarto guardián** del armazón. Los casos de uso son [`CU-02`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) FA-07 y [`CU-03`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) FA-05. Es una de las **tres** historias que `02` §3.2 describió por contenido: «confinamiento de la cuenta con la contraseña reseteada».
 
 ## 3. Criterios de aceptación
 
@@ -41,7 +41,7 @@ Como **producto**, quiero **que una cuenta con cambio de contraseña pendiente n
 
 ## 5. Prioridad y estimación
 
-`Must` por `RN-13` e `INV-09`, y porque el criterio de transición `d` → `e` exige que **cualquier ruta que la cuenta reseteada intente termine en el cambio de contraseña**.
+`Must` por `RN-13` e `INV-09`, y porque el criterio de transición `d` → `e` exige que **cualquier ruta que la cuenta con la contraseña reseteada intente termine en el cambio de contraseña**.
 
 **Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
 
@@ -64,4 +64,5 @@ Como **producto**, quiero **que una cuenta con cambio de contraseña pendiente n
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **2** ocurrencias a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. Numera y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 había repartido por necesidad de negocio con este identificador, y que su §3.2 dejó a la categoría 06 para redactar. |

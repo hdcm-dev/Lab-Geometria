@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** US-09-Cambiar-La-Contrasena-Propia-Con-La-Provisoria-Como-Vigente.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobada
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Épica:** EP-03 Ciclo de vida de la cuenta de alumno
 **Etapa del producto:** `d`
@@ -38,7 +38,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **que el mismo punto de cambi
 | ¿Decide qué se dice? | **No.** Levantar la marca es de la capa de aplicación |
 | Familia empobrecida | **No** |
 | BT derivadas | BT-11, BT-12, BT-16 |
-| Tests previstos en 08 | Batería de integración sobre una cuenta reseteada |
+| Tests previstos en 08 | Batería de integración sobre una cuenta con la contraseña reseteada |
 
 ## 5. Prioridad y estimación
 
@@ -65,4 +65,5 @@ Como **código de `GeometriaFactory-Web`**, quiero **que el mismo punto de cambi
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.3 previó con este mismo identificador y este mismo contenido. |

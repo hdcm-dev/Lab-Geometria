@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** RC-07-La-Marca-No-Es-Un-Estado-De-Cuenta.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`RN-12`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md); [`RN-13`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md); [`RN-15`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-15-Reseteo-Independiente-Del-Estado-De-Cuenta.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §17.1.P.2 (**INV-09**) y §17.3.P.4 («Ampliación del 2026-08-08 por el circuito de revisión»); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
@@ -21,7 +21,7 @@ Dos atributos del modelo que no son lo que su vecino sugiere, y que por eso comp
 
 ## 2. Justificación
 
-**Sobre la marca.** El reseteo procede sobre los tres estados de cuenta porque **opera sobre la credencial y no es una transición de la máquina de estados**. Si la marca fuera un cuarto estado, resetear una cuenta bloqueada la desbloquearía y resetear una pendiente la habilitaría: el administrador tendría que acordarse de una secuencia, que es justamente lo que la regla vino a evitar. Modelarla como atributo aparte es lo que permite que resetear y habilitar se hagan **en cualquier orden y terminen igual**.
+**Sobre la marca.** El reseteo procede sobre los tres estados de cuenta porque **opera sobre la credencial y no es una transición de la máquina de estados**. Si la marca fuera un cuarto estado, resetear la contraseña de una cuenta bloqueada la desbloquearía y resetear la de una pendiente la habilitaría: el administrador tendría que acordarse de una secuencia, que es justamente lo que la regla vino a evitar. Modelarla como atributo aparte es lo que permite que resetear y habilitar se hagan **en cualquier orden y terminen igual**.
 
 **Sobre el comentario.** Un campo alcanza porque los dos estados de cierre son terminales: de `Finalizado` y de `Rechazado` no sale ninguna transición, de modo que no puede haber un segundo comentario que historiar. Y no es una observación porque lo escribe **una persona**, no lleva nota ni escala y no habla de la geometría.
 
@@ -52,6 +52,7 @@ Modelar el comentario como entidad con historial tampoco produce rechazo: produc
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.4 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
 | 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**: habilitar una cuenta produce su contraseña provisoria y deja la marca puesta. **§3** declara que la marca tiene **dos** orígenes y no uno, y deja la constancia del desfase entre el enunciado de INV-09 en §17.1.P.2 —que sigue diciendo «únicamente el reseteo»— y lo que RN-16 decide en §4.1 de la misma versión. **La regla no cambia**: la marca sigue sin ser un cuarto estado de cuenta, y sigue siendo ortogonal a la situación. Lo que cambia es cuántos actos la ponen. Sube minor. |

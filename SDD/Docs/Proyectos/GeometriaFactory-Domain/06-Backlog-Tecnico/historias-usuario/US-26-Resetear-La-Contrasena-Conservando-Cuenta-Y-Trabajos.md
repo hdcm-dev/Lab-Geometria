@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** US-26-Resetear-La-Contrasena-Conservando-Cuenta-Y-Trabajos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobada
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-03 Ciclo de vida de la cuenta de alumno
 **Etapa del producto:** `d`
@@ -24,7 +24,7 @@ La capacidad `F-26` del intake §4 es `Must Have` desde su versión 1.7 y **reti
 
 - Given una cuenta de alumno con trabajos en tres estados distintos y con sus comentarios, When se la resetea, Then conserva su identidad, su situación y **todos** sus trabajos, por `RN-12`.
 - Given una cuenta de alumno en `Bloqueado` o en estado `Pendiente`, When se la resetea, Then el reseteo procede y **no le cambia la situación**, por `RN-15`.
-- Given la cuenta con papel `Administrador`, When se intenta resetearla, Then se rechaza, por `INV-08`.
+- Given la cuenta con papel `Administrador`, When se intenta resetear su contraseña, Then se rechaza, por `INV-08`.
 
 ## 4. Trazabilidad
 
@@ -60,4 +60,5 @@ La capacidad `F-26` del intake §4 es `Must Have` desde su versión 1.7 y **reti
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». El caso de la **cuenta de administrador** se reescribe como «resetear **la contraseña de** la cuenta de administrador», que sigue sin admitirse (**INV-08**, **RN-15**): no se cambia el sujeto a «de alumno», que invertiría el sentido de la regla. No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §5.3 previó con este mismo identificador y este mismo contenido. |

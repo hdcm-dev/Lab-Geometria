@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-05-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -32,7 +32,7 @@
 
 Exponer **A-09**, el punto de acceso con el que el administrador resetea la contraseña de un alumno. Es el único punto de toda esta superficie que **devuelve un valor de credencial en su respuesta**, y por eso su contrato es el más estricto en lo que no se puede hacer con esa respuesta.
 
-Es también el punto que cierra un agujero de diseño que el intake declara con nombre: hasta que la capacidad del reseteo entró, el único camino ante un olvido de contraseña era dar de baja y volver a dar de alta, y eso **eliminaba todos los trabajos del alumno**. De ahí la propiedad que este punto tiene que hacer observable desde afuera: **resetear conserva la cuenta, su situación, su papel y todos sus trabajos con sus estados y comentarios**.
+Es también el punto que cierra un agujero de diseño que el intake declara con nombre: hasta que la capacidad del reseteo entró, el único camino ante un olvido de contraseña era dar de baja y volver a dar de alta, y eso **eliminaba todos los trabajos del alumno**. De ahí la propiedad que este punto tiene que hacer observable desde afuera: **resetear la contraseña conserva la cuenta, su situación, su papel y todos sus trabajos con sus estados y comentarios**.
 
 Lo que este caso de uso **no** hace: **no produce la provisoria** —la produce el mecanismo de credenciales de `GeometriaFactory-Infrastructure`, que es la única capa con tramo en esa regla—, no la elige, no la valida y **no la registra en ninguna parte**.
 
@@ -63,9 +63,9 @@ Lo que este caso de uso **no** hace: **no produce la provisoria** —la produce 
 
 | Id | Disparador | Desarrollo | Punto de retorno |
 | --- | --- | --- | --- |
-| FA-01 | La cuenta reseteada está en situación `Pendiente`, o `Bloqueado` | El reseteo **procede igual** y la cuenta **queda en la misma situación** en la que estaba. Es el enunciado literal de la regla que lo independiza del estado, y el motivo declarado es que el administrador no tenga que acordarse de una secuencia | Paso 4 |
+| FA-01 | La cuenta con la contraseña reseteada está en situación `Pendiente`, o `Bloqueado` | El reseteo **procede igual** y la cuenta **queda en la misma situación** en la que estaba. Es el enunciado literal de la regla que lo independiza del estado, y el motivo declarado es que el administrador no tenga que acordarse de una secuencia | Paso 4 |
 | FA-02 | Se resetea dos veces seguidas la misma cuenta | Las **dos** peticiones responden `200` y las provisorias son **distintas**. La marca queda puesta las dos veces, y la segunda provisoria reemplaza a la primera | Paso 4 |
-| FA-03 | La cuenta reseteada tiene trabajos en `Borrador`, en `Rechazado` y en `Finalizado` | El reseteo **no toca ninguno**: conserva los tres con sus estados y sus comentarios. Se verifica listándolos después | Paso 4 |
+| FA-03 | La cuenta con la contraseña reseteada tiene trabajos en `Borrador`, en `Rechazado` y en `Finalizado` | El reseteo **no toca ninguno**: conserva los tres con sus estados y sus comentarios. Se verifica listándolos después | Paso 4 |
 
 ## 6. Excepciones y errores
 
@@ -96,7 +96,7 @@ Lo que este caso de uso **no** hace: **no produce la provisoria** —la produce 
 | CA-03 | La misma cuenta | Se invoca A-09 **dos** veces seguidas | Las 2 respuestas son `200` y las **2** provisorias son **distintas** |
 | CA-04 | La cuenta con papel `Administrador` | Se invoca A-09 sobre ella | Responde `409` con su código propio, y la credencial de esa cuenta **no cambió** |
 | CA-05 | Una cuenta de alumno en situación `Pendiente`, que nunca fue habilitada y no tiene contraseña | Se invoca A-09 | Responde **`200`** con su provisoria y la situación `Pendiente` sin cambio: **0 respuestas `409`** se producen por la ausencia de contraseña previa |
-| CA-06 | Una cuenta reseteada | Se invoca **cualquier otro punto** que exija acceso, con un acceso obtenido antes del reseteo | Responde `403` con el código de cambio requerido: la marca corta **aunque el acceso siga siendo válido** |
+| CA-06 | Una cuenta con la contraseña reseteada | Se invoca **cualquier otro punto** que exija acceso, con un acceso obtenido antes del reseteo | Responde `403` con el código de cambio requerido: la marca corta **aunque el acceso siga siendo válido** |
 | CA-07 | La respuesta de un reseteo con éxito y el registro del servidor | Se inspeccionan | La provisoria aparece **exactamente 1 vez**, en el cuerpo de la respuesta, y **0 veces** en el registro del servidor |
 | CA-08 | La fuente de material impredecible que no responde | Se invoca A-09 | Responde con fallo, **0 provisorias producidas** y la credencial anterior **sigue vigente** |
 | CA-09 | El punto A-09 | Se inspecciona su superficie | **0 parámetros** de situación de cuenta y **0 filas** de respuesta por cuenta no habilitada |
@@ -126,6 +126,7 @@ Lo que este caso de uso **no** hace: **no produce la provisoria** —la produce 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.3 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **4** ocurrencias a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** Habilitar produce una contraseña provisoria con **el mismo mecanismo y el mismo tratamiento** que este punto de acceso, de modo que el producto tiene un solo mecanismo de credencial inicial. **§6**: `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` queda **retirado** del conjunto cerrado —su premisa, la existencia de un camino anónimo alternativo, desapareció— y se conserva como fila tachada, con la constancia de que el retiro cierra de paso la tensión con **RN-15**. **§8**: **CA-05** se invierte: el reseteo sobre una cuenta `Pendiente` sin contraseña **procede** y responde `200`. La cabecera cita el intake **1.13**. **El punto A-09, su resultado y la exclusión de la provisoria del registro del servidor no cambian.** Sube minor. |
 | 1.2 | 2026-08-11 | **Cierra los hallazgos `B-API-07` (P2) y `B-API-13` (P3)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0. **§6**, fila tachada de `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA`: se quita el fragmento colgado «~ino que ya existe es que la persona la establezca en su primer ingreso, por **A-04**», trozo de la redacción anterior a 1.1 que sobrevivió a un reemplazo con la marca de tachado mal cerrada —un solo `~`— y que **describía en presente, como camino vigente, el punto de acceso que `RN-16` retiró**. La celda termina en «El identificador no se recicla», que es su enunciado. **Cabecera**: pasa a citar `PRODUCT-INTAKE` **1.26**, vigente hoy. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: las celdas mutiladas eran **dos**, ésta y la de `CU-01` §6, y las dos se corrigen en la misma tanda; las demás menciones vivas de `A-04` **declaran su retiro** y son correctas. **Ningún código, ninguna respuesta y ningún criterio de aceptación cambia.** Sube minor. |
