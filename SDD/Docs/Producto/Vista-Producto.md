@@ -2,21 +2,23 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Vista-Producto.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Nivel:** Producto
-**Trazabilidad upstream:** `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §1.2, §2, §3, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §13 (composición del producto) y §14 (las tres reglas de arquitectura de nivel producto); las **siete** categorías `05-Arquitectura-Tecnica` emitidas bajo `Proyectos/`, con sus **45** ADR y sus **seis** contratos de superficie
-**Trazabilidad downstream:** `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de los siete proyectos de código
+**Trazabilidad upstream:** [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3** §1.2, §2, §3, §4 y §5; [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.26** §13 (composición del producto) y §14 (las tres reglas de arquitectura de nivel producto); las **siete** categorías `05-Arquitectura-Tecnica` emitidas bajo `Proyectos/`, con sus **45** ADR y sus **seis** contratos de superficie
+**Trazabilidad downstream:** `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de los siete proyectos de código; [`Pipeline-Producto.md`](Pipeline-Producto.md) y [`../README.md`](../README.md), emitidos en la misma consolidación
 
 ---
 
 ## Tabla de contenido
 
 - [1. Objetivo y alcance](#1-objetivo-y-alcance)
+  - [1.1 Estado real de cierre](#11-estado-real-de-cierre)
 - [2. Mapa de proyectos de código](#2-mapa-de-proyectos-de-código)
 - [3. Grafo de dependencias](#3-grafo-de-dependencias)
+  - [3.1 La discrepancia del grafo, y por qué sigue abierta](#31-la-discrepancia-del-grafo-y-por-qué-sigue-abierta)
 - [4. Contratos inter-proyecto](#4-contratos-inter-proyecto)
 - [5. Decisiones de nivel producto](#5-decisiones-de-nivel-producto)
 - [6. Cross-cutting compartido](#6-cross-cutting-compartido)
@@ -36,9 +38,49 @@
 
 **Para quién.** Para quien tiene que entender el producto entero antes de tocar una parte: el desarrollador que entra por un proyecto de código y necesita saber qué le impone el resto, y quien decide el orden de construcción y de despliegue.
 
+### 1.1 Estado real de cierre
+
+La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle completo de especificación por proyecto de código está emitido y auditado, y esta versión lo consolida. **Nada de lo que sigue redecide nada**: cada fila apunta al informe de auditoría que la cierra, bajo [`../Audit/`](../Audit/).
+
+| Fase | Categorías | Ámbito | Informe que la cierra | Dictamen |
+| --- | --- | --- | --- | --- |
+| A | `00-Contexto`, `01-Necesidades-Negocio` | Producto | [`A-00-01-r3.md`](../Audit/A-00-01-r3.md) | Aprobado con observaciones |
+| B | `02-Especificacion-Funcional`, `03-UX-UI-DX` | Por proyecto de código | `B-02-03-<Nombre-Proyecto-Codigo>-r<N>.md`, un informe por proyecto de código | Aprobado o aprobado con observaciones |
+| B2 | Validación visual de maqueta | `GeometriaFactory-Web`, con la fachada del `Visor` integrada | [`B2-Maqueta-GeometriaFactory-Web-r1.md`](../Audit/B2-Maqueta-GeometriaFactory-Web-r1.md), cuyo rechazo levanta [`F26-Propagacion-r2.md`](../Audit/F26-Propagacion-r2.md) | Rechazado en ronda 1; rechazo levantado |
+| C | `05-Arquitectura-Tecnica` | Los siete | [`C-05-Arquitectura-Siete-Proyectos-r2.md`](../Audit/C-05-Arquitectura-Siete-Proyectos-r2.md) | Aprobado |
+| D | `06-Backlog-Tecnico`, `07-Plan-Sprint` | Los siete | [`D-06-07-Backlog-Siete-Proyectos-r1.md`](../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) | Aprobado |
+| E | `08-Calidad-Y-Pruebas` | Los siete | [`E-08-Calidad-Siete-Proyectos-r2.md`](../Audit/E-08-Calidad-Siete-Proyectos-r2.md) | Aprobado |
+| F | `09-Devops` | Los siete | [`F-09-Devops-Siete-Proyectos-r1.md`](../Audit/F-09-Devops-Siete-Proyectos-r1.md) | Aprobado |
+| G | `10-Examples`, pasada de diseño | Los siete | [`G-10-Examples-Siete-Proyectos-r2.md`](../Audit/G-10-Examples-Siete-Proyectos-r2.md) | Aprobado |
+
+**Ocho categorías por proyecto de código, no siete.** Cada uno de los siete tiene emitidas `02`, `03`, `05`, `06`, `07`, `08`, `09` y `10`. La novena, `04-Prompts-AI`, **está omitida por gating** en los siete: `usa_llm` es false en todos según `PRODUCT-MANIFEST` §5, y su ausencia no es hueco. La décima y última, `11-Documentacion`, entra en esta misma consolidación como plan documental —Momento 1— y todavía no tiene contenido redactado.
+
+**Un hueco de auditoría, declarado y no resuelto acá.** Bajo `../Audit/` hay un informe `B-02-03-` por cada proyecto de código **salvo `GeometriaFactory-Api`**: son seis informes para siete proyectos de código. Las categorías `02` y `03` de la `Api` existen y están emitidas, y su contenido fue revisado dentro de [`Coherencia-Corpus-r2.md`](../Audit/Coherencia-Corpus-r2.md), pero **no hay un informe de Fase B propio de ese proyecto de código**. Esta vista lo registra y no lo cierra: cerrarlo es emitir el informe faltante o declarar por escrito que la revisión de coherencia lo sustituye, y ninguna de las dos cosas es una decisión de arquitectura.
+
+**Las magnitudes del producto, contadas sobre el instrumento y no heredadas de otro documento.** Cada fila se verificó el día de esta emisión contra el documento que la produce.
+
+| Magnitud | Cantidad | Dónde se cuenta |
+| --- | --- | --- |
+| Proyectos de código | 7 | `PRODUCT-MANIFEST` §2 |
+| Aristas de compilación | 7 u 8 según qué sección del manifiesto se lea | §3.1 de este documento |
+| Casos de uso | 71 — `Domain` 13, `Api` 12, `Application` 11, `Web` 10, `Infrastructure` 10, `Contracts` 8, `Visor` 7 | `Proyectos/<Nombre>/02-Especificacion-Funcional/Casos-De-Uso/` |
+| Reglas de negocio | 16 | `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, `RN-01` a `RN-16` |
+| Invariantes del dominio | 9 | `PRODUCT-INTAKE` §14, `INV-01` a `INV-09` |
+| ADR | 45 | `Proyectos/<Nombre>/05-Arquitectura-Tecnica/Adrs/` |
+| Contratos de superficie | 6 | §4 de este documento |
+| Puntos de acceso de la superficie HTTP | 15 | [`Api/Contratos-REST.md`](../Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) §3 |
+| Códigos del contrato | 15 vivos sobre 18 emitidos, 3 retirados | [`Contracts/Contratos-Abstractions.md`](../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md) §5.1 |
+| Funciones de la fachada del visor | 6 | [`Visor/Contratos-Abstractions.md`](../Proyectos/GeometriaFactory-Visor/05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3 |
+| Escenarios de datos | 8, `E-1` a `E-8` | `PRODUCT-INTAKE` §20 |
+| Casos de la batería del validador | 10 | [`Infrastructure/08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../Proyectos/GeometriaFactory-Infrastructure/08-Calidad-Y-Pruebas/Criterios-Validacion.md) `CV-02` |
+| Quality gates | 77 — `Api` 15, `Infrastructure` 14, `Application` 11, `Web` 11, `Contracts` 9, `Visor` 9, `Domain` 8 | `Proyectos/<Nombre>/09-Devops/` y `08-Calidad-Y-Pruebas/` |
+| Sondas de verificación `VER-XX` | 19 | `Proyectos/<Nombre>/10-Examples/ejemplo-XX-*.md`, sección de contrato de verificación |
+
+**Ninguna de las 19 sondas tiene evidencia todavía**, y es lo esperado: la Fase G es la pasada de diseño y su campo `evidencia` queda en `No verificado — sin código` hasta la Fase I. Un producto que declarara evidencia acá estaría afirmando lo que no ocurrió.
+
 ## 2. Mapa de proyectos de código
 
-Refleja `PRODUCT-MANIFEST` **1.2** §2 y §5. **Ningún proyecto de código es `redistribuible`**, de modo que el prefijo de paquetes redistribuibles del perfil de nombres (§1.2 del manifiesto) queda sin uso.
+Refleja `PRODUCT-MANIFEST` **1.3** §2 y §5. **Ningún proyecto de código es `redistribuible`**, de modo que el prefijo de paquetes redistribuibles del perfil de nombres (§1.2 del manifiesto) queda sin uso.
 
 | `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | Tipo D8 | Rol en el producto | `redistribuible` | Arquitectura |
 | --- | --- | --- | --- | --- | --- |
@@ -66,7 +108,8 @@ GeometriaFactory-Contracts  -> GeometriaFactory-Web
 GeometriaFactory-Visor      -> GeometriaFactory-Web
 ```
 
-**Ocho aristas de compilación, y todas resuelven.** El grafo es **acíclico**, y el manifiesto lo declara verificado en su §4. [PRECISADO 2026-08-10 al cerrar `N-1` de `C-05-Arquitectura-Siete-Proyectos-r2.md`: este apartado decía **siete** mientras §4 y §8 enumeran **ocho**. La octava es `Application → Api`, que el manifiesto declara **directa** en su §2 y que el diagrama de su §3 no dibuja. El desacuerdo nace aguas arriba, entre §2, §3 y §4 del manifiesto, y **queda elevado**: el grafo es acíclico bajo las dos lecturas y ninguna decisión de arquitectura depende de cuál rija.]
+**El bloque de arriba transcribe el diagrama del manifiesto §3, que dibuja siete aristas. El propio manifiesto declara ocho en su §2.** La discrepancia sigue viva y se detalla en §3.1. El grafo es **acíclico bajo las dos lecturas**. [PRECISADO 2026-08-10 al cerrar `N-1` de `C-05-Arquitectura-Siete-Proyectos-r2.md`: este apartado declaraba **siete** aristas mientras las secciones 4 y 8 de este mismo documento enumeran **ocho**. La octava es `Application → Api`.]
+
 
 **La arista que no está en el grafo, y por qué no introduce ciclo.** `GeometriaFactory-Web → GeometriaFactory-Api` es de **tiempo de ejecución**, no de compilación: el front alcanza el servicio por HTTP con los tipos de `GeometriaFactory-Contracts`, contra los que **los dos extremos compilan por separado**. Por eso no figura como dependencia y por eso el grafo sigue siendo un DAG. Es también la razón por la que el producto tiene **dos procesos desplegables** y no uno.
 
@@ -78,6 +121,23 @@ nivel 1: GeometriaFactory-Application, GeometriaFactory-Web                     
 nivel 2: GeometriaFactory-Infrastructure
 nivel 3: GeometriaFactory-Api
 ```
+
+### 3.1 La discrepancia del grafo, y por qué sigue abierta
+
+**El producto tiene siete u ocho aristas de compilación según qué sección del manifiesto se lea, y la discrepancia no se resuelve acá.** Está elevada al Product Owner desde el 2026-08-10 y sigue sin desenlace. Lo que esta vista hace es dejarla legible, con las tres lecturas abiertas y contadas sobre el documento original.
+
+| Sección de `PRODUCT-MANIFEST` **1.3** | Qué declara | Aristas que se derivan |
+| --- | --- | --- |
+| §2, columna `Dependencias` | `GeometriaFactory-Api` depende de `Application`, `Infrastructure` y `Contracts`; `Web` de `Contracts` y `Visor`; `Application` de `Domain`; `Infrastructure` de `Application` y `Domain` | **8**, con `Application → Api` **directa** |
+| §3, bloque del grafo | Las cinco líneas que este apartado transcribe | **7**: no dibuja `Application → Api` |
+| §4, validaciones bloqueantes | «Cada dependencia referencia un proyecto de código existente en §13 — Cumple: **las siete aristas resuelven**» | **7** |
+
+**Dos contra uno no es una resolución.** La columna de dependencias de §2 es la que un archivo de proyecto materializa al compilar, y el diagrama de §3 es una vista de esa misma tabla; que la vista y la validación coincidan en siete no convierte a la tabla en errónea, porque un consumidor puede declarar una referencia directa a un ensamblado que además le llega transitivamente. **Cuál de las dos formas rige es exactamente lo que hay que decidir, y lo decide quien gobierna el manifiesto.**
+
+**Qué depende de la respuesta, y qué no.** No depende ninguna decisión de arquitectura: el grafo es acíclico con siete y con ocho, el orden topológico de cuatro niveles es el mismo bajo las dos lecturas, y los seis contratos de §4 cubren las mismas fronteras. Lo que sí depende es la forma del archivo de proyecto de `GeometriaFactory-Api` cuando se lo escriba, y el recuento que cualquier documento aguas abajo cite. **Por eso ningún documento de este producto debe afirmar un número sin decir cuál de las tres secciones está leyendo.**
+
+**Desenlace:** abierto. **Titular:** el Product Owner, sobre `PRODUCT-MANIFEST` §2, §3 y §4. **Sin fecha comprometida.**
+
 
 ## 4. Contratos inter-proyecto
 
@@ -156,11 +216,12 @@ Cada contrato inter-proyecto contra la dependencia del manifiesto que materializ
 
 **Los casos de uso que cruzan una frontera entre proyectos de código** son los que se materializan por `Api/Contratos-REST.md`: **once de los doce** de `GeometriaFactory-Api`, según declara ese contrato en su §1. **El doceavo —la colección de peticiones reproducible— ejercita el contrato en lugar de exponerlo**, y su lugar es el árbol de muestras del repositorio y no la superficie.
 
-**Cobertura del grafo: 6 contratos sobre 8 aristas de compilación más 1 de tiempo de ejecución.** Las dos aristas de `Contracts` las cubre un solo contrato, porque es el mismo ensamblado el que los dos consumidores compilan; ésa es exactamente la propiedad de la que depende el versionado del producto.
+**Cobertura del grafo: 6 contratos sobre las aristas de compilación —siete u ocho según la lectura de §3.1— más 1 de tiempo de ejecución.** Las dos aristas de `Contracts` las cubre un solo contrato, porque es el mismo ensamblado el que los dos consumidores compilan; ésa es exactamente la propiedad de la que depende el versionado del producto.
 
 ## 9. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Consolidación de la Fase H.** Se revisa el documento entero contra `PRODUCT-MANIFEST` **1.3** y `PRODUCT-INTAKE` **1.26**, que son las versiones vivas; la 1.1 citaba el manifiesto 1.2 y el intake 1.18. **(a)** Nueva §1.1 con el estado real de cierre: las ocho fases con el informe de auditoría que cierra cada una y su dictamen, la constancia de que cada proyecto de código tiene **ocho** categorías emitidas y no siete —`04` omitida por gating con `usa_llm` false en los siete—, y las catorce magnitudes del producto **contadas sobre el instrumento** el día de esta emisión. **(b)** Se declara un **hueco de auditoría**: hay seis informes `B-02-03-` para siete proyectos de código, y el que falta es el de `GeometriaFactory-Api`. Queda registrado y **sin cerrar**: no es una decisión de arquitectura. **(c)** Nueva §3.1 con la discrepancia del grafo desplegada contra las tres secciones del manifiesto que la producen —§2 declara ocho aristas, §3 dibuja siete, §4 valida siete— y con lo que depende y lo que no depende de la respuesta. **Sigue abierta y elevada al Product Owner; esta versión no la cierra.** §3 y §8 dejan de afirmar un número único y remiten a §3.1. Sube minor: no reabre ninguna ADR, no altera el mapa, los contratos ni los riesgos, y agrega estado verificable. **Autor:** Arquitecto de Software Senior (AG-05) |
 | 1.1 | 2026-08-10 | Cierra `N-1` de `SDD/Docs/Audit/C-05-Arquitectura-Siete-Proyectos-r2.md` 1.0: §3 declaraba **siete** aristas de compilación mientras §4 y §8 enumeran **ocho**. Se corrige a ocho y se declara que el desacuerdo nace en el `PRODUCT-MANIFEST`, entre su §2 —que declara `Application → Api` como dependencia directa— y el diagrama de su §3, que no la dibuja. Queda elevado al Product Owner; el grafo es acíclico bajo las dos lecturas. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial de la vista de producto, **al cierre del bucle de proyectos de código**: los siete están emitidos, en tres olas y en orden topológico. **Cierra el hallazgo `C-05-06` (P3) del informe de auditoría [`../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0**, que levantó que el artefacto era obligatorio para productos de más de un proyecto de código y que **ningún artefacto declaraba su ausencia**. Declara las **ocho** secciones que la guía de la categoría exige: el mapa de los siete proyectos de código con su tipo D8 y la excepción de nombre y path del visor; el grafo con sus **siete** aristas de compilación, la arista de tiempo de ejecución que **no** introduce ciclo y el orden topológico de cuatro niveles; los **seis** contratos inter-proyecto indexados contra la arista que materializan, **sin reescribirlos**; la ausencia declarada de `Producto/Adrs/` con las tres candidatas naturales resueltas en el productor, más las tres reglas de arquitectura de nivel producto con el mecanismo que las sostiene; **siete** preocupaciones transversales con el único lugar donde se decide cada una; **seis** riesgos de integración con impacto, probabilidad y mitigación escrita; y la trazabilidad de cada contrato contra su arista. **No toma ninguna decisión y no reabre ninguna de las 45 ADR emitidas**: referencia, no reescribe, como exige §4.8 de la guía. Declara además, con su motivo, que **no se emite `Contratos-Inter-Proyecto.md`**: los contratos son seis y la guía admite integrarlos como sección de esta vista, y un séptimo documento que los reindexara sería una segunda fuente de verdad sobre las mismas fronteras. |
