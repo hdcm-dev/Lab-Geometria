@@ -14,8 +14,8 @@
 | Repositorio | `https://github.com/hdcm-dev/Lab-Geometria.git` |
 | Lead técnico | El mismo docente, asistido por agente IA (Requerimientos Técnicos §1: «1 docente + agente IA») |
 | Documento | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` |
-| Versión | 1.21 |
-| Fecha | 2026-08-11 |
+| Versión | 1.20 |
+| Fecha | 2026-08-08 |
 | Stack principal | .NET 10 — Blazor Interactive Server (front) + API REST con Clean Architecture (backend) + TypeScript/webpack (visor 3D) |
 | Estado | Borrador |
 
@@ -971,7 +971,7 @@ Componentes Blazor con un **cliente tipado de la API** (`HttpClient` con `Bearer
 |---|---|
 | Navegador ↔ front | HTTPS + SignalR (WebSocket, o repliegue a long polling). Es el **circuito**, y termina acá: no llega al backend (RT §2.3) |
 | Front ↔ API | `HttpClient` en C#, petición-respuesta, `Bearer`. La dirección base se toma de configuración (`ApiBaseUrl`), **nunca embebida en el código** (RT §2.6) |
-| Front ↔ bundle del visor | `IJSRuntime` contra la fachada de `main.js`: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento` — **las seis** que §17.7 P.3 declara (RT §8.4, ampliado en 1.6) |
+| Front ↔ bundle del visor | `IJSRuntime` contra la fachada de `main.js`: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` (RT §8.4) |
 | Prohibido | **Ningún JavaScript del navegador invoca la API** (RA-01). No se agregan bibliotecas JS que consulten servicios por su cuenta |
 
 **Regla de aislamiento del visor** (RT §4.2): el JavaScript del visor se consume **exclusivamente** a través de `main.js`. Ningún componente Blazor invoca funciones internas del bundle ni manipula el `canvas` por su cuenta. Es lo que permite reemplazar el motor 3D sin tocar las páginas.
@@ -1593,7 +1593,6 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
-| 1.21 | 2026-08-11 | **Quinta ocurrencia de la familia «recuento congelado», y la fecha de cabecera.** **(a)** §17.6.P.3, en la fila «Front ↔ bundle del visor» de su tabla de integraciones, seguía enumerando **cinco** funciones de la fachada cuando §17.7 P.3 declara **seis** desde 1.6. Es la misma celda-de-tabla de siempre —ya corregida en §14 por 1.16 y 1.17, en §18 por 1.11, y en los rangos de escenarios por 1.18—, y esta vez **la fuente contradecía a su propio downstream**: la categoría 05 viva de `GeometriaFactory-Web` ya usa «6 de 6». Lo levantó la Fase F de nivel 0, que no la propagó. **(b)** La **fecha de cabecera** decía 2026-08-08 mientras la última fila de control de cambios era del 2026-08-11: la cabecera no se movió en veinte versiones. Ninguna decisión cambia. Sube minor y archiva: 1.20 ya fue citada como insumo. | Orquestador SDD |
 | 1.20 | 2026-08-11 | **La batería del validador quedó descrita como de nueve casos cuando tiene diez.** §21 agregó el décimo el 2026-08-09, al incorporarse el escenario **E-8**, y **cinco lugares** siguieron diciendo nueve: los dos quality gates de §17.3.P.8 y §17.5.P.8, la forma de verificación de §17.3.P.6, el fundamento del puerto en **§17.2.P.11** y el encabezado de la propia §21. Lo levantó la Fase E de `GeometriaFactory-Infrastructure` y `-Api`, que **aplicaron diez y no bajaron la batería a nueve para que coincidiera con la redacción**, dejándolo declarado en sus documentos. Es el cuarto conjunto de la fuente que envejece igual, después de las funciones de la fachada, los invariantes de Domain y los rangos de escenarios, y otra vez son gates, celdas y encabezados. Ninguna decisión cambia. Sube minor y archiva: 1.19 ya fue citada como insumo. | Orquestador SDD |
 | 1.19 | 2026-08-10 | **F-13 sube de `Should Have` a `Must Have`**, decidido por el Product Owner. La sincronización árbol ⇄ escena por índice y la disposición determinista estaban declaradas diferibles mientras §17.7 P.8 las incluía en lo que **PT-02** mide antes de comprometer la etapa `g`. Una puerta que no pasa detiene la planificación, de modo que la capacidad era diferible en el papel e **indiferible en los hechos**: nadie la planificaba y sin embargo bloqueaba. Lo levantaron dos proyectos desde los dos lados de la fachada —`GeometriaFactory-Visor` en su Fase D y `GeometriaFactory-Web` como su punto abierto `PA-02`—, ninguno de los dos repriorizando por su cuenta. Es el segundo caso idéntico después de **F-25** en 1.7, y el patrón vale anotarlo: **una capacidad citada por una puerta técnica no puede ser `Should Have`**. Sube minor y archiva: 1.18 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
 | 1.18 | 2026-08-09 | **Los rangos de escenarios congelados en E-7.** Seis lugares de la fuente —§16.1, §17.3.P.4, §17.3.P.6, §18 S-3, la nota de §20 y la lista de verificación de §23— seguían diciendo «los **siete** escenarios» o «E-1 a **E-7**», cuando §20 tiene **ocho** desde que 1.7 incorporó **E-8**. Lo levantó la Fase C de `GeometriaFactory-Infrastructure`, que contó los del §20 en vez de copiar el rango. Es el tercer conjunto de la fuente que envejece del mismo modo, después de las funciones de la fachada y de los invariantes de Domain, y los seis lugares son enumeraciones y celdas: **la fuente enumera sus conjuntos en más lugares de los que actualiza cuando crecen**. Ninguna decisión cambia. Sube minor y archiva: 1.17 ya fue citada como insumo. | Orquestador SDD |
