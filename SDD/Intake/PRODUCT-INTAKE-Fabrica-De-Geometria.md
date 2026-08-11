@@ -14,10 +14,10 @@
 | Repositorio | `https://github.com/hdcm-dev/Lab-Geometria.git` |
 | Lead técnico | El mismo docente, asistido por agente IA (Requerimientos Técnicos §1: «1 docente + agente IA») |
 | Documento | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` |
-| Versión | 1.26 |
+| Versión | 1.27 |
 | Fecha | 2026-08-11 |
 | Stack principal | .NET 10 — Blazor Interactive Server (front) + API REST con Clean Architecture (backend) + TypeScript/webpack (visor 3D) |
-| Estado | Borrador |
+| Estado | **Aprobado** |
 
 > Este documento captura qué quiere el cliente, cómo se compone el producto y cómo se construye cada proyecto de código.
 > El orquestador deriva de §13 el `PRODUCT-MANIFEST` canónico; no se completa el manifiesto a mano.
@@ -1600,6 +1600,7 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.27 | 2026-08-11 | **Aprobación del Product Owner.** El intake pasa de `Borrador` a **`Aprobado`**. `Master-Prompt.md` §15 declara al Product Owner autor responsable del intake y **quien lo aprueba**, de modo que este cambio de estado no lo podía hacer ningún agente: la promoción documental del 2026-08-11 dejó expresamente estos ocho artefactos fuera por ese motivo. La aprobación se recibió de viva voz junto con la de la maqueta, después del cierre de los tres huecos de proceso —la ronda 2 de la Fase B2, la Fase B de `GeometriaFactory-Api` y el estado documental— y con las veintiséis versiones anteriores archivadas en `_legacy/`. **No cambia ningún contenido**: cambia quién responde por él. | Product Owner |
 | 1.26 | 2026-08-11 | **Un error de recuento de la propia 1.25.** La precisión que 1.25 agregó a §18 —para cerrar la familia de contradicciones entre §16.1 y §18— decía que §16.1 «asigna carpeta a **seis** de los siete proyectos», y son **los siete**: la misma versión que completó esa tabla contó mal sus filas. Lo levantó la corrección de la Fase G, que fue a contar en vez de leer. Vale anotarlo: el defecto que 1.25 declaró —enumerar un conjunto en un lugar distinto de donde vive— **reapareció en el párrafo escrito para declararlo**. Ninguna decisión cambia. Sube minor y archiva: 1.25 ya fue citada como insumo. | Orquestador SDD |
 | 1.25 | 2026-08-11 | **Cierre de la familia de contradicciones entre §16.1 y §18**, levantada por la auditoría de la Fase G. **(a)** §16.1 seguía diciendo que `GeometriaFactory-Web` «no produce sample propio» y Web produjo uno. La redacción anterior **no era falsa** sobre lo que regulaba —el guion de demostración—; lo que faltaba era una muestra **que se corra sola**. Se amplía distinguiendo las dos cosas, y se declara por qué lleva uno solo. **(b)** La raíz de la familia queda declarada en §18: **las tres muestras `S-1`/`S-2`/`S-3` no son el conjunto de las carpetas de `/samples`**, son las tres demostraciones nombradas por su papel, y §16.1 asigna carpeta a seis proyectos que las contienen y más. Confundir las dos listas es lo que hizo que las dos secciones se contradijeran veintitrés versiones. Sube minor y archiva: 1.24 ya fue citada como insumo. | Orquestador SDD, sobre `G-10-Examples-Siete-Proyectos-r1.md` |
 | 1.24 | 2026-08-11 | **Application e Infrastructure pasan a tener `/samples` propios**, con lo que las cuatro bibliotecas quedan resueltas del mismo modo. Es la revisión que 1.23 dejó anotada, hecha al emitir su Fase G: se cumplen los dos términos —la segunda audiencia que declara la guía de la categoría, y que sin categoría 10 un proyecto sin maqueta queda **sin ninguna sonda de deriva**—. **Y aparece un motivo que ninguno de los otros tres tenía**: §18 asigna a `GeometriaFactory-Infrastructure` la muestra **`S-3`**, de modo que la redacción anterior de §16.1 **contradecía a §18 dentro del mismo documento**, y la contradicción sobrevivió veintitrés versiones sin que nadie la mirara porque vivía en dos celdas de tablas distintas. Sube minor y archiva: 1.23 ya fue citada como insumo. | Orquestador SDD, sobre elevación de la Fase G |
