@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -168,12 +168,13 @@ La partición es por los **seis** componentes de `05` §3.1, dos de los cuales n
 | **El umbral numérico de fluidez no existe** (`05` §11 `PA-03`, `BT-18`) | La interacción fluida se verifica de forma **cualitativa declarada** junto con `PT-02`, y no con un número | `BT-18`, antes de cerrar la etapa `g`: o el Product Owner fija un umbral, o esta categoría fija su guion de medición cualitativo. **Ninguna de las dos salidas es inventar un número**, y `05` §8 se niega explícitamente a hacerlo |
 | **La versión del motor de dibujo no está anclada** (`05` §11 `PA-01`, `BT-09`) | Si la versión que se adopte exige una interfaz distinta de la del visualizador previo, la capa 3 se rehace y varios casos de prueba se reescriben | `BT-09`, antes de comprometer la etapa `g`, que es cuando se miden `PT-02` y `PT-03` |
 | **La versión mínima de navegador no está fijada** (`05` §11 `PA-04`) | El requisito se declara **por capacidad** y no por versión, de modo que `TC-02` verifica la ausencia de capacidad gráfica y no una versión | El Product Owner sobre su propio documento, sin fecha comprometida. **No es bloqueante** |
-| **No hay filas `VER-XX` en la matriz de sensado de deriva** | Las sondas de contrato y comportamiento que la categoría 10 aporta todavía no existen | `10-Examples` de este proyecto de código, que desarrollará el sample **S-1**. Al emitirse, [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) suma una fila `VER-XX` por contrato de verificación |
+| ~~**No hay filas `VER-XX` en la matriz de sensado de deriva**~~ · **Cerrado el 2026-08-11** | Se declaraba porque las sondas de contrato y comportamiento que la categoría 10 aporta todavía no existían | **Cerrado**: [`../10-Examples/`](../10-Examples/) se emitió en su pasada de diseño y desarrolló el sample **S-1** en **tres** partes, con un contrato de verificación cada una. [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.1 les dio de alta las filas `SD-13`, `SD-14` y `SD-15`, todas en `Sin verificar`, y pasó de **doce** a **quince** sondas. La fila se conserva con su desenlace en lugar de retirarse |
 | **Las pruebas de extremo a extremo exigen un navegador con capacidad gráfica en el entorno de ejecución** | Un entorno de integración continua sin esa capacidad no puede medir `PT-02`, `TC-16` ni `TC-17` | Es una condición del ambiente, declarada en [`Estrategia-Testing.md`](Estrategia-Testing.md) §7. Su provisión concreta pertenece a `09-Devops` |
 
 ## 9. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`** declarado en §8. Se emitió [`../10-Examples/`](../10-Examples/) en su pasada de diseño, con el sample **S-1** en **tres** partes y un contrato de verificación cada una, y [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) subió a **1.1** con las filas `SD-13` a `SD-15`, pasando de **doce** a **quince** sondas. La fila del hueco se **conserva** con su desenlace y su fecha. **Ninguna de las seis tablas de cobertura cambia.** |
 | 1.1 | 2026-08-11 | **`H-04`.** `TC-20` estaba definido en el catálogo y **no tenía fila en ninguna de las cinco tablas** de esta matriz, siendo **la prueba de la puerta `PT-02`**. Se agrega **§2.1**, que lo enumera con sus cinco tramos, su trazabilidad y la remisión a los criterios `CV-20` a `CV-23` de [`Criterios-Validacion.md`](Criterios-Validacion.md) §4, para que el recorrido inverso `TC → matriz` cierre. **Ninguna cobertura, umbral ni caso cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**siete** filas de caso de uso, **ocho** de NFR y **dieciséis** de regla de negocio— y dos más: las **siete** garantías del contrato de fachada y los **siete** códigos de condición en sus **ocho** filas de curso. La tabla de reglas declara de forma verificable que **ninguna de las dieciséis se verifica acá y dónde se verifica cada una**, que es el resultado correcto para un visualizador puro. Transcribe las condiciones de medición de `02` §6 sin redefinirlas y las declara vinculantes. Declara la cobertura por los **seis** componentes con «Sin medir», las tres ausencias de métrica de código con su motivo, y **cinco** huecos, incluido el umbral de fluidez que esta categoría **no inventa**. |
