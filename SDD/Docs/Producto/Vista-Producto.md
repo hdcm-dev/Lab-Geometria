@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Vista-Producto.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -66,7 +66,7 @@ GeometriaFactory-Contracts  -> GeometriaFactory-Web
 GeometriaFactory-Visor      -> GeometriaFactory-Web
 ```
 
-**Siete aristas de compilación, y todas resuelven.** El grafo es **acíclico**, y el manifiesto lo declara verificado en su §4.
+**Ocho aristas de compilación, y todas resuelven.** El grafo es **acíclico**, y el manifiesto lo declara verificado en su §4. [PRECISADO 2026-08-10 al cerrar `N-1` de `C-05-Arquitectura-Siete-Proyectos-r2.md`: este apartado decía **siete** mientras §4 y §8 enumeran **ocho**. La octava es `Application → Api`, que el manifiesto declara **directa** en su §2 y que el diagrama de su §3 no dibuja. El desacuerdo nace aguas arriba, entre §2, §3 y §4 del manifiesto, y **queda elevado**: el grafo es acíclico bajo las dos lecturas y ninguna decisión de arquitectura depende de cuál rija.]
 
 **La arista que no está en el grafo, y por qué no introduce ciclo.** `GeometriaFactory-Web → GeometriaFactory-Api` es de **tiempo de ejecución**, no de compilación: el front alcanza el servicio por HTTP con los tipos de `GeometriaFactory-Contracts`, contra los que **los dos extremos compilan por separado**. Por eso no figura como dependencia y por eso el grafo sigue siendo un DAG. Es también la razón por la que el producto tiene **dos procesos desplegables** y no uno.
 
@@ -156,10 +156,11 @@ Cada contrato inter-proyecto contra la dependencia del manifiesto que materializ
 
 **Los casos de uso que cruzan una frontera entre proyectos de código** son los que se materializan por `Api/Contratos-REST.md`: **once de los doce** de `GeometriaFactory-Api`, según declara ese contrato en su §1. **El doceavo —la colección de peticiones reproducible— ejercita el contrato en lugar de exponerlo**, y su lugar es el árbol de muestras del repositorio y no la superficie.
 
-**Cobertura del grafo: 6 contratos sobre 7 aristas de compilación más 1 de tiempo de ejecución.** Las dos aristas de `Contracts` las cubre un solo contrato, porque es el mismo ensamblado el que los dos consumidores compilan; ésa es exactamente la propiedad de la que depende el versionado del producto.
+**Cobertura del grafo: 6 contratos sobre 8 aristas de compilación más 1 de tiempo de ejecución.** Las dos aristas de `Contracts` las cubre un solo contrato, porque es el mismo ensamblado el que los dos consumidores compilan; ésa es exactamente la propiedad de la que depende el versionado del producto.
 
 ## 9. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-10 | Cierra `N-1` de `SDD/Docs/Audit/C-05-Arquitectura-Siete-Proyectos-r2.md` 1.0: §3 declaraba **siete** aristas de compilación mientras §4 y §8 enumeran **ocho**. Se corrige a ocho y se declara que el desacuerdo nace en el `PRODUCT-MANIFEST`, entre su §2 —que declara `Application → Api` como dependencia directa— y el diagrama de su §3, que no la dibuja. Queda elevado al Product Owner; el grafo es acíclico bajo las dos lecturas. | Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial de la vista de producto, **al cierre del bucle de proyectos de código**: los siete están emitidos, en tres olas y en orden topológico. **Cierra el hallazgo `C-05-06` (P3) del informe de auditoría [`../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0**, que levantó que el artefacto era obligatorio para productos de más de un proyecto de código y que **ningún artefacto declaraba su ausencia**. Declara las **ocho** secciones que la guía de la categoría exige: el mapa de los siete proyectos de código con su tipo D8 y la excepción de nombre y path del visor; el grafo con sus **siete** aristas de compilación, la arista de tiempo de ejecución que **no** introduce ciclo y el orden topológico de cuatro niveles; los **seis** contratos inter-proyecto indexados contra la arista que materializan, **sin reescribirlos**; la ausencia declarada de `Producto/Adrs/` con las tres candidatas naturales resueltas en el productor, más las tres reglas de arquitectura de nivel producto con el mecanismo que las sostiene; **siete** preocupaciones transversales con el único lugar donde se decide cada una; **seis** riesgos de integración con impacto, probabilidad y mitigación escrita; y la trazabilidad de cada contrato contra su arista. **No toma ninguna decisión y no reabre ninguna de las 45 ADR emitidas**: referencia, no reescribe, como exige §4.8 de la guía. Declara además, con su motivo, que **no se emite `Contratos-Inter-Proyecto.md`**: los contratos son seis y la guía admite integrarlos como sección de esta vista, y un séptimo documento que los reindexara sería una segunda fuente de verdad sobre las mismas fronteras. |
