@@ -1,0 +1,66 @@
+# US-19 — Devolver el detalle con piezas y componentes, y el listado sin componentes
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Application
+**Documento:** US-19-Devolver-El-Detalle-Con-Piezas-Y-Componentes-Y-El-Listado-Sin-Componentes.md
+**Versión:** 1.0
+**Estado:** Propuesta
+**Fecha:** 2026-08-10
+**Autor:** Scrum Master + Backlog Curator (AG-06)
+**Épica:** EP-04 Gestión del trabajo
+**Etapa del producto:** `e`
+**Prioridad MoSCoW:** Must
+**Estimación:** Sin fijar (ver [`../Product-Backlog.md`](../Product-Backlog.md) §4.1)
+
+## 1. Historia
+
+Como **código consumidor de la biblioteca**, quiero **que el detalle traiga las piezas con su identidad posicional y sus componentes, y que el listado no los traiga**, para **tener con qué dibujar y armar el árbol sin volver pesada la pantalla más cargada del producto**.
+
+## 2. Contexto
+
+`NB-06` pide visualización dentro del producto, y `02` §7.2 declara que **lo que esta capa aporta a esa necesidad es la entrega de las piezas con su identidad posicional y sus componentes en el detalle**. El contrato de uso es [`CU-06`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Consultar-Los-Trabajos-Propios-Del-Alumno.md). `PRODUCT-INTAKE` §17.2.P.10 declara que las consultas de listado **nunca cargan los componentes**.
+
+## 3. Criterios de aceptación
+
+- Given un trabajo interpretado, When se pide su detalle, Then vienen sus piezas con su **posición** y sus componentes.
+- Given el listado del alumno y el de la comisión, When se los resuelve, Then los componentes cargados son exactamente **0** en los dos.
+- Given un conjunto de piezas con huecos —posiciones sin pieza reconstruida—, When se lo devuelve, Then las posiciones **no se renumeran**: la posición es la identidad de la pieza.
+
+## 4. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| NB upstream | NB-03, NB-06 (parcial) |
+| CU cubiertos | CU-06 |
+| RN e invariantes que ejerce | RN-03, RN-09 |
+| Componente de `05` §3.1 | Orquestación de la consulta |
+| Puertos que consume | Repositorio de trabajos |
+| Comprobación de `02` §4 que la alcanza | Pertenencia, y cambio de contraseña pendiente antes que ella |
+| BT derivadas | BT-07, BT-16 |
+| Tests previstos en 08 | Inspección de la proyección devuelta, comprobando que la colección de componentes no viene materializada |
+
+## 5. Prioridad y estimación
+
+`Must` porque `05` §8 fija el NFR de **0** componentes cargados en los dos listados y porque sin las piezas con su posición no hay con qué sincronizar el árbol y la escena en la etapa `g`.
+
+**Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
+
+## 6. DoR check
+
+- [x] Declara al menos un caso de uso de 02
+- [x] Declara la necesidad de negocio y la etapa del roadmap
+- [x] Criterios en Given/When/Then, con camino feliz y caso de borde
+- [x] Declara el componente de `05` §3.1 y los puertos que consume
+- [x] Declara qué comprobación de `02` §4 la alcanza
+- [x] Las condiciones de rechazo que produce existen en el catálogo de las 36 de [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md)
+- [x] Se puede verificar con dobles de los cuatro puertos, sin base de datos
+
+## 7. Notas y supuestos
+
+**El dibujo, el árbol y la sincronización no son de esta capa**: son de `GeometriaFactory-Visor` y de `GeometriaFactory-Web`. Por eso `NB-06` figura como cobertura **parcial** en `02` §7.2, y por eso esta historia vive en la etapa `e` y no en la `g`.
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.3 previó con este mismo identificador. |

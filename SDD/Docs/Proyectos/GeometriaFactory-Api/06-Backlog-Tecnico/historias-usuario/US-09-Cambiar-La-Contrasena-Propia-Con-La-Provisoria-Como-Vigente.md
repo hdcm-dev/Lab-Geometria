@@ -1,0 +1,68 @@
+# US-09 — Cambiar la contraseña propia con la provisoria como vigente
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Api
+**Documento:** US-09-Cambiar-La-Contrasena-Propia-Con-La-Provisoria-Como-Vigente.md
+**Versión:** 1.0
+**Estado:** Propuesta
+**Fecha:** 2026-08-10
+**Autor:** Scrum Master + API Product Owner (AG-06)
+**Épica:** EP-03 Ciclo de vida de la cuenta de alumno
+**Etapa del producto:** `d`
+**Punto de acceso:** `A-05`, bajo la guardia, y **es su única excepción**
+**Prioridad MoSCoW:** Must
+**Estimación:** Sin fijar (ver [`../Product-Backlog.md`](../Product-Backlog.md) §4.1)
+
+## 1. Historia
+
+Como **código de `GeometriaFactory-Web`**, quiero **que el mismo punto de cambio de contraseña sirva cuando la vigente es la provisoria**, para **que el primer ingreso y el cambio posterior a un reseteo recorran un solo camino**.
+
+## 2. Contexto
+
+`RN-16` unificó los dos mecanismos de credencial inicial del producto, y `02` §11 registra que **el punto abierto más importante de esta categoría quedó cerrado** por esa vía: la escritura anónima de contraseña **se suprimió** en lugar de resolverse, y `A-04` quedó **retirado y no se recicla**. El contrato de uso es [`CU-03`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md).
+
+## 3. Criterios de aceptación
+
+- Given una cuenta con la marca puesta y su provisoria, When cambia su contraseña presentando la provisoria como vigente, Then el cambio procede.
+- Given ese mismo punto, When lo pide una cuenta con la marca puesta, Then **la guardia del cambio pendiente lo deja pasar**: es su única excepción declarada.
+- Given cualquier otro punto, When lo pide esa misma cuenta, Then se rechaza.
+
+## 4. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| NB upstream | NB-02 |
+| CU cubiertos | CU-03 |
+| RN que ejerce | RN-13, RN-16 |
+| Componente de `05` §3.1 | Superficie de acceso y credencial propia, Guardia de admisión |
+| ¿Decide qué se dice? | **No.** Levantar la marca es de la capa de aplicación |
+| Familia empobrecida | **No** |
+| BT derivadas | BT-11, BT-12, BT-16 |
+| Tests previstos en 08 | Batería de integración sobre una cuenta reseteada |
+
+## 5. Prioridad y estimación
+
+`Must` por derivar de `F-04` y `F-26`, `Must Have`, y porque el criterio de transición `d` → `e` exige que **ningún punto de acceso acepte un correo y una contraseña nueva sin credencial**.
+
+**Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
+
+## 6. DoR check
+
+- [x] Declara al menos un caso de uso de 02
+- [x] Declara la necesidad de negocio y la etapa del roadmap
+- [x] Criterios en Given/When/Then, con camino feliz y caso de borde
+- [x] Declara el punto de acceso que la realiza y el componente de `05` §3.1 que lo aloja
+- [x] Declara si su punto está bajo la guardia, y si no lo está, cuál de las cuatro ausencias declaradas es
+- [x] Toda condición que transporta es uno de los quince códigos vivos del contrato, con su destino declarado
+- [x] Declara que no decide qué se dice
+- [x] Declara si su respuesta pertenece a una de las tres familias deliberadamente empobrecidas
+
+## 7. Notas y supuestos
+
+**`A-04` está retirado y no se recicla.** Exponía la escritura de contraseña sin credencial, y `RN-16` **suprimió la operación** en lugar de resolverla. Reciclarlo volvería a abrir el agujero que el punto abierto de esta categoría había levantado.
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.3 previó con este mismo identificador y este mismo contenido. |

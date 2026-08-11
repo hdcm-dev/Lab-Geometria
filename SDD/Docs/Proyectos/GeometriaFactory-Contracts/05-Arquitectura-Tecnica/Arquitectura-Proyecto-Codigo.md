@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Arquitectura-Proyecto-Codigo.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -257,11 +257,14 @@ Este proyecto de código **no redacta ninguna regla de negocio**: es el caso que
 | --- | --- | --- | --- |
 | PA-01 | Los **nombres definitivos de los tipos, de sus campos y de los espacios de nombres**. El intake no los fija y la categoría 02 tampoco: se anclan en la etapa que implementa el contrato | El equipo en el punto de control de la etapa correspondiente | Etapa `c` en adelante, según la familia |
 | PA-02 | La **zona horaria y la precisión del campo de momento** del tipo de error. Ninguna fuente las declara | El equipo, junto con la elección de formato de intercambio | Etapa `a` o `c` |
-| PA-03 | El **formato de intercambio y su configuración** —cómo se nombran los campos al serializar, qué se hace con los valores ausentes— pertenece a `GeometriaFactory-Api` y a `GeometriaFactory-Web`, y ninguna de las dos categorías 05 está emitida todavía. Este proyecto de código sólo exige que los tipos sean serializables sin comportamiento | Las categorías 05 de `GeometriaFactory-Api` y `GeometriaFactory-Web` | Al emitirse |
+| PA-03 | **RESUELTO.** El **formato de intercambio y su configuración** —cómo se nombran los campos al serializar, qué se hace con los valores ausentes— se reasignó a las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web`. **Las dos están emitidas**, y la decisión está tomada: [`Web`](../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 `PA-03` declaró que **no la toma de un solo lado** —«los dos extremos tienen que coincidir o el contrato deja de ser el mismo»— y que la decisión pertenece al **productor**, que él **adopta**; y [`Api ADR-02`](../../GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) la tomó, con **seis** reglas de formato que **obligan a los dos extremos** y con la verificación por la batería de integración que golpea el servicio real. **Lo que este proyecto de código exigía —que sus tipos sean serializables sin comportamiento— sigue valiendo y no cambia** | **Cerrado** por la categoría 05 de `GeometriaFactory-Api`, con `GeometriaFactory-Web` como consumidor | **Resuelto** el 2026-08-10, al emitirse las dos categorías 05 |
 | PA-04 | Los dos valores rotulados **[ASUNCIÓN]** de §8 siguen pendientes de confirmación del Product Owner en `PRODUCT-INTAKE` §22 | El Product Owner sobre su propio documento | Antes de fijar la puerta en 09 |
+
+**Cuatro filas: tres abiertas —`PA-01`, `PA-02` y `PA-04`— y una resuelta, `PA-03`.** La fila resuelta **se conserva en la tabla en lugar de retirarse**, porque retirarla dejaría un hueco de numeración sin declarar y porque su desenlace es una decisión que otros dos proyectos de código citan.
 
 ## 12. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial de la arquitectura técnica de `GeometriaFactory-Contracts`. Declara el estilo con sus tres alternativas evaluadas, las ocho familias de tipos como componentes con su grafo acíclico, la regla de exposición en la vista lógica, las cuatro vistas mínimas, los cross-cutting centralizados, siete NFR con objetivo numérico, seis riesgos con mitigación, la trazabilidad de las once restricciones transversales y de las dieciséis reglas, y cuatro puntos abiertos. Emite cinco ADR individuales bajo `Adrs/` y el contrato de superficie pública en `Contratos-Abstractions.md`. |
+| 1.1 | 2026-08-11 | **Corrige una afirmación de §11 que dejó de ser cierta y cierra el punto abierto que la contenía.** La fila `PA-03` declaraba que el formato de intercambio pertenece a las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` y que **«ninguna de las dos está emitida todavía»**. **Hoy las dos lo están** —y con ellas las **siete** categorías 05 del producto—, y además **la decisión está tomada**: `GeometriaFactory-Web` §11 `PA-03` declaró que no la toma de un solo lado y que la adopta del productor, y `Api ADR-02` la tomó con seis reglas de formato que obligan a los dos extremos, con la coincidencia verificada por la batería de integración contra el servicio real. `PA-03` pasa a **fila resuelta**, con su desenlace, sus dos referencias y su fecha, y **se conserva en la tabla en lugar de retirarse** para no dejar un hueco de numeración sin declarar; §11 gana la línea de reparto **tres abiertas y una resuelta**. **Lo que este proyecto de código exigía sigue valiendo y no cambia**: que sus tipos sean serializables sin comportamiento. **Ninguna decisión de arquitectura, ninguna ADR, ningún NFR, ningún riesgo, ninguna restricción transversal y ningún otro punto abierto cambia.** Sube minor. |

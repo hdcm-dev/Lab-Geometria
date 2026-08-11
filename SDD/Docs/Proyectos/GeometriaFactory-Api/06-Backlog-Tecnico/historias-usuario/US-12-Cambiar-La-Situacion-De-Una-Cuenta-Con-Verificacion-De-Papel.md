@@ -1,0 +1,68 @@
+# US-12 — Cambiar la situación de una cuenta con verificación de papel
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Api
+**Documento:** US-12-Cambiar-La-Situacion-De-Una-Cuenta-Con-Verificacion-De-Papel.md
+**Versión:** 1.0
+**Estado:** Propuesta
+**Fecha:** 2026-08-10
+**Autor:** Scrum Master + API Product Owner (AG-06)
+**Épica:** EP-03 Ciclo de vida de la cuenta de alumno
+**Etapa del producto:** `d`
+**Punto de acceso:** `A-07`, bajo la guardia
+**Prioridad MoSCoW:** Must
+**Estimación:** Sin fijar (ver [`../Product-Backlog.md`](../Product-Backlog.md) §4.1)
+
+## 1. Historia
+
+Como **código de `GeometriaFactory-Web`**, quiero **exponer el cambio de situación de una cuenta y recibir la provisoria cuando la operación la produce**, para **que el panel pueda comunicársela al alumno en el momento**.
+
+## 2. Contexto
+
+`F-03` del intake §4 es `Must Have`, y `RN-16` agrega que **habilitar produce la provisoria**. `02` §6 declara el segundo efecto estructural de esa regla sobre esta superficie: **el resultado de este punto devuelve la provisoria**. El contrato de uso es [`CU-04`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md).
+
+## 3. Criterios de aceptación
+
+- Given un acceso con papel `Administrador` y una cuenta en estado `Pendiente`, When se la habilita, Then la transición se aplica y **el resultado devuelve la provisoria**.
+- Given una rehabilitación, When se la aplica, Then ocurre lo mismo.
+- Given ese resultado, When se inspecciona el registro del servidor, Then **la provisoria no aparece en ninguna traza**.
+
+## 4. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| NB upstream | NB-01, NB-02 |
+| CU cubiertos | CU-04 |
+| RN que ejerce | RN-01, RN-06, RN-16 en su efecto estructural |
+| Componente de `05` §3.1 | Superficie de gobierno de la comisión |
+| ¿Decide qué se dice? | **No.** La transición la resuelve el dominio y la provisoria la produce `GeometriaFactory-Infrastructure` |
+| Familia empobrecida | **No** |
+| BT derivadas | BT-11, BT-17 |
+| Tests previstos en 08 | Batería de integración, y la inspección de que la provisoria no queda en el registro |
+
+## 5. Prioridad y estimación
+
+`Must` por derivar de `F-03` y `F-04`, `Must Have`, y porque el criterio de transición `d` → `e` exige que al habilitar el producto muestre **una contraseña provisoria que el administrador no escribió**.
+
+**Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
+
+## 6. DoR check
+
+- [x] Declara al menos un caso de uso de 02
+- [x] Declara la necesidad de negocio y la etapa del roadmap
+- [x] Criterios en Given/When/Then, con camino feliz y caso de borde
+- [x] Declara el punto de acceso que la realiza y el componente de `05` §3.1 que lo aloja
+- [x] Declara si su punto está bajo la guardia, y si no lo está, cuál de las cuatro ausencias declaradas es
+- [x] Toda condición que transporta es uno de los quince códigos vivos del contrato, con su destino declarado
+- [x] Declara que no decide qué se dice
+- [x] Declara si su respuesta pertenece a una de las tres familias deliberadamente empobrecidas
+
+## 7. Notas y supuestos
+
+**`RN-16` tiene dos efectos estructurales sobre esta superficie y ninguno es un tramo propio** (`02` §6): el **retiro** de `A-04` y el resultado de este punto. Lo que esta capa aporta es **no exponer ningún punto que la contradiga**.
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.3 previó con este mismo identificador y este mismo contenido. |

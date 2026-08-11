@@ -2,11 +2,11 @@
 
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-03-Seleccionar-Una-Pieza-Por-Su-Indice.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-08
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §1, §4 y §5 (quinto criterio, sincronización entre el árbol y la escena); `00-Contexto/Vision-Producto.md` §9 (entrada «pieza»); `00-Contexto/Alcance-Producto.md` §4.2 (capacidad F-13); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.7 P.3, §17.7 P.8 (criterio de sincronización por índice), §14 (RA-02), §20 E-1 y §20 E-7
+**Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §1, §4 y §5 (quinto criterio, sincronización entre el árbol y la escena); `00-Contexto/Vision-Producto.md` §9 (entrada «pieza»); `00-Contexto/Alcance-Producto.md` **§4.1** (capacidad F-13, `Must Have` desde `PRODUCT-INTAKE` **1.19**); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.7 P.3, §17.7 P.8 (criterio de sincronización por índice), §14 (RA-02), §20 E-1 y §20 E-7
 **Trazabilidad downstream:** 03-UX-UI-DX, 05-Arquitectura-Tecnica, 06-Backlog-Tecnico, 08-Calidad-Y-Pruebas, 10-Examples
 
 ---
@@ -110,3 +110,4 @@ Las dos condiciones terminan de forma controlada y dejan la escena exactamente c
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Contrato de uso de `seleccionarPieza`, con cuatro flujos alternativos, dos condiciones de error y cinco criterios de aceptación anclados en los índices de los escenarios E-1 y E-7. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de F-13 a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4. La trazabilidad upstream remitía a `Alcance-Producto.md` **§4.2**, «capacidades declaradas con prioridad menor», y esa remisión quedó falsa: F-13 pasó a **§4.1** con el resto del alcance comprometido en la versión 1.6 de ese documento. Se corrige la sección y se declara la prioridad vigente. Ningún flujo, condición de error ni criterio de aceptación de este contrato de uso cambia: la sincronización por índice ya se especificaba entera, porque `PRODUCT-INTAKE` §17.7 P.8 la incluye entre lo que `PT-02` mide antes de comprometer la etapa `g`, que es precisamente el fundamento de la promoción. Sube minor. |

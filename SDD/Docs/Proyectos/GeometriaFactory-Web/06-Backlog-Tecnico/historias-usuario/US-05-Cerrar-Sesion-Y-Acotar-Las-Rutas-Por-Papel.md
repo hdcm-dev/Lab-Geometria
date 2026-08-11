@@ -1,0 +1,67 @@
+# US-05 — Cerrar sesión y acotar las rutas por papel
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Web
+**Documento:** US-05-Cerrar-Sesion-Y-Acotar-Las-Rutas-Por-Papel.md
+**Versión:** 1.0
+**Estado:** Propuesta
+**Fecha:** 2026-08-10
+**Autor:** Scrum Master (AG-06)
+**Épica:** EP-03 Identidad del administrador y sesión
+**Etapa del producto:** `c`
+**Superficie de 03:** Los dos shells, sobre las once superficies
+**Prioridad MoSCoW:** Must
+**Estimación:** Sin fijar (ver [`../Product-Backlog.md`](../Product-Backlog.md) §4.1)
+
+## 1. Historia
+
+Como **persona con cuenta**, quiero **cerrar mi sesión y que la aplicación sólo me ofrezca lo que mi papel admite**, para **no dejar mi sesión abierta y no encontrarme con destinos que no me corresponden**.
+
+## 2. Contexto
+
+`F-05` del intake §4 declara `Must Have` el inicio y el cierre de sesión. El caso de uso es [`CU-02`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md). `RT-09` de `02` §6 declara la parte más importante de esta historia: **esto acota lo que se ofrece; la verificación de pertenencia y de papel la hace el servicio de datos en cada solicitud**.
+
+## 3. Criterios de aceptación
+
+- Given una sesión abierta, When la persona cierra sesión, Then la sesión termina y ninguna ruta del panel queda alcanzable.
+- Given una sesión de alumno, When se recorre la navegación, Then **ninguna ruta de administrador es alcanzable** y su destino **no se dibuja en la barra lateral, ni siquiera deshabilitado**.
+- Given una ruta de administrador pedida por dirección directa con sesión de alumno, When se la solicita, Then la aplicación desvía y **el servicio de datos rechaza igual**: la acotación de la pantalla no es la defensa.
+
+## 4. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| NB upstream | NB-01, NB-02 |
+| CU cubiertos | CU-02 |
+| Restricciones transversales que la alcanzan | RT-02, RT-09 |
+| Componente de `05` §3.1 | Armazón y encaminamiento, Sesión y estado del circuito |
+| Quién hace cumplir lo que esta historia sólo ofrece | El servicio de datos, que verifica papel y pertenencia en cada solicitud |
+| BT derivadas | BT-07, BT-14 |
+| Tests previstos en 08 | Paso del guion de la etapa `c`, y prueba de ruta forzada contra la superficie de `GeometriaFactory-Api` |
+
+## 5. Prioridad y estimación
+
+`Must` por derivar de `F-05`, `Must Have`, y porque la protección de rutas es criterio de aceptación declarado en `PRODUCT-INTAKE` §17.6.P.5.
+
+**Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
+
+## 6. DoR check
+
+- [x] Declara al menos un caso de uso de 02
+- [x] Declara la necesidad de negocio y la etapa del roadmap
+- [x] Criterios en Given/When/Then, con camino feliz y caso de borde
+- [x] Declara la superficie de 03 que la aloja y el componente de `05` §3.1 que la sostiene
+- [x] Declara qué restricciones transversales de `02` §6 la alcanzan
+- [x] Toda condición que presenta es uno de los quince códigos vivos del contrato, o el camino de ausencia de respuesta
+- [x] Ninguna afirmación depende de que la pieza pública haga cumplir una regla
+- [x] Se puede maquetar y validar sin servicio de datos
+
+## 7. Notas y supuestos
+
+**No dibujar el destino del otro papel es una decisión de presentación legítima y necesaria, y no hace cumplir nada** (`02` §5). Es también lo que `05` §10.3 declara que esta pieza hace por `RN-01`: el aprovisionamiento se ofrece una sola vez y los dos shells no muestran el destino del otro papel.
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Numera y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 había repartido por necesidad de negocio con este identificador, y que su §3.2 dejó a la categoría 06 para redactar. |

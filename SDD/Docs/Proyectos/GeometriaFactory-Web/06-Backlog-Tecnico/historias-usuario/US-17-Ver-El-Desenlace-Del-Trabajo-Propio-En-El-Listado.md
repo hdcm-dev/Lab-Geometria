@@ -1,0 +1,67 @@
+# US-17 — Ver el desenlace del trabajo propio en el listado, y el comentario al abrirlo
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Web
+**Documento:** US-17-Ver-El-Desenlace-Del-Trabajo-Propio-En-El-Listado.md
+**Versión:** 1.0
+**Estado:** Propuesta
+**Fecha:** 2026-08-10
+**Autor:** Scrum Master (AG-06)
+**Épica:** EP-08 Desenlace de la entrega
+**Etapa del producto:** `h`
+**Superficie de 03:** `Panel-De-Trabajos-Del-Alumno` y `Vista-De-Trabajo`
+**Prioridad MoSCoW:** Must
+**Estimación:** Sin fijar (ver [`../Product-Backlog.md`](../Product-Backlog.md) §4.1)
+
+## 1. Historia
+
+Como **alumno**, quiero **ver el desenlace de mi trabajo en mi propio listado y el comentario del docente al abrirlo**, para **que la entrega tenga un cierre explícito y no quede sólo depositada**.
+
+## 2. Contexto
+
+`NB-09` pide desenlace explícito. Los casos de uso son [`CU-06`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md) para el estado en el listado y [`CU-07`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md) para el comentario al abrir. El roadmap 1.1 precisó esta distinción en sus dos apariciones, y la causa es del ensamblado de contratos: **el comentario no viaja en la proyección de listado**.
+
+## 3. Criterios de aceptación
+
+- Given un trabajo propio en `Finalizado` o en `Rechazado`, When se mira el listado, Then el **desenlace** está a la vista.
+- Given ese mismo trabajo, When se lo abre desde el listado, Then el **comentario** del administrador aparece, si lo hay.
+- Given un trabajo rechazado **sin** comentario, When se lo abre, Then el estado informa que no fue aceptado y **no hay explicación escrita**: el comentario es opcional en los dos desenlaces, y es una consecuencia que el Product Owner aceptó explícitamente.
+
+## 4. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| NB upstream | NB-09, NB-03 |
+| CU cubiertos | CU-06, CU-07 |
+| Restricciones transversales que la alcanzan | RT-06, RT-07 |
+| Componente de `05` §3.1 | Superficies, Representaciones reutilizadas |
+| Quién hace cumplir lo que esta historia sólo ofrece | La terminalidad y la exclusividad de la facultad son invariantes del dominio |
+| BT derivadas | BT-09, BT-11 |
+| Tests previstos en 08 | Paso del guion de la etapa `h`, con desenlace con comentario y sin comentario |
+
+## 5. Prioridad y estimación
+
+`Must` por derivar de `F-21` y `F-23`, `Must Have`, y porque el criterio de transición `h` → `i…` exige que el alumno vea **el desenlace en su propio listado** y **el comentario al abrir el trabajo** desde ese listado.
+
+**Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
+
+## 6. DoR check
+
+- [x] Declara al menos un caso de uso de 02
+- [x] Declara la necesidad de negocio y la etapa del roadmap
+- [x] Criterios en Given/When/Then, con camino feliz y caso de borde
+- [x] Declara la superficie de 03 que la aloja y el componente de `05` §3.1 que la sostiene
+- [x] Declara qué restricciones transversales de `02` §6 la alcanzan
+- [x] Toda condición que presenta es uno de los quince códigos vivos del contrato, o el camino de ausencia de respuesta
+- [x] Ninguna afirmación depende de que la pieza pública haga cumplir una regla
+- [x] Se puede maquetar y validar sin servicio de datos
+
+## 7. Notas y supuestos
+
+**El comentario no es una observación y la superficie no los mezcla.** Las observaciones son del validador sobre la geometría y son varias; el comentario del administrador es **uno solo, opcional y sin historial**. La categoría 03 ya ubicó el comentario **al abrir el trabajo** y no en el listado.
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Numera y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 había repartido por necesidad de negocio con este identificador, y que su §3.2 dejó a la categoría 06 para redactar. |
