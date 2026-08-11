@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-07-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md), [`NB-06`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md), [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md), [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (F-08, F-11, F-12, F-21), §4.1 (RN-03, RN-09, RN-11), §4.2, §7 (CL-5), §14 (RA-03), §17.4.P.10, §17.5.P.10; `Proyectos/GeometriaFactory-Contracts/.../CU-04-Contrato-De-Listado-De-Trabajos.md` y `.../CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md`; `Proyectos/GeometriaFactory-Application/.../CU-06-Consultar-Los-Trabajos-Propios-Del-Alumno.md` y `.../CU-07-Revisar-Los-Trabajos-De-La-Comision.md`

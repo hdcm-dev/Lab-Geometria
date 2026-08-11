@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-09-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md), [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4.1 (RN-03, RN-09, **RN-16**), §7 (CL-2, CL-5, CL-8), §14 (**RA-03**), §17.5.P.5, §17.5.P.10; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md` completo, y la §6 de sus otros siete contratos de uso; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3, §2.3 y §5, que declara que la traducción de sus condiciones hacia afuera del proceso pertenece a este proyecto de código

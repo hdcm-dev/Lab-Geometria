@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-08-Exponer-El-Desenlace-De-La-Revision.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (F-21, F-23), §4.1 (RN-10, RN-11), §4.2 y sus tres consecuencias aceptadas, §6 (flujo 2.1), §7 (CL-10, CL-11), §12 (entradas «Aprobar / Rechazar» y «Comentario»), §14 (RA-03); `Proyectos/GeometriaFactory-Contracts/.../CU-07-Contrato-De-Desenlace-De-La-Revision.md`; `Proyectos/GeometriaFactory-Application/.../CU-08-Dar-Desenlace-A-Un-Trabajo.md`

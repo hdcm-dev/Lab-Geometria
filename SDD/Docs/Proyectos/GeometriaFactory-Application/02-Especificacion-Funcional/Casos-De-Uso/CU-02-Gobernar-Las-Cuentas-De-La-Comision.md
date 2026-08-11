@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-02-Gobernar-Las-Cuentas-De-La-Comision.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5 (admisión explícita, cobertura de las cuatro operaciones, protección de la operación destructiva, advertencia previa a la baja); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13**, §4 (F-03, **F-04** precisada, F-26), §4.1 (RN-01, RN-06, RN-07, RN-12, RN-13, RN-14, **RN-16**), §17.1.P.2 (**INV-09**), §7 (CL-6, CL-7 reescrito), §17.2.P.5; orquesta [`CU-02`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) y la fijación de [`CU-03`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) de GeometriaFactory-Domain

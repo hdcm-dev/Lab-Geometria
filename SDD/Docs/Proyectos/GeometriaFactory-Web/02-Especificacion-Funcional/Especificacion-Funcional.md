@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Especificacion-Funcional.md
 **Versión:** 1.7
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../00-Contexto/Vision-Producto.md` §3, §7, §9 (glosario raíz); `../../../00-Contexto/Alcance-Producto.md` §4.1, §5, §8; `../../../00-Contexto/Compatibilidad-Plataformas.md` §2.2 y §4; `../../../01-Necesidades-Negocio/Necesidades-Negocio.md` §2, §4, §5.3, y las nueve `NB-XX` de `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14**, §4 (capacidades, con **F-26** y **F-25** ya `Must Have`), §4.1 (**las dieciséis reglas**, con **RN-16** nueva del intake 1.13 y **RN-13 precisada**), §4.2 (modelo de estados y tabla de quién puede qué), §5 (historias de usuario), §6 (flujos 1, 2, 2.1, 3 y 4), §7 (casos límite), §13 y §14 (composición y reglas RA-01 a RA-03), §17.1.P.2 (**INV-09**), §17.6 íntegro (P.1 a P.12) y §17.7 P.3 y P.10; `../../GeometriaFactory-Contracts/02-Especificacion-Funcional/` (**ocho** contratos de uso, **quince** códigos de error y tres señales, con **CU-08 cubriendo F-26**: ver §6, RT-12); `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md` (**seis funciones** y siete condiciones)

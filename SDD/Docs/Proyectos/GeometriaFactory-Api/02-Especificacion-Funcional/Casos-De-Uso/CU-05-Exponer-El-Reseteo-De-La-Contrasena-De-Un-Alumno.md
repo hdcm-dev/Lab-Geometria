@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-05-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md), [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (**F-26**, F-03, **F-04** precisada), §4.1 (RN-12, RN-13, RN-14, RN-15, **RN-16**), §7 (CL-7), §9 (X-2 retirada), §11 (RN-B6 cerrado), §17.1.P.2 (INV-08, INV-09), §14 (RA-03); `Proyectos/GeometriaFactory-Contracts/.../CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md`; `Proyectos/GeometriaFactory-Application/.../CU-11-Resetear-La-Contrasena-De-Un-Alumno.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md`

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Documento:** README.md
 **Versión:** 1.4
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Product Manager Senior (AG-00), actuando también como Analista de Negocio Senior (AG-01) por `Rules-Contexto.md` §1.3
 **Trazabilidad upstream:** PRODUCT-INTAKE 1.9 §2 (stakeholders y cantidad de personas del equipo), §4.2 (colisión de vocabulario de `Pendiente`), §13 (composición del producto), PRODUCT-MANIFEST §5 (flag `equipo_n`)

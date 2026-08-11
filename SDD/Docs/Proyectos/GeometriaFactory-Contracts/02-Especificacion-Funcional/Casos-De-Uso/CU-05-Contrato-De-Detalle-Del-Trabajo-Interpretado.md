@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §1, §5; `NB-05-Visibilidad-Del-Error-De-Calculo.md` §1, §5; `NB-06-Visualizacion-Dentro-Del-Producto.md` §5; `NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §5 (quinto criterio); `NB-09-Desenlace-Explicito-De-La-Entrega.md` §1 y §5 (sexto criterio); `00-Contexto/Vision-Producto.md` §9.1 (Pieza, Componente, Observación, Advertencia, Error de validación, Valor declarado / valor derivado); `00-Contexto/Alcance-Producto.md` §4.1 (F-09, F-10, F-11) y §8; `PRODUCT-INTAKE` **1.14** §4 (F-21), §4.1 (RN-10), §4.2, §12 (entrada «comentario»), §17.4 P.3, P.5, P.10 y P.11, §17.5 P.3, §4 (F-09, F-10, F-11), §6 (flujo 4), §20.E-1, §20.E-3, §20.E-4, §20.E-5

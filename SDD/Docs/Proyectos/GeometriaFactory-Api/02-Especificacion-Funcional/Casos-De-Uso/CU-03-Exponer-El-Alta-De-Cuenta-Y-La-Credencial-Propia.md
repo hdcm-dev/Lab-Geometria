@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-03-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md), [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (F-01, F-02, **F-04** precisada, F-05), §4.1 (RN-01, RN-02, RN-06, RN-13, **RN-16**), §6 (flujo 1), §9 (X-1), §14 (RA-01, RA-03), §17.5.P.5; `Proyectos/GeometriaFactory-Contracts/.../CU-02-Contrato-De-Administracion-De-Cuentas.md`; `Proyectos/GeometriaFactory-Application/.../CU-01-Registrar-El-Alta-De-Una-Cuenta.md`, `.../CU-10-Configurar-La-Cuenta-De-Administrador.md` y `.../CU-03-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md`

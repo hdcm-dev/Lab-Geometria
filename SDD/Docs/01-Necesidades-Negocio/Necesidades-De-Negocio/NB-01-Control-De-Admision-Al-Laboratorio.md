@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-01-Control-De-Admision-Al-Laboratorio.md |
 | Versión | 1.2 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-10 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE 1.9 §1 (idea y problema), §3 (propuesta de valor), §4 (capacidades F-01 y F-03; **F-26**, que vive en el mismo panel y pertenece a NB-02), §4.1 (**RN-15**, que declara que el reseteo no es una transición de la máquina de estados), §7 (casos límite CL-6 y **CL-7** reescrito), §9 (exclusión X-3 vigente y **X-2 retirada**), §11 (riesgo **RN-B6**, tachado el 2026-08-09 por el intake 1.10); `Vision-Producto.md` §1, §2, §8 (riesgo RG-06) y §9; `Alcance-Producto.md` §4.1 y §5 |

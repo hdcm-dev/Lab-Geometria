@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-03-Guardar-Y-Recuperar-Los-Trabajos.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-03, RN-08, RN-11), §7 (CL-1), §17.3.P.2, §17.3.P.4, §17.3.P.11 punto 2, §17.3.P.12; implementa el puerto de repositorio de trabajos de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; el modelo que materializa está en [`Modelo-Datos/Modelo-Conceptual.md`](../Modelo-Datos/Modelo-Conceptual.md)

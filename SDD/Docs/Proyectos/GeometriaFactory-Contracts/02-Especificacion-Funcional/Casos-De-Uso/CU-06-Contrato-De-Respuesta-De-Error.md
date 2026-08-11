@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-06-Contrato-De-Respuesta-De-Error.md
 **Versión:** 1.6
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §1, §5 (tercer criterio); `NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md` §1, §5 (cuarto criterio); `NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §5 (tercer criterio); `00-Contexto/Vision-Producto.md` §9.1 (Fallo silencioso, Error de validación) y §7 R-03; `00-Contexto/Alcance-Producto.md` §8; `PRODUCT-INTAKE` **1.13** §4.1 (RN-05, RN-09, RN-10, **RN-12**, **RN-13**, RN-15, **RN-16**), §4.2, §4 (**F-26**, F-03, **F-04** precisada), §7 (CL-3, **CL-7**), §17.1.P.2 (**INV-09**), §17.4 **P.5**, §14 (RA-03), §17.5 P.3 y P.5, §7 (CL-2, CL-5, CL-8), §20.E-5

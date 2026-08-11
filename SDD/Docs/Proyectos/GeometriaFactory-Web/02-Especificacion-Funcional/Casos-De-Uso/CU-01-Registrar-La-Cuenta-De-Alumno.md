@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-01-Registrar-La-Cuenta-De-Alumno.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (primero y tercer criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §1, §5 (segundo criterio); `../../../../00-Contexto/Vision-Producto.md` §9.1 y §9.2; `../../../../00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-02), §4.1 (RN-02, RN-06), §6 (flujo 1), §9 (**X-1** vigente y **X-2 retirada**), §17.6 P.3 y P.5

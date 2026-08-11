@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-06-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md), [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (F-06, F-07, F-22, F-24), §4.1 (RN-03, RN-04, RN-05, RN-08, RN-09), §4.2, §6 (flujo 2), §7 (CL-3, CL-5), §12 (entradas «Enviar» y «Error de validación»), §14 (RA-03), §17.5.P.6, §20.E-2, §20.E-5, §20.E-8, §21; `Proyectos/GeometriaFactory-Contracts/.../CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md`; `Proyectos/GeometriaFactory-Application/.../CU-04-Cargar-Y-Reeditar-Un-Trabajo-Propio.md`, `.../CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md` y `.../CU-09-Eliminar-Un-Trabajo.md`

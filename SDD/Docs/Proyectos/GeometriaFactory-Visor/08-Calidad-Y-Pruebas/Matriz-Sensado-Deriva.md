@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Matriz-Sensado-Deriva.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08); alta de las sondas `VER-XX` por Developer Advocate / Sample Engineer Senior (AG-10)
 **Variante:** Calidad y pruebas

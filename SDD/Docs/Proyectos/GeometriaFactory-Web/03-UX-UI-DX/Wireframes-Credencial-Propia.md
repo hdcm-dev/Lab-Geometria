@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Wireframes-Credencial-Propia.md
 **Versión:** 1.4
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI

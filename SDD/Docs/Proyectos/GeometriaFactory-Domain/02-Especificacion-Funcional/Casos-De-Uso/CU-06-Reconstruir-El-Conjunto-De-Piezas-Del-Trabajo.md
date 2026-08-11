@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1, §4 y §5; [`NB-06`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md) §5 (disposición estable y sincronización por posición de pieza); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-08 y RN-09), §4.2 (modelo de estados del trabajo), §17.1.P.2 (INV-07), §17.1.P.11 (puntos 1, 2 y 4), §20.E-1, §20.E-2, **§20.E-5 (tipo desconocido, que es el escenario de la posición reservada)**, §20.E-6, §20.E-7

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-01-Canjear-Credenciales-Por-Un-Acceso-Firmado.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (F-05, **F-04** precisada), §4.1 (RN-06, RN-13, **RN-16**), §14 (RA-01, RA-03), §17.5.P.3, §17.5.P.5 y su nota de seguridad, §11 (RN-B5); `Proyectos/GeometriaFactory-Contracts/.../CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md` completo; `Proyectos/GeometriaFactory-Application/.../CU-03-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md` y `CU-06-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md`

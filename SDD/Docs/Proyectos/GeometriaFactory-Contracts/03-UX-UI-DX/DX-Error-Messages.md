@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** DX-Error-Messages.md
 **Versión:** 1.8
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX

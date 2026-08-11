@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md` §1, §5; `NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §1, §5; `00-Contexto/Vision-Producto.md` §9.1 (Trabajo, Pieza); `00-Contexto/Alcance-Producto.md` §4.1 (F-06, F-07) y §5 (X-4); `PRODUCT-INTAKE` §17.4 P.2, P.3, P.5 y P.11 (decisión 2), §17.5 P.3, §4 (F-06, F-07), §6 (flujo 2), §7 (CL-3), §20.E-2

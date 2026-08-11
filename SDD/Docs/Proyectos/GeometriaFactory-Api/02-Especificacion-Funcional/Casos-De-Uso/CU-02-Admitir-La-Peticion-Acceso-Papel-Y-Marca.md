@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-02-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4.1 (RN-01, RN-13, **RN-16**), §4 (**F-04** precisada), §17.1.P.2 (INV-09), §17.5.P.3, §17.5.P.5 (autorización por papel **más** verificación de pertenencia), §14 (RA-01, RA-03); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4, y en particular su cuarta comprobación transversal y su precisión 5; `Proyectos/GeometriaFactory-Infrastructure/.../CU-08-Emitir-El-Acceso-Firmado.md`; `Proyectos/GeometriaFactory-Contracts/.../CU-06-Contrato-De-Respuesta-De-Error.md`

@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Especificacion-Funcional.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `../../../00-Contexto/Vision-Producto.md` §3 (propuesta de valor) y §9 (glosario raíz); `../../../00-Contexto/Alcance-Producto.md` §4.1 (capacidades comprometidas) y §4.2 (capacidades de prioridad menor); `../../../00-Contexto/Compatibilidad-Plataformas.md` §2.2 (plataforma del navegador) y §4 (alternativas para plataformas no soportadas); `../../../01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (catálogo de necesidades); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md` §1, §4, §5 y §7; `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §4 (problema específico), en su parte de piezas dibujadas; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4 (capacidad F-25), §14 (RA-01, RA-02, RA-03), §16.1, §17.7 completo, §18, §20 E-1 y E-7

@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-07-Contrato-De-Desenlace-De-La-Revision.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md` §1, §5; `NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §5; `00-Contexto/Vision-Producto.md` §9.1 (Estado del trabajo, Aprobar / Rechazar, Comentario) y §9.2 (`Pendiente`, forma calificada obligatoria); `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE` **1.14** §4 (F-21, F-23), §4.1 (RN-10), §4.2 (modelo de estados), §6 (flujo 2.1), §7 (CL-10, CL-11), §9 (retiro de X-5), §12 (glosario), §17.4 P.3, P.5 y P.10

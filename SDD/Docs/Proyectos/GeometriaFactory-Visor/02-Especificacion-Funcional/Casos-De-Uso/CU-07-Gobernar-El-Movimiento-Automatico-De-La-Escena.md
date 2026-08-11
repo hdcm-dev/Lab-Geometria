@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-07-Gobernar-El-Movimiento-Automatico-De-La-Escena.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §1 (descripción de la necesidad) y §5 (criterios de éxito); `00-Contexto/Vision-Producto.md` §3 (diferenciador D-4) y §9 (glosario raíz); `00-Contexto/Alcance-Producto.md` §4.1 (capacidades comprometidas); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 capacidad **F-25** (movimiento automático de la escena con dos controles independientes), §17.7 P.3 (contrato de la fachada), §17.7 P.10 (el movimiento automático no altera la disposición), §17.7 P.4 y P.5 (prohibiciones de persistencia y de identidad), §14 (RA-02)

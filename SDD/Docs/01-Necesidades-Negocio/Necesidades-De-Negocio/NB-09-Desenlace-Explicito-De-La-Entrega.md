@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-09-Desenlace-Explicito-De-La-Entrega.md |
 | Versión | 1.0 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §4 (capacidades F-21, F-23 y F-24), §4.1 (reglas RN-04, RN-10 y RN-11), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §5 (historia 7.1), §6 (flujo 2.1), §7 (casos límite CL-10 y CL-11), §8 (métrica de aprobación del administrador), §9 (retiro de la exclusión X-5), §12 (glosario: «aprobar / rechazar» y «comentario»), §15 (etapa `h`), §22 (asunción A-2); `Vision-Producto.md` §5 (OBJ-03), §6 y §9; `Alcance-Producto.md` §4.1 y §8; `Roadmap-Producto.md` §2.1 y §5.2 |

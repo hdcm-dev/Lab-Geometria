@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5 (separación entre alumnos y acotación de la eliminación); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-07), §4.1 (RN-03 y RN-04), §4.2 (modelo de estados del trabajo), §17.1.P.2 (INV-02 e INV-03), §7 (CL-5), §17.2.P.5, §17.5.P.5, §17.5.P.6

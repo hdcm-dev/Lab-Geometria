@@ -3,8 +3,8 @@
 | Campo | Valor |
 | --- | --- |
 | Producto | Fábrica de Geometría |
-| Versión del documento | 1.1 |
-| Estado | Propuesto |
+| Versión del documento | 1.3 |
+| Estado | Aprobado |
 | Fecha | 2026-08-11 |
 | Stack principal | C# sobre .NET 10 —Blazor Interactive Server en el front, ASP.NET Core en el servicio de datos—, Entity Framework Core sobre SQLite, y TypeScript con webpack en el visor |
 | Composición | 7 proyectos de código (ver tabla de proyectos de código) |
@@ -124,19 +124,19 @@ El producto está **especificado y todavía no construido**. Las ocho categoría
 
 | Categoría | Ámbito | Estado | Cierre |
 | --- | --- | --- | --- |
-| 00-Contexto | Producto | Propuesto | Fase A auditada |
-| 01-Necesidades-Negocio | Producto | Propuesto | Fase A auditada |
-| 02-Especificacion-Funcional | Los siete | Propuesto | Fase B auditada por proyecto de código, **los siete**; el de `GeometriaFactory-Api` se emitió tarde y con dictamen rechazado (ver §8) |
-| 03-UX-UI-DX | Los siete | Propuesto | Fase B auditada; validación visual de maqueta cerrada en `GeometriaFactory-Web` |
+| 00-Contexto | Producto | Aprobado | Fase A auditada |
+| 01-Necesidades-Negocio | Producto | Aprobado | Fase A auditada |
+| 02-Especificacion-Funcional | Los siete | Aprobado | Fase B auditada por proyecto de código, **los siete**; el de `GeometriaFactory-Api` se emitió tarde y con dictamen rechazado en la ronda 1, **levantado por su ronda 2 el 2026-08-11** (ver §8) |
+| 03-UX-UI-DX | Los siete | Aprobado | Fase B auditada; validación visual de maqueta cerrada en `GeometriaFactory-Web` |
 | 04-Prompts-AI | — | **Omitida por gating** | Ningún proyecto de código usa modelos de lenguaje |
-| 05-Arquitectura-Tecnica | Los siete | Propuesto | Fase C auditada, aprobada |
-| 06-Backlog-Tecnico | Los siete | Propuesto | Fase D auditada, aprobada |
-| 07-Plan-Sprint | Los siete | Propuesto | Fase D auditada, aprobada |
-| 08-Calidad-Y-Pruebas | Los siete | Propuesto | Fase E auditada, aprobada |
-| 09-Devops | Los siete | Propuesto | Fase F auditada, aprobada |
-| 10-Examples | Los siete | Propuesto, pasada de diseño | Fase G auditada, aprobada; las 19 sondas sin evidencia hasta que haya código |
+| 05-Arquitectura-Tecnica | Los siete | Aprobado | Fase C auditada, aprobada |
+| 06-Backlog-Tecnico | Los siete | Aprobado | Fase D auditada, aprobada |
+| 07-Plan-Sprint | Los siete | Aprobado | Fase D auditada, aprobada |
+| 08-Calidad-Y-Pruebas | Los siete | Aprobado | Fase E auditada, aprobada |
+| 09-Devops | Los siete | Aprobado | Fase F auditada, aprobada |
+| 10-Examples | Los siete | Aprobado, pasada de diseño | Fase G auditada, aprobada; las 19 sondas sin evidencia hasta que haya código |
 | 11-Documentacion | Producto y los siete | **Planificado** | Plan documental emitido en esta consolidación |
-| Vista y pipeline de producto | Producto | Propuesto | Emitidos en esta consolidación |
+| Vista y pipeline de producto | Producto | Aprobado | Emitidos en esta consolidación |
 
 **Las magnitudes del producto, contadas sobre el instrumento**: 71 casos de uso, 16 reglas de negocio, 9 invariantes del dominio, 45 decisiones de arquitectura, 6 contratos de superficie, 15 puntos de acceso, 15 códigos del contrato vivos sobre 18 emitidos, 6 funciones en la fachada del visor, 8 escenarios de datos, 10 casos en la batería del validador, 77 quality gates y 19 sondas de verificación.
 
@@ -149,7 +149,7 @@ Un producto que se entrega declarando lo que no está decidido vale más que uno
 | Punto abierto | Titular | Dónde está declarado |
 | --- | --- | --- |
 | Cuántas aristas de compilación tiene el producto: el manifiesto declara ocho en §2, dibuja siete en §3 y valida siete en §4 | Product Owner | [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) §3.1 |
-| El **rechazo** del informe de auditoría de Fase B de `GeometriaFactory-Api`, emitido el 2026-08-11 con quince hallazgos de recuento y de cita: **falta la ronda 2 que lo levante**. El informe faltante ya no falta —son siete para siete proyectos de código— y lo que queda abierto es su cierre | Orquestador SDD | [`Audit/B-02-03-GeometriaFactory-Api-r1.md`](Audit/B-02-03-GeometriaFactory-Api-r1.md) §10 y [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) §1.1 |
+| ~~El **rechazo** del informe de auditoría de Fase B de `GeometriaFactory-Api`, emitido el 2026-08-11 con **diecisiete** hallazgos de recuento y de cita: falta la ronda 2 que lo levante.~~ **CERRADO el 2026-08-11.** La ronda 2 se emitió y su dictamen es **APROBADO**: verifica los diecisiete cerrados uno por uno sobre el instrumento y **levanta el rechazo**. Deja dos hallazgos nuevos, los dos P2 y los dos fuera de los 21 artefactos auditados, cerrados en esta misma tanda | Orquestador SDD | [`Audit/B-02-03-GeometriaFactory-Api-r2.md`](Audit/B-02-03-GeometriaFactory-Api-r2.md) §10 |
 | El nombre del cuarto puerto, el de repositorio de cuentas: el puerto existe y su identificador no está fijado | Product Owner y equipo, en la etapa `a` | `Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/` §11 |
 | El umbral numérico de fluidez del visor: ninguna fuente lo declara y ninguna categoría lo inventa | Product Owner | `Proyectos/GeometriaFactory-Visor/05-Arquitectura-Tecnica/` §11 |
 | El alcance de la colección de peticiones reproducible: la fuente lo declara en dos lugares con alcances distintos | Product Owner | `Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/` §11 |
@@ -199,5 +199,7 @@ Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosario
 
 | Versión | Fecha | Descripción del cambio |
 | --- | --- | --- |
+| 1.3 | 2026-08-11 | **Registra la promoción del estado documental del corpus**, hecha el mismo día sobre `SDD/Docs/` según la política de versionado de documentos de `Master-Prompt.md` 5.2 §5. **§7**, columna «Estado»: las once filas de categoría que decían `Propuesto` pasan a **`Aprobado`**; la de `11-Documentacion` **no cambia** y sigue en `Planificado`, y la de `04-Prompts-AI` sigue omitida por gating. **La constancia única de la promoción —alcance contado, fundamento, los ocho documentos no promovidos y lo que queda fuera de `SDD/Docs/`— vive en [`Handoff-Checkout.md`](Handoff-Checkout.md) §2, y este README no la repite**: sólo publica su resultado por categoría. La cabecera de este documento pasó a `Aprobado` por la misma promoción, y **eso no sube versión**: lo que la sube es la reescritura de la columna de §7. **Ninguna magnitud del producto, ningún punto abierto y ninguna decisión cambia.** Sube minor. |
+| 1.2 | 2026-08-11 | **Absorbe la emisión de [`Audit/B-02-03-GeometriaFactory-Api-r2.md`](Audit/B-02-03-GeometriaFactory-Api-r2.md) 1.0, cuyo dictamen es APROBADO, y cierra con ella el hallazgo `N-02` (P2) de ese informe.** **§8**: el punto abierto del rechazo de la Fase B de `GeometriaFactory-Api` pasa a **CERRADO**, con la fila original tachada y conservada porque era correcta al escribirse; y el recuento de hallazgos de la ronda 1 pasa de **quince** a **diecisiete**, que es lo que suma su propio desglose —un P0, cinco P1, seis P2 y cinco P3— y lo que la ronda 2 verificó cerrado uno por uno. **§7**, fila de `02-Especificacion-Funcional`: se registra que el rechazo quedó levantado. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: «quince hallazgos» sobre ese informe vivía en **tres** documentos de nivel producto —éste §8, [`Handoff-Checkout.md`](Handoff-Checkout.md) §6.1 `B-1` y [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) §1.1—, y «falta la ronda 2» en esos **tres mismos** lugares; los tres se corrigen en esta tanda. El recuento de informes de auditoría vivía además en **dos** lugares de `Handoff-Checkout.md` —§2.1 y §5— y pasa de 30 y 32 a **33**. **Ninguna magnitud del producto, ningún proyecto de código y ninguna decisión cambia.** Sube minor. |
 | 1.1 | 2026-08-11 | **Absorbe la emisión de [`Audit/B-02-03-GeometriaFactory-Api-r1.md`](Audit/B-02-03-GeometriaFactory-Api-r1.md) y de [`Audit/B2-Maqueta-GeometriaFactory-Web-r2.md`](Audit/B2-Maqueta-GeometriaFactory-Web-r2.md), los dos del 2026-08-11.** **§7**, fila de `02-Especificacion-Funcional`: la Fase B pasa a estar auditada en **los siete** proyectos de código; ya no hay informe faltante, y lo que se declara es que el del proyecto de código principal llegó tarde y con dictamen rechazado. **§8**: el punto abierto deja de ser «falta el informe» —que dejó de ser cierto— y pasa a ser **«falta la ronda 2 que levante su rechazo»**, con el informe citado directamente. Se llega acá por la búsqueda de propagación que exige `B-02-03-GeometriaFactory-Api-r1.md` §10 para toda corrección de este tipo: este README y `Handoff-Checkout.md` §11 `D-3` eran los otros dos lugares vivos que afirmaban la ausencia del informe, y los dos se corrigen en la misma tanda. **Ninguna magnitud del producto, ningún proyecto de código y ninguna decisión cambia.** Sube minor. |
 | 1.0 | 2026-08-11 | Emisión inicial, en la consolidación de la Fase H. Presenta la identidad del producto, la tabla de los **siete** proyectos de código con su tipo D8, rol y dependencias reflejando el `PRODUCT-MANIFEST` **1.3** sin divergencias, el stack y las plataformas por proyecto de código, el mapa de la documentación con las categorías de nivel producto y la carpeta de cada proyecto de código, **cuatro** flujos de lectura por rol de intervención, el proceso de regeneración con la declaración fundamentada de los **tres** archivos satélite que no se emiten, el estado por categoría con su fase de cierre, los **siete** puntos abiertos de nivel producto con su titular, un glosario rápido de **veintiún** términos y la tabla de responsables. **No decide nada y no replica el roadmap**: enlaza a `00-Contexto/Roadmap-Producto.md`. **Autor:** Arquitecto de Soluciones Senior + API Designer (AG-ROOT) |

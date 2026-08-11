@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** US-21-Sincronizar-El-Arbol-Y-La-Escena-Por-Indice-De-Pieza.md
 **Versión:** 1.1
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-11
 **Autor:** Scrum Master (AG-06)
 **Épica:** EP-07 Visualización del trabajo

@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** ADR-08-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Despliegue

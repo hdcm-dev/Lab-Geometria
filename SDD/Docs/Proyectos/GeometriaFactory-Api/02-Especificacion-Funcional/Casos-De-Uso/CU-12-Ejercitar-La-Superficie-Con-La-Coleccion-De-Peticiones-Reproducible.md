@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-12-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §16.1 (qué hay en la carpeta de muestras para el tipo `rest-api`), §18 (**S-2**, con su reproducibilidad de cinco pasos o menos), §15 (regla de delivery: **no se inventan textos de prueba**), §20 (**los ocho escenarios**, E-1 a E-8), §21 (matriz de cobertura), §17.5.P.6, §10 (host de desarrollo sin herramientas)

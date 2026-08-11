@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Definicion-Modelo-De-Dominio.md
 **Versión:** 1.9
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §4 (capacidades **F-01**, F-02, F-03, **F-04** precisada, F-07, F-08, F-12, F-21, F-22, F-23, F-24 y **F-26**), §15 (etapas `c` y `d`), §4.1 (las **dieciséis** reglas de negocio con su enunciado, con **RN-16** nueva del intake 1.13), §17.3.P.4 (sellos de tiempo del trabajo), §7 (**CL-7** reescrito), §9 (**X-2** retirada), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §17.1.P.1, §17.1.P.2 (los **nueve** invariantes con su enunciado, con **INV-08** adoptado e **INV-09** nuevo), §17.1.P.3, §17.1.P.4, §17.1.P.5, §17.1.P.11, §14 (contratos entre proyectos de código), §6 (flujos 2 y 2.1), §7 (casos límite), §20 (los **ocho** escenarios `E-1` a `E-8`); `00-Contexto/Vision-Producto.md` §9; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Documento:** Alcance-Producto.md
 **Versión:** 1.6
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Product Manager Senior (AG-00), actuando también como Analista de Negocio Senior (AG-01) por `Rules-Contexto.md` §1.3
 **Trazabilidad upstream:** PRODUCT-INTAKE 1.9 §1 (problema), §3 (propuesta de valor), §4 (alcance funcional pretendido con MoSCoW), §4.1 (reglas de negocio declaradas), §4.2 (modelo de estados del trabajo), §5 (historias de usuario), §6 (flujos típicos), §7 (casos límite), §9 (exclusiones), §10 (restricciones del cliente), §12 (glosario), §15 (esquema de descomposición y delivery), §22 (supuestos declarados)

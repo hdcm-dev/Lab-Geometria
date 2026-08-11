@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md |
 | Versión | 1.2 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (diferenciadores D-1 y D-3), §4 (capacidades F-09 y F-22), §4.1 (reglas RN-05, RN-08 y RN-09), §4.2 (modelo de estados del trabajo), §6 (flujos 2 y 4), §7 (caso límite CL-3), §12 (glosario del dominio: «enviar»), §9 (exclusión X-4), §10 (formato de entrada no negociable), §11 (riesgo RN-B3), §15 (regla de delivery de datos de prueba reales), §20 y §21 (escenarios de datos); `Vision-Producto.md` §3 y §8; `Alcance-Producto.md` §4.1, §7 y §8 |

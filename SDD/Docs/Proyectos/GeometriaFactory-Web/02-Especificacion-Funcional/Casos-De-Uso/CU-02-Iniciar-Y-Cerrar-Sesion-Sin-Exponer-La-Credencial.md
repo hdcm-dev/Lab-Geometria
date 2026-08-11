@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5 (tercer, cuarto y quinto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §5 (segundo criterio); `../../../../00-Contexto/Vision-Producto.md` §9.2 (pieza en su segundo referente, forma calificada de `Pendiente`); `../../../../00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.8**, §4 (F-05, **F-26**), §4.1 (RN-01, RN-06, **RN-13 precisada**), §6 (flujo 1), §9 (**X-2 retirada**), §14 (RA-01, RA-03), §17.1.P.2 (**INV-09**), §17.6 P.3, **P.5**, P.11 punto 1; [`GeometriaFactory-Contracts` CU-08](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md) §4, §6

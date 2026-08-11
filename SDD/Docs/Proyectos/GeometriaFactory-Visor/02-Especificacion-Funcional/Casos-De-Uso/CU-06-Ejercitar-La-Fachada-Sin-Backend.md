@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** CU-06-Ejercitar-La-Fachada-Sin-Backend.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `NB-06-Visualizacion-Dentro-Del-Producto.md` §5 (segundo, tercero, cuarto y quinto criterios); `00-Contexto/Vision-Producto.md` §3 (diferenciadores D-3 y D-4) y §9 (fallo silencioso); `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §14 (RA-01 y RA-02), §16.1 (materialización de `/samples`), §4 (capacidad F-25), §17.7 P.3, P.4, P.5, P.6, P.10 y P.11, §18 (sample S-1 y punto de extensión), §20 E-7

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** Definition-Of-Ready.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Trazabilidad upstream:** [`Product-Backlog.md`](Product-Backlog.md) 1.0 §5 (refinamiento); [`Backlog-Tecnico.md`](Backlog-Tecnico.md) 1.0 §3; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §5.1 (criterios comunes a toda transición); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §15 (reglas de delivery y punto de control bloqueante)

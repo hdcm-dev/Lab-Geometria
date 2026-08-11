@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto y unidad desplegable del servidor propio**

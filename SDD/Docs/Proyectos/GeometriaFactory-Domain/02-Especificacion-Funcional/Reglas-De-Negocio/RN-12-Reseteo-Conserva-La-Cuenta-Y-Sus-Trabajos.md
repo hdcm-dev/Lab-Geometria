@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-12**, **RN-14** y **RN-15**), §4 (**F-26**), §17.1.P.2 (**INV-09**), §7 (**CL-7** reescrito), §9 (**X-2 retirada**), §11 (**RN-B6 tachado** el 2026-08-09 por este mismo 1.10, precisamente porque F-26 dejó sin objeto su mitigación), §4.2 (modelo de estados del trabajo); [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1; `00-Contexto/Vision-Producto.md` §8 (RG-06)

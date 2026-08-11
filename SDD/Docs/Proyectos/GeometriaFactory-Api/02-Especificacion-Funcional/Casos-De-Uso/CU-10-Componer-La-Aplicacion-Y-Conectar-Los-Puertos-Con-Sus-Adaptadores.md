@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-10-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §13 (dependencias y orden topológico), §14 (contratos entre proyectos de código; RA-03), §17.5.P.1, §17.5.P.2 («más la composición de raíz que conecta puertos con adaptadores»), §17.5.P.4, §17.5.P.5 (secretos por variable de entorno o archivo montado), §17.5.P.8, §17.5.P.11; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.3** §2 y §3; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara **los cuatro puertos**; `Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara los cuatro adaptadores, los dos mecanismos y la responsabilidad de arranque

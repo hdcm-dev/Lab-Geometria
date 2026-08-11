@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-08-Dar-Desenlace-A-Un-Trabajo.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md) §5 (cobertura de los desenlaces, facultad exclusiva del administrador, terminalidad, carácter opcional del comentario, devolución visible para el alumno); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-21, F-23), §4.1 (RN-10, RN-11), §4.2 (modelo de estados y sus tres consecuencias aceptadas), §6 (flujo 2.1), §7 (CL-10, CL-11), §17.2.P.5; orquesta [`CU-10` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-10-Resolver-El-Desenlace-Del-Trabajo.md)

@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Matriz-Sensado-Deriva.md
 **Versión:** 1.5
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Maquetador de validación visual (AG-03M); alta de la sonda `VER-XX` por Developer Advocate / Sample Engineer Senior (AG-10)
 **Variante:** Calidad y pruebas

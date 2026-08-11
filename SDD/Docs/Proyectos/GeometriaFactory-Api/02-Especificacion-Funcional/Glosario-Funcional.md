@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Glosario-Funcional.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Especificacion-Funcional.md` §3, §4 y §6 y `Definicion-Superficie-HTTP.md` completo, de este proyecto de código; los glosarios funcionales de `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Contracts` y `GeometriaFactory-Infrastructure`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §12 y §12.1; `Vocabulario-Rules.md` §2 y §9, en cuanto a los seis términos normativos y al criterio de polisemia

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md); [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §3 (D-2), §4 (F-10), §4.1 (RN-05, RN-08), §7 (CL-4), §17.3.P.10, §17.3.P.11 punto 1, §20.E-1 a §20.E-6 y §21; implementa la segunda mitad del puerto de validación de figuras de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; alimenta [`CU-07`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) de GeometriaFactory-Domain

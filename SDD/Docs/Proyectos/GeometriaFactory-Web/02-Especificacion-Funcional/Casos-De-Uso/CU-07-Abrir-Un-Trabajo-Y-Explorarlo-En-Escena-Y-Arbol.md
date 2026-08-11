@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-07-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md` §1, §4, §5 (los siete criterios); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md` §5 (tercer criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §5 (quinto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md` §5 (sexto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §5 (sexto criterio); `../../../../00-Contexto/Vision-Producto.md` §9.1 (observación, comentario, fallo silencioso); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14**, §4 (F-11, F-13, **F-25 `Must Have`**), §4.1 (RN-03, RN-08, RN-09, RN-11), §6 (flujo 3), §14 (RA-02), §17.6 P.3, P.10, **P.11 punto 4 y punto 5**, y §17.7 P.3 y P.10

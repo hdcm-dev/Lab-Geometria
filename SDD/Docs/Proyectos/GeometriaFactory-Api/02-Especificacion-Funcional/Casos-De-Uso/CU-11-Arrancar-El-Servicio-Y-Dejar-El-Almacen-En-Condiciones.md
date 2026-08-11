@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-11-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-08`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §7 (CL-8), §14 (RA-03), §17.5.P.3 (punto de salud), §17.5.P.4 (**aplicar las migraciones al arrancar**), §17.5.P.8 (PT-04), §17.5.P.9, §17.5.P.10 (arranque en frío), §17.5.P.12 (ventana de indisponibilidad); `Proyectos/GeometriaFactory-Infrastructure/.../CU-10-Preparar-El-Almacen-Al-Arrancar.md`, cuya forma de terminación propia es el **arranque detenido**

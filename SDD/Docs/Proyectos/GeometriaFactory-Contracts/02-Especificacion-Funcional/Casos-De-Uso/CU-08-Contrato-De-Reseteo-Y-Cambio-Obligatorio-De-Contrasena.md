@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md
 **Versión:** 1.5
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §1, §5; `NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5; `00-Contexto/Vision-Producto.md` §9; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE` **1.13** §4 (**F-26**, F-03, **F-04** precisada), §4.1 (**RN-12**, **RN-13 precisada**, RN-07, RN-14, RN-15, **RN-16**), §17.1.P.2 (**INV-09**), §7 (**CL-7** reescrito), §9 (**X-2 retirada**, X-1 vigente), §17.4 P.2, P.3, P.5 y P.8, §17.5 P.3 y P.5, §14 (**RA-01**, RA-03)

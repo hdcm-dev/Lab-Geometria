@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md` §1, §5 (segundo, tercero y cuarto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md` §5 (sexto criterio); `../../../../00-Contexto/Vision-Producto.md` §9.1 (estado del trabajo); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-07, F-08), §4.1 (RN-03, RN-04, RN-10), §4.2 (tabla de quién puede qué), §7 (CL-5, CL-10), §17.6 P.4

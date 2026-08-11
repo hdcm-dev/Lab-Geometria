@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-10-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-10), §4 (F-21 y F-23), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §17.1.P.2 (INV-07), §5 (historia 7.1), §6 (flujo 2.1); [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-07-Registrar-Las-Observaciones-Del-Trabajo.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) §1, §4 y §5; [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (localización del defecto); `00-Contexto/Vision-Producto.md` §9.1 (observación, advertencia, error de validación, comentario) y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-05, RN-08 y RN-09), §4.2 (modelo de estados del trabajo), §17.1.P.2 (INV-04 e INV-07), §7 (CL-4), §17.1.P.11 punto 3, §17.2.P.11 punto 2, §17.3.P.10 (tolerancia 0.01), §20.E-1, §20.E-3, §20.E-4, §20.E-5

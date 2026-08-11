@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md
 **Versión:** 1.7
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (**F-04** precisada, F-05, F-03 y **F-26**), §4.1 (RN-06, **RN-12**, **RN-13**, RN-14 y **RN-16**), §17.1.P.2 (INV-06, **INV-09**), §17.1.P.5, §6 (flujo 1), §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**)

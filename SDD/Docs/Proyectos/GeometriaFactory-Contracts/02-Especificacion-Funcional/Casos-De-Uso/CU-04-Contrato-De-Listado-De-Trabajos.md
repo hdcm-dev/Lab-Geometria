@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** CU-04-Contrato-De-Listado-De-Trabajos.md
 **Versión:** 1.3
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md` §5 (tercer criterio); `NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §1, §5; `NB-09-Desenlace-Explicito-De-La-Entrega.md` §5; `00-Contexto/Vision-Producto.md` §9.1; `00-Contexto/Alcance-Producto.md` §4.1 (F-08, F-12) y §4.2 (F-15); `PRODUCT-INTAKE` **1.14** §17.4 P.3, P.5 y **P.10** (NFR estructural), §17.5 P.3, §4 (F-08, F-12, F-15), §4.1 (RN-11), §4.2 (modelo de estados), §6 (flujo 2.1)

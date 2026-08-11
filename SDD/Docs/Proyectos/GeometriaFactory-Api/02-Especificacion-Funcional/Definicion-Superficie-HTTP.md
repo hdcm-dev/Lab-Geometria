@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Definicion-Superficie-HTTP.md
 **Versión:** 1.4
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §17.5.P.3 (protocolo, consumidor, ausencia de CORS y de WebSockets, punto de canje y punto de salud), §17.5.P.5 (flujo, reclamos, respuestas, autorización, secretos), §17.5.P.2, §17.5.P.6, §17.5.P.9, §17.5.P.10, §17.5.P.11, §9 (X-9), §14 (**RA-01, RA-02, RA-03**), §4.1 (RN-03, RN-06, RN-09, RN-13, **RN-16**), §4 (**F-04** precisada, F-03); `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/` completo, y en particular la §6 de sus ocho contratos de uso y `CU-06` §6 y §10, de donde sale el **conjunto cerrado de quince códigos**; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4 y §6; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3, que declara que la traducción de sus condiciones hacia afuera del proceso pertenece a este proyecto de código

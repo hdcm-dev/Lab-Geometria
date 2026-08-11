@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** US-16-Cerrar-El-Conjunto-Con-El-Codigo-No-Clasificado.md
 **Versión:** 1.0
-**Estado:** Propuesta
+**Estado:** Aprobada
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-02 Identidad del administrador y sesión

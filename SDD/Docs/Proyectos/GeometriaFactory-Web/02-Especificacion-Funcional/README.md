@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
 **Versión:** 1.5
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** [`Especificacion-Funcional.md`](Especificacion-Funcional.md) §3 (catálogo), §4 (matriz), §6 (restricciones transversales) y §9 (omisiones); `../../../00-Contexto/Vision-Producto.md` §3 y §9; `../../../00-Contexto/Alcance-Producto.md` §4.1 y §5; `../../../01-Necesidades-Negocio/Necesidades-Negocio.md` §2 y §5.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13, §14 (RA-01 a RA-03) y §17.6

@@ -4,7 +4,7 @@
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** CU-04-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md
 **Versión:** 1.2
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §4 (F-03, **F-04** precisada), §4.1 (RN-01, RN-06, RN-07, RN-13, RN-14, **RN-16**), §17.1.P.2 (**INV-09**), §7 (CL-6), §14 (RA-03), §17.5.P.5; `Proyectos/GeometriaFactory-Contracts/.../CU-02-Contrato-De-Administracion-De-Cuentas.md`; `Proyectos/GeometriaFactory-Application/.../CU-02-Gobernar-Las-Cuentas-De-La-Comision.md`; `Proyectos/GeometriaFactory-Infrastructure/.../CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md`

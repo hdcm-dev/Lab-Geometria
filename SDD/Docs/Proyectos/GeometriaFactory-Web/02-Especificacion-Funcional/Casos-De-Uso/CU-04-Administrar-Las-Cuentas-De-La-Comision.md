@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-04-Administrar-Las-Cuentas-De-La-Comision.md
 **Versión:** 1.6
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §1, §5 (los cinco criterios); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md` §5 (tercer criterio); `../../../../00-Contexto/Alcance-Producto.md` §4.1, §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13**, §4 (F-01, F-03, **F-26**), §4.1 (RN-01, RN-06, RN-07, **RN-12**, **RN-13 precisada**), §6 (flujo 1), §7 (CL-6, **CL-7 reescrito**), §9 (X-3, **X-2 retirada**), §11 (**RN-B6 tachado** el 2026-08-09 por el intake 1.10, porque F-26 dejó sin objeto su mitigación; lo que sostenía vive en §7 CL-6), §17.1.P.2 (**INV-09**), §17.6 P.5; [`GeometriaFactory-Contracts` CU-08](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md)

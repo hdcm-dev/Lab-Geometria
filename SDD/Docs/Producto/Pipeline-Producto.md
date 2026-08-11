@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Documento:** Pipeline-Producto.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior, con foco en Release Engineering y Platform Engineering (AG-09)
 **Nivel:** Producto

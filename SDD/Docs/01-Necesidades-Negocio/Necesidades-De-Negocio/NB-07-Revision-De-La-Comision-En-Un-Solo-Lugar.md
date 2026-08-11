@@ -5,7 +5,7 @@
 | Producto | Fábrica de Geometría |
 | Documento | NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md |
 | Versión | 1.1 |
-| Estado | Propuesto |
+| Estado | Aprobado |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (diferenciador D-5), §4 (capacidades F-12 y F-15), §4.1 (regla RN-11), §4.2 (modelo de estados del trabajo), §6 (flujos 2.1 y 3), §8 (métricas de entrega y de aprobación), §9 (retiro de la exclusión X-5); `Vision-Producto.md` §1, §3 y §6; `Alcance-Producto.md` §4.1, §4.2, §5 y §8 |

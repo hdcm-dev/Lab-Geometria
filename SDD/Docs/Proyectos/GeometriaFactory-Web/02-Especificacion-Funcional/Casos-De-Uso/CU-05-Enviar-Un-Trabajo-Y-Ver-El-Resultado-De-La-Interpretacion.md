@@ -3,7 +3,7 @@
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** CU-05-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md
 **Versión:** 1.1
-**Estado:** Propuesto
+**Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md` §1, §5 (tercero, cuarto, quinto y sexto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md` §1, §5 (primero, segundo y quinto criterio); `../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md` §5 (segundo y tercer criterio); `../../../../00-Contexto/Vision-Producto.md` §9.1 (enviar, observación, advertencia, error de validación, estado del trabajo); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-06, F-09, F-10, F-22), §4.1 (RN-03, RN-05, RN-08, RN-09), §4.2, §6 (flujo 2, flujo 4), §7 (CL-3, CL-4), §17.6 P.3, P.4, P.11 punto 4 y punto 5, §20.E-1, §20.E-2
