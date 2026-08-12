@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** Glosario-Funcional.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` y `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Glosario-Funcional.md` (vocabulario de las dos categorías de las que este proyecto de código depende); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.2, §12, §12.1, §17.3
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Infrastructure
@@ -45,7 +45,7 @@ La resolución del choque de vocabulario del intake rige acá sin excepción: «
 | Operador estricto | La forma de la comparación de valores: se advierte cuando la diferencia absoluta es **mayor** que la tolerancia, y **no** cuando es mayor o igual | `Definicion-Contrato-Del-Validador-De-Figuras.md`, CU-02 | — |
 | Posición reservada | La posición, dentro del rango de figuras del conjunto raíz, que ocupa una figura que **no se pudo reconstruir**. Admite observación aunque no haya pieza, y **no se compacta** | CU-01, CU-03, `RC-02` | — |
 | Cantidad de figuras del conjunto raíz | Cuántas figuras trae el texto interpretado, incluidas las no reconstruidas. **Referenciada** del modelo del dominio; acá se agrega que **es la que este proyecto de código produce** | CU-01, CU-03, `Modelo-Datos/` | — |
-| Contraseña provisoria | El valor de credencial que **este proyecto de código produce** cuando el administrador resetea la cuenta de un alumno. **Referenciada** de la capa de aplicación; acá se agrega que es donde nace y que **no se conserva** | CU-07, `RC-07` | «clave provisoria». **No se dice «contraseña temporal»**: no vence por tiempo, la levanta la marca |
+| Contraseña provisoria | El valor de credencial que **este proyecto de código produce** cuando el administrador resetea la contraseña de la cuenta de un alumno. **Referenciada** de la capa de aplicación; acá se agrega que es donde nace y que **no se conserva** | CU-07, `RC-07` | «clave provisoria». **No se dice «contraseña temporal»**: no vence por tiempo, la levanta la marca |
 | Valor derivado de la credencial | Lo que el producto guarda en lugar de la contraseña. **No es el «valor derivado» de la geometría**: ver §3.3 | CU-05, CU-06, CU-07 | «credencial derivada», que es la forma que usa la categoría de dominio |
 | Acceso firmado | Lo que se emite para que la pieza pública opere contra la pieza de datos: identificador, correo, papel y expiración, firmado con clave simétrica | CU-08 | «el acceso». **No se dice «sesión»**: la pieza de datos es sin estado |
 | Clave de firma | El secreto con el que el acceso se firma. **Vive fuera del repositorio de código y fuera de la imagen** | CU-08 | — |
@@ -149,5 +149,6 @@ Los seis términos normativos del framework —producto, unidad de entrega, mód
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara los diecisiete términos que esta categoría acuña —entre ellos las cuatro trampas del formato, la lectura tolerante, el criterio de existencia contra veracidad, el operador estricto, la posición reservada, la terminación degradada, el arranque detenido y la regla conceptual de modelo—, los cuatro términos con más de un referente con la forma que corresponde a cada uno y su evidencia de colisión —«validador», que es la polisemia propia de esta capa, «repositorio», que gana acá un tercer referente, «derivado», que es la que más caro sale, y `Pendiente`—, los tres casos que deliberadamente no se corrigen, y los términos que se referencian del glosario raíz y de los glosarios de `GeometriaFactory-Domain` y de `GeometriaFactory-Application` sin redefinirlos. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |

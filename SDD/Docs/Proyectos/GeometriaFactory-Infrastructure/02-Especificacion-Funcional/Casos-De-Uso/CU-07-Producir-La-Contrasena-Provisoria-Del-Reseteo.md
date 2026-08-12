@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Documento:** CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §4 (F-26), §4.1 (**RN-14**, RN-12, RN-13, RN-15, **RN-16**), §7 (CL-7), §9 (X-2 retirada), §17.1.P.2 (INV-09); [`RN-14`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-14-Provisoria-Producida-Por-El-Sistema.md); `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §6 y §8, que declaran que **RN-14 no se ejerce allá** y que su mecanismo es de este proyecto de código; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md` §10 y **CA-10**
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
@@ -31,7 +31,7 @@
 
 ## 1. Propósito
 
-Producir el valor de la **contraseña provisoria** cuando el administrador **habilita o resetea** la cuenta de un alumno, con las dos propiedades que la regla exige: **no es adivinable** y **no se repite** entre cuentas ni entre actos sobre la misma cuenta.
+Producir el valor de la **contraseña provisoria** cuando el administrador **habilita** la cuenta de un alumno o **resetea su contraseña**, con las dos propiedades que la regla exige: **no es adivinable** y **no se repite** entre cuentas ni entre actos sobre la misma cuenta.
 
 **Este contrato tiene desde `PRODUCT-INTAKE` 1.13 dos consumidores y un solo mecanismo.** **RN-16** declara que habilitar una cuenta produce una contraseña provisoria con las mismas propiedades y el mismo tratamiento que la del reseteo, de modo que `GeometriaFactory-Application` `CU-02` pide el valor por este mismo contrato, igual que `CU-11`. **Nada de este contrato cambia por eso**, y ése es exactamente el punto: la invocación no lleva ningún dato de la cuenta ni del acto que la motiva, de modo que **no hay forma de que el valor dependa de cuál de los dos la pidió**. El nombre del documento se conserva por estabilidad de citación.
 
@@ -120,6 +120,7 @@ El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y c
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.4 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
 | 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04**: habilitar una cuenta produce una contraseña provisoria con las mismas propiedades y el mismo tratamiento que el reseteo. **Este contrato gana un segundo consumidor y no cambia nada más**, y §1 declara por qué eso no es una omisión: la invocación **no lleva ningún dato de la cuenta ni del acto**, de modo que el valor no puede depender de cuál de los dos la pidió. **§1** amplía el propósito a la habilitación; **§2** declara los dos consumidores; **§3** precisa que este contrato no sabe qué operación lo motivó. **Ningún flujo, código de terminación, postcondición ni criterio de aceptación cambia**, y las dos propiedades exigidas al valor siguen siendo las mismas. El **nombre del documento se conserva** por estabilidad de citación. Sube minor. |

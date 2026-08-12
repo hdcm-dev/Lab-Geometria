@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Mini-Plan.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Scrum Master (AG-07)
@@ -73,7 +73,7 @@ Este proyecto de código toca **las ocho** etapas comprometidas, y además parti
 | `a` | El front publicado arranca en el hosting, su página de salud muestra datos reales del servidor propio, y las **cuatro** partes de `PT-01` están medidas y documentadas, incluido el repliegue de transporte si ocurre. |
 | `b` | Todas las rutas del mapa de navegación son alcanzables, con las **once** superficies en marcador de posición sobre la línea de base visual aprobada, sin estilos improvisados fuera del sistema visual. |
 | `c` | El docente configura su cuenta, entra, cambia su contraseña y sale, con la credencial custodiada del lado del servidor; y la aplicación distingue el vacío del fallo y la reconexión de la indisponibilidad. |
-| `d` | El alumno se registra, el docente lo habilita y le comunica la provisoria, el alumno entra cambiándola, y una cuenta reseteada no llega a ninguna otra ruta hasta cambiarla. |
+| `d` | El alumno se registra, el docente lo habilita y le comunica la provisoria, el alumno entra cambiándola, y una cuenta con la contraseña reseteada no llega a ninguna otra ruta hasta cambiarla. |
 | `e` | El alumno carga trabajos con su texto intacto y ve su listado; el administrador recorre la entrega de la comisión agrupada y filtrada, sin borradores. |
 | `f` | El alumno envía su trabajo, previsualiza antes de enviarlo, y ve sus advertencias con los dos valores y sus errores con índice de figura y campo. |
 | `g` | La persona ve el trabajo en tres dimensiones y como árbol dentro del producto, con la sincronización por índice y los dos movimientos automáticos gobernados por separado, sin una sola petición originada por la visualización. |
@@ -237,5 +237,6 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Web`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con los cuatro omitidos— y por qué no se declara capacidad numérica, con el fundamento propio de que la categoría 05 ya se negó a inventar el umbral de tiempo de respuesta. Declara que este proyecto de código toca **las ocho** etapas comprometidas y que además participa del **momento** de medición de `PT-02` y `PT-03`, con la constancia explícita de que ese momento **no es una etapa nueva** sino uno que el roadmap §2.2 ya declara. Compromete las **30** historias y las **23** tareas técnicas del backlog de 06 sin inventar ningún identificador, declara el orden de construcción con `PT-01` medida antes que cualquier otra cosa y con las cuatro reglas de dependencia interna que ninguna tarea puede cruzar, referencia la Definition of Done por destino con la constancia de que 08 todavía no está emitida, y declara **ocho** riesgos con mitigación, incluido el que la fuente declara **sin mitigación en el código**. Registra la tensión de `PA-02` sin resolverla reprioritizando. |
 | 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4), que cierra la tensión de `PA-02`. La cabecera pasa a citar el intake **1.19** y la versión **1.1** del `Product-Backlog.md` que este plan consume. **§3**: la nota de US-21 declara que su MoSCoW es hoy `Must`, conserva la constancia de que este plan **no** resolvió la tensión reprioritizando y registra quién la resolvió y cuándo. **Ninguna etapa, ningún orden de construcción, ningún riesgo y ningún compromiso cambia**: US-21 ya estaba comprometida con prioridad de ejecución `Alta`, que es lo que hacía visible la contradicción. Sube minor. |

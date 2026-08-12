@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-12**, **RN-14** y **RN-15**), §4 (**F-26**), §17.1.P.2 (**INV-09**), §7 (**CL-7** reescrito), §9 (**X-2 retirada**), §11 (**RN-B6 tachado** el 2026-08-09 por este mismo 1.10, precisamente porque F-26 dejó sin objeto su mitigación), §4.2 (modelo de estados del trabajo); [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1; `00-Contexto/Vision-Producto.md` §8 (RG-06)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
@@ -26,7 +26,7 @@
 
 ## 1. Enunciado de la regla
 
-El reseteo de contraseña de una cuenta de alumno **conserva la cuenta y sus trabajos**. El **sistema produce** una contraseña **provisoria** (RN-14); la cuenta queda marcada como **con cambio de contraseña pendiente** y **conserva su estado de habilitación**, su papel, su identidad y **todos sus trabajos con sus estados y comentarios**. Resetear no es dar de baja: **no dispara RN-07**.
+El reseteo de **la contraseña** de una cuenta de alumno **conserva la cuenta y todos sus trabajos**. Lo que se resetea es la contraseña; la cuenta no se resetea, no se da de baja y no se vuelve a crear. El **sistema produce** una contraseña **provisoria** (RN-14); la cuenta queda marcada como **con cambio de contraseña pendiente** y **conserva su estado de habilitación**, su papel, su identidad y **todos sus trabajos con sus estados y comentarios**. Resetear la contraseña no es dar de baja la cuenta: **no dispara RN-07**.
 
 ## 2. Justificación
 
@@ -53,12 +53,13 @@ Rechazo. Un reseteo que declare eliminar los trabajos del alumno o cambiar su es
 
 ## 6. Pruebas que la verifican
 
-Pruebas unitarias de dominio previstas en 08: reseteo de una cuenta con trabajos en los cuatro estados verificando que **ninguno** se elimina y que los comentarios se conservan; reseteo sobre cuentas `Pendiente`, `Habilitado` y `Bloqueado` verificando que el estado no cambia; y rechazo del reseteo que declara arrastre. El dato de prueba que el intake declara para esta regla es el alumno con tres trabajos —uno en `Borrador`, uno en `Rechazado` y uno en `Finalizado`— que los conserva los tres después del reseteo (§4.1, columna de verificación).
+Pruebas unitarias de dominio previstas en 08: reseteo de la contraseña de una cuenta con trabajos en los cuatro estados verificando que **ninguno** se elimina y que los comentarios se conservan; reseteo sobre cuentas `Pendiente`, `Habilitado` y `Bloqueado` verificando que el estado no cambia; y rechazo del reseteo que declara arrastre. El dato de prueba que el intake declara para esta regla es el alumno con tres trabajos —uno en `Borrador`, uno en `Rechazado` y uno en `Finalizado`— que los conserva los tres después del reseteo (§4.1, columna de verificación).
 
 ## 7. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.4 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. **§1 se precisa** para que el sujeto quede explícito —«el reseteo de **la contraseña** de una cuenta de alumno conserva la cuenta y **todos** sus trabajos», y «resetear la contraseña no es dar de baja la cuenta»—, **sin perder el enunciado ni su verificación**. |
 | 1.0 | 2026-08-09 | Emisión inicial, por la regla **RN-12** que `PRODUCT-INTAKE` 1.7 §4.1 transcribe junto con la capacidad **F-26**. Declara el enunciado, la justificación como cierre de un agujero de diseño con el retiro de **X-2** y la reescritura de **CL-7**, el ámbito sobre los tres estados de cuenta y los cuatro de trabajo, el cierre sobre la cuenta de administrador, la correspondencia con **INV-09** compartida con RN-13, y el código de rechazo con el que se verifica. |
 | 1.1 | 2026-08-09 | Absorbe la decisión del Product Owner sobre **quién produce la contraseña provisoria**: **la produce el sistema y no la escribe el administrador**, porque una provisoria escrita por el docente termina siendo la misma clave para toda la comisión. §3 corrige la última viñeta, que decía que «la elige el administrador» y quedó falsa. **El enunciado de la regla, su ámbito sobre los estados de cuenta, su consecuencia y su código de rechazo no cambian**; en particular, la viñeta que declara que el reseteo procede **cualquiera sea el estado de cuenta** ya era correcta y el Product Owner la ratificó. |
 | 1.2 | 2026-08-09 | **Absorbe el `PRODUCT-INTAKE` 1.10**, que reescribe el enunciado de RN-12 y reparte en dos reglas nuevas —**RN-14** y **RN-15**— lo que esta regla arrastraba como contexto. Es la fuente registrando las dos decisiones del Product Owner cuya ausencia el informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 levantó como `F26-01`. **§1**: el enunciado decía «**el administrador fija** una contraseña provisoria», que era lo que la fuente decía hasta 1.9 y que el intake 1.10 invirtió: pasa a decir que **el sistema produce** la provisoria, con la remisión a **RN-14**. **§3**: las dos viñetas que declaraban de quién es el valor provisorio y por qué el reseteo no exige estado habilitado **remiten ahora a las reglas que la fuente les dio** —[RN-14](RN-14-Provisoria-Producida-Por-El-Sistema.md) y [RN-15](RN-15-Reseteo-Independiente-Del-Estado-De-Cuenta.md)— en lugar de enunciarlas de nuevo acá. **Ni el ámbito, ni la consecuencia, ni el código de rechazo, ni los CU afectados, ni las pruebas cambian**: lo que esta regla promete —que la cuenta y todos sus trabajos se conservan— es exactamente lo mismo. Sube minor: corrige un enunciado contra la fuente y reparte contexto a dos reglas hermanas, sin alterar lo que exige. |

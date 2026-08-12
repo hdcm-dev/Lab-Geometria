@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §2 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (**F-04** precisada, F-03, **F-26**), §4.1 (RN-06, **RN-13**, **RN-16**), §17.1.P.2 (INV-06, **INV-09**), §17.1.P.5, §17.5.P.5, §6 (flujo 1), §7 (**CL-7**)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
@@ -90,7 +90,7 @@ Los **tres** son terminaciones controladas y no excepciones de programa: la eval
 | CA-02 | Un alumno con cuenta `Pendiente` | La capa de aplicación consulta la admisibilidad | El dominio devuelve no admisible con el motivo `CUENTA_PENDIENTE` |
 | CA-03 | Un alumno con cuenta `Bloqueado` y credencial derivada con valor | La capa de aplicación consulta la admisibilidad | El dominio devuelve no admisible con el motivo `CUENTA_BLOQUEADA` |
 | CA-04 | Un alumno **recién habilitado**: cuenta `Habilitado`, credencial provisoria con valor y marca puesta | La capa de aplicación consulta la admisibilidad | El dominio devuelve no admisible con el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE`. **0 cuentas de alumno `Habilitado` sin credencial derivada** son alcanzables, y por eso el motivo `CREDENCIAL_NO_ESTABLECIDA` ya no tiene criterio que lo ejercite |
-| CA-05 | Un alumno reseteado: cuenta `Habilitado`, credencial provisoria con valor y marca de cambio de contraseña pendiente puesta | La capa de aplicación consulta la admisibilidad | El dominio devuelve no admisible con el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE`, con 1 motivo y 0 cambios sobre la cuenta |
+| CA-05 | Un alumno con la contraseña reseteada: cuenta `Habilitado`, credencial provisoria con valor y marca de cambio de contraseña pendiente puesta | La capa de aplicación consulta la admisibilidad | El dominio devuelve no admisible con el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE`, con 1 motivo y 0 cambios sobre la cuenta |
 | CA-06 | El mismo alumno, después de reemplazar su credencial por CU-03 FA-04 | La capa de aplicación consulta la admisibilidad | El dominio devuelve admisible, con 0 motivos: la marca quedó levantada y la cuenta opera con normalidad |
 
 ## 9. Trazabilidad
@@ -114,6 +114,7 @@ Los **tres** son terminaciones controladas y no excepciones de programa: la eval
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.4 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` 1.3 y la resolución de la ambigüedad de los invariantes. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §9 incorpora **RN-06**, la regla que INV-06 sostiene y cuyo enunciado el intake anterior no transcribía. Se califican las ocurrencias de `Pendiente` según `Vision-Producto.md` §9.2. **Corrección de la ronda r1 del audit, hallazgo P3-04**: la sección opcional de compatibilidad se numera §17 y no §12, que es el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna a la variante `library`. |
 | 1.2 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**: la capacidad **F-26**, la regla **RN-13** y el invariante **INV-09**. §1 declara que este caso de uso materializa ahora dos invariantes y **por qué la guarda de INV-09 se concentra acá**, como decisión derivada de esta categoría y no como transcripción. El flujo principal suma el paso 5, la comprobación de la marca; **FA-03** describe la situación esperada después de un reseteo; §6 suma el motivo **`CAMBIO_DE_CONTRASENA_PENDIENTE`** y el conjunto pasa de tres a **cuatro**; §8 suma **CA-05** y **CA-06**, el par que verifica el motivo y su levantamiento; y §9 refiere RN-13 e INV-09. **§17 declara la discrepancia** entre la regla de compatibilidad de este contrato, que trata el motivo nuevo como incompatible, y la subida minor del documento, que sigue la política de versionado de esta propagación. |

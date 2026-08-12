@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** RN-14-Provisoria-Producida-Por-El-Sistema.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-14**), §4 (**F-26**, «el sistema produce una contraseña provisoria» y «el panel **no lleva campo de contraseña**»), §17.1.P.2 (las reglas sin invariante asociado), §17.1.P.5 (el dominio no maneja secretos: la contraseña llega ya derivada), §7 (**CL-7**); [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1 y §5; [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
@@ -47,7 +47,7 @@ Lo que la regla protege es la promesa de RN-13 y de INV-09: la provisoria vale p
 
 **No hay código de rechazo del dominio**, y el motivo es el mismo por el que la regla no se ejerce acá: el dominio recibe un valor ya derivado y no puede distinguir uno producido por el sistema de uno escrito por el administrador. La única condición que el dominio sí comprueba sobre ese valor es que no esté vacío, y es `VALOR_DERIVADO_VACIO` de [CU-13](../Casos-De-Uso/CU-13-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) §6, que no es esta regla.
 
-Violarla no produce un rechazo sino un daño silencioso: una provisoria escrita a mano y repetida, o derivable del correo del alumno, convierte el reseteo en una puerta abierta a la identidad de cualquier cuenta reseteada. Es un defecto que **sólo una prueba detecta**, y por eso §6 declara dónde vive esa prueba.
+Violarla no produce un rechazo sino un daño silencioso: una provisoria escrita a mano y repetida, o derivable del correo del alumno, convierte el reseteo en una puerta abierta a la identidad de cualquier cuenta con la contraseña reseteada. Es un defecto que **sólo una prueba detecta**, y por eso §6 declara dónde vive esa prueba.
 
 ## 5. CU afectados
 
@@ -62,4 +62,5 @@ Violarla no produce un rechazo sino un daño silencioso: una provisoria escrita 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-09 | Emisión inicial, por la regla **RN-14** que `PRODUCT-INTAKE` **1.10** §4.1 incorpora al transcribir la decisión del Product Owner del 2026-08-09 sobre quién produce la contraseña provisoria de la capacidad **F-26**. Declara el enunciado con sus dos propiedades —no adivinable y no repetida, ni entre cuentas ni entre reseteos—, la justificación de uso que el Product Owner dio, el ámbito **con la declaración explícita de que este proyecto de código no la ejerce** porque el valor le llega ya derivado y de dónde sí se ejerce, la consecuencia sin código de rechazo propio y las pruebas, que viven en `GeometriaFactory-Contracts` `CU-08` CA-10. El contenido no se origina acá: estaba ya modelado en `CU-13` §2 y §10 de esta categoría, en `GeometriaFactory-Application` `CU-11` §10 y en `GeometriaFactory-Contracts` `CU-08` §10, y esta emisión lo recoge bajo el identificador que la fuente le dio. |

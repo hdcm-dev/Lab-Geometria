@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Documento:** CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md
-**Versión:** 1.7
+**Versión:** 1.8
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4 (**F-04** precisada, F-05, F-03 y **F-26**), §4.1 (RN-06, **RN-12**, **RN-13**, RN-14 y **RN-16**), §17.1.P.2 (INV-06, **INV-09**), §17.1.P.5, §6 (flujo 1), §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
@@ -97,8 +97,8 @@ Los cuatro rechazos dejan al alumno exactamente como estaba.
 | CA-02 | Un alumno con cuenta `Pendiente` y credencial derivada sin valor | La capa de aplicación solicita fijar la credencial | El dominio rechaza con el código `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` |
 | CA-03 | Un alumno con cuenta `Habilitado` y credencial derivada ya fijada | La capa de aplicación solicita fijarla por primera vez | El dominio rechaza con el código `CREDENCIAL_YA_FIJADA` |
 | CA-04 | Un alumno con cuenta `Habilitado` y credencial derivada ya fijada | La capa de aplicación solicita reemplazarla sin declarar la verificación de la vigente | El dominio rechaza con el código `CREDENCIAL_VIGENTE_NO_VERIFICADA` y 0 cambios de credencial se aplican |
-| CA-05 | Un alumno reseteado: cuenta `Habilitado`, credencial provisoria y **marca de cambio de contraseña pendiente puesta** | La capa de aplicación solicita el reemplazo declarando verificada la provisoria | El dominio devuelve el alumno con la credencial nueva y **la marca levantada**, y la cuenta vuelve a ser admisible en CU-04 |
-| CA-06 | El mismo alumno reseteado, con la marca puesta | La capa de aplicación solicita el reemplazo **sin** declarar la verificación de la vigente | El dominio rechaza con el código `CREDENCIAL_VIGENTE_NO_VERIFICADA`, la credencial no cambia y **la marca sigue puesta**: 0 caminos levantan la marca sin un cambio efectivo |
+| CA-05 | Un alumno con la contraseña reseteada: cuenta `Habilitado`, credencial provisoria y **marca de cambio de contraseña pendiente puesta** | La capa de aplicación solicita el reemplazo declarando verificada la provisoria | El dominio devuelve el alumno con la credencial nueva y **la marca levantada**, y la cuenta vuelve a ser admisible en CU-04 |
+| CA-06 | El mismo alumno con la contraseña reseteada, con la marca puesta | La capa de aplicación solicita el reemplazo **sin** declarar la verificación de la vigente | El dominio rechaza con el código `CREDENCIAL_VIGENTE_NO_VERIFICADA`, la credencial no cambia y **la marca sigue puesta**: 0 caminos levantan la marca sin un cambio efectivo |
 
 ## 9. Trazabilidad
 
@@ -122,6 +122,7 @@ Los cuatro rechazos dejan al alumno exactamente como estaba.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.8 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **2** ocurrencias a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` 1.3 y la resolución de la ambigüedad de los invariantes. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §9 deja de declarar que ninguna regla lo restringe y pasa a citar **RN-06**, cuyo enunciado el intake anterior no transcribía. Se califican las ocurrencias de `Pendiente` y de los demás estados de cuenta según `Vision-Producto.md` §9.2. **Corrección de la ronda r1 del audit, hallazgo P3-04**: la sección opcional de compatibilidad se numera §17 y no §12, que es el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna a la variante `library`. |
 | 1.2 | 2026-08-09 | Alcanzado por la **corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`. Con los dos caminos de alta separados, §1 declara que la fijación por primera vez es la del auto-registro y se suma **FA-03**, que ubica el cambio de contraseña del administrador de la etapa `c` en el reemplazo de FA-01: su credencial nace fijada por CU-12, de modo que el camino de fijación le devolvería `CREDENCIAL_YA_FIJADA`. |
