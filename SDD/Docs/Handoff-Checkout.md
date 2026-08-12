@@ -2,12 +2,12 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Handoff-Checkout.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Orquestador SDD
 **Instrumento normativo:** `Master-Prompt.md` 5.2 §12 (repositorio del framework, sólo lectura)
-**Trazabilidad upstream:** [`../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.26**; [`../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3**; el árbol completo de [`.`](.) y de [`Audit/`](Audit/); [`../Maquetas/GeometriaFactory-Web/`](../Maquetas/GeometriaFactory-Web/); [`../../samples/`](../../samples/)
+**Trazabilidad upstream:** [`../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.28**; [`../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3**; el árbol completo de [`.`](.) y de [`Audit/`](Audit/); [`../Maquetas/GeometriaFactory-Web/`](../Maquetas/GeometriaFactory-Web/); [`../../samples/`](../../samples/)
 **Trazabilidad downstream:** el ciclo de codificación. Este documento es el instrumento que el equipo se lleva al Sprint 1.
 
 ---
@@ -75,7 +75,7 @@ nivel 3: GeometriaFactory-Api
 
 Contado con `find ... -name '*.md' -not -path '*_legacy*' | wc -l` para la cantidad y con `cat | wc -c` para el tamaño. El tamaño es la suma de bytes de los archivos vivos de la categoría, redondeada a KB.
 
-**Total del corpus vivo de `SDD/Docs/`: 643 archivos `.md`, 10.113.419 bytes (≈ 9,6 MB).** Además hay **171** archivos `.md` archivados en carpetas `_legacy/`, que no se cuentan en ninguna cifra de este documento. La cifra de 1.0 —639 archivos y ≈ 9,4 MB— era correcta al escribirse: desde entonces entraron tres informes de auditoría y creció el cuerpo de los documentos corregidos.
+**Total del corpus vivo de `SDD/Docs/`: 645 archivos `.md`, 10.241.158 bytes (≈ 9,8 MB), recontados el 2026-08-12.** Además hay **171** archivos `.md` archivados en carpetas `_legacy/`, que no se cuentan en ninguna cifra de este documento. Las cifras anteriores eran correctas al escribirse y **no se heredan**: 1.0 contó 639 archivos y ≈ 9,4 MB, 1.2 contó 643 y ≈ 9,6 MB. Lo que entró desde 1.3 son **dos observaciones de proceso** en [`Audit/`](Audit/) —ver §5— y el crecimiento del cuerpo de los documentos corregidos, que es lo que mueve los tamaños de las tablas de §2.1 a §2.8 sin mover ninguna cantidad de archivos: **las 63 filas de categoría de §2.2 a §2.8 tienen hoy exactamente la misma cantidad de archivos que en 1.2, y la única fila de §2.1 que cambia de cantidad es la de `Audit/`**.
 
 **Estado de los documentos: el corpus quedó promovido el 2026-08-11.** Esta es la constancia única de la promoción; ningún otro documento la repite.
 
@@ -83,9 +83,9 @@ Contado con `find ... -name '*.md' -not -path '*_legacy*' | wc -l` para la canti
 - **Por qué `Aprobado` y no `Vigente`.** `Master-Prompt.md` 5.2 §5 nombra los dos valores y **no los distingue**. Se elige `Aprobado` por tres razones: en este framework `Vigente` ya tiene un sentido propio y estructural —es lo contrario de `Superado` en la política de deprecación de §5.1, y es el valor con el que las tablas de artefactos de la categoría 11 separan lo emitido de lo `Planificado`—, de modo que estamparlo no agregaría información; `Aprobado` es el valor que el `PRODUCT-MANIFEST` **1.3** ya usa en este mismo campo, con lo cual el corpus queda con un solo vocabulario; y es el término con el que los informes de auditoría discuten la promoción.
 - **Con qué fundamento.** `Master-Prompt.md` 5.2 §5, política de versionado de documentos: un artefacto pasa a `Aprobado` o `Vigente` «**en el corte de fase con confirmación humana, o cuando otro artefacto lo cita como insumo, lo que suceda primero**». Se aplica **la segunda condición y no la primera**: cada documento promovido es citado como insumo por al menos otro artefacto vivo —es la cadena de trazabilidad D6 que declara la cabecera de cada uno—, y esa condición es verificable sobre el repositorio. **La primera condición no se usa**: este documento no tiene evidencia en el repositorio de un corte de fase con confirmación humana, y esa confirmación no la puede suplir ningún agente. Ver `B-4` de §6.1, que queda abierto en esa parte.
 - **Qué consecuencia tiene.** La del propio §5, y es la razón de fondo para dejarlo escrito: desde `Aprobado`, **toda corrección sube versión y archiva el estado anterior** en `_legacy/`. Se termina la absorción de correcciones dentro de la versión en curso.
-- **Alcance contado.** El corpus vivo de `SDD/Docs/` tiene **643** archivos `.md`, de los cuales **33** son informes de auditoría sin campo de estado de documento. Los **610** restantes declaran uno, exactamente uno cada uno. **El barrido de 1.0 no daba eso**: decía «589 `Propuesto` y 166 `Propuesta`», y 589 + 166 = 755, que no es la cantidad de documentos vivos ni entonces ni hoy. Recontado archivo por archivo, eran **444** `Propuesto` —432 en cabecera de prosa y 12 en cabecera de tabla, que el `grep` de 1.0 no alcanzaba— y 166 `Propuesta`. El número viejo se deja tachado en `B-4` porque así se escribió, y no se hereda. **Se promovieron 602** —424 `Propuesto` → `Aprobado` en cabecera de prosa, 166 `Propuesta` → `Aprobada`, y 12 `| Estado | Propuesto |` → `| Estado | Aprobado |` en las cabeceras de tabla de `01-Necesidades-Negocio` y del `README.md` raíz—. **Quedan 8 sin promover**, declarados debajo.
-- **Los 8 que no se promueven, con su motivo.** Son los ocho `README.md` de la categoría **11-Documentacion** —el de `Producto/` y uno por proyecto de código—. Su contenido está pendiente: la categoría 11 va por el modelo de documentación viva y hoy sólo tiene el **Momento 1**, el plan; las fases I y J, que la completan y la consolidan, no corrieron. Además arrastran el hallazgo `P2-2` de [`Audit/H-Final-Consolidado-r1.md`](Audit/H-Final-Consolidado-r1.md) §4, abierto: declaran tres estados distintos para el mismo documento. **Promoverlos sería sellar un plan como si fuera la documentación.** Quedan en `Propuesto` y su promoción es trabajo de la Fase J.
-- **Lo que queda fuera de `SDD/Docs/` y no se promueve.** El `PRODUCT-INTAKE` pasó a **`Aprobado`** el 2026-08-11, por decisión del Product Owner [ACTUALIZADO]; hasta ese día seguía en `Borrador`: `Master-Prompt.md` §13 admite exactamente **dos** casos de escritura sobre el intake y ninguno es el cambio de su estado, y §15 declara que el Product Owner «es el autor responsable del intake y **quien lo aprueba**». Es `B-3` de §6.1 y sigue abierto. El `README.md` de `SDD/Maquetas/GeometriaFactory-Web/` sigue «a la espera de la aprobación explícita del Product Owner», que es como §15 define una maqueta aprobada. El `PRODUCT-MANIFEST` **1.3** ya estaba en `Aprobado` desde el 2026-08-08, confirmado por el Product Owner.
+- **Alcance contado.** El corpus vivo de `SDD/Docs/` tiene hoy **645** archivos `.md`, de los cuales **33** son informes de auditoría sin campo de estado de documento. Los **612** restantes declaran uno, exactamente uno cada uno, y hoy se reparten en **438 `Aprobado`, 166 `Aprobada` y 8 `Propuesto`**, contados archivo por archivo el 2026-08-12. Al día de la promoción los documentos con campo de estado eran **610**: los dos que faltan son las dos observaciones de proceso emitidas después, que **nacieron `Aprobado`** y no pasaron por la promoción. **El barrido de 1.0 no daba eso**: decía «589 `Propuesto` y 166 `Propuesta`», y 589 + 166 = 755, que no es la cantidad de documentos vivos ni entonces ni hoy. Recontado archivo por archivo, eran **444** `Propuesto` —432 en cabecera de prosa y 12 en cabecera de tabla, que el `grep` de 1.0 no alcanzaba— y 166 `Propuesta`. El número viejo se deja tachado en `B-4` porque así se escribió, y no se hereda. **Se promovieron 602** —424 `Propuesto` → `Aprobado` en cabecera de prosa, 166 `Propuesta` → `Aprobada`, y 12 `| Estado | Propuesto |` → `| Estado | Aprobado |` en las cabeceras de tabla de `01-Necesidades-Negocio` y del `README.md` raíz—. **Quedan 8 sin promover**, declarados debajo.
+- **Los 8 que no se promueven, con su motivo.** Son los ocho `README.md` de la categoría **11-Documentacion** —el de `Producto/` y uno por proyecto de código—. Su contenido está pendiente: la categoría 11 va por el modelo de documentación viva y hoy sólo tiene el **Momento 1**, el plan; las fases I y J, que la completan y la consolidan, no corrieron. El hallazgo `P2-2` de [`Audit/H-Final-Consolidado-r1.md`](Audit/H-Final-Consolidado-r1.md) §4, que registraba tres estados distintos para el mismo documento, **está cerrado desde la emisión 1.1 de los ocho README**: hoy los ocho declaran `status: Vigente` en su encabezado estructurado y `**Estado:** Propuesto` en su cabecera de prosa, y cada uno abre con una tabla que declara que **son dos ejes distintos y no una contradicción** —ciclo de vida del contenido en un caso, situación de aprobación en el otro—. Ver §9 y `B-5` de §6.1. **Promoverlos sería sellar un plan como si fuera la documentación.** Quedan en `Propuesto` y su promoción es trabajo de la Fase J.
+- **Lo que queda fuera de `SDD/Docs/` y no se promueve.** El `PRODUCT-INTAKE` pasó a **`Aprobado`** el 2026-08-11, por decisión del Product Owner; hasta ese día seguía en `Borrador`, porque `Master-Prompt.md` §13 admite exactamente **dos** casos de escritura sobre el intake y ninguno es el cambio de su estado, y §15 declara que el Product Owner «es el autor responsable del intake y **quien lo aprueba**». Es `B-3` de §6.1, **cerrado**. Verificado el 2026-08-12 sobre el propio documento: su cabecera declara hoy versión **1.28** y estado **`Aprobado`**. El `README.md` de `SDD/Maquetas/GeometriaFactory-Web/` **también quedó aprobado** el 2026-08-11 —su cabecera declara «**Aprobada** por el Product Owner», con sus tres huecos declarados—, que es como §15 define una maqueta aprobada. El `PRODUCT-MANIFEST` sigue en **1.3**, `Aprobado`. El `PRODUCT-MANIFEST` **1.3** ya estaba en `Aprobado` desde el 2026-08-08, confirmado por el Product Owner.
 
 La columna «estado» de las tablas siguientes reproduce el resultado.
 
@@ -93,42 +93,42 @@ La columna «estado» de las tablas siguientes reproduce el resultado.
 
 | Categoría | Cantidad de archivos | Tamaño aprox | Estado |
 | --- | --- | --- | --- |
-| `00-Contexto` | 5 | 152 KB | Aprobado |
-| `01-Necesidades-Negocio` | 11 | 184 KB | Aprobado |
+| `00-Contexto` | 5 | 155 KB | Aprobado |
+| `01-Necesidades-Negocio` | 11 | 185 KB | Aprobado |
 | `Producto/` (vista de producto y pipeline) | 2 | ver nota | Aprobado |
 | `Producto/11-Documentacion` | 1 | ver nota | Propuesto |
-| `Audit/` (informes de auditoría) | 33 | 1600 KB | N/A — son informes, no entregables |
-| `README.md` de `SDD/Docs/` | 1 | 21 KB | Aprobado |
+| `Audit/` (informes de auditoría y observaciones) | 35 | 1562 KB | N/A — no son entregables: **33** informes con dictamen y **2** observaciones de proceso |
+| `README.md` de `SDD/Docs/` | 1 | 25 KB | Aprobado |
 
-Nota: `Producto/` completo —los tres archivos, incluido el de `11-Documentacion`— suma 74 KB.
+Nota: `Producto/` completo —los tres archivos, incluido el de `11-Documentacion`— suma **81 KB**.
 
 ### 2.2 `GeometriaFactory-Domain`
 
 | Categoría | Cantidad de archivos | Tamaño aprox | Estado |
 | --- | --- | --- | --- |
-| `02-Especificacion-Funcional` | 33 | 428 KB | Aprobado |
-| `03-UX-UI-DX` | 5 | 151 KB | Aprobado |
-| `05-Arquitectura-Tecnica` | 10 | 96 KB | Aprobado |
-| `06-Backlog-Tecnico` | 31 | 165 KB | Aprobado |
+| `02-Especificacion-Funcional` | 33 | 438 KB | Aprobado |
+| `03-UX-UI-DX` | 5 | 152 KB | Aprobado |
+| `05-Arquitectura-Tecnica` | 10 | 98 KB | Aprobado |
+| `06-Backlog-Tecnico` | 31 | 167 KB | Aprobado |
 | `07-Plan-Sprint` | 2 | 24 KB | Aprobado |
-| `08-Calidad-Y-Pruebas` | 9 | 130 KB | Aprobado |
-| `09-Devops` | 5 | 60 KB | Aprobado |
+| `08-Calidad-Y-Pruebas` | 9 | 131 KB | Aprobado |
+| `09-Devops` | 5 | 61 KB | Aprobado |
 | `10-Examples` | 4 | 49 KB | Aprobado |
-| `11-Documentacion` | 1 | 7 KB | Propuesto (plan, Momento 1) |
+| `11-Documentacion` | 1 | 11 KB | Propuesto (plan, Momento 1) |
 
 ### 2.3 `GeometriaFactory-Contracts`
 
 | Categoría | Cantidad de archivos | Tamaño aprox | Estado |
 | --- | --- | --- | --- |
-| `02-Especificacion-Funcional` | 11 | 254 KB | Aprobado |
-| `03-UX-UI-DX` | 5 | 143 KB | Aprobado |
-| `05-Arquitectura-Tecnica` | 9 | 92 KB | Aprobado |
+| `02-Especificacion-Funcional` | 11 | 257 KB | Aprobado |
+| `03-UX-UI-DX` | 5 | 145 KB | Aprobado |
+| `05-Arquitectura-Tecnica` | 9 | 93 KB | Aprobado |
 | `06-Backlog-Tecnico` | 26 | 148 KB | Aprobado |
-| `07-Plan-Sprint` | 2 | 22 KB | Aprobado |
-| `08-Calidad-Y-Pruebas` | 9 | 125 KB | Aprobado |
-| `09-Devops` | 5 | 64 KB | Aprobado |
+| `07-Plan-Sprint` | 2 | 23 KB | Aprobado |
+| `08-Calidad-Y-Pruebas` | 9 | 126 KB | Aprobado |
+| `09-Devops` | 5 | 65 KB | Aprobado |
 | `10-Examples` | 4 | 47 KB | Aprobado |
-| `11-Documentacion` | 1 | 7 KB | Propuesto (plan, Momento 1) |
+| `11-Documentacion` | 1 | 11 KB | Propuesto (plan, Momento 1) |
 
 ### 2.4 `GeometriaFactory-Visor`
 
@@ -136,69 +136,69 @@ Nota: `Producto/` completo —los tres archivos, incluido el de `11-Documentacio
 | --- | --- | --- | --- |
 | `02-Especificacion-Funcional` | 11 | 173 KB | Aprobado |
 | `03-UX-UI-DX` | 5 | 162 KB | Aprobado |
-| `05-Arquitectura-Tecnica` | 12 | 121 KB | Aprobado |
-| `06-Backlog-Tecnico` | 4 | 87 KB | Aprobado (modo inline, sin `historias-usuario/`) |
-| `07-Plan-Sprint` | 2 | 25 KB | Aprobado |
-| `08-Calidad-Y-Pruebas` | 10 | 164 KB | Aprobado |
+| `05-Arquitectura-Tecnica` | 12 | 124 KB | Aprobado |
+| `06-Backlog-Tecnico` | 4 | 88 KB | Aprobado (modo inline, sin `historias-usuario/`) |
+| `07-Plan-Sprint` | 2 | 26 KB | Aprobado |
+| `08-Calidad-Y-Pruebas` | 10 | 165 KB | Aprobado |
 | `09-Devops` | 6 | 90 KB | Aprobado |
 | `10-Examples` | 4 | 53 KB | Aprobado |
-| `11-Documentacion` | 1 | 7 KB | Propuesto (plan, Momento 1) |
+| `11-Documentacion` | 1 | 11 KB | Propuesto (plan, Momento 1) |
 
 ### 2.5 `GeometriaFactory-Application`
 
 | Categoría | Cantidad de archivos | Tamaño aprox | Estado |
 | --- | --- | --- | --- |
-| `02-Especificacion-Funcional` | 14 | 249 KB | Aprobado |
-| `03-UX-UI-DX` | 5 | 204 KB | Aprobado |
-| `05-Arquitectura-Tecnica` | 10 | 125 KB | Aprobado |
-| `06-Backlog-Tecnico` | 36 | 197 KB | Aprobado |
-| `07-Plan-Sprint` | 2 | 29 KB | Aprobado |
+| `02-Especificacion-Funcional` | 14 | 253 KB | Aprobado |
+| `03-UX-UI-DX` | 5 | 207 KB | Aprobado |
+| `05-Arquitectura-Tecnica` | 10 | 129 KB | Aprobado |
+| `06-Backlog-Tecnico` | 36 | 199 KB | Aprobado |
+| `07-Plan-Sprint` | 2 | 30 KB | Aprobado |
 | `08-Calidad-Y-Pruebas` | 9 | 154 KB | Aprobado |
-| `09-Devops` | 5 | 65 KB | Aprobado |
+| `09-Devops` | 5 | 66 KB | Aprobado |
 | `10-Examples` | 4 | 56 KB | Aprobado |
-| `11-Documentacion` | 1 | 7 KB | Propuesto (plan, Momento 1) |
+| `11-Documentacion` | 1 | 11 KB | Propuesto (plan, Momento 1) |
 
 ### 2.6 `GeometriaFactory-Web`
 
 | Categoría | Cantidad de archivos | Tamaño aprox | Estado |
 | --- | --- | --- | --- |
-| `02-Especificacion-Funcional` | 13 | 242 KB | Aprobado |
-| `03-UX-UI-DX` | 20 | 475 KB | Aprobado (incluye los tres artefactos de línea de base de la Fase B2) |
-| `05-Arquitectura-Tecnica` | 10 | 134 KB | Aprobado |
-| `06-Backlog-Tecnico` | 34 | 200 KB | Aprobado |
-| `07-Plan-Sprint` | 2 | 33 KB | Aprobado |
-| `08-Calidad-Y-Pruebas` | 9 | 220 KB | Aprobado |
-| `09-Devops` | 6 | 114 KB | Aprobado |
+| `02-Especificacion-Funcional` | 13 | 247 KB | Aprobado |
+| `03-UX-UI-DX` | 20 | 481 KB | Aprobado (incluye los tres artefactos de línea de base de la Fase B2) |
+| `05-Arquitectura-Tecnica` | 10 | 137 KB | Aprobado |
+| `06-Backlog-Tecnico` | 34 | 203 KB | Aprobado |
+| `07-Plan-Sprint` | 2 | 34 KB | Aprobado |
+| `08-Calidad-Y-Pruebas` | 9 | 224 KB | Aprobado |
+| `09-Devops` | 6 | 115 KB | Aprobado |
 | `10-Examples` | 2 | 34 KB | Aprobado |
-| `11-Documentacion` | 1 | 6 KB | Propuesto (plan, Momento 1) |
+| `11-Documentacion` | 1 | 10 KB | Propuesto (plan, Momento 1) |
 
 ### 2.7 `GeometriaFactory-Infrastructure`
 
 | Categoría | Cantidad de archivos | Tamaño aprox | Estado |
 | --- | --- | --- | --- |
-| `02-Especificacion-Funcional` | 22 | 265 KB | Aprobado |
-| `03-UX-UI-DX` | 5 | 135 KB | Aprobado |
-| `05-Arquitectura-Tecnica` | 13 | 201 KB | Aprobado |
-| `06-Backlog-Tecnico` | 29 | 180 KB | Aprobado |
+| `02-Especificacion-Funcional` | 22 | 268 KB | Aprobado |
+| `03-UX-UI-DX` | 5 | 138 KB | Aprobado |
+| `05-Arquitectura-Tecnica` | 13 | 203 KB | Aprobado |
+| `06-Backlog-Tecnico` | 29 | 182 KB | Aprobado |
 | `07-Plan-Sprint` | 2 | 29 KB | Aprobado |
-| `08-Calidad-Y-Pruebas` | 9 | 169 KB | Aprobado |
-| `09-Devops` | 5 | 82 KB | Aprobado |
-| `10-Examples` | 4 | 58 KB | Aprobado |
-| `11-Documentacion` | 1 | 7 KB | Propuesto (plan, Momento 1) |
+| `08-Calidad-Y-Pruebas` | 9 | 170 KB | Aprobado |
+| `09-Devops` | 5 | 83 KB | Aprobado |
+| `10-Examples` | 4 | 59 KB | Aprobado |
+| `11-Documentacion` | 1 | 11 KB | Propuesto (plan, Momento 1) |
 
 ### 2.8 `GeometriaFactory-Api`
 
 | Categoría | Cantidad de archivos | Tamaño aprox | Estado |
 | --- | --- | --- | --- |
-| `02-Especificacion-Funcional` | 16 | 278 KB | Aprobado |
-| `03-UX-UI-DX` | 5 | 112 KB | Aprobado |
-| `05-Arquitectura-Tecnica` | 12 | 195 KB | Aprobado |
-| `06-Backlog-Tecnico` | 34 | 198 KB | Aprobado |
+| `02-Especificacion-Funcional` | 16 | 299 KB | Aprobado |
+| `03-UX-UI-DX` | 5 | 127 KB | Aprobado |
+| `05-Arquitectura-Tecnica` | 12 | 198 KB | Aprobado |
+| `06-Backlog-Tecnico` | 34 | 199 KB | Aprobado |
 | `07-Plan-Sprint` | 2 | 32 KB | Aprobado |
-| `08-Calidad-Y-Pruebas` | 9 | 173 KB | Aprobado |
+| `08-Calidad-Y-Pruebas` | 9 | 174 KB | Aprobado |
 | `09-Devops` | 6 | 121 KB | Aprobado |
-| `10-Examples` | 4 | 61 KB | Aprobado |
-| `11-Documentacion` | 1 | 7 KB | Propuesto (plan, Momento 1) |
+| `10-Examples` | 4 | 63 KB | Aprobado |
+| `11-Documentacion` | 1 | 11 KB | Propuesto (plan, Momento 1) |
 
 **La categoría 04 no existe en ningún proyecto de código**, por gating: `usa_llm` es false en los siete (manifiesto §5). Verificado con `find`: no hay ningún directorio `04-*`.
 
@@ -392,7 +392,7 @@ Los primeros nueve coinciden con las cifras de control cruzado. Los que **no** c
 | --- | --- | --- | --- | --- | --- |
 | `BT-01` | Tarea técnica | Crear el proyecto del bundle con su cadena de construcción reproducible | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.7.P.8; `05` §5 |
 | `BT-02` | Tarea técnica | Guion de construcción propio del bundle, para el ciclo corto | — | Criterio en `Backlog-Tecnico.md` | `05` §5, fila de ciclo corto de trabajo |
-| `BT-03` | Tarea técnica | Decidir si el bundle generado se versiona o se ignora | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-05`; intake §17.7.P.7. **Es una decisión abierta**, ver bloque 6 |
+| `BT-03` | Tarea técnica | Aplicar la decisión de que el bundle generado no se versiona: se ignora y lo genera la canalización | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-05`, hoy **RESUELTO** por `09-Devops/Entornos-Deploy.md` §2; intake §17.7.P.7. **Ya no es una decisión abierta**, ver `A-8` del bloque 6 |
 
 ### 4.4 `GeometriaFactory-Application` — nivel 1, etapa `a`: 6 ítems
 
@@ -415,7 +415,7 @@ Los primeros nueve coinciden con las cifras de control cruzado. Los que **no** c
 | `BT-04` | Tarea técnica | Medir `PT-01` en sus cuatro partes | — | Criterio en `Backlog-Tecnico.md` | Intake §15 y §17.6.P.10; `05` §8; `05` §11 `PA-02` |
 | `BT-05` | Tarea técnica | Dirección del servicio de datos desde configuración, con secretos | — | Criterio en `Backlog-Tecnico.md` | `ADR-07`; `05` §7, fila de configuración y secretos; intake §17.6.P.5 |
 | `BT-06` | Tarea técnica | Puerta de publicación que comprueba que la dirección pública responde | — | Criterio en `Backlog-Tecnico.md` | `05` §5, puertas bloqueantes; `05` §9, sexto riesgo |
-| `BT-12` | Tarea técnica | Adoptar el formato de intercambio que fija la categoría 05 de la Api | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-03`; `Api` `ADR-02`. **Los dos extremos tienen que coincidir**, ver bloque 6 |
+| `BT-12` | Tarea técnica | Adoptar el formato de intercambio que fija la categoría 05 de la Api | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-03`, hoy **RESUELTO**; `Api` `ADR-02` §2, con sus **seis** reglas que obligan a los dos extremos. **La decisión está tomada y esta tarea la adopta**, ver `A-5` del bloque 6 |
 
 ### 4.6 `GeometriaFactory-Infrastructure` — nivel 2, etapa `a`: 10 ítems
 
@@ -457,7 +457,7 @@ Los primeros nueve coinciden con las cifras de control cruzado. Los que **no** c
 
 ## 5. Audits aprobados
 
-Contados con `ls SDD/Docs/Audit/`: **33** informes. Cada veredicto se leyó abriendo la sección de dictamen del propio informe.
+Contados con `ls SDD/Docs/Audit/` el 2026-08-12: **35 archivos**, de los cuales **33 son informes de auditoría con dictamen** —los de la tabla— y **2 son observaciones de proceso sin dictamen**, que no auditan un entregable sino la conducción del trabajo: [`Audit/Observacion-Ejecucion-De-La-Orquestacion.md`](Audit/Observacion-Ejecucion-De-La-Orquestacion.md) y [`Audit/Observacion-Ciclo-De-Correccion-Sin-Corte.md`](Audit/Observacion-Ciclo-De-Correccion-Sin-Corte.md). La segunda es la que fija el **criterio de corte del ciclo de corrección** y declara en su §5 que esta pasada sobre este documento es la última. Cada veredicto se leyó abriendo la sección de dictamen del propio informe.
 
 | Fase | Proyecto de código | Ronda | Veredicto | Informe |
 | --- | --- | --- | --- | --- |
@@ -503,7 +503,20 @@ Contados con `ls SDD/Docs/Audit/`: **33** informes. Cada veredicto se leyó abri
 
 **Este es el bloque que le importa a quien empiece a construir.** Lo que sigue es lo que se va a chocar el primer día. Cada fila dice qué falta decidir, quién es el titular y **qué se rompe si se empieza a construir sin decidirlo**.
 
-Los puntos abiertos se leyeron abriendo la §11 de las siete `Arquitectura-Proyecto-Codigo.md`, la §8 de [`README.md`](README.md), la §7 de [`Producto/11-Documentacion/README.md`](Producto/11-Documentacion/README.md) y la §22 del intake. Contados: **47 puntos abiertos `PA-XX` en las siete categorías 05** —Api 10, Infrastructure 11, Web 7, Application 6, Visor 5, Contracts 4, Domain 4—, de los cuales **3 están declarados RESUELTOS** (`Api` `PA-10`, `Contracts` `PA-03`, `Infrastructure` `PA-08`) y **44 siguen vivos**; **7** de nivel producto; y **4** asunciones vivas en el intake (`A-2` a `A-5`).
+Los puntos abiertos se leyeron abriendo la §11 de las siete `Arquitectura-Proyecto-Codigo.md`, la §8 de [`README.md`](README.md), la §7 de [`Producto/11-Documentacion/README.md`](Producto/11-Documentacion/README.md) y la §22 del intake, **fila por fila y el 2026-08-12**.
+
+**Las siete categorías 05 emiten en total 47 filas `PA-XX`** —Api 10, Infrastructure 11, Web 7, Application 6, Visor 5, Contracts 4, Domain 4—, que es la misma cantidad que contó 1.0 porque **ninguna fila se retira**: las resueltas se conservan con su desenlace para no dejar huecos de numeración. Lo que cambió es cuántas siguen vivas.
+
+| Estado de la fila, hoy | Cuántas | Cuáles |
+| --- | --- | --- |
+| **Resueltas y declaradas RESUELTO** | **9** | `Domain` `PA-03`, `Contracts` `PA-03`, `Visor` `PA-05`, `Application` `PA-03`, `Web` `PA-03` y `PA-07`, `Infrastructure` `PA-05` y `PA-08`, `Api` `PA-10` |
+| **Vivas** | **38** | El resto: Api 9, Infrastructure 9, Web 5, Application 5, Visor 4, Contracts 3, Domain 3 |
+
+**Seis de esas nueve se cerraron después de 1.0**, que contaba **3 resueltas y 44 vivas** —`Api` `PA-10`, `Contracts` `PA-03` e `Infrastructure` `PA-08`, que siguen resueltas—. Las seis nuevas son: `Domain` `PA-03` (la ambigüedad del intake sobre `RN-12` e `INV-09`, cerrada por el Product Owner en `PRODUCT-INTAKE` **1.11**), `Application` `PA-03` (el criterio de comparación de correos, cerrado por `Infrastructure ADR-03`), `Web` `PA-03` (el formato de intercambio, cerrado por `Api ADR-02` —es el mismo desenlace con el que ya se había cerrado `Contracts` `PA-03`—), `Infrastructure` `PA-05` (el límite de tamaño del texto, reasignado a `Api` `PA-05`, del que **sigue abierto el número**), y `Visor` `PA-05` con `Web` `PA-07` (el versionado del bundle, cerrado por las dos categorías 09).
+
+**Y dos filas estaban mal enunciadas y hoy están corregidas, sin dejar de estar abiertas**: `Application` `PA-04` —decía que el modelo del dominio no declara **los tres** sellos y hoy sólo vale para **uno**, el de desenlace— y `Api` `PA-06` —reverificado contra el texto vivo del intake **1.28**, que es donde sigue viva la divergencia de alcance—. Las dos siguen en el bloque 6.2, con el enunciado acotado.
+
+De nivel producto, [`README.md`](README.md) §8 declara **7 filas, una de ellas tachada por cerrada** —el rechazo del informe de Fase B de `GeometriaFactory-Api`—, de modo que **6 siguen vivas**. Y el intake §22 declara **4 asunciones vivas** (`A-2` a `A-5`): `A-1` está resuelta en el propio documento.
 
 ### 6.1 Bloqueos de proceso, antes que de contenido
 
@@ -513,26 +526,26 @@ Los puntos abiertos se leyeron abriendo la §11 de las siete `Arquitectura-Proye
 | `B-2` | ~~**La Fase B2 de la maqueta de `GeometriaFactory-Web` tiene un solo informe y su veredicto es RECHAZADO.**~~ **CERRADO.** La redacción original era correcta al escribirse. El 2026-08-11 se emitió [`Audit/B2-Maqueta-GeometriaFactory-Web-r2.md`](Audit/B2-Maqueta-GeometriaFactory-Web-r2.md), con dictamen **APROBADO** y levantando expresamente el rechazo de la ronda 1 | Orquestador SDD y Product Owner | El P0 de r1 está cerrado **por recuento propio del auditor y no por declaración**: la cobertura de la matriz de sensado da 211 de 211. La línea de base del bloque 8 mide contra una fase aprobada. La ronda 2 deja cuatro hallazgos nuevos de corrección puntual —1 P1, 2 P2, 1 P3—, **ninguno de ellos condición de bloqueo**, y el más importante, `NB2-03`, es un hueco de validación de `RN-16` que se declara y se cierra en la iteración 5 de maqueta |
 | ~~`B-3`~~ | ~~**El intake está en estado `Borrador`**~~ — **CERRADO el 2026-08-11.** El Product Owner aprobó el intake de viva voz, con lo que pasa a **`Aprobado`** en su versión **1.27**. Era el bloqueo que ningún agente podía levantar: `Master-Prompt.md` §15 lo declara autor responsable y aprobador del intake. | Product Owner | Cerrado |
 | `B-4` | ~~**Ningún documento del corpus está en estado `Aprobado`**: 589 dicen `Propuesto` y 166 `Propuesta`, y cero dicen `Aprobado`.~~ **CERRADO EN SU PARTE DOCUMENTAL, ABIERTO EN LA FIRMA.** El 2026-08-11 se promovieron **602** de los **610** documentos vivos con campo de estado, por la segunda condición de `Master-Prompt.md` 5.2 §5 —el artefacto citado como insumo—, con la constancia contada en §2. **Lo que sigue abierto es la primera condición**: el corte de fase con **confirmación humana** del Product Owner, que ningún agente puede declarar por él, y con él la aprobación del `PRODUCT-INTAKE`, que §13 y §15 reservan a su autor. Los ocho README de la categoría 11 quedan en `Propuesto` con su motivo declarado | Product Owner | Ya no falta el punto de corte documental: hay una versión sellada por documento y toda corrección posterior sube versión y archiva la anterior. Lo que falta es la firma: mientras el Product Owner no confirme el corte de fase, el sello dice que la cadena de insumos se cerró, **no** que alguien la revisó y la aceptó. No impide arrancar |
-| `B-5` | **Los tres artefactos de la Fase H marcados como pendientes por `H-Final-Consolidado-r1.md` §4** siguen sin corregir: las dos líneas de `P2-1`, la unificación del estado de los ocho README de la categoría 11 (`P2-2`) y las cuatro filas de tabla de `P3-1` | Orquestador SDD | `P2-2` está verificado abierto: los ocho README de la categoría 11 declaran `status: Planificado` en su encabezado estructurado, `Estado: Propuesto` en su cabecera de prosa y `Vigente` en su propia fila de la tabla de artefactos. Tres estados distintos para el mismo documento |
+| `B-5` | ~~**Los tres artefactos de la Fase H marcados como pendientes por `H-Final-Consolidado-r1.md` §4** siguen sin corregir: las dos líneas de `P2-1`, la unificación del estado de los ocho README de la categoría 11 (`P2-2`) y las cuatro filas de tabla de `P3-1`.~~ **CERRADO EN DOS DE SUS TRES PARTES, Y ABIERTO EN UNA LÍNEA.** Verificado abriendo los archivos el 2026-08-12 | Orquestador SDD | **`P2-2`: cerrado.** Los ocho README de la categoría 11 declaran hoy `status: Vigente` en su encabezado estructurado y `**Estado:** Propuesto` en su cabecera de prosa, y **traen una tabla que declara que son dos ejes distintos y no una contradicción**: el `status` y la columna `Estado` de la tabla de artefactos responden al enum de ciclo de vida del **contenido** de `Rules-Documentacion.md`, y el `**Estado:**` de la cabecera al de **aprobación** de `Root-Rules.md` §6. El tercer valor, `Planificado`, era el que estaba mal y es el que se corrigió. **`P3-1`: cerrado.** Las cuatro filas `1.1` de los `06-Backlog-Tecnico/README.md` de `Api`, `Infrastructure`, `Visor` y `Web` tienen hoy **tres celdas**, las mismas tres del encabezado: el autor quedó dentro de la celda de descripción. **`P2-1`: cerrado en una de sus dos líneas y abierto en la otra.** `03-UX-UI-DX/README.md` de `Api` dice hoy «**catorce de las quince** rutas son propuesta derivada», que es lo correcto; **`02-Especificacion-Funcional/README.md` de `Api` línea 58 sigue diciendo «las quince rutas están decididas, y quince de ellas no lo están»**, donde va **catorce** —la del canje de credenciales la declara la fuente—, y **el mismo archivo dice lo correcto en su línea 79**. Es una corrección de una palabra sobre un README de índice: no cambia ninguna ruta, ningún contrato y ningún recuento del producto, y quien la lea trata como abierta una ruta que ya está fijada, que es el error conservador |
 
 ### 6.2 Decisiones de arquitectura sin cerrar
 
-Los `PA-XX` que siguen vivos y que **bloquean o condicionan** trabajo de la etapa `a`, que es el primer tramo que se va a construir.
+Los `PA-XX` que siguen vivos y que **bloquean o condicionan** trabajo de la etapa `a`, que es el primer tramo que se va a construir. **De las veintiuna filas que 1.0 abrió acá, cuatro están hoy cerradas —`A-5`, `A-8`, `A-9` y `A-11`— y quedan diecisiete vivas.** Las cerradas se conservan tachadas, con su desenlace y su fuente, porque son decisiones que otros documentos citan y porque retirarlas dejaría huecos de numeración sin declarar.
 
 | # | Qué falta decidir | Dónde está declarado | Titular | Qué se rompe si se construye sin esto |
 | --- | --- | --- | --- | --- |
 | `A-1` | **El nombre del cuarto puerto**, el de repositorio de cuentas. El puerto existe y su identificador no está fijado | `Application/05` §11 `PA-01`; `Infrastructure/05` §11 `PA-01` | El equipo, en el punto de control de la etapa `a` | Es un nombre de tipo público de `GeometriaFactory-Application` que `GeometriaFactory-Infrastructure` implementa y `GeometriaFactory-Api` conecta en su composición de raíz. Elegirlo mal y cambiarlo después toca tres proyectos de código y su documentación |
-| `A-2` | **Los nombres definitivos de tipos y de espacios de nombres**, abiertos en **los siete** proyectos de código | `PA-01`/`PA-02`/`PA-05`/`PA-07` de las siete categorías 05, según el proyecto | El equipo, en el punto de control de la etapa `a` | Es literalmente la primera línea de código de cada proyecto. Además, mientras estén abiertos, **ningún `Recorrido-Codigo.md` de la categoría 11 puede escribir una ruta verificable** ([`Producto/11-Documentacion/README.md`](Producto/11-Documentacion/README.md) §7) |
+| `A-2` | **Los nombres definitivos de tipos y de espacios de nombres**, abiertos en **seis de los siete** proyectos de código [CORREGIDO 2026-08-12: decía «los siete» y citaba filas que no existen] | `PA-01` de Domain y Contracts; `PA-02` de Visor, Application e Infrastructure; `PA-07` de Api. **`GeometriaFactory-Web` no lo tiene**, y con fundamento: su única superficie es la HTTP, cuyos nombres decide `GeometriaFactory-Api` | El equipo, en el punto de control de la etapa `a` | Es literalmente la primera línea de código de cada proyecto. Además, mientras estén abiertos, **ningún `Recorrido-Codigo.md` de la categoría 11 puede escribir una ruta verificable** ([`Producto/11-Documentacion/README.md`](Producto/11-Documentacion/README.md) §7) |
 | `A-3` | **Cuál de las dos funciones de derivación de clave se ancla**, y con qué parámetros. El intake declara «PBKDF2 o Argon2» y **no elige** | `Infrastructure/05` §11 `PA-03`; `ADR-04` §7 | Product Owner y equipo, en la etapa `a` | Es `BT-03` de la etapa `a` de `Infrastructure`. La credencial derivada se guarda con sus parámetros versionados; cambiar la función después de tener cuentas creadas obliga a una migración de credenciales |
 | `A-4` | **Las rutas y los verbos definitivos de los quince puntos de acceso.** Las únicas dos cosas que la fuente declara son el punto de canje de credenciales y la **existencia** de un punto de salud. Las quince filas son propuesta derivada rotulada fila por fila | `Api/05` §11 `PA-01`; `Api/05` §3.4 | Product Owner y equipo, en el punto de control de la etapa `a` | Es `BT-07` de la etapa `a` de `Api`. Todo el cliente HTTP de `GeometriaFactory-Web`, la colección de peticiones de `CU-12` y las tres sondas `VER-XX` de `Api` se escriben contra esas rutas |
-| `A-5` | **El formato de intercambio y su configuración** —nombres de campos al serializar, tratamiento de valores ausentes—. **No se puede decidir de un solo lado**: los dos extremos tienen que coincidir o el contrato deja de ser el mismo | `Web/05` §11 `PA-03`; `Api` `ADR-02`; `Contracts/05` §11 `PA-03` (declarado resuelto por reasignación) | Las categorías 05 de `Api` y de `Web`, en conjunto | Es `BT-08` de `Api` y `BT-12` de `Web`, las dos en la etapa `a`. Si cada extremo elige por su cuenta, el front deserializa mal lo que el backend serializa bien, y el síntoma aparece en integración y no en compilación |
+| ~~`A-5`~~ | ~~**El formato de intercambio y su configuración** —nombres de campos al serializar, tratamiento de valores ausentes—.~~ **CERRADO.** Lo decidió el productor, que es a quien le correspondía: [`Api` `ADR-02`](Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 fija **seis reglas de formato que obligan a los dos extremos** y declara que la coincidencia la verifica la batería de integración contra el servicio real | `Api` `ADR-02`; `Web/05` §11 `PA-03` y `Contracts/05` §11 `PA-03`, los dos **RESUELTO** hoy | Cerrado el 2026-08-10 por la categoría 05 de `Api`, con `Web` como consumidor que adopta | `BT-08` de `Api` y `BT-12` de `Web` siguen en la etapa `a`, pero ya no son una decisión: son la **adopción** de una decisión escrita. Lo que había que evitar —que cada extremo eligiera por su cuenta— no puede ocurrir |
 | `A-6` | **La vigencia exacta del acceso firmado.** El intake declara «corta» y sin acceso de refresco, y no fija número | `Api/05` §11 `PA-04`; `ADR-03` | El equipo en la etapa `a`, y el Product Owner | Es `BT-10` de la etapa `a` de `Api`. Un valor puesto sin criterio expulsa al alumno en medio de una clase o deja un acceso vivo mucho después |
 | `A-7` | **El valor del límite de tamaño del cuerpo de una petición.** `ADR-02` fija la **forma** —un solo límite para todo el producto, que rechaza y nunca trunca— y deja el número abierto | `Api/05` §11 `PA-05` | El equipo en la etapa `a` | Es `BT-09` de la etapa `a` de `Api`. Un límite bajo rechaza el JSON del escenario `E-1`, que es el más grande que la fuente documenta |
-| `A-8` | **Si el bundle generado del visor se versiona en el repositorio o se ignora.** El intake admite las dos | `Visor/05` §11 `PA-05`; `Web/05` §11 `PA-07` | La categoría 09 | Es `BT-03` de la etapa `a` de `Visor`. Alcanza también a `Web`, porque el bundle vive en su directorio de recursos estáticos. Decidirlo después obliga a reescribir el flujo de publicación de dos proyectos de código |
-| `A-9` | **El criterio de comparación de dos correos** —tal cual o normalizados—, que la unicidad exige decidir. `Domain` lo dejó abierto, `Application` no lo reabrió y `Infrastructure` lo tiene asignado | `Application/05` §11 `PA-03`; `Domain/11` §6 | La capa que ejerce la verificación, antes de cerrar la etapa `d` | `RN-02` («correo del alumno único») no es verificable sin este criterio. Dos alumnos pueden registrarse con el mismo correo escrito distinto |
-| `A-10` | **Los sellos de alta, de modificación y de desenlace**: el intake los sostiene como verificables en prueba, pero el modelo del dominio **no los declara como atributos** | `Application/05` §11 `PA-04` | Product Owner, y `GeometriaFactory-Domain` si decide incorporarlos | Si son atributos del dominio, entran en las entidades y en el esquema de persistencia. Descubrirlo después de crear el esquema obliga a una transformación de esquema sobre datos reales |
-| `A-11` | **La ambigüedad del intake sobre `RN-12` e `INV-09`**: su columna de reglas sostenidas y su prosa dicen cosas distintas. La categoría 02 adoptó la columna y elevó la consolidación; la 05 hereda esa lectura sin resolverla | `Domain/05` §11 `PA-03` | Product Owner, sobre `PRODUCT-INTAKE` §17.1.P.2 | Es una regla del dominio con dos lecturas. Se construye una de las dos y hay una probabilidad de la mitad de construir la equivocada |
-| `A-12` | **El alcance de la colección de peticiones reproducible**, declarado en dos lugares de la fuente con alcances distintos: el intake §16.1 dice «los escenarios `E-1` a `E-8` como cuerpo» —ocho— y §18 `S-2` dice «con los cuerpos de `E-2` y `E-5`» —dos— | `Api/05` §11 `PA-06`; `Api/10-Examples/README.md` §4 | Product Owner | Cambia el alcance de `VER-02` de `Api` y de la fila `SD-02` de su matriz de sensado. **`H-Final-Consolidado-r1.md` §6 declara que no abrió los dos lugares de la fuente**, de modo que la contradicción está reportada pero no verificada por la auditoría final |
+| ~~`A-8`~~ | ~~**Si el bundle generado del visor se versiona en el repositorio o se ignora.**~~ **CERRADO.** [`Visor/09-Devops/Entornos-Deploy.md`](Proyectos/GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md) §2 decide que **el bundle no se versiona: se ignora, y lo genera la canalización antes de publicar**, con cuatro fundamentos y cuatro exigencias operativas; [`Web/09-Devops/Entornos-Deploy.md`](Proyectos/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md) §2 **adopta la misma decisión desde el lado del anfitrión sin reabrirla** | `Visor/05` §11 `PA-05` y `Web/05` §11 `PA-07`, los dos **RESUELTO** hoy | Cerrado el 2026-08-11 por las dos categorías 09 | `BT-03` de la etapa `a` de `Visor` se construye contra una decisión tomada. El flujo de publicación de los dos proyectos de código ya está escrito sobre ella |
+| ~~`A-9`~~ | ~~**El criterio de comparación de dos correos** —tal cual o normalizados—, que la unicidad exige decidir.~~ **CERRADO.** Lo decidió la capa que ejerce la verificación: [`Infrastructure` `ADR-03`](Proyectos/GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-03-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §2 fija que dos correos son el mismo cuando coinciden **ignorando mayúsculas y minúsculas y sin ninguna otra normalización**, que el correo se guarda tal como la persona lo escribió, y que la unicidad la sostiene un **índice único sobre la forma normalizada** | `Application/05` §11 `PA-03`, hoy **RESUELTO**; `Infrastructure` `ADR-03` §2 y §6 | Cerrado el 2026-08-10 por la categoría 05 de `Infrastructure` | `RN-02` es verificable: el criterio existe y viene con el índice que lo sostiene. A `GeometriaFactory-Application` la unicidad le llega resuelta por el puerto |
+| `A-10` | **El sello de desenlace.** *(Enunciado corregido y acotado: decía «los sellos de alta, de modificación y de desenlace», y hoy dos de los tres dejaron de ser discrepancia.)* `PRODUCT-INTAKE` §17.3.P.4 incorporó los dos sellos del trabajo el 2026-08-09 y `Domain/02` `Definicion-Modelo-De-Dominio.md` §2.2 los declara como atributos —fecha de creación y fecha de última modificación—, igual que ya declaraba la fecha de alta del alumno. **Lo que sigue abierto es el sello de desenlace**, que ninguna fuente declara como atributo del trabajo | `Application/05` §11 `PA-04`, con su enunciado ya corregido en la fuente | Product Owner, y `GeometriaFactory-Domain` si decide incorporarlo | Si es atributo del dominio, entra en la entidad y en el esquema de persistencia. Descubrirlo después de crear el esquema obliga a una transformación de esquema sobre datos reales. Hoy esta capa lo trata como metadato de orquestación |
+| ~~`A-11`~~ | ~~**La ambigüedad del intake sobre `RN-12` e `INV-09`**: su columna de reglas sostenidas y su prosa dicen cosas distintas.~~ **CERRADO.** La ambigüedad **ya no está en el texto vivo**: `PRODUCT-INTAKE` §17.1.P.2 cierra hoy su prosa diciendo que `RN-12`, `RN-13` y `RN-16` sí tienen invariante y que es `INV-09`, que es lo que la columna declaraba. La categoría 02 había adoptado la columna, o sea la lectura que la fuente terminó declarando, y por eso **nada de lo que se hereda cambia** | `Domain/05` §11 `PA-03`, hoy **RESUELTO** | Cerrado por el Product Owner sobre su propio documento, en `PRODUCT-INTAKE` **1.11** | Ya no hay dos lecturas: hay una, y es la que la categoría 02 construyó |
+| `A-12` | **El alcance de la colección de peticiones reproducible**, declarado en dos lugares de la fuente con alcances distintos. *(Enunciado reverificado contra `PRODUCT-INTAKE` **1.28**: los dos textos siguen vivos y siguen sin decir cuál manda.)* el intake §16.1 dice «los escenarios `E-1` a `E-8` como cuerpo» —ocho— y §18 `S-2` dice «con los cuerpos de `E-2` y `E-5`» —dos— | `Api/05` §11 `PA-06`; `Api/10-Examples/README.md` §4 | Product Owner | Cambia el alcance de `VER-02` de `Api` y de la fila `SD-02` de su matriz de sensado. **`H-Final-Consolidado-r1.md` §6 declara que no abrió los dos lugares de la fuente**, pero **`Api/05` §11 `PA-06` sí los abrió después**: reverificó los dos textos contra `PRODUCT-INTAKE` **1.28** y los dos siguen vivos y con alcances distintos, con la precisión que §18 ganó en **1.25** —que `S-1`, `S-2` y `S-3` no son el conjunto de las carpetas de `/samples`— sin nombrar a esta divergencia. La categoría 02 adopta **los ocho** con su fundamento y la 05 hereda esa lectura sin reabrirla |
 | `A-13` | **Hasta dónde llega el conjunto de tipos de figura reconstruibles.** Los seis que los escenarios ejercitan son los que la pieza que dibuja sabe dibujar; el análisis del que sale el intake menciona siete clases en un ejemplo y diez en el otro, y **ninguna fuente las enumera** | `Infrastructure/05` §11 `PA-04` | Product Owner | Un tipo fuera del conjunto produce error de validación, que es correcto pero puede no ser lo deseado. Si el docente da una actividad con un séptimo tipo, el trabajo del alumno queda en `Borrador` sin que nadie lo haya decidido |
 | `A-14` | **La condición derivada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`**, que **ninguna fuente enuncia** y que la categoría 02 declaró con su fundamento | `Infrastructure/05` §11 `PA-10` | Product Owner, para confirmarla o reemplazarla | Es una condición de error que el sistema va a producir y que ninguna fuente pidió. Si el Product Owner la reemplaza, cambia el flujo de ejecución del validador |
 | `A-15` | **La frecuencia del respaldo.** El intake la declara explícitamente «a definir por el docente» | `Infrastructure/05` §11 `PA-07` | Product Owner, y `09-Devops` | No bloquea construcción, sí bloquea puesta en producción: es una base SQLite con los trabajos de una comisión entera |
@@ -545,7 +558,7 @@ Los `PA-XX` que siguen vivos y que **bloquean o condicionan** trabajo de la etap
 
 ### 6.3 Marcas `[A VERIFICAR]` y `[ASUNCIÓN]` que condicionan puertas
 
-Contadas con `grep -o` sobre el corpus vivo: **50** ocurrencias de `[A VERIFICAR]` y **244** de `[ASUNCIÓN]`.
+Contadas con `grep -ro` sobre los **645** archivos vivos de `SDD/Docs/` el 2026-08-12: **57** ocurrencias de `[A VERIFICAR]` y **230** de `[ASUNCIÓN]`. Si se excluyen los informes de [`Audit/`](Audit/), que las citan al reportarlas, quedan **52** y **206**. Las cifras de 1.0 —50 y 244— no se heredan: **se recontaron**, y la diferencia es el crecimiento del cuerpo de los documentos corregidos, no marcas nuevas sobre decisiones nuevas.
 
 | # | Qué está sin confirmar | Dónde | Titular | Qué se rompe |
 | --- | --- | --- | --- | --- |
@@ -564,7 +577,7 @@ Contadas con `grep -o` sobre el corpus vivo: **50** ocurrencias de `[A VERIFICAR
 | `X-1` | **Cuántas aristas de compilación tiene el producto.** El manifiesto declara ocho en su §2, dibuja siete en su §3 y valida siete en su §4. **Yo conté ocho** sobre la columna «Dependencias» de §2 | Product Owner, sobre el manifiesto | El grafo de §3 **no dibuja la arista `GeometriaFactory-Application` → `GeometriaFactory-Api`**, que la fila de `Api` de §2 sí declara. Quien arme el archivo de proyecto de `Api` leyendo §3 no va a poner esa referencia, y va a depender de que llegue transitivamente por `Infrastructure`. `H-Final-Consolidado-r1.md` §5 lo enuncia como uno de los puntos donde el constructor se detiene |
 | `X-2` | ~~**El estado de la Fase B2**: aprobada según el manifiesto §5 y `Linea-Base-Visual.md`, rechazada según el único informe de auditoría que existe de ella~~ **CERRADO.** Las dos declaraciones dicen hoy lo mismo: la fase está aprobada por el Product Owner y por su ronda 2 de auditoría | Orquestador SDD y Product Owner | Ver `B-2` |
 
-**Ninguno de los puntos de 6.2 a 6.4 impide arrancar la etapa `a`**, y la mayoría están atados precisamente a su punto de control, que es donde corresponde cerrarlos. Los de 6.1 sí son de otra naturaleza: son huecos de proceso. `B-1` y `B-2` eran los dos que un equipo que arranque no podía cerrar por su cuenta, y **los dos informes que faltaban se emitieron el 2026-08-11**: `B-2` queda cerrado y `B-1` queda cerrado en su parte de proceso, con su ronda 2 pendiente.
+**Ninguno de los puntos de 6.2 a 6.4 impide arrancar la etapa `a`**, y la mayoría están atados precisamente a su punto de control, que es donde corresponde cerrarlos. Los de 6.1 sí son de otra naturaleza: son huecos de proceso, y **hoy quedan cerrados los cinco, con dos salvedades escritas y ninguna bloqueante**: `B-1` y `B-2` cerraron con los dos informes emitidos el 2026-08-11 —`B-1` en su parte de proceso **y en su dictamen**—, `B-3` cerró con la aprobación del intake por el Product Owner, `B-4` está cerrado en su parte documental y **abierto en la firma** —el corte de fase con confirmación humana, que ningún agente puede declarar—, y `B-5` está cerrado en dos de sus tres partes, con **una línea de un README de índice** todavía por corregir. **Lo único que un equipo que arranque no puede cerrar por su cuenta es la firma de `B-4`, y no le impide construir.**
 
 ---
 
@@ -662,7 +675,7 @@ Contado sobre la §2 de cada plan de proyecto de código y la §3 del plan de pr
 | `GeometriaFactory-Api` | **11** | Integrador (obligatorio), mantenedor (obligatorio), operador (obligatorio) | 1 `Vigente` + **10** `Planificado` | [`Proyectos/GeometriaFactory-Api/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Api/11-Documentacion/README.md) |
 | **Total** | **72** | — | **8** `Vigente` (los ocho README) + **64** `Planificado` | — |
 
-**El estado de los ocho README no es uno solo, y hay que decirlo.** Cada uno declara `status: Planificado` en su encabezado estructurado, `Estado: Propuesto` en su cabecera de prosa y `Vigente` en su propia fila de la tabla de artefactos. Es el hallazgo `P2-2` de [`Audit/H-Final-Consolidado-r1.md`](Audit/H-Final-Consolidado-r1.md), declarado abierto en su §4 y verificado abierto acá. Ver `B-5` del bloque 6.
+**Los ocho README declaran dos valores de estado, y eso ya no es una contradicción: son dos ejes, y los ocho lo declaran.** Verificado archivo por archivo el 2026-08-12: los ocho dicen `status: Vigente` en su encabezado estructurado —el eje del **ciclo de vida del contenido**, el mismo enum con el que la tabla de artefactos de arriba dice `Vigente`, porque el README está redactado y lleva fecha de última revisión— y `**Estado:** Propuesto` en su cabecera de prosa —el eje de la **situación de aprobación**, `Root-Rules.md` §6, y dice `Propuesto` porque la promoción documental del 2026-08-11 dejó a los ocho expresamente fuera, con el motivo escrito en §2—. El tercer valor, el `status: Planificado` que contradecía a los otros dos, **es el que se corrigió**. Cierra el hallazgo `P2-2` de [`Audit/H-Final-Consolidado-r1.md`](Audit/H-Final-Consolidado-r1.md) §4. Ver `B-5` del bloque 6.
 
 **El Momento 2 no puede adelantarse a la etapa `a`.** [`Producto/11-Documentacion/README.md`](Producto/11-Documentacion/README.md) §7 lo declara con su motivo: mientras los nombres de tipos y de espacios de nombres estén abiertos, ningún `Recorrido-Codigo.md` puede escribir una ruta verificable, y la regla dura de ese documento es que toda ruta citada exista.
 
@@ -711,7 +724,7 @@ Cada contrato vive en la §9 del documento del sample, como bloque `verificacion
 | `D-1` | Aristas de compilación del producto | **8**, sobre la columna «Dependencias» del manifiesto §2 | **7** en el grafo en prosa del manifiesto §3 y **7** en su §4 («las siete aristas resuelven») | `PRODUCT-MANIFEST` §2, §3 y §4. Ya declarado como punto abierto de nivel producto en [`README.md`](README.md) §8 y en `Producto/Vista-Producto.md` §3.1. Es `X-1` del bloque 6 |
 | `D-2` | Artefactos de la categoría 11 en estado `Planificado` | **64**, contando filas `Planificado` en los ocho planes | **65** en [`Audit/H-Final-Consolidado-r1.md`](Audit/H-Final-Consolidado-r1.md) §6, punto 3: «los 65 artefactos planificados de la categoría 11, que no existen» | El total de **72** sí coincide: 72 menos los **8** README que están `Vigente` da 64, no 65 |
 | `D-3` | Informes de auditoría de Fase B | **7**, uno por proyecto de código, con el de `GeometriaFactory-Api` emitido el 2026-08-11 | El corpus lo declaraba como hueco en [`README.md`](README.md) §8 y en `Producto/Vista-Producto.md` §1.1, **y los dos quedaron actualizados**. **Coincide**: ya no hay divergencia, y la fila se conserva porque era el hueco más caro del bloque 6 | — |
-| `D-4` | Estado de los ocho README de la categoría 11 | **Tres valores distintos por documento**: `Planificado` en el encabezado estructurado, `Propuesto` en la cabecera de prosa, `Vigente` en la fila de la tabla de artefactos | `H-Final-Consolidado-r1.md` §4 lo declara como `P2-2` **pendiente de corregir**. **Coincide** y sigue abierto | — |
+| `D-4` | Estado de los ocho README de la categoría 11 | ~~**Tres valores distintos por documento**~~ **Dos valores, de dos ejes declarados**: `Vigente` en el encabezado estructurado y en la fila de la tabla de artefactos —ciclo de vida del contenido—, `Propuesto` en la cabecera de prosa —situación de aprobación—. Contado sobre los ocho archivos el 2026-08-12 | `H-Final-Consolidado-r1.md` §4 lo declaraba como `P2-2` pendiente de corregir. **Ya no hay divergencia**: el hallazgo está cerrado y cada README trae la tabla que declara la dualidad. La fila se conserva porque el informe final la registra | — |
 | `D-5` | Filas de la matriz de sensado de `GeometriaFactory-Visor` | **15** filas `SD-XX` reales | Un `grep` ingenuo de identificadores únicos devuelve **26**, porque la tabla de correspondencias con `Web` reutiliza identificadores de los dos proyectos de código | Se aclara acá para que ninguna ronda posterior lo levante como divergencia |
 | `D-6` | Casos límite del intake §7 | **11** filas (`CL-1` a `CL-11`) | El control cruzado de referencia habla de «diez casos de batería», que es otra cosa: son los **10** casos de la batería del validador cruzados en el intake §21, no los casos límite de §7. **Las dos cifras son correctas y refieren a conjuntos distintos** | Se aclara acá para evitar que se confundan |
 
@@ -723,6 +736,7 @@ Los nueve recuentos de control cruzado —71 casos de uso con su reparto por pro
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.4 | 2026-08-12 | **Pone al día lo que el trabajo de los últimos días dejó viejo: este documento declaraba abierto lo que ya está cerrado.** Es la pasada que [`Audit/Observacion-Ciclo-De-Correccion-Sin-Corte.md`](Audit/Observacion-Ciclo-De-Correccion-Sin-Corte.md) §5 declara última, y **el ciclo de corrección de la especificación cierra acá**. **(a) Salvedad `B-5` de §6.1 y su fila `D-4` de §11.** `P2-2` —los ocho `11-Documentacion/README.md`— **cerrado**, verificado archivo por archivo: los ocho declaran hoy `status: Vigente` y `**Estado:** Propuesto`, y traen la tabla que declara **por qué son dos ejes distintos**. `P3-1` **cerrado**: las cuatro filas `1.1` tienen hoy tres celdas. `P2-1` **cerrado en una de sus dos líneas**: `Api/03-UX-UI-DX/README.md` dice «catorce de las quince», y **`Api/02-Especificacion-Funcional/README.md` línea 58 sigue diciendo «quince»**, que es lo único que queda de la salvedad y no bloquea. §9 y §2 reescriben en consecuencia. **(b) §6 y §6.2, puntos abiertos `PA-XX`.** De las **47** filas de las siete categorías 05 —que siguen siendo 47 porque ninguna se retira—, hoy hay **9 resueltas y 38 vivas**, contra las **3 y 44** que declaraba 1.0: se cerraron `Domain` `PA-03`, `Visor` `PA-05`, `Application` `PA-03`, `Web` `PA-03` y `PA-07` e `Infrastructure` `PA-05`. En §6.2, las filas **`A-5`, `A-8`, `A-9` y `A-11` pasan a cerradas** —tachadas, con su desenlace y su fuente— y quedan **17 vivas de 21**; **`A-10` y `A-12`**, que estaban mal enunciadas, quedan con el enunciado corregido en la fuente y **siguen abiertas**. §4.3 `BT-03` de `Visor` y §4.5 `BT-12` de `Web` dejan de remitir a una decisión abierta. **(c) Recuentos recontados, no heredados.** [`Audit/`](Audit/) pasa de **33** a **35** archivos —**33 informes con dictamen y 2 observaciones de proceso**— en §5 y §2.1. El corpus vivo pasa de **643** a **645** archivos y de ≈ 9,6 a **≈ 9,8 MB**. Los documentos con campo de estado pasan de **610** a **612**, hoy **438 `Aprobado`, 166 `Aprobada` y 8 `Propuesto`**. Los tamaños de las **49 filas** de §2.2 a §2.8 que crecieron, y de **4** de §2.1, se recontaron con `find` y `wc -c`; **ninguna cantidad de archivos cambia**. §6.3 recuenta las marcas: **57** `[A VERIFICAR]` y **230** `[ASUNCIÓN]` sobre el corpus vivo. La trazabilidad upstream de la cabecera pasa a `PRODUCT-INTAKE` **1.28**. **(d) §2 y §6.4.** El intake y la maqueta quedan declarados **aprobados** donde §2 todavía los daba pendientes, y el cierre de §6.4 declara el estado real de las cinco salvedades de §6.1. **Ningún ítem del Sprint 1, ningún flag, ninguna cifra de trazabilidad y ninguna decisión cambia**: lo que cambia es qué está cerrado y cuántos hay. Sube minor. | Orquestador SDD |
 | 1.3 | 2026-08-11 | **Aprobación del Product Owner sobre el intake y la maqueta.** Los dos artefactos que la promoción documental del 2026-08-11 dejó expresamente fuera —porque `Master-Prompt.md` §15 hace de su aprobación un acto humano— quedan **aprobados**: `PRODUCT-INTAKE` pasa a `Aprobado` en su versión **1.27** y la maqueta de `GeometriaFactory-Web` queda **Aprobada con sus tres huecos declarados** (la sexta función de la fachada, el reseteo de contraseña y la provisoria al habilitar, sin validación visual, con la iteración 5 como vía). Se cierra la salvedad **`B-3`** de §6.1 y se actualiza la nota de §2. **Ningún contenido cambia**: cambia quién responde por él. | Product Owner (aprobación) · Orquestador SDD (registro) |
 | 1.2 | 2026-08-11 | **Absorbe la emisión de [`Audit/B-02-03-GeometriaFactory-Api-r2.md`](Audit/B-02-03-GeometriaFactory-Api-r2.md) 1.0 —dictamen APROBADO— y deja la constancia de la promoción del estado documental del corpus.** **(a) Cierre del hallazgo `N-02` (P2) de ese informe.** **§6.1** `B-1`: el recuento de hallazgos de la ronda 1 pasa de **quince** a **diecisiete** —el desglose «un P0, cinco P1, seis P2 y cinco P3», que suma diecisiete, estaba escrito en la misma oración— y la salvedad pasa a **cerrada también en su dictamen**. **§5**: entra la fila de la **ronda 2 de la Fase B de `GeometriaFactory-Api`, APROBADO**, y la línea de estado de las fases pasa de una excepción a **ninguna**. **§5** y **§2.1**: el recuento de informes de auditoría, contado con `ls SDD/Docs/Audit/`, pasa de **32** y de **30** respectivamente a **33**. **§2**: el total del corpus vivo pasa de 639 a **643** archivos y de ≈ 9,4 a **≈ 9,6 MB**, recontado con `find` y `wc -c`; las dos cifras de 1.0 eran correctas al escribirse. **(b) Constancia de la promoción.** **§2**, «Estado de los documentos»: se reemplaza el barrido de 1.0 por la constancia única de la promoción del 2026-08-11 —qué valor se aplicó y por qué `Aprobado` y no `Vigente`, con qué condición de `Master-Prompt.md` 5.2 §5, el alcance contado (602 promovidos de 610 documentos con campo de estado, sobre 643 archivos vivos), los **8** no promovidos con su motivo y lo que queda fuera de `SDD/Docs/`—. **§2.1 a §2.8**, columna «Estado»: las **60** filas de categoría que decían `Propuesto` pasan a `Aprobado`; las **8** de `11-Documentacion` **no cambian**. **§6.1** `B-4`: pasa a **cerrado en su parte documental y abierto en la firma**, con el titular intacto. **Ninguna cifra contada sobre el árbol que no se haya recontado, ningún ítem de Sprint 1, ningún flag, ningún punto abierto de arquitectura y ninguna decisión cambia.** Sube minor. | Orquestador SDD |
 | 1.0 | 2026-08-11 | Emisión inicial del resumen ejecutivo de check-out exigido por `Master-Prompt.md` 5.2 §12, con sus **diez** bloques. Todas las cifras se contaron con herramienta sobre el árbol vivo de `SDD/Docs/`, `SDD/Maquetas/` y `/samples/`, excluyendo `_legacy/`; ninguna se heredó de otro documento. Inventaría **7** proyectos de código sin código escrito, **639** documentos vivos por **≈ 9,4 MB**, la cadena de trazabilidad de los diez eslabones por proyecto de código con **2** huérfanos declarados y **3** ADR de versionado que trazan al intake y no a la cadena, **48** ítems de la etapa `a` listos para codear, **30** informes de auditoría con su veredicto, **47** puntos abiertos `PA-XX` en las categorías 05 —**44** vivos—, **7** de nivel producto y **4** asunciones vivas del intake, los flags inmutables del manifiesto §5, **182** elementos de línea de base visual y **92** filas de sensado todas en `Sin verificar`, **72** artefactos documentales planificados de los cuales **64** en `Planificado`, y las **19** sondas `VER-XX` sin evidencia. Declara **6** divergencias entre lo contado y lo declarado por otros documentos, sin resolver ninguna. **No toma ninguna decisión**: todo lo no decidido está en el bloque 6, con titular y con la consecuencia de construir sin decidirlo. | Orquestador SDD |
