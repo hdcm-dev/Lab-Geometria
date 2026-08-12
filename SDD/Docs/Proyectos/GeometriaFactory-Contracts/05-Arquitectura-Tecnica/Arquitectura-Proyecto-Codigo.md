@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Arquitectura-Proyecto-Codigo.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.15** §4 y §4.1 (las **dieciséis** reglas `RN-01` a `RN-16`), §4.2 (modelo de estados del trabajo), §13 y §14 (composición y las tres reglas de arquitectura `RA-01`, `RA-02`, `RA-03`), §17.4 completo (P.1 a P.12), §17.5 P.3 y P.5 (qué existe del otro lado del contrato); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2, §3 y §5; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) y los ocho contratos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) y [`../03-UX-UI-DX/README.md`](../03-UX-UI-DX/README.md)
@@ -51,7 +51,7 @@ Cuatro propiedades estructurales lo concretan:
 
 1. **Cero dependencias, y en particular ninguna hacia `GeometriaFactory-Domain`.** El intake declara esa ausencia como **quality gate bloqueante** (§17.4.P.8), y es lo que impide que la unidad pública conozca las entidades del dominio.
 2. **Compilación compartida en lugar de descripción formal de servicio.** Los dos consumidores compilan contra el mismo ensamblado, de modo que un cambio incompatible rompe la compilación antes que el tiempo de ejecución ([`ADR-03`](Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md)).
-3. **Un solo tipo de error para las ocho familias**, con un conjunto cerrado de **quince** códigos vivos ([`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)).
+3. **Un solo tipo de error para las ocho familias**, con un conjunto cerrado de **diecisiete** códigos vivos ([`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)).
 4. **Proyección de listado separada del detalle**, que es lo que evita que el listado arrastre el texto completo de cada trabajo ([`ADR-05`](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md)).
 
 ### 2.1 Alternativas descartadas
@@ -79,7 +79,7 @@ Un componente es acá una **familia de tipos de transferencia**, que es la unida
 | Familia de detalle | Transportar el trabajo interpretado: piezas, componentes, observaciones y el comentario del administrador como bloque propio | Identificador del trabajo | Detalle completo del trabajo | Familia de error |
 | Familia de desenlace | Transportar la aprobación o el rechazo, con comentario opcional | Identificador y desenlace pretendido | Estado terminal alcanzado | Familia de error |
 | Familia de reseteo | Transportar el reseteo por el administrador y el cambio obligatorio por la propia cuenta | Identificador de cuenta, y nada más, en el reseteo | Resultado que declara la situación conservada, el cambio pendiente y la provisoria producida | Familia de error, Familia de cuentas |
-| Familia de error | Declarar el **único** tipo con el que un fallo cruza la frontera, y el conjunto cerrado de quince códigos | Código, texto neutro, detalles de ubicación y momento | El mismo tipo, para las siete familias anteriores | Ninguna |
+| Familia de error | Declarar el **único** tipo con el que un fallo cruza la frontera, y el conjunto cerrado de diecisiete códigos | Código, texto neutro, detalles de ubicación y momento | El mismo tipo, para las siete familias anteriores | Ninguna |
 
 **Las dependencias apuntan todas hacia la familia de error, que no depende de ninguna.** La única arista adicional es la de reseteo hacia cuentas, y tiene motivo declarado: el cambio obligatorio de contraseña **reutiliza el mismo tipo** que el cambio voluntario, en lugar de redeclararlo ([`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3.1). El grafo es acíclico.
 
@@ -92,7 +92,7 @@ flowchart TD
     DET["Familia de detalle"]
     DES["Familia de desenlace"]
     RES["Familia de reseteo"]
-    ERR["Familia de error<br/>15 códigos vivos"]
+    ERR["Familia de error<br/>17 códigos vivos"]
     SES --> ERR
     CTA --> ERR
     TRA --> ERR
@@ -164,7 +164,7 @@ Los ocho contratos de uso tienen componente y ningún componente queda sin contr
 
 | Preocupación | Decisión | Fundamento |
 | --- | --- | --- |
-| Manejo de errores | **Un único tipo de error** con cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y un conjunto cerrado de **quince** códigos vivos sobre **dieciocho** identificadores emitidos | [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
+| Manejo de errores | **Un único tipo de error** con cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y un conjunto cerrado de **diecisiete** códigos vivos sobre **veinte** identificadores emitidos | [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
 | Registro de eventos, trazas y métricas | **Ninguno propio.** El ensamblado no instrumenta. La correlación entre las dos unidades desplegables, si se decide, es de `GeometriaFactory-Api` y de `GeometriaFactory-Web` | `PRODUCT-INTAKE` §17.4.P.10 no declara observabilidad propia |
 | Configuración | **Ninguna.** El ensamblado no lee configuración | Derivado de §17.4.P.2, tipos planos sin comportamiento |
 | Secretos | **Ninguno, y es prohibición explícita**: ningún tipo transporta el hash de la contraseña ni la clave de firma | [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) |
@@ -181,7 +181,7 @@ El primero y el segundo vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE` 
 | Carga útil del listado | **0** ocurrencias del texto original, **0** de componentes de pieza y **0** del comentario del administrador en la proyección de listado [ASUNCIÓN derivada del intake §17.4.P.10] | Inspección de la superficie pública de la familia de listado | [`ADR-05`](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md) |
 | Referencias hacia `GeometriaFactory-Domain` | Exactamente **0** | Inspección del archivo de proyecto, puerta bloqueante de construcción | [`ADR-01`](Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) |
 | Campos capaces de transportar una dirección de servicio, una ruta de datos o un secreto | Exactamente **0** en los tipos de las ocho familias | Prueba de inspección de superficie pública, que es CA-01 de CU-06 | [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) |
-| Códigos de error del conjunto cerrado | Exactamente **15** vivos, y **0** códigos producidos fuera del conjunto | Prueba de inspección del conjunto cerrado, que es CA-09 de CU-06 | [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
+| Códigos de error del conjunto cerrado | Exactamente **17** vivos, y **0** códigos producidos fuera del conjunto | Prueba de inspección del conjunto cerrado, que es CA-09 de CU-06 | [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
 | Campos de la respuesta de sesión | Exactamente **4**, y **0** que transporten una condición que impida operar | Inspección de la superficie pública, restricción transversal `RT-10` | [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) |
 | Advertencias de construcción | Exactamente **0** | Etapa de `build` del pipeline, bloqueante para fusionar | [`ADR-03`](Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) |
 
@@ -208,7 +208,7 @@ El primero y el segundo vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE` 
 | RN aplicables | Ninguna propia: este proyecto de código no las redacta. Las refiere por identificador a `GeometriaFactory-Domain`, ver §10.3 |
 | ADRs que lo gobiernan | ADR-01, ADR-02, ADR-03, ADR-04, ADR-05 |
 | Contratos que expone | [`Contratos-Abstractions.md`](Contratos-Abstractions.md) |
-| Tests previstos en 08 | Pruebas de integración que golpean el servicio real, una por tipo como mínimo; prueba de inspección de superficie pública para los campos prohibidos; prueba de inspección del conjunto cerrado de quince códigos |
+| Tests previstos en 08 | Pruebas de integración que golpean el servicio real, una por tipo como mínimo; prueba de inspección de superficie pública para los campos prohibidos; prueba de inspección del conjunto cerrado de diecisiete códigos |
 
 ### 10.2 Las once restricciones transversales contra la decisión que las sostiene
 
@@ -268,3 +268,4 @@ Este proyecto de código **no redacta ninguna regla de negocio**: es el caso que
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial de la arquitectura técnica de `GeometriaFactory-Contracts`. Declara el estilo con sus tres alternativas evaluadas, las ocho familias de tipos como componentes con su grafo acíclico, la regla de exposición en la vista lógica, las cuatro vistas mínimas, los cross-cutting centralizados, siete NFR con objetivo numérico, seis riesgos con mitigación, la trazabilidad de las once restricciones transversales y de las dieciséis reglas, y cuatro puntos abiertos. Emite cinco ADR individuales bajo `Adrs/` y el contrato de superficie pública en `Contratos-Abstractions.md`. |
 | 1.1 | 2026-08-11 | **Corrige una afirmación de §11 que dejó de ser cierta y cierra el punto abierto que la contenía.** La fila `PA-03` declaraba que el formato de intercambio pertenece a las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` y que **«ninguna de las dos está emitida todavía»**. **Hoy las dos lo están** —y con ellas las **siete** categorías 05 del producto—, y además **la decisión está tomada**: `GeometriaFactory-Web` §11 `PA-03` declaró que no la toma de un solo lado y que la adopta del productor, y `Api ADR-02` la tomó con seis reglas de formato que obligan a los dos extremos, con la coincidencia verificada por la batería de integración contra el servicio real. `PA-03` pasa a **fila resuelta**, con su desenlace, sus dos referencias y su fecha, y **se conserva en la tabla en lugar de retirarse** para no dejar un hueco de numeración sin declarar; §11 gana la línea de reparto **tres abiertas y una resuelta**. **Lo que este proyecto de código exigía sigue valiendo y no cambia**: que sus tipos sean serializables sin comportamiento. **Ninguna decisión de arquitectura, ninguna ADR, ningún NFR, ningún riesgo, ninguna restricción transversal y ningún otro punto abierto cambia.** Sube minor. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **6**. Sube minor. |

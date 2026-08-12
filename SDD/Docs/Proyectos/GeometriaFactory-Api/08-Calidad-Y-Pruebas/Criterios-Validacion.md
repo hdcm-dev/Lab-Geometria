@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Criterios-Validacion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
 **Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.5.P.6, §17.5.P.8, §17.5.P.10, §21 y §22
@@ -43,7 +43,7 @@ Los momentos en que se aplican estos criterios son el **punto de control de cada
 | CV-04 | Las **treinta** historias de usuario tienen su caso de verificación | Matriz §2, columna de historias | **30 de 30** |
 | CV-05 | Las **dieciséis** reglas de negocio tienen verificado el tramo que esta capa ejerce; las **tres** sin tramo tienen verificado que **esta capa no deshaga lo que otra decidió** | Matriz §4 | **16 de 16**, con **13** con tramo y **3** sin él |
 | CV-06 | Los **nueve** invariantes tienen verificado lo que esta capa aporta a cada uno | Matriz §6 | **9 de 9** |
-| CV-07 | **14 de 15** códigos del contrato tienen traducción declarada y **1** está declarado **sin destino con su motivo**; hay **0** inventados y **0** renombrados | `TC-24` y `TC-27`, en las dos direcciones | **14 + 1 = 15**, con **0** y **0** |
+| CV-07 | **16 de 17** códigos del contrato tienen traducción declarada y **1** está declarado **sin destino con su motivo**; hay **0** inventados y **0** renombrados | `TC-24` y `TC-27`, en las dos direcciones | **14 + 1 = 15**, con **0** y **0** |
 | CV-08 | Las **tres** familias empobrecidas dan respuestas **indistinguibles en cuerpo y en código** | `TC-25` | **3 de 3**, sin gradación |
 | CV-09 | Los **ocho** escenarios del intake §20 están ejercitados **como cuerpo de petición**, sin sustituirlos por datos sintéticos | `TC-17`, `TC-19`, `TC-22`, `TC-35` y la batería del validador que corre desde acá | **8 de 8** |
 | CV-10 | Un envío cuyo texto **no verifica** responde con **éxito** y no con un código de fallo | `TC-17`, con `E-5` y `E-8` | **3 de 3** envíos exitosos con estados distintos |
@@ -61,7 +61,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-15 | Forma de la pirámide de pruebas | **60 %** integración y **40 %** unitarias **[ASUNCIÓN en cuanto al reparto]** | `TC-37` | **Condicionado.** **La inversión no es asunción** y no queda en suspenso |
 | CV-16 | Puntos de acceso fuera de la guardia | **4** sobre **15**, ni uno más | `TC-07` | **Bloqueante, sin gradación** |
 | CV-17 | Puntos que fijan una contraseña sobre una cuenta existente sin credencial | **0** | `TC-10` | **Bloqueante** |
-| CV-18 | Códigos del contrato con traducción declarada, en las dos direcciones | 14 con destino, 1 sin él, 0 inventados, 0 renombrados | `TC-24`, `TC-27` | **Bloqueante** |
+| CV-18 | Códigos del contrato con traducción declarada, en las dos direcciones | 16 con destino, 1 sin él, 0 inventados, 0 renombrados | `TC-24`, `TC-27` | **Bloqueante** |
 | CV-19 | Respuestas indistinguibles de las tres familias empobrecidas | **3 de 3** | `TC-25` | **Bloqueante, sin gradación** |
 | CV-20 | Respuestas que exponen dirección, ruta, secreto o traza, sobre los quince puntos **y** sobre el registro del servidor | **0** | `TC-26` | **Bloqueante** |
 | CV-21 | Configuraciones de intercambio declaradas en el producto | **1**, compartida por los dos extremos | `TC-29` | **Bloqueante** |
@@ -122,3 +122,4 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-01`.** La nota de §6 sobre `CV-31` afirmaba en presente que el intake escribe «nueve» en §17.3.P.8 y §17.5.P.8; el intake **1.20** dice **diez** en los dos. Reescrita contra el texto vivo, con el nueve ubicado **hasta 1.19**. **`H-08`.** `CV-34` atribuía a `Rules-Calidad-Y-Pruebas.md` §2.2 un piso de mutación que esa tabla fija para el tipo **`library`**: la fila `rest-api`, que es la de este proyecto de código, no pide mutation score. Queda declarado como exigencia adoptada por encima de la guía. Ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **cuarenta** criterios de validación numerados `CV-01` a `CV-40`, repartidos en funcionales, no funcionales, de regresión y de calidad de código, cada uno con su umbral y su forma de medición. Distingue cuatro caracteres —bloqueante, condicionado, **puerta técnica sin excepción posible** y no exigible— y ata los condicionados a los valores rotulados **[ASUNCIÓN]** del intake §22, precisando que **la inversión de la pirámide no es asunción** aunque su reparto sí lo sea. Incorpora el criterio de **15 de 15 puntos ejercidos**, que es lo que hace verificable la exigencia de la regla para el tipo `rest-api`, y el de **4 + 11 = 15** sobre la guardia. Declara que no hay criterio de disponibilidad y que los tres tiempos son del servicio y no de la suite. Su §6 declara las cuatro salidas admitidas, el tratamiento del recuento de la batería del validador y **seis** situaciones que explícitamente no son excepción. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** los **ocho** contratos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) con sus criterios de aceptación; las **once** restricciones transversales de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6; las **veintidós** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); los **siete** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3.1 y §3.2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §18 y §20
@@ -34,7 +34,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 
 - **Inspección de superficie**: comprobación que se hace leyendo la superficie pública del ensamblado, sin ejecutar nada. Es la mitad de la verificación de este proyecto de código ([`Estrategia-Testing.md`](Estrategia-Testing.md) §1).
 - **Integración**: prueba que golpea el servicio real por su protocolo y usa los tipos de este ensamblado como cuerpo de petición y de respuesta. **Vive materialmente en `GeometriaFactory-Api`**; acá se declara qué tiene que verificar sobre los tipos.
-- **Recuento**: la forma característica de aserción de este proyecto de código — cero campos, cuatro campos, quince códigos ([`Estrategia-Testing.md`](Estrategia-Testing.md) §4).
+- **Recuento**: la forma característica de aserción de este proyecto de código — cero campos, cuatro campos, diecisiete códigos ([`Estrategia-Testing.md`](Estrategia-Testing.md) §4).
 - **Fixture**: uno de los cuatro cuerpos declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §5.
 
 ## 2. Catálogo de casos de prueba
@@ -225,15 +225,15 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
-#### TC-16 — El-Conjunto-Cerrado-Tiene-Quince-Codigos-Vivos
+#### TC-16 — El-Conjunto-Cerrado-Tiene-Diecisiete-Codigos-Vivos
 
 | Campo | Valor |
 | --- | --- |
 | Tipo | Inspección de superficie |
 | Cubre | `CU-06`; `US-14`, `US-16`; NFR «Códigos de error del conjunto cerrado» |
-| Setup | El conjunto cerrado de códigos del contrato, y la tabla de `03` §3.2, que es la única del proyecto de código donde los **dieciocho** identificadores emitidos están enumerados juntos |
-| Pasos | Given el conjunto cerrado, When se lo recorre entero, Then tiene exactamente **15** códigos vivos. When se busca un código cuya causa sea una cuenta habilitada sin contraseña, o un reseteo sobre una cuenta sin contraseña, Then **0 códigos** de los quince responden a esas causas. When se comparan los identificadores vivos contra los **tres retirados**, Then **ninguno se recicla**. Given un fallo que el contrato no previó, Then llega `CONTRATO_ERROR_NO_CLASIFICADO` |
-| Salida esperada | 15 vivos, 3 retirados sin reciclar, 18 emitidos en total, 0 códigos para las dos causas que `RN-16` volvió imposibles, y el cierre del conjunto verificado. Es `CA-09` de `CU-06` |
+| Setup | El conjunto cerrado de códigos del contrato, y la tabla de `03` §3.2, que es la única del proyecto de código donde los **veinte** identificadores emitidos están enumerados juntos |
+| Pasos | Given el conjunto cerrado, When se lo recorre entero, Then tiene exactamente **17** códigos vivos. When se busca un código cuya causa sea una cuenta habilitada sin contraseña, o un reseteo sobre una cuenta sin contraseña, Then **0 códigos** de los diecisiete responden a esas causas. When se comparan los identificadores vivos contra los **tres retirados**, Then **ninguno se recicla**. Given un fallo que el contrato no previó, Then llega `CONTRATO_ERROR_NO_CLASIFICADO` |
+| Salida esperada | 17 vivos, 3 retirados sin reciclar, 20 emitidos en total, 0 códigos para las dos causas que `RN-16` volvió imposibles, y el cierre del conjunto verificado. Es `CA-09` de `CU-06` |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -320,7 +320,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Restricciones transversales cubiertas | **11 de 11**, ver [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5 |
 | Historias de usuario cubiertas | **22 de 22**, una de ellas —`US-10`— fuera del tramo comprometido y declarada así |
 | NFR con caso de prueba asociado | **6 de 7**; el séptimo, advertencias de construcción, se mide en la etapa `build` y no por un caso de prueba |
-| Códigos del conjunto cerrado verificados | **15 vivos** y **3 retirados sin reciclar**, sobre **18** emitidos, agregados en `TC-16` y desplegados en los casos funcionales |
+| Códigos del conjunto cerrado verificados | **17 vivos** y **3 retirados sin reciclar**, sobre **20** emitidos, agregados en `TC-16` y desplegados en los casos funcionales |
 | Escenarios del intake §20 alcanzados | **8 de 8** |
 | Casos de prueba sin upstream declarado | **0** |
 
@@ -332,3 +332,4 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-02`.** El campo «Cubre» de `TC-21` califica ahora el rótulo [ASUNCIÓN] de `QG-05` como referido a **la forma del gate** y declara el gate **bloqueante**, según §17.4.P.6 y la fila `A-4` del intake §22. **Ningún caso de prueba, paso ni salida esperada cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **veintidós** casos de prueba referenciales, `TC-01` a `TC-22`, cada uno con tipo, upstream por identificador, setup, pasos en Given-When-Then, salida esperada, salida observada y estado. Diecinueve cubren los **ocho** contratos de uso y las **veintidós** historias; los tres últimos son inspecciones de superficie sobre las referencias hacia el dominio, el ejercicio de los tipos por integración y la prohibición de que el navegador invoque el servicio. Los **ocho** escenarios del intake §20 quedan alcanzados, con la precisión de qué parte de cada uno le toca a un ensamblado que transporta y no interpreta. `TC-11` se declara fuera del tramo comprometido con su motivo. Todas las salidas observadas dicen «Sin ejecutar» y todos los estados `Pendiente`. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **6**. Sube minor. |

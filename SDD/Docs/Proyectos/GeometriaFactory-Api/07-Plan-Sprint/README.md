@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Scrum Master + API PM (AG-07)
 
 ---
@@ -48,7 +48,7 @@
 | La superficie: los quince puntos, sus verbos y sus códigos de respuesta | [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) y [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) |
 | El orden de las etapas, sus criterios de transición y dónde se miden las puertas | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) |
 | Las dieciséis reglas y los nueve invariantes | `GeometriaFactory-Domain`, categorías 02 y 05 |
-| El conjunto cerrado de quince códigos vivos | `GeometriaFactory-Contracts`. **Esta capa no agrega, no renombra y no traduce a texto ninguno** |
+| El conjunto cerrado de diecisiete códigos vivos | `GeometriaFactory-Contracts`. **Esta capa no agrega, no renombra y no traduce a texto ninguno** |
 | El nombre del cuarto puerto | El punto de control de la etapa `a`, **sobre la superficie de `GeometriaFactory-Application`** |
 | Los **dos huecos** del conjunto cerrado de códigos | Abiertos: `PA-03` y `PA-04` del backlog, elevados con BT-15. **Esta categoría no inventa códigos** |
 | El despliegue | **Manual, por el docente** (`PRODUCT-INTAKE` §17.5.P.8). `09-Devops`, **todavía no emitida**, mide el mecanismo de construcción en destino con BT-26 |
@@ -63,3 +63,4 @@
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **Cierre de la fila de `10-Examples`** de §4, que decía «todavía no emitida». La categoría se emitió en su pasada de diseño y la colección de peticiones es su sample 02, con el contrato `VER-02` que entra a la matriz de sensado como `SD-02`. La fila se **conserva** con su desenlace y su fecha. Se declara además que las filas de `08-Calidad-Y-Pruebas` y de `09-Devops` de esa misma tabla **también quedaron desactualizadas** y que corregirlas pertenece a esta categoría en su próxima revisión. **Ningún tramo del plan, ninguna puerta y ningún recuento cambian.** Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Declara el único artefacto emitido, los **cuatro** que se omiten con el motivo de cada uno, el estado del plan con sus **seis** tramos, sus quince puntos de acceso y la puerta `PT-04`, y dónde vive lo que este plan no decide, incluidos los dos huecos del conjunto cerrado de códigos y las tres categorías todavía no emitidas. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

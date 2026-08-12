@@ -3,12 +3,12 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
-**Trazabilidad upstream:** los **doce** casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); los **quince** puntos de acceso de [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.4; las **treinta** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); las **dieciséis** entradas y los **quince** códigos vivos de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §6.1 y de [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5; los **diecisiete** NFR de `05` §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §20 y §21
+**Trazabilidad upstream:** los **doce** casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); los **quince** puntos de acceso de [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.4; las **treinta** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); las **dieciocho** entradas y los **diecisiete** códigos vivos de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §6.1 y de [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5; los **diecisiete** NFR de `05` §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §20 y §21
 **Trazabilidad downstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Plan-Pruebas.md`](Plan-Pruebas.md)
 
 ---
@@ -328,15 +328,15 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 
 ### 2.4 Traducción a protocolo
 
-#### TC-24 — Catorce-Codigos-Con-Destino-Y-Uno-Sin-El
+#### TC-24 — Dieciseis-Codigos-Con-Destino-Y-Uno-Sin-El
 
 | Campo | Valor |
 | --- | --- |
 | Tipo | Unit, **inspección con umbral exacto** |
 | Cubre | `CU-09`; `US-24`; NFR de códigos con traducción; `QG-06` |
-| Setup | El conjunto cerrado de **quince** códigos del ensamblado de contratos, y la tabla de traducción de [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5 |
-| Pasos | Given los quince códigos, When se recorre la tabla, Then **14** tienen código de respuesta asignado y **1** está declarado **sin destino con su motivo**: el que describe que la pieza de datos no responde, porque **si hubo respuesta, el servicio respondió**. When se recorre en la dirección inversa, Then **ninguna fila de la tabla cita un código que no esté en el conjunto cerrado** |
-| Salida esperada | 14 con destino, 1 sin él con su motivo, y **0** filas huérfanas en las dos direcciones. **El hueco es intencional y está declarado**, para que una revisión posterior no lo levante como cobertura faltante |
+| Setup | El conjunto cerrado de **diecisiete** códigos del ensamblado de contratos, y la tabla de traducción de [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5 |
+| Pasos | Given los diecisiete códigos, When se recorre la tabla, Then **16** tienen código de respuesta asignado y **1** está declarado **sin destino con su motivo**: el que describe que la pieza de datos no responde, porque **si hubo respuesta, el servicio respondió**. When se recorre en la dirección inversa, Then **ninguna fila de la tabla cita un código que no esté en el conjunto cerrado** |
+| Salida esperada | 16 con destino, 1 sin él con su motivo, y **0** filas huérfanas en las dos direcciones. **El hueco es intencional y está declarado**, para que una revisión posterior no lo levante como cobertura faltante |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -520,3 +520,4 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **treinta y siete** casos de verificación, `TC-01` a `TC-37`, repartidos en seis grupos, cada uno con sus ocho campos y su upstream explícito, incluidos el punto de acceso `A-XX` que ejerce y el riesgo de `05` §9 que mitiga. Incluye **cinco** inspecciones con umbral exacto —entre ellas la de los **cuatro** puntos fuera de la guardia, que es el control que más veces hay que ejercer— y **el único** caso que la fuente exige verificar **forzando la petición**. Todos los estados dicen `Pendiente` y todas las salidas observadas dicen «Sin ejecutar». Los **ocho** escenarios del intake §20 entran **como cuerpo de petición**, sin sustituirse por datos sintéticos. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **5**. Sube minor. |

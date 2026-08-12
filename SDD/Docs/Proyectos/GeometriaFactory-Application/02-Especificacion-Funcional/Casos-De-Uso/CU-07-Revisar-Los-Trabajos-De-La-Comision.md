@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-07-Revisar-Los-Trabajos-De-La-Comision.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md) §5 (alcance de la vista, recorte del listado, organización del listado, coincidencia de la vista entre los dos papeles); [`NB-09`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md) §5 (cobertura de los desenlaces, parcial); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-12), §4.1 (RN-11), §4.2, §6 (flujo 2.1 y flujo 3), §17.2.P.10; orquesta [`CU-11` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-11-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Application
@@ -106,6 +106,7 @@ Las tres son consultas y no modifican nada.
 
 ## 10. Notas y supuestos
 
+- **La negativa por facultad de este caso de uso ya tiene código propio en el contrato.** `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` ante el listado de la comisión viajaba hasta hoy en el código genérico. El Product Owner incorporó `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` (`PRODUCT-INTAKE` **1.29** §17.4 P.3 y §17.2 P.5). **Este caso de uso no cambia**; lo que cambia es que la pieza pública puede distinguir «no tenés permiso» de «algo salió mal».
 - **El predicado de alcance lo declara el dominio y la consulta la ejecuta el repositorio**: esta capa es la que los junta. El dominio no conoce el conjunto de trabajos.
 - **El recorte de los borradores se traslada al puerto**, no se aplica después sobre un conjunto mayor: un borrador que llega a esta capa y se descarta acá ya viajó, y el criterio del listado es que no aparezca.
 - La agrupación y el orden en la pantalla son decisiones de presentación y viven en `03-UX-UI-DX`; acá se entrega el dato de dueño que las hace posibles.
@@ -117,6 +118,7 @@ Las tres son consultas y no modifican nada.
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
 
 ## 17. Compatibilidad de la superficie pública
 

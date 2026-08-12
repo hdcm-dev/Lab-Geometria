@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Plan-Pruebas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.1; [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) 1.1 §2; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §9; [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md)
@@ -43,7 +43,7 @@
 - [ ] Las historias de la etapa cumplen los **siete** criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §1, incluidos el sexto —refinada contra la regla de exposición— y el séptimo —todo código de error pertenece al conjunto cerrado—.
 - [ ] `BT-01` está cerrada: el ensamblado compila y **no declara ninguna biblioteca de serialización**.
 - [ ] `BT-04` está cerrada para la familia de la etapa: sus nombres de tipos, de campos y de espacios de nombres están decididos y registrados en el punto de control de esa etapa.
-- [ ] `BT-06` y `BT-07` están cerradas antes de cualquier etapa posterior a la `c`: el tipo de error existe con sus cuatro campos y el conjunto cerrado de **quince** códigos está declarado. **Las siete familias restantes dependen de la familia de error**.
+- [ ] `BT-06` y `BT-07` están cerradas antes de cualquier etapa posterior a la `c`: el tipo de error existe con sus cuatro campos y el conjunto cerrado de **diecisiete** códigos está declarado. **Las siete familias restantes dependen de la familia de error**.
 - [ ] Para las filas que exigen integración: el servicio real levanta y la batería de `GeometriaFactory-Api` corre.
 
 ## 3. Criterios de salida
@@ -67,7 +67,7 @@ Alineados con los **seis** riesgos arquitectónicos de [`../05-Arquitectura-Tecn
 | RQ-01 | Que aparezca una referencia hacia `GeometriaFactory-Domain` y el acoplamiento vuelva por esa vía | Alto | Media | `TC-20` en **cada** etapa, no sólo en la `a`; `QG-02` bloquea la fusión |
 | RQ-02 | **Que un campo nuevo transporte una dirección de servicio o una traza, sin que nadie lo note porque compila** | Alto | Media, y es la forma habitual en que este defecto entra | `TC-15`, más la cadencia de revisión **por cambio de superficie** de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §5 |
 | RQ-03 | Que el listado incorpore un campo del detalle «porque hace falta en una pantalla» | Medio | **Alta**: es la presión natural de la capa de presentación | `TC-09`, con sus tres recuentos en 0, ejecutado en cada etapa que toque la familia de listado |
-| RQ-04 | Que un identificador de código retirado se recicle para otra condición | Medio | Baja, **pero con precedente**: ya hay tres retirados | `TC-16`, que compara los quince vivos contra los tres retirados |
+| RQ-04 | Que un identificador de código retirado se recicle para otra condición | Medio | Baja, **pero con precedente**: ya hay tres retirados | `TC-16`, que compara los diecisiete vivos contra los tres retirados |
 | RQ-05 | Que una de las dos unidades desplegables se despliegue sin la otra tras un cambio incompatible | Alto | Media | `QG-08` y el criterio de salida correspondiente de §3 |
 | RQ-06 | Que aparezca un tipo pensado para que el navegador invoque el servicio de datos | Alto | Baja | `TC-22` |
 | RQ-07 | **Que las pruebas de integración se difieran indefinidamente** porque dependen de un proyecto de código de nivel 3 | Alto: el gate de 100 % de tipos ejercitados quedaría sin medir hasta el final | **Alta**, por construcción del orden topológico | Cada fila de §5 declara qué queda diferido y en qué etapa se ejecuta; el criterio de salida exige declararlo por escrito y no callarlo |
@@ -106,3 +106,4 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara el alcance sobre las **siete** etapas comprometidas que este proyecto de código toca, con la `b` declarada ausente y la fase `i…` declarada fuera del compromiso; **seis** criterios de entrada y **nueve** de salida; **ocho** riesgos de calidad alineados con los seis riesgos arquitectónicos de `05` §9 más dos propios —el diferimiento indefinido de la integración y la confusión de titularidad con las reglas de negocio—; y el plan por etapa **sin fechas ni duraciones**, con la asimetría declarada entre lo que se verifica ya por inspección y lo que queda pendiente de una batería que vive en un proyecto de código de nivel topológico 3. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

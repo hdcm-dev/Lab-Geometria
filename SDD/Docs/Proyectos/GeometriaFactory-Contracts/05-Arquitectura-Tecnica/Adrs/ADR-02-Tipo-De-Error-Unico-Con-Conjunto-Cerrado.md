@@ -1,10 +1,10 @@
-# ADR-02 — Un único tipo de error, con conjunto cerrado de quince códigos
+# ADR-02 — Un único tipo de error, con conjunto cerrado de diecisiete códigos
 
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Comunicación
 
@@ -16,13 +16,13 @@ Todo fallo que cruza la frontera entre las dos unidades desplegables tiene que l
 
 A la vez, RA-03 prohíbe que un mensaje exponga la dirección de un servicio interno. Cada tipo capaz de transportar texto libre hacia la unidad pública es un lugar donde esa prohibición se puede violar, de modo que **la cantidad de tipos de error es una superficie de riesgo**.
 
-El conjunto de códigos tiene historia y conviene tenerla presente al decidir: creció de trece a catorce, a dieciséis y a diecisiete, y **se achicó por primera vez a quince** cuando RN-16 unificó los dos mecanismos de credencial inicial del producto y dos códigos perdieron su causa. El catálogo de la categoría 03 enumera hoy **dieciocho identificadores emitidos —quince vivos y tres retirados—**, y es la única tabla del proyecto de código donde están juntos ([`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §3.2).
+El conjunto de códigos tiene historia y conviene tenerla presente al decidir: creció de trece a catorce, a dieciséis y a diecisiete; **se achicó por primera vez a quince** cuando RN-16 unificó los dos mecanismos de credencial inicial del producto y dos códigos perdieron su causa; y volvió a **diecisiete** cuando el Product Owner incorporó `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que **este proyecto de código emite formalmente** en [`../Contratos-Abstractions.md`](../Contratos-Abstractions.md) §5.1. El catálogo de la categoría 03 enumera hoy **veinte identificadores emitidos —diecisiete vivos y tres retirados—**, y es la única tabla del proyecto de código donde están juntos ([`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §3.2).
 
 Motivación upstream: NB-02, NB-04, NB-08, NB-09; RN-03, RN-09, RN-10, RN-11, RN-13, RN-15, RN-16; RA-03.
 
 ## 2. Decisión
 
-**Un único tipo de error para las ocho familias**, con cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y **un conjunto cerrado de quince códigos vivos**.
+**Un único tipo de error para las ocho familias**, con cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y **un conjunto cerrado de diecisiete códigos vivos**.
 
 Tres reglas que acompañan a la decisión:
 
@@ -64,7 +64,7 @@ La fuente de verdad del conjunto es el contrato de uso [`CU-06`](../../02-Especi
 - El tipo de error declara **exactamente cuatro campos** y **cero** capaces de transportar una dirección de servicio, una ruta de archivo de datos o un valor de secreto.
 - El código es un valor de conjunto cerrado, no una cadena libre.
 - El texto es **neutro**: no nombra el campo que falló cuando eso revelaría información —el canje de credenciales no dice cuál de los dos campos era incorrecto— y nunca contiene una dirección.
-- **Las tres señales declaradas no son códigos de error** y no se cuentan entre los quince: viven en la §6.1 de CU-03, CU-04 y CU-05, y se catalogan precisamente para que no se traten como error.
+- **Las tres señales declaradas no son códigos de error** y no se cuentan entre los diecisiete: viven en la §6.1 de CU-03, CU-04 y CU-05, y se catalogan precisamente para que no se traten como error.
 - Un identificador retirado queda registrado como retirado en el catálogo de 03, tachado y rotulado, y no se reutiliza.
 
 ## 8. Métricas de validación
@@ -73,7 +73,7 @@ La fuente de verdad del conjunto es el contrato de uso [`CU-06`](../../02-Especi
 | --- | --- | --- |
 | Tipos de error del ensamblado | Exactamente **1** | Inspección de la superficie pública |
 | Campos del tipo de error | Exactamente **4**, y **0** capaces de transportar dirección, ruta o secreto | CA-01 de CU-06 |
-| Códigos vivos del conjunto cerrado | Exactamente **15**, sobre **18** identificadores emitidos | CA-09 de CU-06 e inspección del catálogo de 03 §3.2 |
+| Códigos vivos del conjunto cerrado | Exactamente **17**, sobre **20** identificadores emitidos | CA-09 de CU-06 e inspección del catálogo de 03 §3.2 |
 | Códigos producidos fuera del conjunto | Exactamente **0** | Prueba de integración que recorre las condiciones y compara contra el conjunto |
 | Códigos para las operaciones bloqueadas por la marca | Exactamente **1**, para todas las operaciones y para los **2** orígenes | CA-07 y CA-08 de CU-06 |
 | Identificadores retirados reciclados | Exactamente **0** | Inspección del catálogo de 03 |
@@ -90,3 +90,4 @@ La fuente de verdad del conjunto es el contrato de uso [`CU-06`](../../02-Especi
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra el tipo de error único con conjunto cerrado de quince códigos vivos sobre dieciocho identificadores emitidos, las tres reglas que lo acompañan —código justificado por el trabajo del consumidor, cierre por abajo y no reciclado—, cuatro alternativas evaluadas y seis métricas de validación. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **5**. Sube minor. |

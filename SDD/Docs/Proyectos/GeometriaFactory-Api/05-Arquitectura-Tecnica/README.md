@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Tipo de proyecto de código (D8):** `rest-api`
 
@@ -13,7 +13,7 @@
 
 ## 1. Punto de entrada
 
-`GeometriaFactory-Api` es el **proyecto de código principal** del producto y el único que ensambla a los demás: **quince** puntos de acceso, la composición de raíz que conecta los cuatro puertos con sus adaptadores, la guardia de admisión y las dos traducciones que convierten los **quince** códigos vivos del contrato en **diez** códigos de respuesta. Es nivel 3 del orden topológico, el último, y **nadie depende de él por compilación**: lo alcanza `GeometriaFactory-Web` por HTTP, en tiempo de ejecución.
+`GeometriaFactory-Api` es el **proyecto de código principal** del producto y el único que ensambla a los demás: **quince** puntos de acceso, la composición de raíz que conecta los cuatro puertos con sus adaptadores, la guardia de admisión y las dos traducciones que convierten los **diecisiete** códigos vivos del contrato en **diez** códigos de respuesta. Es nivel 3 del orden topológico, el último, y **nadie depende de él por compilación**: lo alcanza `GeometriaFactory-Web` por HTTP, en tiempo de ejecución.
 
 Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los cinco documentos: **acá se decide cómo se dice y no qué se dice**, y **acá es donde dos reglas de negocio se rompen hacia afuera sin que ninguna capa de adentro se entere**. Son `RN-03` —si el trabajo ajeno deja de ser indistinguible del inexistente— y `RN-13` —si un punto de acceso queda fuera de la guardia—. El punto de entrada es [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md).
 
@@ -23,7 +23,7 @@ Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los
 | --- | --- |
 | [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) | Documento maestro: estilo, las cuatro vistas mínimas, cross-cutting, diecisiete NFR, nueve riesgos, trazabilidad de las dieciséis reglas, de los nueve invariantes y de las tres reglas de arquitectura, y diez puntos abiertos |
 | [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) | Índice de las ocho ADR, con la correspondencia contra los cinco temas que el tipo exige y la tabla de consulta rápida por preocupación |
-| [`Contratos-REST.md`](Contratos-REST.md) | Contrato de la superficie: quince puntos, diez códigos de respuesta, **la tabla de traducción de los quince códigos del contrato**, el formato de intercambio y el versionado |
+| [`Contratos-REST.md`](Contratos-REST.md) | Contrato de la superficie: quince puntos, diez códigos de respuesta, **la tabla de traducción de los diecisiete códigos del contrato**, el formato de intercambio y el versionado |
 | [`Adrs/`](Adrs/) | Las ocho decisiones, una por archivo |
 
 ## 3. ADR vigentes
@@ -43,7 +43,7 @@ Ninguna superada, ninguna rechazada.
 
 ## 4. NFR vigentes
 
-Los **diecisiete**, con su objetivo numérico y su mecanismo, están en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §8. En una línea: percentil 99 del listado por debajo de **500 ms** medido en el servidor, **20** peticiones por minuto sostenidas, arranque en frío por debajo de **30 segundos**, cobertura **75 %** de líneas y **70 %** de ramas, pirámide **60/40** invertida a propósito —los cinco rotulados `[ASUNCIÓN]` por el intake—, **4** puntos fuera de la guardia y ni uno más, **0** puntos que fijen contraseña sin credencial, **14 de 15** códigos con traducción declarada y **1** sin destino, **3 de 3** comparaciones de respuestas indistinguibles, **0** respuestas con dirección, ruta, secreto o traza, **1** sola configuración de intercambio en todo el producto, **0** textos alterados en el borde y **0** truncamientos, **4 de 4** puertos conectados, **0** peticiones atendidas con la preparación incompleta, **0** eliminaciones fuera de alcance al forzar la petición, **0** advertencias de construcción y la colección reproducible en **5 pasos o menos**.
+Los **diecisiete**, con su objetivo numérico y su mecanismo, están en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §8. En una línea: percentil 99 del listado por debajo de **500 ms** medido en el servidor, **20** peticiones por minuto sostenidas, arranque en frío por debajo de **30 segundos**, cobertura **75 %** de líneas y **70 %** de ramas, pirámide **60/40** invertida a propósito —los cinco rotulados `[ASUNCIÓN]` por el intake—, **4** puntos fuera de la guardia y ni uno más, **0** puntos que fijen contraseña sin credencial, **16 de 17** códigos con traducción declarada y **1** sin destino, **3 de 3** comparaciones de respuestas indistinguibles, **0** respuestas con dirección, ruta, secreto o traza, **1** sola configuración de intercambio en todo el producto, **0** textos alterados en el borde y **0** truncamientos, **4 de 4** puertos conectados, **0** peticiones atendidas con la preparación incompleta, **0** eliminaciones fuera de alcance al forzar la petición, **0** advertencias de construcción y la colección reproducible en **5 pasos o menos**.
 
 ## 5. Orden de lectura sugerido
 
@@ -82,3 +82,4 @@ Cinco puntos abiertos llegaron a esta categoría desde otras Fases C, y conviene
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de la sección: los cuatro documentos vigentes, las ocho ADR con su estado, los diecisiete NFR en una línea, el orden de lectura de seis pasos, los cuatro artefactos omitidos —dos de ellos con **apartamiento declarado** frente a la guía del tipo, y con el fundamento de la fuente en el caso de la descripción formal de servicio— y el destino de los cinco puntos abiertos que otras Fases C reasignaron a ésta, uno resuelto por completo, dos resueltos en su criterio y abiertos en su número, y dos declarados no resolubles acá. |
 | 1.1 | 2026-08-10 | **Arrastre del cierre del hallazgo `C-05-03` (P2)** del informe de auditoría [`../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0. La fila del formato de intercambio de §7 importaba el número **ocho** de `Contratos-REST.md` §2.2 mientras citaba el fundamento de `ADR-02`, que allí se predica de **seis**. Pasa a declarar el reparto —**ocho filas**, de las cuales seis son reglas de formato y dos no lo son— y a remitir al cuadre **6 + 1 + 1 = 8** que las dos fuentes publican desde sus versiones 1.1. **Ningún documento de la sección, ninguna ADR y ningún NFR cambia.** Sube minor. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |

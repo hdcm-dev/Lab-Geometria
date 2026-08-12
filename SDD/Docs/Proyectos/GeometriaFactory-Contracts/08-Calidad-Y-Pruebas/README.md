@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
 
@@ -64,7 +64,7 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | QG-01 | Compila sin advertencias | Bloqueante |
 | QG-02 | 0 referencias hacia `GeometriaFactory-Domain` | Bloqueante |
 | QG-03 | 0 campos capaces de filtrar hash, clave de firma, dirección, ruta o traza | Se rechaza aunque compile |
-| QG-04 | 15 códigos vivos y 0 producidos fuera del conjunto | Se rechaza aunque compile |
+| QG-04 | 17 códigos vivos y 0 producidos fuera del conjunto | Se rechaza aunque compile |
 | QG-05 | 100 % de los tipos ejercitados por integración **[ASUNCIÓN del intake, sobre la forma del gate]** | **Bloqueante** |
 | QG-06 | Proyección de listado sin texto original, componentes ni comentario **[ASUNCIÓN derivada]** | **Condicionado** |
 | QG-07 | 4 campos en la respuesta de sesión y 0 que impidan operar | Se rechaza aunque compile |
@@ -81,8 +81,8 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | Restricciones transversales | **11** | `02` §6 |
 | Familias de tipos | **8** | `05` §3.1 |
 | NFR | **7** | `05` §8 |
-| Códigos de error vivos | **15** | `05` §7 y `CU-06` §10 |
-| Identificadores de código emitidos | **18**, con **3** retirados | `03` §3.2 |
+| Códigos de error vivos | **17** | `05` §7 y `CU-06` §10 |
+| Identificadores de código emitidos | **20**, con **3** retirados | `03` §3.2 |
 | Señales declaradas que no son error | **3** | `03` §3.3 |
 | Entradas de diagnóstico de construcción | **15**, `DXC-01` a `DXC-15` | `03` §3.1 |
 | Historias de usuario | **22**, **21** comprometidas | `06` `Product-Backlog.md` §4 |
@@ -100,3 +100,4 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`.** Se emitió [`../10-Examples/`](../10-Examples/) en su pasada de diseño, con **tres** contratos de verificación, y con ellos se abrió [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que pasa a ser el **octavo** artefacto de la sección. La fila de §3 se **conserva** con su desenlace y su fecha en lugar de retirarse. Vale una precisión propia de este proyecto de código: como su verificación no vive en `tests/` de acá sino en la batería de integración de `GeometriaFactory-Api` (`PRODUCT-INTAKE` §17.4.P.6), las tres sondas son hoy el **único** instrumento ejecutable que sensa esta superficie. **Ningún gate, umbral, caso de prueba ni recuento de esta sección cambia**, y `QG-05` sigue siendo bloqueante y sin sonda que lo sustituya. |
 | 1.1 | 2026-08-11 | **`H-02` y `H-08`.** La tabla de gates de §4 declaraba a `QG-05` **condicionado** y atribuía los dos condicionados a la asunción `A-4`. `QG-05` pasa a **bloqueante** —§17.4.P.6 lo llama «equivalente y bloqueante» y §22 `A-4` deja a salvo su carácter— y el único condicionado es `QG-06`, respaldado por §17.4.P.10. Se actualizan las versiones de los artefactos revisados. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Contracts`. Lista los **siete** artefactos emitidos, el orden de lectura, los **dos** omitidos con su motivo y su condición de reapertura, los **nueve** quality gates con su carácter y la tabla de recuentos con la fuente de cada uno. Declara además el precedente de forma que constituye la matriz de sensado de deriva de `GeometriaFactory-Web`, que no es de este proyecto de código y no se toca. |
+| 1.3 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |

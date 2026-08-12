@@ -2,9 +2,9 @@
 
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** ADR-06-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Estilo
 
@@ -47,13 +47,13 @@ Y una regla de forma sobre lo que la condición lleva: **ninguna condición de e
 2. El catálogo de 36 condiciones es contable, y por eso se puede verificar en las **dos direcciones**: que toda condición del catálogo tenga prueba, y que ninguna condición emitida esté fuera del catálogo.
 3. La indisponibilidad de un puerto se trata como cualquier otra condición, de modo que el caso de uso de envío termina de forma controlada y el texto original queda intacto.
 4. `RA-03` se sostiene sin esfuerzo: si la condición no lleva texto, no puede llevar una dirección de servicio dentro del texto.
-5. Aguas abajo, `GeometriaFactory-Api` tiene un conjunto finito que traducir, y `GeometriaFactory-Contracts` puede mantener su propio conjunto cerrado de **quince** códigos vivos sin que esta capa lo desborde.
+5. Aguas abajo, `GeometriaFactory-Api` tiene un conjunto finito que traducir, y `GeometriaFactory-Contracts` puede mantener su propio conjunto cerrado de **diecisiete** códigos vivos sin que esta capa lo desborde.
 
 ## 6. Consecuencias negativas y trade-offs
 
 1. **Se acepta la ceremonia en el consumidor.** Cada invocación devuelve algo que hay que mirar. Se compra a cambio de que ningún rechazo se convierta en fallo silencioso, que es lo que el producto viene a eliminar.
 2. **Se acepta que el catálogo tenga que actualizarse antes que el código.** Una condición nueva nace en 03; si alguien la emite primero desde acá, la prueba de inspección en la dirección «emitidas contra catálogo» la va a levantar, y eso es deliberado: el orden correcto es el otro.
-3. **Se acepta que los 36 códigos de esta capa no coincidan con los 15 códigos vivos del contrato del producto.** No es una divergencia: son dos conjuntos con destinatarios distintos, y el mapeo de uno a otro es de `GeometriaFactory-Api`. Colapsarlos habría obligado a esta capa a hablar en el vocabulario de la frontera HTTP, que no conoce.
+3. **Se acepta que los 36 códigos de esta capa no coincidan con los 17 códigos vivos del contrato del producto.** No es una divergencia: son dos conjuntos con destinatarios distintos, y el mapeo de uno a otro es de `GeometriaFactory-Api`. Colapsarlos habría obligado a esta capa a hablar en el vocabulario de la frontera HTTP, que no conoce.
 
 ## 7. Implementación
 
@@ -88,3 +88,4 @@ Y una regla de forma sobre lo que la condición lleva: **ninguna condición de e
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra el resultado tipado como continuación de la decisión del nivel 0, declara el catálogo de 36 condiciones como conjunto cerrado de fuente única en la categoría 03, prohíbe el texto de presentación en la condición, evalúa cuatro alternativas, declara tres trade-offs incluida la no coincidencia con los quince códigos vivos del contrato del producto, y fija seis métricas de validación. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

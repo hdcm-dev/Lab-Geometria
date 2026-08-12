@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Estrategia-Testing.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
 **Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §3.4, §4 y §8; [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.5.P.6, §17.5.P.8, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
@@ -33,17 +33,17 @@
 | Nivel | Qué cubre acá | Porcentaje objetivo | Justificación |
 | --- | --- | --- | --- |
 | Integración | **La batería de integración del producto**: golpea la superficie real **por su protocolo** contra el almacén real, con el proceso levantado en el ambiente de prueba | **60 %** [ASUNCIÓN del intake en cuanto al reparto] | Lo declara el intake §17.5.P.6. Un host delgado no tiene lógica propia que probar en aislamiento: lo que hay que verificar es **que el cable esté conectado**, y eso sólo se ve ejerciéndolo. Es además la batería a la que el intake §17.3.P.6 le asigna **la persistencia real** de `GeometriaFactory-Infrastructure` |
-| Unit | La **traducción de motivos y códigos**, que es la única pieza con lógica propia; y las pruebas de inspección estructural | **40 %** [ASUNCIÓN en cuanto al reparto] | El traductor se puede recorrer entero sobre los **quince** códigos sin levantar el proceso, y hacerlo unitario lo vuelve barato de reejecutar. Las inspecciones —los cuatro puntos fuera de la guardia, los cuatro puertos conectados— también |
+| Unit | La **traducción de motivos y códigos**, que es la única pieza con lógica propia; y las pruebas de inspección estructural | **40 %** [ASUNCIÓN en cuanto al reparto] | El traductor se puede recorrer entero sobre los **diecisiete** códigos sin levantar el proceso, y hacerlo unitario lo vuelve barato de reejecutar. Las inspecciones —los cuatro puntos fuera de la guardia, los cuatro puertos conectados— también |
 | Extremo a extremo con la persona | — | **0 %** | **No aplica acá y se declara así en lugar de omitirse.** El recorrido de una persona pasa por `GeometriaFactory-Web`, y su verificación es el guion de demostración de ese proyecto de código. Acá lo más cerca de un recorrido es la **colección de peticiones reproducible** de `CU-12`, que el intake declara como forma de demostración de este tipo de proyecto de código y que **no es una prueba automatizada** |
 
-**El apartamiento invierte la pirámide y hay que decir qué se paga por eso.** Una batería mayoritariamente de integración es más lenta y más frágil que una unitaria, y su diagnóstico es más caro. Lo que la mantiene sana acá es que **las propiedades más peligrosas del proyecto de código no dependen de ejercer el cable sino de contarlo**: los cuatro puntos fuera de la guardia, los catorce códigos con destino, las tres familias indistinguibles, los cuatro puertos conectados y la única configuración de intercambio se verifican con **inspecciones de umbral exacto**, que son unitarias y baratas.
+**El apartamiento invierte la pirámide y hay que decir qué se paga por eso.** Una batería mayoritariamente de integración es más lenta y más frágil que una unitaria, y su diagnóstico es más caro. Lo que la mantiene sana acá es que **las propiedades más peligrosas del proyecto de código no dependen de ejercer el cable sino de contarlo**: los cuatro puntos fuera de la guardia, los dieciséis códigos con destino, las tres familias indistinguibles, los cuatro puertos conectados y la única configuración de intercambio se verifican con **inspecciones de umbral exacto**, que son unitarias y baratas.
 
 **Lo que la regla exige y acá se cumple con creces**: `Rules-Calidad-Y-Pruebas.md` §2.2 pide **100 % de endpoints cubiertos por contract test**. Acá los **quince** puntos de acceso se ejercen en la batería de integración, y además la tabla de traducción se recorre entera en las dos direcciones.
 
 **Tres clases de verificación que conviene nombrar aparte:**
 
 - **Prueba de integración por protocolo.** Levanta el proceso y golpea un punto de acceso con su verbo, su cuerpo y su cabecera de autorización, contra el almacén real.
-- **Prueba de inspección con umbral exacto.** Recorre un conjunto cerrado —los quince puntos, los quince códigos, los cuatro puertos— y compara **en las dos direcciones**. Su umbral no admite gradación.
+- **Prueba de inspección con umbral exacto.** Recorre un conjunto cerrado —los quince puntos, los diecisiete códigos, los cuatro puertos— y compara **en las dos direcciones**. Su umbral no admite gradación.
 - **Verificación forzando la petición.** La que ejerce una acotación **sin pasar por la interfaz**. Es el único criterio de verificación del producto que la fuente exige ejercer así contra esta superficie, y es `TC-20`.
 
 ## 2. Cobertura mínima por capa
@@ -54,7 +54,7 @@ La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Ar
 
 **Con qué autoridad baja, y qué hace falta para sostenerlo.** El número no lo elige esta categoría: lo fija el intake §17.5.P.6 y viene rotulado **[ASUNCIÓN]**, de modo que el apartamiento es de la fuente del producto y no una relajación de la Fase E. Pero **la autoridad de la fuente no reemplaza a la ADR que §2.2 exige**: mientras el 75 % siga vigente, este proyecto de código queda con **un apartamiento de la guía declarado y sin ADR**, y **cerrarlo es de la categoría 05**, que es donde viven las ADR. Queda registrado como hueco en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8. **Esta categoría no sube el número por su cuenta** —hacerlo sería contradecir la fuente— **ni lo da por justificado por venir de ella**.
 
-**Qué compensa la caída, que no es un argumento para no declararla.** El piso global es un promedio y los componentes donde un defecto no se nota suben muy por encima: la guardia de admisión y el traductor a **95/90**, la superficie de acceso y la de trabajos a **80/75**, el arranque a **85/80**. Y los cuatro conjuntos contables del cierre de esta sección —15 puntos, 15 códigos, 4 puertos, 4 puntos fuera de la guardia— **no admiten promedio**: se cumplen enteros o no se cumplen. El **100 % de endpoints cubiertos por contract test** que la misma fila de §2.2 exige **se cumple**, y §1 lo declara.
+**Qué compensa la caída, que no es un argumento para no declararla.** El piso global es un promedio y los componentes donde un defecto no se nota suben muy por encima: la guardia de admisión y el traductor a **95/90**, la superficie de acceso y la de trabajos a **80/75**, el arranque a **85/80**. Y los cuatro conjuntos contables del cierre de esta sección —15 puntos, 17 códigos, 4 puertos, 4 puntos fuera de la guardia— **no admiten promedio**: se cumplen enteros o no se cumplen. El **100 % de endpoints cubiertos por contract test** que la misma fila de §2.2 exige **se cumple**, y §1 lo declara.
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -70,7 +70,7 @@ La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Ar
 
 **De dónde sale cada número, sin mezclarlos.** El 75/70 global es del intake y viene rotulado **[ASUNCIÓN]**. El **mutation score de 60 %** no lo declara ninguna fuente del producto **ni la fila que le corresponde a este proyecto de código en la guía**: §2.2 lo fija para el tipo **`library`** —«mutation score >= 60 % en dominio»— y la fila **`rest-api`**, que es la de este proyecto de código, **no pide mutation score**. Esta categoría lo adopta igual, tomándolo prestado de la fila `library`, porque el traductor de motivos y códigos es la clase de lógica que un puntaje de mutación sí sabe interrogar. **Es más exigencia que la que la guía le pide, no menos**, y se declara así para que nadie lo lea como una obligación de §2.2 sobre `rest-api`. Los valores por encima del piso los sube esta categoría con el fundamento de la columna.
 
-**Además de la cobertura de líneas hay una cobertura contable que no admite promedio**: **15 de 15** puntos de acceso ejercidos, **15 de 15** códigos del contrato recorridos, **4 de 4** puertos conectados y **4** puntos fuera de la guardia. Ésas se cumplen o no se cumplen.
+**Además de la cobertura de líneas hay una cobertura contable que no admite promedio**: **15 de 15** puntos de acceso ejercidos, **17 de 17** códigos del contrato recorridos, **4 de 4** puertos conectados y **4** puntos fuera de la guardia. Ésas se cumplen o no se cumplen.
 
 ## 3. Tooling
 
@@ -102,7 +102,7 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 | --- | --- |
 | Cobertura de la guardia | Para todo punto de acceso de los quince, o está dentro de la guardia, o pertenece al conjunto declarado de **cuatro** exenciones. No hay tercera posibilidad |
 | Indistinguibilidad | Para cada una de las tres familias empobrecidas, las dos respuestas comparadas son idénticas en cuerpo y en código de respuesta |
-| Conjunto cerrado de códigos | Para toda respuesta de fallo, el código del contrato que lleva pertenece al conjunto cerrado de **quince**, y su código de respuesta es el que la tabla de traducción declara |
+| Conjunto cerrado de códigos | Para toda respuesta de fallo, el código del contrato que lleva pertenece al conjunto cerrado de **diecisiete**, y su código de respuesta es el que la tabla de traducción declara |
 | Integridad del texto | Para todo texto enviado y aceptado, lo guardado es idéntico carácter por carácter; y para todo texto por encima del límite, **se rechaza y no se trunca** |
 
 ## 5. Mocks y fixtures
@@ -113,7 +113,7 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 | Sustitución | Cuándo | Por qué |
 | --- | --- | --- |
-| Resultados tipados de la capa de aplicación | Las pruebas unitarias del **traductor** | Recorrer los quince códigos por la superficie exigiría provocar quince estados del sistema; el traductor se verifica entero sobre el conjunto cerrado sin levantar el proceso |
+| Resultados tipados de la capa de aplicación | Las pruebas unitarias del **traductor** | Recorrer los diecisiete códigos por la superficie exigiría provocar quince estados del sistema; el traductor se verifica entero sobre el conjunto cerrado sin levantar el proceso |
 | Preparación del almacén **que falla** | `TC-31` | Es la única forma de verificar que **no se atiende ninguna petición** con la preparación incompleta |
 | Ausencia de un adaptador | `TC-28` | Verifica que la composición de raíz **falla en construcción** y no en la primera petición |
 
@@ -165,3 +165,4 @@ Fixtures compartidos:
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-06`.** §2 fijaba el piso global en 75/70 **sin compararlo con la guía**, siendo el único de los siete proyectos de código cuyo piso **baja**: `Rules-Calidad-Y-Pruebas.md` §2.2 fija 80 % de aplicación para el tipo `rest-api` y exige un **ADR** para bajar cobertura. §2 declara ahora el apartamiento, con qué autoridad se hace —el intake §17.5.P.6, rotulado [ASUNCIÓN]—, que **la autoridad de la fuente no reemplaza a la ADR**, y qué lo compensa. **`H-08`.** El mutation score de 60 % se atribuía a §2.2 sin decir que esa tabla lo pide para el tipo `library` y no para `rest-api`. **Ningún umbral se toca**: el 75/70 no se sube ni se da por justificado por venir de la fuente. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la pirámide objetivo **invertida** —60 integración, 40 unitario, 0 de extremo a extremo con la persona—, con el motivo que el intake §17.5.P.6 declara y con lo que esa inversión cuesta dicho sin adornos, más las inspecciones de umbral exacto que la compensan. Declara la cobertura por los **ocho** componentes, con el piso más bajo del producto y con la guardia de admisión y el traductor muy por encima de él, y la cobertura contable que no admite promedio. Declara el tooling por función, la política de **cero dobles en la batería de integración** con las tres sustituciones admitidas fuera de ella, y el uso de los **ocho** escenarios del intake §20 **como cuerpo de petición**, con la precisión de que esta capa verifica el borde y no la interpretación. Declara el ambiente, incluida la ausencia de canal de sesión interactiva y de intercambio de origen cruzado, y la constancia de que los tres tiempos declarados son **del servicio y no de la suite**. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **7**. Sube minor. |

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
 **Trazabilidad upstream:** los **diez** casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) y las **trece** restricciones transversales de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6; las **treinta** historias de [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/); las **once** superficies y la línea de base de [`../03-UX-UI-DX/`](../03-UX-UI-DX/); los **catorce** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8; las **61** filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.2; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §20 y §21
@@ -421,15 +421,15 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
-#### TC-31 — Quince-Codigos-Vivos-Traducidos-Sin-Exponer-Nada
+#### TC-31 — Diecisiete-Codigos-Vivos-Traducidos-Sin-Exponer-Nada
 
 | Campo | Valor |
 | --- | --- |
 | Tipo | Inspección estructural, más barrido de la microcopy |
 | Cubre | `RA-03`; `RT-03`; NFR de mensajes que exponen (`05` §8); `QG-08`; sondas `SD-57`, `SD-58` |
-| Setup | El traductor de condiciones, y el conjunto de los **quince** códigos vivos del contrato de `GeometriaFactory-Contracts` |
-| Pasos | Given los quince códigos **y** el camino de **ausencia de respuesta**, When se recorre la traducción de cada uno, Then los **dieciséis** mensajes resultantes **no incluyen dirección de servicio, nombre de archivo de datos, traza ni código de error**. Then cada uno dice **qué pasó, por qué y qué hacer**. Given un barrido de toda la microcopy visible, Then `Pendiente` aparece **siempre calificado** donde conviven los dos referentes |
-| Salida esperada | **15 de 15** códigos traducidos más el camino de ausencia, con **0** exposiciones. El traductor es el único lugar por el que un mensaje llega a la persona, lo que hace la propiedad verificable en un solo punto |
+| Setup | El traductor de condiciones, y el conjunto de los **diecisiete** códigos vivos del contrato de `GeometriaFactory-Contracts` |
+| Pasos | Given los diecisiete códigos **y** el camino de **ausencia de respuesta**, When se recorre la traducción de cada uno, Then los **dieciséis** mensajes resultantes **no incluyen dirección de servicio, nombre de archivo de datos, traza ni código de error**. Then cada uno dice **qué pasó, por qué y qué hacer**. Given un barrido de toda la microcopy visible, Then `Pendiente` aparece **siempre calificado** donde conviven los dos referentes |
+| Salida esperada | **17 de 17** códigos traducidos más el camino de ausencia, con **0** exposiciones. El traductor es el único lugar por el que un mensaje llega a la persona, lo que hace la propiedad verificable en un solo punto |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -505,3 +505,4 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-03`.** El campo «Cubre» de `TC-20` atribuía a `PT-03` la sincronización del árbol y la escena por índice, que el intake §17.7.P.8 declara parte de **`PT-02`**; y el recuento de §3 daba `PT-03` por ejercido en `TC-20` y `TC-21`. Corregidos los dos: `PT-03` —el motor dentro del bundle y la página sin acceso a CDN— **no tiene caso propio acá** y se verifica del lado de `GeometriaFactory-Visor`. **Ningún caso de prueba, paso ni salida esperada cambia**, y los **35** casos siguen siendo 35. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **treinta y cinco** casos de verificación, `TC-01` a `TC-35`, repartidos en siete grupos, cada uno con sus ocho campos y con su upstream explícito, incluidas las sondas `SD-XX` de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) que cada uno ejerce **sin redefinir su umbral**. Incluye **seis** casos que verifican **forzando la solicitud sin pasar por la pantalla**, que es obligatorio porque esta pieza no hace cumplir reglas; **cinco** inspecciones estructurales con umbral cero para `RA-01`, `RA-02` y `RA-03`; y los casos de las puertas técnicas `PT-01`, `PT-02` y `PT-03`. Todos los estados dicen `Pendiente` y todas las salidas observadas dicen «Sin ejecutar». Los **ocho** escenarios del intake §20 entran **en su forma original y completa**, sin sustituirse por datos sintéticos. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **4**. Sube minor. |

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Mini-Plan.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Scrum Master + API PM (AG-07)
 **Tipo de proyecto de código (D8):** `rest-api`
 **Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) **1.1** (seis épicas, treinta historias), [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) 1.0 (veintiséis tareas técnicas) y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §2.2, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §2, §10, §13, §15, §16.1, §17.5, §18 y §22; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §4, §5, §8, §9 y §11
@@ -163,7 +163,7 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 Criterios específicos que este plan agrega:
 
 1. **La actualización de la categoría 11 forma parte del cierre.** La categoría 11 de este proyecto de código todavía no está emitida; hasta su emisión la condición se cumple de forma vacía y **se registra así en el informe de cierre**.
-2. **Las dos inspecciones se corren en cada etapa que agregue un punto o un código**, no sólo en la que las introdujo: los quince puntos contra la guardia y los quince códigos contra la tabla de traducción, **las dos en las dos direcciones**.
+2. **Las dos inspecciones se corren en cada etapa que agregue un punto o un código**, no sólo en la que las introdujo: los quince puntos contra la guardia y los diecisiete códigos contra la tabla de traducción, **las dos en las dos direcciones**.
 3. **Las dos pruebas de criterio propio del producto se ejecutan y pasan**: la **eliminación forzada contra la superficie** —el único criterio que la fuente exige ejercer así— y la del **texto byte a byte con rechazo sin truncamiento**.
 4. **Ningún guion de prueba que involucre el texto de figuras usa datos inventados**: los cuerpos son los escenarios `E-1` a `E-8` del intake §20.
 5. **Los cinco valores rotulados [ASUNCIÓN] se usan como vigentes y la puerta de cobertura no se declara bloqueante en 09** hasta que BT-25 cierre.
@@ -190,7 +190,7 @@ Una etapa de este proyecto de código está hecha cuando:
 - [ ] Todas sus historias y tareas comprometidas en §3 están en estado terminado.
 - [ ] Los criterios comunes a toda transición de [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5.1 se cumplen, incluida la no regresión sin correcciones.
 - [ ] Los criterios propios de la transición correspondiente de su §5.2 que alcanzan a este proyecto de código se cumplen.
-- [ ] **Las dos inspecciones en las dos direcciones pasan**: los quince puntos contra la guardia y los quince códigos contra la tabla de traducción.
+- [ ] **Las dos inspecciones en las dos direcciones pasan**: los quince puntos contra la guardia y los diecisiete códigos contra la tabla de traducción.
 - [ ] La batería de integración corre entera contra el servicio real y el almacén real.
 - [ ] Para la etapa `a`: **`PT-04` está medida** y está verificado que **la sesión interactiva del front no llega hasta acá**.
 - [ ] Para la etapa `e`: la **eliminación forzada** y la prueba del **texto byte a byte** pasan.
@@ -230,3 +230,4 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Api`, proyecto de código principal del producto. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con los cuatro omitidos— y por qué no se declara capacidad numérica, con el fundamento propio de que **cinco de los diecisiete requerimientos no funcionales ya vienen rotulados como asunción**, la mayor concentración del producto. Fija el objetivo de cada uno de los **seis** tramos que este proyecto de código toca, compromete las **30** historias y las **26** tareas técnicas del backlog de 06 sin inventar ningún identificador, declara el orden de construcción con las cuatro decisiones de frontera en la etapa `a` y con las tres reglas de dependencia interna que ninguna tarea puede cruzar, referencia la Definition of Done por destino con la constancia de que 08 todavía no está emitida, y declara **nueve** riesgos con mitigación, tres de ellos de impacto **muy alto**, incluidos los dos por los que esta capa puede romper una regla de negocio hacia afuera sin que ninguna capa de adentro se entere. |
 | 1.1 | 2026-08-11 | **Actualiza la trazabilidad upstream** a la versión del `Product-Backlog.md` de la sección 06, que subieron a **1.1** el 2026-08-11. El `Product-Backlog.md` subió al absorber la promoción de `F-13` a `Must Have` (`PRODUCT-INTAKE` **1.19** §4) y al declarar la regularidad de la distribución MoSCoW (hallazgo `D-06-03`). **Ninguna historia ni tarea técnica de este proyecto de código cambia de prioridad, de etapa ni de tramo**, y ningún compromiso, riesgo ni orden de construcción de este plan se toca: la fila existe para que la versión citada sea la vigente y no una que ya no está. Sube minor. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

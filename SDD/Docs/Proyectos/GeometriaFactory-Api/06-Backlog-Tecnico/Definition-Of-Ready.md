@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Definition-Of-Ready.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Scrum Master + API Product Owner (AG-06)
 **Trazabilidad upstream:** [`Product-Backlog.md`](Product-Backlog.md) 1.0 §5; [`Backlog-Tecnico.md`](Backlog-Tecnico.md) 1.0 §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.3 §3, §4 y §6; [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) 1.3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §3.1, §3.4, §8 y §9; [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md); [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §5.1
 **Trazabilidad downstream:** `07-Plan-Sprint` de GeometriaFactory-Api
@@ -32,7 +32,7 @@ Ocho criterios, todos respondibles con sí o no. Los cuatro últimos son propios
 3. **Tiene criterios de aceptación en Given/When/Then, con al menos dos escenarios**, uno de camino feliz y uno de borde.
 4. **Declara el punto de acceso que la realiza**, de los **quince** de `Definicion-Superficie-HTTP.md` §3, o declara que no realiza ninguno; y el componente de `05` §3.1 que lo aloja.
 5. **Declara si su punto está bajo la guardia.** Si no lo está, declara **cuál de las cuatro ausencias declaradas** es y por qué. Una historia que agregue un punto y no diga nada de la guardia **no está lista**: es el defecto de omisión que rompe `RN-13` **sin que nada falle**.
-6. **Toda condición que la historia transporta es uno de los quince códigos vivos** del conjunto cerrado de `GeometriaFactory-Contracts`, con su destino declarado en la tabla de traducción. Una historia que necesite un código nuevo **no está lista**: los códigos **no se acuñan acá**, y donde el conjunto no tiene código **se usa el genérico y se declara el hueco**.
+6. **Toda condición que la historia transporta es uno de los diecisiete códigos vivos** del conjunto cerrado de `GeometriaFactory-Contracts`, con su destino declarado en la tabla de traducción. Una historia que necesite un código nuevo **no está lista**: los códigos **no se acuñan acá**, y donde el conjunto no tiene código **se usa el genérico y se declara el hueco**.
 7. **Declara que no decide qué se dice.** Una historia que decida un estado, una admisibilidad, una pertenencia sobre el dato o qué campos cruzan la frontera **está mal ubicada**: `02` §4 lo enuncia en una línea.
 8. **Si su respuesta pertenece a una de las tres familias deliberadamente empobrecidas, lo declara.** Son tres —credenciales inválidas sin declarar qué campo falló, recurso que no se ve sin distinguir inexistente de ajeno de fuera de alcance, y correo ya registrado sin declarar situación ni papel—, y en las tres **es la decisión y no el defecto**.
 
@@ -69,7 +69,7 @@ Seis criterios, todos respondibles con sí o no.
 
 1. El **punto de control bloqueante** de cada etapa (`PRODUCT-INTAKE` §15), que es además donde se validan las **rutas y los verbos** de los quince puntos.
 2. La puerta de **imagen** del pipeline, que exige que se construya con el archivo multietapa, **arranque, aplique las transformaciones sobre un almacén vacío y responda salud**. Es `PT-04`.
-3. **Las dos inspecciones en las dos direcciones**: los quince puntos contra la guardia, y los quince códigos contra la tabla de traducción. No dependen de que alguien las revise: se corren, y son las únicas que detectan un defecto de **omisión**.
+3. **Las dos inspecciones en las dos direcciones**: los quince puntos contra la guardia, y los diecisiete códigos contra la tabla de traducción. No dependen de que alguien las revise: se corren, y son las únicas que detectan un defecto de **omisión**.
 
 ## 5. Qué no es esta DoR
 
@@ -77,10 +77,11 @@ Seis criterios, todos respondibles con sí o no.
 
 **No define la superficie.** Los **quince** puntos de acceso, sus verbos y sus códigos de respuesta están en `Definicion-Superficie-HTTP.md` y en [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md); esta DoR exige que la historia **declare** su punto, no que lo rediseñe.
 
-**Y no redacta reglas de negocio ni códigos del contrato.** Las **dieciséis** reglas viven en `GeometriaFactory-Domain` y los **quince** códigos vivos en `GeometriaFactory-Contracts`. Esta capa **no agrega, no renombra y no traduce a texto** ningún código.
+**Y no redacta reglas de negocio ni códigos del contrato.** Las **dieciséis** reglas viven en `GeometriaFactory-Domain` y los **diecisiete** códigos vivos en `GeometriaFactory-Contracts`. Esta capa **no agrega, no renombra y no traduce a texto** ningún código.
 
 ## 6. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara **ocho** criterios de entrada para las historias —cuatro propios de este proyecto de código: el punto de acceso que la realiza, si ese punto está bajo la guardia, que la historia no decida qué se dice, y que declare si su respuesta pertenece a una de las tres familias deliberadamente empobrecidas— y **seis** para las tareas técnicas, incluido el que exige comparar contra una lista **en las dos direcciones** cuando la tarea toca la superficie. Declara seis casos de excepción, dos de ellos negativos y sin excepción posible, y dos que recogen los únicos dos casos de uso del proyecto de código que no trazan a ninguna necesidad. Declara el aprobador con la constancia de que el filtro más duro son las dos inspecciones en las dos direcciones, y la delimitación contra la Definition of Done, contra la superficie y contra el conjunto cerrado de códigos. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |

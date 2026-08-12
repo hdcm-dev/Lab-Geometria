@@ -2,9 +2,9 @@
 
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** ADR-04-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Comunicación
 
@@ -16,7 +16,7 @@ Una petición que falla atraviesa **dos** traducciones antes de convertirse en u
 
 El caso más caro tiene nombre. `RN-03` exige que el trabajo ajeno responda «no encontrado» y **nunca** «no autorizado», y la capa de aplicación declara que quien traduce su motivo es **el consumidor**, que es este proyecto de código. Elegir el número informativo en lugar del correcto confirma la existencia de un recurso ajeno y permite averiguar por tanteo qué identificadores existen.
 
-Y hay una restricción que atraviesa todo: **el conjunto de códigos del contrato es cerrado y tiene quince códigos vivos**, unión de los que declaran los ocho contratos de uso de `GeometriaFactory-Contracts`. Sobre **dieciocho** identificadores que ese ensamblado emitió a lo largo de su historia, **tres quedaron retirados y ninguno se recicla**: el del texto no interpretable, que dejó de describir un fallo cuando el envío pasó a ser la acción única de guardado, y los dos que `RN-16` volvió imposibles al unificar el mecanismo de credencial inicial. Esta capa **no agrega ninguno**.
+Y hay una restricción que atraviesa todo: **el conjunto de códigos del contrato es cerrado y tiene diecisiete códigos vivos**, unión de los que declaran los ocho contratos de uso de `GeometriaFactory-Contracts`. Sobre **veinte** identificadores que ese ensamblado emitió a lo largo de su historia, **tres quedaron retirados y ninguno se recicla**: el del texto no interpretable, que dejó de describir un fallo cuando el envío pasó a ser la acción única de guardado, y los dos que `RN-16` volvió imposibles al unificar el mecanismo de credencial inicial. Esta capa **no agrega ninguno**.
 
 Motivación upstream: NB-04, NB-08, NB-09; RN-02, RN-03, RN-06, RN-09, RN-10, RN-15; INV-01, INV-02, INV-07; `PRODUCT-INTAKE` §14 (RA-03), §17.5.P.5, §17.5.P.10.
 
@@ -24,7 +24,7 @@ Motivación upstream: NB-04, NB-08, NB-09; RN-02, RN-03, RN-06, RN-09, RN-10, RN
 
 **Un único traductor, transversal a los quince puntos, con una única tabla, y ningún camino de fallo que lo evite.** Seis reglas:
 
-1. **La tabla de traducción es una sola y vive en [`../Contratos-REST.md`](../Contratos-REST.md) §5**, con **quince** filas para los quince códigos vivos: **catorce con destino** y **uno declarado sin destino**, porque describe la ausencia de respuesta de esta pieza y **una respuesta con ese código sería una contradicción en sus términos**.
+1. **La tabla de traducción es una sola y vive en [`../Contratos-REST.md`](../Contratos-REST.md) §5**, con **diecisiete** filas para los diecisiete códigos vivos: **dieciséis con destino** y **uno declarado sin destino**, porque describe la ausencia de respuesta de esta pieza y **una respuesta con ese código sería una contradicción en sus términos**.
 2. **Ningún código se inventa, se renombra ni se traduce a texto.** Donde el conjunto cerrado no tiene un código para un camino, el que corresponde es el genérico y **el hueco se declara**. Hay **dos** huecos declarados, y son el motivo por el que el código genérico tiene **cuatro** destinos en lugar de dos.
 3. **Dos respuestas no llevan ningún código del contrato, y la ausencia es deliberada**: el `401` de la guardia —acceso ausente, vencido o con firma que no corresponde— y el `400` de una petición que **no llega a ser el tipo del contrato**. Las dos ocurren **antes** de que haya un contrato con el que hablar.
 4. **Tres familias dicen menos de lo que el servicio sabe, y en las tres es la decisión y no el defecto**: credenciales inválidas sin declarar qué campo falló, recurso que no se ve sin distinguir inexistente de ajeno de fuera de alcance, y correo ya registrado sin declarar la situación ni el papel de la cuenta que lo ocupa. **Una sola prueba las cubre a las tres**: comparar dos respuestas que deberían ser indistinguibles y verificar que lo son.
@@ -41,7 +41,7 @@ Motivación upstream: NB-04, NB-08, NB-09; RN-02, RN-03, RN-06, RN-09, RN-10, RN
 
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
-| Traductor único con tabla única y huecos declarados (**adoptada**) | La unidad de verificación es el **conjunto cerrado**, no el punto de acceso: se prueba recorriendo quince códigos y no quince rutas; los huecos quedan visibles en lugar de naturalizados | Un código genérico con cuatro destinos es menos preciso de lo que el producto sabe ser en todos los demás lugares |
+| Traductor único con tabla única y huecos declarados (**adoptada**) | La unidad de verificación es el **conjunto cerrado**, no el punto de acceso: se prueba recorriendo diecisiete códigos y no quince rutas; los huecos quedan visibles en lugar de naturalizados | Un código genérico con cuatro destinos es menos preciso de lo que el producto sabe ser en todos los demás lugares |
 | Traducción declarada punto por punto | Cada punto se lee entero | **Descartada.** La unidad de verificación pasaría a ser la ruta, y un código del conjunto cerrado sin traducción en algún punto no se detectaría; además `RN-03` podría traducirse distinto en dos puntos |
 | Inventar los dos códigos que faltan en el conjunto cerrado | Cerraría los dos huecos y daría precisión donde hoy no la hay | **Descartada.** Los códigos son del ensamblado de contratos, y agregarlos es **decisión de aquel proyecto de código y del Product Owner**. Inventarlos acá los propagaría a 06, 08 y 10 como si fueran de la fuente |
 | Responder «no autorizado» ante un trabajo ajeno, que es lo que el servicio sabe | Más informativo para el consumidor | **Descartada por `RN-03`**, que lo prohíbe por escrito y declara el criterio de verificación: pedir el trabajo de otro alumno devuelve «no encontrado» |
@@ -50,7 +50,7 @@ Motivación upstream: NB-04, NB-08, NB-09; RN-02, RN-03, RN-06, RN-09, RN-10, RN
 ## 5. Consecuencias positivas
 
 1. `RN-03` queda sostenida por una prueba directa y no por una convención: dos respuestas comparadas y verificadas indistinguibles.
-2. La cobertura de traducción se verifica **en las dos direcciones** sobre un conjunto de quince, que es un objeto finito y estable.
+2. La cobertura de traducción se verifica **en las dos direcciones** sobre un conjunto de diecisiete, que es un objeto finito y estable.
 3. Los **dos** huecos del conjunto cerrado quedan declarados y elevados, en lugar de tapados con un código inventado que después nadie podría quitar.
 4. `RN-09` cruza la frontera sin recortarse: la posición y el campo viajan en el cuerpo del error del contrato.
 5. `RA-03` queda exigible con una prueba de inspección sobre las respuestas de los quince puntos y sobre el registro del servidor.
@@ -65,7 +65,7 @@ Motivación upstream: NB-04, NB-08, NB-09; RN-02, RN-03, RN-06, RN-09, RN-10, RN
 ## 7. Implementación
 
 - El traductor de motivos y códigos de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde se elige un código de respuesta.
-- La tabla completa, con sus **quince** filas, está en [`../Contratos-REST.md`](../Contratos-REST.md) §5, y **este documento no la duplica**.
+- La tabla completa, con sus **diecisiete** filas, está en [`../Contratos-REST.md`](../Contratos-REST.md) §5, y **este documento no la duplica**.
 - **Convención impuesta:** ningún punto de acceso elige un código de respuesta por su cuenta, ni siquiera para un caso «obvio».
 - **Convención impuesta:** un motivo interno nuevo que no tenga código del contrato usa el genérico **y agrega una fila a la lista de huecos**, que se eleva al Product Owner. No se inventa un código.
 - La prueba de 08 recorre el conjunto cerrado, **no los puntos de acceso**: es **una prueba por código**, no una por ruta.
@@ -74,7 +74,7 @@ Motivación upstream: NB-04, NB-08, NB-09; RN-02, RN-03, RN-06, RN-09, RN-10, RN
 
 | Métrica | Objetivo | Cómo se mide |
 | --- | --- | --- |
-| Códigos del contrato con traducción declarada | **14 de 15**, con **1** sin destino y su motivo | Prueba de inspección contra [`../Contratos-REST.md`](../Contratos-REST.md) §5, **en las dos direcciones** |
+| Códigos del contrato con traducción declarada | **16 de 17**, con **1** sin destino y su motivo | Prueba de inspección contra [`../Contratos-REST.md`](../Contratos-REST.md) §5, **en las dos direcciones** |
 | Códigos inventados o renombrados por esta capa | Exactamente **0** | Inspección contra el conjunto cerrado de `GeometriaFactory-Contracts` |
 | Respuestas de esta superficie con el código que describe la ausencia de respuesta | Exactamente **0** | Prueba de inspección: sería una contradicción en sus términos |
 | Comparaciones de respuestas indistinguibles que dan idénticas | **3 de 3** | Trabajo ajeno contra inexistente; correo inválido contra contraseña inválida; correo ocupado por cuenta habilitada contra ocupado por cuenta bloqueada |
@@ -96,3 +96,4 @@ Motivación upstream: NB-04, NB-08, NB-09; RN-02, RN-03, RN-06, RN-09, RN-10, RN
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Fija el traductor único con tabla única sobre los **quince** códigos vivos del conjunto cerrado —catorce con destino y uno declarado sin él—, las dos respuestas sin código, las tres familias deliberadamente empobrecidas con la prueba que las cubre a las tres, las dos señales que viajan en respuestas exitosas y la prohibición de `RA-03` con su contracara de registro. Declara los **dos** huecos del conjunto cerrado como el síntoma medible de los cuatro destinos del código genérico, en lugar de inventar identificadores. Evalúa cinco alternativas, declara cuatro trade-offs y fija ocho métricas de validación. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **6**. Sube minor. |

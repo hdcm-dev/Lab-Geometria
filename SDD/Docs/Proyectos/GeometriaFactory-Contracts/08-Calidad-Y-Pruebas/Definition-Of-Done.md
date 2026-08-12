@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Definition-Of-Done.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md); [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.4.P.3
@@ -38,7 +38,7 @@
 - [ ] Los `TC-XX` de **inspección de superficie** de esa historia están escritos y en verde. **Se valida** con la salida de la inspección.
 - [ ] Los `TC-XX` de **integración** de esa historia están en verde, **o declarados diferidos por escrito** con la etapa en que se ejecutan. **Se valida** con el informe de cierre.
 - [ ] La historia no introdujo ningún campo capaz de transportar el hash de la contraseña, la clave de firma, una dirección de servicio interno, una ruta de archivo de datos ni una traza. **Se valida** con `TC-15` sobre la familia que la historia toca. **Es el criterio 6 de la DoR verificado del lado del cierre.**
-- [ ] Todo código de error que la historia usa pertenece al conjunto cerrado de **quince**. **Se valida** con `TC-16`.
+- [ ] Todo código de error que la historia usa pertenece al conjunto cerrado de **diecisiete**. **Se valida** con `TC-16`.
 - [ ] La historia **no redactó ninguna regla de negocio**. **Se valida** leyendo su tabla de trazabilidad: las reglas se refieren por identificador a `GeometriaFactory-Domain`.
 - [ ] Si la historia agregó o quitó un valor de un conjunto cerrado, el cambio está declarado como incompatible en el `§17` del contrato de uso. **Se valida** leyendo esa sección.
 - [ ] El ensamblado compila sin advertencias. **Se valida** con `scripts/build.sh`.
@@ -71,7 +71,7 @@ Se aplica cuando las **siete** etapas comprometidas que este proyecto de código
 - [ ] Los **veinticinco** criterios de [`Criterios-Validacion.md`](Criterios-Validacion.md) están evaluados uno por uno, con su resultado registrado.
 - [ ] **8 de 8** contratos de uso, **21 de 21** historias comprometidas y **16 de 16** reglas con caso de prueba en verde. **Se valida** con los recuentos de la matriz. `US-10` y `TC-11` quedan declarados fuera del tramo comprometido.
 - [ ] **100 %** de los tipos ejercitados por al menos una prueba de integración contra el servicio real. **Se valida** con `TC-21`. **Criterio bloqueante**: el intake §17.4.P.6 lo llama «el gate equivalente y bloqueante», y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante». Lo que puede cambiar es **cómo** se expresa la condición.
-- [ ] **15** códigos vivos, **18** emitidos, **3** retirados y **0** reciclados. **Se valida** con `TC-16`.
+- [ ] **17** códigos vivos, **20** emitidos, **3** retirados y **0** reciclados. **Se valida** con `TC-16`.
 - [ ] **0** referencias hacia `GeometriaFactory-Domain` y **0** campos de filtración. **Se valida** con `TC-20` y `TC-15`.
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos de prueba que los usan. **Se valida** con `CV-07`.
 - [ ] Los dos valores rotulados **[ASUNCIÓN]** están confirmados, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 —fila `A-4`— y §17.4.P.10, más el estado de `BT-18`. **Que el de `QG-05` siga sin confirmar no lo vuelve condicionado**: el gate bloquea igual y lo sujeto a confirmación es su forma.
@@ -101,3 +101,4 @@ Se aplica cuando las **siete** etapas comprometidas que este proyecto de código
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-02`.** Los tres puntos que trataban a `CV-08` como criterio condicionado pasan a tratarlo como **bloqueante**, por la fila `A-4` del intake §22 y por §17.4.P.6. Se aclara además que **que la asunción siga sin confirmar no vuelve condicionado al gate**: lo sujeto a confirmación es su forma. Ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la DoD en **cuatro** capas —historia, tarea técnica, **etapa** y entrega del proyecto de código—, con el fundamento de por qué la tercera no se llama sprint y la cuarta no se llama release. Cada criterio responde «cómo se valida» con una operación concreta, y la mayoría con un recuento sobre la superficie pública. Distingue en las cuatro capas entre las inspecciones de superficie, que no se difieren, y las pruebas de integración, que sí pueden diferirse por escrito mientras `GeometriaFactory-Api` no exista. Declara **cinco** casos de excepción, dos de ellos sin excepción posible, y la vigencia como fuente canónica con la delimitación frente a la Definition of Ready. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Criterios-Validacion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
 **Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.6.P.6, §17.6.P.8, §17.6.P.10 y §22
@@ -42,7 +42,7 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | CV-03 | Las **trece** restricciones transversales tienen caso de verificación | Matriz §5 | **13 de 13** |
 | CV-04 | Las **dieciséis** reglas de negocio tienen verificado **lo que esta pieza hace por ellas**, y ninguna afirmación depende de que esta pieza las haga cumplir | Matriz §4 | **16 de 16** |
 | CV-05 | **Toda acotación se verificó forzando la solicitud sin pasar por la pantalla**, y no mirando que el control no se dibuja | `TC-01`, `TC-05`, `TC-07`, `TC-15`, `TC-25`, `TC-26` | **6 de 6** casos ejecutados sobre las acotaciones vigentes |
-| CV-06 | Los **quince** códigos vivos del contrato **más** el camino de ausencia de respuesta tienen mensaje de superficie, y **ninguno** expone dirección, ruta de datos ni traza | `TC-31` | **16 de 16** mensajes, con **0** exposiciones |
+| CV-06 | Los **diecisiete** códigos vivos del contrato **más** el camino de ausencia de respuesta tienen mensaje de superficie, y **ninguno** expone dirección, ruta de datos ni traza | `TC-31` | **16 de 16** mensajes, con **0** exposiciones |
 | CV-07 | Los **ocho** escenarios del intake §20 están ejercitados **en su forma original y completa**, sin sustituirlos por datos sintéticos | `TC-11` a `TC-14`, `TC-17` a `TC-20`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
 | CV-08 | El escenario `E-1` produce **exactamente 3 piezas y 2 advertencias**, y el cilindro **no produce ninguna observación** | `TC-13` | 3 y 2, con **0** observaciones del cilindro. **Una tercera advertencia significa que el operador de tolerancia dejó de ser estricto** |
 
@@ -60,7 +60,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-14 | Peticiones del navegador hacia el servicio de datos | **0**, medidas **con los dos movimientos prendidos** | `TC-29` | **Bloqueante, sin gradación**. Una medición hecha sin la condición **no cuenta como medición** |
 | CV-15 | Salidas hacia el servicio de datos y bibliotecas de guion que consulten | **1** y **0** | `TC-30` | **Bloqueante** |
 | CV-16 | Apariciones de la credencial de sesión en el navegador | **0** | `TC-03` | **Bloqueante**. Criterio de aceptación de la etapa `c` |
-| CV-17 | Mensajes que exponen dirección, ruta de datos o traza | **0** sobre los quince códigos y el camino de ausencia | `TC-31` | **Bloqueante** |
+| CV-17 | Mensajes que exponen dirección, ruta de datos o traza | **0** sobre los diecisiete códigos y el camino de ausencia | `TC-31` | **Bloqueante** |
 | CV-18 | Tráfico de circuito durante la interacción con la escena | **0**, y el texto viaja **1** sola vez por trabajo | `TC-33` | **Bloqueante** |
 | CV-19 | Instancias del visor no liberadas tras **10** recorridos, con los dos movimientos prendidos | **0** | `TC-21`, puerta `PT-02` | **Puerta técnica**: si no pasa, **detiene la planificación de la etapa `g`** y no se arrastra como deuda |
 | CV-20 | Invocaciones al interior del bundle | **0**, con **6 de 6** funciones como única vía | `TC-32` | **Bloqueante** |
@@ -113,3 +113,4 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-02`.** `CV-13` pasa de **condicionado** a **bloqueante**, y la salida admitida correspondiente de §6 se reemplaza por la declaración de que **ningún criterio de este proyecto de código es condicionado**: lo rotulado [ASUNCIÓN] es la forma de la puerta, y §22 `A-4` deja a salvo su carácter. **El umbral del 100 % acumulativo no cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **treinta y cinco** criterios de validación numerados `CV-01` a `CV-35`, repartidos en funcionales, no funcionales, de regresión y deriva, y de calidad de código, cada uno con su umbral y su forma de medición. Distingue cuatro caracteres —bloqueante, condicionado, **puerta técnica sin excepción posible** y no exigible— y ata el único condicionado al valor rotulado **[ASUNCIÓN]** del intake §22, precisando que lo rotulado es la **forma de la puerta** y no la regla acumulativa. Declara que no hay criterio de cobertura de líneas ni de tiempo de respuesta, con el fundamento de cada ausencia. Incorpora los criterios de deriva sobre las **61** filas de la matriz de sensado y el criterio de que **toda acotación se verifica forzando la solicitud**. Declara las cuatro salidas admitidas y seis situaciones que explícitamente no lo son. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |
