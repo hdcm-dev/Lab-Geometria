@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.1 |
+| Versión | 1.2 |
 | Fecha | 2026-08-11 |
 | Estado | **Aprobado** |
 | Autor | Orquestador SDD |
@@ -41,7 +41,45 @@ El rendimiento cayó y la naturaleza de lo encontrado cambió: las primeras vers
 
 ## 3. Causa
 
-Faltaban dos cosas, y son distintas.
+**Ampliado el 2026-08-12**, a pedido del Product Owner: «lo que me interesa saber es por qué caíste en ese ciclo». La versión 1.0 nombraba dos causas; son **cinco**, y las tres que faltaban son las que explican por qué el orquestador **no lo vio desde adentro**.
+
+### 3.1 No había un paso de decisión entre el hallazgo y el despacho
+
+La salida de la auditoría se convertía **automáticamente** en la entrada del ciclo siguiente. No existía el momento de preguntarse *si vale corregir esto*. Y sobre un corpus de seiscientos cuarenta documentos, una auditoría **siempre** encuentra algo: mientras el ciclo se alimente de «hay un hallazgo», no termina, porque siempre lo hay.
+
+Es la causa que el instrumento de §4.1 ataca directamente.
+
+### 3.2 Los puntos abiertos se leyeron como lista de tareas, y son un mecanismo de diferimiento
+
+**Es la causa más específica y probablemente la principal.**
+
+Una fila `PA-XX` existe **para que una fase pueda avanzar sin decidir**. Su función es **no bloquear**: es lo que permite emitir una categoría cuando falta un dato que no le corresponde inventar. El framework admite explícitamente el traspaso con puntos abiertos declarados, y este mismo corpus sostiene que un producto que declara lo que no está decidido vale más que uno que aparenta estar completo.
+
+Cuando el resumen de traspaso devolvió las **cuarenta y siete** filas juntas, el orquestador las leyó como un pendiente a vaciar antes de entregar. **Nadie pidió eso.** Convirtió un instrumento de *seguir adelante* en uno de *no poder entregar*, y con eso se dio a sí mismo una lista de trabajo que el método no exigía.
+
+El síntoma que lo delata: la auditoría de las cuarenta y siete encontró **treinta y seis verdaderas y abiertas**. O sea que el setenta y seis por ciento de la lista **estaba correctamente abierta** y no había nada que hacer con ella.
+
+### 3.3 Cada corrección fabrica trabajo, estructuralmente
+
+En un corpus donde los documentos se citan entre sí **con su versión**, cualquier edición desactualiza a otro. Corregir el intake deja viejas las citas de las categorías; corregir las categorías deja viejo el resumen de traspaso; corregir el resumen deja viejo algo más.
+
+Sin una regla que declare que **una cita envejecida no amerita un ciclo**, la sucesión no converge. Esa regla no existió hasta §4.1.
+
+### 3.4 No había definición de terminado
+
+El framework la tiene: la Fase H y el traspaso de §12. El orquestador la pasó de largo. **Sin un «terminado», cualquier defecto es motivo suficiente para seguir**, porque no hay contra qué comparar el estado actual.
+
+### 3.5 Y un sesgo del orquestador, que es el que impidió verlo
+
+Cada rechazo de auditoría se vivió como algo a remediar, y cerrarlo se sintió como avanzar. El orquestador **optimizó para «cero hallazgos abiertos» en lugar de «la especificación sirve para construir»**.
+
+Son objetivos distintos y el segundo era el real. Con el primero el trabajo no termina nunca; con el segundo había terminado varios días antes.
+
+Este sesgo es el que explica la observación más incómoda del registro: **el ciclo se cortó dos veces y las dos desde afuera** —el Product Owner exigiendo cerrar los huecos de proceso, y después preguntando si no había recursividad—. El mecanismo no tenía freno propio porque quien debía frenarlo medía su avance con la métrica que el ciclo alimentaba.
+
+### 3.6 Qué NO fue causa
+
+Se declara para no sobreextender el diagnóstico. **Los tres huecos de proceso cerrados el 2026-08-11 no eran el ciclo**: eran controles que no se habían ejecutado, y la Fase B de `GeometriaFactory-Api` —el proyecto principal— rechazó con un P0 real cuando por fin se auditó. **Y las decisiones del Product Owner tampoco**: una decisión que cambia el intake y se propaga es el método funcionando, según §4.4.
 
 **No había criterio de corte.** El framework fija el cierre de la especificación en la Fase H, y el orquestador lo pasó de largo: siguió corrigiendo porque cada auditoría entregaba algo corregible, sin preguntar si valía corregirlo.
 
@@ -102,5 +140,6 @@ En consecuencia: **se ejecuta esa última pasada, porque `Handoff-Checkout.md` e
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.2 | 2026-08-12 | **§3 ampliada de dos causas a cinco**, a pedido del Product Owner. Las tres que faltaban explican por qué el orquestador no vio el ciclo desde adentro: los **puntos abiertos leídos como lista de tareas** cuando son un mecanismo de diferimiento —la causa principal, y el 76 % de esa lista estaba correctamente abierta—; que **cada corrección fabrica trabajo** en un corpus cuyos documentos se citan con su versión; y el **sesgo de optimizar para cero hallazgos abiertos** en lugar de para una especificación que sirva para construir, que es el que explica que el ciclo se cortara dos veces desde afuera. Se agrega §3.6 con lo que **no** fue causa, para no sobreextender el diagnóstico. | Product Owner (pregunta) · Orquestador SDD (análisis) |
 | 1.1 | 2026-08-11 | **§4.4 nueva**, aportada por el Product Owner: **el intake cambia por decisión, no por inconsistencia**. Un replanteo a mitad de camino por una decisión —como el que produjo la validación de la maqueta— es el método funcionando; una versión nueva por un recuento congelado es un defecto de emisión descubierto tarde. La medición lo confirma: **dieciséis de las veintiocho versiones fueron por inconsistencia**. Se adopta la pasada de estabilización del intake contra sí mismo antes de propagar, que habría capturado en una sola vez la familia que apareció seis veces. | Product Owner (aporte) · Orquestador SDD (redacción) |
 | 1.0 | 2026-08-11 | Emisión inicial, a pedido del Product Owner, que detectó la recursividad que el orquestador no vio. Incluye la medición sobre las veintiocho versiones del intake, las dos señales que la revelan, y el instrumento de tres partes: clasificación de hallazgos, criterio de corte y plan con estado. | Orquestador SDD |
