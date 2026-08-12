@@ -2,11 +2,11 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Plan-Etapa-A.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-12
 **Nivel:** Producto
-**Trazabilidad upstream:** [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.29** §13, §14, §15, §16, §16.1 y §17.1 a §17.7; [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3** §1, §1.2, §2 y §3; [`../00-Contexto/Roadmap-Producto.md`](../00-Contexto/Roadmap-Producto.md) §2.2, §4 y §5; [`Pipeline-Producto.md`](Pipeline-Producto.md) §2, §6 y §9; [`Vista-Producto.md`](Vista-Producto.md) §3.1, §4 y §5; [`../Handoff-Checkout.md`](../Handoff-Checkout.md) §4 y §6; las **siete** categorías `05-Arquitectura-Tecnica` y las **siete** `09-Devops` bajo `Proyectos/`
+**Trazabilidad upstream:** [`Norma-De-Nomenclatura.md`](Norma-De-Nomenclatura.md) **1.1** §6.3, §6.4 y §6.10 (el glosario contra el que se renombró) y §8, tramo `R-1`; [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.29** §13, §14, §15, §16, §16.1 y §17.1 a §17.7; [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3** §1, §1.2, §2 y §3; [`../00-Contexto/Roadmap-Producto.md`](../00-Contexto/Roadmap-Producto.md) §2.2, §4 y §5; [`Pipeline-Producto.md`](Pipeline-Producto.md) §2, §6 y §9; [`Vista-Producto.md`](Vista-Producto.md) §3.1, §4 y §5; [`../Handoff-Checkout.md`](../Handoff-Checkout.md) §4 y §6; las **siete** categorías `05-Arquitectura-Tecnica` y las **siete** `09-Devops` bajo `Proyectos/`
 **Trazabilidad downstream:** la rama de la etapa `a` y su solicitud de incorporación, que **es** el punto de control (`PRODUCT-INTAKE` §15, regla de delivery 4)
 
 ---
@@ -104,35 +104,35 @@ Fundamento, y no es preferencia de estilo:
 
 ```text
 GeometriaFactory.Domain                        tipos raíz del dominio
-GeometriaFactory.Domain.Entidades              las cinco entidades
-GeometriaFactory.Domain.Valores                los cuatro conjuntos cerrados
-GeometriaFactory.Domain.Guardas                guardas y resultado tipado
+GeometriaFactory.Domain.Entities               las cinco entidades
+GeometriaFactory.Domain.Values                 los cuatro conjuntos cerrados
+GeometriaFactory.Domain.Guards                 guardas y resultado tipado
 
 GeometriaFactory.Contracts                     tipo de error y conjunto cerrado de códigos
-GeometriaFactory.Contracts.Cuentas             tipos de transferencia por familia
-GeometriaFactory.Contracts.Trabajos
-GeometriaFactory.Contracts.Servicio            estado del servicio
+GeometriaFactory.Contracts.Accounts            tipos de transferencia por familia
+GeometriaFactory.Contracts.Works
+GeometriaFactory.Contracts.Service             estado del servicio
 
-GeometriaFactory.Application.Puertos           los cuatro puertos
-GeometriaFactory.Application.Cuentas           orquestaciones de alta, gobierno e ingreso
-GeometriaFactory.Application.Trabajos          orquestaciones de trabajo, consulta y desenlace
+GeometriaFactory.Application.Ports             los cuatro puertos
+GeometriaFactory.Application.Accounts          orquestaciones de alta, gobierno e ingreso
+GeometriaFactory.Application.Works             orquestaciones de trabajo, consulta y desenlace
 
-GeometriaFactory.Infrastructure.Persistencia   contexto, mapeos y transformaciones de esquema
-GeometriaFactory.Infrastructure.Seguridad      derivación de clave y acceso firmado
-GeometriaFactory.Infrastructure.Validacion     motor de interpretación y verificación
-GeometriaFactory.Infrastructure.Tiempo         adaptador de reloj
+GeometriaFactory.Infrastructure.Persistence    contexto, mapeos y transformaciones de esquema
+GeometriaFactory.Infrastructure.Security       derivación de clave y acceso firmado
+GeometriaFactory.Infrastructure.Validation     motor de interpretación y verificación
+GeometriaFactory.Infrastructure.Time           adaptador de reloj
 
-GeometriaFactory.Api.Puntos                    los quince puntos de acceso
-GeometriaFactory.Api.Composicion               composición de raíz, arranque y salud
+GeometriaFactory.Api.Endpoints                 los quince puntos de acceso
+GeometriaFactory.Api.Composition               composición de raíz, arranque y salud
 
-GeometriaFactory.Web.Componentes               armazón, superficies y representaciones
-GeometriaFactory.Web.Servicios                 servicios de aplicación de front, sesión, traductor
-GeometriaFactory.Web.Integracion               cliente tipado y anfitrión del visor
+GeometriaFactory.Web.Components                armazón, superficies y representaciones
+GeometriaFactory.Web.Services                  servicios de aplicación de front, sesión, traductor
+GeometriaFactory.Web.Integration               cliente tipado y anfitrión del visor
 ```
 
 **Tres reglas que acompañan la propuesta:**
 
-1. **Un solo nivel de subsegmento.** Sin `…​.Entidades.Cuentas.Internos`. La profundidad crece por carpeta de archivo si hace falta, no por espacio de nombres.
+1. **Un solo nivel de subsegmento.** Sin `…​.Entities.Accounts.Internos`. La profundidad crece por carpeta de archivo si hace falta, no por espacio de nombres.
 2. **El espacio de nombres coincide con la carpeta.** Es lo que hace verificable la regla de `Recorrido-Codigo.md` de que toda ruta citada exista (`Producto/11-Documentacion/README.md` §7).
 3. **El subsegmento no es la partición de componentes.** `Application/05` §3.1 declara expresamente que su partición en **ocho** componentes «es de responsabilidad y no de espacios de nombres»; `Web/05` §3.1 declara **ocho** componentes y `Infrastructure` los suyos. Los subsegmentos de arriba **agrupan** componentes, no los espejan uno a uno, y el mapeo se registra en el punto de control.
 
@@ -147,7 +147,7 @@ GeometriaFactory.Web.Integracion               cliente tipado y anfitrión del v
 | Fuente | Cómo nombra la entidad |
 | --- | --- |
 | `PRODUCT-INTAKE` §13 y §17.3.P.4 | Entidad **`ALUMNO`**, dentro de las cinco: `ALUMNO`, `TRABAJO`, `PIEZA`, `COMPONENTE`, `OBSERVACION` |
-| `Domain/02` `Definicion-Modelo-De-Dominio.md` §2.1 | Entidad **`Alumno`**, con atributo `Papel` que vale `Alumno` o `Administrador` |
+| `Domain/02` `Definicion-Modelo-De-Dominio.md` §2.1 | Entidad **`Alumno`**, con atributo `Role` que vale `Alumno` o `Administrador` |
 | `Infrastructure/02` `Modelo-Conceptual.md` §3.1 y §3.2 | Entidad **`CUENTA`**, en el diagrama y en la tabla |
 | `Infrastructure/05` `Modelo-Datos-Logico.md` §2.1 | Tabla **`Cuenta`**, «entidad conceptual de origen: **Cuenta**» |
 | `Application/05` §3.1 y `ADR-02` | «repositorio de **cuentas**», «orquestación del alta de **cuentas**», «gobierno de **cuentas**» |
@@ -155,9 +155,9 @@ GeometriaFactory.Web.Integracion               cliente tipado y anfitrión del v
 
 **Verificado con `grep` el 2026-08-12 sobre el árbol vivo de `GeometriaFactory-Infrastructure`, excluido `_legacy/`: la cadena `ALUMNO` aparece en cuatro lugares y en los cuatro es un fragmento de un código del contrato, nunca un nombre de entidad ni de tabla.** El renombre a `Cuenta` ocurrió y no está declarado como apartamiento en ninguna parte.
 
-**Propuesta principal `P-3a`: la entidad se llama `Cuenta`.** Fundamento: es el término que usan cinco de las seis fuentes de la tabla, es el que hace verdadero el invariante `INV-08` —la cuenta con papel `Administrador` no es un alumno y sin embargo es una fila de esa misma entidad— y es el que evita que el tipo `Alumno` tenga un miembro `Papel` cuyo valor pueda ser `Administrador`, que es una contradicción legible en la primera línea del archivo.
+**Propuesta principal `P-3a`: la entidad se llama `Cuenta`.** Fundamento: es el término que usan cinco de las seis fuentes de la tabla, es el que hace verdadero el invariante `INV-08` —la cuenta con papel `Administrador` no es un alumno y sin embargo es una fila de esa misma entidad— y es el que evita que el tipo `Alumno` tenga un miembro `Role` cuyo valor pueda ser `Administrador`, que es una contradicción legible en la primera línea del archivo.
 
-**Alternativa `P-3b`: la entidad se llama `Alumno`.** Pro: es la letra del intake §13 y §17.3.P.4, que es la fuente de mayor rango. Costo: obliga a corregir `Modelo-Conceptual.md`, `Modelo-Datos-Logico.md` y las tablas de trazabilidad que los citan, y deja el nombre del tipo en contradicción con su propio atributo `Papel`.
+**Alternativa `P-3b`: la entidad se llama `Alumno`.** Pro: es la letra del intake §13 y §17.3.P.4, que es la fuente de mayor rango. Costo: obliga a corregir `Modelo-Conceptual.md`, `Modelo-Datos-Logico.md` y las tablas de trazabilidad que los citan, y deja el nombre del tipo en contradicción con su propio atributo `Role`.
 
 **Cualquiera de las dos que se elija, la otra fuente queda con una corrección pendiente.** Este plan no puede corregir el intake: `Master-Prompt.md` §15 reserva ese acto a su autor.
 
@@ -167,7 +167,7 @@ GeometriaFactory.Web.Integracion               cliente tipado y anfitrión del v
 
 **Qué hace el puerto, declarado por `Application ADR-02` §2 punto 1 y por su §3.1:** recuperar una cuenta por su correo, responder si un correo ya está registrado, responder si ya existe una cuenta con papel `Administrador`, y materializar el resultado incluida la marca de cambio de contraseña pendiente.
 
-**Propuesta principal `P-4a`: `IRepositorioCuentas`.**
+**Propuesta principal `P-4a`: `IAccountRepository`.**
 
 Fundamento, y es literal: `Infrastructure ADR-03` §6 punto 4 declara que la propuesta que llega al punto de control es que **el identificador del cuarto puerto siga el patrón de los tres que el intake sí declara**, y que esos tres «empiezan por la misma letra de contrato y nombran la cosa, no el mecanismo». Aplicado:
 
@@ -176,11 +176,11 @@ Fundamento, y es literal: `Infrastructure ADR-03` §6 punto 4 declara que la pro
 | Repositorio de trabajos | `IRepositorioTrabajos` | **Declarado** por el intake §13, §14 y §17.2.P.1 |
 | Validación de figuras | `IValidadorFiguras` | **Declarado** por las mismas |
 | Reloj del sistema | `IRelojDelSistema` | **Declarado** por las mismas |
-| Repositorio de cuentas | **`IRepositorioCuentas`** | **Propuesta** de este documento, por el criterio de `Infrastructure ADR-03` §6 |
+| Repositorio de cuentas | **`IAccountRepository`** | **Propuesta** de este documento, por el criterio de `Infrastructure ADR-03` §6 |
 
 Además, `Application ADR-02` §2 nombra al puerto en lenguaje de dominio como **«repositorio de cuentas»** y `Application/05` §3.1 lo repite en su componente de declaración de puertos. La propuesta es el mismo sintagma llevado a identificador, sin acuñar nada.
 
-**Alternativa real `P-4b`: `IRepositorioAlumnos`.** Sólo tiene sentido si `D-03` se resuelve por `P-3b`. Costo: el puerto responde también por la cuenta con papel `Administrador` —`INV-05` exige saber si ya existe una, y ése es exactamente el puerto que lo responde según `ADR-02` §5 punto 2—, de modo que un puerto llamado «de alumnos» que se consulta para saber si existe el administrador miente en su nombre. **`P-4a` y `P-3a` se sostienen mutuamente y se recomienda decidirlas juntas.**
+**Alternativa real `P-4b`: `IStudentRepository`.** Sólo tiene sentido si `D-03` se resuelve por `P-3b`. Costo: el puerto responde también por la cuenta con papel `Administrador` —`INV-05` exige saber si ya existe una, y ése es exactamente el puerto que lo responde según `ADR-02` §5 punto 2—, de modo que un puerto llamado «de alumnos» que se consulta para saber si existe el administrador miente en su nombre. **`P-4a` y `P-3a` se sostienen mutuamente y se recomienda decidirlas juntas.**
 
 **Alternativa `P-4c`: no abrir el cuarto puerto y resolver la unicidad dentro de `IRepositorioTrabajos`.** Está considerada y **descartada** por `Application ADR-02` §4: sería una frontera con dos dominios adentro, y haría que el alta de cuenta dependiera del repositorio de trabajos. No se reabre acá.
 
@@ -190,10 +190,10 @@ Además, `Application ADR-02` §2 nombra al puerto en lenguaje de dominio como *
 
 | Puerto | Adaptador propuesto | Mecanismo declarado |
 | --- | --- | --- |
-| `IRepositorioCuentas` | `RepositorioCuentasEfCore` | EF Core sobre SQLite (intake §17.3.P.4) |
-| `IRepositorioTrabajos` | `RepositorioTrabajosEfCore` | EF Core sobre SQLite |
-| `IValidadorFiguras` | `ValidadorFigurasLocal` | Motor propio, **sin red** (intake §17.3.P.3) |
-| `IRelojDelSistema` | `RelojDelSistemaUtc` | Momento en tiempo universal coordinado (`Modelo-Datos-Logico.md` §2.1 y `RC-06`) |
+| `IAccountRepository` | `EfCoreAccountRepository` | EF Core sobre SQLite (intake §17.3.P.4) |
+| `IRepositorioTrabajos` | `EfCoreWorkRepository` | EF Core sobre SQLite |
+| `IValidadorFiguras` | `LocalFigureValidator` | Motor propio, **sin red** (intake §17.3.P.3) |
+| `IRelojDelSistema` | `UtcSystemClock` | Momento en tiempo universal coordinado (`Modelo-Datos-Logico.md` §2.1 y `RC-06`) |
 
 Las cuatro filas son **propuesta** derivada del criterio; el criterio es declarado. **Los adaptadores se nombran en la etapa `a` pero sólo dos se construyen después**: `BT-09` (cuentas) y `BT-12` (reloj) son de etapa `c`, `BT-10` (trabajos) de etapa `e` y `BT-16` (validador) de etapa `f`.
 
@@ -210,12 +210,12 @@ Las cuatro filas son **propuesta** derivada del criterio; el criterio es declara
 | `Pieza` | Entidad | §2.3 |
 | `Componente` | Entidad | §2.4 |
 | `Observacion` | Entidad | §2.5 |
-| `Papel` | Conjunto cerrado de **2**: `Alumno`, `Administrador` | §2.1; `Contratos-REST.md` §2.2 |
-| `EstadoDeCuenta` | Conjunto cerrado de **3**: `Pendiente`, `Habilitado`, `Bloqueado` | §2.1; `Modelo-Datos-Logico.md` §2.1 |
-| `EstadoDeTrabajo` | Conjunto cerrado de **4**: `Borrador`, `Pendiente`, `Finalizado`, `Rechazado` | §2.2; `Modelo-Datos-Logico.md` §2.2 |
-| `EspecieDeObservacion` | Conjunto cerrado de **2**: `Advertencia`, `ErrorDeValidacion` | §2.5 |
+| `Role` | Conjunto cerrado de **2**: `Alumno`, `Administrador` | §2.1; `Contratos-REST.md` §2.2 |
+| `AccountStatus` | Conjunto cerrado de **3**: `Pendiente`, `Habilitado`, `Bloqueado` | §2.1; `Modelo-Datos-Logico.md` §2.1 |
+| `WorkStatus` | Conjunto cerrado de **4**: `Borrador`, `Pendiente`, `Finalizado`, `Rechazado` | §2.2; `Modelo-Datos-Logico.md` §2.2 |
+| `ObservationKind` | Conjunto cerrado de **2**: `Advertencia`, `ErrorDeValidacion` | §2.5 |
 
-Los nombres de los cuatro conjuntos cerrados y el de `EspecieDeObservacion` son **propuesta**: las fuentes declaran los **valores** y no el nombre del tipo que los agrupa. El valor `Error de validación` se propone como `ErrorDeValidacion` por `D-01`; **su nombre al serializar es el que `Contratos-REST.md` §2.2 exige que sea literal**, y por eso la forma exacta de ese nombre entra al punto de control.
+Los nombres de los cuatro conjuntos cerrados y el de `ObservationKind` son **propuesta**: las fuentes declaran los **valores** y no el nombre del tipo que los agrupa. El valor `Error de validación` se propone como `ErrorDeValidacion` por `D-01`; **su nombre al serializar es el que `Contratos-REST.md` §2.2 exige que sea literal**, y por eso la forma exacta de ese nombre entra al punto de control.
 
 **`GeometriaFactory.Application`** — su etapa `a` es `BT-01` a `BT-06`. Los tipos que necesita son los cuatro puertos de §1.5 y nada más: sus ocho componentes de orquestación pertenecen a etapas posteriores.
 
@@ -223,17 +223,17 @@ Los nombres de los cuatro conjuntos cerrados y el de `EspecieDeObservacion` son 
 
 | Tipo propuesto | Qué es | Base declarada |
 | --- | --- | --- |
-| `ContextoDeGeometriaFactory` | Contexto de persistencia, uno por operación | Intake §17.3.P.4; `Infrastructure/05` §3.1 |
-| `PreparacionDelAlmacen` | Aplica las transformaciones al arrancar y **detiene el arranque** ante un esquema que no corresponde | `ADR-07`; `BT-06`; `US-24`, `US-25` |
-| `ConfiguracionDeCuenta`, `…DeTrabajo`, `…DePieza`, `…DeComponente`, `…DeObservacion` | Los cinco mapeos, uno por entidad | `BT-05`; `Modelo-Datos-Logico.md` §2 |
+| `GeometriaFactoryDbContext` | Contexto de persistencia, uno por operación | Intake §17.3.P.4; `Infrastructure/05` §3.1 |
+| `StorePreparation` | Aplica las transformaciones al arrancar y **detiene el arranque** ante un esquema que no corresponde | `ADR-07`; `BT-06`; `US-24`, `US-25` |
+| `AccountConfiguration`, `WorkConfiguration`, `PieceConfiguration`, `ComponentConfiguration`, `ObservationConfiguration` | Los cinco mapeos, uno por entidad | `BT-05`; `Modelo-Datos-Logico.md` §2 |
 
 **`GeometriaFactory.Api`** — su etapa `a` incluye `BT-02` (composición de raíz con los cuatro puertos), `BT-03` (arranque en dos fases con el punto de salud sin acceso), y `US-26` a `US-29`:
 
 | Tipo propuesto | Qué es | Base declarada |
 | --- | --- | --- |
-| `ComposicionDeRaiz` | Conecta **4 de 4** puertos con su adaptador, **0** sin adaptador y **0** con más de uno | `ADR-06`; `QG-10` de `Api/09` `Pipeline-CI-CD.md` §2.1 |
-| `ArranqueEnDosFases` | Prepara el almacén antes de atender la primera petición; **0** peticiones atendidas con la preparación incompleta | `ADR-07`; `QG-11`; `US-27`, `US-28` |
-| `PuntoDeSalud` | Realiza `A-16`, **fuera de la guardia** | `Contratos-REST.md` §3; `US-29` |
+| `CompositionRoot` | Conecta **4 de 4** puertos con su adaptador, **0** sin adaptador y **0** con más de uno | `ADR-06`; `QG-10` de `Api/09` `Pipeline-CI-CD.md` §2.1 |
+| `TwoPhaseStartup` | Prepara el almacén antes de atender la primera petición; **0** peticiones atendidas con la preparación incompleta | `ADR-07`; `QG-11`; `US-27`, `US-28` |
+| `HealthEndpoint` | Realiza `A-16`, **fuera de la guardia** | `Contratos-REST.md` §3; `US-29` |
 
 **`GeometriaFactory.Contracts`** — su etapa `a` es `BT-01` a `BT-03`: crear el ensamblado y sus dos puertas. **`PA-01` de `Contracts` ancla sus nombres de tipos «etapa `c` en adelante, según la familia»**, de modo que la etapa `a` **no crea ningún tipo de transferencia**. Ver `R-03` en §7: el cuerpo de la respuesta de `A-16` no tiene tipo declarado en ninguna parte.
 
@@ -241,8 +241,8 @@ Los nombres de los cuatro conjuntos cerrados y el de `EspecieDeObservacion` son 
 
 | Tipo propuesto | Qué es | Base declarada |
 | --- | --- | --- |
-| `Estado` (componente Blazor) | Página de estado que consume el punto de salud y muestra datos reales | Intake §15; `Roadmap-Producto.md` §5.2, transición `a` → `b`; `Web BT-03` |
-| `ClienteDelServicioDeDatos` | La **única** salida hacia el servicio de datos | `Web/05` §3.1, capa 3; §3.2 punto 3 |
+| `Status` (componente Blazor) | Página de estado que consume el punto de salud y muestra datos reales | Intake §15; `Roadmap-Producto.md` §5.2, transición `a` → `b`; `Web BT-03` |
+| `DataServiceClient` | La **única** salida hacia el servicio de datos | `Web/05` §3.1, capa 3; §3.2 punto 3 |
 
 **`GeometriaFactory-Visor`** — sus seis funciones de fachada **están fijadas por el intake §17.7.P.3 y no son propuesta**. `Visor/05` `PA-02` declara abiertos únicamente los nombres internos, y los ata a la **etapa `g`**, no a la `a`. La etapa `a` crea el proyecto y un bundle «vacío pero real» (intake §15), con la fachada declarada y sin lógica de dibujo.
 
@@ -298,34 +298,34 @@ Lab-Geometria/
 ├── src/
 │   ├── GeometriaFactory.Domain/
 │   │   ├── GeometriaFactory.Domain.csproj            0 dependencias salientes (puerta BT-04)
-│   │   ├── Entidades/{Cuenta,Trabajo,Pieza,Componente,Observacion}.cs
-│   │   └── Valores/{Papel,EstadoDeCuenta,EstadoDeTrabajo,EspecieDeObservacion}.cs
+│   │   ├── Entities/{Cuenta,Trabajo,Pieza,Componente,Observacion}.cs
+│   │   └── Values/{Role,AccountStatus,WorkStatus,ObservationKind}.cs
 │   ├── GeometriaFactory.Contracts/
 │   │   └── GeometriaFactory.Contracts.csproj         0 referencias hacia Domain (puerta BT-02)
 │   ├── GeometriaFactory.Application/
 │   │   ├── GeometriaFactory.Application.csproj       1 sola dependencia saliente: Domain
-│   │   └── Puertos/{IRepositorioCuentas,IRepositorioTrabajos,IValidadorFiguras,IRelojDelSistema}.cs
+│   │   └── Ports/{IAccountRepository,IRepositorioTrabajos,IValidadorFiguras,IRelojDelSistema}.cs
 │   ├── GeometriaFactory.Infrastructure/
 │   │   ├── GeometriaFactory.Infrastructure.csproj    2 dependencias: Application y Domain
-│   │   └── Persistencia/
-│   │       ├── ContextoDeGeometriaFactory.cs
-│   │       ├── PreparacionDelAlmacen.cs
-│   │       ├── Configuraciones/Configuracion{Cuenta,Trabajo,Pieza,Componente,Observacion}.cs
+│   │   └── Persistence/
+│   │       ├── GeometriaFactoryDbContext.cs
+│   │       ├── StorePreparation.cs
+│   │       ├── Configuraciones/{Account,Work,Piece,Component,Observation}Configuration.cs
 │   │       └── Migrations/                           generadas; se versionan con el código de su etapa
 │   ├── GeometriaFactory.Api/
 │   │   ├── GeometriaFactory.Api.csproj               3 referencias, o 2 + transitiva (X-1)
 │   │   ├── Program.cs                                host delgado
-│   │   ├── Composicion/{ComposicionDeRaiz,ArranqueEnDosFases}.cs
-│   │   ├── Puntos/PuntoDeSalud.cs                    realiza A-16
+│   │   ├── Composition/{CompositionRoot,TwoPhaseStartup}.cs
+│   │   ├── Endpoints/HealthEndpoint.cs               realiza A-16
 │   │   ├── appsettings.json
 │   │   └── appsettings.Development.json              escucha por HTTP sin certificado
 │   └── GeometriaFactory.Web/
 │       ├── GeometriaFactory.Web.csproj               referencia Contracts; consume el bundle
 │       ├── Program.cs
 │       ├── App.razor · Routes.razor · _Imports.razor
-│       ├── Componentes/Layout/MainLayout.razor
-│       ├── Componentes/Paginas/Estado.razor          página de estado  [APARTAMIENTO AP-03]
-│       ├── Integracion/ClienteDelServicioDeDatos.cs  la única salida
+│       ├── Components/Layout/MainLayout.razor
+│       ├── Components/Paginas/Status.razor           página de estado  [APARTAMIENTO AP-03]
+│       ├── Integration/DataServiceClient.cs          la única salida
 │       ├── appsettings.json                          sin la dirección real del servicio
 │       └── wwwroot/
 │           ├── js/                                   destino del bundle; no se edita a mano
@@ -360,14 +360,14 @@ Lab-Geometria/
 | `deploy/compose.yaml` | Despliegue en destino construyendo desde el repositorio, con `healthcheck` contra el punto de salud. **El acto de desplegar es manual y del Product Owner**: la canalización no lo ejecuta | Intake §17.5.P.7 y §17.5.P.8; `Api/09` `Pipeline-CI-CD.md` §1 |
 | `scripts/` (7 guiones) | Ver §4 | Intake §16 |
 | `*.csproj` (6) | Un archivo de proyecto por carpeta, con las dependencias de compilación exactas del manifiesto §2 y **las versiones de paquete ancladas explícitamente**: toda versión se fija en el archivo, y un cambio mayor es una decisión que se documenta, nunca el efecto de una actualización | Manifiesto §2; intake, encabezado de la Parte C |
-| `Domain/Entidades/` y `Domain/Valores/` | Los cinco tipos y los cuatro conjuntos cerrados, **sin invariantes** en esta etapa. Ver `R-02` | `Definicion-Modelo-De-Dominio.md` §2; `Infrastructure BT-05` |
-| `Application/Puertos/` | Los **cuatro** puertos, que son **la única frontera del proyecto de código** | `Application ADR-02` §2 |
-| `Infrastructure/Persistencia/` | Contexto por operación, mapeo de las cinco entidades con sus índices y sus restricciones, **sin ninguna columna de pertenencia a instancia**, con modo de diario por delante y escritor único declarados | `BT-05`; `Modelo-Datos-Logico.md` §2 y §3 |
-| `…/Persistencia/Migrations/` | Transformaciones de esquema, versionadas con el código de su etapa. **Una transformación ya fusionada no se edita** | Intake §17.3.P.7; `ADR-07` |
-| `Api/Composicion/` | `4 de 4` puertos conectados, `0` sin adaptador, `0` con más de uno, y `1` sola configuración de intercambio declarada en todo el producto — es `QG-10`, y **falla en construcción** cuando falta un puerto | `ADR-06`; `Api/09` `Pipeline-CI-CD.md` §2.1 |
-| `Api/Puntos/PuntoDeSalud.cs` | Realiza `A-16`. **Una de las cuatro ausencias declaradas de la guardia** —las otras tres son `A-01`, `A-02` y `A-03`—, y su respuesta no lleva dirección de servicio, ruta del almacén ni traza | `Contratos-REST.md` §3; `US-29` |
-| `Web/Componentes/Paginas/Estado.razor` | Consume el punto de salud y muestra datos reales. Es lo que hace medible `PT-01.d` | Intake §15; `Web BT-03`; `US-29` §2 |
-| `Web/Integracion/ClienteDelServicioDeDatos.cs` | **La única salida** hacia el servicio de datos. Si aparece una segunda, `RA-01` se queda sin lugar donde verificarse. La dirección base **llega por configuración, nunca embebida** | `Web/05` §3.1 y §3.2 punto 3; `Web ADR-07` |
+| `Domain/Entities/` y `Domain/Values/` | Los cinco tipos y los cuatro conjuntos cerrados, **sin invariantes** en esta etapa. Ver `R-02` | `Definicion-Modelo-De-Dominio.md` §2; `Infrastructure BT-05` |
+| `Application/Ports/` | Los **cuatro** puertos, que son **la única frontera del proyecto de código** | `Application ADR-02` §2 |
+| `Infrastructure/Persistence/` | Contexto por operación, mapeo de las cinco entidades con sus índices y sus restricciones, **sin ninguna columna de pertenencia a instancia**, con modo de diario por delante y escritor único declarados | `BT-05`; `Modelo-Datos-Logico.md` §2 y §3 |
+| `…/Persistence/Migrations/` | Transformaciones de esquema, versionadas con el código de su etapa. **Una transformación ya fusionada no se edita** | Intake §17.3.P.7; `ADR-07` |
+| `Api/Composition/` | `4 de 4` puertos conectados, `0` sin adaptador, `0` con más de uno, y `1` sola configuración de intercambio declarada en todo el producto — es `QG-10`, y **falla en construcción** cuando falta un puerto | `ADR-06`; `Api/09` `Pipeline-CI-CD.md` §2.1 |
+| `Api/Endpoints/HealthEndpoint.cs` | Realiza `A-16`. **Una de las cuatro ausencias declaradas de la guardia** —las otras tres son `A-01`, `A-02` y `A-03`—, y su respuesta no lleva dirección de servicio, ruta del almacén ni traza | `Contratos-REST.md` §3; `US-29` |
+| `Web/Components/Paginas/Status.razor` | Consume el punto de salud y muestra datos reales. Es lo que hace medible `PT-01.d` | Intake §15; `Web BT-03`; `US-29` §2 |
+| `Web/Integration/DataServiceClient.cs` | **La única salida** hacia el servicio de datos. Si aparece una segunda, `RA-01` se queda sin lugar donde verificarse. La dirección base **llega por configuración, nunca embebida** | `Web/05` §3.1 y §3.2 punto 3; `Web ADR-07` |
 | `Web/wwwroot/js/` | Destino del bundle. **Artefacto generado, no se edita a mano** | Intake §13 y §16 |
 | `visor/src/main.ts` | Fachada externa con las **seis** funciones declaradas. **No contiene lógica de dibujo** | Intake §17.7.P.2 y §17.7.P.3 |
 | `visor/webpack.config.js` | Empaqueta con el motor gráfico **dentro del bundle, sin red de distribución externa** (es `PT-03`), y expone la salida **como biblioteca en `window` con un nombre propio, sin globales sueltas** | Intake §17.7.P.1 y §17.7.P.3 |
@@ -526,4 +526,5 @@ Lab-Geometria/
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-12 | **Tramo `R-1` del plan de renombre de [`Norma-De-Nomenclatura.md`](Norma-De-Nomenclatura.md) 1.1 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** Renombra a inglés **los identificadores que este documento propone** y sólo ésos: los **18 espacios de nombres** de §1.3 —16 subsegmentos distintos— por §6.10; los **14 tipos y adaptadores** de §1.6 y §1.7 y los **6 derivados** —los cinco mapeos de `BT-05` y el componente de la página de estado— por §6.4; y los **2 puertos propuestos** de §1.5, `P-4a` y `P-4b`, por §6.3. Alcanza también las **rutas de carpeta** que la regla 2 de §1.3 obliga a hacer coincidir con el subsegmento —`Entities/`, `Values/`, `Ports/`, `Persistence/`, `Composition/`, `Endpoints/`, `Components/`, `Integration/`— y los **nombres de archivo** de §2.1, que la norma §3 fija iguales al tipo que contienen. **Cuadre `V-4` en las dos direcciones: 0 ocurrencias de los nombres viejos y 81 de los nuevos, contra 81 medidas antes de editar.** **No toca ninguna otra clase**, por la regla 1 de §8: las cinco entidades, los tres puertos declarados, los dos miembros, las seis funciones de la fachada y los diez valores de conjunto cerrado siguen en castellano hasta su propio tramo. **No toca la prosa**, ni los identificadores documentales, ni el dato del alumno. **Y no toca `D-01` §1.2**, cuya propuesta `P-1a` —identificadores en castellano— quedó superada por la norma 1.1 §3: corregirla es contenido y no renombre, y se eleva al punto de control. Quedan sin traducir, y se declaran, **tres identificadores sin fila en el glosario**: las carpetas `Configuraciones/` y `Paginas/`, que no son subsegmento de espacio de nombres, y el segmento `Internos` del contraejemplo de la regla 1 de §1.3. |
 | 1.0 | 2026-08-12 | **Emisión inicial.** Plan de la etapa `a` para el punto de control del Product Owner, emitido **antes de escribir código**. Propone, sin decidir, las seis decisiones de nombres que `Handoff-Checkout.md` §6.2 registra como `A-1` y `A-2` —idioma y forma de los identificadores, esquema de espacios de nombres, nombre de la entidad de cuenta, nombre del cuarto puerto, criterio de nombrado de adaptadores y tipos centrales del esqueleto—, cada una con su alternativa real y su costo donde la hay. **Declara que el nombre de la solución y los de los siete proyectos NO son un punto abierto**: están declarados en `PRODUCT-INTAKE` §13 y §16 y derivados en `PRODUCT-MANIFEST` **1.3** §1 y §2, con estado `Aprobado`. Fija el árbol de archivos siguiendo el del intake §16, con **cuatro** apartamientos declarados —`Directory.Build.props` y `.editorconfig`, ampliación del `.gitignore`, la página de estado fuera de la línea de base visual, y `visor/dist/` generado y no versionado—. **Verifica y cita** el orden de construcción en los cuatro niveles topológicos de `Pipeline-Producto.md` §2, contrastado contra `PRODUCT-MANIFEST` §3 y `PRODUCT-INTAKE` §13, que coinciden. Declara los **siete** guiones del intake §16 con su criterio de éxito y su fuente, y marca que **`run-web.sh` y `migrate.sh` no tienen contenido declarado por ninguna fuente**. Mapea los **ocho** criterios propios de la transición `a` → `b` y los **siete** comunes contra lo que los demuestra. Enumera **catorce** cosas que la etapa `a` no hace, cada una con la etapa donde sí ocurre. Eleva **siete** riesgos y contradicciones sin resolver, entre ellos la contradicción de orden entre `Infrastructure BT-05` (etapa `a`) y `Domain BT-06` (etapa `c`) y la divergencia `Alumno` / `Cuenta`, **ninguno de los cuales existía como punto abierto registrado**. **No toma ninguna decisión, no reabre ninguna de las 45 ADR emitidas y no modifica ningún otro documento del corpus.** |
