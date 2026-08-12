@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.0 |
+| Versión | 1.1 |
 | Fecha | 2026-08-11 |
 | Estado | **Aprobado** |
 | Autor | Orquestador SDD |
@@ -73,6 +73,25 @@ El ciclo se cierra cuando se cumple **cualquiera** de estas tres:
 
 Toda tanda se ejecuta contra un plan con partes marcables, según `Observacion-Ejecucion-De-La-Orquestacion.md` §6.2. Antes de despachar cada parte, el orquestador declara **qué parte del plan avanzó y cuánto falta**. Un ciclo sin plan no puede detectar que está volviendo sobre lo mismo.
 
+### 4.4 La distinción que faltaba: el intake cambia por decisión, no por inconsistencia
+
+Aportada por el Product Owner al leer la medición, y **es la regla que evita la anomalía en vez de detectarla tarde**.
+
+**El intake debe cambiar cuando hay una decisión.** Es su función. Y las decisiones aparecen a mitad de camino con toda legitimidad: la validación de la maqueta de la Fase B2 produjo cambios aprobados que obligaron a replantear parte de la solución, y eso está bien —es el método funcionando, no fallando—. Un replanteo así se propaga en orden y nadie debería resistirlo.
+
+**El intake no debería cambiar por inconsistencia.** Que una sección enumere cinco funciones donde otra declara seis, que un rango quede congelado en `E-7`, que la prosa nombre `RN-12` donde va `RN-11`: **eso no es conocimiento nuevo, es un defecto de emisión del propio intake**. Corregirlo es necesario, pero que llegue como versión nueva significa que se descubrió tarde, de a uno, y por una fase que estaba haciendo otra cosa.
+
+**La medición lo confirma.** De las veintiocho versiones, **dieciséis fueron por inconsistencia** —las cinco de fondo y las once de forma— y **doce por decisión o conocimiento nuevo**. Más de la mitad de la historia del documento no debería haber existido como historia del documento.
+
+**Consecuencia operativa.** Después de toda decisión que modifique el intake, y **antes** de propagar nada:
+
+1. **Pasada de estabilización sobre el intake solo**, contra sí mismo: que sus conjuntos cierren, que sus rangos alcancen lo que hoy existe, que ninguna sección contradiga a otra, y que ninguna enumeración enumere de menos. Es una sola pasada, mecánica, y encuentra de una vez lo que si no aparece de a seis.
+2. **Recién entonces se propaga**, y por orden de categorías.
+
+La familia «recuento congelado» habría caído entera en **una** pasada de estas. Apareció **seis veces** repartida en seis fases distintas porque nunca se hizo.
+
+**Y da un criterio de diagnóstico**: si el intake sube versión y el motivo **no es una decisión**, hay que preguntarse por qué la inconsistencia no se detectó antes de consumirlo. La respuesta es siempre la misma —porque no hubo pasada de estabilización— y es lo que hay que corregir, no el síntoma.
+
 ## 5. Aplicación inmediata
 
 Al momento de emitirse esta observación, el criterio §4.2 se cumple **dos veces**: la señal A (la pasada pendiente sobre `Handoff-Checkout.md` existe **sólo** porque la tanda anterior lo desactualizó) y la condición 2 (la familia «recuento congelado» va por su sexta aparición).
@@ -83,4 +102,5 @@ En consecuencia: **se ejecuta esa última pasada, porque `Handoff-Checkout.md` e
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-11 | **§4.4 nueva**, aportada por el Product Owner: **el intake cambia por decisión, no por inconsistencia**. Un replanteo a mitad de camino por una decisión —como el que produjo la validación de la maqueta— es el método funcionando; una versión nueva por un recuento congelado es un defecto de emisión descubierto tarde. La medición lo confirma: **dieciséis de las veintiocho versiones fueron por inconsistencia**. Se adopta la pasada de estabilización del intake contra sí mismo antes de propagar, que habría capturado en una sola vez la familia que apareció seis veces. | Product Owner (aporte) · Orquestador SDD (redacción) |
 | 1.0 | 2026-08-11 | Emisión inicial, a pedido del Product Owner, que detectó la recursividad que el orquestador no vio. Incluye la medición sobre las veintiocho versiones del intake, las dos señales que la revelan, y el instrumento de tres partes: clasificación de hallazgos, criterio de corte y plan con estado. | Orquestador SDD |
