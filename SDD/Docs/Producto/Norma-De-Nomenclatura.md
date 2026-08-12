@@ -2,13 +2,13 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Norma-De-Nomenclatura.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Orquestador SDD (medición y redacción) · Product Owner (las tres decisiones de §5)
 **Nivel:** Producto
-**Origen:** Observación del Product Owner, 2026-08-12: el estándar nombra espacios de nombres, clases y variables en inglés, y el corpus se salió del estándar sin declararlo. La versión 1.1 incorpora las **tres decisiones tomadas por el Product Owner el 2026-08-12** sobre las zonas de frontera que la 1.0 elevó
-**Trazabilidad upstream:** [`../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.30** §13.1 (que registra las tres decisiones de §5), §13, §17.1.P.11, §17.2.P.1, §17.3.P.4, §17.4.P.3, §17.7.P.3 (que declaraba los nombres de la fachada **a fijar en la etapa que la implementa**); [`../Handoff-Checkout.md`](../Handoff-Checkout.md) §6.2 `A-1` y `A-2`; [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.2 a §1.7
+**Origen:** Observación del Product Owner, 2026-08-12: el estándar nombra espacios de nombres, clases y variables en inglés, y el corpus se salió del estándar sin declararlo. La versión 1.1 incorpora las **tres decisiones tomadas por el Product Owner el 2026-08-12** sobre las zonas de frontera que la 1.0 elevó. La versión 1.2 **corrige el método**, no los nombres: el tramo de ensayo `R-1` de §8 se ejecutó y el método falló en cinco puntos, y ésta es la emisión que los repara antes de que arranque el tramo siguiente
+**Trazabilidad upstream:** [`../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.30** §13.1 (que registra las tres decisiones de §5), §13, §17.1.P.11, §17.2.P.1, §17.3.P.4, §17.4.P.3, §17.7.P.3 (que declaraba los nombres de la fachada **a fijar en la etapa que la implementa**); [`../Handoff-Checkout.md`](../Handoff-Checkout.md) §6.2 `A-1` y `A-2`; [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.2 a §1.7; y **el informe del tramo `R-1`**, que es el mensaje del commit `1edccca` del 2026-08-12 —«tramo `R-1`: el ensayo del renombre, y las cinco correcciones que compró»—, única fuente de los cinco defectos que esta versión corrige
 **Trazabilidad downstream:** el punto de control de la etapa `a`; las siete categorías `05-Arquitectura-Tecnica`; la tanda de renombre que ordena §8; [`../Audit/Observacion-Desviacion-De-Nomenclatura.md`](../Audit/Observacion-Desviacion-De-Nomenclatura.md)
 
 ---
@@ -18,10 +18,12 @@
 - [1. Qué fija esta norma y qué no](#1-qué-fija-esta-norma-y-qué-no)
 - [2. El alcance real, contado](#2-el-alcance-real-contado)
   - [2.1 Cómo se contó](#21-cómo-se-contó)
-  - [2.2 Las seis clases](#22-las-seis-clases)
-  - [2.3 Lo que el recuento decide](#23-lo-que-el-recuento-decide)
+  - [2.2 Las seis clases, remedidas](#22-las-seis-clases-remedidas)
+  - [2.3 Las superficies derivadas, contadas](#23-las-superficies-derivadas-contadas)
+  - [2.4 Lo que el recuento decide](#24-lo-que-el-recuento-decide)
 - [3. Zona 1 · Identificadores de código, en inglés](#3-zona-1--identificadores-de-código-en-inglés)
 - [4. Zona 2 · Texto, en castellano](#4-zona-2--texto-en-castellano)
+  - [4.1 Citas, reportes de fuente ajena y uso propio](#41-citas-reportes-de-fuente-ajena-y-uso-propio)
 - [5. Zona de frontera · Las tres decisiones tomadas](#5-zona-de-frontera--las-tres-decisiones-tomadas)
   - [5.1 `F-01` Las seis funciones de la fachada del visor · **decidida**](#51-f-01-las-seis-funciones-de-la-fachada-del-visor--decidida)
   - [5.2 `F-02` Los valores de los conjuntos cerrados · **decidida**](#52-f-02-los-valores-de-los-conjuntos-cerrados--decidida)
@@ -38,8 +40,11 @@
   - [6.8 Clase 6 · Códigos de condición y de contrato (101)](#68-clase-6--códigos-de-condición-y-de-contrato-101)
   - [6.9 Las dos unificaciones y las cuatro coincidencias de nombre](#69-las-dos-unificaciones-y-las-cuatro-coincidencias-de-nombre)
   - [6.10 Los espacios de nombres](#610-los-espacios-de-nombres)
+  - [6.11 Las superficies derivadas: carpetas y nombres de archivo](#611-las-superficies-derivadas-carpetas-y-nombres-de-archivo)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
+  - [8.1 Los siete tramos](#81-los-siete-tramos)
+  - [8.2 Los dos actos de cada tramo](#82-los-dos-actos-de-cada-tramo)
 - [9. Control de cambios](#9-control-de-cambios)
 
 ---
@@ -50,7 +55,7 @@
 
 **Registra las tres decisiones de frontera, que son del Product Owner.** La versión 1.0 las elevó con su costo contado y su alternativa real, que es lo que hizo posible decidirlas. **El Product Owner las decidió el 2026-08-12** y §5 las registra como decisiones tomadas, con fecha, fundamento y costo. Este documento no las toma: las asienta y las hace verificables.
 
-**Y produce el glosario completo, que es el entregable que hace ejecutable al renombre.** §6 cubre los **155 identificadores** de las seis clases de §2.2. La regla que lo gobierna es una sola: **si un concepto no está en la tabla, no se traduce por criterio propio — se agrega primero**.
+**Y produce el glosario completo, que es el entregable que hace ejecutable al renombre.** §6 cubre los **155 identificadores** de las seis clases de §2.2, y desde la 1.2 también las **cinco superficies derivadas** de §6.11 —las carpetas y los nombres de archivo que ninguna de las seis clases contaba—. La regla que lo gobierna es una sola: **si un concepto no está en la tabla, no se traduce por criterio propio — se agrega primero**.
 
 **No renombra nada.** Ninguna emisión de esta tanda modifica un identificador del corpus. Renombrar es un acto posterior, se ejecuta **contra el glosario de §6** y su orden es el de **§8**. Hacerlo antes del glosario es lo que produce tres nombres distintos para la misma cosa.
 
@@ -60,51 +65,103 @@
 
 ### 2.1 Cómo se contó
 
-Sobre el árbol `SDD/` del 2026-08-12, **excluidos `_legacy/` y `Docs/Audit/`**: **631 archivos** —615 `.md`, 12 `.html`, 3 `.js` y 1 `.css`—. Cada cifra de §2.2 es un recuento con herramienta sobre ese conjunto, no una estimación.
+Sobre el árbol `SDD/` del 2026-08-12, **excluidos `_legacy/` y `Docs/Audit/`**: **632 archivos** —616 `.md`, 12 `.html`, 3 `.js` y 1 `.css`—. La 1.0 y la 1.1 declararon **631**, y la diferencia está medida y no es un error de conteo: la 1.0 contó el árbol **antes de emitirse**, y este documento es el archivo 632. Contado sobre el árbol previo a la emisión de la 1.0 da 631; sobre el de hoy da 632.
 
-Dos precisiones de método, porque cambian los números:
+**La medición corre sobre 631 de esos 632, porque se excluye este documento.** Sus §6.3 a §6.11 son la tabla de correspondencia, de modo que cada identificador castellano que aparece acá es un **reporte** y no un uso: §4.1 lo declara como regla general y no como excepción de conveniencia. La 1.1 ya lo hacía sin decirlo, y no decirlo es parte de lo que esta versión corrige.
 
-1. **Se cuenta el identificador, no la palabra.** `Pendiente` en prosa no cuenta; `` `Pendiente` `` entre acentos graves, que es como el corpus marca un valor de conjunto cerrado, sí. Los códigos de condición se cuentan por su forma completa.
-2. **«Documentos» es en cuántos archivos aparece al menos una vez** el identificador de la clase, y «ocurrencias» es cuántas veces en total. Un identificador citado quince veces en un archivo cuenta un documento y quince ocurrencias.
+**Qué cuenta cada cifra.** Tres unidades distintas, y confundir dos de ellas en un solo lugar es el defecto que trajo esta versión:
 
-### 2.2 Las seis clases
+1. **Identificadores distintos**: cuántos nombres hay.
+2. **Documentos**: en cuántos archivos aparece al menos una vez algún identificador del grupo.
+3. **Ocurrencias**: cuántas veces en total. Un identificador citado quince veces en un archivo cuenta un documento y quince ocurrencias.
 
-| Clase | Identificadores distintos | Documentos | Ocurrencias |
-| --- | --- | --- | --- |
-| **1. Interfaces y puertos** | **5** — `IRepositorioTrabajos`, `IValidadorFiguras`, `IRelojDelSistema` declarados; `IRepositorioCuentas` e `IRepositorioAlumnos` propuestos | 12 declarados · 1 propuestos | 56 declarados · 5 propuestos |
-| **2. Entidades y tipos** | **31** — 5 entidades (`Cuenta`, `Trabajo`, `Pieza`, `Componente`, `Observacion`), 5 en mayúsculas del intake (`ALUMNO`…), 7 tipos de figura del dato del alumno, 14 tipos y adaptadores propuestos | 3 · 3 · 30 · 1 | 37 · — · 201 · 18 |
-| **3. Miembros y propiedades** | **2** — `HashContrasena`, `JsonOriginal` | 3 | 8 |
-| **4. Funciones de la fachada del visor** | **6** — `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir`, `establecerMovimiento` | **52**, de los cuales **21** declaran las seis | **593** |
-| **5. Valores de conjuntos cerrados** | **10** — 6 estados (`Pendiente`, `Habilitado`, `Bloqueado`, `Borrador`, `Finalizado`, `Rechazado`) y 4 de papel y especie (`Alumno`, `Administrador`, `Advertencia`, `ErrorDeValidacion`) | **396** | **4259** |
-| **6. Códigos de condición y de contrato** | **101** — 21 `CONTRATO_*` de la frontera y 80 internos de los seis catálogos | **334** | **2911** |
+**El instrumento, exacto.** Cada cifra de §2.2, §2.3 y §8 sale de este procedimiento, aplicado con herramienta sobre los 631 archivos:
+
+1. De cada archivo se extraen sus **regiones de código**: los bloques cercados con tres acentos graves y los tramos entre acentos graves simples. Es como el corpus marca un identificador, y es lo que separa `` `Pendiente` `` de «pendiente» en prosa.
+2. Cada región se parte en átomos por espacio y puntuación, y **todo átomo que sea un nombre de archivo de documentación** —termina en `.md`, `.html` o `.css`— **se descarta entero**: §4 los declara castellanos y el renombre no los toca.
+3. Cada átomo restante se parte en *tokens* por todo carácter que no sea letra, dígito o `_`. Así `Persistence/Configuraciones/AccountConfiguration.cs` da tres tokens y aporta **una ocurrencia de la carpeta `Configuraciones`**, y `Entities/{Cuenta,…}.cs` aporta **una ocurrencia del nombre de archivo `Cuenta`**.
+4. Una **ocurrencia** es un token idéntico al identificador. La comparación es exacta y sensible a mayúsculas: `TRABAJO` no se confunde con `Trabajo`, ni `CORREO_YA_REGISTRADO` con `CONTRATO_CORREO_YA_REGISTRADO`.
+
+**El paso 3 es la corrección de fondo del defecto de las rutas.** Ninguna cifra de la 1.1 contaba las carpetas ni los nombres de archivo, y §3 obliga a contarlas: §2.3 mide cuánto es eso.
+
+**Y lo que se declara es la ocurrencia *candidata*, no la ocurrencia a renombrar.** Un token idéntico al identificador puede ser el identificador, o puede ser un homónimo: prosa marcada como código, una cita de fuente ajena (§4.1), u otro concepto con el mismo nombre. **Esa separación no la hace una herramienta**: la hace el tramo, por escrito y **antes de editar**, y `V-4` de §7 la exige así. Donde ya está medida, se declara.
+
+**El instrumento reproduce seis cifras de la 1.1 con exactitud**, lo que es la evidencia de que mide lo mismo que ella creía medir: clase 1 declarada (12 documentos y 56 ocurrencias), clase 1 propuesta (1 y 5, sobre el estado previo a `R-1`), clase 3 (3 y 8), los 21 `CONTRATO_*` (220 y 1201), el catálogo vivo de `GeometriaFactory-Infrastructure` (205 y 394) y los 21 documentos que declaran las seis funciones de la fachada. Las que **no** reproduce están abajo con su diferencia y su causa.
+
+### 2.2 Las seis clases, remedidas
+
+| Clase | Identificadores distintos | Documentos | Ocurrencias candidatas | Lo que decía la 1.1 |
+| --- | --- | --- | --- | --- |
+| **1. Interfaces y puertos** | **5** — `IRepositorioTrabajos`, `IValidadorFiguras`, `IRelojDelSistema` declarados; `IRepositorioCuentas` e `IRepositorioAlumnos` propuestos | 12 declarados · 0 propuestos hoy (1 antes de `R-1`) | 56 declarados · 0 propuestos hoy (5 antes de `R-1`) | 12 · 1 documentos; 56 · 5 ocurrencias — **coincide** |
+| **2. Entidades y tipos** | **31** — 5 entidades, 5 tablas en mayúsculas, 7 tipos de figura, 14 tipos y adaptadores propuestos | 46 · 7 · 39 · 0 hoy (1 antes de `R-1`) | 297 · 34 · 358 · 0 hoy (30 antes de `R-1`) | 3 · 3 · 30 · 1 documentos; 37 · — · 201 · 18 ocurrencias |
+| **3. Miembros y propiedades** | **2** — `HashContrasena`, `JsonOriginal` | 3 | 8 | 3 y 8 — **coincide** |
+| **4. Funciones de la fachada del visor** | **6** | **53**, de los cuales **21** declaran las seis | **621** | 52 documentos y 593 ocurrencias |
+| **5. Valores de conjuntos cerrados** | **10** | **399** | **4461** | 396 documentos y 4259 ocurrencias |
+| **6. Códigos de condición y de contrato** | **101** | **330** | **2847** | 334 documentos y 2911 ocurrencias |
+
+**El total sin solapamiento entre clases: 155 identificadores distintos en 464 de los 631 archivos medidos, con 8712 ocurrencias candidatas** —8682 medidas hoy, más las 30 de los 14 tipos propuestos que `R-1` ya renombró, medidas sobre el estado previo—. La 1.1 declaraba 155 identificadores en 459 de 631 archivos con 8111 ocurrencias.
 
 Los desgloses que hacen falta para decidir:
 
-| Desglose | Distintos | Documentos | Ocurrencias |
-| --- | --- | --- | --- |
-| Clase 5, sólo los **seis estados** | 6 | 384 | 3874 |
-| Clase 5, sólo `Pendiente` | 1 | 349 | 1919 |
-| Clase 6, sólo los `CONTRATO_*` | 21 | 220 | 1201 |
-| Clase 6, catálogo de `GeometriaFactory-Domain` | 42 vivos + 5 retirados | 65 | 810 |
-| Clase 6, catálogo de `GeometriaFactory-Application` | 36 vivos | 114 | 1059 |
-| Clase 6, catálogo de `GeometriaFactory-Infrastructure` | 17 vivos | 205 | 394 |
-| Clase 6, catálogo de `GeometriaFactory-Visor` | 7 vivos | 48 | 351 |
+| Desglose | Distintos | Documentos | Ocurrencias | 1.1 |
+| --- | --- | --- | --- | --- |
+| Clase 2, las **5 entidades** | 5 | 46 | 297 | 3 y 37 |
+| Clase 2, las **5 tablas en mayúsculas** | 5 | 7 | 34 | 3 documentos, ocurrencias no declaradas |
+| Clase 2, entidades **y** tablas, sin solapamiento | 10 | 49 | 331 | — |
+| Clases 1, 2 y 3 juntas | 38 | 88 | 754 | 38 identificadores en 37 documentos |
+| Clase 5, sólo los **seis estados** | 6 | 386 | 4030 | 384 y 3874 |
+| Clase 5, sólo `Pendiente` | 1 | 351 | 1983 | 349 y 1919 |
+| Clase 5, `Pendiente` en documentos que traen **los dos contextos** | 1 | 58 | 956 | — |
+| «pendiente» **en prosa**, fuera de toda región de código | — | 254 | 934 | — |
+| Clase 6, sólo los `CONTRATO_*` | 21 | 220 | 1201 | 220 y 1201 — **coincide** |
+| Clase 6, catálogo de `GeometriaFactory-Domain` | 42 vivos + 5 retirados | 64 | 749 | 65 y 810 |
+| Clase 6, catálogo de `GeometriaFactory-Application` | 36 vivos | 99 | 775 | 114 y 1059 |
+| Clase 6, catálogo de `GeometriaFactory-Infrastructure` | 17 vivos | 205 | 394 | 205 y 394 — **coincide** |
+| Clase 6, catálogo de `GeometriaFactory-Visor` | 7 vivos | 44 | 287 | 48 y 351 |
+| Clase 6, los 4 retirados de §6.8.5 | 4 | 13 | 47 | — |
 
-**El total sin solapamiento entre clases: 155 identificadores distintos en 459 de los 631 archivos, con 8111 ocurrencias.**
+**Las tres diferencias, con su causa medida.**
+
+**Primera, y es la grande: la clase 2 estaba mal contada por un orden de magnitud.** La 1.1 daba las cinco entidades en **3 documentos y 37 ocurrencias**; son **46 documentos y 297 ocurrencias**. La causa es que se contó sobre los documentos que **declaran** el modelo de dominio y no sobre el corpus que **usa** los nombres: `` `Trabajo` `` aparece marcado como identificador en 35 documentos —casos de uso, historias de usuario, contratos de datos de la maqueta, reglas de negocio— y `` `Cuenta` `` en 18. La consecuencia para el plan está en §8: esta clase **no era barata**, y por eso necesita tramo propio.
+
+**Segunda: la clase 6 se midió por forma y no contra la lista.** La 1.1 contó todo token con forma `SCREAMING_SNAKE_CASE`. El corpus tiene **141 tokens distintos de esa forma, en 334 documentos y 3022 ocurrencias** —de ahí salen sus 334 documentos—, y **sólo 101 son códigos del catálogo**. Los otros 40 son constantes de la maqueta de `GeometriaFactory-Web` —`SELLO_MAQUETA`, `ROTULOS_DE_ESTADO`, `PASO_ANGULO`, `TEXTO_E1`, `ARBOL_E7`…— y **`TRANSICION_DE_TRABAJO_NO_ADMITIDA`**, con **1 ocurrencia**, que no es un huérfano nuevo: es un código que `RN-05` acuñó y retiró, y su única ocurrencia está **dentro de la fila de control de cambios que declara el retiro**. Es el caso que §4.1 existe para proteger.
+
+**Tercera, y son menores: la clase 4 y la clase 5 suben.** La fachada pasa de 52 a 53 documentos y de 593 a 621 ocurrencias, y los conjuntos cerrados de 396 a 399 y de 4259 a 4461, porque el instrumento cuenta también las formas punteadas —`EstadoDeCuenta.Pendiente`— y las que viven dentro de bloques cercados, que el recuento anterior no alcanzaba.
 
 **El recuento de la clase 6 se rehizo para la versión 1.1, sobre los seis catálogos, y cierra en 101.** El desglose está en §6.2 y conviene anticipar el término que no era obvio: los **80 internos** son **76 vivos** —la unión de los cuatro catálogos, descontado el solapamiento— **más 4 retirados** que ya no son condición de ningún catálogo y siguen apareciendo en el corpus. El quinto retirado que `GeometriaFactory-Domain` declara sigue **vivo en `GeometriaFactory-Application`** y por eso está entre los 76.
 
-Los desgloses de la clase 6 **se solapan**: un mismo código lo declara `GeometriaFactory-Domain` y lo cita `GeometriaFactory-Application`. La cifra sin solapamiento es la de §2.2: **101 distintos en 334 documentos, 2911 ocurrencias**.
+Los desgloses de la clase 6 **se solapan**: un mismo código lo declara `GeometriaFactory-Domain` y lo cita `GeometriaFactory-Application`. La cifra sin solapamiento es la de §2.2: **101 distintos en 330 documentos, 2847 ocurrencias**.
 
-### 2.3 Lo que el recuento decide
+### 2.3 Las superficies derivadas, contadas
+
+**Cada identificador se escribe además como carpeta y como nombre de archivo, y eso no es opcional: dos reglas ya declaradas lo obligan.** La regla de forma 3 de §3 fija que **el espacio de nombres coincide con la carpeta**, y la última fila de la tabla de §3 fija que **el nombre de archivo de código es igual al tipo que contiene**. Renombrar el tipo sin renombrar su archivo deja el corpus contra su propia norma; el ensayo `R-1` lo descubrió al ejecutarse, y ninguna cifra de la 1.1 lo contaba.
+
+Lo que hay hoy, contado archivo por archivo con el instrumento de §2.1:
+
+| Superficie escrita | Dónde | Ocurrencias | Quién la arrastra |
+| --- | --- | --- | --- |
+| `Entities/{Cuenta,Trabajo,Pieza,Componente,Observacion}.cs` — cinco nombres de archivo | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 | 5 | El tramo `R-2b` de §8, con las cinco entidades |
+| `Ports/{…,IRepositorioTrabajos,IValidadorFiguras,IRelojDelSistema}.cs` — tres nombres de archivo | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 | 3 | El tramo `R-2`, con los tres puertos declarados |
+| `VisorFiguras.razor` — nombre de archivo del componente Blazor que envuelve al visor | Intake §17.7.P.2 | 1 | El tramo `R-3`, con la fachada; §6.11 le da fila |
+| `Persistence/Configuraciones/` — carpeta **por debajo** del nivel de espacio de nombres | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 | 1 | §6.11. `R-1` la dejó sin renombrar porque ninguna regla la cubría |
+| `Components/Paginas/` — carpeta por debajo del nivel de espacio de nombres | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 y §1.7 | 2 | §6.11, ídem |
+| `visor/src/visor/` — carpeta de la capa 3 del *bundle*, por debajo del nivel | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 | 1 | §6.11, y no lo había detectado el ensayo |
+| `Entities.Accounts.Internos` — segmento del contraejemplo de la regla de un solo nivel | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.3 | 1 | §6.11, ídem |
+| `Persistence/Migrations/` y `Components/Layout/` — carpetas por debajo del nivel, **ya en inglés** | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 | 2 | Ninguno: se verifican y se dejan |
+
+**Dieciséis ocurrencias en dos documentos**, y ésa es la medida real de la superficie derivada hoy: el corpus dibuja el árbol de código en **dos lugares y en ningún otro** —el plan de la etapa `a` y el intake—.
+
+**Que hoy sea chica no la vuelve despreciable, y el ensayo lo probó.** Los 16 subsegmentos de espacio de nombres de §6.10 son, cada uno, **también una carpeta**, de modo que la superficie derivada duplicó el alcance del tramo `R-1` respecto de lo que su fila declaraba. La regla que la gobierna —y que faltaba— es **§6.11**, y existe para que el día que el código exista no haya que redescubrirla documento por documento.
+
+### 2.4 Lo que el recuento decide
 
 Tres cosas, y son las que ordenan el resto del documento.
 
-**Primera: hay dos poblaciones y no una.** Los identificadores *propuestos* —los 14 tipos y adaptadores de [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 y §1.7, los dos puertos alternativos, los 16 subsegmentos de espacio de nombres de su §1.3— viven en **un solo documento** y suman **41 ocurrencias**. Renombrarlos cuesta una edición. Los identificadores *declarados* —los códigos de condición, los valores de estado, la fachada— viven en cientos de documentos. Son problemas distintos y merecen respuestas distintas.
+**Primera: hay dos poblaciones y no una.** Los identificadores *propuestos* —los 14 tipos y adaptadores de [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 y §1.7, los dos puertos alternativos, los 16 subsegmentos de espacio de nombres de su §1.3 y los 6 derivados de §6.4— viven en **un solo documento** y son **38 identificadores con 80 ocurrencias candidatas**, de las cuales **2 son prosa** —`Estado` en el campo de cabecera del documento y en una frase— y **78 se renombran**. La 1.1 declaraba «41 ocurrencias», y era **la única cifra de la norma que no se midió con herramienta**: cuarenta y uno era un recuento de *identificadores*, no de ocurrencias. El tramo `R-1` la midió al ejecutarse —informó 81— y esta versión la remide con el instrumento de §2.1. Renombrarlos costó una edición; eso sigue siendo cierto.
 
-**Segunda: el grueso del corpus no está en juego.** Las clases 1, 2 y 3 juntas —puertos, entidades, miembros— son **38 identificadores en 37 documentos**. Ahí la norma se aplica sin negociación, porque casi nada existe todavía.
+**Segunda: el grueso del corpus sí está en juego, y la 1.1 decía lo contrario.** Las clases 1, 2 y 3 juntas —puertos, entidades, miembros— no son «38 identificadores en 37 documentos»: son **38 identificadores en 88 documentos, con 754 ocurrencias**. Lo que casi no existe todavía son los puertos y los miembros —15 documentos entre los dos—; las **entidades** están escritas en 46 documentos. La frase de la 1.1 —«ahí la norma se aplica sin negociación, porque casi nada existe todavía»— era verdadera para las clases 1 y 3 y **falsa para la clase 2**, y de esa falsedad salió el hueco del plan que §8 cierra con `R-2b`.
 
-**Tercera: `Pendiente` sola pesa más que las clases 1, 2 y 3 juntas.** 1919 ocurrencias en 349 documentos, y **nombra dos cosas distintas**: una cuenta que espera habilitación y un trabajo que espera revisión. [`../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1 ya tuvo que declarar una forma calificada obligatoria —«marca de cambio de contraseña pendiente»— justamente porque «`Pendiente` a secas nombra un estado de cuenta y un estado de trabajo». Un identificador en inglés no habría tenido esa colisión: `Pending` y `Submitted` son palabras distintas.
+**Tercera: `Pendiente` sola pesa más que las clases 1, 2 y 3 juntas, y no se puede renombrar por cadena.** **1983 ocurrencias en 351 documentos**, y **nombra dos cosas distintas**: una cuenta que espera habilitación y un trabajo que espera revisión. Tres cifras más, medidas, que deciden cómo se ejecuta `R-4`: **58 documentos traen los dos contextos** —estados de cuenta y estados de trabajo en el mismo archivo— **con 956 ocurrencias entre ellos**, que es donde un renombre por cadena elige mal; y **«pendiente» aparece 934 veces en 254 documentos fuera de toda región de código**, es decir en prosa, donde §4 manda que se quede. [`../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1 ya tuvo que declarar una forma calificada obligatoria —«marca de cambio de contraseña pendiente»— justamente porque «`Pendiente` a secas nombra un estado de cuenta y un estado de trabajo». Un identificador en inglés no habría tenido esa colisión: `Pending` y `Submitted` son palabras distintas.
 
 ## 3. Zona 1 · Identificadores de código, en inglés
 
@@ -146,6 +203,27 @@ Tres cosas, y son las que ordenan el resto del documento.
 
 **La regla que las une:** si lo lee una persona, castellano; si lo lee una herramienta, inglés. La frontera es esa, y las tres decisiones de §5 son exactamente los lugares donde algo lo leen las dos.
 
+### 4.1 Citas, reportes de fuente ajena y uso propio
+
+**Un identificador escrito en un documento puede estar haciendo tres cosas distintas, y el renombre las trata distinto.** Sin esta regla, un tramo que renombra «todas las ocurrencias» **corrige unas y falsifica otras**, y la diferencia no se ve en un recuento.
+
+| Forma | Qué es | Qué hace el renombre | Cómo se reconoce |
+| --- | --- | --- | --- |
+| **Cita textual** | Palabras de otra fuente reproducidas literalmente, entre comillas angulares | **No se toca nunca.** Cambiar un nombre adentro de una cita la convierte en una cita falsa: la fuente no dijo eso | Está entre `«` y `»`, o entre comillas, y remite a un documento y a un parágrafo |
+| **Reporte de fuente** | Una afirmación propia sobre **cómo nombra otra fuente**: «el intake §17.3.P.4 nombra las cinco tablas en mayúsculas» | Se renombra **si y sólo si esa fuente se renombra**, y en **el mismo tramo** que la fuente. Si la fuente no se renombra, el reporte conserva el nombre ajeno | Tiene un sujeto que no es este producto —el intake, `RT §7.1`, el programa de la Actividad 1— y un verbo de decir: *nombra*, *declara*, *emite*, *transcribe* |
+| **Registro histórico** | Un acta de algo que ya pasó: fila de control de cambios, hallazgo de auditoría, ronda de corrección, retiro de un código | **No se toca nunca.** Es el registro de un hecho con su nombre de entonces; renombrarlo borra la trazabilidad que el acta existe para dar | Vive en la sección de control de cambios de su documento, o cita una ronda, un hallazgo o una versión |
+| **Uso propio** | El documento usa el identificador para nombrar la cosa | **Se renombra.** Es la población de §8 | Todo lo que no es ninguna de las tres anteriores |
+
+**Cuánto es esto, contado.** El corpus tiene **117 citas entrecomilladas que traen adentro un identificador del glosario, con 134 ocurrencias, repartidas en 58 documentos**, y **441 filas de control de cambios que nombran uno**. No es un caso de borde: es una población comparable a la de un tramo entero.
+
+**El caso que lo vuelve urgente, y es el tramo siguiente.** `R-2` toca **el intake**, que es *la fuente* de la que el resto del corpus reporta. Ahí las tres formas conviven en el mismo párrafo, y la regla decide:
+
+1. Cuando el intake **se renombra**, todo reporte que dice «el intake nombra `IRepositorioTrabajos`» pasa a decir `IWorkRepository` **en el mismo tramo**, porque si no queda reportando algo que la fuente ya no dice.
+2. Cuando la fuente es **ajena al producto** —el JSON que emite el programa de la Actividad 1 (§5.4), o `RT §7.1` transcrito por el intake §17.3.P.4— el reporte **conserva el nombre ajeno**, aunque el identificador propio se renombre. `Modelo-Datos-Logico.md` §7 puede decir que la tabla `Account` corresponde a lo que `RT §7.1` llama `ALUMNO`: ésa es la forma correcta, y es la que §6.9 ya usa.
+3. Cuando la fuente **cita a su vez** un nombre retirado, el reporte no se traduce: `RN-05` conserva `TRANSICION_DE_TRABAJO_NO_ADMITIDA` en su fila de control de cambios de la 1.1, porque esa fila **declara el retiro** de ese código y renombrarla haría ilegible el hallazgo `P2-02` que la produjo.
+
+**La consecuencia operativa está en `V-4` de §7 y en §8.2**: la lista de ocurrencias que **no** se renombran —las tres primeras formas de la tabla— se escribe **antes de editar**, y el cuadre se hace contra ella.
+
 ## 5. Zona de frontera · Las tres decisiones tomadas
 
 Las tres tienen la misma forma: **un identificador que también es dato**. Se persiste, o viaja en una respuesta, o lo invoca otro extremo. Cambiarlo no es renombrar: es cambiar un contrato.
@@ -154,9 +232,9 @@ Las tres tienen la misma forma: **un identificador que también es dato**. Se pe
 
 | Frontera | Decisión | Fecha | Alcance contado | ¿Cambia un contrato? |
 | --- | --- | --- | --- | --- |
-| `F-01` Fachada del visor | **`F-01a`: las seis funciones van a inglés** | 2026-08-12 | 52 documentos · 593 ocurrencias | No. Los nombres nunca estuvieron fijados |
-| `F-02` Conjuntos cerrados | **`F-02a`: identificador en inglés, etiqueta en castellano** | 2026-08-12 | 396 documentos · 4259 ocurrencias | Sí en la forma persistida, **con costo cero hoy**: no hay base poblada |
-| `F-03` Códigos de condición | **Los 101 van a inglés: los 80 internos y los 21 de contrato** | 2026-08-12 | 334 documentos · 2911 ocurrencias | **Sí. Es un cambio de contrato y así se declara** |
+| `F-01` Fachada del visor | **`F-01a`: las seis funciones van a inglés** | 2026-08-12 | 53 documentos · 621 ocurrencias candidatas | No. Los nombres nunca estuvieron fijados |
+| `F-02` Conjuntos cerrados | **`F-02a`: identificador en inglés, etiqueta en castellano** | 2026-08-12 | 399 documentos · 4461 ocurrencias candidatas, y 934 más de «pendiente» en prosa que **no** se tocan | Sí en la forma persistida, **con costo cero hoy**: no hay base poblada |
+| `F-03` Códigos de condición | **Los 101 van a inglés: los 80 internos y los 21 de contrato** | 2026-08-12 | 330 documentos · 2847 ocurrencias candidatas | **Sí. Es un cambio de contrato y así se declara** |
 
 ### 5.1 `F-01` Las seis funciones de la fachada del visor · **decidida**
 
@@ -171,7 +249,7 @@ Los otros dos términos del fundamento, y son los que hacen que el momento sea e
 1. **El visor no existe como código.** La etapa `a` crea el proyecto y un *bundle* «vacío pero real» (intake §15), con la fachada declarada y sin lógica de dibujo. No hay una sola línea que renombrar.
 2. **Su único consumidor está en la misma solución.** El *bundle* sólo lo invoca `GeometriaFactory-Web`, que se compila y se despliega junto con él. No hay consumidor externo al que avisarle.
 
-**Costo contado, y es el que se paga.** **52 documentos** las nombran; **21** declaran las seis; **593 ocurrencias** en total. Los documentos que fijan su contrato son [`../Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md), su [`ADR-02`](../Proyectos/GeometriaFactory-Visor/05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md), el intake §17.7.P.3, y las categorías 02, 03, 05 y 10 de `GeometriaFactory-Visor` y `GeometriaFactory-Web`. Es un renombre mecánico, verificable con recuento en las dos direcciones, **sin ninguna decisión por documento**.
+**Costo contado, y es el que se paga.** **53 documentos** las nombran; **21** declaran las seis; **621 ocurrencias** en total, remedidas en la 1.2 —la 1.1 declaraba 52 y 593—. Los documentos que fijan su contrato son [`../Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md), su [`ADR-02`](../Proyectos/GeometriaFactory-Visor/05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md), el intake §17.7.P.3, y las categorías 02, 03, 05 y 10 de `GeometriaFactory-Visor` y `GeometriaFactory-Web`. Es un renombre mecánico, verificable con recuento en las dos direcciones, **sin ninguna decisión por documento**.
 
 **La alternativa que se descartó** era `F-01b` —quedan en castellano, declarado como apartamiento—: dejaba la única superficie pública del producto en un idioma distinto del de todo el resto del código, y obligaba a `GeometriaFactory.Web.Integration` a traducir en el punto de invocación, que es el defecto que `RI-06` de [`Vista-Producto.md`](Vista-Producto.md) §7 declara con historia en este producto.
 
@@ -185,7 +263,7 @@ Los otros dos términos del fundamento, y son los que hacen que el momento sea e
 
 **El fundamento decisivo: deshace la colisión ya declarada de `Pendiente`.** Hoy `Pendiente` nombra **dos cosas distintas** —una cuenta que espera habilitación y un trabajo que espera revisión— y el corpus ya tuvo que pagar por eso: [`../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1 declaró obligatoria una forma calificada —«marca de cambio de contraseña pendiente»— justamente porque «`Pendiente` a secas nombra un estado de cuenta y un estado de trabajo». En inglés son dos palabras: la cuenta está `Pending` y el trabajo está `Submitted` —se envió y espera revisión—. **La forma calificada obligatoria deja de hacer falta**, y §6.7 declara cuál de los dos nombres va en cada contexto.
 
-**Costo contado, y es alto.** **396 documentos, 4259 ocurrencias**: es la clase más grande del corpus. Sólo `Pendiente` son 349 documentos y 1919 ocurrencias.
+**Costo contado, y es alto.** **399 documentos, 4461 ocurrencias candidatas**: es la clase más grande del corpus. Sólo `Pendiente` son **351 documentos y 1983 ocurrencias**, de las cuales **956 viven en los 58 documentos que traen los dos contextos a la vez**; y hay **934 ocurrencias más de «pendiente» en prosa, en 254 documentos**, que §4 deja donde están. Las cifras de la 1.1 eran 396 y 4259, y 349 y 1919.
 
 **Y el costo que no es documental, con su ventana.** El identificador es el dato persistido, de modo que una base ya poblada exigiría una transformación de esquema. **Hoy no hay ninguna base poblada** —`GeometriaFactory-Infrastructure` no está construido—, así que ese costo es **cero si se ejecuta ahora**, y deja de serlo el día que exista la primera fila. Es la razón por la que la decisión se toma hoy y no después.
 
@@ -212,9 +290,9 @@ Los otros dos términos del fundamento, y son los que hacen que el momento sea e
 
 **La convención de forma, exacta.** Los códigos **conservan su forma de constante y sólo cambian de idioma**: `SCREAMING_SNAKE_CASE`, palabras en inglés separadas por `_`, sin artículos, sin preposiciones sueltas y sin prefijo de proyecto. `DATO_OBLIGATORIO_AUSENTE` pasa a `REQUIRED_FIELD_MISSING`; `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` pasa a `STATE_FORBIDS_UPDATE`. La forma no se toca porque no está en discusión: lo que estaba en discusión era el idioma.
 
-**Costo contado.** **334 documentos, 2911 ocurrencias.** Los `CONTRATO_*` solos: 220 documentos, 1201 ocurrencias. Es el renombre más caro de los tres y el más mecánico: no hay ninguna decisión por documento, sólo correspondencia uno a uno contra §6.8, y los seis catálogos son la fuente única contra la que se verifica. La verificación en las dos direcciones que `ADR-06` de `GeometriaFactory-Application` ya exige —comparar los códigos emitidos contra el catálogo— **sirve tal cual** después del renombre.
+**Costo contado.** **330 documentos, 2847 ocurrencias candidatas**, remedidas en la 1.2 —la 1.1 declaraba 334 y 2911, contando por forma y no contra la lista de los 101; §2.2 lo detalla—. Los `CONTRATO_*` solos: **220 documentos, 1201 ocurrencias**, cifra que la remedición reproduce exacta. Es el renombre más caro de los tres y el más mecánico: no hay ninguna decisión por documento, sólo correspondencia uno a uno contra §6.8, y los seis catálogos son la fuente única contra la que se verifica. La verificación en las dos direcciones que `ADR-06` de `GeometriaFactory-Application` ya exige —comparar los códigos emitidos contra el catálogo— **sirve tal cual** después del renombre.
 
-**Las dos alternativas que se descartaron.** `F-03b` —quedan como están, declarado como apartamiento— dejaba el producto con una regla partida —identificadores en inglés salvo estos 101— que hay que explicar cada vez, y la explicación es histórica y no técnica. `F-03c` —sólo los 80 internos, y los 21 `CONTRATO_*` quedan— era la salida intermedia, y la 1.0 ya había medido por qué compra poco: reduce el alcance de 334 documentos a 318, que **no es una reducción real**, porque los mismos documentos citan las dos familias; y obliga a `GeometriaFactory-Api` a traducir de un catálogo inglés a uno castellano en la frontera, que es una tabla más que mantener.
+**Las dos alternativas que se descartaron.** `F-03b` —quedan como están, declarado como apartamiento— dejaba el producto con una regla partida —identificadores en inglés salvo estos 101— que hay que explicar cada vez, y la explicación es histórica y no técnica. `F-03c` —sólo los 80 internos, y los 21 `CONTRATO_*` quedan— era la salida intermedia, y la 1.0 ya había medido por qué compra poco: reduce el alcance de 330 documentos a 314, que **no es una reducción real**, porque los mismos documentos citan las dos familias; y obliga a `GeometriaFactory-Api` a traducir de un catálogo inglés a uno castellano en la frontera, que es una tabla más que mantener.
 
 **El hallazgo lateral de la 1.0 sigue abierto y se confirma.** Dos identificadores `CONTRATO_*` —`CONTRATO_CAMBIO_DE_CONTRASENA_PENDIENTE` y `CONTRATO_RESETEO_NO_ADMITIDO`— aparecen en **tres casos de uso de `GeometriaFactory-Web`** —`CU-02`, `CU-03` y `CU-04`— y **no figuran en el catálogo de `GeometriaFactory-Contracts`, ni en el de `GeometriaFactory-Api`, ni en `Contratos-REST.md`**. Es un defecto de fondo preexistente y ajeno al idioma: el conjunto real citado por el corpus es **23** y el conjunto declarado es **21**. §6.8 les da fila con la marca `huérfano` y **no los traduce**, porque §6.1 exige que el concepto exista antes que el nombre: quien los declare formalmente los agrega, y recién ahí entran al renombre.
 
@@ -222,7 +300,7 @@ Los otros dos términos del fundamento, y son los que hacen que el momento sea e
 
 **El JSON que el alumno pega no se toca, y sus claves no son un identificador de este producto.** `Tipo`, `Tapas`, `Bases`, `Radio`, `Largo`, `Ancho`, `Area`, `Volumen`, y los valores `Cilindro`, `Cubo`, `Ortoedro`, `Rectangulo`, `Cuadrado`, `Circulo`, `RectanguloDesarrollado`.
 
-Los emite el programa de escritorio de la Actividad 1, que **no forma parte de este producto**: el intake §17.1.P.10 lo dice con todas las letras —«eso es de la Actividad 1, que es el emisor del dato y no forma parte de este producto»— y la decisión `D-1` fija que el JSON se acepta **tal como lo emite su programa**, con sus comas finales y su clave `Tapas`. **30 documentos, 201 ocurrencias** para los siete tipos de figura.
+Los emite el programa de escritorio de la Actividad 1, que **no forma parte de este producto**: el intake §17.1.P.10 lo dice con todas las letras —«eso es de la Actividad 1, que es el emisor del dato y no forma parte de este producto»— y la decisión `D-1` fija que el JSON se acepta **tal como lo emite su programa**, con sus comas finales y su clave `Tapas`. **39 documentos, 358 ocurrencias** para los siete tipos de figura —la 1.1 declaraba 30 y 201—.
 
 **Consecuencia para la norma:** el tipo de C# que lee ese JSON se llama en inglés y **mapea explícitamente** al nombre castellano de la clave. La traducción vive en el mapeo, declarada, en un solo lugar — que es precisamente donde el producto ya decidió que viven las trampas del formato. §6.4 trae las quince filas con su marca `no se renombra`.
 
@@ -255,7 +333,10 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | 4. Funciones de la fachada del visor | 6 | 6 | §6.6 |
 | 5. Valores de conjuntos cerrados | 10 | 10 | §6.7 |
 | 6. Códigos de condición y de contrato | 101 | 101 | §6.8 |
-| **Total** | **155** | **155** | — |
+| **Total de las seis clases** | **155** | **155** | — |
+| Superficies derivadas por debajo del nivel de espacio de nombres | 5 | 5 | §6.11 |
+
+**Las cinco filas de §6.11 no entran en los 155** y por eso van aparte: ninguna de las seis clases de §2.2 las contaba, porque las seis clases cuentan *identificadores* y éstas son *superficies* —carpetas y nombres de archivo— que ninguna regla alcanzaba. Se agregan por el corolario 4 de §6.1, que es lo que esta norma pide hacer cuando aparece un concepto sin fila.
 
 **El recuento se rehizo para esta versión y reproduce el de §2.2.** Se contó sobre los seis catálogos, que son la fuente, y no sobre el corpus entero: un catálogo declara sus códigos en la primera celda de las filas de su §3, y ésa es la única forma de distinguir un código **declarado** de un código **citado**. El desglose de la clase 6, que es donde el número podía no cerrar:
 
@@ -605,17 +686,53 @@ Los **18 espacios de nombres** que [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.3 pr
 
 **Una nota sobre `GeometriaFactory.Api.Endpoints`.** El glosario funcional de `GeometriaFactory-Api` §2 fija que **en la prosa se dice «punto de acceso» y no «endpoint»**, con fundamento. Esta norma no lo toca: la prosa sigue diciendo «punto de acceso», y el espacio de nombres dice `Endpoints`. Es exactamente la separación de §3 y §4 funcionando, y conviene que el primer caso donde se nota quede escrito.
 
+### 6.11 Las superficies derivadas: carpetas y nombres de archivo
+
+**La clase que faltaba no es una clase de identificadores: es la segunda y la tercera escritura de todos ellos.** Cada identificador del glosario se escribe además como **segmento de carpeta** y como **nombre de archivo**, y el renombre las arrastra porque dos reglas ya declaradas lo obligan: la regla de forma 3 de §3 —**el espacio de nombres coincide con la carpeta**— y la última fila de la tabla de §3 —**el nombre de archivo de código es igual al tipo que contiene**—. §2.3 cuenta lo que hay hoy.
+
+> **La regla, y cubre la clase entera.** Las dos escrituras derivadas de un identificador —su carpeta y su archivo— **son parte del identificador**: se renombran **con él, en el mismo tramo y bajo el mismo cuadre**, y nunca en un tramo aparte.
+>
+> **Y por debajo del nivel de espacio de nombres el idioma no se afloja.** Toda carpeta y todo archivo que viva bajo `src/`, `tests/` o `visor/` va en **inglés**, con la forma de §3 —`PascalCase` para carpetas y para archivos que contienen un tipo; la convención del marco donde el marco la impone, como `wwwroot/js/`—, **incluidas las que ningún espacio de nombres nombra**: las que están por debajo de ese nivel, y las que el marco no proyecta a espacio de nombres.
+>
+> **La regla de §4 no las alcanza.** «Nombres de archivo de la documentación, castellano, `Título-Con-Guiones`» rige **sólo** los archivos de `SDD/`. No rige nada bajo `src/`, `tests/` ni `visor/`. Ésa es la confusión que dejó `Configuraciones/` y `Paginas/` sin renombrar en el ensayo `R-1`: no estaban exentas, estaban sin regla.
+>
+> **Corolario.** Una carpeta que **no** nombra ningún concepto del glosario no está exenta: es nombre de código, va en inglés y **se agrega al glosario** como cualquier otro, por el corolario 4 de §6.1.
+
+**Y la frontera, declarada, para que el control no la vuelva a plantear.** La **maqueta** de `SDD/Maquetas/GeometriaFactory-Web/` es HTML, CSS y JavaScript, y sus archivos y sus constantes están en castellano —`Maqueta.js`, `Datos-Maqueta.js`, `Visor-Tridimensional.js`, `Estilos-Maqueta.css`, y las 40 constantes `SCREAMING_SNAKE_CASE` que §2.2 cuenta—. **No se renombran, y no es un apartamiento.** Su propio `README.md` §1 declara que **no es el producto** y que **no es documentación viva**: es «la línea de base de un momento», aprobada por el Product Owner el 2026-08-11. Renombrarla alteraría una línea de base ya aprobada, que es exactamente lo que un registro histórico no admite (§4.1).
+
+**Las cinco filas que la regla obliga a agregar**, que son los casos vivos que el corpus tiene hoy (§2.3):
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `Configuraciones/` | `Configurations/` | Carpeta, por debajo del nivel de espacio de nombres, dentro de `Persistence/` | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6; contiene los cinco mapeos de `BT-05` que §6.4 ya nombra |
+| `Paginas/` | `Pages/` | Carpeta, por debajo del nivel, dentro de `Components/` | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6 y §1.7 |
+| `visor/` (la de `visor/src/`) | `viewer/` | Carpeta de la **capa 3** del *bundle*, por debajo del nivel | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.6; `Visor ADR-01`, que declara las tres capas. **No es** la raíz `visor/` del proyecto de código, que no se renombra (§1) |
+| `Internos` | `Internal` | Segmento del **contraejemplo** de la regla de un solo nivel | [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.3. Es un nombre que la norma prohíbe usar; lleva fila igual, porque el contraejemplo se escribe y hay que escribirlo en inglés |
+| `VisorFiguras` ⟶ `VisorFiguras.razor` | `FigureViewer` ⟶ `FigureViewer.razor` | Componente Blazor que envuelve al visor: **tipo y nombre de archivo** | Intake §17.7.P.2, que lo declara como la **capa 1** de las tres; `Visor ADR-01`. Es el único identificador de tipo que ninguna de las seis clases había contado |
+
+**El ensayo encontró tres huecos y la remedición encontró cinco.** `Configuraciones/`, `Paginas/` e `Internos` los reportó el tramo `R-1`; `visor/` de la capa 3 y `VisorFiguras.razor` aparecieron al barrer el corpus entero con el instrumento de §2.1. Se verificó además que **`Migrations/` y `Layout/` ya están en inglés** y no requieren acción, y se declara acá para que el control `V-6` de §7 no las vuelva a levantar.
+
 ## 7. Cómo se verifica esta norma
 
-Una norma sin instrumento de verificación es una intención. Cinco controles, y los cinco son mecánicos:
+Una norma sin instrumento de verificación es una intención. Siete controles, y los siete son mecánicos:
 
 | # | Control | Cuándo | Qué detecta |
 | --- | --- | --- | --- |
 | `V-1` | **Recuento de identificadores fuera del glosario.** Todo identificador de código declarado en el corpus tiene que resolver contra una fila de §6.3 a §6.8 | En cada auditoría de categoría 05 y en el punto de control de cada etapa | Un concepto traducido por criterio propio, que es lo que §6.1 prohíbe |
 | `V-2` | **Inspección de idioma de identificador.** Ningún identificador de código nuevo en castellano | En cada emisión que declare un identificador | La reaparición de la desviación por el mismo camino por el que apareció |
 | `V-3` | **Cuadre de la etiqueta.** Todo valor de conjunto cerrado tiene identificador **y** etiqueta, y la etiqueta está en castellano | Al construir `GeometriaFactory.Web.Services` | Un identificador inglés que se filtró a la pantalla |
-| `V-4` | **Cuadre del renombre, en las dos direcciones.** Después de cada tramo de §8: cero ocurrencias del identificador viejo y tantas del nuevo como había del viejo | Al cerrar cada tramo de §8 | Un renombre a medias, que es el modo de falla que el corpus ya mostró con la sexta función de la fachada |
+| `V-4` | **Cuadre del renombre, contra la lista declarada de antemano.** Ver la formulación completa abajo: no es «cero ocurrencias viejas» | Al cerrar cada tramo de §8, y su primera mitad **antes** de editar | Un renombre a medias, que es el modo de falla que el corpus ya mostró con la sexta función de la fachada |
 | `V-5` | **Catálogo contra tipo, no contra nombre.** La prueba de inspección de `ADR-06` de `GeometriaFactory-Application` compara los códigos emitidos contra **su** catálogo, no contra el conjunto de nombres | Al construir `GeometriaFactory-Application` | Los cuatro homónimos de §6.9 leídos como si fueran el mismo código |
+| `V-6` | **Cuadre de la superficie derivada.** Por cada identificador renombrado en el tramo, su carpeta y su nombre de archivo quedan en inglés, y ninguna carpeta ni archivo bajo `src/`, `tests/` o `visor/` queda en castellano | Al cerrar cada tramo de §8, junto con `V-4` | El defecto que `R-1` mostró: el tipo renombrado y su carpeta no (§6.11) |
+| `V-7` | **Coherencia interna del documento renombrado.** Ningún documento tocado por un tramo conserva texto que argumenta a favor del nombre anterior. Se busca por los términos del argumento, no por el identificador: «castellano», «español», «sin tildes», «sin eñes», «tilde», «eñe», el nombre viejo escrito **fuera** de región de código, y toda comparación entre los dos idiomas | Al cerrar el **acto 2** de cada tramo (§8.2) | El defecto que `R-1` dejó vivo: `Plan-Etapa-A.md` con sus identificadores en inglés y su §1.2 argumentando por el castellano con cinco fundamentos |
+
+> **`V-4`, en su forma completa.** La 1.1 lo enunciaba como «cero ocurrencias del identificador viejo», y el ensayo `R-1` demostró que **es imposible de cumplir**: en `Plan-Etapa-A.md`, `Estado` aparece cinco veces y **dos son prosa** —el campo de cabecera del documento y una frase—. El agente cuadró el tramo separando los homónimos **a mano y sin dejar registro**, que es exactamente lo que un control mecánico existe para evitar. La formulación que rige desde la 1.2 es ésta:
+>
+> 1. **Antes de editar**, el tramo escribe **la lista de ocurrencias que no se renombran**, ocurrencia por ocurrencia, con su documento, su línea y su motivo. Los motivos admitidos son los cuatro de §4.1: prosa, cita textual, reporte de fuente que no se renombra, registro histórico.
+> 2. **Al cerrar**, el cuadre es: `ocurrencias viejas restantes = las de esa lista`, celda por celda, y no cero. Y en la otra dirección: `ocurrencias nuevas = candidatas medidas − las de la lista`.
+> 3. **Sin la lista escrita antes, el tramo no se puede cerrar.** Una lista escrita después no es un control: es una explicación de lo que salió.
+>
+> **Para los tramos de población grande, el cuadre es por concepto y no por cadena.** `Pendiente` nombra dos cosas —una cuenta que espera habilitación y un trabajo que espera revisión— y son **1983 ocurrencias en 351 documentos**, de las cuales **956 están en los 58 documentos que traen los dos contextos a la vez** (§2.2). Un renombre por cadena elegiría un solo nombre inglés para las dos y **destruiría prosa en cientos de documentos**: las 934 ocurrencias de «pendiente» en prosa, en 254 documentos, son intocables por §4. De modo que `R-4` cuadra **dos poblaciones separadas** —`Pending` y `Submitted`—, cada una con su lista previa, y **la suma de las dos más la lista de no renombradas tiene que dar las 1983 candidatas**. Ninguna ocurrencia puede quedar sin concepto asignado; una sola que quede, bloquea el cierre.
 
 **Y una condición previa que hay que decir:** hasta el 2026-08-12 **ninguna de las 33 auditorías del corpus verificó el idioma de un identificador**, porque ninguna invariante lo pedía. La invariante `D1` que todas ejercen dice «idioma español rioplatense neutro técnico» y se refiere **a la prosa**. `V-2` es el control que faltaba, y es la única razón por la que la desviación pudo propagarse a 334 documentos sin que nadie la nombrara.
 
@@ -623,27 +740,57 @@ Una norma sin instrumento de verificación es una intención. Cinco controles, y
 
 **Esta norma no ejecuta el renombre. Lo ordena.** El renombre es una tanda posterior y se ejecuta **contra el glosario de §6**, nunca contra el criterio de quien edita: es la única forma de que la misma cosa no termine con tres nombres, que es exactamente lo que pasaría si cada tramo tradujera por su cuenta.
 
-**Tres reglas que gobiernan los cinco tramos.**
+**Cuatro reglas que gobiernan los siete tramos.**
 
 1. **Un tramo, una clase, un pull request.** No se mezclan clases en un mismo tramo: el cuadre de `V-4` deja de ser mecánico si en la misma edición cambiaron dos poblaciones.
-2. **Se renombra de menor a mayor alcance.** Los tramos baratos primero, no por comodidad, sino porque validan el procedimiento sobre una población chica antes de aplicarlo sobre 396 documentos.
-3. **Ningún tramo empieza si el anterior no cuadró.** `V-4` es bloqueante.
+2. **Se renombra de menor a mayor alcance, salvo cuando una dependencia lo invierta**, y la inversión se declara. Los tramos baratos primero, no por comodidad, sino porque validan el procedimiento sobre una población chica antes de aplicarlo sobre cientos de documentos. **Hay una inversión y es `R-4` antes de `R-5`**: `R-4` alcanza más documentos que `R-5` —399 contra 330—, y va primero porque **23 de los 101 códigos llevan adentro el nombre inglés de un valor de conjunto cerrado** —`DESENLACE_FUERA_DE_PENDIENTE` ⟶ `OUTCOME_OUTSIDE_SUBMITTED`, `ENVIO_FUERA_DE_BORRADOR` ⟶ `SUBMISSION_OUTSIDE_DRAFT`, `CONTRATO_ALUMNO_NO_ENCONTRADO` ⟶ `STUDENT_NOT_FOUND`—, de modo que el valor se fija antes que el código que lo cita.
+3. **Ningún tramo empieza si el anterior no cuadró.** `V-4` es bloqueante, y desde la 1.2 también lo son `V-6` y `V-7`.
+4. **Cada tramo son dos actos y no uno**, y el segundo es tan obligatorio como el primero. §8.2 los define.
 
-| Tramo | Qué renombra | Alcance contado | Proyectos alcanzados | Qué se verifica al cerrarlo |
-| --- | --- | --- | --- | --- |
-| **`R-1`** | **Los propuestos**: los 18 espacios de nombres de §6.10, los 14 tipos y adaptadores de §6.4, los 6 derivados, y los 2 puertos propuestos de §6.3 | **1 documento** —[`Plan-Etapa-A.md`](Plan-Etapa-A.md)— y **41 ocurrencias** (§2.3) | Ninguno: son propuesta, nada los cita | `V-1` y `V-2` sobre `Plan-Etapa-A.md`. `V-4`: 0 ocurrencias viejas. **Es el tramo de ensayo**: valida el procedimiento con costo de una edición |
-| **`R-2`** | **Clases 1 y 3**: los 3 puertos declarados de §6.3 y los 2 miembros de §6.5 | **5 identificadores**, 12 + 3 documentos, 56 + 8 ocurrencias (§2.2) | `Domain`, `Application`, `Infrastructure`, y el intake §17.1.P.5, §17.2.P.1, §17.3.P.4 | `V-4` por identificador. **El intake se toca acá y no antes**, porque es la fuente y su cambio arrastra a los siete proyectos |
-| **`R-3`** | **Clase 4**: las 6 funciones de la fachada (§6.6) | **52 documentos, 593 ocurrencias**; 21 documentos llevan las seis | `Visor` (02, 03, 05, 10), `Web` (02, 03, 05, 10), el intake §14, §17.6.P.3, §17.7.P.3, §18 | `V-4` por función, **y el recuento de «6 de 6»**: los 21 documentos que declaran las seis tienen que seguir declarando seis. Es el conjunto que ya envejeció mal tres veces |
-| **`R-4`** | **Clase 5**: los 10 valores de conjunto cerrado (§6.7), **con su etiqueta** | **396 documentos, 4259 ocurrencias**; sólo `Pendiente` son 349 documentos y 1919 ocurrencias | Los siete, y el intake §4.2, §12, §17.1.P.2, §17.3.P.4 | `V-3` **en cada documento que muestre el valor a una persona**, y `V-4` por valor. **`Pendiente` se verifica en dos direcciones separadas**, una por concepto: ninguna ocurrencia puede quedar sin decidir si era `Pending` o `Submitted` |
-| **`R-5`** | **Clase 6**: los 101 códigos (§6.8) | **334 documentos, 2911 ocurrencias**; los 21 de contrato son 220 documentos y 1201 ocurrencias | Los siete. Los seis catálogos `03-UX-UI-DX/DX-Error-Messages.md` son la fuente y se renombran **primero** | `V-4` por código, `V-5` sobre los cuatro homónimos de §6.9, y la verificación en las dos direcciones de `ADR-06`. **Condición de entrada: los dos huérfanos de §6.8.7 tienen que estar resueltos** —declarados o corregida la cita— antes de empezar |
+### 8.1 Los siete tramos
+
+| # | Tramo | Qué renombra | Alcance remedido (§2.2 y §2.3) | Proyectos alcanzados | Qué se verifica al cerrarlo |
+| --- | --- | --- | --- | --- | --- |
+| 1 | **`R-1`** · **ejecutado el 2026-08-12** | **Los propuestos**: los 16 subsegmentos de espacio de nombres de §6.10, los 14 tipos y adaptadores de §6.4, los 6 derivados, y los 2 puertos propuestos de §6.3 — **38 identificadores**, de los cuales **16 son de los 155** | **1 documento** —[`Plan-Etapa-A.md`](Plan-Etapa-A.md)— y **80 ocurrencias candidatas**: 2 de prosa (`Estado`) y **78 renombradas**. La fila de la 1.1 declaraba «41 ocurrencias» y era la única cifra sin medir (§2.4) | Ninguno: son propuesta, nada los cita | Cerró `V-1` y `V-2`. **No cerró `V-6` ni `V-7`**, que no existían: dejó cuatro superficies derivadas sin renombrar y su §1.2 argumentando por el castellano. Ésa es la deuda que toma `R-1b` |
+| 2 | **`R-1b`** · **la deuda del ensayo** | Las **4 superficies derivadas** que ninguna regla cubría —`Configuraciones/`, `Paginas/`, `visor/` de la capa 3, `Internos`— contra §6.11, **y el acto 2 de `R-1`** | **1 documento** —[`Plan-Etapa-A.md`](Plan-Etapa-A.md)— y **5 ocurrencias** de superficie (§2.3), más el texto del acto 2 | Ninguno | `V-6` sobre las cuatro, y `V-7` sobre `Plan-Etapa-A.md` §1.2. **Es condición de entrada de `R-2`**: el ensayo no está cerrado hasta acá |
+| 3 | **`R-2`** | **Clases 1 y 3**: los 3 puertos declarados de §6.3 y los 2 miembros de §6.5 — **5 identificadores** | **13 documentos, 64 ocurrencias candidatas**, más **3 nombres de archivo** de §2.3 | `Application`, `Infrastructure`, el intake §17.1.P.5, §17.2.P.1, §17.3.P.4 y el manifiesto | `V-4` por identificador, con su lista previa; `V-6` sobre los tres archivos. **El intake se toca acá y no antes**, porque es la fuente: §4.1 punto 1 rige, y todo reporte que dice «el intake nombra X» se renombra en este mismo tramo |
+| 4 | **`R-2b`** · **el tramo que faltaba** | **Clase 2, la parte que ningún tramo tomaba**: las 5 entidades (`Cuenta`, `Trabajo`, `Pieza`, `Componente`, `Observacion`) y las 5 tablas en mayúsculas del intake (`ALUMNO`…), **unificadas por §6.9 en 5 nombres ingleses** — **10 identificadores** | **49 documentos, 331 ocurrencias candidatas**, más **5 nombres de archivo** de §2.3. La 1.1 daba las entidades en 3 documentos y 37 ocurrencias, y por eso el plan las daba por cubiertas (§2.4) | Los siete, y el intake §12, §17.3.P.4 | `V-4` por identificador. **Y un cuadre propio de la unificación**: `ALUMNO` y `Cuenta` van los dos a `Account`, así que el cuadre es `Account = ALUMNO + Cuenta − no renombradas`. §4.1 punto 2 rige fuerte acá: todo reporte de lo que `RT §7.1` llama `ALUMNO` **conserva el nombre ajeno** |
+| 5 | **`R-3`** | **Clase 4**: las 6 funciones de la fachada (§6.6) | **53 documentos, 621 ocurrencias candidatas**; 21 documentos llevan las seis | `Visor` (02, 03, 05, 10), `Web` (02, 03, 05, 10), el intake §14, §17.6.P.3, §17.7.P.2, §17.7.P.3, §18 | `V-4` por función, **y el recuento de «6 de 6»**: los 21 documentos que declaran las seis tienen que seguir declarando seis. `V-6` incluye `VisorFiguras.razor` ⟶ `FigureViewer.razor` (§6.11). Es el conjunto que ya envejeció mal tres veces |
+| 6 | **`R-4`** | **Clase 5**: los 10 valores de conjunto cerrado (§6.7), **con su etiqueta** | **399 documentos, 4461 ocurrencias candidatas**; sólo `Pendiente` son 351 documentos y 1983 ocurrencias, **956 de ellas en los 58 documentos que traen los dos contextos**; y 934 ocurrencias de «pendiente» **en prosa**, en 254 documentos, que no se tocan | Los siete, y el intake §4.2, §12, §17.1.P.2, §17.3.P.4 | `V-3` **en cada documento que muestre el valor a una persona**, y `V-4` **por concepto y no por cadena**: `Pending` y `Submitted` cuadran como dos poblaciones separadas, y la suma de las dos más la lista previa tiene que dar 1983 |
+| 7 | **`R-5`** | **Clase 6**: los 101 códigos (§6.8) | **330 documentos, 2847 ocurrencias candidatas**; los 21 de contrato son 220 documentos y 1201 ocurrencias | Los siete. Los seis catálogos `03-UX-UI-DX/DX-Error-Messages.md` son la fuente y se renombran **primero** | `V-4` por código, `V-5` sobre los cuatro homónimos de §6.9, y la verificación en las dos direcciones de `ADR-06`. **Condición de entrada: los dos huérfanos de §6.8.7 tienen que estar resueltos**. Y §4.1 punto 3: los 4 retirados de §6.8.5 son 47 ocurrencias en 13 documentos, y las que viven en una fila de control de cambios **no se tocan** |
+
+**Cobertura del plan, contada.** Los siete tramos cubren **148 de los 155 identificadores**: 16 en `R-1`, 5 en `R-2`, **10 en `R-2b`**, 6 en `R-3`, 10 en `R-4` y 101 en `R-5`. Los **7 restantes** son los tipos de figura del dato del alumno, que **no se renombran** por la decisión declarada en §5.4 y llevan esa marca en §6.4: **148 renombrados + 7 declarados intocables = 155**, y no queda ninguno sin tramo. La 1.1 sumaba **138** y no lo decía. Fuera de los 155, el plan cubre además los 16 subsegmentos de espacio de nombres y los 6 derivados —los dos en `R-1`— y las **5 superficies derivadas** de §6.11, repartidas entre `R-1b`, `R-2`, `R-2b` y `R-3`.
+
+**Por qué `R-2b` se llama así y no `R-3`.** Los nombres `R-1` a `R-5` ya están citados por [`Plan-Etapa-A.md`](Plan-Etapa-A.md) en su trazabilidad upstream, por §6.9 de este documento y por el informe del tramo `R-1`. Renumerar los rompería. El tramo nuevo entra **entre `R-2` y `R-3`** por las dos razones que la regla 2 pide: por **alcance**, 49 documentos está entre los 13 de `R-2` y los 53 de `R-3`; y por **dependencia**, porque las cinco entidades son la raíz de la que cuelgan los nombres que `R-1` y `R-2` ya escribieron —`IAccountRepository`, `EfCoreAccountRepository`, `AccountStatus`— y que `R-5` va a citar adentro de sus códigos.
 
 **El orden dentro de `R-5`, porque 101 códigos en una sola pasada no se cuadran.** Cinco pasos, uno por catálogo, en orden de dependencia: `Domain` (42), después `Application` (los 12 propios), después `Infrastructure` (los 15 propios), después `Visor` (7), y **`Contracts` al final** (21), que es el único que cambia el contrato y el que arrastra a `Api` y a `Web` en la misma edición, por `RT-06`.
 
-**Lo que el renombre no toca, y conviene tenerlo a la vista mientras se ejecuta:** la prosa (§4), los identificadores documentales `CU-XX`, `RN-XX`, `BT-XX`, `ADR-XX`, `E-VIS-XX`, `DXT-XX`, `DXC-XX`, el nombre del producto, el de los siete proyectos de código, y **el dato del alumno de §5.4**. Un tramo que toque cualquiera de esos se detiene y se revierte.
+### 8.2 Los dos actos de cada tramo
+
+**Renombrar un identificador y corregir el texto que argumentaba por el nombre viejo son dos actos distintos**, y la 1.1 ordenaba sólo el primero. El ensayo mostró el costo: `Plan-Etapa-A.md` quedó con sus identificadores en inglés y **con su §1.2 todavía argumentando a favor del castellano, con cinco fundamentos**, incluido uno que esta norma ya había refutado —que los nombres de la fachada «están fijados por el intake §17.7.P.3» (§5.1)—. El documento quedó **internamente contradictorio**, y ningún control lo miraba.
+
+**Acto 1 · El renombre.** Es lo que §8.1 describe. Toca **regiones de código**: identificadores, carpetas y nombres de archivo. Cierra con `V-4` y `V-6`.
+
+**Acto 2 · La corrección del texto que quedó argumentando por lo anterior.** Toca **prosa**, y sólo prosa. Cierra con `V-7`.
+
+**Cómo se detecta el texto que quedó argumentando, y son tres barridos mecánicos sobre los documentos que el acto 1 tocó** —nunca sobre el corpus entero, porque el resto no cambió—:
+
+| # | Barrido | Qué busca | Qué se hace con lo que aparece |
+| --- | --- | --- | --- |
+| 1 | **El identificador viejo fuera de región de código** | El nombre castellano escrito en prosa, sin acentos graves, en un documento donde el acto 1 ya lo renombró | Se clasifica por §4.1. Si es uso propio, se reescribe. Si es cita, reporte o registro histórico, **se deja y entra en la lista de `V-4`** |
+| 2 | **Los términos del argumento de idioma** | `castellano`, `español`, `inglés`, `tilde`, `tildes`, `eñe`, `eñes`, `sin tildes`, `sin eñes`, `idioma`, y toda comparación entre los dos idiomas | Se lee el párrafo entero. Si argumenta por el nombre anterior, se reescribe **con el fundamento nuevo**, no se borra: un argumento borrado deja la decisión sin por qué |
+| 3 | **Las afirmaciones que la norma refutó** | Las que §3 y §5 corrigieron por escrito: que los nombres de la fachada estaban fijados (§5.1), que escribir sin tildes ni eñes era un costo inevitable (§3), que la forma calificada de `Pendiente` es permanente (§5.2) | Se reescriben citando la sección de esta norma que las corrige, para que la corrección quede trazable |
+
+**Cuándo se ejecuta el acto 2.** **Dentro del mismo tramo y antes de cerrarlo**, en un commit separado del acto 1 —para que el cuadre de `V-4` siga siendo mecánico, que es lo que pide la regla 1— y **nunca en un tramo posterior**: un documento contradictorio consultado entre dos tramos propaga el argumento viejo, que es el camino por el que la desviación llegó a 334 documentos sin que nadie la nombrara (§7).
+
+**La única excepción, y ya está tomada:** el acto 2 de `R-1` no se ejecutó, porque la regla no existía cuando el tramo corrió. Se ejecuta en **`R-1b`**, que es condición de entrada de `R-2`.
+
+**Lo que el renombre no toca, y conviene tenerlo a la vista mientras se ejecuta:** la prosa (§4), las citas, los reportes de fuente ajena y los registros históricos (§4.1), los identificadores documentales `CU-XX`, `RN-XX`, `BT-XX`, `ADR-XX`, `E-VIS-XX`, `DXT-XX`, `DXC-XX`, el nombre del producto, el de los siete proyectos de código, **la maqueta de `SDD/Maquetas/`** (§6.11) y **el dato del alumno de §5.4**. Un tramo que toque cualquiera de esos se detiene y se revierte.
 
 ## 9. Control de cambios
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.2 | 2026-08-12 | **Corrige el método, no los nombres.** Emitida a raíz del **informe del tramo de ensayo `R-1`** —commit `1edccca` del 2026-08-12, «tramo `R-1`: el ensayo del renombre, y las cinco correcciones que compró»—, que ejecutó el tramo y reportó cinco fallas del método. **Primera: las cifras estaban mal medidas y se remidieron las cinco poblaciones con herramienta.** §2.1 declara el instrumento paso por paso, la unidad de cada cifra y que lo que se declara es la **ocurrencia candidata** y no la ocurrencia a renombrar; reproduce **seis** cifras de la 1.1 con exactitud y corrige las demás. La cifra que el informe encontró —«41 ocurrencias» del tramo `R-1`, que era un recuento de identificadores y **la única de la norma que no se midió con herramienta**— queda en **38 identificadores, 80 ocurrencias candidatas, 2 de prosa, 78 renombradas**. El corpus pasa de 631 a **632 archivos**, con la diferencia explicada: la 1.0 se contó a sí misma fuera. Las correcciones grandes: la **clase 2** pasa de 3 documentos y 37 ocurrencias a **46 y 297** —se había contado sobre quien declara y no sobre quien usa—, y la **clase 6** de 334 y 2911 a **330 y 2847**, porque la 1.1 midió por forma `SCREAMING_SNAKE_CASE` y no contra la lista de los 101: el corpus tiene 141 tokens de esa forma y 40 no son códigos. La clase 4 pasa a 53 y 621, la clase 5 a 399 y 4461, y el total a **155 identificadores en 464 de 632 archivos con 8712 ocurrencias**. **Segunda: falta una clase entera en el glosario, y es §6.11, las superficies derivadas.** Cada identificador se escribe además como carpeta y como nombre de archivo, y dos reglas ya declaradas lo obligan; la regla nueva fija que **por debajo del nivel de espacio de nombres el idioma no se afloja** y que §4 no alcanza a nada bajo `src/`, `tests/` ni `visor/`. §2.3 cuenta la superficie —**16 ocurrencias en dos documentos**— y §6.11 agrega **cinco filas**: los tres huecos que el ensayo reportó (`Configuraciones/`, `Paginas/`, `Internos`) y **dos más que la remedición encontró** (`visor/` de la capa 3 y `VisorFiguras.razor` ⟶ `FigureViewer.razor`), con la maqueta de `SDD/Maquetas/` declarada fuera por ser línea de base aprobada. **Tercera: `V-4` era inaplicable y se reformula.** Deja de ser «cero ocurrencias del identificador viejo» —imposible de cumplir, como probó `Estado`, que aparece cinco veces y dos son prosa— y pasa a ser **ocurrencias viejas restantes = las declaradas de antemano**, con **la lista escrita antes de editar**, ocurrencia por ocurrencia y con su motivo; sin esa lista el tramo no cierra. Y para los conjuntos cerrados el cuadre es **por concepto y no por cadena**: `Pendiente` son 1983 ocurrencias, 956 de ellas en los 58 documentos que traen los dos contextos, y hay 934 ocurrencias de «pendiente» en prosa que un renombre por cadena destruiría. **Cuarta: se escribe §4.1**, la regla de **citas, reportes de fuente ajena, registros históricos y uso propio**, con lo que hace el renombre con cada forma y cómo se reconoce; el corpus tiene **117 citas entrecomilladas con 134 ocurrencias de identificador en 58 documentos** y **441 filas de control de cambios** que nombran uno. Importa ya, porque `R-2` toca **el intake, que es la fuente**. **Quinta: el plan no cubría las seis clases y ahora sí.** Los cinco tramos sumaban **138 de 155**; §8 pasa a **siete tramos** con **`R-2b`**, que renombra las cinco entidades y las cinco tablas en mayúsculas, ubicado entre `R-2` y `R-3` por alcance y por dependencia, y **`R-1b`**, que salda la deuda del ensayo. La cobertura queda en **148 renombrados + 7 declarados intocables (§5.4) = 155**. Suma además **`V-6`** —cuadre de la superficie derivada— y **`V-7`** —coherencia interna del documento renombrado— a §7, y **§8.2, los dos actos de cada tramo**: renombrar y corregir el texto que quedaba argumentando por el nombre viejo, con los **tres barridos** que lo detectan y la regla de que el acto 2 corre dentro del mismo tramo y antes de cerrarlo. El acto 2 de `R-1` —`Plan-Etapa-A.md` con sus identificadores en inglés y su §1.2 argumentando por el castellano con cinco fundamentos— queda asignado a `R-1b`, condición de entrada de `R-2`. **No renombra nada.** | Orquestador SDD (remedición, reglas y redacción) |
 | 1.1 | 2026-08-12 | **Las tres zonas de frontera dejan de ser propuestas elevadas y pasan a decisiones tomadas**, con su fecha, su fundamento y su costo contado (§5): **`F-01a`**, las seis funciones de la fachada del visor van a inglés, con el fundamento decisivo de que el intake §17.7.P.3 las declaraba «a fijar en la etapa que la implementa» y por lo tanto **nunca estuvieron fijadas**; **`F-02a`**, los conjuntos cerrados llevan identificador en inglés y etiqueta en castellano, con el fundamento de que deshace la colisión ya declarada de `Pendiente` —que hoy nombra dos cosas y en inglés se separa en `Pending` y `Submitted`— y con la ventana de costo cero mientras no haya base poblada; y **`F-03`**, **todos** los códigos de condición van a inglés, los 80 internos y los 21 de contrato, por consistencia total, con el fundamento de que el producto no emitió una sola respuesta todavía y los dos consumidores compilan juntos. **`F-03` se declara explícitamente como cambio de contrato** y no como renombre, con la regla operativa `RT-06` —los dos extremos se cambian y se despliegan juntos— y con la eliminación del prefijo `CONTRATO_`. **El glosario pasa de 42 conceptos a las seis clases completas: 155 identificadores en 155 filas** (§6.2 a §6.8), con el recuento rehecho sobre los seis catálogos y el desglose que reconcilia los 101 códigos —76 internos vivos + 4 retirados + 21 de contrato—. Suma **la regla operativa** de que un concepto no listado no se traduce por criterio propio sino que se agrega primero, sus cuatro corolarios y la convención exacta de forma de los códigos; **dos unificaciones** de conceptos que el corpus nombra hoy dos veces —`CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` con `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, y las cinco tablas en mayúsculas del intake con las cinco entidades— y **cuatro homónimos declarados** que el retiro del prefijo produce (§6.9); y **dos huérfanos que no se traducen**, `CONTRATO_CAMBIO_DE_CONTRASENA_PENDIENTE` y `CONTRATO_RESETEO_NO_ADMITIDO`, que tres casos de uso de `GeometriaFactory-Web` citan y ningún catálogo declara. Agrega **`V-4`** —cuadre del renombre en las dos direcciones— y **`V-5`** —catálogo contra tipo y no contra nombre— a §7, y **§8, el plan de renombre en cinco tramos** con su alcance contado, sus proyectos alcanzados y lo que se verifica al cerrar cada uno, del más barato al más caro. El documento pasa de `Propuesto` a **`Aprobado`**. **No renombra nada**: el renombre es la tanda que ejecuta §8. | Product Owner (las tres decisiones) · Orquestador SDD (recuento, glosario y redacción) |
 | 1.0 | 2026-08-12 | **Emisión inicial**, a pedido del Product Owner, que observó que el corpus nombra identificadores de código en castellano contra el estándar. Fija las dos zonas que no se discuten —**identificadores de código en inglés** (§3) y **texto en castellano** (§4)— y separa las tres **zonas de frontera** que no decide y eleva: `F-01` las seis funciones de la fachada del visor, `F-02` los diez valores de los cuatro conjuntos cerrados, `F-03` los 101 códigos de condición y de contrato, cada una con propuesta, costo contado y alternativa real. Emite el **glosario de correspondencia** con 42 conceptos derivables de la especificación, la regla de que **un concepto no listado no se traduce por criterio propio**, y la correspondencia de los 18 espacios de nombres. Cuenta el alcance real sobre **631 archivos** de `SDD/` excluidos `_legacy/` y `Docs/Audit/`: **396 documentos y 4259 ocurrencias** de valores de conjunto cerrado, **334 documentos y 2911 ocurrencias** de códigos de condición, **52 documentos y 593 ocurrencias** de la fachada. Declara **dos hechos verificados que cambian la discusión**: que el intake §17.7.P.3 nunca fijó los nombres de la fachada sino que los dejó «a fijar en la etapa que la implementa», contra lo que `Plan-Etapa-A.md` §1.2 afirma; y que **ninguna de las 33 auditorías** verificó jamás el idioma de un identificador. **No renombra nada.** | Product Owner (observación) · Orquestador SDD (medición y redacción) |
