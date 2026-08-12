@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Contratos-Abstractions.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -20,7 +20,7 @@
   - [4.2 Conjuntos cerrados](#42-conjuntos-cerrados)
   - [4.3 Lo que ningún tipo lleva](#43-lo-que-ningún-tipo-lleva)
 - [5. Manejo de errores](#5-manejo-de-errores)
-  - [5.1 Los quince códigos vivos](#51-los-quince-códigos-vivos)
+  - [5.1 Los diecisiete códigos vivos](#51-los-diecisiete-códigos-vivos)
   - [5.2 Los tres identificadores retirados](#52-los-tres-identificadores-retirados)
   - [5.3 Las tres señales declaradas, que no son error](#53-las-tres-señales-declaradas-que-no-son-error)
 - [6. Versionado del contrato](#6-versionado-del-contrato)
@@ -53,14 +53,14 @@ Un ensamblado de tipos no expone operaciones: expone **familias de tipos** que o
 | --- | --- | --- | --- |
 | Sesión | Solicitud de canje de credenciales y respuesta de sesión de cuatro campos | CU-01 | `CONTRATO_CREDENCIAL_INVALIDA`, `CONTRATO_CUENTA_NO_HABILITADA` |
 | Cuentas | Registro, credencial, listado de cuentas, cambio de situación, confirmación escrita de la baja y cambio de contraseña | CU-02 | `CONTRATO_CORREO_YA_REGISTRADO`, `CONTRATO_CONFIRMACION_NO_COINCIDE`, `CONTRATO_ADMINISTRADOR_YA_CONFIGURADO` |
-| Trabajo | Envío, eliminación y estado del trabajo, con el texto original como cadena no interpretada | CU-03 | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` |
+| Trabajo | Envío, eliminación y estado del trabajo, con el texto original como cadena no interpretada | CU-03 | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` |
 | Listado | Proyección de trabajos, con alcance distinto según el papel | CU-04 | `CONTRATO_ALUMNO_NO_ENCONTRADO` |
 | Detalle | Trabajo interpretado: piezas, componentes, observaciones y comentario del administrador | CU-05 | Ninguno propio |
-| Error | El único tipo con el que un fallo cruza la frontera, y el conjunto cerrado de quince códigos | CU-06 | `CONTRATO_ERROR_NO_CLASIFICADO` |
+| Error | El único tipo con el que un fallo cruza la frontera, y el conjunto cerrado de diecisiete códigos | CU-06 | `CONTRATO_ERROR_NO_CLASIFICADO` |
 | Desenlace | Aprobación o rechazo de un trabajo en estado `Pendiente`, con comentario opcional | CU-07 | `CONTRATO_ESTADO_NO_PERMITE_DESENLACE`, `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` |
 | Reseteo | Reseteo por el administrador y cambio obligatorio por la propia cuenta | CU-08 | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` |
 
-Los tres códigos que no figuran como propios de ninguna familia —`CONTRATO_CAMPO_REQUERIDO_AUSENTE`, `CONTRATO_SERVICIO_NO_DISPONIBLE` y `CONTRATO_TRABAJO_NO_ENCONTRADO`— son **transversales a varias familias** y por eso no se atribuyen a una sola; §5.1 declara en qué contrato de uso aparece cada uno.
+Los cuatro códigos que no figuran como propios de ninguna familia —`CONTRATO_CAMPO_REQUERIDO_AUSENTE`, `CONTRATO_SERVICIO_NO_DISPONIBLE`, `CONTRATO_TRABAJO_NO_ENCONTRADO` y `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR`— son **transversales a varias familias** y por eso no se atribuyen a una sola; §5.1 declara en qué contrato de uso aparece cada uno.
 
 ## 4. Esquemas de datos
 
@@ -80,7 +80,7 @@ Las ocho familias son los componentes de [`Arquitectura-Proyecto-Codigo.md`](Arq
 | Situación de la cuenta | `Pendiente`, `Habilitado`, `Bloqueado` | 3 |
 | Papel de la cuenta | `Alumno`, `Administrador` | 2 |
 | Especie de la observación | Advertencia, error de validación | 2 |
-| Códigos de error | Los quince de §5.1 | 15 |
+| Códigos de error | Los diecisiete de §5.1 | 17 |
 
 **Ningún tipo permite salir de `Finalizado` ni de `Rechazado`**: es la restricción `RT-08` de la categoría 02, y se materializa por ausencia —no hay solicitud que lo pida—.
 
@@ -100,9 +100,9 @@ Y tres ausencias más, de las que cada una tiene su motivo:
 
 Un único tipo de error para las ocho familias, con conjunto cerrado de códigos ([`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)). El texto es **neutro** y nunca contiene la dirección del servicio que falló.
 
-### 5.1 Los quince códigos vivos
+### 5.1 Los diecisiete códigos vivos
 
-La lista es la unión de las §6 de los ocho contratos de uso de la categoría 02, que es su fuente. Quince filas.
+La lista es la unión de las §6 de los ocho contratos de uso de la categoría 02, que es su fuente. Diecisiete filas.
 
 | # | Código | Dónde se declara |
 | --- | --- | --- |
@@ -120,13 +120,24 @@ La lista es la unión de las §6 de los ocho contratos de uso de la categoría 0
 | 12 | `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | CU-06, CU-07 |
 | 13 | `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | CU-06, CU-07 |
 | 14 | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | CU-06, CU-08 |
-| 15 | `CONTRATO_ERROR_NO_CLASIFICADO` | CU-06 |
+| 15 | `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | CU-02, CU-04, CU-06, CU-08 |
+| 16 | `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | CU-03, CU-06 |
+| 17 | `CONTRATO_ERROR_NO_CLASIFICADO` | CU-06 |
 
-**Quince códigos.** Cuatro de ellos —el 1, el 2, el 3 y el 6— aparecen en más de un contrato de uso con la **misma** causa, y siguen siendo un código cada uno: la unidad del conjunto es la condición, no la operación. El catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) los desarrolla con su texto neutro propuesto.
+**Diecisiete códigos**, dos de ellos incorporados por decisión del Product Owner (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que este documento **emite formalmente**: el 15 y el 16. **Cinco** de ellos —el 1, el 2, el 3, el 6 y el 15— aparecen en más de un contrato de uso con la **misma** causa, y siguen siendo un código cada uno: la unidad del conjunto es la condición, no la operación. El catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) los desarrolla con su texto neutro propuesto.
+
+**Los dos códigos que entran, y por qué ninguno de los que había alcanzaba** (`PRODUCT-INTAKE` **1.29** §17.4 P.3).
+
+| Código | Condición que representa | Código vecino que no la cubría |
+| --- | --- | --- |
+| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | El papel no alcanza para la operación pedida **fuera del desenlace de un trabajo**: gobernar las cuentas de la comisión, resetear la contraseña de una cuenta de alumno y ver el listado de trabajos de la comisión | `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`, **acotado por su enunciado** a aprobar y a rechazar. Sin código propio, las tres caían en el genérico y el consumidor no podía distinguir «no tenés permiso» de «algo salió mal» |
+| `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | Se pidió **enviar o reeditar** un trabajo que está en `Pendiente`, `Finalizado` o `Rechazado`, y por lo tanto es de **sólo lectura** | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, **acotado a la eliminación**, que no cubre las otras dos escrituras que el mismo estado prohíbe |
+
+Los dos son códigos de **rechazo sin escritura**: la operación no ocurre y el estado no cambia. **Ninguno reemplaza a los quince que había ni recicla a los tres retirados**, y ninguno cambia los cuatro campos del tipo de error ni la regla de exposición de §4.3.
 
 ### 5.2 Los tres identificadores retirados
 
-**Dieciocho identificadores emitidos: quince vivos y tres retirados.** El único lugar del proyecto de código donde los dieciocho están enumerados juntos es la tabla de §3.2 del catálogo de 03; acá se declaran los tres retirados porque forman parte del contrato de compatibilidad.
+**Veinte identificadores emitidos: diecisiete vivos y tres retirados.** El único lugar del proyecto de código donde los veinte están enumerados juntos es la tabla de §3.2 del catálogo de 03; acá se declaran los tres retirados porque forman parte del contrato de compatibilidad.
 
 | Identificador retirado | Cuándo salió | Por qué |
 | --- | --- | --- |
@@ -140,7 +151,7 @@ Un cuarto identificador que conviene no confundir con éstos: **no existe ningú
 
 ### 5.3 Las tres señales declaradas, que no son error
 
-Se catalogan para que no se traten como error, y **no se cuentan entre los quince**.
+Se catalogan para que no se traten como error, y **no se cuentan entre los diecisiete**.
 
 | Señal | Dónde se declara | Qué significa |
 | --- | --- | --- |
@@ -182,3 +193,4 @@ Aplica el criterio de [`ADR-03`](Adrs/ADR-03-Versionado-Por-Compilacion-Comparti
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara las ocho familias de tipos con sus códigos propios, los seis conjuntos cerrados, la lista de lo que ningún tipo lleva, el inventario completo de los **quince** códigos vivos con el contrato de uso donde se declara cada uno, los **tres** identificadores retirados con su motivo y la regla de no reciclado, las **tres** señales declaradas sobre dos identificadores, y el criterio de versionado con la columna que declara cuáles cambios no detecta la compilación. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **22**. Sube minor. |

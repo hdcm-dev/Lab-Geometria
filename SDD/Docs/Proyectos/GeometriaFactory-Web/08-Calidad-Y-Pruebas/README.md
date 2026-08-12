@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
 
@@ -84,7 +84,7 @@ Los once de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3, resumidos acá
 | QG-05 | **0** peticiones del navegador hacia el servicio de datos, con los dos movimientos prendidos | Bloqueante, sin gradación |
 | QG-06 | **1** sola salida y **0** bibliotecas de guion que consulten | Bloqueante |
 | QG-07 | **0** apariciones de la credencial de sesión en el navegador | Bloqueante |
-| QG-08 | **0** mensajes que expongan dirección, ruta o traza, sobre 15 códigos y el camino de ausencia | Bloqueante |
+| QG-08 | **0** mensajes que expongan dirección, ruta o traza, sobre 17 códigos y el camino de ausencia | Bloqueante |
 | QG-09 | **0** invocaciones al interior del bundle; 6 de 6 funciones como única vía | Bloqueante |
 | QG-10 | **0** tráfico de circuito durante la interacción; texto una sola vez por trabajo | Bloqueante |
 | QG-11 | Filas de la matriz de sensado verificadas y **ninguna deriva mayor abierta** | Bloqueante al cierre de etapa |
@@ -120,3 +120,4 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-02`.** La tabla de gates de §5 declaraba a `QG-04` **condicionado**. Pasa a **bloqueante**: §17.6.P.6 lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que lo que puede cambiar es la forma del gate y no su carácter. Se actualizan las versiones de los artefactos revisados. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Web`. Lista los **ocho** artefactos vigentes, **siete** emitidos por esta Fase E y uno —[`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.2— **emitido por la Fase B2 y ya existente**, con la columna que declara quién emitió cada uno. Su §3 declara qué hizo esta fase con esa matriz y qué no hizo, incluida la verificación desde este lado de la tabla de correspondencia de `GeometriaFactory-Visor`. Declara **un** artefacto omitido con su motivo, los **once** quality gates y las **tres** puertas técnicas con su carácter, y la tabla de recuentos con la fuente de cada uno. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

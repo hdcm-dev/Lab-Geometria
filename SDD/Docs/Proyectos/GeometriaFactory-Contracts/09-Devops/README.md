@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
 
@@ -74,7 +74,7 @@
 | Ambientes de despliegue propios | **0**; el ensamblado viaja embebido en **2** procesos | `05` §5; intake §17.4.P.9 |
 | Canales de publicación | **0** | Intake §17.4.P.7 |
 | Dependencias externas | **0** | Intake §17.4.P.1 |
-| Códigos vivos del conjunto cerrado | **15**, sobre **18** emitidos, con **3** retirados y **0** reciclados | `08` `Criterios-Validacion.md` `CV-05` y `CV-20` |
+| Códigos vivos del conjunto cerrado | **17**, sobre **20** emitidos, con **3** retirados y **0** reciclados | `08` `Criterios-Validacion.md` `CV-05` y `CV-20` |
 | Contratos de uso | **8** | `02` §3, citado por `08` README §5 |
 | Clases de cambio que la compilación **no** detecta | **3**, las tres mayores | `ADR-03` §7 |
 | Etapas comprometidas que este proyecto de código toca | **7**: `a`, `c`, `d`, `e`, `f`, `g` y `h` | `08` `Definition-Of-Done.md` §1.4 |
@@ -86,3 +86,4 @@
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Contracts`. Lista los **cuatro** artefactos emitidos, el orden de lectura, la omisión de la guía de publicación con la tensión frente al criterio de aceptación de `Rules-Devops.md` §6 declarada, el resumen de los **nueve** quality gates con dónde corre cada uno y la constancia de que ninguno cambió de carácter —`QG-05` bloqueante, `QG-06` único condicionado—, y la tabla de recuentos con la fuente de cada uno. Deja registrado que `QG-05` es el único gate del nivel topológico 0 que depende de un proyecto de código que todavía no existe, y las tres condiciones de su diferimiento. |
 | 1.1 | 2026-08-11 | **Propagación de las dos decisiones de despliegue del Product Owner** del intake **1.22** §17.6.P.7. El `PD-01` que esta categoría había elevado —el filtro de rutas del flujo del front dejaba fuera a este ensamblado— quedó **cerrado**: §17.6.P.7 enumera hoy las **tres** rutas. La fila de recuentos pasa a declarar **4** puntos abiertos con **3 vigentes**, y se actualizan a 1.1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) y [`Entornos-Deploy.md`](Entornos-Deploy.md) en §1. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

@@ -1,22 +1,22 @@
-# Ejemplo 03 — Error, desenlace y reseteo: quince códigos vivos y una frontera que no filtra
+# Ejemplo 03 — Error, desenlace y reseteo: diecisiete códigos vivos y una frontera que no filtra
 
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/contracts/03-avanzado/`
-**Trazabilidad upstream:** [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md), [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Contrato-De-Desenlace-De-La-Revision.md) y [`CU-08`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de error, de desenlace y de reseteo, y §3.2; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3.2, la única tabla del proyecto de código donde los **dieciocho** identificadores emitidos están enumerados juntos; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-15` a `TC-22`; `PRODUCT-INTAKE` 1.22 §20, escenarios `E-5` y `E-8`
+**Trazabilidad upstream:** [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md), [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Contrato-De-Desenlace-De-La-Revision.md) y [`CU-08`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de error, de desenlace y de reseteo, y §3.2; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3.2, la única tabla del proyecto de código donde los **veinte** identificadores emitidos están enumerados juntos; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-15` a `TC-22`; `PRODUCT-INTAKE` 1.22 §20, escenarios `E-5` y `E-8`
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-03` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
 ## 1. Objetivo del sample
 
-Demostrar las tres familias que cierran el contrato —error, desenlace y reseteo— y las dos inspecciones que sostienen la frontera entera: que el conjunto cerrado de códigos tiene **quince vivos** sobre **dieciocho** emitidos, con **tres** retirados que no se reciclan, y que **ningún** tipo del ensamblado habilita al navegador a invocar el servicio de datos. Al terminar, quien lo ejecuta sabe comprobar un conjunto cerrado en las dos direcciones y verificar una regla de arquitectura sobre una superficie de tipos.
+Demostrar las tres familias que cierran el contrato —error, desenlace y reseteo— y las dos inspecciones que sostienen la frontera entera: que el conjunto cerrado de códigos tiene **diecisiete vivos** sobre **veinte** emitidos, con **tres** retirados que no se reciclan, y que **ningún** tipo del ensamblado habilita al navegador a invocar el servicio de datos. Al terminar, quien lo ejecuta sabe comprobar un conjunto cerrado en las dos direcciones y verificar una regla de arquitectura sobre una superficie de tipos.
 
 ## 2. Nivel
 
@@ -61,7 +61,7 @@ samples/contracts/03-avanzado/
 ```
 [1] Tipo de error: campos=4 (codigo, texto, detalles, momento)
 [2] Campos capaces de transportar una direccion de servicio, una ruta de datos o un secreto: 0
-[3] Conjunto cerrado: codigos vivos=15 | emitidos=18 | retirados=3 | reciclados=0
+[3] Conjunto cerrado: codigos vivos=17 | emitidos=20 | retirados=3 | reciclados=0
 [4] Codigos cuya causa es una cuenta habilitada sin contrasena, o un reseteo sobre una cuenta sin contrasena: 0
 [5] Detalle de ubicacion de E-5: indice-figura=1 campo=Tipo
 [6] Detalle de ubicacion de E-8: indice-figura=1 campo=Largo
@@ -74,7 +74,7 @@ samples/contracts/03-avanzado/
 Familias recorridas: 3 de 8 | Total de familias cubiertas por los tres samples: 8 de 8 | Recuentos en 0: 7
 ```
 
-**El acto `[3]` es el sample.** Un conjunto cerrado no se verifica leyéndolo: se verifica **en las dos direcciones**, comprobando que no falta ninguno de los quince vivos y que no aparece ninguno que no esté. Los **tres** retirados no se reciclan, y su reaparición es una falla, no un empate.
+**El acto `[3]` es el sample.** Un conjunto cerrado no se verifica leyéndolo: se verifica **en las dos direcciones**, comprobando que no falta ninguno de los diecisiete vivos y que no aparece ninguno que no esté. Los **tres** retirados no se reciclan, y su reaparición es una falla, no un empate.
 
 **El acto `[4]` es la consecuencia de `RN-16` sobre este contrato.** Esa regla volvió imposibles dos causas —una cuenta habilitada sin contraseña, y un reseteo sobre una cuenta sin contraseña—, y el recuento en 0 es lo que impide que un código para ellas vuelva a nacer.
 
@@ -86,7 +86,7 @@ Familias recorridas: 3 de 8 | Total de familias cubiertas por los tres samples: 
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Agregar un código al conjunto | Declarar un decimosexto código vivo | El acto `[3]` deja de dar 15 y el sample falla: es `QG-04` ejercido desde afuera del pipeline |
+| Agregar un código al conjunto | Declarar un decimoctavo código vivo | El acto `[3]` deja de dar 17 y el sample falla: es `QG-04` ejercido desde afuera del pipeline |
 | Reciclar un identificador retirado | Reusar uno de los tres retirados para otra condición | El acto `[3]` deja de dar `reciclados=0`. Un identificador retirado no vuelve a nombrar otra condición |
 | Agregar un campo de traza al tipo de error | Declarar un quinto campo con la traza de la implementación | El acto `[1]` deja de dar 4 y el `[2]` deja de dar 0: la frontera empieza a filtrar |
 | Declarar una referencia hacia el dominio | Agregarla al archivo de proyecto | El acto `[10]` deja de dar 0. Es la vía por la que el intake declara que el acoplamiento vuelve, y se rechaza en revisión |
@@ -125,7 +125,7 @@ verificacion:
     exit_code: 0
     stdout_contiene:
       - "[1] Tipo de error: campos=4 (codigo, texto, detalles, momento)"
-      - "[3] Conjunto cerrado: codigos vivos=15 | emitidos=18 | retirados=3 | reciclados=0"
+      - "[3] Conjunto cerrado: codigos vivos=17 | emitidos=20 | retirados=3 | reciclados=0"
       - "[5] Detalle de ubicacion de E-5: indice-figura=1 campo=Tipo"
       - "[8] Campos o valores que permiten salir de Finalizado o de Rechazado: 0"
       - "[10] Referencias hacia GeometriaFactory-Domain: 0"
@@ -141,3 +141,4 @@ verificacion:
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06`, `CU-07` y `CU-08` sobre las **tres** familias restantes, con lo que los tres samples completan **8 de 8** familias de tipos. Verifica el conjunto cerrado en las dos direcciones —**15** vivos sobre **18** emitidos, **3** retirados sin reciclar— y las reglas de arquitectura **RA-01** y **RA-03** sobre la superficie del ensamblado. El contrato `VER-03` declara seis líneas exactas de salida y **una aserción negativa** sobre el índice reportado; `evidencia` queda en `No verificado — sin código`. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **7**. Sube minor. |

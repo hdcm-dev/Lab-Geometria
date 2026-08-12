@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Decisiones-Arquitectura.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -19,7 +19,7 @@
 | ADR | Título | Categoría | Estado | Fecha |
 | --- | --- | --- | --- | --- |
 | [ADR-01](Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) | Ensamblado de tipos de transferencia planos, sin comportamiento y sin dependencias | Estilo | Propuesto | 2026-08-10 |
-| [ADR-02](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) | Un único tipo de error, con conjunto cerrado de quince códigos | Comunicación | Propuesto | 2026-08-10 |
+| [ADR-02](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) | Un único tipo de error, con conjunto cerrado de diecisiete códigos | Comunicación | Propuesto | 2026-08-10 |
 | [ADR-03](Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) | Versionado por compilación compartida y despliegue conjunto, sin versionado de rutas | Despliegue | Propuesto | 2026-08-10 |
 | [ADR-04](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) | Regla de exposición: lista cerrada de lo que nunca cruza la frontera | Seguridad | Propuesto | 2026-08-10 |
 | [ADR-05](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md) | Proyección de listado separada del detalle, y el comentario como bloque propio | Comunicación | Propuesto | 2026-08-10 |
@@ -54,3 +54,4 @@ Las cuatro categorías sin ADR se declaran vacías con su motivo, para que nadie
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Indexa las cinco ADR de `GeometriaFactory-Contracts` con su categoría, su estado y su fecha, declara por qué son cinco y no tres, y declara vacías con su motivo las cuatro categorías de decisión que este proyecto de código no toca. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

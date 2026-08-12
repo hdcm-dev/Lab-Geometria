@@ -2,9 +2,9 @@
 
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** ADR-03-Versionado-Por-Compilacion-Compartida.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Despliegue
 
@@ -61,7 +61,7 @@ Qué constituye cada clase de cambio sobre este contrato:
 | Clase | Qué la produce | ¿Lo detecta la compilación? |
 | --- | --- | --- |
 | **Mayor** | Quitar o renombrar un tipo o un campo; cambiar el tipo de un campo | Sí |
-| **Mayor** | Quitar un valor de un conjunto cerrado —los cuatro estados del trabajo, los dos valores del desenlace, los quince códigos de error— | **No**: compila igual, y el consumidor deja de cubrir todos los casos |
+| **Mayor** | Quitar un valor de un conjunto cerrado —los cuatro estados del trabajo, los dos valores del desenlace, los diecisiete códigos de error— | **No**: compila igual, y el consumidor deja de cubrir todos los casos |
 | **Mayor** | Agregar un código al conjunto cerrado de error | **No**: compila igual, y el consumidor deja de cubrir todos los casos. Es la cláusula de §17 de CU-06 |
 | **Mayor** | Agregar un campo capaz de transportar una dirección de servicio, una ruta de datos o un secreto | **No**: compila igual, y viola RA-03. Se rechaza en revisión |
 | **Menor** | Agregar un tipo o un campo opcional que no viole la regla de exposición | — |
@@ -94,3 +94,4 @@ Qué constituye cada clase de cambio sobre este contrato:
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra la compilación compartida como mecanismo de compatibilidad, la ausencia deliberada de versionado de rutas, la obligación de despliegue conjunto como entrada para 09, el criterio de cambio mayor con la columna que declara **cuáles no detecta la compilación**, cuatro alternativas evaluadas y cinco métricas. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Estrategia-Versionado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) 1.0; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §5; [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) 1.1 §4; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §15, §17.1.P.7, §17.4.P.3 y §17.4.P.7
@@ -36,7 +36,7 @@ El criterio de clase de cambio se transcribe de `ADR-03` §7 **sin agregarle ni 
 | Clase | Qué la produce | ¿Lo detecta la compilación? |
 | --- | --- | --- |
 | **Mayor** | Quitar o renombrar un tipo o un campo; cambiar el tipo de un campo | Sí |
-| **Mayor** | Quitar un valor de un conjunto cerrado —los cuatro estados del trabajo, los dos valores del desenlace, los quince códigos de error— | **No** |
+| **Mayor** | Quitar un valor de un conjunto cerrado —los cuatro estados del trabajo, los dos valores del desenlace, los diecisiete códigos de error— | **No** |
 | **Mayor** | Agregar un código al conjunto cerrado de error | **No** |
 | **Mayor** | Agregar un campo capaz de transportar una dirección de servicio, una ruta de datos o un secreto | **No** |
 | **Menor** | Agregar un tipo o un campo opcional que no viole la regla de exposición | — |
@@ -100,10 +100,11 @@ Lo que rige en su lugar:
 | Todo cambio mayor recibe su fila en el registro de cambios del producto | Revisión del pull request. Objetivo: **0** cambios mayores sin fila | `ADR-03` §8 |
 | Reponer un identificador de código retirado **se rechaza aunque compile** | Revisión, contra `CA-09` de `CU-06` | `ADR-03` §7, cierre |
 
-**El conjunto cerrado tiene 15 códigos vivos sobre 18 identificadores emitidos, con 3 retirados** ([`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) `CV-05`). El versionado de este proyecto de código **es, en buena medida, el gobierno de ese conjunto**: dos de las tres clases de cambio mayor que la compilación no detecta son cambios sobre conjuntos cerrados.
+**El conjunto cerrado tiene 17 códigos vivos sobre 20 identificadores emitidos, con 3 retirados** ([`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) `CV-05`). El versionado de este proyecto de código **es, en buena medida, el gobierno de ese conjunto**: dos de las tres clases de cambio mayor que la compilación no detecta son cambios sobre conjuntos cerrados.
 
 ## 7. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.4.P.7 hereda de §17.1.P.7, y transcribe el criterio de clase de cambio de `ADR-03` §7 **con su columna de qué detecta la compilación**, dejando a la vista que **tres de las siete clases no la detectan y las tres son mayores**. Declara la herramienta de cálculo por su función y precisa qué **no** calcula ninguna herramienta. Declara el modelo de ramas del producto con la cadencia propia de este proyecto de código —inspección de superficie en todo pull request que cambie un campo— y la ausencia de canales con el ADR que la sostiene. Reemplaza la política de obsolescencia por la **política de cambios incompatibles**, con el fundamento de que no hay integrador externo a quien dar plazo, y con las **cinco** obligaciones que sí rigen. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Mini-Plan.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Scrum Master + Maintainer Lead (AG-07)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) **1.1**, [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) 1.0 y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §2, §10, §15 y §17.4; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) 1.1 §3, §4 y §7
@@ -61,7 +61,7 @@ Hay además un motivo propio de este proyecto de código: **su trabajo no es pro
 | Etapa | Objetivo de este proyecto de código al cerrar la etapa |
 | --- | --- |
 | `a` | El ensamblado existe, compila sin dependencias y sin ninguna referencia hacia el dominio, y sus dos puertas de construcción están medidas. |
-| `c` | Los dos extremos pueden intercambiar una sesión y cualquier fallo, con un único tipo de error y su conjunto cerrado de quince códigos. |
+| `c` | Los dos extremos pueden intercambiar una sesión y cualquier fallo, con un único tipo de error y su conjunto cerrado de diecisiete códigos. |
 | `d` | Los dos extremos pueden intercambiar todo el ciclo de vida de una cuenta de alumno, incluido el reseteo, cuya solicitud no tiene campo de contraseña. |
 | `e` | Los dos extremos pueden intercambiar el envío, la eliminación y el listado de trabajos, con la proyección de listado ya acotada. |
 | `f` | Los dos extremos pueden intercambiar el trabajo interpretado, con sus piezas, sus componentes y sus observaciones. |
@@ -82,13 +82,13 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 | `c` | BT-04 | Tarea técnica | Fijar los nombres de la familia de sesión y de la de error | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `c` | BT-05 | Tarea técnica | Fijar la zona horaria y la precisión del campo de momento | Media | Sin fijar | Equipo (1) | Pendiente |
 | `c` | BT-06 | Tarea técnica | Tipo de error único con sus cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-07 | Tarea técnica | Conjunto cerrado de quince códigos vivos, con la regla de no reciclado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-07 | Tarea técnica | Conjunto cerrado de diecisiete códigos vivos, con la regla de no reciclado | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `c` | BT-08 | Tarea técnica | Prueba de inspección de superficie pública para los campos prohibidos | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `c` | BT-09 | Tarea técnica | Familia de sesión con su respuesta de cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `c` | BT-16 | Tarea técnica | Matriz tipo contra prueba de integración | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `c` | BT-17 | Tarea técnica | Adoptar el formato de intercambio que fijan los dos extremos | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `c` | US-01 | Historia | Canje de credenciales y respuesta de sesión de cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-14 | Historia | Error neutro con el conjunto cerrado de quince códigos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-14 | Historia | Error neutro con el conjunto cerrado de diecisiete códigos | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `c` | US-16 | Historia | Cerrar el conjunto con el código no clasificado | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `d` | BT-10 | Tarea técnica | Familia de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `d` | BT-11 | Tarea técnica | Familia de reseteo | Alta | Sin fijar | Equipo (1) | Pendiente |
@@ -203,3 +203,4 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Contracts`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con la constancia de los cuatro que no se emiten— y por qué no se declara capacidad numérica, con el motivo propio de este proyecto de código: su trabajo no es proporcional a su volumen de código. Fija el objetivo de cada uno de los **siete** tramos que toca de las **ocho** etapas comprometidas, compromete **21** historias y **18** tareas técnicas sin inventar ningún identificador, y deja explícitamente **fuera** a US-10, que es de la fase `i…`. Declara el orden de construcción con la familia de error primero, la doble consecuencia del nivel topológico 0 y del contrato que dos proyectos de código compilan a la vez, y **cinco** riesgos con mitigación, incluido el único modo de falla que la compilación compartida no atrapa. |
 | 1.1 | 2026-08-11 | **Actualiza la trazabilidad upstream** a la versión del `Product-Backlog.md` de la sección 06, que subieron a **1.1** el 2026-08-11. El `Product-Backlog.md` subió al absorber la promoción de `F-13` a `Must Have` (`PRODUCT-INTAKE` **1.19** §4) y al declarar la regularidad de la distribución MoSCoW (hallazgo `D-06-03`). **Ninguna historia ni tarea técnica de este proyecto de código cambia de prioridad, de etapa ni de tramo**, y ningún compromiso, riesgo ni orden de construcción de este plan se toca: la fila existe para que la versión citada sea la vigente y no una que ya no está. Sube minor. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |

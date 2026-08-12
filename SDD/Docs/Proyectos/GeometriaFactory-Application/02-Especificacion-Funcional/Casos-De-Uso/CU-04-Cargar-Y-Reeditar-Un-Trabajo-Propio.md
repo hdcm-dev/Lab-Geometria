@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** CU-04-Cargar-Y-Reeditar-Un-Trabajo-Propio.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §5 (trabajo con existencia propia, conservación del trabajo que no verifica, separación entre alumnos); [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (conservación del original); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-06, F-07), §4.1 (RN-03, RN-04, RN-08), §4.2, §6 (flujo 2), §17.2.P.5, §17.2.P.11 punto 3; orquesta [`CU-05`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-05-Crear-Y-Reeditar-Un-Trabajo.md) y [`CU-09`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) de GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Application
@@ -111,6 +111,7 @@ Ninguno deja escritura parcial: la unidad de trabajo se abre recién en el paso 
 
 ## 10. Notas y supuestos
 
+- **La negativa por estado de la reedición ya tiene código propio en el contrato.** `OPERACION_FUERA_DE_BORRADOR` viajaba hasta hoy en el código genérico, porque el código análogo del conjunto cerrado estaba acotado a la eliminación. El Product Owner incorporó `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que cubre la reedición y el envío sobre un trabajo en `Pendiente`, `Finalizado` o `Rechazado`. **Este caso de uso no cambia**: sigue cortando antes que el dominio y sigue distinguiendo sus motivos.
 - **La pertenencia se verifica antes de cualquier escritura y sobre el dato recuperado**, no sobre lo que declara la petición. Que el consumidor haya autenticado a la persona no alcanza: el papel no dice de quién es el trabajo.
 - El producto **no edita el dato del alumno**: la reedición cambia los datos del trabajo y el texto que el alumno vuelve a pegar, nunca el texto ya guardado.
 - La reedición descarta la interpretación anterior porque el texto cambió; volver a interpretarlo es CU-05.
@@ -124,6 +125,7 @@ Ninguno deja escritura parcial: la unidad de trabajo se abre recién en el paso 
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
 | 1.0 | 2026-08-09 | **Correcciones de la ronda r1 del audit**, absorbidas sin subir versión por `Master-Prompt.md` §5, con el documento en estado `Propuesto`. **H-06**: la fecha de alta y la de modificación del trabajo pasan a llamarse **sellos** y se declaran metadatos de orquestación en §2, §4, §7, §8 y §10, distintos de la «Fecha» que el alumno declara y que el modelo del dominio sí modela; el modelo no declara esos dos atributos y la discrepancia está elevada al Product Owner. **H-14**: §6 suma `TEXTO_ORIGINAL_ALTERADO`, propagado del dominio, y §10 declara la equivalencia entre `REEDICION_FUERA_DE_BORRADOR` del dominio y `OPERACION_FUERA_DE_BORRADOR` de este contrato. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
 
 ## 17. Compatibilidad de la superficie pública
 

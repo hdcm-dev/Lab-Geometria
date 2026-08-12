@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 
 ---
@@ -48,7 +48,7 @@
 
 ## 5. Tareas técnicas prioritarias
 
-**BT-02**, la puerta de cero referencias hacia `GeometriaFactory-Domain`, porque el intake la declara como la vía por la que el acoplamiento vuelve. **BT-08**, la inspección de superficie pública, porque es el único mecanismo con el que la regla de exposición deja de ser una declaración. Y **BT-06** con **BT-07**, el tipo de error único y su conjunto cerrado de quince códigos, porque los otros siete contratos de uso comparten sus caminos de error.
+**BT-02**, la puerta de cero referencias hacia `GeometriaFactory-Domain`, porque el intake la declara como la vía por la que el acoplamiento vuelve. **BT-08**, la inspección de superficie pública, porque es el único mecanismo con el que la regla de exposición deja de ser una declaración. Y **BT-06** con **BT-07**, el tipo de error único y su conjunto cerrado de diecisiete códigos, porque los otros siete contratos de uso comparten sus caminos de error.
 
 ## 6. Definition of Ready vigente
 
@@ -60,3 +60,4 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **Corrección del hallazgo P3-3 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida desde la Fase E**: se comprobó abriendo la carpeta y [`Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) existe. Se corrige la frase y se enlaza el artefacto, para que un lector que llegue por 06 no siga creyendo que la DoD no existe. **No era regresión de la Fase G**: el residuo es anterior. Ninguna historia, ítem de backlog ni recuento de esta sección cambia. Contrastado contra el texto vivo del `PRODUCT-INTAKE` **1.25**, en particular §16.1 y §18, y no contra lo que otro documento dice de ellas. Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los cuatro artefactos con su propósito, declara la ausencia de `tareas-tecnicas/` con su motivo, fija el orden de lectura y resume las ocho épicas con su etapa, el reparto de prioridad y las tareas técnicas prioritarias con el fundamento de cada una. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

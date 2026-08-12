@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -18,9 +18,9 @@
   - [2.2 El formato de intercambio y su configuración](#22-el-formato-de-intercambio-y-su-configuración)
 - [3. Operaciones: los quince puntos de acceso](#3-operaciones-los-quince-puntos-de-acceso)
 - [4. Los diez códigos de respuesta](#4-los-diez-códigos-de-respuesta)
-- [5. Manejo de errores: la tabla de traducción de los quince códigos](#5-manejo-de-errores-la-tabla-de-traducción-de-los-quince-códigos)
+- [5. Manejo de errores: la tabla de traducción de los diecisiete códigos](#5-manejo-de-errores-la-tabla-de-traducción-de-los-diecisiete-códigos)
   - [5.1 Las dos respuestas sin código del contrato](#51-las-dos-respuestas-sin-código-del-contrato)
-  - [5.2 Los dos huecos declarados del conjunto cerrado](#52-los-dos-huecos-declarados-del-conjunto-cerrado)
+  - [5.2 Los dos huecos declarados del conjunto cerrado, cerrados](#52-los-dos-huecos-declarados-del-conjunto-cerrado-cerrados)
   - [5.3 Las dos señales que no son fallos](#53-las-dos-señales-que-no-son-fallos)
   - [5.4 Lo que ninguna respuesta puede decir](#54-lo-que-ninguna-respuesta-puede-decir)
 - [6. Versionado del contrato](#6-versionado-del-contrato)
@@ -115,13 +115,13 @@ Los quince son los de [`../02-Especificacion-Funcional/Definicion-Superficie-HTT
 
 **Dos códigos que esta superficie no usa, y su ausencia es informativa.** No hay respuesta de entidad no procesable: el conjunto de causas que otro producto pondría ahí —un texto del alumno que no verifica— **no es un fallo en éste** (§5.3). Y no hay respuesta de exceso de peticiones: ninguna fuente declara límite de caudal, el previsto es de una comisión durante una clase, y agregarlo sería una decisión que nadie tomó ([`ADR-05`](Adrs/ADR-05-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md)).
 
-## 5. Manejo de errores: la tabla de traducción de los quince códigos
+## 5. Manejo de errores: la tabla de traducción de los diecisiete códigos
 
 Una petición que falla atraviesa **dos** traducciones: motivo interno a **código del contrato**, y código del contrato a **código de respuesta**. Las dos son de esta capa ([`ADR-04`](Adrs/ADR-04-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md)), y ésta es la tabla única de la segunda.
 
-El conjunto cerrado lo declara `GeometriaFactory-Contracts` y tiene **quince** códigos vivos. Sobre **dieciocho** identificadores que ese ensamblado emitió a lo largo de su historia, **tres están retirados y ninguno se recicla**. **Esta capa no agrega, no renombra y no traduce a texto ninguno.**
+El conjunto cerrado lo declara `GeometriaFactory-Contracts` y tiene **diecisiete** códigos vivos, dos de ellos incorporados por `PRODUCT-INTAKE` **1.29** §17.4 P.3. Sobre **veinte** identificadores que ese ensamblado emitió a lo largo de su historia, **tres están retirados y ninguno se recicla**. **Esta capa no agrega, no renombra y no traduce a texto ninguno.**
 
-**Las quince filas están, una por código, sin agrupar.**
+**Las diecisiete filas están, una por código, sin agrupar.**
 
 | Código del contrato | Código de respuesta | Fundamento |
 | --- | --- | --- |
@@ -138,12 +138,14 @@ El conjunto cerrado lo declara `GeometriaFactory-Contracts` y tiene **quince** c
 | `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | `409` | Ídem, **incluido el estado terminal**, y la respuesta **no sugiere ninguna forma de revertirlo** |
 | `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | `403` | Es una negativa de facultad y **no tiene nada que ocultar**: no hay recurso ajeno cuya existencia proteger, porque el trabajo puede ser propio |
 | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | `409` | El sujeto del reseteo no lo admite. **No es `403`**: quien pide tiene la facultad, y lo que no procede es la operación sobre esa cuenta |
-| `CONTRATO_ERROR_NO_CLASIFICADO` | `403`, `409`, `500` o `503` | **Es el único código con más de un destino, y la distinción es derivación de la categoría 02, que esta categoría adopta**: `403` cuando el papel no alcanza **en uno de los tres caminos sin código de facultad propio**; `409` cuando se fuerza un reenvío o una reedición sobre un trabajo que no está en `Borrador`, **camino que tampoco tiene código propio**; `503` cuando la causa es una terminación degradada del almacén, que no depende de lo que se pidió y puede resolverse sola; `500` cuando es un defecto no previsto |
+| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | `403` | Negativa de facultad **fuera del desenlace** —gobierno de cuentas, listado de la comisión y reseteo—. Como la del desenlace, **no tiene nada que ocultar**: el recurso no es ajeno y lo que no alcanza es el papel |
+| `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | `409` | El estado del trabajo no habilita la escritura pedida —envío o reedición—. La respuesta **declara el estado actual** y no sugiere ninguna forma de volver a `Borrador` |
+| `CONTRATO_ERROR_NO_CLASIFICADO` | `500` o `503` | **Es el único código con más de un destino**: `503` cuando la causa es una terminación degradada del almacén, que no depende de lo que se pidió y puede resolverse sola; `500` cuando es un defecto no previsto. **Bajó de cuatro destinos a dos** cuando los dos códigos nuevos se llevaron el `403` y el `409` que sólo estaban acá por falta de código propio |
 | `CONTRATO_SERVICIO_NO_DISPONIBLE` | **Ninguno** | **No lo produce esta capa.** El ensamblado lo declara «el único que el contrato admite que produzca la propia pieza pública, porque describe la ausencia de respuesta de la otra pieza». Una respuesta de esta superficie con este código sería una contradicción en sus términos: **si hay respuesta, el servicio respondió** |
 
-**Quince códigos: catorce con destino en esta superficie y uno sin él. Quince filas para quince códigos, ninguna excedente.**
+**Diecisiete códigos: dieciséis con destino en esta superficie y uno sin él. Diecisiete filas para diecisiete códigos, ninguna excedente.**
 
-**Que el código genérico tenga cuatro destinos no es una comodidad: es el síntoma medible de los dos huecos de §5.2**, y dos de esos cuatro destinos existen **sólo** porque el conjunto cerrado no tiene un código propio para esos caminos.
+**Que el código genérico haya bajado de cuatro destinos a dos es la medida del cierre de §5.2**: los dos destinos que se fueron existían **sólo** porque el conjunto cerrado no tenía un código propio para esos caminos.
 
 ### 5.1 Las dos respuestas sin código del contrato
 
@@ -154,14 +156,16 @@ El conjunto cerrado lo declara `GeometriaFactory-Contracts` y tiene **quince** c
 
 **Las dos son deliberadas y se declaran para que su ausencia de código no se lea como un olvido.**
 
-### 5.2 Los dos huecos declarados del conjunto cerrado
+### 5.2 Los dos huecos declarados del conjunto cerrado, **cerrados**
 
-No se resuelven acá y están elevados al Product Owner. **Esta categoría no inventa un código para taparlos**, porque los códigos son del ensamblado de contratos.
+Estaban elevados al Product Owner, con la constancia de que **esta categoría no inventaría un código para taparlos** porque los códigos son del ensamblado de contratos. **El Product Owner los resolvió** (`PRODUCT-INTAKE` **1.29** §17.4 P.3) y `GeometriaFactory-Contracts` emitió los dos códigos.
 
-| Hueco | Qué falta | Qué se hace mientras tanto |
+| Hueco | Qué faltaba | Con qué se cerró |
 | --- | --- | --- |
-| **El papel no alcanza, fuera del desenlace** | El conjunto cerrado tiene **un solo** código de facultad y su enunciado está acotado al desenlace de la revisión. La capa de aplicación emite un motivo de facultad requerida también en **el gobierno de cuentas, el reseteo y la revisión de la comisión** | El código genérico con respuesta `403`. **Dice el número correcto y no dice el motivo** con la precisión que el producto ya sabe darle en el caso vecino |
-| **El trabajo no está en `Borrador`, fuera de la eliminación** | El código análogo está acotado por su enunciado **a la eliminación y al camino del alumno**. Un envío o una reedición forzados fuera de `Borrador` no tienen dónde ir | El código genérico con respuesta `409`, con la misma pérdida de precisión |
+| **El papel no alcanza, fuera del desenlace** | El conjunto cerrado tenía **un solo** código de facultad y su enunciado estaba acotado al desenlace de la revisión. La capa de aplicación emite un motivo de facultad requerida también en **el gobierno de cuentas, el reseteo y la revisión de la comisión** | `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR`, con destino `403` en la tabla de §5. Cerrado el **2026-08-12** |
+| **El trabajo no está en `Borrador`, fuera de la eliminación** | El código análogo estaba acotado por su enunciado **a la eliminación y al camino del alumno**. Un envío o una reedición forzados fuera de `Borrador` no tenían dónde ir | `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR`, con destino `409` en la tabla de §5. Cerrado el **2026-08-12** |
+
+**Ningún código vecino cambió de enunciado**, y **ninguno de los dos recicla un identificador retirado**.
 
 ### 5.3 Las dos señales que no son fallos
 
@@ -213,7 +217,7 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | CU que lo materializan | **Once** de los doce de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5. `CU-12` lo **ejercita** en lugar de exponerlo |
 | Puntos de acceso | **Quince**: A-01 a A-03 y A-05 a A-16. `A-04` retirado y **no reciclado** |
 | Códigos de respuesta | **Diez** distintos, de §4 |
-| Códigos del contrato | **Quince** vivos sobre **dieciocho** identificadores emitidos por `GeometriaFactory-Contracts`; **catorce con destino acá y uno sin él** |
+| Códigos del contrato | **Diecisiete** vivos sobre **veinte** identificadores emitidos por `GeometriaFactory-Contracts`; **dieciséis con destino acá y uno sin él** |
 | CU de la capa de aplicación | Los **once**, con el reparto de la columna de §3 y la correspondencia de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.4 |
 | RN que cubre | RN-01 a RN-16, las **dieciséis**, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2. **Trece** tienen tramo acá; RN-05, RN-14 y RN-16 no. **Dos** se rompen desde acá: RN-03 y RN-13 |
 | Invariantes | INV-01 a INV-09, los **nueve**, con el aporte declarado en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
@@ -228,3 +232,4 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara el apartamiento de la descripción formal de servicio con el fundamento de la fuente, **fija el formato de intercambio y su configuración para los dos extremos** con sus ocho reglas —cerrando el punto abierto que `GeometriaFactory-Contracts` reasignó y `GeometriaFactory-Web` devolvió—, adopta los quince puntos de acceso con la columna de caso de uso que cada uno ejerce, los diez códigos de respuesta con las dos ausencias informativas, y publica la **tabla de traducción con sus quince filas** —catorce con destino y una sin él—, las dos respuestas sin código, los dos huecos declarados, las dos señales que no son fallos, la prohibición de `RA-03` y la política de versionado sin versionado de rutas con las tres clases de cambio que la compilación no detecta. |
 | 1.1 | 2026-08-10 | **Cierra el hallazgo `C-05-03` (P2) del informe de auditoría [`../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0**, en su mitad de este documento. §2.2 publicaba **ocho** filas bajo la columna `Regla` y §9 hablaba de «las ocho reglas», mientras [`ADR-02`](Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 numeraba **seis**: el mismo objeto con dos recuentos en la misma ola, en el artefacto que cierra un reasignado entre capas. **No había contradicción de contenido**, y se verificó fila por fila. §2.2 agrega el cuadre explícito **6 + 1 + 1 = 8**, nombrando las **seis reglas de formato** y las **dos filas que no lo son** —la notación y la prohibición de normalizar el texto original—, y aclarando que el predicado «ninguna depende de que dos configuraciones coincidan» se predica de las seis. §9 pasa a decir «las ocho **filas** de §2.2». **Ninguna fila de la tabla, ningún punto de acceso, ningún código y ninguna política de versionado cambia.** Sube minor. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **18**. Sube minor. |

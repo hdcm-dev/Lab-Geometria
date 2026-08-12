@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** US-16-Cerrar-El-Conjunto-Con-El-Codigo-No-Clasificado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobada
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-02 Identidad del administrador y sesión
 **Etapa del producto:** `c`
@@ -22,9 +22,9 @@ Como **extremo que compila contra el contrato (`GeometriaFactory-Api` y `Geometr
 
 ## 3. Criterios de aceptación
 
-- Given un fallo que no corresponde a ninguno de los otros catorce códigos vivos, When se arma la respuesta, Then usa el código no clasificado y no un código inventado.
+- Given un fallo que no corresponde a ninguno de los otros dieciséis códigos vivos, When se arma la respuesta, Then usa el código no clasificado y no un código inventado.
 - Given una indisponibilidad del servicio de datos, When la unidad pública la presenta, Then lo hace como estado degradado explícito, y el texto **no revela la dirección del servicio que falló**.
-- Given la inspección del conjunto, When se cuenta este código entre los vivos, Then está incluido en los **quince**: cerrar el conjunto no lo pone fuera de él.
+- Given la inspección del conjunto, When se cuenta este código entre los vivos, Then está incluido en los **diecisiete**: cerrar el conjunto no lo pone fuera de él.
 
 ## 4. Trazabilidad
 
@@ -63,3 +63,4 @@ Como **extremo que compila contra el contrato (`GeometriaFactory-Api` y `Geometr
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 previó con este mismo identificador y esta misma pertenencia a necesidades de negocio. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

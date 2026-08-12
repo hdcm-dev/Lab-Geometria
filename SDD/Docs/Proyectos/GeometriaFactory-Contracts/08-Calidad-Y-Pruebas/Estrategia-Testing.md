@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Estrategia-Testing.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.6 §6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §3.1, §4, §5 y §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.4.P.6, §18 (sample S-2), §20 y §22
@@ -56,7 +56,7 @@ La partición de esta categoría es por las **ocho familias de tipos** de `05` �
 | Familia de detalle | CU-05 | Tipos ejercitados; separación del comentario respecto de las observaciones | 100 %; **0** campos compartidos |
 | Familia de desenlace | CU-07 | Tipos ejercitados; conjunto cerrado del desenlace | 100 %; exactamente **2** valores |
 | Familia de reseteo | CU-08 | Tipos ejercitados; campos de la solicitud | 100 %; exactamente **1** campo en la solicitud |
-| Familia de error | CU-06, y transversalmente las otras siete | Tipos ejercitados; conjunto cerrado de códigos; campos capaces de filtrar | 100 %; **15** códigos vivos; **0** campos de filtración |
+| Familia de error | CU-06, y transversalmente las otras siete | Tipos ejercitados; conjunto cerrado de códigos; campos capaces de filtrar | 100 %; **17** códigos vivos; **0** campos de filtración |
 | **Ensamblado completo** | Los ocho | Tipos ejercitados; referencias hacia el dominio; advertencias | **100 %** [ASUNCIÓN]; **0** referencias; **0** advertencias |
 
 **No hay mutation score**, y su ausencia se declara en lugar de omitirse: `Rules-Calidad-Y-Pruebas.md` §2.2 lo pide para `library`, pero la prueba de mutación necesita lógica que mutar y acá no la hay. Mutar un tipo sin comportamiento produce mutantes que ninguna prueba puede matar y un puntaje sin significado. **Es la única exigencia de §2.2 que este proyecto de código no cumple, y el motivo es estructural.**
@@ -92,7 +92,7 @@ Fixtures que esta categoría declara, todos **cuerpos de petición y de respuest
 | --- | --- | --- |
 | Cuerpos del sample S-2 | Alta de trabajo, envío que verifica, envío que no verifica, aprobación y rechazo | Intake §18, que los declara con los cuerpos de `E-2` y `E-5` |
 | Respuesta de sesión de referencia | Los **cuatro** campos y ninguno más | `CU-01`; restricción `RT-10` |
-| Colección de respuestas de error | Una por cada uno de los **quince** códigos vivos | `03` §3.2, que es la única tabla de todo el proyecto de código donde los **dieciocho** identificadores emitidos están enumerados juntos |
+| Colección de respuestas de error | Una por cada uno de los **diecisiete** códigos vivos | `03` §3.2, que es la única tabla de todo el proyecto de código donde los **veinte** identificadores emitidos están enumerados juntos |
 | Proyección de listado de referencia | Un elemento de listado sin texto original, sin componentes y sin comentario | `CU-04`; restricción `RT-04` |
 
 **Regla de duplicación:** los cuerpos de petición se derivan de los del sample S-2 y no se copian. Un segundo cuerpo equivalente con otro valor de geometría es un hallazgo, porque los datos de geometría del producto son los ocho escenarios y no se inventan.
@@ -134,3 +134,4 @@ Fixtures que esta categoría declara, todos **cuerpos de petición y de respuest
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-01`.** §6 afirmaba que §21 del intake cruza la batería obligatoria contra **nueve** casos de prueba; §21 la cruza contra **diez** —los nueve de la fuente técnica más el décimo que esa misma sección agregó el 2026-08-09—. Es el mismo defecto que el informe registró en `GeometriaFactory-Visor` (`H-05`) y que **también estaba acá**. **`H-02`.** §2 cita ahora la fila `A-4` de §22 completa, con su columna «Si el Product Owner la cambia», que es la que sostiene el carácter bloqueante de `QG-05`. Ningún dato de prueba ni umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara el apartamiento completo de la pirámide 80/15/5 de `Rules-Calidad-Y-Pruebas.md` §2.2, con el fundamento de que el apartamiento viene declarado del intake §17.4.P.6 y de `05` §5 y no se decide acá; el reparto 60/40 entre integración e inspección de superficie; la cobertura por las **ocho** familias de tipos en lugar de por líneas, con el gate de 100 % de tipos ejercitados rotulado [ASUNCIÓN]; la ausencia declarada de mutation score con su motivo estructural; el tooling nombrado por función; los cuatro fixtures; el uso de los **ocho** escenarios reales del intake §20 con la precisión de qué parte de cada uno le toca a un ensamblado que transporta y no interpreta; y el ambiente, con la constancia de que no se declara ningún tiempo de ejecución que ninguna fuente dé. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |

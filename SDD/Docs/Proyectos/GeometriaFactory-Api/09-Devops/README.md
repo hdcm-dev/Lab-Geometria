@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto y unidad desplegable del servidor propio**
 
@@ -105,7 +105,7 @@ Es la particularidad de esta sección y conviene tenerla de un vistazo. El intak
 | Unidades desplegables del producto | **2**, y ésta es una | Intake §13 y §14 |
 | Artefactos publicables de este proyecto de código | **1**: `image-docker`, **construida en destino y no publicada en un registro** | Intake §17.5.P.7 |
 | Puntos de acceso | **15** — **4** fuera de la guardia y **11** bajo ella | `02` `Definicion-Superficie-HTTP.md` §3; `05` §3.4, citados por `08` README §5 |
-| Códigos vivos del contrato | **15** — **14** con destino y **1** sin él | `03` §6.1; `05` `Contratos-REST.md` §5, citados por `08` README §5 |
+| Códigos vivos del contrato | **17** — **16** con destino y **1** sin él | `03` §6.1; `05` `Contratos-REST.md` §5, citados por `08` README §5 |
 | Casos de uso | **12** | `02` §5, citado por `08` README §5 |
 | Casos de la batería del validador que corre desde acá | **10** | `PRODUCT-INTAKE` §21; `08` README §5 |
 | Escenarios del intake usados como cuerpo de petición | **8 de 8** | `PRODUCT-INTAKE` §20 |
@@ -121,3 +121,4 @@ Es la particularidad de esta sección y conviene tenerla de un vistazo. El intak
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Api`, **proyecto de código principal y unidad desplegable del servidor propio**. Lista los **cinco** artefactos emitidos —incluida la guía de publicación, que acá **no se omite**—, el orden de lectura que pone primero los dos documentos de despliegue con su motivo, los **tres** artefactos que no corresponden con su motivo, los **quince** quality gates con el stage donde corre cada uno y la constancia de que ninguno cambió de carácter, con la precisión de que **los cuatro rótulos de este proyecto de código son sobre umbrales** y por eso condicionan, al revés que en `GeometriaFactory-Web`. Declara **la frontera del despliegue** con qué queda de cada lado, y la tabla de recuentos con la fuente de cada uno. |
 | 1.1 | 2026-08-11 | **Propagación del intake 1.22 y constancia de las correcciones de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`.** El intake **1.22** §17.6.P.7 decide que, cuando front y backend salen juntos, sale **primero el backend**, con lo que `PD-05` queda **cerrado** y la fila de recuentos pasa a declarar **5** puntos abiertos con **4 vigentes**. Se actualizan a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) —que además corrige `H-01`, `H-03` y `H-05`—, [`Entornos-Deploy.md`](Entornos-Deploy.md) y [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md). |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

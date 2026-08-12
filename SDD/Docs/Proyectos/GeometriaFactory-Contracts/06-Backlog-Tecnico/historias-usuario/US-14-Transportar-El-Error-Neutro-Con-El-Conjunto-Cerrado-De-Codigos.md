@@ -1,11 +1,11 @@
-# US-14 — Transportar el error neutro con el conjunto cerrado de quince códigos
+# US-14 — Transportar el error neutro con el conjunto cerrado de diecisiete códigos
 
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** US-14-Transportar-El-Error-Neutro-Con-El-Conjunto-Cerrado-De-Codigos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobada
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-02 Identidad del administrador y sesión
 **Etapa del producto:** `c`
@@ -14,16 +14,16 @@
 
 ## 1. Historia
 
-Como **extremo que compila contra el contrato (`GeometriaFactory-Api` y `GeometriaFactory-Web`)**, quiero **un **único** tipo de error, con cuatro campos y un conjunto cerrado de **quince** códigos vivos**, para **que exista un solo lugar en el que un fallo pueda cruzar la frontera, y por lo tanto un solo lugar donde vigilarlo**.
+Como **extremo que compila contra el contrato (`GeometriaFactory-Api` y `GeometriaFactory-Web`)**, quiero **un **único** tipo de error, con cuatro campos y un conjunto cerrado de **diecisiete** códigos vivos**, para **que exista un solo lugar en el que un fallo pueda cruzar la frontera, y por lo tanto un solo lugar donde vigilarlo**.
 
 ## 2. Contexto
 
-[`ADR-02`](../../05-Arquitectura-Tecnica/Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) decide el tipo único con conjunto cerrado, y `05` §2.1 declara por qué se descartó un tipo de error por familia: multiplicaría por ocho los lugares donde se puede filtrar una dirección de servicio. `05` §7 fija los cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y los **quince** códigos vivos sobre **dieciocho** identificadores emitidos.
+[`ADR-02`](../../05-Arquitectura-Tecnica/Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) decide el tipo único con conjunto cerrado, y `05` §2.1 declara por qué se descartó un tipo de error por familia: multiplicaría por ocho los lugares donde se puede filtrar una dirección de servicio. `05` §7 fija los cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y los **diecisiete** códigos vivos sobre **veinte** identificadores emitidos.
 
 ## 3. Criterios de aceptación
 
 - Given cualquier fallo que cruce la frontera, When se arma la respuesta, Then usa **el mismo** tipo de error, con sus cuatro campos.
-- Given la inspección del conjunto de códigos, When se cuentan los vivos, Then son exactamente **quince**, y **cero** códigos se producen fuera del conjunto.
+- Given la inspección del conjunto de códigos, When se cuentan los vivos, Then son exactamente **diecisiete**, y **cero** códigos se producen fuera del conjunto.
 - Given un identificador retirado —de los **tres** que hay—, When se busca reutilizarlo para otra condición, Then la regla de no reciclado lo impide: un consumidor viejo lo interpretaría con la causa anterior.
 
 ## 4. Trazabilidad
@@ -63,3 +63,4 @@ Como **extremo que compila contra el contrato (`GeometriaFactory-Api` y `Geometr
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 previó con este mismo identificador y esta misma pertenencia a necesidades de negocio. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **4**. Sube minor. |

@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Contracts
 **Documento:** Criterios-Validacion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
 **Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.1 §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.4.P.3, §17.4.P.6, §17.4.P.8 y §22
@@ -39,7 +39,7 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | CV-02 | Las **once** restricciones transversales tienen caso de prueba, salvo `RT-06`, cuya verificación pertenece a `09-Devops` y está declarada como tal | Matriz §5 | **10 de 11** con caso de prueba, y la undécima con su verificación declarada |
 | CV-03 | Las **veintidós** historias tienen su caso de prueba; `US-10` queda declarada fuera del tramo comprometido | Matriz §2 cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3 | **22 de 22**, **21** comprometidas |
 | CV-04 | Las **dieciséis** reglas de negocio tienen un caso de prueba que verifica **qué transporta este ensamblado de ellas** | Matriz §4 | **16 de 16** |
-| CV-05 | El conjunto cerrado tiene **15** códigos vivos sobre **18** identificadores emitidos, y ninguno de los **3** retirados se recicla | `TC-16` | 15, 18 y **0** reciclados |
+| CV-05 | El conjunto cerrado tiene **17** códigos vivos sobre **20** identificadores emitidos, y ninguno de los **3** retirados se recicla | `TC-16` | 15, 18 y **0** reciclados |
 | CV-06 | `CONTRATO_ERROR_NO_CLASIFICADO` cierra el conjunto: no hay camino por el que un fallo llegue sin representación | `TC-16` | **0** fallos sin representación |
 | CV-07 | Los **ocho** escenarios del intake §20 están alcanzados en la parte que a este proyecto de código le toca, **sin sustituirlos por datos sintéticos** | Verificación uno por uno de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
 
@@ -53,7 +53,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-09 | La proyección de listado no lleva texto original, ni componentes de pieza, ni comentario | **0**, **0** y **0** **[ASUNCIÓN derivada del intake §17.4.P.10]** | `TC-09` | **Condicionado** |
 | CV-10 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | **0** | `TC-20` | **Bloqueante** |
 | CV-11 | Ningún tipo de las **ocho** familias tiene un campo capaz de transportar el hash de la contraseña, la clave de firma, una dirección de servicio interno, una ruta de archivo de datos o una traza | **0** | `TC-15`, `TC-01`, `TC-04`, `TC-19` | **Bloqueante** |
-| CV-12 | El conjunto cerrado tiene exactamente **15** códigos vivos y se producen **0** fuera de él | 15 y 0 | `TC-16` | **Bloqueante** |
+| CV-12 | El conjunto cerrado tiene exactamente **17** códigos vivos y se producen **0** fuera de él | 17 y 0 | `TC-16` | **Bloqueante** |
 | CV-13 | La respuesta de sesión declara exactamente **4** campos y **0** que transporten una condición que impida operar | 4 y 0 | `TC-01`, `TC-02` | **Bloqueante** |
 | CV-14 | El ensamblado compila **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.4.P.8 | **Bloqueante** |
 
@@ -103,3 +103,4 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-02`.** `CV-08` pasa de **condicionado** a **bloqueante**, por el mismo fundamento de `QG-05`: §22 `A-4` deja en duda la forma del gate y no su carácter, y §17.4.P.6 lo llama «equivalente y bloqueante». La salida admitida de §6 queda con `CV-09` como único criterio condicionado. **El umbral del 100 % no cambia.** Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara **veinticinco** criterios de validación, `CV-01` a `CV-25`, repartidos en funcionales, no funcionales, de regresión y compatibilidad, y de calidad de código, cada uno con su umbral y su forma de comprobación. Distingue tres caracteres —bloqueante, condicionado y no aplicable declarado— y ata los condicionados a los dos valores rotulados **[ASUNCIÓN]** del intake §22, asunción `A-4`. Declara la compatibilidad como criterio de validación propio, con el fundamento de que es el mecanismo de protección que el intake §17.4.P.3 le asigna a este proyecto de código; declara explícitamente que la cobertura de líneas y el mutation score no aplican, en lugar de omitirlos; y declara **cuatro** salidas ante un criterio no cumplido, una de ellas sin excepción posible. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |
