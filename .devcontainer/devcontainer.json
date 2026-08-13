@@ -1,0 +1,24 @@
+{
+  "name": "Fabrica de Geometria — entorno unico de desarrollo",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-10.0-trixie",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "forwardPorts": [5080, 5090],
+  "portsAttributes": {
+    "5080": { "label": "GeometriaFactory.Api (HTTP, sin certificado)" },
+    "5090": { "label": "GeometriaFactory.Web" }
+  },
+  "postCreateCommand": "dotnet tool restore",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}

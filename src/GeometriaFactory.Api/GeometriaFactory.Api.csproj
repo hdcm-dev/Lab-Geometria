@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    TRES referencias declaradas: Application, Infrastructure y Contracts (intake §17.5).
+    Es la lectura de OCHO aristas de la discrepancia `X-1` (`Vista-Producto.md` §3.1):
+    la referencia a Application se DECLARA en lugar de recibirse transitivamente por
+    Infrastructure. Se elige la forma explícita porque `CompositionRoot` nombra los cuatro
+    puertos, que viven en Application, y una referencia transitiva deja esa dependencia sin
+    declarar en el archivo de proyecto. El orden topológico es el mismo bajo las dos lecturas.
+    `X-1` sigue siendo del punto de control: acá se declara qué se hizo, no se cierra la decisión.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>GeometriaFactory.Api</RootNamespace>
+    <AssemblyName>GeometriaFactory.Api</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../GeometriaFactory.Application/GeometriaFactory.Application.csproj" />
+    <ProjectReference Include="../GeometriaFactory.Infrastructure/GeometriaFactory.Infrastructure.csproj" />
+    <ProjectReference Include="../GeometriaFactory.Contracts/GeometriaFactory.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

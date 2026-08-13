@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Dos dependencias salientes: Application y Domain (manifiesto §2).
+    Regla de anclaje de versiones (intake, encabezado de la Parte C): toda versión de paquete
+    se fija acá explícitamente. Un cambio mayor es una decisión que se documenta.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>GeometriaFactory.Infrastructure</RootNamespace>
+    <AssemblyName>GeometriaFactory.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../GeometriaFactory.Domain/GeometriaFactory.Domain.csproj" />
+    <ProjectReference Include="../GeometriaFactory.Application/GeometriaFactory.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

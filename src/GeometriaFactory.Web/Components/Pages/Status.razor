@@ -1,0 +1,77 @@
+@page "/estado"
+@rendermode InteractiveServer
+@inject DataServiceClient DataService
+
+@* APARTAMIENTO AP-03 (`Plan-Etapa-A.md` §2.3): esta página NO es una de las once superficies
+   aprobadas de `Linea-Base-Visual.md`. Es andamiaje de la etapa `a` y se declara expresamente
+   fuera de la línea de base visual. La exigen el intake §15, `Web BT-03` y la transición
+   `a` → `b` del roadmap: es lo que vuelve «ambulante» al esqueleto. *@
+
+<PageTitle>Estado del servicio</PageTitle>
+
+<h1>Estado del servicio</h1>
+
+<p>
+    Esta página consulta el punto de salud del servicio de datos y muestra lo que el servidor
+    respondió. Con el servicio detenido muestra el error: es la manera de comprobar que el dato
+    es real y no un literal escrito en la página.
+</p>
+
+<button class="action" @onclick="LoadAsync" disabled="@_loading">
+    @(_loading ? "Consultando…" : "Volver a consultar")
+</button>
+
+@if (_health is not null)
+{
+    <dl class="health">
+        <dt>Almacén preparado</dt>
+        <dd>@(_health.Ready ? "Sí" : "No")</dd>
+
+        <dt>Versión del servicio</dt>
+        <dd>@_health.Version</dd>
+
+        <dt>Momento del servidor (UTC)</dt>
+        <dd>@_health.ServerTimeUtc.ToString("O")</dd>
+    </dl>
+    <p class="read-at">Leído a las @_readAt.ToString("HH:mm:ss") del reloj de esta página.</p>
+}
+else if (_failure is not null)
+{
+    <p class="failure" role="alert">
+        El servicio de datos no respondió: @_failure
+    </p>
+}
+else
+{
+    <p>Sin datos todavía.</p>
+}
+
+@code {
+    private ServiceHealth? _health;
+    private string? _failure;
+    private bool _loading;
+    private DateTimeOffset _readAt;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        _failure = null;
+
+        try
+        {
+            _health = await DataService.GetServiceHealthAsync();
+            _readAt = DateTimeOffset.Now;
+        }
+        catch (Exception exception) when (exception is HttpRequestException or TaskCanceledException)
+        {
+            _health = null;
+            _failure = exception.Message;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

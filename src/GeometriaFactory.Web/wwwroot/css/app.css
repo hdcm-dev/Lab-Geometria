@@ -1,0 +1,13 @@
+/* Andamiaje de la etapa `a`. NO es la línea de base visual del producto:
+   `Linea-Base-Visual.md` inventaría once superficies y la página de estado no es una de ellas. */
+:root { color-scheme: light dark; }
+body { font-family: system-ui, sans-serif; margin: 0; line-height: 1.5; }
+.page > header { display: flex; gap: 1rem; align-items: baseline; padding: 1rem 1.5rem; border-bottom: 1px solid currentColor; }
+.brand { font-weight: 600; }
+.scaffold-note { opacity: 0.7; font-size: 0.875rem; }
+main { padding: 1.5rem; max-width: 48rem; }
+dl.health { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 1rem; }
+dl.health dt { font-weight: 600; }
+.failure { color: #b3261e; }
+.read-at { opacity: 0.7; font-size: 0.875rem; }
+button.action { padding: 0.4rem 0.9rem; margin-bottom: 1rem; }
