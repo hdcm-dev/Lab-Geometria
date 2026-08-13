@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Compatibilidad-Plataformas.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-13
 **Autor:** Product Manager Senior (AG-00), actuando también como Analista de Negocio Senior (AG-01) por `Rules-Contexto.md` §1.3
@@ -21,6 +21,7 @@
   - [2.2 Plataforma del navegador](#22-plataforma-del-navegador)
   - [2.3 Plataformas de construcción](#23-plataformas-de-construcción)
   - [2.4 Resultado medido del transporte de la sesión interactiva (PT-01.b)](#24-resultado-medido-del-transporte-de-la-sesión-interactiva-pt-01b)
+  - [2.5 Resultado medido de la estabilidad y la reconexión de la sesión interactiva (PT-01.c)](#25-resultado-medido-de-la-estabilidad-y-la-reconexión-de-la-sesión-interactiva-pt-01c)
 - [3. Restricciones de plataforma justificadas](#3-restricciones-de-plataforma-justificadas)
 - [4. Alternativas para plataformas no soportadas](#4-alternativas-para-plataformas-no-soportadas)
 - [5. Estado de implementación por plataforma](#5-estado-de-implementación-por-plataforma)
@@ -119,6 +120,44 @@ dbug: Microsoft.AspNetCore.Http.Connections.Internal.Transports.WebSocketsTransp
 
 **El repliegue se provocó, no se supuso**: el navegador se condujo detrás de un intermediario que registra todo lo que pide y que **rechaza el túnel del WebSocket**, que es exactamente lo que hace una red que no lo deja pasar. Lo que quedó registrado es la secuencia del repliegue —negociar, intentar el túnel, recibir el rechazo, volver a negociar y seguir por long polling—, y del lado del servidor, `LongPollingTransport` y cero `WebSocketsTransport` en ese tramo.
 
+### 2.5 Resultado medido de la estabilidad y la reconexión de la sesión interactiva (`PT-01.c`)
+
+`Roadmap-Producto.md` §5.2 exige, para pasar de la etapa `a` a la `b`, **veinte minutos de navegación continua sin que el proceso recicle la sesión, y reconexión funcional al cortar y restablecer la red**. Son dos cosas y acá están las dos, medidas. **Lo medido es el esqueleto de la etapa `a` corriendo en el entorno de desarrollo contenido, con un navegador real conducido por instrumentación, el 2026-08-13.** **No es el hosting**, y la salvedad no es formal: el riesgo que `PT-01.c` vigila —que el proceso del hosting gratuito recicle la sesión— **sólo se puede observar en el hosting**. Acá se mide lo que sí se puede medir hoy: que ni el producto ni el entorno contenido reciclan la sesión, y que la reconexión funciona.
+
+| Qué se midió | Resultado medido |
+|---|---|
+| Duración real de la corrida continua | **1245 s = 20 min 45 s**, de las 09:39:44 a las 10:00:28. No se redondea: la corrida pasó los veinte minutos y por eso se declara el número |
+| Interacción durante la corrida | **20 pulsaciones del botón de la página de estado, una por minuto**, sin recargar la página ni tocar la red. **Las 20 produjeron efecto observable**: el momento del servidor cambió en cada una |
+| Identidad del circuito | **Un solo circuito para toda la corrida**, `nn5Vcf5NZO8NBrVtevlN69k13-blyi-doR66wTo1b4M`, sobre **una sola conexión**, `R4__pTktCbvIy5xdi29nfA`. **Cero** reconexiones y **cero** circuitos nuevos en el registro del front. La única desconexión aparece en la línea **1422 de 1428**, al cerrar el navegador: **después** de los veinte minutos |
+| Que la página nunca se recargó | Marca puesta en la ventana del navegador a los 6 s de cargar, **presente e idéntica al final**; y `performance.now()`, que cuenta desde la **última** carga del documento, terminó en **1 251 023 ms**. Una recarga —que es lo que se ve cuando se pierde la sesión— habría reiniciado las dos cosas |
+| Corte de red: qué se cortó | El navegador sale por un reenviador propio. **Se mató ese proceso**: las conexiones abiertas se cayeron y el puerto dejó de existir. La comprobación desde fuera devolvió `[Errno 111] Connection refused` **0,5 s** después. No se cerró la pestaña ni se detuvo el servidor |
+| Corte de red: qué avisó el front | El aviso de reconexión de la propia pieza pública, `#components-reconnect-modal`, pasó a `display: block` **0,5 s** después del corte y **siguió en `display: block` en las ocho lecturas que cubren el corte**, desde t+0,5 s hasta el instante mismo del restablecimiento: los **18,1 s** que duró |
+| Restablecimiento | Al volver a levantar el reenviador, el aviso volvió a `display: none` **por sí solo a los 3,0 s**, sin recargar la página y sin intervención |
+| Que después sigue funcionando | La pulsación **posterior** al restablecimiento cambió el momento del servidor en pantalla de `13:02:50` a `13:03:15`: el evento viajó por el circuito y volvió con dato nuevo |
+| Que vuelve **el mismo** circuito, no uno nuevo | El registro del front lo dice con todas las letras: `Attempting to reconnect to Circuit`, `Transferring disconnected circuit … to connection …` y `Reconnect to circuit … succeeded`, **con el mismo identificador de circuito antes y después del corte** y **cero** circuitos creados en ese tramo. El estado del lado del servidor sobrevivió al corte |
+| Semáforo | **Verde en el entorno de desarrollo contenido.** Los dos requisitos del criterio se ejercieron y los dos pasaron. **`PT-01.c` no queda cerrada**: sobre el hosting sigue sin medir, y ahí es donde vive el riesgo que el criterio vigila |
+
+**Cómo se midió, para que se pueda volver a correr.** Las dos piezas se levantan dentro del entorno de desarrollo contenido, el servicio de datos **sólo en el bucle local** y el front en el puerto de desarrollo, que es el único publicado. El front se levanta con el detalle de registro de circuitos subido, que es lo que permite identificar el circuito:
+
+```bash
+env 'Logging__LogLevel__Microsoft.AspNetCore.Components=Debug' ./scripts/run-web.sh
+```
+
+El navegador **no** habla con el front directamente: sale por un reenviador de una sola línea de vida —acepta en un puerto y reenvía al del front—. Ese proceso **es** el cable de red del navegador: matarlo es cortar, volver a arrancarlo es restablecer. La navegación de veinte minutos y el corte se conducen con instrumentación del navegador, que pulsa el botón y lee el DOM.
+
+La identidad del circuito se lee del lado del servidor, y es la afirmación que sostiene todo el criterio:
+
+```text
+dbug: Microsoft.AspNetCore.Components.Server.Circuits.CircuitFactory[1]
+      Created circuit nn5Vcf5NZO8NBrVtevlN69k13-blyi-doR66wTo1b4M for connection R4__pTktCbvIy5xdi29nfA
+dbug: Microsoft.AspNetCore.Components.Server.Circuits.CircuitRegistry[102]
+      Attempting to reconnect to Circuit with secret GoyD7KcHoUPHxBdHLpCso22jE2My5hlJ9HBm8ACcSDI.
+dbug: Microsoft.AspNetCore.Components.Server.Circuits.CircuitRegistry[115]
+      Reconnect to circuit with id GoyD7KcHoUPHxBdHLpCso22jE2My5hlJ9HBm8ACcSDI succeeded.
+```
+
+**Un hallazgo que la medición dejó y que conviene no perder.** En un primer montaje el reenviador tenía un tiempo de espera de 10 s sobre el socket de salida, y eso solo bastaba para que **el WebSocket se cayera cada diez segundos de silencio**. El circuito **sobrevivió igual**: el registro muestra desconexión y reconexión sucesivas **siempre con el mismo identificador de circuito**, y la página nunca se recargó. Es decir: el repliegue ante una red que corta el transporte inactivo **está ejercido, aunque no fuera lo que se buscaba medir**. La corrida de veinte minutos que se declara arriba es la del montaje **corregido**, sin ese defecto, y por eso muestra cero reconexiones.
+
 ## 3. Restricciones de plataforma justificadas
 
 | Id | Restricción | Justificación declarada |
@@ -139,7 +178,7 @@ dbug: Microsoft.AspNetCore.Http.Connections.Internal.Transports.WebSocketsTransp
 |---|---|---|
 | El hosting no soporta la versión de plataforma objetivo | Bajar la versión objetivo **de la pieza pública**, no la del servicio de datos | PT-01.a |
 | El hosting no sostiene el transporte de sesión interactiva por WebSockets | Repliegue a long polling: **aceptable**, se documenta la latencia percibida. No es motivo de rediseño. **Ejercido y funcionando** en el entorno de desarrollo: §2.4. Sobre el hosting, sin medir | PT-01.b |
-| El hosting no sostiene ninguna sesión interactiva, o recicla el proceso | Es el peor escenario y **no tiene mitigación en el código**. Salidas documentadas: cambiar el modelo de la pieza pública a ejecución en el navegador con reenvío de peticiones, o servir la pieza pública desde el servidor propio, que reabre el bloqueo desde la facultad | PT-01.c y las salidas documentadas del intake |
+| El hosting no sostiene ninguna sesión interactiva, o recicla el proceso | Es el peor escenario y **no tiene mitigación en el código**. Salidas documentadas: cambiar el modelo de la pieza pública a ejecución en el navegador con reenvío de peticiones, o servir la pieza pública desde el servidor propio, que reabre el bloqueo desde la facultad. **En el entorno de desarrollo el escenario no se observó** y la reconexión al cortar la red quedó **ejercida y funcionando** sobre el mismo circuito: §2.5. **Sobre el hosting, sin medir** | PT-01.c y las salidas documentadas del intake |
 | La pieza pública no alcanza al servicio de datos | Publicar el servicio en un puerto convencional. El reenvío de peticiones **no ayuda** en este caso | PT-01.d |
 | Navegador sin WebGL | **No soportado.** No hay alternativa: sin WebGL no hay visualización, que es una de las capacidades comprometidas | PRODUCT-INTAKE §17.6 P.9 y §17.7 P.9 |
 | Red de la facultad que bloquea el acceso directo al servidor propio | Es la premisa que ordena la partición del producto, no un escenario a mitigar. La salida alternativa —canal saliente con dominio propio— está **declarada y deliberadamente no adoptada**, porque debilitaría la premisa | Exclusión X-10 del alcance |
@@ -153,7 +192,8 @@ Estado a la fecha de emisión 1.0: el producto no tiene código construido. La e
 |---|---|---|---|
 | `net10.0` sobre Linux, servidor propio | Api, Infrastructure, Application, Domain, Contracts | **Verificada en el entorno de desarrollo**: el producto compila entero y las dos piezas arrancan; PT-04 quedó medido con la imagen construida y arrancada | Etapa `a`: el producto compila y las dos piezas desplegables arrancan; PT-04 construye y arranca la imagen |
 | Plataforma del hosting público | Web, Contracts | Declarada, **con la versión marcada para verificar** | Etapa `a`, PT-01.a. Es la primera medición del producto |
-| Transporte de sesión interactiva del hosting | Web | **Medida en el entorno de desarrollo: WebSockets, con repliegue a long polling ejercido y funcionando (§2.4). Sobre el hosting, sin verificar** | Etapa `a`, PT-01.b y PT-01.c. Lo que falta se verifica **sobre la dirección pública**, pidiendo la negociación del circuito contra ella —`curl -sS -X POST "https://<dirección pública>/_blazor/negotiate?negotiateVersion=1" -H "Content-Length: 0"`— y recorriéndola con un navegador real |
+| Transporte de sesión interactiva del hosting | Web | **Medida en el entorno de desarrollo: WebSockets, con repliegue a long polling ejercido y funcionando (§2.4). Sobre el hosting, sin verificar** | Etapa `a`, PT-01.b. Lo que falta se verifica **sobre la dirección pública**, pidiendo la negociación del circuito contra ella —`curl -sS -X POST "https://<dirección pública>/_blazor/negotiate?negotiateVersion=1" -H "Content-Length: 0"`— y recorriéndola con un navegador real |
+| Estabilidad y reconexión de la sesión interactiva | Web | **Medida en el entorno de desarrollo: 20 min 45 s de navegación continua sobre un único circuito, y reconexión funcional al cortar y restablecer la red, sobre el mismo circuito (§2.5). Sobre el hosting, sin verificar** | Etapa `a`, PT-01.c. Lo que falta se verifica **sobre la dirección pública**: la misma corrida cronometrada y el mismo corte de red, contra el hosting, que es el único lugar donde se puede observar si el proceso recicla la sesión |
 | Salida del hosting hacia el servidor propio | Web hacia Api | Declarada, sin verificar | Etapa `a`, PT-01.d |
 | Navegador con WebGL | Web, Visor | Declarada, sin verificar | Etapa `g`, PT-02 y PT-03 |
 | Node.js de construcción | Visor | Declarada, sin verificar | Etapa `a`, al generar el paquete por primera vez |
@@ -178,3 +218,4 @@ Estado a la fecha de emisión 1.0: el producto no tiene código construido. La e
 | 1.0 | 2026-08-08 | Correcciones absorbidas del audit A-00-01-r1, sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-05**: el párrafo introductorio de §5 cita `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` §1.1, decisiones de reconciliación, como evidencia localizable de la única afirmación del documento sobre el estado del sistema. **H-01**: se califica la ocurrencia desnuda de «pieza» de la primera fila de §5, sobre la familia que declara `Vision-Producto.md` §9.2. | Product Manager Senior (AG-00) |
 | 1.1 | 2026-08-08 | Absorbe la renumeración de etapas que trae `PRODUCT-INTAKE` 1.3 al insertar el circuito de revisión del administrador como etapa `h`. Sube minor y archiva el estado anterior porque el documento ya es citado como insumo por otras categorías (`Master-Prompt.md` §5). **§5**: la verificación de PT-05 pasa de la etapa `h` a la etapa `i`, con la nota de que la puerta sigue atada al despliegue real y no a la letra. Es el único cambio: **ninguna plataforma, versión, restricción ni alternativa se modifica**, porque el circuito de revisión no toca la matriz de plataformas. | Product Manager Senior (AG-00) |
 | 1.2 | 2026-08-13 | **Documenta el resultado medido de la puerta técnica PT-01.b**, que `Roadmap-Producto.md` §5.2 exige medido y documentado —repliegue incluido— para pasar de la etapa `a` a la `b`. Agrega **§2.4** con el resultado y su evidencia: el servidor ofrece los **tres** transportes al negociar el circuito, el navegador real elige **WebSockets**, y con el túnel del WebSocket bloqueado el circuito **repliega a long polling —no a `ServerSentEvents`— y la sesión interactiva sigue funcionando**; semáforo **verde**. Incluye la latencia percibida de los dos transportes con su límite declarado: es un bucle local y no la red real. **§4** marca el repliegue como ejercido, y **§5** cambia el estado de **dos** filas —el transporte de la sesión interactiva y la plataforma de servidor— de «declarada, sin verificar» a medida **en el entorno de desarrollo contenido**, dejando escrito que sobre el hosting público sigue sin verificar y con qué comando se verificaría. **Ninguna plataforma, restricción ni alternativa se modifica**: sólo se registra qué se midió y qué falta. Sube minor y no mayor porque no cambia ninguna decisión de plataforma. | Product Manager Senior (AG-00) |
+| 1.3 | 2026-08-13 | **Documenta el resultado medido de la puerta técnica PT-01.c**, que `Roadmap-Producto.md` §5.2 exige en sus **dos** mitades para pasar de la etapa `a` a la `b`. Agrega **§2.5** con las dos y su evidencia: **20 min 45 s de navegación continua** —el número real, sin redondear— con **20 interacciones, todas con efecto observable**, sobre **un único circuito** identificado por su identificador del lado del servidor, **cero** reconexiones y **cero** circuitos nuevos, y con la prueba de que la página **nunca se recargó**; y el **corte de red real** —matar el proceso por el que sale el navegador, con `Connection refused` comprobado— con el **aviso de reconexión de la propia pieza pública visible durante todo el corte**, la vuelta **automática** a los 3,0 s de restablecer, la interacción posterior **con efecto observable** y la reconexión **al mismo circuito**, no a uno nuevo. Deja escrito el hallazgo lateral: una red que corta el transporte inactivo cada diez segundos **no recicla la sesión**, el circuito sobrevive. **§4** marca que el peor escenario no se observó y **§5** agrega la fila de estabilidad y reconexión, medida en el entorno de desarrollo contenido. **`PT-01.c` NO queda cerrada**: sobre el hosting sigue sin medir, y ahí es donde vive el riesgo que el criterio vigila —que el proceso recicle la sesión—, cosa que sólo se puede observar en el hosting. **Ninguna plataforma, restricción ni alternativa se modifica**: sólo se registra qué se midió y qué falta. Sube minor y no mayor porque no cambia ninguna decisión de plataforma. | Product Manager Senior (AG-00) |
