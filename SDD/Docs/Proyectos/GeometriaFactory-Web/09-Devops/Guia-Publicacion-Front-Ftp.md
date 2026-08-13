@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** Guia-Publicacion-Front-Ftp.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-13
 **Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `web-monolith`
 **Tipo de artefacto:** `Front-Ftp`
@@ -49,6 +49,16 @@ Lo que sí hay es **un despliegue**, y tiene pre-requisitos, procedimiento, veri
 
 **Ningún pre-requisito de esta guía se cumple escribiendo un valor acá.** Los dos secretos se nombran por su función y se declara dónde vive el valor; las dos marcas **[A VERIFICAR]** se resuelven midiendo.
 
+**El inventario completo de secretos que el flujo consume, leído sobre el flujo y no supuesto.** El intake §17.6.P.5 declara **dos** por su función —la dirección del servicio de datos y las credenciales del canal—, y ésas son las **dos** que la tabla de arriba exige. El flujo escrito en `.github/workflows/deploy-front-ftp.yml` consume además **el destino dentro del hosting**, que acompaña a las credenciales del canal, y **la dirección pública que el paso 8 interroga**, que es la que `QG-03` mide. Se dejan nombrados por su función y **sin ningún valor**, porque quien vaya a publicar necesita saber que **el flujo se detiene si falta cualquiera de ellos**:
+
+| Secreto, nombrado por su función | Paso que lo usa | Qué pasa si falta |
+| --- | --- | --- |
+| Dirección base del servicio de datos | 6 | El paso **se detiene antes de escribir nada**: comprueba que el valor no esté vacío. Comprobado corriendo el 2026-08-13 |
+| Credenciales del canal de publicación, y **el destino dentro del hosting** | 7 | La subida no ocurre |
+| **Dirección pública** | 8 | La comprobación final no tiene qué interrogar, y el flujo no cierra su gate |
+
+**Y una precisión sobre el valor de la última, que no es cosmética.** El paso 8 exige respuesta correcta de **la dirección que se le da**. En la etapa `a` la pieza pública sirve **una sola ruta —la página de estado— y la raíz no está servida**: se comprobó corriendo el 2026-08-13, levantando la publicación resultante en local, que la raíz responde **404** y la página de estado responde **200**. Si el valor de este secreto es la raíz desnuda, **el paso 8 dará rojo con una publicación correcta** hasta que la etapa `b` ponga las rutas navegables. **No se resuelve ablandando el paso** —eso reabriría exactamente el modo de falla que el intake §17.6.P.8 vino a cerrar—: se resuelve fijando el valor del secreto en una ruta que la etapa sirva.
+
 ## 2. Comando y stage de publicación
 
 **El acto de publicar es el flujo de trabajo del repositorio**, `.github/workflows/deploy-front-ftp.yml`, que el árbol del intake §16 declara. Sus **ocho** pasos y el gate de cada uno están en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 y **no se repiten acá**; lo que esta guía agrega es cómo se lo invoca y qué necesita.
@@ -60,7 +70,7 @@ Lo que sí hay es **un despliegue**, y tiene pre-requisitos, procedimiento, veri
 
 **Los dos caminos corren el mismo flujo entero**, incluidos los pasos 4 y 8. No hay un camino corto que suba sin regenerar el bundle o sin comprobar: `QG-02` y `QG-03` lo impiden.
 
-**Variables requeridas por la publicación: dos, las dos secretas y las dos nombradas por su función** —la dirección base del servicio de datos y las credenciales del canal—. Ninguna otra. El bundle del visor **no requiere ninguna**: no lee configuración propia (`RA-02`).
+**Variables requeridas por la publicación: todas secretas y todas nombradas por su función** —la dirección base del servicio de datos y las credenciales del canal, que son las **dos** que el intake §17.6.P.5 declara, más el destino dentro del hosting y la dirección pública que el paso 8 interroga, que el flujo escrito consume y §1 inventaría—. Ninguna otra, y **ninguna con valor en esta cadena de documentos**. El bundle del visor **no requiere ninguna**: no lee configuración propia (`RA-02`).
 
 **Construcción local para depurar el flujo.** Los guiones del repositorio que el intake §16 lista permiten reproducir los pasos 1 a 5 en la máquina de quien construye, dentro del contenedor de desarrollo: `scripts/build-visor.sh` para el bundle y `scripts/build.sh` para la construcción encadenada. **Los pasos 6, 7 y 8 no se reproducen en local**, porque involucran el secreto y el destino real; intentar reproducirlos exigiría el secreto en la máquina, que es lo que el intake §17.6.P.5 evita.
 
@@ -70,7 +80,7 @@ Lo que sí hay es **un despliegue**, y tiene pre-requisitos, procedimiento, veri
 
 | # | Verificación | Cómo se comprueba | Umbral |
 | --- | --- | --- | --- |
-| 1 | **La dirección pública responde** | Paso 8 del flujo, obligatorio | La dirección pública responde (`QG-03`) |
+| 1 | **La dirección pública responde** | Paso 8 del flujo, obligatorio, sobre **el valor del secreto de la dirección pública**: comprueba una ruta, no el sitio entero (§1) | La dirección pública responde (`QG-03`) |
 | 2 | **El front publicado alcanza el servicio de datos** | Una llamada de salud que devuelve **datos reales** del servidor propio, que es lo que `PT-01.d` mide | Datos reales del servidor propio |
 | 3 | **El bundle servido es el que se generó en este flujo** | Inspección de la definición del flujo: el paso de generación precede al de publicación y no hay artefacto cacheado | **0** publicaciones con un bundle no generado en el mismo flujo (`QG-02`) |
 | 4 | **El guion de demostración de la etapa y los de todas las anteriores pasan** | Ejecución en el navegador del equipo anfitrión (`TC-35`) | **100 %** (`QG-04`) |
@@ -114,4 +124,5 @@ Las **seis** de [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-13 | **Precisa los pre-requisitos operativos de la publicación con lo que el flujo escrito consume**, sin cambiar ninguna decisión. §1 agrega el **inventario completo de secretos nombrados por su función**: a los **dos** que el intake §17.6.P.5 declara se suman el **destino dentro del hosting**, que acompaña a las credenciales del canal, y **la dirección pública que el paso 8 interroga**, con qué pasa si falta cada uno y **ningún valor**. Agrega la precisión de que el paso 8 comprueba **la dirección que se le da**, y el hecho comprobado corriendo el 2026-08-13 de que en la etapa `a` la pieza pública **sirve la página de estado y no la raíz** —404 en la raíz, 200 en la página de estado, sobre la publicación levantada en local—, de modo que un valor apuntado a la raíz desnuda **daría rojo con una publicación correcta**; se declara que **no se resuelve ablandando el paso**, porque eso reabriría el modo de falla que el intake §17.6.P.8 cerró. §2 y la primera verificación de §3 quedan alineadas con ese inventario. **No cambia el tipo de artefacto, ni el procedimiento, ni la reversión, ni las seis métricas.** Sube minor. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara de entrada que **no hay publicación en un repositorio de paquetes** y que lo que documenta es el **despliegue** de la unidad al hosting público, con la estructura de `Rules-Devops.md` §4.5. Declara `Front-Ftp` como tipo de artefacto nuevo, **sin prefijo de familia**, con la constancia de por qué no es una imagen de contenedor ni pertenece a ninguna de las seis familias, y de por qué tampoco corresponde una guía de contrato publicado. Declara los pre-requisitos con los **dos** secretos nombrados por su función y las **dos** marcas [A VERIFICAR] que se resuelven midiendo, los **dos** caminos de invocación del mismo flujo entero, las **cuatro** verificaciones posteriores con su falso negativo y su falso positivo declarados, la reversión **por republicación desde la etiqueta anterior** con la constancia de que no hay despliegue con solapamiento y no se lo simula, y las **seis** métricas de `ADR-07` §8 sin agregar ninguna. |
