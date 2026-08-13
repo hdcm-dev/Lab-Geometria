@@ -6,13 +6,18 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /source
 
+# El identificador del commit entra como argumento de construcción: sin él la imagen no puede
+# decir de qué revisión es, y el punto de salud pierde la mitad de su utilidad operativa.
+ARG SOURCE_REVISION_ID=desconocida
+
 COPY Directory.Build.props ./
 COPY GeometriaFactory.sln ./
 COPY src/ ./src/
 
 RUN dotnet restore src/GeometriaFactory.Api/GeometriaFactory.Api.csproj
 RUN dotnet publish src/GeometriaFactory.Api/GeometriaFactory.Api.csproj \
-    -c Release -o /publish --no-restore
+    -c Release -o /publish --no-restore \
+    -p:SourceRevisionId="$SOURCE_REVISION_ID"
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
