@@ -1,0 +1,30 @@
+# Despliegue en destino, construyendo desde el repositorio.
+#
+# EL ACTO DE DESPLEGAR ES MANUAL Y DEL PRODUCT OWNER: la canalización termina en un artefacto
+# verificado y no en un servicio corriendo (intake §17.5.P.7 y §17.5.P.8;
+# `Api/09 Pipeline-CI-CD.md` §1).
+#
+# El `healthcheck` consulta el punto de salud `A-16`. Su ruta es derivada y no declarada por
+# ninguna fuente: es la decisión `A-4` / `Api BT-07` del punto de control de la etapa `a`.
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-8080}:8080"
+    volumes:
+      - store:/datos
+    healthcheck:
+      # Arranque en frío: aplica transformaciones y responde salud en menos de 30 segundos
+      # [ASUNCIÓN del intake §17.5], que es lo que vuelve útil este `healthcheck`.
+      test: ["CMD-SHELL", "curl --fail --silent http://localhost:8080/salud || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  store:

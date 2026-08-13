@@ -1,0 +1,75 @@
+# Publicación del front por transferencia al hosting (intake §17.6.P.7 y §17.6.P.8;
+# `Pipeline-Producto.md` §4).
+#
+# EL FILTRO DE RUTAS LLEVA TRES ENTRADAS, y la tercera entró por una corrección declarada:
+# sin `GeometriaFactory.Contracts`, un cambio del contrato no dispara la publicación y las dos
+# unidades quedan desalineadas SIN QUE NADA FALLE.
+#
+# Y NO TERMINA EN LA SUBIDA: termina comprobando que la dirección pública responde.
+#
+# Ninguna dirección real vive acá: todas llegan como secretos del repositorio.
+
+name: deploy-front-ftp
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/GeometriaFactory.Web/**'
+      - 'visor/**'
+      - 'src/GeometriaFactory.Contracts/**'
+  workflow_dispatch:
+
+jobs:
+  publish-front:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Anclar el kit de desarrollo
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Anclar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generar el bundle del visor y copiarlo al front
+        run: ./scripts/build-visor.sh
+
+      - name: Publicar el front
+        run: dotnet publish src/GeometriaFactory.Web/GeometriaFactory.Web.csproj -c Release -o ./publish
+
+      - name: Inyectar la direccion del servicio de datos desde secretos
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+        run: |
+          set -euo pipefail
+          test -n "$API_BASE_URL"
+          python3 - <<'PY'
+          import json, os, pathlib
+          path = pathlib.Path('publish/appsettings.json')
+          settings = json.loads(path.read_text(encoding='utf-8'))
+          settings['ApiBaseUrl'] = os.environ['API_BASE_URL']
+          path.write_text(json.dumps(settings, ensure_ascii=False, indent=2), encoding='utf-8')
+          PY
+
+      - name: Subir por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./publish/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+
+      - name: Comprobar que la direccion publica responde
+        env:
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+        run: |
+          set -euo pipefail
+          status_code="$(curl --silent --show-error --location --max-time 30 --output /dev/null --write-out '%{http_code}' "$PUBLIC_URL")"
+          echo "La direccion publica respondio $status_code"
+          test "$status_code" = "200"

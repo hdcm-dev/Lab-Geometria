@@ -1,0 +1,29 @@
+<Project>
+
+  <!--
+    Apartamiento AP-01 del árbol del intake §16, declarado en Plan-Etapa-A.md §2.3.
+    Motivo: los seis proyectos .NET comparten la misma puerta bloqueante —la construcción
+    termina en 0 y SIN ADVERTENCIAS (QG-01)—. Acá vive una sola vez, en lugar de vivir
+    repetida en seis archivos de proyecto y desincronizarse.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <!-- La puerta QG-01 del producto: cero advertencias, y no se arrastran. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <!-- Regla de anclaje de versiones (intake, encabezado de la Parte C):
+         ninguna versión de paquete se resuelve sola. -->
+    <RestoreLockedMode>false</RestoreLockedMode>
+    <Deterministic>true</Deterministic>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+</Project>

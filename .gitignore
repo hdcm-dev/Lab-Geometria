@@ -427,3 +427,25 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+## ---------------------------------------------------------------------------
+## Apartamiento AP-02 de Plan-Etapa-A.md §2.3 — ampliación de la etapa `a`.
+## Ejecuta decisiones ya cerradas: `Visor/09 Entornos-Deploy.md` §2 decidió que el
+## bundle NO se versiona (lo genera la canalización antes de publicar) y
+## `Web/09 Entornos-Deploy.md` §2 la adopta desde el anfitrión.
+## ---------------------------------------------------------------------------
+
+# Salida del empaquetado del visor — artefacto generado (AP-04)
+visor/dist/
+
+# Destino del bundle dentro del front — artefacto generado, no se edita a mano
+src/GeometriaFactory.Web/wwwroot/js/*.js
+src/GeometriaFactory.Web/wwwroot/js/*.js.map
+!src/GeometriaFactory.Web/wwwroot/js/.gitkeep
+
+# Almacén local de desarrollo (SQLite). Nunca entra al repositorio.
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+geometriafactory*.db

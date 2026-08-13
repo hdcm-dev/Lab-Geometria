@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Puerta: UNA sola dependencia saliente, `GeometriaFactory.Domain`.
+    No referencia EF Core ni el marco web: los cuatro puertos de `Ports/` son la frontera.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>GeometriaFactory.Application</RootNamespace>
+    <AssemblyName>GeometriaFactory.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../GeometriaFactory.Domain/GeometriaFactory.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

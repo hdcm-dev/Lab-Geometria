@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Puerta BT-04: CERO dependencias salientes. Este archivo no declara ninguna
+    referencia de proyecto ni ningún paquete, y la prueba de arquitectura de
+    tests/GeometriaFactory.Domain.Tests lo verifica sobre el ensamblado compilado.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>GeometriaFactory.Domain</RootNamespace>
+    <AssemblyName>GeometriaFactory.Domain</AssemblyName>
+  </PropertyGroup>
+
+</Project>

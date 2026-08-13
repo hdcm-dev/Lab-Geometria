@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Puerta BT-02 / QG-02 de este proyecto: CERO referencias hacia GeometriaFactory.Domain.
+    Es lo que impide que el front conozca las entidades. Este archivo no declara ninguna
+    referencia de proyecto, y tests/GeometriaFactory.Integration.Tests lo verifica sobre
+    el ensamblado compilado.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>GeometriaFactory.Contracts</RootNamespace>
+    <AssemblyName>GeometriaFactory.Contracts</AssemblyName>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    UNA sola referencia de proyecto: GeometriaFactory.Contracts (manifiesto §2).
+    No referencia Domain: es lo que impide que el front conozca las entidades.
+    La arista hacia GeometriaFactory.Api es de TIEMPO DE EJECUCIÓN y llega por configuración
+    (`ApiBaseUrl`), nunca por referencia: por eso no introduce ciclo (`Web ADR-07`; manifiesto §3).
+
+    APARTAMIENTO DECLARADO: la etapa `a` NO ancla MudBlazor. El intake §17.6 declara la
+    biblioteca de componentes y deja su versión exacta [A VERIFICAR], y `V-5` la registra como
+    decisión abierta del punto de control (`Web/05` `PA-01`; `BT-02`). Fijar una versión sin
+    poder contrastarla contra el registro de paquetes violaría la regla de anclaje de versiones.
+    La página de estado de la etapa `a` no necesita la biblioteca.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>GeometriaFactory.Web</RootNamespace>
+    <AssemblyName>GeometriaFactory.Web</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../GeometriaFactory.Contracts/GeometriaFactory.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
