@@ -1,6 +1,7 @@
 @page "/estado"
 @rendermode InteractiveServer
 @inject DataServiceClient DataService
+@inject ILogger<Status> Logger
 
 @* APARTAMIENTO AP-03 (`Plan-Etapa-A.md` §2.3): esta página NO es una de las once superficies
    aprobadas de `Linea-Base-Visual.md`. Es andamiaje de la etapa `a` y se declara expresamente
@@ -67,7 +68,13 @@ else
         catch (Exception exception) when (exception is HttpRequestException or TaskCanceledException)
         {
             _health = null;
-            _failure = exception.Message;
+
+            // RA-03: ningún mensaje que llega al navegador expone direcciones de servicios
+            // internos. `exception.Message` las trae —«Connection refused (localhost:5080)»—,
+            // así que NO se propaga: se registra del lado del servidor y a la persona se le
+            // muestra un texto que dice qué pasó sin decir dónde.
+            Logger.LogWarning(exception, "El punto de salud del servicio de datos no respondió.");
+            _failure = "puede estar detenido o inalcanzable desde este servidor.";
         }
         finally
         {
