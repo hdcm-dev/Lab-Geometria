@@ -12,6 +12,10 @@ services:
     build:
       context: ..
       dockerfile: deploy/Dockerfile
+      args:
+        # Se pasa al construir: `SOURCE_REVISION_ID=$(git rev-parse HEAD) docker compose build`.
+        # Sin él la imagen queda sin identificar y el punto de salud no dice de qué commit es.
+        SOURCE_REVISION_ID: ${SOURCE_REVISION_ID:-desconocida}
     restart: unless-stopped
     ports:
       - "${API_PORT:-8080}:8080"
