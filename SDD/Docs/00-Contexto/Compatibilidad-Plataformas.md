@@ -2,9 +2,9 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Compatibilidad-Plataformas.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-08
+**Fecha:** 2026-08-13
 **Autor:** Product Manager Senior (AG-00), actuando también como Analista de Negocio Senior (AG-01) por `Rules-Contexto.md` §1.3
 **Trazabilidad upstream:** PRODUCT-INTAKE §10 (restricciones del cliente: red, servidor propio, hosting sin estado, host de desarrollo sin SDK), §13 (los siete proyectos de código), §15 (puertas técnicas y dónde se miden), §17 P.9 de los siete bloques (compatibilidad y plataformas target), §17.5 P.8 y §17.6 P.8 (ambientes y canales de entrega), §22 (incógnitas marcadas para verificar)
 **Trazabilidad downstream:** 09-Devops, 05-Arquitectura-Tecnica, 08-Calidad-Y-Pruebas, 03-UX-UI-DX
@@ -20,6 +20,7 @@
   - [2.1 Proyectos de código y sus plataformas target](#21-proyectos-de-código-y-sus-plataformas-target)
   - [2.2 Plataforma del navegador](#22-plataforma-del-navegador)
   - [2.3 Plataformas de construcción](#23-plataformas-de-construcción)
+  - [2.4 Resultado medido del transporte de la sesión interactiva (PT-01.b)](#24-resultado-medido-del-transporte-de-la-sesión-interactiva-pt-01b)
 - [3. Restricciones de plataforma justificadas](#3-restricciones-de-plataforma-justificadas)
 - [4. Alternativas para plataformas no soportadas](#4-alternativas-para-plataformas-no-soportadas)
 - [5. Estado de implementación por plataforma](#5-estado-de-implementación-por-plataforma)
@@ -80,6 +81,44 @@ Las siete filas cubren los siete proyectos de código del manifiesto, tomadas de
 | Node.js en versión de soporte extendido, anclada | Construcción del paquete de la visualización | Sólo en tiempo de construcción, y siempre dentro del entorno de desarrollo |
 | Integración continua del proveedor de repositorio | Publicación de la pieza pública por transferencia de archivos | Restringida a los cambios de la pieza pública y de la visualización. Termina comprobando que la dirección pública responde, no en la subida |
 
+### 2.4 Resultado medido del transporte de la sesión interactiva (`PT-01.b`)
+
+`Roadmap-Producto.md` §5.2 exige, para pasar de la etapa `a` a la `b`, que **el transporte de la sesión interactiva esté medido y su resultado documentado, incluido el repliegue si ocurre**. Acá está el resultado. **Lo medido es el esqueleto de la etapa `a` corriendo en el entorno de desarrollo contenido, con un navegador real conducido por instrumentación, el 2026-08-13.** No es el hosting público: esa medición depende de que `PT-01.a` publique, y §5 la deja declarada como pendiente con su comando.
+
+| Qué se midió | Resultado medido |
+|---|---|
+| Transportes que el servidor ofrece al negociar el circuito | **Tres**: `WebSockets`, `ServerSentEvents` y `LongPolling`. El servidor no recorta la oferta |
+| Transporte que el navegador elige de verdad | **WebSockets.** El navegador negocia y sube el circuito a WebSocket; el servidor lo registra como `WebSocketsTransport` y **cero** veces como `LongPollingTransport` o `ServerSentEventsTransport` en ese recorrido |
+| Qué viaja por el circuito | El evento de interfaz y el repintado: la pulsación del botón de la página de estado llega al servidor como invocación del circuito y la pantalla se actualiza con un dato nuevo del servidor |
+| Repliegue cuando el WebSocket **no** está disponible | **Long polling**, y **no** `ServerSentEvents`. Con el túnel WebSocket bloqueado en la ruta del navegador, el cliente vuelve a negociar y sigue por `LongPolling`: **cero** trazas de `WebSocketsTransport` en ese recorrido. La sesión interactiva **sigue funcionando**: la pulsación se procesa y la pantalla se actualiza igual |
+| Latencia percibida del repliegue | Medida dentro de la página, del clic hasta el repintado del DOM: **mediana 6 ms por WebSockets y 8 ms por long polling**, siete muestras cada uno. **El número vale para el bucle local y no para la red real**: acá el trayecto de red es despreciable, y long polling paga una petición completa por mensaje, que es donde el costo aparece cuando hay red de por medio |
+| Semáforo | **Verde.** El mejor de los tres estados posibles —WebSockets— es el que ocurre, y el estado intermedio —repliegue a long polling— quedó además ejercido y funcionando. El peor estado, «ninguna sesión interactiva», **no se observó**. Nada de esto obliga a cambiar el modelo de la pieza pública |
+
+**Cómo se midió, para que se pueda volver a correr.** Las dos piezas se levantan dentro del entorno de desarrollo contenido; el front escucha en el puerto de desarrollo. La negociación del circuito es lo que el navegador hace antes de abrir el transporte, y se puede pedir a mano:
+
+```bash
+curl -sS -i -X POST "http://127.0.0.1:5090/_blazor/negotiate?negotiateVersion=1" -H "Content-Length: 0"
+```
+
+```text
+HTTP/1.1 200 OK
+{"negotiateVersion":1,"connectionId":"...","connectionToken":"...","availableTransports":[
+ {"transport":"WebSockets","transferFormats":["Text","Binary"]},
+ {"transport":"ServerSentEvents","transferFormats":["Text"]},
+ {"transport":"LongPolling","transferFormats":["Text","Binary"]}]}
+```
+
+Que el transporte **elegido** sea WebSockets no se deduce de esa oferta: se lee del lado del servidor, subiendo el detalle de registro del transporte del circuito y contando qué transporte se instancia por recorrido.
+
+```text
+dbug: Microsoft.AspNetCore.Http.Connections.Internal.HttpConnectionDispatcher[4]
+      Establishing new connection.
+dbug: Microsoft.AspNetCore.Http.Connections.Internal.Transports.WebSocketsTransport[1]
+      Socket opened using Sub-Protocol: '(null)'.
+```
+
+**El repliegue se provocó, no se supuso**: el navegador se condujo detrás de un intermediario que registra todo lo que pide y que **rechaza el túnel del WebSocket**, que es exactamente lo que hace una red que no lo deja pasar. Lo que quedó registrado es la secuencia del repliegue —negociar, intentar el túnel, recibir el rechazo, volver a negociar y seguir por long polling—, y del lado del servidor, `LongPollingTransport` y cero `WebSocketsTransport` en ese tramo.
+
 ## 3. Restricciones de plataforma justificadas
 
 | Id | Restricción | Justificación declarada |
@@ -99,7 +138,7 @@ Las siete filas cubren los siete proyectos de código del manifiesto, tomadas de
 | Plataforma o escenario no soportado | Alternativa declarada | Origen |
 |---|---|---|
 | El hosting no soporta la versión de plataforma objetivo | Bajar la versión objetivo **de la pieza pública**, no la del servicio de datos | PT-01.a |
-| El hosting no sostiene el transporte de sesión interactiva por WebSockets | Repliegue a long polling: **aceptable**, se documenta la latencia percibida. No es motivo de rediseño | PT-01.b |
+| El hosting no sostiene el transporte de sesión interactiva por WebSockets | Repliegue a long polling: **aceptable**, se documenta la latencia percibida. No es motivo de rediseño. **Ejercido y funcionando** en el entorno de desarrollo: §2.4. Sobre el hosting, sin medir | PT-01.b |
 | El hosting no sostiene ninguna sesión interactiva, o recicla el proceso | Es el peor escenario y **no tiene mitigación en el código**. Salidas documentadas: cambiar el modelo de la pieza pública a ejecución en el navegador con reenvío de peticiones, o servir la pieza pública desde el servidor propio, que reabre el bloqueo desde la facultad | PT-01.c y las salidas documentadas del intake |
 | La pieza pública no alcanza al servicio de datos | Publicar el servicio en un puerto convencional. El reenvío de peticiones **no ayuda** en este caso | PT-01.d |
 | Navegador sin WebGL | **No soportado.** No hay alternativa: sin WebGL no hay visualización, que es una de las capacidades comprometidas | PRODUCT-INTAKE §17.6 P.9 y §17.7 P.9 |
@@ -108,13 +147,13 @@ Las siete filas cubren los siete proyectos de código del manifiesto, tomadas de
 
 ## 5. Estado de implementación por plataforma
 
-Estado a la fecha de emisión: el producto no tiene código construido. La evidencia es `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` §1.1, bloque de decisiones de reconciliación, que declara que «`SDD/Docs/` estaba vacía al arrancar, de modo que la reconciliación normativa de `Master-Prompt.md` §2.1 no se disparó». Todas las filas están **declaradas y sin verificar**, y cada una indica dónde se verifica.
+Estado a la fecha de emisión 1.0: el producto no tiene código construido. La evidencia es `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` §1.1, bloque de decisiones de reconciliación, que declara que «`SDD/Docs/` estaba vacía al arrancar, de modo que la reconciliación normativa de `Master-Prompt.md` §2.1 no se disparó». Todas las filas estaban **declaradas y sin verificar**, y cada una indica dónde se verifica. **Desde 1.2 eso ya no vale para todas**: la etapa `a` construyó el esqueleto y dos filas cambiaron de estado, con la precisión de que lo medido es el **entorno de desarrollo contenido** y no el hosting público.
 
 | Plataforma | Componentes que la usan | Estado | Dónde se verifica |
 |---|---|---|---|
-| `net10.0` sobre Linux, servidor propio | Api, Infrastructure, Application, Domain, Contracts | Declarada, sin verificar | Etapa `a`: el producto compila y las dos piezas desplegables arrancan; PT-04 construye y arranca la imagen |
+| `net10.0` sobre Linux, servidor propio | Api, Infrastructure, Application, Domain, Contracts | **Verificada en el entorno de desarrollo**: el producto compila entero y las dos piezas arrancan; PT-04 quedó medido con la imagen construida y arrancada | Etapa `a`: el producto compila y las dos piezas desplegables arrancan; PT-04 construye y arranca la imagen |
 | Plataforma del hosting público | Web, Contracts | Declarada, **con la versión marcada para verificar** | Etapa `a`, PT-01.a. Es la primera medición del producto |
-| Transporte de sesión interactiva del hosting | Web | Declarada, sin verificar | Etapa `a`, PT-01.b y PT-01.c |
+| Transporte de sesión interactiva del hosting | Web | **Medida en el entorno de desarrollo: WebSockets, con repliegue a long polling ejercido y funcionando (§2.4). Sobre el hosting, sin verificar** | Etapa `a`, PT-01.b y PT-01.c. Lo que falta se verifica **sobre la dirección pública**, pidiendo la negociación del circuito contra ella —`curl -sS -X POST "https://<dirección pública>/_blazor/negotiate?negotiateVersion=1" -H "Content-Length: 0"`— y recorriéndola con un navegador real |
 | Salida del hosting hacia el servidor propio | Web hacia Api | Declarada, sin verificar | Etapa `a`, PT-01.d |
 | Navegador con WebGL | Web, Visor | Declarada, sin verificar | Etapa `g`, PT-02 y PT-03 |
 | Node.js de construcción | Visor | Declarada, sin verificar | Etapa `a`, al generar el paquete por primera vez |
@@ -138,3 +177,4 @@ Estado a la fecha de emisión: el producto no tiene código construido. La evide
 | 1.0 | 2026-08-08 | Emisión inicial, incluida por decisión del humano al aprobar el plan de fase pese a no ser obligatoria para el tipo D8 del proyecto de código principal, con su motivo declarado en §1.1. Agrega las plataformas target de los siete proyectos de código, la matriz del navegador expresada por capacidad, las tres plataformas de construcción, nueve restricciones justificadas, siete alternativas para escenarios no soportados y el estado de verificación de cada plataforma con la puerta técnica que la mide. | Product Manager Senior (AG-00) |
 | 1.0 | 2026-08-08 | Correcciones absorbidas del audit A-00-01-r1, sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-05**: el párrafo introductorio de §5 cita `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` §1.1, decisiones de reconciliación, como evidencia localizable de la única afirmación del documento sobre el estado del sistema. **H-01**: se califica la ocurrencia desnuda de «pieza» de la primera fila de §5, sobre la familia que declara `Vision-Producto.md` §9.2. | Product Manager Senior (AG-00) |
 | 1.1 | 2026-08-08 | Absorbe la renumeración de etapas que trae `PRODUCT-INTAKE` 1.3 al insertar el circuito de revisión del administrador como etapa `h`. Sube minor y archiva el estado anterior porque el documento ya es citado como insumo por otras categorías (`Master-Prompt.md` §5). **§5**: la verificación de PT-05 pasa de la etapa `h` a la etapa `i`, con la nota de que la puerta sigue atada al despliegue real y no a la letra. Es el único cambio: **ninguna plataforma, versión, restricción ni alternativa se modifica**, porque el circuito de revisión no toca la matriz de plataformas. | Product Manager Senior (AG-00) |
+| 1.2 | 2026-08-13 | **Documenta el resultado medido de la puerta técnica PT-01.b**, que `Roadmap-Producto.md` §5.2 exige medido y documentado —repliegue incluido— para pasar de la etapa `a` a la `b`. Agrega **§2.4** con el resultado y su evidencia: el servidor ofrece los **tres** transportes al negociar el circuito, el navegador real elige **WebSockets**, y con el túnel del WebSocket bloqueado el circuito **repliega a long polling —no a `ServerSentEvents`— y la sesión interactiva sigue funcionando**; semáforo **verde**. Incluye la latencia percibida de los dos transportes con su límite declarado: es un bucle local y no la red real. **§4** marca el repliegue como ejercido, y **§5** cambia el estado de **dos** filas —el transporte de la sesión interactiva y la plataforma de servidor— de «declarada, sin verificar» a medida **en el entorno de desarrollo contenido**, dejando escrito que sobre el hosting público sigue sin verificar y con qué comando se verificaría. **Ninguna plataforma, restricción ni alternativa se modifica**: sólo se registra qué se midió y qué falta. Sube minor y no mayor porque no cambia ninguna decisión de plataforma. | Product Manager Senior (AG-00) |
