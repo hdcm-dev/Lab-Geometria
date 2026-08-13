@@ -449,3 +449,7 @@ src/GeometriaFactory.Web/wwwroot/js/*.js.map
 *.db-shm
 *.db-wal
 geometriafactory*.db
+
+# Salida de `dotnet publish` para el despliegue manual del front. Es artefacto, no fuente:
+# se regenera con `dotnet publish` y nunca se versiona.
+.publish-web/
