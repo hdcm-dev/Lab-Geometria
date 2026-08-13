@@ -19,7 +19,12 @@ public sealed class PortGateTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.Equal(new[] { "GeometriaFactory.Domain" }, referenced);
+        // En la etapa `a` la comprobación es **negativa**: ningún ensamblado del producto
+        // salvo `GeometriaFactory.Domain`. La dirección positiva —que la referencia esté
+        // presente— no es verificable todavía: `Application` declara la referencia de
+        // proyecto pero no usa ningún tipo de `Domain`, así que el compilador la elide del
+        // ensamblado. Pasa a ser `Assert.Equal` cuando la etapa `c` modele las entidades.
+        Assert.Empty(referenced.Except(new[] { "GeometriaFactory.Domain" }));
     }
 
     [Fact]
