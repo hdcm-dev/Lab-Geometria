@@ -2,9 +2,9 @@
 
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** ADR-02-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-13
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Comunicación
 
@@ -14,7 +14,7 @@
 
 [`ADR-01`](ADR-01-Casos-De-Uso-Con-Inversion-De-Dependencias.md) decide que la dependencia se invierte. Lo que esa decisión deja abierto es **cuántas fronteras hay y qué pasa por cada una**, y ahí hay un desajuste entre las fuentes que esta categoría tiene que resolver sin inventar nada.
 
-`PRODUCT-INTAKE` §17.2.P.1 y §14 nombran **tres** puertos: `IRepositorioTrabajos`, `IValidadorFiguras` e `IRelojDelSistema`. Pero la Fase C de `GeometriaFactory-Domain` decidió que **el dominio no lee el conjunto de entidades**: la unicidad del correo y la existencia previa de una cuenta con papel `Administrador` se las tiene que aportar el consumidor. Y ese consumidor es esta capa. Una verificación sobre un conjunto no es posible sin una frontera que lo alcance, de modo que el **cuarto** puerto —el repositorio de cuentas— **existe por necesidad estructural**, no por preferencia.
+`PRODUCT-INTAKE` §17.2.P.1 y §14 nombran **tres** puertos: `IWorkRepository`, `IFigureValidator` e `ISystemClock`. Pero la Fase C de `GeometriaFactory-Domain` decidió que **el dominio no lee el conjunto de entidades**: la unicidad del correo y la existencia previa de una cuenta con papel `Administrador` se las tiene que aportar el consumidor. Y ese consumidor es esta capa. Una verificación sobre un conjunto no es posible sin una frontera que lo alcance, de modo que el **cuarto** puerto —el repositorio de cuentas— **existe por necesidad estructural**, no por preferencia.
 
 La categoría 02 de esta capa lo declaró, lo nombró en lenguaje de dominio y elevó el punto abierto a esta categoría. Lo que falta no es la decisión de que exista: es su nombre.
 
@@ -86,3 +86,4 @@ Sobre el cuarto, la decisión tiene dos mitades:
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Confirma los cuatro puertos como única frontera del proyecto de código, resuelve la mitad decidible del punto abierto que la categoría 02 elevó —el cuarto puerto existe— y declara explícitamente que su identificador no se inventa acá, evalúa cuatro alternativas incluida la de fijar el nombre, declara tres trade-offs y fija cinco métricas de validación. |
+| 1.1 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`—. Acá son **3 ocurrencias**, las de §1, que son **reporte de la fuente** (norma §4.1): el intake se renombró en este mismo tramo. **La decisión de este ADR no cambia**: los cuatro puertos, el fundamento del cuarto y las consecuencias siguen intactos. **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-01-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. |

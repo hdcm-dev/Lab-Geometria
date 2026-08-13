@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Documento:** Contratos-Abstractions.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-13
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -67,9 +67,9 @@ Los cuatro son los de [`../02-Especificacion-Funcional/Especificacion-Funcional.
 
 | Puerto | Identificador declarado | Qué le pide esta capa | Operaciones que lo consumen |
 | --- | --- | --- | --- |
-| Repositorio de trabajos | `IRepositorioTrabajos` | Recuperar un trabajo, resolver una consulta **ya acotada** por dueño o por alcance, materializar el resultado y ejecutar el retiro. Ofrece **dos** formas de lectura: la proyección de listado —sin texto original, sin componentes y sin comentario— y el detalle completo | OP-02, OP-04, OP-05, OP-06, OP-07, OP-08, OP-09 |
-| Validación de figuras | `IValidadorFiguras` | Interpretar el texto original y devolver **la cantidad de figuras del conjunto raíz**, las piezas reconstruidas y las observaciones, con su especie y su ubicación | OP-05 |
-| Reloj del sistema | `IRelojDelSistema` | Los sellos de alta, de modificación y de desenlace, **para que sean verificables en prueba** | OP-01, OP-03, OP-04, OP-05, OP-08, OP-10, OP-11 |
+| Repositorio de trabajos | `IWorkRepository` | Recuperar un trabajo, resolver una consulta **ya acotada** por dueño o por alcance, materializar el resultado y ejecutar el retiro. Ofrece **dos** formas de lectura: la proyección de listado —sin texto original, sin componentes y sin comentario— y el detalle completo | OP-02, OP-04, OP-05, OP-06, OP-07, OP-08, OP-09 |
+| Validación de figuras | `IFigureValidator` | Interpretar el texto original y devolver **la cantidad de figuras del conjunto raíz**, las piezas reconstruidas y las observaciones, con su especie y su ubicación | OP-05 |
+| Reloj del sistema | `ISystemClock` | Los sellos de alta, de modificación y de desenlace, **para que sean verificables en prueba** | OP-01, OP-03, OP-04, OP-05, OP-08, OP-10, OP-11 |
 | Repositorio de cuentas | **Sin identificador declarado**, ver [`ADR-02`](Adrs/ADR-02-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) §2 | Recuperar una cuenta por su correo, responder si un correo ya está registrado y si ya existe una cuenta con papel `Administrador`, y materializar el resultado, **incluida la marca de cambio de contraseña pendiente** | OP-01, OP-02, OP-03, OP-07, OP-10, OP-11 |
 
 **Dos precisiones sobre lo que viaja por los puertos**, tomadas de la categoría 02 y no redefinidas acá:
@@ -144,3 +144,4 @@ Aplica el criterio de [`ADR-03`](Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Supe
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara la superficie de dos caras: las once operaciones de la cara de arriba con lo que cada una exige resuelto y los puertos que consume, y los cuatro puertos de la cara de abajo con lo que se les pide. Emite la tabla de las cuatro comprobaciones contra cada operación, con las once filas, el manejo de errores con la fuente única del catálogo de 36 condiciones, y el criterio de versionado aplicado elemento por elemento con la asimetría de las dos caras. |
+| 1.1 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`—. Acá son **3 ocurrencias**, las de la tabla de la cara de salida. **Ninguna operación, ninguna precondición y ningún contrato cambian**: cambia el idioma del identificador y nada más. **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-01-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. |
