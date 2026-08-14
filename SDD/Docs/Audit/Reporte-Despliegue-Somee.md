@@ -2,8 +2,8 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1.0 |
-| Fecha | 2026-08-13 |
+| Versión | 1.1 |
+| Fecha | 2026-08-14 |
 | Estado | **Aprobado** |
 | Autor | Ingeniero DevOps Senior + Deploy Engineer (AG-09) |
 | Origen | Pedido del Product Owner: dejar registro de la experiencia del primer despliegue real, para que **otro producto que despliegue en un hosting compartido no la redescubra** |
@@ -19,6 +19,10 @@
 - [1. Qué se hizo, y cómo](#1-qué-se-hizo-y-cómo)
 - [2. Qué se midió, y con qué resultado](#2-qué-se-midió-y-con-qué-resultado)
 - [3. Qué salió distinto de lo previsto, y por qué](#3-qué-salió-distinto-de-lo-previsto-y-por-qué)
+  - [3.1 El hallazgo principal: no hay WebSockets en producción, y la medición de desarrollo no lo anticipaba](#31-el-hallazgo-principal-no-hay-websockets-en-producción-y-la-medición-de-desarrollo-no-lo-anticipaba)
+  - [3.2 Lo previsto que se confirmó, y sirve de contraste](#32-lo-previsto-que-se-confirmó-y-sirve-de-contraste)
+  - [3.3 Un detalle del destino que nadie había previsto](#33-un-detalle-del-destino-que-nadie-había-previsto)
+  - [3.4 La causa del hallazgo principal, encontrada después: no era una carencia, era un renglón del plan](#34-la-causa-del-hallazgo-principal-encontrada-después-no-era-una-carencia-era-un-renglón-del-plan)
 - [4. Lo que costó descubrir](#4-lo-que-costó-descubrir)
 - [5. Qué debería estar en el framework SDD](#5-qué-debería-estar-en-el-framework-sdd)
 - [6. Qué NO prueba este reporte](#6-qué-no-prueba-este-reporte)
@@ -95,6 +99,28 @@ Dos cosas se habían anticipado antes de publicar, midiendo la publicación leva
 
 No compromete `RA-03` —no hay ni una aparición de la dirección ni del puerto internos—, pero tiene dos consecuencias que conviene saber de antemano: **el HTML público no es byte a byte el que la publicación generó**, de modo que cualquier verificación que compare el servido contra el generado va a fallar por un motivo ajeno al producto; y **la página pública carga un recurso de un tercero** que el producto no controla.
 
+### 3.4 La causa del hallazgo principal, encontrada después: no era una carencia, era un renglón del plan
+
+**Verificado el 2026-08-13 entrando al panel de la cuenta.** Hasta acá, este reporte declaraba que el hosting **no ofrece** WebSocket y que eso sólo se descubría publicando. Las dos cosas siguen siendo ciertas, pero **faltaba la causa, y la causa es de otra naturaleza que la que se venía suponiendo**.
+
+**WebSocket no es una carencia técnica del proveedor: es una característica que vende con el plan.** En su matriz de características por paquete hay una fila literal `WebSocket`, **no incluida en el plan gratuito** e **incluida en los tres planes pagos**. La lectura tiene su control de sanidad: la fila de **publicidad forzada** está **invertida** —presente en el gratuito, ausente en los pagos—, que es lo que tiene que pasar si la matriz se lee en el sentido correcto.
+
+**Y no hay dónde encenderlo.** En el panel **no existe ningún interruptor de WebSocket**: el formulario del grupo de aplicaciones no lo menciona ni una vez, y sus tres opciones ajustables están bloqueadas con el aviso de mejorar el plan. La base de conocimiento del proveedor tampoco tiene artículos sobre WebSocket ni sobre SignalR, lo que explica por qué la búsqueda en la documentación no había dado nada.
+
+**Qué explica esto de lo que ya estaba medido**, y es lo que convierte tres observaciones sueltas en un solo hecho:
+
+| Lo ya medido | Qué lo explica |
+|---|---|
+| El servidor de información **ignora** el pedido de ascenso y responde **200** en vez de **101** | El módulo de WebSocket **no está habilitado para el sitio**, porque el plan no lo incluye |
+| Declarar WebSocket habilitado en el archivo de configuración del sitio **no cambió nada** | Es una **decisión del proveedor por encima de la configuración de la aplicación**. Esa línea **ya se revirtió**: estaba probado que no hace nada y daba la falsa impresión de que el asunto estaba resuelto |
+| La negociación devuelve **dos** transportes y no tres | Es la consecuencia visible de las dos filas anteriores, y es lo único que se ve desde afuera |
+
+**Por qué esto importa más allá de este producto, y es la lección de la versión 1.1 de este reporte.** La pregunta «**¿el hosting soporta X?**» se venía tratando como una pregunta de dos respuestas —sí o no— y **tiene una tercera: «lo vende aparte»**. La diferencia no es semántica: con «no» la salida es rediseñar o mudarse; con «lo vende aparte» la salida es **comercial, conocida y de costo acotado**, y no toca una línea de código. **Y esa tercera respuesta no se descubre midiendo el sitio: se descubre mirando la matriz de planes del proveedor**, que es un documento comercial y no técnico, y que **se puede leer antes de elegir hosting**, incluso antes de tener producto.
+
+**Lo que la medición sí siguió haciendo bien, y conviene no invertir la lección.** Medir contra el hosting real fue lo que descubrió el hecho; leer la matriz de planes fue lo que descubrió la causa. **Ninguna de las dos reemplaza a la otra**: la matriz dice qué compraste, la medición dice qué te están dando.
+
+**Un dato más del panel, que abrió un riesgo nuevo.** El plan gratuito **exige al menos cinco visitas por mes o da de baja el sitio**. Para un laboratorio que se usa **por ráfagas** —concentrado en los días de entrega— un mes sin actividad basta para perderlo. Quedó registrado como riesgo **`RG-07`** en [`../00-Contexto/Vision-Producto.md`](../00-Contexto/Vision-Producto.md) §8. **Es la clase de condición que ninguna medición técnica del sitio iba a levantar**, y que estaba escrita en el mismo lugar que la fila de WebSocket.
+
 ## 4. Lo que costó descubrir
 
 Registrado por lo que costó, no por lo que ocupa escrito.
@@ -103,22 +129,25 @@ Registrado por lo que costó, no por lo que ocupa escrito.
 |---|---|
 | **Que el archivo de configuración del servidor es requisito duro, y que su ausencia da 500** | Porque **el síntoma no señala la causa**. Un 500 con la subida terminada sin error se parece a un problema de la aplicación, y no lo es: es que el hosting no sabe arrancarla. Sin saberlo de antemano, se busca en el lugar equivocado |
 | **Que la versión de plataforma se elige en un panel fuera del repositorio** | Porque es **configuración invisible desde el árbol de fuentes**. El producto no tiene infraestructura declarativa que la cubra, y un desajuste entre el panel y el artefacto **produce el mismo 500** que la causa anterior. Dos causas distintas, un solo síntoma |
-| **Que el hosting no ofrece WebSockets** | Porque **sólo se descubre publicando**. Ninguna medición local lo anticipa, la documentación pública del proveedor no lo declaraba en los artículos consultados, y el síntoma es silencioso: **la aplicación funciona igual**, sólo que por otro transporte. Si el repliegue no estuviera ejercido, el hallazgo habría llegado como una degradación inexplicable en vez de como un dato |
+| **Que el hosting no ofrece WebSockets** | Porque **el hecho sólo se descubre publicando** —la causa sí se podía leer antes, y eso lo corrige §3.4—. Ninguna medición local lo anticipa, la documentación pública del proveedor no lo declaraba en los artículos consultados, y el síntoma es silencioso: **la aplicación funciona igual**, sólo que por otro transporte. Si el repliegue no estuviera ejercido, el hallazgo habría llegado como una degradación inexplicable en vez de como un dato |
 | **Que la subida espeja con borrado y hay que respaldar antes** | Porque **el costo de descubrirlo tarde es irreversible**. La carpeta raíz del sitio estaba ocupada por otra aplicación —169 archivos— y el hosting no ofrece de dónde recuperarla |
+| **Que la ausencia de WebSocket era una característica de plan y no una limitación técnica** | Porque **se estaba buscando en el lugar equivocado**: se midió el sitio, se probó a habilitarlo en la configuración y se buscó en la base de conocimiento del proveedor —que no tiene un solo artículo sobre WebSocket ni sobre SignalR—. **La respuesta estaba en la matriz de planes**, que es un documento comercial y no técnico, y que **nadie había pensado en abrir** (§3.4) |
+| **Que el plan gratuito exige actividad mínima mensual bajo pena de baja del sitio** | Porque **no tiene síntoma antes de ocurrir**: no hay error, no hay degradación, no hay nada que medir. Está declarado en las condiciones del plan y se descubre leyéndolas (§3.4) |
 
 ## 5. Qué debería estar en el framework SDD
 
-Cinco piezas, todas derivadas de lo de arriba y ninguna inventada. Están escritas para **cualquier producto que despliegue en un hosting compartido**, no para éste.
+**Seis** piezas, todas derivadas de lo de arriba y ninguna inventada. Las cinco primeras son de la versión 1.0; **`F-6` entra con la versión 1.1**, desde §3.4. Están escritas para **cualquier producto que despliegue en un hosting compartido**, no para éste.
 
 | # | Qué incorporar | Por qué, con el hecho que lo sostiene |
 |---|---|---|
-| **F-1** | **Una lista de comprobación de «capacidades del hosting» que se mide publicando, no declarando**, con al menos: versión de plataforma soportada, transportes que el servidor de información ofrece, límites de proceso, y si el proveedor inyecta contenido en lo servido. **Todas se miden contra la dirección pública, sin secretos.** | §3.1: el transporte se dio por bueno desde una medición local y el hosting lo desmintió. §3.3: la inyección de contenido no la había previsto nadie |
+| **F-1** | **Una lista de comprobación de «capacidades del hosting» que se mide publicando, no declarando**, con al menos: versión de plataforma soportada, transportes que el servidor de información ofrece, límites de proceso, y si el proveedor inyecta contenido en lo servido. **Todas se miden contra la dirección pública, sin secretos**, y **`F-6` agrega la mitad que no se mide sino que se lee**: la matriz de planes del proveedor. | §3.1: el transporte se dio por bueno desde una medición local y el hosting lo desmintió. §3.3: la inyección de contenido no la había previsto nadie |
 | **F-2** | **La regla de que una medición hecha en el entorno de desarrollo se rotula con su alcance y no vale como medición de producción cuando lo medido es una capacidad del servidor ajeno.** Distinguir dos clases: propiedades **del código**, que se trasladan, y propiedades **del entorno de ejecución**, que no | §3.1: transporte y latencia son propiedades del entorno, no del código. La documentación del producto ya rotulaba el alcance, y ese rótulo es lo que evitó que la corrección fuera una contradicción |
 | **F-3** | **La obligación de que todo canal de despliegue por espejado declare su procedimiento de respaldo previo, con inventario y verificación de recuento**, antes de la primera subida | §1 punto 5 y §4: el espejado borra, no es reversible desde el hosting, y lo borrado puede no ser del producto |
 | **F-4** | **Un catálogo de modos de falla del hosting compartido con su síntoma**, empezando por el más caro: **500 en la dirección pública con la subida terminada sin error**, y sus dos causas conocidas —falta el archivo de configuración del servidor; la versión elegida en el panel no coincide con la del artefacto—. Escrito **por síntoma**, que es como lo encuentra quien despliega | §4: dos causas distintas producen un solo síntoma, y el síntoma no señala ninguna de las dos |
 | **F-5** | **La práctica de ejercer la contingencia declarada antes de necesitarla.** Cuando la especificación declara una alternativa aceptable ante un escenario adverso, **medirla funcionando** en la etapa que la declara, no cuando el escenario ocurra | §3.1: el repliegue estaba ejercido y funcionando antes de publicar, y por eso el hallazgo llegó como un dato y no como una crisis. **Es lo que convirtió el peor hallazgo del despliegue en un cambio de semáforo** |
+| **F-6** | **La obligación de leer la matriz de planes del proveedor antes de elegir hosting, y de traducir a una fila de esa matriz cada capacidad que el producto necesita.** La pregunta «¿el hosting soporta X?» **tiene tres respuestas y no dos**: sí, no, y **«lo vende aparte»**. La tercera cambia la salida —de rediseñar a pagar o mudarse— y **no se descubre midiendo el sitio**. La lista de `F-1` se mide publicando; **ésta se lee antes de publicar, e incluso antes de tener producto**. La misma lectura levanta las **condiciones de continuidad** del plan, que tampoco tienen síntoma medible | §3.4: `WebSocket` es una fila de la matriz de paquetes del proveedor, no incluida en el gratuito e incluida en los tres pagos, y **en el panel no hay ningún interruptor**. Y la exigencia de **cinco visitas mensuales bajo pena de baja del sitio**, que abrió el riesgo `RG-07`, estaba escrita en el mismo lugar |
 
-**Y una observación de método que las cinco comparten.** Ninguna de las cinco es una decisión de arquitectura: son **obligaciones de medición y de registro**. El producto ya tenía las decisiones correctas —el repliegue declarado aceptable, la comprobación posterior a la subida, la ruta servida anticipada—; lo que faltaba era **saber qué preguntarle al hosting antes de confiar en lo medido en casa**.
+**Y una observación de método que las seis comparten.** Ninguna de las seis es una decisión de arquitectura: son **obligaciones de medición, de lectura y de registro**. El producto ya tenía las decisiones correctas —el repliegue declarado aceptable, la comprobación posterior a la subida, la ruta servida anticipada—; lo que faltaba era **saber qué preguntarle al hosting antes de confiar en lo medido en casa**, y **dónde preguntárselo**: `F-6` agrega que una parte de esas preguntas no se le hace al sitio sino a su matriz de planes.
 
 ## 6. Qué NO prueba este reporte
 
@@ -129,6 +158,8 @@ Cinco piezas, todas derivadas de lo de arriba y ninguna inventada. Están escrit
 | Que otros hosting compartidos se comporten igual | Los puntos 1 y 5 de §1 son del proveedor. Lo generalizable está marcado como tal en esa misma tabla, y lo que no, también |
 | Que la sesión interactiva se sostenga en producción | **`PT-01.c` sigue sin medir sobre el hosting**: los veinte minutos y el corte de red no se corrieron ahí, y es donde vive el riesgo de que el proceso del hosting gratuito recicle la sesión. **Con un motivo más desde este reporte**: lo medido en desarrollo fue sobre un circuito por WebSockets, y el de producción no lo es |
 | Cuál es la latencia percibida en producción | **No está medida** (§3.1). La de desarrollo es de bucle local y este reporte la declara **no extrapolable** |
+| Que la matriz de planes de este proveedor siga diciendo lo mismo | Lo de §3.4 es **una lectura del panel y de la matriz de paquetes, con fecha**: 2026-08-13. Un proveedor puede mover una fila de un paquete a otro sin avisar, y este reporte **no vigila** ese cambio |
+| Que otros proveedores vendan WebSocket como característica de plan | **Es un caso, no una regla.** Lo generalizable de §3.4 no es qué vende este proveedor sino que **la pregunta admite la respuesta «lo vende aparte»**, y que esa respuesta vive en un documento comercial |
 | Que la salida del front público hacia el servidor propio funcione | Al momento de medir, el servicio de datos corría en local y el front público **no lo alcanzaba**. Lo que sí quedó comprobado es que el **estado degradado se ve correctamente**, que es el comportamiento correcto ante esa situación |
 
 ## 7. Dónde quedó documentado cada cosa
@@ -138,6 +169,9 @@ Cinco piezas, todas derivadas de lo de arriba y ninguna inventada. Están escrit
 | El mecanismo del hosting, el modo de falla del 500 y la dependencia del panel | [`../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md`](../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md) **1.2** | §2.1 |
 | El procedimiento de respaldo previo y espejado | La misma | §2.2 |
 | Las mediciones sobre el hosting real y la corrección de `PT-01.b` | [`../00-Contexto/Compatibilidad-Plataformas.md`](../00-Contexto/Compatibilidad-Plataformas.md) **1.4** | §2.6 |
+| La **causa** de la ausencia de WebSocket —característica de plan—, qué la habilitaría, la reversión de la línea de configuración y el entorno del sitio verificado en el panel | La misma, **1.6** | §2.6.2 |
+| El riesgo de la exigencia de cinco visitas mensuales | [`../00-Contexto/Vision-Producto.md`](../00-Contexto/Vision-Producto.md) **1.5** | §8, `RG-07` |
+| La decisión del Product Owner de usar **SignalR con el transporte que el anfitrión ofrezca**, con la ausencia de WebSocket **aceptada** | [`../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.32** | §17.6.P.9 |
 | El cierre de `PT-01.a` y el recuento de criterios de la etapa | [`../Producto/Plan-Etapa-A.md`](../Producto/Plan-Etapa-A.md) **1.7** | §5.2 |
 | La experiencia reutilizable por otro producto | Este reporte | §3, §4 y §5 |
 
@@ -146,3 +180,4 @@ Cinco piezas, todas derivadas de lo de arriba y ninguna inventada. Están escrit
 | Versión | Fecha | Descripción | Autor |
 |---|---|---|---|
 | 1.0 | 2026-08-13 | Emisión inicial. Registra el **primer despliegue real del producto**, ocurrido y en línea: publicación de la pieza pública por FTP a un hosting compartido gratuito, con el mecanismo contrastado contra los artículos 203 y 219 de la base de conocimiento del proveedor y contra la práctica, y con el procedimiento de respaldo previo de **169 archivos** ante un canal que **espeja con borrado**. Registra las **seis** mediciones sobre el hosting real: **`PT-01.a` pasa** con **200** en la ruta servida y **404** en la raíz, la incógnita de versión de plataforma queda **resuelta** —soporta `net10.0`, sin bajar la versión objetivo del front—, **`RA-03` se sostiene en producción** y el **estado degradado se ve correctamente**. Deja como **hallazgo principal** que **el hosting no ofrece WebSockets** —sólo `ServerSentEvents` y `LongPolling`, contra los tres de desarrollo—, de modo que **la sesión interactiva no usa WebSockets en producción**; explica por qué ninguna medición local podía anticiparlo, por qué no obliga a rediseño —el repliegue estaba ejercido y funcionando, y la especificación lo declaraba aceptable— y **qué se invalidó**: la latencia percibida de desarrollo, de bucle local, **no es extrapolable**. Agrega el detalle no previsto de que el proveedor **inyecta contenido propio en la página servida**. Enumera **cuatro** cosas que costaron descubrir con el motivo de cada una, y propone **cinco** incorporaciones al framework SDD, escritas para cualquier producto sobre hosting compartido. Declara en §6 **qué no prueba**, empezando por `PT-01.c`, que **sigue sin medir sobre el hosting**. | Ingeniero DevOps Senior + Deploy Engineer (AG-09) |
+| 1.1 | 2026-08-14 | **Incorpora la causa del hallazgo principal, verificada el 2026-08-13 entrando al panel de la cuenta, y la lección de método que esa causa deja.** Agrega **§3.4**: **WebSocket no es una carencia técnica del proveedor, es una característica que vende con el plan** —fila literal en su matriz de características por paquete, **no incluida en el gratuito** e **incluida en los tres pagos**, con el control de sanidad de que la fila de publicidad forzada está **invertida**—; **en el panel no hay ningún interruptor de WebSocket** y la base de conocimiento del proveedor **no tiene un solo artículo** sobre WebSocket ni sobre SignalR. Con eso quedan **explicadas** las tres medidas que §3.1 registraba sin causa, incluido que el servidor **ignore** el pedido de ascenso y responda **200** en vez de **101**, y que declarar WebSocket habilitado en la configuración del sitio no cambiara nada: **es decisión del proveedor por encima de la configuración de la aplicación**, y **esa línea ya se revirtió**. La lección, escrita para cualquier producto: la pregunta «¿el hosting soporta X?» **tiene tres respuestas y no dos** —sí, no, y **«lo vende aparte»**—, y la tercera **no se descubre midiendo el sitio sino leyendo la matriz de planes**, que es un documento comercial y se puede leer **antes de elegir hosting**. **§4** suma **dos** filas a lo que costó descubrir —la causa, buscada en el lugar equivocado; y la exigencia de actividad mínima, que no tiene síntoma antes de ocurrir—. **§5** pasa de cinco piezas a **seis** con **`F-6`**, que obliga a leer la matriz de planes del proveedor y a traducir a una fila de esa matriz cada capacidad que el producto necesita. **§6** declara **dos** cosas más que este reporte no prueba: que la matriz siga diciendo lo mismo, y que otros proveedores vendan la capacidad igual. **§7** anota dónde quedó cada cosa, incluida la decisión del Product Owner del intake **1.32** §17.6.P.9. **Ninguna medición de la versión 1.0 se corrige ni se retira**: todo lo que declaraba sigue en pie, y lo que se agrega es la causa. Sube minor. | Ingeniero DevOps Senior + Deploy Engineer (AG-09) |
