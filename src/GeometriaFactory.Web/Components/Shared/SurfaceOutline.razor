@@ -1,0 +1,19 @@
+@* Enumera, sobre el sistema visual, los componentes que el wireframe de la superficie declara
+   y todavía no están construidos. No es adorno: es lo que hace que un marcador de posición sea
+   revisable contra `Linea-Base-Visual.md` §3 en lugar de ser una pantalla vacía. *@
+
+<section class="gf-card gf-mt-5">
+    <h2 class="gf-title">Lo que esta superficie va a contener</h2>
+    <ul class="gf-flat-list gf-mt-3">
+        @foreach (var item in Components)
+        {
+            <li><span class="gf-badge gf-badge--neutral">@item.Key</span> @item.Value</li>
+        }
+    </ul>
+</section>
+
+@code {
+    /// Pares `CMP-XX` → nombre del componente, tomados de `Linea-Base-Visual.md` §3.
+    [Parameter, EditorRequired] public IReadOnlyList<KeyValuePair<string, string>> Components { get; set; } =
+        Array.Empty<KeyValuePair<string, string>>();
+}

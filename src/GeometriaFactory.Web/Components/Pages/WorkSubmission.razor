@@ -1,0 +1,57 @@
+@page "/trabajo-nuevo"
+@page "/trabajos/{WorkId}/editar"
+@layout WorkShell
+
+@* SUP-06 `Envio-De-Trabajo` — CU-05.
+   Ruta: `/trabajo-nuevo`, `/trabajos/{WorkId}/editar`. Shell: trabajo.
+   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Envio-De-Trabajo.md`.
+   Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Envio-De-Trabajo.html`.
+
+   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
+   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+
+<PageTitle>Envío de trabajo</PageTitle>
+
+<div class="gf-page-header">
+    <div>
+        <h1>@Heading</h1>
+    <p class="gf-subtitle">Pegá el texto tal como lo devolvió tu programa. No hace falta que le cambies nada.</p>
+    </div>
+</div>
+
+<StagePlaceholder SurfaceId="SUP-06" SurfaceName="Envio-De-Trabajo" UseCase="CU-05" />
+
+<SurfaceOutline Components="@Outline" />
+
+<section class="gf-card gf-mt-5">
+    <h2 class="gf-title">Salidas de esta superficie</h2>
+    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
+       Ninguna superficie es un callejón sin salida.</p>
+    <ul class="gf-flat-list gf-mt-3">
+        <li><a href="/trabajos/marcador"><strong>NAV-18</strong> — «Enviar» y luego «Ver el trabajo»</a></li>
+        <li><a href="/mis-trabajos"><strong>NAV-19</strong> — «Enviar» y luego «Volver a mis trabajos»</a></li>
+    </ul>
+</section>
+
+@code {
+    private static readonly KeyValuePair<string, string>[] Outline =
+    [
+        new("CMP-08", "Acción primaria"),
+        new("CMP-16", "Encabezado y subtítulo"),
+        new("CMP-17", "Campos de nombre, fecha y descripción"),
+        new("CMP-18", "Área de texto del trabajo"),
+        new("CMP-19", "Bloque de previsualización"),
+        new("CMP-20", "Acción de previsualizar"),
+        new("CMP-21", "Nota de alcance de la previsualización"),
+        new("CMP-22", "Lista de piezas no dibujadas"),
+        new("CMP-23", "Nota de acción única"),
+        new("CMP-24", "Bloque de resultado"),
+    ];
+
+    /// Identificador del borrador que se reedita. Nulo en el curso de creación.
+    /// La etapa `b` no lo lee: sólo distingue los dos cursos de la superficie, que es
+    /// diferencia de estructura y no de comportamiento.
+    [Parameter] public string? WorkId { get; set; }
+
+    private string Heading => WorkId is null ? "Trabajo nuevo" : "Volver sobre tu borrador";
+}

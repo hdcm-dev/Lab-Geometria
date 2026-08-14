@@ -1,0 +1,43 @@
+@page "/registro-de-cuenta"
+@layout AccessShell
+
+@* SUP-02 `Registro-De-Cuenta` — CU-01.
+   Ruta: `/registro-de-cuenta`. Shell: acceso.
+   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Registro-De-Cuenta.md`.
+   Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Registro-De-Cuenta.html`.
+
+   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
+   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+
+<PageTitle>Registro de cuenta</PageTitle>
+
+<h1>Registrarte en el laboratorio</h1>
+    <p class="gf-subtitle">Tu cuenta queda a la espera de que el docente la habilite. El laboratorio no envía correos.</p>
+
+<StagePlaceholder SurfaceId="SUP-02" SurfaceName="Registro-De-Cuenta" UseCase="CU-01" />
+
+<SurfaceOutline Components="@Outline" />
+
+<section class="gf-card gf-mt-5">
+    <h2 class="gf-title">Salidas de esta superficie</h2>
+    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
+       Ninguna superficie es un callejón sin salida.</p>
+    <ul class="gf-flat-list gf-mt-3">
+        <li><a href="/ingreso"><strong>NAV-05</strong> — éxito del registro, o «¿Ya tenés cuenta? Ingresar»</a></li>
+    </ul>
+</section>
+
+@code {
+    private static readonly KeyValuePair<string, string>[] Outline =
+    [
+        new("CMP-04", "Banda de resultado"),
+        new("CMP-05", "Campo de correo"),
+        new("CMP-08", "Acción primaria"),
+        new("CMP-09", "Sello de versión"),
+        new("CMP-30", "Tarjeta de acceso"),
+        new("CMP-52", "Subtítulo de expectativa"),
+        new("CMP-53", "Campos de nombre y apellido"),
+        new("CMP-54", "Enlace a Ingreso"),
+        new("CMP-55", "Bloque de éxito"),
+    ];
+}

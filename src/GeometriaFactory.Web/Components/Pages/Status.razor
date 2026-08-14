@@ -8,7 +8,16 @@
    fuera de la línea de base visual. La exigen el intake §15, `Web BT-03` y la transición
    `a` → `b` del roadmap: es lo que vuelve «ambulante» al esqueleto. *@
 
+@layout MainLayout
+
 <PageTitle>Estado del servicio</PageTitle>
+
+@* La etapa `b` movió la hoja de esta página a `css/scaffold.css` y la carga SOLO acá. Es lo que
+   deja al andamiaje fuera del sistema visual sin borrarlo, y lo que permite afirmar sin
+   excepciones que `css/app.css` no tiene un literal de color fuera de sus tokens. *@
+<HeadContent>
+    <link rel="stylesheet" href="css/scaffold.css" />
+</HeadContent>
 
 <h1>Estado del servicio</h1>
 

@@ -1,0 +1,18 @@
+@* Rótulo de marcador de posición de la etapa `b`.
+
+   Existe para que ninguna superficie mienta: la etapa `b` construye la ruta, el armazón, los
+   títulos y el sistema visual, y NO construye comportamiento. Sin este rótulo, una pantalla
+   con el sistema visual puesto se lee como una pantalla terminada. *@
+
+<p class="gf-banner gf-banner--info" role="status">
+    <strong>Marcador de posición.</strong> Esta superficie es <code>@SurfaceId</code>
+    (<code>@SurfaceName</code>), del caso de uso <code>@UseCase</code>. La etapa <code>b</code>
+    construye su ruta, su armazón y su sistema visual; su comportamiento lo construye una etapa
+    posterior. Nada de lo que ves acá consulta al servicio de datos.
+</p>
+
+@code {
+    [Parameter, EditorRequired] public string SurfaceId { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public string SurfaceName { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public string UseCase { get; set; } = string.Empty;
+}

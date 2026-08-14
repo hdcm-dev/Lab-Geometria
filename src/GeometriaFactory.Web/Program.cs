@@ -20,6 +20,11 @@ builder.Services.AddHttpClient<DataServiceClient>(client =>
 
 var app = builder.Build();
 
+// La dirección que no existe se reejecuta contra `/no-encontrado` CONSERVANDO el código 404:
+// sin esto el cuerpo llega vacío, porque el `<NotFound>` del enrutador no gobierna el render
+// estático del servidor. La pantalla es `NotFoundSurface`, propuesta declarada de la etapa `b`.
+app.UseStatusCodePagesWithReExecute("/no-encontrado");
+
 app.UseStaticFiles();
 app.UseAntiforgery();
 

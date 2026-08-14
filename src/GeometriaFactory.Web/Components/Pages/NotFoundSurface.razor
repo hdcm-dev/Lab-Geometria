@@ -1,0 +1,27 @@
+@layout AccessShell
+
+@* PROPUESTA DECLARADA. `Linea-Base-Visual.md` no inventaría ninguna superficie para la dirección
+   que no existe: sus once superficies son las once del producto. Pero la etapa `b` es la que
+   trae el mapa de rutas, y un mapa de rutas sin respuesta para lo que queda afuera devuelve un
+   cuerpo vacío, que es peor que cualquier pantalla.
+
+   Se construye entonces con dos límites: usa el sistema visual adoptado y NADA fuera de él, y
+   NO se numera como `SUP-XX`, porque un identificador de línea de base afirma que alguien lo
+   miró y lo aprobó, y a esto no lo miró nadie. El shell es el de acceso, que es el que no
+   promete navegación —y en la dirección que no existe no se sabe si hay sesión—.
+
+   No lleva `@@page`: la alcanza la reejecución de `UseStatusCodePagesWithReExecute`, de modo que
+   la respuesta conserva su código 404 y la dirección no pasa a existir. *@
+
+<PageTitle>No encontramos esa dirección</PageTitle>
+
+<h1>No encontramos esa dirección</h1>
+
+<p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+    No hay ninguna superficie en esa dirección. Puede que el enlace esté viejo, o que la
+    dirección se haya escrito a mano.
+</p>
+
+<p class="gf-mt-5">
+    <a class="gf-btn gf-btn--primary gf-btn--full" href="/">Volver al principio</a>
+</p>

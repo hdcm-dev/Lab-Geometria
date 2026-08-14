@@ -11,6 +11,34 @@
     decisión abierta del punto de control (`Web/05` `PA-01`; `BT-02`). Fijar una versión sin
     poder contrastarla contra el registro de paquetes violaría la regla de anclaje de versiones.
     La página de estado de la etapa `a` no necesita la biblioteca.
+
+    LA ETAPA `b` SOSTIENE EL APARTAMIENTO, Y LA DECISIÓN ES DE LA ETAPA `b`, NO DE LA FUENTE.
+    Ninguna fuente fija la versión: `PA-01` de `Web/05` §11 sigue abierto y `V-5` también. Lo que
+    la etapa `b` decide, y lo declara acá para que se pueda discutir, es NO INTRODUCIR MudBlazor
+    todavía. Tres razones, y las tres son medibles sobre la maqueta aprobada:
+
+      1. EL SISTEMA VISUAL APROBADO NO ES EL DE NINGUNA BIBLIOTECA DE COMPONENTES. La maqueta
+         carga Bootstrap 5 por CDN y NO USA UNA SOLA DE SUS CLASES: el barrido de los doce HTML
+         y de los tres guiones devuelve cero clases ajenas al prefijo `mq-`. Todo lo visual sale
+         de `assets/css/Estilos-Maqueta.css`, 886 líneas de tokens del catálogo de diseño. El
+         criterio de transición de la etapa `b` es «la interfaz usa el sistema visual adoptado,
+         sin estilos improvisados fuera de él»; el sistema adoptado es ÉSE, y traer una segunda
+         cascada con su propia escala tipográfica, sus propios radios y su propia paleta es
+         exactamente lo que ese criterio prohíbe.
+      2. LA ETAPA `b` NO CONSTRUYE COMPORTAMIENTO. Lo que una biblioteca de componentes aporta
+         —diálogos, tablas con orden, campos con validación, superposiciones— es justamente lo
+         que las pantallas de marcador de posición no tienen. Anclarla acá sería anclar una
+         versión sin ejercer una sola de sus piezas, que es la peor forma de anclar.
+      3. LA REGLA DE ANCLAJE SIGUE SIN PODER CUMPLIRSE. Sigue sin haber forma de contrastar la
+         versión contra el registro de paquetes ni contra `PT-01.a`, que es lo mismo que la
+         etapa `a` declaró y que no cambió.
+
+    QUÉ QUEDA ABIERTO Y QUIÉN LO CIERRA. `PA-01`/`V-5`/`BT-02` siguen abiertos y su dueño sigue
+    siendo el equipo. La etapa que construya comportamiento sobre las superficies es la que tiene
+    que volver sobre esto, y con una pregunta más precisa que la de hoy: si la biblioteca entra,
+    entra CON EL SISTEMA VISUAL DE LA MAQUETA ENCIMA —tematizada contra los mismos tokens— o no
+    entra. Lo que esta etapa deja hecho para que esa decisión sea barata es que los tokens viven
+    en un solo `:root` de `wwwroot/css/app.css` y que ninguna regla escribe un color a mano.
   -->
 
   <PropertyGroup>

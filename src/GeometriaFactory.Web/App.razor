@@ -1,6 +1,8 @@
-@* Armazón del documento. La etapa `a` no trae ninguna de las once superficies del producto. *@
+@* Armazón del documento. La hoja `css/app.css` es el sistema visual portado desde la maqueta
+   aprobada; la carga acá, una sola vez, para las once superficies. La página `/estado` es
+   andamiaje de la etapa `a` y carga su propia hoja por `<HeadContent>`. *@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +10,7 @@
     <link rel="stylesheet" href="css/app.css" />
     <HeadOutlet />
 </head>
-<body>
+<body class="gf-body">
     <Routes />
     <script src="_framework/blazor.web.js"></script>
 </body>

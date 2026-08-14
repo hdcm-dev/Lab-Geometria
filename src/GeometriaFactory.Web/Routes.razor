@@ -1,11 +1,38 @@
+@* El mapa de rutas del producto. Las once superficies de `Linea-Base-Visual.md` §2 se reparten
+   así, y las dos ausencias son deliberadas:
+
+     SUP-01 Aprovisionamiento-Inicial      /aprovisionamiento-inicial        acceso
+     SUP-02 Registro-De-Cuenta             /registro-de-cuenta               acceso
+     SUP-03 Ingreso                        /ingreso                          acceso
+     SUP-04 Credencial-Propia              /credencial-propia/establecer     acceso
+                                           /credencial-propia/cambio-obligado acceso  (propuesta, F-26)
+                                           /mi-contrasena                    trabajo
+     SUP-05 Panel-De-Trabajos-Del-Alumno   /mis-trabajos                     trabajo
+     SUP-06 Envio-De-Trabajo               /trabajo-nuevo                    trabajo
+                                           /trabajos/{WorkId}/editar         trabajo
+     SUP-07 Vista-De-Trabajo               /trabajos/{WorkId}                trabajo
+     SUP-08 Resolucion-Del-Trabajo         SIN RUTA — alojada en SUP-07
+     SUP-09 Panel-De-Cuentas               /cuentas                          trabajo
+     SUP-10 Listado-De-La-Comision         /entrega-comision                 trabajo
+     SUP-11 Estado-Degradado-Y-Reconexion  SIN RUTA — se superpone a los dos shells
+
+     /            resolución del destino inicial (NAV-01 y NAV-03)
+     /estado      andamiaje de la etapa `a`, fuera de la línea de base visual
+
+   El layout por defecto es el shell de ACCESO: si una superficie nueva se olvida de declarar el
+   suyo, cae en el armazón que no promete navegación, que es el error barato de los dos. *@
+
 <Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(AccessShell)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
+    @* El `<NotFound>` del enrutador NO gobierna el render estático del servidor: la dirección
+       inexistente la atiende `UseStatusCodePagesWithReExecute` en `Program.cs`, que reejecuta
+       contra `/no-encontrado` conservando el 404. Este bloque queda por el render interactivo. *@
     <NotFound>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p>No hay ninguna página en esa dirección.</p>
+        <LayoutView Layout="@typeof(AccessShell)">
+            <NotFoundSurface />
         </LayoutView>
     </NotFound>
 </Router>

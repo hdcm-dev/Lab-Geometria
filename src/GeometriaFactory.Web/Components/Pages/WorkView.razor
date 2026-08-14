@@ -1,0 +1,58 @@
+@page "/trabajos/{WorkId}"
+@layout WorkShell
+
+@* SUP-07 `Vista-De-Trabajo` — CU-07.
+   Ruta: `/trabajos/{WorkId}`. Shell: trabajo.
+   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Vista-De-Trabajo.md`.
+   Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Vista-De-Trabajo.html`.
+
+   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
+   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+
+<PageTitle>Vista de trabajo</PageTitle>
+
+<div class="gf-page-header">
+    <div>
+        <h1>Vista de trabajo</h1>
+    <p class="gf-subtitle">Los cuatro elementos del trabajo: datos, texto, escena y árbol.</p>
+    </div>
+</div>
+
+<StagePlaceholder SurfaceId="SUP-07" SurfaceName="Vista-De-Trabajo" UseCase="CU-07" />
+
+@* SUP-08 se aloja ACÁ y no tiene ruta propia. `Linea-Base-Visual.md` §2: «Un sistema construido
+   que le dé ruta propia es deriva mayor». *@
+<WorkResolution />
+
+<SurfaceOutline Components="@Outline" />
+
+<section class="gf-card gf-mt-5">
+    <h2 class="gf-title">Salidas de esta superficie</h2>
+    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
+       Ninguna superficie es un callejón sin salida.</p>
+    <ul class="gf-flat-list gf-mt-3">
+        <li><a href="/mis-trabajos"><strong>NAV-23</strong> — «Volver al listado», papel alumno</a></li>
+        <li><a href="/entrega-comision"><strong>NAV-23</strong> — «Volver al listado», papel administrador</a></li>
+    </ul>
+</section>
+
+@code {
+    private static readonly KeyValuePair<string, string>[] Outline =
+    [
+        new("CMP-22", "Lista de piezas no dibujadas"),
+        new("CMP-38", "Insignia de estado"),
+        new("CMP-56", "Bloque de decisión"),
+        new("CMP-65", "Barra de regreso"),
+        new("CMP-66", "Cabecera del trabajo"),
+        new("CMP-67", "Bloque de datos"),
+        new("CMP-68", "Bloque de comentario"),
+        new("CMP-69", "Lista de observaciones"),
+        new("CMP-70", "Bloque de texto original"),
+        new("CMP-71", "Bloque de la escena"),
+        new("CMP-72", "Controles de movimiento automático"),
+        new("CMP-73", "Árbol de la estructura"),
+    ];
+
+    /// Identificador del trabajo que se mira. La etapa `b` no lo resuelve contra nada.
+    [Parameter] public string? WorkId { get; set; }
+}

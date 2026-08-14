@@ -1,0 +1,47 @@
+@page "/entrega-comision"
+@layout WorkShell
+
+@* SUP-10 `Listado-De-La-Comision` — CU-08.
+   Ruta: `/entrega-comision`. Shell: trabajo.
+   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Listado-De-La-Comision.md`.
+   Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Listado-De-La-Comision.html`.
+
+   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
+   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+
+<PageTitle>Listado de la comisión</PageTitle>
+
+<div class="gf-page-header">
+    <div>
+        <h1>Entrega de la comisión</h1>
+    <p class="gf-subtitle">Los trabajos entregados, agrupados por alumno. Los borradores que los alumnos están armando no aparecen acá.</p>
+    </div>
+</div>
+
+<StagePlaceholder SurfaceId="SUP-10" SurfaceName="Listado-De-La-Comision" UseCase="CU-08" />
+
+<SurfaceOutline Components="@Outline" />
+
+<section class="gf-card gf-mt-5">
+    <h2 class="gf-title">Salidas de esta superficie</h2>
+    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
+       Ninguna superficie es un callejón sin salida.</p>
+    <ul class="gf-flat-list gf-mt-3">
+        <li><a href="/trabajos/marcador?origen=entrega-comision"><strong>NAV-20</strong> — «Abrir» sobre una fila</a></li>
+    </ul>
+</section>
+
+@code {
+    private static readonly KeyValuePair<string, string>[] Outline =
+    [
+        new("CMP-25", "Aviso de indisponibilidad"),
+        new("CMP-34", "Encabezado de la superficie"),
+        new("CMP-35", "Barra de filtros"),
+        new("CMP-36", "Cabecera de grupo"),
+        new("CMP-37", "Fila de trabajo"),
+        new("CMP-38", "Insignia de estado"),
+        new("CMP-39", "Nota de ausencia"),
+        new("CMP-40", "Acción de resumen"),
+        new("CMP-41", "Panel de resumen"),
+    ];
+}

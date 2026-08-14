@@ -1,0 +1,102 @@
+@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+
+@* SHELL DE TRABAJO — `Experiencia-De-Uso.md` §3.2, segundo diagrama.
+   «Barra lateral fija con la identidad del laboratorio arriba, tres destinos según el papel al
+   medio, y al pie —separados por una línea tenue— la identidad de la persona, el cierre de
+   sesión y el sello de versión.»
+
+   LOS TRES DESTINOS POR PAPEL son los de la tabla de §3.2 y los de `Maqueta.js`, constante
+   `DESTINOS` (`Linea-Base-Visual.md` §7, `EV-04`). NINGUNA BARRA LATERAL MUESTRA EL DESTINO DEL
+   OTRO PAPEL, ni siquiera deshabilitado.
+
+   DE DÓNDE SALE EL PAPEL EN LA ETAPA `b`. No hay sesión todavía, así que el papel se resuelve
+   por la ruta —cada superficie de trabajo pertenece a un papel— y, en las dos superficies que
+   los dos papeles comparten, por el parámetro `papel` de la dirección, que es exactamente lo
+   que hace la maqueta (`Credencial-Propia.html?papel=administrador`). Cuando exista la sesión,
+   el papel sale de ella y este bloque desaparece. *@
+
+<a class="gf-skip-link" href="#main-content">Ir al contenido</a>
+
+<div class="gf-shell">
+    <nav class="gf-shell-sidebar" aria-label="Navegación del laboratorio">
+        <span class="gf-identity"><Icon Name="Brand" SizeClass="gf-icon--24" />Fábrica de Geometría</span>
+
+        <ul class="gf-nav gf-flat-list--tight">
+            @foreach (var destination in Destinations)
+            {
+                <li>
+                    @* El destino en curso se marca con `aria-current="page"`, que es a la vez el
+                       anuncio para quien navega con lector y el gancho de estilo de la hoja
+                       (`.gf-nav a[aria-current="page"]`). No se usa `NavLink` porque su marca es
+                       una clase CSS y el sistema visual portado no tiene regla para esa clase. *@
+                    <a href="@destination.Href"
+                       aria-current="@(IsCurrent(destination) ? "page" : null)">
+                        <Icon Name="@destination.Icon" SizeClass="gf-icon--20" />@destination.Label
+                    </a>
+                </li>
+            }
+        </ul>
+
+        <div class="gf-sidebar-footer">
+            <span class="gf-sidebar-person">Marcador de posición</span>
+            <span class="gf-sidebar-role">@RoleLabel</span>
+            <a class="gf-btn gf-btn--secondary" href="/ingreso"><Icon Name="SignOut" />Cerrar sesión</a>
+            <VersionSeal />
+        </div>
+    </nav>
+
+    <div class="gf-shell-content">
+        <main id="main-content" tabindex="-1">
+            @Body
+        </main>
+    </div>
+</div>
+
+<DegradedStateOverlay />
+
+@code {
+    private sealed record Destination(string Label, string Href, string Icon);
+
+    private static readonly Destination[] StudentDestinations =
+    [
+        new("Mis trabajos",  "/mis-trabajos",  "Works"),
+        new("Trabajo nuevo", "/trabajo-nuevo", "New"),
+        new("Mi contraseña", "/mi-contrasena?papel=alumno", "Key"),
+    ];
+
+    private static readonly Destination[] AdministratorDestinations =
+    [
+        new("Entrega de la comisión", "/entrega-comision", "ClassList"),
+        new("Cuentas",                "/cuentas",          "Accounts"),
+        new("Mi contraseña",          "/mi-contrasena?papel=administrador", "Key"),
+    ];
+
+    private bool _isAdministrator;
+
+    private Destination[] Destinations => _isAdministrator ? AdministratorDestinations : StudentDestinations;
+
+    private string RoleLabel => _isAdministrator ? "Administrador" : "Alumno";
+
+    private string _path = "/";
+
+    private bool IsCurrent(Destination destination)
+    {
+        var target = destination.Href.Split('?')[0];
+        return string.Equals(_path, target, StringComparison.Ordinal);
+    }
+
+    protected override void OnParametersSet()
+    {
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        var path = uri.AbsolutePath;
+        _path = path;
+
+        // Rutas propias del administrador. Las del alumno son el resto, y son el valor por
+        // defecto, igual que en la maqueta (`DESTINOS[papel] || DESTINOS.alumno`).
+        _isAdministrator =
+            path.StartsWith("/entrega-comision", StringComparison.Ordinal) ||
+            path.StartsWith("/cuentas", StringComparison.Ordinal) ||
+            uri.Query.Contains("papel=administrador", StringComparison.Ordinal);
+    }
+}
