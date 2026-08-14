@@ -1,0 +1,49 @@
+@page "/"
+@layout AccessShell
+
+@* LA RAÍZ. `NAV-01` y `NAV-03` de `Linea-Base-Visual.md` §5 son las dos únicas filas cuyo origen
+   es «entrada al producto» y cuyo disparador es la RESOLUCIÓN DEL DESTINO INICIAL:
+
+     NAV-01 · entrada sin administrador constituido  → SUP-01 `Aprovisionamiento-Inicial`
+     NAV-03 · entrada con administrador constituido  → SUP-03 `Ingreso`, con redirección neutra
+              que REEMPLAZA la entrada del historial
+
+   De modo que la raíz no es una superficie: es el punto donde corre el GUARDIÁN DE
+   APROVISIONAMIENTO que `Arquitectura-Proyecto-Codigo.md` §3.1 le asigna al componente «Armazón
+   y encaminamiento». La especificación declara los dos destinos y no declara la dirección: que
+   sea `/` es lo único que esta etapa PROPONE, y lo propone porque `/` es la única dirección que
+   una persona escribe sin que nadie se la dé.
+
+   POR QUÉ NO REDIRIGE TODAVÍA. El guardián necesita saber si hay administrador constituido, y
+   eso es una consulta al servicio de datos. La etapa `b` no implementa comportamiento, así que
+   deja acá el lugar del guardián, con sus dos destinos alcanzables a mano. Redirigir a uno de
+   los dos por defecto sería inventar la respuesta que el guardián todavía no puede dar. *@
+
+<PageTitle>Fábrica de Geometría</PageTitle>
+
+<h1>Fábrica de Geometría</h1>
+<p class="gf-subtitle">Laboratorio de geometría de Programación 2.</p>
+
+<p class="gf-banner gf-banner--info gf-mt-5" role="status">
+    <strong>Marcador de posición del destino inicial.</strong> Acá corre el guardián de
+    aprovisionamiento (<code>NAV-01</code> y <code>NAV-03</code>). Mientras no exista, los dos
+    destinos posibles están a un clic.
+</p>
+
+<ul class="gf-flat-list gf-mt-5">
+    <li>
+        <a href="/aprovisionamiento-inicial">
+            <strong>NAV-01</strong> — sin administrador constituido: <code>Aprovisionamiento-Inicial</code>
+        </a>
+    </li>
+    <li>
+        <a href="/ingreso">
+            <strong>NAV-03</strong> — con administrador ya constituido: <code>Ingreso</code>
+        </a>
+    </li>
+</ul>
+
+<p class="gf-caption gf-mt-7">
+    <a href="/estado">Estado del servicio</a> — andamiaje de la etapa <code>a</code>, fuera de la
+    línea de base visual.
+</p>

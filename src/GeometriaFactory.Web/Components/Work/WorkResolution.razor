@@ -1,0 +1,47 @@
+@* SUP-08 `Resolucion-Del-Trabajo` — CU-09.
+
+   NO ES UN DESTINO DE NAVEGACIÓN Y NO TIENE RUTA. `Linea-Base-Visual.md` §2 lo declara así:
+   es la única superficie ALOJADA, se dibuja dentro de `SUP-07`, y «un sistema construido que le
+   dé ruta propia es DERIVA MAYOR». Por eso este archivo vive en `Components/Work/` y no en
+   `Components/Pages/`: no lleva `@page`.
+
+   El archivo `Resolucion-Del-Trabajo.html` de la maqueta la exhibe aislada porque el wireframe
+   exigía demostrar el bloque con su mapa de estados completo. Es instrumento de la maqueta.
+
+   CUÁNDO SE DIBUJA. Cuando quien mira es el administrador y el trabajo está en estado
+   `Pendiente`. La etapa `b` no tiene ni papel ni estado de trabajo, así que dibuja el bloque
+   siempre, rotulado como marcador de posición. *@
+
+<section class="gf-block gf-mt-5">
+    <h2 class="gf-title">Resolución del trabajo</h2>
+
+    <p class="gf-banner gf-banner--info gf-mt-3" role="status">
+        <strong>Marcador de posición.</strong> Esta es <code>SUP-08</code>
+        (<code>Resolucion-Del-Trabajo</code>), del caso de uso <code>CU-09</code>. Está
+        <strong>alojada</strong> en <code>SUP-07</code> y no tiene ruta propia, por decisión de
+        la línea de base visual. En el producto se dibuja sólo para el administrador y sólo si
+        el trabajo está en estado <code>Pendiente</code>.
+    </p>
+
+    <ul class="gf-flat-list gf-mt-3">
+        @foreach (var item in Outline)
+        {
+            <li><span class="gf-badge gf-badge--neutral">@item.Key</span> @item.Value</li>
+        }
+    </ul>
+</section>
+
+@code {
+    private static readonly KeyValuePair<string, string>[] Outline =
+    [
+        new("CMP-56", "Bloque de decisión"),
+        new("CMP-57", "Campo de comentario"),
+        new("CMP-58", "Nota de destino del comentario"),
+        new("CMP-59", "Acción de aprobar"),
+        new("CMP-60", "Acción de rechazar"),
+        new("CMP-61", "Acción de retirar"),
+        new("CMP-62", "Diálogo de confirmación del desenlace"),
+        new("CMP-63", "Diálogo de confirmación del retiro"),
+        new("CMP-64", "Bloque de trabajo resuelto"),
+    ];
+}

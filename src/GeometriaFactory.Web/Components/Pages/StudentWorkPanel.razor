@@ -1,0 +1,48 @@
+@page "/mis-trabajos"
+@layout WorkShell
+
+@* SUP-05 `Panel-De-Trabajos-Del-Alumno` — CU-06.
+   Ruta: `/mis-trabajos`. Shell: trabajo.
+   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Panel-De-Trabajos-Del-Alumno.md`.
+   Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Panel-De-Trabajos-Del-Alumno.html`.
+
+   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
+   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+
+<PageTitle>Mis trabajos</PageTitle>
+
+<div class="gf-page-header">
+    <div>
+        <h1>Mis trabajos</h1>
+    <p class="gf-subtitle">Todo lo que cargaste, con el estado en que está.</p>
+    </div>
+</div>
+
+<StagePlaceholder SurfaceId="SUP-05" SurfaceName="Panel-De-Trabajos-Del-Alumno" UseCase="CU-06" />
+
+<SurfaceOutline Components="@Outline" />
+
+<section class="gf-card gf-mt-5">
+    <h2 class="gf-title">Salidas de esta superficie</h2>
+    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
+       Ninguna superficie es un callejón sin salida.</p>
+    <ul class="gf-flat-list gf-mt-3">
+        <li><a href="/trabajo-nuevo"><strong>NAV-11</strong> — «Trabajo nuevo»</a></li>
+        <li><a href="/trabajos/marcador?origen=mis-trabajos"><strong>NAV-16</strong> — «Abrir» sobre una fila</a></li>
+        <li><a href="/trabajos/marcador/editar"><strong>NAV-17</strong> — «Editar» sobre una fila en estado Borrador</a></li>
+    </ul>
+</section>
+
+@code {
+    private static readonly KeyValuePair<string, string>[] Outline =
+    [
+        new("CMP-08", "Acción primaria"),
+        new("CMP-25", "Aviso de indisponibilidad"),
+        new("CMP-29", "Estado vacío"),
+        new("CMP-34", "Encabezado de la superficie"),
+        new("CMP-35", "Barra de filtros"),
+        new("CMP-37", "Fila de trabajo"),
+        new("CMP-38", "Insignia de estado"),
+        new("CMP-51", "Diálogo de confirmación de eliminación"),
+    ];
+}

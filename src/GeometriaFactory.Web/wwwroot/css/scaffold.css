@@ -1,0 +1,19 @@
+/* Andamiaje de la etapa `a`. NO es la línea de base visual del producto:
+   `Linea-Base-Visual.md` inventaría once superficies y la página de estado no es una de
+   ellas (apartamiento AP-03 de `Plan-Etapa-A.md` §2.3).
+
+   Vive aparte de `app.css` y la carga SOLO `/estado`, por `<HeadContent>`. Es lo que hace
+   que la afirmación de `app.css` —ningún literal de color fuera de `:root`— sea verificable
+   sin excepciones: los literales de esta hoja están fuera del sistema visual por decisión
+   declarada, y por eso están fuera del archivo que lo materializa. */
+:root { color-scheme: light dark; }
+.page { font-family: system-ui, sans-serif; line-height: 1.5; }
+.page > header { display: flex; gap: 1rem; align-items: baseline; padding: 1rem 1.5rem; border-bottom: 1px solid currentColor; }
+.brand { font-weight: 600; }
+.scaffold-note { opacity: 0.7; font-size: 0.875rem; }
+.page > main { padding: 1.5rem; max-width: 48rem; }
+dl.health { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 1rem; }
+dl.health dt { font-weight: 600; }
+.failure { color: #b3261e; }
+.read-at { opacity: 0.7; font-size: 0.875rem; }
+button.action { padding: 0.4rem 0.9rem; margin-bottom: 1rem; }

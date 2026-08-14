@@ -1,0 +1,24 @@
+@* SUP-11 `Estado-Degradado-Y-Reconexion` — CU-10.
+
+   NO TIENE RUTA, Y ES DELIBERADO. `Linea-Base-Visual.md` §5 lo dice con todas las letras:
+   «`SUP-11` no es un destino: se superpone al armazón de la superficie en curso y devuelve el
+   control a la misma superficie al recuperarse». Por eso vive acá, dibujado por los DOS shells,
+   y no en `Components/Pages/`.
+
+   MARCADOR DE POSICIÓN. Los dos tramos que `CU-10` distingue —el servicio de datos que no
+   responde y el circuito que se corta— se sostienen con estado que la etapa `b` no tiene. Lo
+   que esta etapa deja construido es el punto de superposición y su marcado, para que la etapa
+   que traiga el comportamiento no tenga que tocar los dos shells. *@
+
+@if (Visible)
+{
+    <div class="gf-reconnect-notice" role="status">
+        <Icon Name="Alert" />
+        <span>Marcador de posición del estado degradado y la reconexión (SUP-11, CU-10).</span>
+    </div>
+}
+
+@code {
+    /// La etapa `b` no lo enciende nunca: no hay estado que lo dispare.
+    [Parameter] public bool Visible { get; set; }
+}

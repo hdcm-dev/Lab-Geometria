@@ -2,9 +2,9 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Norma-De-Nomenclatura.md
-**Versión:** 1.5
+**Versión:** 1.6
 **Estado:** Aprobado
-**Fecha:** 2026-08-13
+**Fecha:** 2026-08-14
 **Autor:** Orquestador SDD (medición y redacción) · Product Owner (las tres decisiones de §5)
 **Nivel:** Producto
 **Origen:** Observación del Product Owner, 2026-08-12: el estándar nombra espacios de nombres, clases y variables en inglés, y el corpus se salió del estándar sin declararlo. La versión 1.1 incorpora las **tres decisiones tomadas por el Product Owner el 2026-08-12** sobre las zonas de frontera que la 1.0 elevó. La versión 1.2 **corrige el método**, no los nombres: el tramo de ensayo `R-1` de §8 se ejecutó y el método falló en cinco puntos, y ésta es la emisión que los repara antes de que arranque el tramo siguiente. La versión 1.3 **vuelve a corregir el método**, y por la misma vía: el tramo `R-1b` se ejecutó, **cerró limpio** —los siete controles aplicables cuadraron y las cifras de la 1.2 se reprodujeron exactas, lo que valida las correcciones de esa versión— y encontró **tres defectos nuevos**: `V-4` no admitía por escrito el motivo que cubrió diez de las diecisiete ocurrencias no renombradas, la fila de control de cambios del propio tramo rompía el cuadre literal, y el acto 2 de §8.2 no tenía lista previa aunque corre después del acto 1. Ésta los repara **antes de `R-2`**, que toca el intake. La versión 1.4 **corrige el método por tercera y última vez antes de `R-2`**, y no a partir de un tramo ejecutado sino de **la revisión de la propia 1.3**, que se preguntó qué otros controles prometen más de lo que pueden verificar —que es la clase de defecto que compartían los tres que la 1.3 reparó— y encontró **tres**: `V-1` no podía cuadrar §6.10 ni §6.11, que la propia norma agregó al glosario; `V-6` levantaba como falla las diez ocurrencias que la norma declaró correctas; y `V-7` ordenaba lo contrario que §8.2. Y declara, control por control, **cuál de los siete y de los tres barridos de §8.2 se verifica tal como está escrito** La versión 1.5 la trae una **decisión del Product Owner del 2026-08-13**, tomada al arrancar la etapa `a`: **los cinco tramos de renombre que quedaban se suspenden**, porque renombraban identificadores en documentos que describen código que no existe, y el glosario ya está completo para escribir ese código en inglés desde el primer archivo. §8 registra la suspensión y la regla que la reemplaza; §8.2 corrige además el defecto que `R-2` levantó al ejecutarse.
@@ -41,6 +41,7 @@
   - [6.9 Las dos unificaciones y las cuatro coincidencias de nombre](#69-las-dos-unificaciones-y-las-cuatro-coincidencias-de-nombre)
   - [6.10 Los espacios de nombres](#610-los-espacios-de-nombres)
   - [6.11 Las superficies derivadas: carpetas y nombres de archivo](#611-las-superficies-derivadas-carpetas-y-nombres-de-archivo)
+  - [6.12 Agregados por la etapa `b` de `GeometriaFactory-Web`, fuera de los 155](#612-agregados-por-la-etapa-b-de-geometriafactory-web-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -311,9 +312,9 @@ Los emite el programa de escritorio de la Actividad 1, que **no forma parte de e
 
 ### 6.1 La regla del glosario
 
-> **Si un concepto del dominio no está en el glosario —§6.3 a §6.8, §6.10 y §6.11—, no se traduce por criterio propio: se agrega primero a la tabla que le corresponde y recién después se escribe el identificador.**
+> **Si un concepto del dominio no está en el glosario —§6.3 a §6.8, §6.10, §6.11 y §6.12—, no se traduce por criterio propio: se agrega primero a la tabla que le corresponde y recién después se escribe el identificador.**
 
-**El rango son las ocho tablas, y desde la 1.4 se escribe entero.** Hasta la 1.3 la regla decía «§6.3 a §6.8» y dejaba afuera **§6.10** —los 16 subsegmentos de espacio de nombres— y **§6.11** —las cinco superficies derivadas—, que son tablas del mismo glosario y con la misma forma de fila. El corolario de §6.11 manda agregar ahí toda carpeta que no nombre un concepto listado, de modo que la regla ordenaba agregar filas a una tabla que ella misma no nombraba. §6.9 **no** entra en el rango porque no agrega filas: declara las dos unificaciones y los cuatro homónimos de nombres que ya están en §6.4 y en §6.8.
+**El rango son las nueve tablas, y desde la 1.4 se escribe entero.** La novena la agrega la 1.6: **§6.12**, con los identificadores que la etapa `b` de `GeometriaFactory-Web` necesitó y que ninguna de las ocho anteriores contaba. Hasta la 1.3 la regla decía «§6.3 a §6.8» y dejaba afuera **§6.10** —los 16 subsegmentos de espacio de nombres— y **§6.11** —las cinco superficies derivadas—, que son tablas del mismo glosario y con la misma forma de fila. El corolario de §6.11 manda agregar ahí toda carpeta que no nombre un concepto listado, de modo que la regla ordenaba agregar filas a una tabla que ella misma no nombraba. §6.9 **no** entra en el rango porque no agrega filas: declara las dos unificaciones y los cuatro homónimos de nombres que ya están en §6.4 y en §6.8.
 
 Y sus cuatro corolarios, que son lo que hace que la regla sirva:
 
@@ -341,8 +342,9 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | **Total de las seis clases** | **155** | **155** | — |
 | Superficies derivadas por debajo del nivel de espacio de nombres | 5 | 5 | §6.11 |
 | Agregados por la etapa `a` (1.5), **fuera de los 155** | 5 | 5 | §6.4 y §6.5 |
+| Agregados por la etapa `b` (1.6), **fuera de los 155** | 214 | 214 | §6.12 |
 
-**Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca.
+**Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango.
 
 **Las cinco filas de §6.11 no entran en los 155** y por eso van aparte: ninguna de las seis clases de §2.2 las contaba, porque las seis clases cuentan *identificadores* y éstas son *superficies* —carpetas y nombres de archivo— que ninguna regla alcanzaba. Se agregan por el corolario 4 de §6.1, que es lo que esta norma pide hacer cuando aparece un concepto sin fila.
 
@@ -735,13 +737,289 @@ Los **18 espacios de nombres** que [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.3 pr
 
 **El ensayo encontró tres huecos y la remedición encontró cinco.** `Configuraciones/`, `Paginas/` e `Internos` los reportó el tramo `R-1`; `visor/` de la capa 3 y `VisorFiguras.razor` aparecieron al barrer el corpus entero con el instrumento de §2.1. Se verificó además que **`Migrations/` y `Layout/` ya están en inglés** y no requieren acción, y se declara acá para que el control `V-6` de §7 no las vuelva a levantar.
 
+### 6.12 Agregados por la etapa `b` de `GeometriaFactory-Web`, fuera de los 155
+
+**Por qué existe esta sección.** La etapa `b` construye las once superficies como pantallas de
+marcador de posición y porta el sistema visual de la maqueta aprobada, y eso escribe identificadores
+de código que **ninguna de las ocho tablas anteriores tenía**: los tipos de componente de las
+superficies y de los dos armazones, sus miembros, los iconos que la barra lateral usa y —el grueso—
+**los nombres de clase CSS**. Entran por el **corolario 4 de §6.1**, con el mismo criterio con el que
+la 1.5 agregó las cinco filas de la etapa `a`: **no cuentan dentro de los 155**, porque no existían
+cuando se contaron las seis clases.
+
+**Y la frontera con la maqueta se mantiene.** §6.11 declara que los archivos y las constantes de
+`SDD/Maquetas/GeometriaFactory-Web/` **no se renombran**, porque son línea de base ya aprobada. Esta
+sección **no los renombra**: declara la correspondencia entre el nombre castellano que la maqueta usa
+y el nombre inglés con el que el producto lo escribe. Las dos escrituras conviven, cada una en su
+lado de la frontera, y la tabla es lo que permite verificar que el porte fue fiel.
+
+#### 6.12.1 Tipos de componente (24)
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| Shell de acceso | `AccessShell` | Tipo, componente de armazón | `Experiencia-De-Uso.md` §3.2, primer diagrama |
+| Shell de trabajo | `WorkShell` | Tipo, componente de armazón | `Experiencia-De-Uso.md` §3.2, segundo diagrama |
+| Resolución del destino inicial | `InitialDestination` | Tipo, componente de página | `Linea-Base-Visual.md` §5, `NAV-01` y `NAV-03` |
+| `Aprovisionamiento-Inicial` | `InitialProvisioning` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-01` |
+| `Registro-De-Cuenta` | `AccountRegistration` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-02` |
+| `Ingreso` | `SignIn` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-03` |
+| `Credencial-Propia`, curso de establecimiento | `OwnCredentialSetup` | Tipo, componente de página | `Wireframes-Credencial-Propia.md` §1, primera fila de los tres cursos |
+| `Credencial-Propia`, curso de cambio forzado | `OwnCredentialForcedChange` | Tipo, componente de página | `Wireframes-Credencial-Propia.md` §1, tercera fila. **Sin validación visual**: `Linea-Base-Visual.md` §6.1, fila de `F-26` |
+| `Credencial-Propia`, curso de cambio | `OwnCredentialChange` | Tipo, componente de página | `Wireframes-Credencial-Propia.md` §1, segunda fila |
+| `Panel-De-Trabajos-Del-Alumno` | `StudentWorkPanel` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-05` |
+| `Envio-De-Trabajo` | `WorkSubmission` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-06` |
+| `Vista-De-Trabajo` | `WorkView` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-07` |
+| `Resolucion-Del-Trabajo` | `WorkResolution` | Tipo, componente **alojado**, sin ruta | `Linea-Base-Visual.md` §2, `SUP-08` |
+| `Panel-De-Cuentas` | `AccountsPanel` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-09` |
+| `Listado-De-La-Comision` | `ClassSubmissionList` | Tipo, componente de página | `Linea-Base-Visual.md` §2, `SUP-10` |
+| `Estado-Degradado-Y-Reconexion` | `DegradedStateOverlay` | Tipo, componente **superpuesto**, sin ruta | `Linea-Base-Visual.md` §2 y §5, `SUP-11` |
+| Sello de versión | `VersionSeal` | Tipo, componente compartido | `Representacion-Sello-De-Version.md` §2; `CMP-09` |
+| Icono | `Icon` | Tipo, componente compartido | Constante `ICONOS` de `assets/js/Maqueta.js` de la maqueta aprobada |
+| Rótulo de marcador de posición | `StagePlaceholder` | Tipo, componente compartido | **Propuesta de la etapa `b`**: `Roadmap-Producto.md`, primer criterio de transición, «pantallas de marcador de posición» |
+| Contenido previsto de la superficie | `SurfaceOutline` | Tipo, componente compartido | **Propuesta de la etapa `b`**, sobre `Linea-Base-Visual.md` §3 |
+| Superficie de dirección no encontrada | `NotFoundSurface` | Tipo, componente compartido | **Propuesta declarada de la etapa `b`**: ninguna fuente la declara, y por eso **no lleva `SUP-XX`** |
+| Página de dirección no encontrada | `NotFoundPage` | Tipo, componente de página | **Propuesta declarada de la etapa `b`**: punto de reejecución del código 404 |
+| Carpeta de componentes compartidos | `Shared/` | Carpeta, por debajo del nivel de espacio de nombres, dentro de `Components/` | Corolario de §6.11. Aloja las representaciones reutilizadas de `Arquitectura-Proyecto-Codigo.md` §3.1 |
+| Carpeta de componentes del trabajo | `Work/` | Carpeta, por debajo del nivel, dentro de `Components/` | Corolario de §6.11. Aloja `SUP-08`, que no es página porque no tiene ruta |
+
+#### 6.12.2 Miembros y parámetros (13)
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| Destino de la barra lateral | `Destination` | Tipo anidado | `Experiencia-De-Uso.md` §3.2, tabla de los tres destinos por papel; constante `DESTINOS` de `Maqueta.js` |
+| Destinos del alumno | `StudentDestinations` | Miembro | Misma tabla, fila «Alumno» |
+| Destinos del administrador | `AdministratorDestinations` | Miembro | Misma tabla, fila «Administrador» |
+| Destinos vigentes | `Destinations` | Propiedad | Misma tabla |
+| Rótulo del papel | `RoleLabel` | Propiedad | `Experiencia-De-Uso.md` §3.2, pie de la barra lateral |
+| Es administrador | `_isAdministrator` | Campo privado | Ídem; el papel es el de `Glosario-Funcional.md` |
+| Identificador del trabajo | `WorkId` | Parámetro de ruta | `Work` ya está en §6.4; el identificador es el de `Representacion-Fila-De-Trabajo.md` |
+| Identificador de superficie | `SurfaceId` | Parámetro | `Linea-Base-Visual.md` §2, columna `ID` |
+| Nombre canónico de superficie | `SurfaceName` | Parámetro | `Linea-Base-Visual.md` §2, columna «Nombre canónico» |
+| Caso de uso | `UseCase` | Parámetro | `Linea-Base-Visual.md` §2, columna «CU que la origina» |
+| Componentes de la superficie | `Components` | Parámetro | `Linea-Base-Visual.md` §3 |
+| Clase de tamaño del icono | `SizeClass` | Parámetro | Función `icono(nombre, clase)` de `Maqueta.js` |
+| Encabezado de la superficie | `Heading` | Propiedad | `CMP-16` y `CMP-34` |
+
+#### 6.12.3 Iconos (9)
+
+Los nombres del catálogo `ICONOS` de `assets/js/Maqueta.js`. Se portan **los nueve que la etapa `b`
+usa**; los otros doce entran cuando entre la superficie que los necesita.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `marca` | `Brand` | Valor de conjunto cerrado, catálogo de iconos | `ICONOS` de `assets/js/Maqueta.js` |
+| `trabajos` | `Works` | Valor de conjunto cerrado, catálogo de iconos | Ídem; destino 1 del alumno |
+| `nuevo` | `New` | Valor de conjunto cerrado, catálogo de iconos | Ídem; destino 2 del alumno |
+| `llave` | `Key` | Valor de conjunto cerrado, catálogo de iconos | Ídem; destino 3 de los dos papeles |
+| `cuentas` | `Accounts` | Valor de conjunto cerrado, catálogo de iconos | Ídem; destino 2 del administrador |
+| `comision` | `ClassList` | Valor de conjunto cerrado, catálogo de iconos | Ídem; destino 1 del administrador |
+| `salir` | `SignOut` | Valor de conjunto cerrado, catálogo de iconos | Ídem; cierre de sesión, `NAV-24` |
+| `volver` | `Back` | Valor de conjunto cerrado, catálogo de iconos | Ídem; `CMP-65`, barra de regreso |
+| `alerta` | `Alert` | Valor de conjunto cerrado, catálogo de iconos | Ídem; `CMP-25` y `CMP-27` |
+
+#### 6.12.4 Nombres de clase CSS y de animación (168)
+
+**Por qué llevan fila.** Una clase CSS la lee una herramienta —el navegador—, de modo que cae del lado
+de §3 y va en inglés. Ninguna de las ocho tablas la contaba, porque hasta la etapa `b` no había hoja
+de estilos del producto. La convención de forma es **`gf-` + el concepto en inglés**, en `kebab-case`,
+con `--variante` y `__parte` tal como la maqueta ya las usa; `gf-` es la abreviatura de la raíz
+`GeometriaFactory` que §3 declara intocable.
+
+**La columna castellana es la de la maqueta, y la maqueta no se renombra** (§6.11). La tabla declara
+la correspondencia; es lo que hace verificable que el porte no inventó ni perdió nada.
+
+**Ciento sesenta y ocho, contadas.** **165** son clases y llevan selector propio en
+`src/GeometriaFactory.Web/wwwroot/css/app.css` —el control `C-3` de `scripts/verify-visual-system.sh`
+las cuadra—; las **3** restantes son nombres de animación de `@keyframes`, que también los lee el
+navegador: `gf-spin`, `gf-shimmer` y `gf-sweep`.
+
+| Castellano (maqueta) | Inglés (producto) | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `mq-tarjeta-acceso` | `gf-access-card` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-tarjeta-acceso-modulo` | `gf-access-card-module` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-grilla-acceso` | `gf-access-grid` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-insignia` | `gf-badge` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-insignia--peligro` | `gf-badge--danger` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-insignia--info` | `gf-badge--info` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-insignia--neutro` | `gf-badge--neutral` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-insignia--exito` | `gf-badge--success` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-insignia--atencion` | `gf-badge--warning` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-banda` | `gf-banner` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-banda--confirmacion` | `gf-banner--confirmation` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-banda--error` | `gf-banner--error` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-banda--info` | `gf-banner--info` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-banda--atencion` | `gf-banner--warning` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-bloque` | `gf-block` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-body` | `gf-body` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-body-strong` | `gf-body-strong` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-btn` | `gf-btn` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-btn--destructivo` | `gf-btn--destructive` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-btn--ancho` | `gf-btn--full` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-btn--pill` | `gf-btn--pill` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-btn--primario` | `gf-btn--primary` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-btn--secundario` | `gf-btn--secondary` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-lienzo` | `gf-canvas` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-caption` | `gf-caption` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-tarjeta` | `gf-card` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-clicable` | `gf-clickable` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-columna` | `gf-column` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-columna--datos` | `gf-column--data` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-columna--escena` | `gf-column--scene` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-comentario` | `gf-comment` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-diagnostico` | `gf-diagnostics` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-dialogo` | `gf-dialog` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-disclosure` | `gf-disclosure` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-separador` | `gf-divider` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-vacio` | `gf-empty` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-campo` | `gf-field` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-campo--error` | `gf-field--error` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-campo-busqueda` | `gf-field-search` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-filtros` | `gf-filters` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-observacion` | `gf-finding` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-observacion-cuerpo` | `gf-finding-body` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-observacion-ubicacion` | `gf-finding-location` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-observaciones` | `gf-findings` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-lista-plana` | `gf-flat-list` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-lista-plana--sin-hueco` | `gf-flat-list--tight` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-fila-flex` | `gf-flex-row` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-fila-flex--envuelve` | `gf-flex-row--wrap` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-flexible` | `gf-flexible` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-acciones-pie` | `gf-footer-actions` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-grupo` | `gf-group` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-grupo-recuento` | `gf-group-count` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-grupo-cabecera` | `gf-group-header` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ico` | `gf-icon` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ico--16` | `gf-icon--16` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ico--20` | `gf-icon--20` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ico--24` | `gf-icon--24` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ico-contenedor` | `gf-icon-holder` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ico-contenedor--exito` | `gf-icon-holder--success` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-identidad` | `gf-identity` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sangria-2` | `gf-indent-2` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-barra-indeterminada` | `gf-indeterminate-bar` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-inerte` | `gf-inert` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-iniciales` | `gf-initials` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-input` | `gf-input` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-json-cuenta` | `gf-json-count` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-json-clave` | `gf-json-key` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-json-numero` | `gf-json-number` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-json-otro` | `gf-json-other` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-json-cadena` | `gf-json-string` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-justificar-inicio` | `gf-justify-start` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-clave-valor` | `gf-key-value` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-margen-bloque-5` | `gf-margin-block-5` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-margen-arriba-1` | `gf-margin-top-1` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-margen-arriba-2` | `gf-margin-top-2` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mb-4` | `gf-mb-4` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mb-5` | `gf-mb-5` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-meta` | `gf-meta` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ml-auto` | `gf-ml-auto` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-2` | `gf-mt-2` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-3` | `gf-mt-3` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-4` | `gf-mt-4` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-5` | `gf-mt-5` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-6` | `gf-mt-6` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-7` | `gf-mt-7` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-9` | `gf-mt-9` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-mt-auto` | `gf-mt-auto` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-atenuado` | `gf-muted` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-nav` | `gf-nav` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-lista-anidada` | `gf-nested-list` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sin-margen` | `gf-no-margin` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-nodo` | `gf-node` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-nodo--rama` | `gf-node--branch` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-nodo--hoja` | `gf-node--leaf` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-nodo-flecha` | `gf-node-arrow` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-nodo-indice` | `gf-node-index` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-num` | `gf-num` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-texto-original` | `gf-original-text` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-relleno-4` | `gf-padding-4` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-encabezado` | `gf-page-header` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-pieza` | `gf-piece` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-pieza-cuerpo` | `gf-piece-body` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-pieza-cuerpo--contorno` | `gf-piece-body--outline` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-pieza-etiqueta` | `gf-piece-label` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-cartel-reconexion` | `gf-reconnect-notice` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-requisito` | `gf-requirement` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-acciones-fila` | `gf-row-actions` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-tarjeta-fila` | `gf-row-card` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-tarjeta-fila-cabecera` | `gf-row-card-header` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-escena` | `gf-scene` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-escena-lienzo` | `gf-scene-canvas` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-escena-leyenda` | `gf-scene-caption` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-escena-rotulo` | `gf-scene-label` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-escena-movimiento` | `gf-scene-motion` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-escena-movimiento__nota` | `gf-scene-motion__note` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-escena-movimiento__opcion` | `gf-scene-motion__option` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-caja-desplazable` | `gf-scroll-box` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sello` | `gf-seal` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sello-boton` | `gf-seal-button` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-select` | `gf-select` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-shell` | `gf-shell` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-shell-contenido` | `gf-shell-content` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-shell-sidebar` | `gf-shell-sidebar` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-brillo` | `gf-shimmer` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sidebar-pie` | `gf-sidebar-footer` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sidebar-persona` | `gf-sidebar-person` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sidebar-papel` | `gf-sidebar-role` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-esqueleto` | `gf-skeleton` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-esqueleto--bloque` | `gf-skeleton--block` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-esqueleto--campo` | `gf-skeleton--field` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-esqueleto--fila` | `gf-skeleton--row` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-esqueleto--escena` | `gf-skeleton--scene` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-esqueleto--alto` | `gf-skeleton--tall` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-skip` | `gf-skip-link` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-giro` | `gf-spin` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-spinner` | `gf-spinner` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-sr-only` | `gf-sr-only` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-tarjetas-apiladas` | `gf-stacked-cards` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-subtitulo` | `gf-subtitle` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-recorrido` | `gf-sweep` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-tabla` | `gf-table` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-tabla-envoltorio` | `gf-table-wrapper` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-td-acciones` | `gf-td-actions` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-textarea` | `gf-textarea` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-textarea--media` | `gf-textarea--medium` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-textarea--corta` | `gf-textarea--short` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-textarea--texto-trabajo` | `gf-textarea--work-text` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-th-plano` | `gf-th-plain` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-th-plano--cuerpo` | `gf-th-plain--body` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-th-plano--breve` | `gf-th-plain--brief` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-th-plano--fuerte` | `gf-th-plain--strong` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-title` | `gf-title` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-arbol` | `gf-tree` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-arbol-hijos` | `gf-tree-children` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-dos-columnas` | `gf-two-columns` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-dos-columnas--envio` | `gf-two-columns--submission` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-aviso-indisponible` | `gf-unavailable-notice` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-valores` | `gf-values` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-30` | `gf-width-30` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-34` | `gf-width-34` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-38` | `gf-width-38` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-40` | `gf-width-40` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-45` | `gf-width-45` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-46` | `gf-width-46` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-campo` | `gf-width-field` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-medio` | `gf-width-medium` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-corto` | `gf-width-short` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+| `mq-ancho-ancho` | `gf-width-wide` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada; el componente que la usa está en `Linea-Base-Visual.md` §3 |
+
+**Las dieciséis que NO se portaron, y por qué.** `mq-panel-fachada`, `mq-panel-fachada__rotulo`,
+`mq-fa-acciones`, `mq-fa-bitacora`, `mq-fa-linea`, `mq-fa-propiedades`, `mq-fa-recuentos`,
+`mq-sello-maqueta`, `mq-barra-validacion`, `mq-barra-validacion__fila`, `mq-barra-validacion__rotulo`,
+`mq-nota`, `mq-conmutador`, `mq-portada`, `mq-lista-superficies` y `mq-prosa`. Las catorce primeras
+—incluidas `mq-nota` y `mq-conmutador`, que sólo tienen regla **dentro** del bloque de la barra de
+validación— y las dos de la portada son las clases de los tres bloques que `Linea-Base-Visual.md` §6
+declara **instrumento de la maqueta y no producto**. No tienen nombre inglés porque no tienen
+concepto de producto que nombrar.
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
 
 | # | Control | Cuándo | Qué detecta |
 | --- | --- | --- | --- |
-| `V-1` | **Recuento de identificadores fuera del glosario.** Todo identificador de código declarado en el corpus tiene que resolver contra una fila del glosario, y el glosario son **ocho tablas**: §6.3 a §6.8 —las seis clases—, **§6.10** —los subsegmentos de espacio de nombres— y **§6.11** —las superficies derivadas—. §6.9 no entra: no agrega filas, declara unificaciones y homónimos de nombres que ya están en §6.4 y §6.8 | En cada auditoría de categoría 05 y en el punto de control de cada etapa | Un concepto traducido por criterio propio, que es lo que §6.1 prohíbe — **y, desde la 1.4, también el que se agregó por el corolario de §6.11, que hasta entonces caía fuera del rango que el control miraba** |
+| `V-1` | **Recuento de identificadores fuera del glosario.** Todo identificador de código declarado en el corpus tiene que resolver contra una fila del glosario, y el glosario son **nueve tablas**: §6.3 a §6.8 —las seis clases—, **§6.10** —los subsegmentos de espacio de nombres— y **§6.11** —las superficies derivadas—. §6.9 no entra: no agrega filas, declara unificaciones y homónimos de nombres que ya están en §6.4 y §6.8 | En cada auditoría de categoría 05 y en el punto de control de cada etapa | Un concepto traducido por criterio propio, que es lo que §6.1 prohíbe — **y, desde la 1.4, también el que se agregó por el corolario de §6.11, que hasta entonces caía fuera del rango que el control miraba** |
 | `V-2` | **Inspección de idioma de identificador.** Ningún identificador de código nuevo en castellano | En cada emisión que declare un identificador | La reaparición de la desviación por el mismo camino por el que apareció |
 | `V-3` | **Cuadre de la etiqueta.** Todo valor de conjunto cerrado tiene identificador **y** etiqueta, y la etiqueta está en castellano | Al construir `GeometriaFactory.Web.Services` | Un identificador inglés que se filtró a la pantalla |
 | `V-4` | **Cuadre del renombre, contra la lista declarada de antemano.** Ver la formulación completa abajo: no es «cero ocurrencias viejas» | Al cerrar cada tramo de §8, y su primera mitad **antes de editar y antes del acto 1**, cubriendo los dos actos | Un renombre a medias, que es el modo de falla que el corpus ya mostró con la sexta función de la fachada |
@@ -776,7 +1054,7 @@ Una norma sin instrumento de verificación es una intención. Siete controles, y
 
 | Control | Veredicto | Qué lo hace mecánico, o qué le falta |
 | --- | --- | --- |
-| `V-1` | **Verificable con la precisión de la 1.4** | La población es la del instrumento de §2.1 —tokens de región de código— y el rango es ahora el glosario entero (ocho tablas). El único residuo es distinguir el identificador **declarado** del **citado**, y esa distinción ya está escrita: es la de §4.1 entre uso propio y reporte de fuente |
+| `V-1` | **Verificable con la precisión de la 1.4** | La población es la del instrumento de §2.1 —tokens de región de código— y el rango es ahora el glosario entero (nueve tablas desde la 1.6). El único residuo es distinguir el identificador **declarado** del **citado**, y esa distinción ya está escrita: es la de §4.1 entre uso propio y reporte de fuente |
 | `V-2` | **No verificable como está** | «Ningún identificador nuevo en castellano» no tiene forma de pasa/falla: decidir si un token es castellano exige leerlo. Haría falta el criterio de decisión escrito —resolver el token contra la columna castellana del glosario, y contra las marcas de tilde y eñe que §3 ya prohíbe—, que esta versión no agrega porque no se agregan controles nuevos |
 | `V-3` | **Verificable como está** | Población cerrada de **10** valores contra las 10 filas de §6.7: para cada uno, identificador inglés y etiqueta castellana declarada. Se cuenta, no se interpreta |
 | `V-4` | **Verificable como está** | El cierre es aritmético en las dos direcciones y celda por celda contra una lista escrita antes de editar, con la fila de control de cambios del propio tramo excluida. El **motivo** de cada ocurrencia lo escribe una persona, pero el control no verifica el motivo: verifica que la ocurrencia esté en la lista |
@@ -879,6 +1157,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.6 | 2026-08-14 | **Agrega §6.12, la novena tabla del glosario: los 214 identificadores que la etapa `b` de `GeometriaFactory-Web` necesitó, y no renombra nada.** La trae la etapa `b`, que construye las once superficies como pantallas de marcador de posición y **porta el sistema visual de la maqueta aprobada**, y que al hacerlo escribe cuatro familias de identificadores que **ninguna de las ocho tablas anteriores contaba**: **24 tipos de componente** —los dos armazones, las once superficies con los tres cursos de `Credencial-Propia` desdoblados por su shell, los compartidos y las dos carpetas nuevas—, **13 miembros y parámetros**, **9 iconos** del catálogo `ICONOS` de la maqueta, y **168 nombres de clase CSS y de animación** —165 clases y 3 `@keyframes`—, que son el grueso y la familia que obligó a abrir la sección: una clase CSS la lee el navegador, cae del lado de §3 y hasta ahora no tenía regla porque no había hoja de estilos del producto. Entran por el **corolario 4 de §6.1** y **fuera de los 155**, con el mismo criterio con el que la 1.5 agregó las cinco de la etapa `a`. **La frontera de §6.11 se sostiene sin excepción**: la maqueta conserva sus nombres castellanos y no se renombra —es línea de base aprobada—, y lo que §6.12 declara es la **correspondencia** entre las dos escrituras, que es lo que vuelve verificable que el porte fue fiel. Se declaran además **las catorce clases que NO se portaron**, con su motivo: son las de los tres bloques que `Linea-Base-Visual.md` §6 rotula instrumento de la maqueta. La regla de §6.1 y el control `V-1` pasan de **ocho tablas a nueve**, y §6.2 suma la fila del recuento. **Tres filas llevan marca de propuesta y no de fuente** —`StagePlaceholder`, `SurfaceOutline` y `NotFoundSurface`/`NotFoundPage`—, porque ninguna fuente las declara; `NotFoundSurface` además **no lleva `SUP-XX`**, por la misma razón por la que `Linea-Base-Visual.md` §6.1 no le inventa identificador a lo que nadie miró. **No renombra nada del corpus, no toca las ocho tablas anteriores y no mueve ninguna cifra de §2 ni el total de 155.** | Etapa `b` de `GeometriaFactory-Web` (porte y recuento) |
 | 1.5 | 2026-08-13 | **Suspende los cuatro tramos de renombre que quedaban y emite la regla que los reemplaza; corrige un defecto de método que `R-2` levantó al ejecutarse; y agrega al glosario las cinco filas que la etapa `a` necesitó.** **Primero, y es la decisión del Product Owner del 2026-08-13 (§8):** los tramos ejecutados —`R-1`, `R-1b` y `R-2`— **quedan como están**, y `R-2b`, `R-3`, `R-4` y `R-5` pasan a **suspendidos**. El fundamento es del Product Owner y se transcribe: esos tramos renombraban identificadores **en documentos que describen código que no existe**, y **el glosario ya está completo** para escribir ese código en inglés desde el primer archivo. La regla que los reemplaza es la del recuadro de §8: **el glosario es la fuente de nombres para todo código nuevo**; lo que no está en la tabla **se agrega primero** y no se traduce por criterio propio; y los documentos que describen conceptos con su nombre castellano **se actualizan cuando alguien los toca por otro motivo**, no en una tanda propia. §8 declara además los cuatro puntos que la suspensión **no** afloja —§6 y §3 siguen rigiendo, el corolario 4 de §6.1 pasa a ser el mecanismo principal, `V-4`, `V-6` y `V-7` quedan sin población pero no se retiran, y la actualización por contacto ejecuta los dos actos de §8.2— y **deja escritas dos cifras que no cuadran** con la forma en que la decisión se comunicó: los tramos pendientes son **cuatro** y no cinco, y sus ocurrencias candidatas suman **8260** y no ocho mil seiscientas. No se acomoda ninguna de las dos: las cifras de este documento son medidas (§2.1). **Segundo, el defecto de método (§8.2):** la regla acotada de la 1.3 fundaba la admisión de un solo commit en que «el acto 2 toca prosa y sólo prosa» y por lo tanto «no puede mover ninguna cifra de `V-4`». **`R-2` midió lo contrario**: corregir un párrafo que argumentaba por el nombre viejo toca también las regiones de código de ese párrafo, y **borrar** una ocurrencia mueve el cuadre igual que escribirla, porque `V-4` es aritmético **en las dos direcciones**. El párrafo queda **tachado y marcado, no borrado** (§8.2 barrido 2 y `V-7`), con lo que sobrevive de él declarado, y la regla pasa a decir **«escribe, borra o mueve»**, con la obligación de volver a medir las dos direcciones después del acto 2 si los actos ya fueron juntos. **Tercero, el glosario (§6.2, §6.4 y §6.5):** la etapa `a` ejerció el corolario 4 de §6.1 y agregó **cinco filas**, declaradas **fuera de los 155** igual que las cinco de §6.11, porque ninguna de las seis clases las contó y los conceptos no existían cuando se contaron: `EstadoDelServicio` ⟶ **`ServiceHealth`** y `VisorDeGeometriaFactory` ⟶ **`GeometriaFactoryViewer`** en §6.4, y los tres miembros de `ServiceHealth` —**`Ready`**, **`Version`** y **`ServerTimeUtc`**— en §6.5. **Los recuentos de las seis clases no cambian.** Que el cuerpo de la respuesta de salud lleve esos tres datos sigue siendo **propuesta de la etapa `a`** y decisión del punto de control: acá se fija **cómo se llaman**, no **qué se publica**. | Orquestador SDD · Product Owner (la decisión de §8) |
 | 1.4 | 2026-08-12 | **Corrige el método por tercera vez, y es la última pasada antes de `R-2`.** No la trae un tramo ejecutado: la trae **la revisión de la 1.3 que el orquestador ordenó antes de abrir `R-2`** —sin informe aparte, porque su resultado es esta emisión—, que se preguntó **qué otros controles prometen más de lo que pueden verificar**, que es la clase de defecto que compartían los tres que la 1.3 reparó. Encontró **tres**, y los tres están verificados contra la fuente antes de corregirse. **Primero: `V-1` no podía cuadrar lo que la propia norma había agregado al glosario.** Exigía resolver todo identificador declarado contra «una fila de §6.3 a §6.8», y el glosario tiene además **§6.10** —16 subsegmentos de espacio de nombres— y **§6.11** —5 superficies derivadas, entre ellas el tipo `FigureViewer`—, las dos **fuera de ese rango**; y el corolario de §6.11 manda agregar ahí toda carpeta que no nombre un concepto listado, de modo que la regla ordenaba escribir filas en una tabla que el control no miraba. §2.1 ya decía «§6.3 a §6.11» y §6.1 y `V-1` decían «§6.3 a §6.8»: la contradicción estaba adentro del documento. **Los dos pasan a nombrar el glosario entero —ocho tablas—**, con §6.9 explícitamente fuera, porque no agrega filas. **Segundo: `V-6` levantaba como falla lo que la norma declaró correcto.** Prometía que ninguna carpeta ni archivo bajo `src/`, `tests/` o `visor/` queda en castellano, **sin excepción escrita**, mientras §1 y §6.11 declaran intocable la **raíz `visor/`** del proyecto de código y `scripts/build-visor.sh` la lleva adentro del nombre por la misma razón: son las **10 ocurrencias** —7 de la raíz y 3 del guion— que `R-1b` clasificó a mano sobre sus 17 no renombradas. **`V-6` pasa a admitir los mismos cinco motivos de §4.1 que `V-4`, contra la misma lista previa**, con el mismo cuadre celda por celda y la misma exclusión de la fila de control de cambios del propio tramo. **Tercero: `V-7` contradecía a §8.2.** Prometía que ningún documento tocado conserva texto que argumenta a favor del nombre anterior, mientras §8.2 barrido 2 ordena lo contrario —se reescribe **con el fundamento nuevo, no se borra**, porque un argumento borrado deja la decisión sin por qué—; `R-1b` hizo lo correcto en [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.2 —conservó los cinco fundamentos de `P-1a` con su estado y tachó el quinto, refutado por §5.1— y **cerró el control interpretándolo**. **`V-7` se reformula sobre la marca**: pasa el argumento conservado y marcado como superado —estado, fecha y sección que lo supera—, falla el argumento vivo sin marca, y falla también el borrado. El barrido 2 de §8.2 pasa a exigir esa marca. **Y declara qué tan mecánico es cada control.** §7 trae la tabla de los **siete controles y los tres barridos**, con tres veredictos posibles: verificable como está —`V-3`, `V-4`, `V-5` cuando exista código, y el barrido 1—, verificable con la precisión de esta versión —`V-1`, `V-6`, `V-7` y el barrido 2— y **no verificable**, que son **dos**: `V-2`, cuyo «ningún identificador nuevo en castellano» no tiene forma de pasa/falla, y el **barrido 3**, que enumera tres afirmaciones refutadas pero no da texto literal a buscar. Se declara qué haría falta para cada uno y **no se agrega ningún control nuevo**. Consecuencia para `R-2`: `V-2` es control de emisión y el tramo no declara identificadores nuevos; el barrido 3 sí corre, y lo que el tramo declare como cubierto por él **es afirmación de quien lo ejecuta y no medición**, y así debe escribirse en su informe. **No renombra nada, no toca el glosario, no agrega ni quita filas y no mueve ninguna cifra de §2.** | Orquestador SDD (revisión de método, correcciones y redacción) |
 | 1.3 | 2026-08-12 | **Vuelve a corregir el método, y no los nombres.** Emitida a raíz del **informe del tramo `R-1b`** —commit `c0b8b4f` del 2026-08-12, «tramo `R-1b`: la deuda del ensayo, con los dos actos»—. El tramo **cerró limpio**: los siete controles aplicables cuadraron, `V-4` cuadró por primera vez contra una lista escrita antes de editar y **las cifras de la 1.2 se reprodujeron exactas**, lo que valida las correcciones de esa versión. Y encontró **tres defectos nuevos del método**, que ésta repara antes de `R-2`. **Primero: `V-4` no admitía por escrito el motivo que más se usó.** §7 admitía «los cuatro de §4.1», pero §2.1 ya reconocía un quinto caso —**otro concepto con el mismo nombre**— y **10 de las 17 ocurrencias no renombradas de `R-1b` caen ahí**: 7 de la raíz `visor/` del proyecto de código, que §1 declara fuera de discusión y §6.11 distingue de la carpeta de la capa 3, y 3 del guion `build-visor.sh`. §4.1 le da **fila propia** en su tabla, con su definición y su ejemplo medido, y `V-4` pasa a admitir **cinco motivos**: prosa, cita textual, reporte de fuente que no se renombra, registro histórico y otro concepto con el mismo nombre. **Segundo: la fila de control de cambios del propio tramo rompía el cuadre literal.** Al describir lo que hizo, esa fila **reintroduce el identificador viejo** —la de `R-1b` agregó **6 ocurrencias**: una de `Configuraciones`, una de `Paginas`, una de `Internos` y tres de `visor`— y **ninguna podía estar en una lista escrita antes de editar**, porque la fila se escribe después: con la fila adentro el cuadre daba 23 contra 17, y sin ella **17 exactas**. `V-4` declara ahora que **esa fila, y sólo esa fila, queda fuera del cuadre en las dos direcciones**; el resto del control de cambios sigue adentro como registro histórico. **Tercero: el acto 2 no tenía lista previa.** §8.2 barrido 1 mandaba clasificar por §4.1 y «entrar en la lista de `V-4`», pero `V-4` exige la lista **antes de editar** y el acto 2 corre **después** del acto 1. `R-1b` lo resolvió midiendo el barrido 1 antes de tocar nada; la norma no lo ordenaba y ahora sí: **la lista es una sola, cubre los dos actos y se mide antes del acto 1**, y el barrido 1 clasifica contra ella. **Registro.** §8.1 marca **`R-1b` como ejecutado el 2026-08-12** con su cuadre —22 candidatas, 5 renombradas, 17 no renombradas—, su resultado y la remisión al informe; el ensayo queda cerrado y **`R-2` habilitado**. Y se registra el **apartamiento** del tramo: §8.2 pedía los dos actos en commits separados y `R-1b` fue en uno solo, porque los dos vivían en el mismo archivo y separarlos después exigía reeditar. **La regla de los dos commits se acota, no se conserva ni se reemplaza**: van separados **cuando tocan archivos distintos**; sobre el mismo archivo se admite uno solo si el mensaje declara los dos actos por separado y si el acto 2 no escribe, dentro de una región de código, un identificador de la población del tramo. El fundamento es el instrumento de §2.1: cuenta tokens **dentro de regiones de código**, y el acto 2 toca **sólo prosa**, de modo que sobre el mismo archivo no puede mover ninguna cifra de `V-4`. Bajo la regla acotada `R-1b` no habría sido apartamiento; se registra como tal igual, porque la regla vigente al ejecutarse era la otra. **No renombra nada, no toca el glosario y no mueve ninguna cifra de §2.** | Orquestador SDD (medición, correcciones y redacción) |

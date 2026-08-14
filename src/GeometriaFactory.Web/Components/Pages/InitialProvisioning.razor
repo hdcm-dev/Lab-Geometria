@@ -1,0 +1,44 @@
+@page "/aprovisionamiento-inicial"
+@layout AccessShell
+
+@* SUP-01 `Aprovisionamiento-Inicial` — CU-04 FA-03 y FA-04.
+   Ruta: `/aprovisionamiento-inicial`. Shell: acceso.
+   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Aprovisionamiento-Inicial.md`.
+   Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Aprovisionamiento-Inicial.html`.
+
+   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
+   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+
+<PageTitle>Aprovisionamiento inicial</PageTitle>
+
+<h1>Configurar el laboratorio</h1>
+    <p class="gf-subtitle">Vas a crear la única cuenta de administrador de este laboratorio. No se puede crear otra después.</p>
+
+<StagePlaceholder SurfaceId="SUP-01" SurfaceName="Aprovisionamiento-Inicial" UseCase="CU-04 FA-03 y FA-04" />
+
+<SurfaceOutline Components="@Outline" />
+
+<section class="gf-card gf-mt-5">
+    <h2 class="gf-title">Salidas de esta superficie</h2>
+    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
+       Ninguna superficie es un callejón sin salida.</p>
+    <ul class="gf-flat-list gf-mt-3">
+        <li><a href="/ingreso"><strong>NAV-02</strong> — éxito del aprovisionamiento, con su banda de confirmación</a></li>
+    </ul>
+</section>
+
+@code {
+    private static readonly KeyValuePair<string, string>[] Outline =
+    [
+        new("CMP-01", "Tarjeta de aprovisionamiento"),
+        new("CMP-02", "Identidad del laboratorio"),
+        new("CMP-03", "Encabezado y subtítulo de alcance"),
+        new("CMP-04", "Banda de resultado"),
+        new("CMP-05", "Campo de correo"),
+        new("CMP-06", "Campo de contraseña y su repetición"),
+        new("CMP-07", "Requisito declarado"),
+        new("CMP-08", "Acción primaria"),
+        new("CMP-09", "Sello de versión"),
+        new("CMP-10", "Superficie de resolución"),
+    ];
+}

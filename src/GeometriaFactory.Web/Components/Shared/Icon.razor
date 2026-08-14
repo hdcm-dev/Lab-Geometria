@@ -1,0 +1,33 @@
+@* Catálogo de iconos portado desde `SDD/Maquetas/.../assets/js/Maqueta.js`, constante `ICONOS`.
+   Sólo los nueve que la etapa `b` usa: los otros doce del catálogo de la maqueta se portan
+   cuando la superficie que los necesita deje de ser marcador de posición.
+   Los trazos son literalmente los de la maqueta; el color es `currentColor`, de modo que este
+   componente NO introduce ningún valor visual propio. *@
+
+<svg class="gf-icon @SizeClass" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+     aria-hidden="true" focusable="false">
+    @((MarkupString)Paths.GetValueOrDefault(Name, string.Empty))
+</svg>
+
+@code {
+    /// Nombre del icono. Ver `Norma-De-Nomenclatura.md` §6.12, tabla de iconos.
+    [Parameter, EditorRequired] public string Name { get; set; } = string.Empty;
+
+    /// Clase de tamaño del sistema visual: `gf-icon--16`, `gf-icon--20` o `gf-icon--24`.
+    [Parameter] public string SizeClass { get; set; } = "gf-icon--16";
+
+    private static readonly IReadOnlyDictionary<string, string> Paths =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Brand"] = """<path d="M12 2.5L21 8v8l-9 5.5L3 16V8z"/><path d="M12 8.5L16.5 11v4L12 17.5 7.5 15v-4z"/>""",
+            ["Works"] = """<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10l2 2.5h6.5A1.5 1.5 0 0 1 20 8v10a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18z"/>""",
+            ["New"] = """<path d="M12 5v14"/><path d="M5 12h14"/>""",
+            ["Key"] = """<circle cx="8" cy="12" r="3.5"/><path d="M11.5 12H20"/><path d="M17 12v3"/><path d="M20 12v2.5"/>""",
+            ["Accounts"] = """<circle cx="9" cy="8.5" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.5a3.5 3.5 0 0 1 0 6.8"/><path d="M17.5 20a6 6 0 0 0-2.2-4.6"/>""",
+            ["ClassList"] = """<path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>""",
+            ["SignOut"] = """<path d="M14 4H6.5A1.5 1.5 0 0 0 5 5.5v13A1.5 1.5 0 0 0 6.5 20H14"/><path d="M17 8l4 4-4 4"/><path d="M21 12H10"/>""",
+            ["Back"] = """<path d="M11 5l-7 7 7 7"/><path d="M4 12h16"/>""",
+            ["Alert"] = """<path d="M12 3.5L1.8 20.5h20.4z"/><path d="M12 10v4.5"/><path d="M12 17.6v.1"/>""",
+        };
+}
