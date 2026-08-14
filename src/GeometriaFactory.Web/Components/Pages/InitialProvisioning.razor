@@ -2,43 +2,44 @@
 @layout AccessShell
 
 @* SUP-01 `Aprovisionamiento-Inicial` — CU-04 FA-03 y FA-04.
-   Ruta: `/aprovisionamiento-inicial`. Shell: acceso.
+   Ruta: `/aprovisionamiento-inicial`. Shell: acceso. Salida: `NAV-02` → `/ingreso`.
    Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Aprovisionamiento-Inicial.md`.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Aprovisionamiento-Inicial.html`.
+   Componentes que la maqueta declara acá: CMP-01 a CMP-10.
 
-   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
-   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
+   no valida, no envía y no consulta al servicio de datos. Las bandas de resultado —error de
+   entrada, contraseñas que no coinciden, laboratorio ya aprovisionado, éxito— y el aviso de
+   indisponibilidad no se dibujan: los dispara estado que esta etapa no tiene. *@
 
 <PageTitle>Aprovisionamiento inicial</PageTitle>
 
-<h1>Configurar el laboratorio</h1>
-    <p class="gf-subtitle">Vas a crear la única cuenta de administrador de este laboratorio. No se puede crear otra después.</p>
+<StagePlaceholder />
 
-<StagePlaceholder SurfaceId="SUP-01" SurfaceName="Aprovisionamiento-Inicial" UseCase="CU-04 FA-03 y FA-04" />
+<h1 class="gf-mt-5">Configurar el laboratorio</h1>
+<p class="gf-subtitle">Vas a crear la única cuenta de administrador de este laboratorio. No se puede crear otra después.</p>
 
-<SurfaceOutline Components="@Outline" />
+<form>
+    <div class="gf-field">
+        <label for="provisioning-email">Correo</label>
+        <input class="gf-input" id="provisioning-email" name="email" type="email" autocomplete="username" />
+    </div>
 
-<section class="gf-card gf-mt-5">
-    <h2 class="gf-title">Salidas de esta superficie</h2>
-    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
-       Ninguna superficie es un callejón sin salida.</p>
-    <ul class="gf-flat-list gf-mt-3">
-        <li><a href="/ingreso"><strong>NAV-02</strong> — éxito del aprovisionamiento, con su banda de confirmación</a></li>
-    </ul>
-</section>
+    <div class="gf-field">
+        <label for="provisioning-password">Contraseña</label>
+        <input class="gf-input" id="provisioning-password" name="password" type="password"
+               autocomplete="new-password" aria-describedby="provisioning-requirement" />
+        @* Requisito declarado antes del intento, no recién al fallar. *@
+        <span class="gf-requirement" id="provisioning-requirement">Vas a usarla para entrar; no hay forma de recuperarla.</span>
+    </div>
 
-@code {
-    private static readonly KeyValuePair<string, string>[] Outline =
-    [
-        new("CMP-01", "Tarjeta de aprovisionamiento"),
-        new("CMP-02", "Identidad del laboratorio"),
-        new("CMP-03", "Encabezado y subtítulo de alcance"),
-        new("CMP-04", "Banda de resultado"),
-        new("CMP-05", "Campo de correo"),
-        new("CMP-06", "Campo de contraseña y su repetición"),
-        new("CMP-07", "Requisito declarado"),
-        new("CMP-08", "Acción primaria"),
-        new("CMP-09", "Sello de versión"),
-        new("CMP-10", "Superficie de resolución"),
-    ];
-}
+    <div class="gf-field">
+        <label for="provisioning-password-repeat">Repetir contraseña</label>
+        <input class="gf-input" id="provisioning-password-repeat" name="passwordRepeat" type="password"
+               autocomplete="new-password" />
+    </div>
+
+    @* No hay acción secundaria y no hay «cancelar»: en el primer arranque no existe un estado
+       previo al que volver. *@
+    <button type="button" class="gf-btn gf-btn--primary gf-btn--full">Crear la cuenta de administrador</button>
+</form>

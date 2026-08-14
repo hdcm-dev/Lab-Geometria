@@ -3,51 +3,95 @@
 @layout WorkShell
 
 @* SUP-06 `Envio-De-Trabajo` — CU-05.
-   Ruta: `/trabajo-nuevo`, `/trabajos/{WorkId}/editar`. Shell: trabajo.
+   Ruta: `/trabajo-nuevo` y `/trabajos/{WorkId}/editar`. Shell: trabajo.
+   Salidas: `NAV-18` → `/trabajos/{id}`, «Ver el trabajo»; `NAV-19` → `/mis-trabajos`.
    Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Envio-De-Trabajo.md`.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Envio-De-Trabajo.html`.
+   Componentes que la maqueta declara acá: CMP-08, CMP-16 a CMP-24.
 
-   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
-   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
+   no valida, no envía y no consulta al servicio de datos; «Previsualizar» no dibuja, porque el
+   visor tridimensional llega con la etapa que lo trae. El bloque de resultado (CMP-24), la lista
+   de piezas no dibujadas (CMP-22) y el aviso de indisponibilidad no se dibujan: los dispara
+   estado que esta etapa no tiene.
+
+   DOS CURSOS SOBRE LA MISMA DISPOSICIÓN, que es diferencia de estructura y no de
+   comportamiento: creación y reedición de un borrador. *@
 
 <PageTitle>Envío de trabajo</PageTitle>
+
+<StagePlaceholder />
+
+<a class="gf-btn gf-btn--pill gf-mt-5 gf-mb-4" href="/mis-trabajos"><Icon Name="Back" />Volver a mis trabajos</a>
 
 <div class="gf-page-header">
     <div>
         <h1>@Heading</h1>
-    <p class="gf-subtitle">Pegá el texto tal como lo devolvió tu programa. No hace falta que le cambies nada.</p>
+        <p class="gf-subtitle">Pegá el texto tal como lo devolvió tu programa. No hace falta que le cambies nada.</p>
     </div>
 </div>
 
-<StagePlaceholder SurfaceId="SUP-06" SurfaceName="Envio-De-Trabajo" UseCase="CU-05" />
+@* Dos columnas que anticipan la disposición de la vista de trabajo. En pantalla angosta la
+   previsualización NO sube al primer lugar: acá la tarea es cargar y enviar. *@
+<form class="gf-two-columns gf-two-columns--submission">
 
-<SurfaceOutline Components="@Outline" />
+    <div class="gf-column gf-column--data">
+        <section class="gf-card" aria-labelledby="submission-data-heading">
+            <h2 id="submission-data-heading" class="gf-meta">Datos del trabajo</h2>
 
-<section class="gf-card gf-mt-5">
-    <h2 class="gf-title">Salidas de esta superficie</h2>
-    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
-       Ninguna superficie es un callejón sin salida.</p>
-    <ul class="gf-flat-list gf-mt-3">
-        <li><a href="/trabajos/marcador"><strong>NAV-18</strong> — «Enviar» y luego «Ver el trabajo»</a></li>
-        <li><a href="/mis-trabajos"><strong>NAV-19</strong> — «Enviar» y luego «Volver a mis trabajos»</a></li>
-    </ul>
-</section>
+            <div class="gf-mt-3">
+                <div class="gf-field">
+                    <label for="submission-name">Nombre</label>
+                    <input class="gf-input" id="submission-name" name="name" type="text" />
+                </div>
+                <div class="gf-field">
+                    @* La fecha la declara el alumno y se rotula como tal. *@
+                    <label for="submission-date">Fecha del trabajo, la que declarás vos</label>
+                    <input class="gf-input" id="submission-date" name="workDate" type="text"
+                           inputmode="numeric" placeholder="dd/mm/aaaa" />
+                </div>
+                <div class="gf-field">
+                    <label for="submission-description">Descripción</label>
+                    <textarea class="gf-textarea gf-textarea--short" id="submission-description" name="description"></textarea>
+                </div>
+                <div class="gf-field">
+                    <label for="submission-text">Texto del trabajo</label>
+                    @* El texto entra sin ninguna transformación: no se normaliza, no se reordena
+                       y no se le quita ningún carácter. Sin corrección ortográfica ni
+                       autocapitalización. *@
+                    <textarea class="gf-textarea gf-textarea--work-text" id="submission-text" name="workText"
+                              spellcheck="false" autocapitalize="off" autocorrect="off"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="submission-send-heading">
+            <h2 id="submission-send-heading" class="gf-sr-only">Enviar el trabajo</h2>
+            <button type="button" class="gf-btn gf-btn--primary gf-btn--full"
+                    aria-describedby="submission-single-action">Enviar</button>
+            @* Nota de acción única, contigua a la acción primaria. *@
+            <p class="gf-caption gf-mt-2" id="submission-single-action">Enviar es la única forma de guardar. Si el texto no verifica, queda en borrador y lo reenviás.</p>
+        </section>
+    </div>
+
+    <div class="gf-column gf-column--scene">
+        <section aria-labelledby="submission-preview-heading">
+            <h2 id="submission-preview-heading" class="gf-meta">Previsualización</h2>
+
+            <div class="gf-scene gf-mt-2">
+                <span class="gf-scene-label">Área de dibujo</span>
+                <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
+            </div>
+
+            <button type="button" class="gf-btn gf-btn--secondary gf-mt-3"
+                    aria-describedby="submission-preview-scope">Previsualizar</button>
+            @* Nota de alcance: el dibujo no verifica. *@
+            <p class="gf-caption gf-mt-2" id="submission-preview-scope">El dibujo es sólo para que veas lo que modelaste. No decide si tu trabajo verifica.</p>
+        </section>
+    </div>
+</form>
 
 @code {
-    private static readonly KeyValuePair<string, string>[] Outline =
-    [
-        new("CMP-08", "Acción primaria"),
-        new("CMP-16", "Encabezado y subtítulo"),
-        new("CMP-17", "Campos de nombre, fecha y descripción"),
-        new("CMP-18", "Área de texto del trabajo"),
-        new("CMP-19", "Bloque de previsualización"),
-        new("CMP-20", "Acción de previsualizar"),
-        new("CMP-21", "Nota de alcance de la previsualización"),
-        new("CMP-22", "Lista de piezas no dibujadas"),
-        new("CMP-23", "Nota de acción única"),
-        new("CMP-24", "Bloque de resultado"),
-    ];
-
     /// Identificador del borrador que se reedita. Nulo en el curso de creación.
     /// La etapa `b` no lo lee: sólo distingue los dos cursos de la superficie, que es
     /// diferencia de estructura y no de comportamiento.

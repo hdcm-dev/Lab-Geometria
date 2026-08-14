@@ -39,7 +39,9 @@
         </ul>
 
         <div class="gf-sidebar-footer">
-            <span class="gf-sidebar-person">Marcador de posición</span>
+            @* La identidad de la persona sale de la sesión, y la etapa `b` no tiene sesión: el
+               hueco queda vacío en lugar de llevar un nombre inventado. El papel sí se muestra,
+               porque es el que decide los tres destinos de arriba y se resuelve por la ruta. *@
             <span class="gf-sidebar-role">@RoleLabel</span>
             <a class="gf-btn gf-btn--secondary" href="/ingreso"><Icon Name="SignOut" />Cerrar sesión</a>
             <VersionSeal />

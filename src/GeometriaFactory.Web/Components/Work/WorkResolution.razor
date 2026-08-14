@@ -1,4 +1,7 @@
 @* SUP-08 `Resolucion-Del-Trabajo` — CU-09.
+   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Resolucion-Del-Trabajo.md` §2 y §3.
+   Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Resolucion-Del-Trabajo.html`, estado `resoluble`.
+   Componentes que la maqueta declara acá: CMP-56 a CMP-64.
 
    NO ES UN DESTINO DE NAVEGACIÓN Y NO TIENE RUTA. `Linea-Base-Visual.md` §2 lo declara así:
    es la única superficie ALOJADA, se dibuja dentro de `SUP-07`, y «un sistema construido que le
@@ -9,39 +12,34 @@
    exigía demostrar el bloque con su mapa de estados completo. Es instrumento de la maqueta.
 
    CUÁNDO SE DIBUJA. Cuando quien mira es el administrador y el trabajo está en estado
-   `Pendiente`. La etapa `b` no tiene ni papel ni estado de trabajo, así que dibuja el bloque
-   siempre, rotulado como marcador de posición. *@
+   `Pendiente`. La etapa `b` no tiene estado de trabajo; el papel lo resuelve `SUP-07` por la
+   dirección, y es esa la condición que decide si este bloque se dibuja.
 
-<section class="gf-block gf-mt-5">
-    <h2 class="gf-title">Resolución del trabajo</h2>
+   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. Los dos
+   diálogos de confirmación (CMP-62 y CMP-63) y el bloque de trabajo resuelto (CMP-64) no se
+   dibujan: los dispara estado que esta etapa no tiene. El aviso de que la etapa no funciona lo
+   da una sola vez la superficie que aloja este bloque; acá no se repite. *@
 
-    <p class="gf-banner gf-banner--info gf-mt-3" role="status">
-        <strong>Marcador de posición.</strong> Esta es <code>SUP-08</code>
-        (<code>Resolucion-Del-Trabajo</code>), del caso de uso <code>CU-09</code>. Está
-        <strong>alojada</strong> en <code>SUP-07</code> y no tiene ruta propia, por decisión de
-        la línea de base visual. En el producto se dibuja sólo para el administrador y sólo si
-        el trabajo está en estado <code>Pendiente</code>.
-    </p>
+<section class="gf-card gf-mb-5" aria-labelledby="resolution-heading">
+    <h2 id="resolution-heading" class="gf-title">Resolver esta entrega</h2>
 
-    <ul class="gf-flat-list gf-mt-3">
-        @foreach (var item in Outline)
-        {
-            <li><span class="gf-badge gf-badge--neutral">@item.Key</span> @item.Value</li>
-        }
-    </ul>
+    <div class="gf-field gf-mt-4 gf-width-wide">
+        @* La palabra «opcional» va en la ETIQUETA y no sólo en el texto de apoyo: un lector de
+           pantalla que anuncie sólo la etiqueta tiene que enterarse igual. *@
+        <label for="resolution-comment">Comentario para el alumno (opcional)</label>
+        <textarea class="gf-textarea gf-textarea--medium" id="resolution-comment"
+                  aria-describedby="resolution-comment-destination"></textarea>
+        <span class="gf-requirement" id="resolution-comment-destination">Lo va a ver al abrir el trabajo. Podés dejarlo vacío.</span>
+    </div>
+
+    <div class="gf-footer-actions gf-justify-start">
+        <button type="button" class="gf-btn gf-btn--primary">Aprobar</button>
+        @* Rechazar es una decisión legítima, no una destrucción: no es un control destructivo.
+           Es la misma solicitud con el otro valor. *@
+        <button type="button" class="gf-btn gf-btn--secondary">Rechazar</button>
+        @* La acción de retirar queda visualmente separada de las dos decisiones, con su color de
+           peligro y su propio diálogo. *@
+        <span class="gf-flexible"></span>
+        <button type="button" class="gf-btn gf-btn--destructive">Retirar</button>
+    </div>
 </section>
-
-@code {
-    private static readonly KeyValuePair<string, string>[] Outline =
-    [
-        new("CMP-56", "Bloque de decisión"),
-        new("CMP-57", "Campo de comentario"),
-        new("CMP-58", "Nota de destino del comentario"),
-        new("CMP-59", "Acción de aprobar"),
-        new("CMP-60", "Acción de rechazar"),
-        new("CMP-61", "Acción de retirar"),
-        new("CMP-62", "Diálogo de confirmación del desenlace"),
-        new("CMP-63", "Diálogo de confirmación del retiro"),
-        new("CMP-64", "Bloque de trabajo resuelto"),
-    ];
-}

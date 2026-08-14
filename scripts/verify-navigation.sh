@@ -7,7 +7,9 @@
 # Levanta el front y comprueba, contra el servidor de verdad:
 #   C-1  Las trece rutas del producto responden 200 y devuelven su `<h1>`.
 #   C-2  `SUP-08` y `SUP-11` NO tienen ruta —404— y sí aparecen alojada y
-#        superpuesta donde la línea de base manda.
+#        superpuesta donde la línea de base manda. El alojamiento de `SUP-08` se
+#        reconoce por el encabezado de su bloque, no por su identificador: la
+#        etapa `b` sacó los `SUP-XX` de la pantalla.
 #   C-3  Cada superficie de trabajo dibuja los TRES destinos de su papel y
 #        NINGUNO del otro; las de acceso no dibujan barra lateral.
 #   C-4  La dirección que no existe devuelve 404 con la pantalla puesta.
@@ -54,8 +56,17 @@ check —      /estado                            200
 printf '\n== C-2 · las dos superficies SIN ruta ==\n'
 check SUP-08 /resolucion-del-trabajo            404
 check SUP-11 /estado-degradado-y-reconexion     404
-n=$(curl -s "$BASE/trabajos/T-1" | grep -c 'SUP-08')
-echo "SUP-08 alojada dentro de SUP-07 (/trabajos/T-1): $n ocurrencia(s)"; [ "$n" -ge 1 ] || fails=$((fails+1))
+# SUP-08 se comprueba por su CONTENIDO y no por su identificador: la etapa `b` sacó los
+# `SUP-XX` de la pantalla y los dejó en el comentario de cabecera de cada componente, que no
+# llega al navegador. El bloque de resolución se reconoce por su encabezado, que es el de la
+# maqueta aprobada. Y se pide con `papel=administrador` porque es la única condición del
+# wireframe que esta etapa puede evaluar: para el alumno dueño el bloque NO se dibuja.
+n=$(curl -s "$BASE/trabajos/T-1?papel=administrador" | grep -c 'Resolver esta entrega')
+echo "SUP-08 alojada dentro de SUP-07 (/trabajos/T-1, papel administrador): $n ocurrencia(s)"
+[ "$n" -ge 1 ] || fails=$((fails+1))
+m=$(curl -s "$BASE/trabajos/T-1" | grep -c 'Resolver esta entrega')
+echo "SUP-08 NO se dibuja para el alumno dueño (/trabajos/T-1): $m ocurrencia(s)"
+[ "$m" -eq 0 ] || fails=$((fails+1))
 
 printf '\n== C-3 · los tres destinos por papel ==\n'
 destinos() { curl -s "$BASE$1" | tr '\n' ' ' | grep -oE '<ul class="gf-nav[^"]*">.*</ul>' \
