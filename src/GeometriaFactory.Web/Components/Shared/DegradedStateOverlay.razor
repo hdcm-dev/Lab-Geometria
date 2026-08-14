@@ -5,16 +5,17 @@
    control a la misma superficie al recuperarse». Por eso vive acá, dibujado por los DOS shells,
    y no en `Components/Pages/`.
 
-   MARCADOR DE POSICIÓN. Los dos tramos que `CU-10` distingue —el servicio de datos que no
-   responde y el circuito que se corta— se sostienen con estado que la etapa `b` no tiene. Lo
-   que esta etapa deja construido es el punto de superposición y su marcado, para que la etapa
-   que traiga el comportamiento no tenga que tocar los dos shells. *@
+   ETAPA `b`. Los dos tramos que `CU-10` distingue —el servicio de datos que no responde y el
+   circuito que se corta— se sostienen con estado que esta etapa no tiene, así que el aviso
+   nunca se enciende. Lo que queda construido es el punto de superposición, su marcado y SU
+   TEXTO REAL, el de la maqueta aprobada (`Datos-Maqueta.js`, `TEXTOS.reconexion`, que cita
+   `Wireframes-Estado-Degradado-Y-Reconexion.md` §2). *@
 
 @if (Visible)
 {
     <div class="gf-reconnect-notice" role="status">
         <Icon Name="Alert" />
-        <span>Marcador de posición del estado degradado y la reconexión (SUP-11, CU-10).</span>
+        <span>Se cortó la conexión con el laboratorio. Reintentando…</span>
     </div>
 }
 

@@ -3,42 +3,42 @@
 
 @* SUP-03 `Ingreso` — CU-02.
    Ruta: `/ingreso`. Shell: acceso.
+   Salidas: `NAV-04` → `/registro-de-cuenta`; `NAV-06` → `/credencial-propia/establecer`;
+   `NAV-08` → `/mis-trabajos` (papel alumno); `NAV-09` → `/entrega-comision` (papel administrador).
    Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Ingreso.md`.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Ingreso.html`.
+   Componentes que la maqueta declara acá: CMP-04, CMP-05, CMP-08, CMP-09, CMP-30 a CMP-33.
 
-   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
-   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
+   no valida, no envía y no consulta al servicio de datos. Las cinco bandas de confirmación que
+   acusan recibo de actos de otras superficies, las de error y el aviso de indisponibilidad no se
+   dibujan: los dispara estado que esta etapa no tiene. Tampoco se dibuja el control «Mostrar la
+   contraseña», que es comportamiento y no texto.
+
+   La credencial de administrador que la maqueta exhibe en una banda es un INSTRUMENTO DE LA
+   MAQUETA —así lo declara ella misma— y no forma parte del producto: no se porta. *@
 
 <PageTitle>Ingreso</PageTitle>
 
-<h1>Ingresar al laboratorio</h1>
+<StagePlaceholder />
 
-<StagePlaceholder SurfaceId="SUP-03" SurfaceName="Ingreso" UseCase="CU-02" />
+<h1 class="gf-mt-5">Ingresar al laboratorio</h1>
 
-<SurfaceOutline Components="@Outline" />
+<form class="gf-mt-5">
+    <div class="gf-field">
+        <label for="signin-email">Correo</label>
+        <input class="gf-input" id="signin-email" name="email" type="email" autocomplete="username" />
+    </div>
+    <div class="gf-field">
+        <label for="signin-password">Contraseña</label>
+        <input class="gf-input" id="signin-password" name="password" type="password" autocomplete="current-password" />
+    </div>
 
-<section class="gf-card gf-mt-5">
-    <h2 class="gf-title">Salidas de esta superficie</h2>
-    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
-       Ninguna superficie es un callejón sin salida.</p>
-    <ul class="gf-flat-list gf-mt-3">
-        <li><a href="/registro-de-cuenta"><strong>NAV-04</strong> — «¿No tenés cuenta? Registrarte»</a></li>
-        <li><a href="/credencial-propia/establecer"><strong>NAV-06</strong> — ingreso aceptado con contraseña sin establecer</a></li>
-        <li><a href="/mis-trabajos"><strong>NAV-08</strong> — credencial aceptada, papel alumno</a></li>
-        <li><a href="/entrega-comision"><strong>NAV-09</strong> — credencial aceptada, papel administrador</a></li>
-    </ul>
-</section>
+    <button type="button" class="gf-btn gf-btn--primary gf-btn--full">Ingresar</button>
+</form>
 
-@code {
-    private static readonly KeyValuePair<string, string>[] Outline =
-    [
-        new("CMP-04", "Banda de resultado"),
-        new("CMP-05", "Campo de correo"),
-        new("CMP-08", "Acción primaria"),
-        new("CMP-09", "Sello de versión"),
-        new("CMP-30", "Tarjeta de acceso"),
-        new("CMP-31", "Campo de contraseña"),
-        new("CMP-32", "Enlace a Registro-De-Cuenta"),
-        new("CMP-33", "Nota sobre la contraseña olvidada"),
-    ];
-}
+<p class="gf-caption gf-mt-5">¿No tenés cuenta? <a href="/registro-de-cuenta">Registrarte</a></p>
+
+@* Nota inerte: no es un enlace y no dispara nada. Dice qué hacer y advierte la consecuencia,
+   que es la parte que importa (CMP-33). *@
+<p class="gf-caption">Si olvidaste tu contraseña, pedile al docente que te dé de alta otra vez. Tené en cuenta que eso borra también tus trabajos.</p>

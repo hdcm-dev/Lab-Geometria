@@ -17,33 +17,26 @@
    POR QUÉ NO REDIRIGE TODAVÍA. El guardián necesita saber si hay administrador constituido, y
    eso es una consulta al servicio de datos. La etapa `b` no implementa comportamiento, así que
    deja acá el lugar del guardián, con sus dos destinos alcanzables a mano. Redirigir a uno de
-   los dos por defecto sería inventar la respuesta que el guardián todavía no puede dar. *@
+   los dos por defecto sería inventar la respuesta que el guardián todavía no puede dar.
+
+   QUÉ SE MUESTRA MIENTRAS TANTO — PROPUESTA DE LA ETAPA `b`. Ninguna fuente declara texto para
+   esta dirección, porque en el producto terminado nadie la ve: el guardián resuelve y redirige
+   antes de que haya nada que mirar. Lo que la raíz tiene que hacer hoy es no dejar a nadie
+   parado: se ofrecen las dos puertas, y se las nombra con el TÍTULO DE LA SUPERFICIE A LA QUE
+   LLEVAN —«Configurar el laboratorio» y «Ingresar al laboratorio», los dos `<h1>` de la maqueta
+   aprobada—, con la condición que la línea de base le asigna a cada una escrita en castellano
+   llano. Ni `NAV-01` ni `NAV-03` aparecen en pantalla: viven en este comentario. *@
 
 <PageTitle>Fábrica de Geometría</PageTitle>
 
-<h1>Fábrica de Geometría</h1>
+<StagePlaceholder />
+
+<h1 class="gf-mt-5">Fábrica de Geometría</h1>
 <p class="gf-subtitle">Laboratorio de geometría de Programación 2.</p>
 
-<p class="gf-banner gf-banner--info gf-mt-5" role="status">
-    <strong>Marcador de posición del destino inicial.</strong> Acá corre el guardián de
-    aprovisionamiento (<code>NAV-01</code> y <code>NAV-03</code>). Mientras no exista, los dos
-    destinos posibles están a un clic.
-</p>
-
 <ul class="gf-flat-list gf-mt-5">
-    <li>
-        <a href="/aprovisionamiento-inicial">
-            <strong>NAV-01</strong> — sin administrador constituido: <code>Aprovisionamiento-Inicial</code>
-        </a>
-    </li>
-    <li>
-        <a href="/ingreso">
-            <strong>NAV-03</strong> — con administrador ya constituido: <code>Ingreso</code>
-        </a>
-    </li>
+    <li><a href="/aprovisionamiento-inicial">Configurar el laboratorio</a>
+        <span class="gf-caption"> — la primera vez, para crear la cuenta del docente.</span></li>
+    <li><a href="/ingreso">Ingresar al laboratorio</a>
+        <span class="gf-caption"> — si el laboratorio ya está configurado.</span></li>
 </ul>
-
-<p class="gf-caption gf-mt-7">
-    <a href="/estado">Estado del servicio</a> — andamiaje de la etapa <code>a</code>, fuera de la
-    línea de base visual.
-</p>

@@ -1,58 +1,110 @@
 @page "/trabajos/{WorkId}"
 @layout WorkShell
+@inject NavigationManager Navigation
 
 @* SUP-07 `Vista-De-Trabajo` — CU-07.
    Ruta: `/trabajos/{WorkId}`. Shell: trabajo.
+   Salida: `NAV-23` → `/mis-trabajos` si el papel es alumno, `/entrega-comision` si es administrador.
    Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Vista-De-Trabajo.md`.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Vista-De-Trabajo.html`.
+   Componentes que la maqueta declara acá: CMP-22, CMP-38, CMP-56, CMP-65 a CMP-73.
 
-   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
-   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+   ETAPA `b`: los textos y la disposición son los de la maqueta aprobada, y NO hay
+   comportamiento. Las CUATRO PARTES —datos, texto, escena y árbol— están con sus rótulos y sin
+   valores, porque los valores son el trabajo y esta etapa no consulta al servicio de datos. La
+   escena no dibuja: el visor tridimensional llega con la etapa que lo trae. El aviso de
+   indisponibilidad y las bandas de error no se dibujan.
+
+   EL `<h1>` DE LA MAQUETA ES EL NOMBRE DEL TRABAJO, que es un dato. Sin dato queda el nombre
+   canónico de la superficie, que es también su `<title>`. Es lo único de esta pantalla que
+   ninguna fuente declara. *@
 
 <PageTitle>Vista de trabajo</PageTitle>
 
-<div class="gf-page-header">
-    <div>
+<StagePlaceholder />
+
+@* Vuelve al listado de donde vino la persona: el propio si es el alumno, el de la comisión si
+   es el administrador. La etapa `b` no tiene sesión, así que el papel sale de la dirección. *@
+<a class="gf-btn gf-btn--pill gf-mt-5 gf-mb-4" href="@BackHref"><Icon Name="Back" />@BackLabel</a>
+
+<header class="gf-mb-5">
+    <div class="gf-flex-row gf-flex-row--wrap">
         <h1>Vista de trabajo</h1>
-    <p class="gf-subtitle">Los cuatro elementos del trabajo: datos, texto, escena y árbol.</p>
+    </div>
+</header>
+
+@* SUP-08 se aloja ACÁ y no tiene ruta propia. `Linea-Base-Visual.md` §2: «Un sistema construido
+   que le dé ruta propia es deriva mayor».
+
+   SE DIBUJA SÓLO PARA EL ADMINISTRADOR, como manda el wireframe. La otra condición del producto
+   —que el trabajo esté en estado `Pendiente`— es un dato, y esta etapa no lo tiene. Dibujarlo
+   también para el alumno dueño, como hacía el marcador de posición anterior, le ofrecía a un
+   alumno decidir sobre su propio trabajo: eso es una superficie que miente. *@
+@if (IsAdministrator)
+{
+    <WorkResolution />
+}
+
+<div class="gf-two-columns">
+    @* Columna izquierda: datos → comentario → observaciones → texto original. El comentario es
+       lo primero que el alumno busca cuando su trabajo ya tiene desenlace, y el texto original
+       va último y colapsado porque es material de consulta y no de lectura. El bloque de
+       comentario (CMP-68) no se dibuja si no viene poblado, y acá nunca viene. *@
+    <div class="gf-column gf-column--data">
+        <section class="gf-card" aria-labelledby="work-data-heading">
+            <h2 id="work-data-heading" class="gf-meta">Datos del trabajo</h2>
+            <dl class="gf-key-value gf-mt-3">
+                <dt>Nombre</dt><dd></dd>
+                <dt>Fecha del trabajo</dt><dd></dd>
+                <dt>Estado</dt><dd></dd>
+                <dt>Alumno</dt><dd></dd>
+                <dt>Descripción</dt><dd></dd>
+            </dl>
+        </section>
+
+        <section class="gf-card" aria-labelledby="work-findings-heading">
+            <h2 id="work-findings-heading" class="gf-meta">Observaciones</h2>
+            <ul class="gf-findings gf-mt-3">
+                <li class="gf-caption">Sin observaciones.</li>
+            </ul>
+        </section>
+
+        <section class="gf-card" aria-labelledby="work-text-heading">
+            <h2 id="work-text-heading" class="gf-sr-only">Texto original del trabajo</h2>
+            <details class="gf-disclosure">
+                <summary>Texto original</summary>
+                <pre class="gf-original-text"></pre>
+            </details>
+        </section>
+    </div>
+
+    @* Columna derecha: área de dibujo arriba, árbol abajo. *@
+    <div class="gf-column gf-column--scene">
+        <section aria-labelledby="work-scene-heading">
+            <h2 id="work-scene-heading" class="gf-meta">Escena</h2>
+            <div class="gf-scene gf-mt-2">
+                <span class="gf-scene-label">Área de dibujo</span>
+                <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
+            </div>
+        </section>
+
+        <section aria-labelledby="work-tree-heading">
+            <h2 id="work-tree-heading" class="gf-meta">Árbol de la estructura</h2>
+            <div class="gf-card gf-scroll-box gf-mt-2"></div>
+            <p class="gf-caption gf-mt-2">Elegí un nodo de pieza y la escena resalta esa pieza y sólo esa. Elegí una pieza de la escena y el nodo queda marcado, por el mismo índice.</p>
+        </section>
     </div>
 </div>
 
-<StagePlaceholder SurfaceId="SUP-07" SurfaceName="Vista-De-Trabajo" UseCase="CU-07" />
-
-@* SUP-08 se aloja ACÁ y no tiene ruta propia. `Linea-Base-Visual.md` §2: «Un sistema construido
-   que le dé ruta propia es deriva mayor». *@
-<WorkResolution />
-
-<SurfaceOutline Components="@Outline" />
-
-<section class="gf-card gf-mt-5">
-    <h2 class="gf-title">Salidas de esta superficie</h2>
-    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
-       Ninguna superficie es un callejón sin salida.</p>
-    <ul class="gf-flat-list gf-mt-3">
-        <li><a href="/mis-trabajos"><strong>NAV-23</strong> — «Volver al listado», papel alumno</a></li>
-        <li><a href="/entrega-comision"><strong>NAV-23</strong> — «Volver al listado», papel administrador</a></li>
-    </ul>
-</section>
-
 @code {
-    private static readonly KeyValuePair<string, string>[] Outline =
-    [
-        new("CMP-22", "Lista de piezas no dibujadas"),
-        new("CMP-38", "Insignia de estado"),
-        new("CMP-56", "Bloque de decisión"),
-        new("CMP-65", "Barra de regreso"),
-        new("CMP-66", "Cabecera del trabajo"),
-        new("CMP-67", "Bloque de datos"),
-        new("CMP-68", "Bloque de comentario"),
-        new("CMP-69", "Lista de observaciones"),
-        new("CMP-70", "Bloque de texto original"),
-        new("CMP-71", "Bloque de la escena"),
-        new("CMP-72", "Controles de movimiento automático"),
-        new("CMP-73", "Árbol de la estructura"),
-    ];
-
     /// Identificador del trabajo que se mira. La etapa `b` no lo resuelve contra nada.
     [Parameter] public string? WorkId { get; set; }
+
+    private bool IsAdministrator =>
+        Navigation.ToAbsoluteUri(Navigation.Uri).Query.Contains("papel=administrador", StringComparison.Ordinal);
+
+    private string BackHref => IsAdministrator ? "/entrega-comision" : "/mis-trabajos";
+
+    /// Rótulo de regreso, tal como lo arma la maqueta: nombra el listado al que se vuelve.
+    private string BackLabel => IsAdministrator ? "Volver a la entrega de la comisión" : "Volver a mis trabajos";
 }

@@ -1,18 +1,19 @@
-@* Rótulo de marcador de posición de la etapa `b`.
+@* Aviso de pantalla en construcción.
 
-   Existe para que ninguna superficie mienta: la etapa `b` construye la ruta, el armazón, los
-   títulos y el sistema visual, y NO construye comportamiento. Sin este rótulo, una pantalla
-   con el sistema visual puesto se lee como una pantalla terminada. *@
+   UNO SOLO POR PANTALLA, y arriba de todo. Existe para que ninguna superficie mienta: la etapa
+   `b` construye la ruta, el armazón, los textos y el sistema visual, y NO construye
+   comportamiento.
+
+   TEXTO PROPUESTO POR LA ETAPA `b`. Ninguna fuente de producto lo declara —la maqueta y los
+   wireframes describen el producto terminado, no su obra—, así que se escribe acá y se marca
+   como propuesta. Está redactado para el alumno que entra a la dirección pública: dice qué le
+   pasa a lo que haga, y nada más.
+
+   LO QUE ESTE AVISO YA NO DICE. No nombra `SUP-XX`, ni `CU-XX`, ni `NAV-XX`, ni enumera
+   componentes: eso es documentación de obra y su lugar es el comentario de cabecera de cada
+   superficie, donde sigue estando entero. *@
 
 <p class="gf-banner gf-banner--info" role="status">
-    <strong>Marcador de posición.</strong> Esta superficie es <code>@SurfaceId</code>
-    (<code>@SurfaceName</code>), del caso de uso <code>@UseCase</code>. La etapa <code>b</code>
-    construye su ruta, su armazón y su sistema visual; su comportamiento lo construye una etapa
-    posterior. Nada de lo que ves acá consulta al servicio de datos.
+    <strong>Pantalla en construcción.</strong> Todavía no funciona: podés mirarla y recorrerla,
+    pero nada de lo que escribas acá se guarda.
 </p>
-
-@code {
-    [Parameter, EditorRequired] public string SurfaceId { get; set; } = string.Empty;
-    [Parameter, EditorRequired] public string SurfaceName { get; set; } = string.Empty;
-    [Parameter, EditorRequired] public string UseCase { get; set; } = string.Empty;
-}

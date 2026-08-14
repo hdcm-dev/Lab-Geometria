@@ -3,46 +3,62 @@
 
 @* SUP-05 `Panel-De-Trabajos-Del-Alumno` — CU-06.
    Ruta: `/mis-trabajos`. Shell: trabajo.
+   Salidas: `NAV-11` → `/trabajo-nuevo`; `NAV-16` → `/trabajos/{id}`; `NAV-17` → `/trabajos/{id}/editar`.
    Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Panel-De-Trabajos-Del-Alumno.md`.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Panel-De-Trabajos-Del-Alumno.html`.
+   Componentes que la maqueta declara acá: CMP-08, CMP-25, CMP-29, CMP-34, CMP-35, CMP-37, CMP-38, CMP-51.
 
-   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
-   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. La tabla se
+   dibuja con sus rótulos y SIN FILAS, porque las filas son datos y esta etapa no consulta al
+   servicio de datos. Tampoco se dibujan el estado vacío (CMP-29) ni el de filtro sin
+   resultados: los dos AFIRMAN algo sobre la colección —«todavía no cargaste ningún trabajo»— y
+   afirmarlo sin haber preguntado sería mentir. El diálogo de eliminación (CMP-51) y el aviso de
+   indisponibilidad (CMP-25) tampoco: los dispara estado que esta etapa no tiene. *@
 
 <PageTitle>Mis trabajos</PageTitle>
 
-<div class="gf-page-header">
+<StagePlaceholder />
+
+<div class="gf-page-header gf-mt-5">
     <div>
         <h1>Mis trabajos</h1>
-    <p class="gf-subtitle">Todo lo que cargaste, con el estado en que está.</p>
+        <p class="gf-subtitle">Todo lo que cargaste, con el estado en que está.</p>
+    </div>
+    @* Acción primaria presente en todos los estados, incluido el vacío. *@
+    <a class="gf-btn gf-btn--primary" href="/trabajo-nuevo"><Icon Name="New" />Trabajo nuevo</a>
+</div>
+
+@* Barra de filtros: filtra sobre lo ya recibido, no consulta al servicio de datos. *@
+<div class="gf-filters">
+    <div class="gf-field gf-field-search">
+        <label for="works-search">Buscar por nombre</label>
+        <input class="gf-input" id="works-search" type="search" placeholder="nombre del trabajo" />
+    </div>
+    <div class="gf-field">
+        <label for="works-state">Estado</label>
+        <select class="gf-select" id="works-state">
+            <option>todos</option>
+            <option>Borrador</option>
+            <option>Pendiente</option>
+            <option>Finalizado</option>
+            <option>Rechazado</option>
+        </select>
     </div>
 </div>
 
-<StagePlaceholder SurfaceId="SUP-05" SurfaceName="Panel-De-Trabajos-Del-Alumno" UseCase="CU-06" />
-
-<SurfaceOutline Components="@Outline" />
-
-<section class="gf-card gf-mt-5">
-    <h2 class="gf-title">Salidas de esta superficie</h2>
-    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
-       Ninguna superficie es un callejón sin salida.</p>
-    <ul class="gf-flat-list gf-mt-3">
-        <li><a href="/trabajo-nuevo"><strong>NAV-11</strong> — «Trabajo nuevo»</a></li>
-        <li><a href="/trabajos/marcador?origen=mis-trabajos"><strong>NAV-16</strong> — «Abrir» sobre una fila</a></li>
-        <li><a href="/trabajos/marcador/editar"><strong>NAV-17</strong> — «Editar» sobre una fila en estado Borrador</a></li>
-    </ul>
-</section>
-
-@code {
-    private static readonly KeyValuePair<string, string>[] Outline =
-    [
-        new("CMP-08", "Acción primaria"),
-        new("CMP-25", "Aviso de indisponibilidad"),
-        new("CMP-29", "Estado vacío"),
-        new("CMP-34", "Encabezado de la superficie"),
-        new("CMP-35", "Barra de filtros"),
-        new("CMP-37", "Fila de trabajo"),
-        new("CMP-38", "Insignia de estado"),
-        new("CMP-51", "Diálogo de confirmación de eliminación"),
-    ];
-}
+<div class="gf-table-wrapper">
+    <table class="gf-table">
+        <caption class="gf-sr-only">Mis trabajos, con su estado y las acciones que ese estado admite</caption>
+        <thead>
+            <tr>
+                <th scope="col">Trabajo</th>
+                <th scope="col">Fecha del trabajo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Piezas</th>
+                <th scope="col">Advertencias</th>
+                <th scope="col" class="gf-td-actions">Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

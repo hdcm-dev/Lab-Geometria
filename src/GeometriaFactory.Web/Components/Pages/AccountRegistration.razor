@@ -2,42 +2,44 @@
 @layout AccessShell
 
 @* SUP-02 `Registro-De-Cuenta` — CU-01.
-   Ruta: `/registro-de-cuenta`. Shell: acceso.
+   Ruta: `/registro-de-cuenta`. Shell: acceso. Salida: `NAV-05` → `/ingreso`.
    Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Registro-De-Cuenta.md`.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Registro-De-Cuenta.html`.
+   Componentes que la maqueta declara acá: CMP-04, CMP-05, CMP-08, CMP-09, CMP-30, CMP-52 a CMP-55.
 
-   MARCADOR DE POSICIÓN DE LA ETAPA `b`: estructura, título, navegación y sistema visual.
-   Sin lógica de negocio, sin llamadas al servicio de datos y sin formularios que hagan nada. *@
+   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
+   no valida, no envía y no consulta al servicio de datos. El bloque de éxito (CMP-55), las
+   bandas de error y el aviso de indisponibilidad no se dibujan: los dispara estado que esta
+   etapa no tiene. *@
 
 <PageTitle>Registro de cuenta</PageTitle>
 
-<h1>Registrarte en el laboratorio</h1>
-    <p class="gf-subtitle">Tu cuenta queda a la espera de que el docente la habilite. El laboratorio no envía correos.</p>
+<StagePlaceholder />
 
-<StagePlaceholder SurfaceId="SUP-02" SurfaceName="Registro-De-Cuenta" UseCase="CU-01" />
+<h1 class="gf-mt-5">Registrarte en el laboratorio</h1>
+@* Subtítulo de expectativa: declara ANTES del intento que la cuenta queda a la espera y que el
+   laboratorio no envía correos. *@
+<p class="gf-subtitle">Tu cuenta queda a la espera de que el docente la habilite. El laboratorio no envía correos.</p>
 
-<SurfaceOutline Components="@Outline" />
+@* Tres campos y ningún campo de contraseña. La ausencia es la característica principal de la
+   superficie, no un olvido. *@
+<form>
+    <div class="gf-field">
+        <label for="registration-email">Correo</label>
+        <input class="gf-input" id="registration-email" name="email" type="email" autocomplete="email" />
+    </div>
+    <div class="gf-field">
+        <label for="registration-first-name">Nombre</label>
+        <input class="gf-input" id="registration-first-name" name="firstName" type="text" autocomplete="given-name" />
+    </div>
+    <div class="gf-field">
+        <label for="registration-last-name">Apellido</label>
+        <input class="gf-input" id="registration-last-name" name="lastName" type="text" autocomplete="family-name" />
+    </div>
 
-<section class="gf-card gf-mt-5">
-    <h2 class="gf-title">Salidas de esta superficie</h2>
-    <p class="gf-caption gf-mt-2">Las rutas de <code>Linea-Base-Visual.md</code> §5 que nacen acá.
-       Ninguna superficie es un callejón sin salida.</p>
-    <ul class="gf-flat-list gf-mt-3">
-        <li><a href="/ingreso"><strong>NAV-05</strong> — éxito del registro, o «¿Ya tenés cuenta? Ingresar»</a></li>
-    </ul>
-</section>
+    <button type="button" class="gf-btn gf-btn--primary gf-btn--full">Registrarme</button>
+</form>
 
-@code {
-    private static readonly KeyValuePair<string, string>[] Outline =
-    [
-        new("CMP-04", "Banda de resultado"),
-        new("CMP-05", "Campo de correo"),
-        new("CMP-08", "Acción primaria"),
-        new("CMP-09", "Sello de versión"),
-        new("CMP-30", "Tarjeta de acceso"),
-        new("CMP-52", "Subtítulo de expectativa"),
-        new("CMP-53", "Campos de nombre y apellido"),
-        new("CMP-54", "Enlace a Ingreso"),
-        new("CMP-55", "Bloque de éxito"),
-    ];
-}
+@* Única salida de la superficie. No hay enlace de recuperación: no existe recuperación en este
+   producto. *@
+<p class="gf-caption gf-mt-5">¿Ya tenés cuenta? <a href="/ingreso">Ingresar</a></p>
