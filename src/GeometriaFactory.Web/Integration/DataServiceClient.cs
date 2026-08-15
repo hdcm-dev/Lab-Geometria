@@ -41,6 +41,14 @@ public sealed class DataServiceClient
     private const string OwnPasswordPath = "cuenta/contrasena";
 
     /// <summary>
+    /// Ruta del alta de cuenta `A-02` y raíz del listado `A-06`, del cambio de situación `A-07`,
+    /// de la baja `A-08` y del reseteo `A-09`. Es la misma constante que
+    /// `GeometriaFactory.Api.Endpoints.CommissionAccountEndpoints.AccountsRoute`, sin la barra
+    /// inicial porque acá la dirección base la pone la configuración. [derivado]
+    /// </summary>
+    private const string AccountsPath = "cuentas";
+
+    /// <summary>
     /// Texto del estado degradado, tomado literal de la maqueta aprobada.
     /// </summary>
     private const string ServiceUnavailableMessage =
@@ -109,17 +117,119 @@ public sealed class DataServiceClient
             : DataServiceOutcome<bool>.Failed(outcome.Error!);
     }
 
-    private async Task<DataServiceOutcome<TResponse>> PostAsync<TRequest, TResponse>(
+    /// <summary>`A-02` — Registra la cuenta de un alumno, con tres campos y SIN contraseña.</summary>
+    /// <remarks>
+    /// NO LLEVA CREDENCIAL, y es el registro de cuenta que `Api CU-03` declara anónimo por
+    /// diseño: es la puerta por la que el alumno entra al laboratorio. La cuenta nace `Pending`
+    /// y todavía no obtiene acceso (RN-06).
+    /// </remarks>
+    public Task<DataServiceOutcome<AccountRegistrationResponse>> RegisterAccountAsync(
+        AccountRegistrationRequest request,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<AccountRegistrationRequest, AccountRegistrationResponse>(
+            HttpMethod.Post, AccountsPath, request, accessToken: null, cancellationToken);
+
+    /// <summary>`A-06` — Trae el listado de cuentas de la comisión.</summary>
+    /// <remarks>
+    /// UN LISTADO VACÍO NO ES UN FALLO: el punto responde `200` con una colección vacía, y quien
+    /// llama distingue vacío de fallo por <see cref="DataServiceOutcome{TValue}.Succeeded"/> y no
+    /// por el conteo. La credencial se adjunta ACÁ, del lado del servidor.
+    /// </remarks>
+    public Task<DataServiceOutcome<AccountListItem[]>> ListAccountsAsync(
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<object, AccountListItem[]>(
+            HttpMethod.Get, AccountsPath, request: null, accessToken, cancellationToken);
+
+    /// <summary>`A-07` — Habilita, rehabilita o bloquea una cuenta.</summary>
+    /// <remarks>
+    /// LA PROVISORIA VIENE EN LA RESPUESTA Y NO SE ESCRIBE ACÁ (RN-14, RN-16). Este método no
+    /// tiene ningún parámetro de contraseña y no podría tenerlo: el panel no lleva campo de
+    /// contraseña, y el valor lo produce el servicio.
+    /// </remarks>
+    public Task<DataServiceOutcome<AccountStatusChangeResponse>> ChangeAccountStatusAsync(
+        Guid accountId,
+        string intendedStatus,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<AccountStatusChangeRequest, AccountStatusChangeResponse>(
+            HttpMethod.Post,
+            $"{AccountsPath}/{accountId}/situacion",
+            new AccountStatusChangeRequest(accountId, intendedStatus),
+            accessToken,
+            cancellationToken);
+
+    /// <summary>`A-08` — Da de baja una cuenta con su confirmación escrita.</summary>
+    /// <remarks>
+    /// EL CORREO ESCRITO VIAJA EN EL CUERPO Y NO EN LA DIRECCIÓN, que es lo que el contrato
+    /// declara: en la ruta o en la cadena de consulta quedaría escrito en el registro de acceso
+    /// de cualquier intermediario. La pantalla **no es la última defensa**: el servicio compara y
+    /// rechaza con `CONFIRMATION_MISMATCH` cuando no coincide.
+    /// </remarks>
+    public async Task<DataServiceOutcome<bool>> DeleteAccountAsync(
+        Guid accountId,
+        string confirmationEmail,
+        string? accessToken,
+        CancellationToken cancellationToken = default)
+    {
+        var outcome = await SendAsync<AccountDeletionRequest, object>(
+            HttpMethod.Delete,
+            $"{AccountsPath}/{accountId}",
+            new AccountDeletionRequest(accountId, confirmationEmail),
+            accessToken,
+            cancellationToken).ConfigureAwait(false);
+
+        return outcome.Succeeded
+            ? DataServiceOutcome<bool>.Resolved(true)
+            : DataServiceOutcome<bool>.Failed(outcome.Error!);
+    }
+
+    /// <summary>`A-09` — Resetea la contraseña de una cuenta de alumno.</summary>
+    /// <remarks>
+    /// TAMPOCO ACÁ HAY PARÁMETRO DE CONTRASEÑA. La provisoria llega en la respuesta, se muestra
+    /// una vez y no se guarda en ninguna parte de esta pieza.
+    /// </remarks>
+    public Task<DataServiceOutcome<PasswordResetResponse>> ResetAccountPasswordAsync(
+        Guid accountId,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<PasswordResetRequest, PasswordResetResponse>(
+            HttpMethod.Post,
+            $"{AccountsPath}/{accountId}/reseteo-de-contrasena",
+            new PasswordResetRequest(accountId),
+            accessToken,
+            cancellationToken);
+
+    private Task<DataServiceOutcome<TResponse>> PostAsync<TRequest, TResponse>(
         string path,
         TRequest request,
+        string? accessToken,
+        CancellationToken cancellationToken) =>
+        SendAsync<TRequest, TResponse>(HttpMethod.Post, path, request, accessToken, cancellationToken);
+
+    /// <summary>
+    /// El ÚNICO lugar por donde sale una solicitud hacia el servicio de datos, cualquiera sea su
+    /// verbo.
+    /// </summary>
+    /// <remarks>
+    /// LOS CUATRO VERBOS PASAN POR ACÁ, y es lo que hace que RA-03 se cumpla sin depender de que
+    /// cada método se acuerde: el manejo de la excepción de transporte, la lectura del error del
+    /// contrato y el reemplazo del texto que lleva la dirección del servicio están escritos una
+    /// sola vez. Un cuerpo nulo no se envía —es el caso del `GET`— y un `DELETE` **sí** lo lleva,
+    /// porque el correo escrito como confirmación tiene que viajar en el cuerpo.
+    /// </remarks>
+    private async Task<DataServiceOutcome<TResponse>> SendAsync<TRequest, TResponse>(
+        HttpMethod method,
+        string path,
+        TRequest? request,
         string? accessToken,
         CancellationToken cancellationToken)
     {
         try
         {
-            using var message = new HttpRequestMessage(HttpMethod.Post, path)
+            using var message = new HttpRequestMessage(method, path)
             {
-                Content = JsonContent.Create(request),
+                Content = request is null ? null : JsonContent.Create(request),
             };
 
             if (!string.IsNullOrEmpty(accessToken))
@@ -133,7 +243,8 @@ public sealed class DataServiceClient
 
             if (response.IsSuccessStatusCode)
             {
-                // `A-05` responde `200` sin cuerpo: no hay nada que leer y no es un fallo.
+                // `A-05` responde `200` sin cuerpo y `A-08` responde `204`: no hay nada que leer
+                // y no es un fallo. Los dos se piden con `object` como tipo de respuesta.
                 if (typeof(TResponse) == typeof(object))
                 {
                     return DataServiceOutcome<TResponse>.Resolved(default!);

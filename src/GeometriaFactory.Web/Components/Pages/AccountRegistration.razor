@@ -1,6 +1,6 @@
 @page "/registro-de-cuenta"
 @layout AccessShell
-@rendermode InteractiveServer
+@inject DataServiceClient DataService
 
 @* SUP-02 `Registro-De-Cuenta` — CU-01.
    Ruta: `/registro-de-cuenta`. Shell: acceso. Salida: `NAV-05` → `/ingreso`.
@@ -8,39 +8,184 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Registro-De-Cuenta.html`.
    Componentes que la maqueta declara acá: CMP-04, CMP-05, CMP-08, CMP-09, CMP-30, CMP-52 a CMP-55.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
-   no valida, no envía y no consulta al servicio de datos. El bloque de éxito (CMP-55), las
-   bandas de error y el aviso de indisponibilidad no se dibujan: los dispara estado que esta
-   etapa no tiene. *@
+   ETAPA `d`: la pantalla PASA A FUNCIONAR. Tres campos y NINGÚN campo de contraseña —la ausencia
+   es la característica principal de la superficie y es criterio de aceptación por recuento—, el
+   alta sale desde el servidor de la pieza pública y la cuenta queda `Pendiente`.
+
+   POR QUÉ ESTA SUPERFICIE NO ES INTERACTIVA, Y ES UN APARTAMIENTO DECLARADO. La etapa `b` la
+   dibujó con `@@rendermode InteractiveServer`, que es lo que hacían las once pantallas de
+   marcador de posición. Al construirle el comportamiento pasa a render estático de servidor con
+   un POST de verdad, con el mismo patrón que `SignIn` y `OwnCredentialForcedChange`. Los motivos,
+   escritos para que se puedan discutir:
+
+     · El recorrido entero queda verificable **sobre HTTP de verdad**, que es lo que la etapa `d`
+       tiene que demostrar y lo que `ForcedPasswordChangeSurfaceTests` declara en su cabecera
+       después de que una batería de componente en memoria dejara pasar un defecto que vivía
+       exactamente en el cruce de una petición.
+     · La pieza pública **no tiene ni un guion propio** —`verify-stage-c.sh` C-4 lo mide con
+       umbral 0—, de modo que el circuito interactivo no le compraba nada a esta superficie: no
+       hay validación al tipear, y el wireframe §4 la prohíbe expresamente para el correo.
+     · El envío es una petición y no un mensaje por el circuito, con lo cual la
+       antifalsificación del producto sigue puesta y el estado de la pantalla se dibuja
+       RESPONDIENDO al POST, sin redirigir ni acarrear el motivo por la dirección.
+
+   **APARTAMIENTO A CONFIRMAR POR EL PRODUCT OWNER.** Los estados «Cargando» y «Enviando» del
+   wireframe §5 —esqueleto de tres campos, y acción inhabilitada con indicador— NO se dibujan:
+   los dos describen una pantalla que se arma o espera en el navegador, y bajo render estático la
+   respuesta llega armada. La prevención del doble envío, que es lo que el estado «Enviando»
+   protege, la hace el servicio: el segundo intento con el mismo correo responde
+   `EMAIL_ALREADY_REGISTERED` y la superficie lo dibuja.
+
+   RA-01: el alta la hace el servidor de esta pieza, por `DataServiceClient`. Cero peticiones
+   originadas por el navegador hacia el servicio de datos.
+   RA-03: el aviso de indisponibilidad es el texto de la maqueta y no nombra ninguna dirección
+   interna; lo que la excepción de transporte traía se reemplaza dentro del cliente. *@
 
 <PageTitle>Registro de cuenta</PageTitle>
 
-<StagePlaceholder />
-
-<h1 class="gf-mt-5">Registrarte en el laboratorio</h1>
-@* Subtítulo de expectativa: declara ANTES del intento que la cuenta queda a la espera y que el
-   laboratorio no envía correos. *@
-<p class="gf-subtitle">Tu cuenta queda a la espera de que el docente la habilite. El laboratorio no envía correos.</p>
-
-@* Tres campos y ningún campo de contraseña. La ausencia es la característica principal de la
-   superficie, no un olvido. *@
-<form>
-    <div class="gf-field">
-        <label for="registration-email">Correo</label>
-        <input class="gf-input" id="registration-email" name="email" type="email" autocomplete="email" />
+@if (_state is Outcome.Registered)
+{
+    @* Bloque de éxito (CMP-55): REEMPLAZA el formulario y cierra el lazo. Textos literales de la
+       maqueta aprobada, `Registro-De-Cuenta.html`, `data-mq-estado="exito"`. *@
+    <div role="status">
+        <span class="gf-icon-holder gf-icon-holder--success" aria-hidden="true">
+            <Icon Name="Approve" SizeClass="gf-icon--20" />
+        </span>
+        <h1 class="gf-mt-3">Tu cuenta quedó registrada</h1>
+        <p class="gf-subtitle">
+            Todavía no podés ingresar: el docente tiene que habilitarla. No vas a recibir ningún correo.
+        </p>
+        <a class="gf-btn gf-btn--primary gf-btn--full" href="/ingreso?estado=confirmacion-registro">Ir a ingresar</a>
     </div>
-    <div class="gf-field">
-        <label for="registration-first-name">Nombre</label>
-        <input class="gf-input" id="registration-first-name" name="firstName" type="text" autocomplete="given-name" />
-    </div>
-    <div class="gf-field">
-        <label for="registration-last-name">Apellido</label>
-        <input class="gf-input" id="registration-last-name" name="lastName" type="text" autocomplete="family-name" />
-    </div>
+}
+else
+{
+    <h1 class="gf-mt-5">Registrarte en el laboratorio</h1>
+    @* Subtítulo de expectativa (CMP-52): declara ANTES del intento que la cuenta queda a la
+       espera y que el laboratorio no envía correos. No se colapsa ni se recorta en ningún ancho. *@
+    <p class="gf-subtitle">Tu cuenta queda a la espera de que el docente la habilite. El laboratorio no envía correos.</p>
 
-    <button type="button" class="gf-btn gf-btn--primary gf-btn--full">Registrarme</button>
-</form>
+    @if (_state is Outcome.MissingFields)
+    {
+        <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+            Faltan datos. Completá el correo, el nombre y el apellido.
+            No salió ninguna solicitud hacia el servicio de datos.
+        </p>
+    }
+    else if (_state is Outcome.EmailAlreadyRegistered)
+    {
+        @* No revela NINGÚN dato de la cuenta existente: dice que el correo está tomado y nada más. *@
+        <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+            Ese correo ya pertenece a una cuenta del laboratorio. Usá otro, o entrá con el que ya tenés.
+        </p>
+    }
+    else if (_state is Outcome.Rejected)
+    {
+        <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+            La solicitud llegó incompleta. Revisá el campo señalado y volvé a intentar.
+        </p>
+    }
 
-@* Única salida de la superficie. No hay enlace de recuperación: no existe recuperación en este
-   producto. *@
-<p class="gf-caption gf-mt-5">¿Ya tenés cuenta? <a href="/ingreso">Ingresar</a></p>
+    @if (_state is Outcome.Unavailable)
+    {
+        <div class="gf-unavailable-notice gf-margin-block-5" role="alert">
+            <h2>No pudimos registrar tu cuenta</h2>
+            <p>
+                El laboratorio está en pie, pero no está pudiendo llegar a tus datos.
+                Lo que escribiste sigue acá: probá de nuevo.
+            </p>
+        </div>
+    }
+
+    @* TRES CAMPOS Y NINGÚN CAMPO DE CONTRASEÑA. El contrato del alta tampoco lo declara: no hay
+       campo de contraseña que pudiera faltar. *@
+    <form class="gf-mt-5" method="post" @formname="account-registration" @onsubmit="SubmitAsync">
+        <AntiforgeryToken />
+        <div class="gf-field @(_state is Outcome.EmailAlreadyRegistered ? "gf-field--error" : null)">
+            <label for="registration-email">Correo</label>
+            <input class="gf-input" id="registration-email" name="Input.Email" type="email"
+                   autocomplete="email" aria-describedby="registration-email-error" value="@Form.Email" />
+            @if (_state is Outcome.EmailAlreadyRegistered)
+            {
+                <span class="gf-requirement" id="registration-email-error">Ese correo ya está registrado.</span>
+            }
+        </div>
+        <div class="gf-field">
+            <label for="registration-first-name">Nombre</label>
+            <input class="gf-input" id="registration-first-name" name="Input.FirstName" type="text"
+                   autocomplete="given-name" value="@Form.FirstName" />
+        </div>
+        <div class="gf-field">
+            <label for="registration-last-name">Apellido</label>
+            <input class="gf-input" id="registration-last-name" name="Input.LastName" type="text"
+                   autocomplete="family-name" value="@Form.LastName" />
+        </div>
+
+        <button type="submit" class="gf-btn gf-btn--primary gf-btn--full">Registrarme</button>
+    </form>
+
+    @* Única salida de la superficie (CMP-54). No hay enlace de recuperación: no existe
+       recuperación autónoma en este producto, y el reseteo tampoco se pide desde acá. *@
+    <p class="gf-caption gf-mt-5">¿Ya tenés cuenta? <a href="/ingreso">Ingresar</a></p>
+}
+
+@code {
+    private enum Outcome { None, MissingFields, EmailAlreadyRegistered, Rejected, Registered, Unavailable }
+
+    /// <summary>Los tres campos de la tarjeta, tal como el envío los trae de vuelta.</summary>
+    /// <remarks>
+    /// LO ESCRITO VUELVE ESCRITO, y es lo que el wireframe §4 pide: tras un error el formulario
+    /// conserva lo ya escrito y no obliga a reteclear. **No hay ningún campo de contraseña que
+    /// pudiera volver**, porque no hay ninguno que se escriba.
+    /// </remarks>
+    public sealed class RegistrationForm
+    {
+        public string Email { get; set; } = string.Empty;
+
+        public string FirstName { get; set; } = string.Empty;
+
+        public string LastName { get; set; } = string.Empty;
+    }
+
+    /// El envío completa este modelo; el pedido de la página lo deja nulo, y por eso el marcado
+    /// lo lee por <see cref="Form"/> y no directo.
+    [SupplyParameterFromForm]
+    private RegistrationForm? Input { get; set; }
+
+    private RegistrationForm Form => Input ??= new RegistrationForm();
+
+    private Outcome _state = Outcome.None;
+
+    private async Task SubmitAsync()
+    {
+        // La verificación de los tres campos ocurre ACÁ y NO SALE NINGUNA SOLICITUD hacia el
+        // servicio de datos cuando falta alguno: es lo que el estado «Requisito no cumplido»
+        // del wireframe §5 declara, y lo que el texto de la banda afirma.
+        if (string.IsNullOrWhiteSpace(Form.Email)
+            || string.IsNullOrWhiteSpace(Form.FirstName)
+            || string.IsNullOrWhiteSpace(Form.LastName))
+        {
+            _state = Outcome.MissingFields;
+            return;
+        }
+
+        var outcome = await DataService.RegisterAccountAsync(
+            new AccountRegistrationRequest(Form.Email, Form.FirstName, Form.LastName));
+
+        if (outcome.Succeeded)
+        {
+            // La cuenta nace `Pending` y la respuesta lo declara. El bloque de éxito dice
+            // exactamente eso: quedó registrada y todavía no puede entrar.
+            _state = Outcome.Registered;
+            return;
+        }
+
+        _state = outcome.Error!.Code switch
+        {
+            ErrorCode.EmailAlreadyRegistered => Outcome.EmailAlreadyRegistered,
+            ErrorCode.ServiceUnavailable => Outcome.Unavailable,
+            ErrorCode.RequiredFieldMissing => Outcome.MissingFields,
+            _ => Outcome.Rejected,
+        };
+    }
+}

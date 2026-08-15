@@ -19,6 +19,16 @@
 # ninguna salvedad. `scripts/verify-navigation.sh` corre en desarrollo y con la
 # puerta de servicio puesta, y por eso allá las mismas rutas responden 200.
 #
+# LAS DOS PIEZAS SE CORREN EN `Release`, Y NO ES UN DETALLE. Este guion construye la
+# solución con `dotnet build -c Release` y hasta la etapa `d` la levantaba con
+# `dotnet run --no-build` **sin decir la configuración**, con lo cual `dotnet run`
+# resolvía la salida de `Debug`: el guion construía una cosa y verificaba otra, y
+# lo que verificaba podía ser un binario viejo de cualquier antigüedad. El defecto
+# no se notó mientras los cuatro criterios de la etapa `c` existieron en las dos
+# salidas; se hizo visible al agregarse los puntos de la etapa `d`, que en `Debug`
+# no estaban y respondían `404`. Se corrige agregando `-c Release` a los dos
+# `dotnet run`, de modo que lo que se levanta sea exactamente lo que se construyó.
+#
 # LA CLAVE DE FIRMA SE RECIBE Y NO SE BUSCA. Este guion la toma de
 # `ACCESS_TOKEN_SIGNING_KEY` y, si no llega, usa una de prueba y lo dice. En
 # ningún caso hay una clave escrita en el repositorio para producción.
@@ -49,7 +59,7 @@ start_api() {
   ASPNETCORE_ENVIRONMENT=Production \
   ConnectionStrings__Store="Data Source=$STORE" \
   AccessToken__SigningKey="$KEY" \
-  dotnet run --project src/GeometriaFactory.Api/GeometriaFactory.Api.csproj --no-build \
+  dotnet run --project src/GeometriaFactory.Api/GeometriaFactory.Api.csproj -c Release --no-build \
     --urls "$API" > /tmp/api.log 2>&1 &
   API_PID=$!
   for _ in $(seq 1 90); do curl -s -o /dev/null "$API/salud" && return 0; sleep 1; done
@@ -117,7 +127,7 @@ same "$(code_of POST /cuentas/administrador "$OTRO")" 409 "tras el reinicio sigu
 # ---------------------------------------------------------------- C-4 ------
 printf '\n== C-4 · la credencial de sesión no es observable desde el navegador ==\n'
 ApiBaseUrl="$API/" ASPNETCORE_ENVIRONMENT=Production \
-  dotnet run --project src/GeometriaFactory.Web/GeometriaFactory.Web.csproj --no-build \
+  dotnet run --project src/GeometriaFactory.Web/GeometriaFactory.Web.csproj -c Release --no-build \
   --urls "$WEB" > /tmp/web-c.log 2>&1 &
 WEB_PID=$!
 for _ in $(seq 1 90); do curl -s -o /dev/null "$WEB/" && break || sleep 1; done

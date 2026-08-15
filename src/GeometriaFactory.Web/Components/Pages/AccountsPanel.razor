@@ -1,6 +1,8 @@
 @page "/cuentas"
 @layout WorkShell
-@rendermode InteractiveServer
+@inject DataServiceClient DataService
+@inject SessionState Session
+@using System.Globalization
 
 @* SUP-09 `Panel-De-Cuentas` — CU-04 flujo principal, FA-01, FA-02, FA-05, FA-06 y FA-07.
    Ruta: `/cuentas`. Shell: trabajo. Destino `NAV-15` de la barra lateral del administrador.
@@ -8,18 +10,69 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Panel-De-Cuentas.html`.
    Componentes que la maqueta declara acá: CMP-34, CMP-35, CMP-42 a CMP-50.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. La tabla se
-   dibuja con sus rótulos y SIN FILAS, porque las filas son datos. La orientación posterior
-   (CMP-49), la banda de confirmación (CMP-50), el diálogo de baja con confirmación escrita
-   (CMP-47) con su aviso de arrastre (CMP-48) y el aviso de indisponibilidad no se dibujan: los
-   dispara estado que esta etapa no tiene. Tampoco los estados vacío y de filtro sin resultados,
-   que afirman algo sobre la colección sin haber preguntado.
+   ETAPA `d`: la superficie PASA A FUNCIONAR, con sus CINCO operaciones —habilitar, bloquear,
+   rehabilitar, resetear la contraseña y dar de baja—.
+
+   EL PANEL NO TIENE CAMPO DE CONTRASEÑA. NUNCA. Ni para habilitar ni para resetear. Las dos
+   provisorias las produce el servicio y esta superficie sólo las MUESTRA, una vez. Buscar
+   `type="password"` en este archivo tiene que devolver cero, y es criterio de aceptación por
+   recuento.
+
+   INV-08 · LA CUENTA DE ADMINISTRADOR NO SE TOCA, Y ACÁ SE ACOTA OCULTANDO. Su fila no se dibuja:
+   ni con acciones, ni con acciones inhabilitadas (`Web ADR-03` §6.2). Cuál es se sabe SIN
+   preguntarle nada al contrato —`AccountListItem` no lleva papel— porque **el producto tiene un
+   solo administrador (RN-01) y esta superficie sólo la ve él**: la cuenta de administrador es la
+   de la sesión que está mirando. El servicio igual rechaza las cinco operaciones sobre ella, y
+   esta pieza no reemplaza esa verificación: la acota.
+
+   POR QUÉ ESTA SUPERFICIE NO ES INTERACTIVA, Y ES UN APARTAMIENTO DECLARADO. Igual que
+   `AccountRegistration`, pasa a render estático de servidor con envíos POST de verdad. Además de
+   los motivos que aquélla declara, acá pesa uno propio: las cinco operaciones son escrituras y
+   cada una tiene que llegar con su testigo de antifalsificación, que es lo que un formulario
+   estático hace solo.
+
+   **APARTAMIENTOS A CONFIRMAR POR EL PRODUCT OWNER**, y son cinco:
+
+     1. **La acción destructiva no permanece inhabilitada hasta que lo escrito coincide**
+        (wireframe §3 y §5). Inhabilitar un control mientras se teclea exige un guion en el
+        navegador, y la pieza pública no tiene ninguno —umbral 0 de `verify-stage-c.sh` C-4—. La
+        comparación la hace el servidor y, si no coincide, **la baja no procede**: se dibuja el
+        motivo y se deja reintentar. El wireframe ya declara que la pantalla no es la última
+        defensa; lo que se pierde es el aviso anticipado, no la protección.
+     2. **La provisoria no tiene acción de copiado en un solo gesto** (wireframe §3). Copiar al
+        portapapeles es lo mismo: exige guion. Se entrega como **texto seleccionable dentro de un
+        campo de sólo lectura**, que es la parte que el wireframe §7 declara irrenunciable —«se
+        anuncia como texto y es seleccionable», «el copiado no puede ser el único camino»—.
+     3. **El filtro consulta al servidor de la pieza pública** y no filtra sobre lo ya recibido
+        (wireframe §3 y §4). Sin guion no hay filtro local. **No consulta al servicio de datos con
+        el filtro puesto**: el listado se pide entero, siempre igual, y el recorte ocurre de este
+        lado. La pieza pública no guarda copia de la lista entre operaciones, que es lo que §7 sí
+        exige.
+     4. **Los diálogos no confinan el foco ni se cierran con la tecla de escape** (wireframe §7).
+        Se dibujan como diálogo abierto en la misma superficie, con su acción de cancelar; el
+        confinamiento del foco exige guion.
+     5. **Los estados con indicador en curso** —«Aplicando un cambio de situación», «Ejecutando
+        el reseteo», «Ejecutando la baja», «Cargando»— no se dibujan, por el mismo motivo que en
+        `AccountRegistration`: bajo render estático la respuesta llega con la operación hecha.
+
+   Y UNA DECISIÓN QUE NO ES APARTAMIENTO SINO ELECCIÓN, CON SU CONSECUENCIA ESCRITA:
+   **la provisoria se muestra en la respuesta de la operación que la produjo y en ninguna otra.**
+   Si el administrador recarga la página después de habilitar o de resetear, **la pierde**: la
+   respuesta nueva es un `GET` y no trae ninguna provisoria. Se eligió así porque la alternativa
+   —guardarla del lado del servidor para volver a mostrarla— la convierte en un valor almacenado,
+   que es exactamente lo que `Api CU-05` §9 y RT-02 prohíben: hoy la provisoria no entra al
+   registro del servidor ni al almacenamiento del navegador y existe sólo mientras dura la
+   respuesta. El remedio de haberla perdido es **resetear otra vez**, que es una operación normal
+   y no destructiva, conserva la cuenta y todos sus trabajos (RN-12) y produce una provisoria
+   distinta. El bloque lo dice con todas las letras antes de que ocurra.
+
+   RA-01: la lista y las cinco operaciones salen desde el servidor de esta pieza, por
+   `DataServiceClient`. Cero peticiones originadas por el navegador hacia el servicio de datos.
+   RA-03: ningún mensaje de esta superficie nombra una dirección interna.
 
    «SITUACIÓN» Y NO «ESTADO», y es del wireframe: no colisiona con el estado del trabajo. *@
 
 <PageTitle>Panel de cuentas</PageTitle>
-
-<StagePlaceholder />
 
 <div class="gf-page-header gf-mt-5">
     <div>
@@ -28,35 +81,506 @@
     </div>
 </div>
 
-@* Barra de filtros: filtra sobre lo ya recibido. *@
-<div class="gf-filters">
-    <div class="gf-field gf-field-search">
-        <label for="accounts-search">Buscar por correo o nombre</label>
-        <input class="gf-input" id="accounts-search" type="search" placeholder="nombre, apellido o correo" />
-    </div>
-    <div class="gf-field">
-        <label for="accounts-standing">Situación de la cuenta</label>
-        <select class="gf-select" id="accounts-standing">
-            <option>todas</option>
-            <option>Pendiente</option>
-            <option>Habilitada</option>
-            <option>Bloqueada</option>
-        </select>
-    </div>
-</div>
+@if (!Session.IsOpen)
+{
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Para administrar las cuentas de la comisión tenés que estar dentro del laboratorio.
+        <a href="/ingreso">Ir a ingresar</a>.
+    </p>
+}
+else
+{
+    @* ---- La provisoria, la única vez que se ve ------------------------------------------ *@
+    @if (_provisional is not null)
+    {
+        <dialog class="gf-dialog" open aria-labelledby="accounts-provisional-heading">
+            <h2 id="accounts-provisional-heading">Contraseña provisoria de @_provisionalFor</h2>
+            <p>
+                Dictásela, o pasásela por el canal que uses con la comisión.
+                <strong>No se vuelve a mostrar.</strong> Si la perdés, reseteá otra vez: no se
+                pierde ningún trabajo y sale una distinta.
+            </p>
+            <div class="gf-field">
+                <label for="accounts-provisional">Contraseña provisoria, para leerla o copiarla</label>
+                @* Texto, seleccionable y anunciable carácter por carácter (wireframe §7). NO es un
+                   campo de contraseña: es de sólo lectura y no se envía a ninguna parte. *@
+                <input class="gf-input gf-num" id="accounts-provisional" type="text" readonly
+                       value="@_provisional" />
+            </div>
+            <p>@_provisionalFor la va a tener que cambiar apenas entre.</p>
+            <div class="gf-footer-actions">
+                <a class="gf-btn gf-btn--primary" href="/cuentas">Listo</a>
+            </div>
+        </dialog>
+    }
 
-<div class="gf-table-wrapper">
-    <table class="gf-table">
-        <caption class="gf-sr-only">Cuentas de la comisión, con su situación y la operación que esa situación admite</caption>
-        <thead>
-            <tr>
-                <th scope="col">Cuenta</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Situación</th>
-                <th scope="col">Fecha de registro</th>
-                <th scope="col" class="gf-td-actions">Operaciones</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
+    @* ---- Bandas de resultado ------------------------------------------------------------ *@
+    @if (_state is Outcome.Applied)
+    {
+        <p class="gf-banner gf-banner--confirmation" role="status">
+            La operación se aplicó y la lista se volvió a pedir.
+        </p>
+    }
+    else if (_state is Outcome.ConfirmationMismatch)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">
+            El correo que escribiste no es el de la cuenta. La baja no procedió.
+        </p>
+    }
+    else if (_state is Outcome.AccountNotFound)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">
+            Esa cuenta ya no existe. La lista se recargó: volvé a intentar sobre la lista actualizada.
+        </p>
+    }
+    else if (_state is Outcome.ResetNotAdmitted)
+    {
+        @* El motivo, y EL CAMINO QUE SÍ EXISTE. No se ofrece uno que no existe. *@
+        <p class="gf-banner gf-banner--error" role="alert">
+            La cuenta del docente no se resetea. Su contraseña la cambia él mismo desde
+            <a href="/mi-contrasena?papel=administrador">Mi contraseña</a>.
+        </p>
+    }
+    else if (_state is Outcome.Rejected)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">@_rejectionMessage</p>
+    }
+
+    @if (_state is Outcome.Unavailable)
+    {
+        @* La lista NO se muestra con datos viejos: se muestra el aviso en su lugar. *@
+        <section class="gf-unavailable-notice" role="alert" aria-labelledby="accounts-unavailable-heading">
+            <h2 id="accounts-unavailable-heading"><Icon Name="Alert" SizeClass="gf-icon--20" />Ahora no podemos traer las cuentas</h2>
+            <p>
+                El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+                Probá de nuevo en un rato.
+            </p>
+            <a class="gf-btn gf-btn--secondary gf-mt-3" href="/cuentas">Reintentar traer las cuentas</a>
+        </section>
+    }
+    else
+    {
+        @* ---- Diálogo de baja, con confirmación escrita (CMP-47) ------------------------- *@
+        @if (Deleting is { } target)
+        {
+            <dialog class="gf-dialog" open aria-labelledby="accounts-deletion-heading">
+                <h2 id="accounts-deletion-heading">Dar de baja la cuenta de @NameOf(target)</h2>
+                @* Aviso de arrastre (CMP-48): en el MISMO lugar donde se pide la confirmación, y
+                   asociado por descripción accesible al campo para que se anuncie ANTES de que la
+                   persona escriba. Texto literal de la maqueta aprobada. *@
+                <p class="gf-banner gf-banner--warning" id="accounts-deletion-warning">
+                    Esta baja elimina la cuenta y también TODOS sus trabajos. No se puede deshacer
+                    y no hay forma de recuperarlos.
+                </p>
+                <form method="post" @formname="account-deletion" @onsubmit="() => DeleteAsync(target)">
+                    <AntiforgeryToken />
+                    <div class="gf-field">
+                        <label for="accounts-deletion-confirmation">
+                            Para confirmar, escribí el correo de la cuenta: <strong>@target.Email</strong>
+                        </label>
+                        <input class="gf-input" id="accounts-deletion-confirmation" name="Deletion.ConfirmationEmail"
+                               type="email" autocomplete="off" aria-describedby="accounts-deletion-warning"
+                               value="@DeletionForm.ConfirmationEmail" />
+                    </div>
+                    <div class="gf-footer-actions">
+                        <a class="gf-btn gf-btn--secondary" href="/cuentas">Cancelar</a>
+                        <button type="submit" class="gf-btn gf-btn--destructive">Dar de baja</button>
+                    </div>
+                </form>
+            </dialog>
+        }
+
+        @* ---- Diálogo de reseteo, confirmación simple y sin transcripción ---------------- *@
+        @if (Resetting is { } resetTarget)
+        {
+            <dialog class="gf-dialog" open aria-labelledby="accounts-reset-heading">
+                <h2 id="accounts-reset-heading">Resetear la contraseña de @NameOf(resetTarget)</h2>
+                <p>
+                    El sistema le va a generar una contraseña provisoria.
+                    Tenés que dársela vos: el laboratorio no manda correos.
+                </p>
+                @* Aviso de conservación: contracara exacta del aviso de arrastre. Comparte lugar y
+                   forma, y NO color: uno advierte una pérdida y el otro descarta una que la
+                   persona podría suponer. *@
+                <p class="gf-banner gf-banner--info">
+                    @resetTarget.FirstName conserva su cuenta y TODOS sus trabajos. Va a tener que elegir
+                    una contraseña nueva la primera vez que entre, y esa no la vas a saber vos.
+                </p>
+                <form method="post" @formname="account-reset" @onsubmit="() => ResetAsync(resetTarget)">
+                    <AntiforgeryToken />
+                    <div class="gf-footer-actions">
+                        <a class="gf-btn gf-btn--secondary" href="/cuentas">Cancelar</a>
+                        <button type="submit" class="gf-btn gf-btn--primary">Resetear</button>
+                    </div>
+                </form>
+            </dialog>
+        }
+
+        @* ---- Barra de filtros ---------------------------------------------------------- *@
+        <form class="gf-filters" method="get">
+            <div class="gf-field gf-field-search">
+                <label for="accounts-search">Buscar por correo o nombre</label>
+                <Icon Name="Search" />
+                <input class="gf-input" id="accounts-search" name="buscar" type="search"
+                       placeholder="nombre, apellido o correo" value="@SearchTerm" />
+            </div>
+            <div class="gf-field">
+                <label for="accounts-standing">Situación de la cuenta</label>
+                <select class="gf-select" id="accounts-standing" name="situacion">
+                    @foreach (var option in StandingOptions)
+                    {
+                        <option value="@option" selected="@(string.Equals(option, Standing, StringComparison.Ordinal))">@option</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
+        </form>
+
+        @if (_accounts.Count == 0)
+        {
+            @* Vacío de colección: SIN ofrecer una acción de crear. El administrador no crea
+               cuentas de alumno. *@
+            <section class="gf-empty" aria-labelledby="accounts-empty-heading">
+                <Icon Name="Empty" SizeClass="gf-icon--24" />
+                <h2 id="accounts-empty-heading">Todavía no hay ninguna cuenta de alumno</h2>
+                <p>Las cuentas aparecen acá cuando los alumnos se registran. Después las habilitás vos.</p>
+            </section>
+        }
+        else if (Listed.Count == 0)
+        {
+            @* Vacío de FILTRO, distinto del vacío de colección, y con la acción de limpiarlo. *@
+            <section class="gf-empty" aria-labelledby="accounts-filter-empty-heading">
+                <Icon Name="Empty" SizeClass="gf-icon--24" />
+                <h2 id="accounts-filter-empty-heading">Ninguna cuenta coincide con el filtro</h2>
+                <p>Hay cuentas registradas, pero ninguna responde a lo que buscaste.</p>
+                <a class="gf-btn gf-btn--secondary gf-mt-5" href="/cuentas">Limpiar el filtro</a>
+            </section>
+        }
+        else
+        {
+            <div class="gf-table-wrapper">
+                <table class="gf-table">
+                    <caption class="gf-sr-only">Cuentas de la comisión, con su situación y la operación que esa situación admite</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Cuenta</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Situación</th>
+                            <th scope="col">Fecha de registro</th>
+                            <th scope="col" class="gf-td-actions">Operaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var account in Listed)
+                        {
+                            <tr>
+                                <th scope="row">
+                                    <span class="gf-initials" aria-hidden="true">@InitialsOf(account)</span>
+                                    @NameOf(account)
+                                </th>
+                                <td>@account.Email</td>
+                                <td><span class="gf-badge @BadgeClassOf(account)">@StandingOf(account)</span></td>
+                                <td class="gf-num">@account.RegisteredAt.ToLocalTime().ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</td>
+                                <td class="gf-td-actions">
+                                    <span class="gf-row-actions">
+                                        @* Se ofrece LA transición que la situación admite, no las tres a la vez. *@
+                                        <form method="post" @formname="@("account-standing-" + account.AccountId.ToString("N", CultureInfo.InvariantCulture))"
+                                              @onsubmit="() => ChangeStandingAsync(account)">
+                                            <AntiforgeryToken />
+                                            <button type="submit" class="gf-btn gf-btn--secondary"
+                                                    aria-label="@(VerbOf(account) + " la cuenta de " + NameOf(account))">@VerbOf(account)</button>
+                                        </form>
+                                        @* Acción de reseteo: NORMAL, no destructiva, no de peligro, y ANTES de la
+                                           baja. Se ofrece sobre toda cuenta de alumno, cualquiera sea su situación. *@
+                                        <a class="gf-btn gf-btn--secondary" href="@("/cuentas?reseteo=" + account.AccountId)"
+                                           aria-label="@("Resetear la contraseña de la cuenta de " + NameOf(account))">
+                                            <Icon Name="Key" />Resetear la contraseña
+                                        </a>
+                                        <a class="gf-btn gf-btn--destructive" href="@("/cuentas?baja=" + account.AccountId)"
+                                           aria-label="@("Dar de baja la cuenta de " + NameOf(account))">
+                                            <Icon Name="Delete" />Dar de baja
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+}
+
+@code {
+    private enum Outcome { None, Applied, ConfirmationMismatch, AccountNotFound, ResetNotAdmitted, Rejected, Unavailable }
+
+    /// <summary>Las tres situaciones, más «todas», tal como la maqueta las rotula.</summary>
+    private static readonly string[] StandingOptions = ["todas", "Pendiente", "Habilitada", "Bloqueada"];
+
+    /// <summary>Los valores del conjunto cerrado del contrato, y su rótulo en castellano (`V-3`).</summary>
+    private static readonly IReadOnlyDictionary<string, string> StandingLabels =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Pending"] = "Pendiente",
+            ["Enabled"] = "Habilitada",
+            ["Blocked"] = "Bloqueada",
+        };
+
+    /// <summary>El verbo de la ÚNICA transición que cada situación admite.</summary>
+    private static readonly IReadOnlyDictionary<string, string> StandingVerbs =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Pending"] = "Habilitar",
+            ["Enabled"] = "Bloquear",
+            ["Blocked"] = "Rehabilitar",
+        };
+
+    /// <summary>Modelo del formulario de la baja: un solo campo, el correo escrito.</summary>
+    /// <remarks>
+    /// NO LLEVA EL IDENTIFICADOR DE LA CUENTA, y es deliberado: la cuenta la nombra la dirección,
+    /// que es la misma que dibujó el diálogo. Aceptar dos fuentes para el mismo dato crearía un
+    /// lugar donde pueden no coincidir, que es el mismo criterio con el que la pieza de datos
+    /// resolvió que el identificador lo manda la ruta y no el cuerpo.
+    /// </remarks>
+    public sealed class AccountDeletionForm
+    {
+        public string ConfirmationEmail { get; set; } = string.Empty;
+    }
+
+    [SupplyParameterFromForm(FormName = "account-deletion")]
+    private AccountDeletionForm? Deletion { get; set; }
+
+    private AccountDeletionForm DeletionForm => Deletion ??= new AccountDeletionForm();
+
+    /// <summary>
+    /// Lo buscado. Llega por la dirección, porque el filtro es una petición.
+    /// </summary>
+    /// <remarks>
+    /// SE LLAMA `SearchTerm` Y NO `Search`, y no es un capricho: `Search` ya nombra **el icono de
+    /// la lupa** del catálogo portado, y el corolario 2 de §6.1 de la norma de nomenclatura
+    /// prohíbe que un nombre inglés cubra dos conceptos distintos.
+    /// </remarks>
+    [SupplyParameterFromQuery(Name = "buscar")]
+    private string? SearchTerm { get; set; }
+
+    /// <summary>La situación elegida en el filtro, con «todas» por omisión.</summary>
+    [SupplyParameterFromQuery(Name = "situacion")]
+    private string? Standing { get; set; }
+
+    /// <summary>La cuenta cuya baja se está confirmando, nombrada por la dirección.</summary>
+    [SupplyParameterFromQuery(Name = "baja")]
+    private Guid? DeletionTarget { get; set; }
+
+    /// <summary>La cuenta cuyo reseteo se está confirmando, nombrada por la dirección.</summary>
+    [SupplyParameterFromQuery(Name = "reseteo")]
+    private Guid? ResetTarget { get; set; }
+
+    private IReadOnlyList<AccountListItem> _accounts = [];
+    private Outcome _state = Outcome.None;
+    private string _rejectionMessage = string.Empty;
+
+    /// <summary>
+    /// La provisoria que la operación acaba de producir. Vive lo que dura esta respuesta.
+    /// </summary>
+    /// <remarks>
+    /// NO SE GUARDA EN NINGUNA PARTE: ni en el almacenamiento del navegador, ni en el registro del
+    /// servidor, ni en ningún estado que sobreviva a la respuesta. Ver la cabecera del componente
+    /// para la decisión y su consecuencia.
+    /// </remarks>
+    private string? _provisional;
+    private string _provisionalFor = string.Empty;
+
+    /// <summary>Si el diálogo de baja o el de reseteo siguen abiertos después de operar.</summary>
+    private bool _dialogsClosed;
+
+    private AccountListItem? Deleting =>
+        _dialogsClosed ? null : _accounts.FirstOrDefault(account => account.AccountId == DeletionTarget);
+
+    private AccountListItem? Resetting =>
+        _dialogsClosed ? null : _accounts.FirstOrDefault(account => account.AccountId == ResetTarget);
+
+    /// <summary>Lo que la tabla dibuja: la colección recibida, acotada por el filtro.</summary>
+    private IReadOnlyList<AccountListItem> Listed
+    {
+        get
+        {
+            var listed = _accounts.AsEnumerable();
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                var needle = SearchTerm.Trim();
+                listed = listed.Where(account =>
+                    account.Email.Contains(needle, StringComparison.OrdinalIgnoreCase)
+                    || account.FirstName.Contains(needle, StringComparison.OrdinalIgnoreCase)
+                    || account.LastName.Contains(needle, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Standing)
+                && !string.Equals(Standing, "todas", StringComparison.Ordinal))
+            {
+                listed = listed.Where(account =>
+                    string.Equals(StandingOf(account), Standing, StringComparison.Ordinal));
+            }
+
+            return [.. listed];
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Session.LoadAsync();
+        await ReloadAsync();
+    }
+
+    /// <summary>
+    /// Vuelve a pedir la lista. La pieza pública NO GUARDA COPIA entre operaciones: cada recorrido
+    /// la vuelve a pedir, que es lo que el wireframe §7 exige.
+    /// </summary>
+    private async Task ReloadAsync()
+    {
+        if (!Session.IsOpen)
+        {
+            _accounts = [];
+            return;
+        }
+
+        var outcome = await DataService.ListAccountsAsync(Session.UseAccessToken());
+
+        if (!outcome.Succeeded)
+        {
+            _accounts = [];
+
+            // Sólo se pisa el resultado de una operación si todavía no hubo ninguno: el motivo de
+            // la operación es más informativo que «no pudimos traer las cuentas».
+            if (_state is Outcome.None)
+            {
+                _state = Outcome.Unavailable;
+            }
+
+            return;
+        }
+
+        // INV-08: la cuenta de administrador —la de esta misma sesión— NO SE DIBUJA.
+        _accounts = [.. outcome.Value!.Where(account => account.AccountId != Session.AccountId)];
+    }
+
+    private async Task ChangeStandingAsync(AccountListItem account)
+    {
+        var intended = string.Equals(account.Status, "Enabled", StringComparison.Ordinal)
+            ? "Blocked"
+            : "Enabled";
+
+        var outcome = await DataService.ChangeAccountStatusAsync(
+            account.AccountId, intended, Session.UseAccessToken());
+
+        if (outcome.Succeeded)
+        {
+            _state = Outcome.Applied;
+
+            // Habilitar PRODUCE la provisoria (RN-16). Bloquear y rehabilitar no, y ahí el campo
+            // llega sin valor: esa ausencia es la señal de que no hay nada que comunicar.
+            Show(outcome.Value!.ProvisionalPassword, account);
+        }
+        else
+        {
+            Explain(outcome.Error!);
+        }
+
+        _dialogsClosed = true;
+        await ReloadAsync();
+    }
+
+    private async Task ResetAsync(AccountListItem account)
+    {
+        var outcome = await DataService.ResetAccountPasswordAsync(
+            account.AccountId, Session.UseAccessToken());
+
+        if (outcome.Succeeded)
+        {
+            _state = Outcome.Applied;
+            Show(outcome.Value!.ProvisionalPassword, account);
+        }
+        else
+        {
+            Explain(outcome.Error!);
+        }
+
+        _dialogsClosed = true;
+        await ReloadAsync();
+    }
+
+    private async Task DeleteAsync(AccountListItem account)
+    {
+        // LA PANTALLA NO ES LA ÚLTIMA DEFENSA: lo escrito se manda tal cual y quien compara es el
+        // servicio. Cuando no coincide, la baja NO PROCEDE y se dibuja el motivo.
+        var outcome = await DataService.DeleteAccountAsync(
+            account.AccountId, DeletionForm.ConfirmationEmail, Session.UseAccessToken());
+
+        if (outcome.Succeeded)
+        {
+            _state = Outcome.Applied;
+            _dialogsClosed = true;
+        }
+        else
+        {
+            Explain(outcome.Error!);
+
+            // Con la confirmación no coincidente el diálogo SIGUE ABIERTO: se informa y se deja
+            // reintentar con la confirmación correcta, sobre la misma cuenta.
+            _dialogsClosed = _state is not Outcome.ConfirmationMismatch;
+        }
+
+        DeletionForm.ConfirmationEmail = string.Empty;
+        await ReloadAsync();
+    }
+
+    /// <summary>Deja la provisoria a la vista, si la operación produjo alguna.</summary>
+    private void Show(string? provisional, AccountListItem account)
+    {
+        if (string.IsNullOrEmpty(provisional))
+        {
+            return;
+        }
+
+        _provisional = provisional;
+        _provisionalFor = NameOf(account);
+    }
+
+    /// <summary>Traduce el motivo del contrato al estado que la superficie dibuja.</summary>
+    private void Explain(GeometriaFactory.Contracts.Errors.ErrorResponse error)
+    {
+        _rejectionMessage = error.Message;
+        _state = error.Code switch
+        {
+            ErrorCode.ConfirmationMismatch => Outcome.ConfirmationMismatch,
+            ErrorCode.StudentNotFound => Outcome.AccountNotFound,
+            ErrorCode.ResetNotApplicableToAdministratorAccount => Outcome.ResetNotAdmitted,
+            ErrorCode.ServiceUnavailable => Outcome.Unavailable,
+            _ => Outcome.Rejected,
+        };
+    }
+
+    private static string NameOf(AccountListItem account) => $"{account.FirstName} {account.LastName}".Trim();
+
+    private static string InitialsOf(AccountListItem account) =>
+        string.Concat(
+            account.FirstName.Length > 0 ? account.FirstName[..1] : string.Empty,
+            account.LastName.Length > 0 ? account.LastName[..1] : string.Empty)
+        .ToUpperInvariant();
+
+    /// <summary>El rótulo castellano de la situación. Un valor desconocido se muestra tal cual.</summary>
+    private static string StandingOf(AccountListItem account) =>
+        StandingLabels.GetValueOrDefault(account.Status, account.Status);
+
+    private static string VerbOf(AccountListItem account) =>
+        StandingVerbs.GetValueOrDefault(account.Status, "Habilitar");
+
+    /// <summary>El color es refuerzo: la insignia lleva SIEMPRE su texto.</summary>
+    private static string BadgeClassOf(AccountListItem account) => account.Status switch
+    {
+        "Pending" => "gf-badge--warning",
+        "Enabled" => "gf-badge--success",
+        "Blocked" => "gf-badge--danger",
+        _ => "gf-badge--neutral",
+    };
+}

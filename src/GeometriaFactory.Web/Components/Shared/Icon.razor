@@ -1,6 +1,8 @@
 @* Catálogo de iconos portado desde `SDD/Maquetas/.../assets/js/Maqueta.js`, constante `ICONOS`.
-   Sólo los nueve que la etapa `b` usa: los otros doce del catálogo de la maqueta se portan
-   cuando la superficie que los necesita deje de ser marcador de posición.
+   Los nueve que la etapa `b` usa, más los CUATRO que la etapa `d` necesita al construir el
+   registro de cuenta y el panel de cuentas: `buscar`, `eliminar`, `aprobar` y `vacio`. Los ocho
+   restantes del catálogo de la maqueta se portan cuando la superficie que los necesita deje de
+   ser marcador de posición.
    Los trazos son literalmente los de la maqueta; el color es `currentColor`, de modo que este
    componente NO introduce ningún valor visual propio. *@
 
@@ -29,5 +31,10 @@
             ["SignOut"] = """<path d="M14 4H6.5A1.5 1.5 0 0 0 5 5.5v13A1.5 1.5 0 0 0 6.5 20H14"/><path d="M17 8l4 4-4 4"/><path d="M21 12H10"/>""",
             ["Back"] = """<path d="M11 5l-7 7 7 7"/><path d="M4 12h16"/>""",
             ["Alert"] = """<path d="M12 3.5L1.8 20.5h20.4z"/><path d="M12 10v4.5"/><path d="M12 17.6v.1"/>""",
+            // Los cuatro que porta la etapa `d`, con los trazos literales de la maqueta.
+            ["Search"] = """<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l4.5 4.5"/>""",
+            ["Delete"] = """<path d="M4.5 7h15"/><path d="M9.5 7V4.5h5V7"/><path d="M6.5 7l1 13h9l1-13"/>""",
+            ["Approve"] = """<path d="M4.5 12.5l5 5 10-11"/>""",
+            ["Empty"] = """<path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h4l2 3h5A2.5 2.5 0 0 1 20 11.5v5A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z"/><path d="M8 13.5h8"/>""",
         };
 }
