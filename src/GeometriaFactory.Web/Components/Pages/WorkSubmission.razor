@@ -1,7 +1,9 @@
 @page "/trabajo-nuevo"
 @page "/trabajos/{WorkId}/editar"
 @layout WorkShell
-@rendermode InteractiveServer
+@inject DataServiceClient DataService
+@inject SessionState Session
+@using GeometriaFactory.Contracts.Works
 
 @* SUP-06 `Envio-De-Trabajo` — CU-05.
    Ruta: `/trabajo-nuevo` y `/trabajos/{WorkId}/editar`. Shell: trabajo.
@@ -10,18 +12,66 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Envio-De-Trabajo.html`.
    Componentes que la maqueta declara acá: CMP-08, CMP-16 a CMP-24.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
-   no valida, no envía y no consulta al servicio de datos; «Previsualizar» no dibuja, porque el
-   visor tridimensional llega con la etapa que lo trae. El bloque de resultado (CMP-24), la lista
-   de piezas no dibujadas (CMP-22) y el aviso de indisponibilidad no se dibujan: los dispara
-   estado que esta etapa no tiene.
+   ETAPA `e`: la superficie PASA A FUNCIONAR, con sus DOS CURSOS sobre la misma disposición —crear
+   un trabajo nuevo y volver sobre un borrador propio—. El envío es la ÚNICA acción de guardado.
 
-   DOS CURSOS SOBRE LA MISMA DISPOSICIÓN, que es diferencia de estructura y no de
-   comportamiento: creación y reedición de un borrador. *@
+   ══════════════════════════════════════════════════════════════════════════════════════════════
+   EL HECHO DE ESTA ETAPA QUE ESTA PANTALLA TIENE QUE DECIR BIEN, Y CÓMO SE RESOLVIÓ
+
+   En la etapa `e` **todo trabajo queda en `Borrador`, sin excepción**, porque entregar exige un
+   resultado de interpretación que recién construye la etapa `f`. Eso no es un error, no es un
+   fallo del alumno y no es un estado a simular.
+
+   Y ES EXACTAMENTE ACÁ DONDE SE PUEDE MENTIR EN LAS DOS DIRECCIONES, las dos igual de caras:
+
+     · **Hacia arriba**, simulando la entrega: dibujar `Pendiente`, o decir «ya está entregado», o
+       insinuar que un texto correcto pasaría. Le prometería al alumno un desenlace que hoy no
+       puede ocurrir, y lo dejaría esperando una revisión que nadie va a poder hacer.
+     · **Hacia abajo**, adoptando el texto de la maqueta para el estado `no-verifico` —«El texto no
+       verificó. Corregí tu programa…»—. **Ese texto es verdadero en el producto terminado y falso
+       hoy**: hoy nada verificó ni dejó de verificar, porque nada se interpretó. Le diría al alumno
+       que su programa está mal cuando el laboratorio ni siquiera lo miró, y lo mandaría a corregir
+       algo que puede estar perfecto. Es la peor de las dos, porque además es acusatoria.
+
+   LO QUE SE ELIGIÓ, Y ES UN APARTAMIENTO DECLARADO ELEVADO AL PRODUCT OWNER. El bloque de
+   resultado dibuja **la insignia del estado que el servicio devolvió** —que es un dato real, no un
+   literal— y, en lugar del texto del estado `no-verifico`, un texto propio que dice **lo que sí
+   pasó** —el trabajo quedó guardado, con su identificador y su estado—, **por qué queda en
+   borrador** —el texto todavía no se interpreta— y **que de eso no se deduce nada sobre el texto
+   del alumno**. Y ofrece las dos salidas que el wireframe §2 declara. El texto no está en ninguna
+   fuente porque ninguna fuente describe esta etapa: las fuentes describen el producto terminado.
+   Se construye acá, desde el wireframe, y se declara. Cuando la etapa `f` traiga la interpretación,
+   este bloque pasa a los tres estados del wireframe —`verifico`, `verifico-con-advertencias` y
+   `no-verifico`— y **el texto propio se retira**: no es un texto para quedarse.
+   ══════════════════════════════════════════════════════════════════════════════════════════════
+
+   POR QUÉ ESTA SUPERFICIE NO ES INTERACTIVA, Y ES EL MISMO APARTAMIENTO DECLARADO QUE `AccountsPanel`.
+   Render estático de servidor con un POST de verdad. Acá pesa además un motivo propio: **el texto
+   del alumno tiene que llegar carácter por carácter**, y un formulario que envía por HTTP lo
+   entrega tal cual sin pasar por ninguna serialización de estado de circuito.
+
+   TRES APARTAMIENTOS MÁS, TAMBIÉN DECLARADOS:
+
+     1. **LA ACCIÓN «PREVISUALIZAR» NO SE DIBUJA.** El wireframe §3 la declara (CMP-20) y el dibujo
+        lo trae el visor, que es de la etapa `g` y que `RA-02` manda no tocar acá. Un botón servido
+        que no dibuja nada es un control muerto, y un control muerto es una promesa incumplida. En
+        su lugar queda el bloque con su marco y su leyenda, y una nota que dice qué falta y que el
+        envío no depende del dibujo. **La nota de alcance del wireframe se conserva textual**,
+        porque sigue siendo verdadera: el dibujo no verifica.
+     2. **EL ESTADO EN CURSO DICE «Enviando» Y NO «Interpretando tu trabajo…»**, que es el texto
+        del wireframe §5 y de la maqueta. Hoy no se interpreta nada, y el texto en curso es lo
+        único que la persona lee mientras espera: prometer una interpretación ahí sería la misma
+        mentira que el bloque de resultado evita. Se usa el verbo de la acción, que es el mismo que
+        `Registro-De-Cuenta` ya declara en `data-gf-pending`.
+     3. **LA LISTA DE OBSERVACIONES DEL BLOQUE DE RESULTADO NO SE DIBUJA.** `WorkSubmissionResponse`
+        declara en su propio comentario que la colección **no está** y por qué: no hay nada que
+        poblar hasta la etapa `f`. Dibujar «Observaciones (0)» afirmaría que se interpretó y no
+        salió ninguna, que es la misma mentira con otro disfraz.
+
+   RA-01: el envío sale desde el servidor de esta pieza, por `DataServiceClient`.
+   RA-03: ningún mensaje de esta superficie nombra una dirección interna. *@
 
 <PageTitle>Envío de trabajo</PageTitle>
-
-<StagePlaceholder />
 
 <a class="gf-btn gf-btn--pill gf-mt-5 gf-mb-4" href="/mis-trabajos"><Icon Name="Back" />Volver a mis trabajos</a>
 
@@ -32,71 +82,350 @@
     </div>
 </div>
 
-@* Dos columnas que anticipan la disposición de la vista de trabajo. En pantalla angosta la
-   previsualización NO sube al primer lugar: acá la tarea es cargar y enviar. *@
-<form class="gf-two-columns gf-two-columns--submission">
+@if (!Session.IsOpen)
+{
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Para cargar un trabajo tenés que estar dentro del laboratorio.
+        <a href="/ingreso">Ir a ingresar</a>.
+    </p>
+}
+else if (Session.IsAdministrator)
+{
+    @* Cargar y reeditar trabajos es del alumno, y el servicio lo rechaza con `403`. Acá se acota
+       antes de ofrecer un formulario que no puede terminar bien. Texto propio, declarado. *@
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Cargar y reeditar trabajos es del alumno. Los trabajos de la comisión se recorren desde
+        <a href="/entrega-comision">Entrega de la comisión</a>.
+    </p>
+}
+else if (_state is Outcome.NotFound)
+{
+    @* MENSAJE NEUTRO que no distingue el trabajo ajeno del inexistente (RN-03), y NADA MÁS: ni el
+       nombre, ni el estado, ni el dueño. La pantalla no puede decir otra cosa. *@
+    <p class="gf-banner gf-banner--error" role="alert">
+        No encontramos ese trabajo. Volviste a tu listado.
+    </p>
+    <a class="gf-btn gf-btn--secondary gf-mt-3" href="/mis-trabajos">Volver a mis trabajos</a>
+}
+else if (_result is { } result)
+{
+    @* ---- Bloque de resultado (CMP-24). Reemplaza el contenido, y se anuncia como región activa,
+       porque es el desenlace de la acción más importante del producto. ---- *@
+    <section class="gf-card" role="status" aria-labelledby="submission-result-heading" tabindex="-1">
+        <h2 id="submission-result-heading" class="gf-title">
+            Tu trabajo quedó en estado <span class="gf-badge @BadgeClassOf(result.Status)">@LabelOf(result.Status)</span>
+        </h2>
 
-    <div class="gf-column gf-column--data">
-        <section class="gf-card" aria-labelledby="submission-data-heading">
-            <h2 id="submission-data-heading" class="gf-meta">Datos del trabajo</h2>
+        @* EL TEXTO PROPIO DE LA ETAPA `e`. Ver el bloque de la cabecera: dice lo que pasó, por qué
+           queda en borrador, y que de eso no se deduce nada sobre el texto del alumno. *@
+        <p class="gf-caption gf-mt-3">
+            Tu trabajo quedó guardado con todo lo que escribiste, y ya figura en tu listado.
+        </p>
+        <p class="gf-caption gf-mt-2">
+            <strong>El laboratorio todavía no interpreta el texto, así que por ahora todos los trabajos quedan en borrador.</strong>
+            De eso no se deduce nada sobre lo que pegaste: no se revisó. Podés volver sobre él y
+            reenviarlo cuantas veces quieras.
+        </p>
 
-            <div class="gf-mt-3">
-                <div class="gf-field">
-                    <label for="submission-name">Nombre</label>
-                    <input class="gf-input" id="submission-name" name="name" type="text" />
-                </div>
-                <div class="gf-field">
-                    @* La fecha la declara el alumno y se rotula como tal. *@
-                    <label for="submission-date">Fecha del trabajo, la que declarás vos</label>
-                    <input class="gf-input" id="submission-date" name="workDate" type="text"
-                           inputmode="numeric" placeholder="dd/mm/aaaa" />
-                </div>
-                <div class="gf-field">
-                    <label for="submission-description">Descripción</label>
-                    <textarea class="gf-textarea gf-textarea--short" id="submission-description" name="description"></textarea>
-                </div>
-                <div class="gf-field">
-                    <label for="submission-text">Texto del trabajo</label>
-                    @* El texto entra sin ninguna transformación: no se normaliza, no se reordena
-                       y no se le quita ningún carácter. Sin corrección ortográfica ni
-                       autocapitalización. *@
-                    <textarea class="gf-textarea gf-textarea--work-text" id="submission-text" name="workText"
-                              spellcheck="false" autocapitalize="off" autocorrect="off"></textarea>
-                </div>
-            </div>
+        <dl class="gf-key-value gf-mt-4">
+            <dt>Identificador del trabajo</dt><dd class="gf-num">@result.WorkId</dd>
+        </dl>
+
+        <div class="gf-footer-actions">
+            <a class="gf-btn gf-btn--secondary" href="/mis-trabajos">Volver a mis trabajos</a>
+            <a class="gf-btn gf-btn--primary" href="@("/trabajos/" + result.WorkId)">Ver el trabajo</a>
+        </div>
+    </section>
+}
+else
+{
+    @if (_state is Outcome.MissingField)
+    {
+        @* EL TEXTO VACÍO ES CAMPO AUSENTE Y NO TEXTO QUE NO VERIFICA, y el mensaje lo distingue,
+           que es lo que el wireframe §5 exige. *@
+        <p class="gf-banner gf-banner--error" role="alert">
+            Falta el nombre, la fecha o el texto del trabajo. El texto vacío es un campo sin
+            completar, no un texto que no verifica.
+        </p>
+    }
+    else if (_state is Outcome.StateForbidsUpdate)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">@_rejectionMessage</p>
+    }
+    else if (_state is Outcome.Rejected)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">@_rejectionMessage</p>
+    }
+
+    @if (_state is Outcome.Unavailable)
+    {
+        @* INDISPONIBLE CON LO ESCRITO CONSERVADO: el aviso va ARRIBA del formulario para que se lea
+           antes de volver a escribir, y lo escrito sigue abajo. No se guarda en ningún lado: sigue
+           en la superficie, nada más. *@
+        <section class="gf-unavailable-notice gf-mb-5" role="alert" aria-labelledby="submission-unavailable-heading">
+            <h2 id="submission-unavailable-heading"><Icon Name="Alert" SizeClass="gf-icon--20" />No pudimos enviar tu trabajo</h2>
+            <p>
+                El laboratorio está en pie, pero no está pudiendo llegar a tus datos.
+                Lo que escribiste sigue acá: probá de nuevo.
+            </p>
         </section>
+    }
 
-        <section aria-labelledby="submission-send-heading">
-            <h2 id="submission-send-heading" class="gf-sr-only">Enviar el trabajo</h2>
-            <button type="button" class="gf-btn gf-btn--primary gf-btn--full"
-                    aria-describedby="submission-single-action">Enviar</button>
-            @* Nota de acción única, contigua a la acción primaria. *@
-            <p class="gf-caption gf-mt-2" id="submission-single-action">Enviar es la única forma de guardar. Si el texto no verifica, queda en borrador y lo reenviás.</p>
-        </section>
-    </div>
+    @* Dos columnas que anticipan la disposición de la vista de trabajo. En pantalla angosta la
+       previsualización NO sube al primer lugar: acá la tarea es cargar y enviar. *@
+    <form class="gf-two-columns gf-two-columns--submission" method="post"
+          @formname="work-submission" @onsubmit="SubmitAsync" data-gf-pending="Enviando">
+        <AntiforgeryToken />
 
-    <div class="gf-column gf-column--scene">
-        <section aria-labelledby="submission-preview-heading">
-            <h2 id="submission-preview-heading" class="gf-meta">Previsualización</h2>
+        <div class="gf-column gf-column--data">
+            <section class="gf-card" aria-labelledby="submission-data-heading">
+                <h2 id="submission-data-heading" class="gf-meta">Datos del trabajo</h2>
 
-            <div class="gf-scene gf-mt-2">
-                <span class="gf-scene-label">Área de dibujo</span>
-                <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
-            </div>
+                <div class="gf-mt-3">
+                    <div class="gf-field">
+                        <label for="submission-name">Nombre</label>
+                        <input class="gf-input" id="submission-name" name="Input.Name" type="text"
+                               value="@Form.Name" />
+                    </div>
+                    <div class="gf-field">
+                        @* La fecha la declara el alumno y se rotula como tal. Viaja como texto y no
+                           se convierte de zona: la escribe la persona y no es un sello del sistema. *@
+                        <label for="submission-date">Fecha del trabajo, la que declarás vos</label>
+                        <input class="gf-input" id="submission-date" name="Input.DeclaredDate" type="text"
+                               inputmode="numeric" placeholder="dd/mm/aaaa" value="@Form.DeclaredDate" />
+                    </div>
+                    <div class="gf-field">
+                        <label for="submission-description">Descripción</label>
+                        <textarea class="gf-textarea gf-textarea--short" id="submission-description"
+                                  name="Input.Description">@Form.Description</textarea>
+                    </div>
+                    <div class="gf-field">
+                        <label for="submission-text">Texto del trabajo</label>
+                        @* El texto entra sin ninguna transformación: no se normaliza, no se reordena
+                           y no se le quita ningún carácter. Sin corrección ortográfica ni
+                           autocapitalización. Y NO SE LE APLICA `Trim` EN NINGÚN PUNTO del camino
+                           hacia el servicio de datos (RN-08). *@
+                        <textarea class="gf-textarea gf-textarea--work-text" id="submission-text"
+                                  name="Input.OriginalJson"
+                                  spellcheck="false" autocapitalize="off" autocorrect="off">@Form.OriginalJson</textarea>
+                    </div>
+                </div>
+            </section>
 
-            <button type="button" class="gf-btn gf-btn--secondary gf-mt-3"
-                    aria-describedby="submission-preview-scope">Previsualizar</button>
-            @* Nota de alcance: el dibujo no verifica. *@
-            <p class="gf-caption gf-mt-2" id="submission-preview-scope">El dibujo es sólo para que veas lo que modelaste. No decide si tu trabajo verifica.</p>
-        </section>
-    </div>
-</form>
+            <section aria-labelledby="submission-send-heading">
+                <h2 id="submission-send-heading" class="gf-sr-only">Enviar el trabajo</h2>
+                <button type="submit" class="gf-btn gf-btn--primary gf-btn--full"
+                        aria-describedby="submission-single-action">Enviar</button>
+                @* Nota de acción única, contigua a la acción primaria. Sigue siendo verdadera: no
+                   hay «guardar sin enviar», y el reenvío es el camino. *@
+                <p class="gf-caption gf-mt-2" id="submission-single-action">Enviar es la única forma de guardar. Si el texto no verifica, queda en borrador y lo reenviás.</p>
+            </section>
+        </div>
+
+        <div class="gf-column gf-column--scene">
+            <section aria-labelledby="submission-preview-heading">
+                <h2 id="submission-preview-heading" class="gf-meta">Previsualización</h2>
+
+                <div class="gf-scene gf-mt-2">
+                    <span class="gf-scene-label">Área de dibujo</span>
+                    <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
+                </div>
+
+                @* Apartamiento 1 de la cabecera: en lugar del botón muerto, la nota que dice qué
+                   falta y que el envío no depende de eso. *@
+                <p class="gf-caption gf-mt-3">
+                    El dibujo todavía no está construido. Podés cargar y enviar tu trabajo igual:
+                    el envío no depende del dibujo.
+                </p>
+                @* Nota de alcance del wireframe, textual: el dibujo no verifica. *@
+                <p class="gf-caption gf-mt-2">El dibujo es sólo para que veas lo que modelaste. No decide si tu trabajo verifica.</p>
+            </section>
+        </div>
+    </form>
+}
 
 @code {
-    /// Identificador del borrador que se reedita. Nulo en el curso de creación.
-    /// La etapa `b` no lo lee: sólo distingue los dos cursos de la superficie, que es
-    /// diferencia de estructura y no de comportamiento.
+    private enum Outcome { None, MissingField, NotFound, StateForbidsUpdate, Rejected, Unavailable }
+
+    private static readonly IReadOnlyDictionary<string, string> StatusLabels =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Draft"] = "Borrador",
+            ["Submitted"] = "Pendiente",
+            ["Approved"] = "Finalizado",
+            ["Rejected"] = "Rechazado",
+        };
+
+    /// <summary>
+    /// Lo que la persona carga: los cuatro campos del contrato, y ninguno más.
+    /// </summary>
+    /// <remarks>
+    /// NO LLEVA EL IDENTIFICADOR DEL TRABAJO, y es deliberado: el trabajo lo nombra la ruta, que es
+    /// la misma que dibujó el formulario. Es el mismo criterio con el que la pieza de datos resolvió
+    /// que el identificador lo manda la ruta y no el cuerpo, y con el que `AccountsPanel` armó su
+    /// formulario de baja: aceptar dos fuentes para el mismo dato crea un lugar donde pueden no
+    /// coincidir.
+    ///
+    /// Y NO LLEVA NINGÚN CAMPO DE ESTADO PRETENDIDO. Buscar «Pendiente» en este archivo dentro de un
+    /// campo de formulario tiene que devolver cero: el estado lo decide la interpretación.
+    /// </remarks>
+    public sealed class WorkSubmissionForm
+    {
+        public string Name { get; set; } = string.Empty;
+
+        public string DeclaredDate { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+
+        /// <summary>El texto del alumno, tal como lo pegó. Esta propiedad no lo toca.</summary>
+        public string OriginalJson { get; set; } = string.Empty;
+    }
+
+    [SupplyParameterFromForm(FormName = "work-submission")]
+    private WorkSubmissionForm? Input { get; set; }
+
+    private WorkSubmissionForm Form => Input ??= new WorkSubmissionForm();
+
+    /// <summary>Identificador del borrador que se reedita. Nulo en el curso de creación.</summary>
     [Parameter] public string? WorkId { get; set; }
 
-    private string Heading => WorkId is null ? "Trabajo nuevo" : "Volver sobre tu borrador";
+    /// <summary>
+    /// El contexto de la petición, que **sólo existe bajo render estático** —que es como esta
+    /// superficie se dibuja—. Se usa para una sola cosa: distinguir el dibujo del envío.
+    /// </summary>
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    private Outcome _state = Outcome.None;
+    private string _rejectionMessage = string.Empty;
+    private WorkSubmissionResponse? _result;
+
+    /// <summary>El identificador de la ruta, o nulo si la ruta no trae uno reconocible.</summary>
+    /// <remarks>
+    /// UN IDENTIFICADOR QUE NO ES UN IDENTIFICADOR SE TRATA COMO TRABAJO NO ENCONTRADO, y no como
+    /// un error distinto: distinguirlos le diría a quien prueba direcciones a mano cuáles tienen
+    /// forma válida, que es información sobre el almacén.
+    /// </remarks>
+    private Guid? Edited => Guid.TryParse(WorkId, out var parsed) ? parsed : null;
+
+    private bool InEdition => WorkId is not null;
+
+    private string Heading => InEdition ? "Volver sobre tu borrador" : "Trabajo nuevo";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Session.LoadAsync();
+
+        if (!Session.IsOpen || Session.IsAdministrator || !InEdition)
+        {
+            return;
+        }
+
+        // CURSO DE REEDICIÓN: el borrador se trae TAL COMO QUEDÓ. Si no es del alumno, o no
+        // existe, o el identificador no tiene forma, el servicio responde lo mismo y esta pantalla
+        // dice lo mismo.
+        if (Edited is not { } workId)
+        {
+            _state = Outcome.NotFound;
+            return;
+        }
+
+        var outcome = await DataService.GetWorkAsync(workId, Session.UseAccessToken());
+
+        if (!outcome.Succeeded)
+        {
+            Explain(outcome.Error!);
+            return;
+        }
+
+        var work = outcome.Value!;
+
+        // EL FORMULARIO SÓLO SE PUEBLA CUANDO LA PETICIÓN NO ES UN ENVÍO. Después de un envío
+        // rechazado, lo que vale es lo que la persona escribió y no lo que estaba guardado:
+        // pisarlo le borraría el trabajo de corregir. La condición se lee del MÉTODO de la
+        // petición y no de si el modelo del formulario llegó nulo, porque el marco lo materializa
+        // igual cuando nadie envió nada.
+        if (!HttpMethods.IsPost(HttpContext?.Request.Method ?? HttpMethods.Get))
+        {
+            Form.Name = work.Name;
+            Form.DeclaredDate = work.DeclaredDate;
+            Form.Description = work.Description ?? string.Empty;
+            Form.OriginalJson = work.OriginalJson;
+        }
+    }
+
+    /// <summary>
+    /// El envío, que es la ÚNICA acción de guardado del producto.
+    /// </summary>
+    /// <remarks>
+    /// LOS TRES CAMPOS OBLIGATORIOS SE COMPRUEBAN ACÁ **Y TAMBIÉN ALLÁ**. Comprobarlos de este lado
+    /// evita un viaje que ya se sabe que va a fallar y deja el mensaje que distingue campo ausente
+    /// de texto que no verifica; el servicio los vuelve a comprobar, y es él quien rechaza cuando
+    /// la solicitud no pasa por esta pantalla. La descripción NO está en la lista: admite vacío.
+    ///
+    /// EL TEXTO NO SE RECORTA. La comprobación de presencia mira si está en blanco, y **lo que
+    /// viaja es la cadena entera**, con sus espacios y sus saltos de línea intactos.
+    /// </remarks>
+    private async Task SubmitAsync()
+    {
+        _state = Outcome.None;
+        _result = null;
+
+        if (string.IsNullOrWhiteSpace(Form.Name)
+            || string.IsNullOrWhiteSpace(Form.DeclaredDate)
+            || string.IsNullOrWhiteSpace(Form.OriginalJson))
+        {
+            _state = Outcome.MissingField;
+            return;
+        }
+
+        if (InEdition && Edited is null)
+        {
+            // Reedición sobre un identificador que no tiene forma: la misma respuesta que el
+            // inexistente y que el ajeno.
+            _state = Outcome.NotFound;
+            return;
+        }
+
+        var request = new WorkSubmissionRequest(
+            Edited, Form.Name, Form.DeclaredDate, Form.Description, Form.OriginalJson);
+
+        var outcome = Edited is { } workId
+            ? await DataService.ResubmitWorkAsync(workId, request, Session.UseAccessToken())
+            : await DataService.SubmitWorkAsync(request, Session.UseAccessToken());
+
+        if (outcome.Succeeded)
+        {
+            // EL ESTADO QUE VUELVE NO SE REINTERPRETA NI SE REEMPLAZA: se dibuja el que el servicio
+            // decidió. Que sea `Borrador` no convierte esta respuesta en un fallo.
+            _result = outcome.Value!;
+            return;
+        }
+
+        Explain(outcome.Error!);
+    }
+
+    private void Explain(GeometriaFactory.Contracts.Errors.ErrorResponse error)
+    {
+        _rejectionMessage = error.Message;
+        _state = error.Code switch
+        {
+            ErrorCode.WorkNotFound => Outcome.NotFound,
+            ErrorCode.RequiredFieldMissing => Outcome.MissingField,
+            ErrorCode.StateForbidsUpdate => Outcome.StateForbidsUpdate,
+            ErrorCode.ServiceUnavailable => Outcome.Unavailable,
+            _ => Outcome.Rejected,
+        };
+    }
+
+    private static string LabelOf(string status) => StatusLabels.GetValueOrDefault(status, status);
+
+    private static string BadgeClassOf(string status) => status switch
+    {
+        "Draft" => "gf-badge--neutral",
+        "Submitted" => "gf-badge--warning",
+        "Approved" => "gf-badge--success",
+        "Rejected" => "gf-badge--danger",
+        _ => "gf-badge--neutral",
+    };
 }

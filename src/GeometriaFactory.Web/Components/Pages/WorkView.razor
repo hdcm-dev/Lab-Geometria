@@ -1,7 +1,9 @@
 @page "/trabajos/{WorkId}"
 @layout WorkShell
 @inject NavigationManager Navigation
-@rendermode InteractiveServer
+@inject DataServiceClient DataService
+@inject SessionState Session
+@using GeometriaFactory.Contracts.Works
 
 @* SUP-07 `Vista-De-Trabajo` — CU-07.
    Ruta: `/trabajos/{WorkId}`. Shell: trabajo.
@@ -10,102 +12,274 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Vista-De-Trabajo.html`.
    Componentes que la maqueta declara acá: CMP-22, CMP-38, CMP-56, CMP-65 a CMP-73.
 
-   ETAPA `b`: los textos y la disposición son los de la maqueta aprobada, y NO hay
-   comportamiento. Las CUATRO PARTES —datos, texto, escena y árbol— están con sus rótulos y sin
-   valores, porque los valores son el trabajo y esta etapa no consulta al servicio de datos. La
-   escena no dibuja: el visor tridimensional llega con la etapa que lo trae. El aviso de
-   indisponibilidad y las bandas de error no se dibujan.
+   ETAPA `e`: la superficie PASA A TRAER EL TRABAJO. De las cuatro partes que el wireframe declara
+   —datos, texto, escena y árbol— esta etapa puebla **las dos que son dato**: los datos declarados y
+   el texto original íntegro. **La escena y el árbol siguen sin dibujar, y no se tocan**: los trae el
+   visor, que es de la etapa `g`, y `RA-02` manda que el visor siga siendo un visualizador puro.
 
-   EL `<h1>` DE LA MAQUETA ES EL NOMBRE DEL TRABAJO, que es un dato. Sin dato queda el nombre
-   canónico de la superficie, que es también su `<title>`. Es lo único de esta pantalla que
-   ninguna fuente declara. *@
+   EL `<h1>` ES EL NOMBRE DEL TRABAJO, que es un dato y ahora existe. Cuando el trabajo no se
+   encuentra, el `<h1>` vuelve a ser el nombre canónico de la superficie: poner ahí el nombre de un
+   trabajo que no se pudo traer sería inventarlo.
+
+   ══════════════════════════════════════════════════════════════════════════════════════════════
+   «NO ENCONTRADO» ES LO ÚNICO QUE ESTA PANTALLA PUEDE DECIR, Y SE CONSTRUYE PARA QUE NO PUEDA
+   DECIR OTRA COSA. El trabajo inexistente, el ajeno y el borrador que el administrador no ve llegan
+   con **el mismo código, el mismo texto y el mismo cuerpo** (RN-03), y esta superficie **no tiene
+   ninguna rama que los separe**: hay un solo estado de negativa. Y cuando está puesto **no se
+   dibuja nada del trabajo** —ni nombre, ni estado, ni dueño, ni fecha, ni texto—, porque cualquiera
+   de esos datos confirmaría que ese trabajo existe, que es exactamente lo que RN-03 existe para no
+   confirmar. Hay una prueba que lo fija comparando contra el nombre y el correo del dueño real.
+   ══════════════════════════════════════════════════════════════════════════════════════════════
+
+   TRES APARTAMIENTOS DECLARADOS, ELEVADOS AL PRODUCT OWNER:
+
+     1. **LA CABECERA NO LLEVA LOS RECUENTOS DE PIEZAS Y DE ADVERTENCIAS.** El wireframe §2 y §3
+        (CMP-66) los declaran, y el contrato **no los emite**: es el mismo hueco declarado que la
+        columna ausente del listado del alumno, con la misma contradicción entre documentos elevada
+        y sin resolver. Un cero inventado es un dato falso.
+     2. **LA LISTA DE OBSERVACIONES (CMP-69) NO SE DIBUJA COMO «Sin observaciones».** El wireframe
+        §3 y §5 mandan esa línea explícita **con cero elementos**, y hoy no hay cero elementos: no
+        hay colección, porque el texto no se interpreta hasta la etapa `f` —lo declara
+        `WorkDetailResponse` en su propio comentario—. «Sin observaciones» afirmaría que se
+        interpretó y no salió ninguna. En su lugar queda el bloque con su encabezado y una línea que
+        dice lo que sí pasa, para que no quede el hueco sin explicar que §5 prohíbe.
+     3. **EL BLOQUE DE COMENTARIO (CMP-68) NO SE DIBUJA NUNCA EN ESTA ETAPA**, y no es un recorte:
+        se dibuja si viene poblado, y el desenlace que lo produce es de la etapa `h`. La regla del
+        wireframe se construye tal cual —no se dibuja si no viene poblado—, y hoy nunca viene.
+
+   Y UNA CONSECUENCIA DE LA ETAPA QUE CONVIENE LEER ENTERA: **`SUP-08` no se dibuja jamás en la
+   etapa `e`, y eso es correcto**. Su condición es «administrador **y** trabajo en estado
+   `Pendiente`», las dos a la vez; en esta etapa ningún trabajo llega a `Pendiente`, y además el
+   administrador no ve borradores. La etapa `b` la dibujaba con el papel solo, leído de la
+   dirección, y eso le ofrecía a alguien decidir sobre un trabajo que no estaba a la vista. Ahora la
+   condición es la del wireframe y se evalúa sobre el dato.
+
+   RA-01: el detalle llega desde el servidor de esta pieza, por `DataServiceClient`.
+   RA-02: acá no se toca el visor. RA-03: ningún mensaje nombra una dirección interna. *@
 
 <PageTitle>Vista de trabajo</PageTitle>
 
-<StagePlaceholder />
-
-@* Vuelve al listado de donde vino la persona: el propio si es el alumno, el de la comisión si
-   es el administrador. La etapa `b` no tiene sesión, así que el papel sale de la dirección. *@
+@* Vuelve al listado de donde vino la persona: el propio si es el alumno, el de la comisión si es
+   el administrador. Con sesión el papel sale de la sesión; sin sesión se cae al repliegue de la
+   etapa `b` —la dirección—, que es lo que mantiene en pie el paseo sin sesión de desarrollo. *@
 <a class="gf-btn gf-btn--pill gf-mt-5 gf-mb-4" href="@BackHref"><Icon Name="Back" />@BackLabel</a>
 
-<header class="gf-mb-5">
-    <div class="gf-flex-row gf-flex-row--wrap">
-        <h1>Vista de trabajo</h1>
-    </div>
-</header>
-
-@* SUP-08 se aloja ACÁ y no tiene ruta propia. `Linea-Base-Visual.md` §2: «Un sistema construido
-   que le dé ruta propia es deriva mayor».
-
-   SE DIBUJA SÓLO PARA EL ADMINISTRADOR, como manda el wireframe. La otra condición del producto
-   —que el trabajo esté en estado `Pendiente`— es un dato, y esta etapa no lo tiene. Dibujarlo
-   también para el alumno dueño, como hacía el marcador de posición anterior, le ofrecía a un
-   alumno decidir sobre su propio trabajo: eso es una superficie que miente. *@
-@if (IsAdministrator)
+@if (!Session.IsOpen)
 {
-    <WorkResolution />
+    <header class="gf-mb-5">
+        <div class="gf-flex-row gf-flex-row--wrap">
+            <h1>Vista de trabajo</h1>
+        </div>
+    </header>
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Para ver un trabajo tenés que estar dentro del laboratorio.
+        <a href="/ingreso">Ir a ingresar</a>.
+    </p>
+}
+else if (_work is null)
+{
+    <header class="gf-mb-5">
+        <div class="gf-flex-row gf-flex-row--wrap">
+            <h1>Vista de trabajo</h1>
+        </div>
+    </header>
+
+    @if (_unavailable)
+    {
+        @* INDISPONIBLE: no se arma ni la escena ni el árbol, y no se muestra ningún dato viejo. *@
+        <section class="gf-unavailable-notice" role="alert" aria-labelledby="work-unavailable-heading">
+            <h2 id="work-unavailable-heading"><Icon Name="Alert" SizeClass="gf-icon--20" />Ahora no podemos traer este trabajo</h2>
+            <p>
+                El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+                Probá de nuevo en un rato.
+            </p>
+            <a class="gf-btn gf-btn--secondary gf-mt-3" href="@Navigation.Uri">Reintentar traer el trabajo</a>
+        </section>
+    }
+    else
+    {
+        @* EL ÚNICO ESTADO DE NEGATIVA, y no dice nada más. *@
+        <p class="gf-banner gf-banner--error" role="alert">
+            No encontramos ese trabajo. Volviste al listado desde el que lo pediste.
+        </p>
+    }
+}
+else
+{
+    <header class="gf-mb-5">
+        <div class="gf-flex-row gf-flex-row--wrap">
+            <h1>@_work.Name</h1>
+            <span class="gf-badge @BadgeClassOf(_work.Status)">@LabelOf(_work.Status)</span>
+        </div>
+        @* Las dos fechas se rotulan distinto para que no se lean como la misma: la del trabajo la
+           declara el alumno, tal como la escribió. *@
+        <p class="gf-caption gf-num gf-margin-top-1">@_work.DeclaredDate · @OwnerName</p>
+    </header>
+
+    @* SUP-08 se aloja ACÁ y no tiene ruta propia. `Linea-Base-Visual.md` §2: «Un sistema construido
+       que le dé ruta propia es deriva mayor». LAS DOS CONDICIONES DEL WIREFRAME, las dos sobre el
+       dato: quien mira es el administrador Y el trabajo está en estado `Pendiente`. *@
+    @if (Session.IsAdministrator && string.Equals(_work.Status, "Submitted", StringComparison.Ordinal))
+    {
+        <WorkResolution />
+    }
+
+    <div class="gf-two-columns">
+        @* Columna izquierda: datos → comentario → observaciones → texto original. El comentario es
+           lo primero que el alumno busca cuando su trabajo ya tiene desenlace, y el texto original
+           va último y colapsado porque es material de consulta y no de lectura. *@
+        <div class="gf-column gf-column--data">
+            <section class="gf-card" aria-labelledby="work-data-heading">
+                <h2 id="work-data-heading" class="gf-meta">Datos del trabajo</h2>
+                <dl class="gf-key-value gf-mt-3">
+                    <dt>Nombre</dt><dd>@_work.Name</dd>
+                    <dt>Fecha del trabajo</dt><dd class="gf-num">@_work.DeclaredDate</dd>
+                    <dt>Estado</dt><dd><span class="gf-badge @BadgeClassOf(_work.Status)">@LabelOf(_work.Status)</span></dd>
+                    <dt>Alumno</dt><dd>@OwnerName</dd>
+                    <dt>Descripción</dt><dd>@_work.Description</dd>
+                </dl>
+            </section>
+
+            @* CMP-68 · el bloque de comentario NO SE DIBUJA SI NO VIENE POBLADO. En esta etapa
+               nunca viene: el desenlace que lo produce es de la etapa `h`. *@
+            @if (!string.IsNullOrWhiteSpace(_work.AdministratorComment))
+            {
+                <section class="gf-comment" aria-labelledby="work-comment-heading">
+                    <h2 id="work-comment-heading" class="gf-meta">Comentario del docente</h2>
+                    <p class="gf-margin-top-2">@_work.AdministratorComment</p>
+                </section>
+            }
+
+            <section class="gf-card" aria-labelledby="work-findings-heading">
+                <h2 id="work-findings-heading" class="gf-meta">Observaciones</h2>
+                @* Apartamiento 2 de la cabecera: NO se dice «Sin observaciones», porque eso
+                   afirmaría que se interpretó el texto y no salió ninguna. Se dice lo que pasa. *@
+                <p class="gf-caption gf-mt-3">
+                    El laboratorio todavía no interpreta el texto, así que por ahora no hay
+                    observaciones que mostrar.
+                </p>
+            </section>
+
+            <section class="gf-card" aria-labelledby="work-text-heading">
+                <h2 id="work-text-heading" class="gf-sr-only">Texto original del trabajo</h2>
+                @* COLAPSADO POR OMISIÓN Y DENTRO DE SU PROPIO CONTENEDOR DESPLAZABLE, que es lo que
+                   hace que un texto largo no empuje la página: `gf-original-text` desplaza adentro.
+                   El texto se escribe ÍNTEGRO y sin reescribir ningún carácter; el marco lo escapa
+                   para el marcado y el navegador lo devuelve idéntico. *@
+                <details class="gf-disclosure">
+                    <summary>Texto original</summary>
+                    <pre class="gf-original-text">@_work.OriginalJson</pre>
+                </details>
+            </section>
+        </div>
+
+        @* Columna derecha: área de dibujo arriba, árbol abajo. LAS DOS SIGUEN SIN DIBUJAR y son de
+           la etapa `g`: acá no se toca el visor (`RA-02`). *@
+        <div class="gf-column gf-column--scene">
+            <section aria-labelledby="work-scene-heading">
+                <h2 id="work-scene-heading" class="gf-meta">Escena</h2>
+                <div class="gf-scene gf-mt-2">
+                    <span class="gf-scene-label">Área de dibujo</span>
+                    <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
+                </div>
+            </section>
+
+            <section aria-labelledby="work-tree-heading">
+                <h2 id="work-tree-heading" class="gf-meta">Árbol de la estructura</h2>
+                <div class="gf-card gf-scroll-box gf-mt-2"></div>
+                @* La nota de sincronización del wireframe describe una interacción que todavía no
+                   existe: prometerla acá sería un control muerto en forma de texto. Se dice qué
+                   falta, y se retira cuando la etapa `g` traiga el dibujo. *@
+                <p class="gf-caption gf-mt-2">El dibujo y el árbol de la estructura todavía no están construidos. Tu texto se guardó entero y está más arriba, en «Texto original».</p>
+            </section>
+        </div>
+    </div>
 }
 
-<div class="gf-two-columns">
-    @* Columna izquierda: datos → comentario → observaciones → texto original. El comentario es
-       lo primero que el alumno busca cuando su trabajo ya tiene desenlace, y el texto original
-       va último y colapsado porque es material de consulta y no de lectura. El bloque de
-       comentario (CMP-68) no se dibuja si no viene poblado, y acá nunca viene. *@
-    <div class="gf-column gf-column--data">
-        <section class="gf-card" aria-labelledby="work-data-heading">
-            <h2 id="work-data-heading" class="gf-meta">Datos del trabajo</h2>
-            <dl class="gf-key-value gf-mt-3">
-                <dt>Nombre</dt><dd></dd>
-                <dt>Fecha del trabajo</dt><dd></dd>
-                <dt>Estado</dt><dd></dd>
-                <dt>Alumno</dt><dd></dd>
-                <dt>Descripción</dt><dd></dd>
-            </dl>
-        </section>
-
-        <section class="gf-card" aria-labelledby="work-findings-heading">
-            <h2 id="work-findings-heading" class="gf-meta">Observaciones</h2>
-            <ul class="gf-findings gf-mt-3">
-                <li class="gf-caption">Sin observaciones.</li>
-            </ul>
-        </section>
-
-        <section class="gf-card" aria-labelledby="work-text-heading">
-            <h2 id="work-text-heading" class="gf-sr-only">Texto original del trabajo</h2>
-            <details class="gf-disclosure">
-                <summary>Texto original</summary>
-                <pre class="gf-original-text"></pre>
-            </details>
-        </section>
-    </div>
-
-    @* Columna derecha: área de dibujo arriba, árbol abajo. *@
-    <div class="gf-column gf-column--scene">
-        <section aria-labelledby="work-scene-heading">
-            <h2 id="work-scene-heading" class="gf-meta">Escena</h2>
-            <div class="gf-scene gf-mt-2">
-                <span class="gf-scene-label">Área de dibujo</span>
-                <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
-            </div>
-        </section>
-
-        <section aria-labelledby="work-tree-heading">
-            <h2 id="work-tree-heading" class="gf-meta">Árbol de la estructura</h2>
-            <div class="gf-card gf-scroll-box gf-mt-2"></div>
-            <p class="gf-caption gf-mt-2">Elegí un nodo de pieza y la escena resalta esa pieza y sólo esa. Elegí una pieza de la escena y el nodo queda marcado, por el mismo índice.</p>
-        </section>
-    </div>
-</div>
-
 @code {
-    /// Identificador del trabajo que se mira. La etapa `b` no lo resuelve contra nada.
+    private static readonly IReadOnlyDictionary<string, string> StatusLabels =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Draft"] = "Borrador",
+            ["Submitted"] = "Pendiente",
+            ["Approved"] = "Finalizado",
+            ["Rejected"] = "Rechazado",
+        };
+
+    /// <summary>Identificador del trabajo que se mira, tal como viene en la dirección.</summary>
     [Parameter] public string? WorkId { get; set; }
 
+    private WorkDetailResponse? _work;
+
+    /// <summary>
+    /// Si la negativa fue del transporte y no del alcance.
+    /// </summary>
+    /// <remarks>
+    /// ES LA ÚNICA DISTINCIÓN QUE ESTA PANTALLA HACE, y no toca RN-03: separa «no pudimos
+    /// preguntar» de «la respuesta fue que no», que son dos cosas distintas para la persona y
+    /// ninguna de las dos revela si el trabajo existe.
+    /// </remarks>
+    private bool _unavailable;
+
+    /// <summary>
+    /// El papel de quien mira. Con sesión sale de la sesión; sin sesión, de la dirección.
+    /// </summary>
+    /// <remarks>
+    /// EL REPLIEGUE POR DIRECCIÓN SE CONSERVA porque es lo que sostiene el paseo sin sesión de
+    /// desarrollo, que `scripts/verify-navigation.sh` recorre. **No decide nada sobre el dato**: sin
+    /// sesión no hay testigo, no se pide ningún trabajo y no se dibuja ninguno.
+    /// </remarks>
     private bool IsAdministrator =>
-        Navigation.ToAbsoluteUri(Navigation.Uri).Query.Contains("papel=administrador", StringComparison.Ordinal);
+        Session.IsOpen
+            ? Session.IsAdministrator
+            : Navigation.ToAbsoluteUri(Navigation.Uri).Query
+                .Contains("papel=administrador", StringComparison.Ordinal);
 
     private string BackHref => IsAdministrator ? "/entrega-comision" : "/mis-trabajos";
 
-    /// Rótulo de regreso, tal como lo arma la maqueta: nombra el listado al que se vuelve.
+    /// <summary>Rótulo de regreso, tal como lo arma la maqueta: nombra el listado al que se vuelve.</summary>
     private string BackLabel => IsAdministrator ? "Volver a la entrega de la comisión" : "Volver a mis trabajos";
+
+    private string OwnerName => _work is null
+        ? string.Empty
+        : $"{_work.OwnerFirstName} {_work.OwnerLastName}".Trim();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Session.LoadAsync();
+
+        if (!Session.IsOpen)
+        {
+            return;
+        }
+
+        // Un identificador sin forma se trata igual que el inexistente y que el ajeno: no se pide
+        // nada y la pantalla dice lo mismo.
+        if (!Guid.TryParse(WorkId, out var workId))
+        {
+            return;
+        }
+
+        var outcome = await DataService.GetWorkAsync(workId, Session.UseAccessToken());
+
+        if (outcome.Succeeded)
+        {
+            _work = outcome.Value!;
+            return;
+        }
+
+        _unavailable = string.Equals(
+            outcome.Error!.Code, ErrorCode.ServiceUnavailable, StringComparison.Ordinal);
+    }
+
+    private static string LabelOf(string status) => StatusLabels.GetValueOrDefault(status, status);
+
+    private static string BadgeClassOf(string status) => status switch
+    {
+        "Draft" => "gf-badge--neutral",
+        "Submitted" => "gf-badge--warning",
+        "Approved" => "gf-badge--success",
+        "Rejected" => "gf-badge--danger",
+        _ => "gf-badge--neutral",
+    };
 }

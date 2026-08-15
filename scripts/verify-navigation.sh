@@ -105,17 +105,52 @@ check —      /estado                            200
 printf '\n== C-2 · las dos superficies SIN ruta ==\n'
 check SUP-08 /resolucion-del-trabajo            404
 check SUP-11 /estado-degradado-y-reconexion     404
-# SUP-08 se comprueba por su CONTENIDO y no por su identificador: la etapa `b` sacó los
-# `SUP-XX` de la pantalla y los dejó en el comentario de cabecera de cada componente, que no
-# llega al navegador. El bloque de resolución se reconoce por su encabezado, que es el de la
-# maqueta aprobada. Y se pide con `papel=administrador` porque es la única condición del
-# wireframe que esta etapa puede evaluar: para el alumno dueño el bloque NO se dibuja.
-n=$(curl -s "$BASE/trabajos/T-1?papel=administrador" | grep -c 'Resolver esta entrega')
-echo "SUP-08 alojada dentro de SUP-07 (/trabajos/T-1, papel administrador): $n ocurrencia(s)"
-[ "$n" -ge 1 ] || fails=$((fails+1))
-m=$(curl -s "$BASE/trabajos/T-1" | grep -c 'Resolver esta entrega')
-echo "SUP-08 NO se dibuja para el alumno dueño (/trabajos/T-1): $m ocurrencia(s)"
-[ "$m" -eq 0 ] || fails=$((fails+1))
+# ---------------------------------------------------------------------------
+# EL ALOJAMIENTO DE SUP-08 SE COMPRUEBA POR INSPECCIÓN DE LA FUENTE, Y ESTE CONTROL SE REESCRIBIÓ
+# EN LA ETAPA `e`. EL MOTIVO IMPORTA MÁS QUE LA REDACCIÓN.
+#
+# Hasta la etapa `d` este control pedía `/trabajos/T-1?papel=administrador` y exigía que el cuerpo
+# trajera el encabezado del bloque de resolución. Eso era correcto **mientras la superficie era un
+# marcador de posición**: sin dato, la única condición del wireframe que se podía evaluar era el
+# papel, y el papel salía de la dirección.
+#
+# LA ETAPA `e` LE DA DATO A ESA SUPERFICIE, y con eso la condición del wireframe se puede construir
+# entera: el bloque se dibuja cuando quien mira es el administrador **y** el trabajo está en estado
+# `Pendiente`, las dos a la vez. Este guion corre **sin sesión** y con la puerta de servicio puesta,
+# de modo que `/trabajos/T-1` no trae ningún trabajo, y `T-1` ni siquiera tiene forma de
+# identificador: no hay ningún papel ni ninguna dirección que pueda hacer aparecer el bloque, y
+# **eso es lo correcto**. Dibujarlo igual sería ofrecerle a alguien decidir sobre un trabajo que no
+# está a la vista, que es exactamente la superficie que miente que la etapa `e` vino a cerrar.
+#
+# QUÉ SE MIDE AHORA, Y POR QUÉ SIGUE SIENDO LA MISMA PUERTA. Lo que este control existe para
+# impedir es que alguien le dé **ruta propia** a `SUP-08` —`Linea-Base-Visual.md` §2: «un sistema
+# construido que le dé ruta propia es deriva mayor»—. Eso se mide en dos mitades que no dependen de
+# ningún dato: el `404` de `/resolucion-del-trabajo` de acá arriba, y la fuente misma —el componente
+# no declara `@page` y la superficie que lo aloja lo invoca—. **No se afloja nada**: se mide lo que
+# la regla dice, en lugar de medir un efecto que la etapa anterior producía por no tener datos.
+BLOQUE=src/GeometriaFactory.Web/Components/Work/WorkResolution.razor
+ANFITRION=src/GeometriaFactory.Web/Components/Pages/WorkView.razor
+
+rutas=$(grep -c '^@page' "$BLOQUE")
+echo "SUP-08 sin ruta propia (declaraciones \`@page\` en $BLOQUE): $rutas"
+[ "$rutas" -eq 0 ] || { echo "   FALLA: SUP-08 declara una ruta propia"; fails=$((fails+1)); }
+
+alojado=$(grep -c '<WorkResolution' "$ANFITRION")
+echo "SUP-08 alojada dentro de SUP-07 (invocaciones en $ANFITRION): $alojado"
+[ "$alojado" -ge 1 ] || { echo "   FALLA: SUP-07 no aloja el bloque de resolución"; fails=$((fails+1)); }
+
+# Y NINGUNA OTRA SUPERFICIE LO ALOJA: `SUP-08` vive en una sola.
+otros=$(grep -rl '<WorkResolution' --include='*.razor' src/GeometriaFactory.Web | grep -cv "^$ANFITRION$")
+echo "SUP-08 alojada en UNA sola superficie (otras que la invocan): $otros"
+[ "$otros" -eq 0 ] || { echo "   FALLA: más de una superficie aloja el bloque"; fails=$((fails+1)); }
+
+# Y SIN SESIÓN NO SE DIBUJA POR NINGUNA DIRECCIÓN, con ni sin `papel=administrador`: la condición
+# del wireframe se evalúa sobre el trabajo, y sin sesión no hay trabajo que traer.
+for r in "/trabajos/T-1" "/trabajos/T-1?papel=administrador"; do
+  m=$(curl -s "$BASE$r" | grep -c 'Resolver esta entrega')
+  echo "SUP-08 NO se dibuja sin sesión ($r): $m ocurrencia(s)"
+  [ "$m" -eq 0 ] || { echo "   FALLA: el bloque se dibuja sin trabajo a la vista"; fails=$((fails+1)); }
+done
 
 printf '\n== C-3 · los tres destinos por papel ==\n'
 destinos() { curl -s "$BASE$1" | tr '\n' ' ' | grep -oE '<ul class="gf-nav[^"]*">.*</ul>' \
