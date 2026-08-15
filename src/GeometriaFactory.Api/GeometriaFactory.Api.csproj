@@ -21,4 +21,19 @@
     <ProjectReference Include="../GeometriaFactory.Contracts/GeometriaFactory.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- La guardia de `CU-02`: verificación del acceso firmado. Versión anclada por la etapa `c`. -->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.11" />
+    <!--
+      Herramienta de TIEMPO DE DISEÑO, y sólo eso: `dotnet ef` la exige en el proyecto de
+      arranque para poder GENERAR una transformación de esquema. `PrivateAssets` la deja fuera de
+      la salida publicada, de modo que la imagen no la lleva. Las transformaciones se APLICAN
+      solas al arrancar y ese camino no la usa (`Infrastructure ADR-07`).
+    -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>

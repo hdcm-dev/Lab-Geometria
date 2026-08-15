@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @inject NavigationManager Navigation
+@inject SessionState Session
 
 @* SHELL DE TRABAJO — `Experiencia-De-Uso.md` §3.2, segundo diagrama.
    «Barra lateral fija con la identidad del laboratorio arriba, tres destinos según el papel al
@@ -10,11 +11,17 @@
    `DESTINOS` (`Linea-Base-Visual.md` §7, `EV-04`). NINGUNA BARRA LATERAL MUESTRA EL DESTINO DEL
    OTRO PAPEL, ni siquiera deshabilitado.
 
-   DE DÓNDE SALE EL PAPEL EN LA ETAPA `b`. No hay sesión todavía, así que el papel se resuelve
-   por la ruta —cada superficie de trabajo pertenece a un papel— y, en las dos superficies que
-   los dos papeles comparten, por el parámetro `papel` de la dirección, que es exactamente lo
-   que hace la maqueta (`Credencial-Propia.html?papel=administrador`). Cuando exista la sesión,
-   el papel sale de ella y este bloque desaparece. *@
+   DE DÓNDE SALE EL PAPEL DESDE LA ETAPA `c`. Con sesión abierta, DE LA SESIÓN. Sin sesión
+   —prerrenderizado, o una dirección escrita a mano sin haber entrado— se cae al repliegue de la
+   etapa `b`: la ruta, y el parámetro `papel` de la dirección en las dos superficies que los dos
+   papeles comparten, que es lo que hace la maqueta (`Credencial-Propia.html?papel=administrador`).
+   El repliegue se conserva porque es lo que mantiene en pie las pantallas de marcador de
+   posición de las etapas siguientes, que todavía no tienen de dónde sacar una sesión.
+
+   EL CIERRE DE SESIÓN ES UN ACTO Y NO UN ENLACE. Descarta la credencial del estado del circuito
+   ANTES de navegar; el enlace de la etapa `b` sólo cambiaba de pantalla y dejaba la credencial
+   viva. El correo que se muestra al pie sale de la sesión: es un dato de identidad, no la
+   credencial, y es lo único de la sesión que llega al navegador. *@
 
 <a class="gf-skip-link" href="#main-content">Ir al contenido</a>
 
@@ -39,11 +46,14 @@
         </ul>
 
         <div class="gf-sidebar-footer">
-            @* La identidad de la persona sale de la sesión, y la etapa `b` no tiene sesión: el
-               hueco queda vacío en lugar de llevar un nombre inventado. El papel sí se muestra,
-               porque es el que decide los tres destinos de arriba y se resuelve por la ruta. *@
+            @if (Session.IsOpen)
+            {
+                <span class="gf-sidebar-person">@Session.Email</span>
+            }
             <span class="gf-sidebar-role">@RoleLabel</span>
-            <a class="gf-btn gf-btn--secondary" href="/ingreso"><Icon Name="SignOut" />Cerrar sesión</a>
+            <button type="button" class="gf-btn gf-btn--secondary" @onclick="SignOut">
+                <Icon Name="SignOut" />Cerrar sesión
+            </button>
             <VersionSeal />
         </div>
     </nav>
@@ -88,6 +98,14 @@
         return string.Equals(_path, target, StringComparison.Ordinal);
     }
 
+    /// Cerrar sesión: primero se descarta la credencial del circuito, y recién después se
+    /// navega. El orden importa: al revés, la credencial sobreviviría a la navegación.
+    private void SignOut()
+    {
+        Session.Close();
+        Navigation.NavigateTo("/ingreso?estado=sesion-cerrada");
+    }
+
     protected override void OnParametersSet()
     {
         var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
@@ -96,9 +114,10 @@
 
         // Rutas propias del administrador. Las del alumno son el resto, y son el valor por
         // defecto, igual que en la maqueta (`DESTINOS[papel] || DESTINOS.alumno`).
-        _isAdministrator =
-            path.StartsWith("/entrega-comision", StringComparison.Ordinal) ||
-            path.StartsWith("/cuentas", StringComparison.Ordinal) ||
-            uri.Query.Contains("papel=administrador", StringComparison.Ordinal);
+        _isAdministrator = Session.IsOpen
+            ? Session.IsAdministrator
+            : path.StartsWith("/entrega-comision", StringComparison.Ordinal) ||
+              path.StartsWith("/cuentas", StringComparison.Ordinal) ||
+              uri.Query.Contains("papel=administrador", StringComparison.Ordinal);
     }
 }

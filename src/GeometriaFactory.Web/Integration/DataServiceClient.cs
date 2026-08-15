@@ -1,4 +1,7 @@
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using GeometriaFactory.Contracts.Accounts;
+using GeometriaFactory.Contracts.Errors;
 using GeometriaFactory.Contracts.Service;
 
 namespace GeometriaFactory.Web.Integration;
@@ -10,6 +13,14 @@ namespace GeometriaFactory.Web.Integration;
 /// Si aparece una segunda salida, `RA-01` —la sesión interactiva no llega al servicio de datos—
 /// se queda sin un lugar donde verificarse. La dirección base llega por configuración
 /// (`ApiBaseUrl`) y se inyecta en el <see cref="HttpClient"/>: acá no hay ninguna dirección escrita.
+///
+/// TODO LO QUE ESTA CLASE HACE OCURRE DEL LADO DEL SERVIDOR de la pieza pública. Es lo que hace
+/// que la credencial de sesión no tenga por dónde llegar al navegador: quien la adjunta es este
+/// código, en el mismo proceso donde vive el estado del circuito.
+///
+/// NINGÚN MENSAJE QUE ESTA CLASE DEVUELVE LLEVA LA DIRECCIÓN DEL SERVICIO (RA-03). Las
+/// excepciones de transporte se convierten en el error de servicio no disponible del contrato,
+/// con el texto de la maqueta, y no se propagan.
 /// </remarks>
 public sealed class DataServiceClient
 {
@@ -19,6 +30,21 @@ public sealed class DataServiceClient
     /// lados se mueven juntos cuando el punto de control cierre `A-4` / `Api BT-07` (riesgo `R-04`).
     /// </summary>
     private const string HealthPath = "salud";
+
+    /// <summary>Ruta del punto de canje `A-01`. Declarada por el intake §17.5.P.3.</summary>
+    private const string TokenPath = "auth/token";
+
+    /// <summary>Ruta del punto de configuración `A-03`. [derivado]</summary>
+    private const string AdministratorSetupPath = "cuentas/administrador";
+
+    /// <summary>Ruta del punto de cambio de la contraseña propia `A-05`. [derivado]</summary>
+    private const string OwnPasswordPath = "cuenta/contrasena";
+
+    /// <summary>
+    /// Texto del estado degradado, tomado literal de la maqueta aprobada.
+    /// </summary>
+    private const string ServiceUnavailableMessage =
+        "El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.";
 
     private readonly HttpClient _httpClient;
 
@@ -48,4 +74,126 @@ public sealed class DataServiceClient
             .ReadFromJsonAsync<ServiceHealth>(cancellationToken)
             .ConfigureAwait(false);
     }
+
+    /// <summary>`A-03` — Configura la cuenta de administrador del primer arranque.</summary>
+    public Task<DataServiceOutcome<AccountSetupResponse>> ConfigureAdministratorAsync(
+        AdministratorSetupRequest request,
+        CancellationToken cancellationToken = default) =>
+        PostAsync<AdministratorSetupRequest, AccountSetupResponse>(
+            AdministratorSetupPath, request, accessToken: null, cancellationToken);
+
+    /// <summary>`A-01` — Canjea correo y contraseña por la credencial de sesión.</summary>
+    public Task<DataServiceOutcome<SessionResponse>> ExchangeCredentialsAsync(
+        CredentialExchangeRequest request,
+        CancellationToken cancellationToken = default) =>
+        PostAsync<CredentialExchangeRequest, SessionResponse>(
+            TokenPath, request, accessToken: null, cancellationToken);
+
+    /// <summary>
+    /// `A-05` — Cambia la contraseña propia exigiendo la vigente.
+    /// </summary>
+    /// <remarks>
+    /// La credencial de sesión se adjunta ACÁ, del lado del servidor. Es el único lugar del
+    /// producto donde la credencial se usa, y el navegador no participa.
+    /// </remarks>
+    public async Task<DataServiceOutcome<bool>> ChangeOwnPasswordAsync(
+        OwnPasswordChangeRequest request,
+        string? accessToken,
+        CancellationToken cancellationToken = default)
+    {
+        var outcome = await PostAsync<OwnPasswordChangeRequest, object>(
+            OwnPasswordPath, request, accessToken, cancellationToken).ConfigureAwait(false);
+
+        return outcome.Succeeded
+            ? DataServiceOutcome<bool>.Resolved(true)
+            : DataServiceOutcome<bool>.Failed(outcome.Error!);
+    }
+
+    private async Task<DataServiceOutcome<TResponse>> PostAsync<TRequest, TResponse>(
+        string path,
+        TRequest request,
+        string? accessToken,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            using var message = new HttpRequestMessage(HttpMethod.Post, path)
+            {
+                Content = JsonContent.Create(request),
+            };
+
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            }
+
+            using var response = await _httpClient
+                .SendAsync(message, cancellationToken)
+                .ConfigureAwait(false);
+
+            if (response.IsSuccessStatusCode)
+            {
+                // `A-05` responde `200` sin cuerpo: no hay nada que leer y no es un fallo.
+                if (typeof(TResponse) == typeof(object))
+                {
+                    return DataServiceOutcome<TResponse>.Resolved(default!);
+                }
+
+                var value = await response.Content
+                    .ReadFromJsonAsync<TResponse>(cancellationToken)
+                    .ConfigureAwait(false);
+
+                return value is null
+                    ? DataServiceOutcome<TResponse>.Failed(Unavailable())
+                    : DataServiceOutcome<TResponse>.Resolved(value);
+            }
+
+            var error = await ReadErrorAsync(response, cancellationToken).ConfigureAwait(false);
+            return DataServiceOutcome<TResponse>.Failed(error);
+        }
+        catch (HttpRequestException)
+        {
+            // El mensaje de la excepción lleva la dirección del servicio: no se propaga (RA-03).
+            return DataServiceOutcome<TResponse>.Failed(Unavailable());
+        }
+        catch (TaskCanceledException)
+        {
+            return DataServiceOutcome<TResponse>.Failed(Unavailable());
+        }
+    }
+
+    private static async Task<ErrorResponse> ReadErrorAsync(
+        HttpResponseMessage response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var error = await response.Content
+                .ReadFromJsonAsync<ErrorResponse>(cancellationToken)
+                .ConfigureAwait(false);
+
+            if (error is not null && !string.IsNullOrWhiteSpace(error.Code))
+            {
+                return error;
+            }
+        }
+        catch (Exception exception) when (exception is HttpRequestException or System.Text.Json.JsonException)
+        {
+            // Una respuesta que no es del contrato no se muestra tal cual: se reemplaza.
+        }
+
+        // El `401` de la guardia no lleva código del contrato, y es deliberado (`Api CU-02` §6):
+        // acá se lo convierte en el código de credencial inválida, que es lo que la pieza pública
+        // necesita para volver a pedir credenciales.
+        return response.StatusCode == System.Net.HttpStatusCode.Unauthorized
+            ? new ErrorResponse(
+                ErrorCode.InvalidCredentials,
+                "El correo o la contraseña no corresponden.",
+                [],
+                DateTimeOffset.UtcNow)
+            : Unavailable();
+    }
+
+    private static ErrorResponse Unavailable() =>
+        new(ErrorCode.ServiceUnavailable, ServiceUnavailableMessage, [], DateTimeOffset.UtcNow);
 }

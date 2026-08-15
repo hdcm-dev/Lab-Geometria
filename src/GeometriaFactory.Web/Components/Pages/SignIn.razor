@@ -1,5 +1,8 @@
 @page "/ingreso"
 @layout AccessShell
+@inject DataServiceClient DataService
+@inject SessionState Session
+@inject NavigationManager Navigation
 
 @* SUP-03 `Ingreso` — CU-02.
    Ruta: `/ingreso`. Shell: acceso.
@@ -9,32 +12,91 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Ingreso.html`.
    Componentes que la maqueta declara acá: CMP-04, CMP-05, CMP-08, CMP-09, CMP-30 a CMP-33.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
-   no valida, no envía y no consulta al servicio de datos. Las cinco bandas de confirmación que
-   acusan recibo de actos de otras superficies, las de error y el aviso de indisponibilidad no se
-   dibujan: los dispara estado que esta etapa no tiene. Tampoco se dibuja el control «Mostrar la
-   contraseña», que es comportamiento y no texto.
+   ETAPA `c`: la pantalla PASA A FUNCIONAR. Canjea correo y contraseña por la credencial de
+   sesión y abre la sesión del circuito.
 
-   La credencial de administrador que la maqueta exhibe en una banda es un INSTRUMENTO DE LA
-   MAQUETA —así lo declara ella misma— y no forma parte del producto: no se porta. *@
+   DÓNDE QUEDA LA CREDENCIAL. En <see cref="SessionState"/>, que vive en el estado del circuito,
+   del lado del servidor de esta pieza. ESTA PANTALLA NO LA TOCA: se la entrega al custodio y no
+   la vuelve a leer. No hay ninguna expresión de este archivo que la escriba en el marcado.
+
+   ENTRAR ACÁ ES SALIR DE DONDE SE ESTABA. Llegar a esta superficie descarta la credencial que
+   el circuito tuviera: es lo que hace que «Cerrar sesión» sea un acto y no una decoración.
+
+   LA BANDA QUE SE MUESTRA AL LLEGAR sale del parámetro `estado` de la dirección, que es
+   exactamente lo que hace la maqueta. Son las cuatro de acuse de recibo de actos que ocurren
+   FUERA de esta superficie, con sus textos literales. *@
 
 <PageTitle>Ingreso</PageTitle>
 
-<StagePlaceholder />
-
 <h1 class="gf-mt-5">Ingresar al laboratorio</h1>
 
-<form class="gf-mt-5">
+@if (_arrival == "confirmacion-aprovisionamiento")
+{
+    <p class="gf-banner gf-banner--confirmation gf-mt-5" role="status">
+        Tu cuenta de administrador quedó creada. El paso siguiente es entrar con ella.
+    </p>
+}
+else if (_arrival == "confirmacion-contrasena")
+{
+    <p class="gf-banner gf-banner--confirmation gf-mt-5" role="status">
+        Tu contraseña quedó guardada. Ya podés entrar con ella.
+    </p>
+}
+else if (_arrival == "sesion-cerrada")
+{
+    <p class="gf-banner gf-banner--confirmation gf-mt-5" role="status">
+        Cerraste sesión. Para volver a entrar, escribí tu correo y tu contraseña.
+    </p>
+}
+
+@if (_state is Outcome.MissingFields)
+{
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">Completá el correo y la contraseña.</p>
+}
+else if (_state is Outcome.Rejected)
+{
+    @* Un único mensaje que no declara cuál de los dos falló: distinguirlos confirmaría la
+       existencia de la identidad. El texto lo escribe la capa que traduce el motivo interno. *@
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">@_rejectionMessage</p>
+}
+else if (_state is Outcome.PasswordChangeRequired)
+{
+    @* No es un error y no se presenta como tal: es un desvío. El punto de acceso al que lleva
+       es de la etapa `d`, que es la que produce contraseñas provisorias. *@
+    <p class="gf-banner gf-banner--info gf-mt-5" role="status">@_rejectionMessage</p>
+}
+
+@if (_state is Outcome.Unavailable)
+{
+    <div class="gf-unavailable-notice gf-margin-block-5" role="alert">
+        <h2>No pudimos verificar tus datos</h2>
+        <p>El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento. Probá de nuevo en un rato.</p>
+    </div>
+}
+
+<form class="gf-mt-5" @onsubmit="SubmitAsync" @onsubmit:preventDefault="true">
     <div class="gf-field">
         <label for="signin-email">Correo</label>
-        <input class="gf-input" id="signin-email" name="email" type="email" autocomplete="username" />
+        <input class="gf-input" id="signin-email" name="email" type="email" autocomplete="username"
+               @bind="_email" @bind:event="oninput" disabled="@_sending" />
     </div>
     <div class="gf-field">
         <label for="signin-password">Contraseña</label>
-        <input class="gf-input" id="signin-password" name="password" type="password" autocomplete="current-password" />
+        <input class="gf-input" id="signin-password" name="password" type="password" autocomplete="current-password"
+               @bind="_password" @bind:event="oninput" disabled="@_sending" />
     </div>
 
-    <button type="button" class="gf-btn gf-btn--primary gf-btn--full">Ingresar</button>
+    <button type="submit" class="gf-btn gf-btn--primary gf-btn--full" disabled="@_sending">
+        @if (_sending)
+        {
+            <span class="gf-spinner"></span>
+            <text>Entrando…</text>
+        }
+        else
+        {
+            <text>Ingresar</text>
+        }
+    </button>
 </form>
 
 <p class="gf-caption gf-mt-5">¿No tenés cuenta? <a href="/registro-de-cuenta">Registrarte</a></p>
@@ -42,3 +104,66 @@
 @* Nota inerte: no es un enlace y no dispara nada. Dice qué hacer y advierte la consecuencia,
    que es la parte que importa (CMP-33). *@
 <p class="gf-caption">Si olvidaste tu contraseña, pedile al docente que te dé de alta otra vez. Tené en cuenta que eso borra también tus trabajos.</p>
+
+@code {
+    private enum Outcome { None, MissingFields, Rejected, PasswordChangeRequired, Unavailable }
+
+    private string _email = string.Empty;
+    private string _password = string.Empty;
+    private bool _sending;
+    private Outcome _state = Outcome.None;
+    private string _rejectionMessage = string.Empty;
+    private string? _arrival;
+
+    protected override void OnInitialized()
+    {
+        // Llegar acá descarta la credencial del circuito. Es el acto de salir.
+        Session.Close();
+
+        var query = Navigation.ToAbsoluteUri(Navigation.Uri).Query;
+        _arrival = query.Contains("estado=confirmacion-aprovisionamiento", StringComparison.Ordinal) ? "confirmacion-aprovisionamiento"
+            : query.Contains("estado=confirmacion-contrasena", StringComparison.Ordinal) ? "confirmacion-contrasena"
+            : query.Contains("estado=sesion-cerrada", StringComparison.Ordinal) ? "sesion-cerrada"
+            : null;
+    }
+
+    private async Task SubmitAsync()
+    {
+        if (string.IsNullOrWhiteSpace(_email) || string.IsNullOrWhiteSpace(_password))
+        {
+            _state = Outcome.MissingFields;
+            _password = string.Empty;
+            return;
+        }
+
+        _sending = true;
+        _state = Outcome.None;
+
+        var outcome = await DataService.ExchangeCredentialsAsync(
+            new CredentialExchangeRequest(_email, _password));
+
+        _sending = false;
+        // La contraseña en claro deja de existir en esta pieza en cuanto el canje termina.
+        _password = string.Empty;
+
+        if (outcome.Succeeded)
+        {
+            Session.Open(outcome.Value!);
+            _arrival = null;
+
+            // `NAV-08` y `NAV-09`: la ruta inicial la decide el papel que devolvió el canje, y
+            // no la dirección escrita.
+            Navigation.NavigateTo(Session.IsAdministrator ? "/entrega-comision" : "/mis-trabajos");
+            return;
+        }
+
+        _rejectionMessage = outcome.Error!.Message;
+        _state = outcome.Error.Code switch
+        {
+            ErrorCode.PasswordChangeRequired => Outcome.PasswordChangeRequired,
+            ErrorCode.ServiceUnavailable => Outcome.Unavailable,
+            ErrorCode.RequiredFieldMissing => Outcome.MissingFields,
+            _ => Outcome.Rejected,
+        };
+    }
+}

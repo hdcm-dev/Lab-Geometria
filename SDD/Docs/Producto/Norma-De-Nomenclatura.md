@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Norma-De-Nomenclatura.md
-**Versión:** 1.6
+**Versión:** 1.7
 **Estado:** Aprobado
 **Fecha:** 2026-08-14
 **Autor:** Orquestador SDD (medición y redacción) · Product Owner (las tres decisiones de §5)
@@ -42,6 +42,7 @@
   - [6.10 Los espacios de nombres](#610-los-espacios-de-nombres)
   - [6.11 Las superficies derivadas: carpetas y nombres de archivo](#611-las-superficies-derivadas-carpetas-y-nombres-de-archivo)
   - [6.12 Agregados por la etapa `b` de `GeometriaFactory-Web`, fuera de los 155](#612-agregados-por-la-etapa-b-de-geometriafactory-web-fuera-de-los-155)
+  - [6.13 Agregados por la etapa `c`, fuera de los 155](#613-agregados-por-la-etapa-c-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -312,9 +313,9 @@ Los emite el programa de escritorio de la Actividad 1, que **no forma parte de e
 
 ### 6.1 La regla del glosario
 
-> **Si un concepto del dominio no está en el glosario —§6.3 a §6.8, §6.10, §6.11 y §6.12—, no se traduce por criterio propio: se agrega primero a la tabla que le corresponde y recién después se escribe el identificador.**
+> **Si un concepto del dominio no está en el glosario —§6.3 a §6.8, §6.10, §6.11, §6.12 y §6.13—, no se traduce por criterio propio: se agrega primero a la tabla que le corresponde y recién después se escribe el identificador.**
 
-**El rango son las nueve tablas, y desde la 1.4 se escribe entero.** La novena la agrega la 1.6: **§6.12**, con los identificadores que la etapa `b` de `GeometriaFactory-Web` necesitó y que ninguna de las ocho anteriores contaba. Hasta la 1.3 la regla decía «§6.3 a §6.8» y dejaba afuera **§6.10** —los 16 subsegmentos de espacio de nombres— y **§6.11** —las cinco superficies derivadas—, que son tablas del mismo glosario y con la misma forma de fila. El corolario de §6.11 manda agregar ahí toda carpeta que no nombre un concepto listado, de modo que la regla ordenaba agregar filas a una tabla que ella misma no nombraba. §6.9 **no** entra en el rango porque no agrega filas: declara las dos unificaciones y los cuatro homónimos de nombres que ya están en §6.4 y en §6.8.
+**El rango son las diez tablas, y desde la 1.4 se escribe entero.** La novena la agrega la 1.6: **§6.12**, con los identificadores que la etapa `b` de `GeometriaFactory-Web` necesitó y que ninguna de las ocho anteriores contaba. **La décima la agrega la 1.7: §6.13**, con los que la etapa `c` escribió al construir la primera rebanada vertical del producto. Hasta la 1.3 la regla decía «§6.3 a §6.8» y dejaba afuera **§6.10** —los 16 subsegmentos de espacio de nombres— y **§6.11** —las cinco superficies derivadas—, que son tablas del mismo glosario y con la misma forma de fila. El corolario de §6.11 manda agregar ahí toda carpeta que no nombre un concepto listado, de modo que la regla ordenaba agregar filas a una tabla que ella misma no nombraba. §6.9 **no** entra en el rango porque no agrega filas: declara las dos unificaciones y los cuatro homónimos de nombres que ya están en §6.4 y en §6.8.
 
 Y sus cuatro corolarios, que son lo que hace que la regla sirva:
 
@@ -343,8 +344,9 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Superficies derivadas por debajo del nivel de espacio de nombres | 5 | 5 | §6.11 |
 | Agregados por la etapa `a` (1.5), **fuera de los 155** | 5 | 5 | §6.4 y §6.5 |
 | Agregados por la etapa `b` (1.6), **fuera de los 155** | 214 | 214 | §6.12 |
+| Agregados por la etapa `c` (1.7), **fuera de los 155** | 106 | 106 | §6.13 |
 
-**Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango.
+**Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **y para las 106 que agrega la etapa `c` en §6.13**, que desde la 1.7 es la décima. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete.
 
 **Las cinco filas de §6.11 no entran en los 155** y por eso van aparte: ninguna de las seis clases de §2.2 las contaba, porque las seis clases cuentan *identificadores* y éstas son *superficies* —carpetas y nombres de archivo— que ninguna regla alcanzaba. Se agregan por el corolario 4 de §6.1, que es lo que esta norma pide hacer cuando aparece un concepto sin fila.
 
@@ -1013,6 +1015,160 @@ validación— y las dos de la portada son las clases de los tres bloques que `L
 declara **instrumento de la maqueta y no producto**. No tienen nombre inglés porque no tienen
 concepto de producto que nombrar.
 
+### 6.13 Agregados por la etapa `c`, fuera de los 155
+
+**Por qué existe esta sección.** La etapa `c` construye la rebanada vertical de la identidad del
+administrador y de la sesión —capacidades `F-01` y `F-05`— y al hacerlo escribe los primeros
+identificadores de **dominio, aplicación, contratos, infraestructura y superficie HTTP** del
+producto. Entran por el **corolario 4 de §6.1**, con el mismo criterio con el que la 1.5 agregó
+las cinco filas de la etapa `a` y la 1.6 las 214 de la etapa `b`: **no cuentan dentro de los
+155**, porque no existían cuando se contaron las seis clases.
+
+**Y hay una ausencia que conviene declarar, porque es la que prueba que el glosario sirvió:
+NINGÚN CÓDIGO DE CONDICIÓN LLEVA FILA NUEVA.** Los veinte códigos que la etapa `c` escribe
+—doce del dominio, dos propios de la aplicación, uno de infraestructura y ocho del contrato,
+con solapamiento— **ya estaban los veinte** en §6.8, con su nombre inglés fijado por `F-03`. La
+etapa `c` los tomó de ahí y no tradujo ninguno por criterio propio, que es exactamente lo que
+§6.1 manda.
+
+**106 filas, contadas:** 30 tipos, 75 miembros y propiedades, y 1 subsegmento de espacio de nombres.
+
+**Tres nombres que la etapa `c` NO agrega porque ya tenían fila**, y se declara para que el
+control `V-1` no los levante como huecos: `Account`, `Role` y `AccountStatus` están en §6.4 con
+sus valores en §6.7; `EfCoreAccountRepository`, `UtcSystemClock` y `AccountConfiguration` están
+en §6.4; `IAccountRepository` está en §6.3; y los dieciocho subsegmentos de espacio de nombres
+que la etapa usa están en §6.10.
+
+#### 6.13.1 Tipos (30)
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| Resultado de dominio | `DomainResult` / `DomainResult<TValue>` | Tipo, guarda del dominio | `Domain ADR-05`; `Domain CU-12` §4 y `CU-03` §7, que devuelven aplicado o rechazado con motivo |
+| Admisibilidad | `Admission` | Tipo, guarda del dominio | `Domain CU-04`, que evalúa si la cuenta admite acceso y con qué motivo si no |
+| Código de condición | `ConditionCode` | Tipo, catálogo de códigos del dominio | Catálogo de `GeometriaFactory-Domain` §3; §6.8.1 declara los 42 códigos que contiene |
+| Identidad por correo | `EmailIdentity` | Tipo, valor del dominio | `Infrastructure ADR-03`; `Modelo-Datos-Logico.md` §2.1, que declara la forma normalizada como la que decide la identidad |
+| Resultado de aplicación | `ApplicationResult` / `ApplicationResult<TValue>` | Tipo, resultado de la capa de aplicación | Catálogo de `GeometriaFactory-Application` §3, que da a cada caso de uso un desenlace con motivo |
+| Identidad de la cuenta | `AccountIdentity` | Tipo, resultado de la capa de aplicación | `Application CU-04` §4, que devuelve identificador, correo y papel |
+| Comprobación de credencial | `CredentialCheck` | Tipo, conjunto cerrado de la capa de aplicación | `Infrastructure CU-06`, que declara los tres desenlaces: coincide, no coincide y valor ilegible |
+| Código de condición de aplicación | `ApplicationConditionCode` | Tipo, catálogo de códigos propios de la capa de aplicación | Catálogo de `GeometriaFactory-Application` §7.1; §6.8.2 declara los 12 propios |
+| Código de condición de infraestructura | `InfrastructureConditionCode` | Tipo, catálogo de códigos de infraestructura visibles desde la aplicación | Catálogo de `GeometriaFactory-Infrastructure` §7.1; §6.8.3 declara los 15 propios |
+| Caso de uso de configurar el administrador | `ConfigureAdministratorUseCase` | Tipo, caso de uso | `Application CU-10` |
+| Caso de uso de resolver el ingreso | `ResolveSignInUseCase` | Tipo, caso de uso | `Application CU-04` |
+| Caso de uso de cambiar la contraseña propia | `ChangeOwnPasswordUseCase` | Tipo, caso de uso | `Application CU-03` |
+| Solicitud de configuración del administrador | `AdministratorSetupRequest` | Tipo, contrato de solicitud | `Contracts CU-02` FA-03; `Definicion-Superficie-HTTP.md` §3, punto `A-03` |
+| Respuesta de configuración de cuenta | `AccountSetupResponse` | Tipo, contrato de respuesta | `Definicion-Superficie-HTTP.md` §3, punto `A-03`, que responde `201` |
+| Solicitud de canje de credenciales | `CredentialExchangeRequest` | Tipo, contrato de solicitud | `Contracts CU-01` §4 paso 1 |
+| Respuesta de sesión | `SessionResponse` | Tipo, contrato de respuesta | `Contracts CU-01` §4 paso 4 y `CA-01` |
+| Solicitud de cambio de la contraseña propia | `OwnPasswordChangeRequest` | Tipo, contrato de solicitud | `Contracts CU-02` FA-02; `PRODUCT-INTAKE` 1.13, que la deja como tipo único de las tres situaciones |
+| Código de error del contrato | `ErrorCode` | Tipo, conjunto cerrado de códigos del contrato | `Contracts CU-06`; §6.8.6 declara los 21 `CONTRATO_*` |
+| Detalle del error | `ErrorDetail` | Tipo, contrato de respuesta | `Contracts CU-06` §4 paso 3 |
+| Respuesta de error | `ErrorResponse` | Tipo, contrato de respuesta | `Contracts CU-06` `CA-01`, que le fija cuatro campos |
+| Derivación de contraseña | `PasswordDerivation` | Tipo, mecanismo de infraestructura | `Infrastructure CU-06` y `ADR-04` |
+| Opciones de firma | `SigningOptions` | Tipo, configuración de infraestructura | `Infrastructure ADR-04` §2 puntos 3 y 5; intake §17.3.P.5 |
+| Emisor del acceso firmado | `AccessTokenIssuer` | Tipo, mecanismo de infraestructura | `Infrastructure CU-08` y `ADR-04` §2 punto 4 |
+| Puntos de autenticación | `AuthenticationEndpoints` | Tipo, agrupador de puntos de acceso | `Api CU-01`; `Definicion-Superficie-HTTP.md` §3, punto `A-01` |
+| Puntos de cuenta | `AccountEndpoints` | Tipo, agrupador de puntos de acceso | `Api CU-03`; `Definicion-Superficie-HTTP.md` §3, puntos `A-03` y `A-05` |
+| Traducción al contrato | `ContractTranslation` | Tipo, traducción de la capa que expone | `Api CU-09` y `ADR-04`; `Definicion-Superficie-HTTP.md` §5 |
+| Traducción | `Translation` | Tipo anidado en `ContractTranslation` | `Definicion-Superficie-HTTP.md` §5, que declara el recorrido de dos traducciones |
+| Estado de la sesión | `SessionState` | Tipo, servicio de la pieza pública | `Web ADR-03`, que ubica la credencial en el estado del circuito |
+| Desenlace del servicio de datos | `DataServiceOutcome<TValue>` | Tipo, resultado de la pieza pública | `Web CU-10`; `Contracts CU-06` FA-02, que declara que el error de transporte lo produce la propia pieza pública |
+| Andamiaje del servicio de datos | `DataServiceHarness` | Tipo, andamiaje de la batería de pruebas | Intake §17.5.P.6, que exige golpear la aplicación real por HTTP. **[propuesta de la etapa `c`]** |
+
+**Los nombres de los tipos de prueba no llevan fila, y es una regla y no un olvido.** Una clase
+de prueba se llama como el tipo que ejercita más el sufijo `Tests` —`AccountTests`,
+`AccountUseCaseTests`, `SessionCredentialTests`—: no nombra ningún concepto nuevo, nombra al que
+ya tiene fila. La única excepción es `DataServiceHarness`, que sí nombra un concepto propio —el
+andamiaje que levanta la pieza de datos en memoria— y por eso está en la tabla.
+
+#### 6.13.2 Miembros y propiedades (75)
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| Identificador | `Id` | Propiedad de `Account` y de `AccountIdentity` | `Definicion-Modelo-De-Dominio.md` §2.1 |
+| Correo | `Email` | Propiedad de `Account`, `AccountIdentity` y los contratos de cuenta | `Definicion-Modelo-De-Dominio.md` §2.1 |
+| Correo normalizado | `NormalizedEmail` | Propiedad de `Account` | `Modelo-Datos-Logico.md` §2.1; `INV-01` |
+| Nombre | `FirstName` | Propiedad de `Account` y de `AdministratorSetupRequest` | `Definicion-Modelo-De-Dominio.md` §2.1 |
+| Apellido | `LastName` | Propiedad de `Account` y de `AdministratorSetupRequest` | `Definicion-Modelo-De-Dominio.md` §2.1 |
+| Papel | `Role` | Propiedad de `Account`, `AccountIdentity` y los contratos de cuenta | `Definicion-Modelo-De-Dominio.md` §2.1; `RN-01` |
+| Situación | `Status` | Propiedad de `Account` | `Definicion-Modelo-De-Dominio.md` §2.1; `RN-06` |
+| Credencial derivada | `PasswordHash` | Propiedad de `Account` | Intake §17.1.P.5, que prohíbe la contraseña en claro en el dominio |
+| Marca de cambio de contraseña pendiente | `MustChangePassword` | Propiedad de `Account` | `INV-09`; `RN-13`, `RN-14`, `RN-16` |
+| Momento de alta | `CreatedAt` | Propiedad de `Account` | `Modelo-Datos-Logico.md` `RC-06` |
+| Constituir el administrador | `ConfigureAdministrator` | Operación de `Account` | `Domain CU-12` |
+| Reemplazar la credencial | `ReplaceCredential` | Operación de `Account` | `Domain CU-03` FA-01 y FA-04 |
+| Evaluar la admisibilidad | `EvaluateAdmission` | Operación de `Account` | `Domain CU-04` |
+| Se aplicó | `Succeeded` | Miembro de `DomainResult`, `ApplicationResult` y `DataServiceOutcome` | `Domain ADR-05` |
+| Motivo | `ConditionCode` | Miembro de `DomainResult` y de `ApplicationResult` | `Domain ADR-05` |
+| Valor | `Value` | Miembro de `DomainResult<TValue>`, `ApplicationResult<TValue>` y `DataServiceOutcome<TValue>` | `Domain ADR-05` |
+| Aplicado | `Applied` | Constructor con nombre de `DomainResult` y de `ApplicationResult` | `Domain ADR-05` |
+| Rechazado | `Rejected` | Constructor con nombre de `DomainResult` y de `ApplicationResult` | `Domain ADR-05` |
+| Admite | `IsAdmissible` | Miembro de `Admission` | `Domain CU-04` §4 |
+| Motivo de la no admisión | `Reason` | Miembro de `Admission` | `Domain CU-04` §4 |
+| Admisible | `Admissible` | Constructor con nombre de `Admission` | `Domain CU-04` §4 |
+| No admisible | `NotAdmissible` | Constructor con nombre de `Admission` | `Domain CU-04` §5 |
+| Normalizar | `Normalize` | Operación de `EmailIdentity` | `Infrastructure ADR-03` |
+| Recuperar por correo normalizado | `FindByNormalizedEmailAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §3.1 |
+| Recuperar por identificador | `FindByIdAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §3.1 |
+| Existe administrador | `AdministratorExistsAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §2 punto 1; `RN-01` |
+| Correo ya registrado | `EmailIsRegisteredAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §2 punto 1; `RN-02` |
+| Materializar el alta | `AddAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §3.1 |
+| Materializar el cambio | `UpdateAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §3.1 |
+| Ejecutar | `ExecuteAsync` | Operación única de los tres casos de uso | Catálogo de `GeometriaFactory-Application` §3 |
+| Coincide | `Matches` | Valor de `CredentialCheck` | `Infrastructure CU-06` §4 |
+| No coincide | `DoesNotMatch` | Valor de `CredentialCheck` | `Infrastructure CU-06` §5 |
+| Ilegible | `Unreadable` | Valor de `CredentialCheck` | `Infrastructure CU-06` §5; `ADR-04` §2 punto 1 |
+| Identificador de la cuenta | `AccountId` | Miembro de `AccountSetupResponse` y de `SessionResponse` | `Contracts CU-01` `CA-01` |
+| Credencial de sesión | `AccessToken` | Miembro de `SessionResponse` | `Contracts CU-01` `CA-01` |
+| Contraseña | `Password` | Miembro de `CredentialExchangeRequest` y de `AdministratorSetupRequest` | `Contracts CU-01` §4 paso 1 |
+| Contraseña vigente | `CurrentPassword` | Miembro de `OwnPasswordChangeRequest` | `Contracts CU-02` FA-02; `RN-16` |
+| Contraseña nueva | `NewPassword` | Miembro de `OwnPasswordChangeRequest` | `Contracts CU-02` FA-02 |
+| Código | `Code` | Miembro de `ErrorResponse` | `Contracts CU-06` `CA-01` |
+| Texto | `Message` | Miembro de `ErrorResponse` | `Contracts CU-06` `CA-01` |
+| Detalles | `Details` | Miembro de `ErrorResponse` | `Contracts CU-06` `CA-01` |
+| Momento | `OccurredAt` | Miembro de `ErrorResponse` | `Contracts CU-06` `CA-01` |
+| Campo | `Field` | Miembro de `ErrorDetail` | `Contracts CU-06` §4 paso 3 |
+| Índice de figura | `FigureIndex` | Miembro de `ErrorDetail` | `Contracts CU-06` §4 paso 3; `RN-09` |
+| Derivar | `Derive` | Operación de `PasswordDerivation` | `Infrastructure CU-06` §4 |
+| Comprobar | `Verify` | Operación de `PasswordDerivation` | `Infrastructure CU-06` §4 |
+| Función anclada | `AnchoredFunction` | Miembro de `PasswordDerivation` | `Infrastructure ADR-04` §6 punto 1. **[decisión de la etapa `c`: PBKDF2 sobre SHA-256]** |
+| Iteraciones ancladas | `AnchoredIterations` | Miembro de `PasswordDerivation` | `Infrastructure ADR-04` §7. **[propuesta de la etapa `c`]** |
+| Emitir | `Issue` | Operación de `AccessTokenIssuer` | `Infrastructure CU-08` §4 |
+| Parámetros de verificación | `ValidationParameters` | Miembro de `AccessTokenIssuer` | `Api CU-02` §4 |
+| Hay clave de firma | `SigningKeyIsProvided` | Miembro de `AccessTokenIssuer` | `Infrastructure ADR-04` §2 punto 3 |
+| Longitud mínima de la clave de firma | `MinimumSigningKeySizeInBytes` | Miembro de `AccessTokenIssuer` | **[propuesta de la etapa `c`: ninguna fuente da longitud]** |
+| Reclamo del papel | `RoleClaim` | Miembro de `AccessTokenIssuer` | `Infrastructure ADR-04` §2 punto 4 |
+| Clave de firma | `SigningKey` | Miembro de `SigningOptions` | Intake §17.3.P.5 y §17.5.P.5 |
+| Vigencia en minutos | `LifetimeInMinutes` | Miembro de `SigningOptions` | `Infrastructure ADR-04` §2 punto 5. **[propuesta de la etapa `c`: ocho horas]** |
+| Emisor | `Issuer` | Miembro de `SigningOptions` | `Infrastructure ADR-04` §2 punto 4 |
+| Audiencia | `Audience` | Miembro de `SigningOptions` | `Infrastructure ADR-04` §2 punto 4 |
+| Nombre de la sección | `SectionName` | Miembro de `SigningOptions` | `Infrastructure ADR-04` §2 punto 3 |
+| Mapear los puntos de autenticación | `MapAuthenticationEndpoints` | Operación de `AuthenticationEndpoints` | `Definicion-Superficie-HTTP.md` §3, punto `A-01` |
+| Mapear los puntos de cuenta | `MapAccountEndpoints` | Operación de `AccountEndpoints` | `Definicion-Superficie-HTTP.md` §3, puntos `A-03` y `A-05` |
+| Identificador de cuenta del acceso | `AccountIdOf` | Operación de `AuthenticationEndpoints` | `Api CU-02` §7 |
+| Traducir | `Translate` | Operación de `ContractTranslation` | `Definicion-Superficie-HTTP.md` §5 |
+| Problema | `Problem` | Operación de `ContractTranslation` | `Definicion-Superficie-HTTP.md` §5 y §6 |
+| Hay sesión | `IsOpen` | Miembro de `SessionState` | `Web ADR-03` |
+| Es administrador | `IsAdministrator` | Miembro de `SessionState` | `Experiencia-De-Uso.md` §3.2, que reparte destinos por papel |
+| Abrir | `Open` | Operación de `SessionState` | `Web CU-02` §4 paso 6 |
+| Cerrar | `Close` | Operación de `SessionState` | `Web CU-02`; `Experiencia-De-Uso.md` §3.2, cierre de sesión |
+| Usar la credencial | `UseAccessToken` | Operación de `SessionState` | `Web ADR-03`. **[propuesta de la etapa `c`: es método y no propiedad, para que no sea interpolable en el marcado]** |
+| Resuelto | `Resolved` | Constructor con nombre de `DataServiceOutcome` | `Web CU-10` |
+| Fallido | `Failed` | Constructor con nombre de `DataServiceOutcome` | `Web CU-10` |
+| Error | `Error` | Miembro de `DataServiceOutcome` | `Contracts CU-06` FA-02 |
+| Configurar el administrador | `ConfigureAdministratorAsync` | Operación de `DataServiceClient` | `Definicion-Superficie-HTTP.md` §3, punto `A-03` |
+| Canjear credenciales | `ExchangeCredentialsAsync` | Operación de `DataServiceClient` | `Definicion-Superficie-HTTP.md` §3, punto `A-01` |
+| Cambiar la contraseña propia | `ChangeOwnPasswordAsync` | Operación de `DataServiceClient` | `Definicion-Superficie-HTTP.md` §3, punto `A-05` |
+| Puertos conectados | `ConnectedPorts` | Miembro de `CompositionRoot` | `Api` §2.1, puerta `QG-10` |
+
+#### 6.13.3 Subsegmento de espacio de nombres (1)
+
+**Uno solo, y los otros dieciocho ya estaban en §6.10.** La etapa `c` necesitó agrupar los tipos
+del contrato de error, que ninguna de las filas de §6.10 nombraba.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `GeometriaFactory.Contracts.Errores` | `GeometriaFactory.Contracts.Errors` | Subsegmento de espacio de nombres, y la carpeta que le corresponde por §6.11 | `Contracts CU-06`, que declara el tipo único con el que un fallo cruza la frontera |
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -1157,6 +1313,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.7 | 2026-08-14 | **Agrega §6.13, la décima tabla del glosario: los 106 identificadores que la etapa `c` necesitó, y no renombra nada.** La trae la etapa `c`, que construye la primera **rebanada vertical** del producto —identidad del administrador y sesión, capacidades `F-01` y `F-05`— y que al hacerlo escribe los primeros identificadores de **dominio, aplicación, contratos, infraestructura y superficie HTTP**: **30 tipos**, **75 miembros y propiedades** y **1 subsegmento de espacio de nombres**, `GeometriaFactory.Contracts.Errors`. Entran por el **corolario 4 de §6.1** y **fuera de los 155**, con el mismo criterio con el que la 1.5 agregó las cinco de la etapa `a` y la 1.6 las 214 de la etapa `b`. **Lo que más importa de esta emisión es una ausencia: ningún código de condición lleva fila nueva.** Los veinte que la etapa `c` escribió —doce del dominio, dos propios de la aplicación, uno de infraestructura y ocho del contrato— **ya estaban los veinte** en §6.8 con su nombre inglés fijado por `F-03`, y la etapa los tomó de ahí sin traducir ninguno por criterio propio: es la primera vez que el glosario se usa para lo que fue escrito, y funcionó. **Seis filas llevan marca de propuesta o de decisión de etapa y no de fuente**: `DataServiceHarness`, `AnchoredFunction` —donde se ancla **PBKDF2 sobre SHA-256**, elección que la etapa `c` toma aplicando el criterio de `Infrastructure ADR-04` §2, que el intake §17.3.P.1 dejó abierto entre PBKDF2 y Argon2—, `AnchoredIterations`, `MinimumSigningKeySizeInBytes`, `LifetimeInMinutes` y `UseAccessToken`, que es método y no propiedad justamente para que no sea interpolable en el marcado. La regla de §6.1 y el control `V-1` pasan de **nueve tablas a diez**, y §6.2 suma la fila del recuento. **No renombra nada del corpus, no toca las nueve tablas anteriores y no mueve ninguna cifra de §2 ni el total de 155.** | Etapa `c` (construcción y recuento) |
 | 1.6 | 2026-08-14 | **Agrega §6.12, la novena tabla del glosario: los 214 identificadores que la etapa `b` de `GeometriaFactory-Web` necesitó, y no renombra nada.** La trae la etapa `b`, que construye las once superficies como pantallas de marcador de posición y **porta el sistema visual de la maqueta aprobada**, y que al hacerlo escribe cuatro familias de identificadores que **ninguna de las ocho tablas anteriores contaba**: **24 tipos de componente** —los dos armazones, las once superficies con los tres cursos de `Credencial-Propia` desdoblados por su shell, los compartidos y las dos carpetas nuevas—, **13 miembros y parámetros**, **9 iconos** del catálogo `ICONOS` de la maqueta, y **168 nombres de clase CSS y de animación** —165 clases y 3 `@keyframes`—, que son el grueso y la familia que obligó a abrir la sección: una clase CSS la lee el navegador, cae del lado de §3 y hasta ahora no tenía regla porque no había hoja de estilos del producto. Entran por el **corolario 4 de §6.1** y **fuera de los 155**, con el mismo criterio con el que la 1.5 agregó las cinco de la etapa `a`. **La frontera de §6.11 se sostiene sin excepción**: la maqueta conserva sus nombres castellanos y no se renombra —es línea de base aprobada—, y lo que §6.12 declara es la **correspondencia** entre las dos escrituras, que es lo que vuelve verificable que el porte fue fiel. Se declaran además **las catorce clases que NO se portaron**, con su motivo: son las de los tres bloques que `Linea-Base-Visual.md` §6 rotula instrumento de la maqueta. La regla de §6.1 y el control `V-1` pasan de **ocho tablas a nueve**, y §6.2 suma la fila del recuento. **Tres filas llevan marca de propuesta y no de fuente** —`StagePlaceholder`, `SurfaceOutline` y `NotFoundSurface`/`NotFoundPage`—, porque ninguna fuente las declara; `NotFoundSurface` además **no lleva `SUP-XX`**, por la misma razón por la que `Linea-Base-Visual.md` §6.1 no le inventa identificador a lo que nadie miró. **No renombra nada del corpus, no toca las ocho tablas anteriores y no mueve ninguna cifra de §2 ni el total de 155.** | Etapa `b` de `GeometriaFactory-Web` (porte y recuento) |
 | 1.5 | 2026-08-13 | **Suspende los cuatro tramos de renombre que quedaban y emite la regla que los reemplaza; corrige un defecto de método que `R-2` levantó al ejecutarse; y agrega al glosario las cinco filas que la etapa `a` necesitó.** **Primero, y es la decisión del Product Owner del 2026-08-13 (§8):** los tramos ejecutados —`R-1`, `R-1b` y `R-2`— **quedan como están**, y `R-2b`, `R-3`, `R-4` y `R-5` pasan a **suspendidos**. El fundamento es del Product Owner y se transcribe: esos tramos renombraban identificadores **en documentos que describen código que no existe**, y **el glosario ya está completo** para escribir ese código en inglés desde el primer archivo. La regla que los reemplaza es la del recuadro de §8: **el glosario es la fuente de nombres para todo código nuevo**; lo que no está en la tabla **se agrega primero** y no se traduce por criterio propio; y los documentos que describen conceptos con su nombre castellano **se actualizan cuando alguien los toca por otro motivo**, no en una tanda propia. §8 declara además los cuatro puntos que la suspensión **no** afloja —§6 y §3 siguen rigiendo, el corolario 4 de §6.1 pasa a ser el mecanismo principal, `V-4`, `V-6` y `V-7` quedan sin población pero no se retiran, y la actualización por contacto ejecuta los dos actos de §8.2— y **deja escritas dos cifras que no cuadran** con la forma en que la decisión se comunicó: los tramos pendientes son **cuatro** y no cinco, y sus ocurrencias candidatas suman **8260** y no ocho mil seiscientas. No se acomoda ninguna de las dos: las cifras de este documento son medidas (§2.1). **Segundo, el defecto de método (§8.2):** la regla acotada de la 1.3 fundaba la admisión de un solo commit en que «el acto 2 toca prosa y sólo prosa» y por lo tanto «no puede mover ninguna cifra de `V-4`». **`R-2` midió lo contrario**: corregir un párrafo que argumentaba por el nombre viejo toca también las regiones de código de ese párrafo, y **borrar** una ocurrencia mueve el cuadre igual que escribirla, porque `V-4` es aritmético **en las dos direcciones**. El párrafo queda **tachado y marcado, no borrado** (§8.2 barrido 2 y `V-7`), con lo que sobrevive de él declarado, y la regla pasa a decir **«escribe, borra o mueve»**, con la obligación de volver a medir las dos direcciones después del acto 2 si los actos ya fueron juntos. **Tercero, el glosario (§6.2, §6.4 y §6.5):** la etapa `a` ejerció el corolario 4 de §6.1 y agregó **cinco filas**, declaradas **fuera de los 155** igual que las cinco de §6.11, porque ninguna de las seis clases las contó y los conceptos no existían cuando se contaron: `EstadoDelServicio` ⟶ **`ServiceHealth`** y `VisorDeGeometriaFactory` ⟶ **`GeometriaFactoryViewer`** en §6.4, y los tres miembros de `ServiceHealth` —**`Ready`**, **`Version`** y **`ServerTimeUtc`**— en §6.5. **Los recuentos de las seis clases no cambian.** Que el cuerpo de la respuesta de salud lleve esos tres datos sigue siendo **propuesta de la etapa `a`** y decisión del punto de control: acá se fija **cómo se llaman**, no **qué se publica**. | Orquestador SDD · Product Owner (la decisión de §8) |
 | 1.4 | 2026-08-12 | **Corrige el método por tercera vez, y es la última pasada antes de `R-2`.** No la trae un tramo ejecutado: la trae **la revisión de la 1.3 que el orquestador ordenó antes de abrir `R-2`** —sin informe aparte, porque su resultado es esta emisión—, que se preguntó **qué otros controles prometen más de lo que pueden verificar**, que es la clase de defecto que compartían los tres que la 1.3 reparó. Encontró **tres**, y los tres están verificados contra la fuente antes de corregirse. **Primero: `V-1` no podía cuadrar lo que la propia norma había agregado al glosario.** Exigía resolver todo identificador declarado contra «una fila de §6.3 a §6.8», y el glosario tiene además **§6.10** —16 subsegmentos de espacio de nombres— y **§6.11** —5 superficies derivadas, entre ellas el tipo `FigureViewer`—, las dos **fuera de ese rango**; y el corolario de §6.11 manda agregar ahí toda carpeta que no nombre un concepto listado, de modo que la regla ordenaba escribir filas en una tabla que el control no miraba. §2.1 ya decía «§6.3 a §6.11» y §6.1 y `V-1` decían «§6.3 a §6.8»: la contradicción estaba adentro del documento. **Los dos pasan a nombrar el glosario entero —ocho tablas—**, con §6.9 explícitamente fuera, porque no agrega filas. **Segundo: `V-6` levantaba como falla lo que la norma declaró correcto.** Prometía que ninguna carpeta ni archivo bajo `src/`, `tests/` o `visor/` queda en castellano, **sin excepción escrita**, mientras §1 y §6.11 declaran intocable la **raíz `visor/`** del proyecto de código y `scripts/build-visor.sh` la lleva adentro del nombre por la misma razón: son las **10 ocurrencias** —7 de la raíz y 3 del guion— que `R-1b` clasificó a mano sobre sus 17 no renombradas. **`V-6` pasa a admitir los mismos cinco motivos de §4.1 que `V-4`, contra la misma lista previa**, con el mismo cuadre celda por celda y la misma exclusión de la fila de control de cambios del propio tramo. **Tercero: `V-7` contradecía a §8.2.** Prometía que ningún documento tocado conserva texto que argumenta a favor del nombre anterior, mientras §8.2 barrido 2 ordena lo contrario —se reescribe **con el fundamento nuevo, no se borra**, porque un argumento borrado deja la decisión sin por qué—; `R-1b` hizo lo correcto en [`Plan-Etapa-A.md`](Plan-Etapa-A.md) §1.2 —conservó los cinco fundamentos de `P-1a` con su estado y tachó el quinto, refutado por §5.1— y **cerró el control interpretándolo**. **`V-7` se reformula sobre la marca**: pasa el argumento conservado y marcado como superado —estado, fecha y sección que lo supera—, falla el argumento vivo sin marca, y falla también el borrado. El barrido 2 de §8.2 pasa a exigir esa marca. **Y declara qué tan mecánico es cada control.** §7 trae la tabla de los **siete controles y los tres barridos**, con tres veredictos posibles: verificable como está —`V-3`, `V-4`, `V-5` cuando exista código, y el barrido 1—, verificable con la precisión de esta versión —`V-1`, `V-6`, `V-7` y el barrido 2— y **no verificable**, que son **dos**: `V-2`, cuyo «ningún identificador nuevo en castellano» no tiene forma de pasa/falla, y el **barrido 3**, que enumera tres afirmaciones refutadas pero no da texto literal a buscar. Se declara qué haría falta para cada uno y **no se agrega ningún control nuevo**. Consecuencia para `R-2`: `V-2` es control de emisión y el tramo no declara identificadores nuevos; el barrido 3 sí corre, y lo que el tramo declare como cubierto por él **es afirmación de quien lo ejecuta y no medición**, y así debe escribirse en su informe. **No renombra nada, no toca el glosario, no agrega ni quita filas y no mueve ninguna cifra de §2.** | Orquestador SDD (revisión de método, correcciones y redacción) |

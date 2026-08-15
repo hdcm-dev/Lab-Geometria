@@ -11,6 +11,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <!--
+      Levanta la aplicación REAL en memoria y la golpea por HTTP (intake §17.5.P.6). Es lo que
+      permite verificar el cableado que la composición arma, y no una reconstrucción de prueba
+      que podría no parecerse. Versión anclada por la etapa `c`.
+    -->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.11" />
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
       <PrivateAssets>all</PrivateAssets>
@@ -21,6 +27,13 @@
   <ItemGroup>
     <ProjectReference Include="../../src/GeometriaFactory.Api/GeometriaFactory.Api.csproj" />
     <ProjectReference Include="../../src/GeometriaFactory.Contracts/GeometriaFactory.Contracts.csproj" />
+    <!--
+      La pieza pública entra a la batería en la etapa `c` por UN motivo concreto: el cuarto
+      criterio de transición —«la credencial de sesión no es observable desde el navegador»— es
+      una afirmación sobre lo que sus componentes DIBUJAN, y sólo se puede demostrar
+      dibujándolos con una sesión abierta y mirando el marcado producido.
+    -->
+    <ProjectReference Include="../../src/GeometriaFactory.Web/GeometriaFactory.Web.csproj" />
   </ItemGroup>
 
 </Project>

@@ -63,13 +63,20 @@ public sealed class DependencyGateTests
     }
 
     [Fact]
-    public void StageADeclaresNoAttributeOnTheFiveEntities()
+    public void StageCModelsAccountAndLeavesTheOtherFourWithoutAttributes()
     {
-        // El Product Owner ancló el modelado de las entidades a la etapa `c` (`Domain BT-06`).
-        // Esta prueba se retira en esa etapa, y su retiro es parte de `BT-06`.
-        Type[] entities = [typeof(Account), typeof(Work), typeof(Piece), typeof(Component), typeof(Observation)];
+        // RELEVO DECLARADO DE UNA PRUEBA DE LA ETAPA `a`. Hasta la etapa `b` esta prueba se
+        // llamaba `StageADeclaresNoAttributeOnTheFiveEntities` y exigía CERO atributos en las
+        // cinco entidades, porque el Product Owner ancló el modelado a la etapa `c`
+        // (`Domain BT-06`). La etapa `c` modela `Account` y sólo `Account`: el retiro de la
+        // exigencia vieja es parte de `BT-06`, y lo que queda en pie es su otra mitad —que las
+        // cuatro entidades de las etapas `e` y siguientes siguen sin modelar—, que es lo que
+        // impide adelantar etapa sin que nadie lo note.
+        Assert.NotEmpty(typeof(Account).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
 
-        foreach (var entity in entities)
+        Type[] notYetModelled = [typeof(Work), typeof(Piece), typeof(Component), typeof(Observation)];
+
+        foreach (var entity in notYetModelled)
         {
             Assert.Empty(entity.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
         }

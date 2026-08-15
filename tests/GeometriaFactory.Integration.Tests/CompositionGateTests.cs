@@ -35,6 +35,22 @@ public sealed class CompositionGateTests
     }
 
     [Fact]
+    public void StageCConnectsTwoOfTheFourPortsAndNoneTwice()
+    {
+        // Mitad derecha de `QG-10`, en el estado que la etapa `c` deja: DOS puertos conectados
+        // —los dos adaptadores de esta etapa—, cada uno con UN solo adaptador, y los dos que
+        // faltan siguen declarados sin conectar, con su etapa escrita en la composición.
+        Assert.Equal(2, CompositionRoot.ConnectedPorts.Count);
+        Assert.All(CompositionRoot.ConnectedPorts, pair => Assert.Contains(pair.Key, CompositionRoot.DeclaredPorts));
+        Assert.All(CompositionRoot.ConnectedPorts, pair => Assert.True(pair.Key.IsAssignableFrom(pair.Value)));
+
+        // Un adaptador por puerto: ningún adaptador aparece dos veces.
+        Assert.Equal(
+            CompositionRoot.ConnectedPorts.Count,
+            CompositionRoot.ConnectedPorts.Values.Distinct().Count());
+    }
+
+    [Fact]
     public void TheHealthEndpointHasASingleRouteSharedWithTheFront()
     {
         Assert.Equal("/salud", HealthEndpoint.Route);

@@ -1,10 +1,18 @@
 using GeometriaFactory.Web;
 using GeometriaFactory.Web.Integration;
+using GeometriaFactory.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// LA CREDENCIAL DE SESIÓN VIVE ACÁ Y EN NINGÚN OTRO LADO (`Web ADR-03`). El alcance es el del
+// CIRCUITO: bajo interactividad de servidor, un servicio con alcance de ámbito se resuelve una
+// vez por circuito y vive en la memoria del servidor de la pieza pública, de modo que el
+// navegador no tiene por dónde recibirlo. No es una cookie, no es almacenamiento del navegador
+// y no se interpola en el marcado.
+builder.Services.AddScoped<SessionState>();
 
 // La dirección del servicio de datos llega POR CONFIGURACIÓN y nunca embebida en el código
 // (intake §17.6; `Web ADR-07`). El valor real vive como secreto del repositorio y no se versiona.
