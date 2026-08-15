@@ -2,16 +2,22 @@ using GeometriaFactory.Application;
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Accounts;
+using GeometriaFactory.Contracts.Service;
 using GeometriaFactory.Infrastructure.Security;
 
 namespace GeometriaFactory.Api.Endpoints;
 
 /// <summary>
-/// Realiza los tres puntos de acceso de `Api CU-03`: `A-02`, `A-03` y `A-05`.
+/// Realiza los cuatro puntos de acceso de `Api CU-03`: `A-02`, `A-03`, `A-05` y `A-17`.
 /// </summary>
 /// <remarks>
-/// LOS TRES TIENEN EN COMÚN UN RASGO QUE NINGUNO DE LOS DEMÁS TIENE, y es el motivo por el que
+/// LOS CUATRO TIENEN EN COMÚN UN RASGO QUE NINGUNO DE LOS DEMÁS TIENE, y es el motivo por el que
 /// están en un solo contrato: **se ejercen sin acceso firmado, o sin que el papel importe**.
+///
+/// `A-17` ENTRA ACÁ Y NO EN EL PUNTO DE SALUD, y el motivo está escrito en su propio comentario:
+/// responde **si el laboratorio ya tiene administrador**, que es el dato sin el cual el guardián 1
+/// de `Web ADR-03` §2 no se podía construir. Es hermano de `A-03` —misma ventana de alta, mirada
+/// desde afuera— y por eso comparte contrato con él.
 ///
 /// `A-02` REGISTRA UNA CUENTA DE ALUMNO **SIN CAMPO DE CONTRASEÑA**, y sigue siendo anónimo:
 /// **RN-16** suprimió la escritura anónima **de credencial**, no toda escritura anónima. El
@@ -57,6 +63,9 @@ public static class AccountEndpoints
 
     /// <summary>Ruta de `A-05`. [derivado] `Definicion-Superficie-HTTP.md` §3.</summary>
     public const string OwnPasswordRoute = "/cuenta/contrasena";
+
+    /// <summary>Ruta de `A-17`. [derivado] `Definicion-Superficie-HTTP.md` §3.</summary>
+    public const string ProvisioningStateRoute = "/aprovisionamiento";
 
     public static IEndpointRouteBuilder MapAccountEndpoints(this IEndpointRouteBuilder endpoints)
     {
@@ -156,6 +165,39 @@ public static class AccountEndpoints
                 new AccountSetupResponse(identity.Id, identity.Email, identity.Role.ToString()));
         })
         .WithName("ConfigureAdministrator")
+        .AllowAnonymous();
+
+        // `A-17` — SI EL LABORATORIO YA TIENE ADMINISTRADOR. Es el punto que faltaba, y su ausencia
+        // es la razón por la que el **guardián 1** de `Web ADR-03` §2 nunca se construyó: la pieza
+        // pública no tenía con qué preguntarlo. `A-03` configura —es escritura—, `A-16` responde
+        // por la salud del servicio y `A-06` exige ser administrador; ninguno le sirve a un
+        // visitante anónimo, y el guardián corre justamente antes de que nadie se haya identificado.
+        //
+        // ANÓNIMO Y DE SÓLO LECTURA, Y RESPONDE UN SOLO DATO. No hay correo, no hay nombre, no hay
+        // fecha y no hay cantidad de cuentas: lo que se necesita saber es si la ventana de alta
+        // está abierta. Lo que este punto revela **ya es observable en cuanto el guardián empieza a
+        // desviar** —el desvío mismo lo delata—, y la neutralidad que `ADR-03` §6.4 exige es sobre
+        // **no explicar por qué** en la pantalla, no sobre ocultar el hecho.
+        //
+        // POR QUÉ NO SE LE METIÓ EL DATO A `A-16`. La salud la consume el `healthcheck` de
+        // `deploy/compose.yaml`: mezclarle un hecho del producto acopla dos cosas que cambian por
+        // motivos distintos. Son dos preguntas y son dos puntos.
+        //
+        // `200` Y NADA MÁS EN SU TABLA. No hay `503`: este punto no invoca la preparación del
+        // almacén como `A-16` —lee, y si el almacén no atiende la respuesta la produce el manejo
+        // genérico, sin traza ni dirección interna (RA-03)— y no hay ningún estado del laboratorio
+        // que lo haga inválido: «todavía no» es una respuesta legítima y no un fallo.
+        endpoints.MapGet(ProvisioningStateRoute, async (
+            ConfigureAdministratorUseCase configureAdministrator,
+            CancellationToken cancellationToken) =>
+        {
+            var configured = await configureAdministrator
+                .IsConfiguredAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            return Results.Ok(new LaboratoryProvisioning(configured));
+        })
+        .WithName("LaboratoryProvisioning")
         .AllowAnonymous();
 
         endpoints.MapPost(OwnPasswordRoute, async (

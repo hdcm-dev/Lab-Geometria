@@ -51,6 +51,13 @@ builder.Services.AddAuthorization();
 // sobreviva a una recarga y a una pestaña nueva, sin que el testigo se acerque al navegador.
 builder.Services.AddSingleton<SessionTokenStore>();
 
+// LA SONDA DEL APROVISIONAMIENTO, TAMBIÉN CON ALCANCE DE APLICACIÓN. Es lo que hace que el
+// guardián 1 no cueste un viaje de red por navegación: recuerda el «sí» para siempre —el estado
+// es de ida y no vuelve— y no recuerda el «no» ni un segundo, porque la transición ocurre una
+// sola vez en la vida de la instancia y es la que un caché con vencimiento rompe. La asimetría
+// está fundamentada en el comentario de `ProvisioningStateProbe`.
+builder.Services.AddSingleton<ProvisioningStateProbe>();
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<SessionState>();
 
@@ -75,6 +82,25 @@ app.UseStatusCodePagesWithReExecute("/no-encontrado");
 
 app.UseStaticFiles();
 app.UseRouting();
+
+// EL GUARDIÁN 1 DE `Web ADR-03` §2, Y VA PRIMERO DE LOS TRES A PROPÓSITO. Sin administrador
+// configurado, cualquier ruta pedida desvía al aprovisionamiento inicial; con administrador, esa
+// misma ruta deja de armar formulario y desvía de forma neutra. Va **antes** que el intermediario
+// de sesión no restablecible y que el guardián 2 porque su primera mitad habla de **cualquier ruta
+// pedida** y las de ellos hablan de rutas concretas bajo condiciones de sesión: mientras no hay
+// administrador **no hay ninguna cuenta**, de modo que no puede haber sesión válida ni marca
+// huérfana, ellos no tienen nada que decidir, y su desvío a `/ingreso` llevaría a una pantalla
+// donde nadie puede entrar todavía. Al revés, una ruta del panel pedida en un laboratorio sin
+// configurar terminaría en `/ingreso` en lugar de en el aprovisionamiento, que es lo contrario de
+// lo que la ADR declara para el guardián 1.
+//
+// NO NECESITA AUTENTICAR Y POR ESO CORRE ANTES DE `UseAuthentication`: su decisión no mira quién
+// pide, mira el estado del laboratorio. Y corre **después** de `UseStaticFiles`, que es lo que
+// deja los recursos estáticos fuera de su alcance sin que haga falta nombrarlos uno por uno.
+// Sigue ACOTANDO y no haciendo cumplir: quien impide el segundo administrador es el servicio de
+// datos, que responde `409` a `A-03` aunque nadie pase por la pantalla.
+app.UseMiddleware<ProvisioningGateMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

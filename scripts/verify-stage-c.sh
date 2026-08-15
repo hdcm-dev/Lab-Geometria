@@ -12,12 +12,29 @@
 #        inexistente.
 #   C-4  La credencial de sesión no es observable desde el navegador.
 #
-# Y, después de los cuatro, un control que NO es un quinto criterio de
-# transición sino la puerta del **guardián 2 de `Web ADR-03` §2**: «ninguna ruta
-# del panel es accesible sin sesión». Va acá porque este guion es el único que
-# levanta la pieza pública como `Production`, que es donde el guardián rige sin
-# ninguna salvedad. `scripts/verify-navigation.sh` corre en desarrollo y con la
-# puerta de servicio puesta, y por eso allá las mismas rutas responden 200.
+# Y, después de los cuatro, DOS controles que NO son criterios de transición sino
+# las puertas de dos guardianes de `Web ADR-03` §2. Van acá porque este guion es
+# el único que levanta la pieza pública como `Production`, que es donde los
+# guardianes rigen sin ninguna salvedad. `scripts/verify-navigation.sh` corre en
+# desarrollo y con la puerta de servicio puesta, y por eso allá las mismas rutas
+# responden 200.
+#
+#   guardián 2  «Ninguna ruta del panel es accesible sin sesión».
+#   guardián 1  «Una vez que existe la cuenta de administrador, la ruta del
+#               aprovisionamiento deja de armar formulario para siempre y desvía
+#               de forma neutra, sin explicar por qué». Acá se mide LA SEGUNDA
+#               MITAD, que es la que este guion puede medir: cuando el front se
+#               levanta, `C-1` ya configuró el administrador. La primera mitad
+#               —sin administrador toda ruta desvía al aprovisionamiento— y **la
+#               transición entre las dos sin reiniciar la pieza pública** las mide
+#               `ProvisioningGateTests`, que puede gobernar los dos estados.
+#
+# POR ESO `/aprovisionamiento-inicial` SALIÓ DE LA LISTA DE PÚBLICAS DE C-4 Y DEL
+# GUARDIÁN 2, y no es que haya dejado de ser pública: es que con administrador
+# configurado ya no tiene nada que ofrecer, y exigirle 200 sería exigir el defecto
+# que el guardián 1 vino a cerrar. Hasta esta entrega este guion pedía esa ruta y
+# esperaba 200 **con el administrador ya configurado**, es decir, medía y bendecía
+# el formulario que se seguía sirviendo a cualquier anónimo.
 #
 # LAS DOS PIEZAS SE CORREN EN `Release`, Y NO ES UN DETALLE. Este guion construye la
 # solución con `dotnet build -c Release` y hasta la etapa `d` la levantaba con
@@ -156,7 +173,7 @@ for _ in $(seq 1 90); do curl -s -o /dev/null "$WEB/" && break || sleep 1; done
 # 1 · Ninguna respuesta que el navegador recibe trae algo con forma de acceso firmado,
 #     ni SIN sesión ni CON sesión abierta.
 jwt=0
-for r in / /aprovisionamiento-inicial /ingreso /mi-contrasena /entrega-comision /cuentas /mis-trabajos /estado; do
+for r in / /registro-de-cuenta /ingreso /mi-contrasena /entrega-comision /cuentas /mis-trabajos /estado; do
   if curl -s "$WEB$r" | grep -qE 'eyJ[A-Za-z0-9_-]{6,}\.[A-Za-z0-9_-]{6,}\.'; then
     bad "$r trae algo con forma de acceso firmado"; jwt=1
   fi
@@ -254,7 +271,7 @@ data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-d
 
 printf '   -- 3.a · inventario cerrado de guiones propios, sobre las ocho direcciones --\n'
 ajenos=0
-for r in / /aprovisionamiento-inicial /ingreso /mi-contrasena /entrega-comision /cuentas /mis-trabajos /estado; do
+for r in / /registro-de-cuenta /ingreso /mi-contrasena /entrega-comision /cuentas /mis-trabajos /estado; do
   for s in $(curl -s "$WEB$r" | grep -oE '<script[^>]*src="[^"]*"' | sed 's/.*src="//;s/"//'); do
     case "$s" in
       _framework/*|/_framework/*) ;;
@@ -314,7 +331,7 @@ printf '\n== GUARDIÁN 2 · ninguna ruta del panel es accesible sin sesión ==\n
 # estuviera. Esto ACOTA lo que se ofrece y no hace cumplir nada: quien verifica
 # la pertenencia y el papel sigue siendo el servicio de datos, en cada solicitud.
 PANEL='/mis-trabajos /trabajo-nuevo /trabajos/T-1 /trabajos/T-1/editar /cuentas /entrega-comision /mi-contrasena'
-PUBLICAS='/ /aprovisionamiento-inicial /registro-de-cuenta /ingreso /credencial-propia/establecer /credencial-propia/cambio-obligado /estado /no-encontrado'
+PUBLICAS='/ /registro-de-cuenta /ingreso /credencial-propia/establecer /credencial-propia/cambio-obligado /estado /no-encontrado'
 
 printf '   -- sin marca: las siete del panel desvían a /ingreso --\n'
 for r in $PANEL; do
@@ -336,6 +353,32 @@ for r in $PANEL; do
   same "$(curl -s -H "Cookie: $MARCA" -o /dev/null -w '%{http_code}' "$WEB$r")" 200 "$r con sesión"
 done
 
+# ------------------------------------------------ guardián 1 de `ADR-03` §2 ---
+printf '\n== GUARDIÁN 1 · con administrador, el aprovisionamiento deja de armar formulario ==\n'
+# El administrador quedó configurado en `C-1`, de modo que acá rige la SEGUNDA MITAD.
+# Esto ACOTA lo que se ofrece y no hace cumplir nada: la negativa al segundo
+# administrador la sigue produciendo el servicio de datos, y este mismo guion ya la
+# comprobó dos veces —`C-1` y después del reinicio— forzando la petición sin pasar
+# por la pantalla.
+APROV=/aprovisionamiento-inicial
+code=$(curl -s -o /tmp/aprov.html -w '%{http_code}' "$WEB$APROV")
+dest=$(curl -s -o /dev/null -D - "$WEB$APROV" | sed -n 's/^[Ll]ocation: *//p' | tr -d '\r')
+same "$code" 302 "$APROV desvía en lugar de servirse"
+same "$dest" /ingreso "el destino del desvío"
+
+printf '   -- y el desvío es NEUTRO: ni formulario ni explicación --\n'
+# El cuerpo de un desvío no lleva pantalla, y eso es exactamente lo que se verifica:
+# CERO campos de formulario y CERO textos que digan por qué.
+same "$(grep -ci '<input' /tmp/aprov.html)"  0 "campos de formulario en la respuesta"
+same "$(grep -ci '<form' /tmp/aprov.html)"   0 "formularios en la respuesta"
+same "$(grep -ci 'administrador' /tmp/aprov.html)" 0 "menciones al administrador en la respuesta"
+case "$dest" in *\?*) bad "el destino lleva un motivo colgado de la dirección: $dest";; *) ok "el destino no lleva ningún motivo colgado";; esac
+
+printf '   -- el recurso estático y el guion del navegador NO se desvían --\n'
+for r in /css/app.css /interaction/surface-interaction.js; do
+  same "$(curl -s -o /dev/null -w '%{http_code}' "$WEB$r")" 200 "$r se sirve"
+done
+
 printf '\n== RESULTADO ==\n'
-[ "$fails" -eq 0 ] && { echo "CONFORME · los cuatro criterios de transición de la etapa \`c\` pasan"; exit 0; }
+[ "$fails" -eq 0 ] && { echo "CONFORME · los cuatro criterios de transición de la etapa \`c\` y los dos guardianes pasan"; exit 0; }
 echo "NO CONFORME · $fails comprobacion(es) fallan"; exit 1
