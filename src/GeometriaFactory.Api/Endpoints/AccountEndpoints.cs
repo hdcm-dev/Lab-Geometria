@@ -7,9 +7,25 @@ using GeometriaFactory.Infrastructure.Security;
 namespace GeometriaFactory.Api.Endpoints;
 
 /// <summary>
-/// Realiza los puntos de acceso `A-03` y `A-05` (`Api CU-03`).
+/// Realiza los tres puntos de acceso de `Api CU-03`: `A-02`, `A-03` y `A-05`.
 /// </summary>
 /// <remarks>
+/// LOS TRES TIENEN EN COMÚN UN RASGO QUE NINGUNO DE LOS DEMÁS TIENE, y es el motivo por el que
+/// están en un solo contrato: **se ejercen sin acceso firmado, o sin que el papel importe**.
+///
+/// `A-02` REGISTRA UNA CUENTA DE ALUMNO **SIN CAMPO DE CONTRASEÑA**, y sigue siendo anónimo:
+/// **RN-16** suprimió la escritura anónima **de credencial**, no toda escritura anónima. El
+/// registro de cuenta es anónimo por diseño, porque es la puerta por la que el alumno entra al
+/// laboratorio (`PRODUCT-INTAKE` 1.15 §4.1). La cuenta nace `Pending`, sin credencial, y
+/// **todavía no obtiene acceso** (RN-06): la credencial la recibe al ser habilitada, por `A-07`.
+///
+/// EL PUNTO `A-04` QUEDÓ RETIRADO Y **NO SE RECICLA**. Exponía el establecimiento de la
+/// contraseña en el primer ingreso y era **la única escritura de contraseña de esta superficie
+/// que ocurría sin credencial**. Con RN-16 la persona llega a elegir la suya **ya autenticada**,
+/// por `A-05`. De los cuatro puntos que no exigen acceso firmado, **ninguno fija una contraseña
+/// sobre una cuenta existente**, y ésa es la ausencia que §7 de la definición de la superficie
+/// declara como sostenida.
+///
 /// `A-03` configura la cuenta de administrador y **no exige acceso firmado**, porque en el primer
 /// arranque no hay ninguna cuenta que pudiera emitirlo. No es un hueco: sólo procede mientras no
 /// exista administrador, y esa condición la hace cumplir la capa de aplicación con el conjunto de
@@ -33,6 +49,9 @@ namespace GeometriaFactory.Api.Endpoints;
 /// </remarks>
 public static class AccountEndpoints
 {
+    /// <summary>Ruta de `A-02`. [derivado] `Definicion-Superficie-HTTP.md` §3.</summary>
+    public const string RegistrationRoute = "/cuentas";
+
     /// <summary>Ruta de `A-03`. [derivado] `Definicion-Superficie-HTTP.md` §3.</summary>
     public const string AdministratorSetupRoute = "/cuentas/administrador";
 
@@ -42,6 +61,52 @@ public static class AccountEndpoints
     public static IEndpointRouteBuilder MapAccountEndpoints(this IEndpointRouteBuilder endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
+
+        endpoints.MapPost(RegistrationRoute, async (
+            AccountRegistrationRequest request,
+            RegisterAccountUseCase registerAccount,
+            ISystemClock clock,
+            ILoggerFactory loggerFactory,
+            CancellationToken cancellationToken) =>
+        {
+            var now = clock.UtcNow;
+            var log = loggerFactory.CreateLogger(typeof(AccountEndpoints));
+
+            // La respuesta NOMBRA el campo ausente, que es un dato de la petición y no de la
+            // cuenta. NO HAY CAMPO DE CONTRASEÑA QUE PUDIERA FALTAR: el tipo no lo declara.
+            var missing = new List<string>();
+            if (string.IsNullOrWhiteSpace(request?.Email)) { missing.Add(nameof(AccountRegistrationRequest.Email)); }
+            if (string.IsNullOrWhiteSpace(request?.FirstName)) { missing.Add(nameof(AccountRegistrationRequest.FirstName)); }
+            if (string.IsNullOrWhiteSpace(request?.LastName)) { missing.Add(nameof(AccountRegistrationRequest.LastName)); }
+
+            if (missing.Count > 0)
+            {
+                return ContractTranslation.Problem(
+                    Domain.Values.ConditionCode.RequiredFieldMissing, now, [.. missing]);
+            }
+
+            var result = await registerAccount
+                .ExecuteAsync(request!.Email, request.FirstName, request.LastName, cancellationToken)
+                .ConfigureAwait(false);
+
+            if (!result.Succeeded)
+            {
+                log.LogInformation("Registro rechazado con el motivo {Condition}.", result.ConditionCode);
+                return ContractTranslation.Problem(result.ConditionCode, now);
+            }
+
+            var account = result.Value!;
+            log.LogInformation("Cuenta de alumno registrada: {AccountId}.", account.Id);
+
+            // `201`: se constituyó algo que antes no existía. La respuesta declara la situación
+            // inicial, que es lo que sostiene el aviso explícito de RN-06, y NO devuelve
+            // credencial de sesión: registrarse no es entrar.
+            return Results.Created(
+                $"{RegistrationRoute}/{account.Id}",
+                new AccountRegistrationResponse(account.Id, account.Email, account.Status.ToString()));
+        })
+        .WithName("RegisterAccount")
+        .AllowAnonymous();
 
         endpoints.MapPost(AdministratorSetupRoute, async (
             AdministratorSetupRequest request,

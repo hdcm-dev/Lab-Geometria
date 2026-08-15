@@ -108,11 +108,19 @@ public sealed class AccountTests
     }
 
     [Fact]
-    public void NoPublicOperationCanTakeTheAccountOutOfItsState()
+    public void TheSurfaceOfTheAccountIsExactlyTheOperationsTheContractsDeclare()
     {
-        // `INV-08` SE HACE CUMPLIR POR AUSENCIA, y esta prueba es la que lo vuelve verificable:
-        // la superficie pública de la entidad no declara NINGUNA operación que escriba `Status`.
-        // Si la etapa `d` agrega transiciones, esta prueba se cae y obliga a escribir la guarda.
+        // HASTA LA ETAPA `c` ESTA PRUEBA HACÍA CUMPLIR `INV-08` POR AUSENCIA: la superficie
+        // pública no declaraba ninguna operación que escribiera `Status`, y su cabecera anunciaba
+        // que **si la etapa `d` agregaba transiciones, la prueba se caía y obligaba a escribir la
+        // guarda**. La etapa `d` las agregó, la prueba se cayó y la guarda está escrita: es
+        // `TheFiveOperationsAreClosedOverTheAdministratorAccount` de `AccountLifecycleTests`.
+        //
+        // LO QUE ESTA PRUEBA SIGUE HACIENDO ES LO QUE NADIE MÁS HACE: contar la superficie. Un
+        // atributo con escritura pública o una operación de más no rompen ninguna otra prueba, y
+        // acá se ven. Las siete son las que declaran `CU-12`, `CU-01`, `CU-02` —tres de sus
+        // cuatro operaciones, porque habilitar y rehabilitar son la misma—, `CU-03`, `CU-04` y
+        // `CU-13`, y **no hay ninguna octava**.
         var writable = typeof(Account)
             .GetProperties()
             .Where(property => property.CanWrite && (property.SetMethod?.IsPublic ?? false))
@@ -132,7 +140,16 @@ public sealed class AccountTests
             .ToArray();
 
         Assert.Equal(
-            ["ConfigureAdministrator", "EvaluateAdmission", "ReplaceCredential"],
+            [
+                "AdmitDeletion",
+                "Block",
+                "ConfigureAdministrator",
+                "Enable",
+                "EvaluateAdmission",
+                "Register",
+                "ReplaceCredential",
+                "ResetPassword",
+            ],
             operations);
     }
 

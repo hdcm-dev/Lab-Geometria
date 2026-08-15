@@ -18,4 +18,13 @@ public static class InfrastructureConditionCode
     /// comprobar: es un defecto del almacén y NO se responde «no coincide».
     /// </summary>
     public const string UnreadablePasswordHash = "UNREADABLE_PASSWORD_HASH";
+
+    /// <summary>
+    /// `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` — `Infrastructure CU-07`. La fuente de material
+    /// impredecible no respondió y **no se produjo ninguna provisoria**. Se declara acá porque
+    /// esta capa tiene que poder nombrar la condición sin componer el valor por otro medio: un
+    /// reseteo que no se completa es recuperable, y una provisoria adivinable no se nota hasta
+    /// que alguien la usa (`Infrastructure ADR-05` §6).
+    /// </summary>
+    public const string RandomnessSourceUnavailable = "RANDOMNESS_SOURCE_UNAVAILABLE";
 }

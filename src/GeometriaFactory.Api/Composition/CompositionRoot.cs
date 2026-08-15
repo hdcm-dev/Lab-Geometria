@@ -118,10 +118,20 @@ public static class CompositionRoot
             configuration.GetValue("PasswordDerivation:Iterations", PasswordDerivation.AnchoredIterations)));
         services.AddSingleton<AccessTokenIssuer>();
 
+        // La producción de la contraseña provisoria. NO ES UN PUERTO Y NO LO NECESITA: cruza la
+        // frontera como función, igual que la derivación y que la comprobación de credencial, y
+        // por eso los puertos del producto siguen siendo cuatro (`Infrastructure CU-07` §10).
+        services.AddSingleton<ProvisionalPasswordFactory>();
+
         // Los casos de uso de la etapa `c`.
         services.AddScoped<ConfigureAdministratorUseCase>();
         services.AddScoped<ResolveSignInUseCase>();
         services.AddScoped<ChangeOwnPasswordUseCase>();
+
+        // Los casos de uso de la etapa `d`: el ciclo de vida de la cuenta de alumno.
+        services.AddScoped<RegisterAccountUseCase>();
+        services.AddScoped<GovernCommissionAccountsUseCase>();
+        services.AddScoped<ResetStudentPasswordUseCase>();
 
         // La guardia de `CU-02`: verificar la firma y la expiración del acceso presentado.
         // El `401` de la guardia NO lleva código del contrato, y es deliberado: el conjunto
