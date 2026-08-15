@@ -18,10 +18,18 @@
    El repliegue se conserva porque es lo que mantiene en pie las pantallas de marcador de
    posición de las etapas siguientes, que todavía no tienen de dónde sacar una sesión.
 
-   EL CIERRE DE SESIÓN ES UN ACTO Y NO UN ENLACE. Descarta la credencial del estado del circuito
-   ANTES de navegar; el enlace de la etapa `b` sólo cambiaba de pantalla y dejaba la credencial
-   viva. El correo que se muestra al pie sale de la sesión: es un dato de identidad, no la
-   credencial, y es lo único de la sesión que llega al navegador. *@
+   EL CIERRE DE SESIÓN ES UN ACTO Y NO UN ENLACE, Y AHORA ES UN POST. Descarta el testigo del
+   almacén del servidor **y borra la marca del navegador**, que es la parte que un `@@onclick` no
+   puede hacer: borrar una marca es escribir una cabecera, y dentro de un circuito las cabeceras
+   ya salieron. Por eso el botón está dentro de un formulario que envía de verdad, con su
+   testigo de antifalsificación. El enlace de la etapa `b` sólo cambiaba de pantalla; el
+   `@@onclick` de la etapa `c` descartaba la credencial del circuito y dejaba la marca puesta.
+
+   Y POR ESO ESTE ARMAZÓN YA NO NECESITA SER INTERACTIVO: era el `@@onclick` lo único que se lo
+   pedía. Las superficies que aloja siguen declarando su modo de render una por una.
+
+   El correo que se muestra al pie sale de la sesión: es un dato de identidad, no el testigo, y
+   es lo único de la sesión que llega al navegador. *@
 
 <a class="gf-skip-link" href="#main-content">Ir al contenido</a>
 
@@ -51,9 +59,12 @@
                 <span class="gf-sidebar-person">@Session.Email</span>
             }
             <span class="gf-sidebar-role">@RoleLabel</span>
-            <button type="button" class="gf-btn gf-btn--secondary" @onclick="SignOut">
-                <Icon Name="SignOut" />Cerrar sesión
-            </button>
+            <form method="post" @formname="sign-out" @onsubmit="SignOutAsync">
+                <AntiforgeryToken />
+                <button type="submit" class="gf-btn gf-btn--secondary">
+                    <Icon Name="SignOut" />Cerrar sesión
+                </button>
+            </form>
             <VersionSeal />
         </div>
     </nav>
@@ -98,15 +109,33 @@
         return string.Equals(_path, target, StringComparison.Ordinal);
     }
 
-    /// Cerrar sesión: primero se descarta la credencial del circuito, y recién después se
-    /// navega. El orden importa: al revés, la credencial sobreviviría a la navegación.
-    private void SignOut()
+    /// Cerrar sesión: primero se descarta el testigo y se borra la marca, y recién después se
+    /// navega. El orden importa: al revés, la sesión sobreviviría a la navegación.
+    private async Task SignOutAsync()
     {
-        Session.Close();
+        if (HttpContext is not null)
+        {
+            await Session.CloseAsync(HttpContext);
+        }
+
         Navigation.NavigateTo("/ingreso?estado=sesion-cerrada");
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
+    {
+        // La identidad de la marca de sesión se trae antes de decidir qué destinos se dibujan.
+        await Session.LoadAsync();
+        ReadRoute();
+    }
+
+    /// <summary>
+    /// El contexto de la petición, que **sólo existe bajo render estático** — que es como este
+    /// armazón se dibuja—. Es lo que permite borrar la marca al cerrar sesión.
+    /// </summary>
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    private void ReadRoute()
     {
         var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
         var path = uri.AbsolutePath;

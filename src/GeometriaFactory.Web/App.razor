@@ -1,19 +1,29 @@
 @* Armazón del documento.
 
-   INTERACTIVIDAD GLOBAL, Y ES LO QUE HACE POSIBLE `Web ADR-03`. El enrutador se declara
-   interactivo de servidor, de modo que TODA la aplicación vive dentro de UN SOLO CIRCUITO y la
-   navegación entre superficies no lo recicla. Es la condición para que la credencial de sesión
-   pueda vivir en el estado del circuito: con interactividad por página, cada navegación abriría
-   un circuito nuevo, el estado con alcance de ámbito se perdería en cada salto y la única forma
-   de sostener la sesión sería acercarle la credencial al navegador —una cookie o el
-   almacenamiento local—, que es exactamente lo que `ADR-03` descartó.
+   INTERACTIVIDAD POR PÁGINA, Y NO GLOBAL. La etapa `c` declaraba el enrutador entero interactivo
+   de servidor, y esa decisión tenía un costo que no se había pagado: **una superficie interactiva
+   no puede escribir la marca de sesión del navegador**. Su respuesta no es una respuesta HTTP:
+   viaja por el circuito, y para cuando la persona pulsa «Ingresar» las cabeceras de la página ya
+   salieron hace rato. Con la sesión viviendo sólo en el estado del circuito eso no se notaba
+   —no había ninguna marca que escribir—, y el precio era que la sesión no sobrevivía ni a una
+   recarga ni a una pestaña nueva.
+
+   ASÍ QUE EL INGRESO SALE DEL SUBÁRBOL INTERACTIVO y vuelve a ser una petición de verdad: envía
+   por HTTP, canjea, escribe la marca y redirige. `Ingreso` es la ÚNICA superficie que se dibuja
+   así; **las demás siguen declarando `@@rendermode InteractiveServer` una por una** y siguen
+   siendo interactivas de servidor exactamente como antes.
+
+   QUÉ SE PIERDE CON EL CAMBIO, Y POR QUÉ NO IMPORTA YA. Con interactividad global toda la
+   aplicación vivía en UN circuito, y navegar no lo reciclaba: era la condición para que la
+   credencial pudiera vivir en el estado del circuito. Ahora la credencial NO vive ahí —vive en
+   el almacén del servidor, indexada por la marca—, de modo que perder el circuito al navegar
+   dejó de costar la sesión. Es el mismo `Web ADR-03` §2, construido entero por primera vez.
 
    EL PRERRENDERIZADO QUEDA ENCENDIDO. La etapa `b` verifica cada ruta pidiéndola por HTTP y
-   leyendo su `<h1>` del cuerpo devuelto; apagarlo dejaría ese cuerpo vacío y rompería una
-   puerta que hoy pasa. Lo que el prerrenderizado dibuja es la superficie SIN sesión, porque el
-   circuito todavía no existe: el estado real entra en el primer render interactivo. La hoja `css/app.css` es el sistema visual portado desde la maqueta
-   aprobada; la carga acá, una sola vez, para las once superficies. La página `/estado` es
-   andamiaje de la etapa `a` y carga su propia hoja por `<HeadContent>`. *@
+   leyendo su `<h1>` del cuerpo devuelto; apagarlo dejaría ese cuerpo vacío y rompería una puerta
+   que hoy pasa. La hoja `css/app.css` es el sistema visual portado desde la maqueta aprobada; la
+   carga acá, una sola vez, para las once superficies. La página `/estado` es andamiaje de la
+   etapa `a` y carga su propia hoja por `<HeadContent>`. *@
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -21,10 +31,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <link rel="stylesheet" href="css/app.css" />
-    <HeadOutlet @rendermode="InteractiveServer" />
+    @* SIN MODO DE RENDER, y es consecuencia de lo de arriba: el encabezado se dibuja en el mismo
+       pase estático que las superficies, de modo que el título de `Ingreso` —que ya no es
+       interactiva— llega al documento igual que el de las demás. *@
+    <HeadOutlet />
 </head>
 <body class="gf-body">
-    <Routes @rendermode="InteractiveServer" />
+    <Routes />
     <script src="_framework/blazor.web.js"></script>
 </body>
 </html>
