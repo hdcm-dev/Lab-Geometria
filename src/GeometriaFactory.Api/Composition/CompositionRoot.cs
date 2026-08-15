@@ -1,5 +1,6 @@
 using System.Text;
 using GeometriaFactory.Application.Accounts;
+using GeometriaFactory.Application.Works;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Infrastructure.Persistence;
 using GeometriaFactory.Infrastructure.Security;
@@ -16,12 +17,13 @@ namespace GeometriaFactory.Api.Composition;
 /// La puerta `QG-10` (`Api/09 Pipeline-CI-CD.md` §2.1) exige **4 de 4** puertos conectados,
 /// **0** sin adaptador y **0** con más de uno, y falla en construcción cuando falta un puerto.
 ///
-/// ESTADO EN LA ETAPA `c`: **2 de 4 puertos conectados**, y los dos que faltan tienen su etapa
+/// ESTADO EN LA ETAPA `e`: **3 de 4 puertos conectados**, y el que falta tiene su etapa
 /// declarada. `IAccountRepository` ⟶ `EfCoreAccountRepository` e `ISystemClock` ⟶
-/// `UtcSystemClock` son `Infrastructure BT-09` y `BT-12`, los dos de esta etapa, y quedan
-/// conectados acá. `IWorkRepository` ⟶ `EfCoreWorkRepository` es `BT-10` (etapa `e`) y
-/// `IFigureValidator` ⟶ `LocalFigureValidator` es `BT-16` (etapa `f`): conectarlos ahora exigiría
-/// escribirlos, y eso es adelantar dos etapas.
+/// `UtcSystemClock` son `Infrastructure BT-09` y `BT-12`, los dos de la etapa `c`;
+/// `IWorkRepository` ⟶ `EfCoreWorkRepository` es `BT-10` y lo conecta **esta** etapa.
+/// `IFigureValidator` ⟶ `LocalFigureValidator` es `BT-16` (etapa `f`): conectarlo ahora exigiría
+/// escribir el intérprete del texto, y eso es adelantar una etapa entera. **No entra ningún
+/// puerto nuevo**: siguen siendo cuatro y `QG-10` sigue cuadrando.
 ///
 /// LA CLAVE DE FIRMA SE RECIBE Y NO SE BUSCA. Llega por configuración —variable de entorno o
 /// archivo montado— y **no está en el repositorio de código ni en la imagen** (intake §17.3.P.5).
@@ -43,11 +45,12 @@ public static class CompositionRoot
         typeof(ISystemClock)
     ];
 
-    /// <summary>Los puertos que la etapa `c` deja conectados, con su adaptador.</summary>
+    /// <summary>Los puertos que la etapa `e` deja conectados, con su adaptador.</summary>
     public static IReadOnlyDictionary<Type, Type> ConnectedPorts { get; } = new Dictionary<Type, Type>
     {
         [typeof(IAccountRepository)] = typeof(EfCoreAccountRepository),
         [typeof(ISystemClock)] = typeof(UtcSystemClock),
+        [typeof(IWorkRepository)] = typeof(EfCoreWorkRepository),
     };
 
     /// <summary>Nombre de la cadena de conexión del almacén. Su valor llega por configuración.</summary>
@@ -89,13 +92,14 @@ public static class CompositionRoot
         services.AddScoped<StorePreparation>();
         services.AddSingleton<TwoPhaseStartup>();
 
-        // CONEXIÓN DE LOS PUERTOS. Dos de cuatro, con la etapa de los otros dos declarada:
+        // CONEXIÓN DE LOS PUERTOS. Tres de cuatro, con la etapa del que falta declarada:
         //   IAccountRepository ⟶ EfCoreAccountRepository   (Infrastructure BT-09, etapa `c`)
         //   ISystemClock       ⟶ UtcSystemClock            (Infrastructure BT-12, etapa `c`)
         //   IWorkRepository    ⟶ EfCoreWorkRepository      (Infrastructure BT-10, etapa `e`)
         //   IFigureValidator   ⟶ LocalFigureValidator      (Infrastructure BT-16, etapa `f`)
         services.AddScoped<IAccountRepository, EfCoreAccountRepository>();
         services.AddSingleton<ISystemClock, UtcSystemClock>();
+        services.AddScoped<IWorkRepository, EfCoreWorkRepository>();
 
         // Los dos mecanismos sensibles. Son los ÚNICOS lugares del producto donde existen una
         // contraseña en claro y una clave de firma (`Infrastructure ADR-04` §7).
@@ -151,6 +155,14 @@ public static class CompositionRoot
         services.AddScoped<RegisterAccountUseCase>();
         services.AddScoped<GovernCommissionAccountsUseCase>();
         services.AddScoped<ResetStudentPasswordUseCase>();
+
+        // Los casos de uso de la etapa `e`: el trabajo con dueño, estado y persistencia.
+        // NO ENTRA `Application CU-05` —enviar e interpretar el texto—: es de la etapa `f` y
+        // consume el puerto de validación, que sigue sin conectar.
+        services.AddScoped<LoadAndEditOwnWorkUseCase>();
+        services.AddScoped<ConsultOwnWorksUseCase>();
+        services.AddScoped<ReviewCommissionWorksUseCase>();
+        services.AddScoped<DeleteWorkUseCase>();
 
         // La guardia de `CU-02`: verificar la firma y la expiración del acceso presentado.
         // El `401` de la guardia NO lleva código del contrato, y es deliberado: el conjunto

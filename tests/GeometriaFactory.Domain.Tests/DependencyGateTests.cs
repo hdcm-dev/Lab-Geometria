@@ -63,18 +63,24 @@ public sealed class DependencyGateTests
     }
 
     [Fact]
-    public void StageCModelsAccountAndLeavesTheOtherFourWithoutAttributes()
+    public void StageEModelsAccountAndWorkAndLeavesTheOtherThreeWithoutAttributes()
     {
-        // RELEVO DECLARADO DE UNA PRUEBA DE LA ETAPA `a`. Hasta la etapa `b` esta prueba se
-        // llamaba `StageADeclaresNoAttributeOnTheFiveEntities` y exigía CERO atributos en las
-        // cinco entidades, porque el Product Owner ancló el modelado a la etapa `c`
-        // (`Domain BT-06`). La etapa `c` modela `Account` y sólo `Account`: el retiro de la
-        // exigencia vieja es parte de `BT-06`, y lo que queda en pie es su otra mitad —que las
-        // cuatro entidades de las etapas `e` y siguientes siguen sin modelar—, que es lo que
-        // impide adelantar etapa sin que nadie lo note.
-        Assert.NotEmpty(typeof(Account).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+        // RELEVO DECLARADO, POR SEGUNDA VEZ Y CON EL MISMO CRITERIO. Hasta la etapa `b` esta
+        // prueba exigía CERO atributos en las cinco entidades; la `c` modeló `Account` y la
+        // prueba pasó a exigirlo de las otras cuatro. La etapa `e` modela `Work` (`Domain BT-06`
+        // para sus atributos y `BT-12` para su máquina de estados), y lo que queda en pie es la
+        // misma mitad de siempre: **las tres entidades de la etapa `f` siguen sin modelar**. Es
+        // lo que impide adelantar etapa sin que nadie lo note, y es la única forma de que el
+        // orden del roadmap se rompa haciendo fallar algo.
+        Type[] modelled = [typeof(Account), typeof(Work)];
 
-        Type[] notYetModelled = [typeof(Work), typeof(Piece), typeof(Component), typeof(Observation)];
+        foreach (var entity in modelled)
+        {
+            Assert.NotEmpty(entity.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+        }
+
+        // Las tres que interpreta el texto del alumno: son de la etapa `f`.
+        Type[] notYetModelled = [typeof(Piece), typeof(Component), typeof(Observation)];
 
         foreach (var entity in notYetModelled)
         {

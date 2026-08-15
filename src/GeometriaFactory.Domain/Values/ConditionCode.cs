@@ -9,10 +9,19 @@ namespace GeometriaFactory.Domain.Values;
 /// inglés por `Norma-De-Nomenclatura.md` §6.8.1, que da la correspondencia una a una con el
 /// nombre castellano con el que los declara el catálogo.
 ///
-/// ACÁ ESTÁN LOS DIECINUEVE QUE LAS ETAPAS `c` Y `d` USAN, y no los 42 del catálogo: escribir
-/// los otros veintitrés sería declarar condiciones que ninguna operación de estas etapas puede
-/// producir. Los doce primeros los escribió la etapa `c`; los siete últimos los agrega la `d`
-/// con el ciclo de vida de la cuenta (CU-01, CU-02 y CU-13).
+/// ACÁ ESTÁN LOS TREINTA Y TRES QUE LAS ETAPAS `c`, `d` Y `e` USAN, y no los 42 del catálogo:
+/// escribir los NUEVE restantes sería declarar condiciones que ninguna operación de estas etapas
+/// puede producir. Ocho de esos nueve describen la **interpretación del texto**, la reconstrucción
+/// de las piezas y el registro de las observaciones —`WARNING_MISSING_BOTH_VALUES`,
+/// `ERROR_WITHOUT_LOCATION`, `UNKNOWN_OBSERVATION_KIND`, `DECLARED_FAMILY_CONTRADICTS_TYPE`,
+/// `OBSERVATION_ON_MISSING_PIECE`, `INVALID_PIECE_POSITION`, `REBUILD_ON_TERMINAL_WORK` y
+/// `UNKNOWN_PIECE_TYPE`—, que son de la etapa `f`. El noveno,
+/// `OUTCOME_NOT_ALLOWED_BY_CONTRACT`, es **inalcanzable por construcción**: el desenlace tiene
+/// operación propia —<c>ApplyOutcome</c>— y no hay forma de pedirlo por la vía del envío.
+///
+/// Los doce primeros los escribió la etapa `c`; los siete siguientes los agrega la `d` con el
+/// ciclo de vida de la cuenta (CU-01, CU-02 y CU-13); los CATORCE últimos los agrega la `e` con
+/// el trabajo (CU-05, CU-08, CU-09, CU-10 y CU-11).
 /// </remarks>
 public static class ConditionCode
 {
@@ -82,4 +91,70 @@ public static class ConditionCode
 
     /// <summary>`RESETEO_CON_ARRASTRE_DE_TRABAJOS` — CU-13, RN-12. Resetear no es dar de baja.</summary>
     public const string ResetWithWorkCascade = "RESET_WITH_WORK_CASCADE";
+
+    // ---- LOS CATORCE QUE AGREGA LA ETAPA `e` -----------------------------------------------
+    // Los catorce ya estaban en el catálogo y en `Norma-De-Nomenclatura.md` §6.8.1 con su nombre
+    // inglés fijado por `F-03`: acá se transcriben, no se acuñan.
+
+    /// <summary>`TRABAJO_SIN_DUENO` — CU-05, RN-03, INV-02. Un trabajo sin dueño no es un trabajo.</summary>
+    public const string WorkWithoutOwner = "WORK_WITHOUT_OWNER";
+
+    /// <summary>
+    /// `TEXTO_ORIGINAL_ALTERADO` — CU-05, RN-08. El consumidor aporta como original una versión
+    /// corregida por el producto. El producto **no edita el dato del alumno**.
+    /// </summary>
+    public const string OriginalJsonAltered = "ORIGINAL_JSON_ALTERED";
+
+    /// <summary>`REEDICION_FUERA_DE_BORRADOR` — CU-05, RN-04. La reedición está acotada al borrador.</summary>
+    public const string EditOutsideDraft = "EDIT_OUTSIDE_DRAFT";
+
+    /// <summary>
+    /// `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` — CU-09, RN-03, INV-02. **Deliberadamente
+    /// indistinguible de la inexistencia**: el consumidor lo traduce a «no encontrado» y NUNCA a
+    /// «no autorizado», porque «no autorizado» confirmaría que el trabajo ajeno existe.
+    /// </summary>
+    public const string WorkNotFoundForRequester = "WORK_NOT_FOUND_FOR_REQUESTER";
+
+    /// <summary>
+    /// `OPERACION_FUERA_DE_BORRADOR` — CU-09, RN-04, INV-03. Es un motivo **distinto** del
+    /// anterior porque acá la existencia del trabajo ya está admitida para su dueño.
+    /// </summary>
+    public const string OperationOutsideDraft = "OPERATION_OUTSIDE_DRAFT";
+
+    /// <summary>`OPERACION_DESCONOCIDA` — CU-09, CU-11. La operación no pertenece al conjunto declarado.</summary>
+    public const string UnknownOperation = "UNKNOWN_OPERATION";
+
+    /// <summary>
+    /// `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` — CU-11, RN-11, RN-04. El trabajo está en
+    /// `Draft`. **No oculta la existencia**: expresa que está fuera de su flujo de trabajo.
+    /// </summary>
+    public const string WorkOutsideAdministratorScope = "WORK_OUTSIDE_ADMINISTRATOR_SCOPE";
+
+    /// <summary>`ALCANCE_SIN_PAPEL_DE_ADMINISTRADOR` — CU-11, RN-01, RN-11.</summary>
+    public const string ScopeRequiresAdministratorRole = "SCOPE_REQUIRES_ADMINISTRATOR_ROLE";
+
+    /// <summary>`ENVIO_FUERA_DE_BORRADOR` — CU-08, RN-05. Acotado a `Submitted`: los terminales llevan el suyo.</summary>
+    public const string SubmissionOutsideDraft = "SUBMISSION_OUTSIDE_DRAFT";
+
+    /// <summary>
+    /// `ENVIO_SIN_INTERPRETACION` — CU-08, RN-05. El envío decide sobre el resultado de la
+    /// interpretación, y sin ese resultado no hay nada que decidir. **En la etapa `e` es el
+    /// rechazo que recibe todo envío**, porque el intérprete del texto es de la etapa `f`.
+    /// </summary>
+    public const string SubmissionWithoutParseResult = "SUBMISSION_WITHOUT_PARSE_RESULT";
+
+    /// <summary>
+    /// `TRANSICION_DESDE_ESTADO_TERMINAL` — CU-08, CU-10, RN-10, INV-07. **Un solo motivo para los
+    /// dos terminales**, que no los distingue.
+    /// </summary>
+    public const string TransitionFromTerminalStatus = "TRANSITION_FROM_TERMINAL_STATUS";
+
+    /// <summary>`DESENLACE_FUERA_DE_PENDIENTE` — CU-10, RN-10, RN-11.</summary>
+    public const string OutcomeOutsideSubmitted = "OUTCOME_OUTSIDE_SUBMITTED";
+
+    /// <summary>`DESENLACE_SIN_PAPEL_DE_ADMINISTRADOR` — CU-10, RN-10, RN-01. Facultad exclusiva y no delegable.</summary>
+    public const string OutcomeRequiresAdministratorRole = "OUTCOME_REQUIRES_ADMINISTRATOR_ROLE";
+
+    /// <summary>`DESENLACE_DESCONOCIDO` — CU-10, RN-10. El desenlace no es aprobar ni rechazar.</summary>
+    public const string UnknownOutcome = "UNKNOWN_OUTCOME";
 }
