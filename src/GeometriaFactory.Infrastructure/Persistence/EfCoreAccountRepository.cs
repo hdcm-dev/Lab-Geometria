@@ -78,17 +78,36 @@ public sealed class EfCoreAccountRepository : IAccountRepository
     /// Retira una cuenta y todos sus trabajos, en una única unidad de trabajo (RN-07).
     /// </summary>
     /// <remarks>
-    /// HOY RETIRA LA CUENTA SOLA, Y NO ES UN ARRASTRE INCOMPLETO: **los trabajos todavía no
-    /// existen** —son de la etapa `e`— y por lo tanto no hay ninguno que dejar huérfano. Cuando
-    /// la tabla exista, el arrastre entra en ESTA operación y no en el caso de uso, para que
-    /// siga siendo una sola unidad de trabajo y no dos escrituras que puedan quedar a medias
-    /// (`Infrastructure ADR-02`; `RETIRO_PARCIAL_NO_ADMITIDO`).
+    /// ETAPA `e`: EL ARRASTRE ENTRÓ ACÁ ADENTRO, que es donde la etapa `c` anunció que iba a
+    /// entrar. Los trabajos de la cuenta se retiran **en la misma unidad de trabajo** que la
+    /// cuenta: una sola confirmación, y por lo tanto **no existe una baja a medias** que deje
+    /// trabajos sin dueño (`Infrastructure CU-04`; `RETIRO_PARCIAL_NO_ADMITIDO`).
+    ///
+    /// SE RETIRAN LOS CUATRO ESTADOS, TERMINALES INCLUIDOS (`Infrastructure CU-04` FA-03):
+    /// `Approved` y `Rejected` son terminales **para las transiciones, no para el retiro**.
+    ///
+    /// Y SE RETIRAN EXPLÍCITAMENTE, aunque la clave foránea de `RE-06` ya declare el arrastre en
+    /// el esquema. No es redundancia defensiva: el arrastre del esquema depende de que el motor
+    /// tenga la comprobación de claves foráneas encendida, que es un ajuste de conexión y no una
+    /// propiedad del producto. Escribirlo acá hace que **la unidad de trabajo sea la misma en los
+    /// dos casos** y que la prueba de ausencia mida el comportamiento del producto y no el de un
+    /// ajuste.
+    ///
+    /// UNA CUENTA SIN TRABAJOS SE DA DE BAJA IGUAL: un arrastre de cero es válido (FA-02).
     /// </remarks>
     public async Task RemoveAsync(Account account, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(account);
 
+        var works = await _dbContext.Works
+            .Where(work => work.OwnerId == account.Id)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        _dbContext.Works.RemoveRange(works);
         _dbContext.Accounts.Remove(account);
+
+        // UNA SOLA CONFIRMACIÓN PARA LAS DOS COSAS: todo o nada.
         await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
 }

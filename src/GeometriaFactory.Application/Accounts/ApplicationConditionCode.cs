@@ -36,4 +36,36 @@ public static class ApplicationConditionCode
     /// con el reseteo sobre `Pending` y sobre `Blocked`.
     /// </summary>
     public const string ResetLimitedToStudentAccounts = "RESET_LIMITED_TO_STUDENT_ACCOUNTS";
+
+    // ---- LOS TRES QUE AGREGA LA ETAPA `e` --------------------------------------------------
+    // Los tres ya estaban en el catálogo de `GeometriaFactory-Application` y en
+    // `Norma-De-Nomenclatura.md` §6.8.2 con su nombre inglés fijado por `F-03`.
+
+    /// <summary>
+    /// `SOLICITANTE_NO_DECLARADO` — CU-06, RN-03. El consumidor no aporta la identidad de quien
+    /// consulta. **Termina sin consultar el repositorio**: una consulta sin solicitante no se
+    /// puede acotar, y la que no se acota devuelve trabajos ajenos.
+    /// </summary>
+    /// <remarks>
+    /// ES DISTINTO DE `WORK_WITHOUT_OWNER`, y la distinción es de camino y no de causa: aquél lo
+    /// produce la **escritura** —constituir un trabajo sin dueño (`Domain CU-05`)— y éste la
+    /// **consulta**. Los dos catálogos los declaran por separado y ningún documento explica la
+    /// diferencia; se conserva la separación que las fuentes tienen y **queda elevada al Product
+    /// Owner**.
+    /// </remarks>
+    public const string RequesterNotDeclared = "REQUESTER_NOT_DECLARED";
+
+    /// <summary>
+    /// `TRABAJO_INEXISTENTE` — CU-07. El identificador no corresponde a ningún trabajo, **en el
+    /// camino del administrador**. Acá no hay recurso ajeno que proteger: quien pregunta ya
+    /// demostró la facultad.
+    /// </summary>
+    public const string WorkNotFound = "WORK_NOT_FOUND";
+
+    /// <summary>
+    /// `PAPEL_NO_RECONOCIDO` — CU-09, RN-01. El papel declarado no pertenece al conjunto cerrado
+    /// de dos valores. **Termina sin evaluar ninguna de las dos resoluciones**: sin papel no se
+    /// sabe cuál de los dos alcances opuestos aplicar.
+    /// </summary>
+    public const string UnrecognizedRole = "UNRECOGNIZED_ROLE";
 }

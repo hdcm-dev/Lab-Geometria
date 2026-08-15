@@ -68,6 +68,7 @@ store_file="$GF_STORE_FILE"
 # La etapa `e` agrega acá su línea y no toca ninguna otra parte de este guion.
 STORE_INVENTORY=(
   "Account|cuenta(s)"
+  "Work|trabajo(s)"
 )
 
 # Cuenta las filas de una tabla del almacén. Devuelve el número, o `?` si en este

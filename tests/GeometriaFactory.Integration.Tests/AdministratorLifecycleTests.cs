@@ -50,12 +50,20 @@ public sealed class AdministratorLifecycleTests : IDisposable
         using var connection = new SqliteConnection($"Data Source={_storePath}");
         await connection.OpenAsync();
 
-        Assert.Equal(1L, await ScalarAsync(connection,
+        // DOS TRANSFORMACIONES ASENTADAS DESDE LA ETAPA `e`: la de `Account`, de la etapa `c`, y
+        // la de `Work`. El recuento crece con el linaje, y crecerlo acá es lo que impide que una
+        // transformación entre sin que nadie la mire.
+        Assert.Equal(2L, await ScalarAsync(connection,
             "select count(*) from __EFMigrationsHistory"));
-        Assert.Equal(1L, await ScalarAsync(connection,
-            "select count(*) from sqlite_master where type = 'table' and name = 'Account'"));
+        Assert.Equal(2L, await ScalarAsync(connection,
+            "select count(*) from sqlite_master where type = 'table' and name in ('Account', 'Work')"));
         Assert.Equal(2L, await ScalarAsync(connection,
             "select count(*) from sqlite_master where type = 'index' and name in ('UX_Account_NormalizedEmail', 'UX_Account_SingleAdministrator')"));
+
+        // Y el índice de la tabla nueva, que es `IX-03` de `Modelo-Datos-Logico.md` §3: sostiene
+        // las DOS consultas de listado del producto con una sola estructura.
+        Assert.Equal(1L, await ScalarAsync(connection,
+            "select count(*) from sqlite_master where type = 'index' and name = 'IX_Work_Owner_Status'"));
     }
 
     // ---- CRITERIO 1 · el administrador se configura, y sólo mientras no exista ninguno ----

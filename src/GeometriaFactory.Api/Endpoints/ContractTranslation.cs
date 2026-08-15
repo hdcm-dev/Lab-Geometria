@@ -121,11 +121,114 @@ public static class ContractTranslation
             new Translation(ErrorCode.UnclassifiedError, StatusCodes.Status409Conflict,
                 "Esa operación no se aplica sobre la cuenta del docente a cargo del laboratorio."),
 
+        // ---- LOS MOTIVOS QUE AGREGA LA ETAPA `e` -------------------------------------------
+
+        // LOS TRES SALEN POR LA MISMA PUERTA, Y ES EL PUNTO ENTERO DE RN-03: el trabajo que no
+        // existe, el que existe y es de otro, y el borrador que el administrador no ve responden
+        // el MISMO código, el MISMO texto y el MISMO cuerpo. `403` confirmaría que ese trabajo
+        // existe, y ninguna capa de adentro podría repararlo: la regla se rompe eligiendo mal un
+        // número. El texto es neutro a propósito y no dice «no es tuyo».
+        ConditionCode.WorkNotFoundForRequester
+            or ConditionCode.WorkOutsideAdministratorScope
+            or ApplicationConditionCode.WorkNotFound =>
+            new Translation(ErrorCode.WorkNotFound, StatusCodes.Status404NotFound,
+                "No encontramos ese trabajo."),
+
+        // Defectos de la capa que consume, no de la persona: esta superficie no tiene ningún
+        // campo con el que pedirlos. El solicitante siempre viaja en el acceso firmado.
+        ConditionCode.WorkWithoutOwner
+            or ApplicationConditionCode.RequesterNotDeclared
+            or ApplicationConditionCode.UnrecognizedRole
+            or ConditionCode.OriginalJsonAltered =>
+            new Translation(ErrorCode.UnclassifiedError, StatusCodes.Status500InternalServerError,
+                "No pudimos completar la operación. Probá de nuevo en un rato."),
+
         // Los defectos que el conjunto cerrado no describe y que ninguna petición bien formada
         // alcanza. No se inventa un código para ellos: el genérico existe exactamente para que
         // ningún fallo llegue sin representación.
         _ => new Translation(ErrorCode.UnclassifiedError, StatusCodes.Status500InternalServerError,
                 "No pudimos completar la operación. Probá de nuevo en un rato."),
+    };
+
+    /// <summary>
+    /// El alumno pide eliminar un trabajo suyo que ya no está en `Borrador` (`Api CU-06` §6).
+    /// </summary>
+    /// <remarks>
+    /// NO SALE DE <see cref="Translate"/>, Y POR EL MISMO MOTIVO QUE <see cref="AccountNotFound"/>:
+    /// el motivo interno `OPERATION_OUTSIDE_DRAFT` tiene **dos destinos según la operación que lo
+    /// produzca** —`CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` cuando lo produce la eliminación y
+    /// `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` cuando lo produce la reedición—, y resolverlo en la
+    /// tabla habría obligado a elegir uno de los dos y a romper el otro.
+    ///
+    /// LA RESPUESTA DECLARA EL ESTADO ACTUAL, que es lo que la superficie exige, y **no sugiere
+    /// ninguna forma de volver a `Borrador`**, porque no existe.
+    ///
+    /// ESTE CÓDIGO NO SE PRODUCE NUNCA EN EL CAMINO DEL ADMINISTRADOR: a él no lo acota el estado.
+    /// </remarks>
+    public static IResult WorkStateForbidsDelete(DateTimeOffset occurredAt, WorkStatus currentStatus) =>
+        Results.Json(
+            new ErrorResponse(
+                ErrorCode.StateForbidsDelete,
+                $"Este trabajo está en «{LabelOf(currentStatus)}» y ya no lo podés eliminar.",
+                [],
+                occurredAt),
+            statusCode: StatusCodes.Status409Conflict);
+
+    /// <summary>
+    /// El alumno pide reeditar un trabajo suyo que ya no está en `Borrador` (`Api CU-06` §10).
+    /// </summary>
+    /// <remarks>
+    /// El otro destino del mismo motivo interno. Entró al conjunto cerrado por `PRODUCT-INTAKE`
+    /// **1.29** §17.4 P.3, y **cerró el punto abierto 2** que `Definicion-Superficie-HTTP.md` §9
+    /// declaraba: hasta esa decisión este camino caía en el código genérico.
+    /// </remarks>
+    public static IResult WorkStateForbidsUpdate(DateTimeOffset occurredAt, WorkStatus currentStatus) =>
+        Results.Json(
+            new ErrorResponse(
+                ErrorCode.StateForbidsUpdate,
+                $"Este trabajo está en «{LabelOf(currentStatus)}» y ya no se puede modificar.",
+                [],
+                occurredAt),
+            statusCode: StatusCodes.Status409Conflict);
+
+    /// <summary>
+    /// Un acceso que no es de papel `Alumno` pide cargar o reeditar un trabajo.
+    /// </summary>
+    /// <remarks>
+    /// **[APARTAMIENTO DECLARADO DE LA ETAPA `e`, ELEVADO AL PRODUCT OWNER]** El conjunto cerrado
+    /// tiene código propio para la negativa de facultad **del administrador**
+    /// —`OPERATION_ADMIN_ONLY`— y **ninguno para la simétrica**. `Api ADR-04` manda que un motivo
+    /// sin código propio caiga en el genérico y que el hueco se declare en lugar de inventarse un
+    /// código, y eso es lo que se hace: código genérico con respuesta `403`, que es el número que
+    /// `Definicion-Superficie-HTTP.md` §3 ya le da a `A-10` y a `A-11`. Lo que el apartamiento
+    /// contradice es §6 del mismo documento, que le da al genérico sólo `500` y `503`; se elige
+    /// así porque un `500` diría que el producto falló cuando lo que pasa es que quien pide no es
+    /// un alumno. Es el mismo criterio con el que la etapa `d` resolvió sus dos `409`.
+    /// </remarks>
+    public static IResult WorkWritingLimitedToStudents(DateTimeOffset occurredAt) =>
+        Results.Json(
+            new ErrorResponse(
+                ErrorCode.UnclassifiedError,
+                "Cargar y reeditar trabajos es del alumno.",
+                [],
+                occurredAt),
+            statusCode: StatusCodes.Status403Forbidden);
+
+    /// <summary>
+    /// La etiqueta castellana de un estado del trabajo (`Norma-De-Nomenclatura.md` §6.7).
+    /// </summary>
+    /// <remarks>
+    /// EL IDENTIFICADOR SE PERSISTE Y SE SERIALIZA; LA ETIQUETA ES LO QUE VE LA PERSONA, y son
+    /// dos cosas distintas por decisión `F-02`. `Submitted` se etiqueta «Pendiente» y `Approved`
+    /// se etiqueta «Finalizado»: traducir por criterio propio acá metería el identificador inglés
+    /// en un texto que lee un alumno, que es lo que el control `V-3` de la norma detecta.
+    /// </remarks>
+    private static string LabelOf(WorkStatus status) => status switch
+    {
+        WorkStatus.Draft => "Borrador",
+        WorkStatus.Submitted => "Pendiente",
+        WorkStatus.Approved => "Finalizado",
+        _ => "Rechazado",
     };
 
     /// <summary>

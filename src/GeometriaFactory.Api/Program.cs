@@ -37,6 +37,7 @@ app.MapHealthEndpoint();
 app.MapAuthenticationEndpoints();
 app.MapAccountEndpoints();
 app.MapCommissionAccountEndpoints();
+app.MapWorkEndpoints();
 
 await app.RunAsync();
 

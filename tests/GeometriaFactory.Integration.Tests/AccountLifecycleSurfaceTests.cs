@@ -1,10 +1,13 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Accounts;
 using GeometriaFactory.Contracts.Errors;
+using GeometriaFactory.Domain.Entities;
 using GeometriaFactory.Domain.Values;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -601,22 +604,21 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
     // ---- CRITERIO 10 · los trabajos sobreviven al reseteo ------------------------------------
 
     /// <summary>
-    /// LO QUE SÍ SE PUEDE VERIFICAR HOY DEL CRITERIO 10, Y LO QUE NO. El criterio pide que la
-    /// cuenta reseteada conserve **identidad, situación y todos sus trabajos**, verificado sobre
-    /// un alumno con trabajos en tres estados distintos y con sus comentarios.
-    ///
-    /// **LOS TRABAJOS NO EXISTEN TODAVÍA**: son de la etapa `e`, y no hay tabla, ni tipo de
-    /// dominio, ni punto de acceso con el que cargarlos. Inventar un andamiaje que escribiera
-    /// filas en una tabla que el producto no declara **no verificaría nada del producto**, de modo
-    /// que el criterio queda **declarado como no verificable hasta la etapa `e`** y no se da por
-    /// cumplido.
-    ///
-    /// LO QUE SÍ SE MIDE ACÁ ES LA OTRA MITAD, que es la que hoy tiene sustancia: **identidad y
-    /// situación se conservan**, atributo por atributo y leídos del almacén. Y se mide además la
-    /// propiedad estructural que sostiene la mitad que falta: **ningún tipo del circuito de
-    /// reseteo declara un campo con el que un trabajo pudiera perderse**, que es exactamente la
-    /// contracara de la solicitud de baja.
+    /// LA MITAD DEL CRITERIO 10 QUE NO NECESITA TRABAJOS: identidad y situación se conservan.
     /// </summary>
+    /// <remarks>
+    /// LA OTRA MITAD —«y **todos sus trabajos**», sobre un alumno con trabajos en tres estados
+    /// distintos y con sus comentarios— **quedó declarada no verificable en la etapa `d`**, porque
+    /// los trabajos no existían: no había tabla, ni tipo de dominio, ni punto de acceso con el que
+    /// cargarlos. **La cierra la etapa `e`**, en
+    /// <see cref="AccountResetKeepsAllTheWorksInTheirThreeStatuses"/>, que es donde el criterio
+    /// pasa de pendiente a cumplido.
+    ///
+    /// LO QUE SE MIDE ACÁ SIGUE EN PIE Y NO SE DUPLICA: identidad y situación, atributo por
+    /// atributo y leídos del almacén, más la propiedad estructural de que **ningún tipo del
+    /// circuito de reseteo declara un campo con el que un trabajo pudiera perderse**, que es la
+    /// contracara de la solicitud de baja.
+    /// </remarks>
     [Fact]
     public async Task TheResetKeepsTheIdentityAndTheStatusAndDeclaresNoWayToLoseAWork()
     {
@@ -654,6 +656,61 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
 
         Assert.Contains(nameof(AccountDeletionRequest.ConfirmationEmail), typeof(AccountDeletionRequest)
             .GetProperties().Select(p => p.Name));
+    }
+
+    /// <summary>
+    /// CRITERIO 10 DE LA ETAPA `d`, CERRADO POR LA ETAPA `e`: la cuenta reseteada conserva **todos
+    /// sus trabajos**, sobre un alumno con trabajos en **tres estados distintos** y **con sus
+    /// comentarios**, y los conserva **con sus datos**.
+    /// </summary>
+    /// <remarks>
+    /// ES LA MITAD QUE LA ETAPA `d` DECLARÓ NO VERIFICABLE, y la única razón por la que lo era es
+    /// que los trabajos no existían. Ahora existen, y el criterio pasa de **pendiente a
+    /// cumplido**.
+    ///
+    /// SE MIDE SOBRE EL ALMACÉN Y NO SOBRE LA RESPUESTA DEL RESETEO: se toma la foto de las filas
+    /// de trabajo antes y después, campo por campo. La respuesta del reseteo no dice nada de los
+    /// trabajos —ni podría, porque su tipo no declara ningún campo que los referencie—, de modo
+    /// que creerle sería no verificar nada.
+    ///
+    /// LOS TRES ESTADOS SON `Submitted`, `Approved` y `Rejected`, y los dos terminales llevan
+    /// comentario del administrador. Se llega a ellos por las transiciones del dominio, que es lo
+    /// único que puede sacar un trabajo de `Draft`: el punto de acceso del desenlace es de la
+    /// etapa `h`.
+    ///
+    /// Y SE INCLUYE UN CUARTO TRABAJO EN `Draft`, que no hace falta para el enunciado del
+    /// criterio pero sí para lo que el criterio protege: el borrador es lo que un alumno todavía
+    /// no entregó, y perderlo en un reseteo sería la pérdida más cara de las cuatro.
+    /// </remarks>
+    [Fact]
+    public async Task AccountResetKeepsAllTheWorksInTheirThreeStatuses()
+    {
+        var token = await ConfigureAdministratorAsync();
+        var (_, id) = await RegisterStudentAsync();
+        await EnableAsync(token, id);
+
+        await SeedWorkAsync(id, "Entrega en borrador", WorkStatus.Draft, null);
+        await SeedWorkAsync(id, "Entrega enviada", WorkStatus.Submitted, null);
+        await SeedWorkAsync(id, "Entrega finalizada", WorkStatus.Approved, "Muy bien resuelto");
+        await SeedWorkAsync(id, "Entrega rechazada", WorkStatus.Rejected, "Revisá el área del cubo");
+
+        var before = await WorksOfAsync(id);
+
+        Assert.Equal(4, before.Count);
+        Assert.Equal(4, before.Select(work => work.Status).Distinct().Count());
+        Assert.Equal(2, before.Count(work => work.AdministratorComment is not null));
+
+        await ResetAsync(token, id);
+
+        var after = await WorksOfAsync(id);
+
+        // TODOS, CON SUS DATOS: mismo conjunto, campo por campo, incluido el comentario y el
+        // texto original del alumno.
+        Assert.Equal(before, after);
+
+        // Y la cuenta sigue siendo la misma cuenta, con su situación intacta.
+        Assert.Equal("Enabled", await StatusOfAsync(StudentEmail));
+        Assert.True(await MarkOfAsync(StudentEmail));
     }
 
     // ---- Andamiaje --------------------------------------------------------------------------
@@ -788,6 +845,81 @@ public sealed class AccountLifecycleSurfaceTests : IDisposable
         command.Parameters.AddWithValue("$email", EmailIdentity.Normalize(email));
 
         return Convert.ToInt32(await command.ExecuteScalarAsync(), System.Globalization.CultureInfo.InvariantCulture);
+    }
+
+    /// <summary>Una fila de trabajo leída del almacén, para comparar campo por campo.</summary>
+    private sealed record StoredWork(
+        string Id,
+        string OwnerId,
+        string Name,
+        string DeclaredDate,
+        string? Description,
+        string OriginalJson,
+        string Status,
+        string? AdministratorComment,
+        string CreatedAt,
+        string UpdatedAt);
+
+    /// <summary>
+    /// Un trabajo llevado al estado pedido **por las transiciones del dominio y por el puerto del
+    /// producto**. No se escribe ninguna fila a mano: eso verificaría el esquema y no el producto.
+    /// </summary>
+    private async Task SeedWorkAsync(Guid ownerId, string name, WorkStatus status, string? comment)
+    {
+        using var scope = _dataService.Services.CreateScope();
+        var works = scope.ServiceProvider.GetRequiredService<IWorkRepository>();
+        var clock = scope.ServiceProvider.GetRequiredService<ISystemClock>();
+
+        var work = Work.Create(
+            ownerId, name, "2026-08-09", "lo que modelé", "{ \"Figuras\": [], }", true, clock.UtcNow).Value!;
+
+        if (status != WorkStatus.Draft)
+        {
+            Assert.True(work.Submit(true, false, clock.UtcNow).Succeeded);
+        }
+
+        if (status is WorkStatus.Approved or WorkStatus.Rejected)
+        {
+            var outcome = status == WorkStatus.Approved ? WorkOutcome.Approve : WorkOutcome.Reject;
+            Assert.True(work.ApplyOutcome(Role.Administrator, outcome, comment, clock.UtcNow).Succeeded);
+        }
+
+        await works.AddAsync(work);
+    }
+
+    /// <summary>Las filas de trabajo de una cuenta, ordenadas para poder compararlas.</summary>
+    private async Task<IReadOnlyList<StoredWork>> WorksOfAsync(Guid ownerId)
+    {
+        using var connection = new SqliteConnection($"Data Source={_storePath}");
+        await connection.OpenAsync();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = """
+            select Id, OwnerId, Name, DeclaredDate, Description, OriginalJson, Status,
+                   AdministratorComment, CreatedAt, UpdatedAt
+            from Work where OwnerId = $owner collate nocase order by Name
+            """;
+        command.Parameters.AddWithValue("$owner", ownerId.ToString());
+
+        var works = new List<StoredWork>();
+
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            works.Add(new StoredWork(
+                reader.GetString(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.GetString(3),
+                reader.IsDBNull(4) ? null : reader.GetString(4),
+                reader.GetString(5),
+                reader.GetString(6),
+                reader.IsDBNull(7) ? null : reader.GetString(7),
+                reader.GetString(8),
+                reader.GetString(9)));
+        }
+
+        return works;
     }
 
     private sealed record StoredAccount(

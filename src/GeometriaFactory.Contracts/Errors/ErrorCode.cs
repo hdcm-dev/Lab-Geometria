@@ -13,10 +13,14 @@ namespace GeometriaFactory.Contracts.Errors;
 /// `Norma-De-Nomenclatura.md` §5.3, con la correspondencia uno a uno en su §6.8.6. La identidad
 /// del código la da este conjunto, no un prefijo dentro del nombre.
 ///
-/// ACÁ ESTÁN LOS DOCE QUE LAS ETAPAS `c` Y `d` PUEDEN PRODUCIR, de los diecisiete vivos del
-/// conjunto. Ocho los escribió la etapa `c`; los cuatro últimos los agrega la `d` con el gobierno
-/// de las cuentas y el reseteo. Los cinco que faltan describen condiciones **sobre trabajos**,
-/// que son de las etapas `e` y siguientes.
+/// ACÁ ESTÁN LOS QUINCE QUE LAS ETAPAS `c`, `d` Y `e` PUEDEN PRODUCIR, de los diecisiete vivos
+/// del conjunto. Ocho los escribió la etapa `c`; cuatro los agregó la `d` con el gobierno de las
+/// cuentas y el reseteo; los TRES últimos los agrega la `e` con los trabajos.
+///
+/// LOS DOS QUE SIGUEN FALTANDO SON LOS DEL DESENLACE —`CONTRATO_ESTADO_NO_PERMITE_DESENLACE` y
+/// `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`—, que describen condiciones del punto `A-15`.
+/// Ese punto es de la etapa `h`, y escribir sus códigos ahora declararía condiciones que ninguna
+/// petición de esta superficie puede producir.
 /// </remarks>
 public static class ErrorCode
 {
@@ -77,6 +81,31 @@ public static class ErrorCode
     /// </summary>
     public const string ResetNotApplicableToAdministratorAccount =
         "RESET_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT";
+
+    // ---- LOS TRES QUE AGREGA LA ETAPA `e` --------------------------------------------------
+
+    /// <summary>
+    /// `CONTRATO_TRABAJO_NO_ENCONTRADO` (`DXT-07`). **RN-03.** Cubre el trabajo inexistente, el
+    /// ajeno y el que está fuera de lo que el solicitante ve, y **las tres respuestas son
+    /// indistinguibles**: mismo código, mismo texto, mismo cuerpo. Elegir «no autorizado» para el
+    /// ajeno confirmaría que ese trabajo existe, y ninguna capa de adentro podría repararlo.
+    /// </summary>
+    public const string WorkNotFound = "WORK_NOT_FOUND";
+
+    /// <summary>
+    /// `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` (`DXT-08`). RN-04. **El alumno** pide eliminar un
+    /// trabajo suyo que no está en `Draft`. La respuesta **declara el estado actual**. Este código
+    /// **no se produce nunca en el camino del administrador**, porque a él no lo acota el estado.
+    /// </summary>
+    public const string StateForbidsDelete = "STATE_FORBIDS_DELETE";
+
+    /// <summary>
+    /// `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` (`DXT-20`). El estado del trabajo no habilita la
+    /// escritura pedida —enviar o reeditar un trabajo en `Submitted`, `Approved` o `Rejected`—.
+    /// La respuesta **declara el estado actual** y no ofrece forma de volver a `Draft`, porque no
+    /// existe. Entra al conjunto cerrado por `PRODUCT-INTAKE` **1.29** §17.4 P.3.
+    /// </summary>
+    public const string StateForbidsUpdate = "STATE_FORBIDS_UPDATE";
 
     /// <summary>
     /// `CONTRATO_ERROR_NO_CLASIFICADO` (`DXT-12`). Cierra el conjunto: ningún fallo llega a la
