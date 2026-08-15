@@ -1,3 +1,4 @@
+using System.Text;
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Infrastructure.Persistence;
@@ -81,6 +82,37 @@ public static class CompositionRoot
         // contraseña en claro y una clave de firma (`Infrastructure ADR-04` §7).
         var signing = new SigningOptions();
         configuration.GetSection(SigningOptions.SectionName).Bind(signing);
+
+        // EL ARRANQUE SE DETIENE SI LA CLAVE NO LLEGÓ, y ésta es la razón. Sin esta guardia la
+        // pieza arranca entera, responde el punto de salud y se comporta como si estuviera sana:
+        // el primer fallo aparece cuando alguien intenta entrar, con un error genérico en
+        // pantalla y el motivo real sólo en el registro del servidor. Eso ya ocurrió en el
+        // despliegue del 2026-08-15, donde el contenedor se levantó sin la variable y el defecto
+        // se descubrió con una persona adelante intentando usar el producto.
+        //
+        // Una pieza a la que le falta algo sin lo cual NO PUEDE CUMPLIR SU FUNCIÓN tiene que
+        // negarse a arrancar, para que el defecto aparezca donde lo ve quien despliega. Es el
+        // mismo criterio que `GeometriaFactory.Web` ya aplica a la dirección del servicio de
+        // datos, y esta guardia lo trae a la pieza que faltaba.
+        //
+        // EL MENSAJE NOMBRA LA LLAVE Y NUNCA EL VALOR: dice qué falta y dónde se pone, y no
+        // filtra ni un fragmento de la clave hacia el registro (`Infrastructure ADR-04` §7).
+        if (string.IsNullOrWhiteSpace(signing.SigningKey))
+        {
+            throw new InvalidOperationException(
+                $"Falta '{SigningOptions.SectionName}:{nameof(SigningOptions.SigningKey)}'. " +
+                "La clave de firma del acceso llega por configuración —variable de entorno o " +
+                "archivo montado— y sin ella la pieza no puede emitir ninguna sesión de trabajo.");
+        }
+
+        if (Encoding.UTF8.GetByteCount(signing.SigningKey) < AccessTokenIssuer.MinimumSigningKeySizeInBytes)
+        {
+            throw new InvalidOperationException(
+                $"La clave de firma provista es más corta que el mínimo de " +
+                $"{AccessTokenIssuer.MinimumSigningKeySizeInBytes} bytes que exige el algoritmo. " +
+                "Se detiene el arranque en lugar de emitir accesos que no se pueden verificar.");
+        }
+
         services.AddSingleton(signing);
         services.AddSingleton(new PasswordDerivation(
             configuration.GetValue("PasswordDerivation:Iterations", PasswordDerivation.AnchoredIterations)));
