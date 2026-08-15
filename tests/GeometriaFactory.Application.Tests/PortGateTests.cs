@@ -19,12 +19,11 @@ public sealed class PortGateTests
             .OrderBy(name => name, StringComparer.Ordinal)
             .ToArray();
 
-        // En la etapa `a` la comprobación es **negativa**: ningún ensamblado del producto
-        // salvo `GeometriaFactory.Domain`. La dirección positiva —que la referencia esté
-        // presente— no es verificable todavía: `Application` declara la referencia de
-        // proyecto pero no usa ningún tipo de `Domain`, así que el compilador la elide del
-        // ensamblado. Pasa a ser `Assert.Equal` cuando la etapa `c` modele las entidades.
-        Assert.Empty(referenced.Except(new[] { "GeometriaFactory.Domain" }));
+        // ETAPA `c`: la comprobación pasa a ser **exacta**, como el comentario de la etapa `a`
+        // anunció. Ahora `Application` usa tipos de `Domain` —la entidad `Account` y sus
+        // valores—, de modo que la referencia está en el ensamblado y la dirección positiva
+        // ya es verificable: exactamente uno, y es `GeometriaFactory.Domain`.
+        Assert.Equal(new[] { "GeometriaFactory.Domain" }, referenced);
     }
 
     [Fact]

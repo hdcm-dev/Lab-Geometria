@@ -1,4 +1,17 @@
-@* Armazón del documento. La hoja `css/app.css` es el sistema visual portado desde la maqueta
+@* Armazón del documento.
+
+   INTERACTIVIDAD GLOBAL, Y ES LO QUE HACE POSIBLE `Web ADR-03`. El enrutador se declara
+   interactivo de servidor, de modo que TODA la aplicación vive dentro de UN SOLO CIRCUITO y la
+   navegación entre superficies no lo recicla. Es la condición para que la credencial de sesión
+   pueda vivir en el estado del circuito: con interactividad por página, cada navegación abriría
+   un circuito nuevo, el estado con alcance de ámbito se perdería en cada salto y la única forma
+   de sostener la sesión sería acercarle la credencial al navegador —una cookie o el
+   almacenamiento local—, que es exactamente lo que `ADR-03` descartó.
+
+   EL PRERRENDERIZADO QUEDA ENCENDIDO. La etapa `b` verifica cada ruta pidiéndola por HTTP y
+   leyendo su `<h1>` del cuerpo devuelto; apagarlo dejaría ese cuerpo vacío y rompería una
+   puerta que hoy pasa. Lo que el prerrenderizado dibuja es la superficie SIN sesión, porque el
+   circuito todavía no existe: el estado real entra en el primer render interactivo. La hoja `css/app.css` es el sistema visual portado desde la maqueta
    aprobada; la carga acá, una sola vez, para las once superficies. La página `/estado` es
    andamiaje de la etapa `a` y carga su propia hoja por `<HeadContent>`. *@
 <!DOCTYPE html>
@@ -8,10 +21,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <link rel="stylesheet" href="css/app.css" />
-    <HeadOutlet />
+    <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 <body class="gf-body">
-    <Routes />
+    <Routes @rendermode="InteractiveServer" />
     <script src="_framework/blazor.web.js"></script>
 </body>
 </html>

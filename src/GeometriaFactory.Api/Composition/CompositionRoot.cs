@@ -1,5 +1,9 @@
+using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Infrastructure.Persistence;
+using GeometriaFactory.Infrastructure.Security;
+using GeometriaFactory.Infrastructure.Time;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeometriaFactory.Api.Composition;
@@ -11,16 +15,18 @@ namespace GeometriaFactory.Api.Composition;
 /// La puerta `QG-10` (`Api/09 Pipeline-CI-CD.md` §2.1) exige **4 de 4** puertos conectados,
 /// **0** sin adaptador y **0** con más de uno, y falla en construcción cuando falta un puerto.
 ///
-/// ESTADO EN LA ETAPA `a`, y hay que decirlo entero: los cuatro puertos están DECLARADOS acá
-/// y CERO están conectados, porque ninguno de sus cuatro adaptadores existe todavía —
-/// `EfCoreAccountRepository` es `Infrastructure BT-09` (etapa `c`), `UtcSystemClock` es `BT-12`
-/// (etapa `c`), `EfCoreWorkRepository` es `BT-10` (etapa `e`) y `LocalFigureValidator` es `BT-16`
-/// (etapa `f`). `Plan-Etapa-A.md` §1.6 lo declara: «los adaptadores se nombran en la etapa `a`
-/// pero sólo dos se construyen después». Escribir un adaptador acá para que `QG-10` cuadre sería
-/// implementar en la etapa `a` lo que la etapa `c` tiene asignado.
+/// ESTADO EN LA ETAPA `c`: **2 de 4 puertos conectados**, y los dos que faltan tienen su etapa
+/// declarada. `IAccountRepository` ⟶ `EfCoreAccountRepository` e `ISystemClock` ⟶
+/// `UtcSystemClock` son `Infrastructure BT-09` y `BT-12`, los dos de esta etapa, y quedan
+/// conectados acá. `IWorkRepository` ⟶ `EfCoreWorkRepository` es `BT-10` (etapa `e`) y
+/// `IFigureValidator` ⟶ `LocalFigureValidator` es `BT-16` (etapa `f`): conectarlos ahora exigiría
+/// escribirlos, y eso es adelantar dos etapas.
 ///
-/// Lo que la etapa `a` sí deja: <see cref="DeclaredPorts"/>, que es la lista contra la que
-/// `QG-10` se cuadra, y el lugar único donde cada conexión se va a escribir.
+/// LA CLAVE DE FIRMA SE RECIBE Y NO SE BUSCA. Llega por configuración —variable de entorno o
+/// archivo montado— y **no está en el repositorio de código ni en la imagen** (intake §17.3.P.5).
+/// Si no llega, el servicio arranca y **no emite ningún acceso**: la elección deliberada es que
+/// la falla sea visible en el primer canje y no que se genere una clave al vuelo, que dejaría el
+/// sistema funcionando hasta que alguien falsifique un acceso (`Infrastructure ADR-04` §2 punto 3).
 /// </remarks>
 public static class CompositionRoot
 {
@@ -35,6 +41,13 @@ public static class CompositionRoot
         typeof(IFigureValidator),
         typeof(ISystemClock)
     ];
+
+    /// <summary>Los puertos que la etapa `c` deja conectados, con su adaptador.</summary>
+    public static IReadOnlyDictionary<Type, Type> ConnectedPorts { get; } = new Dictionary<Type, Type>
+    {
+        [typeof(IAccountRepository)] = typeof(EfCoreAccountRepository),
+        [typeof(ISystemClock)] = typeof(UtcSystemClock),
+    };
 
     /// <summary>Nombre de la cadena de conexión del almacén. Su valor llega por configuración.</summary>
     public const string StoreConnectionName = "Store";
@@ -56,11 +69,40 @@ public static class CompositionRoot
         services.AddScoped<StorePreparation>();
         services.AddSingleton<TwoPhaseStartup>();
 
-        // CONEXIÓN DE LOS CUATRO PUERTOS — pendiente, y con su etapa declarada:
+        // CONEXIÓN DE LOS PUERTOS. Dos de cuatro, con la etapa de los otros dos declarada:
         //   IAccountRepository ⟶ EfCoreAccountRepository   (Infrastructure BT-09, etapa `c`)
         //   ISystemClock       ⟶ UtcSystemClock            (Infrastructure BT-12, etapa `c`)
         //   IWorkRepository    ⟶ EfCoreWorkRepository      (Infrastructure BT-10, etapa `e`)
         //   IFigureValidator   ⟶ LocalFigureValidator      (Infrastructure BT-16, etapa `f`)
+        services.AddScoped<IAccountRepository, EfCoreAccountRepository>();
+        services.AddSingleton<ISystemClock, UtcSystemClock>();
+
+        // Los dos mecanismos sensibles. Son los ÚNICOS lugares del producto donde existen una
+        // contraseña en claro y una clave de firma (`Infrastructure ADR-04` §7).
+        var signing = new SigningOptions();
+        configuration.GetSection(SigningOptions.SectionName).Bind(signing);
+        services.AddSingleton(signing);
+        services.AddSingleton(new PasswordDerivation(
+            configuration.GetValue("PasswordDerivation:Iterations", PasswordDerivation.AnchoredIterations)));
+        services.AddSingleton<AccessTokenIssuer>();
+
+        // Los casos de uso de la etapa `c`.
+        services.AddScoped<ConfigureAdministratorUseCase>();
+        services.AddScoped<ResolveSignInUseCase>();
+        services.AddScoped<ChangeOwnPasswordUseCase>();
+
+        // La guardia de `CU-02`: verificar la firma y la expiración del acceso presentado.
+        // El `401` de la guardia NO lleva código del contrato, y es deliberado: el conjunto
+        // cerrado no declara ninguno para un acceso ausente, vencido o mal firmado, y esta capa
+        // no inventa códigos.
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                var issuer = new AccessTokenIssuer(signing);
+                options.TokenValidationParameters = issuer.ValidationParameters;
+                options.MapInboundClaims = false;
+            });
+        services.AddAuthorization();
 
         return services;
     }

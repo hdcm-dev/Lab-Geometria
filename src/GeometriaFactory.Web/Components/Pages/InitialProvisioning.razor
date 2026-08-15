@@ -1,5 +1,7 @@
 @page "/aprovisionamiento-inicial"
 @layout AccessShell
+@inject DataServiceClient DataService
+@inject NavigationManager Navigation
 
 @* SUP-01 `Aprovisionamiento-Inicial` — CU-04 FA-03 y FA-04.
    Ruta: `/aprovisionamiento-inicial`. Shell: acceso. Salida: `NAV-02` → `/ingreso`.
@@ -7,28 +9,92 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Aprovisionamiento-Inicial.html`.
    Componentes que la maqueta declara acá: CMP-01 a CMP-10.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. El formulario
-   no valida, no envía y no consulta al servicio de datos. Las bandas de resultado —error de
-   entrada, contraseñas que no coinciden, laboratorio ya aprovisionado, éxito— y el aviso de
-   indisponibilidad no se dibujan: los dispara estado que esta etapa no tiene. *@
+   ETAPA `c`: la pantalla PASA A FUNCIONAR. Los textos siguen siendo los de la maqueta aprobada,
+   y lo que se agrega es comportamiento: valida lo que puede validar sin salir, llama al punto
+   de configuración del servicio de datos DESDE EL SERVIDOR (RA-01) y muestra el desenlace.
+
+   LOS DOS CAMPOS QUE LA MAQUETA NO DIBUJA, Y POR QUÉ ESTÁN. `AdministratorSetupRequest` declara
+   nombre y apellido además del correo y la contraseña, porque `Domain CU-12` y `Application
+   CU-10` los exigen en sus criterios de aceptación, mientras que la maqueta dibuja tres campos.
+   La contradicción está declarada en el contrato y esta pantalla la refleja: **es propuesta de
+   la etapa `c` y va al punto de control**, junto con su resolución opuesta —quitarle nombre y
+   apellido a `CU-12`—, que es del Product Owner.
+
+   EL TEXTO DEL ERROR DE ENTRADA CAMBIA UNA PALABRA POR ESA MISMA RAZÓN: la maqueta dice
+   «Completá los tres campos» y acá los campos que se piden son cuatro. Se declara el cambio en
+   lugar de escribir un texto que contradiga la pantalla.
+
+   LA CONTRASEÑA NO SE CONSERVA AL FALLAR. La maqueta lo dice con todas las letras en el aviso de
+   indisponibilidad —«Lo que escribiste sigue acá, salvo las contraseñas, que se vuelven a
+   pedir»— y esta pantalla lo cumple en TODOS los desenlaces fallidos, no sólo en ése. *@
 
 <PageTitle>Aprovisionamiento inicial</PageTitle>
-
-<StagePlaceholder />
 
 <h1 class="gf-mt-5">Configurar el laboratorio</h1>
 <p class="gf-subtitle">Vas a crear la única cuenta de administrador de este laboratorio. No se puede crear otra después.</p>
 
-<form>
+@if (_state is Outcome.MissingFields)
+{
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+        Completá los cuatro campos. Vas a usar la contraseña para entrar; no hay forma de recuperarla.
+    </p>
+}
+else if (_state is Outcome.Mismatch)
+{
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+        Las dos contraseñas no coinciden. Escribí la misma en los dos campos.
+        No salió ninguna solicitud hacia el servicio de datos.
+    </p>
+}
+else if (_state is Outcome.AlreadyConfigured)
+{
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+        Este laboratorio ya tiene su cuenta de administrador.
+        <a href="/ingreso">Entrá con ella desde la superficie de ingreso</a>.
+    </p>
+}
+else if (_state is Outcome.Rejected)
+{
+    @* El texto lo escribe la capa que traduce el motivo interno, y nunca lleva dirección de
+       servicio interno ni traza (RA-03). *@
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">@_rejectionMessage</p>
+}
+
+@if (_state is Outcome.Unavailable)
+{
+    <div class="gf-unavailable-notice gf-mb-5" role="alert">
+        <h2>No pudimos crear la cuenta</h2>
+        <p>
+            El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+            Lo que escribiste sigue acá, salvo las contraseñas, que se vuelven a pedir.
+        </p>
+    </div>
+}
+
+<form @onsubmit="SubmitAsync" @onsubmit:preventDefault="true">
     <div class="gf-field">
         <label for="provisioning-email">Correo</label>
-        <input class="gf-input" id="provisioning-email" name="email" type="email" autocomplete="username" />
+        <input class="gf-input" id="provisioning-email" name="email" type="email" autocomplete="username"
+               @bind="_email" @bind:event="oninput" disabled="@_sending" />
+    </div>
+
+    <div class="gf-field">
+        <label for="provisioning-first-name">Nombre</label>
+        <input class="gf-input" id="provisioning-first-name" name="firstName" type="text" autocomplete="given-name"
+               @bind="_firstName" @bind:event="oninput" disabled="@_sending" />
+    </div>
+
+    <div class="gf-field">
+        <label for="provisioning-last-name">Apellido</label>
+        <input class="gf-input" id="provisioning-last-name" name="lastName" type="text" autocomplete="family-name"
+               @bind="_lastName" @bind:event="oninput" disabled="@_sending" />
     </div>
 
     <div class="gf-field">
         <label for="provisioning-password">Contraseña</label>
         <input class="gf-input" id="provisioning-password" name="password" type="password"
-               autocomplete="new-password" aria-describedby="provisioning-requirement" />
+               autocomplete="new-password" aria-describedby="provisioning-requirement"
+               @bind="_password" @bind:event="oninput" disabled="@_sending" />
         @* Requisito declarado antes del intento, no recién al fallar. *@
         <span class="gf-requirement" id="provisioning-requirement">Vas a usarla para entrar; no hay forma de recuperarla.</span>
     </div>
@@ -36,10 +102,87 @@
     <div class="gf-field">
         <label for="provisioning-password-repeat">Repetir contraseña</label>
         <input class="gf-input" id="provisioning-password-repeat" name="passwordRepeat" type="password"
-               autocomplete="new-password" />
+               autocomplete="new-password" @bind="_passwordRepeat" @bind:event="oninput" disabled="@_sending" />
     </div>
 
     @* No hay acción secundaria y no hay «cancelar»: en el primer arranque no existe un estado
        previo al que volver. *@
-    <button type="button" class="gf-btn gf-btn--primary gf-btn--full">Crear la cuenta de administrador</button>
+    <button type="submit" class="gf-btn gf-btn--primary gf-btn--full" disabled="@_sending">
+        @if (_sending)
+        {
+            <span class="gf-spinner"></span>
+            <text>Creando la cuenta…</text>
+        }
+        else
+        {
+            <text>Crear la cuenta de administrador</text>
+        }
+    </button>
 </form>
+
+@code {
+    private enum Outcome { None, MissingFields, Mismatch, AlreadyConfigured, Rejected, Unavailable }
+
+    private string _email = string.Empty;
+    private string _firstName = string.Empty;
+    private string _lastName = string.Empty;
+    private string _password = string.Empty;
+    private string _passwordRepeat = string.Empty;
+    private bool _sending;
+    private Outcome _state = Outcome.None;
+    private string _rejectionMessage = string.Empty;
+
+    private async Task SubmitAsync()
+    {
+        // Los dos controles que se resuelven SIN SALIR. La maqueta lo declara y acá se cumple:
+        // cuando las contraseñas no coinciden no sale ninguna solicitud.
+        if (string.IsNullOrWhiteSpace(_email)
+            || string.IsNullOrWhiteSpace(_firstName)
+            || string.IsNullOrWhiteSpace(_lastName)
+            || string.IsNullOrWhiteSpace(_password))
+        {
+            _state = Outcome.MissingFields;
+            ForgetPasswords();
+            return;
+        }
+
+        if (!string.Equals(_password, _passwordRepeat, StringComparison.Ordinal))
+        {
+            _state = Outcome.Mismatch;
+            ForgetPasswords();
+            return;
+        }
+
+        _sending = true;
+        _state = Outcome.None;
+
+        var outcome = await DataService.ConfigureAdministratorAsync(
+            new AdministratorSetupRequest(_email, _firstName, _lastName, _password));
+
+        _sending = false;
+        ForgetPasswords();
+
+        if (outcome.Succeeded)
+        {
+            // El lazo lo cierra la superficie siguiente, no ésta: configurar no es entrar.
+            Navigation.NavigateTo("/ingreso?estado=confirmacion-aprovisionamiento");
+            return;
+        }
+
+        _state = outcome.Error!.Code switch
+        {
+            ErrorCode.AdministratorAlreadyConfigured => Outcome.AlreadyConfigured,
+            ErrorCode.ServiceUnavailable => Outcome.Unavailable,
+            _ => Outcome.Rejected,
+        };
+
+        _rejectionMessage = outcome.Error.Message;
+    }
+
+    /// Las contraseñas se vuelven a pedir en cuanto el intento termina, salga como salga.
+    private void ForgetPasswords()
+    {
+        _password = string.Empty;
+        _passwordRepeat = string.Empty;
+    }
+}
