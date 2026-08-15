@@ -14,6 +14,23 @@
 #        NINGUNO del otro; las de acceso no dibujan barra lateral.
 #   C-4  La dirección que no existe devuelve 404 con la pantalla puesta.
 #
+# POR QUÉ ESTE GUION CORRE CON LA PUERTA DE SERVICIO PUESTA, Y QUÉ NO SIGNIFICA.
+# Este guion se escribió en la etapa `b`, cuando no había sesión: era la forma
+# de que el Product Owner se paseara por las trece pantallas y las aprobara. Hoy
+# el guardián 2 de `Web ADR-03` §2 está CERRADO —«ninguna ruta del panel es
+# accesible sin sesión»—, y sin salvedad las siete rutas del panel desviarían a
+# `/ingreso` y este guion pasaría a exigir un guardián abierto, que es lo
+# contrario de lo que la ADR manda.
+#
+# De modo que la pieza se levanta EN DESARROLLO y con la puerta de servicio
+# puesta EXPLÍCITAMENTE —`PanelWalkthroughWithoutSession`—, que es la opción que
+# `PanelSessionGateMiddleware` sólo honra en el entorno de desarrollo. **Que
+# `C-1` devuelva 200 acá NO dice que el panel sea público**: dice que las trece
+# pantallas dibujan, que es lo que este guion fue a comprobar. Quien verifica el
+# guardián es `scripts/verify-stage-c.sh`, que corre como `Production` y donde
+# esas mismas siete rutas desvían; y `PanelSessionGateTests`, que comprueba que
+# la opción puesta en producción no abre nada.
+#
 # Se corre dentro del contenedor del SDK, desde la raíz del repositorio:
 #   docker run --rm -v "$PWD":/w -w /w mcr.microsoft.com/dotnet/sdk:10.0 \
 #     bash scripts/verify-navigation.sh
@@ -25,6 +42,14 @@ BASE=http://127.0.0.1:$PORT
 fails=0
 
 dotnet build src/GeometriaFactory.Web/GeometriaFactory.Web.csproj -warnaserror | tail -4
+# El entorno y la puerta van EXPLÍCITOS y no heredados: si el entorno se colara
+# como cualquier otra cosa, la puerta no regiría y `C-1` fallaría en las siete
+# rutas del panel sin que quede claro por qué.
+# Y el puerto también va explícito: `appsettings.Development.json` fija un
+# endpoint de Kestrel que, en desarrollo, le gana a `--urls`.
+ASPNETCORE_ENVIRONMENT=Development \
+PanelWalkthroughWithoutSession=true \
+Kestrel__Endpoints__Http__Url="$BASE" \
 dotnet run --project src/GeometriaFactory.Web/GeometriaFactory.Web.csproj --no-build --urls "$BASE" > /tmp/web.log 2>&1 &
 SRV=$!
 trap 'kill $SRV 2>/dev/null' EXIT

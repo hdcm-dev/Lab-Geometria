@@ -13,19 +13,34 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Ingreso.html`.
    Componentes que la maqueta declara acá: CMP-04, CMP-05, CMP-08, CMP-09, CMP-30 a CMP-33.
 
-   ETAPA `c`: la pantalla PASA A FUNCIONAR. Canjea correo y contraseña por la credencial de
-   sesión y abre la sesión del circuito.
+   LA ÚNICA SUPERFICIE QUE NO ES INTERACTIVA, Y NO ES UNA PREFERENCIA. Es la que tiene que
+   ESCRIBIR la marca de sesión del navegador, y una marca se escribe en una cabecera. Dentro de
+   un circuito no hay cabecera que escribir: la respuesta del `@@onclick` viaja por la conexión de
+   tiempo real y las de la página salieron cuando la página se cargó. De modo que esta pantalla
+   se dibuja con render estático de servidor y envía con un POST de verdad, que es el único
+   momento del producto en que la respuesta todavía se puede encabezar.
 
-   DÓNDE QUEDA LA CREDENCIAL. En <see cref="SessionState"/>, que vive en el estado del circuito,
-   del lado del servidor de esta pieza. ESTA PANTALLA NO LA TOCA: se la entrega al custodio y no
-   la vuelve a leer. No hay ninguna expresión de este archivo que la escriba en el marcado.
+   POR QUÉ ESTE FORMULARIO Y NO UN PUNTO DE ACCESO SUELTO. Las dos formas resuelven el POST. Con
+   `@@formname` el manejo del envío vive **en la misma superficie que lo dibuja**, de modo que los
+   estados de la pantalla —requisito no cumplido, credencial rechazada, cambio de contraseña
+   pendiente, indisponible— se muestran DIBUJANDO la respuesta del POST, sin redirigir y sin
+   inventar un lugar donde guardar el motivo entre dos peticiones. Un punto de acceso aparte
+   obligaría a lo contrario: redirigir y acarrear el motivo por la dirección, que es donde el
+   wireframe §5 no lo quiere. Además `<AntiforgeryToken />` deja el formulario funcionando CON la
+   antifalsificación que ya estaba encendida, no desactivándola.
 
-   ENTRAR ACÁ ES SALIR DE DONDE SE ESTABA. Llegar a esta superficie descarta la credencial que
-   el circuito tuviera: es lo que hace que «Cerrar sesión» sea un acto y no una decoración.
+   DÓNDE QUEDA LA CREDENCIAL. El testigo firmado se guarda en el almacén del servidor y la
+   pantalla no lo vuelve a ver; lo que se escribe en el navegador es un identificador OPACO más
+   la identidad y el papel (`Web ADR-03` §2). Ninguna expresión de este archivo escribe el
+   testigo en el marcado.
+
+   ENTRAR ACÁ ES SALIR DE DONDE SE ESTABA. Pedir esta superficie descarta la sesión que hubiera:
+   se borra la marca y se descarta el testigo. Es lo que hace que «Cerrar sesión» sea un acto.
 
    LA BANDA QUE SE MUESTRA AL LLEGAR sale del parámetro `estado` de la dirección, que es
-   exactamente lo que hace la maqueta. Son las cuatro de acuse de recibo de actos que ocurren
-   FUERA de esta superficie, con sus textos literales. *@
+   exactamente lo que hace la maqueta. Son las de acuse de recibo de actos que ocurren FUERA de
+   esta superficie, con sus textos literales, más la de sesión no restablecible, que la trae el
+   desvío del reciclado del proceso (`EST-34`). *@
 
 <PageTitle>Ingreso</PageTitle>
 
@@ -47,6 +62,14 @@ else if (_arrival == "sesion-cerrada")
 {
     <p class="gf-banner gf-banner--confirmation gf-mt-5" role="status">
         Cerraste sesión. Para volver a entrar, escribí tu correo y tu contraseña.
+    </p>
+}
+else if (_arrival == "sesion-no-restablecible")
+{
+    @* Texto literal de la maqueta aprobada, `Ingreso.html`, `data-mq-estado="sesion-no-restablecible"`.
+       No es un error arbitrario en una acción cualquiera: se vuelve acá con el motivo declarado. *@
+    <p class="gf-banner gf-banner--warning gf-mt-5" role="status">
+        Tu sesión no se pudo restablecer y volviste acá. Entrá otra vez para seguir donde estabas.
     </p>
 }
 
@@ -75,29 +98,20 @@ else if (_state is Outcome.PasswordChangeRequired)
     </div>
 }
 
-<form class="gf-mt-5" @onsubmit="SubmitAsync" @onsubmit:preventDefault="true">
+<form class="gf-mt-5" method="post" @formname="sign-in" @onsubmit="SubmitAsync">
+    <AntiforgeryToken />
     <div class="gf-field">
         <label for="signin-email">Correo</label>
-        <input class="gf-input" id="signin-email" name="email" type="email" autocomplete="username"
-               @bind="_email" @bind:event="oninput" disabled="@_sending" />
+        <input class="gf-input" id="signin-email" name="Input.Email" type="email" autocomplete="username"
+               value="@Form.Email" />
     </div>
     <div class="gf-field">
         <label for="signin-password">Contraseña</label>
-        <input class="gf-input" id="signin-password" name="password" type="password" autocomplete="current-password"
-               @bind="_password" @bind:event="oninput" disabled="@_sending" />
+        <input class="gf-input" id="signin-password" name="Input.Password" type="password"
+               autocomplete="current-password" />
     </div>
 
-    <button type="submit" class="gf-btn gf-btn--primary gf-btn--full" disabled="@_sending">
-        @if (_sending)
-        {
-            <span class="gf-spinner"></span>
-            <text>Entrando…</text>
-        }
-        else
-        {
-            <text>Ingresar</text>
-        }
-    </button>
+    <button type="submit" class="gf-btn gf-btn--primary gf-btn--full">Ingresar</button>
 </form>
 
 <p class="gf-caption gf-mt-5">¿No tenés cuenta? <a href="/registro-de-cuenta">Registrarte</a></p>
@@ -109,51 +123,82 @@ else if (_state is Outcome.PasswordChangeRequired)
 @code {
     private enum Outcome { None, MissingFields, Rejected, PasswordChangeRequired, Unavailable }
 
-    private string _email = string.Empty;
-    private string _password = string.Empty;
-    private bool _sending;
+    /// <summary>Los dos campos de la tarjeta, tal como el envío los trae de vuelta.</summary>
+    /// <remarks>
+    /// LA CONTRASEÑA NO SE DEVUELVE AL MARCADO, y el correo sí. Es lo que hace que un rechazo no
+    /// obligue a reescribir el correo y que la contraseña no quede escrita en el documento que
+    /// vuelve.
+    /// </remarks>
+    public sealed class SignInForm
+    {
+        public string Email { get; set; } = string.Empty;
+
+        public string Password { get; set; } = string.Empty;
+    }
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    /// El envío completa este modelo; el pedido de la página lo deja nulo, y por eso el marcado
+    /// lo lee por <see cref="Form"/> y no directo.
+    [SupplyParameterFromForm]
+    private SignInForm? Input { get; set; }
+
+    private SignInForm Form => Input ??= new SignInForm();
+
     private Outcome _state = Outcome.None;
     private string _rejectionMessage = string.Empty;
     private string? _arrival;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        // Llegar acá descarta la credencial del circuito. Es el acto de salir.
-        Session.Close();
+        // Llegar acá descarta la sesión: se borra la marca y se descarta el testigo. Sólo en el
+        // pedido de la página; durante el envío sería borrar lo que se está por escribir.
+        if (HttpMethods.IsGet(HttpContext.Request.Method))
+        {
+            await Session.LoadAsync();
+
+            // Sólo si hay algo que cerrar: sin sesión, borrar la marca sería mandarle al
+            // navegador una cabecera que no dice nada.
+            if (Session.SessionId is not null)
+            {
+                await Session.CloseAsync(HttpContext);
+            }
+        }
 
         var query = Navigation.ToAbsoluteUri(Navigation.Uri).Query;
         _arrival = query.Contains("estado=confirmacion-aprovisionamiento", StringComparison.Ordinal) ? "confirmacion-aprovisionamiento"
             : query.Contains("estado=confirmacion-contrasena", StringComparison.Ordinal) ? "confirmacion-contrasena"
             : query.Contains("estado=sesion-cerrada", StringComparison.Ordinal) ? "sesion-cerrada"
+            : query.Contains("estado=sesion-no-restablecible", StringComparison.Ordinal) ? "sesion-no-restablecible"
             : null;
     }
 
     private async Task SubmitAsync()
     {
-        if (string.IsNullOrWhiteSpace(_email) || string.IsNullOrWhiteSpace(_password))
+        var password = Form.Password;
+        // La contraseña en claro deja de existir en el modelo apenas se la toma: lo que vuelve al
+        // marcado es el correo y nada más.
+        Form.Password = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(Form.Email) || string.IsNullOrWhiteSpace(password))
         {
             _state = Outcome.MissingFields;
-            _password = string.Empty;
             return;
         }
 
-        _sending = true;
-        _state = Outcome.None;
-
         var outcome = await DataService.ExchangeCredentialsAsync(
-            new CredentialExchangeRequest(_email, _password));
-
-        _sending = false;
-        // La contraseña en claro deja de existir en esta pieza en cuanto el canje termina.
-        _password = string.Empty;
+            new CredentialExchangeRequest(Form.Email, password));
 
         if (outcome.Succeeded)
         {
-            Session.Open(outcome.Value!);
+            // ACÁ, Y SÓLO ACÁ, SE ESCRIBE LA MARCA: es el único punto del producto donde las
+            // cabeceras de la respuesta todavía se pueden escribir.
+            await Session.OpenAsync(HttpContext, outcome.Value!);
             _arrival = null;
 
             // `NAV-08` y `NAV-09`: la ruta inicial la decide el papel que devolvió el canje, y
-            // no la dirección escrita.
+            // no la dirección escrita. Bajo render estático esto es una redirección de verdad.
             Navigation.NavigateTo(Session.IsAdministrator ? "/entrega-comision" : "/mis-trabajos");
             return;
         }
