@@ -104,7 +104,12 @@ else
 fi
 
 # ------------------------------------------------------------------ C-2 -----
-banner "C-2 · todo \`--no-build\` con su red puesta"
+# La bandera que este control busca se arma POR PARTES, por el mismo motivo que el verbo de C-1:
+# así este archivo no contiene ninguna de las cadenas que busca y no se denuncia a sí mismo. Con
+# la bandera escrita entera, sus propios mensajes de prosa la hacían dar `NO CONFORME` sobre sí.
+flag='--no'"-build"
+
+banner "C-2 · todo \`$flag\` con su red puesta"
 
 c2_findings=""
 guarded=0
@@ -119,7 +124,7 @@ for file in $(targets); do
       *assert-build-fresh.sh*) [ -z "$guard" ] && guard="$number" ;;
     esac
     case "$content" in
-      *--no-build*) [ -z "$first_no_build" ] && first_no_build="$number" ;;
+      *"$flag"*) [ -z "$first_no_build" ] && first_no_build="$number" ;;
     esac
   done < <(logical_lines "$file")
 
@@ -127,14 +132,14 @@ for file in $(targets); do
   if [ -n "$guard" ] && [ "$guard" -lt "$first_no_build" ]; then
     guarded=$((guarded + 1))
   else
-    c2_findings="${c2_findings}${file}:${first_no_build}: \`--no-build\` sin llamada previa a scripts/assert-build-fresh.sh"$'\n'
+    c2_findings="${c2_findings}${file}:${first_no_build}: \`$flag\` sin llamada previa a scripts/assert-build-fresh.sh"$'\n'
   fi
 done
 
 if [ -z "$c2_findings" ]; then
-  echo "CONFORME · $guarded archivo(s) levantan con \`--no-build\` y los $guarded pasan antes por la red"
+  echo "CONFORME · $guarded archivo(s) levantan con \`$flag\` y los $guarded pasan antes por la red"
 else
-  echo "NO CONFORME · \`--no-build\` sin red:"
+  echo "NO CONFORME · \`$flag\` sin red:"
   printf '%s' "$c2_findings" | sed 's/^/    /'
   echo "    Agregá, antes de levantar:"
   echo "        scripts/assert-build-fresh.sh <ruta-al-csproj> <configuracion> || exit 1"

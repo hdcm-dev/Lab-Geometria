@@ -6,19 +6,61 @@
 # confianza dentro del contenedor (intake §17.5).
 #
 # LA CONFIGURACIÓN SE DECLARA, NO SE HEREDA (`Pipeline-Producto.md` §3.1). Hasta acá este guion
-# corría `dotnet run` a secas, que resuelve `Debug`, mientras `scripts/build.sh` y
-# `scripts/test.sh` construyen y prueban `Release`: quien construía y después levantaba estaba
-# ejecutando binarios que la construcción nunca produjo. El ciclo de los guiones es `Release` de
-# punta a punta; el ciclo del depurador es `Debug` de punta a punta y vive en `.vscode/`. Ninguno
-# de los dos depende del valor por omisión.
+# corría `dotnet run` a secas, que resuelve `Debug` sin decirlo: se levantaban binarios que la
+# construcción declarada nunca produjo. Eso no se afloja y este guion sigue declarando su
+# configuración en la línea de invocación.
 #
-#   GF_CONFIGURATION=Debug scripts/run-api.sh   # si hace falta la otra salida, se pide
+# LO QUE SÍ CAMBIÓ ES EL VALOR: `Debug` por omisión, por decisión del Product Owner —en
+# desarrollo se trabaja en `Debug`—. NO ES UNA VUELTA ATRÁS de la regla, y la diferencia está en
+# una palabra: `Debug` acá está DECLARADO, no heredado del valor por omisión de `dotnet`. Y no
+# reintroduce el desajuste original, porque el desajuste vivía en `--no-build`: este guion
+# CONSTRUYE Y LEVANTA la misma configuración en la misma invocación, de modo que lo que se
+# levanta es siempre lo que se acaba de construir.
+#
+# LOS GUIONES DE VERIFICACIÓN NO ACOMPAÑAN ESTE CAMBIO, Y LA ASIMETRÍA ES A PROPÓSITO.
+# `verify-stage-c.sh` y `verify-navigation.sh` siguen en `Release` porque su trabajo es medir lo
+# que efectivamente se despliega. Una puerta que verifica una salida distinta de la que sale a
+# producción es exactamente el defecto que se acaba de erradicar. QUE NADIE LA «CORRIJA» POR
+# SIMETRÍA: no es una inconsistencia olvidada, es la decisión.
+#
+#   GF_CONFIGURATION=Release scripts/run-api.sh   # si hace falta la otra salida, se pide
+#
+# ---------------------------------------------------------------------------
+# EL CONTENEDOR DE DESARROLLO `gf-back` HAY QUE RELANZARLO UNA VEZ.
+#
+# Corre con `HOME=/tmp` y con el repositorio montado en `/w`, y hasta acá el almacén le salía del
+# valor por omisión relativo de `appsettings.json`: se creaba adentro del árbol montado. Ese valor
+# por omisión ya no existe, y sin la variable el servicio se detiene en el arranque diciendo qué
+# llave le falta. El directorio del anfitrión donde ahora vive el almacén tiene que estar montado,
+# porque `HOME=/tmp` adentro del contenedor es efímero:
+#
+#   docker rm -f gf-back
+#   docker run -d --name gf-back --network gfnet -w /w \
+#     -v /home/fernando/workspaces/workspace-dev/PROG2/Geometria/Lab-Geometria:/w \
+#     -v "$HOME/.local/share/geometria-factory":/datos \
+#     -e HOME=/tmp \
+#     -e "AccessToken__SigningKey=$(cat ~/.config/geometria-factory/access-token.key)" \
+#     -e 'ConnectionStrings__Store=Data Source=/datos/geometriafactory.db' \
+#     mcr.microsoft.com/dotnet/sdk:10.0 \
+#     bash -lc 'cd src/GeometriaFactory.Api && ASPNETCORE_URLS=http://0.0.0.0:5080 dotnet run -c Debug --no-build'
+#
+# El punto de montaje se llama `/datos` a propósito: es el mismo nombre que `deploy/Dockerfile`
+# usa para su volumen, de modo que la ruta de adentro del contenedor es la misma en desarrollo y
+# en el despliegue, y sólo cambia qué hay del lado del anfitrión.
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# EL ALMACÉN VIVE FUERA DEL ÁRBOL DEL REPOSITORIO, y la ruta llega por configuración. El porqué,
+# la ubicación elegida y las alternativas descartadas están en `scripts/store-path.sh`.
+# shellcheck source=scripts/store-path.sh
+. "$repo_root/scripts/store-path.sh"
+gf_resolve_store
+gf_ensure_store_directory
+
 cd "$repo_root/src/GeometriaFactory.Api"
 
-configuration="${GF_CONFIGURATION:-Release}"
+configuration="${GF_CONFIGURATION:-Debug}"
 
 export ASPNETCORE_ENVIRONMENT="${ASPNETCORE_ENVIRONMENT:-Development}"
 
@@ -50,4 +92,5 @@ FIN
 fi
 
 echo "Configuración: $configuration"
+echo "Almacén: $GF_STORE_FILE"
 dotnet run --project GeometriaFactory.Api.csproj --configuration "$configuration" "$@"

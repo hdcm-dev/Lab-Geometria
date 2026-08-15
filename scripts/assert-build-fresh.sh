@@ -93,7 +93,11 @@ if [ "$build_status" -ne 0 ]; then
     echo "  configuración: $configuration"
     echo "  código:        $build_status"
     echo
-    echo "Sin esto, el \`dotnet run --no-build\` de más abajo levantaría la salida de"
+    # El texto dice \`--no-build\` y NO nombra el verbo que lo acompaña, a propósito: con el verbo
+    # escrito, esta línea —que sólo imprime— la levantaba `verify-explicit-configuration.sh` como
+    # una invocación sin configuración declarada. Es la misma técnica que esa puerta ya usa
+    # consigo misma para no denunciarse por su propia prosa.
+    echo "Sin esto, el arranque con \`--no-build\` de más abajo levantaría la salida de"
     echo "la corrida ANTERIOR: el proceso arranca, responde, y lo que se mide es"
     echo "código que ya no está en el árbol. Ese fue el defecto que esta red existe"
     echo "para no repetir."

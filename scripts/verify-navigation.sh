@@ -31,6 +31,14 @@
 # esas mismas siete rutas desvían; y `PanelSessionGateTests`, que comprueba que
 # la opción puesta en producción no abre nada.
 #
+# ESTE GUION SE QUEDA EN `Release` AUNQUE `run-web.sh` HAYA PASADO A `Debug`, Y LA
+# ASIMETRÍA ESTÁ PUESTA A PROPÓSITO. El Product Owner decidió que en desarrollo se
+# trabaja en `Debug`, y los guiones de EJECUCIÓN lo declaran así. Los de VERIFICACIÓN
+# no: miden **lo que efectivamente se despliega**, que es `Release`. Verificar una
+# salida distinta de la que sale a producción es el mismo defecto que la regla de
+# configuración explícita erradicó, con otro disfraz. **QUE NADIE LA «CORRIJA» POR
+# SIMETRÍA:** no es una inconsistencia olvidada entre guiones, es la decisión.
+#
 # Se corre dentro del contenedor del SDK, desde la raíz del repositorio:
 #   docker run --rm -v "$PWD":/w -w /w mcr.microsoft.com/dotnet/sdk:10.0 \
 #     bash scripts/verify-navigation.sh
