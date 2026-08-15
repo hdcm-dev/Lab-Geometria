@@ -13,9 +13,10 @@ namespace GeometriaFactory.Contracts.Errors;
 /// `Norma-De-Nomenclatura.md` §5.3, con la correspondencia uno a uno en su §6.8.6. La identidad
 /// del código la da este conjunto, no un prefijo dentro del nombre.
 ///
-/// ACÁ ESTÁN LOS OCHO QUE LA ETAPA `c` PUEDE PRODUCIR, de los diecisiete vivos del conjunto. Los
-/// otros nueve describen condiciones sobre trabajos, sobre el gobierno de las cuentas y sobre el
-/// reseteo, que son de etapas posteriores.
+/// ACÁ ESTÁN LOS DOCE QUE LAS ETAPAS `c` Y `d` PUEDEN PRODUCIR, de los diecisiete vivos del
+/// conjunto. Ocho los escribió la etapa `c`; los cuatro últimos los agrega la `d` con el gobierno
+/// de las cuentas y el reseteo. Los cinco que faltan describen condiciones **sobre trabajos**,
+/// que son de las etapas `e` y siguientes.
 /// </remarks>
 public static class ErrorCode
 {
@@ -45,6 +46,37 @@ public static class ErrorCode
 
     /// <summary>`CONTRATO_SERVICIO_NO_DISPONIBLE` (`DXT-11`). Sin dirección del servicio que falló.</summary>
     public const string ServiceUnavailable = "SERVICE_UNAVAILABLE";
+
+    // ---- LOS CUATRO QUE AGREGA LA ETAPA `d` ------------------------------------------------
+
+    /// <summary>
+    /// `CONTRATO_CONFIRMACION_NO_COINCIDE` (`DXT-05`). El correo escrito como confirmación de la
+    /// baja no es el de la cuenta (RN-07). **La respuesta no devuelve el correo esperado.**
+    /// </summary>
+    public const string ConfirmationMismatch = "CONFIRMATION_MISMATCH";
+
+    /// <summary>
+    /// `CONTRATO_ALUMNO_NO_ENCONTRADO` (`DXT-10`). **Adopción de causa declarada por `Api CU-04`
+    /// §10**: además del filtro por alumno de un listado de trabajos, cubre la cuenta que un punto
+    /// de administración referencia y no existe. Es la misma situación desde otro punto de acceso.
+    /// </summary>
+    public const string StudentNotFound = "STUDENT_NOT_FOUND";
+
+    /// <summary>
+    /// `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` (`DXT-19`). Negativa **de facultad fuera
+    /// del desenlace** —gobierno de cuentas, listado de la comisión y reseteo— y, como la del
+    /// desenlace, **no tiene nada que ocultar**: el recurso no es ajeno, lo que no alcanza es el
+    /// papel. Entra al conjunto cerrado por `PRODUCT-INTAKE` **1.29** §17.4 P.3.
+    /// </summary>
+    public const string OperationAdminOnly = "OPERATION_ADMIN_ONLY";
+
+    /// <summary>
+    /// `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` (`DXT-17`). RN-15, INV-08.
+    /// **No es una negativa de facultad**: quien pide la tiene, y lo que no procede es la
+    /// operación sobre esa cuenta. El camino que sí existe es el cambio de la propia contraseña.
+    /// </summary>
+    public const string ResetNotApplicableToAdministratorAccount =
+        "RESET_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT";
 
     /// <summary>
     /// `CONTRATO_ERROR_NO_CLASIFICADO` (`DXT-12`). Cierra el conjunto: ningún fallo llega a la

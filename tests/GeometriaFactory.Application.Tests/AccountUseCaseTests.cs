@@ -7,7 +7,8 @@ using Xunit;
 namespace GeometriaFactory.Application.Tests;
 
 /// <summary>
-/// Los tres casos de uso de cuentas de la etapa `c`, ejercidos contra dobles de sus puertos.
+/// Los seis casos de uso de cuentas —los tres de la etapa `c` y los tres de la `d`—, ejercidos
+/// contra dobles de sus puertos.
 /// </summary>
 /// <remarks>
 /// LOS DOBLES REEMPLAZAN A LOS ADAPTADORES Y A NADIE MÁS (intake §17.2.P.11 punto 3): el
@@ -60,6 +61,18 @@ public sealed class AccountUseCaseTests
             UpdateCount++;
             return Task.CompletedTask;
         }
+
+        public Task<IReadOnlyList<Account>> ListAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult<IReadOnlyList<Account>>([.. _accounts]);
+
+        public Task RemoveAsync(Account account, CancellationToken cancellationToken = default)
+        {
+            RemoveCount++;
+            _accounts.Remove(account);
+            return Task.CompletedTask;
+        }
+
+        public int RemoveCount { get; private set; }
     }
 
     private static Account AnAdministrator(string email = "docente@frre.utn.edu.ar", string hash = "derivado-vigente") =>

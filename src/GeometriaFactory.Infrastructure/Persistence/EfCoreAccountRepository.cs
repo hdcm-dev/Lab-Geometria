@@ -58,4 +58,37 @@ public sealed class EfCoreAccountRepository : IAccountRepository
         _dbContext.Accounts.Update(account);
         await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
     }
+
+    /// <summary>
+    /// Todas las cuentas de la comisión, ordenadas por correo normalizado.
+    /// </summary>
+    /// <remarks>
+    /// EL ORDEN LO FIJA EL ADAPTADOR Y NO EL CASO DE USO, porque es lo que el motor puede
+    /// resolver con el índice que ya existe. **Ninguna fuente declara un orden para el listado**:
+    /// se toma el del correo normalizado, que es estable, no depende de la cultura y es la forma
+    /// que ya decide la identidad. **[decisión de la etapa `d`, declarada]**
+    /// </remarks>
+    public async Task<IReadOnlyList<Account>> ListAsync(CancellationToken cancellationToken = default) =>
+        await _dbContext.Accounts
+            .OrderBy(account => account.NormalizedEmail)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+    /// <summary>
+    /// Retira una cuenta y todos sus trabajos, en una única unidad de trabajo (RN-07).
+    /// </summary>
+    /// <remarks>
+    /// HOY RETIRA LA CUENTA SOLA, Y NO ES UN ARRASTRE INCOMPLETO: **los trabajos todavía no
+    /// existen** —son de la etapa `e`— y por lo tanto no hay ninguno que dejar huérfano. Cuando
+    /// la tabla exista, el arrastre entra en ESTA operación y no en el caso de uso, para que
+    /// siga siendo una sola unidad de trabajo y no dos escrituras que puedan quedar a medias
+    /// (`Infrastructure ADR-02`; `RETIRO_PARCIAL_NO_ADMITIDO`).
+    /// </remarks>
+    public async Task RemoveAsync(Account account, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(account);
+
+        _dbContext.Accounts.Remove(account);
+        await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+    }
 }

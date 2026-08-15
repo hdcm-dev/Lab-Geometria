@@ -23,12 +23,20 @@ if (!EF.IsDesignTime)
 // Fase 2 — recién ahora se abre la superficie HTTP.
 // La guardia de `Api CU-02` va ANTES que cualquier punto: verificar el acceso y su expiración
 // ocurre antes de que el punto haga nada, y un rechazo no lee ni escribe nada del almacén.
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+// El paso 5 de la guardia: la comprobación del cambio de contraseña pendiente, aplicada a TODO
+// punto que exija acceso salvo el del cambio de la propia contraseña. Va como intermediario y
+// no como filtro por punto, porque el defecto que se quiere impedir es **olvidarse de un punto**
+// y un filtro se olvida en silencio (`Api CU-02` §1 y CA-05).
+app.UseMiddleware<PendingPasswordChangeGuard>();
 
 app.MapHealthEndpoint();
 app.MapAuthenticationEndpoints();
 app.MapAccountEndpoints();
+app.MapCommissionAccountEndpoints();
 
 await app.RunAsync();
 
