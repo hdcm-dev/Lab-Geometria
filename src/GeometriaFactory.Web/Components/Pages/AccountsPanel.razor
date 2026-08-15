@@ -31,29 +31,41 @@
    cada una tiene que llegar con su testigo de antifalsificación, que es lo que un formulario
    estático hace solo.
 
-   **APARTAMIENTOS A CONFIRMAR POR EL PRODUCT OWNER**, y son cinco:
+   LOS CUATRO APARTAMIENTOS QUE DEPENDÍAN DE NO TENER GUION **ESTÁN CERRADOS**. Los cinco que esta
+   cabecera declaró se elevaron al Product Owner, que **autorizó un guion del navegador acotado a
+   cuatro cosas de interacción de superficie** —`wwwroot/interaction/surface-interaction.js`, el
+   único guion propio de la pieza pública—. Lo que cerró cada uno:
 
-     1. **La acción destructiva no permanece inhabilitada hasta que lo escrito coincide**
-        (wireframe §3 y §5). Inhabilitar un control mientras se teclea exige un guion en el
-        navegador, y la pieza pública no tiene ninguno —umbral 0 de `verify-stage-c.sh` C-4—. La
-        comparación la hace el servidor y, si no coincide, **la baja no procede**: se dibuja el
-        motivo y se deja reintentar. El wireframe ya declara que la pantalla no es la última
-        defensa; lo que se pierde es el aviso anticipado, no la protección.
-     2. **La provisoria no tiene acción de copiado en un solo gesto** (wireframe §3). Copiar al
-        portapapeles es lo mismo: exige guion. Se entrega como **texto seleccionable dentro de un
-        campo de sólo lectura**, que es la parte que el wireframe §7 declara irrenunciable —«se
-        anuncia como texto y es seleccionable», «el copiado no puede ser el único camino»—.
-     3. **El filtro consulta al servidor de la pieza pública** y no filtra sobre lo ya recibido
-        (wireframe §3 y §4). Sin guion no hay filtro local. **No consulta al servicio de datos con
-        el filtro puesto**: el listado se pide entero, siempre igual, y el recorte ocurre de este
-        lado. La pieza pública no guarda copia de la lista entre operaciones, que es lo que §7 sí
-        exige.
-     4. **Los diálogos no confinan el foco ni se cierran con la tecla de escape** (wireframe §7).
-        Se dibujan como diálogo abierto en la misma superficie, con su acción de cancelar; el
-        confinamiento del foco exige guion.
-     5. **Los estados con indicador en curso** —«Aplicando un cambio de situación», «Ejecutando
-        el reseteo», «Ejecutando la baja», «Cargando»— no se dibujan, por el mismo motivo que en
-        `AccountRegistration`: bajo render estático la respuesta llega con la operación hecha.
+     1. **La acción destructiva permanece inhabilitada hasta que lo escrito coincide** (wireframe
+        §3, §4 y §5). Lo hace el guion, leyendo `data-gf-match-input` y `data-gf-match-value` del
+        propio botón. **ES COMODIDAD DE SUPERFICIE Y NO LA DEFENSA, y sigue sin serlo**: el marcado
+        sirve el botón HABILITADO y es el guion el que lo inhabilita, de modo que sin guion la
+        pantalla se comporta como se comportaba; y quien compara y rechaza sigue siendo el servicio
+        de datos, en cada solicitud, incluso cuando la solicitud no pasa por esta pantalla.
+     2. **La provisoria tiene acción de copiado en un solo gesto** (wireframe §3 y §4). El botón lo
+        INJERTA el guion, con lo cual sin guion no queda un control muerto; y el texto sigue siendo
+        seleccionable dentro de un campo de sólo lectura, que es la parte que el wireframe §7
+        declara irrenunciable. El portapapeles exige contexto seguro: donde no lo hay se dibuja el
+        aviso honesto en lugar del botón.
+     3. **APARTAMIENTO QUE SIGUE ABIERTO: el filtro consulta al servidor de la pieza pública** y no
+        filtra sobre lo ya recibido (wireframe §3 y §4). **No entró en lo autorizado**, que fue
+        acotado a las cuatro cosas de arriba. **No consulta al servicio de datos con el filtro
+        puesto**: el listado se pide entero, siempre igual, y el recorte ocurre de este lado. La
+        pieza pública no guarda copia de la lista entre operaciones, que es lo que §7 sí exige.
+     4. **Los diálogos confinan el foco y se cierran con la tecla de escape** (wireframe §7). Lo
+        hace el guion, sobre `data-gf-dialog`. **La tecla de escape no ejecuta ninguna acción**:
+        activa el control de salida que el diálogo ya tiene —`data-gf-dialog-dismiss`, que es
+        «Cancelar» o «Listo»—, de modo que no pueda hacer nada distinto de lo que ese control hace.
+     5. **Los estados con indicador en curso se dibujan** —«Aplicando un cambio de situación»,
+        «Ejecutando el reseteo», «Ejecutando la baja»—, con el texto literal del wireframe §5
+        escrito en `data-gf-pending` por esta superficie: el guion no lleva textos adentro. El
+        estado **«Cargando» sigue sin dibujarse**, y ahí el motivo original no cambió: bajo render
+        estático la respuesta llega con la lista adentro y no hay ningún momento en que la pantalla
+        exista sin ella.
+
+   Y LO QUE EL GUION NO PUEDE HACER, que es lo que lo mantiene acotado: **no origina ninguna
+   petición** —`RA-01` intacto— y **no ve la marca de sesión**, que es `HttpOnly` (`Web ADR-03` §2).
+   Quien lo cuadra es `scripts/verify-stage-c.sh` C-4.
 
    Y UNA DECISIÓN QUE NO ES APARTAMIENTO SINO ELECCIÓN, CON SU CONSECUENCIA ESCRITA:
    **la provisoria se muestra en la respuesta de la operación que la produjo y en ninguna otra.**
@@ -93,7 +105,7 @@ else
     @* ---- La provisoria, la única vez que se ve ------------------------------------------ *@
     @if (_provisional is not null)
     {
-        <dialog class="gf-dialog" open aria-labelledby="accounts-provisional-heading">
+        <dialog class="gf-dialog" open aria-labelledby="accounts-provisional-heading" data-gf-dialog>
             <h2 id="accounts-provisional-heading">Contraseña provisoria de @_provisionalFor</h2>
             <p>
                 Dictásela, o pasásela por el canal que uses con la comisión.
@@ -106,10 +118,20 @@ else
                    campo de contraseña: es de sólo lectura y no se envía a ninguna parte. *@
                 <input class="gf-input gf-num" id="accounts-provisional" type="text" readonly
                        value="@_provisional" />
+                @* EL COPIADO EN UN SOLO GESTO (wireframe §3 y §4), y el botón LO INJERTA EL GUION:
+                   así, si el guion no llega, acá no queda un control muerto y el texto sigue
+                   siendo seleccionable, que es la parte que §7 declara irrenunciable. El
+                   portapapeles exige contexto seguro y en desarrollo local sobre `http://` no
+                   está: en ese caso se dibuja el aviso de abajo EN LUGAR del botón. *@
+                <span class="gf-flex-row gf-mt-2"
+                      data-gf-copy-source="accounts-provisional"
+                      data-gf-copy-label="Copiar la provisoria"
+                      data-gf-copy-done="Copiada al portapapeles."
+                      data-gf-copy-unavailable="Esta conexión no admite copiado automático. Seleccioná el texto de arriba y copialo."></span>
             </div>
             <p>@_provisionalFor la va a tener que cambiar apenas entre.</p>
             <div class="gf-footer-actions">
-                <a class="gf-btn gf-btn--primary" href="/cuentas">Listo</a>
+                <a class="gf-btn gf-btn--primary" href="/cuentas" data-gf-dialog-dismiss>Listo</a>
             </div>
         </dialog>
     }
@@ -163,7 +185,7 @@ else
         @* ---- Diálogo de baja, con confirmación escrita (CMP-47) ------------------------- *@
         @if (Deleting is { } target)
         {
-            <dialog class="gf-dialog" open aria-labelledby="accounts-deletion-heading">
+            <dialog class="gf-dialog" open aria-labelledby="accounts-deletion-heading" data-gf-dialog>
                 <h2 id="accounts-deletion-heading">Dar de baja la cuenta de @NameOf(target)</h2>
                 @* Aviso de arrastre (CMP-48): en el MISMO lugar donde se pide la confirmación, y
                    asociado por descripción accesible al campo para que se anuncie ANTES de que la
@@ -172,7 +194,8 @@ else
                     Esta baja elimina la cuenta y también TODOS sus trabajos. No se puede deshacer
                     y no hay forma de recuperarlos.
                 </p>
-                <form method="post" @formname="account-deletion" @onsubmit="() => DeleteAsync(target)">
+                <form method="post" @formname="account-deletion" @onsubmit="() => DeleteAsync(target)"
+                      data-gf-pending="Ejecutando la baja">
                     <AntiforgeryToken />
                     <div class="gf-field">
                         <label for="accounts-deletion-confirmation">
@@ -183,8 +206,17 @@ else
                                value="@DeletionForm.ConfirmationEmail" />
                     </div>
                     <div class="gf-footer-actions">
-                        <a class="gf-btn gf-btn--secondary" href="/cuentas">Cancelar</a>
-                        <button type="submit" class="gf-btn gf-btn--destructive">Dar de baja</button>
+                        <a class="gf-btn gf-btn--secondary" href="/cuentas" data-gf-dialog-dismiss>Cancelar</a>
+                        @* LA ACCIÓN QUEDA INHABILITADA HASTA QUE LO ESCRITO COINCIDE (wireframe §4 y
+                           §5), y LO INHABILITA EL GUION: el marcado la sirve habilitada, de modo que
+                           sin guion la pantalla se comporta como antes y quien compara es el
+                           servicio. ES COMODIDAD DE SUPERFICIE Y NO LA DEFENSA: la solicitud forzada
+                           que no pasa por acá se rechaza igual, y hay una prueba que lo fija.
+                           El correo esperado NO ES UN DATO NUEVO EN EL NAVEGADOR: es el mismo que
+                           la etiqueta de arriba dibuja a la vista para que la persona lo transcriba. *@
+                        <button type="submit" class="gf-btn gf-btn--destructive"
+                                data-gf-match-input="accounts-deletion-confirmation"
+                                data-gf-match-value="@target.Email">Dar de baja</button>
                     </div>
                 </form>
             </dialog>
@@ -193,7 +225,7 @@ else
         @* ---- Diálogo de reseteo, confirmación simple y sin transcripción ---------------- *@
         @if (Resetting is { } resetTarget)
         {
-            <dialog class="gf-dialog" open aria-labelledby="accounts-reset-heading">
+            <dialog class="gf-dialog" open aria-labelledby="accounts-reset-heading" data-gf-dialog>
                 <h2 id="accounts-reset-heading">Resetear la contraseña de @NameOf(resetTarget)</h2>
                 <p>
                     El sistema le va a generar una contraseña provisoria.
@@ -206,10 +238,11 @@ else
                     @resetTarget.FirstName conserva su cuenta y TODOS sus trabajos. Va a tener que elegir
                     una contraseña nueva la primera vez que entre, y esa no la vas a saber vos.
                 </p>
-                <form method="post" @formname="account-reset" @onsubmit="() => ResetAsync(resetTarget)">
+                <form method="post" @formname="account-reset" @onsubmit="() => ResetAsync(resetTarget)"
+                      data-gf-pending="Ejecutando el reseteo">
                     <AntiforgeryToken />
                     <div class="gf-footer-actions">
-                        <a class="gf-btn gf-btn--secondary" href="/cuentas">Cancelar</a>
+                        <a class="gf-btn gf-btn--secondary" href="/cuentas" data-gf-dialog-dismiss>Cancelar</a>
                         <button type="submit" class="gf-btn gf-btn--primary">Resetear</button>
                     </div>
                 </form>
@@ -284,8 +317,11 @@ else
                                 <td class="gf-td-actions">
                                     <span class="gf-row-actions">
                                         @* Se ofrece LA transición que la situación admite, no las tres a la vez. *@
+                                        @* El estado en curso es PUNTUAL, dentro de la propia fila y sin
+                                           bloquear la lista entera (wireframe §7, «performance percibida»). *@
                                         <form method="post" @formname="@("account-standing-" + account.AccountId.ToString("N", CultureInfo.InvariantCulture))"
-                                              @onsubmit="() => ChangeStandingAsync(account)">
+                                              @onsubmit="() => ChangeStandingAsync(account)"
+                                              data-gf-pending="Aplicando un cambio de situación">
                                             <AntiforgeryToken />
                                             <button type="submit" class="gf-btn gf-btn--secondary"
                                                     aria-label="@(VerbOf(account) + " la cuenta de " + NameOf(account))">@VerbOf(account)</button>

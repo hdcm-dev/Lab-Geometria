@@ -2,9 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
+      // LA CONFIGURACIÓN VA DECLARADA (`Pipeline-Producto.md` §3.1). `Debug` no está acá por
+      // omisión sino por decisión: es la tarea previa de las dos configuraciones de `launch.json`,
+      // y las dos apuntan a `bin/Debug/net10.0/`. Construir sin decirlo acertaba por casualidad;
+      // el día que alguien pusiera `-c Release` en un solo lado, el depurador arrancaría un
+      // binario viejo de `Debug` sin avisar. El ciclo de los guiones de `scripts/` es `Release`
+      // de punta a punta y es el otro par coherente.
       "label": "build",
       "type": "shell",
-      "command": "dotnet build ${workspaceFolder}/GeometriaFactory.sln",
+      "command": "dotnet build ${workspaceFolder}/GeometriaFactory.sln --configuration Debug",
       "group": "build",
       "problemMatcher": "$msCompile"
     }

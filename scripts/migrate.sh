@@ -19,13 +19,21 @@ fi
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# LA CONFIGURACIÓN SE DECLARA, NO SE HEREDA (`Pipeline-Producto.md` §3.1). `dotnet ef` CONSTRUYE
+# el proyecto de arranque para poder cargar el contexto, y sin decirlo construía `Debug` mientras
+# el resto del ciclo de guiones trabaja sobre `Release`: dos salidas del mismo árbol, y la
+# transformación generada contra la que nadie más mira.
+configuration="${GF_CONFIGURATION:-Release}"
+
 # `dotnet-ef` es herramienta LOCAL del repositorio, para que su versión quede versionada junto
 # al código (intake §17.3).
 dotnet tool restore
 
+echo "Configuración: $configuration"
 dotnet ef migrations add "$1" \
   --project src/GeometriaFactory.Infrastructure/GeometriaFactory.Infrastructure.csproj \
   --startup-project src/GeometriaFactory.Api/GeometriaFactory.Api.csproj \
+  --configuration "$configuration" \
   --output-dir Persistence/Migrations
 
 echo "Transformación generada. Una transformación ya fusionada NO se edita."

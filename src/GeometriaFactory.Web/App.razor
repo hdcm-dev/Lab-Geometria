@@ -31,6 +31,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <link rel="stylesheet" href="css/app.css" />
+    @* EL ÚNICO GUION PROPIO DE LA PIEZA PÚBLICA, y se carga acá por el mismo motivo que la hoja:
+       una sola vez, para todas las superficies. Hasta la etapa `d` no había ninguno, y su ausencia
+       era lo que dejaba abiertos CUATRO apartamientos declarados del panel de cuentas y del
+       registro. El Product Owner autorizó un guion **acotado a esas cuatro cosas** —copiar al
+       portapapeles, dibujar un estado en curso, mantener una acción inhabilitada hasta que lo
+       tecleado coincide, y cerrar un diálogo con la tecla de escape confinándole el foco—.
+
+       ES MEJORA PROGRESIVA Y NO UNA DEPENDENCIA: `defer` lo saca del camino del dibujo, y si no
+       llega, las superficies siguen funcionando exactamente como funcionaban sin él. No busca
+       ninguna pantalla por nombre: hace lo que los atributos del marcado le piden, y esos
+       atributos son nueve y están declarados en `Norma-De-Nomenclatura.md` §6.17.3.
+
+       NO TOCA `RA-01` NI `Web ADR-03` §2: no origina ninguna petición y no ve la marca de sesión,
+       que es `HttpOnly`. Quien lo cuadra es `scripts/verify-stage-c.sh` C-4. *@
+    <script src="interaction/surface-interaction.js" defer></script>
     @* SIN MODO DE RENDER, y es consecuencia de lo de arriba: el encabezado se dibuja en el mismo
        pase estático que las superficies, de modo que el título de `Ingreso` —que ya no es
        interactiva— llega al documento igual que el de las demás. *@

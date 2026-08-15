@@ -2,9 +2,9 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Pipeline-Producto.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-15
 **Autor:** Ingeniero DevOps Senior, con foco en Release Engineering y Platform Engineering (AG-09)
 **Nivel:** Producto
 **Trazabilidad upstream:** [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3** §2, §3 y §4; [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.26** §13, §15 y §17 P.7 y P.8; las **siete** categorías `09-Devops` emitidas bajo `Proyectos/`; [`Vista-Producto.md`](Vista-Producto.md) **1.2**
@@ -17,6 +17,7 @@
 - [1. Objetivo y alcance](#1-objetivo-y-alcance)
 - [2. Orden de construcción](#2-orden-de-construcción)
 - [3. Matriz de build y publicación multi-proyecto](#3-matriz-de-build-y-publicación-multi-proyecto)
+  - [3.1 La configuración de compilación se declara siempre y en los dos lados](#31-la-configuración-de-compilación-se-declara-siempre-y-en-los-dos-lados)
 - [4. Coordinación inter-proyecto](#4-coordinación-inter-proyecto)
 - [5. Versionado del producto](#5-versionado-del-producto)
 - [6. Gate de integración de producto](#6-gate-de-integración-de-producto)
@@ -71,6 +72,39 @@ Una fila por proyecto de código. La columna de artefacto publicable dice **qué
 **El caso de `GeometriaFactory-Contracts` es el que mejor muestra la distinción entre publicar y desplegar**, y su propia categoría `09` lo dice así: no se publica nada —no hay feed— y sin embargo el ensamblado llega a los **dos** ambientes de ejecución del producto, embebido en las dos unidades desplegables. Un lector que confunda las dos cosas concluye que el contrato no llega a producción.
 
 **Dos unidades desplegables, tres artefactos que salen.** El bundle del visor sale del repositorio hacia el directorio del front y viaja adentro de la publicación de `Web`; no es una tercera unidad desplegable.
+
+### 3.1 La configuración de compilación se declara siempre y en los dos lados
+
+**La regla, entera:** toda invocación que construya, ejecute, pruebe o publique **declara su configuración**, y la declara **tanto quien construye como quien ejecuta**, aunque el valor por omisión coincida. La coherencia por omisión no cuenta como cumplimiento.
+
+**Por qué es una regla y no una recomendación.** `scripts/verify-stage-c.sh` construía la solución con `dotnet build -c Release` y levantaba las dos piezas con `dotnet run --no-build` **sin decir la configuración**. Sin configuración declarada, `dotnet run` resuelve `Debug`: el guion construía una cosa y verificaba otra, y lo que verificaba podía ser un binario de cualquier antigüedad. No falló mientras lo medido existió en las dos salidas. El día que se agregó una guardia de arranque nueva, el binario viejo arrancó igual y **se concluyó durante un rato que la guardia no funcionaba. Funcionaba.**
+
+**El caso de `verify-navigation.sh` muestra por qué la omisión coherente tampoco sirve.** Construía sin configuración y levantaba sin configuración: acertaba **por omisión en los dos lados**, no por decisión. Bastaba que alguien agregara `-c Release` de un solo lado para reproducir el defecto entero sin que nada avisara.
+
+**Dos ciclos coherentes, y ninguno depende del valor por omisión.** El ciclo de los guiones de `scripts/` es `Release` de punta a punta, porque `Release` es lo que se prueba y lo que se despliega. El ciclo del depurador es `Debug` de punta a punta, y vive entero en `.vscode/`: la tarea previa construye `Debug` y las dos configuraciones de arranque apuntan a `bin/Debug/`. Quien necesite la otra salida desde los guiones la pide con `GF_CONFIGURATION`, que es otra forma de declararla.
+
+| Invocación | Dónde | Qué construye | Qué ejecuta o consume |
+| --- | --- | --- | --- |
+| `scripts/build.sh` | Contenedor de desarrollo y canalización | `Release`, la solución entera | Nada: sólo construye |
+| `scripts/test.sh` | Contenedor de desarrollo y canalización | `Release`, la solución entera | `Release`, las tres baterías |
+| `scripts/run-api.sh` | Contenedor de desarrollo | `Release` por omisión, `GF_CONFIGURATION` si se pide otra | La misma que construyó |
+| `scripts/run-web.sh` | Contenedor de desarrollo | `Release` por omisión, `GF_CONFIGURATION` si se pide otra | La misma que construyó |
+| `scripts/migrate.sh` | Contenedor de desarrollo | `Release`: `dotnet ef` construye el proyecto de arranque para cargar el contexto | La misma que construyó |
+| `scripts/verify-navigation.sh` | Contenedor del kit de desarrollo | `Release`, el front, a través de la red de `assert-build-fresh.sh` | `Release`, con `--no-build` |
+| `scripts/verify-stage-c.sh` | Contenedor del kit de desarrollo | `Release`, la solución entera | `Release`, las dos piezas, con `--no-build` |
+| `scripts/assert-build-fresh.sh` | Debajo de todo `--no-build` | La configuración que recibe como argumento, y sólo ésa | Nada: habilita a quien levanta |
+| `.vscode/tasks.json` y `launch.json` | Máquina de quien desarrolla | `Debug`, la solución entera | `Debug`, desde `bin/Debug/net10.0/` |
+| `deploy/Dockerfile` | Destino, al construir la imagen | `Release`, publicación del servicio de datos | `Release`: la imagen final arranca esa publicación |
+| `deploy/compose.yaml` | Destino | Nada propio: delega en `deploy/Dockerfile` | La imagen que ese archivo produjo |
+| `.github/workflows/deploy-front-ftp.yml` | Canalización de publicación del front | `Release`, publicación del front | `Release`: es lo que se transfiere al hosting |
+
+**Además de declarar la configuración, hay una red debajo de todo `--no-build`.** Declarar la configuración en los dos lados no cubre el otro caso, que es el que produjo la conclusión equivocada: que la construcción **falle** y el guion siga adelante igual. Pasa solo, sin que nadie se distraiga: un guion con `set -uo pipefail` —sin `-e`— que además canaliza la construcción a `tail` pierde el código de salida dos veces, y el `dotnet run --no-build` de la línea siguiente levanta el binario de la corrida anterior. `scripts/assert-build-fresh.sh` construye en la configuración declarada, mira el código de salida y comprueba que el ensamblado de esa configuración exista, y **no vuelve con 0 de ninguna otra manera**.
+
+**La red construye en vez de comparar fechas, y la primera versión sí comparaba fechas.** Se descartó porque da falsos positivos que no se pueden limpiar, y se comprobó en este árbol: con `Deterministic` puesto en `Directory.Build.props`, tocar una fuente sin cambiar su contenido deja el ensamblado exactamente igual —la compilación produce el mismo resultado y la copia se saltea—, de modo que la fuente queda más nueva que la salida para siempre y reconstruir no lo arregla. Un `git checkout` reproduce lo mismo sobre todo el árbol. **Una red que se traba en rojo sin forma de destrabarla se termina salteando, y una red que se saltea no es una red.** La construcción incremental de MSBuild ya sabe si la salida está al día y lo sabe mirando contenidos, no sólo fechas: se la usa como oráculo en lugar de reimplementarla peor.
+
+**Se conserva `--no-build` en quien levanta**, porque separa las dos responsabilidades y deja la falla donde se entiende: la construcción falla en la red, con su mensaje y su código mirado, y lo que se levanta después es exactamente lo que ahí se construyó. Un `dotnet run` que construye por su cuenta esconde la falla de construcción entre la salida del arranque y evalúa la puerta de advertencias `QG-01` en un momento distinto del que se declara.
+
+**La regla tiene puerta propia:** `scripts/verify-explicit-configuration.sh` recorre los archivos versionados que ejecutan algo y falla si aparece una invocación sin configuración declarada, o un `--no-build` sin la red puesta. Es lo que impide que la regla dependa de que alguien se acuerde.
 
 ## 4. Coordinación inter-proyecto
 
@@ -182,3 +216,4 @@ Este documento **no resuelve ninguno**: los registra con su titular, porque un p
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial, en la consolidación de la Fase H y **una sola vez para todo el producto**, porque tiene más de un proyecto de código. Declara las **ocho** secciones que la guía de la categoría exige: el alcance y la frontera contra las siete canalizaciones por proyecto de código; el orden de construcción en los cuatro niveles topológicos del manifiesto; la matriz de build y publicación, con **tres** artefactos que salen del repositorio, **cuatro** proyectos de código sin artefacto propio y **cero** feeds de paquetes; la coordinación de las **nueve** aristas, todas por build conjunto salvo la copia del bundle y la resolución por configuración de la arista de tiempo de ejecución; el versionado en lockstep por etiqueta de etapa cerrada, con la compilación compartida y el despliegue conjunto como mecanismos; el gate de integración de producto con la batería de integración y las **cinco** puertas técnicas; la reversión coordinada con el orden de salida decidido por el Product Owner —**primero el backend**— y la asimetría del almacén; y la trazabilidad de cada artefacto contra su guía de publicación. Suma una novena sección con los **seis** puntos abiertos que alcanzan al pipeline, **ninguno de los cuales se resuelve acá**. **No toma ninguna decisión y no reabre ninguna de las 45 ADR emitidas**: referencia, no reescribe. **Autor:** Ingeniero DevOps Senior (AG-09) |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Absorbe la decisión (b) del Product Owner** (`PRODUCT-INTAKE` **1.29** §18): el alcance de la colección de peticiones (`S-2`) son los **ocho escenarios `E-1` a `E-8`**, y la divergencia entre §16.1 y §18 queda resuelta a favor de los ocho. La lectura que este proyecto de código ya había adoptado **queda confirmada**: no cambia ningún paso, ningún criterio ni ningún recuento. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |
+| 1.2 | 2026-08-15 | **Escribe la regla de configuración de compilación del repositorio**, en un §3.1 nuevo bajo la matriz de build: toda invocación que construya, ejecute, pruebe o publique declara su configuración, y la declara de los **dos** lados, aunque el valor por omisión coincida. La regla no es preventiva: nace de un defecto que **ya costó una conclusión equivocada sobre el producto** —`verify-stage-c.sh` construía `Release` y levantaba `Debug` viejo con `dotnet run --no-build` sin configuración, y por eso se concluyó durante un rato que una guardia de arranque nueva no funcionaba, cuando funcionaba—. El §3.1 agrega la **tabla de las doce invocaciones** del árbol versionado con qué configuración construye y qué configuración ejecuta cada una, los **dos ciclos coherentes** —`Release` de punta a punta en `scripts/`, `Debug` de punta a punta en `.vscode/`—, la red `scripts/assert-build-fresh.sh` que va debajo de todo `--no-build` con el fundamento de por qué construye en vez de comparar fechas, y la puerta `scripts/verify-explicit-configuration.sh` que impide que la regla dependa de que alguien se acuerde. **No cambia ningún artefacto, ningún canal, ninguna arista, ningún gate ni ningún punto abierto**: las siete tablas anteriores quedan como estaban. Sube minor. |
