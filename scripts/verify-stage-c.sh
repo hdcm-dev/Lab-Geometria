@@ -29,6 +29,19 @@
 # no estaban y respondían `404`. Se corrige agregando `-c Release` a los dos
 # `dotnet run`, de modo que lo que se levanta sea exactamente lo que se construyó.
 #
+# ESTE GUION SE QUEDA EN `Release` AUNQUE `run-api.sh` Y `run-web.sh` HAYAN PASADO A
+# `Debug`, Y LA ASIMETRÍA ESTÁ PUESTA A PROPÓSITO. El Product Owner decidió que en
+# desarrollo se trabaja en `Debug`, y los guiones de ejecución lo declaran así. Los de
+# VERIFICACIÓN no, porque su trabajo es distinto: miden **lo que efectivamente se
+# despliega**, y lo que se despliega es `Release` —`deploy/Dockerfile` publica `-c
+# Release` y el flujo del front transfiere `Release`—. Una puerta que verifica una
+# salida distinta de la que sale a producción es el defecto que los párrafos de arriba
+# documentan, con otro disfraz.
+#
+# QUE NADIE LA «CORRIJA» POR SIMETRÍA MÁS ADELANTE: no es una inconsistencia olvidada
+# entre guiones, es la decisión. Ejecutar y verificar no miden lo mismo y no tienen por
+# qué usar la misma salida.
+#
 # LA CLAVE DE FIRMA SE RECIBE Y NO SE BUSCA. Este guion la toma de
 # `ACCESS_TOKEN_SIGNING_KEY` y, si no llega, usa una de prueba y lo dice. En
 # ningún caso hay una clave escrita en el repositorio para producción.

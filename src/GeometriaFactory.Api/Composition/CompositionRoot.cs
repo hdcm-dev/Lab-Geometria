@@ -60,10 +60,29 @@ public static class CompositionRoot
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
 
-        var connectionString = configuration.GetConnectionString(StoreConnectionName)
-            ?? throw new InvalidOperationException(
+        // EL ARRANQUE SE DETIENE SI LA RUTA DEL ALMACÉN NO LLEGÓ, igual que con la clave de firma,
+        // y por un motivo que ya costó datos. Hasta la etapa `d` `appsettings.json` traía
+        // `Data Source=geometriafactory.db`: una ruta RELATIVA, que resolvía contra el directorio
+        // de trabajo y dejaba el almacén de desarrollo ADENTRO del árbol del repositorio. Un
+        // valor por omisión así no falla nunca —siempre encuentra dónde escribir— y por eso nadie
+        // lo mira: el 2026-08-15 una corrida de guiones borró esa base y se llevó la cuenta de
+        // administrador del Product Owner. En la etapa `e` el mismo archivo tiene los trabajos de
+        // una comisión.
+        //
+        // Sin valor por omisión, la falla aparece en el arranque y nombra la llave que falta, en
+        // lugar de aparecer como datos que se evaporan. LA RUTA SIGUE SIN ESTAR ESCRITA ACÁ: este
+        // código no propone ninguna, sólo se niega a inventarla.
+        var connectionString = configuration.GetConnectionString(StoreConnectionName);
+
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException(
                 $"Falta la cadena de conexión '{StoreConnectionName}'. La ruta del almacén llega " +
-                "por configuración y nunca embebida en el código.");
+                "por configuración y nunca embebida en el código: en desarrollo la calcula " +
+                "`scripts/store-path.sh` y la exporta como `ConnectionStrings__Store`, y en el " +
+                "despliegue la fija el `ENV` de `deploy/Dockerfile`. Se detiene el arranque en " +
+                "lugar de elegir un archivo por su cuenta.");
+        }
 
         // Contexto por operación (intake §17.3.P.4): alcance de petición, nunca compartido.
         services.AddDbContext<GeometriaFactoryDbContext>(options => options.UseSqlite(connectionString));

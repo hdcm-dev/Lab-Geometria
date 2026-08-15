@@ -8,11 +8,20 @@
 # La dirección del servicio de datos llega por configuración (`ApiBaseUrl`) y nunca embebida.
 #
 # LA CONFIGURACIÓN SE DECLARA, NO SE HEREDA (`Pipeline-Producto.md` §3.1). Vale lo mismo que en
-# `run-api.sh`: `dotnet run` a secas resolvía `Debug` mientras `build.sh` y `test.sh` trabajan
-# sobre `Release`, y quien encadenaba los dos levantaba binarios que la construcción nunca
-# produjo. El ciclo de los guiones es `Release` de punta a punta.
+# `run-api.sh`: `dotnet run` a secas resolvía `Debug` SIN DECIRLO, y eso no se afloja: la
+# configuración sigue yendo declarada en la invocación.
 #
-#   GF_CONFIGURATION=Debug scripts/run-web.sh
+# LO QUE CAMBIÓ ES EL VALOR: `Debug` por omisión, por decisión del Product Owner —en desarrollo se
+# trabaja en `Debug`—. Declarado, no heredado. Y sin desajuste posible, porque este guion
+# construye y levanta la misma configuración en la misma invocación: no usa `--no-build`.
+#
+# LOS GUIONES DE VERIFICACIÓN SE QUEDAN EN `Release`, Y LA ASIMETRÍA ES A PROPÓSITO.
+# `verify-navigation.sh` levanta esta misma pieza y lo hace en `Release`, porque mide lo que
+# efectivamente se despliega; si midiera una salida distinta de la que sale a producción,
+# volveríamos al defecto que se acaba de erradicar. QUE NADIE LA «CORRIJA» POR SIMETRÍA con este
+# guion: no es una inconsistencia olvidada, es la decisión.
+#
+#   GF_CONFIGURATION=Release scripts/run-web.sh
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -20,7 +29,7 @@ cd "$repo_root/src/GeometriaFactory.Web"
 
 export ASPNETCORE_ENVIRONMENT="${ASPNETCORE_ENVIRONMENT:-Development}"
 
-configuration="${GF_CONFIGURATION:-Release}"
+configuration="${GF_CONFIGURATION:-Debug}"
 
 echo "Configuración: $configuration"
 dotnet run --project GeometriaFactory.Web.csproj --configuration "$configuration" "$@"
