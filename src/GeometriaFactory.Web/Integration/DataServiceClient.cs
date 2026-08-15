@@ -31,6 +31,14 @@ public sealed class DataServiceClient
     /// </summary>
     private const string HealthPath = "salud";
 
+    /// <summary>
+    /// Ruta del punto de aprovisionamiento `A-17`, derivada por `Definicion-Superficie-HTTP.md`
+    /// §3. Es la misma constante que `GeometriaFactory.Api.Endpoints.AccountEndpoints`
+    /// `ProvisioningStateRoute`, sin la barra inicial porque acá la dirección base la pone la
+    /// configuración.
+    /// </summary>
+    private const string ProvisioningPath = "aprovisionamiento";
+
     /// <summary>Ruta del punto de canje `A-01`. Declarada por el intake §17.5.P.3.</summary>
     private const string TokenPath = "auth/token";
 
@@ -81,6 +89,33 @@ public sealed class DataServiceClient
         return await response.Content
             .ReadFromJsonAsync<ServiceHealth>(cancellationToken)
             .ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// `A-17` — Si el laboratorio ya tiene administrador. Devuelve **nulo** cuando el servicio de
+    /// datos no pudo responder, y ese nulo significa **«no se sabe»**, nunca «no».
+    /// </summary>
+    /// <remarks>
+    /// LA DISTINCIÓN ENTRE «NO» Y «NO SE SABE» ES LA QUE IMPORTA, y por eso el tipo devuelto es
+    /// anulable en lugar de un <c>bool</c> con un valor por omisión. Quien llama es el guardián 1
+    /// de `Web ADR-03` §2, y las dos respuestas lo llevan a lugares opuestos: con «no» desvía todo
+    /// al aprovisionamiento, y con «no se sabe» **no desvía nada**, porque desviar sobre una
+    /// suposición dejaría a la persona en un formulario que el servicio va a rechazar y taparía la
+    /// página de estado, que es justamente donde se diagnostica que el servicio no responde.
+    ///
+    /// NO LLEVA CREDENCIAL, y es lo que hace que sirva: el guardián corre **antes de que nadie se
+    /// haya identificado**. Es la segunda consulta anónima del cliente, junto con la de salud.
+    ///
+    /// LA EXCEPCIÓN DE TRANSPORTE NO SE PROPAGA (RA-03): el mensaje lleva la dirección del
+    /// servicio, y acá se convierte en el nulo de «no se sabe» sin texto ninguno.
+    /// </remarks>
+    public async Task<bool?> GetLaboratoryProvisioningAsync(CancellationToken cancellationToken = default)
+    {
+        var outcome = await SendAsync<object, LaboratoryProvisioning>(
+            HttpMethod.Get, ProvisioningPath, request: null, accessToken: null, cancellationToken)
+            .ConfigureAwait(false);
+
+        return outcome.Succeeded ? outcome.Value!.AdministratorConfigured : null;
     }
 
     /// <summary>`A-03` — Configura la cuenta de administrador del primer arranque.</summary>

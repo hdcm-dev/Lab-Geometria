@@ -17,6 +17,13 @@ namespace GeometriaFactory.Integration.Tests;
 /// los produce: se pide cada dirección como la pediría un navegador, con marca y sin ella. Y no se
 /// siguen las redirecciones, porque **la redirección es lo que se verifica**.
 ///
+/// TODAS LAS PRUEBAS CONFIGURAN EL ADMINISTRADOR ANTES, Y NO ES ANDAMIAJE: es lo que aísla al
+/// guardián 2 del guardián 1. Desde que `ProvisioningGateMiddleware` existe, un laboratorio SIN
+/// administrador desvía **cualquier** ruta al aprovisionamiento —`ADR-03` §2, guardián 1, que corre
+/// primero—, de modo que sin configurar nada estas pruebas medirían el guardián 1 creyendo medir el
+/// 2. Con el administrador puesto, el guardián 1 deja de intervenir sobre estas rutas y lo que se
+/// observa es lo que esta batería fue a mirar. El guardián 1 tiene su propia batería.
+///
 /// LA CUARTA PRUEBA ES LA QUE IMPORTA MÁS. La puerta de servicio abre el paseo sin sesión, y su
 /// límite —que fuera de desarrollo no rige **aunque la opción esté puesta**— es una afirmación que
 /// no se puede dejar en un comentario: acá se levanta la pieza en `Production` con la opción
@@ -38,9 +45,16 @@ public sealed class PanelSessionGateTests : IDisposable
     /// Las que NO son del panel y siguen siendo públicas. `/credencial-propia/cambio-obligado` está
     /// acá a propósito: se llega **sin sesión de trabajo** (`INV-09`), y gatearla rompe `RN-13`.
     /// </summary>
+    /// <remarks>
+    /// `/aprovisionamiento-inicial` **salió de esta lista** cuando se construyó el guardián 1: con
+    /// administrador configurado —que es la condición de esta batería— esa ruta **desvía de forma
+    /// neutra** y ya no arma formulario, que es la segunda mitad de `ADR-03` §2 guardián 1. No es
+    /// que haya dejado de ser pública: es que dejó de tener algo que ofrecer. Se verifica en
+    /// `ProvisioningGateTests`.
+    /// </remarks>
     private static readonly string[] PublicRoutes =
     [
-        "/", "/aprovisionamiento-inicial", "/registro-de-cuenta", "/ingreso",
+        "/", "/registro-de-cuenta", "/ingreso",
         "/credencial-propia/establecer", "/credencial-propia/cambio-obligado",
         "/estado", "/no-encontrado",
     ];
@@ -60,6 +74,7 @@ public sealed class PanelSessionGateTests : IDisposable
     public async Task WithoutTheMarkTheSevenRoutesOfThePanelDetourToSignIn()
     {
         using var browser = BrowserOf(_publicPiece);
+        await ConfigureAdministratorAsync();
 
         foreach (var route in PanelRoutes)
         {
@@ -74,6 +89,7 @@ public sealed class PanelSessionGateTests : IDisposable
     public async Task WithoutTheMarkThePublicRoutesStillAnswer()
     {
         using var browser = BrowserOf(_publicPiece);
+        await ConfigureAdministratorAsync();
 
         foreach (var route in PublicRoutes)
         {
@@ -104,6 +120,7 @@ public sealed class PanelSessionGateTests : IDisposable
     public async Task TheServiceDoorDoesNotOpenAnythingOutsideDevelopment()
     {
         // LA OPCIÓN PUESTA Y EL ENTORNO EQUIVOCADO: la opción sola no abre nada.
+        await ConfigureAdministratorAsync();
         using var browser = BrowserOf(HarnessIn("Production", walkthrough: true));
 
         foreach (var route in PanelRoutes)
