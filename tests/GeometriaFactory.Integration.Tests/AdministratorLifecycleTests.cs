@@ -193,12 +193,25 @@ public sealed class AdministratorLifecycleTests : IDisposable
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
-        // Y el rechazo NO lleva código del contrato: el conjunto cerrado no declara ninguno
-        // para un acceso ausente, vencido o mal firmado, y esta capa no inventa códigos.
+        // QUÉ CAMBIÓ ACÁ CON `PRODUCT-INTAKE` 1.34, Y POR QUÉ. Este punto dejó de estar bajo la
+        // guardia de sesión, porque exigirle acceso firmado dejaba la pantalla del cambio
+        // forzado inalcanzable (RN-13). El rechazo lo produce ahora el punto mismo: una petición
+        // sin acceso utilizable y sin correo NO IDENTIFICA NINGUNA CUENTA, y recibe la respuesta
+        // neutra del contrato —la misma que una credencial que no corresponde—, que es lo que
+        // impide distinguir por tanteo qué cuentas existen.
         var refused = await ChangePasswordRawAsync(client, "a.b.c", request);
         var body = await refused.Content.ReadAsStringAsync();
+        Assert.Equal(ErrorCode.InvalidCredentials, (await refused.Content.ReadFromJsonAsync<ErrorResponse>())!.Code);
+
+        // Y no nombra ningún campo: decir «falta el correo» sería enseñar la otra forma de
+        // autenticarse a quien está probando accesos falsificados.
         Assert.DoesNotContain("REQUIRED_FIELD_MISSING", body, StringComparison.Ordinal);
-        Assert.DoesNotContain("INVALID_CREDENTIALS", body, StringComparison.Ordinal);
+        Assert.DoesNotContain("Email", body, StringComparison.Ordinal);
+
+        // Sobre todo: NINGUNO de los tres intentos cambió nada. La contraseña sigue siendo la
+        // primera, que es la afirmación que este control existe para sostener.
+        Assert.NotNull(await SignInAsync(client, FirstPassword));
+        Assert.Null(await SignInAsync(client, SecondPassword));
     }
 
     [Fact]

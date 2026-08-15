@@ -110,8 +110,34 @@ public sealed class SessionState
     public bool IsAdministrator => string.Equals(Role, "Administrator", StringComparison.Ordinal);
 
     /// <summary>
-    /// Abre la sesión con lo que el canje devolvió: guarda el testigo del lado del servidor y
-    /// escribe la marca del navegador.
+    /// Correo de la cuenta que quedó derivada al cambio forzado de contraseña, mientras el
+    /// cambio no se resuelve. **No es una sesión de trabajo y no lo parece**: no hay credencial
+    /// que guardar, porque RN-13 no permite emitir ninguna hasta que la contraseña se cambie.
+    /// </summary>
+    /// <remarks>
+    /// POR QUÉ VIVE ACÁ Y NO EN LA DIRECCIÓN. La pantalla del cambio forzado necesita saber qué
+    /// cuenta cambia, y quien lo sabe es el ingreso que acaba de recibir el desvío. Llevarlo en
+    /// la dirección lo dejaría escrito en la barra del navegador y en el historial; en el estado
+    /// del circuito no sale del servidor de esta pieza, igual que la credencial.
+    /// </remarks>
+    public string? PasswordChangeEmail { get; private set; }
+
+    /// <summary>
+    /// Anota qué cuenta quedó derivada al cambio forzado. Lo invoca el ingreso cuando el canje
+    /// devuelve el desvío, y **no abre ninguna sesión**: <see cref="IsOpen"/> sigue en falso.
+    /// </summary>
+    public void BeginPasswordChange(string email)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(email);
+
+        _accessToken = null;
+        PasswordChangeEmail = email;
+    }
+
+    /// <summary>
+    /// Abre la sesión con lo que el canje devolvió. La credencial entra acá y no sale hacia
+    /// ninguna superficie: la única forma de usarla es <see cref="UseAccessToken"/>, que sólo
+    /// invoca el cliente del servicio de datos, del lado del servidor.
     /// </summary>
     /// <remarks>
     /// EL ORDEN IMPORTA Y ES ÉSTE: primero se guarda el testigo, después se escribe la marca. Al
@@ -143,6 +169,7 @@ public sealed class SessionState
         await context.SignInAsync(SessionCookieDefaults.Scheme, principal).ConfigureAwait(false);
 
         _loaded = principal;
+
     }
 
     /// <summary>
@@ -156,6 +183,7 @@ public sealed class SessionState
     /// </remarks>
     public async Task CloseAsync(HttpContext context)
     {
+
         ArgumentNullException.ThrowIfNull(context);
 
         if (SessionId is { } sessionId)
@@ -165,6 +193,7 @@ public sealed class SessionState
 
         await context.SignOutAsync(SessionCookieDefaults.Scheme).ConfigureAwait(false);
         _loaded = Anonymous;
+
     }
 
     /// <summary>

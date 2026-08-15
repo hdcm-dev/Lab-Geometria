@@ -2,7 +2,6 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Norma-De-Nomenclatura.md
-**Versión:** 1.9
 **Estado:** Aprobado
 **Fecha:** 2026-08-15
 **Autor:** Orquestador SDD (medición y redacción) · Product Owner (las tres decisiones de §5)
@@ -1032,7 +1031,7 @@ con solapamiento— **ya estaban los veinte** en §6.8, con su nombre inglés fi
 etapa `c` los tomó de ahí y no tradujo ninguno por criterio propio, que es exactamente lo que
 §6.1 manda.
 
-**106 filas, contadas:** 30 tipos, 75 miembros y propiedades, y 1 subsegmento de espacio de nombres.
+**109 filas, contadas:** 30 tipos, 78 miembros y propiedades, y 1 subsegmento de espacio de nombres. **Las tres últimas las agrega la 1.8**, con la rebanada del cambio forzado de contraseña que `PRODUCT-INTAKE` **1.34** hizo alcanzable, y llevan su marca en la tabla.
 
 **Tres nombres que la etapa `c` NO agrega porque ya tenían fila**, y se declara para que el
 control `V-1` no los levante como huecos: `Account`, `Role` y `AccountStatus` están en §6.4 con
@@ -1081,7 +1080,7 @@ de prueba se llama como el tipo que ejercita más el sufijo `Tests` —`AccountT
 ya tiene fila. La única excepción es `DataServiceHarness`, que sí nombra un concepto propio —el
 andamiaje que levanta la pieza de datos en memoria— y por eso está en la tabla.
 
-#### 6.13.2 Miembros y propiedades (75)
+#### 6.13.2 Miembros y propiedades (78)
 
 | Castellano | Inglés | Clase | Dónde está declarado el concepto |
 | --- | --- | --- | --- |
@@ -1115,6 +1114,7 @@ andamiaje que levanta la pieza de datos en memoria— y por eso está en la tabl
 | Materializar el alta | `AddAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §3.1 |
 | Materializar el cambio | `UpdateAsync` | Miembro de `IAccountRepository` | `Application ADR-02` §3.1 |
 | Ejecutar | `ExecuteAsync` | Operación única de los tres casos de uso | Catálogo de `GeometriaFactory-Application` §3 |
+| Ejecutar con la contraseña actual | `ExecuteWithCurrentCredentialAsync` | Segunda operación de `ChangeOwnPasswordUseCase` | `PRODUCT-INTAKE` **1.34**, que declara las **dos formas de autenticarse** del cambio de contraseña: con sesión de trabajo y con la contraseña actual. **[agregado por la 1.8]** |
 | Coincide | `Matches` | Valor de `CredentialCheck` | `Infrastructure CU-06` §4 |
 | No coincide | `DoesNotMatch` | Valor de `CredentialCheck` | `Infrastructure CU-06` §5 |
 | Ilegible | `Unreadable` | Valor de `CredentialCheck` | `Infrastructure CU-06` §5; `ADR-04` §2 punto 1 |
@@ -1153,6 +1153,8 @@ andamiaje que levanta la pieza de datos en memoria— y por eso está en la tabl
 | Abrir | `Open` | Operación de `SessionState` | `Web CU-02` §4 paso 6 |
 | Cerrar | `Close` | Operación de `SessionState` | `Web CU-02`; `Experiencia-De-Uso.md` §3.2, cierre de sesión |
 | Usar la credencial | `UseAccessToken` | Operación de `SessionState` | `Web ADR-03`. **[propuesta de la etapa `c`: es método y no propiedad, para que no sea interpolable en el marcado]** |
+| Correo de la cuenta derivada al cambio forzado | `PasswordChangeEmail` | Miembro de `SessionState` | `RN-13`, que deriva al cambio sin emitir sesión de trabajo; `Wireframes-Credencial-Propia.md` §4, «Llegar al cambio forzado». **[agregado por la 1.8]** |
+| Anotar el desvío al cambio forzado | `BeginPasswordChange` | Operación de `SessionState` | `PRODUCT-INTAKE` **1.34**; `Wireframes-Credencial-Propia.md` §4. **[propuesta de la 1.8: no abre sesión, y por eso no se llama `Open`]** |
 | Resuelto | `Resolved` | Constructor con nombre de `DataServiceOutcome` | `Web CU-10` |
 | Fallido | `Failed` | Constructor con nombre de `DataServiceOutcome` | `Web CU-10` |
 | Error | `Error` | Miembro de `DataServiceOutcome` | `Contracts CU-06` FA-02 |
