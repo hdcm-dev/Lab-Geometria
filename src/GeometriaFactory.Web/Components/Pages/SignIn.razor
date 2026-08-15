@@ -208,11 +208,17 @@ else if (_state is Outcome.PasswordChangeRequired)
         if (outcome.Error.Code == ErrorCode.PasswordChangeRequired)
         {
             // EL DESVÍO DEL CAMBIO FORZADO (RN-13). La cuenta se autentica y NO obtiene sesión
-            // de trabajo: lo único que queda anotado es de qué cuenta se trata, para que la
-            // pantalla del cambio sepa a quién le está cambiando la contraseña. Con la marca
-            // puesta, ninguna otra capacidad (INV-09).
+            // de trabajo, así que acá no se abre nada y no se escribe ninguna marca. Con la
+            // marca de cambio pendiente puesta, ninguna otra capacidad (INV-09).
+            //
+            // Y NO SE ACARREA NADA HACIA LA PANTALLA DEL CAMBIO, que es el defecto que este
+            // arreglo retira. Esta superficie es estática: el envío es UNA petición, y la
+            // redirección abre otra, con su propio `SessionState` de ámbito, vacío. Lo que se
+            // anotara acá no llegaría del otro lado, y la pantalla del cambio quedaba sin saber
+            // de quién se trata —el alumno reseteado volvía a quedarse sin puerta—. La pantalla
+            // del cambio pide el correo ella misma y por eso funciona también con recarga, con
+            // enlace guardado y con quien llega de frente.
             _state = Outcome.PasswordChangeRequired;
-            Session.BeginPasswordChange(_email);
             Navigation.NavigateTo("/credencial-propia/cambio-obligado");
             return;
         }
