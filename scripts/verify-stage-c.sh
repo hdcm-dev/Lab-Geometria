@@ -12,6 +12,13 @@
 #        inexistente.
 #   C-4  La credencial de sesión no es observable desde el navegador.
 #
+# Y, después de los cuatro, un control que NO es un quinto criterio de
+# transición sino la puerta del **guardián 2 de `Web ADR-03` §2**: «ninguna ruta
+# del panel es accesible sin sesión». Va acá porque este guion es el único que
+# levanta la pieza pública como `Production`, que es donde el guardián rige sin
+# ninguna salvedad. `scripts/verify-navigation.sh` corre en desarrollo y con la
+# puerta de servicio puesta, y por eso allá las mismas rutas responden 200.
+#
 # LA CLAVE DE FIRMA SE RECIBE Y NO SE BUSCA. Este guion la toma de
 # `ACCESS_TOKEN_SIGNING_KEY` y, si no llega, usa una de prueba y lo dice. En
 # ningún caso hay una clave escrita en el repositorio para producción.
@@ -115,20 +122,67 @@ ApiBaseUrl="$API/" ASPNETCORE_ENVIRONMENT=Production \
 WEB_PID=$!
 for _ in $(seq 1 90); do curl -s -o /dev/null "$WEB/" && break || sleep 1; done
 
-# 1 · Ninguna respuesta que el navegador recibe trae algo con forma de acceso firmado.
+# 1 · Ninguna respuesta que el navegador recibe trae algo con forma de acceso firmado,
+#     ni SIN sesión ni CON sesión abierta.
 jwt=0
 for r in / /aprovisionamiento-inicial /ingreso /mi-contrasena /entrega-comision /cuentas /mis-trabajos /estado; do
   if curl -s "$WEB$r" | grep -qE 'eyJ[A-Za-z0-9_-]{6,}\.[A-Za-z0-9_-]{6,}\.'; then
     bad "$r trae algo con forma de acceso firmado"; jwt=1
   fi
 done
-[ "$jwt" -eq 0 ] && ok "0 ocurrencias con forma de acceso firmado en las ocho direcciones"
+[ "$jwt" -eq 0 ] && ok "0 ocurrencias con forma de acceso firmado en las ocho direcciones, sin sesión"
 
-# 2 · Ninguna cookie propia. La única admitida es la de antifalsificación del marco.
-cookies=$(curl -s -D - -o /dev/null "$WEB/ingreso" | grep -i '^set-cookie:' | sed 's/^[Ss]et-[Cc]ookie: *//')
-propias=$(echo "$cookies" | grep -v '^$' | grep -viE 'Antiforgery' | wc -l)
-same "$propias" 0 "cookies propias en la superficie de ingreso"
-[ -n "$cookies" ] && echo "        cookies emitidas: $(echo "$cookies" | tr '\n' ' ')"
+# 2 · LA MARCA DE SESIÓN, sobre la cabecera real. Reescrito: hasta que la sesión vivió sólo en
+#     el estado del circuito, este control decía «cero cookies propias», y era una forma legítima
+#     de comprobar que la credencial no bajaba al navegador. Con la marca de sesión construida
+#     —`Web ADR-03` §2, «el navegador conserva una marca de sesión que NO LA TRANSPORTA»— esa
+#     redacción ya no comprueba lo correcto: comprobaría la ausencia de una pieza que la ADR
+#     manda tener. Lo que hay que comprobar, y es lo que este control hace ahora, es que la marca
+#     EXISTA, que lleve los tres atributos que el intake §17.6 declara, y que NO LLEVE EL TESTIGO
+#     —ni el literal exacto ni nada con su forma—.
+printf '\n   -- se entra de verdad, para mirar la marca que el navegador recibe --\n'
+TOKEN_2=$(token_for "$PASS_2")
+curl -s -c /tmp/jar-web -o /tmp/ingreso.html "$WEB/ingreso"
+AF_TOKEN=$(sed -n 's/.*name="__RequestVerificationToken" value="\([^"]*\)".*/\1/p' /tmp/ingreso.html | head -1)
+AF_COOKIE=$(grep -i 'Antiforgery' /tmp/jar-web | awk '{print $6"="$7}')
+[ -n "$AF_TOKEN" ] && ok "el formulario de ingreso trae su testigo de antifalsificación" \
+                   || bad "el formulario de ingreso no trae testigo de antifalsificación"
+
+curl -s -D /tmp/entrada.h -o /dev/null -X POST "$WEB/ingreso" \
+  -H "Cookie: $AF_COOKIE" \
+  --data-urlencode "_handler=sign-in" \
+  --data-urlencode "__RequestVerificationToken=$AF_TOKEN" \
+  --data-urlencode "Input.Email=$EMAIL" \
+  --data-urlencode "Input.Password=$PASS_2"
+
+same "$(sed -n '1s/.*[0-9]\.[0-9] \([0-9]*\).*/\1/p' /tmp/entrada.h)" 302 "el ingreso responde con una redirección de verdad"
+SET_COOKIE=$(grep -i '^set-cookie: gf.session=' /tmp/entrada.h | sed 's/^[Ss]et-[Cc]ookie: *//')
+MARCA=$(echo "$SET_COOKIE" | cut -d';' -f1)
+echo "        cabecera cruda: $(echo "$SET_COOKIE" | cut -c1-60)…$(echo "$SET_COOKIE" | sed 's/^[^;]*//')"
+
+[ -n "$MARCA" ] && ok "el navegador recibe la marca de sesión" || bad "no llegó ninguna marca de sesión"
+for atributo in httponly secure 'samesite=strict'; do
+  echo "$SET_COOKIE" | grep -qi "$atributo" && ok "la marca lleva '$atributo'" || bad "la marca NO lleva '$atributo'"
+done
+case "$SET_COOKIE" in *"$TOKEN_2"*) bad "EL TESTIGO ESTÁ ADENTRO DE LA MARCA";; *) ok "el testigo NO está adentro de la marca";; esac
+echo "$SET_COOKIE" | grep -qE 'eyJ[A-Za-z0-9_-]{6,}\.' \
+  && bad "la marca trae algo con forma de acceso firmado" \
+  || ok "la marca no trae nada con forma de acceso firmado"
+
+# Y la marca sirve: la sesión sobrevive a una PETICIÓN NUEVA, que es lo que una recarga hace.
+curl -s -H "Cookie: $MARCA" -o /tmp/panel.html -w '' "$WEB/entrega-comision"
+grep -q "$EMAIL" /tmp/panel.html && ok "la sesión sobrevive a una petición nueva (el panel dibuja $EMAIL)" \
+                                 || bad "la sesión no sobrevivió a una petición nueva"
+grep -qE 'eyJ[A-Za-z0-9_-]{6,}\.[A-Za-z0-9_-]{6,}\.' /tmp/panel.html \
+  && bad "el panel con sesión trae algo con forma de acceso firmado" \
+  || ok "el panel con sesión no trae nada con forma de acceso firmado"
+grep -q "$TOKEN_2" /tmp/panel.html && bad "el testigo literal está en el cuerpo servido" \
+                                   || ok "el testigo literal NO está en el cuerpo servido"
+
+# Y sin la marca no hay sesión: la misma dirección no dibuja identidad de nadie.
+curl -s -o /tmp/anonimo.html "$WEB/entrega-comision"
+grep -q "$EMAIL" /tmp/anonimo.html && bad "sin marca sigue dibujando la identidad" \
+                                   || ok "sin la marca no se dibuja ninguna identidad"
 
 # 3 · El navegador no tiene NINGÚN guion propio que pudiera guardar nada.
 guiones=$(curl -s "$WEB/ingreso" | grep -oE '<script[^>]*src="[^"]*"' | sed 's/.*src="//;s/"//' | tr '\n' ' ')
@@ -139,6 +193,35 @@ case "$guiones" in *geometriafactory-visor.js*) bad "carga un guion propio en la
 escrituras=$(grep -rnE 'localStorage|sessionStorage|document\.cookie|IJSRuntime|InvokeVoidAsync' \
   --include='*.razor' --include='*.cs' src/GeometriaFactory.Web | wc -l)
 same "$escrituras" 0 "líneas de la pieza pública que podrían escribir en el navegador"
+
+# ------------------------------------------------ guardián 2 de `ADR-03` §2 ---
+printf '\n== GUARDIÁN 2 · ninguna ruta del panel es accesible sin sesión ==\n'
+# La pieza corre como `Production`: acá el guardián rige sin excepción, y la
+# opción `PanelWalkthroughWithoutSession` no está puesta ni haría nada si lo
+# estuviera. Esto ACOTA lo que se ofrece y no hace cumplir nada: quien verifica
+# la pertenencia y el papel sigue siendo el servicio de datos, en cada solicitud.
+PANEL='/mis-trabajos /trabajo-nuevo /trabajos/T-1 /trabajos/T-1/editar /cuentas /entrega-comision /mi-contrasena'
+PUBLICAS='/ /aprovisionamiento-inicial /registro-de-cuenta /ingreso /credencial-propia/establecer /credencial-propia/cambio-obligado /estado /no-encontrado'
+
+printf '   -- sin marca: las siete del panel desvían a /ingreso --\n'
+for r in $PANEL; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' "$WEB$r")
+  dest=$(curl -s -o /dev/null -D - "$WEB$r" | sed -n 's/^[Ll]ocation: *//p' | tr -d '\r')
+  if [ "$code" = "302" ] && [ "$dest" = "/ingreso" ]; then ok "$r desvía a /ingreso ($code)"
+  else bad "$r: esperado 302 → /ingreso, obtenido $code → ${dest:-(sin Location)}"; fi
+done
+
+printf '   -- sin marca: las públicas siguen respondiendo 200 --\n'
+# `/credencial-propia/cambio-obligado` está en esta lista a propósito: se llega
+# SIN sesión de trabajo (`INV-09`), y gatearla rompería `RN-13`.
+for r in $PUBLICAS; do
+  same "$(curl -s -o /dev/null -w '%{http_code}' "$WEB$r")" 200 "$r sigue siendo pública"
+done
+
+printf '   -- con marca válida: las siete del panel responden 200 --\n'
+for r in $PANEL; do
+  same "$(curl -s -H "Cookie: $MARCA" -o /dev/null -w '%{http_code}' "$WEB$r")" 200 "$r con sesión"
+done
 
 printf '\n== RESULTADO ==\n'
 [ "$fails" -eq 0 ] && { echo "CONFORME · los cuatro criterios de transición de la etapa \`c\` pasan"; exit 0; }

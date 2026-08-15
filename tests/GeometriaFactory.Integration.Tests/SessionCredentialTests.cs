@@ -1,139 +1,84 @@
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 using GeometriaFactory.Contracts.Accounts;
-using GeometriaFactory.Web.Components.Layout;
-using GeometriaFactory.Web.Components.Pages;
-using GeometriaFactory.Web.Integration;
 using GeometriaFactory.Web.Services;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Http;
 using Xunit;
 
 namespace GeometriaFactory.Integration.Tests;
 
 /// <summary>
 /// CUARTO CRITERIO DE TRANSICIÓN de la etapa `c`: **la credencial de sesión no es observable
-/// desde el navegador**. Acá se demuestra, no se afirma.
+/// desde el navegador**. Acá se demuestra sobre el custodio; en
+/// <see cref="SessionCookieTests"/> se demuestra sobre las cabeceras y los cuerpos reales.
 /// </summary>
 /// <remarks>
-/// QUÉ SIGNIFICA CONCRETAMENTE BAJO INTERACTIVIDAD DE SERVIDOR. El navegador recibe exactamente
-/// dos cosas: el documento prerrenderizado y, después, los **lotes de render** que el circuito
-/// le manda por la conexión de tiempo real. Los dos son **el marcado que los componentes
-/// producen**. De modo que la afirmación «el navegador no ve la credencial» es, palabra por
-/// palabra, la afirmación «ningún componente emite la credencial en su marcado» —más «nadie la
-/// escribe en una cookie ni en el almacenamiento del navegador», que es lo que cubren los
-/// controles de abajo—.
+/// QUÉ SIGNIFICA CONCRETAMENTE DESDE QUE HAY MARCA DE SESIÓN. El navegador recibe tres cosas: el
+/// documento dibujado, los lotes de render que el circuito le manda, y **la marca de sesión**. De
+/// las tres, las dos primeras son marcado que los componentes producen y la tercera es una
+/// cabecera. La afirmación «el navegador no ve el testigo» es entonces tres afirmaciones: ningún
+/// componente lo emite, la marca no lo lleva adentro, y no hay código que lo escriba en el
+/// almacenamiento del navegador. Las dos primeras las ejerce <see cref="SessionCookieTests"/>
+/// sobre las dos piezas corriendo; la tercera se verifica acá, sobre los archivos.
 ///
-/// CÓMO SE DEMUESTRA. Se abre una sesión **de verdad** con una credencial centinela, se dibujan
-/// los componentes que tienen acceso a ella y se mira el marcado producido, que es byte por byte
-/// lo que viajaría. Y se comprueba que la prueba NO ES VACÍA: el mismo marcado sí trae el correo
-/// de la sesión, de modo que si el dibujo hubiera salido «sin sesión» la prueba lo delataría en
-/// lugar de pasar por ausencia.
-///
-/// QUÉ NO DEMUESTRA, Y HAY QUE DECIRLO: no se manejó un navegador de verdad. No hay aquí una
-/// sesión conducida por un navegador sin cabeza que inspeccione `document.cookie` y el
-/// almacenamiento local en vivo. Lo que sí está cubierto por construcción es que **no existe
-/// código que pudiera escribir ahí**: la pieza pública no tiene ningún guion propio ni ninguna
-/// llamada de interoperabilidad, y eso se verifica abajo sobre los archivos.
+/// LO QUE ESTA CLASE CUIDA es la superficie del custodio: que ninguna propiedad de lectura
+/// devuelva el testigo, porque una propiedad de lectura es interpolable en el marcado sin que
+/// nadie lo note.
 /// </remarks>
 public sealed class SessionCredentialTests
 {
-    /// <summary>Credencial centinela. No se parece a nada más del marcado, para que encontrarla sea concluyente.</summary>
+    /// <summary>Testigo centinela. No se parece a nada más, para que encontrarlo sea concluyente.</summary>
     private const string SentinelToken = "CENTINELA-DE-CREDENCIAL-b7f4c1a9e2d640";
 
     private const string SessionEmail = "docente@frre.utn.edu.ar";
 
-    private sealed class StaticNavigationManager : NavigationManager
+    /// <summary>Una identidad ya autenticada, como la que la marca de sesión reconstituye.</summary>
+    private sealed class FixedAuthenticationStateProvider : AuthenticationStateProvider
     {
-        public StaticNavigationManager(string uri) => Initialize("http://localhost/", uri);
+        private readonly AuthenticationState _state;
 
-        protected override void NavigateToCore(string uri, bool forceLoad)
-        {
-            // La prueba no navega: dibujar es todo lo que hace.
-        }
+        public FixedAuthenticationStateProvider(ClaimsPrincipal principal) =>
+            _state = new AuthenticationState(principal);
+
+        public override Task<AuthenticationState> GetAuthenticationStateAsync() => Task.FromResult(_state);
     }
 
-    private static ServiceProvider BuildServices(string uri, out SessionState session)
+    private static SessionState OpenSession(out SessionTokenStore tokens, out string sessionId)
     {
-        var services = new ServiceCollection();
-        services.AddLogging();
-        services.AddSingleton<NavigationManager>(new StaticNavigationManager(uri));
-        services.AddSingleton(new DataServiceClient(new HttpClient { BaseAddress = new Uri("http://el-servicio-de-datos/") }));
+        var identifier = Guid.NewGuid().ToString("N");
+        var store = new SessionTokenStore();
+        store.Keep(identifier, SentinelToken);
 
-        var state = new SessionState();
-        state.Open(new SessionResponse(SentinelToken, Guid.NewGuid(), SessionEmail, "Administrator"));
-        services.AddSingleton(state);
+        var principal = new ClaimsPrincipal(new ClaimsIdentity(
+            [
+                new Claim(SessionClaims.SessionId, identifier),
+                new Claim(SessionClaims.AccountId, Guid.NewGuid().ToString()),
+                new Claim(SessionClaims.Email, SessionEmail),
+                new Claim(SessionClaims.Role, "Administrator"),
+            ],
+            SessionCookieDefaults.Scheme));
 
-        session = state;
-        return services.BuildServiceProvider();
-    }
+        tokens = store;
+        sessionId = identifier;
 
-    private static async Task<string> RenderAsync<TComponent>(string uri, Dictionary<string, object?>? parameters = null)
-        where TComponent : IComponent
-    {
-        using var provider = BuildServices(uri, out var session);
-        Assert.True(session.IsOpen);
-        Assert.Equal(SentinelToken, session.UseAccessToken());
-
-        await using var renderer = new HtmlRenderer(provider, provider.GetRequiredService<ILoggerFactory>());
-
-        return await renderer.Dispatcher.InvokeAsync(async () =>
-        {
-            var output = await renderer.RenderComponentAsync<TComponent>(
-                ParameterView.FromDictionary(parameters ?? []));
-
-            return output.ToHtmlString();
-        });
+        return new SessionState(
+            new FixedAuthenticationStateProvider(principal),
+            new HttpContextAccessor(),
+            store);
     }
 
     [Fact]
-    public async Task TheSurfaceThatUsesTheCredentialDoesNotEmitItIntoItsMarkup()
-    {
-        // `/mi-contrasena` es la ÚNICA superficie de esta etapa que ejerce la credencial: se la
-        // pide al custodio y se la pasa al cliente del servicio de datos. Si algún día alguien
-        // la interpolara en el marcado, esta prueba se cae.
-        var html = await RenderAsync<OwnCredentialChange>("http://localhost/mi-contrasena");
-
-        Assert.DoesNotContain(SentinelToken, html, StringComparison.Ordinal);
-
-        // Y la prueba NO es vacía: el componente se dibujó CON la sesión abierta, que es lo que
-        // muestra el formulario de cambio en lugar del aviso de que hay que entrar.
-        Assert.Contains("credential-current", html, StringComparison.Ordinal);
-    }
-
-    [Fact]
-    public async Task TheWorkShellShowsTheIdentityAndNotTheCredential()
-    {
-        var body = (RenderFragment)(builder => builder.AddMarkupContent(0, "<h1>Cuerpo</h1>"));
-        var html = await RenderAsync<WorkShell>(
-            "http://localhost/entrega-comision",
-            new Dictionary<string, object?> { ["Body"] = body });
-
-        Assert.DoesNotContain(SentinelToken, html, StringComparison.Ordinal);
-
-        // No vacía: el armazón dibujó la sesión —el correo y el papel— y no una pantalla anónima.
-        Assert.Contains(SessionEmail, html, StringComparison.Ordinal);
-        Assert.Contains("Administrador", html, StringComparison.Ordinal);
-    }
-
-    [Fact]
-    public async Task TheSignInSurfaceNeitherReceivesNorEmitsTheCredential()
-    {
-        var html = await RenderAsync<SignIn>("http://localhost/ingreso?estado=sesion-cerrada");
-
-        Assert.DoesNotContain(SentinelToken, html, StringComparison.Ordinal);
-        Assert.Contains("Cerraste sesión", html, StringComparison.Ordinal);
-    }
-
-    [Fact]
-    public void NoReadablePropertyOfTheCustodianYieldsTheCredential()
+    public async Task NoReadablePropertyOfTheCustodianYieldsTheCredential()
     {
         // POR QUÉ IMPORTA: una propiedad de lectura es interpolable en el marcado sin que nadie
-        // lo note. El custodio expone la credencial SÓLO por un método, y esta prueba recorre
-        // toda su superficie de lectura para comprobar que ninguna la devuelve.
-        var session = new SessionState();
-        session.Open(new SessionResponse(SentinelToken, Guid.NewGuid(), SessionEmail, "Administrator"));
+        // lo note. El custodio expone el testigo SÓLO por un método, y esta prueba recorre toda
+        // su superficie de lectura para comprobar que ninguna lo devuelve.
+        var session = OpenSession(out var tokens, out var sessionId);
+        await session.LoadAsync();
+
+        Assert.True(session.IsOpen);
+        Assert.Equal(SentinelToken, session.UseAccessToken());
 
         var readable = typeof(SessionState)
             .GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
@@ -144,23 +89,63 @@ public sealed class SessionCredentialTests
         Assert.NotEmpty(readable);
         Assert.DoesNotContain(SentinelToken, readable);
 
+        // Y la que sí se puede leer —el identificador de sesión— es lo que la marca lleva: no
+        // autoriza nada por sí sola, y fuera de este proceso es una cadena sin significado.
+        Assert.Equal(sessionId, session.SessionId);
+
         var fields = typeof(SessionState)
             .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
 
         Assert.Empty(fields);
 
-        // Y cerrar la sesión la descarta de verdad.
-        session.Close();
+        // Descartar el testigo del almacén cierra la sesión de verdad, aunque la marca siga.
+        tokens.Discard(sessionId);
         Assert.Null(session.UseAccessToken());
         Assert.False(session.IsOpen);
+    }
+
+    [Fact]
+    public void TheMarkOfSessionHasNoPlaceToPutTheCredential()
+    {
+        // LA AUSENCIA ES LA DECISIÓN: no hay una declaración para el testigo, de modo que nadie
+        // puede ponerlo en la marca «sin darse cuenta». Lo que la marca lleva es identidad, papel
+        // y un identificador opaco, y nada de eso sirve contra el servicio de datos.
+        var declared = typeof(SessionClaims)
+            .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)
+            .Select(field => (string)field.GetValue(null)!)
+            .ToArray();
+
+        Assert.Equal(4, declared.Length);
+        Assert.All(declared, name => Assert.DoesNotContain("token", name, StringComparison.OrdinalIgnoreCase));
+
+        // Y el testigo tiene un solo lugar donde vivir, que es del lado del servidor.
+        var store = new SessionTokenStore();
+        store.Keep("una-sesion", SentinelToken);
+        Assert.True(store.Contains("una-sesion"));
+
+        // El reciclado del proceso hace exactamente esto, y no avisa (`ADR-03` §6.1).
+        store.Clear();
+        Assert.False(store.Contains("una-sesion"));
+        Assert.Null(store.Find("una-sesion"));
+    }
+
+    [Fact]
+    public void TheContractOfTheExchangeStillCarriesTheCredentialServerToServer()
+    {
+        // El canje devuelve el testigo, y eso no cambia: lo que cambió es dónde queda. Si el
+        // contrato dejara de traerlo, el almacén no tendría qué guardar.
+        var session = new SessionResponse(SentinelToken, Guid.NewGuid(), SessionEmail, "Administrator");
+
+        Assert.Equal(SentinelToken, session.AccessToken);
+        Assert.Equal(SessionEmail, session.Email);
     }
 
     [Fact]
     public void ThePublicPieceHasNoWayOfWritingAnythingIntoTheBrowser()
     {
         // `RA-01` y el cuarto criterio, vistos desde el otro lado: no hay guion propio que
-        // pudiera guardar la credencial en el navegador, ni llamada de interoperabilidad que
-        // pudiera pasársela a uno. El visor tridimensional es de la etapa `g` y su archivo se
+        // pudiera guardar el testigo en el navegador, ni llamada de interoperabilidad que
+        // pudiera pasárselo a uno. El visor tridimensional es de la etapa `g` y su archivo se
         // genera; se lo excluye nombrándolo, para que la exclusión sea deliberada.
         var web = Path.Combine(RepositoryRoot(), "src", "GeometriaFactory.Web");
 

@@ -2,9 +2,9 @@
 
 **Proyecto de código:** GeometriaFactory-Web
 **Documento:** ADR-03-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md
-**Versión:** 1.0
+**Versión:** 1.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-15
 **Autor:** Arquitecto de Software Senior (AG-05)
 **Categoría:** Seguridad
 
@@ -37,7 +37,12 @@ Motivación upstream: NB-01, NB-02; `RN-01`, `RN-03`, `RN-06`, `RN-11`, `RN-13`,
 
 ## 3. Estado
 
-**Propuesto** desde 2026-08-10.
+**Aprobado** desde 2026-08-10, e **implementado** desde 2026-08-15.
+
+La 1.0 escribía **Propuesto** acá y **Aprobado** en la cabecera, y las dos cosas no podían ser
+ciertas a la vez. La contradicción era del documento y no de la decisión: la decisión se tomó
+aprobada, la categoría 02 la venía exigiendo y las etapas `b` y `c` construyeron contra ella.
+Esta emisión la resuelve del lado en que la decisión efectivamente rigió.
 
 ## 4. Alternativas consideradas
 
@@ -65,6 +70,67 @@ Motivación upstream: NB-01, NB-02; `RN-01`, `RN-03`, `RN-06`, `RN-11`, `RN-13`,
 
 ## 7. Implementación
 
+**Las dos mitades de §2, y en qué se apoya cada una.** §2 declara dos cosas: que la credencial no
+llega al navegador, y que el navegador conserva **una marca de sesión que no la transporta**. La
+etapa `c` construyó la primera y no la segunda: guardó la credencial en el estado del circuito y
+no emitió ninguna marca, con lo cual la única «marca» era el circuito mismo. Eso cumplía la letra
+de la primera mitad y dejaba a la persona afuera con sólo recargar la página. La implementación de
+2026-08-15 construye la segunda mitad, y no cambia ninguna decisión: es la misma de §2, entera.
+
+- **La marca de sesión es un identificador OPACO, y nada más.** Lleva el identificador de la
+  sesión, la identidad y el papel; **no lleva la credencial**, ni en claro ni cifrada. Va
+  `HttpOnly` —que es lo que la hace «no legible por guion», la frase textual de §2—, `Secure` y
+  `SameSite=Strict`, los tres declarados por el intake §17.6 (`RT` §9.2). Su nombre no dice con
+  qué está construido el producto.
+- **La credencial vive en un almacén del lado del servidor, con alcance de aplicación**, indexado
+  por ese identificador. Es lo que reemplaza al estado del circuito de la etapa `c`, y el cambio
+  es de **alcance**, no de lado: la credencial sigue sin tener por dónde salir. Lo que se gana es
+  que la sesión sobreviva a la recarga y a una pestaña nueva; lo que no cambia es §6.1, porque el
+  almacén sigue siendo memoria del proceso.
+- **La superficie de ingreso NO es interactiva, y no es una preferencia.** Escribir una marca es
+  escribir una cabecera, y dentro de un circuito las cabeceras ya salieron: la respuesta viaja por
+  la conexión de tiempo real. De modo que `Ingreso` se dibuja con render estático de servidor y
+  envía con un POST de verdad, con la antifalsificación del marco puesta; durante ese POST, y sólo
+  ahí, se canjea, se guarda la credencial, se escribe la marca y se redirige. **Las demás
+  superficies siguen siendo interactivas de servidor**, declarándolo una por una.
+- **El cierre de sesión también es un POST**, por lo mismo: borrar la marca es escribir una
+  cabecera. Descarta la credencial del almacén **y** borra la marca; con una sola de las dos, la
+  sesión no queda cerrada de verdad.
+- **El estado «marca presente, credencial ausente»** —el que deja el reciclado del proceso de
+  §6.1— lo atiende un intermediario que corre después de autenticar y antes de dibujar: borra la
+  marca y devuelve a `Ingreso` con el motivo declarado. **No es una excepción y no es una pantalla
+  rota**, que es lo que la categoría 03 diseñó para `EST-34`.
+- **El guardián 2 está construido, y es un intermediario que corre después de autenticar.** Sin
+  marca de sesión, las **siete rutas del panel** —`/mis-trabajos`, `/trabajo-nuevo`,
+  `/trabajos/{id}`, `/trabajos/{id}/editar`, `/cuentas`, `/entrega-comision` y `/mi-contrasena`—
+  desvían a `Ingreso`. La lista es de **inclusión**: lo que no está nombrado pasa, de modo que una
+  superficie pública nueva no obliga a acordarse de este archivo y una del panel sí. Hasta esta
+  implementación, la marca de sesión existía y el guardián **no**: las siete respondían 200 sin
+  sesión.
+- **`/credencial-propia/cambio-obligado` queda fuera del guardián 2, y no es un olvido.** Se llega
+  **sin sesión de trabajo**, que es lo que el guardián 4 declara para `INV-09`; gatearla dejaría a
+  esa persona sin ninguna ruta a la que ir —el 2 la mandaría a `Ingreso` y el 4 la traería de
+  vuelta— y eso rompe `RN-13`. Tampoco son del panel el destino inicial, el aprovisionamiento, el
+  registro, el ingreso, `/credencial-propia/establecer`, el estado, la pantalla de no encontrado y
+  los recursos estáticos.
+- **El guardián 2 sigue ACOTANDO y no haciendo cumplir**, y eso está escrito en el propio
+  intermediario. Decide qué se ofrece; **no es control de acceso**. La verificación de pertenencia
+  y de papel la sigue haciendo el servicio de datos en cada solicitud, y **no se afloja ninguna
+  comprobación de aquel lado** por el hecho de que este guardián exista.
+- **El orden con el intermediario de «marca presente, credencial ausente» es deliberado**: aquél
+  corre **primero**. Cuando los dos aplican, habla aquél —borra la marca y desvía a `Ingreso` con
+  el motivo declarado— y corta, de modo que el guardián 2 no llega a correr y la persona lee **por
+  qué** volvió. Al revés vería un `Ingreso` mudo y la marca muerta seguiría puesta. Cuando la marca
+  directamente no está, aquél no hace nada y el guardián 2 desvía **sin motivo**, porque no hay
+  ninguno que declarar: nunca hubo sesión.
+- **Hay una puerta de servicio, y sólo existe en el entorno de desarrollo.** Una opción de
+  configuración —`PanelWalkthroughWithoutSession`— habilita el paseo sin sesión, y el intermediario
+  **la conjuga con el entorno**: fuera de desarrollo el guardián rige **sin excepción aunque la
+  opción esté puesta**. Es la misma forma que la salvedad de `Secure`, y existe por un motivo
+  concreto: `scripts/verify-navigation.sh` recorre las trece pantallas para que el Product Owner
+  las apruebe, y ese recorrido es anterior a que hubiera sesión. **El límite está probado y no sólo
+  comentado**: `PanelSessionGateTests` levanta la pieza como `Production` con la opción en `true` y
+  comprueba que las siete rutas desvían igual.
 - El componente **Sesión y estado del circuito** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único que custodia la credencial; el **Armazón y encaminamiento** es el único que aplica los cuatro guardianes.
 - El **cliente tipado** adjunta la credencial del lado del servidor. Ninguna superficie la ve.
 - Las credenciales en claro del canje, del cambio de contraseña y del reseteo **también** viajan servidor a servidor, según la regla de exposición que `GeometriaFactory-Contracts` declara para su frontera.
@@ -75,9 +141,9 @@ Motivación upstream: NB-01, NB-02; `RN-01`, `RN-03`, `RN-06`, `RN-11`, `RN-13`,
 
 | Métrica | Objetivo | Cómo se mide |
 | --- | --- | --- |
-| Apariciones de la credencial de sesión en el navegador | Exactamente **0** | Inspección del almacenamiento, de las marcas de sesión y del contenido servido, con las herramientas de desarrollo, en la etapa `c` |
+| Apariciones de la credencial de sesión en el navegador | Exactamente **0** | Inspección del almacenamiento, de las marcas de sesión y del contenido servido. **Desde 2026-08-15 se mide sobre la cabecera `Set-Cookie` real y sobre el cuerpo servido**, buscando la credencial literal y su forma: `scripts/verify-stage-c.sh` control `C-4`, y la batería `SessionCookieTests` |
 | Guardianes de ruta aplicados | **4 de 4**, cada uno con al menos un recorrido que lo ejercita | Guion de demostración de la etapa correspondiente |
-| Rutas del panel alcanzables sin sesión | Exactamente **0** | Recorrido pidiendo cada ruta sin sesión |
+| Rutas del panel alcanzables sin sesión | Exactamente **0** | Recorrido pidiendo cada ruta sin sesión. **Desde 2026-08-15 está automatizado**: `scripts/verify-stage-c.sh`, control «guardián 2», que corre como `Production`; y la batería `PanelSessionGateTests`, que además comprueba que la puerta de servicio **no abre nada fuera de desarrollo** |
 | Rutas de administrador alcanzables por un alumno con sesión | Exactamente **0** | Recorrido con sesión de alumno |
 | Rutas alcanzables por una cuenta con la marca de cambio pendiente, distintas del cambio de su propia contraseña | Exactamente **0** | Recorrido con una cuenta recién habilitada y con una recién reseteada: **2 de 2** orígenes de la marca |
 | Negativas producidas por esta pieza en lugar de por el servicio de datos, al forzar la solicitud sin pasar por la pantalla | Exactamente **0** | Prueba que fuerza la solicitud de un recurso ajeno y de una ruta del otro papel |
@@ -94,4 +160,6 @@ Motivación upstream: NB-01, NB-02; `RN-01`, `RN-03`, `RN-06`, `RN-11`, `RN-13`,
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-15 | **Registra en §7 la implementación del guardián 2 y de su puerta de servicio de desarrollo. Ninguna decisión cambia: §2 ya lo declaraba.** La 1.1 describió la marca de sesión y el almacén del lado del servidor, y con eso la sesión quedó construida; **el guardián 2 no**: las siete rutas del panel seguían respondiendo sin sesión, y el único guion que las recorría —`scripts/verify-navigation.sh`, escrito en la etapa `b`— **exigía** ese 200, porque se escribió cuando la sesión no existía. §7 pasa a describir el intermediario que lo cierra: las **siete rutas del panel** desvían a `Ingreso` sin marca, por lista de **inclusión**; `/credencial-propia/cambio-obligado` **queda fuera a propósito**, porque se llega sin sesión de trabajo (`INV-09`) y gatearla rompería `RN-13`; el **orden** respecto del intermediario de «marca presente, credencial ausente», que corre primero para que la persona lea por qué volvió; y la **puerta de servicio** `PanelWalkthroughWithoutSession`, que habilita el paseo sin sesión y **sólo tiene efecto en el entorno de desarrollo** —fuera de ahí el guardián rige sin excepción aunque la opción esté puesta, y eso está probado y no sólo comentado—. §8 precisa **cómo se mide** la métrica de las cero rutas del panel alcanzables sin sesión, que desde hoy está automatizada. **No cambia ninguna decisión**: §2 declaraba el guardián 2 desde la 1.0, los cuatro guardianes siguen **acotando sin hacer cumplir**, y la verificación real sigue siendo la del servicio de datos en cada solicitud. Sube minor. |
+| 1.1 | 2026-08-15 | **Resuelve la contradicción de §3 y describe en §7 la implementación entera de §2, que hasta ahora estaba construida a medias.** §3 decía **Propuesto** mientras la cabecera decía **Aprobado**; la contradicción era del documento —la decisión rigió aprobada desde el primer día, y las etapas `b` y `c` construyeron contra ella—, y queda resuelta como **Aprobado, e implementado desde 2026-08-15**. §7 pasa a describir lo que §2 siempre dijo y la etapa `c` no había construido: **la marca de sesión del navegador**, identificador opaco con `HttpOnly`, `Secure` y `SameSite=Strict` y **sin la credencial adentro**; **el almacén del lado del servidor con alcance de aplicación**, que reemplaza al estado del circuito y hace que la sesión sobreviva a una recarga; **la superficie de ingreso no interactiva**, que es la única forma de escribir una cabecera; **el cierre de sesión como envío de verdad**; y **el intermediario que atiende «marca presente, credencial ausente»**, el estado que deja el reciclado del proceso de §6.1, devolviendo a `Ingreso` con el motivo declarado en vez de fallar. **No cambia ninguna decisión**: §2 queda como estaba, los cuatro guardianes siguen acotando sin hacer cumplir, y §6.1 sigue aceptando la pérdida de la sesión con el reciclado, porque el almacén sigue siendo memoria del proceso. §8 precisa **cómo se mide** la métrica de las cero apariciones, que ahora se mide sobre la cabecera real. Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra la custodia de la credencial de sesión en el estado del circuito del lado del servidor y los cuatro guardianes de ruta, con la distinción explícita entre **acotar lo que se ofrece** y **hacer cumplir**, que es la decisión que la categoría 02 declaró y que esta ADR lleva al plano arquitectónico. Evalúa cuatro alternativas, declara cuatro trade-offs y fija seis métricas de validación, incluida la de forzar la solicitud sin pasar por la pantalla. |
