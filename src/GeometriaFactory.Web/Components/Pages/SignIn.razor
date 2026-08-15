@@ -7,6 +7,7 @@
 @* SUP-03 `Ingreso` — CU-02.
    Ruta: `/ingreso`. Shell: acceso.
    Salidas: `NAV-04` → `/registro-de-cuenta`; `NAV-06` → `/credencial-propia/establecer`;
+   desvío del cambio forzado → `/credencial-propia/cambio-obligado` (RN-13, intake 1.34);
    `NAV-08` → `/mis-trabajos` (papel alumno); `NAV-09` → `/entrega-comision` (papel administrador).
    Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Ingreso.md`.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Ingreso.html`.
@@ -61,8 +62,8 @@ else if (_state is Outcome.Rejected)
 }
 else if (_state is Outcome.PasswordChangeRequired)
 {
-    @* No es un error y no se presenta como tal: es un desvío. El punto de acceso al que lleva
-       es de la etapa `d`, que es la que produce contraseñas provisorias. *@
+    @* No es un error y no se presenta como tal: es un desvío, y ocurre por navegación. Esta
+       banda es el repliegue para el caso en que la navegación no llegue a ocurrir. *@
     <p class="gf-banner gf-banner--info gf-mt-5" role="status">@_rejectionMessage</p>
 }
 
@@ -158,9 +159,21 @@ else if (_state is Outcome.PasswordChangeRequired)
         }
 
         _rejectionMessage = outcome.Error!.Message;
+
+        if (outcome.Error.Code == ErrorCode.PasswordChangeRequired)
+        {
+            // EL DESVÍO DEL CAMBIO FORZADO (RN-13). La cuenta se autentica y NO obtiene sesión
+            // de trabajo: lo único que queda anotado es de qué cuenta se trata, para que la
+            // pantalla del cambio sepa a quién le está cambiando la contraseña. Con la marca
+            // puesta, ninguna otra capacidad (INV-09).
+            _state = Outcome.PasswordChangeRequired;
+            Session.BeginPasswordChange(_email);
+            Navigation.NavigateTo("/credencial-propia/cambio-obligado");
+            return;
+        }
+
         _state = outcome.Error.Code switch
         {
-            ErrorCode.PasswordChangeRequired => Outcome.PasswordChangeRequired,
             ErrorCode.ServiceUnavailable => Outcome.Unavailable,
             ErrorCode.RequiredFieldMissing => Outcome.MissingFields,
             _ => Outcome.Rejected,

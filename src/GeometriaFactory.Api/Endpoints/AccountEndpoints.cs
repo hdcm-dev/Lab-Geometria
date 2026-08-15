@@ -1,3 +1,4 @@
+using GeometriaFactory.Application;
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Accounts;
@@ -16,8 +17,17 @@ namespace GeometriaFactory.Api.Endpoints;
 /// contraseña, y puede serlo porque no la escribe **sobre una cuenta existente** (RN-16, §7 de la
 /// definición de la superficie).
 ///
-/// `A-05` cambia la contraseña propia exigiendo la vigente, con acceso firmado de cualquiera de
-/// los dos papeles. Es la ÚNICA excepción declarada de la guardia de cambio pendiente.
+/// `A-05` cambia la contraseña propia exigiendo la vigente, y admite DOS FORMAS DE AUTENTICARSE
+/// (`PRODUCT-INTAKE` 1.34): con **acceso firmado** de cualquiera de los dos papeles —el cambio
+/// corriente, que cualquier cuenta puede hacer cuando quiera—, y con **la contraseña actual**
+/// —el cambio forzado, donde la provisoria que el administrador comunicó es la que autentica—.
+/// Es la ÚNICA excepción declarada de la guardia de cambio pendiente, y la segunda forma es lo
+/// que la vuelve alcanzable: RN-13 le niega la sesión de trabajo a la cuenta marcada, de modo
+/// que exigirle acceso firmado la dejaba sin ninguna manera de llegar hasta acá.
+///
+/// LA SEGUNDA FORMA NO AFLOJA RN-13 Y NO ES UNA ESCRITURA SIN CREDENCIAL: exige la contraseña
+/// vigente igual que la primera, sólo procede sobre una cuenta CON LA MARCA PUESTA y **no emite
+/// ningún acceso**. Después del cambio la persona vuelve a canjear, y recién ahí obtiene sesión.
 ///
 /// LA CONTRASEÑA EN CLARO MUERE ACÁ: se deriva y lo que sigue hacia adentro es el valor derivado.
 /// </remarks>
@@ -95,13 +105,11 @@ public static class AccountEndpoints
             var now = clock.UtcNow;
             var log = loggerFactory.CreateLogger(typeof(AccountEndpoints));
 
+            // CUÁL DE LAS DOS FORMAS ES: si la petición trae un acceso firmado utilizable, la
+            // cuenta que cambia es la que ese acceso nombra y el correo del cuerpo NO SE MIRA.
+            // Sin acceso, la cuenta la nombra el correo y quien autentica es la contraseña
+            // vigente, que es el cambio forzado.
             var accountId = AuthenticationEndpoints.AccountIdOf(context.User);
-            if (accountId is null)
-            {
-                // El acceso no trae identificador utilizable. Responde como la guardia y sin
-                // código del contrato: el conjunto cerrado no declara ninguno para esta causa.
-                return Results.Unauthorized();
-            }
 
             var missing = new List<string>();
             if (string.IsNullOrWhiteSpace(request?.CurrentPassword)) { missing.Add(nameof(OwnPasswordChangeRequest.CurrentPassword)); }
@@ -113,14 +121,39 @@ public static class AccountEndpoints
                     Domain.Values.ConditionCode.RequiredFieldMissing, now, [.. missing]);
             }
 
-            var result = await changeOwnPassword
-                .ExecuteAsync(
-                    accountId.Value,
-                    storedValue => credentials.Verify(request!.CurrentPassword, storedValue),
-                    // La contraseña nueva se deriva RECIÉN cuando la vigente ya verificó.
-                    () => credentials.Derive(request!.NewPassword) ?? string.Empty,
-                    cancellationToken)
-                .ConfigureAwait(false);
+            ApplicationResult result;
+
+            if (accountId is not null)
+            {
+                result = await changeOwnPassword
+                    .ExecuteAsync(
+                        accountId.Value,
+                        storedValue => credentials.Verify(request!.CurrentPassword, storedValue),
+                        // La contraseña nueva se deriva RECIÉN cuando la vigente ya verificó.
+                        () => credentials.Derive(request!.NewPassword) ?? string.Empty,
+                        cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            else if (string.IsNullOrWhiteSpace(request!.Email))
+            {
+                // Ni acceso firmado ni correo: NADA identifica a la cuenta que querría cambiar.
+                // No es un campo ausente —el correo sólo hace falta en la forma sin sesión— sino
+                // la respuesta neutra de siempre, la misma que recibe una credencial que no
+                // corresponde. Responde como respondía la guardia: `401`.
+                log.LogInformation("Cambio de contraseña rechazado: la petición no identifica ninguna cuenta.");
+                return ContractTranslation.Problem(
+                    Domain.Values.ConditionCode.CurrentCredentialNotVerified, now);
+            }
+            else
+            {
+                result = await changeOwnPassword
+                    .ExecuteWithCurrentCredentialAsync(
+                        request.Email,
+                        storedValue => credentials.Verify(request.CurrentPassword, storedValue),
+                        () => credentials.Derive(request.NewPassword) ?? string.Empty,
+                        cancellationToken)
+                    .ConfigureAwait(false);
+            }
 
             if (!result.Succeeded)
             {
@@ -128,14 +161,18 @@ public static class AccountEndpoints
                 return ContractTranslation.Problem(result.ConditionCode, now);
             }
 
-            log.LogInformation("Contraseña reemplazada para la cuenta {AccountId}.", accountId.Value);
+            log.LogInformation("Contraseña reemplazada por la forma {Form}.", accountId is not null ? "de sesión" : "de credencial");
 
-            // `200` sin cuerpo de sesión: el cambio no emite un acceso nuevo. El que la persona
-            // ya tenía sigue sirviendo hasta que venza, y la renovación es por reingreso.
+            // `200` sin cuerpo de sesión: el cambio no emite un acceso nuevo, en NINGUNA de las
+            // dos formas. Con sesión, el que la persona ya tenía sigue sirviendo hasta que venza;
+            // sin sesión, la persona vuelve a canjear, y es ahí donde obtiene la suya (RN-13).
             return Results.Ok();
         })
         .WithName("ChangeOwnPassword")
-        .RequireAuthorization();
+        // NO lleva `RequireAuthorization`, y es la decisión del intake 1.34: exigir acceso firmado
+        // acá dejaba la pantalla del cambio forzado inalcanzable. La autenticación de la segunda
+        // forma la hace la contraseña vigente, dentro del caso de uso.
+        .AllowAnonymous();
 
         return endpoints;
     }

@@ -46,6 +46,31 @@ public sealed class SessionState
     public bool IsAdministrator => string.Equals(Role, "Administrator", StringComparison.Ordinal);
 
     /// <summary>
+    /// Correo de la cuenta que quedó derivada al cambio forzado de contraseña, mientras el
+    /// cambio no se resuelve. **No es una sesión de trabajo y no lo parece**: no hay credencial
+    /// que guardar, porque RN-13 no permite emitir ninguna hasta que la contraseña se cambie.
+    /// </summary>
+    /// <remarks>
+    /// POR QUÉ VIVE ACÁ Y NO EN LA DIRECCIÓN. La pantalla del cambio forzado necesita saber qué
+    /// cuenta cambia, y quien lo sabe es el ingreso que acaba de recibir el desvío. Llevarlo en
+    /// la dirección lo dejaría escrito en la barra del navegador y en el historial; en el estado
+    /// del circuito no sale del servidor de esta pieza, igual que la credencial.
+    /// </remarks>
+    public string? PasswordChangeEmail { get; private set; }
+
+    /// <summary>
+    /// Anota qué cuenta quedó derivada al cambio forzado. Lo invoca el ingreso cuando el canje
+    /// devuelve el desvío, y **no abre ninguna sesión**: <see cref="IsOpen"/> sigue en falso.
+    /// </summary>
+    public void BeginPasswordChange(string email)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(email);
+
+        _accessToken = null;
+        PasswordChangeEmail = email;
+    }
+
+    /// <summary>
     /// Abre la sesión con lo que el canje devolvió. La credencial entra acá y no sale hacia
     /// ninguna superficie: la única forma de usarla es <see cref="UseAccessToken"/>, que sólo
     /// invoca el cliente del servicio de datos, del lado del servidor.
@@ -58,6 +83,8 @@ public sealed class SessionState
         AccountId = session.AccountId;
         Email = session.Email;
         Role = session.Role;
+        // Abrir sesión cierra el desvío: las dos cosas no coexisten.
+        PasswordChangeEmail = null;
     }
 
     /// <summary>
@@ -69,6 +96,7 @@ public sealed class SessionState
         AccountId = Guid.Empty;
         Email = string.Empty;
         Role = string.Empty;
+        PasswordChangeEmail = null;
     }
 
     /// <summary>
