@@ -22,19 +22,22 @@
        tiene que demostrar y lo que `ForcedPasswordChangeSurfaceTests` declara en su cabecera
        después de que una batería de componente en memoria dejara pasar un defecto que vivía
        exactamente en el cruce de una petición.
-     · La pieza pública **no tiene ni un guion propio** —`verify-stage-c.sh` C-4 lo mide con
-       umbral 0—, de modo que el circuito interactivo no le compraba nada a esta superficie: no
-       hay validación al tipear, y el wireframe §4 la prohíbe expresamente para el correo.
+     · El circuito interactivo no le compra nada a esta superficie: no hay validación al tipear, y
+       el wireframe §4 la prohíbe expresamente para el correo.
      · El envío es una petición y no un mensaje por el circuito, con lo cual la
        antifalsificación del producto sigue puesta y el estado de la pantalla se dibuja
        RESPONDIENDO al POST, sin redirigir ni acarrear el motivo por la dirección.
 
-   **APARTAMIENTO A CONFIRMAR POR EL PRODUCT OWNER.** Los estados «Cargando» y «Enviando» del
-   wireframe §5 —esqueleto de tres campos, y acción inhabilitada con indicador— NO se dibujan:
-   los dos describen una pantalla que se arma o espera en el navegador, y bajo render estático la
-   respuesta llega armada. La prevención del doble envío, que es lo que el estado «Enviando»
-   protege, la hace el servicio: el segundo intento con el mismo correo responde
-   `EMAIL_ALREADY_REGISTERED` y la superficie lo dibuja.
+   **EL APARTAMIENTO QUE ESTA CABECERA DECLARÓ QUEDA CERRADO A MEDIAS, Y SE DICE CUÁL MITAD.** El
+   Product Owner autorizó un guion del navegador acotado a cuatro cosas de interacción de
+   superficie, y una de ellas es el estado en curso: **«Enviando» SÍ se dibuja**, con el texto
+   literal del wireframe §5 escrito en `data-gf-pending` por esta misma superficie —el guion no
+   lleva textos adentro—, sobre la acción primaria y previniendo el doble envío. El servicio lo
+   sigue previniendo por su cuenta: el segundo intento con el mismo correo responde
+   `EMAIL_ALREADY_REGISTERED` y la superficie lo dibuja. **«Cargando» SIGUE SIN DIBUJARSE**, y ahí
+   el motivo original no cambió: describe una pantalla que se arma en el navegador, y bajo render
+   estático la respuesta llega armada. **Si el guion no llega, el alta funciona igual**: el estado
+   en curso es lo único que se pierde.
 
    RA-01: el alta la hace el servidor de esta pieza, por `DataServiceClient`. Cero peticiones
    originadas por el navegador hacia el servicio de datos.
@@ -99,7 +102,13 @@ else
 
     @* TRES CAMPOS Y NINGÚN CAMPO DE CONTRASEÑA. El contrato del alta tampoco lo declara: no hay
        campo de contraseña que pudiera faltar. *@
-    <form class="gf-mt-5" method="post" @formname="account-registration" @onsubmit="SubmitAsync">
+    @* EL ESTADO «Enviando» DEL WIREFRAME §5, que el guion de interacción dibuja sobre la acción
+       primaria cuando el envío sale: acción inhabilitada con indicador adentro. Previene el doble
+       envío en la pantalla; el servicio lo sigue previniendo por su cuenta, respondiendo
+       `EMAIL_ALREADY_REGISTERED` al segundo intento. Sin guion no se dibuja y el alta funciona
+       igual, que es como funcionó hasta ahora. *@
+    <form class="gf-mt-5" method="post" @formname="account-registration" @onsubmit="SubmitAsync"
+          data-gf-pending="Enviando">
         <AntiforgeryToken />
         <div class="gf-field @(_state is Outcome.EmailAlreadyRegistered ? "gf-field--error" : null)">
             <label for="registration-email">Correo</label>

@@ -38,6 +38,15 @@
 #     bash scripts/verify-stage-c.sh
 # ============================================================================
 set -uo pipefail
+
+# LA CONSTRUCCIÓN SE COMPRUEBA, NO SE CONFÍA. La forma anterior —`dotnet build … | tail -3`—
+# perdía el código de salida DOS veces: por la tubería y porque este guion corre sin `-e`. Con
+# la construcción fallada, los `dotnet run --no-build` de más abajo levantaban la salida
+# `Release` de la corrida ANTERIOR: el proceso arrancaba, respondía, y lo que se medía era
+# código que ya no estaba en el árbol. Es el mismo defecto que la cabecera de este guion
+# documenta en su otra variante, y acá estaba en la mitad que nadie miró.
+scripts/assert-build-fresh.sh src/GeometriaFactory.Api/GeometriaFactory.Api.csproj Release || exit 1
+scripts/assert-build-fresh.sh src/GeometriaFactory.Web/GeometriaFactory.Web.csproj Release || exit 1
 cd "$(dirname "$0")/.."
 
 API_PORT=${API_PORT:-5081}
@@ -80,7 +89,6 @@ token_for() { # contraseña
     | sed -n 's/.*"accessToken":"\([^"]*\)".*/\1/p'
 }
 
-dotnet build GeometriaFactory.sln -c Release | tail -3
 trap 'stop_api; kill ${WEB_PID:-0} 2>/dev/null' EXIT
 
 # ---------------------------------------------------------------- C-3 ------
@@ -194,12 +202,94 @@ curl -s -o /tmp/anonimo.html "$WEB/entrega-comision"
 grep -q "$EMAIL" /tmp/anonimo.html && bad "sin marca sigue dibujando la identidad" \
                                    || ok "sin la marca no se dibuja ninguna identidad"
 
-# 3 · El navegador no tiene NINGÚN guion propio que pudiera guardar nada.
-guiones=$(curl -s "$WEB/ingreso" | grep -oE '<script[^>]*src="[^"]*"' | sed 's/.*src="//;s/"//' | tr '\n' ' ')
-echo "        guiones que la página carga: $guiones"
-case "$guiones" in *geometriafactory-visor.js*) bad "carga un guion propio en la superficie de ingreso";; *) ok "sólo el tiempo de ejecución del marco";; esac
+# 3 · EL GUION PROPIO DEL NAVEGADOR: INVENTARIO CERRADO Y ALCANCE ACOTADO.
+#
+# ESTE CONTROL SE REESCRIBIÓ, Y EL MOTIVO IMPORTA MÁS QUE LA REDACCIÓN. Hasta la etapa `d` decía
+# «cero guiones propios», con UMBRAL 0, y era una forma legítima de comprobar que nada del lado del
+# navegador podía guardar la credencial ni hablar con el servicio de datos. Ese umbral tenía un
+# costo que se hizo visible al construir el panel: **cuatro apartamientos declarados del panel de
+# cuentas y del registro no se podían cerrar sin un guion** —copiar la provisoria en un gesto,
+# dibujar el estado en curso, mantener la acción destructiva inhabilitada hasta que lo escrito
+# coincide, y cerrar los diálogos con la tecla de escape confinando el foco—. El Product Owner
+# autorizó un guion ACOTADO A ESAS CUATRO COSAS, con lo cual el umbral 0 dejó de medir lo correcto:
+# mediría la ausencia de una pieza que el producto ahora manda tener.
+#
+# QUÉ MIDE AHORA, Y POR QUÉ SIGUE SIENDO UNA PUERTA Y NO UN PERMISO ABIERTO. Lo que el umbral 0
+# impedía era que apareciera **lógica de producto o de identidad del lado del navegador**, y eso
+# sigue impedido, por cuatro cuadres que no dependen de la buena voluntad de quien escriba el guion:
+#
+#   3.a  EL INVENTARIO ES CERRADO. Hay UN solo guion propio autorizado y se lo nombra literalmente.
+#        Cualquier otro `<script src>` que no sea el tiempo de ejecución del marco falla. Un guion
+#        nuevo no se puede colar: hay que agregarlo acá.
+#   3.b  EL ARCHIVO NO PUEDE SALIR A LA RED NI TOCAR EL NAVEGADOR PERSISTENTE. `RA-01` y
+#        `Web ADR-03` §2 se cuadran contra el texto del archivo, con umbral 0 cada uno. No hay
+#        forma de que ese guion pida nada al servicio de datos ni guarde nada en ninguna parte.
+#   3.c  EL ALCANCE ES UNA LISTA CERRADA DE NUEVE ATRIBUTOS, la de `Norma-De-Nomenclatura.md`
+#        §6.17.3. El guion no busca ninguna superficie por nombre: hace lo que esos nueve atributos
+#        le piden. Un comportamiento nuevo exige un atributo nuevo, y un atributo nuevo falla acá
+#        hasta que se lo agregue **a la norma y a esta lista**, que es exactamente la puerta.
+#   3.d  Y EL CUADRE VA EN LAS DOS DIRECCIONES: los atributos que el marcado declara también tienen
+#        que estar en la lista. Así no puede quedar un lado prometiendo lo que el otro no hace.
+#
+# Lo que este control NO afloja: la lista no admite «cualquier cosa vale». Sigue siendo el mismo
+# criterio de antes —nada de producto ni de identidad en el navegador—, expresado sobre la
+# superficie que ahora existe en lugar de sobre su ausencia.
+GUION=/interaction/surface-interaction.js
+ARCHIVO=src/GeometriaFactory.Web/wwwroot$GUION
+AUTORIZADOS='data-gf-copy-source data-gf-copy-label data-gf-copy-done data-gf-copy-unavailable
+data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-dialog-dismiss'
 
-# 4 · Y no hay una línea de código de la pieza pública que pudiera escribir en el navegador.
+printf '   -- 3.a · inventario cerrado de guiones propios, sobre las ocho direcciones --\n'
+ajenos=0
+for r in / /aprovisionamiento-inicial /ingreso /mi-contrasena /entrega-comision /cuentas /mis-trabajos /estado; do
+  for s in $(curl -s "$WEB$r" | grep -oE '<script[^>]*src="[^"]*"' | sed 's/.*src="//;s/"//'); do
+    case "$s" in
+      _framework/*|/_framework/*) ;;
+      interaction/surface-interaction.js|"$GUION") ;;
+      *) bad "$r carga un guion propio NO autorizado: $s"; ajenos=$((ajenos + 1)) ;;
+    esac
+  done
+done
+[ "$ajenos" -eq 0 ] && ok "0 guiones propios fuera del único autorizado ($GUION) en las ocho direcciones"
+curl -s -o /tmp/guion.js -w '' "$WEB$GUION"
+[ -s /tmp/guion.js ] && ok "el guion autorizado se sirve ($(wc -c < /tmp/guion.js) bytes)" \
+                     || bad "el guion autorizado NO se sirve"
+# Y en el árbol tampoco hay otro: los `.js` de `wwwroot/js/` son el bundle del visor, artefacto
+# generado que este guion no versiona ni sirve desde estas superficies.
+otros=$(find src/GeometriaFactory.Web/wwwroot -name '*.js' -not -path '*/js/*' -not -path "*$GUION" | wc -l)
+same "$otros" 0 "archivos de guion propios en el árbol fuera del autorizado"
+
+printf '   -- 3.b · el guion no sale a la red y no toca el navegador persistente --\n'
+for prohibido in 'fetch *\(' 'XMLHttpRequest' 'WebSocket' 'EventSource' 'sendBeacon' 'import *\(' \
+                 'localStorage' 'sessionStorage' 'document\.cookie' 'Authorization' 'Bearer' \
+                 'accessToken' 'ApiBaseUrl' '\.src *=' 'eval *\('; do
+  n=$(grep -cE "$prohibido" "$ARCHIVO")
+  same "$n" 0 "el guion no contiene \`$prohibido\`"
+done
+
+printf '   -- 3.c · el alcance del guion son los NUEVE atributos autorizados --\n'
+usados=$(grep -oE 'data-gf-[a-z-]+' "$ARCHIVO" | sort -u)
+echo "        atributos que el guion lee: $(echo "$usados" | tr '\n' ' ')"
+fuera=$(comm -23 <(echo "$usados") <(echo "$AUTORIZADOS" | tr ' ' '\n' | sort -u))
+if [ -z "$fuera" ]; then
+  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los nueve autorizados"
+else
+  bad "el guion lee atributos NO autorizados: $(echo "$fuera" | tr '\n' ' ')"
+fi
+
+printf '   -- 3.d · y el marcado no declara ninguno que la lista no tenga --\n'
+declarados=$(grep -rhoE 'data-gf-[a-z-]+' --include='*.razor' src/GeometriaFactory.Web | sort -u)
+sobrantes=$(comm -23 <(echo "$declarados") <(echo "$AUTORIZADOS" | tr ' ' '\n' | sort -u))
+if [ -z "$sobrantes" ]; then
+  ok "$(echo "$declarados" | wc -l) atributos declarados en el marcado, todos autorizados"
+else
+  bad "el marcado declara atributos NO autorizados: $(echo "$sobrantes" | tr '\n' ' ')"
+fi
+
+# 4 · Y NO HAY UNA LÍNEA DE CÓDIGO DE LA PIEZA PÚBLICA QUE PUDIERA ESCRIBIR EN EL NAVEGADOR.
+#     ESTE CONTROL NO CAMBIA, Y NO TENÍA POR QUÉ: el guion autorizado es marcado servido, no
+#     interoperación desde el servidor. La pieza pública sigue sin poder escribir en el navegador
+#     por su cuenta, que es la mitad del umbral 0 que sigue vigente tal cual.
 escrituras=$(grep -rnE 'localStorage|sessionStorage|document\.cookie|IJSRuntime|InvokeVoidAsync' \
   --include='*.razor' --include='*.cs' src/GeometriaFactory.Web | wc -l)
 same "$escrituras" 0 "líneas de la pieza pública que podrían escribir en el navegador"

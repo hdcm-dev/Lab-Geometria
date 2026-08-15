@@ -41,7 +41,23 @@ PORT=${PORT:-5099}
 BASE=http://127.0.0.1:$PORT
 fails=0
 
-dotnet build src/GeometriaFactory.Web/GeometriaFactory.Web.csproj -warnaserror | tail -4
+# LA CONFIGURACIÓN SE DECLARA EN LOS DOS LADOS (`Pipeline-Producto.md` §3.1). Hasta acá este
+# guion construía sin decirla y levantaba sin decirla: acertaba POR OMISIÓN EN LOS DOS LADOS, no
+# por decisión. Bastaba que alguien agregara `-c Release` de un solo lado para reproducir entero
+# el defecto que `verify-stage-c.sh` documenta en su cabecera. Se declara `Release` para que este
+# guion mida la misma salida que `build.sh`, `test.sh` y `verify-stage-c.sh`.
+CONFIGURATION=${GF_CONFIGURATION:-Release}
+WEB_PROJECT=src/GeometriaFactory.Web/GeometriaFactory.Web.csproj
+
+# Y EL CÓDIGO DE SALIDA DE LA CONSTRUCCIÓN SE MIRA. Este guion corre con `set -uo pipefail` y
+# SIN `-e` a propósito —los controles de más abajo cuentan fallas en vez de abortar—, de modo que
+# la construcción canalizada a `tail` que había acá perdía su código de salida DOS VECES: si
+# fallaba, el `--no-build` de más abajo levantaba tranquilamente el binario de la corrida
+# anterior y lo que se verificaba era código viejo. La construcción pasa ahora por la red, que
+# mira ese código, comprueba que el ensamblado de esta configuración exista, y no vuelve con 0
+# de ninguna otra manera. `-warnaserror` viaja hasta la construcción sin cambiar de sentido.
+scripts/assert-build-fresh.sh "$WEB_PROJECT" "$CONFIGURATION" -warnaserror || exit 1
+
 # El entorno y la puerta van EXPLÍCITOS y no heredados: si el entorno se colara
 # como cualquier otra cosa, la puerta no regiría y `C-1` fallaría en las siete
 # rutas del panel sin que quede claro por qué.
@@ -50,7 +66,7 @@ dotnet build src/GeometriaFactory.Web/GeometriaFactory.Web.csproj -warnaserror |
 ASPNETCORE_ENVIRONMENT=Development \
 PanelWalkthroughWithoutSession=true \
 Kestrel__Endpoints__Http__Url="$BASE" \
-dotnet run --project src/GeometriaFactory.Web/GeometriaFactory.Web.csproj --no-build --urls "$BASE" > /tmp/web.log 2>&1 &
+dotnet run --project "$WEB_PROJECT" -c "$CONFIGURATION" --no-build --urls "$BASE" > /tmp/web.log 2>&1 &
 SRV=$!
 trap 'kill $SRV 2>/dev/null' EXIT
 for _ in $(seq 1 90); do curl -s -o /dev/null "$BASE/" && break || sleep 1; done
