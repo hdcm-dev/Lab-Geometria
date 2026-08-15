@@ -1,6 +1,8 @@
 @page "/mis-trabajos"
 @layout WorkShell
-@rendermode InteractiveServer
+@inject DataServiceClient DataService
+@inject SessionState Session
+@using GeometriaFactory.Contracts.Works
 
 @* SUP-05 `Panel-De-Trabajos-Del-Alumno` — CU-06.
    Ruta: `/mis-trabajos`. Shell: trabajo.
@@ -9,16 +11,48 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Panel-De-Trabajos-Del-Alumno.html`.
    Componentes que la maqueta declara acá: CMP-08, CMP-25, CMP-29, CMP-34, CMP-35, CMP-37, CMP-38, CMP-51.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. La tabla se
-   dibuja con sus rótulos y SIN FILAS, porque las filas son datos y esta etapa no consulta al
-   servicio de datos. Tampoco se dibujan el estado vacío (CMP-29) ni el de filtro sin
-   resultados: los dos AFIRMAN algo sobre la colección —«todavía no cargaste ningún trabajo»— y
-   afirmarlo sin haber preguntado sería mentir. El diálogo de eliminación (CMP-51) y el aviso de
-   indisponibilidad (CMP-25) tampoco: los dispara estado que esta etapa no tiene. *@
+   ETAPA `e`: la superficie PASA A FUNCIONAR. Pide el listado propio —con sus borradores, que son
+   suyos—, lo acota con el filtro y ofrece por fila sólo lo que el estado admite.
+
+   POR QUÉ ESTA SUPERFICIE NO ES INTERACTIVA, Y ES EL MISMO APARTAMIENTO DECLARADO QUE `AccountsPanel`.
+   Pasa a render estático de servidor con envíos POST de verdad. La eliminación es una escritura y
+   tiene que llegar con su testigo de antifalsificación, que es lo que un formulario estático hace
+   solo; y el listado llega dentro de la respuesta, con lo cual no hay ningún momento en que la
+   pantalla exista sin él —por eso el estado `Cargando` (EST-04) sigue sin dibujarse—.
+
+   LA PANTALLA ACOTA Y NO HACE CUMPLIR, Y LA DISTINCIÓN NO ES RETÓRICA. No ofrecer «eliminar» sobre
+   un trabajo que no está en `Borrador` es correcto y es lo que `Representacion-Fila-De-Trabajo.md`
+   §3 manda —lo que el estado no admite **no se dibuja**, ni siquiera inhabilitado—. **La defensa
+   está del otro lado**: el servicio de datos rechaza la eliminación fuera de `Draft` aunque la
+   solicitud no pase nunca por esta pantalla, y hay una prueba que lo fija forzándola
+   (`WorkWebSurfaceTests`). Ocultar el botón no reemplaza esa verificación: la acompaña.
+
+   TRES APARTAMIENTOS DECLARADOS, ELEVADOS AL PRODUCT OWNER, con el precedente de las pantallas de
+   la etapa `d` —que declararon los suyos en la cabecera del componente—:
+
+     1. **LAS COLUMNAS «PIEZAS» Y «ADVERTENCIAS» NO SE DIBUJAN.** El wireframe §2 y §3 y
+        `Representacion-Fila-De-Trabajo.md` §4 las declaran, y **la proyección de listado del
+        contrato no las lleva**: `WorkListItem` declara en su propio comentario que `Contracts
+        CU-04` y `Application CU-06` se contradicen sobre qué número es —cantidad de piezas contra
+        recuento de observaciones—, que la etapa `e` no elige por su cuenta y que la contradicción
+        queda elevada. Sin dato, las dos opciones eran dibujar un cero —que afirma que se contaron
+        y dieron cero— o no dibujar la columna. Se elige no dibujarla: **un cero inventado es un
+        dato falso, una columna ausente es una columna ausente.** Cuando el Product Owner resuelva
+        cuál es el número, agregar la columna es un cambio acotado a esta tabla.
+     2. **LA BÚSQUEDA Y EL FILTRO VIAJAN POR LA DIRECCIÓN**, en lugar de acotar en el navegador lo
+        ya recibido, que es lo que el wireframe §3 pide. Es el mismo apartamiento que
+        `AccountsPanel` declaró y que sigue abierto: **no entró en lo que el Product Owner autorizó
+        del guion**. Lo que **no** ocurre es que el filtro llegue al servicio de datos: el listado
+        se pide entero, siempre igual, y el recorte ocurre de este lado.
+     3. **EL PAPEL EQUIVOCADO NO SE DIBUJA COMO SI FUERA EL PROPIO.** Esta superficie es la del
+        alumno; con una sesión de administrador, `A-13` devolvería la comisión y rotularla «Mis
+        trabajos» sería mentir. Se dibuja en su lugar una nota que nombra el listado que sí le
+        corresponde. Ninguna fuente declara ese texto: se construye acá y se declara.
+
+   RA-01: el listado y la eliminación salen desde el servidor de esta pieza, por `DataServiceClient`.
+   RA-03: ningún mensaje de esta superficie nombra una dirección interna. *@
 
 <PageTitle>Mis trabajos</PageTitle>
-
-<StagePlaceholder />
 
 <div class="gf-page-header gf-mt-5">
     <div>
@@ -29,37 +63,361 @@
     <a class="gf-btn gf-btn--primary" href="/trabajo-nuevo"><Icon Name="New" />Trabajo nuevo</a>
 </div>
 
-@* Barra de filtros: filtra sobre lo ya recibido, no consulta al servicio de datos. *@
-<div class="gf-filters">
-    <div class="gf-field gf-field-search">
-        <label for="works-search">Buscar por nombre</label>
-        <input class="gf-input" id="works-search" type="search" placeholder="nombre del trabajo" />
-    </div>
-    <div class="gf-field">
-        <label for="works-state">Estado</label>
-        <select class="gf-select" id="works-state">
-            <option>todos</option>
-            <option>Borrador</option>
-            <option>Pendiente</option>
-            <option>Finalizado</option>
-            <option>Rechazado</option>
-        </select>
-    </div>
-</div>
+@if (!Session.IsOpen)
+{
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Para ver tus trabajos tenés que estar dentro del laboratorio.
+        <a href="/ingreso">Ir a ingresar</a>.
+    </p>
+}
+else if (Session.IsAdministrator)
+{
+    @* Apartamiento 3 de la cabecera: el papel equivocado no se dibuja como si fuera el propio. *@
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Este listado es el de cada alumno con sus propios trabajos. Los trabajos de la comisión
+        están en <a href="/entrega-comision">Entrega de la comisión</a>.
+    </p>
+}
+else
+{
+    @* ---- Bandas de resultado de la eliminación --------------------------------------- *@
+    @if (_state is Outcome.Deleted)
+    {
+        <p class="gf-banner gf-banner--confirmation" role="status">
+            El trabajo dejó de existir. El listado se volvió a pedir y ya no figura.
+        </p>
+    }
+    else if (_state is Outcome.StateForbidsDelete)
+    {
+        @* El motivo DECLARA EL ESTADO ACTUAL, que es lo que el wireframe §5 pide para la
+           eliminación forzada. El estado sale de la respuesta del servicio y no de esta pantalla. *@
+        <p class="gf-banner gf-banner--error" role="alert">
+            Ese trabajo ya no está en borrador y no se puede eliminar. Su estado actual es
+            <strong>@_currentStatus</strong>. El listado se volvió a pedir.
+        </p>
+    }
+    else if (_state is Outcome.NotFound)
+    {
+        @* Mensaje NEUTRO que no distingue el trabajo ajeno del inexistente (RN-03). *@
+        <p class="gf-banner gf-banner--error" role="alert">
+            No encontramos ese trabajo. Volviste a tu listado, que no cambió.
+        </p>
+    }
+    else if (_state is Outcome.Rejected)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">@_rejectionMessage</p>
+    }
 
-<div class="gf-table-wrapper">
-    <table class="gf-table">
-        <caption class="gf-sr-only">Mis trabajos, con su estado y las acciones que ese estado admite</caption>
-        <thead>
-            <tr>
-                <th scope="col">Trabajo</th>
-                <th scope="col">Fecha del trabajo</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Piezas</th>
-                <th scope="col">Advertencias</th>
-                <th scope="col" class="gf-td-actions">Acciones</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
+    @if (_state is Outcome.Unavailable)
+    {
+        @* El listado NO se muestra con datos viejos: la pieza pública no guarda copia. *@
+        <section class="gf-unavailable-notice" role="alert" aria-labelledby="works-unavailable-heading">
+            <h2 id="works-unavailable-heading"><Icon Name="Alert" SizeClass="gf-icon--20" />Ahora no podemos traer tus trabajos</h2>
+            <p>
+                El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+                Probá de nuevo en un rato.
+            </p>
+            <a class="gf-btn gf-btn--secondary gf-mt-3" href="/mis-trabajos">Reintentar traer mis trabajos</a>
+        </section>
+    }
+    else
+    {
+        @* ---- Diálogo de confirmación de eliminación (CMP-51) --------------------------- *@
+        @* SÓLO SE ABRE DESDE UNA FILA EN ESTADO `Borrador`, y acá se comprueba otra vez sobre el
+           listado recién recibido: entre que se dibujó la fila y se pidió el diálogo el estado pudo
+           cambiar. La confirmación es SIMPLE y no escrita, y es la diferencia deliberada con la baja
+           de cuenta: aquélla destruye una cuenta ajena y TODOS sus trabajos, y por eso exige
+           transcribir el correo; ésta destruye UN borrador PROPIO, y el wireframe §3 le declara un
+           diálogo con el nombre del trabajo y las dos acciones. Lo que sí se conserva del criterio
+           del panel de cuentas es lo demás: se declara qué se destruye ANTES de confirmar, y la
+           protección de verdad vive del lado del servicio. *@
+        @if (Deleting is { } target)
+        {
+            <dialog class="gf-dialog" open aria-labelledby="works-deletion-heading" data-gf-dialog>
+                <h2 id="works-deletion-heading">Eliminar «@target.Name»</h2>
+                <p class="gf-banner gf-banner--warning" id="works-deletion-warning">
+                    El trabajo deja de existir. Sólo se puede eliminar mientras está en borrador.
+                </p>
+                <form method="post" @formname="work-deletion" @onsubmit="() => DeleteAsync(target)"
+                      data-gf-pending="Eliminando">
+                    <AntiforgeryToken />
+                    <div class="gf-footer-actions">
+                        <a class="gf-btn gf-btn--secondary" href="/mis-trabajos" data-gf-dialog-dismiss>Cancelar</a>
+                        <button type="submit" class="gf-btn gf-btn--destructive"
+                                aria-describedby="works-deletion-warning">Eliminar</button>
+                    </div>
+                </form>
+            </dialog>
+        }
+
+        @* ---- Barra de filtros ---------------------------------------------------------- *@
+        <form class="gf-filters" method="get">
+            <div class="gf-field gf-field-search">
+                <label for="works-search">Buscar por nombre</label>
+                <Icon Name="Search" />
+                <input class="gf-input" id="works-search" name="buscar" type="search"
+                       placeholder="nombre del trabajo" value="@SearchTerm" />
+            </div>
+            <div class="gf-field">
+                <label for="works-state">Estado</label>
+                <select class="gf-select" id="works-state" name="estado">
+                    @foreach (var option in StateOptions)
+                    {
+                        <option value="@option" selected="@(string.Equals(option, StateFilter, StringComparison.Ordinal))">@option</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
+        </form>
+
+        @if (_works.Count == 0)
+        {
+            @* Vacío de COLECCIÓN, declarado por el tipo recibido y no por el conteo: se llega acá
+               sólo cuando la llamada se resolvió. Es una invitación, no un hueco. *@
+            <section class="gf-empty" aria-labelledby="works-empty-heading">
+                <Icon Name="Empty" SizeClass="gf-icon--24" />
+                <h2 id="works-empty-heading">Todavía no cargaste ningún trabajo</h2>
+                <p>Cargá el texto que produjo tu programa de la Actividad 1 y mirálo dibujado.</p>
+                <a class="gf-btn gf-btn--primary gf-mt-5" href="/trabajo-nuevo">Cargar mi primer trabajo</a>
+            </section>
+        }
+        else if (Listed.Count == 0)
+        {
+            @* Vacío de FILTRO, distinto del de colección: acá sí hay trabajos. *@
+            <section class="gf-empty" aria-labelledby="works-filter-empty-heading">
+                <Icon Name="Empty" SizeClass="gf-icon--24" />
+                <h2 id="works-filter-empty-heading">Ningún trabajo coincide con el filtro</h2>
+                <p>Tenés trabajos cargados, pero ninguno responde a lo que buscaste.</p>
+                <a class="gf-btn gf-btn--secondary gf-mt-5" href="/mis-trabajos">Limpiar el filtro</a>
+            </section>
+        }
+        else
+        {
+            <div class="gf-table-wrapper">
+                <table class="gf-table">
+                    <caption class="gf-sr-only">Mis trabajos, con su estado y las acciones que ese estado admite</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Trabajo</th>
+                            <th scope="col">Fecha del trabajo</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col" class="gf-td-actions">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var work in Listed)
+                        {
+                            <tr>
+                                <th scope="row" class="gf-body-strong gf-th-plain gf-th-plain--body">@work.Name</th>
+                                @* La fecha la DECLARA el alumno y viaja como texto: se muestra tal
+                                   como la escribió, sin convertir de zona ni reformatear. *@
+                                <td class="gf-num">@work.DeclaredDate</td>
+                                <td><span class="gf-badge @BadgeClassOf(work)">@LabelOf(work)</span></td>
+                                <td class="gf-td-actions">
+                                    <span class="gf-row-actions">
+                                        @* CADA ACCIÓN DECLARA SOBRE QUÉ TRABAJO ACTÚA, y no sólo su
+                                           verbo: una lista que anuncia «abrir, editar, eliminar»
+                                           veinte veces seguidas es inutilizable con lector de
+                                           pantalla (wireframe §7). *@
+                                        <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)">
+                                            <Icon Name="Open" />Abrir<span class="gf-sr-only"> «@work.Name»</span>
+                                        </a>
+                                        @* LO QUE EL ESTADO NO ADMITE NO SE DIBUJA, ni siquiera
+                                           inhabilitado. Editar y eliminar existen SÓLO en `Borrador`. *@
+                                        @if (IsDraft(work))
+                                        {
+                                            <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId + "/editar")">
+                                                <Icon Name="Edit" />Editar<span class="gf-sr-only"> «@work.Name»</span>
+                                            </a>
+                                            <a class="gf-btn gf-btn--destructive" href="@("/mis-trabajos?eliminar=" + work.WorkId)">
+                                                <Icon Name="Delete" />Eliminar<span class="gf-sr-only"> «@work.Name»</span>
+                                            </a>
+                                        }
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+}
+
+@code {
+    private enum Outcome { None, Deleted, StateForbidsDelete, NotFound, Rejected, Unavailable }
+
+    /// <summary>Los cuatro estados del conjunto cerrado, más «todos», tal como la maqueta los rotula.</summary>
+    private static readonly string[] StateOptions = ["todos", "Borrador", "Pendiente", "Finalizado", "Rechazado"];
+
+    /// <summary>
+    /// Los valores del conjunto cerrado del contrato y su rótulo castellano
+    /// (`Norma-De-Nomenclatura.md` §6.7, `Representacion-Fila-De-Trabajo.md` §2).
+    /// </summary>
+    private static readonly IReadOnlyDictionary<string, string> StatusLabels =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Draft"] = "Borrador",
+            ["Submitted"] = "Pendiente",
+            ["Approved"] = "Finalizado",
+            ["Rejected"] = "Rechazado",
+        };
+
+    /// <summary>Lo buscado por nombre. Llega por la dirección: ver el apartamiento 2 de la cabecera.</summary>
+    [SupplyParameterFromQuery(Name = "buscar")]
+    private string? SearchTerm { get; set; }
+
+    /// <summary>El estado elegido en el filtro, con «todos» por omisión.</summary>
+    [SupplyParameterFromQuery(Name = "estado")]
+    private string? StateFilter { get; set; }
+
+    /// <summary>El trabajo cuya eliminación se está confirmando, nombrado por la dirección.</summary>
+    [SupplyParameterFromQuery(Name = "eliminar")]
+    private Guid? DeletionTarget { get; set; }
+
+    private IReadOnlyList<WorkListItem> _works = [];
+    private Outcome _state = Outcome.None;
+    private string _rejectionMessage = string.Empty;
+
+    /// <summary>El estado que el servicio declaró al rechazar una eliminación fuera de `Draft`.</summary>
+    private string _currentStatus = string.Empty;
+
+    /// <summary>Si el diálogo sigue abierto después de operar.</summary>
+    private bool _dialogsClosed;
+
+    /// <summary>
+    /// El trabajo del diálogo, resuelto contra el listado RECIÉN RECIBIDO y acotado a `Borrador`.
+    /// </summary>
+    /// <remarks>
+    /// SE VUELVE A COMPROBAR EL ESTADO ACÁ, y no alcanza con que la fila no dibujara el botón: la
+    /// dirección se puede escribir a mano. Sigue siendo acotamiento y no defensa —quien rechaza es
+    /// el servicio—, pero evita ofrecer un diálogo que no puede terminar bien.
+    /// </remarks>
+    private WorkListItem? Deleting =>
+        _dialogsClosed
+            ? null
+            : _works.FirstOrDefault(work => work.WorkId == DeletionTarget && IsDraft(work));
+
+    /// <summary>Lo que la tabla dibuja: la colección recibida, acotada por el filtro.</summary>
+    private IReadOnlyList<WorkListItem> Listed
+    {
+        get
+        {
+            var listed = _works.AsEnumerable();
+
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                var needle = SearchTerm.Trim();
+                listed = listed.Where(work =>
+                    work.Name.Contains(needle, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(StateFilter)
+                && !string.Equals(StateFilter, "todos", StringComparison.Ordinal))
+            {
+                listed = listed.Where(work =>
+                    string.Equals(LabelOf(work), StateFilter, StringComparison.Ordinal));
+            }
+
+            return [.. listed];
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Session.LoadAsync();
+        await ReloadAsync();
+    }
+
+    /// <summary>
+    /// Vuelve a pedir el listado. La pieza pública NO GUARDA COPIA entre operaciones: cada
+    /// recorrido lo vuelve a pedir, que es lo que el wireframe §7 exige.
+    /// </summary>
+    private async Task ReloadAsync()
+    {
+        if (!Session.IsOpen || Session.IsAdministrator)
+        {
+            _works = [];
+            return;
+        }
+
+        var outcome = await DataService.ListWorksAsync(Session.UseAccessToken());
+
+        if (!outcome.Succeeded)
+        {
+            _works = [];
+
+            // Sólo se pisa el resultado de una operación si todavía no hubo ninguno: el motivo de
+            // la operación es más informativo que «no pudimos traer tus trabajos».
+            if (_state is Outcome.None)
+            {
+                _state = Outcome.Unavailable;
+            }
+
+            return;
+        }
+
+        _works = outcome.Value!;
+    }
+
+    private async Task DeleteAsync(WorkListItem work)
+    {
+        var outcome = await DataService.DeleteWorkAsync(work.WorkId, Session.UseAccessToken());
+
+        if (outcome.Succeeded)
+        {
+            _state = Outcome.Deleted;
+        }
+        else
+        {
+            Explain(outcome.Error!);
+        }
+
+        // El diálogo se cierra en los dos casos: no hay nada que reintentar sobre el mismo
+        // trabajo, a diferencia de la baja de cuenta con la confirmación no coincidente.
+        _dialogsClosed = true;
+        await ReloadAsync();
+    }
+
+    /// <summary>Traduce el motivo del contrato al estado que la superficie dibuja.</summary>
+    private void Explain(GeometriaFactory.Contracts.Errors.ErrorResponse error)
+    {
+        _rejectionMessage = error.Message;
+        _state = error.Code switch
+        {
+            ErrorCode.WorkNotFound => Outcome.NotFound,
+            ErrorCode.StateForbidsDelete => Outcome.StateForbidsDelete,
+            ErrorCode.ServiceUnavailable => Outcome.Unavailable,
+            _ => Outcome.Rejected,
+        };
+
+        // El estado actual que el servicio declara viaja DENTRO del texto del contrato, entre
+        // comillas angulares. Se lo lee de ahí en lugar de suponerlo: suponerlo sería afirmar
+        // sobre el trabajo algo que esta pantalla no sabe.
+        if (_state is Outcome.StateForbidsDelete)
+        {
+            var open = error.Message.IndexOf('«', StringComparison.Ordinal);
+            var close = error.Message.IndexOf('»', StringComparison.Ordinal);
+            _currentStatus = open >= 0 && close > open
+                ? error.Message[(open + 1)..close]
+                : string.Empty;
+        }
+    }
+
+    private static bool IsDraft(WorkListItem work) =>
+        string.Equals(work.Status, "Draft", StringComparison.Ordinal);
+
+    /// <summary>El rótulo castellano del estado. Un valor desconocido se muestra tal cual.</summary>
+    private static string LabelOf(WorkListItem work) =>
+        StatusLabels.GetValueOrDefault(work.Status, work.Status);
+
+    /// <summary>El color es refuerzo: la insignia lleva SIEMPRE su texto.</summary>
+    private static string BadgeClassOf(WorkListItem work) => work.Status switch
+    {
+        "Draft" => "gf-badge--neutral",
+        "Submitted" => "gf-badge--warning",
+        "Approved" => "gf-badge--success",
+        "Rejected" => "gf-badge--danger",
+        _ => "gf-badge--neutral",
+    };
+}

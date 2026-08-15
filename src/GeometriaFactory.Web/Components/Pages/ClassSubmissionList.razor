@@ -1,6 +1,8 @@
 @page "/entrega-comision"
 @layout WorkShell
-@rendermode InteractiveServer
+@inject DataServiceClient DataService
+@inject SessionState Session
+@using GeometriaFactory.Contracts.Works
 
 @* SUP-10 `Listado-De-La-Comision` — CU-08.
    Ruta: `/entrega-comision`. Shell: trabajo. Salida: `NAV-20` → `/trabajos/{id}`, «Abrir» sobre una fila.
@@ -8,18 +10,51 @@
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Listado-De-La-Comision.html`.
    Componentes que la maqueta declara acá: CMP-25, CMP-34 a CMP-41.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. Acá no hay
-   siquiera una tabla que dibujar sin datos: las tablas viven DENTRO de la cabecera de grupo de
-   cada alumno (CMP-36), y sin alumnos no hay grupo. Lo que queda construido es el encabezado, la
-   barra de filtros y la nota de ausencia. El panel de resumen (CMP-41), el aviso de
-   indisponibilidad (CMP-25) y los estados vacío y de filtro sin resultados no se dibujan.
+   ETAPA `e`: la superficie PASA A FUNCIONAR. Pide la colección, la agrupa por alumno y la acota
+   con los dos filtros.
 
-   EL RECORTE SE DECLARA EN EL SUBTÍTULO: los borradores no aparecen, y el recorte lo decide el
-   servicio de datos según el papel de quien pide. *@
+   EL RECORTE QUE EXCLUYE LOS BORRADORES LO DECIDE EL SERVICIO DE DATOS, NO ESTA PANTALLA, y se
+   construyó para que no pueda ser de otra manera: **acá no hay ni una línea que filtre por estado
+   `Draft`**. Buscar `Draft` en este archivo tiene que devolver cero. Lo que llega es lo que `A-13`
+   dejó pasar según el papel del acceso firmado, y si mañana el servicio dejara de recortar, esta
+   pantalla los mostraría — que es exactamente la propiedad que hace verificable la regla: si el
+   recorte viviera acá, la regla dependería de la pantalla.
+
+   Y LA PANTALLA NO INSINÚA QUE LOS BORRADORES EXISTAN. El subtítulo declara el recorte con el texto
+   de la maqueta —dice qué **no** aparece— y ningún otro lugar de la superficie cuenta borradores,
+   los nombra por alumno, deja un hueco donde irían ni ofrece una forma de pedirlos. El selector de
+   estado ofrece los **tres** valores visibles y **no** `Borrador`, que es lo que el wireframe §3
+   declara para la insignia de esta superficie: «Nunca `Borrador`».
+
+   POR QUÉ ESTA SUPERFICIE NO ES INTERACTIVA: el mismo apartamiento declarado que `AccountsPanel`.
+   Render estático de servidor. Acá no hay ninguna escritura, y por eso tampoco hay ningún
+   formulario POST: los dos filtros son `GET`.
+
+   CUATRO APARTAMIENTOS DECLARADOS, ELEVADOS AL PRODUCT OWNER:
+
+     1. **LAS COLUMNAS «PIEZAS» Y «ADVERTENCIAS» NO SE DIBUJAN**, por el mismo motivo y con la misma
+        fundamentación que en `StudentWorkPanel`: la proyección del contrato no las lleva y la
+        contradicción entre documentos sobre qué número es sigue elevada. Un cero inventado es un
+        dato falso.
+     2. **LA ACCIÓN «RESUMEN» (CMP-40) Y EL PANEL DE RESUMEN (CMP-41) NO SE DIBUJAN.** El propio
+        wireframe §3 los declara «capacidad de prioridad menor, prevista para una etapa posterior»,
+        y además el resumen cuenta por estado: hoy contaría tres ceros. Un botón servido que no abre
+        nada es un control muerto.
+     3. **LOS GRUPOS SE COLAPSAN CON `<details>` Y NO CON UNA CABECERA QUE DECLARA SU EXPANSIÓN.**
+        El wireframe §3 y §7 piden una cabecera colapsable con su estado de expansión declarado; sin
+        guion, el elemento de divulgación del navegador es la única forma de tener el
+        comportamiento **y** el estado anunciado. No entró en lo que el Product Owner autorizó del
+        guion. El recuento del grupo queda **dentro** de la cabecera, con lo cual sigue a la vista
+        con el grupo colapsado, que es lo que el wireframe exige.
+     4. **EL PAPEL EQUIVOCADO NO SE DIBUJA COMO SI FUERA LA COMISIÓN.** Con una sesión de alumno,
+        `A-13` devolvería sus propios trabajos **con sus borradores**, y dibujarlos bajo un subtítulo
+        que dice que los borradores no aparecen sería mentir dos veces. Se dibuja en su lugar una
+        nota que nombra el listado que sí le corresponde. Texto propio, declarado.
+
+   RA-01: la colección llega desde el servidor de esta pieza, por `DataServiceClient`.
+   RA-03: ningún mensaje de esta superficie nombra una dirección interna. *@
 
 <PageTitle>Listado de la comisión</PageTitle>
-
-<StagePlaceholder />
 
 <div class="gf-page-header gf-mt-5">
     <div>
@@ -28,25 +63,317 @@
     </div>
 </div>
 
-<div class="gf-filters">
-    @* El filtro por alumno vuelve a pedir la colección; el de estado acota lo ya recibido. *@
-    <div class="gf-field">
-        <label for="submissions-student">Alumno</label>
-        <select class="gf-select" id="submissions-student">
-            <option>todos</option>
-        </select>
-    </div>
-    <div class="gf-field">
-        <label for="submissions-state">Estado del trabajo</label>
-        <select class="gf-select" id="submissions-state">
-            <option>todos</option>
-            <option>Pendiente</option>
-            <option>Finalizado</option>
-            <option>Rechazado</option>
-        </select>
-    </div>
-    <button type="button" class="gf-btn gf-btn--secondary">Resumen</button>
-</div>
+@if (!Session.IsOpen)
+{
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Para recorrer la entrega de la comisión tenés que estar dentro del laboratorio.
+        <a href="/ingreso">Ir a ingresar</a>.
+    </p>
+}
+else if (!Session.IsAdministrator)
+{
+    @* Apartamiento 4 de la cabecera. *@
+    <p class="gf-banner gf-banner--info gf-width-medium" role="status">
+        Esta pantalla es la del docente. Tus trabajos están en
+        <a href="/mis-trabajos">Mis trabajos</a>.
+    </p>
+}
+else
+{
+    @if (_state is Outcome.StudentNotFound)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">
+            Ese alumno ya no existe. La lista se recargó sin filtro.
+        </p>
+    }
+    else if (_state is Outcome.Rejected)
+    {
+        <p class="gf-banner gf-banner--error" role="alert">@_rejectionMessage</p>
+    }
 
-@* Nota de ausencia: evita que un alumno sin trabajos se lea como un trabajo perdido. *@
-<p class="gf-caption gf-mt-5">Sólo figuran los alumnos con trabajos entregados. Si un alumno no aparece, todavía no entregó nada.</p>
+    @if (_state is Outcome.Unavailable)
+    {
+        @* La lista NO se muestra con datos viejos: la pieza pública no guarda copia. *@
+        <section class="gf-unavailable-notice" role="alert" aria-labelledby="submissions-unavailable-heading">
+            <h2 id="submissions-unavailable-heading"><Icon Name="Alert" SizeClass="gf-icon--20" />Ahora no podemos traer la entrega</h2>
+            <p>
+                El laboratorio está en pie, pero no está pudiendo llegar a tus datos en este momento.
+                Probá de nuevo en un rato.
+            </p>
+            <a class="gf-btn gf-btn--secondary gf-mt-3" href="/entrega-comision">Reintentar traer la entrega</a>
+        </section>
+    }
+    else
+    {
+        <form class="gf-filters" method="get">
+            @* El filtro por alumno VUELVE A PEDIR LA COLECCIÓN con el criterio poblado, que es lo
+               que el wireframe §3 y §4 declaran; el de estado acota lo ya recibido. Los dos viajan
+               por la dirección porque esta superficie es de render estático. *@
+            <div class="gf-field">
+                <label for="submissions-student">Alumno</label>
+                <select class="gf-select" id="submissions-student" name="alumno">
+                    <option value="">todos</option>
+                    @foreach (var student in Students)
+                    {
+                        <option value="@student.Id" selected="@(student.Id == StudentFilter)">@student.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="gf-field">
+                <label for="submissions-state">Estado del trabajo</label>
+                <select class="gf-select" id="submissions-state" name="estado">
+                    @foreach (var option in StateOptions)
+                    {
+                        <option value="@option" selected="@(string.Equals(option, StateFilter, StringComparison.Ordinal))">@option</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
+        </form>
+
+        @if (_works.Count == 0)
+        {
+            @* Vacío de COLECCIÓN, declarado por el tipo recibido y no por el conteo. SIN acción de
+               crear: el administrador no carga trabajos. Y sin ninguna insinuación sobre lo que no
+               ve: dice que aparecen cuando los alumnos los envían, y nada más. *@
+            <section class="gf-empty" aria-labelledby="submissions-empty-heading">
+                <Icon Name="Empty" SizeClass="gf-icon--24" />
+                <h2 id="submissions-empty-heading">Todavía no hay ningún trabajo entregado</h2>
+                <p>Los trabajos aparecen acá cuando los alumnos los envían.</p>
+            </section>
+        }
+        else if (Groups.Count == 0)
+        {
+            <section class="gf-empty" aria-labelledby="submissions-filter-empty-heading">
+                <Icon Name="Empty" SizeClass="gf-icon--24" />
+                <h2 id="submissions-filter-empty-heading">Ningún trabajo coincide con el filtro</h2>
+                <p>Hay trabajos entregados, pero ninguno responde a lo que buscaste.</p>
+                <a class="gf-btn gf-btn--secondary gf-mt-5" href="/entrega-comision">Limpiar el filtro</a>
+            </section>
+        }
+        else
+        {
+            @foreach (var group in Groups)
+            {
+                <section class="gf-group" aria-label="@("Trabajos de " + group.Name)">
+                    @* El grupo colapsado CONSERVA SU RECUENTO A LA VISTA, porque el recuento está
+                       dentro de la propia cabecera. *@
+                    <details class="gf-disclosure" open>
+                        <summary class="gf-group-header">
+                            <span class="gf-initials" aria-hidden="true">@group.Initials</span>
+                            @group.Name — @group.Email
+                            <span class="gf-group-count gf-num">@group.Count</span>
+                        </summary>
+
+                        <div class="gf-table-wrapper">
+                            <table class="gf-table">
+                                <caption class="gf-sr-only">Trabajos entregados por @group.Name</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Trabajo</th>
+                                        <th scope="col">Fecha del trabajo</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col" class="gf-td-actions">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var work in group.Works)
+                                    {
+                                        <tr>
+                                            <th scope="row" class="gf-th-plain gf-th-plain--body">@work.Name</th>
+                                            <td class="gf-num">@work.DeclaredDate</td>
+                                            <td><span class="gf-badge @BadgeClassOf(work.Status)">@LabelOf(work.Status)</span></td>
+                                            <td class="gf-td-actions">
+                                                @* ACCIÓN ÚNICA: abrir. No hay acciones de decisión:
+                                                   un desenlace se decide mirando el trabajo, no
+                                                   leyendo una fila. *@
+                                                <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)">
+                                                    <Icon Name="Open" />Abrir<span class="gf-sr-only"> «@work.Name»</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+                </section>
+            }
+
+            @* Nota de ausencia: evita que un alumno sin trabajos se lea como un trabajo perdido. *@
+            <p class="gf-caption gf-mt-5">Sólo figuran los alumnos con trabajos entregados. Si un alumno no aparece, todavía no entregó nada.</p>
+        }
+    }
+}
+
+@code {
+    private enum Outcome { None, StudentNotFound, Rejected, Unavailable }
+
+    /// <summary>
+    /// Los TRES estados visibles del administrador, más «todos». **`Borrador` no está**, y su
+    /// ausencia es la del wireframe §3: en esta superficie la insignia nunca lo lleva.
+    /// </summary>
+    private static readonly string[] StateOptions = ["todos", "Pendiente", "Finalizado", "Rechazado"];
+
+    private static readonly IReadOnlyDictionary<string, string> StatusLabels =
+        new Dictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["Submitted"] = "Pendiente",
+            ["Approved"] = "Finalizado",
+            ["Rejected"] = "Rechazado",
+        };
+
+    private sealed record StudentOption(Guid Id, string Name);
+
+    private sealed record Group(Guid OwnerId, string Name, string Email, string Initials, IReadOnlyList<WorkListItem> Works)
+    {
+        /// <summary>El recuento con su unidad, y en singular cuando corresponde.</summary>
+        public string Count => Works.Count == 1 ? "1 trabajo" : $"{Works.Count} trabajos";
+    }
+
+    /// <summary>El alumno elegido en el filtro. Va al servicio de datos como criterio de `A-13`.</summary>
+    [SupplyParameterFromQuery(Name = "alumno")]
+    private Guid? StudentFilter { get; set; }
+
+    /// <summary>El estado elegido en el filtro. Acota lo ya recibido.</summary>
+    [SupplyParameterFromQuery(Name = "estado")]
+    private string? StateFilter { get; set; }
+
+    /// <summary>Lo que la superficie dibuja: la colección que el alcance del papel dejó pasar.</summary>
+    private IReadOnlyList<WorkListItem> _works = [];
+
+    /// <summary>
+    /// La colección SIN criterio de filtro, y sirve para una sola cosa: poblar el selector de
+    /// alumnos.
+    /// </summary>
+    /// <remarks>
+    /// SIN ESTO EL FILTRO SERÍA DE IDA. Construir el selector con la colección ya filtrada dejaría
+    /// una sola opción y no habría forma de pasar a otro alumno sin limpiarlo primero. **Es la misma
+    /// colección y el mismo punto de acceso**, pedido sin criterio: no se guarda entre peticiones y
+    /// no se usa para dibujar ninguna fila.
+    /// </remarks>
+    private IReadOnlyList<WorkListItem> _unfiltered = [];
+
+    private Outcome _state = Outcome.None;
+    private string _rejectionMessage = string.Empty;
+
+    /// <summary>Los alumnos con entrega, para el selector. Salen del dato y no de una lista fija.</summary>
+    private IReadOnlyList<StudentOption> Students =>
+    [
+        .. _unfiltered
+            .GroupBy(work => work.OwnerId)
+            .Select(byOwner => new StudentOption(byOwner.Key, NameOf(byOwner.First())))
+            .OrderBy(student => student.Name, StringComparer.CurrentCulture)
+    ];
+
+    /// <summary>Los grupos que se dibujan: lo recibido, acotado por el filtro de estado.</summary>
+    private IReadOnlyList<Group> Groups
+    {
+        get
+        {
+            var listed = _works.AsEnumerable();
+
+            if (!string.IsNullOrWhiteSpace(StateFilter)
+                && !string.Equals(StateFilter, "todos", StringComparison.Ordinal))
+            {
+                listed = listed.Where(work =>
+                    string.Equals(LabelOf(work.Status), StateFilter, StringComparison.Ordinal));
+            }
+
+            return
+            [
+                .. listed
+                    .GroupBy(work => work.OwnerId)
+                    .Select(byOwner => new Group(
+                        byOwner.Key,
+                        NameOf(byOwner.First()),
+                        byOwner.First().OwnerEmail,
+                        InitialsOf(byOwner.First()),
+                        [.. byOwner]))
+                    .OrderBy(group => group.Name, StringComparer.CurrentCulture)
+            ];
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Session.LoadAsync();
+
+        if (!Session.IsOpen || !Session.IsAdministrator)
+        {
+            return;
+        }
+
+        var token = Session.UseAccessToken();
+
+        var everything = await DataService.ListWorksAsync(token);
+
+        if (!everything.Succeeded)
+        {
+            Explain(everything.Error!);
+            return;
+        }
+
+        _unfiltered = everything.Value!;
+
+        if (StudentFilter is not { } student)
+        {
+            _works = _unfiltered;
+            return;
+        }
+
+        // EL CRITERIO VA AL SERVICIO, que es lo que el wireframe declara. No se filtra acá.
+        var filtered = await DataService.ListWorksAsync(token, student);
+
+        if (filtered.Succeeded)
+        {
+            _works = filtered.Value!;
+            return;
+        }
+
+        // El alumno del filtro ya no existe: se informa y se recarga la lista SIN filtro, que es
+        // recuperación por reintento y no un callejón.
+        Explain(filtered.Error!);
+
+        if (_state is Outcome.StudentNotFound)
+        {
+            _works = _unfiltered;
+            StudentFilter = null;
+        }
+    }
+
+    private void Explain(GeometriaFactory.Contracts.Errors.ErrorResponse error)
+    {
+        _rejectionMessage = error.Message;
+        _state = error.Code switch
+        {
+            ErrorCode.StudentNotFound => Outcome.StudentNotFound,
+            ErrorCode.ServiceUnavailable => Outcome.Unavailable,
+            _ => Outcome.Rejected,
+        };
+    }
+
+    private static string NameOf(WorkListItem work) =>
+        $"{work.OwnerFirstName} {work.OwnerLastName}".Trim();
+
+    private static string InitialsOf(WorkListItem work) =>
+        string.Concat(
+            work.OwnerFirstName.Length > 0 ? work.OwnerFirstName[..1] : string.Empty,
+            work.OwnerLastName.Length > 0 ? work.OwnerLastName[..1] : string.Empty)
+        .ToUpperInvariant();
+
+    /// <summary>
+    /// El rótulo castellano del estado. Un valor que este mapa no tiene se muestra tal cual, y eso
+    /// **también es deliberado**: si el servicio dejara de recortar, el borrador aparecería con su
+    /// nombre crudo en vez de esconderse detrás de una traducción amable.
+    /// </summary>
+    private static string LabelOf(string status) => StatusLabels.GetValueOrDefault(status, status);
+
+    private static string BadgeClassOf(string status) => status switch
+    {
+        "Submitted" => "gf-badge--warning",
+        "Approved" => "gf-badge--success",
+        "Rejected" => "gf-badge--danger",
+        _ => "gf-badge--neutral",
+    };
+}

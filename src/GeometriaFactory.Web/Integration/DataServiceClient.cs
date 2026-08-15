@@ -1,8 +1,10 @@
+using System.Globalization;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using GeometriaFactory.Contracts.Accounts;
 using GeometriaFactory.Contracts.Errors;
 using GeometriaFactory.Contracts.Service;
+using GeometriaFactory.Contracts.Works;
 
 namespace GeometriaFactory.Web.Integration;
 
@@ -55,6 +57,21 @@ public sealed class DataServiceClient
     /// inicial porque acá la dirección base la pone la configuración. [derivado]
     /// </summary>
     private const string AccountsPath = "cuentas";
+
+    /// <summary>
+    /// Ruta del alta `A-10` y raíz del listado `A-13`, de la reedición `A-11`, de la eliminación
+    /// `A-12` y del detalle `A-14`. Es la misma constante que
+    /// `GeometriaFactory.Api.Endpoints.WorkEndpoints.WorksRoute`, sin la barra inicial porque acá
+    /// la dirección base la pone la configuración. [derivado]
+    /// </summary>
+    private const string WorksPath = "trabajos";
+
+    /// <summary>
+    /// Nombre del parámetro de filtro por alumno de `A-13`. Es la misma constante que
+    /// `GeometriaFactory.Api.Endpoints.WorkEndpoints.StudentFilterParameter`, y **va en
+    /// castellano porque es superficie y no identificador** (`Norma-De-Nomenclatura.md` §4).
+    /// </summary>
+    private const string StudentFilterParameter = "alumno";
 
     /// <summary>
     /// Texto del estado degradado, tomado literal de la maqueta aprobada.
@@ -234,6 +251,96 @@ public sealed class DataServiceClient
             new PasswordResetRequest(accountId),
             accessToken,
             cancellationToken);
+
+    /// <summary>`A-10` — Carga un trabajo con su nombre, su fecha, su descripción y su texto.</summary>
+    /// <remarks>
+    /// EL TEXTO SE PASA TAL CUAL Y ESTE MÉTODO NO LO MIRA. Ni recorta, ni normaliza saltos de
+    /// línea, ni reserializa: la cadena que la superficie recogió del área de texto es la cadena
+    /// que viaja (RN-08). Serializar el objeto de solicitud **no** es reserializar el texto: el
+    /// texto es un valor de cadena y el serializador lo escribe escapado y lo devuelve idéntico.
+    ///
+    /// EL ESTADO QUE VUELVE NO SE REINTERPRETA. Que la respuesta traiga `Draft` **no es un
+    /// fallo**: la petición se cumplió y el trabajo quedó guardado con su texto. En la etapa `e`
+    /// ése es el único resultado posible, porque el texto todavía no se interpreta.
+    /// </remarks>
+    public Task<DataServiceOutcome<WorkSubmissionResponse>> SubmitWorkAsync(
+        WorkSubmissionRequest request,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<WorkSubmissionRequest, WorkSubmissionResponse>(
+            HttpMethod.Post, WorksPath, request, accessToken, cancellationToken);
+
+    /// <summary>`A-11` — Reedita un trabajo propio que está en `Draft`.</summary>
+    /// <remarks>
+    /// EL IDENTIFICADOR VIAJA EN LA RUTA, que es la que el punto de acceso usa. El cuerpo lo
+    /// vuelve a llevar porque el contrato declara el mismo tipo para el alta y para la reedición,
+    /// y quien decide es la ruta: así no hay un lugar donde los dos puedan no coincidir.
+    /// </remarks>
+    public Task<DataServiceOutcome<WorkSubmissionResponse>> ResubmitWorkAsync(
+        Guid workId,
+        WorkSubmissionRequest request,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<WorkSubmissionRequest, WorkSubmissionResponse>(
+            HttpMethod.Post, $"{WorksPath}/{workId}", request, accessToken, cancellationToken);
+
+    /// <summary>`A-12` — Elimina un trabajo.</summary>
+    /// <remarks>
+    /// NO LLEVA CUERPO, a diferencia de la baja de cuenta: acá no hay confirmación escrita que
+    /// transportar. **La pantalla no es la defensa**: quien acota la eliminación al estado
+    /// `Draft` para el alumno es el servicio de datos, y lo hace aunque la solicitud no pase por
+    /// ninguna pantalla.
+    /// </remarks>
+    public async Task<DataServiceOutcome<bool>> DeleteWorkAsync(
+        Guid workId,
+        string? accessToken,
+        CancellationToken cancellationToken = default)
+    {
+        var outcome = await SendAsync<object, object>(
+            HttpMethod.Delete, $"{WorksPath}/{workId}", request: null, accessToken, cancellationToken)
+            .ConfigureAwait(false);
+
+        return outcome.Succeeded
+            ? DataServiceOutcome<bool>.Resolved(true)
+            : DataServiceOutcome<bool>.Failed(outcome.Error!);
+    }
+
+    /// <summary>`A-13` — Trae el listado de trabajos con el alcance que el papel determina.</summary>
+    /// <remarks>
+    /// EL ALCANCE NO ES UN PARÁMETRO Y NO SE PODRÍA PEDIR DESDE ACÁ: lo decide el servicio de
+    /// datos leyendo el papel del acceso firmado. El alumno recibe los suyos con sus borradores;
+    /// el administrador recibe la comisión **menos los borradores**. El único parámetro es el
+    /// filtro por alumno, que **acota** lo que ese alcance ya dejó pasar, y para un acceso de
+    /// papel `Alumno` el servicio lo ignora.
+    ///
+    /// UN LISTADO VACÍO NO ES UN FALLO, igual que en `A-06`.
+    /// </remarks>
+    public Task<DataServiceOutcome<WorkListItem[]>> ListWorksAsync(
+        string? accessToken,
+        Guid? studentFilter = null,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<object, WorkListItem[]>(
+            HttpMethod.Get,
+            studentFilter is { } student
+                ? $"{WorksPath}?{StudentFilterParameter}={student.ToString("D", CultureInfo.InvariantCulture)}"
+                : WorksPath,
+            request: null,
+            accessToken,
+            cancellationToken);
+
+    /// <summary>`A-14` — Trae el detalle de un trabajo, con su texto original íntegro.</summary>
+    /// <remarks>
+    /// LOS TRES MOTIVOS DE NEGATIVA SALEN POR LA MISMA PUERTA —el inexistente, el ajeno y el
+    /// borrador que el administrador no ve—: mismo código, mismo texto y mismo cuerpo (RN-03).
+    /// Quien llama **no puede** distinguirlos, y es deliberado: distinguirlos confirmaría que ese
+    /// trabajo existe.
+    /// </remarks>
+    public Task<DataServiceOutcome<WorkDetailResponse>> GetWorkAsync(
+        Guid workId,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<object, WorkDetailResponse>(
+            HttpMethod.Get, $"{WorksPath}/{workId}", request: null, accessToken, cancellationToken);
 
     private Task<DataServiceOutcome<TResponse>> PostAsync<TRequest, TResponse>(
         string path,
