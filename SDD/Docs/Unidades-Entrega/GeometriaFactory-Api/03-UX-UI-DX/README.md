@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-16
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/) completo (doce casos de uso, `Especificacion-Funcional.md` con su §3 de responsabilidades y su §4 de frontera, `Definicion-Superficie-HTTP.md`, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` y `00-Contexto/Alcance-Producto.md`; `01-Necesidades-Negocio/Necesidades-Negocio.md`; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/` (RN-00001 a RN-00016); `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/` (el conjunto cerrado de diecisiete códigos); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.3**; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §14, §16, §18 y §17.5
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/) completo (doce casos de uso, `Especificacion-Funcional.md` con su §3 de responsabilidades y su §4 de frontera, `Definicion-Superficie-HTTP.md`, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` y `00-Contexto/Alcance-Producto.md`; `01-Necesidades-Negocio/Necesidades-Negocio.md`; `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/` (RN-00001 a RN-00016); `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/` (el conjunto cerrado de diecisiete códigos); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.3**; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §14, §16, §18 y §17.5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops`, `10-Examples` y `11-Documentacion` de GeometriaFactory-Api
 
 ---

@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.11 · GeometriaFactory-Application punto 3 (el reloj es un puerto, para que las fechas de alta y de modificación sean verificables en prueba) y §17.1.P.4 · GeometriaFactory-Infrastructure (ampliación del 2026-08-09, sellos de tiempo del trabajo); implementa el puerto de reloj del sistema de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.11 · GeometriaFactory-Application punto 3 (el reloj es un puerto, para que las fechas de alta y de modificación sean verificables en prueba) y §17.1.P.4 · GeometriaFactory-Infrastructure (ampliación del 2026-08-09, sellos de tiempo del trabajo); implementa el puerto de reloj del sistema de `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md` §3
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---

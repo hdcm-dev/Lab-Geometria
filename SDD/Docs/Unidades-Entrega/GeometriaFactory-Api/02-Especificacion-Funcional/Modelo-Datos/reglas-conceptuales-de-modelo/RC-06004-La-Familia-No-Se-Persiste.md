@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.11 · GeometriaFactory-Domain punto 4 («la familia plana/volumétrica **no se persiste**: se deriva de `Tipo` por tabla de consulta»), §20.E-7; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` (entrada «familia plana o volumétrica»)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.11 · GeometriaFactory-Domain punto 4 («la familia plana/volumétrica **no se persiste**: se deriva de `Tipo` por tabla de consulta»), §20.E-7; `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Glosario-Funcional.md` (entrada «familia plana o volumétrica»)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---

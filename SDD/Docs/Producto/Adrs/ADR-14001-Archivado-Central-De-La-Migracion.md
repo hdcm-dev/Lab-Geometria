@@ -39,7 +39,7 @@ snapshots o de dejar el incumplimiento sin nombrar.
 **La migración movió árboles enteros, y la carpeta de origen de la mayoría de esos documentos dejó de
 existir.** El criterio de la regla supone que el documento migrado sigue viviendo donde vivía, y que
 lo único que cambia es su contenido. Acá cambió la estructura:
-`Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/` no existe más, de modo que su
+`Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/` no existe más, de modo que su
 `_legacy/` no tendría dónde colgar.
 
 **Y hay un motivo positivo, no sólo la imposibilidad.** Los 118 documentos de las dos carpetas de

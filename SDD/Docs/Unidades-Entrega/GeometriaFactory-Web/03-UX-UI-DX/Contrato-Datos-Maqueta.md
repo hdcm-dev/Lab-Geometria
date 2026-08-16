@@ -125,7 +125,7 @@ Son las que la maqueta respeta y que el sensado de deriva verifica:
 | --- | --- | --- | --- | --- |
 | `EV-06` | `artefacto` | `SDD/Maquetas/GeometriaFactory-Web/assets/js/Datos-Maqueta.js` | Sección 9, arreglo `CONTRATO_DE_CAMPOS`, insumo directo de §2 | 2026-08-09 |
 | `EV-07` | `artefacto` | `SDD/Maquetas/GeometriaFactory-Web/assets/js/Datos-Maqueta.js` | Sección 10, `INVARIANTES_DE_LA_MAQUETA`, origen de §6 puntos 1 a 6 | 2026-08-09 |
-| `EV-08` | `artefacto` | `SDD/Docs/Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` | §2.1 a §2.5, contra las que se verificó campo por campo la columna de correspondencia de §2 | 2026-08-09 |
+| `EV-08` | `artefacto` | `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` | §2.1 a §2.5, contra las que se verificó campo por campo la columna de correspondencia de §2 | 2026-08-09 |
 | `EV-09` | `humano` | Aprobación explícita de la maqueta por el Product Owner | [`Bitacora-Validacion-Maqueta.md`](Bitacora-Validacion-Maqueta.md) §3, cierre de la iteración 4 | 2026-08-09 |
 | `EV-10` | `artefacto` | `SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md` | §20, los **ocho** escenarios de datos —`E-1` a `E-8`— de los que sale todo ejemplo de §2 | 2026-08-10 |
 

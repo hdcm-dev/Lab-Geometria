@@ -79,7 +79,7 @@ Actor por intención, hacia el documento que responde. Es lo que permite encontr
 | Cualquiera | «¿Qué es esto y por dónde entro?» | `Producto/11-Documentacion/Vision-General-Sistema.md` |
 | Cualquiera | «¿Cómo lo levanto entero en una máquina limpia?» | `Producto/11-Documentacion/Guia-Inicio-Rapido.md` |
 | Operador | «¿Cómo lo despliego, en qué orden y cómo vuelvo atrás?» | `Producto/11-Documentacion/Guia-Despliegue.md` |
-| Operador | «¿Qué necesita este servicio para correr en un contenedor?» | `Proyectos/GeometriaFactory-Api/11-Documentacion/Guia-Contenedor.md` |
+| Operador | «¿Qué necesita este servicio para correr en un contenedor?» | `Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/Guia-Contenedor.md` |
 | Operador | «Algo falla en ejecución, ¿qué miro?» | `Runbook-Operacion.md` del proyecto de código afectado |
 | Operador, mantenedor | «Esto ya le pasó a alguien, ¿cómo lo resolvió?» | `Producto/11-Documentacion/Bitacora-Eventualidades.md` |
 | Mantenedor | «¿Dónde vive en el repositorio lo que la arquitectura llama componente?» | `Recorrido-Codigo.md` del proyecto de código |
@@ -89,7 +89,7 @@ Actor por intención, hacia el documento que responde. Es lo que permite encontr
 | Integrador | «¿Cómo llego a mi primer éxito?» | `Guia-Onboarding-Developer.md` del proyecto de código |
 | Integrador | «¿Cuál es la superficie exacta y qué devuelve cada operación?» | `Referencia-Api.md` del proyecto de código |
 | Integrador | «Me da un error, ¿qué significa?» | `Troubleshooting.md` del proyecto de código |
-| Integrador del visor | «¿Cómo extiendo el visor desde su anfitrión?» | `Proyectos/GeometriaFactory-Visor/11-Documentacion/Guia-Extension.md` |
+| Integrador del visor | «¿Cómo extiendo el visor desde su anfitrión?» | `Unidades-Entrega/GeometriaFactory-Web/11-Documentacion/Guia-Extension.md` |
 | Agente de IA que codifica | «¿Cómo se construye, cómo se valida y qué no puedo tocar?» | `AGENTS.md` en la raíz del repositorio, derivado de `Contrato-Agentes.md` |
 
 ## 3. Estado del cuerpo documental

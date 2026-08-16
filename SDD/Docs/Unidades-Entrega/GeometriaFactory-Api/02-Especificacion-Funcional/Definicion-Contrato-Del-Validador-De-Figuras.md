@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §1, §3 (D-1, D-2, D-3), §4 (F-09, F-10), §4.1 (RN-06005, RN-06008, RN-06009), §7 (CL-3, CL-4), §10 («formato de entrada no negociable»), §11 (**RN-B3**), §12, §14, §17.1.P.3 · GeometriaFactory-Infrastructure, §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.10 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure punto 1, §20 completo (**E-1 a E-8**) y §21 (matriz de cobertura); `Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`, para la frontera entre lo que interpreta y lo que dibuja
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §1, §3 (D-1, D-2, D-3), §4 (F-09, F-10), §4.1 (RN-06005, RN-06008, RN-06009), §7 (CL-3, CL-4), §10 («formato de entrada no negociable»), §11 (**RN-B3**), §12, §14, §17.1.P.3 · GeometriaFactory-Infrastructure, §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.10 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure punto 1, §20 completo (**E-1 a E-8**) y §21 (matriz de cobertura); `Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`, para la frontera entre lo que interpreta y lo que dibuja
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
