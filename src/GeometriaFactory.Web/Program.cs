@@ -121,6 +121,10 @@ app.UseMiddleware<UnrestorableSessionMiddleware>();
 // servicio de datos, en cada solicitud.
 app.UseMiddleware<PanelSessionGateMiddleware>();
 
+// TRADUCE EL FALLO DE VERIFICACIÓN ANTES DE QUE SALGA CRUDO. Va **antes** de la verificación
+// porque tiene que envolverla: lo que atrapa lo lanza ella.
+app.UseMiddleware<StaleFormMiddleware>();
+
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()

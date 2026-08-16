@@ -48,6 +48,21 @@
 
 <h1 class="gf-mt-5">Ingresar al laboratorio</h1>
 
+@* LA PÁGINA VIEJA, DICHA EN CASTELLANO Y CON SALIDA. El marco rechaza un envío cuyo testigo ya no
+   puede verificar —pasa cuando la pantalla estuvo abierta mientras el front se desplegaba de nuevo—
+   y su mensaje es en inglés, sin marca del producto y sin qué hacer. `StaleFormMiddleware` lo
+   traduce a esta marca en la dirección, y acá se dice qué pasó y qué sigue.
+
+   NO SE REINTENTA SOLO: la persona vuelve a enviar cuando quiere, con el formulario ya servido de
+   nuevo y su testigo válido. *@
+@if (IsStale)
+{
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+        Esta pantalla estuvo abierta un rato largo y no pudimos verificar el envío.
+        Nada se perdió: volvé a escribir tu contraseña y reintentá el ingreso.
+    </p>
+}
+
 @if (_arrival == "confirmacion-aprovisionamiento")
 {
     <p class="gf-banner gf-banner--confirmation gf-mt-5" role="status">
@@ -163,6 +178,10 @@ else if (_state is Outcome.PasswordChangeRequired)
                 Path = "/",
             });
     }
+
+    /// <summary>Si esta petición viene de un envío que no se pudo verificar.</summary>
+    private bool IsStale =>
+        Navigation.ToAbsoluteUri(Navigation.Uri).Query.Contains(StaleFormMiddleware.StaleParameter, StringComparison.Ordinal);
 
     private enum Outcome { None, MissingFields, Rejected, PasswordChangeRequired, Unavailable }
 

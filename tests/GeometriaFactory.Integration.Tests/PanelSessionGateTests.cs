@@ -92,6 +92,37 @@ public sealed class PanelSessionGateTests : IDisposable
         }
     }
 
+    /// <summary>
+    /// Un envío que el marco no puede verificar **no muestra el error del marco**: vuelve a la
+    /// pantalla, con su aviso y su testigo nuevo.
+    /// </summary>
+    [Fact]
+    public async Task AnUnverifiableSubmissionComesBackToTheScreenAndNotToTheFrameworkError()
+    {
+        using var browser = BrowserOf(_publicPiece);
+        await ConfigureAdministratorAsync();
+
+        // Un envío sin testigo es exactamente lo que le pasa a quien tenía la pantalla abierta
+        // cuando la pieza pública se desplegó de nuevo: su testigo ya no se puede verificar.
+        using var content = new FormUrlEncodedContent(
+            new Dictionary<string, string> { ["Input.Email"] = "quien@sea.ar" });
+
+        using var response = await browser.PostAsync("/ingreso", content);
+
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.Contains(
+            StaleFormMiddleware.StaleParameter,
+            response.Headers.Location!.ToString(),
+            StringComparison.Ordinal);
+
+        // Y LO QUE LA PERSONA LEE ES DEL PRODUCTO Y EN CASTELLANO, no el texto del marco.
+        using var back = await browser.GetAsync(response.Headers.Location!.ToString());
+        var html = await back.Content.ReadAsStringAsync();
+
+        Assert.Contains("Esta pantalla estuvo abierta", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("antiforgery", html, StringComparison.OrdinalIgnoreCase);
+    }
+
     [Fact]
     public async Task WithoutTheMarkThePublicRoutesStillAnswer()
     {
