@@ -49,6 +49,7 @@
   - [6.18 Agregados por el guardián de aprovisionamiento, fuera de los 155](#618-agregados-por-el-guardián-de-aprovisionamiento-fuera-de-los-155)
   - [6.19 Agregados por la etapa `e`, fuera de los 155](#619-agregados-por-la-etapa-e-fuera-de-los-155)
   - [6.20 Agregados por la interfaz de la etapa `e`, fuera de los 155](#620-agregados-por-la-interfaz-de-la-etapa-e-fuera-de-los-155)
+  - [6.21 Agregados por el validador de figuras de la etapa `f`, fuera de los 155](#621-agregados-por-el-validador-de-figuras-de-la-etapa-f-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -358,6 +359,7 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Agregados por el guardián de aprovisionamiento (1.15), **fuera de los 155** | 8 | 8 | §6.18 |
 | Agregados por la etapa `e` (1.16), **fuera de los 155** | 47 | 47 | §6.19 |
 | Agregados por la interfaz de la etapa `e` (1.17), **fuera de los 155** | 27 | 27 | §6.20 |
+| Agregados por el validador de figuras de la etapa `f` (1.18), **fuera de los 155** | 40 | 40 | §6.21 |
 
 **Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **para las 109 que agrega la etapa `c` en §6.13** —106 propias más las tres que la 1.8 sumó—, que desde la 1.7 es la décima, **para las 39 que agrega §6.14**, que desde la 1.8 es la undécima —27 las trajo la marca de sesión, 5 más el guardián de sesión de la 1.9, 5 más el arreglo del cambio forzado de la 1.10 y 2 más la guardia de arranque de la clave de firma de la 1.11— **para las 36 que agrega §6.15**, que desde la 1.12 es la duodécima —16 tipos y 20 miembros del ciclo de vida de la cuenta de alumno del lado del servicio— **para las 41 que agrega §6.16**, que desde la 1.13 es la decimotercera —2 tipos, 35 miembros, propiedades y valores, y 4 iconos de la interfaz de esa misma etapa— **y para las 19 que agrega §6.17**, que desde la 1.14 es la decimocuarta —2 superficies derivadas, 8 funciones del guion de interacción y 9 atributos de marcado que ese guion lee— **para las 8 que agrega §6.18**, que desde la 1.15 es la decimoquinta —3 tipos y 5 miembros del guardián 1 de `Web ADR-10003` §2 y del punto de acceso anónimo que lo hace posible— **para las 47 que agrega §6.19**, que desde la 1.16 es la decimosexta —16 tipos, 4 valores de conjunto cerrado y 27 miembros del trabajo con dueño, estado y persistencia— **y para las 27 que agrega §6.20**, que desde la 1.17 es la decimoséptima —3 tipos, 22 miembros, propiedades y valores, y 2 iconos de la interfaz de esa misma etapa—. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete. **La etapa `e` la reproduce sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, y entre ellos está el homónimo declarado de §6.9, `WORK_NOT_FOUND`, que la etapa escribió **dos veces, una por catálogo, y no unificó**, porque lo que los separa es el tipo que los contiene. **La etapa `d` reproduce la constancia sobre una población mayor**: de los **quince** códigos que escribió —siete del dominio, tres propios de la aplicación, uno de infraestructura y cuatro del contrato— **cero necesitaron fila nueva**, y entre ellos están los dos casos difíciles que `F-03` había dejado resueltos de antemano: la **unificación** de §6.9, que le da a `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` el mismo nombre inglés, y los **dos identificadores retirados por RN-02016** de §6.8.5, que la etapa `d` **no recicló**.
 
@@ -1853,6 +1855,97 @@ Los nombres del catálogo `ICONOS` de `assets/js/Maqueta.js`, con el mismo crite
 | `abrir` | `Open` | Valor de conjunto cerrado, catálogo de iconos | `ICONOS` de `assets/js/Maqueta.js`; `Representacion-Fila-De-Trabajo.md` §3, la acción que **las cuatro** variantes de estado ofrecen |
 | `editar` | `Edit` | Valor de conjunto cerrado, catálogo de iconos | Ídem; `Representacion-Fila-De-Trabajo.md` §3, variante «Propia, en estado `Borrador`». **Se distingue de la operación `Edit` de `Work`** de §6.19.2: aquélla es una operación del dominio y ésta el nombre de un trazo del catálogo, y el tipo que los contiene los separa |
 
+### 6.21 Agregados por el validador de figuras de la etapa `f`, fuera de los 155
+
+**Por qué existe esta sección.** La etapa `f` construye lo que las cinco anteriores dejaron
+declarado y vacío: **la interpretación del texto del alumno**. `Piece`, `Component` y `Observation`
+existen como tipos desde la etapa `a` —y tienen fila en §6.4— pero **sin un solo atributo**, porque
+el modelo se difirió hasta acá; y el puerto de validación de figuras está declarado **sin miembros**
+desde la misma etapa. Esta tabla trae los conceptos que hacen falta para escribirlos: el
+discriminante de figura y el papel del componente como conjuntos cerrados, el resultado que el
+puerto devuelve, y los miembros de las tres entidades del dominio. Entran por el **corolario 4 de
+§6.1**, con el mismo criterio de §6.19: **no cuentan dentro de los 155**, porque no existían cuando
+se contaron las seis clases.
+
+**Se agregan ANTES de escribir el identificador**, que es exactamente para lo que §6.1 existe.
+
+#### 6.21.1 Tipos
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `TipoDeFigura` | `FigureType` | Conjunto cerrado de `GeometriaFactory.Domain.Values` | [`../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.3, atributo «Tipo»; `Definicion-Contrato-Del-Validador-De-Figuras.md` §5, que enumera las tres familias |
+| `PapelDelComponente` | `ComponentRole` | Conjunto cerrado de `GeometriaFactory.Domain.Values` | `Definicion-Modelo-De-Dominio.md` §2.4, atributo «Papel»: «conjunto cerrado del vocabulario del emisor» |
+| `InterpretacionDeFiguras` | `FigureInterpretation` | Tipo de resultado del puerto, en `GeometriaFactory.Application.Ports` | `Definicion-Contrato-Del-Validador-De-Figuras.md` §3, «qué devuelve el validador»: **tres cosas y no dos** |
+
+#### 6.21.2 Valores de los dos conjuntos cerrados
+
+**Los siete de `FigureType` conservan el discriminante del emisor y no se traducen dos veces:** el
+nombre inglés es el del tipo geométrico, y el valor que el texto del alumno trae —`Cilindro`,
+`Cubo`, …— es **dato del alumno** y se lee tal cual. Ver la declaración de frontera de abajo.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `Cilindro` | `Cylinder` | Valor de `FigureType` | `Definicion-Contrato-Del-Validador-De-Figuras.md` §5, familia volumétrica |
+| `Cubo` | `Cube` | Valor de `FigureType` | Ídem |
+| `Ortoedro` | `Orthohedron` | Valor de `FigureType` | Ídem |
+| `Rectangulo` | `Rectangle` | Valor de `FigureType` | Ídem, familia plana |
+| `Cuadrado` | `Square` | Valor de `FigureType` | Ídem |
+| `Circulo` | `Circle` | Valor de `FigureType` | Ídem |
+| `RectanguloDesarrollado` | `DevelopedRectangle` | Valor de `FigureType` | Ídem, «componente sin forma de pieza»: sólo aparece como `Lado` del cilindro |
+| `Tapa` | `Cap` | Valor de `ComponentRole` | `Definicion-Modelo-De-Dominio.md` §2.4; `Vision-Producto.md` §9.1 |
+| `Cara` | `Face` | Valor de `ComponentRole` | Ídem |
+| `Base` | `Base` | Valor de `ComponentRole` | Ídem. **Homónimo declarado**: el castellano y el inglés coinciden |
+| `Lateral` | `Lateral` | Valor de `ComponentRole` | Ídem. **Homónimo declarado** |
+| `Lado` | `Side` | Valor de `ComponentRole` | Ídem. Es el papel del `RectanguloDesarrollado` del cilindro, y **no se confunde con `Lateral`**: son dos papeles distintos del vocabulario del emisor |
+
+#### 6.21.3 Miembros
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `Posicion` | `Position` | Miembro de `Piece` y de `Component` | `Definicion-Modelo-De-Dominio.md` §2.3 y §2.4: **es la identidad de la pieza** |
+| `Tipo` | `Type` | Miembro de `Piece` y de `Component` | Ídem, atributo «Tipo» de las dos |
+| `AreaDeclarada` | `DeclaredArea` | Miembro de `Piece` y de `Component` | Ídem: «se guarda tal cual, sin corregir» |
+| `AreaDerivada` | `DerivedArea` | Miembro de `Piece` | Ídem: «se guarda por separado del declarado» |
+| `VolumenDeclarado` | `DeclaredVolume` | Miembro de `Piece` | Ídem. No aplica a las figuras planas |
+| `VolumenDerivado` | `DerivedVolume` | Miembro de `Piece` | Ídem |
+| `Componentes` | `Components` | Miembro de `Piece` | Ídem: «vacío admisible en las piezas planas del conjunto raíz» |
+| `Reconstruir` | `Reconstruct` | Miembro de `Piece` | `CU-06001` §4 paso 4, «reconstruye la pieza» |
+| `Papel` | `Role` | Miembro de `Component` | `Definicion-Modelo-De-Dominio.md` §2.4 |
+| `LargoDeclarado` | `DeclaredLength` | Miembro de `Component` | Ídem, «dimensiones declaradas»; `PRODUCT-INTAKE` §20, clave `Largo` |
+| `AnchoDeclarado` | `DeclaredWidth` | Miembro de `Component` | Ídem; clave `Ancho` |
+| `RadioDeclarado` | `DeclaredRadius` | Miembro de `Component` | Ídem; clave `Radio` del `Circulo` |
+| `Declarar` | `Declare` | Miembro de `Component` | `CU-06001` §4 paso 5, «y sus componentes» |
+| `Especie` | `Kind` | Miembro de `Observation` | `Definicion-Modelo-De-Dominio.md` §2.5: la entidad es una y su especie es un atributo |
+| `PosicionDePieza` | `PiecePosition` | Miembro de `Observation` | Ídem: «es la posición **en el texto**», de modo que una figura no reconstruida sigue siendo ubicable |
+| `Campo` | `Field` | Miembro de `Observation` | Ídem: obligatorio en toda observación de especie error de validación (RN-02009) |
+| `ValorDeclarado` | `DeclaredValue` | Miembro de `Observation` | Ídem: obligatorio en las advertencias de discrepancia de valor |
+| `ValorDerivado` | `DerivedValue` | Miembro de `Observation` | Ídem |
+| `ErrorDeValidacionEn` | `ValidationErrorAt` | Miembro de `Observation` | `CU-06001` §4 paso 6: observación con **posición y campo** |
+| `DiscrepanciaDeValorEn` | `ValueDiscrepancyAt` | Miembro de `Observation` | `CU-06002` CA-04: el mensaje expresa **los dos valores**, nunca un texto genérico |
+| `CantidadDeFigurasDelConjuntoRaiz` | `RootFigureCount` | Miembro de `FigureInterpretation` | `Definicion-Contrato-Del-Validador-De-Figuras.md` §3, primera fila. **Homónimo declarado** con el miembro de `Work`, que ya tiene fila en §6.19: es el mismo concepto y el corolario 1 de §6.1 prohíbe darle un segundo nombre |
+| `Piezas` | `Pieces` | Miembro de `FigureInterpretation` | Ídem, segunda fila |
+| `Observaciones` | `Observations` | Miembro de `FigureInterpretation` | Ídem, tercera fila |
+| `Interpretar` | `Interpret` | Miembro de `IFigureValidator` | `CU-06001` §1, «leer el texto … y devolver» |
+| `ToleranciaDeComparacion` | `ComparisonTolerance` | Miembro de `LocalFigureValidator` | `CU-06002` §10: «la tolerancia de 0.01 **no es una asunción**», sale de que el emisor redondea a dos decimales |
+
+**Cuarenta filas: 3 tipos, 12 valores de conjunto cerrado y 25 miembros**, con dos homónimos
+declarados —`Base` y `Lateral`— y uno más entre catálogos, `RootFigureCount`.
+
+**Lo que NO lleva fila, y se declara para que `V-1` no lo levante como hueco:**
+
+- **`Piece`, `Component`, `Observation`, `ObservationKind` y sus dos valores, y `IFigureValidator` y
+  `LocalFigureValidator`**: los siete ya tienen fila —§6.4, §6.7 y §6.5— desde la etapa `a`. Lo que
+  la etapa `f` les agrega son **atributos y miembros**, que sí van arriba. Un tipo que se llena no
+  es un concepto nuevo.
+- **Las claves del texto del alumno** —`Tipo`, `Largo`, `Ancho`, `Radio`, `Area`, `Volumen`,
+  `Tapas`, `Bases`, `Laterales`, `Caras` y `Lado`— **no son identificadores de código y no se
+  traducen**. Son **dato del alumno**: las emite su programa y el producto se adapta al dato, nunca
+  al revés (`Definicion-Contrato-Del-Validador-De-Figuras.md` §1). Viajan además **hacia afuera**,
+  porque el campo de una observación se le muestra a la persona que escribió ese texto, y
+  traducirlo la dejaría buscando en su programa una clave que no existe. Es la misma frontera que
+  §5 declara para el vocabulario del emisor, aplicada al único lugar donde el producto **lee** ese
+  vocabulario en lugar de escribirlo.
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -1997,6 +2090,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.18 | 2026-08-16 | **Agrega §6.21, la decimoctava tabla del glosario: las 40 filas que el validador de figuras de la etapa `f` necesita, agregadas ANTES de escribir el identificador** (corolario 4 de §6.1). Son **3 tipos** —`FigureType` y `ComponentRole`, los dos conjuntos cerrados que `Definicion-Modelo-De-Dominio.md` §2.3 y §2.4 declaran como atributos «Tipo» y «Papel», y `FigureInterpretation`, el resultado de tres partes que `Definicion-Contrato-Del-Validador-De-Figuras.md` §3 exige—, **12 valores** de esos dos conjuntos, con `Base` y `Lateral` como homónimos declarados, y **25 miembros** de `Piece`, `Component`, `Observation`, `FigureInterpretation`, `IFigureValidator` y `LocalFigureValidator`. **Ningún tipo nuevo del dominio**: las tres entidades existen desde la etapa `a` y lo que esta etapa les agrega son atributos, que es la diferencia entre un tipo que se llena y un concepto nuevo. Y **una declaración de frontera**: las once claves del texto del alumno —`Tipo`, `Largo`, `Ancho`, `Radio`, `Area`, `Volumen`, `Tapas`, `Bases`, `Laterales`, `Caras` y `Lado`— **no llevan fila y no se traducen**, porque son dato del alumno y viajan hacia afuera en el campo de cada observación: traducirlas dejaría a la persona buscando en su propio programa una clave que no existe. | Orquestador SDD |
 | 1.17 | 2026-08-15 | **Agrega §6.20, la decimoséptima tabla del glosario: las 27 filas que exigió construir LA INTERFAZ de la etapa `e`, y no renombra nada del corpus.** §6.19 cubrió lo que la etapa `e` escribió del lado del servicio; ésta cubre la pieza pública, que hasta hoy tenía `Panel-De-Trabajos-Del-Alumno`, `Envio-De-Trabajo`, `Vista-De-Trabajo` y `Listado-De-La-Comision` como maqueta sin comportamiento. **27 filas: 3 tipos** —`WorkSubmissionForm`, `StudentOption` y `Group`—, **22 miembros, propiedades y valores** —las cinco salidas del cliente del servicio de datos hacia `A-10` a `A-14`, los miembros con los que las cuatro superficies dibujan el estado y sus acciones, los cuatro campos privados que nombran una decisión declarada, y los dos nombres de formulario que el marco lee— y **2 iconos** —`Open` y `Edit`, con los que el producto lleva quince de los veintiuno del catálogo de la maqueta—. Las 27 entran **antes** de escribir los identificadores, como manda el corolario 4 de §6.1, y **fuera de los 155**, con el mismo criterio de §6.12 a §6.19. **§6.1**: el rango del glosario pasa de dieciséis a **diecisiete** tablas, en la regla y en la prosa que la sigue. **§6.2**: fila nueva con las 27 y la prosa que las cuenta. **§7**: `V-1` pasa de dieciséis a **diecisiete** tablas en **sus dos apariciones** —la fila del control y la del veredicto de mecanicidad—. **Tabla de contenido**: entra §6.20. **Dos constancias que la sección deja escritas para que `V-1` no las levante como huecos**: una lista de catorce identificadores que **reusan** filas de §6.14.2, §6.15.2, §6.16.2 y §6.19.3 porque nombran **el mismo concepto** aplicado a un trabajo en lugar de a una cuenta —y el corolario 1 de §6.1 prohíbe darles un segundo nombre, que es la razón por la que el campo del diálogo se llama `_dialogsClosed` aunque acá haya un solo diálogo—, y **una colisión evitada** del mismo tipo que la de `SearchTerm` en §6.16: el filtro de estado **no** se llama `Status`, que ya nombra el estado del trabajo en §6.19.3, sino `StateFilter`. **Ninguna de las seis clases cambia de recuento**: 155 sigue siendo 155. | Orquestador SDD |
 | 1.16 | 2026-08-15 | **Agrega §6.19, la decimosexta tabla del glosario: las 47 filas que la etapa `e` necesitó, y no renombra nada del corpus.** La trae la etapa `e`, que construye **el trabajo con dueño, estado y persistencia** del lado del servicio —alta, listado, reedición y eliminación—, y que al hacerlo escribe los identificadores de la entidad `Work` y de su máquina de estados, de los cuatro casos de uso de la capa de aplicación, de los cuatro tipos que cruzan la frontera, del mapeo y del adaptador del repositorio de trabajos, y de los cinco puntos de acceso `A-10` a `A-14`. **47 filas: 16 tipos** —`WorkOperation`, `WorkOutcome`, `WorkListEntry`, `WorkDetail`, `WorkOutcomeSnapshot`, los cuatro casos de uso, los cuatro tipos del contrato, `WorkConfiguration`, `EfCoreWorkRepository` y `WorkEndpoints`—, **4 valores de conjunto cerrado** —`View` y `Delete` de `WorkOperation`, `Approve` y `Reject` de `WorkOutcome`— y **27 miembros y propiedades**. Las 47 entran **antes** de escribir los identificadores, como manda el corolario 4 de §6.1, y **fuera de los 155**, con el mismo criterio de §6.12 a §6.18. **§6.1**: el rango del glosario pasa de quince a **dieciséis** tablas, en la regla y en la prosa que la sigue. **§6.2**: fila nueva con las 47 y la prosa que las cuenta; y entra la constancia de la etapa `e` sobre los códigos, que es la de la `c` y la `d` **sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, porque los diecisiete ya estaban en §6.8 con su nombre inglés fijado por `F-03`. **§7**: `V-1` pasa de quince a **dieciséis** tablas en **sus dos apariciones** —la fila del control y la del veredicto de mecanicidad—. **Tabla de contenido**: entra §6.19. **Tres constancias que la sección deja escritas para que `V-1` y `V-3` no las levanten como huecos**: el homónimo `WORK_NOT_FOUND` de §6.9 se escribió **dos veces, una por catálogo, y no se unificó**, porque lo que separa a los dos códigos es el tipo que los contiene y unificarlos habría hecho que la capa de aplicación dependiera del ensamblado de contratos; `WorkOperation` **no lleva etiqueta castellana** porque no llega a ninguna pantalla, de modo que `V-3` no lo alcanza; y `Edit` **no lleva fila de valor propia**, porque es el mismo concepto que la operación `Edit` de `Work` y el corolario 1 de §6.1 prohíbe darle un segundo nombre. **Ninguna de las seis clases cambia de recuento**: 155 sigue siendo 155. | Orquestador SDD |
 | 1.15 | 2026-08-15 | **Agrega §6.18, la decimoquinta tabla del glosario: las 8 filas que exigió construir el GUARDIÁN 1 de `Web ADR-10003` §2, y no renombra nada del corpus.** `Web ADR-10003` §2 declara **cuatro guardianes de ruta** y la etapa `c` construyó tres; el **guardián 1** —«mientras no exista la cuenta de administrador, cualquier ruta pedida desvía al aprovisionamiento inicial; una vez que existe, esa ruta deja de armar formulario para siempre y desvía de forma neutra, sin explicar por qué»— **no se construyó**, y la causa no fue un olvido sino **un faltante de la especificación**: la pieza pública no tenía **ningún punto de acceso con el que preguntar si el laboratorio ya tiene administrador** —`A-03` configura, `A-16` responde por la salud y `A-06` exige ser administrador—. **8 filas: 3 tipos** —`LaboratoryProvisioning`, el cuerpo de la respuesta del punto nuevo `A-17`, que va en el mismo espacio de nombres que `ServiceHealth` porque §6.10 ya lo declara para «estado del servicio»; `ProvisioningStateProbe`, que consulta y **recuerda**; y `ProvisioningGateMiddleware`, con la forma de nombre de `PanelSessionGateMiddleware`, que es el guardián 2— **y 5 miembros** —`AdministratorConfigured`, la **única** propiedad de la respuesta; `IsConfiguredAsync`, que lleva **el mismo nombre en las dos capas** que preguntan lo mismo, por el corolario 1 de §6.1; `GetLaboratoryProvisioningAsync`, con la forma de `GetServiceHealthAsync`, que es la otra consulta anónima de sólo lectura; `NeutralDestination`, cuyo nombre dice **neutro** para que nadie le cuelgue después un motivo en la dirección; y `ExemptPrefixes`, la lista **cerrada** de lo que el guardián no desvía—. **§6.18 trae cuatro declaraciones de ausencia**: las constantes de ruta, con el criterio de la etapa `c` y de la 1.12; `IsExempt`, mecánica privada, con el criterio con el que `PanelSessionGateMiddleware` dejó fuera `HasSession` e `IsOfThePanel`; la batería `ProvisioningGateTests`, con el criterio de §6.16 y §6.17; y **`WalkthroughSetting` con su valor `PanelWalkthroughWithoutSession`**, que el guardián 1 **reusa** en lugar de declarar una segunda puerta de servicio —sus filas de §6.14.2 amplían su tercera columna—. Se actualizan §6.1 —el rango pasa a **quince tablas**—, §6.2 —fila propia de §6.18 y prosa de la decimoquinta—, `V-1` de §7 en sus dos apariciones y la tabla de contenido. **No renombra ningún identificador del corpus, no toca las catorce tablas anteriores y no mueve ninguna cifra de §2 ni el total de 155.** Sube minor. | Guardián de aprovisionamiento (construcción y recuento) |

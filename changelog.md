@@ -289,3 +289,96 @@ Se actualiza **en la rama de la etapa, no después de la fusión** (intake §16 
   en esta etapa todo trabajo queda en `Borrador`**, porque entregar exige un resultado de
   interpretación que aún no existe.
 - No hizo falta ningún guion nuevo ni ningún atributo nuevo: alcanzó con los nueve ya autorizados.
+
+---
+
+## Etapa `f` — Importación y validación
+
+**Rama:** `codigo/etapa-f-validador`
+**EN CURSO.** Esta entrada se escribe **en la rama de la etapa**, como manda el intake §16, y se
+completa a medida que la etapa avanza. Lo que sigue es lo que ya está construido y verificado.
+
+### Agregado
+
+- **El validador de figuras**, que es la mitad de riesgo del producto: el intake declara en su §11
+  que el defecto que más veces se repite es **escribir el validador sin leer el análisis** (`RN-B3`),
+  con probabilidad alta e impacto alto, y que la consecuencia es que «la aplicación no sirve para el
+  dato que existe». Su mitigación declarada es la batería obligatoria, y por eso la batería se
+  escribió **con los ocho escenarios del intake §20 como fixtures y antes que ninguna otra cosa**.
+- **Las tres entidades que las cinco etapas anteriores dejaron declaradas y vacías**: `Piece`,
+  `Component` y `Observation`, con los atributos de `Definicion-Modelo-De-Dominio.md` §2.3, §2.4 y
+  §2.5. Con eso **las cinco entidades del dominio quedan modeladas**.
+- **Dos conjuntos cerrados nuevos**, `FigureType` y `ComponentRole`, que son los atributos «Tipo» y
+  «Papel» del modelo. El tipo tiene **siete** valores y no seis: `RectanguloDesarrollado` es un
+  discriminante del texto y **no es un tipo de pieza**, porque aparece sólo como componente.
+- **El puerto de validación de figuras, con su único miembro.** Un solo miembro para las dos mitades
+  del contrato —interpretar y verificar—: el consumidor pide una interpretación y recibe las
+  observaciones de las dos especies juntas, porque lo que el dominio necesita para resolver el
+  estado es el conjunto completo.
+- **`LocalFigureValidator`**, el adaptador, con las cuatro trampas del formato **declaradas de
+  entrada y no descubiertas después**: `T1`, las claves `Tapas` y `Bases` como sinónimas del
+  ortoedro —la línea que desbloquea el dibujo de todos los ortoedros que el visualizador previo
+  pierde—; `T2`, la lectura con tolerancia a comas finales, porque el texto del alumno **no es JSON
+  estrictamente válido** y eso es un hecho del producto; `T3`, la cara del cubo aceptada como
+  `Cuadrado` y como `Rectangulo`; y `T4`, los valores calculados erróneos **señalados, nunca
+  corregidos ni rechazados**.
+- **La batería obligatoria: quince pruebas sobre los diez casos** de `RT` §11 más el décimo de §21,
+  con los ocho textos transcriptos **carácter por carácter** del intake —comas finales, sangría
+  irregular y `"3,50"` entre comillas incluidos—. **Ningún dato de prueba se inventó**, que es la
+  regla de delivery 5 de §15.
+- **El operador estricto de la tolerancia, anclado en una prueba y no sólo en la prosa**: una
+  diferencia de 0.010 no advierte y una de 0.011 sí. Es lo que hace que `E-1` devuelva **dos**
+  advertencias y no tres, porque el área del cilindro difiere en exactamente 0.01.
+- `Norma-De-Nomenclatura.md` **1.18** §6.21: los **40** identificadores que esta etapa necesitó —3
+  tipos, 12 valores de conjunto cerrado y 25 miembros—, agregados **antes** de escribirlos, por el
+  corolario 4 de §6.1.
+
+### Decidido en esta etapa, y elevado al punto de control
+
+- **De dónde sale la altura del ortoedro, que es lo único que las fuentes no enuncian como regla.**
+  Los dos escenarios que la fijan **la ponen en claves distintas**: en `E-1` y `E-2` el lateral es
+  `Largo 21 · Ancho 7` sobre bases de `7 · 7` y el volumen derivado declarado es `7·7·21`, con la
+  altura en `Largo`; en `E-7` el lateral es `Largo 6 · Ancho 8` sobre bases de `6 · 4` y el intake
+  declara «altura = `Laterales[0].Ancho` = 8». La regla que satisface a los dos, y la única que se
+  sostiene geométricamente, es que **la altura es la dimensión del lateral que no es un lado de la
+  base**. Tomar siempre `Largo` rompe `E-7`; tomar siempre `Ancho` rompe `E-1`, que es el caso de
+  prueba canónico del producto.
+- **Un conjunto de componentes incompleto no se suma.** El ortoedro de `E-8` trae `Bases` y no trae
+  `Laterales`: sumar lo que hay daría 48.00 contra 208.00 declarados y emitiría **una advertencia
+  que ninguna fuente pide**, sobre una diferencia que no es del alumno sino de lo que su texto no
+  incluyó. Sin el conjunto completo, el área no se deriva y no se compara.
+- **El texto del mensaje no es un atributo de la observación.** El modelo declara cuatro atributos y
+  ninguno es una frase: la observación lleva la especie, la posición, el campo y los dos valores, y
+  quien la redacta para la persona es la pieza pública. Guardar una frase acá la ataría al idioma y
+  a la redacción del día en que se escribió. Hay una prueba que lo fija.
+- **Los escenarios `E-3` y `E-4` traen una figura suelta y no un array**, y se aceptan así: el
+  conjunto raíz de un texto de ese tipo tiene una figura. Rechazarlos dejaría **dos casos de la
+  batería obligatoria sin poder ejecutarse**.
+- **Las dos observaciones que no son de ninguna figura** —conjunto raíz vacío y texto ilegible—
+  llevan el campo `Texto`. `CU-06001` FA-03 y FA-04 declaran que van sin posición y no dicen con qué
+  campo; RN-02009 exige campo, y ponerle el nombre de una clave afirmaría que el defecto está en un
+  campo que nadie leyó.
+- **La batería vive en el proyecto de pruebas de integración y no en uno propio.** `CU-06001` §3
+  exige poder ejercerla sin motor de persistencia, y así se ejerce: no levanta ningún host, no abre
+  ninguna base y no toca la red. Agregar un cuarto proyecto de pruebas es una decisión de estructura
+  que esta etapa no toma por su cuenta.
+- **La puerta de dominio de la etapa `e` se relevó por tercera vez, y es la última.** Exigía que las
+  tres entidades del texto del alumno siguieran sin atributos, y **se puso en rojo al escribir el
+  primero**: hizo exactamente lo que su comentario prometía. En su lugar quedan dos puertas nuevas
+  con contenido —que las tres entidades sólo se escriban por sus propias fábricas, y que la
+  observación no lleve mensaje redactado—.
+
+### No hecho, y declarado
+
+- **La etapa no está cerrada.** Lo construido es el validador con su batería. **Falta la
+  orquestación**: el caso de uso de envío que adopta la interpretación y deja que el dominio
+  resuelva el estado, su punto de acceso, el contrato de respuesta con las observaciones, y la
+  pantalla que se las muestra al alumno. Hasta que eso exista, **el puerto sigue sin conectar en la
+  composición** y todo trabajo sigue quedando en `Borrador`, igual que en la etapa `e`.
+- **`PT-02` y `PT-03` no se midieron**: la transición `f` → `g` las exige **antes de comprometer la
+  etapa `g`**, no para cerrar ésta.
+- **Cuántos tipos reconstruibles hay sigue siendo punto abierto aguas arriba.** Los seis de
+  `Definicion-Contrato-Del-Validador-De-Figuras.md` §5 son los que los escenarios ejercitan; el
+  análisis menciona siete clases en `Ejemplo1` y diez en `Ejemplo2`, y **ninguna fuente las
+  enumera**. Un tipo fuera de los seis produce error de validación, que es correcto y puede no ser
+  lo deseado. Lo resuelve el Product Owner con la enumeración de las clases de la Actividad 1.
