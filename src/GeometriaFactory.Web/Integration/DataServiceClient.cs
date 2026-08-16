@@ -263,6 +263,25 @@ public sealed class DataServiceClient
     /// fallo**: la petición se cumplió y el trabajo quedó guardado con su texto. En la etapa `e`
     /// ése es el único resultado posible, porque el texto todavía no se interpreta.
     /// </remarks>
+    /// <summary>
+    /// `A-18` — Pide la interpretación de un texto **sin guardar nada**.
+    /// </summary>
+    /// <remarks>
+    /// ES LA ÚNICA SALIDA DE ESTA PIEZA QUE NO PERSIGUE UN TRABAJO: no lleva identificador y no
+    /// devuelve estado, porque no hay trabajo del que hablar. Lo que trae son las piezas para
+    /// dibujar y las observaciones para leer.
+    /// </remarks>
+    public Task<DataServiceOutcome<WorkInterpretationResponse>> InterpretWorkAsync(
+        string originalJson,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<WorkInterpretationRequest, WorkInterpretationResponse>(
+            HttpMethod.Post,
+            "/interpretaciones",
+            new WorkInterpretationRequest(originalJson),
+            accessToken,
+            cancellationToken);
+
     public Task<DataServiceOutcome<WorkSubmissionResponse>> SubmitWorkAsync(
         WorkSubmissionRequest request,
         string? accessToken,

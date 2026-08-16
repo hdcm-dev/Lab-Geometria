@@ -266,8 +266,12 @@ grep -q "$EMAIL" /tmp/anonimo.html && bad "sin marca sigue dibujando la identida
 # superficie que ahora existe en lugar de sobre su ausencia.
 GUION=/interaction/surface-interaction.js
 ARCHIVO=src/GeometriaFactory.Web/wwwroot$GUION
+# Los NUEVE de la etapa `d` más los DOS que agrega la etapa `g`: el atributo con el que la
+# pantalla le baja las piezas al guion, y la marca con la que el guion recuerda que ya dibujó esa
+# escena. Los dos son **marcado servido**, no una vía nueva: el guion sigue sin pedir nada.
 AUTORIZADOS='data-gf-copy-source data-gf-copy-label data-gf-copy-done data-gf-copy-unavailable
-data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-dialog-dismiss'
+data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-dialog-dismiss
+data-gf-viewer-pieces data-gf-viewer-drawn'
 
 printf '   -- 3.a · inventario cerrado de guiones propios, sobre las ocho direcciones --\n'
 ajenos=0
@@ -297,12 +301,12 @@ for prohibido in 'fetch *\(' 'XMLHttpRequest' 'WebSocket' 'EventSource' 'sendBea
   same "$n" 0 "el guion no contiene \`$prohibido\`"
 done
 
-printf '   -- 3.c · el alcance del guion son los NUEVE atributos autorizados --\n'
+printf '   -- 3.c · el alcance del guion son los ONCE atributos autorizados --\n'
 usados=$(grep -oE 'data-gf-[a-z-]+' "$ARCHIVO" | sort -u)
 echo "        atributos que el guion lee: $(echo "$usados" | tr '\n' ' ')"
 fuera=$(comm -23 <(echo "$usados") <(echo "$AUTORIZADOS" | tr ' ' '\n' | sort -u))
 if [ -z "$fuera" ]; then
-  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los nueve autorizados"
+  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los once autorizados"
 else
   bad "el guion lee atributos NO autorizados: $(echo "$fuera" | tr '\n' ' ')"
 fi

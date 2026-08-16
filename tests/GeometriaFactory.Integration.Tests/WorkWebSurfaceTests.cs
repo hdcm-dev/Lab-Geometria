@@ -706,6 +706,23 @@ public sealed class WorkWebSurfaceTests : IDisposable
 
     // ---- Los envíos de formulario ----
 
+    /// <summary>
+    /// Pide una previsualización desde la superficie: mismo formulario, **otra acción**.
+    /// </summary>
+    private Task<HttpResponseMessage> PostPreviewAsync(
+        HttpResponseMessage page,
+        string html,
+        string mark,
+        string originalJson) =>
+        PostAsync(page, html, mark, NewWorkRoute, "work-submission", new Dictionary<string, string>
+        {
+            ["Input.Name"] = string.Empty,
+            ["Input.DeclaredDate"] = string.Empty,
+            ["Input.Description"] = string.Empty,
+            ["Input.OriginalJson"] = originalJson,
+            ["Input.Action"] = "preview",
+        });
+
     private Task<HttpResponseMessage> PostSubmissionAsync(
         HttpResponseMessage page,
         string html,
@@ -722,6 +739,68 @@ public sealed class WorkWebSurfaceTests : IDisposable
             ["Input.Description"] = description ?? string.Empty,
             ["Input.OriginalJson"] = originalJson,
         });
+
+    // ---- LA PREVISUALIZACIÓN, QUE ES EL CIRCUITO ENTERO DE `ADR-08006` --------------------------
+
+    /// <summary>
+    /// El alumno pega el texto, previsualiza, y **las piezas bajan dentro del marcado** para que el
+    /// visor las dibuje. Sin guardar nada y sin que el navegador hable con el servicio de datos.
+    /// </summary>
+    [Fact]
+    public async Task PreviewingDrawsWithoutSavingAndWithoutTheBrowserCallingTheDataService()
+    {
+        var mark = await SignInAsStudentAsync();
+
+        using var form = await GetAsync(NewWorkRoute, mark);
+        var formHtml = Read(await form.Content.ReadAsStringAsync());
+
+        using var previewed = await PostPreviewAsync(form, formHtml, mark, Scenarios.E1);
+        var html = Read(await previewed.Content.ReadAsStringAsync());
+
+        Trace("1 · POST de la previsualización", previewed);
+        Assert.Equal(HttpStatusCode.OK, previewed.StatusCode);
+
+        // LAS PIEZAS ESTÁN EN EL MARCADO, que es lo que permite que el guion no salga a la red.
+        Assert.Contains("data-gf-viewer-pieces", html, StringComparison.Ordinal);
+        Assert.Contains("\"position\":0", html, StringComparison.Ordinal);
+        Assert.Contains("Cylinder", html, StringComparison.Ordinal);
+        Assert.Contains("3 de 3", html, StringComparison.Ordinal);
+
+        // Y EL PAQUETE DEL VISOR SE SIRVE **EN ESTA SUPERFICIE**, que es la que dibuja.
+        Assert.Contains("js/geometriafactory-visor.js", html, StringComparison.Ordinal);
+
+        // NO SE GUARDÓ NADA. Es la propiedad que `A-18` tiene que sostener, vista desde la
+        // pantalla: previsualizar no es una forma encubierta de guardar.
+        Assert.Equal(0, await CountWorksAsync());
+
+        // Y NO SE SIMULA UNA ENTREGA: la pantalla no habla de estados al previsualizar.
+        Assert.DoesNotContain("Tu trabajo quedó en estado", html, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Un texto con una figura que no se puede interpretar previsualiza igual: dibuja lo que se
+    /// pudo y **enumera la que falta con su posición**.
+    /// </summary>
+    [Fact]
+    public async Task PreviewingATextWithABadFigureListsTheOneThatCouldNotBeDrawn()
+    {
+        var mark = await SignInAsStudentAsync();
+
+        using var form = await GetAsync(NewWorkRoute, mark);
+        var formHtml = Read(await form.Content.ReadAsStringAsync());
+
+        using var previewed = await PostPreviewAsync(form, formHtml, mark, Scenarios.E5);
+        var html = Read(await previewed.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, previewed.StatusCode);
+
+        // DE DOS FIGURAS SE INTERPRETÓ UNA, y la que falta se nombra con su posición: que
+        // desaparezca sin decir cuál es el fallo silencioso que este producto elimina.
+        Assert.Contains("1 de 2", html, StringComparison.Ordinal);
+        Assert.Contains("Figura 2 · posición 1", html, StringComparison.Ordinal);
+
+        Assert.Equal(0, await CountWorksAsync());
+    }
 
     private Task<HttpResponseMessage> PostDeletionAsync(
         HttpResponseMessage page, string html, Guid workId, string mark) =>

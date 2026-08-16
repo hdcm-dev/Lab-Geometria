@@ -300,13 +300,66 @@
         }
     }, true);
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyEnhancements);
-    } else {
-        applyEnhancements();
+
+    // ---- El visor: dibujar lo que la pantalla ya trajo -------------------------------------
+    //
+    // ESTE BLOQUE NO PIDE NADA. Las piezas bajan **dentro del marcado**, en `data-gf-viewer-pieces`,
+    // porque esta pantalla ya se las pidió al servicio de datos del lado del servidor. Es lo que
+    // permite que este guion siga sin una sola salida a la red: `RA-01` prohíbe que un guion del
+    // navegador invoque al servicio, y el inventario de la etapa `c` lo mide con umbral cero.
+    //
+    // Y NO CONOCE EL FORMATO DEL ALUMNO: lee piezas ya reconstruidas y se las pasa al visor tal
+    // como llegaron (`ADR-08006`).
+    function drawScenes() {
+        var scenes = document.querySelectorAll('[data-gf-viewer-pieces]');
+
+        for (var i = 0; i < scenes.length; i++) {
+            var scene = scenes[i];
+
+            if (scene.dataset.gfViewerDrawn === 'yes') {
+                continue;
+            }
+
+            var viewer = window.GeometriaFactoryViewer;
+
+            if (!viewer) {
+                // Sin visor cargado no hay escena, y **no se simula una**: el recuadro queda con su
+                // leyenda y la persona puede enviar igual, que es lo que la nota de al lado dice.
+                continue;
+            }
+
+            var pieces;
+
+            try {
+                pieces = JSON.parse(scene.dataset.gfViewerPieces);
+            } catch (error) {
+                continue;
+            }
+
+            var id = viewer.initialize(scene);
+
+            if (!id) {
+                continue;
+            }
+
+            viewer.loadPieces(id, pieces);
+
+            // LA INSTANCIA SE LIBERA AL DEJAR LA PÁGINA, que es la mitad de `PT-02` que se rompe
+            // sin que nada falle hoy: diez navegaciones sin liberar dejan diez contextos vivos.
+            scene.dataset.gfViewerDrawn = 'yes';
+            window.addEventListener('pagehide', function () { viewer.destroy(id); }, { once: true });
+        }
     }
 
-    new MutationObserver(applyEnhancements).observe(document.documentElement, {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyEnhancements);
+        document.addEventListener('DOMContentLoaded', drawScenes);
+    } else {
+        applyEnhancements();
+        drawScenes();
+    }
+
+    new MutationObserver(function () { applyEnhancements(); drawScenes(); }).observe(document.documentElement, {
         childList: true,
         subtree: true,
     });
