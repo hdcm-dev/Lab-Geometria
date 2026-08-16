@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md) 1.1 §2 y §2.1; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md); [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Visor/Mini-Plan.md)
+**Trazabilidad upstream:** [`Estrategia-Testing.md`](../../Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md) 1.1 §2 y §2.1; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md); [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Visor/Mini-Plan.md)
 **Trazabilidad downstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops` y `10-Examples`
 
 ---
@@ -95,8 +95,8 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | Personas | **Una**, `equipo_n = 1` |
 | Ambiente de construcción | El contenedor de desarrollo, con el entorno de ejecución de la cadena de herramientas |
 | Ambiente de ejecución | Un navegador con **capacidad gráfica tridimensional**, más un conductor capaz de contar peticiones y de leer el almacenamiento. **No hay backend**, y su ausencia es una propiedad exigida y no una carencia |
-| Datos | Los textos de los **ocho** escenarios del intake §20, transcriptos sin modificación, y el elemento de dibujo de tamaño cero de [`Estrategia-Testing.md`](Estrategia-Testing.md) §5 |
-| Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función |
+| Datos | Los textos de los **ocho** escenarios del intake §20, transcriptos sin modificación, y el elemento de dibujo de tamaño cero de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5 |
+| Herramientas | Las de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §3, nombradas por función |
 | Página de prueba | El sample **S-1**, que es a la vez ejemplo y material de prueba, y cuyo desarrollo pertenece a `10-Examples` |
 
 ## 7. Control de cambios

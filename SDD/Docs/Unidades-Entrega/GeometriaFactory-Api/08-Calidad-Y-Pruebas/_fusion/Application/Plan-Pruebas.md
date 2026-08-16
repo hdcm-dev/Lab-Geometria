@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.0; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) 1.1 §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Application/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md)
+**Trazabilidad upstream:** [`Estrategia-Testing.md`](../../Estrategia-Testing.md) 1.0; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) 1.1 §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Application/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md)
 **Trazabilidad downstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -52,7 +52,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 
 - [ ] Todos los `TC-XX` en alcance de la etapa están escritos, ejecutados y en verde.
 - [ ] **Ningún `TC-XX` que estaba en verde en la etapa anterior pasó a rojo** sin justificación escrita en el informe de cierre.
-- [ ] La cobertura por componente alcanza los umbrales de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 en los componentes que la etapa toca. Gate condicionado mientras el valor siga rotulado [ASUNCIÓN].
+- [ ] La cobertura por componente alcanza los umbrales de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 en los componentes que la etapa toca. Gate condicionado mientras el valor siga rotulado [ASUNCIÓN].
 - [ ] `TC-04026` da **0** en sus tres recuentos: ninguna prueba de la etapa abrió el almacén real.
 - [ ] `TC-04027` sigue dando **1** dependencia saliente y **0** de las prohibidas.
 - [ ] `TC-04028` cierra en las dos direcciones sobre las condiciones que la etapa incorporó.
@@ -74,7 +74,7 @@ Alineados con los **seis** riesgos arquitectónicos de [`../05-Arquitectura-Tecn
 | RQ-04 | Que un caso de uso reparta su efecto entre dos unidades de trabajo y la baja deje trabajos huérfanos | Alto | Baja | `TC-04029`, con la baja de cuenta como caso testigo y el recuento de aperturas instrumentado |
 | RQ-05 | Que el consumidor trate el resultado tipado como excepción y descarte los rechazos | Medio | Media | `TC-04031` verifica que ninguna de las 36 condiciones lance; el efecto sobre el consumidor se verifica en `GeometriaFactory-Api` |
 | RQ-06 | Que el nombre del cuarto puerto se fije sin punto de control y haya que renombrar los dobles | Bajo, de retrabajo | Alta | Criterio de entrada de §2: `BT-04002` cerrada **antes** de escribir los casos de prueba que usan ese doble |
-| RQ-07 | **Que un escenario del intake §20 se sustituya por un resultado de interpretación inventado** «porque es más cómodo de armar» | Alto | Media | [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 lo prohíbe; el criterio de salida exige que los ocho escenarios sigan siendo el material de `TC-04015` a `TC-04017` y de `TC-04022` |
+| RQ-07 | **Que un escenario del intake §20 se sustituya por un resultado de interpretación inventado** «porque es más cómodo de armar» | Alto | Media | [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6 lo prohíbe; el criterio de salida exige que los ocho escenarios sigan siendo el material de `TC-04015` a `TC-04017` y de `TC-04022` |
 | RQ-08 | **Que la matriz de cobertura quede desactualizada** y siga diciendo `Pendiente` con pruebas ya escritas | Medio | Alta, es el anti-patrón más común de la categoría | Criterio de salida de §3: la matriz se actualiza al cerrar cada etapa, y su desactualización bloquea el cierre |
 
 ## 5. Plan por etapa
@@ -98,8 +98,8 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | --- | --- |
 | Personas | **Una**, `equipo_n = 1` (intake §2), que ejerce a la vez la construcción, la prueba y la aprobación |
 | Ambiente | El contenedor de desarrollo, único ambiente de este proyecto de código. **No hay base de datos que preparar**, y el umbral de pruebas que la tocan es 0 |
-| Datos | Los **ocho** escenarios del intake §20, en la forma que [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 declara; los **cuatro** dobles de puerto y los **cuatro** fixtures compartidos de su §5 |
-| Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a` |
+| Datos | Los **ocho** escenarios del intake §20, en la forma que [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6 declara; los **cuatro** dobles de puerto y los **cuatro** fixtures compartidos de su §5 |
+| Herramientas | Las de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a` |
 | Guiones | `scripts/build.sh` y `scripts/test.sh`, que son los que el intake §17.1.P.8 · GeometriaFactory-Application declara como puertas |
 
 ## 7. Control de cambios

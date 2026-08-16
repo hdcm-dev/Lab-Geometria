@@ -146,7 +146,7 @@ Nueve filas, una por invariante. La columna de aporte es la de `05` §10.3, que 
 
 ## 7. Cobertura por capa
 
-La partición es por los **ocho** componentes de `05` §3.1, no por capas de despliegue: este proyecto de código no tiene ninguna. Los umbrales son los de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2.
+La partición es por los **ocho** componentes de `05` §3.1, no por capas de despliegue: este proyecto de código no tiene ninguna. Los umbrales son los de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2.
 
 | Componente | Líneas medidas | Ramas medidas | Mutation score medido | Umbral mínimo (líneas / ramas / mutación) |
 | --- | --- | --- | --- | --- |

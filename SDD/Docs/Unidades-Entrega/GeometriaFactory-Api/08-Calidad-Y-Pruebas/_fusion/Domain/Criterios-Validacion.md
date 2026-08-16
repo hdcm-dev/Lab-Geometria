@@ -52,7 +52,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
 | CV-08 | La batería de dominio completa termina en menos de **10 segundos** | 10 s **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain, asunción `A-5` de §22]** | Duración total reportada por el ejecutor en la etapa `test` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
-| CV-09 | La cobertura alcanza **90 %** de líneas y **85 %** de ramas, **por componente y no como número global** | 90 / 85 **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Domain, asunción `A-3` de §22]**, con los tres componentes que suben declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
+| CV-09 | La cobertura alcanza **90 %** de líneas y **85 %** de ramas, **por componente y no como número global** | 90 / 85 **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Domain, asunción `A-3` de §22]**, con los tres componentes que suben declarados en [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
 | CV-10 | El archivo de proyecto declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | 0 y 0 | `TC-02024` y revisión del pull request | **Bloqueante** |
 | CV-11 | El catálogo de condiciones cierra en las dos direcciones | 42 de 42 y 0 fuera | `TC-02023` | **Bloqueante** |
 | CV-12 | Los nueve invariantes están ejercidos sin dobles | 9 de 9, 0 dobles | `TC-02026` | **Bloqueante** |
@@ -77,7 +77,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-18 | Cobertura por componente cumplida, con los cinco componentes reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-09` |
+| CV-18 | Cobertura por componente cumplida, con los cinco componentes reportados por separado | Tabla de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-09` |
 | CV-19 | Mutation score en dominio | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2 para el tipo `library`. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre en el pipeline (hueco declarado en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7). Hasta entonces se reporta «sin medir» |
 | CV-20 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-13` |
 | CV-21 | Ningún caso de prueba está deshabilitado sin motivo escrito en su fila del catálogo | 0 deshabilitados sin motivo | **Bloqueante** |

@@ -159,7 +159,7 @@ La partición es por los **seis** componentes de `05` §3.1, dos de los cuales n
 
 **«Sin medir» y no «0 %».** No hay bundle construido.
 
-**No hay columna de líneas, de ramas ni de mutation score**, y las tres ausencias están declaradas con su motivo en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2: el intake pone un gate de inspección **en lugar de** la cobertura de líneas, y mutar código de dibujo produciría mutantes que sólo una comparación de imágenes podría matar, técnica que §1 de ese documento descarta con su fundamento.
+**No hay columna de líneas, de ramas ni de mutation score**, y las tres ausencias están declaradas con su motivo en [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2: el intake pone un gate de inspección **en lugar de** la cobertura de líneas, y mutar código de dibujo produciría mutantes que sólo una comparación de imágenes podría matar, técnica que §1 de ese documento descarta con su fundamento.
 
 ## 8. Huecos identificados
 
@@ -169,7 +169,7 @@ La partición es por los **seis** componentes de `05` §3.1, dos de los cuales n
 | **La versión del motor de dibujo no está anclada** (`05` §11 `PA-01`, `BT-12009`) | Si la versión que se adopte exige una interfaz distinta de la del visualizador previo, la capa 3 se rehace y varios casos de prueba se reescriben | `BT-12009`, antes de comprometer la etapa `g`, que es cuando se miden `PT-02` y `PT-03` |
 | **La versión mínima de navegador no está fijada** (`05` §11 `PA-04`) | El requisito se declara **por capacidad** y no por versión, de modo que `TC-12002` verifica la ausencia de capacidad gráfica y no una versión | El Product Owner sobre su propio documento, sin fecha comprometida. **No es bloqueante** |
 | ~~**No hay filas `VER-XX` en la matriz de sensado de deriva**~~ · **Cerrado el 2026-08-11** | Se declaraba porque las sondas de contrato y comportamiento que la categoría 10 aporta todavía no existían | **Cerrado**: [`../10-Examples/`](../10-Examples/) se emitió en su pasada de diseño y desarrolló el sample **S-1** en **tres** partes, con un contrato de verificación cada una. [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.1 les dio de alta las filas `SD-12013`, `SD-12014` y `SD-12015`, todas en `Sin verificar`, y pasó de **doce** a **quince** sondas. La fila se conserva con su desenlace en lugar de retirarse |
-| **Las pruebas de extremo a extremo exigen un navegador con capacidad gráfica en el entorno de ejecución** | Un entorno de integración continua sin esa capacidad no puede medir `PT-02`, `TC-12016` ni `TC-12017` | Es una condición del ambiente, declarada en [`Estrategia-Testing.md`](Estrategia-Testing.md) §7. Su provisión concreta pertenece a `09-Devops` |
+| **Las pruebas de extremo a extremo exigen un navegador con capacidad gráfica en el entorno de ejecución** | Un entorno de integración continua sin esa capacidad no puede medir `PT-02`, `TC-12016` ni `TC-12017` | Es una condición del ambiente, declarada en [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §7. Su provisión concreta pertenece a `09-Devops` |
 
 ## 9. Control de cambios
 

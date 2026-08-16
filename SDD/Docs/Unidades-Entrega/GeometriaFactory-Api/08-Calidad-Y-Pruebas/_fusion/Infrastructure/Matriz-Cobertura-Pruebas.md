@@ -126,7 +126,7 @@ Siete filas, una por regla conceptual de [`../02-Especificacion-Funcional/Modelo
 
 ## 6. La batería del validador contra los escenarios
 
-Es la tabla de `05` §10.5 con la columna del caso de prueba que la materializa. **Diez filas, ninguna agrupada.** El detalle de cada escenario está en [`Estrategia-Testing.md`](Estrategia-Testing.md) §6.
+Es la tabla de `05` §10.5 con la columna del caso de prueba que la materializa. **Diez filas, ninguna agrupada.** El detalle de cada escenario está en [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6.
 
 | # | Caso de la batería | Escenario | Caso de prueba | Estado |
 | --- | --- | --- | --- | --- |
@@ -145,7 +145,7 @@ Es la tabla de `05` §10.5 con la columna del caso de prueba que la materializa.
 
 ## 7. Cobertura por capa
 
-La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son los de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2.
+La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son los de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2.
 
 | Componente | Líneas medidas | Ramas medidas | Mutation score medido | Umbral mínimo (líneas / ramas / mutación) |
 | --- | --- | --- | --- | --- |

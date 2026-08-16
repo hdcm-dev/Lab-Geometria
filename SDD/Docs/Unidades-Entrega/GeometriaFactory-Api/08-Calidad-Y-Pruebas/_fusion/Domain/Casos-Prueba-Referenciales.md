@@ -35,8 +35,8 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 
 **Vocabulario de este catálogo**, definido acá la primera vez que aparece y no redefinido después:
 
-- **Nivel**: la posición de una prueba en la pirámide de [`Estrategia-Testing.md`](Estrategia-Testing.md) §1 — unitario o integración interna.
-- **Fixture**: un constructor de entidad compartido, de los cuatro que declara [`Estrategia-Testing.md`](Estrategia-Testing.md) §5.
+- **Nivel**: la posición de una prueba en la pirámide de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §1 — unitario o integración interna.
+- **Fixture**: un constructor de entidad compartido, de los cuatro que declara [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5.
 - **Prueba de inspección**: la que comprueba una propiedad estructural del proyecto de código y no una regla de negocio.
 - **Resultado de interpretación**: el conjunto de piezas y observaciones que el consumidor le aporta al dominio ya producido. El dominio **no lo produce**: lo adopta.
 

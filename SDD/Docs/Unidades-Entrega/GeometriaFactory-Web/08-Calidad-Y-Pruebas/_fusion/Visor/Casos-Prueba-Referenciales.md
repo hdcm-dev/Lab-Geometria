@@ -32,9 +32,9 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 
 **Vocabulario propio de este catálogo**, declarado acá la primera vez que aparece:
 
-- **Nivel**: la posición en la pirámide de [`Estrategia-Testing.md`](Estrategia-Testing.md) §1 — unitario, integración, extremo a extremo en página, o inspección del artefacto generado.
+- **Nivel**: la posición en la pirámide de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §1 — unitario, integración, extremo a extremo en página, o inspección del artefacto generado.
 - **Condición de medición**: el estado en que hay que poner la escena para que la medición valga. Para cuatro de las **seis** propiedades transversales, `02` §6 la declara, y es **vinculante**.
-- **Umbral cero**: la forma de aserción de una propiedad que es una **ausencia**. Un umbral cero sin condición de medición es un caso de prueba mal escrito ([`Estrategia-Testing.md`](Estrategia-Testing.md) §4).
+- **Umbral cero**: la forma de aserción de una propiedad que es una **ausencia**. Un umbral cero sin condición de medición es un caso de prueba mal escrito ([`Estrategia-Testing.md`](../../Estrategia-Testing.md) §4).
 - **Recorrido de ida y vuelta**: pasar de un trabajo a otro y volver, que es lo que `PT-02` cuenta diez veces. Se escribe siempre calificado, porque «recorrido» tiene un segundo referente en esta cadena.
 
 ## 2. Catálogo de casos de prueba

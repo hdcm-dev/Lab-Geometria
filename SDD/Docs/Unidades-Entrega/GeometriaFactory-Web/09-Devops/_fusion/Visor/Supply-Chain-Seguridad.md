@@ -95,7 +95,7 @@ El bundle **sí es un archivo que se traslada** —se copia al anfitrión y se s
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
 | Estático del fuente | **Existe**: la verificación de tipos del lenguaje fuente ocurre en el empaquetado, y su falla es falla de `QG-01` | Intake §17.2.P.1 · GeometriaFactory-Visor y §17.2.P.8 · GeometriaFactory-Visor |
-| Estático **del artefacto generado** | **Existe, bloquea y es la verificación característica de este proyecto de código**: recuentos sobre el bundle —funciones expuestas, identificadores globales, ocurrencias de las tres formas de petición, claves escritas— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Testing.md) §1 y §2; `QG-04`, `QG-05` y `QG-06` |
+| Estático **del artefacto generado** | **Existe, bloquea y es la verificación característica de este proyecto de código**: recuentos sobre el bundle —funciones expuestas, identificadores globales, ocurrencias de las tres formas de petición, claves escritas— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §1 y §2; `QG-04`, `QG-05` y `QG-06` |
 | **Dinámico** | **Existe, y es el único de los tres proyectos de código de nivel topológico 0 que lo tiene**: la medición sobre una página real, con un conductor que cuenta peticiones de red y lee el almacenamiento del navegador, **con los dos movimientos prendidos** | [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md) §2 y §6 |
 | Detección de secretos en las confirmaciones | Recomendada a nivel producto; este proyecto de código no maneja ninguno | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
 

@@ -1,0 +1,187 @@
+[
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/Matriz-Cobertura-Pruebas.md",
+  "origen": "Visor",
+  "ocurrencias": 4
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/Criterios-Validacion.md",
+  "origen": "Visor",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/README.md",
+  "origen": "Visor",
+  "ocurrencias": 8
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md",
+  "origen": "Visor",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/Casos-Prueba-Referenciales.md",
+  "origen": "Visor",
+  "ocurrencias": 4
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+  "origen": "Visor",
+  "ocurrencias": 6
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/10-Examples/_fusion/Visor/README.md",
+  "origen": "Visor",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/_fusion/Visor/Supply-Chain-Seguridad.md",
+  "origen": "Visor",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/_fusion/Visor/Entornos-Deploy.md",
+  "origen": "Visor",
+  "ocurrencias": 3
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Cobertura-Pruebas.md",
+  "origen": "Application",
+  "ocurrencias": 3
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Application/Criterios-Validacion.md",
+  "origen": "Application",
+  "ocurrencias": 6
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Application/README.md",
+  "origen": "Application",
+  "ocurrencias": 4
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md",
+  "origen": "Application",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+  "origen": "Application",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Application/Casos-Prueba-Referenciales.md",
+  "origen": "Application",
+  "ocurrencias": 8
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Application/Plan-Pruebas.md",
+  "origen": "Application",
+  "ocurrencias": 10
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Cobertura-Pruebas.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 4
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Criterios-Validacion.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/README.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 4
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Definition-Of-Done.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Casos-Prueba-Referenciales.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 6
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Plan-Pruebas.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 10
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Cobertura-Pruebas.md",
+  "origen": "Domain",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md",
+  "origen": "Domain",
+  "ocurrencias": 4
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Domain/README.md",
+  "origen": "Domain",
+  "ocurrencias": 6
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md",
+  "origen": "Domain",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md",
+  "origen": "Domain",
+  "ocurrencias": 4
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Domain/Plan-Pruebas.md",
+  "origen": "Domain",
+  "ocurrencias": 10
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+  "origen": "Application",
+  "ocurrencias": 6
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/ejemplo-03-avanzado.md",
+  "origen": "Application",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/ejemplo-02-intermedio.md",
+  "origen": "Application",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Pipeline-CI-CD.md",
+  "origen": "Application",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Pipeline-CI-CD.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Entornos-Deploy.md",
+  "origen": "Infrastructure",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Supply-Chain-Seguridad.md",
+  "origen": "Domain",
+  "ocurrencias": 2
+ },
+ {
+  "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Entornos-Deploy.md",
+  "origen": "Domain",
+  "ocurrencias": 9
+ }
+]

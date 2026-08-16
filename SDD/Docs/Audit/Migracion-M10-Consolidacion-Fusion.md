@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Migracion-M10-Consolidacion-Fusion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-16
 **Regla:** `Migracion-Rules.md` §4.3.2
 **Cierra:** el hallazgo **M-10** de [`Informe-Migracion-6.0-a-8.6.md`](Informe-Migracion-6.0-a-8.6.md) 5.0
@@ -142,6 +142,32 @@ documento concreto que sobre una tabla de salidas. El candidato es
 **`08-Calidad-Y-Pruebas/Estrategia-Testing.md` de `GeometriaFactory-Api`**: cuatro versiones, 312
 líneas únicas, 6 % de solapamiento, y es el que lleva los umbrales que no se pueden promediar.
 
+
+## 5.1 La unidad de consolidación es la categoría, no el documento — aprendido en el primer grupo
+
+**El primer grupo consolidado rompió 61 enlaces**, y no por un defecto de la consolidación sino por
+su granularidad.
+
+Al sacar `Estrategia-Testing.md` de `_fusion/Domain/`, `_fusion/Application/` y
+`_fusion/Infrastructure/`, **los demás documentos que seguían estacionados en esas mismas carpetas se
+quedaron citando a un hermano que ya no estaba**. `Plan-Pruebas.md` de `_fusion/Domain/` citaba
+`Estrategia-Testing.md` como vecino de carpeta, y esa cita dejó de resolver.
+
+**Es estructural y va a repetirse en cada grupo.** Los documentos de una capa se citan entre sí como
+vecinos, de modo que **consolidar de a un documento deja a sus hermanos apuntando al vacío**, y hay
+que reconectarlos en cada pasada. Sobre 67 grupos, eso es reconectar la misma carpeta hasta nueve
+veces.
+
+**La corrección al plan: la unidad de trabajo es la categoría completa.** Se consolidan los N
+documentos de una categoría **en una sola pasada**, y recién al terminarla se retira su carpeta
+`_fusion/` entera. Así cada carpeta se reconecta una vez y no N veces, y —más importante— **la
+categoría queda coherente consigo misma en todo momento**: no hay un estado intermedio donde la mitad
+de sus documentos cite a documentos vigentes y la otra mitad a estacionados.
+
+Los 61 enlaces del primer grupo quedaron reconectados, con su registro en
+`Migracion-M10-Registro-Reconexion.json`. **El grupo `Estrategia-Testing` queda como está** —ya
+consolidado— y `08-Calidad-Y-Pruebas` se termina como categoría, que es como se hará el resto.
+
 ## 6. Lo que este análisis no decide
 
 - **No consolida nada.** `Migracion-Rules.md` §4.3.2 reserva la decisión al humano, grupo por grupo,
@@ -160,3 +186,4 @@ líneas únicas, 6 % de solapamiento, y es el que lleva los umbrales que no se p
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial. Inventario de los 67 grupos de consolidación con su medición de solapamiento —**5,9 % global**, del 1 % al 34 %—, que **corrige la hipótesis de partida**: no son duplicados, el 94 % del contenido es propio de una capa y consolidar es una unión con atribución. Cuatro salidas con su criterio, clasificación propuesta por categoría, orden de ejecución y lo que el análisis no decide. **Ningún documento fue consolidado.** |
+| 1.1 | 2026-08-16 | **§5.1 nueva, aprendida al consolidar el primer grupo.** La consolidación de `Estrategia-Testing.md` rompió **61 enlaces** de los documentos que seguían estacionados en las mismas carpetas `_fusion/`, que lo citaban como vecino. Es estructural y se repetiría en cada grupo, hasta nueve veces por carpeta. **La unidad de trabajo pasa a ser la categoría completa**, no el documento: se consolidan sus N documentos en una pasada y recién entonces se retira su `_fusion/`, con lo que cada carpeta se reconecta una vez y la categoría nunca queda en un estado intermedio incoherente. |

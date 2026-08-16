@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) 1.1 §2; [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Domain/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md)
+**Trazabilidad upstream:** [`Estrategia-Testing.md`](../../Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) 1.1 §2; [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Domain/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md)
 **Trazabilidad downstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -52,7 +52,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 
 - [ ] Todos los `TC-XX` en alcance de la etapa están escritos, ejecutados y en verde.
 - [ ] **Ningún `TC-XX` que estaba en verde en la etapa anterior pasó a rojo** sin justificación escrita en el informe de cierre.
-- [ ] La cobertura por componente alcanza los umbrales de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 en los componentes que la etapa toca. Gate condicionado mientras el valor siga rotulado [ASUNCIÓN].
+- [ ] La cobertura por componente alcanza los umbrales de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 en los componentes que la etapa toca. Gate condicionado mientras el valor siga rotulado [ASUNCIÓN].
 - [ ] `TC-02023` cierra en las dos direcciones sobre las condiciones que la etapa incorporó.
 - [ ] `TC-02026` cierra sobre los invariantes que la etapa toca: **cada uno con prueba de violación rechazada y sin dobles**.
 - [ ] Los gates `QG-01`, `QG-02`, `QG-04`, `QG-05`, `QG-06` y `QG-08` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
@@ -71,7 +71,7 @@ Alineados con los **cinco** riesgos arquitectónicos de [`../05-Arquitectura-Tec
 | RQ-03 | Que el consumidor trate el resultado tipado como excepción y descarte los rechazos | Medio | Media | `TC-02027` verifica que ninguna condición prevista lance; el efecto sobre el consumidor se verifica en `GeometriaFactory-Application` |
 | RQ-04 | Que alguna operación lea el reloj por comodidad y rompa la reproducibilidad | Medio | Baja | `TC-02025`, con la comparación de dos ejecuciones consecutivas sin fijar el reloj |
 | RQ-05 | Que los nombres abiertos se fijen sin punto de control y haya que renombrar | Bajo, de retrabajo | Media | Criterio de entrada de §2: `BT-02002` cerrada antes de escribir casos de prueba |
-| RQ-06 | **Que un escenario del intake §20 se sustituya por un dato sintético** «porque es más cómodo de escribir» | Alto | Media | [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 lo prohíbe; el criterio de salida exige que los ocho escenarios sigan siendo el material de `TC-02013` a `TC-02018` |
+| RQ-06 | **Que un escenario del intake §20 se sustituya por un dato sintético** «porque es más cómodo de escribir» | Alto | Media | [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6 lo prohíbe; el criterio de salida exige que los ocho escenarios sigan siendo el material de `TC-02013` a `TC-02018` |
 | RQ-07 | **Que la matriz de cobertura quede desactualizada** y siga diciendo `Pendiente` con pruebas ya escritas | Medio | Alta, es el anti-patrón más común de la categoría | Criterio de salida de §3: la matriz se actualiza al cerrar cada etapa, y su desactualización bloquea el cierre |
 
 ## 5. Plan por etapa
@@ -95,8 +95,8 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | --- | --- |
 | Personas | **Una**, `equipo_n = 1` (intake §2), que ejerce a la vez la construcción, la prueba y la aprobación |
 | Ambiente | El contenedor de desarrollo, único ambiente de este proyecto de código. No hay ambiente desplegado que preparar |
-| Datos | Los **ocho** escenarios del intake §20, en la forma que [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 declara; y los cuatro fixtures de entidad de su §5 |
-| Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a` |
+| Datos | Los **ocho** escenarios del intake §20, en la forma que [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6 declara; y los cuatro fixtures de entidad de su §5 |
+| Herramientas | Las de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a` |
 | Guiones | `scripts/build.sh` y `scripts/test.sh`, que son los que el intake §17.1.P.8 · GeometriaFactory-Domain declara como puertas |
 
 ## 7. Control de cambios

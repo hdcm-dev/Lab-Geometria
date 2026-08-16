@@ -27,7 +27,7 @@
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.0 | Propuesto | Definición de calidad, atributos ISO 25010, **once** quality gates, papeles y cadencia |
-| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.0 | Propuesto | Pirámide objetivo con su apartamiento declarado, cobertura por componente, tooling, dobles de puerto y el uso de los **ocho** escenarios reales del intake |
+| [`Estrategia-Testing.md`](../../Estrategia-Testing.md) | 1.0 | Propuesto | Pirámide objetivo con su apartamiento declarado, cobertura por componente, tooling, dobles de puerto y el uso de los **ocho** escenarios reales del intake |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.0 | Propuesto | Alcance, criterios de entrada y salida, **ocho** riesgos de calidad y plan por etapa |
 | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, comprobación ↔ tests, invariante ↔ tests y cobertura por componente |
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y un** casos de prueba, `TC-04001` a `TC-04031` |
@@ -38,7 +38,7 @@
 ## 2. Orden de lectura
 
 1. [`Estrategia-Calidad.md`](Estrategia-Calidad.md) — qué se entiende por calidad acá y qué gates existen.
-2. [`Estrategia-Testing.md`](Estrategia-Testing.md) — con qué se prueba, con qué datos y con qué umbrales.
+2. [`Estrategia-Testing.md`](../../Estrategia-Testing.md) — con qué se prueba, con qué datos y con qué umbrales.
 3. [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) — los treinta y un casos, uno por uno.
 4. [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) — el documento bisagra: qué caso de prueba cubre qué.
 5. [`Plan-Pruebas.md`](Plan-Pruebas.md) — cuándo se ejecuta cada cosa, por etapa.

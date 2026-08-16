@@ -57,7 +57,7 @@ samples/application/03-avanzado/
     └── SalidaEsperada.<ext>              # Compara la salida contra el snapshot de §6
 ```
 
-**Los datos de identidad de `ComisionDeEjemplo` son evidentemente ficticios y se declaran como tales.** Ningún escenario del `PRODUCT-INTAKE` §20 fija correos, nombres ni identificadores: los escenarios son datos de **geometría**, y los de identidad y orquestación no se toman de ahí ni se fabrican como si lo fueran. Es la regla de [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Testing.md) §6.
+**Los datos de identidad de `ComisionDeEjemplo` son evidentemente ficticios y se declaran como tales.** Ningún escenario del `PRODUCT-INTAKE` §20 fija correos, nombres ni identificadores: los escenarios son datos de **geometría**, y los de identidad y orquestación no se toman de ahí ni se fabrican como si lo fueran. Es la regla de [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6.
 
 ## 6. Qué esperar
 

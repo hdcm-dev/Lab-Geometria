@@ -40,7 +40,7 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 - [ ] Toda regla e invariante que la historia declara ejercer tiene su fila en la matriz §4 y §6 con este `TC-XX` entre sus tests. **Se valida** leyendo esas dos tablas.
 - [ ] Toda condición de rechazo que la historia produce está en el catálogo de las **36** y alcanzada por prueba. **Se valida** con `TC-04028`.
 - [ ] La historia **no introdujo ninguna prueba que abra el almacén real** ni ninguna dependencia saliente nueva. **Se valida** con `TC-04026` y `TC-04027`.
-- [ ] Los `TC-XX` de la historia usan **dobles de puerto y no dobles de componente interno**. **Se valida** por inspección del código de prueba, contra [`Estrategia-Testing.md`](Estrategia-Testing.md) §5.
+- [ ] Los `TC-XX` de la historia usan **dobles de puerto y no dobles de componente interno**. **Se valida** por inspección del código de prueba, contra [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5.
 - [ ] La construcción termina en 0 y sin advertencias. **Se valida** con la salida de `scripts/build.sh`.
 - [ ] La cobertura del componente que la historia toca no bajó respecto de la medición anterior. **Se valida** comparando el informe de cobertura por componente.
 

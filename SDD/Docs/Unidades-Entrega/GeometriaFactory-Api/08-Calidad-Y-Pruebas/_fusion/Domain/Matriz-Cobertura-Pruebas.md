@@ -132,7 +132,7 @@ Nueve filas, una por invariante de [`../02-Especificacion-Funcional/Definicion-M
 
 ## 6. Cobertura por capa
 
-La partición es por los **cinco** componentes de `05` §3.1, no por capas de despliegue: este proyecto de código no tiene ninguna. Los umbrales son los de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2.
+La partición es por los **cinco** componentes de `05` §3.1, no por capas de despliegue: este proyecto de código no tiene ninguna. Los umbrales son los de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2.
 
 | Componente | Líneas medidas | Ramas medidas | Mutation score medido | Umbral mínimo (líneas / ramas / mutación) |
 | --- | --- | --- | --- | --- |

@@ -9,7 +9,7 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/application/02-intermedio/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04004`, `CU-04005`, `CU-04006` y `CU-04009`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de orquestación del trabajo y de la consulta; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Testing.md) §6, la tabla de los **ocho** escenarios; `PRODUCT-INTAKE` 1.23 §20, escenarios `E-1` a `E-8`
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04004`, `CU-04005`, `CU-04006` y `CU-04009`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de orquestación del trabajo y de la consulta; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6, la tabla de los **ocho** escenarios; `PRODUCT-INTAKE` 1.23 §20, escenarios `E-1` a `E-8`
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md), que toma `VER-04002` como sonda; `11-Documentacion` cuando se emita
 
 ---

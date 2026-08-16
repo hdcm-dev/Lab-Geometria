@@ -88,7 +88,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-29 | Cobertura por componente cumplida, con los **ocho** componentes reportados por separado y **el informe de los dos motores reportado aparte** | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-11` y `CV-12` |
+| CV-29 | Cobertura por componente cumplida, con los **ocho** componentes reportados por separado y **el informe de los dos motores reportado aparte** | Tabla de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-11` y `CV-12` |
 | CV-30 | Mutation score | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2 para el tipo `library`. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre en el pipeline. Hasta entonces se reporta «sin medir». **El adaptador de reloj queda exento con su fundamento** |
 | CV-31 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-23` |
 | CV-32 | Ningún caso de prueba está deshabilitado sin motivo escrito en su fila del catálogo | 0 deshabilitados sin motivo | **Bloqueante** |

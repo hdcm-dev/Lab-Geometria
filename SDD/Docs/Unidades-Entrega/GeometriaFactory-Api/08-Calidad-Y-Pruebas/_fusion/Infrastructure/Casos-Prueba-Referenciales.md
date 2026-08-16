@@ -36,9 +36,9 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 
 **Vocabulario de este catálogo**, definido acá la primera vez que aparece y no redefinido después:
 
-- **Nivel**: la posición de una prueba en la pirámide de [`Estrategia-Testing.md`](Estrategia-Testing.md) §1 — unitario o integración interna.
+- **Nivel**: la posición de una prueba en la pirámide de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §1 — unitario o integración interna.
 - **Integración interna**: la prueba que necesita un **almacén efímero**, creado y descartado por ella misma. No es la batería de integración del producto, que es de `GeometriaFactory-Api`.
-- **Fixture**: uno de los cuatro constructores compartidos de [`Estrategia-Testing.md`](Estrategia-Testing.md) §5, incluidos los **ocho textos literales** de los escenarios del intake §20.
+- **Fixture**: uno de los cuatro constructores compartidos de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5, incluidos los **ocho textos literales** de los escenarios del intake §20.
 - **Prueba de inspección**: la que comprueba una propiedad estructural del proyecto de código y no un contrato.
 - **Los diez casos de la batería**: los que [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §10.5 enumera, con su origen en el intake §21.
 
@@ -483,7 +483,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Magnitud | Valor | Cómo se verifica |
 | --- | --- | --- |
 | Casos de prueba de este catálogo | **35**, `TC-06001` a `TC-06035` | Contar los encabezados de §2 |
-| Casos de la batería del validador | **10 de 10**, `TC-06001` a `TC-06010`, en el mismo orden que `05` §10.5 | §2.1 y [`Estrategia-Testing.md`](Estrategia-Testing.md) §6.1 |
+| Casos de la batería del validador | **10 de 10**, `TC-06001` a `TC-06010`, en el mismo orden que `05` §10.5 | §2.1 y [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6.1 |
 | Casos de uso con al menos un caso de prueba | **10 de 10** | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2 |
 | Reglas de negocio con tramo acá y caso de prueba | **14 de 14**; las **dos** sin tramo se declaran | Matriz §4 |
 | Reglas conceptuales de modelo con caso de prueba | **7 de 7** | Matriz §5 |

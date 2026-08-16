@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md)
+**Trazabilidad upstream:** [`Estrategia-Testing.md`](../../Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md)
 **Trazabilidad downstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -53,7 +53,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 
 - [ ] Todos los `TC-XX` en alcance de la etapa están escritos, ejecutados y en verde.
 - [ ] **Ningún `TC-XX` que estaba en verde en la etapa anterior pasó a rojo** sin justificación escrita en el informe de cierre.
-- [ ] La cobertura por componente alcanza los umbrales de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 en los componentes que la etapa toca, **con el informe acotado a los dos motores reportado por separado**. Gates condicionados mientras los valores sigan rotulados [ASUNCIÓN].
+- [ ] La cobertura por componente alcanza los umbrales de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 en los componentes que la etapa toca, **con el informe acotado a los dos motores reportado por separado**. Gates condicionados mientras los valores sigan rotulados [ASUNCIÓN].
 - [ ] **A partir de la etapa `f`: la batería del validador pasa entera, 10 de 10**, contra la tabla de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6.
 - [ ] `TC-06009` da **exactamente 2** advertencias sobre `E-1`, y no 3.
 - [ ] `TC-06034` cierra en las dos direcciones sobre las condiciones que la etapa incorporó, y `TC-06035` da **0** en sus dos recuentos —mensajes y registro del servidor—.
@@ -77,7 +77,7 @@ Alineados con los **ocho** riesgos arquitectónicos de [`../05-Arquitectura-Tecn
 | RQ-06 | Que la ubicación del almacén **caiga hacia una ruta alternativa** dentro de la imagen cuando el volumen no está montado | Alto: el servicio acepta trabajos de la comisión entera y **los pierde en el siguiente reemplazo de versión** | Media, porque es el comportamiento por defecto de casi cualquier biblioteca de acceso a archivos | `TC-06033`, segunda mitad: la ubicación no disponible **detiene el arranque** |
 | RQ-07 | Que una consulta de listado arrastre los componentes de cada pieza o el texto original | Medio | **Media-alta**: es el comportamiento por defecto de cualquier carga completa de entidad | `TC-06019`, con dos recuentos en cero para el listado y presencia completa en el detalle |
 | RQ-08 | Que la unicidad del correo se sostenga **sólo** con la consulta previa del consumidor | Alto | Media | `TC-06022`, que verifica el rechazo del almacén **aunque la consulta previa no lo hubiera visto** |
-| RQ-09 | **Que un escenario del intake §20 se sustituya por un texto escrito a mano** «porque es más corto» | **Muy alto**: un texto escrito por quien conoce las cuatro trampas **las pasa sin ejercitarlas**, que es exactamente el modo en que `RQ-01` se materializa sin que nadie lo note | Media | [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 lo prohíbe; el criterio de salida exige que los ocho escenarios sigan siendo el material de `TC-06001` a `TC-06011` y de `TC-06016` |
+| RQ-09 | **Que un escenario del intake §20 se sustituya por un texto escrito a mano** «porque es más corto» | **Muy alto**: un texto escrito por quien conoce las cuatro trampas **las pasa sin ejercitarlas**, que es exactamente el modo en que `RQ-01` se materializa sin que nadie lo note | Media | [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6 lo prohíbe; el criterio de salida exige que los ocho escenarios sigan siendo el material de `TC-06001` a `TC-06011` y de `TC-06016` |
 | RQ-10 | **Que la batería se dé por completa con nueve casos**, arrastrando la redacción que los dos gates del intake tuvieron hasta 1.19 en lugar de la tabla de §21 | Alto: dejaría `E-8` sin cubrir, que es el escenario que cerró la única condición del contrato de fachada sin dato de prueba | **Baja desde el intake 1.20**, que corrigió los dos gates a **diez**; queda como riesgo vivo sólo por las copias del texto viejo que puedan circular | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 declara el desenlace y fija **diez**; el criterio de salida de §3 exige 10 de 10 contra la tabla de la matriz §6 |
 
 ## 5. Plan por etapa
@@ -101,9 +101,9 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | Personas | **Una**, `equipo_n = 1` (intake §2), que ejerce a la vez la construcción, la prueba y la aprobación |
 | Ambiente | El contenedor de desarrollo, único ambiente de este proyecto de código |
 | Almacén | **Efímero, creado y descartado por cada prueba de integración interna**, con su ubicación recibida por configuración de prueba. **Nunca el almacén de desarrollo ni el de producción** |
-| Datos | Los **ocho** textos literales de los escenarios del intake §20 y los cuatro fixtures de [`Estrategia-Testing.md`](Estrategia-Testing.md) §5. **Ningún texto de figuras se escribe a mano** |
+| Datos | Los **ocho** textos literales de los escenarios del intake §20 y los cuatro fixtures de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5. **Ningún texto de figuras se escribe a mano** |
 | Secretos de prueba | Una clave de firma **evidentemente ficticia**, provista por configuración de prueba, y la posibilidad de **no proveerla**, que es lo que `TC-06030` necesita |
-| Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a`, con la función de derivación de clave como punto abierto propio |
+| Herramientas | Las de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a`, con la función de derivación de clave como punto abierto propio |
 | Guiones | `scripts/build.sh`, `scripts/test.sh` y el guion de reposición del almacén al estado de primer arranque, que el intake §17.1.P.8 · GeometriaFactory-Infrastructure declara como mecanismo de reversión |
 
 ## 7. Control de cambios

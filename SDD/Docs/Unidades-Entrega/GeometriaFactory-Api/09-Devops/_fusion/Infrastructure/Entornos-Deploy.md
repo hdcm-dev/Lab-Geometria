@@ -112,7 +112,7 @@ Lo que sí hace, y es lo que lo distingue, es **exigir tres cosas del ambiente q
 | Momento | Secretos | Fundamento |
 | --- | --- | --- |
 | Construcción | **Ninguno.** El restaurador toma dependencias de repositorios públicos; no hay publicación que autenticar | Intake §17.1.P.7 · GeometriaFactory-Infrastructure |
-| Prueba | **Ninguno real.** Las contraseñas de los casos son ficticias, y los almacenes son desechables | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Testing.md) |
+| Prueba | **Ninguno real.** Las contraseñas de los casos son ficticias, y los almacenes son desechables | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) |
 | Ejecución | **Uno, recibido y no custodiado**: la clave de firma | Intake §17.1.P.5 · GeometriaFactory-Infrastructure; `05` §5 |
 
 **Ningún secreto entra al repositorio, ni en la integración continua.** El intake §17.1.P.5 · GeometriaFactory-Infrastructure lo declara sin excepción. **No se declara ninguna frecuencia de rotación**: ninguna fuente la da, y el gobierno del valor pertenece a la categoría 09 de `GeometriaFactory-Api`, que es la que lo provee al ambiente.

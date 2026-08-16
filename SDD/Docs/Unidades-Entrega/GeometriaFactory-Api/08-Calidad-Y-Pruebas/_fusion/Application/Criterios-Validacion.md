@@ -53,7 +53,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
 | CV-09 | El caso de uso más pesado resuelve el envío del texto de **3** piezas de `E-1` **sin acceso a base** | **500 ms** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Application, asunción `A-5` de §22]** | Cronometrado dentro de la batería unitaria con doble del puerto de validación, por `BT-04019` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
-| CV-10 | La cobertura alcanza **85 %** de líneas y **80 %** de ramas, **por componente y no como número global** | 85 / 80 **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Application, asunción `A-3` de §22]**, con los cuatro componentes que suben declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
+| CV-10 | La cobertura alcanza **85 %** de líneas y **80 %** de ramas, **por componente y no como número global** | 85 / 80 **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Application, asunción `A-3` de §22]**, con los cuatro componentes que suben declarados en [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
 | CV-11 | Ninguna prueba de esta capa toca la base de datos real | **0** | `TC-04026` y revisión del pull request | **Bloqueante.** Es la puerta propia que el intake §17.1.P.8 · GeometriaFactory-Application declara |
 | CV-12 | El archivo de proyecto declara **1** referencia al producto y **0** a persistencia, transporte, serialización o marco web | 1 y 0 | `TC-04027` | **Bloqueante** |
 | CV-13 | Las consultas de listado no materializan componentes de pieza | **0** en los dos listados | `TC-04030` | **Bloqueante** |
@@ -82,12 +82,12 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-23 | Cobertura por componente cumplida, con los siete componentes con umbral reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-10` |
+| CV-23 | Cobertura por componente cumplida, con los siete componentes con umbral reportados por separado | Tabla de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-10` |
 | CV-24 | Mutation score | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2 para el tipo `library`. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre en el pipeline (hueco declarado en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8). Hasta entonces se reporta «sin medir» |
 | CV-25 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-17` |
 | CV-26 | Ningún caso de prueba está deshabilitado sin motivo escrito en su fila del catálogo | 0 deshabilitados sin motivo | **Bloqueante** |
 | CV-27 | Ningún caso de prueba depende del orden de ejecución ni del reloj del entorno | 0 dependencias de orden; el momento entra siempre por el doble del puerto de reloj (`TC-04013`) | **Bloqueante** |
-| CV-28 | Ninguna prueba sustituye un componente interno con un doble: los dobles son **sólo de puerto** | 0 dobles de componente interno | **Bloqueante**, por [`Estrategia-Testing.md`](Estrategia-Testing.md) §5 |
+| CV-28 | Ninguna prueba sustituye un componente interno con un doble: los dobles son **sólo de puerto** | 0 dobles de componente interno | **Bloqueante**, por [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5 |
 
 ## 6. Excepciones documentadas
 

@@ -98,7 +98,7 @@ Las dos puertas las declara el intake §15 y §17.2.P.8 · GeometriaFactory-Viso
 | CV-30 | El bundle **nunca se editó a mano**: es un artefacto generado y reproducible | 100 % generado | **Bloqueante** |
 | CV-31 | El motor de dibujo **nunca se expone al anfitrión** | 0 exposiciones | **Bloqueante** |
 | CV-32 | **Cobertura de líneas: no aplica como criterio.** El intake §17.2.P.6 · GeometriaFactory-Visor fija el gate de inspección de cero red **en lugar de** la cobertura de líneas | — | **No aplicable, declarado** |
-| CV-33 | **Mutation score: no aplica.** No hay forma de matar los mutantes del código de dibujo sin recurrir a la comparación de imágenes, que [`Estrategia-Testing.md`](Estrategia-Testing.md) §1 descarta con su fundamento | — | **No aplicable, declarado** |
+| CV-33 | **Mutation score: no aplica.** No hay forma de matar los mutantes del código de dibujo sin recurrir a la comparación de imágenes, que [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §1 descarta con su fundamento | — | **No aplicable, declarado** |
 | CV-34 | **Snapshot de la escena: no aplica.** Una comparación de imágenes sería frágil y **no distinguiría un cambio legítimo de orientación de una deriva de posición**, cuando el determinismo comprometido es de posición | — | **No aplicable, declarado** |
 
 **Las tres «no aplicable» se declaran en lugar de omitirse.** Un lector que no encuentre cobertura de líneas ni mutation score en un proyecto de código de tipo `library` tiene que poder leer por qué.

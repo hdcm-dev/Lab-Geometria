@@ -27,7 +27,7 @@
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.1 | Propuesto | Definición de calidad, atributos ISO 25010, **catorce** quality gates, y la declaración de por qué la batería tiene **diez** casos |
-| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Pirámide objetivo, cobertura por componente con el piso propio del validador, tooling, dobles mínimos y los **ocho** escenarios reales del intake como texto literal |
+| [`Estrategia-Testing.md`](../../Estrategia-Testing.md) | 1.1 | Propuesto | Pirámide objetivo, cobertura por componente con el piso propio del validador, tooling, dobles mínimos y los **ocho** escenarios reales del intake como texto literal |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.1 | Propuesto | Alcance, criterios de entrada y salida, **diez** riesgos de calidad y plan por etapa |
 | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, regla conceptual ↔ tests, batería ↔ escenarios y cobertura por componente |
 | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y cinco** casos, `TC-06001` a `TC-06035`, cuyos **diez primeros son los diez de la batería** |
@@ -38,7 +38,7 @@
 ## 2. Orden de lectura
 
 1. [`Estrategia-Calidad.md`](Estrategia-Calidad.md) — qué se entiende por calidad acá, qué gates existen y por qué la batería tiene diez casos.
-2. [`Estrategia-Testing.md`](Estrategia-Testing.md) — con qué se prueba, con qué datos y con qué umbrales.
+2. [`Estrategia-Testing.md`](../../Estrategia-Testing.md) — con qué se prueba, con qué datos y con qué umbrales.
 3. [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) — los treinta y cinco casos, uno por uno.
 4. [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) — el documento bisagra: qué caso de prueba cubre qué.
 5. [`Plan-Pruebas.md`](Plan-Pruebas.md) — cuándo se ejecuta cada cosa, por etapa.

@@ -35,9 +35,9 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 
 **Vocabulario de este catálogo**, definido acá la primera vez que aparece y no redefinido después:
 
-- **Nivel**: la posición de una prueba en la pirámide de [`Estrategia-Testing.md`](Estrategia-Testing.md) §1. Acá hay un solo nivel: unitario.
-- **Doble de puerto**: la sustitución de uno de los **cuatro** puertos de `02` §3, que es la única frontera que una prueba de este proyecto de código sustituye ([`Estrategia-Testing.md`](Estrategia-Testing.md) §5).
-- **Fixture**: un constructor compartido, de los cuatro que declara [`Estrategia-Testing.md`](Estrategia-Testing.md) §5.
+- **Nivel**: la posición de una prueba en la pirámide de [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §1. Acá hay un solo nivel: unitario.
+- **Doble de puerto**: la sustitución de uno de los **cuatro** puertos de `02` §3, que es la única frontera que una prueba de este proyecto de código sustituye ([`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5).
+- **Fixture**: un constructor compartido, de los cuatro que declara [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §5.
 - **Prueba de inspección**: la que comprueba una propiedad estructural del proyecto de código y no un caso de uso.
 - **Resultado de interpretación**: el conjunto de piezas, observaciones y cantidad de figuras del conjunto raíz que el puerto de validación devuelve. Esta capa **no lo produce**: lo recibe y lo entrega al dominio.
 - **La marca**: la marca de cambio de contraseña pendiente, que es lo que `INV-09` gobierna.
@@ -443,7 +443,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Casos de prueba de inspección estructural | **6**, `TC-04026` a `TC-04031` | §2.5 |
 | Casos de prueba deshabilitados | **0** | Ninguna fila lo declara |
 
-**Los ocho escenarios están, uno por uno, y ninguno se sustituye.** `E-1`, `E-2` y `E-3` en `TC-04015`; `E-4` y `E-6` en `TC-04017`; `E-5` y `E-8` en `TC-04016`; `E-7` en `TC-04022`. La forma en que entran a esta capa es la que [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 declara: **el resultado de interpretación que el doble del puerto devuelve**, no el texto.
+**Los ocho escenarios están, uno por uno, y ninguno se sustituye.** `E-1`, `E-2` y `E-3` en `TC-04015`; `E-4` y `E-6` en `TC-04017`; `E-5` y `E-8` en `TC-04016`; `E-7` en `TC-04022`. La forma en que entran a esta capa es la que [`Estrategia-Testing.md`](../../Estrategia-Testing.md) §6 declara: **el resultado de interpretación que el doble del puerto devuelve**, no el texto.
 
 ## 4. Control de cambios
 
