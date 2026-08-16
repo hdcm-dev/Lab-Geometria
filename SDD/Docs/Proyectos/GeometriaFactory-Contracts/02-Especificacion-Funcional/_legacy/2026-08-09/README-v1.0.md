@@ -49,12 +49,12 @@
 
 | CU | Título | Qué decide | NB que sostiene | Enlace |
 | --- | --- | --- | --- | --- |
-| CU-01 | Contrato de canje de credenciales y de sesión | Qué viaja al canjear credenciales, y sobre todo qué no: contraseña almacenada, clave de firma y direcciones de servicio interno quedan fuera | NB-02, NB-01 | [CU-01](Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) |
-| CU-02 | Contrato de administración de cuentas de alumno | Registro sin contraseña, establecimiento y cambio de credencial, listado de cuentas y cambio de situación, con la confirmación escrita de la baja como campo del contrato | NB-01, NB-02 | [CU-02](Casos-De-Uso/CU-02-Contrato-De-Administracion-De-Cuentas.md) |
-| CU-03 | Contrato de carga y edición del trabajo | Que el texto original viaje como una sola cadena, sin interpretarse en el contrato y sin alterar un carácter | NB-03, NB-04 | [CU-03](Casos-De-Uso/CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) |
-| CU-04 | Contrato de listado de trabajos | Que la proyección de listado no arrastre ni el texto original ni los componentes de las piezas | NB-03, NB-07 | [CU-04](Casos-De-Uso/CU-04-Contrato-De-Listado-De-Trabajos.md) |
-| CU-05 | Contrato de detalle del trabajo interpretado | Cómo viajan las piezas, los componentes y las observaciones, con severidad, índice de figura, campo señalado y el par de valor declarado y valor derivado | NB-04, NB-05, NB-06, NB-07 | [CU-05](Casos-De-Uso/CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) |
-| CU-06 | Contrato de respuesta de error | La forma única con la que un fallo cruza la frontera de servicio: texto neutro, conjunto cerrado de códigos, ubicación del defecto y ninguna dirección de servicio | NB-04, NB-08, NB-02 | [CU-06](Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) |
+| CU-01 | Contrato de canje de credenciales y de sesión | Qué viaja al canjear credenciales, y sobre todo qué no: contraseña almacenada, clave de firma y direcciones de servicio interno quedan fuera | NB-02, NB-01 | [CU-01](../../Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) |
+| CU-02 | Contrato de administración de cuentas de alumno | Registro sin contraseña, establecimiento y cambio de credencial, listado de cuentas y cambio de situación, con la confirmación escrita de la baja como campo del contrato | NB-01, NB-02 | [CU-02](../../Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md) |
+| CU-03 | Contrato de carga y edición del trabajo | Que el texto original viaje como una sola cadena, sin interpretarse en el contrato y sin alterar un carácter | NB-03, NB-04 | [CU-03](../../Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) |
+| CU-04 | Contrato de listado de trabajos | Que la proyección de listado no arrastre ni el texto original ni los componentes de las piezas | NB-03, NB-07 | [CU-04](../../Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md) |
+| CU-05 | Contrato de detalle del trabajo interpretado | Cómo viajan las piezas, los componentes y las observaciones, con severidad, índice de figura, campo señalado y el par de valor declarado y valor derivado | NB-04, NB-05, NB-06, NB-07 | [CU-05](../../Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) |
+| CU-06 | Contrato de respuesta de error | La forma única con la que un fallo cruza la frontera de servicio: texto neutro, conjunto cerrado de códigos, ubicación del defecto y ninguna dirección de servicio | NB-04, NB-08, NB-02 | [CU-06](../../Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) |
 
 ## 3. Orden de lectura sugerido
 

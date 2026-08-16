@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md`](../../CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md)
+> - **Versión vigente:** [`CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md`](../../CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -113,7 +113,7 @@ Se separa de la tabla anterior porque en este caso de uso no produce respuesta d
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-04, NB-05, NB-06, NB-07 |
-| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-09`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) sobre CA-04 y [`RN-03`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre la excepción `CONTRATO_TRABAJO_NO_ENCONTRADO`, las dos de `GeometriaFactory-Domain`. La tolerancia de claves, la reconstrucción de piezas y el recálculo de valores son también invariantes de ese proyecto de código, sin identificador nombrable desde acá al momento de esta emisión. Ver `Especificacion-Funcional.md` §5 |
+| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-09`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) sobre CA-04 y [`RN-03`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre la excepción `CONTRATO_TRABAJO_NO_ENCONTRADO`, las dos de `GeometriaFactory-Domain`. La tolerancia de claves, la reconstrucción de piezas y el recálculo de valores son también invariantes de ese proyecto de código, sin identificador nombrable desde acá al momento de esta emisión. Ver `Especificacion-Funcional.md` §5 |
 | Historias de usuario a generar en 06 | US-11 tipo de detalle de trabajo; US-12 tipos de pieza y de componente; US-13 tipo de observación con severidad y par de valores |
 | Componentes esperados en 05 | Familia de tipos de transferencia de detalle del ensamblado de contratos |
 | Tests previstos en 08 | Pruebas de integración sobre los escenarios E-1, E-3, E-4 y E-5 del intake; comparación de la carga útil recibida por los dos papeles para CA-06 |

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`](../../CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md)
+> - **Versión vigente:** [`CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`](../../CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -108,7 +108,7 @@ No hay actor humano. La persona que escribe las credenciales pertenece a los cas
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-02, y NB-01 por el papel de administrador |
-| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplica [`RN-01`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) de `GeometriaFactory-Domain`, que fija los dos papeles del producto y sostiene el conjunto cerrado del campo de papel. Ver `Especificacion-Funcional.md` §5 |
+| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplica [`RN-01`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) de `GeometriaFactory-Domain`, que fija los dos papeles del producto y sostiene el conjunto cerrado del campo de papel. Ver `Especificacion-Funcional.md` §5 |
 | Historias de usuario a generar en 06 | US-01 tipos de canje de credenciales; US-02 tipo de respuesta de sesión sin campos sensibles |
 | Componentes esperados en 05 | Familia de tipos de transferencia de sesión del ensamblado de contratos |
 | Tests previstos en 08 | Pruebas de integración contra el servicio real que ejercitan los cuatro desenlaces del canje: el exitoso (CA-01), el inválido (CA-03), el de cuenta no habilitada (CA-04) y el de **cuenta habilitada que todavía no estableció su contraseña**, que verifica FA-02 y CA-05 —código `CONTRATO_CONTRASENA_NO_ESTABLECIDA` con su motivo, y ausencia de respuesta de sesión—; ningún otro caso de uso cubre ese cuarto camino. Más la inspección de superficie pública para CA-02 |

@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-05), §4.1 (RN-06, RN-13), §14 (RA-03), §17.3.P.1, §17.3.P.5, §17.5.P.5; el flujo que lo consume vive en `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`
+**Trazabilidad upstream:** [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-05), §4.1 (RN-06, RN-13), §14 (RA-03), §17.3.P.1, §17.3.P.5, §17.5.P.5; el flujo que lo consume vive en `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -97,7 +97,7 @@ Lo que este caso de uso **no** hace: no decide si la cuenta admite el acceso —
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-02 |
-| Reglas de negocio aplicables | [RN-06](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) y [RN-13](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), **por lo que este contrato no decide**: las dos se resuelven antes y por eso una cuenta no admitida nunca llega acá |
+| Reglas de negocio aplicables | [RN-06](../../../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) y [RN-13](../../../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), **por lo que este contrato no decide**: las dos se resuelven antes y por eso una cuenta no admitida nunca llega acá |
 | Regla de arquitectura del producto | **RA-03**: ningún mensaje que se muestre incluye direcciones de servicios internos. Acá se ejerce en las respuestas de §6, y su registro del lado del servidor es el que permite diagnosticar sin exponer |
 | Mecanismo que provee | La emisión y la verificación del acceso firmado |
 | Consumidor | La composición de raíz de `GeometriaFactory-Api` |

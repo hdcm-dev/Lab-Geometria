@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`RN-05-Finalizacion-Sin-Errores-De-Validacion.md`](../../RN-05-Finalizacion-Sin-Errores-De-Validacion.md)
+> - **Versión vigente:** [`RN-05-Finalizacion-Sin-Errores-De-Validacion.md`](../../RN-02005-Finalizacion-Sin-Errores-De-Validacion.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-3 y CL-4), §4 (F-10), §17.2.P.11 punto 2, §21 (cobertura de invariantes y reglas), §20.E-1, §20.E-2, §20.E-5, §20.E-6; [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5; [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-3 y CL-4), §4 (F-10), §17.2.P.11 punto 2, §21 (cobertura de invariantes y reglas), §20.E-1, §20.E-2, §20.E-5, §20.E-6; [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5; [`NB-05`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -59,8 +59,8 @@ En sentido inverso, impedir la finalización de un trabajo cuyas observaciones s
 
 ## 5. CU afectados
 
-- [CU-08](../Casos-De-Uso/CU-08-Gobernar-El-Estado-Del-Trabajo.md) — Gobernar el estado del trabajo.
-- [CU-07](../Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo, que es donde la especie queda fijada.
+- [CU-08](../../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) — Gobernar el estado del trabajo.
+- [CU-07](../../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo, que es donde la especie queda fijada.
 
 ## 6. Pruebas que la verifican
 

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md`](../../CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md)
+> - **Versión vigente:** [`CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md`](../../CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1; `00-Contexto/Alcance-Producto.md` §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.5, §4 (F-04 y F-05), §6 (flujo 1), §9 (X-1 y X-2)
+**Trazabilidad upstream:** [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1; `00-Contexto/Alcance-Producto.md` §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.5, §4 (F-04 y F-05), §6 (flujo 1), §9 (X-1 y X-2)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---

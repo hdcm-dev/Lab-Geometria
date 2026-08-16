@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5 (admisión explícita, cobertura de las cuatro operaciones, protección de la operación destructiva, advertencia previa a la baja); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-01, RN-06, RN-07), §7 (CL-6), §17.2.P.5; orquesta [`CU-02` de GeometriaFactory-Domain](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md)
+**Trazabilidad upstream:** [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5 (admisión explícita, cobertura de las cuatro operaciones, protección de la operación destructiva, advertencia previa a la baja); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-01, RN-06, RN-07), §7 (CL-6), §17.2.P.5; orquesta [`CU-02` de GeometriaFactory-Domain](../../CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Application
 
 ---
@@ -100,8 +100,8 @@ Ninguno deja efecto parcial: la baja escribe todo o no escribe nada.
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-01 |
-| Reglas de negocio aplicables | [RN-01](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [RN-04](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md), [RN-06](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [RN-07](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) |
-| Casos de uso de dominio orquestados | [CU-02](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) |
+| Reglas de negocio aplicables | [RN-01](../../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md), [RN-04](../../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md), [RN-06](../../../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [RN-07](../../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) |
+| Casos de uso de dominio orquestados | [CU-02](../../CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) |
 | Puertos que consume | Repositorio de cuentas, repositorio de trabajos |
 | Historias de usuario a generar en 06 | US-04, US-05, US-06 |
 | Componentes esperados en 05 | Caso de uso de gobierno de cuentas; contrato de retiro por dueño en el puerto de repositorio de trabajos |

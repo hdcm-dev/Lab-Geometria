@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md`](../../RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md)
+> - **Versión vigente:** [`RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md`](../../RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-5, con INV-02), §17.2.P.5, §17.5.P.5; [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-5, con INV-02), §17.2.P.5, §17.5.P.5; [`NB-03`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -57,7 +57,7 @@ Rechazo, con la forma exacta del rechazo como parte de la regla: la respuesta an
 
 ## 5. CU afectados
 
-- [CU-09](../Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) — Resolver el acceso de un alumno a un trabajo.
+- [CU-09](../../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) — Resolver el acceso de un alumno a un trabajo.
 
 ## 6. Pruebas que la verifican
 

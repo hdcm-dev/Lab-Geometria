@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`RN-08-Texto-Original-Conservado-Integro.md`](../../RN-08-Texto-Original-Conservado-Integro.md)
+> - **Versión vigente:** [`RN-08-Texto-Original-Conservado-Integro.md`](../../RN-02008-Texto-Original-Conservado-Integro.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §9 (X-4), §4 (F-20), §21 (RN-08 / INV-04), §17.3.P.11 punto 2, §20 (los siete escenarios); [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1 y §5; `00-Contexto/Alcance-Producto.md` §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §9 (X-4), §4 (F-20), §21 (RN-08 / INV-04), §17.3.P.11 punto 2, §20 (los siete escenarios); [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1 y §5; `00-Contexto/Alcance-Producto.md` §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -58,9 +58,9 @@ Rechazo de la operación, con el código `TEXTO_ORIGINAL_ALTERADO`. La regla no 
 
 ## 5. CU afectados
 
-- [CU-05](../Casos-De-Uso/CU-05-Crear-Y-Reeditar-Un-Trabajo.md) — Crear y reeditar un trabajo.
-- [CU-06](../Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — Reconstruir el conjunto de piezas del trabajo.
-- [CU-07](../Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo.
+- [CU-05](../../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) — Crear y reeditar un trabajo.
+- [CU-06](../../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — Reconstruir el conjunto de piezas del trabajo.
+- [CU-07](../../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo.
 
 ## 6. Pruebas que la verifican
 

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-12-Configurar-La-Cuenta-De-Administrador.md`](../../CU-12-Configurar-La-Cuenta-De-Administrador.md)
+> - **Versión vigente:** [`CU-12-Configurar-La-Cuenta-De-Administrador.md`](../../CU-04010-Configurar-La-Cuenta-De-Administrador.md)
 >
 > El cuerpo que sigue **no se modifica**. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4, §5 y §7 (caso de uso previsto «configurar la cuenta de administrador en el primer arranque»); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01, con origen en RF-01 y RF-02), §4.1 (RN-01 y RN-02), §15 (etapa `c`: «configurar el administrador en el primer arranque, **entrar**, cambiar contraseña y salir, persistido»), §17.1.P.2 (INV-01 e INV-05), §17.1.P.5, §9 (X-3)
+**Trazabilidad upstream:** [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1, §4, §5 y §7 (caso de uso previsto «configurar la cuenta de administrador en el primer arranque»); `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01, con origen en RF-01 y RF-02), §4.1 (RN-01 y RN-02), §15 (etapa `c`: «configurar el administrador en el primer arranque, **entrar**, cambiar contraseña y salir, persistido»), §17.1.P.2 (INV-01 e INV-05), §17.1.P.5, §9 (X-3)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -117,7 +117,7 @@ Los cinco rechazos terminan de forma controlada: el dominio no construye la enti
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-01, en su criterio de unicidad de la cuenta de administrador |
-| Reglas de negocio aplicables | [RN-01](../Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [RN-02](../Reglas-De-Negocio/RN-02-Correo-Del-Alumno-Unico.md) |
+| Reglas de negocio aplicables | [RN-01](../../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md), [RN-02](../../../Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) |
 | Invariantes | INV-05, INV-01. Ver además el **invariante candidato INV-08** propuesto en [`Definicion-Modelo-De-Dominio.md`](../Definicion-Modelo-De-Dominio.md) §4.3, que expresa la propiedad que este caso de uso sostiene y que **no viene del intake** |
 | Historias de usuario a generar en 06 | US de configuración del administrador en el primer arranque, US de rechazo de la segunda configuración |
 | Componentes esperados en 05 | Camino de alta propio en la entidad de alumno, distinto del auto-registro, con su estado inicial |

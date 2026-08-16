@@ -54,13 +54,13 @@ Un caso de uso de esta categoría en el que el alumno, el docente, el backend, u
 
 | ID | Caso de uso | Función de la fachada | Estado | Enlace |
 | --- | --- | --- | --- | --- |
-| CU-01 | Inicializar una instancia del visor sobre un elemento de dibujo | `inicializar(elemento, opciones)` | Propuesto | [CU-01](Casos-De-Uso/CU-01-Inicializar-Instancia-Del-Visor.md) |
-| CU-02 | Cargar el texto del trabajo y dibujar sus piezas | `cargarJson(id, texto)` | Propuesto | [CU-02](Casos-De-Uso/CU-02-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) |
-| CU-03 | Seleccionar una pieza por su índice | `seleccionarPieza(id, indice)` | Propuesto | [CU-03](Casos-De-Uso/CU-03-Seleccionar-Una-Pieza-Por-Su-Indice.md) |
-| CU-04 | Redimensionar la escena al elemento de dibujo | `redimensionar(id)` | Propuesto | [CU-04](Casos-De-Uso/CU-04-Redimensionar-La-Escena.md) |
-| CU-05 | Destruir la instancia y liberar sus recursos | `destruir(id)` | Propuesto | [CU-05](Casos-De-Uso/CU-05-Destruir-La-Instancia-Y-Liberar-Recursos.md) |
-| CU-06 | Ejercitar la fachada completa sin backend | Las seis, en recorrido | Propuesto | [CU-06](Casos-De-Uso/CU-06-Ejercitar-La-Fachada-Sin-Backend.md) |
-| CU-07 | Gobernar el movimiento automático de la escena sobre una instancia viva | `establecerMovimiento(id, opciones)` | Propuesto | [CU-07](Casos-De-Uso/CU-07-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) |
+| CU-01 | Inicializar una instancia del visor sobre un elemento de dibujo | `inicializar(elemento, opciones)` | Propuesto | [CU-01](../../../../Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md) |
+| CU-02 | Cargar el texto del trabajo y dibujar sus piezas | `cargarJson(id, texto)` | Propuesto | [CU-02](../../../../Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) |
+| CU-03 | Seleccionar una pieza por su índice | `seleccionarPieza(id, indice)` | Propuesto | [CU-03](../../../../Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) |
+| CU-04 | Redimensionar la escena al elemento de dibujo | `redimensionar(id)` | Propuesto | [CU-04](../../../../Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md) |
+| CU-05 | Destruir la instancia y liberar sus recursos | `destruir(id)` | Propuesto | [CU-05](../../../../Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md) |
+| CU-06 | Ejercitar la fachada completa sin backend | Las seis, en recorrido | Propuesto | [CU-06](../../../../Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) |
+| CU-07 | Gobernar el movimiento automático de la escena sobre una instancia viva | `establecerMovimiento(id, opciones)` | Propuesto | [CU-07](../../../../Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) |
 
 Siete casos de uso, sobre un mínimo de cinco declarado para el tipo `library` en `Rules-Especificacion-Funcional.md` §2.2.
 

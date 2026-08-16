@@ -93,9 +93,9 @@ Permitir que la persona fije su contraseña en su primer ingreso efectivo, ya ha
 
 | Dimensión | Referencia |
 | --- | --- |
-| Necesidad de negocio | [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) |
-| Reglas de negocio aplicables | [`RN-06`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md). La derivación de la credencial y su verificación viven en `GeometriaFactory-Infrastructure`; la admisibilidad de la cuenta, en `GeometriaFactory-Domain` |
-| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-02](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Contrato-De-Administracion-De-Cuentas.md) pasos 7 y 8, y FA-02; [`CU-06`](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) |
+| Necesidad de negocio | [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) |
+| Reglas de negocio aplicables | [`RN-06`](../../../../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md). La derivación de la credencial y su verificación viven en `GeometriaFactory-Infrastructure`; la admisibilidad de la cuenta, en `GeometriaFactory-Domain` |
+| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-02](../../../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md) pasos 7 y 8, y FA-02; [`CU-06`](../../../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) |
 | Fachada del visualizador | Ninguna función |
 | Historias de usuario a generar en 06 | US-06, US-07 |
 | Componentes esperados en 05 | Página de establecimiento de contraseña y página de cambio de contraseña dentro del panel |

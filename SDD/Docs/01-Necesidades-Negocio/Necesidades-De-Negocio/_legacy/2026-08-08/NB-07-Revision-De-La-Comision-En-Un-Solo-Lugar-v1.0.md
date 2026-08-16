@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-08
-> - **Versión vigente:** [`NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md`](../../NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md)
+> - **Versión vigente:** [`NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md`](../../NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 

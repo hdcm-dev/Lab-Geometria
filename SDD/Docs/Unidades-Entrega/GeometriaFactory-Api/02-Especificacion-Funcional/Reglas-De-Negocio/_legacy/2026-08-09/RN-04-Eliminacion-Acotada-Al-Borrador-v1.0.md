@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`RN-04-Eliminacion-Acotada-Al-Borrador.md`](../../RN-04-Eliminacion-Acotada-Al-Borrador.md)
+> - **Versión vigente:** [`RN-04-Eliminacion-Acotada-Al-Borrador.md`](../../RN-02004-Eliminacion-Acotada-Al-Borrador.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-07, con RN-04), §17.5.P.6; [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5; `00-Contexto/Alcance-Producto.md` §4.1
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-07, con RN-04), §17.5.P.6; [`NB-03`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5; `00-Contexto/Alcance-Producto.md` §4.1
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -57,8 +57,8 @@ Rechazo, con el motivo `ELIMINACION_FUERA_DE_BORRADOR`. El trabajo queda intacto
 
 ## 5. CU afectados
 
-- [CU-09](../Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) — Resolver el acceso de un alumno a un trabajo.
-- [CU-08](../Casos-De-Uso/CU-08-Gobernar-El-Estado-Del-Trabajo.md) — Gobernar el estado del trabajo, en cuanto al único estado desde el que el trabajo puede dejar de existir.
+- [CU-09](../../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) — Resolver el acceso de un alumno a un trabajo.
+- [CU-08](../../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) — Gobernar el estado del trabajo, en cuanto al único estado desde el que el trabajo puede dejar de existir.
 
 ## 6. Pruebas que la verifican
 

@@ -51,13 +51,13 @@ Tres decisiones más, tomadas aguas arriba y que esta especificación respeta si
 
 | CU | Contrato de uso que describe | NB que sostiene | Estado | Enlace |
 | --- | --- | --- | --- | --- |
-| CU-01 | Canje de credenciales y respuesta de sesión, sin exponer contraseña almacenada ni clave de firma | NB-02, NB-01 | Propuesto | [CU-01](Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) |
-| CU-02 | Registro, credencial, listado de cuentas y cambio de situación de cuenta, con la confirmación escrita de la baja | NB-01, NB-02 | Propuesto | [CU-02](Casos-De-Uso/CU-02-Contrato-De-Administracion-De-Cuentas.md) |
-| CU-03 | Envío, eliminación y estado del trabajo, con el texto original como cadena no interpretada. El envío es la única acción de guardado y la solicitud de eliminación es única para los dos papeles | NB-03, NB-04 | Propuesto | [CU-03](Casos-De-Uso/CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) |
-| CU-04 | Listado de trabajos como proyección sin texto original ni componentes, con alcance distinto según el papel | NB-03, NB-07, NB-09 | Propuesto | [CU-04](Casos-De-Uso/CU-04-Contrato-De-Listado-De-Trabajos.md) |
-| CU-05 | Detalle del trabajo interpretado: piezas, componentes, observaciones con severidad y par de valores, y comentario del administrador | NB-04, NB-05, NB-06, NB-07, NB-09 | Propuesto | [CU-05](Casos-De-Uso/CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) |
-| CU-06 | Respuesta de error neutra, transversal a los demás, con el conjunto cerrado de catorce códigos | NB-04, NB-08, NB-09, NB-02 | Propuesto | [CU-06](Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) |
-| CU-07 | Desenlace de la revisión: aprobar o rechazar un trabajo en estado `Pendiente`, con comentario opcional | NB-09, NB-07 | Propuesto | [CU-07](Casos-De-Uso/CU-07-Contrato-De-Desenlace-De-La-Revision.md) |
+| CU-01 | Canje de credenciales y respuesta de sesión, sin exponer contraseña almacenada ni clave de firma | NB-02, NB-01 | Propuesto | [CU-01](../../Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) |
+| CU-02 | Registro, credencial, listado de cuentas y cambio de situación de cuenta, con la confirmación escrita de la baja | NB-01, NB-02 | Propuesto | [CU-02](../../Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md) |
+| CU-03 | Envío, eliminación y estado del trabajo, con el texto original como cadena no interpretada. El envío es la única acción de guardado y la solicitud de eliminación es única para los dos papeles | NB-03, NB-04 | Propuesto | [CU-03](../../Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) |
+| CU-04 | Listado de trabajos como proyección sin texto original ni componentes, con alcance distinto según el papel | NB-03, NB-07, NB-09 | Propuesto | [CU-04](../../Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md) |
+| CU-05 | Detalle del trabajo interpretado: piezas, componentes, observaciones con severidad y par de valores, y comentario del administrador | NB-04, NB-05, NB-06, NB-07, NB-09 | Propuesto | [CU-05](../../Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) |
+| CU-06 | Respuesta de error neutra, transversal a los demás, con el conjunto cerrado de catorce códigos | NB-04, NB-08, NB-09, NB-02 | Propuesto | [CU-06](../../Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) |
+| CU-07 | Desenlace de la revisión: aprobar o rechazar un trabajo en estado `Pendiente`, con comentario opcional | NB-09, NB-07 | Propuesto | [CU-07](../../Casos-De-Uso/CU-08007-Contrato-De-Desenlace-De-La-Revision.md) |
 
 Siete casos de uso, sobre el mínimo de cinco que `Rules-Especificacion-Funcional.md` §2.2 fija para `library`.
 

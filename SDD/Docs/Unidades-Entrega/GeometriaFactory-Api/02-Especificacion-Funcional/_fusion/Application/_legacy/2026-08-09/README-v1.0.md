@@ -36,16 +36,16 @@
 
 | CU | Nombre | En una línea |
 | --- | --- | --- |
-| CU-01 | [Registrar el alta de una cuenta](Casos-De-Uso/CU-01-Registrar-El-Alta-De-Una-Cuenta.md) | Auto-registro del alumno: correo libre, cuenta en estado `Pendiente` y sin credencial |
-| CU-02 | [Gobernar las cuentas de la comisión](Casos-De-Uso/CU-02-Gobernar-Las-Cuentas-De-La-Comision.md) | Las cuatro operaciones del administrador, con confirmación escrita y arrastre de trabajos en la baja |
-| CU-03 | [Resolver el ingreso y la credencial del alumno](Casos-De-Uso/CU-03-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) | Admisibilidad con su motivo, y fijación y reemplazo de la credencial derivada |
-| CU-04 | [Cargar y reeditar un trabajo propio](Casos-De-Uso/CU-04-Cargar-Y-Reeditar-Un-Trabajo-Propio.md) | Trabajo con dueño y texto original íntegro; reedición sólo en `Borrador` |
-| CU-05 | [Enviar un trabajo e interpretar su texto](Casos-De-Uso/CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) | La única acción de guardado, con el validador detrás de un puerto |
-| CU-06 | [Consultar los trabajos propios del alumno](Casos-De-Uso/CU-06-Consultar-Los-Trabajos-Propios-Del-Alumno.md) | Listado acotado al dueño y sin componentes; detalle con desenlace y comentario |
-| CU-07 | [Revisar los trabajos de la comisión](Casos-De-Uso/CU-07-Revisar-Los-Trabajos-De-La-Comision.md) | La comisión sin borradores, con dueño para agrupar y filtrar |
-| CU-08 | [Dar desenlace a un trabajo](Casos-De-Uso/CU-08-Dar-Desenlace-A-Un-Trabajo.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad |
-| CU-09 | [Eliminar un trabajo](Casos-De-Uso/CU-09-Eliminar-Un-Trabajo.md) | Los dos alcances opuestos del retiro, en un solo contrato |
-| CU-10 | [Configurar la cuenta de administrador](Casos-De-Uso/CU-10-Configurar-La-Cuenta-De-Administrador.md) | El segundo camino de alta: cuenta única, `Habilitado` y con credencial, sólo en el primer arranque |
+| CU-01 | [Registrar el alta de una cuenta](../../../../Casos-De-Uso/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md) | Auto-registro del alumno: correo libre, cuenta en estado `Pendiente` y sin credencial |
+| CU-02 | [Gobernar las cuentas de la comisión](../../../../Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md) | Las cuatro operaciones del administrador, con confirmación escrita y arrastre de trabajos en la baja |
+| CU-03 | [Resolver el ingreso y la credencial del alumno](../../../../Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) | Admisibilidad con su motivo, y fijación y reemplazo de la credencial derivada |
+| CU-04 | [Cargar y reeditar un trabajo propio](../../../../Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md) | Trabajo con dueño y texto original íntegro; reedición sólo en `Borrador` |
+| CU-05 | [Enviar un trabajo e interpretar su texto](../../../../Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) | La única acción de guardado, con el validador detrás de un puerto |
+| CU-06 | [Consultar los trabajos propios del alumno](../../../../Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md) | Listado acotado al dueño y sin componentes; detalle con desenlace y comentario |
+| CU-07 | [Revisar los trabajos de la comisión](../../../../Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md) | La comisión sin borradores, con dueño para agrupar y filtrar |
+| CU-08 | [Dar desenlace a un trabajo](../../../../Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad |
+| CU-09 | [Eliminar un trabajo](../../../../Casos-De-Uso/CU-04009-Eliminar-Un-Trabajo.md) | Los dos alcances opuestos del retiro, en un solo contrato |
+| CU-10 | [Configurar la cuenta de administrador](../../../../Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md) | El segundo camino de alta: cuenta única, `Habilitado` y con credencial, sólo en el primer arranque |
 
 ## 3. Orden de lectura sugerido
 

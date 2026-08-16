@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md`](../../RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md)
+> - **Versión vigente:** [`RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md`](../../RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-09), §5 (historia 4), §7 (CL-3), §21 (RN-09), §20.E-5, §17.4.P.5; [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 (fallo silencioso)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-09), §5 (historia 4), §7 (CL-3), §21 (RN-09), §20.E-5, §17.4.P.5; [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 (fallo silencioso)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -58,8 +58,8 @@ Rechazo del conjunto de observaciones, con el código `ERROR_SIN_UBICACION`. El 
 
 ## 5. CU afectados
 
-- [CU-07](../Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo.
-- [CU-06](../Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — Reconstruir el conjunto de piezas, en cuanto a la pieza de tipo desconocido que no se adopta.
+- [CU-07](../../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo.
+- [CU-06](../../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — Reconstruir el conjunto de piezas, en cuanto a la pieza de tipo desconocido que no se adopta.
 
 ## 6. Pruebas que la verifican
 

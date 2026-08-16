@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`RN-12`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md); [`RN-13`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md); [`RN-15`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-15-Reseteo-Independiente-Del-Estado-De-Cuenta.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §17.1.P.2 (**INV-09**) y §17.3.P.4 («Ampliación del 2026-08-08 por el circuito de revisión»); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`
+**Trazabilidad upstream:** [`RN-12`](../../../../Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md); [`RN-13`](../../../../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md); [`RN-15`](../../../../Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §17.1.P.2 (**INV-09**) y §17.3.P.4 («Ampliación del 2026-08-08 por el circuito de revisión»); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -40,9 +40,9 @@ Modelar el comentario como entidad con historial tampoco produce rechazo: produc
 
 ## 5. CU afectados
 
-- [`CU-05`](../../Casos-De-Uso/CU-05-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) — Guardar y recuperar las cuentas: es donde la marca se escribe, se conserva y viaja.
-- [`CU-03`](../../Casos-De-Uso/CU-03-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde el comentario vive como campo.
-- [`CU-07`](../../Casos-De-Uso/CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contexto**: es la mitad del reseteo que produce el valor, y la que explica por qué la provisoria es provisoria por la marca y no por un vencimiento.
+- [`CU-05`](../../../../Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) — Guardar y recuperar las cuentas: es donde la marca se escribe, se conserva y viaja.
+- [`CU-03`](../../../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde el comentario vive como campo.
+- [`CU-07`](../../../../Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contexto**: es la mitad del reseteo que produce el valor, y la que explica por qué la provisoria es provisoria por la marca y no por un vencimiento.
 
 ## 6. Pruebas que la verifican
 

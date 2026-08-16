@@ -142,7 +142,7 @@ Shell de acceso, sin navegación.
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | Alumno y docente por igual: la superficie es la misma y sólo cambia el destino |
-| CU origen | [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) íntegro |
+| CU origen | [`CU-02`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) íntegro |
 | Reglas de negocio relevantes | `RN-06` (cuenta pendiente o bloqueada sin acceso), `RN-01` (papeles fijos) |
 | Restricciones transversales | `RT-01`, `RT-02`, `RT-03`, `RT-09` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.4, §4.1, §8.2 |

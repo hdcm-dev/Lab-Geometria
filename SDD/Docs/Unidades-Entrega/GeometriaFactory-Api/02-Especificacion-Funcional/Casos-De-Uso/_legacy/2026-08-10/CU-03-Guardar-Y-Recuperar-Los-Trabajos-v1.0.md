@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-07`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.1 (RN-03, RN-08, RN-11), §7 (CL-1), §17.3.P.2, §17.3.P.4, §17.3.P.11 punto 2, §17.3.P.12; implementa el puerto de repositorio de trabajos de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; el modelo que materializa está en [`Modelo-Datos/Modelo-Conceptual.md`](../Modelo-Datos/Modelo-Conceptual.md)
+**Trazabilidad upstream:** [`NB-03`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-07`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.1 (RN-03, RN-08, RN-11), §7 (CL-1), §17.3.P.2, §17.3.P.4, §17.3.P.11 punto 2, §17.3.P.12; implementa el puerto de repositorio de trabajos de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; el modelo que materializa está en [`Modelo-Datos/Modelo-Conceptual.md`](../Modelo-Datos/Modelo-Conceptual.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -99,8 +99,8 @@ Lo que este caso de uso **no** hace: no decide quién puede ver qué —eso lo r
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-03, y NB-07 en cuanto resuelve la consulta con el alcance ya aplicado |
-| Reglas de negocio aplicables | [RN-08](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md), [RN-03](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) y [RN-11](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-11-El-Administrador-No-Ve-Los-Borradores.md), las dos últimas **por el traslado del recorte al pedido** |
-| Reglas conceptuales de modelo | [`RC-01`](../Modelo-Datos/reglas-conceptuales-de-modelo/RC-01-Texto-Original-Escrito-Una-Sola-Vez.md), [`RC-02`](../Modelo-Datos/reglas-conceptuales-de-modelo/RC-02-Identidad-Posicional-De-La-Pieza.md), [`RC-03`](../Modelo-Datos/reglas-conceptuales-de-modelo/RC-03-Valor-Declarado-Y-Derivado-Por-Separado.md), [`RC-06`](../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06-Tres-Sellos-De-Tiempo-Distintos.md) |
+| Reglas de negocio aplicables | [RN-08](../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md), [RN-03](../../../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) y [RN-11](../../../Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md), las dos últimas **por el traslado del recorte al pedido** |
+| Reglas conceptuales de modelo | [`RC-01`](../../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06001-Texto-Original-Escrito-Una-Sola-Vez.md), [`RC-02`](../../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06002-Identidad-Posicional-De-La-Pieza.md), [`RC-03`](../../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06003-Valor-Declarado-Y-Derivado-Por-Separado.md), [`RC-06`](../../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06006-Tres-Sellos-De-Tiempo-Distintos.md) |
 | Puerto que implementa | Repositorio de trabajos |
 | Consumidor | `GeometriaFactory-Application`, sus CU-02, CU-04, CU-05, CU-06, CU-07, CU-08 y CU-09 |
 | Historias de usuario a generar en 06 | US-08, US-09, US-10, US-11 |

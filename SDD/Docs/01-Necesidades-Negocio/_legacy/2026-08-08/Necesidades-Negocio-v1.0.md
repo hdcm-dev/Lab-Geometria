@@ -59,14 +59,14 @@ Las necesidades están redactadas desde las dos personas que usan el producto �
 
 | ID | Necesidad | Prioridad MoSCoW | CU previstas | Estado | Enlace |
 | --- | --- | --- | --- | --- | --- |
-| NB-01 | Control de admisión y de bajas del laboratorio | Must Have | CU-01, CU-02, CU-03 | Propuesto | [NB-01](Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) |
-| NB-02 | Identidad propia del alumno sin canal de correo | Must Have | CU-04, CU-05, CU-06, CU-07 | Propuesto | [NB-02](Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) |
-| NB-03 | Trabajo con dueño, estado y persistencia | Must Have | CU-08, CU-09, CU-10, CU-11 | Propuesto | [NB-03](Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) |
-| NB-04 | Interpretación fiel del dato del alumno, con el error localizado | Must Have | CU-12, CU-13 | Propuesto | [NB-04](Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) |
-| NB-05 | Visibilidad del error de cálculo sobre el trabajo propio | Must Have | CU-14 | Propuesto | [NB-05](Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) |
-| NB-06 | Visualización del trabajo dentro del producto | Must Have | CU-15, CU-16, CU-17 | Propuesto | [NB-06](Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md) |
-| NB-07 | Revisión de la comisión desde un solo lugar | Must Have | CU-18, CU-19, CU-20 | Propuesto | [NB-07](Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md) |
-| NB-08 | Alcance del laboratorio desde el aula | Should Have | CU-21, CU-22 | Propuesto | [NB-08](Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md) |
+| NB-01 | Control de admisión y de bajas del laboratorio | Must Have | CU-01, CU-02, CU-03 | Propuesto | [NB-01](../../Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) |
+| NB-02 | Identidad propia del alumno sin canal de correo | Must Have | CU-04, CU-05, CU-06, CU-07 | Propuesto | [NB-02](../../Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) |
+| NB-03 | Trabajo con dueño, estado y persistencia | Must Have | CU-08, CU-09, CU-10, CU-11 | Propuesto | [NB-03](../../Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) |
+| NB-04 | Interpretación fiel del dato del alumno, con el error localizado | Must Have | CU-12, CU-13 | Propuesto | [NB-04](../../Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) |
+| NB-05 | Visibilidad del error de cálculo sobre el trabajo propio | Must Have | CU-14 | Propuesto | [NB-05](../../Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) |
+| NB-06 | Visualización del trabajo dentro del producto | Must Have | CU-15, CU-16, CU-17 | Propuesto | [NB-06](../../Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md) |
+| NB-07 | Revisión de la comisión desde un solo lugar | Must Have | CU-18, CU-19, CU-20 | Propuesto | [NB-07](../../Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md) |
+| NB-08 | Alcance del laboratorio desde el aula | Should Have | CU-21, CU-22 | Propuesto | [NB-08](../../Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md) |
 
 Siete necesidades son Must Have y una es Should Have. Las prioridades no se deciden en esta categoría: se derivan de PRODUCT-INTAKE §4 y se justifican en §9 de cada archivo. Dos NB agrupan capacidades de prioridades distintas —NB-06 con F-11 y F-13, NB-07 con F-12 y F-15— y en ambos casos la prioridad de la NB es la de su capacidad más alta, declarada como tal en su §9.
 

@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`RN-07`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md); [`RN-04`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md); [`RN-12`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) **por contraste**; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-03, F-24), §4.1 (RN-04, RN-07), §7 (CL-6)
+**Trazabilidad upstream:** [`RN-07`](../../../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md); [`RN-04`](../../../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md); [`RN-12`](../../../../Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) **por contraste**; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-03, F-24), §4.1 (RN-04, RN-07), §7 (CL-6)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -31,14 +31,14 @@ El «todo o nada» no es una preferencia transaccional: una baja a medias deja *
 
 ## 4. Consecuencia si se viola
 
-Un pedido de baja que no declara el arrastre devuelve `RETIRO_PARCIAL_NO_ADMITIDO` y **no retira nada** ([`CU-04`](../../Casos-De-Uso/CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) §6).
+Un pedido de baja que no declara el arrastre devuelve `RETIRO_PARCIAL_NO_ADMITIDO` y **no retira nada** ([`CU-04`](../../../../Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) §6).
 
 Introducir un borrado lógico no produciría ningún rechazo: produciría un producto en el que la baja no da de baja, y en el que el criterio con el que la regla se verifica pasa sin haber verificado nada.
 
 ## 5. CU afectados
 
-- [`CU-04`](../../Casos-De-Uso/CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) — Borrado físico y arrastre: es donde se hace cumplir.
-- [`CU-07`](../../Casos-De-Uso/CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contraste**: el reseteo no pasa por acá.
+- [`CU-04`](../../../../Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) — Borrado físico y arrastre: es donde se hace cumplir.
+- [`CU-07`](../../../../Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contraste**: el reseteo no pasa por acá.
 
 ## 6. Pruebas que la verifican
 

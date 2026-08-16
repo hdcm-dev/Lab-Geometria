@@ -102,9 +102,9 @@ El actor primario es uno solo. El papel que la persona ejerce —alumno o admini
 
 | Dimensión | Referencia |
 | --- | --- |
-| Necesidad de negocio | [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md), [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) |
-| Reglas de negocio aplicables | [`RN-06`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [`RN-01`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md). Viven y se hacen cumplir en `GeometriaFactory-Domain` |
-| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-01](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) completo, con FA-01, FA-02 y FA-03; [`CU-06`](../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) |
+| Necesidad de negocio | [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md), [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) |
+| Reglas de negocio aplicables | [`RN-06`](../../../../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [`RN-01`](../../../../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md). Viven y se hacen cumplir en `GeometriaFactory-Domain` |
+| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-01](../../../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) completo, con FA-01, FA-02 y FA-03; [`CU-06`](../../../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) |
 | Fachada del visualizador | Ninguna función |
 | Historias de usuario a generar en 06 | US-03, US-04, US-05 |
 | Componentes esperados en 05 | Página de ingreso, custodia de la credencial de sesión en el estado del circuito, y el mecanismo de protección de rutas por papel |

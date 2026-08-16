@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-06-Contrato-De-Respuesta-De-Error.md`](../../CU-06-Contrato-De-Respuesta-De-Error.md)
+> - **Versión vigente:** [`CU-06-Contrato-De-Respuesta-De-Error.md`](../../CU-08006-Contrato-De-Respuesta-De-Error.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -108,7 +108,7 @@ Declarar el único tipo de transferencia con el que un fallo cruza la frontera e
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-04, NB-08, y NB-02 por la explicación de la situación de la cuenta |
-| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-09`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) —toda observación de error indica la posición de la pieza y el campo, que es la regla que `PRODUCT-INTAKE` §17.4 P.5 ancla a este tipo— sobre CA-02, y [`RN-03`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre CA-05, las dos de `GeometriaFactory-Domain`. La regla de arquitectura RA-03 es de nivel producto, vive en `PRODUCT-INTAKE` §14 y su tratamiento arquitectónico pertenece a 05 |
+| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-09`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) —toda observación de error indica la posición de la pieza y el campo, que es la regla que `PRODUCT-INTAKE` §17.4 P.5 ancla a este tipo— sobre CA-02, y [`RN-03`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre CA-05, las dos de `GeometriaFactory-Domain`. La regla de arquitectura RA-03 es de nivel producto, vive en `PRODUCT-INTAKE` §14 y su tratamiento arquitectónico pertenece a 05 |
 | Historias de usuario a generar en 06 | US-14 tipo de error con texto neutro; US-15 detalle de ubicación con índice de figura y campo; US-16 conjunto cerrado de códigos de error |
 | Componentes esperados en 05 | Tipo de transferencia de error del ensamblado de contratos, transversal a las demás familias |
 | Tests previstos en 08 | Prueba de inspección de superficie pública para CA-01; pruebas de integración de error de interpretación con E-5, de credencial inválida, de recurso ajeno y de servicio detenido |

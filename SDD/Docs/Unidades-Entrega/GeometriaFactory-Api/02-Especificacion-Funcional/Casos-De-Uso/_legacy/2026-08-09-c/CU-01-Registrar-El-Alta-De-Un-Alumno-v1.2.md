@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.2
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-01-Registrar-El-Alta-De-Un-Alumno.md`](../../CU-01-Registrar-El-Alta-De-Un-Alumno.md)
+> - **Versión vigente:** [`CU-01-Registrar-El-Alta-De-Un-Alumno.md`](../../CU-02001-Registrar-El-Alta-De-Un-Alumno.md)
 >
 > El cuerpo que sigue **no se modifica**. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-02, con origen en RF-03, y F-04), §4.1 (RN-02), §17.1.P.2 (INV-01), §17.1.P.5, §6 (flujo 1)
+**Trazabilidad upstream:** [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-02, con origen en RF-03, y F-04), §4.1 (RN-02), §17.1.P.2 (INV-01), §17.1.P.5, §6 (flujo 1)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -118,7 +118,7 @@ Los cuatro errores terminan de forma controlada: el dominio no construye la enti
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-02, y NB-01 en su criterio de admisión explícita |
-| Reglas de negocio aplicables | [RN-02](../Reglas-De-Negocio/RN-02-Correo-Del-Alumno-Unico.md), y [RN-01](../Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) **sólo** en cuanto al conjunto cerrado de dos papeles: la unicidad del administrador y su ventana de alta se ejercen en CU-12, no acá |
+| Reglas de negocio aplicables | [RN-02](../../../Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md), y [RN-01](../../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) **sólo** en cuanto al conjunto cerrado de dos papeles: la unicidad del administrador y su ventana de alta se ejercen en CU-12, no acá |
 | Invariantes | INV-01. **INV-05 no se cita como fundamento de este camino**: dice que existe exactamente un administrador y que su alta sólo es posible mientras no exista ninguno, y no dice nada sobre el estado inicial de una cuenta |
 | Historias de usuario a generar en 06 | US de auto-registro del alumno, US de verificación de los datos obligatorios, US de unicidad del correo |
 | Componentes esperados en 05 | Entidad de alumno del modelo de dominio, su conjunto cerrado de estados de cuenta y **los dos caminos de alta con su estado inicial propio** |

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-04-Contrato-De-Listado-De-Trabajos.md`](../../CU-04-Contrato-De-Listado-De-Trabajos.md)
+> - **Versión vigente:** [`CU-04-Contrato-De-Listado-De-Trabajos.md`](../../CU-08004-Contrato-De-Listado-De-Trabajos.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 

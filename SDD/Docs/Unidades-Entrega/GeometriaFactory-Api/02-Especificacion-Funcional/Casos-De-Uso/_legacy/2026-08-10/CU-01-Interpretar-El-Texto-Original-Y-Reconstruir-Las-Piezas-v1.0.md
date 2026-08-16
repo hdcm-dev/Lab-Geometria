@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-09), §4.1 (RN-08, RN-09), §11 (RN-B3), §17.3.P.3, §17.3.P.6, §17.3.P.11 puntos 1 y 2, §20.E-1 a §20.E-7 y §21; implementa el puerto de validación de figuras que declara `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3 y consume su [`CU-05`](../../../GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md); alimenta [`CU-06`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) de GeometriaFactory-Domain
+**Trazabilidad upstream:** [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); [`NB-03`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4 (F-09), §4.1 (RN-08, RN-09), §11 (RN-B3), §17.3.P.3, §17.3.P.6, §17.3.P.11 puntos 1 y 2, §20.E-1 a §20.E-7 y §21; implementa el puerto de validación de figuras que declara `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3 y consume su [`CU-05`](../../CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md); alimenta [`CU-06`](../../CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) de GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -114,9 +114,9 @@ Los seis primeros son escenarios del intake, transcriptos por su identificador y
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-04, y NB-03 en cuanto el trabajo que no verifica se conserva |
-| Reglas de negocio aplicables | [RN-08](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md), [RN-09](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md), [RN-05](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) por el efecto de las observaciones que emite |
+| Reglas de negocio aplicables | [RN-08](../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md), [RN-09](../../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md), [RN-05](../../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) por el efecto de las observaciones que emite |
 | Puerto que implementa | Validación de figuras, en su mitad de interpretación y reconstrucción |
-| Consumidor | `GeometriaFactory-Application` [`CU-05`](../../../GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) |
+| Consumidor | `GeometriaFactory-Application` [`CU-05`](../../CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) |
 | Escenarios del intake que lo ejercitan | E-1, E-2, E-3, E-4, E-5, E-6, E-7 (§20), con la matriz de §21 |
 | Historias de usuario a generar en 06 | US-01, US-02, US-03, US-04 |
 | Componentes esperados en 05 | Adaptador del puerto de validación de figuras, con la lectura tolerante y la tabla de tipos reconstruibles |

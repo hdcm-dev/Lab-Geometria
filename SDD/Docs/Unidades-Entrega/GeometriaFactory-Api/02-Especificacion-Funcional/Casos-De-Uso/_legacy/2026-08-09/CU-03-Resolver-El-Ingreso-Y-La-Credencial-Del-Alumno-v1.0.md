@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §5 (explicación al alumno no habilitado, custodia de la credencial vigente, alta de punta a punta); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-04, F-05), §4.1 (RN-06), §6 (flujo 1), §17.2.P.5; orquesta [`CU-04`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md) y [`CU-03`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) de GeometriaFactory-Domain
+**Trazabilidad upstream:** [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §5 (explicación al alumno no habilitado, custodia de la credencial vigente, alta de punta a punta); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-04, F-05), §4.1 (RN-06), §6 (flujo 1), §17.2.P.5; orquesta [`CU-04`](../../CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) y [`CU-03`](../../CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) de GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Application
 
 ---
@@ -102,8 +102,8 @@ El alumno es el sujeto de la regla.
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-02 |
-| Reglas de negocio aplicables | [RN-06](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [RN-01](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) |
-| Casos de uso de dominio orquestados | [CU-04](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md), [CU-03](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) |
+| Reglas de negocio aplicables | [RN-06](../../../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), [RN-01](../../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) |
+| Casos de uso de dominio orquestados | [CU-04](../../CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md), [CU-03](../../CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) |
 | Puertos que consume | Repositorio de cuentas, reloj del sistema |
 | Historias de usuario a generar en 06 | US-07, US-08, US-09 |
 | Componentes esperados en 05 | Caso de uso de admisibilidad y caso de uso de credencial, con su resultado tipado y su enumeración cerrada de motivos |

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md`](../../CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md)
+> - **Versión vigente:** [`CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md`](../../CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5 (separación entre alumnos y acotación de la eliminación); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-5), §4 (F-07), §17.2.P.5, §17.5.P.5, §17.5.P.6
+**Trazabilidad upstream:** [`NB-03`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5 (separación entre alumnos y acotación de la eliminación); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-5), §4 (F-07), §17.2.P.5, §17.5.P.5, §17.5.P.6
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -107,7 +107,7 @@ Ninguno de los tres tiene efecto sobre el trabajo: la consulta no modifica nada.
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-03 |
-| Reglas de negocio aplicables | [RN-03](../Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md), [RN-04](../Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md) |
+| Reglas de negocio aplicables | [RN-03](../../../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md), [RN-04](../../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) |
 | Invariantes | INV-02, y el aspecto de la pertenencia que INV-03 nombra sin enunciar (ver [`Definicion-Modelo-De-Dominio.md`](../Definicion-Modelo-De-Dominio.md) §4.2) |
 | Historias de usuario a generar en 06 | US de separación de trabajos entre alumnos, US de eliminación acotada al borrador |
 | Componentes esperados en 05 | Resolución de pertenencia sobre la entidad de trabajo, con su enumeración cerrada de motivos |

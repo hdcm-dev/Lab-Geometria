@@ -67,15 +67,15 @@ Lo que no está acá, y dónde está: la interpretación del texto del alumno, e
 
 | CU | Nombre | Contrato que describe | Estado |
 | --- | --- | --- | --- |
-| CU-01 | [Registrar el alta de un alumno](Casos-De-Uso/CU-01-Registrar-El-Alta-De-Un-Alumno.md) | Constituir un alumno en estado `Pendiente`, sin credencial derivada | Propuesto |
-| CU-02 | [Gobernar el ciclo de vida de la cuenta del alumno](Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | Habilitar, bloquear, rehabilitar y dar de baja | Propuesto |
-| CU-03 | [Fijar y reemplazar la credencial derivada](Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | Fijar la credencial en el primer ingreso efectivo y reemplazarla después | Propuesto |
-| CU-04 | [Evaluar la admisibilidad de la cuenta](Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Responder si la cuenta admite acceso y con qué motivo si no lo admite (INV-06) | Propuesto |
-| CU-05 | [Crear y reeditar un trabajo](Casos-De-Uso/CU-05-Crear-Y-Reeditar-Un-Trabajo.md) | Constituir el trabajo con dueño, identidad propia y texto original íntegro | Propuesto |
-| CU-06 | [Reconstruir el conjunto de piezas del trabajo](Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | Incorporar piezas y componentes con identidad posicional y valores separados | Propuesto |
-| CU-07 | [Registrar las observaciones del trabajo](Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) | Incorporar advertencias y errores de validación bien formados | Propuesto |
-| CU-08 | [Gobernar el estado del trabajo](Casos-De-Uso/CU-08-Gobernar-El-Estado-Del-Trabajo.md) | Enviar y finalizar, con la regla que separa guardar de entregar | Propuesto |
-| CU-09 | [Resolver el acceso de un alumno a un trabajo](Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | Pertenencia del trabajo y acotación de la eliminación al borrador | Propuesto |
+| CU-01 | [Registrar el alta de un alumno](../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | Constituir un alumno en estado `Pendiente`, sin credencial derivada | Propuesto |
+| CU-02 | [Gobernar el ciclo de vida de la cuenta del alumno](../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | Habilitar, bloquear, rehabilitar y dar de baja | Propuesto |
+| CU-03 | [Fijar y reemplazar la credencial derivada](../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | Fijar la credencial en el primer ingreso efectivo y reemplazarla después | Propuesto |
+| CU-04 | [Evaluar la admisibilidad de la cuenta](../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Responder si la cuenta admite acceso y con qué motivo si no lo admite (INV-06) | Propuesto |
+| CU-05 | [Crear y reeditar un trabajo](../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) | Constituir el trabajo con dueño, identidad propia y texto original íntegro | Propuesto |
+| CU-06 | [Reconstruir el conjunto de piezas del trabajo](../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | Incorporar piezas y componentes con identidad posicional y valores separados | Propuesto |
+| CU-07 | [Registrar las observaciones del trabajo](../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) | Incorporar advertencias y errores de validación bien formados | Propuesto |
+| CU-08 | [Gobernar el estado del trabajo](../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) | Enviar y finalizar, con la regla que separa guardar de entregar | Propuesto |
+| CU-09 | [Resolver el acceso de un alumno a un trabajo](../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | Pertenencia del trabajo y acotación de la eliminación al borrador | Propuesto |
 
 Nueve casos de uso, sobre un mínimo de cinco para el tipo `library`.
 
@@ -83,13 +83,13 @@ Nueve casos de uso, sobre un mínimo de cinco para el tipo `library`.
 
 | RN | Enunciado en una línea | CU afectados | Estado |
 | --- | --- | --- | --- |
-| RN-01 | [Administrador único y papeles fijos](Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) | CU-01, CU-02, CU-04 | Propuesto |
-| RN-03 | [Un trabajo ajeno es indistinguible de uno inexistente](Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | CU-09 | Propuesto |
-| RN-04 | [La eliminación de un trabajo está acotada al borrador](Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md) | CU-08, CU-09 | Propuesto |
-| RN-05 | [Un trabajo no se finaliza con errores de validación](Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) | CU-07, CU-08 | Propuesto |
-| RN-07 | [La baja arrastra los trabajos y exige confirmación escrita](Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | CU-02 | Propuesto |
-| RN-08 | [El texto original del alumno se conserva íntegro](Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md) | CU-05, CU-06, CU-07 | Propuesto |
-| RN-09 | [Toda observación de error indica la posición de la pieza y el campo](Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) | CU-06, CU-07 | Propuesto |
+| RN-01 | [Administrador único y papeles fijos](../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | CU-01, CU-02, CU-04 | Propuesto |
+| RN-03 | [Un trabajo ajeno es indistinguible de uno inexistente](../../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | CU-09 | Propuesto |
+| RN-04 | [La eliminación de un trabajo está acotada al borrador](../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | CU-08, CU-09 | Propuesto |
+| RN-05 | [Un trabajo no se finaliza con errores de validación](../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | CU-07, CU-08 | Propuesto |
+| RN-07 | [La baja arrastra los trabajos y exige confirmación escrita](../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | CU-02 | Propuesto |
+| RN-08 | [El texto original del alumno se conserva íntegro](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | CU-05, CU-06, CU-07 | Propuesto |
+| RN-09 | [Toda observación de error indica la posición de la pieza y el campo](../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | CU-06, CU-07 | Propuesto |
 
 Los invariantes INV-02, INV-04, INV-05 e INV-06 no llevan archivo propio: son propiedades permanentes del modelo y viven en [`Definicion-Modelo-De-Dominio.md`](Definicion-Modelo-De-Dominio.md) §4, que es el documento de concepto central. Cada regla de negocio declara el invariante que materializa.
 

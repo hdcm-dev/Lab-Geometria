@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`RN-08`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.1 (RN-08), §9 (X-4), §17.3.P.4 («`JsonOriginal` conservado íntegro y nunca reescrito»), §17.3.P.11 punto 2
+**Trazabilidad upstream:** [`RN-08`](../../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.1 (RN-08), §9 (X-4), §17.3.P.4 («`JsonOriginal` conservado íntegro y nunca reescrito»), §17.3.P.11 punto 2
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -32,14 +32,14 @@ Y tiene una consecuencia negativa igual de deliberada: la edición o corrección
 
 ## 4. Consecuencia si se viola
 
-Una escritura que reemplace el texto conservado devuelve `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` y **no escribe nada** ([`CU-03`](../../Casos-De-Uso/CU-03-Guardar-Y-Recuperar-Los-Trabajos.md) §6).
+Una escritura que reemplace el texto conservado devuelve `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` y **no escribe nada** ([`CU-03`](../../../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) §6).
 
 Violarla en silencio —normalizando el texto al guardarlo, por ejemplo— produce un daño que no se nota hasta que alguien compara: el alumno vuelve a abrir su trabajo y ve un texto que él no escribió, las comas finales desaparecen y el escenario que documenta la tolerancia del formato deja de ser reproducible desde el almacén.
 
 ## 5. CU afectados
 
-- [`CU-03`](../../Casos-De-Uso/CU-03-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde se hace cumplir.
-- [`CU-01`](../../Casos-De-Uso/CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — **por contraste**: el validador lee el texto y **no lo devuelve corregido**.
+- [`CU-03`](../../../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde se hace cumplir.
+- [`CU-01`](../../../../Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — **por contraste**: el validador lee el texto y **no lo devuelve corregido**.
 
 ## 6. Pruebas que la verifican
 

@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-07 y reglas sin invariante), §4 (F-03), §4.2 (modelo de estados del trabajo), §7 (CL-6), §11 (RN-B6), §17.1.P.2; [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §2, §4 y §5; `00-Contexto/Vision-Producto.md` §8 (RG-06)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-07 y reglas sin invariante), §4 (F-03), §4.2 (modelo de estados del trabajo), §7 (CL-6), §11 (RN-B6), §17.1.P.2; [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §2, §4 y §5; `00-Contexto/Vision-Producto.md` §8 (RG-06)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -46,7 +46,7 @@ Rechazo. Una baja que declare conservar los trabajos se rechaza con el código `
 
 ## 5. CU afectados
 
-- [CU-02](../Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta del alumno, en su flujo alternativo de baja.
+- [CU-02](../../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta del alumno, en su flujo alternativo de baja.
 
 ## 6. Pruebas que la verifican
 

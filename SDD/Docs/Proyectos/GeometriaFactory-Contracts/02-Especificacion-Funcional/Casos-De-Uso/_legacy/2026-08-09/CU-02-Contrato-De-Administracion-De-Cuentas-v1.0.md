@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-02-Contrato-De-Administracion-De-Cuentas.md`](../../CU-02-Contrato-De-Administracion-De-Cuentas.md)
+> - **Versión vigente:** [`CU-02-Contrato-De-Administracion-De-Cuentas.md`](../../CU-08002-Contrato-De-Administracion-De-Cuentas.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -109,7 +109,7 @@ Declarar los tipos de transferencia del ciclo de vida de una cuenta: el registro
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-01, NB-02 |
-| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-01`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) —administrador único y papeles fijos— y [`RN-07`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) —la baja arrastra los trabajos y exige confirmación escrita—, las dos de `GeometriaFactory-Domain`. Ver `Especificacion-Funcional.md` §5 |
+| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-01`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) —administrador único y papeles fijos— y [`RN-07`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) —la baja arrastra los trabajos y exige confirmación escrita—, las dos de `GeometriaFactory-Domain`. Ver `Especificacion-Funcional.md` §5 |
 | Historias de usuario a generar en 06 | US-03 tipos de registro y de credencial; US-04 tipos de listado y de cambio de situación de cuenta; US-05 solicitud de baja con confirmación escrita |
 | Componentes esperados en 05 | Familia de tipos de transferencia de cuentas del ensamblado de contratos |
 | Tests previstos en 08 | Pruebas de integración del recorrido de alta de punta a punta —registro, habilitación, establecimiento de contraseña, ingreso—, de la baja con confirmación errónea y del intento de configurar una segunda cuenta de administrador |

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-08-Gobernar-El-Estado-Del-Trabajo.md`](../../CU-08-Gobernar-El-Estado-Del-Trabajo.md)
+> - **Versión vigente:** [`CU-08-Gobernar-El-Estado-Del-Trabajo.md`](../../CU-02008-Gobernar-El-Estado-Del-Trabajo.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §5 (visibilidad del avance y cierre del circuito de entrega); [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (límite entre guardar y entregar); [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) §5 (carácter no bloqueante); `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-08), §7 (CL-3 y CL-4), §20.E-1, §20.E-2, §20.E-5
+**Trazabilidad upstream:** [`NB-03`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §5 (visibilidad del avance y cierre del circuito de entrega); [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (límite entre guardar y entregar); [`NB-05`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) §5 (carácter no bloqueante); `00-Contexto/Alcance-Producto.md` §4.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-08), §7 (CL-3 y CL-4), §20.E-1, §20.E-2, §20.E-5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -103,7 +103,7 @@ Admitir o rechazar las transiciones de estado de un trabajo —de `Borrador` a `
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-03, NB-04, NB-05 |
-| Reglas de negocio aplicables | [RN-05](../Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md), [RN-04](../Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md) en cuanto al estado que admite eliminación |
+| Reglas de negocio aplicables | [RN-05](../../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md), [RN-04](../../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) en cuanto al estado que admite eliminación |
 | Invariantes | Ninguno de los declarados restringe específicamente esta transición; la restringen RN-05 y la máquina de estados de [`Definicion-Modelo-De-Dominio.md`](../Definicion-Modelo-De-Dominio.md) §5.2 |
 | Historias de usuario a generar en 06 | US de envío del trabajo, US de finalización con advertencias, US de rechazo de finalización con errores |
 | Componentes esperados en 05 | Máquina de transiciones de estado del trabajo dentro de la entidad de trabajo |

@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`RN-09`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §12 (entrada «Pieza»), §17.1.P.11 punto 2, §20.E-5; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`
+**Trazabilidad upstream:** [`RN-09`](../../../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §12 (entrada «Pieza»), §17.1.P.11 punto 2, §20.E-5; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -41,8 +41,8 @@ Guardar una observación sobre una posición fuera del rango declarado sí produ
 
 ## 5. CU afectados
 
-- [`CU-01`](../../Casos-De-Uso/CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — Interpretar y reconstruir: es donde la posición se calcula y se reserva.
-- [`CU-03`](../../Casos-De-Uso/CU-03-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde se conserva.
+- [`CU-01`](../../../../Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — Interpretar y reconstruir: es donde la posición se calcula y se reserva.
+- [`CU-03`](../../../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde se conserva.
 
 ## 6. Pruebas que la verifican
 

@@ -175,7 +175,7 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | Alumno y docente por igual. **El tratamiento es el mismo para los dos y esa uniformidad es deliberada** |
-| CU origen | [`CU-10`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md) íntegro. Es transversal: los otros nueve casos de uso lo referencian |
+| CU origen | [`CU-10`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md) íntegro. Es transversal: los otros nueve casos de uso lo referencian |
 | Reglas de negocio relevantes | **Ninguna, y con motivo declarado aguas arriba**: las once reglas restringen el dominio y este caso de uso no toca ninguno de esos objetos. Lo que sí lo restringe es la regla de arquitectura RA-03 |
 | Restricciones transversales | `RT-03`, `RT-06`, `RT-07` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.8, §4.1, §8.1, §8.3 |

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-08
-> - **Versión vigente:** [`NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md`](../../NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md)
+> - **Versión vigente:** [`NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md`](../../NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 

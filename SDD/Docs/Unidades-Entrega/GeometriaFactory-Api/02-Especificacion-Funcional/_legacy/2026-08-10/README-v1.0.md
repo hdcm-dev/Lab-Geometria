@@ -42,28 +42,28 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 
 | CU | Nombre | En una línea |
 | --- | --- | --- |
-| CU-01 | [Interpretar el texto original y reconstruir las piezas](Casos-De-Uso/CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | La lectura tolerante del dato real del alumno, con la posición y el campo de cada defecto |
-| CU-02 | [Verificar los valores declarados contra los derivados](Casos-De-Uso/CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Señalar sin corregir ni rechazar, con tolerancia y operador estricto |
-| CU-03 | [Guardar y recuperar los trabajos](Casos-De-Uso/CU-03-Guardar-Y-Recuperar-Los-Trabajos.md) | El texto original conservado literal y la consulta que llega ya acotada |
-| CU-04 | [Ejecutar el borrado físico y el arrastre de la baja](Casos-De-Uso/CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | La única operación destructiva: todo o nada, sin marca de borrado |
-| CU-05 | [Guardar y recuperar las cuentas de la comisión](Casos-De-Uso/CU-05-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Las dos unicidades del almacén y la marca que viaja sin ser un estado |
-| CU-06 | [Derivar la contraseña y verificar una credencial](Casos-De-Uso/CU-06-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | El único punto donde la contraseña en claro se convierte en el valor guardado, y el único que la compara |
-| CU-07 | [Producir la contraseña provisoria del reseteo](Casos-De-Uso/CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | La delegación explícita de RN-14: no adivinable y sin repetirse |
-| CU-08 | [Emitir el acceso firmado](Casos-De-Uso/CU-08-Emitir-El-Acceso-Firmado.md) | Cuatro reclamos, firma simétrica y una clave que no entra al repositorio de código |
-| CU-09 | [Proveer el sello del reloj del sistema](Casos-De-Uso/CU-09-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | El contrato más corto, y el que explica por qué la capa vecina se prueba sin nada |
-| CU-10 | [Preparar el almacén al arrancar](Casos-De-Uso/CU-10-Preparar-El-Almacen-Al-Arrancar.md) | Transformar el esquema solo, y detener el arranque antes que confiar en un almacén equivocado |
+| CU-01 | [Interpretar el texto original y reconstruir las piezas](../../Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | La lectura tolerante del dato real del alumno, con la posición y el campo de cada defecto |
+| CU-02 | [Verificar los valores declarados contra los derivados](../../Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Señalar sin corregir ni rechazar, con tolerancia y operador estricto |
+| CU-03 | [Guardar y recuperar los trabajos](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) | El texto original conservado literal y la consulta que llega ya acotada |
+| CU-04 | [Ejecutar el borrado físico y el arrastre de la baja](../../Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | La única operación destructiva: todo o nada, sin marca de borrado |
+| CU-05 | [Guardar y recuperar las cuentas de la comisión](../../Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Las dos unicidades del almacén y la marca que viaja sin ser un estado |
+| CU-06 | [Derivar la contraseña y verificar una credencial](../../Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | El único punto donde la contraseña en claro se convierte en el valor guardado, y el único que la compara |
+| CU-07 | [Producir la contraseña provisoria del reseteo](../../Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | La delegación explícita de RN-14: no adivinable y sin repetirse |
+| CU-08 | [Emitir el acceso firmado](../../Casos-De-Uso/CU-06008-Emitir-El-Acceso-Firmado.md) | Cuatro reclamos, firma simétrica y una clave que no entra al repositorio de código |
+| CU-09 | [Proveer el sello del reloj del sistema](../../Casos-De-Uso/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | El contrato más corto, y el que explica por qué la capa vecina se prueba sin nada |
+| CU-10 | [Preparar el almacén al arrancar](../../Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Transformar el esquema solo, y detener el arranque antes que confiar en un almacén equivocado |
 
 ## 3. Las siete reglas conceptuales de modelo
 
 | RC | Enunciado en una línea |
 | --- | --- |
-| [RC-01](Modelo-Datos/reglas-conceptuales-de-modelo/RC-01-Texto-Original-Escrito-Una-Sola-Vez.md) | El texto original se escribe una sola vez y no se reescribe |
-| [RC-02](Modelo-Datos/reglas-conceptuales-de-modelo/RC-02-Identidad-Posicional-De-La-Pieza.md) | La identidad de la pieza es su posición, y las posiciones no se compactan |
-| [RC-03](Modelo-Datos/reglas-conceptuales-de-modelo/RC-03-Valor-Declarado-Y-Derivado-Por-Separado.md) | El valor declarado y el derivado se guardan por separado |
-| [RC-04](Modelo-Datos/reglas-conceptuales-de-modelo/RC-04-La-Familia-No-Se-Persiste.md) | La familia plana o volumétrica no se persiste |
-| [RC-05](Modelo-Datos/reglas-conceptuales-de-modelo/RC-05-Retiro-Fisico-Con-Arrastre.md) | El retiro es físico y la baja arrastra todo, en una sola unidad de trabajo |
-| [RC-06](Modelo-Datos/reglas-conceptuales-de-modelo/RC-06-Tres-Sellos-De-Tiempo-Distintos.md) | Los tres tiempos del trabajo son distintos y no se confunden |
-| [RC-07](Modelo-Datos/reglas-conceptuales-de-modelo/RC-07-La-Marca-No-Es-Un-Estado-De-Cuenta.md) | La marca no es un estado de cuenta, y el comentario no es una observación |
+| [RC-01](../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06001-Texto-Original-Escrito-Una-Sola-Vez.md) | El texto original se escribe una sola vez y no se reescribe |
+| [RC-02](../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06002-Identidad-Posicional-De-La-Pieza.md) | La identidad de la pieza es su posición, y las posiciones no se compactan |
+| [RC-03](../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06003-Valor-Declarado-Y-Derivado-Por-Separado.md) | El valor declarado y el derivado se guardan por separado |
+| [RC-04](../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06004-La-Familia-No-Se-Persiste.md) | La familia plana o volumétrica no se persiste |
+| [RC-05](../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06005-Retiro-Fisico-Con-Arrastre.md) | El retiro es físico y la baja arrastra todo, en una sola unidad de trabajo |
+| [RC-06](../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06006-Tres-Sellos-De-Tiempo-Distintos.md) | Los tres tiempos del trabajo son distintos y no se confunden |
+| [RC-07](../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md) | La marca no es un estado de cuenta, y el comentario no es una observación |
 
 ## 4. Orden de lectura sugerido
 

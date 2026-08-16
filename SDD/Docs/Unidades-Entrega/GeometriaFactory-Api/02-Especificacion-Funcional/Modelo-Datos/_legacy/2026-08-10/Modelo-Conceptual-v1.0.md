@@ -50,7 +50,7 @@ Las nueve decisiones vienen del intake y se transcriben para que este documento 
 | Modo de diario | **WAL** |
 | Concurrencia de escritura | **Escritor único**: el motor no admite escrituras concurrentes |
 | Alcance de la unidad de trabajo | **Una por operación** |
-| Versionado del esquema | **Transformaciones aplicadas automáticamente al arrancar**, sobre base inexistente o desactualizada ([`CU-10`](../Casos-De-Uso/CU-10-Preparar-El-Almacen-Al-Arrancar.md)) |
+| Versionado del esquema | **Transformaciones aplicadas automáticamente al arrancar**, sobre base inexistente o desactualizada ([`CU-10`](../../../Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md)) |
 | Almacenamiento del texto del alumno | **Como texto en la fila del trabajo.** No se consulta por su contenido |
 | Instancias por despliegue | **Una instancia, un curso, un administrador.** El modelo **no** lleva ninguna columna de pertenencia a instancia |
 | Respaldo | Copia del archivo con el diario activo, consistente. **Su frecuencia queda a definir por el docente** |
@@ -146,13 +146,13 @@ erDiagram
 
 | RC | Enunciado en una línea | CU donde se hace cumplir |
 | --- | --- | --- |
-| [RC-01](reglas-conceptuales-de-modelo/RC-01-Texto-Original-Escrito-Una-Sola-Vez.md) | El texto original se escribe una sola vez y no se reescribe | CU-03 |
-| [RC-02](reglas-conceptuales-de-modelo/RC-02-Identidad-Posicional-De-La-Pieza.md) | La identidad de la pieza es su posición, y las posiciones no se compactan | CU-01, CU-03 |
-| [RC-03](reglas-conceptuales-de-modelo/RC-03-Valor-Declarado-Y-Derivado-Por-Separado.md) | El valor declarado y el derivado se guardan por separado | CU-02, CU-03 |
-| [RC-04](reglas-conceptuales-de-modelo/RC-04-La-Familia-No-Se-Persiste.md) | La familia plana o volumétrica no se persiste | CU-01, CU-03 |
-| [RC-05](reglas-conceptuales-de-modelo/RC-05-Retiro-Fisico-Con-Arrastre.md) | El retiro es físico y la baja arrastra todo, en una sola unidad de trabajo | CU-04 |
-| [RC-06](reglas-conceptuales-de-modelo/RC-06-Tres-Sellos-De-Tiempo-Distintos.md) | Los tres tiempos del trabajo son distintos y no se confunden | CU-03, CU-09 |
-| [RC-07](reglas-conceptuales-de-modelo/RC-07-La-Marca-No-Es-Un-Estado-De-Cuenta.md) | La marca no es un estado de cuenta, y el comentario no es una observación | CU-03, CU-05 |
+| [RC-01](../../reglas-conceptuales-de-modelo/RC-06001-Texto-Original-Escrito-Una-Sola-Vez.md) | El texto original se escribe una sola vez y no se reescribe | CU-03 |
+| [RC-02](../../reglas-conceptuales-de-modelo/RC-06002-Identidad-Posicional-De-La-Pieza.md) | La identidad de la pieza es su posición, y las posiciones no se compactan | CU-01, CU-03 |
+| [RC-03](../../reglas-conceptuales-de-modelo/RC-06003-Valor-Declarado-Y-Derivado-Por-Separado.md) | El valor declarado y el derivado se guardan por separado | CU-02, CU-03 |
+| [RC-04](../../reglas-conceptuales-de-modelo/RC-06004-La-Familia-No-Se-Persiste.md) | La familia plana o volumétrica no se persiste | CU-01, CU-03 |
+| [RC-05](../../reglas-conceptuales-de-modelo/RC-06005-Retiro-Fisico-Con-Arrastre.md) | El retiro es físico y la baja arrastra todo, en una sola unidad de trabajo | CU-04 |
+| [RC-06](../../reglas-conceptuales-de-modelo/RC-06006-Tres-Sellos-De-Tiempo-Distintos.md) | Los tres tiempos del trabajo son distintos y no se confunden | CU-03, CU-09 |
+| [RC-07](../../reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md) | La marca no es un estado de cuenta, y el comentario no es una observación | CU-03, CU-05 |
 
 **Siete reglas conceptuales, cada una con archivo propio.** Ninguna redacta una regla de negocio: las quince del producto viven en `GeometriaFactory-Domain` y acá se **materializan**.
 

@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md`](../../CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md)
+> - **Versión vigente:** [`CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md`](../../CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1, §4 y §5; [`NB-06`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md) §5 (disposición estable y sincronización por posición de pieza); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.11 (puntos 1, 2 y 4), §20.E-1, §20.E-2, §20.E-6, §20.E-7
+**Trazabilidad upstream:** [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1, §4 y §5; [`NB-06`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md) §5 (disposición estable y sincronización por posición de pieza); `00-Contexto/Vision-Producto.md` §9.1; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §17.1.P.11 (puntos 1, 2 y 4), §20.E-1, §20.E-2, §20.E-6, §20.E-7
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -108,7 +108,7 @@ Incorporar al trabajo el conjunto de piezas y de componentes que resultó de int
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-04, y NB-06 en cuanto a la identidad posicional que hace posible seleccionar y resaltar una pieza |
-| Reglas de negocio aplicables | [RN-08](../Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md), [RN-09](../Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) |
+| Reglas de negocio aplicables | [RN-08](../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md), [RN-09](../../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) |
 | Invariantes | INV-04 |
 | Historias de usuario a generar en 06 | US de reconstrucción de piezas y componentes, US de identidad posicional estable |
 | Componentes esperados en 05 | Entidades de pieza y de componente, y la tabla de consulta que deriva la familia desde el tipo |

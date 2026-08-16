@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md`](../../CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md)
+> - **Versión vigente:** [`CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md`](../../CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -106,7 +106,7 @@ Declarar los tipos de transferencia con los que un trabajo del alumno se crea, s
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-03, y NB-04 por el límite entre guardar y finalizar |
-| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican, todas de `GeometriaFactory-Domain`, [`RN-08`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md) sobre CA-02, [`RN-04`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md) sobre CA-03, [`RN-03`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre CA-04 y [`RN-05`](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) sobre CA-05. Ver `Especificacion-Funcional.md` §5 |
+| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican, todas de `GeometriaFactory-Domain`, [`RN-08`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) sobre CA-02, [`RN-04`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) sobre CA-03, [`RN-03`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre CA-04 y [`RN-05`](../../../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) sobre CA-05. Ver `Especificacion-Funcional.md` §5 |
 | Historias de usuario a generar en 06 | US-06 tipos de alta y de edición de trabajo; US-07 tipos de eliminación y de finalización |
 | Componentes esperados en 05 | Familia de tipos de transferencia de trabajo del ensamblado de contratos |
 | Tests previstos en 08 | Pruebas de integración de alta con el texto de E-2 sin alteración, de eliminación fuera de `Borrador` forzando la petición al servicio, de edición de un trabajo ajeno y de finalización bloqueada con E-5 |

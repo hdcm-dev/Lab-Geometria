@@ -158,7 +158,7 @@ Sobre el requisito declarado: **las exigencias de forma de la contraseña no las
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | Alumno y docente por igual |
-| CU origen | [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Establecer-Y-Cambiar-La-Contrasena-Propia.md) íntegro, con [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) FA-02 como vía de llegada |
+| CU origen | [`CU-03`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10003-Establecer-Y-Cambiar-La-Contrasena-Propia.md) íntegro, con [`CU-02`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) FA-02 como vía de llegada |
 | Reglas de negocio relevantes | `RN-06` (cuenta pendiente o bloqueada sin acceso) |
 | Restricciones transversales | `RT-02`, `RT-03`, `RT-06` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.4, §4.1, §8 |

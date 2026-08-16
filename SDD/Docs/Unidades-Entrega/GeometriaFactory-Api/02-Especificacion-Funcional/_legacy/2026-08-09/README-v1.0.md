@@ -54,27 +54,27 @@ Todos describen un **contrato de uso de la superficie pública**. El actor prima
 
 | CU | Título | NB que implementa |
 | --- | --- | --- |
-| CU-01 | [Registrar el alta de un alumno](Casos-De-Uso/CU-01-Registrar-El-Alta-De-Un-Alumno.md) | NB-02, NB-01 |
-| CU-02 | [Gobernar el ciclo de vida de la cuenta del alumno](Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | NB-01 |
-| CU-03 | [Fijar y reemplazar la credencial derivada](Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | NB-02 |
-| CU-04 | [Evaluar la admisibilidad de la cuenta](Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | NB-01, NB-02 |
-| CU-05 | [Crear y reeditar un trabajo](Casos-De-Uso/CU-05-Crear-Y-Reeditar-Un-Trabajo.md) | NB-03, NB-04 |
-| CU-06 | [Reconstruir el conjunto de piezas del trabajo](Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | NB-04, NB-06 |
-| CU-07 | [Registrar las observaciones del trabajo](Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md) | NB-05, NB-04 |
-| CU-08 | [Gobernar el estado del trabajo](Casos-De-Uso/CU-08-Gobernar-El-Estado-Del-Trabajo.md) | NB-03, NB-04, NB-05 |
-| CU-09 | [Resolver el acceso de un alumno a un trabajo](Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | NB-03 |
+| CU-01 | [Registrar el alta de un alumno](../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | NB-02, NB-01 |
+| CU-02 | [Gobernar el ciclo de vida de la cuenta del alumno](../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | NB-01 |
+| CU-03 | [Fijar y reemplazar la credencial derivada](../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | NB-02 |
+| CU-04 | [Evaluar la admisibilidad de la cuenta](../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | NB-01, NB-02 |
+| CU-05 | [Crear y reeditar un trabajo](../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) | NB-03, NB-04 |
+| CU-06 | [Reconstruir el conjunto de piezas del trabajo](../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | NB-04, NB-06 |
+| CU-07 | [Registrar las observaciones del trabajo](../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) | NB-05, NB-04 |
+| CU-08 | [Gobernar el estado del trabajo](../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) | NB-03, NB-04, NB-05 |
+| CU-09 | [Resolver el acceso de un alumno a un trabajo](../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | NB-03 |
 
 ## 3. Las siete reglas de negocio
 
 | RN | Título | Invariante que materializa |
 | --- | --- | --- |
-| RN-01 | [Administrador único y papeles fijos](Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) | INV-05 |
-| RN-03 | [Un trabajo ajeno es indistinguible de uno inexistente](Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | INV-02 |
-| RN-04 | [La eliminación de un trabajo está acotada al borrador](Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md) | — |
-| RN-05 | [Un trabajo no se finaliza con errores de validación](Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) | — |
-| RN-07 | [La baja arrastra los trabajos y exige confirmación escrita](Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | — |
-| RN-08 | [El texto original del alumno se conserva íntegro](Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md) | INV-04 |
-| RN-09 | [Toda observación de error indica la posición de la pieza y el campo](Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) | — |
+| RN-01 | [Administrador único y papeles fijos](../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | INV-05 |
+| RN-03 | [Un trabajo ajeno es indistinguible de uno inexistente](../../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | INV-02 |
+| RN-04 | [La eliminación de un trabajo está acotada al borrador](../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | — |
+| RN-05 | [Un trabajo no se finaliza con errores de validación](../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | — |
+| RN-07 | [La baja arrastra los trabajos y exige confirmación escrita](../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | — |
+| RN-08 | [El texto original del alumno se conserva íntegro](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | INV-04 |
+| RN-09 | [Toda observación de error indica la posición de la pieza y el campo](../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | — |
 
 **La serie no es contigua a propósito:** faltan RN-02 y RN-06 porque el intake no transcribe su enunciado, y la numeración se conserva para no romper la trazabilidad con las fuentes. La causa está declarada en `Especificacion-Funcional.md` §8 y §9.
 

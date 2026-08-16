@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-01 y RN-07), §17.1.P.2 (INV-05), §17.1.P.5, §7 (CL-6), §9 (X-3), §11 (RN-B6)
+**Trazabilidad upstream:** [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-01 y RN-07), §17.1.P.2 (INV-05), §17.1.P.5, §7 (CL-6), §9 (X-3), §11 (RN-B6)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -103,7 +103,7 @@ Los tres rechazos son terminaciones controladas: la cuenta queda exactamente com
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-01 |
-| Reglas de negocio aplicables | [RN-01](../Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [RN-07](../Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md), [RN-06](../Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) —este caso de uso es donde el estado de cuenta cambia, y de ese estado depende que la cuenta obtenga o no acceso— |
+| Reglas de negocio aplicables | [RN-01](../../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md), [RN-07](../../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md), [RN-06](../../../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) —este caso de uso es donde el estado de cuenta cambia, y de ese estado depende que la cuenta obtenga o no acceso— |
 | Invariantes | INV-05, INV-06 |
 | Historias de usuario a generar en 06 | US de habilitación, US de bloqueo y rehabilitación, US de baja con arrastre |
 | Componentes esperados en 05 | Máquina de transiciones de estado de cuenta dentro de la entidad de alumno |

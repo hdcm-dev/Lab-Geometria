@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`RN-02-Correo-Del-Alumno-Unico.md`](../../RN-02-Correo-Del-Alumno-Unico.md)
+> - **Versión vigente:** [`RN-02-Correo-Del-Alumno-Unico.md`](../../RN-02002-Correo-Del-Alumno-Unico.md)
 >
 > El cuerpo que sigue **no se modifica**. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02), §4 (F-02), §17.1.P.2 (INV-01), §6 (flujo 1), §7 (CL-6 y CL-7); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02), §4 (F-02), §17.1.P.2 (INV-01), §6 (flujo 1), §7 (CL-6 y CL-7); [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -60,7 +60,7 @@ Rechazo del alta, con mensaje explícito hacia la persona que se registra: el in
 
 ## 5. CU afectados
 
-- [CU-01](../Casos-De-Uso/CU-01-Registrar-El-Alta-De-Un-Alumno.md) — Registrar el alta de un alumno.
+- [CU-01](../../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) — Registrar el alta de un alumno.
 
 ## 6. Pruebas que la verifican
 

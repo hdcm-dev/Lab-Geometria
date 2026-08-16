@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`RN-01-Administrador-Unico-Y-Papeles-Fijos.md`](../../RN-01-Administrador-Unico-Y-Papeles-Fijos.md)
+> - **Versión vigente:** [`RN-01-Administrador-Unico-Y-Papeles-Fijos.md`](../../RN-02001-Administrador-Unico-Y-Papeles-Fijos.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §9 (X-3), §4 (F-01 y F-19), §17.3.P.4 (INV-05); [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) §4 y §5; `00-Contexto/Alcance-Producto.md` §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §9 (X-3), §4 (F-01 y F-19), §17.3.P.4 (INV-05); [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §4 y §5; `00-Contexto/Alcance-Producto.md` §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -58,9 +58,9 @@ Rechazo. La constitución de una segunda cuenta con papel `Administrador` no pro
 
 ## 5. CU afectados
 
-- [CU-01](../Casos-De-Uso/CU-01-Registrar-El-Alta-De-Un-Alumno.md) — Registrar el alta de un alumno.
-- [CU-02](../Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta del alumno.
-- [CU-04](../Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md) — Evaluar la admisibilidad de la cuenta, en cuanto al conjunto cerrado de papeles.
+- [CU-01](../../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) — Registrar el alta de un alumno.
+- [CU-02](../../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta del alumno.
+- [CU-04](../../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) — Evaluar la admisibilidad de la cuenta, en cuanto al conjunto cerrado de papeles.
 
 ## 6. Pruebas que la verifican
 

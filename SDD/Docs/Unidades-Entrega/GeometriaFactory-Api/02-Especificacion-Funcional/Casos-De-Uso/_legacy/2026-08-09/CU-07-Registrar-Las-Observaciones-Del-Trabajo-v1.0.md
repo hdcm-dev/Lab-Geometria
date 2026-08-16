@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-07-Registrar-Las-Observaciones-Del-Trabajo.md`](../../CU-07-Registrar-Las-Observaciones-Del-Trabajo.md)
+> - **Versión vigente:** [`CU-07-Registrar-Las-Observaciones-Del-Trabajo.md`](../../CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-05`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) §1, §4 y §5; [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (localización del defecto); `00-Contexto/Vision-Producto.md` §9.1 (observación, advertencia, error de validación); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-4), §17.1.P.11 punto 3, §17.2.P.11 punto 2, §17.3.P.10 (tolerancia 0.01), §20.E-1, §20.E-3, §20.E-4, §20.E-5
+**Trazabilidad upstream:** [`NB-05`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) §1, §4 y §5; [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (localización del defecto); `00-Contexto/Vision-Producto.md` §9.1 (observación, advertencia, error de validación); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-4), §17.1.P.11 punto 3, §17.2.P.11 punto 2, §17.3.P.10 (tolerancia 0.01), §20.E-1, §20.E-3, §20.E-4, §20.E-5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -109,7 +109,7 @@ El alumno es el sujeto: es quien ve la advertencia sobre su propio trabajo. El a
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-05, y NB-04 en su criterio de localización del defecto |
-| Reglas de negocio aplicables | [RN-05](../Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md), [RN-08](../Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md), [RN-09](../Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) |
+| Reglas de negocio aplicables | [RN-05](../../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md), [RN-08](../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md), [RN-09](../../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) |
 | Invariantes | INV-04 |
 | Historias de usuario a generar en 06 | US de registro de advertencias de valor, US de registro de errores de validación con ubicación |
 | Componentes esperados en 05 | Entidad de observación con su especie cerrada y su ubicación |

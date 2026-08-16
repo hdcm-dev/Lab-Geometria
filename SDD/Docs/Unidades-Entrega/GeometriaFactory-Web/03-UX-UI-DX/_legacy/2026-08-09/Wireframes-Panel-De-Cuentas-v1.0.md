@@ -174,7 +174,7 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | El docente como administrador |
-| CU origen | [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Administrar-Las-Cuentas-De-La-Comision.md) flujo principal, FA-01, FA-02 y FA-05. Su FA-03 y FA-04 viven en [`Wireframes-Aprovisionamiento-Inicial.md`](Wireframes-Aprovisionamiento-Inicial.md) |
+| CU origen | [`CU-04`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md) flujo principal, FA-01, FA-02 y FA-05. Su FA-03 y FA-04 viven en [`Wireframes-Aprovisionamiento-Inicial.md`](Wireframes-Aprovisionamiento-Inicial.md) |
 | Reglas de negocio relevantes | `RN-01` (administrador único y papeles fijos), `RN-06` (cuenta pendiente o bloqueada sin acceso), `RN-07` (baja con arrastre y confirmación escrita), `RN-02` |
 | Restricciones transversales | `RT-03`, `RT-06`, `RT-07`, `RT-09` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.3, §3.4, §4.1, §8 |

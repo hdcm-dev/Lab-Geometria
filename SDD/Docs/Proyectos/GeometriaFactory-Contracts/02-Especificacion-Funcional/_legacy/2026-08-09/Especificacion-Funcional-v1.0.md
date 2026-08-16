@@ -64,12 +64,12 @@ Tres decisiones más, tomadas aguas arriba y que esta especificación respeta si
 
 | CU | Contrato de uso que describe | NB que sostiene | Estado | Enlace |
 | --- | --- | --- | --- | --- |
-| CU-01 | Canje de credenciales y respuesta de sesión, sin exponer contraseña almacenada ni clave de firma | NB-02, NB-01 | Propuesto | [CU-01](Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) |
-| CU-02 | Registro, credencial, listado de cuentas y cambio de situación de cuenta, con la confirmación escrita de la baja | NB-01, NB-02 | Propuesto | [CU-02](Casos-De-Uso/CU-02-Contrato-De-Administracion-De-Cuentas.md) |
-| CU-03 | Alta, edición, eliminación y finalización del trabajo, con el texto original como cadena no interpretada | NB-03, NB-04 | Propuesto | [CU-03](Casos-De-Uso/CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) |
-| CU-04 | Listado de trabajos como proyección sin texto original ni componentes | NB-03, NB-07 | Propuesto | [CU-04](Casos-De-Uso/CU-04-Contrato-De-Listado-De-Trabajos.md) |
-| CU-05 | Detalle del trabajo interpretado: piezas, componentes y observaciones con severidad y par de valores | NB-04, NB-05, NB-06, NB-07 | Propuesto | [CU-05](Casos-De-Uso/CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) |
-| CU-06 | Respuesta de error neutra, transversal a los cinco anteriores | NB-04, NB-08, NB-02 | Propuesto | [CU-06](Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) |
+| CU-01 | Canje de credenciales y respuesta de sesión, sin exponer contraseña almacenada ni clave de firma | NB-02, NB-01 | Propuesto | [CU-01](../../Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) |
+| CU-02 | Registro, credencial, listado de cuentas y cambio de situación de cuenta, con la confirmación escrita de la baja | NB-01, NB-02 | Propuesto | [CU-02](../../Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md) |
+| CU-03 | Alta, edición, eliminación y finalización del trabajo, con el texto original como cadena no interpretada | NB-03, NB-04 | Propuesto | [CU-03](../../Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) |
+| CU-04 | Listado de trabajos como proyección sin texto original ni componentes | NB-03, NB-07 | Propuesto | [CU-04](../../Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md) |
+| CU-05 | Detalle del trabajo interpretado: piezas, componentes y observaciones con severidad y par de valores | NB-04, NB-05, NB-06, NB-07 | Propuesto | [CU-05](../../Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) |
+| CU-06 | Respuesta de error neutra, transversal a los cinco anteriores | NB-04, NB-08, NB-02 | Propuesto | [CU-06](../../Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) |
 
 Seis casos de uso, sobre el mínimo de cinco que `Rules-Especificacion-Funcional.md` §2.2 fija para `library`.
 

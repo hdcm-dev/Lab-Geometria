@@ -169,7 +169,7 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | El alumno de la comisión, en el flujo más frecuente de la cursada |
-| CU origen | [`CU-05`](../02-Especificacion-Funcional/Casos-De-Uso/CU-05-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md) íntegro, con [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md) FA-01 como vía de llegada al curso de reedición |
+| CU origen | [`CU-05`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10005-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md) íntegro, con [`CU-06`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md) FA-01 como vía de llegada al curso de reedición |
 | Reglas de negocio relevantes | `RN-05` (sin errores de validación no hay paso a estado `Pendiente`; corta hoy en el envío), `RN-08` (texto conservado íntegro), `RN-09` (observación con posición y campo), `RN-03` |
 | Restricciones transversales | `RT-03`, `RT-04`, `RT-05`, `RT-07`, `RT-08`, `RT-11` |
 | Contrato de fachada | Creación, carga y liberación, con sus códigos de condición |

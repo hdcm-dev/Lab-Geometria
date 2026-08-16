@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`CU-05-Crear-Y-Reeditar-Un-Trabajo.md`](../../CU-05-Crear-Y-Reeditar-Un-Trabajo.md)
+> - **Versión vigente:** [`CU-05-Crear-Y-Reeditar-Un-Trabajo.md`](../../CU-02005-Crear-Y-Reeditar-Un-Trabajo.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 
@@ -20,7 +20,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-03`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §1, §4 y §5; [`NB-04`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (quinto criterio); `00-Contexto/Vision-Producto.md` §9.1; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-06 y F-07), §7 (CL-3), §9 (X-4), §12 (definición de trabajo), §17.1.P.11
+**Trazabilidad upstream:** [`NB-03`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §1, §4 y §5; [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5 (quinto criterio); `00-Contexto/Vision-Producto.md` §9.1; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-06 y F-07), §7 (CL-3), §9 (X-4), §12 (definición de trabajo), §17.1.P.11
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -110,7 +110,7 @@ El alumno es el sujeto de la regla: es quien carga y reedita. El actor del contr
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-03, y NB-04 en su criterio de conservación del original |
-| Reglas de negocio aplicables | [RN-08](../Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md) |
+| Reglas de negocio aplicables | [RN-08](../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) |
 | Invariantes | INV-02 (el trabajo nace con dueño), INV-04 |
 | Historias de usuario a generar en 06 | US de carga de trabajo, US de guardado y reedición de borrador |
 | Componentes esperados en 05 | Entidad de trabajo con su texto original y su conjunto cerrado de estados |

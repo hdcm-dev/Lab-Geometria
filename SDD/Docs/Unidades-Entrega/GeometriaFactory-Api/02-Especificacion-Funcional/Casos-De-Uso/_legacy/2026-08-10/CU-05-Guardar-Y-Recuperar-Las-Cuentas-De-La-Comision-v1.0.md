@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-01`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md); [`NB-02`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.1 (RN-01, RN-02, RN-12, RN-13), §17.1.P.2 (INV-01, INV-05, INV-08, INV-09), §17.3.P.4; implementa el puerto de repositorio de cuentas de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, cuyo identificador es punto abierto declarado allá
+**Trazabilidad upstream:** [`NB-01`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md); [`NB-02`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §4.1 (RN-01, RN-02, RN-12, RN-13), §17.1.P.2 (INV-01, INV-05, INV-08, INV-09), §17.3.P.4; implementa el puerto de repositorio de cuentas de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, cuyo identificador es punto abierto declarado allá
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -97,8 +97,8 @@ Lo que este caso de uso **no** hace: no deriva contraseñas ni las compara —es
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-01, NB-02 |
-| Reglas de negocio aplicables | [RN-02](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02-Correo-Del-Alumno-Unico.md), [RN-01](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md), [RN-12](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-12-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) y [RN-13](../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), las dos últimas por la conservación y el transporte de la marca |
-| Reglas conceptuales de modelo | [`RC-07`](../Modelo-Datos/reglas-conceptuales-de-modelo/RC-07-La-Marca-No-Es-Un-Estado-De-Cuenta.md) |
+| Reglas de negocio aplicables | [RN-02](../../../Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md), [RN-01](../../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md), [RN-12](../../../Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) y [RN-13](../../../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), las dos últimas por la conservación y el transporte de la marca |
+| Reglas conceptuales de modelo | [`RC-07`](../../../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md) |
 | Puerto que implementa | Repositorio de cuentas, cuyo **identificador es un punto abierto declarado aguas arriba** y que esta categoría no reabre |
 | Consumidor | `GeometriaFactory-Application`, sus CU-01, CU-02, CU-03, CU-07, CU-10 y CU-11 |
 | Historias de usuario a generar en 06 | US-14, US-15, US-16 |

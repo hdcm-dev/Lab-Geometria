@@ -181,7 +181,7 @@ Además: el árbol se marca como estructura de árbol, con estado de expansión 
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | Alumno dueño y docente como administrador, con **la misma superficie** |
-| CU origen | [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md) íntegro. `CU-09` aporta el bloque de decisión, documentado aparte |
+| CU origen | [`CU-07`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10007-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md) íntegro. `CU-09` aporta el bloque de decisión, documentado aparte |
 | Reglas de negocio relevantes | `RN-03` (trabajo ajeno indistinguible de inexistente), `RN-08` (texto conservado íntegro), `RN-09` (observación con posición y campo), `RN-11` (el administrador no ve los borradores) |
 | Restricciones transversales | `RT-03`, `RT-04`, `RT-05`, `RT-07`, `RT-10`, `RT-11` |
 | Contrato de fachada | **Las cinco funciones**, con sus siete códigos de condición |

@@ -145,7 +145,7 @@ Estado de éxito, que reemplaza el contenido de la tarjeta:
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | El alumno de la comisión, en su primer contacto con el producto |
-| CU origen | [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Registrar-La-Cuenta-De-Alumno.md) íntegro |
+| CU origen | [`CU-01`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-10001-Registrar-La-Cuenta-De-Alumno.md) íntegro |
 | Reglas de negocio relevantes | `RN-02` (correo único), `RN-06` (cuenta pendiente o bloqueada sin acceso) |
 | Restricciones transversales | `RT-01`, `RT-03`, `RT-06`, `RT-07` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §1.3, §3.2, §3.4, §4.1, §8 |

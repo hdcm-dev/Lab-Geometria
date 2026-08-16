@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`RN-05`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md); [`RN-08`](../../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §12 (entrada «valor declarado / valor derivado»), §17.1.P.11 punto 3, §17.3.P.10
+**Trazabilidad upstream:** [`RN-05`](../../../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md); [`RN-08`](../../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.11** §12 (entrada «valor declarado / valor derivado»), §17.1.P.11 punto 3, §17.3.P.10
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -27,7 +27,7 @@ Guardar sólo el declarado obligaría a rehacer la derivación cada vez que algu
 - Alcanza al `Area` de toda pieza y al `Volumen` de las volumétricas.
 - Alcanza también a la **advertencia**, que se guarda con los dos valores: sin ellos, el mensaje sería genérico y no le diría al alumno qué declaró contra qué dice la geometría.
 - **No alcanza al texto original**, que conserva los valores tal como el alumno los escribió y que nunca se toca.
-- **No fija cómo se deriva un valor**: eso es de [`CU-02`](../../Casos-De-Uso/CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
+- **No fija cómo se deriva un valor**: eso es de [`CU-02`](../../../../Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
 
 ## 4. Consecuencia si se viola
 
@@ -35,8 +35,8 @@ Guardar un solo valor no produce rechazo del almacén: **produce un producto que
 
 ## 5. CU afectados
 
-- [`CU-02`](../../Casos-De-Uso/CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) — Verificar los valores: produce los dos.
-- [`CU-03`](../../Casos-De-Uso/CU-03-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: los conserva.
+- [`CU-02`](../../../../Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) — Verificar los valores: produce los dos.
+- [`CU-03`](../../../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: los conserva.
 
 ## 6. Pruebas que la verifican
 

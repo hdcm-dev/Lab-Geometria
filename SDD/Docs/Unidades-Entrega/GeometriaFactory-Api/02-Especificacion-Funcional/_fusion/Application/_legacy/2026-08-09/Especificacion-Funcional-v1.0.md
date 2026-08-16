@@ -99,16 +99,16 @@ Cuatro precisiones que rigen en toda la categoría:
 
 | CU | Nombre | Contrato que describe | Estado |
 | --- | --- | --- | --- |
-| CU-01 | [Registrar el alta de una cuenta](Casos-De-Uso/CU-01-Registrar-El-Alta-De-Una-Cuenta.md) | Auto-registro del alumno: correo libre, cuenta constituida en estado `Pendiente` y sin credencial | Propuesto |
-| CU-02 | [Gobernar las cuentas de la comisión](Casos-De-Uso/CU-02-Gobernar-Las-Cuentas-De-La-Comision.md) | Habilitar, bloquear, rehabilitar y dar de baja, con confirmación escrita y arrastre de los trabajos | Propuesto |
-| CU-03 | [Resolver el ingreso y la credencial del alumno](Casos-De-Uso/CU-03-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) | Admisibilidad de la cuenta con su motivo, y fijación y reemplazo de la credencial derivada | Propuesto |
-| CU-04 | [Cargar y reeditar un trabajo propio](Casos-De-Uso/CU-04-Cargar-Y-Reeditar-Un-Trabajo-Propio.md) | Constituir el trabajo con dueño y texto original íntegro, y reeditarlo sólo en `Borrador` | Propuesto |
-| CU-05 | [Enviar un trabajo e interpretar su texto](Casos-De-Uso/CU-05-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) | La única acción de guardado: interpretar por el puerto, incorporar piezas y observaciones y dejar que el dominio resuelva el estado | Propuesto |
-| CU-06 | [Consultar los trabajos propios del alumno](Casos-De-Uso/CU-06-Consultar-Los-Trabajos-Propios-Del-Alumno.md) | Listado acotado al dueño y sin componentes, y detalle con desenlace y comentario | Propuesto |
-| CU-07 | [Revisar los trabajos de la comisión](Casos-De-Uso/CU-07-Revisar-Los-Trabajos-De-La-Comision.md) | Listado de la comisión sin borradores, con dueño para agrupar y filtrar, y detalle equivalente al del alumno | Propuesto |
-| CU-08 | [Dar desenlace a un trabajo](Casos-De-Uso/CU-08-Dar-Desenlace-A-Un-Trabajo.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad | Propuesto |
-| CU-09 | [Eliminar un trabajo](Casos-De-Uso/CU-09-Eliminar-Un-Trabajo.md) | Retiro con los dos alcances opuestos: el alumno sólo en `Borrador`, el administrador en todo lo que ve | Propuesto |
-| CU-10 | [Configurar la cuenta de administrador](Casos-De-Uso/CU-10-Configurar-La-Cuenta-De-Administrador.md) | El segundo camino de alta: cuenta única con papel `Administrador`, `Habilitado` y con credencial, sólo mientras no exista ninguna | Propuesto |
+| CU-01 | [Registrar el alta de una cuenta](../../../../Casos-De-Uso/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md) | Auto-registro del alumno: correo libre, cuenta constituida en estado `Pendiente` y sin credencial | Propuesto |
+| CU-02 | [Gobernar las cuentas de la comisión](../../../../Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md) | Habilitar, bloquear, rehabilitar y dar de baja, con confirmación escrita y arrastre de los trabajos | Propuesto |
+| CU-03 | [Resolver el ingreso y la credencial del alumno](../../../../Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) | Admisibilidad de la cuenta con su motivo, y fijación y reemplazo de la credencial derivada | Propuesto |
+| CU-04 | [Cargar y reeditar un trabajo propio](../../../../Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md) | Constituir el trabajo con dueño y texto original íntegro, y reeditarlo sólo en `Borrador` | Propuesto |
+| CU-05 | [Enviar un trabajo e interpretar su texto](../../../../Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) | La única acción de guardado: interpretar por el puerto, incorporar piezas y observaciones y dejar que el dominio resuelva el estado | Propuesto |
+| CU-06 | [Consultar los trabajos propios del alumno](../../../../Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md) | Listado acotado al dueño y sin componentes, y detalle con desenlace y comentario | Propuesto |
+| CU-07 | [Revisar los trabajos de la comisión](../../../../Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md) | Listado de la comisión sin borradores, con dueño para agrupar y filtrar, y detalle equivalente al del alumno | Propuesto |
+| CU-08 | [Dar desenlace a un trabajo](../../../../Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad | Propuesto |
+| CU-09 | [Eliminar un trabajo](../../../../Casos-De-Uso/CU-04009-Eliminar-Un-Trabajo.md) | Retiro con los dos alcances opuestos: el alumno sólo en `Borrador`, el administrador en todo lo que ve | Propuesto |
+| CU-10 | [Configurar la cuenta de administrador](../../../../Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md) | El segundo camino de alta: cuenta única con papel `Administrador`, `Habilitado` y con credencial, sólo mientras no exista ninguna | Propuesto |
 
 Diez casos de uso, sobre un mínimo de cinco para el tipo `library`.
 
@@ -118,17 +118,17 @@ Diez casos de uso, sobre un mínimo de cinco para el tipo `library`.
 
 | RN | Enunciado en una línea | Dónde se ejerce en esta capa |
 | --- | --- | --- |
-| [RN-01](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) | Administrador único y papeles fijos | CU-10 (ventana de alta y su negativa), CU-01 (rechazo del papel `Administrador` por el auto-registro), CU-02, CU-03, CU-07, CU-08 (verificación de facultad) |
-| [RN-02](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02-Correo-Del-Alumno-Unico.md) | El correo del alumno es único | CU-01 y CU-10: la verificación sobre el conjunto de cuentas es de esta capa, en los dos caminos de alta |
-| [RN-03](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-03-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Un alumno sólo ve y opera sus propios trabajos | CU-04, CU-05, CU-06, CU-09: la verificación de pertenencia |
-| [RN-04](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-04-Eliminacion-Acotada-Al-Borrador.md) | El alumno elimina sólo en borrador; el administrador, cualquier trabajo que ve | CU-09 en sus dos alcances, y CU-02 en el arrastre de la baja |
-| [RN-05](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) | Un trabajo no pasa a estado `Pendiente` con errores de validación | CU-05, **con el tramo principal en el dominio**: esta capa entrega el conjunto de observaciones y el dominio resuelve el estado |
-| [RN-06](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Una cuenta `Pendiente` o `Bloqueado` no obtiene acceso | CU-03: la consulta de admisibilidad con su motivo. CU-01 y CU-10 en cuanto fijan estados iniciales opuestos, que es lo que decide si la cuenta admite acceso desde el alta |
-| [RN-07](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | La baja arrastra los trabajos y exige confirmación escrita | CU-02: la comparación del correo escrito y el retiro de todos los trabajos en la misma unidad de trabajo |
-| [RN-08](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md) | El texto original del alumno se conserva íntegro | CU-04 y CU-05: el texto se entrega tal cual y no se reescribe ni cuando la interpretación falla |
-| [RN-09](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Toda observación de error indica la posición de la pieza y el campo | CU-05, **con el tramo principal en el validador**, que produce el mensaje ubicado detrás del puerto. Lo que esta capa aporta es la cantidad de figuras del conjunto raíz, que es el rango contra el que la posición se valida, y el rechazo del conjunto mal formado, que no llega al alumno |
-| [RN-10](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-10-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | El desenlace es exclusivo del administrador y es terminal | CU-08: la verificación de facultad y la propagación de la terminalidad |
-| [RN-11](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-11-El-Administrador-No-Ve-Los-Borradores.md) | El administrador no ve los trabajos en borrador | CU-07, CU-08 y CU-09: el predicado de alcance trasladado a la consulta |
+| [RN-01](../../../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Administrador único y papeles fijos | CU-10 (ventana de alta y su negativa), CU-01 (rechazo del papel `Administrador` por el auto-registro), CU-02, CU-03, CU-07, CU-08 (verificación de facultad) |
+| [RN-02](../../../../Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | El correo del alumno es único | CU-01 y CU-10: la verificación sobre el conjunto de cuentas es de esta capa, en los dos caminos de alta |
+| [RN-03](../../../../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Un alumno sólo ve y opera sus propios trabajos | CU-04, CU-05, CU-06, CU-09: la verificación de pertenencia |
+| [RN-04](../../../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | El alumno elimina sólo en borrador; el administrador, cualquier trabajo que ve | CU-09 en sus dos alcances, y CU-02 en el arrastre de la baja |
+| [RN-05](../../../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Un trabajo no pasa a estado `Pendiente` con errores de validación | CU-05, **con el tramo principal en el dominio**: esta capa entrega el conjunto de observaciones y el dominio resuelve el estado |
+| [RN-06](../../../../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Una cuenta `Pendiente` o `Bloqueado` no obtiene acceso | CU-03: la consulta de admisibilidad con su motivo. CU-01 y CU-10 en cuanto fijan estados iniciales opuestos, que es lo que decide si la cuenta admite acceso desde el alta |
+| [RN-07](../../../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | La baja arrastra los trabajos y exige confirmación escrita | CU-02: la comparación del correo escrito y el retiro de todos los trabajos en la misma unidad de trabajo |
+| [RN-08](../../../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | El texto original del alumno se conserva íntegro | CU-04 y CU-05: el texto se entrega tal cual y no se reescribe ni cuando la interpretación falla |
+| [RN-09](../../../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Toda observación de error indica la posición de la pieza y el campo | CU-05, **con el tramo principal en el validador**, que produce el mensaje ubicado detrás del puerto. Lo que esta capa aporta es la cantidad de figuras del conjunto raíz, que es el rango contra el que la posición se valida, y el rechazo del conjunto mal formado, que no llega al alumno |
+| [RN-10](../../../../Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | El desenlace es exclusivo del administrador y es terminal | CU-08: la verificación de facultad y la propagación de la terminalidad |
+| [RN-11](../../../../Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | El administrador no ve los trabajos en borrador | CU-07, CU-08 y CU-09: el predicado de alcance trasladado a la consulta |
 
 ## 7. Matriz NB → CU → RN → US
 
@@ -136,15 +136,15 @@ Diez casos de uso, sobre un mínimo de cinco para el tipo `library`.
 
 | NB | CU de este proyecto de código | RN aplicables | US previstas en 06 |
 | --- | --- | --- | --- |
-| [NB-01](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md) · Control de admisión y de bajas del laboratorio | CU-10, CU-01, CU-02 | RN-01, RN-02, RN-06, RN-07 | US-03, US-28, US-01, US-04, US-05, US-06 |
-| [NB-02](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-02-Identidad-Propia-Del-Alumno-Sin-Correo.md) · Identidad propia del alumno sin canal de correo | CU-01, CU-03 | RN-02, RN-06 | US-01, US-02, US-07, US-08, US-09 |
-| [NB-03](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) · Trabajo con dueño, estado y persistencia | CU-04, CU-05, CU-06, CU-09 | RN-03, RN-04, RN-05, RN-08 | US-10, US-11, US-12, US-15, US-17, US-18, US-26 |
-| [NB-04](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-04-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) · Interpretación fiel del dato del alumno | CU-04, CU-05 | RN-05, RN-08, RN-09 | US-11, US-13, US-14, US-15, US-16 |
-| [NB-05](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-05-Visibilidad-Del-Error-De-Calculo.md) · Visibilidad del error de cálculo | CU-05 | RN-05, RN-09 | US-13, US-15 |
-| [NB-06](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-06-Visualizacion-Dentro-Del-Producto.md) · Visualización del trabajo dentro del producto | CU-06 (parcial: entrega de piezas con identidad posicional) | RN-03 | US-19 |
-| [NB-07](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md) · Revisión de la comisión desde un solo lugar | CU-07 | RN-01, RN-11 | US-20, US-21, US-22 |
-| [NB-08](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md) · Alcance del laboratorio desde el aula | — | — | — |
-| [NB-09](../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-09-Desenlace-Explicito-De-La-Entrega.md) · Desenlace explícito de la entrega | CU-08, CU-09, CU-06 (parcial), CU-07 (parcial) | RN-04, RN-10, RN-11 | US-18, US-22, US-23, US-24, US-25, US-27 |
+| [NB-01](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) · Control de admisión y de bajas del laboratorio | CU-10, CU-01, CU-02 | RN-01, RN-02, RN-06, RN-07 | US-03, US-28, US-01, US-04, US-05, US-06 |
+| [NB-02](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) · Identidad propia del alumno sin canal de correo | CU-01, CU-03 | RN-02, RN-06 | US-01, US-02, US-07, US-08, US-09 |
+| [NB-03](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) · Trabajo con dueño, estado y persistencia | CU-04, CU-05, CU-06, CU-09 | RN-03, RN-04, RN-05, RN-08 | US-10, US-11, US-12, US-15, US-17, US-18, US-26 |
+| [NB-04](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) · Interpretación fiel del dato del alumno | CU-04, CU-05 | RN-05, RN-08, RN-09 | US-11, US-13, US-14, US-15, US-16 |
+| [NB-05](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) · Visibilidad del error de cálculo | CU-05 | RN-05, RN-09 | US-13, US-15 |
+| [NB-06](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md) · Visualización del trabajo dentro del producto | CU-06 (parcial: entrega de piezas con identidad posicional) | RN-03 | US-19 |
+| [NB-07](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md) · Revisión de la comisión desde un solo lugar | CU-07 | RN-01, RN-11 | US-20, US-21, US-22 |
+| [NB-08](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md) · Alcance del laboratorio desde el aula | — | — | — |
+| [NB-09](../../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) · Desenlace explícito de la entrega | CU-08, CU-09, CU-06 (parcial), CU-07 (parcial) | RN-04, RN-10, RN-11 | US-18, US-22, US-23, US-24, US-25, US-27 |
 
 ### 7.2 Cobertura bidireccional
 
@@ -215,15 +215,15 @@ Los **doce** casos de uso de `GeometriaFactory-Domain` quedan orquestados por lo
 
 | CU de esta capa | CU de dominio que orquesta |
 | --- | --- |
-| CU-01 | [CU-01](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-01-Registrar-El-Alta-De-Un-Alumno.md) |
-| CU-10 | [CU-12](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-12-Configurar-La-Cuenta-De-Administrador.md) |
-| CU-02 | [CU-02](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) |
-| CU-03 | [CU-04](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md), [CU-03](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) |
-| CU-04 | [CU-05](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-05-Crear-Y-Reeditar-Un-Trabajo.md), [CU-09](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-09-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) |
-| CU-05 | [CU-06](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-06-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md), [CU-07](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-07-Registrar-Las-Observaciones-Del-Trabajo.md), [CU-08](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-08-Gobernar-El-Estado-Del-Trabajo.md), CU-09 |
+| CU-01 | [CU-01](../../../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) |
+| CU-10 | [CU-12](../../../../Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md) |
+| CU-02 | [CU-02](../../../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) |
+| CU-03 | [CU-04](../../../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md), [CU-03](../../../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) |
+| CU-04 | [CU-05](../../../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md), [CU-09](../../../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) |
+| CU-05 | [CU-06](../../../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md), [CU-07](../../../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md), [CU-08](../../../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md), CU-09 |
 | CU-06 | CU-09 |
-| CU-07 | [CU-11](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-11-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) |
-| CU-08 | [CU-10](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Casos-De-Uso/CU-10-Resolver-El-Desenlace-Del-Trabajo.md), CU-11 |
+| CU-07 | [CU-11](../../../../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) |
+| CU-08 | [CU-10](../../../../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md), CU-11 |
 | CU-09 | CU-09, CU-11 |
 
 ## 8. Criterio de recorte aplicado
