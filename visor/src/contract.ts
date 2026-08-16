@@ -46,6 +46,22 @@ export interface DrawOutcome {
 
 export interface ViewerOptions {
   readonly background?: string;
+
+  /**
+   * Aviso de que la persona eligió una pieza **en la escena**, con su posición.
+   *
+   * ES LA ÚNICA VÍA DEL VISOR HACIA SU ANFITRIÓN, y entra por `ADR-08007`. Sin ella `F-13` sólo
+   * podía cumplirse en una dirección: las seis funciones de la fachada van todas del anfitrión
+   * hacia el visor, de modo que una selección hecha en la escena **no tenía por dónde enterarse**.
+   *
+   * VA EN LAS OPCIONES Y NO COMO SÉPTIMA FUNCIÓN, y es deliberado: las seis las fijó el Product
+   * Owner y su recuento está citado en cinco documentos. Las opciones ya son el lugar donde el
+   * anfitrión configura su instancia.
+   *
+   * EL VISOR NO GUARDA LA SELECCIÓN NI DECIDE QUÉ HACER CON ELLA: avisa y resalta. Qué se marca en
+   * el árbol es del anfitrión.
+   */
+  readonly onPieceSelected?: (position: number) => void;
 }
 
 /**

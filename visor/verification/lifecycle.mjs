@@ -74,6 +74,47 @@ const medicion = await pestania.evaluate(async ({ piezas, vueltas }) => {
   return rondas;
 }, { piezas: PIEZAS, vueltas: VUELTAS });
 
+// ---- La vuelta de `F-13`: elegir una pieza EN LA ESCENA avisa al anfitrión --------------------
+//
+// Se mide con un clic de verdad sobre el lienzo, en el punto donde está dibujada la pieza del
+// medio. **Sin este control, el aviso podría no dispararse nunca y nada fallaría**: la escena se
+// vería igual y el árbol simplemente no se marcaría.
+const seleccion = await pestania.evaluate(async ({ piezas }) => {
+  const visor = window.GeometriaFactoryViewer;
+  const elemento = document.getElementById('escena');
+  const avisos = [];
+
+  const id = visor.initialize(elemento, { onPieceSelected: (p) => avisos.push(p) });
+  visor.loadPieces(id, piezas);
+  await new Promise((listo) => requestAnimationFrame(() => requestAnimationFrame(listo)));
+
+  const lienzo = elemento.querySelector('canvas');
+  const caja = lienzo.getBoundingClientRect();
+
+  // El centro del lienzo: la cámara encuadra el conjunto, así que ahí hay una pieza.
+  const disparar = (tipo, x, y) => lienzo.dispatchEvent(
+    new PointerEvent(tipo, { clientX: x, clientY: y, bubbles: true }));
+
+  const cx = caja.left + caja.width / 2;
+  const cy = caja.top + caja.height / 2;
+
+  disparar('pointerdown', cx, cy);
+  disparar('pointerup', cx, cy);
+
+  const trasClic = avisos.length;
+
+  // Y ARRASTRAR NO SELECCIONA: soltar después de mover es encuadrar, no elegir.
+  disparar('pointerdown', cx, cy);
+  lienzo.dispatchEvent(new PointerEvent('pointermove', { clientX: cx + 40, clientY: cy, bubbles: true }));
+  disparar('pointerup', cx + 40, cy);
+
+  const trasArrastre = avisos.length;
+
+  visor.destroy(id);
+
+  return { trasClic, trasArrastre, primero: avisos[0] };
+}, { piezas: PIEZAS });
+
 await navegador.close();
 
 // ---- El veredicto, control por control -------------------------------------------------------
@@ -94,12 +135,16 @@ exigir(medicion.every((r) => r.lienzosDurante === 1), 'nunca hay más de UN lien
 exigir(medicion.every((r) => r.lienzosDespues === 0), 'liberar deja CERO lienzos en la página');
 exigir(medicion.every((r) => r.instanciasVivas === 0), 'liberar deja CERO instancias vivas');
 
+exigir(seleccion.trasClic === 1, `un clic sobre una figura avisa UNA vez (avisó ${seleccion.trasClic})`);
+exigir(typeof seleccion.primero === 'number', `el aviso trae la posición de la pieza (trajo ${JSON.stringify(seleccion.primero)})`);
+exigir(seleccion.trasArrastre === seleccion.trasClic, 'arrastrar y soltar NO selecciona: encuadrar no es elegir');
+
 const desbordes = avisos.filter((a) => /Too many active WebGL contexts|WebGL context was lost/i.test(a));
 exigir(desbordes.length === 0, `el navegador no avisó desborde de contextos gráficos (${desbordes.length} avisos)`);
 
 console.log(`\n== RESULTADO ==`);
 if (fallas === 0) {
-  console.log(`CONFORME · los ${8} controles pasan sobre ${VUELTAS} ciclos`);
+  console.log(`CONFORME · los 11 controles pasan sobre ${VUELTAS} ciclos`);
 } else {
   console.log(`NO CONFORME · ${fallas} control(es) fallan`);
   avisos.slice(0, 5).forEach((a) => console.log(`   aviso: ${a}`));

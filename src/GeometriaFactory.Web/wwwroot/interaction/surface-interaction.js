@@ -336,7 +336,10 @@
                 continue;
             }
 
-            var id = viewer.initialize(scene);
+            // EL AVISO DE SELECCIÓN VIAJA EN LAS OPCIONES (`ADR-08007`), y es la vuelta que le
+            // faltaba a `F-13`: elegir una pieza EN LA ESCENA marca su nodo en el árbol, por el
+            // mismo índice y sin traducir ninguna identidad.
+            var id = viewer.initialize(scene, { onPieceSelected: markNode });
 
             if (!id) {
                 continue;
@@ -369,22 +372,72 @@
     }
 
 
-    // Un nodo del árbol pide resaltar SU pieza, por su índice.
+    // ---- La sincronización de `F-13`, en sus dos direcciones ------------------------------------
+
+    // De la escena al árbol: marca el nodo de esa pieza y lo trae a la vista.
+    //
+    // EL ESTADO VIVE EN EL `treeitem` Y NO EN LO QUE SE DIBUJA, que es donde la maqueta aprobada lo
+    // puso: es el único portador de rol y el que recibe el foco.
+    function markNode(position) {
+        var nodes = document.querySelectorAll('[data-gf-piece-node]');
+
+        for (var i = 0; i < nodes.length; i++) {
+            var selected = Number(nodes[i].dataset.gfPieceNode) === position;
+            nodes[i].setAttribute('aria-selected', selected ? 'true' : 'false');
+
+            if (selected && typeof nodes[i].scrollIntoView === 'function') {
+                // TRAERLO A LA VISTA ES PARTE DE LA INTERACCIÓN: un nodo marcado fuera de la
+                // ventana de desplazamiento no le dice nada a nadie.
+                nodes[i].scrollIntoView({ block: 'nearest' });
+            }
+        }
+    }
+
+    // Del árbol a la escena: pide resaltar esa pieza por su índice.
     function bindNode(viewer, id, node) {
         if (node.dataset.gfPieceNodeBound === 'yes') {
             return;
         }
 
         node.dataset.gfPieceNodeBound = 'yes';
-        node.addEventListener('click', function () {
-            viewer.selectPiece(id, Number(node.dataset.gfPieceNode));
+
+        function choose() {
+            var position = Number(node.dataset.gfPieceNode);
+            viewer.selectPiece(id, position);
+            markNode(position);
+        }
+
+        node.addEventListener('click', choose);
+        node.addEventListener('keydown', function (event) {
+            // Con teclado, las dos activaciones que un elemento de árbol tiene que aceptar.
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                choose();
+            }
         });
     }
 
-    // Las dos casillas, LEÍDAS JUNTAS Y ENVIADAS JUNTAS. El visor recibe el estado de los dos
-    // movimientos en cada cambio, porque los gobierna por separado y no conserva ninguno.
+    // ---- Los dos movimientos automáticos (`F-25`) -----------------------------------------------
+
+    // LA PREFERENCIA DEL SISTEMA LA LEE EL ANFITRIÓN, NUNCA EL VISOR: es la frontera que el contrato
+    // de la fachada fija, y la razón por la que el visor recibe dos valores de verdad en lugar de
+    // consultar nada.
+    function reducedMotion() {
+        try {
+            return !!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        } catch (error) {
+            return false;
+        }
+    }
+
     function bindMotion(viewer, id) {
         var boxes = document.querySelectorAll('[data-gf-motion]');
+
+        if (boxes.length === 0) {
+            return;
+        }
+
+        var reduced = reducedMotion();
 
         function push() {
             var options = { cameraOrbit: false, pieceSpin: false };
@@ -402,10 +455,49 @@
             }
 
             boxes[i].dataset.gfMotionBound = 'yes';
-            boxes[i].addEventListener('change', push);
+
+            // ESTADO INICIAL: PRENDIDO, SALVO QUE EL SISTEMA PIDA LO CONTRARIO. Es lo que la
+            // maqueta aprobada decidió, y el fundamento de `F-25`: la órbita ya existe en la
+            // visualización que la cátedra usa hoy, y arrancar apagado sería portar quitando algo
+            // que funciona.
+            boxes[i].checked = !reduced;
+            boxes[i].addEventListener('change', function () {
+                push();
+                announceMotion();
+            });
+        }
+
+        // Y CUANDO EL SISTEMA PIDE MENOS MOVIMIENTO, SE DICE POR QUÉ ARRANCAN APAGADOS: sin el
+        // aviso, la persona ve dos casillas apagadas y no sabe si es una falla.
+        var note = document.querySelector('[data-gf-motion-note]');
+
+        if (note !== null) {
+            note.hidden = !reduced;
         }
 
         push();
+    }
+
+    // El acuse de cada cambio, para quien no ve la escena.
+    function announceMotion() {
+        var status = document.querySelector('[data-gf-motion-status]');
+
+        if (status === null) {
+            return;
+        }
+
+        var boxes = document.querySelectorAll('[data-gf-motion]');
+        var on = [];
+
+        for (var i = 0; i < boxes.length; i++) {
+            if (boxes[i].checked) {
+                on.push(boxes[i].getAttribute('aria-label') || boxes[i].dataset.gfMotion);
+            }
+        }
+
+        status.textContent = on.length === 0
+            ? 'Movimiento automático apagado.'
+            : 'Movimiento automático: ' + on.join(' y ') + '.';
     }
 
     if (document.readyState === 'loading') {

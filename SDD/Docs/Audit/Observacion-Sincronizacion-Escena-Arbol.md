@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Observacion-Sincronizacion-Escena-Arbol.md
-**Versión:** 1.0
-**Estado:** Emitido — **espera decisión del Product Owner**
+**Versión:** 2.0
+**Estado:** CERRADA — resuelta por [`ADR-08007`](../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md)
 **Fecha:** 2026-08-16
 **Autor:** Orquestador SDD
 **Instrumento:** `Master-Prompt.md` §9 — un dato que el producto no puede resolver por su cuenta **se eleva y no se decide**
@@ -47,9 +47,10 @@ disfrazada de otra cosa.
 | **Un aviso en las opciones de `initialize`** | El anfitrión entrega una función que el visor llama al seleccionarse una pieza. **No agrega una séptima función**: `ViewerOptions` ya existe y es el lugar donde el anfitrión configura la instancia. Es el cambio más chico que cierra el hueco |
 | **Una séptima función de fachada** | Explícita y simétrica con las demás, y **toca la zona de frontera `F-01a`**: las seis funciones las fijó el Product Owner el 2026-08-12, y su recuento está citado en el intake, en la norma y en tres documentos más |
 
-**La primera parece la razonable**, y aun así **no se toma acá**: las dos cambian el contrato de la
-fachada, y ese contrato lo fijó el Product Owner. Lo que corresponde es elevarlo con las dos
-opciones y su costo.
+**Se tomó la primera**, con autorización explícita del Product Owner, y está registrada en
+[`ADR-08007`](../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md). El fundamento
+decisivo terminó siendo otro que el tamaño del cambio: **las seis funciones son órdenes que el
+anfitrión da, y un aviso es lo contrario**; entre ellas quedaría sin nada que lo distinga.
 
 ## 4. Qué pasa mientras tanto
 
@@ -58,13 +59,18 @@ del árbol y se resalta en la escena», que es exactamente lo que ocurre. **No d
 revés**, y por eso no hay control muerto ni promesa incumplida: hay una capacidad a medias,
 declarada.
 
-**`F-13` no queda cumplida.** Es `Must Have` y condiciona el cierre de la etapa `g` por la
-transición `g` → `h`, cuyo quinto criterio es «el árbol y la escena se sincronizan por índice de
-pieza». **La mitad que falta es de este contrato**, y el punto de control de la etapa no debería
-cerrarse sin resolverla.
+**`F-13` QUEDA CUMPLIDA en sus dos direcciones**, y el quinto criterio de la transición `g` → `h`
+tiene con qué verificarse. La superficie dice ahora las dos: «elegí una figura del árbol y se
+resalta en la escena, o elegila en la escena y se marca en el árbol».
+
+**Y la resolución obligó a decidir algo que esta observación no había previsto**: distinguir el clic
+del arrastre. Sin esa distinción, **encuadrar la escena seleccionaría la figura que quedara bajo el
+dedo al soltar**, y la selección dejaría de ser una decisión de la persona. Está en `ADR-08007` §4,
+con su prueba de navegador.
 
 ## 5. Control de cambios
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial, al construir el árbol de la vista de trabajo. Declara que **la dirección árbol → escena está hecha** y que **la escena → árbol no tiene canal**: las seis funciones de la fachada van todas del anfitrión hacia el visor y ninguna avisa de vuelta. Enumera las tres formas de improvisarla y por qué las tres son peores que el hueco, y eleva **dos salidas** con su costo: un aviso dentro de las opciones de `initialize` —el cambio más chico, sin séptima función— o una séptima función, que toca la zona de frontera `F-01a`. Declara que **`F-13` no queda cumplida** y que el punto de control de la etapa `g` no debería cerrarse sin resolverlo. | Orquestador SDD |
+| 2.0 | 2026-08-16 | **Cerrada por `ADR-08007`**, con autorización explícita del Product Owner: el aviso de selección entra en las opciones de `inicializar` y **las funciones siguen siendo seis**. El fundamento que decidió no fue el tamaño del cambio sino que **un aviso no es una orden**. `F-13` queda cumplida en las dos direcciones. Y se registra lo que esta observación **no había previsto** y la resolución sacó a la luz: sin distinguir el clic del arrastre, encuadrar la escena seleccionaría la figura que quedara bajo el dedo. | Orquestador SDD |

@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Definicion-Contrato-De-Fachada.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -119,7 +119,7 @@ Los nombres de las cinco primeras son los que declara PRODUCT-INTAKE §17.7 P.3 
 | Aspecto | Definición |
 | --- | --- |
 | Firma declarada | `inicializar(elemento, opciones)` |
-| Qué recibe | El elemento de dibujo sobre el que montar la escena, y un conjunto de opciones de presentación provisto por el componente anfitrión. **Dos de esas opciones están declaradas y son de gobierno del movimiento automático (§5.5)**: el estado inicial de la órbita de la cámara y el estado inicial del giro de las figuras, cada uno prendido o apagado. Ausentes o parciales, la instancia arranca con los dos movimientos **apagados**: la fachada no consulta preferencias del sistema (G-3) y el arranque quieto es el que no sorprende. Estas opciones fijan el estado **con el que la instancia nace**; cambiarlo después, con la instancia viva, es de `establecerMovimiento` (§4.6) |
+| Qué recibe | El elemento de dibujo sobre el que montar la escena, y un conjunto de opciones provisto por el componente anfitrión —de presentación, y **el aviso de selección** ([`ADR-08007`](../../../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md))—. **Dos de esas opciones están declaradas y son de gobierno del movimiento automático (§5.5)**: el estado inicial de la órbita de la cámara y el estado inicial del giro de las figuras, cada uno prendido o apagado. Ausentes o parciales, la instancia arranca con los dos movimientos **apagados**: la fachada no consulta preferencias del sistema (G-3) y el arranque quieto es el que no sorprende. Estas opciones fijan el estado **con el que la instancia nace**; cambiarlo después, con la instancia viva, es de `establecerMovimiento` (§4.6) |
 | Qué devuelve | Un identificador de instancia, que el componente anfitrión conserva y usa en las otras cinco funciones |
 | Qué garantiza | Que queda una instancia viva con escena, iluminación y cámara orbital, aislada de cualquier otra instancia (G-4), y que la instancia no dibuja ninguna pieza hasta que se invoque `cargarPiezas` |
 | Qué no hace | No lee configuración propia (G-3), no crea el elemento de dibujo ni lo ubica en la página, y no dibuja contenido |
@@ -158,6 +158,18 @@ pieza con una dimensión que la fachada no pueda usar, y **deja de ser el camino
 escenario**. La frontera que `Definicion-Contrato-Del-Validador-De-Figuras.md` §8 describía en dos
 mitades pasa a tener una sola: **decidir si el trabajo verifica y decidir qué se dibuja dejan de leer
 el mismo texto**.
+
+**El aviso de selección, y por qué vive acá.** `F-13` exige que la escena y el árbol se sincronicen
+**en las dos direcciones**, y las seis funciones de esta fachada van todas del anfitrión hacia el
+visor: ninguna avisa de vuelta. El anfitrión entrega, entre las opciones, **una función que el visor
+llama cuando la persona elige una pieza en la escena**, con su posición.
+
+**No es una séptima función, y es deliberado**: las seis son órdenes que el anfitrión da, y esto es
+lo contrario. Meterlo entre ellas dejaría la superficie con seis cosas que se piden y una que se
+recibe, sin nada que las distinga —y tocaría la zona de frontera que el Product Owner fijó—.
+
+**El visor no guarda la selección ni decide qué hacer con ella**: avisa y resalta. Y `RA-02` no se
+mueve: el aviso **se lo dan**, como el color de fondo.
 
 ### 4.3 `seleccionarPieza`
 
@@ -319,3 +331,4 @@ Sección propia de este documento de concepto. `Rules-Especificacion-Funcional.m
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-10`**: la fecha de cabecera decía 2026-08-08 y el documento tiene entradas de control de cambios fechadas 2026-08-09; pasa a **2026-08-09**, que es cuando se lo tocó por última vez. Ningún contenido cambia. |
 | 2.0 | 2026-08-16 | **Absorbe [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md), la decisión del Product Owner de que el visor reciba las piezas ya reconstruidas y no el texto del alumno.** §4.2 pasa de `cargarJson(id, texto)` a **`cargarPiezas(id, piezas)`**, con el nombre cambiado junto con la firma: seguir llamándola «cargar JSON» cuando ya no recibe JSON sería un nombre que promete una cosa y un parámetro que trae otra. §2 retira el término «texto del trabajo» y declara «piezas reconstruidas» en su lugar, con la constancia de por qué el anterior se fue. **La tolerancia del formato deja de vivir en el bundle**: las cuatro trampas las resuelve el validador del laboratorio con su batería de diez casos, y el bundle deja de tener tabla de claves sinónimas y de tolerar comas finales **porque ya no las ve**. La condición `DIMENSION_NO_LEGIBLE` **se conserva declarada y deja de ser el camino normal de `§20.E-8`**: esa pieza ya no llega hasta acá. **`RA-02` no se toca y se declara explícitamente**: el bundle sigue sin hacer red, sin identidad y sin pedir su dato por su cuenta —lo recibe de su anfitrión, que es lo que siempre hizo—. Sube **major**: cambia la firma de una función de la fachada. | Product Owner (decisión) · Orquestador SDD |
 | 1.1 | 2026-08-09 | **Cierra el hallazgo `F26-11`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. Tres lugares de este documento —la trazabilidad de cabecera, **§1** y **§5.5**— declaraban que el intake §17.7 P.3 **sigue declarando cinco funciones** y que la consolidación de la sexta estaba pendiente. **Ya no lo está**: el intake la consolidó en su versión **1.6**, y su §17.7 P.3 declara `establecerMovimiento(id, opciones)` como sexta función, rotulada como decisión del 2026-08-09 y remitiendo a §4.6 de este documento por su especificación. §5.5, que se titula «Punto abierto resuelto», dejaba abierto en su texto lo único que quedaba, de modo que un lector encontraba abierto lo que el título declaraba cerrado. Los tres pasajes se corrigen y §5.5 declara que no queda nada abierto en este punto. Ninguna función, garantía, prohibición, código de condición ni política de compatibilidad cambia: la superficie sigue siendo de seis funciones y siete códigos. |
+| 2.1 | 2026-08-16 | **Absorbe [`ADR-08007`](../../../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md)**: las opciones de `inicializar` suman **el aviso de selección**, que es la única vía del visor hacia su anfitrión y lo que permite cumplir `F-13` en su segunda dirección. **Las funciones siguen siendo seis** y ninguna cambia de firma ni de nombre: la zona de frontera `F-01a` no se toca. Se declara por qué no es una séptima función —las seis son órdenes que el anfitrión da, y un aviso es lo contrario— y que el visor **no guarda la selección**: avisa y resalta. Sube minor: amplía las opciones sin cambiar ninguna función. | Orquestador SDD |

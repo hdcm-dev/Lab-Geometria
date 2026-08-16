@@ -750,6 +750,20 @@ public sealed class WorkWebSurfaceTests : IDisposable
 
         // Y SE DECLARA EN POSITIVO que se dibujaron todas, en lugar de callar.
         Assert.Contains("Se dibujaron las 3 figuras", html, StringComparison.Ordinal);
+
+        // EL ÁRBOL LLEVA LA FORMA DE LA MAQUETA APROBADA: roles de árbol y estado de selección en
+        // el `treeitem`, que es el único portador de rol y el que recibe el foco.
+        Assert.Contains("role=\"tree\"", html, StringComparison.Ordinal);
+        Assert.Contains("role=\"treeitem\"", html, StringComparison.Ordinal);
+        Assert.Contains("aria-selected=\"false\"", html, StringComparison.Ordinal);
+
+        // Y LA SINCRONIZACIÓN SE PROMETE EN LAS DOS DIRECCIONES, porque ahora ocurre en las dos.
+        Assert.Contains("o elegila en la escena", html, StringComparison.Ordinal);
+
+        // El aviso de movimiento reducido viaja SERVIDO Y OCULTO: lo enciende el guion, que es
+        // quien consulta la preferencia del sistema.
+        Assert.Contains("data-gf-motion-note", html, StringComparison.Ordinal);
+        Assert.Contains("tu sistema pide movimiento reducido", html, StringComparison.Ordinal);
     }
 
     /// <summary>

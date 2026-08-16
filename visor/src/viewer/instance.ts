@@ -22,6 +22,10 @@ export class ViewerInstance {
   private readonly pieces = new Map<number, THREE.Mesh>();
   private readonly element: HTMLElement;
 
+  private readonly onPieceSelected?: (position: number) => void;
+  private readonly raycaster = new THREE.Raycaster();
+  private pointerMoved = false;
+
   private frame: number | null = null;
   private motion: MotionOptions = { cameraOrbit: false, pieceSpin: false };
   private orbitAngle = 0;
@@ -30,6 +34,7 @@ export class ViewerInstance {
 
   public constructor(element: HTMLElement, options?: ViewerOptions) {
     this.element = element;
+    this.onPieceSelected = options?.onPieceSelected;
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setSize(element.clientWidth || 1, element.clientHeight || 1);
@@ -224,15 +229,68 @@ export class ViewerInstance {
 
   private readonly onPointerDown = (): void => {
     this.dragging = true;
+    this.pointerMoved = false;
   };
 
-  private readonly onPointerUp = (): void => {
+  /**
+   * Soltar sin haber arrastrado ES UNA SELECCIÓN; soltar después de arrastrar es encuadrar.
+   *
+   * DISTINGUIRLOS IMPORTA: sin esta distinción, cada vez que la persona gira la escena para mirar
+   * una figura de atrás, al soltar seleccionaría la que quedó bajo el dedo. La selección dejaría de
+   * ser una decisión suya.
+   */
+  private readonly onPointerUp = (event: PointerEvent): void => {
+    const wasDragging = this.dragging;
     this.dragging = false;
+
+    if (!wasDragging || this.pointerMoved || this.onPieceSelected === undefined) {
+      return;
+    }
+
+    const position = this.pieceAt(event);
+
+    if (position !== null) {
+      this.select(position);
+      this.onPieceSelected(position);
+    }
   };
+
+  /** Qué pieza hay bajo el puntero, o nada. */
+  private pieceAt(event: PointerEvent): number | null {
+    const bounds = this.renderer.domElement.getBoundingClientRect();
+
+    if (bounds.width === 0 || bounds.height === 0) {
+      return null;
+    }
+
+    const pointer = new THREE.Vector2(
+      ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+      -((event.clientY - bounds.top) / bounds.height) * 2 + 1,
+    );
+
+    this.raycaster.setFromCamera(pointer, this.camera);
+
+    const hits = this.raycaster.intersectObjects([...this.pieces.values()], false);
+
+    if (hits.length === 0) {
+      return null;
+    }
+
+    // LA POSICIÓN VIAJA CON LA MALLA desde que se construyó: acá no se deduce de nada.
+    const position = hits[0].object.userData.piecePosition;
+
+    return typeof position === 'number' ? position : null;
+  }
 
   private readonly onPointerMove = (event: PointerEvent): void => {
     if (!this.dragging) {
       return;
+    }
+
+    // Un movimiento mínimo ya es arrastre: el umbral existe para que un temblor de la mano al
+    // hacer clic no cuente como encuadre.
+    if (Math.abs(event.movementX) + Math.abs(event.movementY) > 2) {
+      this.pointerMoved = true;
     }
 
     // Arrastrar orbita la cámara a mano. **Cero peticiones**: es geometría y nada más.
