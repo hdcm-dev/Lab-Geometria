@@ -27,6 +27,9 @@ namespace GeometriaFactory.Contracts.Works;
 /// <param name="DeclaredVolume">El volumen que trae el texto. Nulo en las figuras planas.</param>
 /// <param name="DerivedVolume">El volumen recalculado. Nulo en las figuras planas.</param>
 /// <param name="Components">Las figuras planas que la forman. Vacío en las piezas planas.</param>
+/// <param name="DeclaredLength">La clave `Largo` **de la propia figura**. Sólo en las planas del conjunto raíz.</param>
+/// <param name="DeclaredWidth">La clave `Ancho` de la propia figura.</param>
+/// <param name="DeclaredRadius">La clave `Radio` de la propia figura.</param>
 public sealed record WorkPiece(
     int Position,
     string Type,
@@ -34,7 +37,10 @@ public sealed record WorkPiece(
     double? DerivedArea,
     double? DeclaredVolume,
     double? DerivedVolume,
-    IReadOnlyList<WorkPieceComponent> Components);
+    IReadOnlyList<WorkPieceComponent> Components,
+    double? DeclaredLength = null,
+    double? DeclaredWidth = null,
+    double? DeclaredRadius = null);
 
 /// <summary>
 /// Un componente de una pieza, con las dimensiones desde las que se construye la malla.

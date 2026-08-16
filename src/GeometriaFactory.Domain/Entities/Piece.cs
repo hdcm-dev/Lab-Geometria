@@ -54,6 +54,24 @@ public sealed class Piece
     /// <summary>Figuras planas que forman la pieza. **Vacío admisible** en las piezas planas.</summary>
     public IReadOnlyList<Component> Components => _components;
 
+    /// <summary>Valor de la clave `Largo` **de la propia figura**. Nulo si no la trae.</summary>
+    /// <remarks>
+    /// LAS PLANAS DEL CONJUNTO RAÍZ LLEVAN SU MEDIDA EN SÍ MISMAS, y por eso estos tres atributos
+    /// existen: `§20.E-7` transcribe `{ "Tipo": "Circulo", "Radio": 2.50 }` como figura del conjunto
+    /// raíz **sin componentes**. Sin ellos esa medida se perdía al guardar y la figura no se podía
+    /// dibujar, aunque el conjunto raíz la contara.
+    ///
+    /// NULAS EN LAS VOLUMÉTRICAS: el cubo lleva su arista en sus caras y el ortoedro sus lados en
+    /// sus bases. Duplicarlas acá crearía el segundo lugar donde el mismo dato puede decir otra cosa.
+    /// </remarks>
+    public double? DeclaredLength { get; private set; }
+
+    /// <summary>Valor de la clave `Ancho` de la propia figura. Nulo si no la trae.</summary>
+    public double? DeclaredWidth { get; private set; }
+
+    /// <summary>Valor de la clave `Radio` de la propia figura. Nulo si no la trae.</summary>
+    public double? DeclaredRadius { get; private set; }
+
     /// <summary>
     /// Reconstruye una pieza leída del texto del alumno, en su posición del conjunto raíz.
     /// </summary>
@@ -69,7 +87,10 @@ public sealed class Piece
         double? derivedArea,
         double? declaredVolume,
         double? derivedVolume,
-        IEnumerable<Component>? components = null)
+        IEnumerable<Component>? components = null,
+        double? declaredLength = null,
+        double? declaredWidth = null,
+        double? declaredRadius = null)
     {
         var piece = new Piece
         {
@@ -79,6 +100,9 @@ public sealed class Piece
             DerivedArea = derivedArea,
             DeclaredVolume = declaredVolume,
             DerivedVolume = derivedVolume,
+            DeclaredLength = declaredLength,
+            DeclaredWidth = declaredWidth,
+            DeclaredRadius = declaredRadius,
         };
 
         if (components is not null)

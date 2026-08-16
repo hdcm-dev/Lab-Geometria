@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 import type { Piece, PieceComponent } from '../contract';
+import { palette } from './palette';
 
 /**
  * Construcción de la malla de cada pieza, a partir de sus dimensiones declaradas.
@@ -109,17 +110,21 @@ function geometryOf(piece: Piece): THREE.BufferGeometry | null {
         : null;
     }
 
+    // LAS PLANAS DEL CONJUNTO RAÍZ LLEVAN SU MEDIDA EN SÍ MISMAS, y por eso se lee primero de la
+    // figura y sólo después de un componente: cuando una plana es componente de otra pieza, la
+    // medida está donde el emisor la puso. Leer sólo el componente dejaba a las tres planas de
+    // `E-7` sin con qué dibujarse, contadas y nunca vistas.
     case 'Rectangle':
     case 'Square': {
-      const width = piece.components[0]?.declaredLength ?? null;
-      const depth = piece.components[0]?.declaredWidth ?? null;
-      return null !== width && isUsable(width) && isUsable(depth)
+      const width = piece.declaredLength ?? piece.components[0]?.declaredLength ?? null;
+      const depth = piece.declaredWidth ?? piece.components[0]?.declaredWidth ?? null;
+      return isUsable(width) && isUsable(depth)
         ? new THREE.PlaneGeometry(extent(width), extent(depth))
         : null;
     }
 
     case 'Circle': {
-      const radius = piece.components[0]?.declaredRadius ?? null;
+      const radius = piece.declaredRadius ?? piece.components[0]?.declaredRadius ?? null;
       return isUsable(radius) ? new THREE.CircleGeometry(extent(radius), 48) : null;
     }
 
@@ -153,13 +158,20 @@ export function meshFor(piece: Piece): MeshOutcome {
   }
 
   const material = new THREE.MeshStandardMaterial({
-    color: colorFor(piece.position),
+    color: new THREE.Color(palette().byType[piece.type] ?? '#5C5C57'),
     metalness: 0.05,
     roughness: 0.65,
     side: THREE.DoubleSide,
   });
 
   const mesh = new THREE.Mesh(geometry, material);
+
+  // LAS PLANAS SE ACUESTAN SOBRE EL PLANO DE REFERENCIA, como en el port de la maqueta. Sin esto
+  // quedan **paradas y de canto**: la figura existe, se cuenta y en pantalla es una raya. Una
+  // figura que está dibujada y no se ve es la misma clase de defecto que este visor elimina.
+  if (piece.type === 'Rectangle' || piece.type === 'Square' || piece.type === 'Circle') {
+    mesh.rotation.x = -Math.PI / 2;
+  }
 
   // LA POSICIÓN DE LA PIEZA VIAJA CON SU MALLA: es su identidad, y es con lo que `selectPiece`
   // la encuentra y con lo que el anfitrión la resalta.
@@ -168,13 +180,9 @@ export function meshFor(piece: Piece): MeshOutcome {
   return { mesh, reason: null };
 }
 
-/**
- * El color de una pieza **se deriva de su posición** y de nada más.
- *
- * ES LO QUE HACE LA DISPOSICIÓN DETERMINISTA (`F-13`): procesar el mismo trabajo dos veces produce
- * la misma escena, porque nada acá depende del orden de llegada, del reloj ni del azar.
- */
-function colorFor(position: number): THREE.Color {
-  const hue = (position * 0.137) % 1;
-  return new THREE.Color().setHSL(hue, 0.55, 0.55);
-}
+/* EL COLOR SALE DEL TIPO Y NO DE LA POSICIÓN, y no es un detalle: derivarlo de la posición hacía
+   que la misma figura cambiara de color según con quién la mandaran. La paleta por tipo la declara
+   la maqueta aprobada, y sus valores son tokens del catálogo. Ver `palette.ts`.
+
+   EL DETERMINISMO DE `F-13` NO SE PIERDE: sigue sin depender del orden de llegada, del reloj ni del
+   azar. Lo que cambia es de qué depende —del tipo, que es dato del alumno—. */

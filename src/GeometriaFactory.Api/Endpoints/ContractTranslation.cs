@@ -321,7 +321,10 @@ public static class ContractTranslation
                         component.DeclaredWidth,
                         component.DeclaredRadius,
                         component.DeclaredArea))
-                ]))
+                ],
+                piece.DeclaredLength,
+                piece.DeclaredWidth,
+                piece.DeclaredRadius))
         ];
     }
 

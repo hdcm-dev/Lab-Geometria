@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 import type { DrawOutcome, MotionOptions, Piece, UndrawnPiece, ViewerOptions } from '../contract';
 import { meshFor } from './meshes';
+import { palette } from './palette';
 
 /**
  * Una escena viva: su render, su cámara, sus mallas y su bucle de dibujo.
@@ -20,6 +21,8 @@ export class ViewerInstance {
   private readonly scene: THREE.Scene;
   private readonly camera: THREE.PerspectiveCamera;
   private readonly pieces = new Map<number, THREE.Mesh>();
+  private readonly grid: THREE.GridHelper;
+  private readonly selectionColour = palette().selection;
   private readonly element: HTMLElement;
 
   private readonly onPieceSelected?: (position: number) => void;
@@ -30,7 +33,7 @@ export class ViewerInstance {
   private motion: MotionOptions = { cameraOrbit: false, pieceSpin: false };
   private orbitAngle = 0;
   private radius = 10;
-  private rowWidth = 0;
+  private readonly focus = new THREE.Vector3(0, 1, 0);
   private dragging = false;
 
   public constructor(element: HTMLElement, options?: ViewerOptions) {
@@ -41,8 +44,19 @@ export class ViewerInstance {
     this.renderer.setSize(element.clientWidth || 1, element.clientHeight || 1);
     element.appendChild(this.renderer.domElement);
 
+    const colours = palette();
+
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(options?.background ?? '#101418');
+    this.scene.background = options?.background !== undefined
+      ? new THREE.Color(options.background)
+      : colours.background;
+
+    // GRILLA DE REFERENCIA, del visor original y conservada por el port de la maqueta: sin un
+    // plano de apoyo, tres figuras flotando en un fondo liso no dicen a qué escala están.
+    this.grid = new THREE.GridHelper(60, 30, colours.grid, colours.grid);
+    this.grid.material.opacity = 0.45;
+    this.grid.material.transparent = true;
+    this.scene.add(this.grid);
 
     this.camera = new THREE.PerspectiveCamera(50, this.aspect(), 0.1, 1000);
 
@@ -102,7 +116,12 @@ export class ViewerInstance {
       const half = item.size / 2;
       cursor += half;
 
-      item.mesh.position.set(cursor, 0, 0);
+      // Apoyadas SOBRE la grilla y no atravesándola: el plano es la referencia de escala. Las
+      // figuras acostadas —las planas— quedan **sobre** el plano y no elevadas a media altura.
+      const box = new THREE.Box3().setFromObject(item.mesh);
+      const height = box.max.y - box.min.y;
+
+      item.mesh.position.set(cursor, height < 0.01 ? 0.02 : height / 2, 0);
       this.scene.add(item.mesh);
       this.pieces.set(item.position, item.mesh);
       drawn.push(item.position);
@@ -111,7 +130,7 @@ export class ViewerInstance {
       cursor += half + Math.max(item.size * 0.25, 0.5);
     }
 
-    this.frameCamera(cursor, Math.max(1, ...built.map((item) => item.size)));
+    this.frameCamera();
 
     return { drawn, undrawn };
   }
@@ -122,7 +141,12 @@ export class ViewerInstance {
 
     for (const [key, mesh] of this.pieces) {
       const material = mesh.material as THREE.MeshStandardMaterial;
-      material.emissive.setHex(key === position ? 0x333333 : 0x000000);
+      // EL RESALTE USA EL COLOR DE MARCA, que es el que la maqueta declara para la selección.
+      if (key === position) {
+        material.emissive.copy(this.selectionColour).multiplyScalar(0.45);
+      } else {
+        material.emissive.setHex(0x000000);
+      }
     }
 
     return target !== undefined;
@@ -157,6 +181,9 @@ export class ViewerInstance {
     this.renderer.domElement.removeEventListener('pointermove', this.onPointerMove);
 
     this.clearPieces();
+
+    this.grid.geometry.dispose();
+    (this.grid.material as THREE.Material).dispose();
 
     this.scene.clear();
     this.renderer.dispose();
@@ -196,25 +223,52 @@ export class ViewerInstance {
   }
 
   /**
-   * Encuadra la cámara sobre TODO lo dibujado.
+   * Encuadra la cámara sobre TODO lo dibujado, calculado desde la caja real de la escena.
    *
-   * SE CALCULA DESDE EL ANCHO REAL DE LA FILA Y DE LA FIGURA MÁS GRANDE, no desde la cantidad de
-   * piezas: tres figuras chicas y tres enormes ocupan lo mismo en número y nada parecido en
-   * pantalla.
+   * SE CALCULA Y NO SE ESTIMA, y es la diferencia que se ve: la versión anterior derivaba la
+   * distancia del ancho de la fila con un factor, y con seis figuras **tres quedaban fuera de
+   * cuadro mientras el texto decía que se habían dibujado las seis**. Un encuadre que miente sobre
+   * lo que dibujó es la misma clase de defecto que este visor existe para eliminar.
+   *
+   * LA DISTANCIA SALE DEL ÁNGULO DE LA CÁMARA: para que una esfera de radio `r` entre, hace falta
+   * `r / sen(mitad del ángulo)`. Con el margen, entra con aire y sin depender de cuántas figuras
+   * haya ni de cuán distintas sean entre sí.
    */
-  private frameCamera(rowWidth: number, largest: number): void {
-    this.rowWidth = rowWidth;
-    this.radius = Math.max(6, rowWidth * 0.9 + largest * 1.2);
+  private frameCamera(): void {
+    const box = new THREE.Box3();
+
+    for (const mesh of this.pieces.values()) {
+      box.expandByObject(mesh);
+    }
+
+    if (box.isEmpty()) {
+      this.focus.set(0, 1, 0);
+      this.radius = 10;
+    } else {
+      box.getCenter(this.focus);
+
+      const size = new THREE.Vector3();
+      box.getSize(size);
+
+      const enclosing = Math.max(size.x, size.y, size.z, 1) * 0.5 * Math.SQRT2;
+      const halfAngle = THREE.MathUtils.degToRad(this.camera.fov) / 2;
+
+      this.radius = (enclosing / Math.sin(halfAngle)) * 1.25;
+    }
+
+    // LA CÁMARA MIRA LA FILA DE FRENTE Y DESDE ARRIBA, no en diagonal: las figuras se ordenan a lo
+    // largo de un eje, y mirarlas en diagonal las apila unas sobre otras en pantalla. Con la vista
+    // de frente **se ven las seis separadas**, que es lo que el escenario `E-7` viene a mostrar.
     this.camera.position.set(
-      this.centre().x + this.radius * 0.6,
-      this.radius * 0.5,
-      this.radius,
+      this.focus.x,
+      this.focus.y + this.radius * 0.45,
+      this.focus.z + this.radius * 0.9,
     );
-    this.camera.lookAt(this.centre());
+    this.camera.lookAt(this.focus);
   }
 
   private centre(): THREE.Vector3 {
-    return new THREE.Vector3(this.rowWidth / 2, 0, 0);
+    return this.focus;
   }
 
   private aspect(): number {

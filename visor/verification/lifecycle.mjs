@@ -91,17 +91,36 @@ const seleccion = await pestania.evaluate(async ({ piezas }) => {
   const lienzo = elemento.querySelector('canvas');
   const caja = lienzo.getBoundingClientRect();
 
-  // El centro del lienzo: la cámara encuadra el conjunto, así que ahí hay una pieza.
+  // NO SE HACE CLIC EN EL CENTRO EXACTO, y el motivo se descubrió cuando este control empezó a
+  // fallar: con la fila encuadrada, el centro de la pantalla cae **entre** dos figuras. El punto de
+  // apunte se corre a donde hay una pieza. Lo que se mide es el aviso, no la puntería.
   const disparar = (tipo, x, y) => lienzo.dispatchEvent(
     new PointerEvent(tipo, { clientX: x, clientY: y, bubbles: true }));
 
-  const cx = caja.left + caja.width / 2;
-  const cy = caja.top + caja.height / 2;
+  const cx = caja.left + caja.width * 0.42;
+  const cy = caja.top + caja.height * 0.52;
 
   disparar('pointerdown', cx, cy);
   disparar('pointerup', cx, cy);
 
-  const trasClic = avisos.length;
+  let trasClic = avisos.length;
+
+  // BARRIDO DE APUNTE: si el punto elegido cayó en un hueco entre figuras, se prueban otros a lo
+  // largo de la fila. **Lo que se mide es el aviso y no la puntería**, y el encuadre cambia con la
+  // cantidad y el tamaño de las figuras.
+  if (trasClic === 0) {
+    for (const fx of [0.3, 0.5, 0.6, 0.7]) {
+      for (const fy of [0.45, 0.55]) {
+        const x = caja.left + caja.width * fx;
+        const y = caja.top + caja.height * fy;
+        disparar('pointerdown', x, y);
+        disparar('pointerup', x, y);
+        if (avisos.length > 0) { break; }
+      }
+      if (avisos.length > 0) { break; }
+    }
+    trasClic = avisos.length;
+  }
 
   // Y ARRASTRAR NO SELECCIONA: soltar después de mover es encuadrar, no elegir.
   disparar('pointerdown', cx, cy);

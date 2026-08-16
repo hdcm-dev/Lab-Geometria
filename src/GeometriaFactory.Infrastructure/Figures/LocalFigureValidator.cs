@@ -209,7 +209,12 @@ public sealed class LocalFigureValidator : IFigureValidator
         var derivedVolume = DeriveVolume(type, components, length, width, radius, height);
 
         return (
-            Piece.Reconstruct(position, type, declaredArea, derivedArea, declaredVolume, derivedVolume, components),
+            Piece.Reconstruct(
+                position, type, declaredArea, derivedArea, declaredVolume, derivedVolume, components,
+                // LAS DIMENSIONES DE LA PROPIA FIGURA. En las volumétricas no vienen —viven en sus
+                // componentes— y quedan nulas; en las planas del conjunto raíz **son la única
+                // medida que hay**, y sin ellas la figura se guardaba sin con qué dibujarse.
+                length, width, radius),
             null);
     }
 

@@ -13,13 +13,16 @@ namespace GeometriaFactory.Infrastructure.Persistence.Configurations;
 /// que la posición **no se compacte** (`RC-06002`). El índice único de trabajo y posición es lo que
 /// impide que dos piezas del mismo trabajo digan ocupar el mismo lugar.
 ///
-/// LA PIEZA NO LLEVA COLUMNA DE DIMENSIONES, y es un **apartamiento declarado** de §2.3 del modelo
-/// de datos, que sí la lista. El fundamento es del propio modelo de datos: su §1 declara que cuando
-/// él y `Definicion-Modelo-De-Dominio.md` difieren **manda el modelo del dominio**, y §2.3 del
-/// modelo del dominio enumera siete atributos de la pieza y **ninguno es un conjunto de
-/// dimensiones**: las dimensiones viven en sus componentes. Guardarlas también acá crearía el
-/// segundo lugar donde el mismo dato puede decir otra cosa, que es lo que `RC-06004` evita para la
-/// familia. **[apartamiento de la etapa `f`, declarado y elevado al punto de control.]**
+/// LA PIEZA SÍ LLEVA SUS DIMENSIONES, y **el apartamiento que la etapa `f` había declarado queda
+/// retirado**. Entonces el modelo del dominio no le asignaba ninguna y el razonamiento era correcto
+/// para las volumétricas: el cubo lleva su arista en sus caras. **No lo era para las planas del
+/// conjunto raíz**, que las llevan en sí mismas —`§20.E-7`, `{ "Tipo": "Circulo", "Radio": 2.50 }`
+/// sin componentes—, y con la columna ausente esa medida **se perdía al guardar**: la figura se
+/// contaba en el conjunto raíz y no se podía dibujar nunca.
+///
+/// El modelo del dominio §2.3 las declara desde la etapa `g`, con ese fundamento, y esta
+/// configuración las materializa. **Siguen sin duplicarse**: son nulas en las volumétricas, que las
+/// llevan en sus componentes.
 ///
 /// LA FAMILIA TAMPOCO SE GUARDA (`RC-06004`): se deriva del tipo.
 ///
@@ -46,6 +49,12 @@ public sealed class PieceConfiguration : IEntityTypeConfiguration<Piece>
         builder.Property(p => p.Type)
             .HasConversion<string>()
             .IsRequired();
+
+        // LAS DIMENSIONES DE LA PROPIA FIGURA, que el modelo del dominio agregó en la etapa `g`:
+        // las planas del conjunto raíz las llevan en sí mismas y sin ellas su medida se perdía.
+        builder.Property(p => p.DeclaredLength);
+        builder.Property(p => p.DeclaredWidth);
+        builder.Property(p => p.DeclaredRadius);
 
         builder.Property(p => p.DeclaredArea);
         builder.Property(p => p.DerivedArea);

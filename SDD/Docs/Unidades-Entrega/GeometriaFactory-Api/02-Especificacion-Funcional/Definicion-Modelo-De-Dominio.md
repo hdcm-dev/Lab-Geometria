@@ -111,6 +111,19 @@ Cada figura del conjunto raíz del trabajo. **Su identidad es su posición en es
 | Volumen declarado | El valor de volumen que trae el texto del alumno | Se guarda tal cual, sin corregir. No aplica a las figuras planas |
 | Volumen derivado | El valor de volumen recalculado desde las dimensiones | Se guarda por separado del declarado. No aplica a las figuras planas |
 | Componentes | Figuras planas que forman la pieza | Vacío admisible en las piezas planas del conjunto raíz |
+| Dimensiones declaradas | Los valores dimensionales que el texto trae **para la propia figura** | Presentes **sólo cuando la figura los lleva en sí misma**, que es el caso de las figuras planas del conjunto raíz. Nulas en las volumétricas, que las llevan en sus componentes |
+
+**Por qué la pieza lleva dimensiones propias, y por qué no las llevaba.** Esta emisión las agrega
+[ETAPA `g`, 2026-08-16]. El modelo suponía que **toda** dimensión vive en un componente, que es
+cierto para las tres figuras volumétricas: el cubo la lleva en sus caras y el ortoedro en sus bases
+y laterales. **No es cierto para las planas del conjunto raíz**, y el intake lo transcribe en
+`§20.E-7`: `{ "Tipo": "Circulo", "Radio": 2.50 }` es una figura del conjunto raíz **sin
+componentes**, con su medida en sí misma.
+
+**El costo de la omisión era exacto y medible**: esas tres figuras se reconstruían —el conjunto
+raíz las contaba— y **su medida se perdía al guardarlas**, de modo que nada podía dibujarlas. `E-7`
+declara «se dibujan **seis** piezas, una por cada tipo soportado», y con el modelo anterior eran
+tres. Se descubrió abriendo ese escenario en el producto.
 
 Guardar por separado el valor declarado y el derivado es una decisión tomada aguas arriba: es lo que hace verificable la comparación sin recalcularla en cada consulta (§17.1.P.11 · GeometriaFactory-Domain punto 3).
 

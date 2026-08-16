@@ -24,6 +24,17 @@ export interface Piece {
   readonly declaredVolume?: number | null;
   readonly derivedVolume?: number | null;
   readonly components: readonly PieceComponent[];
+
+  /**
+   * Las dimensiones **de la propia figura**, presentes sólo cuando la figura las lleva en sí misma.
+   *
+   * ES EL CASO DE LAS PLANAS DEL CONJUNTO RAÍZ: `{ "Tipo": "Circulo", "Radio": 2.50 }` no tiene
+   * componentes, y su medida es suya. Las volumétricas las llevan en sus componentes y acá vienen
+   * nulas.
+   */
+  readonly declaredLength?: number | null;
+  readonly declaredWidth?: number | null;
+  readonly declaredRadius?: number | null;
 }
 
 /** Una pieza que no se pudo dibujar, con su posición y su motivo. */
