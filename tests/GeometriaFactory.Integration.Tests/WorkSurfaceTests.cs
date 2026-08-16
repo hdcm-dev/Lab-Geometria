@@ -151,6 +151,96 @@ public sealed class WorkSurfaceTests : IDisposable
         Assert.Equal(world.StudentId, await StoredOwnerAsync(body.WorkId));
     }
 
+    // ---- A-18 · LA INTERPRETACIÓN QUE NO GUARDA NADA ------------------------------------------
+
+    /// <summary>
+    /// `E-1` interpretado sin guardar: devuelve las tres piezas para dibujar y sus dos
+    /// advertencias, **y el almacén queda igual que antes**.
+    /// </summary>
+    [Fact]
+    public async Task InterpretingReturnsThePiecesToDrawAndWritesNothing()
+    {
+        var world = await WorldAsync();
+
+        // El almacén ANTES: cero trabajos. Si no se contara antes, el cero de después no probaría
+        // nada.
+        Assert.Equal(0, await CountWorksAsync());
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/interpretaciones",
+            world.StudentToken,
+            new WorkInterpretationRequest(Scenarios.E1)));
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var body = (await response.Content.ReadFromJsonAsync<WorkInterpretationResponse>())!;
+
+        // LAS PIEZAS, QUE SON LO QUE EL VISOR VA A DIBUJAR, con su posición y sus componentes.
+        Assert.Equal(3, body.RootFigureCount);
+        Assert.Equal(3, body.Pieces.Count);
+        Assert.Equal([0, 1, 2], body.Pieces.Select(p => p.Position));
+        Assert.Equal("Cylinder", body.Pieces[0].Type);
+        Assert.Equal(3, body.Pieces[0].Components.Count);
+        Assert.Equal(6, body.Pieces[1].Components.Count);
+
+        // Y LAS OBSERVACIONES: previsualizar sin decir qué no se pudo interpretar sería el fallo
+        // silencioso que este producto viene a eliminar.
+        Assert.Equal(2, body.Observations.Count);
+
+        // EL ALMACÉN DESPUÉS: sigue en cero. Es la propiedad que este punto tiene que sostener.
+        Assert.Equal(0, await CountWorksAsync());
+    }
+
+    /// <summary>
+    /// Un texto que no verifica se interpreta igual: devuelve lo que sí se pudo reconstruir **y su
+    /// error ubicado**, sin guardar nada y sin hablar de estados.
+    /// </summary>
+    [Fact]
+    public async Task InterpretingATextThatDoesNotVerifyReturnsWhatItCouldRebuild()
+    {
+        var world = await WorldAsync();
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/interpretaciones",
+            world.StudentToken,
+            new WorkInterpretationRequest(Scenarios.E5)));
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var body = (await response.Content.ReadFromJsonAsync<WorkInterpretationResponse>())!;
+
+        // DE DOS FIGURAS SE RECONSTRUYÓ UNA, y el recuento lo dice sin inventar la que falta: es
+        // lo que permite dibujar el cubo y explicar por qué se ve uno solo.
+        Assert.Equal(2, body.RootFigureCount);
+        var piece = Assert.Single(body.Pieces);
+        Assert.Equal(0, piece.Position);
+
+        var error = Assert.Single(body.Observations);
+        Assert.Equal(nameof(ObservationKind.ValidationError), error.Kind);
+        Assert.Equal(1, error.PiecePosition);
+        Assert.Equal("Tipo", error.Field);
+
+        Assert.Equal(0, await CountWorksAsync());
+    }
+
+    /// <summary>El texto vacío es campo ausente, y se nombra: `400` sin interpretar nada.</summary>
+    [Fact]
+    public async Task InterpretingWithoutTextIsRejectedNamingTheField()
+    {
+        var world = await WorldAsync();
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/interpretaciones",
+            world.StudentToken,
+            new WorkInterpretationRequest("   ")));
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.Equal(0, await CountWorksAsync());
+    }
+
     // ---- LOS DOS DESENLACES DEL ENVÍO, QUE SON LO QUE LA TRANSICIÓN `f` -> `g` PIDE ----------
 
     /// <summary>

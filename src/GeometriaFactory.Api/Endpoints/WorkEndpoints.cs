@@ -71,6 +71,15 @@ public static class WorkEndpoints
     /// </remarks>
     public const string StudentFilterParameter = "alumno";
 
+    /// <summary>Ruta de `A-18`. [derivado] `Definicion-Superficie-HTTP.md` §3.</summary>
+    /// <remarks>
+    /// **NO CUELGA DE `/trabajos`, Y ES DELIBERADO.** El producto tiene **una sola acción de
+    /// guardado** y es enviar; colgar de ahí un punto que no guarda insinuaría que hay un segundo
+    /// camino por el que un trabajo entra al almacén. Lo que este punto produce es una
+    /// interpretación, no un trabajo, y la ruta lo dice.
+    /// </remarks>
+    public const string InterpretationsRoute = "/interpretaciones";
+
     public static IEndpointRouteBuilder MapWorkEndpoints(this IEndpointRouteBuilder endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
@@ -127,6 +136,50 @@ public static class WorkEndpoints
                 new WorkSubmissionResponse(outcome.WorkId, outcome.Status.ToString(), outcome.RegisteredAt, ContractTranslation.Observations(outcome)));
         })
         .WithName("SubmitWork")
+        .RequireAuthorization();
+
+        // ---- A-18 · la interpretación que NO guarda nada -------------------------------------
+        // Lo exige `ADR-08006`: el visor recibe las piezas reconstruidas y no el texto, de modo que
+        // previsualizar necesita quien las reconstruya. **Este punto no escribe una sola fila**: no
+        // toca el repositorio, no constituye ningún trabajo y no resuelve ningún estado.
+        //
+        // NO DEVUELVE ESTADO DE TRABAJO PORQUE NO HAY TRABAJO. Resolver el estado es del dominio
+        // sobre un trabajo que existe, y devolver uno acá afirmaría una entrega que no ocurrió.
+        //
+        // EXIGE ACCESO FIRMADO Y PAPEL `Alumno`, con el mismo criterio que `A-10`: interpretar
+        // consume el motor del laboratorio, y un punto anónimo que lo consume es una superficie de
+        // abuso gratuita sobre la única pieza cara del producto.
+        endpoints.MapPost(InterpretationsRoute, (
+            WorkInterpretationRequest request,
+            HttpContext context,
+            IFigureValidator validator,
+            ISystemClock clock) =>
+        {
+            var now = clock.UtcNow;
+
+            if (RoleOf(context.User) != Role.Student)
+            {
+                return StudentOnly(now);
+            }
+
+            if (string.IsNullOrWhiteSpace(request?.OriginalJson))
+            {
+                return ContractTranslation.Problem(ConditionCode.RequiredFieldMissing, now, "OriginalJson");
+            }
+
+            // EL TEXTO SE PASA TAL CUAL, como en `A-10`: ni recorte, ni normalización de saltos de
+            // línea, ni reserialización. Que este punto no guarde no lo autoriza a tocarlo.
+            var interpretation = validator.Interpret(request.OriginalJson);
+
+            // NO SE REGISTRA NADA DEL TEXTO NI DE SU RESULTADO. `A-10` anota el motivo de un rechazo
+            // porque hay un trabajo del que hablar; acá no hay ninguno, y un registro de cada
+            // previsualización sería una traza del trabajo en curso de la persona.
+            return Results.Ok(new WorkInterpretationResponse(
+                interpretation.RootFigureCount,
+                ContractTranslation.Pieces(interpretation.Pieces),
+                ContractTranslation.Observations(interpretation.Observations)));
+        })
+        .WithName("InterpretWork")
         .RequireAuthorization();
 
         // ---- A-11 · la reedición de un trabajo en `Draft` ------------------------------------

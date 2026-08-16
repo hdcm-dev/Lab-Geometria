@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md
-**Versión:** 1.0
-**Estado:** Emitido — **espera decisión del Product Owner**
+**Versión:** 2.0
+**Estado:** Emitido — **dos decisiones tomadas, una abierta**
 **Fecha:** 2026-08-16
 **Autor:** Orquestador SDD
 **Instrumento:** `Master-Prompt.md` §9, manejo de ambigüedad: un dato que el producto no puede resolver por su cuenta **se eleva y no se decide**
@@ -67,11 +67,30 @@ texto crudo necesita al laboratorio para convertirlo.
 
 ## 3. Qué se le pide al Product Owner
 
-| # | Decisión | Opciones |
+| # | Decisión | Estado |
 | --- | --- | --- |
-| 1 | Qué se hace con `§20.E-7` punto 4 | **(a)** Reescribirlo declarando que la página estática recibe la estructura de piezas · **(b)** Conservarlo y declarar que describe el comportamiento anterior a `ADR-08006` |
-| 2 | Qué se hace con `§20.E-8` puntos 2 y 3 | **(a)** Reescribirlos sobre el camino nuevo, con la pieza retenida por el validador · **(b)** Conservarlos como el caso de contrato que la fachada sigue declarando |
-| 3 | Qué se hace con `RT` §8.3 | **(a)** Precisar la propiedad: «sin instalar nada y sin backend», sin «pegando el texto» · **(b)** Sostenerla como está y **reabrir la decisión**, porque es la única de las tres que la decisión contradice de frente |
+| 1 | Qué se hace con `§20.E-7` punto 4 | **TOMADA el 2026-08-16: reescribirlo.** El intake **2.2** lo declara sobre el camino nuevo y agrega qué sigue ejercitando el bundle —el mapeo de los seis tipos— y qué dejó de ser suyo |
+| 2 | Qué se hace con `§20.E-8` puntos 2 y 3 | **TOMADA el 2026-08-16: reescribirlos.** El intake **2.2** declara que la pieza no llega al visor y que **la confusión que el escenario detecta cambia de par**: pasa a ser entre no poder dibujar y no poder interpretar. El punto 5 no se tocó |
+| 3 | Qué se hace con `RT` §8.3 | **ABIERTA.** Es la única que la decisión contradice de frente |
+
+### 3.1 La que queda abierta
+
+**`RT` §8.3 pide no perder que cualquiera pegue el texto y vea el dibujo, sin instalar nada.** Con
+`ADR-08006` se conservan «sin instalar nada» y «sin backend», y **no se conserva «pegando el
+texto»**: la página suelta del visor recibe la estructura de piezas, y quien tenga el texto crudo
+necesita al laboratorio para convertirlo.
+
+**Dónde corre el validador ya está decidido y no cambia esto.** El 2026-08-16 el Product Owner
+resolvió que corre **en el servicio de datos**, de modo que la pantalla le pide la interpretación
+por `A-18` y le pasa el DTO al bundle. Esa decisión define **quién** interpreta; la de `RT` §8.3
+define **qué se hace con una propiedad que ya no se cumple entera**, y son preguntas distintas.
+
+**Las dos salidas, y lo que cuesta cada una:**
+
+| Salida | Qué implica |
+| --- | --- |
+| **Precisar la propiedad** — «sin instalar nada y sin backend», sin «pegando el texto» | La página de prueba del visor se entrega con los ocho escenarios ya convertidos: sigue abriéndose y dibujando sin levantar nada. Se pierde pegar texto nuevo sin el laboratorio |
+| **Sostenerla como está** | El bundle tiene que seguir interpretando el texto, y `ADR-08006` **no procede como está**: volverían los dos lectores del mismo formato |
 
 **La tercera es la que conviene mirar primero.** Las dos primeras son ajustes de redacción sobre
 escenarios; la tercera es una propiedad que el análisis declaró **como cosa a no perder**, y la
@@ -90,3 +109,4 @@ técnicos, que es trabajo del Product Owner y no del que construye.
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial. Eleva las **tres afirmaciones aguas arriba** que `ADR-08006` alcanza —`§20.E-7` punto 4, `§20.E-8` puntos 2 y 3, y `RT` §8.3—, con el texto exacto de cada una, qué pasa a ser cierto, y la decisión que se le pide al Product Owner sobre cada una. Declara que **ninguna invalida la decisión** y que **la construcción no está bloqueada**, y señala que la tercera es la única que la decisión contradice de frente. | Orquestador SDD |
+| 2.0 | 2026-08-16 | **Dos de las tres decisiones tomadas.** El Product Owner resolvió **reescribir** los dos puntos de los escenarios, y el intake pasa a **2.2** con esa absorción. Queda **abierta la tercera**, `RT` §8.3, que es la única que la decisión contradice de frente, y §3.1 la desarrolla con sus dos salidas y lo que cuesta cada una. Se declara además que la decisión de **dónde corre el validador** —en el servicio de datos— **no resuelve ésta**: una dice quién interpreta y la otra qué se hace con una propiedad que ya no se cumple entera. | Orquestador SDD |

@@ -2,6 +2,7 @@ using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Works;
 using GeometriaFactory.Contracts.Errors;
 using GeometriaFactory.Contracts.Works;
+using GeometriaFactory.Domain.Entities;
 using GeometriaFactory.Domain.Values;
 
 namespace GeometriaFactory.Api.Endpoints;
@@ -285,13 +286,58 @@ public static class ContractTranslation
     {
         ArgumentNullException.ThrowIfNull(outcome);
 
-        return outcome.Observations is null
-            ? []
-            : [.. outcome.Observations.Select(o => new WorkObservation(
+        return outcome.Observations is null ? [] : Observations(outcome.Observations);
+    }
+    /// <summary>
+    /// Traduce las piezas reconstruidas del dominio a las del contrato.
+    /// </summary>
+    /// <remarks>
+    /// TRANSPOSICIÓN Y NO REDACCIÓN, igual que las observaciones: cambia el tipo y no el contenido.
+    /// Los conjuntos cerrados —el tipo de figura y el papel del componente— viajan **por su nombre**
+    /// y nunca por su posición.
+    ///
+    /// EL ORDEN ES EL DEL CONJUNTO RAÍZ, y los componentes el de su pieza. Reordenar por tipo se
+    /// leería mejor y **rompería la única identidad que la pieza tiene**, que es su posición.
+    /// </remarks>
+    public static IReadOnlyList<WorkPiece> Pieces(IEnumerable<Piece> pieces)
+    {
+        ArgumentNullException.ThrowIfNull(pieces);
+
+        return
+        [
+            .. pieces.Select(piece => new WorkPiece(
+                piece.Position,
+                piece.Type.ToString(),
+                piece.DeclaredArea,
+                piece.DerivedArea,
+                piece.DeclaredVolume,
+                piece.DerivedVolume,
+                [
+                    .. piece.Components.Select(component => new WorkPieceComponent(
+                        component.Position,
+                        component.Role.ToString(),
+                        component.Type.ToString(),
+                        component.DeclaredLength,
+                        component.DeclaredWidth,
+                        component.DeclaredRadius,
+                        component.DeclaredArea))
+                ]))
+        ];
+    }
+
+    /// <summary>Traduce las observaciones de una interpretación que **no se guardó**.</summary>
+    public static IReadOnlyList<WorkObservation> Observations(IEnumerable<Observation> observations)
+    {
+        ArgumentNullException.ThrowIfNull(observations);
+
+        return
+        [
+            .. observations.Select(o => new WorkObservation(
                 o.Kind.ToString(),
                 o.PiecePosition,
                 o.Field,
                 o.DeclaredValue,
-                o.DerivedValue))];
+                o.DerivedValue))
+        ];
     }
 }
