@@ -185,7 +185,7 @@ Los **doce** casos de uso del dominio, contrastados uno por uno contra el cuerpo
 | CU-08 | CU-11; CU-10 | Sí |
 | CU-09 | CU-09; CU-11 | Sí |
 
-**Huérfanos: ninguno en ninguna de las dos direcciones.** Los doce casos de uso del dominio quedan orquestados por los diez de esta capa; los diez trazan a al menos una necesidad de negocio; NB-08 sigue declarada como alerta explícita con su lugar de cobertura.
+**Huérfanos: ninguno en ninguna de las dos direcciones.** Los doce casos de uso del dominio quedan orquestados por los diez de esta capa; los diez trazan a al menos una necesidad de negocio; NB-00008 sigue declarada como alerta explícita con su lugar de cobertura.
 
 **Fidelidad punto por punto de `CU-10` contra `Domain CU-12`:** papel `Administrador`, estado `Habilitado`, credencial derivada aportada y adoptada, ventana de alta comprobada por esta capa sobre el conjunto de cuentas y declarada al invocar, unicidad del correo ídem, cuatro de los cinco códigos de §6 propagados con el mismo identificador y la misma causa, y el quinto (`CORREO_YA_REGISTRADO`) propio de esta capa por ser el resultado de su propia consulta. `CU-10` CA-02 espeja `Domain CU-12` CA-02 —«devuelve admisible, con 0 motivos»— y sostiene el guion de la etapa `c`. **No se detectó ninguna afirmación de esta capa sobre el dominio corregido que el dominio contradiga.**
 

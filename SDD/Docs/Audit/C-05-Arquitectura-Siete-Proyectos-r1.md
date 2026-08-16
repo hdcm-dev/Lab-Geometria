@@ -135,7 +135,7 @@ Conté cada conjunto sobre el instrumento, sin leer la cifra declarada.
 | Reglas de negocio | 16, `RN-01`…`RN-16` | **16** | Archivos de `Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, excluido `_legacy/` |
 | Invariantes | 9 | **9**, `INV-01` a `INV-09` | Identificadores distintos en el intake, contrastados con §17.1.P.2 |
 | Escenarios | 8, `E-1`…`E-8` | **8** | Encabezados `### §20.E-N` del intake §20 |
-| Necesidades de negocio | 9 | **9**, `NB-01` a `NB-09` | Rangos declarados en 05, contrastados con `01-Necesidades-Negocio/` |
+| Necesidades de negocio | 9 | **9**, `NB-00001` a `NB-00009` | Rangos declarados en 05, contrastados con `01-Necesidades-Negocio/` |
 | Códigos de contrato vivos | 15 sobre 18 emitidos | **15** | Filas `CONTRATO_*` de la tabla de traducción de `Api/Contratos-REST.md` §5 |
 | Puntos de acceso | 15 | **15** | Filas `A-XX` de `Api/Contratos-REST.md` §3: `A-01` a `A-16` **sin `A-04`**, retirado por `RN-16` |
 | Códigos de respuesta | 10 | **10** | `400`, `401`, `403`, `404`, `409`, `500`, `503` de fallo, más `200`, `201`, `204` de éxito |
@@ -155,7 +155,7 @@ Conté cada conjunto sobre el instrumento, sin leer la cifra declarada.
 
 **Veintiocho recuentos declarados, veintiocho que cierran.** Es el resultado más limpio que este corpus dio en esta dimensión.
 
-Un recuento que a primera vista parecía un rango recortado y **no lo es**: `Application` §10 declara «NB-01 a NB-07 y NB-09, **ocho** de las **nueve**», y justifica en la misma celda que `NB-08` no la toca ese proyecto de código porque su dolor es de acceso y de despliegue. Es una cobertura parcial declarada con motivo, no un rango congelado.
+Un recuento que a primera vista parecía un rango recortado y **no lo es**: `Application` §10 declara «NB-00001 a NB-00007 y NB-00009, **ocho** de las **nueve**», y justifica en la misma celda que `NB-00008` no la toca ese proyecto de código porque su dolor es de acceso y de despliegue. Es una cobertura parcial declarada con motivo, no un rango congelado.
 
 ---
 

@@ -12,6 +12,35 @@
 
 ---
 
+> ## Documento superado por la migración 6.0 → 8.6
+>
+> **Este documento es un inventario fechado el 2026-08-12, y describe el árbol tal como estaba
+> entonces: siete proyectos de código, doce casos de uso en `GeometriaFactory-Api`, reglas `RN-01` a
+> `RN-16`.** Nada de eso es cierto hoy. El árbol tiene **dos unidades de entrega**, la unidad `Api`
+> tiene **nueve** casos de uso y las reglas se numeran `RN-02001` a `RN-02016`.
+>
+> **No se reconectaron sus identificadores, y es deliberado.** Reescribirlos dejaría un documento con
+> identificadores nuevos y **recuentos viejos**: diría `CU-00021` donde dice `CU-01`, y seguiría
+> diciendo «doce casos de uso». Un documento a medias migrar afirma cosas que nunca fueron ciertas, y
+> eso es peor que uno viejo que declara su fecha. El hallazgo **M-08** de
+> [`Audit/Informe-Migracion-6.0-a-8.6.md`](Audit/Informe-Migracion-6.0-a-8.6.md) 2.0 lo registra.
+>
+> **Dónde está hoy lo que este documento inventariaba:**
+>
+> | Qué buscabas acá | Dónde está ahora |
+> | --- | --- |
+> | La composición del producto | [`../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **2.1**, §2.A, §2.B y §2.C |
+> | El inventario de documentos por categoría | [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) |
+> | Los casos de uso de `GeometriaFactory-Api` | `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/README.md` **2.0** |
+> | Qué se archivó y por qué | Los `README.md` de las tres carpetas de `_legacy/` |
+> | El estado de la migración | [`Audit/Informe-Migracion-6.0-a-8.6.md`](Audit/Informe-Migracion-6.0-a-8.6.md) |
+>
+> **Se conserva sin tocar** porque es el instrumento de check-out que `Master-Prompt.md` §12 exigió
+> antes del traspaso a codificación, y como tal es un registro de lo que se entregó ese día. Rehacerlo
+> sobre el árbol nuevo es emitir uno nuevo, no editar éste.
+
+---
+
 ## Tabla de contenido
 
 - [0. Qué es este documento y cómo se produjo](#0-qué-es-este-documento-y-cómo-se-produjo)
@@ -217,7 +246,7 @@ Eslabones de `Master-Prompt.md` §12: Visión, NB, CU, RN, ADR, US, BT, Sprint, 
 | Eslabón | Artefacto canónico | Cantidad de ítems | Huérfanos |
 | --- | --- | --- | --- |
 | Visión | [`00-Contexto/Vision-Producto.md`](00-Contexto/Vision-Producto.md) | 1 documento | 0 |
-| NB | [`01-Necesidades-Negocio/Necesidades-De-Negocio/`](01-Necesidades-Negocio/Necesidades-De-Negocio/) | **9** (`NB-01` a `NB-09`, un archivo cada una) | 0 |
+| NB | [`01-Necesidades-Negocio/Necesidades-De-Negocio/`](01-Necesidades-Negocio/Necesidades-De-Negocio/) | **9** (`NB-00001` a `NB-00009`, un archivo cada una) | 0 |
 | Pipeline de producto | [`Producto/Pipeline-Producto.md`](Producto/Pipeline-Producto.md) | 1 documento | 0 |
 
 ### 3.2 `GeometriaFactory-Domain`
@@ -228,7 +257,7 @@ Eslabones de `Master-Prompt.md` §12: Visión, NB, CU, RN, ADR, US, BT, Sprint, 
 | NB | nivel producto | — | — |
 | CU | `02-Especificacion-Funcional/Casos-De-Uso/` | 13 | 0 |
 | RN | `02-Especificacion-Funcional/Reglas-De-Negocio/` | **16** (`RN-01` a `RN-16`) | 0 |
-| ADR | `05-Arquitectura-Tecnica/Adrs/` | 6 | 1 sin traza a CU/NB/RN: `ADR-03` (versionado), que traza al intake §17.1.P.7 |
+| ADR | `05-Arquitectura-Tecnica/Adrs/` | 6 | 1 sin traza a CU/NB/RN: `ADR-03` (versionado), que traza al intake §17.1.P.7 · GeometriaFactory-Domain |
 | US | `06-Backlog-Tecnico/historias-usuario/` | 27 | 0 |
 | BT | `06-Backlog-Tecnico/Backlog-Tecnico.md` | 16 | 0 |
 | Sprint | `07-Plan-Sprint/Mini-Plan.md` §3 | 43 filas comprometidas, seis etapas (`a`, `c`, `d`, `e`, `f`, `h`) | 0: los 27 US y los 16 BT están comprometidos |
@@ -262,7 +291,7 @@ Acá vive el conjunto cerrado de códigos del contrato: **17 vivos sobre 20 emit
 | NB | nivel producto | — | — |
 | CU | `02-Especificacion-Funcional/Casos-De-Uso/` | 7 | 0 |
 | RN | no emite | 0 | — |
-| ADR | `05-Arquitectura-Tecnica/Adrs/` | 6 | 1 sin traza a CU/NB/RN: `ADR-06` (versionado del bundle), que traza al intake §17.7.P.7 |
+| ADR | `05-Arquitectura-Tecnica/Adrs/` | 6 | 1 sin traza a CU/NB/RN: `ADR-06` (versionado del bundle), que traza al intake §17.2.P.7 · GeometriaFactory-Visor |
 | US | `06-Backlog-Tecnico/Product-Backlog.md`, **inline** | 14 | 0 |
 | BT | `06-Backlog-Tecnico/Backlog-Tecnico.md` | 18 | 0 |
 | Sprint | `07-Plan-Sprint/Mini-Plan.md` §3 | 17 filas, dos etapas (`a` y `g`) | 0: los 14 US y los 18 BT están comprometidos, algunas filas agrupan más de un identificador |
@@ -279,7 +308,7 @@ Acá vive el punto de extensión del producto: la fachada de **6** funciones (`i
 | NB | nivel producto | — | — |
 | CU | `02-Especificacion-Funcional/Casos-De-Uso/` | 11 | 0 |
 | RN | no emite | 0 | — |
-| ADR | `05-Arquitectura-Tecnica/Adrs/` | 6 | 1 sin traza a CU/NB/RN: `ADR-03` (versionado), que traza al intake §17.2.P.7 |
+| ADR | `05-Arquitectura-Tecnica/Adrs/` | 6 | 1 sin traza a CU/NB/RN: `ADR-03` (versionado), que traza al intake §17.1.P.7 · GeometriaFactory-Application |
 | US | `06-Backlog-Tecnico/historias-usuario/` | 32 | 0 |
 | BT | `06-Backlog-Tecnico/Backlog-Tecnico.md` | 21 | 0 |
 | Sprint | `07-Plan-Sprint/Mini-Plan.md` §3 | 53 filas, seis etapas (`a`, `c`, `d`, `e`, `f`, `h`) | 0: los 32 US y los 21 BT están comprometidos |
@@ -372,48 +401,48 @@ Los primeros nueve coinciden con las cifras de control cruzado. Los que **no** c
 
 | ID | Tipo | Descripción corta | CU asociado | Criterios | Componentes de 05 |
 | --- | --- | --- | --- | --- | --- |
-| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas, sin dependencias salientes | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.1.P.1; `ADR-01` |
-| `BT-02` | Tarea técnica | Fijar los nombres de tipos y de espacios de nombres, y validarlos en el punto de control | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-01`; intake §17.1.P.11 |
-| `BT-03` | Tarea técnica | Elegir y anclar la herramienta que calcula la versión | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-04`; intake §17.1.P.7 |
+| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas, sin dependencias salientes | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.1.P.1 · GeometriaFactory-Domain; `ADR-01` |
+| `BT-02` | Tarea técnica | Fijar los nombres de tipos y de espacios de nombres, y validarlos en el punto de control | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-01`; intake §17.1.P.11 · GeometriaFactory-Domain |
+| `BT-03` | Tarea técnica | Elegir y anclar la herramienta que calcula la versión | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-04`; intake §17.1.P.7 · GeometriaFactory-Domain |
 | `BT-04` | Tarea técnica | Puerta bloqueante de cero dependencias salientes | — | Criterio en `Backlog-Tecnico.md` | `05` §8, fila de dependencias salientes; `05` §9, primer riesgo |
-| `BT-05` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8, fila de advertencias; intake §17.1.P.8 |
+| `BT-05` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8, fila de advertencias; intake §17.1.P.8 · GeometriaFactory-Domain |
 
 ### 4.2 `GeometriaFactory-Contracts` — nivel 0, etapa `a`: 3 ítems
 
 | ID | Tipo | Descripción corta | CU asociado | Criterios | Componentes de 05 |
 | --- | --- | --- | --- | --- | --- |
-| `BT-01` | Tarea técnica | Crear el ensamblado de tipos, sin dependencias | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.4.P.1; `ADR-01` |
-| `BT-02` | Tarea técnica | Puerta de cero referencias hacia `GeometriaFactory-Domain` | — | Criterio en `Backlog-Tecnico.md` | `05` §8; `05` §9, primer riesgo; intake §17.4.P.8 |
-| `BT-03` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8, fila de advertencias; intake §17.4.P.8 |
+| `BT-01` | Tarea técnica | Crear el ensamblado de tipos, sin dependencias | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.1.P.1 · GeometriaFactory-Contracts; `ADR-01` |
+| `BT-02` | Tarea técnica | Puerta de cero referencias hacia `GeometriaFactory-Domain` | — | Criterio en `Backlog-Tecnico.md` | `05` §8; `05` §9, primer riesgo; intake §17.1.P.8 · GeometriaFactory-Contracts |
+| `BT-03` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8, fila de advertencias; intake §17.1.P.8 · GeometriaFactory-Contracts |
 
 ### 4.3 `GeometriaFactory-Visor` — nivel 0, etapa `a`: 3 ítems
 
 | ID | Tipo | Descripción corta | CU asociado | Criterios | Componentes de 05 |
 | --- | --- | --- | --- | --- | --- |
-| `BT-01` | Tarea técnica | Crear el proyecto del bundle con su cadena de construcción reproducible | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.7.P.8; `05` §5 |
+| `BT-01` | Tarea técnica | Crear el proyecto del bundle con su cadena de construcción reproducible | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.2.P.8 · GeometriaFactory-Visor; `05` §5 |
 | `BT-02` | Tarea técnica | Guion de construcción propio del bundle, para el ciclo corto | — | Criterio en `Backlog-Tecnico.md` | `05` §5, fila de ciclo corto de trabajo |
-| `BT-03` | Tarea técnica | Aplicar la decisión de que el bundle generado no se versiona: se ignora y lo genera la canalización | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-05`, hoy **RESUELTO** por `09-Devops/Entornos-Deploy.md` §2; intake §17.7.P.7. **Ya no es una decisión abierta**, ver `A-8` del bloque 6 |
+| `BT-03` | Tarea técnica | Aplicar la decisión de que el bundle generado no se versiona: se ignora y lo genera la canalización | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-05`, hoy **RESUELTO** por `09-Devops/Entornos-Deploy.md` §2; intake §17.2.P.7 · GeometriaFactory-Visor. **Ya no es una decisión abierta**, ver `A-8` del bloque 6 |
 
 ### 4.4 `GeometriaFactory-Application` — nivel 1, etapa `a`: 6 ítems
 
 | ID | Tipo | Descripción corta | CU asociado | Criterios | Componentes de 05 |
 | --- | --- | --- | --- | --- | --- |
-| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas, con una sola dependencia saliente | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.2.P.1; `ADR-01` |
+| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas, con una sola dependencia saliente | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.1.P.1 · GeometriaFactory-Application; `ADR-01` |
 | `BT-02` | Tarea técnica | Fijar los nombres de tipos, de espacios de nombres y el del cuarto puerto | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-01` y `PA-02`; `05` §3.4; `05` §9, sexto riesgo |
-| `BT-03` | Tarea técnica | Elegir y anclar la herramienta que calcula la versión | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-06`; intake §17.2.P.7 |
+| `BT-03` | Tarea técnica | Elegir y anclar la herramienta que calcula la versión | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-06`; intake §17.1.P.7 · GeometriaFactory-Application |
 | `BT-04` | Tarea técnica | Puerta bloqueante de dependencias salientes | — | Criterio en `Backlog-Tecnico.md` | `05` §8; `05` §9, primer riesgo |
-| `BT-05` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8; intake §17.2.P.8 |
-| `BT-06` | Tarea técnica | Puerta propia de cero pruebas que tocan la base de datos real | — | Criterio en `Backlog-Tecnico.md` | Intake §17.2.P.8; `05` §5 y §8; `05` §9, primer riesgo |
+| `BT-05` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8; intake §17.1.P.8 · GeometriaFactory-Application |
+| `BT-06` | Tarea técnica | Puerta propia de cero pruebas que tocan la base de datos real | — | Criterio en `Backlog-Tecnico.md` | Intake §17.1.P.8 · GeometriaFactory-Application; `05` §5 y §8; `05` §9, primer riesgo |
 
 ### 4.5 `GeometriaFactory-Web` — nivel 1, etapa `a`: 7 ítems
 
 | ID | Tipo | Descripción corta | CU asociado | Criterios | Componentes de 05 |
 | --- | --- | --- | --- | --- | --- |
-| `BT-01` | Tarea técnica | Crear el proyecto del front con su flujo de publicación | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.6.P.8; `05` §5 |
-| `BT-02` | Tarea técnica | Anclar la versión de la biblioteca de componentes de interfaz | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-01`; intake §17.6.P.1, rotulado **[A VERIFICAR]** |
-| `BT-03` | Tarea técnica | Página de salud que consume el punto de salud del servicio de datos | — | Criterio en `Backlog-Tecnico.md` | Intake §15 y §17.5.P.3; `Roadmap-Producto.md` §5.2, transición `a` → `b` |
-| `BT-04` | Tarea técnica | Medir `PT-01` en sus cuatro partes | — | Criterio en `Backlog-Tecnico.md` | Intake §15 y §17.6.P.10; `05` §8; `05` §11 `PA-02` |
-| `BT-05` | Tarea técnica | Dirección del servicio de datos desde configuración, con secretos | — | Criterio en `Backlog-Tecnico.md` | `ADR-07`; `05` §7, fila de configuración y secretos; intake §17.6.P.5 |
+| `BT-01` | Tarea técnica | Crear el proyecto del front con su flujo de publicación | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.2.P.8 · GeometriaFactory-Web; `05` §5 |
+| `BT-02` | Tarea técnica | Anclar la versión de la biblioteca de componentes de interfaz | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-01`; intake §17.2.P.1 · GeometriaFactory-Web, rotulado **[A VERIFICAR]** |
+| `BT-03` | Tarea técnica | Página de salud que consume el punto de salud del servicio de datos | — | Criterio en `Backlog-Tecnico.md` | Intake §15 y §17.1.P.3 · GeometriaFactory-Api; `Roadmap-Producto.md` §5.2, transición `a` → `b` |
+| `BT-04` | Tarea técnica | Medir `PT-01` en sus cuatro partes | — | Criterio en `Backlog-Tecnico.md` | Intake §15 y §17.2.P.10 · GeometriaFactory-Web; `05` §8; `05` §11 `PA-02` |
+| `BT-05` | Tarea técnica | Dirección del servicio de datos desde configuración, con secretos | — | Criterio en `Backlog-Tecnico.md` | `ADR-07`; `05` §7, fila de configuración y secretos; intake §17.2.P.5 · GeometriaFactory-Web |
 | `BT-06` | Tarea técnica | Puerta de publicación que comprueba que la dirección pública responde | — | Criterio en `Backlog-Tecnico.md` | `05` §5, puertas bloqueantes; `05` §9, sexto riesgo |
 | `BT-12` | Tarea técnica | Adoptar el formato de intercambio que fija la categoría 05 de la Api | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-03`, hoy **RESUELTO**; `Api` `ADR-02` §2, con sus **seis** reglas que obligan a los dos extremos. **La decisión está tomada y esta tarea la adopta**, ver `A-5` del bloque 6 |
 
@@ -421,13 +450,13 @@ Los primeros nueve coinciden con las cifras de control cruzado. Los que **no** c
 
 | ID | Tipo | Descripción corta | CU asociado | Criterios | Componentes de 05 |
 | --- | --- | --- | --- | --- | --- |
-| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.3.P.1; `ADR-01` |
+| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.1.P.1 · GeometriaFactory-Infrastructure; `ADR-01` |
 | `BT-02` | Tarea técnica | Fijar nombres y el criterio de nombrado del adaptador de cuentas | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-01` y `PA-02`; `ADR-03` §6 |
 | `BT-03` | Tarea técnica | Anclar la función de derivación de clave y sus parámetros versionados | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-03`; `ADR-04` §7. **La fuente declara dos candidatas y no elige**, ver bloque 6 |
-| `BT-04` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §5 y §8; intake §17.3.P.8 |
+| `BT-04` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §5 y §8; intake §17.1.P.8 · GeometriaFactory-Infrastructure |
 | `BT-05` | Tarea técnica | Contexto de persistencia y mapeo de las cinco entidades | — | Criterio en `Backlog-Tecnico.md` | `05` §3.1, componente transversal; `05` §6; `Modelo-Datos-Logico.md` |
 | `BT-06` | Tarea técnica | Preparación del almacén con linaje inmutable y arranque detenido | `CU-10` | Criterio en `Backlog-Tecnico.md` | `05` §3.1 y §4; `ADR-07`; `05` §9, riesgos quinto y sexto |
-| `BT-07` | Tarea técnica | Puerta de transformaciones sobre un almacén inexistente | `CU-10` | Criterio en `Backlog-Tecnico.md` | Intake §17.3.P.8; `05` §5 y §8; `Roadmap-Producto.md` §5.2 (`PT-04`) |
+| `BT-07` | Tarea técnica | Puerta de transformaciones sobre un almacén inexistente | `CU-10` | Criterio en `Backlog-Tecnico.md` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure; `05` §5 y §8; `Roadmap-Producto.md` §5.2 (`PT-04`) |
 | `BT-08` | Tarea técnica | Fijar la zona horaria y la precisión de los sellos | — | Criterio en `Backlog-Tecnico.md` | `05` §7, fila de zona horaria; `ADR-02` §2; `RC-06` |
 | `US-24` | Historia | Aplicar las transformaciones de esquema al arrancar | `CU-10` | **3** criterios `Given/When/Then` en su §3 | `05` §3.1, mecanismo de arranque; `ADR-07` |
 | `US-25` | Historia | Detener el arranque en lugar de operar sobre un almacén dudoso | `CU-10` | **3** criterios `Given/When/Then` en su §3 | `05` §3.1 y §4, última viñeta; `ADR-07` |
@@ -436,12 +465,12 @@ Los primeros nueve coinciden con las cifras de control cruzado. Los que **no** c
 
 | ID | Tipo | Descripción corta | CU asociado | Criterios | Componentes de 05 |
 | --- | --- | --- | --- | --- | --- |
-| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas de integración | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.5.P.1; `05` §5 |
+| `BT-01` | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas de integración | — (andamiaje) | Criterio en `Backlog-Tecnico.md` | Intake §16 y §17.1.P.1 · GeometriaFactory-Api; `05` §5 |
 | `BT-02` | Tarea técnica | Composición de raíz con los cuatro puertos y sus adaptadores | `CU-10` | Criterio en `Backlog-Tecnico.md` | `05` §3.1, componente «Composición de raíz»; `ADR-06`; `05` §9, séptimo riesgo |
-| `BT-03` | Tarea técnica | Arranque en dos fases con el punto de salud sin acceso | `CU-11` | Criterio en `Backlog-Tecnico.md` | `05` §4, quinta viñeta; `ADR-07`; intake §17.5.P.4 |
-| `BT-04` | Tarea técnica | Imagen multietapa y medición de `PT-04` | — | Criterio en `Backlog-Tecnico.md` | Intake §15 y §17.5.P.8; `05` §5 |
-| `BT-05` | Tarea técnica | Anclar nombres, espacios de nombres y versiones de paquetes | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-07`; intake §17.5.P.11 |
-| `BT-06` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8, última fila; intake §17.5.P.8 |
+| `BT-03` | Tarea técnica | Arranque en dos fases con el punto de salud sin acceso | `CU-11` | Criterio en `Backlog-Tecnico.md` | `05` §4, quinta viñeta; `ADR-07`; intake §17.1.P.4 · GeometriaFactory-Api |
+| `BT-04` | Tarea técnica | Imagen multietapa y medición de `PT-04` | — | Criterio en `Backlog-Tecnico.md` | Intake §15 y §17.1.P.8 · GeometriaFactory-Api; `05` §5 |
+| `BT-05` | Tarea técnica | Anclar nombres, espacios de nombres y versiones de paquetes | — | Criterio en `Backlog-Tecnico.md` | `05` §11 `PA-07`; intake §17.1.P.11 · GeometriaFactory-Api |
+| `BT-06` | Tarea técnica | Puerta de construcción con cero advertencias | — | Criterio en `Backlog-Tecnico.md` | `05` §8, última fila; intake §17.1.P.8 · GeometriaFactory-Api |
 | `BT-07` | Tarea técnica | Fijar rutas y verbos de los quince puntos en el punto de control | — | Criterio en `Backlog-Tecnico.md` | `05` §3.4 y §11 `PA-01`; `Definicion-Superficie-HTTP.md` §3. **Las rutas son propuesta derivada**, ver bloque 6 |
 | `BT-08` | Tarea técnica | Fijar el formato de intercambio para los dos extremos | — | Criterio en `Backlog-Tecnico.md` | `ADR-02`; `05` §2.2; `05` §9, cuarto riesgo |
 | `BT-09` | Tarea técnica | Fijar el límite de cuerpo que rechaza y nunca trunca | — | Criterio en `Backlog-Tecnico.md` | `ADR-02` §2 punto 6; `05` §11 `PA-05`; `Infrastructure` `ADR-06` §2 punto 3 |
@@ -538,13 +567,13 @@ Los `PA-XX` que siguen vivos y que **bloquean o condicionan** trabajo de la etap
 | `A-2` | **Los nombres definitivos de tipos y de espacios de nombres**, abiertos en **seis de los siete** proyectos de código [CORREGIDO 2026-08-12: decía «los siete» y citaba filas que no existen] | `PA-01` de Domain y Contracts; `PA-02` de Visor, Application e Infrastructure; `PA-07` de Api. **`GeometriaFactory-Web` no lo tiene**, y con fundamento: su única superficie es la HTTP, cuyos nombres decide `GeometriaFactory-Api` | El equipo, en el punto de control de la etapa `a` | Es literalmente la primera línea de código de cada proyecto. Además, mientras estén abiertos, **ningún `Recorrido-Codigo.md` de la categoría 11 puede escribir una ruta verificable** ([`Producto/11-Documentacion/README.md`](Producto/11-Documentacion/README.md) §7) |
 | `A-3` | **Cuál de las dos funciones de derivación de clave se ancla**, y con qué parámetros. El intake declara «PBKDF2 o Argon2» y **no elige** | `Infrastructure/05` §11 `PA-03`; `ADR-04` §7 | Product Owner y equipo, en la etapa `a` | Es `BT-03` de la etapa `a` de `Infrastructure`. La credencial derivada se guarda con sus parámetros versionados; cambiar la función después de tener cuentas creadas obliga a una migración de credenciales |
 | `A-4` | **Las rutas y los verbos definitivos de los quince puntos de acceso.** Las únicas dos cosas que la fuente declara son el punto de canje de credenciales y la **existencia** de un punto de salud. Las quince filas son propuesta derivada rotulada fila por fila | `Api/05` §11 `PA-01`; `Api/05` §3.4 | Product Owner y equipo, en el punto de control de la etapa `a` | Es `BT-07` de la etapa `a` de `Api`. Todo el cliente HTTP de `GeometriaFactory-Web`, la colección de peticiones de `CU-12` y las tres sondas `VER-XX` de `Api` se escriben contra esas rutas |
-| ~~`A-5`~~ | ~~**El formato de intercambio y su configuración** —nombres de campos al serializar, tratamiento de valores ausentes—.~~ **CERRADO.** Lo decidió el productor, que es a quien le correspondía: [`Api` `ADR-02`](Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 fija **seis reglas de formato que obligan a los dos extremos** y declara que la coincidencia la verifica la batería de integración contra el servicio real | `Api` `ADR-02`; `Web/05` §11 `PA-03` y `Contracts/05` §11 `PA-03`, los dos **RESUELTO** hoy | Cerrado el 2026-08-10 por la categoría 05 de `Api`, con `Web` como consumidor que adopta | `BT-08` de `Api` y `BT-12` de `Web` siguen en la etapa `a`, pero ya no son una decisión: son la **adopción** de una decisión escrita. Lo que había que evitar —que cada extremo eligiera por su cuenta— no puede ocurrir |
+| ~~`A-5`~~ | ~~**El formato de intercambio y su configuración** —nombres de campos al serializar, tratamiento de valores ausentes—.~~ **CERRADO.** Lo decidió el productor, que es a quien le correspondía: [`Api` `ADR-00002`](Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 fija **seis reglas de formato que obligan a los dos extremos** y declara que la coincidencia la verifica la batería de integración contra el servicio real | `Api` `ADR-02`; `Web/05` §11 `PA-03` y `Contracts/05` §11 `PA-03`, los dos **RESUELTO** hoy | Cerrado el 2026-08-10 por la categoría 05 de `Api`, con `Web` como consumidor que adopta | `BT-08` de `Api` y `BT-12` de `Web` siguen en la etapa `a`, pero ya no son una decisión: son la **adopción** de una decisión escrita. Lo que había que evitar —que cada extremo eligiera por su cuenta— no puede ocurrir |
 | `A-6` | **La vigencia exacta del acceso firmado.** El intake declara «corta» y sin acceso de refresco, y no fija número | `Api/05` §11 `PA-04`; `ADR-03` | El equipo en la etapa `a`, y el Product Owner | Es `BT-10` de la etapa `a` de `Api`. Un valor puesto sin criterio expulsa al alumno en medio de una clase o deja un acceso vivo mucho después |
 | `A-7` | **El valor del límite de tamaño del cuerpo de una petición.** `ADR-02` fija la **forma** —un solo límite para todo el producto, que rechaza y nunca trunca— y deja el número abierto | `Api/05` §11 `PA-05` | El equipo en la etapa `a` | Es `BT-09` de la etapa `a` de `Api`. Un límite bajo rechaza el JSON del escenario `E-1`, que es el más grande que la fuente documenta |
-| ~~`A-8`~~ | ~~**Si el bundle generado del visor se versiona en el repositorio o se ignora.**~~ **CERRADO.** [`Visor/09-Devops/Entornos-Deploy.md`](Proyectos/GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md) §2 decide que **el bundle no se versiona: se ignora, y lo genera la canalización antes de publicar**, con cuatro fundamentos y cuatro exigencias operativas; [`Web/09-Devops/Entornos-Deploy.md`](Proyectos/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md) §2 **adopta la misma decisión desde el lado del anfitrión sin reabrirla** | `Visor/05` §11 `PA-05` y `Web/05` §11 `PA-07`, los dos **RESUELTO** hoy | Cerrado el 2026-08-11 por las dos categorías 09 | `BT-03` de la etapa `a` de `Visor` se construye contra una decisión tomada. El flujo de publicación de los dos proyectos de código ya está escrito sobre ella |
-| ~~`A-9`~~ | ~~**El criterio de comparación de dos correos** —tal cual o normalizados—, que la unicidad exige decidir.~~ **CERRADO.** Lo decidió la capa que ejerce la verificación: [`Infrastructure` `ADR-03`](Proyectos/GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-03-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §2 fija que dos correos son el mismo cuando coinciden **ignorando mayúsculas y minúsculas y sin ninguna otra normalización**, que el correo se guarda tal como la persona lo escribió, y que la unicidad la sostiene un **índice único sobre la forma normalizada** | `Application/05` §11 `PA-03`, hoy **RESUELTO**; `Infrastructure` `ADR-03` §2 y §6 | Cerrado el 2026-08-10 por la categoría 05 de `Infrastructure` | `RN-02` es verificable: el criterio existe y viene con el índice que lo sostiene. A `GeometriaFactory-Application` la unicidad le llega resuelta por el puerto |
-| `A-10` | **El sello de desenlace.** *(Enunciado corregido y acotado: decía «los sellos de alta, de modificación y de desenlace», y hoy dos de los tres dejaron de ser discrepancia.)* `PRODUCT-INTAKE` §17.3.P.4 incorporó los dos sellos del trabajo el 2026-08-09 y `Domain/02` `Definicion-Modelo-De-Dominio.md` §2.2 los declara como atributos —fecha de creación y fecha de última modificación—, igual que ya declaraba la fecha de alta del alumno. **Lo que sigue abierto es el sello de desenlace**, que ninguna fuente declara como atributo del trabajo | `Application/05` §11 `PA-04`, con su enunciado ya corregido en la fuente | Product Owner, y `GeometriaFactory-Domain` si decide incorporarlo | Si es atributo del dominio, entra en la entidad y en el esquema de persistencia. Descubrirlo después de crear el esquema obliga a una transformación de esquema sobre datos reales. Hoy esta capa lo trata como metadato de orquestación |
-| ~~`A-11`~~ | ~~**La ambigüedad del intake sobre `RN-12` e `INV-09`**: su columna de reglas sostenidas y su prosa dicen cosas distintas.~~ **CERRADO.** La ambigüedad **ya no está en el texto vivo**: `PRODUCT-INTAKE` §17.1.P.2 cierra hoy su prosa diciendo que `RN-12`, `RN-13` y `RN-16` sí tienen invariante y que es `INV-09`, que es lo que la columna declaraba. La categoría 02 había adoptado la columna, o sea la lectura que la fuente terminó declarando, y por eso **nada de lo que se hereda cambia** | `Domain/05` §11 `PA-03`, hoy **RESUELTO** | Cerrado por el Product Owner sobre su propio documento, en `PRODUCT-INTAKE` **1.11** | Ya no hay dos lecturas: hay una, y es la que la categoría 02 construyó |
+| ~~`A-8`~~ | ~~**Si el bundle generado del visor se versiona en el repositorio o se ignora.**~~ **CERRADO.** [`Visor/09-Devops/Entornos-Deploy.md`](Unidades-Entrega/GeometriaFactory-Web/09-Devops/_fusion/Visor/Entornos-Deploy.md) §2 decide que **el bundle no se versiona: se ignora, y lo genera la canalización antes de publicar**, con cuatro fundamentos y cuatro exigencias operativas; [`Web/09-Devops/Entornos-Deploy.md`](Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md) §2 **adopta la misma decisión desde el lado del anfitrión sin reabrirla** | `Visor/05` §11 `PA-05` y `Web/05` §11 `PA-07`, los dos **RESUELTO** hoy | Cerrado el 2026-08-11 por las dos categorías 09 | `BT-03` de la etapa `a` de `Visor` se construye contra una decisión tomada. El flujo de publicación de los dos proyectos de código ya está escrito sobre ella |
+| ~~`A-9`~~ | ~~**El criterio de comparación de dos correos** —tal cual o normalizados—, que la unicidad exige decidir.~~ **CERRADO.** Lo decidió la capa que ejerce la verificación: [`Infrastructure` `ADR-06003`](Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §2 fija que dos correos son el mismo cuando coinciden **ignorando mayúsculas y minúsculas y sin ninguna otra normalización**, que el correo se guarda tal como la persona lo escribió, y que la unicidad la sostiene un **índice único sobre la forma normalizada** | `Application/05` §11 `PA-03`, hoy **RESUELTO**; `Infrastructure` `ADR-03` §2 y §6 | Cerrado el 2026-08-10 por la categoría 05 de `Infrastructure` | `RN-02` es verificable: el criterio existe y viene con el índice que lo sostiene. A `GeometriaFactory-Application` la unicidad le llega resuelta por el puerto |
+| `A-10` | **El sello de desenlace.** *(Enunciado corregido y acotado: decía «los sellos de alta, de modificación y de desenlace», y hoy dos de los tres dejaron de ser discrepancia.)* `PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Infrastructure incorporó los dos sellos del trabajo el 2026-08-09 y `Domain/02` `Definicion-Modelo-De-Dominio.md` §2.2 los declara como atributos —fecha de creación y fecha de última modificación—, igual que ya declaraba la fecha de alta del alumno. **Lo que sigue abierto es el sello de desenlace**, que ninguna fuente declara como atributo del trabajo | `Application/05` §11 `PA-04`, con su enunciado ya corregido en la fuente | Product Owner, y `GeometriaFactory-Domain` si decide incorporarlo | Si es atributo del dominio, entra en la entidad y en el esquema de persistencia. Descubrirlo después de crear el esquema obliga a una transformación de esquema sobre datos reales. Hoy esta capa lo trata como metadato de orquestación |
+| ~~`A-11`~~ | ~~**La ambigüedad del intake sobre `RN-12` e `INV-09`**: su columna de reglas sostenidas y su prosa dicen cosas distintas.~~ **CERRADO.** La ambigüedad **ya no está en el texto vivo**: `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain cierra hoy su prosa diciendo que `RN-12`, `RN-13` y `RN-16` sí tienen invariante y que es `INV-09`, que es lo que la columna declaraba. La categoría 02 había adoptado la columna, o sea la lectura que la fuente terminó declarando, y por eso **nada de lo que se hereda cambia** | `Domain/05` §11 `PA-03`, hoy **RESUELTO** | Cerrado por el Product Owner sobre su propio documento, en `PRODUCT-INTAKE` **1.11** | Ya no hay dos lecturas: hay una, y es la que la categoría 02 construyó |
 | ~~`A-12`~~ | ~~**El alcance de la colección de peticiones reproducible**, declarado en dos lugares de la fuente con alcances distintos.~~ **CERRADO.** Lo decidió el Product Owner en `PRODUCT-INTAKE` **1.29** §18: son **los ocho escenarios `E-1` a `E-8`**, y §18 `S-2` pasa a decir lo mismo que §16.1 ya decía. Fundamento declarado: con dos, la colección demuestra que la API responde; con ocho, ejercita el validador contra **todos** los datos reales por HTTP, incluido el `E-8` de la coma decimal | `Api/05` §11 `PA-06`, fila resuelta; `Api/10-Examples/README.md` §4 | **Resuelto** el **2026-08-12** | **Nada cambia**: la categoría 02 de `Api` ya había adoptado los ocho y la 05 heredaba esa lectura. `VER-02` conserva sus aserciones y la fila `SD-02` de la matriz de sensado no se toca |
 | `A-13` | **Hasta dónde llega el conjunto de tipos de figura reconstruibles.** Los seis que los escenarios ejercitan son los que la pieza que dibuja sabe dibujar; el análisis del que sale el intake menciona siete clases en un ejemplo y diez en el otro, y **ninguna fuente las enumera** | `Infrastructure/05` §11 `PA-04` | Product Owner | Un tipo fuera del conjunto produce error de validación, que es correcto pero puede no ser lo deseado. Si el docente da una actividad con un séptimo tipo, el trabajo del alumno queda en `Borrador` sin que nadie lo haya decidido |
 | ~~`A-14`~~ | ~~**La condición derivada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`**, que **ninguna fuente enuncia** y que la categoría 02 declaró con su fundamento.~~ **CERRADO.** El Product Owner la **confirma tal como está** en `PRODUCT-INTAKE` **1.29** §17.3 P.11 punto 5, en lugar de reemplazarla, y adopta el fundamento declarado: «0 advertencias» sería indistinguible de un trabajo verificado sin discrepancias, y una escena vacía sin motivo es el fallo silencioso que el producto viene a eliminar | `Infrastructure/05` §11 `PA-10`, fila resuelta; `Infrastructure/06` `Product-Backlog.md` `PA-08`, fila resuelta | **Resuelto** el **2026-08-12** | **Nada cambia**: el flujo de ejecución del validador, la fila de `CU-02` §6 y la entrada del catálogo de 03 quedan como están. Lo que cambia es que la condición deja de ser derivación de la capa y pasa a estar enunciada por la fuente |
@@ -622,11 +651,11 @@ Valores finales, leídos de [`../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md
 
 Contenido verificado con `find`: **17 archivos**, entre ellos `index.html`, **once** archivos HTML de superficie —`Aprovisionamiento-Inicial`, `Registro-De-Cuenta`, `Ingreso`, `Credencial-Propia`, `Panel-De-Trabajos-Del-Alumno`, `Envio-De-Trabajo`, `Vista-De-Trabajo`, `Resolucion-Del-Trabajo`, `Panel-De-Cuentas`, `Listado-De-La-Comision` y `Estado-Degradado-Y-Reconexion`—, el directorio `assets/` y un `README.md`.
 
-Aprobada por el Product Owner el **2026-08-09**, tras **cuatro iteraciones** registradas en [`Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Bitacora-Validacion-Maqueta.md`](Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Bitacora-Validacion-Maqueta.md). **La fase está auditada y aprobada**: [`Audit/B2-Maqueta-GeometriaFactory-Web-r1.md`](Audit/B2-Maqueta-GeometriaFactory-Web-r1.md) la rechazó por un P0 y [`Audit/B2-Maqueta-GeometriaFactory-Web-r2.md`](Audit/B2-Maqueta-GeometriaFactory-Web-r2.md), del 2026-08-11, **levanta ese rechazo** tras recontar la cobertura de la matriz de sensado por extracción propia. La salvedad `B-2` del bloque 6 queda cerrada; sus cuatro hallazgos nuevos son de corrección puntual y no condicionan el dictamen.
+Aprobada por el Product Owner el **2026-08-09**, tras **cuatro iteraciones** registradas en [`Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Bitacora-Validacion-Maqueta.md`](Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX/Bitacora-Validacion-Maqueta.md). **La fase está auditada y aprobada**: [`Audit/B2-Maqueta-GeometriaFactory-Web-r1.md`](Audit/B2-Maqueta-GeometriaFactory-Web-r1.md) la rechazó por un P0 y [`Audit/B2-Maqueta-GeometriaFactory-Web-r2.md`](Audit/B2-Maqueta-GeometriaFactory-Web-r2.md), del 2026-08-11, **levanta ese rechazo** tras recontar la cobertura de la matriz de sensado por extracción propia. La salvedad `B-2` del bloque 6 queda cerrada; sus cuatro hallazgos nuevos son de corrección puntual y no condicionan el dictamen.
 
 ### 8.2 Elementos de la línea de base, por tipo
 
-Artefacto canónico: [`Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Linea-Base-Visual.md`](Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Linea-Base-Visual.md) 1.4. Contados con `grep -o '<TIPO>-[0-9][0-9]' | sort -u | wc -l` sobre ese archivo.
+Artefacto canónico: [`Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Linea-Base-Visual.md`](Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX/Linea-Base-Visual.md) 1.4. Contados con `grep -o '<TIPO>-[0-9][0-9]' | sort -u | wc -l` sobre ese archivo.
 
 | Tipo | Cantidad contada | Sección del documento |
 | --- | --- | --- |
@@ -638,7 +667,7 @@ Artefacto canónico: [`Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Linea-Base-Vis
 
 **Total: 182 elementos identificados.** Coincide con la declaración de §1 del propio documento (11, 73, 74 y 24). Ninguna fila está `Retirado`: todas nacen vigentes.
 
-Los otros dos artefactos de la Fase B2, emitidos en la misma categoría 03 de `Web` y **no duplicados** en la de `Visor`: [`Contrato-Datos-Maqueta.md`](Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Contrato-Datos-Maqueta.md) y [`Bitacora-Validacion-Maqueta.md`](Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Bitacora-Validacion-Maqueta.md).
+Los otros dos artefactos de la Fase B2, emitidos en la misma categoría 03 de `Web` y **no duplicados** en la de `Visor`: [`Contrato-Datos-Maqueta.md`](Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX/Contrato-Datos-Maqueta.md) y [`Bitacora-Validacion-Maqueta.md`](Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX/Bitacora-Validacion-Maqueta.md).
 
 ### 8.3 Matrices de sensado de deriva
 
@@ -646,8 +675,8 @@ Contadas con `grep -cE '^\| \`SD-[0-9]{2}\`'` sobre cada `Matriz-Sensado-Deriva.
 
 | Proyecto de código | Matriz | Filas `SD-XX` | Estado de cada fila |
 | --- | --- | --- | --- |
-| `GeometriaFactory-Web` | [`Proyectos/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](Proyectos/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) | **62** | **Las 62 en `Sin verificar`** |
-| `GeometriaFactory-Visor` | [`Proyectos/GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](Proyectos/GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) | **15** | **Las 15 en `Sin verificar`** |
+| `GeometriaFactory-Web` | [`Proyectos/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) | **62** | **Las 62 en `Sin verificar`** |
+| `GeometriaFactory-Visor` | [`Proyectos/GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/Matriz-Sensado-Deriva.md) | **15** | **Las 15 en `Sin verificar`** |
 
 La matriz de `Visor` incluye además una tabla de **8** correspondencias que relacionan sus `SD-XX` con los de `Web` —`SD-01`↔`SD-43`, `SD-02`↔`SD-43`, `SD-03`↔`SD-47`, `SD-06`↔`SD-39` y `SD-40`, `SD-07`↔`SD-41` y `SD-45`, `SD-09`↔`SD-18`, `SD-11`↔`SD-44`, `SD-46` y `SD-48`, `SD-12`↔`SD-42`—; esas filas reutilizan identificadores ya contados y no suman sondas.
 
@@ -666,13 +695,13 @@ Contado sobre la §2 de cada plan de proyecto de código y la §3 del plan de pr
 | Ámbito | Artefactos planificados | Rol de intervención | Estado | Plan |
 | --- | --- | --- | --- | --- |
 | Nivel producto | **7** (incluido el `AGENTS.md` de la raíz del repositorio) | Todos, mantenedor, operador, agentes de IA | 1 `Vigente` (el propio README) + **6** `Planificado` | [`Producto/11-Documentacion/README.md`](Producto/11-Documentacion/README.md) |
-| `GeometriaFactory-Domain` | **9** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **8** `Planificado` | [`Proyectos/GeometriaFactory-Domain/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Domain/11-Documentacion/README.md) |
-| `GeometriaFactory-Contracts` | **10** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **9** `Planificado` | [`Proyectos/GeometriaFactory-Contracts/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Contracts/11-Documentacion/README.md) |
-| `GeometriaFactory-Visor` | **11** | Integrador (obligatorio), mantenedor (obligatorio, **con `Guia-Extension`**), operador no aplica | 1 `Vigente` + **10** `Planificado` | [`Proyectos/GeometriaFactory-Visor/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Visor/11-Documentacion/README.md) |
-| `GeometriaFactory-Application` | **9** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **8** `Planificado` | [`Proyectos/GeometriaFactory-Application/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Application/11-Documentacion/README.md) |
-| `GeometriaFactory-Web` | **6** | Integrador omitido salvo troubleshooting resumido, mantenedor (obligatorio), operador (obligatorio) | 1 `Vigente` + **5** `Planificado` | [`Proyectos/GeometriaFactory-Web/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Web/11-Documentacion/README.md) |
-| `GeometriaFactory-Infrastructure` | **9** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **8** `Planificado` | [`Proyectos/GeometriaFactory-Infrastructure/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Infrastructure/11-Documentacion/README.md) |
-| `GeometriaFactory-Api` | **11** | Integrador (obligatorio), mantenedor (obligatorio), operador (obligatorio) | 1 `Vigente` + **10** `Planificado` | [`Proyectos/GeometriaFactory-Api/11-Documentacion/README.md`](Proyectos/GeometriaFactory-Api/11-Documentacion/README.md) |
+| `GeometriaFactory-Domain` | **9** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **8** `Planificado` | [`Proyectos/GeometriaFactory-Domain/11-Documentacion/README.md`](Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/_fusion/Domain/README.md) |
+| `GeometriaFactory-Contracts` | **10** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **9** `Planificado` | [`Proyectos/GeometriaFactory-Contracts/11-Documentacion/README.md`](_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/11-Documentacion/README.md) |
+| `GeometriaFactory-Visor` | **11** | Integrador (obligatorio), mantenedor (obligatorio, **con `Guia-Extension`**), operador no aplica | 1 `Vigente` + **10** `Planificado` | [`Proyectos/GeometriaFactory-Visor/11-Documentacion/README.md`](Unidades-Entrega/GeometriaFactory-Web/11-Documentacion/_fusion/Visor/README.md) |
+| `GeometriaFactory-Application` | **9** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **8** `Planificado` | [`Proyectos/GeometriaFactory-Application/11-Documentacion/README.md`](Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/_fusion/Application/README.md) |
+| `GeometriaFactory-Web` | **6** | Integrador omitido salvo troubleshooting resumido, mantenedor (obligatorio), operador (obligatorio) | 1 `Vigente` + **5** `Planificado` | [`Proyectos/GeometriaFactory-Web/11-Documentacion/README.md`](Unidades-Entrega/GeometriaFactory-Web/11-Documentacion/README.md) |
+| `GeometriaFactory-Infrastructure` | **9** | Integrador (obligatorio), mantenedor (obligatorio), operador no aplica | 1 `Vigente` + **8** `Planificado` | [`Proyectos/GeometriaFactory-Infrastructure/11-Documentacion/README.md`](Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/_fusion/Infrastructure/README.md) |
+| `GeometriaFactory-Api` | **11** | Integrador (obligatorio), mantenedor (obligatorio), operador (obligatorio) | 1 `Vigente` + **10** `Planificado` | [`Proyectos/GeometriaFactory-Api/11-Documentacion/README.md`](Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/README.md) |
 | **Total** | **72** | — | **8** `Vigente` (los ocho README) + **64** `Planificado` | — |
 
 **Los ocho README declaran dos valores de estado, y eso ya no es una contradicción: son dos ejes, y los ocho lo declaran.** Verificado archivo por archivo el 2026-08-12: los ocho dicen `status: Vigente` en su encabezado estructurado —el eje del **ciclo de vida del contenido**, el mismo enum con el que la tabla de artefactos de arriba dice `Vigente`, porque el README está redactado y lleva fecha de última revisión— y `**Estado:** Propuesto` en su cabecera de prosa —el eje de la **situación de aprobación**, `Root-Rules.md` §6, y dice `Propuesto` porque la promoción documental del 2026-08-11 dejó a los ocho expresamente fuera, con el motivo escrito en §2—. El tercer valor, el `status: Planificado` que contradecía a los otros dos, **es el que se corrigió**. Cierra el hallazgo `P2-2` de [`Audit/H-Final-Consolidado-r1.md`](Audit/H-Final-Consolidado-r1.md) §4. Ver `B-5` del bloque 6.

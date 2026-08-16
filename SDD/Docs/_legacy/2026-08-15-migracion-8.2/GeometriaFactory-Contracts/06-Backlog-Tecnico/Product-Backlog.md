@@ -1,0 +1,242 @@
+# Product Backlog — GeometriaFactory-Contracts
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Contracts
+**Documento:** Product-Backlog.md
+**Versión:** 1.2
+**Estado:** Aprobado
+**Fecha:** 2026-08-12
+**Autor:** Scrum Master + Backlog Curator (AG-06)
+**Tipo de proyecto de código (D8):** `library`
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.6 §3 (los **ocho** contratos de uso), §4 (matriz NB → CU → RN → US con las **veintidós** historias previstas), §4.2 (correspondencia con la previsión de 01), §5 (por qué la columna de reglas está vacía) y §6 (las **once** restricciones transversales); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1 (las **ocho** familias de tipos), §8 (los **siete** NFR) y §11 (los **cuatro** puntos abiertos); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §4 (las **veintiséis** capacidades y su prioridad), §15 (las **ocho** etapas comprometidas `a` a `h`) y §17.4 (P.1 a P.12); [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §3, §4 y §5; [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) 1.1 §3 y §4
+**Trazabilidad downstream:** [`Backlog-Tecnico.md`](Backlog-Tecnico.md), [`Definition-Of-Ready.md`](Definition-Of-Ready.md), `07-Plan-Sprint` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Contracts
+
+---
+
+## Tabla de contenido
+
+- [1. Objetivos del producto](#1-objetivos-del-producto)
+  - [1.1 Qué significa nivel topológico 0 para este backlog](#11-qué-significa-nivel-topológico-0-para-este-backlog)
+  - [1.2 Qué es una historia en un proyecto de código sin comportamiento](#12-qué-es-una-historia-en-un-proyecto-de-código-sin-comportamiento)
+- [2. Épicas](#2-épicas)
+- [3. Historias por épica](#3-historias-por-épica)
+  - [3.1 EP-08001 · Esqueleto ambulante y verificación de viabilidad](#31-ep-01--esqueleto-ambulante-y-verificación-de-viabilidad)
+  - [3.2 EP-08002 · Identidad del administrador y sesión](#32-ep-02--identidad-del-administrador-y-sesión)
+  - [3.3 EP-08003 · Ciclo de vida de la cuenta de alumno](#33-ep-03--ciclo-de-vida-de-la-cuenta-de-alumno)
+  - [3.4 EP-08004 · Gestión del trabajo](#34-ep-04--gestión-del-trabajo)
+  - [3.5 EP-08005 · Interpretación y verificación del dato del alumno](#35-ep-05--interpretación-y-verificación-del-dato-del-alumno)
+  - [3.6 EP-08006 · Visualización del trabajo](#36-ep-06--visualización-del-trabajo)
+  - [3.7 EP-08007 · Desenlace de la entrega](#37-ep-07--desenlace-de-la-entrega)
+  - [3.8 EP-08008 · Capacidades de prioridad menor](#38-ep-08--capacidades-de-prioridad-menor)
+- [4. Métricas de avance](#4-métricas-de-avance)
+  - [4.1 Por qué la unidad de estimación queda abierta](#41-por-qué-la-unidad-de-estimación-queda-abierta)
+  - [4.2 Por qué la distribución MoSCoW es la que es](#42-por-qué-la-distribución-moscow-es-la-que-es)
+- [5. Refinamiento](#5-refinamiento)
+- [6. Puntos abiertos de este backlog](#6-puntos-abiertos-de-este-backlog)
+- [7. Control de cambios](#7-control-de-cambios)
+
+---
+
+## 1. Objetivos del producto
+
+Este backlog convierte en trabajo planificable los **ocho** contratos de uso de `GeometriaFactory-Contracts`, que es el ensamblado de tipos que viajan entre las dos unidades desplegables del producto. Su propósito es que se pueda responder, en cualquier momento, qué parte de la frontera ya está declarada y qué queda de ella por declarar.
+
+**El MVP no se define acá.** Lo define el tramo comprometido del producto —las **ocho** etapas `a` a `h` de `PRODUCT-INTAKE` §15— y el objetivo de avance que el intake declara, **8 de 8 etapas** (§22, asunción `A-2`).
+
+**Este backlog no reordena las etapas ni las renombra.** Las ocho épicas de §2 son la partición de las etapas del producto que tocan a este proyecto de código, con el nombre de épica candidata que [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §3 ya declaró para cada una, más una octava que agrupa lo que cae fuera del tramo comprometido.
+
+### 1.1 Qué significa nivel topológico 0 para este backlog
+
+`Vista-Producto.md` §3 ubica a `GeometriaFactory-Contracts` en el **nivel 0** del orden topológico. Tres consecuencias, y la tercera es propia de este proyecto de código y no la comparte con los otros dos del mismo nivel:
+
+1. **Ninguna historia espera a otro proyecto de código.** El ensamblado no referencia a ninguno, y en particular **ninguna referencia hacia `GeometriaFactory-Domain`**, que el intake declara como puerta bloqueante (§17.4.P.8).
+2. **Su trabajo condiciona el de los dos extremos.** `GeometriaFactory-Api` y `GeometriaFactory-Web` compilan contra el mismo ensamblado, de modo que un tipo que acá no exista es un tipo que ninguno de los dos puede usar.
+3. **Es el único contrato del producto que dos proyectos de código compilan a la vez**, y por eso `Vista-Producto.md` §4 lo llama la red del producto. La contracara está declarada y es una regla operativa: un cambio incompatible obliga al **despliegue conjunto** de las dos unidades.
+
+### 1.2 Qué es una historia en un proyecto de código sin comportamiento
+
+Este proyecto de código **no tiene comportamiento**: son tipos de transferencia planos (`05` §1). Su arquitectura no es de ejecución sino **de exposición**, y sus historias tienen la misma forma: lo que cada una entrega es que un dato concreto **pueda cruzar la frontera con su forma**, o que un dato concreto **no pueda cruzarla**.
+
+De ahí dos consecuencias que atraviesan las veintidós:
+
+- **El rol de todas es el mismo**: los dos extremos que compilan contra el contrato. No hay alumno ni administrador como actor, aunque sus datos sean los que viajan.
+- **Los criterios de aceptación son en buena parte de inspección de la superficie pública**, y no de ejecución. Es lo que la categoría 02 ya declaró al fijar que lo que este proyecto de código decide baja a criterios verificables por inspección y no a reglas de negocio (`02` §5).
+
+**Ninguna historia de este backlog redacta una regla de negocio.** Las reglas viven en `GeometriaFactory-Domain` y acá se citan por identificador, como hace la categoría 02.
+
+## 2. Épicas
+
+| Épica | Nombre | Etapa del producto | Descripción breve | Historias | Tareas técnicas |
+| --- | --- | --- | --- | --- | --- |
+| EP-08001 | Esqueleto ambulante y verificación de viabilidad | `a` | El ensamblado existe, compila sin dependencias y sin referencia al dominio, y sus decisiones abiertas de nombre y de momento quedan encaminadas | Ninguna: la etapa `a` no tiene capacidad funcional asociada | BT-08001 a BT-08005 |
+| EP-08002 | Identidad del administrador y sesión | `c` | La familia de sesión y la familia de error, que es transversal a las otras siete | US-08001, US-08014, US-08016 | BT-08006, BT-08007, BT-08008, BT-08009 |
+| EP-08003 | Ciclo de vida de la cuenta de alumno | `d` | La familia de cuentas y la familia de reseteo | US-08002, US-08003, US-08004, US-08005, US-08021, US-08022 | BT-08010, BT-08011 |
+| EP-08004 | Gestión del trabajo | `e` | La familia de trabajo y la familia de listado, con su carga útil acotada | US-08006, US-08007, US-08008, US-08009, US-08019 | BT-08012, BT-08013 |
+| EP-08005 | Interpretación y verificación del dato del alumno | `f` | La familia de detalle con sus observaciones y sus pares de valores | US-08011, US-08013, US-08015 | BT-08014 |
+| EP-08006 | Visualización del trabajo | `g` | Lo que el detalle tiene que llevar para que el árbol y la escena existan | US-08012 | BT-08014 |
+| EP-08007 | Desenlace de la entrega | `h` | La familia de desenlace y el comentario del administrador como bloque propio | US-08017, US-08018, US-08020 | BT-08015 |
+| EP-08008 | Capacidades de prioridad menor | `i…` | Lo que el tramo comprometido no levanta y el intake declara de prioridad menor | US-08010 | — |
+
+**La etapa `b` no produce épica en este proyecto de código, y es declaración y no olvido.** Construye la cáscara del front con pantallas de marcador de posición; no hay ningún dato que cruce la frontera todavía.
+
+**EP-08008 está fuera del tramo comprometido**, y por eso su única historia no entra en el objetivo de **8 de 8 etapas**: el roadmap §2.1 declara que las capacidades de la fase `i…` se planifican con la plantilla completa cuando `h` esté cerrada y demostrada. Se declara acá para que la previsión de 02 quede completa y no para comprometerla.
+
+## 3. Historias por épica
+
+Las **veintidós** historias son las que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 previó, con el mismo identificador y con la misma pertenencia a necesidades de negocio; esa sección declara que **la categoría 06 las confirma al redactarlas**, y esto es esa confirmación. Ninguna se agrega, ninguna se retira y ninguna se renumera. Cada una vive en su archivo bajo [`historias-usuario/`](historias-usuario/), porque el proyecto de código supera las veinte historias.
+
+### 3.1 EP-08001 · Esqueleto ambulante y verificación de viabilidad
+
+Sin historias. Todo el trabajo de la etapa `a` en este proyecto de código es técnico y vive en [`Backlog-Tecnico.md`](Backlog-Tecnico.md) §2.1 como BT-08001 a BT-08005.
+
+### 3.2 EP-08002 · Identidad del administrador y sesión
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08001](historias-usuario/US-08001-Transportar-El-Canje-De-Credenciales-Y-La-Respuesta-De-Sesion.md) | Transportar el canje de credenciales y la respuesta de sesión de cuatro campos | Must | Sin fijar (§4.1) | Propuesta | CU-08001 | EP-08002 |
+| [US-08014](historias-usuario/US-08014-Transportar-El-Error-Neutro-Con-El-Conjunto-Cerrado-De-Codigos.md) | Transportar el error neutro con el conjunto cerrado de diecisiete códigos | Must | Sin fijar (§4.1) | Propuesta | CU-08006 | EP-08002 |
+| [US-08016](historias-usuario/US-08016-Cerrar-El-Conjunto-Con-El-Codigo-No-Clasificado.md) | Cerrar el conjunto con el código no clasificado | Must | Sin fijar (§4.1) | Propuesta | CU-08006 | EP-08002 |
+
+### 3.3 EP-08003 · Ciclo de vida de la cuenta de alumno
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08002](historias-usuario/US-08002-Transportar-El-Registro-De-Una-Cuenta-De-Alumno.md) | Transportar el registro de una cuenta de alumno | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08003](historias-usuario/US-08003-Transportar-El-Listado-De-Cuentas-Del-Panel-Del-Administrador.md) | Transportar el listado de cuentas del panel del administrador | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08004](historias-usuario/US-08004-Transportar-El-Cambio-De-Situacion-De-La-Cuenta.md) | Transportar el cambio de situación de la cuenta | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08005](historias-usuario/US-08005-Transportar-La-Baja-Con-Su-Confirmacion-Escrita.md) | Transportar la baja con su confirmación escrita | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08021](historias-usuario/US-08021-Transportar-El-Reseteo-Sin-Campo-De-Contrasena.md) | Transportar el reseteo sin campo de contraseña y con la provisoria producida | Must | Sin fijar (§4.1) | Propuesta | CU-08008 | EP-08003 |
+| [US-08022](historias-usuario/US-08022-Reutilizar-La-Solicitud-De-Cambio-Para-El-Cambio-Obligatorio.md) | Reutilizar la solicitud de cambio de contraseña para el cambio obligatorio | Must | Sin fijar (§4.1) | Propuesta | CU-08008, CU-08002 | EP-08003 |
+
+### 3.4 EP-08004 · Gestión del trabajo
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08006](historias-usuario/US-08006-Transportar-El-Envio-Del-Trabajo-Con-El-Texto-Original.md) | Transportar el envío del trabajo con el texto original como cadena | Must | Sin fijar (§4.1) | Propuesta | CU-08003 | EP-08004 |
+| [US-08007](historias-usuario/US-08007-Transportar-La-Solicitud-Unica-De-Eliminacion.md) | Transportar la solicitud única de eliminación del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-08003 | EP-08004 |
+| [US-08008](historias-usuario/US-08008-Transportar-La-Proyeccion-De-Listado-Sin-La-Carga-Del-Detalle.md) | Transportar la proyección de listado sin la carga del detalle | Must | Sin fijar (§4.1) | Propuesta | CU-08004 | EP-08004 |
+| [US-08009](historias-usuario/US-08009-Transportar-El-Alcance-Del-Listado-Segun-El-Papel.md) | Transportar el alcance del listado según el papel, con los datos para agrupar y filtrar | Must | Sin fijar (§4.1) | Propuesta | CU-08004 | EP-08004 |
+| [US-08019](historias-usuario/US-08019-Transportar-El-Conjunto-Cerrado-De-Cuatro-Estados.md) | Transportar el conjunto cerrado de cuatro estados del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-08003, CU-08004 | EP-08004 |
+
+### 3.5 EP-08005 · Interpretación y verificación del dato del alumno
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08011](historias-usuario/US-08011-Transportar-El-Detalle-Con-Sus-Piezas-Y-Componentes.md) | Transportar el detalle del trabajo interpretado con sus piezas y componentes | Must | Sin fijar (§4.1) | Propuesta | CU-08005 | EP-08005 |
+| [US-08013](historias-usuario/US-08013-Transportar-La-Observacion-Con-Severidad-Y-Par-De-Valores.md) | Transportar la observación con su severidad y su par de valores | Must | Sin fijar (§4.1) | Propuesta | CU-08005 | EP-08005 |
+| [US-08015](historias-usuario/US-08015-Transportar-El-Detalle-De-Ubicacion-Con-Indice-Y-Campo.md) | Transportar el detalle de ubicación con índice de figura y campo | Must | Sin fijar (§4.1) | Propuesta | CU-08006, CU-08005 | EP-08005 |
+
+### 3.6 EP-08006 · Visualización del trabajo
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08012](historias-usuario/US-08012-Transportar-El-Texto-Original-En-El-Detalle-Para-El-Arbol.md) | Transportar el texto original en el detalle, para el árbol y para la escena | Must | Sin fijar (§4.1) | Propuesta | CU-08005 | EP-08006 |
+
+### 3.7 EP-08007 · Desenlace de la entrega
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08017](historias-usuario/US-08017-Transportar-El-Desenlace-Con-Su-Conjunto-Cerrado-De-Dos-Valores.md) | Transportar el desenlace con su conjunto cerrado de dos valores | Must | Sin fijar (§4.1) | Propuesta | CU-08007 | EP-08007 |
+| [US-08018](historias-usuario/US-08018-Transportar-El-Comentario-Como-Bloque-Propio.md) | Transportar el comentario del administrador como bloque propio y nunca como observación | Must | Sin fijar (§4.1) | Propuesta | CU-08007, CU-08005 | EP-08007 |
+| [US-08020](historias-usuario/US-08020-Transportar-El-Desenlace-Al-Alumno-Estado-Y-Comentario.md) | Transportar el desenlace al alumno: el estado en el listado y el comentario en el detalle | Must | Sin fijar (§4.1) | Propuesta | CU-08004, CU-08005 | EP-08007 |
+
+### 3.8 EP-08008 · Capacidades de prioridad menor
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08010](historias-usuario/US-08010-Transportar-El-Resumen-Por-Alumno-Y-Por-Estado.md) | Transportar el resumen por alumno y por estado del panel del administrador | Could | Sin fijar (§4.1) | Propuesta | CU-08004 | EP-08008 |
+
+## 4. Métricas de avance
+
+| Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
+| --- | --- | --- | --- |
+| Must | 21 | 95,5 % | Sin fijar (§4.1) |
+| Should | 0 | 0 % | — |
+| Could | 1 | 4,5 % | Sin fijar (§4.1) |
+| Won't (v1.0) | 0 | 0 % | — |
+| **Total** | **22** | **100 %** | **Sin fijar** |
+
+| Métrica | Valor al 2026-08-10 |
+| --- | --- |
+| Historias en estado `Propuesta` | 22 de 22 |
+| Historias cerradas | 0 de 22 |
+| Porcentaje cerrado | 0 % |
+| Historias dentro del tramo comprometido | 21 de 22; la restante, US-08010, es de la fase `i…` |
+| Tareas técnicas declaradas | 18 |
+| Tareas técnicas cerradas | 0 de 18 |
+| Etapas del producto que este proyecto de código toca | **7** de las 8 comprometidas: `a`, `c`, `d`, `e`, `f`, `g` y `h`. La única que no toca es la `b` |
+| Etapas fuera del tramo comprometido con historias declaradas | 1, la `i…`, con US-08010 |
+| Deuda declarada en el backlog | 4 tareas técnicas que cierran un punto abierto: BT-08004, BT-08005, BT-08017 y BT-08018 |
+
+### 4.1 Por qué la unidad de estimación queda abierta
+
+La regla de la categoría exige declarar una técnica de estimación. **Este backlog no la fija, y lo declara en lugar de inventarla**, por el mismo motivo que los otros dos proyectos de código de nivel 0: el intake declara **sin plazo calendario, y que el avance se mide por etapas cerradas**; la unidad de planificación es la **etapa** y no el sprint (`Roadmap-Producto.md` §1.2); no hay historial del que derivar velocidad; y el equipo es de **una sola persona** (`PRODUCT-INTAKE` §2, `equipo_n = 1`).
+
+Hay además un motivo propio de este proyecto de código: **no tiene comportamiento**, y su pipeline no tiene siquiera etapa de pruebas propias (`05` §5). Estimar esfuerzo relativo sobre declaraciones de tipos, cuyo trabajo real es decidir qué campo existe y cuál no, produciría números sin contenido.
+
+La columna `Estimación` dice **«Sin fijar»** en las veintidós historias y en las dieciocho tareas técnicas. El punto abierto es `PA-01` de §6.
+
+### 4.2 Por qué la distribución MoSCoW es la que es
+
+**21 `Must` sobre 22**, con una única `Could`:
+
+1. **La prioridad la declara el Product Owner en el intake y esta categoría no reprioriza** (`Rules-Plan-Sprint.md` §1.3 declara esa división de titularidad para AG-06). `PRODUCT-INTAKE` §4 declara **diecinueve** de sus **veintiséis** capacidades como `Must Have` —**dieciocho** hasta el 2026-08-10, y `F-13` desde que la versión **1.19** de esa fuente la promovió—.
+2. **Este proyecto de código es una frontera, y una frontera se declara entera o no sirve.** Un tipo que falte no degrada una funcionalidad: impide que la funcionalidad exista, porque los dos extremos compilan contra él. Ese es el motivo estructural por el que acá hay todavía menos margen de recorte que en el resto del producto.
+3. **La única `Could` es US-08010**, y lo es porque su capacidad de origen, `F-15` —panel de resumen del administrador por alumno y por estado—, es `Could Have` en `PRODUCT-INTAKE` §4 y cae en la fase `i…`. La categoría 02 ya la ubicaba ahí al declarar, en su §4.2, que la previsión de producto correspondiente queda fuera con su prioridad menor.
+
+**Lo que reemplaza acá al recorte por prioridad es el recorte por etapa**, como en todo el producto: se difiere una etapa entera, no una historia suelta.
+
+**Sobre la regularidad de esta distribución** [AGREGADO 2026-08-11, en respuesta al hallazgo `D-06-03` de [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0]. La auditoría observó que la distribución de los siete backlogs es demasiado regular para ser casualidad, y tiene razón en que **la regularidad existe y hasta ahora no estaba declarada**. Se declara acá, con el recuento hecho de nuevo sobre las fichas y sobre los índices inline, y con su explicación.
+
+| Proyecto de código | Historias | `Must` | `Should` | `Could` |
+| --- | --- | --- | --- | --- |
+| GeometriaFactory-Domain | 27 | 26 | 1 | 0 |
+| GeometriaFactory-Contracts | 22 | 21 | 0 | 1 |
+| GeometriaFactory-Visor | 14 | 14 | 0 | 0 |
+| GeometriaFactory-Application | 32 | 31 | 1 | 0 |
+| GeometriaFactory-Web | 30 | 30 | 0 | 0 |
+| GeometriaFactory-Infrastructure | 25 | 24 | 1 | 0 |
+| GeometriaFactory-Api | 30 | 29 | 1 | 0 |
+| **Total** | **180** | **175** | **4** | **1** |
+
+**La explicación no es una cuota, y se puede verificar una por una.** El tramo comprometido —las etapas `c` a `h`— contiene **diecinueve** capacidades del intake §4, y desde `PRODUCT-INTAKE` **1.19** **las diecinueve son `Must Have`**: la única que no lo era, `F-13`, la promovió el Product Owner el 2026-08-10. De ahí se sigue mecánicamente que **ninguna historia que derive de una capacidad del tramo comprometido puede ser no-`Must`**, y que las no-`Must` que existen tienen que venir de otro lado. Vienen de dos lados, y sólo de dos:
+
+- **De una capacidad de la fase `i…`**, que este backlog no planifica pero que la frontera de tipos sí tiene que transportar: es el único caso, `US-08010` de `GeometriaFactory-Contracts`, que deriva de `F-15`, `Could Have`.
+- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-08012` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11), `US-08016` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-06023` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-00030` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
+
+**Los dos proyectos de código que hoy quedan en 100 % `Must` son exactamente los dos cuya única no-`Must` derivaba de `F-13`** —el Visor y Web, desde los dos lados de la fachada—. No llegaron ahí eligiendo: llegaron porque la capacidad de la que dependían subió de prioridad, después de que los dos elevaran la tensión y **se negaran a repriorizarla por su cuenta**.
+
+**La consecuencia hay que decirla y es incómoda**: la señal de recorte que MoSCoW normalmente da **no está disponible en este backlog**. No hay una lista de historias que se puedan soltar si el trabajo aprieta, porque el Product Owner ya priorizó aguas arriba y lo que quedó del lado de este backlog está comprometido. Lo que reemplaza a esa señal es el **orden de etapas**, que es la unidad de planificación que este producto sí tiene: si algo aprieta, se difiere una etapa entera, con su punto de control, y no una historia suelta.
+
+## 5. Refinamiento
+
+| Aspecto | Decisión |
+| --- | --- |
+| Cadencia | Una sesión **por etapa**, al abrir la rama de la etapa. No hay sprints (`Roadmap-Producto.md` §1.2) |
+| Segunda sesión obligatoria | Al cerrar la etapa, sobre las historias de la siguiente |
+| Responsable | La única persona del equipo, con el papel de AG-06 |
+| Formato | Revisión de la historia contra su contrato de uso de 02, contra la familia de tipos de `05` §3.1 que la sostiene y contra la **regla de exposición** de `05` §3.2 |
+| Entrada obligatoria a la sesión | La lista de lo que **nunca cruza la frontera** (`05` §3.2) y las once restricciones transversales de `02` §6. Toda historia se refina contra las dos |
+| Qué produce la sesión | Historias en estado `Ready` según [`Definition-Of-Ready.md`](Definition-Of-Ready.md), o el registro de qué le falta a cada una |
+
+**Una regla propia de este refinamiento**: cada vez que una historia agrega un campo a un tipo, la sesión pregunta si ese campo puede transportar una dirección de servicio, una ruta de datos o un secreto. `05` §9 declara que agregar un campo de diagnóstico es **la forma habitual en que ese defecto entra**, y que entra sin que nadie lo note porque compila.
+
+## 6. Puntos abiertos de este backlog
+
+| Id | Punto abierto | Quién lo cierra | Cuándo |
+| --- | --- | --- | --- |
+| PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | Al cerrar la etapa `c` |
+| PA-02 | **Los nombres de los tipos, de sus campos y de los espacios de nombres**, que ni el intake ni la categoría 02 fijan y que se anclan en la etapa que implementa cada familia (`05` §11 PA-01). Convertido en trabajo como BT-08004 | El equipo en el punto de control de la etapa correspondiente | De la etapa `c` en adelante, según la familia |
+| PA-03 | **La zona horaria y la precisión del campo de momento** del tipo de error: ninguna fuente las declara (`05` §11 PA-02). Convertido en trabajo como BT-08005 | El equipo, junto con la elección del formato de intercambio | Etapa `a` o `c` |
+| PA-04 | **El formato de intercambio y su configuración** pertenece a `GeometriaFactory-Api` y a `GeometriaFactory-Web` (`05` §11 PA-03). Convertido en trabajo como BT-08017, que es de **adopción** y no de decisión: este proyecto de código sólo exige que los tipos sean serializables sin comportamiento | Las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web`, **que ya están emitidas** | Al adoptarlo |
+| PA-05 | **Los dos valores rotulados [ASUNCIÓN]** de `05` §8, pendientes de confirmación en `PRODUCT-INTAKE` §22, asunción `A-4` (`05` §11 PA-04). Convertido en trabajo como BT-08018 | El Product Owner sobre su propio documento | Antes de fijar la puerta en 09 |
+
+**Sobre `PA-04` hay una constancia que corresponde dejar por escrito.** El punto abierto `PA-03` de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 dice que las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` **no están emitidas todavía**. Al día de este backlog **sí lo están**: [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §1 declara que las siete están emitidas, y su §5 cita la decisión concreta que cierra el formato de intercambio para los dos extremos. El punto abierto, por lo tanto, **ya tiene respuesta aguas abajo** y lo que queda es adoptarla, que es BT-08017. Esta observación se eleva para que `05` la absorba; este backlog no edita ese documento.
+
+## 7. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial del product backlog de `GeometriaFactory-Contracts`. Declara **ocho** épicas —siete como partición de las etapas del producto que este proyecto de código toca, con el nombre de épica candidata que el roadmap ya había declarado, y una octava para lo que cae fuera del tramo comprometido— y la etapa que no produce épica con su motivo. Confirma y redacta las **veintidós** historias que la categoría 02 previó, con el mismo identificador y la misma pertenencia a necesidades de negocio, cada una en su archivo bajo `historias-usuario/` por superar el umbral de veinte. Declara qué es una historia en un proyecto de código sin comportamiento, la unidad de estimación como **punto abierto** en lugar de inventarla, y la distribución MoSCoW de 21 `Must` sobre 22 con su fundamento estructural. Deja cinco puntos abiertos, cuatro de ellos convertidos en tareas técnicas, y eleva que el punto abierto `PA-03` de la categoría 05 ya tiene respuesta aguas abajo. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4 y en su control de cambios, y **cierra el hallazgo `D-06-03`** del informe de auditoría [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **Ninguna historia de este backlog cambia de prioridad**: `F-13` es de la visualización y no baja a este proyecto de código, de modo que el reparto MoSCoW de §4 no se toca. **§4.2**: el punto 1 pasa de **dieciocho a diecinueve** capacidades `Must Have` del intake §4. **§4.2 (`D-06-03`)**: entra el bloque «Sobre la regularidad de esta distribución», que declara lo que hasta ahora estaba implícito —el recuento de los siete proyectos de código, contado de nuevo sobre las fichas y los índices inline: **175 `Must`, 4 `Should` y 1 `Could`** sobre 180— y lo explica sin forzar ninguna redistribución: como las **diecinueve** capacidades del tramo comprometido son hoy todas `Must Have`, toda historia no-`Must` tiene que venir o de una capacidad de la fase `i…` o de una decisión propia de las categorías 02 o 05, y se enumeran las cinco una por una. Se declara además la consecuencia: la señal de recorte que MoSCoW normalmente da **no está disponible en este backlog** y la reemplaza íntegramente el orden de etapas. Sube minor. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

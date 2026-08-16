@@ -1,0 +1,73 @@
+> **Artefacto archivado — estado `Superado`**
+>
+> Esta es una **copia archivada** del documento `RN-08-Texto-Original-Conservado-Integro.md` en su versión **1.0**, tomada el 2026-08-09 por el orquestador SDD antes de que la versión vigente la superara (`Master-Prompt.md` §5 y §5.1).
+>
+> - **Estado:** `Superado`
+> - **Versión que preserva:** 1.0
+> - **Fecha de archivado:** 2026-08-09
+> - **Versión vigente:** [`RN-08-Texto-Original-Conservado-Integro.md`](../../RN-02008-Texto-Original-Conservado-Integro.md)
+>
+> El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
+
+---
+
+# RN-08 — El texto original del alumno se conserva íntegro
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Domain
+**Documento:** RN-08-Texto-Original-Conservado-Integro.md
+**Versión:** 1.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-08
+**Autor:** Analista Funcional + API Designer (AG-02)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §9 (X-4), §4 (F-20), §21 (RN-08 / INV-04), §17.3.P.11 punto 2, §20 (los siete escenarios); [`NB-04`](../../../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1 y §5; `00-Contexto/Alcance-Producto.md` §5
+**Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
+
+---
+
+## Tabla de contenido
+
+- [1. Enunciado de la regla](#1-enunciado-de-la-regla)
+- [2. Justificación](#2-justificación)
+- [3. Ámbito de aplicación](#3-ámbito-de-aplicación)
+- [4. Consecuencia si se viola](#4-consecuencia-si-se-viola)
+- [5. CU afectados](#5-cu-afectados)
+- [6. Pruebas que la verifican](#6-pruebas-que-la-verifican)
+- [7. Control de cambios](#7-control-de-cambios)
+
+---
+
+## 1. Enunciado de la regla
+
+El texto que el alumno cargó se conserva íntegro, carácter por carácter, y el producto no lo reescribe, no lo normaliza y no lo corrige en ningún momento de la vida del trabajo.
+
+## 2. Justificación
+
+El formato de entrada es una premisa fija y el producto se adapta al dato, nunca al revés. El texto original es la única fuente fiel del trabajo del alumno, y editarlo desde el producto está declarado fuera del alcance (PRODUCT-INTAKE §9, X-4, y §4, F-20). Conservarlo íntegro tiene además una consecuencia operativa declarada: permite reprocesar el trabajo si la interpretación mejora (§17.3.P.11 punto 2). El invariante INV-04 lo expresa como propiedad permanente del trabajo.
+
+## 3. Ámbito de aplicación
+
+- Se evalúa al constituir el trabajo y en cada reedición del borrador, que reemplaza el texto por otro texto del alumno pero nunca por una versión corregida por el producto.
+- Se sostiene durante la interpretación: reconstruir las piezas no altera el texto.
+- Se sostiene durante la verificación de valores: la discrepancia se señala como advertencia y el valor declarado no se corrige.
+- Se sostiene en la finalización y después de ella.
+
+## 4. Consecuencia si se viola
+
+Rechazo de la operación, con el código `TEXTO_ORIGINAL_ALTERADO`. La regla no admite compensación: un texto alterado ya no es el trabajo del alumno, y ninguna advertencia posterior lo repara.
+
+## 5. CU afectados
+
+- [CU-05](../../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) — Crear y reeditar un trabajo.
+- [CU-06](../../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — Reconstruir el conjunto de piezas del trabajo.
+- [CU-07](../../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo.
+
+## 6. Pruebas que la verifican
+
+Pruebas unitarias de dominio previstas en 08: comparación carácter por carácter del texto conservado contra el texto aportado, con el escenario E-2 —que trae 2 comas finales y la clave `Tapas`— como caso principal, y con los siete escenarios del intake como cobertura. El criterio de éxito de negocio es de `NB-04` §5: 0 caracteres del texto original modificados por el producto, verificado además en cada punto de control posterior por la regla de no regresión.
+
+## 7. Control de cambios
+
+| Versión | Fecha | Cambios |
+| --- | --- | --- |
+| 1.0 | 2026-08-08 | Emisión inicial. |

@@ -1,0 +1,117 @@
+# Plan de pruebas — GeometriaFactory-Web
+
+**Producto:** Fábrica de Geometría
+**Proyecto de código:** GeometriaFactory-Web
+**Documento:** Plan-Pruebas.md
+**Versión:** 1.2
+**Estado:** Aprobado
+**Fecha:** 2026-08-12
+**Autor:** Ingeniero QA / SDET Senior (AG-08)
+**Tipo de proyecto de código (D8):** `web-monolith`
+**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) 1.1; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.1; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 y §3; [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md); [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md)
+**Trazabilidad downstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
+
+---
+
+## Tabla de contenido
+
+- [1. Alcance del plan](#1-alcance-del-plan)
+- [2. Criterios de entrada](#2-criterios-de-entrada)
+- [3. Criterios de salida](#3-criterios-de-salida)
+- [4. Riesgos de calidad](#4-riesgos-de-calidad)
+- [5. Plan por etapa](#5-plan-por-etapa)
+- [6. Recursos](#6-recursos)
+- [7. Control de cambios](#7-control-de-cambios)
+
+---
+
+## 1. Alcance del plan
+
+**Qué cubre.** Los **treinta y cinco** casos de verificación de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) y las **61** filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md), repartidos entre las **ocho** etapas comprometidas del producto —`a` a `h`—. **Este es el único de los siete proyectos de código del producto que produce épica en las ocho**, y así lo declara [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2.
+
+**Qué no cubre, y dónde se cubre.** Las reglas de negocio y su cumplimiento, en `GeometriaFactory-Domain` y en las capas que las ejercen; la batería de integración contra el servicio de datos real, en `GeometriaFactory-Api`; el interior del bundle y sus siete condiciones, en `GeometriaFactory-Visor`; la interpretación del texto, en `GeometriaFactory-Infrastructure`.
+
+**Y algo que no cubre y conviene decir aparte:** esta pieza **no verifica que una regla se cumpla**, porque no la hace cumplir (`02` §5). Lo que verifica de cada acotación es **que forzar la solicitud sin pasar por la pantalla la reciba rechazada del otro lado**. Seis casos de verificación existen sólo para eso.
+
+**La unidad de planificación es la etapa y no el sprint.** El intake declara «sin plazo calendario; el avance se mide por etapas cerradas». Por eso §5 se titula «Plan por etapa» y **ninguna de sus filas lleva una fecha ni una duración**.
+
+## 2. Criterios de entrada
+
+Lo que tiene que estar listo para que este plan se ejecute en una etapa:
+
+- [ ] La rama de la etapa está abierta y la sesión de refinamiento se hizo.
+- [ ] Las historias de la etapa cumplen los **ocho** criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §1, incluidos el 4 —superficie declarada—, el 6 —toda condición es uno de los **diecisiete** códigos vivos o el camino de ausencia de respuesta— y el 7 —ninguna afirmación depende de que esta pieza haga cumplir una regla—.
+- [ ] **`PT-01` está medida en sus cuatro partes** y su resultado registrado. El intake §15 la ubica en la etapa `a`, **antes que cualquier otra cosa**: sin ella el modelo de front no está confirmado.
+- [ ] **Antes de la etapa `g`: `PT-02` y `PT-03` están medidas.** Una puerta que no pasa **detiene la planificación de la etapa que depende de ella** y no se arrastra como deuda.
+- [ ] El servicio de datos está levantado desde el contenedor de desarrollo, a partir de la etapa `c`. El guion no se ejecuta contra un doble.
+- [ ] El bundle del visor **generado en el flujo y no tomado de un artefacto viejo**, a partir de la etapa `g`.
+- [ ] Las filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) que la etapa toca están identificadas, con el método resuelto que declara [`Estrategia-Testing.md`](Estrategia-Testing.md) §8.1.
+
+## 3. Criterios de salida
+
+Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una etapa:
+
+- [ ] Todos los `TC-XX` en alcance de la etapa están ejecutados y pasan.
+- [ ] **El guion de la etapa y los de todas las anteriores pasan al 100 %** (`TC-10035`). Es la regla de no-regresión acumulativa del intake §15, que **no es asunción**.
+- [ ] Las filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) que la etapa toca están verificadas, **con estado y fecha actualizados**.
+- [ ] **Ninguna deriva mayor queda sin resolver.** Se corrige lo construido, o se actualiza la línea de base con aprobación humana explícita. **Nunca por omisión.**
+- [ ] Las cinco inspecciones estructurales —`TC-10029` a `TC-10033`— dan **0** en cada uno de sus recuentos, en la condición declarada.
+- [ ] Los seis casos que verifican **forzando la solicitud** —`TC-10001`, `TC-10005`, `TC-10007`, `TC-10015`, `TC-10025`, `TC-10026`— se ejecutaron para las acotaciones que la etapa introdujo.
+- [ ] Los gates `QG-01`, `QG-02`, `QG-03`, `QG-05`, `QG-06`, `QG-07`, `QG-08`, `QG-09`, `QG-10` y `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] `QG-04` **se cumple**: el guion de la etapa y los de todas las anteriores pasan al 100 %. Es **bloqueante**, no condicionado (ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1).
+- [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró.
+- [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
+- [ ] El punto de control de la etapa tiene el OK explícito del Product Owner (intake §15, regla de delivery 2).
+
+## 4. Riesgos de calidad
+
+Alineados con los **siete** riesgos arquitectónicos de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §9, más tres propios de esta categoría.
+
+| Id | Riesgo | Impacto | Probabilidad | Mitigación en este plan |
+| --- | --- | --- | --- | --- |
+| RQ-01 | Que aparezca un guion del navegador que llame al servicio de datos | **Muy alto** | Media | `TC-10029` y `TC-10030` en **cada** etapa, con el conteo hecho **con los dos movimientos prendidos**; `QG-05` y `QG-06` bloquean la fusión |
+| RQ-02 | Que el proceso del hosting recicle y la persona pierda la sesión en mitad de un acto | Alto | Media, y **medida**: es `PT-01.c` | No hay mitigación técnica que inventar. Lo que hay es tratamiento verificado: `TC-10027` ejerce el estado «sesión no restablecible», y el envío como **única** acción de guardado hace que un corte no deje un trabajo a medias |
+| RQ-03 | Que un mensaje mostrado lleve una dirección de servicio, una ruta de datos o una traza | Alto | Media, porque entra por el camino de excepción | `TC-10031` recorre los **diecisiete** códigos **y** el camino de ausencia de respuesta, sobre el traductor, que es el único punto por el que un mensaje llega a la persona |
+| RQ-04 | Que un componente termine tocando el interior del bundle porque la fachada no expone algo | Alto | Media | `TC-10032` en cada etapa a partir de la `g`; y el procedimiento del `Visor` para cuando falta algo en la fachada, que **no es tocar el interior** |
+| RQ-05 | Que la liberación de la instancia no se invoque y recorrer trabajos acumule contextos gráficos | Alto | Media, porque es la clase de omisión que no falla la primera vez | `TC-10021` como puerta `PT-02`, medida **antes de comprometer la etapa `g`** y reejecutada al cerrarla |
+| RQ-06 | Que una subida deje la aplicación caída y se reporte como exitosa | Alto | Media, porque la subida **no es transaccional** | `QG-03`: el flujo **no termina en la subida**, termina comprobando que la dirección pública responde |
+| RQ-07 | Que un listado incorpore un campo del detalle y arrastre el texto completo de cada trabajo | Medio | Alta | `TC-10015` y `TC-10024` verifican la forma del listado; la proyección separada es decisión de `GeometriaFactory-Contracts` y esta pieza la consume sin invertirla |
+| RQ-08 | **Que una acotación se dé por verificada mirando que el control no se dibuja**, sin forzar la solicitud | **Muy alto**: es la forma exacta en que una regla se cree cumplida y no lo está | Alta, porque es lo cómodo | Criterio de salida de §3: los **seis** casos que fuerzan la solicitud se ejecutan para toda acotación que la etapa introduce. La Definition of Ready §1 criterio 7 lo exige desde la entrada |
+| RQ-09 | **Que una deriva mayor se resuelva por omisión**, dejando la fila en `Sin verificar` y siguiendo | Alto: la línea de base deja de ser línea de base | Media | Criterio de salida de §3 y `QG-11`: ninguna deriva mayor queda sin resolver, y la decisión —corregir o actualizar la línea de base— es del Product Owner con constancia escrita |
+| RQ-10 | **Que el guion se ejecute sólo para la etapa en curso** y la regla acumulativa se erosione | Alto: es la única red de seguridad de regresión que este proyecto de código tiene | Alta, porque el guion crece en cada etapa y ejecutarlo entero se vuelve caro | `TC-10035` es acumulativo por definición y su criterio de salida lo exige. **La regla acumulativa no es la parte rotulada [ASUNCIÓN]**: lo rotulado es expresarla como puerta con umbral del 100 % |
+
+## 5. Plan por etapa
+
+Sin fechas y sin duraciones, por lo declarado en §1. `TC-10035` aparece en **todas** las etapas porque es acumulativo.
+
+| Etapa | Épica | Alcance de testing | Casos de verificación en alcance | Filas de la matriz de sensado | Entregable de esta categoría |
+| --- | --- | --- | --- | --- | --- |
+| `a` | EP-10001 Esqueleto ambulante y verificación de viabilidad | Las **cuatro** mediciones de `PT-01` y la inspección de la única salida | `TC-10034`, `TC-10030`, `TC-10035` | Ninguna: todavía no hay superficie construida | `PT-01` medida y registrada, con la salida declarada si alguna parte no pasa |
+| `b` | EP-10002 Navegación y sistema visual | Los **dos** shells, el mapa de rutas y las **once** superficies con marcador de posición | `TC-10005`, `TC-10029`, `TC-10035` | `SD-10001` a `SD-10011`, `SD-10023` a `SD-10027`, `SD-10054` a `SD-10056`, `SD-10059` a `SD-10061` | Las once superficies sensadas contra la maqueta; el primer conteo de peticiones del navegador |
+| `c` | EP-10003 Identidad del administrador y sesión | Aprovisionamiento, ingreso con la credencial custodiada, cambio de contraseña y estado degradado | `TC-10001`, `TC-10003`, `TC-10004`, `TC-10006`, `TC-10027`, `TC-10028`, `TC-10031`, `TC-10035` | `SD-10014`, `SD-10015`, `SD-10016`, `SD-10022`, `SD-10057`, `SD-10058` | **0 apariciones de la credencial en el navegador**, criterio de aceptación de esta etapa; los diecisiete códigos traducidos |
+| `d` | EP-10004 Ciclo de vida de la cuenta de alumno | Registro, panel de cuentas con sus cinco operaciones, provisoria comunicada y confinamiento | `TC-10002`, `TC-10007`, `TC-10008`, `TC-10009`, `TC-10010`, `TC-10035` | `SD-10009`, `SD-10013`, `SD-10019`, `SD-10028`, `SD-10035` | El cuarto guardián verificado **forzando la solicitud**; las operaciones de `F-26` verificadas contra `CU-10003` y `CU-10004`, **sin sonda propia** |
+| `e` | EP-10005 Gestión del trabajo | Carga con el texto intacto, listado propio y listado de la comisión | `TC-10011`, `TC-10015`, `TC-10024`, `TC-10026`, `TC-10035` | `SD-10005`, `SD-10010`, `SD-10021`, `SD-10029`, `SD-10034`, `SD-10036` | Comparación carácter por carácter del texto de `E-2`; indistinguibilidad verificada forzando |
+| `f` | EP-10006 Interpretación y verificación del dato del alumno | Previsualización que dibuja y no verifica, y presentación de advertencias y errores | `TC-10012`, `TC-10013`, `TC-10014`, `TC-10035` | `SD-10006`, `SD-10017`, `SD-10030`, `SD-10033`, `SD-10037`, `SD-10038` | Los escenarios `E-1`, `E-3`, `E-5` y `E-8` ejercitados; **exactamente dos** advertencias en `E-1` |
+| `g` | EP-10007 Visualización del trabajo | La vista de trabajo con sus cuatro elementos, el árbol, la sincronización por índice y el gobierno del movimiento | `TC-10017`, `TC-10018`, `TC-10019`, `TC-10020`, `TC-10021`, `TC-10022`, `TC-10023`, `TC-10032`, `TC-10033`, `TC-10035` | `SD-10007`, `SD-10018`, `SD-10031`, `SD-10039` a `SD-10053` | `PT-02` y `PT-03` pasadas **antes** de comprometer la etapa; los escenarios `E-6` y `E-7` ejercitados |
+| `h` | EP-10008 Desenlace de la entrega | El desenlace en el listado propio, la resolución con comentario opcional y el retiro | `TC-10016`, `TC-10025`, `TC-10035`, y reejecución de `TC-10024` y `TC-10026` | `SD-10008`, `SD-10020`, `SD-10026`, `SD-10027` | Matriz completa: 10 de 10 casos de uso, 13 de 13 restricciones, 61 de 61 sondas verificadas |
+
+**La suma cubre los treinta y cinco casos de verificación y las sesenta y una filas.** `TC-10024` y `TC-10026` aparecen dos veces porque la etapa `h` los reejecuta con el desenlace ya construido; `TC-10035` aparece en las ocho porque es acumulativo por definición.
+
+## 6. Recursos
+
+| Recurso | Detalle |
+| --- | --- |
+| Personas | **Una**, `equipo_n = 1` (intake §2), que ejerce a la vez la construcción, la verificación observada y la aprobación |
+| Ambientes | **Dos, y no son intercambiables**: el contenedor de desarrollo con el navegador del equipo anfitrión para el guion, y el **hosting público** para `PT-01`, porque lo que esa puerta mide son las capacidades de ese hosting |
+| Servicio de datos | Levantado y **real** a partir de la etapa `c`. Su indisponibilidad se provoca deteniéndolo, no simulándola |
+| Datos | Los **ocho** escenarios del intake §20 **en su forma original y completa**; y los datos de maqueta de [`../03-UX-UI-DX/Contrato-Datos-Maqueta.md`](../03-UX-UI-DX/Contrato-Datos-Maqueta.md), con la salvedad de los **valores compuestos para la maqueta que no viajan al producto** |
+| Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función: panel de herramientas de desarrollo, lector de pantalla, medición de contraste y un cliente de peticiones para forzar la solicitud |
+| Línea de base | [`../03-UX-UI-DX/Linea-Base-Visual.md`](../03-UX-UI-DX/Linea-Base-Visual.md), [`../03-UX-UI-DX/Contrato-Datos-Maqueta.md`](../03-UX-UI-DX/Contrato-Datos-Maqueta.md) y [`../03-UX-UI-DX/Bitacora-Validacion-Maqueta.md`](../03-UX-UI-DX/Bitacora-Validacion-Maqueta.md), aprobados por el Product Owner |
+
+## 7. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.1 | 2026-08-11 | **`H-02`.** El criterio de salida que pedía que `QG-04` «se midiera y se registrara aunque sea condicionado» pasa a exigir que **se cumpla**: el gate es bloqueante. Ningún caso ni umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
+| 1.0 | 2026-08-11 | Emisión inicial. Declara el alcance del plan sobre las **ocho** etapas comprometidas —este es el único proyecto de código del producto que produce épica en todas—, con la constancia de que esta pieza **no verifica que una regla se cumpla** sino que forzar la solicitud la recibe rechazada del otro lado. Declara **siete** criterios de entrada —incluidas las tres puertas técnicas en su momento— y **once** de salida, todos verificables; **diez** riesgos de calidad alineados con los siete riesgos arquitectónicos de `05` §9 más tres propios, entre ellos el de dar una acotación por verificada mirando la pantalla y el de resolver una deriva mayor por omisión; el plan por etapa con los treinta y cinco casos de verificación **y las sesenta y una filas de la matriz de sensado** repartidas, **sin fechas ni duraciones**; y los recursos, con los **dos** ambientes que no son intercambiables. |
+| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |

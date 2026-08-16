@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.1
 > - **Fecha de archivado:** 2026-08-09
-> - **Versión vigente:** [`NB-06-Visualizacion-Dentro-Del-Producto.md`](../../NB-06-Visualizacion-Dentro-Del-Producto.md)
+> - **Versión vigente:** [`NB-06-Visualizacion-Dentro-Del-Producto.md`](../../NB-00006-Visualizacion-Dentro-Del-Producto.md)
 >
 > El cuerpo que sigue **no se modifica**.
 

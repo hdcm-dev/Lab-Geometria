@@ -154,7 +154,7 @@ Barrido de `RN-XX`, `INV-XX`, `NB-XX`, `E-X`, `CU-XX`, `RC-XX`, `T-X` y `RA-XX` 
 | --- | --- | --- | --- |
 | `RN-XX` | RN-01 a RN-15, sin ninguno fuera de rango | Intake §4.1 declara quince; `GeometriaFactory-Domain/…/Reglas-De-Negocio/` tiene los quince archivos, y las quince rutas enlazadas en §6 resuelven | **Sin fantasmas** |
 | `INV-XX` | Sólo INV-09, en `CU-07` §10 y en la cabecera de `CU-07` | Intake §17.1.P.2 declara nueve invariantes; INV-09 existe y es la marca de cambio de contraseña pendiente | **Correcto** |
-| `NB-XX` | NB-01 a NB-09 | Nueve archivos en `01-Necesidades-Negocio/Necesidades-De-Negocio/`; las nueve rutas de la matriz §7.1 resuelven | **Sin fantasmas** |
+| `NB-XX` | NB-00001 a NB-00009 | Nueve archivos en `01-Necesidades-Negocio/Necesidades-De-Negocio/`; las nueve rutas de la matriz §7.1 resuelven | **Sin fantasmas** |
 | `E-X` | E-1 a E-8 | Intake §20 declara ocho escenarios | **Sin fantasmas**, con la salvedad de contenido de H-01 |
 | `CU-XX` | CU-01 a CU-10 locales, más citas cruzadas a `Application` CU-01, CU-03, CU-05, CU-11 y a `Contracts` CU-08 | Los diez archivos locales existen; `Application/…/CU-11-Resetear-La-Contrasena-De-Un-Alumno.md` y `Contracts/…/CU-08-…md` existen y dicen lo citado | **Sin fantasmas**, con la salvedad de H-05 |
 | `RC-XX` | RC-01 a RC-07 | Siete archivos propios | **Sin fantasmas** |

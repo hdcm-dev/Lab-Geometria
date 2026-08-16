@@ -1,0 +1,166 @@
+# PRODUCT-MANIFEST — Fábrica de Geometría
+
+**Plantilla de referencia:** `PRODUCT-MANIFEST-template.md` versión 4.1 (Framework SDD)
+
+Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13, según `Intake-Rules.md` §4 y `Master-Prompt.md` §3. No se completa a mano.
+
+---
+
+## §1 Bloque de producto
+
+| Campo | Plano | Valor |
+|---|---|---|
+| `Nombre-Producto` | negocio | Fábrica de Geometría |
+| `Slug-Producto` | documentación | `Fabrica-De-Geometria` |
+| `Raiz-Codigo` | código | `GeometriaFactory` |
+| `Artefacto-Agrupacion` | código | `GeometriaFactory.sln` |
+| Proyecto de código principal | — | `GeometriaFactory-Api` |
+| Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` (de su §13 se deriva este manifiesto) |
+| Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
+| Versión | — | 1.4 |
+| Fecha | — | 2026-08-13 |
+| Estado | — | Aprobado (confirmado por el Product Owner el 2026-08-08) |
+
+`Slug-Producto` es el único campo derivado: se obtiene de `Nombre-Producto` con el algoritmo de `Master-Prompt.md` §3.2 (`Fábrica de Geometría` → `Fabrica-De-Geometria`). `Raiz-Codigo` y `Artefacto-Agrupacion` se leen declarados del intake (cabecera y perfil de convención de §13), no se derivan.
+
+**Independencia de planos verificada** (`Master-Prompt.md` §3.2): `Fabrica-De-Geometria` y `GeometriaFactory` no son la misma cadena salvo puntuación, y `Nombre-Producto` no contiene el separador de segmentos del perfil. La derivación procede.
+
+### §1.1 Procedencia del framework
+
+| Artefacto del framework | Versión |
+|---|---|
+| Framework SDD (conjunto) | 6.0 |
+| `Master-Prompt` | 5.2 |
+| `Root-Rules` | 3.1 |
+| `Rules-Contexto` | 3.1 |
+| `Rules-Necesidades-Negocio` | 3.1 |
+| `Rules-Especificacion-Funcional` | 4.0 |
+| `Rules-UX-UI-DX` | 4.0 |
+| `Rules-Arquitectura-Tecnica` | 3.1 |
+| `Rules-Backlog-Tecnico` | 3.1 |
+| `Rules-Plan-Sprint` | 3.1 |
+| `Rules-Calidad-Y-Pruebas` | 3.1 |
+| `Rules-Devops` | 3.1 |
+| `Rules-Examples` | 4.1 |
+| `Rules-Documentacion` | 4.1 |
+| Reglas transversales aplicadas | `Intake-Rules` 3.2, `Vocabulario-Rules` 2.1, `Maqueta-Rules` 3.1 y `Deriva-Rules` 3.1 (Fase B2 confirmada para `GeometriaFactory-Web` y `GeometriaFactory-Visor`). `Migracion-Rules` no aplica: el árbol no atravesó migración normativa |
+| `PRODUCT-INTAKE-template` | 2.1 |
+| `PRODUCT-MANIFEST-template` | 4.1 |
+
+`Rules-Prompts-AI` no lleva fila: la categoría 04 queda omitida por gating (`usa_llm` == false en los siete proyectos de código, ver §5).
+
+#### Decisiones de reconciliación
+
+Sin filas. `SDD/Docs/` estaba vacía al arrancar, de modo que la reconciliación normativa de `Master-Prompt.md` §2.1 no se disparó.
+
+### §1.2 Perfil de convención de nombres
+
+| Parámetro | Valor | Notas |
+|---|---|---|
+| `Raiz-Codigo` | `GeometriaFactory` | Declarado por el Product Owner (intake §13, cabecera) |
+| Separador de segmentos | `.` | Convención de espacios de nombres de .NET |
+| Prefijo de paquetes redistribuibles | `Aplicada` | Sin uso: ningún proyecto de código es `redistribuible` |
+| Extensión del agrupador | `.sln` | Compone `GeometriaFactory.sln` |
+
+---
+
+## §2 Tabla de proyectos de código
+
+| `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | `tipo_proyecto_codigo` (D8) | Rol en el producto | `redistribuible` | Dependencias | Path |
+|---|---|---|---|---|---|---|
+| `GeometriaFactory-Api` | `GeometriaFactory.Api` | `rest-api` | Host REST en el servidor propio: endpoints, autenticación JWT y migraciones al arrancar (**principal**) | false | `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure`, `GeometriaFactory-Contracts` | `src/GeometriaFactory.Api/` |
+| `GeometriaFactory-Web` | `GeometriaFactory.Web` | `web-monolith` | Front Blazor Interactive Server con MudBlazor en el hosting público; único punto de contacto del navegador | false | `GeometriaFactory-Contracts`, `GeometriaFactory-Visor` | `src/GeometriaFactory.Web/` |
+| `GeometriaFactory-Domain` | `GeometriaFactory.Domain` | `library` | Entidades e invariantes del dominio; centro de la regla de dependencias | false | — | `src/GeometriaFactory.Domain/` |
+| `GeometriaFactory-Application` | `GeometriaFactory.Application` | `library` | Casos de uso y puertos (`IWorkRepository`, `IFigureValidator`, `ISystemClock`) | false | `GeometriaFactory-Domain` | `src/GeometriaFactory.Application/` |
+| `GeometriaFactory-Infrastructure` | `GeometriaFactory.Infrastructure` | `library` | EF Core sobre SQLite, seguridad (derivación de clave y emisión de JWT) y validador de figuras | false | `GeometriaFactory-Application`, `GeometriaFactory-Domain` | `src/GeometriaFactory.Infrastructure/` |
+| `GeometriaFactory-Contracts` | `GeometriaFactory.Contracts` | `library` | DTOs de la API; contrato compartido por los dos procesos desplegables | false | — | `src/GeometriaFactory.Contracts/` |
+| `GeometriaFactory-Visor` | `geometriafactory-visor` | `library` | Bundle JavaScript del visor 3D; visualizador puro (RA-02) | false | — | `visor/` |
+
+**Excepción de nombre y de path declarada en el intake §13**, con su fundamento: `GeometriaFactory-Visor` es el único proyecto de código fuera del ecosistema .NET (paquete Node.js con TypeScript y webpack). Su `Identidad-Codigo` sigue la convención de `package.json` —minúscula con guiones— porque `GeometriaFactory.Visor` sería un nombre de paquete npm inválido, y su carpeta es `visor/` en la raíz y no `src/`, para que la solución .NET y el proyecto Node no compartan raíz de herramientas (intake §13 y §16, RT §4.2). La regla general `<Raiz-Codigo>.<Sufijo>` y el path `src/<Identidad-Codigo>/` rigen para los otros seis.
+
+---
+
+## §3 Grafo de dependencias
+
+Dependencias de compilación (Clean Architecture: apuntan siempre hacia adentro):
+
+```text
+GeometriaFactory-Domain     -> GeometriaFactory-Application -> GeometriaFactory-Infrastructure -> GeometriaFactory-Api
+GeometriaFactory-Domain     -> GeometriaFactory-Infrastructure
+GeometriaFactory-Contracts  -> GeometriaFactory-Api
+GeometriaFactory-Contracts  -> GeometriaFactory-Web
+GeometriaFactory-Visor      -> GeometriaFactory-Web
+```
+
+La arista `GeometriaFactory-Web → GeometriaFactory-Api` es de **runtime** (HTTP con `HttpClient` y tipos de `Contracts`), no de compilación. Por eso no figura en la columna de dependencias y no introduce ciclo (intake §13, RT §4.1).
+
+Orden topológico de generación y de construcción:
+
+```text
+nivel 0: GeometriaFactory-Domain, GeometriaFactory-Contracts, GeometriaFactory-Visor   (paralelizables)
+nivel 1: GeometriaFactory-Application, GeometriaFactory-Web                            (paralelizables)
+nivel 2: GeometriaFactory-Infrastructure
+nivel 3: GeometriaFactory-Api
+```
+
+---
+
+## §4 Resultado de las validaciones bloqueantes
+
+| Validación | Resultado |
+|---|---|
+| Cada `tipo_proyecto_codigo` pertenece al conjunto cerrado D8 | Cumple: `rest-api` (1), `web-monolith` (1), `library` (5) |
+| Exactamente un proyecto de código principal | Cumple: `GeometriaFactory-Api` |
+| Sin colisión de `Nombre-Proyecto-Codigo` ni de `Identidad-Codigo` | Cumple: siete nombres y siete identidades distintas |
+| Cada dependencia referencia un proyecto de código existente en §13 | Cumple: las siete aristas resuelven |
+| Grafo acíclico | Cumple: orden topológico de cuatro niveles derivable |
+| `Nombre-Producto` en prosa de negocio, independiente de `Raiz-Codigo` | Cumple |
+| `Raiz-Codigo` declarado en el intake | Cumple: declarado, no asumido |
+| §13 recorrible (sin filas de ejemplo, con perfil de convención) | Cumple |
+
+---
+
+## §5 Flags derivados (`Master-Prompt.md` §4)
+
+Flags del producto:
+
+| Flag | Valor | Origen |
+|---|---|---|
+| `equipo_n` | 1 | Intake §2: «1 docente + agente IA»; el agente no es persona del equipo. Efecto: la categoría 07 emite únicamente `Mini-Plan.md` |
+
+Flags por proyecto de código:
+
+| Proyecto de código | tipo D8 | `usa_llm` | `tiene_ui_final` | `multi_tenant` | `tiene_auth` | `tiene_portal_developers` | `tiene_extensibilidad` | `tiene_persistencia` | `requiere_compliance` | `tiene_observabilidad_critica` | `requiere_maqueta` |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| `GeometriaFactory-Domain` | `library` | false | false (DX) | false | **true** | false | false | false | false | false | false |
+| `GeometriaFactory-Contracts` | `library` | false | false (DX) | false | false | false | false | false | false | false | false |
+| `GeometriaFactory-Visor` | `library` | false | false (DX) | false | false | false | true | false | false | false | true |
+| `GeometriaFactory-Application` | `library` | false | false (DX) | false | **true** | false | false | false | false | false | false |
+| `GeometriaFactory-Web` | `web-monolith` | false | true (UX/UI) | false | true | false | false | false | false | false | true |
+| `GeometriaFactory-Infrastructure` | `library` | false | false (DX) | false | true | false | false | true | false | false | false |
+| `GeometriaFactory-Api` | `rest-api` | false | false (DX) | false | true | false | false | true | false | true | false |
+
+Fundamento de los valores que no son el trivial:
+
+- `usa_llm` false en los siete: ninguna sección §17 P.10 ni P.11 declara uso de LLM en el producto. El agente IA interviene en la construcción, no en el sistema construido. La categoría 04 se omite para todos.
+- `multi_tenant` false: intake §17.3 P.4 lo declara explícitamente («Una instancia, un curso, un administrador», INV-05).
+- `tiene_auth`: true en `Infrastructure` (derivación de clave y emisión de JWT HS256), en `Api` (ROPC con JWT Bearer, `POST /auth/token`) y en `Web` (canje de credenciales, token en el circuito, cookie de sesión). **Corregido el 2026-08-09 a true también en `Domain` y en `Application`**, alineando el manifiesto a lo que declara la sección de trazabilidad del `PRODUCT-INTAKE`, que es la fuente. La derivación original leía sólo el P.5 de cada bloque técnico y ponía false en los dos, razonando que modelar la condición no es implementar el mecanismo. El flag no distingue mecanismo de regla: `Domain` contiene la regla que condiciona la autenticación (INV-06, una cuenta `Pendiente` o `Bloqueada` no obtiene token) y `Application` contiene la **autorización** por pertenencia (INV-02, INV-03), que es precisamente lo que el flag habilita documentar. El efecto es que la categoría 05 de esos dos proyectos de código emite su ADR de autenticación, que con el valor anterior se habría omitido. Sin retrabajo: `Domain` ya había emitido los casos de uso correspondientes y `Application` no había arrancado.
+- `tiene_persistencia`: true en `Infrastructure` (SQLite con EF Core) y en `Api` (toma de configuración la ruta del archivo y aplica migraciones al arrancar). Los otros cinco declaran «No aplica».
+- `tiene_extensibilidad` true en `Visor`: el punto de extensión del producto es el contrato de la fachada del visor, que el intake **§17.7 P.3** declara con **seis** funciones desde su versión 1.6 —`inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, **`establecerMovimiento(id, opciones)`** y `destruir`—, ejercido entero por el sample S-1. La sexta la incorporó el Product Owner el 2026-08-09 al cerrar la Fase B2, y prende o apaga sobre una instancia viva los dos movimientos automáticos de F-25 sin reconstruirla. **§18 del intake enumera las mismas seis** —«el contrato de la fachada del visor (`inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento`, las **seis** que §17.7 P.3 declara desde 1.6)»—, de modo que §17.7 P.3 y §18 **coinciden** y no hay ninguna divergencia que declarar. [CORREGIDO 2026-08-11: hasta la versión 1.2 esta línea decía que «la enumeración de §18 del intake sigue nombrando cinco» y lo trataba como residuo de la fuente anterior a 1.6. **Era falso**: el residuo se corrigió en el intake 1.11, y esta línea fue la fuente desde la que cuatro documentos de la Fase G repitieron la afirmación sin abrir §18.] Que S-1 ejerza las seis está verificado en `GeometriaFactory-Visor` `CU-06` §7, CA-01 y CA-06, que es el caso de uso que materializa ese sample. La sexta función **no afloja RA-02**: el anfitrión pasa dos valores de verdad y el bundle no consulta la preferencia de movimiento reducido ni conserva la elección.
+- `requiere_compliance` false: intake §10 declara que no aplica ninguna normativa.
+- `tiene_observabilidad_critica` true en `Api`: §17.5 P.10 declara latencia p99 con métrica numérica (500 ms). No hay SLO de disponibilidad en ningún proyecto de código; los demás no declaran p99.
+- `requiere_maqueta`: true en `Web` por `tiene_ui_final` == true, y true en `Visor` por ser librería de componentes visuales. **Confirmado por el Product Owner el 2026-08-08**: los dos quedan alcanzados por la Fase B2, y `Maqueta-Rules.md` y `Deriva-Rules.md` pasan a ser reglas aplicadas del producto. **Cómo corrió, declarado el 2026-08-09**: hubo **una sola maqueta**, la de `GeometriaFactory-Web`, y la validación de la fachada del visor se integró en ella **por decisión del Product Owner**, porque la fachada no dibuja superficie propia y lo único observable de ella es la escena embebida en su anfitrión. El flag no cambia de valor: `Visor` ejecutó su Fase B2 y quedó aprobada. Lo que cambia es dónde viven sus tres artefactos de línea de base —`Linea-Base-Visual.md`, `Contrato-Datos-Maqueta.md` y `Bitacora-Validacion-Maqueta.md`—, emitidos en la categoría 03 de `GeometriaFactory-Web` y **no duplicados** en la del `Visor`, que recibió la retroalimentación. Así lo declara `GeometriaFactory-Visor/03-UX-UI-DX/README.md` §4.
+
+Los flags quedan **inmutables** desde esta confirmación (`Master-Prompt.md` §4). Un cambio posterior obliga a retroceder a la fase más temprana afectada del proyecto de código correspondiente.
+
+---
+
+## §6 Control de cambios
+
+| Versión | Fecha | Cambios | Autor |
+|---|---|---|---|
+| 1.4 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../Docs/Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`—. Acá son **3 ocurrencias**, las de la columna «qué expone» de `GeometriaFactory-Application` en §2, **derivadas del intake §13**, que se renombró en la misma edición: si la derivación no se moviera con su fuente quedaría reportando algo que §13 ya no dice. **Ningún flag, ningún tipo, ninguna arista del grafo y ningún orden topológico cambian.** **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-01-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. | Orquestador SDD |
+| 1.3 | 2026-08-11 | **Cierra el hallazgo `P1-2`** del informe de auditoría `SDD/Docs/Audit/G-10-Examples-Siete-Proyectos-r1.md` 1.0. La línea de §5 sobre el punto de extensión afirmaba que «la enumeración de §18 del intake sigue nombrando cinco» funciones de la fachada y la trataba como residuo pendiente de corrección por el Product Owner. **La afirmación era falsa**: §18 del `PRODUCT-INTAKE` **1.25**, abierto y leído, enumera las **seis** por nombre y las rotula «las seis que §17.7 P.3 declara desde 1.6»; la corrección venía de la versión 1.11 del intake y este manifiesto no la registró. El defecto no quedó acá: **cuatro documentos de la Fase G tomaron la afirmación de esta línea en vez de abrir §18** y la repitieron como viva. Se reescribe la línea con el texto de §18 citado desde la fuente y se deja constancia expresa de la corrección, para que la próxima fase no la vuelva a copiar. **Ningún flag, ningún tipo D8 y ningún proyecto de código del manifiesto cambia**: la corrección es de una afirmación sobre otra sección del intake. | Product Owner |
+| 1.2 | 2026-08-10 | **Cierra los hallazgos `F26-21` y `N-2`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0, que registró que este documento fue el único del corpus al que la propagación de F-26 no llegó. Revisado entero contra el `PRODUCT-INTAKE` **1.10** y contra los documentos vivos de los cinco proyectos de código con documentación emitida. **(a) El punto de extensión declara seis funciones y no cinco.** El fundamento de `tiene_extensibilidad` en `GeometriaFactory-Visor` enumeraba `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar` y `destruir`, la enumeración de §18 del intake, que es anterior a que su §17.7 P.3 sumara **`establecerMovimiento(id, opciones)`** en la versión **1.6**. Se pasa a citar §17.7 P.3, que es la sección que lleva el contrato, se declara que la enumeración de §18 quedó como residuo de la fuente, y se ancla en `Visor` `CU-06` —CA-01 y CA-06— que el sample S-1 ejerce las seis. Se deja escrito que la sexta función confirma **RA-02** en lugar de aflojarla: el anfitrión pasa dos valores de verdad y el bundle no consulta la preferencia de movimiento reducido ni conserva la elección. **(b) El fundamento de `requiere_maqueta` describía una Fase B2 que no ocurrió así.** Decía que los dos proyectos de código la ejecutan «cada uno con su maqueta propia», contra `GeometriaFactory-Visor/03-UX-UI-DX/README.md` §4, que declara desde el 2026-08-09 que **no tuvo maqueta propia por decisión del Product Owner** y que su validación se integró en la maqueta de `GeometriaFactory-Web`. **Ningún flag cambia de valor**: `requiere_maqueta` sigue true en los dos y la inmutabilidad de `Master-Prompt.md` §4 no se toca; lo que se corrige es la descripción de cómo se ejerció y dónde quedaron los tres artefactos de línea de base. **Nada más quedó desactualizado**: se recontaron los siete proyectos de código de §2, las siete aristas de §3, las ocho validaciones bloqueantes de §4 y los flags de §5 contra el intake 1.10, y F-26 —que es lo que la tanda propagaba— no altera composición, jerarquía ni ningún flag, porque entra como capacidad dentro de proyectos de código ya declarados. Sube minor: corrige dos fundamentos derivados sin cambiar composición, jerarquía ni valores de flag. | Orquestador SDD |
+| 1.1 | 2026-08-09 | Corrección de `tiene_auth` en `GeometriaFactory-Domain` y `GeometriaFactory-Application`, de false a **true**, alineando el manifiesto a la sección de trazabilidad del `PRODUCT-INTAKE`, que es la fuente y declara true en los dos. La derivación original de §5 leía sólo el P.5 de cada bloque técnico. Detectada al emitir la categoría 03 de `GeometriaFactory-Domain`, que documentó la frontera de autenticación y encontró la divergencia contra el manifiesto. **No dispara el retroceso de fase de `Master-Prompt.md` §4**: el efecto del flag es habilitar casos de uso de autenticación en 02 y un ADR en 05; `Domain` ya había emitido esos casos de uso por otra vía y `Application` todavía no arrancó, de modo que ninguna fase generada queda inválida. Sube minor: corrige un valor derivado sin cambiar la composición ni la jerarquía. | Orquestador SDD |
+| 1.0 | 2026-08-08 | Confirmado por el Product Owner en la misma fecha de emisión: manifiesto aprobado como canónico y flags fijados, con `requiere_maqueta` == true en `GeometriaFactory-Web` y en `GeometriaFactory-Visor`, y `tiene_observabilidad_critica` == true en `GeometriaFactory-Api` sin invertir. La confirmación no sube versión: el documento cierra su emisión inicial. Derivación inicial desde `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13 y su perfil de convención, según `Intake-Rules.md` §4. Incluye bloque de procedencia del framework 6.0, tabla de siete proyectos de código, grafo y orden topológico, resultado de las ocho validaciones bloqueantes y flags derivados de `Master-Prompt.md` §4. | Orquestador SDD |

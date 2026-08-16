@@ -5,7 +5,7 @@
 > - **Estado:** `Superado`
 > - **Versión que preserva:** 1.0
 > - **Fecha de archivado:** 2026-08-08
-> - **Versión vigente:** [`NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md`](../../NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md)
+> - **Versión vigente:** [`NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md`](../../NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md)
 >
 > El cuerpo que sigue **no se modifica**: un registro que se corrige después deja de ser un registro. Este archivo no se renombra, no se reenlaza y no vuelve a tocarse.
 

@@ -1,0 +1,2301 @@
+{
+ "resueltas": [
+  {
+   "linea": 9,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 304,
+   "anterior": "ADR-06",
+   "proyecto": "Application",
+   "nuevo": "ADR-04006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 324,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 324,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 362,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 390,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 437,
+   "anterior": "ADR-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 442,
+   "anterior": "ADR-07",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06007",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 443,
+   "anterior": "ADR-06",
+   "proyecto": "Api",
+   "nuevo": "ADR-00006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 444,
+   "anterior": "ADR-07",
+   "proyecto": "Api",
+   "nuevo": "ADR-00007",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 454,
+   "anterior": "US-29",
+   "proyecto": "Api",
+   "nuevo": "US-00029",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 467,
+   "anterior": "ADR-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 483,
+   "anterior": "ADR-07",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06007",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 483,
+   "anterior": "ADR-07",
+   "proyecto": "Api",
+   "nuevo": "ADR-00007",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 493,
+   "anterior": "ADR-02",
+   "proyecto": "Visor",
+   "nuevo": "ADR-12002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 634,
+   "anterior": "CU-06",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 635,
+   "anterior": "CU-06",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 675,
+   "anterior": "CU-02",
+   "proyecto": "Web",
+   "nuevo": "CU-10002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 675,
+   "anterior": "CU-03",
+   "proyecto": "Web",
+   "nuevo": "CU-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 676,
+   "anterior": "CU-04",
+   "proyecto": "Web",
+   "nuevo": "CU-10004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 698,
+   "anterior": "ADR-06",
+   "proyecto": "Application",
+   "nuevo": "ADR-04006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 749,
+   "anterior": "ADR-01",
+   "proyecto": "Visor",
+   "nuevo": "ADR-12001",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 751,
+   "anterior": "ADR-01",
+   "proyecto": "Visor",
+   "nuevo": "ADR-12001",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1059,
+   "anterior": "ADR-05",
+   "proyecto": "Domain",
+   "nuevo": "ADR-02005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1059,
+   "anterior": "CU-12",
+   "proyecto": "Domain",
+   "nuevo": "CU-00025",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1060,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1062,
+   "anterior": "ADR-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1064,
+   "anterior": "CU-04",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1065,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1068,
+   "anterior": "CU-10",
+   "proyecto": "Application",
+   "nuevo": "CU-00025",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1069,
+   "anterior": "CU-04",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1070,
+   "anterior": "CU-03",
+   "proyecto": "Application",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1071,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1073,
+   "anterior": "CU-01",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08001",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1074,
+   "anterior": "CU-01",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08001",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1075,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1076,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1077,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1078,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1079,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1080,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1081,
+   "anterior": "CU-08",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06008",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1082,
+   "anterior": "CU-01",
+   "proyecto": "Api",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1084,
+   "anterior": "CU-09",
+   "proyecto": "Api",
+   "nuevo": "CU-00009",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1086,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1087,
+   "anterior": "CU-10",
+   "proyecto": "Web",
+   "nuevo": "CU-10010",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1087,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1110,
+   "anterior": "CU-12",
+   "proyecto": "Domain",
+   "nuevo": "CU-00025",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1111,
+   "anterior": "CU-03",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1112,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1113,
+   "anterior": "ADR-05",
+   "proyecto": "Domain",
+   "nuevo": "ADR-02005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1114,
+   "anterior": "ADR-05",
+   "proyecto": "Domain",
+   "nuevo": "ADR-02005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1115,
+   "anterior": "ADR-05",
+   "proyecto": "Domain",
+   "nuevo": "ADR-02005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1116,
+   "anterior": "ADR-05",
+   "proyecto": "Domain",
+   "nuevo": "ADR-02005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1117,
+   "anterior": "ADR-05",
+   "proyecto": "Domain",
+   "nuevo": "ADR-02005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1118,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1119,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1120,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1121,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1122,
+   "anterior": "ADR-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1123,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1124,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1125,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1126,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1127,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1128,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1131,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1132,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1133,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1134,
+   "anterior": "CU-01",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08001",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1135,
+   "anterior": "CU-01",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08001",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1136,
+   "anterior": "CU-01",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08001",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1137,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1138,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1139,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1140,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1141,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1142,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1143,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1144,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1145,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1146,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1147,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1148,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1149,
+   "anterior": "CU-08",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06008",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1150,
+   "anterior": "CU-02",
+   "proyecto": "Api",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1151,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1153,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1155,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1156,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1157,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1158,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1161,
+   "anterior": "CU-02",
+   "proyecto": "Api",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1164,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1166,
+   "anterior": "CU-02",
+   "proyecto": "Web",
+   "nuevo": "CU-10002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1167,
+   "anterior": "CU-02",
+   "proyecto": "Web",
+   "nuevo": "CU-10002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1168,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1171,
+   "anterior": "CU-10",
+   "proyecto": "Web",
+   "nuevo": "CU-10010",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1172,
+   "anterior": "CU-10",
+   "proyecto": "Web",
+   "nuevo": "CU-10010",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1173,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1186,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1191,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1212,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1240,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1242,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1243,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1246,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1256,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1257,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1259,
+   "anterior": "CU-02",
+   "proyecto": "Web",
+   "nuevo": "CU-10002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1260,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1261,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1262,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1263,
+   "anterior": "CU-02",
+   "proyecto": "Web",
+   "nuevo": "CU-10002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1264,
+   "anterior": "CU-02",
+   "proyecto": "Web",
+   "nuevo": "CU-10002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1270,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1273,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1275,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1276,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1335,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1336,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1337,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1337,
+   "anterior": "CU-04",
+   "proyecto": "Api",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1338,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1339,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1340,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1341,
+   "anterior": "CU-08",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08008",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1342,
+   "anterior": "CU-08",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08008",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1343,
+   "anterior": "CU-04",
+   "proyecto": "Api",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1344,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1344,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1345,
+   "anterior": "CU-01",
+   "proyecto": "Application",
+   "nuevo": "CU-00021",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1346,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1347,
+   "anterior": "CU-11",
+   "proyecto": "Application",
+   "nuevo": "CU-00024",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1348,
+   "anterior": "CU-07",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06007",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1349,
+   "anterior": "CU-04",
+   "proyecto": "Api",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1350,
+   "anterior": "CU-02",
+   "proyecto": "Api",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1356,
+   "anterior": "CU-01",
+   "proyecto": "Domain",
+   "nuevo": "CU-00021",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1357,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1357,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1358,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1359,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1360,
+   "anterior": "CU-13",
+   "proyecto": "Domain",
+   "nuevo": "CU-00024",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1361,
+   "anterior": "CU-04",
+   "proyecto": "Api",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1362,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1363,
+   "anterior": "CU-04",
+   "proyecto": "Api",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1364,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1365,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1366,
+   "anterior": "CU-07",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06007",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1367,
+   "anterior": "ADR-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1368,
+   "anterior": "ADR-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1369,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1370,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1371,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1372,
+   "anterior": "CU-02",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08002",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1374,
+   "anterior": "CU-04",
+   "proyecto": "Api",
+   "nuevo": "CU-00023",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1375,
+   "anterior": "CU-02",
+   "proyecto": "Api",
+   "nuevo": "CU-00022",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1445,
+   "anterior": "CU-10",
+   "proyecto": "Web",
+   "nuevo": "CU-10010",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1462,
+   "anterior": "CU-06",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1506,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1572,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1607,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1613,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1614,
+   "anterior": "CU-10",
+   "proyecto": "Application",
+   "nuevo": "CU-00025",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1616,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1681,
+   "anterior": "CU-09",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1681,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1682,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1683,
+   "anterior": "CU-06",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1683,
+   "anterior": "ADR-05",
+   "proyecto": "Contracts",
+   "nuevo": "ADR-08005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1684,
+   "anterior": "CU-06",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1684,
+   "anterior": "CU-05",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1685,
+   "anterior": "CU-04",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1686,
+   "anterior": "CU-04",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1687,
+   "anterior": "CU-06",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1688,
+   "anterior": "CU-07",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1689,
+   "anterior": "CU-09",
+   "proyecto": "Application",
+   "nuevo": "CU-00027",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1690,
+   "anterior": "CU-03",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1691,
+   "anterior": "CU-03",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1692,
+   "anterior": "CU-04",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1693,
+   "anterior": "CU-05",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1694,
+   "anterior": "BT-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1695,
+   "anterior": "BT-10",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06010",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1695,
+   "anterior": "CU-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1711,
+   "anterior": "CU-09",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1712,
+   "anterior": "CU-09",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1713,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1714,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1723,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1724,
+   "anterior": "CU-05",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1725,
+   "anterior": "CU-05",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1726,
+   "anterior": "CU-08",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1727,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1727,
+   "anterior": "BT-12",
+   "proyecto": "Domain",
+   "nuevo": "BT-02012",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1728,
+   "anterior": "CU-09",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1729,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1730,
+   "anterior": "CU-06",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1731,
+   "anterior": "CU-07",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1731,
+   "anterior": "CU-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1732,
+   "anterior": "CU-04",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1733,
+   "anterior": "CU-04",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1734,
+   "anterior": "CU-06",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1734,
+   "anterior": "CU-05",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08005",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1737,
+   "anterior": "CU-04",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1738,
+   "anterior": "CU-04",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1739,
+   "anterior": "CU-04",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1741,
+   "anterior": "CU-07",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1741,
+   "anterior": "CU-07",
+   "proyecto": "Api",
+   "nuevo": "CU-00028",
+   "resolucion": "desplazamiento + consolidación 8.5"
+  },
+  {
+   "linea": 1744,
+   "anterior": "ADR-04",
+   "proyecto": "Api",
+   "nuevo": "ADR-00004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1866,
+   "anterior": "ADR-06",
+   "proyecto": "Application",
+   "nuevo": "ADR-04006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 1901,
+   "anterior": "ADR-06",
+   "proyecto": "Application",
+   "nuevo": "ADR-04006",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 2002,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 2002,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 2008,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 2009,
+   "anterior": "ADR-03",
+   "proyecto": "Web",
+   "nuevo": "ADR-10003",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 2010,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "desplazamiento por proyecto de código"
+  },
+  {
+   "linea": 531,
+   "anterior": "CU-07",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 532,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 533,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 545,
+   "anterior": "CU-08",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 546,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 548,
+   "anterior": "CU-08",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 549,
+   "anterior": "CU-07",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 550,
+   "anterior": "CU-07",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 552,
+   "anterior": "CU-06",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 554,
+   "anterior": "CU-07",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 555,
+   "anterior": "CU-09",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 555,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 557,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 557,
+   "anterior": "CU-13",
+   "proyecto": "Domain",
+   "nuevo": "CU-00024",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 559,
+   "anterior": "CU-06",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 560,
+   "anterior": "CU-06",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 561,
+   "anterior": "CU-05",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 562,
+   "anterior": "CU-13",
+   "proyecto": "Domain",
+   "nuevo": "CU-00024",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 564,
+   "anterior": "CU-06",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 570,
+   "anterior": "CU-01",
+   "proyecto": "Domain",
+   "nuevo": "CU-00021",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 570,
+   "anterior": "CU-12",
+   "proyecto": "Domain",
+   "nuevo": "CU-00025",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 579,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 580,
+   "anterior": "CU-05",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 583,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 583,
+   "anterior": "CU-03",
+   "proyecto": "Application",
+   "nuevo": "CU-00022",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 583,
+   "anterior": "CU-11",
+   "proyecto": "Application",
+   "nuevo": "CU-00024",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 584,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 584,
+   "anterior": "CU-07",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 584,
+   "anterior": "CU-08",
+   "proyecto": "Application",
+   "nuevo": "CU-00029",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 584,
+   "anterior": "CU-11",
+   "proyecto": "Application",
+   "nuevo": "CU-00024",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 586,
+   "anterior": "CU-05",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 587,
+   "anterior": "CU-09",
+   "proyecto": "Application",
+   "nuevo": "CU-00027",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 588,
+   "anterior": "CU-11",
+   "proyecto": "Application",
+   "nuevo": "CU-00024",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 589,
+   "anterior": "CU-06",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 590,
+   "anterior": "CU-07",
+   "proyecto": "Application",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 598,
+   "anterior": "CU-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06003",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 598,
+   "anterior": "CU-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 598,
+   "anterior": "CU-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06005",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 599,
+   "anterior": "CU-08",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06008",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 600,
+   "anterior": "CU-02",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06002",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 601,
+   "anterior": "CU-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06003",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 602,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 603,
+   "anterior": "CU-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06006",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 604,
+   "anterior": "CU-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06003",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 605,
+   "anterior": "CU-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06003",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 606,
+   "anterior": "CU-07",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06007",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 607,
+   "anterior": "CU-10",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06010",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 608,
+   "anterior": "CU-08",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06008",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 609,
+   "anterior": "CU-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 610,
+   "anterior": "CU-10",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06010",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 611,
+   "anterior": "CU-01",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06001",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 612,
+   "anterior": "CU-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06005",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 664,
+   "anterior": "CU-04",
+   "proyecto": "Contracts",
+   "nuevo": "CU-08004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1059,
+   "anterior": "CU-03",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1079,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1081,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1084,
+   "anterior": "ADR-04",
+   "proyecto": "Api",
+   "nuevo": "ADR-00004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1133,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1348,
+   "anterior": "ADR-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06005",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1349,
+   "anterior": "CU-05",
+   "proyecto": "Api",
+   "nuevo": "CU-00024",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1366,
+   "anterior": "ADR-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06005",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1695,
+   "anterior": "CU-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "CU-06004",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1696,
+   "anterior": "CU-07",
+   "proyecto": "Api",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1711,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 1712,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "proyecto nombrado en la misma fila"
+  },
+  {
+   "linea": 530,
+   "anterior": "CU-12",
+   "proyecto": "Domain",
+   "nuevo": "CU-00025",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 534,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 535,
+   "anterior": "CU-12",
+   "proyecto": "Domain",
+   "nuevo": "CU-00025",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 536,
+   "anterior": "CU-01",
+   "proyecto": "Domain",
+   "nuevo": "CU-00021",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 537,
+   "anterior": "CU-03",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 538,
+   "anterior": "CU-03",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 539,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 540,
+   "anterior": "CU-03",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 541,
+   "anterior": "CU-04",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 542,
+   "anterior": "CU-01",
+   "proyecto": "Domain",
+   "nuevo": "CU-00021",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 542,
+   "anterior": "CU-05",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 542,
+   "anterior": "CU-12",
+   "proyecto": "Domain",
+   "nuevo": "CU-00025",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 543,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 544,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 547,
+   "anterior": "CU-08",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 551,
+   "anterior": "CU-01",
+   "proyecto": "Domain",
+   "nuevo": "CU-00021",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 551,
+   "anterior": "CU-12",
+   "proyecto": "Domain",
+   "nuevo": "CU-00025",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 553,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 556,
+   "anterior": "CU-09",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 558,
+   "anterior": "CU-01",
+   "proyecto": "Domain",
+   "nuevo": "CU-00021",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 563,
+   "anterior": "CU-05",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 565,
+   "anterior": "CU-11",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 566,
+   "anterior": "CU-09",
+   "proyecto": "Domain",
+   "nuevo": "CU-00028",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 567,
+   "anterior": "CU-05",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 568,
+   "anterior": "CU-08",
+   "proyecto": "Domain",
+   "nuevo": "CU-00026",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 568,
+   "anterior": "CU-10",
+   "proyecto": "Domain",
+   "nuevo": "CU-00029",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 569,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 571,
+   "anterior": "CU-03",
+   "proyecto": "Domain",
+   "nuevo": "CU-00022",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 571,
+   "anterior": "CU-13",
+   "proyecto": "Domain",
+   "nuevo": "CU-00024",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 581,
+   "anterior": "CU-01",
+   "proyecto": "Application",
+   "nuevo": "CU-00021",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 581,
+   "anterior": "CU-10",
+   "proyecto": "Application",
+   "nuevo": "CU-00025",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 582,
+   "anterior": "CU-02",
+   "proyecto": "Application",
+   "nuevo": "CU-00023",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 585,
+   "anterior": "CU-05",
+   "proyecto": "Application",
+   "nuevo": "CU-00026",
+   "resolucion": "documento fuente citado en la misma fila"
+  },
+  {
+   "linea": 686,
+   "anterior": "CU-02",
+   "proyecto": "Domain",
+   "nuevo": "CU-00023",
+   "resolucion": "documento fuente citado en la misma fila"
+  }
+ ],
+ "resueltas_por_lectura": [
+  {
+   "anterior": "—`CU-02`, `CU-03` y `CU-04`—",
+   "nuevo": "—`CU-10002`, `CU-10003` y `CU-10004`—",
+   "ocurrencias": 1,
+   "resolucion": "la propia frase dice «tres casos de uso de `GeometriaFactory-Web`»"
+  },
+  {
+   "anterior": "los cinco mapeos de `BT-05`",
+   "nuevo": "los cinco mapeos de `BT-06005`",
+   "ocurrencias": 2,
+   "resolucion": "los mapeos de EF Core son de `GeometriaFactory-Infrastructure`"
+  },
+  {
+   "anterior": "`US-29` §3, «datos reales del servidor propio»",
+   "nuevo": "`US-00029` §3, «datos reales del servidor propio»",
+   "ocurrencias": 1,
+   "resolucion": "§6.9 de este mismo documento la cita como «`US-29` de `GeometriaFactory-Api`»"
+  },
+  {
+   "anterior": "`Api CU-03`; `Definicion-Superficie-HTTP.md` §3, puntos `A-03` y `A-05`",
+   "nuevo": "`CU-00025` y `CU-00022`; `Definicion-Superficie-HTTP.md` §3, puntos `A-03` y `A-05`",
+   "ocurrencias": 1,
+   "resolucion": "el `CU-00003` de origen se repartió: `A-03` quedó en `CU-00025` y `A-05` en `CU-00022`, y la fila nombra los dos puntos"
+  },
+  {
+   "anterior": "`Application CU-00023` §7 y `CU-11` §7",
+   "nuevo": "`Application CU-00023` §7",
+   "ocurrencias": 1,
+   "resolucion": "`CU-04011` quedó absorbido por `CU-00024`, y la fila ya nombra la capacidad de habilitación"
+  },
+  {
+   "anterior": "`Application CU-00028` §4 paso 3 y `CU-07` §4 paso 4",
+   "nuevo": "`Application CU-00028` §4 paso 3",
+   "ocurrencias": 1,
+   "resolucion": "`CU-04007` quedó absorbido por el mismo `CU-00028` que la fila ya nombra"
+  },
+  {
+   "anterior": "`Application CU-00028` FA-01 y `CU-07` FA-03; `Contracts CU-08005`",
+   "nuevo": "`Application CU-00028` FA-01; `Contracts CU-08005`",
+   "ocurrencias": 1,
+   "resolucion": "ídem"
+  },
+  {
+   "anterior": "`Application CU-00028` FA-01 y `CU-07` FA-03; `Definicion-Superficie-HTTP.md`",
+   "nuevo": "`Application CU-00028` FA-01; `Definicion-Superficie-HTTP.md`",
+   "ocurrencias": 1,
+   "resolucion": "ídem"
+  },
+  {
+   "anterior": "`Application CU-00026` §7, que declara identificador y estado; `Api CU-06` §4 paso 4",
+   "nuevo": "`CU-00026` §7, que declara identificador y estado, y §4 paso 8, que le suma la fecha de registro",
+   "ocurrencias": 1,
+   "resolucion": "el `CU-00006` de `Api` y el `CU-04005` de `Application` quedaron los dos en `CU-00026`"
+  },
+  {
+   "anterior": "`Contracts CU-08003` §4 paso 4; `Api CU-06` §4 paso 4",
+   "nuevo": "`Contracts CU-08003` §4 paso 4; `CU-00026` §4 paso 8",
+   "ocurrencias": 1,
+   "resolucion": "`A-10` y `A-11` quedaron en `CU-00026`"
+  },
+  {
+   "anterior": "puntos `A-10` a `A-14`; `Api CU-06` y `CU-00028`",
+   "nuevo": "puntos `A-10` a `A-14`; `CU-00026`, `CU-00027` y `CU-00028`",
+   "ocurrencias": 1,
+   "resolucion": "el `CU-00006` de origen se repartió: `A-10` y `A-11` en `CU-00026`, `A-12` en `CU-00027`"
+  },
+  {
+   "anterior": "`Api CU-06` §4 paso 4; `Modelo-Datos-Logico.md`",
+   "nuevo": "`CU-00026` §4 paso 8; `Modelo-Datos-Logico.md`",
+   "ocurrencias": 1,
+   "resolucion": "`A-10` quedó en `CU-00026`"
+  },
+  {
+   "anterior": "`US-29` §3, tercer criterio",
+   "nuevo": "`US-00029` §3, tercer criterio",
+   "ocurrencias": 1,
+   "resolucion": "misma historia que §6.9 cita como «`US-29` de `GeometriaFactory-Api`»"
+  },
+  {
+   "anterior": "en el sentido de `ADR-03` §2",
+   "nuevo": "en el sentido de `ADR-10003` §2",
+   "ocurrencias": 1,
+   "resolucion": "es el guardián de `GeometriaFactory-Web`, que el corpus cita como «guardián 1 de `Web ADR-00003` §2»"
+  },
+  {
+   "anterior": "la verificación en las dos direcciones de `ADR-06`",
+   "nuevo": "la verificación en las dos direcciones de `ADR-00004`",
+   "ocurrencias": 1,
+   "resolucion": "es `ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados`, el único ADR del producto que declara la verificación en las dos direcciones"
+  }
+ ]
+}

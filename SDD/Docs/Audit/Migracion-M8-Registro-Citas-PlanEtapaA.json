@@ -1,0 +1,285 @@
+{
+ "resueltas": [
+  {
+   "linea": 143,
+   "anterior": "BT-06",
+   "proyecto": "Web",
+   "nuevo": "BT-10006",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 170,
+   "anterior": "ADR-02",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06002",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 187,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 200,
+   "anterior": "RC-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "RC-06006",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 202,
+   "anterior": "BT-09",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06009",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 202,
+   "anterior": "BT-12",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06012",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 202,
+   "anterior": "BT-10",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06010",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 202,
+   "anterior": "BT-16",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06016",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 208,
+   "anterior": "BT-01",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06001",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 208,
+   "anterior": "BT-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06005",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 208,
+   "anterior": "BT-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06006",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 208,
+   "anterior": "BT-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06005",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 208,
+   "anterior": "BT-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06006",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 231,
+   "anterior": "ADR-07",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06007",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 231,
+   "anterior": "BT-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06006",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 231,
+   "anterior": "US-24",
+   "proyecto": "Infrastructure",
+   "nuevo": "US-06024",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 231,
+   "anterior": "US-25",
+   "proyecto": "Infrastructure",
+   "nuevo": "US-06025",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 232,
+   "anterior": "BT-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06005",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 239,
+   "anterior": "ADR-07",
+   "proyecto": "Api",
+   "nuevo": "ADR-00007",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 239,
+   "anterior": "US-27",
+   "proyecto": "Api",
+   "nuevo": "US-00027",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 239,
+   "anterior": "US-28",
+   "proyecto": "Api",
+   "nuevo": "US-00028",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 240,
+   "anterior": "US-29",
+   "proyecto": "Api",
+   "nuevo": "US-00029",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 308,
+   "anterior": "BT-02",
+   "proyecto": "Contracts",
+   "nuevo": "BT-08002",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 367,
+   "anterior": "BT-05",
+   "proyecto": "Api",
+   "nuevo": "BT-00005",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 414,
+   "anterior": "ADR-07",
+   "proyecto": "Visor",
+   "nuevo": "ADR-12007",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 434,
+   "anterior": "ADR-07",
+   "proyecto": "Visor",
+   "nuevo": "ADR-12007",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 479,
+   "anterior": "US-24",
+   "proyecto": "Api",
+   "nuevo": "US-00024",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 479,
+   "anterior": "US-25",
+   "proyecto": "Api",
+   "nuevo": "US-00025",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 479,
+   "anterior": "US-26",
+   "proyecto": "Api",
+   "nuevo": "US-00026",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 479,
+   "anterior": "US-29",
+   "proyecto": "Api",
+   "nuevo": "US-00029",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 599,
+   "anterior": "BT-05",
+   "proyecto": "Api",
+   "nuevo": "BT-00005",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 599,
+   "anterior": "BT-06",
+   "proyecto": "Api",
+   "nuevo": "BT-00006",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 599,
+   "anterior": "US-24",
+   "proyecto": "Api",
+   "nuevo": "US-00024",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 599,
+   "anterior": "US-25",
+   "proyecto": "Api",
+   "nuevo": "US-00025",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 599,
+   "anterior": "BT-06",
+   "proyecto": "Api",
+   "nuevo": "BT-00006",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 599,
+   "anterior": "BT-07",
+   "proyecto": "Api",
+   "nuevo": "BT-00007",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 617,
+   "anterior": "RC-01",
+   "proyecto": "Web",
+   "nuevo": "RC-10001",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 619,
+   "anterior": "BT-05",
+   "proyecto": "Visor",
+   "nuevo": "BT-12005",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 620,
+   "anterior": "BT-05",
+   "proyecto": "Visor",
+   "nuevo": "BT-12005",
+   "resolucion": "proyecto de la fila o del bloque"
+  },
+  {
+   "linea": 620,
+   "anterior": "BT-06",
+   "proyecto": "Visor",
+   "nuevo": "BT-12006",
+   "resolucion": "proyecto de la fila o del bloque"
+  }
+ ],
+ "pendientes": []
+}

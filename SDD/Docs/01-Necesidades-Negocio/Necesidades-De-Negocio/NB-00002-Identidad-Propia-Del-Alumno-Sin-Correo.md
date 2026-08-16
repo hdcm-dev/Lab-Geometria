@@ -1,0 +1,136 @@
+# NB-00002 — Identidad propia del alumno sin canal de correo
+
+| Campo | Valor |
+| --- | --- |
+| Producto | Fábrica de Geometría |
+| Documento | NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md |
+| Versión | 1.6 |
+| Estado | Aprobado |
+| Fecha | 2026-08-11 |
+| Autor | Analista de Negocio Senior (AG-01) |
+| Trazabilidad upstream | PRODUCT-INTAKE **1.13** §1 (idea y problema), §3 (promesa central: el trabajo tiene dueño), §4 (capacidades F-02, **F-04** precisada, F-05, F-03 y **F-26**), §4.1 (reglas RN-02006, **RN-02012**, **RN-02013**, **RN-02014**, **RN-02015** y **RN-02016**), §4.2 (colisión de vocabulario de `Pendiente`), §6 (flujo 1), §7 (caso límite **CL-7** reescrito), §9 (exclusión X-1 vigente y **X-2 retirada**), §17.1.P.2 · GeometriaFactory-Domain (invariante **INV-09**); `Vision-Producto.md` §1, §3, §8 (riesgo RG-06) y §9; `Alcance-Producto.md` §4.1 y §5; `Roadmap-Producto.md` §3 y §5.2 |
+| Trazabilidad downstream | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+
+---
+
+## Tabla de contenido
+
+- [1. Descripción de la necesidad](#1-descripción-de-la-necesidad)
+- [2. Ejemplo de uso desde la perspectiva del negocio](#2-ejemplo-de-uso-desde-la-perspectiva-del-negocio)
+- [3. Impacto](#3-impacto)
+- [4. Problema específico que resuelve](#4-problema-específico-que-resuelve)
+- [5. Criterios de éxito](#5-criterios-de-éxito)
+- [6. Stakeholders involucrados](#6-stakeholders-involucrados)
+- [7. Trazabilidad a CU](#7-trazabilidad-a-cu)
+- [8. Dependencias con otras NB](#8-dependencias-con-otras-nb)
+- [9. Prioridad MoSCoW](#9-prioridad-moscow)
+- [10. Control de cambios](#10-control-de-cambios)
+
+---
+
+## 1. Descripción de la necesidad
+
+El trabajo del alumno no tiene hoy dueño. La cadena actual termina en un texto que vive en un portapapeles: no queda guardado, no tiene propietario y nadie puede afirmar de quién es (PRODUCT-INTAKE §1). La promesa central del producto es que ese trabajo quede guardado, tenga dueño, tenga estado y se entregue (PRODUCT-INTAKE §3), y el dueño requiere que el alumno tenga una identidad propia dentro del laboratorio: una cuenta que le pertenezca y una credencial que sólo él conozca.
+
+La dificultad concreta es que el producto no dispone de canal de correo, por decisión declarada del Product Owner (PRODUCT-INTAKE §9, exclusión **X-1**, vigente; **X-2** lo sostuvo hasta su retiro el 2026-08-09, como se explica dos párrafos más abajo). Todo el patrón habitual de alta —enviar una contraseña provisoria, confirmar una dirección, recuperar una clave olvidada— queda descartado. La necesidad, entonces, no es «tener cuentas», sino que el alumno llegue a tener una credencial propia **sin que ninguna credencial se transporte por un canal del sistema**: el alumno se registra sin elegir contraseña, el administrador lo habilita —y el sistema produce entonces una **contraseña provisoria** que la pantalla le muestra para que se la comunique en persona—, y el alumno entra con ella y **elige la suya cambiándola** (PRODUCT-INTAKE 1.13 §4.1, **RN-02016**). La contraseña definitiva la sigue eligiendo él y el administrador no la conoce; lo que cambió es que llega a elegirla **identificado**, y no llenando un formulario anónimo con su correo.
+
+Esa forma de resolverlo tuvo, hasta el 2026-08-09, una consecuencia cara: sin correo no había canal de recuperación, y el alumno que olvidaba su contraseña sólo se recuperaba por intervención del administrador, que **daba de baja la cuenta y la volvía a dar de alta, perdiendo los trabajos** que esa cuenta tenía. El Product Owner cerró ese agujero con la capacidad **F-26**: el administrador **resetea la credencial** desde su panel, el sistema produce una contraseña **provisoria** que la pantalla le muestra para que se la comunique, y **la cuenta y todos sus trabajos se conservan** —resetear no es dar de baja—. Con eso, la exclusión X-2 quedó retirada y el caso límite CL-7 reescrito. **Lo que sigue sin haber es recuperación autónoma**: el alumno no se recupera solo, porque eso exigiría un correo que el producto no tiene; depende de un acto del docente, igual que depende de él para entrar la primera vez.
+
+Ese reseteo no debilita la premisa del circuito, y por eso encaja en esta necesidad en lugar de contradecirla. **Ninguna credencial se transporta igual que antes**: la provisoria no viaja por ningún canal, se muestra en la pantalla del docente y se dice en voz alta o en persona, del mismo modo que la habilitación se ejerce mirando una lista. **Y no se convierte en una credencial de uso**: la provisoria sólo sirve para cambiarla. Mientras no se cambie, la cuenta **se autentica pero no obtiene sesión de trabajo** y el producto la deriva al cambio de contraseña, que es lo único que puede hacer (RN-02013, INV-09). Al cambiarla elige una contraseña que **el administrador no conoce**, con lo que la propiedad central de esta necesidad —una credencial que sólo el alumno conozca— se restablece en el mismo acto.
+
+Dos precisiones que el Product Owner declaró el 2026-08-09 y que esta necesidad recoge porque cambian lo que hay que verificar. **La provisoria la produce el sistema, no la escribe el administrador** (RN-02014): tiene que ser no adivinable y no repetirse entre cuentas ni entre reseteos de la misma cuenta, y el panel no lleva campo de contraseña. Si la escribiera el docente, en la práctica terminaría siendo la misma clave para toda la comisión, y una credencial compartida es exactamente lo contrario de una identidad propia. Y **resetear no exige que la cuenta esté habilitada** (RN-02015): procede sobre `Pendiente`, `Habilitado` y `Bloqueado`, porque opera sobre la credencial y no es una transición de la máquina de estados de la cuenta, de modo que no la altera ni obliga al docente a acordarse de una secuencia.
+
+La necesidad incluye, además, que el alumno pueda cambiar su contraseña cuando quiera presentando la vigente, que es la forma que tiene de gestionar su credencial cuando sospecha que dejó de ser secreta.
+
+## 2. Ejemplo de uso desde la perspectiva del negocio
+
+Una alumna entra por primera vez al laboratorio y se registra con su correo, su nombre y su apellido. No le piden ninguna contraseña. El producto le avisa que su cuenta quedó en estado `Pendiente`, a la espera de autorización. Ese mismo día intenta ingresar y el producto le dice, con todas las letras, que su cuenta `Pendiente` todavía no fue habilitada: no le devuelve un error confuso ni la deja pensando que se equivocó de dirección. Al día siguiente el docente la habilita. Al habilitarla, el producto genera una **contraseña provisoria** y se la muestra al docente, que se la comunica. Ella vuelve a intentar ingresar y esta vez entra con la provisoria y el producto la lleva derecho a **cambiarla** por una que elija ella, sin dejarla ir a ninguna otra parte hasta que lo haga. La establece, entra y ve su panel de trabajos vacío, listo para cargar el primero. En ningún momento recibió un correo del laboratorio, ni tuvo que esperar uno.
+
+## 3. Impacto
+
+- Si se resuelve: el trabajo pasa a tener dueño, que es la condición previa a cualquier entrega, a cualquier listado propio y a cualquier revisión del docente.
+- Si se resuelve: el alumno recibe siempre una explicación de su situación —pendiente, habilitado o bloqueado— en lugar de un rechazo sin causa.
+- Si se resuelve: la ausencia de correo deja de ser una carencia y pasa a ser una propiedad del circuito, porque ninguna credencial viaja por ningún canal.
+- Si se resuelve: el olvido de contraseña deja de costar la cuenta y los trabajos, y el alumno vuelve a entrar con todo lo que había cargado, con sus estados y sus comentarios (F-26).
+- Si queda sin resolver **la parte de F-26**: el laboratorio se vuelve inutilizable para el primer alumno que olvide su contraseña, porque la única salida documentada es una baja que elimina todo su trabajo. Es el motivo por el que el Product Owner la declaró `Must Have` y por el que la fase `d` no cierra sin ella.
+- Si queda sin resolver: el producto no puede cumplir su promesa central, porque un trabajo sin dueño es exactamente el problema que se viene a resolver.
+- Si queda sin resolver: no hay forma de separar los trabajos de un alumno de los de otro, y por lo tanto tampoco de revisarlos por alumno.
+- Riesgo residual aceptado, **y de otro tamaño desde el 2026-08-09**: olvidar la contraseña ya no cuesta ni la cuenta ni los trabajos, porque el administrador la resetea (F-26). Lo que subsiste es que **no hay recuperación autónoma**: el alumno depende de que el docente esté disponible para reseteársela (`Vision-Producto.md` §8, RG-06).
+
+## 4. Problema específico que resuelve
+
+- El texto que produce el alumno no puede atribuirse hoy a nadie.
+- Sin canal de correo, el alumno no tiene forma de recibir una credencial inicial.
+- Un alumno que olvida su contraseña no tiene ninguna forma de volver a entrar, y la única salida declarada del producto —dar de baja y volver a dar de alta— le borra todos sus trabajos.
+- Una contraseña provisoria escrita por el docente termina siendo la misma para toda la comisión, y una credencial compartida no es una identidad propia.
+- Un alumno que todavía no fue autorizado no sabe si el problema es su cuenta, su clave o la herramienta.
+- No existe forma de que el alumno cambie su credencial cuando sospecha que dejó de ser secreta.
+- Una credencial que se enviara por algún canal quedaría expuesta fuera del producto.
+
+## 5. Criterios de éxito
+
+| Criterio | Métrica | Target | Plazo |
+| --- | --- | --- | --- |
+| Circuito de alta sin correo | Correos que el producto envía en todo el ciclo de registro, habilitación y primer ingreso de un alumno | 0 | Punto de control de la etapa `d`, y en cada punto de control posterior por la regla de no regresión |
+| Alta de punta a punta | Recorridos completos del guion de alta —registro, habilitación **con provisoria comunicada**, ingreso con esa provisoria, cambio obligatorio y acceso al panel— que terminan con el alumno dentro de su panel de trabajos, sobre los recorridos ejecutados en el punto de control | 1 de 1 | Punto de control de la etapa `d` |
+| Explicación al alumno no habilitado | Intentos de ingreso de una cuenta `Pendiente` que reciben aviso explícito de que la cuenta todavía no fue habilitada, sobre el total de intentos | 100 % | Punto de control de la etapa `d` |
+| Custodia de la credencial vigente | Cambios de contraseña aceptados sin que se presente la contraseña vigente | 0 | Punto de control de la etapa `c`, y verificado sobre cuentas de alumno en la etapa `d` |
+| Credencial no observable | Credenciales de sesión observables desde el navegador de la persona | 0 | Punto de control de la etapa `c` |
+| Recuperación del olvido sin pérdida | Trabajos que un alumno conserva después de que le reseteen la contraseña, sobre los 3 que tenía cargados —uno en `Borrador`, uno en `Rechazado` y uno en `Finalizado`, con sus comentarios— | 3 de 3 | Punto de control de la etapa `d` |
+| Bajas ejecutadas para recuperar una cuenta | Bajas de cuenta que el circuito exige para resolver un olvido de contraseña | 0 | Punto de control de la etapa `d` |
+| Provisoria producida por el sistema | Campos de contraseña que el panel del administrador ofrece para escribir la provisoria | 0 | Punto de control de la etapa `d` |
+| Provisoria no repetida | Reseteos consecutivos sobre la misma cuenta que producen la misma provisoria, sobre los 2 del guion de demostración | 0 de 2 | Punto de control de la etapa `d` |
+| Reseteo independiente de la situación de la cuenta | Situaciones de cuenta sobre las que el reseteo procede sin alterarlas, sobre las 3 declaradas: `Pendiente`, `Habilitado` y `Bloqueado` | 3 de 3 | Punto de control de la etapa `d` |
+| Alcance de la cuenta con provisoria | Rutas del producto, distintas del cambio de contraseña, que alcanza una cuenta que todavía no cambió su provisoria —**venga de una habilitación o de un reseteo**— | 0 | Punto de control de la etapa `d` |
+| Escrituras anónimas de contraseña | Puntos de acceso del producto que aceptan un correo y una contraseña nueva **sin credencial** | 0 | Punto de control de la etapa `d`, y en cada punto de control posterior por la regla de no regresión |
+
+Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §9 (X-1) y §4 (F-04); el segundo y el tercero, de PRODUCT-INTAKE §6 (flujo 1) y de la transición `d` a `e` de `Roadmap-Producto.md` §5.2; el cuarto, de PRODUCT-INTAKE §4 (F-05) y de la transición `c` a `d` del mismo roadmap; el quinto, de la misma transición `c` a `d`. Los **seis siguientes** derivan de la capacidad **F-26** de PRODUCT-INTAKE §4 y de sus reglas: el sexto y el séptimo de **RN-02012** —el reseteo conserva la cuenta y sus trabajos y no dispara la baja— y del caso límite **CL-7** reescrito; el octavo y el noveno de **RN-02014** —la provisoria la produce el sistema, no es adivinable y no se repite—; el décimo de **RN-02015** —resetear no exige cuenta habilitada y no altera su situación—; y el undécimo de **RN-02013** e **INV-09** —la cuenta con la contraseña reseteada se autentica y no obtiene sesión de trabajo—. **El duodécimo deriva de RN-02016** —no existe ninguna escritura anónima **de credencial**: toda operación que fija o cambia una contraseña ocurre con la cuenta ya autenticada, y el **registro** de la cuenta sigue siendo anónimo por diseño (`PRODUCT-INTAKE` **1.15** §4.1)— y es el que hace verificable la promesa central de esta necesidad desde el lado que faltaba: hasta el intake 1.12 el propio circuito de alta tenía un punto que aceptaba un correo y una contraseña nueva sin credencial. Los siete se verifican en el punto de control de la etapa `d`, que es donde `Roadmap-Producto.md` §3 ubica F-26 y donde su transición `d` a `e` los recoge como criterios bloqueantes. Ninguno depende de la asunción A-2 del intake.
+
+## 6. Stakeholders involucrados
+
+| Rol | Nivel | Qué pide o aporta |
+| --- | --- | --- |
+| Docente de Programación 2 (TUP), responsable de la cátedra y de la Actividad 1, en su papel de Product Owner | Propietario | Decidió el circuito sin correo y aceptó por escrito su consecuencia sobre la recuperación de contraseña; valida el punto de control de la etapa `d` |
+| Cátedra de Programación 2, como dueño del problema | Propietario | Necesita que el trabajo entregado sea atribuible a un alumno concreto de la comisión |
+| El mismo docente, en su papel de equipo de desarrollo (una persona, asistida por un agente de IA) | Implementador | Construye el circuito de identidad y lo demuestra de punta a punta en el punto de control |
+| Alumno de la comisión | Beneficiario | Obtiene una cuenta propia y una credencial que elige él mismo, y sabe siempre en qué situación está su cuenta |
+| El mismo docente, en su papel de administrador del laboratorio | Beneficiario y operador | Es quien habilita la cuenta y quien **resetea la credencial** del alumno que olvidó su contraseña, desde el mismo panel y sin dar de baja nada. Le comunica al alumno la provisoria que el producto le muestra, y no llega a conocer la contraseña que el alumno elige después |
+
+## 7. Trazabilidad a CU
+
+| NB | Casos de uso emitidos | Estado |
+| --- | --- | --- |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` registrar una cuenta de alumno con correo, nombre y apellido | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` elegir la contraseña propia en el primer ingreso, con la provisoria como vigente | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` iniciar y cerrar sesión | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` cambiar la contraseña exigiendo la vigente | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` resetear la contraseña de un alumno desde el panel del administrador, con la provisoria que produce el sistema | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` cambiar la contraseña provisoria en el ingreso siguiente al reseteo, que es lo único que la cuenta puede hacer hasta cambiarla | Emitidos |
+
+## 8. Dependencias con otras NB
+
+- Depende de: NB-00001, porque la habilitación de una cuenta de alumno la ejerce el administrador, que existe recién cuando NB-00001 está resuelta.
+- Es prerequisito de: NB-00003, porque un trabajo sólo tiene dueño si el alumno tiene identidad propia.
+
+## 9. Prioridad MoSCoW
+
+**Must Have.** Se deriva de PRODUCT-INTAKE §4: las cuatro capacidades que esta NB agrupa —F-02, F-04, F-05 y **F-26**— están declaradas Must Have, todas con la misma prioridad, de modo que no hay agregación de prioridades distintas.
+
+**Por qué F-26 encaja en esta necesidad y no en NB-00001 ni en una propia.** Los criterios de partición de esta categoría son los de `Necesidades-Negocio.md` §3.2: se parte lo que apunta a **métricas distintas con públicos distintos**, y se fusiona lo que comparte dolor central y se distingue sólo por el ejemplo. F-26 comparte con F-02, F-04 y F-05 el dolor central de esta NB —que el alumno tenga una credencial propia sin que ninguna credencial se transporte— y su beneficiario, que es el alumno; no apunta a ninguna métrica de negocio distinta. La duda razonable es NB-00001, porque **la operación la ejerce el administrador y vive en su panel**, que es la superficie de F-03. Se descarta por el criterio que la propia fuente declara: NB-00001 articula el **control de admisión**, o sea quién está adentro del laboratorio y quién deja de estar, y el reseteo **no es un acto de admisión**. El intake lo dice con todas las letras en **RN-02015**: resetear opera sobre la credencial y **no es una transición de la máquina de estados de la cuenta**, no la habilita, no la bloquea y no la altera; de hecho procede sobre las tres situaciones por igual. Lo que resuelve es que **el alumno recupere su identidad dentro del laboratorio**, que es exactamente el enunciado de esta NB, y por eso el criterio de éxito que le corresponde se mide sobre lo que el alumno conserva y no sobre lo que el docente controla. Compartir superficie con NB-00001 —el mismo panel— no es motivo de fusión: `Necesidades-Negocio.md` §3.2 ya resolvió el caso equivalente entre NB-00007 y NB-00009, donde compartir superficie y público operador quedó registrado como **dependencia y no como fusión**. Una NB propia tampoco se justifica: no hay dolor independiente, no hay público nuevo y no hay métrica nueva, que son las tres condiciones que esta categoría exige para partir.
+
+## 10. Control de cambios
+
+> **Las citas `CU-XX` de las filas de abajo son a la previsión de casos de uso a nivel producto que la
+> migración a SDD 8.x retiró.** Se conservan con su número por `Root-Rules.md` §9.3, y el motivo por el
+> que no admiten reescritura está en `Necesidades-Negocio.md` §7.
+
+
+| Versión | Fecha | Cambios |
+| --- | --- | --- |
+| 1.6 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
+| 1.0 | 2026-08-08 | Emisión inicial. Articula la necesidad de identidad propia del alumno sin canal de correo a partir de las capacidades F-02, F-04 y F-05 del intake, con cinco criterios de éxito trazados a su sección de origen y cuatro casos de uso previstos. |
+| 1.1 | 2026-08-08 | Califica la forma desnuda de `Pendiente` en §2 —dos ocurrencias— y en el tercer criterio de §5 —dos ocurrencias—, según la entrada de forma calificada obligatoria que `Vision-Producto.md` §9.2 incorporó al declarar el modelo de estados del trabajo de `PRODUCT-INTAKE` 1.3: el término nombra a la vez un estado de cuenta y uno de trabajo, y esta NB usa el primero. La cabecera suma RN-02006 y §4.2 como origen. **Sube minor y archiva el estado anterior** porque el documento ya es citado como insumo por otras categorías (`Master-Prompt.md` §5). Ningún criterio, target, prioridad ni trazabilidad cambia: es una calificación léxica por ocurrencia. |
+| 1.2 | 2026-08-09 | **Cierra la parte del hallazgo `F26-02` que alcanza a este archivo**, del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. La auditoría encontró que esta NB **enseñaba el procedimiento destructivo como el único** en tres lugares —§1, §3 y §6—, cuando el Product Owner ya lo había reemplazado por la capacidad **F-26**, y que ninguna necesidad de negocio articulaba esa capacidad `Must Have`. **Sube minor y archiva el estado anterior** porque el documento ya es citado como insumo por otras categorías (`Master-Prompt.md` §5). **§1**: el párrafo que declaraba la baja y el alta como consecuencia aceptada del circuito sin correo se reescribe sobre F-26 —reseteo desde el panel, provisoria producida por el sistema, cuenta y trabajos conservados, X-2 retirada y CL-7 reescrito—, y se agregan los dos párrafos que declaran por qué el reseteo no debilita la premisa del circuito y las dos precisiones del Product Owner del 2026-08-09, **RN-02014** y **RN-02015**. **§3**: entran el impacto de resolver F-26 y el de no resolverla, y el riesgo residual pasa de «olvidar la contraseña cuesta la cuenta y sus trabajos» a lo que efectivamente subsiste, que es la ausencia de recuperación autónoma. **§4**: entran los dos problemas específicos que F-26 resuelve. **§5**: los criterios pasan de cinco a **once**, con seis criterios nuevos derivados de F-26 y de sus reglas RN-02012, RN-02013, RN-02014, RN-02015 e INV-09, todos con plazo en el punto de control de la etapa `d`, que es donde `Roadmap-Producto.md` §3 ubica la capacidad. **§6**: el administrador deja de resolver el olvido «dando de baja y volviendo a dar de alta» y pasa a resetear. **§7**: se prevén **CU-29** y **CU-30**. **§9**: la NB agrupa cuatro capacidades y se declara el fundamento de por qué F-26 encaja acá por fusión y no en NB-00001 ni en una NB propia, aplicando los criterios de partición de `Necesidades-Negocio.md` §3.2. La prioridad de la NB no cambia: ya era Must Have. |
+| 1.3 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-02016) y la precisión de F-04**, decisión del Product Owner sobre la identificación de la cuenta en el primer ingreso. **§1**: el párrafo que describía el circuito sin correo decía que el alumno «establece él mismo» su contraseña en su primer ingreso; se reescribe sobre la **contraseña provisoria que produce la habilitación**, con la precisión de que el alumno **sigue eligiendo** la suya y lo que cambió es que llega a elegirla identificado, y de que lo que no existe es un canal **del sistema** que transporte una contraseña. **§5**: los criterios pasan de once a **doce**, con el criterio nuevo de **cero escrituras anónimas de contraseña**, medido en el punto de control de `d` y en todos los posteriores por no regresión; el criterio de alta de punta a punta se rehace sobre el circuito con provisoria; el de alcance de la cuenta con provisoria se amplía a los **dos** orígenes de la marca; y el párrafo de origen recoge el duodécimo. **§7**: `CU-05` previsto se reescribe. **La necesidad, su dolor, su beneficiario, su prioridad y sus cuatro capacidades no cambian.** Sube minor y archiva. |
+| 1.4 | 2026-08-10 | **Cierra el hallazgo `C-06` (P1) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0 en una ocurrencia que el informe no registra, contra `PRODUCT-INTAKE` 1.14.** **§2** fundaba la ausencia de canal de correo en «las exclusiones **X-1 y X-2**» del intake §9, donde la fila de X-2 está **tachada** y rotulada «Exclusión retirada el 2026-08-09». Es la misma cita vencida que el informe levanta en `GeometriaFactory-Web` `CU-10001`, y acá convivía con el párrafo de dos más abajo, que **ya narra correctamente** el retiro y la entrada de F-26. Pasa a citar **X-1** como vigente y a declarar X-2 como retirada, con la remisión al párrafo que lo explica; la cabecera ya declaraba «§9 (exclusión X-1 vigente y X-2 retirada)» y no cambia. **Ningún criterio de éxito, ninguna capacidad absorbida y ninguna dependencia cambia.** Sube minor. |
+| 1.5 | 2026-08-10 | **Absorbe la corrección de `PRODUCT-INTAKE` 1.15 §4.1 (RN-02016)**, que precisa que lo que la regla elimina es la escritura anónima **de credencial** y no toda escritura anónima: el **registro de cuenta** de RF-03 es anónimo por diseño y debe seguir siéndolo, porque es como el alumno entra al laboratorio. **§5**: el párrafo de origen de los criterios decía que RN-02016 deriva de que «no existe ninguna escritura anónima en el sistema», afirmación demasiado ancha que la 1.13 había enunciado y que se propagó desde ahí; pasa a decir «de credencial», con la constancia de que el registro sigue siendo anónimo. **El duodécimo criterio de éxito no cambia**: ya estaba acotado a «escrituras anónimas **de contraseña**» y por eso era correcto. Ninguna otra parte del documento cambia. Sube minor. |

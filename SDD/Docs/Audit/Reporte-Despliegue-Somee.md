@@ -166,7 +166,7 @@ Registrado por lo que costó, no por lo que ocupa escrito.
 
 | Contenido | Documento | Sección |
 |---|---|---|
-| El mecanismo del hosting, el modo de falla del 500 y la dependencia del panel | [`../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md`](../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md) **1.2** | §2.1 |
+| El mecanismo del hosting, el modo de falla del 500 y la dependencia del panel | [`../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md) **1.2** | §2.1 |
 | El procedimiento de respaldo previo y espejado | La misma | §2.2 |
 | Las mediciones sobre el hosting real y la corrección de `PT-01.b` | [`../00-Contexto/Compatibilidad-Plataformas.md`](../00-Contexto/Compatibilidad-Plataformas.md) **1.4** | §2.6 |
 | La **causa** de la ausencia de WebSocket —característica de plan—, qué la habilitaría, la reversión de la línea de configuración y el entorno del sitio verificado en el panel | La misma, **1.6** | §2.6.2 |

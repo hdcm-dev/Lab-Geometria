@@ -219,7 +219,7 @@ Se contrastó la tabla de `Especificacion-Funcional.md` §7.4 con el paso o fluj
 | --- | --- |
 | CU de Domain sin orquestar | **Ninguno.** Los once quedan cubiertos: Dom CU-01→App CU-01; Dom CU-02→App CU-02; Dom CU-03 y CU-04→App CU-03; Dom CU-05→App CU-04; Dom CU-06, CU-07 y CU-08→App CU-05; Dom CU-09→App CU-04, CU-05, CU-06 y CU-09; Dom CU-10→App CU-08; Dom CU-11→App CU-07, CU-08 y CU-09 |
 | CU de Application sin NB upstream | **Ninguno.** Los nueve trazan a al menos una necesidad de negocio (§7.2) |
-| NB sin CU en este proyecto de código | **NB-08**, declarada como alerta explícita con su motivo y su lugar de cobertura. Es el tratamiento correcto, no un silencio |
+| NB sin CU en este proyecto de código | **NB-00008**, declarada como alerta explícita con su motivo y su lugar de cobertura. Es el tratamiento correcto, no un silencio |
 
 ### 5.3 Fidelidad de lo que Application afirma sobre el dominio
 
