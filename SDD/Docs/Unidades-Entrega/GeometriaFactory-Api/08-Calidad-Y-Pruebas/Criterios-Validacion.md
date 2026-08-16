@@ -149,7 +149,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 ### 3.2 `GeometriaFactory-Domain`
 
-Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8. Los dos primeros llevan su rótulo **[ASUNCIÓN]** porque así vienen del intake y **no son compromisos** hasta que el Product Owner los confirme.
+Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8. Los dos primeros llevan su rótulo **[ASUNCIÓN]** porque así vienen del intake y **no son compromisos** hasta que el Product Owner los confirme.
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
@@ -166,7 +166,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 ### 3.3 `GeometriaFactory-Application`
 
-Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §8. Los dos primeros llevan su rótulo **[ASUNCIÓN]** porque así vienen del intake y **no son compromisos** hasta que el Product Owner los confirme.
+Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8. Los dos primeros llevan su rótulo **[ASUNCIÓN]** porque así vienen del intake y **no son compromisos** hasta que el Product Owner los confirme.
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
@@ -186,7 +186,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 ### 3.4 `GeometriaFactory-Infrastructure`
 
-Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §8. Los tres primeros llevan su rótulo **[ASUNCIÓN]** porque así vienen del intake.
+Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8. Los tres primeros llevan su rótulo **[ASUNCIÓN]** porque así vienen del intake.
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |

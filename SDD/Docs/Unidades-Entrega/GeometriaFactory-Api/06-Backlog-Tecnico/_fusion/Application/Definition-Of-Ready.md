@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Scrum Master + Backlog Curator (AG-06)
-**Trazabilidad upstream:** [`Product-Backlog.md`](Product-Backlog.md) 1.0 §5; [`Backlog-Tecnico.md`](Backlog-Tecnico.md) 1.0 §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) 1.7 §3, §4 y §6; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md) (las **36** condiciones); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §8 y §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) 1.5 §5.1
+**Trazabilidad upstream:** [`Product-Backlog.md`](Product-Backlog.md) 1.0 §5; [`Backlog-Tecnico.md`](Backlog-Tecnico.md) 1.0 §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.7 §3, §4 y §6; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md) (las **36** condiciones); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §8 y §9; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) 1.5 §5.1
 **Trazabilidad downstream:** `07-Plan-Sprint` de GeometriaFactory-Application
 
 ---
@@ -27,10 +27,10 @@
 
 Siete criterios, todos respondibles con sí o no. Los tres últimos son propios de este proyecto de código.
 
-1. **Traza a un caso de uso.** La historia declara al menos un `CU-XX` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §5.
+1. **Traza a un caso de uso.** La historia declara al menos un `CU-XX` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §5.
 2. **Declara su necesidad de negocio y su etapa del producto**, de las que [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) §2.1 enumera.
 3. **Tiene criterios de aceptación en Given/When/Then, con al menos dos escenarios**, uno de camino feliz y uno de borde.
-4. **Declara el componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1 que la sostiene** y los **puertos** que consume, de los cuatro de `02` §3.
+4. **Declara el componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 que la sostiene** y los **puertos** que consume, de los cuatro de `02` §3.
 5. **Declara cuál de las cuatro comprobaciones de `02` §4 la alcanza, o declara que ninguna la alcanza y por qué.** Una historia que no diga nada de la cuarta comprobación **no está lista**: es el camino por el que `INV-09` se pierde, y `Domain ADR-04005` §6 ya declaró que el dominio no puede impedirlo.
 6. **Toda condición de rechazo que la historia produce existe en el catálogo de las 36** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md). Una historia que necesite una condición nueva **no está lista**: el catálogo es cerrado y se compara en las dos direcciones.
 7. **Se puede verificar con dobles de los cuatro puertos, sin base de datos y sin frontera de proceso.** Si no se puede, o la historia está mal ubicada o algún componente está consultando por su cuenta, que es el primer riesgo de `05` §9.

@@ -31,7 +31,7 @@
 Acá se declaran únicamente los términos que **esta** categoría acuña para **este** proyecto de código, y que aparecen en más de uno de sus artefactos. Todo lo demás se **referencia** en §4:
 
 - `00-Contexto/Vision-Producto.md` §9 es el **glosario raíz de la cadena**.
-- [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Glosario-Funcional.md) declara lo que la categoría 02 acuña para este proyecto de código, incluidos los cuatro puertos, las dos verificaciones, el motivo, el doble y la unidad de trabajo.
+- [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) declara lo que la categoría 02 acuña para este proyecto de código, incluidos los cuatro puertos, las dos verificaciones, el motivo, el doble y la unidad de trabajo.
 - El glosario funcional de `GeometriaFactory-Domain` declara el vocabulario de la capa de la que este proyecto de código depende.
 
 Ninguna entrada de §2 pisa a ninguna de las tres fuentes. La regla de no duplicación es explícita: si un término ya está declarado con la misma semántica, se referencia; lo único que se acuña acá es el vocabulario de la **superficie pública vista por quien interviene** y del **recorrido de integración**.
@@ -123,7 +123,7 @@ Los siguientes términos aparecen en los artefactos de esta sección con la mism
 
 ### 4.2 Del glosario funcional de 02 de este proyecto de código
 
-Todos declarados en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Glosario-Funcional.md) §2 y §3. **Esta sección los usa sin excepción con la misma semántica y no redefine ninguno**, ni siquiera cuando le agrega un nombre para el resultado de una comprobación, como en las tres negativas de §2.
+Todos declarados en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) §2 y §3. **Esta sección los usa sin excepción con la misma semántica y no redefine ninguno**, ni siquiera cuando le agrega un nombre para el resultado de una comprobación, como en las tres negativas de §2.
 
 | Término | Qué designa, en una línea |
 | --- | --- |

@@ -175,7 +175,7 @@ Los cuatro modos de documentación, con el orden en que conviene visitarlos desp
 | --- | --- | --- |
 | Tutorial | Esta guía | Es la que se acaba de recorrer. No hay otra |
 | How-to | [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), los trece contratos de uso | Cuando hay que invocar una operación concreta y saber qué resolver antes |
-| Reference | [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) para entidades y transiciones; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones de error; [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Glosario-Funcional.md) para el vocabulario | Cuando hace falta un dato puntual |
+| Reference | [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) para entidades y transiciones; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones de error; [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) para el vocabulario | Cuando hace falta un dato puntual |
 | Explanation | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.2 y §1.3; `Definicion-Modelo-De-Dominio.md` §4, §6 y §7; la §7 de esta guía | Cuando la pregunta es «por qué está así» |
 
 Punto de entrada recomendado de la sección de especificación funcional: su `README.md` propone un orden de lectura de ocho pasos que este onboarding no duplica.

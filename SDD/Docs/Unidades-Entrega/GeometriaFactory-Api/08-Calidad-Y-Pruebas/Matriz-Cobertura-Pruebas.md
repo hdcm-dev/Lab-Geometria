@@ -106,7 +106,7 @@ Doce filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificaci
 
 ### 2.2 `GeometriaFactory-Domain`
 
-Trece filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) §3. Ninguna se agrupa.
+Trece filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3. Ninguna se agrupa.
 
 | CU | Criterio Given-When-Then principal | Test | Tipo | Estado |
 | --- | --- | --- | --- | --- |
@@ -139,7 +139,7 @@ Trece filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificac
 
 ### 2.3 `GeometriaFactory-Application`
 
-Once filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §5. Ninguna se agrupa.
+Once filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5. Ninguna se agrupa.
 
 | CU | Criterio Given-When-Then principal | Tests | Historias cubiertas | Estado |
 | --- | --- | --- | --- | --- |
@@ -169,7 +169,7 @@ Once filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificaci
 
 ### 2.4 `GeometriaFactory-Infrastructure`
 
-Diez filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Infrastructure/Especificacion-Funcional.md) §5. Ninguna se agrupa.
+Diez filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5. Ninguna se agrupa.
 
 | CU | Criterio Given-When-Then principal | Tests | Historias cubiertas | Estado |
 | --- | --- | --- | --- | --- |
@@ -220,7 +220,7 @@ Diecisiete filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-
 
 ### 3.2 `GeometriaFactory-Domain`
 
-Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8.
+Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
@@ -237,7 +237,7 @@ Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyec
 
 ### 3.3 `GeometriaFactory-Application`
 
-Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §8.
+Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
@@ -257,7 +257,7 @@ Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proye
 
 ### 3.4 `GeometriaFactory-Infrastructure`
 
-Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §8.
+Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
@@ -313,7 +313,7 @@ Dieciséis filas, una por regla. El tramo de cada una es el que `05` §10.2 le a
 
 ### 4.2 `GeometriaFactory-Domain`
 
-Dieciséis filas, una por regla de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) §4. Ninguna se agrupa. La columna de invariante es la que esa sección le asigna a cada regla.
+Dieciséis filas, una por regla de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §4. Ninguna se agrupa. La columna de invariante es la que esa sección le asigna a cada regla.
 
 | RN | Invariante | Tests que la verifican | Tipo | Estado |
 | --- | --- | --- | --- | --- |
@@ -340,7 +340,7 @@ Dieciséis filas, una por regla de [`../02-Especificacion-Funcional/Especificaci
 
 ### 4.3 `GeometriaFactory-Application`
 
-Dieciséis filas, una por regla. La columna de tramo es la que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §6 y [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §10.2 le asignan a cada una **en esta capa**; esta matriz la refleja y no la redefine. Las reglas se enuncian en `GeometriaFactory-Domain` y acá se referencian.
+Dieciséis filas, una por regla. La columna de tramo es la que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 y [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.2 le asignan a cada una **en esta capa**; esta matriz la refleja y no la redefine. Las reglas se enuncian en `GeometriaFactory-Domain` y acá se referencian.
 
 | RN | Tramo en esta capa | Tests que lo verifican | Estado |
 | --- | --- | --- | --- |
@@ -367,7 +367,7 @@ Dieciséis filas, una por regla. La columna de tramo es la que [`../02-Especific
 
 ### 4.4 `GeometriaFactory-Infrastructure`
 
-Dieciséis filas, una por regla. El tramo de cada una es el que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Infrastructure/Especificacion-Funcional.md) §6 y `05` §10.2 le asignan **en esta capa**; esta matriz lo refleja y no lo redefine. Las reglas se enuncian en `GeometriaFactory-Domain`.
+Dieciséis filas, una por regla. El tramo de cada una es el que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 y `05` §10.2 le asignan **en esta capa**; esta matriz lo refleja y no lo redefine. Las reglas se enuncian en `GeometriaFactory-Domain`.
 
 | RN | Tramo en esta capa | Tests | Estado |
 | --- | --- | --- | --- |
@@ -611,7 +611,7 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 
 ### 9.1 `GeometriaFactory-Application`
 
-Cuatro filas, una por comprobación de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §4. Es la tabla que el NFR de ejercicio de las cuatro comprobaciones recorre.
+Cuatro filas, una por comprobación de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §4. Es la tabla que el NFR de ejercicio de las cuatro comprobaciones recorre.
 
 | Comprobación | Motivo que emite al fallar | Test de su negativa | Sin base de datos | Estado |
 | --- | --- | --- | --- | --- |

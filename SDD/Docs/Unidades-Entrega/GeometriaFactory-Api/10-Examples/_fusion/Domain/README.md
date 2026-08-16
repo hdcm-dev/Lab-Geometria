@@ -70,7 +70,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 - **Trazabilidad obligatoria** en la §8 de cada markdown, con al menos una fila por caso de uso, regla, ADR o NFR.
 - **Criterio de aceptación evaluable por una máquina**: exit code más líneas exactas de salida. Ninguno está redactado como prosa.
 - **Los datos son reales.** Los escenarios del `PRODUCT-INTAKE` §20 se transcriben sin modificación y no se sustituyen por datos sintéticos. **Los archivos de escenario llevan extensión `.txt` y no `.json`**, que es la convención de los siete proyectos de código del producto: el texto de `E-2` **no es JSON estrictamente válido** —trae dos comas finales— y nombrar `.json` a un archivo de escenario invita a que una herramienta lo reformatee al abrirlo. En este proyecto de código `E-2` no está entre los seis que el sample 02 usa, de modo que el riesgo no se materializa; la convención se sigue igual, porque una carpeta de escenarios con dos extensiones distintas según el proyecto de código es la clase de detalle que después nadie recuerda por qué está.
-- **Los samples no acuñan vocabulario.** Todo término que usan está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Glosario-Funcional.md).
+- **Los samples no acuñan vocabulario.** Todo término que usan está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md).
 
 ## 5. Estructura de `/samples` y su desvío declarado
 
@@ -105,7 +105,7 @@ De modo que **la fuente vinculante de la estructura de `/samples/domain/` es §1
 
 ## 7. Vínculo con 05 y con 11
 
-Los tres samples respetan la superficie pública que declara [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) y no invocan componentes internos: los **cinco** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §3.1 son internos y ninguno se expone por separado.
+Los tres samples respetan la superficie pública que declara [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) y no invocan componentes internos: los **cinco** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 son internos y ninguno se expone por separado.
 
 **`11-Documentacion` todavía no está emitida** para este proyecto de código. Cuando lo esté, referencia estos samples y los contextualiza **sin duplicar su código**, que es la división que `Rules-Examples.md` §0 fija: 10 demuestra con código ejecutable y verificable, 11 explica, referencia y enlaza.
 

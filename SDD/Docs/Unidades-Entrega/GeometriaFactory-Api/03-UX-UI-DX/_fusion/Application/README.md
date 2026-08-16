@@ -55,7 +55,7 @@ No hay carpeta `_legacy/`: esta categoría nunca se había emitido para este pro
 4. **[`Glosario-UX.md`](Glosario-UX.md)** — conviene tenerlo a mano desde el principio si el lector viene de otra categoría, sobre todo por la regla de que «error» a secas no se escribe acá y por la polisemia de «repositorio», que 02 ya había declarado.
 5. **[`DX-Developer-Experience.md`](DX-Developer-Experience.md) §4 a §7** — Diátaxis, métricas y retroalimentación, que son las decisiones de mantenimiento de la sección.
 
-La sección aguas arriba, [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), tiene su propio orden de lectura de cinco pasos en su [`README.md`](../../../02-Especificacion-Funcional/_fusion/Application/README.md), y esta sección no lo duplica: lo referencia. Su recomendación vale también acá: **sin §3 y §4 de `Especificacion-Funcional.md`, los once casos de uso se leen mal.**
+La sección aguas arriba, [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), tiene su propio orden de lectura de cinco pasos en su [`README.md`](../../../02-Especificacion-Funcional/README.md), y esta sección no lo duplica: lo referencia. Su recomendación vale también acá: **sin §3 y §4 de `Especificacion-Funcional.md`, los once casos de uso se leen mal.**
 
 ## 4. Artefactos omitidos y su motivo
 

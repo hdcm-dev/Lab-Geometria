@@ -51,7 +51,7 @@ Prerrequisitos:
 
 Conocimiento previo que **no** se supone: el estilo de casos de uso con inversión de dependencias. Es lo que la §7 de esta guía enseña, y es lo que hay que entender antes de tocar nada, porque quien no lo entienda va a intentar consultar datos desde acá.
 
-Vocabulario mínimo para no perderse en la primera media hora. Los términos están definidos en `00-Contexto/Vision-Producto.md` §9, que es el glosario raíz, en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Glosario-Funcional.md) y en [`Glosario-UX.md`](Glosario-UX.md); acá sólo se enumeran para que el lector sepa qué buscar: puerto, doble, motivo, unidad de trabajo, alcance de consulta, verificación de pertenencia, verificación de facultad, camino de alta, metadato de orquestación, cantidad de figuras del conjunto raíz, trabajo, pieza, observación, advertencia, error de validación, texto original, desenlace y comentario.
+Vocabulario mínimo para no perderse en la primera media hora. Los términos están definidos en `00-Contexto/Vision-Producto.md` §9, que es el glosario raíz, en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) y en [`Glosario-UX.md`](Glosario-UX.md); acá sólo se enumeran para que el lector sepa qué buscar: puerto, doble, motivo, unidad de trabajo, alcance de consulta, verificación de pertenencia, verificación de facultad, camino de alta, metadato de orquestación, cantidad de figuras del conjunto raíz, trabajo, pieza, observación, advertencia, error de validación, texto original, desenlace y comentario.
 
 Tres convenciones que conviene conocer desde el primer minuto porque se cruzan en cada documento:
 
@@ -194,10 +194,10 @@ Los cuatro modos de documentación, con el orden en que conviene visitarlos desp
 | --- | --- | --- |
 | Tutorial | Esta guía | Es la que se acaba de recorrer. No hay otra |
 | How-to | [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), los once contratos de uso | Cuando hay que invocar una operación concreta y saber qué resolver antes |
-| Reference | [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §3 y §4 para los puertos y las comprobaciones; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones de error; [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Glosario-Funcional.md) para el vocabulario | Cuando hace falta un dato puntual |
+| Reference | [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 y §4 para los puertos y las comprobaciones; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones de error; [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) para el vocabulario | Cuando hace falta un dato puntual |
 | Explanation | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.2, §1.3 y §1.4; `Especificacion-Funcional.md` §1, §4 y §8; la §7 de esta guía | Cuando la pregunta es «por qué está así» |
 
-Punto de entrada recomendado de la sección de especificación funcional: su [`README.md`](../../../02-Especificacion-Funcional/_fusion/Application/README.md) propone un orden de lectura que este onboarding no duplica. Y para el lector que llega desde el dominio, la tabla de §7.4 del índice de 02 dice qué caso de uso de `GeometriaFactory-Domain` orquesta cada uno de los once de acá.
+Punto de entrada recomendado de la sección de especificación funcional: su [`README.md`](../../../02-Especificacion-Funcional/README.md) propone un orden de lectura que este onboarding no duplica. Y para el lector que llega desde el dominio, la tabla de §7.4 del índice de 02 dice qué caso de uso de `GeometriaFactory-Domain` orquesta cada uno de los once de acá.
 
 ## 6. Control de cambios
 

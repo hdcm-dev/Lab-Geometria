@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **once** casos de uso; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1, los **ocho** componentes, y §3.4, los **cuatro** puertos; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Contratos-Abstractions.md); [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta y dos** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md), los **treinta y un** casos de prueba; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **once** casos de uso; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, los **ocho** componentes, y §3.4, los **cuatro** puertos; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md); [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta y dos** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md), los **treinta y un** casos de prueba; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma las tres sondas `VER-XX`; `11-Documentacion` cuando se emita, que referencia estos samples sin duplicar su código
 
 ---
@@ -74,7 +74,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 - **Trazabilidad obligatoria** en la §8 de cada markdown, con al menos una fila por caso de uso, regla, ADR o NFR.
 - **Criterio de aceptación evaluable por una máquina**: exit code más líneas exactas de salida. Ninguno está redactado como prosa.
 - **Los datos son reales.** Los resultados de interpretación de los escenarios del `PRODUCT-INTAKE` §20 se transcriben de la sección «qué verificar» del escenario correspondiente y no se sustituyen por datos sintéticos. Los datos de identidad y de orquestación que ningún escenario da —un correo, un nombre, un identificador, un momento— son valores evidentemente ficticios y se declaran como tales, que es la regla de [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6.
-- **Los samples no acuñan vocabulario ni condiciones.** Todo término está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Glosario-Funcional.md), y las condiciones salen del catálogo cerrado de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md).
+- **Los samples no acuñan vocabulario ni condiciones.** Todo término está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md), y las condiciones salen del catálogo cerrado de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md).
 
 ## 5. Estructura de `/samples` y su desvío declarado
 
@@ -118,7 +118,7 @@ Es decir: §16.1 **adoptó** la conclusión de esta sección y con los mismos do
 
 ## 8. Vínculo con 05 y con 11
 
-Los tres samples consumen la superficie pública que declara [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Contratos-Abstractions.md) y no invocan componentes internos: los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1 son internos y ninguno se expone por separado. Los **cuatro** puertos se satisfacen con dobles, que es lo que [`ADR-04002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) hace posible.
+Los tres samples consumen la superficie pública que declara [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) y no invocan componentes internos: los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 son internos y ninguno se expone por separado. Los **cuatro** puertos se satisfacen con dobles, que es lo que [`ADR-04002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) hace posible.
 
 **`11-Documentacion` todavía no está emitida** para este proyecto de código. Cuando lo esté, referencia estos samples y los contextualiza **sin duplicar su código**, que es la división que `Rules-Examples.md` §0 fija: 10 demuestra con código ejecutable y verificable, 11 explica, referencia y enlaza.
 

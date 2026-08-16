@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.0
+**Versión:** 3.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
 **Trazabilidad upstream:** [`Especificacion-Funcional.md`](Especificacion-Funcional.md) (índice maestro de esta categoría); `01-Necesidades-Negocio/Necesidades-Negocio.md`; `00-Contexto/Vision-Producto.md`; y las categorías 02 de `GeometriaFactory-Contracts`, `GeometriaFactory-Application` e `GeometriaFactory-Infrastructure`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `10-Examples` de GeometriaFactory-Api
@@ -22,6 +22,26 @@
 - [6. Control de cambios](#6-control-de-cambios)
 
 ---
+
+
+## 0.1 El índice y el vocabulario también se consolidaron
+
+**La consolidación de casos de uso de agosto dejó esta categoría a medias**, y el 2026-08-16 se
+terminó: [`Especificacion-Funcional.md`](Especificacion-Funcional.md) y
+[`Glosario-Funcional.md`](Glosario-Funcional.md) pasan a **2.0**, absorbiendo los homónimos de las
+tres capas.
+
+El índice maestro tenía **ocho secciones comunes a las cuatro capas y ocho propias de una sola**, y
+las ocho propias completan lo que ninguna declaraba entera: el catálogo de reglas de negocio venía
+del dominio, los puertos y la autorización por pertenencia de la aplicación, los mecanismos provistos
+de la infraestructura, y las responsabilidades y la frontera de decisión del host.
+
+**El inventario real de la categoría hoy:** 9 casos de uso consolidados, **16 reglas de negocio**,
+el modelo de datos con sus reglas conceptuales, y los tres documentos de concepto central —superficie
+HTTP, modelo de dominio y contrato del validador—.
+
+**La carpeta `_fusion/` de esta categoría se retira**: la fusión terminó acá. Los snapshots
+`_legacy/` que viajaban dentro de ella acompañan a sus documentos en el archivo.
 
 ## 1. Qué hay en esta carpeta
 
@@ -100,3 +120,4 @@ y en `09-Devops`. `CU-00012` **es un sample**, no un caso de uso, y vive en
 | 1.4 | 2026-08-12 | **Cierra el residuo vivo de `P2-1`** de `SDD/Docs/Audit/H-Final-Consolidado-r1.md` §4, reportado también como `N-01` en `Coherencia-Corpus-r2.md`. §5 decía «**quince** de ellas no lo están» sobre las quince rutas, cuando son **catorce**: la del canje de credenciales la declara una fuente. El mismo archivo ya decía lo correcto en su §7, de modo que se contradecía consigo mismo. Es la última de las dos líneas del hallazgo; la otra se corrigió el 2026-08-11 en el `README.md` de `03-UX-UI-DX`. Ninguna decisión, contrato ni caso de prueba cambia. **Autor:** Orquestador SDD |
 | 1.4 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
 | 2.0 | 2026-08-16 | **Consolidación 8.5** (`Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2). Los casos de uso pasan de **doce a nueve**, uno por capacidad de la unidad de entrega: **cuatro de los doce no eran casos de uso de esta unidad** y se reubicaron —traducción del motivo, composición, arranque y la colección reproducible—, y los ocho restantes **agrupaban por perfil de autenticación y por recurso**, criterio transversal a las capacidades, de modo que `CU-00003` y `CU-00006` se reparten en tres y dos capacidades. Los identificadores nuevos empiezan en `CU-00021` porque **los absorbidos no se reciclan**. §1 declara la carpeta `_legacy/` de la consolidación, §2 lista los nueve, §3 rehace el orden de lectura sobre el recorrido de la persona, y §5 actualiza el ámbito de los identificadores. La cabecera pasa de «proyecto de código» a **unidad de entrega**. Sube major. |
+| 3.0 | 2026-08-16 | **Consolidación de la fusión.** Se terminó lo que la consolidación de casos de uso había dejado a medias: el índice maestro y el glosario absorben los homónimos de las tres capas y pasan a 2.0. Entra §0.1 con el inventario real y con las ocho secciones propias de una sola capa que completan el índice. La carpeta `_fusion/` **se retira**. Sube major. |

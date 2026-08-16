@@ -20,7 +20,7 @@ Demostrar la mitad de esta capa que **no toca el almacén**: leer el texto que e
 
 ## 2. Nivel
 
-**Básico.** Punto de entrada absoluto del proyecto de código. No supone ningún otro sample, no abre el archivo de datos y no necesita ninguna preparación previa: es la partición que [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §2 punto 2 declara —«la mitad de esta capa no toca el almacén»— vista como sample.
+**Básico.** Punto de entrada absoluto del proyecto de código. No supone ningún otro sample, no abre el archivo de datos y no necesita ninguna preparación previa: es la partición que [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §2 punto 2 declara —«la mitad de esta capa no toca el almacén»— vista como sample.
 
 ## 3. Prerequisites
 

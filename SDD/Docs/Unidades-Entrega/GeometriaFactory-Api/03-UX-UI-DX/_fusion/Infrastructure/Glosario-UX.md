@@ -31,7 +31,7 @@
 Acá se declaran únicamente los términos que **esta** categoría acuña para **este** proyecto de código, y que aparecen en más de uno de sus artefactos. Todo lo demás se **referencia** en §4:
 
 - `00-Contexto/Vision-Producto.md` §9 es el **glosario raíz de la cadena**.
-- [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Infrastructure/Glosario-Funcional.md) declara lo que la categoría 02 acuña para este proyecto de código, incluidas las cuatro trampas del formato, la lectura tolerante, el operador estricto, la terminación degradada y el arranque detenido.
+- [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) declara lo que la categoría 02 acuña para este proyecto de código, incluidas las cuatro trampas del formato, la lectura tolerante, el operador estricto, la terminación degradada y el arranque detenido.
 - Los glosarios de `GeometriaFactory-Domain` y de `GeometriaFactory-Application` declaran el vocabulario de las dos capas de las que este proyecto de código depende.
 
 Ninguna entrada de §2 pisa a ninguna de esas fuentes. Lo único que se acuña acá es el vocabulario de **quien interviene sobre este proyecto de código** y del **recorrido de implementación y de despliegue**.
@@ -106,7 +106,7 @@ Trabajo; Pieza en sus dos referentes, el segundo siempre calificado; Componente;
 
 ### 4.2 Del glosario funcional de 02 de este proyecto de código
 
-Todos declarados en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Infrastructure/Glosario-Funcional.md) §2 y §3. **Esta sección los usa sin excepción con la misma semántica y no redefine ninguno.**
+Todos declarados en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) §2 y §3. **Esta sección los usa sin excepción con la misma semántica y no redefine ninguno.**
 
 | Término | Qué designa, en una línea |
 | --- | --- |

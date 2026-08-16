@@ -27,7 +27,7 @@
 
 Seis criterios, todos respondibles con sí o no. Una historia que no los cumpla no entra a la etapa.
 
-1. **Traza a un caso de uso.** La historia declara al menos un `CU-XX` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) §3 en su tabla de trazabilidad.
+1. **Traza a un caso de uso.** La historia declara al menos un `CU-XX` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 en su tabla de trazabilidad.
 2. **Declara su necesidad de negocio y su etapa.** La historia nombra la `NB-XX` que sostiene y la etapa del producto en la que se ejerce, de las **ocho** comprometidas.
 3. **Tiene criterios de aceptación en Given/When/Then, con al menos dos escenarios**, uno de camino feliz y uno de borde.
 4. **Cita por identificador toda regla e invariante que ejerce**, sin volver a enunciarla. El enunciado vive en `Reglas-De-Negocio/` y en `Definicion-Modelo-De-Dominio.md`, y una historia que lo reescriba abre una segunda fuente de verdad.
@@ -38,7 +38,7 @@ Seis criterios, todos respondibles con sí o no. Una historia que no los cumpla 
 
 Cinco criterios, todos respondibles con sí o no.
 
-1. **Declara su fuente upstream por identificador**: un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §3.1, una ADR, un NFR de su §8, un punto abierto de su §11 o una regla de delivery del intake §15.
+1. **Declara su fuente upstream por identificador**: un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, una ADR, un NFR de su §8, un punto abierto de su §11 o una regla de delivery del intake §15.
 2. **Declara al menos una historia consumidora**, o se justifica como infraestructura compartida citando la ADR o la puerta que la sostiene.
 3. **Sus criterios de aceptación son verificables** por inspección, por prueba automatizada o por medición de una puerta declarada. «Queda bien hecho» no es un criterio.
 4. **Sus dependencias sobre otras tareas están declaradas y ninguna es circular.**

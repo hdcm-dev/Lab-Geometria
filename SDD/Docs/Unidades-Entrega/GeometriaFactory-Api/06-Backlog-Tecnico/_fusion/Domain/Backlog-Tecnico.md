@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1 (los **cinco** componentes), §5 (etapas del pipeline), §8 (los **seis** NFR), §9 (los **cinco** riesgos) y §11 (los **cuatro** puntos abiertos); las **seis** ADR de [`../05-Arquitectura-Tecnica/Adrs/`](../05-Arquitectura-Tecnica/Adrs/); [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md) 1.5 (las **42** condiciones); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §15 (etapas y reglas de delivery), §16 (estructura de repositorio) y §17.1.P.6 · GeometriaFactory-Domain a P.11
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1 (los **cinco** componentes), §5 (etapas del pipeline), §8 (los **seis** NFR), §9 (los **cinco** riesgos) y §11 (los **cuatro** puntos abiertos); las **seis** ADR de [`../05-Arquitectura-Tecnica/Adrs/`](../05-Arquitectura-Tecnica/Adrs/); [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md) 1.5 (las **42** condiciones); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §15 (etapas y reglas de delivery), §16 (estructura de repositorio) y §17.1.P.6 · GeometriaFactory-Domain a P.11
 **Trazabilidad downstream:** [`Product-Backlog.md`](Product-Backlog.md), `07-Plan-Sprint`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Domain
 
 ---
@@ -32,7 +32,7 @@
 
 Las **dieciséis** tareas técnicas viven **inline** en este documento y no en archivos individuales, porque el proyecto de código está por debajo del umbral de treinta que fija la regla de la categoría. Cada una declara su fuente upstream por identificador, sus criterios de aceptación, sus dependencias, su tipo y las historias que la consumen.
 
-**Ninguna tarea inventa alcance.** Cada una nace de un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §3.1, de una ADR, de un NFR de su §8, de un punto abierto de su §11 o de una regla de delivery del intake §15. Las cuatro que cierran un punto abierto —BT-02002, BT-02003, BT-02015 y BT-02016— son la parte de este backlog que convierte en trabajo lo que las categorías anteriores dejaron declarado sin resolver, en lugar de resolverlo por su cuenta.
+**Ninguna tarea inventa alcance.** Cada una nace de un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, de una ADR, de un NFR de su §8, de un punto abierto de su §11 o de una regla de delivery del intake §15. Las cuatro que cierran un punto abierto —BT-02002, BT-02003, BT-02015 y BT-02016— son la parte de este backlog que convierte en trabajo lo que las categorías anteriores dejaron declarado sin resolver, en lugar de resolverlo por su cuenta.
 
 **Estimación: sin fijar**, por el fundamento de [`Product-Backlog.md`](Product-Backlog.md) §4.1. Lo que ordena las tareas es la **etapa** y las dependencias de §3, no un tamaño relativo.
 
@@ -84,7 +84,7 @@ Las **dieciséis** tareas técnicas viven **inline** en este documento y no en a
 | --- | --- |
 | Objetivo | Que los nueve invariantes queden ejercidos, que las puertas medibles del proyecto de código estén definidas y que los dos valores rotulados como asunción se confirmen antes de volverse bloqueantes |
 | Alcance | Matriz invariante contra prueba, puertas de cobertura y de tiempo, y el criterio de comparación de correos |
-| Fuente upstream | `05` §8 (NFR de ejercicio de los invariantes y de cobertura), `05` §11 PA-02; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) §9; `PRODUCT-INTAKE` §22 asunciones `A-3` y `A-5` |
+| Fuente upstream | `05` §8 (NFR de ejercicio de los invariantes y de cobertura), `05` §11 PA-02; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §9; `PRODUCT-INTAKE` §22 asunciones `A-3` y `A-5` |
 | Etapa | `a` la definición, `d` a `h` la ejecución acumulativa |
 | BT contenidas | BT-02014, BT-02015, BT-02016 |
 
@@ -107,13 +107,13 @@ Las **dieciséis** tareas técnicas viven **inline** en este documento y no en a
 | BT-02013 | Construir la adopción de la interpretación | feature | EP-T04 | `f` | Alta | Sin fijar | `05` §3.1, componente «Adopción de la interpretación» | BT-02006, BT-02012 | El conjunto de piezas, sus componentes y las observaciones se incorporan comprobando que están bien formados; un conjunto mal formado se rechaza **entero** y el trabajo queda como estaba | US-02010, US-02011, US-02013, US-02014, US-02016 |
 | BT-02014 | Armar la matriz de ejercicio de los nueve invariantes | docs | EP-T05 | `d` | Alta | Sin fijar | `05` §8, fila de ejercicio de los invariantes; `05` §9, segundo riesgo | BT-02010, BT-02011, BT-02012 | **100 %** de los nueve invariantes con al menos una prueba que verifique su violación rechazada, **sin dobles de prueba**; la matriz se entrega a 08 y se revisa al cerrar cada etapa | US-02008, US-02017, US-02023, US-02025, US-02027 |
 | BT-02015 | Confirmar los dos valores rotulados como asunción y fijar la puerta de cobertura | indagación | EP-T05 | `d` | Media | Sin fijar | `05` §8, filas de tiempo de la batería y de cobertura; `05` §11 PA-02; `PRODUCT-INTAKE` §22 asunciones `A-3` y `A-5` | BT-02005, BT-02014 | El Product Owner confirma o corrige los dos valores **sobre su propio documento**; hasta entonces se usan como vigentes y la puerta **no se declara bloqueante** en 09. **Caja temporal: antes de fijar la puerta en 09** | **Infraestructura compartida**: condiciona la puerta del pipeline de todas las historias |
-| BT-02016 | Decidir el criterio de comparación de dos correos | indagación | EP-T05 | `d` | Media | Sin fijar | [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) §9, punto abierto; `RN-02002`, `INV-01` | BT-02006 | Queda decidido si dos correos se comparan tal cual o normalizados, **y dónde** se normaliza; la decisión se toma junto con la capa que ejerce la verificación y no acá sola; el dominio sigue conservando el dato como lo recibe. **Caja temporal: antes de cerrar la etapa `d`** | US-02003 |
+| BT-02016 | Decidir el criterio de comparación de dos correos | indagación | EP-T05 | `d` | Media | Sin fijar | [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §9, punto abierto; `RN-02002`, `INV-01` | BT-02006 | Queda decidido si dos correos se comparan tal cual o normalizados, **y dónde** se normaliza; la decisión se toma junto con la capa que ejerce la verificación y no acá sola; el dominio sigue conservando el dato como lo recibe. **Caja temporal: antes de cerrar la etapa `d`** | US-02003 |
 
 **Seis tareas se justifican como infraestructura compartida** —BT-02001, BT-02002, BT-02003, BT-02004, BT-02005 y BT-02015— y las otras diez declaran al menos una historia consumidora. Ninguna tarea queda sin una cosa ni la otra.
 
 ## 4. Trazabilidad BT ↔ US ↔ CU
 
-Las dieciséis filas están, una por tarea técnica, sin agrupar. Los casos de uso son los de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) §3.
+Las dieciséis filas están, una por tarea técnica, sin agrupar. Los casos de uso son los de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3.
 
 | BT | US que la consumen | CU upstream | Fuente de arquitectura |
 | --- | --- | --- | --- |

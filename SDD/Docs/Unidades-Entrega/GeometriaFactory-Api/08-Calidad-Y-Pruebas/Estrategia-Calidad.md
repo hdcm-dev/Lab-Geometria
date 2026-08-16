@@ -86,7 +86,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los dos v
 
 | Atributo ISO 25010 | Prioridad | Métrica y origen |
 | --- | --- | --- |
-| Adecuación funcional | **Crítica** | 100 % de los **trece** casos de uso con al menos un caso de prueba por criterio de aceptación; 100 % de los **nueve** invariantes con prueba de violación rechazada, sin dobles ([`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8) |
+| Adecuación funcional | **Crítica** | 100 % de los **trece** casos de uso con al menos un caso de prueba por criterio de aceptación; 100 % de los **nueve** invariantes con prueba de violación rechazada, sin dobles ([`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8) |
 | Fiabilidad | **Crítica** | 100 % de las **42** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) alcanzadas por al menos una prueba, y **0** condiciones producidas por la biblioteca que no figuren en el catálogo (`05` §8) |
 | Mantenibilidad | **Alta** | **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización (`05` §8); **0** advertencias de construcción (intake §17.1.P.8 · GeometriaFactory-Domain) |
 | Eficiencia de desempeño | **Media**, y sólo de construcción | Batería de dominio completa en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain]. No hay métrica de runtime porque no hay runtime propio |
@@ -103,7 +103,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los dos v
 
 | Atributo ISO 25010 | Prioridad | Métrica y origen |
 | --- | --- | --- |
-| Adecuación funcional | **Crítica** | 100 % de los **once** casos de uso con al menos un caso de prueba por criterio de aceptación de sus historias; **4 de 4** comprobaciones de autorización con prueba de su negativa ([`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §8) |
+| Adecuación funcional | **Crítica** | 100 % de los **once** casos de uso con al menos un caso de prueba por criterio de aceptación de sus historias; **4 de 4** comprobaciones de autorización con prueba de su negativa ([`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8) |
 | Seguridad | **Crítica, como autorización y no como mecanismo** | La cuarta comprobación corta antes que las otras tres, con **1** prueba dedicada a ese orden (`05` §8). Esta capa no compara contraseñas ni emite accesos: la contraseña llega ya derivada y la provisoria ya producida (intake §17.1.P.5 · GeometriaFactory-Application) |
 | Fiabilidad | **Crítica** | 100 % de las **36** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §7.1 alcanzadas por al menos una prueba, y **0** condiciones producidas por la capa que no figuren en el catálogo (`05` §8); **a lo sumo 1** unidad de trabajo por caso de uso, sin efecto repartido |
 | Mantenibilidad | **Alta** | Exactamente **1** referencia a otro proyecto de código del producto —`GeometriaFactory-Domain`— y **0** a bibliotecas de persistencia, transporte, serialización o marco web (`05` §8); **0** advertencias de construcción (intake §17.1.P.8 · GeometriaFactory-Application) |
@@ -129,7 +129,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los valor
 | Usabilidad | **No aplica como atributo de interfaz** | `tiene_ui_final` es false (`PRODUCT-MANIFEST` §5). Su equivalente es la experiencia del desarrollador, que documenta [`../03-UX-UI-DX/DX-Developer-Experience.md`](../03-UX-UI-DX/DX-Developer-Experience.md) |
 | Portabilidad | **Baja** | Plataforma única sin sufijo de sistema operativo (intake §17.1.P.9 · GeometriaFactory-Infrastructure), con el motor de almacenamiento embebido y anclado en la etapa `a` |
 
-**Los tres atributos críticos son los que el resto del producto no puede reparar.** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Infrastructure/Especificacion-Funcional.md) §6 lo dice con precisión: **tres reglas tienen su tramo principal acá** —`RN-06008`, `RN-06009` y `RN-06014`— y «si acá se hacen mal, ninguna capa de más adentro puede repararlas». Esa frase es la que fija esta prioridad.
+**Los tres atributos críticos son los que el resto del producto no puede reparar.** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 lo dice con precisión: **tres reglas tienen su tramo principal acá** —`RN-06008`, `RN-06009` y `RN-06014`— y «si acá se hacen mal, ninguna capa de más adentro puede repararlas». Esa frase es la que fija esta prioridad.
 
 ## 3. Quality gates
 
@@ -184,7 +184,7 @@ Se declaran aparte de los gates porque su consecuencia es distinta: el intake §
 
 ### 3.2 `GeometriaFactory-Domain`
 
-Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cinco primeros los declara el intake §17.1.P.8 · GeometriaFactory-Domain; los tres siguientes los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8.
+Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cinco primeros los declara el intake §17.1.P.8 · GeometriaFactory-Domain; los tres siguientes los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
 
 | Id | Condición | Cómo se verifica | Consecuencia si no se cumple |
 | --- | --- | --- | --- |
@@ -205,7 +205,7 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 
 ### 3.3 `GeometriaFactory-Application`
 
-Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cuatro primeros los declara el intake §17.1.P.8 · GeometriaFactory-Application —que remite a §17.1.P.8 · GeometriaFactory-Domain y agrega uno propio—; los demás los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §8, con una fila por NFR.
+Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cuatro primeros los declara el intake §17.1.P.8 · GeometriaFactory-Application —que remite a §17.1.P.8 · GeometriaFactory-Domain y agrega uno propio—; los demás los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8, con una fila por NFR.
 
 | Id | Condición | Cómo se verifica | Consecuencia si no se cumple |
 | --- | --- | --- | --- |
@@ -225,13 +225,13 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 
 ### 3.1 Qué significa que un gate esté condicionado
 
-`QG-03` y `QG-10` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para los 500 ms—. [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) `PA-05` y [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md) `BT-04018` declaran el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
+`QG-03` y `QG-10` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para los 500 ms—. [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) `PA-05` y [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md) `BT-04018` declaran el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
 
 Condicionado no quiere decir opcional. La medición se hace igual y el resultado se registra; lo que queda en suspenso es la consecuencia automática. Un incumplimiento se trata como hallazgo del punto de control de la etapa y no como rechazo de la fusión.
 
 ### 3.4 `GeometriaFactory-Infrastructure`
 
-Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cuatro primeros los declara el intake §17.1.P.8 · GeometriaFactory-Infrastructure; los demás los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §8, con una fila por NFR.
+Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cuatro primeros los declara el intake §17.1.P.8 · GeometriaFactory-Infrastructure; los demás los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8, con una fila por NFR.
 
 | Id | Condición | Cómo se verifica | Consecuencia si no se cumple |
 | --- | --- | --- | --- |
@@ -269,7 +269,7 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 - El intake **§21** cruza la batería obligatoria contra los escenarios y su tabla tiene **diez** filas: las nueve de la fuente técnica original más **«Dimensión no legible → `E-8`»**, que la propia fila rotula **[DECISIÓN 2026-08-09]**.
 - **Hasta la versión 1.19** el intake escribía «las **nueve** pruebas del validador» en §17.1.P.8 · GeometriaFactory-Infrastructure y en §17.1.P.8 · GeometriaFactory-Api, y «la batería obligatoria de nueve casos» en §17.1.P.6 · GeometriaFactory-Infrastructure: eran redacciones anteriores a la incorporación del décimo caso, que quedaron sin propagar. **En 1.20 los tres lugares dicen diez**, junto con §17.1.P.11 · GeometriaFactory-Application y el encabezado de §21.
 - El intake **1.20 §17.1.P.6 · GeometriaFactory-Infrastructure** dice hoy «la **batería obligatoria de diez casos**», **§17.1.P.8 · GeometriaFactory-Infrastructure** «las **diez** pruebas del validador pasan» y **§17.1.P.8 · GeometriaFactory-Api** «incluidas las **diez** pruebas del validador» en el pipeline de `GeometriaFactory-Api`.
-- [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §8 y §10.5 ya habían resuelto la lectura antes de esa corrección: **la batería tiene 10 casos**, «los nueve obligatorios de la fuente más el décimo que §21 agregó con `E-8`».
+- [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 y §10.5 ya habían resuelto la lectura antes de esa corrección: **la batería tiene 10 casos**, «los nueve obligatorios de la fuente más el décimo que §21 agregó con `E-8`».
 
 **Esta categoría mantiene esa lectura, que la fuente ya confirmó.** La divergencia entre los gates y la tabla de §21 **está cerrada**: la levantó esta misma fase y el intake la corrigió en 1.20, de modo que no queda nada derivado al Product Owner por este motivo. **Lo que esta categoría no hizo, y sigue sin hacer, es bajar la batería a nueve para que coincidiera con la redacción de la puerta**: el décimo caso cubre `E-8`, que §21 declara como el escenario que cerró la única condición del contrato de fachada que no tenía dato de prueba. El desenlace queda registrado en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8.
 

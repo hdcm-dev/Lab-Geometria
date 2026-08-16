@@ -88,7 +88,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 - **Integración interna**: la prueba que necesita un **almacén efímero**, creado y descartado por ella misma. No es la batería de integración del producto, que es de `GeometriaFactory-Api`.
 - **Fixture**: uno de los cuatro constructores compartidos de [`Estrategia-Testing.md`](Estrategia-Testing.md) §5, incluidos los **ocho textos literales** de los escenarios del intake §20.
 - **Prueba de inspección**: la que comprueba una propiedad estructural del proyecto de código y no un contrato.
-- **Los diez casos de la batería**: los que [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §10.5 enumera, con su origen en el intake §21.
+- **Los diez casos de la batería**: los que [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.5 enumera, con su origen en el intake §21.
 
 **Los diez primeros casos de este catálogo son, uno a uno, los diez de la batería.** No se agruparon ni se reordenaron: la correspondencia con la tabla de `05` §10.5 es de identidad, y así se puede recorrer sin traducir.
 
@@ -903,7 +903,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Campo | Valor |
 | --- | --- |
 | Tipo | Prueba de inspección, nivel unitario |
-| Cubre | NFR «Cobertura del catálogo de condiciones» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8; `BT-02008` |
+| Cubre | NFR «Cobertura del catálogo de condiciones» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8; `BT-02008` |
 | Setup | El conjunto de códigos que la biblioteca puede emitir, y el catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §6.2 |
 | Pasos | Given los dos conjuntos, When se los compara **en las dos direcciones**, Then no hay ningún código emitido que falte en el catálogo, ni ninguna de las **42** condiciones del catálogo sin al menos una prueba que la alcance |
 | Salida esperada | **42 de 42** alcanzadas y **0** emitidas fuera del catálogo. Los **cinco** identificadores retirados —tres por renombre y dos por imposibilidad de su causa (`03` §6.1)— **no se reciclan** y su aparición es una falla |

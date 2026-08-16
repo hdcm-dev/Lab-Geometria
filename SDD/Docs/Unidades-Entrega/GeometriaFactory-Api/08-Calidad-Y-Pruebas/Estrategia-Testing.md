@@ -188,7 +188,7 @@ La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Ar
 
 ### 2.2 `GeometriaFactory-Domain`
 
-La partición no es en capas de despliegue —no las hay— sino en los **cinco componentes** de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Domain y es **90 % de líneas y 85 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
+La partición no es en capas de despliegue —no las hay— sino en los **cinco componentes** de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Domain y es **90 % de líneas y 85 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -205,7 +205,7 @@ La partición no es en capas de despliegue —no las hay— sino en los **cinco 
 
 ### 2.3 `GeometriaFactory-Application`
 
-La partición no es en capas de despliegue —no las hay— sino en los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Application y es **85 % de líneas y 80 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
+La partición no es en capas de despliegue —no las hay— sino en los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Application y es **85 % de líneas y 80 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -225,7 +225,7 @@ La partición no es en capas de despliegue —no las hay— sino en los **ocho**
 
 ### 2.4 `GeometriaFactory-Infrastructure`
 
-La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Infrastructure y es **85 % de líneas y 80 % de ramas**; el validador tiene un piso propio de **95 % de líneas**. Los tres valores vienen rotulados **[ASUNCIÓN del intake §22, asunción `A-3`]**.
+La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Infrastructure y es **85 % de líneas y 80 % de ramas**; el validador tiene un piso propio de **95 % de líneas**. Los tres valores vienen rotulados **[ASUNCIÓN del intake §22, asunción `A-3`]**.
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -415,7 +415,7 @@ Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 
 ### 5.3 `GeometriaFactory-Application`
 
-**Política de dobles: sólo de puerto, y de ningún otro lugar.** Los **cuatro** puertos de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §3 son la única frontera que una prueba sustituye. Un doble de un componente interno —de la guarda, de un orquestador— es un hallazgo de revisión: rompe la propiedad de que el caso de uso se ejerce **entero**, que es lo que el intake §17.1.P.6 · GeometriaFactory-Application pide probar.
+**Política de dobles: sólo de puerto, y de ningún otro lugar.** Los **cuatro** puertos de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 son la única frontera que una prueba sustituye. Un doble de un componente interno —de la guarda, de un orquestador— es un hallazgo de revisión: rompe la propiedad de que el caso de uso se ejerce **entero**, que es lo que el intake §17.1.P.6 · GeometriaFactory-Application pide probar.
 
 Los cuatro dobles, con lo que cada uno tiene que poder simular:
 
@@ -485,7 +485,7 @@ Fixtures compartidos:
 
 **Los datos de prueba de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos, provenientes de la aplicación de escritorio de los alumnos y de los dos ejemplos de la cátedra, cada uno con su procedencia y su estado declarado —`medido`, `derivado` o `reconstruido`—. §21 los cruza contra la batería obligatoria de **diez** casos de prueba —los **nueve** de la fuente técnica más el **décimo** que esa misma sección agregó el 2026-08-09 para la dimensión no legible—.
 
-**Cómo los usa este proyecto de código, que es la parte que hay que decir con precisión.** El dominio **no interpreta el texto del alumno**: la interpretación es de `GeometriaFactory-Infrastructure` y la reconstrucción de piezas le llega ya producida ([`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) §1). De cada escenario, entonces, lo que entra acá **no es el texto sino su resultado**: el conjunto de piezas y de observaciones que el escenario declara en su bloque «Qué verificar».
+**Cómo los usa este proyecto de código, que es la parte que hay que decir con precisión.** El dominio **no interpreta el texto del alumno**: la interpretación es de `GeometriaFactory-Infrastructure` y la reconstrucción de piezas le llega ya producida ([`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §1). De cada escenario, entonces, lo que entra acá **no es el texto sino su resultado**: el conjunto de piezas y de observaciones que el escenario declara en su bloque «Qué verificar».
 
 | Escenario | Qué aporta a las pruebas de este proyecto de código | Fuente del valor |
 | --- | --- | --- |
@@ -506,7 +506,7 @@ Fixtures compartidos:
 
 **Los datos de prueba de este producto son reales y no se sustituyen por datos sintéticos.** El intake §20 transcribe **ocho** escenarios `E-1` a `E-8` con sus payloads completos, provenientes de la aplicación de escritorio de los alumnos y de los dos ejemplos de la cátedra, cada uno con su procedencia y su estado declarado —`medido`, `derivado` o `reconstruido`—. §21 los cruza contra la batería obligatoria de **nueve** casos de prueba de RT §11, más un décimo que esa misma sección agrega.
 
-**Cómo los usa este proyecto de código, que es la parte que hay que decir con precisión.** Esta capa **no interpreta el texto del alumno**: la interpretación es de `GeometriaFactory-Infrastructure` y llega por el puerto de validación de figuras ([`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §3). De cada escenario, entonces, lo que entra acá **no es el texto sino el resultado que el doble del puerto devuelve**: piezas, observaciones y la cantidad de figuras del conjunto raíz. El texto original sí viaja íntegro por la capa, y eso es lo que `RN-04008` exige verificar.
+**Cómo los usa este proyecto de código, que es la parte que hay que decir con precisión.** Esta capa **no interpreta el texto del alumno**: la interpretación es de `GeometriaFactory-Infrastructure` y llega por el puerto de validación de figuras ([`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3). De cada escenario, entonces, lo que entra acá **no es el texto sino el resultado que el doble del puerto devuelve**: piezas, observaciones y la cantidad de figuras del conjunto raíz. El texto original sí viaja íntegro por la capa, y eso es lo que `RN-04008` exige verificar.
 
 | Escenario | Qué aporta a las pruebas de este proyecto de código | Fuente del valor |
 | --- | --- | --- |
@@ -546,7 +546,7 @@ Fixtures compartidos:
 
 ### 6.1 Los ocho escenarios contra los diez casos de la batería
 
-Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §10.5, con la columna que a esta categoría le toca: **qué caso de prueba la materializa**. Ninguna fila se agrupa y ninguna se agrega.
+Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.5, con la columna que a esta categoría le toca: **qué caso de prueba la materializa**. Ninguna fila se agrupa y ninguna se agrega.
 
 | # | Caso de la batería | Escenario | CU | Paso del flujo | Caso de prueba |
 | --- | --- | --- | --- | --- | --- |

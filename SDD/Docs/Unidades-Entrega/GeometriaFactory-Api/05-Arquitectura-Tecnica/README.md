@@ -1,15 +1,42 @@
 # 05 · Arquitectura técnica — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Tipo de proyecto de código (D8):** `rest-api`
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega, y su inventario cambió
+
+**Los tres documentos maestros se consolidaron el 2026-08-16** —`Arquitectura-Proyecto-Codigo.md`,
+`Contratos-Abstractions.md` y `Decisiones-Arquitectura.md`, todos en **2.0**—, absorbiendo los
+homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada uno lleva una
+subsección por proyecto de código y una §0 con lo que sólo se ve con las capas juntas.
+
+**El inventario real de la categoría hoy:**
+
+| Artefacto | Qué es |
+| --- | --- |
+| [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) 2.0 | Documento maestro de la unidad, con las once secciones por capa. **Es el más grande del corpus de la fusión** |
+| [`Contratos-Abstractions.md`](Contratos-Abstractions.md) 2.0 | El contrato de un extremo al otro: operaciones y puertos de la capa de aplicación, esquemas de la de infraestructura, elementos de datos del host |
+| [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) 2.0 | Índice de decisiones por capa, **con sus categorías vacías declaradas** |
+| [`Contratos-REST.md`](Contratos-REST.md) | Contrato de la superficie HTTP |
+| [`Flujo-Ejecucion.md`](Flujo-Ejecucion.md) · [`Modelo-Datos-Logico.md`](Modelo-Datos-Logico.md) | Del host y de la persistencia |
+| [`Adrs/`](Adrs/) | **27 decisiones**, una por archivo, de las cuatro capas |
+| [`Operaciones-Internas/`](Operaciones-Internas/) | **14 documentos**: las operaciones que ninguna persona ejecuta, reubicadas por la consolidación de casos de uso |
+
+**Las 27 ADR ya conviven sin colisionar**: la renumeración les dio rango por capa —`ADR-00xxx` del
+host, `ADR-02xxx` del dominio, `ADR-04xxx` de la aplicación, `ADR-06xxx` de la infraestructura—, de
+modo que su unión fue directa.
+
+Los documentos absorbidos están en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/05-Arquitectura-Tecnica/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/05-Arquitectura-Tecnica/).
 
 ## 1. Punto de entrada
 
@@ -83,3 +110,4 @@ Cinco puntos abiertos llegaron a esta categoría desde otras Fases C, y conviene
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de la sección: los cuatro documentos vigentes, las ocho ADR con su estado, los diecisiete NFR en una línea, el orden de lectura de seis pasos, los cuatro artefactos omitidos —dos de ellos con **apartamiento declarado** frente a la guía del tipo, y con el fundamento de la fuente en el caso de la descripción formal de servicio— y el destino de los cinco puntos abiertos que otras Fases C reasignaron a ésta, uno resuelto por completo, dos resueltos en su criterio y abiertos en su número, y dos declarados no resolubles acá. |
 | 1.1 | 2026-08-10 | **Arrastre del cierre del hallazgo `C-05-03` (P2)** del informe de auditoría [`../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../../../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0. La fila del formato de intercambio de §7 importaba el número **ocho** de `Contratos-REST.md` §2.2 mientras citaba el fundamento de `ADR-00002`, que allí se predica de **seis**. Pasa a declarar el reparto —**ocho filas**, de las cuales seis son reglas de formato y dos no lo son— y a remitir al cuadre **6 + 1 + 1 = 8** que las dos fuentes publican desde sus versiones 1.1. **Ningún documento de la sección, ninguna ADR y ningún NFR cambia.** Sube minor. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**. Entra §0 con el inventario real —tres documentos maestros consolidados, 27 ADR de las cuatro capas y 14 operaciones internas— y con la constancia de que las ADR **ya no colisionaban** por la renumeración previa. La carpeta `_fusion/` de esta categoría **se retira**. Sube major. |

@@ -54,7 +54,7 @@ Prerrequisitos:
 
 Conocimiento previo que **no** se supone: cómo es el dato real que este producto tiene que leer. Es lo que la §3.3 y la §3.4 de esta guía muestran con textos verdaderos, y es lo que hay que entender antes de tocar nada.
 
-Vocabulario mínimo para no perderse en la primera media hora. Los términos están definidos en el glosario raíz, en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Infrastructure/Glosario-Funcional.md) y en [`Glosario-UX.md`](Glosario-UX.md); acá sólo se enumeran para que el lector sepa qué buscar: adaptador, almacén, trampa del formato, lectura tolerante, existencia contra veracidad, operador estricto, posición reservada, cantidad de figuras del conjunto raíz, contraseña provisoria, valor derivado de la credencial, acceso firmado, terminación degradada, arranque detenido, transformación de esquema, regla conceptual de modelo, observación, advertencia, error de validación y texto original.
+Vocabulario mínimo para no perderse en la primera media hora. Los términos están definidos en el glosario raíz, en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md) y en [`Glosario-UX.md`](Glosario-UX.md); acá sólo se enumeran para que el lector sepa qué buscar: adaptador, almacén, trampa del formato, lectura tolerante, existencia contra veracidad, operador estricto, posición reservada, cantidad de figuras del conjunto raíz, contraseña provisoria, valor derivado de la credencial, acceso firmado, terminación degradada, arranque detenido, transformación de esquema, regla conceptual de modelo, observación, advertencia, error de validación y texto original.
 
 Tres convenciones que conviene conocer desde el primer minuto:
 
@@ -200,10 +200,10 @@ Cuatro saltos, todos con enlace. Si en alguna condición la cadena se corta, es 
 | --- | --- | --- |
 | Tutorial | Esta guía | Es la que se acaba de recorrer. No hay otra |
 | How-to | [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), los diez contratos | Cuando hay que implementar un adaptador concreto y saber qué garantías sostener |
-| Reference | [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Infrastructure/Especificacion-Funcional.md) §3 y §4; [`../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md`](../../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md) para el dato guardado; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones; los dos glosarios | Cuando hace falta un dato puntual |
+| Reference | [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 y §4; [`../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md`](../../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md) para el dato guardado; [`DX-Error-Messages.md`](DX-Error-Messages.md) para las condiciones; los dos glosarios | Cuando hace falta un dato puntual |
 | Explanation | **[`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md)**, entero; [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.2, §1.3 y §1.4; la §7 de esta guía | Cuando la pregunta es «por qué está así» |
 
-Punto de entrada recomendado de la sección de especificación funcional: su [`README.md`](../../../02-Especificacion-Funcional/_fusion/Infrastructure/README.md) propone un orden de lectura de siete pasos que este onboarding no duplica.
+Punto de entrada recomendado de la sección de especificación funcional: su [`README.md`](../../../02-Especificacion-Funcional/README.md) propone un orden de lectura de siete pasos que este onboarding no duplica.
 
 ## 6. Control de cambios
 
