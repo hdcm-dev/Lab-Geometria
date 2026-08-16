@@ -214,7 +214,7 @@ Sobre el requisito declarado: **las exigencias de forma de la contraseña no las
 | --- | --- |
 | Persona objetivo | Alumno y docente por igual |
 | CU origen | [`CU-10003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10003-Establecer-Y-Cambiar-La-Contrasena-Propia.md) íntegro, con [`CU-10002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md) FA-02 y **FA-07** como vías de llegada |
-| Reglas de negocio relevantes | `RN-10006` (cuenta pendiente o bloqueada sin acceso) y **`RN-10013`** (la provisoria confina hasta que se cambie, y la cuenta llega al cambio **sin sesión de trabajo**), del `PRODUCT-INTAKE` **1.8** §4.1, con archivo en [`GeometriaFactory-Domain`](../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) |
+| Reglas de negocio relevantes | `RN-10006` (cuenta pendiente o bloqueada sin acceso) y **`RN-10013`** (la provisoria confina hasta que se cambie, y la cuenta llega al cambio **sin sesión de trabajo**), del `PRODUCT-INTAKE` **1.8** §4.1, con archivo en [`RN-02013` · `GeometriaFactory-Domain`](../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) |
 | Restricciones transversales | `RT-02`, `RT-03`, `RT-06`, **`RT-12`** |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.4, §4.1, §8 |
 | Representaciones que invoca | [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) |

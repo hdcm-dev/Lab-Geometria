@@ -43,19 +43,19 @@ Todos describen un **contrato de uso de la superficie pública**. El actor prima
 
 | CU | Título | NB que implementa |
 | --- | --- | --- |
-| CU-02001 | [Registrar el alta de un alumno](../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | NB-00002, NB-00001 |
-| CU-02002 | [Gobernar el ciclo de vida de la cuenta del alumno](../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | NB-00001 |
-| CU-02003 | [Fijar y reemplazar la credencial derivada](../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | NB-00002 |
-| CU-02004 | [Evaluar la admisibilidad de la cuenta](../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | NB-00001, NB-00002 |
-| CU-02005 | [Crear y reeditar un trabajo](../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) | NB-00003, NB-00004 |
-| CU-02006 | [Reconstruir el conjunto de piezas del trabajo](../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | NB-00004, NB-00006 |
-| CU-02007 | [Registrar las observaciones del trabajo](../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) | NB-00005, NB-00004 |
-| CU-02008 | [Gobernar el estado del trabajo en el envío](../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) | NB-00003, NB-00004, NB-00005 |
-| CU-02009 | [Resolver el acceso de un alumno a un trabajo](../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | NB-00003 |
-| CU-02010 | [Resolver el desenlace del trabajo](../../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) | NB-00009, NB-00003 |
-| CU-02011 | [Resolver el alcance del administrador sobre un trabajo](../../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) | NB-00009, NB-00007 |
-| CU-02012 | [Configurar la cuenta de administrador en el primer arranque](../../Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) | NB-00001 |
-| CU-02013 | [Resetear la contraseña de una cuenta de alumno](../../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) | NB-00001, NB-00002 |
+| CU-02001 | [`CU-02001` · Registrar el alta de un alumno](../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | NB-00002, NB-00001 |
+| CU-02002 | [`CU-02002` · Gobernar el ciclo de vida de la cuenta del alumno](../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | NB-00001 |
+| CU-02003 | [`CU-02003` · Fijar y reemplazar la credencial derivada](../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | NB-00002 |
+| CU-02004 | [`CU-02004` · Evaluar la admisibilidad de la cuenta](../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | NB-00001, NB-00002 |
+| CU-02005 | [`CU-02005` · Crear y reeditar un trabajo](../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) | NB-00003, NB-00004 |
+| CU-02006 | [`CU-02006` · Reconstruir el conjunto de piezas del trabajo](../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | NB-00004, NB-00006 |
+| CU-02007 | [`CU-02007` · Registrar las observaciones del trabajo](../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) | NB-00005, NB-00004 |
+| CU-02008 | [`CU-02008` · Gobernar el estado del trabajo en el envío](../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) | NB-00003, NB-00004, NB-00005 |
+| CU-02009 | [`CU-02009` · Resolver el acceso de un alumno a un trabajo](../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | NB-00003 |
+| CU-02010 | [`CU-02010` · Resolver el desenlace del trabajo](../../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) | NB-00009, NB-00003 |
+| CU-02011 | [`CU-02011` · Resolver el alcance del administrador sobre un trabajo](../../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) | NB-00009, NB-00007 |
+| CU-02012 | [`CU-02012` · Configurar la cuenta de administrador en el primer arranque](../../Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) | NB-00001 |
+| CU-02013 | [`CU-02013` · Resetear la contraseña de una cuenta de alumno](../../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) | NB-00001, NB-00002 |
 
 ## 3. Las dieciséis reglas de negocio
 
@@ -63,22 +63,22 @@ La serie es **contigua de RN-02001 a RN-02016**. La columna del invariante es la
 
 | RN | Título | Invariante que la expresa |
 | --- | --- | --- |
-| RN-02001 | [Administrador único y papeles fijos](../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | INV-05 |
-| RN-02002 | [El correo del alumno es único](../../Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | INV-01 |
-| RN-02003 | [Un alumno sólo ve y opera sus propios trabajos](../../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | INV-02 |
-| RN-02004 | [El alumno elimina sólo en borrador; el administrador, cualquier trabajo que ve](../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | INV-03 |
-| RN-02005 | [Un trabajo no pasa a estado `Pendiente` con errores de validación](../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | INV-04 |
-| RN-02006 | [Una cuenta `Pendiente` o `Bloqueado` no obtiene acceso](../../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | INV-06 |
-| RN-02007 | [La baja arrastra los trabajos y exige confirmación escrita](../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | — |
-| RN-02008 | [El texto original del alumno se conserva íntegro](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | — |
-| RN-02009 | [Toda observación de error indica la posición de la pieza y el campo](../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | — |
-| RN-02010 | [El desenlace es exclusivo del administrador y es terminal](../../Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | INV-07 |
-| RN-02011 | [El administrador no ve los trabajos en borrador](../../Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | — |
-| RN-02012 | [El reseteo de contraseña conserva la cuenta y sus trabajos](../../Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | INV-09 |
-| RN-02013 | [Con la contraseña provisoria sin cambiar, la cuenta no llega a ninguna otra parte](../../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | INV-09 |
-| RN-02014 | [La contraseña provisoria la produce el sistema, no la escribe el administrador](../../Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | — |
-| RN-02015 | [Resetear no exige que la cuenta esté habilitada](../../Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md) | — |
-| RN-02016 | [Habilitar una cuenta produce su contraseña provisoria](../../Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | INV-09 |
+| RN-02001 | [`RN-02001` · Administrador único y papeles fijos](../../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | INV-05 |
+| RN-02002 | [`RN-02002` · El correo del alumno es único](../../Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | INV-01 |
+| RN-02003 | [`RN-02003` · Un alumno sólo ve y opera sus propios trabajos](../../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | INV-02 |
+| RN-02004 | [`RN-02004` · El alumno elimina sólo en borrador; el administrador, cualquier trabajo que ve](../../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | INV-03 |
+| RN-02005 | [`RN-02005` · Un trabajo no pasa a estado `Pendiente` con errores de validación](../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | INV-04 |
+| RN-02006 | [`RN-02006` · Una cuenta `Pendiente` o `Bloqueado` no obtiene acceso](../../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | INV-06 |
+| RN-02007 | [`RN-02007` · La baja arrastra los trabajos y exige confirmación escrita](../../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | — |
+| RN-02008 | [`RN-02008` · El texto original del alumno se conserva íntegro](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | — |
+| RN-02009 | [`RN-02009` · Toda observación de error indica la posición de la pieza y el campo](../../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | — |
+| RN-02010 | [`RN-02010` · El desenlace es exclusivo del administrador y es terminal](../../Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | INV-07 |
+| RN-02011 | [`RN-02011` · El administrador no ve los trabajos en borrador](../../Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | — |
+| RN-02012 | [`RN-02012` · El reseteo de contraseña conserva la cuenta y sus trabajos](../../Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | INV-09 |
+| RN-02013 | [`RN-02013` · Con la contraseña provisoria sin cambiar, la cuenta no llega a ninguna otra parte](../../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | INV-09 |
+| RN-02014 | [`RN-02014` · La contraseña provisoria la produce el sistema, no la escribe el administrador](../../Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | — |
+| RN-02015 | [`RN-02015` · Resetear no exige que la cuenta esté habilitada](../../Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md) | — |
+| RN-02016 | [`RN-02016` · Habilitar una cuenta produce su contraseña provisoria](../../Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | INV-09 |
 
 Las seis filas con guion —sobre dieciséis— lo están por un motivo declarado en `PRODUCT-INTAKE` §17.1.P.2: RN-02007, RN-02008, RN-02009, **RN-02014** y **RN-02015** describen comportamientos —o, en el caso de RN-02015, la ausencia de una precondición— y no condiciones permanentes, y RN-02011 es una regla de alcance de consulta. **RN-02012, RN-02013 y RN-02016 comparten INV-09**: las dos primeras son las dos mitades de la misma condición, y **RN-02016 agrega un segundo origen** de la marca que las dos gobiernan —la habilitación, junto al reseteo—. Esa lectura la sostiene la **columna «regla de negocio que sostiene» de la fila INV-09** de esa sección del intake, que dice «RN-02012, RN-02013», y **no su prosa**, que enumera a RN-02012 entre las reglas sin invariante. La ambigüedad es del intake, está declarada en `Especificacion-Funcional.md` §8 y su fundamento está en `Definicion-Modelo-De-Dominio.md` §4.3.
 

@@ -39,18 +39,18 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 
 | CU | Nombre | En una línea |
 | --- | --- | --- |
-| CU-00001 | [Canjear credenciales por un acceso firmado](Casos-De-Uso/CU-00001-Canjear-Credenciales-Por-Un-Acceso-Firmado.md) | El único punto cuya ruta declara una fuente, con su respuesta genérica y sus tres motivos |
-| CU-00002 | [Admitir la petición: acceso, papel y marca](Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md) | La guardia de once puntos, cuyo defecto característico es no alcanzar a alguno |
-| CU-00003 | [Exponer el alta de cuenta y la credencial propia](Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md) | Los cuatro puntos que se ejercen sin acceso o sin que el papel importe |
-| CU-00004 | [Exponer el gobierno de las cuentas de la comisión](Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md) | Listado, situación y la única operación destructiva de la superficie |
-| CU-00005 | [Exponer el reseteo de la contraseña de un alumno](Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md) | El único punto que devuelve un valor de credencial, y no lo registra |
-| CU-00006 | [Exponer el envío y la eliminación de un trabajo](Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md) | El texto que no se normaliza en el borde, y el envío que no verifica y **responde con éxito** |
-| CU-00007 | [Exponer el listado y el detalle de los trabajos](Casos-De-Uso/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Los dos puntos de lectura, sin ningún parámetro para pedir de más |
-| CU-00008 | [Exponer el desenlace de la revisión](Casos-De-Uso/CU-00008-Exponer-El-Desenlace-De-La-Revision.md) | La transición irreversible, y la terminalidad sostenida por ausencia |
-| CU-00009 | [Traducir el motivo del contrato a respuesta de protocolo](Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Las dos traducciones, las tres reglas de asignación y los dos huecos declarados |
-| CU-00010 | [Componer la aplicación y conectar los puertos con sus adaptadores](Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | La factura de que todo lo demás se pruebe con dobles, pagada una sola vez |
-| CU-00011 | [Arrancar el servicio y dejar el almacén en condiciones](Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | El arranque que se detiene antes que atender sobre un almacén equivocado |
-| CU-00012 | [Ejercitar la superficie con la colección de peticiones reproducible](Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | La demostración ejecutable, con los ocho escenarios como cuerpo y en tres pasos |
+| CU-00001 | [`CU-00001` · Canjear credenciales por un acceso firmado](Casos-De-Uso/CU-00001-Canjear-Credenciales-Por-Un-Acceso-Firmado.md) | El único punto cuya ruta declara una fuente, con su respuesta genérica y sus tres motivos |
+| CU-00002 | [`CU-00002` · Admitir la petición: acceso, papel y marca](Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md) | La guardia de once puntos, cuyo defecto característico es no alcanzar a alguno |
+| CU-00003 | [`CU-00003` · Exponer el alta de cuenta y la credencial propia](Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md) | Los cuatro puntos que se ejercen sin acceso o sin que el papel importe |
+| CU-00004 | [`CU-00004` · Exponer el gobierno de las cuentas de la comisión](Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md) | Listado, situación y la única operación destructiva de la superficie |
+| CU-00005 | [`CU-00005` · Exponer el reseteo de la contraseña de un alumno](Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md) | El único punto que devuelve un valor de credencial, y no lo registra |
+| CU-00006 | [`CU-00006` · Exponer el envío y la eliminación de un trabajo](Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md) | El texto que no se normaliza en el borde, y el envío que no verifica y **responde con éxito** |
+| CU-00007 | [`CU-00007` · Exponer el listado y el detalle de los trabajos](Casos-De-Uso/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Los dos puntos de lectura, sin ningún parámetro para pedir de más |
+| CU-00008 | [`CU-00008` · Exponer el desenlace de la revisión](Casos-De-Uso/CU-00008-Exponer-El-Desenlace-De-La-Revision.md) | La transición irreversible, y la terminalidad sostenida por ausencia |
+| CU-00009 | [`CU-00009` · Traducir el motivo del contrato a respuesta de protocolo](Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Las dos traducciones, las tres reglas de asignación y los dos huecos declarados |
+| CU-00010 | [`CU-00010` · Componer la aplicación y conectar los puertos con sus adaptadores](Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | La factura de que todo lo demás se pruebe con dobles, pagada una sola vez |
+| CU-00011 | [`CU-00011` · Arrancar el servicio y dejar el almacén en condiciones](Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | El arranque que se detiene antes que atender sobre un almacén equivocado |
+| CU-00012 | [`CU-00012` · Ejercitar la superficie con la colección de peticiones reproducible](Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | La demostración ejecutable, con los ocho escenarios como cuerpo y en tres pasos |
 
 ## 3. Orden de lectura sugerido
 
