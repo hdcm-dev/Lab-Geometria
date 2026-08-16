@@ -52,9 +52,16 @@ public sealed class PanelSessionGateTests : IDisposable
     /// que haya dejado de ser pública: es que dejó de tener algo que ofrecer. Se verifica en
     /// `ProvisioningGateTests`.
     /// </remarks>
+    /// <remarks>
+    /// **[RELEVO DE LA ETAPA `g`, DECLARADO.]** La raíz salía de esta lista. Dejó de ser una ruta
+    /// que responde y pasó a ser **el punto donde corre el guardián**: con administrador
+    /// constituido desvía al ingreso (`NAV-03`), que es la mitad que faltaba. Lo que esta prueba
+    /// afirma —que sin marca de sesión las rutas públicas siguen respondiendo— no cambia; lo que
+    /// cambia es que la raíz **no es una de ellas**.
+    /// </remarks>
     private static readonly string[] PublicRoutes =
     [
-        "/", "/registro-de-cuenta", "/ingreso",
+         "/registro-de-cuenta", "/ingreso",
         "/credencial-propia/establecer", "/credencial-propia/cambio-obligado",
         "/estado", "/no-encontrado",
     ];
