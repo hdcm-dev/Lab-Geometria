@@ -253,11 +253,23 @@ else
                                value="@Form.Name" />
                     </div>
                     <div class="gf-field">
-                        @* La fecha la declara el alumno y se rotula como tal. Viaja como texto y no
-                           se convierte de zona: la escribe la persona y no es un sello del sistema. *@
+                        @* La fecha la declara el alumno y se rotula como tal. **No es un sello del
+                           sistema y no se convierte de zona**: es el día que la persona elige.
+
+                           CON CALENDARIO Y NO ESCRITA A MANO **[decisión de la etapa `g`,
+                           declarada]**. Escribirla a mano deja a cada persona resolviendo un
+                           formato —`1/1/2026`, `01/01/26`, `2026-1-1`— y el producto guardando
+                           cualquiera de ellos, que es lo contrario de un dato declarado. El
+                           control nativo da el calendario del sistema y **un solo formato**.
+
+                           LA CONSECUENCIA, DICHA: lo que se guarda pasa a ser `aaaa-mm-dd`, que es
+                           lo que este control entrega. Se sigue conservando **tal como la persona
+                           la declaró** —nadie la reescribe ni la convierte—, y quien la muestra la
+                           formatea para leerla. Las fechas cargadas antes, con su forma vieja, se
+                           siguen mostrando como están. *@
                         <label for="submission-date">Fecha del trabajo, la que declarás vos</label>
-                        <input class="gf-input" id="submission-date" name="Input.DeclaredDate" type="text"
-                               inputmode="numeric" placeholder="dd/mm/aaaa" value="@Form.DeclaredDate" />
+                        <input class="gf-input" id="submission-date" name="Input.DeclaredDate" type="date"
+                               value="@Form.DeclaredDate" />
                     </div>
                     <div class="gf-field">
                         <label for="submission-description">Descripción</label>

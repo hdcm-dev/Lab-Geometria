@@ -139,7 +139,7 @@ else
                 <h2 id="work-data-heading" class="gf-meta">Datos del trabajo</h2>
                 <dl class="gf-key-value gf-mt-3">
                     <dt>Nombre</dt><dd>@_work.Name</dd>
-                    <dt>Fecha del trabajo</dt><dd class="gf-num">@_work.DeclaredDate</dd>
+                    <dt>Fecha del trabajo</dt><dd class="gf-num">@DeclaredDateText.ToDisplay(_work.DeclaredDate)</dd>
                     <dt>Estado</dt><dd><span class="gf-badge @BadgeClassOf(_work.Status)">@LabelOf(_work.Status)</span></dd>
                     <dt>Alumno</dt><dd>@OwnerName</dd>
                     <dt>Descripción</dt><dd>@_work.Description</dd>

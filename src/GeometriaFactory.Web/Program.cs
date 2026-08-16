@@ -51,6 +51,10 @@ builder.Services.AddAuthorization();
 // sobreviva a una recarga y a una pestaña nueva, sin que el testigo se acerque al navegador.
 builder.Services.AddSingleton<SessionTokenStore>();
 
+// De quién es el cambio forzado en curso, contra una marca opaca del navegador. Es lo que permite
+// que la pantalla del cambio **no vuelva a pedir el correo** que la persona acaba de escribir.
+builder.Services.AddSingleton<PendingCredentialChangeStore>();
+
 // LA SONDA DEL APROVISIONAMIENTO, TAMBIÉN CON ALCANCE DE APLICACIÓN. Es lo que hace que el
 // guardián 1 no cueste un viaje de red por navegación: recuerda el «sí» para siempre —el estado
 // es de ida y no vuelve— y no recuerda el «no» ni un segundo, porque la transición ocurre una

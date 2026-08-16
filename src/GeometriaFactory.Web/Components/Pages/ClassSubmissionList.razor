@@ -181,7 +181,7 @@ else
                                     {
                                         <tr>
                                             <th scope="row" class="gf-th-plain gf-th-plain--body">@work.Name</th>
-                                            <td class="gf-num">@work.DeclaredDate</td>
+                                            <td class="gf-num">@DeclaredDateText.ToDisplay(work.DeclaredDate)</td>
                                             <td><span class="gf-badge @BadgeClassOf(work.Status)">@LabelOf(work.Status)</span></td>
                                             <td class="gf-td-actions">
                                                 @* ACCIÓN ÚNICA: abrir. No hay acciones de decisión:
