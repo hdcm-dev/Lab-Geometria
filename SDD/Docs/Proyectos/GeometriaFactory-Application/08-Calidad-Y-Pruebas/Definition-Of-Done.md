@@ -38,8 +38,8 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 - [ ] Esos `TC-XX` están escritos y **en verde**. **Se valida** con la salida de `scripts/test.sh`.
 - [ ] **La comprobación de autorización que la historia declaró en su Definition of Ready criterio 5 tiene prueba de su negativa.** **Se valida** leyendo la matriz §5. Una historia que dijo «ninguna me alcanza» y resultó tocar una operación que lee o escribe **no está terminada**.
 - [ ] Toda regla e invariante que la historia declara ejercer tiene su fila en la matriz §4 y §6 con este `TC-XX` entre sus tests. **Se valida** leyendo esas dos tablas.
-- [ ] Toda condición de rechazo que la historia produce está en el catálogo de las **36** y alcanzada por prueba. **Se valida** con `TC-28`.
-- [ ] La historia **no introdujo ninguna prueba que abra el almacén real** ni ninguna dependencia saliente nueva. **Se valida** con `TC-26` y `TC-27`.
+- [ ] Toda condición de rechazo que la historia produce está en el catálogo de las **36** y alcanzada por prueba. **Se valida** con `TC-04028`.
+- [ ] La historia **no introdujo ninguna prueba que abra el almacén real** ni ninguna dependencia saliente nueva. **Se valida** con `TC-04026` y `TC-04027`.
 - [ ] Los `TC-XX` de la historia usan **dobles de puerto y no dobles de componente interno**. **Se valida** por inspección del código de prueba, contra [`Estrategia-Testing.md`](Estrategia-Testing.md) §5.
 - [ ] La construcción termina en 0 y sin advertencias. **Se valida** con la salida de `scripts/build.sh`.
 - [ ] La cobertura del componente que la historia toca no bajó respecto de la medición anterior. **Se valida** comparando el informe de cobertura por componente.
@@ -49,15 +49,15 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 - [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra, según lo exige la Definition of Ready §2 criterio 3.
 - [ ] Si la propiedad que la tarea sostiene es una **ausencia** —cero dependencias de más, cero pruebas que tocan la base, cero componentes cargados—, el criterio se midió **con umbral cero y en la condición declarada**, y no se dio por cumplido por no haberse observado lo contrario. **Se valida** con el `TC-XX` de inspección correspondiente.
 - [ ] Si la tarea es de tipo indagación, la decisión que produjo está **registrada** en el documento que corresponde, y no sólo tomada. **Se valida** leyendo ese documento.
-- [ ] Si la tarea **acompaña** un punto abierto cuya titularidad es de otro proyecto de código —`BT-20`, `BT-21`—, declaró de quién es la decisión y no la tomó por su cuenta. **Se valida** leyendo la fila de la tarea.
-- [ ] Si la tarea es una puerta —`BT-04`, `BT-05`, `BT-06`, `BT-18`, `BT-19`— la puerta se midió al menos una vez y su resultado quedó registrado. **Se valida** con la salida del pipeline.
+- [ ] Si la tarea **acompaña** un punto abierto cuya titularidad es de otro proyecto de código —`BT-04020`, `BT-04021`—, declaró de quién es la decisión y no la tomó por su cuenta. **Se valida** leyendo la fila de la tarea.
+- [ ] Si la tarea es una puerta —`BT-04004`, `BT-04005`, `BT-04006`, `BT-04018`, `BT-04019`— la puerta se midió al menos una vez y su resultado quedó registrado. **Se valida** con la salida del pipeline.
 - [ ] La construcción y la batería pasan enteras. **Se valida** con `scripts/build.sh` y `scripts/test.sh`.
 
 ### 1.3 Etapa
 
 - [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3.
 - [ ] Los **once** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen. **Se valida** con esa lista.
-- [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-11` a `CV-17`, `CV-25` a `CV-28`— se cumplen. **Se valida** con el informe del pipeline y con `TC-11`, `TC-26`, `TC-27`, `TC-28`, `TC-29`, `TC-30` y `TC-31`.
+- [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-11` a `CV-17`, `CV-25` a `CV-28`— se cumplen. **Se valida** con el informe del pipeline y con `TC-04011`, `TC-04026`, `TC-04027`, `TC-04028`, `TC-04029`, `TC-04030` y `TC-04031`.
 - [ ] Los criterios condicionados —`CV-09`, `CV-10`, `CV-23`— **se midieron y se registraron**, aunque no bloqueen. **Se valida** con la presencia de la medición en el informe de cierre. Registrar «sin medir» cuando la medición era posible **no cumple**.
 - [ ] La batería completa —y no sólo lo que la etapa tocó— corre y pasa. **Se valida** con `CV-18`.
 - [ ] Ningún `TC-XX` que estaba en verde pasó a rojo sin justificación escrita. **Se valida** con `CV-19`.
@@ -71,9 +71,9 @@ Se aplica cuando las **seis** etapas que este proyecto de código toca —`a`, `
 
 - [ ] Los **veintiocho** criterios de [`Criterios-Validacion.md`](Criterios-Validacion.md) están evaluados uno por uno, con su resultado registrado. **Se valida** con ese documento.
 - [ ] **11 de 11** casos de uso, **16 de 16** reglas, **4 de 4** comprobaciones, **9 de 9** invariantes y **32 de 32** historias con caso de prueba en verde. **Se valida** con los recuentos de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md).
-- [ ] **36 de 36** condiciones alcanzadas y **0** fuera del catálogo. **Se valida** con `TC-28`.
+- [ ] **36 de 36** condiciones alcanzadas y **0** fuera del catálogo. **Se valida** con `TC-04028`.
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos de prueba que los usan, sin sustitución por datos inventados. **Se valida** con `CV-07` y con el recuento de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3.
-- [ ] Los dos valores rotulados **[ASUNCIÓN]** están confirmados por el Product Owner, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 y el estado de `BT-18`.
+- [ ] Los dos valores rotulados **[ASUNCIÓN]** están confirmados por el Product Owner, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 y el estado de `BT-04018`.
 - [ ] No queda ningún punto abierto de `05` §11 sin desenlace declarado, **incluido el nombre del cuarto puerto**. **Se valida** leyendo esa tabla.
 - [ ] La versión de la biblioteca está calculada según la estrategia de versionado del intake §17.2.P.7 y la etiqueta de la etapa existe. **Se valida** con el registro de la etiqueta.
 

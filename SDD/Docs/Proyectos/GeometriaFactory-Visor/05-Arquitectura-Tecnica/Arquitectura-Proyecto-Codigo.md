@@ -46,14 +46,14 @@ Este proyecto de código es el único del producto fuera del ecosistema de los o
 
 ## 2. Estilo arquitectónico
 
-**Estilo elegido: microkernel con fachada plana, en tres capas.** El núcleo es el servicio de dibujo, la fachada es su única puerta y el componente anfitrión vive fuera de este proyecto de código. `PRODUCT-INTAKE` §17.7.P.2 declara las tres capas como obligatorias y como el motivo por el que la fachada existe; [`ADR-01`](Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md) lo registra.
+**Estilo elegido: microkernel con fachada plana, en tres capas.** El núcleo es el servicio de dibujo, la fachada es su única puerta y el componente anfitrión vive fuera de este proyecto de código. `PRODUCT-INTAKE` §17.7.P.2 declara las tres capas como obligatorias y como el motivo por el que la fachada existe; [`ADR-12001`](Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md) lo registra.
 
 Cuatro propiedades estructurales lo concretan:
 
-1. **Visualizador puro.** Sin red, sin persistencia, sin configuración propia y sin identidad. Es `RA-02`, y es lo que hace imposible violar `RA-01` desde el navegador ([`ADR-03`](Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md)).
-2. **Superficie de seis funciones planas y nada más**, que es todo lo que el anfitrión puede invocar ([`ADR-02`](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md)).
-3. **El motor de dibujo tridimensional queda dentro de la capa 3 y empaquetado**, nunca expuesto al anfitrión y nunca traído desde una red de distribución externa ([`ADR-04`](Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md)).
-4. **La disposición de cada pieza se deriva de su índice**, no de un ordenamiento aleatorio ([`ADR-05`](Adrs/ADR-05-Disposicion-Determinista-Derivada-Del-Indice.md)).
+1. **Visualizador puro.** Sin red, sin persistencia, sin configuración propia y sin identidad. Es `RA-02`, y es lo que hace imposible violar `RA-01` desde el navegador ([`ADR-12003`](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md)).
+2. **Superficie de seis funciones planas y nada más**, que es todo lo que el anfitrión puede invocar ([`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md)).
+3. **El motor de dibujo tridimensional queda dentro de la capa 3 y empaquetado**, nunca expuesto al anfitrión y nunca traído desde una red de distribución externa ([`ADR-12004`](Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md)).
+4. **La disposición de cada pieza se deriva de su índice**, no de un ordenamiento aleatorio ([`ADR-12005`](Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md)).
 
 ### 2.1 Alternativas descartadas
 
@@ -63,7 +63,7 @@ Las dos primeras las descarta el intake; la tercera la evalúa y la descarta est
 | --- | --- | --- | --- |
 | Portar el archivo del visualizador previo tal cual | Costo de trabajo casi nulo; ya funciona | Arrastraría **527 de 1101 líneas** de código inactivo —el **48 %**— más dos controles inoperantes, a un producto nuevo | **Descartada** por `PRODUCT-INTAKE` §17.7.P.2 |
 | Exponer el servicio de dibujo directamente al anfitrión, sin fachada | Una capa menos | Ataría las páginas a los nombres internos del motor de dibujo y lo volvería irreemplazable, que es exactamente lo contrario del punto de extensión que el producto declara | **Descartada** por `PRODUCT-INTAKE` §17.7.P.2 |
-| Una instancia global única en lugar de instancias identificadas | Firmas más cortas: ninguna función necesitaría identificador | Rompe la garantía **G-4** de aislamiento entre instancias, y con ella la posibilidad de tener dos escenas vivas en la misma página. Además haría que `destruir` fuera ambiguo | **Descartada** por esta categoría, ver [`ADR-02`](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) §4 |
+| Una instancia global única en lugar de instancias identificadas | Firmas más cortas: ninguna función necesitaría identificador | Rompe la garantía **G-4** de aislamiento entre instancias, y con ella la posibilidad de tener dos escenas vivas en la misma página. Además haría que `destruir` fuera ambiguo | **Descartada** por esta categoría, ver [`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) §4 |
 
 ### 2.2 Nota de vocabulario técnico
 
@@ -105,13 +105,13 @@ flowchart TD
 
 | Componente | Casos de uso que cubre |
 | --- | --- |
-| Fachada plana | CU-01 a CU-07, los siete |
-| Registro de instancias | CU-01, CU-05, y la resolución del identificador en CU-02, CU-03, CU-04 y CU-07 |
-| Lector del texto | CU-02 |
-| Servicio de dibujo | CU-01, CU-02, CU-03, CU-04, CU-05, CU-07 |
-| Motor de dibujo tridimensional | CU-01, CU-02, CU-05 |
+| Fachada plana | CU-12001 a CU-12007, los siete |
+| Registro de instancias | CU-12001, CU-12005, y la resolución del identificador en CU-12002, CU-12003, CU-12004 y CU-12007 |
+| Lector del texto | CU-12002 |
+| Servicio de dibujo | CU-12001, CU-12002, CU-12003, CU-12004, CU-12005, CU-12007 |
+| Motor de dibujo tridimensional | CU-12001, CU-12002, CU-12005 |
 
-**CU-06 es transversal**: recorre las seis funciones desde una página integradora sin backend, y por eso su componente es la fachada entera. Es además el sample S-1 del producto.
+**CU-12006 es transversal**: recorre las seis funciones desde una página integradora sin backend, y por eso su componente es la fachada entera. Es además el sample S-1 del producto.
 
 ### 3.3 Qué se porta y qué no
 
@@ -128,7 +128,7 @@ El proyecto de código nace de un visualizador previo, y qué se conserva de él
 | Las cinco variantes comentadas de la función que procesa el conjunto de figuras, y las dos de la que ubica las piezas | Código inactivo: son parte del 48 % que el intake decide no arrastrar |
 | La función de actualización del cilindro y los dos manejadores de alternar mallado y de centrar objetos | Referencian elementos de la página que no existen: son los dos controles inoperantes |
 | Las tres bibliotecas de interfaz que el visualizador previo carga sin usar | Peso muerto, y además dependencias externas que este proyecto de código no necesita |
-| El ordenamiento aleatorio de la disposición | **Se reemplaza** por posición derivada del índice ([`ADR-05`](Adrs/ADR-05-Disposicion-Determinista-Derivada-Del-Indice.md)) |
+| El ordenamiento aleatorio de la disposición | **Se reemplaza** por posición derivada del índice ([`ADR-12005`](Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md)) |
 
 ## 4. Vista de procesos
 
@@ -167,14 +167,14 @@ El proyecto de código nace de un visualizador previo, y qué se conserva de él
 
 | Preocupación | Decisión | Fundamento |
 | --- | --- | --- |
-| Red | **Cero peticiones**, y es la decisión que define al proyecto de código. Ni obtención de recursos, ni petición asincrónica, ni conexión persistente. Garantía G-1 | [`ADR-03`](Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
+| Red | **Cero peticiones**, y es la decisión que define al proyecto de código. Ni obtención de recursos, ni petición asincrónica, ni conexión persistente. Garantía G-1 | [`ADR-12003`](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
 | Persistencia | **Cero escrituras** en el almacenamiento del navegador. Garantía G-2 | `PRODUCT-INTAKE` §17.7.P.4 |
 | Configuración | **Ninguna propia.** Todo lo que la instancia necesita llega por parámetro. Garantía G-3 | `PRODUCT-INTAKE` §17.7.P.3 |
 | Identidad y autorización | **Ninguna.** El bundle no sabe quién mira ni qué papel cumple, y no participa de ninguna decisión de autorización | `PRODUCT-INTAKE` §17.7.P.5 |
-| Manejo de errores | **Siete códigos de condición**, declarados una sola vez en [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §6, que es su fuente única. Un código nuevo sólo puede nacer allá. Un **curso** nuevo se agrega como fila de curso y no como código | [`ADR-02`](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) |
-| Ausencia de fallo silencioso | **Toda pieza que no se dibuja queda enumerada** en el resultado de dibujo con su índice y su condición. Garantía G-5 | `Vision-Producto.md` §9 y NB-06 |
+| Manejo de errores | **Siete códigos de condición**, declarados una sola vez en [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §6, que es su fuente única. Un código nuevo sólo puede nacer allá. Un **curso** nuevo se agrega como fila de curso y no como código | [`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) |
+| Ausencia de fallo silencioso | **Toda pieza que no se dibuja queda enumerada** en el resultado de dibujo con su índice y su condición. Garantía G-5 | `Vision-Producto.md` §9 y NB-00006 |
 | Registro de eventos y métricas | **Ninguno propio.** El bundle no instrumenta ni emite registros: hacerlo sería, en el mejor de los casos, escribir en la consola del navegador, y no aporta a ningún consumidor del producto | Derivado de G-1, G-2 y G-3 |
-| Exposición de la infraestructura | **Ninguna posible.** El bundle no conoce ninguna dirección de servicio, de modo que no puede exponerla (`RA-03`) | [`ADR-03`](Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
+| Exposición de la infraestructura | **Ninguna posible.** El bundle no conoce ninguna dirección de servicio, de modo que no puede exponerla (`RA-03`) | [`ADR-12003`](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
 | Vocabulario | «Pieza» en su forma desnuda designa cada figura del conjunto raíz del trabajo; «recorrido» se escribe siempre calificado | [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §8 y [`../03-UX-UI-DX/Glosario-UX.md`](../03-UX-UI-DX/Glosario-UX.md) |
 
 ## 8. Quality attributes (NFR)
@@ -183,14 +183,14 @@ Los seis primeros son las **seis propiedades transversales verificables** que [`
 
 | NFR | Objetivo numérico | Mecanismo de medición | ADR relacionada |
 | --- | --- | --- | --- |
-| Cero red | Exactamente **0 peticiones** originadas por el archivo de guion | Conteo en la pestaña de red, **con los dos movimientos automáticos prendidos y sostenidos** —su peor caso— y también durante los gestos de rotar y acercar | [`ADR-03`](Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
-| Cero persistencia | **0 claves** escritas en el almacenamiento del navegador, y ningún estado conservado entre páginas | Inspección del almacenamiento con cualquier estado de los movimientos; se comprueba además que recargar la página no repone la preferencia | [`ADR-03`](Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
-| Se ejercita sin backend | Recorrido completo de las **seis** funciones con un texto pegado a mano y **0 servicios del backend disponibles** | Página integradora sin backend, que es el sample S-1 | [`ADR-06`](Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) |
-| Disposición determinista | Dos procesados del mismo texto producen la **misma disposición**, comparable pieza por pieza | Comparación de dos procesados; **se compara posición, no orientación**, y la propiedad vale con cualquier estado de los movimientos | [`ADR-05`](Adrs/ADR-05-Disposicion-Determinista-Derivada-Del-Indice.md) |
-| Liberación de recursos | **10 recorridos** de ida y vuelta entre trabajos sin degradación | Recorridos **con los dos movimientos prendidos**: un bucle de dibujo que sobreviviera a `destruir` es la forma de degradación que hay que descartar | [`ADR-01`](Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md) |
-| Ausencia de fallo silencioso | **100 %** de las piezas no dibujadas enumeradas con su índice y su condición, y **0** piezas que desaparezcan sin registro | Inspección del resultado de dibujo sobre los escenarios E-1 y E-7 | [`ADR-02`](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) |
-| Dependencias traídas de una red de distribución externa en tiempo de ejecución | Exactamente **0** | Puerta técnica **PT-03**: la página funciona sin acceso a redes externas [derivado por esta categoría del intake §15] | [`ADR-04`](Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) |
-| Superficie pública del bundle | Exactamente **6** funciones expuestas, bajo **1** nombre propio en el objeto global del navegador y **0** identificadores globales sueltos | Inspección del bundle generado [derivado por esta categoría del intake §17.7.P.2 y P.11 punto 3] | [`ADR-02`](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) |
+| Cero red | Exactamente **0 peticiones** originadas por el archivo de guion | Conteo en la pestaña de red, **con los dos movimientos automáticos prendidos y sostenidos** —su peor caso— y también durante los gestos de rotar y acercar | [`ADR-12003`](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
+| Cero persistencia | **0 claves** escritas en el almacenamiento del navegador, y ningún estado conservado entre páginas | Inspección del almacenamiento con cualquier estado de los movimientos; se comprueba además que recargar la página no repone la preferencia | [`ADR-12003`](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) |
+| Se ejercita sin backend | Recorrido completo de las **seis** funciones con un texto pegado a mano y **0 servicios del backend disponibles** | Página integradora sin backend, que es el sample S-1 | [`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) |
+| Disposición determinista | Dos procesados del mismo texto producen la **misma disposición**, comparable pieza por pieza | Comparación de dos procesados; **se compara posición, no orientación**, y la propiedad vale con cualquier estado de los movimientos | [`ADR-12005`](Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md) |
+| Liberación de recursos | **10 recorridos** de ida y vuelta entre trabajos sin degradación | Recorridos **con los dos movimientos prendidos**: un bucle de dibujo que sobreviviera a `destruir` es la forma de degradación que hay que descartar | [`ADR-12001`](Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md) |
+| Ausencia de fallo silencioso | **100 %** de las piezas no dibujadas enumeradas con su índice y su condición, y **0** piezas que desaparezcan sin registro | Inspección del resultado de dibujo sobre los escenarios E-1 y E-7 | [`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) |
+| Dependencias traídas de una red de distribución externa en tiempo de ejecución | Exactamente **0** | Puerta técnica **PT-03**: la página funciona sin acceso a redes externas [derivado por esta categoría del intake §15] | [`ADR-12004`](Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) |
+| Superficie pública del bundle | Exactamente **6** funciones expuestas, bajo **1** nombre propio en el objeto global del navegador y **0** identificadores globales sueltos | Inspección del bundle generado [derivado por esta categoría del intake §17.7.P.2 y P.11 punto 3] | [`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) |
 
 **Por qué la propiedad de cero red declara sus condiciones de medición**, y por qué esta sección las repite en lugar de omitirlas: el umbral no cambia —sigue siendo exactamente 0— pero sin condiciones la prueba mediría el caso fácil. Los entornos de prueba automatizados suelen declarar preferencia de movimiento reducido; un anfitrión que la respeta arranca la instancia con los dos movimientos apagados, y una prueba escrita ahí quedaría en verde **sin haber ejercitado nunca el bucle de dibujo**, que es el caso donde una petición se colaría. Que la fachada **no consulte esa preferencia por su cuenta** (G-3) es lo que hace que la prueba pueda prenderlos aunque el entorno la declare.
 
@@ -201,10 +201,10 @@ Los seis primeros son las **seis propiedades transversales verificables** que [`
 | Riesgo | Impacto | Probabilidad | Mitigación |
 | --- | --- | --- | --- |
 | Que aparezca una petición de red en el bundle, por comodidad o por una dependencia que la haga por dentro | Muy alto: reabre contenido mixto, restricción de origen cruzado y exposición de la dirección del servidor propio, y rompe `RA-01` a través de `RA-02` | Baja para la primera causa, **media para la segunda** | Puerta verificable por inspección: cero ocurrencias de las tres formas de petición en el código fuente **y en el bundle generado**; más el conteo en la pestaña de red con los movimientos prendidos |
-| Que el anfitrión termine dependiendo de nombres internos del motor de dibujo, y el motor deje de ser reemplazable | Alto: se pierde el punto de extensión declarado del producto | Media: es la presión natural cuando una pantalla necesita algo que la fachada no expone | [`ADR-01`](Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md) y [`Extensibilidad.md`](Extensibilidad.md) §5, que declara qué se hace cuando falta algo en la fachada |
+| Que el anfitrión termine dependiendo de nombres internos del motor de dibujo, y el motor deje de ser reemplazable | Alto: se pierde el punto de extensión declarado del producto | Media: es la presión natural cuando una pantalla necesita algo que la fachada no expone | [`ADR-12001`](Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md) y [`Extensibilidad.md`](Extensibilidad.md) §5, que declara qué se hace cuando falta algo en la fachada |
 | Que un bucle de dibujo sobreviva a `destruir` y se acumule al recorrer trabajos | Alto: degradación progresiva, que es lo que `PT-02` mide | Media | NFR de liberación de recursos medido **con los movimientos prendidos**, que es su peor caso |
-| Que la versión del motor de dibujo que se ancle exija una interfaz distinta de la del visualizador previo | Medio: retrabajo acotado a la capa 3 | Alta: el intake ya lo anticipa, porque el visualizador previo reimplementa la cámara orbital a mano por una carencia de su versión | [`ADR-04`](Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md), que confina el motor a la capa 3, y el anclaje explícito de versión que el producto exige |
-| Que una pieza deje de dibujarse sin quedar enumerada | Alto: es exactamente el defecto original que NB-06 viene a cerrar | Baja | Garantía G-5 y NFR de ausencia de fallo silencioso, con los escenarios E-1 y E-7 como material |
+| Que la versión del motor de dibujo que se ancle exija una interfaz distinta de la del visualizador previo | Medio: retrabajo acotado a la capa 3 | Alta: el intake ya lo anticipa, porque el visualizador previo reimplementa la cámara orbital a mano por una carencia de su versión | [`ADR-12004`](Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md), que confina el motor a la capa 3, y el anclaje explícito de versión que el producto exige |
+| Que una pieza deje de dibujarse sin quedar enumerada | Alto: es exactamente el defecto original que NB-00006 viene a cerrar | Baja | Garantía G-5 y NFR de ausencia de fallo silencioso, con los escenarios E-1 y E-7 como material |
 | Que se acuñe un código de condición aguas abajo, fuera de la categoría 02 | Medio: el conjunto deja de ser cerrado y 03 y 08 se desincronizan | Media: el catálogo de 03 ya creció de doce a trece entradas **sin** que creciera el conjunto de códigos, y esa distinción es fácil de perder | Regla declarada: los códigos son siete, su fuente única es el contrato de fachada, y un curso nuevo es fila de curso y no código |
 
 ## 10. Trazabilidad
@@ -213,10 +213,10 @@ Los seis primeros son las **seis propiedades transversales verificables** que [`
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU cubiertos | CU-01 a CU-07, los siete de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 |
-| NB que sostiene | **NB-06**, que es su necesidad, y **NB-04** parcialmente, sólo en la parte de que las piezas se dibujen |
+| CU cubiertos | CU-12001 a CU-12007, los siete de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 |
+| NB que sostiene | **NB-00006**, que es su necesidad, y **NB-00004** parcialmente, sólo en la parte de que las piezas se dibujen |
 | RN aplicables | **Ninguna.** Un visualizador puro no tiene reglas de dominio: las decide el backend. Lo que tiene son condiciones de contrato, que no son reglas de negocio |
-| ADRs que lo gobiernan | ADR-01, ADR-02, ADR-03, ADR-04, ADR-05, ADR-06 |
+| ADRs que lo gobiernan | ADR-12001, ADR-12002, ADR-12003, ADR-12004, ADR-12005, ADR-12006 |
 | Contratos que expone | [`Contratos-Abstractions.md`](Contratos-Abstractions.md), y el punto de extensión en [`Extensibilidad.md`](Extensibilidad.md) |
 | Tests previstos en 08 | Verificación de las **siete** garantías; las **seis** propiedades transversales con sus condiciones de medición; los escenarios **E-1** y **E-7** como material de dibujo; y las dos puertas técnicas `PT-02` y `PT-03` |
 
@@ -226,13 +226,13 @@ Las siete filas están, `G-1` a `G-7`, sin agrupar. Son las de [`../02-Especific
 
 | Garantía | Enunciado, en una línea | Componente que la sostiene | ADR |
 | --- | --- | --- | --- |
-| G-1 · Cero red | Ninguna función ni ningún movimiento origina una petición | Todos, por ausencia; se verifica sobre el bundle entero | ADR-03 |
-| G-2 · Cero persistencia | Ninguna función escribe en el almacenamiento del navegador | Todos, por ausencia | ADR-03 |
-| G-3 · Sin configuración propia | Todo lo que la instancia necesita llega por parámetro | Fachada plana | ADR-02, ADR-03 |
-| G-4 · Aislamiento entre instancias | Dos instancias vivas no comparten escena, ni selección, ni disposición | Registro de instancias, Servicio de dibujo | ADR-02 |
-| G-5 · Sin fallo silencioso | Toda pieza no dibujada queda enumerada con su índice | Lector del texto, Servicio de dibujo | ADR-02 |
-| G-6 · Determinismo | La misma entrada produce la misma **posición** de cada pieza, no la misma orientación | Servicio de dibujo | ADR-05 |
-| G-7 · Terminación controlada | O la operación surte efecto completo, o la instancia queda como estaba | Fachada plana | ADR-02 |
+| G-1 · Cero red | Ninguna función ni ningún movimiento origina una petición | Todos, por ausencia; se verifica sobre el bundle entero | ADR-12003 |
+| G-2 · Cero persistencia | Ninguna función escribe en el almacenamiento del navegador | Todos, por ausencia | ADR-12003 |
+| G-3 · Sin configuración propia | Todo lo que la instancia necesita llega por parámetro | Fachada plana | ADR-12002, ADR-12003 |
+| G-4 · Aislamiento entre instancias | Dos instancias vivas no comparten escena, ni selección, ni disposición | Registro de instancias, Servicio de dibujo | ADR-12002 |
+| G-5 · Sin fallo silencioso | Toda pieza no dibujada queda enumerada con su índice | Lector del texto, Servicio de dibujo | ADR-12002 |
+| G-6 · Determinismo | La misma entrada produce la misma **posición** de cada pieza, no la misma orientación | Servicio de dibujo | ADR-12005 |
+| G-7 · Terminación controlada | O la operación surte efecto completo, o la instancia queda como estaba | Fachada plana | ADR-12002 |
 
 **Las siete garantías son parte del contrato, no detalles de implementación**: perder cualquiera es cambio mayor aunque las seis firmas no se toquen.
 

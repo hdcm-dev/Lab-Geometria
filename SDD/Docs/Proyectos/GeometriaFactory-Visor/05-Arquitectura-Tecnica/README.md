@@ -32,12 +32,12 @@ Lo que hay que haber entendido antes de tocar esta sección: **su contribución 
 
 | ADR | Título | Categoría | Estado |
 | --- | --- | --- | --- |
-| [ADR-01](Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md) | Tres capas con fachada plana, y el motor de dibujo confinado a la capa interna | Estilo | Propuesto |
-| [ADR-02](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) | La superficie pública son seis funciones planas, siete garantías y siete códigos | Estilo | Propuesto |
-| [ADR-03](Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md) | Visualizador puro: cero red, cero persistencia, cero configuración y cero identidad | Seguridad | Propuesto |
-| [ADR-04](Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) | Motor de dibujo empaquetado dentro del bundle y aislado tras la capa 3 | Despliegue | Propuesto |
-| [ADR-05](Adrs/ADR-05-Disposicion-Determinista-Derivada-Del-Indice.md) | Disposición determinista derivada del índice, y el determinismo es de posición y no de orientación | Estilo | Propuesto |
-| [ADR-06](Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) | El artefacto es un bundle generado, y su versionado es el del punto de extensión | Despliegue | Propuesto |
+| [ADR-12001](Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md) | Tres capas con fachada plana, y el motor de dibujo confinado a la capa interna | Estilo | Propuesto |
+| [ADR-12002](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) | La superficie pública son seis funciones planas, siete garantías y siete códigos | Estilo | Propuesto |
+| [ADR-12003](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) | Visualizador puro: cero red, cero persistencia, cero configuración y cero identidad | Seguridad | Propuesto |
+| [ADR-12004](Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) | Motor de dibujo empaquetado dentro del bundle y aislado tras la capa 3 | Despliegue | Propuesto |
+| [ADR-12005](Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md) | Disposición determinista derivada del índice, y el determinismo es de posición y no de orientación | Estilo | Propuesto |
+| [ADR-12006](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) | El artefacto es un bundle generado, y su versionado es el del punto de extensión | Despliegue | Propuesto |
 
 Ninguna superada, ninguna rechazada.
 
@@ -54,7 +54,7 @@ En una línea: **0** peticiones de red y **0** claves escritas, **6 de 6** funci
 ## 5. Orden de lectura sugerido
 
 1. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §2 y §3 — el estilo de tres capas y los seis componentes.
-2. [`Adrs/ADR-03`](Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md) — las cuatro ausencias. Es lo que define al proyecto de código, y lo que explica por qué el anfitrión carga con tanto trabajo.
+2. [`Adrs/ADR-12003`](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) — las cuatro ausencias. Es lo que define al proyecto de código, y lo que explica por qué el anfitrión carga con tanto trabajo.
 3. [`Flujo-Ejecucion.md`](Flujo-Ejecucion.md) §3 — la canalización de dibujo. Es donde se ve qué se lee del texto y qué deliberadamente no.
 4. [`Contratos-Abstractions.md`](Contratos-Abstractions.md) §5 — los siete códigos, con la distinción entre **curso** y **código**, que es lo que más se malinterpreta al bajar a 03 y a 08.
 5. [`Extensibilidad.md`](Extensibilidad.md) — el punto de extensión, y sobre todo su §5, el proceso por el que la fachada crece sin romperse.

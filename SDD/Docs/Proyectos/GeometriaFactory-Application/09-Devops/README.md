@@ -27,7 +27,7 @@
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.0 | Propuesto | Los **tres** stages, los **once** gates materializados con su carácter, la puerta propia del intake y dónde se la hace cumplir, triggers, matriz, caché, promoción, reversión y notificaciones |
-| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico y convenciones de mensaje, la tabla de clases de cambio de `ADR-03` con su asimetría aditiva-mayor, modelo de ramas y ausencia de canales |
+| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico y convenciones de mensaje, la tabla de clases de cambio de `ADR-04003` con su asimetría aditiva-mayor, modelo de ramas y ausencia de canales |
 | [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Por qué no hay ambientes ni canales, dónde viaja el ensamblado, y la ausencia de configuración y de secretos propios |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario, firma, nivel de integridad de la construcción, análisis de dependencias, análisis estático y dinámico, política ante vulnerabilidades, y la autorización como preocupación de cadena de suministro |
 
@@ -56,16 +56,16 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | QG-01 | `build` | Bloqueante |
 | QG-02 | `test` | Bloqueante |
 | QG-03 | `test`, informe de cobertura por componente | **Condicionado** |
-| QG-04 | `test`, con `TC-26`, más la revisión del pull request | Bloqueante |
-| QG-05 | `build`, inspección del archivo de proyecto (`TC-27`) | Bloqueante |
-| QG-06 | `test`, inspección `TC-28` en las dos direcciones | Bloqueante |
-| QG-07 | Cierre de la etapa, con `TC-11` y la matriz de comprobaciones | Bloqueante al cierre de etapa |
-| QG-08 | `test`, inspección de los once orquestadores y `TC-29` | Bloqueante |
-| QG-09 | `test`, con `TC-30` | Bloqueante |
+| QG-04 | `test`, con `TC-04026`, más la revisión del pull request | Bloqueante |
+| QG-05 | `build`, inspección del archivo de proyecto (`TC-04027`) | Bloqueante |
+| QG-06 | `test`, inspección `TC-04028` en las dos direcciones | Bloqueante |
+| QG-07 | Cierre de la etapa, con `TC-04011` y la matriz de comprobaciones | Bloqueante al cierre de etapa |
+| QG-08 | `test`, inspección de los once orquestadores y `TC-04029` | Bloqueante |
+| QG-09 | `test`, con `TC-04030` | Bloqueante |
 | QG-10 | `test`, medición sobre la batería unitaria | **Condicionado** |
-| QG-11 | Revisión del pull request, con `TC-31` | Se rechaza en revisión |
+| QG-11 | Revisión del pull request, con `TC-04031` | Se rechaza en revisión |
 
-**Los dos condicionados se miden y se registran igual.** Dependen de valores rotulados **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para los 500 ms—, y `Estrategia-Calidad.md` §3.1 declara que la puerta no se declara bloqueante en esta categoría hasta que el Product Owner los confirme. **Confirmados, los dos pasan a bloqueantes sin ningún otro cambio**: el umbral no se toca. La tarea que los eleva es `BT-18`, al cerrar la etapa `d`.
+**Los dos condicionados se miden y se registran igual.** Dependen de valores rotulados **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para los 500 ms—, y `Estrategia-Calidad.md` §3.1 declara que la puerta no se declara bloqueante en esta categoría hasta que el Product Owner los confirme. **Confirmados, los dos pasan a bloqueantes sin ningún otro cambio**: el umbral no se toca. La tarea que los eleva es `BT-04018`, al cerrar la etapa `d`.
 
 **`QG-05` es el gate que sostiene a `QG-04`, y por eso corre antes.** Es la única decisión de ubicación que esta categoría tomó por su cuenta, y su fundamento está en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2: con **0** bibliotecas de persistencia declaradas, una prueba de esta capa no tiene con qué abrir un almacén.
 

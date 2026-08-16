@@ -19,11 +19,11 @@
   - [1.1 Qué significa nivel topológico 0 para este backlog](#11-qué-significa-nivel-topológico-0-para-este-backlog)
   - [1.2 Qué es una historia en un visualizador puro](#12-qué-es-una-historia-en-un-visualizador-puro)
 - [2. Épicas](#2-épicas)
-  - [2.1 Por qué EP-02 no es una etapa nueva](#21-por-qué-ep-02-no-es-una-etapa-nueva)
+  - [2.1 Por qué EP-12002 no es una etapa nueva](#21-por-qué-ep-02-no-es-una-etapa-nueva)
 - [3. Historias por épica](#3-historias-por-épica)
   - [3.1 Índice de historias](#31-índice-de-historias)
-  - [3.2 EP-02 · Medición de las puertas técnicas del visor](#32-ep-02--medición-de-las-puertas-técnicas-del-visor)
-  - [3.3 EP-03 · Visualización del trabajo](#33-ep-03--visualización-del-trabajo)
+  - [3.2 EP-12002 · Medición de las puertas técnicas del visor](#32-ep-02--medición-de-las-puertas-técnicas-del-visor)
+  - [3.3 EP-12003 · Visualización del trabajo](#33-ep-03--visualización-del-trabajo)
 - [4. Métricas de avance](#4-métricas-de-avance)
   - [4.1 Por qué la unidad de estimación queda abierta](#41-por-qué-la-unidad-de-estimación-queda-abierta)
   - [4.2 Por qué la distribución MoSCoW es la que es](#42-por-qué-la-distribución-moscow-es-la-que-es)
@@ -61,15 +61,15 @@ Este backlog convierte en trabajo planificable los **siete** contratos de uso de
 
 | Épica | Nombre | Momento del producto | Descripción breve | Historias | Tareas técnicas |
 | --- | --- | --- | --- | --- | --- |
-| EP-01 | Esqueleto ambulante y verificación de viabilidad | Etapa `a` | El proyecto del bundle existe, su cadena de construcción es reproducible y produce un archivo **vacío pero real** | Ninguna: la etapa `a` no tiene capacidad funcional asociada | BT-01, BT-02, BT-03 |
-| EP-02 | Medición de las puertas técnicas del visor | **Antes de comprometer la etapa `g`** (`Roadmap-Producto.md` §2.2) | Lo que `PT-02` y `PT-03` exigen que ya funcione en ese momento: que el bundle cargue, cree la escena, dibuje, sincronice por índice y libere sus recursos | US-01, US-04, US-09, US-11 | BT-04 a BT-10, BT-12, BT-13, BT-14, BT-16 |
-| EP-03 | Visualización del trabajo | Etapa `g` | Lo que la etapa integra en el producto: el árbol, el movimiento automático de `F-25`, la tolerancia de claves y la página integradora sin backend | US-02, US-03, US-05, US-06, US-07, US-08, US-10, US-12, US-13, US-14 | BT-06, BT-07, BT-11, BT-15, BT-17, BT-18 |
+| EP-12001 | Esqueleto ambulante y verificación de viabilidad | Etapa `a` | El proyecto del bundle existe, su cadena de construcción es reproducible y produce un archivo **vacío pero real** | Ninguna: la etapa `a` no tiene capacidad funcional asociada | BT-12001, BT-12002, BT-12003 |
+| EP-12002 | Medición de las puertas técnicas del visor | **Antes de comprometer la etapa `g`** (`Roadmap-Producto.md` §2.2) | Lo que `PT-02` y `PT-03` exigen que ya funcione en ese momento: que el bundle cargue, cree la escena, dibuje, sincronice por índice y libere sus recursos | US-12001, US-12004, US-12009, US-12011 | BT-12004 a BT-12010, BT-12012, BT-12013, BT-12014, BT-12016 |
+| EP-12003 | Visualización del trabajo | Etapa `g` | Lo que la etapa integra en el producto: el árbol, el movimiento automático de `F-25`, la tolerancia de claves y la página integradora sin backend | US-12002, US-12003, US-12005, US-12006, US-12007, US-12008, US-12010, US-12012, US-12013, US-12014 | BT-12006, BT-12007, BT-12011, BT-12015, BT-12017, BT-12018 |
 
 **Ninguna otra etapa produce épica en este proyecto de código, y es declaración y no olvido.** Las etapas `b` a `f` construyen la cáscara del front, las cuentas, los trabajos y la interpretación; ninguna de ellas dibuja nada. La etapa `h` es el circuito de revisión, y la fachada **dibuja el mismo trabajo para el alumno y para el administrador sin saber cuál de los dos lo mira**, que es exactamente lo que `RA-02` exige (`02` §5.3).
 
-### 2.1 Por qué EP-02 no es una etapa nueva
+### 2.1 Por qué EP-12002 no es una etapa nueva
 
-**EP-02 no crea una etapa, no renombra ninguna y no altera el orden de las ocho comprometidas.** Se apoya en un momento que el roadmap ya declara: su §2.2 ubica a `PT-02` y `PT-03` **antes de comprometer la fase `g`**, y su §5.2 incluye «`PT-02` y `PT-03` medidas antes de comprometer `g`» entre los criterios de la transición `f` → `g`.
+**EP-12002 no crea una etapa, no renombra ninguna y no altera el orden de las ocho comprometidas.** Se apoya en un momento que el roadmap ya declara: su §2.2 ubica a `PT-02` y `PT-03` **antes de comprometer la fase `g`**, y su §5.2 incluye «`PT-02` y `PT-03` medidas antes de comprometer `g`» entre los criterios de la transición `f` → `g`.
 
 De ahí se sigue algo que el backlog tiene que reflejar y que no se lee de la tabla de etapas: **el grueso de este proyecto de código se construye antes de que la etapa `g` se abra**, porque una puerta que no pasa detiene la planificación de la etapa que depende de ella y no se arrastra como deuda. Meter esas cuatro historias dentro de la épica de la etapa `g` habría escondido esa obligación.
 
@@ -87,30 +87,30 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| US-01 | Crear una instancia del visor sobre un elemento de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-01 | EP-02 |
-| US-02 | Fijar el estado inicial de los dos movimientos al crear la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-01 | EP-03 |
-| US-03 | Informar la ausencia de capacidad gráfica en lugar de fallar en silencio | Must | Sin fijar (§4.1) | Propuesta | CU-01 | EP-03 |
-| US-04 | Dibujar las piezas del texto del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-02 |
-| US-05 | Leer las dimensiones con las variantes de clave del emisor | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| US-06 | Enumerar toda pieza no dibujada con su índice y su condición | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| US-07 | Devolver la estructura del texto para que el anfitrión arme el árbol | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| US-08 | Derivar la disposición de cada pieza de su índice | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| US-09 | Resaltar en exclusiva la pieza del índice indicado | Must | Sin fijar (§4.1) | Propuesta | CU-03 | EP-02 |
-| US-10 | Ajustar la escena al tamaño del elemento de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-04 | EP-03 |
-| US-11 | Liberar los recursos de la instancia y cortar su bucle de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-05 | EP-02 |
-| US-12 | Gobernar en vivo los dos movimientos automáticos sin reconstruir la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-07 | EP-03 |
-| US-13 | Detener el movimiento mientras la persona arrastra y mientras la superficie no está visible | Must | Sin fijar (§4.1) | Propuesta | CU-07 | EP-03 |
-| US-14 | Ejercitar las seis funciones desde una página integradora sin backend | Must | Sin fijar (§4.1) | Propuesta | CU-06 | EP-03 |
+| US-12001 | Crear una instancia del visor sobre un elemento de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-12001 | EP-12002 |
+| US-12002 | Fijar el estado inicial de los dos movimientos al crear la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-12001 | EP-12003 |
+| US-12003 | Informar la ausencia de capacidad gráfica en lugar de fallar en silencio | Must | Sin fijar (§4.1) | Propuesta | CU-12001 | EP-12003 |
+| US-12004 | Dibujar las piezas del texto del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12002 |
+| US-12005 | Leer las dimensiones con las variantes de clave del emisor | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12006 | Enumerar toda pieza no dibujada con su índice y su condición | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12007 | Devolver la estructura del texto para que el anfitrión arme el árbol | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12008 | Derivar la disposición de cada pieza de su índice | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12009 | Resaltar en exclusiva la pieza del índice indicado | Must | Sin fijar (§4.1) | Propuesta | CU-12003 | EP-12002 |
+| US-12010 | Ajustar la escena al tamaño del elemento de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-12004 | EP-12003 |
+| US-12011 | Liberar los recursos de la instancia y cortar su bucle de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-12005 | EP-12002 |
+| US-12012 | Gobernar en vivo los dos movimientos automáticos sin reconstruir la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-12007 | EP-12003 |
+| US-12013 | Detener el movimiento mientras la persona arrastra y mientras la superficie no está visible | Must | Sin fijar (§4.1) | Propuesta | CU-12007 | EP-12003 |
+| US-12014 | Ejercitar las seis funciones desde una página integradora sin backend | Must | Sin fijar (§4.1) | Propuesta | CU-12006 | EP-12003 |
 
 **Rol común a las catorce**: el **componente anfitrión** que embebe el bundle, que vive en `GeometriaFactory-Web` y que el contrato nombra como su actor primario.
 
-### 3.2 EP-02 · Medición de las puertas técnicas del visor
+### 3.2 EP-12002 · Medición de las puertas técnicas del visor
 
-#### US-01 — Crear una instancia del visor sobre un elemento de dibujo
+#### US-12001 — Crear una instancia del visor sobre un elemento de dibujo
 
 **Historia.** Como componente anfitrión, quiero crear una instancia del visor sobre un elemento de dibujo y recibir su identificador, para tener una escena viva a la que dirigir las otras cinco funciones.
 
-**Contexto.** Contrato de uso [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Inicializar-Instancia-Del-Visor.md). Proviene de la primera fila de `02` §5.1, «US de creación de instancia». `PT-02` exige que la creación de instancia arme la escena.
+**Contexto.** Contrato de uso [`CU-12001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md). Proviene de la primera fila de `02` §5.1, «US de creación de instancia». `PT-02` exige que la creación de instancia arme la escena.
 
 **Criterios de aceptación.**
 
@@ -118,7 +118,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given dos instancias creadas en la misma página, When se opera sobre una, Then la otra no cambia: no comparten escena, ni selección, ni disposición (garantía `G-4`).
 - Given una instancia creada, When se cuentan las peticiones que origina el archivo de guion, Then son exactamente **cero** (garantía `G-1`).
 
-**Trazabilidad.** NB-06 · CU-01 · Garantías `G-1`, `G-3`, `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-04, BT-05, BT-08 · Tests en 08: verificación de las siete garantías y las puertas `PT-02` y `PT-03`.
+**Trazabilidad.** NB-00006 · CU-12001 · Garantías `G-1`, `G-3`, `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-12004, BT-12005, BT-12008 · Tests en 08: verificación de las siete garantías y las puertas `PT-02` y `PT-03`.
 
 **Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4, y porque `PT-02` no se puede medir sin ella.
 
@@ -126,11 +126,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** **El identificador de instancia existe precisamente para que no haya una instancia global única**: `05` §2.1 declara que esa alternativa se descartó porque rompe `G-4` y porque volvería ambigua la liberación de recursos.
 
-#### US-04 — Dibujar las piezas del texto del trabajo
+#### US-12004 — Dibujar las piezas del texto del trabajo
 
 **Historia.** Como componente anfitrión, quiero pasarle a la instancia el texto del trabajo y que dibuje sus piezas, para que la persona vea en tres dimensiones lo que su programa modeló.
 
-**Contexto.** Contrato de uso [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md). Proviene de la primera fila de `02` §5.1, «US de dibujo del trabajo». `PT-02` exige que dibuje las tres figuras del escenario `E-1` **incluido el ortoedro**.
+**Contexto.** Contrato de uso [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md). Proviene de la primera fila de `02` §5.1, «US de dibujo del trabajo». `PT-02` exige que dibuje las tres figuras del escenario `E-1` **incluido el ortoedro**.
 
 **Criterios de aceptación.**
 
@@ -138,7 +138,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given el texto del escenario `E-7`, When se lo carga, Then se dibujan los **seis** tipos dibujables, tres volumétricos y tres planos.
 - Given una pieza de un tipo fuera de esos seis, When se carga el texto, Then no se dibuja y **queda enumerada** con su índice y la condición `TIPO_NO_DIBUJABLE`.
 
-**Trazabilidad.** NB-06, NB-04 (parcial) · CU-02 · Garantías `G-1`, `G-5`, `G-6` · Componentes: lector del texto, servicio de dibujo, motor de dibujo · BT-07, BT-08, BT-09, BT-14 · Tests en 08: escenarios `E-1` y `E-7` del intake §20 como material declarado.
+**Trazabilidad.** NB-00006, NB-00004 (parcial) · CU-12002 · Garantías `G-1`, `G-5`, `G-6` · Componentes: lector del texto, servicio de dibujo, motor de dibujo · BT-12007, BT-12008, BT-12009, BT-12014 · Tests en 08: escenarios `E-1` y `E-7` del intake §20 como material declarado.
 
 **Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4, y porque es el corazón de `PT-02`.
 
@@ -146,11 +146,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** **El bundle no valida el trabajo ni emite observaciones**: eso es del backend. Que tolere las mismas claves que él **no es duplicar la validación** —el backend decide si el trabajo es válido; el bundle sólo necesita saber de dónde sacar una dimensión para dibujar (`PRODUCT-INTAKE` §17.7.P.11 punto 4).
 
-#### US-09 — Resaltar en exclusiva la pieza del índice indicado
+#### US-12009 — Resaltar en exclusiva la pieza del índice indicado
 
 **Historia.** Como componente anfitrión, quiero resaltar la pieza de un índice dado, para que el árbol y la escena señalen lo mismo cuando la persona toca cualquiera de los dos.
 
-**Contexto.** Contrato de uso [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Seleccionar-Una-Pieza-Por-Su-Indice.md). Proviene de la tercera fila de `02` §5.1, «US de resaltado exclusivo por índice». `PT-02` exige que **el árbol y la escena se sincronicen por índice**.
+**Contexto.** Contrato de uso [`CU-12003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md). Proviene de la tercera fila de `02` §5.1, «US de resaltado exclusivo por índice». `PT-02` exige que **el árbol y la escena se sincronicen por índice**.
 
 **Criterios de aceptación.**
 
@@ -158,7 +158,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given un índice que no corresponde a ninguna pieza dibujada, When se lo selecciona, Then la instancia queda como estaba y se informa la condición correspondiente (garantía `G-7`).
 - Given un identificador de instancia que no corresponde a una instancia viva, When se invoca la selección, Then se informa `INSTANCIA_DESCONOCIDA`.
 
-**Trazabilidad.** NB-06 · CU-03 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-04, BT-05, BT-08, BT-14 · Tests en 08: `PT-02`, parte de sincronización por índice.
+**Trazabilidad.** NB-00006 · CU-12003 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-12004, BT-12005, BT-12008, BT-12014 · Tests en 08: `PT-02`, parte de sincronización por índice.
 
 **Prioridad.** `Must` porque su capacidad de origen, `F-13`, es **`Must Have`** en `PRODUCT-INTAKE` §4 desde la versión **1.19** de esa fuente. Hasta esa decisión esta historia era `Should` **y bloqueante en la práctica**, porque `PT-02` la incluye entre lo que hay que medir antes de comprometer la etapa `g` y una puerta que no pasa detiene la planificación de esa etapa. Este backlog **no la repriorizó por su cuenta**: elevó la tensión como `PA-06` y esperó. **El Product Owner la resolvió el 2026-08-10 subiendo la capacidad**, con ese mismo fundamento; ver §6, `PA-06`, cerrado.
 
@@ -166,11 +166,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** **La presentación del árbol es del anfitrión** (`05` §3.3): la fachada devuelve la estructura y no dibuja el árbol. Lo que esta historia sincroniza es el índice, que es la identidad de la pieza porque el texto no trae identificador.
 
-#### US-11 — Liberar los recursos de la instancia y cortar su bucle de dibujo
+#### US-12011 — Liberar los recursos de la instancia y cortar su bucle de dibujo
 
 **Historia.** Como componente anfitrión, quiero destruir una instancia y que libere sus recursos, para que recorrer trabajos de ida y vuelta no degrade la aplicación.
 
-**Contexto.** Contrato de uso [`CU-05`](../02-Especificacion-Funcional/Casos-De-Uso/CU-05-Destruir-La-Instancia-Y-Liberar-Recursos.md). Proviene de la primera fila de `02` §5.1, «US de liberación de recursos». `PT-02` exige que recorrer diez veces de ida y vuelta no degrade.
+**Contexto.** Contrato de uso [`CU-12005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md). Proviene de la primera fila de `02` §5.1, «US de liberación de recursos». `PT-02` exige que recorrer diez veces de ida y vuelta no degrade.
 
 **Criterios de aceptación.**
 
@@ -178,7 +178,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given diez recorridos de ida y vuelta entre trabajos **con los dos movimientos prendidos**, When se mide la degradación, Then no la hay: ése es el peor caso y es la condición de medición que `02` §6 declara.
 - Given una instancia ya destruida, When se la vuelve a usar, Then se informa `INSTANCIA_DESCONOCIDA`: el registro invalidó su identificador.
 
-**Trazabilidad.** NB-06 · CU-05 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-05, BT-12, BT-14 · Tests en 08: propiedad de liberación de recursos con sus condiciones de medición, y `PT-02`.
+**Trazabilidad.** NB-00006 · CU-12005 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-12005, BT-12012, BT-12014 · Tests en 08: propiedad de liberación de recursos con sus condiciones de medición, y `PT-02`.
 
 **Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4, y porque `PT-02` la mide antes de comprometer la etapa `g`.
 
@@ -186,13 +186,13 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** **Un bucle de dibujo que sobreviviera a la destrucción es exactamente la forma de degradación que esta historia tiene que descartar**, y por eso la medición se hace con los movimientos prendidos: con los movimientos apagados no se ejercitaría (`02` §6, `05` §8).
 
-### 3.3 EP-03 · Visualización del trabajo
+### 3.3 EP-12003 · Visualización del trabajo
 
-#### US-02 — Fijar el estado inicial de los dos movimientos al crear la instancia
+#### US-12002 — Fijar el estado inicial de los dos movimientos al crear la instancia
 
 **Historia.** Como componente anfitrión, quiero fijar al crear la instancia si cada uno de los dos movimientos automáticos arranca prendido o apagado, para respetar la preferencia de movimiento reducido que **yo** consulto, sin que el bundle consulte nada.
 
-**Contexto.** La capacidad `F-25` del intake §4 declara que el anfitrión gobierna los dos movimientos **enviando dos valores de verdad**, y que el bundle **no consulta nada**, en particular no lee la preferencia de movimiento reducido del navegador. Proviene de la quinta fila de `02` §5.1, en su parte de las dos opciones de gobierno de `CU-01`.
+**Contexto.** La capacidad `F-25` del intake §4 declara que el anfitrión gobierna los dos movimientos **enviando dos valores de verdad**, y que el bundle **no consulta nada**, en particular no lee la preferencia de movimiento reducido del navegador. Proviene de la quinta fila de `02` §5.1, en su parte de las dos opciones de gobierno de `CU-12001`.
 
 **Criterios de aceptación.**
 
@@ -200,7 +200,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given una instancia creada, When se inspecciona el bundle, Then **no consulta la preferencia de movimiento reducido del sistema** (garantía `G-3`).
 - Given una instancia creada con los dos movimientos apagados, When se recarga la página, Then la preferencia **no se repone** desde el bundle: no la conserva (garantía `G-2`).
 
-**Trazabilidad.** NB-06 · CU-01 · Garantías `G-1`, `G-2`, `G-3` · Componentes: fachada plana, servicio de dibujo · BT-04, BT-11 · Tests en 08: propiedades de cero red y cero persistencia con sus condiciones de medición.
+**Trazabilidad.** NB-00006 · CU-12001 · Garantías `G-1`, `G-2`, `G-3` · Componentes: fachada plana, servicio de dibujo · BT-12004, BT-12011 · Tests en 08: propiedades de cero red y cero persistencia con sus condiciones de medición.
 
 **Prioridad.** `Must` porque `PRODUCT-INTAKE` §4 declara `F-25` como `Must Have`, y porque el roadmap §5.2 incorporó el gobierno independiente de los dos movimientos como criterio de la transición `g` → `h`.
 
@@ -208,7 +208,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** Que el bundle **no** consulte esa preferencia no afloja `RA-02`: la confirma, y además es lo que hace que la prueba de cero red pueda prender los movimientos aunque el entorno de prueba declare movimiento reducido (`02` §6).
 
-#### US-03 — Informar la ausencia de capacidad gráfica en lugar de fallar en silencio
+#### US-12003 — Informar la ausencia de capacidad gráfica en lugar de fallar en silencio
 
 **Historia.** Como componente anfitrión, quiero que la creación de instancia me informe cuando el navegador no tiene capacidad gráfica tridimensional, para poder mostrar una alternativa en lugar de una escena vacía.
 
@@ -220,19 +220,19 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given ese mismo caso, When se inspecciona el estado, Then no queda ninguna instancia a medio construir (garantía `G-7`).
 - Given cualquiera de los dos casos, When se cuentan los códigos de condición del contrato, Then siguen siendo **siete**: esta historia no acuña ninguno nuevo.
 
-**Trazabilidad.** NB-06 · CU-01 · Garantías `G-5`, `G-7` · Componentes: fachada plana · BT-04, BT-06 · Tests en 08: verificación de las siete garantías.
+**Trazabilidad.** NB-00006 · CU-12001 · Garantías `G-5`, `G-7` · Componentes: fachada plana · BT-12004, BT-12006 · Tests en 08: verificación de las siete garantías.
 
-**Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4, y porque una escena que no aparece sin que nadie se entere es exactamente el problema que `NB-06` viene a cerrar.
+**Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4, y porque una escena que no aparece sin que nadie se entere es exactamente el problema que `NB-00006` viene a cerrar.
 
 **Verificación de entrada.** Cumple los siete criterios de la DoR.
 
 **Notas.** **La versión mínima de navegador queda abierta y no se decide acá**: la fuente no la fija y el requisito se declara por capacidad (`05` §11 `PA-04`, recogido como `PA-05` de §6).
 
-#### US-05 — Leer las dimensiones con las variantes de clave del emisor
+#### US-12005 — Leer las dimensiones con las variantes de clave del emisor
 
 **Historia.** Como componente anfitrión, quiero que el bundle lea las dimensiones tolerando las variantes de clave que el emisor real produce, para que ninguna pieza que el producto interpreta quede sin dibujar.
 
-**Contexto.** Proviene de la última fila de `02` §5.1, «US de lectura de dimensiones con las variantes de clave del emisor», que traza a `NB-04` **sólo en su parte de piezas efectivamente dibujadas**.
+**Contexto.** Proviene de la última fila de `02` §5.1, «US de lectura de dimensiones con las variantes de clave del emisor», que traza a `NB-00004` **sólo en su parte de piezas efectivamente dibujadas**.
 
 **Criterios de aceptación.**
 
@@ -240,7 +240,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given una pieza a la que le **falta** la clave o el componente del que se lee la medida, When se la procesa, Then no se dibuja y queda enumerada con `DIMENSION_NO_LEGIBLE`.
 - Given una dimensión cuyo valor es cero, When se la procesa, Then **la pieza se dibuja**: el cero es una dimensión legible, y lo que produce la condición es la **ausencia** de la clave, nunca el valor que trae.
 
-**Trazabilidad.** NB-06, NB-04 (parcial) · CU-02 · Garantías `G-5` · Componentes: lector del texto · BT-07 · Tests en 08: escenario `E-8` del intake §20, que se incorporó precisamente para `DIMENSION_NO_LEGIBLE`.
+**Trazabilidad.** NB-00006, NB-00004 (parcial) · CU-12002 · Garantías `G-5` · Componentes: lector del texto · BT-12007 · Tests en 08: escenario `E-8` del intake §20, que se incorporó precisamente para `DIMENSION_NO_LEGIBLE`.
 
 **Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4.
 
@@ -248,11 +248,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** El tercer criterio existe porque **la visualización previa evaluaba la verdad del número y perdía la figura**, que es lo que la garantía `G-5` viene a impedir (`05` §6).
 
-#### US-06 — Enumerar toda pieza no dibujada con su índice y su condición
+#### US-12006 — Enumerar toda pieza no dibujada con su índice y su condición
 
 **Historia.** Como componente anfitrión, quiero recibir en el resultado de dibujo la lista de las piezas que no se dibujaron, con su índice y su condición, para poder decirle a la persona qué falta y por qué.
 
-**Contexto.** Es la garantía `G-5`, ausencia de fallo silencioso, y `02` §6 la declara como la propiedad **que cierra el problema original de `NB-06`**: hoy, en la visualización previa, la figura simplemente no aparece y nadie se entera.
+**Contexto.** Es la garantía `G-5`, ausencia de fallo silencioso, y `02` §6 la declara como la propiedad **que cierra el problema original de `NB-00006`**: hoy, en la visualización previa, la figura simplemente no aparece y nadie se entera.
 
 **Criterios de aceptación.**
 
@@ -260,15 +260,15 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given cualquier texto, When se compara la cantidad de piezas del conjunto con las dibujadas más las enumeradas, Then **no falta ninguna**: cero piezas desaparecen sin registro.
 - Given los escenarios `E-1` y `E-7`, When se inspecciona el resultado, Then el **100 %** de las piezas no dibujadas está enumerado.
 
-**Trazabilidad.** NB-06 · CU-02 · Garantía `G-5` · Componentes: lector del texto, servicio de dibujo · BT-07, BT-08 · Tests en 08: propiedad de ausencia de fallo silencioso, sin condición adicional de medición.
+**Trazabilidad.** NB-00006 · CU-12002 · Garantía `G-5` · Componentes: lector del texto, servicio de dibujo · BT-12007, BT-12008 · Tests en 08: propiedad de ausencia de fallo silencioso, sin condición adicional de medición.
 
-**Prioridad.** `Must` porque es la garantía que `NB-06` exige y porque `05` §9 declara que una pieza que deje de dibujarse sin quedar enumerada es **exactamente el defecto original** que esa necesidad viene a cerrar.
+**Prioridad.** `Must` porque es la garantía que `NB-00006` exige y porque `05` §9 declara que una pieza que deje de dibujarse sin quedar enumerada es **exactamente el defecto original** que esa necesidad viene a cerrar.
 
 **Verificación de entrada.** Cumple los siete criterios de la DoR.
 
 **Notas.** **El bundle no emite observaciones**: ni advertencias ni errores de validación, que son del backend (`02` §2). Lo que enumera son piezas no dibujadas con una **condición del contrato**, que es otra cosa.
 
-#### US-07 — Devolver la estructura del texto para que el anfitrión arme el árbol
+#### US-12007 — Devolver la estructura del texto para que el anfitrión arme el árbol
 
 **Historia.** Como componente anfitrión, quiero que la fachada me devuelva la estructura del texto, para armar el árbol colapsable en mi propia interfaz.
 
@@ -280,19 +280,19 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given esa estructura, When se la compara con el texto original, Then **no lo reescribe ni lo normaliza**: el texto es un dato de entrada opaco.
 - Given la estructura devuelta, When se busca en ella cualquier decisión de presentación, Then no hay ninguna: la forma del árbol es del anfitrión.
 
-**Trazabilidad.** NB-06 · CU-02 · Garantías `G-3`, `G-5` · Componentes: fachada plana, lector del texto · BT-04, BT-07 · Tests en 08: recorrido de `CU-06` sobre la página integradora.
+**Trazabilidad.** NB-00006 · CU-12002 · Garantías `G-3`, `G-5` · Componentes: fachada plana, lector del texto · BT-12004, BT-12007 · Tests en 08: recorrido de `CU-12006` sobre la página integradora.
 
 **Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4, que declara la previsualización **y** el árbol colapsable.
 
 **Verificación de entrada.** Cumple los siete criterios de la DoR.
 
-**Notas.** El índice que trae la estructura es el mismo con el que US-09 sincroniza el resaltado: es la identidad de la pieza y no un número de presentación.
+**Notas.** El índice que trae la estructura es el mismo con el que US-12009 sincroniza el resaltado: es la identidad de la pieza y no un número de presentación.
 
-#### US-08 — Derivar la disposición de cada pieza de su índice
+#### US-12008 — Derivar la disposición de cada pieza de su índice
 
 **Historia.** Como componente anfitrión, quiero que la disposición de las piezas se derive del índice de cada una, para que procesar el mismo trabajo dos veces produzca la misma escena.
 
-**Contexto.** [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Disposicion-Determinista-Derivada-Del-Indice.md) reemplaza el ordenamiento aleatorio del visualizador previo por posición derivada del índice. Proviene de la tercera fila de `02` §5.1, «US de disposición derivada del índice».
+**Contexto.** [`ADR-12005`](../05-Arquitectura-Tecnica/Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md) reemplaza el ordenamiento aleatorio del visualizador previo por posición derivada del índice. Proviene de la tercera fila de `02` §5.1, «US de disposición derivada del índice».
 
 **Criterios de aceptación.**
 
@@ -300,7 +300,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given esa comparación, When se mira la orientación de las piezas en un instante, Then **no se compara**: el determinismo es de la posición y no de la orientación (garantía `G-6`).
 - Given cualquier estado de los dos movimientos automáticos, When se repite la comparación, Then el resultado no cambia: prenderlos o apagarlos con la instancia viva no altera la disposición.
 
-**Trazabilidad.** NB-06 · CU-02 · Garantía `G-6` · Componentes: servicio de dibujo · BT-10 · Tests en 08: propiedad de disposición determinista con sus condiciones de medición.
+**Trazabilidad.** NB-00006 · CU-12002 · Garantía `G-6` · Componentes: servicio de dibujo · BT-12010 · Tests en 08: propiedad de disposición determinista con sus condiciones de medición.
 
 **Prioridad.** `Must` porque su capacidad de origen, `F-13`, es **`Must Have`** en `PRODUCT-INTAKE` §4 desde la versión **1.19** de esa fuente. Era `Should` hasta esa decisión, aunque ya fuera criterio de la transición `g` → `h` del roadmap §5.2 —con la precisión de que se predica de la posición y no de la orientación— y estuviera entre lo que `PT-02` mide: esa contradicción es la que el Product Owner resolvió; ver §6, `PA-06`, cerrado.
 
@@ -308,11 +308,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** La precisión del segundo criterio la introdujo el roadmap 1.2 para que el movimiento automático de `F-25` **no contradijera** el criterio de disposición determinista, y la fuente de esa precisión es `PRODUCT-INTAKE` §17.7.P.10.
 
-#### US-10 — Ajustar la escena al tamaño del elemento de dibujo
+#### US-12010 — Ajustar la escena al tamaño del elemento de dibujo
 
 **Historia.** Como componente anfitrión, quiero pedirle a la instancia que recalcule su relación de aspecto cuando cambio el tamaño del elemento de dibujo, para que la escena no se deforme.
 
-**Contexto.** Contrato de uso [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Redimensionar-La-Escena.md). Proviene de la primera fila de `02` §5.1, «US de ajuste al espacio disponible».
+**Contexto.** Contrato de uso [`CU-12004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md). Proviene de la primera fila de `02` §5.1, «US de ajuste al espacio disponible».
 
 **Criterios de aceptación.**
 
@@ -320,7 +320,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given un ajuste pedido, When se consulta el estado de la instancia, Then la disposición, la selección vigente y el estado de los movimientos **no cambian**.
 - Given un identificador que no corresponde a una instancia viva, When se pide el ajuste, Then se informa `INSTANCIA_DESCONOCIDA`.
 
-**Trazabilidad.** NB-06 · CU-04 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-04, BT-05, BT-08 · Tests en 08: recorrido de `CU-06`.
+**Trazabilidad.** NB-00006 · CU-12004 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-12004, BT-12005, BT-12008 · Tests en 08: recorrido de `CU-12006`.
 
 **Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4: una escena deformada no cumple la previsualización que la capacidad declara.
 
@@ -328,11 +328,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** **El anfitrión es quien detecta el cambio de tamaño**; la fachada no observa el elemento por su cuenta, porque eso sería conocimiento del sistema que `RA-02` le niega.
 
-#### US-12 — Gobernar en vivo los dos movimientos automáticos sin reconstruir la instancia
+#### US-12012 — Gobernar en vivo los dos movimientos automáticos sin reconstruir la instancia
 
 **Historia.** Como componente anfitrión, quiero prender y apagar por separado la órbita de la cámara y el giro de las piezas sobre una instancia ya viva, para que la persona controle el movimiento sin perder lo que está mirando.
 
-**Contexto.** Contrato de uso [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Gobernar-El-Movimiento-Automatico-De-La-Escena.md), que existe porque `PRODUCT-INTAKE` §17.7.P.3 declara la **sexta función** de la fachada. Proviene de la quinta fila de `02` §5.1. El roadmap §5.2 lo incorporó como **séptimo criterio** de la transición `g` → `h`.
+**Contexto.** Contrato de uso [`CU-12007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md), que existe porque `PRODUCT-INTAKE` §17.7.P.3 declara la **sexta función** de la fachada. Proviene de la quinta fila de `02` §5.1. El roadmap §5.2 lo incorporó como **séptimo criterio** de la transición `g` → `h`.
 
 **Criterios de aceptación.**
 
@@ -340,7 +340,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given ese cambio, When se consulta la instancia, Then **no se reconstruyó**: no se recargó el texto, no cambió la disposición y no se perdió la selección vigente.
 - Given un cambio de movimiento, When se consulta el resultado, Then devuelve el **estado efectivo de los dos**.
 
-**Trazabilidad.** NB-06 y la capacidad `F-25` del intake §4 · CU-07 · Garantías `G-1`, `G-2`, `G-3`, `G-6` · Componentes: fachada plana, servicio de dibujo · BT-04, BT-11 · Tests en 08: criterios de aceptación de `CU-07` y propiedades de cero red y cero persistencia.
+**Trazabilidad.** NB-00006 y la capacidad `F-25` del intake §4 · CU-12007 · Garantías `G-1`, `G-2`, `G-3`, `G-6` · Componentes: fachada plana, servicio de dibujo · BT-12004, BT-12011 · Tests en 08: criterios de aceptación de `CU-12007` y propiedades de cero red y cero persistencia.
 
 **Prioridad.** `Must` porque `PRODUCT-INTAKE` §4 declara `F-25` como `Must Have` desde su versión 1.7, con el fundamento de que **la órbita de la cámara ya existe en la visualización que la cátedra usa hoy** y de que diferirla sería portar quitando algo que funciona.
 
@@ -348,7 +348,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** El estado de los movimientos **sobrevive a la carga de otro texto**, y es una asimetría deliberada: cargar otro texto reemplaza el contenido dibujado y no el gobierno de la escena; la selección vigente y el resultado de dibujo, en cambio, sí se reemplazan (`05` §6).
 
-#### US-13 — Detener el movimiento mientras la persona arrastra y mientras la superficie no está visible
+#### US-12013 — Detener el movimiento mientras la persona arrastra y mientras la superficie no está visible
 
 **Historia.** Como componente anfitrión, quiero que los movimientos automáticos se detengan solos mientras la persona arrastra la cámara y mientras la superficie de dibujo no está visible, para no pelearle el control ni gastar recursos en un movimiento que nadie ve.
 
@@ -360,7 +360,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given ese mismo movimiento, When la superficie de dibujo deja de estar visible, Then el bucle se detiene.
 - Given cualquiera de las dos detenciones, When se consulta el estado gobernado, Then **no cambió**: el anfitrión no tiene que apagar su control porque el bucle se haya detenido solo.
 
-**Trazabilidad.** NB-06 y la capacidad `F-25` · CU-07 · Garantías `G-1`, `G-7` · Componentes: servicio de dibujo · BT-11 · Tests en 08: criterios de aceptación de `CU-07`.
+**Trazabilidad.** NB-00006 y la capacidad `F-25` · CU-12007 · Garantías `G-1`, `G-7` · Componentes: servicio de dibujo · BT-12011 · Tests en 08: criterios de aceptación de `CU-12007`.
 
 **Prioridad.** `Must` por derivar de `F-25`, `Must Have` en `PRODUCT-INTAKE` §4, que declara explícitamente que los dos se detienen mientras la persona arrastra.
 
@@ -368,11 +368,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Notas.** La distinción entre **detener el bucle** y **cambiar el estado gobernado** es lo que hace que el anfitrión pueda dibujar un control que refleje la intención de la persona y no el instante del bucle.
 
-#### US-14 — Ejercitar las seis funciones desde una página integradora sin backend
+#### US-12014 — Ejercitar las seis funciones desde una página integradora sin backend
 
 **Historia.** Como componente anfitrión —y como cualquier integrador del punto de extensión—, quiero recorrer las seis funciones de la fachada desde una página con un texto pegado a mano y sin ningún servicio del backend disponible, para comprobar que el bundle es de verdad un visualizador puro.
 
-**Contexto.** Contrato de uso [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Ejercitar-La-Fachada-Sin-Backend.md), que es **transversal** y es además el sample `S-1` del producto (`PRODUCT-INTAKE` §16.1 y §18). `PRODUCT-INTAKE` §16.1 declara que es «una propiedad exigida explícitamente» y no un agregado de conveniencia.
+**Contexto.** Contrato de uso [`CU-12006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md), que es **transversal** y es además el sample `S-1` del producto (`PRODUCT-INTAKE` §16.1 y §18). `PRODUCT-INTAKE` §16.1 declara que es «una propiedad exigida explícitamente» y no un agregado de conveniencia.
 
 **Criterios de aceptación.**
 
@@ -380,7 +380,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 - Given ese recorrido, When se cuentan las peticiones originadas por el archivo de guion **con los dos movimientos prendidos y sostenidos**, Then son exactamente **cero**.
 - Given ese recorrido, When se inspecciona el almacenamiento del navegador, Then hay **cero** claves escritas, y recargar la página no repone ninguna preferencia.
 
-**Trazabilidad.** NB-06 y, por contribución negativa, `NB-08` · CU-06 · Garantías `G-1` a `G-7`, las siete · Componentes: la fachada entera · BT-15, BT-16 · Tests en 08: las **seis** propiedades transversales de `02` §6 con sus condiciones de medición.
+**Trazabilidad.** NB-00006 y, por contribución negativa, `NB-00008` · CU-12006 · Garantías `G-1` a `G-7`, las siete · Componentes: la fachada entera · BT-12015, BT-12016 · Tests en 08: las **seis** propiedades transversales de `02` §6 con sus condiciones de medición.
 
 **Prioridad.** `Must` porque es el sample declarado del producto y porque es donde las seis propiedades transversales se verifican juntas: repartidas entre los otros seis contratos de uso, ninguno las verificaría todas (`02` §3.1 punto 2).
 
@@ -407,7 +407,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 | Tareas técnicas declaradas | 18 |
 | Tareas técnicas cerradas | 0 de 18 |
 | Etapas del producto que este proyecto de código toca | 2 de las 8 comprometidas: `a` y `g`, más el momento de medición de `PT-02` y `PT-03` que precede a la `g` |
-| Deuda declarada en el backlog | 4 tareas técnicas que cierran un punto abierto: BT-03, BT-09, BT-17 y BT-18 |
+| Deuda declarada en el backlog | 4 tareas técnicas que cierran un punto abierto: BT-12003, BT-12009, BT-12017 y BT-12018 |
 
 ### 4.1 Por qué la unidad de estimación queda abierta
 
@@ -420,7 +420,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 **14 `Must` y ninguna no-`Must`**, desde el 2026-08-10:
 
 1. **La prioridad la declara el Product Owner en el intake y esta categoría no reprioriza.** `PRODUCT-INTAKE` §4 declara `F-11`, `F-13` y `F-25` como `Must Have`: `F-25` desde la versión 1.7 de esa fuente y **`F-13` desde la 1.19**. Las tres capacidades que tocan a este proyecto de código son hoy `Must Have`, y por eso sus catorce historias lo son.
-2. **Las dos historias que eran `Should` —US-08 y US-09— derivan de `F-13`**, sincronización árbol ⇄ escena por índice y disposición determinista entre procesados. Cambiaron de prioridad **porque cambió la de su capacidad de origen**, no porque este backlog las repriorizara.
+2. **Las dos historias que eran `Should` —US-12008 y US-12009— derivan de `F-13`**, sincronización árbol ⇄ escena por índice y disposición determinista entre procesados. Cambiaron de prioridad **porque cambió la de su capacidad de origen**, no porque este backlog las repriorizara.
 3. **Cómo se resolvió la tensión que este backlog había elevado.** Las dos historias estaban **dentro de lo que `PT-02` mide antes de comprometer la etapa `g`** (`PRODUCT-INTAKE` §17.7.P.8 nombra la sincronización por índice entre lo que la puerta verifica; el roadmap §5.2 nombra la disposición determinista entre los criterios de la transición `g` → `h`), de modo que en la práctica no eran diferibles aunque su prioridad declarada lo admitiera. Este backlog **no les subió la prioridad**: elevó la tensión como `PA-06` y la dejó en manos de quien podía resolverla. **El Product Owner la resolvió el 2026-08-10 promoviendo `F-13` a `Must Have`**, con ese mismo fundamento, y `PA-06` queda cerrado en §6. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada.
 4. **Este backlog queda en 100 % `Must`, y hay que declararlo porque la regla de la categoría lo mira con dureza.** El criterio de aceptación de `Rules-Backlog-Tecnico.md` §6 pide que la distribución **no sea 100 % `Must`**, y ésta lo es. **No es una omisión de priorización sino la consecuencia aritmética de una decisión ajena**: las tres capacidades que bajan a este proyecto de código son `Must Have` en la fuente, y este backlog no puede degradar ninguna sin reprioritizar por su cuenta, que es exactamente lo que se negó a hacer cuando la tensión estaba abierta. Inventar acá una `Should` para cumplir el reparto sería peor que el apartamiento: sería una prioridad falsa. Queda declarado como apartamiento consciente, con su motivo, y la condición para que deje de serlo es que el Product Owner clasifique con prioridad menor alguna capacidad que toque a este proyecto de código.
 
@@ -439,8 +439,8 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 
 **La explicación no es una cuota, y se puede verificar una por una.** El tramo comprometido —las etapas `c` a `h`— contiene **diecinueve** capacidades del intake §4, y desde `PRODUCT-INTAKE` **1.19** **las diecinueve son `Must Have`**: la única que no lo era, `F-13`, la promovió el Product Owner el 2026-08-10. De ahí se sigue mecánicamente que **ninguna historia que derive de una capacidad del tramo comprometido puede ser no-`Must`**, y que las no-`Must` que existen tienen que venir de otro lado. Vienen de dos lados, y sólo de dos:
 
-- **De una capacidad de la fase `i…`**, que este backlog no planifica pero que la frontera de tipos sí tiene que transportar: es el único caso, `US-10` de `GeometriaFactory-Contracts`, que deriva de `F-15`, `Could Have`.
-- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-12` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11), `US-16` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-23` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-30` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
+- **De una capacidad de la fase `i…`**, que este backlog no planifica pero que la frontera de tipos sí tiene que transportar: es el único caso, `US-12010` de `GeometriaFactory-Contracts`, que deriva de `F-15`, `Could Have`.
+- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-12012` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11), `US-12016` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-12023` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-12030` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
 
 **Los dos proyectos de código que hoy quedan en 100 % `Must` son exactamente los dos cuya única no-`Must` derivaba de `F-13`** —el Visor y Web, desde los dos lados de la fachada—. No llegaron ahí eligiendo: llegaron porque la capacidad de la que dependían subió de prioridad, después de que los dos elevaran la tensión y **se negaran a repriorizarla por su cuenta**.
 
@@ -450,7 +450,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 
 | Aspecto | Decisión |
 | --- | --- |
-| Cadencia | Una sesión **antes de abrir el trabajo de EP-02** y otra al abrir la etapa `g`. No hay sprints (`Roadmap-Producto.md` §1.2) |
+| Cadencia | Una sesión **antes de abrir el trabajo de EP-12002** y otra al abrir la etapa `g`. No hay sprints (`Roadmap-Producto.md` §1.2) |
 | Segunda sesión obligatoria | Antes de comprometer la etapa `g`, junto con la lectura de `PT-02` y `PT-03`: si una puerta no pasa, el refinamiento de la etapa se detiene y no se arrastra como deuda |
 | Responsable | La única persona del equipo, con el papel de AG-06 |
 | Formato | Revisión de la historia contra su contrato de uso de 02, contra la garantía de [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §3.2 que ejerce y contra el componente de `05` §3.1 que la sostiene |
@@ -463,17 +463,17 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 
 | Id | Punto abierto | Quién lo cierra | Cuándo |
 | --- | --- | --- | --- |
-| PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | Al cerrar EP-02 |
-| PA-02 | **La versión del motor de dibujo tridimensional** que se adopta, y el cambio de interfaz que exija si es posterior a la del visualizador previo (`05` §11 `PA-01`). Convertido en trabajo como BT-09 | El equipo, al implementar la capa 3 | Antes de comprometer la etapa `g`, que es cuando se miden `PT-02` y `PT-03` |
-| PA-03 | **Los nombres definitivos** de las funciones internas, de las clases y de los campos del resultado de dibujo (`05` §11 `PA-02`). **Los nombres de las seis funciones de la fachada no están abiertos**: los fija `PRODUCT-INTAKE` §17.7.P.3. Convertido en trabajo como BT-17 | El equipo, en la etapa que implementa la fachada | Etapa `g` |
-| PA-04 | **El umbral numérico de fluidez de la interacción.** Ninguna fuente lo declara y `05` §8 se niega explícitamente a inventarlo. Hasta que exista, la propiedad se verifica de forma cualitativa junto con `PT-02`. Convertido en trabajo como BT-18 | El Product Owner, o la categoría 08 al fijar su guion de medición | Antes de cerrar la etapa `g` |
+| PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | Al cerrar EP-12002 |
+| PA-02 | **La versión del motor de dibujo tridimensional** que se adopta, y el cambio de interfaz que exija si es posterior a la del visualizador previo (`05` §11 `PA-01`). Convertido en trabajo como BT-12009 | El equipo, al implementar la capa 3 | Antes de comprometer la etapa `g`, que es cuando se miden `PT-02` y `PT-03` |
+| PA-03 | **Los nombres definitivos** de las funciones internas, de las clases y de los campos del resultado de dibujo (`05` §11 `PA-02`). **Los nombres de las seis funciones de la fachada no están abiertos**: los fija `PRODUCT-INTAKE` §17.7.P.3. Convertido en trabajo como BT-12017 | El equipo, en la etapa que implementa la fachada | Etapa `g` |
+| PA-04 | **El umbral numérico de fluidez de la interacción.** Ninguna fuente lo declara y `05` §8 se niega explícitamente a inventarlo. Hasta que exista, la propiedad se verifica de forma cualitativa junto con `PT-02`. Convertido en trabajo como BT-12018 | El Product Owner, o la categoría 08 al fijar su guion de medición | Antes de cerrar la etapa `g` |
 | PA-05 | **La versión mínima de navegador.** La fuente no la fija: el requisito se declara **por capacidad** —capacidad gráfica tridimensional— y no por versión (`05` §11 `PA-04`). **No se convierte en trabajo**: no hay nada que construir, sólo una declaración que el Product Owner puede querer precisar | El Product Owner sobre su propio documento | Sin fecha comprometida |
-| PA-06 | ~~**La tensión entre la prioridad declarada de `F-13` y la puerta `PT-02`**: las dos historias `Should` de este backlog están dentro de lo que la puerta mide antes de comprometer la etapa `g`, de modo que en la práctica no son diferibles. Este backlog **no las repriorizó**; se elevó para que el Product Owner decidiera si `F-13` seguía siendo `Should Have`.~~ **CERRADO el 2026-08-10.** Desenlace: el Product Owner **promovió `F-13` a `Must Have`** en `PRODUCT-INTAKE` **1.19** §4, con el fundamento que este backlog había elevado —§17.7 P.8 incluye las dos propiedades entre lo que `PT-02` mide antes de comprometer la etapa `g`, y una puerta que no pasa detiene la planificación—. US-08 y US-09 pasan a `Must` en consecuencia, y §4.2 recoge el desenlace. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada, como `PA-02` de su backlog, y queda cerrada por la misma decisión. **La fila se conserva para no dejar hueco de numeración** | Cerrado por el Product Owner sobre `PRODUCT-INTAKE` §4 | Cerrado el 2026-08-10 |
-| PA-07 | **Si el bundle generado se versiona en el repositorio o se ignora** (`05` §11 `PA-05`). Convertido en trabajo como BT-03 | La categoría 09 | Al emitirse 09 |
+| PA-06 | ~~**La tensión entre la prioridad declarada de `F-13` y la puerta `PT-02`**: las dos historias `Should` de este backlog están dentro de lo que la puerta mide antes de comprometer la etapa `g`, de modo que en la práctica no son diferibles. Este backlog **no las repriorizó**; se elevó para que el Product Owner decidiera si `F-13` seguía siendo `Should Have`.~~ **CERRADO el 2026-08-10.** Desenlace: el Product Owner **promovió `F-13` a `Must Have`** en `PRODUCT-INTAKE` **1.19** §4, con el fundamento que este backlog había elevado —§17.7 P.8 incluye las dos propiedades entre lo que `PT-02` mide antes de comprometer la etapa `g`, y una puerta que no pasa detiene la planificación—. US-12008 y US-12009 pasan a `Must` en consecuencia, y §4.2 recoge el desenlace. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada, como `PA-02` de su backlog, y queda cerrada por la misma decisión. **La fila se conserva para no dejar hueco de numeración** | Cerrado por el Product Owner sobre `PRODUCT-INTAKE` §4 | Cerrado el 2026-08-10 |
+| PA-07 | **Si el bundle generado se versiona en el repositorio o se ignora** (`05` §11 `PA-05`). Convertido en trabajo como BT-12003 | La categoría 09 | Al emitirse 09 |
 
 ## 7. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-10 | Emisión inicial del product backlog de `GeometriaFactory-Visor`. Declara **tres** épicas: dos apoyadas en etapas del roadmap y una tercera, EP-02, apoyada en el **momento de medición** que el roadmap §2.2 declara para `PT-02` y `PT-03`, con la constancia explícita de que **no crea una etapa nueva ni renombra ninguna**. Numera y redacta las **catorce** historias que la categoría 02 había descrito por contenido sin numerar, cada una con su fila de origen en la matriz de esa categoría, e inline por estar por debajo del umbral de veinte. Declara qué es una historia en un visualizador puro y por qué algunas tienen entregable de ausencia verificable. Declara la unidad de estimación como **punto abierto**, con el fundamento propio de que la categoría 05 ya se negó a inventar el umbral de fluidez. Eleva como `PA-06` la tensión entre la prioridad `Should Have` de `F-13` y la puerta `PT-02`, **sin reprioritizar**. |
-| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4 y en su control de cambios, y **cierra los hallazgos `D-06-03` y `D-06-04`** del informe de auditoría [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **Cabecera**: la trazabilidad upstream pasa al intake **1.19**, declara las tres capacidades como `Must Have` y señala **§17.7 P.8** como fuente del fundamento. **§3.1 y fichas `US-08` y `US-09`**: las dos historias pasan de `Should` a **`Must`**, porque cambió la prioridad de su capacidad de origen y no porque este backlog repriorizara. **§4**: el reparto pasa de 12/2 a **14 `Must` sobre 14**. **§4.2**: se reescriben los tres puntos —la tensión elevada tiene desenlace— y entra un cuarto punto que declara el **100 % `Must`** como apartamiento consciente del criterio de aceptación de `Rules-Backlog-Tecnico.md` §6, con su motivo y su condición de revisión. **§4.2 (`D-06-03`)**: entra el bloque «Sobre la regularidad de esta distribución», con el recuento de los siete proyectos de código contado de nuevo —**175 `Must`, 4 `Should`, 1 `Could`** sobre 180— y con la explicación de por qué la regularidad no es una cuota. **§3 (`D-06-04`)**: entra la subsección que declara **por qué las catorce historias van inline** y no en archivo propio. La regla `Rules-Backlog-Tecnico.md` §2.1 clasifica la banda de diez a veinte como **recomendada** para archivo propio, de modo que con catorce el modo inline es una elección y no la aplicación de un umbral; se declara con sus tres motivos —`equipo_n = 1`, el refinamiento contra tres conjuntos cerrados comunes a las catorce, y la equivalencia de contenido que la regla exige en los dos modos— y con la condición para revisarla. **§6**: `PA-06` queda **cerrado** con su desenlace y su fecha, conservando la fila para no dejar hueco de numeración. Sube minor. |
+| 1.0 | 2026-08-10 | Emisión inicial del product backlog de `GeometriaFactory-Visor`. Declara **tres** épicas: dos apoyadas en etapas del roadmap y una tercera, EP-12002, apoyada en el **momento de medición** que el roadmap §2.2 declara para `PT-02` y `PT-03`, con la constancia explícita de que **no crea una etapa nueva ni renombra ninguna**. Numera y redacta las **catorce** historias que la categoría 02 había descrito por contenido sin numerar, cada una con su fila de origen en la matriz de esa categoría, e inline por estar por debajo del umbral de veinte. Declara qué es una historia en un visualizador puro y por qué algunas tienen entregable de ausencia verificable. Declara la unidad de estimación como **punto abierto**, con el fundamento propio de que la categoría 05 ya se negó a inventar el umbral de fluidez. Eleva como `PA-06` la tensión entre la prioridad `Should Have` de `F-13` y la puerta `PT-02`, **sin reprioritizar**. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4 y en su control de cambios, y **cierra los hallazgos `D-06-03` y `D-06-04`** del informe de auditoría [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **Cabecera**: la trazabilidad upstream pasa al intake **1.19**, declara las tres capacidades como `Must Have` y señala **§17.7 P.8** como fuente del fundamento. **§3.1 y fichas `US-12008` y `US-12009`**: las dos historias pasan de `Should` a **`Must`**, porque cambió la prioridad de su capacidad de origen y no porque este backlog repriorizara. **§4**: el reparto pasa de 12/2 a **14 `Must` sobre 14**. **§4.2**: se reescriben los tres puntos —la tensión elevada tiene desenlace— y entra un cuarto punto que declara el **100 % `Must`** como apartamiento consciente del criterio de aceptación de `Rules-Backlog-Tecnico.md` §6, con su motivo y su condición de revisión. **§4.2 (`D-06-03`)**: entra el bloque «Sobre la regularidad de esta distribución», con el recuento de los siete proyectos de código contado de nuevo —**175 `Must`, 4 `Should`, 1 `Could`** sobre 180— y con la explicación de por qué la regularidad no es una cuota. **§3 (`D-06-04`)**: entra la subsección que declara **por qué las catorce historias van inline** y no en archivo propio. La regla `Rules-Backlog-Tecnico.md` §2.1 clasifica la banda de diez a veinte como **recomendada** para archivo propio, de modo que con catorce el modo inline es una elección y no la aplicación de un umbral; se declara con sus tres motivos —`equipo_n = 1`, el refinamiento contra tres conjuntos cerrados comunes a las catorce, y la equivalencia de contenido que la regla exige en los dos modos— y con la condición para revisarla. **§6**: `PA-06` queda **cerrado** con su desenlace y su fecha, conservando la fila para no dejar hueco de numeración. Sube minor. |

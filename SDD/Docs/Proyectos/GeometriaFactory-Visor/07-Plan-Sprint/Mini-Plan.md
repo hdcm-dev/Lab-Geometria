@@ -85,42 +85,42 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 
 | Tramo | ID | Tipo | Descripción corta | Prioridad | Estimación | Asignado | Estado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `a` | BT-01 | Tarea técnica | Crear el proyecto del bundle con su cadena de construcción reproducible | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-02 | Tarea técnica | Guion de construcción propio del bundle, para el ciclo corto | Media | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-03 | Tarea técnica | Decidir si el bundle generado se versiona o se ignora | Media | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-04 | Tarea técnica | Fachada plana con las seis funciones | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-05 | Tarea técnica | Registro de instancias con su invalidación | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-06 | Tarea técnica | Los siete códigos de condición desde su fuente única | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-07 | Tarea técnica | Lector del texto con las variantes de clave del emisor | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-08 | Tarea técnica | Servicio de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-09 | Tarea técnica | Anclar la versión del motor de dibujo y confinarlo a la capa 3 | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-10 | Tarea técnica | Disposición derivada del índice | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-12 | Tarea técnica | Liberar recursos y cortar el bucle al destruir | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-13 | Tarea técnica | Medir la puerta `PT-03` sobre el bundle generado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-14 | Tarea técnica | Medir la puerta `PT-02` sobre una página del anfitrión | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | BT-16 | Tarea técnica | Inspeccionar la superficie del bundle generado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | US-01 | Historia | Crear una instancia del visor sobre un elemento de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | US-04 | Historia | Dibujar las piezas del texto del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | US-09 | Historia | Resaltar en exclusiva la pieza del índice indicado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| Antes de `g` | US-11 | Historia | Liberar los recursos de la instancia y cortar su bucle de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | BT-11 | Tarea técnica | Gobierno de los dos movimientos automáticos en el bucle | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | BT-15 | Tarea técnica | Página integradora sin backend, sample `S-1` | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | BT-17 | Tarea técnica | Fijar los nombres internos de funciones, clases y campos | Media | Sin fijar | Equipo (1) | Pendiente |
-| `g` | BT-18 | Tarea técnica | Resolver el umbral de fluidez, o dejarlo declaradamente cualitativo | Media | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-02 | Historia | Fijar el estado inicial de los dos movimientos al crear la instancia | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-03 | Historia | Informar la ausencia de capacidad gráfica en lugar de fallar en silencio | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-05 | Historia | Leer las dimensiones con las variantes de clave del emisor | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-06 | Historia | Enumerar toda pieza no dibujada con su índice y su condición | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-07 | Historia | Devolver la estructura del texto para que el anfitrión arme el árbol | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-08 | Historia | Derivar la disposición de cada pieza de su índice | Media | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-10 | Historia | Ajustar la escena al tamaño del elemento de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-12 | Historia | Gobernar en vivo los dos movimientos automáticos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-13 | Historia | Detener el movimiento al arrastrar y al no estar visible | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-14 | Historia | Ejercitar las seis funciones desde una página integradora sin backend | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-12001 | Tarea técnica | Crear el proyecto del bundle con su cadena de construcción reproducible | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-12002 | Tarea técnica | Guion de construcción propio del bundle, para el ciclo corto | Media | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-12003 | Tarea técnica | Decidir si el bundle generado se versiona o se ignora | Media | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12004 | Tarea técnica | Fachada plana con las seis funciones | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12005 | Tarea técnica | Registro de instancias con su invalidación | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12006 | Tarea técnica | Los siete códigos de condición desde su fuente única | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12007 | Tarea técnica | Lector del texto con las variantes de clave del emisor | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12008 | Tarea técnica | Servicio de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12009 | Tarea técnica | Anclar la versión del motor de dibujo y confinarlo a la capa 3 | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12010 | Tarea técnica | Disposición derivada del índice | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12012 | Tarea técnica | Liberar recursos y cortar el bucle al destruir | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12013 | Tarea técnica | Medir la puerta `PT-03` sobre el bundle generado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12014 | Tarea técnica | Medir la puerta `PT-02` sobre una página del anfitrión | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | BT-12016 | Tarea técnica | Inspeccionar la superficie del bundle generado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | US-12001 | Historia | Crear una instancia del visor sobre un elemento de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | US-12004 | Historia | Dibujar las piezas del texto del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | US-12009 | Historia | Resaltar en exclusiva la pieza del índice indicado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| Antes de `g` | US-12011 | Historia | Liberar los recursos de la instancia y cortar su bucle de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | BT-12011 | Tarea técnica | Gobierno de los dos movimientos automáticos en el bucle | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | BT-12015 | Tarea técnica | Página integradora sin backend, sample `S-1` | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | BT-12017 | Tarea técnica | Fijar los nombres internos de funciones, clases y campos | Media | Sin fijar | Equipo (1) | Pendiente |
+| `g` | BT-12018 | Tarea técnica | Resolver el umbral de fluidez, o dejarlo declaradamente cualitativo | Media | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12002 | Historia | Fijar el estado inicial de los dos movimientos al crear la instancia | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12003 | Historia | Informar la ausencia de capacidad gráfica en lugar de fallar en silencio | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12005 | Historia | Leer las dimensiones con las variantes de clave del emisor | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12006 | Historia | Enumerar toda pieza no dibujada con su índice y su condición | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12007 | Historia | Devolver la estructura del texto para que el anfitrión arme el árbol | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12008 | Historia | Derivar la disposición de cada pieza de su índice | Media | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12010 | Historia | Ajustar la escena al tamaño del elemento de dibujo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12012 | Historia | Gobernar en vivo los dos movimientos automáticos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12013 | Historia | Detener el movimiento al arrastrar y al no estar visible | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-12014 | Historia | Ejercitar las seis funciones desde una página integradora sin backend | Alta | Sin fijar | Equipo (1) | Pendiente |
 
 **Total comprometido: 14 historias y 18 tareas técnicas**, repartidas en dos etapas y un momento. **Las catorce historias están dentro del tramo comprometido de ocho etapas**: este proyecto de código no tiene ninguna de la fase `i…`.
 
-**US-08 y US-09 figuran con prioridad de ejecución `Media` y `Alta` respectivamente**, y su MoSCoW en 06 es **`Must` en las dos** desde el 2026-08-10. La diferencia entre las dos columnas subsiste y tiene el mismo motivo de siempre: la prioridad de ejecución ordena **dentro** de la etapa y no dice qué se difiere, de modo que dos historias igual de comprometidas pueden tener orden distinto. Lo que desapareció es la contradicción: US-09 está dentro de lo que `PT-02` mide y por eso su ejecución no era diferible **aunque su MoSCoW lo admitiera**, y esa tensión —que 06 elevó como `PA-06` y que este plan se negó a resolver subiéndole la prioridad— la **cerró el Product Owner** promoviendo `F-13` a `Must Have` en `PRODUCT-INTAKE` **1.19**.
+**US-12008 y US-12009 figuran con prioridad de ejecución `Media` y `Alta` respectivamente**, y su MoSCoW en 06 es **`Must` en las dos** desde el 2026-08-10. La diferencia entre las dos columnas subsiste y tiene el mismo motivo de siempre: la prioridad de ejecución ordena **dentro** de la etapa y no dice qué se difiere, de modo que dos historias igual de comprometidas pueden tener orden distinto. Lo que desapareció es la contradicción: US-12009 está dentro de lo que `PT-02` mide y por eso su ejecución no era diferible **aunque su MoSCoW lo admitiera**, y esa tensión —que 06 elevó como `PA-06` y que este plan se negó a resolver subiéndole la prioridad— la **cerró el Product Owner** promoviendo `F-13` a `Must Have` en `PRODUCT-INTAKE` **1.19**.
 
 ## 4. Alcance técnico y orden de construcción
 
@@ -128,9 +128,9 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 
 **Orden**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) §3:
 
-1. `a`: BT-01 primero; BT-02 y BT-03 sobre él.
-2. Antes de `g`: **BT-09 temprano**, porque anclar la versión del motor condiciona toda la capa 3 y `05` §9 le asigna probabilidad **alta** al cambio de interfaz que puede exigir. Después BT-04 y BT-05, después BT-07, después BT-08 sobre los tres, después BT-10 y BT-12. Las cuatro historias del tramo, sobre esas tareas. **Al final BT-13, BT-14 y BT-16**, que son las mediciones y sólo tienen sentido sobre algo terminado.
-3. `g`: BT-11 sobre BT-04, BT-08 y BT-10; las diez historias del tramo; BT-15 al final, porque el sample recorre las seis funciones; BT-17 y BT-18 antes del punto de control.
+1. `a`: BT-12001 primero; BT-12002 y BT-12003 sobre él.
+2. Antes de `g`: **BT-12009 temprano**, porque anclar la versión del motor condiciona toda la capa 3 y `05` §9 le asigna probabilidad **alta** al cambio de interfaz que puede exigir. Después BT-12004 y BT-12005, después BT-12007, después BT-12008 sobre los tres, después BT-12010 y BT-12012. Las cuatro historias del tramo, sobre esas tareas. **Al final BT-12013, BT-12014 y BT-12016**, que son las mediciones y sólo tienen sentido sobre algo terminado.
+3. `g`: BT-12011 sobre BT-12004, BT-12008 y BT-12010; las diez historias del tramo; BT-12015 al final, porque el sample recorre las seis funciones; BT-12017 y BT-12018 antes del punto de control.
 
 **Regla de dependencias entre capas, que ninguna tarea puede cruzar**: la capa 1 no conoce el interior, la capa 2 no contiene lógica de dibujo y la capa 3 no conoce al anfitrión (`05` §3.1).
 
@@ -153,12 +153,12 @@ Criterios específicos que este plan agrega:
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 | --- | --- | --- | --- |
-| Que aparezca una petición de red en el bundle, por comodidad o **por una dependencia que la haga por dentro** | Baja para la primera causa, **media para la segunda** | **Muy alto**: reabre contenido mixto, restricción de origen cruzado y exposición de la dirección del servidor propio, y rompe `RA-01` a través de `RA-02` | BT-16, inspección con cero ocurrencias de las tres formas de petición **en el código fuente y en el bundle generado**, más el conteo en la pestaña de red con los movimientos prendidos (`05` §9, primer riesgo) |
-| Que la versión del motor de dibujo que se ancle exija una interfaz distinta de la del visualizador previo | **Alta**: el intake ya lo anticipa, porque el visualizador previo reimplementa la cámara orbital a mano por una carencia de su versión | Medio: retrabajo acotado a la capa 3 | BT-09 **temprano** en el tramo del medio, y el confinamiento del motor a la capa 3 que [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) declara (`05` §9, cuarto riesgo) |
-| Que un bucle de dibujo sobreviva a la destrucción y se acumule al recorrer trabajos | Media | Alto: degradación progresiva, que es lo que `PT-02` mide | BT-12 y BT-14, con los diez recorridos medidos **con los movimientos prendidos**, que es su peor caso (`05` §9, tercer riesgo) |
-| Que el anfitrión termine dependiendo de nombres internos del motor de dibujo y el motor deje de ser reemplazable | Media: es la presión natural cuando una pantalla necesita algo que la fachada no expone | Alto: se pierde el punto de extensión declarado del producto | [`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md) y [`Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) §5, que declara qué se hace cuando falta algo en la fachada (`05` §9, segundo riesgo) |
-| Que se acuñe un código de condición fuera de la categoría 02 | Media: el catálogo de 03 ya creció **sin** que creciera el conjunto de códigos, y esa distinción es fácil de perder | Medio: el conjunto deja de ser cerrado y 03 y 08 se desincronizan | BT-06 y el criterio 6 de la DoR, que no admite excepción: los códigos son siete, su fuente única es el contrato de fachada y un curso nuevo es fila de curso y no código (`05` §9, sexto riesgo) |
-| Que la etapa `g` se comprometa antes de medir `PT-02` y `PT-03` | Media, porque el trabajo de este proyecto de código se lee fácilmente como si viviera **dentro** de la etapa `g` | Alto: es exactamente lo que la regla de puertas del intake prohíbe | Los **tres tramos** de §1.3 y la épica EP-02 del backlog, que existen para que ese momento sea visible en la planificación y no una nota al pie |
+| Que aparezca una petición de red en el bundle, por comodidad o **por una dependencia que la haga por dentro** | Baja para la primera causa, **media para la segunda** | **Muy alto**: reabre contenido mixto, restricción de origen cruzado y exposición de la dirección del servidor propio, y rompe `RA-01` a través de `RA-02` | BT-12016, inspección con cero ocurrencias de las tres formas de petición **en el código fuente y en el bundle generado**, más el conteo en la pestaña de red con los movimientos prendidos (`05` §9, primer riesgo) |
+| Que la versión del motor de dibujo que se ancle exija una interfaz distinta de la del visualizador previo | **Alta**: el intake ya lo anticipa, porque el visualizador previo reimplementa la cámara orbital a mano por una carencia de su versión | Medio: retrabajo acotado a la capa 3 | BT-12009 **temprano** en el tramo del medio, y el confinamiento del motor a la capa 3 que [`ADR-12004`](../05-Arquitectura-Tecnica/Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) declara (`05` §9, cuarto riesgo) |
+| Que un bucle de dibujo sobreviva a la destrucción y se acumule al recorrer trabajos | Media | Alto: degradación progresiva, que es lo que `PT-02` mide | BT-12012 y BT-12014, con los diez recorridos medidos **con los movimientos prendidos**, que es su peor caso (`05` §9, tercer riesgo) |
+| Que el anfitrión termine dependiendo de nombres internos del motor de dibujo y el motor deje de ser reemplazable | Media: es la presión natural cuando una pantalla necesita algo que la fachada no expone | Alto: se pierde el punto de extensión declarado del producto | [`ADR-12001`](../05-Arquitectura-Tecnica/Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md) y [`Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) §5, que declara qué se hace cuando falta algo en la fachada (`05` §9, segundo riesgo) |
+| Que se acuñe un código de condición fuera de la categoría 02 | Media: el catálogo de 03 ya creció **sin** que creciera el conjunto de códigos, y esa distinción es fácil de perder | Medio: el conjunto deja de ser cerrado y 03 y 08 se desincronizan | BT-12006 y el criterio 6 de la DoR, que no admite excepción: los códigos son siete, su fuente única es el contrato de fachada y un curso nuevo es fila de curso y no código (`05` §9, sexto riesgo) |
+| Que la etapa `g` se comprometa antes de medir `PT-02` y `PT-03` | Media, porque el trabajo de este proyecto de código se lee fácilmente como si viviera **dentro** de la etapa `g` | Alto: es exactamente lo que la regla de puertas del intake prohíbe | Los **tres tramos** de §1.3 y la épica EP-12002 del backlog, que existen para que ese momento sea visible en la planificación y no una nota al pie |
 
 ## 7. Criterios de hecho de cada tramo
 
@@ -177,11 +177,11 @@ Un tramo de este proyecto de código está hecho cuando:
 
 | Tramo | NB que avanzan | CU que avanzan | ADR que gobiernan las decisiones |
 | --- | --- | --- | --- |
-| Etapa `a` | Ninguna: es un hito interno sin capacidad funcional asociada | Ninguno | ADR-06 |
-| Antes de comprometer `g` | NB-06, y NB-04 en su parte de piezas dibujadas | CU-01, CU-02, CU-03, CU-05 | ADR-01, ADR-02, ADR-03, ADR-04, ADR-05 |
-| Etapa `g` | NB-06, NB-04 (parcial), y NB-08 por contribución negativa | CU-01, CU-02, CU-04, CU-06, CU-07 | ADR-01, ADR-02, ADR-03, ADR-06 |
+| Etapa `a` | Ninguna: es un hito interno sin capacidad funcional asociada | Ninguno | ADR-12006 |
+| Antes de comprometer `g` | NB-00006, y NB-00004 en su parte de piezas dibujadas | CU-12001, CU-12002, CU-12003, CU-12005 | ADR-12001, ADR-12002, ADR-12003, ADR-12004, ADR-12005 |
+| Etapa `g` | NB-00006, NB-00004 (parcial), y NB-00008 por contribución negativa | CU-12001, CU-12002, CU-12004, CU-12006, CU-12007 | ADR-12001, ADR-12002, ADR-12003, ADR-12006 |
 
-**Este proyecto de código sostiene una sola necesidad de negocio entera, `NB-06`**, y toca otras dos parcialmente: `NB-04` sólo en la parte de que las piezas se dibujen, y `NB-08` por contribución **negativa** —no hacer red—, que se verifica en `CU-06` pero que no implementa ninguna capacidad de esa necesidad (`02` §5.3). Las **seis** restantes las implementan otros proyectos de código y no quedan sin cubrir por esta declaración.
+**Este proyecto de código sostiene una sola necesidad de negocio entera, `NB-00006`**, y toca otras dos parcialmente: `NB-00004` sólo en la parte de que las piezas se dibujen, y `NB-00008` por contribución **negativa** —no hacer red—, que se verifica en `CU-12006` pero que no implementa ninguna capacidad de esa necesidad (`02` §5.3). Las **seis** restantes las implementan otros proyectos de código y no quedan sin cubrir por esta declaración.
 
 **Puertas técnicas del producto y este proyecto de código.** `PT-02` y `PT-03` **son de este proyecto de código** y se miden antes de comprometer la etapa `g`; son las dos únicas de las cinco que lo alcanzan. `PT-01` y `PT-04` son del front y del servicio de datos, y `PT-05` del despliegue real de la fase `i`.
 
@@ -200,4 +200,4 @@ La bitácora se completa **al cerrar cada tramo**. Para el tramo del medio, lo q
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Visor`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`— y por qué no se declara capacidad numérica, con el fundamento propio de que la categoría 05 ya se negó a inventar el único umbral que le faltaba. Declara los **tres tramos** de este proyecto de código —etapa `a`, el **momento** de medición de `PT-02` y `PT-03`, y etapa `g`— con la constancia explícita de que el del medio **no es una etapa nueva** sino un momento que el roadmap ya declara. Compromete las **14** historias y las **18** tareas técnicas del backlog de 06 sin inventar ningún identificador, declara el orden de construcción con el anclaje del motor de dibujo temprano, y **seis** riesgos con mitigación, incluido el de comprometer la etapa `g` antes de medir sus puertas. Registra la tensión de `PA-06` sin resolverla reprioritizando. |
-| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4), que cierra la tensión de `PA-06`. La cabecera pasa a citar el intake **1.19** y las versiones **1.1** de los dos artefactos de 06 que este plan consume. **§3**: la nota de US-08 y US-09 declara que su MoSCoW es hoy `Must` en las dos, conserva el motivo por el que la prioridad de ejecución sigue siendo distinta —ordena dentro de la etapa, no dice qué se difiere— y registra el desenlace de la tensión. **Ningún tramo, ningún orden de construcción, ningún riesgo y ningún compromiso cambia**: las catorce historias ya estaban comprometidas en este plan, que es precisamente lo que hacía visible la contradicción. Sube minor. |
+| 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4), que cierra la tensión de `PA-06`. La cabecera pasa a citar el intake **1.19** y las versiones **1.1** de los dos artefactos de 06 que este plan consume. **§3**: la nota de US-12008 y US-12009 declara que su MoSCoW es hoy `Must` en las dos, conserva el motivo por el que la prioridad de ejecución sigue siendo distinta —ordena dentro de la etapa, no dice qué se difiere— y registra el desenlace de la tensión. **Ningún tramo, ningún orden de construcción, ningún riesgo y ningún compromiso cambia**: las catorce historias ya estaban comprometidas en este plan, que es precisamente lo que hacía visible la contradicción. Sube minor. |

@@ -31,7 +31,7 @@
 
 `GeometriaFactory-Api` tiene calidad cuando **ningún punto de acceso queda fuera de la guardia que le corresponde**, cuando **ninguna traducción a protocolo deshace una decisión ya tomada adentro** y cuando **el servicio no atiende una sola petición sobre un almacén que no está en condiciones**.
 
-Las tres partes describen el mismo peligro desde tres ángulos: **acá es donde una decisión correcta de una capa de adentro se puede perder sin que nada falle**. `05` §9 lo declara con precisión en su primer riesgo —un punto nuevo fuera de la guardia hace que `RN-13` e `INV-09` dejen de valer **y nada falla**— y en el segundo —un trabajo ajeno que responde «no autorizado» confirma la existencia de un recurso ajeno, y **ninguna capa de adentro puede repararlo**—.
+Las tres partes describen el mismo peligro desde tres ángulos: **acá es donde una decisión correcta de una capa de adentro se puede perder sin que nada falle**. `05` §9 lo declara con precisión en su primer riesgo —un punto nuevo fuera de la guardia hace que `RN-00013` e `INV-09` dejen de valer **y nada falla**— y en el segundo —un trabajo ajeno que responde «no autorizado» confirma la existencia de un recurso ajeno, y **ninguna capa de adentro puede repararlo**—.
 
 **Este es además el proyecto de código donde vive la batería de integración del producto.** El intake §17.5.P.6 declara que `GeometriaFactory.Integration.Tests` golpea **la superficie real por su protocolo contra el almacén real**, y §17.3.P.6 le asigna a esa batería la persistencia real de `GeometriaFactory-Infrastructure`. La consecuencia para esta categoría es doble: su pirámide está **invertida a propósito**, y **lo que acá se rompe no lo cubre ninguna otra batería del producto**.
 
@@ -47,7 +47,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los valor
 | Eficiencia de desempeño | **Alta** | Percentil 99 del listado por debajo de **500 ms**, medido **en el servidor** [ASUNCIÓN del intake §17.5.P.10]; caudal sostenido de **20 peticiones por minuto** [ASUNCIÓN]; arranque en frío en menos de **30 segundos** [ASUNCIÓN] |
 | Mantenibilidad | **Alta** | **75 %** de líneas y **70 %** de ramas [ASUNCIÓN del intake §17.5.P.6]; pirámide de **60 %** integración y **40 %** unitarias [ASUNCIÓN], **invertida a propósito**; **1** sola configuración de intercambio declarada en el producto; **0** advertencias de construcción |
 | Compatibilidad | **Media** | Los tipos que cruzan la frontera son los del ensamblado de contratos y **esta capa no agrega ni recorta campos**; sin versionado de rutas, porque no hay clientes de terceros |
-| Usabilidad | **No aplica como atributo de interfaz** | `tiene_ui_final` es false. Su equivalente es la experiencia del desarrollador que consume la superficie, y la **colección de peticiones reproducible** de `CU-12` es su instrumento |
+| Usabilidad | **No aplica como atributo de interfaz** | `tiene_ui_final` es false. Su equivalente es la experiencia del desarrollador que consume la superficie, y la **colección de peticiones reproducible** de `CU-00012` es su instrumento |
 | Portabilidad | **Baja** | Plataforma única sobre el sistema operativo del contenedor, con la imagen final llevando **sólo el entorno de ejecución** y sin linaje con la imagen de desarrollo (intake §17.5.P.9) |
 
 **Este es el único proyecto de código del producto con `tiene_observabilidad_critica` == true** (`PRODUCT-MANIFEST` §5), y el motivo está declarado: es el único que declara un percentil con métrica numérica. **No hay atributo de disponibilidad**, y es correcto: el intake declara «sin SLO», el servidor es domiciliario y la caída se responde con **estado degradado en el front**, no con redundancia.
@@ -61,18 +61,18 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 | QG-01 | El guion de construcción termina en **0 y sin advertencias** | Etapa `build` del pipeline | **Bloquea la fusión** (intake §17.5.P.8) |
 | QG-02 | El guion de pruebas pasa **entero**, **incluida la batería del validador** | Etapa `test` del pipeline | Bloquea la fusión. Ver §3.2 sobre el recuento de esa batería |
 | QG-03 | La cobertura alcanza **75 %** de líneas y **70 %** de ramas [ASUNCIÓN del intake §17.5.P.6] | Informe de cobertura de la etapa `test`, **por componente** | **Condicionado**, ver §3.1 |
-| QG-04 | La pirámide del proyecto de código es **60 %** de integración y **40 %** unitarias [ASUNCIÓN del intake §17.5.P.6] | Recuento de pruebas por clase en el informe de la etapa `test` (`TC-37`) | **Condicionado**, ver §3.1 |
-| QG-05 | Exactamente **4** puntos de acceso quedan fuera de la guardia de admisión, **ni uno más**, sobre los **quince** | `TC-07`, inspección en las dos direcciones | **Bloquea la fusión.** Es el primer riesgo de `05` §9: un punto nuevo fuera de la guardia hace que `RN-13` deje de valer **y nada falla** |
-| QG-06 | **16 de 17** códigos del contrato tienen traducción declarada, **1** está declarado **sin destino con su motivo**, y hay **0** inventados y **0** renombrados | `TC-24` y `TC-27`, comparación en las dos direcciones contra [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5 | Bloquea la fusión |
-| QG-07 | **3 de 3** familias empobrecidas dan respuestas **indistinguibles en cuerpo y en código** | `TC-25` | Bloquea la fusión. Es el segundo riesgo de `05` §9, y **ninguna capa de adentro puede repararlo** |
-| QG-08 | **0** respuestas que expongan dirección de servicio, ruta de datos, secreto o traza, sobre los **quince** puntos **y** sobre el registro del servidor | `TC-26` | Bloquea la fusión. Es `RA-03` |
-| QG-09 | **0** caracteres de diferencia entre el texto enviado y el guardado, y **0** truncamientos silenciosos | `TC-19` | Bloquea la fusión. **Rechazar, nunca truncar** |
-| QG-10 | **4 de 4** puertos conectados a su adaptador, con **0** sin adaptador o con más de uno; y **1** sola configuración de intercambio declarada en el producto | `TC-28` y `TC-29` | Bloquea la fusión, **con fallo en construcción** cuando falta un puerto |
-| QG-11 | **0** peticiones atendidas con la preparación del almacén incompleta | `TC-31` | Bloquea la fusión |
-| QG-12 | **0** eliminaciones fuera de alcance aceptadas **al forzar la petición** contra esta superficie | `TC-20` | Bloquea la fusión. Es **el único criterio de verificación del producto que la fuente exige ejercer forzando la petición**, y el intake §17.5.P.6 lo declara bloqueante |
-| QG-13 | El arranque en frío aplica las transformaciones y responde salud en menos de **30 segundos** [ASUNCIÓN del intake §17.5.P.10] | `TC-33` | **Condicionado**, ver §3.1 |
-| QG-14 | Percentil 99 del listado por debajo de **500 ms** medido en el servidor, y caudal sostenido de **20 peticiones por minuto** [ASUNCIÓN del intake §17.5.P.10] | `TC-34`, en la batería de integración | **Condicionado**, ver §3.1 |
-| QG-15 | La colección de peticiones reproducible tiene **5 pasos o menos** y **0 datos de prueba inventados** | `TC-35` | Bloquea el cierre de la etapa que la incorpora |
+| QG-04 | La pirámide del proyecto de código es **60 %** de integración y **40 %** unitarias [ASUNCIÓN del intake §17.5.P.6] | Recuento de pruebas por clase en el informe de la etapa `test` (`TC-00037`) | **Condicionado**, ver §3.1 |
+| QG-05 | Exactamente **4** puntos de acceso quedan fuera de la guardia de admisión, **ni uno más**, sobre los **quince** | `TC-00007`, inspección en las dos direcciones | **Bloquea la fusión.** Es el primer riesgo de `05` §9: un punto nuevo fuera de la guardia hace que `RN-00013` deje de valer **y nada falla** |
+| QG-06 | **16 de 17** códigos del contrato tienen traducción declarada, **1** está declarado **sin destino con su motivo**, y hay **0** inventados y **0** renombrados | `TC-00024` y `TC-00027`, comparación en las dos direcciones contra [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5 | Bloquea la fusión |
+| QG-07 | **3 de 3** familias empobrecidas dan respuestas **indistinguibles en cuerpo y en código** | `TC-00025` | Bloquea la fusión. Es el segundo riesgo de `05` §9, y **ninguna capa de adentro puede repararlo** |
+| QG-08 | **0** respuestas que expongan dirección de servicio, ruta de datos, secreto o traza, sobre los **quince** puntos **y** sobre el registro del servidor | `TC-00026` | Bloquea la fusión. Es `RA-03` |
+| QG-09 | **0** caracteres de diferencia entre el texto enviado y el guardado, y **0** truncamientos silenciosos | `TC-00019` | Bloquea la fusión. **Rechazar, nunca truncar** |
+| QG-10 | **4 de 4** puertos conectados a su adaptador, con **0** sin adaptador o con más de uno; y **1** sola configuración de intercambio declarada en el producto | `TC-00028` y `TC-00029` | Bloquea la fusión, **con fallo en construcción** cuando falta un puerto |
+| QG-11 | **0** peticiones atendidas con la preparación del almacén incompleta | `TC-00031` | Bloquea la fusión |
+| QG-12 | **0** eliminaciones fuera de alcance aceptadas **al forzar la petición** contra esta superficie | `TC-00020` | Bloquea la fusión. Es **el único criterio de verificación del producto que la fuente exige ejercer forzando la petición**, y el intake §17.5.P.6 lo declara bloqueante |
+| QG-13 | El arranque en frío aplica las transformaciones y responde salud en menos de **30 segundos** [ASUNCIÓN del intake §17.5.P.10] | `TC-00033` | **Condicionado**, ver §3.1 |
+| QG-14 | Percentil 99 del listado por debajo de **500 ms** medido en el servidor, y caudal sostenido de **20 peticiones por minuto** [ASUNCIÓN del intake §17.5.P.10] | `TC-00034`, en la batería de integración | **Condicionado**, ver §3.1 |
+| QG-15 | La colección de peticiones reproducible tiene **5 pasos o menos** y **0 datos de prueba inventados** | `TC-00035` | Bloquea el cierre de la etapa que la incorpora |
 
 **Quince gates, y ninguno inventado.** Los que no salen del intake salen de una fila de `05` §8, que declara los **diecisiete** NFR de este proyecto de código.
 
@@ -118,7 +118,7 @@ Se declaran aparte de los gates porque su consecuencia es distinta: el intake §
 | Momento | Qué se revisa | Qué produce |
 | --- | --- | --- |
 | Al abrir la rama de cada etapa | Qué casos de verificación entran en alcance, y **qué puntos de acceso nuevos entran a la guardia** | El alcance de testing de la etapa, en [`Plan-Pruebas.md`](Plan-Pruebas.md) §5 |
-| **Ante todo punto de acceso nuevo** | Que quede dentro de la guardia, o que su exención esté entre las **cuatro** declaradas | `TC-07` reejecutado, con el recuento de los quince en las dos direcciones. **Es el control que más veces hay que ejercer** |
+| **Ante todo punto de acceso nuevo** | Que quede dentro de la guardia, o que su exención esté entre las **cuatro** declaradas | `TC-00007` reejecutado, con el recuento de los quince en las dos direcciones. **Es el control que más veces hay que ejercer** |
 | Al cerrar cada etapa | La matriz de cobertura entera; el estado de cada `TC-XX`; y **la batería de integración completa** | Matriz actualizada y la constancia de los gates medidos |
 | Al cerrar la etapa `c` | Los valores rotulados [ASUNCIÓN] | La confirmación del Product Owner, o su continuidad como asunción |
 | Ante todo defecto cerrado | Que exista al menos un `TC-XX` nuevo o extendido que lo prevenga | La entrada correspondiente en el catálogo de casos de verificación |

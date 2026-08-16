@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/contracts/02-intermedio/`
-**Trazabilidad upstream:** [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md), [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Contrato-De-Listado-De-Trabajos.md) y [`CU-05`](../02-Especificacion-Funcional/Casos-De-Uso/CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de trabajo, de listado y de detalle; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-07` a `TC-10`, `TC-12`, `TC-13` y `TC-14`; `PRODUCT-INTAKE` 1.22 §20, escenarios `E-1`, `E-2`, `E-3`, `E-4`, `E-6` y `E-7`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`CU-08003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md), [`CU-08004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md) y [`CU-08005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de trabajo, de listado y de detalle; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-08007` a `TC-08010`, `TC-08012`, `TC-08013` y `TC-08014`; `PRODUCT-INTAKE` 1.22 §20, escenarios `E-1`, `E-2`, `E-3`, `E-4`, `E-6` y `E-7`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-08002` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -67,9 +67,9 @@ samples/contracts/02-intermedio/
 Familias recorridas: 3 de 8 | Escenarios usados como cuerpo: 6 de 8 | Recuentos en 0: 5
 ```
 
-**El acto `[2]` es el corazón del sample.** `E-2` trae la clave `Tapas` donde el visualizador previo exigía `Bases`, y dos comas finales que lo dejan fuera del JSON estricto. Que vuelva **idéntico carácter por carácter** es lo que prueba que este ensamblado transporta y **no interpreta**, y es la forma en que `RN-08` de `GeometriaFactory-Domain` cruza esta frontera.
+**El acto `[2]` es el corazón del sample.** `E-2` trae la clave `Tapas` donde el visualizador previo exigía `Bases`, y dos comas finales que lo dejan fuera del JSON estricto. Que vuelva **idéntico carácter por carácter** es lo que prueba que este ensamblado transporta y **no interpreta**, y es la forma en que `RN-08008` de `GeometriaFactory-Domain` cruza esta frontera.
 
-**Los tres recuentos en 0 del acto `[5]`** son la razón de que `CU-04` y `CU-05` sean dos contratos separados: la proyección de listado no arrastra la carga del detalle. Es el NFR «Carga útil del listado» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8, y su umbral viene rotulado **[ASUNCIÓN derivada]** de `PRODUCT-INTAKE` §17.4.P.10, de modo que el gate `QG-06` que lo mide es **condicionado** y no bloquea la fusión hasta que el Product Owner lo confirme.
+**Los tres recuentos en 0 del acto `[5]`** son la razón de que `CU-08004` y `CU-08005` sean dos contratos separados: la proyección de listado no arrastra la carga del detalle. Es el NFR «Carga útil del listado» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8, y su umbral viene rotulado **[ASUNCIÓN derivada]** de `PRODUCT-INTAKE` §17.4.P.10, de modo que el gate `QG-06` que lo mide es **condicionado** y no bloquea la fusión hasta que el Product Owner lo confirme.
 
 **El acto `[8]` contrasta `E-3` con `E-4`**: son el **mismo cubo de lado 3** emitido por los dos ejemplos de la cátedra, y el contrato transporta **una** observación en el primero y **cero** en el segundo, con los dos valores en **campos separados** y no en un texto compuesto.
 
@@ -88,24 +88,24 @@ Familias recorridas: 3 de 8 | Escenarios usados como cuerpo: 6 de 8 | Recuentos 
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) | Contrato de uso | Actos `[1]` a `[4]`: el envío con el texto crudo y la solicitud única de eliminación |
-| [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Contrato-De-Listado-De-Trabajos.md) | Contrato de uso | Actos `[5]` y `[6]`: la proyección y sus tres ausencias |
-| [`CU-05`](../02-Especificacion-Funcional/Casos-De-Uso/CU-05-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) | Contrato de uso | Actos `[7]` a `[9]`: piezas, componentes, observaciones y comentario |
+| [`CU-08003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md) | Contrato de uso | Actos `[1]` a `[4]`: el envío con el texto crudo y la solicitud única de eliminación |
+| [`CU-08004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md) | Contrato de uso | Actos `[5]` y `[6]`: la proyección y sus tres ausencias |
+| [`CU-08005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md) | Contrato de uso | Actos `[7]` a `[9]`: piezas, componentes, observaciones y comentario |
 | `RT-03` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 | Restricción transversal | El texto original como cadena no interpretada |
 | `RT-04` de la misma sección | Restricción transversal | Los tres recuentos en 0 del acto `[5]` |
 | `RT-09` de la misma sección | Restricción transversal | El acto `[9]`: el comentario es bloque propio y no comparte campos con las observaciones |
-| [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md) | Decisión arquitectónica | La separación entre los actos `[5]` y `[7]` |
+| [`ADR-08005`](../05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md) | Decisión arquitectónica | La separación entre los actos `[5]` y `[7]` |
 | NFR «Carga útil del listado» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 | Requisito no funcional | Acto `[5]`, con su rótulo [ASUNCIÓN derivada] declarado en §6 |
 | `PRODUCT-INTAKE` §20 `E-1`, `E-2`, `E-3`, `E-4`, `E-6`, `E-7` | Escenario con payload real | Los seis textos, transcriptos sin modificación, son los cuerpos del recorrido |
 
-**Qué queda deliberadamente fuera de este sample.** `US-10`, el resumen por alumno y por estado, **no** se ilustra: deriva de una capacidad `Could Have` y su caso de prueba `TC-11` está declarado **fuera del tramo comprometido** en [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md). Un sample que la ilustrara comprometería lo que la categoría 08 declaró no comprometido.
+**Qué queda deliberadamente fuera de este sample.** `US-08010`, el resumen por alumno y por estado, **no** se ilustra: deriva de una capacidad `Could Have` y su caso de prueba `TC-08011` está declarado **fuera del tramo comprometido** en [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md). Un sample que la ilustrara comprometería lo que la categoría 08 declaró no comprometido.
 
 ## 9. Contrato de verificación
 
 ```yaml
 verificacion:
-  id: VER-02
-  verifica: [CU-03, CU-04, CU-05, US-06, US-07, US-08, US-11, US-12, US-13, US-18, US-19]
+  id: VER-08002
+  verifica: [CU-08003, CU-08004, CU-08005, US-08006, US-08007, US-08008, US-08011, US-08012, US-08013, US-08018, US-08019]
   comando: "dotnet run --project samples/contracts/02-intermedio"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -130,4 +130,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-03`, `CU-04` y `CU-05` sobre **tres** de las **ocho** familias, con **seis** de los **ocho** escenarios del `PRODUCT-INTAKE` §20 como cuerpos, transcriptos sin modificación. Declara por qué los archivos de escenario llevan extensión `.txt` y por qué `US-10` queda deliberadamente fuera, por estar su caso de prueba fuera del tramo comprometido. El contrato `VER-02` declara seis líneas exactas de salida; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-08003`, `CU-08004` y `CU-08005` sobre **tres** de las **ocho** familias, con **seis** de los **ocho** escenarios del `PRODUCT-INTAKE` §20 como cuerpos, transcriptos sin modificación. Declara por qué los archivos de escenario llevan extensión `.txt` y por qué `US-08010` queda deliberadamente fuera, por estar su caso de prueba fuera del tramo comprometido. El contrato `VER-08002` declara seis líneas exactas de salida; `evidencia` queda en `No verificado — sin código`. |

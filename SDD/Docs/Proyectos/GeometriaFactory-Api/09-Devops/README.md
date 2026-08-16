@@ -28,7 +28,7 @@
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **cinco** stages con el quinto declarado fuera del alcance, los **quince** gates con su carácter, la matriz, la caché, la promoción en cuatro transiciones, la reversión y las **dos** puertas técnicas |
-| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, las **cinco** reglas con las que `ADR-08` reemplaza al versionado de rutas, y las **tres** clases de cambio que la compilación no detecta con dónde se atrapan |
+| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, las **cinco** reglas con las que `ADR-00008` reemplaza al versionado de rutas, y las **tres** clases de cambio que la compilación no detecta con dónde se atrapan |
 | [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Los **dos** ambientes con el apartamiento del modelo declarado, cómo llega el código al destino, **la dirección dinámica** en sus tres tramos, configuración y secretos |
 | [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md) | 1.1 | Propuesto | Pre-requisitos, procedimiento de despliegue en destino, **la prueba única del mecanismo** que la fuente exige, **cinco** verificaciones posteriores, reversión y métricas |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario sobre la imagen, la firma con su brecha y su desplazamiento, nivel de integridad con la brecha propia del canal, análisis, y la **superficie expuesta** como preocupación de cadena de suministro |
@@ -64,20 +64,20 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | QG-01 | `build` | Bloqueante |
 | QG-02 | `test` | Bloqueante |
 | QG-03 | `cobertura`, informe por componente | **Condicionado** |
-| QG-04 | `cobertura`, recuento por clase (`TC-37`) | **Condicionado**; la **inversión** no es asunción |
-| QG-05 | `test`, con `TC-07` en las dos direcciones | Bloqueante, sin gradación |
-| QG-06 | `test`, con `TC-24` y `TC-27` | Bloqueante |
-| QG-07 | `test`, con `TC-25` | Bloqueante, sin gradación |
-| QG-08 | `test`, con `TC-26` | Bloqueante |
-| QG-09 | `test`, con `TC-19` | Bloqueante, sin gradación |
-| QG-10 | `build`, con `TC-28` y `TC-29` | Bloqueante, con fallo en construcción |
-| QG-11 | `test`, con `TC-31` | Bloqueante |
-| QG-12 | `test`, con `TC-20`, **forzando la petición** | Bloqueante |
-| QG-13 | `imagen`, con `TC-33` | **Condicionado** |
-| QG-14 | `test`, batería de integración, con `TC-34` | **Condicionado** |
-| QG-15 | Cierre de la etapa que incorpora la colección, con `TC-35` | Bloqueante al cierre de esa etapa |
+| QG-04 | `cobertura`, recuento por clase (`TC-00037`) | **Condicionado**; la **inversión** no es asunción |
+| QG-05 | `test`, con `TC-00007` en las dos direcciones | Bloqueante, sin gradación |
+| QG-06 | `test`, con `TC-00024` y `TC-00027` | Bloqueante |
+| QG-07 | `test`, con `TC-00025` | Bloqueante, sin gradación |
+| QG-08 | `test`, con `TC-00026` | Bloqueante |
+| QG-09 | `test`, con `TC-00019` | Bloqueante, sin gradación |
+| QG-10 | `build`, con `TC-00028` y `TC-00029` | Bloqueante, con fallo en construcción |
+| QG-11 | `test`, con `TC-00031` | Bloqueante |
+| QG-12 | `test`, con `TC-00020`, **forzando la petición** | Bloqueante |
+| QG-13 | `imagen`, con `TC-00033` | **Condicionado** |
+| QG-14 | `test`, batería de integración, con `TC-00034` | **Condicionado** |
+| QG-15 | Cierre de la etapa que incorpora la colección, con `TC-00035` | Bloqueante al cierre de esa etapa |
 
-**Los cuatro condicionados se miden y se registran igual.** Dependen de valores rotulados **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura y la forma de la pirámide, `A-5` para el percentil, el caudal y el arranque en frío—. **Confirmados, los cuatro pasan a bloqueantes sin ningún otro cambio.** La tarea que los eleva es `BT-25`, al cerrar la etapa `d`.
+**Los cuatro condicionados se miden y se registran igual.** Dependen de valores rotulados **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura y la forma de la pirámide, `A-5` para el percentil, el caudal y el arranque en frío—. **Confirmados, los cuatro pasan a bloqueantes sin ningún otro cambio.** La tarea que los eleva es `BT-00025`, al cerrar la etapa `d`.
 
 **Los cuatro rótulos de este proyecto de código son sobre umbrales**, y por eso los cuatro condicionan. Es el caso contrario al de `GeometriaFactory-Web`, donde la única marca es sobre **la forma** del gate y el gate **bloquea**. La regla de reparto está en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2, y **no la inventó esta categoría**: la fijó la Fase E.
 

@@ -61,7 +61,7 @@ La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Ar
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
 | Contexto de persistencia y mapeo | 85 % | 80 % | 60 % | Piso del intake §17.3.P.6 |
-| Adaptador de repositorio de trabajos | 90 % | 85 % | 60 % | Sube sobre el piso: sostiene el texto original conservado —tramo principal de `RN-08`— y la proyección de listado, donde `05` §9 declara probabilidad **media-alta** de arrastrar componentes por defecto |
+| Adaptador de repositorio de trabajos | 90 % | 85 % | 60 % | Sube sobre el piso: sostiene el texto original conservado —tramo principal de `RN-06008`— y la proyección de listado, donde `05` §9 declara probabilidad **media-alta** de arrastrar componentes por defecto |
 | Adaptador de repositorio de cuentas | 90 % | 85 % | 60 % | Sube sobre el piso: sostiene la unicidad como segunda línea y **la marca que viaja sin ser un estado de cuenta** |
 | Motor de interpretación de figuras | **95 %** | 90 % | 60 % | **Piso propio del intake §17.3.P.6**: es el número más alto del producto y está donde la fuente señala el criterio que más veces se rompe. El 90 de ramas lo sube esta categoría |
 | Motor de verificación de valores | **95 %** | 90 % | 60 % | Ídem: los dos motores son «el validador de figuras» al que el intake le asigna el 95 |
@@ -83,7 +83,7 @@ Se nombran por función y no por producto. La elección concreta y su anclaje de
 | Unit | Marco de pruebas unitarias de la plataforma objetivo, ejecutado por `scripts/test.sh` |
 | Integración interna | El mismo marco, con un **almacén efímero creado y descartado por cada prueba**, y con la ubicación del almacén recibida por configuración de prueba |
 | Aserciones | Biblioteca de aserciones del mismo marco |
-| Dobles | Sólo donde hace falta aislar el mundo: la **fuente de material impredecible**, para poder simular que no responde (`TC-28`), y el **almacén interrumpido a mitad de operación** (`TC-21`). El reloj **no se dobla acá**: acá se implementa |
+| Dobles | Sólo donde hace falta aislar el mundo: la **fuente de material impredecible**, para poder simular que no responde (`TC-06028`), y el **almacén interrumpido a mitad de operación** (`TC-06021`). El reloj **no se dobla acá**: acá se implementa |
 | Cobertura por líneas y ramas | Recolector de cobertura de la plataforma, con informe por componente **y con un informe acotado a los dos motores**, que es lo que `QG-06` mide |
 | Mutation score | Marco de pruebas de mutación de la plataforma. **Su incorporación al pipeline es un hueco declarado**, ver [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 | Medición del tiempo de interpretación | Cronometrado dentro de la batería unitaria, **sin almacén**, que es la condición que el intake §17.3.P.10 declara |
@@ -114,10 +114,10 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 | Doble | Cuándo | Por qué |
 | --- | --- | --- |
-| Fuente de material impredecible que **no responde** | `TC-28` | Es la única forma de verificar que ante su ausencia **no se compone una provisoria por otro medio** —un contador, la fecha, el correo—, que `05` §9 declara de impacto muy alto |
-| Almacén **interrumpido a mitad de operación** | `TC-21` | Es el mecanismo de medición que `05` §8 declara para el NFR de cero retiros parciales |
-| Ubicación del almacén **no disponible** | `TC-33` | Verifica que el arranque **se detiene** en lugar de caer hacia una ruta alternativa dentro de la imagen, que `05` §9 declara de impacto alto y probabilidad media |
-| Esquema **que no corresponde** al linaje esperado | `TC-33` | Verifica que el almacén **no se descarta ni se recrea**, que es «el atajo más destructivo del producto» según `05` §9 |
+| Fuente de material impredecible que **no responde** | `TC-06028` | Es la única forma de verificar que ante su ausencia **no se compone una provisoria por otro medio** —un contador, la fecha, el correo—, que `05` §9 declara de impacto muy alto |
+| Almacén **interrumpido a mitad de operación** | `TC-06021` | Es el mecanismo de medición que `05` §8 declara para el NFR de cero retiros parciales |
+| Ubicación del almacén **no disponible** | `TC-06033` | Verifica que el arranque **se detiene** en lugar de caer hacia una ruta alternativa dentro de la imagen, que `05` §9 declara de impacto alto y probabilidad media |
+| Esquema **que no corresponde** al linaje esperado | `TC-06033` | Verifica que el almacén **no se descarta ni se recrea**, que es «el atajo más destructivo del producto» según `05` §9 |
 
 **Lo que no se dobla, y por qué:** el reloj —acá se implementa, no se consume—; el almacén en su operación normal —para eso está el almacén efímero de la integración interna—; y los dos motores entre sí —el de verificación consume las piezas que el de interpretación reconstruye, y probarlos por separado con piezas inventadas perdería exactamente el acoplamiento que la batería verifica—.
 
@@ -127,7 +127,7 @@ Fixtures compartidos:
 | --- | --- | --- |
 | Los **ocho** textos de los escenarios del intake §20 | El texto original de `E-1` a `E-8`, **literal y carácter por carácter**, con sus comas finales y sus claves tal como están | Es el material de los diez casos de la batería. Ver §6 |
 | Almacén efímero preparado | Un almacén recién creado con las transformaciones aplicadas, y otro **inexistente** | Los dos adaptadores y la preparación del almacén los necesitan en los dos estados |
-| Cuenta en cada uno de sus tres estados, con y sin la marca | Seis combinaciones | `CU-05` escribe la marca sobre los tres estados sin alterarlos |
+| Cuenta en cada uno de sus tres estados, con y sin la marca | Seis combinaciones | `CU-06005` escribe la marca sobre los tres estados sin alterarlos |
 | Trabajo con piezas, componentes y observaciones | Un trabajo materializable completo, y su proyección de listado | La distinción entre las **dos formas de lectura** se prueba contra el mismo trabajo |
 
 ## 6. Datos de prueba
@@ -157,18 +157,18 @@ Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](..
 
 | # | Caso de la batería | Escenario | CU | Paso del flujo | Caso de prueba |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Ortoedro con clave sinónima (`T1`) | `E-2` | CU-01 | P-3 | `TC-01` |
-| 2 | Texto con comas finales (`T2`) | `E-2` | CU-01 | P-2 | `TC-02` |
-| 3 | Cubo con caras `Cuadrado` (`T3`) | `E-3` | CU-01 | P-4 | `TC-03` |
-| 4 | Cubo con caras `Rectangulo` (`T3`) | `E-4` | CU-01 | P-4 | `TC-04` |
-| 5 | Área del cubo declarada contra derivada | `E-3` | CU-02 | P-6 | `TC-05` |
-| 6 | Volumen del ortoedro declarado contra derivado | `E-2`, `E-1` | CU-02 | P-6 | `TC-06` |
-| 7 | Dimensión en `0` que no descarta la figura | `E-6` | CU-01 y CU-02 | P-4 y P-6 | `TC-07` |
-| 8 | Tipo desconocido con posición y campo | `E-5` | CU-01 | P-3 | `TC-08` |
-| 9 | Texto semilla completo | `E-1` | CU-01 y CU-02 | P-1 a P-7 | `TC-09` |
-| 10 | Dimensión no legible | `E-8` | CU-01 | P-4 | `TC-10` |
+| 1 | Ortoedro con clave sinónima (`T1`) | `E-2` | CU-06001 | P-3 | `TC-06001` |
+| 2 | Texto con comas finales (`T2`) | `E-2` | CU-06001 | P-2 | `TC-06002` |
+| 3 | Cubo con caras `Cuadrado` (`T3`) | `E-3` | CU-06001 | P-4 | `TC-06003` |
+| 4 | Cubo con caras `Rectangulo` (`T3`) | `E-4` | CU-06001 | P-4 | `TC-06004` |
+| 5 | Área del cubo declarada contra derivada | `E-3` | CU-06002 | P-6 | `TC-06005` |
+| 6 | Volumen del ortoedro declarado contra derivado | `E-2`, `E-1` | CU-06002 | P-6 | `TC-06006` |
+| 7 | Dimensión en `0` que no descarta la figura | `E-6` | CU-06001 y CU-06002 | P-4 y P-6 | `TC-06007` |
+| 8 | Tipo desconocido con posición y campo | `E-5` | CU-06001 | P-3 | `TC-06008` |
+| 9 | Texto semilla completo | `E-1` | CU-06001 y CU-06002 | P-1 a P-7 | `TC-06009` |
+| 10 | Dimensión no legible | `E-8` | CU-06001 | P-4 | `TC-06010` |
 
-**Diez casos, uno por fila, y siete de los ocho escenarios representados.** El octavo, `E-7`, **no respalda ninguno de los diez y se usa igual**, como cobertura adicional declarada: `TC-11` lo ejercita porque es el único texto que cubre los **seis** tipos reconstruibles. La afirmación no es de esta categoría: la hace `05` §10.5 y acá se hereda.
+**Diez casos, uno por fila, y siete de los ocho escenarios representados.** El octavo, `E-7`, **no respalda ninguno de los diez y se usa igual**, como cobertura adicional declarada: `TC-06011` lo ejercita porque es el único texto que cubre los **seis** tipos reconstruibles. La afirmación no es de esta categoría: la hace `05` §10.5 y acá se hereda.
 
 **El décimo caso existe por una decisión del Product Owner.** El intake §21 lo agrega con el rótulo **[DECISIÓN 2026-08-09]** y declara que `E-8` cerró la única condición del contrato de fachada que no tenía dato de prueba. Sobre el recuento de **nueve** que dos gates del intake escribieron **hasta 1.19** y que el intake **1.20** corrigió a **diez**, ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2.
 
@@ -180,8 +180,8 @@ Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](..
 | Almacén | **Efímero, creado y descartado por cada prueba de integración interna.** Nunca el almacén de desarrollo ni el de producción. Su ubicación **se recibe por configuración de prueba y no se busca** |
 | Aislamiento entre pruebas | Total. Las unitarias no comparten estado; las de integración interna crean su propio almacén y lo descartan. Ninguna prueba depende del orden de ejecución |
 | Paralelismo | **Admitido en el nivel unitario. En integración interna, sólo si cada prueba tiene su propio archivo de almacén**: el motor de almacenamiento del producto es de **escritor único**, y dos pruebas sobre el mismo archivo se bloquearían entre sí |
-| Secretos | **Ninguno real.** La clave de firma de las pruebas es un valor evidentemente ficticio, declarado como tal, **provisto por configuración de prueba**. `TC-30` verifica que **sin clave no hay emisión**, y para eso hace falta poder no proveerla |
-| Reloj | **Acá se implementa el reloj, no se consume**: `TC-31` verifica que el sello sale del puerto. Ninguna prueba fija el reloj del entorno |
+| Secretos | **Ninguno real.** La clave de firma de las pruebas es un valor evidentemente ficticio, declarado como tal, **provisto por configuración de prueba**. `TC-06030` verifica que **sin clave no hay emisión**, y para eso hace falta poder no proveerla |
+| Reloj | **Acá se implementa el reloj, no se consume**: `TC-06031` verifica que el sello sale del puerto. Ninguna prueba fija el reloj del entorno |
 | Datos de geometría | Los **ocho** textos del intake §20, literales. **Ningún texto de figuras se escribe a mano** |
 | Duración | **No se declara ningún tiempo de ejecución de la batería.** El único tiempo declarado es el de la **interpretación** del texto de `E-1`: menos de **200 ms**, medido sin almacén [ASUNCIÓN del intake §17.3.P.10]. Ninguna fuente da un tiempo de suite para esta capa, y no se inventa uno |
 

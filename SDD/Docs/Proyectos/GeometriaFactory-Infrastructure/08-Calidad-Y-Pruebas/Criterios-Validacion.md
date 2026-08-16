@@ -38,14 +38,14 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | Id | Criterio | Cómo se comprueba | Umbral |
 | --- | --- | --- | --- |
 | CV-01 | Los **diez** casos de uso tienen al menos un caso de prueba en verde, y cada criterio Given-When-Then de sus historias está cubierto | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2 | **10 de 10** |
-| CV-02 | **La batería del validador pasa entera**, con los **ocho** escenarios del intake §20 como entrada | Matriz §6 y `TC-01` a `TC-10` | **10 de 10.** Ver §6 sobre el recuento |
+| CV-02 | **La batería del validador pasa entera**, con los **ocho** escenarios del intake §20 como entrada | Matriz §6 y `TC-06001` a `TC-06010` | **10 de 10.** Ver §6 sobre el recuento |
 | CV-03 | Las **veinticinco** historias de usuario tienen su caso de prueba | Matriz §2, columna de historias | **25 de 25** |
 | CV-04 | Las **dieciséis** reglas de negocio tienen verificado el tramo que esta capa ejerce, y las **dos** sin tramo tienen verificado que **esta capa guarda el dato y no lo comprueba** | Matriz §4 | **16 de 16**, con **14** con tramo y **2** sin él |
 | CV-05 | Las **siete** reglas conceptuales de modelo tienen caso de prueba | Matriz §5 | **7 de 7** |
-| CV-06 | Las **17** condiciones del catálogo están alcanzadas por al menos una prueba, y no se emite ninguna condición fuera del catálogo | `TC-34`, comparación en las dos direcciones | **17 de 17** y **0** fuera |
-| CV-07 | Los **ocho** escenarios del intake §20 están ejercitados **como texto literal**, sin sustituirlos por textos escritos a mano | `TC-01` a `TC-11` y `TC-16`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
-| CV-08 | El escenario `E-1` produce **3 piezas y exactamente 2 advertencias**, y el cilindro **no produce ninguna observación** | `TC-09` | 3 y **2**. **Una tercera advertencia significa que el operador de tolerancia dejó de ser estricto** |
-| CV-09 | Un texto **ilegible** produce una observación de validación y **no** la condición de motor no disponible | `TC-13` | Tres resultados distintos y **0** confusiones entre resultado y fallo |
+| CV-06 | Las **17** condiciones del catálogo están alcanzadas por al menos una prueba, y no se emite ninguna condición fuera del catálogo | `TC-06034`, comparación en las dos direcciones | **17 de 17** y **0** fuera |
+| CV-07 | Los **ocho** escenarios del intake §20 están ejercitados **como texto literal**, sin sustituirlos por textos escritos a mano | `TC-06001` a `TC-06011` y `TC-06016`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
+| CV-08 | El escenario `E-1` produce **3 piezas y exactamente 2 advertencias**, y el cilindro **no produce ninguna observación** | `TC-06009` | 3 y **2**. **Una tercera advertencia significa que el operador de tolerancia dejó de ser estricto** |
+| CV-09 | Un texto **ilegible** produce una observación de validación y **no** la condición de motor no disponible | `TC-06013` | Tres resultados distintos y **0** confusiones entre resultado y fallo |
 
 ## 3. Criterios no funcionales
 
@@ -53,19 +53,19 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
-| CV-10 | La interpretación del texto de **3** piezas de `E-1` termina **sin almacén** | **200 ms** **[ASUNCIÓN del intake §17.3.P.10, asunción `A-5` de §22]** | `TC-15` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
+| CV-10 | La interpretación del texto de **3** piezas de `E-1` termina **sin almacén** | **200 ms** **[ASUNCIÓN del intake §17.3.P.10, asunción `A-5` de §22]** | `TC-06015` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
 | CV-11 | La cobertura del proyecto de código, **por componente y no como número global** | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.3.P.6, asunción `A-3`]** | Informe de cobertura por componente | **Condicionado** |
 | CV-12 | La cobertura del **validador de figuras**, medida sobre los **dos motores** | **95 %** de líneas **[ASUNCIÓN del intake §17.3.P.6]**. Es el número más alto del producto | Informe acotado a los dos motores | **Condicionado** |
-| CV-13 | La comparación de valores usa tolerancia **0.01** absoluta con operador **estricto** | 0.01, estricto | `TC-09` | **Bloqueante, y no condicionado.** El intake §22 lo excluye expresamente de las asunciones |
-| CV-14 | Peticiones de red originadas por los dos motores | **0** | `TC-14` | **Bloqueante** |
-| CV-15 | Aplicación de transformaciones sobre un almacén inexistente, sin paso manual | **1 de 1** | `TC-32` | **Bloqueante.** Es criterio de aceptación de la etapa `c` |
-| CV-16 | Provisorias iguales en dos producciones consecutivas, sobre la misma cuenta y entre cuentas | **0**, y **0** derivables del nombre, del correo o de la fecha | `TC-27` | **Bloqueante** |
-| CV-17 | Componentes de pieza y apariciones del texto original en una proyección de listado | **0** y **0** | `TC-19` | **Bloqueante** |
-| CV-18 | Escrituras aceptadas que reemplacen el texto original conservado | **0** | `TC-16` | **Bloqueante** |
-| CV-19 | Retiros parciales tras una baja interrumpida | **0** | `TC-21`, con el almacén interrumpido a mitad de operación | **Bloqueante** |
-| CV-20 | Emisiones de acceso sin clave de firma, y claves generadas al vuelo | **0** y **0** | `TC-30` | **Bloqueante** |
-| CV-21 | Mensajes y trazas con un secreto, la ruta del almacén o el texto del alumno, **en las dos direcciones** —mensaje y registro del servidor— | **0** y **0** | `TC-35` | **Bloqueante** |
-| CV-22 | Cobertura del catálogo de condiciones, en las dos direcciones | 17 de 17 y 0 fuera | `TC-34` | **Bloqueante** |
+| CV-13 | La comparación de valores usa tolerancia **0.01** absoluta con operador **estricto** | 0.01, estricto | `TC-06009` | **Bloqueante, y no condicionado.** El intake §22 lo excluye expresamente de las asunciones |
+| CV-14 | Peticiones de red originadas por los dos motores | **0** | `TC-06014` | **Bloqueante** |
+| CV-15 | Aplicación de transformaciones sobre un almacén inexistente, sin paso manual | **1 de 1** | `TC-06032` | **Bloqueante.** Es criterio de aceptación de la etapa `c` |
+| CV-16 | Provisorias iguales en dos producciones consecutivas, sobre la misma cuenta y entre cuentas | **0**, y **0** derivables del nombre, del correo o de la fecha | `TC-06027` | **Bloqueante** |
+| CV-17 | Componentes de pieza y apariciones del texto original en una proyección de listado | **0** y **0** | `TC-06019` | **Bloqueante** |
+| CV-18 | Escrituras aceptadas que reemplacen el texto original conservado | **0** | `TC-06016` | **Bloqueante** |
+| CV-19 | Retiros parciales tras una baja interrumpida | **0** | `TC-06021`, con el almacén interrumpido a mitad de operación | **Bloqueante** |
+| CV-20 | Emisiones de acceso sin clave de firma, y claves generadas al vuelo | **0** y **0** | `TC-06030` | **Bloqueante** |
+| CV-21 | Mensajes y trazas con un secreto, la ruta del almacén o el texto del alumno, **en las dos direcciones** —mensaje y registro del servidor— | **0** y **0** | `TC-06035` | **Bloqueante** |
+| CV-22 | Cobertura del catálogo de condiciones, en las dos direcciones | 17 de 17 y 0 fuera | `TC-06034` | **Bloqueante** |
 | CV-23 | La construcción termina en 0 y **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.3.P.8 | **Bloqueante** |
 
 **No hay criterio de disponibilidad ni de caudal, y es correcto que no lo haya.** El intake §17.3.P.10 declara «sin SLO» para este proyecto de código, y quien tiene sujeto para el caudal es `GeometriaFactory-Api`, que es el que recibe peticiones.
@@ -80,7 +80,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-25 | **Ningún caso de prueba que estaba en verde en la etapa anterior pasa a rojo** sin justificación escrita | 0 regresiones sin justificar |
 | CV-26 | **Los diez casos de la batería del validador se reejecutan en toda etapa posterior a la `f`**, y no sólo en ella | 10 de 10 en cada ejecución. Es el riesgo de negocio que la fuente pone primero |
 | CV-27 | Todo defecto cerrado generó al menos un `TC-XX` nuevo o extendió uno existente | 1 caso de prueba por defecto cerrado, como mínimo |
-| CV-28 | Los casos de los tres modos de falla que **no se notan** —`TC-28`, `TC-30`, `TC-33`— se ejecutan en **todas** las etapas a partir de aquella en que su sujeto existe | Presentes en cada ejecución. Son los que `05` §9 declara de impacto muy alto |
+| CV-28 | Los casos de los tres modos de falla que **no se notan** —`TC-06028`, `TC-06030`, `TC-06033`— se ejecutan en **todas** las etapas a partir de aquella en que su sujeto existe | Presentes en cada ejecución. Son los que `05` §9 declara de impacto muy alto |
 
 **La regla de no regresión es acumulativa por diseño.** El intake §15, regla de delivery 1, la declara: al cerrar cada etapa deben seguir pasando los guiones de todas las anteriores, sin correcciones.
 

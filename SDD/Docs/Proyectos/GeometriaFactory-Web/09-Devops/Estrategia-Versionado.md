@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-06-Aislamiento-Del-Visor-Tras-Su-Fachada.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Aislamiento-Del-Visor-Tras-Su-Fachada.md) 1.0; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3 y §1.4; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.4.P.3, §17.6.P.7 y §17.6.P.8
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) 1.0; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3 y §1.4; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.4.P.3, §17.6.P.7 y §17.6.P.8
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md)
 
 ---
@@ -68,7 +68,7 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 | Prefijo de etiqueta | El que se fije al anclarla, registrado en el punto de control de la etapa `a` |
 | Qué **no** calcula la herramienta | **Ninguna de las seis clases de §1.** No hay superficie de tipos que comparar: lo que cambia es lo que la persona ve, y eso lo decide el criterio y lo verifica el guion |
 
-**Y una versión que sí se ancla y no se calcula**: la de la **biblioteca de componentes de interfaz**, que la fuente deja explícitamente **[A VERIFICAR]** y declara que se registra al crear el andamiaje (intake §17.6.P.1). Es `PA-01` de `05` §11 y `BT-02` de la etapa `a`. **Esta categoría no la inventa.**
+**Y una versión que sí se ancla y no se calcula**: la de la **biblioteca de componentes de interfaz**, que la fuente deja explícitamente **[A VERIFICAR]** y declara que se registra al crear el andamiaje (intake §17.6.P.1). Es `PA-01` de `05` §11 y `BT-10002` de la etapa `a`. **Esta categoría no la inventa.**
 
 ## 4. Modelo de ramas
 
@@ -102,12 +102,12 @@ Hay una asimetría propia de este proyecto de código que conviene declarar, por
 | Qué viaja adentro de la publicación | Cómo se versiona | Consecuencia |
 | --- | --- | --- |
 | La aplicación del front | Con la versión de esta unidad, calculada desde las etiquetas | Volver a la etiqueta anterior reconstruye exactamente esta parte |
-| Los tipos de `GeometriaFactory-Contracts` **compilados adentro** | Con el estado del repositorio en esa etiqueta, **no con una versión de paquete** | No hay versión intermedia que resolver: `ADR-03` de aquel proyecto de código lo decide como **compilación compartida** |
+| Los tipos de `GeometriaFactory-Contracts` **compilados adentro** | Con el estado del repositorio en esa etiqueta, **no con una versión de paquete** | No hay versión intermedia que resolver: `ADR-10003` de aquel proyecto de código lo decide como **compilación compartida** |
 | El **bundle del visor** como recurso estático generado | **Con el fuente que lo generó, y no con un archivo guardado**: no está versionado, se regenera en cada flujo | Volver a la etiqueta anterior **regenera** el bundle; no lo restaura. Es una propiedad y no un costo: un archivo restaurado podría no corresponder al fuente |
 
 **La tercera fila es la que suele leerse mal.** Que el bundle no esté en el repositorio no debilita a la etiqueta: la etiqueta apunta al **fuente del visor** en ese estado, y el flujo lo reconstruye. Lo que se pierde es la posibilidad de servir un bundle sin construirlo, que es precisamente lo que `QG-02` prohíbe.
 
-**Y una asimetría que esta unidad no puede resolver sola**: `ADR-06` §6 de `GeometriaFactory-Visor` acepta que un cambio mayor del punto de extensión del bundle **no lo detecta ninguna compilación** desde este lado. La mitigación desde acá es `QG-09` —**0** invocaciones al interior del bundle, con las **6** funciones de la fachada como única vía— más la revisión.
+**Y una asimetría que esta unidad no puede resolver sola**: `ADR-10006` §6 de `GeometriaFactory-Visor` acepta que un cambio mayor del punto de extensión del bundle **no lo detecta ninguna compilación** desde este lado. La mitigación desde acá es `QG-09` —**0** invocaciones al interior del bundle, con las **6** funciones de la fachada como única vía— más la revisión.
 
 ## 7. Política de cambios incompatibles
 
@@ -115,18 +115,18 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
-| Ante un cambio **mayor** de los de §1, el guion de demostración de la etapa **y los de todas las anteriores** pasan al **100 %** antes del punto de control | `QG-04`, con `TC-35`. **Bloqueante** | Intake §17.6.P.6 y §15, regla de no-regresión acumulativa |
+| Ante un cambio **mayor** de los de §1, el guion de demostración de la etapa **y los de todas las anteriores** pasan al **100 %** antes del punto de control | `QG-04`, con `TC-10035`. **Bloqueante** | Intake §17.6.P.6 y §15, regla de no-regresión acumulativa |
 | Ante un cambio **incompatible del contrato**, **las dos unidades desplegables se despliegan juntas** | El `QG-08` de `GeometriaFactory-Contracts`, que bloquea la publicación de la etapa. Tratamiento operativo en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2 | Intake §17.4.P.3 |
-| **0** advertencias de construcción | `QG-01`, en el paso 5 del flujo | Intake §17.6.P.8; [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8, sexta métrica |
-| **0** apariciones de la dirección del servidor propio en el repositorio | Inspección del árbol de fuentes y del historial | [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8, primera métrica |
+| **0** advertencias de construcción | `QG-01`, en el paso 5 del flujo | Intake §17.6.P.8; [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8, sexta métrica |
+| **0** apariciones de la dirección del servidor propio en el repositorio | Inspección del árbol de fuentes y del historial | [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8, primera métrica |
 | **0** etapas cerradas sin etiqueta | Inspección del historial contra el índice de informes de cierre | Intake §17.6.P.7 |
 | Toda **deriva mayor** contra la línea de base visual se resuelve corrigiendo lo construido o actualizando la línea de base con aprobación humana, **nunca por omisión** | `QG-11`, al cerrar la etapa | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto | Revisión del pull request de la etapa, que **es** el punto de control | Intake §15, regla de delivery 3 |
 
-**Las seis métricas de [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8 se adoptan sin agregar ninguna**, y las cuatro que no figuran arriba como obligación de versionado figuran como gates en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2: la respuesta de la dirección pública, la salida hacia el servicio de datos, el bundle generado en el mismo flujo y las publicaciones que terminan sin comprobar.
+**Las seis métricas de [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8 se adoptan sin agregar ninguna**, y las cuatro que no figuran arriba como obligación de versionado figuran como gates en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2: la respuesta de la dirección pública, la salida hacia el servicio de datos, el bundle generado en el mismo flujo y las publicaciones que terminan sin comprobar.
 
 ## 8. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.6.P.7 declara **sin excepciones**, y declara la consecuencia de que esta unidad sea **hoja del grafo y no exponga contrato a nadie**: la clase de cambio se decide sobre **lo que la persona ve y puede hacer**, con **seis** clases y **ninguna** detectable por un compilador, entre ellas la rotura de las tres reglas de arquitectura, que es la única clase que **compila, se publica y se ve bien**. Declara la herramienta de cálculo por su función sin elegirla, y la versión de la biblioteca de componentes como valor **[A VERIFICAR]** que no se inventa. Declara el modelo de ramas con la precisión de que **acá fusionar puede desencadenar un despliegue**, y que este es el único proyecto de código que toca **las ocho** etapas comprometidas. Declara la ausencia de canales de paquete con **un** canal de despliegue, la asimetría de **qué versiona realmente la etiqueta** —incluido el bundle, que se regenera y no se restaura— y la política de cambios incompatibles con **siete** obligaciones, adoptando las seis métricas de `ADR-07` §8 sin agregar ninguna. |
+| 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.6.P.7 declara **sin excepciones**, y declara la consecuencia de que esta unidad sea **hoja del grafo y no exponga contrato a nadie**: la clase de cambio se decide sobre **lo que la persona ve y puede hacer**, con **seis** clases y **ninguna** detectable por un compilador, entre ellas la rotura de las tres reglas de arquitectura, que es la única clase que **compila, se publica y se ve bien**. Declara la herramienta de cálculo por su función sin elegirla, y la versión de la biblioteca de componentes como valor **[A VERIFICAR]** que no se inventa. Declara el modelo de ramas con la precisión de que **acá fusionar puede desencadenar un despliegue**, y que este es el único proyecto de código que toca **las ocho** etapas comprometidas. Declara la ausencia de canales de paquete con **un** canal de despliegue, la asimetría de **qué versiona realmente la etiqueta** —incluido el bundle, que se regenera y no se restaura— y la política de cambios incompatibles con **siete** obligaciones, adoptando las seis métricas de `ADR-10007` §8 sin agregar ninguna. |

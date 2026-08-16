@@ -28,7 +28,7 @@
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Stages, los **nueve** gates materializados, el momento de medición de las dos puertas técnicas y las **dos** plataformas |
-| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado del **punto de extensión**, criterio de cambio de `ADR-06` y política de crecimiento de la fachada |
+| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado del **punto de extensión**, criterio de cambio de `ADR-12006` y política de crecimiento de la fachada |
 | [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Ausencia de ambientes y canales, y **la resolución del punto abierto `PA-05`** |
 | [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md) | 1.0 | Propuesto | La **entrega interna** del bundle al anfitrión: pre-requisitos, comandos, verificación, reversión y métricas |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario del bundle, firma, nivel de integridad, análisis de composición y dinámico, y política ante vulnerabilidades |
@@ -58,8 +58,8 @@
 | Gate | Dónde corre | Carácter |
 | --- | --- | --- |
 | QG-01 | Stage `empaquetar` | Bloqueante |
-| QG-02 (**`PT-03`**) | Momento de medición, `TC-19` | **Bloqueante, detiene la planificación de `g`** |
-| QG-03 (**`PT-02`**) | Momento de medición, `TC-20` | **Bloqueante, detiene la planificación de `g`** |
+| QG-02 (**`PT-03`**) | Momento de medición, `TC-12019` | **Bloqueante, detiene la planificación de `g`** |
+| QG-03 (**`PT-02`**) | Momento de medición, `TC-12020` | **Bloqueante, detiene la planificación de `g`** |
 | QG-04 | Stage `inspeccionar`, sobre el **bundle generado**, con los dos movimientos prendidos | Bloqueante, sin gradación |
 | QG-05 | Stage `inspeccionar` | Bloqueante, sin gradación |
 | QG-06 | Stage `inspeccionar`, sobre el bundle generado | Bloqueante |
@@ -76,7 +76,7 @@
 | Id | Punto abierto de `05` §11 | Estado tras esta emisión |
 | --- | --- | --- |
 | PA-05 | Si el bundle generado se versiona en el repositorio o se ignora. `05` §11 declara que **lo cierra la categoría 09** | **Cerrado**: se ignora y lo genera la canalización. Fundamento en [`Entornos-Deploy.md`](Entornos-Deploy.md) §2, con **cuatro** apoyos verificables y **una** exigencia operativa pendiente sobre el archivo de exclusiones del repositorio |
-| PA-01 | La versión del motor de dibujo tridimensional que se adopta | **Abierto.** Se cierra por `BT-09` antes del momento de medición. Recogido como `PD-03` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| PA-01 | La versión del motor de dibujo tridimensional que se adopta | **Abierto.** Se cierra por `BT-12009` antes del momento de medición. Recogido como `PD-03` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 | PA-03 | El umbral numérico de fluidez de la interacción | **Abierto, y esta categoría no lo cierra**: inventar un número acá lo propagaría como si fuera del producto |
 | PA-04 | La versión mínima de navegador | **Abierto.** El requisito se declara **por capacidad** y no por versión, y así se materializa en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §4 |
 

@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §7 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §4; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §14, §16, §17.1.P.4, §17.1.P.5 y §17.1.P.9
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §7 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §4; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §14, §16, §17.1.P.4, §17.1.P.5 y §17.1.P.9
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -46,7 +46,7 @@ De modo que la tabla de ambientes de este proyecto de código tiene una sola fil
 
 `Rules-Devops.md` §2.2 fija para el tipo `library` un modelo de canales `preview` / `stable` sobre feed único, y declara que los modelos son piso: no se quita ninguno sin un ADR que lo justifique.
 
-**El ADR existe y es anterior a esta categoría.** [`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) §4 evaluó como alternativa la publicación en un repositorio de paquetes interno y la descartó con dos motivos: el intake la descarta explícitamente, y agregaría infraestructura a un producto que las fuentes declaran básico. El apartamiento, entonces, **no lo decide 09**: 09 lo registra y lo hace operativo.
+**El ADR existe y es anterior a esta categoría.** [`ADR-02003`](../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §4 evaluó como alternativa la publicación en un repositorio de paquetes interno y la descartó con dos motivos: el intake la descarta explícitamente, y agregaría infraestructura a un producto que las fuentes declaran básico. El apartamiento, entonces, **no lo decide 09**: 09 lo registra y lo hace operativo.
 
 **Y hay una razón de fondo para no simular los dos canales.** `Rules-Devops.md` §4.8 declara anti-patrón confundir publicación con despliegue. Declarar acá un canal `preview` y un canal `stable` sin feed detrás sería la versión inversa del mismo error: **inventar publicación donde sólo hay compilación**. Un canal es un destino del que alguien retira un artefacto; acá nadie retira nada, porque el consumidor lo obtiene por referencia de proyecto dentro de la misma construcción.
 
@@ -76,7 +76,7 @@ Lo único que se aproxima a una declaración de entorno es el **archivo de defin
 | --- | --- | --- |
 | Configuración de ejecución | **Ninguna.** El proyecto de código no lee configuración | `05` §7, citado por [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
 | Variables de entorno | **Ninguna**, ni en construcción ni en prueba | `Estrategia-Testing.md` §7, fila de variables de entorno |
-| Reloj | **No se fija ni se simula**: el momento entra por parámetro | [`../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
+| Reloj | **No se fija ni se simula**: el momento entra por parámetro | [`../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
 
 **El principio de configuración externa se cumple de la forma más fuerte posible: no habiendo configuración.** Un mapa de variables por ambiente sería una tabla vacía con encabezados.
 
@@ -112,4 +112,4 @@ Lo único que se aproxima a una declaración de entorno es el **archivo de defin
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial. Declara que este proyecto de código **no tiene ambientes de despliegue ni canales de publicación**, con las tres afirmaciones de la fuente que lo sostienen, y registra el apartamiento del modelo `preview` / `stable` que `Rules-Devops.md` §2.2 fija para el tipo `library`, apoyado en `ADR-03` §4, que ya había descartado la publicación en un repositorio de paquetes. Declara el contenedor de desarrollo como único ambiente y por qué **no** se lo llama `DEV`. Declara la ausencia de infraestructura declarativa, de configuración y de secretos propios, cada una con la sección de la fuente que la respalda, y la ausencia de frecuencia de rotación por no haber secreto que rotar. Declara que la infraestructura de despliegue del producto pertenece a los dos proyectos de código que se despliegan y **no se describe acá**. |
+| 1.0 | 2026-08-11 | Emisión inicial. Declara que este proyecto de código **no tiene ambientes de despliegue ni canales de publicación**, con las tres afirmaciones de la fuente que lo sostienen, y registra el apartamiento del modelo `preview` / `stable` que `Rules-Devops.md` §2.2 fija para el tipo `library`, apoyado en `ADR-02003` §4, que ya había descartado la publicación en un repositorio de paquetes. Declara el contenedor de desarrollo como único ambiente y por qué **no** se lo llama `DEV`. Declara la ausencia de infraestructura declarativa, de configuración y de secretos propios, cada una con la sección de la fuente que la respalda, y la ausencia de frecuencia de rotación por no haber secreto que rotar. Declara que la infraestructura de despliegue del producto pertenece a los dos proyectos de código que se despliegan y **no se describe acá**. |

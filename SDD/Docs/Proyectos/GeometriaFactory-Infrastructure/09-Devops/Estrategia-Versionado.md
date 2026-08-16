@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §5 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-07-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7, §17.3.P.4 y §17.3.P.7
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §5 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7, §17.3.P.4 y §17.3.P.7
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md)
 
 ---
@@ -39,7 +39,7 @@ Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[
 | **Menor** | Se agrega un adaptador para un puerto nuevo que la capa de aplicación declaró | Sí, si falta |
 | **Parche** | Se corrige un adaptador para que cumpla lo que ya declaraba | — |
 
-**Las dos filas del medio son las que importan acá.** Son cambios mayores **que compilan**, y las dos tocan lo que la fuente protege con más fuerza: la regla de no cargar componentes en los listados (intake §17.3.P.12) y la conservación íntegra del texto original (`RN-08`, intake §17.3.P.11 punto 2). Ninguna herramienta de comparación de superficie las vería; las ven `QG-10` y `QG-11`, y por eso son gates.
+**Las dos filas del medio son las que importan acá.** Son cambios mayores **que compilan**, y las dos tocan lo que la fuente protege con más fuerza: la regla de no cargar componentes en los listados (intake §17.3.P.12) y la conservación íntegra del texto original (`RN-06008`, intake §17.3.P.11 punto 2). Ninguna herramienta de comparación de superficie las vería; las ven `QG-10` y `QG-11`, y por eso son gates.
 
 ## 2. Convenciones de mensaje de confirmación
 
@@ -77,8 +77,8 @@ Es lo que distingue a este documento de los de las otras cuatro bibliotecas del 
 
 | Linaje | Qué es | Regla que lo gobierna | Qué pasa si se rompe |
 | --- | --- | --- | --- |
-| **Transformaciones de esquema** | La secuencia ordenada que lleva un almacén desde inexistente hasta el esquema en uso | **Se versiona con el código de su etapa y no se edita una ya fusionada** (intake §17.3.P.7); el linaje es **inmutable** ([`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) | Un almacén existente tiene aplicado un linaje que ya no coincide con el del código. **Volver a una etiqueta anterior no lo deshace**: el esquema del almacén no se recompila |
-| **Parámetros de la derivación de clave** | Los parámetros con los que se derivó cada contraseña guardada | **Se versionan junto al valor derivado, sin valor por defecto silencioso** ([`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)) | Un cambio de parámetros dejaría sin verificar las contraseñas ya guardadas si no se conservara con qué se derivó cada una |
+| **Transformaciones de esquema** | La secuencia ordenada que lleva un almacén desde inexistente hasta el esquema en uso | **Se versiona con el código de su etapa y no se edita una ya fusionada** (intake §17.3.P.7); el linaje es **inmutable** ([`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) | Un almacén existente tiene aplicado un linaje que ya no coincide con el del código. **Volver a una etiqueta anterior no lo deshace**: el esquema del almacén no se recompila |
+| **Parámetros de la derivación de clave** | Los parámetros con los que se derivó cada contraseña guardada | **Se versionan junto al valor derivado, sin valor por defecto silencioso** ([`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)) | Un cambio de parámetros dejaría sin verificar las contraseñas ya guardadas si no se conservara con qué se derivó cada una |
 
 **Los dos son la razón por la que la reversión de este proyecto de código no es simétrica.** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §7 lo declara: volver a la etiqueta anterior revierte el código, **no el almacén**. Una transformación equivocada se corrige **con otra transformación**, nunca editando la anterior; y el guion de restablecimiento, que sí deja el almacén como en el primer arranque, **no es un camino de producción** (`05` §5).
 
@@ -105,14 +105,14 @@ Esta sección reemplaza además a la política de obsolescencia que `Rules-Devop
 
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
-| **Ninguna transformación ya fusionada se edita** | Revisión del pull request de la etapa | Intake §17.3.P.7; [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) |
+| **Ninguna transformación ya fusionada se edita** | Revisión del pull request de la etapa | Intake §17.3.P.7; [`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) |
 | Las transformaciones **se aplican solas sobre un almacén inexistente**, sin paso manual | `QG-04`, en el stage `verificar-transformaciones` | Intake §17.3.P.8, criterio de aceptación de la etapa `c` |
 | **0** advertencias de construcción | `QG-01`, en `build` | Intake §17.3.P.8 |
-| **0** componentes de pieza y **0** apariciones del texto original en una proyección de listado | `QG-10`, con `TC-19` | Es una de las dos clases mayores que compilan (§1) |
-| **0** escrituras que reemplacen el texto original conservado | `QG-11`, con `TC-16` y `TC-21` | La otra clase mayor que compila (§1) |
+| **0** componentes de pieza y **0** apariciones del texto original en una proyección de listado | `QG-10`, con `TC-06019` | Es una de las dos clases mayores que compilan (§1) |
+| **0** escrituras que reemplacen el texto original conservado | `QG-11`, con `TC-06016` y `TC-06021` | La otra clase mayor que compila (§1) |
 | **0** etapas cerradas sin etiqueta | Inspección del historial contra el índice de informes de cierre | Intake §15 y §17.3.P.7 |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto | Revisión del pull request, que **es** el punto de control | Intake §15, regla de delivery 3 |
-| Los parámetros de derivación **viajan junto al valor derivado**, sin valor por defecto silencioso | Revisión, contra [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | El mismo ADR |
+| Los parámetros de derivación **viajan junto al valor derivado**, sin valor por defecto silencioso | Revisión, contra [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | El mismo ADR |
 
 **La primera fila es la única obligación de versionado de todo el producto que alcanza a un dato que sobrevive al código.** Las demás protegen la construcción o la ejecución; ésa protege **almacenes que ya existen y que ninguna canalización toca**.
 

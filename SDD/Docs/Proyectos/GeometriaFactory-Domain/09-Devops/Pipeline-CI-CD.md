@@ -51,15 +51,15 @@ Los stages son los **tres** que declaran el intake §17.1.P.8 —«restore → b
 | `build` | `scripts/build.sh` | `QG-01`: termina en **0 y sin advertencias** | 0 advertencias | **Bloqueante** |
 | `build` | El mismo guion, con el análisis estático de la plataforma activo | `QG-04`: **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | 0 y 0 | **Bloqueante** |
 | `test` | `scripts/test.sh` | `QG-02`: la batería pasa entera, **0** pruebas rojas y **0** deshabilitadas sin motivo escrito | 0 y 0 | **Bloqueante** |
-| `test` | Prueba de inspección `TC-23` | `QG-05`: **42 de 42** condiciones del catálogo alcanzadas y **0** emitidas fuera de él, comparado en las dos direcciones | 42 y 0 | **Bloqueante** |
-| `test` | Prueba de inspección `TC-26` sobre la matriz de invariantes | `QG-06`: **9 de 9** invariantes con prueba de violación rechazada, **sin dobles** | 9 y 0 | **Bloqueante al cierre de etapa** |
+| `test` | Prueba de inspección `TC-02023` | `QG-05`: **42 de 42** condiciones del catálogo alcanzadas y **0** emitidas fuera de él, comparado en las dos direcciones | 42 y 0 | **Bloqueante** |
+| `test` | Prueba de inspección `TC-02026` sobre la matriz de invariantes | `QG-06`: **9 de 9** invariantes con prueba de violación rechazada, **sin dobles** | 9 y 0 | **Bloqueante al cierre de etapa** |
 | `test` | Recolector de cobertura, con informe **por componente** | `QG-03`: **90 %** de líneas y **85 %** de ramas | 90 / 85 **[ASUNCIÓN del intake §17.1.P.6, asunción `A-3` de §22]** | **Condicionado**: se mide y se registra; no bloquea la fusión |
 | `test` | Duración total reportada por el ejecutor | `QG-07`: la batería completa termina en menos de **10 segundos** | 10 s **[ASUNCIÓN del intake §17.1.P.10, asunción `A-5` de §22]** | **Condicionado** |
-| Revisión del pull request | Lectura de la superficie pública contra [`../05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | `QG-08`: ninguna condición prevista viaja como excepción de control de flujo | 0 excepciones de negocio | **Se rechaza en revisión aunque compile** |
+| Revisión del pull request | Lectura de la superficie pública contra [`../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | `QG-08`: ninguna condición prevista viaja como excepción de control de flujo | 0 excepciones de negocio | **Se rechaza en revisión aunque compile** |
 
 **Por qué el gate de análisis estático no tiene stage propio de `lint`.** Ninguna fuente del producto declara un linter separado, y el criterio que un stage de `lint` verificaría ya está expresado como **cero advertencias de construcción**: `CV-20` de [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) declara que el análisis estático no introduce advertencias nuevas y lo hace **bloqueante por `CV-13`**, que es el gate de `build`. Abrir un stage aparte duplicaría la misma medición en dos lugares. La elección concreta de las reglas de análisis y su anclaje de versión son de la etapa `a`, por la regla de anclaje de versiones del encabezado de la Parte C del intake.
 
-**Los dos gates condicionados se miden igual.** Condicionado no es opcional: `Estrategia-Calidad.md` §3.1 declara que la medición se hace y el resultado se registra, y lo que queda en suspenso es la consecuencia automática. El pipeline **emite el número y no lo silencia**; su incumplimiento entra como hallazgo del punto de control de la etapa, no como rechazo de la fusión. Los dos dependen de valores rotulados **[ASUNCIÓN]** en el intake §22, y `BT-15` es la tarea que los eleva al Product Owner.
+**Los dos gates condicionados se miden igual.** Condicionado no es opcional: `Estrategia-Calidad.md` §3.1 declara que la medición se hace y el resultado se registra, y lo que queda en suspenso es la consecuencia automática. El pipeline **emite el número y no lo silencia**; su incumplimiento entra como hallazgo del punto de control de la etapa, no como rechazo de la fusión. Los dos dependen de valores rotulados **[ASUNCIÓN]** en el intake §22, y `BT-02015` es la tarea que los eleva al Product Owner.
 
 ### 2.2 Los cuatro stages que no existen acá, y por qué
 
@@ -126,9 +126,9 @@ La única promoción que este proyecto de código ejecuta es la **de estado del 
 
 | Situación | Procedimiento | Fundamento |
 | --- | --- | --- |
-| Una etapa fusionada rompe algo que estaba en verde | Volver a la **etiqueta de la etapa anterior**, que permite reconstruir cualquier demostración ya aprobada | Intake §17.1.P.8, y [`../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) §5 |
-| Un cambio de esta biblioteca rompe la compilación de un consumidor | La rotura aparece en la construcción del consumidor, antes de cualquier despliegue. Se revierte la confirmación o se corrige en la misma rama de etapa | `ADR-03` §7: qué constituye cambio mayor, menor y parche |
-| Un cambio mayor llegó sin fila en el registro de cambios del producto | Se agrega la fila en `changelog.md` antes de cerrar la etapa | `ADR-03` §8, métrica de cambios mayores sin registro, objetivo **0** |
+| Una etapa fusionada rompe algo que estaba en verde | Volver a la **etiqueta de la etapa anterior**, que permite reconstruir cualquier demostración ya aprobada | Intake §17.1.P.8, y [`../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §5 |
+| Un cambio de esta biblioteca rompe la compilación de un consumidor | La rotura aparece en la construcción del consumidor, antes de cualquier despliegue. Se revierte la confirmación o se corrige en la misma rama de etapa | `ADR-02003` §7: qué constituye cambio mayor, menor y parche |
+| Un cambio mayor llegó sin fila en el registro de cambios del producto | Se agrega la fila en `changelog.md` antes de cerrar la etapa | `ADR-02003` §8, métrica de cambios mayores sin registro, objetivo **0** |
 
 **No hay delist, no hay retiro de versión y no hay ventana de gracia**, porque no hay artefacto publicado que retirar. El procedimiento de reversión de esta biblioteca **es de código y de etiqueta**, y termina ahí.
 
@@ -138,7 +138,7 @@ La única promoción que este proyecto de código ejecuta es la **de estado del 
 | --- | --- | --- |
 | La salida del pipeline sobre el pull request de la etapa | El resultado de los tres stages, gate por gate, con el número de los dos condicionados | El pull request **es** el punto de control (intake §15) |
 | El informe de cierre de la etapa | La medición de `QG-03` y `QG-07` con su distancia al umbral, y la constancia de los gates bloqueantes | Definition of Done §1.3 y `Criterios-Validacion.md` §6 |
-| El registro de cambios del producto | Toda fila de cambio mayor de esta biblioteca | `ADR-03` §7 |
+| El registro de cambios del producto | Toda fila de cambio mayor de esta biblioteca | `ADR-02003` §7 |
 
 **No se declara ningún canal de mensajería ni ningún tablero.** Ninguna fuente del producto declara uno, `equipo_n` es 1 y el destinatario de la notificación es la misma persona que ejecuta. Un escalamiento por severidad hacia un equipo que no existe sería ceremonia sin lector.
 
@@ -158,7 +158,7 @@ Este proyecto de código no se despliega, pero **condiciona** a las dos canaliza
 | Id | Punto abierto | Quién lo cierra | Cuándo |
 | --- | --- | --- | --- |
 | PD-01 | La **herramienta concreta** de cada stage —ejecutor de pruebas, recolector de cobertura y reglas de análisis estático— y su anclaje de versión | El equipo, en el punto de control de la etapa `a` | Etapa `a`, por la regla de anclaje de versiones del intake, encabezado de la Parte C |
-| PD-02 | La **confirmación de los dos valores rotulados [ASUNCIÓN]** que hoy dejan condicionados a `QG-03` y `QG-07`. Confirmados, los dos pasan a bloqueantes sin ningún otro cambio de este documento | El Product Owner, sobre el intake §22 | `BT-15`, al cerrar la etapa `d` (`Estrategia-Calidad.md` §5) |
+| PD-02 | La **confirmación de los dos valores rotulados [ASUNCIÓN]** que hoy dejan condicionados a `QG-03` y `QG-07`. Confirmados, los dos pasan a bloqueantes sin ningún otro cambio de este documento | El Product Owner, sobre el intake §22 | `BT-02015`, al cerrar la etapa `d` (`Estrategia-Calidad.md` §5) |
 | PD-03 | Si el mutation score entra alguna vez al pipeline. Hoy `CV-19` se reporta «sin medir» y su hueco está declarado | La categoría 08, si la herramienta se elige | Sin fecha comprometida |
 
 **Ninguno de los tres se cierra inventando un valor.** El tratamiento de `PD-02` es el que la Fase E ya declaró y esta categoría lo adopta sin cambiarlo.

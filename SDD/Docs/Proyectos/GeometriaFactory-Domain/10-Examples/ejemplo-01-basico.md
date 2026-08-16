@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/domain/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-01`, `CU-02`, `CU-03`, `CU-04` y `CU-12`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-01` a `OP-04` y `OP-12`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-01`, `TC-02`, `TC-03`, `TC-06`, `TC-09` y `TC-10`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-01` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-01` a `OP-04` y `OP-12`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02001`, `TC-02002`, `TC-02003`, `TC-02006`, `TC-02009` y `TC-02010`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -76,17 +76,17 @@ Salida esperada en consola, línea por línea. Es el snapshot contra el que comp
 Operaciones invocadas: 9 | Rechazos tipados: 2 | Excepciones: 0
 ```
 
-**Las tres líneas de admisibilidad son el punto del sample.** `[3]`, `[5]` y `[7]` muestran los tres desenlaces de `CU-04` sobre la misma cuenta a medida que avanza su ciclo de vida, y muestran que el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE` de `RN-13` se levanta **sólo** con el cambio efectuado por la propia cuenta.
+**Las tres líneas de admisibilidad son el punto del sample.** `[3]`, `[5]` y `[7]` muestran los tres desenlaces de `CU-02004` sobre la misma cuenta a medida que avanza su ciclo de vida, y muestran que el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE` de `RN-02013` se levanta **sólo** con el cambio efectuado por la propia cuenta.
 
-**La última línea también es contrato**: `Excepciones: 0` materializa [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), que reserva las excepciones a los defectos de programación del consumidor.
+**La última línea también es contrato**: `Excepciones: 0` materializa [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), que reserva las excepciones a los defectos de programación del consumidor.
 
 ## 7. Variaciones sugeridas
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Habilitar sin aportar la provisoria derivada | Quitar el valor derivado del acto `[4]` | Rechazo `HABILITACION_SIN_CREDENCIAL_PROVISORIA` (`RN-16`), y la cuenta queda `Pendiente` |
-| Operar sobre la cuenta de administrador | Invocar habilitar, bloquear o resetear sobre la cuenta del acto `[1]` | Rechazo `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` (`RN-01`), la cuenta queda `Habilitado` |
-| Bloquear y volver a preguntar | Bloquear la cuenta después del acto `[7]` | La admisibilidad pasa a no admisible con motivo `CUENTA_BLOQUEADA` (`RN-06`), sin perder la credencial |
+| Habilitar sin aportar la provisoria derivada | Quitar el valor derivado del acto `[4]` | Rechazo `HABILITACION_SIN_CREDENCIAL_PROVISORIA` (`RN-02016`), y la cuenta queda `Pendiente` |
+| Operar sobre la cuenta de administrador | Invocar habilitar, bloquear o resetear sobre la cuenta del acto `[1]` | Rechazo `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` (`RN-02001`), la cuenta queda `Habilitado` |
+| Bloquear y volver a preguntar | Bloquear la cuenta después del acto `[7]` | La admisibilidad pasa a no admisible con motivo `CUENTA_BLOQUEADA` (`RN-02006`), sin perder la credencial |
 | Alta que aporta credencial derivada | Pasar un valor derivado en el acto `[2]` | Rechazo `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA`: la credencial se fija al habilitar y no antes |
 
 Las cuatro variaciones son el puente hacia el ejemplo 02, donde el sujeto deja de ser la cuenta y pasa a ser el trabajo.
@@ -95,24 +95,24 @@ Las cuatro variaciones son el puente hacia el ejemplo 02, donde el sujeto deja d
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Registrar-El-Alta-De-Un-Alumno.md) | Caso de uso | Acto `[2]`: constituye el alumno con cuenta `Pendiente`, sin credencial y con papel `Alumno` |
-| [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | Caso de uso | Acto `[4]`: habilita la cuenta; la variación de bloqueo recorre la transición inversa |
-| [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | Caso de uso | Actos `[4]` y `[6]`: fija la provisoria y después la reemplaza exigiendo la vigente |
-| [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Caso de uso | Actos `[3]`, `[5]` y `[7]`: los tres desenlaces de la puerta única |
-| [`CU-12`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12-Configurar-La-Cuenta-De-Administrador.md) | Caso de uso | Actos `[1]` y `[1b]`: la ventana de alta del administrador y su cierre |
-| [`RN-01`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El rechazo de `[1b]` y la variación sobre la cuenta de administrador |
-| [`RN-06`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-06-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | El motivo `CUENTA_PENDIENTE` de `[3]` |
-| [`RN-13`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | El motivo de `[5]` y su levantamiento en `[6]` |
-| [`RN-16`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-16-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | Habilitar produce la provisoria: la variación sin ella se rechaza |
-| [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | La línea final con `Excepciones: 0` |
-| [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md) | Decisión arquitectónica | Las tres invocaciones de admisibilidad son la única puerta que el consumidor consulta |
+| [`CU-02001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | Caso de uso | Acto `[2]`: constituye el alumno con cuenta `Pendiente`, sin credencial y con papel `Alumno` |
+| [`CU-02002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | Caso de uso | Acto `[4]`: habilita la cuenta; la variación de bloqueo recorre la transición inversa |
+| [`CU-02003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | Caso de uso | Actos `[4]` y `[6]`: fija la provisoria y después la reemplaza exigiendo la vigente |
+| [`CU-02004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Caso de uso | Actos `[3]`, `[5]` y `[7]`: los tres desenlaces de la puerta única |
+| [`CU-02012`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) | Caso de uso | Actos `[1]` y `[1b]`: la ventana de alta del administrador y su cierre |
+| [`RN-02001`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El rechazo de `[1b]` y la variación sobre la cuenta de administrador |
+| [`RN-02006`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | El motivo `CUENTA_PENDIENTE` de `[3]` |
+| [`RN-02013`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | El motivo de `[5]` y su levantamiento en `[6]` |
+| [`RN-02016`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | Habilitar produce la provisoria: la variación sin ella se rechaza |
+| [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | La línea final con `Excepciones: 0` |
+| [`ADR-02005`](../05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) | Decisión arquitectónica | Las tres invocaciones de admisibilidad son la única puerta que el consumidor consulta |
 
 ## 9. Contrato de verificación
 
 ```yaml
 verificacion:
-  id: VER-01
-  verifica: [CU-01, CU-02, CU-03, CU-04, CU-12, US-01, US-04, US-06, US-24, US-27]
+  id: VER-02001
+  verifica: [CU-02001, CU-02002, CU-02003, CU-02004, CU-02012, US-02001, US-02004, US-02006, US-02024, US-02027]
   comando: "dotnet run --project samples/domain/01-basico"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -136,4 +136,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2: el markdown explicativo queda completo y el contrato de verificación `VER-01` declara `verifica`, `comando`, `precondiciones` y `criterio_aceptacion`, con `evidencia` en `No verificado — sin código`. Cubre `CU-01`, `CU-02`, `CU-03`, `CU-04` y `CU-12` con las operaciones `OP-01` a `OP-04` y `OP-12` del contrato de uso del proyecto de código. El criterio de aceptación es exit code más cuatro líneas exactas de salida, sin prosa evaluable por una persona. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2: el markdown explicativo queda completo y el contrato de verificación `VER-02001` declara `verifica`, `comando`, `precondiciones` y `criterio_aceptacion`, con `evidencia` en `No verificado — sin código`. Cubre `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012` con las operaciones `OP-01` a `OP-04` y `OP-12` del contrato de uso del proyecto de código. El criterio de aceptación es exit code más cuatro líneas exactas de salida, sin prosa evaluable por una persona. |

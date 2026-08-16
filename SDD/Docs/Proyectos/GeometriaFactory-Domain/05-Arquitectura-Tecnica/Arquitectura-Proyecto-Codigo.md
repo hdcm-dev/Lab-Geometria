@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28** §4 y §4.1 (las **dieciséis** reglas `RN-01` a `RN-16`), §4.2 (modelo de estados del trabajo), §13 y §14 (composición del producto y las tres reglas de arquitectura `RA-01`, `RA-02`, `RA-03`), §15 (etapas y puertas técnicas), §16 (estructura de repositorio), §17.1 completo (P.1 a P.12, con los **nueve** invariantes `INV-01` a `INV-09`); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2, §3 y §5 (flags de este proyecto de código); [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md), [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) y los trece casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) y [`../03-UX-UI-DX/DX-Developer-Experience.md`](../03-UX-UI-DX/DX-Developer-Experience.md)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28** §4 y §4.1 (las **dieciséis** reglas `RN-02001` a `RN-02016`), §4.2 (modelo de estados del trabajo), §13 y §14 (composición del producto y las tres reglas de arquitectura `RA-01`, `RA-02`, `RA-03`), §15 (etapas y puertas técnicas), §16 (estructura de repositorio), §17.1 completo (P.1 a P.12, con los **nueve** invariantes `INV-01` a `INV-09`); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2, §3 y §5 (flags de este proyecto de código); [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md), [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) y los trece casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) y [`../03-UX-UI-DX/DX-Developer-Experience.md`](../03-UX-UI-DX/DX-Developer-Experience.md)
 **Trazabilidad downstream:** `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -46,14 +46,14 @@ No documenta el modelo de datos físico —este proyecto de código declara su p
 
 ## 2. Estilo arquitectónico
 
-**Estilo elegido: modelo de dominio rico con invariantes explícitas, como núcleo de una arquitectura de capas con dependencias hacia adentro.** Es la decisión que `PRODUCT-INTAKE` §17.1.P.2 declara tomada aguas arriba y que [`ADR-01`](Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) registra con su contexto y sus consecuencias.
+**Estilo elegido: modelo de dominio rico con invariantes explícitas, como núcleo de una arquitectura de capas con dependencias hacia adentro.** Es la decisión que `PRODUCT-INTAKE` §17.1.P.2 declara tomada aguas arriba y que [`ADR-02001`](Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) registra con su contexto y sus consecuencias.
 
 En términos de esta categoría, el estilo se concreta en cuatro propiedades estructurales:
 
 1. **Cero dependencias salientes.** El proyecto de código no referencia ningún otro proyecto de código del producto ni ninguna biblioteca de persistencia, de transporte o de serialización (`PRODUCT-INTAKE` §17.1.P.1). Es nivel 0 del orden topológico del `PRODUCT-MANIFEST` §3.
 2. **Las guardas son la superficie pública.** Lo que el consumidor invoca son operaciones que aceptan o rechazan, y el rechazo es un valor de retorno tipado y no una excepción de control de flujo. Lo desarrolla [`Contratos-Abstractions.md`](Contratos-Abstractions.md).
-3. **El tiempo y la unicidad entran por parámetro.** El dominio no lee el reloj ni consulta conjuntos de entidades: las dos cosas se las aporta el consumidor ([`ADR-06`](Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)).
-4. **La admisibilidad es la puerta única de las guardas de cuenta.** `INV-06` e `INV-09` se ejercen en un solo lugar, y no repetidos en cada operación ([`ADR-05`](Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md)).
+3. **El tiempo y la unicidad entran por parámetro.** El dominio no lee el reloj ni consulta conjuntos de entidades: las dos cosas se las aporta el consumidor ([`ADR-02006`](Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)).
+4. **La admisibilidad es la puerta única de las guardas de cuenta.** `INV-06` e `INV-09` se ejercen en un solo lugar, y no repetidos en cada operación ([`ADR-02005`](Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md)).
 
 ### 2.1 Alternativas descartadas
 
@@ -63,7 +63,7 @@ Las dos primeras las descarta el intake y esta categoría no las reabre; la terc
 | --- | --- | --- | --- |
 | Modelo anémico, con la lógica en los servicios de aplicación | Menos tipos, menos ceremonia, la lógica queda toda junta | Los invariantes y las transiciones —que son precisamente lo que hay que poder probar sin infraestructura— quedarían fuera del proyecto de código sin dependencias, y su verificación pasaría a exigir el resto de las capas | **Descartada** por `PRODUCT-INTAKE` §17.1.P.2 |
 | Entidades del proveedor de persistencia como modelo de dominio | Un solo juego de tipos entre dominio y base de datos | Ata el dominio al proveedor y viola la regla de dependencias hacia adentro; además obligaría a referenciar una biblioteca de persistencia desde el nivel 0 | **Descartada** por `PRODUCT-INTAKE` §17.1.P.2 |
-| Un agregado único que abarque cuenta y trabajo | Una sola puerta de consistencia, imposible de saltear | Las dos entidades raíz no comparten ninguna invariante: ninguna de las nueve liga el estado de una cuenta con el estado de un trabajo. El agregado único cargaría toda la cuenta en cada operación de trabajo sin comprar consistencia | **Descartada** por esta categoría, ver [`ADR-01`](Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) §4 |
+| Un agregado único que abarque cuenta y trabajo | Una sola puerta de consistencia, imposible de saltear | Las dos entidades raíz no comparten ninguna invariante: ninguna de las nueve liga el estado de una cuenta con el estado de un trabajo. El agregado único cargaría toda la cuenta en cada operación de trabajo sin comprar consistencia | **Descartada** por esta categoría, ver [`ADR-02001`](Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) §4 |
 
 ### 2.2 Por qué no se evalúan los estilos de sistema distribuido
 
@@ -111,11 +111,11 @@ Las flechas del diagrama son unidireccionales y el grafo es acíclico: los cuatr
 
 | Componente | Casos de uso que cubre |
 | --- | --- |
-| Núcleo de entidades | CU-01, CU-05, CU-06, CU-07, CU-12 |
-| Guardas de cuenta | CU-01, CU-02, CU-03, CU-12, CU-13 |
-| Evaluador de admisibilidad | CU-04 |
-| Máquina de estados del trabajo | CU-08, CU-09, CU-10, CU-11 |
-| Adopción de la interpretación | CU-06, CU-07 |
+| Núcleo de entidades | CU-02001, CU-02005, CU-02006, CU-02007, CU-02012 |
+| Guardas de cuenta | CU-02001, CU-02002, CU-02003, CU-02012, CU-02013 |
+| Evaluador de admisibilidad | CU-02004 |
+| Máquina de estados del trabajo | CU-02008, CU-02009, CU-02010, CU-02011 |
+| Adopción de la interpretación | CU-02006, CU-02007 |
 
 Los trece casos de uso tienen componente. Ninguno queda sin cubrir y ningún componente queda sin caso de uso.
 
@@ -154,11 +154,11 @@ Todas las decisiones transversales viven acá y no repartidas por componente.
 | --- | --- | --- |
 | Registro de eventos | **Ninguno.** El dominio no registra ni instrumenta. Un rechazo se informa por su valor de retorno y quien decide si eso amerita una entrada de registro es el consumidor | `PRODUCT-INTAKE` §17.1.P.10 declara «sin observabilidad propia» |
 | Trazas y métricas | **Ninguna propia.** No hay identificador de correlación que propagar dentro de la biblioteca: la correlación la lleva el consumidor | `PRODUCT-INTAKE` §17.1.P.10 |
-| Manejo de errores | **Resultado tipado, no excepción.** Toda condición prevista viaja como valor de retorno con su código estable, tomado del catálogo de **42** condiciones de 03. Las excepciones quedan reservadas a defectos de programación del consumidor —un argumento nulo donde el contrato exige valor— y nunca a reglas de negocio | [`ADR-02`](Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) |
-| Configuración | **Ninguna.** El proyecto de código no lee configuración: todo lo que necesita llega por parámetro, incluidos el momento y la unicidad ya resuelta | [`ADR-06`](Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
-| Secretos | **Ninguno.** La contraseña llega **ya derivada**; el dominio no ve valores en claro, no deriva y no compara credenciales por su cuenta | `PRODUCT-INTAKE` §17.1.P.5; [`ADR-04`](Adrs/ADR-04-Frontera-De-Autenticacion-Y-Autorizacion.md) |
+| Manejo de errores | **Resultado tipado, no excepción.** Toda condición prevista viaja como valor de retorno con su código estable, tomado del catálogo de **42** condiciones de 03. Las excepciones quedan reservadas a defectos de programación del consumidor —un argumento nulo donde el contrato exige valor— y nunca a reglas de negocio | [`ADR-02002`](Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) |
+| Configuración | **Ninguna.** El proyecto de código no lee configuración: todo lo que necesita llega por parámetro, incluidos el momento y la unicidad ya resuelta | [`ADR-02006`](Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
+| Secretos | **Ninguno.** La contraseña llega **ya derivada**; el dominio no ve valores en claro, no deriva y no compara credenciales por su cuenta | `PRODUCT-INTAKE` §17.1.P.5; [`ADR-02004`](Adrs/ADR-02004-Frontera-De-Autenticacion-Y-Autorizacion.md) |
 | Vocabulario | `Pendiente` se escribe **siempre calificado** —«cuenta `Pendiente`» o «trabajo en estado `Pendiente`»—, y la marca de la contraseña provisoria se nombra siempre con la palabra «marca» | `PRODUCT-INTAKE` §4.2; `Definicion-Modelo-De-Dominio.md` §2.1 |
-| Zona horaria y formato de fecha | **No se decide acá.** El momento entra como valor ya resuelto por el consumidor, de modo que la elección de zona y de precisión pertenece a quien lo aporta | [`ADR-06`](Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
+| Zona horaria y formato de fecha | **No se decide acá.** El momento entra como valor ya resuelto por el consumidor, de modo que la elección de zona y de precisión pertenece a quien lo aporta | [`ADR-02006`](Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
 
 ## 8. Quality attributes (NFR)
 
@@ -166,12 +166,12 @@ Los dos primeros valores vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE`
 
 | NFR | Objetivo numérico | Mecanismo de medición | ADR relacionada |
 | --- | --- | --- | --- |
-| Tiempo de la batería de pruebas del dominio | Menos de **10 segundos** de punta a punta [ASUNCIÓN del intake] | Duración total reportada por el ejecutor de pruebas en la etapa de `test` del pipeline | [`ADR-01`](Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) |
-| Cobertura de la biblioteca | **90 %** de líneas y **85 %** de ramas [ASUNCIÓN del intake] | Informe de cobertura del pipeline, bloqueante para fusionar | [`ADR-01`](Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) |
-| Dependencias salientes del proyecto de código | Exactamente **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | Inspección del archivo de proyecto, bloqueante en revisión [derivado de `PRODUCT-INTAKE` §17.1.P.1] | [`ADR-01`](Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) |
-| Cobertura del catálogo de condiciones | **100 %** de las **42** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) alcanzadas por al menos una prueba, y **0** condiciones producidas por la biblioteca que no figuren en el catálogo | Prueba de inspección que compara el conjunto de códigos emitidos contra el catálogo, en las dos direcciones [derivado por esta categoría] | [`ADR-02`](Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) |
-| Ejercicio de los invariantes | **100 %** de los **nueve** invariantes con al menos una prueba que verifique su violación rechazada, sin dobles de prueba | Matriz invariante contra prueba en 08, verificada en la etapa de `test` [derivado por esta categoría] | [`ADR-05`](Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md) |
-| Advertencias de construcción | Exactamente **0** advertencias | `scripts/build.sh` termina en 0 y sin advertencias, puerta bloqueante para fusionar (`PRODUCT-INTAKE` §17.1.P.8) | [`ADR-03`](Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) |
+| Tiempo de la batería de pruebas del dominio | Menos de **10 segundos** de punta a punta [ASUNCIÓN del intake] | Duración total reportada por el ejecutor de pruebas en la etapa de `test` del pipeline | [`ADR-02001`](Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) |
+| Cobertura de la biblioteca | **90 %** de líneas y **85 %** de ramas [ASUNCIÓN del intake] | Informe de cobertura del pipeline, bloqueante para fusionar | [`ADR-02001`](Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) |
+| Dependencias salientes del proyecto de código | Exactamente **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | Inspección del archivo de proyecto, bloqueante en revisión [derivado de `PRODUCT-INTAKE` §17.1.P.1] | [`ADR-02001`](Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) |
+| Cobertura del catálogo de condiciones | **100 %** de las **42** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) alcanzadas por al menos una prueba, y **0** condiciones producidas por la biblioteca que no figuren en el catálogo | Prueba de inspección que compara el conjunto de códigos emitidos contra el catálogo, en las dos direcciones [derivado por esta categoría] | [`ADR-02002`](Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) |
+| Ejercicio de los invariantes | **100 %** de los **nueve** invariantes con al menos una prueba que verifique su violación rechazada, sin dobles de prueba | Matriz invariante contra prueba en 08, verificada en la etapa de `test` [derivado por esta categoría] | [`ADR-02005`](Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) |
+| Advertencias de construcción | Exactamente **0** advertencias | `scripts/build.sh` termina en 0 y sin advertencias, puerta bloqueante para fusionar (`PRODUCT-INTAKE` §17.1.P.8) | [`ADR-02003`](Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) |
 
 **No hay NFR de latencia, de throughput ni de disponibilidad, y es correcto que no los haya.** Este proyecto de código no atiende peticiones ni abre conexiones, de modo que esas tres métricas no tienen sujeto acá. El único NFR de tiempo que lo alcanza es el de construcción, que es el que la regla de no-regresión acumulativa del producto hace caro si crece (`PRODUCT-INTAKE` §15).
 
@@ -180,9 +180,9 @@ Los dos primeros valores vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE`
 | Riesgo | Impacto | Probabilidad | Mitigación |
 | --- | --- | --- | --- |
 | Que una dependencia se cuele en el nivel 0 —una anotación de mapeo, un atributo de serialización— y el dominio deje de ser probable sin infraestructura | Alto: se pierde la propiedad que justifica el estilo entero | Media: es la forma en que este defecto entra habitualmente, de a una anotación por vez | Puerta bloqueante de **0 dependencias salientes** (§8), verificada por inspección del archivo de proyecto en cada revisión |
-| Que un invariante se ejerza en un componente y no en otro, y quede una puerta por la que se lo saltea | Alto: es exactamente la familia de defectos que abrió el P0 y su reincidencia por bloqueo de la cuenta de administrador | Media, y con precedente registrado en `B-02-03-GeometriaFactory-Domain-r3.md` | Puerta única de admisibilidad ([`ADR-05`](Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md)) y NFR de ejercicio de los nueve invariantes (§8) |
-| Que el consumidor use el resultado tipado como si fuera una excepción, y descarte los rechazos sin tratarlos | Medio: convierte un rechazo del dominio en un fallo silencioso, que es lo que el producto viene a eliminar | Media | Que toda operación con rechazo posible devuelva un resultado que el consumidor no pueda ignorar sin que se note en revisión ([`ADR-02`](Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) §7) |
-| Que el momento lo lea el dominio «por comodidad» en alguna operación | Medio: rompe la reproducibilidad de las pruebas y mete una dependencia de entorno en el nivel 0 | Baja | [`ADR-06`](Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md), con la inspección de que ninguna operación obtiene el momento por su cuenta |
+| Que un invariante se ejerza en un componente y no en otro, y quede una puerta por la que se lo saltea | Alto: es exactamente la familia de defectos que abrió el P0 y su reincidencia por bloqueo de la cuenta de administrador | Media, y con precedente registrado en `B-02-03-GeometriaFactory-Domain-r3.md` | Puerta única de admisibilidad ([`ADR-02005`](Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md)) y NFR de ejercicio de los nueve invariantes (§8) |
+| Que el consumidor use el resultado tipado como si fuera una excepción, y descarte los rechazos sin tratarlos | Medio: convierte un rechazo del dominio en un fallo silencioso, que es lo que el producto viene a eliminar | Media | Que toda operación con rechazo posible devuelva un resultado que el consumidor no pueda ignorar sin que se note en revisión ([`ADR-02002`](Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) §7) |
+| Que el momento lo lea el dominio «por comodidad» en alguna operación | Medio: rompe la reproducibilidad de las pruebas y mete una dependencia de entorno en el nivel 0 | Baja | [`ADR-02006`](Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md), con la inspección de que ninguna operación obtiene el momento por su cuenta |
 | Que los nombres de tipos y de espacios de nombres, que el intake deja abiertos, se fijen sin punto de control y después haya que renombrarlos | Bajo: costo de retrabajo, no de corrección | Media | El intake ya lo declara punto abierto de la etapa `a` y lo ata a su punto de control (`PRODUCT-INTAKE` §17.1.P.11); esta categoría lo repite en §11 |
 
 ## 10. Trazabilidad
@@ -191,10 +191,10 @@ Los dos primeros valores vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE`
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU cubiertos | CU-01 a CU-13, los trece de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 |
-| RN aplicables | RN-01 a RN-16, las dieciséis, con el reparto de §10.2 |
+| CU cubiertos | CU-02001 a CU-02013, los trece de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 |
+| RN aplicables | RN-02001 a RN-02016, las dieciséis, con el reparto de §10.2 |
 | Invariantes sostenidos | INV-01 a INV-09, los nueve, con el reparto de §10.3 |
-| ADRs que lo gobiernan | ADR-01, ADR-02, ADR-03, ADR-04, ADR-05, ADR-06 |
+| ADRs que lo gobiernan | ADR-02001, ADR-02002, ADR-02003, ADR-02004, ADR-02005, ADR-02006 |
 | Contratos que expone | [`Contratos-Abstractions.md`](Contratos-Abstractions.md) |
 | Tests previstos en 08 | Pruebas unitarias puras, sin dobles, sobre los nueve invariantes y las tres máquinas de estado (`PRODUCT-INTAKE` §17.1.P.6); prueba de inspección del catálogo de condiciones en las dos direcciones; prueba de inspección de dependencias salientes |
 
@@ -204,24 +204,24 @@ Las dieciséis filas están, una por regla, y ninguna se agrupa. El invariante d
 
 | Regla | Invariante | Componente que la gobierna | ADR que la alcanza |
 | --- | --- | --- | --- |
-| RN-01 Administrador único y papeles fijos | INV-05 | Guardas de cuenta | ADR-01 |
-| RN-02 Correo del alumno único | INV-01 | Núcleo de entidades, con la unicidad aportada | ADR-06 |
-| RN-03 Trabajo ajeno indistinguible de inexistente | INV-02 | Máquina de estados del trabajo | ADR-02 |
-| RN-04 Eliminación acotada al borrador para el alumno | INV-03 | Máquina de estados del trabajo | ADR-02 |
-| RN-05 No se pasa a estado `Pendiente` con errores de validación | INV-04 | Máquina de estados del trabajo | ADR-02 |
-| RN-06 Cuenta `Pendiente` o `Bloqueado` sin acceso | INV-06 | Evaluador de admisibilidad | ADR-04, ADR-05 |
-| RN-07 Baja con arrastre y confirmación escrita | Ninguno | Guardas de cuenta | ADR-01 |
-| RN-08 Texto original conservado íntegro | Ninguno | Núcleo de entidades | ADR-01 |
-| RN-09 Observación de error con posición y campo | Ninguno | Adopción de la interpretación | ADR-02 |
-| RN-10 Desenlace exclusivo del administrador y terminalidad | INV-07 | Máquina de estados del trabajo | ADR-02 |
-| RN-11 El administrador no ve los borradores | Ninguno | Máquina de estados del trabajo, como predicado de alcance | ADR-02 |
-| RN-12 El reseteo conserva la cuenta y sus trabajos | INV-09 | Guardas de cuenta | ADR-04, ADR-05 |
-| RN-13 Cambio forzado antes de toda otra capacidad | INV-09 | Evaluador de admisibilidad | ADR-05 |
-| RN-14 La provisoria la produce el sistema | Ninguno | **Ninguno de este proyecto de código**: el valor le llega ya derivado | ADR-04 |
-| RN-15 Resetear no exige cuenta habilitada | Ninguno | Guardas de cuenta, por la **ausencia** de precondición | ADR-04 |
-| RN-16 Habilitar produce la provisoria | INV-09 | Guardas de cuenta | ADR-04, ADR-05 |
+| RN-02001 Administrador único y papeles fijos | INV-05 | Guardas de cuenta | ADR-02001 |
+| RN-02002 Correo del alumno único | INV-01 | Núcleo de entidades, con la unicidad aportada | ADR-02006 |
+| RN-02003 Trabajo ajeno indistinguible de inexistente | INV-02 | Máquina de estados del trabajo | ADR-02002 |
+| RN-02004 Eliminación acotada al borrador para el alumno | INV-03 | Máquina de estados del trabajo | ADR-02002 |
+| RN-02005 No se pasa a estado `Pendiente` con errores de validación | INV-04 | Máquina de estados del trabajo | ADR-02002 |
+| RN-02006 Cuenta `Pendiente` o `Bloqueado` sin acceso | INV-06 | Evaluador de admisibilidad | ADR-02004, ADR-02005 |
+| RN-02007 Baja con arrastre y confirmación escrita | Ninguno | Guardas de cuenta | ADR-02001 |
+| RN-02008 Texto original conservado íntegro | Ninguno | Núcleo de entidades | ADR-02001 |
+| RN-02009 Observación de error con posición y campo | Ninguno | Adopción de la interpretación | ADR-02002 |
+| RN-02010 Desenlace exclusivo del administrador y terminalidad | INV-07 | Máquina de estados del trabajo | ADR-02002 |
+| RN-02011 El administrador no ve los borradores | Ninguno | Máquina de estados del trabajo, como predicado de alcance | ADR-02002 |
+| RN-02012 El reseteo conserva la cuenta y sus trabajos | INV-09 | Guardas de cuenta | ADR-02004, ADR-02005 |
+| RN-02013 Cambio forzado antes de toda otra capacidad | INV-09 | Evaluador de admisibilidad | ADR-02005 |
+| RN-02014 La provisoria la produce el sistema | Ninguno | **Ninguno de este proyecto de código**: el valor le llega ya derivado | ADR-02004 |
+| RN-02015 Resetear no exige cuenta habilitada | Ninguno | Guardas de cuenta, por la **ausencia** de precondición | ADR-02004 |
+| RN-02016 Habilitar produce la provisoria | INV-09 | Guardas de cuenta | ADR-02004, ADR-02005 |
 
-**Diez reglas con invariante y seis sin él.** Las seis sin invariante son RN-07, RN-08, RN-09, RN-11, RN-14 y RN-15, y el motivo de cada una está declarado en `Definicion-Modelo-De-Dominio.md` §4.3; esta tabla lo refleja y no lo redefine. **RN-12, RN-13 y RN-16 comparten INV-09**, que es la lectura que la categoría 02 adoptó de la columna de reglas sostenidas del propio invariante, declarando que la prosa del intake es ambigua en ese punto. Esta categoría adopta la misma lectura y **no afirma que la prosa del intake la respalde**.
+**Diez reglas con invariante y seis sin él.** Las seis sin invariante son RN-02007, RN-02008, RN-02009, RN-02011, RN-02014 y RN-02015, y el motivo de cada una está declarado en `Definicion-Modelo-De-Dominio.md` §4.3; esta tabla lo refleja y no lo redefine. **RN-02012, RN-02013 y RN-02016 comparten INV-09**, que es la lectura que la categoría 02 adoptó de la columna de reglas sostenidas del propio invariante, declarando que la prosa del intake es ambigua en ese punto. Esta categoría adopta la misma lectura y **no afirma que la prosa del intake la respalde**.
 
 ### 10.3 Los nueve invariantes contra el componente que los sostiene
 
@@ -235,7 +235,7 @@ Las dieciséis filas están, una por regla, y ninguna se agrupa. El invariante d
 | INV-06 Cuenta `Pendiente` o `Bloqueado` sin acceso | Evaluador de admisibilidad | El dominio modela la condición; el acceso se materializa afuera |
 | INV-07 Estado terminal sin salida ni cambio de contenido | Máquina de estados del trabajo | Alcanza a `Finalizado` y a `Rechazado` |
 | INV-08 La cuenta de administrador está siempre `Habilitado` | Guardas de cuenta | Cierra la familia de defectos que se abrió dos veces: nacer `Pendiente` y poder ser bloqueada |
-| INV-09 Cuenta con la marca puesta sin ninguna otra capacidad | Evaluador de admisibilidad | Puerta única, con la consecuencia declarada en [`ADR-05`](Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md) |
+| INV-09 Cuenta con la marca puesta sin ninguna otra capacidad | Evaluador de admisibilidad | Puerta única, con la consecuencia declarada en [`ADR-02005`](Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) |
 
 ## 11. Puntos abiertos
 
@@ -243,7 +243,7 @@ Las dieciséis filas están, una por regla, y ninguna se agrupa. El invariante d
 | --- | --- | --- | --- |
 | PA-01 | Los **nombres definitivos de tipos y de espacios de nombres** de la biblioteca. El intake los declara abiertos y los ata al punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11) | El Product Owner en el punto de control de la etapa `a` | Etapa `a` |
 | PA-02 | Los dos valores rotulados **[ASUNCIÓN]** en §8 —tiempo de la batería y cobertura mínima— siguen pendientes de confirmación del Product Owner en `PRODUCT-INTAKE` §22. Se usan como vigentes | El Product Owner sobre su propio documento | Antes de fijar la puerta de cobertura en 09 |
-| PA-03 | **RESUELTO.** La **ambigüedad del intake sobre RN-12 e INV-09** —su columna de reglas sostenidas y su prosa decían cosas distintas— **ya no está en el texto vivo**: `PRODUCT-INTAKE` §17.1.P.2 cierra hoy su prosa con «**RN-12, RN-13 y RN-16 sí lo tienen, y es INV-09**, que es lo que la columna de ese invariante declara», y el mismo párrafo lleva la marca de la corrección. La categoría 02 había adoptado la columna, que es lo que la fuente terminó declarando, de modo que **esta categoría no cambia nada de lo que hereda** | **Cerrado** por el Product Owner sobre su propio documento | **Resuelto** en `PRODUCT-INTAKE` **1.11**, 2026-08-09, que reemplazó el identificador equivocado; el recuento que lo acompañaba quedó completo en **1.14** |
+| PA-03 | **RESUELTO.** La **ambigüedad del intake sobre RN-02012 e INV-09** —su columna de reglas sostenidas y su prosa decían cosas distintas— **ya no está en el texto vivo**: `PRODUCT-INTAKE` §17.1.P.2 cierra hoy su prosa con «**RN-02012, RN-02013 y RN-02016 sí lo tienen, y es INV-09**, que es lo que la columna de ese invariante declara», y el mismo párrafo lleva la marca de la corrección. La categoría 02 había adoptado la columna, que es lo que la fuente terminó declarando, de modo que **esta categoría no cambia nada de lo que hereda** | **Cerrado** por el Product Owner sobre su propio documento | **Resuelto** en `PRODUCT-INTAKE` **1.11**, 2026-08-09, que reemplazó el identificador equivocado; el recuento que lo acompañaba quedó completo en **1.14** |
 | PA-04 | La **herramienta que calcula la versión** a partir de las convenciones de mensaje de confirmación no está elegida: el intake declara que se ancla en la etapa `a` (`PRODUCT-INTAKE` §17.1.P.7) | El equipo en la etapa `a` | Etapa `a` |
 
 **Cuatro filas: tres abiertas —`PA-01`, `PA-02` y `PA-04`— y una resuelta, `PA-03`.** La fila resuelta **se conserva en la tabla en lugar de retirarse**, con su desenlace, su fecha y dónde se resolvió, porque retirarla dejaría un hueco de numeración sin declarar. Es el criterio que `GeometriaFactory-Contracts` y `GeometriaFactory-Infrastructure` ya aplicaron sobre sus propias tablas.
@@ -253,4 +253,4 @@ Las dieciséis filas están, una por regla, y ninguna se agrupa. El invariante d
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial de la arquitectura técnica de `GeometriaFactory-Domain`. Declara el estilo con sus tres alternativas evaluadas, los cinco componentes con su regla de dependencias interna y su cobertura de los trece casos de uso, las cuatro vistas mínimas —lógica, procesos, despliegue y datos, esta última con la omisión declarada del modelo lógico—, los cross-cutting concerns centralizados, seis NFR con objetivo numérico y mecanismo de medición, cinco riesgos con mitigación, la trazabilidad de las dieciséis reglas y de los nueve invariantes contra el componente que los gobierna, y cuatro puntos abiertos. Emite seis ADR individuales bajo `Adrs/` y el contrato de superficie pública en `Contratos-Abstractions.md`. |
-| 1.1 | 2026-08-11 | **Cierra `PA-03` de §11, que le anunciaba al Product Owner una decisión que su propio documento ya había tomado.** La fila declaraba que el intake es ambiguo sobre `RN-12` e `INV-09` porque su columna de reglas sostenidas y su prosa decían cosas distintas. **Reverificado abriendo el texto vivo de `PRODUCT-INTAKE` 1.28**: §17.1.P.2 dice hoy «RN-12, RN-13 y RN-16 sí lo tienen, y es INV-09, que es lo que la columna de ese invariante declara», y el párrafo lleva la marca de su corrección; el control de cambios del intake la registra en **1.11** —donde el identificador equivocado se reemplazó, tras un diagnóstico previo que lo había tomado por un error de conteo— y el recuento que la acompañaba quedó completo en **1.14**. `PA-03` pasa a **fila resuelta**, con su desenlace, su fecha y dónde se resolvió, y **se conserva en la tabla en lugar de retirarse** para no dejar un hueco de numeración sin declarar; §11 gana la línea de reparto **tres abiertas y una resuelta**. La trazabilidad de cabecera pasa a citar el intake **1.28**, que es la versión contra la que se reverificó este punto abierto. **Esta categoría ya leía la columna, de modo que ninguna decisión de arquitectura, ninguna ADR, ningún NFR, ningún riesgo y ningún otro punto abierto cambia.** Sube minor. |
+| 1.1 | 2026-08-11 | **Cierra `PA-03` de §11, que le anunciaba al Product Owner una decisión que su propio documento ya había tomado.** La fila declaraba que el intake es ambiguo sobre `RN-02012` e `INV-09` porque su columna de reglas sostenidas y su prosa decían cosas distintas. **Reverificado abriendo el texto vivo de `PRODUCT-INTAKE` 1.28**: §17.1.P.2 dice hoy «RN-02012, RN-02013 y RN-02016 sí lo tienen, y es INV-09, que es lo que la columna de ese invariante declara», y el párrafo lleva la marca de su corrección; el control de cambios del intake la registra en **1.11** —donde el identificador equivocado se reemplazó, tras un diagnóstico previo que lo había tomado por un error de conteo— y el recuento que la acompañaba quedó completo en **1.14**. `PA-03` pasa a **fila resuelta**, con su desenlace, su fecha y dónde se resolvió, y **se conserva en la tabla en lugar de retirarse** para no dejar un hueco de numeración sin declarar; §11 gana la línea de reparto **tres abiertas y una resuelta**. La trazabilidad de cabecera pasa a citar el intake **1.28**, que es la versión contra la que se reverificó este punto abierto. **Esta categoría ya leía la columna, de modo que ninguna decisión de arquitectura, ninguna ADR, ningún NFR, ningún riesgo y ningún otro punto abierto cambia.** Sube minor. |

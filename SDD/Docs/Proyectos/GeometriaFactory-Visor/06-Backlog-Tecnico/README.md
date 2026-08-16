@@ -32,21 +32,21 @@
 
 | Épica | Momento del producto | Historias | Tareas técnicas |
 | --- | --- | --- | --- |
-| EP-01 Esqueleto ambulante y verificación de viabilidad | Etapa `a` | Ninguna | BT-01, BT-02, BT-03 |
-| EP-02 Medición de las puertas técnicas del visor | Antes de comprometer la etapa `g` | US-01, US-04, US-09, US-11 | BT-04 a BT-10, BT-12, BT-13, BT-14, BT-16 |
-| EP-03 Visualización del trabajo | Etapa `g` | US-02, US-03, US-05, US-06, US-07, US-08, US-10, US-12, US-13, US-14 | BT-06, BT-07, BT-11, BT-15, BT-17, BT-18 |
+| EP-12001 Esqueleto ambulante y verificación de viabilidad | Etapa `a` | Ninguna | BT-12001, BT-12002, BT-12003 |
+| EP-12002 Medición de las puertas técnicas del visor | Antes de comprometer la etapa `g` | US-12001, US-12004, US-12009, US-12011 | BT-12004 a BT-12010, BT-12012, BT-12013, BT-12014, BT-12016 |
+| EP-12003 Visualización del trabajo | Etapa `g` | US-12002, US-12003, US-12005, US-12006, US-12007, US-12008, US-12010, US-12012, US-12013, US-12014 | BT-12006, BT-12007, BT-12011, BT-12015, BT-12017, BT-12018 |
 
-**EP-02 no crea una etapa nueva ni renombra ninguna**: se apoya en el momento de medición que [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.2 ya declara para `PT-02` y `PT-03`. El fundamento completo está en [`Product-Backlog.md`](Product-Backlog.md) §2.1.
+**EP-12002 no crea una etapa nueva ni renombra ninguna**: se apoya en el momento de medición que [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.2 ya declara para `PT-02` y `PT-03`. El fundamento completo está en [`Product-Backlog.md`](Product-Backlog.md) §2.1.
 
 ## 4. Historias `Must Have` del tramo comprometido
 
-**Las catorce.** Desde el 2026-08-10 este backlog no tiene ninguna historia no-`Must`: las dos que eran `Should` —US-08 y US-09— derivan de `F-13`, y el Product Owner **promovió esa capacidad a `Must Have`** en `PRODUCT-INTAKE` **1.19**, cerrando la tensión que este backlog había elevado como `PA-06` y que **no había resuelto reprioritizando**. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada. El 100 % `Must` resultante queda declarado como apartamiento consciente en [`Product-Backlog.md`](Product-Backlog.md) §4.2, con su motivo.
+**Las catorce.** Desde el 2026-08-10 este backlog no tiene ninguna historia no-`Must`: las dos que eran `Should` —US-12008 y US-12009— derivan de `F-13`, y el Product Owner **promovió esa capacidad a `Must Have`** en `PRODUCT-INTAKE` **1.19**, cerrando la tensión que este backlog había elevado como `PA-06` y que **no había resuelto reprioritizando**. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada. El 100 % `Must` resultante queda declarado como apartamiento consciente en [`Product-Backlog.md`](Product-Backlog.md) §4.2, con su motivo.
 
 **Las catorce están dentro del tramo comprometido de ocho etapas**: este proyecto de código no tiene ninguna historia de la fase `i…`.
 
 ## 5. Tareas técnicas prioritarias
 
-**BT-13** y **BT-14**, las dos puertas técnicas, porque una puerta que no pasa detiene la planificación de la etapa `g` y no se arrastra como deuda. **BT-16**, la inspección de la superficie del bundle generado, porque es donde se verifica que el visualizador siga siendo puro **sobre el artefacto que se sirve** y no sobre el código fuente. Y **BT-09**, el anclaje de la versión del motor de dibujo, porque `05` §9 le asigna probabilidad **alta** al retrabajo que su cambio de interfaz puede exigir.
+**BT-12013** y **BT-12014**, las dos puertas técnicas, porque una puerta que no pasa detiene la planificación de la etapa `g` y no se arrastra como deuda. **BT-12016**, la inspección de la superficie del bundle generado, porque es donde se verifica que el visualizador siga siendo puro **sobre el artefacto que se sirve** y no sobre el código fuente. Y **BT-12009**, el anclaje de la versión del motor de dibujo, porque `05` §9 le asigna probabilidad **alta** al retrabajo que su cambio de interfaz puede exigir.
 
 ## 6. Definition of Ready vigente
 
@@ -57,5 +57,5 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. **Autor:** Orquestador SDD |
-| 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos con su propósito, declara la ausencia de las dos carpetas de archivos individuales con su motivo, fija el orden de lectura, resume las tres épicas con su momento del producto y la constancia de que EP-02 no crea una etapa, y nombra las tareas técnicas prioritarias con el fundamento de cada una. |
+| 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos con su propósito, declara la ausencia de las dos carpetas de archivos individuales con su motivo, fija el orden de lectura, resume las tres épicas con su momento del producto y la constancia de que EP-12002 no crea una etapa, y nombra las tareas técnicas prioritarias con el fundamento de cada una. |
 | 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`** (`PRODUCT-INTAKE` **1.19** §4) y **cierra el hallazgo `D-06-04`** del informe [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0. **§1**: la nota de ausencia de las dos carpetas deja de presentarse como umbral aplicado y pasa a distinguir los dos casos —las dieciocho tareas están por debajo de toda banda, las catorce historias caen en la banda que la regla **recomienda** para archivo propio— y remite al fundamento de la elección, que se escribe en `Product-Backlog.md` §3. **§4**: las historias `Must Have` pasan de doce a **catorce**, con el desenlace de `PA-06` y con la remisión al apartamiento del 100 % `Must` declarado en `Product-Backlog.md` §4.2. Ninguna épica, tarea técnica ni Definition of Ready cambia. Sube minor. |

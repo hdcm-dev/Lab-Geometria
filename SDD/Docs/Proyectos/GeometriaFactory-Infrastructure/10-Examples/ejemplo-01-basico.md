@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/infrastructure/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) y [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md); [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md); [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5, la tabla de derivación por tipo; `PRODUCT-INTAKE` 1.23 §20, los **ocho** escenarios, y §21
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-01` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) y [`CU-06002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md); [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md); [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5, la tabla de derivación por tipo; `PRODUCT-INTAKE` 1.23 §20, los **ocho** escenarios, y §21
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -98,12 +98,12 @@ Escenarios recorridos: 8 | Observaciones de error: 2 | Advertencias: 4 | Excepci
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | Caso de uso | Lee los ocho textos con las cuatro tolerancias y reconstruye las piezas con su posición y sus componentes |
-| [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Caso de uso | Deriva y compara con tolerancia **0.01** y operador estricto, y emite la advertencia con el par de valores |
-| [`RN-05`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Distingue las **4** advertencias de las **2** observaciones de error, que es lo que después decide el estado |
-| [`RN-09`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en `E-5` y en `E-8`, nunca un texto genérico |
-| [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) | Decisión arquitectónica | Las cuatro tolerancias y la tabla de derivación por tipo, ejercidas sobre datos reales |
-| [`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md) | Decisión arquitectónica | El validador se instancia solo, sin arrastrar la dependencia de persistencia. Es lo que hace barata a la batería obligatoria |
+| [`CU-06001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | Caso de uso | Lee los ocho textos con las cuatro tolerancias y reconstruye las piezas con su posición y sus componentes |
+| [`CU-06002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Caso de uso | Deriva y compara con tolerancia **0.01** y operador estricto, y emite la advertencia con el par de valores |
+| [`RN-02005`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Distingue las **4** advertencias de las **2** observaciones de error, que es lo que después decide el estado |
+| [`RN-02009`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en `E-5` y en `E-8`, nunca un texto genérico |
+| [`ADR-06006`](../05-Arquitectura-Tecnica/Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) | Decisión arquitectónica | Las cuatro tolerancias y la tabla de derivación por tipo, ejercidas sobre datos reales |
+| [`ADR-06001`](../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md) | Decisión arquitectónica | El validador se instancia solo, sin arrastrar la dependencia de persistencia. Es lo que hace barata a la batería obligatoria |
 | `PRODUCT-INTAKE` §20 `E-1` a `E-8` | Escenario con payload real | Los ocho textos se transcriben sin modificación y son la entrada del recorrido |
 | `PRODUCT-INTAKE` §21 | Matriz de cobertura | El reparto de las tolerancias `T1` a `T4` entre los escenarios, que §2 del [`README.md`](README.md) de esta carpeta recuenta |
 
@@ -111,8 +111,8 @@ Escenarios recorridos: 8 | Observaciones de error: 2 | Advertencias: 4 | Excepci
 
 ```yaml
 verificacion:
-  id: VER-01
-  verifica: [CU-01, CU-02, US-01, US-02, US-03, US-04, US-05, US-06, US-07]
+  id: VER-06001
+  verifica: [CU-06001, CU-06002, US-06001, US-06002, US-06003, US-06004, US-06005, US-06006, US-06007]
   comando: "dotnet run --project samples/infrastructure/01-basico"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -144,4 +144,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-01` y `CU-02` sobre los **ocho** escenarios reales del `PRODUCT-INTAKE` §20 como **texto literal**, transcriptos sin modificación, y ejercita las **cuatro** tolerancias `T1` a `T4`. Declara por qué los archivos llevan extensión `.txt` y por qué el sample no abre el almacén. El contrato `VER-01` declara ocho líneas exactas de salida y **dos aserciones negativas** —el índice reportado y el cilindro sin observación, que es donde se rompe el operador estricto—; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06001` y `CU-06002` sobre los **ocho** escenarios reales del `PRODUCT-INTAKE` §20 como **texto literal**, transcriptos sin modificación, y ejercita las **cuatro** tolerancias `T1` a `T4`. Declara por qué los archivos llevan extensión `.txt` y por qué el sample no abre el almacén. El contrato `VER-06001` declara ocho líneas exactas de salida y **dos aserciones negativas** —el índice reportado y el cilindro sin observación, que es donde se rompe el operador estricto—; `evidencia` queda en `No verificado — sin código`. |

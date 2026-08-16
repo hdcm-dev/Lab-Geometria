@@ -33,7 +33,7 @@
 | Hecho | Valor | Dónde está declarado |
 | --- | --- | --- |
 | Dependencias externas | **Ninguna.** La única dependencia core es `GeometriaFactory.Domain`, que es del mismo producto y a su vez no tiene ninguna | Intake §17.2.P.1 y §17.1.P.1 |
-| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-05`, con `TC-27` |
+| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-05`, con `TC-04027` |
 | Referencias a bibliotecas de persistencia, transporte, serialización o marco web | **0** | `QG-05`, bloqueante |
 | Artefacto publicado | **Ninguno**: `redistribuible` es false | Intake §13; `05` §5 |
 
@@ -62,9 +62,9 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Comprobación | Umbral | Cómo se ejecuta | Carácter |
 | --- | --- | --- | --- |
-| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-05`, con `TC-27` y la revisión del pull request | **Bloqueante** |
+| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-05`, con `TC-04027` y la revisión del pull request | **Bloqueante** |
 | Referencias a bibliotecas de persistencia, transporte, serialización o marco web | **0** | El mismo gate | **Bloqueante** |
-| Pruebas de esta capa que abren el almacén real | **0** | `QG-04`, con `TC-26` | **Bloqueante** |
+| Pruebas de esta capa que abren el almacén real | **0** | `QG-04`, con `TC-04026` | **Bloqueante** |
 | Actualización automática de dependencias | **No aplica**: no hay dependencias externas que actualizar | — | — |
 
 **Sin dependencias externas, el análisis de composición no tiene sujeto y lo que corresponde verificar es que ese cero se sostenga.** Las tres primeras filas son esa verificación, y las tres ya bloquean desde la Fase E: esta categoría no agrega ninguna comprobación nueva, las ubica en el stage donde corren. `QG-05` corre en `build`, que es el más barato, y es **la propiedad que sostiene a `QG-04`**: sin biblioteca de persistencia declarada, una prueba de esta capa no tiene con qué abrir un almacén.

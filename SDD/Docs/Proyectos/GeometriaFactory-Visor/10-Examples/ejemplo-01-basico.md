@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/visor/01-basico/`
-**Trazabilidad upstream:** [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Inicializar-Instancia-Del-Visor.md), [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) y [`CU-05`](../02-Especificacion-Funcional/Casos-De-Uso/CU-05-Destruir-La-Instancia-Y-Liberar-Recursos.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.1, §4.2, §4.5, §5.1 y §5.2; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-01`, `TC-04`, `TC-05` y `TC-09`; `PRODUCT-INTAKE` 1.22 §18 sample **S-1** y §20.E-1
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-01` como sonda `SD-13`; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`CU-12001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md), [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) y [`CU-12005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.1, §4.2, §4.5, §5.1 y §5.2; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12001`, `TC-12004`, `TC-12005` y `TC-12009`; `PRODUCT-INTAKE` 1.22 §18 sample **S-1** y §20.E-1
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-12001` como sonda `SD-12013`; `11-Documentacion` cuando se emita
 
 ---
 
@@ -95,15 +95,15 @@ Funciones ejercidas: 3 de 6 | Servicios del backend disponibles: 0 | Excepciones
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Inicializar-Instancia-Del-Visor.md) | Caso de uso | Acto `[1]`, y las dos primeras variaciones |
-| [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[2]` a `[5]` |
-| [`CU-05`](../02-Especificacion-Funcional/Casos-De-Uso/CU-05-Destruir-La-Instancia-Y-Liberar-Recursos.md) | Caso de uso | Actos `[6]` y `[7]` |
+| [`CU-12001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md) | Caso de uso | Acto `[1]`, y las dos primeras variaciones |
+| [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[2]` a `[5]` |
+| [`CU-12005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md) | Caso de uso | Actos `[6]` y `[7]` |
 | Garantía `G-1` · Cero red | Garantía del contrato de fachada | Acto `[8]`. La medición en su **peor caso** es del ejemplo 03 |
 | Garantía `G-5` · Sin fallo silencioso | Garantía del contrato de fachada | `no dibujadas=0` en `[2]`: `E-1` no tiene piezas que queden fuera |
 | Garantía `G-6` · Determinismo | Garantía del contrato de fachada | Acto `[5]` |
 | Garantía `G-7` · Terminación controlada | Garantía del contrato de fachada | Acto `[7]` y la tercera variación |
-| [`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md) | Decisión arquitectónica | `anfitrion.<ext>` invoca sólo la fachada y no conoce el interior |
-| [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Disposicion-Determinista-Derivada-Del-Indice.md) | Decisión arquitectónica | Acto `[5]` |
+| [`ADR-12001`](../05-Arquitectura-Tecnica/Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md) | Decisión arquitectónica | `anfitrion.<ext>` invoca sólo la fachada y no conoce el interior |
+| [`ADR-12005`](../05-Arquitectura-Tecnica/Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md) | Decisión arquitectónica | Acto `[5]` |
 | **RA-02** del `PRODUCT-INTAKE` §14 | Regla de arquitectura del producto | Acto `[8]` y el recuento de servicios del backend disponibles en 0 |
 | `PRODUCT-INTAKE` §18 sample **S-1** | Estrategia de demostración | Este sample es la primera de sus tres partes |
 | `PRODUCT-INTAKE` §20.E-1 | Escenario con payload real | `datos/E1.txt`, transcripto sin modificación |
@@ -112,8 +112,8 @@ Funciones ejercidas: 3 de 6 | Servicios del backend disponibles: 0 | Excepciones
 
 ```yaml
 verificacion:
-  id: VER-01
-  verifica: [CU-01, CU-02, CU-05, US-01, US-04, US-07, US-08, US-11]
+  id: VER-12001
+  verifica: [CU-12001, CU-12002, CU-12005, US-12001, US-12004, US-12007, US-12008, US-12011]
   comando: "bash scripts/build-visor.sh && npm --prefix samples/visor/01-basico run verify"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -139,4 +139,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2. Primera de las tres partes del sample **S-1** del `PRODUCT-INTAKE` §18. Cubre `CU-01`, `CU-02` y `CU-05` con **tres** de las **seis** funciones de la fachada, sobre el escenario `E-1` transcripto sin modificación. El contrato `VER-01` declara seis líneas exactas de salida, con el recuento de peticiones en **0** y el ortoedro dibujado; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2. Primera de las tres partes del sample **S-1** del `PRODUCT-INTAKE` §18. Cubre `CU-12001`, `CU-12002` y `CU-12005` con **tres** de las **seis** funciones de la fachada, sobre el escenario `E-1` transcripto sin modificación. El contrato `VER-12001` declara seis líneas exactas de salida, con el recuento de peticiones en **0** y el ortoedro dibujado; `evidencia` queda en `No verificado — sin código`. |

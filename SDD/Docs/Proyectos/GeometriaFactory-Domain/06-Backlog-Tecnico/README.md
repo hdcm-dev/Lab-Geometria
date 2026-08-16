@@ -32,20 +32,20 @@
 
 | Épica | Etapa | Historias | Tareas técnicas |
 | --- | --- | --- | --- |
-| EP-01 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-01 a BT-05 |
-| EP-02 Identidad del administrador y sesión | `c` | US-07, US-08, US-24, US-25 | BT-06, BT-07, BT-10, BT-11 |
-| EP-03 Ciclo de vida de la cuenta de alumno | `d` | US-01 a US-06, US-26, US-27 | BT-09, BT-10, BT-11, BT-16 |
-| EP-04 Gestión del trabajo | `e` | US-09, US-10, US-18, US-19, US-22 | BT-06, BT-12 |
-| EP-05 Interpretación y verificación del dato del alumno | `f` | US-11 a US-17 | BT-08, BT-12, BT-13 |
-| EP-06 Desenlace de la entrega | `h` | US-20, US-21, US-23 | BT-12, BT-14 |
+| EP-02001 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-02001 a BT-02005 |
+| EP-02002 Identidad del administrador y sesión | `c` | US-02007, US-02008, US-02024, US-02025 | BT-02006, BT-02007, BT-02010, BT-02011 |
+| EP-02003 Ciclo de vida de la cuenta de alumno | `d` | US-02001 a US-02006, US-02026, US-02027 | BT-02009, BT-02010, BT-02011, BT-02016 |
+| EP-02004 Gestión del trabajo | `e` | US-02009, US-02010, US-02018, US-02019, US-02022 | BT-02006, BT-02012 |
+| EP-02005 Interpretación y verificación del dato del alumno | `f` | US-02011 a US-02017 | BT-02008, BT-02012, BT-02013 |
+| EP-02006 Desenlace de la entrega | `h` | US-02020, US-02021, US-02023 | BT-02012, BT-02014 |
 
 ## 4. Historias `Must Have` del tramo comprometido
 
-**Veintiséis de las veintisiete**, con la única `Should` en US-12. El tramo comprometido son las **ocho** etapas `a` a `h` del intake §15, y este proyecto de código toca **seis** de ellas. El fundamento del reparto está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
+**Veintiséis de las veintisiete**, con la única `Should` en US-02012. El tramo comprometido son las **ocho** etapas `a` a `h` del intake §15, y este proyecto de código toca **seis** de ellas. El fundamento del reparto está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
 
 ## 5. Tareas técnicas prioritarias
 
-Las cinco de la etapa `a` —BT-01 a BT-05— porque nada de este proyecto de código empieza sin ellas, y las dos que cierran un punto abierto de esa misma etapa: **BT-02**, los nombres de tipos y de espacios de nombres, y **BT-03**, la herramienta que calcula la versión. Las dos tienen caja temporal en la etapa `a` y no se arrastran.
+Las cinco de la etapa `a` —BT-02001 a BT-02005— porque nada de este proyecto de código empieza sin ellas, y las dos que cierran un punto abierto de esa misma etapa: **BT-02002**, los nombres de tipos y de espacios de nombres, y **BT-02003**, la herramienta que calcula la versión. Las dos tienen caja temporal en la etapa `a` y no se arrastran.
 
 ## 6. Definition of Ready vigente
 

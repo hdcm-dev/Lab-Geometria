@@ -7,7 +7,7 @@
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md` íntegro —§4, FA-01 a FA-05, §6, §6.1 y CA-01 a CA-07—; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07, RT-09); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-03-Trabajo-Con-Dueno-Estado-Y-Persistencia.md` §1, §5 (segundo, tercero y cuarto criterio); `NB-09` §5 (sexto criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-07, F-08), §4.1 (RN-03, RN-04, RN-10), §4.2 (tabla de quién puede qué), §7 (CL-5, CL-10), §17.6 P.4; `Design-Rules-Web-Generico.md` §3, §4.3, §4.8, §4.9, §5, §7, §8; `Design-Rules-Blazor-Mudblazor.md` §4, §5
+**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md` íntegro —§4, FA-01 a FA-05, §6, §6.1 y CA-01 a CA-07—; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07, RT-09); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md` §1, §5 (segundo, tercero y cuarto criterio); `NB-00009` §5 (sexto criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-07, F-08), §4.1 (RN-10003, RN-10004, RN-10010), §4.2 (tabla de quién puede qué), §7 (CL-5, CL-10), §17.6 P.4; `Design-Rules-Web-Generico.md` §3, §4.3, §4.8, §4.9, §5, §7, §8; `Design-Rules-Blazor-Mudblazor.md` §4, §5
 **Trazabilidad downstream:** Fase B2 de validación visual de maqueta; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
 
 ---
@@ -146,13 +146,13 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | El alumno de la comisión |
-| CU origen | [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md) íntegro |
-| Reglas de negocio relevantes | `RN-03` (trabajo ajeno indistinguible de inexistente), `RN-04` (eliminación acotada al borrador), `RN-10` (desenlace exclusivo y terminalidad) |
+| CU origen | [`CU-10006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md) íntegro |
+| Reglas de negocio relevantes | `RN-10003` (trabajo ajeno indistinguible de inexistente), `RN-10004` (eliminación acotada al borrador), `RN-10010` (desenlace exclusivo y terminalidad) |
 | Restricciones transversales | `RT-03`, `RT-06`, `RT-07`, `RT-09` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §2.4, §3.2, §4.3, §5, §7 |
 | Representaciones que invoca | [`Representacion-Fila-De-Trabajo.md`](Representacion-Fila-De-Trabajo.md), [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) |
 | Catálogo de diseño aplicado | `Design-Rules-Web-Generico.md`, `Design-Rules-Blazor-Mudblazor.md` |
-| US a generar en 06 | `US-15`, `US-16`, `US-17` |
+| US a generar en 06 | `US-10015`, `US-10016`, `US-10017` |
 | Tests previstos en 08 | Guion de demostración de la etapa `e`: cuatro trabajos en los cuatro estados distinguibles entre sí; recuento de acciones por estado; eliminación forzada sobre un estado que no la admite; trabajo ajeno por dirección directa; listado vacío distinguible del estado degradado; etapa `h` para el desenlace visible en el listado; recorrido por teclado y revisión en escala de grises de las cuatro insignias |
 
 ## 9. Control de cambios
@@ -160,5 +160,5 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. Listado propio con los cuatro estados y sus acciones por estado dibujadas por ausencia y no por inhabilitación, filtro local que no origina peticiones, estado vacío como invitación distinguible del aviso de indisponibilidad por el tipo recibido, declaración explícita de que el comentario no viaja en el listado y de por qué el estado nuevo no aparece solo, versión angosta con reflujo de filas a tarjetas, y doce estados declarados para la Fase B2. |
-| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-03` y `NB-09` de la cabecera pasan a citarse con sección y criterio numerado. |
+| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-00003` y `NB-00009` de la cabecera pasan a citarse con sección y criterio numerado. |
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-04** (recuentos sin dato declarado): las columnas de piezas y de advertencias de `Entrega 1` pasan de `4 / 1` a `1 / 0` y las de `Primer intento` de `2 / 3` a `1 / 1`, que son los valores de los escenarios `E-4` y `E-3` del `PRODUCT-INTAKE` §20 que esos trabajos materializan; las cifras anteriores no correspondían a ningún escenario declarado. **H-03**: §2 suma la nota que declara a este documento dueño único del conjunto de datos de ejemplo del alumno, del que `Wireframes-Listado-De-La-Comision.md` deriva el suyo. |

@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3 y §3.1 (los **nueve** quality gates y el carácter vinculante de las dos puertas técnicas); [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) 1.0 §3, §4 y §6; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.0 §1.3; [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) 1.0 §2, §3 y §5; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.22** §10, §13, §14, §15, §16, §16.1, §17.6.P.7, §17.6.P.8, §17.7.P.1 a §17.7.P.11 y §18
+**Trazabilidad upstream:** [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3 y §3.1 (los **nueve** quality gates y el carácter vinculante de las dos puertas técnicas); [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) 1.0 §3, §4 y §6; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.0 §1.3; [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) 1.0 §2, §3 y §5; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.22** §10, §13, §14, §15, §16, §16.1, §17.6.P.7, §17.6.P.8, §17.7.P.1 a §17.7.P.11 y §18
 **Trazabilidad downstream:** [`Estrategia-Versionado.md`](Estrategia-Versionado.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md), [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md); `10-Examples` (sample S-1) y `11-Documentacion` cuando se emitan; `Producto/Pipeline-Producto.md`
 
 ---
@@ -54,13 +54,13 @@ Los stages son los que declaran el intake §17.7.P.8 y `05` §5: **instalación 
 | --- | --- | --- | --- | --- |
 | `instalar` | Instalación **reproducible** de dependencias desde el archivo de bloqueo, dentro del contenedor de desarrollo | Ninguno propio: su falla detiene la construcción | — | Bloqueante por construcción |
 | `empaquetar` | `scripts/build-visor.sh`: el empaquetador produce el bundle | `QG-01`: el bundle **se genera sin errores** | 0 errores | **Bloqueante** |
-| `inspeccionar` | Recuentos sobre el **bundle generado** y sobre el fuente (`TC-16`, `TC-18`) | `QG-04`: **0** peticiones originadas por el archivo de guion y **0** ocurrencias de las tres formas de petición en el fuente **y en el bundle** | 0 y 0, **medido con los dos movimientos prendidos y sostenidos** | **Bloqueante, sin gradación** |
-| `inspeccionar` | Lectura del almacenamiento del navegador (`TC-17`) | `QG-05`: **0** claves escritas y ningún estado conservado entre páginas | 0 | **Bloqueante, sin gradación** |
-| `inspeccionar` | Recuento de la superficie expuesta por el bundle (`TC-18`) | `QG-06`: exactamente **6** funciones, **1** nombre propio en el objeto global y **0** identificadores globales sueltos | 6, 1 y 0 | **Bloqueante** |
-| `probar` | Batería del proyecto de código: unitario, integración y extremo a extremo en página | `QG-07`: **100 %** de las piezas no dibujadas enumeradas con su índice y su código, y **0** sin registro (`TC-06`) | 100 % y 0 | **Bloqueante, sin gradación** |
-| `probar` | `TC-21`, contra §6 del contrato de fachada | `QG-08`: los códigos de condición son exactamente **siete** y **ninguno se acuña aguas abajo** | 7 y 0 | **Se rechaza en revisión** |
-| **Medición de puertas** | `TC-19` | `QG-02` (**`PT-03`**): el motor de dibujo queda **dentro** del bundle y la página funciona **sin acceso a redes de distribución externas**; **0** dependencias traídas de una red externa en tiempo de ejecución | 0 | **Bloqueante, y detiene la planificación de la etapa `g`** |
-| **Medición de puertas** | `TC-20` | `QG-03` (**`PT-02`**): el bundle carga en una página del anfitrión, la creación de instancia arma la escena, la carga del texto dibuja las **tres** figuras de `E-1` **incluido el ortoedro**, **diez** recorridos de ida y vuelta no degradan, y el árbol y la escena **se sincronizan por índice** | 3 de 3 figuras; 10 recorridos sin degradación, **con los dos movimientos prendidos** | **Bloqueante, y detiene la planificación de la etapa `g`** |
+| `inspeccionar` | Recuentos sobre el **bundle generado** y sobre el fuente (`TC-12016`, `TC-12018`) | `QG-04`: **0** peticiones originadas por el archivo de guion y **0** ocurrencias de las tres formas de petición en el fuente **y en el bundle** | 0 y 0, **medido con los dos movimientos prendidos y sostenidos** | **Bloqueante, sin gradación** |
+| `inspeccionar` | Lectura del almacenamiento del navegador (`TC-12017`) | `QG-05`: **0** claves escritas y ningún estado conservado entre páginas | 0 | **Bloqueante, sin gradación** |
+| `inspeccionar` | Recuento de la superficie expuesta por el bundle (`TC-12018`) | `QG-06`: exactamente **6** funciones, **1** nombre propio en el objeto global y **0** identificadores globales sueltos | 6, 1 y 0 | **Bloqueante** |
+| `probar` | Batería del proyecto de código: unitario, integración y extremo a extremo en página | `QG-07`: **100 %** de las piezas no dibujadas enumeradas con su índice y su código, y **0** sin registro (`TC-12006`) | 100 % y 0 | **Bloqueante, sin gradación** |
+| `probar` | `TC-12021`, contra §6 del contrato de fachada | `QG-08`: los códigos de condición son exactamente **siete** y **ninguno se acuña aguas abajo** | 7 y 0 | **Se rechaza en revisión** |
+| **Medición de puertas** | `TC-12019` | `QG-02` (**`PT-03`**): el motor de dibujo queda **dentro** del bundle y la página funciona **sin acceso a redes de distribución externas**; **0** dependencias traídas de una red externa en tiempo de ejecución | 0 | **Bloqueante, y detiene la planificación de la etapa `g`** |
+| **Medición de puertas** | `TC-12020` | `QG-03` (**`PT-02`**): el bundle carga en una página del anfitrión, la creación de instancia arma la escena, la carga del texto dibuja las **tres** figuras de `E-1` **incluido el ortoedro**, **diez** recorridos de ida y vuelta no degradan, y el árbol y la escena **se sincronizan por índice** | 3 de 3 figuras; 10 recorridos sin degradación, **con los dos movimientos prendidos** | **Bloqueante, y detiene la planificación de la etapa `g`** |
 | `copiar` | Copia del bundle a `src/GeometriaFactory.Web/wwwroot/js/` | Ninguno propio. Su verificación es la del anfitrión: ver [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md) §3 | — | Bloqueante por construcción |
 | Revisión del pull request | Comparación del bundle contra el fuente que lo generó | `QG-09`: el bundle **nunca se edita a mano**; es artefacto generado y reproducible | 0 ediciones manuales | **Se rechaza en revisión** |
 
@@ -100,7 +100,7 @@ Lo que sí le corresponde a 09 es declarar **cómo se ejecutan dentro de la cana
 | Confirmación empujada a la rama de una etapa que toca `visor/` | `instalar` → `empaquetar` → `inspeccionar` → `probar` | Nada por sí solo |
 | **Todo cambio del bundle** | `inspeccionar` entero —`QG-04`, `QG-05` y `QG-06`— **sobre el bundle generado y no sólo sobre la fuente** | La fusión. Es la cadencia propia que [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §5 declara |
 | Apertura o actualización del pull request de la etapa | Todos los stages, más la revisión de `QG-08` y `QG-09` | La fusión |
-| **Antes de comprometer la etapa `g`** | La medición de `PT-02` y `PT-03` completa, con `TC-19` y `TC-20` | **El compromiso de la etapa `g`** |
+| **Antes de comprometer la etapa `g`** | La medición de `PT-02` y `PT-03` completa, con `TC-12019` y `TC-12020` | **El compromiso de la etapa `g`** |
 | Fusión a la rama principal | Todos los stages sobre el estado fusionado, **incluida la copia al anfitrión** | El cierre de la etapa |
 | Fusión a la rama principal con cambios bajo `visor/` | Además, el flujo de trabajo de publicación del front, que el intake §17.6.P.7 declara restringido a cambios bajo `src/GeometriaFactory.Web/`, `visor/` y `src/GeometriaFactory.Contracts/` | La publicación del front |
 | Etiqueta de cierre de etapa | Todos los stages sobre el estado etiquetado | La declaración de etapa cerrada |
@@ -133,7 +133,7 @@ Este proyecto de código tiene **dos plataformas y no una**, y confundirlas ser�
 | Artefacto del momento de medición | El registro de `PT-02` y `PT-03`, **con la condición en que se midió cada ausencia** | Definition of Done §1.3 |
 | Inventario de componentes del bundle | Emitido en el stage `empaquetar`. Ver [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) §1 | Decisión de esta categoría |
 | Retención | Mientras dure el punto de control; los registros se adjuntan al informe de cierre | Intake §15 |
-| Reproducibilidad exigida | **Dos construcciones desde el mismo estado producen el mismo artefacto** | [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §8, segunda métrica |
+| Reproducibilidad exigida | **Dos construcciones desde el mismo estado producen el mismo artefacto** | [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §8, segunda métrica |
 
 **El bundle no se versiona en el repositorio.** Es la resolución del punto abierto `PA-05`, y su fundamento completo está en [`Entornos-Deploy.md`](Entornos-Deploy.md) §2: se genera en cada canalización que lo necesita y se ignora en el control de versiones.
 
@@ -142,7 +142,7 @@ Este proyecto de código tiene **dos plataformas y no una**, y confundirlas ser�
 | Transición | Trigger | Prerrequisitos | Aprobador |
 | --- | --- | --- | --- |
 | Rama de etapa → rama principal | Fusión del pull request | Los gates bloqueantes de §2.1 y los **diez** criterios de salida de [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §3 | El Product Owner, con OK explícito (intake §15) |
-| **Momento de medición → compromiso de la etapa `g`** | Las dos puertas técnicas pasadas enteras, en sus **seis** tramos `CV-18` a `CV-23` | `TC-19` y `TC-20`, con sus condiciones de medición registradas | El mismo, con el registro de la medición |
+| **Momento de medición → compromiso de la etapa `g`** | Las dos puertas técnicas pasadas enteras, en sus **seis** tramos `CV-18` a `CV-23` | `TC-12019` y `TC-12020`, con sus condiciones de medición registradas | El mismo, con el registro de la medición |
 | Bundle construido → bundle en el anfitrión | El stage `copiar` | Los gates de `inspeccionar` en verde sobre ese mismo bundle | Automático dentro de la construcción |
 
 **La segunda fila no tiene equivalente en ningún otro proyecto de código de nivel topológico 0.** Es una promoción cuyo prerrequisito no es un gate de esta cadena sino una **puerta técnica del producto**, y su incumplimiento no bloquea una fusión: bloquea que una etapa **se planifique**.
@@ -151,9 +151,9 @@ Este proyecto de código tiene **dos plataformas y no una**, y confundirlas ser�
 
 | Situación | Procedimiento | Fundamento |
 | --- | --- | --- |
-| El bundle desplegado rompe la visualización | Volver a la **etiqueta de la etapa anterior** y **regenerar** el bundle desde ese estado. No se restaura un archivo guardado: se reconstruye | Intake §17.1.P.8, modelo del producto; [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §5, punto 2 |
+| El bundle desplegado rompe la visualización | Volver a la **etiqueta de la etapa anterior** y **regenerar** el bundle desde ese estado. No se restaura un archivo guardado: se reconstruye | Intake §17.1.P.8, modelo del producto; [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §5, punto 2 |
 | El bundle desplegado en el hosting está roto | La reversión efectiva es la del front: **volver a publicar desde la etiqueta anterior**, que es el procedimiento que el intake §17.6.P.8 declara para esa unidad. La regeneración del bundle es parte de esa publicación | Intake §17.6.P.8 |
-| Un cambio mayor del punto de extensión rompió al anfitrión | **Ninguna compilación lo detectó**, y es la asimetría que `ADR-06` §6 acepta. Se revierte por etiqueta y la mitigación previa es la revisión más el sample **S-1**, que ejerce el contrato entero | `ADR-06` §2 y §5, punto 3 |
+| Un cambio mayor del punto de extensión rompió al anfitrión | **Ninguna compilación lo detectó**, y es la asimetría que `ADR-12006` §6 acepta. Se revierte por etiqueta y la mitigación previa es la revisión más el sample **S-1**, que ejerce el contrato entero | `ADR-12006` §2 y §5, punto 3 |
 
 **Que el bundle se regenere y no se restaure es consecuencia directa de resolver `PA-05` como se resolvió**, y es una propiedad y no un costo: un archivo restaurado desde el control de versiones podría no corresponder al fuente, que es exactamente lo que `QG-09` y `CV-30` prohíben.
 
@@ -164,7 +164,7 @@ Este proyecto de código tiene **dos plataformas y no una**, y confundirlas ser�
 | La salida del pipeline sobre el pull request de la etapa | El resultado del empaquetado y **los recuentos** de las tres inspecciones sobre el bundle generado |
 | El registro del momento de medición | `PT-02` y `PT-03` tramo por tramo, **con la condición de medición junto a cada resultado** |
 | El informe de cierre de la etapa | Lo anterior, más la verificación cualitativa de fluidez **rotulada como cualitativa** |
-| El registro de cambios del producto | Toda fila de cambio mayor del punto de extensión (`ADR-06` §7) |
+| El registro de cambios del producto | Toda fila de cambio mayor del punto de extensión (`ADR-12006` §7) |
 
 **No se declara ningún canal de mensajería ni ningún tablero**: ninguna fuente lo declara y `equipo_n` es 1.
 
@@ -186,7 +186,7 @@ Este proyecto de código no se despliega, pero **su artefacto viaja dentro del d
 | --- | --- | --- | --- |
 | PD-01 | La **herramienta concreta** de cada stage —empaquetador, ejecutor de pruebas, conductor de navegador y generador del inventario de componentes— y su anclaje de versión | El equipo, en el punto de control de la etapa `a` | Etapa `a`, por la regla de anclaje de versiones del intake |
 | PD-02 | Que el ejecutor de la canalización provea **navegador con capacidad gráfica tridimensional y conductor capaz de contar peticiones y leer el almacenamiento**. Sin eso, `QG-04`, `QG-05` y las dos puertas técnicas no se pueden medir en la canalización y quedarían como medición manual registrada | El equipo, antes del momento de medición | Antes de comprometer la etapa `g` |
-| PD-03 | La **versión del motor de dibujo tridimensional** que se ancla, y el cambio de interfaz que exija si es posterior a la del visualizador previo | El equipo, por `BT-09` | Antes del momento de medición (`PA-01` de `05` §11) |
+| PD-03 | La **versión del motor de dibujo tridimensional** que se ancla, y el cambio de interfaz que exija si es posterior a la del visualizador previo | El equipo, por `BT-12009` | Antes del momento de medición (`PA-01` de `05` §11) |
 
 **`PA-05` de `05` §11 queda cerrado por esta categoría**, con su desenlace y su fundamento en [`Entornos-Deploy.md`](Entornos-Deploy.md) §2. **`PA-03` —el umbral numérico de fluidez— sigue abierto y esta categoría no lo cierra**: inventar un número acá lo propagaría como si fuera del producto.
 

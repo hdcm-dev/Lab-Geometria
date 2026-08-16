@@ -46,8 +46,8 @@
 | Qué se construye y en qué prioridad | [`../06-Backlog-Tecnico/`](../06-Backlog-Tecnico/) |
 | El orden de las etapas, sus criterios de transición y dónde se miden las puertas | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) |
 | Las dieciséis reglas y los nueve invariantes | `GeometriaFactory-Domain`, categorías 02 y 05 |
-| El nombre del cuarto puerto | El **punto de control de la etapa `a`**, según [`../05-Arquitectura-Tecnica/Adrs/ADR-02-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md). Este plan lo compromete como BT-02 y **no lo fija** |
-| El criterio de comparación de dos correos | La categoría 05 de `GeometriaFactory-Infrastructure`. Este plan lo acompaña con BT-21 |
+| El nombre del cuarto puerto | El **punto de control de la etapa `a`**, según [`../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md`](../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md). Este plan lo compromete como BT-04002 y **no lo fija** |
+| El criterio de comparación de dos correos | La categoría 05 de `GeometriaFactory-Infrastructure`. Este plan lo acompaña con BT-04021 |
 | La Definition of Done canónica y el guion de medición | `08-Calidad-Y-Pruebas`, **todavía no emitida** |
 | La puerta de cobertura y el pipeline | `09-Devops`, **todavía no emitida** |
 

@@ -39,10 +39,10 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | --- | --- | --- | --- |
 | CV-01 | Los **trece** casos de uso tienen al menos un caso de prueba en verde, y cada criterio Given-When-Then declarado en sus historias está cubierto | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2, columna de estado | **13 de 13** |
 | CV-02 | Las **dieciséis** reglas de negocio tienen al menos un caso de prueba en verde | Matriz §4 | **16 de 16** |
-| CV-03 | Los **nueve** invariantes tienen al menos una prueba que verifica **su violación rechazada**, y ninguna de esas pruebas usa dobles | Matriz §5, recorrida por `TC-26` | **9 de 9**, con **0** dobles |
-| CV-04 | Las **42** condiciones del catálogo están alcanzadas por al menos una prueba, y no se emite ninguna condición fuera del catálogo | `TC-23`, comparación en las dos direcciones | **42 de 42** y **0** fuera |
-| CV-05 | Ninguna condición prevista viaja como excepción de control de flujo | `TC-27` | **0** excepciones de negocio |
-| CV-06 | Los **ocho** escenarios del intake §20 están ejercitados como fixture, con sus resultados declarados y **sin sustituirlos por datos sintéticos** | `TC-13` a `TC-18`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
+| CV-03 | Los **nueve** invariantes tienen al menos una prueba que verifica **su violación rechazada**, y ninguna de esas pruebas usa dobles | Matriz §5, recorrida por `TC-02026` | **9 de 9**, con **0** dobles |
+| CV-04 | Las **42** condiciones del catálogo están alcanzadas por al menos una prueba, y no se emite ninguna condición fuera del catálogo | `TC-02023`, comparación en las dos direcciones | **42 de 42** y **0** fuera |
+| CV-05 | Ninguna condición prevista viaja como excepción de control de flujo | `TC-02027` | **0** excepciones de negocio |
+| CV-06 | Los **ocho** escenarios del intake §20 están ejercitados como fixture, con sus resultados declarados y **sin sustituirlos por datos sintéticos** | `TC-02013` a `TC-02018`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
 | CV-07 | Las **veintisiete** historias de usuario tienen su caso de prueba | Matriz §2, columna de test, cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3 | **27 de 27** |
 
 ## 3. Criterios no funcionales
@@ -53,9 +53,9 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- | --- | --- |
 | CV-08 | La batería de dominio completa termina en menos de **10 segundos** | 10 s **[ASUNCIÓN del intake §17.1.P.10, asunción `A-5` de §22]** | Duración total reportada por el ejecutor en la etapa `test` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
 | CV-09 | La cobertura alcanza **90 %** de líneas y **85 %** de ramas, **por componente y no como número global** | 90 / 85 **[ASUNCIÓN del intake §17.1.P.6, asunción `A-3` de §22]**, con los tres componentes que suben declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
-| CV-10 | El archivo de proyecto declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | 0 y 0 | `TC-24` y revisión del pull request | **Bloqueante** |
-| CV-11 | El catálogo de condiciones cierra en las dos direcciones | 42 de 42 y 0 fuera | `TC-23` | **Bloqueante** |
-| CV-12 | Los nueve invariantes están ejercidos sin dobles | 9 de 9, 0 dobles | `TC-26` | **Bloqueante** |
+| CV-10 | El archivo de proyecto declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | 0 y 0 | `TC-02024` y revisión del pull request | **Bloqueante** |
+| CV-11 | El catálogo de condiciones cierra en las dos direcciones | 42 de 42 y 0 fuera | `TC-02023` | **Bloqueante** |
+| CV-12 | Los nueve invariantes están ejercidos sin dobles | 9 de 9, 0 dobles | `TC-02026` | **Bloqueante** |
 | CV-13 | La construcción termina en 0 y **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.1.P.8 | **Bloqueante** |
 
 **No hay criterio de latencia, de throughput ni de disponibilidad, y es correcto que no lo haya**: este proyecto de código no atiende peticiones ni abre conexiones (`05` §8, cierre de la sección). Inventar un umbral de esos tres sería inventar un sujeto que no existe.
@@ -69,7 +69,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-14 | La batería completa se ejecuta entera al cerrar cada etapa, y no sólo los casos de prueba que la etapa tocó | 100 % de los `TC-XX` escritos hasta ese momento |
 | CV-15 | **Ningún caso de prueba que estaba en verde en la etapa anterior pasa a rojo** sin justificación escrita en el informe de cierre de la etapa | 0 regresiones sin justificar |
 | CV-16 | Todo defecto cerrado generó al menos un `TC-XX` nuevo o extendió uno existente, con su fila en la matriz | 1 caso de prueba por defecto cerrado, como mínimo |
-| CV-17 | `TC-05` —las cinco operaciones rechazadas sobre la cuenta de administrador— se ejecuta en **todas** las etapas a partir de la `d` | Presente en cada ejecución. Es la prueba de regresión de la familia de defectos que en este producto **se abrió dos veces** |
+| CV-17 | `TC-02005` —las cinco operaciones rechazadas sobre la cuenta de administrador— se ejecuta en **todas** las etapas a partir de la `d` | Presente en cada ejecución. Es la prueba de regresión de la familia de defectos que en este producto **se abrió dos veces** |
 
 **La regla de no regresión es acumulativa por diseño.** El intake declara que cada etapa reejecuta lo anterior, y eso es lo que hace caro que la batería crezca en tiempo: es el motivo por el que `CV-08` existe.
 
@@ -81,7 +81,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-19 | Mutation score en dominio | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2 para el tipo `library`. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre en el pipeline (hueco declarado en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7). Hasta entonces se reporta «sin medir» |
 | CV-20 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-13` |
 | CV-21 | Ningún caso de prueba está deshabilitado sin motivo escrito en su fila del catálogo | 0 deshabilitados sin motivo | **Bloqueante** |
-| CV-22 | Ningún caso de prueba depende del orden de ejecución ni de un reloj del entorno | 0 dependencias de orden; dos ejecuciones consecutivas con resultado idéntico (`TC-25`) | **Bloqueante** |
+| CV-22 | Ningún caso de prueba depende del orden de ejecución ni de un reloj del entorno | 0 dependencias de orden; dos ejecuciones consecutivas con resultado idéntico (`TC-02025`) | **Bloqueante** |
 
 ## 6. Excepciones documentadas
 
@@ -89,7 +89,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-08`, `CV-09`, `CV-18`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-15`) | Nadie: es el tratamiento declarado, no una excepción concedida |
+| Criterio **condicionado** —`CV-08`, `CV-09`, `CV-18`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-02015`) | Nadie: es el tratamiento declarado, no una excepción concedida |
 | Criterio **no exigible todavía** —`CV-19`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado ni se declara cumplido** | — |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito en el punto de control | El Product Owner, con constancia escrita en el informe de cierre |
 

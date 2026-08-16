@@ -79,63 +79,63 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**. La 
 
 | Etapa | ID | Tipo | Descripción corta | Prioridad | Estimación | Asignado | Estado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `a` | BT-01 | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas, con una sola dependencia saliente | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-02 | Tarea técnica | Fijar los nombres de tipos, de espacios de nombres y el del cuarto puerto | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-03 | Tarea técnica | Elegir y anclar la herramienta que calcula la versión | Media | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-04 | Tarea técnica | Puerta bloqueante de dependencias salientes | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-05 | Tarea técnica | Puerta de construcción con cero advertencias | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-06 | Tarea técnica | Puerta propia de cero pruebas que tocan la base de datos real | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-07 | Tarea técnica | Declarar los cuatro puertos como frontera | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-10 | Tarea técnica | Guarda de autorización con las cuatro comprobaciones en orden fijo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-12 | Tarea técnica | Orquestación del alta de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-14 | Tarea técnica | Orquestación del ingreso y la credencial | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-03 | Historia | Configurar la cuenta de administrador con su ventana de alta | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-28 | Historia | Rechazar la configuración de un segundo administrador | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-07 | Historia | Devolver el motivo de una cuenta que no admite ingreso | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-09 | Historia | Reemplazar la credencial derivada exigiendo la vigente | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-11 | Tarea técnica | Matriz de ejercicio de las cuatro comprobaciones | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-13 | Tarea técnica | Orquestación del gobierno de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-18 | Tarea técnica | Confirmar los dos valores rotulados como asunción | Media | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-20 | Tarea técnica | Elevar los sellos de alta, modificación y desenlace | Media | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-21 | Tarea técnica | Acompañar la decisión del criterio de comparación de correos | Media | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-01 | Historia | Constituir una cuenta de alumno `Pendiente` y sin credencial | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-02 | Historia | Rechazar el alta con un correo ya registrado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-04 | Historia | Habilitar, bloquear y rehabilitar con verificación de facultad | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-05 | Historia | Dar de baja exigiendo el correo escrito como confirmación | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-06 | Historia | Arrastrar en la baja todos los trabajos de la cuenta | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-08 | Historia | Fijar la credencial derivada provisoria dentro de la habilitación | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-29 | Historia | Resetear la contraseña de un alumno con verificación de facultad | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-30 | Historia | Impedir que una cuenta marcada ejerza cualquier otra capacidad | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-31 | Historia | Conservar la cuenta, su estado y todos sus trabajos tras el reseteo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-32 | Historia | Levantar la marca con el cambio hecho por la propia cuenta | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | BT-09 | Tarea técnica | Fijar el alcance de la unidad de trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | BT-15 | Tarea técnica | Orquestación del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | BT-16 | Tarea técnica | Orquestación de la consulta, con la proyección sin componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-10 | Historia | Cargar un trabajo con dueño, identificador propio y sello del reloj | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-11 | Historia | Conservar el texto original íntegro al cargar y al reeditar | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-12 | Historia | Reeditar sólo un trabajo propio en `Borrador` | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-17 | Historia | Listar los trabajos propios con los cuatro estados distinguibles | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-19 | Historia | Detalle con piezas y componentes, y listado sin componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-20 | Historia | Listar los trabajos de la comisión excluyendo los borradores | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-21 | Historia | Filtrar el listado de la comisión por alumno | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-22 | Historia | Abrir el detalle de un trabajo de la comisión | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-26 | Historia | Eliminar un trabajo propio sólo en `Borrador` | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-19 | Tarea técnica | Medir el tiempo del caso de uso más pesado sobre `E-1`, sin base | Media | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-08 | Tarea técnica | Resultado tipado y catálogo de las 36 condiciones en las dos direcciones | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-13 | Historia | Enviar un trabajo con advertencias y que pase a estado `Pendiente` | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-14 | Historia | Enviar un trabajo con errores y que quede en `Borrador` | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-15 | Historia | Interpretar el texto por el puerto, sin tocar la base de datos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-16 | Historia | Terminar de forma controlada cuando la interpretación no está disponible | Media | Sin fijar | Equipo (1) | Pendiente |
-| `h` | BT-17 | Tarea técnica | Orquestación del desenlace | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-18 | Historia | Ver el desenlace y el comentario del trabajo propio | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-23 | Historia | Aprobar un trabajo en estado `Pendiente`, con comentario opcional | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-24 | Historia | Rechazar un trabajo en estado `Pendiente`, con comentario opcional | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-25 | Historia | Rechazar toda transición sin facultad o desde un estado terminal | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-27 | Historia | Eliminar por el administrador en los tres estados que ve | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-04001 | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas, con una sola dependencia saliente | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-04002 | Tarea técnica | Fijar los nombres de tipos, de espacios de nombres y el del cuarto puerto | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-04003 | Tarea técnica | Elegir y anclar la herramienta que calcula la versión | Media | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-04004 | Tarea técnica | Puerta bloqueante de dependencias salientes | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-04005 | Tarea técnica | Puerta de construcción con cero advertencias | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-04006 | Tarea técnica | Puerta propia de cero pruebas que tocan la base de datos real | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-04007 | Tarea técnica | Declarar los cuatro puertos como frontera | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-04010 | Tarea técnica | Guarda de autorización con las cuatro comprobaciones en orden fijo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-04012 | Tarea técnica | Orquestación del alta de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-04014 | Tarea técnica | Orquestación del ingreso y la credencial | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-04003 | Historia | Configurar la cuenta de administrador con su ventana de alta | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-04028 | Historia | Rechazar la configuración de un segundo administrador | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-04007 | Historia | Devolver el motivo de una cuenta que no admite ingreso | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-04009 | Historia | Reemplazar la credencial derivada exigiendo la vigente | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-04011 | Tarea técnica | Matriz de ejercicio de las cuatro comprobaciones | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-04013 | Tarea técnica | Orquestación del gobierno de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-04018 | Tarea técnica | Confirmar los dos valores rotulados como asunción | Media | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-04020 | Tarea técnica | Elevar los sellos de alta, modificación y desenlace | Media | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-04021 | Tarea técnica | Acompañar la decisión del criterio de comparación de correos | Media | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04001 | Historia | Constituir una cuenta de alumno `Pendiente` y sin credencial | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04002 | Historia | Rechazar el alta con un correo ya registrado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04004 | Historia | Habilitar, bloquear y rehabilitar con verificación de facultad | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04005 | Historia | Dar de baja exigiendo el correo escrito como confirmación | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04006 | Historia | Arrastrar en la baja todos los trabajos de la cuenta | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04008 | Historia | Fijar la credencial derivada provisoria dentro de la habilitación | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04029 | Historia | Resetear la contraseña de un alumno con verificación de facultad | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04030 | Historia | Impedir que una cuenta marcada ejerza cualquier otra capacidad | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04031 | Historia | Conservar la cuenta, su estado y todos sus trabajos tras el reseteo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-04032 | Historia | Levantar la marca con el cambio hecho por la propia cuenta | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | BT-04009 | Tarea técnica | Fijar el alcance de la unidad de trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | BT-04015 | Tarea técnica | Orquestación del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | BT-04016 | Tarea técnica | Orquestación de la consulta, con la proyección sin componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04010 | Historia | Cargar un trabajo con dueño, identificador propio y sello del reloj | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04011 | Historia | Conservar el texto original íntegro al cargar y al reeditar | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04012 | Historia | Reeditar sólo un trabajo propio en `Borrador` | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04017 | Historia | Listar los trabajos propios con los cuatro estados distinguibles | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04019 | Historia | Detalle con piezas y componentes, y listado sin componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04020 | Historia | Listar los trabajos de la comisión excluyendo los borradores | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04021 | Historia | Filtrar el listado de la comisión por alumno | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04022 | Historia | Abrir el detalle de un trabajo de la comisión | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-04026 | Historia | Eliminar un trabajo propio sólo en `Borrador` | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-04019 | Tarea técnica | Medir el tiempo del caso de uso más pesado sobre `E-1`, sin base | Media | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-04008 | Tarea técnica | Resultado tipado y catálogo de las 36 condiciones en las dos direcciones | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-04013 | Historia | Enviar un trabajo con advertencias y que pase a estado `Pendiente` | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-04014 | Historia | Enviar un trabajo con errores y que quede en `Borrador` | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-04015 | Historia | Interpretar el texto por el puerto, sin tocar la base de datos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-04016 | Historia | Terminar de forma controlada cuando la interpretación no está disponible | Media | Sin fijar | Equipo (1) | Pendiente |
+| `h` | BT-04017 | Tarea técnica | Orquestación del desenlace | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-04018 | Historia | Ver el desenlace y el comentario del trabajo propio | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-04023 | Historia | Aprobar un trabajo en estado `Pendiente`, con comentario opcional | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-04024 | Historia | Rechazar un trabajo en estado `Pendiente`, con comentario opcional | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-04025 | Historia | Rechazar toda transición sin facultad o desde un estado terminal | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-04027 | Historia | Eliminar por el administrador en los tres estados que ve | Alta | Sin fijar | Equipo (1) | Pendiente |
 
 **Total comprometido: 32 historias y 21 tareas técnicas, repartidas en seis etapas.** La prioridad de la columna es de **ejecución dentro de la etapa** y no reemplaza a la MoSCoW del backlog, que vive en 06.
 
-**US-16 figura con prioridad de ejecución `Media`**, y su MoSCoW en 06 es `Should`. Es la única historia de este backlog donde las dos coinciden en señalar lo mismo: si la etapa `f` aprieta, es la primera candidata a diferirse.
+**US-04016 figura con prioridad de ejecución `Media`**, y su MoSCoW en 06 es `Should`. Es la única historia de este backlog donde las dos coinciden en señalar lo mismo: si la etapa `f` aprieta, es la primera candidata a diferirse.
 
 ## 4. Alcance técnico y orden de construcción
 
@@ -143,12 +143,12 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 
 **Orden dentro de cada etapa**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) §3:
 
-1. `a`: BT-01 primero; BT-02 y BT-03 sobre él; BT-04, BT-05 y BT-06 al cerrar, porque son puertas y no se pueden medir sobre un proyecto que todavía no compila. **BT-02 termina en el punto de control**, y ahí queda fijado el nombre del cuarto puerto.
-2. `c`: BT-07 antes que todo lo demás —los orquestadores consumen puertos—; después BT-10, después BT-12 y BT-14; las cuatro historias de la etapa sobre esas tareas.
-3. `d`: BT-13 sobre BT-10 y BT-07; las diez historias después; **BT-11 se abre con US-30 y se cierra con la última historia de la etapa**, porque la cuarta comprobación no tiene sobre qué decidir hasta que exista la marca; BT-18, BT-20 y BT-21 antes del punto de control.
-4. `e`: BT-09 sobre BT-07; después BT-15 y BT-16; las nueve historias después.
-5. `f`: las cuatro historias sobre BT-15; **BT-08 al cerrar**, porque el catálogo de condiciones no se puede recorrer en las dos direcciones hasta que el conjunto esté entero producido; BT-19 al final, porque mide sobre algo terminado.
-6. `h`: BT-17 sobre BT-10 y BT-07; las cinco historias después.
+1. `a`: BT-04001 primero; BT-04002 y BT-04003 sobre él; BT-04004, BT-04005 y BT-04006 al cerrar, porque son puertas y no se pueden medir sobre un proyecto que todavía no compila. **BT-04002 termina en el punto de control**, y ahí queda fijado el nombre del cuarto puerto.
+2. `c`: BT-04007 antes que todo lo demás —los orquestadores consumen puertos—; después BT-04010, después BT-04012 y BT-04014; las cuatro historias de la etapa sobre esas tareas.
+3. `d`: BT-04013 sobre BT-04010 y BT-04007; las diez historias después; **BT-04011 se abre con US-04030 y se cierra con la última historia de la etapa**, porque la cuarta comprobación no tiene sobre qué decidir hasta que exista la marca; BT-04018, BT-04020 y BT-04021 antes del punto de control.
+4. `e`: BT-04009 sobre BT-04007; después BT-04015 y BT-04016; las nueve historias después.
+5. `f`: las cuatro historias sobre BT-04015; **BT-04008 al cerrar**, porque el catálogo de condiciones no se puede recorrer en las dos direcciones hasta que el conjunto esté entero producido; BT-04019 al final, porque mide sobre algo terminado.
+6. `h`: BT-04017 sobre BT-04010 y BT-04007; las cinco historias después.
 
 **Regla de dependencias interna que ninguna tarea puede cruzar** (`05` §3.2): **ningún orquestador depende de otro orquestador**, la guarda **no lee conjuntos y no escribe**, y la flecha hacia `GeometriaFactory-Infrastructure` es de implementación y va al revés que la de dependencia —este proyecto de código **no la nombra ni la referencia**—.
 
@@ -161,21 +161,21 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 Criterios específicos que este plan agrega, y que no reemplazan a los anteriores:
 
 1. **La actualización de la categoría 11 forma parte del cierre.** La categoría 11 de este proyecto de código **todavía no está emitida**, de modo que hasta su emisión la condición se cumple de forma vacía y **se registra así en el informe de cierre**, en lugar de darse por cumplida en silencio.
-2. **Las tres puertas de construcción se miden en cada etapa y no sólo en la que las introdujo**: una sola dependencia saliente (BT-04), cero advertencias (BT-05) y **cero pruebas que toquen la base de datos real** (BT-06).
+2. **Las tres puertas de construcción se miden en cada etapa y no sólo en la que las introdujo**: una sola dependencia saliente (BT-04004), cero advertencias (BT-04005) y **cero pruebas que toquen la base de datos real** (BT-04006).
 3. **La matriz de ejercicio de las cuatro comprobaciones se revisa al cerrar cada etapa** que introduzca o toque un camino de lectura o de escritura.
 4. **Ningún guion de prueba que involucre el texto de figuras usa datos inventados**: se usan los escenarios `E-1` a `E-8` del intake §20, por la regla de delivery 5 de su §15.
-5. **Los dos valores rotulados [ASUNCIÓN] se usan como vigentes y la puerta de cobertura no se declara bloqueante en 09** hasta que BT-18 cierre. Ninguna etapa se cierra declarando cumplido un número que el Product Owner no confirmó.
+5. **Los dos valores rotulados [ASUNCIÓN] se usan como vigentes y la puerta de cobertura no se declara bloqueante en 09** hasta que BT-04018 cierre. Ninguna etapa se cierra declarando cumplido un número que el Product Owner no confirmó.
 
 ## 6. Riesgos y mitigaciones
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 | --- | --- | --- | --- |
-| Que aparezca un camino que ejerza una capacidad **sin** resolver antes la marca de cambio de contraseña pendiente | Media, **y es una dependencia de disciplina heredada**: [`Domain ADR-05`](../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md) §6 declaró que el dominio no puede impedirla | **Muy alto**: `INV-09` deja de valer y una clave que el administrador conoce queda sirviendo para operar como el alumno | BT-10 con el orden fijo en un único componente, BT-11 con la prueba específica de que la cuarta corta primero, y el criterio 5 de la DoR, que no admite excepción (`05` §9, segundo riesgo) |
-| Que un caso de uso consulte la base por su cuenta y deje de ser probable con dobles | Media: es la presión natural cuando una pantalla pide un dato que la proyección no trae | Alto: se pierde la propiedad que justifica el estilo entero y la autorización por pertenencia deja de poder verificarse sin base | BT-04 y **BT-06**, la puerta propia de cero pruebas que tocan la base real, medidas en cada etapa (`05` §9, primer riesgo) |
-| Que la negativa por pertenencia y la negativa por facultad se confundan, y un trabajo ajeno responda «no autorizado» | Media: es un error de lectura fácil, y la categoría 03 lo llama «el error más caro que un consumidor puede cometer contra esta capa» | Alto: permite averiguar por tanteo qué identificadores existen, que es lo que `RN-03` viene a cerrar | BT-11, con la prueba que pide un trabajo ajeno y compara el motivo emitido; y la tabla de traducciones prohibidas de 03 (`05` §9, tercer riesgo) |
-| Que el nombre del cuarto puerto se fije sin punto de control y haya que renombrarlo en los cuatro componentes que lo consumen | **Alta**: hoy no tiene nombre declarado en ninguna fuente (`05` §9, sexto riesgo) | Bajo: costo de retrabajo, no de corrección | BT-02, con caja temporal en la etapa `a` y validación en su punto de control, y el nombramiento en lenguaje de dominio mientras tanto |
-| Que un caso de uso reparta su efecto entre dos unidades de trabajo y la baja deje trabajos huérfanos | Baja | Alto: `RN-07` deja de valer y el arrastre se vuelve parcial | BT-09, con la baja como caso testigo y el NFR de **0** casos de uso que repartan su efecto (`05` §9, cuarto riesgo) |
-| Que la etapa `f` avance con los valores rotulados como asunción sin confirmar y la puerta de cobertura se declare bloqueante sobre un número que nadie aprobó | Media | Medio | BT-18, con la condición explícita de que la puerta **no se declara bloqueante en 09** hasta que el Product Owner confirme (`05` §11 `PA-05`; `PRODUCT-INTAKE` §22) |
+| Que aparezca un camino que ejerza una capacidad **sin** resolver antes la marca de cambio de contraseña pendiente | Media, **y es una dependencia de disciplina heredada**: [`Domain ADR-02005`](../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) §6 declaró que el dominio no puede impedirla | **Muy alto**: `INV-09` deja de valer y una clave que el administrador conoce queda sirviendo para operar como el alumno | BT-04010 con el orden fijo en un único componente, BT-04011 con la prueba específica de que la cuarta corta primero, y el criterio 5 de la DoR, que no admite excepción (`05` §9, segundo riesgo) |
+| Que un caso de uso consulte la base por su cuenta y deje de ser probable con dobles | Media: es la presión natural cuando una pantalla pide un dato que la proyección no trae | Alto: se pierde la propiedad que justifica el estilo entero y la autorización por pertenencia deja de poder verificarse sin base | BT-04004 y **BT-04006**, la puerta propia de cero pruebas que tocan la base real, medidas en cada etapa (`05` §9, primer riesgo) |
+| Que la negativa por pertenencia y la negativa por facultad se confundan, y un trabajo ajeno responda «no autorizado» | Media: es un error de lectura fácil, y la categoría 03 lo llama «el error más caro que un consumidor puede cometer contra esta capa» | Alto: permite averiguar por tanteo qué identificadores existen, que es lo que `RN-04003` viene a cerrar | BT-04011, con la prueba que pide un trabajo ajeno y compara el motivo emitido; y la tabla de traducciones prohibidas de 03 (`05` §9, tercer riesgo) |
+| Que el nombre del cuarto puerto se fije sin punto de control y haya que renombrarlo en los cuatro componentes que lo consumen | **Alta**: hoy no tiene nombre declarado en ninguna fuente (`05` §9, sexto riesgo) | Bajo: costo de retrabajo, no de corrección | BT-04002, con caja temporal en la etapa `a` y validación en su punto de control, y el nombramiento en lenguaje de dominio mientras tanto |
+| Que un caso de uso reparta su efecto entre dos unidades de trabajo y la baja deje trabajos huérfanos | Baja | Alto: `RN-04007` deja de valer y el arrastre se vuelve parcial | BT-04009, con la baja como caso testigo y el NFR de **0** casos de uso que repartan su efecto (`05` §9, cuarto riesgo) |
+| Que la etapa `f` avance con los valores rotulados como asunción sin confirmar y la puerta de cobertura se declare bloqueante sobre un número que nadie aprobó | Media | Medio | BT-04018, con la condición explícita de que la puerta **no se declara bloqueante en 09** hasta que el Product Owner confirme (`05` §11 `PA-05`; `PRODUCT-INTAKE` §22) |
 | Que el punto de control de una etapa se demore y el trabajo de los niveles 2 y 3 se adelante sobre una superficie todavía no aprobada | Media | Alto: rompe la regla de etapas en serie del intake §10 | La regla de delivery 4 del intake §15 —una rama y una solicitud de incorporación por etapa, y no se abre la siguiente antes de fusionar—, que se aplica también a este proyecto de código aunque su trabajo esté terminado antes |
 
 ## 7. Criterios de hecho de cada tramo
@@ -195,16 +195,16 @@ Una etapa de este proyecto de código está hecha cuando:
 
 | Etapa | NB que avanzan | CU que avanzan | ADR que gobiernan las decisiones |
 | --- | --- | --- | --- |
-| `a` | Ninguna: es un hito interno sin capacidad funcional asociada | Ninguno | ADR-01, ADR-03 |
-| `c` | NB-01, NB-02 | CU-03, CU-10 | ADR-01, ADR-02, ADR-04, ADR-06 |
-| `d` | NB-01, NB-02 | CU-01, CU-02, CU-03, CU-11 | ADR-02, ADR-04, ADR-05 |
-| `e` | NB-03, NB-06 (parcial), NB-07 | CU-04, CU-06, CU-07, CU-09 | ADR-01, ADR-04, ADR-05 |
-| `f` | NB-04, NB-05, NB-03 | CU-05 | ADR-01, ADR-02, ADR-06 |
-| `h` | NB-09 | CU-06, CU-08, CU-09 | ADR-04, ADR-05, ADR-06 |
+| `a` | Ninguna: es un hito interno sin capacidad funcional asociada | Ninguno | ADR-04001, ADR-04003 |
+| `c` | NB-00001, NB-00002 | CU-04003, CU-04010 | ADR-04001, ADR-04002, ADR-04004, ADR-04006 |
+| `d` | NB-00001, NB-00002 | CU-04001, CU-04002, CU-04003, CU-04011 | ADR-04002, ADR-04004, ADR-04005 |
+| `e` | NB-00003, NB-00006 (parcial), NB-00007 | CU-04004, CU-04006, CU-04007, CU-04009 | ADR-04001, ADR-04004, ADR-04005 |
+| `f` | NB-00004, NB-00005, NB-00003 | CU-04005 | ADR-04001, ADR-04002, ADR-04006 |
+| `h` | NB-00009 | CU-04006, CU-04008, CU-04009 | ADR-04004, ADR-04005, ADR-04006 |
 
 **Las seis etapas declaran al menos una necesidad de negocio en avance, salvo la `a`**, y esa excepción es del propio roadmap: `a` es un hito interno sin capacidad funcional asociada (§2.1).
 
-**`NB-08` no aparece en ninguna fila, y es declaración y no olvido.** `02` §7.2 declara que este proyecto de código **no la toca**: su dolor es de acceso y de despliegue, y esta capa no atiende peticiones, no abre conexiones y no conoce la frontera de proceso. Se cubre en 02 de `GeometriaFactory-Web` y de `GeometriaFactory-Api` y en `09-Devops`.
+**`NB-00008` no aparece en ninguna fila, y es declaración y no olvido.** `02` §7.2 declara que este proyecto de código **no la toca**: su dolor es de acceso y de despliegue, y esta capa no atiende peticiones, no abre conexiones y no conoce la frontera de proceso. Se cubre en 02 de `GeometriaFactory-Web` y de `GeometriaFactory-Api` y en `09-Devops`.
 
 **Puertas técnicas del producto y este proyecto de código.** `PT-01` y `PT-04` se miden en la etapa `a` y `PT-02` y `PT-03` antes de comprometer la `g`; **ninguna de las cuatro se mide sobre este proyecto de código** —son del front, del servicio de datos y del bundle del visor—, y por eso no figuran como ítem de §3. Lo que sí lo alcanza es la consecuencia: una puerta que no pasa **detiene la planificación de las etapas que dependen de ella**.
 
@@ -222,5 +222,5 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Application`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con la constancia de los cuatro que **no** se emiten— y por qué no se declara capacidad numérica, con el fundamento propio de que el único NFR de tiempo que alcanza a esta capa ya viene rotulado como asunción sin confirmar. Fija el objetivo de cada uno de los **seis** tramos que este proyecto de código toca de las **ocho** etapas comprometidas, compromete las **32** historias y las **21** tareas técnicas del backlog de 06 sin inventar ningún identificador, declara el orden de construcción dentro de cada etapa con la regla de dependencias interna que ninguna tarea puede cruzar, referencia la Definition of Done por destino con la constancia de que 08 todavía no está emitida, y declara **siete** riesgos con mitigación, los criterios de hecho de cada tramo y la trazabilidad de necesidades, casos de uso y ADR por etapa, con la constancia de que **`NB-08` no la toca este proyecto de código**. |
+| 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Application`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con la constancia de los cuatro que **no** se emiten— y por qué no se declara capacidad numérica, con el fundamento propio de que el único NFR de tiempo que alcanza a esta capa ya viene rotulado como asunción sin confirmar. Fija el objetivo de cada uno de los **seis** tramos que este proyecto de código toca de las **ocho** etapas comprometidas, compromete las **32** historias y las **21** tareas técnicas del backlog de 06 sin inventar ningún identificador, declara el orden de construcción dentro de cada etapa con la regla de dependencias interna que ninguna tarea puede cruzar, referencia la Definition of Done por destino con la constancia de que 08 todavía no está emitida, y declara **siete** riesgos con mitigación, los criterios de hecho de cada tramo y la trazabilidad de necesidades, casos de uso y ADR por etapa, con la constancia de que **`NB-00008` no la toca este proyecto de código**. |
 | 1.1 | 2026-08-11 | **Actualiza la trazabilidad upstream** a las versiones del `Product-Backlog.md` y del `Backlog-Tecnico.md` de la sección 06, que subieron a **1.1** el 2026-08-11. El `Product-Backlog.md` subió al absorber la promoción de `F-13` a `Must Have` (`PRODUCT-INTAKE` **1.19** §4) y al declarar la regularidad de la distribución MoSCoW (hallazgo `D-06-03`). El `Backlog-Tecnico.md` subió a 1.1 al cerrar el hallazgo `D-06-02` del informe [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0, que completó una enumeración de cobertura inversa sin tocar ninguna tarea técnica. **Ninguna historia ni tarea técnica de este proyecto de código cambia de prioridad, de etapa ni de tramo**, y ningún compromiso, riesgo ni orden de construcción de este plan se toca: la fila existe para que la versión citada sea la vigente y no una que ya no está. Sube minor. |

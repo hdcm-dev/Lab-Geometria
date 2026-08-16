@@ -38,22 +38,22 @@ La resolución del choque de vocabulario del intake rige acá sin excepción: «
 | Término canónico | Definición operativa | Artefactos de 02 donde aparece | Sinónimos y alias |
 | --- | --- | --- | --- |
 | Adaptador | La implementación concreta de un puerto, que vive en este proyecto de código. **Un adaptador provee el mecanismo y no toma decisiones de negocio** | `Especificacion-Funcional.md` §3 y §4, los diez CU | «Implementación del puerto». **No se dice «el puerto» cuando el sujeto es la implementación** |
-| Almacén | El archivo único donde el producto guarda todo lo que sobrevive al apagado del proceso. Se nombra así, y **no «base de datos»**, cuando el sujeto es el lugar donde vive el dato de esta instancia | `Especificacion-Funcional.md` §4, `Modelo-Datos/`, CU-03, CU-04, CU-05, CU-10 | «Archivo del almacén» cuando el sujeto es el archivo en su ruta |
-| Trampa del formato | Cada uno de los cuatro rasgos del texto real del alumno que rompen a un lector ingenuo: `T1` clave sinónima, `T2` comas finales, `T3` cara con dos nombres, `T4` valores calculados erróneos. **El contrato nace sabiéndolas** | `Definicion-Contrato-Del-Validador-De-Figuras.md` §2, CU-01, CU-02 | «Las cuatro trampas», en forma corta |
-| Lectura tolerante | La forma en que este proyecto de código lee el texto del alumno: admitiendo comas finales, omitiendo comentarios y aceptando las claves sinónimas. **No es permisividad**: es adaptarse al dato, que es premisa fija del producto | `Definicion-Contrato-Del-Validador-De-Figuras.md` §2, CU-01 | — |
-| Existencia contra veracidad | El criterio con el que se lee una dimensión: se comprueba que **el campo esté**, no que su valor tenga sentido geométrico. Un `0.00` presente **no descarta la figura** | `Definicion-Contrato-Del-Validador-De-Figuras.md` §2, CU-01, CU-02 | — |
-| Operador estricto | La forma de la comparación de valores: se advierte cuando la diferencia absoluta es **mayor** que la tolerancia, y **no** cuando es mayor o igual | `Definicion-Contrato-Del-Validador-De-Figuras.md`, CU-02 | — |
-| Posición reservada | La posición, dentro del rango de figuras del conjunto raíz, que ocupa una figura que **no se pudo reconstruir**. Admite observación aunque no haya pieza, y **no se compacta** | CU-01, CU-03, `RC-02` | — |
-| Cantidad de figuras del conjunto raíz | Cuántas figuras trae el texto interpretado, incluidas las no reconstruidas. **Referenciada** del modelo del dominio; acá se agrega que **es la que este proyecto de código produce** | CU-01, CU-03, `Modelo-Datos/` | — |
-| Contraseña provisoria | El valor de credencial que **este proyecto de código produce** cuando el administrador resetea la contraseña de la cuenta de un alumno. **Referenciada** de la capa de aplicación; acá se agrega que es donde nace y que **no se conserva** | CU-07, `RC-07` | «clave provisoria». **No se dice «contraseña temporal»**: no vence por tiempo, la levanta la marca |
-| Valor derivado de la credencial | Lo que el producto guarda en lugar de la contraseña. **No es el «valor derivado» de la geometría**: ver §3.3 | CU-05, CU-06, CU-07 | «credencial derivada», que es la forma que usa la categoría de dominio |
-| Acceso firmado | Lo que se emite para que la pieza pública opere contra la pieza de datos: identificador, correo, papel y expiración, firmado con clave simétrica | CU-08 | «el acceso». **No se dice «sesión»**: la pieza de datos es sin estado |
-| Clave de firma | El secreto con el que el acceso se firma. **Vive fuera del repositorio de código y fuera de la imagen** | CU-08 | — |
-| Terminación degradada | La forma en que termina una operación que no se pudo completar por una causa que no depende de lo que se pidió. **Se declara en vez de fingir un resultado**, y este proyecto de código **no reintenta** | CU-01, CU-03, CU-04, CU-05, CU-07 | «estado degradado», que es la forma que usa la capa de aplicación |
-| Arranque detenido | La forma de terminación propia de la preparación del almacén: el servicio **no atiende ninguna petición**. Es preferible a operar sobre un almacén en el que no se puede confiar | CU-10 | — |
-| Transformación de esquema | Cada paso versionado que lleva el almacén de una forma a la siguiente, **aplicado al arrancar**. Se versiona con el código de su etapa y **una ya fusionada no se edita** | CU-10, `Modelo-Datos/` | «migración», que es la forma que usan las fuentes técnicas. Se admite cuando el sujeto es la herramienta |
+| Almacén | El archivo único donde el producto guarda todo lo que sobrevive al apagado del proceso. Se nombra así, y **no «base de datos»**, cuando el sujeto es el lugar donde vive el dato de esta instancia | `Especificacion-Funcional.md` §4, `Modelo-Datos/`, CU-06003, CU-06004, CU-06005, CU-06010 | «Archivo del almacén» cuando el sujeto es el archivo en su ruta |
+| Trampa del formato | Cada uno de los cuatro rasgos del texto real del alumno que rompen a un lector ingenuo: `T1` clave sinónima, `T2` comas finales, `T3` cara con dos nombres, `T4` valores calculados erróneos. **El contrato nace sabiéndolas** | `Definicion-Contrato-Del-Validador-De-Figuras.md` §2, CU-06001, CU-06002 | «Las cuatro trampas», en forma corta |
+| Lectura tolerante | La forma en que este proyecto de código lee el texto del alumno: admitiendo comas finales, omitiendo comentarios y aceptando las claves sinónimas. **No es permisividad**: es adaptarse al dato, que es premisa fija del producto | `Definicion-Contrato-Del-Validador-De-Figuras.md` §2, CU-06001 | — |
+| Existencia contra veracidad | El criterio con el que se lee una dimensión: se comprueba que **el campo esté**, no que su valor tenga sentido geométrico. Un `0.00` presente **no descarta la figura** | `Definicion-Contrato-Del-Validador-De-Figuras.md` §2, CU-06001, CU-06002 | — |
+| Operador estricto | La forma de la comparación de valores: se advierte cuando la diferencia absoluta es **mayor** que la tolerancia, y **no** cuando es mayor o igual | `Definicion-Contrato-Del-Validador-De-Figuras.md`, CU-06002 | — |
+| Posición reservada | La posición, dentro del rango de figuras del conjunto raíz, que ocupa una figura que **no se pudo reconstruir**. Admite observación aunque no haya pieza, y **no se compacta** | CU-06001, CU-06003, `RC-06002` | — |
+| Cantidad de figuras del conjunto raíz | Cuántas figuras trae el texto interpretado, incluidas las no reconstruidas. **Referenciada** del modelo del dominio; acá se agrega que **es la que este proyecto de código produce** | CU-06001, CU-06003, `Modelo-Datos/` | — |
+| Contraseña provisoria | El valor de credencial que **este proyecto de código produce** cuando el administrador resetea la contraseña de la cuenta de un alumno. **Referenciada** de la capa de aplicación; acá se agrega que es donde nace y que **no se conserva** | CU-06007, `RC-06007` | «clave provisoria». **No se dice «contraseña temporal»**: no vence por tiempo, la levanta la marca |
+| Valor derivado de la credencial | Lo que el producto guarda en lugar de la contraseña. **No es el «valor derivado» de la geometría**: ver §3.3 | CU-06005, CU-06006, CU-06007 | «credencial derivada», que es la forma que usa la categoría de dominio |
+| Acceso firmado | Lo que se emite para que la pieza pública opere contra la pieza de datos: identificador, correo, papel y expiración, firmado con clave simétrica | CU-06008 | «el acceso». **No se dice «sesión»**: la pieza de datos es sin estado |
+| Clave de firma | El secreto con el que el acceso se firma. **Vive fuera del repositorio de código y fuera de la imagen** | CU-06008 | — |
+| Terminación degradada | La forma en que termina una operación que no se pudo completar por una causa que no depende de lo que se pidió. **Se declara en vez de fingir un resultado**, y este proyecto de código **no reintenta** | CU-06001, CU-06003, CU-06004, CU-06005, CU-06007 | «estado degradado», que es la forma que usa la capa de aplicación |
+| Arranque detenido | La forma de terminación propia de la preparación del almacén: el servicio **no atiende ninguna petición**. Es preferible a operar sobre un almacén en el que no se puede confiar | CU-06010 | — |
+| Transformación de esquema | Cada paso versionado que lleva el almacén de una forma a la siguiente, **aplicado al arrancar**. Se versiona con el código de su etapa y **una ya fusionada no se edita** | CU-06010, `Modelo-Datos/` | «migración», que es la forma que usan las fuentes técnicas. Se admite cuando el sujeto es la herramienta |
 | Regla conceptual de modelo | Cada una de las siete condiciones que el dato guardado tiene que cumplir, con identificador `RC-XX`. **No es una regla de negocio**: declara cómo el dato sobrevive, no qué decidió el negocio | `Modelo-Datos/`, los diez CU | — |
-| Segunda línea | El papel que cumplen las restricciones de unicidad del almacén frente a la consulta previa del consumidor: **la verificación previa no es una garantía por sí sola** | `Especificacion-Funcional.md` §4, CU-05 | — |
+| Segunda línea | El papel que cumplen las restricciones de unicidad del almacén frente a la consulta previa del consumidor: **la verificación previa no es una garantía por sí sola** | `Especificacion-Funcional.md` §4, CU-06005 | — |
 
 ## 3. Términos con más de un referente
 
@@ -65,7 +65,7 @@ Es la polisemia propia de este proyecto de código, y nace de que acá conviven 
 
 | Referente | Forma que corresponde | Evidencia de colisión |
 | --- | --- | --- |
-| El **puerto** que la capa de aplicación declara | **«puerto de validación de figuras»**, siempre completo | Los dos referentes aparecen en la misma sección de `Especificacion-Funcional.md` §3 y en la §9 de CU-01 y CU-02 |
+| El **puerto** que la capa de aplicación declara | **«puerto de validación de figuras»**, siempre completo | Los dos referentes aparecen en la misma sección de `Especificacion-Funcional.md` §3 y en la §9 de CU-06001 y CU-06002 |
 | El **adaptador** que lo implementa acá | **«validador de figuras»**, o «el validador» cuando el complemento ya está fijado en la misma oración | La categoría de aplicación ya declara «validador de figuras» como la forma corta usada cuando el sujeto es la implementación, y acá el sujeto es siempre la implementación |
 
 ### 3.2 Repositorio
@@ -76,7 +76,7 @@ Heredada de la categoría de aplicación, que la declaró primero, y **acá gana
 | --- | --- | --- |
 | El puerto por el que se guarda y se recupera | **Siempre calificado**: «puerto de repositorio de trabajos», «puerto de repositorio de cuentas» | Declarado en la categoría de aplicación §3.1 y conservado |
 | El adaptador que lo implementa | **«adaptador del repositorio de trabajos»** o «de cuentas» | Los dos primeros conviven en `Especificacion-Funcional.md` §3 |
-| El repositorio de código donde vive el árbol del producto | **No se nombra «repositorio» a secas.** Se dice «repositorio de código» | Aparece en CU-08 —donde se declara que la clave de firma no entra— junto con los otros dos referentes |
+| El repositorio de código donde vive el árbol del producto | **No se nombra «repositorio» a secas.** Se dice «repositorio de código» | Aparece en CU-06008 —donde se declara que la clave de firma no entra— junto con los otros dos referentes |
 
 ### 3.3 Derivado
 
@@ -84,8 +84,8 @@ Es la colisión que más caro sale, porque las dos cosas son números que el sis
 
 | Referente | Forma que corresponde | Evidencia de colisión |
 | --- | --- | --- |
-| El valor de `Area` o de `Volumen` que el sistema recalcula desde las dimensiones | **«valor derivado»**, o «`Area` derivada» y «`Volumen` derivado» con su campo | Declarado en el glosario raíz. Domina CU-01, CU-02 y `RC-03` |
-| El valor con el que el producto guarda una contraseña | **«valor derivado de la credencial»** o **«credencial derivada»**, nunca «valor derivado» a secas | Los dos aparecen en la misma sección de `Especificacion-Funcional.md` §4 y en el vocabulario de CU-05, CU-06 y CU-07 |
+| El valor de `Area` o de `Volumen` que el sistema recalcula desde las dimensiones | **«valor derivado»**, o «`Area` derivada» y «`Volumen` derivado» con su campo | Declarado en el glosario raíz. Domina CU-06001, CU-06002 y `RC-06003` |
+| El valor con el que el producto guarda una contraseña | **«valor derivado de la credencial»** o **«credencial derivada»**, nunca «valor derivado» a secas | Los dos aparecen en la misma sección de `Especificacion-Funcional.md` §4 y en el vocabulario de CU-06005, CU-06006 y CU-06007 |
 
 Regla de uso, en una línea: **«derivado» a secas designa la geometría; la credencial se nombra siempre con su complemento.**
 
@@ -95,8 +95,8 @@ Regla de uso, en una línea: **«derivado» a secas designa la geometría; la cr
 
 | Referente | Forma que corresponde | Dónde aparece acá |
 | --- | --- | --- |
-| Estado de una **cuenta** registrada y todavía no habilitada | **«cuenta `Pendiente`»** | CU-05, `RC-07`, `Modelo-Datos/` |
-| Estado de un **trabajo** enviado, a la espera de revisión | **«trabajo en estado `Pendiente`»**, o «estado `Pendiente`» cuando el trabajo está nombrado en la misma oración | CU-01, CU-02, CU-03, CU-04 |
+| Estado de una **cuenta** registrada y todavía no habilitada | **«cuenta `Pendiente`»** | CU-06005, `RC-06007`, `Modelo-Datos/` |
+| Estado de un **trabajo** enviado, a la espera de revisión | **«trabajo en estado `Pendiente`»**, o «estado `Pendiente`» cuando el trabajo está nombrado en la misma oración | CU-06001, CU-06002, CU-06003, CU-06004 |
 
 La forma desnuda no se usa. **Dos usos que no se califican, y no son defecto**: la enumeración del conjunto cerrado de valores de un atributo, donde el atributo enunciado ya fija el referente, y los nombres de los códigos, que son identificadores literales del contrato.
 
@@ -121,7 +121,7 @@ Ya declarados con la misma semántica con la que esta categoría los usa: Trabaj
 | Alumno, Papel, Estado de cuenta, Credencial derivada | El vocabulario de la cuenta |
 | Texto original | El texto que el alumno cargó, conservado íntegro |
 | Posición de pieza | Lugar de la figura en el conjunto raíz; es la identidad de la pieza |
-| Familia plana o volumétrica | Clasificación que se deriva del tipo y **no se guarda** (`RC-04`) |
+| Familia plana o volumétrica | Clasificación que se deriva del tipo y **no se guarda** (`RC-06004`) |
 | Especie de observación | Atributo que vale `Advertencia` o `Error de validación` |
 | Desenlace | Término colectivo de aprobar y rechazar |
 | Alcance del administrador | Los tres estados de trabajo que no son `Borrador` |

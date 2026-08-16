@@ -44,7 +44,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los dos v
 | Mantenibilidad | **Alta** | **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización (`05` §8); **0** advertencias de construcción (intake §17.1.P.8) |
 | Eficiencia de desempeño | **Media**, y sólo de construcción | Batería de dominio completa en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10]. No hay métrica de runtime porque no hay runtime propio |
 | Seguridad | **Baja como implementación, alta como regla** | El proyecto de código no deriva ni compara credenciales: la contraseña llega ya derivada (intake §17.1.P.5). Lo que sí se verifica es `INV-06` e `INV-09`, que condicionan el acceso |
-| Compatibilidad | **Media** | La superficie pública es contrato para `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`; su estabilidad la gobierna [`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) |
+| Compatibilidad | **Media** | La superficie pública es contrato para `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`; su estabilidad la gobierna [`ADR-02003`](../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) |
 | Usabilidad | **No aplica como atributo de interfaz** | `tiene_ui_final` es false. Su equivalente es la experiencia del desarrollador, que documenta [`../03-UX-UI-DX/DX-Developer-Experience.md`](../03-UX-UI-DX/DX-Developer-Experience.md) |
 | Portabilidad | **Baja** | Plataforma única sin sufijo de sistema operativo (intake §17.1.P.9). No hay matriz de plataformas que probar |
 
@@ -59,15 +59,15 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 | QG-01 | El guion de construcción termina en **0 y sin advertencias** | Etapa `build` del pipeline | **Bloquea la fusión** (intake §17.1.P.8) |
 | QG-02 | El guion de pruebas pasa **entero**: cero pruebas rojas y cero deshabilitadas sin motivo escrito | Etapa `test` del pipeline | Bloquea la fusión |
 | QG-03 | La cobertura alcanza el mínimo declarado: **90 %** de líneas y **85 %** de ramas [ASUNCIÓN del intake §17.1.P.6] | Informe de cobertura de la etapa `test` | **Condicionado**, ver §3.1 |
-| QG-04 | El archivo de proyecto declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | Inspección del archivo de proyecto, en revisión y como prueba de inspección (`TC-24`) | Bloquea la fusión. Es la propiedad que justifica el estilo entero ([`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md)) |
-| QG-05 | **100 %** de las **42** condiciones del catálogo alcanzadas por prueba, y **0** condiciones emitidas fuera del catálogo | Prueba de inspección en las dos direcciones (`TC-23`) | Bloquea la fusión |
-| QG-06 | **100 %** de los **nueve** invariantes con al menos una prueba que verifique su violación rechazada, **sin dobles de prueba** | Matriz invariante contra prueba de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5, revisada al cerrar cada etapa (`TC-26`) | Bloquea el cierre de la etapa |
+| QG-04 | El archivo de proyecto declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | Inspección del archivo de proyecto, en revisión y como prueba de inspección (`TC-02024`) | Bloquea la fusión. Es la propiedad que justifica el estilo entero ([`ADR-02001`](../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md)) |
+| QG-05 | **100 %** de las **42** condiciones del catálogo alcanzadas por prueba, y **0** condiciones emitidas fuera del catálogo | Prueba de inspección en las dos direcciones (`TC-02023`) | Bloquea la fusión |
+| QG-06 | **100 %** de los **nueve** invariantes con al menos una prueba que verifique su violación rechazada, **sin dobles de prueba** | Matriz invariante contra prueba de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5, revisada al cerrar cada etapa (`TC-02026`) | Bloquea el cierre de la etapa |
 | QG-07 | La batería completa termina en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10] | Duración total reportada por el ejecutor en la etapa `test` | **Condicionado**, ver §3.1 |
-| QG-08 | Ninguna condición prevista viaja como excepción de control de flujo | Revisión de la superficie pública contra [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Se rechaza en revisión aunque compile |
+| QG-08 | Ninguna condición prevista viaja como excepción de control de flujo | Revisión de la superficie pública contra [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Se rechaza en revisión aunque compile |
 
 ### 3.1 Qué significa que un gate esté condicionado
 
-`QG-03` y `QG-07` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para el tiempo de la batería—. [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) `BT-15` declara el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
+`QG-03` y `QG-07` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para el tiempo de la batería—. [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) `BT-02015` declara el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
 
 Condicionado no quiere decir opcional. La medición se hace igual y el resultado se registra; lo que queda en suspenso es la consecuencia automática. Un incumplimiento se trata como hallazgo del punto de control de la etapa y no como rechazo de la fusión.
 
@@ -89,7 +89,7 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 | --- | --- | --- |
 | Al abrir la rama de cada etapa | Qué casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) entran en alcance, según las historias de la etapa | El alcance de testing de la etapa, en [`Plan-Pruebas.md`](Plan-Pruebas.md) §5 |
 | Al cerrar cada etapa | La matriz de cobertura entera, incluida la de los nueve invariantes; el estado de cada `TC-XX` | Matriz actualizada y la constancia de los gates medidos |
-| Al cerrar la etapa `d` | Los dos valores rotulados [ASUNCIÓN], por `BT-15` | La confirmación del Product Owner, o su continuidad como asunción |
+| Al cerrar la etapa `d` | Los dos valores rotulados [ASUNCIÓN], por `BT-02015` | La confirmación del Product Owner, o su continuidad como asunción |
 | Ante todo defecto cerrado | Que exista al menos un `TC-XX` nuevo o extendido que lo prevenga | La entrada correspondiente en el catálogo de casos de prueba |
 
 **La cadencia es por etapa y no por sprint**, porque este producto no tiene sprints: la unidad de planificación es la etapa ([`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §1.2, citado por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1). **No se declara ninguna frecuencia calendaria**: el intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y una cadencia en semanas sería un plazo que ninguna fuente da.

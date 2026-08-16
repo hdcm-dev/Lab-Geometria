@@ -30,12 +30,12 @@ Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los
 
 | ADR | Título | Categoría | Estado |
 | --- | --- | --- | --- |
-| [ADR-01](Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) | Modelo de dominio rico con invariantes explícitas y cero dependencias | Estilo | Propuesto |
-| [ADR-02](Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | La superficie pública son guardas con resultado tipado, no excepciones | Estilo | Propuesto |
-| [ADR-03](Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) | Versionado por versionado semántico sin publicación, y estabilidad de la superficie | Despliegue | Propuesto |
-| [ADR-04](Adrs/ADR-04-Frontera-De-Autenticacion-Y-Autorizacion.md) | Frontera de autenticación: el dominio modela la condición y no el mecanismo | Seguridad | Propuesto |
-| [ADR-05](Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md) | Puerta única de admisibilidad para las guardas de acceso de la cuenta | Seguridad | Propuesto |
-| [ADR-06](Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) | El dominio no lee el reloj ni el conjunto de entidades: los dos entran por parámetro | Estilo | Propuesto |
+| [ADR-02001](Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) | Modelo de dominio rico con invariantes explícitas y cero dependencias | Estilo | Propuesto |
+| [ADR-02002](Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | La superficie pública son guardas con resultado tipado, no excepciones | Estilo | Propuesto |
+| [ADR-02003](Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) | Versionado por versionado semántico sin publicación, y estabilidad de la superficie | Despliegue | Propuesto |
+| [ADR-02004](Adrs/ADR-02004-Frontera-De-Autenticacion-Y-Autorizacion.md) | Frontera de autenticación: el dominio modela la condición y no el mecanismo | Seguridad | Propuesto |
+| [ADR-02005](Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) | Puerta única de admisibilidad para las guardas de acceso de la cuenta | Seguridad | Propuesto |
+| [ADR-02006](Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) | El dominio no lee el reloj ni el conjunto de entidades: los dos entran por parámetro | Estilo | Propuesto |
 
 Ninguna superada, ninguna rechazada.
 
@@ -46,9 +46,9 @@ Los seis, con su objetivo numérico y su mecanismo, están en [`Arquitectura-Pro
 ## 5. Orden de lectura sugerido
 
 1. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §2 y §3 — el estilo y los cinco componentes. Sin esto, el resto se lee como documentación de una biblioteca de utilidades, que es lo que este proyecto de código no es.
-2. [`Adrs/ADR-01`](Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) — la decisión de la que dependen todas las demás.
+2. [`Adrs/ADR-02001`](Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) — la decisión de la que dependen todas las demás.
 3. [`Contratos-Abstractions.md`](Contratos-Abstractions.md) §3 — las trece operaciones y, sobre todo, la columna de lo que cada una **exige resuelto** por el consumidor. Es la frontera del proyecto de código en forma de tabla.
-4. [`Adrs/ADR-04`](Adrs/ADR-04-Frontera-De-Autenticacion-Y-Autorizacion.md) y [`ADR-05`](Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md) — juntas, porque la segunda es la forma concreta que toma la primera.
+4. [`Adrs/ADR-02004`](Adrs/ADR-02004-Frontera-De-Autenticacion-Y-Autorizacion.md) y [`ADR-02005`](Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) — juntas, porque la segunda es la forma concreta que toma la primera.
 5. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10 — la trazabilidad, para consultar por regla o por invariante.
 
 ## 6. Artefactos omitidos y su motivo

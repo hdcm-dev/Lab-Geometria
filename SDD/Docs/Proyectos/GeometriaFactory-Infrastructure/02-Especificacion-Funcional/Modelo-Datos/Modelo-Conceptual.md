@@ -35,7 +35,7 @@
 
 Es el modelo **conceptual** de lo que el producto guarda: qué entidades existen, qué atributos tienen y cómo se relacionan. **Es el único documento de la cadena documental que describe el dato guardado**, porque `GeometriaFactory-Infrastructure` es el proyecto de código que modela y ejerce la persistencia del producto: el `PRODUCT-MANIFEST` §5 declara ese flag true acá y también en `GeometriaFactory-Api`, que **delega en éste** y sólo toma de configuración la ruta y dispara la preparación al arrancar.
 
-**No es un esquema físico.** No fija nombres de tablas, de columnas ni de tipos de dato, y no propone índices: eso es de `05-Arquitectura-Tecnica` y se materializa en las transformaciones de esquema que `CU-10` aplica al arrancar. Los conceptos se nombran acá en lenguaje de dominio, igual que en el resto de esta categoría.
+**No es un esquema físico.** No fija nombres de tablas, de columnas ni de tipos de dato, y no propone índices: eso es de `05-Arquitectura-Tecnica` y se materializa en las transformaciones de esquema que `CU-06010` aplica al arrancar. Los conceptos se nombran acá en lenguaje de dominio, igual que en el resto de esta categoría.
 
 **No es el modelo del dominio.** El dominio declara entidades, invariantes y máquinas de estado, y no conoce el motor de persistencia. Este documento declara cómo esas entidades **sobreviven a que el proceso se apague**. Cuando los dos digan cosas distintas, manda el modelo del dominio: acá se materializa, no se decide.
 
@@ -50,7 +50,7 @@ Las nueve decisiones vienen del intake y se transcriben para que este documento 
 | Modo de diario | **WAL** |
 | Concurrencia de escritura | **Escritor único**: el motor no admite escrituras concurrentes |
 | Alcance de la unidad de trabajo | **Una por operación** |
-| Versionado del esquema | **Transformaciones aplicadas automáticamente al arrancar**, sobre base inexistente o desactualizada ([`CU-10`](../Casos-De-Uso/CU-10-Preparar-El-Almacen-Al-Arrancar.md)) |
+| Versionado del esquema | **Transformaciones aplicadas automáticamente al arrancar**, sobre base inexistente o desactualizada ([`CU-06010`](../Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md)) |
 | Almacenamiento del texto del alumno | **Como texto en la fila del trabajo.** No se consulta por su contenido |
 | Instancias por despliegue | **Una instancia, un curso, un administrador.** El modelo **no** lleva ninguna columna de pertenencia a instancia |
 | Respaldo | Copia del archivo con el diario activo, consistente. **Su frecuencia queda a definir por el docente** |
@@ -80,9 +80,9 @@ erDiagram
 | Nombre y apellido | Datos del alta |
 | Papel | `Alumno` o `Administrador`. **Una sola cuenta con papel `Administrador` en el almacén** |
 | Estado de cuenta | `Pendiente`, `Habilitado` o `Bloqueado` |
-| Credencial derivada | **Nula mientras la cuenta está `Pendiente`, y con valor desde el acto de habilitación**, que la fija con la provisoria que el sistema produce (**RN-16**). Nunca en claro, nunca con resumen simple |
-| Marca de cambio de contraseña pendiente | Atributo propio, **que no es un estado de cuenta** (`RC-07`) |
-| Fecha de alta | La aporta el consumidor. **No hay fecha de última modificación de la cuenta**, y el motivo está en `RC-06` |
+| Credencial derivada | **Nula mientras la cuenta está `Pendiente`, y con valor desde el acto de habilitación**, que la fija con la provisoria que el sistema produce (**RN-06016**). Nunca en claro, nunca con resumen simple |
+| Marca de cambio de contraseña pendiente | Atributo propio, **que no es un estado de cuenta** (`RC-06007`) |
+| Fecha de alta | La aporta el consumidor. **No hay fecha de última modificación de la cuenta**, y el motivo está en `RC-06006` |
 
 ### 3.3 Trabajo
 
@@ -91,25 +91,25 @@ erDiagram
 | Identidad propia | Identificador del trabajo |
 | Dueño | La cuenta a la que pertenece. **Un trabajo sin dueño no es un trabajo** |
 | Nombre y descripción | Datos que el alumno escribe |
-| `Fecha` | **La escribe el alumno.** No es un sello (`RC-06`) |
-| Texto original | El texto que el alumno pegó, **conservado literal** (`RC-01`) |
-| Cantidad de figuras del conjunto raíz | Cuántas trae el texto interpretado, **incluidas las no reconstruidas**. Es el rango de posiciones válidas (`RC-02`) |
+| `Fecha` | **La escribe el alumno.** No es un sello (`RC-06006`) |
+| Texto original | El texto que el alumno pegó, **conservado literal** (`RC-06001`) |
+| Cantidad de figuras del conjunto raíz | Cuántas trae el texto interpretado, **incluidas las no reconstruidas**. Es el rango de posiciones válidas (`RC-06002`) |
 | Estado | `Borrador`, `Pendiente`, `Finalizado` o `Rechazado` |
-| Comentario del administrador | Texto libre y nulable, con la fecha y el identificador de quien lo dejó. **Campo, no entidad, y sin historial** (`RC-07`) |
-| Fecha de creación y fecha de última modificación | Los dos sellos que produce el sistema por el puerto de reloj (`RC-06`) |
+| Comentario del administrador | Texto libre y nulable, con la fecha y el identificador de quien lo dejó. **Campo, no entidad, y sin historial** (`RC-06007`) |
+| Fecha de creación y fecha de última modificación | Los dos sellos que produce el sistema por el puerto de reloj (`RC-06006`) |
 
 ### 3.4 Pieza
 
 | Atributo | Qué guarda |
 | --- | --- |
 | Trabajo al que pertenece | — |
-| Posición en el conjunto raíz | **Es su identidad**, y no se compacta (`RC-02`) |
+| Posición en el conjunto raíz | **Es su identidad**, y no se compacta (`RC-06002`) |
 | Tipo | El discriminante que el texto del alumno declara |
 | Dimensiones | Las que su tipo requiere |
-| `Area` declarada y `Area` derivada | **Los dos, por separado** (`RC-03`) |
+| `Area` declarada y `Area` derivada | **Los dos, por separado** (`RC-06003`) |
 | `Volumen` declarado y `Volumen` derivado | Los dos, cuando la pieza es volumétrica |
 
-**La familia plana o volumétrica no se guarda** (`RC-04`).
+**La familia plana o volumétrica no se guarda** (`RC-06004`).
 
 ### 3.5 Componente
 
@@ -129,7 +129,7 @@ erDiagram
 | Trabajo al que pertenece | **No cuelga de la pieza**, y por eso puede designar una posición sin pieza |
 | Especie | `Advertencia` o `Error de validación` |
 | Posición de la figura y campo | La ubicación que el mensaje declara |
-| Valor declarado y valor derivado | **Sólo en la advertencia**, y los dos (`RC-03`) |
+| Valor declarado y valor derivado | **Sólo en la advertencia**, y los dos (`RC-06003`) |
 
 ## 4. Conjuntos cerrados
 
@@ -146,13 +146,13 @@ erDiagram
 
 | RC | Enunciado en una línea | CU donde se hace cumplir |
 | --- | --- | --- |
-| [RC-01](reglas-conceptuales-de-modelo/RC-01-Texto-Original-Escrito-Una-Sola-Vez.md) | El texto original se escribe una sola vez y no se reescribe | CU-03 |
-| [RC-02](reglas-conceptuales-de-modelo/RC-02-Identidad-Posicional-De-La-Pieza.md) | La identidad de la pieza es su posición, y las posiciones no se compactan | CU-01, CU-03 |
-| [RC-03](reglas-conceptuales-de-modelo/RC-03-Valor-Declarado-Y-Derivado-Por-Separado.md) | El valor declarado y el derivado se guardan por separado | CU-02, CU-03 |
-| [RC-04](reglas-conceptuales-de-modelo/RC-04-La-Familia-No-Se-Persiste.md) | La familia plana o volumétrica no se persiste | CU-01, CU-03 |
-| [RC-05](reglas-conceptuales-de-modelo/RC-05-Retiro-Fisico-Con-Arrastre.md) | El retiro es físico y la baja arrastra todo, en una sola unidad de trabajo | CU-04 |
-| [RC-06](reglas-conceptuales-de-modelo/RC-06-Tres-Sellos-De-Tiempo-Distintos.md) | Los tres tiempos del trabajo son distintos y no se confunden | CU-03, CU-09 |
-| [RC-07](reglas-conceptuales-de-modelo/RC-07-La-Marca-No-Es-Un-Estado-De-Cuenta.md) | La marca no es un estado de cuenta, y el comentario no es una observación | CU-03, CU-05 |
+| [RC-06001](reglas-conceptuales-de-modelo/RC-06001-Texto-Original-Escrito-Una-Sola-Vez.md) | El texto original se escribe una sola vez y no se reescribe | CU-06003 |
+| [RC-06002](reglas-conceptuales-de-modelo/RC-06002-Identidad-Posicional-De-La-Pieza.md) | La identidad de la pieza es su posición, y las posiciones no se compactan | CU-06001, CU-06003 |
+| [RC-06003](reglas-conceptuales-de-modelo/RC-06003-Valor-Declarado-Y-Derivado-Por-Separado.md) | El valor declarado y el derivado se guardan por separado | CU-06002, CU-06003 |
+| [RC-06004](reglas-conceptuales-de-modelo/RC-06004-La-Familia-No-Se-Persiste.md) | La familia plana o volumétrica no se persiste | CU-06001, CU-06003 |
+| [RC-06005](reglas-conceptuales-de-modelo/RC-06005-Retiro-Fisico-Con-Arrastre.md) | El retiro es físico y la baja arrastra todo, en una sola unidad de trabajo | CU-06004 |
+| [RC-06006](reglas-conceptuales-de-modelo/RC-06006-Tres-Sellos-De-Tiempo-Distintos.md) | Los tres tiempos del trabajo son distintos y no se confunden | CU-06003, CU-06009 |
+| [RC-06007](reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md) | La marca no es un estado de cuenta, y el comentario no es una observación | CU-06003, CU-06005 |
 
 **Siete reglas conceptuales, cada una con archivo propio.** Ninguna redacta una regla de negocio: las dieciséis del producto viven en `GeometriaFactory-Domain` y acá se **materializan**.
 
@@ -166,8 +166,8 @@ erDiagram
 | Los datos que cruzan la frontera del proceso | `GeometriaFactory-Contracts` |
 | El nombre de las tablas, las columnas y los índices | `05-Arquitectura-Tecnica`, y las transformaciones de esquema |
 | Una columna de pertenencia a instancia | **No existe y no va a existir**: una instancia, un curso, un administrador |
-| Una marca de borrado lógico | **No existe**: el retiro es físico (`RC-05`) |
-| Un historial de comentarios | **No existe**: los estados de cierre son terminales y el comentario es un campo (`RC-07`) |
+| Una marca de borrado lógico | **No existe**: el retiro es físico (`RC-06005`) |
+| Un historial de comentarios | **No existe**: los estados de cierre son terminales y el comentario es un campo (`RC-06007`) |
 
 ## 7. Puntos abiertos de este modelo
 
@@ -184,5 +184,5 @@ erDiagram
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara las nueve decisiones de almacenamiento, las cinco entidades con sus atributos, las cuatro relaciones, los cuatro conjuntos cerrados, las siete reglas conceptuales de modelo con su archivo propio, la tabla de lo que no vive acá y los cuatro puntos abiertos. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
-| 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-16) y la precisión de F-04.** La fila de **credencial derivada** decía que era nula «hasta el primer ingreso efectivo», y eso dejó de ser cierto: se fija **en el acto de habilitación**, con la contraseña provisoria que el sistema produce. **Ninguna tabla, ninguna clave, ninguna cardinalidad y ninguna regla conceptual del modelo cambia**: lo que cambió es en qué momento el atributo pasa de nulo a tener valor, no su forma ni su nulabilidad. La cabecera cita el intake **1.13**. Sube minor. |
-| 1.3 | 2026-08-10 | **Cierra el hallazgo `C-02` (P0) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** La fila de **§6** que remite a `GeometriaFactory-Domain` decía «Las **quince** reglas de negocio y los nueve invariantes»; las reglas son **dieciséis**, `RN-01` a `RN-16`, contadas sobre los archivos de `Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, y los invariantes siguen siendo **nueve**, `INV-01` a `INV-09`, también recontados. Pasa a **dieciséis**, y con ella la nota de **§5** —«las quince del producto viven en `GeometriaFactory-Domain`»—, que es la segunda declaración viva del mismo archivo y que el informe tampoco registra. La cabecera pasa a citar el intake **1.14**. **Ninguna entidad, ningún atributo, ninguna relación y ninguna restricción de este modelo cambia.** Sube minor. |
+| 1.2 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-06016) y la precisión de F-04.** La fila de **credencial derivada** decía que era nula «hasta el primer ingreso efectivo», y eso dejó de ser cierto: se fija **en el acto de habilitación**, con la contraseña provisoria que el sistema produce. **Ninguna tabla, ninguna clave, ninguna cardinalidad y ninguna regla conceptual del modelo cambia**: lo que cambió es en qué momento el atributo pasa de nulo a tener valor, no su forma ni su nulabilidad. La cabecera cita el intake **1.13**. Sube minor. |
+| 1.3 | 2026-08-10 | **Cierra el hallazgo `C-02` (P0) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** La fila de **§6** que remite a `GeometriaFactory-Domain` decía «Las **quince** reglas de negocio y los nueve invariantes»; las reglas son **dieciséis**, `RN-06001` a `RN-06016`, contadas sobre los archivos de `Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, y los invariantes siguen siendo **nueve**, `INV-01` a `INV-09`, también recontados. Pasa a **dieciséis**, y con ella la nota de **§5** —«las quince del producto viven en `GeometriaFactory-Domain`»—, que es la segunda declaración viva del mismo archivo y que el informe tampoco registra. La cabecera pasa a citar el intake **1.14**. **Ninguna entidad, ningún atributo, ninguna relación y ninguna restricción de este modelo cambia.** Sube minor. |

@@ -30,7 +30,7 @@
 | [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Pirámide objetivo, cobertura por componente con el piso propio del validador, tooling, dobles mínimos y los **ocho** escenarios reales del intake como texto literal |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.1 | Propuesto | Alcance, criterios de entrada y salida, **diez** riesgos de calidad y plan por etapa |
 | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, regla conceptual ↔ tests, batería ↔ escenarios y cobertura por componente |
-| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y cinco** casos, `TC-01` a `TC-35`, cuyos **diez primeros son los diez de la batería** |
+| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y cinco** casos, `TC-06001` a `TC-06035`, cuyos **diez primeros son los diez de la batería** |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter bloqueante, condicionado o no exigible |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
 | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.0 | Propuesto | **Tres** sondas `VER-XX` tomadas de los contratos de verificación de [`../10-Examples/`](../10-Examples/), sin ninguna fila de línea de base visual |
@@ -51,7 +51,7 @@
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
 | `Guia-Testing-Extensibilidad.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 lo exige para `library` **con plugins** y lo omite para los tipos sin puntos de extensión. El flag `tiene_extensibilidad` de este proyecto de código es **false** (`PRODUCT-MANIFEST` §5): el punto de extensión del producto es el contrato de la fachada del visor, y su guía vive en la categoría 08 de `GeometriaFactory-Visor` |
-| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Emitido el 2026-08-11**, en 1.0 | **La omisión que esta fila declaraba quedó cerrada.** Se omitía porque `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumplía las dos condiciones: `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5) y su `10-Examples` no estaba emitida. **La segunda condición dejó de cumplirse**: [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 declara **tres** contratos de verificación, `VER-01` a `VER-03`, y de ellos se toman las **tres** sondas de la matriz. La primera condición sigue en pie, y por eso la matriz **no tiene ninguna fila de línea de base visual**. Es el caso que `Deriva-Rules.md` §2.3 prevé —«cuando el proyecto de código no ejecuta Fase B2 pero sí tiene categoría 10, la matriz se emite igual: […] poblada solo con sondas `VER-XX`», con la elisión marcada; el fragmento suprimido asigna la apertura a AG-08 en la Fase E, y la matriz declara en su §1 por qué acá la abre AG-10—. La fila se conserva con su desenlace, en lugar de retirarse, para que el motivo de la omisión y el de su cierre queden legibles juntos |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Emitido el 2026-08-11**, en 1.0 | **La omisión que esta fila declaraba quedó cerrada.** Se omitía porque `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumplía las dos condiciones: `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5) y su `10-Examples` no estaba emitida. **La segunda condición dejó de cumplirse**: [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 declara **tres** contratos de verificación, `VER-06001` a `VER-06003`, y de ellos se toman las **tres** sondas de la matriz. La primera condición sigue en pie, y por eso la matriz **no tiene ninguna fila de línea de base visual**. Es el caso que `Deriva-Rules.md` §2.3 prevé —«cuando el proyecto de código no ejecuta Fase B2 pero sí tiene categoría 10, la matriz se emite igual: […] poblada solo con sondas `VER-XX`», con la elisión marcada; el fragmento suprimido asigna la apertura a AG-08 en la Fase E, y la matriz declara en su §1 por qué acá la abre AG-10—. La fila se conserva con su desenlace, en lugar de retirarse, para que el motivo de la omisión y el de su cierre queden legibles juntos |
 
 ## 4. Quality gates configurados
 
@@ -78,7 +78,7 @@ Los catorce de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3, resumidos a
 
 **`QG-07` no es condicionado y conviene no confundirlo**: el intake §22 enumera la tolerancia de 0.01 entre «lo que NO es asunción», con su fundamento.
 
-**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 asigna `PT-04` a su épica `EP-01`. Su consecuencia es la del intake §15: **una puerta que no pasa detiene la planificación de las etapas que dependen de ella**.
+**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 asigna `PT-04` a su épica `EP-06001`. Su consecuencia es la del intake §15: **una puerta que no pasa detiene la planificación de las etapas que dependen de ella**.
 
 ## 5. Recuentos que esta sección sostiene
 
@@ -89,7 +89,7 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 | Casos de uso | **10** | `02` §5 |
 | Puertos implementados | **4**, más **2** mecanismos y **1** responsabilidad de arranque | `02` §3 |
 | Reglas de negocio del producto | **16**, con **14** con tramo acá y **2** sin él | `02` §6; se enuncian en `GeometriaFactory-Domain` |
-| Reglas con tramo **principal** acá | **3** — `RN-08`, `RN-09` y `RN-14` | `02` §6 |
+| Reglas con tramo **principal** acá | **3** — `RN-06008`, `RN-06009` y `RN-06014` | `02` §6 |
 | Reglas conceptuales de modelo | **7** | `02` `Modelo-Datos/reglas-conceptuales-de-modelo/` |
 | Condiciones distintas catalogadas | **17** | `03` §7.1 |
 | Historias de usuario | **25** | `06` `Product-Backlog.md` §3 |

@@ -55,20 +55,20 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | --- | --- | --- |
 | QG-01 | `build` | Bloqueante |
 | QG-02 | `test` | Bloqueante |
-| QG-03 | `test`, batería del validador (`TC-01` a `TC-10`) | Bloqueante |
-| QG-04 | **`verificar-transformaciones`**, con `TC-32` | Bloqueante |
+| QG-03 | `test`, batería del validador (`TC-06001` a `TC-06010`) | Bloqueante |
+| QG-04 | **`verificar-transformaciones`**, con `TC-06032` | Bloqueante |
 | QG-05 | `test`, informe de cobertura por componente | **Condicionado** |
 | QG-06 | `test`, informe acotado a los dos motores | **Condicionado** |
-| QG-07 | `test`, con `TC-09` | Bloqueante. **No es condicionado** |
-| QG-08 | `build`, inspección de dependencias de los dos motores (`TC-14`) | Bloqueante |
-| QG-09 | `test`, con `TC-27` | Bloqueante |
-| QG-10 | `test`, con `TC-19` | Bloqueante |
-| QG-11 | `test`, con `TC-16` y `TC-21` | Bloqueante |
-| QG-12 | `test`, con `TC-30` | Bloqueante |
-| QG-13 | `test`, con `TC-34` y `TC-35` en las dos direcciones | Bloqueante |
-| QG-14 | `test`, con `TC-15` | **Condicionado** |
+| QG-07 | `test`, con `TC-06009` | Bloqueante. **No es condicionado** |
+| QG-08 | `build`, inspección de dependencias de los dos motores (`TC-06014`) | Bloqueante |
+| QG-09 | `test`, con `TC-06027` | Bloqueante |
+| QG-10 | `test`, con `TC-06019` | Bloqueante |
+| QG-11 | `test`, con `TC-06016` y `TC-06021` | Bloqueante |
+| QG-12 | `test`, con `TC-06030` | Bloqueante |
+| QG-13 | `test`, con `TC-06034` y `TC-06035` en las dos direcciones | Bloqueante |
+| QG-14 | `test`, con `TC-06015` | **Condicionado** |
 
-**Los tres condicionados se miden y se registran igual.** Dependen de valores rotulados **[ASUNCIÓN]** en el intake §22 —`A-3` para las dos coberturas, `A-5` para los 200 ms—, y `Estrategia-Calidad.md` §3.1 declara que la puerta no se declara bloqueante en esta categoría hasta que el Product Owner los confirme. **Confirmados, los tres pasan a bloqueantes sin ningún otro cambio.** La tarea que los eleva es `BT-23`, al cerrar la etapa `d`.
+**Los tres condicionados se miden y se registran igual.** Dependen de valores rotulados **[ASUNCIÓN]** en el intake §22 —`A-3` para las dos coberturas, `A-5` para los 200 ms—, y `Estrategia-Calidad.md` §3.1 declara que la puerta no se declara bloqueante en esta categoría hasta que el Product Owner los confirme. **Confirmados, los tres pasan a bloqueantes sin ningún otro cambio.** La tarea que los eleva es `BT-06023`, al cerrar la etapa `d`.
 
 **`QG-07` lleva número y no es condicionado**, y la distinción es de la fuente: el intake §22 enumera la tolerancia de **0.01** entre «lo que **NO** es asunción», con su fundamento. El caso testigo y la consecuencia de confundirlo están en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.3.
 

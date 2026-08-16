@@ -33,22 +33,22 @@
 
 | Épica | Etapa | Historias | Tareas técnicas |
 | --- | --- | --- | --- |
-| EP-01 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-01 a BT-05 |
-| EP-02 Identidad del administrador y sesión | `c` | US-01, US-14, US-16 | BT-06 a BT-09 |
-| EP-03 Ciclo de vida de la cuenta de alumno | `d` | US-02, US-03, US-04, US-05, US-21, US-22 | BT-10, BT-11 |
-| EP-04 Gestión del trabajo | `e` | US-06, US-07, US-08, US-09, US-19 | BT-12, BT-13 |
-| EP-05 Interpretación y verificación del dato del alumno | `f` | US-11, US-13, US-15 | BT-14 |
-| EP-06 Visualización del trabajo | `g` | US-12 | BT-14 |
-| EP-07 Desenlace de la entrega | `h` | US-17, US-18, US-20 | BT-15 |
-| EP-08 Capacidades de prioridad menor | `i…` | US-10 | — |
+| EP-08001 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-08001 a BT-08005 |
+| EP-08002 Identidad del administrador y sesión | `c` | US-08001, US-08014, US-08016 | BT-08006 a BT-08009 |
+| EP-08003 Ciclo de vida de la cuenta de alumno | `d` | US-08002, US-08003, US-08004, US-08005, US-08021, US-08022 | BT-08010, BT-08011 |
+| EP-08004 Gestión del trabajo | `e` | US-08006, US-08007, US-08008, US-08009, US-08019 | BT-08012, BT-08013 |
+| EP-08005 Interpretación y verificación del dato del alumno | `f` | US-08011, US-08013, US-08015 | BT-08014 |
+| EP-08006 Visualización del trabajo | `g` | US-08012 | BT-08014 |
+| EP-08007 Desenlace de la entrega | `h` | US-08017, US-08018, US-08020 | BT-08015 |
+| EP-08008 Capacidades de prioridad menor | `i…` | US-08010 | — |
 
 ## 4. Historias `Must Have` del tramo comprometido
 
-**Veintiuna de las veintidós.** La restante, US-10, es `Could` y cae en la fase `i…`, **fuera** del tramo comprometido de ocho etapas. El fundamento del reparto está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
+**Veintiuna de las veintidós.** La restante, US-08010, es `Could` y cae en la fase `i…`, **fuera** del tramo comprometido de ocho etapas. El fundamento del reparto está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
 
 ## 5. Tareas técnicas prioritarias
 
-**BT-02**, la puerta de cero referencias hacia `GeometriaFactory-Domain`, porque el intake la declara como la vía por la que el acoplamiento vuelve. **BT-08**, la inspección de superficie pública, porque es el único mecanismo con el que la regla de exposición deja de ser una declaración. Y **BT-06** con **BT-07**, el tipo de error único y su conjunto cerrado de diecisiete códigos, porque los otros siete contratos de uso comparten sus caminos de error.
+**BT-08002**, la puerta de cero referencias hacia `GeometriaFactory-Domain`, porque el intake la declara como la vía por la que el acoplamiento vuelve. **BT-08008**, la inspección de superficie pública, porque es el único mecanismo con el que la regla de exposición deja de ser una declaración. Y **BT-08006** con **BT-08007**, el tipo de error único y su conjunto cerrado de diecisiete códigos, porque los otros siete contratos de uso comparten sus caminos de error.
 
 ## 6. Definition of Ready vigente
 

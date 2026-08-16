@@ -47,7 +47,7 @@
 | El orden de las etapas, sus criterios de transición y dónde se miden las puertas | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) |
 | El punto de extensión del producto y su contrato | [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) y [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §4 |
 | La Definition of Done canónica y el guion de medición de la fluidez | `08-Calidad-Y-Pruebas`, **todavía no emitida** |
-| Si el bundle generado se versiona o se ignora | `09-Devops`, **todavía no emitida**. Este plan lo eleva con su plazo, como BT-03 |
+| Si el bundle generado se versiona o se ignora | `09-Devops`, **todavía no emitida**. Este plan lo eleva con su plazo, como BT-12003 |
 | El sample `S-1` como entregable de ejemplos | `10-Examples`, **todavía no emitida** |
 
 ## 5. Control de cambios

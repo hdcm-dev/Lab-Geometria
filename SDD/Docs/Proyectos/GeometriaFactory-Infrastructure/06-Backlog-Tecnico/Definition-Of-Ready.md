@@ -28,7 +28,7 @@
 Ocho criterios, todos respondibles con sí o no. Los cuatro últimos son propios de este proyecto de código.
 
 1. **Traza a un caso de uso.** La historia declara al menos un `CU-XX` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5.
-2. **Declara su necesidad de negocio y su etapa del producto.** Con **una excepción declarada**: las dos historias de `CU-09` pueden no declarar necesidad, porque `02` §7.2 declara que ese caso de uso **no traza a ninguna** y explica por qué.
+2. **Declara su necesidad de negocio y su etapa del producto.** Con **una excepción declarada**: las dos historias de `CU-06009` pueden no declarar necesidad, porque `02` §7.2 declara que ese caso de uso **no traza a ninguna** y explica por qué.
 3. **Tiene criterios de aceptación en Given/When/Then, con al menos dos escenarios**, uno de camino feliz y uno de borde.
 4. **Declara el componente de `05` §3.1 que la sostiene**, y si toca el almacén, **las reglas conceptuales de modelo que materializa**, de las siete.
 5. **Declara que no toma ninguna decisión de negocio.** Una historia que decida un estado, una autorización, una admisibilidad o el resultado de una comparación de confirmación **está mal ubicada**: `02` §4 lo enuncia en una línea, y esta capa **provee el mecanismo**.
@@ -51,9 +51,9 @@ Seis criterios, todos respondibles con sí o no.
 
 | Caso | Qué se flexibiliza | Quién lo aprueba |
 | --- | --- | --- |
-| Historias de `CU-09`, el sello del reloj | El criterio 2 de §1 se cumple **declarando que no traza a ninguna necesidad y por qué**, según `02` §7.2. Inventarle una traza sería peor que declarar la ausencia | El Product Owner |
+| Historias de `CU-06009`, el sello del reloj | El criterio 2 de §1 se cumple **declarando que no traza a ninguna necesidad y por qué**, según `02` §7.2. Inventarle una traza sería peor que declarar la ausencia | El Product Owner |
 | Tarea de indagación que cierra o eleva un punto abierto de `05` §11 | El criterio 3 de §2 puede cumplirse con el **resultado esperado** en lugar de con un criterio verificable de antemano | El Product Owner, en el punto de control de la etapa que la contiene |
-| Historia cuya verificación depende de uno de los valores rotulados **[ASUNCIÓN]** de `05` §8 | El criterio 3 de §1 se cumple con el valor **vigente pero declarado como asunción**, hasta que `PA-09` del backlog se cierre con BT-23. **No habilita a inventar otro número** | El Product Owner, o 08 al fijar su guion de medición |
+| Historia cuya verificación depende de uno de los valores rotulados **[ASUNCIÓN]** de `05` §8 | El criterio 3 de §1 se cumple con el valor **vigente pero declarado como asunción**, hasta que `PA-09` del backlog se cierre con BT-06023. **No habilita a inventar otro número** | El Product Owner, o 08 al fijar su guion de medición |
 | Historia del validador de figuras | Ninguno: **no se admite excepción al criterio 3 ni al 6**, y su material de prueba son **los ocho escenarios del intake §20 y ninguno inventado**. Es la mitigación del único riesgo de negocio del producto | — |
 | Tarea que toca la producción de la provisoria o la preparación del almacén | Ninguno: **no se admite excepción al criterio 4 de §2**. Los dos atajos están escritos porque los dos **dejan el sistema aparentemente funcionando**: una provisoria adivinable no se nota hasta que alguien la usa, y un almacén recreado deja el servicio impecable y sin los trabajos de nadie | — |
 
@@ -76,7 +76,7 @@ Seis criterios, todos respondibles con sí o no.
 
 **No redacta reglas de negocio ni invariantes.** Las **dieciséis** reglas y los **nueve** invariantes viven en `GeometriaFactory-Domain`; lo que esta DoR exige es que la historia los **cite por identificador**. Las **siete** reglas conceptuales de modelo sí son propias de la categoría 02 de este proyecto de código, y **no compiten con las reglas de negocio**: una regla conceptual de modelo declara cómo el dato sobrevive, no qué decidió el negocio.
 
-**Y no decide el límite de tamaño del texto.** `ADR-06` §2 decidió que el motor **no impone límite propio** y reasignó el valor y su forma de rechazo a la categoría 05 de `GeometriaFactory-Api`, que ya la tomó: **rechaza y nunca trunca**.
+**Y no decide el límite de tamaño del texto.** `ADR-06006` §2 decidió que el motor **no impone límite propio** y reasignó el valor y su forma de rechazo a la categoría 05 de `GeometriaFactory-Api`, que ya la tomó: **rechaza y nunca trunca**.
 
 ## 6. Control de cambios
 

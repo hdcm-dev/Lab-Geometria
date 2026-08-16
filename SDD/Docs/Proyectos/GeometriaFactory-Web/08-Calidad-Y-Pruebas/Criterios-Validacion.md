@@ -41,10 +41,10 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | CV-02 | Las **treinta** historias de usuario tienen su caso de verificación | Matriz §2, columna de historias | **30 de 30** |
 | CV-03 | Las **trece** restricciones transversales tienen caso de verificación | Matriz §5 | **13 de 13** |
 | CV-04 | Las **dieciséis** reglas de negocio tienen verificado **lo que esta pieza hace por ellas**, y ninguna afirmación depende de que esta pieza las haga cumplir | Matriz §4 | **16 de 16** |
-| CV-05 | **Toda acotación se verificó forzando la solicitud sin pasar por la pantalla**, y no mirando que el control no se dibuja | `TC-01`, `TC-05`, `TC-07`, `TC-15`, `TC-25`, `TC-26` | **6 de 6** casos ejecutados sobre las acotaciones vigentes |
-| CV-06 | Los **diecisiete** códigos vivos del contrato **más** el camino de ausencia de respuesta tienen mensaje de superficie, y **ninguno** expone dirección, ruta de datos ni traza | `TC-31` | **16 de 16** mensajes, con **0** exposiciones |
-| CV-07 | Los **ocho** escenarios del intake §20 están ejercitados **en su forma original y completa**, sin sustituirlos por datos sintéticos | `TC-11` a `TC-14`, `TC-17` a `TC-20`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
-| CV-08 | El escenario `E-1` produce **exactamente 3 piezas y 2 advertencias**, y el cilindro **no produce ninguna observación** | `TC-13` | 3 y 2, con **0** observaciones del cilindro. **Una tercera advertencia significa que el operador de tolerancia dejó de ser estricto** |
+| CV-05 | **Toda acotación se verificó forzando la solicitud sin pasar por la pantalla**, y no mirando que el control no se dibuja | `TC-10001`, `TC-10005`, `TC-10007`, `TC-10015`, `TC-10025`, `TC-10026` | **6 de 6** casos ejecutados sobre las acotaciones vigentes |
+| CV-06 | Los **diecisiete** códigos vivos del contrato **más** el camino de ausencia de respuesta tienen mensaje de superficie, y **ninguno** expone dirección, ruta de datos ni traza | `TC-10031` | **16 de 16** mensajes, con **0** exposiciones |
+| CV-07 | Los **ocho** escenarios del intake §20 están ejercitados **en su forma original y completa**, sin sustituirlos por datos sintéticos | `TC-10011` a `TC-10014`, `TC-10017` a `TC-10020`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
+| CV-08 | El escenario `E-1` produce **exactamente 3 piezas y 2 advertencias**, y el cilindro **no produce ninguna observación** | `TC-10013` | 3 y 2, con **0** observaciones del cilindro. **Una tercera advertencia significa que el operador de tolerancia dejó de ser estricto** |
 
 ## 3. Criterios no funcionales
 
@@ -52,18 +52,18 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
-| CV-09 | `PT-01.a`: el front publicado arranca y sirve la página inicial | **200** en la dirección pública | `TC-34` | **Puerta técnica**: si no pasa, se baja la versión objetivo del front |
-| CV-10 | `PT-01.b`: transporte del circuito | Semáforo; **amarillo aceptable** documentando la latencia percibida | `TC-34` | **Puerta técnica**: sólo el rojo obliga a cambiar el modelo de front. **Un repliegue de mayor latencia no es motivo de rediseño** |
-| CV-11 | `PT-01.c`: estabilidad del proceso | **20 minutos** continuos sin reciclado, con reconexión funcional | `TC-34` | **Puerta técnica**: es el peor escenario y **no tiene mitigación en el código** |
-| CV-12 | `PT-01.d`: salida hacia el backend | Una llamada de salud devuelve **datos reales** | `TC-34` | **Puerta técnica**: si no pasa, publicar el servicio de datos en un puerto convencional |
-| CV-13 | Pasos del guion de demostración de la etapa **y de todas las anteriores** | **100 %** **[ASUNCIÓN del intake §17.6.P.6 en cuanto a expresarlo como puerta; asunción `A-4` de §22, que declara que cambia la forma del gate y no su carácter bloqueante]** | `TC-35` | **Bloqueante.** Lo rotulado [ASUNCIÓN] es **la forma de la puerta**, y §22 declara que un cambio del Product Owner no toca su carácter. **La regla acumulativa rige igual**: no es asunción de nadie |
-| CV-14 | Peticiones del navegador hacia el servicio de datos | **0**, medidas **con los dos movimientos prendidos** | `TC-29` | **Bloqueante, sin gradación**. Una medición hecha sin la condición **no cuenta como medición** |
-| CV-15 | Salidas hacia el servicio de datos y bibliotecas de guion que consulten | **1** y **0** | `TC-30` | **Bloqueante** |
-| CV-16 | Apariciones de la credencial de sesión en el navegador | **0** | `TC-03` | **Bloqueante**. Criterio de aceptación de la etapa `c` |
-| CV-17 | Mensajes que exponen dirección, ruta de datos o traza | **0** sobre los diecisiete códigos y el camino de ausencia | `TC-31` | **Bloqueante** |
-| CV-18 | Tráfico de circuito durante la interacción con la escena | **0**, y el texto viaja **1** sola vez por trabajo | `TC-33` | **Bloqueante** |
-| CV-19 | Instancias del visor no liberadas tras **10** recorridos, con los dos movimientos prendidos | **0** | `TC-21`, puerta `PT-02` | **Puerta técnica**: si no pasa, **detiene la planificación de la etapa `g`** y no se arrastra como deuda |
-| CV-20 | Invocaciones al interior del bundle | **0**, con **6 de 6** funciones como única vía | `TC-32` | **Bloqueante** |
+| CV-09 | `PT-01.a`: el front publicado arranca y sirve la página inicial | **200** en la dirección pública | `TC-10034` | **Puerta técnica**: si no pasa, se baja la versión objetivo del front |
+| CV-10 | `PT-01.b`: transporte del circuito | Semáforo; **amarillo aceptable** documentando la latencia percibida | `TC-10034` | **Puerta técnica**: sólo el rojo obliga a cambiar el modelo de front. **Un repliegue de mayor latencia no es motivo de rediseño** |
+| CV-11 | `PT-01.c`: estabilidad del proceso | **20 minutos** continuos sin reciclado, con reconexión funcional | `TC-10034` | **Puerta técnica**: es el peor escenario y **no tiene mitigación en el código** |
+| CV-12 | `PT-01.d`: salida hacia el backend | Una llamada de salud devuelve **datos reales** | `TC-10034` | **Puerta técnica**: si no pasa, publicar el servicio de datos en un puerto convencional |
+| CV-13 | Pasos del guion de demostración de la etapa **y de todas las anteriores** | **100 %** **[ASUNCIÓN del intake §17.6.P.6 en cuanto a expresarlo como puerta; asunción `A-4` de §22, que declara que cambia la forma del gate y no su carácter bloqueante]** | `TC-10035` | **Bloqueante.** Lo rotulado [ASUNCIÓN] es **la forma de la puerta**, y §22 declara que un cambio del Product Owner no toca su carácter. **La regla acumulativa rige igual**: no es asunción de nadie |
+| CV-14 | Peticiones del navegador hacia el servicio de datos | **0**, medidas **con los dos movimientos prendidos** | `TC-10029` | **Bloqueante, sin gradación**. Una medición hecha sin la condición **no cuenta como medición** |
+| CV-15 | Salidas hacia el servicio de datos y bibliotecas de guion que consulten | **1** y **0** | `TC-10030` | **Bloqueante** |
+| CV-16 | Apariciones de la credencial de sesión en el navegador | **0** | `TC-10003` | **Bloqueante**. Criterio de aceptación de la etapa `c` |
+| CV-17 | Mensajes que exponen dirección, ruta de datos o traza | **0** sobre los diecisiete códigos y el camino de ausencia | `TC-10031` | **Bloqueante** |
+| CV-18 | Tráfico de circuito durante la interacción con la escena | **0**, y el texto viaja **1** sola vez por trabajo | `TC-10033` | **Bloqueante** |
+| CV-19 | Instancias del visor no liberadas tras **10** recorridos, con los dos movimientos prendidos | **0** | `TC-10021`, puerta `PT-02` | **Puerta técnica**: si no pasa, **detiene la planificación de la etapa `g`** y no se arrastra como deuda |
+| CV-20 | Invocaciones al interior del bundle | **0**, con **6 de 6** funciones como única vía | `TC-10032` | **Bloqueante** |
 | CV-21 | Elementos de la línea de base demostrados | **11 de 11** superficies, **73 de 73** componentes, **74 de 74** estados, **24 de 24** rutas y **29 de 29** campos | Las **61** filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Bloqueante al cierre de la etapa** para los elementos que la etapa toca |
 | CV-22 | Advertencias de construcción | **0** | Etapa de construcción del flujo de publicación | **Bloqueante** |
 
@@ -79,7 +79,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-26 | **Ninguna deriva mayor queda sin resolver.** Se corrige lo construido, o se actualiza la línea de base con aprobación humana explícita | 0 derivas mayores abiertas al cerrar la etapa |
 | CV-27 | Toda deriva **menor** queda registrada aunque no bloquee | 100 % de las menores registradas |
 | CV-28 | Todo defecto cerrado generó al menos un `TC-XX` nuevo o extendió uno existente | 1 caso de verificación por defecto cerrado, como mínimo |
-| CV-29 | Las cinco inspecciones estructurales —`TC-29` a `TC-33`— se ejecutan en **todas** las etapas a partir de aquella en que su sujeto existe | Presentes en cada ejecución |
+| CV-29 | Las cinco inspecciones estructurales —`TC-10029` a `TC-10033`— se ejecutan en **todas** las etapas a partir de aquella en que su sujeto existe | Presentes en cada ejecución |
 
 **La regla de no regresión es acumulativa por diseño y es la única red de seguridad que este proyecto de código tiene**, porque no tiene batería automatizada propia. El intake §15, regla de delivery 1, la declara: al cerrar cada etapa deben seguir pasando los guiones de todas las anteriores, **sin correcciones**.
 
@@ -89,10 +89,10 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- | --- |
 | CV-30 | Cobertura de líneas | **No aplica**: no hay proyecto de pruebas propio (intake §17.6.P.6) | **No exigible.** Si en alguna etapa se agregan pruebas automatizadas de componentes, su umbral se fija en ese momento y se registra en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 |
 | CV-31 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-22` |
-| CV-32 | Todo valor visual sale de un token del catálogo de diseño; no hay literales visuales ad hoc | 0 literales fuera del catálogo | **Bloqueante**, por la sonda `SD-54` |
-| CV-33 | Ningún instrumento de la maqueta ni valor compuesto para la maqueta llega al sistema construido | 0 instrumentos y 0 valores | **Bloqueante, sin gradación**, por las sondas `SD-59` y `SD-60` |
-| CV-34 | Recorrido completo por teclado, foco visible y contraste de **4.5:1** en las once superficies | 11 de 11 | **Bloqueante**, por las sondas `SD-51` y `SD-52` |
-| CV-35 | Ninguna superficie invoca al cliente tipado: entre una superficie y la salida hay siempre un servicio de aplicación de front | 0 invocaciones directas | **Bloqueante**, por `TC-30`. Es lo que hizo posible la Fase B2 y lo que mantiene maquetable cada superficie |
+| CV-32 | Todo valor visual sale de un token del catálogo de diseño; no hay literales visuales ad hoc | 0 literales fuera del catálogo | **Bloqueante**, por la sonda `SD-10054` |
+| CV-33 | Ningún instrumento de la maqueta ni valor compuesto para la maqueta llega al sistema construido | 0 instrumentos y 0 valores | **Bloqueante, sin gradación**, por las sondas `SD-10059` y `SD-10060` |
+| CV-34 | Recorrido completo por teclado, foco visible y contraste de **4.5:1** en las once superficies | 11 de 11 | **Bloqueante**, por las sondas `SD-10051` y `SD-10052` |
+| CV-35 | Ninguna superficie invoca al cliente tipado: entre una superficie y la salida hay siempre un servicio de aplicación de front | 0 invocaciones directas | **Bloqueante**, por `TC-10030`. Es lo que hizo posible la Fase B2 y lo que mantiene maquetable cada superficie |
 
 ## 6. Excepciones documentadas
 

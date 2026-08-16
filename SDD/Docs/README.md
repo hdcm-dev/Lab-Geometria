@@ -78,7 +78,7 @@ El mapa completo, con el grafo, los contratos que cruzan fronteras y los riesgos
 | Sección | Propósito | Responsable | Enlace |
 | --- | --- | --- | --- |
 | 00-Contexto (producto) | Visión, alcance, roadmap y compatibilidad de plataformas | AG-00 | [00-Contexto](00-Contexto/) |
-| 01-Necesidades-Negocio (producto) | Las nueve necesidades de negocio, `NB-01` a `NB-09` | AG-01 | [01-Necesidades-Negocio](01-Necesidades-Negocio/) |
+| 01-Necesidades-Negocio (producto) | Las nueve necesidades de negocio, `NB-00001` a `NB-00009` | AG-01 | [01-Necesidades-Negocio](01-Necesidades-Negocio/) |
 | Producto (producto) | Vista de producto, pipeline de producto y plan documental | AG-05, AG-09, AG-11 | [Producto](Producto/) |
 | Audit (producto) | Informes de auditoría independiente, uno por fase | Auditor independiente | [Audit](Audit/) |
 | Proyectos/GeometriaFactory-Api | Documentación 02 a 10 del servicio de datos | AG-02 a AG-11 | [GeometriaFactory-Api](Proyectos/GeometriaFactory-Api/) |

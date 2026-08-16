@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los **diez** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-01 a CU-10), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4 (**la frontera entre mecanismo y decisión** y sus cinco precisiones), §6 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §3, §4 y §8; `02-Especificacion-Funcional/Modelo-Datos/` completo; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-01 a RN-16 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/` §4 y §6, y su `CU-05` §6, que declara qué motivo recibe por el puerto de validación; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11 (RN-B3, RN-B5), §14 (RA-03), §17.3 íntegro
+**Trazabilidad upstream:** §6 de los **diez** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-06001 a CU-06010), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4 (**la frontera entre mecanismo y decisión** y sus cinco precisiones), §6 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §3, §4 y §8; `02-Especificacion-Funcional/Modelo-Datos/` completo; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-06001 a RN-06016 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/` §4 y §6, y su `CU-06005` §6, que declara qué motivo recibe por el puerto de validación; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §11 (RN-B3, RN-B5), §14 (RA-03), §17.3 íntegro
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Infrastructure
 
 ---
@@ -27,15 +27,15 @@
   - [2.4 Las tres condiciones que fallan hacia el lado seguro](#24-las-tres-condiciones-que-fallan-hacia-el-lado-seguro)
   - [2.5 El caso de uso sin condiciones](#25-el-caso-de-uso-sin-condiciones)
 - [3. Catálogo](#3-catálogo)
-  - [3.1 CU-01 Interpretar el texto original y reconstruir las piezas](#31-cu-01-interpretar-el-texto-original-y-reconstruir-las-piezas)
-  - [3.2 CU-02 Verificar los valores declarados contra los derivados](#32-cu-02-verificar-los-valores-declarados-contra-los-derivados)
-  - [3.3 CU-03 Guardar y recuperar los trabajos](#33-cu-03-guardar-y-recuperar-los-trabajos)
-  - [3.4 CU-04 Ejecutar el borrado físico y el arrastre de la baja](#34-cu-04-ejecutar-el-borrado-físico-y-el-arrastre-de-la-baja)
-  - [3.5 CU-05 Guardar y recuperar las cuentas de la comisión](#35-cu-05-guardar-y-recuperar-las-cuentas-de-la-comisión)
-  - [3.6 CU-06 Derivar la contraseña y verificar una credencial](#36-cu-06-derivar-la-contraseña-y-verificar-una-credencial)
-  - [3.7 CU-07 Producir la contraseña provisoria del reseteo](#37-cu-07-producir-la-contraseña-provisoria-del-reseteo)
-  - [3.8 CU-08 Emitir el acceso firmado](#38-cu-08-emitir-el-acceso-firmado)
-  - [3.9 CU-10 Preparar el almacén al arrancar](#39-cu-10-preparar-el-almacén-al-arrancar)
+  - [3.1 CU-06001 Interpretar el texto original y reconstruir las piezas](#31-cu-01-interpretar-el-texto-original-y-reconstruir-las-piezas)
+  - [3.2 CU-06002 Verificar los valores declarados contra los derivados](#32-cu-02-verificar-los-valores-declarados-contra-los-derivados)
+  - [3.3 CU-06003 Guardar y recuperar los trabajos](#33-cu-03-guardar-y-recuperar-los-trabajos)
+  - [3.4 CU-06004 Ejecutar el borrado físico y el arrastre de la baja](#34-cu-04-ejecutar-el-borrado-físico-y-el-arrastre-de-la-baja)
+  - [3.5 CU-06005 Guardar y recuperar las cuentas de la comisión](#35-cu-05-guardar-y-recuperar-las-cuentas-de-la-comisión)
+  - [3.6 CU-06006 Derivar la contraseña y verificar una credencial](#36-cu-06-derivar-la-contraseña-y-verificar-una-credencial)
+  - [3.7 CU-06007 Producir la contraseña provisoria del reseteo](#37-cu-07-producir-la-contraseña-provisoria-del-reseteo)
+  - [3.8 CU-06008 Emitir el acceso firmado](#38-cu-08-emitir-el-acceso-firmado)
+  - [3.9 CU-06010 Preparar el almacén al arrancar](#39-cu-10-preparar-el-almacén-al-arrancar)
 - [4. Tono y voz](#4-tono-y-voz)
 - [5. Localización](#5-localización)
 - [6. Control de cambios](#6-control-de-cambios)
@@ -71,13 +71,13 @@ Es la distinción que sostiene todo lo demás, y la que más se equivoca en esta
 
 | Lo que ocurre | Por qué **no** es una condición de error | Dónde está declarado |
 | --- | --- | --- |
-| Una figura del texto no se pudo reconstruir | Es una **observación de especie error de validación**: una entidad del dominio, un resultado, y **lo que el alumno tiene que ver** | CU-01 FA-01, FA-02, FA-05 |
-| El texto no se pudo leer **ni con la tolerancia** | Es un resultado igual: se devuelven 0 figuras y **una observación**, no la condición degradada. El trabajo queda en `Borrador` y el alumno corrige | CU-01 FA-04 y **CA-10** |
-| La verificación no encontró ninguna discrepancia | Cero advertencias es un resultado, no un fallo. Es el criterio negativo, más difícil de acertar que el positivo | CU-02 FA-01 |
-| La recuperación no encontró nada | Es «nada encontrado». Quién lo traduce, **y sin revelar la existencia de un recurso ajeno**, es el consumidor | CU-03 FA-01, CU-04 FA-01, CU-05 FA-01 |
-| Una consulta con alcance devuelve el conjunto vacío | Una comisión sin entregas todavía | CU-03 FA-02 |
-| La credencial no coincide | Una contraseña equivocada es el caso normal. **No se distingue hacia afuera cuál campo falló** | CU-06 FA-01 |
-| Un acceso está vencido, o su firma no corresponde | Es exactamente lo que la verificación existe para detectar. La renovación del producto es **por reingreso** | CU-08 FA-01, FA-02 |
+| Una figura del texto no se pudo reconstruir | Es una **observación de especie error de validación**: una entidad del dominio, un resultado, y **lo que el alumno tiene que ver** | CU-06001 FA-01, FA-02, FA-05 |
+| El texto no se pudo leer **ni con la tolerancia** | Es un resultado igual: se devuelven 0 figuras y **una observación**, no la condición degradada. El trabajo queda en `Borrador` y el alumno corrige | CU-06001 FA-04 y **CA-10** |
+| La verificación no encontró ninguna discrepancia | Cero advertencias es un resultado, no un fallo. Es el criterio negativo, más difícil de acertar que el positivo | CU-06002 FA-01 |
+| La recuperación no encontró nada | Es «nada encontrado». Quién lo traduce, **y sin revelar la existencia de un recurso ajeno**, es el consumidor | CU-06003 FA-01, CU-06004 FA-01, CU-06005 FA-01 |
+| Una consulta con alcance devuelve el conjunto vacío | Una comisión sin entregas todavía | CU-06003 FA-02 |
+| La credencial no coincide | Una contraseña equivocada es el caso normal. **No se distingue hacia afuera cuál campo falló** | CU-06006 FA-01 |
+| Un acceso está vencido, o su firma no corresponde | Es exactamente lo que la verificación existe para detectar. La renovación del producto es **por reingreso** | CU-06008 FA-01, FA-02 |
 
 **La consecuencia más cara de confundirlos** está en el segundo: si un texto ilegible devolviera `INTERPRETACION_NO_DISPONIBLE` en lugar de una observación, el alumno vería «el servicio no está disponible» cuando lo que pasa es que su programa emitió algo que no se puede leer. Se quedaría esperando a que el sistema se recupere de un problema que no tiene.
 
@@ -87,7 +87,7 @@ Esta capa emite un **código**, no un texto. No produce mensajes para personas, 
 
 La columna «mensaje» de este catálogo es el **enunciado canónico en lenguaje plano** de cada condición: la base sobre la que las capas de afuera componen lo que una persona lee. No es una cadena que la biblioteca produzca.
 
-**Una sola de estas condiciones tiene destinatario declarado aguas arriba**, y conviene saberlo: `INTERPRETACION_NO_DISPONIBLE` es la que `GeometriaFactory-Application` `CU-05` §6 declara recibir por el puerto de validación. Las demás llegan a la composición de raíz o a la capa de aplicación sin nombre propio allá, y su traducción se decide en `05-Arquitectura-Tecnica`.
+**Una sola de estas condiciones tiene destinatario declarado aguas arriba**, y conviene saberlo: `INTERPRETACION_NO_DISPONIBLE` es la que `GeometriaFactory-Application` `CU-06005` §6 declara recibir por el puerto de validación. Las demás llegan a la composición de raíz o a la capa de aplicación sin nombre propio allá, y su traducción se decide en `05-Arquitectura-Tecnica`.
 
 ### 1.4 Lo que ninguna condición de esta capa puede decir
 
@@ -146,7 +146,7 @@ Son las tres que un implementador apurado convertiría en un valor por defecto, 
 
 | Condición | El atajo tentador | Por qué el atajo es peor que la condición |
 | --- | --- | --- |
-| `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` | Componer la contraseña provisoria con un contador, con la fecha o con el correo del alumno | Produce una provisoria **adivinable**, que es exactamente lo que RN-14 prohíbe, y el reseteo parece haber funcionado. **Un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa** |
+| `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` | Componer la contraseña provisoria con un contador, con la fecha o con el correo del alumno | Produce una provisoria **adivinable**, que es exactamente lo que RN-06014 prohíbe, y el reseteo parece haber funcionado. **Un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa** |
 | `CLAVE_DE_FIRMA_AUSENTE` | Generar una clave al vuelo, o emitir sin firmar | El sistema arranca, emite accesos y nadie lo nota hasta que alguien falsifica uno. Una clave generada al vuelo además invalida todos los accesos en cada reinicio, con lo cual el síntoma visible es otro |
 | `RUTA_DEL_ALMACEN_NO_DISPONIBLE` | Caer hacia una ruta alternativa dentro de la imagen | El servicio arranca, acepta trabajos de la comisión entera **y los pierde en el siguiente reemplazo de versión**. Nadie se entera hasta que alguien busca su trabajo y no está |
 
@@ -156,7 +156,7 @@ La regla que resume las tres, y que conviene poder recitar: **cuando el mecanism
 
 ### 2.5 El caso de uso sin condiciones
 
-**`CU-09` no tiene ninguna entrada en este catálogo, y su ausencia está declarada.** Devolver el momento actual no recibe entrada que pueda ser inválida, no toca el almacén, no consume secretos y no depende de nada que pueda no responder: la única forma de que falle es que falle el proceso entero, y eso no es una condición de ningún contrato.
+**`CU-06009` no tiene ninguna entrada en este catálogo, y su ausencia está declarada.** Devolver el momento actual no recibe entrada que pueda ser inválida, no toca el almacén, no consume secretos y no depende de nada que pueda no responder: la única forma de que falle es que falle el proceso entero, y eso no es una condición de ningún contrato.
 
 Se deja escrito por dos motivos. Uno, para que una revisión posterior no lo levante como cobertura faltante: **son nueve subsecciones de catálogo para diez casos de uso, y el hueco es intencional**. Y dos, porque su ausencia dice algo: es el contrato más trivial de la capa, y **que sea trivial es la prueba de que la inversión está bien hecha**. Si algún día tuviera una condición, sería señal de que se le agregó lógica que pertenece a otro lado.
 
@@ -164,60 +164,60 @@ Se deja escrito por dos motivos. Uno, para que una revisión posterior no lo lev
 
 **Diecisiete condiciones, derivadas una por una de la §6 de los diez casos de uso.** Ninguna se inventó y ninguna quedó afuera; el recuento y la verificación mecánica están en §7.
 
-**Una sola condición se declara en más de un caso de uso** —`ALMACEN_NO_DISPONIBLE`, en CU-03, CU-04 y CU-05, siempre con la misma causa—, lleva **una sola entrada** en la subsección donde aparece primero, y sus dos apariciones restantes se anotan ahí. **No hay ninguna fila excedente: 17 filas de tabla para 17 condiciones.**
+**Una sola condición se declara en más de un caso de uso** —`ALMACEN_NO_DISPONIBLE`, en CU-06003, CU-06004 y CU-06005, siempre con la misma causa—, lleva **una sola entrada** en la subsección donde aparece primero, y sus dos apariciones restantes se anotan ahí. **No hay ninguna fila excedente: 17 filas de tabla para 17 condiciones.**
 
-### 3.1 CU-01 Interpretar el texto original y reconstruir las piezas
+### 3.1 CU-06001 Interpretar el texto original y reconstruir las piezas
 
 Es el contrato de mayor riesgo del producto. **Ninguna de sus dos condiciones nace de que el alumno haya escrito mal el texto**: eso produce observaciones, que son resultados (§1.2).
 
 | Código | Categoría | Mensaje | Causa probable | Acción sugerida |
 | --- | --- | --- | --- | --- |
-| `TEXTO_ORIGINAL_AUSENTE` | Entrada inválida | Se pidió interpretar sin texto | La invocación llegó con texto nulo o vacío | Aportar el texto original. **No se confunde con el conjunto raíz vacío**, que sí es un texto, sí se interpreta y sí produce una observación (CU-01 FA-03): acá el defecto es de la invocación y allá es del dato del alumno |
-| `INTERPRETACION_NO_DISPONIBLE` | Error transitorio | La interpretación no se pudo completar por una causa que no depende del texto | El adaptador no pudo resolver | Informar el estado degradado y **no presentar el trabajo como interpretado**. **No se inventan observaciones, no se devuelve un conjunto vacío como si fuera un resultado y no se informan figuras que no se contaron.** Es el único código de este catálogo con destinatario declarado aguas arriba: `GeometriaFactory-Application` `CU-05` §6 lo espera por este puerto. **Esta capa no reintenta** |
+| `TEXTO_ORIGINAL_AUSENTE` | Entrada inválida | Se pidió interpretar sin texto | La invocación llegó con texto nulo o vacío | Aportar el texto original. **No se confunde con el conjunto raíz vacío**, que sí es un texto, sí se interpreta y sí produce una observación (CU-06001 FA-03): acá el defecto es de la invocación y allá es del dato del alumno |
+| `INTERPRETACION_NO_DISPONIBLE` | Error transitorio | La interpretación no se pudo completar por una causa que no depende del texto | El adaptador no pudo resolver | Informar el estado degradado y **no presentar el trabajo como interpretado**. **No se inventan observaciones, no se devuelve un conjunto vacío como si fuera un resultado y no se informan figuras que no se contaron.** Es el único código de este catálogo con destinatario declarado aguas arriba: `GeometriaFactory-Application` `CU-06005` §6 lo espera por este puerto. **Esta capa no reintenta** |
 
-**La confusión que este par previene.** Si un texto ilegible devolviera la segunda condición en lugar de una observación, el producto le diría al alumno que el servicio no está disponible cuando lo que pasa es que su programa emitió algo que no se puede leer. El criterio `CU-01` CA-10 existe exactamente para eso y exige el resultado, no el código.
+**La confusión que este par previene.** Si un texto ilegible devolviera la segunda condición en lugar de una observación, el producto le diría al alumno que el servicio no está disponible cuando lo que pasa es que su programa emitió algo que no se puede leer. El criterio `CU-06001` CA-10 existe exactamente para eso y exige el resultado, no el código.
 
-### 3.2 CU-02 Verificar los valores declarados contra los derivados
+### 3.2 CU-06002 Verificar los valores declarados contra los derivados
 
-Forma de terminación: negativa sin escritura. **Este contrato no emite errores de validación**: los emite CU-01.
+Forma de terminación: negativa sin escritura. **Este contrato no emite errores de validación**: los emite CU-06001.
 
 | Código | Categoría | Mensaje | Causa probable | Acción sugerida |
 | --- | --- | --- | --- | --- |
-| `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` | Conflicto de estado | Se pidió verificar los valores sin haber reconstruido las piezas | La orquestación del adaptador salteó la interpretación | Reconstruir primero, por CU-01. **No se devuelve «0 advertencias»**: sería indistinguible de un trabajo verificado sin discrepancias, y convertiría un defecto de orquestación en un resultado creíble. **Es una decisión derivada de la categoría 02**, declarada como punto abierto en `../02-Especificacion-Funcional/Especificacion-Funcional.md` §11 y en `CU-02` §6 y §10: ninguna fuente enuncia esta condición |
+| `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` | Conflicto de estado | Se pidió verificar los valores sin haber reconstruido las piezas | La orquestación del adaptador salteó la interpretación | Reconstruir primero, por CU-06001. **No se devuelve «0 advertencias»**: sería indistinguible de un trabajo verificado sin discrepancias, y convertiría un defecto de orquestación en un resultado creíble. **Es una decisión derivada de la categoría 02**, declarada como punto abierto en `../02-Especificacion-Funcional/Especificacion-Funcional.md` §11 y en `CU-06002` §6 y §10: ninguna fuente enuncia esta condición |
 
-### 3.3 CU-03 Guardar y recuperar los trabajos
+### 3.3 CU-06003 Guardar y recuperar los trabajos
 
 Forma de terminación: negativa sin escritura en las dos primeras, degradada en las dos últimas. Ninguna deja escritura parcial.
 
 | Código | Categoría | Mensaje | Causa probable | Acción sugerida |
 | --- | --- | --- | --- | --- |
-| `CONSULTA_SIN_ALCANCE_DECLARADO` | Entrada inválida | La consulta de listado llegó sin dueño y sin predicado de alcance | El consumidor no trasladó el recorte al pedido | Trasladar el recorte **antes** de pedir. Un listado sin recorte sería el listado de todos los trabajos de la comisión, que es lo que RN-03 y RN-11 vienen a impedir. **Esta capa no lo comprueba por autorización sino por integridad del pedido**: no sabe quién preguntó |
-| `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` | Entrada inválida | El texto original no admite ser reemplazado | Una materialización aportó, para un trabajo existente, un texto distinto del conservado | Conservar el texto tal como el alumno lo pegó (RN-08, `RC-01`). **Es la condición que hace exigible la regla en el único lugar donde el texto puede perderse.** La reedición cambia los datos del trabajo y el texto que el alumno **vuelve a pegar**, nunca el ya guardado |
+| `CONSULTA_SIN_ALCANCE_DECLARADO` | Entrada inválida | La consulta de listado llegó sin dueño y sin predicado de alcance | El consumidor no trasladó el recorte al pedido | Trasladar el recorte **antes** de pedir. Un listado sin recorte sería el listado de todos los trabajos de la comisión, que es lo que RN-06003 y RN-06011 vienen a impedir. **Esta capa no lo comprueba por autorización sino por integridad del pedido**: no sabe quién preguntó |
+| `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` | Entrada inválida | El texto original no admite ser reemplazado | Una materialización aportó, para un trabajo existente, un texto distinto del conservado | Conservar el texto tal como el alumno lo pegó (RN-06008, `RC-06001`). **Es la condición que hace exigible la regla en el único lugar donde el texto puede perderse.** La reedición cambia los datos del trabajo y el texto que el alumno **vuelve a pegar**, nunca el ya guardado |
 | `ESCRITURA_CONCURRENTE_RECHAZADA` | Error transitorio | Otra operación tenía el almacén tomado para escribir | El motor **no admite escrituras concurrentes** y el backend opera como escritor único | Informar y **no reintentar acá**: si corresponde reintentar, lo decide el consumidor. La concurrencia real es baja porque el alcance es de aula, y el escritor único es una restricción **aceptada por escrito** a cambio de un despliegue sin servicio de base de datos aparte |
-| `ALMACEN_NO_DISPONIBLE` | Error transitorio | El almacén no está alcanzable | La ubicación configurada no responde, o el volumen persistente no está montado | Revisar el despliegue, no el código. **No hay réplica ni caché**: los datos no están disponibles hasta que el servidor vuelva, y la pieza pública lo declara como estado degradado. **El mensaje no incluye la ruta** (§1.4). Esta condición vuelve a declararse en CU-04 y en CU-05, con la misma causa |
+| `ALMACEN_NO_DISPONIBLE` | Error transitorio | El almacén no está alcanzable | La ubicación configurada no responde, o el volumen persistente no está montado | Revisar el despliegue, no el código. **No hay réplica ni caché**: los datos no están disponibles hasta que el servidor vuelva, y la pieza pública lo declara como estado degradado. **El mensaje no incluye la ruta** (§1.4). Esta condición vuelve a declararse en CU-06004 y en CU-06005, con la misma causa |
 
-### 3.4 CU-04 Ejecutar el borrado físico y el arrastre de la baja
+### 3.4 CU-06004 Ejecutar el borrado físico y el arrastre de la baja
 
 Forma de terminación: negativa sin escritura. **Ninguna deja retiro parcial**, y es la propiedad entera de este contrato.
 
 | Código | Categoría | Mensaje | Causa probable | Acción sugerida |
 | --- | --- | --- | --- | --- |
-| `RETIRO_PARCIAL_NO_ADMITIDO` | Entrada inválida | La baja de una cuenta retira todos sus trabajos o no ocurre | Se pidió la baja sin declarar el arrastre, o declarándolo sobre un subconjunto | Declarar el arrastre completo. Un arrastre parcial dejaría **trabajos sin dueño**, que es la forma más silenciosa de romper el modelo: nada falla y el listado del administrador sigue mostrándolos. El criterio con el que RN-07 se verifica es que **no quede ningún trabajo del alumno dado de baja** |
+| `RETIRO_PARCIAL_NO_ADMITIDO` | Entrada inválida | La baja de una cuenta retira todos sus trabajos o no ocurre | Se pidió la baja sin declarar el arrastre, o declarándolo sobre un subconjunto | Declarar el arrastre completo. Un arrastre parcial dejaría **trabajos sin dueño**, que es la forma más silenciosa de romper el modelo: nada falla y el listado del administrador sigue mostrándolos. El criterio con el que RN-06007 se verifica es que **no quede ningún trabajo del alumno dado de baja** |
 
-**El almacén no disponible en el retiro.** `ALMACEN_NO_DISPONIBLE` tiene su entrada en §3.3 y vuelve a declararse acá con la misma causa. Su precisión propia: **no retira nada**, de modo que una baja interrumpida deja la cuenta y sus trabajos enteros (CU-04 CA-05).
+**El almacén no disponible en el retiro.** `ALMACEN_NO_DISPONIBLE` tiene su entrada en §3.3 y vuelve a declararse acá con la misma causa. Su precisión propia: **no retira nada**, de modo que una baja interrumpida deja la cuenta y sus trabajos enteros (CU-06004 CA-05).
 
-### 3.5 CU-05 Guardar y recuperar las cuentas de la comisión
+### 3.5 CU-06005 Guardar y recuperar las cuentas de la comisión
 
 Forma de terminación: negativa sin escritura en las dos primeras.
 
 | Código | Categoría | Mensaje | Causa probable | Acción sugerida |
 | --- | --- | --- | --- | --- |
-| `CORREO_YA_REGISTRADO` | Conflicto de estado | El correo aportado ya pertenece a una cuenta | La materialización colisionó con una cuenta existente | **No informar el estado ni el papel de la cuenta que ocupa el correo.** Es la **segunda línea** de la unicidad: la consulta previa del consumidor no es una garantía por sí sola, y `GeometriaFactory-Application` `CU-01` **FA-02** ya declara ese camino: «el puerto de repositorio rechaza la materialización por una colisión de correo que la consulta no vio», con el mismo motivo. **El código se llama igual allá y acá, y no es casualidad**: es la misma regla verificada dos veces |
+| `CORREO_YA_REGISTRADO` | Conflicto de estado | El correo aportado ya pertenece a una cuenta | La materialización colisionó con una cuenta existente | **No informar el estado ni el papel de la cuenta que ocupa el correo.** Es la **segunda línea** de la unicidad: la consulta previa del consumidor no es una garantía por sí sola, y `GeometriaFactory-Application` `CU-06001` **FA-02** ya declara ese camino: «el puerto de repositorio rechaza la materialización por una colisión de correo que la consulta no vio», con el mismo motivo. **El código se llama igual allá y acá, y no es casualidad**: es la misma regla verificada dos veces |
 | `UNICIDAD_DE_ADMINISTRADOR_VIOLADA` | Conflicto de estado | La instancia admite una sola cuenta con papel `Administrador` | La materialización habría dejado dos | Usar el camino de configuración del administrador, que la capa de aplicación gobierna con su ventana de alta. **Acá se impide el resultado, no se explica el camino**: esta capa no conoce la ventana |
 
 **El almacén no disponible en las cuentas.** `ALMACEN_NO_DISPONIBLE`, con entrada en §3.3, vuelve a declararse acá con la misma causa y sin precisión propia.
 
-### 3.6 CU-06 Derivar la contraseña y verificar una credencial
+### 3.6 CU-06006 Derivar la contraseña y verificar una credencial
 
 Forma de terminación: negativa sin escritura. **Ninguna incluye en su respuesta la contraseña ni el valor derivado** (§1.4).
 
@@ -226,17 +226,17 @@ Forma de terminación: negativa sin escritura. **Ninguna incluye en su respuesta
 | `CONTRASENA_EN_CLARO_AUSENTE` | Entrada inválida | Se pidió derivar o verificar sin contraseña | La invocación llegó con valor nulo o vacío | Aportar la contraseña. **No se deriva la cadena vacía**: produciría un valor derivado válido para una credencial que nadie eligió, y la capa de aplicación ya rechaza el valor derivado vacío del otro lado de la frontera |
 | `CREDENCIAL_DERIVADA_ILEGIBLE` | Error interno | El valor derivado guardado no permite verificar | No lleva los parámetros con los que se produjo, o su forma no corresponde a la función anclada | **Corregir el dato guardado o el camino de migración de parámetros, no la invocación.** Y **no responder «no coincide»**: lo haría indistinguible de una contraseña equivocada, y la cuenta quedaría inaccesible sin que nadie supiera por qué. Es un defecto del almacén o de una migración, no de quien intenta entrar |
 
-### 3.7 CU-07 Producir la contraseña provisoria del reseteo
+### 3.7 CU-06007 Producir la contraseña provisoria del reseteo
 
 Forma de terminación: degradada. **Es el contrato con una sola condición, y es la más importante de este catálogo.**
 
 | Código | Categoría | Mensaje | Causa probable | Acción sugerida |
 | --- | --- | --- | --- | --- |
-| `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` | Error transitorio | No se pudo producir una contraseña provisoria | La fuente de material impredecible del sistema no respondió | **Informar que el reseteo no se completó, y no completarlo.** Bajo ninguna circunstancia se compone el valor por otro medio: con un contador, con la fecha o con un dato de la cuenta, la provisoria queda **adivinable**, que es exactamente lo que RN-14 prohíbe, y el reseteo parece haber funcionado. **Un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa.** El camino declarado es volver a intentar el reseteo, que produce un valor nuevo |
+| `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` | Error transitorio | No se pudo producir una contraseña provisoria | La fuente de material impredecible del sistema no respondió | **Informar que el reseteo no se completó, y no completarlo.** Bajo ninguna circunstancia se compone el valor por otro medio: con un contador, con la fecha o con un dato de la cuenta, la provisoria queda **adivinable**, que es exactamente lo que RN-06014 prohíbe, y el reseteo parece haber funcionado. **Un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa.** El camino declarado es volver a intentar el reseteo, que produce un valor nuevo |
 
 **Por qué esta condición existe y no es paranoia.** El fundamento de la regla que sostiene es de uso: si la provisoria la escribiera el docente, terminaría siendo la misma clave para toda la comisión. Una provisoria producida por un contador reproduce ese defecto **sin que nadie lo haya decidido**.
 
-### 3.8 CU-08 Emitir el acceso firmado
+### 3.8 CU-06008 Emitir el acceso firmado
 
 Forma de terminación: negativa sin escritura. **Ninguna incluye la clave de firma ni la dirección de un servicio interno** (§1.4).
 
@@ -245,7 +245,7 @@ Forma de terminación: negativa sin escritura. **Ninguna incluye la clave de fir
 | `CLAVE_DE_FIRMA_AUSENTE` | Recurso ausente | No hay clave de firma provista | El arranque no recibió el valor por variable de entorno ni por archivo montado | Proveerla en el despliegue. **No se genera una clave de reemplazo al vuelo y no se emite sin firmar**: un acceso sin firma verificable es peor que ningún acceso, porque el sistema seguiría funcionando y nadie lo notaría hasta que alguien lo falsifique. **El mensaje no dice de dónde se esperaba leerla** |
 | `RECLAMOS_INCOMPLETOS` | Entrada inválida | El acceso exige identificador, correo, papel y expiración | Se pidió emitir sin alguno de los cuatro | Aportar los cuatro. **Ninguno se completa con un valor por defecto**: un acceso sin papel dejaría a las capas de adentro decidiendo sobre un dato que nadie declaró, y uno sin expiración no vencería nunca |
 
-### 3.9 CU-10 Preparar el almacén al arrancar
+### 3.9 CU-06010 Preparar el almacén al arrancar
 
 Forma de terminación: **arranque detenido**, en las dos. Es la única subsección del catálogo donde aparece esa forma.
 
@@ -276,15 +276,15 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 
 1. **Los códigos son identificadores estables**, en mayúsculas y sin acentos, y **no se traducen nunca**. Son parte de la superficie pública: renombrar uno rompe la compilación de quien lo consume, que es la señal más temprana posible. La §17 de cada caso de uso declara qué cambio es compatible.
 2. **El texto que una persona lee no se compone acá.** La traducción a mensaje y a respuesta de protocolo pertenece a `GeometriaFactory-Api` y a la superficie que lo muestra, y está sujeta a la prohibición de §1.4, que no es una recomendación de estilo sino RA-03, regla de nivel producto.
-3. **Un solo idioma en el producto v1**: español rioplatense. **Con una excepción de hecho que conviene declarar**: el texto del alumno puede traer separadores decimales de su cultura —una coma en lugar de un punto—, y eso **no es un problema de localización de esta capa** sino un rasgo del dato de entrada. **Qué hace el validador con él está declarado** desde el `PRODUCT-INTAKE` **1.12**, §20.E-8 punto 5: es **error de validación**, con el índice de figura y el campo, y el trabajo **queda en `Borrador`**. Es el escenario `E-8`, y la categoría 02 lo lleva en `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y en `CU-01` CA-12.
+3. **Un solo idioma en el producto v1**: español rioplatense. **Con una excepción de hecho que conviene declarar**: el texto del alumno puede traer separadores decimales de su cultura —una coma en lugar de un punto—, y eso **no es un problema de localización de esta capa** sino un rasgo del dato de entrada. **Qué hace el validador con él está declarado** desde el `PRODUCT-INTAKE` **1.12**, §20.E-8 punto 5: es **error de validación**, con el índice de figura y el campo, y el trabajo **queda en `Borrador`**. Es el escenario `E-8`, y la categoría 02 lo lleva en `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y en `CU-06001` CA-12.
 
 ## 6. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.0 | 2026-08-10 | Emisión inicial. Cataloga las **17** condiciones distintas derivadas de la §6 de los diez casos de uso, sobre **19** filas declaradas y **17** filas de tabla, sin ninguna excedente. Declara los siete resultados que **no** son condiciones de error, con la confusión más cara de esta capa; la prohibición de §1.4 sobre los tres secretos y la ruta del almacén, con su contracara de registro del lado del servidor; la taxonomía con **dos categorías vacías** —conflicto de facultad y de alcance— y su motivo, que es el espejo del proyecto de código hermano; la forma de terminación **arranque detenido**, propia de esta capa, y la ausencia declarada de «motivo de resultado»; las tres condiciones que fallan hacia el lado seguro, con el atajo tentador de cada una y por qué el atajo es peor; y la ausencia declarada de `CU-09` del catálogo. |
-| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: el punto 3 de §5 decía que qué hace el validador con el separador decimal de la cultura del alumno era un punto abierto de la categoría 02; pasa a declarar el resultado que el intake 1.12 fija en §20.E-8 punto 5 —error de validación con índice de figura y campo, y el trabajo en `Borrador`— y a remitir a `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y a `CU-01` CA-12. **H-04**: la entrada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` de §3.2 nombra dónde queda registrado el punto abierto que declara. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. Las 17 condiciones, sus recuentos de §7.1 a §7.4 y la taxonomía no cambian. |
-| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que el reseteo— y lleva las reglas de negocio del producto de quince a **dieciséis**. La cabecera de trazabilidad y la tabla de referencias pasan a declarar el rango **`RN-01` a `RN-16`**. **Ninguna decisión, ningún artefacto y ninguna condición de este documento cambia**: RN-16 no tiene tramo propio acá. Sube minor. |
+| 1.0 | 2026-08-10 | Emisión inicial. Cataloga las **17** condiciones distintas derivadas de la §6 de los diez casos de uso, sobre **19** filas declaradas y **17** filas de tabla, sin ninguna excedente. Declara los siete resultados que **no** son condiciones de error, con la confusión más cara de esta capa; la prohibición de §1.4 sobre los tres secretos y la ruta del almacén, con su contracara de registro del lado del servidor; la taxonomía con **dos categorías vacías** —conflicto de facultad y de alcance— y su motivo, que es el espejo del proyecto de código hermano; la forma de terminación **arranque detenido**, propia de esta capa, y la ausencia declarada de «motivo de resultado»; las tres condiciones que fallan hacia el lado seguro, con el atajo tentador de cada una y por qué el atajo es peor; y la ausencia declarada de `CU-06009` del catálogo. |
+| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: el punto 3 de §5 decía que qué hace el validador con el separador decimal de la cultura del alumno era un punto abierto de la categoría 02; pasa a declarar el resultado que el intake 1.12 fija en §20.E-8 punto 5 —error de validación con índice de figura y campo, y el trabajo en `Borrador`— y a remitir a `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y a `CU-06001` CA-12. **H-04**: la entrada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` de §3.2 nombra dónde queda registrado el punto abierto que declara. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. Las 17 condiciones, sus recuentos de §7.1 a §7.4 y la taxonomía no cambian. |
+| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-06016** —habilitar una cuenta produce su contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que el reseteo— y lleva las reglas de negocio del producto de quince a **dieciséis**. La cabecera de trazabilidad y la tabla de referencias pasan a declarar el rango **`RN-06001` a `RN-06016`**. **Ninguna decisión, ningún artefacto y ninguna condición de este documento cambia**: RN-06016 no tiene tramo propio acá. Sube minor. |
 
 ## 7. Cobertura y trazabilidad
 
@@ -292,10 +292,10 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 
 | Magnitud | Valor |
 | --- | --- |
-| Casos de uso de los que deriva el catálogo | **10** (CU-01 a CU-10) |
-| Casos de uso **con** condiciones declaradas | **9**. `CU-09` no tiene ninguna, y su ausencia está declarada en §2.5 |
+| Casos de uso de los que deriva el catálogo | **10** (CU-06001 a CU-06010) |
+| Casos de uso **con** condiciones declaradas | **9**. `CU-06009` no tiene ninguna, y su ausencia está declarada en §2.5 |
 | Filas de condición declaradas en la §6 de los diez casos de uso | **19** |
-| Condiciones declaradas en más de un caso de uso | **1** (`ALMACEN_NO_DISPONIBLE`, en CU-03, CU-04 y CU-05, siempre con la misma causa) |
+| Condiciones declaradas en más de un caso de uso | **1** (`ALMACEN_NO_DISPONIBLE`, en CU-06003, CU-06004 y CU-06005, siempre con la misma causa) |
 | Reapariciones, sobre esa una | **2** |
 | **Condiciones distintas catalogadas** | **17** |
 | Filas de tabla en §3 | **17. Ninguna excedente**: no hay ningún código con causas opuestas según el camino |
@@ -311,16 +311,16 @@ La verificación se hizo en las dos direcciones, caso de uso por caso de uso, y 
 
 | CU | Filas en su §6 | Entradas nuevas en §3 | Condiciones ya catalogadas que reaparecen | Suma |
 | --- | --- | --- | --- | --- |
-| CU-01 | 2 | 2 | 0 | 2 |
-| CU-02 | 1 | 1 | 0 | 1 |
-| CU-03 | 4 | 4 | 0 | 4 |
-| CU-04 | 2 | 1 | 1 (`ALMACEN_NO_DISPONIBLE`) | 2 |
-| CU-05 | 3 | 2 | 1 (`ALMACEN_NO_DISPONIBLE`) | 3 |
-| CU-06 | 2 | 2 | 0 | 2 |
-| CU-07 | 1 | 1 | 0 | 1 |
-| CU-08 | 2 | 2 | 0 | 2 |
-| **CU-09** | **0** | **0** | **0** | **0** |
-| CU-10 | 2 | 2 | 0 | 2 |
+| CU-06001 | 2 | 2 | 0 | 2 |
+| CU-06002 | 1 | 1 | 0 | 1 |
+| CU-06003 | 4 | 4 | 0 | 4 |
+| CU-06004 | 2 | 1 | 1 (`ALMACEN_NO_DISPONIBLE`) | 2 |
+| CU-06005 | 3 | 2 | 1 (`ALMACEN_NO_DISPONIBLE`) | 3 |
+| CU-06006 | 2 | 2 | 0 | 2 |
+| CU-06007 | 1 | 1 | 0 | 1 |
+| CU-06008 | 2 | 2 | 0 | 2 |
+| **CU-06009** | **0** | **0** | **0** | **0** |
+| CU-06010 | 2 | 2 | 0 | 2 |
 | **Total** | **19** | **17** | **2** | **19** |
 
 Las dos comprobaciones que cierran la verificación:
@@ -332,31 +332,31 @@ Las dos comprobaciones que cierran la verificación:
 
 | Código | CU que lo declara | Regla de negocio | Categoría | Forma de terminación |
 | --- | --- | --- | --- | --- |
-| `TEXTO_ORIGINAL_AUSENTE` | CU-01 | — | Entrada inválida | Negativa sin escritura |
-| `INTERPRETACION_NO_DISPONIBLE` | CU-01 | RN-08 (como garantía: el texto queda intacto) | Error transitorio | Terminación degradada |
-| `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` | CU-02 | — | Conflicto de estado | Negativa sin escritura |
-| `CONSULTA_SIN_ALCANCE_DECLARADO` | CU-03 | RN-03, RN-11 | Entrada inválida | Negativa sin escritura |
-| `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` | CU-03 | RN-08 | Entrada inválida | Negativa sin escritura |
-| `ESCRITURA_CONCURRENTE_RECHAZADA` | CU-03 | — | Error transitorio | Terminación degradada |
-| `ALMACEN_NO_DISPONIBLE` | CU-03, CU-04, CU-05 | — | Error transitorio | Terminación degradada |
-| `RETIRO_PARCIAL_NO_ADMITIDO` | CU-04 | RN-07, RN-04 | Entrada inválida | Negativa sin escritura |
-| `CORREO_YA_REGISTRADO` | CU-05 | RN-02 | Conflicto de estado | Negativa sin escritura |
-| `UNICIDAD_DE_ADMINISTRADOR_VIOLADA` | CU-05 | RN-01 | Conflicto de estado | Negativa sin escritura |
-| `CONTRASENA_EN_CLARO_AUSENTE` | CU-06 | — | Entrada inválida | Negativa sin escritura |
-| `CREDENCIAL_DERIVADA_ILEGIBLE` | CU-06 | — | Error interno | Negativa sin escritura |
-| `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` | CU-07 | **RN-14** | Error transitorio | Terminación degradada |
-| `CLAVE_DE_FIRMA_AUSENTE` | CU-08 | — | Recurso ausente | Negativa sin escritura |
-| `RECLAMOS_INCOMPLETOS` | CU-08 | — | Entrada inválida | Negativa sin escritura |
-| `MIGRACION_NO_APLICABLE` | CU-10 | — | Conflicto de estado | Arranque detenido |
-| `RUTA_DEL_ALMACEN_NO_DISPONIBLE` | CU-10 | — | Error transitorio | Arranque detenido |
+| `TEXTO_ORIGINAL_AUSENTE` | CU-06001 | — | Entrada inválida | Negativa sin escritura |
+| `INTERPRETACION_NO_DISPONIBLE` | CU-06001 | RN-06008 (como garantía: el texto queda intacto) | Error transitorio | Terminación degradada |
+| `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` | CU-06002 | — | Conflicto de estado | Negativa sin escritura |
+| `CONSULTA_SIN_ALCANCE_DECLARADO` | CU-06003 | RN-06003, RN-06011 | Entrada inválida | Negativa sin escritura |
+| `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` | CU-06003 | RN-06008 | Entrada inválida | Negativa sin escritura |
+| `ESCRITURA_CONCURRENTE_RECHAZADA` | CU-06003 | — | Error transitorio | Terminación degradada |
+| `ALMACEN_NO_DISPONIBLE` | CU-06003, CU-06004, CU-06005 | — | Error transitorio | Terminación degradada |
+| `RETIRO_PARCIAL_NO_ADMITIDO` | CU-06004 | RN-06007, RN-06004 | Entrada inválida | Negativa sin escritura |
+| `CORREO_YA_REGISTRADO` | CU-06005 | RN-06002 | Conflicto de estado | Negativa sin escritura |
+| `UNICIDAD_DE_ADMINISTRADOR_VIOLADA` | CU-06005 | RN-06001 | Conflicto de estado | Negativa sin escritura |
+| `CONTRASENA_EN_CLARO_AUSENTE` | CU-06006 | — | Entrada inválida | Negativa sin escritura |
+| `CREDENCIAL_DERIVADA_ILEGIBLE` | CU-06006 | — | Error interno | Negativa sin escritura |
+| `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` | CU-06007 | **RN-06014** | Error transitorio | Terminación degradada |
+| `CLAVE_DE_FIRMA_AUSENTE` | CU-06008 | — | Recurso ausente | Negativa sin escritura |
+| `RECLAMOS_INCOMPLETOS` | CU-06008 | — | Entrada inválida | Negativa sin escritura |
+| `MIGRACION_NO_APLICABLE` | CU-06010 | — | Conflicto de estado | Arranque detenido |
+| `RUTA_DEL_ALMACEN_NO_DISPONIBLE` | CU-06010 | — | Error transitorio | Arranque detenido |
 
 Tres notas sobre las columnas, para que nadie las complete con atribuciones inventadas:
 
 | Caso | Situación |
 | --- | --- |
 | Columnas de regla con guion | **Diez de las diecisiete no tienen regla de negocio detrás, y es correcto.** Esta capa provee mecanismos, y un mecanismo tiene precondiciones que ninguna regla de negocio enuncia: que llegue el texto, que llegue la contraseña, que esté la clave. Inventarles una regla sería el defecto contrario al que este catálogo evita |
-| `RN-09` sin condición que la haga cumplir por rechazo | No la tiene, y no es un hueco: su tramo principal está en esta capa pero se ejerce **produciendo** el mensaje ubicado, no rechazando nada. Su verificación vive en `CU-01` CA-04 |
-| `RN-14` con una sola condición | `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` es lo único que esta capa **rechaza** por esa regla. Lo que la regla exige de verdad —las dos propiedades del valor— no se rechaza: **se produce**, y se verifica en `CU-07` CA-01 a CA-04 |
+| `RN-06009` sin condición que la haga cumplir por rechazo | No la tiene, y no es un hueco: su tramo principal está en esta capa pero se ejerce **produciendo** el mensaje ubicado, no rechazando nada. Su verificación vive en `CU-06001` CA-04 |
+| `RN-06014` con una sola condición | `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` es lo único que esta capa **rechaza** por esa regla. Lo que la regla exige de verdad —las dos propiedades del valor— no se rechaza: **se produce**, y se verifica en `CU-06007` CA-01 a CA-04 |
 
 ### 7.4 Trazabilidad del artefacto
 
@@ -366,12 +366,12 @@ Tres notas sobre las columnas, para que nadie las complete con atribuciones inve
 | --- | --- |
 | Rol de intervención | Implementador de adaptadores, mantenedor de la capa y **operador del despliegue**, que acá sí existe ([`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.1) |
 | Superficie pública que se documenta | Las 17 condiciones de error de los diez contratos, y la frontera entre mecanismo y decisión de `Especificacion-Funcional.md` §4 |
-| CU origen | CU-01 a CU-10, §6 de cada uno. **`CU-09` no declara ninguna** |
-| Reglas de negocio relevantes | RN-01 a RN-16 de `GeometriaFactory-Domain`, con la correspondencia de §7.3. **Tres tienen su tramo principal en esta capa**: RN-08, RN-09 y RN-14 |
-| Necesidades de negocio | NB-01 a NB-09, las nueve. La correspondencia está en `Especificacion-Funcional.md` §7.1 |
+| CU origen | CU-06001 a CU-06010, §6 de cada uno. **`CU-06009` no declara ninguna** |
+| Reglas de negocio relevantes | RN-06001 a RN-06016 de `GeometriaFactory-Domain`, con la correspondencia de §7.3. **Tres tienen su tramo principal en esta capa**: RN-06008, RN-06009 y RN-06014 |
+| Necesidades de negocio | NB-00001 a NB-00009, las nueve. La correspondencia está en `Especificacion-Funcional.md` §7.1 |
 | Wireframes asociados | N/A. `tiene_ui_final` == false |
 | US a generar en 06 | US del catálogo mantenido junto al código; US de las tres condiciones que fallan hacia el lado seguro, **con el atajo prohibido como criterio de aceptación**; US de la prohibición de §1.4, con inspección del registro del servidor |
-| Tests previstos en 08 | Una prueba por condición. Las de CU-01, CU-02, CU-06, CU-07 y CU-08, **unitarias y sin almacén**; las de CU-03, CU-04, CU-05 y CU-10, de integración contra el almacén real. Y una inspección de que ningún mensaje contiene la clave de firma, una contraseña, una provisoria, la ruta del almacén ni el texto del alumno |
+| Tests previstos en 08 | Una prueba por condición. Las de CU-06001, CU-06002, CU-06006, CU-06007 y CU-06008, **unitarias y sin almacén**; las de CU-06003, CU-06004, CU-06005 y CU-06010, de integración contra el almacén real. Y una inspección de que ningún mensaje contiene la clave de firma, una contraseña, una provisoria, la ruta del almacén ni el texto del alumno |
 | Catálogo de diseño aplicado | N/A para variante DX |
-| Configuración dirigida por esquema, primer arranque, acceso de operador único, identidad de versión | N/A. **La preparación del almacén de CU-10 no es la extensión de primer arranque**: acá es un contrato de uso, y la superficie de aprovisionamiento, si la hubiera, viviría en la categoría 03 de la pieza pública |
+| Configuración dirigida por esquema, primer arranque, acceso de operador único, identidad de versión | N/A. **La preparación del almacén de CU-06010 no es la extensión de primer arranque**: acá es un contrato de uso, y la superficie de aprovisionamiento, si la hubiera, viviría en la categoría 03 de la pieza pública |
 | Validación visual de maqueta y línea de base | N/A. `requiere_maqueta` == false |

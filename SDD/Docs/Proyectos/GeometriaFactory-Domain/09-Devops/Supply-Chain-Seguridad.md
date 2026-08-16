@@ -69,10 +69,10 @@
 
 | Comprobación | Umbral | Cómo se ejecuta | Carácter |
 | --- | --- | --- | --- |
-| Referencias salientes del archivo de proyecto | **0** a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | `QG-04`, con `TC-24` y la revisión del pull request | **Bloqueante** |
+| Referencias salientes del archivo de proyecto | **0** a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | `QG-04`, con `TC-02024` y la revisión del pull request | **Bloqueante** |
 | Actualización automática de dependencias | **No aplica**: no hay dependencias que actualizar | — | — |
 
-**El día en que este proyecto de código adquiera una dependencia externa, el gate bloqueante se dispara antes que cualquier análisis de composición.** Es un orden afortunado: la primera pregunta no será «¿esa dependencia tiene vulnerabilidades?» sino «¿por qué el dominio adquirió una dependencia?», que es la que [`../05-Arquitectura-Tecnica/Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) obliga a contestar.
+**El día en que este proyecto de código adquiera una dependencia externa, el gate bloqueante se dispara antes que cualquier análisis de composición.** Es un orden afortunado: la primera pregunta no será «¿esa dependencia tiene vulnerabilidades?» sino «¿por qué el dominio adquirió una dependencia?», que es la que [`../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) obliga a contestar.
 
 **La regla de anclaje de versiones del producto rige igual** aunque hoy no haya nada que anclar: el intake, en el encabezado de su Parte C, declara que toda versión de paquete se fija explícitamente y que un cambio de versión mayor es una decisión que se documenta, **nunca el efecto colateral de una actualización**. Esa regla es la que hace que una actualización automática silenciosa no sea admisible en este producto.
 
@@ -81,7 +81,7 @@
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
 | Estático | **Existe y bloquea**, integrado en el stage `build`: `CV-20` declara **0** advertencias nuevas del análisis estático, bloqueante por `CV-13`, que es el gate de construcción sin advertencias | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §5 y §3 |
-| Estático de superficie | **Existe y bloquea**: las pruebas de inspección `TC-23`, `TC-24`, `TC-26` y `TC-27` revisan el proyecto de código sobre sí mismo —catálogo de condiciones, dependencias salientes, invariantes ejercidos y condiciones que no viajan como excepción— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §1, «prueba de inspección» |
+| Estático de superficie | **Existe y bloquea**: las pruebas de inspección `TC-02023`, `TC-02024`, `TC-02026` y `TC-02027` revisan el proyecto de código sobre sí mismo —catálogo de condiciones, dependencias salientes, invariantes ejercidos y condiciones que no viajan como excepción— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §1, «prueba de inspección» |
 | Dinámico | **No aplica, y se declara en lugar de omitirse** | Un análisis dinámico ejercita una aplicación en ejecución. Este proyecto de código **no atiende peticiones ni abre conexiones** (`05` §8, cierre), de modo que no hay superficie que ejercitar. El análisis dinámico del producto tiene sujeto en `GeometriaFactory-Api`, que es quien expone la superficie HTTP |
 | Detección de secretos en las confirmaciones | **Recomendada a nivel producto y no propia**: este proyecto de código no maneja secretos (intake §17.1.P.5), pero comparte repositorio con los que sí | Ver [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
 

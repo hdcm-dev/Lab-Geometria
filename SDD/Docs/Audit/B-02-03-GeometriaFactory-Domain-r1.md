@@ -9,7 +9,7 @@
 | Alcance | Fase completa (primera auditoría de este proyecto de código): 26 documentos de 02 y 5 de 03, más sus 20 copias de `_legacy/2026-08-09/` |
 | Categoría 04 | Omitida por gating (`usa_llm` == false, `PRODUCT-MANIFEST` 1.1 §5). Su ausencia **no** es hallazgo |
 | Insumos normativos | `Rules-Especificacion-Funcional.md` §2, §3, §4, §5.2, §6; `Rules-UX-UI-DX.md` §2.1, §2.2, §4, §6; `Vocabulario-Rules.md` §9 y §10; `Master-Prompt.md` §5 y §10 |
-| Insumos de contexto | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.3; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.1; `00-Contexto/` 1.1; `01-Necesidades-Negocio/` 1.1 (con `NB-09` 1.0) |
+| Insumos de contexto | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.3; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.1; `00-Contexto/` 1.1; `01-Necesidades-Negocio/` 1.1 (con `NB-00009` 1.0) |
 | Auditor | Auditor independiente de fase — Arquitecto de Soluciones + QA Senior. Sin participación en la generación de la Fase B |
 | Fecha | 2026-08-09 |
 | Ronda | r1 |
@@ -91,7 +91,7 @@ Leyenda: **OK** cumple · **n/a** no aplica.
 
 - **D9 — n/a en toda la fase, y es lo correcto.** No hay sistema construido: la Fase B especifica, no documenta hechos. Las afirmaciones de los treinta y un documentos son de especificación, de diseño o de contexto, y `Master-Prompt.md` §15 excluye esas tres clases del alcance de D9. **No se convirtió ninguna afirmación de especificación en hallazgo por no citar evidencia.** La única afirmación de esta fase que sí habría caído bajo D9 —la de que el catálogo de 03 deriva de la §6 de los once casos de uso sin inventar ni omitir— la verificó el propio documento en su §6.1 y la volvió a verificar esta auditoría en §5 de este informe.
 - **D4 y D5 — verificados por ejecución.** Ningún archivo vivo lleva sufijo de versión; los veinte snapshots lo llevan con guion medio (`-v1.0.md`). Las veinte copias de `_legacy/2026-08-09/` conservan `Versión: 1.0` y `Fecha: 2026-08-08`, y su marca de tiempo de escritura (00:40:47) es **anterior** a la del primer documento vivo (00:45:24): ningún subagente las tocó. Ver P3-07 sobre el estado de cabecera de esas copias.
-- **D6 — nivel de detalle verificado documento por documento.** Ninguna cabecera cita «PRODUCT-INTAKE» a secas. Todas nombran secciones concretas —el mínimo observado es `RN-02`, con «§4.1 (enunciado de RN-02), §4 (F-02), §17.1.P.2 (INV-01), §6 (flujo 1), §7 (CL-6 y CL-7)»— y las que citan 00 y 01 lo hacen por sección (`Vision-Producto.md` §9.1, `NB-04` §1, §4 y §5). `NB-09`, que es nuevo, aparece como upstream en `RN-04`, `RN-10`, `RN-11`, `CU-10`, `CU-11`, `Especificacion-Funcional.md` §5.1 y `Definicion-Modelo-De-Dominio.md` §9. Las marcas P2/P3 en la columna D6 señalan remisiones cruzadas incompletas o erróneas dentro del cuerpo, no cabeceras defectuosas.
+- **D6 — nivel de detalle verificado documento por documento.** Ninguna cabecera cita «PRODUCT-INTAKE» a secas. Todas nombran secciones concretas —el mínimo observado es `RN-02`, con «§4.1 (enunciado de RN-02), §4 (F-02), §17.1.P.2 (INV-01), §6 (flujo 1), §7 (CL-6 y CL-7)»— y las que citan 00 y 01 lo hacen por sección (`Vision-Producto.md` §9.1, `NB-00004` §1, §4 y §5). `NB-00009`, que es nuevo, aparece como upstream en `RN-04`, `RN-10`, `RN-11`, `CU-10`, `CU-11`, `Especificacion-Funcional.md` §5.1 y `Definicion-Modelo-De-Dominio.md` §9. Las marcas P2/P3 en la columna D6 señalan remisiones cruzadas incompletas o erróneas dentro del cuerpo, no cabeceras defectuosas.
 - **D8 — conjunto cerrado respetado.** Los treinta y un documentos declaran o presuponen `library`, coherente con `PRODUCT-MANIFEST` 1.1 §5. `Rules-UX-UI-DX.md` §1.2 asigna variante **DX** a `library`, y los cinco artefactos de 03 la declaran en su cabecera, como pide §4.1.
 - **D7 — sin vocabulario del dominio fuente.** La única mención de formato de serialización en toda la categoría 02 es la columna de alias de `Glosario-Funcional.md` §2 —«"JSON original" en las fuentes técnicas»—, que es exactamente la forma que la regla pide: declarar el alias y no adoptarlo.
 
@@ -196,7 +196,7 @@ Es la verificación central del encargo. Se contrastó **enunciado por enunciado
 | RN-03 | «Un alumno **sólo ve y opera sus propios trabajos**» | `RN-03` §1: la formulación de la fuente, seguida de la indistinguibilidad de CL-5 | **Sí** | No |
 | RN-04 | «El alumno elimina sus trabajos **sólo en `Borrador`**. El **administrador elimina cualquier trabajo que ve**, en cualquier estado, con borrado físico» | `RN-04` §1: las dos mitades, literales | **Sí** | No |
 | RN-05 | «Un trabajo **no pasa a `Pendiente` con errores de interpretación** del JSON. Las advertencias **sí** lo permiten» | `RN-05` §1: idéntico, con «texto» donde el intake dice «JSON» | **Sí.** La sustitución léxica está justificada: el dominio no conoce formatos de serialización (`Glosario-Funcional.md` §2, entrada «texto original») | No |
-| RN-06 | «Una cuenta `Pendiente` o `Bloqueada` **no obtiene sesión**» | `RN-06` §1: «no obtiene acceso al laboratorio, y el motivo se le informa» | **Sí.** «Acceso» por «sesión» es sustitución declarada en el control de cambios: «sesión» es vocabulario de otro proyecto de código. La segunda mitad deriva de NB-02 §2 y §5, citado | No |
+| RN-06 | «Una cuenta `Pendiente` o `Bloqueada` **no obtiene sesión**» | `RN-06` §1: «no obtiene acceso al laboratorio, y el motivo se le informa» | **Sí.** «Acceso» por «sesión» es sustitución declarada en el control de cambios: «sesión» es vocabulario de otro proyecto de código. La segunda mitad deriva de NB-00002 §2 y §5, citado | No |
 | RN-07 | «La **baja física** elimina la cuenta y **todos sus trabajos**, y exige confirmación explícita escribiendo el correo» | `RN-07` §1: las tres partes, más «es irreversible» | **Sí** | No |
 | RN-08 | «El **JSON original del alumno se conserva íntegro** y nunca se reescribe» | `RN-08` §1: «se conserva íntegro, carácter por carácter, y el producto no lo reescribe, no lo normaliza y no lo corrige» | **Sí** | No |
 | RN-09 | «Los mensajes de error de validación indican **índice de figura y campo**, nunca un texto genérico» | `RN-09` §1: «posición de esa figura en el conjunto raíz y el campo», más la prohibición del texto genérico | **Sí.** «Posición de pieza» por «índice de figura» es alias declarado en `Glosario-Funcional.md` §2 | No |
@@ -338,7 +338,7 @@ La distinción está declarada en **seis artefactos** y ninguno la contamina. `D
 
 ### 6.4 Los once casos de uso frente a la guía de `Rules-Especificacion-Funcional.md` §5.2
 
-La guía es orientativa —«library con menos de diez»— y la propia regla declara en §2.2 que «el mínimo es piso, no techo. La cota superior queda definida por la cobertura completa de las NB-XX declaradas en 01». `Especificacion-Funcional.md` §6 declara el apartamiento con su causa: el alcance del producto creció, `01-Necesidades-Negocio` 1.1 emitió `NB-09` y pasó de 22 a 27 los casos de uso previstos a nivel producto, verificado contra `Necesidades-Negocio.md` §5.3 y su control de cambios.
+La guía es orientativa —«library con menos de diez»— y la propia regla declara en §2.2 que «el mínimo es piso, no techo. La cota superior queda definida por la cobertura completa de las NB-XX declaradas en 01». `Especificacion-Funcional.md` §6 declara el apartamiento con su causa: el alcance del producto creció, `01-Necesidades-Negocio` 1.1 emitió `NB-00009` y pasó de 22 a 27 los casos de uso previstos a nivel producto, verificado contra `Necesidades-Negocio.md` §5.3 y su control de cambios.
 
 **Evaluación de si algún caso de uso debió fusionarse**, uno por uno, contra el criterio «¿es un sub-flujo de otro?» de §5.2:
 
@@ -347,10 +347,10 @@ La guía es orientativa —«library con menos de diez»— y la propia regla de
 | CU-01 y CU-02 | No | Sujetos y momentos distintos: constitución por el registro, gobierno posterior por el administrador. Sus §6 no comparten ninguna condición |
 | CU-03 y CU-04 | No | CU-03 muta la credencial, CU-04 es una consulta que no modifica nada. Formas de terminación distintas: rechazo contra motivo de resultado |
 | CU-05 y CU-08 | No | La partición es la que el modelo de estados obliga: la constitución no decide estado y el envío sí. Fusionarlos reintroduciría el «guardar sin enviar» que F-22 eliminó |
-| CU-06 y CU-07 | No | Trazan a NB-04 y NB-05 con métricas distintas; es la misma partición que 01 §3.2 ya justificó |
+| CU-06 y CU-07 | No | Trazan a NB-00004 y NB-00005 con métricas distintas; es la misma partición que 01 §3.2 ya justificó |
 | CU-08 y CU-10 | No | Los tres criterios de partición se sostienen: sujetos distintos (alumno que envía / administrador que decide), reglas distintas (RN-05 / RN-10) y momentos distintos. Además sus §6 no comparten ninguna condición salvo `TRANSICION_DESDE_ESTADO_TERMINAL`, que el catálogo trata como entrada única |
 | CU-09 y CU-11 | No | Las reglas que los gobiernan son opuestas —al alumno lo acota la pertenencia y el borrador; al administrador, todo menos el borrador— y sus tablas de condiciones son disjuntas salvo `OPERACION_DESCONOCIDA` |
-| Las cuatro operaciones de cuenta dentro de CU-02 | Fusión **correcta**, no partición faltante | NB-01 §5 las trata como un conjunto único de cobertura |
+| Las cuatro operaciones de cuenta dentro de CU-02 | Fusión **correcta**, no partición faltante | NB-00001 §5 las trata como un conjunto único de cobertura |
 | Aprobar y rechazar dentro de CU-10 | Fusión **correcta** | Mismo acto con dos desenlaces, misma precondición, mismo comentario, misma terminalidad |
 
 **Conclusión: la justificación se sostiene y no hay casos de uso que debieran fusionarse.** El apartamiento está declarado con su causa, como pide el anti-patrón de §4.5 sobre numeración y recorte. No es hallazgo.

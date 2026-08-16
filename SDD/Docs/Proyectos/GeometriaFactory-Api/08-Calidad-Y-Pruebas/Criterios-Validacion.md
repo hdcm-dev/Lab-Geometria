@@ -39,14 +39,14 @@ Los momentos en que se aplican estos criterios son el **punto de control de cada
 | --- | --- | --- | --- |
 | CV-01 | Los **doce** casos de uso tienen al menos un caso de verificación pasado, y cada criterio Given-When-Then de sus historias está cubierto | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2 | **12 de 12** |
 | CV-02 | **Los quince puntos de acceso están ejercidos**, que es lo que `Rules-Calidad-Y-Pruebas.md` §2.2 exige para el tipo `rest-api` | Matriz §5 | **15 de 15** |
-| CV-03 | Exactamente **4** puntos quedan fuera de la guardia y **11** bajo ella, verificado **en las dos direcciones** | `TC-07` | **4 + 11 = 15**, sin gradación |
+| CV-03 | Exactamente **4** puntos quedan fuera de la guardia y **11** bajo ella, verificado **en las dos direcciones** | `TC-00007` | **4 + 11 = 15**, sin gradación |
 | CV-04 | Las **treinta** historias de usuario tienen su caso de verificación | Matriz §2, columna de historias | **30 de 30** |
 | CV-05 | Las **dieciséis** reglas de negocio tienen verificado el tramo que esta capa ejerce; las **tres** sin tramo tienen verificado que **esta capa no deshaga lo que otra decidió** | Matriz §4 | **16 de 16**, con **13** con tramo y **3** sin él |
 | CV-06 | Los **nueve** invariantes tienen verificado lo que esta capa aporta a cada uno | Matriz §6 | **9 de 9** |
-| CV-07 | **16 de 17** códigos del contrato tienen traducción declarada y **1** está declarado **sin destino con su motivo**; hay **0** inventados y **0** renombrados | `TC-24` y `TC-27`, en las dos direcciones | **14 + 1 = 15**, con **0** y **0** |
-| CV-08 | Las **tres** familias empobrecidas dan respuestas **indistinguibles en cuerpo y en código** | `TC-25` | **3 de 3**, sin gradación |
-| CV-09 | Los **ocho** escenarios del intake §20 están ejercitados **como cuerpo de petición**, sin sustituirlos por datos sintéticos | `TC-17`, `TC-19`, `TC-22`, `TC-35` y la batería del validador que corre desde acá | **8 de 8** |
-| CV-10 | Un envío cuyo texto **no verifica** responde con **éxito** y no con un código de fallo | `TC-17`, con `E-5` y `E-8` | **3 de 3** envíos exitosos con estados distintos |
+| CV-07 | **16 de 17** códigos del contrato tienen traducción declarada y **1** está declarado **sin destino con su motivo**; hay **0** inventados y **0** renombrados | `TC-00024` y `TC-00027`, en las dos direcciones | **14 + 1 = 15**, con **0** y **0** |
+| CV-08 | Las **tres** familias empobrecidas dan respuestas **indistinguibles en cuerpo y en código** | `TC-00025` | **3 de 3**, sin gradación |
+| CV-09 | Los **ocho** escenarios del intake §20 están ejercitados **como cuerpo de petición**, sin sustituirlos por datos sintéticos | `TC-00017`, `TC-00019`, `TC-00022`, `TC-00035` y la batería del validador que corre desde acá | **8 de 8** |
+| CV-10 | Un envío cuyo texto **no verifica** responde con **éxito** y no con un código de fallo | `TC-00017`, con `E-5` y `E-8` | **3 de 3** envíos exitosos con estados distintos |
 
 ## 3. Criterios no funcionales
 
@@ -54,23 +54,23 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
-| CV-11 | Latencia del listado, medida **en el servidor** | **Percentil 99 por debajo de 500 ms** **[ASUNCIÓN, `A-5`]** | `TC-34` | **Condicionado** |
-| CV-12 | Caudal sostenido | **20 peticiones por minuto** **[ASUNCIÓN, `A-5`]** | `TC-34` | **Condicionado** |
-| CV-13 | Arranque en frío: aplica transformaciones y responde salud | **Menos de 30 segundos** **[ASUNCIÓN, `A-5`]** | `TC-33` | **Condicionado** |
+| CV-11 | Latencia del listado, medida **en el servidor** | **Percentil 99 por debajo de 500 ms** **[ASUNCIÓN, `A-5`]** | `TC-00034` | **Condicionado** |
+| CV-12 | Caudal sostenido | **20 peticiones por minuto** **[ASUNCIÓN, `A-5`]** | `TC-00034` | **Condicionado** |
+| CV-13 | Arranque en frío: aplica transformaciones y responde salud | **Menos de 30 segundos** **[ASUNCIÓN, `A-5`]** | `TC-00033` | **Condicionado** |
 | CV-14 | Cobertura del proyecto de código, **por componente y no como número global** | **75 %** de líneas y **70 %** de ramas **[ASUNCIÓN, `A-3`]** | Informe de cobertura por componente | **Condicionado** |
-| CV-15 | Forma de la pirámide de pruebas | **60 %** integración y **40 %** unitarias **[ASUNCIÓN en cuanto al reparto]** | `TC-37` | **Condicionado.** **La inversión no es asunción** y no queda en suspenso |
-| CV-16 | Puntos de acceso fuera de la guardia | **4** sobre **15**, ni uno más | `TC-07` | **Bloqueante, sin gradación** |
-| CV-17 | Puntos que fijan una contraseña sobre una cuenta existente sin credencial | **0** | `TC-10` | **Bloqueante** |
-| CV-18 | Códigos del contrato con traducción declarada, en las dos direcciones | 16 con destino, 1 sin él, 0 inventados, 0 renombrados | `TC-24`, `TC-27` | **Bloqueante** |
-| CV-19 | Respuestas indistinguibles de las tres familias empobrecidas | **3 de 3** | `TC-25` | **Bloqueante, sin gradación** |
-| CV-20 | Respuestas que exponen dirección, ruta, secreto o traza, sobre los quince puntos **y** sobre el registro del servidor | **0** | `TC-26` | **Bloqueante** |
-| CV-21 | Configuraciones de intercambio declaradas en el producto | **1**, compartida por los dos extremos | `TC-29` | **Bloqueante** |
-| CV-22 | Caracteres de diferencia entre el texto enviado y el guardado, y truncamientos silenciosos | **0** y **0** | `TC-19` | **Bloqueante, sin gradación** |
-| CV-23 | Puertos conectados a su adaptador | **4 de 4**, con fallo **en construcción** si falta alguno | `TC-28` | **Bloqueante** |
-| CV-24 | Peticiones atendidas con la preparación del almacén incompleta | **0** | `TC-31` | **Bloqueante** |
-| CV-25 | Eliminaciones fuera de alcance aceptadas **al forzar la petición** | **0** | `TC-20` | **Bloqueante.** Es el **único** criterio del producto que la fuente exige ejercer forzando la petición contra esta superficie |
+| CV-15 | Forma de la pirámide de pruebas | **60 %** integración y **40 %** unitarias **[ASUNCIÓN en cuanto al reparto]** | `TC-00037` | **Condicionado.** **La inversión no es asunción** y no queda en suspenso |
+| CV-16 | Puntos de acceso fuera de la guardia | **4** sobre **15**, ni uno más | `TC-00007` | **Bloqueante, sin gradación** |
+| CV-17 | Puntos que fijan una contraseña sobre una cuenta existente sin credencial | **0** | `TC-00010` | **Bloqueante** |
+| CV-18 | Códigos del contrato con traducción declarada, en las dos direcciones | 16 con destino, 1 sin él, 0 inventados, 0 renombrados | `TC-00024`, `TC-00027` | **Bloqueante** |
+| CV-19 | Respuestas indistinguibles de las tres familias empobrecidas | **3 de 3** | `TC-00025` | **Bloqueante, sin gradación** |
+| CV-20 | Respuestas que exponen dirección, ruta, secreto o traza, sobre los quince puntos **y** sobre el registro del servidor | **0** | `TC-00026` | **Bloqueante** |
+| CV-21 | Configuraciones de intercambio declaradas en el producto | **1**, compartida por los dos extremos | `TC-00029` | **Bloqueante** |
+| CV-22 | Caracteres de diferencia entre el texto enviado y el guardado, y truncamientos silenciosos | **0** y **0** | `TC-00019` | **Bloqueante, sin gradación** |
+| CV-23 | Puertos conectados a su adaptador | **4 de 4**, con fallo **en construcción** si falta alguno | `TC-00028` | **Bloqueante** |
+| CV-24 | Peticiones atendidas con la preparación del almacén incompleta | **0** | `TC-00031` | **Bloqueante** |
+| CV-25 | Eliminaciones fuera de alcance aceptadas **al forzar la petición** | **0** | `TC-00020` | **Bloqueante.** Es el **único** criterio del producto que la fuente exige ejercer forzando la petición contra esta superficie |
 | CV-26 | Advertencias de construcción | **0** | Etapa `build`; intake §17.5.P.8 | **Bloqueante** |
-| CV-27 | Pasos de la colección de peticiones reproducible, y datos de prueba inventados en ella | **5 o menos**, y **0** | `TC-35` | **Bloqueante al cierre de la etapa que la incorpora** |
+| CV-27 | Pasos de la colección de peticiones reproducible, y datos de prueba inventados en ella | **5 o menos**, y **0** | `TC-00035` | **Bloqueante al cierre de la etapa que la incorpora** |
 
 **No hay criterio de disponibilidad, y es correcto que no lo haya.** El intake declara «sin SLO»: el servidor es domiciliario y su caída se responde con **estado degradado en el front**, no con redundancia.
 
@@ -82,7 +82,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- |
 | CV-28 | La batería completa —unitaria y de integración— se ejecuta entera al cerrar cada etapa | 100 % de los `TC-XX` escritos hasta ese momento |
 | CV-29 | **Ningún caso de verificación que pasaba en la etapa anterior deja de pasar** sin justificación escrita | 0 regresiones sin justificar |
-| CV-30 | **`TC-07` se ejecuta en todas las etapas que agregan un punto de acceso**, y `TC-25` y `TC-26` en todas las que agregan una respuesta de fallo | Presentes en cada una. Son los tres cuyo resultado **cambia al crecer la superficie** |
+| CV-30 | **`TC-00007` se ejecuta en todas las etapas que agregan un punto de acceso**, y `TC-00025` y `TC-00026` en todas las que agregan una respuesta de fallo | Presentes en cada una. Son los tres cuyo resultado **cambia al crecer la superficie** |
 | CV-31 | **La batería del validador que corre desde acá pasa entera** en toda etapa posterior a la `f` | **10 de 10** en cada ejecución. Ver §6 sobre el recuento |
 | CV-32 | Todo defecto cerrado generó al menos un `TC-XX` nuevo o extendió uno existente | 1 caso por defecto cerrado, como mínimo |
 

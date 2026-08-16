@@ -30,7 +30,7 @@
 | [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Apartamiento declarado de la pirámide, cobertura por familia de tipos, tooling, fixtures y datos de prueba |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.0 | Propuesto | Alcance, criterios de entrada y salida, **ocho** riesgos y plan por etapa |
 | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, `RT-XX` ↔ tests y cobertura por familia |
-| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.1 | Propuesto | Catálogo de **veintidós** casos de prueba, `TC-01` a `TC-22` |
+| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.1 | Propuesto | Catálogo de **veintidós** casos de prueba, `TC-08001` a `TC-08022` |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Veinticinco** criterios, `CV-01` a `CV-25`, con su carácter |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas |
 | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.0 | Propuesto | **Tres** sondas `VER-XX` tomadas de los contratos de verificación de `10-Examples`, sin ninguna fila de línea de base visual |
@@ -51,7 +51,7 @@
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
 | `Guia-Testing-Extensibilidad.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 lo exige para `library` **con plugins**. El flag `tiene_extensibilidad` de este proyecto de código es **false** (`PRODUCT-MANIFEST` §5): el punto de extensión del producto es el contrato de la fachada del visor, no este ensamblado |
-| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Emitido el 2026-08-11**, en 1.0 | **La omisión que esta fila declaraba quedó cerrada.** Se omitía porque `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumplía las dos condiciones. **La segunda dejó de cumplirse**: [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 declara **tres** contratos de verificación, `VER-01` a `VER-03`, y de ellos salen las **tres** sondas. La primera sigue en pie —`requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5)—, y por eso la matriz **no tiene ninguna fila de línea de base visual**: es el caso que `Deriva-Rules.md` §2.3 prevé y que §6 exige. La fila se conserva con su desenlace, en lugar de retirarse, para que el motivo de la omisión y el de su cierre queden legibles juntos |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Emitido el 2026-08-11**, en 1.0 | **La omisión que esta fila declaraba quedó cerrada.** Se omitía porque `Rules-Calidad-Y-Pruebas.md` §2.1 la omite para «proyectos de código sin Fase B2 y sin categoría 10», y este proyecto de código cumplía las dos condiciones. **La segunda dejó de cumplirse**: [`../10-Examples/README.md`](../10-Examples/README.md) 1.0 declara **tres** contratos de verificación, `VER-08001` a `VER-08003`, y de ellos salen las **tres** sondas. La primera sigue en pie —`requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5)—, y por eso la matriz **no tiene ninguna fila de línea de base visual**: es el caso que `Deriva-Rules.md` §2.3 prevé y que §6 exige. La fila se conserva con su desenlace, en lugar de retirarse, para que el motivo de la omisión y el de su cierre queden legibles juntos |
 
 **Precedente de forma dentro de esta categoría.** `GeometriaFactory-Web` tiene su `08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md` desde la Fase B2, porque ejecutó la maqueta; ese documento no es de este proyecto de código y no se toca. Su existencia es justamente lo que hace visible que la omisión de acá está condicionada por dos flags y no por una decisión de esta categoría.
 
@@ -71,7 +71,7 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | QG-08 | Despliegue conjunto ante un cambio incompatible | Bloquea la publicación de la etapa |
 | QG-09 | 0 tipos que permitan salir de un estado terminal o que habiliten al navegador | Se rechaza aunque compile |
 
-**El único gate condicionado es `QG-06`**, cuyo valor viene rotulado [ASUNCIÓN derivada] de §17.4.P.10: se mide y se registra, y no bloquea la fusión hasta que el Product Owner lo confirme (`BT-18`). **`QG-05` bloquea**: la fila `A-4` del intake §22 declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante», y §17.4.P.6 lo llama «el gate equivalente y bloqueante».
+**El único gate condicionado es `QG-06`**, cuyo valor viene rotulado [ASUNCIÓN derivada] de §17.4.P.10: se mide y se registra, y no bloquea la fusión hasta que el Product Owner lo confirme (`BT-08018`). **`QG-05` bloquea**: la fila `A-4` del intake §22 declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante», y §17.4.P.6 lo llama «el gate equivalente y bloqueante».
 
 ## 5. Recuentos que esta sección sostiene
 
@@ -81,7 +81,7 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | Restricciones transversales | **11** | `02` §6 |
 | Familias de tipos | **8** | `05` §3.1 |
 | NFR | **7** | `05` §8 |
-| Códigos de error vivos | **17** | `05` §7 y `CU-06` §10 |
+| Códigos de error vivos | **17** | `05` §7 y `CU-08006` §10 |
 | Identificadores de código emitidos | **20**, con **3** retirados | `03` §3.2 |
 | Señales declaradas que no son error | **3** | `03` §3.3 |
 | Entradas de diagnóstico de construcción | **15**, `DXC-01` a `DXC-15` | `03` §3.1 |

@@ -41,7 +41,7 @@ Los casos de uso que se materializan a través de este contrato son los **diez**
 
 **Contrato de superficie de biblioteca, declarado en prosa estructurada.** No hay descripción formal de servicio, ni esquema de mensajes, ni definición de procedimiento remoto: el intake declara «no aplica» en comunicación e integración para este proyecto de código, porque **no expone puntos de acceso** (§17.3.P.3).
 
-**Los nombres de tipos, de operaciones y de espacios de nombres no se fijan acá.** El intake los ata al punto de control de la etapa `a`; este documento nombra los elementos en lenguaje de dominio, igual que hacen las categorías 02 y 03 de este proyecto de código. Los **tres** identificadores de puerto que el intake sí declara —`IWorkRepository`, `IFigureValidator` e `ISystemClock`— se citan en §3 y son la única cita de identificadores de código de esta cadena; el cuarto **no tiene identificador declarado** y esta categoría no lo inventa ([`ADR-03`](Adrs/ADR-03-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §6).
+**Los nombres de tipos, de operaciones y de espacios de nombres no se fijan acá.** El intake los ata al punto de control de la etapa `a`; este documento nombra los elementos en lenguaje de dominio, igual que hacen las categorías 02 y 03 de este proyecto de código. Los **tres** identificadores de puerto que el intake sí declara —`IWorkRepository`, `IFigureValidator` e `ISystemClock`— se citan en §3 y son la única cita de identificadores de código de esta cadena; el cuarto **no tiene identificador declarado** y esta categoría no lo inventa ([`ADR-06003`](Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §6).
 
 ## 3. Operaciones
 
@@ -51,25 +51,25 @@ Las **siete** filas de superficie están, agrupadas por clase y sin agrupar dent
 
 | Op | Frontera | Qué ofrece | Exige resuelto por el consumidor | CU | ADR |
 | --- | --- | --- | --- | --- | --- |
-| OP-01 | Puerto de repositorio de trabajos (`IWorkRepository`) | Recuperar un trabajo; resolver una consulta **ya acotada** por dueño o por alcance, en sus **dos** formas —proyección de listado sin texto original, sin componentes y sin comentario, y detalle completo—; materializar el resultado; ejecutar el retiro | El recorte, declarado en el pedido. **Sin recorte no hay consulta**; y la pertenencia y la facultad, ya comprobadas | CU-03, CU-04 | ADR-01, ADR-02 |
-| OP-02 | Puerto de repositorio de cuentas (**sin identificador declarado**) | Recuperar una cuenta por su correo; responder si un correo ya está registrado y si ya existe una cuenta con papel `Administrador`; materializar el resultado **incluida la marca de cambio de contraseña pendiente**; ejecutar el retiro con arrastre | La credencial **ya derivada**, cuando la haya; la facultad, ya comprobada; el correo de confirmación, ya comparado | CU-05, CU-04 | ADR-01, ADR-03 |
-| OP-03 | Puerto de validación de figuras (`IFigureValidator`) | Interpretar el texto original y devolver **tres cosas**: la cantidad de figuras del conjunto raíz, las piezas reconstruidas con su posición y las observaciones con su especie, su posición y su campo | Nada más que el texto. **No recibe identidad, ni estado, ni configuración** | CU-01, CU-02 | ADR-06 |
-| OP-04 | Puerto de reloj del sistema (`ISystemClock`) | Devolver el momento actual, en tiempo universal coordinado | Nada | CU-09 | ADR-02 |
+| OP-01 | Puerto de repositorio de trabajos (`IWorkRepository`) | Recuperar un trabajo; resolver una consulta **ya acotada** por dueño o por alcance, en sus **dos** formas —proyección de listado sin texto original, sin componentes y sin comentario, y detalle completo—; materializar el resultado; ejecutar el retiro | El recorte, declarado en el pedido. **Sin recorte no hay consulta**; y la pertenencia y la facultad, ya comprobadas | CU-06003, CU-06004 | ADR-06001, ADR-06002 |
+| OP-02 | Puerto de repositorio de cuentas (**sin identificador declarado**) | Recuperar una cuenta por su correo; responder si un correo ya está registrado y si ya existe una cuenta con papel `Administrador`; materializar el resultado **incluida la marca de cambio de contraseña pendiente**; ejecutar el retiro con arrastre | La credencial **ya derivada**, cuando la haya; la facultad, ya comprobada; el correo de confirmación, ya comparado | CU-06005, CU-06004 | ADR-06001, ADR-06003 |
+| OP-03 | Puerto de validación de figuras (`IFigureValidator`) | Interpretar el texto original y devolver **tres cosas**: la cantidad de figuras del conjunto raíz, las piezas reconstruidas con su posición y las observaciones con su especie, su posición y su campo | Nada más que el texto. **No recibe identidad, ni estado, ni configuración** | CU-06001, CU-06002 | ADR-06006 |
+| OP-04 | Puerto de reloj del sistema (`ISystemClock`) | Devolver el momento actual, en tiempo universal coordinado | Nada | CU-06009 | ADR-06002 |
 
 ### Los dos mecanismos
 
 | Op | Mecanismo | Qué ofrece | Exige resuelto por el consumidor | CU | ADR |
 | --- | --- | --- | --- | --- | --- |
-| OP-05 | Credenciales | Derivar una contraseña; verificar una credencial contra un valor derivado; y **producir la contraseña provisoria** de la habilitación y del reseteo | Para las dos primeras, la contraseña en claro. **Para la tercera, nada: la producción no recibe ningún parámetro** | CU-06, CU-07 | ADR-04, ADR-05 |
-| OP-06 | Acceso firmado | Emitir un acceso con sus **cuatro** reclamos —identificador, correo, papel y expiración— y verificar uno recibido | Los cuatro reclamos, **completos**; la admisibilidad de la cuenta, **ya resuelta**: una cuenta que no admite acceso no llega acá | CU-08 | ADR-04 |
+| OP-05 | Credenciales | Derivar una contraseña; verificar una credencial contra un valor derivado; y **producir la contraseña provisoria** de la habilitación y del reseteo | Para las dos primeras, la contraseña en claro. **Para la tercera, nada: la producción no recibe ningún parámetro** | CU-06006, CU-06007 | ADR-06004, ADR-06005 |
+| OP-06 | Acceso firmado | Emitir un acceso con sus **cuatro** reclamos —identificador, correo, papel y expiración— y verificar uno recibido | Los cuatro reclamos, **completos**; la admisibilidad de la cuenta, **ya resuelta**: una cuenta que no admite acceso no llega acá | CU-06008 | ADR-06004 |
 
 ### La responsabilidad de arranque
 
 | Op | Responsabilidad | Qué ofrece | Exige resuelto por el consumidor | CU | ADR |
 | --- | --- | --- | --- | --- | --- |
-| OP-07 | Preparación del almacén | Crear el almacén si no existe, aplicar el linaje de transformaciones si está desactualizado, y **detener el arranque** antes que operar sobre un almacén en el que no se puede confiar | La ubicación del almacén, provista por configuración. **Esta capa la recibe y no la busca** | CU-10 | ADR-07 |
+| OP-07 | Preparación del almacén | Crear el almacén si no existe, aplicar el linaje de transformaciones si está desactualizado, y **detener el arranque** antes que operar sobre un almacén en el que no se puede confiar | La ubicación del almacén, provista por configuración. **Esta capa la recibe y no la busca** | CU-06010 | ADR-06007 |
 
-**Siete filas de superficie sobre diez casos de uso**, y la diferencia no es un hueco: `CU-01` y `CU-02` comparten la frontera del puerto de validación —son los dos motores de un mismo pipeline—, y `CU-03` con `CU-04` y `CU-05` con `CU-04` comparten las dos fronteras de repositorio, porque el retiro es una operación más de cada una aunque sea el caso de uso que se verifica por ausencia.
+**Siete filas de superficie sobre diez casos de uso**, y la diferencia no es un hueco: `CU-06001` y `CU-06002` comparten la frontera del puerto de validación —son los dos motores de un mismo pipeline—, y `CU-06003` con `CU-06004` y `CU-06005` con `CU-06004` comparten las dos fronteras de repositorio, porque el retiro es una operación más de cada una aunque sea el caso de uso que se verifica por ausencia.
 
 ## 4. Esquemas de datos: qué cruza cada frontera
 
@@ -88,13 +88,13 @@ Las **siete** filas de superficie están, agrupadas por clase y sin agrupar dent
 **Dos precisiones tomadas de la categoría 02 y no redefinidas acá:**
 
 1. **La cantidad de figuras del conjunto raíz la produce el validador**, incluidas las figuras que no pudo reconstruir, y **no es derivable de las piezas**, que admiten huecos. El dominio la exige como precondición de la reconstrucción.
-2. **Los sellos de creación y de última modificación son metadatos que produce el consumidor por el puerto de reloj**, distintos de la `Fecha` que el alumno declara en su trabajo. Los tres tiempos no se confunden (`RC-06`).
+2. **Los sellos de creación y de última modificación son metadatos que produce el consumidor por el puerto de reloj**, distintos de la `Fecha` que el alumno declara en su trabajo. Los tres tiempos no se confunden (`RC-06006`).
 
 ## 5. Manejo de errores
 
 - **El conjunto de condiciones es cerrado y su fuente única es la categoría 03**: las **17** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md). Este contrato no acuña ninguna y no las transcribe: las referencia.
 - **Código, no texto y no excepción.** Esta capa emite un código estable de una enumeración cerrada. No produce mensajes para personas, no los formatea y no los traduce.
-- **Ningún código es un código de protocolo.** Su traducción pertenece a `GeometriaFactory-Api`, y una sola condición tiene destinatario declarado aguas arriba: `INTERPRETACION_NO_DISPONIBLE`, que `GeometriaFactory-Application` `CU-05` §6 espera por el puerto de validación.
+- **Ningún código es un código de protocolo.** Su traducción pertenece a `GeometriaFactory-Api`, y una sola condición tiene destinatario declarado aguas arriba: `INTERPRETACION_NO_DISPONIBLE`, que `GeometriaFactory-Application` `CU-06005` §6 espera por el puerto de validación.
 - **Dos categorías de conflicto están vacías, y no es un hueco**: facultad y alcance. **Esta capa no autoriza** y no recibe la identidad del solicitante para comprobar nada. Quien busque acá una negativa de autorización está buscando en la capa equivocada.
 - **Cuatro condiciones son de terminación degradada y dos detienen el arranque.** Esta capa **no reintenta**: reintentar, si corresponde, lo decide el consumidor.
 - **Ninguna condición deja efecto parcial.** Todas las escrituras ocurren dentro de una unidad de trabajo que se cierra entera o no se cierra.
@@ -112,10 +112,10 @@ Aplica el criterio general del producto —versionado semántico, sin publicaci�
 | Cambiar lo que cruza una frontera en la tabla de §4 | Mayor |
 | Quitar una condición del catálogo de 17, o reciclar su identificador | Mayor |
 | Cambiar la forma de terminación de una condición existente | Mayor |
-| **Editar una transformación de esquema ya fusionada** | **Prohibido**, no versionado. Entra una transformación nueva ([`ADR-07`](Adrs/ADR-07-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) |
+| **Editar una transformación de esquema ya fusionada** | **Prohibido**, no versionado. Entra una transformación nueva ([`ADR-06007`](Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) |
 | Agregar una operación a un adaptador existente, o agregar una condición al catálogo | Menor |
 | Agregar una transformación de esquema al linaje | Menor |
-| Cambiar los parámetros de la función de derivación de clave | Menor, **porque los parámetros viajan con el valor derivado** ([`ADR-04`](Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)): las credenciales existentes siguen verificándose |
+| Cambiar los parámetros de la función de derivación de clave | Menor, **porque los parámetros viajan con el valor derivado** ([`ADR-06004`](Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)): las credenciales existentes siguen verificándose |
 | Corregir un adaptador para que cumpla lo que ya declaraba | Parche |
 
 **Compatibilidad hacia atrás.** El único consumidor se compila dentro del mismo artefacto de agrupación, de modo que un cambio incompatible **rompe la compilación antes de romper el tiempo de ejecución**. No hay deprecación gradual ni convivencia de dos versiones: la política es corregir los dos lados en la misma etapa.
@@ -126,11 +126,11 @@ Aplica el criterio general del producto —versionado semántico, sin publicaci�
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU que lo consumen | CU-01 a CU-10, los **diez** |
+| CU que lo consumen | CU-06001 a CU-06010, los **diez** |
 | Puertos que implementa | Los **cuatro** que declara [`GeometriaFactory-Application`](../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Contratos-Abstractions.md) §4. Ninguno queda sin adaptador y no hay adaptador sin puerto |
-| RN que cubre | RN-01 a RN-16, las **dieciséis**, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2. **Catorce** tienen tramo acá; RN-06 y RN-10 no. **Tres** lo tienen principal: RN-08, RN-09 y RN-14 |
+| RN que cubre | RN-06001 a RN-06016, las **dieciséis**, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2. **Catorce** tienen tramo acá; RN-06006 y RN-06010 no. **Tres** lo tienen principal: RN-06008, RN-06009 y RN-06014 |
 | Invariantes | INV-01 a INV-09, los **nueve**, con el aporte de esta capa declarado en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
-| ADR que lo gobiernan | ADR-01 a ADR-07, las **siete** |
+| ADR que lo gobiernan | ADR-06001 a ADR-06007, las **siete** |
 | Consumidores | **Uno solo**: la composición de raíz de `GeometriaFactory-Api`, por referencia de proyecto de código |
 | Documentos hermanos | [`Modelo-Datos-Logico.md`](Modelo-Datos-Logico.md), para lo que cruza hacia el almacén; [`Flujo-Ejecucion.md`](Flujo-Ejecucion.md), para lo que ocurre dentro del puerto de validación |
 | Tests previstos en 08 | Una prueba por operación en su camino de efecto aplicado y al menos una por condición del catálogo de 17; matriz puerto contra adaptador; batería de 10 casos del validador sin almacén; pruebas de integración contra el almacén real para los dos repositorios y para la preparación |
@@ -140,4 +140,4 @@ Aplica el criterio general del producto —versionado semántico, sin publicaci�
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara la superficie de una cara y tres clases —cuatro adaptadores de puertos que declara otro proyecto de código, dos mecanismos propios y una responsabilidad de arranque—, las siete operaciones con lo que cada una exige resuelto, la tabla de lo que cruza y lo que nunca cruza cada frontera, el manejo de errores con la fuente única del catálogo de 17 condiciones y las dos categorías vacías, y el criterio de versionado con la excepción de los datos ya guardados, que sobreviven al despliegue y no se recompilan. |
-| 1.1 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`—. Acá son **6 ocurrencias**: las tres de §2 y las tres de la tabla de operaciones de §3. **Ninguna operación y ningún contrato cambian.** **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-01-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. |
+| 1.1 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`—. Acá son **6 ocurrencias**: las tres de §2 y las tres de la tabla de operaciones de §3. **Ninguna operación y ningún contrato cambian.** **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-06001-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. |

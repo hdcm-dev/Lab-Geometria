@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11 (punto abierto `PA-05`); [`../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0; [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) 1.0 §6; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §16, §16.1, §17.6.P.7, §17.6.P.8, §17.7.P.4, §17.7.P.5, §17.7.P.7, §17.7.P.8, §17.7.P.9 y §18
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11 (punto abierto `PA-05`); [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0; [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) 1.0 §6; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §16, §16.1, §17.6.P.7, §17.6.P.8, §17.7.P.4, §17.7.P.5, §17.7.P.7, §17.7.P.8, §17.7.P.9 y §18
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md), [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -45,13 +45,13 @@
 
 ### 1.1 Apartamiento declarado del modelo de la categoría
 
-`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único. **Acá no hay feed**, y el ADR que lo justifica es anterior a esta categoría: [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 evaluó publicar el bundle en un repositorio público de paquetes y lo descartó porque el intake lo descarta explícitamente, `redistribuible` es false y no hay integradores externos: **sería un portal para una comunidad que no existe**.
+`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único. **Acá no hay feed**, y el ADR que lo justifica es anterior a esta categoría: [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 evaluó publicar el bundle en un repositorio público de paquetes y lo descartó porque el intake lo descarta explícitamente, `redistribuible` es false y no hay integradores externos: **sería un portal para una comunidad que no existe**.
 
 **El caso de este proyecto de código tiene además un rasgo que los otros dos de nivel topológico 0 no tienen**: su artefacto sí es un archivo que se entrega —se copia al anfitrión— y por eso la categoría emite [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md), que documenta esa entrega interna con la estructura que `Rules-Devops.md` §4.5 exige. **Entrega no es publicación**, y el documento lo declara en su primera sección para que nadie lea un canal donde no lo hay.
 
 ## 2. Resolución de `PA-05`: el bundle se ignora en el repositorio
 
-`05` §11 registra el punto abierto `PA-05` —si el bundle generado **se versiona en el repositorio o se ignora**— y declara que **lo cierra la categoría 09, al emitirse**. [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §6, punto 4, acepta explícitamente que la decisión quede abierta y que la elección pertenezca a 09. **Se cierra acá.**
+`05` §11 registra el punto abierto `PA-05` —si el bundle generado **se versiona en el repositorio o se ignora**— y declara que **lo cierra la categoría 09, al emitirse**. [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §6, punto 4, acepta explícitamente que la decisión quede abierta y que la elección pertenezca a 09. **Se cierra acá.**
 
 **Decisión: el bundle generado no se versiona en el repositorio. Se ignora, y lo genera la canalización antes de publicar.**
 
@@ -64,7 +64,7 @@ El intake §17.7.P.7 admite las dos formas y le pone condición a cada una: si s
 | **Versionarlo abre la puerta al único defecto que este proyecto de código tiene prohibido sin excepción.** El intake §13 y §17.7.P.7 declaran que el bundle **nunca se edita a mano**; `QG-09` lo rechaza en revisión y `CV-30` lo declara bloqueante. Un archivo generado, versionado y visible en cada revisión es exactamente el que alguien corrige «en el acto» cuando tiene apuro | Intake §13 y §17.7.P.7; `08` `Estrategia-Calidad.md` §3 y `Criterios-Validacion.md` §6 |
 | **No perjudica al sample ni al trabajo local**, que es la única objeción seria a ignorarlo. El intake §18 declara la reproducción de **S-1** en cinco pasos o menos y su primer paso **ya es construir el bundle** con el guion propio; el mismo guion existe para el ciclo corto de trabajo sobre el visor | Intake §18 y §17.7.P.8 |
 
-**La decisión no toca ninguna decisión de arquitectura.** `ADR-06` §2 mantiene todo lo suyo: versionado semántico sin publicación, artefacto tratado como salida reproducible y nunca editado a mano. Lo que 09 elige es **dónde no vive el archivo**, que es exactamente lo que la ADR le dejó.
+**La decisión no toca ninguna decisión de arquitectura.** `ADR-12006` §2 mantiene todo lo suyo: versionado semántico sin publicación, artefacto tratado como salida reproducible y nunca editado a mano. Lo que 09 elige es **dónde no vive el archivo**, que es exactamente lo que la ADR le dejó.
 
 ### 2.1 Alternativa considerada y descartada
 
@@ -79,8 +79,8 @@ Consecuencias operativas concretas, y se declaran porque una decisión de esta c
 
 | Exigencia | Estado hoy | Quién la aplica |
 | --- | --- | --- |
-| El control de versiones **excluye el directorio de salida del empaquetado** en `visor/` y **el bundle copiado** bajo los recursos estáticos del anfitrión | **No cumplido todavía**: el archivo `.gitignore` del repositorio, leído el 2026-08-11, no excluye ninguna de las dos rutas —sí excluye el directorio de dependencias del ecosistema del navegador— | El equipo, en la etapa `a`, al poner en pie la cadena de construcción (`BT-01` de `08` `Plan-Pruebas.md` §2) |
-| El guion propio del bundle existe y produce **un archivo vacío pero real** desde la etapa `a` | Declarado como criterio de entrada de la categoría 08 | El mismo, con `BT-01` y `BT-02` |
+| El control de versiones **excluye el directorio de salida del empaquetado** en `visor/` y **el bundle copiado** bajo los recursos estáticos del anfitrión | **No cumplido todavía**: el archivo `.gitignore` del repositorio, leído el 2026-08-11, no excluye ninguna de las dos rutas —sí excluye el directorio de dependencias del ecosistema del navegador— | El equipo, en la etapa `a`, al poner en pie la cadena de construcción (`BT-12001` de `08` `Plan-Pruebas.md` §2) |
+| El guion propio del bundle existe y produce **un archivo vacío pero real** desde la etapa `a` | Declarado como criterio de entrada de la categoría 08 | El mismo, con `BT-12001` y `BT-12002` |
 | Toda ejecución local que necesite el bundle **lo construye antes**: el sample S-1 y el front en local | Declarado por el intake §18 para S-1 | Quien ejecuta |
 | La canalización del front **no se modifica por esta decisión** | Ya genera el bundle en su interior | Categoría 09 de `GeometriaFactory-Web` |
 
@@ -133,4 +133,4 @@ La infraestructura del producto —imagen del backend y flujo de trabajo de publ
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial. Declara que este proyecto de código **no tiene ambientes ni canales propios** y registra el apartamiento del modelo `preview` / `stable` apoyado en `ADR-06` §4. **Cierra el punto abierto `PA-05`**: el bundle **se ignora en el repositorio y lo genera la canalización**, con cuatro fundamentos verificables —la canalización del front ya lo genera; el gate bloqueante del front prohíbe tomarlo de un artefacto viejo; versionarlo abre la puerta a la edición manual que el producto prohíbe sin excepción; y no perjudica al sample, cuyo primer paso ya es construirlo—, con la alternativa evaluada y **cuatro exigencias operativas**, una de ellas declarada como acción pendiente con la fecha de lectura del estado del repositorio. Declara la ausencia de configuración, de persistencia, de identidad y de secretos como **prohibiciones explícitas** y no como carencias, y por qué eso hace que el mismo artefacto sirva en los tres lugares donde se usa. |
+| 1.0 | 2026-08-11 | Emisión inicial. Declara que este proyecto de código **no tiene ambientes ni canales propios** y registra el apartamiento del modelo `preview` / `stable` apoyado en `ADR-12006` §4. **Cierra el punto abierto `PA-05`**: el bundle **se ignora en el repositorio y lo genera la canalización**, con cuatro fundamentos verificables —la canalización del front ya lo genera; el gate bloqueante del front prohíbe tomarlo de un artefacto viejo; versionarlo abre la puerta a la edición manual que el producto prohíbe sin excepción; y no perjudica al sample, cuyo primer paso ya es construirlo—, con la alternativa evaluada y **cuatro exigencias operativas**, una de ellas declarada como acción pendiente con la fecha de lectura del estado del repositorio. Declara la ausencia de configuración, de persistencia, de identidad y de secretos como **prohibiciones explícitas** y no como carencias, y por qué eso hace que el mismo artefacto sirva en los tres lugares donde se usa. |

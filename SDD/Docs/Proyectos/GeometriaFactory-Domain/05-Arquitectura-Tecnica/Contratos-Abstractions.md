@@ -42,23 +42,23 @@ Los casos de uso que se materializan a través de este contrato son los **trece*
 
 ## 3. Operaciones
 
-Trece operaciones, una por caso de uso. La columna «Exige resuelto» declara qué tiene que haber resuelto el consumidor **antes** de invocar, que es la contrapartida de [`ADR-05`](Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md) y de [`ADR-06`](Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md).
+Trece operaciones, una por caso de uso. La columna «Exige resuelto» declara qué tiene que haber resuelto el consumidor **antes** de invocar, que es la contrapartida de [`ADR-02005`](Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) y de [`ADR-02006`](Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md).
 
 | Op | Caso de uso | Qué hace | Exige resuelto por el consumidor | Componente |
 | --- | --- | --- | --- | --- |
-| OP-01 | CU-01 | Constituye un alumno con cuenta `Pendiente`, sin credencial derivada y con papel `Alumno` | Unicidad del correo; momento del alta | Núcleo de entidades, Guardas de cuenta |
-| OP-02 | CU-02 | Habilita, bloquea, rehabilita o da de baja una cuenta **de alumno** | Que quien opera es el administrador; el texto de confirmación en la baja; momento | Guardas de cuenta |
-| OP-03 | CU-03 | Fija o reemplaza la credencial derivada de una cuenta | Que la credencial vigente fue verificada; la credencial nueva **ya derivada** | Guardas de cuenta |
-| OP-04 | CU-04 | Responde si la cuenta admite acceso, y con qué motivos si no | Nada: es la puerta de entrada | Evaluador de admisibilidad |
-| OP-05 | CU-05 | Constituye o reedita un trabajo con dueño, identidad propia y texto original íntegro | Pertenencia del trabajo; momento de creación y de última modificación | Núcleo de entidades, Máquina de estados |
-| OP-06 | CU-06 | Adopta el conjunto de piezas y componentes reconstruido, con identidad posicional | La interpretación del texto, hecha afuera; la cantidad de figuras del conjunto raíz | Adopción de la interpretación |
-| OP-07 | CU-07 | Adopta las observaciones del trabajo, comprobando que están bien formadas | La emisión de las observaciones, hecha afuera | Adopción de la interpretación |
-| OP-08 | CU-08 | Resuelve el estado del trabajo en el envío: `Pendiente` si el texto verifica, `Borrador` si no | El resultado de la interpretación; momento | Máquina de estados |
-| OP-09 | CU-09 | Resuelve si un alumno accede a un trabajo y qué puede hacer con él | Nada más que las entidades | Máquina de estados |
-| OP-10 | CU-10 | Aplica el desenlace —aprobar o rechazar— sobre un trabajo en estado `Pendiente`, con comentario opcional | Que quien opera es el administrador; momento | Máquina de estados |
-| OP-11 | CU-11 | Resuelve qué trabajos entran en el alcance del administrador y cuáles puede eliminar | Nada más que las entidades | Máquina de estados |
-| OP-12 | CU-12 | Constituye la única cuenta de administrador, `Habilitado` y con credencial, mientras no exista ninguna | Que no existe ninguna cuenta con papel `Administrador`; la credencial **ya derivada**; momento | Guardas de cuenta |
-| OP-13 | CU-13 | Resetea la contraseña de una cuenta de alumno: fija la provisoria **ya derivada** y pone la marca | Que quien opera es el administrador; la provisoria ya producida y derivada; momento | Guardas de cuenta |
+| OP-01 | CU-02001 | Constituye un alumno con cuenta `Pendiente`, sin credencial derivada y con papel `Alumno` | Unicidad del correo; momento del alta | Núcleo de entidades, Guardas de cuenta |
+| OP-02 | CU-02002 | Habilita, bloquea, rehabilita o da de baja una cuenta **de alumno** | Que quien opera es el administrador; el texto de confirmación en la baja; momento | Guardas de cuenta |
+| OP-03 | CU-02003 | Fija o reemplaza la credencial derivada de una cuenta | Que la credencial vigente fue verificada; la credencial nueva **ya derivada** | Guardas de cuenta |
+| OP-04 | CU-02004 | Responde si la cuenta admite acceso, y con qué motivos si no | Nada: es la puerta de entrada | Evaluador de admisibilidad |
+| OP-05 | CU-02005 | Constituye o reedita un trabajo con dueño, identidad propia y texto original íntegro | Pertenencia del trabajo; momento de creación y de última modificación | Núcleo de entidades, Máquina de estados |
+| OP-06 | CU-02006 | Adopta el conjunto de piezas y componentes reconstruido, con identidad posicional | La interpretación del texto, hecha afuera; la cantidad de figuras del conjunto raíz | Adopción de la interpretación |
+| OP-07 | CU-02007 | Adopta las observaciones del trabajo, comprobando que están bien formadas | La emisión de las observaciones, hecha afuera | Adopción de la interpretación |
+| OP-08 | CU-02008 | Resuelve el estado del trabajo en el envío: `Pendiente` si el texto verifica, `Borrador` si no | El resultado de la interpretación; momento | Máquina de estados |
+| OP-09 | CU-02009 | Resuelve si un alumno accede a un trabajo y qué puede hacer con él | Nada más que las entidades | Máquina de estados |
+| OP-10 | CU-02010 | Aplica el desenlace —aprobar o rechazar— sobre un trabajo en estado `Pendiente`, con comentario opcional | Que quien opera es el administrador; momento | Máquina de estados |
+| OP-11 | CU-02011 | Resuelve qué trabajos entran en el alcance del administrador y cuáles puede eliminar | Nada más que las entidades | Máquina de estados |
+| OP-12 | CU-02012 | Constituye la única cuenta de administrador, `Habilitado` y con credencial, mientras no exista ninguna | Que no existe ninguna cuenta con papel `Administrador`; la credencial **ya derivada**; momento | Guardas de cuenta |
+| OP-13 | CU-02013 | Resetea la contraseña de una cuenta de alumno: fija la provisoria **ya derivada** y pone la marca | Que quien opera es el administrador; la provisoria ya producida y derivada; momento | Guardas de cuenta |
 
 **Trece operaciones sobre trece casos de uso.** OP-11 y OP-09 devuelven predicados y no aplican efecto: el dominio no ejecuta consultas, declara el criterio con el que la consulta se acota.
 
@@ -78,7 +78,7 @@ Las cinco de [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](
 
 ### 4.2 Conjuntos cerrados
 
-Agregar un valor a cualquiera de estos conjuntos es cambio **menor**; quitarlo es cambio **mayor** ([`ADR-03`](Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) §7).
+Agregar un valor a cualquiera de estos conjuntos es cambio **menor**; quitarlo es cambio **mayor** ([`ADR-02003`](Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §7).
 
 | Conjunto | Valores | Cantidad |
 | --- | --- | --- |
@@ -94,7 +94,7 @@ Agregar un valor a cualquiera de estos conjuntos es cambio **menor**; quitarlo e
 
 ### 4.3 Resultado de operación
 
-Toda operación que pueda rechazar devuelve un resultado con dos salidas posibles —efecto aplicado, o condición que lo impidió— según [`ADR-02`](Adrs/ADR-02-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md). Tres precisiones de forma:
+Toda operación que pueda rechazar devuelve un resultado con dos salidas posibles —efecto aplicado, o condición que lo impidió— según [`ADR-02002`](Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md). Tres precisiones de forma:
 
 1. **La admisibilidad devuelve varios motivos**, no uno: una cuenta puede ser no admisible por más de una causa a la vez.
 2. **La adopción de la interpretación devuelve una colección de condiciones**, porque un conjunto de piezas puede estar mal formado en más de un lugar.
@@ -110,7 +110,7 @@ Toda operación que pueda rechazar devuelve un resultado con dos salidas posible
 
 ## 6. Versionado del contrato
 
-Aplica el criterio de [`ADR-03`](Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md) §7, con estas concreciones sobre los elementos de este contrato:
+Aplica el criterio de [`ADR-02003`](Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §7, con estas concreciones sobre los elementos de este contrato:
 
 | Cambio sobre este contrato | Clase |
 | --- | --- |
@@ -128,10 +128,10 @@ Aplica el criterio de [`ADR-03`](Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Supe
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU que lo consumen | CU-01 a CU-13, los trece |
-| RN que cubre | RN-01 a RN-16, las dieciséis, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2 |
+| CU que lo consumen | CU-02001 a CU-02013, los trece |
+| RN que cubre | RN-02001 a RN-02016, las dieciséis, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2 |
 | Invariantes que sostiene | INV-01 a INV-09, los nueve, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
-| ADR que lo gobiernan | ADR-01, ADR-02, ADR-03, ADR-04, ADR-05, ADR-06 |
+| ADR que lo gobiernan | ADR-02001, ADR-02002, ADR-02003, ADR-02004, ADR-02005, ADR-02006 |
 | Consumidores | `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`, por referencia de proyecto de código |
 | Tests previstos en 08 | Una prueba por operación en su camino de efecto aplicado y al menos una por condición del catálogo; prueba de inspección de la superficie pública contra §4.2 y §5 |
 

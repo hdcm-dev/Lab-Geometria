@@ -40,9 +40,9 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 - [ ] Esos `TC-XX` están ejecutados y **pasan**. **Se valida** con el registro del guion de la etapa.
 - [ ] **Si la historia introduce una acotación, existe un caso que la verifica forzando la solicitud sin pasar por la pantalla.** **Se valida** con los seis casos de `CV-05`. Una historia que sólo demuestre que el control no se dibuja **no está terminada**: eso acota lo que se ofrece y no prueba nada.
 - [ ] La superficie que la historia declaró en su Definition of Ready criterio 4 **tiene sus filas de la matriz de sensado verificadas**, con estado y fecha. **Se valida** leyendo [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md).
-- [ ] **Ninguna condición que la historia presenta está fuera de los diecisiete códigos vivos** ni del camino de ausencia de respuesta, y ninguna expone dirección, ruta ni traza. **Se valida** con `TC-31`.
-- [ ] La historia **no introdujo ninguna petición del navegador hacia el servicio de datos** ni ninguna salida nueva. **Se valida** con `TC-29` y `TC-30`.
-- [ ] Si la historia toca la escena, **no introdujo invocaciones al interior del bundle** ni tráfico de circuito durante la interacción. **Se valida** con `TC-32` y `TC-33`.
+- [ ] **Ninguna condición que la historia presenta está fuera de los diecisiete códigos vivos** ni del camino de ausencia de respuesta, y ninguna expone dirección, ruta ni traza. **Se valida** con `TC-10031`.
+- [ ] La historia **no introdujo ninguna petición del navegador hacia el servicio de datos** ni ninguna salida nueva. **Se valida** con `TC-10029` y `TC-10030`.
+- [ ] Si la historia toca la escena, **no introdujo invocaciones al interior del bundle** ni tráfico de circuito durante la interacción. **Se valida** con `TC-10032` y `TC-10033`.
 - [ ] La construcción termina **sin advertencias**. **Se valida** con la etapa de construcción del flujo de publicación.
 
 ### 1.2 Tarea técnica
@@ -57,8 +57,8 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
 - [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3.
 - [ ] Los **once** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen. **Se valida** con esa lista.
-- [ ] **El guion de demostración de la etapa y los de todas las anteriores pasan al 100 %, sin correcciones.** **Se valida** con `TC-35` y `CV-23`. Ejecutar sólo el de la etapa en curso **no cumple**.
-- [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-13`, `CV-14` a `CV-18`, `CV-20` a `CV-22`, `CV-31` a `CV-35`— se cumplen. **Se valida** con el registro del flujo y con `TC-29` a `TC-33`.
+- [ ] **El guion de demostración de la etapa y los de todas las anteriores pasan al 100 %, sin correcciones.** **Se valida** con `TC-10035` y `CV-23`. Ejecutar sólo el de la etapa en curso **no cumple**.
+- [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-13`, `CV-14` a `CV-18`, `CV-20` a `CV-22`, `CV-31` a `CV-35`— se cumplen. **Se valida** con el registro del flujo y con `TC-10029` a `TC-10033`.
 - [ ] `CV-13` **se cumple**, y no sólo se midió: es **bloqueante** aunque su forma de puerta siga rotulada [ASUNCIÓN], porque el intake §22 `A-4` declara que lo que puede cambiar es la forma del gate y no su carácter. **Se valida** con la presencia de la medición **y de su resultado en verde** en el informe de cierre.
 - [ ] **Las filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) que la etapa toca están verificadas, con estado y fecha, y ninguna deriva mayor queda abierta.** **Se valida** recorriendo la matriz. Una deriva mayor se resuelve **corrigiendo lo construido o actualizando la línea de base con aprobación humana explícita**, nunca por omisión.
 - [ ] Toda deriva **menor** quedó registrada aunque no bloquee. **Se valida** con `CV-27`.

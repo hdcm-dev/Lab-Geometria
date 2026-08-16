@@ -89,7 +89,7 @@ Para cada proyecto de código extraje el conjunto de `TC-XX` **definidos** —lo
 
 ### 2.3 Reglas, invariantes y necesidades
 
-Las **dieciséis** reglas `RN-01` a `RN-16` de la categoría 02 de Domain tienen las dieciséis filas en su tabla §4, ninguna agrupada, y el reparto de la columna de invariante es **diez con invariante y seis sin él** —conté: con, `RN-01` a `RN-06`, `RN-10`, `RN-12`, `RN-13`, `RN-16`; sin, `RN-07`, `RN-08`, `RN-09`, `RN-11`, `RN-14`, `RN-15`—, que es exactamente lo que la matriz declara. Los **nueve** invariantes tienen las nueve filas de la cuarta tabla, cada uno con al menos una prueba de violación rechazada y la columna «usa dobles» en `No` en las nueve. Las **nueve** necesidades `NB-01` a `NB-09` existen en `01-Necesidades-Negocio/` y aparecen citadas en la cadena.
+Las **dieciséis** reglas `RN-01` a `RN-16` de la categoría 02 de Domain tienen las dieciséis filas en su tabla §4, ninguna agrupada, y el reparto de la columna de invariante es **diez con invariante y seis sin él** —conté: con, `RN-01` a `RN-06`, `RN-10`, `RN-12`, `RN-13`, `RN-16`; sin, `RN-07`, `RN-08`, `RN-09`, `RN-11`, `RN-14`, `RN-15`—, que es exactamente lo que la matriz declara. Los **nueve** invariantes tienen las nueve filas de la cuarta tabla, cada uno con al menos una prueba de violación rechazada y la columna «usa dobles» en `No` en las nueve. Las **nueve** necesidades `NB-00001` a `NB-00009` existen en `01-Necesidades-Negocio/` y aparecen citadas en la cadena.
 
 Un punto de honestidad que conviene destacar: la matriz de Domain declara que `RN-12`, `RN-13` y `RN-16` comparten `INV-09` «con la lectura que la categoría 02 adoptó», y agrega que **«no afirma que la prosa del intake la respalde»**. Eso es exactamente lo que hay que hacer con una lectura heredada de una fuente ambigua.
 
@@ -214,7 +214,7 @@ Abrí todas las citas entrecomilladas atribuidas al intake. El resultado es buen
 | Reglas de negocio | 16 | **16** | `RN-01` a `RN-16` en `02` de Domain; 16 filas en la matriz |
 | Invariantes | 9 | **9** | `INV-01` a `INV-09`; 9 filas en la cuarta tabla de la matriz de Domain |
 | Escenarios | 8 | **8** | `E-1` a `E-8` en §20; los siete proyectos de código dicen «ocho» |
-| Necesidades de negocio | 9 | **9** | `NB-01` a `NB-09` en `01-Necesidades-Negocio/` |
+| Necesidades de negocio | 9 | **9** | `NB-00001` a `NB-00009` en `01-Necesidades-Negocio/` |
 | Códigos de contrato | 15 vivos / 18 emitidos | **15 / 18** | `CV-05` y `CV-12` de Contracts; coincide con `03` |
 | Puntos de acceso | 15 | **15** | `CV-02` de Api y su tabla §5 |
 | Funciones de fachada | 6 | **6** | `CV-02` del Visor, `QG-06`, `SD-01` y `SD-43` de Web |

@@ -157,7 +157,7 @@ Los conté yo, sobre el instrumento, sin leer la cifra declarada.
 | Reglas de negocio | 16 | **16** | Archivos `RN-*` de `Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, excluido `_legacy/` |
 | Invariantes | 9 | **9**, `INV-01` a `INV-09` | Identificadores distintos en el intake |
 | Escenarios | 8 | **8** | `grep -c "^### §20.E-"` sobre el intake |
-| Necesidades de negocio | 9 | **9**, `NB-01` a `NB-09` | Identificadores distintos en `01-Necesidades-Negocio/`, excluido `_legacy/` |
+| Necesidades de negocio | 9 | **9**, `NB-00001` a `NB-00009` | Identificadores distintos en `01-Necesidades-Negocio/`, excluido `_legacy/` |
 | Códigos de contrato vivos | 15 sobre 18 emitidos | **15** | Filas `CONTRATO_*` de `Contratos-REST.md` §5. Los 18 emitidos y los 3 retirados los declara §5 del mismo documento |
 | Puntos de acceso | 15 | **15** | Filas de la tabla de `Contratos-REST.md` §3. Los identificadores llegan a `A-16`; **`A-04` no está en la tabla** y su retiro por `RN-16` se declara en el párrafo siguiente, con el criterio de que no se recicla |
 | Códigos de respuesta | 10 | **10** | Filas de la tabla de `Contratos-REST.md` §4, y contraste con la enumeración de `DX-Error-Messages.md` §6.2: `400`, `401`, `403`, `404`, `409`, `500`, `503`, más `200`, `201`, `204` |

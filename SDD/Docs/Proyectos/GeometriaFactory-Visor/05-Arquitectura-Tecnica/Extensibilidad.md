@@ -40,17 +40,17 @@ Conviene decir de entrada qué clase de extensibilidad es, porque no es la habit
 | Qué compra | Que el motor de dibujo tridimensional se pueda reemplazar **sin tocar ninguna página** |
 | Por qué funciona | Porque el componente anfitrión no conoce los nombres internos del motor: sólo estas seis funciones (`PRODUCT-INTAKE` §17.7.P.2, alternativa descartada 2) |
 | Quién lo ejerce | El sample **S-1**, la página integradora sin backend, en cinco pasos o menos |
-| ADR que lo gobiernan | [`ADR-01`](Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md), [`ADR-02`](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) y [`ADR-06`](Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) |
+| ADR que lo gobiernan | [`ADR-12001`](Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md), [`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) y [`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) |
 
 ## 3. Qué se puede reemplazar y qué no
 
 | Elemento | ¿Reemplazable? | Fundamento |
 | --- | --- | --- |
-| El **motor de dibujo tridimensional** | **Sí**, y es el propósito del punto de extensión | Vive confinado a la capa 3 y nunca aparece en la superficie pública ([`ADR-04`](Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md)) |
+| El **motor de dibujo tridimensional** | **Sí**, y es el propósito del punto de extensión | Vive confinado a la capa 3 y nunca aparece en la superficie pública ([`ADR-12004`](Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md)) |
 | El **servicio de dibujo** entero, capa 3 | **Sí** | La capa 2 no contiene lógica de dibujo, de modo que la capa 3 se puede sustituir sin tocarla |
 | La **forma interna del identificador** de instancia | **Sí, y no es cambio de contrato** | Es opaco por decisión; que el anfitrión dependa de su forma es un defecto del anfitrión |
-| La **disposición** de las piezas en la escena | **No libremente**: cualquier reemplazo tiene que derivarla del índice | Garantía G-6 y [`ADR-05`](Adrs/ADR-05-Disposicion-Determinista-Derivada-Del-Indice.md) |
-| Las **seis funciones** y sus nombres | **No.** Quitar una, renombrarla o cambiar qué recibe es cambio mayor | Rompe al anfitrión y al sample S-1 ([`ADR-06`](Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §7) |
+| La **disposición** de las piezas en la escena | **No libremente**: cualquier reemplazo tiene que derivarla del índice | Garantía G-6 y [`ADR-12005`](Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md) |
+| Las **seis funciones** y sus nombres | **No.** Quitar una, renombrarla o cambiar qué recibe es cambio mayor | Rompe al anfitrión y al sample S-1 ([`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §7) |
 | Las **siete garantías** | **No.** Perder cualquiera es cambio mayor aunque las firmas no se toquen | Son parte del contrato, no detalles de implementación |
 | Los **siete códigos de condición** | **No aguas abajo.** Un código nuevo sólo puede nacer en la categoría 02 | Fuente única en §6 del contrato de fachada |
 
@@ -65,7 +65,7 @@ Un reemplazo de la capa 3 —otro motor de dibujo, u otra implementación del se
 | 3 | Los **siete** códigos de condición, ni uno más ni uno menos, con sus dos cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` | Inspección contra §6 del contrato de fachada |
 | 4 | Los **seis** tipos de pieza dibujables, con el cero como dimensión legible | Escenario **E-7**, que cubre los seis tipos |
 | 5 | La disposición derivada del índice, con **posición reservada** para las figuras no reconstruidas | Escenario **E-5** y comparación de dos procesados |
-| 6 | Los **dos** movimientos automáticos gobernables por separado, con reposición de la orientación de partida al apagar el giro | Los criterios de aceptación de `CU-07` |
+| 6 | Los **dos** movimientos automáticos gobernables por separado, con reposición de la orientación de partida al apagar el giro | Los criterios de aceptación de `CU-12007` |
 | 7 | Liberación completa en `destruir`, incluido el corte del bucle | **10** recorridos de ida y vuelta con los movimientos prendidos, puerta `PT-02` |
 | 8 | Empaquetado sin dependencias traídas de una red externa en tiempo de ejecución | Puerta `PT-03` |
 
@@ -84,7 +84,7 @@ Es el proceso que hay que seguir cuando el anfitrión necesita una capacidad que
 | 5 | **Consolidarla en el intake** §17.7 P.3, para que la fuente de las funciones vuelva a ser única | El Product Owner |
 | 6 | Declararla **cambio menor** y registrarla | El equipo |
 
-**Ese proceso ya se recorrió entero una vez**, con la sexta función: el Product Owner la decidió el 2026-08-09 al cerrar la validación visual de la Fase B2, la categoría 02 la acuñó en §4.6 de su documento de concepto central con caso de uso propio `CU-07`, **no acuñó garantía ni código** —la condición que informa ya existía— y el intake la consolidó en su versión 1.6. La superficie pasó de cinco funciones a seis **sin romper a ningún anfitrión escrito contra las cinco anteriores**, que es la definición de cambio menor.
+**Ese proceso ya se recorrió entero una vez**, con la sexta función: el Product Owner la decidió el 2026-08-09 al cerrar la validación visual de la Fase B2, la categoría 02 la acuñó en §4.6 de su documento de concepto central con caso de uso propio `CU-12007`, **no acuñó garantía ni código** —la condición que informa ya existía— y el intake la consolidó en su versión 1.6. La superficie pasó de cinco funciones a seis **sin romper a ningún anfitrión escrito contra las cinco anteriores**, que es la definición de cambio menor.
 
 ## 6. Ejemplo de ejercicio del punto de extensión
 
@@ -95,7 +95,7 @@ El ejemplo canónico es el sample **S-1**, y no un ejemplo inventado acá: `PROD
 | Qué ejerce | Las **seis** funciones, en recorrido, sin ninguna pieza del backend |
 | Reproducibilidad | **Cinco pasos o menos**, todos dentro del contenedor de desarrollo: generar el bundle, abrir la página, pegar un texto, mirar |
 | Material | Escenarios **E-1** —tres piezas, con el ortoedro dibujado— y **E-7** —seis piezas que cubren los seis tipos dibujables— |
-| Caso de uso que lo materializa | `CU-06`, el transversal de la categoría 02 |
+| Caso de uso que lo materializa | `CU-12006`, el transversal de la categoría 02 |
 | Dónde se desarrolla | La categoría **10-Examples**, que todavía no está emitida para este proyecto de código |
 
 **Por qué el sample es la prueba del punto de extensión y no un agregado de conveniencia**: si las seis funciones se pueden ejercer enteras sin backend, entonces nada del interior depende del resto del producto, y por lo tanto el interior se puede reemplazar. El intake lo declara como propiedad exigida y no opcional.
@@ -116,9 +116,9 @@ Se declara para que ninguna categoría aguas abajo lo busque ni lo invente.
 
 | Dimensión | Referencia |
 | --- | --- |
-| ADR que justifica el punto de extensión | [`ADR-01`](Adrs/ADR-01-Tres-Capas-Con-Fachada-Plana.md), y su política de crecimiento en [`ADR-02`](Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) y [`ADR-06`](Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) |
+| ADR que justifica el punto de extensión | [`ADR-12001`](Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md), y su política de crecimiento en [`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) y [`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) |
 | Contrato que lo define | [`Contratos-Abstractions.md`](Contratos-Abstractions.md) y [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) |
-| CU que lo ejercen | `CU-01` a `CU-07`; el recorrido completo es `CU-06` |
+| CU que lo ejercen | `CU-12001` a `CU-12007`; el recorrido completo es `CU-12006` |
 | Ejemplo de extensión | Sample **S-1**, que la categoría 10-Examples desarrollará |
 | Tests previstos en 08 | Los ocho compromisos de §4, todos verificables sin backend |
 

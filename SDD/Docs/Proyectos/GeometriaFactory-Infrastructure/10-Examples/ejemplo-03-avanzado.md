@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/infrastructure/03-avanzado/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06` a `CU-10`; [`../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md), [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) y [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §2.4, la regla de detenerse en lugar de cumplir a medias
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-03` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06006` a `CU-06010`; [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md), [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) y [`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §2.4, la regla de detenerse en lugar de cumplir a medias
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06003` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -46,11 +46,11 @@ samples/infrastructure/03-avanzado/
 ├── README.md                              # Copia corta de §1, §3 y §4 de este documento
 ├── Program.<ext>                          # Recorre los cinco actos en orden
 ├── Actos/
-│   ├── ActoDerivarYVerificar.<ext>        # CU-06
-│   ├── ActoProducirProvisoria.<ext>       # CU-07
-│   ├── ActoEmitirAcceso.<ext>             # CU-08
-│   ├── ActoReloj.<ext>                    # CU-09
-│   └── ActoPrepararAlmacen.<ext>          # CU-10
+│   ├── ActoDerivarYVerificar.<ext>        # CU-06006
+│   ├── ActoProducirProvisoria.<ext>       # CU-06007
+│   ├── ActoEmitirAcceso.<ext>             # CU-06008
+│   ├── ActoReloj.<ext>                    # CU-06009
+│   └── ActoPrepararAlmacen.<ext>          # CU-06010
 ├── Inspecciones/
 │   ├── SinSecretosEnLaFuente.<ext>        # Recuento con umbral 0 sobre el árbol del sample
 │   └── SinClaroEnLaTraza.<ext>            # Recuento con umbral 0 sobre la salida producida
@@ -96,31 +96,31 @@ Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
 | Ruta del almacén ausente | Quitar la ruta de la configuración del entorno | `RUTA_DEL_ALMACEN_NO_DISPONIBLE`, y **el mensaje no nombra ninguna ruta**: es una dirección de servicio interno |
-| Provisoria derivada de la cuenta | Producir la provisoria a partir del correo | La línea `derivadas de un dato de la cuenta` pasa a `si` y el criterio de aceptación falla. Es lo que [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) prohíbe |
-| Parámetros de derivación sin anclar | Cambiar los parámetros de derivación sin versionarlos | Las credenciales derivadas antes dejan de verificar, y nada lo declara. Es lo que [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) viene a impedir |
+| Provisoria derivada de la cuenta | Producir la provisoria a partir del correo | La línea `derivadas de un dato de la cuenta` pasa a `si` y el criterio de aceptación falla. Es lo que [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) prohíbe |
+| Parámetros de derivación sin anclar | Cambiar los parámetros de derivación sin versionarlos | Las credenciales derivadas antes dejan de verificar, y nada lo declara. Es lo que [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) viene a impedir |
 | Reloj del sistema en vez del puerto | Leer el reloj directamente en un acto | La línea `sello identico` pasa a `no` y el sample deja de ser comparable entre corridas |
 
 ## 8. Trazabilidad
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | Caso de uso | Deriva sin guardar en claro y distingue el veredicto falso del derivado ilegible |
-| [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | Caso de uso | Produce **100** provisorias con **0** repetidas y se detiene cuando la aleatoriedad no responde |
-| [`CU-08`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08-Emitir-El-Acceso-Firmado.md) | Caso de uso | Emite con sus **cuatro** reclamos y rechaza sin clave de firma y con reclamos incompletos |
-| [`CU-09`](../02-Especificacion-Funcional/Casos-De-Uso/CU-09-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | Caso de uso | Provee el sello por el puerto, con dos corridas que dan el mismo valor al fijarlo |
-| [`CU-10`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10-Preparar-El-Almacen-Al-Arrancar.md) | Caso de uso | Aplica las transformaciones, registra el linaje y detiene el arranque ante un linaje desconocido |
-| [`RN-14`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-14-Provisoria-Producida-Por-El-Sistema.md) | Regla de negocio | La provisoria la produce el sistema, no adivinable y sin repetirse |
-| [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | Decisión arquitectónica | La derivación anclada con parámetros versionados |
-| [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) | Decisión arquitectónica | Las **100** provisorias sin repetición y sin derivar de un dato de la cuenta |
-| [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) | Decisión arquitectónica | El linaje inmutable y el arranque detenido |
+| [`CU-06006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | Caso de uso | Deriva sin guardar en claro y distingue el veredicto falso del derivado ilegible |
+| [`CU-06007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | Caso de uso | Produce **100** provisorias con **0** repetidas y se detiene cuando la aleatoriedad no responde |
+| [`CU-06008`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06008-Emitir-El-Acceso-Firmado.md) | Caso de uso | Emite con sus **cuatro** reclamos y rechaza sin clave de firma y con reclamos incompletos |
+| [`CU-06009`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | Caso de uso | Provee el sello por el puerto, con dos corridas que dan el mismo valor al fijarlo |
+| [`CU-06010`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Caso de uso | Aplica las transformaciones, registra el linaje y detiene el arranque ante un linaje desconocido |
+| [`RN-02014`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | Regla de negocio | La provisoria la produce el sistema, no adivinable y sin repetirse |
+| [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | Decisión arquitectónica | La derivación anclada con parámetros versionados |
+| [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) | Decisión arquitectónica | Las **100** provisorias sin repetición y sin derivar de un dato de la cuenta |
+| [`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) | Decisión arquitectónica | El linaje inmutable y el arranque detenido |
 | `RA-03` | Regla de arquitectura del producto | Las dos inspecciones con umbral **0**: ninguna clave, contraseña ni ruta del almacén en la fuente del sample ni en su salida |
 
 ## 9. Contrato de verificación
 
 ```yaml
 verificacion:
-  id: VER-03
-  verifica: [CU-06, CU-07, CU-08, CU-09, CU-10, US-17, US-18, US-19, US-20, US-21, US-22, US-23, US-24, US-25]
+  id: VER-06003
+  verifica: [CU-06006, CU-06007, CU-06008, CU-06009, CU-06010, US-06017, US-06018, US-06019, US-06020, US-06021, US-06022, US-06023, US-06024, US-06025]
   comando: "dotnet run --project samples/infrastructure/03-avanzado"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -159,4 +159,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06` a `CU-10`, los cinco mecanismos que sólo esta capa provee, con **dos** inspecciones de umbral **cero** y su condición de medición declarada. El contrato `VER-03` declara once líneas exactas de salida y **cuatro aserciones negativas**, una por cada modo de falla silencioso de la capa; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06006` a `CU-06010`, los cinco mecanismos que sólo esta capa provee, con **dos** inspecciones de umbral **cero** y su condición de medición declarada. El contrato `VER-06003` declara once líneas exactas de salida y **cuatro aserciones negativas**, una por cada modo de falla silencioso de la capa; `evidencia` queda en `No verificado — sin código`. |

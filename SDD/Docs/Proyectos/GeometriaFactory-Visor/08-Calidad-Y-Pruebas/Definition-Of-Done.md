@@ -37,7 +37,7 @@
 - [ ] Todos los criterios Given/When/Then de la historia están cubiertos por al menos un `TC-XX`. **Se valida** leyendo la columna de test de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2 para su `CU-XX`.
 - [ ] Esos `TC-XX` están escritos y **en verde**.
 - [ ] **Toda garantía que la historia declara ejercer tiene su fila en la matriz §5 con este `TC-XX` entre sus tests**, y ninguna afirmación de la historia contradice a otra garantía. **Se valida** leyendo esa tabla. Es el criterio 5 de la DoR verificado del lado del cierre.
-- [ ] Todo código de condición que la historia usa es **uno de los siete**, y la historia **no acuñó ninguno**. **Se valida** con `TC-21`.
+- [ ] Todo código de condición que la historia usa es **uno de los siete**, y la historia **no acuñó ninguno**. **Se valida** con `TC-12021`.
 - [ ] Si la historia entrega una **ausencia**, su criterio se verificó con **umbral cero y con su condición de medición registrada**. **Se valida** leyendo el registro de la medición. Un umbral cero sin condición **no cumple**.
 - [ ] Ninguna persona, papel, servicio ni credencial interviene como actor ni condiciona un flujo. **Se valida** leyendo la historia y su caso de prueba.
 - [ ] El bundle se genera sin errores. **Se valida** con el guion de construcción del bundle.
@@ -48,14 +48,14 @@
 - [ ] Si la tarea sostiene una **ausencia**, su criterio se expresó con umbral cero **y con la condición en que se mide**. **Se valida** leyendo el criterio: sin condición, la tarea ni siquiera cumplía la DoR §2.
 - [ ] Si la tarea es de tipo indagación, la decisión que produjo está **registrada** y no sólo tomada. **Se valida** leyendo el documento donde quedó.
 - [ ] Ninguna dependencia introducida cruza la regla de dependencias entre capas. **Se valida** con `CV-29`.
-- [ ] Si la tarea mide una puerta —`BT-13`, `BT-14`, `BT-16`— el resultado quedó registrado con su condición de medición. **Se valida** con el informe.
+- [ ] Si la tarea mide una puerta —`BT-12013`, `BT-12014`, `BT-12016`— el resultado quedó registrado con su condición de medición. **Se valida** con el informe.
 
 ### 1.3 Momento del producto
 
 - [ ] Todas las historias de la épica cumplen §1.1, y todas sus tareas técnicas cumplen §1.2.
 - [ ] Los **diez** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen.
 - [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-29` a `CV-31`— se cumplen.
-- [ ] **En el momento de medición: `PT-02` y `PT-03` pasan enteras**, en sus **seis** tramos `CV-18` a `CV-23`. **Se valida** con `TC-19` y `TC-20`. **Si alguna no pasa, la etapa `g` no se compromete**: no hay diferimiento, no hay deuda y no hay carácter condicionado.
+- [ ] **En el momento de medición: `PT-02` y `PT-03` pasan enteras**, en sus **seis** tramos `CV-18` a `CV-23`. **Se valida** con `TC-12019` y `TC-12020`. **Si alguna no pasa, la etapa `g` no se compromete**: no hay diferimiento, no hay deuda y no hay carácter condicionado.
 - [ ] Toda medición de ausencia se hizo **con su condición** y quedó registrada junto al resultado. **Se valida** con el informe de cierre.
 - [ ] La batería completa —y no sólo lo que el momento tocó— corre y pasa. **Se valida** con `CV-24`.
 - [ ] Ningún `TC-XX` que estaba en verde pasó a rojo sin justificación escrita. **Se valida** con `CV-25`.
@@ -75,7 +75,7 @@ Se aplica cuando la etapa `a`, el momento de medición y la etapa `g` están cer
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos de prueba que los usan. **Se valida** con `CV-08`.
 - [ ] **`PT-02` y `PT-03` pasadas**, con su registro.
 - [ ] Los **ocho** compromisos de un reemplazo de la capa 3 están verificables sin backend. **Se valida** con [`Guia-Testing-Extensibilidad.md`](Guia-Testing-Extensibilidad.md) §3.
-- [ ] El sample **S-1** ejerce las **seis** funciones enteras, en **cinco pasos o menos**. **Se valida** con `TC-15`.
+- [ ] El sample **S-1** ejerce las **seis** funciones enteras, en **cinco pasos o menos**. **Se valida** con `TC-12015`.
 - [ ] Los puntos abiertos de `05` §11 tienen desenlace declarado, o su continuidad como abiertos está registrada: hoy son **cinco**, `PA-01` a `PA-05`.
 - [ ] El bundle es un **artefacto generado y reproducible**, nunca editado a mano. **Se valida** con `CV-30`.
 
@@ -83,7 +83,7 @@ Se aplica cuando la etapa `a`, el momento de medición y la etapa `g` están cer
 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
-| **Umbral de fluidez inexistente** | La verificación es cualitativa declarada junto con `PT-02`. **No habilita a inventar un número** | El Product Owner, o esta categoría al fijar su guion de medición (`BT-18`) | El guion cualitativo y su resultado, rotulado como cualitativo |
+| **Umbral de fluidez inexistente** | La verificación es cualitativa declarada junto con `PT-02`. **No habilita a inventar un número** | El Product Owner, o esta categoría al fijar su guion de medición (`BT-12018`) | El guion cualitativo y su resultado, rotulado como cualitativo |
 | Deuda técnica que un momento no alcanza a cerrar | Se difiere **una sola vez**, y nunca si es de los bloqueantes de §1.3 | El Product Owner | Una `BT-XX` nueva con el momento en que se cierra |
 | **`PT-02` o `PT-03` que no pasan** | **Ninguna excepción.** La etapa `g` no se compromete | — | — |
 | Medición de ausencia **sin su condición** | **No se admite.** No cuenta como medición | — | — |

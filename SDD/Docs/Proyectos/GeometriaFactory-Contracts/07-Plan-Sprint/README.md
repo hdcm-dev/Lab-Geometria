@@ -33,7 +33,7 @@
 | Etapas que toca este proyecto de código | 7 (`a`, `c`, `d`, `e`, `f`, `g`, `h`) |
 | Etapas cerradas | 0 |
 | Etapa abierta | Ninguna: el producto está en fase de especificación |
-| Historias comprometidas | 21 de las 22 del backlog; US-10 queda para la fase `i…` |
+| Historias comprometidas | 21 de las 22 del backlog; US-08010 queda para la fase `i…` |
 | Tareas técnicas comprometidas | 18 |
 
 ## 4. Dónde vive lo que este plan no decide

@@ -7,7 +7,7 @@
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-08-Recorrer-La-Entrega-De-La-Comision.md` íntegro —§4, FA-01 a FA-04, §6, §6.1 y CA-01 a CA-07—; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07, RT-09); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-07-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §1, §5 (los siete criterios); `NB-09` §5 (primer criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-12, F-15), §4.1 (RN-03, RN-11), §4.2, §6 (flujos 2.1 y 3), §17.6 P.4; `Design-Rules-Web-Generico.md` §3, §4.3, §4.8, §4.10, §5, §7, §8; `Design-Rules-Blazor-Mudblazor.md` §4, §5
+**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-10008-Recorrer-La-Entrega-De-La-Comision.md` íntegro —§4, FA-01 a FA-04, §6, §6.1 y CA-01 a CA-07—; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07, RT-09); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md` §1, §5 (los siete criterios); `NB-00009` §5 (primer criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-12, F-15), §4.1 (RN-10003, RN-10011), §4.2, §6 (flujos 2.1 y 3), §17.6 P.4; `Design-Rules-Web-Generico.md` §3, §4.3, §4.8, §4.10, §5, §7, §8; `Design-Rules-Blazor-Mudblazor.md` §4, §5
 **Trazabilidad downstream:** Fase B2 de validación visual de maqueta; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
 
 ---
@@ -149,13 +149,13 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | El docente como administrador, en tanda de revisión |
-| CU origen | [`CU-08`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08-Recorrer-La-Entrega-De-La-Comision.md) íntegro |
-| Reglas de negocio relevantes | `RN-11` (el administrador no ve los borradores), `RN-03` (trabajo ajeno indistinguible de inexistente) |
+| CU origen | [`CU-10008`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10008-Recorrer-La-Entrega-De-La-Comision.md) íntegro |
+| Reglas de negocio relevantes | `RN-10011` (el administrador no ve los borradores), `RN-10003` (trabajo ajeno indistinguible de inexistente) |
 | Restricciones transversales | `RT-03`, `RT-06`, `RT-07`, `RT-09` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.7, §4.3, §7 |
 | Representaciones que invoca | [`Representacion-Fila-De-Trabajo.md`](Representacion-Fila-De-Trabajo.md), [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) |
 | Catálogo de diseño aplicado | `Design-Rules-Web-Generico.md`, `Design-Rules-Blazor-Mudblazor.md` |
-| US a generar en 06 | `US-22`, `US-23` |
+| US a generar en 06 | `US-10022`, `US-10023` |
 | Tests previstos en 08 | Guion de demostración de la etapa `e`: dos alumnos con trabajos entregados y un borrador que ningún grupo muestra, con cero borradores en todo el listado, y con el recuento de cada grupo igual a la cantidad de filas que ese grupo dibuja; agrupación y filtro disponibles; filtro por un alumno; recorrido completo sin solicitudes externas; el listado sin ofrecer aprobar ni rechazar; listado vacío distinguible del estado degradado; etapa `i` para el resumen |
 
 ## 9. Control de cambios
@@ -163,5 +163,5 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. Listado de la comisión agrupado por alumno con filtro, con el recorte de borradores declarado en el subtítulo y verificable por recuento con umbral 0, la nota de ausencia que evita que un alumno sin trabajos se lea como un trabajo perdido, la declaración de que el listado no ofrece resolver sin abrir, el panel de resumen dibujado como capacidad de prioridad menor con su lugar ya fijado, y diez estados declarados para la Fase B2. |
-| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-07` y `NB-09` de la cabecera pasan a citarse con sección y criterio numerado. |
+| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-00007` y `NB-00009` de la cabecera pasan a citarse con sección y criterio numerado. |
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-03** (dueño contradictorio de un trabajo): `Primer intento` pasa al grupo de Ana Diaz, que es de quien lo declara `Wireframes-Panel-De-Trabajos-Del-Alumno.md` §2; el grupo de Beto Lopez conserva un trabajo propio, `Segundo intento`, que además demuestra el rechazo sin comentario escrito. §2 suma la nota que declara al panel del alumno como dueño único del conjunto de datos de ejemplo. **H-04** (recuentos sin dato declarado): el recuento del grupo de Ana pasa de «2 trabajos» a «3 trabajos», la fila del resumen de Ana pasa de `1 / 1 / 0` a `1 / 1 / 1`, y las columnas de piezas y de advertencias de las cuatro filas pasan a los valores del escenario del `PRODUCT-INTAKE` §20 que cada trabajo materializa. §8 reescribe el guion de demostración, que describía un caso que el §2 no contenía. |

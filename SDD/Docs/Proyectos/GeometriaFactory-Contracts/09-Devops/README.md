@@ -27,7 +27,7 @@
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **dos** stages, los **nueve** gates materializados, dónde corre el que este proyecto de código no puede correr solo, y la regla de despliegue conjunto con su orden |
-| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, criterio de clase de cambio de `ADR-03` con la columna de qué detecta la compilación, y política de cambios incompatibles |
+| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, criterio de clase de cambio de `ADR-08003` con la columna de qué detecta la compilación, y política de cambios incompatibles |
 | [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Por qué no hay ambientes ni canales propios, dónde viaja el ensamblado, y la superficie de exposición como regla de secretos |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario, firma, nivel de integridad, análisis, política ante vulnerabilidades, y la superficie de exposición como preocupación de cadena de suministro |
 
@@ -76,7 +76,7 @@
 | Dependencias externas | **0** | Intake §17.4.P.1 |
 | Códigos vivos del conjunto cerrado | **17**, sobre **20** emitidos, con **3** retirados y **0** reciclados | `08` `Criterios-Validacion.md` `CV-05` y `CV-20` |
 | Contratos de uso | **8** | `02` §3, citado por `08` README §5 |
-| Clases de cambio que la compilación **no** detecta | **3**, las tres mayores | `ADR-03` §7 |
+| Clases de cambio que la compilación **no** detecta | **3**, las tres mayores | `ADR-08003` §7 |
 | Etapas comprometidas que este proyecto de código toca | **7**: `a`, `c`, `d`, `e`, `f`, `g` y `h` | `08` `Definition-Of-Done.md` §1.4 |
 | Puntos abiertos de esta categoría | **4** declarados, `PD-01` a `PD-04`, de los cuales **3 vigentes**: `PD-01` quedó cerrado por el intake 1.22 y conserva su fila | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 

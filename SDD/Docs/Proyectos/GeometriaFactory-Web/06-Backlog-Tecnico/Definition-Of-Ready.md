@@ -45,7 +45,7 @@ Seis criterios, todos respondibles con sí o no.
 3. **Sus criterios de aceptación son verificables**, y cuando la propiedad que sostienen es una **ausencia** —cero peticiones del navegador, cero apariciones de la credencial, cero invocaciones al interior del bundle, cero instancias no liberadas— el criterio se expresa **con umbral cero y con la condición en que se mide**. Un criterio de ausencia sin condición de medición **no está listo**: mediría el caso fácil. La condición de referencia para el conteo de red es **con los dos movimientos automáticos prendidos**, que es el peor caso declarado.
 4. **Sus dependencias sobre otras tareas están declaradas y ninguna es circular**, y ninguna cruza la regla de dependencias de `05` §3.2: **ninguna superficie invoca al cliente tipado**, **ninguna superficie invoca al interior del bundle** y **el traductor no habla con el servicio de datos**.
 5. **Si es de tipo indagación, tiene caja temporal expresada en etapas o en el punto de control que la cierra**, nunca en horas.
-6. **Si el punto abierto que cierra no es de este proyecto de código, lo declara.** BT-12 adopta el formato que fija `GeometriaFactory-Api`, BT-23 acompaña una decisión de `09-Devops` y BT-10, BT-21 y BT-22 elevan al Product Owner. **Adoptar y acompañar no es decidir.**
+6. **Si el punto abierto que cierra no es de este proyecto de código, lo declara.** BT-10012 adopta el formato que fija `GeometriaFactory-Api`, BT-10023 acompaña una decisión de `09-Devops` y BT-10010, BT-10021 y BT-10022 elevan al Product Owner. **Adoptar y acompañar no es decidir.**
 
 ## 3. Excepciones admitidas
 
@@ -53,7 +53,7 @@ Seis criterios, todos respondibles con sí o no.
 | --- | --- | --- |
 | Historia de las etapas `a` y `b` | **No aplica**: esas dos etapas **no tienen historias**, y su trabajo es íntegramente técnico. Se declara para que la ausencia no se lea como excepción tácita | — |
 | Tarea de indagación que cierra o eleva un punto abierto de `05` §11 | El criterio 3 de §2 puede cumplirse con el **resultado esperado** en lugar de con un criterio verificable de antemano | El Product Owner, en el punto de control de la etapa que la contiene |
-| Historia cuya verificación depende del **umbral de tiempo de respuesta**, que no existe | El criterio 3 de §1 se cumple con verificación **cualitativa declarada**, hasta que `PA-06` del backlog se cierre con BT-21. Es la salida que `05` §8 declara, y **no habilita a inventar un número** | El Product Owner, o 08 al fijar su guion de medición |
+| Historia cuya verificación depende del **umbral de tiempo de respuesta**, que no existe | El criterio 3 de §1 se cumple con verificación **cualitativa declarada**, hasta que `PA-06` del backlog se cierre con BT-10021. Es la salida que `05` §8 declara, y **no habilita a inventar un número** | El Product Owner, o 08 al fijar su guion de medición |
 | Historia que introduce interactividad nueva | Ninguno: **no se admite excepción al criterio 5 ni al 6**. Un guion del navegador que llame al servicio de datos rompe `RA-01`, que es la regla que sostiene la topología entera, y `05` §9 le asigna impacto **muy alto** | — |
 | Historia que toca el bundle del visor | Ninguno: **no se admite excepción al criterio 4 en su parte de superficie**. Sólo el anfitrión toca la fachada, y sólo por sus **seis** funciones; si una superficie necesita algo que las seis no dan, el procedimiento está en [`Visor Extensibilidad.md`](../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Extensibilidad.md) §5 y **no** en tocar el interior | — |
 

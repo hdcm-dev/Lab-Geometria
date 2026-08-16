@@ -76,47 +76,47 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 
 | Etapa | ID | Tipo | Descripción corta | Prioridad | Estimación | Asignado | Estado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `a` | BT-01 | Tarea técnica | Crear el ensamblado de tipos, sin dependencias | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-02 | Tarea técnica | Puerta de cero referencias hacia `GeometriaFactory-Domain` | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-03 | Tarea técnica | Puerta de construcción con cero advertencias | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-04 | Tarea técnica | Fijar los nombres de la familia de sesión y de la de error | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-05 | Tarea técnica | Fijar la zona horaria y la precisión del campo de momento | Media | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-06 | Tarea técnica | Tipo de error único con sus cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-07 | Tarea técnica | Conjunto cerrado de diecisiete códigos vivos, con la regla de no reciclado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-08 | Tarea técnica | Prueba de inspección de superficie pública para los campos prohibidos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-09 | Tarea técnica | Familia de sesión con su respuesta de cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-16 | Tarea técnica | Matriz tipo contra prueba de integración | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-17 | Tarea técnica | Adoptar el formato de intercambio que fijan los dos extremos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-01 | Historia | Canje de credenciales y respuesta de sesión de cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-14 | Historia | Error neutro con el conjunto cerrado de diecisiete códigos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-16 | Historia | Cerrar el conjunto con el código no clasificado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-10 | Tarea técnica | Familia de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-11 | Tarea técnica | Familia de reseteo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-18 | Tarea técnica | Confirmar los dos valores rotulados como asunción | Media | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-02 | Historia | Registro de una cuenta de alumno | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-03 | Historia | Listado de cuentas del panel del administrador | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-04 | Historia | Cambio de situación de la cuenta | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-05 | Historia | Baja con su confirmación escrita | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-21 | Historia | Reseteo sin campo de contraseña y con la provisoria producida | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-22 | Historia | Reutilizar la solicitud de cambio para el cambio obligatorio | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | BT-12 | Tarea técnica | Familia de trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | BT-13 | Tarea técnica | Familia de listado con su carga útil acotada | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-06 | Historia | Envío del trabajo con el texto original como cadena | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-07 | Historia | Solicitud única de eliminación del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-08 | Historia | Proyección de listado sin la carga del detalle | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-09 | Historia | Alcance del listado según el papel, con los datos para agrupar y filtrar | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-19 | Historia | Conjunto cerrado de cuatro estados del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-14 | Tarea técnica | Familia de detalle, con el comentario como bloque propio | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-11 | Historia | Detalle del trabajo interpretado con sus piezas y componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-13 | Historia | Observación con su severidad y su par de valores | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-15 | Historia | Detalle de ubicación con índice de figura y campo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `g` | US-12 | Historia | Texto original en el detalle, para el árbol y para la escena | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | BT-15 | Tarea técnica | Familia de desenlace | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-17 | Historia | Desenlace con su conjunto cerrado de dos valores | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-18 | Historia | Comentario del administrador como bloque propio | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `h` | US-20 | Historia | Desenlace al alumno: estado en el listado y comentario en el detalle | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-08001 | Tarea técnica | Crear el ensamblado de tipos, sin dependencias | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-08002 | Tarea técnica | Puerta de cero referencias hacia `GeometriaFactory-Domain` | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-08003 | Tarea técnica | Puerta de construcción con cero advertencias | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08004 | Tarea técnica | Fijar los nombres de la familia de sesión y de la de error | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08005 | Tarea técnica | Fijar la zona horaria y la precisión del campo de momento | Media | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08006 | Tarea técnica | Tipo de error único con sus cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08007 | Tarea técnica | Conjunto cerrado de diecisiete códigos vivos, con la regla de no reciclado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08008 | Tarea técnica | Prueba de inspección de superficie pública para los campos prohibidos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08009 | Tarea técnica | Familia de sesión con su respuesta de cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08016 | Tarea técnica | Matriz tipo contra prueba de integración | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-08017 | Tarea técnica | Adoptar el formato de intercambio que fijan los dos extremos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-08001 | Historia | Canje de credenciales y respuesta de sesión de cuatro campos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-08014 | Historia | Error neutro con el conjunto cerrado de diecisiete códigos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-08016 | Historia | Cerrar el conjunto con el código no clasificado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-08010 | Tarea técnica | Familia de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-08011 | Tarea técnica | Familia de reseteo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-08018 | Tarea técnica | Confirmar los dos valores rotulados como asunción | Media | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-08002 | Historia | Registro de una cuenta de alumno | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-08003 | Historia | Listado de cuentas del panel del administrador | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-08004 | Historia | Cambio de situación de la cuenta | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-08005 | Historia | Baja con su confirmación escrita | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-08021 | Historia | Reseteo sin campo de contraseña y con la provisoria producida | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-08022 | Historia | Reutilizar la solicitud de cambio para el cambio obligatorio | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | BT-08012 | Tarea técnica | Familia de trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | BT-08013 | Tarea técnica | Familia de listado con su carga útil acotada | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-08006 | Historia | Envío del trabajo con el texto original como cadena | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-08007 | Historia | Solicitud única de eliminación del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-08008 | Historia | Proyección de listado sin la carga del detalle | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-08009 | Historia | Alcance del listado según el papel, con los datos para agrupar y filtrar | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-08019 | Historia | Conjunto cerrado de cuatro estados del trabajo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-08014 | Tarea técnica | Familia de detalle, con el comentario como bloque propio | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-08011 | Historia | Detalle del trabajo interpretado con sus piezas y componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-08013 | Historia | Observación con su severidad y su par de valores | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-08015 | Historia | Detalle de ubicación con índice de figura y campo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `g` | US-08012 | Historia | Texto original en el detalle, para el árbol y para la escena | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | BT-08015 | Tarea técnica | Familia de desenlace | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-08017 | Historia | Desenlace con su conjunto cerrado de dos valores | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-08018 | Historia | Comentario del administrador como bloque propio | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `h` | US-08020 | Historia | Desenlace al alumno: estado en el listado y comentario en el detalle | Alta | Sin fijar | Equipo (1) | Pendiente |
 
-**Total comprometido: 21 historias y 18 tareas técnicas**, repartidas en siete etapas. **US-10 no está comprometida**: es `Could`, cae en la fase `i…` y el roadmap §2.1 declara que esa fase se planifica con la plantilla completa cuando `h` esté cerrada y demostrada.
+**Total comprometido: 21 historias y 18 tareas técnicas**, repartidas en siete etapas. **US-08010 no está comprometida**: es `Could`, cae en la fase `i…` y el roadmap §2.1 declara que esa fase se planifica con la plantilla completa cuando `h` esté cerrada y demostrada.
 
 ## 4. Alcance técnico y orden de construcción
 
@@ -124,17 +124,17 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 
 **Orden dentro de cada etapa**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) §3:
 
-1. `a`: BT-01 primero; BT-02 y BT-03 al cerrar, porque son puertas y necesitan algo que compile.
-2. `c`: **BT-06 antes que todo lo demás**, porque las siete familias restantes dependen de la de error y ella de ninguna (`05` §3.1); después BT-07, BT-08 y BT-09; BT-04, BT-05 y BT-17 se cierran antes del punto de control; BT-16 se abre acá y se mantiene hasta la etapa `h`.
-3. `d`: BT-10 antes que BT-11, porque el reseteo depende de cuentas —la única arista adicional del grafo—; las seis historias después; BT-18 antes del punto de control.
-4. `e`: BT-12 antes que BT-13; las cinco historias después.
-5. `f`: BT-14 sobre BT-12; las tres historias después.
-6. `g`: sólo US-12, sobre la familia de detalle ya construida.
-7. `h`: BT-15 sobre BT-06 y BT-12; las tres historias después.
+1. `a`: BT-08001 primero; BT-08002 y BT-08003 al cerrar, porque son puertas y necesitan algo que compile.
+2. `c`: **BT-08006 antes que todo lo demás**, porque las siete familias restantes dependen de la de error y ella de ninguna (`05` §3.1); después BT-08007, BT-08008 y BT-08009; BT-08004, BT-08005 y BT-08017 se cierran antes del punto de control; BT-08016 se abre acá y se mantiene hasta la etapa `h`.
+3. `d`: BT-08010 antes que BT-08011, porque el reseteo depende de cuentas —la única arista adicional del grafo—; las seis historias después; BT-08018 antes del punto de control.
+4. `e`: BT-08012 antes que BT-08013; las cinco historias después.
+5. `f`: BT-08014 sobre BT-08012; las tres historias después.
+6. `g`: sólo US-08012, sobre la familia de detalle ya construida.
+7. `h`: BT-08015 sobre BT-08006 y BT-08012; las tres historias después.
 
 **Consecuencia del nivel topológico 0**: dentro de cada etapa, este proyecto de código va **antes** que `GeometriaFactory-Api` y `GeometriaFactory-Web`, que compilan los dos contra el mismo ensamblado. Un tipo que acá no exista es un tipo que ninguno de los dos puede usar.
 
-**Y una consecuencia que sólo tiene este proyecto de código**: cualquier cambio incompatible que se decida en una etapa posterior **rompe la compilación de los dos extremos**, no la de uno. Eso es deliberado —es el mecanismo del versionado del producto— y su contrapartida aceptada es el **despliegue conjunto** ([`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md)).
+**Y una consecuencia que sólo tiene este proyecto de código**: cualquier cambio incompatible que se decida en una etapa posterior **rompe la compilación de los dos extremos**, no la de uno. Eso es deliberado —es el mecanismo del versionado del producto— y su contrapartida aceptada es el **despliegue conjunto** ([`ADR-08003`](../05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md)).
 
 ## 5. Definition of Done aplicada
 
@@ -143,20 +143,20 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 Criterios específicos que este plan agrega:
 
 1. **La actualización de la categoría 11 forma parte del cierre.** La categoría 11 de este proyecto de código todavía no está emitida, de modo que hasta su emisión la condición se cumple de forma vacía y **se registra así en el informe de cierre**, en lugar de darse por cumplida en silencio.
-2. **Las dos puertas de construcción se miden en cada etapa** y no sólo en la `a`: cero referencias hacia el dominio (BT-02) y cero advertencias (BT-03).
-3. **La inspección de superficie pública (BT-08) se repite en toda etapa que agregue un campo a un tipo.** No alcanza con haberla corrido una vez.
-4. **La matriz de tipos ejercitados por integración (BT-16) se actualiza al cerrar cada etapa.** Es el gate equivalente que reemplaza a la cobertura de líneas, porque este proyecto de código no tiene pruebas propias (`RT-07`).
+2. **Las dos puertas de construcción se miden en cada etapa** y no sólo en la `a`: cero referencias hacia el dominio (BT-08002) y cero advertencias (BT-08003).
+3. **La inspección de superficie pública (BT-08008) se repite en toda etapa que agregue un campo a un tipo.** No alcanza con haberla corrido una vez.
+4. **La matriz de tipos ejercitados por integración (BT-08016) se actualiza al cerrar cada etapa.** Es el gate equivalente que reemplaza a la cobertura de líneas, porque este proyecto de código no tiene pruebas propias (`RT-07`).
 5. **Ningún guion de prueba que involucre el texto de figuras usa datos inventados**: se usan los escenarios `E-1` a `E-8` del intake §20.
 
 ## 6. Riesgos y mitigaciones
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 | --- | --- | --- | --- |
-| Que aparezca una referencia hacia `GeometriaFactory-Domain` y el acoplamiento vuelva por esa vía | Media: el intake la nombra como «la vía por la que el acoplamiento vuelve» | Alto | BT-02, puerta bloqueante medida en **cada** etapa, y rechazo en revisión (`05` §9, primer riesgo) |
-| Que un campo nuevo transporte una dirección de servicio o una traza, **sin que nadie lo note porque compila** | Media | Alto: viola `RA-03` y expone la topología del producto | BT-08, repetida en toda etapa que agregue un campo, y el criterio 6 de la DoR, que no admite excepción (`05` §9, segundo riesgo) |
-| Que el listado incorpore un campo del detalle «porque hace falta en una pantalla» | **Alta**: es la presión natural de la capa de presentación | Medio | BT-13 con umbral cero en las tres dimensiones, y [`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md), que declara que la proyección existe precisamente para **no** ser el detalle (`05` §9, tercer riesgo) |
+| Que aparezca una referencia hacia `GeometriaFactory-Domain` y el acoplamiento vuelva por esa vía | Media: el intake la nombra como «la vía por la que el acoplamiento vuelve» | Alto | BT-08002, puerta bloqueante medida en **cada** etapa, y rechazo en revisión (`05` §9, primer riesgo) |
+| Que un campo nuevo transporte una dirección de servicio o una traza, **sin que nadie lo note porque compila** | Media | Alto: viola `RA-03` y expone la topología del producto | BT-08008, repetida en toda etapa que agregue un campo, y el criterio 6 de la DoR, que no admite excepción (`05` §9, segundo riesgo) |
+| Que el listado incorpore un campo del detalle «porque hace falta en una pantalla» | **Alta**: es la presión natural de la capa de presentación | Medio | BT-08013 con umbral cero en las tres dimensiones, y [`ADR-08005`](../05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), que declara que la proyección existe precisamente para **no** ser el detalle (`05` §9, tercer riesgo) |
 | Que una de las dos unidades desplegables se despliegue sin la otra tras un cambio incompatible | Media | Alto: el contrato deja de ser el mismo de los dos lados | Regla operativa de despliegue conjunto, que **09 tiene que materializar** y que este plan eleva como entrada a esa categoría (`05` §9, quinto riesgo; `Vista-Producto.md` §7 `RI-02`) |
-| Que los dos extremos se configuren distinto **sin romper ninguna compilación**, y un campo llegue nulo en producción | Media si no se controla | **Alto**: `Vista-Producto.md` §7 lo declara como el único modo de falla del contrato que la compilación compartida no atrapa | BT-17, adoptar la **única** configuración de intercambio declarada en todo el producto, y verificación **ejerciendo el servicio real** desde la batería de integración, no comparando dos archivos |
+| Que los dos extremos se configuren distinto **sin romper ninguna compilación**, y un campo llegue nulo en producción | Media si no se controla | **Alto**: `Vista-Producto.md` §7 lo declara como el único modo de falla del contrato que la compilación compartida no atrapa | BT-08017, adoptar la **única** configuración de intercambio declarada en todo el producto, y verificación **ejerciendo el servicio real** desde la batería de integración, no comparando dos archivos |
 
 ## 7. Criterios de hecho de cada tramo
 
@@ -175,13 +175,13 @@ Una etapa de este proyecto de código está hecha cuando:
 
 | Etapa | NB que avanzan | CU que avanzan | ADR que gobiernan las decisiones |
 | --- | --- | --- | --- |
-| `a` | Ninguna: es un hito interno sin capacidad funcional asociada | Ninguno | ADR-01, ADR-03 |
-| `c` | NB-01, NB-02, NB-04, NB-08 | CU-01, CU-06 | ADR-01, ADR-02, ADR-04 |
-| `d` | NB-01, NB-02 | CU-02, CU-08 | ADR-04 |
-| `e` | NB-03, NB-04, NB-07, NB-09 | CU-03, CU-04 | ADR-01, ADR-05 |
-| `f` | NB-04, NB-05, NB-06, NB-07 | CU-05, CU-06 | ADR-05 |
-| `g` | NB-04, NB-06 | CU-05 | ADR-01, ADR-05 |
-| `h` | NB-09, NB-07 | CU-05, CU-07 | ADR-05 |
+| `a` | Ninguna: es un hito interno sin capacidad funcional asociada | Ninguno | ADR-08001, ADR-08003 |
+| `c` | NB-00001, NB-00002, NB-00004, NB-00008 | CU-08001, CU-08006 | ADR-08001, ADR-08002, ADR-08004 |
+| `d` | NB-00001, NB-00002 | CU-08002, CU-08008 | ADR-08004 |
+| `e` | NB-00003, NB-00004, NB-00007, NB-00009 | CU-08003, CU-08004 | ADR-08001, ADR-08005 |
+| `f` | NB-00004, NB-00005, NB-00006, NB-00007 | CU-08005, CU-08006 | ADR-08005 |
+| `g` | NB-00004, NB-00006 | CU-08005 | ADR-08001, ADR-08005 |
+| `h` | NB-00009, NB-00007 | CU-08005, CU-08007 | ADR-08005 |
 
 **Las siete etapas declaran al menos una necesidad de negocio en avance, salvo la `a`**, y esa excepción es del propio roadmap: `a` es un hito interno sin capacidad funcional asociada.
 
@@ -201,6 +201,6 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Contracts`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con la constancia de los cuatro que no se emiten— y por qué no se declara capacidad numérica, con el motivo propio de este proyecto de código: su trabajo no es proporcional a su volumen de código. Fija el objetivo de cada uno de los **siete** tramos que toca de las **ocho** etapas comprometidas, compromete **21** historias y **18** tareas técnicas sin inventar ningún identificador, y deja explícitamente **fuera** a US-10, que es de la fase `i…`. Declara el orden de construcción con la familia de error primero, la doble consecuencia del nivel topológico 0 y del contrato que dos proyectos de código compilan a la vez, y **cinco** riesgos con mitigación, incluido el único modo de falla que la compilación compartida no atrapa. |
+| 1.0 | 2026-08-10 | Emisión inicial del mini-plan de `GeometriaFactory-Contracts`. Declara por qué la categoría emite un único artefacto —`equipo_n = 1`, con la constancia de los cuatro que no se emiten— y por qué no se declara capacidad numérica, con el motivo propio de este proyecto de código: su trabajo no es proporcional a su volumen de código. Fija el objetivo de cada uno de los **siete** tramos que toca de las **ocho** etapas comprometidas, compromete **21** historias y **18** tareas técnicas sin inventar ningún identificador, y deja explícitamente **fuera** a US-08010, que es de la fase `i…`. Declara el orden de construcción con la familia de error primero, la doble consecuencia del nivel topológico 0 y del contrato que dos proyectos de código compilan a la vez, y **cinco** riesgos con mitigación, incluido el único modo de falla que la compilación compartida no atrapa. |
 | 1.1 | 2026-08-11 | **Actualiza la trazabilidad upstream** a la versión del `Product-Backlog.md` de la sección 06, que subieron a **1.1** el 2026-08-11. El `Product-Backlog.md` subió al absorber la promoción de `F-13` a `Must Have` (`PRODUCT-INTAKE` **1.19** §4) y al declarar la regularidad de la distribución MoSCoW (hallazgo `D-06-03`). **Ninguna historia ni tarea técnica de este proyecto de código cambia de prioridad, de etapa ni de tramo**, y ningún compromiso, riesgo ni orden de construcción de este plan se toca: la fila existe para que la versión citada sea la vigente y no una que ya no está. Sube minor. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |

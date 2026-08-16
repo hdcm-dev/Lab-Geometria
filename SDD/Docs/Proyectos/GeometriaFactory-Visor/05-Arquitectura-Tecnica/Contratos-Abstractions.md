@@ -126,7 +126,7 @@ Las mismas dos opciones en las dos funciones que las reciben, **con una diferenc
 
 ## 6. Versionado del contrato
 
-Aplica el criterio de [`ADR-06`](Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §7. Lo esencial:
+Aplica el criterio de [`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §7. Lo esencial:
 
 | Cambio | Clase |
 | --- | --- |
@@ -145,11 +145,11 @@ Aplica el criterio de [`ADR-06`](Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Pu
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU que lo consumen | CU-01 a CU-07, los siete de la categoría 02 de este proyecto de código |
-| NB que sostiene | NB-06, y NB-04 parcialmente |
+| CU que lo consumen | CU-12001 a CU-12007, los siete de la categoría 02 de este proyecto de código |
+| NB que sostiene | NB-00006, y NB-00004 parcialmente |
 | RN que cubre | **Ninguna.** Un visualizador puro no tiene reglas de dominio |
 | Garantías que compromete | G-1 a G-7, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2 |
-| ADR que lo gobiernan | ADR-01, ADR-02, ADR-03, ADR-04, ADR-05, ADR-06 |
+| ADR que lo gobiernan | ADR-12001, ADR-12002, ADR-12003, ADR-12004, ADR-12005, ADR-12006 |
 | Consumidor | El componente anfitrión, que vive en `GeometriaFactory-Web` |
 | Ejemplos | Sample **S-1**, la página integradora sin backend, que ejerce las seis funciones |
 | Tests previstos en 08 | Las siete garantías; las seis propiedades transversales con sus condiciones de medición; los escenarios E-1 y E-7; las puertas `PT-02` y `PT-03` |

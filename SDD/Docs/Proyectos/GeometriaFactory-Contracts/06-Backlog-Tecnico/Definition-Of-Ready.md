@@ -50,7 +50,7 @@ Cinco criterios, todos respondibles con sí o no.
 | Caso | Qué se flexibiliza | Quién lo aprueba |
 | --- | --- | --- |
 | Tarea de indagación que cierra un punto abierto de `05` §11 | El criterio 3 de §2 puede cumplirse con el resultado esperado en lugar de con un criterio verificable de antemano | El Product Owner, en el punto de control de la etapa que la contiene |
-| Historia de la fase `i…` | Los criterios 3 y 7 de §1 se difieren hasta que esa fase se planifique con la plantilla completa, como declara el roadmap §2.1. Alcanza hoy únicamente a **US-10** | El Product Owner, al planificar la fase `i…` |
+| Historia de la fase `i…` | Los criterios 3 y 7 de §1 se difieren hasta que esa fase se planifique con la plantilla completa, como declara el roadmap §2.1. Alcanza hoy únicamente a **US-08010** | El Product Owner, al planificar la fase `i…` |
 | Historia que introduce un campo nuevo en un tipo existente | Ninguno: **no se admite excepción al criterio 6**. `05` §9 declara que agregar un campo de diagnóstico es la forma habitual en que ese defecto entra, y que entra sin que nadie lo note porque compila | — |
 
 ## 4. Aprobador
@@ -60,7 +60,7 @@ Cinco criterios, todos respondibles con sí o no.
 | Product Owner | El docente de la cátedra, que es también quien ejecuta (`PRODUCT-INTAKE` cabecera y §2) | Que un ítem cumple esta DoR antes de entrar a la etapa, y las excepciones de §3 |
 | AG-06, curaduría del backlog | La misma persona, en el papel de la categoría 06 | Que la historia o la tarea esté redactada, trazada y con sus criterios escritos |
 
-**Con `equipo_n = 1` los dos papeles los ejerce la misma persona.** Lo que reemplaza al filtro de una segunda persona es el **punto de control bloqueante** de cada etapa (`PRODUCT-INTAKE` §15). Para este proyecto de código hay además un segundo filtro que no depende de nadie: **la compilación de los dos extremos**. Un cambio incompatible rompe la compilación de `GeometriaFactory-Api` y de `GeometriaFactory-Web` antes que el tiempo de ejecución, y ése es el mecanismo del versionado del producto ([`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md)).
+**Con `equipo_n = 1` los dos papeles los ejerce la misma persona.** Lo que reemplaza al filtro de una segunda persona es el **punto de control bloqueante** de cada etapa (`PRODUCT-INTAKE` §15). Para este proyecto de código hay además un segundo filtro que no depende de nadie: **la compilación de los dos extremos**. Un cambio incompatible rompe la compilación de `GeometriaFactory-Api` y de `GeometriaFactory-Web` antes que el tiempo de ejecución, y ése es el mecanismo del versionado del producto ([`ADR-08003`](../05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md)).
 
 **Lo que ese filtro no atrapa está declarado y conviene tenerlo presente al aprobar**: `Vista-Producto.md` §7 registra como riesgo `RI-01` que los dos extremos se configuren distinto **sin romper ninguna compilación**, y lo califica como el único modo de falla del contrato que la compilación compartida no atrapa.
 

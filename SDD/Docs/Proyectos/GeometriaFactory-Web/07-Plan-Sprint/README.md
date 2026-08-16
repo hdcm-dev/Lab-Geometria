@@ -48,9 +48,9 @@
 | El diseño de las once superficies, sus estados y su línea de base visual | [`../03-UX-UI-DX/`](../03-UX-UI-DX/), **emitida y validada contra una maqueta aprobada** |
 | El orden de las etapas, sus criterios de transición y dónde se miden las puertas | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) |
 | Las dieciséis reglas de negocio | `GeometriaFactory-Domain`. **Esta pieza no hace cumplir ninguna** |
-| El formato de intercambio | La categoría 05 de `GeometriaFactory-Api`. Esta pieza **lo adopta**, con BT-12 |
-| El umbral numérico de tiempo de respuesta | Abierto: `PA-06` del backlog, elevado con BT-21. **La categoría 05 se negó a inventarlo** |
-| Si el bundle generado se versiona o se ignora | `09-Devops`, **todavía no emitida**. Este plan lo acompaña con BT-23 |
+| El formato de intercambio | La categoría 05 de `GeometriaFactory-Api`. Esta pieza **lo adopta**, con BT-10012 |
+| El umbral numérico de tiempo de respuesta | Abierto: `PA-06` del backlog, elevado con BT-10021. **La categoría 05 se negó a inventarlo** |
+| Si el bundle generado se versiona o se ignora | `09-Devops`, **todavía no emitida**. Este plan lo acompaña con BT-10023 |
 | La Definition of Done canónica | `08-Calidad-Y-Pruebas`, **todavía no emitida**. Lo que sí está emitido de esa categoría es [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que este plan consume |
 
 ## 5. Control de cambios

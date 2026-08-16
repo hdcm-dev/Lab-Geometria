@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-10
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `02-Especificacion-Funcional/Glosario-Funcional.md` §2, §3 y §4; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §2, §4 y §8; `02-Especificacion-Funcional/Modelo-Datos/`; §6 de CU-01 a CU-10; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Glosario-Funcional.md` §2 y `03-UX-UI-DX/Glosario-UX.md` §2; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` §2; `Vocabulario-Rules.md` §2, §4 y §9
+**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena); `02-Especificacion-Funcional/Glosario-Funcional.md` §2, §3 y §4; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3, §4 y §11; `02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md` §2, §4 y §8; `02-Especificacion-Funcional/Modelo-Datos/`; §6 de CU-06001 a CU-06010; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Glosario-Funcional.md` §2 y `03-UX-UI-DX/Glosario-UX.md` §2; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` §2; `Vocabulario-Rules.md` §2, §4 y §9
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de GeometriaFactory-Infrastructure
 
 ---

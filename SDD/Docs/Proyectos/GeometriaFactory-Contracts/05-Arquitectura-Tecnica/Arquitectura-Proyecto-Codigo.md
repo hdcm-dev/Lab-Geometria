@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.15** §4 y §4.1 (las **dieciséis** reglas `RN-01` a `RN-16`), §4.2 (modelo de estados del trabajo), §13 y §14 (composición y las tres reglas de arquitectura `RA-01`, `RA-02`, `RA-03`), §17.4 completo (P.1 a P.12), §17.5 P.3 y P.5 (qué existe del otro lado del contrato); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2, §3 y §5; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) y los ocho contratos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) y [`../03-UX-UI-DX/README.md`](../03-UX-UI-DX/README.md)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.15** §4 y §4.1 (las **dieciséis** reglas `RN-08001` a `RN-08016`), §4.2 (modelo de estados del trabajo), §13 y §14 (composición y las tres reglas de arquitectura `RA-01`, `RA-02`, `RA-03`), §17.4 completo (P.1 a P.12), §17.5 P.3 y P.5 (qué existe del otro lado del contrato); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2, §3 y §5; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) y los ocho contratos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) y [`../03-UX-UI-DX/README.md`](../03-UX-UI-DX/README.md)
 **Trazabilidad downstream:** `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de GeometriaFactory-Contracts
 
 ---
@@ -45,14 +45,14 @@ Este proyecto de código es atípico en una cosa que conviene decir antes que na
 
 ## 2. Estilo arquitectónico
 
-**Estilo elegido: ensamblado compartido de tipos de transferencia planos, sin comportamiento y sin dependencias, con un único tipo de error transversal.** Lo registra [`ADR-01`](Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md).
+**Estilo elegido: ensamblado compartido de tipos de transferencia planos, sin comportamiento y sin dependencias, con un único tipo de error transversal.** Lo registra [`ADR-08001`](Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md).
 
 Cuatro propiedades estructurales lo concretan:
 
 1. **Cero dependencias, y en particular ninguna hacia `GeometriaFactory-Domain`.** El intake declara esa ausencia como **quality gate bloqueante** (§17.4.P.8), y es lo que impide que la unidad pública conozca las entidades del dominio.
-2. **Compilación compartida en lugar de descripción formal de servicio.** Los dos consumidores compilan contra el mismo ensamblado, de modo que un cambio incompatible rompe la compilación antes que el tiempo de ejecución ([`ADR-03`](Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md)).
-3. **Un solo tipo de error para las ocho familias**, con un conjunto cerrado de **diecisiete** códigos vivos ([`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)).
-4. **Proyección de listado separada del detalle**, que es lo que evita que el listado arrastre el texto completo de cada trabajo ([`ADR-05`](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md)).
+2. **Compilación compartida en lugar de descripción formal de servicio.** Los dos consumidores compilan contra el mismo ensamblado, de modo que un cambio incompatible rompe la compilación antes que el tiempo de ejecución ([`ADR-08003`](Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md)).
+3. **Un solo tipo de error para las ocho familias**, con un conjunto cerrado de **diecisiete** códigos vivos ([`ADR-08002`](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)).
+4. **Proyección de listado separada del detalle**, que es lo que evita que el listado arrastre el texto completo de cada trabajo ([`ADR-08005`](Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md)).
 
 ### 2.1 Alternativas descartadas
 
@@ -62,7 +62,7 @@ Las dos primeras las descarta el intake; la tercera la evalúa y la descarta est
 | --- | --- | --- | --- |
 | Compartir las entidades de dominio entre las dos unidades desplegables | Un solo juego de tipos, cero duplicación | Acopla la unidad pública a cambios internos del dominio y **filtra al navegador campos que no le corresponden**, empezando por la credencial derivada | **Descartada** por `PRODUCT-INTAKE` §17.4.P.2 |
 | Generar el cliente desde una descripción formal del servicio | Contrato explícito y verificable por herramienta; clientes generados | Costo de cadena de herramientas frente a un contrato que consumen **dos** proyectos de código de la misma solución, compilados juntos | **Descartada** por `PRODUCT-INTAKE` §17.4.P.2 |
-| Un tipo de error por familia de tipos | Cada familia declararía exactamente sus condiciones | Multiplica por ocho los lugares donde se puede filtrar una dirección de servicio, que es exactamente lo que RA-03 evita; y obligaría a la unidad pública a ocho tratamientos distintos del mismo trabajo | **Descartada** por esta categoría, ver [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) §4 |
+| Un tipo de error por familia de tipos | Cada familia declararía exactamente sus condiciones | Multiplica por ocho los lugares donde se puede filtrar una dirección de servicio, que es exactamente lo que RA-03 evita; y obligaría a la unidad pública a ocho tratamientos distintos del mismo trabajo | **Descartada** por esta categoría, ver [`ADR-08002`](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) §4 |
 
 ## 3. Vista lógica
 
@@ -105,14 +105,14 @@ flowchart TD
 
 ### 3.2 La regla de exposición
 
-Es la decisión central del proyecto de código, y por eso vive en la vista lógica y no enterrada en cross-cutting: **qué se expone y qué no**. `PRODUCT-INTAKE` §17.4.P.5 la declara y [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) la registra.
+Es la decisión central del proyecto de código, y por eso vive en la vista lógica y no enterrada en cross-cutting: **qué se expone y qué no**. `PRODUCT-INTAKE` §17.4.P.5 la declara y [`ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) la registra.
 
 | Nunca cruza la frontera | Fundamento |
 | --- | --- |
 | El hash de la contraseña, en ninguna de sus formas | `PRODUCT-INTAKE` §17.4.P.5 |
 | La clave de firma | `PRODUCT-INTAKE` §17.4.P.5 |
 | Cualquier dirección de servicio interno, en un campo o dentro de un texto | RA-03, `PRODUCT-INTAKE` §14 y §17.4.P.5 |
-| Rutas de archivos de datos y trazas de la implementación | Postcondición de [`../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) §7 |
+| Rutas de archivos de datos y trazas de la implementación | Postcondición de [`../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) §7 |
 | Ninguna condición que impida operar, como campo de la respuesta de sesión | Restricción transversal `RT-10` de la categoría 02: las tres viajan como respuesta de error con código propio |
 
 **Y una prohibición de forma, no de contenido**: ningún tipo de este ensamblado habilita a que el navegador invoque el servicio de datos. Todas las solicitudes las arma el servidor de la unidad pública y viajan servidor a servidor, **incluidas las que llevan credenciales en claro** —canje, cambio y reseteo—. Es `RA-01`, y la categoría 02 lo declara como `RT-11`.
@@ -121,14 +121,14 @@ Es la decisión central del proyecto de código, y por eso vive en la vista lóg
 
 | Componente | Contrato de uso que cubre |
 | --- | --- |
-| Familia de sesión | CU-01 |
-| Familia de cuentas | CU-02 |
-| Familia de trabajo | CU-03 |
-| Familia de listado | CU-04 |
-| Familia de detalle | CU-05 |
-| Familia de error | CU-06, y transversalmente los otros siete |
-| Familia de desenlace | CU-07 |
-| Familia de reseteo | CU-08 |
+| Familia de sesión | CU-08001 |
+| Familia de cuentas | CU-08002 |
+| Familia de trabajo | CU-08003 |
+| Familia de listado | CU-08004 |
+| Familia de detalle | CU-08005 |
+| Familia de error | CU-08006, y transversalmente los otros siete |
+| Familia de desenlace | CU-08007 |
+| Familia de reseteo | CU-08008 |
 
 Los ocho contratos de uso tienen componente y ningún componente queda sin contrato de uso.
 
@@ -157,17 +157,17 @@ Los ocho contratos de uso tienen componente y ningún componente queda sin contr
 - **Sin caché.** Un tipo de transferencia no cachea: si la unidad pública decide cachear una respuesta, esa decisión es suya y no del contrato.
 - **La forma de los datos sí es una decisión de esta sección**, y tiene dos concreciones que aguas abajo no se pueden invertir:
   - **El texto original del trabajo viaja como cadena, sin interpretarse** (`PRODUCT-INTAKE` §17.4.P.11 punto 2). La interpretación es del backend y el dibujo, del bundle del visor.
-  - **La proyección de listado no incluye el texto original, ni los componentes de las piezas, ni el comentario del administrador** ([`ADR-05`](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md)).
+  - **La proyección de listado no incluye el texto original, ni los componentes de las piezas, ni el comentario del administrador** ([`ADR-08005`](Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md)).
 - **El comentario del administrador viaja en el detalle como bloque propio y nunca como elemento de la colección de observaciones**: no comparten ni un campo. Es la restricción transversal `RT-09` de la categoría 02.
 
 ## 7. Cross-cutting concerns
 
 | Preocupación | Decisión | Fundamento |
 | --- | --- | --- |
-| Manejo de errores | **Un único tipo de error** con cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y un conjunto cerrado de **diecisiete** códigos vivos sobre **veinte** identificadores emitidos | [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
+| Manejo de errores | **Un único tipo de error** con cuatro campos —código, texto neutro, colección de detalles de ubicación y momento— y un conjunto cerrado de **diecisiete** códigos vivos sobre **veinte** identificadores emitidos | [`ADR-08002`](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
 | Registro de eventos, trazas y métricas | **Ninguno propio.** El ensamblado no instrumenta. La correlación entre las dos unidades desplegables, si se decide, es de `GeometriaFactory-Api` y de `GeometriaFactory-Web` | `PRODUCT-INTAKE` §17.4.P.10 no declara observabilidad propia |
 | Configuración | **Ninguna.** El ensamblado no lee configuración | Derivado de §17.4.P.2, tipos planos sin comportamiento |
-| Secretos | **Ninguno, y es prohibición explícita**: ningún tipo transporta el hash de la contraseña ni la clave de firma | [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) |
+| Secretos | **Ninguno, y es prohibición explícita**: ningún tipo transporta el hash de la contraseña ni la clave de firma | [`ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) |
 | Vocabulario | `Pendiente` se escribe **siempre calificado** —«cuenta `Pendiente`» o «trabajo en estado `Pendiente`»—, porque los dos sentidos cruzan este mismo contrato. «Contrato» tiene tres referentes en la cadena y se escribe siempre en la forma que su glosario fija | `PRODUCT-INTAKE` §4.2; [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../02-Especificacion-Funcional/Glosario-Funcional.md) |
 | Momento | El tipo de error lleva un campo de momento. **Su zona horaria y su precisión no se deciden acá**: las fija quien lo produce | Punto abierto PA-02 de §11 |
 
@@ -177,13 +177,13 @@ El primero y el segundo vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE` 
 
 | NFR | Objetivo numérico | Mecanismo de medición | ADR relacionada |
 | --- | --- | --- | --- |
-| Tipos ejercitados por prueba de integración | **100 %** de los tipos de transferencia, con al menos una prueba cada uno [ASUNCIÓN del intake] | Matriz tipo contra prueba en 08, sobre la batería de integración que golpea el servicio real | [`ADR-03`](Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) |
-| Carga útil del listado | **0** ocurrencias del texto original, **0** de componentes de pieza y **0** del comentario del administrador en la proyección de listado [ASUNCIÓN derivada del intake §17.4.P.10] | Inspección de la superficie pública de la familia de listado | [`ADR-05`](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md) |
-| Referencias hacia `GeometriaFactory-Domain` | Exactamente **0** | Inspección del archivo de proyecto, puerta bloqueante de construcción | [`ADR-01`](Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) |
-| Campos capaces de transportar una dirección de servicio, una ruta de datos o un secreto | Exactamente **0** en los tipos de las ocho familias | Prueba de inspección de superficie pública, que es CA-01 de CU-06 | [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) |
-| Códigos de error del conjunto cerrado | Exactamente **17** vivos, y **0** códigos producidos fuera del conjunto | Prueba de inspección del conjunto cerrado, que es CA-09 de CU-06 | [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
-| Campos de la respuesta de sesión | Exactamente **4**, y **0** que transporten una condición que impida operar | Inspección de la superficie pública, restricción transversal `RT-10` | [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) |
-| Advertencias de construcción | Exactamente **0** | Etapa de `build` del pipeline, bloqueante para fusionar | [`ADR-03`](Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) |
+| Tipos ejercitados por prueba de integración | **100 %** de los tipos de transferencia, con al menos una prueba cada uno [ASUNCIÓN del intake] | Matriz tipo contra prueba en 08, sobre la batería de integración que golpea el servicio real | [`ADR-08003`](Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
+| Carga útil del listado | **0** ocurrencias del texto original, **0** de componentes de pieza y **0** del comentario del administrador en la proyección de listado [ASUNCIÓN derivada del intake §17.4.P.10] | Inspección de la superficie pública de la familia de listado | [`ADR-08005`](Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md) |
+| Referencias hacia `GeometriaFactory-Domain` | Exactamente **0** | Inspección del archivo de proyecto, puerta bloqueante de construcción | [`ADR-08001`](Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) |
+| Campos capaces de transportar una dirección de servicio, una ruta de datos o un secreto | Exactamente **0** en los tipos de las ocho familias | Prueba de inspección de superficie pública, que es CA-01 de CU-08006 | [`ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) |
+| Códigos de error del conjunto cerrado | Exactamente **17** vivos, y **0** códigos producidos fuera del conjunto | Prueba de inspección del conjunto cerrado, que es CA-09 de CU-08006 | [`ADR-08002`](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) |
+| Campos de la respuesta de sesión | Exactamente **4**, y **0** que transporten una condición que impida operar | Inspección de la superficie pública, restricción transversal `RT-10` | [`ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) |
+| Advertencias de construcción | Exactamente **0** | Etapa de `build` del pipeline, bloqueante para fusionar | [`ADR-08003`](Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
 
 **No hay NFR de latencia ni de throughput**, y es correcto: el ensamblado no ejecuta nada. El único atributo de rendimiento que este proyecto de código puede empeorar es el **tamaño de la carga útil**, y por eso la segunda fila es la que hay que mirar.
 
@@ -192,11 +192,11 @@ El primero y el segundo vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE` 
 | Riesgo | Impacto | Probabilidad | Mitigación |
 | --- | --- | --- | --- |
 | Que aparezca una referencia hacia `GeometriaFactory-Domain` y el acoplamiento vuelva por esa vía | Alto: la unidad pública pasaría a conocer las entidades y podría filtrar campos que no le corresponden | Media: el intake la nombra como «la vía por la que el acoplamiento vuelve» | Puerta bloqueante de construcción y rechazo en revisión (`PRODUCT-INTAKE` §17.4.P.8) |
-| Que un campo nuevo de un tipo transporte una dirección de servicio o una traza, sin que nadie lo note porque compila | Alto: viola RA-03 y expone la topología del producto | Media: es la forma habitual en que este defecto entra, agregando un campo de diagnóstico | Prueba de inspección de superficie pública (CA-01 de CU-06) y cláusula de rechazo de §17 de ese contrato de uso |
-| Que el listado incorpore un campo del detalle «porque hace falta en una pantalla» | Medio: el listado del administrador arrastraría el texto completo de cada trabajo | Alta: es la presión natural de la capa de presentación | NFR de carga útil del listado (§8) y [`ADR-05`](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md), que declara que la proyección existe precisamente para **no** ser el detalle |
-| Que un identificador de código retirado se recicle para otra condición | Medio: un consumidor viejo lo interpretaría con la causa anterior | Baja, pero con precedente cercano: ya hay **tres** identificadores retirados | Regla explícita de no reciclado en [`ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) §7 y CA-09 de CU-06 |
+| Que un campo nuevo de un tipo transporte una dirección de servicio o una traza, sin que nadie lo note porque compila | Alto: viola RA-03 y expone la topología del producto | Media: es la forma habitual en que este defecto entra, agregando un campo de diagnóstico | Prueba de inspección de superficie pública (CA-01 de CU-08006) y cláusula de rechazo de §17 de ese contrato de uso |
+| Que el listado incorpore un campo del detalle «porque hace falta en una pantalla» | Medio: el listado del administrador arrastraría el texto completo de cada trabajo | Alta: es la presión natural de la capa de presentación | NFR de carga útil del listado (§8) y [`ADR-08005`](Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), que declara que la proyección existe precisamente para **no** ser el detalle |
+| Que un identificador de código retirado se recicle para otra condición | Medio: un consumidor viejo lo interpretaría con la causa anterior | Baja, pero con precedente cercano: ya hay **tres** identificadores retirados | Regla explícita de no reciclado en [`ADR-08002`](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) §7 y CA-09 de CU-08006 |
 | Que una de las dos unidades desplegables se despliegue sin la otra tras un cambio incompatible | Alto: el contrato deja de ser el mismo de los dos lados | Media | Regla operativa de despliegue conjunto (`PRODUCT-INTAKE` §17.4.P.3), que 09 tiene que materializar |
-| Que aparezca un tipo pensado para que el navegador invoque el servicio de datos | Alto: reabre contenido mixto, restricción de origen cruzado y exposición de la dirección del servidor propio | Baja | `RT-11` de la categoría 02 y [`ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md), que declaran que **todas** las solicitudes las arma el servidor de la unidad pública |
+| Que aparezca un tipo pensado para que el navegador invoque el servicio de datos | Alto: reabre contenido mixto, restricción de origen cruzado y exposición de la dirección del servidor propio | Baja | `RT-11` de la categoría 02 y [`ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), que declaran que **todas** las solicitudes las arma el servidor de la unidad pública |
 
 ## 10. Trazabilidad
 
@@ -204,9 +204,9 @@ El primero y el segundo vienen rotulados **[ASUNCIÓN]** desde `PRODUCT-INTAKE` 
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU cubiertos | CU-01 a CU-08, los ocho de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 |
+| CU cubiertos | CU-08001 a CU-08008, los ocho de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 |
 | RN aplicables | Ninguna propia: este proyecto de código no las redacta. Las refiere por identificador a `GeometriaFactory-Domain`, ver §10.3 |
-| ADRs que lo gobiernan | ADR-01, ADR-02, ADR-03, ADR-04, ADR-05 |
+| ADRs que lo gobiernan | ADR-08001, ADR-08002, ADR-08003, ADR-08004, ADR-08005 |
 | Contratos que expone | [`Contratos-Abstractions.md`](Contratos-Abstractions.md) |
 | Tests previstos en 08 | Pruebas de integración que golpean el servicio real, una por tipo como mínimo; prueba de inspección de superficie pública para los campos prohibidos; prueba de inspección del conjunto cerrado de diecisiete códigos |
 
@@ -216,17 +216,17 @@ Las once filas están, `RT-01` a `RT-11`, sin agrupar. Son las de [`../02-Especi
 
 | Restricción | Qué exige, en una línea | ADR que la materializa |
 | --- | --- | --- |
-| RT-01 | Ningún tipo lleva hash de contraseña, clave de firma ni dirección de servicio interno | ADR-04 |
-| RT-02 | La respuesta de error lleva texto neutro y, cuando corresponde, índice de figura y campo | ADR-02, ADR-04 |
-| RT-03 | El texto original del trabajo viaja como cadena, sin interpretarse | ADR-01 |
-| RT-04 | La proyección de listado no lleva texto original, ni componentes, ni comentario | ADR-05 |
-| RT-05 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | ADR-01 |
-| RT-06 | Un cambio incompatible obliga al despliegue conjunto de las dos unidades | ADR-03 |
-| RT-07 | Sin pruebas propias: el gate equivalente es el 100 % de tipos ejercitados por integración | ADR-03 |
-| RT-08 | Cuatro estados del trabajo, dos terminales, y ningún tipo que permita salir de ellos | ADR-01 |
-| RT-09 | El comentario viaja como bloque propio y nunca como observación | ADR-05 |
-| RT-10 | Ninguna condición que impida operar viaja como campo de la respuesta de sesión | ADR-02, ADR-04 |
-| RT-11 | Ningún tipo habilita a que el navegador invoque el servicio de datos | ADR-04 |
+| RT-01 | Ningún tipo lleva hash de contraseña, clave de firma ni dirección de servicio interno | ADR-08004 |
+| RT-02 | La respuesta de error lleva texto neutro y, cuando corresponde, índice de figura y campo | ADR-08002, ADR-08004 |
+| RT-03 | El texto original del trabajo viaja como cadena, sin interpretarse | ADR-08001 |
+| RT-04 | La proyección de listado no lleva texto original, ni componentes, ni comentario | ADR-08005 |
+| RT-05 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | ADR-08001 |
+| RT-06 | Un cambio incompatible obliga al despliegue conjunto de las dos unidades | ADR-08003 |
+| RT-07 | Sin pruebas propias: el gate equivalente es el 100 % de tipos ejercitados por integración | ADR-08003 |
+| RT-08 | Cuatro estados del trabajo, dos terminales, y ningún tipo que permita salir de ellos | ADR-08001 |
+| RT-09 | El comentario viaja como bloque propio y nunca como observación | ADR-08005 |
+| RT-10 | Ninguna condición que impida operar viaja como campo de la respuesta de sesión | ADR-08002, ADR-08004 |
+| RT-11 | Ningún tipo habilita a que el navegador invoque el servicio de datos | ADR-08004 |
 
 ### 10.3 Las dieciséis reglas contra este proyecto de código
 
@@ -234,22 +234,22 @@ Este proyecto de código **no redacta ninguna regla de negocio**: es el caso que
 
 | Regla | Qué transporta este proyecto de código de ella | Contrato de uso |
 | --- | --- | --- |
-| RN-01 Administrador único | El rechazo de configurar un segundo administrador, con código propio | CU-02 |
-| RN-02 Correo único | El rechazo del registro con correo ya usado, con código propio | CU-02 |
-| RN-03 Trabajo ajeno indistinguible de inexistente | Un solo código y un solo texto para los dos casos: nada permite distinguirlos | CU-03, CU-05 |
-| RN-04 Eliminación acotada | La solicitud **única** de eliminación para los dos papeles, y el rechazo por estado en el camino del alumno | CU-03 |
-| RN-05 Sin errores de validación no hay estado `Pendiente` | El estado resultante del envío y las observaciones con su especie | CU-03, CU-05 |
-| RN-06 Cuenta `Pendiente` o `Bloqueado` sin acceso | El motivo de la situación de la cuenta, como respuesta de error y no como campo de sesión | CU-01 |
-| RN-07 Baja con arrastre y confirmación escrita | La confirmación escrita como campo de la solicitud, y su rechazo si no coincide | CU-02 |
-| RN-08 Texto original íntegro | El texto como cadena no interpretada, en las dos direcciones | CU-03, CU-05 |
-| RN-09 Observación con posición y campo | El índice de figura y el campo señalado en la observación del detalle | CU-05 |
-| RN-10 Desenlace exclusivo y terminal | El desenlace como conjunto cerrado de dos valores, el estado terminal, y dos códigos de rechazo propios | CU-07 |
-| RN-11 El administrador no ve los borradores | El alcance del listado según el papel, y la causa ampliada del código de no encontrado | CU-04, CU-06 |
-| RN-12 El reseteo conserva la cuenta y sus trabajos | Un resultado que **no declara ningún campo por el que los trabajos se pierdan** | CU-08 |
-| RN-13 Cambio forzado antes de toda otra capacidad | Un **solo** código para todas las operaciones bloqueadas | CU-06, CU-08 |
-| RN-14 La provisoria la produce el sistema | Una solicitud de reseteo **sin campo de contraseña**, y un resultado que lleva la provisoria producida | CU-08 |
-| RN-15 Resetear no exige cuenta habilitada | La **ausencia** de un código por cuenta no habilitada: esa causa no existe y no recibe código | CU-06, CU-08 |
-| RN-16 Habilitar produce la provisoria | El mismo código para los **dos orígenes** de la marca, y la ausencia de todo tipo de establecimiento anónimo de contraseña | CU-02, CU-06, CU-08 |
+| RN-08001 Administrador único | El rechazo de configurar un segundo administrador, con código propio | CU-08002 |
+| RN-08002 Correo único | El rechazo del registro con correo ya usado, con código propio | CU-08002 |
+| RN-08003 Trabajo ajeno indistinguible de inexistente | Un solo código y un solo texto para los dos casos: nada permite distinguirlos | CU-08003, CU-08005 |
+| RN-08004 Eliminación acotada | La solicitud **única** de eliminación para los dos papeles, y el rechazo por estado en el camino del alumno | CU-08003 |
+| RN-08005 Sin errores de validación no hay estado `Pendiente` | El estado resultante del envío y las observaciones con su especie | CU-08003, CU-08005 |
+| RN-08006 Cuenta `Pendiente` o `Bloqueado` sin acceso | El motivo de la situación de la cuenta, como respuesta de error y no como campo de sesión | CU-08001 |
+| RN-08007 Baja con arrastre y confirmación escrita | La confirmación escrita como campo de la solicitud, y su rechazo si no coincide | CU-08002 |
+| RN-08008 Texto original íntegro | El texto como cadena no interpretada, en las dos direcciones | CU-08003, CU-08005 |
+| RN-08009 Observación con posición y campo | El índice de figura y el campo señalado en la observación del detalle | CU-08005 |
+| RN-08010 Desenlace exclusivo y terminal | El desenlace como conjunto cerrado de dos valores, el estado terminal, y dos códigos de rechazo propios | CU-08007 |
+| RN-08011 El administrador no ve los borradores | El alcance del listado según el papel, y la causa ampliada del código de no encontrado | CU-08004, CU-08006 |
+| RN-08012 El reseteo conserva la cuenta y sus trabajos | Un resultado que **no declara ningún campo por el que los trabajos se pierdan** | CU-08008 |
+| RN-08013 Cambio forzado antes de toda otra capacidad | Un **solo** código para todas las operaciones bloqueadas | CU-08006, CU-08008 |
+| RN-08014 La provisoria la produce el sistema | Una solicitud de reseteo **sin campo de contraseña**, y un resultado que lleva la provisoria producida | CU-08008 |
+| RN-08015 Resetear no exige cuenta habilitada | La **ausencia** de un código por cuenta no habilitada: esa causa no existe y no recibe código | CU-08006, CU-08008 |
+| RN-08016 Habilitar produce la provisoria | El mismo código para los **dos orígenes** de la marca, y la ausencia de todo tipo de establecimiento anónimo de contraseña | CU-08002, CU-08006, CU-08008 |
 
 ## 11. Puntos abiertos
 
@@ -257,7 +257,7 @@ Este proyecto de código **no redacta ninguna regla de negocio**: es el caso que
 | --- | --- | --- | --- |
 | PA-01 | Los **nombres definitivos de los tipos, de sus campos y de los espacios de nombres**. El intake no los fija y la categoría 02 tampoco: se anclan en la etapa que implementa el contrato | El equipo en el punto de control de la etapa correspondiente | Etapa `c` en adelante, según la familia |
 | PA-02 | La **zona horaria y la precisión del campo de momento** del tipo de error. Ninguna fuente las declara | El equipo, junto con la elección de formato de intercambio | Etapa `a` o `c` |
-| PA-03 | **RESUELTO.** El **formato de intercambio y su configuración** —cómo se nombran los campos al serializar, qué se hace con los valores ausentes— se reasignó a las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web`. **Las dos están emitidas**, y la decisión está tomada: [`Web`](../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 `PA-03` declaró que **no la toma de un solo lado** —«los dos extremos tienen que coincidir o el contrato deja de ser el mismo»— y que la decisión pertenece al **productor**, que él **adopta**; y [`Api ADR-02`](../../GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) la tomó, con **seis** reglas de formato que **obligan a los dos extremos** y con la verificación por la batería de integración que golpea el servicio real. **Lo que este proyecto de código exigía —que sus tipos sean serializables sin comportamiento— sigue valiendo y no cambia** | **Cerrado** por la categoría 05 de `GeometriaFactory-Api`, con `GeometriaFactory-Web` como consumidor | **Resuelto** el 2026-08-10, al emitirse las dos categorías 05 |
+| PA-03 | **RESUELTO.** El **formato de intercambio y su configuración** —cómo se nombran los campos al serializar, qué se hace con los valores ausentes— se reasignó a las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web`. **Las dos están emitidas**, y la decisión está tomada: [`Web`](../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 `PA-03` declaró que **no la toma de un solo lado** —«los dos extremos tienen que coincidir o el contrato deja de ser el mismo»— y que la decisión pertenece al **productor**, que él **adopta**; y [`Api ADR-00002`](../../GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) la tomó, con **seis** reglas de formato que **obligan a los dos extremos** y con la verificación por la batería de integración que golpea el servicio real. **Lo que este proyecto de código exigía —que sus tipos sean serializables sin comportamiento— sigue valiendo y no cambia** | **Cerrado** por la categoría 05 de `GeometriaFactory-Api`, con `GeometriaFactory-Web` como consumidor | **Resuelto** el 2026-08-10, al emitirse las dos categorías 05 |
 | PA-04 | Los dos valores rotulados **[ASUNCIÓN]** de §8 siguen pendientes de confirmación del Product Owner en `PRODUCT-INTAKE` §22 | El Product Owner sobre su propio documento | Antes de fijar la puerta en 09 |
 
 **Cuatro filas: tres abiertas —`PA-01`, `PA-02` y `PA-04`— y una resuelta, `PA-03`.** La fila resuelta **se conserva en la tabla en lugar de retirarse**, porque retirarla dejaría un hueco de numeración sin declarar y porque su desenlace es una decisión que otros dos proyectos de código citan.
@@ -267,5 +267,5 @@ Este proyecto de código **no redacta ninguna regla de negocio**: es el caso que
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial de la arquitectura técnica de `GeometriaFactory-Contracts`. Declara el estilo con sus tres alternativas evaluadas, las ocho familias de tipos como componentes con su grafo acíclico, la regla de exposición en la vista lógica, las cuatro vistas mínimas, los cross-cutting centralizados, siete NFR con objetivo numérico, seis riesgos con mitigación, la trazabilidad de las once restricciones transversales y de las dieciséis reglas, y cuatro puntos abiertos. Emite cinco ADR individuales bajo `Adrs/` y el contrato de superficie pública en `Contratos-Abstractions.md`. |
-| 1.1 | 2026-08-11 | **Corrige una afirmación de §11 que dejó de ser cierta y cierra el punto abierto que la contenía.** La fila `PA-03` declaraba que el formato de intercambio pertenece a las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` y que **«ninguna de las dos está emitida todavía»**. **Hoy las dos lo están** —y con ellas las **siete** categorías 05 del producto—, y además **la decisión está tomada**: `GeometriaFactory-Web` §11 `PA-03` declaró que no la toma de un solo lado y que la adopta del productor, y `Api ADR-02` la tomó con seis reglas de formato que obligan a los dos extremos, con la coincidencia verificada por la batería de integración contra el servicio real. `PA-03` pasa a **fila resuelta**, con su desenlace, sus dos referencias y su fecha, y **se conserva en la tabla en lugar de retirarse** para no dejar un hueco de numeración sin declarar; §11 gana la línea de reparto **tres abiertas y una resuelta**. **Lo que este proyecto de código exigía sigue valiendo y no cambia**: que sus tipos sean serializables sin comportamiento. **Ninguna decisión de arquitectura, ninguna ADR, ningún NFR, ningún riesgo, ninguna restricción transversal y ningún otro punto abierto cambia.** Sube minor. |
+| 1.1 | 2026-08-11 | **Corrige una afirmación de §11 que dejó de ser cierta y cierra el punto abierto que la contenía.** La fila `PA-03` declaraba que el formato de intercambio pertenece a las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` y que **«ninguna de las dos está emitida todavía»**. **Hoy las dos lo están** —y con ellas las **siete** categorías 05 del producto—, y además **la decisión está tomada**: `GeometriaFactory-Web` §11 `PA-03` declaró que no la toma de un solo lado y que la adopta del productor, y `Api ADR-08002` la tomó con seis reglas de formato que obligan a los dos extremos, con la coincidencia verificada por la batería de integración contra el servicio real. `PA-03` pasa a **fila resuelta**, con su desenlace, sus dos referencias y su fecha, y **se conserva en la tabla en lugar de retirarse** para no dejar un hueco de numeración sin declarar; §11 gana la línea de reparto **tres abiertas y una resuelta**. **Lo que este proyecto de código exigía sigue valiendo y no cambia**: que sus tipos sean serializables sin comportamiento. **Ninguna decisión de arquitectura, ninguna ADR, ningún NFR, ningún riesgo, ninguna restricción transversal y ningún otro punto abierto cambia.** Sube minor. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **6**. Sube minor. |

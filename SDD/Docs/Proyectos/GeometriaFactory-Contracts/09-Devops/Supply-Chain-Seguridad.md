@@ -62,7 +62,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Comprobación | Umbral | Cómo se ejecuta | Carácter |
 | --- | --- | --- | --- |
-| Referencias hacia `GeometriaFactory-Domain` | **0** | `QG-02`, con `TC-20` y la revisión del pull request | **Bloqueante** |
+| Referencias hacia `GeometriaFactory-Domain` | **0** | `QG-02`, con `TC-08020` y la revisión del pull request | **Bloqueante** |
 | Bibliotecas de serialización declaradas | **0** | `CV-22` | **Bloqueante** |
 | Ciclos entre las **ocho** familias de tipos | **0**, con **1** arista adicional —reseteo hacia cuentas— que conserva su motivo declarado | `CV-23` | **Bloqueante** |
 | Actualización automática de dependencias | **No aplica**: no hay dependencias que actualizar | — | — |

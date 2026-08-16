@@ -33,26 +33,26 @@
 
 | Épica | Etapa del producto | Historias | Tareas técnicas |
 | --- | --- | --- | --- |
-| EP-01 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-01 a BT-06 |
-| EP-02 Navegación y sistema visual | `b` | Ninguna | BT-07, BT-08, BT-09, BT-10 |
-| EP-03 Identidad del administrador y sesión | `c` | US-03, US-04, US-05, US-06, US-08, US-26, US-27 | BT-11 a BT-15 |
-| EP-04 Ciclo de vida de la cuenta de alumno | `d` | US-01, US-02, US-07, US-09, US-10, US-28, US-29, US-30 | BT-07, BT-13, BT-14 |
-| EP-05 Gestión del trabajo | `e` | US-11, US-15, US-16, US-22, US-23 | BT-13 |
-| EP-06 Interpretación y verificación del dato del alumno | `f` | US-12, US-13, US-14 | BT-16 |
-| EP-07 Visualización del trabajo | `g` | US-18, US-19, US-20, US-21 | BT-16, BT-17, BT-18, BT-23 |
-| EP-08 Desenlace de la entrega | `h` | US-17, US-24, US-25 | BT-19, BT-20 |
+| EP-10001 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-10001 a BT-10006 |
+| EP-10002 Navegación y sistema visual | `b` | Ninguna | BT-10007, BT-10008, BT-10009, BT-10010 |
+| EP-10003 Identidad del administrador y sesión | `c` | US-10003, US-10004, US-10005, US-10006, US-10008, US-10026, US-10027 | BT-10011 a BT-10015 |
+| EP-10004 Ciclo de vida de la cuenta de alumno | `d` | US-10001, US-10002, US-10007, US-10009, US-10010, US-10028, US-10029, US-10030 | BT-10007, BT-10013, BT-10014 |
+| EP-10005 Gestión del trabajo | `e` | US-10011, US-10015, US-10016, US-10022, US-10023 | BT-10013 |
+| EP-10006 Interpretación y verificación del dato del alumno | `f` | US-10012, US-10013, US-10014 | BT-10016 |
+| EP-10007 Visualización del trabajo | `g` | US-10018, US-10019, US-10020, US-10021 | BT-10016, BT-10017, BT-10018, BT-10023 |
+| EP-10008 Desenlace de la entrega | `h` | US-10017, US-10024, US-10025 | BT-10019, BT-10020 |
 
 **Las ocho etapas comprometidas producen épica acá**, y es el único de los siete proyectos de código del que se puede decir. Las dos primeras no tienen historias porque son hitos internos sin capacidad funcional asociada.
 
 ## 4. Historias `Must Have` del tramo comprometido
 
-**Las treinta.** Desde el 2026-08-10 este backlog no tiene ninguna historia no-`Must`: la que era `Should` es **US-21** —sincronización del árbol y la escena por índice de pieza—, que deriva de `F-13`, y el Product Owner **promovió esa capacidad a `Must Have`** en `PRODUCT-INTAKE` **1.19**, cerrando la tensión que este backlog había elevado como `PA-02` y que **no había resuelto reprioritizando**. Es la misma tensión que `GeometriaFactory-Visor` elevó desde el otro lado de la fachada, y una sola decisión cerró las dos. El 100 % `Must` resultante queda declarado como apartamiento consciente en [`Product-Backlog.md`](Product-Backlog.md) §4.2, con su motivo.
+**Las treinta.** Desde el 2026-08-10 este backlog no tiene ninguna historia no-`Must`: la que era `Should` es **US-10021** —sincronización del árbol y la escena por índice de pieza—, que deriva de `F-13`, y el Product Owner **promovió esa capacidad a `Must Have`** en `PRODUCT-INTAKE` **1.19**, cerrando la tensión que este backlog había elevado como `PA-02` y que **no había resuelto reprioritizando**. Es la misma tensión que `GeometriaFactory-Visor` elevó desde el otro lado de la fachada, y una sola decisión cerró las dos. El 100 % `Must` resultante queda declarado como apartamiento consciente en [`Product-Backlog.md`](Product-Backlog.md) §4.2, con su motivo.
 
 **Las treinta están dentro del tramo comprometido de ocho etapas**: este proyecto de código no tiene ninguna historia de la fase `i…`.
 
 ## 5. Tareas técnicas prioritarias
 
-**BT-04**, las cuatro mediciones de `PT-01`, porque se hacen en la etapa `a` **antes que cualquier otra cosa** y de su resultado depende el modelo entero de esta pieza: la salida preferente si `PT-01.b` o `PT-01.c` dan rojo está registrada y es un cambio de modelo, no un ajuste. **BT-15**, la puerta de cero peticiones del navegador, porque `RA-01` es la regla que sostiene la topología entera y `05` §9 le asigna impacto **muy alto**. **BT-14**, la custodia de la credencial en el estado del circuito, porque `05` §2.1 la llama **la decisión más consecuente del producto en términos de lo que la persona puede observar**. Y **BT-12**, la adopción del formato de intercambio, porque un desajuste entre los dos extremos **no lo detecta la compilación**, que es la única red que este producto tiene.
+**BT-10004**, las cuatro mediciones de `PT-01`, porque se hacen en la etapa `a` **antes que cualquier otra cosa** y de su resultado depende el modelo entero de esta pieza: la salida preferente si `PT-01.b` o `PT-01.c` dan rojo está registrada y es un cambio de modelo, no un ajuste. **BT-10015**, la puerta de cero peticiones del navegador, porque `RA-01` es la regla que sostiene la topología entera y `05` §9 le asigna impacto **muy alto**. **BT-10014**, la custodia de la credencial en el estado del circuito, porque `05` §2.1 la llama **la decisión más consecuente del producto en términos de lo que la persona puede observar**. Y **BT-10012**, la adopción del formato de intercambio, porque un desajuste entre los dos extremos **no lo detecta la compilación**, que es la única red que este producto tiene.
 
 ## 6. Definition of Ready vigente
 

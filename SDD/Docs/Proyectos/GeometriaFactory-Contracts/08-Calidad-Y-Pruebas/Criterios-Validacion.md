@@ -37,10 +37,10 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | --- | --- | --- | --- |
 | CV-01 | Los **ocho** contratos de uso tienen al menos un caso de prueba en verde, y cada criterio de aceptación declarado en su `§8` está cubierto | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2 | **8 de 8** |
 | CV-02 | Las **once** restricciones transversales tienen caso de prueba, salvo `RT-06`, cuya verificación pertenece a `09-Devops` y está declarada como tal | Matriz §5 | **10 de 11** con caso de prueba, y la undécima con su verificación declarada |
-| CV-03 | Las **veintidós** historias tienen su caso de prueba; `US-10` queda declarada fuera del tramo comprometido | Matriz §2 cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3 | **22 de 22**, **21** comprometidas |
+| CV-03 | Las **veintidós** historias tienen su caso de prueba; `US-08010` queda declarada fuera del tramo comprometido | Matriz §2 cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3 | **22 de 22**, **21** comprometidas |
 | CV-04 | Las **dieciséis** reglas de negocio tienen un caso de prueba que verifica **qué transporta este ensamblado de ellas** | Matriz §4 | **16 de 16** |
-| CV-05 | El conjunto cerrado tiene **17** códigos vivos sobre **20** identificadores emitidos, y ninguno de los **3** retirados se recicla | `TC-16` | 15, 18 y **0** reciclados |
-| CV-06 | `CONTRATO_ERROR_NO_CLASIFICADO` cierra el conjunto: no hay camino por el que un fallo llegue sin representación | `TC-16` | **0** fallos sin representación |
+| CV-05 | El conjunto cerrado tiene **17** códigos vivos sobre **20** identificadores emitidos, y ninguno de los **3** retirados se recicla | `TC-08016` | 15, 18 y **0** reciclados |
+| CV-06 | `CONTRATO_ERROR_NO_CLASIFICADO` cierra el conjunto: no hay camino por el que un fallo llegue sin representación | `TC-08016` | **0** fallos sin representación |
 | CV-07 | Los **ocho** escenarios del intake §20 están alcanzados en la parte que a este proyecto de código le toca, **sin sustituirlos por datos sintéticos** | Verificación uno por uno de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
 
 ## 3. Criterios no funcionales
@@ -49,12 +49,12 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
-| CV-08 | Todos los tipos de transferencia están ejercitados por al menos una prueba de integración contra el servicio real | **100 %** **[ASUNCIÓN del intake §17.4.P.6, asunción `A-4` de §22: sobre la forma del gate, no sobre su carácter]** | `TC-21`, sobre la matriz §6 | **Bloqueante** |
-| CV-09 | La proyección de listado no lleva texto original, ni componentes de pieza, ni comentario | **0**, **0** y **0** **[ASUNCIÓN derivada del intake §17.4.P.10]** | `TC-09` | **Condicionado** |
-| CV-10 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | **0** | `TC-20` | **Bloqueante** |
-| CV-11 | Ningún tipo de las **ocho** familias tiene un campo capaz de transportar el hash de la contraseña, la clave de firma, una dirección de servicio interno, una ruta de archivo de datos o una traza | **0** | `TC-15`, `TC-01`, `TC-04`, `TC-19` | **Bloqueante** |
-| CV-12 | El conjunto cerrado tiene exactamente **17** códigos vivos y se producen **0** fuera de él | 17 y 0 | `TC-16` | **Bloqueante** |
-| CV-13 | La respuesta de sesión declara exactamente **4** campos y **0** que transporten una condición que impida operar | 4 y 0 | `TC-01`, `TC-02` | **Bloqueante** |
+| CV-08 | Todos los tipos de transferencia están ejercitados por al menos una prueba de integración contra el servicio real | **100 %** **[ASUNCIÓN del intake §17.4.P.6, asunción `A-4` de §22: sobre la forma del gate, no sobre su carácter]** | `TC-08021`, sobre la matriz §6 | **Bloqueante** |
+| CV-09 | La proyección de listado no lleva texto original, ni componentes de pieza, ni comentario | **0**, **0** y **0** **[ASUNCIÓN derivada del intake §17.4.P.10]** | `TC-08009` | **Condicionado** |
+| CV-10 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | **0** | `TC-08020` | **Bloqueante** |
+| CV-11 | Ningún tipo de las **ocho** familias tiene un campo capaz de transportar el hash de la contraseña, la clave de firma, una dirección de servicio interno, una ruta de archivo de datos o una traza | **0** | `TC-08015`, `TC-08001`, `TC-08004`, `TC-08019` | **Bloqueante** |
+| CV-12 | El conjunto cerrado tiene exactamente **17** códigos vivos y se producen **0** fuera de él | 17 y 0 | `TC-08016` | **Bloqueante** |
+| CV-13 | La respuesta de sesión declara exactamente **4** campos y **0** que transporten una condición que impida operar | 4 y 0 | `TC-08001`, `TC-08002` | **Bloqueante** |
 | CV-14 | El ensamblado compila **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.4.P.8 | **Bloqueante** |
 
 **No hay criterio de latencia ni de throughput, y es correcto que no lo haya**: el ensamblado no ejecuta nada (`05` §8, cierre). El único atributo de rendimiento que puede empeorar es el **tamaño de la carga útil**, y por eso `CV-09` existe.
@@ -78,7 +78,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-21 | Los tipos son **serializables sin comportamiento**: sin lógica en los descriptores de acceso, sin campos calculados y sin ciclos entre tipos | 0 en las tres formas | **Bloqueante**. Es lo que `BT-17` exige y lo que este proyecto de código conserva tras el cierre de `PA-03` |
+| CV-21 | Los tipos son **serializables sin comportamiento**: sin lógica en los descriptores de acceso, sin campos calculados y sin ciclos entre tipos | 0 en las tres formas | **Bloqueante**. Es lo que `BT-08017` exige y lo que este proyecto de código conserva tras el cierre de `PA-03` |
 | CV-22 | El ensamblado **no declara ninguna biblioteca de serialización** | 0 | **Bloqueante**: declararla rompería las cero dependencias |
 | CV-23 | El grafo de dependencias entre las **ocho** familias es acíclico, y la única arista adicional —reseteo hacia cuentas— conserva su motivo declarado | 0 ciclos, 1 arista adicional con motivo | **Bloqueante** |
 | CV-24 | **Cobertura de líneas: no aplica como criterio.** El intake §17.4.P.6 lo declara así y fija el gate equivalente de `CV-08` | — | **No aplicable, declarado** |
@@ -90,12 +90,12 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-09`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**: el umbral es un valor rotulado [ASUNCIÓN] sin confirmar (`BT-18`) | Nadie: es el tratamiento declarado |
+| Criterio **condicionado** —`CV-09`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**: el umbral es un valor rotulado [ASUNCIÓN] sin confirmar (`BT-08018`) | Nadie: es el tratamiento declarado |
 | Prueba de integración **no ejecutable todavía** porque `GeometriaFactory-Api` no existe | Se declara diferida **por escrito**, con la etapa en que se ejecuta, y la inspección de superficie correspondiente **sí se ejecuta** | El Product Owner, en el punto de control, con constancia escrita |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica con la remediación y **la etapa no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner |
 | Campo nuevo que la revisión rechaza por `CV-11` | **No se admite excepción.** `05` §9 declara que agregar un campo de diagnóstico es la forma habitual en que ese defecto entra, y que entra sin que nadie lo note porque compila | — |
 
-**Lo que no es una excepción admitida:** reponer un código retirado del conjunto cerrado —contradice `CA-09` de `CU-06` y describe situaciones que `RN-16` no admite—, agregar un campo del detalle a la proyección de listado «porque hace falta en una pantalla», o declarar cumplido un criterio de superficie cuya inspección no se hizo.
+**Lo que no es una excepción admitida:** reponer un código retirado del conjunto cerrado —contradice `CA-09` de `CU-08006` y describe situaciones que `RN-08016` no admite—, agregar un campo del detalle a la proyección de listado «porque hace falta en una pantalla», o declarar cumplido un criterio de superficie cuya inspección no se hizo.
 
 ## 7. Control de cambios
 

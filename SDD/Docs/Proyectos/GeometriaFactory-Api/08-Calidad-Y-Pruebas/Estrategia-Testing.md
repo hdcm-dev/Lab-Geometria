@@ -34,7 +34,7 @@
 | --- | --- | --- | --- |
 | Integración | **La batería de integración del producto**: golpea la superficie real **por su protocolo** contra el almacén real, con el proceso levantado en el ambiente de prueba | **60 %** [ASUNCIÓN del intake en cuanto al reparto] | Lo declara el intake §17.5.P.6. Un host delgado no tiene lógica propia que probar en aislamiento: lo que hay que verificar es **que el cable esté conectado**, y eso sólo se ve ejerciéndolo. Es además la batería a la que el intake §17.3.P.6 le asigna **la persistencia real** de `GeometriaFactory-Infrastructure` |
 | Unit | La **traducción de motivos y códigos**, que es la única pieza con lógica propia; y las pruebas de inspección estructural | **40 %** [ASUNCIÓN en cuanto al reparto] | El traductor se puede recorrer entero sobre los **diecisiete** códigos sin levantar el proceso, y hacerlo unitario lo vuelve barato de reejecutar. Las inspecciones —los cuatro puntos fuera de la guardia, los cuatro puertos conectados— también |
-| Extremo a extremo con la persona | — | **0 %** | **No aplica acá y se declara así en lugar de omitirse.** El recorrido de una persona pasa por `GeometriaFactory-Web`, y su verificación es el guion de demostración de ese proyecto de código. Acá lo más cerca de un recorrido es la **colección de peticiones reproducible** de `CU-12`, que el intake declara como forma de demostración de este tipo de proyecto de código y que **no es una prueba automatizada** |
+| Extremo a extremo con la persona | — | **0 %** | **No aplica acá y se declara así en lugar de omitirse.** El recorrido de una persona pasa por `GeometriaFactory-Web`, y su verificación es el guion de demostración de ese proyecto de código. Acá lo más cerca de un recorrido es la **colección de peticiones reproducible** de `CU-00012`, que el intake declara como forma de demostración de este tipo de proyecto de código y que **no es una prueba automatizada** |
 
 **El apartamiento invierte la pirámide y hay que decir qué se paga por eso.** Una batería mayoritariamente de integración es más lenta y más frágil que una unitaria, y su diagnóstico es más caro. Lo que la mantiene sana acá es que **las propiedades más peligrosas del proyecto de código no dependen de ejercer el cable sino de contarlo**: los cuatro puntos fuera de la guardia, los dieciséis códigos con destino, las tres familias indistinguibles, los cuatro puertos conectados y la única configuración de intercambio se verifican con **inspecciones de umbral exacto**, que son unitarias y baratas.
 
@@ -44,7 +44,7 @@
 
 - **Prueba de integración por protocolo.** Levanta el proceso y golpea un punto de acceso con su verbo, su cuerpo y su cabecera de autorización, contra el almacén real.
 - **Prueba de inspección con umbral exacto.** Recorre un conjunto cerrado —los quince puntos, los diecisiete códigos, los cuatro puertos— y compara **en las dos direcciones**. Su umbral no admite gradación.
-- **Verificación forzando la petición.** La que ejerce una acotación **sin pasar por la interfaz**. Es el único criterio de verificación del producto que la fuente exige ejercer así contra esta superficie, y es `TC-20`.
+- **Verificación forzando la petición.** La que ejerce una acotación **sin pasar por la interfaz**. Es el único criterio de verificación del producto que la fuente exige ejercer así contra esta superficie, y es `TC-00020`.
 
 ## 2. Cobertura mínima por capa
 
@@ -58,8 +58,8 @@ La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Ar
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
-| Composición de raíz | 75 % | 70 % | — | Piso del intake. **Sin mutation score**: es declaración de cableado, y su verificación real es `TC-28`, que **falla en construcción** si un puerto queda sin adaptador |
-| Guardia de admisión | **95 %** | **90 %** | 60 % | Sube muy por encima del piso: es donde se pierde `RN-13` sin que nada falle, y `05` §9 le asigna probabilidad **alta** por ser un defecto de **omisión** |
+| Composición de raíz | 75 % | 70 % | — | Piso del intake. **Sin mutation score**: es declaración de cableado, y su verificación real es `TC-00028`, que **falla en construcción** si un puerto queda sin adaptador |
+| Guardia de admisión | **95 %** | **90 %** | 60 % | Sube muy por encima del piso: es donde se pierde `RN-00013` sin que nada falle, y `05` §9 le asigna probabilidad **alta** por ser un defecto de **omisión** |
 | Traductor de motivos y códigos | **95 %** | **90 %** | 60 % | Sube: es la única pieza con lógica propia, y es donde una decisión de adentro se deshace. **Ninguna capa de adentro puede reparar un error suyo** |
 | Superficie de acceso y credencial propia | 80 % | 75 % | 60 % | Sube sobre el piso: son los **cuatro** puntos que se ejercen sin acceso firmado, que es exactamente el conjunto que `QG-05` acota |
 | Superficie de gobierno de la comisión | 75 % | 70 % | 60 % | Piso del intake |
@@ -94,7 +94,7 @@ Se nombran por función y no por producto. La elección concreta y su anclaje de
 
 Decisión de esta categoría: **no se adopta un marco de especificaciones ejecutables con archivos de escenario separados.** Los criterios viven en las historias, y cada `TC-XX` de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) los transcribe citando la historia de origen.
 
-**Y hay un motivo propio de este proyecto de código**: la **colección de peticiones reproducible** de `CU-12` ya es una enunciación ejecutable de un recorrido por la superficie. Un juego de archivos de escenario paralelo produciría **tres** enunciaciones del mismo recorrido —la historia, la colección y el escenario— y ninguna sería la fuente.
+**Y hay un motivo propio de este proyecto de código**: la **colección de peticiones reproducible** de `CU-00012` ya es una enunciación ejecutable de un recorrido por la superficie. Un juego de archivos de escenario paralelo produciría **tres** enunciaciones del mismo recorrido —la historia, la colección y el escenario— y ninguna sería la fuente.
 
 **Dónde sí se usan pruebas basadas en propiedades:**
 
@@ -114,8 +114,8 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 | Sustitución | Cuándo | Por qué |
 | --- | --- | --- |
 | Resultados tipados de la capa de aplicación | Las pruebas unitarias del **traductor** | Recorrer los diecisiete códigos por la superficie exigiría provocar quince estados del sistema; el traductor se verifica entero sobre el conjunto cerrado sin levantar el proceso |
-| Preparación del almacén **que falla** | `TC-31` | Es la única forma de verificar que **no se atiende ninguna petición** con la preparación incompleta |
-| Ausencia de un adaptador | `TC-28` | Verifica que la composición de raíz **falla en construcción** y no en la primera petición |
+| Preparación del almacén **que falla** | `TC-00031` | Es la única forma de verificar que **no se atiende ninguna petición** con la preparación incompleta |
+| Ausencia de un adaptador | `TC-00028` | Verifica que la composición de raíz **falla en construcción** y no en la primera petición |
 
 Fixtures compartidos:
 
@@ -154,8 +154,8 @@ Fixtures compartidos:
 | Almacén | **Real y efímero**: el mismo motor que en producción, en un archivo creado y descartado por la batería. **Nunca el almacén de desarrollo ni el de producción** |
 | Aislamiento entre pruebas | Cada prueba de integración parte de un almacén preparado y conocido. **El paralelismo entre pruebas que comparten archivo de almacén no es admisible**: el motor es de **escritor único** |
 | Secretos | La clave de firma de las pruebas es un valor **evidentemente ficticio**, provisto por configuración de prueba. **Ningún secreto real entra al repositorio, ni en el pipeline** |
-| Transporte | **Sin canal de sesión interactiva.** El intake §17.5.P.3 declara que esta superficie **no expone ni requiere** ese canal, y que es criterio de aceptación de la etapa `a`. `TC-36` lo verifica |
-| Intercambio de origen cruzado | **No configurado**, porque el navegador no alcanza esta superficie. `TC-36` verifica su ausencia |
+| Transporte | **Sin canal de sesión interactiva.** El intake §17.5.P.3 declara que esta superficie **no expone ni requiere** ese canal, y que es criterio de aceptación de la etapa `a`. `TC-00036` lo verifica |
+| Intercambio de origen cruzado | **No configurado**, porque el navegador no alcanza esta superficie. `TC-00036` verifica su ausencia |
 | Medición del percentil y del caudal | **En el servidor**, sin contar el tramo de red doméstica, que el intake declara fuera de control |
 | Duración | **No se declara ningún tiempo de ejecución de la batería.** Los tres tiempos declarados —percentil, caudal y arranque en frío— son del **servicio**, no de la suite, y vienen del intake con su rótulo [ASUNCIÓN]. Ninguna fuente da un tiempo de suite, y no se inventa uno |
 

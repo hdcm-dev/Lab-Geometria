@@ -7,7 +7,7 @@
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md` íntegro —§4, FA-01 a FA-05, §6, CA-01 a CA-07 y §13—; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07); `../02-Especificacion-Funcional/Glosario-Funcional.md` §2, entradas «estado degradado» y «cartel de reconexión»; `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-08-Alcance-Del-Laboratorio-Desde-El-Aula.md` §1, §5 (tercer y cuarto criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-2, CL-8, CL-9), §11 (RN-B1, RN-B2, RN-B4), §14 (RA-03), §17.6 P.4, P.9, **P.10** y P.12; `Design-Rules-Web-Generico.md` §5, §7, §10; `Design-Rules-Blazor-Mudblazor.md` §2 y §5
+**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md` íntegro —§4, FA-01 a FA-05, §6, CA-01 a CA-07 y §13—; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07); `../02-Especificacion-Funcional/Glosario-Funcional.md` §2, entradas «estado degradado» y «cartel de reconexión»; `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md` §1, §5 (tercer y cuarto criterio); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §7 (CL-2, CL-8, CL-9), §11 (RN-B1, RN-B2, RN-B4), §14 (RA-03), §17.6 P.4, P.9, **P.10** y P.12; `Design-Rules-Web-Generico.md` §5, §7, §10; `Design-Rules-Blazor-Mudblazor.md` §2 y §5
 **Trazabilidad downstream:** Fase B2 de validación visual de maqueta; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`; `09-Devops`
 
 ---
@@ -175,13 +175,13 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | Alumno y docente por igual. **El tratamiento es el mismo para los dos y esa uniformidad es deliberada** |
-| CU origen | [`CU-10`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md) íntegro. Es transversal: los otros nueve casos de uso lo referencian |
+| CU origen | [`CU-10010`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md) íntegro. Es transversal: los otros nueve casos de uso lo referencian |
 | Reglas de negocio relevantes | **Ninguna, y con motivo declarado aguas arriba**: las **dieciséis** reglas restringen el dominio y este caso de uso no toca ninguno de esos objetos. Lo que sí lo restringe es la regla de arquitectura RA-03 |
 | Restricciones transversales | `RT-03`, `RT-06`, `RT-07` |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.8, §4.1, §8.1, §8.3 |
 | Superficies que la referencian | Las otras diez, todas |
 | Catálogo de diseño aplicado | `Design-Rules-Web-Generico.md` §5 y §10, `Design-Rules-Blazor-Mudblazor.md` §2 y §5 |
-| US a generar en 06 | `US-26`, `US-27` |
+| US a generar en 06 | `US-10026`, `US-10027` |
 | Tests previstos en 08 | Guion de demostración de la etapa `a` para el corte y restablecimiento de red y para veinte minutos de navegación continua sin perder la sesión; verificación acumulativa en cada punto de control posterior de que la página sigue en pie con cero excepciones sin manejar y de que el mensaje no contiene ninguna dirección de servicio interno; reintento tras reponer el servicio con el texto conservado; listado vacío distinguible del estado degradado; anuncio efectivo del aviso y del cartel con lector de pantalla |
 
 ## 9. Control de cambios
@@ -189,6 +189,6 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. El estado degradado tratado como superficie diseñada y no como error improvisado, con la tabla comparativa que separa los dos tramos independientes y sus dos avisos, la tercera condición que deliberadamente no se avisa, la conservación de lo escrito como estado propio, la distinción entre estado vacío y aviso por el tipo recibido, las tres prohibiciones de contenido de mensaje, y doce estados declarados para la Fase B2. |
-| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: la `NB-08` de la cabecera pasa a citarse con sección y criterio —§1, §5 (tercer y cuarto criterio)—. |
+| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: la `NB-00008` de la cabecera pasa a citarse con sección y criterio —§1, §5 (tercer y cuarto criterio)—. |
 | 1.1 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: la fila «Reglas de negocio relevantes» de §9 fundamenta su **ninguna** sobre el recuento de reglas del producto, que pasó de once a **quince**. El fundamento no cambia —las reglas restringen el dominio y esta superficie no toca ninguno de esos objetos, mientras que lo que sí la restringe es la regla de arquitectura **RA-03**—; lo que se corrige es el número. **Ningún componente, estado, ruta ni criterio de esta superficie cambia.** Sube minor. |
-| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-16** —habilitar una cuenta produce su contraseña provisoria— y lleva las reglas de negocio del producto de quince a **dieciséis**. §9 actualiza el recuento de las reglas del producto que esta superficie declara **no** relevantes, por el mismo motivo que su caso de uso: **RN-16 tampoco la alcanza**. **Ninguna decisión de este documento cambia.** Sube minor. |
+| 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-10016** —habilitar una cuenta produce su contraseña provisoria— y lleva las reglas de negocio del producto de quince a **dieciséis**. §9 actualiza el recuento de las reglas del producto que esta superficie declara **no** relevantes, por el mismo motivo que su caso de uso: **RN-10016 tampoco la alcanza**. **Ninguna decisión de este documento cambia.** Sube minor. |

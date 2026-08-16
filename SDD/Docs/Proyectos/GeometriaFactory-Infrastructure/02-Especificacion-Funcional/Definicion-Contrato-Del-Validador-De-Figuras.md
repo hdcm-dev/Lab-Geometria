@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §1, §3 (D-1, D-2, D-3), §4 (F-09, F-10), §4.1 (RN-05, RN-08, RN-09), §7 (CL-3, CL-4), §10 («formato de entrada no negociable»), §11 (**RN-B3**), §12, §14, §17.3.P.3, §17.3.P.6, §17.3.P.10, §17.3.P.11 punto 1, §20 completo (**E-1 a E-8**) y §21 (matriz de cobertura); `Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`, para la frontera entre lo que interpreta y lo que dibuja
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §1, §3 (D-1, D-2, D-3), §4 (F-09, F-10), §4.1 (RN-06005, RN-06008, RN-06009), §7 (CL-3, CL-4), §10 («formato de entrada no negociable»), §11 (**RN-B3**), §12, §14, §17.3.P.3, §17.3.P.6, §17.3.P.10, §17.3.P.11 punto 1, §20 completo (**E-1 a E-8**) y §21 (matriz de cobertura); `Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`, para la frontera entre lo que interpreta y lo que dibuja
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -66,13 +66,13 @@ Siete, y todas son verificables:
 
 | Id | Garantía | Dónde se verifica |
 | --- | --- | --- |
-| G-1 | **El texto original no se modifica**, ni siquiera cuando la interpretación falla | `CU-01` CA-09 |
-| G-2 | **Un defecto en una figura no descarta el resto del análisis**: el recorrido sigue | `CU-01` CA-04 |
-| G-3 | **La posición de una figura no reconstruida queda reservada** y no se compacta | `CU-01` CA-04, `CU-03` CA-08 |
-| G-4 | **Ningún mensaje es genérico**: todo error de validación indica posición y campo | `CU-01` CA-04 |
-| G-5 | **Un valor calculado erróneo produce advertencia, nunca rechazo** | `CU-02` CA-01, CA-04, CA-06 |
-| G-6 | **El contrato no hace red y no lee configuración propia**: recibe texto y devuelve observaciones | `CU-01` CA-11 |
-| G-7 | **Un texto que el alumno escribió mal es un resultado, no una avería**: produce observaciones, no la condición degradada | `CU-01` CA-10 |
+| G-1 | **El texto original no se modifica**, ni siquiera cuando la interpretación falla | `CU-06001` CA-09 |
+| G-2 | **Un defecto en una figura no descarta el resto del análisis**: el recorrido sigue | `CU-06001` CA-04 |
+| G-3 | **La posición de una figura no reconstruida queda reservada** y no se compacta | `CU-06001` CA-04, `CU-06003` CA-08 |
+| G-4 | **Ningún mensaje es genérico**: todo error de validación indica posición y campo | `CU-06001` CA-04 |
+| G-5 | **Un valor calculado erróneo produce advertencia, nunca rechazo** | `CU-06002` CA-01, CA-04, CA-06 |
+| G-6 | **El contrato no hace red y no lee configuración propia**: recibe texto y devuelve observaciones | `CU-06001` CA-11 |
+| G-7 | **Un texto que el alumno escribió mal es un resultado, no una avería**: produce observaciones, no la condición degradada | `CU-06001` CA-10 |
 
 **G-7 es la que más veces se rompe al implementar**, y por eso tiene criterio propio: un texto ilegible tiene que devolver observaciones y no `INTERPRETACION_NO_DISPONIBLE`, porque el segundo dejaría al alumno sin saber qué corregir.
 
@@ -98,10 +98,10 @@ Los ocho están transcriptos completos en `PRODUCT-INTAKE` §20, con su proceden
 | **E-2** | `Ortoedro(7,7,21)` **tal como lo emite el programa** | **T1 y T2 juntas en el mismo texto**, más T4 | Lectura exitosa pese a las dos comas finales; bases leídas desde `Tapas`; **1 pieza, 2 bases y 4 laterales**; área sin observación y **1 advertencia de volumen** |
 | **E-3** | `Cubo(3)` de `Ejemplo1`, caras `Cuadrado` | **T3 por el lado de `Ejemplo1`** y **T4 en su forma más visible** | Caras interpretadas; **1 advertencia de área**, declarada 36.00 contra derivada 54.00; volumen sin observación |
 | **E-4** | `Cubo(3)` de `Ejemplo2`, caras `Rectangulo` | **T3 por el otro lado**, y el **criterio negativo** | Caras interpretadas igual que en E-3, y **cero observaciones en total**. Es el escenario que un validador que advirtiera siempre haría fallar |
-| **E-5** | Un cubo válido en la posición 0 y un tipo desconocido en la 1 | **RN-09 y RN-05 juntas** | **1 observación de error de validación con posición 1 y campo `Tipo`**; la pieza de la posición 0 se reconstruye igual; el trabajo queda en `Borrador` |
+| **E-5** | Un cubo válido en la posición 0 y un tipo desconocido en la 1 | **RN-06009 y RN-06005 juntas** | **1 observación de error de validación con posición 1 y campo `Tipo`**; la pieza de la posición 0 se reconstruye igual; el trabajo queda en `Borrador` |
 | **E-6** | Un `Rectangulo` con `"Largo": 0.00` | **Existencia contra veracidad** | La figura **se interpreta y no se descarta**; a lo sumo una advertencia por el valor derivado, **nunca** un error de validación |
 | **E-7** | Los seis tipos dibujables, con `"Bases"` en el ortoedro | **La cobertura del mapeo de tipos**, y T1 por su otra clave | **6 piezas**, con las tres figuras planas como piezas del conjunto raíz. Cero errores de validación |
-| **E-8** | Un ortoedro válido y un cubo con `"Largo": "3,50"` como cadena | **El desenlace del envío, que el intake 1.12 resolvió como error** | **1 observación de especie error de validación con posición 1 y campo `Largo`**; el ortoedro de la posición 0 **se reconstruye igual** y la posición 1 queda reservada; y por RN-05 el trabajo **queda en `Borrador`** y no pasa a `Pendiente`. Verificado por `CU-01` **CA-12** |
+| **E-8** | Un ortoedro válido y un cubo con `"Largo": "3,50"` como cadena | **El desenlace del envío, que el intake 1.12 resolvió como error** | **1 observación de especie error de validación con posición 1 y campo `Largo`**; el ortoedro de la posición 0 **se reconstruye igual** y la posición 1 queda reservada; y por RN-06005 el trabajo **queda en `Borrador`** y no pasa a `Pendiente`. Verificado por `CU-06001` **CA-12** |
 
 **Los siete primeros son los que `PRODUCT-INTAKE` §17.3.P.6 declara como entrada de la batería de este proyecto de código.** El octavo entró después, por el contrato de la pieza que dibuja, y **su desenlace del envío es de este contrato desde el intake 1.12**.
 
@@ -113,16 +113,16 @@ La batería obligatoria del producto tiene **nueve casos de prueba** —los de R
 
 | # | Caso de prueba obligatorio | Escenario | CU de esta categoría | Criterio |
 | --- | --- | --- | --- | --- |
-| 1 | Ortoedro con clave `Tapas` (T1) | E-2 | CU-01 | CA-01 |
-| 2 | Texto con comas finales (T2) | E-2 | CU-01 | CA-01 |
-| 3 | Cubo de `Ejemplo1`, caras `Cuadrado` (T3) | E-3 | CU-01 | CA-02 |
-| 4 | Cubo de `Ejemplo2`, caras `Rectangulo` (T3) | E-4 | CU-01 | CA-03 |
-| 5 | Área de `Cubo(3)` de `Ejemplo1` | E-3 | CU-02 | CA-04 |
-| 6 | Volumen de `Ortoedro(7,7,21)` | E-2, E-1 | CU-02 | CA-06, CA-01 |
-| 7 | Dimensión en `0` | E-6 | CU-01 y CU-02 | CA-05 y CA-07 |
-| 8 | `Tipo` desconocido | E-5 | CU-01 | CA-04 |
-| 9 | JSON semilla completo | E-1 | CU-01 y CU-02 | CA-07 y CA-01 |
-| 10 | Dimensión no legible | E-8 | CU-01 | CA-12 |
+| 1 | Ortoedro con clave `Tapas` (T1) | E-2 | CU-06001 | CA-01 |
+| 2 | Texto con comas finales (T2) | E-2 | CU-06001 | CA-01 |
+| 3 | Cubo de `Ejemplo1`, caras `Cuadrado` (T3) | E-3 | CU-06001 | CA-02 |
+| 4 | Cubo de `Ejemplo2`, caras `Rectangulo` (T3) | E-4 | CU-06001 | CA-03 |
+| 5 | Área de `Cubo(3)` de `Ejemplo1` | E-3 | CU-06002 | CA-04 |
+| 6 | Volumen de `Ortoedro(7,7,21)` | E-2, E-1 | CU-06002 | CA-06, CA-01 |
+| 7 | Dimensión en `0` | E-6 | CU-06001 y CU-06002 | CA-05 y CA-07 |
+| 8 | `Tipo` desconocido | E-5 | CU-06001 | CA-04 |
+| 9 | JSON semilla completo | E-1 | CU-06001 y CU-06002 | CA-07 y CA-01 |
+| 10 | Dimensión no legible | E-8 | CU-06001 | CA-12 |
 
 **Diez casos, todos con criterio de aceptación en esta categoría. Ninguno queda sin cubrir y ninguno se inventó.**
 
@@ -130,7 +130,7 @@ Tres precisiones sobre la matriz, para que nadie las lea como huecos:
 
 1. **La matriz de §21 tiene diez filas y no nueve, y la décima sí tiene tramo en este proyecto de código.** La décima —«dimensión no legible», E-8— entró el 2026-08-09 con el contrato de la pieza que dibuja, y hasta el intake 1.11 su desenlace del envío no estaba prescripto. **El intake 1.12 lo prescribió** y la fila vigente dice: «En el visor, la pieza no se dibuja y se enumera con índice y código. **En el validador, error: el trabajo queda en `Borrador`**», con lugar de verificación **etapas `f` y `g`**. La etapa `f` es la del validador —lo confirman **ocho de las otras nueve filas** de esa misma matriz, que ubican en `f` sus casos de interpretación; la novena, «dimensión en `0`», no nombra etapa y remite a la batería de RT §11—, de modo que el caso se verifica **acá y también en la visualización**, y por eso es el caso 10 de la tabla de arriba. Los nueve primeros siguen siendo la batería obligatoria de RT §11; el décimo es el que §21 agregó.
 2. **E-7 no respalda ninguno de los nueve**, aunque §17.3.P.6 lo declare como entrada de este proyecto de código. Acá se usa igual, y su valor es real: es el único texto que ejercita el mapeo completo de los seis tipos y las figuras planas como piezas del conjunto raíz. Se declara como cobertura **adicional** y no como parte de la batería.
-3. **Los cuatro casos que verifican valores son de `CU-02` y los seis de estructura son de `CU-01`**, con dos —el 7 y el 9— que tocan a los dos. Es la partición que este proyecto de código heredó del dominio.
+3. **Los cuatro casos que verifican valores son de `CU-06002` y los seis de estructura son de `CU-06001`**, con dos —el 7 y el 9— que tocan a los dos. Es la partición que este proyecto de código heredó del dominio.
 
 ## 8. La frontera con el visor
 
@@ -150,17 +150,17 @@ El intake lo declara sin ambigüedad: el bundle tolera las mismas claves que el 
 
 ## 9. Puntos abiertos de este contrato
 
-**Tres. El que era el primero se cerró.** Qué devuelve este contrato ante el texto de E-8 estuvo abierto hasta el `PRODUCT-INTAKE` 1.11 y **lo resolvió el Product Owner en 1.12**, a pedido de la emisión de esta misma categoría: es **error de validación**, con el trabajo en `Borrador`, y está declarado en §6 y en §7 de este documento y verificado por `CU-01` **CA-12**. No se reabre.
+**Tres. El que era el primero se cerró.** Qué devuelve este contrato ante el texto de E-8 estuvo abierto hasta el `PRODUCT-INTAKE` 1.11 y **lo resolvió el Product Owner en 1.12**, a pedido de la emisión de esta misma categoría: es **error de validación**, con el trabajo en `Borrador`, y está declarado en §6 y en §7 de este documento y verificado por `CU-06001` **CA-12**. No se reabre.
 
 | Punto | Situación | Quién lo resuelve |
 | --- | --- | --- |
 | **Hasta dónde llega el conjunto de tipos reconstruibles** | Los seis de §5 son los que los escenarios ejercitan y los que la pieza que dibuja sabe dibujar. El análisis del que sale el intake menciona **siete clases en `Ejemplo1` y diez en `Ejemplo2`**, y **ninguna fuente las enumera**, de modo que no se puede afirmar cuáles son ni si alguna emite un tipo que no está en los seis. Un tipo fuera del conjunto produce error de validación, que es un resultado correcto pero puede no ser el deseado si la clase existe en la actividad | Product Owner, con la enumeración de las clases de la Actividad 1 |
-| Cuál es el valor derivado del área de una pieza volumétrica | El intake lo muestra dos veces como **suma de los componentes** —el cilindro de E-1 y el ortoedro de E-2— y una vez como fórmula —`6·l²` en el cubo de E-3—, y las dos formas **coinciden** en ese cubo. No hay contradicción declarada, pero tampoco hay una regla enunciada. `CU-02` §10 adopta la suma de componentes y lo declara | `05-Arquitectura-Tecnica`, al fijar la tabla de derivación por tipo |
+| Cuál es el valor derivado del área de una pieza volumétrica | El intake lo muestra dos veces como **suma de los componentes** —el cilindro de E-1 y el ortoedro de E-2— y una vez como fórmula —`6·l²` en el cubo de E-3—, y las dos formas **coinciden** en ese cubo. No hay contradicción declarada, pero tampoco hay una regla enunciada. `CU-06002` §10 adopta la suma de componentes y lo declara | `05-Arquitectura-Tecnica`, al fijar la tabla de derivación por tipo |
 | El límite de tamaño del texto que se acepta | Ninguna fuente lo declara, y el requerimiento no funcional declarado está medido sobre un texto de tres piezas. Un texto arbitrariamente grande no tiene hoy ningún corte declarado | Product Owner, y `05-Arquitectura-Tecnica` |
 
 ## 10. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.0 | 2026-08-10 | Emisión inicial. Documento de concepto central del proyecto de código. Declara las cuatro trampas del formato con lo que hace un lector ingenuo y lo que hace este contrato, las tres cosas que devuelve y la que no, las siete garantías con su criterio de verificación, el conjunto de tipos que reconstruye, los ocho escenarios del intake con lo que a este contrato le toca en cada uno, la cobertura completa de la batería obligatoria de nueve casos contra los criterios de aceptación de `CU-01` y `CU-02`, la frontera con la pieza que dibuja y los cuatro puntos abiertos. |
-| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: la fila `E-8` de §6 deja de decir «nada declarado» y lleva el resultado esperado que el intake 1.12 fija en §20.E-8 punto 5 —**1 observación de especie error de validación con posición 1 y campo `Largo`**, el ortoedro de la posición 0 reconstruido, la posición 1 reservada y el trabajo en `Borrador` por RN-05—, con el fundamento de por qué es error y no advertencia; §9 retira el punto abierto correspondiente y pasa de cuatro a **tres**. **H-03**: la precisión 1 de §7 se rehace contra la fila vigente de §21, que ubica la verificación en las **etapas `f` y `g`** y no sólo en la visualización; en consecuencia **la batería de este proyecto de código pasa de nueve a diez casos**, con la décima fila mapeada a `CU-01` **CA-12**, y la precisión 3 pasa de cinco a **seis** casos de estructura. §8 separa las dos mitades de E-8: la condición `DIMENSION_NO_LEGIBLE` sigue siendo de la fachada y el desenlace del envío es de este contrato. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. |
+| 1.0 | 2026-08-10 | Emisión inicial. Documento de concepto central del proyecto de código. Declara las cuatro trampas del formato con lo que hace un lector ingenuo y lo que hace este contrato, las tres cosas que devuelve y la que no, las siete garantías con su criterio de verificación, el conjunto de tipos que reconstruye, los ocho escenarios del intake con lo que a este contrato le toca en cada uno, la cobertura completa de la batería obligatoria de nueve casos contra los criterios de aceptación de `CU-06001` y `CU-06002`, la frontera con la pieza que dibuja y los cuatro puntos abiertos. |
+| 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: la fila `E-8` de §6 deja de decir «nada declarado» y lleva el resultado esperado que el intake 1.12 fija en §20.E-8 punto 5 —**1 observación de especie error de validación con posición 1 y campo `Largo`**, el ortoedro de la posición 0 reconstruido, la posición 1 reservada y el trabajo en `Borrador` por RN-06005—, con el fundamento de por qué es error y no advertencia; §9 retira el punto abierto correspondiente y pasa de cuatro a **tres**. **H-03**: la precisión 1 de §7 se rehace contra la fila vigente de §21, que ubica la verificación en las **etapas `f` y `g`** y no sólo en la visualización; en consecuencia **la batería de este proyecto de código pasa de nueve a diez casos**, con la décima fila mapeada a `CU-06001` **CA-12**, y la precisión 3 pasa de cinco a **seis** casos de estructura. §8 separa las dos mitades de E-8: la condición `DIMENSION_NO_LEGIBLE` sigue siendo de la fachada y el desenlace del envío es de este contrato. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. |

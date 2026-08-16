@@ -29,7 +29,7 @@ Este documento existe porque el tipo `library` lo pide **cuando el proyecto de c
 
 **No documenta los adaptadores de persistencia ni los dos mecanismos de seguridad**, que no son pipelines: su recorrido es una operación y su forma de terminación está en el catálogo de condiciones.
 
-Lo que gobierna este flujo es [`ADR-06`](Adrs/ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md), y lo que lo verifica es la batería de **10** casos de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.5.
+Lo que gobierna este flujo es [`ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md), y lo que lo verifica es la batería de **10** casos de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.5.
 
 ## 2. El pipeline en siete pasos
 
@@ -57,7 +57,7 @@ flowchart TD
 | **P-6** | Derivar `Area` y `Volumen` según §5 y compararlos con los declarados | **T4**: los valores calculados erróneos **se señalan, no se rechazan ni se corrigen** | **Advertencia** con el valor declarado y el derivado, cuando la diferencia absoluta es **mayor** que 0.01 |
 | **P-7** | Reunir la cantidad de figuras del conjunto raíz, las piezas reconstruidas y las observaciones, y devolverlos juntos | Ninguna | Ninguna |
 
-**Un defecto en una figura no interrumpe el recorrido** (`G-2`). P-3 a P-6 siguen con las demás, y **la posición de la figura no reconstruida queda reservada** (`G-3`, `RC-02`): no se compacta, porque la posición es la identidad de la pieza y una observación puede designar una posición sin pieza.
+**Un defecto en una figura no interrumpe el recorrido** (`G-2`). P-3 a P-6 siguen con las demás, y **la posición de la figura no reconstruida queda reservada** (`G-3`, `RC-06002`): no se compacta, porque la posición es la identidad de la pieza y una observación puede designar una posición sin pieza.
 
 ## 3. Qué transforma cada paso
 
@@ -68,7 +68,7 @@ flowchart TD
 | P-3 | Estructura leída | **Cantidad de figuras del conjunto raíz** y una lista de tipos resueltos, con huecos donde el tipo no se reconoció |
 | P-4 | Lista de tipos resueltos | Piezas con posición, tipo y dimensiones; posiciones reservadas donde no se pudo reconstruir |
 | P-5 | Piezas | Las mismas piezas con sus componentes |
-| P-6 | Piezas con componentes | Las mismas piezas con `Area` y `Volumen` **declarado y derivado por separado** (`RC-03`), más las advertencias |
+| P-6 | Piezas con componentes | Las mismas piezas con `Area` y `Volumen` **declarado y derivado por separado** (`RC-06003`), más las advertencias |
 | P-7 | Cantidad, piezas y observaciones | El resultado del contrato: **las tres cosas juntas** |
 
 **La cantidad de figuras del conjunto raíz sale de P-3 y no de P-7**, y ésa es la razón por la que **no es derivable de las piezas**: el conjunto admite huecos, y sin el número producido antes de reconstruir, el dominio no tiene contra qué comprobar que la posición de una observación existe.
@@ -81,7 +81,7 @@ flowchart TD
 | **Negativa sin recorrido** | La entrada no es utilizable: texto nulo o vacío (P-1) | `TEXTO_ORIGINAL_AUSENTE` | Negativa sin escritura |
 | **Terminación degradada** | El adaptador no pudo completar la interpretación **por una causa que no depende del texto** | `INTERPRETACION_NO_DISPONIBLE` | Terminación degradada. **No se inventan observaciones, no se devuelve un conjunto vacío como si fuera un resultado y no se informan figuras que no se contaron.** Esta capa no reintenta |
 
-**La confusión que estas tres filas previenen es la más cara de la capa**, y `CU-01` CA-10 existe para ella: si un texto ilegible devolviera la tercera en lugar de la primera, el producto le diría al alumno que el servicio no está disponible cuando lo que pasa es que su programa emitió algo que no se puede leer, y el alumno esperaría a que se recupere de un problema que no tiene.
+**La confusión que estas tres filas previenen es la más cara de la capa**, y `CU-06001` CA-10 existe para ella: si un texto ilegible devolviera la tercera en lugar de la primera, el producto le diría al alumno que el servicio no está disponible cuando lo que pasa es que su programa emitió algo que no se puede leer, y el alumno esperaría a que se recupere de un problema que no tiene.
 
 **Y una cuarta cosa que no es una terminación de este pipeline: el estado del trabajo.** El motor entrega el conjunto de observaciones con su especie y **el dominio resuelve**. Sólo el error de validación impide el paso a estado `Pendiente`; la advertencia no lo impide.
 
@@ -89,7 +89,7 @@ flowchart TD
 
 ## 5. Tabla de derivación por tipo
 
-Es la tabla que la categoría 02 derivó a esta categoría. La rige [`ADR-06`](Adrs/ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2: **el área derivada de una pieza volumétrica es la suma de las áreas declaradas de sus componentes**, y la fórmula se usa donde no hay componentes que sumar.
+Es la tabla que la categoría 02 derivó a esta categoría. La rige [`ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2: **el área derivada de una pieza volumétrica es la suma de las áreas declaradas de sus componentes**, y la fórmula se usa donde no hay componentes que sumar.
 
 Los tipos son los **seis** que los escenarios ejercitan, más el que sólo aparece como componente. Las **siete** filas están, sin agrupar.
 
@@ -117,22 +117,22 @@ Los tipos son los **seis** que los escenarios ejercitan, más el que sólo apare
 | Corregir un valor calculado erróneo | **T4**: se señala, no se corrige. Es el mayor valor didáctico del producto |
 | Rechazar el trabajo por valores inconsistentes | Ídem: la advertencia **no bloquea** el paso a estado `Pendiente`. Sólo el error de validación lo hace |
 | Descartar una figura con una dimensión en cero | **Existencia no es veracidad.** El cero es un valor presente y legible: la figura se interpreta (`E-6`) |
-| Compactar las posiciones tras una figura no reconstruida | La posición **es la identidad** de la pieza (`RC-02`), y una observación puede designar una posición sin pieza |
+| Compactar las posiciones tras una figura no reconstruida | La posición **es la identidad** de la pieza (`RC-06002`), y una observación puede designar una posición sin pieza |
 | Guardar el resultado | El pipeline devuelve; guardar es del adaptador de repositorio de trabajos, en otra operación y en otra unidad de trabajo |
-| Hacer una petición de red o leer configuración propia | **`G-6`**, verificado con **0** peticiones en `CU-01` CA-11. Es el reflejo estructural de `RA-02` en esta capa |
-| Imponer un límite de tamaño al texto | El corte pertenece al **borde del proceso**, que **rechaza y nunca trunca** ([`ADR-06`](Adrs/ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2 punto 3) |
+| Hacer una petición de red o leer configuración propia | **`G-6`**, verificado con **0** peticiones en `CU-06001` CA-11. Es el reflejo estructural de `RA-02` en esta capa |
+| Imponer un límite de tamaño al texto | El corte pertenece al **borde del proceso**, que **rechaza y nunca trunca** ([`ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2 punto 3) |
 
 ## 7. Trazabilidad
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU que materializa | [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) —pasos P-1 a P-5 y P-7— y [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) —paso P-6— |
-| RN que sostiene | RN-05 (produce el insumo), RN-08 (**tramo principal**: el texto no se modifica ni cuando la interpretación falla), RN-09 (**tramo principal**: toda observación con posición y campo) |
+| CU que materializa | [`CU-06001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) —pasos P-1 a P-5 y P-7— y [`CU-06002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) —paso P-6— |
+| RN que sostiene | RN-06005 (produce el insumo), RN-06008 (**tramo principal**: el texto no se modifica ni cuando la interpretación falla), RN-06009 (**tramo principal**: toda observación con posición y campo) |
 | Invariantes | INV-04, al que aporta el conjunto completo de observaciones con su especie |
 | Garantías del contrato de la categoría 02 | Las **siete**, `G-1` a `G-7`: `G-1` en la ausencia de escritura sobre el texto, `G-2` en la continuidad del recorrido, `G-3` en las posiciones reservadas de P-3 y P-4, `G-4` en las columnas de observación de P-3 a P-5, `G-5` en P-6, `G-6` en §6 y `G-7` en la primera fila de §4 |
 | Trampas del formato | Las **cuatro**: `T2` en P-2, `T1` y `T3` en P-4 y P-5, `T4` en P-6 |
 | Escenarios | Los **ocho**, `E-1` a `E-8`, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.5 |
-| ADR que lo gobierna | [`ADR-06`](Adrs/ADR-06-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) |
+| ADR que lo gobierna | [`ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) |
 | Tests previstos en 08 | La batería de **10** casos, **unitaria y sin almacén**, con una prueba por paso del pipeline; la prueba de las **2** advertencias exactas de `E-1`; la prueba de las **0** observaciones de `E-4`; y la prueba de **0** peticiones de red |
 
 ## 8. Control de cambios

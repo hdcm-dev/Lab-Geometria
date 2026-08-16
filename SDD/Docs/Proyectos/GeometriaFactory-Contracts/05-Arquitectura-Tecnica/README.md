@@ -30,11 +30,11 @@ Lo que hay que haber entendido antes de tocar esta sección: **la arquitectura d
 
 | ADR | Título | Categoría | Estado |
 | --- | --- | --- | --- |
-| [ADR-01](Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) | Ensamblado de tipos de transferencia planos, sin comportamiento y sin dependencias | Estilo | Propuesto |
-| [ADR-02](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) | Un único tipo de error, con conjunto cerrado de diecisiete códigos | Comunicación | Propuesto |
-| [ADR-03](Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) | Versionado por compilación compartida y despliegue conjunto, sin versionado de rutas | Despliegue | Propuesto |
-| [ADR-04](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) | Regla de exposición: lista cerrada de lo que nunca cruza la frontera | Seguridad | Propuesto |
-| [ADR-05](Adrs/ADR-05-Proyeccion-De-Listado-Separada-Del-Detalle.md) | Proyección de listado separada del detalle, y el comentario como bloque propio | Comunicación | Propuesto |
+| [ADR-08001](Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) | Ensamblado de tipos de transferencia planos, sin comportamiento y sin dependencias | Estilo | Propuesto |
+| [ADR-08002](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) | Un único tipo de error, con conjunto cerrado de diecisiete códigos | Comunicación | Propuesto |
+| [ADR-08003](Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) | Versionado por compilación compartida y despliegue conjunto, sin versionado de rutas | Despliegue | Propuesto |
+| [ADR-08004](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) | Regla de exposición: lista cerrada de lo que nunca cruza la frontera | Seguridad | Propuesto |
+| [ADR-08005](Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md) | Proyección de listado separada del detalle, y el comentario como bloque propio | Comunicación | Propuesto |
 
 Ninguna superada, ninguna rechazada.
 
@@ -47,9 +47,9 @@ Ninguno de los siete es de latencia ni de throughput, y es correcto: el ensambla
 ## 5. Orden de lectura sugerido
 
 1. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §3.2 — la regla de exposición. Son dos tablas y es lo primero que hay que haber entendido.
-2. [`Adrs/ADR-04`](Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) — su fundamento, con las alternativas que se evaluaron.
+2. [`Adrs/ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) — su fundamento, con las alternativas que se evaluaron.
 3. [`Contratos-Abstractions.md`](Contratos-Abstractions.md) §5 — el inventario de los diecisiete códigos, los tres retirados y las tres señales. Es donde más se equivoca quien llega de otra categoría, porque los tres conjuntos se parecen y no son lo mismo.
-4. [`Adrs/ADR-02`](Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) — el criterio con el que un código se justifica, que es lo que evita que el conjunto crezca por operación.
+4. [`Adrs/ADR-08002`](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) — el criterio con el que un código se justifica, que es lo que evita que el conjunto crezca por operación.
 5. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10 — la trazabilidad, para consultar por restricción transversal o por regla.
 
 ## 6. Artefactos omitidos y su motivo

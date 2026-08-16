@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/infrastructure/02-intermedio/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-03`, `CU-04` y `CU-05`; [`../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md), el esquema físico de las **cinco** entidades; [`../05-Arquitectura-Tecnica/Adrs/ADR-02-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) y [`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md); `PRODUCT-INTAKE` 1.23 §20, escenarios `E-1`, `E-2` y `E-5`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06003`, `CU-06004` y `CU-06005`; [`../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md), el esquema físico de las **cinco** entidades; [`../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) y [`ADR-06003`](../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md); `PRODUCT-INTAKE` 1.23 §20, escenarios `E-1`, `E-2` y `E-5`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06002` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -46,11 +46,11 @@ samples/infrastructure/02-intermedio/
 │   ├── E1.txt  E2.txt  E5.txt           # Transcriptos del PRODUCT-INTAKE §20, sin modificación
 │   └── Interpretaciones.<ext>           # Resultados del ejemplo 01, reusados sin recalcular
 ├── Actos/
-│   ├── ActoMaterializar.<ext>           # CU-03, escritura
-│   ├── ActoConsultar.<ext>              # CU-03, las dos formas de lectura
-│   ├── ActoRetirar.<ext>                # CU-04
-│   ├── ActoArrastrar.<ext>              # CU-04, la baja de una cuenta
-│   └── ActoCuentas.<ext>                # CU-05, incluidas las dos preguntas sobre el conjunto
+│   ├── ActoMaterializar.<ext>           # CU-06003, escritura
+│   ├── ActoConsultar.<ext>              # CU-06003, las dos formas de lectura
+│   ├── ActoRetirar.<ext>                # CU-06004
+│   ├── ActoArrastrar.<ext>              # CU-06004, la baja de una cuenta
+│   └── ActoCuentas.<ext>                # CU-06005, incluidas las dos preguntas sobre el conjunto
 └── tests/
     └── SalidaEsperada.<ext>             # Compara la salida contra el snapshot de §6
 ```
@@ -78,11 +78,11 @@ Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0
 
 **La línea `[2]` de la consulta sin alcance es la razón de ser de este sample.** El adaptador **no filtra después**: exige que el recorte venga en el pedido. Un repositorio genérico que devolviera todo y dejara el recorte del lado del consumidor es exactamente lo que esa condición viene a impedir, y es la alternativa que `05` §2.1 descarta con ese fundamento.
 
-**Las dos líneas de `[4]` son la unidad de trabajo vista desde afuera.** Cuando el arrastre se completa quedan **0** trabajos de esa cuenta; cuando se interrumpe quedan **2**, los mismos que había. No hay estado intermedio observable: es el todo o nada que [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) fija, con la baja con arrastre como caso testigo.
+**Las dos líneas de `[4]` son la unidad de trabajo vista desde afuera.** Cuando el arrastre se completa quedan **0** trabajos de esa cuenta; cuando se interrumpe quedan **2**, los mismos que había. No hay estado intermedio observable: es el todo o nada que [`ADR-06002`](../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) fija, con la baja con arrastre como caso testigo.
 
 **La diferencia entre las dos líneas de `[2]` es contrato y no optimización.** El listado no lleva componentes ni texto original; el detalle sí. Pedir componentes en un listado obligaría a traer el detalle de cada fila, y el contrato del producto ya separó las dos proyecciones antes de que esta capa existiera.
 
-**La última línea es `RN-08` medida donde se puede violar.** El texto original se guarda literal y **ninguna escritura lo reemplaza**: la que lo intenta se rechaza, en lugar de aplicarse y dejar el defecto para que lo descubra alguien mirando una pantalla.
+**La última línea es `RN-06008` medida donde se puede violar.** El texto original se guarda literal y **ninguna escritura lo reemplaza**: la que lo intenta se rechaza, en lugar de aplicarse y dejar el defecto para que lo descubra alguien mirando una pantalla.
 
 ## 7. Variaciones sugeridas
 
@@ -91,30 +91,30 @@ Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0
 | Dos escritores a la vez | Lanzar dos operaciones de escritura simultáneas | `ESCRITURA_CONCURRENTE_RECHAZADA`. **Esta capa no reintenta**: la decisión de reintentar es del consumidor, y `05` §2.1 declara por qué |
 | Almacén ausente | Correr sin ejecutar el paso 3 | `ALMACEN_NO_DISPONIBLE`, y **no** un valor compuesto por otro medio |
 | Materializar sin texto original | Quitar el texto del trabajo antes de guardarlo | `TEXTO_ORIGINAL_AUSENTE`: el trabajo no se guarda a medias |
-| Correos que difieren sólo en mayúsculas | Dar de alta dos cuentas con el mismo correo escrito distinto | Depende del criterio de comparación, que **no está decidido todavía** ([`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §6). El sample lo declara como variación y **no afirma un resultado** |
+| Correos que difieren sólo en mayúsculas | Dar de alta dos cuentas con el mismo correo escrito distinto | Depende del criterio de comparación, que **no está decidido todavía** ([`ADR-06003`](../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §6). El sample lo declara como variación y **no afirma un resultado** |
 
 ## 8. Trazabilidad
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Guardar-Y-Recuperar-Los-Trabajos.md) | Caso de uso | Materializa los tres trabajos y resuelve las **dos** formas de lectura con el recorte ya trasladado |
-| [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | Caso de uso | Retira un trabajo con todo lo que cuelga y arrastra los **2** restantes de una cuenta dada de baja |
-| [`CU-05`](../02-Especificacion-Funcional/Casos-De-Uso/CU-05-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Responde las **dos** preguntas sobre el conjunto y transporta la marca sin alterar el estado |
-| [`RN-02`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02-Correo-Del-Alumno-Unico.md) | Regla de negocio | La unicidad del correo la sostiene el almacén, no el consumidor |
-| [`RN-01`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-01-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | La unicidad del administrador la sostiene el almacén |
-| [`RN-07`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-07-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | Regla de negocio | El arrastre es todo o nada |
-| [`RN-08`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-08-Texto-Original-Conservado-Integro.md) | Regla de negocio | El texto se guarda literal y toda escritura que lo reemplace se rechaza |
-| [`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md) | Decisión arquitectónica | Un adaptador por puerto, sin repositorio genérico: la consulta sin alcance se rechaza en lugar de resolverse afuera |
-| [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) | Decisión arquitectónica | Una unidad de trabajo por operación y escritor único, con el arrastre como caso testigo |
-| [`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) | Decisión arquitectónica | La comparación de correos y su índice, con el punto que sigue abierto declarado en §7 |
+| [`CU-06003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) | Caso de uso | Materializa los tres trabajos y resuelve las **dos** formas de lectura con el recorte ya trasladado |
+| [`CU-06004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | Caso de uso | Retira un trabajo con todo lo que cuelga y arrastra los **2** restantes de una cuenta dada de baja |
+| [`CU-06005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Responde las **dos** preguntas sobre el conjunto y transporta la marca sin alterar el estado |
+| [`RN-02002`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | Regla de negocio | La unicidad del correo la sostiene el almacén, no el consumidor |
+| [`RN-02001`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | La unicidad del administrador la sostiene el almacén |
+| [`RN-02007`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | Regla de negocio | El arrastre es todo o nada |
+| [`RN-02008`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | Regla de negocio | El texto se guarda literal y toda escritura que lo reemplace se rechaza |
+| [`ADR-06001`](../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md) | Decisión arquitectónica | Un adaptador por puerto, sin repositorio genérico: la consulta sin alcance se rechaza en lugar de resolverse afuera |
+| [`ADR-06002`](../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) | Decisión arquitectónica | Una unidad de trabajo por operación y escritor único, con el arrastre como caso testigo |
+| [`ADR-06003`](../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) | Decisión arquitectónica | La comparación de correos y su índice, con el punto que sigue abierto declarado en §7 |
 | `PRODUCT-INTAKE` §20 `E-1`, `E-2`, `E-5` | Escenario con payload real | Los tres textos que se materializan, transcriptos sin modificación |
 
 ## 9. Contrato de verificación
 
 ```yaml
 verificacion:
-  id: VER-02
-  verifica: [CU-03, CU-04, CU-05, US-08, US-09, US-10, US-11, US-12, US-13, US-14, US-15, US-16]
+  id: VER-06002
+  verifica: [CU-06003, CU-06004, CU-06005, US-06008, US-06009, US-06010, US-06011, US-06012, US-06013, US-06014, US-06015, US-06016]
   comando: "dotnet run --project samples/infrastructure/02-intermedio"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -147,4 +147,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-03`, `CU-04` y `CU-05` sobre un almacén real llevado a su estado de primer arranque, con **tres** de los ocho escenarios materializados y sus interpretaciones reusadas del ejemplo 01 sin recalcular. Declara por qué la ruta del almacén no se escribe en el sample y por qué la variación de comparación de correos **no afirma un resultado**, dado que `ADR-03` §6 la deja abierta. El contrato `VER-02` declara ocho líneas exactas de salida y **tres aserciones negativas** —los componentes en el listado, el estado intermedio del arrastre y el trabajo que no se retiró—; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06003`, `CU-06004` y `CU-06005` sobre un almacén real llevado a su estado de primer arranque, con **tres** de los ocho escenarios materializados y sus interpretaciones reusadas del ejemplo 01 sin recalcular. Declara por qué la ruta del almacén no se escribe en el sample y por qué la variación de comparación de correos **no afirma un resultado**, dado que `ADR-06003` §6 la deja abierta. El contrato `VER-06002` declara ocho líneas exactas de salida y **tres aserciones negativas** —los componentes en el listado, el estado intermedio del arrastre y el trabajo que no se retiró—; `evidencia` queda en `No verificado — sin código`. |

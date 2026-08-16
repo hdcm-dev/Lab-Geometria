@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/contracts/03-avanzado/`
-**Trazabilidad upstream:** [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md), [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Contrato-De-Desenlace-De-La-Revision.md) y [`CU-08`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de error, de desenlace y de reseteo, y §3.2; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3.2, la única tabla del proyecto de código donde los **veinte** identificadores emitidos están enumerados juntos; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-15` a `TC-22`; `PRODUCT-INTAKE` 1.22 §20, escenarios `E-5` y `E-8`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-03` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`CU-08006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md), [`CU-08007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08007-Contrato-De-Desenlace-De-La-Revision.md) y [`CU-08008`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de error, de desenlace y de reseteo, y §3.2; [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §3.2, la única tabla del proyecto de código donde los **veinte** identificadores emitidos están enumerados juntos; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-08015` a `TC-08022`; `PRODUCT-INTAKE` 1.22 §20, escenarios `E-5` y `E-8`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-08003` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -76,7 +76,7 @@ Familias recorridas: 3 de 8 | Total de familias cubiertas por los tres samples: 
 
 **El acto `[3]` es el sample.** Un conjunto cerrado no se verifica leyéndolo: se verifica **en las dos direcciones**, comprobando que no falta ninguno de los diecisiete vivos y que no aparece ninguno que no esté. Los **tres** retirados no se reciclan, y su reaparición es una falla, no un empate.
 
-**El acto `[4]` es la consecuencia de `RN-16` sobre este contrato.** Esa regla volvió imposibles dos causas —una cuenta habilitada sin contraseña, y un reseteo sobre una cuenta sin contraseña—, y el recuento en 0 es lo que impide que un código para ellas vuelva a nacer.
+**El acto `[4]` es la consecuencia de `RN-08016` sobre este contrato.** Esa regla volvió imposibles dos causas —una cuenta habilitada sin contraseña, y un reseteo sobre una cuenta sin contraseña—, y el recuento en 0 es lo que impide que un código para ellas vuelva a nacer.
 
 **Los actos `[5]` y `[6]` usan `E-5` y `E-8`, y el índice es 1 en los dos.** El primer elemento de `E-5` es válido a propósito: que el índice reportado sea **1 y no 0** es lo que prueba que la ubicación se calcula y no se informa siempre la primera figura (`PRODUCT-INTAKE` §20.E-5, punto 2). En `E-8`, el intake resuelve la dimensión no legible como **error y no como advertencia**, de modo que el estado que el contrato transporta es `Borrador`.
 
@@ -95,14 +95,14 @@ Familias recorridas: 3 de 8 | Total de familias cubiertas por los tres samples: 
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Contrato-De-Respuesta-De-Error.md) | Contrato de uso | Actos `[1]` a `[6]`: el tipo único de error, su conjunto cerrado y su detalle de ubicación |
-| [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Contrato-De-Desenlace-De-La-Revision.md) | Contrato de uso | Actos `[7]` y `[8]`: los dos valores y la ausencia de vuelta atrás |
-| [`CU-08`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md) | Contrato de uso | Actos `[9]` y `[9b]`: la solicitud de un solo campo y la reutilización del tipo de cambio |
+| [`CU-08006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) | Contrato de uso | Actos `[1]` a `[6]`: el tipo único de error, su conjunto cerrado y su detalle de ubicación |
+| [`CU-08007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08007-Contrato-De-Desenlace-De-La-Revision.md) | Contrato de uso | Actos `[7]` y `[8]`: los dos valores y la ausencia de vuelta atrás |
+| [`CU-08008`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md) | Contrato de uso | Actos `[9]` y `[9b]`: la solicitud de un solo campo y la reutilización del tipo de cambio |
 | `RT-02` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 | Restricción transversal | El detalle de ubicación con índice y campo de `[5]` y `[6]` |
 | `RT-05` de la misma sección | Restricción transversal | El acto `[10]` |
 | `RT-11` de la misma sección | Restricción transversal | El acto `[11]` |
-| [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) | Decisión arquitectónica | Actos `[1]`, `[3]` y `[4]` |
-| [`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Por-Compilacion-Compartida.md) | Decisión arquitectónica | El acto `[10]`: los dos extremos se compilan contra el mismo ensamblado |
+| [`ADR-08002`](../05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) | Decisión arquitectónica | Actos `[1]`, `[3]` y `[4]` |
+| [`ADR-08003`](../05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) | Decisión arquitectónica | El acto `[10]`: los dos extremos se compilan contra el mismo ensamblado |
 | **RA-01** del `PRODUCT-INTAKE` §14 | Regla de arquitectura del producto | Acto `[11]`: ningún tipo habilita al navegador a armar la solicitud |
 | **RA-03** del `PRODUCT-INTAKE` §14 | Regla de arquitectura del producto | Acto `[2]`: ningún campo transporta una dirección de servicio interno |
 | `PRODUCT-INTAKE` §20 `E-5` y `E-8` | Escenario con payload real | Los dos textos, transcriptos sin modificación, producen los detalles de ubicación de `[5]` y `[6]` |
@@ -111,8 +111,8 @@ Familias recorridas: 3 de 8 | Total de familias cubiertas por los tres samples: 
 
 ```yaml
 verificacion:
-  id: VER-03
-  verifica: [CU-06, CU-07, CU-08, US-14, US-15, US-16, US-17, US-21, US-22]
+  id: VER-08003
+  verifica: [CU-08006, CU-08007, CU-08008, US-08014, US-08015, US-08016, US-08017, US-08021, US-08022]
   comando: "dotnet run --project samples/contracts/03-avanzado"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -140,5 +140,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06`, `CU-07` y `CU-08` sobre las **tres** familias restantes, con lo que los tres samples completan **8 de 8** familias de tipos. Verifica el conjunto cerrado en las dos direcciones —**15** vivos sobre **18** emitidos, **3** retirados sin reciclar— y las reglas de arquitectura **RA-01** y **RA-03** sobre la superficie del ensamblado. El contrato `VER-03` declara seis líneas exactas de salida y **una aserción negativa** sobre el índice reportado; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-08006`, `CU-08007` y `CU-08008` sobre las **tres** familias restantes, con lo que los tres samples completan **8 de 8** familias de tipos. Verifica el conjunto cerrado en las dos direcciones —**15** vivos sobre **18** emitidos, **3** retirados sin reciclar— y las reglas de arquitectura **RA-01** y **RA-03** sobre la superficie del ensamblado. El contrato `VER-08003` declara seis líneas exactas de salida y **una aserción negativa** sobre el índice reportado; `evidencia` queda en `No verificado — sin código`. |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **7**. Sube minor. |

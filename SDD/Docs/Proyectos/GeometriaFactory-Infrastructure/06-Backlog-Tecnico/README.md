@@ -33,23 +33,23 @@
 
 | Épica | Etapa del producto | Historias | Tareas técnicas |
 | --- | --- | --- | --- |
-| EP-01 Esqueleto ambulante y verificación de viabilidad | `a` | US-24, US-25 | BT-01 a BT-08 |
-| EP-02 Identidad del administrador y sesión | `c` | US-14, US-15, US-17, US-18, US-21, US-22, US-23 | BT-05, BT-09, BT-12, BT-13, BT-15, BT-21 |
-| EP-03 Ciclo de vida de la cuenta de alumno | `d` | US-13, US-16, US-19, US-20 | BT-09, BT-11, BT-14, BT-25 |
-| EP-04 Gestión del trabajo | `e` | US-08, US-09, US-10, US-11, US-12 | BT-05, BT-10, BT-11 |
-| EP-05 Interpretación y verificación del dato del alumno | `f` | US-01 a US-07 | BT-16 a BT-20, BT-24 |
+| EP-06001 Esqueleto ambulante y verificación de viabilidad | `a` | US-06024, US-06025 | BT-06001 a BT-06008 |
+| EP-06002 Identidad del administrador y sesión | `c` | US-06014, US-06015, US-06017, US-06018, US-06021, US-06022, US-06023 | BT-06005, BT-06009, BT-06012, BT-06013, BT-06015, BT-06021 |
+| EP-06003 Ciclo de vida de la cuenta de alumno | `d` | US-06013, US-06016, US-06019, US-06020 | BT-06009, BT-06011, BT-06014, BT-06025 |
+| EP-06004 Gestión del trabajo | `e` | US-06008, US-06009, US-06010, US-06011, US-06012 | BT-06005, BT-06010, BT-06011 |
+| EP-06005 Interpretación y verificación del dato del alumno | `f` | US-06001 a US-06007 | BT-06016 a BT-06020, BT-06024 |
 
-**EP-01 es la única épica de etapa `a` del producto que tiene historias**, y el motivo está en [`Product-Backlog.md`](Product-Backlog.md) §3.1: `PT-04` se mide en esa etapa y exige que las actualizaciones de esquema se apliquen sobre base vacía. **Las etapas `b`, `g` y `h` no producen épica acá**, con el motivo declarado en §2 de ese mismo documento.
+**EP-06001 es la única épica de etapa `a` del producto que tiene historias**, y el motivo está en [`Product-Backlog.md`](Product-Backlog.md) §3.1: `PT-04` se mide en esa etapa y exige que las actualizaciones de esquema se apliquen sobre base vacía. **Las etapas `b`, `g` y `h` no producen épica acá**, con el motivo declarado en §2 de ese mismo documento.
 
 ## 4. Historias `Must Have` del tramo comprometido
 
-**Veinticuatro de las veinticinco.** La única `Should` es **US-23** —proveer el sello por un puerto—, y lo es porque su caso de uso, `CU-09`, es **el único de los diez que no traza a ninguna necesidad de negocio**: su origen es una decisión de testabilidad y no una capacidad. El fundamento completo está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
+**Veinticuatro de las veinticinco.** La única `Should` es **US-06023** —proveer el sello por un puerto—, y lo es porque su caso de uso, `CU-06009`, es **el único de los diez que no traza a ninguna necesidad de negocio**: su origen es una decisión de testabilidad y no una capacidad. El fundamento completo está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
 
 **Las veinticinco están dentro del tramo comprometido de ocho etapas.**
 
 ## 5. Tareas técnicas prioritarias
 
-**BT-03**, el anclaje de la función de derivación de clave, porque el intake §17.3.P.1 declara **dos candidatas y no elige**, la decisión es de este proyecto de código y **no se puede delegar hacia arriba ni hacia abajo**. **BT-16, BT-17 y BT-18**, el validador y su batería de diez casos, porque son la **mitigación declarada del único riesgo de negocio del producto**, al que la fuente asigna probabilidad alta e impacto alto. **BT-14**, la producción de la provisoria, porque su atajo destructivo —componerla por otro medio cuando la fuente de aleatoriedad no responde— **deja el reseteo aparentemente funcionando** y no se nota hasta que alguien la usa. Y **BT-06**, la preparación del almacén, porque el atajo de descartarlo y crearlo de nuevo **deja el servicio impecable y sin los trabajos de nadie**.
+**BT-06003**, el anclaje de la función de derivación de clave, porque el intake §17.3.P.1 declara **dos candidatas y no elige**, la decisión es de este proyecto de código y **no se puede delegar hacia arriba ni hacia abajo**. **BT-06016, BT-06017 y BT-06018**, el validador y su batería de diez casos, porque son la **mitigación declarada del único riesgo de negocio del producto**, al que la fuente asigna probabilidad alta e impacto alto. **BT-06014**, la producción de la provisoria, porque su atajo destructivo —componerla por otro medio cuando la fuente de aleatoriedad no responde— **deja el reseteo aparentemente funcionando** y no se nota hasta que alguien la usa. Y **BT-06006**, la preparación del almacén, porque el atajo de descartarlo y crearlo de nuevo **deja el servicio impecable y sin los trabajos de nadie**.
 
 ## 6. Definition of Ready vigente
 

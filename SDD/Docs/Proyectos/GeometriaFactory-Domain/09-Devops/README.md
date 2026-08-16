@@ -27,7 +27,7 @@
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.0 | Propuesto | Los **tres** stages, los **ocho** gates materializados con su carácter, triggers, matriz, caché, promoción, reversión y notificaciones |
-| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico y convenciones de mensaje, criterio de cambio mayor tomado de `ADR-03`, modelo de ramas y ausencia de canales |
+| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico y convenciones de mensaje, criterio de cambio mayor tomado de `ADR-02003`, modelo de ramas y ausencia de canales |
 | [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.0 | Propuesto | Por qué no hay ambientes ni canales, el contenedor de desarrollo como único ambiente, y la ausencia de configuración y de secretos propios |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario, firma, nivel de integridad de la construcción, análisis de dependencias, análisis estático y dinámico, y política ante vulnerabilidades |
 
@@ -56,9 +56,9 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | QG-01 | `build` | Bloqueante |
 | QG-02 | `test` | Bloqueante |
 | QG-03 | `test`, informe de cobertura por componente | **Condicionado** |
-| QG-04 | `build`, con inspección `TC-24` | Bloqueante |
-| QG-05 | `test`, inspección `TC-23` | Bloqueante |
-| QG-06 | `test`, inspección `TC-26` | Bloqueante al cierre de etapa |
+| QG-04 | `build`, con inspección `TC-02024` | Bloqueante |
+| QG-05 | `test`, inspección `TC-02023` | Bloqueante |
+| QG-06 | `test`, inspección `TC-02026` | Bloqueante al cierre de etapa |
 | QG-07 | `test`, duración total de la batería | **Condicionado** |
 | QG-08 | Revisión del pull request | Se rechaza en revisión |
 

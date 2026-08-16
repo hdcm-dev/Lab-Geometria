@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/api/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-01`, `CU-02` y `CU-09`; [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y §6; [`../03-UX-UI-DX/Guia-Onboarding-Developer.md`](../03-UX-UI-DX/Guia-Onboarding-Developer.md) §3.3 y §3.4; `PRODUCT-INTAKE` 1.23 §20, escenarios `E-5` y `E-8`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-01` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-00001`, `CU-00002` y `CU-00009`; [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y §6; [`../03-UX-UI-DX/Guia-Onboarding-Developer.md`](../03-UX-UI-DX/Guia-Onboarding-Developer.md) §3.3 y §3.4; `PRODUCT-INTAKE` 1.23 §20, escenarios `E-5` y `E-8`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-00001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -58,7 +58,7 @@ samples/api/01-basico/
     └── salida.txt                # Snapshot de la salida de §6
 ```
 
-**Los archivos de cuerpo llevan extensión `.txt` y no `.json`, a propósito.** Los textos del alumno se transportan **sin normalizar en el borde**, que es lo que `US-19` exige, y nombrarlos `.json` invitaría a que una herramienta los reformateara al abrirlos. Es el mismo criterio que ya adoptaron las categorías 10 de `GeometriaFactory-Contracts` y de `GeometriaFactory-Visor`.
+**Los archivos de cuerpo llevan extensión `.txt` y no `.json`, a propósito.** Los textos del alumno se transportan **sin normalizar en el borde**, que es lo que `US-00019` exige, y nombrarlos `.json` invitaría a que una herramienta los reformateara al abrirlos. Es el mismo criterio que ya adoptaron las categorías 10 de `GeometriaFactory-Contracts` y de `GeometriaFactory-Visor`.
 
 **Los cuatro primeros archivos de petición no son el objeto del sample: son su preparación.** Existen porque sin cuenta habilitada no hay canje, y `A-04` —el punto anónimo que fijaba la contraseña— **está retirado** desde `PRODUCT-INTAKE` 1.13: hoy la habilitación devuelve la provisoria y el alumno cambia la suya por `A-05`, ya autenticado.
 
@@ -90,24 +90,24 @@ Peticiones ejecutadas: 14 | Respuestas comparadas: 14 | Diferencias: 0
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Declarar qué campo falló | Hacer que el canje distinga correo inexistente de contraseña incorrecta | La respuesta deja de ser genérica y `US-02` deja de cumplirse: se filtra qué correos existen |
-| Enviar `E-5` como `400` | Tratar el error de interpretación como petición mal formada | El trabajo **no se guarda**, el alumno pierde su texto y `RN-08` deja de poder cumplirse |
-| Exceptuar un segundo punto de la guardia del cambio pendiente | Dejar pasar otro punto además del cambio de contraseña propia | `US-06` deja de cumplirse: la cuenta marcada alcanza una capacidad que `RN-13` prohíbe |
+| Declarar qué campo falló | Hacer que el canje distinga correo inexistente de contraseña incorrecta | La respuesta deja de ser genérica y `US-00002` deja de cumplirse: se filtra qué correos existen |
+| Enviar `E-5` como `400` | Tratar el error de interpretación como petición mal formada | El trabajo **no se guarda**, el alumno pierde su texto y `RN-00008` deja de poder cumplirse |
+| Exceptuar un segundo punto de la guardia del cambio pendiente | Dejar pasar otro punto además del cambio de contraseña propia | `US-00006` deja de cumplirse: la cuenta marcada alcanza una capacidad que `RN-00013` prohíbe |
 | Devolver la ruta del almacén en un mensaje | Incluir la ruta del archivo de datos en el cuerpo de un error | La línea de umbral cero pasa a **1** y el criterio de aceptación falla. Es `RA-03` |
 
 ## 8. Trazabilidad
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Canjear-Credenciales-Por-Un-Acceso-Firmado.md) | Caso de uso | Canjea correo y contraseña por un acceso firmado, y recorre sus tres desenlaces |
-| [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md) | Caso de uso | Ejercita la guardia en sus tres dimensiones: acceso, papel y marca |
-| [`CU-09`](../02-Especificacion-Funcional/Casos-De-Uso/CU-09-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Caso de uso | Comprueba que los **6** códigos de contrato que aparecen se traducen según la tabla única, sin inventar ninguno |
-| [`RN-05`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-05-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | `E-5` y `E-8` quedan en `Borrador` sin que la respuesta sea un fallo |
-| [`RN-09`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-09-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en las dos observaciones de error |
-| [`RN-13`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-13-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | La guardia del cambio pendiente sobre todos los puntos salvo uno |
-| [`RN-16`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-16-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | La habilitación devuelve la provisoria, que el cambio usa como vigente |
-| [`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md) | Decisión arquitectónica | La credencial firmada, el papel por punto y la guardia transversal |
-| [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md) | Decisión arquitectónica | Las dos traducciones con tabla única y **0** códigos inventados |
+| [`CU-00001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00001-Canjear-Credenciales-Por-Un-Acceso-Firmado.md) | Caso de uso | Canjea correo y contraseña por un acceso firmado, y recorre sus tres desenlaces |
+| [`CU-00002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md) | Caso de uso | Ejercita la guardia en sus tres dimensiones: acceso, papel y marca |
+| [`CU-00009`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Caso de uso | Comprueba que los **6** códigos de contrato que aparecen se traducen según la tabla única, sin inventar ninguno |
+| [`RN-02005`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | `E-5` y `E-8` quedan en `Borrador` sin que la respuesta sea un fallo |
+| [`RN-02009`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en las dos observaciones de error |
+| [`RN-02013`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | La guardia del cambio pendiente sobre todos los puntos salvo uno |
+| [`RN-02016`](../../GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | La habilitación devuelve la provisoria, que el cambio usa como vigente |
+| [`ADR-00003`](../05-Arquitectura-Tecnica/Adrs/ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md) | Decisión arquitectónica | La credencial firmada, el papel por punto y la guardia transversal |
+| [`ADR-00004`](../05-Arquitectura-Tecnica/Adrs/ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md) | Decisión arquitectónica | Las dos traducciones con tabla única y **0** códigos inventados |
 | `RA-03` | Regla de arquitectura del producto | **0** respuestas con dirección, ruta, traza o secreto |
 | `PRODUCT-INTAKE` §20 `E-5`, `E-8` | Escenario con payload real | Los dos textos se transcriben sin modificación y son los cuerpos del envío |
 
@@ -115,8 +115,8 @@ Peticiones ejecutadas: 14 | Respuestas comparadas: 14 | Diferencias: 0
 
 ```yaml
 verificacion:
-  id: VER-01
-  verifica: [CU-01, CU-02, CU-09, US-01, US-02, US-03, US-04, US-05, US-06, US-24, US-25]
+  id: VER-00001
+  verifica: [CU-00001, CU-00002, CU-00009, US-00001, US-00002, US-00003, US-00004, US-00005, US-00006, US-00024, US-00025]
   comando: "bash samples/api/01-basico/run.sh"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -157,4 +157,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-01`, `CU-02` y `CU-09` sobre **seis** puntos de acceso y **dos** escenarios reales, `E-5` y `E-8`, transcriptos sin modificación. Declara por qué los archivos de cuerpo llevan extensión `.txt`, por qué las cuatro primeras peticiones son preparación y no objeto, y por qué `A-04` no aparece. El contrato `VER-01` declara **cuatro** aserciones de respuesta HTTP con código y cuerpo, cuatro líneas exactas de salida y **tres aserciones negativas**; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-00001`, `CU-00002` y `CU-00009` sobre **seis** puntos de acceso y **dos** escenarios reales, `E-5` y `E-8`, transcriptos sin modificación. Declara por qué los archivos de cuerpo llevan extensión `.txt`, por qué las cuatro primeras peticiones son preparación y no objeto, y por qué `A-04` no aparece. El contrato `VER-00001` declara **cuatro** aserciones de respuesta HTTP con código y cuerpo, cuatro líneas exactas de salida y **tres aserciones negativas**; `evidencia` queda en `No verificado — sin código`. |

@@ -38,7 +38,7 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 - [ ] Esos `TC-XX` están escritos y **en verde**. **Se valida** con la salida de `scripts/test.sh`.
 - [ ] Toda regla de negocio, invariante y **regla conceptual de modelo** que la historia declara ejercer tiene su fila en la matriz §4 y §5 con este `TC-XX` entre sus tests. **Se valida** leyendo esas dos tablas.
 - [ ] **Si la historia usa un texto de figuras, ese texto sale del intake §20 y no está escrito a mano.** **Se valida** por inspección del fixture, contra `CV-34`. Una historia con un texto propio **no está terminada**: es el modo en que el riesgo de negocio que la fuente pone primero se materializa sin que nadie lo note.
-- [ ] Toda condición de rechazo que la historia produce está en el catálogo de las **17** y alcanzada por prueba. **Se valida** con `TC-34`.
+- [ ] Toda condición de rechazo que la historia produce está en el catálogo de las **17** y alcanzada por prueba. **Se valida** con `TC-06034`.
 - [ ] **Si la historia introduce una propiedad de ausencia** —cero peticiones de red, cero retiros parciales, cero provisorias repetidas, cero secretos en mensajes—, se midió **con umbral cero y en la condición declarada**, y no se dio por cumplida por no haberse observado lo contrario. **Se valida** con el `TC-XX` correspondiente.
 - [ ] **Si la historia toca el almacén, su prueba crea y descarta su propio almacén efímero.** **Se valida** por inspección, contra `CV-33`.
 - [ ] La construcción termina en 0 y sin advertencias. **Se valida** con la salida de `scripts/build.sh`.
@@ -72,7 +72,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 - [ ] Los **treinta y cinco** criterios de [`Criterios-Validacion.md`](Criterios-Validacion.md) están evaluados uno por uno, con su resultado registrado. **Se valida** con ese documento.
 - [ ] **10 de 10** casos de uso, **16 de 16** reglas de negocio con su tramo verificado, **7 de 7** reglas conceptuales de modelo y **25 de 25** historias con caso de prueba en verde. **Se valida** con los recuentos de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md).
 - [ ] **10 de 10** casos de la batería del validador, con los **ocho** escenarios como entrada. **Se valida** con la matriz §6.
-- [ ] **17 de 17** condiciones alcanzadas y **0** fuera del catálogo. **Se valida** con `TC-34`.
+- [ ] **17 de 17** condiciones alcanzadas y **0** fuera del catálogo. **Se valida** con `TC-06034`.
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos que los usan, **como texto literal**. **Se valida** con `CV-07` y con el recuento de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3.
 - [ ] Los **tres** valores rotulados **[ASUNCIÓN]** están confirmados por el Product Owner, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 y `PA-11` de `05` §11.
 - [ ] No queda ningún punto abierto de `05` §11 sin desenlace declarado. **Se valida** leyendo esa tabla, que ya tiene una fila **resuelta** con su fecha.

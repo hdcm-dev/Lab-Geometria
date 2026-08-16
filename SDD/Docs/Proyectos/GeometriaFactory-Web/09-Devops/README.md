@@ -30,7 +30,7 @@
 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **ocho** pasos del flujo de publicación, los **once** gates con su carácter, el `PD-01` que `GeometriaFactory-Contracts` elevó —hoy **cerrado** por el intake 1.22—, las **tres** plataformas y las **tres** puertas técnicas |
 | [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, las **seis** clases de cambio decididas sobre lo que la persona ve, modelo de ramas, canales y qué versiona realmente la etiqueta |
 | [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Los **dos** ambientes con el apartamiento del modelo de cuatro declarado, el tramo local de la decisión sobre el bundle, configuración, secretos y qué pasa cuando la dirección del servidor propio cambia |
-| [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md) | 1.0 | Propuesto | Pre-requisitos, invocación del flujo, **cuatro** verificaciones posteriores, reversión y las **seis** métricas de `ADR-07` §8 |
+| [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md) | 1.0 | Propuesto | Pre-requisitos, invocación del flujo, **cuatro** verificaciones posteriores, reversión y las **seis** métricas de `ADR-10007` §8 |
 | [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario sobre las dos cadenas, la firma con su brecha, nivel de integridad, análisis de dependencias, análisis dinámico y las **tres** reglas de arquitectura como preocupación de cadena de suministro |
 
 ## 2. Orden de lectura
@@ -64,13 +64,13 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | QG-01 | Paso 5 del flujo de publicación | Bloquea la fusión |
 | QG-02 | Paso 4, e inspección de la definición del flujo | Bloquea la publicación |
 | QG-03 | Paso 8 del flujo | Bloquea el flujo |
-| QG-04 | Guion de demostración acumulativo, antes del punto de control (`TC-35`) | **Bloqueante**, no condicionado |
-| QG-05 | Pull request, conteo en la pestaña de red con los movimientos prendidos (`TC-29`) | Bloqueante, sin gradación |
-| QG-06 | Pull request, inspección del árbol de fuentes y de las dependencias de guion (`TC-30`) | Bloqueante |
-| QG-07 | Pull request, inspección del almacenamiento y del contenido servido (`TC-03`) | Bloqueante |
-| QG-08 | Pull request, inspección del traductor de condiciones (`TC-31`) | Bloqueante |
-| QG-09 | Pull request, inspección del árbol de fuentes (`TC-32`) | Bloqueante |
-| QG-10 | Pull request, conteo del tráfico de circuito (`TC-33`) | Bloqueante |
+| QG-04 | Guion de demostración acumulativo, antes del punto de control (`TC-10035`) | **Bloqueante**, no condicionado |
+| QG-05 | Pull request, conteo en la pestaña de red con los movimientos prendidos (`TC-10029`) | Bloqueante, sin gradación |
+| QG-06 | Pull request, inspección del árbol de fuentes y de las dependencias de guion (`TC-10030`) | Bloqueante |
+| QG-07 | Pull request, inspección del almacenamiento y del contenido servido (`TC-10003`) | Bloqueante |
+| QG-08 | Pull request, inspección del traductor de condiciones (`TC-10031`) | Bloqueante |
+| QG-09 | Pull request, inspección del árbol de fuentes (`TC-10032`) | Bloqueante |
+| QG-10 | Pull request, conteo del tráfico de circuito (`TC-10033`) | Bloqueante |
 | QG-11 | Cierre de la etapa, recorrido de la matriz de sensado | Bloquea el cierre de etapa |
 
 **Ningún gate de este proyecto de código es condicionado.** El único con valor rotulado **[ASUNCIÓN]** es `QG-04`, y lo rotulado es **expresar la regla acumulativa como puerta**, no la regla: el intake §17.6.P.6 lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante». Es la distinción que la Fase E fijó y esta categoría la materializa sin reabrirla.
@@ -85,7 +85,7 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | --- | --- | --- | --- |
 | 1 | **El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`**, que quedaba fuera aunque es entrada de compilación de esta unidad | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2, decisión 1 | Se elevó al Product Owner como `PD-01`, y **él la confirmó en el intake 1.22**: §17.6.P.7 enumera hoy las **tres** rutas. `PD-01` **cerrado** |
 | 2 | **El despliegue conjunto lo sostiene `QG-08` de `GeometriaFactory-Contracts` y no el filtro de rutas**, porque el filtro dispara una construcción y no coordina dos despliegues, y uno de los dos es manual por decisión del Product Owner | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.1 y §3.2 | Adoptada |
-| 3 | **La exclusión del bundle del control de versiones queda asignada a `BT-01`** de la etapa `a`, con el estado del repositorio verificado y fechado | [`Entornos-Deploy.md`](Entornos-Deploy.md) §2 | Asignada, registrada como `PD-02` |
+| 3 | **La exclusión del bundle del control de versiones queda asignada a `BT-10001`** de la etapa `a`, con el estado del repositorio verificado y fechado | [`Entornos-Deploy.md`](Entornos-Deploy.md) §2 | Asignada, registrada como `PD-02` |
 
 **Y un hallazgo que esta sección deja escrito, y que el intake 1.22 confirmó en lugar de derogar**: con el front publicándose automáticamente al fusionar y el backend desplegándose a mano, **el despliegue conjunto es siempre un acto humano coordinado**, y ninguna decisión sobre el filtro de rutas lo vuelve automático. Tampoco lo vuelve automático el orden de salida que el intake §17.6.P.7 fija desde 1.22 —**primero el backend**—: el orden reduce el daño del intervalo, **no lo elimina**, y el mecanismo que queda sigue siendo la constancia escrita antes de cerrar la etapa.
 

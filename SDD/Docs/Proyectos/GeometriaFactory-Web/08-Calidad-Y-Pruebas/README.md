@@ -31,10 +31,10 @@
 | [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Fase E, AG-08 | Pirámide objetivo con su apartamiento declarado, cobertura por unidades contables, tooling, datos, y la **relación con la matriz de sensado** con la resolución de sus 61 filas |
 | [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.1 | Propuesto | Fase E, AG-08 | Alcance, criterios de entrada y salida, **diez** riesgos de calidad y plan por etapa sobre las ocho |
 | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Fase E, AG-08 | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, restricción transversal ↔ tests y cobertura por componente |
-| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.1 | Propuesto | Fase E, AG-08 | Catálogo de **treinta y cinco** casos de verificación, `TC-01` a `TC-35` |
+| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.1 | Propuesto | Fase E, AG-08 | Catálogo de **treinta y cinco** casos de verificación, `TC-10001` a `TC-10035` |
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | Fase E, AG-08 | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | Fase E, AG-08 | **DoD canónica** del proyecto de código, en cuatro capas |
-| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **1.2** | Propuesto | **Fase B2, AG-03M** | **Ya existía antes de esta fase.** Las **61** sondas `SD-01` a `SD-61` contra la línea de base visual aprobada. Ver §3 |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **1.2** | Propuesto | **Fase B2, AG-03M** | **Ya existía antes de esta fase.** Las **61** sondas `SD-10001` a `SD-10061` contra la línea de base visual aprobada. Ver §3 |
 
 ## 2. Orden de lectura
 
@@ -61,13 +61,13 @@
 | Se convirtió su verificación en **gate** y en criterio de cierre de etapa | `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3; [`Plan-Pruebas.md`](Plan-Pruebas.md) §3; [`Definition-Of-Done.md`](Definition-Of-Done.md) §1.3 |
 | Se **verificó desde este lado** la tabla de correspondencia que [`../../GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) declara contra ésta: **las ocho correspondencias son verdaderas** | [`Estrategia-Testing.md`](Estrategia-Testing.md) §8.2 |
 | **No se modificó ninguna fila, ningún umbral ni el recuento de 61** | — |
-| **No se abrieron filas para la capacidad `F-26`**, porque sus elementos de interfaz no tienen identificador en la línea de base. Se verifican con `TC-06`, `TC-07` y `TC-10` contra los criterios de aceptación de `CU-03` y `CU-04`, **sin umbral de deriva**, y así queda declarado como hueco | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
+| **No se abrieron filas para la capacidad `F-26`**, porque sus elementos de interfaz no tienen identificador en la línea de base. Se verifican con `TC-10006`, `TC-10007` y `TC-10010` contra los criterios de aceptación de `CU-10003` y `CU-10004`, **sin umbral de deriva**, y así queda declarado como hueco | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 
 ## 4. Artefactos omitidos y su motivo
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Guia-Testing-Extensibilidad.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 la exige para `library` con plugins y para `web-microservices` con plugins, y la omite para los tipos sin puntos de extensión. El flag `tiene_extensibilidad` de este proyecto de código es **false** (`PRODUCT-MANIFEST` §5): el punto de extensión del producto es el contrato de la fachada del visor, y su guía vive en la categoría 08 de `GeometriaFactory-Visor`. Lo que sí hace este proyecto de código es **consumir** ese punto de extensión, y `TC-32` verifica que lo consuma **sólo por sus seis funciones** |
+| `Guia-Testing-Extensibilidad.md` | **Omitido** | `Rules-Calidad-Y-Pruebas.md` §2.1 la exige para `library` con plugins y para `web-microservices` con plugins, y la omite para los tipos sin puntos de extensión. El flag `tiene_extensibilidad` de este proyecto de código es **false** (`PRODUCT-MANIFEST` §5): el punto de extensión del producto es el contrato de la fachada del visor, y su guía vive en la categoría 08 de `GeometriaFactory-Visor`. Lo que sí hace este proyecto de código es **consumir** ese punto de extensión, y `TC-10032` verifica que lo consuma **sólo por sus seis funciones** |
 
 **Ninguna omisión más.** A diferencia de los proyectos de código de biblioteca del producto, acá **la matriz de sensado de deriva no se omite**: `requiere_maqueta` es **true** (`PRODUCT-MANIFEST` §5), la Fase B2 se ejecutó con maqueta propia y la matriz existe desde entonces.
 

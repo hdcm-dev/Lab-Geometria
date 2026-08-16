@@ -40,14 +40,14 @@ Ocho filas, una por contrato de uso de [`../02-Especificacion-Funcional/Especifi
 
 | CU | Criterio Given-When-Then principal | Test | Tipo | Estado |
 | --- | --- | --- | --- | --- |
-| CU-01 Contrato de canje de credenciales y sesión | Given un canje válido, When se lo ejerce, Then la respuesta de sesión llega con **cuatro** campos y ninguno más; con la cuenta no habilitada o con la marca puesta, Then llega **respuesta de error** y no sesión | `TC-01`, `TC-02` | Integración e inspección | `Pendiente` |
-| CU-02 Contrato de administración de cuentas | Given el registro, el listado, el cambio de situación y la baja con confirmación escrita, When se los ejerce, Then cada uno transporta lo que declara; habilitar **devuelve la provisoria producida** | `TC-03`, `TC-04`, `TC-05`, `TC-06` | Integración e inspección | `Pendiente` |
-| CU-03 Contrato de carga y edición del trabajo | Given el envío con el texto original, When se lo envía y se pide el detalle, Then el texto vuelve íntegro como **una sola cadena**; la solicitud de eliminación es **única** para los dos papeles | `TC-07`, `TC-08` | Integración e inspección | `Pendiente` |
-| CU-04 Contrato de listado de trabajos | Given la proyección de listado, When se la inspecciona, Then no lleva texto original, ni componentes, ni comentario; el alcance cambia según el papel y excluye los `Borrador` para el administrador | `TC-09`, `TC-10`, `TC-11` | Inspección e integración | `Pendiente` |
-| CU-05 Contrato de detalle del trabajo interpretado | Given el detalle, When se lo pide, Then trae piezas con sus componentes, el texto original, las observaciones con severidad y **par de valores**, y el comentario **como bloque propio** | `TC-12`, `TC-13`, `TC-14` | Integración e inspección | `Pendiente` |
-| CU-06 Contrato de respuesta de error | Given el tipo de error, When se inspecciona su superficie, Then declara **cuatro** campos y **0** capaces de filtrar; el conjunto cerrado tiene **diecisiete** códigos vivos y `CONTRATO_ERROR_NO_CLASIFICADO` lo cierra | `TC-15`, `TC-16`, `TC-17`, `TC-02` | Inspección e integración | `Pendiente` |
-| CU-07 Contrato de desenlace de la revisión | Given el desenlace, When se lo inspecciona, Then es un conjunto cerrado de **dos** valores con comentario opcional, y **ningún** tipo permite salir de un estado terminal | `TC-18`, `TC-14` | Inspección e integración | `Pendiente` |
-| CU-08 Contrato de reseteo y cambio obligatorio | Given la solicitud de reseteo, When se la inspecciona, Then lleva **un solo campo** y **0** de contraseña; el resultado declara la situación conservada, el cambio pendiente y la provisoria producida | `TC-19`, `TC-02` | Inspección e integración | `Pendiente` |
+| CU-08001 Contrato de canje de credenciales y sesión | Given un canje válido, When se lo ejerce, Then la respuesta de sesión llega con **cuatro** campos y ninguno más; con la cuenta no habilitada o con la marca puesta, Then llega **respuesta de error** y no sesión | `TC-08001`, `TC-08002` | Integración e inspección | `Pendiente` |
+| CU-08002 Contrato de administración de cuentas | Given el registro, el listado, el cambio de situación y la baja con confirmación escrita, When se los ejerce, Then cada uno transporta lo que declara; habilitar **devuelve la provisoria producida** | `TC-08003`, `TC-08004`, `TC-08005`, `TC-08006` | Integración e inspección | `Pendiente` |
+| CU-08003 Contrato de carga y edición del trabajo | Given el envío con el texto original, When se lo envía y se pide el detalle, Then el texto vuelve íntegro como **una sola cadena**; la solicitud de eliminación es **única** para los dos papeles | `TC-08007`, `TC-08008` | Integración e inspección | `Pendiente` |
+| CU-08004 Contrato de listado de trabajos | Given la proyección de listado, When se la inspecciona, Then no lleva texto original, ni componentes, ni comentario; el alcance cambia según el papel y excluye los `Borrador` para el administrador | `TC-08009`, `TC-08010`, `TC-08011` | Inspección e integración | `Pendiente` |
+| CU-08005 Contrato de detalle del trabajo interpretado | Given el detalle, When se lo pide, Then trae piezas con sus componentes, el texto original, las observaciones con severidad y **par de valores**, y el comentario **como bloque propio** | `TC-08012`, `TC-08013`, `TC-08014` | Integración e inspección | `Pendiente` |
+| CU-08006 Contrato de respuesta de error | Given el tipo de error, When se inspecciona su superficie, Then declara **cuatro** campos y **0** capaces de filtrar; el conjunto cerrado tiene **diecisiete** códigos vivos y `CONTRATO_ERROR_NO_CLASIFICADO` lo cierra | `TC-08015`, `TC-08016`, `TC-08017`, `TC-08002` | Inspección e integración | `Pendiente` |
+| CU-08007 Contrato de desenlace de la revisión | Given el desenlace, When se lo inspecciona, Then es un conjunto cerrado de **dos** valores con comentario opcional, y **ningún** tipo permite salir de un estado terminal | `TC-08018`, `TC-08014` | Inspección e integración | `Pendiente` |
+| CU-08008 Contrato de reseteo y cambio obligatorio | Given la solicitud de reseteo, When se la inspecciona, Then lleva **un solo campo** y **0** de contraseña; el resultado declara la situación conservada, el cambio pendiente y la provisoria producida | `TC-08019`, `TC-08002` | Inspección e integración | `Pendiente` |
 
 **Ocho de ocho contratos de uso con al menos un caso de prueba.** Ninguno queda huérfano.
 
@@ -57,15 +57,15 @@ Siete filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proye
 
 | NFR | Objetivo numérico | Test | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
-| Tipos ejercitados por prueba de integración | **100 %** de los tipos, con al menos una prueba cada uno **[ASUNCIÓN del intake §17.4.P.6]** | `TC-21` | Matriz de §6, sobre la batería que golpea el servicio real | `Pendiente` |
-| Carga útil del listado | **0** ocurrencias del texto original, **0** de componentes de pieza y **0** del comentario **[ASUNCIÓN derivada del intake §17.4.P.10]** | `TC-09` | Inspección de la superficie de la familia de listado | `Pendiente` |
-| Referencias hacia `GeometriaFactory-Domain` | Exactamente **0** | `TC-20` | Inspección del archivo de proyecto, más la comprobación reproducible de `03` §3 | `Pendiente` |
-| Campos capaces de transportar una dirección de servicio, una ruta de datos o un secreto | Exactamente **0** en los tipos de las **ocho** familias | `TC-15`, `TC-01`, `TC-04` | Prueba de inspección de superficie pública, que es `CA-01` de `CU-06` | `Pendiente` |
-| Códigos de error del conjunto cerrado | Exactamente **17** vivos y **0** producidos fuera del conjunto | `TC-16` | Prueba de inspección del conjunto cerrado, que es `CA-09` de `CU-06` | `Pendiente` |
-| Campos de la respuesta de sesión | Exactamente **4**, y **0** que transporten una condición que impida operar | `TC-01`, `TC-02` | Inspección de la superficie pública, restricción `RT-10` | `Pendiente` |
+| Tipos ejercitados por prueba de integración | **100 %** de los tipos, con al menos una prueba cada uno **[ASUNCIÓN del intake §17.4.P.6]** | `TC-08021` | Matriz de §6, sobre la batería que golpea el servicio real | `Pendiente` |
+| Carga útil del listado | **0** ocurrencias del texto original, **0** de componentes de pieza y **0** del comentario **[ASUNCIÓN derivada del intake §17.4.P.10]** | `TC-08009` | Inspección de la superficie de la familia de listado | `Pendiente` |
+| Referencias hacia `GeometriaFactory-Domain` | Exactamente **0** | `TC-08020` | Inspección del archivo de proyecto, más la comprobación reproducible de `03` §3 | `Pendiente` |
+| Campos capaces de transportar una dirección de servicio, una ruta de datos o un secreto | Exactamente **0** en los tipos de las **ocho** familias | `TC-08015`, `TC-08001`, `TC-08004` | Prueba de inspección de superficie pública, que es `CA-01` de `CU-08006` | `Pendiente` |
+| Códigos de error del conjunto cerrado | Exactamente **17** vivos y **0** producidos fuera del conjunto | `TC-08016` | Prueba de inspección del conjunto cerrado, que es `CA-09` de `CU-08006` | `Pendiente` |
+| Campos de la respuesta de sesión | Exactamente **4**, y **0** que transporten una condición que impida operar | `TC-08001`, `TC-08002` | Inspección de la superficie pública, restricción `RT-10` | `Pendiente` |
 | Advertencias de construcción | Exactamente **0** | **Ninguno**: gate `QG-01`, etapa `build` del pipeline | Etapa `build` | `Pendiente` |
 
-**Los dos valores rotulados [ASUNCIÓN] se citan con su rótulo y no se convierten en compromiso.** El de los tipos ejercitados viene de §17.4.P.6 y lo respalda la fila `A-4` del intake §22; el de la carga útil del listado viene de §17.4.P.10 y §22 no lo enumera. Su conversión en trabajo es `BT-18`. **Sólo `QG-06` es condicionado**: la columna de `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante», de modo que **`QG-05` bloquea** ([`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1).
+**Los dos valores rotulados [ASUNCIÓN] se citan con su rótulo y no se convierten en compromiso.** El de los tipos ejercitados viene de §17.4.P.6 y lo respalda la fila `A-4` del intake §22; el de la carga útil del listado viene de §17.4.P.10 y §22 no lo enumera. Su conversión en trabajo es `BT-08018`. **Sólo `QG-06` es condicionado**: la columna de `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante», de modo que **`QG-05` bloquea** ([`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1).
 
 **Seis de los siete NFR tienen caso de prueba.** El séptimo es una medición del pipeline y no un comportamiento del ensamblado.
 
@@ -77,22 +77,22 @@ Lo que esta tabla declara es **qué transporta este ensamblado de cada regla, y 
 
 | RN | Qué transporta este proyecto de código de ella | Test | Estado |
 | --- | --- | --- | --- |
-| RN-01 Administrador único | El rechazo de configurar un segundo administrador, con código propio | `TC-05` | `Pendiente` |
-| RN-02 Correo único | El rechazo del registro con correo ya usado, con código propio | `TC-03` | `Pendiente` |
-| RN-03 Trabajo ajeno indistinguible de inexistente | Un solo código y un solo texto para los dos casos | `TC-08`, `TC-10` | `Pendiente` |
-| RN-04 Eliminación acotada | La solicitud **única** de eliminación para los dos papeles, y el rechazo por estado en el camino del alumno | `TC-08` | `Pendiente` |
-| RN-05 Sin errores de validación no hay estado `Pendiente` | El estado resultante del envío y las observaciones con su especie | `TC-07`, `TC-17` | `Pendiente` |
-| RN-06 Cuenta `Pendiente` o `Bloqueado` sin acceso | El motivo de la situación, **como respuesta de error y no como campo de sesión** | `TC-02` | `Pendiente` |
-| RN-07 Baja con arrastre y confirmación escrita | La confirmación escrita como campo de la solicitud, y su rechazo si no coincide | `TC-06` | `Pendiente` |
-| RN-08 Texto original íntegro | El texto como cadena no interpretada, **en las dos direcciones** | `TC-07`, `TC-12` | `Pendiente` |
-| RN-09 Observación con posición y campo | El índice de figura y el campo señalado en la observación del detalle | `TC-17`, `TC-13` | `Pendiente` |
-| RN-10 Desenlace exclusivo y terminal | El desenlace como conjunto cerrado de dos valores, el estado terminal, y dos códigos de rechazo propios | `TC-18` | `Pendiente` |
-| RN-11 El administrador no ve los borradores | El alcance del listado según el papel, y la causa ampliada del código de no encontrado | `TC-10`, `TC-08` | `Pendiente` |
-| RN-12 El reseteo conserva la cuenta y sus trabajos | Un resultado que **no declara ningún campo por el que los trabajos se pierdan** | `TC-19` | `Pendiente` |
-| RN-13 Cambio forzado antes de toda otra capacidad | Un **solo** código para todas las operaciones bloqueadas | `TC-02`, `TC-16` | `Pendiente` |
-| RN-14 La provisoria la produce el sistema | Una solicitud de reseteo **sin campo de contraseña**, y un resultado que lleva la provisoria producida | `TC-19` | `Pendiente` |
-| RN-15 Resetear no exige cuenta habilitada | La **ausencia** de un código por cuenta no habilitada: esa causa no existe y no recibe código | `TC-16`, `TC-19` | `Pendiente` |
-| RN-16 Habilitar produce la provisoria | El mismo código para los **dos orígenes** de la marca, y la ausencia de todo tipo de establecimiento anónimo de contraseña | `TC-02`, `TC-05` | `Pendiente` |
+| RN-08001 Administrador único | El rechazo de configurar un segundo administrador, con código propio | `TC-08005` | `Pendiente` |
+| RN-08002 Correo único | El rechazo del registro con correo ya usado, con código propio | `TC-08003` | `Pendiente` |
+| RN-08003 Trabajo ajeno indistinguible de inexistente | Un solo código y un solo texto para los dos casos | `TC-08008`, `TC-08010` | `Pendiente` |
+| RN-08004 Eliminación acotada | La solicitud **única** de eliminación para los dos papeles, y el rechazo por estado en el camino del alumno | `TC-08008` | `Pendiente` |
+| RN-08005 Sin errores de validación no hay estado `Pendiente` | El estado resultante del envío y las observaciones con su especie | `TC-08007`, `TC-08017` | `Pendiente` |
+| RN-08006 Cuenta `Pendiente` o `Bloqueado` sin acceso | El motivo de la situación, **como respuesta de error y no como campo de sesión** | `TC-08002` | `Pendiente` |
+| RN-08007 Baja con arrastre y confirmación escrita | La confirmación escrita como campo de la solicitud, y su rechazo si no coincide | `TC-08006` | `Pendiente` |
+| RN-08008 Texto original íntegro | El texto como cadena no interpretada, **en las dos direcciones** | `TC-08007`, `TC-08012` | `Pendiente` |
+| RN-08009 Observación con posición y campo | El índice de figura y el campo señalado en la observación del detalle | `TC-08017`, `TC-08013` | `Pendiente` |
+| RN-08010 Desenlace exclusivo y terminal | El desenlace como conjunto cerrado de dos valores, el estado terminal, y dos códigos de rechazo propios | `TC-08018` | `Pendiente` |
+| RN-08011 El administrador no ve los borradores | El alcance del listado según el papel, y la causa ampliada del código de no encontrado | `TC-08010`, `TC-08008` | `Pendiente` |
+| RN-08012 El reseteo conserva la cuenta y sus trabajos | Un resultado que **no declara ningún campo por el que los trabajos se pierdan** | `TC-08019` | `Pendiente` |
+| RN-08013 Cambio forzado antes de toda otra capacidad | Un **solo** código para todas las operaciones bloqueadas | `TC-08002`, `TC-08016` | `Pendiente` |
+| RN-08014 La provisoria la produce el sistema | Una solicitud de reseteo **sin campo de contraseña**, y un resultado que lleva la provisoria producida | `TC-08019` | `Pendiente` |
+| RN-08015 Resetear no exige cuenta habilitada | La **ausencia** de un código por cuenta no habilitada: esa causa no existe y no recibe código | `TC-08016`, `TC-08019` | `Pendiente` |
+| RN-08016 Habilitar produce la provisoria | El mismo código para los **dos orígenes** de la marca, y la ausencia de todo tipo de establecimiento anónimo de contraseña | `TC-08002`, `TC-08005` | `Pendiente` |
 
 **Dieciséis de dieciséis reglas con al menos un caso de prueba que verifica lo que este proyecto de código transporta de ellas.** Ninguna se verifica acá **como regla**: eso ocurre en `GeometriaFactory-Domain`, y confundir las dos cosas sería atribuirle a un ensamblado de tipos planos una capacidad que no tiene.
 
@@ -102,17 +102,17 @@ Once filas, `RT-01` a `RT-11`, las de [`../02-Especificacion-Funcional/Especific
 
 | RT | Qué exige, en una línea | Test | Estado |
 | --- | --- | --- | --- |
-| RT-01 | Ningún tipo lleva hash de contraseña, clave de firma ni dirección de servicio interno | `TC-15`, `TC-01`, `TC-04`, `TC-19` | `Pendiente` |
-| RT-02 | La respuesta de error lleva texto neutro y, cuando corresponde, índice de figura y campo | `TC-15`, `TC-17` | `Pendiente` |
-| RT-03 | El texto original viaja como cadena, sin interpretarse | `TC-07`, `TC-12` | `Pendiente` |
-| RT-04 | La proyección de listado no lleva texto original, ni componentes, ni comentario | `TC-09` | `Pendiente` |
-| RT-05 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | `TC-20` | `Pendiente` |
+| RT-01 | Ningún tipo lleva hash de contraseña, clave de firma ni dirección de servicio interno | `TC-08015`, `TC-08001`, `TC-08004`, `TC-08019` | `Pendiente` |
+| RT-02 | La respuesta de error lleva texto neutro y, cuando corresponde, índice de figura y campo | `TC-08015`, `TC-08017` | `Pendiente` |
+| RT-03 | El texto original viaja como cadena, sin interpretarse | `TC-08007`, `TC-08012` | `Pendiente` |
+| RT-04 | La proyección de listado no lleva texto original, ni componentes, ni comentario | `TC-08009` | `Pendiente` |
+| RT-05 | El ensamblado no declara ninguna referencia hacia `GeometriaFactory-Domain` | `TC-08020` | `Pendiente` |
 | RT-06 | Un cambio incompatible obliga al despliegue conjunto de las dos unidades | **Ninguno**: es una regla operativa, no una propiedad del ensamblado. Se verifica en la revisión del pull request de la etapa y en `09-Devops` (gate `QG-08`) | `Pendiente` |
-| RT-07 | Sin pruebas propias: el gate equivalente es el 100 % de tipos ejercitados por integración | `TC-21` | `Pendiente` |
-| RT-08 | Cuatro estados del trabajo, dos terminales, y ningún tipo que permita salir de ellos | `TC-18`, `TC-07` | `Pendiente` |
-| RT-09 | El comentario viaja como bloque propio y nunca como observación | `TC-14` | `Pendiente` |
-| RT-10 | Ninguna condición que impida operar viaja como campo de la respuesta de sesión | `TC-01`, `TC-02` | `Pendiente` |
-| RT-11 | Ningún tipo habilita a que el navegador invoque el servicio de datos | `TC-22` | `Pendiente` |
+| RT-07 | Sin pruebas propias: el gate equivalente es el 100 % de tipos ejercitados por integración | `TC-08021` | `Pendiente` |
+| RT-08 | Cuatro estados del trabajo, dos terminales, y ningún tipo que permita salir de ellos | `TC-08018`, `TC-08007` | `Pendiente` |
+| RT-09 | El comentario viaja como bloque propio y nunca como observación | `TC-08014` | `Pendiente` |
+| RT-10 | Ninguna condición que impida operar viaja como campo de la respuesta de sesión | `TC-08001`, `TC-08002` | `Pendiente` |
+| RT-11 | Ningún tipo habilita a que el navegador invoque el servicio de datos | `TC-08022` | `Pendiente` |
 
 **Diez de once restricciones con caso de prueba.** `RT-06` es la única sin uno, y **su ausencia está declarada y no es un hueco**: una regla de despliegue conjunto no se comprueba leyendo la superficie ni golpeando el servicio, sino mirando qué se publicó. Su verificación pertenece a `09-Devops`.
 
@@ -140,17 +140,17 @@ La partición es por las **ocho** familias de `05` §3.1, que son sus componente
 
 | Hueco | Consecuencia | Plan de remediación |
 | --- | --- | --- |
-| **La batería de integración no vive en este proyecto de código** sino en `GeometriaFactory-Api`, de nivel topológico 3 | Ningún tipo se puede ejercitar de verdad hasta que ese proyecto de código exista. Entre tanto, lo único verificable son las inspecciones de superficie | Es una dependencia declarada por el intake §17.4.P.6 y no una omisión. Las inspecciones de superficie —`TC-01`, `TC-09`, `TC-14` a `TC-16`, `TC-18` a `TC-22`— **sí corren desde la etapa `c`** y cubren los cinco gates de superficie |
-| **Los dos valores rotulados [ASUNCIÓN]** —tipos ejercitados y carga útil del listado— siguen sin confirmar | **`QG-06` es condicionado** y no bloquea la fusión. **`QG-05` bloquea igual**: lo que `A-4` deja abierto es la forma del gate, no su carácter | `BT-18`, antes de fijar las puertas en `09-Devops` |
+| **La batería de integración no vive en este proyecto de código** sino en `GeometriaFactory-Api`, de nivel topológico 3 | Ningún tipo se puede ejercitar de verdad hasta que ese proyecto de código exista. Entre tanto, lo único verificable son las inspecciones de superficie | Es una dependencia declarada por el intake §17.4.P.6 y no una omisión. Las inspecciones de superficie —`TC-08001`, `TC-08009`, `TC-08014` a `TC-08016`, `TC-08018` a `TC-08022`— **sí corren desde la etapa `c`** y cubren los cinco gates de superficie |
+| **Los dos valores rotulados [ASUNCIÓN]** —tipos ejercitados y carga útil del listado— siguen sin confirmar | **`QG-06` es condicionado** y no bloquea la fusión. **`QG-05` bloquea igual**: lo que `A-4` deja abierto es la forma del gate, no su carácter | `BT-08018`, antes de fijar las puertas en `09-Devops` |
 | **`RT-06` no tiene caso de prueba** | El despliegue conjunto ante un cambio incompatible depende de la disciplina del pull request de la etapa | Gate `QG-08` y la materialización en `09-Devops`. Su detección tardía está catalogada como `DXC-08` |
-| **La zona horaria y la precisión del campo de momento no están decididas** (`05` §11 `PA-02`, `BT-05`) | Ningún caso de prueba puede afirmar nada sobre el formato de ese campo | `BT-05`, antes de cerrar la etapa `c` |
-| ~~**Ninguna fila `VER-XX` y ninguna matriz de sensado de deriva**~~ · **Cerrado el 2026-08-11** | Se declaraba porque este proyecto de código no ejecutó la Fase B2 —`requiere_maqueta` es false— y no tenía categoría 10 emitida | **Cerrado**: se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-01` a `VER-03`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que declara **tres** filas `SD-01` a `SD-03`, todas en `Sin verificar`. Las tres sondas **no cierran el primer hueco de esta tabla**: siguen sin golpear el servicio real, y el gate bloqueante `QG-05` sigue dependiendo de la batería de integración de `GeometriaFactory-Api`. La fila se conserva con su desenlace en lugar de retirarse |
+| **La zona horaria y la precisión del campo de momento no están decididas** (`05` §11 `PA-02`, `BT-08005`) | Ningún caso de prueba puede afirmar nada sobre el formato de ese campo | `BT-08005`, antes de cerrar la etapa `c` |
+| ~~**Ninguna fila `VER-XX` y ninguna matriz de sensado de deriva**~~ · **Cerrado el 2026-08-11** | Se declaraba porque este proyecto de código no ejecutó la Fase B2 —`requiere_maqueta` es false— y no tenía categoría 10 emitida | **Cerrado**: se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-08001` a `VER-08003`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que declara **tres** filas `SD-08001` a `SD-08003`, todas en `Sin verificar`. Las tres sondas **no cierran el primer hueco de esta tabla**: siguen sin golpear el servicio real, y el gate bloqueante `QG-05` sigue dependiendo de la batería de integración de `GeometriaFactory-Api`. La fila se conserva con su desenlace en lugar de retirarse |
 
 ## 8. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`** declarado en §7. Se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-01` a `VER-03`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0 con **tres** filas en `Sin verificar`. La fila del hueco se **conserva** con su desenlace y su fecha. **El primer hueco de §7 sigue abierto**: las tres sondas no golpean el servicio real y el gate bloqueante `QG-05` sigue dependiendo de la batería de integración de `GeometriaFactory-Api`. **Ninguna de las cuatro tablas de cobertura cambia.** |
+| 1.2 | 2026-08-11 | **Cierre del hueco de sondas `VER-XX`** declarado en §7. Se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-08001` a `VER-08003`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0 con **tres** filas en `Sin verificar`. La fila del hueco se **conserva** con su desenlace y su fecha. **El primer hueco de §7 sigue abierto**: las tres sondas no golpean el servicio real y el gate bloqueante `QG-05` sigue dependiendo de la batería de integración de `GeometriaFactory-Api`. **Ninguna de las cuatro tablas de cobertura cambia.** |
 | 1.1 | 2026-08-11 | **`H-02` y `H-08`.** §3 y el hueco correspondiente de §8 declaraban a `QG-05` y `QG-06` como los dos gates condicionados de la asunción `A-4`. **Sólo `QG-06` queda condicionado**, y su respaldo es §17.4.P.10 y no `A-4`; **`QG-05` bloquea**, porque `A-4` declara que un cambio del Product Owner cambia la forma del gate y no su carácter. Ninguna fila de cobertura ni ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara las tres tablas obligatorias —**ocho** filas de contrato de uso, **siete** de NFR y **dieciséis** de regla de negocio, ninguna agrupada— y una cuarta de **once** restricciones transversales, con la constancia de que la tabla de reglas declara **qué transporta** este ensamblado de cada una y no que las verifique como reglas. Declara la cobertura por las **ocho** familias de tipos con «Sin medir» en lugar de cero, la ausencia de cobertura por líneas y de mutation score con su fundamento, los dos valores rotulados **[ASUNCIÓN]** con su rótulo, y **cinco** huecos con su plan, incluida la dependencia de la batería de integración respecto de un proyecto de código de nivel 3. |
 | 1.3 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |

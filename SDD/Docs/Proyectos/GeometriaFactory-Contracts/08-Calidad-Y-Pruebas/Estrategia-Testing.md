@@ -49,14 +49,14 @@ La partición de esta categoría es por las **ocho familias de tipos** de `05` �
 
 | Familia de tipos | Contrato de uso | Métrica de cobertura | Umbral |
 | --- | --- | --- | --- |
-| Familia de sesión | CU-01 | Tipos ejercitados por integración; campos de la respuesta de sesión | 100 % ejercitados; exactamente **4** campos |
-| Familia de cuentas | CU-02 | Tipos ejercitados por integración | 100 % |
-| Familia de trabajo | CU-03 | Tipos ejercitados por integración | 100 % |
-| Familia de listado | CU-04 | Tipos ejercitados; ocurrencias prohibidas en la proyección | 100 %; **0** de texto original, **0** de componentes, **0** de comentario |
-| Familia de detalle | CU-05 | Tipos ejercitados; separación del comentario respecto de las observaciones | 100 %; **0** campos compartidos |
-| Familia de desenlace | CU-07 | Tipos ejercitados; conjunto cerrado del desenlace | 100 %; exactamente **2** valores |
-| Familia de reseteo | CU-08 | Tipos ejercitados; campos de la solicitud | 100 %; exactamente **1** campo en la solicitud |
-| Familia de error | CU-06, y transversalmente las otras siete | Tipos ejercitados; conjunto cerrado de códigos; campos capaces de filtrar | 100 %; **17** códigos vivos; **0** campos de filtración |
+| Familia de sesión | CU-08001 | Tipos ejercitados por integración; campos de la respuesta de sesión | 100 % ejercitados; exactamente **4** campos |
+| Familia de cuentas | CU-08002 | Tipos ejercitados por integración | 100 % |
+| Familia de trabajo | CU-08003 | Tipos ejercitados por integración | 100 % |
+| Familia de listado | CU-08004 | Tipos ejercitados; ocurrencias prohibidas en la proyección | 100 %; **0** de texto original, **0** de componentes, **0** de comentario |
+| Familia de detalle | CU-08005 | Tipos ejercitados; separación del comentario respecto de las observaciones | 100 %; **0** campos compartidos |
+| Familia de desenlace | CU-08007 | Tipos ejercitados; conjunto cerrado del desenlace | 100 %; exactamente **2** valores |
+| Familia de reseteo | CU-08008 | Tipos ejercitados; campos de la solicitud | 100 %; exactamente **1** campo en la solicitud |
+| Familia de error | CU-08006, y transversalmente las otras siete | Tipos ejercitados; conjunto cerrado de códigos; campos capaces de filtrar | 100 %; **17** códigos vivos; **0** campos de filtración |
 | **Ensamblado completo** | Los ocho | Tipos ejercitados; referencias hacia el dominio; advertencias | **100 %** [ASUNCIÓN]; **0** referencias; **0** advertencias |
 
 **No hay mutation score**, y su ausencia se declara en lugar de omitirse: `Rules-Calidad-Y-Pruebas.md` §2.2 lo pide para `library`, pero la prueba de mutación necesita lógica que mutar y acá no la hay. Mutar un tipo sin comportamiento produce mutantes que ninguna prueba puede matar y un puntaje sin significado. **Es la única exigencia de §2.2 que este proyecto de código no cumple, y el motivo es estructural.**
@@ -91,9 +91,9 @@ Fixtures que esta categoría declara, todos **cuerpos de petición y de respuest
 | Fixture | Qué contiene | De dónde sale |
 | --- | --- | --- |
 | Cuerpos del sample S-2 | Alta de trabajo, envío que verifica, envío que no verifica, aprobación y rechazo | Intake §18, que los declara con los cuerpos de `E-2` y `E-5` |
-| Respuesta de sesión de referencia | Los **cuatro** campos y ninguno más | `CU-01`; restricción `RT-10` |
+| Respuesta de sesión de referencia | Los **cuatro** campos y ninguno más | `CU-08001`; restricción `RT-10` |
 | Colección de respuestas de error | Una por cada uno de los **diecisiete** códigos vivos | `03` §3.2, que es la única tabla de todo el proyecto de código donde los **veinte** identificadores emitidos están enumerados juntos |
-| Proyección de listado de referencia | Un elemento de listado sin texto original, sin componentes y sin comentario | `CU-04`; restricción `RT-04` |
+| Proyección de listado de referencia | Un elemento de listado sin texto original, sin componentes y sin comentario | `CU-08004`; restricción `RT-04` |
 
 **Regla de duplicación:** los cuerpos de petición se derivan de los del sample S-2 y no se copian. Un segundo cuerpo equivalente con otro valor de geometría es un hallazgo, porque los datos de geometría del producto son los ocho escenarios y no se inventan.
 

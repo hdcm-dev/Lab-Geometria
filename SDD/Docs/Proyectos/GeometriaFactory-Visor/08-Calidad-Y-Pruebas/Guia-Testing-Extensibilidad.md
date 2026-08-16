@@ -59,25 +59,25 @@ La tabla de `05` `Extensibilidad.md` §3 declara qué es reemplazable. Esta guí
 
 | # | Compromiso de `05` §4 | Casos de prueba que lo verifican | Material |
 | --- | --- | --- | --- |
-| 1 | Las **seis** funciones, con sus nombres y con lo que cada una recibe y devuelve | `TC-15`, `TC-18` | Sample **S-1** |
-| 2 | Las **siete** garantías, verificadas con las **seis** propiedades transversales **y sus condiciones de medición** | `TC-16`, `TC-17`, `TC-15`, `TC-09`, `TC-04`, `TC-07`, más la tabla de garantías de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5 | `E-1`, `E-7` |
-| 3 | Los **siete** códigos, ni uno más ni uno menos, con los **dos cursos** de `ELEMENTO_DE_DIBUJO_INVALIDO` | `TC-21`, `TC-02`, `TC-12` | Elemento de dibujo de tamaño cero |
-| 4 | Los **seis** tipos de pieza dibujables, **con el cero como dimensión legible** | `TC-05`, `TC-07` | `E-7` y `E-6` |
-| 5 | La disposición derivada del índice, con **posición reservada** para las figuras no reconstruidas | `TC-09`, `TC-07` | `E-1` y `E-5` |
-| 6 | Los **dos** movimientos gobernables por separado, con **reposición de la orientación de partida** al apagar el giro | `TC-13`, `TC-14`, `TC-03` | `E-1` |
-| 7 | Liberación completa al destruir, **incluido el corte del bucle** | `TC-04` | Dos trabajos entre los que ir y volver |
-| 8 | Empaquetado **sin dependencias traídas de una red externa** en tiempo de ejecución | `TC-19`, `TC-18` | Página sin acceso a redes externas |
+| 1 | Las **seis** funciones, con sus nombres y con lo que cada una recibe y devuelve | `TC-12015`, `TC-12018` | Sample **S-1** |
+| 2 | Las **siete** garantías, verificadas con las **seis** propiedades transversales **y sus condiciones de medición** | `TC-12016`, `TC-12017`, `TC-12015`, `TC-12009`, `TC-12004`, `TC-12007`, más la tabla de garantías de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5 | `E-1`, `E-7` |
+| 3 | Los **siete** códigos, ni uno más ni uno menos, con los **dos cursos** de `ELEMENTO_DE_DIBUJO_INVALIDO` | `TC-12021`, `TC-12002`, `TC-12012` | Elemento de dibujo de tamaño cero |
+| 4 | Los **seis** tipos de pieza dibujables, **con el cero como dimensión legible** | `TC-12005`, `TC-12007` | `E-7` y `E-6` |
+| 5 | La disposición derivada del índice, con **posición reservada** para las figuras no reconstruidas | `TC-12009`, `TC-12007` | `E-1` y `E-5` |
+| 6 | Los **dos** movimientos gobernables por separado, con **reposición de la orientación de partida** al apagar el giro | `TC-12013`, `TC-12014`, `TC-12003` | `E-1` |
+| 7 | Liberación completa al destruir, **incluido el corte del bucle** | `TC-12004` | Dos trabajos entre los que ir y volver |
+| 8 | Empaquetado **sin dependencias traídas de una red externa** en tiempo de ejecución | `TC-12019`, `TC-12018` | Página sin acceso a redes externas |
 
 **Los ocho compromisos son verificables sin backend**, que es lo que hace barato evaluar un reemplazo: alcanza con el sample **S-1** y los escenarios `E-1`, `E-5`, `E-6` y `E-7`. `05` `Extensibilidad.md` §4 lo declara así y esta guía no lo relaja.
 
 **Cómo se corre la batería sobre un reemplazo, en orden:**
 
 1. Generar el bundle con el reemplazo, con el guion propio del bundle.
-2. Correr `TC-18` y `TC-19`: si la superficie cambió o si aparecieron dependencias de red externa, **no hay nada más que probar**.
-3. Correr `TC-21`: si el conjunto de códigos cambió, el reemplazo **no cumple** el compromiso 3.
-4. Abrir el sample **S-1** y correr `TC-15`, con `E-1` y con `E-7`.
-5. Correr las propiedades de ausencia —`TC-16` y `TC-17`— **con los dos movimientos prendidos**.
-6. Correr `TC-04`, `TC-07`, `TC-09`, `TC-13` y `TC-14`.
+2. Correr `TC-12018` y `TC-12019`: si la superficie cambió o si aparecieron dependencias de red externa, **no hay nada más que probar**.
+3. Correr `TC-12021`: si el conjunto de códigos cambió, el reemplazo **no cumple** el compromiso 3.
+4. Abrir el sample **S-1** y correr `TC-12015`, con `E-1` y con `E-7`.
+5. Correr las propiedades de ausencia —`TC-12016` y `TC-12017`— **con los dos movimientos prendidos**.
+6. Correr `TC-12004`, `TC-12007`, `TC-12009`, `TC-12013` y `TC-12014`.
 7. Registrar el resultado de los ocho compromisos, uno por uno.
 
 **Los dos primeros pasos son de descarte rápido y están puestos en ese orden a propósito**: un reemplazo que cambia la superficie o que trae una dependencia de red no cumple, y correr la batería entera antes de saberlo sería trabajo perdido.
@@ -91,13 +91,13 @@ La tabla de `05` `Extensibilidad.md` §3 declara qué es reemplazable. Esta guí
 | 1 · Comprobar que no se resuelve del lado del anfitrión | Nada: es del equipo, antes de que haya algo que probar |
 | 2 · Comprobar que no cabe como flujo alternativo | Nada |
 | 3 · Especificar la función en la categoría 02 | Nada: los criterios de aceptación nacen allá |
-| 4 · Comprobar si acuña **garantía** o **código** nuevos | **Acá sí.** Si acuña código, la tabla de códigos de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6 suma una fila y `TC-21` cambia su umbral. Si acuña garantía, la tabla §5 suma una fila. **Si no acuña ninguno de los dos, ninguna de las dos tablas cambia**, y eso hay que verificarlo en lugar de suponerlo |
+| 4 · Comprobar si acuña **garantía** o **código** nuevos | **Acá sí.** Si acuña código, la tabla de códigos de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6 suma una fila y `TC-12021` cambia su umbral. Si acuña garantía, la tabla §5 suma una fila. **Si no acuña ninguno de los dos, ninguna de las dos tablas cambia**, y eso hay que verificarlo en lugar de suponerlo |
 | 5 · Consolidarla en el intake §17.7.P.3 | Nada, salvo verificar que la consolidación ocurrió antes de declarar la función terminada (`Definition-Of-Done.md` §1.3) |
 | 6 · Declararla cambio menor y registrarla | **Acá sí.** Un `TC-XX` nuevo por la función, y la verificación de que **ningún anfitrión escrito contra la superficie anterior se rompe**, que es la definición de cambio menor |
 
-**El proceso ya se recorrió entero una vez**, con la sexta función `establecerMovimiento`: la categoría 02 la acuñó con caso de uso propio `CU-07`, **no acuñó garantía ni código** —la condición que puede informar, `INSTANCIA_DESCONOCIDA`, ya existía y pasó a presentarse en **cinco** funciones—, y el intake la consolidó en su versión **1.6**. Del lado de esta categoría, el efecto es que **`TC-13` y `TC-14` existen y que `TC-21` verifica que el conjunto sigue cerrado en siete**: la superficie pasó de cinco funciones a seis **sin romper a ningún anfitrión escrito contra las cinco anteriores**.
+**El proceso ya se recorrió entero una vez**, con la sexta función `establecerMovimiento`: la categoría 02 la acuñó con caso de uso propio `CU-12007`, **no acuñó garantía ni código** —la condición que puede informar, `INSTANCIA_DESCONOCIDA`, ya existía y pasó a presentarse en **cinco** funciones—, y el intake la consolidó en su versión **1.6**. Del lado de esta categoría, el efecto es que **`TC-12013` y `TC-12014` existen y que `TC-12021` verifica que el conjunto sigue cerrado en siete**: la superficie pasó de cinco funciones a seis **sin romper a ningún anfitrión escrito contra las cinco anteriores**.
 
-**El catálogo de diagnóstico de 03 sí creció**, de doce a **trece** entradas, porque su unidad de catalogación es la **función** y no el código. `TC-21` protege esa distinción: crecer el catálogo no es crecer el conjunto de códigos, y confundir las dos cifras es el defecto que `05` §9 declara como sexto riesgo.
+**El catálogo de diagnóstico de 03 sí creció**, de doce a **trece** entradas, porque su unidad de catalogación es la **función** y no el código. `TC-12021` protege esa distinción: crecer el catálogo no es crecer el conjunto de códigos, y confundir las dos cifras es el defecto que `05` §9 declara como sexto riesgo.
 
 ## 5. Errores de prueba que rompen el punto de extensión
 

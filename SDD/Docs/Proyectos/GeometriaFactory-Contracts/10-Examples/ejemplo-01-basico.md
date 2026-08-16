@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/contracts/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) y [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Contrato-De-Administracion-De-Cuentas.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de sesión y de cuentas, y §3.2; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-01` a `TC-06`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-01` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) y [`CU-08002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, familias de sesión y de cuentas, y §3.2; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.1 `TC-08001` a `TC-08006`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-08001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -72,9 +72,9 @@ samples/contracts/01-basico/
 Familias recorridas: 2 de 8 | Recuentos en 0: 4 | Referencias hacia el dominio: 0
 ```
 
-**Las cuatro líneas que terminan en 0 son el sample.** Un tipo de transferencia no se prueba viendo qué transporta, sino comprobando qué **no** puede transportar: es la regla de exposición de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.2, registrada en [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md).
+**Las cuatro líneas que terminan en 0 son el sample.** Un tipo de transferencia no se prueba viendo qué transporta, sino comprobando qué **no** puede transportar: es la regla de exposición de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.2, registrada en [`ADR-08004`](../05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md).
 
-**La línea `[6]` es la consecuencia de `RN-16` sobre este contrato**: habilitar **produce** la provisoria, de modo que el resultado la devuelve. Y la línea `[8]` es su contracara: `RN-16` eliminó todo tipo de establecimiento anónimo de contraseña, y el recuento en 0 es lo que impide que vuelva por la puerta de atrás.
+**La línea `[6]` es la consecuencia de `RN-08016` sobre este contrato**: habilitar **produce** la provisoria, de modo que el resultado la devuelve. Y la línea `[8]` es su contracara: `RN-08016` eliminó todo tipo de establecimiento anónimo de contraseña, y el recuento en 0 es lo que impide que vuelva por la puerta de atrás.
 
 ## 7. Variaciones sugeridas
 
@@ -89,21 +89,21 @@ Familias recorridas: 2 de 8 | Recuentos en 0: 4 | Referencias hacia el dominio: 
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-01`](../02-Especificacion-Funcional/Casos-De-Uso/CU-01-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) | Contrato de uso | Actos `[1]` a `[3]`: la respuesta de sesión con sus cuatro campos y sus dos ausencias |
-| [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Contrato-De-Administracion-De-Cuentas.md) | Contrato de uso | Actos `[4]` a `[8]`: registro, listado, cambio de situación y baja |
+| [`CU-08001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md) | Contrato de uso | Actos `[1]` a `[3]`: la respuesta de sesión con sus cuatro campos y sus dos ausencias |
+| [`CU-08002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md) | Contrato de uso | Actos `[4]` a `[8]`: registro, listado, cambio de situación y baja |
 | `RT-01` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 | Restricción transversal | Los recuentos en 0 de `[2]` y `[5]` |
 | `RT-10` de la misma sección | Restricción transversal | El recuento en 0 de `[3]`: las condiciones que impiden operar viajan como error |
-| [`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) | Decisión arquitectónica | Los cuerpos se componen sin invocar comportamiento: los tipos son planos |
-| [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Regla-De-Exposicion-De-La-Frontera.md) | Decisión arquitectónica | Las cuatro líneas que terminan en 0 |
+| [`ADR-08001`](../05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) | Decisión arquitectónica | Los cuerpos se componen sin invocar comportamiento: los tipos son planos |
+| [`ADR-08004`](../05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) | Decisión arquitectónica | Las cuatro líneas que terminan en 0 |
 | NFR «Campos de la respuesta de sesión» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 | Requisito no funcional | El acto `[1]` |
-| `RN-16` de `GeometriaFactory-Domain` | Regla de negocio del proyecto de código vecino | Actos `[6]` y `[8]` |
+| `RN-08016` de `GeometriaFactory-Domain` | Regla de negocio del proyecto de código vecino | Actos `[6]` y `[8]` |
 
 ## 9. Contrato de verificación
 
 ```yaml
 verificacion:
-  id: VER-01
-  verifica: [CU-01, CU-02, US-01, US-02, US-03, US-04, US-05]
+  id: VER-08001
+  verifica: [CU-08001, CU-08002, US-08001, US-08002, US-08003, US-08004, US-08005]
   comando: "dotnet run --project samples/contracts/01-basico"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -126,4 +126,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2. Cubre `CU-01` y `CU-02` sobre **dos** de las **ocho** familias de tipos, con la forma de aserción por recuento que la categoría 08 declara como característica del proyecto de código. Declara que el sample **no golpea** el servicio de datos, porque la batería de integración vive en `GeometriaFactory-Api` y no acá. El contrato `VER-01` declara cinco líneas exactas de salida; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2. Cubre `CU-08001` y `CU-08002` sobre **dos** de las **ocho** familias de tipos, con la forma de aserción por recuento que la categoría 08 declara como característica del proyecto de código. Declara que el sample **no golpea** el servicio de datos, porque la batería de integración vive en `GeometriaFactory-Api` y no acá. El contrato `VER-08001` declara cinco líneas exactas de salida; `evidencia` queda en `No verificado — sin código`. |

@@ -31,7 +31,7 @@ Siete criterios, todos respondibles con sí o no. Los tres últimos son propios 
 2. **Declara su necesidad de negocio y su etapa del producto**, de las que [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.1 enumera.
 3. **Tiene criterios de aceptación en Given/When/Then, con al menos dos escenarios**, uno de camino feliz y uno de borde.
 4. **Declara el componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 que la sostiene** y los **puertos** que consume, de los cuatro de `02` §3.
-5. **Declara cuál de las cuatro comprobaciones de `02` §4 la alcanza, o declara que ninguna la alcanza y por qué.** Una historia que no diga nada de la cuarta comprobación **no está lista**: es el camino por el que `INV-09` se pierde, y `Domain ADR-05` §6 ya declaró que el dominio no puede impedirlo.
+5. **Declara cuál de las cuatro comprobaciones de `02` §4 la alcanza, o declara que ninguna la alcanza y por qué.** Una historia que no diga nada de la cuarta comprobación **no está lista**: es el camino por el que `INV-09` se pierde, y `Domain ADR-04005` §6 ya declaró que el dominio no puede impedirlo.
 6. **Toda condición de rechazo que la historia produce existe en el catálogo de las 36** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md). Una historia que necesite una condición nueva **no está lista**: el catálogo es cerrado y se compara en las dos direcciones.
 7. **Se puede verificar con dobles de los cuatro puertos, sin base de datos y sin frontera de proceso.** Si no se puede, o la historia está mal ubicada o algún componente está consultando por su cuenta, que es el primer riesgo de `05` §9.
 
@@ -50,8 +50,8 @@ Cinco criterios, todos respondibles con sí o no.
 | Caso | Qué se flexibiliza | Quién lo aprueba |
 | --- | --- | --- |
 | Tarea de indagación que cierra un punto abierto de `05` §11 | El criterio 3 de §2 puede cumplirse con el **resultado esperado** en lugar de con un criterio verificable de antemano | El Product Owner, en el punto de control de la etapa que la contiene |
-| Tarea que **acompaña** un punto abierto cuya titularidad es de otro proyecto de código —BT-20 y BT-21— | El criterio 2 de §2 se cumple declarando de quién es la decisión y cuál es el plazo, en lugar de una historia consumidora | El Product Owner |
-| Historia cuya verificación depende de uno de los dos valores rotulados **[ASUNCIÓN]** de `05` §8 | El criterio 3 de §1 se cumple con el valor **vigente pero declarado como asunción**, hasta que `PA-05` del backlog se cierre con BT-18. **No habilita a inventar otro número** | El Product Owner, o 08 al fijar su guion de medición |
+| Tarea que **acompaña** un punto abierto cuya titularidad es de otro proyecto de código —BT-04020 y BT-04021— | El criterio 2 de §2 se cumple declarando de quién es la decisión y cuál es el plazo, en lugar de una historia consumidora | El Product Owner |
+| Historia cuya verificación depende de uno de los dos valores rotulados **[ASUNCIÓN]** de `05` §8 | El criterio 3 de §1 se cumple con el valor **vigente pero declarado como asunción**, hasta que `PA-05` del backlog se cierre con BT-04018. **No habilita a inventar otro número** | El Product Owner, o 08 al fijar su guion de medición |
 | Historia que agrega una operación que lee o escribe | Ninguno: **no se admite excepción al criterio 5 ni al 6**. Un camino que ejerza una capacidad sin resolver antes la marca es el riesgo de impacto **muy alto** de `05` §9, y una condición acuñada aguas abajo rompe la cobertura del catálogo en las dos direcciones | — |
 
 ## 4. Aprobador

@@ -20,14 +20,14 @@
   - [1.2 Qué es una historia en un proyecto de código sin comportamiento](#12-qué-es-una-historia-en-un-proyecto-de-código-sin-comportamiento)
 - [2. Épicas](#2-épicas)
 - [3. Historias por épica](#3-historias-por-épica)
-  - [3.1 EP-01 · Esqueleto ambulante y verificación de viabilidad](#31-ep-01--esqueleto-ambulante-y-verificación-de-viabilidad)
-  - [3.2 EP-02 · Identidad del administrador y sesión](#32-ep-02--identidad-del-administrador-y-sesión)
-  - [3.3 EP-03 · Ciclo de vida de la cuenta de alumno](#33-ep-03--ciclo-de-vida-de-la-cuenta-de-alumno)
-  - [3.4 EP-04 · Gestión del trabajo](#34-ep-04--gestión-del-trabajo)
-  - [3.5 EP-05 · Interpretación y verificación del dato del alumno](#35-ep-05--interpretación-y-verificación-del-dato-del-alumno)
-  - [3.6 EP-06 · Visualización del trabajo](#36-ep-06--visualización-del-trabajo)
-  - [3.7 EP-07 · Desenlace de la entrega](#37-ep-07--desenlace-de-la-entrega)
-  - [3.8 EP-08 · Capacidades de prioridad menor](#38-ep-08--capacidades-de-prioridad-menor)
+  - [3.1 EP-08001 · Esqueleto ambulante y verificación de viabilidad](#31-ep-01--esqueleto-ambulante-y-verificación-de-viabilidad)
+  - [3.2 EP-08002 · Identidad del administrador y sesión](#32-ep-02--identidad-del-administrador-y-sesión)
+  - [3.3 EP-08003 · Ciclo de vida de la cuenta de alumno](#33-ep-03--ciclo-de-vida-de-la-cuenta-de-alumno)
+  - [3.4 EP-08004 · Gestión del trabajo](#34-ep-04--gestión-del-trabajo)
+  - [3.5 EP-08005 · Interpretación y verificación del dato del alumno](#35-ep-05--interpretación-y-verificación-del-dato-del-alumno)
+  - [3.6 EP-08006 · Visualización del trabajo](#36-ep-06--visualización-del-trabajo)
+  - [3.7 EP-08007 · Desenlace de la entrega](#37-ep-07--desenlace-de-la-entrega)
+  - [3.8 EP-08008 · Capacidades de prioridad menor](#38-ep-08--capacidades-de-prioridad-menor)
 - [4. Métricas de avance](#4-métricas-de-avance)
   - [4.1 Por qué la unidad de estimación queda abierta](#41-por-qué-la-unidad-de-estimación-queda-abierta)
   - [4.2 Por qué la distribución MoSCoW es la que es](#42-por-qué-la-distribución-moscow-es-la-que-es)
@@ -68,83 +68,83 @@ De ahí dos consecuencias que atraviesan las veintidós:
 
 | Épica | Nombre | Etapa del producto | Descripción breve | Historias | Tareas técnicas |
 | --- | --- | --- | --- | --- | --- |
-| EP-01 | Esqueleto ambulante y verificación de viabilidad | `a` | El ensamblado existe, compila sin dependencias y sin referencia al dominio, y sus decisiones abiertas de nombre y de momento quedan encaminadas | Ninguna: la etapa `a` no tiene capacidad funcional asociada | BT-01 a BT-05 |
-| EP-02 | Identidad del administrador y sesión | `c` | La familia de sesión y la familia de error, que es transversal a las otras siete | US-01, US-14, US-16 | BT-06, BT-07, BT-08, BT-09 |
-| EP-03 | Ciclo de vida de la cuenta de alumno | `d` | La familia de cuentas y la familia de reseteo | US-02, US-03, US-04, US-05, US-21, US-22 | BT-10, BT-11 |
-| EP-04 | Gestión del trabajo | `e` | La familia de trabajo y la familia de listado, con su carga útil acotada | US-06, US-07, US-08, US-09, US-19 | BT-12, BT-13 |
-| EP-05 | Interpretación y verificación del dato del alumno | `f` | La familia de detalle con sus observaciones y sus pares de valores | US-11, US-13, US-15 | BT-14 |
-| EP-06 | Visualización del trabajo | `g` | Lo que el detalle tiene que llevar para que el árbol y la escena existan | US-12 | BT-14 |
-| EP-07 | Desenlace de la entrega | `h` | La familia de desenlace y el comentario del administrador como bloque propio | US-17, US-18, US-20 | BT-15 |
-| EP-08 | Capacidades de prioridad menor | `i…` | Lo que el tramo comprometido no levanta y el intake declara de prioridad menor | US-10 | — |
+| EP-08001 | Esqueleto ambulante y verificación de viabilidad | `a` | El ensamblado existe, compila sin dependencias y sin referencia al dominio, y sus decisiones abiertas de nombre y de momento quedan encaminadas | Ninguna: la etapa `a` no tiene capacidad funcional asociada | BT-08001 a BT-08005 |
+| EP-08002 | Identidad del administrador y sesión | `c` | La familia de sesión y la familia de error, que es transversal a las otras siete | US-08001, US-08014, US-08016 | BT-08006, BT-08007, BT-08008, BT-08009 |
+| EP-08003 | Ciclo de vida de la cuenta de alumno | `d` | La familia de cuentas y la familia de reseteo | US-08002, US-08003, US-08004, US-08005, US-08021, US-08022 | BT-08010, BT-08011 |
+| EP-08004 | Gestión del trabajo | `e` | La familia de trabajo y la familia de listado, con su carga útil acotada | US-08006, US-08007, US-08008, US-08009, US-08019 | BT-08012, BT-08013 |
+| EP-08005 | Interpretación y verificación del dato del alumno | `f` | La familia de detalle con sus observaciones y sus pares de valores | US-08011, US-08013, US-08015 | BT-08014 |
+| EP-08006 | Visualización del trabajo | `g` | Lo que el detalle tiene que llevar para que el árbol y la escena existan | US-08012 | BT-08014 |
+| EP-08007 | Desenlace de la entrega | `h` | La familia de desenlace y el comentario del administrador como bloque propio | US-08017, US-08018, US-08020 | BT-08015 |
+| EP-08008 | Capacidades de prioridad menor | `i…` | Lo que el tramo comprometido no levanta y el intake declara de prioridad menor | US-08010 | — |
 
 **La etapa `b` no produce épica en este proyecto de código, y es declaración y no olvido.** Construye la cáscara del front con pantallas de marcador de posición; no hay ningún dato que cruce la frontera todavía.
 
-**EP-08 está fuera del tramo comprometido**, y por eso su única historia no entra en el objetivo de **8 de 8 etapas**: el roadmap §2.1 declara que las capacidades de la fase `i…` se planifican con la plantilla completa cuando `h` esté cerrada y demostrada. Se declara acá para que la previsión de 02 quede completa y no para comprometerla.
+**EP-08008 está fuera del tramo comprometido**, y por eso su única historia no entra en el objetivo de **8 de 8 etapas**: el roadmap §2.1 declara que las capacidades de la fase `i…` se planifican con la plantilla completa cuando `h` esté cerrada y demostrada. Se declara acá para que la previsión de 02 quede completa y no para comprometerla.
 
 ## 3. Historias por épica
 
 Las **veintidós** historias son las que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 previó, con el mismo identificador y con la misma pertenencia a necesidades de negocio; esa sección declara que **la categoría 06 las confirma al redactarlas**, y esto es esa confirmación. Ninguna se agrega, ninguna se retira y ninguna se renumera. Cada una vive en su archivo bajo [`historias-usuario/`](historias-usuario/), porque el proyecto de código supera las veinte historias.
 
-### 3.1 EP-01 · Esqueleto ambulante y verificación de viabilidad
+### 3.1 EP-08001 · Esqueleto ambulante y verificación de viabilidad
 
-Sin historias. Todo el trabajo de la etapa `a` en este proyecto de código es técnico y vive en [`Backlog-Tecnico.md`](Backlog-Tecnico.md) §2.1 como BT-01 a BT-05.
+Sin historias. Todo el trabajo de la etapa `a` en este proyecto de código es técnico y vive en [`Backlog-Tecnico.md`](Backlog-Tecnico.md) §2.1 como BT-08001 a BT-08005.
 
-### 3.2 EP-02 · Identidad del administrador y sesión
-
-| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
-| --- | --- | --- | --- | --- | --- | --- |
-| [US-01](historias-usuario/US-01-Transportar-El-Canje-De-Credenciales-Y-La-Respuesta-De-Sesion.md) | Transportar el canje de credenciales y la respuesta de sesión de cuatro campos | Must | Sin fijar (§4.1) | Propuesta | CU-01 | EP-02 |
-| [US-14](historias-usuario/US-14-Transportar-El-Error-Neutro-Con-El-Conjunto-Cerrado-De-Codigos.md) | Transportar el error neutro con el conjunto cerrado de diecisiete códigos | Must | Sin fijar (§4.1) | Propuesta | CU-06 | EP-02 |
-| [US-16](historias-usuario/US-16-Cerrar-El-Conjunto-Con-El-Codigo-No-Clasificado.md) | Cerrar el conjunto con el código no clasificado | Must | Sin fijar (§4.1) | Propuesta | CU-06 | EP-02 |
-
-### 3.3 EP-03 · Ciclo de vida de la cuenta de alumno
+### 3.2 EP-08002 · Identidad del administrador y sesión
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-02](historias-usuario/US-02-Transportar-El-Registro-De-Una-Cuenta-De-Alumno.md) | Transportar el registro de una cuenta de alumno | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| [US-03](historias-usuario/US-03-Transportar-El-Listado-De-Cuentas-Del-Panel-Del-Administrador.md) | Transportar el listado de cuentas del panel del administrador | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| [US-04](historias-usuario/US-04-Transportar-El-Cambio-De-Situacion-De-La-Cuenta.md) | Transportar el cambio de situación de la cuenta | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| [US-05](historias-usuario/US-05-Transportar-La-Baja-Con-Su-Confirmacion-Escrita.md) | Transportar la baja con su confirmación escrita | Must | Sin fijar (§4.1) | Propuesta | CU-02 | EP-03 |
-| [US-21](historias-usuario/US-21-Transportar-El-Reseteo-Sin-Campo-De-Contrasena.md) | Transportar el reseteo sin campo de contraseña y con la provisoria producida | Must | Sin fijar (§4.1) | Propuesta | CU-08 | EP-03 |
-| [US-22](historias-usuario/US-22-Reutilizar-La-Solicitud-De-Cambio-Para-El-Cambio-Obligatorio.md) | Reutilizar la solicitud de cambio de contraseña para el cambio obligatorio | Must | Sin fijar (§4.1) | Propuesta | CU-08, CU-02 | EP-03 |
+| [US-08001](historias-usuario/US-08001-Transportar-El-Canje-De-Credenciales-Y-La-Respuesta-De-Sesion.md) | Transportar el canje de credenciales y la respuesta de sesión de cuatro campos | Must | Sin fijar (§4.1) | Propuesta | CU-08001 | EP-08002 |
+| [US-08014](historias-usuario/US-08014-Transportar-El-Error-Neutro-Con-El-Conjunto-Cerrado-De-Codigos.md) | Transportar el error neutro con el conjunto cerrado de diecisiete códigos | Must | Sin fijar (§4.1) | Propuesta | CU-08006 | EP-08002 |
+| [US-08016](historias-usuario/US-08016-Cerrar-El-Conjunto-Con-El-Codigo-No-Clasificado.md) | Cerrar el conjunto con el código no clasificado | Must | Sin fijar (§4.1) | Propuesta | CU-08006 | EP-08002 |
 
-### 3.4 EP-04 · Gestión del trabajo
+### 3.3 EP-08003 · Ciclo de vida de la cuenta de alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-06](historias-usuario/US-06-Transportar-El-Envio-Del-Trabajo-Con-El-Texto-Original.md) | Transportar el envío del trabajo con el texto original como cadena | Must | Sin fijar (§4.1) | Propuesta | CU-03 | EP-04 |
-| [US-07](historias-usuario/US-07-Transportar-La-Solicitud-Unica-De-Eliminacion.md) | Transportar la solicitud única de eliminación del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-03 | EP-04 |
-| [US-08](historias-usuario/US-08-Transportar-La-Proyeccion-De-Listado-Sin-La-Carga-Del-Detalle.md) | Transportar la proyección de listado sin la carga del detalle | Must | Sin fijar (§4.1) | Propuesta | CU-04 | EP-04 |
-| [US-09](historias-usuario/US-09-Transportar-El-Alcance-Del-Listado-Segun-El-Papel.md) | Transportar el alcance del listado según el papel, con los datos para agrupar y filtrar | Must | Sin fijar (§4.1) | Propuesta | CU-04 | EP-04 |
-| [US-19](historias-usuario/US-19-Transportar-El-Conjunto-Cerrado-De-Cuatro-Estados.md) | Transportar el conjunto cerrado de cuatro estados del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-03, CU-04 | EP-04 |
+| [US-08002](historias-usuario/US-08002-Transportar-El-Registro-De-Una-Cuenta-De-Alumno.md) | Transportar el registro de una cuenta de alumno | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08003](historias-usuario/US-08003-Transportar-El-Listado-De-Cuentas-Del-Panel-Del-Administrador.md) | Transportar el listado de cuentas del panel del administrador | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08004](historias-usuario/US-08004-Transportar-El-Cambio-De-Situacion-De-La-Cuenta.md) | Transportar el cambio de situación de la cuenta | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08005](historias-usuario/US-08005-Transportar-La-Baja-Con-Su-Confirmacion-Escrita.md) | Transportar la baja con su confirmación escrita | Must | Sin fijar (§4.1) | Propuesta | CU-08002 | EP-08003 |
+| [US-08021](historias-usuario/US-08021-Transportar-El-Reseteo-Sin-Campo-De-Contrasena.md) | Transportar el reseteo sin campo de contraseña y con la provisoria producida | Must | Sin fijar (§4.1) | Propuesta | CU-08008 | EP-08003 |
+| [US-08022](historias-usuario/US-08022-Reutilizar-La-Solicitud-De-Cambio-Para-El-Cambio-Obligatorio.md) | Reutilizar la solicitud de cambio de contraseña para el cambio obligatorio | Must | Sin fijar (§4.1) | Propuesta | CU-08008, CU-08002 | EP-08003 |
 
-### 3.5 EP-05 · Interpretación y verificación del dato del alumno
-
-| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
-| --- | --- | --- | --- | --- | --- | --- |
-| [US-11](historias-usuario/US-11-Transportar-El-Detalle-Con-Sus-Piezas-Y-Componentes.md) | Transportar el detalle del trabajo interpretado con sus piezas y componentes | Must | Sin fijar (§4.1) | Propuesta | CU-05 | EP-05 |
-| [US-13](historias-usuario/US-13-Transportar-La-Observacion-Con-Severidad-Y-Par-De-Valores.md) | Transportar la observación con su severidad y su par de valores | Must | Sin fijar (§4.1) | Propuesta | CU-05 | EP-05 |
-| [US-15](historias-usuario/US-15-Transportar-El-Detalle-De-Ubicacion-Con-Indice-Y-Campo.md) | Transportar el detalle de ubicación con índice de figura y campo | Must | Sin fijar (§4.1) | Propuesta | CU-06, CU-05 | EP-05 |
-
-### 3.6 EP-06 · Visualización del trabajo
+### 3.4 EP-08004 · Gestión del trabajo
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-12](historias-usuario/US-12-Transportar-El-Texto-Original-En-El-Detalle-Para-El-Arbol.md) | Transportar el texto original en el detalle, para el árbol y para la escena | Must | Sin fijar (§4.1) | Propuesta | CU-05 | EP-06 |
+| [US-08006](historias-usuario/US-08006-Transportar-El-Envio-Del-Trabajo-Con-El-Texto-Original.md) | Transportar el envío del trabajo con el texto original como cadena | Must | Sin fijar (§4.1) | Propuesta | CU-08003 | EP-08004 |
+| [US-08007](historias-usuario/US-08007-Transportar-La-Solicitud-Unica-De-Eliminacion.md) | Transportar la solicitud única de eliminación del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-08003 | EP-08004 |
+| [US-08008](historias-usuario/US-08008-Transportar-La-Proyeccion-De-Listado-Sin-La-Carga-Del-Detalle.md) | Transportar la proyección de listado sin la carga del detalle | Must | Sin fijar (§4.1) | Propuesta | CU-08004 | EP-08004 |
+| [US-08009](historias-usuario/US-08009-Transportar-El-Alcance-Del-Listado-Segun-El-Papel.md) | Transportar el alcance del listado según el papel, con los datos para agrupar y filtrar | Must | Sin fijar (§4.1) | Propuesta | CU-08004 | EP-08004 |
+| [US-08019](historias-usuario/US-08019-Transportar-El-Conjunto-Cerrado-De-Cuatro-Estados.md) | Transportar el conjunto cerrado de cuatro estados del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-08003, CU-08004 | EP-08004 |
 
-### 3.7 EP-07 · Desenlace de la entrega
-
-| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
-| --- | --- | --- | --- | --- | --- | --- |
-| [US-17](historias-usuario/US-17-Transportar-El-Desenlace-Con-Su-Conjunto-Cerrado-De-Dos-Valores.md) | Transportar el desenlace con su conjunto cerrado de dos valores | Must | Sin fijar (§4.1) | Propuesta | CU-07 | EP-07 |
-| [US-18](historias-usuario/US-18-Transportar-El-Comentario-Como-Bloque-Propio.md) | Transportar el comentario del administrador como bloque propio y nunca como observación | Must | Sin fijar (§4.1) | Propuesta | CU-07, CU-05 | EP-07 |
-| [US-20](historias-usuario/US-20-Transportar-El-Desenlace-Al-Alumno-Estado-Y-Comentario.md) | Transportar el desenlace al alumno: el estado en el listado y el comentario en el detalle | Must | Sin fijar (§4.1) | Propuesta | CU-04, CU-05 | EP-07 |
-
-### 3.8 EP-08 · Capacidades de prioridad menor
+### 3.5 EP-08005 · Interpretación y verificación del dato del alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-10](historias-usuario/US-10-Transportar-El-Resumen-Por-Alumno-Y-Por-Estado.md) | Transportar el resumen por alumno y por estado del panel del administrador | Could | Sin fijar (§4.1) | Propuesta | CU-04 | EP-08 |
+| [US-08011](historias-usuario/US-08011-Transportar-El-Detalle-Con-Sus-Piezas-Y-Componentes.md) | Transportar el detalle del trabajo interpretado con sus piezas y componentes | Must | Sin fijar (§4.1) | Propuesta | CU-08005 | EP-08005 |
+| [US-08013](historias-usuario/US-08013-Transportar-La-Observacion-Con-Severidad-Y-Par-De-Valores.md) | Transportar la observación con su severidad y su par de valores | Must | Sin fijar (§4.1) | Propuesta | CU-08005 | EP-08005 |
+| [US-08015](historias-usuario/US-08015-Transportar-El-Detalle-De-Ubicacion-Con-Indice-Y-Campo.md) | Transportar el detalle de ubicación con índice de figura y campo | Must | Sin fijar (§4.1) | Propuesta | CU-08006, CU-08005 | EP-08005 |
+
+### 3.6 EP-08006 · Visualización del trabajo
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08012](historias-usuario/US-08012-Transportar-El-Texto-Original-En-El-Detalle-Para-El-Arbol.md) | Transportar el texto original en el detalle, para el árbol y para la escena | Must | Sin fijar (§4.1) | Propuesta | CU-08005 | EP-08006 |
+
+### 3.7 EP-08007 · Desenlace de la entrega
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08017](historias-usuario/US-08017-Transportar-El-Desenlace-Con-Su-Conjunto-Cerrado-De-Dos-Valores.md) | Transportar el desenlace con su conjunto cerrado de dos valores | Must | Sin fijar (§4.1) | Propuesta | CU-08007 | EP-08007 |
+| [US-08018](historias-usuario/US-08018-Transportar-El-Comentario-Como-Bloque-Propio.md) | Transportar el comentario del administrador como bloque propio y nunca como observación | Must | Sin fijar (§4.1) | Propuesta | CU-08007, CU-08005 | EP-08007 |
+| [US-08020](historias-usuario/US-08020-Transportar-El-Desenlace-Al-Alumno-Estado-Y-Comentario.md) | Transportar el desenlace al alumno: el estado en el listado y el comentario en el detalle | Must | Sin fijar (§4.1) | Propuesta | CU-08004, CU-08005 | EP-08007 |
+
+### 3.8 EP-08008 · Capacidades de prioridad menor
+
+| US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
+| --- | --- | --- | --- | --- | --- | --- |
+| [US-08010](historias-usuario/US-08010-Transportar-El-Resumen-Por-Alumno-Y-Por-Estado.md) | Transportar el resumen por alumno y por estado del panel del administrador | Could | Sin fijar (§4.1) | Propuesta | CU-08004 | EP-08008 |
 
 ## 4. Métricas de avance
 
@@ -161,12 +161,12 @@ Sin historias. Todo el trabajo de la etapa `a` en este proyecto de código es t�
 | Historias en estado `Propuesta` | 22 de 22 |
 | Historias cerradas | 0 de 22 |
 | Porcentaje cerrado | 0 % |
-| Historias dentro del tramo comprometido | 21 de 22; la restante, US-10, es de la fase `i…` |
+| Historias dentro del tramo comprometido | 21 de 22; la restante, US-08010, es de la fase `i…` |
 | Tareas técnicas declaradas | 18 |
 | Tareas técnicas cerradas | 0 de 18 |
 | Etapas del producto que este proyecto de código toca | **7** de las 8 comprometidas: `a`, `c`, `d`, `e`, `f`, `g` y `h`. La única que no toca es la `b` |
-| Etapas fuera del tramo comprometido con historias declaradas | 1, la `i…`, con US-10 |
-| Deuda declarada en el backlog | 4 tareas técnicas que cierran un punto abierto: BT-04, BT-05, BT-17 y BT-18 |
+| Etapas fuera del tramo comprometido con historias declaradas | 1, la `i…`, con US-08010 |
+| Deuda declarada en el backlog | 4 tareas técnicas que cierran un punto abierto: BT-08004, BT-08005, BT-08017 y BT-08018 |
 
 ### 4.1 Por qué la unidad de estimación queda abierta
 
@@ -182,7 +182,7 @@ La columna `Estimación` dice **«Sin fijar»** en las veintidós historias y en
 
 1. **La prioridad la declara el Product Owner en el intake y esta categoría no reprioriza** (`Rules-Plan-Sprint.md` §1.3 declara esa división de titularidad para AG-06). `PRODUCT-INTAKE` §4 declara **diecinueve** de sus **veintiséis** capacidades como `Must Have` —**dieciocho** hasta el 2026-08-10, y `F-13` desde que la versión **1.19** de esa fuente la promovió—.
 2. **Este proyecto de código es una frontera, y una frontera se declara entera o no sirve.** Un tipo que falte no degrada una funcionalidad: impide que la funcionalidad exista, porque los dos extremos compilan contra él. Ese es el motivo estructural por el que acá hay todavía menos margen de recorte que en el resto del producto.
-3. **La única `Could` es US-10**, y lo es porque su capacidad de origen, `F-15` —panel de resumen del administrador por alumno y por estado—, es `Could Have` en `PRODUCT-INTAKE` §4 y cae en la fase `i…`. La categoría 02 ya la ubicaba ahí al declarar, en su §4.2, que la previsión de producto correspondiente queda fuera con su prioridad menor.
+3. **La única `Could` es US-08010**, y lo es porque su capacidad de origen, `F-15` —panel de resumen del administrador por alumno y por estado—, es `Could Have` en `PRODUCT-INTAKE` §4 y cae en la fase `i…`. La categoría 02 ya la ubicaba ahí al declarar, en su §4.2, que la previsión de producto correspondiente queda fuera con su prioridad menor.
 
 **Lo que reemplaza acá al recorte por prioridad es el recorte por etapa**, como en todo el producto: se difiere una etapa entera, no una historia suelta.
 
@@ -201,8 +201,8 @@ La columna `Estimación` dice **«Sin fijar»** en las veintidós historias y en
 
 **La explicación no es una cuota, y se puede verificar una por una.** El tramo comprometido —las etapas `c` a `h`— contiene **diecinueve** capacidades del intake §4, y desde `PRODUCT-INTAKE` **1.19** **las diecinueve son `Must Have`**: la única que no lo era, `F-13`, la promovió el Product Owner el 2026-08-10. De ahí se sigue mecánicamente que **ninguna historia que derive de una capacidad del tramo comprometido puede ser no-`Must`**, y que las no-`Must` que existen tienen que venir de otro lado. Vienen de dos lados, y sólo de dos:
 
-- **De una capacidad de la fase `i…`**, que este backlog no planifica pero que la frontera de tipos sí tiene que transportar: es el único caso, `US-10` de `GeometriaFactory-Contracts`, que deriva de `F-15`, `Could Have`.
-- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-12` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11), `US-16` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-23` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-30` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
+- **De una capacidad de la fase `i…`**, que este backlog no planifica pero que la frontera de tipos sí tiene que transportar: es el único caso, `US-08010` de `GeometriaFactory-Contracts`, que deriva de `F-15`, `Could Have`.
+- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-08012` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11), `US-08016` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-06023` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-00030` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
 
 **Los dos proyectos de código que hoy quedan en 100 % `Must` son exactamente los dos cuya única no-`Must` derivaba de `F-13`** —el Visor y Web, desde los dos lados de la fachada—. No llegaron ahí eligiendo: llegaron porque la capacidad de la que dependían subió de prioridad, después de que los dos elevaran la tensión y **se negaran a repriorizarla por su cuenta**.
 
@@ -226,12 +226,12 @@ La columna `Estimación` dice **«Sin fijar»** en las veintidós historias y en
 | Id | Punto abierto | Quién lo cierra | Cuándo |
 | --- | --- | --- | --- |
 | PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | Al cerrar la etapa `c` |
-| PA-02 | **Los nombres de los tipos, de sus campos y de los espacios de nombres**, que ni el intake ni la categoría 02 fijan y que se anclan en la etapa que implementa cada familia (`05` §11 PA-01). Convertido en trabajo como BT-04 | El equipo en el punto de control de la etapa correspondiente | De la etapa `c` en adelante, según la familia |
-| PA-03 | **La zona horaria y la precisión del campo de momento** del tipo de error: ninguna fuente las declara (`05` §11 PA-02). Convertido en trabajo como BT-05 | El equipo, junto con la elección del formato de intercambio | Etapa `a` o `c` |
-| PA-04 | **El formato de intercambio y su configuración** pertenece a `GeometriaFactory-Api` y a `GeometriaFactory-Web` (`05` §11 PA-03). Convertido en trabajo como BT-17, que es de **adopción** y no de decisión: este proyecto de código sólo exige que los tipos sean serializables sin comportamiento | Las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web`, **que ya están emitidas** | Al adoptarlo |
-| PA-05 | **Los dos valores rotulados [ASUNCIÓN]** de `05` §8, pendientes de confirmación en `PRODUCT-INTAKE` §22, asunción `A-4` (`05` §11 PA-04). Convertido en trabajo como BT-18 | El Product Owner sobre su propio documento | Antes de fijar la puerta en 09 |
+| PA-02 | **Los nombres de los tipos, de sus campos y de los espacios de nombres**, que ni el intake ni la categoría 02 fijan y que se anclan en la etapa que implementa cada familia (`05` §11 PA-01). Convertido en trabajo como BT-08004 | El equipo en el punto de control de la etapa correspondiente | De la etapa `c` en adelante, según la familia |
+| PA-03 | **La zona horaria y la precisión del campo de momento** del tipo de error: ninguna fuente las declara (`05` §11 PA-02). Convertido en trabajo como BT-08005 | El equipo, junto con la elección del formato de intercambio | Etapa `a` o `c` |
+| PA-04 | **El formato de intercambio y su configuración** pertenece a `GeometriaFactory-Api` y a `GeometriaFactory-Web` (`05` §11 PA-03). Convertido en trabajo como BT-08017, que es de **adopción** y no de decisión: este proyecto de código sólo exige que los tipos sean serializables sin comportamiento | Las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web`, **que ya están emitidas** | Al adoptarlo |
+| PA-05 | **Los dos valores rotulados [ASUNCIÓN]** de `05` §8, pendientes de confirmación en `PRODUCT-INTAKE` §22, asunción `A-4` (`05` §11 PA-04). Convertido en trabajo como BT-08018 | El Product Owner sobre su propio documento | Antes de fijar la puerta en 09 |
 
-**Sobre `PA-04` hay una constancia que corresponde dejar por escrito.** El punto abierto `PA-03` de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 dice que las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` **no están emitidas todavía**. Al día de este backlog **sí lo están**: [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §1 declara que las siete están emitidas, y su §5 cita la decisión concreta que cierra el formato de intercambio para los dos extremos. El punto abierto, por lo tanto, **ya tiene respuesta aguas abajo** y lo que queda es adoptarla, que es BT-17. Esta observación se eleva para que `05` la absorba; este backlog no edita ese documento.
+**Sobre `PA-04` hay una constancia que corresponde dejar por escrito.** El punto abierto `PA-03` de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 dice que las categorías 05 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` **no están emitidas todavía**. Al día de este backlog **sí lo están**: [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §1 declara que las siete están emitidas, y su §5 cita la decisión concreta que cierra el formato de intercambio para los dos extremos. El punto abierto, por lo tanto, **ya tiene respuesta aguas abajo** y lo que queda es adoptarla, que es BT-08017. Esta observación se eleva para que `05` la absorba; este backlog no edita ese documento.
 
 ## 7. Control de cambios
 

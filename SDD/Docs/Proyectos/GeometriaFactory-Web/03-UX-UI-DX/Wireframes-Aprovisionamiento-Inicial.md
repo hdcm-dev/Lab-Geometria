@@ -7,7 +7,7 @@
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Administrar-Las-Cuentas-De-La-Comision.md` §3, FA-03, FA-04, §6 y CA-01; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-01-Control-De-Admision-Al-Laboratorio.md` §1, §5 (los cinco criterios); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01), §4.1 (RN-01), §14 (RA-03), §17.6 P.5; `Design-Rules-Primer-Arranque.md` §1 a §9; `Design-Rules-Web-Generico.md` §3.1, §4.6, §4.9, §5, §7; `Design-Rules-Blazor-Mudblazor.md` §4.2
+**Trazabilidad upstream:** `../02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md` §3, FA-03, FA-04, §6 y CA-01; `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 (RT-03, RT-06, RT-07); `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md` §1, §5 (los cinco criterios); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01), §4.1 (RN-10001), §14 (RA-03), §17.6 P.5; `Design-Rules-Primer-Arranque.md` §1 a §9; `Design-Rules-Web-Generico.md` §3.1, §4.6, §4.9, §5, §7; `Design-Rules-Blazor-Mudblazor.md` §4.2
 **Trazabilidad downstream:** Fase B2 de validación visual de maqueta; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
 
 ---
@@ -156,13 +156,13 @@ Punto de quiebre principal en 768 px [ASUNCIÓN, tomada del documento base].
 | Dimensión | Referencia |
 | --- | --- |
 | Persona objetivo | El docente, en su primer contacto con la instancia |
-| CU origen | [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Administrar-Las-Cuentas-De-La-Comision.md), FA-03 y FA-04, con CA-01 |
-| Reglas de negocio relevantes | `RN-01`, administrador único y papeles fijos |
+| CU origen | [`CU-10004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md), FA-03 y FA-04, con CA-01 |
+| Reglas de negocio relevantes | `RN-10001`, administrador único y papeles fijos |
 | Restricciones transversales | `RT-03` (ningún mensaje con dirección interna), `RT-06` (sin estado propio), `RT-07` (indisponibilidad como estado degradado) |
 | Marco aplicado | [`Experiencia-De-Uso.md`](Experiencia-De-Uso.md) §3.2, §3.3, §4.1, §5 |
 | Representaciones que invoca | [`Representacion-Sello-De-Version.md`](Representacion-Sello-De-Version.md) |
 | Catálogo de diseño aplicado | `Design-Rules-Web-Generico.md`, `Design-Rules-Blazor-Mudblazor.md` §4.2, `Design-Rules-Primer-Arranque.md` completo, `Design-Rules-Identidad-De-Version.md` §4.2 |
-| US a generar en 06 | `US-08` |
+| US a generar en 06 | `US-10008` |
 | Tests previstos en 08 | Guion de demostración de la etapa `c`: alta inicial, y segunda apertura de la ruta que ya no arma formulario. Recorrido por teclado. Verificación de que ningún mensaje contiene dirección de servicio interno |
 
 ## 9. Control de cambios
@@ -170,4 +170,4 @@ Punto de quiebre principal en 768 px [ASUNCIÓN, tomada del documento base].
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. Superficie de primer arranque con shell partido sin chrome y sin cancelar, predicado único con corte en tres capas y redirección neutra, requisito declarado antes del intento, banda de resultado con el lazo cerrado en la superficie siguiente, destino al completar declarado explícitamente, y sello de versión en la primera de sus dos ubicaciones obligatorias. Catorce estados declarados para la Fase B2. |
-| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: la `NB-01` de la cabecera pasa a citarse con sección y criterio —§1, §5 (los cinco criterios)—, con la forma que ya usan los casos de uso de la categoría 02. |
+| 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: la `NB-00001` de la cabecera pasa a citarse con sección y criterio —§1, §5 (los cinco criterios)—, con la forma que ya usan los casos de uso de la categoría 02. |

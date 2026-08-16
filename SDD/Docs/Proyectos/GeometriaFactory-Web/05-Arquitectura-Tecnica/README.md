@@ -29,13 +29,13 @@ Lo que hay que haber entendido antes de tocar esta sección: **este proyecto de 
 
 | ADR | Título | Categoría | Estado |
 | --- | --- | --- | --- |
-| [ADR-01](Adrs/ADR-01-Render-En-El-Servidor-Con-Circuito-Interactivo.md) | Render en el servidor con circuito interactivo, y una sola salida hacia el servicio de datos | Estilo | Propuesto |
-| [ADR-02](Adrs/ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md) | Sin estado propio y sin persistencia, y por qué se omite el modelo de datos lógico | Persistencia | Propuesto |
-| [ADR-03](Adrs/ADR-03-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md) | La credencial de sesión vive en el estado del circuito, y las rutas acotan sin hacer cumplir | Seguridad | Propuesto |
-| [ADR-04](Adrs/ADR-04-Tres-Capas-De-Presentacion.md) | Tres capas de presentación: ninguna superficie llega sola al servicio de datos | Estilo | Propuesto |
-| [ADR-05](Adrs/ADR-05-Estado-Degradado-Como-Superficie.md) | Un traductor único de condiciones, y el estado degradado como superficie y no como error | Comunicación | Propuesto |
-| [ADR-06](Adrs/ADR-06-Aislamiento-Del-Visor-Tras-Su-Fachada.md) | El visor se opera sólo por sus seis funciones, y es esta pieza la que consulta el entorno | Comunicación | Propuesto |
-| [ADR-07](Adrs/ADR-07-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) | La dirección del servicio de datos viene de configuración, y el despliegue termina comprobando | Despliegue | Propuesto |
+| [ADR-10001](Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md) | Render en el servidor con circuito interactivo, y una sola salida hacia el servicio de datos | Estilo | Propuesto |
+| [ADR-10002](Adrs/ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md) | Sin estado propio y sin persistencia, y por qué se omite el modelo de datos lógico | Persistencia | Propuesto |
+| [ADR-10003](Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md) | La credencial de sesión vive en el estado del circuito, y las rutas acotan sin hacer cumplir | Seguridad | Propuesto |
+| [ADR-10004](Adrs/ADR-10004-Tres-Capas-De-Presentacion.md) | Tres capas de presentación: ninguna superficie llega sola al servicio de datos | Estilo | Propuesto |
+| [ADR-10005](Adrs/ADR-10005-Estado-Degradado-Como-Superficie.md) | Un traductor único de condiciones, y el estado degradado como superficie y no como error | Comunicación | Propuesto |
+| [ADR-10006](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) | El visor se opera sólo por sus seis funciones, y es esta pieza la que consulta el entorno | Comunicación | Propuesto |
+| [ADR-10007](Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) | La dirección del servicio de datos viene de configuración, y el despliegue termina comprobando | Despliegue | Propuesto |
 
 Ninguna superada, ninguna rechazada.
 
@@ -50,17 +50,17 @@ Los catorce, con su objetivo numérico y su mecanismo, están en [`Arquitectura-
 1. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.4, las tres reglas de arquitectura y cómo las trata esta pieza. Son media página y es lo primero: **una superficie o un componente que las viole es un defecto, no una alternativa**. La categoría 03 hace la misma recomendación con su §2.4, y por el mismo motivo.
 2. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §2.2 — las cuatro decisiones de `GeometriaFactory-Contracts` y de `GeometriaFactory-Visor` que esta pieza hereda y no reabre. Sin eso, el aislamiento del visor se lee como una precaución y no como una obligación heredada.
 3. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §3 — los ocho componentes en tres capas, y sobre todo **§3.2**, cuyas cinco precisiones son las que hacen auditable lo demás.
-4. [`Adrs/ADR-01`](Adrs/ADR-01-Render-En-El-Servidor-Con-Circuito-Interactivo.md) y [`ADR-03`](Adrs/ADR-03-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md) — juntas, porque la segunda sólo es posible por la primera.
-5. [`Adrs/ADR-06`](Adrs/ADR-06-Aislamiento-Del-Visor-Tras-Su-Fachada.md) — la decisión con más superficie de contacto con otro proyecto de código.
+4. [`Adrs/ADR-10001`](Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md) y [`ADR-10003`](Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md) — juntas, porque la segunda sólo es posible por la primera.
+5. [`Adrs/ADR-10006`](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) — la decisión con más superficie de contacto con otro proyecto de código.
 6. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10 — la trazabilidad, para consultar por restricción transversal, por regla o por regla de arquitectura.
 
 ## 6. Artefactos omitidos y su motivo
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Modelo-Datos-Logico.md` | **Omitido, con ADR** | La regla lo marca **obligatorio** para `web-monolith`, y se omite igual como **decisión técnica declarada**: `tiene_persistencia` es false y es deliberado. La categoría 02 lo pidió explícitamente en su §9 —«corresponde una ADR en 05-Arquitectura-Tecnica que la registre»— y esa ADR es [`ADR-02`](Adrs/ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md). El modelo lógico del producto le corresponde a la categoría 05 de `GeometriaFactory-Infrastructure` |
+| `Modelo-Datos-Logico.md` | **Omitido, con ADR** | La regla lo marca **obligatorio** para `web-monolith`, y se omite igual como **decisión técnica declarada**: `tiene_persistencia` es false y es deliberado. La categoría 02 lo pidió explícitamente en su §9 —«corresponde una ADR en 05-Arquitectura-Tecnica que la registre»— y esa ADR es [`ADR-10002`](Adrs/ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md). El modelo lógico del producto le corresponde a la categoría 05 de `GeometriaFactory-Infrastructure` |
 | `contratos-<area>.md` | **Omitido** | La regla lo exige para `web-monolith` **sólo si expone API externa**, y este proyecto de código **no expone contrato a nadie**: es hoja del grafo de dependencias y punto de entrada del usuario final (`PRODUCT-INTAKE` §14). Los contratos que **consume** están emitidos en los proyectos de código que los producen: [`Contracts`](../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md) y [`Visor`](../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Contratos-Abstractions.md) |
-| `Flujo-Ejecucion.md` | **Omitido** | La regla lo admite para `web-monolith` **sólo si hay orquestación compleja**, y no la hay: cada superficie hace una o pocas solicitudes y compone el resultado. La secuencia más larga de la pieza es el ciclo de vida de la instancia del visor, y vive entera en [`ADR-06`](Adrs/ADR-06-Aislamiento-Del-Visor-Tras-Su-Fachada.md) §7 y en `CU-07`. El flujo de ejecución del dibujo, que sí es una canalización, ya lo emitió [`GeometriaFactory-Visor`](../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Flujo-Ejecucion.md) |
+| `Flujo-Ejecucion.md` | **Omitido** | La regla lo admite para `web-monolith` **sólo si hay orquestación compleja**, y no la hay: cada superficie hace una o pocas solicitudes y compone el resultado. La secuencia más larga de la pieza es el ciclo de vida de la instancia del visor, y vive entera en [`ADR-10006`](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) §7 y en `CU-10007`. El flujo de ejecución del dibujo, que sí es una canalización, ya lo emitió [`GeometriaFactory-Visor`](../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Flujo-Ejecucion.md) |
 | `Extensibilidad.md` | **Omitido** | `tiene_extensibilidad` es false en el `PRODUCT-MANIFEST` §5. El punto de extensión del producto es el contrato de la fachada del visor, y esta pieza es su **consumidor**, no su dueño: cómo crece esa fachada lo declara [`Extensibilidad.md`](../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Extensibilidad.md) §5 de `GeometriaFactory-Visor` |
 | `_legacy/` | **No existe** | Es la primera emisión de esta categoría en este proyecto de código: no hay ninguna versión superada que archivar |
 
@@ -70,7 +70,7 @@ Dos puntos llegaron a esta categoría por nombre, y conviene decir qué pasó co
 
 | Punto que llegó | Qué hizo esta sección |
 | --- | --- |
-| La **ADR que registre la omisión del modelo conceptual y del modelo lógico**, pedida por la categoría 02 §9 | **Resuelto.** [`ADR-02`](Adrs/ADR-02-Sin-Estado-Propio-Y-Sin-Persistencia.md) la emite, con la aclaración de que la omisión **no es la que la regla admite** para el tipo D8: contradice su valor por defecto y por eso lleva ADR |
+| La **ADR que registre la omisión del modelo conceptual y del modelo lógico**, pedida por la categoría 02 §9 | **Resuelto.** [`ADR-10002`](Adrs/ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md) la emite, con la aclaración de que la omisión **no es la que la regla admite** para el tipo D8: contradice su valor por defecto y por eso lleva ADR |
 | El **formato de intercambio y su configuración**, derivado por la Fase C de `GeometriaFactory-Contracts` a las categorías 05 de `GeometriaFactory-Api` y de ésta | **No resuelto, y con fundamento.** No se puede decidir de un solo lado: los dos extremos tienen que coincidir o el contrato deja de ser el mismo. Esta categoría declara que la decisión pertenece a la categoría 05 de `GeometriaFactory-Api`, que es el productor, y que esta pieza la adopta. Sigue como `PA-03` |
 
 ## 8. Relación con la Fase B2 y con la categoría 03

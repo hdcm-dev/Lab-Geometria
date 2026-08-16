@@ -63,7 +63,7 @@ Es lo propio de esta fase y es donde puse el grueso del esfuerzo. Verifiqué las
 
 **Los 9 invariantes.** `INV-01` a `INV-09` aparecen todos, entre 9 y 32 ocurrencias. `INV-09` —la marca de cambio de contraseña pendiente— es el más citado, con 32.
 
-**Las 9 necesidades de negocio.** `NB-01` a `NB-09` aparecen todas. `NB-08`, la que dos proyectos de código declaran explícitamente no tocar, es la menos citada con 19 ocurrencias, y aun así tiene trabajo asociado en Web, Api e Infrastructure.
+**Las 9 necesidades de negocio.** `NB-00001` a `NB-00009` aparecen todas. `NB-00008`, la que dos proyectos de código declaran explícitamente no tocar, es la menos citada con 19 ocurrencias, y aun así tiene trabajo asociado en Web, Api e Infrastructure.
 
 **Los 8 escenarios del anexo.** `E-1` a `E-8` aparecen los ocho. Es el conjunto cuya cita falsa provocó el rechazo de la Fase C —donde se citaba «E-1 a E-7» y «siete escenarios»—, y esta vez el corpus lo trata bien: `GeometriaFactory-Infrastructure` §2 EP-05 declara «la batería de **10** casos sobre los **ocho** escenarios», con el número correcto.
 
@@ -192,7 +192,7 @@ Conté todos sobre el instrumento. La columna «Contado» es mi recuento, no el 
 | Reglas de negocio | 16 | **16** | `RN-01` a `RN-16` sobre el intake §4.1, sin huecos |
 | Invariantes | 9 | **9** | `INV-01` a `INV-09` sobre el intake |
 | Escenarios del anexo | 8 | **8** | `§20.E-1` a `§20.E-8`, contando los encabezados de tercer nivel de la Parte D |
-| Necesidades de negocio | 9 | **9** | Nueve archivos en `01-Necesidades-Negocio/Necesidades-De-Negocio/`, `NB-01` a `NB-09` |
+| Necesidades de negocio | 9 | **9** | Nueve archivos en `01-Necesidades-Negocio/Necesidades-De-Negocio/`, `NB-00001` a `NB-00009` |
 | Códigos de contrato vivos | 15 sobre 18 emitidos | **15** | Filas de datos de `Contracts/05/Contratos-Abstractions.md` §5.1: quince. El corpus declara además los tres retirados y la regla de no reciclado |
 | Puntos de acceso | 15 | **15** | Filas de `Api/02/Definicion-Superficie-HTTP.md` §3: `A-01` a `A-03` y `A-05` a `A-16`, sin `A-04`. Tres más doce, quince. El cuadre que el propio documento publica —cuatro sin acceso firmado más once bajo la guardia— también da quince |
 | Funciones de fachada | 6 | **6** | Filas de la tabla del intake §17.7.P.3: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir`, `establecerMovimiento` |

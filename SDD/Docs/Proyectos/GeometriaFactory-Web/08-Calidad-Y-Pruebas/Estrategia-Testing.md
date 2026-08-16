@@ -41,7 +41,7 @@
 
 **El apartamiento es de forma y no de rigor, y tiene una consecuencia que conviene decir sin adornos.** Un guion observado es más caro de ejecutar y menos reproducible que una batería automatizada: por eso esta estrategia lo compensa con **dos instrumentos que sí son enumerables y verificables uno por uno** —las 61 filas de la matriz de sensado y los **35** casos de verificación de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md)—, y con **seis inspecciones estructurales** cuyo umbral es exactamente cero y que no dependen de que alguien mire bien.
 
-**Contra la pirámide invertida**: acá la pirámide **es** de extremo a extremo, y no por descuido sino por decisión de la fuente. Lo que la mantiene sana es que las propiedades críticas —`RA-01`, `RA-02`, `RA-03`, la credencial fuera del navegador— **no se verifican mirando la pantalla** sino contando y forzando: `TC-29` a `TC-33`. **Contra la pirámide aplanada**: §2 no reporta ningún número global de cobertura, porque no hay ninguno que reportar.
+**Contra la pirámide invertida**: acá la pirámide **es** de extremo a extremo, y no por descuido sino por decisión de la fuente. Lo que la mantiene sana es que las propiedades críticas —`RA-01`, `RA-02`, `RA-03`, la credencial fuera del navegador— **no se verifican mirando la pantalla** sino contando y forzando: `TC-10029` a `TC-10033`. **Contra la pirámide aplanada**: §2 no reporta ningún número global de cobertura, porque no hay ninguno que reportar.
 
 **Tres clases de verificación que conviene nombrar aparte:**
 
@@ -56,15 +56,15 @@
 | Dimensión | Unidad de cobertura | Umbral | Fuente |
 | --- | --- | --- | --- |
 | Pasos del guion de demostración | Paso ejecutado y pasado | **100 %** de la etapa y de todas las anteriores [ASUNCIÓN del intake §17.6.P.6 en cuanto a la forma de la puerta] | Intake §17.6.P.6; `05` §8 |
-| Superficies de la línea de base | Superficie sensada | **11 de 11** | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) §4, filas `SD-01` a `SD-11` |
+| Superficies de la línea de base | Superficie sensada | **11 de 11** | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) §4, filas `SD-10001` a `SD-10011` |
 | Componentes de la línea de base | Componente sensado | **73 de 73** | Ídem, tabla de cobertura de §4 |
 | Estados de la línea de base | Estado sensado | **74 de 74** | Ídem |
 | Rutas de la línea de base | Ruta sensada | **24 de 24** | Ídem |
 | Campos del contrato de datos de maqueta | Campo sensado | **29 de 29** | Ídem |
 | Casos de uso | Caso de uso con verificación | **10 de 10** | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2 |
 | Restricciones transversales | Restricción con verificación | **13 de 13** | Matriz §5 |
-| Códigos vivos del contrato | Código traducido a presentación **sin exponer nada** | **15 de 15** | Matriz §3, `TC-31` |
-| Superficies con recorrido por teclado y contraste medido | Superficie | **11 de 11** | `SD-51` y `SD-52` de la matriz de sensado |
+| Códigos vivos del contrato | Código traducido a presentación **sin exponer nada** | **15 de 15** | Matriz §3, `TC-10031` |
+| Superficies con recorrido por teclado y contraste medido | Superficie | **11 de 11** | `SD-10051` y `SD-10052` de la matriz de sensado |
 
 **Los tres componentes de capa 1, los tres de capa 2 y los dos de capa 3 de `05` §3.1 no llevan umbral numérico propio**, y decirlo es más honesto que repartir un porcentaje inventado entre ocho módulos que ninguna herramienta va a medir. Lo que sí tiene cada componente es **al menos un caso de verificación que lo ejerce**, y eso sí se declara en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6.
 
@@ -103,12 +103,12 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 | Sustitución | Cuándo | Por qué |
 | --- | --- | --- |
-| **Servicio de datos caído** | `TC-27`, `TC-28`, y las filas `SD-14` de la matriz de sensado | El estado degradado y la reconexión **no se pueden observar** con el servicio disponible. Se provoca deteniendo el servicio, no simulándolo |
-| **Circuito cortado y restablecido** | `TC-27`, y `PT-01.c` | Ídem: se provoca cortando la red del navegador |
-| **Preferencia de movimiento reducido declarada por el sistema** | `TC-22`, y `SD-48` | Se declara en el sistema operativo o en el navegador. **No se simula desde el código**, porque lo que se verifica es que esta pieza la **lea** y la traduzca a dos valores de verdad |
-| **Sin capacidad gráfica tridimensional** | `TC-23`, y `RT-11` | Se deshabilita la capacidad en el navegador, para verificar que el resto del producto sigue disponible |
+| **Servicio de datos caído** | `TC-10027`, `TC-10028`, y las filas `SD-10014` de la matriz de sensado | El estado degradado y la reconexión **no se pueden observar** con el servicio disponible. Se provoca deteniendo el servicio, no simulándolo |
+| **Circuito cortado y restablecido** | `TC-10027`, y `PT-01.c` | Ídem: se provoca cortando la red del navegador |
+| **Preferencia de movimiento reducido declarada por el sistema** | `TC-10022`, y `SD-10048` | Se declara en el sistema operativo o en el navegador. **No se simula desde el código**, porque lo que se verifica es que esta pieza la **lea** y la traduzca a dos valores de verdad |
+| **Sin capacidad gráfica tridimensional** | `TC-10023`, y `RT-11` | Se deshabilita la capacidad en el navegador, para verificar que el resto del producto sigue disponible |
 
-**Los datos de las etapas `b` y anteriores** salen de [`../03-UX-UI-DX/Contrato-Datos-Maqueta.md`](../03-UX-UI-DX/Contrato-Datos-Maqueta.md), y ese documento declara en su §5 **valores compuestos para la maqueta que no se propagan al producto** —la credencial de prueba y la cuarta cuenta de ejemplo—. La fila `SD-60` de la matriz de sensado los sensa: **un dato compuesto para la maqueta que figure como dato del producto es deriva mayor**.
+**Los datos de las etapas `b` y anteriores** salen de [`../03-UX-UI-DX/Contrato-Datos-Maqueta.md`](../03-UX-UI-DX/Contrato-Datos-Maqueta.md), y ese documento declara en su §5 **valores compuestos para la maqueta que no se propagan al producto** —la credencial de prueba y la cuarta cuenta de ejemplo—. La fila `SD-10060` de la matriz de sensado los sensa: **un dato compuesto para la maqueta que figure como dato del producto es deriva mayor**.
 
 ## 6. Datos de prueba
 
@@ -118,18 +118,18 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 | Escenario | Qué verifica en esta pieza | Fuente del valor |
 | --- | --- | --- |
-| `E-1` | **3 piezas y 2 advertencias**; las tres figuras se dibujan en la escena; procesar dos veces produce la **misma disposición**. Es el texto semilla y el caso canónico | §20.E-1, «Qué verificar» puntos 5 y 7; `SD-37`, `SD-38`, `SD-41` |
-| `E-2` | **El texto se envía carácter por carácter con sus dos comas finales**, y se muestra sin reescribirlo. Es el material de `RN-08` y de la fila `SD-36` | §20.E-2, punto 1; `SD-36` |
-| `E-3` | La advertencia de área con el par **36.00 declarado y 54.00 derivado**, mostrada **exactamente como llega, sin reformatear** | §20.E-3, punto 2; `SD-33` |
-| `E-4` | **Cero observaciones**: la lista de observaciones se dibuja como línea explícita y no como hueco | §20.E-4, punto 4; `SD-21` |
-| `E-5` | El error con **índice de figura 1** y **campo `Tipo`**, nunca un texto genérico; y **ninguna pieza desaparece sin quedar enumerada** | §20.E-5, puntos 1 a 4; `SD-30`, `SD-40` |
-| `E-6` | La pieza con dimensión **`0.00` se dibuja** y no produce condición de dibujo | §20.E-6, puntos 1 y 4; `SD-39` |
-| `E-7` | Los **seis** tipos dibujables, con la clave `Bases` en el ortoedro | §20.E-7, puntos 1 a 3; `SD-40` |
+| `E-1` | **3 piezas y 2 advertencias**; las tres figuras se dibujan en la escena; procesar dos veces produce la **misma disposición**. Es el texto semilla y el caso canónico | §20.E-1, «Qué verificar» puntos 5 y 7; `SD-10037`, `SD-10038`, `SD-10041` |
+| `E-2` | **El texto se envía carácter por carácter con sus dos comas finales**, y se muestra sin reescribirlo. Es el material de `RN-10008` y de la fila `SD-10036` | §20.E-2, punto 1; `SD-10036` |
+| `E-3` | La advertencia de área con el par **36.00 declarado y 54.00 derivado**, mostrada **exactamente como llega, sin reformatear** | §20.E-3, punto 2; `SD-10033` |
+| `E-4` | **Cero observaciones**: la lista de observaciones se dibuja como línea explícita y no como hueco | §20.E-4, punto 4; `SD-10021` |
+| `E-5` | El error con **índice de figura 1** y **campo `Tipo`**, nunca un texto genérico; y **ninguna pieza desaparece sin quedar enumerada** | §20.E-5, puntos 1 a 4; `SD-10030`, `SD-10040` |
+| `E-6` | La pieza con dimensión **`0.00` se dibuja** y no produce condición de dibujo | §20.E-6, puntos 1 y 4; `SD-10039` |
+| `E-7` | Los **seis** tipos dibujables, con la clave `Bases` en el ortoedro | §20.E-7, puntos 1 a 3; `SD-10040` |
 | `E-8` | La pieza no se dibuja y **queda enumerada con su índice y su código**; **el árbol muestra las dos piezas**, incluida la que no se dibujó; y el desenlace del envío **es error**: el trabajo queda en `Borrador` | §20.E-8, puntos 2, 5 y 6 |
 
 **Regeneración y versionado.** Los ocho escenarios **no se regeneran**: son datos declarados por el intake con su procedencia. Un dato de prueba de este proyecto de código que cambie un valor de un escenario es un defecto, no una actualización.
 
-**Lo que no se inventa.** Ningún caso de verificación introduce un texto de figuras que no esté en §20. Donde hace falta un dato que ningún escenario da —un correo, un nombre de alumno, un comentario del administrador— se usa un valor evidentemente ficticio y se declara como tal, con la salvedad de `SD-60`: **los valores compuestos para la maqueta no viajan al producto**.
+**Lo que no se inventa.** Ningún caso de verificación introduce un texto de figuras que no esté en §20. Donde hace falta un dato que ningún escenario da —un correo, un nombre de alumno, un comentario del administrador— se usa un valor evidentemente ficticio y se declara como tal, con la salvedad de `SD-10060`: **los valores compuestos para la maqueta no viajan al producto**.
 
 ## 7. Ambiente de testing
 
@@ -156,8 +156,8 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 | Exigir su actualización al cerrar cada etapa, con estado y fecha | **Hecho** en [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 y en [`Definition-Of-Done.md`](Definition-Of-Done.md) §1.3 |
 | Convertirla en gate | **Hecho**: `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 |
 | Modificar sus filas, sus umbrales o su recuento de línea de base, que sigue siendo **61** | **No se hace.** Un umbral de deriva se cambia con aprobación humana explícita, no desde esta categoría |
-| Abrir filas nuevas para la capacidad **F-26** | **No se hace**, y el motivo lo declara la propia matriz en su §4: los elementos de interfaz que arrastra esa capacidad **no tienen identificador en la línea de base**, porque son posteriores a la aprobación de la maqueta. Sus sondas nacen con la **iteración 5** de maqueta y la reemisión de la línea de base. **Que no tengan sonda no significa que no se verifiquen**: `TC-06`, `TC-07` y `TC-10` de esta categoría las cubren contra los criterios de aceptación de `CU-03` y `CU-04`, que es lo que la propia matriz declara que gobierna esa construcción mientras tanto |
-| Abrir filas `VER-XX` | **No se hizo en la Fase E, y quedó hecho el 2026-08-11 por AG-10**: en ese momento `10-Examples` no estaba emitida y la matriz lo declaraba. Al emitirse, la matriz sumó la fila **`SD-62`** desde el único contrato de verificación de [`../10-Examples/`](../10-Examples/), en `Sin verificar`. **El alta no es de esta categoría**: `Deriva-Rules.md` §4 se la asigna a AG-10 en el momento que cierra la categoría 10, y las **61** filas que esta categoría sí resolvió en §8.1 no cambian |
+| Abrir filas nuevas para la capacidad **F-26** | **No se hace**, y el motivo lo declara la propia matriz en su §4: los elementos de interfaz que arrastra esa capacidad **no tienen identificador en la línea de base**, porque son posteriores a la aprobación de la maqueta. Sus sondas nacen con la **iteración 5** de maqueta y la reemisión de la línea de base. **Que no tengan sonda no significa que no se verifiquen**: `TC-10006`, `TC-10007` y `TC-10010` de esta categoría las cubren contra los criterios de aceptación de `CU-10003` y `CU-10004`, que es lo que la propia matriz declara que gobierna esa construcción mientras tanto |
+| Abrir filas `VER-XX` | **No se hizo en la Fase E, y quedó hecho el 2026-08-11 por AG-10**: en ese momento `10-Examples` no estaba emitida y la matriz lo declaraba. Al emitirse, la matriz sumó la fila **`SD-10062`** desde el único contrato de verificación de [`../10-Examples/`](../10-Examples/), en `Sin verificar`. **El alta no es de esta categoría**: `Deriva-Rules.md` §4 se la asigna a AG-10 en el momento que cierra la categoría 10, y las **61** filas que esta categoría sí resolvió en §8.1 no cambian |
 
 **La frontera entre los dos instrumentos, dicha una sola vez.** La matriz de sensado responde «¿lo construido se sigue pareciendo a lo que el humano aprobó mirando, y sigue respetando el contrato?». El catálogo de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) responde «¿el sistema hace lo que las historias dicen?». Cuando los dos miran lo mismo, la matriz aporta el **umbral de deriva** y el caso de prueba aporta el **criterio de aceptación**; ninguno de los dos reemplaza al otro y **ninguno redefine el umbral del otro**.
 
@@ -167,20 +167,20 @@ Las **61** filas de la matriz agrupadas por su método resuelto. La agrupación 
 
 | Familia | Filas | Cuántas | Método resuelto | Casos de verificación que la ejercen | Etapa en que entra |
 | --- | --- | --- | --- | --- | --- |
-| Superficies | `SD-01` a `SD-11` | 11 | **Inspección visual** contra la maqueta aprobada, superficie por superficie | `TC-35`, y los `TC-XX` de la superficie correspondiente | `b`, y se reverifica cuando la superficie recibe capacidad |
-| Familias de estados | `SD-12` a `SD-22` | 11 | **Conmutación de estado** en el sistema construido, contra la tabla de la línea de base | `TC-04`, `TC-13`, `TC-14`, `TC-15`, `TC-24`, `TC-27`, `TC-28` | `c` a `h`, según la superficie |
-| Familias de rutas | `SD-23` a `SD-27` | 5 | **Recorrido completo**, más revisión de la tabla de rutas del sistema construido para `SD-27` | `TC-05`, `TC-07`, `TC-26`, `TC-35` | `b` para el mapa, `c` a `h` para los recorridos |
-| Modelo de datos y formatos | `SD-28` a `SD-36` | 9 | **Inspección visual con escenario del intake**, más comparación carácter por carácter para `SD-36` | `TC-11`, `TC-13`, `TC-14`, `TC-18` | `e` y `f` |
-| Comportamiento verificable por ejecución | `SD-37` a `SD-42` | 6 | **Ejecución automatizable** con los escenarios `E-1`, `E-5`, `E-6` y `E-7`, y los **10** recorridos de ida y vuelta | `TC-13`, `TC-14`, `TC-17`, `TC-20`, `TC-21` | `f` y `g` |
-| Contrato de fachada y movimiento | `SD-43` a `SD-48` | 6 | **Inspección del árbol de fuentes** más **conteo en la pestaña de red**, e inspección visual para los controles | `TC-22`, `TC-29`, `TC-32`, `TC-33` | `g` |
-| Accesibilidad | `SD-49` a `SD-53` | 5 | **Recorrido por teclado**, **lectura asistida** y **medición de contraste**, las tres observadas | `TC-19`, `TC-23`, y revisión de accesibilidad de las once superficies | `b` para el armazón, `g` para el árbol y la escena |
-| Tokens, ancho angosto y sello | `SD-54` a `SD-56` | 3 | **Revisión de las hojas de estilo** e **inspección visual** en ancho angosto | `TC-35` | `b` |
-| Barridos de microcopy | `SD-57`, `SD-58` | 2 | **Barrido de los mensajes visibles**, con umbral 0 | `TC-31` | `c` |
-| Barridos de residuos de maqueta y componentes transversales | `SD-59` a `SD-61` | 3 | **Barrido del sistema construido** buscando cada instrumento y cada valor compuesto, e inspección superficie por superficie para `SD-61` | `TC-35`, y la revisión de la etapa `b` | `b`, y se reverifica al cerrar `h` |
+| Superficies | `SD-10001` a `SD-10011` | 11 | **Inspección visual** contra la maqueta aprobada, superficie por superficie | `TC-10035`, y los `TC-XX` de la superficie correspondiente | `b`, y se reverifica cuando la superficie recibe capacidad |
+| Familias de estados | `SD-10012` a `SD-10022` | 11 | **Conmutación de estado** en el sistema construido, contra la tabla de la línea de base | `TC-10004`, `TC-10013`, `TC-10014`, `TC-10015`, `TC-10024`, `TC-10027`, `TC-10028` | `c` a `h`, según la superficie |
+| Familias de rutas | `SD-10023` a `SD-10027` | 5 | **Recorrido completo**, más revisión de la tabla de rutas del sistema construido para `SD-10027` | `TC-10005`, `TC-10007`, `TC-10026`, `TC-10035` | `b` para el mapa, `c` a `h` para los recorridos |
+| Modelo de datos y formatos | `SD-10028` a `SD-10036` | 9 | **Inspección visual con escenario del intake**, más comparación carácter por carácter para `SD-10036` | `TC-10011`, `TC-10013`, `TC-10014`, `TC-10018` | `e` y `f` |
+| Comportamiento verificable por ejecución | `SD-10037` a `SD-10042` | 6 | **Ejecución automatizable** con los escenarios `E-1`, `E-5`, `E-6` y `E-7`, y los **10** recorridos de ida y vuelta | `TC-10013`, `TC-10014`, `TC-10017`, `TC-10020`, `TC-10021` | `f` y `g` |
+| Contrato de fachada y movimiento | `SD-10043` a `SD-10048` | 6 | **Inspección del árbol de fuentes** más **conteo en la pestaña de red**, e inspección visual para los controles | `TC-10022`, `TC-10029`, `TC-10032`, `TC-10033` | `g` |
+| Accesibilidad | `SD-10049` a `SD-10053` | 5 | **Recorrido por teclado**, **lectura asistida** y **medición de contraste**, las tres observadas | `TC-10019`, `TC-10023`, y revisión de accesibilidad de las once superficies | `b` para el armazón, `g` para el árbol y la escena |
+| Tokens, ancho angosto y sello | `SD-10054` a `SD-10056` | 3 | **Revisión de las hojas de estilo** e **inspección visual** en ancho angosto | `TC-10035` | `b` |
+| Barridos de microcopy | `SD-10057`, `SD-10058` | 2 | **Barrido de los mensajes visibles**, con umbral 0 | `TC-10031` | `c` |
+| Barridos de residuos de maqueta y componentes transversales | `SD-10059` a `SD-10061` | 3 | **Barrido del sistema construido** buscando cada instrumento y cada valor compuesto, e inspección superficie por superficie para `SD-10061` | `TC-10035`, y la revisión de la etapa `b` | `b`, y se reverifica al cerrar `h` |
 
 **Once más once más cinco más nueve más seis más seis más cinco más tres más dos más tres son sesenta y una.** El recuento cierra contra el de la matriz, y ninguna fila queda sin método resuelto ni sin etapa asignada.
 
-**Cuántas quedan como inspección observada y cuántas se automatizan.** Las **seis** filas de `SD-37` a `SD-42` y las de conteo de `SD-43`, `SD-45` y `SD-47` admiten ejecución automatizable; **las demás quedan como inspección**, y decirlo es más honesto que declarar una automatización que este proyecto de código no tiene proyecto de pruebas donde alojar.
+**Cuántas quedan como inspección observada y cuántas se automatizan.** Las **seis** filas de `SD-10037` a `SD-10042` y las de conteo de `SD-10043`, `SD-10045` y `SD-10047` admiten ejecución automatizable; **las demás quedan como inspección**, y decirlo es más honesto que declarar una automatización que este proyecto de código no tiene proyecto de pruebas donde alojar.
 
 ### 8.2 Correspondencia con la matriz de `GeometriaFactory-Visor`
 
@@ -188,23 +188,23 @@ Las **61** filas de la matriz agrupadas por su método resuelto. La agrupación 
 
 | Fila de la matriz del `Visor` | Fila de ésta que la correspondencia cita | Verificación desde este lado |
 | --- | --- | --- |
-| `SD-01` seis funciones de la fachada | `SD-43` | **Verdadera.** `SD-43` afirma que la escena se opera **exclusivamente por las seis funciones** desde el componente anfitrión |
-| `SD-02` cero red | `SD-43` | **Verdadera.** `SD-43` incluye el recuento de peticiones en la pestaña de red **durante la interacción con la escena** |
-| `SD-03` cero persistencia | `SD-47` | **Verdadera.** `SD-47` afirma que **la preferencia de cada movimiento es del componente anfitrión** y que la fachada no escribe ninguna clave |
-| `SD-06` sin fallo silencioso | `SD-39` y `SD-40` | **Verdadera.** `SD-39` sensa que la pieza con dimensión `0.00` **se dibuja**; `SD-40` sensa que el recuento de piezas sin registro es **0** |
-| `SD-07` determinismo | `SD-41` y `SD-45` | **Verdadera.** `SD-41` compara dos cargas del mismo texto; `SD-45` compara las disposiciones en las **cuatro** combinaciones de movimiento |
-| `SD-09` siete códigos en ocho cursos | `SD-18` | **Verdadera.** `SD-18` sensa los **ocho** estados que materializan las **siete** condiciones del contrato y que **usan los códigos sin renombrarlos** |
-| `SD-11` gobierno del movimiento | `SD-44`, `SD-46` y `SD-48` | **Verdadera.** `SD-44` sensa los dos controles independientes; `SD-46`, la reposición de la orientación de partida; `SD-48`, el arranque destildado con preferencia de movimiento reducido declarada |
-| `SD-12` puertas `PT-02` y `PT-03` | `SD-42` | **Verdadera en lo que afirma, y parcial en su alcance.** `SD-42` sensa los **diez recorridos de ida y vuelta sin degradación**, que es lo que la correspondencia le atribuye. **Lo que esa fila no cubre es la otra puerta de la correspondencia, `PT-03`** —que el motor de dibujo quede **dentro** del bundle y la página funcione **sin acceso a CDN externos**, que es como el intake §17.7.P.8 define `PT-03`—, que es propiedad del bundle y **se sensa sólo del lado del `Visor`**. La correspondencia no afirma lo contrario: dice «acá las dos puertas enteras, allá los diez recorridos» |
+| `SD-10001` seis funciones de la fachada | `SD-10043` | **Verdadera.** `SD-10043` afirma que la escena se opera **exclusivamente por las seis funciones** desde el componente anfitrión |
+| `SD-10002` cero red | `SD-10043` | **Verdadera.** `SD-10043` incluye el recuento de peticiones en la pestaña de red **durante la interacción con la escena** |
+| `SD-10003` cero persistencia | `SD-10047` | **Verdadera.** `SD-10047` afirma que **la preferencia de cada movimiento es del componente anfitrión** y que la fachada no escribe ninguna clave |
+| `SD-10006` sin fallo silencioso | `SD-10039` y `SD-10040` | **Verdadera.** `SD-10039` sensa que la pieza con dimensión `0.00` **se dibuja**; `SD-10040` sensa que el recuento de piezas sin registro es **0** |
+| `SD-10007` determinismo | `SD-10041` y `SD-10045` | **Verdadera.** `SD-10041` compara dos cargas del mismo texto; `SD-10045` compara las disposiciones en las **cuatro** combinaciones de movimiento |
+| `SD-10009` siete códigos en ocho cursos | `SD-10018` | **Verdadera.** `SD-10018` sensa los **ocho** estados que materializan las **siete** condiciones del contrato y que **usan los códigos sin renombrarlos** |
+| `SD-10011` gobierno del movimiento | `SD-10044`, `SD-10046` y `SD-10048` | **Verdadera.** `SD-10044` sensa los dos controles independientes; `SD-10046`, la reposición de la orientación de partida; `SD-10048`, el arranque destildado con preferencia de movimiento reducido declarada |
+| `SD-10012` puertas `PT-02` y `PT-03` | `SD-10042` | **Verdadera en lo que afirma, y parcial en su alcance.** `SD-10042` sensa los **diez recorridos de ida y vuelta sin degradación**, que es lo que la correspondencia le atribuye. **Lo que esa fila no cubre es la otra puerta de la correspondencia, `PT-03`** —que el motor de dibujo quede **dentro** del bundle y la página funcione **sin acceso a CDN externos**, que es como el intake §17.7.P.8 define `PT-03`—, que es propiedad del bundle y **se sensa sólo del lado del `Visor`**. La correspondencia no afirma lo contrario: dice «acá las dos puertas enteras, allá los diez recorridos» |
 
 **No hay doble sensado con umbrales distintos.** Las filas de esta matriz se anclan en identificadores de línea de base **validados visualmente**; las de la matriz del `Visor` se anclan en elementos del **contrato de la fachada**. Cuando las dos miran lo mismo, lo miran desde lados distintos, y los umbrales que declaran son compatibles: **deriva mayor sin gradación en las dos** para cero red, cero persistencia, fallo silencioso, determinismo y las puertas técnicas.
 
-**Un punto que conviene dejar escrito porque las dos matrices lo tratan.** La **sexta función**, `establecerMovimiento`, se incorporó al contrato **después** de que el Product Owner aprobó la maqueta y **no fue validada visualmente**; por eso `SD-43` de esta matriz la sensa **contra el contrato y no contra la maqueta**, y así lo dice su columna de umbral y la nota al pie de su §4. La matriz del `Visor` lo declara del mismo modo. **Las dos coinciden y ninguna afirma que la maqueta la haya validado.**
+**Un punto que conviene dejar escrito porque las dos matrices lo tratan.** La **sexta función**, `establecerMovimiento`, se incorporó al contrato **después** de que el Product Owner aprobó la maqueta y **no fue validada visualmente**; por eso `SD-10043` de esta matriz la sensa **contra el contrato y no contra la maqueta**, y así lo dice su columna de umbral y la nota al pie de su §4. La matriz del `Visor` lo declara del mismo modo. **Las dos coinciden y ninguna afirma que la maqueta la haya validado.**
 
 ## 9. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.2 | 2026-08-11 | **Cierre del hueco de filas `VER-XX`** declarado en §8. La fila de la tabla de §8 que decía «no se hace: `10-Examples` no está emitida» se **conserva** con su desenlace y su fecha: la categoría 10 se emitió y AG-10 dio de alta la fila **`SD-62`** en [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.3**, desde el único contrato de verificación de esa categoría. Se precisa que el recuento **61** que esta categoría no modifica es el de filas de **línea de base**, y que `SD-62` no pertenece a ese conjunto. **Ninguna resolución de método de §8.1, ninguna correspondencia de §8.2, ningún umbral y ningún caso de prueba cambian.** Sube minor. |
-| 1.1 | 2026-08-11 | **`H-03`.** La última fila de §8.2 atribuía a `PT-02` el contenido de `PT-03` en el párrafo que certifica la correspondencia con la matriz de sensado del `Visor`: lo que `SD-42` no cubre es **`PT-03`** —el motor de dibujo dentro del bundle y la página sin acceso a CDN—, que es como el intake §17.7.P.8 define esa puerta. **`H-02`.** §2 cita ahora §17.6.P.6 como «gate bloqueante y numérico». **Las ocho correspondencias siguen siendo verdaderas y ninguna se toca**; la matriz de sensado 1.2 no se modifica. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
+| 1.2 | 2026-08-11 | **Cierre del hueco de filas `VER-XX`** declarado en §8. La fila de la tabla de §8 que decía «no se hace: `10-Examples` no está emitida» se **conserva** con su desenlace y su fecha: la categoría 10 se emitió y AG-10 dio de alta la fila **`SD-10062`** en [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.3**, desde el único contrato de verificación de esa categoría. Se precisa que el recuento **61** que esta categoría no modifica es el de filas de **línea de base**, y que `SD-10062` no pertenece a ese conjunto. **Ninguna resolución de método de §8.1, ninguna correspondencia de §8.2, ningún umbral y ningún caso de prueba cambian.** Sube minor. |
+| 1.1 | 2026-08-11 | **`H-03`.** La última fila de §8.2 atribuía a `PT-02` el contenido de `PT-03` en el párrafo que certifica la correspondencia con la matriz de sensado del `Visor`: lo que `SD-10042` no cubre es **`PT-03`** —el motor de dibujo dentro del bundle y la página sin acceso a CDN—, que es como el intake §17.7.P.8 define esa puerta. **`H-02`.** §2 cita ahora §17.6.P.6 como «gate bloqueante y numérico». **Las ocho correspondencias siguen siendo verdaderas y ninguna se toca**; la matriz de sensado 1.2 no se modifica. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la pirámide objetivo con su apartamiento del reparto de `Rules-Calidad-Y-Pruebas.md` §2.2 y el motivo —el intake §17.6.P.6 declara que este proyecto de código **no tiene proyecto de pruebas propio** y que su verificación es el guion de demostración acumulativo—, con la consecuencia de ese apartamiento dicha sin adornos y los dos instrumentos enumerables que la compensan. Declara la cobertura por unidades contables en lugar de por líneas, el tooling nombrado por función, la política de una sola clase de sustitución admitida, el uso de los **ocho** escenarios del intake §20 **en su forma original y completa**, que es propio de este proyecto de código, y el ambiente. Su §8 declara la **relación con la matriz de sensado de deriva ya emitida en la Fase B2**: qué hace esta fase con ella y qué no, la **resolución del método de verificación de sus 61 filas por familia** con el recuento cerrado, y la **verificación desde este lado de las ocho correspondencias** que la matriz de `GeometriaFactory-Visor` declara, todas confirmadas, con la precisión de alcance de la última. |

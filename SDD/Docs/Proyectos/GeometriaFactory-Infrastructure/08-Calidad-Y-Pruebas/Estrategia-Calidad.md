@@ -49,7 +49,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los valor
 | Usabilidad | **No aplica como atributo de interfaz** | `tiene_ui_final` es false (`PRODUCT-MANIFEST` §5). Su equivalente es la experiencia del desarrollador, que documenta [`../03-UX-UI-DX/DX-Developer-Experience.md`](../03-UX-UI-DX/DX-Developer-Experience.md) |
 | Portabilidad | **Baja** | Plataforma única sin sufijo de sistema operativo (intake §17.3.P.9), con el motor de almacenamiento embebido y anclado en la etapa `a` |
 
-**Los tres atributos críticos son los que el resto del producto no puede reparar.** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 lo dice con precisión: **tres reglas tienen su tramo principal acá** —`RN-08`, `RN-09` y `RN-14`— y «si acá se hacen mal, ninguna capa de más adentro puede repararlas». Esa frase es la que fija esta prioridad.
+**Los tres atributos críticos son los que el resto del producto no puede reparar.** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 lo dice con precisión: **tres reglas tienen su tramo principal acá** —`RN-06008`, `RN-06009` y `RN-06014`— y «si acá se hacen mal, ninguna capa de más adentro puede repararlas». Esa frase es la que fija esta prioridad.
 
 ## 3. Quality gates
 
@@ -59,22 +59,22 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 | --- | --- | --- | --- |
 | QG-01 | El guion de construcción termina en **0 y sin advertencias** | Etapa `build` del pipeline | **Bloquea la fusión** (intake §17.3.P.8) |
 | QG-02 | El guion de pruebas pasa **entero**: cero pruebas rojas y cero deshabilitadas sin motivo escrito | Etapa `test` del pipeline | Bloquea la fusión |
-| QG-03 | **La batería del validador pasa entera: 10 de 10**, con los **ocho** escenarios como entrada | `TC-01` a `TC-10`, contra la tabla de `05` §10.5 | Bloquea la fusión. Ver §3.2 sobre el recuento |
-| QG-04 | **Las transformaciones de esquema se aplican solas sobre un almacén inexistente**, sin paso manual | Etapa de verificación de transformaciones del pipeline, y `TC-32` | Bloquea la fusión. Es criterio de aceptación de la etapa `c` (intake §17.3.P.8) |
+| QG-03 | **La batería del validador pasa entera: 10 de 10**, con los **ocho** escenarios como entrada | `TC-06001` a `TC-06010`, contra la tabla de `05` §10.5 | Bloquea la fusión. Ver §3.2 sobre el recuento |
+| QG-04 | **Las transformaciones de esquema se aplican solas sobre un almacén inexistente**, sin paso manual | Etapa de verificación de transformaciones del pipeline, y `TC-06032` | Bloquea la fusión. Es criterio de aceptación de la etapa `c` (intake §17.3.P.8) |
 | QG-05 | La cobertura del proyecto de código alcanza **85 %** de líneas y **80 %** de ramas [ASUNCIÓN del intake §17.3.P.6] | Informe de cobertura de la etapa `test`, **por componente** | **Condicionado**, ver §3.1 |
 | QG-06 | La cobertura del **validador de figuras** alcanza **95 %** de líneas [ASUNCIÓN del intake §17.3.P.6] | Informe de cobertura acotado a los **dos motores** | **Condicionado**, ver §3.1 |
-| QG-07 | La comparación de valores usa tolerancia **0.01** absoluta con operador **estricto**: el escenario `E-1` da **exactamente 2** advertencias y no 3 | `TC-09` | **Bloquea la fusión, y no es condicionado.** El intake §22 declara expresamente que la tolerancia **no es asunción**: sale de que el emisor redondea a 2 decimales |
-| QG-08 | Los **dos motores** originan exactamente **0** peticiones de red | `TC-14`, inspección de dependencias de los dos motores | Bloquea la fusión |
-| QG-09 | **0** provisorias iguales en dos producciones consecutivas sobre la misma cuenta y entre cuentas distintas, y ninguna derivable del nombre, del correo ni de la fecha | `TC-27` | Bloquea la fusión |
-| QG-10 | **0** componentes de pieza cargados y **0** apariciones del texto original en una proyección de listado | `TC-19` | Bloquea la fusión |
-| QG-11 | **0** escrituras aceptadas que reemplacen el texto original conservado, y **0** retiros parciales tras una baja interrumpida | `TC-16` y `TC-21` | Bloquea la fusión |
-| QG-12 | **0** emisiones de acceso sin clave de firma, y **0** claves generadas al vuelo | `TC-30` | Bloquea la fusión |
-| QG-13 | **100 %** de las **17** condiciones del catálogo alcanzadas por prueba, **0** emitidas fuera del catálogo, y **0** mensajes o trazas con un secreto, la ruta del almacén o el texto del alumno | `TC-34` y `TC-35`, comparación en las dos direcciones | Bloquea la fusión |
-| QG-14 | La interpretación del texto de **3** piezas de `E-1` termina en menos de **200 ms**, medida **sin almacén** [ASUNCIÓN del intake §17.3.P.10] | `TC-15` | **Condicionado**, ver §3.1 |
+| QG-07 | La comparación de valores usa tolerancia **0.01** absoluta con operador **estricto**: el escenario `E-1` da **exactamente 2** advertencias y no 3 | `TC-06009` | **Bloquea la fusión, y no es condicionado.** El intake §22 declara expresamente que la tolerancia **no es asunción**: sale de que el emisor redondea a 2 decimales |
+| QG-08 | Los **dos motores** originan exactamente **0** peticiones de red | `TC-06014`, inspección de dependencias de los dos motores | Bloquea la fusión |
+| QG-09 | **0** provisorias iguales en dos producciones consecutivas sobre la misma cuenta y entre cuentas distintas, y ninguna derivable del nombre, del correo ni de la fecha | `TC-06027` | Bloquea la fusión |
+| QG-10 | **0** componentes de pieza cargados y **0** apariciones del texto original en una proyección de listado | `TC-06019` | Bloquea la fusión |
+| QG-11 | **0** escrituras aceptadas que reemplacen el texto original conservado, y **0** retiros parciales tras una baja interrumpida | `TC-06016` y `TC-06021` | Bloquea la fusión |
+| QG-12 | **0** emisiones de acceso sin clave de firma, y **0** claves generadas al vuelo | `TC-06030` | Bloquea la fusión |
+| QG-13 | **100 %** de las **17** condiciones del catálogo alcanzadas por prueba, **0** emitidas fuera del catálogo, y **0** mensajes o trazas con un secreto, la ruta del almacén o el texto del alumno | `TC-06034` y `TC-06035`, comparación en las dos direcciones | Bloquea la fusión |
+| QG-14 | La interpretación del texto de **3** piezas de `E-1` termina en menos de **200 ms**, medida **sin almacén** [ASUNCIÓN del intake §17.3.P.10] | `TC-06015` | **Condicionado**, ver §3.1 |
 
 **Catorce gates, y ninguno inventado.** Los que no salen del intake salen de una fila de `05` §8, que declara los **catorce** NFR de este proyecto de código.
 
-**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 asigna `PT-04` a su épica `EP-01`. Su umbral y su consecuencia son los del intake §15 —una puerta que no pasa **detiene la planificación de las etapas que dependen de ella**— y esta categoría no los mueve.
+**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 asigna `PT-04` a su épica `EP-06001`. Su umbral y su consecuencia son los del intake §15 —una puerta que no pasa **detiene la planificación de las etapas que dependen de ella**— y esta categoría no los mueve.
 
 ### 3.1 Qué significa que un gate esté condicionado
 

@@ -47,11 +47,11 @@
 | Qué se construye y en qué prioridad | [`../06-Backlog-Tecnico/`](../06-Backlog-Tecnico/) |
 | El orden de las etapas, sus criterios de transición y dónde se miden las puertas | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) |
 | Las dieciséis reglas y los nueve invariantes | `GeometriaFactory-Domain`, categorías 02 y 05 |
-| El identificador del cuarto puerto | El punto de control de la etapa `a`, **sobre la superficie de `GeometriaFactory-Application`**, que es quien lo declara. Este plan aporta el criterio de nombrado del **adaptador**, con BT-02 |
+| El identificador del cuarto puerto | El punto de control de la etapa `a`, **sobre la superficie de `GeometriaFactory-Application`**, que es quien lo declara. Este plan aporta el criterio de nombrado del **adaptador**, con BT-06002 |
 | El límite de tamaño del texto que se acepta | La categoría 05 de `GeometriaFactory-Api`. **Ya está reasignado y no se convierte en trabajo acá** |
 | La composición de raíz y la conexión de los adaptadores | `GeometriaFactory-Api`. Este proyecto de código **declara sus adaptadores y no los registra** |
 | La Definition of Done canónica y el guion de medición | `08-Calidad-Y-Pruebas`, **todavía no emitida** |
-| Las tres puertas de cobertura y el pipeline | `09-Devops`, **todavía no emitida**. Hasta que BT-23 cierre, **no se declaran bloqueantes** |
+| Las tres puertas de cobertura y el pipeline | `09-Devops`, **todavía no emitida**. Hasta que BT-06023 cierre, **no se declaran bloqueantes** |
 
 ## 5. Control de cambios
 

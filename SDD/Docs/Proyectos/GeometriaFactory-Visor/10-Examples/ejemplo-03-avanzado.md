@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/visor/03-avanzado/`
-**Trazabilidad upstream:** [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Ejercitar-La-Fachada-Sin-Backend.md) y [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Gobernar-El-Movimiento-Automatico-De-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4.6, §5.4, §5.5 y §6; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §6, las **seis** propiedades transversales; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-13` a `TC-21`; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md); `PRODUCT-INTAKE` 1.22 §15 puertas `PT-02` y `PT-03`, §17.7.P.6 y §18
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-03` como sonda `SD-15`; [`../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md`](../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md), que lo usa como batería de aceptación de un reemplazo; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`CU-12006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) y [`CU-12007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4.6, §5.4, §5.5 y §6; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §6, las **seis** propiedades transversales; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12013` a `TC-12021`; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md); `PRODUCT-INTAKE` 1.22 §15 puertas `PT-02` y `PT-03`, §17.7.P.6 y §18
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-12003` como sonda `SD-12015`; [`../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md`](../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md), que lo usa como batería de aceptación de un reemplazo; `11-Documentacion` cuando se emita
 
 ---
 
@@ -55,8 +55,8 @@ samples/visor/03-avanzado/
 │   ├── E1.txt  E7.txt                 # Transcriptos del PRODUCT-INTAKE §20, sin modificación
 │   └── trabajos.<ext>                 # Dos trabajos entre los que ir y volver diez veces
 └── tests/
-    ├── seis-funciones-sin-backend.<ext>   # CU-06 y las seis propiedades transversales
-    ├── gobierno-del-movimiento.<ext>      # CU-07 y las ocho reglas de §5.5
+    ├── seis-funciones-sin-backend.<ext>   # CU-12006 y las seis propiedades transversales
+    ├── gobierno-del-movimiento.<ext>      # CU-12007 y las ocho reglas de §5.5
     └── puertas-tecnicas.<ext>             # PT-02 y PT-03, y la inspección del bundle generado
 ```
 
@@ -107,15 +107,15 @@ La última variación es el motivo por el que existe el punto de extensión: si 
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-06`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06-Ejercitar-La-Fachada-Sin-Backend.md) | Caso de uso | Actos `[1]` y `[2]`. Es el caso de uso que **materializa el sample S-1** |
-| [`CU-07`](../02-Especificacion-Funcional/Casos-De-Uso/CU-07-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) | Caso de uso | Actos `[3]` a `[9]`: las **ocho** reglas de gobierno de §5.5 |
+| [`CU-12006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) | Caso de uso | Actos `[1]` y `[2]`. Es el caso de uso que **materializa el sample S-1** |
+| [`CU-12007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) | Caso de uso | Actos `[3]` a `[9]`: las **ocho** reglas de gobierno de §5.5 |
 | Garantía `G-1` · Cero red | Garantía del contrato de fachada | Actos `[10b]` y `[13]`, con su condición de medición |
 | Garantía `G-2` · Cero persistencia | Garantía del contrato de fachada | Acto `[14]` |
 | Garantía `G-3` · Sin configuración propia | Garantía del contrato de fachada | Acto `[3]` y la segunda variación |
 | Garantía `G-6` · Determinismo | Garantía del contrato de fachada | Acto `[5]`: ningún movimiento altera la disposición |
-| [`ADR-03`](../05-Arquitectura-Tecnica/Adrs/ADR-03-Visualizador-Puro-Sin-Red-Ni-Identidad.md) | Decisión arquitectónica | Actos `[2]`, `[13]` y `[14]` |
-| [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) | Decisión arquitectónica | Acto `[11]` y la cuarta variación |
-| [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) | Decisión arquitectónica | Actos `[10]` y `[10b]`, sobre el **bundle generado** |
+| [`ADR-12003`](../05-Arquitectura-Tecnica/Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) | Decisión arquitectónica | Actos `[2]`, `[13]` y `[14]` |
+| [`ADR-12004`](../05-Arquitectura-Tecnica/Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) | Decisión arquitectónica | Acto `[11]` y la cuarta variación |
+| [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) | Decisión arquitectónica | Actos `[10]` y `[10b]`, sobre el **bundle generado** |
 | **`PT-02`** del `PRODUCT-INTAKE` §15 y §17.7.P.8 | Puerta técnica | Acto `[12]`, en sus cinco tramos |
 | **`PT-03`** del `PRODUCT-INTAKE` §15 y §17.7.P.8 | Puerta técnica | Acto `[11]` |
 | **RA-01** del `PRODUCT-INTAKE` §14 | Regla de arquitectura del producto | Actos `[10b]` y `[13]`: el archivo de guion **es** el JavaScript del navegador del producto, y al no hacer red no puede invocar la API |
@@ -126,8 +126,8 @@ La última variación es el motivo por el que existe el punto de extensión: si 
 
 ```yaml
 verificacion:
-  id: VER-03
-  verifica: [CU-06, CU-07, US-02, US-12, US-13, US-14]
+  id: VER-12003
+  verifica: [CU-12006, CU-12007, US-12002, US-12012, US-12013, US-12014]
   comando: "bash scripts/build-visor.sh && npm --prefix samples/visor/03-avanzado run verify"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -159,4 +159,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Tercera parte del sample **S-1**, la que cierra su promesa: ejerce las **seis** funciones de la fachada sin ninguna pieza del backend. Cubre `CU-06` y `CU-07`, las **ocho** reglas de gobierno del movimiento de §5.5, las **seis** propiedades transversales, los **siete** códigos y las **dos** puertas técnicas `PT-02` y `PT-03`. El contrato `VER-03` declara nueve líneas exactas de salida y **tres precondiciones que son condiciones de medición vinculantes**; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Tercera parte del sample **S-1**, la que cierra su promesa: ejerce las **seis** funciones de la fachada sin ninguna pieza del backend. Cubre `CU-12006` y `CU-12007`, las **ocho** reglas de gobierno del movimiento de §5.5, las **seis** propiedades transversales, los **siete** códigos y las **dos** puertas técnicas `PT-02` y `PT-03`. El contrato `VER-12003` declara nueve líneas exactas de salida y **tres precondiciones que son condiciones de medición vinculantes**; `evidencia` queda en `No verificado — sin código`. |

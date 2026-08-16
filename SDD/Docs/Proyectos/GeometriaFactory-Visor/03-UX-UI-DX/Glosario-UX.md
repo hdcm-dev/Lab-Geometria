@@ -100,7 +100,7 @@ Los dos sentidos conviven **dentro de una misma tabla**, que es el caso en que l
 | Referente | Qué designa | Dónde nace | Forma que le corresponde |
 | --- | --- | --- | --- |
 | De integración | Secuencia de invocaciones de las seis funciones que verifica el contrato de punta a punta | Esta categoría (§2.1) | **Siempre calificado**: «recorrido de integración» |
-| De continuidad de uso | Cada ida y vuelta entre trabajos, de los diez con que se verifica que la visualización no degrada | `NB-06` §5, tercer criterio; `CU-05` CA-04 | **Siempre calificado**: «recorrido de ida y vuelta» |
+| De continuidad de uso | Cada ida y vuelta entre trabajos, de los diez con que se verifica que la visualización no degrada | `NB-00006` §5, tercer criterio; `CU-12005` CA-04 | **Siempre calificado**: «recorrido de ida y vuelta» |
 
 **La forma desnuda «recorrido» no se usa como sustantivo en esta categoría.** Es el corolario de `Vocabulario-Rules.md` §9.2: cuando conviven dos formas calificadas, el término desnudo es el defecto.
 

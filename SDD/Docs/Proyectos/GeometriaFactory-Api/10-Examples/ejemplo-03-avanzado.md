@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/api/03-avanzado/`
-**Trazabilidad upstream:** [`CU-10`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) y [`CU-11`](../02-Especificacion-Funcional/Casos-De-Uso/CU-11-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md); [`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Host-Delgado-Con-Composicion-De-Raiz-Unica.md), [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) y [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md); [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, punto `A-16`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-03` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`CU-00010`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) y [`CU-00011`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md); [`ADR-00001`](../05-Arquitectura-Tecnica/Adrs/ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md), [`ADR-00002`](../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00006`](../05-Arquitectura-Tecnica/Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) y [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md); [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, punto `A-16`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-00003` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -46,10 +46,10 @@ samples/api/03-avanzado/
 ├── README.md                          # Copia corta de §1, §3 y §4 de este documento
 ├── run.sh                             # Punto de entrada único: arranca, inspecciona y detiene
 ├── Actos/
-│   ├── ActoArranqueSano.<ext>         # CU-11, fase 1 y fase 2
+│   ├── ActoArranqueSano.<ext>         # CU-00011, fase 1 y fase 2
 │   ├── ActoSalud.<ext>                # A-16, sin acceso firmado
-│   ├── ActoArranqueDetenido.<ext>     # CU-11, sobre el almacén de linaje desconocido
-│   └── ActoInspeccionDeComposicion.<ext>  # CU-10, los cuatro puertos y la configuración
+│   ├── ActoArranqueDetenido.<ext>     # CU-00011, sobre el almacén de linaje desconocido
+│   └── ActoInspeccionDeComposicion.<ext>  # CU-00010, los cuatro puertos y la configuración
 ├── almacenes/
 │   └── linaje-desconocido.md          # Cómo se compone, y la constancia de que lo compone el sample
 └── esperado/
@@ -75,7 +75,7 @@ Actos recorridos: 4 | Arranques: 2 | Arranques detenidos: 1 | Diferencias contra
 
 **La primera línea con `peticiones atendidas durante la fase 1: 0` es el arranque en dos fases medido.** Las transformaciones se aplican **antes** de que la superficie atienda: si alguna petición entrara durante la fase 1, operaría sobre un almacén a medio preparar y nadie se enteraría.
 
-**La línea `[3]` con el arranque detenido es una buena noticia, no una falla del sample.** Ante un linaje que no se entiende, el servicio **no arranca**. Atender peticiones sobre un almacén dudoso es peor que no atender ninguna, y `US-28` lo exige explícitamente.
+**La línea `[3]` con el arranque detenido es una buena noticia, no una falla del sample.** Ante un linaje que no se entiende, el servicio **no arranca**. Atender peticiones sobre un almacén dudoso es peor que no atender ninguna, y `US-00028` lo exige explícitamente.
 
 **La segunda línea de `[3]` es `RA-03` en el peor momento posible.** El mensaje del arranque detenido es el que más tienta a incluir la ruta del archivo o una traza, porque quien lo lee está diagnosticando. **No las lleva**: la ruta del almacén es una dirección de servicio interno a los efectos de esa regla.
 
@@ -89,19 +89,19 @@ Actos recorridos: 4 | Arranques: 2 | Arranques detenidos: 1 | Diferencias contra
 | --- | --- | --- |
 | Atender durante la fase 1 | Exponer la superficie antes de aplicar las transformaciones | La primera línea pasa a un número mayor que 0 y el criterio falla. Es lo que el arranque en dos fases viene a impedir |
 | Arrancar igual con linaje desconocido | Continuar el arranque en lugar de detenerlo | `Arranques detenidos` pasa a **0** y el servicio atiende sobre un almacén en el que no se puede confiar |
-| Conectar un puerto fuera de la composición de raíz | Instanciar un adaptador dentro de un punto de acceso | La línea de `conectados fuera de la composicion de raiz` pasa a **1**: el host deja de ser delgado (`ADR-01`) |
+| Conectar un puerto fuera de la composición de raíz | Instanciar un adaptador dentro de un punto de acceso | La línea de `conectados fuera de la composicion de raiz` pasa a **1**: el host deja de ser delgado (`ADR-00001`) |
 | Agregar configuración de intercambio de origen cruzado | Habilitarla «por las dudas» | La línea `[5]` deja de decir ausente, y con eso se declara que el navegador alcanza esta superficie. Rompe `RA-01`, que es regla de nivel producto |
 
 ## 8. Trazabilidad
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-10`](../02-Especificacion-Funcional/Casos-De-Uso/CU-10-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | Caso de uso | Conecta **4 de 4** puertos con su adaptador, en un solo lugar, tomando la configuración del entorno |
-| [`CU-11`](../02-Especificacion-Funcional/Casos-De-Uso/CU-11-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | Caso de uso | Arranca en dos fases, responde salud y **detiene** el arranque ante un linaje desconocido |
-| [`ADR-01`](../05-Arquitectura-Tecnica/Adrs/ADR-01-Host-Delgado-Con-Composicion-De-Raiz-Unica.md) | Decisión arquitectónica | **0** conexiones de puerto fuera de la composición de raíz |
-| [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Formato-De-Intercambio-Y-Su-Configuracion.md) | Decisión arquitectónica | **1** sola configuración de intercambio declarada en el proceso |
-| [`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) | Decisión arquitectónica | Los ciclos de vida y la configuración resueltos en un único lugar |
-| [`ADR-07`](../05-Arquitectura-Tecnica/Adrs/ADR-07-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) | Decisión arquitectónica | Las dos fases con **0** peticiones atendidas en la primera, y el punto de salud sin acceso |
+| [`CU-00010`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | Caso de uso | Conecta **4 de 4** puertos con su adaptador, en un solo lugar, tomando la configuración del entorno |
+| [`CU-00011`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | Caso de uso | Arranca en dos fases, responde salud y **detiene** el arranque ante un linaje desconocido |
+| [`ADR-00001`](../05-Arquitectura-Tecnica/Adrs/ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md) | Decisión arquitectónica | **0** conexiones de puerto fuera de la composición de raíz |
+| [`ADR-00002`](../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) | Decisión arquitectónica | **1** sola configuración de intercambio declarada en el proceso |
+| [`ADR-00006`](../05-Arquitectura-Tecnica/Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) | Decisión arquitectónica | Los ciclos de vida y la configuración resueltos en un único lugar |
+| [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) | Decisión arquitectónica | Las dos fases con **0** peticiones atendidas en la primera, y el punto de salud sin acceso |
 | `RA-01` | Regla de arquitectura del producto | **0** configuración de intercambio de origen cruzado y **0** canal de sesión interactiva: el navegador no alcanza esta superficie |
 | `RA-03` | Regla de arquitectura del producto | El mensaje del arranque detenido no lleva ruta, dirección ni traza |
 
@@ -109,8 +109,8 @@ Actos recorridos: 4 | Arranques: 2 | Arranques detenidos: 1 | Diferencias contra
 
 ```yaml
 verificacion:
-  id: VER-03
-  verifica: [CU-10, CU-11, US-26, US-27, US-28, US-29]
+  id: VER-00003
+  verifica: [CU-00010, CU-00011, US-00026, US-00027, US-00028, US-00029]
   comando: "bash samples/api/03-avanzado/run.sh"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -151,4 +151,4 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-10` y `CU-11`, que son lo que este proyecto de código tiene de propio: la composición de raíz con **4 de 4** puertos y **0** conexiones fuera de ella, y el arranque en dos fases con **0** peticiones atendidas en la primera y el arranque **detenido** ante un linaje desconocido. Ejercita `A-16`, el único punto que la colección del sample 02 deja fuera de su archivo, y verifica `RA-01` y `RA-03` con umbral cero. El contrato `VER-03` declara **dos** aserciones de respuesta HTTP, ocho líneas exactas de salida y **tres aserciones negativas** sobre defectos que dejan el servicio aparentemente funcionando; `evidencia` queda en `No verificado — sin código`. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-00010` y `CU-00011`, que son lo que este proyecto de código tiene de propio: la composición de raíz con **4 de 4** puertos y **0** conexiones fuera de ella, y el arranque en dos fases con **0** peticiones atendidas en la primera y el arranque **detenido** ante un linaje desconocido. Ejercita `A-16`, el único punto que la colección del sample 02 deja fuera de su archivo, y verifica `RA-01` y `RA-03` con umbral cero. El contrato `VER-00003` declara **dos** aserciones de respuesta HTTP, ocho líneas exactas de salida y **tres aserciones negativas** sobre defectos que dejan el servicio aparentemente funcionando; `evidencia` queda en `No verificado — sin código`. |

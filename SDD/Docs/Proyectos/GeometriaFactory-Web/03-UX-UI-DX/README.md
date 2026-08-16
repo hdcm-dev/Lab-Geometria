@@ -7,7 +7,7 @@
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
-**Trazabilidad upstream:** `../02-Especificacion-Funcional/` completo —`Especificacion-Funcional.md` con sus §6 y §7, los diez casos de uso `CU-01` a `CU-10` y `Glosario-Funcional.md`—; `../../../00-Contexto/Vision-Producto.md` §2, §3, §9; `../../../00-Contexto/Alcance-Producto.md` §4.1; `../../../00-Contexto/Compatibilidad-Plataformas.md` §2.2 y §4; las nueve `NB-XX` de `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/`; `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4, §4.2, §5, §6, §7, §14 y §17.6 íntegro; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` §5 (flags del proyecto de código); catálogo de diseño de `Devs/References/Design/`
+**Trazabilidad upstream:** `../02-Especificacion-Funcional/` completo —`Especificacion-Funcional.md` con sus §6 y §7, los diez casos de uso `CU-10001` a `CU-10010` y `Glosario-Funcional.md`—; `../../../00-Contexto/Vision-Producto.md` §2, §3, §9; `../../../00-Contexto/Alcance-Producto.md` §4.1; `../../../00-Contexto/Compatibilidad-Plataformas.md` §2.2 y §4; las nueve `NB-XX` de `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/`; `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4, §4.2, §5, §6, §7, §14 y §17.6 íntegro; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` §5 (flags del proyecto de código); catálogo de diseño de `Devs/References/Design/`
 **Trazabilidad downstream:** la **Fase B2** de validación visual de maqueta, que es el downstream inmediato; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`; `11-Documentacion`
 
 ---
@@ -80,21 +80,21 @@ El criterio es **una superficie por caso de uso**, con dos ajustes y una fusión
 
 | Superficie | Caso de uso |
 | --- | --- |
-| `Aprovisionamiento-Inicial` | CU-04 FA-03 y FA-04 |
-| `Registro-De-Cuenta` | CU-01 |
-| `Ingreso` | CU-02 |
-| `Credencial-Propia` | CU-03 |
-| `Panel-De-Trabajos-Del-Alumno` | CU-06 |
-| `Envio-De-Trabajo` | CU-05 |
-| `Vista-De-Trabajo` | CU-07 |
-| `Resolucion-Del-Trabajo` | CU-09 |
-| `Panel-De-Cuentas` | CU-04 flujo principal, FA-01, FA-02, FA-05 |
-| `Listado-De-La-Comision` | CU-08 |
-| `Estado-Degradado-Y-Reconexion` | CU-10 |
+| `Aprovisionamiento-Inicial` | CU-10004 FA-03 y FA-04 |
+| `Registro-De-Cuenta` | CU-10001 |
+| `Ingreso` | CU-10002 |
+| `Credencial-Propia` | CU-10003 |
+| `Panel-De-Trabajos-Del-Alumno` | CU-10006 |
+| `Envio-De-Trabajo` | CU-10005 |
+| `Vista-De-Trabajo` | CU-10007 |
+| `Resolucion-Del-Trabajo` | CU-10009 |
+| `Panel-De-Cuentas` | CU-10004 flujo principal, FA-01, FA-02, FA-05 |
+| `Listado-De-La-Comision` | CU-10008 |
+| `Estado-Degradado-Y-Reconexion` | CU-10010 |
 
-- **CU-04 se parte en dos superficies**, porque su aprovisionamiento vive en otro shell, se usa una vez en la vida de la instancia y tiene guard propio. La partición es de presentación y no contradice la fusión que la categoría 02 decidió: allá el criterio de recorte era el objeto sobre el que se actúa, acá es la unidad maquetable.
-- **CU-10 se emite como superficie propia aunque sea transversal**, porque el estado degradado es una superficie y no un error, y documentarlo una vez evita que diez wireframes lo redibujen distinto.
-- **CU-09 no tiene ruta propia**: su bloque de decisión se aloja en `Vista-De-Trabajo`. Se emite como wireframe separado porque tiene mapa de estados e interacciones propios y porque la maqueta lo va a tener que demostrar como recorrido.
+- **CU-10004 se parte en dos superficies**, porque su aprovisionamiento vive en otro shell, se usa una vez en la vida de la instancia y tiene guard propio. La partición es de presentación y no contradice la fusión que la categoría 02 decidió: allá el criterio de recorte era el objeto sobre el que se actúa, acá es la unidad maquetable.
+- **CU-10010 se emite como superficie propia aunque sea transversal**, porque el estado degradado es una superficie y no un error, y documentarlo una vez evita que diez wireframes lo redibujen distinto.
+- **CU-10009 no tiene ruta propia**: su bloque de decisión se aloja en `Vista-De-Trabajo`. Se emite como wireframe separado porque tiene mapa de estados e interacciones propios y porque la maqueta lo va a tener que demostrar como recorrido.
 
 Cada superficie declara su **nombre canónico** en la sección 1 de su wireframe, y ése es el nombre que la maqueta y la línea de base visual van a reusar sin cambios.
 
@@ -139,7 +139,7 @@ Cada superficie declara su **nombre canónico** en la sección 1 de su wireframe
 | `Design-Rules-Primer-Arranque.md` | **Aplicado** | El producto se despliega por instancia y arranca sin la configuración mínima que lo hace utilizable: no hay administrador hasta que alguien lo configura |
 | `Design-Rules-Identidad-De-Version.md` | **Aplicado** | El producto produce artefactos desplegables identificables y esta pieza es la que tiene superficies donde exhibir el sello |
 | `Design-Rules-Config-Esquema.md` | **No aplica** | **No hay superficies de configuración que la persona fije.** El único parámetro configurable del proyecto de código es la dirección de la pieza de datos, que es **configuración de entorno** —se inyecta al publicar— y no configuración de aplicación. Por la frontera de `Rules-UX-UI-DX.md` §1.4, un parámetro que la superficie no gobierna **no se dibuja, ni siquiera deshabilitado** |
-| `Design-Rules-Acceso-Monousuario.md` | **No aplica** | El producto declara **dos papeles** y tiene gestión de cuentas: registro, habilitación, bloqueo y baja. La condición de carga de la extensión es una sola identidad de operación **sin** gestión de usuarios ni papeles diferenciados, y no se cumple. Rige el patrón de acceso general del documento base. Lo que sí se hereda por coincidencia de forma, y se declara para que no parezca omisión, es el shell partido —que la extensión de primer arranque también fija— y el rechazo de credenciales indiferenciado, que acá viene exigido por `CU-02` §6 y no por esta extensión |
+| `Design-Rules-Acceso-Monousuario.md` | **No aplica** | El producto declara **dos papeles** y tiene gestión de cuentas: registro, habilitación, bloqueo y baja. La condición de carga de la extensión es una sola identidad de operación **sin** gestión de usuarios ni papeles diferenciados, y no se cumple. Rige el patrón de acceso general del documento base. Lo que sí se hereda por coincidencia de forma, y se declara para que no parezca omisión, es el shell partido —que la extensión de primer arranque también fija— y el rechazo de credenciales indiferenciado, que acá viene exigido por `CU-10002` §6 y no por esta extensión |
 
 **Ningún token visual se define en esta sección.** Todos se heredan del catálogo, y los patrones se referencian por su nombre del catálogo en lugar de redibujarse.
 
@@ -164,4 +164,4 @@ Cada superficie declara su **nombre canónico** en la sección 1 de su wireframe
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, **sin subir versión** por `Master-Prompt.md` §5. §1 pasa de diecisiete a **veinte** documentos y lista los tres artefactos de línea de base emitidos. §5 pasa de declararlos previstos a declararlos **emitidos**, con la aprobación explícita del Product Owner del 2026-08-09, y declara el cuarto artefacto que la fase emitió fuera de esta carpeta: la matriz de sensado de deriva, en `../08-Calidad-Y-Pruebas/`. El párrafo «qué le toca después» pasa a declarar qué artefactos absorbieron la retroalimentación y por qué ninguno subió versión ni requirió archivado. |
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-11`**: §5 afirmaba que «el modelo UX-UI de `Devs/Modelos-UX-UI/` no está elegido a esta fecha» en el mismo documento que declara la Fase B2 ejecutada y cerrada. Pasa a declarar el **resultado del paso 1**: el catálogo de modelos estaba vacío, la única opción ofrecible era la de por defecto, el humano eligió el **catálogo base de `References/Design/`**, y no se capitalizó ningún modelo nuevo. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, con sus dos decisiones. **(a) F-26**: §1 declara el **tercer curso** de `Credencial-Propia`, y §6 corrige la enumeración de capacidades ausentes, que decía «no hay recuperación de contraseña» sin más: lo que no hay es recuperación **autónoma**, y el reseteo por el administrador sí existe. **(b) F-25**: §6 corrige la formulación de RA-02, que declaraba **cinco** funciones del bundle y son **seis**, y suma que es la pieza pública la que consulta el entorno del navegador y manda los dos valores de verdad. **Los recuentos de la sección no cambian**: siguen siendo veinte documentos, once wireframes y once superficies; F-26 no agrega superficie, porque el cambio forzado es un curso de `Credencial-Propia` y el reseteo es una operación de `Panel-De-Cuentas`. |
-| 1.2 | 2026-08-10 | Alineación con `PRODUCT-INTAKE` **1.13** §4.1 (**RN-16**) y la precisión de **F-04**: habilitar produce la contraseña provisoria, con lo cual el curso de establecimiento **sin credencial vigente deja de existir** y el primer ingreso pasa a recorrer el mismo formulario de tres campos que los otros dos. §2 reescribe la fila de `Wireframes-Credencial-Propia.md`, que sigue teniendo **tres** cursos pero con el primero cambiado. Ningún artefacto se agrega ni se omite. (DX Lead (AG-03)). |
+| 1.2 | 2026-08-10 | Alineación con `PRODUCT-INTAKE` **1.13** §4.1 (**RN-10016**) y la precisión de **F-04**: habilitar produce la contraseña provisoria, con lo cual el curso de establecimiento **sin credencial vigente deja de existir** y el primer ingreso pasa a recorrer el mismo formulario de tres campos que los otros dos. §2 reescribe la fila de `Wireframes-Credencial-Propia.md`, que sigue teniendo **tres** cursos pero con el primero cambiado. Ningún artefacto se agrega ni se omite. (DX Lead (AG-03)). |

@@ -33,24 +33,24 @@
 
 | Épica | Etapa del producto | Historias | Tareas técnicas |
 | --- | --- | --- | --- |
-| EP-01 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-01 a BT-06 |
-| EP-02 Identidad del administrador y sesión | `c` | US-03, US-07, US-09, US-28 | BT-07, BT-08, BT-10, BT-12, BT-14 |
-| EP-03 Ciclo de vida de la cuenta de alumno | `d` | US-01, US-02, US-04, US-05, US-06, US-08, US-29, US-30, US-31, US-32 | BT-10, BT-11, BT-12, BT-13, BT-14, BT-21 |
-| EP-04 Gestión del trabajo | `e` | US-10, US-11, US-12, US-17, US-19, US-20, US-21, US-22, US-26 | BT-09, BT-15, BT-16 |
-| EP-05 Interpretación y verificación del dato del alumno | `f` | US-13, US-14, US-15, US-16 | BT-15, BT-19 |
-| EP-06 Desenlace de la entrega | `h` | US-18, US-23, US-24, US-25, US-27 | BT-15, BT-17 |
+| EP-04001 Esqueleto ambulante y verificación de viabilidad | `a` | Ninguna | BT-04001 a BT-04006 |
+| EP-04002 Identidad del administrador y sesión | `c` | US-04003, US-04007, US-04009, US-04028 | BT-04007, BT-04008, BT-04010, BT-04012, BT-04014 |
+| EP-04003 Ciclo de vida de la cuenta de alumno | `d` | US-04001, US-04002, US-04004, US-04005, US-04006, US-04008, US-04029, US-04030, US-04031, US-04032 | BT-04010, BT-04011, BT-04012, BT-04013, BT-04014, BT-04021 |
+| EP-04004 Gestión del trabajo | `e` | US-04010, US-04011, US-04012, US-04017, US-04019, US-04020, US-04021, US-04022, US-04026 | BT-04009, BT-04015, BT-04016 |
+| EP-04005 Interpretación y verificación del dato del alumno | `f` | US-04013, US-04014, US-04015, US-04016 | BT-04015, BT-04019 |
+| EP-04006 Desenlace de la entrega | `h` | US-04018, US-04023, US-04024, US-04025, US-04027 | BT-04015, BT-04017 |
 
 **Las etapas `b` y `g` no producen épica en este proyecto de código**, y el motivo está en [`Product-Backlog.md`](Product-Backlog.md) §2: ninguna de las dos orquesta un caso de uso ni ejerce una comprobación de autorización.
 
 ## 4. Historias `Must Have` del tramo comprometido
 
-**Treinta y una de las treinta y dos.** La única `Should` es **US-16** —terminar de forma controlada cuando la interpretación no está disponible—, y lo es porque su origen no es una capacidad del intake sino una decisión de esta arquitectura (`05` §4). El fundamento completo está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
+**Treinta y una de las treinta y dos.** La única `Should` es **US-04016** —terminar de forma controlada cuando la interpretación no está disponible—, y lo es porque su origen no es una capacidad del intake sino una decisión de esta arquitectura (`05` §4). El fundamento completo está en [`Product-Backlog.md`](Product-Backlog.md) §4.2.
 
 **Las treinta y dos están dentro del tramo comprometido de ocho etapas**: este proyecto de código no tiene ninguna historia de la fase `i…`.
 
 ## 5. Tareas técnicas prioritarias
 
-**BT-02**, porque cierra el nombre del **cuarto puerto** —el que ninguna fuente declara— en el punto de control de la etapa `a`, y `05` §9 le asigna probabilidad **alta** al retrabajo si se fija sin ese punto de control. **BT-06**, la puerta de cero pruebas que tocan la base de datos real, porque es lo que hace verificable la autorización por pertenencia sin base, que es exactamente lo que la fuente exige probar. **BT-10** y **BT-11**, la guarda con las cuatro comprobaciones en orden fijo y su matriz de ejercicio, porque un camino que ejerza una capacidad sin resolver antes la marca es el riesgo de impacto **muy alto** de `05` §9.
+**BT-04002**, porque cierra el nombre del **cuarto puerto** —el que ninguna fuente declara— en el punto de control de la etapa `a`, y `05` §9 le asigna probabilidad **alta** al retrabajo si se fija sin ese punto de control. **BT-04006**, la puerta de cero pruebas que tocan la base de datos real, porque es lo que hace verificable la autorización por pertenencia sin base, que es exactamente lo que la fuente exige probar. **BT-04010** y **BT-04011**, la guarda con las cuatro comprobaciones en orden fijo y su matriz de ejercicio, porque un camino que ejerza una capacidad sin resolver antes la marca es el riesgo de impacto **muy alto** de `05` §9.
 
 ## 6. Definition of Ready vigente
 

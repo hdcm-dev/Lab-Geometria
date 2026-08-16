@@ -134,7 +134,7 @@ Contados a mano sobre los archivos, no leídos de una declaración.
 | Casos en la batería del validador | **10** | `PRODUCT-INTAKE` 1.26 §17.5.P.8: «incluidas las **diez** pruebas del validador» | Ningún artefacto auditado lo cita. Ver §9 |
 | Casos de uso de `GeometriaFactory-Contracts` | **8** | `ls` de su `Casos-De-Uso/` | **Coherente**: «los ocho contratos de uso», en seis lugares |
 | Casos de uso de `GeometriaFactory-Application` | **11** | `ls` de su `Casos-De-Uso/` | **Coherente**: §7.4 los mapea los once, uno por uno |
-| Necesidades de negocio | **9** | NB-01 a NB-09 | **Coherente**; la matriz §7.1 tiene nueve filas y la cobertura inversa, doce |
+| Necesidades de negocio | **9** | NB-00001 a NB-00009 | **Coherente**; la matriz §7.1 tiene nueve filas y la cobertura inversa, doce |
 | Historias previstas | **30** | Filas de §7.3, `US-01` a `US-30` sin huecos | **Coherente** |
 | Puntos abiertos | **11** = 7 propios + 4 heredados | Filas vivas de §11 | **Coherente en el total; contradictorio en el reparto** de uno (`P2-06`) |
 
@@ -160,7 +160,7 @@ Se abrieron las fuentes. **Ninguna cita entrecomillada se dio por buena.** Se pr
 | «El conjunto cerrado tiene quince códigos» | `Definicion-Superficie-HTTP.md` §6 | `Contracts/CU-06` §10 | **Verdadera, literal** |
 | «los **once** casos de uso» de la capa de aplicación | `Especificacion-Funcional.md` §7.4 | `ls` de `Application/02/Casos-De-Uso/` | **Verdadera**, y los once están mapeados |
 | «`GeometriaFactory-Infrastructure` §7.2 declara ser **una de las dos** secciones que cubren las nueve necesidades» | `Especificacion-Funcional.md` §7.2 y §11 | `Infrastructure/02/Especificacion-Funcional.md` §7.2, línea 171 | **Verdadera, literal.** El residuo que esta categoría anota para que otro lo absorba **existe y sigue abierto** |
-| «`GeometriaFactory-Application` declara explícitamente que no toca NB-08» | `Especificacion-Funcional.md` §7.2 | `Application/02/Especificacion-Funcional.md`, matriz §7.1 y su tabla de necesidades sin CU | **Verdadera** |
+| «`GeometriaFactory-Application` declara explícitamente que no toca NB-00008» | `Especificacion-Funcional.md` §7.2 | `Application/02/Especificacion-Funcional.md`, matriz §7.1 y su tabla de necesidades sin CU | **Verdadera** |
 | «`Especificacion-Funcional.md` §6 dice: trece con tramo acá, **dos** sin él» | `03/README.md` §6 y `DX-Developer-Experience.md` §8 | `Especificacion-Funcional.md` §6 | **FALSA.** §6 dice «Trece de las dieciséis tienen tramo acá y **tres** no lo tienen» → `P1-05` |
 | «el catálogo de las **18 entradas** — **16** códigos con destino más **2** sin código» | `03/README.md` §2, `Glosario-UX.md` §2 y §3.1, `DX-Developer-Experience.md` §5 y §6, `Guia-Onboarding-Developer.md` §3.5 | `DX-Error-Messages.md` §2.1, §3, §6.1, §6.2 | **FALSA en los seis lugares.** El catálogo dice dieciséis entradas, catorce con destino → `P0-01` |
 | «§7 declara las **seis** ausencias de la superficie» | `02/README.md` §4 | `Definicion-Superficie-HTTP.md` §7 | **FALSA.** Son siete, y el mismo README §1 dice siete → `P2-03` |

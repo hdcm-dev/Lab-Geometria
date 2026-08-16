@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.1.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.1.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 
 ---
@@ -53,7 +53,7 @@ La partición no es en capas de despliegue —no las hay— sino en los **cinco 
 | --- | --- | --- | --- | --- |
 | Núcleo de entidades | 90 % | 85 % | 60 % | Piso del intake §17.1.P.6 |
 | Guardas de cuenta | 95 % | 90 % | 60 % | Sube sobre el piso: es el componente donde el P0 del producto y su reincidencia se abrieron (`05` §9, segundo riesgo) |
-| Evaluador de admisibilidad | 100 % | 100 % | 60 % | Es la **puerta única** de `INV-06` y de `INV-09` ([`ADR-05`](../05-Arquitectura-Tecnica/Adrs/ADR-05-Guarda-Unica-De-Admisibilidad.md)). Una rama sin cubrir acá es una guarda que nadie ejerce |
+| Evaluador de admisibilidad | 100 % | 100 % | 60 % | Es la **puerta única** de `INV-06` y de `INV-09` ([`ADR-02005`](../05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md)). Una rama sin cubrir acá es una guarda que nadie ejerce |
 | Máquina de estados del trabajo | 95 % | 90 % | 60 % | Sostiene cinco de los nueve invariantes (`05` §10.3) |
 | Adopción de la interpretación | 90 % | 85 % | 60 % | Piso del intake |
 | **Proyecto de código completo** | **90 %** | **85 %** | **60 %** | Intake §17.1.P.6 [ASUNCIÓN] y `Rules-Calidad-Y-Pruebas.md` §2.2 para el mutation score |
@@ -89,18 +89,18 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 | --- | --- |
 | Terminación controlada | Para toda operación y todo estado inicial admisible, o el efecto se aplica entero o la entidad queda como estaba (`05` §4, última viñeta) |
 | Conjunto cerrado de condiciones | Para toda invocación que rechaza, el código devuelto pertenece a las **42** condiciones del catálogo |
-| Indistinguibilidad | Para todo trabajo ajeno y todo trabajo inexistente, el resultado de `CU-09` es el mismo (`RN-03`, `INV-02`) |
+| Indistinguibilidad | Para todo trabajo ajeno y todo trabajo inexistente, el resultado de `CU-02009` es el mismo (`RN-02003`, `INV-02`) |
 | Terminalidad | Para todo trabajo en `Finalizado` o en `Rechazado` y toda transición, el resultado es rechazo (`INV-07`) |
 
 ## 5. Mocks y fixtures
 
-**Política de dobles: ninguno.** El intake §17.1.P.6 declara «pruebas unitarias puras y sin dobles», y este proyecto de código lo permite porque no tiene dependencias que aislar. Lo que en otros proyectos de código exigiría un doble —el reloj y la unicidad del correo— acá **entra por parámetro** ([`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)): la prueba pasa el momento y la afirmación de unicidad como valores, y por eso es reproducible sin fijar el reloj del entorno.
+**Política de dobles: ninguno.** El intake §17.1.P.6 declara «pruebas unitarias puras y sin dobles», y este proyecto de código lo permite porque no tiene dependencias que aislar. Lo que en otros proyectos de código exigiría un doble —el reloj y la unicidad del correo— acá **entra por parámetro** ([`ADR-02006`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)): la prueba pasa el momento y la afirmación de unicidad como valores, y por eso es reproducible sin fijar el reloj del entorno.
 
 Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 
 | Fixture | Qué construye | Por qué se centraliza |
 | --- | --- | --- |
-| Cuenta de alumno en cada uno de sus tres estados | `Pendiente`, `Habilitado`, `Bloqueado`, con y sin la marca de cambio de contraseña pendiente | Seis combinaciones que aparecen en `CU-02`, `CU-03`, `CU-04` y `CU-13` |
+| Cuenta de alumno en cada uno de sus tres estados | `Pendiente`, `Habilitado`, `Bloqueado`, con y sin la marca de cambio de contraseña pendiente | Seis combinaciones que aparecen en `CU-02002`, `CU-02003`, `CU-02004` y `CU-02013` |
 | Cuenta de administrador | Única, `Habilitado`, con credencial derivada | `INV-05` e `INV-08` la exigen en esa forma y sólo en esa |
 | Trabajo en cada uno de sus cuatro estados | `Borrador`, `Pendiente`, `Finalizado`, `Rechazado` | Las transiciones y la terminalidad se prueban contra los cuatro |
 | Resultados de interpretación de los escenarios del intake | Los conjuntos de piezas y observaciones que corresponden a `E-1` a `E-8`, ver §6 | Es el material que hace comparables las pruebas de este proyecto de código con las de `GeometriaFactory-Infrastructure` |
@@ -121,8 +121,8 @@ Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 | `E-4` | **Cero observaciones en total.** Es el criterio negativo: el envío pasa a `Pendiente` sin ninguna observación que adoptar | §20.E-4, punto 4 |
 | `E-5` | Observación de severidad **`Error`** con **índice de figura 1** y **campo `Tipo`**; la primera pieza, válida, se interpreta igual. El trabajo **queda en `Borrador`** | §20.E-5, puntos 1 a 4 |
 | `E-6` | Una figura que **se interpreta** y produce a lo sumo una advertencia; el trabajo pasa a `Pendiente` | §20.E-6, puntos 1 a 3 |
-| `E-7` | Conjunto de 6 piezas que cubre los seis tipos, tres volumétricos y tres planos. Ejercita la derivación de familia de `US-12` | §20.E-7, puntos 1 y 3 |
-| `E-8` | **El desenlace del envío es error, no advertencia** [DECISIÓN 2026-08-09]: el trabajo **queda en `Borrador`** y no pasa a `Pendiente`, con el mensaje localizado por índice de figura y campo que exige `RN-09` | §20.E-8, punto 5 |
+| `E-7` | Conjunto de 6 piezas que cubre los seis tipos, tres volumétricos y tres planos. Ejercita la derivación de familia de `US-02012` | §20.E-7, puntos 1 y 3 |
+| `E-8` | **El desenlace del envío es error, no advertencia** [DECISIÓN 2026-08-09]: el trabajo **queda en `Borrador`** y no pasa a `Pendiente`, con el mensaje localizado por índice de figura y campo que exige `RN-02009` | §20.E-8, punto 5 |
 
 **Regeneración y versionado.** Los ocho escenarios **no se regeneran**: son datos declarados por el intake con su procedencia. Un fixture de este proyecto de código que cambie un valor de un escenario es un defecto, no una actualización. Si el intake cambia un escenario, el cambio baja acá como una corrección con su fila de control de cambios.
 
@@ -137,7 +137,7 @@ Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 | Paralelismo | Admitido. `05` §4 declara que la batería puede correr en paralelo porque ninguna prueba comparte estado |
 | Base de datos | **Ninguna.** `tiene_persistencia` es false |
 | Variables de entorno y secretos | **Ninguno.** El proyecto de código no lee configuración (`05` §7) y la contraseña llega ya derivada |
-| Reloj | **No se fija ni se simula.** El momento entra por parámetro, de modo que la prueba lo elige ([`ADR-06`](../05-Arquitectura-Tecnica/Adrs/ADR-06-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)) |
+| Reloj | **No se fija ni se simula.** El momento entra por parámetro, de modo que la prueba lo elige ([`ADR-02006`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)) |
 | Duración | La batería completa en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10]. **Ningún otro tiempo de ejecución se declara acá**: ninguna fuente da otro |
 
 ## 8. Control de cambios

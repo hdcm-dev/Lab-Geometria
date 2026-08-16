@@ -55,13 +55,13 @@ Clasificación ISO/IEC 25010. Las **seis propiedades transversales** de `02` §6
 | Id | Condición | Cómo se verifica | Consecuencia si no se cumple |
 | --- | --- | --- | --- |
 | QG-01 | El bundle **se genera sin errores** | Etapa de empaquetado del pipeline (intake §17.7.P.8) | Bloquea la fusión |
-| QG-02 | **`PT-03`**: el motor de dibujo tridimensional queda **dentro** del bundle y la página funciona **sin acceso a redes de distribución externas**; **0** dependencias traídas de una red externa en tiempo de ejecución | `TC-19`, sobre el bundle generado | **Bloqueante, y detiene la planificación de la etapa `g`**. Ver §3.1 |
-| QG-03 | **`PT-02`**: el bundle carga en una página del anfitrión, la creación de instancia arma la escena, la carga del texto dibuja las **tres** figuras de `E-1` **incluido el ortoedro**, **diez** recorridos de ida y vuelta no degradan, y el árbol y la escena **se sincronizan por índice** | `TC-20`, con los recorridos medidos **con los dos movimientos prendidos** | **Bloqueante, y detiene la planificación de la etapa `g`**. Ver §3.1 |
-| QG-04 | **Cero red**: exactamente **0** peticiones originadas por el archivo de guion, y **0** ocurrencias de las tres formas de petición en el código fuente **y en el bundle generado** | `TC-16` y `TC-18`, con la medición **con los dos movimientos prendidos y sostenidos** | Bloqueante, sin gradación. Es `RA-02`, y a través de ella `RA-01` |
-| QG-05 | **Cero persistencia**: **0** claves escritas en el almacenamiento del navegador y ningún estado conservado entre páginas | `TC-17` | Bloqueante, sin gradación |
-| QG-06 | Superficie del bundle: exactamente **6** funciones expuestas, bajo **1** nombre propio en el objeto global y **0** identificadores globales sueltos | `TC-18` | Bloqueante |
-| QG-07 | **Ausencia de fallo silencioso**: **100 %** de las piezas no dibujadas enumeradas con su índice y su código, y **0** sin registro | `TC-06` | Bloqueante, sin gradación. Es la garantía `G-5` |
-| QG-08 | Los códigos de condición son exactamente **siete** y **ninguno se acuña aguas abajo**; un curso nuevo se agrega como fila de curso y no como código | `TC-21`, contra §6 del contrato de fachada | Se rechaza en revisión |
+| QG-02 | **`PT-03`**: el motor de dibujo tridimensional queda **dentro** del bundle y la página funciona **sin acceso a redes de distribución externas**; **0** dependencias traídas de una red externa en tiempo de ejecución | `TC-12019`, sobre el bundle generado | **Bloqueante, y detiene la planificación de la etapa `g`**. Ver §3.1 |
+| QG-03 | **`PT-02`**: el bundle carga en una página del anfitrión, la creación de instancia arma la escena, la carga del texto dibuja las **tres** figuras de `E-1` **incluido el ortoedro**, **diez** recorridos de ida y vuelta no degradan, y el árbol y la escena **se sincronizan por índice** | `TC-12020`, con los recorridos medidos **con los dos movimientos prendidos** | **Bloqueante, y detiene la planificación de la etapa `g`**. Ver §3.1 |
+| QG-04 | **Cero red**: exactamente **0** peticiones originadas por el archivo de guion, y **0** ocurrencias de las tres formas de petición en el código fuente **y en el bundle generado** | `TC-12016` y `TC-12018`, con la medición **con los dos movimientos prendidos y sostenidos** | Bloqueante, sin gradación. Es `RA-02`, y a través de ella `RA-01` |
+| QG-05 | **Cero persistencia**: **0** claves escritas en el almacenamiento del navegador y ningún estado conservado entre páginas | `TC-12017` | Bloqueante, sin gradación |
+| QG-06 | Superficie del bundle: exactamente **6** funciones expuestas, bajo **1** nombre propio en el objeto global y **0** identificadores globales sueltos | `TC-12018` | Bloqueante |
+| QG-07 | **Ausencia de fallo silencioso**: **100 %** de las piezas no dibujadas enumeradas con su índice y su código, y **0** sin registro | `TC-12006` | Bloqueante, sin gradación. Es la garantía `G-5` |
+| QG-08 | Los códigos de condición son exactamente **siete** y **ninguno se acuña aguas abajo**; un curso nuevo se agrega como fila de curso y no como código | `TC-12021`, contra §6 del contrato de fachada | Se rechaza en revisión |
 | QG-09 | El bundle **nunca se edita a mano**: es un artefacto generado y reproducible | Revisión del pull request de la etapa (intake §17.7.P.7) | Se rechaza en revisión |
 
 **No hay gate de cobertura de líneas**, y su ausencia está declarada aguas arriba: el intake §17.7.P.6 fija como gate «verificable por inspección, **en lugar de cobertura de líneas**» la ausencia de las tres formas de petición de red —que el intake nombra una por una, y que este documento describe en vez de nombrar, fuera de las comillas—. `QG-04` es ese gate.
@@ -74,7 +74,7 @@ Clasificación ISO/IEC 25010. Las **seis propiedades transversales** de `02` §6
 
 **Una puerta que no pasa detiene la planificación de la etapa `g` y no se arrastra como deuda.** Es el mismo fundamento por el que el Product Owner promovió la capacidad `F-13` a `Must Have` en el intake **1.19**: una capacidad citada por una puerta técnica deja de ser diferible. Esta categoría **no puede convertir `PT-02` ni `PT-03` en gates condicionados**, ni cambiar lo que miden, ni agregarles criterios.
 
-Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide cada una** —`TC-19` y `TC-20`— y **con qué condiciones**: los diez recorridos, con los dos movimientos prendidos, porque un bucle de dibujo que sobreviviera a la destrucción es exactamente la degradación que la puerta tiene que descartar y con los movimientos apagados no se ejercitaría.
+Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide cada una** —`TC-12019` y `TC-12020`— y **con qué condiciones**: los diez recorridos, con los dos movimientos prendidos, porque un bucle de dibujo que sobreviviera a la destrucción es exactamente la degradación que la puerta tiene que descartar y con los movimientos apagados no se ejercitaría.
 
 ## 4. Roles de calidad dentro del equipo
 
@@ -92,7 +92,7 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 
 | Momento | Qué se revisa | Qué produce |
 | --- | --- | --- |
-| Al abrir la rama de la etapa `a` | Que la cadena de construcción sea reproducible y produzca un archivo **vacío pero real** | `BT-01` cerrada |
+| Al abrir la rama de la etapa `a` | Que la cadena de construcción sea reproducible y produzca un archivo **vacío pero real** | `BT-12001` cerrada |
 | **Antes de comprometer la etapa `g`** | `PT-02` y `PT-03` enteras | Las dos puertas medidas, o la etapa `g` sin comprometer |
 | Al cerrar la etapa `g` | Las **seis** propiedades transversales con sus condiciones de medición, las **siete** garantías y los **siete** códigos | Matriz de cobertura actualizada y matriz de sensado de deriva con su estado |
 | **Ante todo cambio del bundle** | `QG-04`, `QG-05` y `QG-06`, sobre el **bundle generado** y no sólo sobre la fuente | La constancia de la medición en el pull request |

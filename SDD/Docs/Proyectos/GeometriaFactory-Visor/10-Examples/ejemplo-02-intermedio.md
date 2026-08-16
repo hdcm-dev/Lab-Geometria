@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** [`/samples/visor/02-intermedio/`](../../../../../samples/visor/02-intermedio/), esqueletada con su README local y su comando previsto
-**Trazabilidad upstream:** [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md), [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Seleccionar-Una-Pieza-Por-Su-Indice.md) y [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Redimensionar-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.3, §4.4, §5.2, §5.3 y §6; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-06`, `TC-07`, `TC-08`, `TC-11` y `TC-12`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-2`, `E-5`, `E-6`, `E-7` y `E-8`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02` como sonda `SD-14`; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md), [`CU-12003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) y [`CU-12004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.3, §4.4, §5.2, §5.3 y §6; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12006`, `TC-12007`, `TC-12008`, `TC-12011` y `TC-12012`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-2`, `E-5`, `E-6`, `E-7` y `E-8`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-12002` como sonda `SD-12014`; `11-Documentacion` cuando se emita
 
 ---
 
@@ -92,22 +92,22 @@ Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones d
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-02`](../02-Especificacion-Funcional/Casos-De-Uso/CU-02-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[1]` a `[8]` |
-| [`CU-03`](../02-Especificacion-Funcional/Casos-De-Uso/CU-03-Seleccionar-Una-Pieza-Por-Su-Indice.md) | Caso de uso | Actos `[9]` a `[11]` |
-| [`CU-04`](../02-Especificacion-Funcional/Casos-De-Uso/CU-04-Redimensionar-La-Escena.md) | Caso de uso | Actos `[12]` a `[14]` |
+| [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[1]` a `[8]` |
+| [`CU-12003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) | Caso de uso | Actos `[9]` a `[11]` |
+| [`CU-12004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md) | Caso de uso | Actos `[12]` a `[14]` |
 | Garantía `G-5` · Sin fallo silencioso | Garantía del contrato de fachada | Actos `[5]`, `[6]`, `[7]` y el recuento final de piezas sin registro en 0 |
 | Garantía `G-7` · Terminación controlada | Garantía del contrato de fachada | Actos `[11]` y `[13]`: la instancia y la selección quedan como estaban |
 | §5.3 del contrato de fachada, tipos dibujables | Elemento del concepto | Actos `[1]` a `[4]` y `[7]` |
-| [`ADR-02`](../05-Arquitectura-Tecnica/Adrs/ADR-02-Superficie-De-Seis-Funciones-Planas.md) | Decisión arquitectónica | Las **cinco** funciones que este sample invoca —de las **seis** que ADR-02 declara como superficie pública— se invocan desde el anfitrión, y ninguna otra. La sexta, `establecerMovimiento`, la ejerce el ejemplo 03 |
-| [`ADR-04`](../05-Arquitectura-Tecnica/Adrs/ADR-04-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) | Decisión arquitectónica | El anfitrión no nombra ninguna primitiva del motor de dibujo |
+| [`ADR-12002`](../05-Arquitectura-Tecnica/Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) | Decisión arquitectónica | Las **cinco** funciones que este sample invoca —de las **seis** que ADR-12002 declara como superficie pública— se invocan desde el anfitrión, y ninguna otra. La sexta, `establecerMovimiento`, la ejerce el ejemplo 03 |
+| [`ADR-12004`](../05-Arquitectura-Tecnica/Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md) | Decisión arquitectónica | El anfitrión no nombra ninguna primitiva del motor de dibujo |
 | `PRODUCT-INTAKE` §20 `E-2`, `E-5`, `E-6`, `E-7`, `E-8` | Escenario con payload real | Los cinco textos, transcriptos sin modificación |
 
 ## 9. Contrato de verificación
 
 ```yaml
 verificacion:
-  id: VER-02
-  verifica: [CU-02, CU-03, CU-04, US-05, US-06, US-07, US-09, US-10]
+  id: VER-12002
+  verifica: [CU-12002, CU-12003, CU-12004, US-12005, US-12006, US-12007, US-12009, US-12010]
   comando: "bash scripts/build-visor.sh && npm --prefix samples/visor/02-intermedio run verify"
   precondiciones:
     - "Repositorio abierto dentro del entorno de desarrollo contenido del propio repositorio"
@@ -137,5 +137,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **Corrección de precisión de recuento, hallada al resolver el informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0 y no reportada por él.** La fila de `ADR-02` de la §8 decía «Las cinco funciones se invocan desde el anfitrión y ninguna otra», atribuyéndole a esa ADR una superficie de **cinco** funciones cuando declara **seis** desde su título y su §2 —las cinco son las que **este sample** invoca, no las que la ADR declara—. Se enlaza además la carpeta esqueletada de [`/samples/visor/02-intermedio/`](../../../../../samples/visor/02-intermedio/) creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento del contrato cambia. |
-| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Segunda parte del sample **S-1**. Cubre `CU-02`, `CU-03` y `CU-04`, lleva las funciones ejercidas a **5 de 6** y usa **cinco** escenarios del `PRODUCT-INTAKE` §20 transcriptos sin modificación. Verifica los **seis** tipos dibujables, los dos sinónimos de clave del emisor, los **dos** cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` y los **dos** casos de `INDICE_FUERA_DE_RANGO`. El contrato `VER-02` declara siete líneas exactas de salida y **una aserción negativa** sobre la figura de `E-6`; `evidencia` queda en `No verificado — sin código`. |
+| 1.1 | 2026-08-11 | **Corrección de precisión de recuento, hallada al resolver el informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0 y no reportada por él.** La fila de `ADR-12002` de la §8 decía «Las cinco funciones se invocan desde el anfitrión y ninguna otra», atribuyéndole a esa ADR una superficie de **cinco** funciones cuando declara **seis** desde su título y su §2 —las cinco son las que **este sample** invoca, no las que la ADR declara—. Se enlaza además la carpeta esqueletada de [`/samples/visor/02-intermedio/`](../../../../../samples/visor/02-intermedio/) creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento del contrato cambia. |
+| 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Segunda parte del sample **S-1**. Cubre `CU-12002`, `CU-12003` y `CU-12004`, lleva las funciones ejercidas a **5 de 6** y usa **cinco** escenarios del `PRODUCT-INTAKE` §20 transcriptos sin modificación. Verifica los **seis** tipos dibujables, los dos sinónimos de clave del emisor, los **dos** cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` y los **dos** casos de `INDICE_FUERA_DE_RANGO`. El contrato `VER-12002` declara siete líneas exactas de salida y **una aserción negativa** sobre la figura de `E-6`; `evidencia` queda en `No verificado — sin código`. |

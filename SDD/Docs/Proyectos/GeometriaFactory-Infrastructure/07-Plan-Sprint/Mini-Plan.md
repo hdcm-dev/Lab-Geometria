@@ -77,61 +77,61 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 
 | Etapa | ID | Tipo | Descripción corta | Prioridad | Estimación | Asignado | Estado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `a` | BT-01 | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-02 | Tarea técnica | Fijar nombres y el criterio de nombrado del adaptador de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-03 | Tarea técnica | Anclar la función de derivación de clave y sus parámetros versionados | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-05 | Tarea técnica | Contexto de persistencia y mapeo de las cinco entidades | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-08 | Tarea técnica | Fijar la zona horaria y la precisión de los sellos | Media | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-06 | Tarea técnica | Preparación del almacén con linaje inmutable y arranque detenido | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-04 | Tarea técnica | Puerta de construcción con cero advertencias | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-07 | Tarea técnica | Puerta de transformaciones sobre un almacén inexistente | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | US-24 | Historia | Aplicar las transformaciones de esquema al arrancar | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | US-25 | Historia | Detener el arranque en lugar de operar sobre un almacén dudoso | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-09 | Tarea técnica | Adaptador de repositorio de cuentas con el índice único | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-12 | Tarea técnica | Adaptador de reloj del sistema | Media | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-13 | Tarea técnica | Mecanismo de derivación y verificación de credenciales | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | BT-15 | Tarea técnica | Mecanismo de acceso firmado con la clave que recibe y no busca | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-14 | Historia | Sostener en el almacén la unicidad del correo y la del administrador | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-15 | Historia | Responder las dos preguntas sobre el conjunto | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-17 | Historia | Derivar una contraseña sin guardarla ni registrarla en claro | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-18 | Historia | Verificar una credencial y distinguir el derivado ilegible | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-21 | Historia | Emitir el acceso firmado con sus cuatro reclamos | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-22 | Historia | Rechazar la emisión sin clave de firma | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `c` | US-23 | Historia | Proveer el sello por un puerto | Media | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-14 | Tarea técnica | Producción de la contraseña provisoria, no adivinable y sin repetirse | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-21 | Tarea técnica | Cerrar el catálogo de las 17 condiciones en las dos direcciones | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-22 | Tarea técnica | Inspección de que ningún mensaje ni traza lleva secreto, ruta ni texto | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-23 | Tarea técnica | Confirmar los valores rotulados como asunción y las tres coberturas | Media | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-25 | Tarea técnica | Elevar la forma de sostener que la provisoria no se repite | Media | Sin fijar | Equipo (1) | Pendiente |
-| `d` | BT-26 | Tarea técnica | Elevar la frecuencia del respaldo y la fecha de última modificación | Baja | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-13 | Historia | Arrastrar todos los trabajos de una cuenta dada de baja | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-16 | Historia | Conservar y transportar la marca sin alterar el estado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-19 | Historia | Producir una provisoria no adivinable y sin repetirse | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `d` | US-20 | Historia | Terminar sin producir valor cuando la aleatoriedad no responde | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | BT-10 | Tarea técnica | Adaptador de repositorio de trabajos con la proyección separada | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | BT-11 | Tarea técnica | Retiro físico con todo o nada y arrastre de la baja | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-08 | Historia | Conservar el texto original literal y rechazar toda escritura que lo reemplace | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-09 | Historia | Materializar el trabajo con sus piezas, componentes y observaciones | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-10 | Historia | Resolver la consulta con el recorte ya trasladado al pedido | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-11 | Historia | Excluir componentes y texto original del resultado de un listado | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `e` | US-12 | Historia | Retirar físicamente un trabajo con todo lo que cuelga de él | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-16 | Tarea técnica | Motor de interpretación con las cuatro trampas del formato | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-19 | Tarea técnica | Fijar la tabla de derivación por tipo | Media | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-17 | Tarea técnica | Motor de verificación con tolerancia 0.01 y operador estricto | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-20 | Tarea técnica | Puerta de cero peticiones de red de los dos motores | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-24 | Tarea técnica | Elevar hasta dónde llega el conjunto de tipos reconstruibles | Media | Sin fijar | Equipo (1) | Pendiente |
-| `f` | BT-18 | Tarea técnica | Batería de diez casos con los ocho escenarios como entrada | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-01 | Historia | Leer el texto real con tolerancia a comas finales y claves sinónimas | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-02 | Historia | Devolver la cantidad de figuras del conjunto raíz | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-03 | Historia | Reconstruir las piezas con su posición y sus componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-04 | Historia | Emitir el error de validación con posición de figura y campo | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-05 | Historia | Derivar el valor desde las dimensiones y los componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-06 | Historia | Comparar con tolerancia absoluta y operador estricto | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `f` | US-07 | Historia | Emitir la advertencia con el valor declarado y el derivado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06001 | Tarea técnica | Crear el proyecto de código y su proyecto de pruebas | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06002 | Tarea técnica | Fijar nombres y el criterio de nombrado del adaptador de cuentas | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06003 | Tarea técnica | Anclar la función de derivación de clave y sus parámetros versionados | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06005 | Tarea técnica | Contexto de persistencia y mapeo de las cinco entidades | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06008 | Tarea técnica | Fijar la zona horaria y la precisión de los sellos | Media | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06006 | Tarea técnica | Preparación del almacén con linaje inmutable y arranque detenido | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06004 | Tarea técnica | Puerta de construcción con cero advertencias | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-06007 | Tarea técnica | Puerta de transformaciones sobre un almacén inexistente | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | US-06024 | Historia | Aplicar las transformaciones de esquema al arrancar | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | US-06025 | Historia | Detener el arranque en lugar de operar sobre un almacén dudoso | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-06009 | Tarea técnica | Adaptador de repositorio de cuentas con el índice único | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-06012 | Tarea técnica | Adaptador de reloj del sistema | Media | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-06013 | Tarea técnica | Mecanismo de derivación y verificación de credenciales | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | BT-06015 | Tarea técnica | Mecanismo de acceso firmado con la clave que recibe y no busca | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-06014 | Historia | Sostener en el almacén la unicidad del correo y la del administrador | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-06015 | Historia | Responder las dos preguntas sobre el conjunto | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-06017 | Historia | Derivar una contraseña sin guardarla ni registrarla en claro | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-06018 | Historia | Verificar una credencial y distinguir el derivado ilegible | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-06021 | Historia | Emitir el acceso firmado con sus cuatro reclamos | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-06022 | Historia | Rechazar la emisión sin clave de firma | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `c` | US-06023 | Historia | Proveer el sello por un puerto | Media | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-06014 | Tarea técnica | Producción de la contraseña provisoria, no adivinable y sin repetirse | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-06021 | Tarea técnica | Cerrar el catálogo de las 17 condiciones en las dos direcciones | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-06022 | Tarea técnica | Inspección de que ningún mensaje ni traza lleva secreto, ruta ni texto | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-06023 | Tarea técnica | Confirmar los valores rotulados como asunción y las tres coberturas | Media | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-06025 | Tarea técnica | Elevar la forma de sostener que la provisoria no se repite | Media | Sin fijar | Equipo (1) | Pendiente |
+| `d` | BT-06026 | Tarea técnica | Elevar la frecuencia del respaldo y la fecha de última modificación | Baja | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-06013 | Historia | Arrastrar todos los trabajos de una cuenta dada de baja | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-06016 | Historia | Conservar y transportar la marca sin alterar el estado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-06019 | Historia | Producir una provisoria no adivinable y sin repetirse | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `d` | US-06020 | Historia | Terminar sin producir valor cuando la aleatoriedad no responde | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | BT-06010 | Tarea técnica | Adaptador de repositorio de trabajos con la proyección separada | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | BT-06011 | Tarea técnica | Retiro físico con todo o nada y arrastre de la baja | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-06008 | Historia | Conservar el texto original literal y rechazar toda escritura que lo reemplace | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-06009 | Historia | Materializar el trabajo con sus piezas, componentes y observaciones | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-06010 | Historia | Resolver la consulta con el recorte ya trasladado al pedido | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-06011 | Historia | Excluir componentes y texto original del resultado de un listado | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `e` | US-06012 | Historia | Retirar físicamente un trabajo con todo lo que cuelga de él | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-06016 | Tarea técnica | Motor de interpretación con las cuatro trampas del formato | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-06019 | Tarea técnica | Fijar la tabla de derivación por tipo | Media | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-06017 | Tarea técnica | Motor de verificación con tolerancia 0.01 y operador estricto | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-06020 | Tarea técnica | Puerta de cero peticiones de red de los dos motores | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-06024 | Tarea técnica | Elevar hasta dónde llega el conjunto de tipos reconstruibles | Media | Sin fijar | Equipo (1) | Pendiente |
+| `f` | BT-06018 | Tarea técnica | Batería de diez casos con los ocho escenarios como entrada | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-06001 | Historia | Leer el texto real con tolerancia a comas finales y claves sinónimas | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-06002 | Historia | Devolver la cantidad de figuras del conjunto raíz | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-06003 | Historia | Reconstruir las piezas con su posición y sus componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-06004 | Historia | Emitir el error de validación con posición de figura y campo | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-06005 | Historia | Derivar el valor desde las dimensiones y los componentes | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-06006 | Historia | Comparar con tolerancia absoluta y operador estricto | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `f` | US-06007 | Historia | Emitir la advertencia con el valor declarado y el derivado | Alta | Sin fijar | Equipo (1) | Pendiente |
 
 **Total comprometido: 25 historias y 26 tareas técnicas**, repartidas en cinco etapas. La prioridad de la columna es de **ejecución dentro de la etapa** y no reemplaza a la MoSCoW del backlog.
 
-**US-23 figura con prioridad de ejecución `Media`**, y su MoSCoW en 06 es `Should`: es la única historia de este backlog donde las dos coinciden en señalar lo mismo.
+**US-06023 figura con prioridad de ejecución `Media`**, y su MoSCoW en 06 es `Should`: es la única historia de este backlog donde las dos coinciden en señalar lo mismo.
 
 ## 4. Alcance técnico y orden de construcción
 
@@ -139,11 +139,11 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 
 **Orden dentro de cada etapa**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) §3:
 
-1. `a`: BT-01 primero; **BT-03 temprano**, porque el anclaje de la derivación de clave condiciona los dos mecanismos y es una decisión que el intake asigna a este proyecto de código sin elegir por él; BT-02 en paralelo; después BT-05, BT-08 y BT-06; las dos historias sobre ellos; **BT-04 y BT-07 al cerrar**, porque son puertas y no se miden sobre algo que todavía no compila ni arranca.
-2. `c`: BT-09 sobre BT-05; BT-12, BT-13 y BT-15 en paralelo, porque **no dependen del contexto de persistencia**; las siete historias después.
-3. `d`: BT-14 sobre BT-13; las cuatro historias; BT-21 y BT-22 al cerrar, porque el catálogo y la inspección de secretos necesitan el conjunto ya producido; BT-23, BT-25 y BT-26 antes del punto de control.
-4. `e`: BT-10 y BT-11 sobre BT-05 y BT-09; las cinco historias después.
-5. `f`: BT-16 primero; BT-19 y BT-17 sobre él; las siete historias; **BT-18 y BT-20 al cerrar**, porque son la batería y la inspección, y sólo tienen sentido sobre algo terminado.
+1. `a`: BT-06001 primero; **BT-06003 temprano**, porque el anclaje de la derivación de clave condiciona los dos mecanismos y es una decisión que el intake asigna a este proyecto de código sin elegir por él; BT-06002 en paralelo; después BT-06005, BT-06008 y BT-06006; las dos historias sobre ellos; **BT-06004 y BT-06007 al cerrar**, porque son puertas y no se miden sobre algo que todavía no compila ni arranca.
+2. `c`: BT-06009 sobre BT-06005; BT-06012, BT-06013 y BT-06015 en paralelo, porque **no dependen del contexto de persistencia**; las siete historias después.
+3. `d`: BT-06014 sobre BT-06013; las cuatro historias; BT-06021 y BT-06022 al cerrar, porque el catálogo y la inspección de secretos necesitan el conjunto ya producido; BT-06023, BT-06025 y BT-06026 antes del punto de control.
+4. `e`: BT-06010 y BT-06011 sobre BT-06005 y BT-06009; las cinco historias después.
+5. `f`: BT-06016 primero; BT-06019 y BT-06017 sobre él; las siete historias; **BT-06018 y BT-06020 al cerrar**, porque son la batería y la inspección, y sólo tienen sentido sobre algo terminado.
 
 **Reglas de dependencia interna que ninguna tarea puede cruzar** (`05` §3.2): **ningún adaptador depende de otro adaptador** —el único par acoplado son los dos motores, en una sola dirección: la verificación exige las piezas ya reconstruidas—; **los dos motores, el reloj y el mecanismo de credenciales no dependen del contexto de persistencia**; y **la composición de raíz no es de acá**: este proyecto de código declara sus adaptadores y `GeometriaFactory-Api` los conecta.
 
@@ -160,7 +160,7 @@ Criterios específicos que este plan agrega:
 1. **La actualización de la categoría 11 forma parte del cierre.** La categoría 11 de este proyecto de código todavía no está emitida; hasta su emisión la condición se cumple de forma vacía y **se registra así en el informe de cierre**.
 2. **Las dos puertas propias del pipeline se miden en cada etapa**: construcción sin advertencias y **transformaciones aplicadas solas sobre un almacén inexistente**, que es la cuarta etapa y es propia de acá.
 3. **Ningún guion de prueba que involucre el texto de figuras usa datos inventados**: el material son los escenarios `E-1` a `E-8` del intake §20, por la regla de delivery 5 de su §15.
-4. **Los tres valores rotulados [ASUNCIÓN] se usan como vigentes y las puertas de cobertura no se declaran bloqueantes en 09** hasta que BT-23 cierre.
+4. **Los tres valores rotulados [ASUNCIÓN] se usan como vigentes y las puertas de cobertura no se declaran bloqueantes en 09** hasta que BT-06023 cierre.
 5. **La etapa `f` no se cierra sin la batería de diez casos pasando entera.** Es la mitigación declarada del único riesgo de negocio del producto, y su cobertura es la más alta del producto.
 6. **Ningún mensaje ni ninguna traza lleva un secreto, la ruta del almacén o el texto del alumno**, verificado **en las dos direcciones** al cerrar cada etapa que agregue condiciones.
 
@@ -168,14 +168,14 @@ Criterios específicos que este plan agrega:
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 | --- | --- | --- | --- |
-| Que el validador se escriba sin leer el análisis y no sirva para el dato que existe | **Alta si no se controla**, así lo declara la fuente | **Muy alto**: es el **único riesgo de negocio del producto cuya mitigación declarada es una batería de pruebas**, y su materialización deja el producto inútil para el dato real | Las **cuatro** trampas escritas **antes de leer texto** (BT-16), la batería de **10** casos con los ocho escenarios (BT-18), la cobertura más alta del producto y la tabla de derivación por tipo (BT-19) |
-| Que la provisoria se componga por un contador, la fecha o el correo cuando la fuente de aleatoriedad no responde | Media | **Muy alto**: produce una provisoria adivinable **y el reseteo parece haber funcionado**. Un reseteo que no se completa es recuperable; una provisoria adivinable **no se nota hasta que alguien la usa** | BT-14, con el atajo **escrito como prohibido**, la condición propia y el NFR de **0** provisorias repetidas; y US-20, cuyo entregable es la terminación |
-| Que ante la ausencia de clave de firma se genere una al vuelo o se emita sin firmar | Media | **Muy alto**: el sistema arranca, emite accesos y **nadie lo nota hasta que alguien falsifica uno** | BT-15, con la clave que **se recibe y no se busca**, y US-22, con **0** accesos emitidos sin clave |
-| Que la preparación del almacén descarte el almacén y lo cree de nuevo ante un esquema que no corresponde | Baja, **pero es el atajo más destructivo del producto** | **Muy alto**: deja el servicio impecable y **sin los trabajos de nadie** | BT-06 y US-25, con arranque detenido y la regla de que **una transformación ya fusionada no se edita** |
-| Que la ubicación del almacén caiga hacia una ruta dentro de la imagen cuando el volumen no está montado | Media, **porque es el comportamiento por defecto de casi cualquier biblioteca de acceso a archivos** | Alto: el servicio arranca, acepta trabajos de la comisión entera y **los pierde en el siguiente reemplazo de versión** | BT-06 y la regla de que **la configuración se recibe y no se busca** |
-| Que un texto ilegible devuelva la condición de servicio no disponible en lugar de una observación | **Alta**: la categoría 03 declara que ésa es la garantía que más veces se rompe al implementar | Alto: el alumno esperaría a que se recupere **de un problema que no tiene** | US-04 con su tercer criterio, BT-21 con la separación entre **resultado** y **fallo** ejercida, y la segunda regla de refinamiento del backlog |
-| Que una consulta de listado arrastre los componentes de cada pieza o el texto original | **Media-alta**: es el comportamiento por defecto de cualquier carga completa de entidad | Medio: rompe el requerimiento de tiempo del listado del administrador | BT-10 y US-11, con **0** componentes cargados verificados sobre la proyección devuelta |
-| Que la unicidad del correo se sostenga sólo con la consulta previa del consumidor | Media, **porque la consulta previa no es una garantía por sí sola** | Alto: dos cuentas con el mismo correo hacen que el ingreso deje de ser determinista e `INV-01` deja de valer | BT-09 y US-14, con el índice único como **segunda línea** y su condición declarada como camino |
+| Que el validador se escriba sin leer el análisis y no sirva para el dato que existe | **Alta si no se controla**, así lo declara la fuente | **Muy alto**: es el **único riesgo de negocio del producto cuya mitigación declarada es una batería de pruebas**, y su materialización deja el producto inútil para el dato real | Las **cuatro** trampas escritas **antes de leer texto** (BT-06016), la batería de **10** casos con los ocho escenarios (BT-06018), la cobertura más alta del producto y la tabla de derivación por tipo (BT-06019) |
+| Que la provisoria se componga por un contador, la fecha o el correo cuando la fuente de aleatoriedad no responde | Media | **Muy alto**: produce una provisoria adivinable **y el reseteo parece haber funcionado**. Un reseteo que no se completa es recuperable; una provisoria adivinable **no se nota hasta que alguien la usa** | BT-06014, con el atajo **escrito como prohibido**, la condición propia y el NFR de **0** provisorias repetidas; y US-06020, cuyo entregable es la terminación |
+| Que ante la ausencia de clave de firma se genere una al vuelo o se emita sin firmar | Media | **Muy alto**: el sistema arranca, emite accesos y **nadie lo nota hasta que alguien falsifica uno** | BT-06015, con la clave que **se recibe y no se busca**, y US-06022, con **0** accesos emitidos sin clave |
+| Que la preparación del almacén descarte el almacén y lo cree de nuevo ante un esquema que no corresponde | Baja, **pero es el atajo más destructivo del producto** | **Muy alto**: deja el servicio impecable y **sin los trabajos de nadie** | BT-06006 y US-06025, con arranque detenido y la regla de que **una transformación ya fusionada no se edita** |
+| Que la ubicación del almacén caiga hacia una ruta dentro de la imagen cuando el volumen no está montado | Media, **porque es el comportamiento por defecto de casi cualquier biblioteca de acceso a archivos** | Alto: el servicio arranca, acepta trabajos de la comisión entera y **los pierde en el siguiente reemplazo de versión** | BT-06006 y la regla de que **la configuración se recibe y no se busca** |
+| Que un texto ilegible devuelva la condición de servicio no disponible en lugar de una observación | **Alta**: la categoría 03 declara que ésa es la garantía que más veces se rompe al implementar | Alto: el alumno esperaría a que se recupere **de un problema que no tiene** | US-06004 con su tercer criterio, BT-06021 con la separación entre **resultado** y **fallo** ejercida, y la segunda regla de refinamiento del backlog |
+| Que una consulta de listado arrastre los componentes de cada pieza o el texto original | **Media-alta**: es el comportamiento por defecto de cualquier carga completa de entidad | Medio: rompe el requerimiento de tiempo del listado del administrador | BT-06010 y US-06011, con **0** componentes cargados verificados sobre la proyección devuelta |
+| Que la unicidad del correo se sostenga sólo con la consulta previa del consumidor | Media, **porque la consulta previa no es una garantía por sí sola** | Alto: dos cuentas con el mismo correo hacen que el ingreso deje de ser determinista e `INV-01` deja de valer | BT-06009 y US-06014, con el índice único como **segunda línea** y su condición declarada como camino |
 
 ## 7. Criterios de hecho de cada tramo
 
@@ -196,13 +196,13 @@ Una etapa de este proyecto de código está hecha cuando:
 
 | Etapa | NB que avanzan | CU que avanzan | ADR que gobiernan las decisiones |
 | --- | --- | --- | --- |
-| `a` | NB-03, NB-08 (parcial) | CU-10 | ADR-01, ADR-02, ADR-04, ADR-07 |
-| `c` | NB-01, NB-02 | CU-05, CU-06, CU-08, CU-09 | ADR-01, ADR-02, ADR-03, ADR-04 |
-| `d` | NB-01, NB-02 | CU-04, CU-05, CU-07 | ADR-02, ADR-05 |
-| `e` | NB-03, NB-07 (parcial), NB-09 | CU-03, CU-04 | ADR-01, ADR-02 |
-| `f` | NB-04, NB-05, NB-06 (parcial) | CU-01, CU-02 | ADR-06 |
+| `a` | NB-00003, NB-00008 (parcial) | CU-06010 | ADR-06001, ADR-06002, ADR-06004, ADR-06007 |
+| `c` | NB-00001, NB-00002 | CU-06005, CU-06006, CU-06008, CU-06009 | ADR-06001, ADR-06002, ADR-06003, ADR-06004 |
+| `d` | NB-00001, NB-00002 | CU-06004, CU-06005, CU-06007 | ADR-06002, ADR-06005 |
+| `e` | NB-00003, NB-00007 (parcial), NB-00009 | CU-06003, CU-06004 | ADR-06001, ADR-06002 |
+| `f` | NB-00004, NB-00005, NB-00006 (parcial) | CU-06001, CU-06002 | ADR-06006 |
 
-**Las cinco etapas declaran al menos una necesidad de negocio en avance, incluida la `a`**, y en eso este proyecto de código se distingue de los demás: su etapa `a` no es un hito interno vacío, porque la preparación del almacén ya aporta a `NB-03` y a `NB-08` en su parte de que el producto quede en un estado que la pieza pública pueda declarar.
+**Las cinco etapas declaran al menos una necesidad de negocio en avance, incluida la `a`**, y en eso este proyecto de código se distingue de los demás: su etapa `a` no es un hito interno vacío, porque la preparación del almacén ya aporta a `NB-00003` y a `NB-00008` en su parte de que el producto quede en un estado que la pieza pública pueda declarar.
 
 **Puertas técnicas del producto y este proyecto de código.** **`PT-04` lo alcanza** en su parte de que las actualizaciones de esquema se apliquen sobre base vacía, y se mide en la etapa `a`. `PT-01` es del front, `PT-02` y `PT-03` del bundle del visor y del anfitrión, y `PT-05` del despliegue real de la fase `i`. Lo que alcanza a este proyecto de código de las otras cuatro es la consecuencia: **una puerta que no pasa detiene la planificación de las etapas que dependen de ella**.
 
