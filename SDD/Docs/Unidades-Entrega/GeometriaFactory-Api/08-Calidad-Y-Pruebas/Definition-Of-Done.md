@@ -87,7 +87,7 @@ Se aplica cada vez que el artefacto del servidor propio se construye para entreg
 
 ### 1.2 `GeometriaFactory-Domain`
 
-**Por qué la tercera capa se llama «etapa» y no «sprint».** Este producto no tiene sprints: la unidad de planificación es la **etapa**, y así lo declaran el roadmap §1.2 y [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §4.1. Llamarla sprint habría creado una unidad que ninguna fuente tiene. La cuarta capa se llama «entrega del proyecto de código» y no «release» porque **este proyecto de código no se publica**: `redistribuible` es false y no viaja a ningún repositorio de paquetes (`05` §5).
+**Por qué la tercera capa se llama «etapa» y no «sprint».** Este producto no tiene sprints: la unidad de planificación es la **etapa**, y así lo declaran el roadmap §1.2 y [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1. Llamarla sprint habría creado una unidad que ninguna fuente tiene. La cuarta capa se llama «entrega del proyecto de código» y no «release» porque **este proyecto de código no se publica**: `redistribuible` es false y no viaja a ningún repositorio de paquetes (`05` §5).
 
 Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
@@ -103,15 +103,15 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
 ### 1.2 Tarea técnica
 
-- [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra, según lo exige la DoR §2 criterio 3.
+- [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra, según lo exige la DoR §2 criterio 3.
 - [ ] Si la tarea es de tipo indagación, la decisión que produjo está **registrada** en el documento que corresponde, y no sólo tomada. **Se valida** leyendo ese documento.
-- [ ] Si la tarea cierra un punto abierto de `05` §11 o de [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §6, ese punto queda declarado cerrado con su desenlace. **Se valida** leyendo la tabla de puntos abiertos.
+- [ ] Si la tarea cierra un punto abierto de `05` §11 o de [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §6, ese punto queda declarado cerrado con su desenlace. **Se valida** leyendo la tabla de puntos abiertos.
 - [ ] Si la tarea es una puerta —`BT-02004`, `BT-02005`, `BT-02008`, `BT-02014`— la puerta se midió al menos una vez y su resultado quedó registrado. **Se valida** con la salida del pipeline.
 - [ ] La construcción y la batería pasan enteras. **Se valida** con `scripts/build.sh` y `scripts/test.sh`.
 
 ### 1.3 Etapa
 
-- [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §3.
+- [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3.
 - [ ] Los **nueve** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen. **Se valida** con esa lista.
 - [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-10` a `CV-13`, `CV-20` a `CV-22`— se cumplen. **Se valida** con el informe del pipeline y con `TC-02023`, `TC-02024`, `TC-02026` y `TC-02027`.
 - [ ] Los criterios condicionados —`CV-08`, `CV-09`, `CV-18`— **se midieron y se registraron**, aunque no bloqueen. **Se valida** con la presencia de la medición en el informe de cierre. Registrar «sin medir» cuando la medición era posible **no cumple**.
@@ -135,7 +135,7 @@ Se aplica cuando las **seis** etapas que este proyecto de código toca —`a`, `
 
 ### 1.3 `GeometriaFactory-Application`
 
-**Por qué la tercera capa se llama «etapa» y no «sprint».** Este producto no tiene sprints: la unidad de planificación es la **etapa**, y así lo declaran el roadmap y [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2. Llamarla sprint habría creado una unidad que ninguna fuente tiene. La cuarta capa se llama «entrega del proyecto de código» y no «release» porque **este proyecto de código no se publica**: `redistribuible` es false y no viaja a ningún repositorio de paquetes (`05` §5).
+**Por qué la tercera capa se llama «etapa» y no «sprint».** Este producto no tiene sprints: la unidad de planificación es la **etapa**, y así lo declaran el roadmap y [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2. Llamarla sprint habría creado una unidad que ninguna fuente tiene. La cuarta capa se llama «entrega del proyecto de código» y no «release» porque **este proyecto de código no se publica**: `redistribuible` es false y no viaja a ningún repositorio de paquetes (`05` §5).
 
 Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
@@ -153,7 +153,7 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
 ### 1.2 Tarea técnica
 
-- [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra, según lo exige la Definition of Ready §2 criterio 3.
+- [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra, según lo exige la Definition of Ready §2 criterio 3.
 - [ ] Si la propiedad que la tarea sostiene es una **ausencia** —cero dependencias de más, cero pruebas que tocan la base, cero componentes cargados—, el criterio se midió **con umbral cero y en la condición declarada**, y no se dio por cumplido por no haberse observado lo contrario. **Se valida** con el `TC-XX` de inspección correspondiente.
 - [ ] Si la tarea es de tipo indagación, la decisión que produjo está **registrada** en el documento que corresponde, y no sólo tomada. **Se valida** leyendo ese documento.
 - [ ] Si la tarea **acompaña** un punto abierto cuya titularidad es de otro proyecto de código —`BT-04020`, `BT-04021`—, declaró de quién es la decisión y no la tomó por su cuenta. **Se valida** leyendo la fila de la tarea.
@@ -162,7 +162,7 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
 ### 1.3 Etapa
 
-- [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §3.
+- [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3.
 - [ ] Los **once** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen. **Se valida** con esa lista.
 - [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-11` a `CV-17`, `CV-25` a `CV-28`— se cumplen. **Se valida** con el informe del pipeline y con `TC-04011`, `TC-04026`, `TC-04027`, `TC-04028`, `TC-04029`, `TC-04030` y `TC-04031`.
 - [ ] Los criterios condicionados —`CV-09`, `CV-10`, `CV-23`— **se midieron y se registraron**, aunque no bloqueen. **Se valida** con la presencia de la medición en el informe de cierre. Registrar «sin medir» cuando la medición era posible **no cumple**.
@@ -204,7 +204,7 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
 ### 1.2 Tarea técnica
 
-- [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra.
+- [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra.
 - [ ] Si la tarea es de tipo indagación, la decisión que produjo está **registrada** en el documento que corresponde, y no sólo tomada. **Se valida** leyendo ese documento.
 - [ ] Si la tarea cierra un punto abierto de `05` §11, ese punto queda declarado cerrado con su desenlace. **Se valida** leyendo esa tabla.
 - [ ] Si la tarea es una puerta del pipeline —construcción, batería, cobertura, **verificación de transformaciones**— la puerta se midió al menos una vez y su resultado quedó registrado. **Se valida** con la salida del pipeline.
@@ -212,7 +212,7 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
 ### 1.3 Etapa
 
-- [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §3.
+- [ ] Todas las historias de la épica de la etapa cumplen §1.1, y todas sus tareas técnicas cumplen §1.2. **Se valida** recorriendo el índice de la épica en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3.
 - [ ] Los **once** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen. **Se valida** con esa lista.
 - [ ] **A partir de la etapa `f`: la batería del validador pasa entera, 10 de 10.** **Se valida** con la tabla de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6, recorrida fila por fila. **Nueve casos no cumplen**, y el motivo está en [`Criterios-Validacion.md`](Criterios-Validacion.md) §6.
 - [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-13` a `CV-23`, `CV-31` a `CV-35`— se cumplen. **Se valida** con el informe del pipeline y con los casos de prueba nombrados.
@@ -304,7 +304,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 **Este documento es la fuente canónica de la Definition of Done de `GeometriaFactory-Domain`.**
 
 - [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md) y cualquier plan de etapa **referencian** esta DoD y no la redefinen. Una lista de criterios de cierre escrita en un plan es un hallazgo, y el que rige es éste.
-- [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión regían los criterios de transición del roadmap §5, que son de nivel producto. **Con esta emisión ese interinato termina**: los criterios de transición del roadmap siguen valiendo a nivel producto y esta DoD los complementa a nivel de proyecto de código, sin contradecirlos.
+- [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión regían los criterios de transición del roadmap §5, que son de nivel producto. **Con esta emisión ese interinato termina**: los criterios de transición del roadmap siguen valiendo a nivel producto y esta DoD los complementa a nivel de proyecto de código, sin contradecirlos.
 - Todo cambio en los criterios de §1 se registra en §4 y se comunica en el punto de control de la etapa siguiente.
 - La DoD **no habla de cuándo empezar**: eso es la DoR, y las dos no se solapan.
 
@@ -313,7 +313,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 **Este documento es la fuente canónica de la Definition of Done de `GeometriaFactory-Application`.**
 
 - [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md) y cualquier plan de etapa **referencian** esta DoD y no la redefinen. Una lista de criterios de cierre escrita en un plan es un hallazgo, y el que rige es éste.
-- [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión regían los criterios de transición del roadmap §5, que son de nivel producto. **Con esta emisión ese interinato termina**: los criterios de transición del roadmap siguen valiendo a nivel producto y esta DoD los complementa a nivel de proyecto de código, sin contradecirlos.
+- [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión regían los criterios de transición del roadmap §5, que son de nivel producto. **Con esta emisión ese interinato termina**: los criterios de transición del roadmap siguen valiendo a nivel producto y esta DoD los complementa a nivel de proyecto de código, sin contradecirlos.
 - Todo cambio en los criterios de §1 se registra en §4 y se comunica en el punto de control de la etapa siguiente.
 - La DoD **no habla de cuándo empezar**: eso es la Definition of Ready, y las dos no se solapan.
 
@@ -322,7 +322,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 **Este documento es la fuente canónica de la Definition of Done de `GeometriaFactory-Infrastructure`.**
 
 - [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md) y cualquier plan de etapa **referencian** esta DoD y no la redefinen. Una lista de criterios de cierre escrita en un plan es un hallazgo, y el que rige es éste.
-- [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Infrastructure/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión regían los criterios de transición del roadmap §5, que son de nivel producto. **Con esta emisión ese interinato termina**: los criterios del roadmap siguen valiendo a nivel producto y esta DoD los complementa a nivel de proyecto de código.
+- [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión regían los criterios de transición del roadmap §5, que son de nivel producto. **Con esta emisión ese interinato termina**: los criterios del roadmap siguen valiendo a nivel producto y esta DoD los complementa a nivel de proyecto de código.
 - **El recuento de la batería no se cambia desde este documento.** Esta DoD exige **diez**, siguiendo `05` §8 y §10.5; si el Product Owner corrigiera la redacción de sus gates en otro sentido, el cambio bajaría por el intake y no por acá.
 - Todo cambio en los criterios de §1 se registra en §4 y se comunica en el punto de control de la etapa siguiente.
 - La DoD **no habla de cuándo empezar**: eso es la Definition of Ready, y las dos no se solapan.

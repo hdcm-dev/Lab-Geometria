@@ -38,7 +38,7 @@
 | Casos de la batería obligatoria del validador | 0 de **10**, con los ocho escenarios `E-1` a `E-8` como entrada |
 | Puertas técnicas que lo alcanzan | **`PT-04`**, en su parte de transformaciones aplicadas sobre base vacía, medida en la etapa `a` |
 
-**Las etapas `b`, `g` y `h` no producen trabajo acá**, y el motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2, incluida la `h`, cuyo aporte ya está construido en la `e`.
+**Las etapas `b`, `g` y `h` no producen trabajo acá**, y el motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) §2, incluida la `h`, cuyo aporte ya está construido en la `e`.
 
 ## 4. Dónde vive lo que este plan no decide
 

@@ -37,7 +37,7 @@
 | Tareas técnicas comprometidas | 21 |
 | Puertas técnicas propias | **Ninguna de las cinco del producto se mide sobre este proyecto de código.** Lo que sí lo alcanza es la consecuencia: una puerta que no pasa detiene la planificación de las etapas que dependen de ella |
 
-**Las etapas `b` y `g` no producen trabajo acá**, y el motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2.
+**Las etapas `b` y `g` no producen trabajo acá**, y el motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) §2.
 
 ## 4. Dónde vive lo que este plan no decide
 

@@ -78,7 +78,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 - **Trazabilidad obligatoria** en la §8 de cada markdown, con al menos una fila por caso de uso, regla, regla conceptual o ADR.
 - **Criterio de aceptación evaluable por una máquina**: exit code más líneas exactas de salida. Ninguno está redactado como prosa.
 - **Los datos son reales**, transcriptos del `PRODUCT-INTAKE` §20 sin modificación, en archivos `.txt` y no `.json`, porque el texto de `E-2` **no es JSON estrictamente válido** y una herramienta que lo reformateara rompería justamente la tolerancia que ese escenario ejercita.
-- **Los samples no acuñan vocabulario ni condiciones.** Todo término está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md), y las **17** condiciones tienen fuente única en [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md).
+- **Los samples no acuñan vocabulario ni condiciones.** Todo término está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md), y las **17** condiciones tienen fuente única en [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md).
 
 ## 5. Estructura de `/samples` y su desvío declarado
 

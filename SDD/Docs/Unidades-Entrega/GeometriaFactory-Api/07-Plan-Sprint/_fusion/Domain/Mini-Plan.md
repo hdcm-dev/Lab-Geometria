@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Scrum Master + Maintainer Lead (AG-07)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) **1.1** (seis épicas, veintisiete historias), [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md) **1.1** (dieciséis tareas técnicas) y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §2 (`equipo_n = 1`), §10 y §15 (etapas, reglas de delivery y puertas técnicas); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8, §9 y §11; [`../../../Producto/Vista-Producto.md`](../../../../../Producto/Vista-Producto.md) 1.1 §3
+**Trazabilidad upstream:** [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) **1.1** (seis épicas, veintisiete historias), [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/Backlog-Tecnico.md) **1.1** (dieciséis tareas técnicas) y [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/Definition-Of-Ready.md) 1.0; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) 1.5 §2.1, §4 y §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §2 (`equipo_n = 1`), §10 y §15 (etapas, reglas de delivery y puertas técnicas); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8, §9 y §11; [`../../../Producto/Vista-Producto.md`](../../../../../Producto/Vista-Producto.md) 1.1 §3
 **Trazabilidad downstream:** `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---
@@ -39,7 +39,7 @@
 | Etapas que toca este proyecto de código | **Seis**: `a`, `c`, `d`, `e`, `f`, `h` |
 | Duración de cada etapa | **Sin fecha.** El intake declara sin plazo calendario y el avance se mide por etapas cerradas (`Roadmap-Producto.md` §1.1) |
 | Tamaño del equipo | `equipo_n = 1` (`PRODUCT-INTAKE` §2) |
-| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §4.1 |
+| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) §4.1 |
 | Nivel topológico | **0**, sin dependencias salientes (`Vista-Producto.md` §3) |
 | Paralelismo entre etapas | **Ninguno.** Las etapas son estrictamente secuenciales y sin OK explícito no se avanza (`Roadmap-Producto.md` §4) |
 
@@ -68,7 +68,7 @@ Una frase por etapa, orientada a lo que queda disponible al cerrarla. Las frases
 | `f` | El consumidor puede adoptar el conjunto de piezas y las observaciones de un trabajo, y resolver si el envío lo lleva a estado `Pendiente` o lo deja en `Borrador`. |
 | `h` | El consumidor puede resolver el desenlace de un trabajo en estado `Pendiente` y la eliminación por el administrador, con los dos estados terminales operativos. |
 
-**Las etapas `b` y `g` no producen trabajo en este proyecto de código**, y por eso no tienen fila. No es un hueco: es lo que [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §2 declara con su motivo.
+**Las etapas `b` y `g` no producen trabajo en este proyecto de código**, y por eso no tienen fila. No es un hueco: es lo que [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) §2 declara con su motivo.
 
 ## 3. Ítems comprometidos por tramo
 
@@ -126,7 +126,7 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**. La 
 
 Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md).
 
-**Orden dentro de cada etapa**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md) §3:
+**Orden dentro de cada etapa**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/Backlog-Tecnico.md) §3:
 
 1. `a`: BT-02001 primero; BT-02002 y BT-02003 en paralelo sobre él; BT-02004 y BT-02005 al cerrar, porque son puertas y no se pueden medir sobre un proyecto que todavía no compila.
 2. `c`: BT-02006 y BT-02007 antes que BT-02010 y BT-02011; las cuatro historias de la etapa después de las cuatro tareas.

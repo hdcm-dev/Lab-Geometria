@@ -74,7 +74,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 - **Trazabilidad obligatoria** en la §8 de cada markdown, con al menos una fila por caso de uso, regla, ADR o NFR.
 - **Criterio de aceptación evaluable por una máquina**: exit code más líneas exactas de salida. Ninguno está redactado como prosa.
 - **Los datos son reales.** Los resultados de interpretación de los escenarios del `PRODUCT-INTAKE` §20 se transcriben de la sección «qué verificar» del escenario correspondiente y no se sustituyen por datos sintéticos. Los datos de identidad y de orquestación que ningún escenario da —un correo, un nombre, un identificador, un momento— son valores evidentemente ficticios y se declaran como tales, que es la regla de [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6.
-- **Los samples no acuñan vocabulario ni condiciones.** Todo término está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md), y las condiciones salen del catálogo cerrado de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md).
+- **Los samples no acuñan vocabulario ni condiciones.** Todo término está declarado en [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../../../02-Especificacion-Funcional/Glosario-Funcional.md), y las condiciones salen del catálogo cerrado de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md).
 
 ## 5. Estructura de `/samples` y su desvío declarado
 

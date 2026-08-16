@@ -9,7 +9,7 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/infrastructure/03-avanzado/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06006` a `CU-06010`; [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md), [`ADR-06005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) y [`ADR-06007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md) §2.4, la regla de detenerse en lugar de cumplir a medias
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06006` a `CU-06010`; [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md), [`ADR-06005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) y [`ADR-06007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §2.4, la regla de detenerse en lugar de cumplir a medias
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06003` como sonda; `11-Documentacion` cuando se emita
 
 ---
@@ -85,7 +85,7 @@ Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
 
 **La cuarta línea de `[1]` es la que más se confunde.** Un derivado **ilegible** no es lo mismo que una credencial **incorrecta**: la segunda es una respuesta legítima del mecanismo y la primera es un almacén en el que no se puede confiar. Colapsarlas haría que un dato corrupto se leyera como «contraseña equivocada» y nadie se enteraría nunca.
 
-**La segunda línea de `[2]` es la regla de detenerse dicha con números.** Sin fuente de material impredecible, los valores producidos son **0**: el mecanismo no compone la provisoria por otro medio, no cae hacia un sustituto y no la deriva de un dato de la cuenta. Es la regla que gobierna las **17** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md) §2.4.
+**La segunda línea de `[2]` es la regla de detenerse dicha con números.** Sin fuente de material impredecible, los valores producidos son **0**: el mecanismo no compone la provisoria por otro medio, no cae hacia un sustituto y no la deriva de un dato de la cuenta. Es la regla que gobierna las **17** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §2.4.
 
 **La línea `[4]` con el sello idéntico entre dos corridas es lo que hace reproducible a todo el resto del producto.** El reloj llega **por un puerto** para que las pruebas lo puedan fijar; si esta capa leyera el reloj del sistema directamente, ningún sample de ningún proyecto de código podría tener un criterio de aceptación comparable.
 

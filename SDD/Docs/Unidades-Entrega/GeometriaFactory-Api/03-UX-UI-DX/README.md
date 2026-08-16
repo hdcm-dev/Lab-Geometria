@@ -1,11 +1,11 @@
 # 03 · UX / UI / DX — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.4
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
 **Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/) completo (doce casos de uso, `Especificacion-Funcional.md` con su §3 de responsabilidades y su §4 de frontera, `Definicion-Superficie-HTTP.md`, `Glosario-Funcional.md` y su `README.md`); `00-Contexto/Vision-Producto.md` y `00-Contexto/Alcance-Producto.md`; `01-Necesidades-Negocio/Necesidades-Negocio.md`; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/` (RN-00001 a RN-00016); `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/` (el conjunto cerrado de diecisiete códigos); `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.3**; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §14, §16, §18 y §17.5
@@ -24,6 +24,26 @@
 - [7. Control de cambios](#7-control-de-cambios)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los cuatro documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los homónimos
+de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada uno lleva una subsección por
+proyecto de código.
+
+**El de más volumen del corpus de la fusión es** [`DX-Error-Messages.md`](DX-Error-Messages.md), con
+**853 líneas de contenido único** entre las cuatro capas: es una unión de catálogo, y sus códigos no
+colisionaban porque la renumeración les había dado rango propio. **Los principios de redacción los
+declaraba sólo el host**, y valen para los cuatro catálogos.
+
+Y [`Guia-Onboarding-Developer.md`](Guia-Onboarding-Developer.md) reúne por primera vez **los cuatro
+atajos propios de cada capa** —dónde va una regla nueva, la inversión de dependencias en la práctica,
+los tres atajos que no fallan de la infraestructura y las tres cosas que no fallan del host—, que es
+exactamente lo que un desarrollador nuevo necesita y que ninguna guía sola le daba.
+
+**La carpeta `_fusion/` de esta categoría se retira**: la fusión terminó acá. Los documentos absorbidos
+están en [`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/03-UX-UI-DX/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/03-UX-UI-DX/).
 
 ## 1. Variante aplicada y por qué
 
@@ -114,3 +134,4 @@ Los criterios siguientes de `Rules-UX-UI-DX.md` §6 son de la variante UX/UI o e
 | 1.2 | 2026-08-10 | **Cierra el hallazgo `C-02` (P0) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0 en una declaración viva que el informe no registra, contra `PRODUCT-INTAKE` 1.14.** La nota «las reglas de negocio no viven acá» decía **quince**. Las reglas del producto son **dieciséis**, `RN-00001` a `RN-00016`, contadas sobre los archivos de `GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`. Las «catorce de las quince **rutas**» de este mismo archivo se recontaron y **no cambian**: son los quince puntos de acceso de la superficie, que es otro conjunto cerrado. **Ningún documento de la sección y ningún orden de lectura cambia.** Sube minor. |
 | 1.3 | 2026-08-11 | **Cierra los hallazgos `B-API-01` (P0), `B-API-06` (P1), `B-API-16` (P3) y `B-API-13` (P3)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0, y **absorbe la propagación de `B-API-12` (P2)**. **§2**, fila de `DX-Error-Messages.md`: el catálogo pasa de «**18 entradas** —16 códigos con destino más 2 sin código—» a «**16 entradas** —**14** códigos con destino más 2 sin código—», recontado sobre las siete tablas de §3 de aquel documento (3+2+2+1+2+5+1 = 16) y coincidente con su §6.1 y su §6.2, con `../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §6 y con `GeometriaFactory-Contracts/CU-00006` §10. **§6**, nota «Las reglas de negocio no viven acá»: el reparto pasa de «trece con tramo acá, **dos** sin él» a «**tres** sin él», que es lo que dice la fuente citada —`../02-Especificacion-Funcional/Especificacion-Funcional.md` §6: «Trece de las dieciséis tienen tramo acá y tres no lo tienen»—, con las tres sin tramo contadas sobre su tabla: `RN-00005`, `RN-00014` y `RN-00016`. La emisión 1.2 había corregido «quince reglas» a «dieciséis» **en la misma oración** sin recontar el reparto. **§6**, puntos abiertos: el reparto de los once pasa de siete propios y cuatro heredados a **seis y cinco**, con la vigencia del acceso firmado rotulada heredada también en `Especificacion-Funcional.md` §11. **§4**, fila de `DX-Operability.md`: el motivo suma la condición de la guía —recomendado para `rest-api` **con SLO estricto**— y declara el flag `tiene_observabilidad_critica` == true con lo que ese flag registra según `PRODUCT-MANIFEST` 1.3 §5; **la omisión sigue siendo correcta**. **Cabecera**: pasa a citar `PRODUCT-INTAKE` **1.26** y `PRODUCT-MANIFEST` **1.3**. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**, según la condición de método del informe: el recuento del catálogo se citaba mal en **seis lugares vivos de cuatro documentos**, todos de esta categoría, y los seis se corrigen en esta tanda; el reparto «trece con tramo, dos sin él» tenía **dos** ocurrencias falsas en esta categoría —ésta y `DX-Developer-Experience.md` §8— sobre cuatro citas vivas del reparto en el proyecto de código, y las otras dos ya decían tres; el reparto de puntos abiertos se corrige en los **tres** lugares vivos que lo citan. **Ningún artefacto se agrega ni se omite y ninguna omisión declarada cambia de veredicto.** Sube minor. **Enmienda de esta misma fila, 2026-08-11**, absorbida en la versión en curso sin subir —la política de versionado del framework absorbe dentro de la versión vigente las correcciones derivadas del audit de la propia fase de emisión mientras el documento está en `Propuesto`—: el alcance de propagación declaraba «cinco documentos» donde son **cuatro**, contados sobre la enumeración misma —`README.md`, `Glosario-UX.md`, `DX-Developer-Experience.md` y `Guia-Onboarding-Developer.md`—; el número venía heredado sin recontar de la ronda 1. **Los seis lugares siguen siendo seis y ningún recuento del producto se mueve.** Cierra el hallazgo `N-01` (P2) de [`B-02-03-GeometriaFactory-Api-r2.md`](../../../Audit/B-02-03-GeometriaFactory-Api-r2.md) 1.0. |
 | 1.4 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**, con sus documentos consolidados en 2.0. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

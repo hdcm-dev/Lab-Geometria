@@ -189,7 +189,7 @@ Toda operación que pueda rechazar devuelve un resultado con dos salidas posible
 
 ### 5.2 `GeometriaFactory-Application`
 
-- **El conjunto de condiciones es cerrado y su fuente única es la categoría 03**: las **36** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md). Este contrato no acuña ninguna y no las transcribe: las referencia ([`ADR-04006`](Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md)).
+- **El conjunto de condiciones es cerrado y su fuente única es la categoría 03**: las **36** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md). Este contrato no acuña ninguna y no las transcribe: las referencia ([`ADR-04006`](Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md)).
 - **Resultado tipado, no excepción.** Toda condición prevista viaja como valor de retorno con su código estable. Las excepciones quedan reservadas a defectos de programación del consumidor.
 - **Las tres negativas de autorización no se confunden.** La de pertenencia oculta la existencia del recurso y el consumidor la traduce a «no encontrado» y **nunca** a «no autorizado»; la de facultad sí admite ser explícita; la de alcance del administrador es propia y distinta de las dos.
 - **Una sola negativa de facultad**, aunque el dominio declare dos códigos para la misma: esta capa corta con su propia verificación antes de invocarlo.
@@ -199,7 +199,7 @@ Toda operación que pueda rechazar devuelve un resultado con dos salidas posible
 
 ### 5.3 `GeometriaFactory-Infrastructure`
 
-- **El conjunto de condiciones es cerrado y su fuente única es la categoría 03**: las **17** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md). Este contrato no acuña ninguna y no las transcribe: las referencia.
+- **El conjunto de condiciones es cerrado y su fuente única es la categoría 03**: las **17** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md). Este contrato no acuña ninguna y no las transcribe: las referencia.
 - **Código, no texto y no excepción.** Esta capa emite un código estable de una enumeración cerrada. No produce mensajes para personas, no los formatea y no los traduce.
 - **Ningún código es un código de protocolo.** Su traducción pertenece a `GeometriaFactory-Api`, y una sola condición tiene destinatario declarado aguas arriba: `INTERPRETACION_NO_DISPONIBLE`, que `GeometriaFactory-Application` `CU-06005` §6 espera por el puerto de validación.
 - **Dos categorías de conflicto están vacías, y no es un hueco**: facultad y alcance. **Esta capa no autoriza** y no recibe la identidad del solicitante para comprobar nada. Quien busque acá una negativa de autorización está buscando en la capa equivocada.

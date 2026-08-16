@@ -1,0 +1,914 @@
+{
+ "reconectados": [
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Testing.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Testing.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../../../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../../../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/ejemplo-03-avanzado.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../../../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/ejemplo-03-avanzado.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../../../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/Supply-Chain-Seguridad.md",
+   "anterior": "_fusion/Infrastructure/Supply-Chain-Seguridad.md",
+   "nuevo": "Supply-Chain-Seguridad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "_fusion/Infrastructure/Estrategia-Versionado.md",
+   "nuevo": "Estrategia-Versionado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md",
+   "anterior": "_fusion/Infrastructure/Estrategia-Versionado.md",
+   "nuevo": "Estrategia-Versionado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/Estrategia-Versionado.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/Estrategia-Versionado.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/Glosario-UX.md",
+   "nuevo": "../03-UX-UI-DX/Glosario-UX.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/Glosario-UX.md",
+   "nuevo": "../03-UX-UI-DX/Glosario-UX.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Application/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Application/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Application/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Application/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Application/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Application/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Application/README.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Infrastructure/Definition-Of-Ready.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Infrastructure/README.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Domain/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Domain/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Domain/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Domain/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Domain/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/_fusion/Domain/Mini-Plan.md",
+   "anterior": "../../../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md",
+   "nuevo": "../../../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+   "nuevo": "../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+   "nuevo": "../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02007-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md",
+   "nuevo": "historias-usuario/US-02007-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02008-Evaluar-La-Admisibilidad-De-La-Cuenta.md",
+   "nuevo": "historias-usuario/US-02008-Evaluar-La-Admisibilidad-De-La-Cuenta.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02024-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md",
+   "nuevo": "historias-usuario/US-02024-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02025-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md",
+   "nuevo": "historias-usuario/US-02025-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02001-Constituir-Un-Alumno-Con-Cuenta-Pendiente-Y-Sin-Credencial.md",
+   "nuevo": "historias-usuario/US-02001-Constituir-Un-Alumno-Con-Cuenta-Pendiente-Y-Sin-Credencial.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02002-Rechazar-El-Alta-Con-Datos-Obligatorios-Ausentes.md",
+   "nuevo": "historias-usuario/US-02002-Rechazar-El-Alta-Con-Datos-Obligatorios-Ausentes.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02003-Exigir-La-Unicidad-Del-Correo-Verificada-En-El-Alta.md",
+   "nuevo": "historias-usuario/US-02003-Exigir-La-Unicidad-Del-Correo-Verificada-En-El-Alta.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02004-Habilitar-Bloquear-Y-Rehabilitar-Una-Cuenta.md",
+   "nuevo": "historias-usuario/US-02004-Habilitar-Bloquear-Y-Rehabilitar-Una-Cuenta.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02005-Dar-De-Baja-Una-Cuenta-Arrastrando-Sus-Trabajos.md",
+   "nuevo": "historias-usuario/US-02005-Dar-De-Baja-Una-Cuenta-Arrastrando-Sus-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02006-Fijar-La-Credencial-Provisoria-En-El-Acto-De-Habilitacion.md",
+   "nuevo": "historias-usuario/US-02006-Fijar-La-Credencial-Provisoria-En-El-Acto-De-Habilitacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02026-Resetear-La-Contrasena-Conservando-Cuenta-Y-Trabajos.md",
+   "nuevo": "historias-usuario/US-02026-Resetear-La-Contrasena-Conservando-Cuenta-Y-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02027-Exigir-El-Cambio-De-La-Provisoria-Antes-De-Toda-Otra-Capacidad.md",
+   "nuevo": "historias-usuario/US-02027-Exigir-El-Cambio-De-La-Provisoria-Antes-De-Toda-Otra-Capacidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02009-Constituir-Un-Trabajo-Con-Dueno-Identidad-Y-Texto-Original.md",
+   "nuevo": "historias-usuario/US-02009-Constituir-Un-Trabajo-Con-Dueno-Identidad-Y-Texto-Original.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02010-Reeditar-Un-Trabajo-En-Borrador-Descartando-La-Interpretacion-Anterior.md",
+   "nuevo": "historias-usuario/US-02010-Reeditar-Un-Trabajo-En-Borrador-Descartando-La-Interpretacion-Anterior.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02018-Resolver-La-Pertenencia-De-Un-Trabajo-A-Su-Dueno.md",
+   "nuevo": "historias-usuario/US-02018-Resolver-La-Pertenencia-De-Un-Trabajo-A-Su-Dueno.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02019-Acotar-Al-Borrador-Lo-Que-El-Alumno-Reedita-Y-Elimina.md",
+   "nuevo": "historias-usuario/US-02019-Acotar-Al-Borrador-Lo-Que-El-Alumno-Reedita-Y-Elimina.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02022-Excluir-Los-Borradores-Del-Alcance-Del-Administrador.md",
+   "nuevo": "historias-usuario/US-02022-Excluir-Los-Borradores-Del-Alcance-Del-Administrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02011-Reconstruir-El-Conjunto-De-Piezas-Con-Identidad-Posicional.md",
+   "nuevo": "historias-usuario/US-02011-Reconstruir-El-Conjunto-De-Piezas-Con-Identidad-Posicional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02012-Derivar-La-Familia-Plana-O-Volumetrica-Desde-El-Tipo.md",
+   "nuevo": "historias-usuario/US-02012-Derivar-La-Familia-Plana-O-Volumetrica-Desde-El-Tipo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02013-Registrar-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md",
+   "nuevo": "historias-usuario/US-02013-Registrar-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02014-Registrar-Errores-De-Validacion-Con-Posicion-De-Pieza-Y-Campo.md",
+   "nuevo": "historias-usuario/US-02014-Registrar-Errores-De-Validacion-Con-Posicion-De-Pieza-Y-Campo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02015-Enviar-Un-Trabajo-Que-Verifica-Y-Pasa-A-Estado-Pendiente.md",
+   "nuevo": "historias-usuario/US-02015-Enviar-Un-Trabajo-Que-Verifica-Y-Pasa-A-Estado-Pendiente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02016-Enviar-Un-Trabajo-Que-No-Verifica-Y-Queda-En-Borrador.md",
+   "nuevo": "historias-usuario/US-02016-Enviar-Un-Trabajo-Que-No-Verifica-Y-Queda-En-Borrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02017-Rechazar-Toda-Transicion-Desde-Un-Estado-Terminal.md",
+   "nuevo": "historias-usuario/US-02017-Rechazar-Toda-Transicion-Desde-Un-Estado-Terminal.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02020-Aprobar-Un-Trabajo-En-Estado-Pendiente.md",
+   "nuevo": "historias-usuario/US-02020-Aprobar-Un-Trabajo-En-Estado-Pendiente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02021-Rechazar-Un-Trabajo-En-Estado-Pendiente.md",
+   "nuevo": "historias-usuario/US-02021-Rechazar-Un-Trabajo-En-Estado-Pendiente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-02023-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md",
+   "nuevo": "historias-usuario/US-02023-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04003-Configurar-La-Cuenta-De-Administrador-Con-Su-Ventana-De-Alta.md",
+   "nuevo": "historias-usuario/US-04003-Configurar-La-Cuenta-De-Administrador-Con-Su-Ventana-De-Alta.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04007-Devolver-El-Motivo-De-Una-Cuenta-Que-No-Admite-Ingreso.md",
+   "nuevo": "historias-usuario/US-04007-Devolver-El-Motivo-De-Una-Cuenta-Que-No-Admite-Ingreso.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04009-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md",
+   "nuevo": "historias-usuario/US-04009-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04028-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md",
+   "nuevo": "historias-usuario/US-04028-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04001-Constituir-Una-Cuenta-De-Alumno-Pendiente-Y-Sin-Credencial.md",
+   "nuevo": "historias-usuario/US-04001-Constituir-Una-Cuenta-De-Alumno-Pendiente-Y-Sin-Credencial.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04002-Rechazar-El-Alta-Con-Un-Correo-Ya-Registrado.md",
+   "nuevo": "historias-usuario/US-04002-Rechazar-El-Alta-Con-Un-Correo-Ya-Registrado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04004-Habilitar-Bloquear-Y-Rehabilitar-Con-Verificacion-De-Facultad.md",
+   "nuevo": "historias-usuario/US-04004-Habilitar-Bloquear-Y-Rehabilitar-Con-Verificacion-De-Facultad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04005-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Como-Confirmacion.md",
+   "nuevo": "historias-usuario/US-04005-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Como-Confirmacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04006-Arrastrar-En-La-Baja-Todos-Los-Trabajos-De-La-Cuenta.md",
+   "nuevo": "historias-usuario/US-04006-Arrastrar-En-La-Baja-Todos-Los-Trabajos-De-La-Cuenta.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04008-Fijar-La-Credencial-Derivada-Provisoria-Dentro-De-La-Habilitacion.md",
+   "nuevo": "historias-usuario/US-04008-Fijar-La-Credencial-Derivada-Provisoria-Dentro-De-La-Habilitacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04029-Resetear-La-Contrasena-De-Un-Alumno-Con-Verificacion-De-Facultad.md",
+   "nuevo": "historias-usuario/US-04029-Resetear-La-Contrasena-De-Un-Alumno-Con-Verificacion-De-Facultad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04030-Impedir-Que-Una-Cuenta-Marcada-Ejerza-Cualquier-Otra-Capacidad.md",
+   "nuevo": "historias-usuario/US-04030-Impedir-Que-Una-Cuenta-Marcada-Ejerza-Cualquier-Otra-Capacidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04031-Conservar-La-Cuenta-Su-Estado-Y-Todos-Sus-Trabajos-Tras-El-Reseteo.md",
+   "nuevo": "historias-usuario/US-04031-Conservar-La-Cuenta-Su-Estado-Y-Todos-Sus-Trabajos-Tras-El-Reseteo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04032-Levantar-La-Marca-Con-El-Cambio-Hecho-Por-La-Propia-Cuenta.md",
+   "nuevo": "historias-usuario/US-04032-Levantar-La-Marca-Con-El-Cambio-Hecho-Por-La-Propia-Cuenta.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04010-Cargar-Un-Trabajo-Con-Dueno-Identificador-Propio-Y-Sello-Del-Reloj.md",
+   "nuevo": "historias-usuario/US-04010-Cargar-Un-Trabajo-Con-Dueno-Identificador-Propio-Y-Sello-Del-Reloj.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04011-Conservar-El-Texto-Original-Integro-Al-Cargar-Y-Al-Reeditar.md",
+   "nuevo": "historias-usuario/US-04011-Conservar-El-Texto-Original-Integro-Al-Cargar-Y-Al-Reeditar.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04012-Reeditar-Solo-Un-Trabajo-Propio-En-Borrador.md",
+   "nuevo": "historias-usuario/US-04012-Reeditar-Solo-Un-Trabajo-Propio-En-Borrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04017-Listar-Los-Trabajos-Propios-Con-Los-Cuatro-Estados-Distinguibles.md",
+   "nuevo": "historias-usuario/US-04017-Listar-Los-Trabajos-Propios-Con-Los-Cuatro-Estados-Distinguibles.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04019-Devolver-El-Detalle-Con-Piezas-Y-Componentes-Y-El-Listado-Sin-Componentes.md",
+   "nuevo": "historias-usuario/US-04019-Devolver-El-Detalle-Con-Piezas-Y-Componentes-Y-El-Listado-Sin-Componentes.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04020-Listar-Los-Trabajos-De-La-Comision-Excluyendo-Los-Borradores.md",
+   "nuevo": "historias-usuario/US-04020-Listar-Los-Trabajos-De-La-Comision-Excluyendo-Los-Borradores.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04021-Filtrar-El-Listado-De-La-Comision-Por-Alumno.md",
+   "nuevo": "historias-usuario/US-04021-Filtrar-El-Listado-De-La-Comision-Por-Alumno.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04022-Abrir-El-Detalle-De-Un-Trabajo-De-La-Comision.md",
+   "nuevo": "historias-usuario/US-04022-Abrir-El-Detalle-De-Un-Trabajo-De-La-Comision.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04026-Eliminar-Un-Trabajo-Propio-Solo-En-Borrador.md",
+   "nuevo": "historias-usuario/US-04026-Eliminar-Un-Trabajo-Propio-Solo-En-Borrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04013-Enviar-Un-Trabajo-Con-Advertencias-Y-Que-Pase-A-Estado-Pendiente.md",
+   "nuevo": "historias-usuario/US-04013-Enviar-Un-Trabajo-Con-Advertencias-Y-Que-Pase-A-Estado-Pendiente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04014-Enviar-Un-Trabajo-Con-Errores-Y-Que-Quede-En-Borrador.md",
+   "nuevo": "historias-usuario/US-04014-Enviar-Un-Trabajo-Con-Errores-Y-Que-Quede-En-Borrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04015-Interpretar-El-Texto-Por-El-Puerto-Sin-Tocar-La-Base-De-Datos.md",
+   "nuevo": "historias-usuario/US-04015-Interpretar-El-Texto-Por-El-Puerto-Sin-Tocar-La-Base-De-Datos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04016-Terminar-De-Forma-Controlada-Cuando-La-Interpretacion-No-Esta-Disponible.md",
+   "nuevo": "historias-usuario/US-04016-Terminar-De-Forma-Controlada-Cuando-La-Interpretacion-No-Esta-Disponible.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04018-Ver-El-Desenlace-Y-El-Comentario-Del-Trabajo-Propio.md",
+   "nuevo": "historias-usuario/US-04018-Ver-El-Desenlace-Y-El-Comentario-Del-Trabajo-Propio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04023-Aprobar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md",
+   "nuevo": "historias-usuario/US-04023-Aprobar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04024-Rechazar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md",
+   "nuevo": "historias-usuario/US-04024-Rechazar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04025-Rechazar-Toda-Transicion-Sin-Facultad-O-Desde-Un-Estado-Terminal.md",
+   "nuevo": "historias-usuario/US-04025-Rechazar-Toda-Transicion-Sin-Facultad-O-Desde-Un-Estado-Terminal.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-04027-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md",
+   "nuevo": "historias-usuario/US-04027-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06024-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md",
+   "nuevo": "historias-usuario/US-06024-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06025-Detener-El-Arranque-En-Lugar-De-Operar-Sobre-Un-Almacen-Dudoso.md",
+   "nuevo": "historias-usuario/US-06025-Detener-El-Arranque-En-Lugar-De-Operar-Sobre-Un-Almacen-Dudoso.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06014-Sostener-En-El-Almacen-La-Unicidad-Del-Correo-Y-La-Del-Administrador.md",
+   "nuevo": "historias-usuario/US-06014-Sostener-En-El-Almacen-La-Unicidad-Del-Correo-Y-La-Del-Administrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06015-Responder-Las-Dos-Preguntas-Sobre-El-Conjunto.md",
+   "nuevo": "historias-usuario/US-06015-Responder-Las-Dos-Preguntas-Sobre-El-Conjunto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06017-Derivar-Una-Contrasena-Sin-Guardarla-Ni-Registrarla-En-Claro.md",
+   "nuevo": "historias-usuario/US-06017-Derivar-Una-Contrasena-Sin-Guardarla-Ni-Registrarla-En-Claro.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06018-Verificar-Una-Credencial-Y-Distinguir-El-Derivado-Ilegible.md",
+   "nuevo": "historias-usuario/US-06018-Verificar-Una-Credencial-Y-Distinguir-El-Derivado-Ilegible.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06021-Emitir-El-Acceso-Firmado-Con-Sus-Cuatro-Reclamos.md",
+   "nuevo": "historias-usuario/US-06021-Emitir-El-Acceso-Firmado-Con-Sus-Cuatro-Reclamos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06022-Rechazar-La-Emision-Sin-Clave-De-Firma.md",
+   "nuevo": "historias-usuario/US-06022-Rechazar-La-Emision-Sin-Clave-De-Firma.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06023-Proveer-El-Sello-Por-Un-Puerto-Para-Que-Las-Pruebas-Lo-Puedan-Fijar.md",
+   "nuevo": "historias-usuario/US-06023-Proveer-El-Sello-Por-Un-Puerto-Para-Que-Las-Pruebas-Lo-Puedan-Fijar.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06013-Arrastrar-Todos-Los-Trabajos-De-Una-Cuenta-Dada-De-Baja.md",
+   "nuevo": "historias-usuario/US-06013-Arrastrar-Todos-Los-Trabajos-De-Una-Cuenta-Dada-De-Baja.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06016-Conservar-Y-Transportar-La-Marca-Sin-Alterar-El-Estado.md",
+   "nuevo": "historias-usuario/US-06016-Conservar-Y-Transportar-La-Marca-Sin-Alterar-El-Estado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06019-Producir-Una-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md",
+   "nuevo": "historias-usuario/US-06019-Producir-Una-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06020-Terminar-Sin-Producir-Valor-Cuando-La-Aleatoriedad-No-Responde.md",
+   "nuevo": "historias-usuario/US-06020-Terminar-Sin-Producir-Valor-Cuando-La-Aleatoriedad-No-Responde.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06008-Conservar-El-Texto-Original-Literal-Y-Rechazar-Toda-Escritura-Que-Lo-Reemplace.md",
+   "nuevo": "historias-usuario/US-06008-Conservar-El-Texto-Original-Literal-Y-Rechazar-Toda-Escritura-Que-Lo-Reemplace.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06009-Materializar-El-Trabajo-Con-Sus-Piezas-Componentes-Y-Observaciones.md",
+   "nuevo": "historias-usuario/US-06009-Materializar-El-Trabajo-Con-Sus-Piezas-Componentes-Y-Observaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06010-Resolver-La-Consulta-Con-El-Recorte-Ya-Trasladado-Al-Pedido.md",
+   "nuevo": "historias-usuario/US-06010-Resolver-La-Consulta-Con-El-Recorte-Ya-Trasladado-Al-Pedido.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06011-Excluir-Componentes-Y-Texto-Original-Del-Resultado-De-Un-Listado.md",
+   "nuevo": "historias-usuario/US-06011-Excluir-Componentes-Y-Texto-Original-Del-Resultado-De-Un-Listado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06012-Retirar-Fisicamente-Un-Trabajo-Con-Todo-Lo-Que-Cuelga-De-El.md",
+   "nuevo": "historias-usuario/US-06012-Retirar-Fisicamente-Un-Trabajo-Con-Todo-Lo-Que-Cuelga-De-El.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06001-Leer-El-Texto-Real-Con-Tolerancia-A-Comas-Finales-Y-Claves-Sinonimas.md",
+   "nuevo": "historias-usuario/US-06001-Leer-El-Texto-Real-Con-Tolerancia-A-Comas-Finales-Y-Claves-Sinonimas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06002-Devolver-La-Cantidad-De-Figuras-Del-Conjunto-Raiz.md",
+   "nuevo": "historias-usuario/US-06002-Devolver-La-Cantidad-De-Figuras-Del-Conjunto-Raiz.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06003-Reconstruir-Las-Piezas-Con-Su-Posicion-Y-Sus-Componentes.md",
+   "nuevo": "historias-usuario/US-06003-Reconstruir-Las-Piezas-Con-Su-Posicion-Y-Sus-Componentes.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06004-Emitir-El-Error-De-Validacion-Con-Posicion-De-Figura-Y-Campo.md",
+   "nuevo": "historias-usuario/US-06004-Emitir-El-Error-De-Validacion-Con-Posicion-De-Figura-Y-Campo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06005-Derivar-El-Valor-Desde-Las-Dimensiones-Y-Los-Componentes.md",
+   "nuevo": "historias-usuario/US-06005-Derivar-El-Valor-Desde-Las-Dimensiones-Y-Los-Componentes.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06006-Comparar-Con-Tolerancia-Absoluta-Y-Operador-Estricto.md",
+   "nuevo": "historias-usuario/US-06006-Comparar-Con-Tolerancia-Absoluta-Y-Operador-Estricto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../historias-usuario/US-06007-Emitir-La-Advertencia-Con-El-Valor-Declarado-Y-El-Derivado.md",
+   "nuevo": "historias-usuario/US-06007-Emitir-La-Advertencia-Con-El-Valor-Declarado-Y-El-Derivado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md",
+   "nuevo": "../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md",
+   "nuevo": "../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md",
+   "nuevo": "../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Definition-Of-Ready.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Definition-Of-Ready.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Definition-Of-Ready.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Infrastructure/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/Definition-Of-Ready.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  }
+ ],
+ "sin_resolver": [
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Casos-Prueba-Referenciales.md"
+  }
+ ]
+}

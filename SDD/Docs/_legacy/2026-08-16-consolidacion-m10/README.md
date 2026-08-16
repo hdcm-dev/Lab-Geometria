@@ -3,7 +3,7 @@
 **Fecha:** 2026-08-16
 **Motivo:** `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.0
 **Regla:** `Migracion-Rules.md` §4.3.2
-**Estado:** **En curso.** 16 de 67 grupos consolidados · **3 de 18 carpetas `_fusion/` retiradas**
+**Estado:** **En curso.** 27 de 67 grupos consolidados · **6 de 18 carpetas `_fusion/` retiradas**
 
 ---
 
@@ -25,18 +25,26 @@ una selección.
 | `08-Calidad-Y-Pruebas` | 9 | 24 | **S1** en cinco, **S2** en tres, **S3** el índice |
 | `05-Arquitectura-Tecnica` | 4 | 11 | **S1** en uno, **S2** en dos, **S3** el índice |
 | `02-Especificacion-Funcional` | 3 | 9 + 3 snapshots `_legacy/` | **S1** el índice maestro, **S2** el glosario, **S3** el `README` |
+| `03-UX-UI-DX` | 5 | 15 | **S1** en dos, **S2** en dos, **S3** el índice |
+| `06-Backlog-Tecnico` | 4 | 12 | **S1** en uno, **S2** en dos, **S3** el índice |
+| `09-Devops` | 5 | 15 | **S1** en cuatro, **S3** el índice |
 
-**Preservación medida sobre los doce documentos que transponen: 3070 líneas de contenido absorbidas,
-0 sin correspondencia.** Los tres `README` no transponen —les corresponde **S3**, reescribir el
-índice— y sus 313 líneas son las listas de artefactos de categorías que dejaron de existir; están
-enteras acá.
+**Preservación medida sobre los veintiún documentos que transponen: 6765 líneas de contenido
+absorbidas, 0 sin correspondencia.** Los seis `README` no transponen —les corresponde **S3**— y sus
+545 líneas están enteras acá.
+
+**Un hueco encontrado y cerrado en la tercera tanda: el preámbulo.** La transposición leía sólo el
+contenido dentro de las secciones numeradas, y **el texto entre la cabecera y la §1 se perdía**.
+Alcanzaba a un solo documento —`Supply-Chain-Seguridad`, donde las tres capas declaraban por separado
+de dónde sale su política— y quedó recuperado como su §1. El verificador de preservación se corrigió
+para contarlo.
 
 **Los snapshots `_legacy/` que viajaban dentro de `_fusion/` acompañan a sus documentos**, que es la
 decisión que el análisis §6 dejaba abierta.
 
 ## Qué falta
 
-**51 grupos** en **6 categorías de `GeometriaFactory-Api`** y **las 9 de `GeometriaFactory-Web`**, con su clasificación propuesta y su orden en
+**40 grupos** en **3 categorías de `GeometriaFactory-Api`** —`07-Plan-Sprint`, `10-Examples` y `11-Documentacion`— y **las 9 de `GeometriaFactory-Web`**, con su clasificación propuesta y su orden en
 `Audit/Migracion-M10-Consolidacion-Fusion.md` §4 y §5. Mientras un grupo no se consolide, sus
 documentos siguen en `<categoria>/_fusion/<Origen>/`, y **la presencia de esa carpeta declara que la
 fusión no terminó**.

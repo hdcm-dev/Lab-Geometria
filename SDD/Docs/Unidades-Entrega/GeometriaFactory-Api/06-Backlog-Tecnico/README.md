@@ -1,14 +1,27 @@
 # 06 · Backlog técnico — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-16
 **Autor:** Scrum Master + API Product Owner (AG-06)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los tres documentos de esta categoría se consolidaron el 2026-08-16.** Las `US` y los `BT` de las
+cuatro capas conviven **sin una sola colisión**, porque la renumeración de la migración les había dado
+rango propio: es una unión de catálogo directa.
+
+**El orden de ejecución no lo fija este backlog**: lo fija el grafo de compilación del manifiesto
+—primero el dominio, después la aplicación y la infraestructura, y al final el host—.
+
+**La carpeta `_fusion/` de esta categoría se retira**: la fusión terminó acá. Los documentos absorbidos
+están en [`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/06-Backlog-Tecnico/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/06-Backlog-Tecnico/).
 
 ## 1. Documentos de esta sección
 
@@ -62,3 +75,4 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos y la carpeta de historias, declara la ausencia de `tareas-tecnicas/` con su motivo, fija el orden de lectura, resume las seis épicas con su etapa del producto y las dos que no producen épica, y nombra las tareas técnicas prioritarias con el fundamento de cada una, incluidas las dos inspecciones que detectan defectos de omisión. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**, con sus documentos consolidados en 2.0. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

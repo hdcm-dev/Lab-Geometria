@@ -199,7 +199,7 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 
 ### 3.1 Qué significa que un gate esté condicionado
 
-`QG-03` y `QG-07` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para el tiempo de la batería—. [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md) `BT-02015` declara el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
+`QG-03` y `QG-07` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para el tiempo de la batería—. [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) `BT-02015` declara el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
 
 Condicionado no quiere decir opcional. La medición se hace igual y el resultado se registra; lo que queda en suspenso es la consecuencia automática. Un incumplimiento se trata como hallazgo del punto de control de la etapa y no como rechazo de la fusión.
 
@@ -225,7 +225,7 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 
 ### 3.1 Qué significa que un gate esté condicionado
 
-`QG-03` y `QG-10` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para los 500 ms—. [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) `PA-05` y [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md) `BT-04018` declaran el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
+`QG-03` y `QG-10` son los dos gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para los 500 ms—. [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) `PA-05` y [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) `BT-04018` declaran el tratamiento y esta estrategia lo adopta sin cambiarlo: **los dos valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
 
 Condicionado no quiere decir opcional. La medición se hace igual y el resultado se registra; lo que queda en suspenso es la consecuencia automática. Un incumplimiento se trata como hallazgo del punto de control de la etapa y no como rechazo de la fusión.
 
@@ -252,7 +252,7 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 
 **Catorce gates, y ninguno inventado.** Los que no salen del intake salen de una fila de `05` §8, que declara los **catorce** NFR de este proyecto de código.
 
-**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2 asigna `PT-04` a su épica `EP-06001`. Su umbral y su consecuencia son los del intake §15 —una puerta que no pasa **detiene la planificación de las etapas que dependen de ella**— y esta categoría no los mueve.
+**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 asigna `PT-04` a su épica `EP-06001`. Su umbral y su consecuencia son los del intake §15 —una puerta que no pasa **detiene la planificación de las etapas que dependen de ella**— y esta categoría no los mueve.
 
 ### 3.1 Qué significa que un gate esté condicionado
 
@@ -297,7 +297,7 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 | Product Owner | El docente de la cátedra, que es también quien ejecuta | Aprobar el cierre de cada etapa en su punto de control, y confirmar los dos valores rotulados [ASUNCIÓN] |
 | Revisión mecánica | El pipeline | Los ocho gates de §3. Es lo único que no depende de que alguien se acuerde |
 
-**Lo que reemplaza al revisor humano independiente es el punto de control bloqueante de cada etapa** (intake §15), exactamente con el mismo fundamento con el que lo declara [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md) §4. Esta categoría no inventa un segundo revisor que no existe.
+**Lo que reemplaza al revisor humano independiente es el punto de control bloqueante de cada etapa** (intake §15), exactamente con el mismo fundamento con el que lo declara [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §4. Esta categoría no inventa un segundo revisor que no existe.
 
 ### 4.3 `GeometriaFactory-Application`
 
@@ -309,7 +309,7 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 | Product Owner | El docente de la cátedra, que es también quien ejecuta | Aprobar el cierre de cada etapa en su punto de control, y confirmar los dos valores rotulados [ASUNCIÓN] |
 | Revisión mecánica | El pipeline | Los once gates de §3. Es lo único que no depende de que alguien se acuerde |
 
-**Lo que reemplaza al revisor humano independiente es el punto de control bloqueante de cada etapa** (intake §15, regla de delivery 2), exactamente con el mismo fundamento con el que lo declara [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md) §4. Esta categoría no inventa un segundo revisor que no existe.
+**Lo que reemplaza al revisor humano independiente es el punto de control bloqueante de cada etapa** (intake §15, regla de delivery 2), exactamente con el mismo fundamento con el que lo declara [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §4. Esta categoría no inventa un segundo revisor que no existe.
 
 ### 4.4 `GeometriaFactory-Infrastructure`
 
@@ -346,7 +346,7 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 | Al cerrar la etapa `d` | Los dos valores rotulados [ASUNCIÓN], por `BT-02015` | La confirmación del Product Owner, o su continuidad como asunción |
 | Ante todo defecto cerrado | Que exista al menos un `TC-XX` nuevo o extendido que lo prevenga | La entrada correspondiente en el catálogo de casos de prueba |
 
-**La cadencia es por etapa y no por sprint**, porque este producto no tiene sprints: la unidad de planificación es la etapa ([`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §1.2, citado por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §4.1). **No se declara ninguna frecuencia calendaria**: el intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y una cadencia en semanas sería un plazo que ninguna fuente da.
+**La cadencia es por etapa y no por sprint**, porque este producto no tiene sprints: la unidad de planificación es la etapa ([`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §1.2, citado por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1). **No se declara ninguna frecuencia calendaria**: el intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y una cadencia en semanas sería un plazo que ninguna fuente da.
 
 ### 5.3 `GeometriaFactory-Application`
 
@@ -357,7 +357,7 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 | Al cerrar la etapa `d` | Los dos valores rotulados [ASUNCIÓN], por `BT-04018` | La confirmación del Product Owner, o su continuidad como asunción |
 | Ante todo defecto cerrado | Que exista al menos un `TC-XX` nuevo o extendido que lo prevenga | La entrada correspondiente en el catálogo de casos de prueba |
 
-**La cadencia es por etapa y no por sprint**, porque este producto no tiene sprints: la unidad de planificación es la etapa ([`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md), citado por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2). **No se declara ninguna frecuencia calendaria**: el intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y una cadencia en semanas sería un plazo que ninguna fuente da.
+**La cadencia es por etapa y no por sprint**, porque este producto no tiene sprints: la unidad de planificación es la etapa ([`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md), citado por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2). **No se declara ninguna frecuencia calendaria**: el intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y una cadencia en semanas sería un plazo que ninguna fuente da.
 
 ### 5.4 `GeometriaFactory-Infrastructure`
 

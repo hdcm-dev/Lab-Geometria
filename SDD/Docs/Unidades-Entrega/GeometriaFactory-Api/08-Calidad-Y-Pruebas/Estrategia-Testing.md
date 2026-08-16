@@ -330,7 +330,7 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 ### 4.2 `GeometriaFactory-Domain`
 
-**Los criterios de aceptación de las veintisiete historias ya están escritos en Given/When/Then**: la Definition of Ready lo exige como criterio 3, con al menos un camino feliz y un caso de borde ([`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md) §1).
+**Los criterios de aceptación de las veintisiete historias ya están escritos en Given/When/Then**: la Definition of Ready lo exige como criterio 3, con al menos un camino feliz y un caso de borde ([`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §1).
 
 Decisión de esta categoría: **no se adopta un marco de especificaciones ejecutables con archivos de escenario separados.** Los criterios viven en las historias, y cada `TC-XX` de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) los transcribe en sus pasos citando la historia de origen. Un juego de archivos de escenario paralelo a las historias abriría una segunda fuente de verdad sobre el mismo criterio, que es el defecto que este corpus tiene documentado como el que más veces volvió.
 
@@ -345,7 +345,7 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 ### 4.3 `GeometriaFactory-Application`
 
-**Los criterios de aceptación de las treinta y dos historias ya están escritos en Given/When/Then**: la Definition of Ready lo exige como criterio 3, con al menos dos escenarios, uno de camino feliz y uno de borde ([`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md) §1).
+**Los criterios de aceptación de las treinta y dos historias ya están escritos en Given/When/Then**: la Definition of Ready lo exige como criterio 3, con al menos dos escenarios, uno de camino feliz y uno de borde ([`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §1).
 
 Decisión de esta categoría: **no se adopta un marco de especificaciones ejecutables con archivos de escenario separados.** Los criterios viven en las historias, y cada `TC-XX` de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) los transcribe en sus pasos citando la historia de origen. Un juego de archivos de escenario paralelo a las historias abriría una segunda fuente de verdad sobre el mismo criterio, que es el defecto que este corpus tiene documentado como el que más veces volvió.
 

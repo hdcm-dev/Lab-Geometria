@@ -88,7 +88,7 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | CV-04 | Las **42** condiciones del catálogo están alcanzadas por al menos una prueba, y no se emite ninguna condición fuera del catálogo | `TC-02023`, comparación en las dos direcciones | **42 de 42** y **0** fuera |
 | CV-05 | Ninguna condición prevista viaja como excepción de control de flujo | `TC-02027` | **0** excepciones de negocio |
 | CV-06 | Los **ocho** escenarios del intake §20 están ejercitados como fixture, con sus resultados declarados y **sin sustituirlos por datos sintéticos** | `TC-02013` a `TC-02018`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
-| CV-07 | Las **veintisiete** historias de usuario tienen su caso de prueba | Matriz §2, columna de test, cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §3 | **27 de 27** |
+| CV-07 | Las **veintisiete** historias de usuario tienen su caso de prueba | Matriz §2, columna de test, cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3 | **27 de 27** |
 
 ### 2.3 `GeometriaFactory-Application`
 
@@ -101,7 +101,7 @@ El momento en que se aplican estos criterios es el **punto de control de cada et
 | CV-05 | Las **36** condiciones del catálogo están alcanzadas por al menos una prueba, y no se emite ninguna condición fuera del catálogo | `TC-04028`, comparación en las dos direcciones | **36 de 36** y **0** fuera |
 | CV-06 | Ninguna condición prevista viaja como excepción de control de flujo | `TC-04031` | **0** excepciones de negocio |
 | CV-07 | Los **ocho** escenarios del intake §20 están ejercitados como resultado de interpretación, **sin sustituirlos por datos inventados** | `TC-04015`, `TC-04016`, `TC-04017` y `TC-04022`, verificados uno por uno en [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 | **8 de 8** |
-| CV-08 | Las **treinta y dos** historias de usuario tienen su caso de prueba | Matriz §2, columna de historias, cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §3 | **32 de 32** |
+| CV-08 | Las **treinta y dos** historias de usuario tienen su caso de prueba | Matriz §2, columna de historias, cruzada con [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §3 | **32 de 32** |
 
 ### 2.4 `GeometriaFactory-Infrastructure`
 
@@ -331,7 +331,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- |
 | Criterio **condicionado** —`CV-08`, `CV-09`, `CV-18`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-02015`) | Nadie: es el tratamiento declarado, no una excepción concedida |
 | Criterio **no exigible todavía** —`CV-19`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado ni se declara cumplido** | — |
-| Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Domain/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito en el punto de control | El Product Owner, con constancia escrita en el informe de cierre |
+| Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito en el punto de control | El Product Owner, con constancia escrita en el informe de cierre |
 
 **Lo que no es una excepción admitida:** bajar un umbral para que cierre, deshabilitar un caso de prueba para que la batería pase, sustituir un escenario del intake por un dato que dé el resultado esperado, o declarar cumplido un criterio cuya medición no se hizo.
 
@@ -343,7 +343,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- |
 | Criterio **condicionado** —`CV-09`, `CV-10`, `CV-23`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-04018`) | Nadie: es el tratamiento declarado, no una excepción concedida |
 | Criterio **no exigible todavía** —`CV-24`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado ni se declara cumplido** | — |
-| Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito en el punto de control | El Product Owner, con constancia escrita en el informe de cierre |
+| Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito en el punto de control | El Product Owner, con constancia escrita en el informe de cierre |
 
 **Lo que no es una excepción admitida:** bajar un umbral para que cierre, deshabilitar un caso de prueba para que la batería pase, mover una prueba a la batería de integración de `GeometriaFactory-Api` **para esquivar `CV-11`** en lugar de porque ahí es donde pertenece, sustituir un escenario del intake por un resultado que dé el desenlace esperado, o declarar cumplido un criterio cuya medición no se hizo.
 
@@ -355,7 +355,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | --- | --- | --- |
 | Criterio **condicionado** —`CV-10`, `CV-11`, `CV-12`, `CV-29`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó | Nadie: es el tratamiento declarado, no una excepción concedida |
 | Criterio **no exigible todavía** —`CV-30`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado** | — |
-| Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner, con constancia escrita |
+| Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner, con constancia escrita |
 
 **Sobre `CV-02` y el recuento de la batería.** El intake **1.20** escribe «las **diez** pruebas del validador pasan» en §17.1.P.8 · GeometriaFactory-Infrastructure e «incluidas las **diez** pruebas del validador» en §17.1.P.8 · GeometriaFactory-Api, y su §21 tiene **diez** filas, la décima incorporada con `E-8` bajo el rótulo **[DECISIÓN 2026-08-09]**. **Hasta 1.19 los dos gates escribían nueve**, y esta categoría aplicó diez igual, apoyada en `05` §8 y §10.5, que ya habían resuelto la lectura; la fuente lo corrigió en 1.20 y la divergencia está cerrada. **Cerrar la etapa con nueve casos y declarar cumplido `CV-02` no es una excepción admitida**: dejaría sin cubrir el escenario que cerró la única condición del contrato de fachada que no tenía dato de prueba.
 

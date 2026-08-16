@@ -45,27 +45,27 @@ aplicación y la infraestructura, y al final la batería de integración que eje
 
 ### 1.2 `GeometriaFactory-Domain`
 
-**Qué cubre.** Los **veintisiete** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **seis** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e`, `f` y `h`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §2 declara como sus épicas.
+**Qué cubre.** Los **veintisiete** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **seis** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e`, `f` y `h`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 declara como sus épicas.
 
 **Qué no cubre, y dónde se cubre.** La interpretación del texto del alumno y la tolerancia de formato, en `GeometriaFactory-Infrastructure`; el transporte de los datos por la frontera de servicio, en `GeometriaFactory-Contracts`; el dibujo, en `GeometriaFactory-Visor`; los recorridos de punta a punta del producto, en `GeometriaFactory-Api` y `GeometriaFactory-Web`.
 
-**La unidad de planificación es la etapa y no el sprint.** El intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y el producto no tiene sprints ([`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §4.1). Por eso §5 se titula «Plan por etapa» y **ninguna de sus filas lleva una fecha ni una duración**: sería un plazo que ninguna fuente da.
+**La unidad de planificación es la etapa y no el sprint.** El intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y el producto no tiene sprints ([`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1). Por eso §5 se titula «Plan por etapa» y **ninguna de sus filas lleva una fecha ni una duración**: sería un plazo que ninguna fuente da.
 
 **Las etapas `b` y `g` no aparecen en el plan**, y es declaración y no olvido: no producen épica en este proyecto de código, porque no tocan entidades, invariantes ni transiciones.
 
 ### 1.3 `GeometriaFactory-Application`
 
-**Qué cubre.** Los **treinta y un** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **seis** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e`, `f` y `h`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2 declara como sus épicas.
+**Qué cubre.** Los **treinta y un** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **seis** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e`, `f` y `h`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 declara como sus épicas.
 
 **Qué no cubre, y dónde se cubre.** Las entidades, los invariantes y las máquinas de estado, en `GeometriaFactory-Domain`; la interpretación efectiva del texto, la derivación de la contraseña, la producción de la provisoria y el guardado, en `GeometriaFactory-Infrastructure`; el transporte de los datos por la frontera de proceso, en `GeometriaFactory-Contracts`; **la batería de integración contra el almacén real y la API real**, en `GeometriaFactory-Api` (intake §17.1.P.6 · GeometriaFactory-Application); las superficies y el dibujo, en `GeometriaFactory-Web` y `GeometriaFactory-Visor`.
 
 **La unidad de planificación es la etapa y no el sprint.** El intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y el producto no tiene sprints. Por eso §5 se titula «Plan por etapa» y **ninguna de sus filas lleva una fecha ni una duración**: sería un plazo que ninguna fuente da.
 
-**Las etapas `b` y `g` no aparecen en el plan**, y es declaración y no olvido: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2 declara que no producen épica en este proyecto de código, porque ninguna de las dos orquesta un caso de uso ni ejerce una comprobación de autorización.
+**Las etapas `b` y `g` no aparecen en el plan**, y es declaración y no olvido: [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 declara que no producen épica en este proyecto de código, porque ninguna de las dos orquesta un caso de uso ni ejerce una comprobación de autorización.
 
 ### 1.4 `GeometriaFactory-Infrastructure`
 
-**Qué cubre.** Los **treinta y cinco** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **cinco** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e` y `f`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2 declara como sus épicas.
+**Qué cubre.** Los **treinta y cinco** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **cinco** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e` y `f`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 declara como sus épicas.
 
 **Qué no cubre, y dónde se cubre.** Las entidades, los invariantes y las máquinas de estado, en `GeometriaFactory-Domain`; la orquestación, la autorización y el alcance transaccional declarado, en `GeometriaFactory-Application`; **la persistencia real ejercida por la superficie del producto**, en `GeometriaFactory-Api`, que es donde el intake §17.1.P.6 · GeometriaFactory-Infrastructure ubica la batería de integración; las superficies y el dibujo, en `GeometriaFactory-Web` y `GeometriaFactory-Visor`.
 
@@ -91,8 +91,8 @@ Lo que tiene que estar listo para que este plan se ejecute en una etapa:
 
 Lo que tiene que estar listo para que este plan se ejecute en una etapa:
 
-- [ ] La rama de la etapa está abierta y la sesión de refinamiento se hizo ([`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Domain/Product-Backlog.md) §5).
-- [ ] Las historias de la etapa cumplen los **seis** criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md) §1, incluido el de tener criterios de aceptación en Given/When/Then.
+- [ ] La rama de la etapa está abierta y la sesión de refinamiento se hizo ([`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §5).
+- [ ] Las historias de la etapa cumplen los **seis** criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §1, incluido el de tener criterios de aceptación en Given/When/Then.
 - [ ] Toda condición de rechazo que las historias de la etapa producen **ya existe** en el catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md), o su alta está comprometida bajo la excepción de la DoR §3.
 - [ ] `BT-02001` está cerrada: el proyecto de código y su proyecto de pruebas existen y la batería corre, aunque sea vacía.
 - [ ] `BT-02002` está cerrada: los nombres de tipos y de espacios de nombres están fijados y validados en el punto de control de la etapa `a`. Sin esto ningún caso de prueba se puede escribir sin retrabajo.
@@ -102,11 +102,11 @@ Lo que tiene que estar listo para que este plan se ejecute en una etapa:
 
 Lo que tiene que estar listo para que este plan se ejecute en una etapa:
 
-- [ ] La rama de la etapa está abierta y la sesión de refinamiento se hizo ([`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §5).
-- [ ] Las historias de la etapa cumplen los **siete** criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Application/Definition-Of-Ready.md) §1, incluidos el 5 —cuál de las cuatro comprobaciones la alcanza— y el 6 —toda condición existe en el catálogo de las 36—.
+- [ ] La rama de la etapa está abierta y la sesión de refinamiento se hizo ([`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §5).
+- [ ] Las historias de la etapa cumplen los **siete** criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §1, incluidos el 5 —cuál de las cuatro comprobaciones la alcanza— y el 6 —toda condición existe en el catálogo de las 36—.
 - [ ] `BT-04001` está cerrada: el proyecto de código y su proyecto de pruebas existen, la batería corre aunque sea vacía, y el archivo de proyecto declara **1** dependencia saliente.
 - [ ] `BT-04002` está cerrada: los nombres de tipos, de espacios de nombres y **el del cuarto puerto** están fijados y validados en el punto de control de la etapa `a`. Sin esto los dobles de puerto se escriben contra un nombre que va a cambiar.
-- [ ] **Las guardas de `GeometriaFactory-Domain` que la etapa invoca ya existen.** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §1.1 lo declara: dentro de cada etapa, el trabajo del nivel 0 va primero.
+- [ ] **Las guardas de `GeometriaFactory-Domain` que la etapa invoca ya existen.** [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §1.1 lo declara: dentro de cada etapa, el trabajo del nivel 0 va primero.
 - [ ] El contenedor de desarrollo levanta y `scripts/test.sh` corre de punta a punta.
 
 ### 2.4 `GeometriaFactory-Infrastructure`
@@ -114,7 +114,7 @@ Lo que tiene que estar listo para que este plan se ejecute en una etapa:
 Lo que tiene que estar listo para que este plan se ejecute en una etapa:
 
 - [ ] La rama de la etapa está abierta y la sesión de refinamiento se hizo.
-- [ ] Las historias de la etapa cumplen los criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/_fusion/Infrastructure/Definition-Of-Ready.md) §1, incluida la cita por identificador de las reglas y los invariantes que viven en `GeometriaFactory-Domain`.
+- [ ] Las historias de la etapa cumplen los criterios de [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §1, incluida la cita por identificador de las reglas y los invariantes que viven en `GeometriaFactory-Domain`.
 - [ ] **Los puertos que esta etapa implementa ya están declarados en `GeometriaFactory-Application`.** Es un proyecto de código de nivel 2: un puerto que no exista arriba no se puede implementar acá.
 - [ ] Los nombres de tipos y de espacios de nombres están fijados en el punto de control de la etapa `a` (`05` §11 `PA-02`).
 - [ ] **A partir de la etapa `c`: la función de derivación de clave está anclada** (`05` §11 `PA-03`). Sin eso, los valores esperados de `TC-06025` y `TC-06026` no se pueden escribir sin retrabajo.
