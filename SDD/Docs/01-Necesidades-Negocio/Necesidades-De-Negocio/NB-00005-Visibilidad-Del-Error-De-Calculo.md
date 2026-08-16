@@ -8,7 +8,7 @@
 | Estado | Aprobado |
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
-| Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (diferenciador D-2), §4 (capacidad F-10), §4.1 (regla RN-05), §4.2 (modelo de estados del trabajo), §6 (flujo 2), §7 (caso límite CL-4), §8 (métrica de valor didáctico entregado), §20 (escenarios E-1 a E-4), §22 (asunción A-2); `Vision-Producto.md` §1, §3, §5 y §9; `Alcance-Producto.md` §3 y §8 |
+| Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (diferenciador D-2), §4 (capacidad F-10), §4.1 (regla RN-02005), §4.2 (modelo de estados del trabajo), §6 (flujo 2), §7 (caso límite CL-4), §8 (métrica de valor didáctico entregado), §20 (escenarios E-1 a E-4), §22 (asunción A-2); `Vision-Producto.md` §1, §3, §5 y §9; `Alcance-Producto.md` §3 y §8 |
 | Trazabilidad downstream | `CU-00007`, `CU-02007`, `CU-04005`, `CU-06002` en `GeometriaFactory-Api`; `CU-10005`, `CU-10007` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
@@ -34,7 +34,7 @@ Los ejemplos de la propia cátedra arrastran dos errores de fórmula verificados
 
 La necesidad de la cátedra es que el producto haga visible esa discrepancia sobre el trabajo del propio alumno, que es el único lugar donde tiene valor didáctico. No se trata de corregirla ni de rechazar el trabajo: el producto recalcula los valores desde las dimensiones que el propio texto declara, compara y **señala** la diferencia, mostrando los dos números. La corrección la hace el alumno en su programa, que es donde está el error.
 
-El carácter no bloqueante es deliberado y está declarado: una discrepancia de valor **no impide que el trabajo pase a estado `Pendiente`** (PRODUCT-INTAKE §7, CL-4, y §4.1, RN-05). Que después el administrador lo apruebe o lo rechace es una decisión suya, y no la toma la verificación de valores. Si bloqueara, el alumno con el error lo viviría como un rechazo del producto en lugar de como información sobre su código, y además quedaría fuera de la entrega justamente el caso que más interesa observar. Esta es la capacidad que el intake identifica como el mayor valor didáctico del producto (PRODUCT-INTAKE §3, diferenciador D-2).
+El carácter no bloqueante es deliberado y está declarado: una discrepancia de valor **no impide que el trabajo pase a estado `Pendiente`** (PRODUCT-INTAKE §7, CL-4, y §4.1, RN-02005). Que después el administrador lo apruebe o lo rechace es una decisión suya, y no la toma la verificación de valores. Si bloqueara, el alumno con el error lo viviría como un rechazo del producto en lugar de como información sobre su código, y además quedaría fuera de la entrega justamente el caso que más interesa observar. Esta es la capacidad que el intake identifica como el mayor valor didáctico del producto (PRODUCT-INTAKE §3, diferenciador D-2).
 
 ## 2. Ejemplo de uso desde la perspectiva del negocio
 
@@ -67,7 +67,7 @@ Una alumna carga el trabajo con las tres piezas del ejemplo con el que trabajó 
 | Criterio negativo de la verificación | Advertencias emitidas sobre el mismo cubo emitido por el segundo ejemplo de la cátedra, cuyo valor declarado sí se corresponde con sus dimensiones | 0 | Punto de control de la etapa `f` |
 | Cobertura sobre el escenario semilla | Advertencias emitidas sobre el escenario de tres piezas del intake, sobre las 2 esperadas: el área del cubo y el volumen del ortoedro | 2 de 2 | Punto de control de la etapa `f` |
 
-Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §8; el segundo, de PRODUCT-INTAKE §7 (CL-4), §4 (F-10) y §4.1 (RN-05); el tercero, de PRODUCT-INTAKE §3 (D-2) y §20 (escenario E-3); el cuarto, de PRODUCT-INTAKE §20 (escenario E-4) y de `Alcance-Producto.md` §8; el quinto, de PRODUCT-INTAKE §20 (escenario E-1). **El target del primer criterio está rotulado como asunción A-2 en PRODUCT-INTAKE §22 y está pendiente de confirmación del Product Owner**; se usa como valor vigente hasta que la confirmación llegue. Los otros cuatro están declarados en las fuentes y no son asunciones.
+Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §8; el segundo, de PRODUCT-INTAKE §7 (CL-4), §4 (F-10) y §4.1 (RN-02005); el tercero, de PRODUCT-INTAKE §3 (D-2) y §20 (escenario E-3); el cuarto, de PRODUCT-INTAKE §20 (escenario E-4) y de `Alcance-Producto.md` §8; el quinto, de PRODUCT-INTAKE §20 (escenario E-1). **El target del primer criterio está rotulado como asunción A-2 en PRODUCT-INTAKE §22 y está pendiente de confirmación del Product Owner**; se usa como valor vigente hasta que la confirmación llegue. Los otros cuatro están declarados en las fuentes y no son asunciones.
 
 ## 6. Stakeholders involucrados
 

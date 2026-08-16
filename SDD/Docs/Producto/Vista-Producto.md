@@ -64,7 +64,7 @@ La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle c
 | Proyectos de código | 7 | `PRODUCT-MANIFEST` §2 |
 | Aristas de compilación | 7 u 8 según qué sección del manifiesto se lea | §3.1 de este documento |
 | Casos de uso | 71 — `Domain` 13, `Api` 12, `Application` 11, `Web` 10, `Infrastructure` 10, `Contracts` 8, `Visor` 7 | `Proyectos/<Nombre>/02-Especificacion-Funcional/Casos-De-Uso/` |
-| Reglas de negocio | 16 | `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, `RN-01` a `RN-16` |
+| Reglas de negocio | 16 | `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`, `RN-02001` a `RN-02016` |
 | Invariantes del dominio | 9 | `PRODUCT-INTAKE` §14, `INV-01` a `INV-09` |
 | ADR | 45 | `Proyectos/<Nombre>/05-Arquitectura-Tecnica/Adrs/` |
 | Contratos de superficie | 6 | §4 de este documento |

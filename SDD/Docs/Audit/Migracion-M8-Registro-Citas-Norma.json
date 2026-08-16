@@ -1,0 +1,3849 @@
+[
+ {
+  "linea": 9,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 135,
+  "cita": "RN-05",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 234,
+  "cita": "RN-05",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 304,
+  "cita": "ADR-06",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 308,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Contratos-REST.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 308,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Contratos-REST.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 308,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Contratos-REST.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 324,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 324,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 362,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 362,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 390,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Handoff-Checkout.md",
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 437,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 440,
+  "cita": "RC-06",
+  "familia": "RC",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md",
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 442,
+  "cita": "ADR-07",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 443,
+  "cita": "ADR-06",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 444,
+  "cita": "ADR-07",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 448,
+  "cita": "BT-05",
+  "familia": "BT",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 454,
+  "cita": "US-29",
+  "familia": "US",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 465,
+  "cita": "RN-12",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Definicion-Modelo-De-Dominio.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 465,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Definicion-Modelo-De-Dominio.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 465,
+  "cita": "INV-09",
+  "familia": "INV",
+  "documentos_co_citados": [
+   "Definicion-Modelo-De-Dominio.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 467,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 472,
+  "cita": "RN-09",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Definicion-Modelo-De-Dominio.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 479,
+  "cita": "US-29",
+  "familia": "US",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 483,
+  "cita": "ADR-07",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 483,
+  "cita": "ADR-07",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 484,
+  "cita": "US-29",
+  "familia": "US",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 485,
+  "cita": "RC-06",
+  "familia": "RC",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 493,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Definicion-Contrato-De-Fachada.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 530,
+  "cita": "CU-12",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 530,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 531,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 532,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 532,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 532,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 533,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 533,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 534,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 534,
+  "cita": "RN-13",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 534,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 535,
+  "cita": "CU-12",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 536,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 537,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 538,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 539,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 539,
+  "cita": "RN-06",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 540,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 540,
+  "cita": "RN-06",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 541,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 541,
+  "cita": "RN-06",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 542,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 542,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 542,
+  "cita": "CU-12",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 543,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 543,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 544,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 544,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 544,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 545,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 545,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 546,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 546,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 546,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 547,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 547,
+  "cita": "RN-05",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 548,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 548,
+  "cita": "RN-05",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 549,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 549,
+  "cita": "RN-09",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 550,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 550,
+  "cita": "RN-05",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 551,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 551,
+  "cita": "CU-12",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 552,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 553,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 553,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 553,
+  "cita": "RN-14",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 554,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 554,
+  "cita": "RN-09",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 555,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 555,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 556,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 556,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 557,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 557,
+  "cita": "CU-13",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 557,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 558,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 558,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 559,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 560,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 560,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 561,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 561,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 562,
+  "cita": "CU-13",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 562,
+  "cita": "RN-12",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 563,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 563,
+  "cita": "RN-08",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 564,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 564,
+  "cita": "RN-09",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 565,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 565,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 565,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 566,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 566,
+  "cita": "RN-03",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 567,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 567,
+  "cita": "RN-03",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 568,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 568,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 568,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 569,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 570,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 570,
+  "cita": "CU-12",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 570,
+  "cita": "RN-02",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 571,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 571,
+  "cita": "CU-13",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 579,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 579,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 580,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 580,
+  "cita": "RN-09",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 581,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 581,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 581,
+  "cita": "RN-02",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 582,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 582,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 583,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 583,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 583,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 584,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 584,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 584,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 584,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 584,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 584,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 585,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 585,
+  "cita": "RN-08",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 586,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 586,
+  "cita": "RN-09",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 586,
+  "cita": "RN-05",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 587,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 587,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 588,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 588,
+  "cita": "RN-15",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 588,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 589,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 589,
+  "cita": "RN-03",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 590,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 598,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 598,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 598,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 599,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 600,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 601,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 601,
+  "cita": "RN-03",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 601,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 602,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 603,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 604,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 605,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 605,
+  "cita": "RN-08",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 606,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 606,
+  "cita": "RN-14",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 607,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 608,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 609,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 609,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 609,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 610,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 611,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 612,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 612,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 634,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 635,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 636,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 637,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 649,
+  "cita": "RN-06",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 650,
+  "cita": "RN-02",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 651,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 652,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 653,
+  "cita": "RN-03",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 653,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 654,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 658,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 659,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 660,
+  "cita": "RN-13",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 660,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 660,
+  "cita": "INV-09",
+  "familia": "INV",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 661,
+  "cita": "RN-15",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 661,
+  "cita": "INV-08",
+  "familia": "INV",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 664,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 666,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 667,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 675,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 675,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 676,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 686,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 698,
+  "cita": "ADR-06",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 747,
+  "cita": "BT-05",
+  "familia": "BT",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 749,
+  "cita": "ADR-01",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Plan-Etapa-A.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 751,
+  "cita": "ADR-01",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1059,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1059,
+  "cita": "CU-12",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1059,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1060,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1062,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1064,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1065,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1068,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1069,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1070,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1071,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1073,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1074,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1075,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1076,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1077,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1078,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1079,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1079,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1080,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1081,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1081,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1082,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1083,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1084,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1084,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1086,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1087,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1087,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1102,
+  "cita": "INV-01",
+  "familia": "INV",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1105,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Definicion-Modelo-De-Dominio.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1106,
+  "cita": "RN-06",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Definicion-Modelo-De-Dominio.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1108,
+  "cita": "INV-09",
+  "familia": "INV",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1108,
+  "cita": "RN-13",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1108,
+  "cita": "RN-14",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1108,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1109,
+  "cita": "RC-06",
+  "familia": "RC",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1110,
+  "cita": "CU-12",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1111,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1112,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1113,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1114,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1115,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1116,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1117,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1118,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1119,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1120,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1121,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1122,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1123,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1124,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1125,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1125,
+  "cita": "RN-01",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1126,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1126,
+  "cita": "RN-02",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1127,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1128,
+  "cita": "ADR-02",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1131,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1132,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1133,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1133,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1134,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1135,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1136,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1137,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1137,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1138,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1139,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1140,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1141,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1142,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1143,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1144,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1144,
+  "cita": "RN-09",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1145,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1146,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1147,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1148,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1149,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1150,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1151,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1153,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1155,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1156,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1157,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1158,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1161,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1164,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1166,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1167,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Experiencia-De-Uso.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1168,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1169,
+  "cita": "RN-13",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Wireframes-Credencial-Propia.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1171,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1172,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1173,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1186,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1191,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1212,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1240,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1242,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1243,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Linea-Base-Visual.md",
+   "Wireframes-Ingreso.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1243,
+  "cita": "EST-34",
+  "familia": "EST",
+  "documentos_co_citados": [
+   "Linea-Base-Visual.md",
+   "Wireframes-Ingreso.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1246,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1256,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1257,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1259,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1260,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1261,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1262,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1263,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1264,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Experiencia-De-Uso.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1270,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1273,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1275,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Experiencia-De-Uso.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1276,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1307,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1335,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1336,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1337,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1337,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1338,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1338,
+  "cita": "RN-14",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1339,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1339,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1340,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1340,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1341,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1342,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1343,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1344,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1344,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1344,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1345,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1346,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1347,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1348,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1348,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1349,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1349,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1350,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1350,
+  "cita": "INV-09",
+  "familia": "INV",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1356,
+  "cita": "CU-01",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1357,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1357,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1357,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1358,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1359,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1359,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1360,
+  "cita": "CU-13",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1360,
+  "cita": "RN-12",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1360,
+  "cita": "RN-15",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1361,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1362,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1362,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1363,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1364,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1365,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1366,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1366,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1367,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1368,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1369,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1370,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1371,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1371,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1372,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1374,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1375,
+  "cita": "CU-02",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1443,
+  "cita": "RN-07",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1444,
+  "cita": "RN-12",
+  "familia": "RN",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1445,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1462,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1506,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1545,
+  "cita": "EST-05",
+  "familia": "EST",
+  "documentos_co_citados": [
+   "Linea-Base-Visual.md",
+   "Wireframes-Panel-De-Cuentas.md",
+   "Wireframes-Registro-De-Cuenta.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1545,
+  "cita": "EST-49",
+  "familia": "EST",
+  "documentos_co_citados": [
+   "Linea-Base-Visual.md",
+   "Wireframes-Panel-De-Cuentas.md",
+   "Wireframes-Registro-De-Cuenta.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1545,
+  "cita": "EST-50",
+  "familia": "EST",
+  "documentos_co_citados": [
+   "Linea-Base-Visual.md",
+   "Wireframes-Panel-De-Cuentas.md",
+   "Wireframes-Registro-De-Cuenta.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1572,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1607,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1613,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1614,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1616,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Linea-Base-Visual.md"
+  ],
+  "unidad": "GeometriaFactory-Web",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1617,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1681,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1681,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1682,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Contratos-Abstractions.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: 2 unidades"
+ },
+ {
+  "linea": 1683,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1683,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1683,
+  "cita": "ADR-05",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1684,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1684,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1684,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1685,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1685,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1686,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1687,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1688,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1689,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1690,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1691,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1691,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1692,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1693,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1694,
+  "cita": "BT-05",
+  "familia": "BT",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1695,
+  "cita": "BT-10",
+  "familia": "BT",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1695,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1695,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1696,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1696,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1711,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1711,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1712,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1712,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1713,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1713,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1714,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1714,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1720,
+  "cita": "INV-02",
+  "familia": "INV",
+  "documentos_co_citados": [
+   "Definicion-Modelo-De-Dominio.md",
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1723,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1723,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1723,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1724,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1725,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1725,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1726,
+  "cita": "CU-08",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1726,
+  "cita": "RN-05",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1727,
+  "cita": "CU-10",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1727,
+  "cita": "RN-10",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1727,
+  "cita": "BT-12",
+  "familia": "BT",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1728,
+  "cita": "CU-09",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1728,
+  "cita": "RN-03",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1728,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1728,
+  "cita": "INV-02",
+  "familia": "INV",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1728,
+  "cita": "INV-03",
+  "familia": "INV",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1729,
+  "cita": "CU-11",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1729,
+  "cita": "RN-11",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1729,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1730,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1731,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1731,
+  "cita": "CU-03",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1732,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1733,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1734,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1734,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1734,
+  "cita": "CU-05",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1736,
+  "cita": "CU-06",
+  "familia": "CU",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1737,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1738,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1739,
+  "cita": "CU-04",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1741,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1741,
+  "cita": "CU-07",
+  "familia": "CU",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1744,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "Definicion-Superficie-HTTP.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1745,
+  "cita": "RC-06",
+  "familia": "RC",
+  "documentos_co_citados": [
+   "Modelo-Datos-Logico.md"
+  ],
+  "unidad": "GeometriaFactory-Api",
+  "resolucion": "resuelta por documento co-citado"
+ },
+ {
+  "linea": 1824,
+  "cita": "RN-04",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1837,
+  "cita": "RN-03",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1866,
+  "cita": "ADR-06",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1901,
+  "cita": "ADR-06",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 1952,
+  "cita": "ADR-06",
+  "familia": "ADR",
+  "documentos_co_citados": [
+   "DX-Error-Messages.md"
+  ],
+  "unidad": null,
+  "resolucion": "ambigua: 2 unidades"
+ },
+ {
+  "linea": 2002,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 2002,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 2005,
+  "cita": "RN-16",
+  "familia": "RN",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 2008,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 2009,
+  "cita": "ADR-03",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ },
+ {
+  "linea": 2010,
+  "cita": "ADR-04",
+  "familia": "ADR",
+  "documentos_co_citados": null,
+  "unidad": null,
+  "resolucion": "ambigua: sin documento co-citado"
+ }
+]

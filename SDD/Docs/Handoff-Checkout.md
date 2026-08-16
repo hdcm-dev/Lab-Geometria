@@ -12,6 +12,35 @@
 
 ---
 
+> ## Documento superado por la migración 6.0 → 8.6
+>
+> **Este documento es un inventario fechado el 2026-08-12, y describe el árbol tal como estaba
+> entonces: siete proyectos de código, doce casos de uso en `GeometriaFactory-Api`, reglas `RN-01` a
+> `RN-16`.** Nada de eso es cierto hoy. El árbol tiene **dos unidades de entrega**, la unidad `Api`
+> tiene **nueve** casos de uso y las reglas se numeran `RN-02001` a `RN-02016`.
+>
+> **No se reconectaron sus identificadores, y es deliberado.** Reescribirlos dejaría un documento con
+> identificadores nuevos y **recuentos viejos**: diría `CU-00021` donde dice `CU-01`, y seguiría
+> diciendo «doce casos de uso». Un documento a medias migrar afirma cosas que nunca fueron ciertas, y
+> eso es peor que uno viejo que declara su fecha. El hallazgo **M-08** de
+> [`Audit/Informe-Migracion-6.0-a-8.6.md`](Audit/Informe-Migracion-6.0-a-8.6.md) 2.0 lo registra.
+>
+> **Dónde está hoy lo que este documento inventariaba:**
+>
+> | Qué buscabas acá | Dónde está ahora |
+> | --- | --- |
+> | La composición del producto | [`../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **2.1**, §2.A, §2.B y §2.C |
+> | El inventario de documentos por categoría | [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) |
+> | Los casos de uso de `GeometriaFactory-Api` | `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/README.md` **2.0** |
+> | Qué se archivó y por qué | Los `README.md` de las tres carpetas de `_legacy/` |
+> | El estado de la migración | [`Audit/Informe-Migracion-6.0-a-8.6.md`](Audit/Informe-Migracion-6.0-a-8.6.md) |
+>
+> **Se conserva sin tocar** porque es el instrumento de check-out que `Master-Prompt.md` §12 exigió
+> antes del traspaso a codificación, y como tal es un registro de lo que se entregó ese día. Rehacerlo
+> sobre el árbol nuevo es emitir uno nuevo, no editar éste.
+
+---
+
 ## Tabla de contenido
 
 - [0. Qué es este documento y cómo se produjo](#0-qué-es-este-documento-y-cómo-se-produjo)

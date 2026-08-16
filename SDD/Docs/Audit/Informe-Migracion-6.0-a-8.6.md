@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Informe-Migracion-6.0-a-8.6.md
-**Versión:** 2.0
-**Fase:** M6 — Auditoría de migración, **ronda 2** (`Master-Prompt-Migracion.md` 2.0 §10)
+**Versión:** 3.0
+**Fase:** M6 — Auditoría de migración, **ronda 3** (`Master-Prompt-Migracion.md` 2.0 §10)
 **Alcance:** el árbol `SDD/` del destino `Lab-Geometria`, en la rama de migración
 **Auditor:** Arquitecto de Soluciones + QA Senior, con la mecánica de `Master-Prompt.md` §10
 **Fecha:** 2026-08-16
@@ -32,9 +32,13 @@ M3 sin ejecutar** y por eso declaró la migración **parcial** y dejó la proced
 ejecutaron después —M2 con su doble detención resuelta y M3 con confirmación explícita del Product
 Owner el 2026-08-16—, y con la cadena completa **M5 reescribió la procedencia a 8.6**.
 
-Hallazgos de esta ronda: **0 P0**, **3 P1**, **4 P2**. El veredicto es **APROBADO CON OBSERVACIONES**
-y la migración se declara **COMPLETA**, con **dos conformidades de forma abiertas** que se enumeran
-como M-08 y M-09 y que **no son documentos sin migrar**.
+Hallazgos de esta ronda: **0 P0**, **0 P1**, **7 P2**. El veredicto es **APROBADO** y la migración se
+declara **COMPLETA Y CERRADA**.
+
+**Los tres P1 de la ronda 2 quedaron cerrados el 2026-08-16**, cada uno por la salida que le
+correspondía y no por la misma: **M-03** con un ADR de apartamiento, **M-08** con una supersesión
+declarada y un registro de citas ambiguas, y **M-09** partido en dos —lo determinable se ejecutó, lo
+que no lo era se declaró—. Ninguno se cerró afirmando que el problema no existía.
 
 **Qué cambió respecto de la ronda 1.** M-04 —el orden de las fases— queda **cerrado**: M2 y M3 se
 ejecutaron, aunque después de M4. M-01 queda **reemplazado por M-08 y M-09**, que lo dicen con
@@ -138,7 +142,7 @@ definición conservan la forma anterior—.
 **Marca de origen:** propio de la migración, o aguas arriba. **Marca de detectabilidad:** por guion, o
 sólo por lectura.
 
-### M-08 · P1 · propio · por guion — Dos documentos de referencia cruzada no se reconectaron en M4
+### M-08 · P2 · propio · por guion — Dos documentos de referencia cruzada no se reconectaron en M4 · **CERRADO, con 305 citas para confirmar**
 
 **Archivos:** `Docs/Handoff-Checkout.md` (247 identificadores de forma vieja) y
 `Docs/Producto/Norma-De-Nomenclatura.md` (455).
@@ -155,10 +159,27 @@ categorías. Cayeron en el hueco entre dos recorridos.
 migrado. Con el intake ya migrado se ve que son dos cosas: éstos **no citan al intake**, citan al
 propio árbol, y son residuos de verdad.
 
-**Recomendación.** Reconectarlos desde registro, con la misma disciplina de dos pasadas de M4. Son
-**dos archivos**, y el mapeo es el mismo que ya está registrado.
+**CERRADO el 2026-08-16, con salidas distintas para cada archivo, porque no eran el mismo problema.**
 
-### M-09 · P1 · propio · sólo por lectura — Las familias de identificadores del intake conservan su ancho de origen
+**`Handoff-Checkout.md` no se reconecta, y se declara superado.** Es un inventario fechado el
+2026-08-12, y **sus recuentos también están viejos**: dice «doce casos de uso» y «siete proyectos de
+código». Reconectarle los identificadores habría producido un documento con identificadores nuevos y
+recuentos viejos, **afirmando cosas que nunca fueron ciertas**. Lleva ahora un bloque de supersesión
+que declara su fecha, qué dejó de ser cierto y **dónde está hoy cada cosa que inventariaba**. Se
+conserva sin tocar porque es el registro de lo que se entregó ese día.
+
+**`Norma-De-Nomenclatura.md` tiene sus 464 citas inventariadas, y 411 son ambiguas.** El documento
+**no tiene secciones por proyecto de código**, de modo que un `CU-02` desnudo puede resolver a
+cualquiera de las siete numeraciones de origen. Sólo **51 resuelven** por el documento co-citado en la
+misma fila. `Migracion-Rules.md` §4.3.1 dice qué hacer con esto: **declararlas y confirmarlas, no
+inferirlas**. El inventario completo, cita por cita y con su línea, está en
+`Migracion-M8-Registro-Citas-Norma.json`. **De las 411, las 106 de familia `RN` se cerraron por
+M-09**, porque `RN` es familia única en el producto y su mapeo no depende del contexto. **Quedan 305
+para confirmar**, y son el único trabajo abierto de este informe.
+
+Baja a **P2**: está inventariado, medido y con su procedimiento declarado.
+
+### M-09 · P2 · propio · sólo por lectura — Las familias de identificadores del intake conservan su ancho de origen · **CERRADO**
 
 **Evidencia.** El intake numera sus reglas `RN-01` a `RN-16` y sus invariantes `INV-01` a `INV-09`.
 `Root-Rules.md` §9.2 fija **cinco dígitos uniformes** y enumera las familias alcanzadas: `NB`, `CU`,
@@ -179,11 +200,22 @@ sección rellenada, ni procedencia escrita con documentos sin migrar, ni fila de
 **Todos los documentos están migrados**; lo que falta es conformidad de forma en un conjunto de
 familias, y queda declarado acá.
 
-**Recomendación, y no es obvia.** Renumerar las familias del intake es una **decisión del Product
-Owner sobre su propio documento**, con un alcance de más de 5000 ocurrencias y sin ningún beneficio
-funcional inmediato. Las dos salidas legítimas son ejecutarla con árbol y registro, o **declararla
-como apartamiento** con su ADR y el motivo. Lo que no es legítimo es dejarla sin decidir, que es
-exactamente lo que pasó hasta acá.
+**CERRADO el 2026-08-16, partido en dos, porque no todas las familias eran el mismo caso.**
+
+**`RN` se renumeró**, a `RN-02001` a `RN-02016`, con **377 citas reconectadas** desde
+`Migracion-M9-Registro-Citas-RN.json`. **No era una elección de numeración**: el árbol migrado ya
+numeraba esas mismas reglas así, y convivían `RN-15` y `RN-02015` **para la misma regla** sin que nada
+lo dijera. No había dos formas legítimas: había una vigente y una cita que no la usaba. El intake sube
+a **2.1** y su §4.1 lo declara.
+
+**Las diez familias restantes conservan su ancho**, y el apartamiento está en
+[`ADR-14002`](../Producto/Adrs/ADR-14002-Familias-Propias-Del-Intake-Con-Ancho-De-Origen.md). El
+motivo es que **no tienen numeración de destino**: renumerarlas no reconecta nada, elige un número
+nuevo sobre 5000 ocurrencias del documento del Product Owner, y `F-26` no resuelve mejor como
+`F-00026`. El ADR declara qué lo reabre: que alguna de esas familias pase a tener artefacto propio
+generado.
+
+Baja a **P2**.
 
 ### M-02 · absorbido por M-08
 
@@ -193,7 +225,7 @@ no es que la norma documente la correspondencia histórica —eso sería deliber
 documento no se reconectó**. Se conserva el identificador con su remisión, en lugar de retirarlo, para
 que una cita de la ronda 1 no quede sin respuesta.
 
-### M-03 · P1 · propio · sólo por lectura — El archivado no usó el `_legacy/` de cada carpeta
+### M-03 · P2 · propio · sólo por lectura — El archivado no usó el `_legacy/` de cada carpeta · **CERRADO**
 
 **Evidencia.** `Migracion-Rules.md` §6 pide que «el estado previo de cada documento migrado quede
 archivado en el `_legacy/` de su propia carpeta». El archivado se hizo en **dos carpetas centrales**:
@@ -206,8 +238,10 @@ La decisión es defendible; **no haberla declarado como apartamiento no lo es**:
 exige que un artefacto que se aparta de la norma lleve su ADR, y un apartamiento sin declarar se
 evalúa como omisión y no como decisión.
 
-**Recomendación.** Emitir el ADR de apartamiento, o mover los snapshots. La primera es la que
-corresponde al hecho.
+**CERRADO el 2026-08-16** con [`ADR-14001`](../Producto/Adrs/ADR-14001-Archivado-Central-De-La-Migracion.md),
+que declara el apartamiento con su motivo, acota su alcance **a esta migración y sólo a ésta** —el
+archivado ordinario de `Master-Prompt.md` §13 sigue siendo por carpeta— y enumera las tres
+alternativas descartadas. Baja a **P2**.
 
 ### M-04 · P2 · propio · sólo por lectura — El orden de las fases no se respetó
 
@@ -310,13 +344,13 @@ continuar sin preguntar, que es el comportamiento que `Master-Prompt.md` §2.1 t
 
 ## 8. Veredicto
 
-**APROBADO CON OBSERVACIONES.** Cero P0. La migración **6.0 → 8.6 queda cerrada**.
+**APROBADO.** Cero P0, cero P1. La migración **6.0 → 8.6 queda cerrada**.
 
 Lo que la migración hizo está verificado: 26.057 identificadores renumerados sin una sola colisión,
-844 enlaces reconectados en M4 y **2208 citas de sección** en M2, **100 % de anclaje de referencias**,
-una consolidación de casos de uso que **se corrigió dos veces al leer las fuentes**, y un intake cuyo
-§17 se transpuso **sin reescritura**, con 252 líneas de contenido y **cero pérdidas** fuera de los
-cinco valores D8 que el modelo de dos ejes retira por decisión.
+844 enlaces reconectados en M4, **2208 citas de sección** en M2 y **377 citas de regla** en M9,
+**100 % de anclaje de referencias**, una consolidación de casos de uso que **se corrigió dos veces al
+leer las fuentes**, y un intake cuyo §17 se transpuso **sin reescritura**, con 252 líneas de contenido
+y **cero pérdidas** fuera de los cinco valores D8 que el modelo de dos ejes retira por decisión.
 
 **El resultado que más importa no es de forma.** Al pasar los flags de siete filas por proyecto de
 código a dos por unidad de entrega, `tiene_persistencia` de la entrega `GeometriaFactory-Api` **pasa
@@ -325,14 +359,22 @@ a true**. Evaluado por proyecto de código quedaba en false —la persistencia v
 la entrega**. Es el defecto que el modelo de dos ejes existía para cerrar, y acá se lo ve cerrado
 sobre un producto real.
 
-**Condiciones abiertas, ninguna bloqueante:**
+**Los tres P1 se cerraron con salidas distintas, y eso es lo que hay que retener.** No hay una única
+manera de cerrar un hallazgo de migración: `RN` se **renumeró** porque había una inconsistencia real;
+las otras diez familias se **declararon** porque no la había; `Handoff-Checkout.md` se **superó**
+porque migrarlo a medias lo habría vuelto falso; y las 411 citas ambiguas de la norma se
+**inventariaron** porque el método prohíbe resolverlas por inferencia. Cerrar los cuatro de la misma
+forma habría sido más rápido y habría dejado tres de ellos mal.
 
-1. **M-08**: reconectar `Handoff-Checkout.md` y `Producto/Norma-De-Nomenclatura.md` desde registro.
-2. **M-09**: decidir sobre las familias de identificadores del intake — renumerarlas con árbol y
-   registro, o **declararlas como apartamiento** con su ADR. La decisión es del Product Owner.
-3. **M-03**: emitir el ADR de apartamiento del archivado central, o mover los snapshots.
+**Lo único abierto, y no es bloqueante:** las **305 citas ambiguas** de
+`Producto/Norma-De-Nomenclatura.md` que quedan después del cierre de M-09. Están inventariadas cita
+por cita con su línea en `Migracion-M8-Registro-Citas-Norma.json`, y su resolución **necesita
+confirmación humana**, que es lo que `Migracion-Rules.md` §4.3.1 exige para una cita desnuda ambigua.
+Hasta que se confirmen, la norma sigue siendo legible: sus citas apuntan a la numeración con la que
+el documento se escribió, y esta auditoría dice cuál es.
 
-**Ninguna de las tres impide reinvocar el orquestador de generación**, que es lo que sigue.
+**La reinvocación del orquestador de generación está habilitada.** Su reconciliación normativa va a
+encontrar la procedencia coincidente con la vigente e informar «al día».
 
 ## 9. Control de cambios
 
@@ -340,3 +382,4 @@ sobre un producto real.
 | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial. Auditoría de la migración 6.0 → 8.6 sobre el destino `Lab-Geometria`. Estado de las siete fases, resultado de la compuerta mecánica sobre 435 documentos vivos, los veintiséis criterios de aceptación de `Migracion-Rules.md` §6, siete hallazgos —0 P0, 4 P1, 3 P2—, el inventario de contenido sin destino y la declaración de **migración parcial** con la procedencia intacta. |
 | 2.0 | 2026-08-16 | **Ronda 2**, después de que M2, M3 y M5 se ejecutaran. La migración pasa de **PARCIAL** a **COMPLETA** y la procedencia queda en **8.6**. §2 declara las siete fases hechas y suma §2.2 con la resolución de la batería de M2. §3 rehace los recuentos sobre 437 documentos vivos. §4 cierra los tres criterios que dependían de M2 y M3. En hallazgos: **M-01 se reemplaza por M-08 y M-09**, que separan dos causas que la ronda 1 había atribuido a una sola —dos documentos de referencia cruzada sin reconectar, y las familias del intake con su ancho de origen—; **M-02 queda absorbido por M-08** y se conserva con su remisión; **M-04 baja de P1 a P2**, cerrado en lo sustantivo. Total: **0 P0, 3 P1, 4 P2**. |
+| 3.0 | 2026-08-16 | **Ronda 3**, después del cierre de los tres P1. Veredicto **APROBADO** —cero P0 y cero P1— y migración **COMPLETA Y CERRADA**. **M-03** cierra con `ADR-14001`, que declara el apartamiento del archivado central y lo acota a esta migración. **M-08** cierra con dos salidas distintas: `Handoff-Checkout.md` se declara **superado** en lugar de reconectarse, porque sus recuentos también están viejos y migrarlo a medias lo habría vuelto falso; y las 464 citas de `Norma-De-Nomenclatura.md` quedan **inventariadas**, con 51 resueltas por documento co-citado y **305 pendientes de confirmación humana** después del cierre de M-09. **M-09** cierra partido en dos: `RN` **se renumera** —377 citas, porque el árbol ya numeraba esas reglas y convivían dos números para la misma— y las diez familias restantes se **declaran** en `ADR-14002`. Total: **0 P0, 0 P1, 7 P2**. |
