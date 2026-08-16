@@ -9,7 +9,7 @@
 | Fecha | 2026-08-11 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE **1.13** §1 (idea y problema), §3 (promesa central: el trabajo tiene dueño), §4 (capacidades F-02, **F-04** precisada, F-05, F-03 y **F-26**), §4.1 (reglas RN-06, **RN-12**, **RN-13**, **RN-14**, **RN-15** y **RN-16**), §4.2 (colisión de vocabulario de `Pendiente`), §6 (flujo 1), §7 (caso límite **CL-7** reescrito), §9 (exclusión X-1 vigente y **X-2 retirada**), §17.1.P.2 (invariante **INV-09**); `Vision-Producto.md` §1, §3, §8 (riesgo RG-06) y §9; `Alcance-Producto.md` §4.1 y §5; `Roadmap-Producto.md` §3 y §5.2 |
-| Trazabilidad downstream | CU-04, CU-05, CU-06, CU-07, CU-29, CU-30 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -98,14 +98,14 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §9 (X-1) y §4 (F-
 
 ## 7. Trazabilidad a CU
 
-| NB | CU prevista | Estado |
+| NB | Casos de uso emitidos | Estado |
 | --- | --- | --- |
-| NB-00002 | CU-04 registrar una cuenta de alumno con correo, nombre y apellido | a generar |
-| NB-00002 | CU-05 elegir la contraseña propia en el primer ingreso, con la provisoria como vigente | a generar |
-| NB-00002 | CU-06 iniciar y cerrar sesión | a generar |
-| NB-00002 | CU-07 cambiar la contraseña exigiendo la vigente | a generar |
-| NB-00002 | CU-29 resetear la contraseña de un alumno desde el panel del administrador, con la provisoria que produce el sistema | a generar |
-| NB-00002 | CU-30 cambiar la contraseña provisoria en el ingreso siguiente al reseteo, que es lo único que la cuenta puede hacer hasta cambiarla | a generar |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` registrar una cuenta de alumno con correo, nombre y apellido | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` elegir la contraseña propia en el primer ingreso, con la provisoria como vigente | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` iniciar y cerrar sesión | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` cambiar la contraseña exigiendo la vigente | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` resetear la contraseña de un alumno desde el panel del administrador, con la provisoria que produce el sistema | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` en `GeometriaFactory-Web` cambiar la contraseña provisoria en el ingreso siguiente al reseteo, que es lo único que la cuenta puede hacer hasta cambiarla | Emitidos |
 
 ## 8. Dependencias con otras NB
 

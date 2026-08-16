@@ -9,7 +9,7 @@
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (promesa central), §4 (capacidades F-06, F-07 y F-08), §4.1 (reglas RN-03, RN-04 y RN-05), §4.2 (modelo de estados del trabajo), §6 (flujo 2), §7 (casos límite CL-3 y CL-5), §8 (métrica de entrega del alumno), §12 (glosario del dominio), §22 (asunción A-2); `Vision-Producto.md` §1, §3, §5 y §9; `Alcance-Producto.md` §4.1 y §8 |
-| Trazabilidad downstream | CU-08, CU-09, CU-10, CU-11 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | `CU-00006`, `CU-00007`, `CU-00011`, `CU-02005`, `CU-02008`, `CU-02009`, `CU-02010`, `CU-04004`, `CU-04006`, `CU-04009`, `CU-06001`, `CU-06003`, `CU-06004`, `CU-06010` en `GeometriaFactory-Api`; `CU-10005`, `CU-10006` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -87,12 +87,12 @@ El quinto criterio corta en estado `Pendiente` y no en `Finalizado`, y el motivo
 
 ## 7. Trazabilidad a CU
 
-| NB | CU prevista | Estado |
+| NB | Casos de uso emitidos | Estado |
 | --- | --- | --- |
-| NB-00003 | CU-08 cargar un trabajo con nombre, fecha, descripción y texto de figuras | a generar |
-| NB-00003 | CU-09 reeditar un trabajo en estado `Borrador` | a generar |
-| NB-00003 | CU-10 eliminar un trabajo propio en estado `Borrador` | a generar |
-| NB-00003 | CU-11 listar los trabajos propios con su estado | a generar |
+| NB-00003 | `CU-00006`, `CU-00007`, `CU-00011`, `CU-02005`, `CU-02008`, `CU-02009`, `CU-02010`, `CU-04004`, `CU-04006`, `CU-04009`, `CU-06001`, `CU-06003`, `CU-06004`, `CU-06010` en `GeometriaFactory-Api`; `CU-10005`, `CU-10006` en `GeometriaFactory-Web` cargar un trabajo con nombre, fecha, descripción y texto de figuras | Emitidos |
+| NB-00003 | `CU-00006`, `CU-00007`, `CU-00011`, `CU-02005`, `CU-02008`, `CU-02009`, `CU-02010`, `CU-04004`, `CU-04006`, `CU-04009`, `CU-06001`, `CU-06003`, `CU-06004`, `CU-06010` en `GeometriaFactory-Api`; `CU-10005`, `CU-10006` en `GeometriaFactory-Web` reeditar un trabajo en estado `Borrador` | Emitidos |
+| NB-00003 | `CU-00006`, `CU-00007`, `CU-00011`, `CU-02005`, `CU-02008`, `CU-02009`, `CU-02010`, `CU-04004`, `CU-04006`, `CU-04009`, `CU-06001`, `CU-06003`, `CU-06004`, `CU-06010` en `GeometriaFactory-Api`; `CU-10005`, `CU-10006` en `GeometriaFactory-Web` eliminar un trabajo propio en estado `Borrador` | Emitidos |
+| NB-00003 | `CU-00006`, `CU-00007`, `CU-00011`, `CU-02005`, `CU-02008`, `CU-02009`, `CU-02010`, `CU-04004`, `CU-04006`, `CU-04009`, `CU-06001`, `CU-06003`, `CU-06004`, `CU-06010` en `GeometriaFactory-Api`; `CU-10005`, `CU-10006` en `GeometriaFactory-Web` listar los trabajos propios con su estado | Emitidos |
 
 ## 8. Dependencias con otras NB
 

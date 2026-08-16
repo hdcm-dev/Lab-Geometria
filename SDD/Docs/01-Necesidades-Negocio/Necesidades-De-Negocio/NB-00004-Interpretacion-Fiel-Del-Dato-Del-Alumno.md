@@ -9,7 +9,7 @@
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (diferenciadores D-1 y D-3), §4 (capacidades F-09 y F-22), §4.1 (reglas RN-05, RN-08 y RN-09), §4.2 (modelo de estados del trabajo), §6 (flujos 2 y 4), §7 (caso límite CL-3), §12 (glosario del dominio: «enviar»), §9 (exclusión X-4), §10 (formato de entrada no negociable), §11 (riesgo RN-B3), §15 (regla de delivery de datos de prueba reales), §20 y §21 (escenarios de datos); `Vision-Producto.md` §3 y §8; `Alcance-Producto.md` §4.1, §7 y §8 |
-| Trazabilidad downstream | CU-12, CU-13, CU-23 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | `CU-00006`, `CU-00009`, `CU-02005`, `CU-02006`, `CU-02007`, `CU-02008`, `CU-04004`, `CU-04005`, `CU-06001`, `CU-06002` en `GeometriaFactory-Api`; `CU-10005`, `CU-12002` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -85,11 +85,11 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §11 (RN-B3) y §15
 
 ## 7. Trazabilidad a CU
 
-| NB | CU prevista | Estado |
+| NB | Casos de uso emitidos | Estado |
 | --- | --- | --- |
-| NB-00004 | CU-12 interpretar el texto del trabajo y reportar los errores con figura y campo | a generar |
-| NB-00004 | CU-13 resolver el estado del trabajo según el resultado de la interpretación | a generar |
-| NB-00004 | CU-23 enviar un trabajo | a generar |
+| NB-00004 | `CU-00006`, `CU-00009`, `CU-02005`, `CU-02006`, `CU-02007`, `CU-02008`, `CU-04004`, `CU-04005`, `CU-06001`, `CU-06002` en `GeometriaFactory-Api`; `CU-10005`, `CU-12002` en `GeometriaFactory-Web` interpretar el texto del trabajo y reportar los errores con figura y campo | Emitidos |
+| NB-00004 | `CU-00006`, `CU-00009`, `CU-02005`, `CU-02006`, `CU-02007`, `CU-02008`, `CU-04004`, `CU-04005`, `CU-06001`, `CU-06002` en `GeometriaFactory-Api`; `CU-10005`, `CU-12002` en `GeometriaFactory-Web` resolver el estado del trabajo según el resultado de la interpretación | Emitidos |
+| NB-00004 | `CU-00006`, `CU-00009`, `CU-02005`, `CU-02006`, `CU-02007`, `CU-02008`, `CU-04004`, `CU-04005`, `CU-06001`, `CU-06002` en `GeometriaFactory-Api`; `CU-10005`, `CU-12002` en `GeometriaFactory-Web` enviar un trabajo | Emitidos |
 
 ## 8. Dependencias con otras NB
 

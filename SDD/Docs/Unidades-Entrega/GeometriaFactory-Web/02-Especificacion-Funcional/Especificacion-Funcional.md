@@ -126,41 +126,48 @@ Ninguna necesidad queda sin caso de uso y ningún caso de uso queda huérfano. E
 | NB-00008 | Parcial: la presentación del estado degradado y el cartel de reconexión, que es lo único de esta necesidad que la persona ve | La verificación de acceso desde la red de la facultad y el despliegue de las dos piezas desplegables son de 09-Devops |
 | NB-00009 | Sostenida en lo que le corresponde: las dos decisiones con su comentario opcional, el retiro, y que el alumno vea el desenlace en su listado y el comentario al abrir el trabajo | La exclusividad de la facultad y la terminalidad son invariantes del dominio |
 
-### 4.2 Correspondencia con la previsión de casos de uso de 01
+### 4.2 Correspondencia con los flujos de producto de 01
 
-`Necesidades-Negocio.md` §5.3 previó veintisiete casos de uso a nivel producto. Ésta es la confirmación que le corresponde a `GeometriaFactory-Web`. Para distinguir las dos series homónimas, la previsión de 01 se escribe con el prefijo **`P·`** y los identificadores sin prefijo son siempre los locales de esta sección.
+`Necesidades-Negocio.md` §5.3 enumera los flujos de producto que cada necesidad de negocio pide. Esta
+tabla declara cuáles realiza `GeometriaFactory-Web` y con qué caso de uso.
 
-| Previsión de 01 | NB | CU local que la realiza | Qué queda fuera de este proyecto de código |
+Hasta la migración a SDD 8.x, la previsión de 01 llevaba su propia numeración y esta sección tuvo que
+acuñar la familia `P·CU-XX` para poder citarla sin confundirla con los casos de uso locales, que se
+numeraban por proyecto de código. Con el **ámbito de unicidad en el producto** de `Root-Rules.md`
+§9.1 los identificadores ya no se pisan, la previsión numerada se retiró de §5.3 y **la familia
+`P·CU` se retira con ella**: los flujos se nombran, y quien los realiza se cita por su identificador.
+
+| Flujo de producto que pide 01 | NB | Caso de uso que lo realiza | Qué queda fuera de esta unidad de entrega |
 | --- | --- | --- | --- |
-| `P·CU-01` configurar la cuenta de administrador en el primer arranque | NB-00001 | CU-10004, FA-03 | La unicidad, que es invariante de dominio |
-| `P·CU-02` habilitar, bloquear y rehabilitar una cuenta | NB-00001 | CU-10004, flujo principal | La transición admitida |
-| `P·CU-03` dar de baja una cuenta con confirmación escrita | NB-00001 | CU-10004, FA-02 | El arrastre de trabajos |
-| `P·CU-04` registrar una cuenta de alumno | NB-00002 | CU-10001, flujo principal | La unicidad del correo |
-| `P·CU-05` elegir la contraseña propia en el primer ingreso, **con la provisoria como vigente** | NB-00002 | CU-10003, flujo principal; CU-10002 FA-02 para el desvío | La derivación de la clave y la producción de la provisoria |
-| `P·CU-06` iniciar y cerrar sesión | NB-00002 | CU-10002 completo | La emisión de la credencial de sesión |
-| `P·CU-07` cambiar la contraseña exigiendo la vigente | NB-00002 | CU-10003, FA-01 | La verificación de la contraseña vigente |
-| `P·CU-08` cargar un trabajo | NB-00003 | CU-10005, flujo principal | La persistencia |
-| `P·CU-09` reeditar un trabajo en estado `Borrador` | NB-00003 | CU-10005 FA-05, y CU-10006 FA-01 | La acotación al estado |
-| `P·CU-10` eliminar un trabajo propio en estado `Borrador` | NB-00003 | CU-10006, FA-02 | La acotación al estado y a la pertenencia |
-| `P·CU-11` listar los trabajos propios | NB-00003 | CU-10006, flujo principal | El alcance de la colección |
-| `P·CU-12` interpretar el texto y reportar el error con figura y campo | NB-00004 | CU-10005, paso 8, y CU-10007 paso 10 | Toda la interpretación y la tolerancia de claves |
-| `P·CU-13` resolver el estado del trabajo según el resultado de la interpretación | NB-00004 | CU-10005, FA-01 y FA-02 | La decisión del estado, que es del dominio |
-| `P·CU-23` enviar un trabajo | NB-00004 | CU-10005, flujo principal completo | La interpretación |
-| `P·CU-14` verificar los valores declarados contra los derivados | NB-00005 | CU-10005 FA-03, y CU-10007 paso 10 | El recálculo y la tolerancia de comparación |
-| `P·CU-15` previsualizar el trabajo en tres dimensiones | NB-00006 | CU-10007, pasos 5 a 7; CU-10005 paso 4 para la previsualización previa al envío | El dibujo, que es del bundle |
-| `P·CU-16` explorar la estructura como árbol colapsable | NB-00006 | CU-10007, paso 8 | La estructura del texto, que devuelve la fachada |
-| `P·CU-17` sincronizar el árbol y la escena por índice de pieza | NB-00006 | CU-10007, paso 9 | El resaltado, que ejerce la fachada |
-| `P·CU-18` listar los trabajos de la comisión sin los que están en estado `Borrador` | NB-00007 | CU-10008, flujo principal | El recorte, que decide el dominio |
-| `P·CU-19` abrir un trabajo de un alumno para revisarlo | NB-00007 | CU-10007, FA-01 | La visibilidad, que decide el dominio |
-| `P·CU-20` consultar el panel de resumen por alumno y por estado | NB-00007 | CU-10008, FA-04 | El recuento, que produce la pieza de datos |
-| `P·CU-21` verificar el acceso al laboratorio desde la red de la facultad | NB-00008 | **Ninguno.** No es un acto de la persona dentro del producto | Verificación de campo y despliegue: 09-Devops |
-| `P·CU-22` presentar el estado degradado cuando el servicio de datos no responde | NB-00008 | CU-10010, flujo principal | La respuesta de error neutra, que declara el contrato |
-| `P·CU-24` aprobar un trabajo en estado `Pendiente`, con comentario opcional | NB-00009 | CU-10009, flujo principal | La transición y su exclusividad |
-| `P·CU-25` rechazar un trabajo en estado `Pendiente`, con comentario opcional | NB-00009 | CU-10009, FA-01 | Ídem, con el otro valor de la decisión |
-| `P·CU-26` consultar el desenlace y el comentario del trabajo propio | NB-00009 | CU-10006 FA-03 para el estado en el listado; CU-10007 paso 11 para el comentario | El transporte del comentario |
-| `P·CU-27` eliminar un trabajo desde el panel del administrador | NB-00009 | CU-10009, FA-03 | La acotación por visibilidad |
+| configurar la cuenta de administrador en el primer arranque | NB-00001 | CU-10004, FA-03 | La unicidad, que es invariante de dominio |
+| habilitar, bloquear y rehabilitar una cuenta | NB-00001 | CU-10004, flujo principal | La transición admitida |
+| dar de baja una cuenta con confirmación escrita | NB-00001 | CU-10004, FA-02 | El arrastre de trabajos |
+| registrar una cuenta de alumno | NB-00002 | CU-10001, flujo principal | La unicidad del correo |
+| elegir la contraseña propia en el primer ingreso, **con la provisoria como vigente** | NB-00002 | CU-10003, flujo principal; CU-10002 FA-02 para el desvío | La derivación de la clave y la producción de la provisoria |
+| iniciar y cerrar sesión | NB-00002 | CU-10002 completo | La emisión de la credencial de sesión |
+| cambiar la contraseña exigiendo la vigente | NB-00002 | CU-10003, FA-01 | La verificación de la contraseña vigente |
+| cargar un trabajo | NB-00003 | CU-10005, flujo principal | La persistencia |
+| reeditar un trabajo en estado `Borrador` | NB-00003 | CU-10005 FA-05, y CU-10006 FA-01 | La acotación al estado |
+| eliminar un trabajo propio en estado `Borrador` | NB-00003 | CU-10006, FA-02 | La acotación al estado y a la pertenencia |
+| listar los trabajos propios | NB-00003 | CU-10006, flujo principal | El alcance de la colección |
+| interpretar el texto y reportar el error con figura y campo | NB-00004 | CU-10005, paso 8, y CU-10007 paso 10 | Toda la interpretación y la tolerancia de claves |
+| resolver el estado del trabajo según el resultado de la interpretación | NB-00004 | CU-10005, FA-01 y FA-02 | La decisión del estado, que es del dominio |
+| enviar un trabajo | NB-00004 | CU-10005, flujo principal completo | La interpretación |
+| verificar los valores declarados contra los derivados | NB-00005 | CU-10005 FA-03, y CU-10007 paso 10 | El recálculo y la tolerancia de comparación |
+| previsualizar el trabajo en tres dimensiones | NB-00006 | CU-10007, pasos 5 a 7; CU-10005 paso 4 para la previsualización previa al envío | El dibujo, que es del bundle |
+| explorar la estructura como árbol colapsable | NB-00006 | CU-10007, paso 8 | La estructura del texto, que devuelve la fachada |
+| sincronizar el árbol y la escena por índice de pieza | NB-00006 | CU-10007, paso 9 | El resaltado, que ejerce la fachada |
+| listar los trabajos de la comisión sin los que están en estado `Borrador` | NB-00007 | CU-10008, flujo principal | El recorte, que decide el dominio |
+| abrir un trabajo de un alumno para revisarlo | NB-00007 | CU-10007, FA-01 | La visibilidad, que decide el dominio |
+| consultar el panel de resumen por alumno y por estado | NB-00007 | CU-10008, FA-04 | El recuento, que produce la pieza de datos |
+| verificar el acceso al laboratorio desde la red de la facultad | NB-00008 | **Ninguno.** No es un acto de la persona dentro del producto | Verificación de campo y despliegue: 09-Devops |
+| presentar el estado degradado cuando el servicio de datos no responde | NB-00008 | CU-10010, flujo principal | La respuesta de error neutra, que declara el contrato |
+| aprobar un trabajo en estado `Pendiente`, con comentario opcional | NB-00009 | CU-10009, flujo principal | La transición y su exclusividad |
+| rechazar un trabajo en estado `Pendiente`, con comentario opcional | NB-00009 | CU-10009, FA-01 | Ídem, con el otro valor de la decisión |
+| consultar el desenlace y el comentario del trabajo propio | NB-00009 | CU-10006 FA-03 para el estado en el listado; CU-10007 paso 11 para el comentario | El transporte del comentario |
+| eliminar un trabajo desde el panel del administrador | NB-00009 | CU-10009, FA-03 | La acotación por visibilidad |
 
-Veintiséis de las veintisiete previsiones se realizan en esta sección; `P·CU-21` es la única que este proyecto de código no toca, porque no es un acto que la persona ejecute dentro del producto.
+Veintiséis de los veintisiete flujos se realizan en esta sección. El único que esta unidad de entrega no toca es **verificar el acceso al laboratorio desde la red de la facultad**, porque no es un acto que la persona ejecute dentro del producto: es verificación de campo y despliegue, y vive en 09-Devops.
 
 **Dos actos de esta sección no tienen previsión en 01, y es correcto que no la tengan**: el **reseteo de contraseña** de CU-10004 FA-06 y el **cambio forzado** de CU-10003 FA-04. Los dos nacen de la capacidad **F-26**, que el `PRODUCT-INTAKE` incorporó en su versión **1.7**, posterior a la emisión de `Necesidades-Negocio.md` §5.3. **No se los fuerza dentro de ninguna previsión existente**: `01-Necesidades-Negocio` decidirá si los incorpora a su catálogo, y hasta entonces la correspondencia se lee al revés, desde la capacidad.
 

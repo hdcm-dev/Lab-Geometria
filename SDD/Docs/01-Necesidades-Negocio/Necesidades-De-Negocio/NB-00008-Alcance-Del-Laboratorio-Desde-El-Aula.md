@@ -9,7 +9,7 @@
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §4 (capacidad F-14), §7 (casos límite CL-2, CL-8 y CL-9), §10 (restricciones de red, de servidor propio y de despliegue manual), §11 (riesgos RN-B1, RN-B2 y RN-B4), §15 (puertas técnicas y dónde se miden); `Vision-Producto.md` §7 y §8; `Alcance-Producto.md` §2.2, §4.2 y §6.2; `Compatibilidad-Plataformas.md` §1.2 y §5 |
-| Trazabilidad downstream | CU-21, CU-22 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | `CU-00009`, `CU-00011`, `CU-06010` en `GeometriaFactory-Api`; `CU-10010` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -82,10 +82,10 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §11 (RN-B1), §15 
 
 ## 7. Trazabilidad a CU
 
-| NB | CU prevista | Estado |
+| NB | Casos de uso emitidos | Estado |
 | --- | --- | --- |
-| NB-00008 | CU-21 verificar el acceso al laboratorio desde la red de la facultad | a generar |
-| NB-00008 | CU-22 presentar el estado degradado cuando el servicio de datos no responde | a generar |
+| NB-00008 | `CU-00009`, `CU-00011`, `CU-06010` en `GeometriaFactory-Api`; `CU-10010` en `GeometriaFactory-Web` verificar el acceso al laboratorio desde la red de la facultad | Emitidos |
+| NB-00008 | `CU-00009`, `CU-00011`, `CU-06010` en `GeometriaFactory-Api`; `CU-10010` en `GeometriaFactory-Web` presentar el estado degradado cuando el servicio de datos no responde | Emitidos |
 
 ## 8. Dependencias con otras NB
 

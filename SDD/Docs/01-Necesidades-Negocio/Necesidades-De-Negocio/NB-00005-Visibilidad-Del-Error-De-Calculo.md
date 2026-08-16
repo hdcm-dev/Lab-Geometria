@@ -9,7 +9,7 @@
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §1 (idea y problema), §3 (diferenciador D-2), §4 (capacidad F-10), §4.1 (regla RN-05), §4.2 (modelo de estados del trabajo), §6 (flujo 2), §7 (caso límite CL-4), §8 (métrica de valor didáctico entregado), §20 (escenarios E-1 a E-4), §22 (asunción A-2); `Vision-Producto.md` §1, §3, §5 y §9; `Alcance-Producto.md` §3 y §8 |
-| Trazabilidad downstream | CU-14 (prevista en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | `CU-00007`, `CU-02007`, `CU-04005`, `CU-06002` en `GeometriaFactory-Api`; `CU-10005`, `CU-10007` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -81,9 +81,9 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §8; el segundo, de
 
 ## 7. Trazabilidad a CU
 
-| NB | CU prevista | Estado |
+| NB | Casos de uso emitidos | Estado |
 | --- | --- | --- |
-| NB-00005 | CU-14 verificar los valores declarados contra los derivados y emitir las advertencias | a generar |
+| NB-00005 | `CU-00007`, `CU-02007`, `CU-04005`, `CU-06002` en `GeometriaFactory-Api`; `CU-10005`, `CU-10007` en `GeometriaFactory-Web` verificar los valores declarados contra los derivados y emitir las advertencias | Emitidos |
 
 ## 8. Dependencias con otras NB
 

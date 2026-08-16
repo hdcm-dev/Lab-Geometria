@@ -9,7 +9,7 @@
 | Fecha | 2026-08-08 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE §4 (capacidades F-21, F-23 y F-24), §4.1 (reglas RN-04, RN-10 y RN-11), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §5 (historia 7.1), §6 (flujo 2.1), §7 (casos límite CL-10 y CL-11), §8 (métrica de aprobación del administrador), §9 (retiro de la exclusión X-5), §12 (glosario: «aprobar / rechazar» y «comentario»), §15 (etapa `h`), §22 (asunción A-2); `Vision-Producto.md` §5 (OBJ-03), §6 y §9; `Alcance-Producto.md` §4.1 y §8; `Roadmap-Producto.md` §2.1 y §5.2 |
-| Trazabilidad downstream | CU-24, CU-25, CU-26, CU-27 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | `CU-00006`, `CU-00008`, `CU-02010`, `CU-02011`, `CU-04006`, `CU-04007`, `CU-04008`, `CU-04009`, `CU-06004` en `GeometriaFactory-Api`; `CU-10006`, `CU-10008`, `CU-10009` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -89,12 +89,12 @@ El target del primer criterio es 100 % y no un porcentaje menor, y el motivo est
 
 ## 7. Trazabilidad a CU
 
-| NB | CU prevista | Estado |
+| NB | Casos de uso emitidos | Estado |
 | --- | --- | --- |
-| NB-00009 | CU-24 aprobar un trabajo en estado `Pendiente`, con comentario opcional | a generar |
-| NB-00009 | CU-25 rechazar un trabajo en estado `Pendiente`, con comentario opcional | a generar |
-| NB-00009 | CU-26 consultar el desenlace y el comentario del trabajo propio | a generar |
-| NB-00009 | CU-27 eliminar un trabajo desde el panel del administrador | a generar |
+| NB-00009 | `CU-00006`, `CU-00008`, `CU-02010`, `CU-02011`, `CU-04006`, `CU-04007`, `CU-04008`, `CU-04009`, `CU-06004` en `GeometriaFactory-Api`; `CU-10006`, `CU-10008`, `CU-10009` en `GeometriaFactory-Web` aprobar un trabajo en estado `Pendiente`, con comentario opcional | Emitidos |
+| NB-00009 | `CU-00006`, `CU-00008`, `CU-02010`, `CU-02011`, `CU-04006`, `CU-04007`, `CU-04008`, `CU-04009`, `CU-06004` en `GeometriaFactory-Api`; `CU-10006`, `CU-10008`, `CU-10009` en `GeometriaFactory-Web` rechazar un trabajo en estado `Pendiente`, con comentario opcional | Emitidos |
+| NB-00009 | `CU-00006`, `CU-00008`, `CU-02010`, `CU-02011`, `CU-04006`, `CU-04007`, `CU-04008`, `CU-04009`, `CU-06004` en `GeometriaFactory-Api`; `CU-10006`, `CU-10008`, `CU-10009` en `GeometriaFactory-Web` consultar el desenlace y el comentario del trabajo propio | Emitidos |
+| NB-00009 | `CU-00006`, `CU-00008`, `CU-02010`, `CU-02011`, `CU-04006`, `CU-04007`, `CU-04008`, `CU-04009`, `CU-06004` en `GeometriaFactory-Api`; `CU-10006`, `CU-10008`, `CU-10009` en `GeometriaFactory-Web` eliminar un trabajo desde el panel del administrador | Emitidos |
 
 ## 8. Dependencias con otras NB
 

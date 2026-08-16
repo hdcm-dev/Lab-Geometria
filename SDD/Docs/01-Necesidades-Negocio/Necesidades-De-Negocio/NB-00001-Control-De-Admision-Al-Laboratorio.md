@@ -9,7 +9,7 @@
 | Fecha | 2026-08-10 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE 1.9 §1 (idea y problema), §3 (propuesta de valor), §4 (capacidades F-01 y F-03; **F-26**, que vive en el mismo panel y pertenece a NB-00002), §4.1 (**RN-15**, que declara que el reseteo no es una transición de la máquina de estados), §7 (casos límite CL-6 y **CL-7** reescrito), §9 (exclusión X-3 vigente y **X-2 retirada**), §11 (riesgo **RN-B6**, tachado el 2026-08-09 por el intake 1.10); `Vision-Producto.md` §1, §2, §8 (riesgo RG-06) y §9; `Alcance-Producto.md` §4.1 y §5 |
-| Trazabilidad downstream | CU-01, CU-02, CU-03 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | `CU-00003`, `CU-00004`, `CU-00005`, `CU-02001`, `CU-02002`, `CU-02004`, `CU-02012`, `CU-02013`, `CU-04001`, `CU-04002`, `CU-04010`, `CU-04011`, `CU-06004`, `CU-06005`, `CU-06007` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10004` en `GeometriaFactory-Web` (emitidos en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -84,11 +84,11 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §4 (F-01) y de la 
 
 ## 7. Trazabilidad a CU
 
-| NB | CU prevista | Estado |
+| NB | Casos de uso emitidos | Estado |
 | --- | --- | --- |
-| NB-00001 | CU-01 configurar la cuenta de administrador en el primer arranque | a generar |
-| NB-00001 | CU-02 habilitar, bloquear y rehabilitar una cuenta de alumno | a generar |
-| NB-00001 | CU-03 dar de baja una cuenta de alumno con confirmación escrita | a generar |
+| NB-00001 | `CU-00003`, `CU-00004`, `CU-00005`, `CU-02001`, `CU-02002`, `CU-02004`, `CU-02012`, `CU-02013`, `CU-04001`, `CU-04002`, `CU-04010`, `CU-04011`, `CU-06004`, `CU-06005`, `CU-06007` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10004` en `GeometriaFactory-Web` configurar la cuenta de administrador en el primer arranque | Emitidos |
+| NB-00001 | `CU-00003`, `CU-00004`, `CU-00005`, `CU-02001`, `CU-02002`, `CU-02004`, `CU-02012`, `CU-02013`, `CU-04001`, `CU-04002`, `CU-04010`, `CU-04011`, `CU-06004`, `CU-06005`, `CU-06007` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10004` en `GeometriaFactory-Web` habilitar, bloquear y rehabilitar una cuenta de alumno | Emitidos |
+| NB-00001 | `CU-00003`, `CU-00004`, `CU-00005`, `CU-02001`, `CU-02002`, `CU-02004`, `CU-02012`, `CU-02013`, `CU-04001`, `CU-04002`, `CU-04010`, `CU-04011`, `CU-06004`, `CU-06005`, `CU-06007` en `GeometriaFactory-Api`; `CU-10001`, `CU-10002`, `CU-10004` en `GeometriaFactory-Web` dar de baja una cuenta de alumno con confirmación escrita | Emitidos |
 
 ## 8. Dependencias con otras NB
 

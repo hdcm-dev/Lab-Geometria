@@ -11,7 +11,7 @@
 | Fecha | 2026-08-11 |
 | Autor | Analista de Negocio Senior (AG-01) |
 | Trazabilidad upstream | PRODUCT-INTAKE 1.15 §1 (idea y problema), §2 (audiencia y stakeholders), §3 (propuesta de valor), §4 (alcance funcional pretendido con MoSCoW), §4.1 (reglas de negocio RN-01 a RN-16), §4.2 (modelo de estados del trabajo), §5 (historias de usuario), §6 (flujos típicos), §7 (casos límite), §8 (métricas de éxito), §9 (exclusiones), §10 (restricciones), §11 (riesgos), §12 (glosario del dominio), §15 (descomposición y delivery), §17.7 P.10 (el movimiento automático no altera la disposición), §20 y §21 (escenarios de datos), §22 (asunciones); `00-Contexto/Vision-Producto.md`, `00-Contexto/Alcance-Producto.md`, `00-Contexto/Roadmap-Producto.md`, `00-Contexto/Compatibilidad-Plataformas.md` |
-| Trazabilidad downstream | CU-01 a CU-30 (previstas en 02-Especificacion-Funcional); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
+| Trazabilidad downstream | 63 casos de uso emitidos en las dos unidades de entrega, con 105 vínculos de trazabilidad (ver §5.3); 06-Backlog-Tecnico, 07-Plan-Sprint, 08-Calidad-Y-Pruebas |
 
 ---
 
@@ -27,7 +27,7 @@
 - [5. Trazabilidad agregada](#5-trazabilidad-agregada)
   - [5.1 De capacidad del intake a NB](#51-de-capacidad-del-intake-a-nb)
   - [5.2 De métrica de negocio a NB](#52-de-métrica-de-negocio-a-nb)
-  - [5.3 De NB a caso de uso previsto](#53-de-nb-a-caso-de-uso-previsto)
+  - [5.3 De NB a caso de uso emitido](#53-de-nb-a-caso-de-uso-emitido)
   - [5.4 Posición en la cadena de trazabilidad](#54-posición-en-la-cadena-de-trazabilidad)
 - [6. Valores pendientes de confirmación](#6-valores-pendientes-de-confirmación)
 - [7. Control de cambios](#7-control-de-cambios)
@@ -46,15 +46,15 @@ Las necesidades están redactadas desde las dos personas que usan el producto �
 
 | ID | Necesidad | Prioridad MoSCoW | CU previstas | Estado | Enlace |
 | --- | --- | --- | --- | --- | --- |
-| NB-00001 | Control de admisión y de bajas del laboratorio | Must Have | CU-01, CU-02, CU-03 | Propuesto | [NB-00001](Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) |
-| NB-00002 | Identidad propia del alumno sin canal de correo | Must Have | CU-04, CU-05, CU-06, CU-07, CU-29, CU-30 | Propuesto | [NB-00002](Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) |
-| NB-00003 | Trabajo con dueño, estado y persistencia | Must Have | CU-08, CU-09, CU-10, CU-11 | Propuesto | [NB-00003](Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) |
-| NB-00004 | Interpretación fiel del dato del alumno, con el error localizado | Must Have | CU-12, CU-13, CU-23 | Propuesto | [NB-00004](Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) |
-| NB-00005 | Visibilidad del error de cálculo sobre el trabajo propio | Must Have | CU-14 | Propuesto | [NB-00005](Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) |
-| NB-00006 | Visualización del trabajo dentro del producto | Must Have | CU-15, CU-16, CU-17, CU-28 | Propuesto | [NB-00006](Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md) |
-| NB-00007 | Revisión de la comisión desde un solo lugar | Must Have | CU-18, CU-19, CU-20 | Propuesto | [NB-00007](Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md) |
-| NB-00008 | Alcance del laboratorio desde el aula | Should Have | CU-21, CU-22 | Propuesto | [NB-00008](Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md) |
-| NB-00009 | Desenlace explícito de la entrega | Must Have | CU-24, CU-25, CU-26, CU-27 | Propuesto | [NB-00009](Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) |
+| NB-00001 | Control de admisión y de bajas del laboratorio | Must Have | 15 en `Api`; 3 en `Web` | Propuesto | [NB-00001](Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) |
+| NB-00002 | Identidad propia del alumno sin canal de correo | Must Have | 15 en `Api`; 4 en `Web` | Propuesto | [NB-00002](Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) |
+| NB-00003 | Trabajo con dueño, estado y persistencia | Must Have | 14 en `Api`; 2 en `Web` | Propuesto | [NB-00003](Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) |
+| NB-00004 | Interpretación fiel del dato del alumno, con el error localizado | Must Have | 10 en `Api`; 2 en `Web` | Propuesto | [NB-00004](Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) |
+| NB-00005 | Visibilidad del error de cálculo sobre el trabajo propio | Must Have | 4 en `Api`; 2 en `Web` | Propuesto | [NB-00005](Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) |
+| NB-00006 | Visualización del trabajo dentro del producto | Must Have | 3 en `Api`; 8 en `Web` | Propuesto | [NB-00006](Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md) |
+| NB-00007 | Revisión de la comisión desde un solo lugar | Must Have | 4 en `Api`; 3 en `Web` | Propuesto | [NB-00007](Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md) |
+| NB-00008 | Alcance del laboratorio desde el aula | Should Have | 3 en `Api`; 1 en `Web` | Propuesto | [NB-00008](Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md) |
+| NB-00009 | Desenlace explícito de la entrega | Must Have | 9 en `Api`; 3 en `Web` | Propuesto | [NB-00009](Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) |
 
 Ocho necesidades son Must Have y una es Should Have. Las prioridades no se deciden en esta categoría: se derivan de PRODUCT-INTAKE §4 y se justifican en §9 de cada archivo. **Desde `PRODUCT-INTAKE` 1.19, NB-00006 dejó de agrupar prioridades distintas**: sus tres capacidades —F-11, F-13 y F-25— son las tres `Must Have`, de modo que la única NB que todavía agrupa prioridades distintas es **NB-00007**, con F-12 `Must Have` y F-15 `Could Have`. La regla de agregación no cambia y se conserva escrita porque sigue gobernando ese caso: la prioridad de la NB es la de su capacidad más alta, declarada como tal en su §9.
 
@@ -173,21 +173,39 @@ Las **diecinueve** capacidades Must Have están cubiertas: ninguna quedó sin ne
 
 Las cuatro métricas del intake son de nivel producto y no alcanzan para cubrir los criterios de éxito de nueve necesidades. Los criterios restantes se derivaron de los casos límite de PRODUCT-INTAKE §7, de las **dieciséis** reglas de negocio de §4.1 —`RN-01` a `RN-16`, contadas fila por fila en la fuente—, del modelo de estados de §4.2, de los flujos de §6, de los escenarios de datos de §20 y de los criterios verificables de transición de `Roadmap-Producto.md` §5.2, que a su vez trazan a los criterios de aceptación de etapa del intake. Cada criterio declara su origen en la nota al pie de §5 de su archivo.
 
-### 5.3 De NB a caso de uso previsto
+### 5.3 De NB a caso de uso emitido
 
-| NB | CU previstas | Estado de las CU |
-| --- | --- | --- |
-| NB-00001 | CU-01, CU-02, CU-03 | a generar |
-| NB-00002 | CU-04, CU-05, CU-06, CU-07, CU-29, CU-30 | a generar |
-| NB-00003 | CU-08, CU-09, CU-10, CU-11 | a generar |
-| NB-00004 | CU-12, CU-13, CU-23 | a generar |
-| NB-00005 | CU-14 | a generar |
-| NB-00006 | CU-15, CU-16, CU-17, CU-28 | a generar |
-| NB-00007 | CU-18, CU-19, CU-20 | a generar |
-| NB-00008 | CU-21, CU-22 | a generar |
-| NB-00009 | CU-24, CU-25, CU-26, CU-27 | a generar |
+| NB | Casos de uso de `GeometriaFactory-Api` | Casos de uso de `GeometriaFactory-Web` | Estado |
+| --- | --- | --- | --- |
+| NB-00001 | `CU-00003`, `CU-00004`, `CU-00005`, `CU-02001`, `CU-02002`, `CU-02004`, `CU-02012`, `CU-02013`, `CU-04001`, `CU-04002`, `CU-04010`, `CU-04011`, `CU-06004`, `CU-06005`, `CU-06007` | `CU-10001`, `CU-10002`, `CU-10004` | Emitidos |
+| NB-00002 | `CU-00001`, `CU-00002`, `CU-00003`, `CU-00005`, `CU-02001`, `CU-02003`, `CU-02004`, `CU-02013`, `CU-04001`, `CU-04003`, `CU-04011`, `CU-06005`, `CU-06006`, `CU-06007`, `CU-06008` | `CU-10001`, `CU-10002`, `CU-10003`, `CU-10004` | Emitidos |
+| NB-00003 | `CU-00006`, `CU-00007`, `CU-00011`, `CU-02005`, `CU-02008`, `CU-02009`, `CU-02010`, `CU-04004`, `CU-04006`, `CU-04009`, `CU-06001`, `CU-06003`, `CU-06004`, `CU-06010` | `CU-10005`, `CU-10006` | Emitidos |
+| NB-00004 | `CU-00006`, `CU-00009`, `CU-02005`, `CU-02006`, `CU-02007`, `CU-02008`, `CU-04004`, `CU-04005`, `CU-06001`, `CU-06002` | `CU-10005`, `CU-12002` | Emitidos |
+| NB-00005 | `CU-00007`, `CU-02007`, `CU-04005`, `CU-06002` | `CU-10005`, `CU-10007` | Emitidos |
+| NB-00006 | `CU-00007`, `CU-02006`, `CU-04006` | `CU-10007`, `CU-12001`, `CU-12002`, `CU-12003`, `CU-12004`, `CU-12005`, `CU-12006`, `CU-12007` | Emitidos |
+| NB-00007 | `CU-00007`, `CU-02011`, `CU-04007`, `CU-06003` | `CU-10007`, `CU-10008`, `CU-10009` | Emitidos |
+| NB-00008 | `CU-00009`, `CU-00011`, `CU-06010` | `CU-10010` | Emitidos |
+| NB-00009 | `CU-00006`, `CU-00008`, `CU-02010`, `CU-02011`, `CU-04006`, `CU-04007`, `CU-04008`, `CU-04009`, `CU-06004` | `CU-10006`, `CU-10008`, `CU-10009` | Emitidos |
 
-**Treinta** casos de uso previstos, contados sobre esta misma tabla —3 + 6 + 4 + 3 + 1 + 4 + 3 + 2 + 4—, todos con estado `a generar`. La numeración es una previsión de esta categoría y la confirma la categoría 02 al redactarlos.
+**Ciento cinco** vínculos de trazabilidad entre necesidad de negocio y caso de uso, contados sobre
+esta misma tabla, todos con estado `Emitidos`. La cuenta es de vínculos y no de casos de uso: un
+caso de uso que implementa dos necesidades aparece en dos filas.
+
+**Sobre la numeración, y por qué esta tabla cambió de forma.** Hasta la migración a SDD 8.x esta
+sección declaraba una **previsión** de treinta casos de uso numerados `CU-01` a `CU-30` a nivel
+producto, con la nota de que «la numeración es una previsión de esta categoría y la confirma la
+categoría 02 al redactarlos». Esa previsión no podía confirmarse: cada proyecto de código numeraba
+sus casos de uso de forma independiente, de modo que el `CU-05` previsto acá y el `CU-05` emitido por
+una categoría 02 no eran el mismo. Para poder citarla, el corpus tuvo que acuñar una familia propia,
+`P·CU-XX`, que ninguna regla del framework declaraba.
+
+Con el **ámbito de unicidad en el producto** de `Root-Rules.md` §9.1, la previsión y la numeración
+emitida son el mismo espacio de nombres: un `CU-02005` es uno solo en todo el producto. La familia
+`P·CU` deja de tener función y se retira, y esta tabla cita los identificadores emitidos en lugar de
+una previsión que no resolvía.
+
+Las columnas por unidad de entrega no desambiguan —los identificadores ya son únicos— sino que
+declaran **dónde vive** cada caso de uso, que es lo que un lector necesita para abrirlo.
 
 ### 5.4 Posición en la cadena de trazabilidad
 
