@@ -96,6 +96,11 @@ Origen de cada criterio: el primero deriva de PRODUCT-INTAKE §8; el segundo, de
 
 ## 10. Control de cambios
 
+> **Las citas `CU-XX` de las filas de abajo son a la previsión de casos de uso a nivel producto que la
+> migración a SDD 8.x retiró.** Se conservan con su número por `Root-Rules.md` §9.3, y el motivo por el
+> que no admiten reescritura está en `Necesidades-Negocio.md` §7.
+
+
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Articula la necesidad de hacer visible el error de cálculo sobre el trabajo propio a partir de la capacidad F-10 del intake, con cinco criterios de éxito trazados a su sección de origen —incluido el criterio negativo del segundo ejemplo de la cátedra y uno con target rotulado como asunción A-2— y un caso de uso previsto. |

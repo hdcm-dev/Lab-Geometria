@@ -122,6 +122,11 @@ La parte correspondiente a **F-13** —disposición estable y sincronización—
 
 ## 10. Control de cambios
 
+> **Las citas `CU-XX` de las filas de abajo son a la previsión de casos de uso a nivel producto que la
+> migración a SDD 8.x retiró.** Se conservan con su número por `Root-Rules.md` §9.3, y el motivo por el
+> que no admiten reescritura está en `Necesidades-Negocio.md` §7.
+
+
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Articula la necesidad de ver el trabajo dentro del producto a partir de las capacidades F-11 y F-13 del intake, con seis criterios de éxito trazados a su sección de origen, tres casos de uso previstos y la declaración de agregación de prioridades de §9. |

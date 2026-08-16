@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Informe-Migracion-6.0-a-8.6.md
-**Versión:** 3.0
-**Fase:** M6 — Auditoría de migración, **ronda 3** (`Master-Prompt-Migracion.md` 2.0 §10)
+**Versión:** 4.0
+**Fase:** M6 — Auditoría de migración, **ronda 4** (`Master-Prompt-Migracion.md` 2.0 §10)
 **Alcance:** el árbol `SDD/` del destino `Lab-Geometria`, en la rama de migración
 **Auditor:** Arquitecto de Soluciones + QA Senior, con la mecánica de `Master-Prompt.md` §10
 **Fecha:** 2026-08-16
@@ -32,8 +32,8 @@ M3 sin ejecutar** y por eso declaró la migración **parcial** y dejó la proced
 ejecutaron después —M2 con su doble detención resuelta y M3 con confirmación explícita del Product
 Owner el 2026-08-16—, y con la cadena completa **M5 reescribió la procedencia a 8.6**.
 
-Hallazgos de esta ronda: **0 P0**, **0 P1**, **7 P2**. El veredicto es **APROBADO** y la migración se
-declara **COMPLETA Y CERRADA**.
+Hallazgos de esta ronda: **0 P0**, **0 P1**, **7 P2**, y **ningún tema abierto**. El veredicto es
+**APROBADO** y la migración se declara **COMPLETA Y CERRADA**.
 
 **Los tres P1 de la ronda 2 quedaron cerrados el 2026-08-16**, cada uno por la salida que le
 correspondía y no por la misma: **M-03** con un ADR de apartamiento, **M-08** con una supersesión
@@ -142,7 +142,7 @@ definición conservan la forma anterior—.
 **Marca de origen:** propio de la migración, o aguas arriba. **Marca de detectabilidad:** por guion, o
 sólo por lectura.
 
-### M-08 · P2 · propio · por guion — Dos documentos de referencia cruzada no se reconectaron en M4 · **CERRADO, con 305 citas para confirmar**
+### M-08 · P2 · propio · por guion — Dos documentos de referencia cruzada no se reconectaron en M4 · **CERRADO**
 
 **Archivos:** `Docs/Handoff-Checkout.md` (247 identificadores de forma vieja) y
 `Docs/Producto/Norma-De-Nomenclatura.md` (455).
@@ -174,10 +174,17 @@ cualquiera de las siete numeraciones de origen. Sólo **51 resuelven** por el do
 misma fila. `Migracion-Rules.md` §4.3.1 dice qué hacer con esto: **declararlas y confirmarlas, no
 inferirlas**. El inventario completo, cita por cita y con su línea, está en
 `Migracion-M8-Registro-Citas-Norma.json`. **De las 411, las 106 de familia `RN` se cerraron por
-M-09**, porque `RN` es familia única en el producto y su mapeo no depende del contexto. **Quedan 305
-para confirmar**, y son el único trabajo abierto de este informe.
+M-09**, porque `RN` es familia única en el producto y su mapeo no depende del contexto.
 
-Baja a **P2**: está inventariado, medido y con su procedimiento declarado.
+**Las 305 restantes se resolvieron el 2026-08-16, y no por confirmación sino porque no eran
+ambiguas.** El calificador estaba en el texto, en cuatro formas que ningún resolutor único
+alcanzaba: delante del identificador, detrás, en otra columna de la fila, y en el documento fuente
+citado en la fila. Cuatro pasadas sucesivas —cada una midiendo el resto de la anterior— las llevaron
+a 16, y esas dieciséis se leyeron una por una. La norma quedó en **0 citas de forma vieja** en las
+familias `CU`, `ADR`, `US` y `BT`. El mismo procedimiento se corrió sobre el resto del árbol:
+**111 citas más** en `Plan-Etapa-A.md`, `Compatibilidad-Plataformas.md` y las necesidades de negocio.
+
+Baja a **P2** y **cierra**.
 
 ### M-09 · P2 · propio · sólo por lectura — Las familias de identificadores del intake conservan su ancho de origen · **CERRADO**
 
@@ -366,12 +373,23 @@ porque migrarlo a medias lo habría vuelto falso; y las 411 citas ambiguas de la
 **inventariaron** porque el método prohíbe resolverlas por inferencia. Cerrar los cuatro de la misma
 forma habría sido más rápido y habría dejado tres de ellos mal.
 
-**Lo único abierto, y no es bloqueante:** las **305 citas ambiguas** de
-`Producto/Norma-De-Nomenclatura.md` que quedan después del cierre de M-09. Están inventariadas cita
-por cita con su línea en `Migracion-M8-Registro-Citas-Norma.json`, y su resolución **necesita
-confirmación humana**, que es lo que `Migracion-Rules.md` §4.3.1 exige para una cita desnuda ambigua.
-Hasta que se confirmen, la norma sigue siendo legible: sus citas apuntan a la numeración con la que
-el documento se escribió, y esta auditoría dice cuál es.
+**Las citas ambiguas quedaron resueltas, y el camino importa más que el número.** La ronda 3 dejaba
+305 pendientes de confirmación humana. Al leerlas apareció que **no eran desnudas**: el calificador
+estaba ahí, sólo que en cuatro formas distintas —el proyecto delante del identificador
+(`Application ADR-02`), detrás (`US-29` de `GeometriaFactory-Api`), en otra columna de la misma fila
+(`| Domain · Application | … CU-12 |`) y, la más precisa, en el documento fuente citado en la fila
+(`Domain/03 §3.12 · CU-12`)—. Cuatro resolutores sucesivos, cada uno midiendo lo que el anterior
+dejaba, las llevaron de 305 a **16**, y esas dieciséis se resolvieron leyéndolas una por una contra
+la evidencia del propio corpus. **331 citas reconectadas en la norma, 111 en el resto del árbol**,
+todas con su registro.
+
+**Lo que no se reescribió, y es una decisión y no un resto.** Veintinueve citas de
+`01-Necesidades-Negocio/` apuntan a la **previsión de treinta casos de uso a nivel producto que la
+migración retiró**. `Root-Rules.md` §9.3 declara que un identificador retirado no libera su número, y
+esas citas viven en filas de control de cambios: reescribirlas haría que cada fila **afirmara que la
+versión anterior decía algo que no decía**. Y no hay reescritura correcta posible, porque la
+correspondencia entre la previsión y lo emitido es justamente lo que el corpus declara que nunca
+resolvió. Los siete documentos afectados lo declaran ahora en su control de cambios.
 
 **La reinvocación del orquestador de generación está habilitada.** Su reconciliación normativa va a
 encontrar la procedencia coincidente con la vigente e informar «al día».
@@ -383,3 +401,4 @@ encontrar la procedencia coincidente con la vigente e informar «al día».
 | 1.0 | 2026-08-16 | Emisión inicial. Auditoría de la migración 6.0 → 8.6 sobre el destino `Lab-Geometria`. Estado de las siete fases, resultado de la compuerta mecánica sobre 435 documentos vivos, los veintiséis criterios de aceptación de `Migracion-Rules.md` §6, siete hallazgos —0 P0, 4 P1, 3 P2—, el inventario de contenido sin destino y la declaración de **migración parcial** con la procedencia intacta. |
 | 2.0 | 2026-08-16 | **Ronda 2**, después de que M2, M3 y M5 se ejecutaran. La migración pasa de **PARCIAL** a **COMPLETA** y la procedencia queda en **8.6**. §2 declara las siete fases hechas y suma §2.2 con la resolución de la batería de M2. §3 rehace los recuentos sobre 437 documentos vivos. §4 cierra los tres criterios que dependían de M2 y M3. En hallazgos: **M-01 se reemplaza por M-08 y M-09**, que separan dos causas que la ronda 1 había atribuido a una sola —dos documentos de referencia cruzada sin reconectar, y las familias del intake con su ancho de origen—; **M-02 queda absorbido por M-08** y se conserva con su remisión; **M-04 baja de P1 a P2**, cerrado en lo sustantivo. Total: **0 P0, 3 P1, 4 P2**. |
 | 3.0 | 2026-08-16 | **Ronda 3**, después del cierre de los tres P1. Veredicto **APROBADO** —cero P0 y cero P1— y migración **COMPLETA Y CERRADA**. **M-03** cierra con `ADR-14001`, que declara el apartamiento del archivado central y lo acota a esta migración. **M-08** cierra con dos salidas distintas: `Handoff-Checkout.md` se declara **superado** en lugar de reconectarse, porque sus recuentos también están viejos y migrarlo a medias lo habría vuelto falso; y las 464 citas de `Norma-De-Nomenclatura.md` quedan **inventariadas**, con 51 resueltas por documento co-citado y **305 pendientes de confirmación humana** después del cierre de M-09. **M-09** cierra partido en dos: `RN` **se renumera** —377 citas, porque el árbol ya numeraba esas reglas y convivían dos números para la misma— y las diez familias restantes se **declaran** en `ADR-14002`. Total: **0 P0, 0 P1, 7 P2**. |
+| 4.0 | 2026-08-16 | **Ronda 4.** Cierra el último tema abierto: las 305 citas que la ronda 3 dejaba pendientes de confirmación. **No eran ambiguas**: su calificador estaba en el texto en cuatro formas distintas, y cuatro resolutores sucesivos más una lectura de las dieciséis finales las llevaron a **0**. **442 citas reconectadas** en total —331 en la norma y 111 en el resto del árbol—, con sus tres registros. Las **29 citas a la previsión de casos de uso retirada** se conservan por `Root-Rules.md` §9.3 y se declaran en el control de cambios de los siete documentos que las llevan: no admiten reescritura correcta, porque la correspondencia entre la previsión y lo emitido es lo que el corpus declara que nunca resolvió. **0 P0, 0 P1, 7 P2, ningún tema abierto.** |

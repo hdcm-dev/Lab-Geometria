@@ -27,7 +27,7 @@ internas y su detalle es arquitectura.
 
 Todo. Su contenido no se tocó: siguen declarando sus actores, sus precondiciones, sus flujos y sus
 criterios de aceptación, y conservan su identificador, que hace legible de qué capa vienen —`CU-06…`
-de infraestructura, `CU-000…` de la capa de exposición—.
+de infraestructura, `CU-00000…` de la capa de exposición—.
 
 Lo que cambia es **dónde viven y qué son**: el contrato interno de una capa, no la especificación de
 lo que el producto hace.

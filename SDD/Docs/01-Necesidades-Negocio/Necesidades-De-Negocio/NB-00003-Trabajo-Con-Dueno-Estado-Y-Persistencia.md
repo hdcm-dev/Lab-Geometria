@@ -107,6 +107,11 @@ La acción de envío que decide entre `Borrador` y `Pendiente` no pertenece a es
 
 ## 10. Control de cambios
 
+> **Las citas `CU-XX` de las filas de abajo son a la previsión de casos de uso a nivel producto que la
+> migración a SDD 8.x retiró.** Se conservan con su número por `Root-Rules.md` §9.3, y el motivo por el
+> que no admiten reescritura está en `Necesidades-Negocio.md` §7.
+
+
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Articula la necesidad de que el trabajo del alumno tenga dueño, estado y persistencia a partir de las capacidades F-06, F-07 y F-08 del intake, con cinco criterios de éxito trazados a su sección de origen —uno de ellos con target rotulado como asunción A-2— y cuatro casos de uso previstos. |

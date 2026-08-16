@@ -1,0 +1,874 @@
+{
+ "resueltas": [
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 1243,
+   "anterior": "EST-34",
+   "proyecto": "Web",
+   "nuevo": "EST-10034"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 157,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 172,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 176,
+   "anterior": "ADR-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 183,
+   "anterior": "ADR-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 185,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 189,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 193,
+   "anterior": "ADR-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 224,
+   "anterior": "BT-01",
+   "proyecto": "Application",
+   "nuevo": "BT-04001"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 224,
+   "anterior": "BT-06",
+   "proyecto": "Application",
+   "nuevo": "BT-04006"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 226,
+   "anterior": "BT-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06005"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 226,
+   "anterior": "BT-06",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06006"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 226,
+   "anterior": "BT-08",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06008"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 226,
+   "anterior": "US-24",
+   "proyecto": "Infrastructure",
+   "nuevo": "US-06024"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 226,
+   "anterior": "US-25",
+   "proyecto": "Infrastructure",
+   "nuevo": "US-06025"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 234,
+   "anterior": "BT-02",
+   "proyecto": "Api",
+   "nuevo": "BT-00002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 234,
+   "anterior": "BT-03",
+   "proyecto": "Api",
+   "nuevo": "BT-00003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 234,
+   "anterior": "US-26",
+   "proyecto": "Api",
+   "nuevo": "US-00026"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 234,
+   "anterior": "US-29",
+   "proyecto": "Api",
+   "nuevo": "US-00029"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 238,
+   "anterior": "ADR-06",
+   "proyecto": "Api",
+   "nuevo": "ADR-00006"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 242,
+   "anterior": "BT-01",
+   "proyecto": "Contracts",
+   "nuevo": "BT-08001"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 242,
+   "anterior": "BT-03",
+   "proyecto": "Contracts",
+   "nuevo": "BT-08003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 244,
+   "anterior": "BT-03",
+   "proyecto": "Web",
+   "nuevo": "BT-10003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 248,
+   "anterior": "BT-03",
+   "proyecto": "Web",
+   "nuevo": "BT-10003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 259,
+   "anterior": "ADR-04",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06004"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 259,
+   "anterior": "BT-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 260,
+   "anterior": "BT-07",
+   "proyecto": "Api",
+   "nuevo": "BT-00007"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 261,
+   "anterior": "BT-10",
+   "proyecto": "Api",
+   "nuevo": "BT-00010"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 262,
+   "anterior": "ADR-02",
+   "proyecto": "Api",
+   "nuevo": "ADR-00002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 262,
+   "anterior": "BT-09",
+   "proyecto": "Api",
+   "nuevo": "BT-00009"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 265,
+   "anterior": "BT-02",
+   "proyecto": "Web",
+   "nuevo": "BT-10002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 304,
+   "anterior": "BT-04",
+   "proyecto": "Domain",
+   "nuevo": "BT-02004"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 368,
+   "anterior": "ADR-02",
+   "proyecto": "Application",
+   "nuevo": "ADR-04002"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 369,
+   "anterior": "BT-05",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06005"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 370,
+   "anterior": "ADR-07",
+   "proyecto": "Infrastructure",
+   "nuevo": "ADR-06007"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 371,
+   "anterior": "ADR-06",
+   "proyecto": "Api",
+   "nuevo": "ADR-00006"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 372,
+   "anterior": "US-29",
+   "proyecto": "Api",
+   "nuevo": "US-00029"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 373,
+   "anterior": "BT-03",
+   "proyecto": "Web",
+   "nuevo": "BT-10003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 373,
+   "anterior": "US-29",
+   "proyecto": "Web",
+   "nuevo": "US-10029"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 374,
+   "anterior": "ADR-07",
+   "proyecto": "Web",
+   "nuevo": "ADR-10007"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 378,
+   "anterior": "BT-01",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06001"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 466,
+   "anterior": "BT-03",
+   "proyecto": "Web",
+   "nuevo": "BT-10003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 466,
+   "anterior": "US-29",
+   "proyecto": "Web",
+   "nuevo": "US-10029"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 468,
+   "anterior": "BT-04",
+   "proyecto": "Web",
+   "nuevo": "BT-10004"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 469,
+   "anterior": "BT-04",
+   "proyecto": "Web",
+   "nuevo": "BT-10004"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 470,
+   "anterior": "US-29",
+   "proyecto": "Web",
+   "nuevo": "US-10029"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 470,
+   "anterior": "BT-04",
+   "proyecto": "Web",
+   "nuevo": "BT-10004"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 471,
+   "anterior": "BT-04",
+   "proyecto": "Api",
+   "nuevo": "BT-00004"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 471,
+   "anterior": "BT-07",
+   "proyecto": "Api",
+   "nuevo": "BT-00007"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 577,
+   "anterior": "BT-06",
+   "proyecto": "Domain",
+   "nuevo": "BT-02006"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 577,
+   "anterior": "BT-10",
+   "proyecto": "Domain",
+   "nuevo": "BT-02010"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 577,
+   "anterior": "BT-12",
+   "proyecto": "Domain",
+   "nuevo": "BT-02012"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 578,
+   "anterior": "BT-14",
+   "proyecto": "Domain",
+   "nuevo": "BT-02014"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 579,
+   "anterior": "BT-16",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06016"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 581,
+   "anterior": "BT-10",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06010"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 582,
+   "anterior": "BT-09",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06009"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 583,
+   "anterior": "BT-15",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06015"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 583,
+   "anterior": "BT-03",
+   "proyecto": "Infrastructure",
+   "nuevo": "BT-06003"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 600,
+   "anterior": "US-29",
+   "proyecto": "Contracts",
+   "nuevo": "US-08029"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 601,
+   "anterior": "BT-07",
+   "proyecto": "Api",
+   "nuevo": "BT-00007"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 242,
+   "anterior": "CU-01",
+   "proyecto": "Domain",
+   "nuevo": "CU-00021"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 242,
+   "anterior": "CU-28",
+   "proyecto": "Domain",
+   "nuevo": "CU-02028"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 242,
+   "anterior": "CU-30",
+   "proyecto": "Domain",
+   "nuevo": "CU-02030"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md",
+   "linea": 130,
+   "anterior": "CU-01",
+   "proyecto": "Web",
+   "nuevo": "CU-10001"
+  },
+  {
+   "archivo": "Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md",
+   "linea": 97,
+   "anterior": "CU-28",
+   "proyecto": "Web",
+   "nuevo": "CU-10028"
+  },
+  {
+   "archivo": "Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md",
+   "linea": 117,
+   "anterior": "CU-28",
+   "proyecto": "Web",
+   "nuevo": "CU-10028"
+  },
+  {
+   "archivo": "Docs/Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "linea": 93,
+   "anterior": "CU-27",
+   "proyecto": "Web",
+   "nuevo": "CU-10027"
+  },
+  {
+   "archivo": "Docs/Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "linea": 243,
+   "anterior": "CU-05",
+   "proyecto": "Web",
+   "nuevo": "CU-10005"
+  },
+  {
+   "archivo": "Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/README.md",
+   "linea": 30,
+   "anterior": "CU-000",
+   "proyecto": "Api",
+   "nuevo": "CU-00000"
+  },
+  {
+   "archivo": "Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md",
+   "linea": 238,
+   "anterior": "RC-01",
+   "proyecto": "Application",
+   "nuevo": "RC-04001"
+  },
+  {
+   "archivo": "Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md",
+   "linea": 240,
+   "anterior": "CU-06",
+   "proyecto": "Visor",
+   "nuevo": "CU-12006"
+  }
+ ],
+ "pendientes": [
+  {
+   "archivo": "Docs/00-Contexto/Compatibilidad-Plataformas.md",
+   "linea": 176,
+   "cita": "US-29"
+  },
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 440,
+   "cita": "RC-06"
+  },
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 485,
+   "cita": "RC-06"
+  },
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 1109,
+   "cita": "RC-06"
+  },
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 1545,
+   "cita": "EST-05"
+  },
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 1545,
+   "cita": "EST-49"
+  },
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 1545,
+   "cita": "EST-50"
+  },
+  {
+   "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+   "linea": 1745,
+   "cita": "RC-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 143,
+   "cita": "BT-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 170,
+   "cita": "ADR-02"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 187,
+   "cita": "ADR-02"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 200,
+   "cita": "RC-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 202,
+   "cita": "BT-09"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 202,
+   "cita": "BT-12"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 202,
+   "cita": "BT-10"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 202,
+   "cita": "BT-16"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 208,
+   "cita": "BT-01"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 208,
+   "cita": "BT-05"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 208,
+   "cita": "BT-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 208,
+   "cita": "BT-05"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 208,
+   "cita": "BT-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 231,
+   "cita": "ADR-07"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 231,
+   "cita": "BT-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 231,
+   "cita": "US-24"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 231,
+   "cita": "US-25"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 232,
+   "cita": "BT-05"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 239,
+   "cita": "ADR-07"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 239,
+   "cita": "US-27"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 239,
+   "cita": "US-28"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 240,
+   "cita": "US-29"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 308,
+   "cita": "BT-02"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 367,
+   "cita": "BT-05"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 414,
+   "cita": "ADR-07"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 434,
+   "cita": "ADR-07"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 479,
+   "cita": "US-24"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 479,
+   "cita": "US-25"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 479,
+   "cita": "US-26"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 479,
+   "cita": "US-29"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 599,
+   "cita": "BT-05"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 599,
+   "cita": "BT-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 599,
+   "cita": "US-24"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 599,
+   "cita": "US-25"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 599,
+   "cita": "BT-06"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 599,
+   "cita": "BT-07"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 617,
+   "cita": "RC-01"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 619,
+   "cita": "BT-05"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 620,
+   "cita": "BT-05"
+  },
+  {
+   "archivo": "Docs/Producto/Plan-Etapa-A.md",
+   "linea": 620,
+   "cita": "BT-06"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 93,
+   "cita": "CU-17"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 94,
+   "cita": "CU-28"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 95,
+   "cita": "CU-29"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 95,
+   "cita": "CU-30"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 96,
+   "cita": "CU-20"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 195,
+   "cita": "CU-01"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 195,
+   "cita": "CU-30"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 198,
+   "cita": "CU-05"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 198,
+   "cita": "CU-05"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 238,
+   "cita": "CU-28"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 238,
+   "cita": "CU-28"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 239,
+   "cita": "CU-29"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-Negocio.md",
+   "linea": 239,
+   "cita": "CU-30"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md",
+   "linea": 114,
+   "cita": "CU-09"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md",
+   "linea": 114,
+   "cita": "CU-10"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md",
+   "linea": 102,
+   "cita": "CU-20"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md",
+   "linea": 117,
+   "cita": "CU-17"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md",
+   "linea": 117,
+   "cita": "CU-28"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md",
+   "linea": 130,
+   "cita": "CU-28"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md",
+   "linea": 108,
+   "cita": "CU-23"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md",
+   "linea": 108,
+   "cita": "CU-13"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md",
+   "linea": 128,
+   "cita": "CU-29"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md",
+   "linea": 128,
+   "cita": "CU-30"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md",
+   "linea": 129,
+   "cita": "CU-05"
+  },
+  {
+   "archivo": "Docs/01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md",
+   "linea": 102,
+   "cita": "CU-14"
+  },
+  {
+   "archivo": "Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/README.md",
+   "linea": 29,
+   "cita": "CU-06",
+   "motivo": "CU repartido"
+  }
+ ]
+}

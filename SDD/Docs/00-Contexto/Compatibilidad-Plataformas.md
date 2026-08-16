@@ -173,7 +173,7 @@ dbug: Microsoft.AspNetCore.Components.Server.Circuits.CircuitRegistry[115]
 | **Versión de plataforma del hosting**, la incógnita `[A VERIFICAR]` del intake §17.2.P.9 · GeometriaFactory-Web | **RESUELTA: el hosting soporta `net10.0`.** **No hizo falta bajar la versión objetivo del front**, que es la salida que §17.2.P.10 · GeometriaFactory-Web declaraba para el caso contrario. La restricción `CP-03` de §3 deja de estar pendiente de medición |
 | Raíz del sitio | **404.** La única ruta servida en la etapa `a` es la página de estado: hay **una sola** página con ruta declarada. No es un defecto de la publicación |
 | `RA-03` en producción | **Se sostiene.** En el HTML público servido por el hosting hay **cero** apariciones de la dirección y del puerto internos |
-| Estado degradado | **Se ve correctamente.** El servicio de datos corre en el servidor propio y el front público **no lo alcanza**, y la página de estado dice exactamente eso en lugar de mostrar un dato inventado. Es `US-29` funcionando desde el otro lado de la red |
+| Estado degradado | **Se ve correctamente.** El servicio de datos corre en el servidor propio y el front público **no lo alcanza**, y la página de estado dice exactamente eso en lugar de mostrar un dato inventado. Es `US-00029` funcionando desde el otro lado de la red |
 | **`PT-01.b` sobre el hosting real** | **El hosting NO ofrece WebSockets.** La negociación del circuito devuelve **dos** transportes, `ServerSentEvents` y `LongPolling`. En desarrollo ofrecía los **tres** |
 
 **Cómo se midió, para que se pueda volver a correr.** Las tres comprobaciones son sobre la dirección pública y no necesitan ningún secreto:

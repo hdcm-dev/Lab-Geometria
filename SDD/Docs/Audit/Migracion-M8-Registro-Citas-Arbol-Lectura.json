@@ -1,0 +1,23 @@
+[
+ {
+  "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+  "anterior": "`RC-06`",
+  "nuevo": "`RC-06006`",
+  "ocurrencias": 4,
+  "resolucion": "`Modelo-Datos-Logico.md` §2.1 y el enunciado «tres sellos de tiempo» identifican a `RC-06006`"
+ },
+ {
+  "archivo": "Docs/Producto/Norma-De-Nomenclatura.md",
+  "anterior": "`EST-05`, `EST-49` y `EST-50`",
+  "nuevo": "`EST-10005`, `EST-10049` y `EST-10050`",
+  "ocurrencias": 1,
+  "resolucion": "`Linea-Base-Visual.md` es de `GeometriaFactory-Web`"
+ },
+ {
+  "archivo": "Docs/00-Contexto/Compatibilidad-Plataformas.md",
+  "anterior": "`US-29` funcionando",
+  "nuevo": "`US-00029` funcionando",
+  "ocurrencias": 1,
+  "resolucion": "la historia es de `GeometriaFactory-Api`, como la cita §6.9 de la norma"
+ }
+]
