@@ -124,7 +124,7 @@ Cómo obtiene cada consumidor el artefacto de su productor, arista por arista. *
 | `Infrastructure → Api` | Compilación | Build conjunto | `PRODUCT-MANIFEST` §2 y §3 |
 | `Contracts → Api` | Compilación | Build conjunto | `PRODUCT-MANIFEST` §2 y §3 |
 | `Contracts → Web` | Compilación | Build conjunto | `PRODUCT-MANIFEST` §2 y §3 |
-| `Visor → Web` | Compilación del empaquetado del front | **Copia del bundle generado** al directorio de recursos estáticos del anfitrión. El bundle **no se versiona en el repositorio**: lo genera la canalización antes de publicar | [`Visor/Entornos-Deploy.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/_fusion/Visor/Entornos-Deploy.md) §2, que cerró el punto abierto `PA-05` de aquel proyecto de código |
+| `Visor → Web` | Compilación del empaquetado del front | **Copia del bundle generado** al directorio de recursos estáticos del anfitrión. El bundle **no se versiona en el repositorio**: lo genera la canalización antes de publicar | [`Visor/Entornos-Deploy.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md) §2, que cerró el punto abierto `PA-05` de aquel proyecto de código |
 | `Application → Api` | Compilación, **en disputa** | Build conjunto bajo las dos lecturas | Ver [`Vista-Producto.md`](Vista-Producto.md) §3.1: el manifiesto declara la arista en §2 y no la dibuja en §3 |
 | `Web → Api` | **Tiempo de ejecución**, HTTP servidor a servidor | La dirección del servicio de datos **llega por configuración**, no por referencia | [`Web ADR-10007`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) |
 

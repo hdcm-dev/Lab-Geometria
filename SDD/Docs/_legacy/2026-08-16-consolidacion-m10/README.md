@@ -3,7 +3,7 @@
 **Fecha:** 2026-08-16
 **Motivo:** `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.0
 **Regla:** `Migracion-Rules.md` §4.3.2
-**Estado:** **`GeometriaFactory-Api` cerrada: 9 de 9 categorías.** 37 de 67 grupos · **9 de 18 carpetas `_fusion/` retiradas**
+**Estado:** **CERRADA.** 67 de 67 grupos · **18 de 18 carpetas `_fusion/` retiradas** · **0 en todo el árbol**
 
 ---
 
@@ -51,9 +51,38 @@ resolución de destino (§5.1 y §5.2 del análisis).
 
 **Los snapshots `_legacy/` que viajaban dentro de `_fusion/` acompañan a sus documentos.**
 
-## Qué falta
+## `GeometriaFactory-Web`
 
-**30 grupos**, todos en **`GeometriaFactory-Web`**, con **9 carpetas `_fusion/`** y una sola capa estacionada, `Visor`, con su clasificación propuesta y su orden en
-`Audit/Migracion-M10-Consolidacion-Fusion.md` §4 y §5. Mientras un grupo no se consolide, sus
-documentos siguen en `<categoria>/_fusion/<Origen>/`, y **la presencia de esa carpeta declara que la
-fusión no terminó**.
+| Categoría | Grupos | Documentos absorbidos |
+| --- | --- | --- |
+| Las nueve | 30 | 30 + 3 snapshots `_legacy/` |
+
+**2308 líneas absorbidas, 0 sin correspondencia** en los veintiún documentos que transponen; 293 en
+los nueve `README`, por diseño de la salida **S3**.
+
+Con una sola capa estacionada —`Visor`— cada grupo fue de dos documentos en vez de cuatro. Lo que la
+consolidación deja visible es **dónde el visor aporta lo que el portal no podía declarar**: la
+superficie visual del componente empaquetado en `03-UX-UI-DX`, su gate estructural de **cero llamadas
+de red** en `08-Calidad-Y-Pruebas` —que es lo que sostiene `RA-02`—, y su canalización propia en
+`09-Devops`, donde el portal se publica por FTP y el visor produce un bundle que se copia.
+
+## Totales
+
+| | Api | Web | **Total** |
+| --- | --- | --- | --- |
+| Grupos consolidados | 37 | 30 | **67** |
+| Documentos absorbidos | 110 | 33 | **143** |
+| Líneas de contenido absorbidas | 7418 | 2308 | **9726** |
+| Sin correspondencia en los que transponen | 0 | 0 | **0** |
+| Líneas de los `README` (S3, por diseño) | 715 | 293 | **1008** |
+| Carpetas `_fusion/` retiradas | 9 | 9 | **18** |
+
+**La fusión terminó.** No queda ninguna carpeta `_fusion/` en el árbol, que es la condición que
+`Migracion-Rules.md` §4.3.2 usa para declararlo.
+
+## Qué no se consolidó, y es una decisión
+
+**Los doce samples de `10-Examples` de `GeometriaFactory-Api`**, por la salida **S4**: eran doce
+samples distintos con contratos de verificación distintos, no versiones de tres. Se les dio identidad
+visible con el sufijo del proyecto de código que ejercita cada uno. Es la única salida del inventario
+que **no reduce documentos**.

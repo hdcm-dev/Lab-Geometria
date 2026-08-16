@@ -1,11 +1,11 @@
 # 10 · Ejemplos — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-16
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `web-monolith`
 **Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **diez** casos de uso; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, los **ocho** componentes en sus **tres** capas; [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta** historias; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §3 y §6; [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) 1.2, sus **61** filas; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
@@ -27,6 +27,16 @@
 - [10. Control de cambios](#10-control-de-cambios)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**Los samples del visor no se fundieron con los del portal**, por la misma decisión que en la otra unidad: son samples distintos con contratos de verificación distintos.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/10-Examples/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/10-Examples/).
 
 ## 1. Qué hay en esta carpeta
 
@@ -133,3 +143,4 @@ El sample no invoca ningún componente interno de [`../05-Arquitectura-Tecnica/A
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **Correcciones del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0, contrastadas contra el texto vivo del `PRODUCT-INTAKE` 1.25.** **P0-1**: la carpeta [`/samples/web/01-datos-seed/`](../../../../../samples/web/01-datos-seed/) se crea de verdad, con su README local y su comando previsto, y §1 lo declara con el enlace; el comando de la fila `SD-10062` de la matriz de sensado queda coherente con lo que existe. **P1-4**: se corrige §5, que declaraba «nada que elevar sobre §16.1» mientras la fila de §16.1 decía que este proyecto de código no produce sample propio y esta categoría emitía uno. La contradicción **se elevó y se cerró**: la 1.25 le asigna la carpeta `/samples/web/` con un solo sample y adopta las dos razones de este README. §5 cita ahora la fila vigente abierta en la fuente y declara que la fuente vinculante de la carpeta es §16.1. **P1-3**: se registra que la 1.25 precisó que las tres muestras `S-X` de §18 no son el conjunto de las carpetas, y por qué la frase «no hay sample de flujo de usuario final» no contradice a este sample. **P2-1**: se restituye completo el criterio de `Rules-Examples.md` §6, cuya cita cortaba en «o la ausencia está justificada» y suprimía «**en `Decisiones-Proyecto.md`**». Se declara que ese artefacto **no existe en este corpus** y que resolverlo es de la orquestación. Se actualiza la trazabilidad upstream a la versión **1.25** del intake. Ningún recuento, contrato, sample ni cobertura cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial de la categoría, en la **pasada de diseño** de `Rules-Examples.md` §0.2. Declara **un** sample, `datos-seed`, con progresión por capacidad y nivel implícito declarado, y **una** sonda `VER-10001` en `No verificado — sin código`, que entra a la matriz de sensado ya emitida como fila **`SD-10062`** sin tocar sus **61** filas anteriores. Declara **por qué hay un sample y no dos** —la regla condiciona el de tema custom a un punto de extensión visual que este proyecto de código no tiene, con `tiene_extensibilidad` false—, **qué relación tiene con `PRODUCT-INTAKE` §16.1** —que sigue siendo cierto de la arista A, y esta emisión es sólo de arista B—, [corregido en 1.1: faltaba la consecuencia documental, hoy cerrada por el intake 1.25] y en qué se diferencia el argumento del que valió para los proyectos de código sin maqueta. Verifica **3 de 10** casos de uso con la ausencia de los otros siete justificada según `Rules-Examples.md` §6, y **8 de 8** escenarios del intake §20 usados en su forma original y completa. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

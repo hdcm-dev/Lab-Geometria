@@ -1,11 +1,11 @@
 # 09 · DevOps — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-16
 **Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `web-monolith` · **Una de las dos unidades desplegables del producto**
 
@@ -22,6 +22,16 @@
 - [7. Control de cambios](#7-control-de-cambios)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**Las dos canalizaciones son distintas y las dos están acá**: el portal se publica por FTP al hosting y el visor produce un bundle que se copia a `wwwroot/js/`. `Entornos-Deploy.md` tiene sólo tres secciones comunes, y es donde eso se ve.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/09-Devops/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/09-Devops/).
 
 ## 1. Artefactos de esta sección
 
@@ -114,3 +124,4 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Web`, **una de las dos unidades desplegables del producto**. Lista los **cinco** artefactos emitidos —incluida la guía de publicación, que acá **no se omite**—, el orden de lectura con la precisión de que el documento bisagra es el de entornos y no el de versionado, los **tres** artefactos que no corresponden con su motivo, los **once** quality gates con dónde corre cada uno y la constancia de que **ninguno es condicionado**, las **tres decisiones derivadas** de esta sección con su estado, el hallazgo de que **el despliegue conjunto es siempre un acto humano coordinado**, y la tabla de recuentos con la fuente de cada uno. |
 | 1.1 | 2026-08-11 | **Propagación de las dos decisiones de despliegue del Product Owner** del intake **1.22** §17.2.P.7 · GeometriaFactory-Web. **(a)** El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`: la decisión 1 de §5 pasa de elevada a **confirmada por la fuente** y `PD-01` queda **cerrado**, con lo que la fila de recuentos declara **5** puntos abiertos con **4 vigentes**. **(b)** Cuando front y backend salen juntos, **primero el backend**: se agrega al hallazgo de §5 con la constancia de que el orden **no vuelve automático** el despliegue conjunto y de que el intervalo se minimiza en vez de eliminarse. Actualiza a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) y [`Entornos-Deploy.md`](Entornos-Deploy.md). |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

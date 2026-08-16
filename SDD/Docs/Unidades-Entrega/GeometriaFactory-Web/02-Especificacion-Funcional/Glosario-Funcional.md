@@ -1,36 +1,43 @@
 # Glosario funcional — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Producto:** Fábrica de Geometría
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Glosario-Funcional.md
-**Versión:** 1.4
-**Estado:** Aprobado
-**Fecha:** 2026-08-11
-**Autor:** Analista Funcional senior (AG-02)
-**Trazabilidad upstream:** `../../../00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena: §9.1 términos del dominio del cliente, §9.2 términos que esa categoría precisa, §9.3 resolución del choque de vocabulario); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1, §4.2, §12 y §12.1, §14, §17.6 P.3, P.4, P.5, P.10 y P.11; `../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Glosario-Funcional.md`; `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md` §2; `Vocabulario-Rules.md` §2, §4 y §9
-**Trazabilidad downstream:** `../03-UX-UI-DX/`, cuyo `Glosario-UX.md` referencia estos términos en lugar de duplicarlos; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
+**Versión:** 2.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-16
+**`tipo_unidad_entrega` (D8):** `web-monolith`
+**Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
+**Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
 
 ---
 
-## Tabla de contenido
+## 0. Cómo leer este documento
 
-- [1. Alcance de este glosario](#1-alcance-de-este-glosario)
-- [2. Términos que esta categoría acuña](#2-términos-que-esta-categoría-acuña)
-- [3. Términos con más de un referente](#3-términos-con-más-de-un-referente)
-  - [3.1 Vista](#31-vista)
-  - [3.2 Pieza](#32-pieza)
-  - [3.3 `Pendiente`](#33-pendiente)
-- [4. Términos referenciados y no redefinidos](#4-términos-referenciados-y-no-redefinidos)
-- [5. Control de cambios](#5-control-de-cambios)
+**La unidad de entrega tiene un solo documento de esta clase**, y cada sección lleva **una subsección
+por proyecto de código**, con su texto **transpuesto sin reescritura**.
+
+**Las dos secciones de cada apartado son la del portal y la del bundle del visor.** **1 secciones existen sólo en `GeometriaFactory-Visor`** —«Tabla de términos que esta categoría acuña»—, y son las que el portal no podía declarar porque describen el componente empaquetado que viaja adentro.
 
 ---
 
 ## 1. Alcance de este glosario
 
+### 1.1 `GeometriaFactory-Web`
+
 Declara únicamente el vocabulario que la especificación funcional de `GeometriaFactory-Web` **acuña**, y referencia lo que ya está declarado en `Vision-Producto.md` §9, que es el glosario raíz de la cadena, o en los glosarios de los proyectos de código de los que esta pieza depende. Ningún término de §4 se redefine acá.
 
 La regla de inclusión aplicada es la de `Rules-Especificacion-Funcional.md` §3.3: entra todo término que aparece en más de un artefacto de esta categoría. Un término que vive en un solo caso de uso se define ahí y no entra.
 
+### 1.2 `GeometriaFactory-Visor`
+
+Declara el vocabulario que la especificación funcional de `GeometriaFactory-Visor` **acuña**: el de la escena, la malla, el árbol, la selección y la instancia. Todo lo que ya declara el glosario raíz del producto —`Vision-Producto.md` §9— se referencia en §4 y **no se redefine acá**.
+
+La regla de inclusión aplicada es la de `Rules-Especificacion-Funcional.md` §3.3: entra todo término que aparece en más de un artefacto de esta categoría. Un término que vive en un solo artefacto se define ahí y no entra.
+
 ## 2. Términos que esta categoría acuña
+
+### 2.1 `GeometriaFactory-Web`
 
 | Término canónico | Definición operativa | Artefactos de 02 donde aparece | Sinónimos y alias |
 | --- | --- | --- | --- |
@@ -60,6 +67,8 @@ La regla de inclusión aplicada es la de `Rules-Especificacion-Funcional.md` §3
 | Elemento de dibujo | El elemento de la página sobre el que la instancia del visualizador dibuja, provisto por el componente anfitrión | `Especificacion-Funcional.md` §7, CU-10005, CU-10007 | El término lo acuña `GeometriaFactory-Visor`; no se usa el nombre técnico del elemento |
 
 ## 3. Términos con más de un referente
+
+### 3.1 `GeometriaFactory-Web`
 
 Se declaran los tres términos cuyos sentidos **colisionan en el mismo contexto de lectura**, según el criterio de `Vocabulario-Rules.md` §9.2: el contexto de lectura de un subagente es la sección, no el documento. No se reporta ningún otro caso: los términos cuyos sentidos se distinguen solos quedan fuera, por la prohibición de §9.4 y por el anti-patrón de `Rules-Especificacion-Funcional.md` §4.5 sobre calificar ocurrencias de contextos disjuntos.
 
@@ -106,7 +115,34 @@ Dos referentes, y la regla que los separa es **vinculante para toda la documenta
 
 Evidencia de que los contextos colisionan: CU-10002 habla en la misma sección de una cuenta que espera habilitación, y CU-10006 y CU-10008 hablan de trabajos que esperan revisión; en el flujo de alta y en el de revisión los dos sentidos pueden aparecer en el mismo párrafo, y la forma desnuda no los separa.
 
+### 3.2 `GeometriaFactory-Visor`
+
+### 3.1 «Pieza»
+
+Es el término polisémico verificado de esta categoría, y su colisión ya está declarada aguas arriba en `Vision-Producto.md` §9.1 y §9.2. Los dos referentes:
+
+| Referente | Qué designa | Forma que le corresponde |
+| --- | --- | --- |
+| Del dominio | Cada figura del conjunto raíz del trabajo, identificada por su índice | **Forma desnuda**: «pieza». Es el único referente que usan los siete casos de uso de esta categoría, porque `seleccionarPieza` opera sobre él |
+| De la composición del producto | Cada uno de los artefactos del producto que se despliegan por separado | **Siempre calificado**: «pieza pública», «pieza de datos», «piezas desplegables» |
+
+Evidencia de la colisión y su resolución: el glosario raíz ya verificó que los dos sentidos comparten contexto de lectura dentro del producto y por eso obligó a calificar el segundo (`Vision-Producto.md` §9.2, corrección H-01). Esta categoría **no reabre la verificación ni agrega calificaciones**: adopta la resolución vigente. En los artefactos de 02 de este proyecto de código el segundo referente no aparece, salvo en esta entrada, que existe para que un subagente que lea una sección suelta sepa a qué apunta la forma desnuda.
+
+### 3.2 «Resultado de la interpretación», precisión que no es polisemia declarada
+
+`PRODUCT-INTAKE` §17.7 P.3 describe lo que `cargarJson` devuelve como «el resultado de la interpretación». Dentro de este proyecto de código ese valor se nombra **resultado de dibujo**, porque el resultado de la interpretación del producto es otra cosa: lo produce el backend, lleva observaciones y decide si un trabajo puede finalizarse. No es una polisemia que esta categoría declare abierta, es una precisión de nombre para evitar que se cree una: la fachada no interpreta trabajos, dibuja piezas.
+
+### 3.3 «Órbita», precisión que tampoco es polisemia declarada
+
+La escena de toda instancia tiene una **cámara orbital**: es la que responde al arrastre de quien mira, existe desde `inicializar` y no depende de ningún movimiento automático. La **órbita de la cámara** de §2 es otra cosa: el movimiento automático que hace girar sola esa misma cámara, prendido o apagado por la fachada. No es una polisemia abierta —los dos usos apuntan al mismo objeto, la cámara, y se distinguen por quién la mueve—, pero se declara acá porque confundirlos llevaría a leer que apagar el movimiento automático deja la escena sin cámara orbital, que es falso.
+
+### 3.4 Verificación negativa
+
+Se revisaron los demás términos acuñados en §2 buscando referentes múltiples dentro de esta categoría. **Ninguno verificado** además de los tratados arriba. En particular, no se califican «escena», «malla», «árbol» ni «instancia», cuyos contextos de uso son disjuntos de cualquier otro sentido presente en el corpus del producto: calificarlos sería el falso positivo que `Vocabulario-Rules.md` §9.1 declara defecto.
+
 ## 4. Términos referenciados y no redefinidos
+
+### 4.1 `GeometriaFactory-Web`
 
 Los siguientes ya están declarados en `Vision-Producto.md` §9 y **no se redefinen acá**. Se listan porque aparecen en más de un artefacto de esta categoría y un lector que entre por una sección suelta necesita saber dónde está su definición canónica.
 
@@ -131,13 +167,61 @@ Los siguientes ya están declarados en `Vision-Producto.md` §9 y **no se redefi
 
 Del glosario de `GeometriaFactory-Contracts` se referencian, con la misma semántica y sin redefinirse: «respuesta de error neutra», «índice de figura», «campo señalado», «proyección de listado», «detalle del trabajo», «credencial de sesión», «texto original del trabajo», «estado terminal» y «señal declarada que no es error». Del contrato de fachada de `GeometriaFactory-Visor` se referencian «instancia del visor», «identificador de instancia» y «resultado de dibujo».
 
-## 5. Control de cambios
+### 4.2 `GeometriaFactory-Visor`
+
+Los siguientes términos ya están declarados en el glosario raíz del producto y **se usan con esa misma semántica**. Puntero único: `../00-Contexto/Vision-Producto.md` §9.
+
+| Término | Dónde está declarado | Cómo lo usa esta categoría |
+| --- | --- | --- |
+| Trabajo | `Vision-Producto.md` §9.1 | Lo que el alumno entrega en el laboratorio. La fachada nunca lo guarda ni lo conoce como registro: sólo recibe su texto |
+| Pieza (referente del dominio) | `Vision-Producto.md` §9.1 | Cada figura del conjunto raíz del trabajo. Ver §3.1 |
+| Componente (figura plana de una pieza) | `Vision-Producto.md` §9.1 | Tapa, cara, base, lateral o lado, de donde la fachada lee las dimensiones del volumen. **No confundir con «componente anfitrión»**, que es término de §2 y designa a quien invoca la fachada |
+| Observación, advertencia, error de validación | `Vision-Producto.md` §9.1 | Se nombran únicamente para declarar que **este proyecto de código no emite ninguna de las tres**: son del backend |
+| Valor declarado / valor derivado | `Vision-Producto.md` §9.1 | Se nombran para declarar que la fachada no los compara ni los recalcula |
+| Tapa | `Vision-Producto.md` §9.1 | Nombre de clave del que la fachada lee dimensiones, aceptando la variante del dominio del emisor |
+| Rectángulo desarrollado | `Vision-Producto.md` §9.1 | Componente `Lado` del cilindro. La fachada lo usa para leer una dimensión y no lo dibuja como pieza del conjunto raíz |
+| Coma final | `Vision-Producto.md` §9.1 | Particularidad del texto del alumno. Ver la nota de CU-12002 §10 sobre qué escenario la ejercita |
+| Fallo silencioso | `Vision-Producto.md` §9.1 | Es lo que la garantía de enumeración de piezas no dibujadas elimina |
+| Laboratorio | `Vision-Producto.md` §9.1 | Nombre corriente del producto en uso |
+| Actividad 1, `Describir()` | `Vision-Producto.md` §9.1 | Emisor del dato. No forma parte del producto |
+| Pieza en su segundo referente | `Vision-Producto.md` §9.2 | Forma siempre calificada. Ver §3.1 |
+| Capacidad (`F-XX`) | `Vision-Producto.md` §9.2 | Ítem del alcance funcional del intake. No es sinónimo de caso de uso |
+
+**Choque de vocabulario vigente** (`Vision-Producto.md` §9.3, `PRODUCT-INTAKE` §12.1), respetado en los siete casos de uso y en el documento de concepto: «proyecto de código» designa exclusivamente una unidad de compilación, la palabra «proyecto» a secas no se usa, y las dos unidades de la Actividad 1 que emiten el dato se nombran `Ejemplo1` y `Ejemplo2`.
+
+## 5. Tabla de términos que esta categoría acuña
+
+### 5.1 `GeometriaFactory-Visor`
+
+| Término | Definición operativa | Artefactos de 02 donde aparece | Sinónimos y alias |
+| --- | --- | --- | --- |
+| Fachada | Superficie pública del archivo de guion: las **seis** funciones planas que el componente anfitrión puede invocar, y nada más | `Definicion-Contrato-De-Fachada.md`, CU-12001 a CU-12007 | «Contrato de fachada» cuando se nombra el conjunto de funciones más sus garantías |
+| Componente anfitrión | El componente que embebe el archivo de guion e invoca sus funciones. Es el actor primario de los siete casos de uso. No es una persona, y la fachada no sabe qué componente es | `Definicion-Contrato-De-Fachada.md`, CU-12001 a CU-12007 | «Componente anfitrión mínimo» cuando se trata de la página integradora sin backend de CU-12006 |
+| Elemento de dibujo | Elemento de la página, provisto por el componente anfitrión, sobre el que una instancia monta su escena | `Definicion-Contrato-De-Fachada.md`, CU-12001, CU-12004, CU-12005, CU-12006 | — |
+| Instancia del visor | Escena viva asociada a un elemento de dibujo. Nace con `inicializar` y termina con `destruir` | `Definicion-Contrato-De-Fachada.md`, CU-12001 a CU-12007 | «Instancia», en su forma corta, dentro de esta categoría |
+| Identificador de instancia | Valor opaco que `inicializar` devuelve y que las otras cinco funciones exigen. Identifica una instancia viva y deja de ser válido cuando se la libera | `Definicion-Contrato-De-Fachada.md`, CU-12001 a CU-12007 | — |
+| Escena | Espacio tridimensional de una instancia, con su iluminación y su cámara orbital, donde se ubican las mallas | `Definicion-Contrato-De-Fachada.md`, CU-12001 a CU-12007 | — |
+| Malla | Representación tridimensional que la fachada construye para una pieza dibujable y ubica en la escena | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12003, CU-12005 | — |
+| Tipo dibujable | Cada uno de los seis tipos de pieza que la fachada sabe convertir en malla: `Cilindro`, `Cubo`, `Ortoedro`, `Rectangulo`, `Cuadrado` y `Circulo` | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12006 | «Pieza dibujable» para la pieza cuyo tipo lo es |
+| Resultado de dibujo | Lo que `cargarJson` devuelve: piezas dibujadas con su índice y su tipo, piezas no dibujadas con su índice y su código de condición, y la estructura del texto. **No lleva observaciones** | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12003, CU-12006 | El intake lo nombra «el resultado de la interpretación» (§17.7 P.3); ver la nota de §3 |
+| Estructura del texto | Representación jerárquica del texto recibido que la fachada devuelve para que el componente anfitrión la presente como árbol colapsable | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12006 | — |
+| Árbol | Presentación colapsable de la estructura del texto. La arma el componente anfitrión con lo que la fachada le devuelve | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12003, CU-12006 | «Árbol colapsable», forma completa del glosario raíz de la necesidad NB-00006 |
+| Selección | Estado de a lo sumo una pieza resaltada por instancia. Se fija por índice y se descarta al cargar un trabajo nuevo o al destruir la instancia | `Definicion-Contrato-De-Fachada.md`, CU-12003, CU-12004, CU-12005 | «Resaltado» para el efecto visible de la selección |
+| Índice de pieza | Posición de una pieza en el conjunto raíz del trabajo. Es su identidad, porque el dato del alumno no trae identificador propio, y es la clave con la que el árbol y la escena se sincronizan | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12003, CU-12006 | — |
+| Disposición | Ubicación relativa de las piezas en la escena. Se **deriva del índice** de cada pieza, de modo que dos cargas del mismo texto producen la misma disposición | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12004, CU-12006 | «Disposición determinista» cuando se enuncia la propiedad |
+| Texto del trabajo | Dato de entrada de `cargarJson`. La fachada lo lee para construir mallas, y ni lo pide, ni lo guarda, ni lo reescribe | `Definicion-Contrato-De-Fachada.md`, CU-12002, CU-12006 | — |
+| Código de condición | Código con el que la fachada informa por qué una invocación no surtió efecto, o por qué una pieza no se dibujó. Es una condición de contrato, **no** una observación de dominio | `Definicion-Contrato-De-Fachada.md`, CU-12001 a CU-12007 | — |
+| Cero red | Propiedad de la fachada: ninguna función origina una petición de red. El umbral es exactamente 0, medido contando peticiones | `Definicion-Contrato-De-Fachada.md`, CU-12001 a CU-12007 | — |
+| Cero persistencia | Propiedad de la fachada: no guarda estado entre páginas ni escribe en el almacenamiento del navegador | `Definicion-Contrato-De-Fachada.md`, CU-12001, CU-12002, CU-12005, CU-12006 | — |
+| Página integradora | Página sin ninguna pieza del backend que carga el archivo de guion, recibe un texto pegado a mano y ejerce las seis funciones. Es el componente anfitrión de CU-12006 y el sample S-1 del producto | `Definicion-Contrato-De-Fachada.md`, CU-12006 | «Página de prueba del visor» en el intake §18 |
+| Capacidad gráfica tridimensional | Capacidad que el navegador debe proveer para que exista una instancia. Se declara por capacidad y no por número de versión | `Definicion-Contrato-De-Fachada.md`, CU-12001, CU-12006 | — |
+| Movimiento automático | Movimiento que la escena ejerce sola, sin que la persona la toque. Son **dos e independientes** —órbita de la cámara y giro de las figuras—, los gobierna la fachada y ninguno altera la disposición | `Definicion-Contrato-De-Fachada.md`, CU-12001, CU-12002, CU-12004, CU-12005, CU-12006, CU-12007 | Capacidad **F-25** del alcance del producto. «Los dos movimientos», en su forma corta dentro de esta categoría |
+| Órbita de la cámara | Movimiento automático en el que **la cámara gira sola** alrededor del conjunto y las piezas quedan quietas. Existe en el visualizador previo y se porta | `Definicion-Contrato-De-Fachada.md`, CU-12001, CU-12006, CU-12007 | No confundir con la **cámara orbital** de la escena, que es la que responde al arrastre de la persona y existe con la órbita apagada |
+| Giro de las figuras | Movimiento automático en el que **cada pieza rota sobre su eje vertical, en su lugar**, sin salir de la celda que le asignó su índice. Al apagarlo, cada pieza vuelve a su orientación de partida. Es capacidad nueva: no existe en el visualizador previo | `Definicion-Contrato-De-Fachada.md`, CU-12001, CU-12006, CU-12007 | — |
+| Estado efectivo del movimiento | Estado en que quedan los dos movimientos después de gobernarlos, que `establecerMovimiento` devuelve para que el componente anfitrión sincronice sus controles con lo que la escena hace | `Definicion-Contrato-De-Fachada.md`, CU-12007 | — |
+
+## 6. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.4 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
-| 1.0 | 2026-08-09 | Emisión inicial. Declara **veinte** términos acuñados por la especificación funcional de la pieza pública, tres términos con más de un referente —«vista», «pieza» y `Pendiente`—, cada uno con su evidencia de colisión y su forma resuelta, y dieciséis términos referenciados del glosario raíz más los referenciados de los glosarios de `GeometriaFactory-Contracts` y `GeometriaFactory-Visor`. |
-| 1.0 | 2026-08-09 | Corrección absorbida de la ronda 1 de auditoría (`Audit/B-02-03-GeometriaFactory-Web-r1.md`), sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-07**: el conteo de términos acuñados decía «diecinueve» y la tabla de §2 tiene **veinte** filas; se corrige el número. Se corrige **dentro de la fila de emisión** —y no como excepción a la regla de no reescribir una fila ya escrita— porque esa fila no describe un estado anterior sino el contenido vigente de este mismo documento, y era la única ocurrencia del conteo en todo el artefacto. El conteo de términos referenciados, dieciséis, se verificó por recuento y ya era correcto. |
-| 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**. §2 pasa de **veinte a veinticuatro** términos acuñados, con los cuatro que trae la capacidad **F-26**: «contraseña provisoria», «cambio de contraseña pendiente», «cambio forzado» y «reseteo de contraseña», los dos primeros con un alias prohibido y su motivo. La entrada «componente anfitrión del visualizador» pasa de cinco a **seis** funciones y declara que es quien consulta el entorno del navegador y manda los dos valores de verdad del movimiento automático, por la frontera que 1.7 fijó para **F-25**. Sube minor: agrega términos sin redefinir ninguno. |
-| 1.2 | 2026-08-09 | Absorbe las dos decisiones del Product Owner sobre **F-26** que `CU-10004` 1.3 aplica. §2 corrige dos definiciones **sin dar de alta ni de baja ningún término**: **contraseña provisoria** pasa a declarar que **la produce el sistema** y que el panel no tiene dónde escribirla, y **reseteo de contraseña** explicita que procede **cualquiera sea la situación de la cuenta**. Los recuentos de §2 no cambian: siguen siendo veinticuatro términos acuñados. **Autor:** Analista Funcional senior (AG-02) |
-| 1.3 | 2026-08-09 | **Cierra la parte del hallazgo `F26-27`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo: la fila 1.2 de este control de cambios tenía **cuatro celdas en una tabla de tres columnas**. El texto de la fila se conserva íntegro y el autor pasa a leerse dentro de la celda de cambios, en lugar de en una cuarta columna que la tabla no declara. **Ningún término cambia de definición, de forma obligatoria ni de criterio de inclusión**, y el recuento de veinticuatro términos acuñados no cambia. Sube minor: repara la tabla sin alterar lo que sus filas dicen. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

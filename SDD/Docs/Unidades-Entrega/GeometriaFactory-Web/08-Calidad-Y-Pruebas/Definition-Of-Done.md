@@ -1,32 +1,29 @@
 # Definition of Done — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Definition-Of-Done.md
-**Versión:** 1.2
-**Estado:** Aprobado
-**Fecha:** 2026-08-12
-**Autor:** Ingeniero QA / SDET Senior (AG-08)
-**Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.2.P.8 · GeometriaFactory-Web
-**Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops`, que materializa sus criterios mecánicos como pasos del flujo de publicación
+**Versión:** 2.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-16
+**`tipo_unidad_entrega` (D8):** `web-monolith`
+**Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
+**Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
 
 ---
 
-## Tabla de contenido
+## 0. Cómo leer este documento
 
-- [1. DoD por capa](#1-dod-por-capa)
-  - [1.1 Historia de usuario](#11-historia-de-usuario)
-  - [1.2 Tarea técnica](#12-tarea-técnica)
-  - [1.3 Etapa](#13-etapa)
-  - [1.4 Publicación](#14-publicación)
-- [2. Excepciones admitidas](#2-excepciones-admitidas)
-- [3. Vigencia](#3-vigencia)
-- [4. Control de cambios](#4-control-de-cambios)
+**La unidad de entrega tiene un solo documento de esta clase**, y cada sección lleva **una subsección
+por proyecto de código**, con su texto **transpuesto sin reescritura**.
+
+**Las dos secciones de cada apartado son la del portal y la del bundle del visor.** Las dos declaran las mismas secciones: la unidad de entrega es una y el visor viaja adentro.
 
 ---
 
 ## 1. DoD por capa
+
+### 1.1 `GeometriaFactory-Web`
 
 **Por qué la tercera capa se llama «etapa» y no «sprint».** Este producto no tiene sprints: la unidad de planificación es la **etapa**. Llamarla sprint habría creado una unidad que ninguna fuente tiene.
 
@@ -77,7 +74,62 @@ Se aplica cada vez que el flujo de publicación corre hacia el hosting público.
 - [ ] Si la publicación no dejó la aplicación en pie, **se volvió a publicar desde la etiqueta anterior**. **Se valida** con el registro de la reversión.
 - [ ] La publicación se hizo **fuera del horario de uso**, porque la subida no es transaccional. **Se valida** con la hora registrada del flujo.
 
+### 1.2 `GeometriaFactory-Visor`
+
+**Por qué la tercera capa se llama «momento del producto».** El producto no tiene sprints y este proyecto de código no se organiza sólo por etapas: su momento central es el de la **medición de `PT-02` y `PT-03`**, que el roadmap §2.2 ubica antes de comprometer la etapa `g` y que `06` §2.1 declara como épica sin crear etapa nueva. Llamar «sprint» o «etapa» a esa capa habría inventado una unidad que ninguna fuente tiene.
+
+**Por qué la cuarta se llama «entrega del proyecto de código».** El bundle **no se publica en ningún repositorio de paquetes**: `redistribuible` es false y su artefacto se copia al directorio de recursos estáticos del anfitrión.
+
+### 1.1 Historia de usuario
+
+- [ ] Todos los criterios Given/When/Then de la historia están cubiertos por al menos un `TC-XX`. **Se valida** leyendo la columna de test de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §2 para su `CU-XX`.
+- [ ] Esos `TC-XX` están escritos y **en verde**.
+- [ ] **Toda garantía que la historia declara ejercer tiene su fila en la matriz §5 con este `TC-XX` entre sus tests**, y ninguna afirmación de la historia contradice a otra garantía. **Se valida** leyendo esa tabla. Es el criterio 5 de la DoR verificado del lado del cierre.
+- [ ] Todo código de condición que la historia usa es **uno de los siete**, y la historia **no acuñó ninguno**. **Se valida** con `TC-12021`.
+- [ ] Si la historia entrega una **ausencia**, su criterio se verificó con **umbral cero y con su condición de medición registrada**. **Se valida** leyendo el registro de la medición. Un umbral cero sin condición **no cumple**.
+- [ ] Ninguna persona, papel, servicio ni credencial interviene como actor ni condiciona un flujo. **Se valida** leyendo la historia y su caso de prueba.
+- [ ] El bundle se genera sin errores. **Se valida** con el guion de construcción del bundle.
+
+### 1.2 Tarea técnica
+
+- [ ] Los criterios de aceptación que la tarea declara en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) se cumplen uno por uno. **Se valida** por inspección, por prueba automatizada o por medición de la puerta que la tarea nombra.
+- [ ] Si la tarea sostiene una **ausencia**, su criterio se expresó con umbral cero **y con la condición en que se mide**. **Se valida** leyendo el criterio: sin condición, la tarea ni siquiera cumplía la DoR §2.
+- [ ] Si la tarea es de tipo indagación, la decisión que produjo está **registrada** y no sólo tomada. **Se valida** leyendo el documento donde quedó.
+- [ ] Ninguna dependencia introducida cruza la regla de dependencias entre capas. **Se valida** con `CV-29`.
+- [ ] Si la tarea mide una puerta —`BT-12013`, `BT-12014`, `BT-12016`— el resultado quedó registrado con su condición de medición. **Se valida** con el informe.
+
+### 1.3 Momento del producto
+
+- [ ] Todas las historias de la épica cumplen §1.1, y todas sus tareas técnicas cumplen §1.2.
+- [ ] Los **diez** criterios de salida de [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 se cumplen.
+- [ ] Los criterios bloqueantes de [`Criterios-Validacion.md`](Criterios-Validacion.md) —`CV-29` a `CV-31`— se cumplen.
+- [ ] **En el momento de medición: `PT-02` y `PT-03` pasan enteras**, en sus **seis** tramos `CV-18` a `CV-23`. **Se valida** con `TC-12019` y `TC-12020`. **Si alguna no pasa, la etapa `g` no se compromete**: no hay diferimiento, no hay deuda y no hay carácter condicionado.
+- [ ] Toda medición de ausencia se hizo **con su condición** y quedó registrada junto al resultado. **Se valida** con el informe de cierre.
+- [ ] La batería completa —y no sólo lo que el momento tocó— corre y pasa. **Se valida** con `CV-24`.
+- [ ] Ningún `TC-XX` que estaba en verde pasó a rojo sin justificación escrita. **Se valida** con `CV-25`.
+- [ ] [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada en sus cinco tablas.
+- [ ] [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) tiene el estado y la fecha de verificación de cada fila que el momento toca. **Se valida** leyendo su columna de estado.
+- [ ] Todo defecto cerrado generó al menos un `TC-XX`. **Se valida** con `CV-26`.
+- [ ] Si el momento propuso una función nueva en la fachada, los **seis** pasos de [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) §5 se recorrieron enteros, incluida la consolidación en el intake. **Se valida** leyendo el intake §17.2.P.3 · GeometriaFactory-Visor.
+- [ ] El punto de control tiene el **OK explícito del Product Owner**.
+
+### 1.4 Entrega del proyecto de código
+
+Se aplica cuando la etapa `a`, el momento de medición y la etapa `g` están cerrados.
+
+- [ ] Los **treinta y cuatro** criterios de [`Criterios-Validacion.md`](Criterios-Validacion.md) están evaluados uno por uno, con su resultado registrado.
+- [ ] **7 de 7** casos de uso, **6 de 6** funciones, **7 de 7** garantías, **7 de 7** códigos en sus **8** cursos, **14 de 14** historias y **8 de 8** NFR con caso de prueba en verde.
+- [ ] Las **seis** propiedades transversales verificadas **con sus condiciones de medición** y reverificadas después de incorporar el gobierno en vivo de los movimientos. **Se valida** con `CV-27`.
+- [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos de prueba que los usan. **Se valida** con `CV-08`.
+- [ ] **`PT-02` y `PT-03` pasadas**, con su registro.
+- [ ] Los **ocho** compromisos de un reemplazo de la capa 3 están verificables sin backend. **Se valida** con [`Guia-Testing-Extensibilidad.md`](Guia-Testing-Extensibilidad.md) §3.
+- [ ] El sample **S-1** ejerce las **seis** funciones enteras, en **cinco pasos o menos**. **Se valida** con `TC-12015`.
+- [ ] Los puntos abiertos de `05` §11 tienen desenlace declarado, o su continuidad como abiertos está registrada: hoy son **cinco**, `PA-01` a `PA-05`.
+- [ ] El bundle es un **artefacto generado y reproducible**, nunca editado a mano. **Se valida** con `CV-30`.
+
 ## 2. Excepciones admitidas
+
+### 2.1 `GeometriaFactory-Web`
 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
@@ -90,7 +142,19 @@ Se aplica cada vez que el flujo de publicación corre hacia el hosting público.
 | **Guion ejecutado sólo para la etapa en curso** | **No se admite.** Es la regla de no-regresión acumulativa del intake §15, y **no es la parte rotulada [ASUNCIÓN]** | — | — |
 | **Acotación dada por verificada mirando la pantalla** | **No se admite.** Esta pieza no hace cumplir reglas: si no se forzó la solicitud, no se verificó nada | — | — |
 
+### 2.2 `GeometriaFactory-Visor`
+
+| Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
+| --- | --- | --- | --- |
+| **Umbral de fluidez inexistente** | La verificación es cualitativa declarada junto con `PT-02`. **No habilita a inventar un número** | El Product Owner, o esta categoría al fijar su guion de medición (`BT-12018`) | El guion cualitativo y su resultado, rotulado como cualitativo |
+| Deuda técnica que un momento no alcanza a cerrar | Se difiere **una sola vez**, y nunca si es de los bloqueantes de §1.3 | El Product Owner | Una `BT-XX` nueva con el momento en que se cierra |
+| **`PT-02` o `PT-03` que no pasan** | **Ninguna excepción.** La etapa `g` no se compromete | — | — |
+| Medición de ausencia **sin su condición** | **No se admite.** No cuenta como medición | — | — |
+| Historia que rompe una garantía o acuña un código | **No se admite**, y es la misma prohibición que la DoR §3 declara del lado de la entrada | — | — |
+
 ## 3. Vigencia
+
+### 3.1 `GeometriaFactory-Web`
 
 **Este documento es la fuente canónica de la Definition of Done de `GeometriaFactory-Web`.**
 
@@ -100,10 +164,17 @@ Se aplica cada vez que el flujo de publicación corre hacia el hosting público.
 - Todo cambio en los criterios de §1 se registra en §4 y se comunica en el punto de control de la etapa siguiente.
 - La DoD **no habla de cuándo empezar**: eso es la Definition of Ready, y las dos no se solapan.
 
+### 3.2 `GeometriaFactory-Visor`
+
+**Este documento es la fuente canónica de la Definition of Done de `GeometriaFactory-Visor`.**
+
+- [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md) y cualquier plan **referencian** esta DoD y no la redefinen.
+- [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión gobernaban el cierre los criterios de transición del roadmap §5 y las dos puertas técnicas. **Con esta emisión ese interinato termina**: los criterios de transición del roadmap siguen valiendo a nivel producto, las dos puertas siguen siendo del intake, y esta DoD las incorpora sin redefinirlas.
+- Esa misma sección de la DoR nombra tres condiciones de cierre que **no son suyas**: los diez recorridos sin degradación, la medición de peticiones con los movimientos prendidos y la página integradora funcionando. **Las tres viven acá**, en `CV-14`, `CV-10` y `CV-12` respectivamente, y su ubicación queda así confirmada.
+- Todo cambio en los criterios de §1 se registra en §4 y se comunica en el punto de control siguiente.
+
 ## 4. Control de cambios
 
-| Versión | Fecha | Descripción |
+| Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **`H-02`.** `CV-13` pasa de criterio condicionado a **bloqueante**: se lo agrega a la lista de bloqueantes de la DoD de etapa y su fila de flexibilización deja de conceder nada. Ningún umbral cambia. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
-| 1.0 | 2026-08-11 | Emisión inicial. Declara la DoD en **cuatro** capas —historia, tarea técnica, **etapa** y **publicación**—, con el fundamento de por qué la tercera no se llama sprint y la cuarta no se llama release, dado que este proyecto de código sí se entrega pero no se versiona como paquete redistribuible. Cada criterio responde «cómo se valida» con una operación concreta. Incorpora como criterio de historia que **toda acotación se verifique forzando la solicitud**, como criterio de tarea técnica que las propiedades de ausencia se midan **en su condición declarada** —el conteo de peticiones con los dos movimientos prendidos—, y como criterio de etapa que **ninguna deriva mayor quede abierta**. Su §1.4 declara los criterios de la publicación, incluida la comprobación de que la dirección pública responde. Declara **ocho** casos de excepción, **cuatro** de ellos sin excepción posible, y la vigencia como fuente canónica, con la constancia de que los umbrales de deriva **no se cambian desde este documento**. |
-| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

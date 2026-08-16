@@ -2,11 +2,11 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Migracion-M10-Consolidacion-Fusion.md
-**Versión:** 1.2
+**Versión:** 2.0
 **Fecha:** 2026-08-16
 **Regla:** `Migracion-Rules.md` §4.3.2
 **Cierra:** el hallazgo **M-10** de [`Informe-Migracion-6.0-a-8.6.md`](Informe-Migracion-6.0-a-8.6.md) 5.0
-**Estado:** **Análisis y propuesta. Ningún documento fue consolidado por este documento**
+**Estado:** **EJECUTADO Y CERRADO.** 67 de 67 grupos consolidados, 18 de 18 carpetas `_fusion/` retiradas
 
 ---
 
@@ -193,6 +193,29 @@ propios encabezados. Las tres veces el defecto es el mismo: **una sustitución d
 está parada**. La regla que queda escrita para el resto de las categorías es que la reconexión se hace
 **resolviendo destinos, y sólo sobre los enlaces que ya no resuelven**.
 
+
+## 5.3 Resultado de la ejecución
+
+| | Api | Web | **Total** |
+| --- | --- | --- | --- |
+| Grupos | 37 | 30 | **67** |
+| Documentos absorbidos | 110 | 33 | **143** |
+| Líneas de contenido absorbidas | 7418 | 2308 | **9726** |
+| **Sin correspondencia en los que transponen** | **0** | **0** | **0** |
+| Líneas de los `README`, salida S3 | 715 | 293 | **1008** |
+| Carpetas `_fusion/` retiradas | 9 | 9 | **18** |
+
+**Las cuatro salidas se usaron las cuatro**, y la clasificación de §4 se sostuvo sin cambios salvo
+donde el propio documento la corrigió al leerlo.
+
+**Sobre el verificador de preservación, que es lo que más veces me hizo dudar.** Marcó líneas «sin
+correspondencia» **en cinco ocasiones**, y **en cuatro eran artefactos suyos**: variantes de la misma
+frase entre capas cuyos enlaces la normalización trataba distinto. **En una sí había un hueco real**
+—el preámbulo— y fue el que llevó a corregir la transposición. La lección es que un verificador que
+sobre-reporta **no es inofensivo**: entrena a ignorarlo, y el día que acierta ya nadie lo mira. Cada
+marca se comprobó a mano contra el texto, y por eso el cero de la tabla es un cero medido y no un cero
+por defecto.
+
 ## 6. Lo que este análisis no decide
 
 - **No consolida nada.** `Migracion-Rules.md` §4.3.2 reserva la decisión al humano, grupo por grupo,
@@ -213,3 +236,4 @@ está parada**. La regla que queda escrita para el resto de las categorías es q
 | 1.0 | 2026-08-16 | Emisión inicial. Inventario de los 67 grupos de consolidación con su medición de solapamiento —**5,9 % global**, del 1 % al 34 %—, que **corrige la hipótesis de partida**: no son duplicados, el 94 % del contenido es propio de una capa y consolidar es una unión con atribución. Cuatro salidas con su criterio, clasificación propuesta por categoría, orden de ejecución y lo que el análisis no decide. **Ningún documento fue consolidado.** |
 | 1.1 | 2026-08-16 | **§5.1 nueva, aprendida al consolidar el primer grupo.** La consolidación de `Estrategia-Testing.md` rompió **61 enlaces** de los documentos que seguían estacionados en las mismas carpetas `_fusion/`, que lo citaban como vecino. Es estructural y se repetiría en cada grupo, hasta nueve veces por carpeta. **La unidad de trabajo pasa a ser la categoría completa**, no el documento: se consolidan sus N documentos en una pasada y recién entonces se retira su `_fusion/`, con lo que cada carpeta se reconecta una vez y la categoría nunca queda en un estado intermedio incoherente. |
 | 1.2 | 2026-08-16 | **§5.2 nueva, aprendida al cerrar la primera categoría.** Una sustitución de patrón para reconectar los enlaces **rompió 181 donde había 96**, alcanzando documentos de la otra unidad de entrega: la profundidad correcta de un enlace depende de dónde está el documento que cita, y un patrón no lo sabe. Los dañados se restauraron desde el commit y la reconexión se rehízo **resolviendo destinos por nombre, acotada a la unidad de entrega y sólo sobre enlaces que ya no resuelven**: 92 de 94. Es la tercera vez que la migración tropieza con lo mismo —M4 con la etiqueta y el destino, M2 con los encabezados propios—, y queda como regla para las ocho categorías restantes. |
+| 2.0 | 2026-08-16 | **Ejecutado y cerrado.** Los 67 grupos consolidados y las 18 carpetas `_fusion/` retiradas: **no queda ninguna en el árbol**, que es la condición con la que `Migracion-Rules.md` §4.3.2 declara terminada la fusión. **9726 líneas de contenido absorbidas con 0 sin correspondencia** en los documentos que transponen. §5.3 nueva con el resultado y con lo aprendido sobre el verificador de preservación, que sobre-reportó cuatro de cinco veces. Sube **major**. |
