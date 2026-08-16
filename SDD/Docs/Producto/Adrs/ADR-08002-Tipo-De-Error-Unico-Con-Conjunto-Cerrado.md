@@ -82,7 +82,7 @@ La fuente de verdad del conjunto es el contrato de uso [`CU-08006`](../Contratos
 
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §6, §8, §10 y §17.
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) §2.2, §3.2 y §3.3.
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-03), §17.4.P.5 y §4.1 (RN-08009, RN-08013, RN-08015, RN-08016).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-03), §17.1.P.5 · GeometriaFactory-Contracts y §4.1 (RN-08009, RN-08013, RN-08015, RN-08016).
 - ADR relacionadas: [`ADR-08004`](ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), [`ADR-08003`](ADR-08003-Versionado-Por-Compilacion-Compartida.md).
 
 ## 10. Control de cambios

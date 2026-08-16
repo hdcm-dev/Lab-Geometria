@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02008), §4 (F-20), §9 (X-4), §17.1.P.2 (reglas sin invariante asociado), §17.3.P.11 punto 2, §20 (los **ocho** escenarios); [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1 y §5; `00-Contexto/Alcance-Producto.md` §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02008), §4 (F-20), §9 (X-4), §17.1.P.2 · GeometriaFactory-Domain (reglas sin invariante asociado), §17.1.P.11 · GeometriaFactory-Infrastructure punto 2, §20 (los **ocho** escenarios); [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §1 y §5; `00-Contexto/Alcance-Producto.md` §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -30,9 +30,9 @@ El texto que el alumno cargó se conserva íntegro, carácter por carácter, y e
 
 ## 2. Justificación
 
-El formato de entrada es una premisa fija y el producto se adapta al dato, nunca al revés. El texto original es la única fuente fiel del trabajo del alumno, y editarlo desde el producto está declarado fuera del alcance (PRODUCT-INTAKE §4.1, §9 X-4 y §4 F-20). Conservarlo íntegro tiene además una consecuencia operativa declarada: permite reprocesar el trabajo si la interpretación mejora (§17.3.P.11 punto 2).
+El formato de entrada es una premisa fija y el producto se adapta al dato, nunca al revés. El texto original es la única fuente fiel del trabajo del alumno, y editarlo desde el producto está declarado fuera del alcance (PRODUCT-INTAKE §4.1, §9 X-4 y §4 F-20). Conservarlo íntegro tiene además una consecuencia operativa declarada: permite reprocesar el trabajo si la interpretación mejora (§17.1.P.11 · GeometriaFactory-Infrastructure punto 2).
 
-**Esta regla no tiene invariante asociado**, y el intake lo declara explícitamente: describe un comportamiento —no reescribir— y no una condición permanente sobre el estado (§17.1.P.2). En particular **no la expresa INV-04**, que enuncia otra cosa: que un trabajo `Finalizado` tiene el texto interpretado sin errores, y que sostiene a RN-02005.
+**Esta regla no tiene invariante asociado**, y el intake lo declara explícitamente: describe un comportamiento —no reescribir— y no una condición permanente sobre el estado (§17.1.P.2 · GeometriaFactory-Domain). En particular **no la expresa INV-04**, que enuncia otra cosa: que un trabajo `Finalizado` tiene el texto interpretado sin errores, y que sostiene a RN-02005.
 
 ## 3. Ámbito de aplicación
 
@@ -60,5 +60,5 @@ Pruebas unitarias de dominio previstas en 08: comparación carácter por caráct
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. |
-| 1.1 | 2026-08-09 | **Corrige la atribución de INV-04.** La versión anterior declaraba que INV-04 expresaba esta regla, siguiendo lo que `PRODUCT-INTAKE` §21 afirmaba antes de su corrección; el intake 1.3 §17.1.P.2 transcribe los siete invariantes y deja ver que INV-04 enuncia que un trabajo `Finalizado` tiene el texto interpretado sin errores, y que sostiene a **RN-02005**. Esta regla queda **sin invariante asociado**, junto con RN-02007 y RN-02009, por describir un comportamiento y no una condición permanente. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §3 extiende el ámbito al envío, al desenlace y a los cuatro estados. |
+| 1.1 | 2026-08-09 | **Corrige la atribución de INV-04.** La versión anterior declaraba que INV-04 expresaba esta regla, siguiendo lo que `PRODUCT-INTAKE` §21 afirmaba antes de su corrección; el intake 1.3 §17.1.P.2 · GeometriaFactory-Domain transcribe los siete invariantes y deja ver que INV-04 enuncia que un trabajo `Finalizado` tiene el texto interpretado sin errores, y que sostiene a **RN-02005**. Esta regla queda **sin invariante asociado**, junto con RN-02007 y RN-02009, por describir un comportamiento y no una condición permanente. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §3 extiende el ámbito al envío, al desenlace y a los cuatro estados. |
 | 1.2 | 2026-08-10 | **Cierra la parte del hallazgo `N-4`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0 que alcanza a este archivo. Dos residuos de recuento: la **trazabilidad de cabecera** citaba «§20 (los siete escenarios)» y **§6** decía «con los siete escenarios del intake como cobertura». El intake §20 tiene **ocho** desde su versión 1.7, con **E-8** incorporado para `DIMENSION_NO_LEGIBLE`; contados `E-1` a `E-8` sobre la fuente viva. Los dos pasan a **ocho**. **El enunciado de la regla no cambia, ni su ámbito, ni su verificación**: la cobertura de prueba se amplía en un escenario, y E-8 conserva el texto original íntegro igual que los otros siete. Sube minor: corrige un recuento derivado. |

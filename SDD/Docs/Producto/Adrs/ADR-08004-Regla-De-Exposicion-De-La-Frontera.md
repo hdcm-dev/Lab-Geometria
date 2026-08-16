@@ -12,7 +12,7 @@
 
 ## 1. Contexto
 
-Este ensamblado es el único tipo de dato que cruza la frontera entre las dos unidades desplegables, de modo que **es donde se decide qué se expone y qué no** (`PRODUCT-INTAKE` §17.4.P.5). Es la decisión central del proyecto de código: no tiene comportamiento, así que lo único que decide es la forma de la frontera.
+Este ensamblado es el único tipo de dato que cruza la frontera entre las dos unidades desplegables, de modo que **es donde se decide qué se expone y qué no** (`PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Contracts). Es la decisión central del proyecto de código: no tiene comportamiento, así que lo único que decide es la forma de la frontera.
 
 Tres reglas de arquitectura de nivel producto caen sobre esa frontera (`PRODUCT-INTAKE` §14):
 
@@ -30,8 +30,8 @@ Se declara una **lista cerrada de lo que nunca cruza la frontera**, verificable 
 
 | Nunca cruza | Fundamento |
 | --- | --- |
-| El hash de la contraseña, en ninguna de sus formas | `PRODUCT-INTAKE` §17.4.P.5 |
-| La clave de firma | `PRODUCT-INTAKE` §17.4.P.5 |
+| El hash de la contraseña, en ninguna de sus formas | `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Contracts |
+| La clave de firma | `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Contracts |
 | Cualquier dirección de servicio interno, en un campo o dentro de un texto | RA-03 |
 | Rutas de archivos de datos y trazas de la implementación | CU-08006 §7 |
 | Una condición que impida operar, como **campo** de la respuesta de sesión | `RT-10` de la categoría 02 |
@@ -89,7 +89,7 @@ Y dos decisiones de forma que la acompañan:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-01, RA-02, RA-03), §17.4.P.5, §17.5.P.5 y §4.1 (RN-08013, RN-08014, RN-08016).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-01, RA-02, RA-03), §17.1.P.5 · GeometriaFactory-Contracts, §17.1.P.5 · GeometriaFactory-Api y §4.1 (RN-08013, RN-08014, RN-08016).
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §2 y §6 (`RT-01`, `RT-02`, `RT-10`, `RT-11`).
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §7 y §8; [`CU-08001`](../Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md); [`CU-08008`](../Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md).
 - ADR relacionadas: [`ADR-08001`](ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md), [`ADR-08002`](ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md).

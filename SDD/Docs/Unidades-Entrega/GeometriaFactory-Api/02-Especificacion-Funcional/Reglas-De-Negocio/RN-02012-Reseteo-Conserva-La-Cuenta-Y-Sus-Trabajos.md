@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-02012**, **RN-02014** y **RN-02015**), §4 (**F-26**), §17.1.P.2 (**INV-09**), §7 (**CL-7** reescrito), §9 (**X-2 retirada**), §11 (**RN-B6 tachado** el 2026-08-09 por este mismo 1.10, precisamente porque F-26 dejó sin objeto su mitigación), §4.2 (modelo de estados del trabajo); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1; `00-Contexto/Vision-Producto.md` §8 (RG-06)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-02012**, **RN-02014** y **RN-02015**), §4 (**F-26**), §17.1.P.2 · GeometriaFactory-Domain (**INV-09**), §7 (**CL-7** reescrito), §9 (**X-2 retirada**), §11 (**RN-B6 tachado** el 2026-08-09 por este mismo 1.10, precisamente porque F-26 dejó sin objeto su mitigación), §4.2 (modelo de estados del trabajo); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1; `00-Contexto/Vision-Producto.md` §8 (RG-06)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -40,7 +40,7 @@ Es la respuesta declarada del Product Owner al caso límite de la contraseña ol
 - Alcanza a los trabajos en los **cuatro** estados, incluidos los dos terminales y sus comentarios: el reseteo no toca ninguno.
 - **No se aplica a la cuenta con papel `Administrador`**, sobre la que el reseteo no procede (CU-02013 §6, RN-02001, INV-08). El administrador cambia su propia contraseña por el reemplazo de CU-02003.
 - **Su invariante es INV-09**, que comparte con RN-02013. Las dos son las dos mitades de la misma condición: ésta declara qué conserva el reseteo, y RN-02013 qué no puede la cuenta hasta cambiar la provisoria (`Definicion-Modelo-De-Dominio.md` §4.3).
-- El dominio **no conoce la contraseña provisoria y no la produce**: **la produce el sistema** —no la escribe el administrador—, el administrador la comunica por fuera del producto y al dominio llega ya derivada (PRODUCT-INTAKE §17.1.P.5). Quién la produce y qué se le exige al valor tienen desde el `PRODUCT-INTAKE` 1.10 regla propia, [RN-02014](RN-02014-Provisoria-Producida-Por-El-Sistema.md), y acá se citan en lugar de enunciarse de nuevo.
+- El dominio **no conoce la contraseña provisoria y no la produce**: **la produce el sistema** —no la escribe el administrador—, el administrador la comunica por fuera del producto y al dominio llega ya derivada (PRODUCT-INTAKE §17.1.P.5 · GeometriaFactory-Domain). Quién la produce y qué se le exige al valor tienen desde el `PRODUCT-INTAKE` 1.10 regla propia, [RN-02014](RN-02014-Provisoria-Producida-Por-El-Sistema.md), y acá se citan en lugar de enunciarse de nuevo.
 
 ## 4. Consecuencia si se viola
 

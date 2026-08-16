@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-04), §4.1 (RN-02013, RN-02016), §17.1.P.5, §17.5.P.3 y §17.5.P.5, y la resolución **1.34** sobre con qué se autentica el cambio forzado
+**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-04), §4.1 (RN-02013, RN-02016), §17.1.P.5 · GeometriaFactory-Domain, §17.1.P.3 · GeometriaFactory-Api y §17.1.P.5 · GeometriaFactory-Api, y la resolución **1.34** sobre con qué se autentica el cambio forzado
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** `CU-00003` §A-05, [`CU-00001`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-00001-Canjear-Credenciales-Por-Un-Acceso-Firmado.md), [`CU-00002`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md), [`CU-04003`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md), [`CU-02003`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) y [`CU-02004`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1
 
@@ -47,14 +47,14 @@ Abarca tres tramos que son uno solo desde el punto de vista de quien entra:
 **Lo que este caso de uso no hace, y hay que dejarlo imposible de confundir: no autoriza.** Verificar
 que la sesión trae papel `Administrador` no es lo mismo que verificar que quien pide puede operar
 sobre *ese* trabajo. La comprobación sobre el dato recuperado —pertenencia, facultad y alcance— vive
-en cada caso de uso que toca datos. El intake §17.5.P.5 lo dice en una línea: **el rol no alcanza**.
+en cada caso de uso que toca datos. El intake §17.1.P.5 · GeometriaFactory-Api lo dice en una línea: **el rol no alcanza**.
 
 **Tampoco fija la primera credencial.** Desde **RN-02016** la contraseña inicial la produce el
 sistema **dentro del acto de habilitación**, que es `CU-00023`. Acá la persona sólo la **reemplaza**,
 y siempre presentando la vigente: **ningún camino de este caso de uso fija una contraseña sobre una
 cuenta sin conocer la anterior**.
 
-**El producto acepta por escrito un riesgo en el canje.** El intake §17.5.P.5 registra la elección de
+**El producto acepta por escrito un riesgo en el canje.** El intake §17.1.P.5 · GeometriaFactory-Api registra la elección de
 canjear la contraseña en claro contra **A-01** como **decisión consciente y no como omisión**, porque
 el intermediario es el propio portal del mismo sistema y el alcance es un laboratorio de aula.
 
@@ -65,7 +65,7 @@ el intermediario es el propio portal del mismo sistema y el alcance es un labora
 | Alumno o administrador | Primario | Entra al laboratorio con su correo y su contraseña, y cambia la suya cuando quiere o cuando se lo exigen |
 | `GeometriaFactory-Web` | Intermediario | Recibe las credenciales del formulario y las canjea **servidor a servidor**; presenta la sesión en cada petición posterior. **El navegador no alcanza esta superficie** (RA-01) |
 | Mecanismo de acceso firmado | Sistema | Emite la sesión con sus cuatro reclamos, y la verifica en cada petición |
-| Mecanismo de credenciales | Sistema | Deriva la contraseña y la compara contra el valor derivado guardado. **La contraseña en claro no llega nunca al modelo de dominio** (intake §17.1.P.5) |
+| Mecanismo de credenciales | Sistema | Deriva la contraseña y la compara contra el valor derivado guardado. **La contraseña en claro no llega nunca al modelo de dominio** (intake §17.1.P.5 · GeometriaFactory-Domain) |
 | Almacén de cuentas | Sistema | Recupera la cuenta por su correo y materializa la credencial resultante |
 | Reloj del sistema | Sistema | Provee el sello de modificación de la cuenta |
 
@@ -221,7 +221,7 @@ registrados.
 | Reglas de negocio aplicables | [RN-02006](../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md), con su tramo de traducción acá: la respuesta **con motivo**. [RN-02013](../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), **con el tramo que esta unidad puede romper sola**: un punto de acceso fuera de la guardia la incumple **sin que nada falle**; y con las dos formas de autenticación que el intake 1.34 declara. [RN-02001](../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md), por el papel que viaja en la sesión y el que cada punto exige. [RN-02010](../Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md), en el único punto donde el papel insuficiente tiene código del contrato |
 | Invariantes del producto | **INV-06**, una cuenta `Pendiente` o `Bloqueado` no obtiene acceso. **INV-09**, una cuenta marcada no ejerce ninguna capacidad salvo cambiar su propia contraseña: la guardia es su expresión en la frontera del proceso |
 | Reglas de arquitectura del producto | **RA-01**, el único invocante legítimo es el portal, servidor a servidor. **RA-03**, ninguna respuesta expone secretos ni direcciones de servicios internos, y todo intento queda registrado |
-| Puntos de acceso | **A-01** el canje; **A-05** el cambio propio; **A-05 a A-15**, once, gobernados por la guardia. **A-01 es la única ruta que declara una fuente**, el intake §17.5.P.3 |
+| Puntos de acceso | **A-01** el canje; **A-05** el cambio propio; **A-05 a A-15**, once, gobernados por la guardia. **A-01 es la única ruta que declara una fuente**, el intake §17.1.P.3 · GeometriaFactory-Api |
 | Contratos de uso que transporta | `GeometriaFactory-Contracts` `CU-00001` y `CU-00002`, incluida la reutilización de este último por el cambio obligatorio |
 | Puertos que consume | Almacén de cuentas, reloj del sistema, mecanismo de acceso firmado, mecanismo de credenciales |
 | Historias de usuario a generar en 06 | US-00001 a US-00006, US-00009 |

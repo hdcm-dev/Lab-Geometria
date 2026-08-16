@@ -19,7 +19,7 @@ Dos cosas que el modelo necesita no están dentro del alcance de una entidad:
 
 La tercera cosa que no está: **la fecha que el alumno escribe en su trabajo no es ninguna de las anteriores**. Es dato del alumno y no del reloj, y el modelo la distingue explícitamente de la fecha de creación y de la de última modificación.
 
-Motivación upstream: RN-02002, RN-02007, RN-02008; INV-01; `PRODUCT-INTAKE` §17.1.P.1 (sin dependencias), §17.2.P.11 punto 3 (el reloj como puerto de la capa de aplicación) y §17.3.P.4 (sellos de tiempo del trabajo).
+Motivación upstream: RN-02002, RN-02007, RN-02008; INV-01; `PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Domain (sin dependencias), §17.1.P.11 · GeometriaFactory-Application punto 3 (el reloj como puerto de la capa de aplicación) y §17.1.P.4 · GeometriaFactory-Infrastructure (sellos de tiempo del trabajo).
 
 ## 2. Decisión
 
@@ -36,7 +36,7 @@ Cuando una operación exige unicidad, su contrato declara que **la unicidad ya f
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Momento y unicidad por parámetro (**adoptada**) | Conserva las cero dependencias; las pruebas son reproducibles porque el tiempo es un dato; ninguna operación depende del entorno | Cada operación que necesita el momento lo lleva en su firma, lo que engrosa el contrato; el consumidor tiene que acordarse de aportarlo |
-| Un puerto de reloj declarado en el dominio | El dominio expresaría por sí mismo que necesita el tiempo | Duplicaría el puerto que `GeometriaFactory-Application` ya declara, y el intake asigna ese puerto explícitamente a la capa de aplicación (§17.2.P.11 punto 3) |
+| Un puerto de reloj declarado en el dominio | El dominio expresaría por sí mismo que necesita el tiempo | Duplicaría el puerto que `GeometriaFactory-Application` ya declara, y el intake asigna ese puerto explícitamente a la capa de aplicación (§17.1.P.11 · GeometriaFactory-Application punto 3) |
 | Leer el reloj del sistema dentro del dominio | Firmas más cortas | Mete una dependencia de entorno en el nivel 0 y hace irreproducibles las pruebas de todo lo que dependa de fechas; es el defecto que ADR-02001 protege |
 | Un puerto de repositorio en el dominio para verificar la unicidad | INV-01 se ejercería entero acá | Obliga al dominio a conocer el concepto de consulta, que es exactamente lo que `Definicion-Modelo-De-Dominio.md` §7 pone del otro lado de la frontera |
 
@@ -73,7 +73,7 @@ Cuando una operación exige unicidad, su contrato declara que **la unicidad ya f
 ## 9. Referencias
 
 - [`../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1, §2.2, §4.1 y §7.
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.1, §17.2.P.11 punto 3 y §17.3.P.4.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.1 · GeometriaFactory-Domain, §17.1.P.11 · GeometriaFactory-Application punto 3 y §17.1.P.4 · GeometriaFactory-Infrastructure.
 - ADR relacionadas: [`ADR-02001`](ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md), [`ADR-02002`](ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md).
 
 ## 10. Control de cambios

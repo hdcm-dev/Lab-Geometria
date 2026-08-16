@@ -64,7 +64,7 @@ Cinco criterios, todos respondibles con sí o no.
 **Con `equipo_n = 1` los dos papeles los ejerce la misma persona.** Lo que reemplaza al filtro de una segunda persona son dos cosas:
 
 1. El **punto de control bloqueante** de cada etapa (`PRODUCT-INTAKE` §15), que es donde se cierran los nombres de la etapa `a`, incluido el del cuarto puerto.
-2. Las **puertas medidas** del pipeline, que no dependen de que alguien las revise: cero dependencias salientes de más, cero advertencias de construcción y **cero pruebas de esta capa que toquen la base de datos real**. La última es la más dura y es propia de este proyecto de código (`PRODUCT-INTAKE` §17.2.P.8).
+2. Las **puertas medidas** del pipeline, que no dependen de que alguien las revise: cero dependencias salientes de más, cero advertencias de construcción y **cero pruebas de esta capa que toquen la base de datos real**. La última es la más dura y es propia de este proyecto de código (`PRODUCT-INTAKE` §17.1.P.8 · GeometriaFactory-Application).
 
 ## 5. Qué no es esta DoR
 

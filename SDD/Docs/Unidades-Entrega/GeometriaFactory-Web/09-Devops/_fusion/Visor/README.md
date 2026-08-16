@@ -67,7 +67,7 @@
 | QG-08 | Stage `probar`, y revisión | Se rechaza en revisión |
 | QG-09 | Revisión del pull request | Se rechaza en revisión |
 
-**Ninguno es condicionado**, y no lo decide esta categoría: [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/README.md) §4 lo declara y da el motivo —los umbrales salen del contrato de la fachada y de las dos puertas técnicas, no de valores rotulados **[ASUNCIÓN]**—. La única marca [ASUNCIÓN] que alcanza a este proyecto de código está en el intake §17.7.P.6 y es **sobre la forma del gate y no sobre la regla**, de modo que no condiciona: `QG-04` bloquea.
+**Ninguno es condicionado**, y no lo decide esta categoría: [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/README.md) §4 lo declara y da el motivo —los umbrales salen del contrato de la fachada y de las dos puertas técnicas, no de valores rotulados **[ASUNCIÓN]**—. La única marca [ASUNCIÓN] que alcanza a este proyecto de código está en el intake §17.2.P.6 · GeometriaFactory-Visor y es **sobre la forma del gate y no sobre la regla**, de modo que no condiciona: `QG-04` bloquea.
 
 **No hay gate de cobertura de líneas, ni de mutation score, ni umbral numérico de fluidez.** Las tres ausencias están declaradas aguas arriba con su motivo, y **esta categoría no inventa ninguna de las tres**.
 
@@ -88,14 +88,14 @@
 
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
-| Stages de la canalización | **5**: `instalar`, `empaquetar`, `inspeccionar`, `probar`, `copiar` | Intake §17.7.P.8; `05` §5 |
+| Stages de la canalización | **5**: `instalar`, `empaquetar`, `inspeccionar`, `probar`, `copiar` | Intake §17.2.P.8 · GeometriaFactory-Visor; `05` §5 |
 | Quality gates materializados | **9**, **ninguno** condicionado | `08` `Estrategia-Calidad.md` §3 |
-| Puertas técnicas que se miden acá | **2**: `PT-02` y `PT-03`, en **6** tramos | Intake §15 y §17.7.P.8; `08` `Criterios-Validacion.md` §4 |
-| Funciones de la fachada | **6** | Intake §17.7.P.3; `02` `Definicion-Contrato-De-Fachada.md` §4 |
+| Puertas técnicas que se miden acá | **2**: `PT-02` y `PT-03`, en **6** tramos | Intake §15 y §17.2.P.8 · GeometriaFactory-Visor; `08` `Criterios-Validacion.md` §4 |
+| Funciones de la fachada | **6** | Intake §17.2.P.3 · GeometriaFactory-Visor; `02` `Definicion-Contrato-De-Fachada.md` §4 |
 | Garantías del contrato | **7** | `02` `Definicion-Contrato-De-Fachada.md` §3.2 |
 | Códigos de condición | **7**, en **8** cursos | `02` `Definicion-Contrato-De-Fachada.md` §6 |
 | Ambientes de despliegue propios | **0** | `05` §5 |
-| Canales de publicación | **0** | Intake §17.7.P.7 |
+| Canales de publicación | **0** | Intake §17.2.P.7 · GeometriaFactory-Visor |
 | Artefactos entregados | **1**: el bundle, copiado al anfitrión | Intake §13; `05` §5 |
 | Secretos propios | **0**, en construcción y en ejecución | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
 | Momentos del producto que este proyecto de código toca | **3**: la etapa `a`, el momento de medición y la etapa `g` | `08` `Plan-Pruebas.md` §1 |
@@ -106,4 +106,4 @@
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Visor`. Lista los **cinco** artefactos emitidos —es el único de los tres proyectos de código de nivel topológico 0 con guía de publicación, y el motivo está declarado—, el orden de lectura, el resumen de los **nueve** quality gates con la constancia de que **ninguno es condicionado** y de que la única marca [ASUNCIÓN] que lo alcanza es sobre la forma del gate, y el estado de los **cinco** puntos abiertos de `05` §11 tras esta emisión: **`PA-05` cerrado**, `PA-01`, `PA-03` y `PA-04` vivos, y `PA-02` fuera del alcance de esta categoría. Cierra con la tabla de recuentos y la fuente de cada uno. |
-| 1.1 | 2026-08-11 | **Propagación de la primera decisión de despliegue del Product Owner** del intake **1.22** §17.6.P.7: el filtro de rutas del flujo que publica el front incluye ahora `src/GeometriaFactory.Contracts/`. La consecuencia cae entera dentro de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), que sube a **1.1** en §1: este proyecto de código deja de ser el único de nivel topológico 0 cuyo cambio dispara una publicación. **Las dos afirmaciones de este índice sobre lo que este proyecto de código tiene de único entre los tres de nivel topológico 0 no se tocan**: las dos son sobre la guía de publicación, y ninguna se apoyaba en el filtro de rutas. |
+| 1.1 | 2026-08-11 | **Propagación de la primera decisión de despliegue del Product Owner** del intake **1.22** §17.2.P.7 · GeometriaFactory-Web: el filtro de rutas del flujo que publica el front incluye ahora `src/GeometriaFactory.Contracts/`. La consecuencia cae entera dentro de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), que sube a **1.1** en §1: este proyecto de código deja de ser el único de nivel topológico 0 cuyo cambio dispara una publicación. **Las dos afirmaciones de este índice sobre lo que este proyecto de código tiene de único entre los tres de nivel topológico 0 no se tocan**: las dos son sobre la guía de publicación, y ninguna se apoyaba en el filtro de rutas. |

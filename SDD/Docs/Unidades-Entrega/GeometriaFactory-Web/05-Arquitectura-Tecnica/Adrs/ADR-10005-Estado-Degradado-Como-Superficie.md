@@ -18,7 +18,7 @@ Las tres terminan en la pantalla, y confundirlas es el error de lectura más pro
 
 Hay además una obligación que sólo se puede cumplir en un lugar: `RA-03` exige que **ningún mensaje mostrado incluya la dirección de un servicio interno, un nombre de archivo de datos ni una traza de la implementación**. Si los mensajes se compusieran en once superficies, habría once lugares donde eso se puede violar; si se componen en uno, hay uno.
 
-Motivación upstream: NB-00008; `RA-03`; `PRODUCT-INTAKE` §7 (`CL-2`), §17.6.P.5 y §17.6.P.10; restricciones transversales `RT-03` y `RT-07` de la categoría 02.
+Motivación upstream: NB-00008; `RA-03`; `PRODUCT-INTAKE` §7 (`CL-2`), §17.2.P.5 · GeometriaFactory-Web y §17.2.P.10 · GeometriaFactory-Web; restricciones transversales `RT-03` y `RT-07` de la categoría 02.
 
 ## 2. Decisión
 
@@ -79,7 +79,7 @@ Y la regla que hace posible distinguir sin adivinar: **el listado vacío se dist
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §7 (`CL-2`), §14 (`RA-03`), §17.6.P.5 y §17.6.P.10.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §7 (`CL-2`), §14 (`RA-03`), §17.2.P.5 · GeometriaFactory-Web y §17.2.P.10 · GeometriaFactory-Web.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 (`RT-03`, `RT-07`) y [`CU-10010`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md).
 - [`../../03-UX-UI-DX/Wireframes-Estado-Degradado-Y-Reconexion.md`](../../03-UX-UI-DX/Wireframes-Estado-Degradado-Y-Reconexion.md) §1, la tabla que separa los dos tramos; [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §4.1 y §8.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), el conjunto cerrado de diecisiete códigos vivos que este traductor cubre.

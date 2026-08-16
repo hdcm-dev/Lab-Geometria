@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-02010, RN-02011), §4.2 y su **consecuencia 3** (el comentario es opcional), §17.1.P.2 (INV-07)
+**Trazabilidad upstream:** [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-02010, RN-02011), §4.2 y su **consecuencia 3** (el comentario es opcional), §17.1.P.2 · GeometriaFactory-Domain (INV-07)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** [`CU-00008`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-00008-Exponer-El-Desenlace-De-La-Revision.md), [`CU-04008`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04008-Dar-Desenlace-A-Un-Trabajo.md) y [`CU-02010`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1
 

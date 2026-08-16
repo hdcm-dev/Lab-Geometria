@@ -18,7 +18,7 @@ Esta pieza es **una de las dos unidades desplegables del producto**, y la única
 2. **La subida al hosting no es transaccional** (`R-03`). Puede dejar la aplicación a medias, y una subida que se reporta como exitosa habiendo dejado el producto caído es peor que una falla visible.
 3. **El bundle del visor viaja adentro de esta unidad.** Si se toma de un artefacto viejo, la aplicación publicada dibuja con una versión que nadie construyó en ese flujo.
 
-Motivación upstream: NB-00008; `RA-03`; `PRODUCT-INTAKE` §17.6.P.5, §17.6.P.7, §17.6.P.8, §17.6.P.10 (`PT-01.a`, `PT-01.d`) y §17.7 P.8 (`PT-03`).
+Motivación upstream: NB-00008; `RA-03`; `PRODUCT-INTAKE` §17.2.P.5 · GeometriaFactory-Web, §17.2.P.7 · GeometriaFactory-Web, §17.2.P.8 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web (`PT-01.a`, `PT-01.d`) y §17.7 P.8 (`PT-03`).
 
 ## 2. Decisión
 
@@ -39,9 +39,9 @@ La reversión es **volver a publicar desde la etiqueta anterior**, y el desplieg
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Dirección desde configuración inyectada al publicar, con comprobación final (**adoptada**) | La dirección real no queda en el repositorio; cambiarla no exige recompilar el código fuente; una publicación rota se detecta en el mismo flujo | La comprobación final alarga el flujo, y una falla intermitente del hosting puede marcar en rojo un despliegue que sí funcionó |
-| Dirección embebida en el código | Un parámetro menos que administrar y sin secretos que rotar | Publicaría la dirección del servidor propio en el repositorio, que es exactamente lo que `RA-03` y la fuente prohíben; y cambiarla exigiría recompilar. **Descartada por `PRODUCT-INTAKE` §17.6.P.5 y §17.6.P.11 punto 3** |
+| Dirección embebida en el código | Un parámetro menos que administrar y sin secretos que rotar | Publicaría la dirección del servidor propio en el repositorio, que es exactamente lo que `RA-03` y la fuente prohíben; y cambiarla exigiría recompilar. **Descartada por `PRODUCT-INTAKE` §17.2.P.5 · GeometriaFactory-Web y §17.2.P.11 · GeometriaFactory-Web punto 3** |
 | Dirección configurable desde una superficie del producto | El docente podría cambiarla sin tocar el despliegue | **No hay superficies de configuración que la persona fije**, y un parámetro que la superficie no gobierna no se dibuja ni siquiera deshabilitado. Además pondría la dirección del servidor propio en el navegador. **Descartada por la categoría 03** |
-| Terminar el flujo en la subida, sin comprobar | Flujo más corto y sin falsos rojos | Deja el modo de falla más caro sin detección: la aplicación caída reportada como desplegada. **Descartada por `PRODUCT-INTAKE` §17.6.P.8** |
+| Terminar el flujo en la subida, sin comprobar | Flujo más corto y sin falsos rojos | Deja el modo de falla más caro sin detección: la aplicación caída reportada como desplegada. **Descartada por `PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Web** |
 
 ## 5. Consecuencias positivas
 
@@ -79,7 +79,7 @@ La reversión es **volver a publicar desde la etiqueta anterior**, y el desplieg
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-03`), §17.6.P.5, §17.6.P.7, §17.6.P.8, §17.6.P.10, §17.6.P.12 y §17.7 P.8.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-03`), §17.2.P.5 · GeometriaFactory-Web, §17.2.P.7 · GeometriaFactory-Web, §17.2.P.8 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web, §17.2.P.12 · GeometriaFactory-Web y §17.7 P.8.
 - [`../../03-UX-UI-DX/README.md`](../../03-UX-UI-DX/README.md) §7, que declara por qué no hay superficies de configuración.
 - [`../../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md), por el carácter generado del bundle que esta unidad transporta.
 - ADR relacionadas: [`ADR-10001`](ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md), [`ADR-10006`](ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md).

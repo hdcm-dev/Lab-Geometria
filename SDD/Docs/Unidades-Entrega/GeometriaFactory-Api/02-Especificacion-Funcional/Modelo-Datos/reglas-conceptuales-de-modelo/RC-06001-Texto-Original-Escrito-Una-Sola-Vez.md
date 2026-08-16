@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`RN-02008`](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-06008), §9 (X-4), §17.3.P.4 («`JsonOriginal` conservado íntegro y nunca reescrito»), §17.3.P.11 punto 2
+**Trazabilidad upstream:** [`RN-02008`](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-06008), §9 (X-4), §17.1.P.4 · GeometriaFactory-Infrastructure («`JsonOriginal` conservado íntegro y nunca reescrito»), §17.1.P.11 · GeometriaFactory-Infrastructure punto 2
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---

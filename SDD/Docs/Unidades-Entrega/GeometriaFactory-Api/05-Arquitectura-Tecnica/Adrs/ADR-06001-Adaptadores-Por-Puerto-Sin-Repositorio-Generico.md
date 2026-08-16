@@ -12,11 +12,11 @@
 
 ## 1. Contexto
 
-`GeometriaFactory-Application` declara **cuatro** puertos y este proyecto de código los implementa. El intake ya descartó dos formas de hacerlo —repositorio genérico sobre el conjunto de entidades y consultas escritas a mano— y dejó dicho el estilo: «adaptadores que implementan los puertos de Application» (`PRODUCT-INTAKE` §17.3.P.2). Lo que ninguna fuente resuelve es **cuántas piezas son** y **qué pasa con lo que no es puerto**: los dos mecanismos de seguridad y la preparación del almacén, que la categoría 02 declara explícitamente como cosas que **no** son puertos de la capa de aplicación.
+`GeometriaFactory-Application` declara **cuatro** puertos y este proyecto de código los implementa. El intake ya descartó dos formas de hacerlo —repositorio genérico sobre el conjunto de entidades y consultas escritas a mano— y dejó dicho el estilo: «adaptadores que implementan los puertos de Application» (`PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Infrastructure). Lo que ninguna fuente resuelve es **cuántas piezas son** y **qué pasa con lo que no es puerto**: los dos mecanismos de seguridad y la preparación del almacén, que la categoría 02 declara explícitamente como cosas que **no** son puertos de la capa de aplicación.
 
 Hay además una tensión propia de esta capa que la partición tiene que resolver. La mitad de lo que vive acá **toca el almacén** —guardar, recuperar, retirar, preparar— y la otra mitad **no lo toca**: interpretar un texto, derivar una contraseña, producir una provisoria, firmar un acceso, decir qué hora es. Si las dos mitades quedan en la misma pieza, la batería obligatoria del validador —que es la mitigación declarada del único riesgo alto de negocio del producto— pasa a necesitar un almacén para correr.
 
-Motivación upstream: NB-00003, NB-00004; RN-06003, RN-06008, RN-06009, RN-06011; INV-02, INV-03; `PRODUCT-INTAKE` §11 (RN-B3), §17.3.P.2, §17.3.P.6, §17.3.P.12.
+Motivación upstream: NB-00003, NB-00004; RN-06003, RN-06008, RN-06009, RN-06011; INV-02, INV-03; `PRODUCT-INTAKE` §11 (RN-B3), §17.1.P.2 · GeometriaFactory-Infrastructure, §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.12 · GeometriaFactory-Infrastructure.
 
 ## 2. Decisión
 
@@ -40,8 +40,8 @@ Motivación upstream: NB-00003, NB-00004; RN-06003, RN-06008, RN-06009, RN-06011
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Un adaptador por puerto, con los mecanismos como componentes propios (**adoptada**) | La frontera queda en cuatro lugares contables; la mitad que no toca el almacén se prueba unitariamente; cada adaptador se sustituye por un doble sin arrastrar a los demás | Más tipos que en cualquiera de las alternativas, y la responsabilidad de conectarlos cae afuera |
-| Repositorio genérico sobre el conjunto de entidades | Un solo tipo para las cinco entidades | **Descartada por el intake §17.3.P.2**: diluye las consultas que sí importan y obliga a armar el recorte del lado del consumidor, que es lo que `CONSULTA_SIN_ALCANCE_DECLARADO` viene a impedir |
-| Consultas escritas a mano sobre el almacén | Control total de cada consulta | **Descartada por el intake §17.3.P.2**: las transformaciones de esquema aplicadas al arrancar son decisión tomada y el mapeador las provee |
+| Repositorio genérico sobre el conjunto de entidades | Un solo tipo para las cinco entidades | **Descartada por el intake §17.1.P.2 · GeometriaFactory-Infrastructure**: diluye las consultas que sí importan y obliga a armar el recorte del lado del consumidor, que es lo que `CONSULTA_SIN_ALCANCE_DECLARADO` viene a impedir |
+| Consultas escritas a mano sobre el almacén | Control total de cada consulta | **Descartada por el intake §17.1.P.2 · GeometriaFactory-Infrastructure**: las transformaciones de esquema aplicadas al arrancar son decisión tomada y el mapeador las provee |
 | Un adaptador único que implemente los cuatro puertos | Menos tipos; la unidad de trabajo queda evidente en un solo lugar | **Descartada acá.** El validador arrastraría la dependencia de persistencia y la batería obligatoria dejaría de correr sin almacén, que es exactamente la propiedad que la mitigación del riesgo `RN-B3` necesita |
 | Registrar los adaptadores desde este proyecto de código, con un punto de entrada de composición propio | Un solo lugar donde se conectan, escrito por quien los conoce | Haría que la frontera dejara de ser contable desde afuera y que `GeometriaFactory-Api` no pudiera sustituir un adaptador por un doble en su batería de integración sin tocar esta biblioteca |
 
@@ -78,7 +78,7 @@ Motivación upstream: NB-00003, NB-00004; RN-06003, RN-06008, RN-06009, RN-06011
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §11 (RN-B3), §17.3.P.2, §17.3.P.6 y §17.3.P.12.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §11 (RN-B3), §17.1.P.2 · GeometriaFactory-Infrastructure, §17.1.P.6 · GeometriaFactory-Infrastructure y §17.1.P.12 · GeometriaFactory-Infrastructure.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, §4 y §8.
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md`](ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md), que declara la frontera que esta ADR materializa.
 - ADR relacionadas: [`ADR-06002`](ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md), [`ADR-06006`](ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md).

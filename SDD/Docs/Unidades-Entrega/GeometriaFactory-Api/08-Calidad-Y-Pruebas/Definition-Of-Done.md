@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.5.P.7 y §17.5.P.8
+**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.1.P.7 · GeometriaFactory-Api y §17.1.P.8 · GeometriaFactory-Api
 **Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops`, que materializa sus criterios mecánicos como etapas del pipeline
 
 ---
@@ -30,7 +30,7 @@
 
 **Por qué la tercera capa se llama «etapa» y no «sprint».** Este producto no tiene sprints: la unidad de planificación es la **etapa**.
 
-**Y por qué la cuarta se llama «entrega del artefacto» y no «release».** Este proyecto de código **sí produce un artefacto entregable** —la imagen que corre en el servidor propio— pero `redistribuible` es false y **no se publica en ningún registro**: se construye en destino. Además **el despliegue no es del agente**: el intake §17.5.P.8 lo declara manual y del Product Owner. Lo que esta DoD declara terminado es **el artefacto entregado**, no el despliegue realizado.
+**Y por qué la cuarta se llama «entrega del artefacto» y no «release».** Este proyecto de código **sí produce un artefacto entregable** —la imagen que corre en el servidor propio— pero `redistribuible` es false y **no se publica en ningún registro**: se construye en destino. Además **el despliegue no es del agente**: el intake §17.1.P.8 · GeometriaFactory-Api lo declara manual y del Product Owner. Lo que esta DoD declara terminado es **el artefacto entregado**, no el despliegue realizado.
 
 Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
@@ -94,7 +94,7 @@ Se aplica cada vez que el artefacto del servidor propio se construye para entreg
 | **Familia empobrecida enriquecida** | **No se admite.** La respuesta más informativa es la tentadora, y **ninguna capa de adentro puede repararla** | — | — |
 | **Cuerpo truncado en lugar de rechazado** | **No se admite.** Rompe `RN-00008` en silencio | — | — |
 | **Eliminación fuera de alcance dada por verificada sin forzar la petición** | **No se admite.** Es el único criterio del producto que la fuente exige ejercer así | — | — |
-| **Batería del validador cerrada con nueve casos** | **No se admite.** Tiene **diez**, y el décimo cubre `E-8`. El intake **1.20** lo dice así en §17.5.P.8 | — | — |
+| **Batería del validador cerrada con nueve casos** | **No se admite.** Tiene **diez**, y el décimo cubre `E-8`. El intake **1.20** lo dice así en §17.1.P.8 · GeometriaFactory-Api | — | — |
 
 ## 3. Vigencia
 
@@ -111,6 +111,6 @@ Se aplica cada vez que el artefacto del servidor propio se construye para entreg
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **`H-01`.** El caso de excepción «batería del validador cerrada con nueve casos» describía la redacción del gate del intake sin decir que ya está corregida; ahora cita el intake **1.20** §17.5.P.8, que dice **diez**. No se admite igual, y el umbral de la batería sigue siendo **10 de 10**. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
+| 1.1 | 2026-08-11 | **`H-01`.** El caso de excepción «batería del validador cerrada con nueve casos» describía la redacción del gate del intake sin decir que ya está corregida; ahora cita el intake **1.20** §17.1.P.8 · GeometriaFactory-Api, que dice **diez**. No se admite igual, y el umbral de la batería sigue siendo **10 de 10**. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la DoD en **cuatro** capas —historia, tarea técnica, **etapa** y **entrega del artefacto**—, con el fundamento de por qué la tercera no se llama sprint y la cuarta no se llama release ni despliegue. Cada criterio responde «cómo se valida» con una operación concreta. Incorpora como criterio de historia que **todo punto de acceso nuevo declare su ubicación respecto de la guardia y reejecute `TC-00007`**, y que toda respuesta de fallo nueva reejecute los cuatro casos de traducción. Su §1.4 declara los criterios del artefacto, incluidos `PT-04`, la ausencia de secretos en la imagen y el volumen persistente, con la constancia de que **el artefacto queda entregado, no desplegado**. Declara **nueve** casos de excepción, **seis** de ellos sin excepción posible, y la vigencia como fuente canónica. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

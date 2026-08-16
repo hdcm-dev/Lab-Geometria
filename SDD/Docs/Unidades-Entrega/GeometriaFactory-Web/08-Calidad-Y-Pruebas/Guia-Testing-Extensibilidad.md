@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) 1.0 §2 a §7; [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4, §6 y §7; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §16.1, §17.7.P.8 y §18
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) 1.0 §2 a §7; [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4, §6 y §7; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §16.1, §17.2.P.8 · GeometriaFactory-Visor y §18
 **Trazabilidad downstream:** `10-Examples`, que desarrolla el sample **S-1**; `11-Documentacion`, que cita esta guía sin redefinirla
 
 ---
@@ -49,7 +49,7 @@ La tabla de `05` `Extensibilidad.md` §3 declara qué es reemplazable. Esta guí
 | El **servicio de dibujo** entero, capa 3 | Sí | Lo mismo, más la disposición derivada del índice |
 | La **forma interna del identificador** de instancia | Sí, y **no es cambio de contrato** | Que las cinco funciones que lo exigen sigan resolviéndolo, y que un identificador liberado siga produciendo `INSTANCIA_DESCONOCIDA`. **Que el anfitrión dependa de su forma es un defecto del anfitrión**, y esta batería no lo cubre |
 | La **disposición** de las piezas | No libremente | Que siga derivándose del índice y que dos procesados produzcan la misma **posición** |
-| Las **seis** funciones y sus nombres | No | Que sigan siendo seis, con los nombres que el intake §17.7.P.3 fija |
+| Las **seis** funciones y sus nombres | No | Que sigan siendo seis, con los nombres que el intake §17.2.P.3 · GeometriaFactory-Visor fija |
 | Las **siete** garantías | No | Que ninguna se pierda: perder una es cambio mayor aunque las firmas no se toquen |
 | Los **siete** códigos de condición | No aguas abajo | Que sigan siendo siete y que ninguno se acuñe fuera de la categoría 02 |
 
@@ -92,7 +92,7 @@ La tabla de `05` `Extensibilidad.md` §3 declara qué es reemplazable. Esta guí
 | 2 · Comprobar que no cabe como flujo alternativo | Nada |
 | 3 · Especificar la función en la categoría 02 | Nada: los criterios de aceptación nacen allá |
 | 4 · Comprobar si acuña **garantía** o **código** nuevos | **Acá sí.** Si acuña código, la tabla de códigos de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6 suma una fila y `TC-12021` cambia su umbral. Si acuña garantía, la tabla §5 suma una fila. **Si no acuña ninguno de los dos, ninguna de las dos tablas cambia**, y eso hay que verificarlo en lugar de suponerlo |
-| 5 · Consolidarla en el intake §17.7.P.3 | Nada, salvo verificar que la consolidación ocurrió antes de declarar la función terminada (`Definition-Of-Done.md` §1.3) |
+| 5 · Consolidarla en el intake §17.2.P.3 · GeometriaFactory-Visor | Nada, salvo verificar que la consolidación ocurrió antes de declarar la función terminada (`Definition-Of-Done.md` §1.3) |
 | 6 · Declararla cambio menor y registrarla | **Acá sí.** Un `TC-XX` nuevo por la función, y la verificación de que **ningún anfitrión escrito contra la superficie anterior se rompe**, que es la definición de cambio menor |
 
 **El proceso ya se recorrió entero una vez**, con la sexta función `establecerMovimiento`: la categoría 02 la acuñó con caso de uso propio `CU-12007`, **no acuñó garantía ni código** —la condición que puede informar, `INSTANCIA_DESCONOCIDA`, ya existía y pasó a presentarse en **cinco** funciones—, y el intake la consolidó en su versión **1.6**. Del lado de esta categoría, el efecto es que **`TC-12013` y `TC-12014` existen y que `TC-12021` verifica que el conjunto sigue cerrado en siete**: la superficie pasó de cinco funciones a seis **sin romper a ningún anfitrión escrito contra las cinco anteriores**.

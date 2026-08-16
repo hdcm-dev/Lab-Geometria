@@ -19,7 +19,7 @@ Este proyecto de código declara su persistencia como «no aplica directamente»
 
 El caso testigo es `RN-04007`: la baja arrastra **todos** los trabajos de la cuenta, en cualquier estado, y exige la confirmación escrita del correo. Son tres efectos —comparar, retirar, cambiar la situación— que o pasan juntos o no pasa ninguno.
 
-Motivación upstream: NB-00001, NB-00003, NB-00007, NB-00009; RN-04004, RN-04007, RN-04011, RN-04012; INV-03; `PRODUCT-INTAKE` §17.2.P.4 y §17.2.P.10.
+Motivación upstream: NB-00001, NB-00003, NB-00007, NB-00009; RN-04004, RN-04007, RN-04011, RN-04012; INV-03; `PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Application y §17.1.P.10 · GeometriaFactory-Application.
 
 ## 2. Decisión
 
@@ -62,7 +62,7 @@ Y sobre la forma de la consulta: **las consultas de listado no materializan los 
 - La unidad se abre **después** de que la guarda de autorización autorizó y **antes** de la primera escritura: la comprobación se hace sobre el dato recuperado y antes de escribir.
 - El caso de uso de gobierno de cuentas es el testigo: comparación del correo escrito, retiro de todos los trabajos y cambio de situación, en la misma unidad.
 - El puerto de repositorio de trabajos ofrece **dos** formas de lectura distintas: la proyección de listado —sin texto original, sin componentes y sin comentario— y el detalle completo. No es una optimización: es la forma del contrato.
-- Convención impuesta al adaptador: la unidad de trabajo es **un contexto por operación**, según `PRODUCT-INTAKE` §17.2.P.4, que del lado de esta capa se expresa como un caso de uso, una transacción.
+- Convención impuesta al adaptador: la unidad de trabajo es **un contexto por operación**, según `PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Application, que del lado de esta capa se expresa como un caso de uso, una transacción.
 
 ## 8. Métricas de validación
 
@@ -77,7 +77,7 @@ Y sobre la forma de la consulta: **las consultas de listado no materializan los 
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.2.P.4, §17.2.P.10 y §4.1 (RN-04004, RN-04007, RN-04011, RN-04012).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.1.P.4 · GeometriaFactory-Application, §17.1.P.10 · GeometriaFactory-Application y §4.1 (RN-04004, RN-04007, RN-04011, RN-04012).
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, última precisión.
 - [`../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §7, donde el dominio deriva la atomicidad al puerto de repositorio que esta capa declara.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md`](../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), la decisión equivalente del otro lado de la frontera.

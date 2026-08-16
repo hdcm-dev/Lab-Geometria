@@ -1,6 +1,6 @@
 # PRODUCT-INTAKE — Fábrica de Geometría
 
-**Plantilla de referencia:** `PRODUCT-INTAKE-template.md` versión **3.0** (Framework SDD)
+**Plantilla de referencia:** `PRODUCT-INTAKE-template.md` versión 2.1 (Framework SDD)
 
 ## Cabecera del documento
 
@@ -14,8 +14,8 @@
 | Repositorio | `https://github.com/hdcm-dev/Lab-Geometria.git` |
 | Lead técnico | El mismo docente, asistido por agente IA (Requerimientos Técnicos §1: «1 docente + agente IA») |
 | Documento | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` |
-| Versión | 2.0 |
-| Fecha | 2026-08-16 |
+| Versión | 1.34 |
+| Fecha | 2026-08-13 |
 | Stack principal | .NET 10 — Blazor Interactive Server (front) + API REST con Clean Architecture (backend) + TypeScript/webpack (visor 3D) |
 | Estado | **Aprobado** |
 
@@ -63,17 +63,20 @@ Cuatro planos, más el nombre del repositorio, que no es ninguno de ellos y conv
   - [§11 Riesgos detectados desde el negocio](#11-riesgos-detectados-desde-el-negocio)
   - [§12 Glosario del dominio del cliente](#12-glosario-del-dominio-del-cliente)
 - [Parte B — Composición del producto](#parte-b--composición-del-producto)
-  - [§13 Composición del producto: los dos ejes](#13-composición-del-producto-los-dos-ejes)
-    - [§13.1 Unidades de entrega](#131-unidades-de-entrega)
-    - [§13.2 Proyectos de código](#132-proyectos-de-código)
-    - [§13.3 Matriz de composición](#133-matriz-de-composición)
+  - [§13 Proyectos de código del producto](#13-proyectos-de-código-del-producto)
+    - [§13.1 Idioma de los identificadores de código](#131-idioma-de-los-identificadores-de-código)
   - [§14 Estilo arquitectónico del producto](#14-estilo-arquitectónico-del-producto)
   - [§15 Esquema de descomposición y delivery](#15-esquema-de-descomposición-y-delivery)
   - [§16 Estructura de repositorio del producto](#16-estructura-de-repositorio-del-producto)
     - [§16.1 Materialización de `/samples`](#161-materialización-de-samples)
 - [Parte C — Técnica por proyecto de código](#parte-c--técnica-por-proyecto-de-código)
-  - [§17.1 GeometriaFactory-Api](#171-geometriafactory-api) — unidad de entrega principal
-  - [§17.2 GeometriaFactory-Web](#172-geometriafactory-web) — unidad de entrega
+  - [§17.1 GeometriaFactory-Domain](#171-geometriafactory-domain)
+  - [§17.2 GeometriaFactory-Application](#172-geometriafactory-application)
+  - [§17.3 GeometriaFactory-Infrastructure](#173-geometriafactory-infrastructure)
+  - [§17.4 GeometriaFactory-Contracts](#174-geometriafactory-contracts)
+  - [§17.5 GeometriaFactory-Api](#175-geometriafactory-api)
+  - [§17.6 GeometriaFactory-Web](#176-geometriafactory-web)
+  - [§17.7 GeometriaFactory-Visor](#177-geometriafactory-visor)
   - [§18 Estrategia de demo / samples](#18-estrategia-de-demo--samples)
 - [Parte D — Anexos de datos](#parte-d--anexos-de-datos)
   - [§20 Anexo A — Escenarios con ejemplos completos](#20-anexo-a--escenarios-con-ejemplos-completos)
@@ -88,7 +91,6 @@ Cuatro planos, más el nombre del repositorio, que no es ninguno de ellos y conv
   - [§21 Anexo B — Cobertura de campos y trazabilidad de los ejemplos](#21-anexo-b--cobertura-de-campos-y-trazabilidad-de-los-ejemplos)
 - [§19 Checklist de completitud del intake](#19-checklist-de-completitud-del-intake)
 - [§22 Supuestos declarados y puntos a confirmar](#22-supuestos-declarados-y-puntos-a-confirmar)
-  - [§23 Idioma de los identificadores de código](#23-idioma-de-los-identificadores-de-código)
 - [Trazabilidad downstream](#trazabilidad-downstream)
 - [Control de cambios](#control-de-cambios)
 
@@ -377,54 +379,33 @@ Estas son métricas de resultado de negocio. Las técnicas —latencia, disponib
 ---
 # Parte B — Composición del producto
 
-## §13 Composición del producto: los dos ejes
+## §13 Proyectos de código del producto
 
 La composición se lee directamente de RT §4.1 y §4.2, que declaran Clean Architecture en el backend, **dos procesos desplegables** porque van a servidores distintos, y el proyecto Node.js del visor.
 
-**Los dos ejes no son el mismo, y en este producto la diferencia se ve a simple vista.** El producto se **entrega** en dos piezas —una por servidor, porque la topología obliga— y se **construye** con siete proyectos de código. Las cuatro bibliotecas del backend no se despliegan: viajan adentro del host REST.
+| `Nombre-Proyecto-Codigo` | `tipo_proyecto_codigo` (D8) | Rol en el producto | Dependencias | `redistribuible` |
+|---|---|---|---|---|
+| **GeometriaFactory-Api** (principal) | `rest-api` | Host REST desplegado en el servidor propio: endpoints, autenticación JWT y aplicación de migraciones al arrancar | GeometriaFactory-Application, GeometriaFactory-Infrastructure, GeometriaFactory-Contracts | false |
+| **GeometriaFactory-Web** | `web-monolith` | Front Blazor Interactive Server con MudBlazor, desplegado en el hosting público. Es el único punto de contacto del navegador | GeometriaFactory-Contracts, GeometriaFactory-Visor | false |
+| **GeometriaFactory-Domain** | `library` | Entidades e invariantes del dominio (Alumno, Trabajo, Pieza, Componente, Observación). Sin dependencias | — | false |
+| **GeometriaFactory-Application** | `library` | Casos de uso y puertos (`IWorkRepository`, `IFigureValidator`, `ISystemClock`) | GeometriaFactory-Domain | false |
+| **GeometriaFactory-Infrastructure** | `library` | EF Core con SQLite, seguridad (derivación de clave y emisión de JWT) y validador de figuras | GeometriaFactory-Application, GeometriaFactory-Domain | false |
+| **GeometriaFactory-Contracts** | `library` | DTOs de la API. Referenciado por Api y por Web, y es lo que impide que el front conozca el dominio | — | false |
+| **GeometriaFactory-Visor** | `library` | Proyecto Node.js/TypeScript que produce el bundle del visor 3D. Es un **visualizador puro**: sin configuración, sin red y sin conocimiento del sistema (RA-02) | — | false |
 
-### §13.1 Unidades de entrega
+**Proyecto de código principal:** `GeometriaFactory-Api`. Es el que sostiene el dato, las reglas de negocio y la única base de datos del producto (RT §10: «el front no tiene base de datos»).
 
-| `Nombre-Unidad-Entrega` | `tipo_unidad_entrega` (D8) | Rol en el producto | Integra con (runtime) | `redistribuible` | Estado |
-|---|---|---|---|---|---|
-| **GeometriaFactory-Api** (principal) | `rest-api` | Host REST desplegado en el servidor propio: endpoints, autenticación JWT y aplicación de migraciones al arrancar. Sostiene el dato, las reglas de negocio y la única base de datos del producto (RT §10) | — | false | vigente |
-| **GeometriaFactory-Web** | `web-monolith` | Front Blazor Interactive Server con MudBlazor, desplegado en el hosting público. Es el único punto de contacto del navegador | `GeometriaFactory-Api`, por **HTTP con `Bearer` JWT, servidor a servidor** (RT §4.1) | false | vigente |
-
-**Unidad de entrega principal:** `GeometriaFactory-Api`.
-
-**Las dos son `vigente`** [DECISIÓN 2026-08-16, batería M2 B-1]: ninguna fuente declara una entrega planificada para otra etapa, §15 y §16 describen las dos en construcción, y `SDD/Docs/` tiene las once categorías emitidas para las dos.
-
-**Ninguna se publica como paquete redistribuible.** No hay nada en las fuentes que declare publicación en un feed: los dos artefactos entregables son una imagen Docker y una publicación subida por FTP (RT §4.1).
-
-**La arista `Web → Api` es de runtime y no de compilación.** El front habla con la API por HTTP con `HttpClient` y tipos de `Contracts` (RT §4.1). Por eso vive en esta tabla y no en las dependencias de §13.2, y por eso no introduce ciclo: son dos grafos distintos.
-
-### §13.2 Proyectos de código
-
-| `Nombre-Proyecto-Codigo` | Solución de código | Stack | Rol en la arquitectura | Dependencias de compilación | Compone |
-|---|---|---|---|---|---|
-| **GeometriaFactory-Api** | `GeometriaFactory.sln` | ASP.NET Core sobre .NET 10 | Host REST: endpoints, autenticación y composición de raíz | GeometriaFactory-Application, GeometriaFactory-Infrastructure, GeometriaFactory-Contracts | GeometriaFactory-Api |
-| **GeometriaFactory-Web** | `GeometriaFactory.sln` | Blazor Interactive Server sobre .NET 10, con MudBlazor | Front: páginas y componentes. Es hoja del grafo y punto de entrada del usuario final | GeometriaFactory-Contracts, GeometriaFactory-Visor | GeometriaFactory-Web |
-| **GeometriaFactory-Domain** | `GeometriaFactory.sln` | C# sobre .NET 10, biblioteca de clases | Entidades e invariantes del dominio (Alumno, Trabajo, Pieza, Componente, Observación). Es el centro de la regla de dependencias | — | GeometriaFactory-Api |
-| **GeometriaFactory-Application** | `GeometriaFactory.sln` | C# sobre .NET 10, biblioteca de clases | Casos de uso y puertos (`IWorkRepository`, `IFigureValidator`, `ISystemClock`) | GeometriaFactory-Domain | GeometriaFactory-Api |
-| **GeometriaFactory-Infrastructure** | `GeometriaFactory.sln` | C# sobre .NET 10, con EF Core y proveedor SQLite | EF Core con SQLite, seguridad (derivación de clave y emisión de JWT) y validador de figuras | GeometriaFactory-Application, GeometriaFactory-Domain | GeometriaFactory-Api |
-| **GeometriaFactory-Contracts** | `GeometriaFactory.sln` | C# sobre .NET 10, biblioteca de tipos de datos | DTOs de la API. Es lo que impide que el front conozca el dominio | — | GeometriaFactory-Api, GeometriaFactory-Web |
-| **GeometriaFactory-Visor** | **Ninguna.** Proyecto Node.js independiente, en `visor/` | Node.js con TypeScript y webpack | Produce el bundle del visor 3D. Es un **visualizador puro**: sin configuración, sin red y sin conocimiento del sistema (RA-02) | — | GeometriaFactory-Web |
-
-**Los proyectos de código no llevan valor D8**, y esta emisión los deja sin él: el tipo describe una forma de entrega, y un proyecto de código no se entrega, se compila. Los cinco que la emisión 1.34 declaraba `library` no perdieron nada de su rol: lo que perdieron es un atributo que el modelo de dos ejes le asigna a la unidad que los contiene.
-
-**El visor no pertenece a ninguna solución de código**, y es la misma excepción que §16 declara: es un paquete Node.js con TypeScript y webpack (RT §3, §8.2), fuera de `GeometriaFactory.sln` para que la solución .NET y el proyecto Node no se estorben.
-
-**Grafo de dependencias de compilación (acíclico).** La regla de Clean Architecture es que las dependencias apuntan siempre hacia adentro, `Api → Infrastructure → Application → Domain`, y `Domain` sin dependencias (RT §4.1):
+**Grafo de dependencias (acíclico).** La regla de Clean Architecture es que las dependencias apuntan siempre hacia adentro, `Api → Infrastructure → Application → Domain`, y `Domain` sin dependencias (RT §4.1):
 
 ```mermaid
 flowchart TB
-    WEB["GeometriaFactory-Web"]
-    API["GeometriaFactory-Api"]
-    INFRA["GeometriaFactory-Infrastructure"]
-    APP["GeometriaFactory-Application"]
-    DOM["GeometriaFactory-Domain"]
-    CON["GeometriaFactory-Contracts"]
-    VIS["GeometriaFactory-Visor<br/>Node.js"]
+    WEB["GeometriaFactory-Web<br/>web-monolith"]
+    API["GeometriaFactory-Api<br/>rest-api (principal)"]
+    INFRA["GeometriaFactory-Infrastructure<br/>library"]
+    APP["GeometriaFactory-Application<br/>library"]
+    DOM["GeometriaFactory-Domain<br/>library"]
+    CON["GeometriaFactory-Contracts<br/>library"]
+    VIS["GeometriaFactory-Visor<br/>library (Node)"]
     WEB --> CON
     WEB --> VIS
     API --> APP
@@ -433,29 +414,21 @@ flowchart TB
     INFRA --> APP
     APP --> DOM
     INFRA --> DOM
+    WEB -.->|"HTTP en runtime,<br/>no es dependencia de compilación"| API
 ```
 
-**Orden topológico de compilación:**
+La arista `Web → Api` es de **runtime**, no de compilación: el front habla con la API por HTTP con `HttpClient` y tipos de `Contracts` (RT §4.1). Por eso no aparece en la columna de dependencias y no introduce ciclo.
+
+**Orden topológico:**
 
 - nivel 0: GeometriaFactory-Domain, GeometriaFactory-Contracts, GeometriaFactory-Visor
 - nivel 1: GeometriaFactory-Application, GeometriaFactory-Web
 - nivel 2: GeometriaFactory-Infrastructure
 - nivel 3: GeometriaFactory-Api
 
-**El grafo de compilación no lleva la arista `Web → Api`**, que es de runtime y vive en §13.1. Es la distinción que §14 desarrolla.
+**Ningún proyecto de código se publica como paquete redistribuible.** No hay nada en las fuentes que declare publicación en un feed: los dos artefactos entregables son una imagen Docker y una publicación subida por FTP (RT §4.1).
 
-### §13.3 Matriz de composición
-
-Derivada de la columna «Compone» de §13.2. Se publica para revisión:
-
-| | Api (proyecto) | Web (proyecto) | Domain | Application | Infrastructure | Contracts | Visor |
-|---|---|---|---|---|---|---|---|
-| **GeometriaFactory-Api** | X | | X | X | X | X | |
-| **GeometriaFactory-Web** | | X | | | | X | X |
-
-**`GeometriaFactory-Contracts` es el único proyecto compartido**, y es lo primero que hay que mirar antes de cambiarlo: **su modificación alcanza a las dos entregas**. Es coherente con lo que ya era: «el contrato compartido entre los dos procesos desplegables y el único tipo que cruza la frontera HTTP».
-
-Perfil de convención de nombres de código:
+### Perfil de convención de nombres de código
 
 | Parámetro | Valor | Notas |
 |---|---|---|
@@ -476,14 +449,28 @@ Identidades de código resultantes, que coinciden con los directorios de §16:
 | GeometriaFactory-Web | `GeometriaFactory.Web` | `src/GeometriaFactory.Web/` |
 | GeometriaFactory-Visor | `geometriafactory-visor` | `visor/` |
 
-**Excepción declarada para GeometriaFactory-Visor.** Es el único proyecto de código que no pertenece al ecosistema .NET: es un paquete Node.js con TypeScript y webpack (RT §3, §8.2). Dos consecuencias:
+**Excepción declarada para GeometriaFactory-Visor.** Es el único proyecto de código que no pertenece al ecosistema .NET: es un paquete Node.js con TypeScript y webpack (RT §3, §8.2). Dos consecuencias, ambas tomadas de la fuente y no de una preferencia:
 
-1. Su identidad de código no sigue `<Raiz-Codigo>.<Sufijo>` sino la convención de `package.json`, que es minúscula con guiones. Aplicar `GeometriaFactory.Visor` produciría un nombre de paquete npm fuera de convención.
-2. Su carpeta es `visor/` en la raíz del repositorio, no `src/geometriafactory-visor/`, porque así lo fija el árbol de RT §4.2. No entra en `/src` para que la solución .NET y el proyecto Node no se estorben.
+1. Su identidad de código no sigue `<Raiz-Codigo>.<Sufijo>` sino la convención de `package.json`, que es minúscula con guiones. Aplicar `GeometriaFactory.Visor` produciría un nombre de paquete npm inválido.
+2. Su carpeta es `visor/` en la raíz del repositorio, no `src/geometriafactory-visor/`, porque así lo fija el árbol de RT §4.2. No entra en `/src` para que la solución .NET y el proyecto Node no compartan raíz de herramientas.
 
 Su salida, `visor.bundle.js`, se copia a `src/GeometriaFactory.Web/wwwroot/js/` y **no se edita a mano**: es un artefacto generado (RT §5.2 R6).
 
----
+### §13.1 Idioma de los identificadores de código
+
+**Tres decisiones del Product Owner del 2026-08-12**, que cierran las zonas de frontera que `SDD/Docs/Producto/Norma-De-Nomenclatura.md` 1.0 había elevado. La norma es la fuente: **este intake las registra, no las redeclara**. ~~Y **no renombra todavía ningún identificador**.~~ **Superado el 2026-08-13 por la norma §8, tramo `R-2`:** el renombre es una tanda posterior que se ejecuta contra el glosario de la norma, en el orden de su §8, y **su tercer tramo ya corrió sobre este documento**: los tres puertos de la norma §6.3 y los dos miembros de su §6.5 están en inglés desde la versión 1.31. Los demás tramos —`R-2b`, `R-3`, `R-4` y `R-5`— siguen pendientes, y hasta que corran este documento conserva los nombres castellanos de sus poblaciones.
+
+| Decisión | Qué se decidió | Alcance | Consecuencia para este documento |
+|---|---|---|---|
+| **`F-01`** | Las **seis funciones de la fachada del visor** llevan nombre inglés | 52 documentos, 593 ocurrencias | **§17.7 P.3 deja de tener un punto abierto.** Esa sección declaraba los nombres «a fijar en la etapa que la implementa», y quedan fijados por la norma §6.6. La tabla de §17.7 P.3 conserva sus nombres castellanos hasta la tanda de renombre |
+| **`F-02`** | Los **valores de los cuatro conjuntos cerrados** llevan identificador inglés y **etiqueta castellana** | 396 documentos, 4259 ocurrencias | Alcanza al valor **persistido y serializado** de §17.3 P.4 y §17.4 P.3, que se guarda y viaja **por su nombre**. Deshace la colisión de `Pendiente`, que hoy nombra un estado de cuenta y un estado de trabajo (§4.2, §12) |
+| **`F-03`** | **Todos** los códigos de condición llevan nombre inglés: los **80 internos** y los **21 de contrato**, sin el prefijo `CONTRATO_` | 334 documentos, 2911 ocurrencias | **Es un cambio de contrato y así se declara**: los códigos del contrato viajan dentro de las respuestas y `GeometriaFactory-Web` los cita. Alcanza al conjunto cerrado de §17.4 P.3 |
+
+**Los tres fundamentos, que son la razón por la que se decide hoy y no después.** `F-01`: los nombres de la fachada **nunca estuvieron fijados** —§17.7 P.3 los declara «a fijar en la etapa que la implementa»—, el visor no existe como código y su único consumidor está en la misma solución. `F-02`: el identificador es el dato persistido, y **no hay ninguna base poblada** porque `GeometriaFactory-Infrastructure` no está construido, de modo que el costo de esquema es cero hoy y deja de serlo con la primera fila. `F-03`: **el producto no emitió una sola respuesta todavía** y los dos consumidores del contrato —`GeometriaFactory-Api` y `GeometriaFactory-Web`— se compilan contra el mismo ensamblado y se despliegan juntos (`RT-06`), de modo que no hay ningún consumidor externo al que el cambio le llegue sin aviso.
+
+**Lo que este intake no hace.** No transcribe el glosario: son **155 identificadores en seis clases** y su fuente única es la norma §6.2 a §6.8. ~~**Ningún identificador de este documento cambia en la versión 1.30.**~~ **Cierto para la 1.30 y superado por la 1.31 el 2026-08-13** (norma §8, tramo `R-2`): la 1.31 renombra **cinco** identificadores de este documento —los tres puertos de la norma §6.3 y los dos miembros de su §6.5—, contra el glosario y no por criterio propio. Ningún otro cambia. La regla operativa que rige a partir de acá es la de la norma §6.1: **si un concepto no está en el glosario, no se traduce por criterio propio — se agrega primero**.
+
+**Lo que no alcanza.** El nombre del producto, `Raiz-Codigo`, las siete `Identidad-Codigo` de arriba y la excepción de `GeometriaFactory-Visor` **no se reabren**: ya son ingleses en su raíz y no son punto abierto. Tampoco alcanza al **dato del alumno** —las claves y los valores del JSON que emite el programa de la Actividad 1—, que §17.1 P.10 declara ajeno a este producto y que se acepta tal como llega.
 
 ## §14 Estilo arquitectónico del producto
 
@@ -507,46 +494,17 @@ flowchart LR
     NAV -.->|"nunca"| API
 ```
 
-**Dos clases de contrato, y confundirlas es el error frecuente.** La emisión 1.34 las enumeraba
-juntas en una sola tabla de «qué expone cada proyecto de código». Son distintas y viven en ejes
-distintos:
-
-| Clase de contrato | Entre qué | Qué es | En este producto |
-|---|---|---|---|
-| **De integración** | Entre unidades de entrega | Lo que dos piezas desplegadas se prometen **en runtime** | Uno solo: el que `GeometriaFactory-Api` le expone a `GeometriaFactory-Web` |
-| **De compilación** | Entre proyectos de código | Lo que un proyecto expone a los que lo referencian **al construir** | Siete, uno por proyecto de código |
-
-**Un contrato de integración no aparece en las dependencias de compilación de §13.2 y no introduce
-ciclo en ellas.** Es exactamente el caso de la arista `Web → Api`.
-
-#### Contratos de integración, entre unidades de entrega
-
-| Unidad de entrega | Contrato que expone | A quién, y con qué protocolo |
-|---|---|---|
-| **GeometriaFactory-Api** | Endpoints REST con `Bearer` JWT, sobre los DTOs de `GeometriaFactory-Contracts` | A `GeometriaFactory-Web`, por **HTTP servidor a servidor**. **Ningún guion del navegador lo alcanza** (RA-01) |
-| **GeometriaFactory-Web** | Ninguno. No expone contrato a otra unidad de entrega: es el punto de entrada del usuario final | — |
-
-**El contrato de integración del producto es uno solo, y su forma la fija un proyecto de código
-compartido.** `GeometriaFactory-Contracts` se compila dentro de las dos entregas, de modo que un
-cambio incompatible **rompe la compilación antes de romper el runtime**, y la regla operativa es que
-las dos se despliegan juntas ante un cambio de contrato (RT-06).
-
-#### Contratos de compilación, entre proyectos de código
+**Qué expone cada proyecto de código a sus dependientes:**
 
 | Proyecto de código | Contrato que expone | A quién |
 |---|---|---|
-| GeometriaFactory-Domain | Entidades, invariantes **INV-01 a INV-09** —los nueve que §17.1.P.2 · GeometriaFactory-Domain declara— y transiciones de estado. Sin dependencias hacia afuera | Application, Infrastructure |
+| GeometriaFactory-Domain | Entidades, invariantes **INV-01 a INV-09** —los nueve que §17.1.P.2 declara— y transiciones de estado. Sin dependencias hacia afuera | Application, Infrastructure |
 | GeometriaFactory-Application | Casos de uso y **puertos** (`IWorkRepository`, `IFigureValidator`, `ISystemClock`). Es quien define el contrato que Infrastructure implementa: la dependencia se invierte | Api, Infrastructure |
 | GeometriaFactory-Infrastructure | Implementaciones de los puertos: EF Core sobre SQLite, hash de contraseña, emisión de JWT y validador de figuras. No la referencia nadie más que la composición de raíz de Api | Api |
-| GeometriaFactory-Contracts | **DTOs de la API.** Es el proyecto de código **compartido**, y el único tipo que cruza la frontera HTTP | Api, Web |
-| GeometriaFactory-Api | Ninguno hacia otro proyecto de código: es raíz del grafo de compilación. Lo que expone es su contrato de **integración** | — |
-| GeometriaFactory-Web | Ninguno: es hoja del grafo | — |
-| GeometriaFactory-Visor | **Fachada plana `main.ts`**: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento` — **seis**, las que §17.1.P.3 · GeometriaFactory-Application declara. Es todo lo que Blazor puede invocar del bundle | Web, por interoperabilidad JS |
-
-**Dónde quedó cada fila de la tabla anterior.** Las siete de la emisión 1.34 están las siete: cinco
-conservan su enunciado, y las dos que describían contratos de **runtime** —lo que `Api` le expone a
-`Web`— subieron a la tabla de integración, que es su eje.
-
+| GeometriaFactory-Contracts | **DTOs de la API.** Es el contrato compartido entre los dos procesos desplegables y el único tipo que cruza la frontera HTTP | Api, Web |
+| GeometriaFactory-Api | Endpoints REST con `Bearer` JWT, sobre los DTOs de Contracts | Web, por HTTP |
+| GeometriaFactory-Web | Páginas y componentes. No expone contrato a nadie: es hoja del grafo y punto de entrada del usuario final | — |
+| GeometriaFactory-Visor | **Fachada plana `main.ts`**: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento` — **seis**, las que §17.7 P.3 declara desde 1.6. Es todo lo que Blazor puede invocar del bundle | Web, por interoperabilidad JS |
 
 **Por qué esta descomposición y no otra.**
 
@@ -563,8 +521,6 @@ Las cuatro bibliotecas del backend no son una partición arbitraria: son las cap
 | **RA-01** | Ningún JavaScript del navegador invoca la API | Es lo que sostiene las tres propiedades de la topología: sin contenido mixto, sin CORS y sin exposición de la IP del servidor propio (RT §2.2). Romperla en un solo proyecto de código las reabre las tres |
 | **RA-02** | El bundle del visor es un **visualizador puro**: sin configuración, sin red, sin conocimiento del sistema | Es lo que hace imposible violar RA-01 desde el navegador (RT §8.3) |
 | **RA-03** | Todo lo que el navegador deba obtener del backend pasa por el front | Descargas, imágenes y redirecciones se sirven desde el dominio del front; los mensajes de error nunca incluyen direcciones de servicios internos (RT §2.5) |
-
----
 
 ## §15 Esquema de descomposición y delivery
 
@@ -681,64 +637,20 @@ Siete bloques, uno por cada proyecto de código de §13, en orden topológico. C
 
 ---
 
-## §17.1 GeometriaFactory-Api
+## §17.1 GeometriaFactory-Domain
 
 | Campo | Valor |
 |---|---|
-| `Nombre-Unidad-Entrega` | GeometriaFactory-Api |
-| `tipo_unidad_entrega` (D8) | `rest-api` |
-| Rol en el producto | Host REST desplegado en el servidor propio: endpoints, autenticación JWT y aplicación de migraciones al arrancar |
+| `Nombre-Proyecto-Codigo` | GeometriaFactory-Domain |
+| `Identidad-Codigo` | `GeometriaFactory.Domain` |
+| `tipo_proyecto_codigo` (D8) | `library` |
+| Rol | Entidades e invariantes del dominio. Es el centro de la regla de dependencias |
 | `redistribuible` | false |
-| Proyectos de código que la componen | `GeometriaFactory-Api`, `GeometriaFactory-Contracts`, `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure` |
-
-Se compone de **5** proyectos de código: `GeometriaFactory-Api`, `GeometriaFactory-Contracts`, `GeometriaFactory-Domain`, `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`. **`GeometriaFactory-Contracts` es compartido**: sus entradas aparecen también en el bloque de la otra unidad de entrega, y la matriz de §13.3 lo hace visible.
-
-**Cada subsección P.N enumera las entradas de sus proyectos de código, nombrando el proyecto de cada una.** Los textos son los de la emisión 1.34, transpuestos sin reescritura: lo que cambia es el orden —de proyecto de código a subsección— y no el contenido. La correspondencia con la numeración anterior está en `SDD/Docs/Audit/Migracion-M2-Registro-Citas-17.json`.
-
-**Identidad de los proyectos de código que la componen.** `tipo_unidad_entrega` y `redistribuible` **no figuran acá**: son atributos de la unidad de entrega, según §13.1 y §13.2.
-
-| Proyecto de código | `Identidad-Codigo` | Rol |
-|---|---|---|
-| **GeometriaFactory-Api** | `GeometriaFactory.Api` | Host REST desplegado en el servidor propio. **Proyecto de código principal** |
-| **GeometriaFactory-Contracts** | `GeometriaFactory.Contracts` | DTOs de la API, compartidos por los dos procesos desplegables |
-| **GeometriaFactory-Domain** | `GeometriaFactory.Domain` | Entidades e invariantes del dominio. Es el centro de la regla de dependencias |
-| **GeometriaFactory-Application** | `GeometriaFactory.Application` | Casos de uso y puertos. Define el contrato que Infrastructure implementa |
-| **GeometriaFactory-Infrastructure** | `GeometriaFactory.Infrastructure` | EF Core con SQLite, seguridad y validador de figuras |
 
 ### §17.1.P.1 Stack tecnológico
-
-#### §17.1.P.1 · GeometriaFactory-Api
-
-ASP.NET Core sobre **.NET 10**. Dependencias core: `GeometriaFactory.Application`, `GeometriaFactory.Infrastructure` y `GeometriaFactory.Contracts`; autenticación **JWT Bearer**. Se ejecuta como contenedor Docker sobre Linux (RT §13). En desarrollo escucha por **HTTP sin certificado**, para evitar la fricción del certificado de confianza dentro del contenedor (RT §5.3).
-
-#### §17.1.P.1 · GeometriaFactory-Contracts
-
-C# sobre **.NET 10**, biblioteca de tipos de datos. **Sin dependencias**: no referencia el dominio. Es lo que impide que el front conozca las entidades.
-
-#### §17.1.P.1 · GeometriaFactory-Domain
-
 C# sobre **.NET 10**, biblioteca de clases. **Sin dependencias core**: es la condición que RT §4.1 declara para esta capa («`Domain` sin dependencias»). No referencia EF Core, ni el framework web, ni bibliotecas de serialización.
 
-#### §17.1.P.1 · GeometriaFactory-Application
-
-C# sobre **.NET 10**. Dependencia core única: `GeometriaFactory.Domain`. No referencia EF Core ni el framework web: los puertos `IWorkRepository`, `IFigureValidator` e `ISystemClock` (RT §4.1) son la frontera.
-
-#### §17.1.P.1 · GeometriaFactory-Infrastructure
-
-C# sobre **.NET 10**. Dependencias core: **Entity Framework Core con proveedor SQLite** (RT §3), la biblioteca de derivación de clave (PBKDF2 o Argon2, RT §9.2) y la de emisión de JWT. `dotnet-ef` se instala como **herramienta local del repositorio**, para que su versión quede versionada junto al código (RT §5.3). Versiones exactas ancladas en la etapa `a` y registradas en RT §3 (regla de anclaje).
-
-### §17.1.P.2 Estilo arquitectónico
-
-#### §17.1.P.2 · GeometriaFactory-Api
-
-Host delgado: endpoints REST que traducen petición a caso de uso y resultado a DTO, más la composición de raíz que conecta puertos con adaptadores. Alternativas descartadas: (1) **API con lógica en los controladores** —descartado porque haría inseparable la verificación de pertenencia de la capa HTTP y volvería obligatoria una prueba de integración para cada regla—; (2) **backend-for-frontend que devuelva vistas ya armadas** —descartado porque el front es Interactive Server y arma sus vistas en el servidor del hosting; un BFF agregaría un salto sin quitar ninguno—.
-
-#### §17.1.P.2 · GeometriaFactory-Contracts
-
-Tipos de transferencia planos, sin comportamiento. Alternativas descartadas: (1) **compartir las entidades de dominio entre Api y Web** —descartado porque acoplaría el front a cambios internos del dominio y filtraría al navegador campos que no le corresponden, como `PasswordHash`—; (2) **generar el cliente desde OpenAPI** —descartado por costo de cadena de herramientas frente a un contrato que consumen dos proyectos de código de la misma solución—.
-
-#### §17.1.P.2 · GeometriaFactory-Domain
-
+### §17.1.P.2 Estilo arquitectónico del proyecto de código
 Modelo de dominio con entidades e invariantes explícitas, centro de una arquitectura hexagonal/Clean (RT §4.1). Alternativas descartadas: (1) **modelo anémico con la lógica en los servicios de aplicación** —descartado porque las invariantes INV-01 a INV-09 y las transiciones de estado son precisamente lo que hay que poder probar sin infraestructura—; (2) **entidades de EF Core como modelo de dominio** —descartado porque ataría el dominio al proveedor de persistencia y violaría la regla de dependencias hacia adentro—.
 
 **Invariantes del dominio, transcriptos completos de RT §7.3.** La versión anterior de este intake nombraba el rango «INV-01 a INV-06» sin enunciar ninguno, y atribuía a INV-04 un contenido que no le corresponde. Un invariante es una afirmación que tiene que ser verdadera **siempre**, sin importar la operación ni quién la ejecute; es lo que el dominio hace cumplir aunque la petición llegue por fuera de la interfaz.
@@ -757,76 +669,116 @@ Modelo de dominio con entidades e invariantes explícitas, centro de una arquite
 
 **Nueve invariantes desde el 2026-08-09.** Los invariantes no son reglas distintas de las de §4.1: son las mismas vistas desde el dominio. La regla declara qué decidió el negocio; el invariante declara qué condición sobre los datos no puede romperse nunca. **Dieciséis reglas desde el 2026-08-09: diez con invariante asociado y seis sin él.** Las seis que no lo tienen —RN-07 baja física, RN-08 texto íntegro, RN-09 error con ubicación, **RN-11** alcance de la consulta del administrador, **RN-14** producción de la provisoria y **RN-15** independencia del estado— no lo tienen porque describen comportamientos, o alcances de consulta, y no condiciones permanentes sobre el estado. **RN-12, RN-13 y RN-16 sí lo tienen, y es INV-09**, que es lo que la columna de ese invariante declara. [CORREGIDO el 2026-08-09: esta lista nombraba a **RN-12** en el lugar de RN-11, con lo cual la prosa contradecía a su propia tabla y a `GeometriaFactory-Domain`, que cuenta nueve reglas con invariante y seis sin él.]
 
-#### §17.1.P.2 · GeometriaFactory-Application
-
-Casos de uso con **inversión de dependencias**: la capa de aplicación declara los puertos y la infraestructura los implementa. Alternativas descartadas: (1) **servicios que usan directamente el `DbContext`** —descartado porque haría imposible probar la autorización por pertenencia sin base de datos, que es justo lo que RT §11 exige probar—; (2) **mediador con handlers y pipeline de comportamientos** —descartado por sobre-ingeniería para el alcance declarado como básica (RT §1)—.
-
-#### §17.1.P.2 · GeometriaFactory-Infrastructure
-
-Adaptadores que implementan los puertos de Application. Alternativas descartadas: (1) **repositorio genérico sobre `DbSet<T>`** —descartado porque diluye las consultas que sí importan, como el listado del administrador agrupado por alumno—; (2) **acceso directo con SQL escrito a mano** —descartado porque las migraciones automáticas al arrancar (RT §10) son una decisión tomada y EF Core las provee—.
-
 ### §17.1.P.3 Comunicación e integración
-
-#### §17.1.P.3 · GeometriaFactory-Api
-
-| Aspecto | Definición |
-|---|---|
-| Protocolo | HTTP/HTTPS, petición-respuesta, **sin estado**. `Authorization: Bearer <token>` |
-| Formato | JSON, con los DTOs de `GeometriaFactory.Contracts` |
-| Quién la consume | **Únicamente `GeometriaFactory.Web`, servidor a servidor.** El navegador nunca la alcanza (RA-01) |
-| WebSockets | **No expone ni requiere WebSockets**: el circuito de Blazor termina en el front y no llega al backend (RT §2.3). Es criterio de aceptación de la etapa `a` |
-| CORS | No hace falta: la API no recibe peticiones del navegador (RT §2.2) |
-| Endpoint de autenticación | `POST /auth/token` con correo y contraseña |
-| Salud | Endpoint de salud, consumido por la página de salud del front y por el `healthcheck` del `compose.yaml` |
-| Versionado del contrato | El del ensamblado de contratos (§17.1.P.3 · GeometriaFactory-Contracts). Sin clientes de terceros, no hay versionado de rutas |
-
-#### §17.1.P.3 · GeometriaFactory-Contracts
-
-Es **el** contrato de comunicación del producto: define el payload JSON que viaja entre `GeometriaFactory.Web` y `GeometriaFactory.Api` por HTTP con `Bearer` (RT §4.1, §9.1). Política de cambios incompatibles: como los dos extremos se compilan contra el mismo ensamblado, un cambio incompatible **rompe la compilación** antes de romper el runtime. La regla operativa es que Api y Web se despliegan juntos ante un cambio de contrato; no hay versionado de endpoints en este alcance porque no hay clientes de terceros.
-
-**Dos códigos entran al conjunto cerrado: diecisiete vivos sobre veinte identificadores emitidos** [DECISIÓN 2026-08-12]. El conjunto cerrado de códigos de error del contrato lo **emite formalmente `GeometriaFactory-Contracts`**, que es su fuente y el único lugar donde los identificadores están enumerados juntos; este intake no lo transcribe entero y declara acá los que entran **por decisión**, con el recuento que resulta. Hasta hoy el conjunto tenía **quince códigos vivos** sobre **dieciocho** identificadores emitidos —quince vivos más **tres retirados**, que no se reciclan—. Con estos dos pasa a **diecisiete vivos sobre veinte emitidos**, y los tres retirados siguen retirados. Los dos identificadores son **derivación de este intake**: se proponen acá siguiendo la convención `CONTRATO_<CONDICIÓN>` de los quince vivos, y `GeometriaFactory-Contracts` los emite formalmente al incorporarlos.
-
-| Código nuevo | Condición que representa | Por qué no alcanzaba lo que había |
-|---|---|---|
-| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | **El papel no alcanza para la operación pedida, fuera del desenlace de un trabajo**: gobernar las cuentas de la comisión (F-03), resetear la contraseña de un alumno (F-26) y ver el listado de trabajos de la comisión (F-12) | El único código de facultad del conjunto, `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`, está **acotado por su enunciado** a aprobar o rechazar un trabajo (F-23, RN-10), y la capa de aplicación emite ese mismo rechazo en las otras tres. Sin código propio, las tres caen en el genérico `CONTRATO_ERROR_NO_CLASIFICADO` y **el front no puede distinguir «no tenés permiso» de «algo salió mal»**, que son dos mensajes distintos para el alumno |
-| `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | **Se pidió enviar o reeditar un trabajo que no está en `Borrador`.** Un trabajo en `Pendiente`, `Finalizado` o `Rechazado` es de **sólo lectura** para el alumno (F-07, RN-04, INV-07) | El código análogo existente, `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, está **acotado a la eliminación** y al camino del alumno, y no cubre las otras dos escrituras que el mismo estado prohíbe. Sin él, forzar un envío o una reedición contra la API sobre un trabajo ya entregado no tiene código propio |
-
-Los dos son códigos de **rechazo sin escritura**: la operación no ocurre y el estado no cambia. Ninguno reemplaza a los quince vigentes ni recicla a los tres retirados, y ninguno modifica los cuatro campos del tipo de error ni la regla de exposición de P.5.
-
-**Los códigos del contrato pasan a inglés, y es un cambio de contrato** [DECISIÓN del Product Owner 2026-08-12, `F-03`, §13.1]. Alcanza a **los 21 identificadores `CONTRATO_*`** —17 vivos, la señal de listado vacío y los 3 retirados— y **elimina el prefijo `CONTRATO_`**: la identidad del código la da el conjunto cerrado que lo declara, no un prefijo dentro del nombre. Se declara **como cambio de contrato y no como renombre**, porque estos códigos viajan dentro de las respuestas y `GeometriaFactory-Web` los cita para decidir qué muestra; en consecuencia rige `RT-06` —los dos extremos se cambian y se despliegan juntos—. **El conjunto no cambia de tamaño, ni entra ni sale ningún código, y ninguna condición cambia de significado**: cambia el idioma del identificador. La correspondencia uno a uno está en `Norma-De-Nomenclatura.md` §6.8.6 y **este documento no la transcribe**. La ejecución es el tramo `R-5` de la norma §8, y **esta versión no renombra nada**.
-
-#### §17.1.P.3 · GeometriaFactory-Domain
-
 **No aplica.** No expone protocolos ni contratos externos: sus tipos los consumen Application e Infrastructure por referencia de proyecto. No cruza ninguna frontera de proceso.
 
-#### §17.1.P.3 · GeometriaFactory-Application
-
-**No aplica** hacia afuera del proceso. Hacia adentro expone sus casos de uso a `GeometriaFactory.Api` y sus puertos a `GeometriaFactory.Infrastructure`. El versionado de esos contratos es el del ensamblado: son referencias de proyecto dentro de la misma solución, y un cambio incompatible rompe la compilación, que es la señal más temprana posible.
-
-#### §17.1.P.3 · GeometriaFactory-Infrastructure
-
-**No aplica**: no expone endpoints. Consume el sistema de archivos donde vive el archivo SQLite y nada más. En particular, **el validador de figuras no hace red**: recibe texto y devuelve observaciones.
-
 ### §17.1.P.4 Persistencia
-
-#### §17.1.P.4 · GeometriaFactory-Api
-
-Delega en `GeometriaFactory.Infrastructure` (§17.1.P.4 · GeometriaFactory-Infrastructure). Responsabilidad propia y declarada: **aplicar las migraciones al arrancar** (RT §4.2, §10) y tomar de configuración la ruta del archivo SQLite, que en producción apunta a un volumen persistente.
-
-#### §17.1.P.4 · GeometriaFactory-Contracts
-
-**No aplica.**
-
-#### §17.1.P.4 · GeometriaFactory-Domain
-
 **No aplica.** El dominio no conoce el motor de persistencia. El modelo de datos que lo refleja (RT §7.1) lo materializa Infrastructure.
 
-#### §17.1.P.4 · GeometriaFactory-Application
+### §17.1.P.5 Seguridad y autenticación
+No implementa autenticación. Sí modela las reglas que la condicionan: el estado de la cuenta (`Pendiente` / `Habilitado` / `Bloqueado`) y el invariante **INV-06**, que un alumno `Pendiente` o `Bloqueado` no obtiene token. No maneja secretos: la contraseña llega ya derivada y se guarda como `PasswordHash`, nulo hasta el primer ingreso (RT §7.1).
 
+### §17.1.P.6 Estrategia de testing
+Cubierto por `tests/GeometriaFactory.Domain.Tests`, con pruebas unitarias puras y sin dobles: los invariantes §7.3 y las transiciones de estado de trabajo y de cuenta (RT §11).
+**Cobertura mínima: 90 % de líneas y 85 % de ramas** [ASUNCIÓN]. Es el proyecto de código con el número más alto del producto porque no tiene dependencias que dificulten la prueba y porque sus invariantes son la última defensa de las reglas RN-01 a RN-16.
+
+### §17.1.P.7 Estrategia de versionado y release
+**SemVer 2.0.0 y Conventional Commits sin excepciones.** La versión la calcula la herramienta que se ancle en la etapa `a` y se registra en RT §3 en ese momento. No se publica en ningún feed: se compila dentro de `GeometriaFactory.sln`. Branching: una rama por etapa a partir de la principal, con etiqueta al fusionar (RT §16).
+
+### §17.1.P.8 Pipeline CI/CD
+Stages: restore → build → test. Quality gates bloqueantes para fusionar: `scripts/build.sh` termina en **0 y sin advertencias** (RT §5.4), `scripts/test.sh` pasa entero, y la cobertura alcanza el mínimo de P.6. El pull request de la etapa **es** el punto de control (RT §16). Rollback: la etiqueta de la etapa anterior permite volver a cualquier demostración.
+
+### §17.1.P.9 Compatibilidad y plataformas target
+`net10.0` sin sufijo de plataforma; se ejecuta en Linux, que es el SO del devcontainer y el del servidor del backend (RT §5.4). Toda combinación no listada se considera no soportada. En particular **no** apunta a `net10.0-windows`: eso es de la Actividad 1, que es el emisor del dato y no forma parte de este producto.
+
+### §17.1.P.10 Requerimientos no funcionales (NFR)
+Sin NFR de runtime propios: no atiende peticiones ni abre conexiones. El único NFR medible es de construcción: **la batería de pruebas de dominio completa en menos de 10 segundos** [ASUNCIÓN], para que la regla de no-regresión de RF §9.4 sea barata de ejercer en cada etapa. Sin observabilidad propia: no registra ni instrumenta.
+
+### §17.1.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
+1. **La reconstrucción del dominio puede ajustarse a un modelo realista** [DECISIÓN del docente, RT §7.1]: el formato de entrada es fijo, la representación interna no. Alternativa descartada: espejar el JSON tal cual, que arrastraría su redundancia (AN §9.4).
+2. **La identidad de la pieza es su índice en el array raíz**, porque el JSON no trae identificador (AN §8.1) y el índice alcanza para selección y resaltado.
+3. **Se guardan por separado el valor declarado y el derivado** en `PIEZA`, que es lo que hace posible la verificación de RT §6.5 sin recalcular en cada consulta.
+4. **La familia plana/volumétrica no se persiste**: se deriva de `Tipo` por tabla de consulta.
+Queda abierto para la etapa `a`: los nombres definitivos de tipos y espacios de nombres, que se validan en su punto de control.
+
+### §17.1.P.12 Restricciones técnicas y trade-offs aceptados
+Se renuncia a la comodidad de anotar las entidades con atributos de mapeo y de serialización, a cambio de que el dominio se pueda probar y cambiar sin tocar infraestructura. Se acepta la duplicación aparente entre las entidades y los DTOs de `GeometriaFactory.Contracts`: es deliberada, y es lo que impide que un cambio de dominio rompa el contrato HTTP.
+
+---
+
+## §17.2 GeometriaFactory-Application
+
+| Campo | Valor |
+|---|---|
+| `Nombre-Proyecto-Codigo` | GeometriaFactory-Application |
+| `Identidad-Codigo` | `GeometriaFactory.Application` |
+| `tipo_proyecto_codigo` (D8) | `library` |
+| Rol | Casos de uso y puertos. Define el contrato que Infrastructure implementa |
+| `redistribuible` | false |
+
+### §17.2.P.1 Stack tecnológico
+C# sobre **.NET 10**. Dependencia core única: `GeometriaFactory.Domain`. No referencia EF Core ni el framework web: los puertos `IWorkRepository`, `IFigureValidator` e `ISystemClock` (RT §4.1) son la frontera.
+
+### §17.2.P.2 Estilo arquitectónico del proyecto de código
+Casos de uso con **inversión de dependencias**: la capa de aplicación declara los puertos y la infraestructura los implementa. Alternativas descartadas: (1) **servicios que usan directamente el `DbContext`** —descartado porque haría imposible probar la autorización por pertenencia sin base de datos, que es justo lo que RT §11 exige probar—; (2) **mediador con handlers y pipeline de comportamientos** —descartado por sobre-ingeniería para el alcance declarado como básica (RT §1)—.
+
+### §17.2.P.3 Comunicación e integración
+**No aplica** hacia afuera del proceso. Hacia adentro expone sus casos de uso a `GeometriaFactory.Api` y sus puertos a `GeometriaFactory.Infrastructure`. El versionado de esos contratos es el del ensamblado: son referencias de proyecto dentro de la misma solución, y un cambio incompatible rompe la compilación, que es la señal más temprana posible.
+
+### §17.2.P.4 Persistencia
 **No aplica directamente.** Declara el puerto de repositorio y el alcance de la unidad de trabajo: **un `DbContext` por operación** (RT §10), que del lado de la aplicación se expresa como un caso de uso, una transacción.
 
-#### §17.1.P.4 · GeometriaFactory-Infrastructure
+### §17.2.P.5 Seguridad y autenticación
+Acá vive la **verificación de pertenencia**, que es distinta de la autorización por rol y no la reemplaza: «el rol no alcanza; un alumno autenticado no debe poder leer el trabajo de otro cambiando el identificador en la petición» (RT §9.2). Materializa INV-02 e INV-03, y la respuesta ante un recurso ajeno es «no encontrado», no «no autorizado» (RN-03). No maneja secretos.
 
+**El rechazo por papel se emite con código propio fuera del desenlace** [DECISIÓN 2026-08-12]. Esta capa rechaza por papel en tres operaciones que no son el desenlace de un trabajo —gobernar las cuentas (F-03), resetear la contraseña de un alumno (F-26) y ver el listado de la comisión (F-12)— y hasta hoy emitía para las tres el código acotado al desenlace o el genérico. Emite `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR`, que entra al conjunto cerrado por §17.4 P.3. La verificación de pertenencia **no cambia**: sigue respondiendo «no encontrado» ante un recurso ajeno, que es otra cosa que la falta de papel.
+
+### §17.2.P.6 Estrategia de testing
+`tests/GeometriaFactory.Application.Tests`: casos de uso con repositorios simulados, con foco en la autorización por pertenencia (RT §11).
+**Cobertura mínima: 85 % de líneas y 80 % de ramas** [ASUNCIÓN]. Pirámide del proyecto de código: 100 % unitarias; la integración vive en `GeometriaFactory.Integration.Tests`, que pertenece a la Api.
+
+### §17.2.P.7 Estrategia de versionado y release
+Idéntica a §17.1.P.7: SemVer 2.0.0, Conventional Commits, sin publicación en feed, una rama y una etiqueta por etapa.
+
+### §17.2.P.8 Pipeline CI/CD
+Idéntico a §17.1.P.8. Quality gate propio y bloqueante: **ninguna prueba de esta capa toca la base de datos real**; si una lo hace, está mal ubicada y pertenece a integración.
+
+### §17.2.P.9 Compatibilidad y plataformas target
+`net10.0`, Linux. Sin dependencias de plataforma.
+
+### §17.2.P.10 Requerimientos no funcionales (NFR)
+El caso de uso de validación de un trabajo —el más pesado, porque recorre todas las piezas y sus componentes— **resuelve en menos de 500 ms para el JSON semilla de 3 piezas del escenario E-1** [ASUNCIÓN], medido sin acceso a base. Las consultas de listado **nunca cargan los componentes** (RT §7.2): es una decisión de modelado con efecto directo en el tiempo de respuesta del listado del administrador.
+
+### §17.2.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
+1. **El validador de figuras es un puerto, no una dependencia concreta** (RT §4.1): es lo que permite probar los **diez** casos de la batería aislando la lógica de tolerancia de claves.
+2. **La verificación de valores produce observaciones de dos niveles**, `Error` y `Advertencia`, y sólo el primero impide que el trabajo pase a `Pendiente` (RT §6.5, RN-05).
+3. **El reloj es un puerto** (`ISystemClock`), para que las fechas de alta y modificación sean verificables en prueba.
+
+### §17.2.P.12 Restricciones técnicas y trade-offs aceptados
+Se renuncia a consultar la base con proyecciones ad-hoc desde el caso de uso, a cambio de poder probarlo entero con dobles. Se acepta escribir a mano el mapeo entre entidades y DTOs.
+
+---
+
+## §17.3 GeometriaFactory-Infrastructure
+
+| Campo | Valor |
+|---|---|
+| `Nombre-Proyecto-Codigo` | GeometriaFactory-Infrastructure |
+| `Identidad-Codigo` | `GeometriaFactory.Infrastructure` |
+| `tipo_proyecto_codigo` (D8) | `library` |
+| Rol | EF Core con SQLite, seguridad y validador de figuras |
+| `redistribuible` | false |
+
+### §17.3.P.1 Stack tecnológico
+C# sobre **.NET 10**. Dependencias core: **Entity Framework Core con proveedor SQLite** (RT §3), la biblioteca de derivación de clave (PBKDF2 o Argon2, RT §9.2) y la de emisión de JWT. `dotnet-ef` se instala como **herramienta local del repositorio**, para que su versión quede versionada junto al código (RT §5.3). Versiones exactas ancladas en la etapa `a` y registradas en RT §3 (regla de anclaje).
+
+### §17.3.P.2 Estilo arquitectónico del proyecto de código
+Adaptadores que implementan los puertos de Application. Alternativas descartadas: (1) **repositorio genérico sobre `DbSet<T>`** —descartado porque diluye las consultas que sí importan, como el listado del administrador agrupado por alumno—; (2) **acceso directo con SQL escrito a mano** —descartado porque las migraciones automáticas al arrancar (RT §10) son una decisión tomada y EF Core las provee—.
+
+### §17.3.P.3 Comunicación e integración
+**No aplica**: no expone endpoints. Consume el sistema de archivos donde vive el archivo SQLite y nada más. En particular, **el validador de figuras no hace red**: recibe texto y devuelve observaciones.
+
+### §17.3.P.4 Persistencia
 Es la responsabilidad central del proyecto de código (RT §10):
 
 | Aspecto | Definición |
@@ -851,10 +803,134 @@ El modelo de datos es el de RT §7.1: `ALUMNO`, `TRABAJO`, `PIEZA`, `COMPONENTE`
 
 **Ampliación del 2026-08-08 por el circuito de revisión.** `TRABAJO` suma el estado `Rechazado` a su conjunto cerrado —que pasa a `Borrador`, `Pendiente`, `Finalizado`, `Rechazado`— y un campo de **comentario del administrador**, texto libre y nulable, con la fecha y el identificador de quien lo dejó. El comentario **no es una entidad aparte ni lleva historial**: `Finalizado` y `Rechazado` son terminales (INV-07), así que un trabajo recibe a lo sumo un comentario y un campo alcanza. No se confunde con `OBSERVACION`, que es lo que el validador emite sobre la geometría y sí es entidad propia con varias filas por trabajo.
 
-### §17.1.P.5 Seguridad y autenticación
+### §17.3.P.5 Seguridad y autenticación
+Acá viven las dos piezas sensibles: **derivación de la contraseña** con PBKDF2 o Argon2 —nunca en claro ni con resumen simple— y **emisión del JWT** firmado con clave simétrica HS256 (RT §9.2). La **clave de firma se genera o se provee en el primer arranque y vive fuera del repositorio y fuera de la imagen**: variable de entorno o archivo montado (RT §9.2, §13). Ningún secreto entra al repositorio, ni en CI/CD (RT §16).
 
-#### §17.1.P.5 · GeometriaFactory-Api
+### §17.3.P.6 Estrategia de testing
+El validador de figuras se prueba con la **batería obligatoria de diez casos** —los nueve de RT §11 más el décimo que §21 agrega para la dimensión no legible—, con los escenarios **E-1 a E-8** de la Parte D como entrada. La persistencia real contra SQLite se prueba desde `GeometriaFactory.Integration.Tests`.
+**Cobertura mínima: 85 % de líneas y 80 % de ramas en el conjunto del proyecto de código, y 95 % de líneas en el validador de figuras** [ASUNCIÓN]. El número más alto del producto está donde RF §10 etapa `f` señala el criterio que más veces se rompe.
 
+### §17.3.P.7 Estrategia de versionado y release
+Idéntica a §17.1.P.7. Además: **cada migración de EF Core se versiona con el código de su etapa**; no se editan migraciones ya fusionadas.
+
+### §17.3.P.8 Pipeline CI/CD
+Stages: restore → build → test → verificación de migraciones. Quality gates bloqueantes: build en 0 sin advertencias; las **diez** pruebas del validador pasan; **las migraciones se aplican solas sobre una base inexistente** (criterio de aceptación de la etapa `c`); la cobertura alcanza los mínimos de P.6. Rollback: `scripts/reset-db.sh` reproduce el estado de primer arranque.
+
+### §17.3.P.9 Compatibilidad y plataformas target
+`net10.0`, Linux (devcontainer y servidor propio). SQLite en su versión embebida por el proveedor de EF Core, anclada en la etapa `a`.
+
+### §17.3.P.10 Requerimientos no funcionales (NFR)
+- **Validación completa del JSON semilla de 3 piezas (E-1) en menos de 200 ms** [ASUNCIÓN].
+- **Comparación de valores con tolerancia absoluta de 0.01**, nunca por igualdad exacta de punto flotante (RT §6.5). Este número **no** es asunción: sale de que el emisor redondea a 2 decimales (AN §9.3).
+- **El operador es estricto: se emite advertencia cuando la diferencia absoluta es MAYOR que 0.01, no mayor o igual** [DECISIÓN 2026-08-09]. La precisión no es teórica: en el escenario semilla **E-1**, el área del cilindro declara 113.10 y la suma de sus componentes da 113.09, con una diferencia de **exactamente 0.01**. Con el operador estricto ese caso **no** produce advertencia y el escenario da las **dos** que §20.E-1 declara; con «mayor o igual» daría **tres** y el caso de prueba canónico del producto fallaría. Toda implementación y todo caso de prueba usan el operador estricto.
+- Disponibilidad: sin SLO. El servidor es domiciliario y su caída está declarada como riesgo aceptado con estado degradado (R-08).
+- Observabilidad: registro del lado del servidor de todo error que se muestre al usuario, porque **el mensaje visible nunca puede incluir la dirección de un servicio interno** (RA-03).
+
+### §17.3.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
+1. **El validador nace sabiendo las cuatro trampas del formato** T1 a T4 (RT §6.3): acepta `Bases` o `Tapas` como sinónimos en el ortoedro, parsea con `AllowTrailingCommas` y omisión de comentarios, acepta caras `Cuadrado` o `Rectangulo`, y **no rechaza los valores calculados erróneos: los señala**.
+2. **El JSON original se conserva íntegro** (RN-08), lo que permite reprocesar si el validador mejora.
+3. **Migraciones aplicadas al arrancar** (RT §10), no por un paso manual de despliegue.
+4. **SQLite y no un motor cliente-servidor**: es archivo único en un volumen, coherente con un despliegue domiciliario de un contenedor.
+5. **Se confirma la condición derivada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`** [DECISIÓN 2026-08-12]. **Ninguna fuente la enuncia**: la declaró `GeometriaFactory-Infrastructure` con su fundamento, y el Product Owner la confirma tal como está en lugar de reemplazarla. Enunciado: **cuando ninguna pieza del JSON se pudo reconstruir, la verificación de valores no se ejecuta y termina en esta condición propia**, y no en una lista vacía de observaciones ni en una escena en blanco sin explicación. El fundamento es que «cero advertencias» sería **indistinguible de un trabajo verificado sin discrepancias**, y convertiría un defecto de orquestación en un resultado creíble; y del lado del visor, una escena vacía sin motivo es exactamente el **fallo silencioso** que §12 define y que el producto viene a eliminar. Es la condición que protege el orden de los dos motores del validador: reconstruir primero, verificar después.
+
+### §17.3.P.12 Restricciones técnicas y trade-offs aceptados
+Se acepta la limitación de **escritor único** de SQLite a cambio de un despliegue sin servicio de base de datos aparte. Se acepta persistir los componentes de cada pieza pese a su redundancia (un `Cubo(3)` serializa 6 caras idénticas para expresar un solo número, AN §9.4) porque **son parte del ejercicio**; se compensa no cargándolos nunca en las consultas de listado (RT §7.2).
+
+---
+
+## §17.4 GeometriaFactory-Contracts
+
+| Campo | Valor |
+|---|---|
+| `Nombre-Proyecto-Codigo` | GeometriaFactory-Contracts |
+| `Identidad-Codigo` | `GeometriaFactory.Contracts` |
+| `tipo_proyecto_codigo` (D8) | `library` |
+| Rol | DTOs de la API, compartidos por los dos procesos desplegables |
+| `redistribuible` | false |
+
+### §17.4.P.1 Stack tecnológico
+C# sobre **.NET 10**, biblioteca de tipos de datos. **Sin dependencias**: no referencia el dominio. Es lo que impide que el front conozca las entidades.
+
+### §17.4.P.2 Estilo arquitectónico del proyecto de código
+Tipos de transferencia planos, sin comportamiento. Alternativas descartadas: (1) **compartir las entidades de dominio entre Api y Web** —descartado porque acoplaría el front a cambios internos del dominio y filtraría al navegador campos que no le corresponden, como `PasswordHash`—; (2) **generar el cliente desde OpenAPI** —descartado por costo de cadena de herramientas frente a un contrato que consumen dos proyectos de código de la misma solución—.
+
+### §17.4.P.3 Comunicación e integración
+Es **el** contrato de comunicación del producto: define el payload JSON que viaja entre `GeometriaFactory.Web` y `GeometriaFactory.Api` por HTTP con `Bearer` (RT §4.1, §9.1). Política de cambios incompatibles: como los dos extremos se compilan contra el mismo ensamblado, un cambio incompatible **rompe la compilación** antes de romper el runtime. La regla operativa es que Api y Web se despliegan juntos ante un cambio de contrato; no hay versionado de endpoints en este alcance porque no hay clientes de terceros.
+
+**Dos códigos entran al conjunto cerrado: diecisiete vivos sobre veinte identificadores emitidos** [DECISIÓN 2026-08-12]. El conjunto cerrado de códigos de error del contrato lo **emite formalmente `GeometriaFactory-Contracts`**, que es su fuente y el único lugar donde los identificadores están enumerados juntos; este intake no lo transcribe entero y declara acá los que entran **por decisión**, con el recuento que resulta. Hasta hoy el conjunto tenía **quince códigos vivos** sobre **dieciocho** identificadores emitidos —quince vivos más **tres retirados**, que no se reciclan—. Con estos dos pasa a **diecisiete vivos sobre veinte emitidos**, y los tres retirados siguen retirados. Los dos identificadores son **derivación de este intake**: se proponen acá siguiendo la convención `CONTRATO_<CONDICIÓN>` de los quince vivos, y `GeometriaFactory-Contracts` los emite formalmente al incorporarlos.
+
+| Código nuevo | Condición que representa | Por qué no alcanzaba lo que había |
+|---|---|---|
+| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | **El papel no alcanza para la operación pedida, fuera del desenlace de un trabajo**: gobernar las cuentas de la comisión (F-03), resetear la contraseña de un alumno (F-26) y ver el listado de trabajos de la comisión (F-12) | El único código de facultad del conjunto, `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`, está **acotado por su enunciado** a aprobar o rechazar un trabajo (F-23, RN-10), y la capa de aplicación emite ese mismo rechazo en las otras tres. Sin código propio, las tres caen en el genérico `CONTRATO_ERROR_NO_CLASIFICADO` y **el front no puede distinguir «no tenés permiso» de «algo salió mal»**, que son dos mensajes distintos para el alumno |
+| `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | **Se pidió enviar o reeditar un trabajo que no está en `Borrador`.** Un trabajo en `Pendiente`, `Finalizado` o `Rechazado` es de **sólo lectura** para el alumno (F-07, RN-04, INV-07) | El código análogo existente, `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, está **acotado a la eliminación** y al camino del alumno, y no cubre las otras dos escrituras que el mismo estado prohíbe. Sin él, forzar un envío o una reedición contra la API sobre un trabajo ya entregado no tiene código propio |
+
+Los dos son códigos de **rechazo sin escritura**: la operación no ocurre y el estado no cambia. Ninguno reemplaza a los quince vigentes ni recicla a los tres retirados, y ninguno modifica los cuatro campos del tipo de error ni la regla de exposición de P.5.
+
+**Los códigos del contrato pasan a inglés, y es un cambio de contrato** [DECISIÓN del Product Owner 2026-08-12, `F-03`, §13.1]. Alcanza a **los 21 identificadores `CONTRATO_*`** —17 vivos, la señal de listado vacío y los 3 retirados— y **elimina el prefijo `CONTRATO_`**: la identidad del código la da el conjunto cerrado que lo declara, no un prefijo dentro del nombre. Se declara **como cambio de contrato y no como renombre**, porque estos códigos viajan dentro de las respuestas y `GeometriaFactory-Web` los cita para decidir qué muestra; en consecuencia rige `RT-06` —los dos extremos se cambian y se despliegan juntos—. **El conjunto no cambia de tamaño, ni entra ni sale ningún código, y ninguna condición cambia de significado**: cambia el idioma del identificador. La correspondencia uno a uno está en `Norma-De-Nomenclatura.md` §6.8.6 y **este documento no la transcribe**. La ejecución es el tramo `R-5` de la norma §8, y **esta versión no renombra nada**.
+
+### §17.4.P.4 Persistencia
+**No aplica.**
+
+### §17.4.P.5 Seguridad y autenticación
+No implementa autenticación, pero **es donde se decide qué se expone**. Regla: ningún DTO incluye el hash de contraseña, la clave de firma ni ninguna dirección de servicio interno (RA-03). El DTO de respuesta de error lleva texto neutro y, cuando corresponde, índice de figura y campo (RN-09), nunca la dirección del servicio que falló.
+
+### §17.4.P.6 Estrategia de testing
+No tiene pruebas propias: son tipos sin comportamiento. Se ejercitan íntegramente desde `GeometriaFactory.Integration.Tests`, que golpea la API real por HTTP con `WebApplicationFactory` (RT §11).
+**Cobertura mínima: no aplica como gate propio**; el gate equivalente y bloqueante es que **el 100 % de los DTOs esté ejercitado por al menos una prueba de integración** [ASUNCIÓN].
+
+### §17.4.P.7 Estrategia de versionado y release
+Idéntica a §17.1.P.7. Un cambio incompatible en un DTO es **breaking** y sube major del producto en `changelog.md`, aunque no se publique en ningún feed.
+
+### §17.4.P.8 Pipeline CI/CD
+Stages: restore → build. Quality gate bloqueante: **compila sin advertencias y sin referencias hacia `GeometriaFactory.Domain`**; una referencia de ese tipo se rechaza en revisión, porque es la vía por la que el acoplamiento vuelve.
+
+### §17.4.P.9 Compatibilidad y plataformas target
+`net10.0`, Linux. Se carga en los dos procesos: el del hosting y el del servidor propio.
+
+### §17.4.P.10 Requerimientos no funcionales (NFR)
+Sin NFR de runtime propios. Un NFR estructural, verificable por inspección: **el payload de listado de trabajos no incluye ni el `OriginalJson` ni los componentes de las piezas** [ASUNCIÓN derivada de RT §7.2], para que el listado del administrador no arrastre el texto completo de cada trabajo.
+
+### §17.4.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
+1. **Existe un ensamblado de contratos separado** (RT §4.1), en lugar de definir los DTOs dentro de la Api.
+2. **El texto crudo del JSON viaja como cadena**, sin interpretarse en el contrato: la interpretación es del backend y el dibujo del bundle.
+
+### §17.4.P.12 Restricciones técnicas y trade-offs aceptados
+Se acepta duplicar forma entre entidades y DTOs a cambio de desacoplar los dos procesos. Se renuncia a un contrato descrito en OpenAPI y a clientes generados: con dos consumidores compilados juntos, el costo no se paga.
+
+---
+
+## §17.5 GeometriaFactory-Api
+
+| Campo | Valor |
+|---|---|
+| `Nombre-Proyecto-Codigo` | GeometriaFactory-Api |
+| `Identidad-Codigo` | `GeometriaFactory.Api` |
+| `tipo_proyecto_codigo` (D8) | `rest-api` |
+| Rol | Host REST desplegado en el servidor propio. **Proyecto de código principal** |
+| `redistribuible` | false |
+
+### §17.5.P.1 Stack tecnológico
+ASP.NET Core sobre **.NET 10**. Dependencias core: `GeometriaFactory.Application`, `GeometriaFactory.Infrastructure` y `GeometriaFactory.Contracts`; autenticación **JWT Bearer**. Se ejecuta como contenedor Docker sobre Linux (RT §13). En desarrollo escucha por **HTTP sin certificado**, para evitar la fricción del certificado de confianza dentro del contenedor (RT §5.3).
+
+### §17.5.P.2 Estilo arquitectónico del proyecto de código
+Host delgado: endpoints REST que traducen petición a caso de uso y resultado a DTO, más la composición de raíz que conecta puertos con adaptadores. Alternativas descartadas: (1) **API con lógica en los controladores** —descartado porque haría inseparable la verificación de pertenencia de la capa HTTP y volvería obligatoria una prueba de integración para cada regla—; (2) **backend-for-frontend que devuelva vistas ya armadas** —descartado porque el front es Interactive Server y arma sus vistas en el servidor del hosting; un BFF agregaría un salto sin quitar ninguno—.
+
+### §17.5.P.3 Comunicación e integración
+| Aspecto | Definición |
+|---|---|
+| Protocolo | HTTP/HTTPS, petición-respuesta, **sin estado**. `Authorization: Bearer <token>` |
+| Formato | JSON, con los DTOs de `GeometriaFactory.Contracts` |
+| Quién la consume | **Únicamente `GeometriaFactory.Web`, servidor a servidor.** El navegador nunca la alcanza (RA-01) |
+| WebSockets | **No expone ni requiere WebSockets**: el circuito de Blazor termina en el front y no llega al backend (RT §2.3). Es criterio de aceptación de la etapa `a` |
+| CORS | No hace falta: la API no recibe peticiones del navegador (RT §2.2) |
+| Endpoint de autenticación | `POST /auth/token` con correo y contraseña |
+| Salud | Endpoint de salud, consumido por la página de salud del front y por el `healthcheck` del `compose.yaml` |
+| Versionado del contrato | El del ensamblado de contratos (§17.4.P.3). Sin clientes de terceros, no hay versionado de rutas |
+
+### §17.5.P.4 Persistencia
+Delega en `GeometriaFactory.Infrastructure` (§17.3.P.4). Responsabilidad propia y declarada: **aplicar las migraciones al arrancar** (RT §4.2, §10) y tomar de configuración la ruta del archivo SQLite, que en producción apunta a un volumen persistente.
+
+### §17.5.P.5 Seguridad y autenticación
 **ROPC con JWT Bearer** [DECISIÓN explícita del docente, RT §9.1]:
 
 | Aspecto | Definición |
@@ -870,79 +946,16 @@ El modelo de datos es el de RT §7.1: `ALUMNO`, `TRABAJO`, `PIEZA`, `COMPONENTE`
 
 **Nota de seguridad registrada como decisión consciente, no como omisión** (RT §9.3): ROPC está desaconsejado por OAuth 2.1 porque obliga a la aplicación intermedia a manejar la contraseña en claro. Acá se acepta porque el intermediario es el propio front del mismo sistema, el tramo navegador→front es HTTPS y el alcance es un laboratorio de aula. El tramo front→API va **en claro** si ese salto es HTTP plano: es el riesgo R-02, aceptado por escrito, con el túnel saliente de RT §15.1 como salida documentada y no adoptada.
 
-#### §17.1.P.5 · GeometriaFactory-Contracts
-
-No implementa autenticación, pero **es donde se decide qué se expone**. Regla: ningún DTO incluye el hash de contraseña, la clave de firma ni ninguna dirección de servicio interno (RA-03). El DTO de respuesta de error lleva texto neutro y, cuando corresponde, índice de figura y campo (RN-09), nunca la dirección del servicio que falló.
-
-#### §17.1.P.5 · GeometriaFactory-Domain
-
-No implementa autenticación. Sí modela las reglas que la condicionan: el estado de la cuenta (`Pendiente` / `Habilitado` / `Bloqueado`) y el invariante **INV-06**, que un alumno `Pendiente` o `Bloqueado` no obtiene token. No maneja secretos: la contraseña llega ya derivada y se guarda como `PasswordHash`, nulo hasta el primer ingreso (RT §7.1).
-
-#### §17.1.P.5 · GeometriaFactory-Application
-
-Acá vive la **verificación de pertenencia**, que es distinta de la autorización por rol y no la reemplaza: «el rol no alcanza; un alumno autenticado no debe poder leer el trabajo de otro cambiando el identificador en la petición» (RT §9.2). Materializa INV-02 e INV-03, y la respuesta ante un recurso ajeno es «no encontrado», no «no autorizado» (RN-03). No maneja secretos.
-
-**El rechazo por papel se emite con código propio fuera del desenlace** [DECISIÓN 2026-08-12]. Esta capa rechaza por papel en tres operaciones que no son el desenlace de un trabajo —gobernar las cuentas (F-03), resetear la contraseña de un alumno (F-26) y ver el listado de la comisión (F-12)— y hasta hoy emitía para las tres el código acotado al desenlace o el genérico. Emite `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR`, que entra al conjunto cerrado por §17.4 P.3. La verificación de pertenencia **no cambia**: sigue respondiendo «no encontrado» ante un recurso ajeno, que es otra cosa que la falta de papel.
-
-#### §17.1.P.5 · GeometriaFactory-Infrastructure
-
-Acá viven las dos piezas sensibles: **derivación de la contraseña** con PBKDF2 o Argon2 —nunca en claro ni con resumen simple— y **emisión del JWT** firmado con clave simétrica HS256 (RT §9.2). La **clave de firma se genera o se provee en el primer arranque y vive fuera del repositorio y fuera de la imagen**: variable de entorno o archivo montado (RT §9.2, §13). Ningún secreto entra al repositorio, ni en CI/CD (RT §16).
-
-### §17.1.P.6 Estrategia de testing
-
-#### §17.1.P.6 · GeometriaFactory-Api
-
+### §17.5.P.6 Estrategia de testing
 Pirámide del proyecto de código: **60 % integración, 40 % unitarias** [ASUNCIÓN] —invertida respecto de lo habitual y a propósito, porque lo que este proyecto de código aporta es cableado, y el cableado se verifica ejerciéndolo—. `GeometriaFactory.Integration.Tests` golpea la **API real por HTTP con `WebApplicationFactory`** contra SQLite real (RT §11).
 **Cobertura mínima: 75 % de líneas y 70 % de ramas** [ASUNCIÓN].
 Pruebas de contrato hacia otros proyectos de código: las de integración cubren el contrato con `GeometriaFactory.Contracts` extremo a extremo.
 Criterio bloqueante tomado de la fuente: **la eliminación de un trabajo que no está en `Borrador` o que no pertenece al solicitante se verifica forzando la petición a la API, no sólo por la interfaz** (RF §10 etapa `e`).
 
-#### §17.1.P.6 · GeometriaFactory-Contracts
-
-No tiene pruebas propias: son tipos sin comportamiento. Se ejercitan íntegramente desde `GeometriaFactory.Integration.Tests`, que golpea la API real por HTTP con `WebApplicationFactory` (RT §11).
-**Cobertura mínima: no aplica como gate propio**; el gate equivalente y bloqueante es que **el 100 % de los DTOs esté ejercitado por al menos una prueba de integración** [ASUNCIÓN].
-
-#### §17.1.P.6 · GeometriaFactory-Domain
-
-Cubierto por `tests/GeometriaFactory.Domain.Tests`, con pruebas unitarias puras y sin dobles: los invariantes §7.3 y las transiciones de estado de trabajo y de cuenta (RT §11).
-**Cobertura mínima: 90 % de líneas y 85 % de ramas** [ASUNCIÓN]. Es el proyecto de código con el número más alto del producto porque no tiene dependencias que dificulten la prueba y porque sus invariantes son la última defensa de las reglas RN-01 a RN-16.
-
-#### §17.1.P.6 · GeometriaFactory-Application
-
-`tests/GeometriaFactory.Application.Tests`: casos de uso con repositorios simulados, con foco en la autorización por pertenencia (RT §11).
-**Cobertura mínima: 85 % de líneas y 80 % de ramas** [ASUNCIÓN]. Pirámide del proyecto de código: 100 % unitarias; la integración vive en `GeometriaFactory.Integration.Tests`, que pertenece a la Api.
-
-#### §17.1.P.6 · GeometriaFactory-Infrastructure
-
-El validador de figuras se prueba con la **batería obligatoria de diez casos** —los nueve de RT §11 más el décimo que §21 agrega para la dimensión no legible—, con los escenarios **E-1 a E-8** de la Parte D como entrada. La persistencia real contra SQLite se prueba desde `GeometriaFactory.Integration.Tests`.
-**Cobertura mínima: 85 % de líneas y 80 % de ramas en el conjunto del proyecto de código, y 95 % de líneas en el validador de figuras** [ASUNCIÓN]. El número más alto del producto está donde RF §10 etapa `f` señala el criterio que más veces se rompe.
-
-### §17.1.P.7 Estrategia de versionado y release
-
-#### §17.1.P.7 · GeometriaFactory-Api
-
+### §17.5.P.7 Estrategia de versionado y release
 SemVer 2.0.0 y Conventional Commits sin excepciones. Una rama y un pull request por etapa; **cada etapa cerrada y fusionada recibe una etiqueta**, para poder volver a cualquier demostración (RT §16). El `changelog.md` se actualiza en la rama de la etapa, no después de la fusión. Canal de entrega: imagen Docker construida **en destino desde el repositorio Git** con `docker compose`, sin publicar en un registro (RT §13).
 
-#### §17.1.P.7 · GeometriaFactory-Contracts
-
-Idéntica a §17.1.P.7 · GeometriaFactory-Domain. Un cambio incompatible en un DTO es **breaking** y sube major del producto en `changelog.md`, aunque no se publique en ningún feed.
-
-#### §17.1.P.7 · GeometriaFactory-Domain
-
-**SemVer 2.0.0 y Conventional Commits sin excepciones.** La versión la calcula la herramienta que se ancle en la etapa `a` y se registra en RT §3 en ese momento. No se publica en ningún feed: se compila dentro de `GeometriaFactory.sln`. Branching: una rama por etapa a partir de la principal, con etiqueta al fusionar (RT §16).
-
-#### §17.1.P.7 · GeometriaFactory-Application
-
-Idéntica a §17.1.P.7 · GeometriaFactory-Domain: SemVer 2.0.0, Conventional Commits, sin publicación en feed, una rama y una etiqueta por etapa.
-
-#### §17.1.P.7 · GeometriaFactory-Infrastructure
-
-Idéntica a §17.1.P.7 · GeometriaFactory-Domain. Además: **cada migración de EF Core se versiona con el código de su etapa**; no se editan migraciones ya fusionadas.
-
-### §17.1.P.8 Pipeline CI/CD
-
-#### §17.1.P.8 · GeometriaFactory-Api
-
+### §17.5.P.8 Pipeline CI/CD
 | Stage | Quality gate |
 |---|---|
 | build | `scripts/build.sh` termina en **0 y sin advertencias** |
@@ -953,78 +966,17 @@ Idéntica a §17.1.P.7 · GeometriaFactory-Domain. Además: **cada migración de
 
 Ambientes: desarrollo (devcontainer) y producción (servidor propio). Reemplazo de versión: *detener y arrancar*, con ventana de indisponibilidad; sin proxy inverso no hay despliegue con solapamiento (RT §13). Rollback: volver a la etiqueta anterior y reconstruir. **Ningún secreto entra al repositorio.**
 
-#### §17.1.P.8 · GeometriaFactory-Contracts
-
-Stages: restore → build. Quality gate bloqueante: **compila sin advertencias y sin referencias hacia `GeometriaFactory.Domain`**; una referencia de ese tipo se rechaza en revisión, porque es la vía por la que el acoplamiento vuelve.
-
-#### §17.1.P.8 · GeometriaFactory-Domain
-
-Stages: restore → build → test. Quality gates bloqueantes para fusionar: `scripts/build.sh` termina en **0 y sin advertencias** (RT §5.4), `scripts/test.sh` pasa entero, y la cobertura alcanza el mínimo de P.6. El pull request de la etapa **es** el punto de control (RT §16). Rollback: la etiqueta de la etapa anterior permite volver a cualquier demostración.
-
-#### §17.1.P.8 · GeometriaFactory-Application
-
-Idéntico a §17.1.P.8 · GeometriaFactory-Domain. Quality gate propio y bloqueante: **ninguna prueba de esta capa toca la base de datos real**; si una lo hace, está mal ubicada y pertenece a integración.
-
-#### §17.1.P.8 · GeometriaFactory-Infrastructure
-
-Stages: restore → build → test → verificación de migraciones. Quality gates bloqueantes: build en 0 sin advertencias; las **diez** pruebas del validador pasan; **las migraciones se aplican solas sobre una base inexistente** (criterio de aceptación de la etapa `c`); la cobertura alcanza los mínimos de P.6. Rollback: `scripts/reset-db.sh` reproduce el estado de primer arranque.
-
-### §17.1.P.9 Compatibilidad y plataformas target
-
-#### §17.1.P.9 · GeometriaFactory-Api
-
+### §17.5.P.9 Compatibilidad y plataformas target
 `net10.0`, Linux exclusivamente: devcontainer, imagen de producción y servidor propio son Linux (RT §5.4). La imagen final lleva **sólo el entorno de ejecución**, sin SDK ni depurador, y **no tiene linaje con la imagen del devcontainer** (RT §5.2 R5). Un puerto publicado hacia el router es el único punto de entrada al servidor propio.
 
-#### §17.1.P.9 · GeometriaFactory-Contracts
-
-`net10.0`, Linux. Se carga en los dos procesos: el del hosting y el del servidor propio.
-
-#### §17.1.P.9 · GeometriaFactory-Domain
-
-`net10.0` sin sufijo de plataforma; se ejecuta en Linux, que es el SO del devcontainer y el del servidor del backend (RT §5.4). Toda combinación no listada se considera no soportada. En particular **no** apunta a `net10.0-windows`: eso es de la Actividad 1, que es el emisor del dato y no forma parte de este producto.
-
-#### §17.1.P.9 · GeometriaFactory-Application
-
-`net10.0`, Linux. Sin dependencias de plataforma.
-
-#### §17.1.P.9 · GeometriaFactory-Infrastructure
-
-`net10.0`, Linux (devcontainer y servidor propio). SQLite en su versión embebida por el proveedor de EF Core, anclada en la etapa `a`.
-
-### §17.1.P.10 Requerimientos no funcionales (NFR)
-
-#### §17.1.P.10 · GeometriaFactory-Api
-
+### §17.5.P.10 Requerimientos no funcionales (NFR)
 - **Latencia p99 de una operación de listado: por debajo de 500 ms medida en el servidor** [ASUNCIÓN], sin contar el tramo de internet doméstico, que no está bajo control.
 - **Throughput mínimo: 20 peticiones por minuto sostenidas** [ASUNCIÓN], derivado del uso previsto (una comisión operando durante una clase) y de la limitación de escritor único de SQLite.
 - **Disponibilidad: sin SLO.** El servidor es domiciliario; su caída es el riesgo R-08 y se responde con estado degradado en el front, no con redundancia.
 - **Arranque en frío: aplica migraciones y responde salud en menos de 30 segundos** [ASUNCIÓN], para que el `healthcheck` del `compose.yaml` sirva de algo.
 - Observabilidad: registro estructurado del lado del servidor de cada error y de cada intento de acceso rechazado. **Ningún mensaje mostrado al usuario incluye direcciones de servicios internos** (RA-03).
 
-#### §17.1.P.10 · GeometriaFactory-Contracts
-
-Sin NFR de runtime propios. Un NFR estructural, verificable por inspección: **el payload de listado de trabajos no incluye ni el `OriginalJson` ni los componentes de las piezas** [ASUNCIÓN derivada de RT §7.2], para que el listado del administrador no arrastre el texto completo de cada trabajo.
-
-#### §17.1.P.10 · GeometriaFactory-Domain
-
-Sin NFR de runtime propios: no atiende peticiones ni abre conexiones. El único NFR medible es de construcción: **la batería de pruebas de dominio completa en menos de 10 segundos** [ASUNCIÓN], para que la regla de no-regresión de RF §9.4 sea barata de ejercer en cada etapa. Sin observabilidad propia: no registra ni instrumenta.
-
-#### §17.1.P.10 · GeometriaFactory-Application
-
-El caso de uso de validación de un trabajo —el más pesado, porque recorre todas las piezas y sus componentes— **resuelve en menos de 500 ms para el JSON semilla de 3 piezas del escenario E-1** [ASUNCIÓN], medido sin acceso a base. Las consultas de listado **nunca cargan los componentes** (RT §7.2): es una decisión de modelado con efecto directo en el tiempo de respuesta del listado del administrador.
-
-#### §17.1.P.10 · GeometriaFactory-Infrastructure
-
-- **Validación completa del JSON semilla de 3 piezas (E-1) en menos de 200 ms** [ASUNCIÓN].
-- **Comparación de valores con tolerancia absoluta de 0.01**, nunca por igualdad exacta de punto flotante (RT §6.5). Este número **no** es asunción: sale de que el emisor redondea a 2 decimales (AN §9.3).
-- **El operador es estricto: se emite advertencia cuando la diferencia absoluta es MAYOR que 0.01, no mayor o igual** [DECISIÓN 2026-08-09]. La precisión no es teórica: en el escenario semilla **E-1**, el área del cilindro declara 113.10 y la suma de sus componentes da 113.09, con una diferencia de **exactamente 0.01**. Con el operador estricto ese caso **no** produce advertencia y el escenario da las **dos** que §20.E-1 declara; con «mayor o igual» daría **tres** y el caso de prueba canónico del producto fallaría. Toda implementación y todo caso de prueba usan el operador estricto.
-- Disponibilidad: sin SLO. El servidor es domiciliario y su caída está declarada como riesgo aceptado con estado degradado (R-08).
-- Observabilidad: registro del lado del servidor de todo error que se muestre al usuario, porque **el mensaje visible nunca puede incluir la dirección de un servicio interno** (RA-03).
-
-### §17.1.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
-
-#### §17.1.P.11 · GeometriaFactory-Api
-
+### §17.5.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
 1. **API REST en proceso separado con Clean Architecture** [DECISIÓN, RT §3, §4.1], porque los dos artefactos van a servidores distintos.
 2. **ROPC con JWT** [DECISIÓN del docente, RT §9.1], con su nota de seguridad registrada.
 3. **La API no soporta WebSockets ni sesiones persistentes**: es REST sin estado (RT §2.3).
@@ -1032,105 +984,112 @@ El caso de uso de validación de un trabajo —el más pesado, porque recorre to
 5. **Despliegue construyendo en destino desde Git**, para evitar publicar la imagen en un registro. Con una advertencia **[A VERIFICAR]** de la fuente: exige que el motor de contenedores del destino resuelva la referencia al repositorio y tenga credenciales si es privado; debe probarse una vez antes de depender del mecanismo (RT §13).
 Queda abierto: la versión exacta de los paquetes, que se ancla en la etapa `a`.
 
-#### §17.1.P.11 · GeometriaFactory-Contracts
-
-1. **Existe un ensamblado de contratos separado** (RT §4.1), en lugar de definir los DTOs dentro de la Api.
-2. **El texto crudo del JSON viaja como cadena**, sin interpretarse en el contrato: la interpretación es del backend y el dibujo del bundle.
-
-#### §17.1.P.11 · GeometriaFactory-Domain
-
-1. **La reconstrucción del dominio puede ajustarse a un modelo realista** [DECISIÓN del docente, RT §7.1]: el formato de entrada es fijo, la representación interna no. Alternativa descartada: espejar el JSON tal cual, que arrastraría su redundancia (AN §9.4).
-2. **La identidad de la pieza es su índice en el array raíz**, porque el JSON no trae identificador (AN §8.1) y el índice alcanza para selección y resaltado.
-3. **Se guardan por separado el valor declarado y el derivado** en `PIEZA`, que es lo que hace posible la verificación de RT §6.5 sin recalcular en cada consulta.
-4. **La familia plana/volumétrica no se persiste**: se deriva de `Tipo` por tabla de consulta.
-Queda abierto para la etapa `a`: los nombres definitivos de tipos y espacios de nombres, que se validan en su punto de control.
-
-#### §17.1.P.11 · GeometriaFactory-Application
-
-1. **El validador de figuras es un puerto, no una dependencia concreta** (RT §4.1): es lo que permite probar los **diez** casos de la batería aislando la lógica de tolerancia de claves.
-2. **La verificación de valores produce observaciones de dos niveles**, `Error` y `Advertencia`, y sólo el primero impide que el trabajo pase a `Pendiente` (RT §6.5, RN-05).
-3. **El reloj es un puerto** (`ISystemClock`), para que las fechas de alta y modificación sean verificables en prueba.
-
-#### §17.1.P.11 · GeometriaFactory-Infrastructure
-
-1. **El validador nace sabiendo las cuatro trampas del formato** T1 a T4 (RT §6.3): acepta `Bases` o `Tapas` como sinónimos en el ortoedro, parsea con `AllowTrailingCommas` y omisión de comentarios, acepta caras `Cuadrado` o `Rectangulo`, y **no rechaza los valores calculados erróneos: los señala**.
-2. **El JSON original se conserva íntegro** (RN-08), lo que permite reprocesar si el validador mejora.
-3. **Migraciones aplicadas al arrancar** (RT §10), no por un paso manual de despliegue.
-4. **SQLite y no un motor cliente-servidor**: es archivo único en un volumen, coherente con un despliegue domiciliario de un contenedor.
-5. **Se confirma la condición derivada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`** [DECISIÓN 2026-08-12]. **Ninguna fuente la enuncia**: la declaró `GeometriaFactory-Infrastructure` con su fundamento, y el Product Owner la confirma tal como está en lugar de reemplazarla. Enunciado: **cuando ninguna pieza del JSON se pudo reconstruir, la verificación de valores no se ejecuta y termina en esta condición propia**, y no en una lista vacía de observaciones ni en una escena en blanco sin explicación. El fundamento es que «cero advertencias» sería **indistinguible de un trabajo verificado sin discrepancias**, y convertiría un defecto de orquestación en un resultado creíble; y del lado del visor, una escena vacía sin motivo es exactamente el **fallo silencioso** que §12 define y que el producto viene a eliminar. Es la condición que protege el orden de los dos motores del validador: reconstruir primero, verificar después.
-
-### §17.1.P.12 Restricciones técnicas y trade-offs aceptados
-
-#### §17.1.P.12 · GeometriaFactory-Api
-
+### §17.5.P.12 Restricciones técnicas y trade-offs aceptados
 Se acepta una **ventana de indisponibilidad** en cada reemplazo de versión, a cambio de no montar un proxy inverso. Se acepta el **escritor único** de SQLite. Se acepta que el tramo front→API viaje en claro (R-02). No soporta carga concurrente alta ni multi-tenant, y no pretende hacerlo: el alcance es de aula (RT §1).
-
-#### §17.1.P.12 · GeometriaFactory-Contracts
-
-Se acepta duplicar forma entre entidades y DTOs a cambio de desacoplar los dos procesos. Se renuncia a un contrato descrito en OpenAPI y a clientes generados: con dos consumidores compilados juntos, el costo no se paga.
-
-#### §17.1.P.12 · GeometriaFactory-Domain
-
-Se renuncia a la comodidad de anotar las entidades con atributos de mapeo y de serialización, a cambio de que el dominio se pueda probar y cambiar sin tocar infraestructura. Se acepta la duplicación aparente entre las entidades y los DTOs de `GeometriaFactory.Contracts`: es deliberada, y es lo que impide que un cambio de dominio rompa el contrato HTTP.
-
-#### §17.1.P.12 · GeometriaFactory-Application
-
-Se renuncia a consultar la base con proyecciones ad-hoc desde el caso de uso, a cambio de poder probarlo entero con dobles. Se acepta escribir a mano el mapeo entre entidades y DTOs.
-
-#### §17.1.P.12 · GeometriaFactory-Infrastructure
-
-Se acepta la limitación de **escritor único** de SQLite a cambio de un despliegue sin servicio de base de datos aparte. Se acepta persistir los componentes de cada pieza pese a su redundancia (un `Cubo(3)` serializa 6 caras idénticas para expresar un solo número, AN §9.4) porque **son parte del ejercicio**; se compensa no cargándolos nunca en las consultas de listado (RT §7.2).
 
 ---
 
-## §17.2 GeometriaFactory-Web
+## §17.6 GeometriaFactory-Web
 
 | Campo | Valor |
 |---|---|
-| `Nombre-Unidad-Entrega` | GeometriaFactory-Web |
-| `tipo_unidad_entrega` (D8) | `web-monolith` |
-| Rol en el producto | Front Blazor Interactive Server con MudBlazor, desplegado en el hosting público. Es el único punto de contacto del navegador |
+| `Nombre-Proyecto-Codigo` | GeometriaFactory-Web |
+| `Identidad-Codigo` | `GeometriaFactory.Web` |
+| `tipo_proyecto_codigo` (D8) | `web-monolith` |
+| Rol | Front Blazor Interactive Server en el hosting público. Único punto de contacto del navegador |
 | `redistribuible` | false |
-| Proyectos de código que la componen | `GeometriaFactory-Web`, `GeometriaFactory-Contracts`, `GeometriaFactory-Visor` |
 
-Se compone de **3** proyectos de código: `GeometriaFactory-Web`, `GeometriaFactory-Contracts` y `GeometriaFactory-Visor`. **`GeometriaFactory-Contracts` es compartido**: sus entradas aparecen también en el bloque de la otra unidad de entrega, y la matriz de §13.3 lo hace visible.
-
-**Cada subsección P.N enumera las entradas de sus proyectos de código, nombrando el proyecto de cada una.** Los textos son los de la emisión 1.34, transpuestos sin reescritura: lo que cambia es el orden —de proyecto de código a subsección— y no el contenido. La correspondencia con la numeración anterior está en `SDD/Docs/Audit/Migracion-M2-Registro-Citas-17.json`.
-
-**Identidad de los proyectos de código que la componen.** `tipo_unidad_entrega` y `redistribuible` **no figuran acá**: son atributos de la unidad de entrega, según §13.1 y §13.2.
-
-| Proyecto de código | `Identidad-Codigo` | Rol |
-|---|---|---|
-| **GeometriaFactory-Web** | `GeometriaFactory.Web` | Front Blazor Interactive Server en el hosting público. Único punto de contacto del navegador |
-| **GeometriaFactory-Contracts** | `GeometriaFactory.Contracts` | DTOs de la API, compartidos por los dos procesos desplegables |
-| **GeometriaFactory-Visor** | `geometriafactory-visor` (paquete Node; excepción declarada en §13) | Bundle JavaScript del visor 3D. **Visualizador puro** (RA-02) |
-
-### §17.2.P.1 Stack tecnológico
-
-#### §17.2.P.1 · GeometriaFactory-Web
-
+### §17.6.P.1 Stack tecnológico
 ASP.NET Core sobre **.NET 10** con **Blazor**, páginas **Interactive Server** [DECISIÓN, RT §3]. Componentes de interfaz: **MudBlazor**, cuya versión exacta **se ancla al crear el andamiaje y se registra en RT §3 en ese momento** —la fuente la deja explícitamente **[A VERIFICAR]** porque no se puede contrastar contra el registro de paquetes en este entorno—. Dependencias core: `GeometriaFactory.Contracts` y el bundle de `GeometriaFactory-Visor`, que llega como archivo a `wwwroot/js/`.
 
-#### §17.2.P.1 · GeometriaFactory-Contracts
-
-C# sobre **.NET 10**, biblioteca de tipos de datos. **Sin dependencias**: no referencia el dominio. Es lo que impide que el front conozca las entidades.
-
-#### §17.2.P.1 · GeometriaFactory-Visor
-
-**TypeScript** como lenguaje fuente, transpilado por **webpack** [DECISIÓN, RT §3, §8.2]. **Three.js entra como dependencia de `package.json`, no por CDN**, y termina dentro del bundle: el front debe funcionar sin acceso a CDN externos (PT-03). El visor original usa **r128** por CDN (`index.html:230`); la versión que se adopte se ancla y se registra en RT §3, y si es posterior a r128 se documenta el cambio de API que exija —el visor actual reimplementa la cámara orbital a mano porque r128 no trae `OrbitControls` (AN §10.4 D19)—. Node.js en versión LTS anclada, provista por la característica `node` del devcontainer; `npm` corre **dentro del devcontainer**.
-
-### §17.2.P.2 Estilo arquitectónico
-
-#### §17.2.P.2 · GeometriaFactory-Web
-
+### §17.6.P.2 Estilo arquitectónico del proyecto de código
 Componentes Blazor con un **cliente tipado de la API** (`HttpClient` con `Bearer`) y una capa de interoperabilidad JS que habla **sólo** con la fachada del bundle. Alternativas descartadas, y esta es la decisión más consecuente del producto: (1) **Blazor WebAssembly** —descartado porque reabre las tres propiedades de la topología: contenido mixto, CORS y exposición de la IP del servidor propio, y obligaría a HTTPS válido en un servidor de IP dinámica (RT §2.2). Está registrada como la **salida preferente** si PT-01.b o PT-01.c dan rojo—; (2) **servir el front desde el propio contenedor del servidor propio** —descartado porque pierde el motivo por el que existe esta topología: el bloqueo desde la facultad—.
 
-#### §17.2.P.2 · GeometriaFactory-Contracts
+### §17.6.P.3 Comunicación e integración
+| Tramo | Definición |
+|---|---|
+| Navegador ↔ front | HTTPS + SignalR (WebSocket, o repliegue a long polling). Es el **circuito**, y termina acá: no llega al backend (RT §2.3) |
+| Front ↔ API | `HttpClient` en C#, petición-respuesta, `Bearer`. La dirección base se toma de configuración (`ApiBaseUrl`), **nunca embebida en el código** (RT §2.6) |
+| Front ↔ bundle del visor | `IJSRuntime` contra la fachada de `main.js`: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento` — **las seis** que §17.7 P.3 declara (RT §8.4, ampliado en 1.6) |
+| Prohibido | **Ningún JavaScript del navegador invoca la API** (RA-01). No se agregan bibliotecas JS que consulten servicios por su cuenta |
 
-Tipos de transferencia planos, sin comportamiento. Alternativas descartadas: (1) **compartir las entidades de dominio entre Api y Web** —descartado porque acoplaría el front a cambios internos del dominio y filtraría al navegador campos que no le corresponden, como `PasswordHash`—; (2) **generar el cliente desde OpenAPI** —descartado por costo de cadena de herramientas frente a un contrato que consumen dos proyectos de código de la misma solución—.
+**Regla de aislamiento del visor** (RT §4.2): el JavaScript del visor se consume **exclusivamente** a través de `main.js`. Ningún componente Blazor invoca funciones internas del bundle ni manipula el `canvas` por su cuenta. Es lo que permite reemplazar el motor 3D sin tocar las páginas.
 
-#### §17.2.P.2 · GeometriaFactory-Visor
+### §17.6.P.4 Persistencia
+**No aplica, y es deliberado.** «El front no guarda estado propio: es exactamente el problema que la topología evita» (RT §14). Lo único que vive del lado del front es el estado del circuito, en memoria del servidor del hosting, donde reside el token (RT §9.1).
 
+### §17.6.P.5 Seguridad y autenticación
+El front recibe las credenciales del formulario por HTTPS y las canjea contra `POST /auth/token`. Guarda el token **en el estado del circuito, del lado del servidor**; el navegador sólo maneja una cookie de sesión `HttpOnly`, `Secure`, `SameSite=Strict` (RT §9.2). **El token JWT no aparece en el navegador**, y eso es criterio de aceptación verificable con las herramientas de desarrollo (RF §10 etapa `c`).
+
+Protección de rutas: ninguna ruta del panel es accesible sin sesión, y un alumno autenticado no accede a ninguna ruta de administrador. Secretos: `ApiBaseUrl` y credenciales de FTP viven como secretos del repositorio y se inyectan en la publicación; **la dirección real del servidor propio no se versiona** (RT §14, §16).
+
+**RA-03 aplicada acá**: descargas, archivos, imágenes y redirecciones se sirven desde el dominio del front, que a su vez los pide a la API con `HttpClient`. Los mensajes de error mostrados al usuario nunca incluyen direcciones de servicios internos.
+
+### §17.6.P.6 Estrategia de testing
+No tiene proyecto de pruebas propio en el árbol de RT §4.2. Su verificación es **el guion de demostración de cada etapa**, ejecutado en el navegador del host y acumulativo por la regla de no-regresión (RF §9.4), más las pruebas de integración que ejercitan la API que consume.
+**Gate bloqueante y numérico en lugar de cobertura de líneas: el 100 % de los pasos del guion de demostración de la etapa y de todas las anteriores se ejecuta y pasa antes del punto de control** [ASUNCIÓN en cuanto a expresarlo como gate; la regla acumulativa es de RF §9.4]. Si en alguna etapa se agregan pruebas automatizadas de componentes, su cobertura mínima se fija en ese momento y se registra acá.
+
+### §17.6.P.7 Estrategia de versionado y release
+SemVer 2.0.0 y Conventional Commits sin excepciones; rama, pull request y etiqueta por etapa (RT §16). Canal de entrega: **workflow de GitHub Actions que publica y sube por FTP** al hosting, disparado manualmente y por fusión a la rama principal, restringido a cambios bajo `src/GeometriaFactory.Web/`, `visor/` y **`src/GeometriaFactory.Contracts/`** (RT §14, ampliado el 2026-08-11).
+
+**Por qué el contrato entra en el filtro** [DECISIÓN 2026-08-11]. RT §14 enumeraba dos rutas, y el proyecto de contratos **es entrada de compilación del front** (§13). Con dos rutas existía un caso silencioso: tocar el contrato, no tocar el front, fusionar, y **publicar un front compilado contra el contrato anterior** —que compila, porque el front no cambió, y falla recién contra la API—. Lo levantó la Fase F al resolver el punto abierto `PD-01`.
+
+**Orden de salida cuando front y backend cambian juntos: primero el backend** [DECISIÓN 2026-08-11]. Ninguna fuente lo elegía, y el intervalo entre los dos despliegues es una ventana de inconsistencia. Se elige el backend primero porque **una API nueva normalmente acepta lo que mandaba el front anterior**, mientras que un front nuevo contra una API vieja le pide algo que todavía no existe y el alumno ve el error. El orden **no vuelve automático el despliegue conjunto**: el front se publica al fusionar y el backend se despliega a mano, de modo que la coordinación sigue siendo un acto humano y el intervalo se minimiza, no se elimina.
+
+### §17.6.P.8 Pipeline CI/CD
+Pasos del workflow (RT §14): checkout → `setup-dotnet` .NET 10 → `setup-node` y `npm ci` en `visor/` → webpack genera el bundle y lo copia a `wwwroot/js` → `dotnet publish -c Release` → inyección de `ApiBaseUrl` desde secretos → subida FTP → **verificación de que la URL pública responde 200**.
+
+Quality gates bloqueantes: build sin advertencias; bundle generado en el mismo workflow, nunca tomado de un artefacto viejo; **el workflow no termina en la subida, termina comprobando que la URL pública responde** —una subida por FTP que deja la aplicación caída y se reporta como exitosa es peor que una falla visible (RT §14)—. Rollback: volver a publicar desde la etiqueta anterior. Riesgo asumido: **la subida por FTP no es transaccional** (R-03); se despliega fuera del horario de uso.
+
+### §17.6.P.9 Compatibilidad y plataformas target
+
+**Transporte de la sesión interactiva: SignalR con el transporte que el anfitrión ofrezca** [DECISIÓN 2026-08-13 del Product Owner]. El producto usa **SignalR** y no exige ningún transporte en particular: toma el mejor disponible y repliega solo. **La ausencia de WebSocket en el hosting queda aceptada y no bloquea**, con tres medidas independientes que la sostienen —la negociación ofrece sólo eventos del servidor y long polling por HTTP/2 y por HTTP/1.1; habilitarlo en la configuración del sitio no cambia la oferta y no rompe; y un apretón de manos de ascenso devuelve 200 en vez de 101, o sea que el servidor **ignora** el pedido—.
+
+**Por qué no bloquea, y no es resignación**: la interacción continua —rotar, acercar, mover la cámara, seleccionar una pieza, recorrer el árbol— **no viaja por el circuito**, porque el visor es un visualizador puro que resuelve todo en el navegador (RA-02) y el árbol es responsabilidad suya. Por el circuito viajan **actos discretos y espaciados**: pegar el texto, enviar, navegar, aprobar o rechazar. La decisión de 1.6 de que el visor fuera puro —tomada sin saber esto— es lo que vuelve la carencia una molestia y no un problema.
+
+**Qué reabriría la decisión**, y con qué señal se reconoce: que el aviso de reconexión **aparezca con frecuencia** durante el uso real —en la medición de veinte minutos no apareció ni una vez—, o que la respuesta **se degrade al crecer la cantidad de alumnos conectados**, que es el costo propio del long polling. En cualquiera de los dos casos la salida está identificada y **no toca una línea de código**: un anfitrión que ofrezca WebSocket, y SignalR pasa a usarlo solo. **Nada quedó preparado, y es correcto que así sea** [CORREGIDO 2026-08-13]: la 1.32 afirmaba que la configuración del sitio ya estaba lista para aprovecharlo. Se había agregado una línea que habilita WebSocket en la configuración de la aplicación, **se midió que no cambia nada** —el anfitrión decide por encima de ella— y **se revirtió**, porque una línea inerte da la falsa impresión de que el asunto está resuelto. Si algún día el anfitrión lo ofrece, SignalR lo toma **solo**, sin configuración ni código.
+Servidor: hosting gratuito somee.com con servidor de información, HTTPS y dominio público. **La versión de .NET que soporta el hosting está [A VERIFICAR]**: es PT-01.a, y si no pasa la salida es **bajar la versión objetivo del front, no la del backend** —son dos artefactos independientes (RT §12)—.
+Navegador: cualquiera con soporte de **WebGL** y de WebSockets o long polling. La fuente no fija versiones mínimas; se declara el requisito por capacidad y no por número de versión, y toda combinación sin WebGL se considera no soportada, porque sin él no hay visor.
+
+### §17.6.P.10 Requerimientos no funcionales (NFR)
+Los NFR de este proyecto de código **son las cuatro mediciones de PT-01**, que la fuente declara y que se miden en la etapa `a` (RT §12):
+
+| Id | Criterio | Umbral | Si no pasa |
+|---|---|---|---|
+| PT-01.a | El front publicado arranca y sirve la página inicial | **200** en la URL pública | Bajar la versión objetivo del front |
+| PT-01.b | Transporte del circuito | Semáforo: 🟢 WebSockets · 🟡 long polling **aceptable**, se documenta la latencia percibida · 🔴 sin circuito | Sólo 🔴 obliga a cambiar el modelo de front |
+| PT-01.c | Estabilidad del proceso | **20 minutos** de navegación continua sin que el proceso recicle el circuito, y reconexión funcional al cortar y restablecer la red | Es el peor escenario: **no tiene mitigación en el código** (R-06) |
+| PT-01.d | Salida hacia el backend | Una llamada de salud devuelve datos reales del servidor propio | Publicar la API en un puerto convencional (R-05). **La pasarela no ayuda acá** |
+
+Además: **durante la interacción 3D no hay tráfico de circuito hacia el servidor** (RT §8.4). El JSON viaja del servidor al navegador **una sola vez por trabajo**, en la invocación de `cargarJson`; ni el árbol ni la escena se re-renderizan desde el servidor.
+Observabilidad: manejo explícito del cartel de reconexión y del **estado degradado** cuando la API no responde, nunca una excepción sin manejar (RT §2.6).
+
+### §17.6.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
+1. **Blazor Interactive Server** [DECISIÓN, RT §3], por la razón técnica de RT §2.2 y no por preferencia de estilo: la llamada a la API la hace el servidor del front, lo que elimina contenido mixto, CORS y exposición de la IP.
+2. **MudBlazor** como sistema de componentes [DECISIÓN], sin estilos improvisados fuera del sistema visual (criterio de aceptación de la etapa `b`).
+3. **La dirección de la API viene de configuración**, admitiendo IP directa [DECISIÓN: «la IP dinámica realmente no cambia tanto»], con DDNS como recomendación (RT §2.6).
+4. **Maquetado de dos columnas en la página de trabajo**: datos y texto del JSON a la izquierda; canvas 3D arriba y árbol del JSON abajo a la derecha. Es la disposición del visor actual, **ya probada en el aula** (RF §7, AN §7.2).
+5. **`destruir` se invoca en `DisposeAsync` del componente**, no opcional bajo Interactive Server: sin eso, navegar entre trabajos acumula contextos WebGL en el navegador (RT §8.4).
+
+### §17.6.P.12 Restricciones técnicas y trade-offs aceptados
+Se acepta depender de un hosting gratuito, con el reciclado de proceso como riesgo sin mitigación en el código (R-06), a cambio de tener dominio público y HTTPS donde la facultad no bloquea. Se acepta que un repliegue a **long polling** degrade la latencia percibida al tipear; **no es motivo de rediseño** (R-07). Se renuncia a ejecutar lógica en el navegador —salvo el dibujo del visor— para no reabrir RA-01.
+
+---
+
+## §17.7 GeometriaFactory-Visor
+
+| Campo | Valor |
+|---|---|
+| `Nombre-Proyecto-Codigo` | GeometriaFactory-Visor |
+| `Identidad-Codigo` | `geometriafactory-visor` (paquete Node; excepción declarada en §13) |
+| `tipo_proyecto_codigo` (D8) | `library` |
+| Rol | Bundle JavaScript del visor 3D. **Visualizador puro** (RA-02) |
+| `redistribuible` | false |
+
+### §17.7.P.1 Stack tecnológico
+**TypeScript** como lenguaje fuente, transpilado por **webpack** [DECISIÓN, RT §3, §8.2]. **Three.js entra como dependencia de `package.json`, no por CDN**, y termina dentro del bundle: el front debe funcionar sin acceso a CDN externos (PT-03). El visor original usa **r128** por CDN (`index.html:230`); la versión que se adopte se ancla y se registra en RT §3, y si es posterior a r128 se documenta el cambio de API que exija —el visor actual reimplementa la cámara orbital a mano porque r128 no trae `OrbitControls` (AN §10.4 D19)—. Node.js en versión LTS anclada, provista por la característica `node` del devcontainer; `npm` corre **dentro del devcontainer**.
+
+### §17.7.P.2 Estilo arquitectónico del proyecto de código
 **Tres capas, obligatorias, y es el motivo por el que existe `main.ts`** (RT §8.4):
 
 | Capa | Archivo | Responsabilidad | Qué no hace |
@@ -1143,36 +1102,7 @@ Alternativas descartadas: (1) **portar `js/visor.js` tal cual** —descartado po
 
 **Qué se porta y qué no** (RT §8.1): se portan `create3DObject` y las funciones `create*`, el árbol JSON colapsable (`createJSONTree`, «el mejor recurso didáctico del visor») y la escena con luces y cámara orbital. **No se portan** las cinco variantes comentadas de `processObjectArray`, las dos de `getRandomPosition`, `updateCylinder()`, los manejadores `toggleWireframe` y `centerObjects` —referencian elementos inexistentes—, ni jQuery, Popper y Bootstrap JS, cargados sin uso. El layout con `sort(() => Math.random() - 0.5)` **se reemplaza** por posición derivada del índice (AN §10.4 D10).
 
-### §17.2.P.3 Comunicación e integración
-
-#### §17.2.P.3 · GeometriaFactory-Web
-
-| Tramo | Definición |
-|---|---|
-| Navegador ↔ front | HTTPS + SignalR (WebSocket, o repliegue a long polling). Es el **circuito**, y termina acá: no llega al backend (RT §2.3) |
-| Front ↔ API | `HttpClient` en C#, petición-respuesta, `Bearer`. La dirección base se toma de configuración (`ApiBaseUrl`), **nunca embebida en el código** (RT §2.6) |
-| Front ↔ bundle del visor | `IJSRuntime` contra la fachada de `main.js`: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento` — **las seis** que §17.7 P.3 declara (RT §8.4, ampliado en 1.6) |
-| Prohibido | **Ningún JavaScript del navegador invoca la API** (RA-01). No se agregan bibliotecas JS que consulten servicios por su cuenta |
-
-**Regla de aislamiento del visor** (RT §4.2): el JavaScript del visor se consume **exclusivamente** a través de `main.js`. Ningún componente Blazor invoca funciones internas del bundle ni manipula el `canvas` por su cuenta. Es lo que permite reemplazar el motor 3D sin tocar las páginas.
-
-#### §17.2.P.3 · GeometriaFactory-Contracts
-
-Es **el** contrato de comunicación del producto: define el payload JSON que viaja entre `GeometriaFactory.Web` y `GeometriaFactory.Api` por HTTP con `Bearer` (RT §4.1, §9.1). Política de cambios incompatibles: como los dos extremos se compilan contra el mismo ensamblado, un cambio incompatible **rompe la compilación** antes de romper el runtime. La regla operativa es que Api y Web se despliegan juntos ante un cambio de contrato; no hay versionado de endpoints en este alcance porque no hay clientes de terceros.
-
-**Dos códigos entran al conjunto cerrado: diecisiete vivos sobre veinte identificadores emitidos** [DECISIÓN 2026-08-12]. El conjunto cerrado de códigos de error del contrato lo **emite formalmente `GeometriaFactory-Contracts`**, que es su fuente y el único lugar donde los identificadores están enumerados juntos; este intake no lo transcribe entero y declara acá los que entran **por decisión**, con el recuento que resulta. Hasta hoy el conjunto tenía **quince códigos vivos** sobre **dieciocho** identificadores emitidos —quince vivos más **tres retirados**, que no se reciclan—. Con estos dos pasa a **diecisiete vivos sobre veinte emitidos**, y los tres retirados siguen retirados. Los dos identificadores son **derivación de este intake**: se proponen acá siguiendo la convención `CONTRATO_<CONDICIÓN>` de los quince vivos, y `GeometriaFactory-Contracts` los emite formalmente al incorporarlos.
-
-| Código nuevo | Condición que representa | Por qué no alcanzaba lo que había |
-|---|---|---|
-| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | **El papel no alcanza para la operación pedida, fuera del desenlace de un trabajo**: gobernar las cuentas de la comisión (F-03), resetear la contraseña de un alumno (F-26) y ver el listado de trabajos de la comisión (F-12) | El único código de facultad del conjunto, `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`, está **acotado por su enunciado** a aprobar o rechazar un trabajo (F-23, RN-10), y la capa de aplicación emite ese mismo rechazo en las otras tres. Sin código propio, las tres caen en el genérico `CONTRATO_ERROR_NO_CLASIFICADO` y **el front no puede distinguir «no tenés permiso» de «algo salió mal»**, que son dos mensajes distintos para el alumno |
-| `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | **Se pidió enviar o reeditar un trabajo que no está en `Borrador`.** Un trabajo en `Pendiente`, `Finalizado` o `Rechazado` es de **sólo lectura** para el alumno (F-07, RN-04, INV-07) | El código análogo existente, `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, está **acotado a la eliminación** y al camino del alumno, y no cubre las otras dos escrituras que el mismo estado prohíbe. Sin él, forzar un envío o una reedición contra la API sobre un trabajo ya entregado no tiene código propio |
-
-Los dos son códigos de **rechazo sin escritura**: la operación no ocurre y el estado no cambia. Ninguno reemplaza a los quince vigentes ni recicla a los tres retirados, y ninguno modifica los cuatro campos del tipo de error ni la regla de exposición de P.5.
-
-**Los códigos del contrato pasan a inglés, y es un cambio de contrato** [DECISIÓN del Product Owner 2026-08-12, `F-03`, §13.1]. Alcanza a **los 21 identificadores `CONTRATO_*`** —17 vivos, la señal de listado vacío y los 3 retirados— y **elimina el prefijo `CONTRATO_`**: la identidad del código la da el conjunto cerrado que lo declara, no un prefijo dentro del nombre. Se declara **como cambio de contrato y no como renombre**, porque estos códigos viajan dentro de las respuestas y `GeometriaFactory-Web` los cita para decidir qué muestra; en consecuencia rige `RT-06` —los dos extremos se cambian y se despliegan juntos—. **El conjunto no cambia de tamaño, ni entra ni sale ningún código, y ninguna condición cambia de significado**: cambia el idioma del identificador. La correspondencia uno a uno está en `Norma-De-Nomenclatura.md` §6.8.6 y **este documento no la transcribe**. La ejecución es el tramo `R-5` de la norma §8, y **esta versión no renombra nada**.
-
-#### §17.2.P.3 · GeometriaFactory-Visor
-
+### §17.7.P.3 Comunicación e integración
 Contrato de la fachada, con los nombres definitivos a fijar en la etapa que la implementa (RT §8.4):
 
 | Función expuesta | Propósito |
@@ -1188,173 +1118,41 @@ Contrato de la fachada, con los nombres definitivos a fijar en la etapa que la i
 
 La salida se expone como **biblioteca en `window` con un nombre propio, sin globales sueltas** (RT §8.2). **El bundle no hace ninguna llamada de red** —ni `fetch`, ni `XMLHttpRequest`, ni `WebSocket`— y no lee configuración propia (RA-02).
 
-### §17.2.P.4 Persistencia
-
-#### §17.2.P.4 · GeometriaFactory-Web
-
-**No aplica, y es deliberado.** «El front no guarda estado propio: es exactamente el problema que la topología evita» (RT §14). Lo único que vive del lado del front es el estado del circuito, en memoria del servidor del hosting, donde reside el token (RT §9.1).
-
-#### §17.2.P.4 · GeometriaFactory-Contracts
-
-**No aplica.**
-
-#### §17.2.P.4 · GeometriaFactory-Visor
-
+### §17.7.P.4 Persistencia
 **No aplica, y es prohibición explícita**: el bundle no guarda estado entre páginas ni escribe en el almacenamiento del navegador (RT §8.3).
 
-### §17.2.P.5 Seguridad y autenticación
-
-#### §17.2.P.5 · GeometriaFactory-Web
-
-El front recibe las credenciales del formulario por HTTPS y las canjea contra `POST /auth/token`. Guarda el token **en el estado del circuito, del lado del servidor**; el navegador sólo maneja una cookie de sesión `HttpOnly`, `Secure`, `SameSite=Strict` (RT §9.2). **El token JWT no aparece en el navegador**, y eso es criterio de aceptación verificable con las herramientas de desarrollo (RF §10 etapa `c`).
-
-Protección de rutas: ninguna ruta del panel es accesible sin sesión, y un alumno autenticado no accede a ninguna ruta de administrador. Secretos: `ApiBaseUrl` y credenciales de FTP viven como secretos del repositorio y se inyectan en la publicación; **la dirección real del servidor propio no se versiona** (RT §14, §16).
-
-**RA-03 aplicada acá**: descargas, archivos, imágenes y redirecciones se sirven desde el dominio del front, que a su vez los pide a la API con `HttpClient`. Los mensajes de error mostrados al usuario nunca incluyen direcciones de servicios internos.
-
-#### §17.2.P.5 · GeometriaFactory-Contracts
-
-No implementa autenticación, pero **es donde se decide qué se expone**. Regla: ningún DTO incluye el hash de contraseña, la clave de firma ni ninguna dirección de servicio interno (RA-03). El DTO de respuesta de error lleva texto neutro y, cuando corresponde, índice de figura y campo (RN-09), nunca la dirección del servicio que falló.
-
-#### §17.2.P.5 · GeometriaFactory-Visor
-
+### §17.7.P.5 Seguridad y autenticación
 **No aplica, y también es prohibición explícita**: el bundle no sabe quién es el usuario ni qué rol tiene, y no participa de ninguna decisión de autorización (RT §8.3). Su contribución a la seguridad del producto es negativa por diseño —no hacer red—: es lo que hace imposible que aparezca un `fetch` del navegador hacia la API y que vuelvan contenido mixto, CORS y exposición de la IP.
 
-### §17.2.P.6 Estrategia de testing
-
-#### §17.2.P.6 · GeometriaFactory-Web
-
-No tiene proyecto de pruebas propio en el árbol de RT §4.2. Su verificación es **el guion de demostración de cada etapa**, ejecutado en el navegador del host y acumulativo por la regla de no-regresión (RF §9.4), más las pruebas de integración que ejercitan la API que consume.
-**Gate bloqueante y numérico en lugar de cobertura de líneas: el 100 % de los pasos del guion de demostración de la etapa y de todas las anteriores se ejecuta y pasa antes del punto de control** [ASUNCIÓN en cuanto a expresarlo como gate; la regla acumulativa es de RF §9.4]. Si en alguna etapa se agregan pruebas automatizadas de componentes, su cobertura mínima se fija en ese momento y se registra acá.
-
-#### §17.2.P.6 · GeometriaFactory-Contracts
-
-No tiene pruebas propias: son tipos sin comportamiento. Se ejercitan íntegramente desde `GeometriaFactory.Integration.Tests`, que golpea la API real por HTTP con `WebApplicationFactory` (RT §11).
-**Cobertura mínima: no aplica como gate propio**; el gate equivalente y bloqueante es que **el 100 % de los DTOs esté ejercitado por al menos una prueba de integración** [ASUNCIÓN].
-
-#### §17.2.P.6 · GeometriaFactory-Visor
-
+### §17.7.P.6 Estrategia de testing
 Se ejercita **sin backend**, con un JSON pegado a mano en una página de prueba: es la propiedad que hoy tiene `tools_json_figure_viewer` y que RT §8.3 exige no perder. Es también el sample de §16.1.
 **Gate bloqueante y verificable por inspección, en lugar de cobertura de líneas: cero ocurrencias de `fetch`, `XMLHttpRequest` y `WebSocket` en el código fuente de `visor/` y en el bundle generado** [ASUNCIÓN en cuanto a expresarlo como gate automatizable; la regla es de RA-02 y ya es criterio de aceptación de la etapa `g`]. Se verifica además por la pestaña de red del navegador: durante la interacción 3D **no hay ni una sola petición hacia la API**.
 Casos de dibujo verificados con los escenarios E-1 y E-7 de la Parte D: las tres figuras del JSON semilla se dibujan, **ortoedro incluido**.
 
-### §17.2.P.7 Estrategia de versionado y release
-
-#### §17.2.P.7 · GeometriaFactory-Web
-
-SemVer 2.0.0 y Conventional Commits sin excepciones; rama, pull request y etiqueta por etapa (RT §16). Canal de entrega: **workflow de GitHub Actions que publica y sube por FTP** al hosting, disparado manualmente y por fusión a la rama principal, restringido a cambios bajo `src/GeometriaFactory.Web/`, `visor/` y **`src/GeometriaFactory.Contracts/`** (RT §14, ampliado el 2026-08-11).
-
-**Por qué el contrato entra en el filtro** [DECISIÓN 2026-08-11]. RT §14 enumeraba dos rutas, y el proyecto de contratos **es entrada de compilación del front** (§13). Con dos rutas existía un caso silencioso: tocar el contrato, no tocar el front, fusionar, y **publicar un front compilado contra el contrato anterior** —que compila, porque el front no cambió, y falla recién contra la API—. Lo levantó la Fase F al resolver el punto abierto `PD-01`.
-
-**Orden de salida cuando front y backend cambian juntos: primero el backend** [DECISIÓN 2026-08-11]. Ninguna fuente lo elegía, y el intervalo entre los dos despliegues es una ventana de inconsistencia. Se elige el backend primero porque **una API nueva normalmente acepta lo que mandaba el front anterior**, mientras que un front nuevo contra una API vieja le pide algo que todavía no existe y el alumno ve el error. El orden **no vuelve automático el despliegue conjunto**: el front se publica al fusionar y el backend se despliega a mano, de modo que la coordinación sigue siendo un acto humano y el intervalo se minimiza, no se elimina.
-
-#### §17.2.P.7 · GeometriaFactory-Contracts
-
-Idéntica a §17.1.P.7 · GeometriaFactory-Domain. Un cambio incompatible en un DTO es **breaking** y sube major del producto en `changelog.md`, aunque no se publique en ningún feed.
-
-#### §17.2.P.7 · GeometriaFactory-Visor
-
+### §17.7.P.7 Estrategia de versionado y release
 SemVer 2.0.0 en `package.json` y Conventional Commits, igual que el resto del producto. **No se publica en npm.** Su artefacto es `visor.bundle.js`, y **es un artefacto generado**: si se versiona en el repositorio, se versiona como salida reproducible; si se ignora, `scripts/build.sh` lo genera antes de publicar (RT §5.2 R6). Nunca se edita a mano.
 
-### §17.2.P.8 Pipeline CI/CD
-
-#### §17.2.P.8 · GeometriaFactory-Web
-
-Pasos del workflow (RT §14): checkout → `setup-dotnet` .NET 10 → `setup-node` y `npm ci` en `visor/` → webpack genera el bundle y lo copia a `wwwroot/js` → `dotnet publish -c Release` → inyección de `ApiBaseUrl` desde secretos → subida FTP → **verificación de que la URL pública responde 200**.
-
-Quality gates bloqueantes: build sin advertencias; bundle generado en el mismo workflow, nunca tomado de un artefacto viejo; **el workflow no termina en la subida, termina comprobando que la URL pública responde** —una subida por FTP que deja la aplicación caída y se reporta como exitosa es peor que una falla visible (RT §14)—. Rollback: volver a publicar desde la etiqueta anterior. Riesgo asumido: **la subida por FTP no es transaccional** (R-03); se despliega fuera del horario de uso.
-
-#### §17.2.P.8 · GeometriaFactory-Contracts
-
-Stages: restore → build. Quality gate bloqueante: **compila sin advertencias y sin referencias hacia `GeometriaFactory.Domain`**; una referencia de ese tipo se rechaza en revisión, porque es la vía por la que el acoplamiento vuelve.
-
-#### §17.2.P.8 · GeometriaFactory-Visor
-
+### §17.7.P.8 Pipeline CI/CD
 Stages: `npm ci` → webpack → copia a `src/GeometriaFactory.Web/wwwroot/js/`. `scripts/build-visor.sh` hace sólo el bundle, para el ciclo corto de trabajo sobre el visor; `scripts/build.sh` lo encadena con la compilación de la solución. Quality gates bloqueantes: el bundle se genera sin errores; **PT-03** —Three.js dentro del bundle, la página funciona sin acceso a CDN—; **PT-02** —el bundle carga en una página Blazor Interactive Server, `inicializar` crea la escena, `cargarJson` dibuja las tres figuras de E-1 incluido el ortoedro, navegar y volver 10 veces no degrada, y el árbol y la escena se sincronizan por índice—.
 
-### §17.2.P.9 Compatibilidad y plataformas target
-
-#### §17.2.P.9 · GeometriaFactory-Web
-
-**Transporte de la sesión interactiva: SignalR con el transporte que el anfitrión ofrezca** [DECISIÓN 2026-08-13 del Product Owner]. El producto usa **SignalR** y no exige ningún transporte en particular: toma el mejor disponible y repliega solo. **La ausencia de WebSocket en el hosting queda aceptada y no bloquea**, con tres medidas independientes que la sostienen —la negociación ofrece sólo eventos del servidor y long polling por HTTP/2 y por HTTP/1.1; habilitarlo en la configuración del sitio no cambia la oferta y no rompe; y un apretón de manos de ascenso devuelve 200 en vez de 101, o sea que el servidor **ignora** el pedido—.
-
-**Por qué no bloquea, y no es resignación**: la interacción continua —rotar, acercar, mover la cámara, seleccionar una pieza, recorrer el árbol— **no viaja por el circuito**, porque el visor es un visualizador puro que resuelve todo en el navegador (RA-02) y el árbol es responsabilidad suya. Por el circuito viajan **actos discretos y espaciados**: pegar el texto, enviar, navegar, aprobar o rechazar. La decisión de 1.6 de que el visor fuera puro —tomada sin saber esto— es lo que vuelve la carencia una molestia y no un problema.
-
-**Qué reabriría la decisión**, y con qué señal se reconoce: que el aviso de reconexión **aparezca con frecuencia** durante el uso real —en la medición de veinte minutos no apareció ni una vez—, o que la respuesta **se degrade al crecer la cantidad de alumnos conectados**, que es el costo propio del long polling. En cualquiera de los dos casos la salida está identificada y **no toca una línea de código**: un anfitrión que ofrezca WebSocket, y SignalR pasa a usarlo solo. **Nada quedó preparado, y es correcto que así sea** [CORREGIDO 2026-08-13]: la 1.32 afirmaba que la configuración del sitio ya estaba lista para aprovecharlo. Se había agregado una línea que habilita WebSocket en la configuración de la aplicación, **se midió que no cambia nada** —el anfitrión decide por encima de ella— y **se revirtió**, porque una línea inerte da la falsa impresión de que el asunto está resuelto. Si algún día el anfitrión lo ofrece, SignalR lo toma **solo**, sin configuración ni código.
-Servidor: hosting gratuito somee.com con servidor de información, HTTPS y dominio público. **La versión de .NET que soporta el hosting está [A VERIFICAR]**: es PT-01.a, y si no pasa la salida es **bajar la versión objetivo del front, no la del backend** —son dos artefactos independientes (RT §12)—.
-Navegador: cualquiera con soporte de **WebGL** y de WebSockets o long polling. La fuente no fija versiones mínimas; se declara el requisito por capacidad y no por número de versión, y toda combinación sin WebGL se considera no soportada, porque sin él no hay visor.
-
-#### §17.2.P.9 · GeometriaFactory-Contracts
-
-`net10.0`, Linux. Se carga en los dos procesos: el del hosting y el del servidor propio.
-
-#### §17.2.P.9 · GeometriaFactory-Visor
-
+### §17.7.P.9 Compatibilidad y plataformas target
 Navegadores con **WebGL**. Node.js LTS anclado, sólo en tiempo de construcción: en runtime no hay Node, hay un archivo JavaScript servido desde `wwwroot`. La fuente no fija versiones mínimas de navegador; se declara el requisito por capacidad, y sin WebGL el visor no es soportado.
 
-### §17.2.P.10 Requerimientos no funcionales (NFR)
-
-#### §17.2.P.10 · GeometriaFactory-Web
-
-Los NFR de este proyecto de código **son las cuatro mediciones de PT-01**, que la fuente declara y que se miden en la etapa `a` (RT §12):
-
-| Id | Criterio | Umbral | Si no pasa |
-|---|---|---|---|
-| PT-01.a | El front publicado arranca y sirve la página inicial | **200** en la URL pública | Bajar la versión objetivo del front |
-| PT-01.b | Transporte del circuito | Semáforo: 🟢 WebSockets · 🟡 long polling **aceptable**, se documenta la latencia percibida · 🔴 sin circuito | Sólo 🔴 obliga a cambiar el modelo de front |
-| PT-01.c | Estabilidad del proceso | **20 minutos** de navegación continua sin que el proceso recicle el circuito, y reconexión funcional al cortar y restablecer la red | Es el peor escenario: **no tiene mitigación en el código** (R-06) |
-| PT-01.d | Salida hacia el backend | Una llamada de salud devuelve datos reales del servidor propio | Publicar la API en un puerto convencional (R-05). **La pasarela no ayuda acá** |
-
-Además: **durante la interacción 3D no hay tráfico de circuito hacia el servidor** (RT §8.4). El JSON viaja del servidor al navegador **una sola vez por trabajo**, en la invocación de `cargarJson`; ni el árbol ni la escena se re-renderizan desde el servidor.
-Observabilidad: manejo explícito del cartel de reconexión y del **estado degradado** cuando la API no responde, nunca una excepción sin manejar (RT §2.6).
-
-#### §17.2.P.10 · GeometriaFactory-Contracts
-
-Sin NFR de runtime propios. Un NFR estructural, verificable por inspección: **el payload de listado de trabajos no incluye ni el `OriginalJson` ni los componentes de las piezas** [ASUNCIÓN derivada de RT §7.2], para que el listado del administrador no arrastre el texto completo de cada trabajo.
-
-#### §17.2.P.10 · GeometriaFactory-Visor
-
+### §17.7.P.10 Requerimientos no funcionales (NFR)
 - **Movimiento automático opcional** (F-25): la fachada expone el gobierno de los dos movimientos **por función propia, sin reconstruir la instancia**, y no alteran la disposición. El determinismo que este proyecto de código garantiza es de la **posición** de cada pieza, derivada de su índice, no de su orientación en un instante [DECISIÓN 2026-08-09].
 - **Cero peticiones de red** originadas por el bundle. Es el NFR más importante del proyecto de código y se mide contando peticiones en la pestaña de red: el umbral es exactamente 0, **medido con los dos movimientos automáticos prendidos y sostenidos**, que es su peor caso porque el bucle de dibujo corre de continuo [DECISIÓN 2026-08-09]. Medirlo con los movimientos apagados —lo que ocurre por defecto en un entorno que declara preferencia de movimiento reducido— dejaría la prueba en verde sin haber ejercitado nunca el bucle (RA-01, RA-02).
 - **Sin degradación tras 10 navegaciones de ida y vuelta entre trabajos** (RT §12 PT-02): `destruir` libera geometrías, materiales y el contexto WebGL.
 - **Disposición determinista**: procesar el mismo trabajo dos veces produce la misma disposición (cierra AN D10). Se verifica comparando dos procesados.
 - Interacción fluida al rotar y acercar con el mouse, **sin tráfico de circuito durante el gesto** (RT §8.4).
 
-### §17.2.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
-
-#### §17.2.P.11 · GeometriaFactory-Web
-
-1. **Blazor Interactive Server** [DECISIÓN, RT §3], por la razón técnica de RT §2.2 y no por preferencia de estilo: la llamada a la API la hace el servidor del front, lo que elimina contenido mixto, CORS y exposición de la IP.
-2. **MudBlazor** como sistema de componentes [DECISIÓN], sin estilos improvisados fuera del sistema visual (criterio de aceptación de la etapa `b`).
-3. **La dirección de la API viene de configuración**, admitiendo IP directa [DECISIÓN: «la IP dinámica realmente no cambia tanto»], con DDNS como recomendación (RT §2.6).
-4. **Maquetado de dos columnas en la página de trabajo**: datos y texto del JSON a la izquierda; canvas 3D arriba y árbol del JSON abajo a la derecha. Es la disposición del visor actual, **ya probada en el aula** (RF §7, AN §7.2).
-5. **`destruir` se invoca en `DisposeAsync` del componente**, no opcional bajo Interactive Server: sin eso, navegar entre trabajos acumula contextos WebGL en el navegador (RT §8.4).
-
-#### §17.2.P.11 · GeometriaFactory-Contracts
-
-1. **Existe un ensamblado de contratos separado** (RT §4.1), en lugar de definir los DTOs dentro de la Api.
-2. **El texto crudo del JSON viaja como cadena**, sin interpretarse en el contrato: la interpretación es del backend y el dibujo del bundle.
-
-#### §17.2.P.11 · GeometriaFactory-Visor
-
+### §17.7.P.11 Decisiones técnicas pre-tomadas (pre-ADR)
 1. **El bundle es un visualizador puro** (RA-02, RT §8.3): recibe objetos genéricos por interoperabilidad y dibuja. Sostiene RA-01, se prueba sin backend y es reemplazable.
 2. **Three.js empaquetado, no por CDN** (PT-03).
 3. **Un único bundle expuesto como biblioteca en `window`**, sin globales sueltas.
 4. **El bundle tolera las mismas claves que el backend** (T1, T3) y **eso no es duplicar la validación**: el backend decide si el trabajo es válido y emite observaciones; el bundle sólo necesita saber de dónde sacar una dimensión para dibujar, y emite mallas (RT §8.3).
 5. **Posición derivada del índice** en lugar del `sort` aleatorio del visor original.
 
-### §17.2.P.12 Restricciones técnicas y trade-offs aceptados
-
-#### §17.2.P.12 · GeometriaFactory-Web
-
-Se acepta depender de un hosting gratuito, con el reciclado de proceso como riesgo sin mitigación en el código (R-06), a cambio de tener dominio público y HTTPS donde la facultad no bloquea. Se acepta que un repliegue a **long polling** degrade la latencia percibida al tipear; **no es motivo de rediseño** (R-07). Se renuncia a ejecutar lógica en el navegador —salvo el dibujo del visor— para no reabrir RA-01.
-
-#### §17.2.P.12 · GeometriaFactory-Contracts
-
-Se acepta duplicar forma entre entidades y DTOs a cambio de desacoplar los dos procesos. Se renuncia a un contrato descrito en OpenAPI y a clientes generados: con dos consumidores compilados juntos, el costo no se paga.
-
-#### §17.2.P.12 · GeometriaFactory-Visor
-
+### §17.7.P.12 Restricciones técnicas y trade-offs aceptados
 Se renuncia a que el visor pida datos por su cuenta —lo que sería más simple de implementar— porque eso reabriría contenido mixto, CORS y exposición de la IP (R-10). Se acepta el peso de Three.js dentro del bundle a cambio de funcionar sin acceso a CDN. Se acepta reescribir el port en TypeScript en lugar de copiar el archivo original, con el costo de trabajo que implica: portar tal cual arrastraría el 48 % de código muerto y dos controles inoperantes a una solución nueva.
 
 ---
@@ -1745,7 +1543,7 @@ Cobertura de invariantes y reglas de negocio por escenario:
 | Invariante o regla | Escenario que la ejercita |
 |---|---|
 | RN-05 — un trabajo no pasa a `Pendiente` con errores de interpretación; las advertencias sí lo permiten | E-5 (rechaza), E-1, E-2, E-3 (aceptan con advertencias) |
-| RN-08 — el JSON original se conserva íntegro y nunca se reescribe | **Los ocho**: ningún escenario espera que el texto guardado difiera del pegado. **Corregido el 2026-08-08**: esta fila atribuía la regla a INV-04, que enuncia otra cosa —un trabajo `Finalizado` tiene JSON interpretado sin errores, §17.1.P.2 · GeometriaFactory-Domain—. RN-08 no tiene invariante asociado |
+| RN-08 — el JSON original se conserva íntegro y nunca se reescribe | **Los ocho**: ningún escenario espera que el texto guardado difiera del pegado. **Corregido el 2026-08-08**: esta fila atribuía la regla a INV-04, que enuncia otra cosa —un trabajo `Finalizado` tiene JSON interpretado sin errores, §17.1.P.2—. RN-08 no tiene invariante asociado |
 | RN-09 — todo mensaje de error indica índice de figura y campo | E-5 |
 | RF-20 — verificación de valores calculados con tolerancia 0.01 | E-1, E-2, E-3 (advierten), E-4, E-6 (no advierten de área/volumen declarados correctos) |
 | RA-02 — el bundle no hace red y se ejercita sin backend | E-7 |
@@ -1797,10 +1595,6 @@ General:
 
 ## §22 Supuestos declarados y puntos a confirmar
 
-> **Apartamiento declarado** (`Root-Rules.md` §11). La plantilla 3.0 tampoco tiene §22, igual que la
-> 2.1: esta sección **ya era un apartamiento** y la migración M2 lo nombra como tal en lugar de
-> seguir declarándolo sólo en prosa.
-
 Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes son extensas y precisas en lo técnico pero no declaran algunos campos que el framework exige, y la alternativa —dejarlos vacíos— detendría al orquestador con una batería de preguntas. Cada asunción está completa y es utilizable; ninguna contradice a las fuentes.
 
 **A-1 ya no es una asunción**: la identidad del producto la decidió el Product Owner el 2026-08-08 y la fila queda como registro de la decisión y de la acción que dispara sobre las fuentes. Las asunciones vivas son A-2 a A-5.
@@ -1816,31 +1610,6 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 **Lo que NO es asunción y conviene no confundir:** la tolerancia de 0.01 (sale de que el emisor redondea a 2 decimales, AN §9.3), los 20 minutos de PT-01.c, el semáforo de PT-01.b y los umbrales de las cinco puertas técnicas están declarados en las fuentes y se transcriben sin cambio.
 
 **Marcas [A VERIFICAR] heredadas de las fuentes**, que no son asunciones de este documento sino incógnitas que las fuentes declaran y que se resuelven midiendo, no decidiendo: la versión exacta de MudBlazor (RT §3), las capacidades del hosting gratuito (PT-01), la viabilidad de construir la imagen en destino desde Git (RT §13) y la disponibilidad de un dominio propio para el túnel saliente (RT §15.1).
-
----
-
-## §23 Idioma de los identificadores de código
-
-> **Apartamiento declarado** (`Root-Rules.md` §11). Esta sección **no pertenece a la plantilla 3.0**,
-> que lleva el perfil de convención de nombres dentro de §13.3 y no tiene lugar para decisiones de
-> idioma de identificadores. Era la §13.1 de la emisión 1.34 y la migración M2 la trajo acá entera,
-> sin tocar su contenido: **son decisiones vigentes del Product Owner, con su alcance medido**, y su
-> fuente única sigue siendo `SDD/Docs/Producto/Norma-De-Nomenclatura.md`. Descartarla por no tener
-> sección en la plantilla habría perdido tres decisiones aprobadas.
-
-**Tres decisiones del Product Owner del 2026-08-12**, que cierran las zonas de frontera que `SDD/Docs/Producto/Norma-De-Nomenclatura.md` 1.0 había elevado. La norma es la fuente: **este intake las registra, no las redeclara**. ~~Y **no renombra todavía ningún identificador**.~~ **Superado el 2026-08-13 por la norma §8, tramo `R-2`:** el renombre es una tanda posterior que se ejecuta contra el glosario de la norma, en el orden de su §8, y **su tercer tramo ya corrió sobre este documento**: los tres puertos de la norma §6.3 y los dos miembros de su §6.5 están en inglés desde la versión 1.31. Los demás tramos —`R-2b`, `R-3`, `R-4` y `R-5`— siguen pendientes, y hasta que corran este documento conserva los nombres castellanos de sus poblaciones.
-
-| Decisión | Qué se decidió | Alcance | Consecuencia para este documento |
-|---|---|---|---|
-| **`F-01`** | Las **seis funciones de la fachada del visor** llevan nombre inglés | 52 documentos, 593 ocurrencias | **§17.7 P.3 deja de tener un punto abierto.** Esa sección declaraba los nombres «a fijar en la etapa que la implementa», y quedan fijados por la norma §6.6. La tabla de §17.7 P.3 conserva sus nombres castellanos hasta la tanda de renombre |
-| **`F-02`** | Los **valores de los cuatro conjuntos cerrados** llevan identificador inglés y **etiqueta castellana** | 396 documentos, 4259 ocurrencias | Alcanza al valor **persistido y serializado** de §17.3 P.4 y §17.4 P.3, que se guarda y viaja **por su nombre**. Deshace la colisión de `Pendiente`, que hoy nombra un estado de cuenta y un estado de trabajo (§4.2, §12) |
-| **`F-03`** | **Todos** los códigos de condición llevan nombre inglés: los **80 internos** y los **21 de contrato**, sin el prefijo `CONTRATO_` | 334 documentos, 2911 ocurrencias | **Es un cambio de contrato y así se declara**: los códigos del contrato viajan dentro de las respuestas y `GeometriaFactory-Web` los cita. Alcanza al conjunto cerrado de §17.4 P.3 |
-
-**Los tres fundamentos, que son la razón por la que se decide hoy y no después.** `F-01`: los nombres de la fachada **nunca estuvieron fijados** —§17.7 P.3 los declara «a fijar en la etapa que la implementa»—, el visor no existe como código y su único consumidor está en la misma solución. `F-02`: el identificador es el dato persistido, y **no hay ninguna base poblada** porque `GeometriaFactory-Infrastructure` no está construido, de modo que el costo de esquema es cero hoy y deja de serlo con la primera fila. `F-03`: **el producto no emitió una sola respuesta todavía** y los dos consumidores del contrato —`GeometriaFactory-Api` y `GeometriaFactory-Web`— se compilan contra el mismo ensamblado y se despliegan juntos (`RT-06`), de modo que no hay ningún consumidor externo al que el cambio le llegue sin aviso.
-
-**Lo que este intake no hace.** No transcribe el glosario: son **155 identificadores en seis clases** y su fuente única es la norma §6.2 a §6.8. ~~**Ningún identificador de este documento cambia en la versión 1.30.**~~ **Cierto para la 1.30 y superado por la 1.31 el 2026-08-13** (norma §8, tramo `R-2`): la 1.31 renombra **cinco** identificadores de este documento —los tres puertos de la norma §6.3 y los dos miembros de su §6.5—, contra el glosario y no por criterio propio. Ningún otro cambia. La regla operativa que rige a partir de acá es la de la norma §6.1: **si un concepto no está en el glosario, no se traduce por criterio propio — se agrega primero**.
-
-**Lo que no alcanza.** El nombre del producto, `Raiz-Codigo`, las siete `Identidad-Codigo` de arriba y la excepción de `GeometriaFactory-Visor` **no se reabren**: ya son ingleses en su raíz y no son punto abierto. Tampoco alcanza al **dato del alumno** —las claves y los valores del JSON que emite el programa de la Actividad 1—, que §17.1 P.10 declara ajeno a este producto y que se acepta tal como llega.
 
 ---
 
@@ -1881,9 +1650,9 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
 | 1.34 | 2026-08-14 | **Con qué se autentica el cambio forzado de contraseña**, precisado por el Product Owner. Dos fuentes se contradecían y la contradicción **dejaba una pantalla inalcanzable**: `Api CU-01` §6 declara que la cuenta con cambio pendiente **no obtiene acceso**, mientras `Definicion-Superficie-HTTP.md` §3 pone la operación de cambio **bajo la guardia de sesión** — sin acceso emitido, el alumno reseteado no podía llegar a cambiar su clave y quedaba fuera del laboratorio. Se resuelve declarando que la operación admite **dos formas de autenticarse**: con **sesión**, para el cambio corriente que cualquier cuenta puede hacer —incluida la del administrador—, y con **la contraseña actual**, para el cambio forzado, donde la provisoria que el administrador comunicó es la que autentica. **`RN-13` no se afloja**: sigue sin haber sesión de trabajo hasta que la contraseña se cambie. El Product Owner declaró además el flujo completo: cada usuario cambia su propia contraseña, y si un alumno la pierde el administrador se la resetea y **le acerca la provisoria**; los flujos más automatizados exigirían correo o mensajes, que este producto no tiene (X-1). Sube minor y archiva: 1.33 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
-| 1.33 | 2026-08-14 | **Dos correcciones a la emisión 1.32.** **(a)** Afirmaba que «la configuración del sitio ya quedó preparada» para aprovechar WebSocket si aparece. **Es falsa**: la línea que lo habilitaba se midió inerte —el anfitrión decide por encima de la configuración de la aplicación— y **se revirtió el mismo día**, porque una línea que no hace nada da la falsa impresión de que el asunto está resuelto. La afirmación se escribió antes de la reversión y nadie volvió a mirarla. **(b)** §17.2.P.9 · GeometriaFactory-Web seguía rotulando la versión de plataforma como **[A VERIFICAR]**, y está resuelta desde que el sitio publicado corre `net10.0`, confirmado además en el panel de la cuenta. Ninguna decisión cambia. Sube minor y archiva: 1.32 ya fue citada como insumo. | Orquestador SDD |
-| 1.32 | 2026-08-13 | **Transporte de la sesión interactiva, decidido por el Product Owner**: el producto usa **SignalR con el transporte que el anfitrión ofrezca**, y la ausencia de WebSocket en el hosting **queda aceptada**. Se registra en §17.2.P.9 · GeometriaFactory-Web con las tres medidas independientes que la sostienen, el fundamento por el que no bloquea —la interacción continua no viaja por el circuito, porque el visor es puro y el árbol es suyo—, y **las dos señales que reabrirían la decisión** con su salida, que no toca código. Sube minor y archiva: 1.31 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
-| 1.31 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../Docs/Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`— y los **dos miembros** de su §6.5 —`HashContrasena` ⟶ `PasswordHash` y `JsonOriginal` ⟶ `OriginalJson`—. Acá son **15 ocurrencias** y **todas son uso propio**: este documento es *la fuente* que el resto del corpus reporta, de modo que §4.1 punto 1 rige y el renombre de la fuente arrastra a los reportes **en el mismo tramo**. Se renombran §13, §14, §17.1.P.5 · GeometriaFactory-Domain, §17.1.P.1 · GeometriaFactory-Application, §17.1.P.11 · GeometriaFactory-Application, §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.2 · GeometriaFactory-Contracts, §17.1.P.10 · GeometriaFactory-Contracts y §22 `A-5`. **Ninguna es cita textual y ninguna vive en una fila de control de cambios**, que son las dos formas que §4.1 declara intocables y que se buscaron una por una antes de editar. **Acto 2:** §13.1 decía «no renombra todavía ningún identificador» y «ningún identificador de este documento cambia en la versión 1.30». Las dos afirmaciones **se conservan tachadas y con la marca** que `V-7` exige —estado, fecha y sección que las supera—, porque siguen siendo ciertas de la 1.30 y dejan de serlo de la 1.31. **No se toca ninguna otra población** (regla 1 de la norma §8): las cinco tablas en mayúsculas y las cinco entidades son `R-2b`, la fachada de §17.2.P.3 · GeometriaFactory-Visor es `R-3`, los valores de conjunto cerrado son `R-4` y los códigos son `R-5`, y todos conservan su nombre castellano hasta su tramo. **No cambia ningún requerimiento, ninguna decisión, ningún flag y ninguna cifra.** **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-01-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. | Orquestador SDD |
+| 1.33 | 2026-08-14 | **Dos correcciones a la emisión 1.32.** **(a)** Afirmaba que «la configuración del sitio ya quedó preparada» para aprovechar WebSocket si aparece. **Es falsa**: la línea que lo habilitaba se midió inerte —el anfitrión decide por encima de la configuración de la aplicación— y **se revirtió el mismo día**, porque una línea que no hace nada da la falsa impresión de que el asunto está resuelto. La afirmación se escribió antes de la reversión y nadie volvió a mirarla. **(b)** §17.6.P.9 seguía rotulando la versión de plataforma como **[A VERIFICAR]**, y está resuelta desde que el sitio publicado corre `net10.0`, confirmado además en el panel de la cuenta. Ninguna decisión cambia. Sube minor y archiva: 1.32 ya fue citada como insumo. | Orquestador SDD |
+| 1.32 | 2026-08-13 | **Transporte de la sesión interactiva, decidido por el Product Owner**: el producto usa **SignalR con el transporte que el anfitrión ofrezca**, y la ausencia de WebSocket en el hosting **queda aceptada**. Se registra en §17.6.P.9 con las tres medidas independientes que la sostienen, el fundamento por el que no bloquea —la interacción continua no viaja por el circuito, porque el visor es puro y el árbol es suyo—, y **las dos señales que reabrirían la decisión** con su salida, que no toca código. Sube minor y archiva: 1.31 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
+| 1.31 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../Docs/Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`— y los **dos miembros** de su §6.5 —`HashContrasena` ⟶ `PasswordHash` y `JsonOriginal` ⟶ `OriginalJson`—. Acá son **15 ocurrencias** y **todas son uso propio**: este documento es *la fuente* que el resto del corpus reporta, de modo que §4.1 punto 1 rige y el renombre de la fuente arrastra a los reportes **en el mismo tramo**. Se renombran §13, §14, §17.1.P.5, §17.2.P.1, §17.2.P.11, §17.3.P.4, §17.4.P.2, §17.4.P.10 y §22 `A-5`. **Ninguna es cita textual y ninguna vive en una fila de control de cambios**, que son las dos formas que §4.1 declara intocables y que se buscaron una por una antes de editar. **Acto 2:** §13.1 decía «no renombra todavía ningún identificador» y «ningún identificador de este documento cambia en la versión 1.30». Las dos afirmaciones **se conservan tachadas y con la marca** que `V-7` exige —estado, fecha y sección que las supera—, porque siguen siendo ciertas de la 1.30 y dejan de serlo de la 1.31. **No se toca ninguna otra población** (regla 1 de la norma §8): las cinco tablas en mayúsculas y las cinco entidades son `R-2b`, la fachada de §17.7.P.3 es `R-3`, los valores de conjunto cerrado son `R-4` y los códigos son `R-5`, y todos conservan su nombre castellano hasta su tramo. **No cambia ningún requerimiento, ninguna decisión, ningún flag y ninguna cifra.** **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-01-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. | Orquestador SDD |
 | 1.30 | 2026-08-12 | **Las tres decisiones de nomenclatura del Product Owner, y la segunda pasada de estabilización del intake contra sí mismo.** Entra **§13.1**, que registra las tres decisiones del 2026-08-12 sobre las zonas de frontera que `SDD/Docs/Producto/Norma-De-Nomenclatura.md` 1.0 había elevado, cada una con su alcance contado y su consecuencia sobre este documento, y que remite a la norma **1.1** y a su glosario como fuente única. **(a) `F-01`**: las **seis funciones de la fachada del visor** pasan a inglés; **§17.7 P.3 deja de tener un punto abierto**, porque los nombres que declaraba «a fijar en la etapa que la implementa» quedan fijados por la norma §6.6. **(b) `F-02`**: los **diez valores de los cuatro conjuntos cerrados** llevan identificador inglés y etiqueta castellana; se anota en **§17.3 P.4**, que es donde el valor se guarda por su nombre, con las dos consecuencias de persistencia —costo de esquema cero mientras no haya base poblada, y la colisión de `Pendiente` deshecha—. **(c) `F-03`**: **los 101 códigos de condición pasan a inglés**, los 80 internos y los 21 de contrato, y **se elimina el prefijo `CONTRATO_`**; se anota en **§17.4 P.3** y **se declara explícitamente como cambio de contrato**, no como renombre, con `RT-06` vigente —los dos extremos se cambian y se despliegan juntos—, sobre el fundamento de que el producto no emitió una sola respuesta todavía y los dos consumidores compilan contra el mismo ensamblado. **Ningún identificador de este documento cambia en esta versión**: el renombre es una tanda posterior que se ejecuta contra el glosario de la norma, en el orden de su §8. **Pasada de estabilización, aparte de las tres decisiones y ejecutada después de escribirlas** (`Observacion-Ciclo-De-Correccion-Sin-Corte.md` §4.4, segunda aplicación de la regla). Se verificó el documento **contra sí mismo**: se recontaron las filas reales de capacidades por categoría MoSCoW, reglas, invariantes, casos límite, exclusiones, riesgos, términos del glosario, historias, métricas, proyectos de código, tipos D8, escenarios, muestras y códigos del contrato, y se las comparó contra toda afirmación en prosa, encabezado o celda que declarara una cantidad o un rango; se resolvieron **todas** las referencias `§x` del cuerpo contra las secciones que existen; se cruzaron los rótulos **[ASUNCIÓN]** y **[A VERIFICAR]** contra §22 **en las dos direcciones**; y se cruzó la tabla de etapas de §15 contra las diecinueve capacidades `Must Have` de §4. **Seis defectos, en cuatro familias.** **Enumeración que enumera de menos (2)**: §15 no asignaba etapa a **`F-25`** ni a **`F-26`**, las dos `Must Have` desde el 2026-08-09 — entraron por las versiones 1.5 y 1.7 y la tabla que enumera no se movió; se asignan a `g` y a `d` **absorbiendo la derivación ya fundamentada** de `Roadmap-Producto.md` §3 y §4, que hasta hoy era el único lugar del corpus donde estaban ubicadas y que declara expresamente que el intake no lo hacía. **Rótulo faltante (2)**: dos de las cuatro métricas de §8 —«Avance del producto» y «Valor didáctico»— no llevaban **[ASUNCIÓN]** aunque §22 `A-2` declara asunción a **los cuatro** targets; se rotulan. **Registro faltante (1)**: la pirámide invertida de **60 % integración / 40 % unitarias** de §17.5 P.6 lleva **[ASUNCIÓN]** y **no tenía fila en §22** — `A-3` sólo cubría coberturas y `A-4` sólo los gates de Contracts, Web y Visor—; se incorpora a `A-3`. Es la misma familia que 1.29 cerró para el [ASUNCIÓN] de §17.4 P.10, y su reaparición confirma que el cruce hay que hacerlo en las dos direcciones y no sólo de rótulo a §22. **Referencia a sección inexistente (1)**: el control de cambios de 1.18 citaba «§23» como la lista de verificación, y **este intake no tiene ninguna §23**: su lista de verificación es §19; se corrige dejando constancia. **Ninguno de los seis cambia una decisión, un contrato ni un caso de prueba**: son defectos de emisión del propio intake. Se suma la fila de §13.1 a la trazabilidad downstream. Sube minor y archiva: 1.29 ya fue citada como insumo. | Product Owner (tres decisiones) · Orquestador SDD (registro y pasada de estabilización) |
 | 1.29 | 2026-08-12 | **Tres decisiones del Product Owner, y la primera pasada de estabilización del intake contra sí mismo.** **(a) Dos códigos entran al conjunto cerrado del contrato** (§17.4 P.3, con nota en §17.2 P.5): `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR`, para «el papel no alcanza» **fuera del desenlace** —gobernar cuentas, resetear una contraseña y ver el listado de la comisión, tres rechazos que hoy caen en el genérico y que el front no puede distinguir de una falla—, y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR`, para **enviar o reeditar** un trabajo que no está en `Borrador`, que el código análogo no cubría por estar acotado a la eliminación. El conjunto pasa de **quince a diecisiete vivos**, y los identificadores emitidos de **dieciocho a veinte**, con los tres retirados intactos. Los dos nombres son **derivación de este intake**, siguiendo la convención de los quince vivos; **`GeometriaFactory-Contracts` es quien los emite formalmente**. **(b) El alcance de la colección de peticiones (`S-2`) son los ocho escenarios `E-1` a `E-8`**: §16.1 ya lo decía así y §18 decía «los cuerpos de E-2 y E-5», y la divergencia queda resuelta a favor de los ocho, porque con dos la colección demuestra que la API responde y con ocho ejercita el validador contra todos los datos reales **por HTTP**, incluido el cilindro cuya diferencia de 0.01 funda el operador estricto de tolerancia y el `E-8` de la coma decimal. **(c) Se confirma la condición derivada `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`** (§17.3 P.11 punto 5), que ninguna fuente enunciaba y que `GeometriaFactory-Infrastructure` había declarado con su fundamento: cuando ninguna pieza se pudo reconstruir corresponde una condición propia, y no una lista vacía de observaciones —indistinguible de un trabajo verificado sin discrepancias— ni una escena en blanco sin explicación. **Pasada de estabilización, aparte de las tres decisiones y ejecutada después de escribirlas** (`Observacion-Ciclo-De-Correccion-Sin-Corte.md` §4.4, primera aplicación de la regla). Se verificó el documento **contra sí mismo**: se contaron las filas reales de reglas, invariantes, escenarios, capacidades por categoría MoSCoW, casos límite, exclusiones, riesgos, términos del glosario, proyectos de código, funciones de fachada, muestras y casos de la batería, y se las comparó contra **toda** afirmación en prosa, encabezado o celda que declarara una cantidad o un rango; se recorrieron una por una las citas de escenarios para validar la lista que las enumera; y se revisaron los rótulos **[ASUNCIÓN]** y **[A VERIFICAR]** contra §22. **Dieciocho defectos, en cinco familias.** **Recuento congelado en celda o encabezado (10)**: las capacidades `Must Have` eran **diecinueve** y §19 decía dieciséis; los casos límite son **once** y decía nueve; las exclusiones vigentes son **ocho** y decía nueve, además de omitir que X-2 también está retirada; los riesgos vigentes son **cinco** más RN-B6 cerrado y decía seis; el glosario define **diecisiete** términos y decía catorce; §21 decía «los siete» escenarios donde son ocho; y la batería del validador seguía descrita como de **nueve** casos en cuatro lugares más —§11 RN-B3, §18 `S-3`, §20.E-6 y la trazabilidad downstream— que 1.20 no había alcanzado. **Rango congelado (3)**: §17.1 P.2 decía «INV-01 a INV-07» sobre nueve invariantes, §17.1 P.6 «RN-01 a RN-09» sobre dieciséis reglas, y la trazabilidad downstream «etapas `a` a `g`» sobre ocho etapas comprometidas. **Enumeración que enumera de menos o de más (2)**: la nota de la Parte D listaba §7 y §17.5 P.6 —que no citan ningún escenario— y omitía §11, §17.3 P.4 y §17.7 P.8, que sí; y §4 atribuía al circuito de revisión **todas** las capacidades ajenas a RF, dejando afuera F-26 y F-25. **Contradicción entre secciones (1)**: §4 (F-15, F-16) y §9 (X-6, X-7) seguían llamando etapa `h` a lo que §15 declara etapa `i` desde que el circuito de revisión ocupó esa letra. **Rótulo o registro faltante (2)**: X-10 no llevaba la marca **[A VERIFICAR]** que §22 le atribuye, y el **[ASUNCIÓN]** de §17.4 P.10 no tenía fila en §22; se incorpora a A-5. **Ninguno de los dieciocho cambia una decisión, un contrato ni un caso de prueba**: son defectos de emisión del propio intake, y esta pasada es la que la regla §4.4 exige antes de propagar. Sube minor y archiva: 1.28 ya fue citada como insumo. | Product Owner (tres decisiones) · Orquestador SDD (registro y pasada de estabilización) |
 | 1.28 | 2026-08-11 | **Nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección de fuente pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»—: F-26 es un reseteo de contraseña común y corriente, del tipo que normalmente se haría por correo, y como el producto no puede enviar correo el alumno se lo pide al administrador, el administrador **le resetea la contraseña**, el sistema produce una provisoria que el administrador le comunica y el alumno está obligado a cambiarla en su primer ingreso. Leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es justamente el remedio que F-26 vino a reemplazar. **(a)** La verificación de **RN-15** decía «Resetear una cuenta `Bloqueado` funciona»; dice «Resetear **la contraseña de** una cuenta `Bloqueado` funciona». **(b)** La verificación de **RN-13** decía «Un alumno reseteado»; dice «Un alumno **con la contraseña reseteada**». Ni RN-12 ni los identificadores de reglas, invariantes o códigos cambian. Sube minor y archiva: 1.27 ya fue citada como insumo. | Orquestador SDD, sobre pedido del Product Owner |
@@ -1893,28 +1662,28 @@ Sección propia de este intake, fuera de la plantilla. Existe porque las fuentes
 | 1.24 | 2026-08-11 | **Application e Infrastructure pasan a tener `/samples` propios**, con lo que las cuatro bibliotecas quedan resueltas del mismo modo. Es la revisión que 1.23 dejó anotada, hecha al emitir su Fase G: se cumplen los dos términos —la segunda audiencia que declara la guía de la categoría, y que sin categoría 10 un proyecto sin maqueta queda **sin ninguna sonda de deriva**—. **Y aparece un motivo que ninguno de los otros tres tenía**: §18 asigna a `GeometriaFactory-Infrastructure` la muestra **`S-3`**, de modo que la redacción anterior de §16.1 **contradecía a §18 dentro del mismo documento**, y la contradicción sobrevivió veintitrés versiones sin que nadie la mirara porque vivía en dos celdas de tablas distintas. Sube minor y archiva: 1.23 ya fue citada como insumo. | Orquestador SDD, sobre elevación de la Fase G |
 | 1.23 | 2026-08-11 | **Domain y Contracts pasan a tener `/samples` propios**, elevado por la Fase G. §16.1 los agrupaba con las otras dos bibliotecas bajo «sin samples propios: no son consumidas por integradores externos», que respondía bien a la pregunta de la audiencia **externa**. La guía de la categoría 10 declara una **segunda audiencia** —el equipo que construye y los agentes que codifican contra la especificación— y la de deriva exige matriz de sensado a todo proyecto con categoría 10: sin ella, estos dos quedaban **sin ninguna sonda**, porque tampoco tienen maqueta. Se separan de `Application` e `Infrastructure`, cuya Fase G todavía no se emitió y para las que queda anotada la misma revisión. La verificación sigue viviendo en `tests/`: los samples la ilustran, no la reemplazan. Sube minor y archiva: 1.22 ya fue citada como insumo. | Orquestador SDD, sobre elevación de la Fase G |
 | 1.22 | 2026-08-11 | **Dos decisiones de despliegue del Product Owner**, elevadas por la Fase F. **(a) El proyecto de contratos entra en el filtro de rutas** del flujo que publica el front. Con las dos rutas que RT §14 enumeraba existía un caso silencioso —tocar el contrato, no tocar el front, fusionar, y publicar un front compilado contra el contrato anterior, que compila y falla recién contra la API—, y el contrato **es entrada de compilación del front** por §13. **(b) Cuando front y backend salen juntos, primero el backend**, porque una API nueva normalmente acepta lo que mandaba el front anterior, mientras que al revés el alumno ve el error. Ninguna fuente elegía el orden. Queda declarado que el orden **no vuelve automático** el despliegue conjunto: el front sale al fusionar y el backend a mano, así que la coordinación sigue siendo humana y el intervalo se minimiza en vez de eliminarse. Sube minor y archiva: 1.21 ya fue citada como insumo. | Product Owner (decisiones) · Orquestador SDD (registro) |
-| 1.21 | 2026-08-11 | **Quinta ocurrencia de la familia «recuento congelado», y la fecha de cabecera.** **(a)** §17.2.P.3 · GeometriaFactory-Web, en la fila «Front ↔ bundle del visor» de su tabla de integraciones, seguía enumerando **cinco** funciones de la fachada cuando §17.7 P.3 declara **seis** desde 1.6. Es la misma celda-de-tabla de siempre —ya corregida en §14 por 1.16 y 1.17, en §18 por 1.11, y en los rangos de escenarios por 1.18—, y esta vez **la fuente contradecía a su propio downstream**: la categoría 05 viva de `GeometriaFactory-Web` ya usa «6 de 6». Lo levantó la Fase F de nivel 0, que no la propagó. **(b)** La **fecha de cabecera** decía 2026-08-08 mientras la última fila de control de cambios era del 2026-08-11: la cabecera no se movió en veinte versiones. Ninguna decisión cambia. Sube minor y archiva: 1.20 ya fue citada como insumo. | Orquestador SDD |
-| 1.20 | 2026-08-11 | **La batería del validador quedó descrita como de nueve casos cuando tiene diez.** §21 agregó el décimo el 2026-08-09, al incorporarse el escenario **E-8**, y **cinco lugares** siguieron diciendo nueve: los dos quality gates de §17.1.P.8 · GeometriaFactory-Infrastructure y §17.1.P.8 · GeometriaFactory-Api, la forma de verificación de §17.1.P.6 · GeometriaFactory-Infrastructure, el fundamento del puerto en **§17.1.P.11 · GeometriaFactory-Application** y el encabezado de la propia §21. Lo levantó la Fase E de `GeometriaFactory-Infrastructure` y `-Api`, que **aplicaron diez y no bajaron la batería a nueve para que coincidiera con la redacción**, dejándolo declarado en sus documentos. Es el cuarto conjunto de la fuente que envejece igual, después de las funciones de la fachada, los invariantes de Domain y los rangos de escenarios, y otra vez son gates, celdas y encabezados. Ninguna decisión cambia. Sube minor y archiva: 1.19 ya fue citada como insumo. | Orquestador SDD |
+| 1.21 | 2026-08-11 | **Quinta ocurrencia de la familia «recuento congelado», y la fecha de cabecera.** **(a)** §17.6.P.3, en la fila «Front ↔ bundle del visor» de su tabla de integraciones, seguía enumerando **cinco** funciones de la fachada cuando §17.7 P.3 declara **seis** desde 1.6. Es la misma celda-de-tabla de siempre —ya corregida en §14 por 1.16 y 1.17, en §18 por 1.11, y en los rangos de escenarios por 1.18—, y esta vez **la fuente contradecía a su propio downstream**: la categoría 05 viva de `GeometriaFactory-Web` ya usa «6 de 6». Lo levantó la Fase F de nivel 0, que no la propagó. **(b)** La **fecha de cabecera** decía 2026-08-08 mientras la última fila de control de cambios era del 2026-08-11: la cabecera no se movió en veinte versiones. Ninguna decisión cambia. Sube minor y archiva: 1.20 ya fue citada como insumo. | Orquestador SDD |
+| 1.20 | 2026-08-11 | **La batería del validador quedó descrita como de nueve casos cuando tiene diez.** §21 agregó el décimo el 2026-08-09, al incorporarse el escenario **E-8**, y **cinco lugares** siguieron diciendo nueve: los dos quality gates de §17.3.P.8 y §17.5.P.8, la forma de verificación de §17.3.P.6, el fundamento del puerto en **§17.2.P.11** y el encabezado de la propia §21. Lo levantó la Fase E de `GeometriaFactory-Infrastructure` y `-Api`, que **aplicaron diez y no bajaron la batería a nueve para que coincidiera con la redacción**, dejándolo declarado en sus documentos. Es el cuarto conjunto de la fuente que envejece igual, después de las funciones de la fachada, los invariantes de Domain y los rangos de escenarios, y otra vez son gates, celdas y encabezados. Ninguna decisión cambia. Sube minor y archiva: 1.19 ya fue citada como insumo. | Orquestador SDD |
 | 1.19 | 2026-08-10 | **F-13 sube de `Should Have` a `Must Have`**, decidido por el Product Owner. La sincronización árbol ⇄ escena por índice y la disposición determinista estaban declaradas diferibles mientras §17.7 P.8 las incluía en lo que **PT-02** mide antes de comprometer la etapa `g`. Una puerta que no pasa detiene la planificación, de modo que la capacidad era diferible en el papel e **indiferible en los hechos**: nadie la planificaba y sin embargo bloqueaba. Lo levantaron dos proyectos desde los dos lados de la fachada —`GeometriaFactory-Visor` en su Fase D y `GeometriaFactory-Web` como su punto abierto `PA-02`—, ninguno de los dos repriorizando por su cuenta. Es el segundo caso idéntico después de **F-25** en 1.7, y el patrón vale anotarlo: **una capacidad citada por una puerta técnica no puede ser `Should Have`**. Sube minor y archiva: 1.18 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
-| 1.18 | 2026-08-09 | **Los rangos de escenarios congelados en E-7.** Seis lugares de la fuente —§16.1, §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.6 · GeometriaFactory-Infrastructure, §18 S-3, la nota de §20 y la lista de verificación de §19 [CORREGIDO 2026-08-12: decía «§23», y este intake no tiene ninguna §23; su lista de verificación es §19]— seguían diciendo «los **siete** escenarios» o «E-1 a **E-7**», cuando §20 tiene **ocho** desde que 1.7 incorporó **E-8**. Lo levantó la Fase C de `GeometriaFactory-Infrastructure`, que contó los del §20 en vez de copiar el rango. Es el tercer conjunto de la fuente que envejece del mismo modo, después de las funciones de la fachada y de los invariantes de Domain, y los seis lugares son enumeraciones y celdas: **la fuente enumera sus conjuntos en más lugares de los que actualiza cuando crecen**. Ninguna decisión cambia. Sube minor y archiva: 1.17 ya fue citada como insumo. | Orquestador SDD |
-| 1.17 | 2026-08-09 | **Segundo recuento viejo en la misma celda de §14.** La tabla «qué expone cada proyecto de código» declaraba que `GeometriaFactory-Domain` expone «invariantes **INV-01 a INV-06**», cuando §17.1.P.2 · GeometriaFactory-Domain declara **nueve** desde que entraron INV-07, INV-08 e INV-09. Lo levantó la Fase C de `GeometriaFactory-Application`, que citó §17.1.P.2 · GeometriaFactory-Domain en vez de propagar el rango viejo. Es el mismo defecto que 1.16 corrigió en la fila de al lado, y el hecho de que fueran **dos filas de la misma tabla** confirma el patrón: §14 es un resumen que enumera, y **todo lo que enumera envejece cada vez que crece un conjunto**. Ninguna decisión cambia. Sube minor y archiva: 1.16 ya fue citada como insumo. | Orquestador SDD |
+| 1.18 | 2026-08-09 | **Los rangos de escenarios congelados en E-7.** Seis lugares de la fuente —§16.1, §17.3.P.4, §17.3.P.6, §18 S-3, la nota de §20 y la lista de verificación de §19 [CORREGIDO 2026-08-12: decía «§23», y este intake no tiene ninguna §23; su lista de verificación es §19]— seguían diciendo «los **siete** escenarios» o «E-1 a **E-7**», cuando §20 tiene **ocho** desde que 1.7 incorporó **E-8**. Lo levantó la Fase C de `GeometriaFactory-Infrastructure`, que contó los del §20 en vez de copiar el rango. Es el tercer conjunto de la fuente que envejece del mismo modo, después de las funciones de la fachada y de los invariantes de Domain, y los seis lugares son enumeraciones y celdas: **la fuente enumera sus conjuntos en más lugares de los que actualiza cuando crecen**. Ninguna decisión cambia. Sube minor y archiva: 1.17 ya fue citada como insumo. | Orquestador SDD |
+| 1.17 | 2026-08-09 | **Segundo recuento viejo en la misma celda de §14.** La tabla «qué expone cada proyecto de código» declaraba que `GeometriaFactory-Domain` expone «invariantes **INV-01 a INV-06**», cuando §17.1.P.2 declara **nueve** desde que entraron INV-07, INV-08 e INV-09. Lo levantó la Fase C de `GeometriaFactory-Application`, que citó §17.1.P.2 en vez de propagar el rango viejo. Es el mismo defecto que 1.16 corrigió en la fila de al lado, y el hecho de que fueran **dos filas de la misma tabla** confirma el patrón: §14 es un resumen que enumera, y **todo lo que enumera envejece cada vez que crece un conjunto**. Ninguna decisión cambia. Sube minor y archiva: 1.16 ya fue citada como insumo. | Orquestador SDD |
 | 1.16 | 2026-08-09 | **Último residuo de la sexta función de la fachada.** §14, en su tabla «qué expone cada proyecto de código», seguía enumerando **cinco** funciones del visor mientras §17.7 P.3 declara **seis** desde la versión 1.6 y §18 ya se había corregido en 1.11. Lo levantó la Fase C de `GeometriaFactory-Visor`, que citó §17.7 P.3 —la sección que lleva el contrato— en vez de propagar el recuento viejo. Es el tercer lugar de la fuente donde la misma decisión quedó a medias, y es exactamente el modo de falla que el corpus viene mostrando: **la decisión llega, el recuento sobrevive en lo que no se lee como texto corrido**, acá una celda de tabla. Ninguna decisión cambia. Sube minor y archiva: 1.15 ya fue citada como insumo. | Orquestador SDD |
 | 1.15 | 2026-08-09 | **Tres defectos de la propia fuente**, levantados por `Coherencia-Corpus-r1.md` y por la corrección que lo siguió. **(a)** El título y el ancla de §4.1 decían «RN-01 a **RN-09**» sobre una sección de **dieciséis** reglas: el rango quedó congelado en la emisión y nunca se movió, pese a siete reglas nuevas. **(b) El más importante**: RN-16 afirmaba que «no existe ninguna escritura anónima **en el sistema**», y eso **es falso** — el **registro de cuenta** de RF-03 es anónimo por diseño y así debe seguir, porque es como el alumno entra al laboratorio. Lo que RN-16 elimina es la escritura anónima **de credencial**. La afirmación de más se propagó a los siete proyectos antes de que nadie la mirara, que es el riesgo de enunciar una garantía más ancha que la decisión que la sostiene. **(c)** El rótulo de la segunda tabla de §4.1 volvió a quedar corto al entrar RN-16 —encabezaba siete filas enumerando seis—, el mismo defecto que 1.11 ya había corregido una vez; se reescribe declarando que enumera tandas y que envejece con cada una. Ninguna decisión cambia. Sube minor y archiva: 1.14 ya fue citada como insumo. | Orquestador SDD |
-| 1.14 | 2026-08-09 | **Dos contradicciones internas que dejó la entrada de RN-16**, levantadas por la propagación de 1.13 a los siete proyectos. **(a)** El enunciado de **INV-09** en §17.1.P.2 · GeometriaFactory-Domain seguía diciendo que la marca de cambio pendiente «la pone **únicamente** el reseteo del administrador» —redacción de 1.7— mientras RN-16 declara que **habilitar también la pone**, y cita a ese mismo invariante al hacerlo. La fuente se contradecía a sí misma en el punto exacto que la propagación tenía que transcribir; los proyectos propagaron la decisión y no la letra, dejando constancia. Corregido: la marca la ponen las **dos** operaciones que producen provisoria. **(b)** La prosa de §17.1.P.2 · GeometriaFactory-Domain cerraba en **quince** reglas con «seis sin invariante»; con RN-16 son **dieciséis: diez con invariante y seis sin él**. Ninguna decisión cambia: los dos son defectos de transcripción de la fuente. Sube minor y archiva: 1.13 ya fue citada como insumo. | Orquestador SDD |
+| 1.14 | 2026-08-09 | **Dos contradicciones internas que dejó la entrada de RN-16**, levantadas por la propagación de 1.13 a los siete proyectos. **(a)** El enunciado de **INV-09** en §17.1.P.2 seguía diciendo que la marca de cambio pendiente «la pone **únicamente** el reseteo del administrador» —redacción de 1.7— mientras RN-16 declara que **habilitar también la pone**, y cita a ese mismo invariante al hacerlo. La fuente se contradecía a sí misma en el punto exacto que la propagación tenía que transcribir; los proyectos propagaron la decisión y no la letra, dejando constancia. Corregido: la marca la ponen las **dos** operaciones que producen provisoria. **(b)** La prosa de §17.1.P.2 cerraba en **quince** reglas con «seis sin invariante»; con RN-16 son **dieciséis: diez con invariante y seis sin él**. Ninguna decisión cambia: los dos son defectos de transcripción de la fuente. Sube minor y archiva: 1.13 ya fue citada como insumo. | Orquestador SDD |
 | 1.13 | 2026-08-09 | **Identificación de la cuenta en el primer ingreso**, resuelta por el Product Owner. La emisión de la Fase B de `GeometriaFactory-Api` levantó que establecer la contraseña del primer ingreso era **la única escritura de la superficie que ocurría sin credencial**, y que ninguna fuente declaraba cómo viaja la identidad en esa operación: un punto anónimo que aceptara correo y contraseña nueva habría permitido fijarle la contraseña a cualquier cuenta habilitada antes que su dueño. Se resuelve con **RN-16**: habilitar produce una contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que el reseteo de F-26, y el alumno la cambia por el camino que RN-13 ya fija. Dos consecuencias: **no queda ninguna escritura anónima en el sistema**, y el producto tiene **un solo mecanismo de credencial inicial** en lugar de dos. F-04 se precisa en consecuencia. Sube minor y archiva: 1.12 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
 | 1.12 | 2026-08-09 | **Desenlace del envío para `E-8`**, resuelto por el Product Owner. El escenario declaraba expresamente que «no prescribe el desenlace del envío», y la emisión de la Fase B de `GeometriaFactory-Infrastructure` levantó que sin esa decisión el validador no tenía resultado declarado para el modo de falla **más probable** del producto —el que produce la configuración regional de la máquina, no un error del alumno—. Se resuelve como **error**: el trabajo queda en `Borrador` con el mensaje localizado por índice y campo. El fundamento es que una dimensión ilegible no es un valor mal calculado sino un valor que **no se pudo leer**, y dejarla pasar como advertencia entregaría al docente un trabajo con una pieza invisible que el alumno descubriría recién al ver el rechazo. Sube minor y archiva: 1.11 ya fue citada como insumo. | Product Owner (decisión) · Orquestador SDD (registro) |
-| 1.11 | 2026-08-09 | **Tres residuos de forma que dejó la incorporación de F-26**, levantados por `F26-Propagacion-r2.md` y por la revisión del manifiesto. **(a)** El rótulo de §4.1 decía «**Dos** reglas nuevas que el circuito de revisión introduce» encabezando **seis** filas: no se actualizó cuando entraron las cuatro del reseteo, y atribuía al circuito de revisión reglas que introdujo F-26. Reescrito distinguiendo las dos tandas por fecha y por origen. **(b)** La prosa de §17.1.P.2 · GeometriaFactory-Domain nombraba a **RN-12** entre las reglas sin invariante, cuando la que corresponde ahí es **RN-11**: la prosa contradecía a su propia tabla —la columna de INV-09 asigna RN-12 y RN-13— y a `GeometriaFactory-Domain`, que cuenta nueve con invariante y seis sin él. La auditoría había diagnosticado el defecto como un error de conteo; era un identificador equivocado. **(c)** §18 enumeraba **cinco** funciones de la fachada al describir el punto de extensión, contra las **seis** que §17.7 P.3 declara desde 1.6. Ninguna decisión cambia: los tres son defectos de transcripción. Sube minor y archiva: 1.10 ya fue citada como insumo. | Orquestador SDD |
+| 1.11 | 2026-08-09 | **Tres residuos de forma que dejó la incorporación de F-26**, levantados por `F26-Propagacion-r2.md` y por la revisión del manifiesto. **(a)** El rótulo de §4.1 decía «**Dos** reglas nuevas que el circuito de revisión introduce» encabezando **seis** filas: no se actualizó cuando entraron las cuatro del reseteo, y atribuía al circuito de revisión reglas que introdujo F-26. Reescrito distinguiendo las dos tandas por fecha y por origen. **(b)** La prosa de §17.1.P.2 nombraba a **RN-12** entre las reglas sin invariante, cuando la que corresponde ahí es **RN-11**: la prosa contradecía a su propia tabla —la columna de INV-09 asigna RN-12 y RN-13— y a `GeometriaFactory-Domain`, que cuenta nueve con invariante y seis sin él. La auditoría había diagnosticado el defecto como un error de conteo; era un identificador equivocado. **(c)** §18 enumeraba **cinco** funciones de la fachada al describir el punto de extensión, contra las **seis** que §17.7 P.3 declara desde 1.6. Ninguna decisión cambia: los tres son defectos de transcripción. Sube minor y archiva: 1.10 ya fue citada como insumo. | Orquestador SDD |
 | 1.10 | 2026-08-09 | **Dos residuos que dejó 1.9, levantados por la corrección del rechazo de `F26-Propagacion-r1.md`.** **(a)** El riesgo **RN-B6** —«el alumno pierde su trabajo por olvidar la contraseña»— seguía declarado con su mitigación «advertirlo antes de dar de baja», apoyado en X-1 y **X-2**, treinta y seis líneas debajo de la fila que retira X-2. Se cierra: F-26 conserva la cuenta y sus trabajos, de modo que la baja dejó de ser el remedio del olvido y la mitigación quedó sin objeto. Lo que sobrevive de X-1 —que no hay recuperación autónoma— vive en CL-7. **(b)** La asunción **A-2** de §22 seguía enunciando «7 de 7 etapas» contra el §8 que desde 1.7 dice **8 de 8**; la contradicción hacía que cinco documentos de nivel producto declararan abierto un punto ya resuelto. Sube minor y archiva: 1.9 ya fue citada como insumo. | Orquestador SDD |
 | 1.9 | 2026-08-09 | **Registro de las dos decisiones del Product Owner que la versión 1.8 propagó sin escribir.** La auditoría `F26-Propagacion-r1.md` las levantó como P0, y con razón: cuatro proyectos de código las declaraban ratificadas mientras la fuente decía lo contrario. El defecto es del orquestador, que propagó hacia adentro sin cerrar hacia afuera. **(a) La provisoria la produce el sistema** — entra **RN-14**, con la propiedad exigida: no adivinable y sin repetirse entre cuentas ni entre reseteos. El fundamento es que si la escribe el docente termina siendo la misma clave para toda la comisión, y el panel cargaría con un campo de contraseña ajena. Se corrigen las tres afirmaciones de F-26, RN-12 y CL-7 que decían que la fija el administrador. **(b) Resetear no exige cuenta habilitada** — entra **RN-15**: procede sobre `Pendiente`, `Habilitado` y `Bloqueado`, porque opera sobre la credencial y no es una transición de la máquina de estados; el administrador no tiene que acordarse de una secuencia. Sigue sin admitirse sobre la cuenta de administrador, y **INV-08 no se toca**. Sube minor y archiva: 1.8 ya fue citada como insumo. | Product Owner (decisiones) · Orquestador SDD (registro tardío, ver el informe de auditoría) |
-| 1.8 | 2026-08-09 | **Dos correcciones a la emisión 1.7**, encontradas por la propagación que esa misma versión disparó. **(a)** §17.1.P.2 · GeometriaFactory-Domain declaraba «Ocho invariantes» en la prosa contra una tabla de **nueve**, y enumeraba «las tres reglas sin invariante» sin considerar a RN-12 ni a RN-13: la prosa no se actualizó al entrar INV-09. Corregido a nueve, con cuatro reglas sin invariante y RN-13 asociada a INV-09. **(b) RN-13 decía que la cuenta reseteada «ingresa»**, que se leía como que obtenía sesión de trabajo. Emitir sesión a una cuenta que por INV-09 no ejerce ninguna capacidad es contradictorio, y la diferencia **es observable**. Se precisa: la credencial provisoria se reconoce y deriva al cambio, sin sesión de trabajo, que es el paralelo exacto del primer ingreso con contraseña no fijada. Sube minor y archiva: 1.7 ya fue citada como insumo. | Orquestador SDD, sobre hallazgos de la propagación a `GeometriaFactory-Domain` y `GeometriaFactory-Contracts` |
+| 1.8 | 2026-08-09 | **Dos correcciones a la emisión 1.7**, encontradas por la propagación que esa misma versión disparó. **(a)** §17.1.P.2 declaraba «Ocho invariantes» en la prosa contra una tabla de **nueve**, y enumeraba «las tres reglas sin invariante» sin considerar a RN-12 ni a RN-13: la prosa no se actualizó al entrar INV-09. Corregido a nueve, con cuatro reglas sin invariante y RN-13 asociada a INV-09. **(b) RN-13 decía que la cuenta reseteada «ingresa»**, que se leía como que obtenía sesión de trabajo. Emitir sesión a una cuenta que por INV-09 no ejerce ninguna capacidad es contradictorio, y la diferencia **es observable**. Se precisa: la credencial provisoria se reconoce y deriva al cambio, sin sesión de trabajo, que es el paralelo exacto del primer ingreso con contraseña no fijada. Sube minor y archiva: 1.7 ya fue citada como insumo. | Orquestador SDD, sobre hallazgos de la propagación a `GeometriaFactory-Domain` y `GeometriaFactory-Contracts` |
 | 1.7 | 2026-08-09 | **Consolidación de cinco decisiones del Product Owner**, tomadas al revisar los entregables de la Fase B2. **(a) Reseteo de contraseña por el administrador** — entra **F-26** `Must Have`: el administrador ve a todos sus alumnos y desde el mismo panel los habilita, los bloquea, los da de baja y **les resetea la clave**, fijando una **provisoria que el alumno debe cambiar en su próximo ingreso**. Retira la exclusión **X-2** y reescribe el caso límite **CL-7**. Cierra un agujero de diseño, no agrega comodidad: el único camino declarado hasta 1.6 era dar de baja y volver a dar de alta, y por RN-07 **eso borraba todos los trabajos del alumno**, de modo que el primer olvido de contraseña costaba la cursada entera. **(b) F-25 sube a `Must Have`** — el movimiento automático es comportamiento propio del bundle y vive en su mismo bucle de dibujo; además la órbita **ya existe en el visor actual**, así que diferirla sería portar quitando algo que hoy funciona. **(c) Frontera del movimiento** — el anfitrión manda **dos valores de verdad** por la fachada y el bundle **no consulta nada**: la preferencia de movimiento reducido la lee el anfitrión, no el visor. Esto no afloja la garantía del contrato: la confirma. **(d) Escenario E-8** — se incorpora para `DIMENSION_NO_LEGIBLE`, que era la única de las siete condiciones del contrato de fachada sin dato de prueba; el pedido quedó abierto en 1.5. **(e) Objetivo de avance** — pasa de «7 de 7 etapas» a **«8 de 8, todas las comprometidas»**: con siete, el producto podía declararse completo con una etapa comprometida sin construir. Sube minor: agrega una capacidad `Must Have`, sube la prioridad de otra, retira una exclusión, agrega un escenario y corrige un objetivo, sin invalidar ninguna decisión previa. | Product Owner (decisiones) · Orquestador SDD (consolidación) |
 | 1.6 | 2026-08-09 | **Consolidación de la propagación de la Fase B2** al contrato del visor, con dos decisiones del Product Owner. **(a) Sexta función de la fachada**: §17.7 P.3 declaraba cinco y suma `establecerMovimiento(id, opciones)`, que prende o apaga los dos movimientos de F-25 **sobre una instancia viva y sin reconstruirla**. La alternativa —destruir, reinicializar con opciones nuevas y recargar— **perdía la selección de pieza** y producía un parpadeo cada vez que la persona tocaba una casilla. No abre ningún código de condición: los siete siguen cerrados y con identificador inválido corresponde el que ya existe. **(b) Condición de medición del NFR de cero peticiones de red**: el umbral no cambia —exactamente 0— pero pasa a medirse **con los dos movimientos prendidos**, que es el peor caso. El motivo es que un entorno de prueba automatizado suele declarar preferencia de movimiento reducido, con lo cual los movimientos arrancan apagados y la prueba quedaría en verde sin haber ejercitado nunca el bucle de dibujo. Sube minor: amplía la superficie declarada de un proyecto de código y precisa la condición de medición de un NFR, sin cambiar ningún umbral ni invalidar decisiones previas. | Product Owner (decisiones) · Orquestador SDD (consolidación) |
 | 1.5 | 2026-08-09 | **Retroalimentación de la Fase B2**, validación visual de la maqueta de `GeometriaFactory-Web` con el visor integrado, aprobada por el Product Owner tras cuatro iteraciones. **(a)** Entra **F-25**, movimiento automático de la escena con dos controles independientes: la órbita de la cámara, que **existe en el visor actual** y se porta, y el **giro de cada pieza sobre su eje, que no existe y es capacidad nueva** pedida al mirar la maqueta. `Should Have`, por ser comodidad de lectura y no capacidad de entrega. **(b)** §17.7 P.10 declara que el movimiento automático no altera la disposición: el determinismo exigido es de la **posición** derivada del índice, no de la orientación. **(c)** Queda abierto un pedido de escenario: de las siete condiciones del contrato de fachada, **`DIMENSION_NO_LEGIBLE` es la única sin escenario propio en §20 ni fila en §21**; la maqueta lo demostró con un texto compuesto y corresponde decidir si se incorpora un escenario **E-8** o si la condición queda declarada sin dato de prueba. Sube minor: agrega una capacidad `Should Have` y precisa un NFR, sin invalidar ninguna decisión previa. | Product Owner (validación visual) · Orquestador SDD (consolidación) |
-| 1.4 | 2026-08-09 | Tres decisiones del Product Owner, consolidadas en una sola intervención. **(a) INV-08 adoptado** (§17.1.P.2 · GeometriaFactory-Domain): la cuenta con papel `Administrador` está siempre `Habilitado` y no admite baja; toda cuenta de alumno nace `Pendiente`. Los invariantes vigentes pasan de siete a **ocho**. No proviene de las fuentes: lo propuso la categoría 02 de `GeometriaFactory-Domain` tras dos hallazgos independientes —uno **P0**, que dejaba nacer `Pendiente` a esa cuenta y mataba la instancia en el primer arranque, y uno **P1**, que permitía bloquearla después— que terminaban en la misma condición sin salida por puertas distintas. **(b) Sellos de tiempo del trabajo** (§17.3 P.4): `TRABAJO` suma fecha de creación y fecha de última modificación, producidas por el puerto de reloj, distintas de la `Fecha` que el alumno declara; y se declara explícitamente que **el JSON del alumno no lleva fechas y no se le agrega ninguna**, porque el texto se conserva íntegro (RN-08). **(c) Operador de comparación de la tolerancia** (§17.3 P.10): se fija **estricto**, mayor que 0.01 y no mayor o igual. La precisión la volvió decisiva el propio escenario semilla: el área del cilindro de E-1 declara 113.10 y sus componentes suman 113.09, diferencia de exactamente 0.01, de modo que el operador decide si el escenario canónico produce dos advertencias —lo documentado— o tres. Sube minor: adopta un invariante y precisa dos reglas sin invalidar ninguna decisión previa; ningún proyecto de código cambia y el `PRODUCT-MANIFEST` no se re-deriva. | Product Owner (decisiones) · Orquestador SDD (consolidación) |
-| 1.3 | 2026-08-08 | **Circuito de revisión del administrador** [DECISIÓN del Product Owner]. Es el cambio de alcance de esta versión y su origen es una batería de preguntas del orquestador sobre invariantes y reglas sin enunciado. Alcanza a §4, §4.1 y §4.2 nuevas, §6, §7, §9, §12 y §17.1.P.2 · GeometriaFactory-Domain. **Capacidades**: F-21 pasa de `Won't Have v1` a `Must Have` como **comentario** del administrador —texto libre, opcional, sin nota ni escala— y con ella se **retira la exclusión X-5**, cuya condición de reingreso declarada era «si el docente lo pide»; entran F-22 (enviar como acción única), F-23 (aprobar o rechazar, facultad exclusiva del administrador) y F-24 (eliminación de cualquier trabajo que el administrador ve); F-07, F-08 y F-12 se reescriben. **Estados**: se agrega `Rechazado`, terminal como `Finalizado`; `Borrador` pasa a significar «el JSON no verificó» al unificarse guardar y enviar en una sola acción. **Reglas**: RN-04 admite el borrado del administrador en cualquier estado, RN-05 adelanta su corte del cierre al envío, y entran RN-10 (sólo el administrador aprueba o rechaza, y los estados de cierre son terminales) y RN-11 (el administrador no ve borradores). **Invariantes**: INV-03 se acota a la eliminación por parte de un alumno, para que el borrado del administrador no lo vuelva falso, y entra INV-07 (los estados de cierre no cambian). Tres consecuencias quedan declaradas y aceptadas en §4.2: corregir un rechazo obliga a cargar un trabajo nuevo, no se puede conservar en borrador un trabajo cuyo JSON verifica, y un rechazo puede no llevar explicación escrita. Sube minor y no major: agrega capacidades y precisa reglas sin invalidar ninguna decisión previa, y ningún proyecto de código de §13 cambia, de modo que el `PRODUCT-MANIFEST` no se re-deriva. | Product Owner (decisión) · Orquestador SDD (consolidación) |
-| 1.3 | 2026-08-08 | Actualización §4.1 y §17.1.P.2 · GeometriaFactory-Domain: consolidación de las respuestas del Product Owner a la batería de ambigüedades que AG-02 devolvió al emitir la categoría 02 de `GeometriaFactory-Domain`. El intake declaraba las series «RN-01 a RN-09» e «INV-01 a INV-06» **sin transcribir ningún enunciado**: siete reglas eran reconstruibles de citas dispersas, **RN-02 y RN-06 no aparecían en ninguna sección**, y de los seis invariantes sólo cuatro tenían contenido inferible, con **INV-04 mal atribuido** en §21 al texto conservado íntegro cuando enuncia que un trabajo `Finalizado` no tiene errores de interpretación. §4.1 transcribe las nueve reglas con su criterio de verificación y §17.1.P.2 · GeometriaFactory-Domain los invariantes con su enunciado y la regla que cada uno sostiene, más la declaración de que invariantes y reglas no son conjuntos distintos sino la misma decisión vista desde el negocio y desde el dominio. Los enunciados provienen de `Requerimientos-Funcionales.md` §7 y `Requerimientos-Tecnicos.md` §7.3, verificados por el orquestador contra las fuentes. Motivo: sin enunciado, ninguna categoría aguas abajo podía derivarlos, y la documentación de dominio ya emitida había propagado la atribución errónea de INV-04 en seis lugares. | Product Owner (confirmación) · Orquestador SDD (consolidación) |
+| 1.4 | 2026-08-09 | Tres decisiones del Product Owner, consolidadas en una sola intervención. **(a) INV-08 adoptado** (§17.1.P.2): la cuenta con papel `Administrador` está siempre `Habilitado` y no admite baja; toda cuenta de alumno nace `Pendiente`. Los invariantes vigentes pasan de siete a **ocho**. No proviene de las fuentes: lo propuso la categoría 02 de `GeometriaFactory-Domain` tras dos hallazgos independientes —uno **P0**, que dejaba nacer `Pendiente` a esa cuenta y mataba la instancia en el primer arranque, y uno **P1**, que permitía bloquearla después— que terminaban en la misma condición sin salida por puertas distintas. **(b) Sellos de tiempo del trabajo** (§17.3 P.4): `TRABAJO` suma fecha de creación y fecha de última modificación, producidas por el puerto de reloj, distintas de la `Fecha` que el alumno declara; y se declara explícitamente que **el JSON del alumno no lleva fechas y no se le agrega ninguna**, porque el texto se conserva íntegro (RN-08). **(c) Operador de comparación de la tolerancia** (§17.3 P.10): se fija **estricto**, mayor que 0.01 y no mayor o igual. La precisión la volvió decisiva el propio escenario semilla: el área del cilindro de E-1 declara 113.10 y sus componentes suman 113.09, diferencia de exactamente 0.01, de modo que el operador decide si el escenario canónico produce dos advertencias —lo documentado— o tres. Sube minor: adopta un invariante y precisa dos reglas sin invalidar ninguna decisión previa; ningún proyecto de código cambia y el `PRODUCT-MANIFEST` no se re-deriva. | Product Owner (decisiones) · Orquestador SDD (consolidación) |
+| 1.3 | 2026-08-08 | **Circuito de revisión del administrador** [DECISIÓN del Product Owner]. Es el cambio de alcance de esta versión y su origen es una batería de preguntas del orquestador sobre invariantes y reglas sin enunciado. Alcanza a §4, §4.1 y §4.2 nuevas, §6, §7, §9, §12 y §17.1.P.2. **Capacidades**: F-21 pasa de `Won't Have v1` a `Must Have` como **comentario** del administrador —texto libre, opcional, sin nota ni escala— y con ella se **retira la exclusión X-5**, cuya condición de reingreso declarada era «si el docente lo pide»; entran F-22 (enviar como acción única), F-23 (aprobar o rechazar, facultad exclusiva del administrador) y F-24 (eliminación de cualquier trabajo que el administrador ve); F-07, F-08 y F-12 se reescriben. **Estados**: se agrega `Rechazado`, terminal como `Finalizado`; `Borrador` pasa a significar «el JSON no verificó» al unificarse guardar y enviar en una sola acción. **Reglas**: RN-04 admite el borrado del administrador en cualquier estado, RN-05 adelanta su corte del cierre al envío, y entran RN-10 (sólo el administrador aprueba o rechaza, y los estados de cierre son terminales) y RN-11 (el administrador no ve borradores). **Invariantes**: INV-03 se acota a la eliminación por parte de un alumno, para que el borrado del administrador no lo vuelva falso, y entra INV-07 (los estados de cierre no cambian). Tres consecuencias quedan declaradas y aceptadas en §4.2: corregir un rechazo obliga a cargar un trabajo nuevo, no se puede conservar en borrador un trabajo cuyo JSON verifica, y un rechazo puede no llevar explicación escrita. Sube minor y no major: agrega capacidades y precisa reglas sin invalidar ninguna decisión previa, y ningún proyecto de código de §13 cambia, de modo que el `PRODUCT-MANIFEST` no se re-deriva. | Product Owner (decisión) · Orquestador SDD (consolidación) |
+| 1.3 | 2026-08-08 | Actualización §4.1 y §17.1.P.2: consolidación de las respuestas del Product Owner a la batería de ambigüedades que AG-02 devolvió al emitir la categoría 02 de `GeometriaFactory-Domain`. El intake declaraba las series «RN-01 a RN-09» e «INV-01 a INV-06» **sin transcribir ningún enunciado**: siete reglas eran reconstruibles de citas dispersas, **RN-02 y RN-06 no aparecían en ninguna sección**, y de los seis invariantes sólo cuatro tenían contenido inferible, con **INV-04 mal atribuido** en §21 al texto conservado íntegro cuando enuncia que un trabajo `Finalizado` no tiene errores de interpretación. §4.1 transcribe las nueve reglas con su criterio de verificación y §17.1.P.2 los invariantes con su enunciado y la regla que cada uno sostiene, más la declaración de que invariantes y reglas no son conjuntos distintos sino la misma decisión vista desde el negocio y desde el dominio. Los enunciados provienen de `Requerimientos-Funcionales.md` §7 y `Requerimientos-Tecnicos.md` §7.3, verificados por el orquestador contra las fuentes. Motivo: sin enunciado, ninguna categoría aguas abajo podía derivarlos, y la documentación de dominio ya emitida había propagado la atribución errónea de INV-04 en seis lugares. | Product Owner (confirmación) · Orquestador SDD (consolidación) |
 | 1.2 | 2026-08-08 | Actualización §12 y §12.1: resolución del hallazgo **HI-2** del informe de auditoría `SDD/Docs/Audit/A-00-01-r1.md`, elevado al Product Owner y aprobado por él. La entrada «Trabajo» de §12 usaba el término normativo **«unidad de entrega»** con el referente del dominio, mientras la fila de verificación de §12.1 declaraba que ese término no aparecía, contra el procedimiento de `Vocabulario-Rules.md` §6. `Vocabulario-Rules.md` §2 delimita la unidad de entrega por poder desplegarse o publicarse de forma independiente, y el Trabajo del alumno es un registro de datos. §12 pasa a decir «es lo que el alumno entrega en el laboratorio» y declara explícitamente que no es una unidad de entrega en el sentido normativo; §12.1 precisa que las unidades de entrega del producto son los dos servicios desplegables. Motivo: la contradicción se había propagado a la Fase A como hallazgo H-02 y habría vuelto a copiarse del origen en cada categoría siguiente. Sube minor: precisa una sección ya aprobada sin cambiar ninguna decisión de negocio. | Orquestador SDD |
 | 1.2 | 2026-08-08 | Actualización §6, flujo 4: resolución del hallazgo **HI-1** del informe de auditoría `SDD/Docs/Audit/A-00-01-r1.md`, elevado al Product Owner y aprobado por él. El flujo describía el escenario E-1 como «seis figuras: tres cilindros, dos cubos y un ortoedro» con «tres advertencias», mientras §20.E-1 —rotulado `medido` y contrastado carácter por carácter— transcribe **tres piezas y dos advertencias**. Manda §20 por llevar rótulo de procedencia medida. El flujo pasa a declarar las tres piezas y las dos advertencias con sus valores declarados y derivados, y se le agrega la precisión de que E-1 no ejercita las tolerancias del formato —su texto fue editado a mano y trae `"Bases"` sin comas finales—, que son las que ejercita E-2. Motivo: §6 es la sección que la categoría 02 lee para derivar flujos y la 08 para armar casos de prueba, y el número equivocado alimentaría un caso inexistente. Sube minor: corrige una sección ya aprobada sin cambiar ninguna decisión funcional. | Orquestador SDD |
 | 1.1 | 2026-08-08 | Identidad del producto decidida por el Product Owner, que resuelve la asunción A-1. `Nombre-Producto` pasa a **Fábrica de Geometría** (`Slug-Producto` derivado: `Fabrica-De-Geometria`, que renombra este archivo) y `Raiz-Codigo` pasa de `Lab.Geometria` a **`GeometriaFactory`**, con `Artefacto-Agrupacion` = `GeometriaFactory.sln`. Alcanza a la cabecera, a los siete `Nombre-Proyecto-Codigo` e `Identidad-Codigo` de §13, al árbol de §16, a los siete bloques de §17, a §18 y a la trazabilidad downstream. La nota de identidad de la cabecera se reescribe como tabla de los cuatro planos y declara que **`Lab-Geometria` es el nombre del repositorio, no un plano de identidad**: el prefijo `Lab` agrupa los repositorios de aplicaciones de laboratorio didáctico del docente. Sube minor: no cambia ninguna decisión funcional ni técnica, sólo la identidad con la que se nombran. | Product Owner (decisión) · Agente IA (aplicación) |
 | 1.0 | 2026-08-08 | Intake unificado inicial del producto, integrado a partir de los Requerimientos Funcionales, los Requerimientos Técnicos y el Análisis Final Integrado del ecosistema Geometría. Declara 7 proyectos de código, los siete escenarios de datos de la Parte D transcriptos completos, y las cinco asunciones de §22. | Agente IA sobre el material del Product Owner |
-| 2.0 | 2026-08-16 | **Migración estructural del framework SDD 6.0 al 8.6, fase M2** (`Master-Prompt-Migracion.md` 2.0 §6), sobre la plantilla **3.0**. El intake pasa de describir **un eje** a describir **dos**. **§1 a §12 no cambian**, ni de número, ni de nombre, ni de contenido. **§13** se renombra a «Composición del producto: los dos ejes» y se parte en **§13.1** unidades de entrega —dos, `GeometriaFactory-Api` y `GeometriaFactory-Web`, con su `tipo_unidad_entrega`, su integración en runtime y su estado—, **§13.2** proyectos de código —los siete, con su solución de código, sus dependencias de compilación y qué unidad compone cada uno— y **§13.3** la matriz de composición, que hace visible que `GeometriaFactory-Contracts` es **el único proyecto compartido**. `tipo_proyecto_codigo` **deja de existir**: el D8 es atributo de la unidad de entrega, y los cinco `library` no pierden rol sino un atributo que el modelo de dos ejes le asigna a la entrega que los contiene. **§14** parte su tabla única de contratos en **dos**, de integración y de compilación, y declara que la arista `Web → Api` es de runtime y no introduce ciclo en el grafo de compilación. **§17** pasa de **siete bloques por proyecto de código a dos por unidad de entrega**: cada subsección P.N enumera las entradas de sus proyectos componentes **nombrando el proyecto de cada una**, con los textos de la emisión 1.34 **transpuestos sin reescritura** —lo que cambia es el orden y no el contenido—, y las entradas de `GeometriaFactory-Contracts` aparecen en **las dos** unidades por ser compartido. El bloque de idioma de los identificadores, que era §13.1 y que la plantilla 3.0 no ubica, pasa a **§23** con apartamiento declarado, junto a §22, que ya era sección propia fuera de plantilla. **Batería M2 resuelta:** B-1, las dos unidades `vigente`; B-2, los NFR de los proyectos que no se despliegan **se conservan nombrando su proyecto**, con apartamiento declarado contra la afirmación de la plantilla, porque existen, están medidos y `CU-00026` CA-15 los ejercita; B-3, los pre-ADR se **renumeran y sus citas se reconectan desde registro confirmado**, `SDD/Docs/Audit/Migracion-M2-Registro-Citas-17.json`. **Ninguna regla de negocio, invariante, escenario, métrica, exclusión ni decisión del Product Owner cambia de enunciado.** El estado anterior queda archivado en `_legacy/2026-08-16/`. Sube **major**, porque una migración estructural reescribe secciones ya aprobadas. |
+

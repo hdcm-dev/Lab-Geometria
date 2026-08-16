@@ -18,7 +18,7 @@ Además, esta capa **produce condiciones propias** que el dominio no tiene: las 
 
 Hay un tercer elemento que hace falta decidir y que no es obvio: **quién puede acuñar una condición nueva**. Un catálogo que crece desde varios lugares deja de ser un conjunto cerrado, y aguas abajo `GeometriaFactory-Api` tiene que traducir cada condición a una respuesta de protocolo. Si aparece una condición sin traducción declarada, el producto vuelve a tener un fallo que llega a la persona sin representación.
 
-Motivación upstream: NB-00004, NB-00005, NB-00006; RN-04003, RN-04005, RN-04008, RN-04009; `PRODUCT-INTAKE` §17.2.P.11 punto 2 y §17.2.P.12; [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md).
+Motivación upstream: NB-00004, NB-00005, NB-00006; RN-04003, RN-04005, RN-04008, RN-04009; `PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Application punto 2 y §17.1.P.12 · GeometriaFactory-Application; [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md).
 
 ## 2. Decisión
 
@@ -80,7 +80,7 @@ Y una regla de forma sobre lo que la condición lleva: **ninguna condición de e
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 y §6.
 - [`../../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md`](ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), la decisión del nivel 0 que ésta continúa.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), el conjunto cerrado del otro lado de la frontera.
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-03`), §17.2.P.11 punto 2 y §17.2.P.12.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-03`), §17.1.P.11 · GeometriaFactory-Application punto 2 y §17.1.P.12 · GeometriaFactory-Application.
 - ADR relacionadas: [`ADR-04003`](ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md), [`ADR-04004`](ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md).
 
 ## 10. Control de cambios

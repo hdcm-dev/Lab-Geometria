@@ -26,12 +26,12 @@ Demostrar el camino más corto que un consumidor recorre contra esta biblioteca:
 
 | Ítem | Versión mínima | Origen |
 | --- | --- | --- |
-| Plataforma de ejecución de la solución de código | **.NET 10** | `PRODUCT-INTAKE` §17.1.P.1 y encabezado de la Parte C |
+| Plataforma de ejecución de la solución de código | **.NET 10** | `PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Domain y encabezado de la Parte C |
 | Entorno de desarrollo contenido del repositorio | El del propio repositorio, `.devcontainer/` | `PRODUCT-INTAKE` §16; el host **no tiene** el SDK (`PRODUCT-INTAKE` §17.1, encabezado de la Parte C) |
 | Etapa `a` del plan de entrega cerrada | — | Es la que crea la estructura de proyectos de código y los comandos de construcción de `scripts/` (`PRODUCT-INTAKE` §15) |
-| Sistema operativo | Linux, el del entorno contenido | `PRODUCT-INTAKE` §17.1.P.9: `net10.0` sin sufijo de plataforma |
+| Sistema operativo | Linux, el del entorno contenido | `PRODUCT-INTAKE` §17.1.P.9 · GeometriaFactory-Domain: `net10.0` sin sufijo de plataforma |
 
-**Sin servicios externos.** El proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1), de modo que el sample no necesita base de datos, red ni credenciales.
+**Sin servicios externos.** El proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Domain), de modo que el sample no necesita base de datos, red ni credenciales.
 
 ## 4. Cómo correrlo
 
@@ -57,7 +57,7 @@ samples/domain/01-basico/
     └── SalidaEsperada.<ext>      # Compara la salida contra el snapshot de §6
 ```
 
-**Los nombres de tipos y de espacios de nombres no se fijan acá**: el intake los declara abiertos hasta el punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11) y [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §2 lo repite. El árbol de arriba nombra los archivos por el acto que ejecutan, no por el tipo que contienen.
+**Los nombres de tipos y de espacios de nombres no se fijan acá**: el intake los declara abiertos hasta el punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain) y [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §2 lo repite. El árbol de arriba nombra los archivos por el acto que ejecutan, no por el tipo que contienen.
 
 ## 6. Qué esperar
 

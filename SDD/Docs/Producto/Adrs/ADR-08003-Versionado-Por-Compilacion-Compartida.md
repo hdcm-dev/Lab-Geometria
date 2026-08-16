@@ -12,13 +12,13 @@
 
 ## 1. Contexto
 
-`PRODUCT-INTAKE` §17.4.P.3 declara la política de cambios incompatibles: como los dos extremos se compilan contra el mismo ensamblado, un cambio incompatible **rompe la compilación antes de romper el tiempo de ejecución**; la regla operativa es que las dos unidades desplegables se despliegan juntas ante un cambio de contrato, y **no hay versionado de rutas del servicio en este alcance porque no hay clientes de terceros**. §17.4.P.7 agrega que un cambio incompatible en un tipo es **breaking** y sube major del producto en el registro de cambios, aunque no se publique en ningún feed.
+`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Contracts declara la política de cambios incompatibles: como los dos extremos se compilan contra el mismo ensamblado, un cambio incompatible **rompe la compilación antes de romper el tiempo de ejecución**; la regla operativa es que las dos unidades desplegables se despliegan juntas ante un cambio de contrato, y **no hay versionado de rutas del servicio en este alcance porque no hay clientes de terceros**. §17.1.P.7 · GeometriaFactory-Contracts agrega que un cambio incompatible en un tipo es **breaking** y sube major del producto en el registro de cambios, aunque no se publique en ningún feed.
 
-Este proyecto de código no tiene pruebas propias: se ejercita íntegramente desde las pruebas de integración que golpean el servicio real, y su gate equivalente es que **el 100 % de los tipos esté ejercitado por al menos una prueba de integración**, valor que el intake rotula `[ASUNCIÓN]` (§17.4.P.6).
+Este proyecto de código no tiene pruebas propias: se ejercita íntegramente desde las pruebas de integración que golpean el servicio real, y su gate equivalente es que **el 100 % de los tipos esté ejercitado por al menos una prueba de integración**, valor que el intake rotula `[ASUNCIÓN]` (§17.1.P.6 · GeometriaFactory-Contracts).
 
 La restricción transversal `RT-06` de la categoría 02 registra además que **la versión vigente del contrato ya ejerció esa política**: el conjunto cerrado de estados y el de códigos de error cambiaron los dos.
 
-Motivación upstream: `PRODUCT-INTAKE` §17.4.P.3, §17.4.P.6, §17.4.P.7 y §17.4.P.8; `RT-06` y `RT-07` de la categoría 02.
+Motivación upstream: `PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Contracts, §17.1.P.6 · GeometriaFactory-Contracts, §17.1.P.7 · GeometriaFactory-Contracts y §17.1.P.8 · GeometriaFactory-Contracts; `RT-06` y `RT-07` de la categoría 02.
 
 ## 2. Decisión
 
@@ -38,7 +38,7 @@ Motivación upstream: `PRODUCT-INTAKE` §17.4.P.3, §17.4.P.6, §17.4.P.7 y §17
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Compilación compartida con despliegue conjunto (**adoptada**) | El error aparece en la construcción, que es lo más barato posible; cero infraestructura de versionado | Las dos unidades quedan atadas en su calendario de despliegue; un cambio de contrato no se puede desplegar por partes |
-| Versionado de rutas del servicio con convivencia de dos versiones | Permitiría desplegar las unidades por separado y dar plazo de migración | No hay a quién dárselo: los dos consumidores son del mismo producto. Descartada por `PRODUCT-INTAKE` §17.4.P.3, que declara explícitamente que no hay versionado de rutas en este alcance |
+| Versionado de rutas del servicio con convivencia de dos versiones | Permitiría desplegar las unidades por separado y dar plazo de migración | No hay a quién dárselo: los dos consumidores son del mismo producto. Descartada por `PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Contracts, que declara explícitamente que no hay versionado de rutas en este alcance |
 | Negociación de versión en tiempo de ejecución | Tolerante a despliegues desfasados | Convierte un error de compilación en un error de ejecución, que es exactamente lo que la decisión adoptada evita; y agrega un mecanismo que nadie va a ejercer |
 | Sólo compatibilidad aditiva, sin cambios incompatibles nunca | Las unidades nunca quedarían desfasadas | El contrato ya ejerció dos cambios incompatibles —el conjunto de estados y el de códigos—, y el segundo fue una **reducción** obligada por una decisión de negocio. Prohibirlos habría dejado dos códigos vivos describiendo situaciones imposibles |
 
@@ -84,7 +84,7 @@ Qué constituye cada clase de cambio sobre este contrato:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.4.P.3, §17.4.P.6, §17.4.P.7 y §17.4.P.8.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.3 · GeometriaFactory-Contracts, §17.1.P.6 · GeometriaFactory-Contracts, §17.1.P.7 · GeometriaFactory-Contracts y §17.1.P.8 · GeometriaFactory-Contracts.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §6, `RT-06` y `RT-07`.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §17.
 - ADR relacionadas: [`ADR-08001`](ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md), [`ADR-08002`](ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md).

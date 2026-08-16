@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md) 1.0 §1 y §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §14, §16, §17.2.P.3, §17.2.P.4, §17.2.P.5 y §17.2.P.9
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md) 1.0 §1 y §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §14, §16, §17.1.P.3 · GeometriaFactory-Application, §17.1.P.4 · GeometriaFactory-Application, §17.1.P.5 · GeometriaFactory-Application y §17.1.P.9 · GeometriaFactory-Application
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -34,7 +34,7 @@
 | --- | --- |
 | No tiene unidad de despliegue propia: se compila dentro del artefacto de agrupación y **viaja embebido en la unidad desplegable del servidor propio, por la vía de `GeometriaFactory-Api`** | `05` §5, primera fila |
 | **Ninguna dependencia de infraestructura**: no requiere base de datos, ni almacén de secretos, ni servicio externo. Todo lo que necesita del exterior entra por los **cuatro** puertos | `05` §5, tercera fila |
-| No se publica en ningún repositorio de paquetes: `redistribuible` es false | `05` §5, última fila; intake §13 y §17.2.P.7 |
+| No se publica en ningún repositorio de paquetes: `redistribuible` es false | `05` §5, última fila; intake §13 y §17.1.P.7 · GeometriaFactory-Application |
 
 | Ambiente o canal | Destino | Aprobador | Ventana o acuerdo de nivel de servicio |
 | --- | --- | --- | --- |
@@ -71,24 +71,24 @@ La infraestructura del producto existe y está enumerada en el árbol del intake
 
 | Aspecto | Decisión | Fundamento |
 | --- | --- | --- |
-| Configuración propia de ejecución | **Ninguna.** No lee variables de entorno ni archivos de configuración: lo que necesita se lo inyecta la composición de raíz de `GeometriaFactory-Api` | `05` §5; intake §17.2.P.2 |
-| Persistencia | **No aplica directamente.** Declara el puerto de repositorio y el alcance de la unidad de trabajo —**un caso de uso, una transacción**—, y la implementación es de `GeometriaFactory-Infrastructure` | Intake §17.2.P.4 |
-| Reloj | **Es un puerto**, para que las fechas de alta y modificación sean verificables en prueba. No se toma del sistema | Intake §17.2.P.11, punto 3 |
+| Configuración propia de ejecución | **Ninguna.** No lee variables de entorno ni archivos de configuración: lo que necesita se lo inyecta la composición de raíz de `GeometriaFactory-Api` | `05` §5; intake §17.1.P.2 · GeometriaFactory-Application |
+| Persistencia | **No aplica directamente.** Declara el puerto de repositorio y el alcance de la unidad de trabajo —**un caso de uso, una transacción**—, y la implementación es de `GeometriaFactory-Infrastructure` | Intake §17.1.P.4 · GeometriaFactory-Application |
+| Reloj | **Es un puerto**, para que las fechas de alta y modificación sean verificables en prueba. No se toma del sistema | Intake §17.1.P.11 · GeometriaFactory-Application, punto 3 |
 | Variables de entorno del pipeline | **Ninguna** | Decisión de esta categoría, derivada de la tabla de §2.1 de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md): sus tres stages leen el repositorio y escriben recuentos e informes |
 
 **La fila del reloj no es un detalle de estilo.** Un caso de uso que tomara la hora del sistema sería irreproducible en la canalización, y `QG-02` —batería entera en verde— empezaría a fallar por motivos que no son del código. Que el reloj entre por un puerto es lo que hace que la batería sea determinista en cualquier ejecutor.
 
 ## 5. Secretos
 
-**Ninguno, y la afirmación es de la fuente y no de esta categoría.** El intake §17.2.P.5 declara que esta capa **no maneja secretos**: la verificación de pertenencia vive acá, pero la comparación de contraseñas y la emisión de accesos no.
+**Ninguno, y la afirmación es de la fuente y no de esta categoría.** El intake §17.1.P.5 · GeometriaFactory-Application declara que esta capa **no maneja secretos**: la verificación de pertenencia vive acá, pero la comparación de contraseñas y la emisión de accesos no.
 
 | Momento | Secretos | Fundamento |
 | --- | --- | --- |
-| Construcción | **Ninguno.** El restaurador toma dependencias de la plataforma; no hay publicación que autenticar | Intake §17.2.P.7, por remisión a §17.1.P.7 |
+| Construcción | **Ninguno.** El restaurador toma dependencias de la plataforma; no hay publicación que autenticar | Intake §17.1.P.7 · GeometriaFactory-Application, por remisión a §17.1.P.7 · GeometriaFactory-Domain |
 | Prueba | **Ninguno.** La batería corre con dobles de los cuatro puertos, sin base de datos y sin frontera de proceso | `Estrategia-Calidad.md` §1 |
-| Ejecución | **Ninguno propio.** La contraseña llega **ya derivada** y la provisoria **ya producida**: esta capa las recibe, no las fabrica | Intake §17.2.P.5 |
+| Ejecución | **Ninguno propio.** La contraseña llega **ya derivada** y la provisoria **ya producida**: esta capa las recibe, no las fabrica | Intake §17.1.P.5 · GeometriaFactory-Application |
 
-**Lo que sí es responsabilidad de esta capa, y conviene no confundirlo con un secreto**, es la **verificación de pertenencia**: el intake §17.2.P.5 la declara distinta de la autorización por rol y no reemplazable por ella —«el rol no alcanza; un alumno autenticado no debe poder leer el trabajo de otro cambiando el identificador en la petición»—, materializa `INV-02` e `INV-03`, y su respuesta ante un recurso ajeno es **«no encontrado», no «no autorizado»** (`RN-04003`). Desde esta categoría, la consecuencia práctica es que **un stage de este proyecto de código que pidiera una credencial sería la señal de que algo se salió de su alcance**.
+**Lo que sí es responsabilidad de esta capa, y conviene no confundirlo con un secreto**, es la **verificación de pertenencia**: el intake §17.1.P.5 · GeometriaFactory-Application la declara distinta de la autorización por rol y no reemplazable por ella —«el rol no alcanza; un alumno autenticado no debe poder leer el trabajo de otro cambiando el identificador en la petición»—, materializa `INV-02` e `INV-03`, y su respuesta ante un recurso ajeno es **«no encontrado», no «no autorizado»** (`RN-04003`). Desde esta categoría, la consecuencia práctica es que **un stage de este proyecto de código que pidiera una credencial sería la señal de que algo se salió de su alcance**.
 
 **No se declara ninguna frecuencia de rotación**: no hay secreto propio que rotar. Los del producto —la clave de firma del servidor propio, la dirección base del servicio de datos y las credenciales del canal de publicación del front— viven fuera del repositorio y su gobierno pertenece a las categorías 09 de `GeometriaFactory-Api` y de `GeometriaFactory-Web`.
 

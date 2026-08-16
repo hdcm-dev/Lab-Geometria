@@ -54,7 +54,7 @@ La capacidad `F-05` del intake §4 declara el cambio de contraseña exigiendo la
 
 ## 7. Notas y supuestos
 
-La marca **la levanta únicamente el cambio efectivo hecho por la propia cuenta**, según el enunciado de `INV-09` que `PRODUCT-INTAKE` §17.1.P.2 consolidó en su versión 1.14. Ningún acto del administrador la levanta.
+La marca **la levanta únicamente el cambio efectivo hecho por la propia cuenta**, según el enunciado de `INV-09` que `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain consolidó en su versión 1.14. Ningún acto del administrador la levanta.
 
 ## 8. Control de cambios
 

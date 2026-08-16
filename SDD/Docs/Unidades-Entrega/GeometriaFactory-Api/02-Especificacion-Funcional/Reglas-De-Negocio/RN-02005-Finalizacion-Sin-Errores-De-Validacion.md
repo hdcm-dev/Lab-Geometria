@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02005, con el corte adelantado del cierre al envío), §4 (F-10 y F-22), §4.2 (modelo de estados del trabajo), §17.1.P.2 (INV-04), §7 (CL-3 y CL-4), §17.2.P.11 punto 2, §21, §20.E-1, §20.E-2, §20.E-5, §20.E-6; [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5; [`NB-00005`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02005, con el corte adelantado del cierre al envío), §4 (F-10 y F-22), §4.2 (modelo de estados del trabajo), §17.1.P.2 · GeometriaFactory-Domain (INV-04), §7 (CL-3 y CL-4), §17.1.P.11 · GeometriaFactory-Application punto 2, §21, §20.E-1, §20.E-2, §20.E-5, §20.E-6; [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md) §5; [`NB-00005`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md) §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---

@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §2, §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11 (`PA-06`); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md) 1.0 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7, §17.2.P.3 y §17.2.P.7
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §2, §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11 (`PA-06`); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md) 1.0 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7 · GeometriaFactory-Domain, §17.1.P.3 · GeometriaFactory-Application y §17.1.P.7 · GeometriaFactory-Application
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md)
 
 ---
@@ -27,7 +27,7 @@
 
 ## 1. Versionado semántico
 
-Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.2.P.7 declara la estrategia de este proyecto de código **idéntica a la de §17.1.P.7**: versionado semántico, convenciones de mensaje de confirmación, **sin publicación en feed**, y una rama y una etiqueta por etapa.
+Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.1.P.7 · GeometriaFactory-Application declara la estrategia de este proyecto de código **idéntica a la de §17.1.P.7 · GeometriaFactory-Domain**: versionado semántico, convenciones de mensaje de confirmación, **sin publicación en feed**, y una rama y una etiqueta por etapa.
 
 **Qué gobierna la compatibilidad acá, y no lo decide esta categoría.** [`ADR-04003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) §2 lo decide: **el contrato se protege por compilación compartida y no por descripción formal ni por convivencia de versiones**, un cambio incompatible rompe la compilación del artefacto de agrupación, y la política es corregir las dos caras **en la misma etapa**.
 
@@ -73,7 +73,7 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 ## 4. Modelo de ramas
 
-El del producto, heredado entero y sin variantes: **una rama por etapa** a partir de la principal, con etiqueta al fusionar; **un pull request por etapa, que es el punto de control**; **etapas en serie**, sin abrir la rama de una etapa antes de fusionar la anterior; y sin OK explícito no se avanza (intake §10, §15 y §17.1.P.7).
+El del producto, heredado entero y sin variantes: **una rama por etapa** a partir de la principal, con etiqueta al fusionar; **un pull request por etapa, que es el punto de control**; **etapas en serie**, sin abrir la rama de una etapa antes de fusionar la anterior; y sin OK explícito no se avanza (intake §10, §15 y §17.1.P.7 · GeometriaFactory-Domain).
 
 **Reglas de protección de la rama principal**, que es lo que esta categoría aporta:
 
@@ -85,7 +85,7 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 ## 5. Canales
 
-**No hay canales de publicación.** El intake §17.2.P.7, por remisión a §17.1.P.7, declara que no se publica en ningún feed, y §13 lo generaliza al producto entero: **ningún proyecto de código se publica como paquete redistribuible**. `05` §5 lo repite en su última fila.
+**No hay canales de publicación.** El intake §17.1.P.7 · GeometriaFactory-Application, por remisión a §17.1.P.7 · GeometriaFactory-Domain, declara que no se publica en ningún feed, y §13 lo generaliza al producto entero: **ningún proyecto de código se publica como paquete redistribuible**. `05` §5 lo repite en su última fila.
 
 `Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único y admite apartarse con un ADR que lo justifique: **el ADR existe y es [`ADR-04003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md)**, cuyo §2 declara que no se publica en ningún repositorio de paquetes y que por eso **no hay deprecación gradual, ni versiones conviviendo, ni consumidor externo al que avisar**. El apartamiento queda desarrollado en [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.
 
@@ -110,4 +110,4 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.2.P.7 hereda de §17.1.P.7, y transcribe la tabla de clases de cambio de `ADR-04003` §7 con su **asimetría propia**: agregar una operación a un puerto es **mayor**, y es la única fila aditiva de las nueve que lo es. Declara la herramienta de cálculo **por su función**, sin cerrar el punto abierto `PA-06` que la fuente ató a la etapa `a`, y precisa qué no calcularía ninguna herramienta. Declara el modelo de ramas del producto con la cadencia propia de este proyecto de código y la ausencia de canales con el ADR que la sostiene. Reemplaza la política de obsolescencia por la **política de cambios incompatibles**, con el fundamento de que no hay integrador externo a quien dar plazo, y adopta las **cuatro** métricas de `ADR-04003` §8 sin agregar ninguna. |
+| 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.1.P.7 · GeometriaFactory-Application hereda de §17.1.P.7 · GeometriaFactory-Domain, y transcribe la tabla de clases de cambio de `ADR-04003` §7 con su **asimetría propia**: agregar una operación a un puerto es **mayor**, y es la única fila aditiva de las nueve que lo es. Declara la herramienta de cálculo **por su función**, sin cerrar el punto abierto `PA-06` que la fuente ató a la etapa `a`, y precisa qué no calcularía ninguna herramienta. Declara el modelo de ramas del producto con la cadencia propia de este proyecto de código y la ausencia de canales con el ADR que la sostiene. Reemplaza la política de obsolescencia por la **política de cambios incompatibles**, con el fundamento de que no hay integrador externo a quien dar plazo, y adopta las **cuatro** métricas de `ADR-04003` §8 sin agregar ninguna. |

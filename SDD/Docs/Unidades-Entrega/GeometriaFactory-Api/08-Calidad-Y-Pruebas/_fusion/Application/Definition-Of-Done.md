@@ -75,7 +75,7 @@ Se aplica cuando las **seis** etapas que este proyecto de código toca —`a`, `
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos de prueba que los usan, sin sustitución por datos inventados. **Se valida** con `CV-07` y con el recuento de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3.
 - [ ] Los dos valores rotulados **[ASUNCIÓN]** están confirmados por el Product Owner, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 y el estado de `BT-04018`.
 - [ ] No queda ningún punto abierto de `05` §11 sin desenlace declarado, **incluido el nombre del cuarto puerto**. **Se valida** leyendo esa tabla.
-- [ ] La versión de la biblioteca está calculada según la estrategia de versionado del intake §17.2.P.7 y la etiqueta de la etapa existe. **Se valida** con el registro de la etiqueta.
+- [ ] La versión de la biblioteca está calculada según la estrategia de versionado del intake §17.1.P.7 · GeometriaFactory-Application y la etiqueta de la etapa existe. **Se valida** con el registro de la etiqueta.
 
 ## 2. Excepciones admitidas
 
@@ -85,7 +85,7 @@ Se aplica cuando las **seis** etapas que este proyecto de código toca —`a`, `
 | Mutation score **no exigible todavía** | El criterio `CV-24` se reporta «sin medir» hasta que la herramienta esté elegida y corra | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva en el backlog técnico, con la etapa en que se cierra |
 | Caso de prueba deshabilitado | **No se admite sin motivo escrito en su fila** del catálogo. Un caso deshabilitado sin motivo incumple `CV-26` | — | — |
-| Prueba que abre el almacén real | **No se admite en ninguna forma.** El intake §17.2.P.8 declara la puerta propia y bloqueante, y la salida correcta es **reubicar la prueba** en la batería de integración de `GeometriaFactory-Api` porque ahí es donde pertenece, no para esquivar la puerta | — | — |
+| Prueba que abre el almacén real | **No se admite en ninguna forma.** El intake §17.1.P.8 · GeometriaFactory-Application declara la puerta propia y bloqueante, y la salida correcta es **reubicar la prueba** en la batería de integración de `GeometriaFactory-Api` porque ahí es donde pertenece, no para esquivar la puerta | — | — |
 | Historia que la etapa sólo ejerce parcialmente | **No se admite.** Es la misma regla que la Definition of Ready declara para la entrada: una historia que no cabe entera en su etapa está mal cortada y se redivide | — | — |
 
 ## 3. Vigencia

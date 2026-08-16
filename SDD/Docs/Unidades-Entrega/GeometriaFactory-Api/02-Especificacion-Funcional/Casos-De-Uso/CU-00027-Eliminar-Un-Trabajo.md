@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-02003, RN-02004, RN-02011), §4.2 (estados del trabajo), §17.1.P.2 (INV-02, INV-03)
+**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-02003, RN-02004, RN-02011), §4.2 (estados del trabajo), §17.1.P.2 · GeometriaFactory-Domain (INV-02, INV-03)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** `CU-00006` §A-12 y [`CU-04009`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04009-Eliminar-Un-Trabajo.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1 y §2.1.2
 

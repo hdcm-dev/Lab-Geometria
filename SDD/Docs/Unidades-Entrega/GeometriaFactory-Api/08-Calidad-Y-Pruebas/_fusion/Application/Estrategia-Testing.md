@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) 1.7 §3 y §4; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.2.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) 1.7 §3 y §4; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.1.P.6 · GeometriaFactory-Application, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 
 ---
@@ -28,12 +28,12 @@
 
 ## 1. Pirámide de testing deseada
 
-`Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library` la distribución **80 / 15 / 5** entre unitario, integración y extremo a extremo con snapshot. Este proyecto de código **se aparta del reparto y declara el motivo**, que no es de esta categoría sino del intake: §17.2.P.6 declara «pirámide del proyecto de código: **100 % unitarias**; la integración vive en `GeometriaFactory.Integration.Tests`, que pertenece a la Api».
+`Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library` la distribución **80 / 15 / 5** entre unitario, integración y extremo a extremo con snapshot. Este proyecto de código **se aparta del reparto y declara el motivo**, que no es de esta categoría sino del intake: §17.1.P.6 · GeometriaFactory-Application declara «pirámide del proyecto de código: **100 % unitarias**; la integración vive en `GeometriaFactory.Integration.Tests`, que pertenece a la Api».
 
 | Nivel | Qué cubre acá | Porcentaje objetivo | Justificación |
 | --- | --- | --- | --- |
-| Unit | Los once casos de uso enteros, con **dobles de los cuatro puertos**, más las cuatro comprobaciones de autorización y las pruebas de inspección estructural | **100 %** | Lo declara el intake §17.2.P.6. La inversión de dependencias existe precisamente para que un caso de uso entero sea unitario: no hay nada en esta capa que exija un ambiente |
-| Integración | — | **0 %** | **No aplica acá y se declara así en lugar de omitirse.** La batería de integración del producto existe y golpea la API real contra el almacén real, pero es de `GeometriaFactory-Api` (intake §17.2.P.6 y §17.5.P.6). Una prueba de esta capa que abriera el almacén violaría `QG-04` |
+| Unit | Los once casos de uso enteros, con **dobles de los cuatro puertos**, más las cuatro comprobaciones de autorización y las pruebas de inspección estructural | **100 %** | Lo declara el intake §17.1.P.6 · GeometriaFactory-Application. La inversión de dependencias existe precisamente para que un caso de uso entero sea unitario: no hay nada en esta capa que exija un ambiente |
+| Integración | — | **0 %** | **No aplica acá y se declara así en lugar de omitirse.** La batería de integración del producto existe y golpea la API real contra el almacén real, pero es de `GeometriaFactory-Api` (intake §17.1.P.6 · GeometriaFactory-Application y §17.1.P.6 · GeometriaFactory-Api). Una prueba de esta capa que abriera el almacén violaría `QG-04` |
 | E2E y snapshot | — | **0 %** | El proyecto de código no es unidad de despliegue, no tiene proceso propio ni interfaz (`05` §4 y §5). Un recorrido de punta a punta del producto pasa por `GeometriaFactory-Api` y `GeometriaFactory-Web`, y ahí es donde vive |
 
 **El apartamiento es de reparto, no de rigor.** Los veinte puntos que la regla asigna a integración, extremo a extremo y snapshot **no se descartan: se reasignan a otro proyecto de código**, que es donde la fuente los pone. El piso unitario **sube** de 80 a 100, de modo que no se baja ninguna exigencia y no hace falta la ADR que §2.2 exige para bajar cobertura.
@@ -47,7 +47,7 @@
 
 ## 2. Cobertura mínima por capa
 
-La partición no es en capas de despliegue —no las hay— sino en los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.2.P.6 y es **85 % de líneas y 80 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
+La partición no es en capas de despliegue —no las hay— sino en los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Application y es **85 % de líneas y 80 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -56,10 +56,10 @@ La partición no es en capas de despliegue —no las hay— sino en los **ocho**
 | Orquestación del alta de cuentas | 90 % | 85 % | 60 % | Sube sobre el piso: sostiene los dos caminos de alta con estados iniciales opuestos, que ya produjeron un defecto de fusión corregido en la categoría 02 |
 | Orquestación del gobierno de cuentas | 90 % | 85 % | 60 % | Sube sobre el piso: contiene el arrastre de la baja —caso testigo de la unidad de trabajo— y el reseteo, que pone la marca |
 | Orquestación del ingreso y la credencial | 95 % | 90 % | 60 % | Sube sobre el piso: es el único lugar donde la marca **se levanta** (`CU-04003` FA-05), y donde la admisibilidad devuelve sus motivos sin colapsarlos |
-| Orquestación del trabajo | 85 % | 80 % | 60 % | Piso del intake §17.2.P.6 |
+| Orquestación del trabajo | 85 % | 80 % | 60 % | Piso del intake §17.1.P.6 · GeometriaFactory-Application |
 | Orquestación de la consulta | 85 % | 80 % | 60 % | Piso del intake |
 | Orquestación del desenlace | 85 % | 80 % | 60 % | Piso del intake |
-| **Proyecto de código completo** | **85 %** | **80 %** | **60 %** | Intake §17.2.P.6 [ASUNCIÓN] y `Rules-Calidad-Y-Pruebas.md` §2.2 para el mutation score |
+| **Proyecto de código completo** | **85 %** | **80 %** | **60 %** | Intake §17.1.P.6 · GeometriaFactory-Application [ASUNCIÓN] y `Rules-Calidad-Y-Pruebas.md` §2.2 para el mutation score |
 
 **De dónde sale cada número, sin mezclarlos.** El 85/80 global es del intake y viene rotulado **[ASUNCIÓN]**: es el valor que el Product Owner tiene pendiente de confirmar. El **mutation score de 60 %** no lo declara ninguna fuente del producto: es el piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library` y esta categoría lo adopta como tal; **no se le atribuye al intake**. Los cuatro valores por encima del piso —100, 90, 90 y 95— los sube esta categoría con el fundamento declarado en la columna, que es lo que §2.2 admite («los porcentajes son piso, no techo»).
 
@@ -98,7 +98,7 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 ## 5. Mocks y fixtures
 
-**Política de dobles: sólo de puerto, y de ningún otro lugar.** Los **cuatro** puertos de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §3 son la única frontera que una prueba sustituye. Un doble de un componente interno —de la guarda, de un orquestador— es un hallazgo de revisión: rompe la propiedad de que el caso de uso se ejerce **entero**, que es lo que el intake §17.2.P.6 pide probar.
+**Política de dobles: sólo de puerto, y de ningún otro lugar.** Los **cuatro** puertos de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §3 son la única frontera que una prueba sustituye. Un doble de un componente interno —de la guarda, de un orquestador— es un hallazgo de revisión: rompe la propiedad de que el caso de uso se ejerce **entero**, que es lo que el intake §17.1.P.6 · GeometriaFactory-Application pide probar.
 
 Los cuatro dobles, con lo que cada uno tiene que poder simular:
 
@@ -145,16 +145,16 @@ Fixtures compartidos, todos como **constructores**:
 
 | Aspecto | Decisión |
 | --- | --- |
-| Dónde corre | Dentro del contenedor de desarrollo, porque el equipo anfitrión no tiene el kit de desarrollo instalado (intake, encabezado de la Parte C, y §17.2.P.9) |
+| Dónde corre | Dentro del contenedor de desarrollo, porque el equipo anfitrión no tiene el kit de desarrollo instalado (intake, encabezado de la Parte C, y §17.1.P.9 · GeometriaFactory-Application) |
 | Aislamiento entre pruebas | Total y por construcción: no hay estado compartido entre invocaciones, no hay caché y no hay registro estático (`05` §4). Ninguna prueba depende del orden de ejecución |
 | Paralelismo | Admitido. `05` §4 declara que la batería puede correr en paralelo porque ninguna prueba comparte estado ni base |
-| Base de datos | **Ninguna, y el umbral es exactamente 0.** `tiene_persistencia` es false y el intake §17.2.P.8 declara la puerta propia: una prueba de esta capa que abra el almacén real **está mal ubicada** |
+| Base de datos | **Ninguna, y el umbral es exactamente 0.** `tiene_persistencia` es false y el intake §17.1.P.8 · GeometriaFactory-Application declara la puerta propia: una prueba de esta capa que abra el almacén real **está mal ubicada** |
 | Variables de entorno y secretos | **Ninguno.** El proyecto de código no lee configuración (`05` §7) y la contraseña llega ya derivada, la provisoria ya producida y ya derivada |
-| Reloj | **No se fija ni se simula el reloj del entorno.** El momento entra por el puerto de reloj, de modo que la prueba lo elige. Es lo que el intake §17.2.P.11 punto 3 declara que el puerto existe para permitir |
-| Duración | **No se declara ningún tiempo de ejecución de la batería.** El único tiempo que este proyecto de código tiene declarado es el del caso de uso más pesado —**500 ms** sobre `E-1`, [ASUNCIÓN del intake §17.2.P.10]—, que es una medición por caso de uso y no de la suite. Ninguna fuente da un tiempo de suite para esta capa, y no se inventa uno |
+| Reloj | **No se fija ni se simula el reloj del entorno.** El momento entra por el puerto de reloj, de modo que la prueba lo elige. Es lo que el intake §17.1.P.11 · GeometriaFactory-Application punto 3 declara que el puerto existe para permitir |
+| Duración | **No se declara ningún tiempo de ejecución de la batería.** El único tiempo que este proyecto de código tiene declarado es el del caso de uso más pesado —**500 ms** sobre `E-1`, [ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Application]—, que es una medición por caso de uso y no de la suite. Ninguna fuente da un tiempo de suite para esta capa, y no se inventa uno |
 
 ## 8. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial. Declara la pirámide objetivo con su apartamiento del reparto de `Rules-Calidad-Y-Pruebas.md` §2.2 y el motivo —el intake §17.2.P.6 declara 100 % unitarias y ubica la integración en `GeometriaFactory-Api`—, la cobertura mínima por los **ocho** componentes de `05` §3.1 con el origen de cada número separado y con la declaración de que el componente de puertos no tiene umbral porque no tiene líneas que cubrir, el tooling nombrado por función, la decisión de no adoptar archivos de escenario ejecutables, la política de dobles **sólo de puerto** con los cuatro dobles y lo que cada uno simula, los cuatro fixtures compartidos, el uso de los **ocho** escenarios reales del intake §20 —con la precisión de que a esta capa le entra el resultado que el doble devuelve y no el texto— y el ambiente de testing, incluida la constancia de que no se declara ningún tiempo de ejecución de suite que ninguna fuente dé. |
+| 1.0 | 2026-08-11 | Emisión inicial. Declara la pirámide objetivo con su apartamiento del reparto de `Rules-Calidad-Y-Pruebas.md` §2.2 y el motivo —el intake §17.1.P.6 · GeometriaFactory-Application declara 100 % unitarias y ubica la integración en `GeometriaFactory-Api`—, la cobertura mínima por los **ocho** componentes de `05` §3.1 con el origen de cada número separado y con la declaración de que el componente de puertos no tiene umbral porque no tiene líneas que cubrir, el tooling nombrado por función, la decisión de no adoptar archivos de escenario ejecutables, la política de dobles **sólo de puerto** con los cuatro dobles y lo que cada uno simula, los cuatro fixtures compartidos, el uso de los **ocho** escenarios reales del intake §20 —con la precisión de que a esta capa le entra el resultado que el doble devuelve y no el texto— y el ambiente de testing, incluida la constancia de que no se declara ningún tiempo de ejecución de suite que ninguna fuente dé. |

@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.3.P.8
+**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.1.P.8 · GeometriaFactory-Infrastructure
 **Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops`, que materializa sus criterios mecánicos como etapas del pipeline
 
 ---
@@ -76,7 +76,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos que los usan, **como texto literal**. **Se valida** con `CV-07` y con el recuento de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3.
 - [ ] Los **tres** valores rotulados **[ASUNCIÓN]** están confirmados por el Product Owner, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 y `PA-11` de `05` §11.
 - [ ] No queda ningún punto abierto de `05` §11 sin desenlace declarado. **Se valida** leyendo esa tabla, que ya tiene una fila **resuelta** con su fecha.
-- [ ] La versión de la biblioteca está calculada según la estrategia de versionado del intake §17.3.P.7, la etiqueta de la etapa existe y **ninguna transformación de esquema ya fusionada fue editada**. **Se valida** con el registro de la etiqueta y con el historial de las transformaciones.
+- [ ] La versión de la biblioteca está calculada según la estrategia de versionado del intake §17.1.P.7 · GeometriaFactory-Infrastructure, la etiqueta de la etapa existe y **ninguna transformación de esquema ya fusionada fue editada**. **Se valida** con el registro de la etiqueta y con el historial de las transformaciones.
 
 ## 2. Excepciones admitidas
 
@@ -87,7 +87,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 | **Adaptador de reloj sin mutation score** | Queda exento con su fundamento declarado: un umbral de mutación sobre una operación de una línea no aporta información | — | La fila correspondiente de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva, con la etapa en que se cierra |
 | Caso de prueba deshabilitado | **No se admite sin motivo escrito en su fila** del catálogo | — | — |
-| **Batería cerrada con nueve casos** | **No se admite.** La batería tiene **diez** y el décimo cubre `E-8`. El intake **1.20** lo dice así en §17.3.P.6, §17.3.P.8 y §17.5.P.8; la redacción de nueve fue de versiones anteriores al décimo caso y ya está corregida | — | — |
+| **Batería cerrada con nueve casos** | **No se admite.** La batería tiene **diez** y el décimo cubre `E-8`. El intake **1.20** lo dice así en §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.8 · GeometriaFactory-Infrastructure y §17.1.P.8 · GeometriaFactory-Api; la redacción de nueve fue de versiones anteriores al décimo caso y ya está corregida | — | — |
 | **Texto de figuras escrito a mano** | **No se admite en ninguna forma.** Los ocho escenarios existen precisamente porque nadie los escribió pensando en el validador | — | — |
 | **NFR de umbral cero dado por cumplido sin medición** | **No se admite.** No haber observado lo contrario no es una medición | — | — |
 
@@ -105,5 +105,5 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **`H-01`.** El caso de excepción «batería cerrada con nueve casos» describía la redacción del gate del intake sin decir que ya está corregida; ahora cita el intake **1.20** §17.3.P.6, §17.3.P.8 y §17.5.P.8, que dicen **diez**. No se admite igual, y el umbral sigue siendo **10 de 10** desde la etapa `f`. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
+| 1.1 | 2026-08-11 | **`H-01`.** El caso de excepción «batería cerrada con nueve casos» describía la redacción del gate del intake sin decir que ya está corregida; ahora cita el intake **1.20** §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.8 · GeometriaFactory-Infrastructure y §17.1.P.8 · GeometriaFactory-Api, que dicen **diez**. No se admite igual, y el umbral sigue siendo **10 de 10** desde la etapa `f`. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la DoD en **cuatro** capas —historia, tarea técnica, **etapa** y entrega del proyecto de código—, con el fundamento de por qué la tercera no se llama sprint y la cuarta no se llama release. Cada criterio responde «cómo se valida» con una operación concreta. Incorpora como criterio de historia que **todo texto de figuras salga del intake §20 y no esté escrito a mano**, que las propiedades de **ausencia** se midan en su condición declarada, y que toda prueba que toque el almacén **cree y descarte el suyo**. Su §1.3 exige la batería **10 de 10** a partir de la etapa `f` y declara que **nueve no cumplen**. Declara **ocho** casos de excepción, **cuatro** de ellos sin excepción posible, y la vigencia como fuente canónica, con la constancia de que el recuento de la batería **no se cambia desde este documento**. |

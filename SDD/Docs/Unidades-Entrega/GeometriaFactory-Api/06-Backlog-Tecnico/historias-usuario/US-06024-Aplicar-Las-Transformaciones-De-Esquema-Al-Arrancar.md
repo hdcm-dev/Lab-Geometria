@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el almacén se cree y
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.3.P.11 punto 3 declara las transformaciones **aplicadas al arrancar y no por un paso manual**, y §17.3.P.8 las declara **criterio de aceptación de la etapa `c`**. Y `PT-04`, que se mide en la etapa `a`, exige que la imagen del servicio de datos **arranque, aplique sus actualizaciones de esquema sobre base vacía y responda salud**. El contrato de uso es [`CU-06010`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md).
+`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Infrastructure punto 3 declara las transformaciones **aplicadas al arrancar y no por un paso manual**, y §17.1.P.8 · GeometriaFactory-Infrastructure las declara **criterio de aceptación de la etapa `c`**. Y `PT-04`, que se mide en la etapa `a`, exige que la imagen del servicio de datos **arranque, aplique sus actualizaciones de esquema sobre base vacía y responda salud**. El contrato de uso es [`CU-06010`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md).
 
 ## 3. Criterios de aceptación
 

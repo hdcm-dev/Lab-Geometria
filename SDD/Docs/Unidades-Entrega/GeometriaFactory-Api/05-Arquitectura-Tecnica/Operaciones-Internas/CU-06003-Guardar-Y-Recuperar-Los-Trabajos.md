@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-06003, RN-06008, RN-06011), §7 (CL-1), §17.3.P.2, §17.3.P.4, §17.3.P.11 punto 2, §17.3.P.12; implementa el puerto de repositorio de trabajos de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; el modelo que materializa está en [`Modelo-Datos/Modelo-Conceptual.md`](../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md)
+**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4.1 (RN-06003, RN-06008, RN-06011), §7 (CL-1), §17.1.P.2 · GeometriaFactory-Infrastructure, §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure punto 2, §17.1.P.12 · GeometriaFactory-Infrastructure; implementa el puerto de repositorio de trabajos de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; el modelo que materializa está en [`Modelo-Datos/Modelo-Conceptual.md`](../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -33,7 +33,7 @@
 
 Materializar y recuperar el trabajo del alumno con sus piezas, sus componentes y sus observaciones, **conservando el texto original íntegro** (RN-06008), y resolver las consultas que el consumidor pide **ya acotadas** por dueño o por alcance.
 
-Es la mitad de este proyecto de código que el intake declara «la responsabilidad central» (§17.3.P.4): un archivo único de SQLite, en un volumen persistente, con un escritor único y una unidad de trabajo por operación.
+Es la mitad de este proyecto de código que el intake declara «la responsabilidad central» (§17.1.P.4 · GeometriaFactory-Infrastructure): un archivo único de SQLite, en un volumen persistente, con un escritor único y una unidad de trabajo por operación.
 
 Lo que este caso de uso **no** hace: no decide quién puede ver qué —eso lo resolvió el consumidor antes de pedir— y **no arma consultas por su cuenta**. Recibe un pedido con su recorte declarado y lo resuelve.
 

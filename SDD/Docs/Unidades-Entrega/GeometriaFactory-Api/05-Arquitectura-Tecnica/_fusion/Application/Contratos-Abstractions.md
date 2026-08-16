@@ -29,7 +29,7 @@
 Este documento declara **qué expone `GeometriaFactory-Application` y a quién**, y con qué compromisos. La superficie es **de dos caras**, y ésa es la particularidad que hay que entender antes que nada:
 
 - **Hacia arriba**, expone sus **once** casos de uso a `GeometriaFactory-Api`.
-- **Hacia abajo**, expone los **cuatro** puertos que `GeometriaFactory-Infrastructure` implementa. La dependencia se invierte: esta capa declara lo que necesita y otra lo provee (`PRODUCT-INTAKE` §14 y §17.2.P.1).
+- **Hacia abajo**, expone los **cuatro** puertos que `GeometriaFactory-Infrastructure` implementa. La dependencia se invierte: esta capa declara lo que necesita y otra lo provee (`PRODUCT-INTAKE` §14 y §17.1.P.1 · GeometriaFactory-Application).
 
 Los casos de uso que se materializan a través de este contrato son los once de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Application/Especificacion-Funcional.md) §5, sin excepción: cada uno describe un contrato de uso de esta superficie y no un flujo de pantallas.
 
@@ -37,7 +37,7 @@ Los casos de uso que se materializan a través de este contrato son los once de 
 
 ## 2. Formato
 
-**Contrato de superficie de biblioteca, declarado en prosa estructurada.** No hay descripción formal de servicio, ni esquema de mensajes, ni definición de procedimiento remoto: no hay protocolo que describir (`PRODUCT-INTAKE` §17.2.P.3 declara «no aplica» hacia afuera del proceso).
+**Contrato de superficie de biblioteca, declarado en prosa estructurada.** No hay descripción formal de servicio, ni esquema de mensajes, ni definición de procedimiento remoto: no hay protocolo que describir (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Application declara «no aplica» hacia afuera del proceso).
 
 **Los nombres de tipos, de operaciones y de espacios de nombres no se fijan acá.** El intake los declara abiertos y los ata al punto de control de la etapa `a`; este documento nombra los elementos en lenguaje de dominio, igual que hacen las categorías 02 y 03 de este proyecto de código. Los **tres** identificadores de puerto que el intake sí declara se transcriben en §4 y son la única cita de identificadores de código de esta cadena.
 

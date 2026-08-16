@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02004), §4 (F-07 y F-24), §4.2 (tabla de quién puede qué en cada estado), §17.1.P.2 (INV-03), §17.5.P.6; [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5; [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) §5; `00-Contexto/Alcance-Producto.md` §4.1
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02004), §4 (F-07 y F-24), §4.2 (tabla de quién puede qué en cada estado), §17.1.P.2 · GeometriaFactory-Domain (INV-03), §17.1.P.6 · GeometriaFactory-Api; [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) §4 y §5; [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) §5; `00-Contexto/Alcance-Producto.md` §4.1
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -55,7 +55,7 @@ Rechazo. Para el alumno, con el motivo `OPERACION_FUERA_DE_BORRADOR`; para el ad
 
 ## 6. Pruebas que la verifican
 
-Pruebas unitarias de dominio previstas en 08: eliminación por el alumno admitida en `Borrador` y rechazada en `Pendiente`, en `Finalizado` y en `Rechazado`; eliminación por el administrador admitida en los tres estados que ve y rechazada en `Borrador`. El criterio bloqueante de verificarlo **forzando la petición** pertenece a las pruebas de integración de `GeometriaFactory-Api` (PRODUCT-INTAKE §17.5.P.6), que además debe ejercer el borrado del administrador sobre un trabajo en estado `Pendiente`. Los criterios de éxito de negocio son de `NB-00003` §5 —0 eliminaciones del alumno fuera de `Borrador`— y de `NB-00009` §5 —3 de 3 estados en los que el administrador puede eliminar—.
+Pruebas unitarias de dominio previstas en 08: eliminación por el alumno admitida en `Borrador` y rechazada en `Pendiente`, en `Finalizado` y en `Rechazado`; eliminación por el administrador admitida en los tres estados que ve y rechazada en `Borrador`. El criterio bloqueante de verificarlo **forzando la petición** pertenece a las pruebas de integración de `GeometriaFactory-Api` (PRODUCT-INTAKE §17.1.P.6 · GeometriaFactory-Api), que además debe ejercer el borrado del administrador sobre un trabajo en estado `Pendiente`. Los criterios de éxito de negocio son de `NB-00003` §5 —0 eliminaciones del alumno fuera de `Borrador`— y de `NB-00009` §5 —3 de 3 estados en los que el administrador puede eliminar—.
 
 ## 7. Control de cambios
 

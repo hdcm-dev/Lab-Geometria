@@ -18,7 +18,7 @@ Este proyecto de código es el **anfitrión del bundle del visor**: lo recibe co
 
 Hay además una obligación de ciclo de vida que la fuente marca como **no opcional**: la liberación de la instancia se invoca al descartar el componente que la aloja, porque sin eso navegar entre trabajos acumula contextos gráficos en el navegador. Es lo que la puerta técnica `PT-02` mide con diez recorridos de ida y vuelta.
 
-Motivación upstream: NB-00006, NB-00004, NB-00005; `RA-01`, `RA-02`; `PRODUCT-INTAKE` §17.6.P.3 (regla de aislamiento del visor), §17.6.P.10, §17.6.P.11 punto 5, §17.7 P.3 y P.10; restricciones transversales `RT-04`, `RT-05`, `RT-10`, `RT-11` y `RT-13` de la categoría 02.
+Motivación upstream: NB-00006, NB-00004, NB-00005; `RA-01`, `RA-02`; `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Web (regla de aislamiento del visor), §17.2.P.10 · GeometriaFactory-Web, §17.2.P.11 · GeometriaFactory-Web punto 5, §17.7 P.3 y P.10; restricciones transversales `RT-04`, `RT-05`, `RT-10`, `RT-11` y `RT-13` de la categoría 02.
 
 ## 2. Decisión
 
@@ -42,7 +42,7 @@ Y dos consecuencias que las superficies no pueden invertir:
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Aislamiento total tras las seis funciones, con el entorno consultado por esta pieza (**adoptada**) | El motor de dibujo queda reemplazable, que es el punto de extensión declarado del producto; `RA-02` se sostiene sin que el bundle tenga que abstenerse de nada que necesite | Cuando una superficie necesita algo que las seis funciones no dan, hay que ampliar la fachada en el otro proyecto de código |
-| Invocar funciones internas del bundle cuando la fachada no alcanza | Resuelve de inmediato lo que falte, sin coordinar con otro proyecto de código | Ata las superficies a los nombres internos del motor de dibujo y lo vuelve irreemplazable, que es lo contrario del punto de extensión que el producto declara. **Descartada por `PRODUCT-INTAKE` §17.6.P.3** |
+| Invocar funciones internas del bundle cuando la fachada no alcanza | Resuelve de inmediato lo que falte, sin coordinar con otro proyecto de código | Ata las superficies a los nombres internos del motor de dibujo y lo vuelve irreemplazable, que es lo contrario del punto de extensión que el producto declara. **Descartada por `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Web** |
 | Que el bundle consulte la preferencia de movimiento reducido por su cuenta | Un ida y vuelta menos, y la preferencia se respetaría aunque el anfitrión se olvide | **Rompe `RA-02`**: el bundle pasaría a leer configuración del entorno. Y haría que la prueba de cero red midiera el caso fácil, porque un entorno de prueba que declara movimiento reducido dejaría el bucle apagado. **Descartada por la Fase C de `GeometriaFactory-Visor`** |
 | Reconstruir la instancia para prender o apagar un movimiento | No haría falta la sexta función de la fachada | Perdería la selección de pieza vigente y volvería a cargar el texto, que ya viajó una sola vez. La sexta función existe precisamente para gobernar **sobre una instancia viva**. **Descartada por `PRODUCT-INTAKE` §17.7 P.3** |
 
@@ -86,7 +86,7 @@ Y dos consecuencias que las superficies no pueden invertir:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-01`, `RA-02`), §17.6.P.3, §17.6.P.10, §17.6.P.11 punto 5, §17.7 P.3 y §17.7 P.10.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-01`, `RA-02`), §17.2.P.3 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web, §17.2.P.11 · GeometriaFactory-Web punto 5, §17.7 P.3 y §17.7 P.10.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 (`RT-04`, `RT-05`, `RT-10`, `RT-11`, `RT-13`) y §7, con sus tres consecuencias.
 - [`../../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md`](ADR-12002-Superficie-De-Seis-Funciones-Planas.md) y [`ADR-12003`](ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md).
 - [`../../../GeometriaFactory-Visor/05-Arquitectura-Tecnica/Extensibilidad.md`](../Extensibilidad.md) §5, el procedimiento para cuando al anfitrión le falta algo.

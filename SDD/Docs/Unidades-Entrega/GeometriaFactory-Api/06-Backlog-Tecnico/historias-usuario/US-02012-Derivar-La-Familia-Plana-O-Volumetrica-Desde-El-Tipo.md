@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.1.P.11 punto 4 declara la decisión pre-tomada: la familia plana o volumétrica **no se persiste**, se deriva del tipo por tabla de consulta. No es una capacidad `F-XX` del intake §4 sino una decisión técnica, y de ahí su prioridad.
+`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain punto 4 declara la decisión pre-tomada: la familia plana o volumétrica **no se persiste**, se deriva del tipo por tabla de consulta. No es una capacidad `F-XX` del intake §4 sino una decisión técnica, y de ahí su prioridad.
 
 ## 3. Criterios de aceptación
 
@@ -39,7 +39,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 5. Prioridad y estimación
 
-`Should` porque su origen no es una capacidad del intake §4 sino una decisión técnica pre-tomada de §17.1.P.11. El dominio funciona sin ella; lo que se pierde es una derivación de conveniencia y la garantía de que no haya un segundo lugar donde desincronizarse. Es la **única** historia no `Must` de este backlog, y el fundamento del reparto está en [`../Product-Backlog.md`](../Product-Backlog.md) §4.2.
+`Should` porque su origen no es una capacidad del intake §4 sino una decisión técnica pre-tomada de §17.1.P.11 · GeometriaFactory-Domain. El dominio funciona sin ella; lo que se pierde es una derivación de conveniencia y la garantía de que no haya un segundo lugar donde desincronizarse. Es la **única** historia no `Must` de este backlog, y el fundamento del reparto está en [`../Product-Backlog.md`](../Product-Backlog.md) §4.2.
 
 **Estimación: sin fijar.** Ninguna fuente da base para puntos de historia ni para tallas, y el intake declara sin plazo calendario: el avance se mide por etapas cerradas. El fundamento completo está en [`../Product-Backlog.md`](../Product-Backlog.md) §4.1 y el punto abierto es `PA-01` de su §6.
 

@@ -64,7 +64,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 
 ## 4. Convenciones de los samples
 
-- **Autocontenidos.** Ninguno requiere servicios externos: el proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1).
+- **Autocontenidos.** Ninguno requiere servicios externos: el proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Domain).
 - **Ejecutables en entorno limpio en cuatro pasos**, dentro del entorno de desarrollo contenido del repositorio, que es donde ocurre todo el ciclo porque el host no tiene la plataforma (`PRODUCT-INTAKE`, encabezado de la Parte C).
 - **Nivel declarado** en la §2 de cada markdown, y progresión por nivel y no por dominio.
 - **Trazabilidad obligatoria** en la §8 de cada markdown, con al menos una fila por caso de uso, regla, ADR o NFR.

@@ -35,7 +35,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 | RN e invariantes que ejerce | RN-02001, RN-02002; INV-01, INV-08 |
 | BT derivadas | BT-02006, BT-02010 |
 | Etapa del producto | `d`, según [`../../../../00-Contexto/Roadmap-Producto.md`](../../../../00-Contexto/Roadmap-Producto.md) §2.1 |
-| Tests previstos en 08 | Pruebas unitarias puras sobre el núcleo de entidades y las guardas de cuenta, sin dobles (`PRODUCT-INTAKE` §17.1.P.6). El caso concreto lo fija 08. |
+| Tests previstos en 08 | Pruebas unitarias puras sobre el núcleo de entidades y las guardas de cuenta, sin dobles (`PRODUCT-INTAKE` §17.1.P.6 · GeometriaFactory-Domain). El caso concreto lo fija 08. |
 
 ## 5. Prioridad y estimación
 

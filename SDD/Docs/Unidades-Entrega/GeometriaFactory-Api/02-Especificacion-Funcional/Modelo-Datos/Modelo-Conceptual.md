@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §17.3.P.4 íntegro —tabla de persistencia, modelo de datos, ampliación del 2026-08-09 sobre los sellos y ampliación del 2026-08-08 por el circuito de revisión—, §17.3.P.11, §17.3.P.12, §4.1 y §4.2 (modelo de estados del trabajo), §17.1.P.2 (invariantes); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`, que es el modelo del dominio que éste materializa
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §17.1.P.4 · GeometriaFactory-Infrastructure íntegro —tabla de persistencia, modelo de datos, ampliación del 2026-08-09 sobre los sellos y ampliación del 2026-08-08 por el circuito de revisión—, §17.1.P.11 · GeometriaFactory-Infrastructure, §17.1.P.12 · GeometriaFactory-Infrastructure, §4.1 y §4.2 (modelo de estados del trabajo), §17.1.P.2 · GeometriaFactory-Domain (invariantes); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`, que es el modelo del dominio que éste materializa
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Infrastructure
 
 ---

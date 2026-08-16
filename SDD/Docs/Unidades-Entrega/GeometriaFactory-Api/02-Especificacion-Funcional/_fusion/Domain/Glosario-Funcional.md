@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena), §9.1, §9.2 y §9.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §4.2 (colisión de vocabulario de `Pendiente`), §4 (**F-26**), §4.1 (**RN-02012**, **RN-02013**), §17.1.P.2 (**INV-09**), §12 y §12.1 (glosario del dominio del cliente y choque de vocabulario), §17.1
+**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9 (glosario raíz de la cadena), §9.1, §9.2 y §9.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.14** §4.2 (colisión de vocabulario de `Pendiente`), §4 (**F-26**), §4.1 (**RN-02012**, **RN-02013**), §17.1.P.2 · GeometriaFactory-Domain (**INV-09**), §12 y §12.1 (glosario del dominio del cliente y choque de vocabulario), §17.1
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Domain
 
 ---

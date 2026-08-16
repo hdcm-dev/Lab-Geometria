@@ -12,13 +12,13 @@
 
 ## 1. Contexto
 
-El intake decide dos cosas sobre el esquema y las decide juntas: las transformaciones se **aplican automáticamente al arrancar**, sobre un almacén inexistente o desactualizado, y **cada transformación se versiona con el código de su etapa; no se editan las ya fusionadas** (`PRODUCT-INTAKE` §17.3.P.4 y §17.3.P.7). La segunda es criterio de aceptación de la etapa `c`: «las migraciones se aplican solas sobre una base inexistente».
+El intake decide dos cosas sobre el esquema y las decide juntas: las transformaciones se **aplican automáticamente al arrancar**, sobre un almacén inexistente o desactualizado, y **cada transformación se versiona con el código de su etapa; no se editan las ya fusionadas** (`PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Infrastructure y §17.1.P.7 · GeometriaFactory-Infrastructure). La segunda es criterio de aceptación de la etapa `c`: «las migraciones se aplican solas sobre una base inexistente».
 
 Lo que ninguna fuente resuelve es **qué pasa cuando no se pueden aplicar**. Y ahí están los dos atajos más destructivos del producto, los dos declarados en el catálogo de condiciones de la categoría 03: descartar el almacén y crearlo de nuevo —«deja el servicio impecable y sin los trabajos de nadie»— y caer hacia una ruta alternativa dentro de la imagen —«el servicio arranca, acepta trabajos de la comisión entera y los pierde en el siguiente reemplazo de versión»—. Los dos comparten la forma: **el servicio arranca y nadie se entera**.
 
 El despliegue del producto agrava la apuesta. El reemplazo de versión es *detener y arrancar*, con ventana de indisponibilidad y sin proxy inverso; el despliegue es manual, a cargo del docente; y el respaldo es una copia del archivo con frecuencia a definir. No hay red de contención automática.
 
-Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.3.P.4, §17.3.P.7, §17.3.P.8, §17.5.P.4, §17.5.P.7.
+Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.7 · GeometriaFactory-Infrastructure, §17.1.P.8 · GeometriaFactory-Infrastructure, §17.1.P.4 · GeometriaFactory-Api, §17.1.P.7 · GeometriaFactory-Api.
 
 ## 2. Decisión
 
@@ -41,7 +41,7 @@ Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.3.P.4,
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Preparación al arrancar, con linaje inmutable y arranque detenido (**adoptada**) | El despliegue no tiene paso manual que olvidar; el fallo es ruidoso y ocurre antes de aceptar un solo trabajo; la etapa `c` tiene su criterio de aceptación verificable | Una transformación mal escrita deja el servicio caído hasta que una persona intervenga |
-| Aplicar las transformaciones por un paso manual de despliegue | La persona decide cuándo, y puede respaldar antes | **Descartada por el intake §17.3.P.4**, que las declara automáticas al arrancar. Además el despliegue es manual y domiciliario: un paso más es un paso más para olvidar |
+| Aplicar las transformaciones por un paso manual de despliegue | La persona decide cuándo, y puede respaldar antes | **Descartada por el intake §17.1.P.4 · GeometriaFactory-Infrastructure**, que las declara automáticas al arrancar. Además el despliegue es manual y domiciliario: un paso más es un paso más para olvidar |
 | Arrancar en modo de sólo lectura cuando el esquema no corresponde | El listado seguiría funcionando y el docente vería algo | **Descartada.** Un producto cuya única acción de guardado no funciona no está degradado, está roto, y presentarlo como funcionando retrasa el diagnóstico. Además el esquema que no corresponde puede hacer que la lectura devuelva datos incompletos sin decirlo |
 | Descartar el almacén y recrearlo cuando el esquema no corresponde | El servicio siempre arranca y el criterio de aceptación siempre pasa | **Descartada, y es el atajo más destructivo del producto.** Deja el servicio impecable y sin los trabajos de nadie |
 | Caer hacia una ruta alternativa cuando el volumen no está montado | El servicio arranca en cualquier entorno sin configurar | **Descartada.** Acepta trabajos y los pierde en el siguiente reemplazo de versión, que es el modo de falla que más tarda en notarse de todo el producto |
@@ -67,7 +67,7 @@ Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.3.P.4,
 - **Convención impuesta:** ninguna operación de adaptador dispara la preparación. Se ejecuta una vez, desde el arranque, y no a demanda.
 - **Convención impuesta:** la ubicación del almacén se recibe. Este proyecto de código no lee variables de entorno ni archivos de configuración por su cuenta.
 - **Convención impuesta:** una transformación fusionada no se edita. La revisión rechaza el cambio aunque compile y aunque el resultado sea equivalente.
-- La etapa de verificación de transformaciones del pipeline (`PRODUCT-INTAKE` §17.3.P.8) es la puerta bloqueante que comprueba la regla 1 de §2 en cada fusión.
+- La etapa de verificación de transformaciones del pipeline (`PRODUCT-INTAKE` §17.1.P.8 · GeometriaFactory-Infrastructure) es la puerta bloqueante que comprueba la regla 1 de §2 en cada fusión.
 
 ## 8. Métricas de validación
 
@@ -82,7 +82,7 @@ Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.3.P.4,
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §14 (RA-03), §17.3.P.4, §17.3.P.7, §17.3.P.8, §17.5.P.4 y §17.5.P.7.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §14 (RA-03), §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.7 · GeometriaFactory-Infrastructure, §17.1.P.8 · GeometriaFactory-Infrastructure, §17.1.P.4 · GeometriaFactory-Api y §17.1.P.7 · GeometriaFactory-Api.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md`](../Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md).
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.3 (forma de terminación «arranque detenido»), §2.4 y §3.9.
 - [`../Modelo-Datos-Logico.md`](../Modelo-Datos-Logico.md) §5, que declara la transformación inicial con su identificador.

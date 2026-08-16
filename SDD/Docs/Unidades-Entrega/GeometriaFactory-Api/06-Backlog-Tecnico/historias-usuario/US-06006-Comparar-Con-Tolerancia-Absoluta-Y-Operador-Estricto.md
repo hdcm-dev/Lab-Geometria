@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la comparación de va
 
 ## 2. Contexto
 
-El intake §17.3.P.10 fija la tolerancia y declara explícitamente que **no es una asunción**: sale de que el emisor redondea a dos decimales. Y fija el operador: **se advierte cuando la diferencia absoluta es mayor que 0.01, nunca mayor o igual**, con un fundamento numérico verificable. El contrato de uso es [`CU-06002`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
+El intake §17.1.P.10 · GeometriaFactory-Infrastructure fija la tolerancia y declara explícitamente que **no es una asunción**: sale de que el emisor redondea a dos decimales. Y fija el operador: **se advierte cuando la diferencia absoluta es mayor que 0.01, nunca mayor o igual**, con un fundamento numérico verificable. El contrato de uso es [`CU-06002`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
 
 ## 3. Criterios de aceptación
 

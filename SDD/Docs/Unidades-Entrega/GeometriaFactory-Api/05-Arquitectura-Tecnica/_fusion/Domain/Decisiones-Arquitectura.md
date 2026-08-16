@@ -42,10 +42,10 @@ El mínimo de tres para `library` cubre estilo, superficie pública y estrategia
 | Categoría | ADR que la cubre | Observación |
 | --- | --- | --- |
 | Estilo | ADR-02001, ADR-02002, ADR-02006 | — |
-| Persistencia | **Ninguna** | El flag `tiene_persistencia` es false y el intake declara «no aplica» en §17.1.P.4. No hay decisión de persistencia que tomar acá |
-| Comunicación | **Ninguna** | Este proyecto de código no expone protocolos ni cruza fronteras de proceso (`PRODUCT-INTAKE` §17.1.P.3) |
+| Persistencia | **Ninguna** | El flag `tiene_persistencia` es false y el intake declara «no aplica» en §17.1.P.4 · GeometriaFactory-Domain. No hay decisión de persistencia que tomar acá |
+| Comunicación | **Ninguna** | Este proyecto de código no expone protocolos ni cruza fronteras de proceso (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Domain) |
 | Seguridad | ADR-02004, ADR-02005 | — |
-| Observabilidad | **Ninguna** | El intake declara «sin observabilidad propia» en §17.1.P.10: no registra ni instrumenta |
+| Observabilidad | **Ninguna** | El intake declara «sin observabilidad propia» en §17.1.P.10 · GeometriaFactory-Domain: no registra ni instrumenta |
 | Despliegue | ADR-02003 | No hay unidad de despliegue propia; lo que la ADR gobierna es la construcción y el versionado |
 | Extensibilidad | **Ninguna** | El flag `tiene_extensibilidad` es false. El punto de extensión del producto es el contrato de la fachada del visor, no este proyecto de código |
 

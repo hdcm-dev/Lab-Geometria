@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02010), §4 (F-21 y F-23), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §17.1.P.2 (INV-07), §5 (historia 7.1), §6 (flujo 2.1); [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02010), §4 (F-21 y F-23), §4.2 (modelo de estados del trabajo y sus tres consecuencias aceptadas), §17.1.P.2 · GeometriaFactory-Domain (INV-07), §5 (historia 7.1), §6 (flujo 2.1); [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -60,4 +60,4 @@ Pruebas unitarias de dominio previstas en 08: aprobación y rechazo admitidos de
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.0 | 2026-08-09 | Emisión inicial. Regla nueva del circuito de revisión que el Product Owner incorporó el 2026-08-08 y que `PRODUCT-INTAKE` 1.3 §4.1 declara; §17.1.P.2 declara INV-07 como el invariante que la expresa. No existía en la fuente funcional original. |
+| 1.0 | 2026-08-09 | Emisión inicial. Regla nueva del circuito de revisión que el Product Owner incorporó el 2026-08-08 y que `PRODUCT-INTAKE` 1.3 §4.1 declara; §17.1.P.2 · GeometriaFactory-Domain declara INV-07 como el invariante que la expresa. No existía en la fuente funcional original. |

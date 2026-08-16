@@ -12,13 +12,13 @@
 
 ## 1. Contexto
 
-El intake fija el flujo por decisión explícita del docente: el front recibe correo y contraseña del formulario y los canjea por un acceso firmado con clave simétrica; el acceso vive en el circuito del front y **nunca llega al navegador**; la autorización es **«por papel en cada punto más verificación de pertenencia»**, y el intake agrega la frase que ordena todo lo demás: **«el papel no alcanza»** (`PRODUCT-INTAKE` §17.5.P.5).
+El intake fija el flujo por decisión explícita del docente: el front recibe correo y contraseña del formulario y los canjea por un acceso firmado con clave simétrica; el acceso vive en el circuito del front y **nunca llega al navegador**; la autorización es **«por papel en cada punto más verificación de pertenencia»**, y el intake agrega la frase que ordena todo lo demás: **«el papel no alcanza»** (`PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Api).
 
 Sobre eso hay una decisión de arquitectura que ninguna fuente toma y que es la más importante de este proyecto de código. `RN-00013` e `INV-09` exigen que una cuenta con la marca de cambio de contraseña pendiente **no llegue a ninguna otra parte del sistema**. La comprobación la ejerce la capa de aplicación, en la primera de sus cuatro comprobaciones. Pero esa comprobación sólo se ejerce **si el punto de acceso invoca un caso de uso que la tenga**, y la categoría 02 lo dijo sin ambigüedad: **un punto nuevo que quede fuera de la guardia rompe la regla sin que nada falle**.
 
 Es un defecto de omisión, y los defectos de omisión no se ven leyendo el código nuevo: se ven comparando contra una lista.
 
-Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010, RN-00012, RN-00013, RN-00016; INV-02, INV-03, INV-06, INV-08, INV-09; `PRODUCT-INTAKE` §17.5.P.5, §17.5.P.6.
+Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010, RN-00012, RN-00013, RN-00016; INV-02, INV-03, INV-06, INV-08, INV-09; `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Api, §17.1.P.6 · GeometriaFactory-Api.
 
 ## 2. Decisión
 
@@ -44,7 +44,7 @@ Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010
 | Declarar la guardia punto por punto | Cada punto se lee entero, sin saber de una lista | **Descartada.** Es exactamente el defecto que la categoría 02 declara: un punto nuevo que se olvide de declararla **no falla**, y la regla se rompe hacia afuera sin que ninguna capa de adentro se entere |
 | Declarar sólo las excepciones, con la guardia aplicada por omisión y sin prueba de inspección | Un punto nuevo queda protegido sin hacer nada | **Descartada a medias**: la aplicación por omisión se adopta, pero **sin la prueba de inspección no alcanza**, porque nada impediría que alguien agregue una excepción y nadie lo note. La prueba es la parte que no se puede omitir |
 | Comprobar acá también la pertenencia sobre el dato recuperado | Un pedido mal formado fallaría antes | **Descartada.** Dos lugares que comprueban lo mismo terminan diciendo cosas distintas, y el intake es explícito: la autorización es por papel **más** verificación de pertenencia, y la segunda es de adentro |
-| Emitir un acceso de refresco de vigencia larga | La persona no vuelve a escribir su contraseña cuando el acceso vence | **Descartada por el intake §17.5.P.5**: vigencia corta y renovación por reingreso, sin acceso de refresco en este alcance |
+| Emitir un acceso de refresco de vigencia larga | La persona no vuelve a escribir su contraseña cuando el acceso vence | **Descartada por el intake §17.1.P.5 · GeometriaFactory-Api**: vigencia corta y renovación por reingreso, sin acceso de refresco en este alcance |
 
 ## 5. Consecuencias positivas
 
@@ -83,7 +83,7 @@ Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-00013, RN-00016), §17.5.P.5 y §17.5.P.6.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-00013, RN-00016), §17.1.P.5 · GeometriaFactory-Api y §17.1.P.6 · GeometriaFactory-Api.
 - [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y §7.
 - [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md`](ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md), que es la comprobación que esta guardia garantiza que se ejerza siempre.

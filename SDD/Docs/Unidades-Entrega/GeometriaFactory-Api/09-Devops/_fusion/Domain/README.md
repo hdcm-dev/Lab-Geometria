@@ -44,7 +44,7 @@
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Guia-Publicacion-<tipo-artefacto>.md` | **Omitido** | `Rules-Devops.md` §2.1 lo declara obligatorio para «todos los tipos D8 **con artefacto publicable**» y lo omite para «tipos cuyo artefacto no se publica externamente». Éste es exactamente ese caso: el intake §17.1.P.7 declara que la biblioteca **no se publica en ningún feed** y que se compila dentro del artefacto de agrupación, y §13 lo generaliza al producto entero. **La tensión con el criterio de aceptación de `Rules-Devops.md` §6 —que pide «al menos una» guía— se declara en lugar de resolverse escribiendo una guía vacía**: no hay pre-requisito de cuenta, no hay comando de publicación, no hay verificación posterior y no hay retiro; una guía de publicación de este proyecto de código sería cinco secciones diciendo «no aplica» |
+| `Guia-Publicacion-<tipo-artefacto>.md` | **Omitido** | `Rules-Devops.md` §2.1 lo declara obligatorio para «todos los tipos D8 **con artefacto publicable**» y lo omite para «tipos cuyo artefacto no se publica externamente». Éste es exactamente ese caso: el intake §17.1.P.7 · GeometriaFactory-Domain declara que la biblioteca **no se publica en ningún feed** y que se compila dentro del artefacto de agrupación, y §13 lo generaliza al producto entero. **La tensión con el criterio de aceptación de `Rules-Devops.md` §6 —que pide «al menos una» guía— se declara en lugar de resolverse escribiendo una guía vacía**: no hay pre-requisito de cuenta, no hay comando de publicación, no hay verificación posterior y no hay retiro; una guía de publicación de este proyecto de código sería cinco secciones diciendo «no aplica» |
 | `Pipeline-Producto.md` | **No es de esta sección** | Es artefacto de nivel producto (`Rules-Devops.md` §2.1 y §4.9). Se emite una sola vez bajo `Producto/`, al cierre del bucle de proyectos de código, y **no lo emite la Fase F de un proyecto de código** |
 
 ## 4. Los ocho quality gates, y en qué stage corre cada uno
@@ -68,13 +68,13 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
-| Stages del pipeline | **3**: `restore`, `build`, `test` | Intake §17.1.P.8; `05` §5 |
+| Stages del pipeline | **3**: `restore`, `build`, `test` | Intake §17.1.P.8 · GeometriaFactory-Domain; `05` §5 |
 | Quality gates materializados | **8**, **6** bloqueantes y **2** condicionados | `08` `Estrategia-Calidad.md` §3 |
 | Ambientes de despliegue | **0** | `05` §5; intake §13 |
-| Canales de publicación | **0** | Intake §17.1.P.7 |
+| Canales de publicación | **0** | Intake §17.1.P.7 · GeometriaFactory-Domain |
 | Artefactos publicados | **0** | Intake §13 |
-| Secretos propios | **0** | Intake §17.1.P.5 |
-| Dependencias externas | **0** | Intake §17.1.P.1; `05` §8 |
+| Secretos propios | **0** | Intake §17.1.P.5 · GeometriaFactory-Domain |
+| Dependencias externas | **0** | Intake §17.1.P.1 · GeometriaFactory-Domain; `05` §8 |
 | Etapas del producto que este proyecto de código toca | **6**: `a`, `c`, `d`, `e`, `f` y `h` | `08` `Plan-Pruebas.md` §1 |
 | Puntos abiertos de esta categoría | **3**: `PD-01` a `PD-03` | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 

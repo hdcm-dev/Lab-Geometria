@@ -54,7 +54,7 @@ La capacidad `F-06` del intake §4 declara la carga del trabajo con nombre, fech
 
 ## 7. Notas y supuestos
 
-**Las dos fechas del trabajo —creación y última modificación— las produce el consumidor a través del puerto de reloj** y son distintas de la fecha que el alumno declara (`PRODUCT-INTAKE` §17.3.P.4, decisión del Product Owner). El dominio no lee el reloj ([`ADR-02006`](../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)).
+**Las dos fechas del trabajo —creación y última modificación— las produce el consumidor a través del puerto de reloj** y son distintas de la fecha que el alumno declara (`PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Infrastructure, decisión del Product Owner). El dominio no lee el reloj ([`ADR-02006`](../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)).
 
 ## 8. Control de cambios
 

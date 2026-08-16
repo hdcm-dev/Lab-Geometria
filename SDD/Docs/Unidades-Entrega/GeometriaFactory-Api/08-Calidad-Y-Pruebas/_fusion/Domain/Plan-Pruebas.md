@@ -97,7 +97,7 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | Ambiente | El contenedor de desarrollo, único ambiente de este proyecto de código. No hay ambiente desplegado que preparar |
 | Datos | Los **ocho** escenarios del intake §20, en la forma que [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 declara; y los cuatro fixtures de entidad de su §5 |
 | Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a` |
-| Guiones | `scripts/build.sh` y `scripts/test.sh`, que son los que el intake §17.1.P.8 declara como puertas |
+| Guiones | `scripts/build.sh` y `scripts/test.sh`, que son los que el intake §17.1.P.8 · GeometriaFactory-Domain declara como puertas |
 
 ## 7. Control de cambios
 

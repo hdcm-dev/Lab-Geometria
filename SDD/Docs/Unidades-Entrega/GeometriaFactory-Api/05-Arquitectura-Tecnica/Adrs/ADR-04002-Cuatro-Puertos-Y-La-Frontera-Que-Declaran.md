@@ -14,11 +14,11 @@
 
 [`ADR-04001`](ADR-04001-Casos-De-Uso-Con-Inversion-De-Dependencias.md) decide que la dependencia se invierte. Lo que esa decisión deja abierto es **cuántas fronteras hay y qué pasa por cada una**, y ahí hay un desajuste entre las fuentes que esta categoría tiene que resolver sin inventar nada.
 
-`PRODUCT-INTAKE` §17.2.P.1 y §14 nombran **tres** puertos: `IWorkRepository`, `IFigureValidator` e `ISystemClock`. Pero la Fase C de `GeometriaFactory-Domain` decidió que **el dominio no lee el conjunto de entidades**: la unicidad del correo y la existencia previa de una cuenta con papel `Administrador` se las tiene que aportar el consumidor. Y ese consumidor es esta capa. Una verificación sobre un conjunto no es posible sin una frontera que lo alcance, de modo que el **cuarto** puerto —el repositorio de cuentas— **existe por necesidad estructural**, no por preferencia.
+`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Application y §14 nombran **tres** puertos: `IWorkRepository`, `IFigureValidator` e `ISystemClock`. Pero la Fase C de `GeometriaFactory-Domain` decidió que **el dominio no lee el conjunto de entidades**: la unicidad del correo y la existencia previa de una cuenta con papel `Administrador` se las tiene que aportar el consumidor. Y ese consumidor es esta capa. Una verificación sobre un conjunto no es posible sin una frontera que lo alcance, de modo que el **cuarto** puerto —el repositorio de cuentas— **existe por necesidad estructural**, no por preferencia.
 
 La categoría 02 de esta capa lo declaró, lo nombró en lenguaje de dominio y elevó el punto abierto a esta categoría. Lo que falta no es la decisión de que exista: es su nombre.
 
-Motivación upstream: NB-00001, NB-00002; RN-04001, RN-04002, RN-04009, RN-04014, RN-04016; INV-01, INV-05; `PRODUCT-INTAKE` §17.2.P.1, §17.2.P.3, §17.2.P.11.
+Motivación upstream: NB-00001, NB-00002; RN-04001, RN-04002, RN-04009, RN-04014, RN-04016; INV-01, INV-05; `PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Application, §17.1.P.3 · GeometriaFactory-Application, §17.1.P.11 · GeometriaFactory-Application.
 
 ## 2. Decisión
 
@@ -54,7 +54,7 @@ Sobre el cuarto, la decisión tiene dos mitades:
 ## 6. Consecuencias negativas y trade-offs
 
 1. **Se acepta arrastrar un punto abierto de nombre hasta la etapa `a`.** El costo es de retrabajo —cuatro componentes lo consumen— y no de corrección. Se acepta porque la alternativa es inventar un identificador de código, que es un costo peor y menos visible.
-2. **Se acepta que el intake quede en deuda con su propia §17.2.P.1**, que nombra tres puertos sobre cuatro. Esta ADR **no corrige el intake**: lo declara, porque corregirlo es del Product Owner sobre su propio documento.
+2. **Se acepta que el intake quede en deuda con su propia §17.1.P.1 · GeometriaFactory-Application**, que nombra tres puertos sobre cuatro. Esta ADR **no corrige el intake**: lo declara, porque corregirlo es del Product Owner sobre su propio documento.
 3. **Se acepta que el puerto de repositorio de trabajos tenga que ofrecer la proyección de listado sin componentes**, en lugar de que el caso de uso la arme con una consulta a medida. Es la contrapartida de [`ADR-04001`](ADR-04001-Casos-De-Uso-Con-Inversion-De-Dependencias.md).
 
 ## 7. Implementación
@@ -76,7 +76,7 @@ Sobre el cuarto, la decisión tiene dos mitades:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14, §17.2.P.1, §17.2.P.3 y §17.2.P.11.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14, §17.1.P.1 · GeometriaFactory-Application, §17.1.P.3 · GeometriaFactory-Application y §17.1.P.11 · GeometriaFactory-Application.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, §8 y §11.
 - [`../../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md), que es la decisión del nivel 0 de la que este cuarto puerto se deduce.
 - ADR relacionadas: [`ADR-04001`](ADR-04001-Casos-De-Uso-Con-Inversion-De-Dependencias.md), [`ADR-04005`](ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md).

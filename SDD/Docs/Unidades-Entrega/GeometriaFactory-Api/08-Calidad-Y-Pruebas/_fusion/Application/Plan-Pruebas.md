@@ -29,7 +29,7 @@
 
 **Qué cubre.** Los **treinta y un** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **seis** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e`, `f` y `h`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2 declara como sus épicas.
 
-**Qué no cubre, y dónde se cubre.** Las entidades, los invariantes y las máquinas de estado, en `GeometriaFactory-Domain`; la interpretación efectiva del texto, la derivación de la contraseña, la producción de la provisoria y el guardado, en `GeometriaFactory-Infrastructure`; el transporte de los datos por la frontera de proceso, en `GeometriaFactory-Contracts`; **la batería de integración contra el almacén real y la API real**, en `GeometriaFactory-Api` (intake §17.2.P.6); las superficies y el dibujo, en `GeometriaFactory-Web` y `GeometriaFactory-Visor`.
+**Qué no cubre, y dónde se cubre.** Las entidades, los invariantes y las máquinas de estado, en `GeometriaFactory-Domain`; la interpretación efectiva del texto, la derivación de la contraseña, la producción de la provisoria y el guardado, en `GeometriaFactory-Infrastructure`; el transporte de los datos por la frontera de proceso, en `GeometriaFactory-Contracts`; **la batería de integración contra el almacén real y la API real**, en `GeometriaFactory-Api` (intake §17.1.P.6 · GeometriaFactory-Application); las superficies y el dibujo, en `GeometriaFactory-Web` y `GeometriaFactory-Visor`.
 
 **La unidad de planificación es la etapa y no el sprint.** El intake declara «sin plazo calendario; el avance se mide por etapas cerradas», y el producto no tiene sprints. Por eso §5 se titula «Plan por etapa» y **ninguna de sus filas lleva una fecha ni una duración**: sería un plazo que ninguna fuente da.
 
@@ -100,7 +100,7 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | Ambiente | El contenedor de desarrollo, único ambiente de este proyecto de código. **No hay base de datos que preparar**, y el umbral de pruebas que la tocan es 0 |
 | Datos | Los **ocho** escenarios del intake §20, en la forma que [`Estrategia-Testing.md`](Estrategia-Testing.md) §6 declara; los **cuatro** dobles de puerto y los **cuatro** fixtures compartidos de su §5 |
 | Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a` |
-| Guiones | `scripts/build.sh` y `scripts/test.sh`, que son los que el intake §17.2.P.8 declara como puertas |
+| Guiones | `scripts/build.sh` y `scripts/test.sh`, que son los que el intake §17.1.P.8 · GeometriaFactory-Application declara como puertas |
 
 ## 7. Control de cambios
 

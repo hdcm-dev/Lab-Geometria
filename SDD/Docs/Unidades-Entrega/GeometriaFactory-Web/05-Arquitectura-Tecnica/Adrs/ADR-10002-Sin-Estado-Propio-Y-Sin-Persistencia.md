@@ -18,7 +18,7 @@ El fundamento no es que no haga falta modelar: es que **este proyecto de código
 
 Hay una segunda consecuencia, menos obvia y que conviene decidir junto con la primera: **si no hay copia local, la ausencia de datos y el fallo tienen que distinguirse por otra vía**. Un listado vacío y un listado que no se pudo traer se ven igual si lo único que se mira es el conteo.
 
-Motivación upstream: NB-00003, NB-00007, NB-00008; `PRODUCT-INTAKE` §7 (`CL-2`, `CL-8`), §17.6.P.4, §17.6.P.10 (`PT-01.c`) y §17.6.P.12; `PRODUCT-MANIFEST` §5 (`tiene_persistencia` == false); restricciones transversales `RT-06`, `RT-07` y `RT-08` de la categoría 02.
+Motivación upstream: NB-00003, NB-00007, NB-00008; `PRODUCT-INTAKE` §7 (`CL-2`, `CL-8`), §17.2.P.4 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web (`PT-01.c`) y §17.2.P.12 · GeometriaFactory-Web; `PRODUCT-MANIFEST` §5 (`tiene_persistencia` == false); restricciones transversales `RT-06`, `RT-07` y `RT-08` de la categoría 02.
 
 ## 2. Decisión
 
@@ -41,7 +41,7 @@ Y la consecuencia que la primera obliga: **el listado vacío se distingue del fa
 | Sin estado propio, con el estado degradado como respuesta (**adoptada**) | El dato del producto vive en un solo lugar; no hay coherencia que mantener; el reciclado del proceso no corrompe nada porque no hay nada que corromper | Cuando el servicio de datos no está, la aplicación no puede mostrar ni lo último visto |
 | Caché de listados en el servidor del front | Mostraría lo último conocido durante una caída y aliviaría el ida y vuelta | Convierte a la pieza pública en un **segundo lugar donde vive el dato**, que es lo que la topología evita; abre la pregunta de qué se muestra cuando la caché y el servicio difieren; y **no sobreviviría al reciclado**, que es el escenario que más se querría cubrir. **Descartada por esta categoría** |
 | Almacenamiento en el navegador para lo ya visto | Sobreviviría al reciclado del proceso, que la caché del servidor no cubre | Pondría datos de otras personas al alcance de cualquier guion del navegador, en un producto donde ni siquiera la credencial llega ahí; y contradice el mismo criterio con el que el bundle del visor tiene **cero** escrituras de almacenamiento. **Descartada por esta categoría** |
-| Base de datos propia del front | Permitiría funcionar desconectado | El hosting **resetea el estado persistente**: la base se perdería, y con ella la confianza en lo que muestra. Es literalmente el problema que la partición del producto vino a resolver. **Descartada por `PRODUCT-INTAKE` §17.6.P.4** |
+| Base de datos propia del front | Permitiría funcionar desconectado | El hosting **resetea el estado persistente**: la base se perdería, y con ella la confianza en lo que muestra. Es literalmente el problema que la partición del producto vino a resolver. **Descartada por `PRODUCT-INTAKE` §17.2.P.4 · GeometriaFactory-Web** |
 
 ## 5. Consecuencias positivas
 
@@ -78,7 +78,7 @@ Y la consecuencia que la primera obliga: **el listado vacío se distingue del fa
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §7 (`CL-2`, `CL-8`), §17.6.P.4, §17.6.P.10 y §17.6.P.12.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §7 (`CL-2`, `CL-8`), §17.2.P.4 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web y §17.2.P.12 · GeometriaFactory-Web.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §5, `tiene_persistencia` == false.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 (`RT-06`, `RT-07`, `RT-08`) y §9, que pide esta ADR por su nombre.
 - [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §4.1 y §7.

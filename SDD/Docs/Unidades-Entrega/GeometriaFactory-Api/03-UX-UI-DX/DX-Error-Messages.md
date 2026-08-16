@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-12
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los **doce** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-00001 a CU-00012), con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §3, §4, §5, §6 y §8; `02-Especificacion-Funcional/Especificacion-Funcional.md` §4 (**la frontera y sus seis precisiones**), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-00006-Contrato-De-Respuesta-De-Error.md` §6 y §10, que declara el **conjunto cerrado de diecisiete códigos**, y la §6 de sus otros siete contratos de uso; RN-00001 a RN-00016 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §14 (RA-03), §17.5.P.5 y §17.5.P.10
+**Trazabilidad upstream:** §6 de los **doce** casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-00001 a CU-00012), con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` §3, §4, §5, §6 y §8; `02-Especificacion-Funcional/Especificacion-Funcional.md` §4 (**la frontera y sus seis precisiones**), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-00006-Contrato-De-Respuesta-De-Error.md` §6 y §10, que declara el **conjunto cerrado de diecisiete códigos**, y la §6 de sus otros siete contratos de uso; RN-00001 a RN-00016 de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §14 (RA-03), §17.1.P.5 · GeometriaFactory-Api y §17.1.P.10 · GeometriaFactory-Api
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Api
 
 ---
@@ -99,7 +99,7 @@ Tres familias de respuestas dicen **menos de lo que el servicio sabe**, y en las
 
 | Familia | Qué no dice | Por qué |
 | --- | --- | --- |
-| **Credenciales inválidas** | No declara si falló el correo o la contraseña | Distinguirlos permitiría averiguar por tanteo **qué correos están registrados**. Lo declara el intake §17.5.P.5 |
+| **Credenciales inválidas** | No declara si falló el correo o la contraseña | Distinguirlos permitiría averiguar por tanteo **qué correos están registrados**. Lo declara el intake §17.1.P.5 · GeometriaFactory-Api |
 | **Recurso que no se ve** | No distingue el inexistente, el ajeno y el que está fuera del alcance del solicitante | Es **RN-00003**. Distinguirlos permitiría averiguar por tanteo **qué identificadores existen** |
 | **Correo ya registrado** | No declara la situación ni el papel de la cuenta que ocupa el correo | Misma familia: no confirmar nada sobre una cuenta que el solicitante no debería conocer |
 

@@ -19,7 +19,7 @@ Esa partición se sostiene sobre tres reglas de arquitectura de nivel producto, 
 - **RA-01**, ningún JavaScript del navegador invoca la API. Es lo que sostiene las tres propiedades de la topología: sin contenido mixto, sin restricción de origen cruzado y sin exposición de la dirección del servidor propio. **Romperla en un solo proyecto de código las reabre las tres.**
 - **RA-02**, el bundle del visor es un visualizador puro: sin configuración, sin red, sin conocimiento del sistema. Es lo que hace **imposible** violar RA-01 desde el navegador.
 
-Este proyecto de código **es** el JavaScript del navegador del producto. Su contribución a la seguridad es **negativa por diseño**: no hacer red es lo que impide que aparezca una petición desde el navegador hacia el servicio de datos y que vuelvan el contenido mixto, la restricción de origen cruzado y la exposición de la dirección (`PRODUCT-INTAKE` §17.7.P.5 y §17.7.P.12).
+Este proyecto de código **es** el JavaScript del navegador del producto. Su contribución a la seguridad es **negativa por diseño**: no hacer red es lo que impide que aparezca una petición desde el navegador hacia el servicio de datos y que vuelvan el contenido mixto, la restricción de origen cruzado y la exposición de la dirección (`PRODUCT-INTAKE` §17.2.P.5 · GeometriaFactory-Visor y §17.2.P.12 · GeometriaFactory-Visor).
 
 Motivación upstream: NB-00006, NB-00008 en su arista de estado degradado; capacidad F-25; RA-01, RA-02 y RA-03.
 
@@ -47,7 +47,7 @@ Motivación upstream: NB-00006, NB-00008 en su arista de estado degradado; capac
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Visualizador puro, con las cuatro ausencias verificables (**adoptada**) | Hace **imposible** violar RA-01 desde el navegador; el bundle se prueba sin backend; es reemplazable; y la verificación es por inspección, no por confianza | El anfitrión carga con todo lo que la fachada no hace: obtener el texto, dibujar los controles, consultar la preferencia y conservarla |
-| Que el visor pida los datos por su cuenta | Más simple de implementar: el anfitrión sólo le pasaría un identificador | **Reabre contenido mixto, restricción de origen cruzado y exposición de la dirección del servidor propio.** Es el riesgo que el intake registra y la razón por la que la topología existe. Descartada por `PRODUCT-INTAKE` §17.7.P.12 |
+| Que el visor pida los datos por su cuenta | Más simple de implementar: el anfitrión sólo le pasaría un identificador | **Reabre contenido mixto, restricción de origen cruzado y exposición de la dirección del servidor propio.** Es el riesgo que el intake registra y la razón por la que la topología existe. Descartada por `PRODUCT-INTAKE` §17.2.P.12 · GeometriaFactory-Visor |
 | Que el bundle consulte la preferencia de movimiento reducido del sistema | El comportamiento accesible saldría por defecto, sin trabajo del anfitrión | Es **leer configuración propia** y viola G-3. Y tiene un efecto de segundo orden peor: las pruebas automatizadas suelen declarar esa preferencia, con lo que los movimientos arrancarían apagados y **la medición de cero red quedaría en verde sin ejercitar nunca el bucle** |
 | Que el bundle conserve la elección de quien mira en el almacenamiento del navegador | La preferencia sobreviviría a la recarga sin trabajo del anfitrión | Es **escribir en el almacenamiento** y viola G-2. La preferencia es de quien mira y su lugar es el anfitrión |
 
@@ -85,7 +85,7 @@ Motivación upstream: NB-00006, NB-00008 en su arista de estado degradado; capac
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-01, RA-02, RA-03), §17.7.P.3, §17.7.P.4, §17.7.P.5, §17.7.P.6, §17.7.P.10, §17.7.P.11 punto 1 y §17.7.P.12.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-01, RA-02, RA-03), §17.2.P.3 · GeometriaFactory-Visor, §17.2.P.4 · GeometriaFactory-Visor, §17.2.P.5 · GeometriaFactory-Visor, §17.2.P.6 · GeometriaFactory-Visor, §17.2.P.10 · GeometriaFactory-Visor, §17.2.P.11 · GeometriaFactory-Visor punto 1 y §17.2.P.12 · GeometriaFactory-Visor.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §5, que declara que la sexta función **no afloja RA-02**.
 - [`../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §3.2 (G-1, G-2, G-3), §3.3 y §5.5.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §6, lugar único de las condiciones de medición.

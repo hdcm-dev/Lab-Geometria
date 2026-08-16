@@ -38,7 +38,7 @@ Conviene decir de entrada qué clase de extensibilidad es, porque no es la habit
 | --- | --- |
 | El punto de extensión | Las **seis** funciones de la fachada: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento` |
 | Qué compra | Que el motor de dibujo tridimensional se pueda reemplazar **sin tocar ninguna página** |
-| Por qué funciona | Porque el componente anfitrión no conoce los nombres internos del motor: sólo estas seis funciones (`PRODUCT-INTAKE` §17.7.P.2, alternativa descartada 2) |
+| Por qué funciona | Porque el componente anfitrión no conoce los nombres internos del motor: sólo estas seis funciones (`PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Visor, alternativa descartada 2) |
 | Quién lo ejerce | El sample **S-1**, la página integradora sin backend, en cinco pasos o menos |
 | ADR que lo gobiernan | [`ADR-12001`](Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md), [`ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) y [`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) |
 

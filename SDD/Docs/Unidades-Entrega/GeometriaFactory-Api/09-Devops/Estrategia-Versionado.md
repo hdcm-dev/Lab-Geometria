@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) 1.0 §2, §7 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) 1.0; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3 y §1.4; [`../../GeometriaFactory-Contracts/09-Devops/Estrategia-Versionado.md`](../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Estrategia-Versionado.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.4.P.3, §17.5.P.3 y §17.5.P.7
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) 1.0 §2, §7 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) 1.0; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3 y §1.4; [`../../GeometriaFactory-Contracts/09-Devops/Estrategia-Versionado.md`](../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Estrategia-Versionado.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.3 · GeometriaFactory-Contracts, §17.1.P.3 · GeometriaFactory-Api y §17.1.P.7 · GeometriaFactory-Api
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md)
 
 ---
@@ -27,9 +27,9 @@
 
 ## 1. Versionado semántico, y qué reemplaza al versionado de rutas
 
-Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.5.P.7 lo declara **sin excepciones**, junto con las convenciones de mensaje de confirmación, una rama y un pull request por etapa, y **una etiqueta por cada etapa cerrada y fusionada, para poder volver a cualquier demostración**. Declara además que **el registro de cambios se actualiza en la rama de la etapa, no después de la fusión**.
+Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.1.P.7 · GeometriaFactory-Api lo declara **sin excepciones**, junto con las convenciones de mensaje de confirmación, una rama y un pull request por etapa, y **una etiqueta por cada etapa cerrada y fusionada, para poder volver a cualquier demostración**. Declara además que **el registro de cambios se actualiza en la rama de la etapa, no después de la fusión**.
 
-**Y declara una ausencia con su sustituto, que es lo que ordena este documento.** El intake §17.5.P.3 dice que **no hay versionado de rutas porque no hay clientes de terceros**, y [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2 declara qué lo reemplaza, en cinco reglas que esta categoría transcribe y no reescribe:
+**Y declara una ausencia con su sustituto, que es lo que ordena este documento.** El intake §17.1.P.3 · GeometriaFactory-Api dice que **no hay versionado de rutas porque no hay clientes de terceros**, y [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2 declara qué lo reemplaza, en cinco reglas que esta categoría transcribe y no reescribe:
 
 1. **Una sola versión de la superficie vive a la vez**: sin prefijo de versión en las rutas, sin convivencia de dos formas de un punto y sin deprecación gradual.
 2. **Todo cambio del ensamblado de contratos obliga al despliegue conjunto** de esta unidad y de la pública.
@@ -74,7 +74,7 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 ## 4. Modelo de ramas
 
-El del producto, heredado entero y sin variantes: **una rama por etapa** a partir de la principal, con etiqueta al fusionar; **un pull request por etapa, que es el punto de control**; **etapas en serie**; y sin OK explícito no se avanza (intake §10, §15 y §17.5.P.7).
+El del producto, heredado entero y sin variantes: **una rama por etapa** a partir de la principal, con etiqueta al fusionar; **un pull request por etapa, que es el punto de control**; **etapas en serie**; y sin OK explícito no se avanza (intake §10, §15 y §17.1.P.7 · GeometriaFactory-Api).
 
 **Reglas de protección de la rama principal**, que es lo que esta categoría aporta:
 
@@ -89,14 +89,14 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 **No hay canales de publicación**, y hay **un** destino de despliegue.
 
-`Rules-Devops.md` §4.3 pide declarar canales `preview` y `stable`; esa figura pertenece a artefactos que se publican y se consumen por versión. Acá el artefacto **no se publica**: el intake §17.5.P.7 declara la imagen construida **en destino desde el repositorio, sin publicar en un registro**, y `redistribuible` es false.
+`Rules-Devops.md` §4.3 pide declarar canales `preview` y `stable`; esa figura pertenece a artefactos que se publican y se consumen por versión. Acá el artefacto **no se publica**: el intake §17.1.P.7 · GeometriaFactory-Api declara la imagen construida **en destino desde el repositorio, sin publicar en un registro**, y `redistribuible` es false.
 
 | Figura del catálogo | Estado acá | Motivo |
 | --- | --- | --- |
 | Canal `preview` | **No existe** | No hay registro ni integrador que consuma un anticipo. Lo que un anticipo compraría —probar antes de que llegue a producción— lo compra la puerta `PT-04`, que ejercita el arranque completo **antes** de que exista la oportunidad de desplegar |
-| Canal `stable` | **Se corresponde con el único destino**: el servidor propio | Intake §17.5.P.7 |
-| Despliegue **canario** | **No existe.** Sin proxy inverso no hay despliegue con solapamiento, y el almacén tiene **escritor único** | Intake §17.5.P.8 y §17.5.P.12; [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.1 |
-| Sufijos de anticipo `-alpha`, `-beta`, `-rc` | **No se usan** | Las etiquetas del producto son **de etapa cerrada**, no de anticipo (intake §15 y §17.5.P.7) |
+| Canal `stable` | **Se corresponde con el único destino**: el servidor propio | Intake §17.1.P.7 · GeometriaFactory-Api |
+| Despliegue **canario** | **No existe.** Sin proxy inverso no hay despliegue con solapamiento, y el almacén tiene **escritor único** | Intake §17.1.P.8 · GeometriaFactory-Api y §17.1.P.12 · GeometriaFactory-Api; [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.1 |
+| Sufijos de anticipo `-alpha`, `-beta`, `-rc` | **No se usan** | Las etiquetas del producto son **de etapa cerrada**, no de anticipo (intake §15 y §17.1.P.7 · GeometriaFactory-Api) |
 
 ## 6. Política de cambios incompatibles
 
@@ -105,11 +105,11 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
 | **Ninguna ruta lleva prefijo ni sufijo de versión**, y ningún punto de acceso convive con una forma anterior de sí mismo | Inspección de los **quince** puntos | `ADR-00008` §7 y §8, primeras dos métricas |
-| **Todo cambio del ensamblado de contratos entra con el despliegue de las dos piezas en la misma etapa** | `QG-08` de `GeometriaFactory-Contracts`, que bloquea la **publicación de la etapa**; revisión de cada etapa que toque el ensamblado | Intake §17.4.P.3; `ADR-00008` §8, sexta métrica |
+| **Todo cambio del ensamblado de contratos entra con el despliegue de las dos piezas en la misma etapa** | `QG-08` de `GeometriaFactory-Contracts`, que bloquea la **publicación de la etapa**; revisión de cada etapa que toque el ensamblado | Intake §17.1.P.3 · GeometriaFactory-Contracts; `ADR-00008` §8, sexta métrica |
 | La **colección de peticiones** se actualiza en la misma intervención en que cambia la superficie, **se reproduce en cinco pasos o menos y no inventa datos de prueba** | `QG-15`, con `TC-00035`, al cierre de la etapa que la incorpora | `ADR-00008` §7 y §8, cuarta y quinta métrica |
 | **0** etapas cerradas sin etiqueta | Inspección del historial | `ADR-00008` §8, tercera métrica |
 | Un punto de acceso nuevo **declara de qué lado de la guardia queda** | `QG-05`, con `TC-00007` en las dos direcciones. **Exactamente 4 fuera, ni uno más** | `05` §9, primer riesgo |
-| Todo cambio mayor recibe su fila en el registro de cambios del producto, **escrita en la rama de la etapa** | Revisión del pull request, que **es** el punto de control | Intake §17.5.P.7 |
+| Todo cambio mayor recibe su fila en el registro de cambios del producto, **escrita en la rama de la etapa** | Revisión del pull request, que **es** el punto de control | Intake §17.1.P.7 · GeometriaFactory-Api |
 
 **Las seis métricas de `ADR-00008` §8 se adoptan sin agregar ninguna**, y las seis figuran arriba o en [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md) §5.
 
@@ -119,4 +119,4 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.5.P.7 declara **sin excepciones**, y transcribe las **cinco** reglas con las que `ADR-00008` §2 reemplaza al versionado de rutas. Hace operativa la tercera: las **tres** clases de cambio que la compilación no detecta, cada una con dónde se la atrapa en la canalización y con qué umbral, y con la precisión de que la del esquema del almacén **no se puede ignorar en ejecución** porque el arranque en dos fases detiene el servicio. Agrega **tres** precisiones sobre los mensajes de confirmación, una de ellas propia: agregar un punto de acceso exige declarar de qué lado de la guardia queda. Declara la herramienta de cálculo por su función sin elegirla, el modelo de ramas con la batería de integración que **ninguna otra canalización del producto puede correr**, la ausencia de canales y de canario con sus motivos, y la política de cambios incompatibles con **seis** obligaciones, adoptando las seis métricas de `ADR-00008` §8 sin agregar ninguna y sosteniendo la ausencia declarada de la pasarela de reenvío. |
+| 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.1.P.7 · GeometriaFactory-Api declara **sin excepciones**, y transcribe las **cinco** reglas con las que `ADR-00008` §2 reemplaza al versionado de rutas. Hace operativa la tercera: las **tres** clases de cambio que la compilación no detecta, cada una con dónde se la atrapa en la canalización y con qué umbral, y con la precisión de que la del esquema del almacén **no se puede ignorar en ejecución** porque el arranque en dos fases detiene el servicio. Agrega **tres** precisiones sobre los mensajes de confirmación, una de ellas propia: agregar un punto de acceso exige declarar de qué lado de la guardia queda. Declara la herramienta de cálculo por su función sin elegirla, el modelo de ramas con la batería de integración que **ninguna otra canalización del producto puede correr**, la ausencia de canales y de canario con sus motivos, y la política de cambios incompatibles con **seis** obligaciones, adoptando las seis métricas de `ADR-00008` §8 sin agregar ninguna y sosteniendo la ausencia declarada de la pasarela de reenvío. |

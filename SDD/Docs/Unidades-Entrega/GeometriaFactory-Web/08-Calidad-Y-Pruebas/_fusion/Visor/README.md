@@ -76,7 +76,7 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | QG-08 | 7 códigos, ninguno acuñado aguas abajo | Se rechaza en revisión |
 | QG-09 | El bundle nunca se edita a mano | Se rechaza en revisión |
 
-**Ningún gate de este proyecto de código es condicionado**, a diferencia de los otros dos de nivel topológico 0. El motivo es que sus umbrales **no salen de valores rotulados [ASUNCIÓN]**: salen del contrato de la fachada y de las dos puertas técnicas, que el intake declara sin rótulo. **La única marca [ASUNCIÓN] que alcanza a este proyecto de código está en §17.7.P.6 y es sobre la forma del gate —expresarlo como automatizable— y no sobre la regla**, que es `RA-02` y ya es criterio de aceptación de la etapa `g`.
+**Ningún gate de este proyecto de código es condicionado**, a diferencia de los otros dos de nivel topológico 0. El motivo es que sus umbrales **no salen de valores rotulados [ASUNCIÓN]**: salen del contrato de la fachada y de las dos puertas técnicas, que el intake declara sin rótulo. **La única marca [ASUNCIÓN] que alcanza a este proyecto de código está en §17.2.P.6 · GeometriaFactory-Visor y es sobre la forma del gate —expresarlo como automatizable— y no sobre la regla**, que es `RA-02` y ya es criterio de aceptación de la etapa `g`.
 
 **No hay gate de cobertura de líneas ni de mutation score**, y las dos ausencias están declaradas con su motivo en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2. **No hay umbral numérico de fluidez**, y esta categoría **no lo inventa**: es el punto abierto `PA-03` de `05` §11.
 
@@ -85,7 +85,7 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
 | Casos de uso | **7** | `02` §3 |
-| Funciones de la fachada | **6** | `Definicion-Contrato-De-Fachada.md` §4; intake §17.7.P.3 |
+| Funciones de la fachada | **6** | `Definicion-Contrato-De-Fachada.md` §4; intake §17.2.P.3 · GeometriaFactory-Visor |
 | Garantías | **7** | `Definicion-Contrato-De-Fachada.md` §3.2 |
 | Prohibiciones del contrato | **7** | `Definicion-Contrato-De-Fachada.md` §3.3 |
 | Códigos de condición | **7**, en **8** cursos | `Definicion-Contrato-De-Fachada.md` §6 |
@@ -97,7 +97,7 @@ Los nueve de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3. **El texto vi
 | Puntos abiertos de arquitectura | **5** | `05` §11 |
 | Historias de usuario | **14**, todas `Must` | `06` `Product-Backlog.md` §3.1 y §4 |
 | Tareas técnicas | **18** | `06` `Backlog-Tecnico.md` |
-| Puertas técnicas | **2**: `PT-02` y `PT-03` | `PRODUCT-INTAKE` §15 y §17.7.P.8 |
+| Puertas técnicas | **2**: `PT-02` y `PT-03` | `PRODUCT-INTAKE` §15 y §17.2.P.8 · GeometriaFactory-Visor |
 | Casos de prueba de esta categoría | **21** | [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3 |
 | Criterios de validación | **34** | [`Criterios-Validacion.md`](Criterios-Validacion.md) |
 | Sondas de la matriz de sensado | **12** | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) §3 |

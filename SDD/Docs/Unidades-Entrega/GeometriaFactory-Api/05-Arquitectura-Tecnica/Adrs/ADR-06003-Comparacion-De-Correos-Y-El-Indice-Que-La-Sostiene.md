@@ -20,7 +20,7 @@
 
 El caso concreto que obliga a decidir no es teórico. El alumno se registra escribiendo su correo; el administrador lo habilita y le comunica la provisoria **de viva voz**; el alumno vuelve a escribir el correo para entrar. Si «Alumno@Ejemplo.Com» y «alumno@ejemplo.com» son dos cuentas, el laboratorio tiene dos identidades para una persona, una de ellas con trabajos y la otra sin ninguno, y nadie se entera hasta que el alumno no encuentra su trabajo. Y si son dos cuentas para el almacén pero una sola para quien las mira, `RN-06002` deja de tener criterio de verificación ejecutable.
 
-Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `PRODUCT-INTAKE` §4.1, §17.3.P.4.
+Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `PRODUCT-INTAKE` §4.1, §17.1.P.4 · GeometriaFactory-Infrastructure.
 
 ## 2. Decisión
 
@@ -85,7 +85,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `P
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-06001, RN-06002) y §17.3.P.4.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-06001, RN-06002) y §17.1.P.4 · GeometriaFactory-Infrastructure.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 precisión 2 y §11.
 - [`../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md`](../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md) §3.2 y §7.
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/README.md`](../_fusion/Application/README.md) §7, que es donde la decisión quedó reasignada a esta categoría.

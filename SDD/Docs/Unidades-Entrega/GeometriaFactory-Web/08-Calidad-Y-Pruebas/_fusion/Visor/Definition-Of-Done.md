@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/_fusion/Visor/Definition-Of-Ready.md) 1.0 §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) §2.2 y §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15 y §17.7.P.8
+**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.0; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/_fusion/Visor/Definition-Of-Ready.md) 1.0 §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../../../00-Contexto/Roadmap-Producto.md) §2.2 y §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15 y §17.2.P.8 · GeometriaFactory-Visor
 **Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Visor/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops` y `10-Examples`
 
 ---
@@ -62,7 +62,7 @@
 - [ ] [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada en sus cinco tablas.
 - [ ] [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) tiene el estado y la fecha de verificación de cada fila que el momento toca. **Se valida** leyendo su columna de estado.
 - [ ] Todo defecto cerrado generó al menos un `TC-XX`. **Se valida** con `CV-26`.
-- [ ] Si el momento propuso una función nueva en la fachada, los **seis** pasos de [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../../../05-Arquitectura-Tecnica/Extensibilidad.md) §5 se recorrieron enteros, incluida la consolidación en el intake. **Se valida** leyendo el intake §17.7.P.3.
+- [ ] Si el momento propuso una función nueva en la fachada, los **seis** pasos de [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../../../05-Arquitectura-Tecnica/Extensibilidad.md) §5 se recorrieron enteros, incluida la consolidación en el intake. **Se valida** leyendo el intake §17.2.P.3 · GeometriaFactory-Visor.
 - [ ] El punto de control tiene el **OK explícito del Product Owner**.
 
 ### 1.4 Entrega del proyecto de código

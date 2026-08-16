@@ -54,7 +54,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 7. Notas y supuestos
 
-`RN-02007` **no tiene invariante asociado** y es correcto: describe un comportamiento y no una condición permanente sobre el estado (`PRODUCT-INTAKE` §17.1.P.2). La eliminación efectiva de las filas es del consumidor; lo que el dominio declara es el alcance del arrastre.
+`RN-02007` **no tiene invariante asociado** y es correcto: describe un comportamiento y no una condición permanente sobre el estado (`PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain). La eliminación efectiva de las filas es del consumidor; lo que el dominio declara es el alcance del arrastre.
 
 ## 8. Control de cambios
 

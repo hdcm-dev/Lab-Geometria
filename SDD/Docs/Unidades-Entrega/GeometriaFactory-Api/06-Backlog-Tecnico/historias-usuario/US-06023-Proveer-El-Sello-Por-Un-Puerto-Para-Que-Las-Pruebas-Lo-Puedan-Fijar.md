@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **obtener el momento actual
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.2.P.11 punto 3 declara que **el reloj es un puerto para que las fechas de alta y modificación sean verificables en prueba**, y `Domain ADR-06006` declara que el dominio no lee el reloj. El contrato de uso es [`CU-06009`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md), que `02` llama **el contrato más corto de la capa y el que explica por qué la capa se puede probar entera con dobles**.
+`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Application punto 3 declara que **el reloj es un puerto para que las fechas de alta y modificación sean verificables en prueba**, y `Domain ADR-06006` declara que el dominio no lee el reloj. El contrato de uso es [`CU-06009`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md), que `02` llama **el contrato más corto de la capa y el que explica por qué la capa se puede probar entera con dobles**.
 
 ## 3. Criterios de aceptación
 

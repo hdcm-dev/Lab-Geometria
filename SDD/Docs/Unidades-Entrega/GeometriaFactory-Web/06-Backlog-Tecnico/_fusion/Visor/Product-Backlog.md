@@ -45,7 +45,7 @@ Este backlog convierte en trabajo planificable los **siete** contratos de uso de
 
 `Vista-Producto.md` §3 ubica a `GeometriaFactory-Visor` en el **nivel 0**. Sus consecuencias acá son distintas de las de los otros dos proyectos de código del mismo nivel:
 
-1. **Ninguna historia espera a otro proyecto de código**, y en este caso la independencia es más fuerte que en los otros dos: el bundle **se ejercita sin backend**, con un texto pegado a mano, y eso es una propiedad exigida y no una conveniencia (`PRODUCT-INTAKE` §16.1 y §17.7.P.6).
+1. **Ninguna historia espera a otro proyecto de código**, y en este caso la independencia es más fuerte que en los otros dos: el bundle **se ejercita sin backend**, con un texto pegado a mano, y eso es una propiedad exigida y no una conveniencia (`PRODUCT-INTAKE` §16.1 y §17.2.P.6 · GeometriaFactory-Visor).
 2. **Su trabajo condiciona el de `GeometriaFactory-Web`**, que lo empaqueta en su directorio de recursos estáticos y que aloja el componente anfitrión.
 3. **Su trabajo se puede empezar mucho antes de la etapa en la que se integra**, y el propio roadmap lo obliga: `PT-02` y `PT-03` se miden **antes de comprometer la fase `g`** (§2.2), lo que exige que el bundle ya cargue, ya dibuje y ya libere recursos en ese momento.
 
@@ -73,7 +73,7 @@ Este backlog convierte en trabajo planificable los **siete** contratos de uso de
 
 De ahí se sigue algo que el backlog tiene que reflejar y que no se lee de la tabla de etapas: **el grueso de este proyecto de código se construye antes de que la etapa `g` se abra**, porque una puerta que no pasa detiene la planificación de la etapa que depende de ella y no se arrastra como deuda. Meter esas cuatro historias dentro de la épica de la etapa `g` habría escondido esa obligación.
 
-Qué exigen exactamente las dos puertas, según `PRODUCT-INTAKE` §17.7.P.8: **`PT-03`**, que el motor de dibujo quede dentro del bundle y que la página funcione sin acceso a redes de distribución externas; **`PT-02`**, que el bundle cargue en una página del anfitrión, que la creación de instancia arme la escena, que la carga del texto dibuje las tres figuras del escenario `E-1` **incluido el ortoedro**, que recorrer diez veces de ida y vuelta no degrade, y que el árbol y la escena se sincronicen por índice.
+Qué exigen exactamente las dos puertas, según `PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Visor: **`PT-03`**, que el motor de dibujo quede dentro del bundle y que la página funcione sin acceso a redes de distribución externas; **`PT-02`**, que el bundle cargue en una página del anfitrión, que la creación de instancia arme la escena, que la carga del texto dibuje las tres figuras del escenario `E-1` **incluido el ortoedro**, que recorrer diez veces de ida y vuelta no degrade, y que el árbol y la escena se sincronicen por índice.
 
 ## 3. Historias por épica
 
@@ -144,7 +144,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Verificación de entrada.** Cumple los siete criterios de la DoR.
 
-**Notas.** **El bundle no valida el trabajo ni emite observaciones**: eso es del backend. Que tolere las mismas claves que él **no es duplicar la validación** —el backend decide si el trabajo es válido; el bundle sólo necesita saber de dónde sacar una dimensión para dibujar (`PRODUCT-INTAKE` §17.7.P.11 punto 4).
+**Notas.** **El bundle no valida el trabajo ni emite observaciones**: eso es del backend. Que tolere las mismas claves que él **no es duplicar la validación** —el backend decide si el trabajo es válido; el bundle sólo necesita saber de dónde sacar una dimensión para dibujar (`PRODUCT-INTAKE` §17.2.P.11 · GeometriaFactory-Visor punto 4).
 
 #### US-12009 — Resaltar en exclusiva la pieza del índice indicado
 
@@ -212,7 +212,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero que la creación de instancia me informe cuando el navegador no tiene capacidad gráfica tridimensional, para poder mostrar una alternativa en lugar de una escena vacía.
 
-**Contexto.** `PRODUCT-INTAKE` §17.7.P.9 declara el requisito **por capacidad y no por versión de navegador**, y que sin esa capacidad el visor no es soportado. `05` §5 declara que la fachada informa `CAPACIDAD_GRAFICA_AUSENTE`.
+**Contexto.** `PRODUCT-INTAKE` §17.2.P.9 · GeometriaFactory-Visor declara el requisito **por capacidad y no por versión de navegador**, y que sin esa capacidad el visor no es soportado. `05` §5 declara que la fachada informa `CAPACIDAD_GRAFICA_AUSENTE`.
 
 **Criterios de aceptación.**
 
@@ -306,7 +306,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Verificación de entrada.** Cumple los siete criterios de la DoR.
 
-**Notas.** La precisión del segundo criterio la introdujo el roadmap 1.2 para que el movimiento automático de `F-25` **no contradijera** el criterio de disposición determinista, y la fuente de esa precisión es `PRODUCT-INTAKE` §17.7.P.10.
+**Notas.** La precisión del segundo criterio la introdujo el roadmap 1.2 para que el movimiento automático de `F-25` **no contradijera** el criterio de disposición determinista, y la fuente de esa precisión es `PRODUCT-INTAKE` §17.2.P.10 · GeometriaFactory-Visor.
 
 #### US-12010 — Ajustar la escena al tamaño del elemento de dibujo
 
@@ -332,7 +332,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero prender y apagar por separado la órbita de la cámara y el giro de las piezas sobre una instancia ya viva, para que la persona controle el movimiento sin perder lo que está mirando.
 
-**Contexto.** Contrato de uso [`CU-12007`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md), que existe porque `PRODUCT-INTAKE` §17.7.P.3 declara la **sexta función** de la fachada. Proviene de la quinta fila de `02` §5.1. El roadmap §5.2 lo incorporó como **séptimo criterio** de la transición `g` → `h`.
+**Contexto.** Contrato de uso [`CU-12007`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md), que existe porque `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Visor declara la **sexta función** de la fachada. Proviene de la quinta fila de `02` §5.1. El roadmap §5.2 lo incorporó como **séptimo criterio** de la transición `g` → `h`.
 
 **Criterios de aceptación.**
 
@@ -421,7 +421,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 
 1. **La prioridad la declara el Product Owner en el intake y esta categoría no reprioriza.** `PRODUCT-INTAKE` §4 declara `F-11`, `F-13` y `F-25` como `Must Have`: `F-25` desde la versión 1.7 de esa fuente y **`F-13` desde la 1.19**. Las tres capacidades que tocan a este proyecto de código son hoy `Must Have`, y por eso sus catorce historias lo son.
 2. **Las dos historias que eran `Should` —US-12008 y US-12009— derivan de `F-13`**, sincronización árbol ⇄ escena por índice y disposición determinista entre procesados. Cambiaron de prioridad **porque cambió la de su capacidad de origen**, no porque este backlog las repriorizara.
-3. **Cómo se resolvió la tensión que este backlog había elevado.** Las dos historias estaban **dentro de lo que `PT-02` mide antes de comprometer la etapa `g`** (`PRODUCT-INTAKE` §17.7.P.8 nombra la sincronización por índice entre lo que la puerta verifica; el roadmap §5.2 nombra la disposición determinista entre los criterios de la transición `g` → `h`), de modo que en la práctica no eran diferibles aunque su prioridad declarada lo admitiera. Este backlog **no les subió la prioridad**: elevó la tensión como `PA-06` y la dejó en manos de quien podía resolverla. **El Product Owner la resolvió el 2026-08-10 promoviendo `F-13` a `Must Have`**, con ese mismo fundamento, y `PA-06` queda cerrado en §6. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada.
+3. **Cómo se resolvió la tensión que este backlog había elevado.** Las dos historias estaban **dentro de lo que `PT-02` mide antes de comprometer la etapa `g`** (`PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Visor nombra la sincronización por índice entre lo que la puerta verifica; el roadmap §5.2 nombra la disposición determinista entre los criterios de la transición `g` → `h`), de modo que en la práctica no eran diferibles aunque su prioridad declarada lo admitiera. Este backlog **no les subió la prioridad**: elevó la tensión como `PA-06` y la dejó en manos de quien podía resolverla. **El Product Owner la resolvió el 2026-08-10 promoviendo `F-13` a `Must Have`**, con ese mismo fundamento, y `PA-06` queda cerrado en §6. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada.
 4. **Este backlog queda en 100 % `Must`, y hay que declararlo porque la regla de la categoría lo mira con dureza.** El criterio de aceptación de `Rules-Backlog-Tecnico.md` §6 pide que la distribución **no sea 100 % `Must`**, y ésta lo es. **No es una omisión de priorización sino la consecuencia aritmética de una decisión ajena**: las tres capacidades que bajan a este proyecto de código son `Must Have` en la fuente, y este backlog no puede degradar ninguna sin reprioritizar por su cuenta, que es exactamente lo que se negó a hacer cuando la tensión estaba abierta. Inventar acá una `Should` para cumplir el reparto sería peor que el apartamiento: sería una prioridad falsa. Queda declarado como apartamiento consciente, con su motivo, y la condición para que deje de serlo es que el Product Owner clasifique con prioridad menor alguna capacidad que toque a este proyecto de código.
 
 **Sobre la regularidad de esta distribución** [AGREGADO 2026-08-11, en respuesta al hallazgo `D-06-03` de [`../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md`](../../../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md) 1.0]. La auditoría observó que la distribución de los siete backlogs es demasiado regular para ser casualidad, y tiene razón en que **la regularidad existe y hasta ahora no estaba declarada**. Se declara acá, con el recuento hecho de nuevo sobre las fichas y sobre los índices inline, y con su explicación.
@@ -440,7 +440,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 **La explicación no es una cuota, y se puede verificar una por una.** El tramo comprometido —las etapas `c` a `h`— contiene **diecinueve** capacidades del intake §4, y desde `PRODUCT-INTAKE` **1.19** **las diecinueve son `Must Have`**: la única que no lo era, `F-13`, la promovió el Product Owner el 2026-08-10. De ahí se sigue mecánicamente que **ninguna historia que derive de una capacidad del tramo comprometido puede ser no-`Must`**, y que las no-`Must` que existen tienen que venir de otro lado. Vienen de dos lados, y sólo de dos:
 
 - **De una capacidad de la fase `i…`**, que este backlog no planifica pero que la frontera de tipos sí tiene que transportar: es el único caso, `US-12010` de `GeometriaFactory-Contracts`, que deriva de `F-15`, `Could Have`.
-- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-12012` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11), `US-12016` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-12023` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-12030` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
+- **De una decisión que no tomó el Product Owner sino la categoría 02 o la 05** de ese proyecto de código: `US-12012` de Domain (una decisión técnica pre-tomada del intake §17.1.P.11 · GeometriaFactory-Domain), `US-12016` de Application (`05` §4, la indisponibilidad de un puerto como condición), `US-12023` de Infrastructure (testabilidad del sello, con el caso de uso que su `02` §7.2 declara sin necesidad de negocio) y `US-12030` de Api (la estrategia de demostración de §16.1 y §18). Son **cuatro**, una por cada proyecto de código que **no toca la visualización**, y ésa es toda la regularidad: cada una de esas cuatro capas tomó exactamente una decisión propia que no responde a una capacidad, y esa decisión es lo que puede diferirse.
 
 **Los dos proyectos de código que hoy quedan en 100 % `Must` son exactamente los dos cuya única no-`Must` derivaba de `F-13`** —el Visor y Web, desde los dos lados de la fachada—. No llegaron ahí eligiendo: llegaron porque la capacidad de la que dependían subió de prioridad, después de que los dos elevaran la tensión y **se negaran a repriorizarla por su cuenta**.
 
@@ -465,7 +465,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 | --- | --- | --- | --- |
 | PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | Al cerrar EP-12002 |
 | PA-02 | **La versión del motor de dibujo tridimensional** que se adopta, y el cambio de interfaz que exija si es posterior a la del visualizador previo (`05` §11 `PA-01`). Convertido en trabajo como BT-12009 | El equipo, al implementar la capa 3 | Antes de comprometer la etapa `g`, que es cuando se miden `PT-02` y `PT-03` |
-| PA-03 | **Los nombres definitivos** de las funciones internas, de las clases y de los campos del resultado de dibujo (`05` §11 `PA-02`). **Los nombres de las seis funciones de la fachada no están abiertos**: los fija `PRODUCT-INTAKE` §17.7.P.3. Convertido en trabajo como BT-12017 | El equipo, en la etapa que implementa la fachada | Etapa `g` |
+| PA-03 | **Los nombres definitivos** de las funciones internas, de las clases y de los campos del resultado de dibujo (`05` §11 `PA-02`). **Los nombres de las seis funciones de la fachada no están abiertos**: los fija `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Visor. Convertido en trabajo como BT-12017 | El equipo, en la etapa que implementa la fachada | Etapa `g` |
 | PA-04 | **El umbral numérico de fluidez de la interacción.** Ninguna fuente lo declara y `05` §8 se niega explícitamente a inventarlo. Hasta que exista, la propiedad se verifica de forma cualitativa junto con `PT-02`. Convertido en trabajo como BT-12018 | El Product Owner, o la categoría 08 al fijar su guion de medición | Antes de cerrar la etapa `g` |
 | PA-05 | **La versión mínima de navegador.** La fuente no la fija: el requisito se declara **por capacidad** —capacidad gráfica tridimensional— y no por versión (`05` §11 `PA-04`). **No se convierte en trabajo**: no hay nada que construir, sólo una declaración que el Product Owner puede querer precisar | El Product Owner sobre su propio documento | Sin fecha comprometida |
 | PA-06 | ~~**La tensión entre la prioridad declarada de `F-13` y la puerta `PT-02`**: las dos historias `Should` de este backlog están dentro de lo que la puerta mide antes de comprometer la etapa `g`, de modo que en la práctica no son diferibles. Este backlog **no las repriorizó**; se elevó para que el Product Owner decidiera si `F-13` seguía siendo `Should Have`.~~ **CERRADO el 2026-08-10.** Desenlace: el Product Owner **promovió `F-13` a `Must Have`** en `PRODUCT-INTAKE` **1.19** §4, con el fundamento que este backlog había elevado —§17.7 P.8 incluye las dos propiedades entre lo que `PT-02` mide antes de comprometer la etapa `g`, y una puerta que no pasa detiene la planificación—. US-12008 y US-12009 pasan a `Must` en consecuencia, y §4.2 recoge el desenlace. `GeometriaFactory-Web` había elevado la misma tensión desde el otro lado de la fachada, como `PA-02` de su backlog, y queda cerrada por la misma decisión. **La fila se conserva para no dejar hueco de numeración** | Cerrado por el Product Owner sobre `PRODUCT-INTAKE` §4 | Cerrado el 2026-08-10 |

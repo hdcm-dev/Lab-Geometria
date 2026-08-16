@@ -29,11 +29,11 @@
 
 **Qué cubre.** Los **treinta y siete** casos de verificación de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **seis** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e`, `f` y `h`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2 declara como sus épicas.
 
-**Y cubre algo más, que conviene declarar aparte porque no es sólo de este proyecto de código: la batería de integración del producto.** El intake §17.5.P.6 declara que `GeometriaFactory.Integration.Tests` golpea la superficie real por su protocolo contra el almacén real, y §17.3.P.6 le asigna **la persistencia real** de `GeometriaFactory-Infrastructure`. Esa batería vive acá y este plan la planifica.
+**Y cubre algo más, que conviene declarar aparte porque no es sólo de este proyecto de código: la batería de integración del producto.** El intake §17.1.P.6 · GeometriaFactory-Api declara que `GeometriaFactory.Integration.Tests` golpea la superficie real por su protocolo contra el almacén real, y §17.1.P.6 · GeometriaFactory-Infrastructure le asigna **la persistencia real** de `GeometriaFactory-Infrastructure`. Esa batería vive acá y este plan la planifica.
 
 **Qué no cubre, y dónde se cubre.** Las reglas del dominio y sus invariantes, en `GeometriaFactory-Domain`; la orquestación y las cuatro comprobaciones de autorización sobre el dato, en `GeometriaFactory-Application`; la interpretación del texto y los mecanismos de seguridad, en `GeometriaFactory-Infrastructure`; el recorrido de la persona, en `GeometriaFactory-Web`; el dibujo, en `GeometriaFactory-Visor`.
 
-**Y una cosa que este plan explícitamente no planifica: el despliegue.** El intake §17.5.P.8 lo declara **manual, por el docente**, y que el agente **entrega el archivo de construcción y el de composición y no ejecuta el despliegue**. Lo que sí se verifica es que el artefacto se construya, arranque y responda.
+**Y una cosa que este plan explícitamente no planifica: el despliegue.** El intake §17.1.P.8 · GeometriaFactory-Api lo declara **manual, por el docente**, y que el agente **entrega el archivo de construcción y el de composición y no ejecuta el despliegue**. Lo que sí se verifica es que el artefacto se construya, arranque y responda.
 
 **La unidad de planificación es la etapa y no el sprint.** El intake declara «sin plazo calendario; el avance se mide por etapas cerradas». Por eso §5 se titula «Plan por etapa» y **ninguna de sus filas lleva una fecha ni una duración**.
 

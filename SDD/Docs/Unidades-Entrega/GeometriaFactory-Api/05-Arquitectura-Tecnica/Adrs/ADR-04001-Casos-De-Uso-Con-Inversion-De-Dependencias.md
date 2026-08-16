@@ -16,7 +16,7 @@ El producto necesita una capa donde vivan los **once** casos de uso y donde se d
 
 La restricción estructural es que este proyecto de código es **nivel 1** del orden topológico: por debajo sólo tiene `GeometriaFactory-Domain`, que ya declaró cero dependencias salientes. Si esta capa referenciara una biblioteca de persistencia, la propiedad que el nivel 0 compró se perdería una capa más arriba, porque toda prueba de caso de uso arrastraría el motor.
 
-Motivación upstream: NB-00001, NB-00002, NB-00003, NB-00004, NB-00005, NB-00006, NB-00007, NB-00009; RN-04002, RN-04003, RN-04005, RN-04008, RN-04009; INV-01, INV-02, INV-03, INV-05; `PRODUCT-INTAKE` §17.2.P.1, §17.2.P.2, §17.2.P.6 y §17.2.P.12.
+Motivación upstream: NB-00001, NB-00002, NB-00003, NB-00004, NB-00005, NB-00006, NB-00007, NB-00009; RN-04002, RN-04003, RN-04005, RN-04008, RN-04009; INV-01, INV-02, INV-03, INV-05; `PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Application, §17.1.P.2 · GeometriaFactory-Application, §17.1.P.6 · GeometriaFactory-Application y §17.1.P.12 · GeometriaFactory-Application.
 
 ## 2. Decisión
 
@@ -33,8 +33,8 @@ En consecuencia, **un caso de uso completo se ejerce con dobles de sus puertos**
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Casos de uso con inversión de dependencias (**adoptada**) | La autorización por pertenencia se prueba sin base; el nivel 1 conserva la propiedad del nivel 0; el validador de figuras —la pieza con más reglas verificadas del producto— queda aislado detrás de un puerto | Obliga a escribir a mano el mapeo entre entidades y tipos de transferencia, y renuncia a consultar la base con proyecciones a medida desde el caso de uso |
-| Servicios que consultan directamente el contexto de persistencia | Menos tipos y menos ceremonia; consultas a medida por caso de uso | Haría imposible probar la autorización por pertenencia sin base de datos, que es justo lo que la fuente exige probar. **Descartada por `PRODUCT-INTAKE` §17.2.P.2** |
-| Mediador con manejadores y canalización de comportamientos | Los comportamientos transversales —autorización, unidad de trabajo— se resuelven una sola vez en la canalización | Sobre-ingeniería para el alcance que la fuente declara **básica**, y metería en el nivel 1 una infraestructura de la que hoy no depende. **Descartada por `PRODUCT-INTAKE` §17.2.P.2** |
+| Servicios que consultan directamente el contexto de persistencia | Menos tipos y menos ceremonia; consultas a medida por caso de uso | Haría imposible probar la autorización por pertenencia sin base de datos, que es justo lo que la fuente exige probar. **Descartada por `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Application** |
+| Mediador con manejadores y canalización de comportamientos | Los comportamientos transversales —autorización, unidad de trabajo— se resuelven una sola vez en la canalización | Sobre-ingeniería para el alcance que la fuente declara **básica**, y metería en el nivel 1 una infraestructura de la que hoy no depende. **Descartada por `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Application** |
 | Un caso de uso por operación elemental, en lugar de los once del recorte de 02 | Contratos más chicos, una postcondición cada uno | Multiplicaría los lugares donde repetir las cuatro comprobaciones y la unidad de trabajo, y cambiaría identificadores `CU-XX` que 03, 06 y 08 ya citan. **Descartada por esta categoría** |
 
 ## 5. Consecuencias positivas
@@ -47,7 +47,7 @@ En consecuencia, **un caso de uso completo se ejerce con dobles de sus puertos**
 
 ## 6. Consecuencias negativas y trade-offs
 
-1. **Se acepta escribir a mano el mapeo entre entidades y tipos de transferencia.** El intake lo declara explícitamente como trade-off aceptado (§17.2.P.12).
+1. **Se acepta escribir a mano el mapeo entre entidades y tipos de transferencia.** El intake lo declara explícitamente como trade-off aceptado (§17.1.P.12 · GeometriaFactory-Application).
 2. **Se renuncia a consultar la base con proyecciones a medida desde el caso de uso**, a cambio de poder probarlo entero con dobles. El costo se paga en la forma del puerto de repositorio, que tiene que ofrecer la proyección que el listado necesita.
 3. **Se acepta que el doble de un puerto pueda mentir.** Una prueba con dobles verifica que el caso de uso hace lo que corresponde con lo que el puerto devuelve, no que el adaptador devuelva eso. Esa segunda mitad la cubre la batería de integración de `GeometriaFactory-Api`, y esta ADR la declara para que no se dé por cubierta acá.
 
@@ -63,14 +63,14 @@ En consecuencia, **un caso de uso completo se ejerce con dobles de sus puertos**
 | Métrica | Objetivo | Cómo se mide |
 | --- | --- | --- |
 | Referencias salientes del archivo de proyecto | Exactamente **1**, y **0** a persistencia, transporte, serialización o marco web | Inspección del archivo de proyecto, bloqueante en revisión |
-| Pruebas de esta capa que tocan la base de datos real | Exactamente **0** | Puerta propia y bloqueante del pipeline (`PRODUCT-INTAKE` §17.2.P.8) |
+| Pruebas de esta capa que tocan la base de datos real | Exactamente **0** | Puerta propia y bloqueante del pipeline (`PRODUCT-INTAKE` §17.1.P.8 · GeometriaFactory-Application) |
 | Proporción de pruebas unitarias en la batería del proyecto de código | **100 %** | Recuento por proyecto de pruebas |
 | Tiempo del caso de uso más pesado | Menos de **500 ms** para el texto semilla de **3** piezas de `E-1`, sin acceso a base [ASUNCIÓN del intake] | Medición sobre la batería unitaria con doble del puerto de validación |
 | Cobertura de la biblioteca | **85 %** de líneas y **80 %** de ramas [ASUNCIÓN del intake] | Informe de cobertura del pipeline |
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.2.P.1, §17.2.P.2, §17.2.P.6, §17.2.P.8, §17.2.P.10 y §17.2.P.12; §22 asunciones A-3 y A-5.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.1.P.1 · GeometriaFactory-Application, §17.1.P.2 · GeometriaFactory-Application, §17.1.P.6 · GeometriaFactory-Application, §17.1.P.8 · GeometriaFactory-Application, §17.1.P.10 · GeometriaFactory-Application y §17.1.P.12 · GeometriaFactory-Application; §22 asunciones A-3 y A-5.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §1 y §3.
 - [`../../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md`](ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md), la decisión del nivel 0 que ésta continúa.
 - ADR relacionadas: [`ADR-04002`](ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md), [`ADR-04005`](ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md).

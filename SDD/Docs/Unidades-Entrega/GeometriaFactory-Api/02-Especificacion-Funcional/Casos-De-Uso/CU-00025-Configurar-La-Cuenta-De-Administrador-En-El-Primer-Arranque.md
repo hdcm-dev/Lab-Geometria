@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01), §4.1 (RN-02001, RN-02002), §17.1.P.2 (INV-01) y §17.1.P.5, y el guion de la etapa `c`
+**Trazabilidad upstream:** [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-01), §4.1 (RN-02001, RN-02002), §17.1.P.2 · GeometriaFactory-Domain (INV-01) y §17.1.P.5 · GeometriaFactory-Domain, y el guion de la etapa `c`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** `CU-00003` §A-03 y §A-17, [`CU-04010`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04010-Configurar-La-Cuenta-De-Administrador.md) y [`CU-02012`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02012-Configurar-La-Cuenta-De-Administrador.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1
 

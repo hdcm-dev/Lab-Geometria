@@ -28,9 +28,9 @@ Demostrar el recorrido mínimo del archivo de guion sobre una página sin ningun
 
 | Ítem | Versión mínima | Origen |
 | --- | --- | --- |
-| Entorno de ejecución de la cadena de herramientas | Versión de soporte prolongado, anclada en la etapa que la introduce | `PRODUCT-INTAKE` §17.7.P.1; corre **dentro** del entorno de desarrollo contenido |
-| Entorno de desarrollo contenido del repositorio | El del propio repositorio, `.devcontainer/` | `PRODUCT-INTAKE` §16 y §17.7.P.1 |
-| Navegador con **capacidad gráfica tridimensional** | Declarada por capacidad, no por versión | `PRODUCT-INTAKE` §17.7.P.9. Sin esa capacidad el visor **no es soportado** |
+| Entorno de ejecución de la cadena de herramientas | Versión de soporte prolongado, anclada en la etapa que la introduce | `PRODUCT-INTAKE` §17.2.P.1 · GeometriaFactory-Visor; corre **dentro** del entorno de desarrollo contenido |
+| Entorno de desarrollo contenido del repositorio | El del propio repositorio, `.devcontainer/` | `PRODUCT-INTAKE` §16 y §17.2.P.1 · GeometriaFactory-Visor |
+| Navegador con **capacidad gráfica tridimensional** | Declarada por capacidad, no por versión | `PRODUCT-INTAKE` §17.2.P.9 · GeometriaFactory-Visor. Sin esa capacidad el visor **no es soportado** |
 | Conductor de navegador capaz de contar peticiones de red | — | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §3 |
 | Etapa que genera el archivo de guion, cerrada | — | Sin ella no hay bundle que cargar |
 
@@ -44,7 +44,7 @@ Demostrar el recorrido mínimo del archivo de guion sobre una página sin ningun
 4. Para mirarlo a mano, abrir `samples/visor/01-basico/index.html` en un navegador con capacidad gráfica tridimensional y pegar el texto de `E-1` en el área de texto.
 5. Comparar con §6.
 
-**El paso 2 usa el comando corto y no el completo.** `scripts/build-visor.sh` produce **sólo** el archivo de guion; `scripts/build.sh` lo encadena con la compilación del resto del producto (`PRODUCT-INTAKE` §17.7.P.8). Para trabajar sobre el visor rige el corto.
+**El paso 2 usa el comando corto y no el completo.** `scripts/build-visor.sh` produce **sólo** el archivo de guion; `scripts/build.sh` lo encadena con la compilación del resto del producto (`PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Visor). Para trabajar sobre el visor rige el corto.
 
 ## 5. Estructura del código
 

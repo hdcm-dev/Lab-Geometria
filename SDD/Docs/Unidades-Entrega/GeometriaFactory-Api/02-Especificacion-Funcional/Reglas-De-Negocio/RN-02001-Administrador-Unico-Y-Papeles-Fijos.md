@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02001), §4 (F-01 y F-19), §9 (X-3), §17.1.P.2 (INV-05), §17.3.P.4; [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §4 y §5; `00-Contexto/Alcance-Producto.md` §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02001), §4 (F-01 y F-19), §9 (X-3), §17.1.P.2 · GeometriaFactory-Domain (INV-05), §17.1.P.4 · GeometriaFactory-Infrastructure; [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §4 y §5; `00-Contexto/Alcance-Producto.md` §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -30,7 +30,7 @@ Existe **exactamente un** administrador, y su alta sólo es posible mientras no 
 
 ## 2. Justificación
 
-Es una decisión de negocio del Product Owner, declarada como exclusión: el producto es deliberadamente básico y su modelo es de dos papeles fijos y un único administrador (PRODUCT-INTAKE §4.1, §9 X-3 y §4 F-19). El invariante **INV-05** la expresa como condición permanente: existe exactamente un administrador configurado y su alta sólo es posible mientras no exista ninguno (§17.1.P.2). Un segundo administrador configurado por error volvería ambiguo quién manda sobre la lista de la comisión (`NB-00001` §4).
+Es una decisión de negocio del Product Owner, declarada como exclusión: el producto es deliberadamente básico y su modelo es de dos papeles fijos y un único administrador (PRODUCT-INTAKE §4.1, §9 X-3 y §4 F-19). El invariante **INV-05** la expresa como condición permanente: existe exactamente un administrador configurado y su alta sólo es posible mientras no exista ninguno (§17.1.P.2 · GeometriaFactory-Domain). Un segundo administrador configurado por error volvería ambiguo quién manda sobre la lista de la comisión (`NB-00001` §4).
 
 ## 3. Ámbito de aplicación
 
@@ -61,6 +61,6 @@ Pruebas unitarias puras de dominio previstas en 08: constitución rechazada de u
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. |
-| 1.1 | 2026-08-09 | Absorbe el enunciado completo que `PRODUCT-INTAKE` 1.3 §4.1 transcribe. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. El enunciado incorpora la condición de alta —«su alta sólo es posible mientras no exista ninguno»—, la cita de INV-05 pasa de §17.3.P.4 a §17.1.P.2, que es donde el intake ahora enuncia los siete invariantes, y §6 suma el criterio de verificación declarado por la fuente. |
+| 1.1 | 2026-08-09 | Absorbe el enunciado completo que `PRODUCT-INTAKE` 1.3 §4.1 transcribe. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. El enunciado incorpora la condición de alta —«su alta sólo es posible mientras no exista ninguno»—, la cita de INV-05 pasa de §17.1.P.4 · GeometriaFactory-Infrastructure a §17.1.P.2 · GeometriaFactory-Domain, que es donde el intake ahora enuncia los siete invariantes, y §6 suma el criterio de verificación declarado por la fuente. |
 | 1.2 | 2026-08-09 | **Corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`. Esta regla se citaba en CU-02001 como fundamento del estado inicial `Pendiente` de toda cuenta, y **no dice eso**: declara que existe exactamente un administrador y que su alta sólo es posible mientras no exista ninguno. §3 lo precisa explícitamente y §5 reasigna el alta del administrador a **CU-02012**, que se emite con este cambio, dejando a CU-02001 sólo por el conjunto cerrado de dos papeles. |
 | 1.3 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-01**. La regla protegía la unicidad del administrador sólo contra la baja, y el bloqueo producía el mismo resultado sin estar prohibido. §3 extiende el ámbito a las cuatro operaciones citando la capacidad **F-03**, que ya las declara sobre cuentas de alumno; §4 pasa a citar el código único `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, que reemplaza al retirado `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA`, y declara el efecto sobre el circuito de revisión; §6 suma el bloqueo a las pruebas previstas. |

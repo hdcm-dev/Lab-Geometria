@@ -45,7 +45,7 @@ Los casos de uso que se materializan a través de este contrato son **once de lo
 
 **Este contrato se declara en prosa estructurada y no en una descripción formal de servicio, y es un apartamiento declarado de la guía del tipo `rest-api`.**
 
-La guía exige una descripción formal para este tipo. **La fuente decide lo contrario, por escrito y con fundamento**: `PRODUCT-INTAKE` §17.4.P.2 descarta «generar el cliente desde una descripción formal» por costo de cadena de herramientas frente a un contrato que consumen dos proyectos de código del mismo producto, y §17.4.P.12 lo cierra: «se renuncia a un contrato descrito en una notación formal y a clientes generados: **con dos consumidores compilados juntos, el costo no se paga**».
+La guía exige una descripción formal para este tipo. **La fuente decide lo contrario, por escrito y con fundamento**: `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Contracts descarta «generar el cliente desde una descripción formal» por costo de cadena de herramientas frente a un contrato que consumen dos proyectos de código del mismo producto, y §17.1.P.12 · GeometriaFactory-Contracts lo cierra: «se renuncia a un contrato descrito en una notación formal y a clientes generados: **con dos consumidores compilados juntos, el costo no se paga**».
 
 Emitir una descripción formal contra esa decisión crearía **una segunda fuente de verdad sobre la misma superficie**, que envejecería sin que nada la compare, en un producto cuyo defecto documentado más repetido es exactamente ése. El contrato formal del producto **es el ensamblado de tipos de transferencia**, que los dos extremos compilan, y este documento es la superficie que lo transporta.
 
@@ -57,7 +57,7 @@ Emitir una descripción formal contra esa decisión crearía **una segunda fuent
 
 | Regla | Decisión | Qué pasa si se rompe |
 | --- | --- | --- |
-| Notación | **Notación de objetos de texto**, sobre los tipos de `GeometriaFactory-Contracts` | Declarado por el intake §17.5.P.3 |
+| Notación | **Notación de objetos de texto**, sobre los tipos de `GeometriaFactory-Contracts` | Declarado por el intake §17.1.P.3 · GeometriaFactory-Api |
 | Nombres de campo | **Tal como los declara el tipo**, sin transformación de estilo | Es la única convención que no puede desincronizarse, porque no hay nada que configurar distinto en cada lado |
 | Conjuntos cerrados | **Por su nombre, nunca por su posición**. Son **cuatro**: papel de la cuenta, estado de cuenta, estado del trabajo y especie de observación | Un valor insertado en el medio cambiaría el significado de **todos** los datos ya emitidos |
 | Campos nulos | **Se emiten** | La nulidad significa cosas: una credencial nula es una cuenta `Pendiente`; un comentario nulo es un trabajo sin desenlace escrito |
@@ -107,8 +107,8 @@ Los dieciséis son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 | `201` | Se constituyó algo que antes no existía: una cuenta o un trabajo | **[derivado]** |
 | `204` | Se retiró algo y no hay cuerpo que devolver | **[derivado]** |
 | `400` | La petición no es utilizable: falta un campo que el contrato exige, el que llegó no es del conjunto cerrado que declara, el cuerpo no se puede leer, trae un campo desconocido, o **excede el límite de tamaño** | **[derivado]** |
-| `401` | **Ante credenciales inválidas, genérico y sin declarar cuál campo falló.** También ante la ausencia de credencial, la credencial vencida y la firma que no corresponde | **Declarado** por el intake §17.5.P.5; ampliado por derivación a los tres casos de la guardia |
-| `403` | **Con motivo**, ante la cuenta que no admite acceso, ante el papel que el punto no admite y ante la cuenta con cambio de contraseña pendiente | **Declarado** por el intake §17.5.P.5 para la cuenta `Pendiente` o `Bloqueado`; los otros dos son derivación |
+| `401` | **Ante credenciales inválidas, genérico y sin declarar cuál campo falló.** También ante la ausencia de credencial, la credencial vencida y la firma que no corresponde | **Declarado** por el intake §17.1.P.5 · GeometriaFactory-Api; ampliado por derivación a los tres casos de la guardia |
+| `403` | **Con motivo**, ante la cuenta que no admite acceso, ante el papel que el punto no admite y ante la cuenta con cambio de contraseña pendiente | **Declarado** por el intake §17.1.P.5 · GeometriaFactory-Api para la cuenta `Pendiente` o `Bloqueado`; los otros dos son derivación |
 | `404` | Lo pedido no existe, **o no es del solicitante, o está fuera de lo que ve**, sin que la respuesta permita distinguir los tres casos | **[derivado en el número; la obligación es de `RN-00003`]** |
 | `409` | La operación es legítima y el estado no la admite | **[derivado]** |
 | `500` | Un defecto que el producto no previó. **Nunca lleva detalle de implementación** | **[derivado]** |

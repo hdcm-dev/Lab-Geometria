@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02002), §4 (F-02), §17.1.P.2 (INV-01), §6 (flujo 1), §7 (CL-6 y CL-7); [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02002), §4 (F-02), §17.1.P.2 · GeometriaFactory-Domain (INV-01), §6 (flujo 1), §7 (CL-6 y CL-7); [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1, §4 y §5; `00-Contexto/Vision-Producto.md` §9.1
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -38,7 +38,7 @@ El invariante que la expresa como condición permanente es **INV-01**.
 
 - Se evalúa en el alta de toda cuenta, de alumno y de administrador.
 - Se evalúa también cuando una cuenta dada de baja vuelve a darse de alta con el mismo correo: la baja es física, de modo que el correo queda libre y el alta procede.
-- **El dominio no la puede verificar solo.** La unicidad se afirma sobre el conjunto de alumnos, y una entidad no conoce a ese conjunto: el dominio exige que el consumidor declare la comprobación hecha, y quien la ejerce es `GeometriaFactory-Application` con el puerto de repositorio. Es la misma frontera que el intake declara para todo lo que exige consultar el conjunto (§17.1.P.4).
+- **El dominio no la puede verificar solo.** La unicidad se afirma sobre el conjunto de alumnos, y una entidad no conoce a ese conjunto: el dominio exige que el consumidor declare la comprobación hecha, y quien la ejerce es `GeometriaFactory-Application` con el puerto de repositorio. Es la misma frontera que el intake declara para todo lo que exige consultar el conjunto (§17.1.P.4 · GeometriaFactory-Domain).
 - El criterio con el que dos correos se consideran el mismo —si se comparan tal cual o normalizados— es una decisión de 05: el dominio conserva el dato como lo recibe.
 
 ## 4. Consecuencia si se viola
@@ -58,5 +58,5 @@ Pruebas unitarias de dominio previstas en 08: el alta invocada sin declarar la c
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.0 | 2026-08-09 | Emisión inicial. La regla existía en la fuente funcional pero `PRODUCT-INTAKE` no transcribía su enunciado, y esta categoría la había elevado como ambigüedad en su versión anterior en lugar de inventarla. El intake 1.3 §4.1 la transcribe y §17.1.P.2 declara INV-01 como el invariante que la expresa. |
+| 1.0 | 2026-08-09 | Emisión inicial. La regla existía en la fuente funcional pero `PRODUCT-INTAKE` no transcribía su enunciado, y esta categoría la había elevado como ambigüedad en su versión anterior en lugar de inventarla. El intake 1.3 §4.1 la transcribe y §17.1.P.2 · GeometriaFactory-Domain declara INV-01 como el invariante que la expresa. |
 | 1.1 | 2026-08-09 | Alcanzada por la **corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`. §3 ya declaraba que la regla se evalúa «en el alta de toda cuenta, de alumno y de administrador», pero §5 listaba un solo caso de uso porque el alta del administrador no tenía el suyo. Con **CU-02012** emitido, §5 lo suma y la trazabilidad regla → caso de uso vuelve a ser bidireccional. |

@@ -63,7 +63,7 @@ En una línea: **0** peticiones de red y **0** claves escritas, **6 de 6** funci
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Modelo-Datos-Logico.md` | **Omitido** | La regla de la categoría lo omite para `library` puro sin estado. `tiene_persistencia` es false y el intake declara «no aplica, y es prohibición explícita» en §17.7.P.4: el bundle no guarda estado entre páginas ni escribe en el almacenamiento del navegador |
+| `Modelo-Datos-Logico.md` | **Omitido** | La regla de la categoría lo omite para `library` puro sin estado. `tiene_persistencia` es false y el intake declara «no aplica, y es prohibición explícita» en §17.2.P.4 · GeometriaFactory-Visor: el bundle no guarda estado entre páginas ni escribe en el almacenamiento del navegador |
 | `_legacy/` | **No existe** | Es la primera emisión de esta categoría en este proyecto de código: no hay ninguna versión superada que archivar |
 
 **Esta sección no omite ni el flujo de ejecución ni la extensibilidad**, a diferencia de los otros dos proyectos de código de nivel 0: el primero porque `cargarJson` es un motor de procesamiento con transformaciones declarables, y el segundo porque `tiene_extensibilidad` es **true** y el punto de extensión del producto es precisamente el contrato de esta fachada.

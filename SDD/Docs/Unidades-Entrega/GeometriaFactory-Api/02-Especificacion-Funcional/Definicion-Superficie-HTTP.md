@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-15
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.34** (§4.1 RN-00013 y su fila de control de cambios 1.34: **con qué se autentica el cambio forzado**, que es lo que reconcilia §3 con `CU-00001` §6), **1.26** §17.5.P.3 (protocolo, consumidor, ausencia de CORS y de WebSockets, punto de canje y punto de salud), §17.5.P.5 (flujo, reclamos, respuestas, autorización, secretos), §17.5.P.2, §17.5.P.6, §17.5.P.9, §17.5.P.10, §17.5.P.11, §9 (X-9), §14 (**RA-01, RA-02, RA-03**), §4.1 (RN-00003, RN-00006, RN-00009, RN-00013, **RN-00016**), §4 (**F-04** precisada, F-03); `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/` completo, y en particular la §6 de sus ocho contratos de uso y `CU-00006` §6 y §10, de donde sale el **conjunto cerrado de diecisiete códigos**; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4 y §6; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3, que declara que la traducción de sus condiciones hacia afuera del proceso pertenece a este proyecto de código
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.34** (§4.1 RN-00013 y su fila de control de cambios 1.34: **con qué se autentica el cambio forzado**, que es lo que reconcilia §3 con `CU-00001` §6), **1.26** §17.1.P.3 · GeometriaFactory-Api (protocolo, consumidor, ausencia de CORS y de WebSockets, punto de canje y punto de salud), §17.1.P.5 · GeometriaFactory-Api (flujo, reclamos, respuestas, autorización, secretos), §17.1.P.2 · GeometriaFactory-Api, §17.1.P.6 · GeometriaFactory-Api, §17.1.P.9 · GeometriaFactory-Api, §17.1.P.10 · GeometriaFactory-Api, §17.1.P.11 · GeometriaFactory-Api, §9 (X-9), §14 (**RA-01, RA-02, RA-03**), §4.1 (RN-00003, RN-00006, RN-00009, RN-00013, **RN-00016**), §4 (**F-04** precisada, F-03); `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/` completo, y en particular la §6 de sus ocho contratos de uso y `CU-00006` §6 y §10, de donde sale el **conjunto cerrado de diecisiete códigos**; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4 y §6; `Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md` §1.3 y §2.3, que declara que la traducción de sus condiciones hacia afuera del proceso pertenece a este proyecto de código
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `10-Examples` de GeometriaFactory-Api
 
 ---
@@ -33,7 +33,7 @@ Los doce casos de uso de esta categoría describen contratos de uso, uno por uno
 
 Esa pregunta importa acá más que en las tres capas que este proyecto de código ensambla, por tres motivos que se acumulan:
 
-1. **Lo que no está acá, no existe para nadie.** El intake §17.5.P.9 declara que un puerto publicado hacia el enrutador es el único punto de entrada al servidor propio. Una capacidad implementada en las tres capas de adentro y no expuesta acá es una capacidad que el producto no tiene.
+1. **Lo que no está acá, no existe para nadie.** El intake §17.1.P.9 · GeometriaFactory-Api declara que un puerto publicado hacia el enrutador es el único punto de entrada al servidor propio. Una capacidad implementada en las tres capas de adentro y no expuesta acá es una capacidad que el producto no tiene.
 2. **Lo que está acá de más, no lo protege nadie.** Cada punto de acceso agrega una superficie donde la guardia puede faltar y donde una regla puede romperse. La lista completa es la única forma de comprobar que **los once puntos que exigen acceso están los once bajo la misma guardia**.
 3. **Acá se elige el número, y el número dice cosas.** Responder «no autorizado» donde la regla exige «no encontrado» confirma la existencia de un recurso ajeno, y ninguna capa de adentro puede repararlo. RN-00003 se rompe eligiendo mal un código de respuesta.
 
@@ -47,17 +47,17 @@ Es la sección que hay que leer antes que la tabla de §3, porque de otro modo e
 
 | Qué | Dónde |
 | --- | --- |
-| El protocolo es petición-respuesta, **sin estado**, con el acceso firmado en la cabecera de autorización | Intake §17.5.P.3 |
-| El formato es JSON, con los tipos de `GeometriaFactory-Contracts` | Intake §17.5.P.3 |
-| **El único consumidor es `GeometriaFactory-Web`, servidor a servidor**; el navegador nunca la alcanza | Intake §17.5.P.3, RA-01 |
-| Existe un **punto de canje de credenciales**, con correo y contraseña, y su ruta está declarada: `POST /auth/token` | Intake §17.5.P.3 y §17.5.P.5 |
-| Existe un **punto de salud**, consumido por la página de salud del front y por la comprobación del despliegue. **La fuente no da su ruta** | Intake §17.5.P.3 |
-| Ante credenciales inválidas se responde **`401` genérico, sin revelar cuál campo falló** | Intake §17.5.P.5 |
-| Ante cuenta `Pendiente` o `Bloqueada` se responde **`403` con motivo** | Intake §17.5.P.5 |
-| La autorización es **por papel en cada punto más verificación de pertenencia**; el papel no alcanza | Intake §17.5.P.5 |
-| **No hay versionado de rutas**, porque no hay clientes de terceros | Intake §17.5.P.3 |
-| **No hay CORS y no hay WebSockets** | Intake §17.5.P.3 |
-| Un trabajo que no está en `Borrador` o que no pertenece al solicitante **se verifica forzando la petición contra esta superficie** | Intake §17.5.P.6 |
+| El protocolo es petición-respuesta, **sin estado**, con el acceso firmado en la cabecera de autorización | Intake §17.1.P.3 · GeometriaFactory-Api |
+| El formato es JSON, con los tipos de `GeometriaFactory-Contracts` | Intake §17.1.P.3 · GeometriaFactory-Api |
+| **El único consumidor es `GeometriaFactory-Web`, servidor a servidor**; el navegador nunca la alcanza | Intake §17.1.P.3 · GeometriaFactory-Api, RA-01 |
+| Existe un **punto de canje de credenciales**, con correo y contraseña, y su ruta está declarada: `POST /auth/token` | Intake §17.1.P.3 · GeometriaFactory-Api y §17.1.P.5 · GeometriaFactory-Api |
+| Existe un **punto de salud**, consumido por la página de salud del front y por la comprobación del despliegue. **La fuente no da su ruta** | Intake §17.1.P.3 · GeometriaFactory-Api |
+| Ante credenciales inválidas se responde **`401` genérico, sin revelar cuál campo falló** | Intake §17.1.P.5 · GeometriaFactory-Api |
+| Ante cuenta `Pendiente` o `Bloqueada` se responde **`403` con motivo** | Intake §17.1.P.5 · GeometriaFactory-Api |
+| La autorización es **por papel en cada punto más verificación de pertenencia**; el papel no alcanza | Intake §17.1.P.5 · GeometriaFactory-Api |
+| **No hay versionado de rutas**, porque no hay clientes de terceros | Intake §17.1.P.3 · GeometriaFactory-Api |
+| **No hay CORS y no hay WebSockets** | Intake §17.1.P.3 · GeometriaFactory-Api |
+| Un trabajo que no está en `Borrador` o que no pertenece al solicitante **se verifica forzando la petición contra esta superficie** | Intake §17.1.P.6 · GeometriaFactory-Api |
 
 **Lo que es derivación de esta categoría**, y va rotulado fila por fila en las tablas que siguen: **las rutas y los verbos de los quince puntos restantes**, **la partición de la superficie en dieciséis puntos**, y **ocho de los diez códigos de respuesta** con su asignación. Nada de eso lo declara ninguna fuente, y su forma definitiva la fija `05-Arquitectura-Tecnica` y se valida en el punto de control de la primera etapa.
 
@@ -116,8 +116,8 @@ Es la sección que hay que leer antes que la tabla de §3, porque de otro modo e
 | `201` | Se constituyó algo que antes no existía: una cuenta o un trabajo | **[derivado]** |
 | `204` | Se retiró algo y no hay cuerpo que devolver | **[derivado]** |
 | `400` | La petición no es utilizable: falta un campo que el contrato exige, o el que llegó no es del conjunto cerrado que declara | **[derivado]** |
-| `401` | **Ante credenciales inválidas, genérico y sin declarar cuál campo falló.** También ante la ausencia de acceso, el acceso vencido y la firma que no corresponde | **Declarado** por el intake §17.5.P.5, ampliado por derivación a los tres casos de la guardia |
-| `403` | **Con motivo**, ante la cuenta que no admite acceso, ante el papel que el punto no admite y ante la cuenta con cambio de contraseña pendiente | **Declarado** por el intake §17.5.P.5 para la cuenta `Pendiente` o `Bloqueada`; los otros dos son derivación |
+| `401` | **Ante credenciales inválidas, genérico y sin declarar cuál campo falló.** También ante la ausencia de acceso, el acceso vencido y la firma que no corresponde | **Declarado** por el intake §17.1.P.5 · GeometriaFactory-Api, ampliado por derivación a los tres casos de la guardia |
+| `403` | **Con motivo**, ante la cuenta que no admite acceso, ante el papel que el punto no admite y ante la cuenta con cambio de contraseña pendiente | **Declarado** por el intake §17.1.P.5 · GeometriaFactory-Api para la cuenta `Pendiente` o `Bloqueada`; los otros dos son derivación |
 | `404` | Lo pedido no existe **o no es del solicitante, o está fuera de lo que ve**, sin que la respuesta permita distinguir los tres casos | **[derivado en el número; la obligación es de RN-00003]** |
 | `409` | La operación es legítima y el estado no la admite: el correo ocupado, el administrador ya configurado, el estado que no admite desenlace, el que no admite eliminar, el reseteo que no aplica | **[derivado]** |
 | `500` | Un defecto que el producto no previó. **Nunca lleva detalle de implementación** | **[derivado]** |
@@ -185,11 +185,11 @@ Cada ausencia es una decisión declarada de una fuente, no un pendiente. Se enum
 | Ausencia | Por qué | Qué la repone si se rompe |
 | --- | --- | --- |
 | **CORS** | La superficie no recibe peticiones del navegador: RA-01. Configurar CORS sería declarar que sí las recibe | Agregarlo reabre las tres propiedades de la topología: contenido mixto, CORS y exposición de la dirección del servidor propio |
-| **WebSockets** | El circuito de la pieza pública **termina en el front** y no llega hasta acá. El intake lo declara criterio de aceptación de la primera etapa | Un punto de acceso que sostenga una conexión abierta rompe además el «sin estado» de §17.5.P.3 |
+| **WebSockets** | El circuito de la pieza pública **termina en el front** y no llega hasta acá. El intake lo declara criterio de aceptación de la primera etapa | Un punto de acceso que sostenga una conexión abierta rompe además el «sin estado» de §17.1.P.3 · GeometriaFactory-Api |
 | **Pasarela de reenvío en el front** | El intake §9 X-9 la declara **especificada y no implementada**, porque hoy ningún JavaScript del navegador toca esta superficie y la pasarela sólo consumiría el recurso más escaso del plan gratuito. Queda especificada para adoptarla sin rediseño | Su condición de reingreso está declarada: descarga de archivos, carga directa desde el navegador o migración del front a ejecución en el navegador |
 | **Versionado de rutas** | No hay clientes de terceros: los dos extremos compilan contra el mismo ensamblado y un cambio incompatible **rompe la compilación** antes que el tiempo de ejecución | La regla operativa que lo reemplaza es el **despliegue conjunto** de las dos piezas desplegables ante un cambio de contrato |
 | **Sesión del lado del servidor** | REST sin estado. Lo que se parece a una sesión vive en el circuito de la pieza pública, donde reside el acceso firmado | Un punto de acceso que dependa de la petición anterior obliga a afinidad de servidor, que este despliegue no tiene |
-| **Acceso de refresco** | El intake §17.5.P.5 declara vigencia corta y **renovación por reingreso**, sin acceso de refresco en este alcance | Agregarlo es una decisión de alcance, no una comodidad: cambia qué pasa cuando el acceso vence |
+| **Acceso de refresco** | El intake §17.1.P.5 · GeometriaFactory-Api declara vigencia corta y **renovación por reingreso**, sin acceso de refresco en este alcance | Agregarlo es una decisión de alcance, no una comodidad: cambia qué pasa cuando el acceso vence |
 | **Cualquier punto que fije una contraseña sobre una cuenta existente sin credencial** | **RN-00016** (`PRODUCT-INTAKE` 1.13 §4.1): habilitar produce la contraseña provisoria, de modo que toda operación que fija una contraseña ocurre con la cuenta ya autenticada. La ausencia es lo que impide que alguien que conozca un correo habilitado le fije la contraseña a esa cuenta antes que su dueño. **La segunda forma de A-05, que `PRODUCT-INTAKE` 1.34 declara, no la repone**: autenticarse **con la contraseña actual** es autenticarse, y sin la vigente presentada no se cambia nada | Reponerlo devuelve exactamente ese agujero. La condición de reingreso **no existe**: no es un pendiente de alcance sino una decisión de seguridad del Product Owner |
 
 ## 8. Lo que ninguna respuesta de esta superficie puede decir
@@ -205,7 +205,7 @@ Es RA-03, que es regla de nivel producto, y **acá es donde se puede violar haci
 | La **contraseña provisoria**, fuera del cuerpo del resultado del reseteo | Se devuelve **una vez**, a quien la pidió, y **no se registra en ninguna traza** | Nada: el valor viaja en el resultado y no en ningún otro lado |
 | **Trazas de la implementación**, nombres de tipos internos o cadenas de llamada | Es lo que un defecto no previsto expone si no se lo maneja | El código genérico, con su código de respuesta |
 
-**Y la contracara, que es igual de obligatoria:** el intake §17.5.P.10 declara registro estructurado del lado del servidor **de cada error y de cada intento de acceso rechazado**. Sin ese registro, la prohibición de exponer se convierte en imposibilidad de diagnosticar, y el operador que despliega a mano se queda sin nada que mirar.
+**Y la contracara, que es igual de obligatoria:** el intake §17.1.P.10 · GeometriaFactory-Api declara registro estructurado del lado del servidor **de cada error y de cada intento de acceso rechazado**. Sin ese registro, la prohibición de exponer se convierte en imposibilidad de diagnosticar, y el operador que despliega a mano se queda sin nada que mirar.
 
 ## 9. Puntos abiertos de esta superficie
 

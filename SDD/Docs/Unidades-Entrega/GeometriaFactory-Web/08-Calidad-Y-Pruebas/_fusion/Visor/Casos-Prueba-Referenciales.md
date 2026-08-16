@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** los **siete** casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4, §5 y §6; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md) 1.2 §6; las **catorce** historias de [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md) §3; los **ocho** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.7.P.8, §18, §20 y §21
+**Trazabilidad upstream:** los **siete** casos de uso de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4, §5 y §6; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md) 1.2 §6; las **catorce** historias de [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md) §3; los **ocho** NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) §8; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.2.P.8 · GeometriaFactory-Visor, §18, §20 y §21
 **Trazabilidad downstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Guia-Testing-Extensibilidad.md`](../../Guia-Testing-Extensibilidad.md)
 
 ---
@@ -223,7 +223,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Cubre | `CU-12006`; las **seis** propiedades transversales de `02` §6; `US-12014`; NFR «Se ejercita sin backend»; sample **S-1**; `BT-12015` |
 | Setup | La página integradora del sample S-1, con el bundle cargado, un área donde se pega el texto y una superficie de dibujo, y **0 servicios del backend disponibles** |
 | Pasos | Given la página y el texto de `E-1` pegado a mano, When se recorren las **seis** funciones —crear, cargar, seleccionar, ajustar, gobernar el movimiento y destruir—, Then el recorrido cierra entero **sin ninguna pieza del backend**. When se repite con el texto de `E-7`, Then se dibujan los seis tipos. When se cuentan las peticiones de la pestaña de red durante todo el recorrido, Then son **cero** |
-| Salida esperada | Recorrido completo de las seis funciones con cero servicios disponibles y cero peticiones. **Es la propiedad que el intake §17.7.P.6 y `RT §8.3` exigen no perder**, y es el sample que demuestra el punto de extensión |
+| Salida esperada | Recorrido completo de las seis funciones con cero servicios disponibles y cero peticiones. **Es la propiedad que el intake §17.2.P.6 · GeometriaFactory-Visor y `RT §8.3` exigen no perder**, y es el sample que demuestra el punto de extensión |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -268,7 +268,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Inspección del artefacto generado y extremo a extremo en página |
-| Cubre | Puerta técnica **`PT-03`** del intake §15 y §17.7.P.8; NFR «Dependencias traídas de una red de distribución externa»; `QG-02`; `BT-12013` |
+| Cubre | Puerta técnica **`PT-03`** del intake §15 y §17.2.P.8 · GeometriaFactory-Visor; NFR «Dependencias traídas de una red de distribución externa»; `QG-02`; `BT-12013` |
 | Setup | El bundle generado y una página abierta **sin acceso a redes de distribución externas** |
 | Pasos | Given el bundle, When se lo inspecciona, Then el motor de dibujo tridimensional **está dentro**. Given la página sin acceso a redes externas, When se la abre y se ejerce la fachada, Then **funciona**: hay exactamente **0** dependencias traídas de una red externa en tiempo de ejecución |
 | Salida esperada | El motor dentro y el recuento en 0. **Una puerta que no pasa detiene la planificación de la etapa `g`** y no se arrastra como deuda |
@@ -280,7 +280,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Extremo a extremo en página |
-| Cubre | Puerta técnica **`PT-02`** del intake §15 y §17.7.P.8; `US-12001`, `US-12004`, `US-12009`, `US-12011`; `QG-03`; `BT-12014` |
+| Cubre | Puerta técnica **`PT-02`** del intake §15 y §17.2.P.8 · GeometriaFactory-Visor; `US-12001`, `US-12004`, `US-12009`, `US-12011`; `QG-03`; `BT-12014` |
 | Setup | Una página del componente anfitrión con el bundle cargado, y el texto del escenario `E-1` |
 | Pasos | Given la página del anfitrión, When se carga el bundle, Then carga. When se crea la instancia, Then **arma la escena**. When se carga el texto de `E-1`, Then **dibuja las tres figuras, incluido el ortoedro**. When se hacen **diez recorridos de ida y vuelta** entre trabajos **con los dos movimientos prendidos**, Then **no degrada**. When se selecciona una pieza desde el árbol y desde la escena, Then **los dos se sincronizan por índice** |
 | Salida esperada | Los **cinco** tramos que la puerta exige, medidos juntos. La sincronización por índice es la que dejó de ser diferible cuando el Product Owner promovió `F-13` a `Must Have` en el intake **1.19**, con el fundamento de que una capacidad citada por una puerta no puede ser de prioridad menor |

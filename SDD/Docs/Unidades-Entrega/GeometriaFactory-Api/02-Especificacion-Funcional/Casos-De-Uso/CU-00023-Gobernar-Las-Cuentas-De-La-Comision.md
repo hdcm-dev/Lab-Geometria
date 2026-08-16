@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5 (cobertura de las cuatro operaciones); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-02001, RN-02007, RN-02014, RN-02016), §17.1.P.5
+**Trazabilidad upstream:** [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5 (cobertura de las cuatro operaciones); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-03), §4.1 (RN-02001, RN-02007, RN-02014, RN-02016), §17.1.P.5 · GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** [`CU-00004`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md), [`CU-04002`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md) y [`CU-02002`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1
 

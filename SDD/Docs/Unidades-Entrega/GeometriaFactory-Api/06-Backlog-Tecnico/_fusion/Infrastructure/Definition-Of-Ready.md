@@ -40,7 +40,7 @@ Ocho criterios, todos respondibles con sí o no. Los cuatro últimos son propios
 
 Seis criterios, todos respondibles con sí o no.
 
-1. **Declara su fuente upstream por identificador**: un componente de `05` §3.1, una ADR, un NFR de su §8, un riesgo de su §9, un punto abierto de su §11, una regla conceptual de modelo o una puerta del intake §17.3.P.8.
+1. **Declara su fuente upstream por identificador**: un componente de `05` §3.1, una ADR, un NFR de su §8, un riesgo de su §9, un punto abierto de su §11, una regla conceptual de modelo o una puerta del intake §17.1.P.8 · GeometriaFactory-Infrastructure.
 2. **Declara al menos una historia consumidora**, o se justifica como infraestructura compartida citando la ADR, la puerta o el punto abierto que la sostiene.
 3. **Sus criterios de aceptación son verificables**, y cuando la propiedad que sostienen es una **ausencia** —cero peticiones de red, cero componentes cargados, cero retiros parciales, cero provisorias repetidas, cero mensajes con secreto— el criterio se expresa **con umbral cero y con la condición en la que se mide**.
 4. **Si la tarea tiene un atajo destructivo conocido, lo escribe como prohibido.** `05` §9 identifica dos de impacto **muy alto**: **componer la provisoria por un contador, la fecha o el correo** cuando la fuente de material impredecible no responde, y **descartar el almacén y crearlo de nuevo** ante un esquema que no corresponde. Una tarea que los toque y no los declare **no está lista**.

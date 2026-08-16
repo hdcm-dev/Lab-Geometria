@@ -57,7 +57,7 @@ Las dos que exceden el mínimo tienen origen declarado:
 | Persistencia | ADR-10002 | La decisión es **no tener persistencia**, y por eso lleva ADR: contradice el valor por defecto de la regla para este tipo D8 |
 | Comunicación | ADR-10005, ADR-10006 | Las dos fronteras de esta pieza: hacia el servicio de datos —lo que vuelve como condición— y hacia el bundle del visor |
 | Seguridad | ADR-10003 | Custodia de la credencial y guardianes de ruta que **acotan sin hacer cumplir** |
-| Observabilidad | **Ninguna** | `tiene_observabilidad_critica` es false y §17.6.P.10 no declara instrumentación. Lo que la fuente sí exige es **manejo explícito** del cartel de reconexión y del estado degradado, y eso vive en ADR-10005. Un registro del lado del front no tendría consumidor: no hay operador mirando el hosting |
+| Observabilidad | **Ninguna** | `tiene_observabilidad_critica` es false y §17.2.P.10 · GeometriaFactory-Web no declara instrumentación. Lo que la fuente sí exige es **manejo explícito** del cartel de reconexión y del estado degradado, y eso vive en ADR-10005. Un registro del lado del front no tendría consumidor: no hay operador mirando el hosting |
 | Despliegue | ADR-10007 | — |
 | Extensibilidad | **Ninguna** | `tiene_extensibilidad` es false en el `PRODUCT-MANIFEST` §5. El punto de extensión del producto es el contrato de la fachada del visor, y **este proyecto de código es su consumidor, no su dueño**: cómo crece esa fachada lo declara [`Extensibilidad.md`](Extensibilidad.md) §5 de `GeometriaFactory-Visor` |
 

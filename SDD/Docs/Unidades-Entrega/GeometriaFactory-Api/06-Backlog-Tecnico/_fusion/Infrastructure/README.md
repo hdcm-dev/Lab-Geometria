@@ -49,7 +49,7 @@
 
 ## 5. Tareas técnicas prioritarias
 
-**BT-06003**, el anclaje de la función de derivación de clave, porque el intake §17.3.P.1 declara **dos candidatas y no elige**, la decisión es de este proyecto de código y **no se puede delegar hacia arriba ni hacia abajo**. **BT-06016, BT-06017 y BT-06018**, el validador y su batería de diez casos, porque son la **mitigación declarada del único riesgo de negocio del producto**, al que la fuente asigna probabilidad alta e impacto alto. **BT-06014**, la producción de la provisoria, porque su atajo destructivo —componerla por otro medio cuando la fuente de aleatoriedad no responde— **deja el reseteo aparentemente funcionando** y no se nota hasta que alguien la usa. Y **BT-06006**, la preparación del almacén, porque el atajo de descartarlo y crearlo de nuevo **deja el servicio impecable y sin los trabajos de nadie**.
+**BT-06003**, el anclaje de la función de derivación de clave, porque el intake §17.1.P.1 · GeometriaFactory-Infrastructure declara **dos candidatas y no elige**, la decisión es de este proyecto de código y **no se puede delegar hacia arriba ni hacia abajo**. **BT-06016, BT-06017 y BT-06018**, el validador y su batería de diez casos, porque son la **mitigación declarada del único riesgo de negocio del producto**, al que la fuente asigna probabilidad alta e impacto alto. **BT-06014**, la producción de la provisoria, porque su atajo destructivo —componerla por otro medio cuando la fuente de aleatoriedad no responde— **deja el reseteo aparentemente funcionando** y no se nota hasta que alguien la usa. Y **BT-06006**, la preparación del almacén, porque el atajo de descartarlo y crearlo de nuevo **deja el servicio impecable y sin los trabajos de nadie**.
 
 ## 6. Definition of Ready vigente
 

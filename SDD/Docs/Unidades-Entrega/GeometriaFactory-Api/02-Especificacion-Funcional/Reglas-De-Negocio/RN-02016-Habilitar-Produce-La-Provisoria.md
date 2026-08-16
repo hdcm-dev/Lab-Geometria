@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.15** §4.1 (enunciado de **RN-02016** corregido, y RN-02012, RN-02013, RN-02014 con las que forma circuito), §4 (**F-03**, **F-04** precisada, F-26), §17.1.P.2 (**INV-09**, INV-06, INV-08), §15 (etapa `d`), §7 (CL-7), §9 (X-1 vigente); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.15** §4.1 (enunciado de **RN-02016** corregido, y RN-02012, RN-02013, RN-02014 con las que forma circuito), §4 (**F-03**, **F-04** precisada, F-26), §17.1.P.2 · GeometriaFactory-Domain (**INV-09**, INV-06, INV-08), §15 (etapa `d`), §7 (CL-7), §9 (X-1 vigente); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---

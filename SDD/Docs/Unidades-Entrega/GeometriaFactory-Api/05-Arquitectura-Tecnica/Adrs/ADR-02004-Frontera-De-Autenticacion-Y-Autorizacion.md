@@ -14,7 +14,7 @@
 
 El flag `tiene_auth` de este proyecto de código es **true**, y el `PRODUCT-MANIFEST` §5 declara por qué y con qué efecto: fue corregido de false a true el 2026-08-09 alineando el manifiesto con la sección de trazabilidad del `PRODUCT-INTAKE`, porque el flag no distingue mecanismo de regla —el dominio contiene la regla que condiciona la autenticación, INV-06— y **el efecto declarado de esa corrección es que la categoría 05 de este proyecto de código emita su ADR de autenticación**, que es esta.
 
-Lo que el dominio sí hace: modela el estado de la cuenta, la credencial derivada, la marca de cambio de contraseña pendiente y los invariantes INV-06, INV-08 e INV-09. Lo que no hace: derivar contraseñas, compararlas, emitir accesos ni manejar secretos; la contraseña le llega **ya derivada** (`PRODUCT-INTAKE` §17.1.P.5).
+Lo que el dominio sí hace: modela el estado de la cuenta, la credencial derivada, la marca de cambio de contraseña pendiente y los invariantes INV-06, INV-08 e INV-09. Lo que no hace: derivar contraseñas, compararlas, emitir accesos ni manejar secretos; la contraseña le llega **ya derivada** (`PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Domain).
 
 Sobre esa frontera cayeron dos decisiones recientes del producto que este proyecto de código tiene que sostener sin implementarlas: **RN-02014**, que la contraseña provisoria la produce el sistema y no la escribe el administrador, y **RN-02016**, que habilitar una cuenta produce su provisoria, con lo cual el producto pasó a tener un solo mecanismo de credencial inicial.
 
@@ -39,7 +39,7 @@ El dominio **modela las condiciones de la autenticación y de la autorización p
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Modelar la condición y no el mecanismo (**adoptada**) | Mantiene las cero dependencias del nivel 0; los invariantes de acceso se prueban sin criptografía ni emisión de acceso; el mecanismo se puede cambiar sin tocar el dominio | Obliga a confiar en que el consumidor resolvió la verificación antes de invocar; la frontera hay que declararla explícitamente o se difumina |
-| Derivar y comparar la contraseña dentro del dominio | Una sola puerta de credencial, imposible de saltear | Exige una biblioteca de criptografía en el nivel 0, lo que rompe ADR-02001 y la condición del intake §17.1.P.1; y ataría el dominio a un algoritmo concreto |
+| Derivar y comparar la contraseña dentro del dominio | Una sola puerta de credencial, imposible de saltear | Exige una biblioteca de criptografía en el nivel 0, lo que rompe ADR-02001 y la condición del intake §17.1.P.1 · GeometriaFactory-Domain; y ataría el dominio a un algoritmo concreto |
 | Sacar del dominio también el estado de cuenta y la marca, dejándolos en la capa que autentica | El dominio quedaría más chico | INV-06, INV-08 e INV-09 dejarían de ser invariantes verificables sin infraestructura, que es la propiedad que ADR-02001 protege; y la instancia perdería la guarda que impide quedarse sin administrador |
 | Producir la contraseña provisoria en el dominio | Un solo lugar donde nace la credencial inicial | El dominio no tiene fuente de aleatoriedad ni derivación, y RN-02014 exige que la provisoria no sea adivinable ni se repita: son propiedades de un mecanismo, no de una regla |
 
@@ -78,7 +78,7 @@ El dominio **modela las condiciones de la autenticación y de la autorización p
 ## 9. Referencias
 
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §5, fundamento de `tiene_auth` y de su corrección del 2026-08-09.
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.5, §4.1 (RN-02006, RN-02012 a RN-02016), §17.1.P.2 (INV-06, INV-08, INV-09), §14 (RA-03).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.5 · GeometriaFactory-Domain, §4.1 (RN-02006, RN-02012 a RN-02016), §17.1.P.2 · GeometriaFactory-Domain (INV-06, INV-08, INV-09), §14 (RA-03).
 - [`../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1, §5.1, §5.3 y §7.
 - [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) y [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md).
 - ADR relacionadas: [`ADR-02001`](ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md), [`ADR-02005`](ADR-02005-Guarda-Unica-De-Admisibilidad.md).

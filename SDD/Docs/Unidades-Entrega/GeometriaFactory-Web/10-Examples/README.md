@@ -67,7 +67,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 | Comprobación | Resultado |
 | --- | --- |
 | `tiene_extensibilidad` en el `PRODUCT-MANIFEST` §5 | **false**. El único true del producto es `GeometriaFactory-Visor` |
-| Cuál es el punto de extensión del producto | El **contrato de la fachada del visor**, con sus **seis** funciones (`PRODUCT-MANIFEST` §5, `PRODUCT-INTAKE` §17.7.P.3). Vive en otro proyecto de código y ya tiene sus samples: [`../../GeometriaFactory-Visor/10-Examples/`](../../GeometriaFactory-Visor/10-Examples/) |
+| Cuál es el punto de extensión del producto | El **contrato de la fachada del visor**, con sus **seis** funciones (`PRODUCT-MANIFEST` §5, `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Visor). Vive en otro proyecto de código y ya tiene sus samples: [`../../GeometriaFactory-Visor/10-Examples/`](../../GeometriaFactory-Visor/10-Examples/) |
 | Qué pasa con los valores visuales de esta pieza | Salen de un **catálogo cerrado de tokens**, y la fila `SD-10054` de la matriz de sensado declara deriva mayor cuando aparece un literal visual fuera de él. Un catálogo cerrado con umbral cero **es lo contrario de un punto de extensión** |
 
 **Un sample de tema custom acá afirmaría una capacidad que el producto no tiene**, y sería el anti-patrón de `Rules-Examples.md` §4.5 en su forma más cara: un ejemplo que ilustra bien algo que no existe.

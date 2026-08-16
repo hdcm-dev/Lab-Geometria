@@ -43,7 +43,7 @@ Este contrato es además **el punto de extensión declarado del producto**; su t
 
 La salida se expone como **biblioteca bajo un solo nombre propio en el objeto global del navegador**, sin identificadores globales sueltos.
 
-**Los nombres de las seis funciones están fijados** por `PRODUCT-INTAKE` §17.7.P.3 y no se cambian. Los nombres de las funciones internas, de las clases y de los campos del resultado de dibujo **no se fijan acá**: se anclan en la etapa que implementa la fachada.
+**Los nombres de las seis funciones están fijados** por `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Visor y no se cambian. Los nombres de las funciones internas, de las clases y de los campos del resultado de dibujo **no se fijan acá**: se anclan en la etapa que implementa la fachada.
 
 ## 3. Operaciones: las seis funciones
 

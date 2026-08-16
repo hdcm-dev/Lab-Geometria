@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-00008`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §7 (CL-8), §14 (RA-03), §17.5.P.3 (punto de salud), §17.5.P.4 (**aplicar las migraciones al arrancar**), §17.5.P.8 (PT-04), §17.5.P.9, §17.5.P.10 (arranque en frío), §17.5.P.12 (ventana de indisponibilidad); `Proyectos/GeometriaFactory-Infrastructure/.../CU-00010-Preparar-El-Almacen-Al-Arrancar.md`, cuya forma de terminación propia es el **arranque detenido**
+**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md), [`NB-00008`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §7 (CL-8), §14 (RA-03), §17.1.P.3 · GeometriaFactory-Api (punto de salud), §17.1.P.4 · GeometriaFactory-Api (**aplicar las migraciones al arrancar**), §17.1.P.8 · GeometriaFactory-Api (PT-04), §17.1.P.9 · GeometriaFactory-Api, §17.1.P.10 · GeometriaFactory-Api (arranque en frío), §17.1.P.12 · GeometriaFactory-Api (ventana de indisponibilidad); `Proyectos/GeometriaFactory-Infrastructure/.../CU-00010-Preparar-El-Almacen-Al-Arrancar.md`, cuya forma de terminación propia es el **arranque detenido**
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Api
 
 ---
@@ -32,7 +32,7 @@
 
 Declarar el arranque del servicio: **disparar la preparación del almacén** antes de atender la primera petición, y exponer **A-16**, el punto por el que se responde por el estado del servicio.
 
-Es la responsabilidad que el intake §17.5.P.4 asigna a este proyecto de código en una línea —**aplicar las migraciones al arrancar**— y es una de las dos por las que su flag de persistencia vale true, aunque **el dato lo modele y lo guarde otro**: acá se toma de configuración la ubicación y se dispara la transformación; la transformación la ejecuta el adaptador.
+Es la responsabilidad que el intake §17.1.P.4 · GeometriaFactory-Api asigna a este proyecto de código en una línea —**aplicar las migraciones al arrancar**— y es una de las dos por las que su flag de persistencia vale true, aunque **el dato lo modele y lo guarde otro**: acá se toma de configuración la ubicación y se dispara la transformación; la transformación la ejecuta el adaptador.
 
 Su forma de terminación es propia y no existe en ningún otro caso de uso de esta categoría: **el arranque detenido**. Cuando el almacén no queda en condiciones, el servicio **no atiende ninguna petición**. Es preferible a atender sobre un almacén en el que no se puede confiar, y es lo que hace que la pieza pública pueda declarar estado degradado en vez de mostrar datos que parecen buenos.
 

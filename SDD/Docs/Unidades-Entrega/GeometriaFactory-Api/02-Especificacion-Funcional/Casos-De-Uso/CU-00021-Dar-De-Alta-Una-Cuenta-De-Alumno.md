@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-02, con origen en RF-03), §4.1 (RN-02002, RN-02016), §6 (flujo 1), §17.1.P.2 (INV-01)
+**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-02, con origen en RF-03), §4.1 (RN-02002, RN-02016), §6 (flujo 1), §17.1.P.2 · GeometriaFactory-Domain (INV-01)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** `CU-00003` §A-02, [`CU-04001`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md) y [`CU-02001`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02001-Registrar-El-Alta-De-Un-Alumno.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1
 

@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (enunciado precisado de **RN-02013**, y enunciados de RN-02012 y **RN-02016**), §4 (**F-26**, F-03, **F-04** precisada), §17.1.P.2 (**INV-09**, INV-06), §17.1.P.5, §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**); [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; `00-Contexto/Vision-Producto.md` §9.2
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (enunciado precisado de **RN-02013**, y enunciados de RN-02012 y **RN-02016**), §4 (**F-26**, F-03, **F-04** precisada), §17.1.P.2 · GeometriaFactory-Domain (**INV-09**, INV-06), §17.1.P.5 · GeometriaFactory-Domain, §7 (**CL-7** reescrito), §9 (X-1 vigente, **X-2 retirada**); [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5; `00-Contexto/Vision-Producto.md` §9.2
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -30,7 +30,7 @@ Mientras la contraseña provisoria no se cambie, la cuenta **no llega a ninguna 
 
 ## 2. Justificación
 
-Es lo que hace que la provisoria sea provisoria. Sin esta regla, una clave que el administrador conoce quedaría sirviendo indefinidamente para operar como el alumno: el reseteo dejaría de ser una reparación y pasaría a ser una puerta permanente a la identidad de otra persona. El fundamento está declarado en el propio enunciado de **INV-09** (`PRODUCT-INTAKE` §17.1.P.2).
+Es lo que hace que la provisoria sea provisoria. Sin esta regla, una clave que el administrador conoce quedaría sirviendo indefinidamente para operar como el alumno: el reseteo dejaría de ser una reparación y pasaría a ser una puerta permanente a la identidad de otra persona. El fundamento está declarado en el propio enunciado de **INV-09** (`PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain).
 
 Es además lo que sostiene la promesa de identidad propia del alumno de `NB-00002` en el único momento en que el producto la pone en riesgo: el reseteo la reduce a una ventana que la propia cuenta cierra.
 

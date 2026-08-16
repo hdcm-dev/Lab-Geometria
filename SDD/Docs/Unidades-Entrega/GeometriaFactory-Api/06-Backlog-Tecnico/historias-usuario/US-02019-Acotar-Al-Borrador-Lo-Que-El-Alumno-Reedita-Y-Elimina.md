@@ -54,7 +54,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 7. Notas y supuestos
 
-`INV-03` está acotado al alumno **por decisión declarada** del 2026-08-08 (`PRODUCT-INTAKE` §17.1.P.2): el enunciado anterior habría quedado falso al ampliarse el borrado del administrador.
+`INV-03` está acotado al alumno **por decisión declarada** del 2026-08-08 (`PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain): el enunciado anterior habría quedado falso al ampliarse el borrado del administrador.
 
 ## 8. Control de cambios
 

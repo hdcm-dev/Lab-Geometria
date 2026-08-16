@@ -12,7 +12,7 @@
 
 ## 1. Contexto
 
-El motor de dibujo tridimensional es la única dependencia externa real de este proyecto de código. `PRODUCT-INTAKE` §17.7.P.1 declara dos cosas sobre él: que **entra como dependencia declarada del proyecto y no desde una red de distribución externa**, terminando dentro del bundle porque el front debe funcionar sin acceso a redes externas; y que **la versión que se adopte se ancla y se registra**, documentando el cambio de interfaz que exija si es posterior a la del visualizador previo.
+El motor de dibujo tridimensional es la única dependencia externa real de este proyecto de código. `PRODUCT-INTAKE` §17.2.P.1 · GeometriaFactory-Visor declara dos cosas sobre él: que **entra como dependencia declarada del proyecto y no desde una red de distribución externa**, terminando dentro del bundle porque el front debe funcionar sin acceso a redes externas; y que **la versión que se adopte se ancla y se registra**, documentando el cambio de interfaz que exija si es posterior a la del visualizador previo.
 
 Ese último punto no es teórico: el visualizador previo **reimplementa la cámara orbital a mano** porque su versión no la trae, de modo que una versión posterior probablemente ofrezca la capacidad de otra forma.
 
@@ -37,7 +37,7 @@ Motivación upstream: NB-00006, NB-00008 en su arista de funcionamiento desde la
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Motor empaquetado y confinado a la capa 3 (**adoptada**) | La página funciona sin acceso a redes externas; el motor es reemplazable; el artefacto es reproducible | El bundle pesa más; una actualización del motor obliga a regenerar y volver a desplegar el artefacto |
-| Traer el motor desde una red de distribución externa | Bundle mucho más liviano; caché compartida entre sitios | **Falla PT-03**: la página dejaría de funcionar sin acceso a la red externa, y el producto se usa desde una red que bloquea lo que no espera. Descartada por `PRODUCT-INTAKE` §17.7.P.1 |
+| Traer el motor desde una red de distribución externa | Bundle mucho más liviano; caché compartida entre sitios | **Falla PT-03**: la página dejaría de funcionar sin acceso a la red externa, y el producto se usa desde una red que bloquea lo que no espera. Descartada por `PRODUCT-INTAKE` §17.2.P.1 · GeometriaFactory-Visor |
 | Empaquetarlo pero dejarlo accesible al anfitrión | El anfitrión podría hacer cosas que la fachada no expone | Rompe la capa 2 de ADR-12001 y vuelve al motor irreemplazable, que es lo contrario del punto de extensión |
 | No anclar la versión, tomar siempre la última compatible | Menos mantenimiento declarado | Contradice la regla de anclaje de versiones que el producto declara para los seis proyectos de código, y expone a que un cambio de interfaz del motor rompa la capa 3 sin decisión de nadie |
 
@@ -75,7 +75,7 @@ Motivación upstream: NB-00006, NB-00008 en su arista de funcionamiento desde la
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.7.P.1, §17.7.P.7, §17.7.P.8, §17.7.P.9, §17.7.P.11 punto 2, §17.7.P.12 y §15 (`PT-02`, `PT-03`); encabezado de la Parte C, regla de anclaje de versiones.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.2.P.1 · GeometriaFactory-Visor, §17.2.P.7 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor, §17.2.P.9 · GeometriaFactory-Visor, §17.2.P.11 · GeometriaFactory-Visor punto 2, §17.2.P.12 · GeometriaFactory-Visor y §15 (`PT-02`, `PT-03`); encabezado de la Parte C, regla de anclaje de versiones.
 - [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §2.2 y §5.
 - ADR relacionadas: [`ADR-12001`](ADR-12001-Tres-Capas-Con-Fachada-Plana.md), [`ADR-12006`](ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md).
 

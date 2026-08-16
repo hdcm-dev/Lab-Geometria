@@ -9,7 +9,7 @@
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
 **Tipo de artefacto:** `Bundle-Visor`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0 §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §13, §16, §16.1, §17.6.P.7, §17.6.P.8, §17.7.P.7, §17.7.P.8 y §18
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0 §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §13, §16, §16.1, §17.2.P.7 · GeometriaFactory-Web, §17.2.P.8 · GeometriaFactory-Web, §17.2.P.7 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor y §18
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md); `10-Examples` (sample S-1) y `11-Documentacion` cuando se emitan
 
 ---
@@ -28,7 +28,7 @@
 
 ## 0. Qué significa «publicación» acá, y qué no
 
-**Este documento no describe una publicación externa, porque no la hay.** El intake §17.7.P.7 declara que el bundle **no se publica** en ningún repositorio de paquetes, `redistribuible` es false (intake §13) y [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 descartó publicarlo con el fundamento de que sería un portal para una comunidad que no existe.
+**Este documento no describe una publicación externa, porque no la hay.** El intake §17.2.P.7 · GeometriaFactory-Visor declara que el bundle **no se publica** en ningún repositorio de paquetes, `redistribuible` es false (intake §13) y [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 descartó publicarlo con el fundamento de que sería un portal para una comunidad que no existe.
 
 Lo que sí hay es **una entrega**, y tiene procedimiento, verificación y reversión propios: el artefacto se genera y **se copia al directorio de recursos estáticos de `GeometriaFactory-Web`**, desde donde viaja dentro del despliegue de esa unidad (`05` §5). Ese acto es lo que esta guía documenta, con la estructura que `Rules-Devops.md` §4.5 exige para una guía de publicación.
 
@@ -42,16 +42,16 @@ Lo que sí hay es **una entrega**, y tiene procedimiento, verificación y revers
 
 | Pre-requisito | Detalle | Fundamento |
 | --- | --- | --- |
-| Contenedor de desarrollo levantado | Es donde corre el gestor de paquetes del ecosistema del navegador. El equipo anfitrión no tiene las cadenas de herramientas instaladas | Intake §17.7.P.1 y §10 |
+| Contenedor de desarrollo levantado | Es donde corre el gestor de paquetes del ecosistema del navegador. El equipo anfitrión no tiene las cadenas de herramientas instaladas | Intake §17.2.P.1 · GeometriaFactory-Visor y §10 |
 | Dependencias instaladas de forma **reproducible**, desde el archivo de bloqueo | La regla de anclaje de versiones del intake prohíbe que una versión cambie como efecto colateral | Intake, encabezado de la Parte C |
-| Versión del motor de dibujo tridimensional **anclada y registrada** | Punto abierto `PA-01` de `05` §11, cerrado por `BT-12009` antes del momento de medición | Intake §17.7.P.1 |
+| Versión del motor de dibujo tridimensional **anclada y registrada** | Punto abierto `PA-01` de `05` §11, cerrado por `BT-12009` antes del momento de medición | Intake §17.2.P.1 · GeometriaFactory-Visor |
 | Que exista el directorio de recursos estáticos del anfitrión, destino de la copia | `src/GeometriaFactory.Web/wwwroot/js/`, declarado en el árbol del repositorio | Intake §13 y §16 |
 
 **Ningún secreto**: ver [`Entornos-Deploy.md`](Entornos-Deploy.md) §5.
 
 ## 2. Comando y stage de entrega
 
-Los comandos son los guiones que el intake §17.7.P.8 declara, y **no se inventa ninguno**:
+Los comandos son los guiones que el intake §17.2.P.8 · GeometriaFactory-Visor declara, y **no se inventa ninguno**:
 
 | Camino | Comando | Cuándo se usa | Qué produce |
 | --- | --- | --- | --- |
@@ -59,7 +59,7 @@ Los comandos son los guiones que el intake §17.7.P.8 declara, y **no se inventa
 | Construcción del producto | `scripts/build.sh` | En la canalización, y antes de publicar | El bundle encadenado con la compilación del resto de la solución |
 | Publicación del front | El flujo de trabajo de publicación, que **genera el bundle en su propio interior** antes de publicar y subir | Al fusionar a la rama principal con cambios bajo `src/GeometriaFactory.Web/` o `visor/`, y también por disparo manual | El bundle recién generado, dentro de la publicación del front |
 
-**El tercer camino es el que efectivamente entrega el artefacto a un usuario**, y no lo ejecuta este proyecto de código: es del flujo de trabajo que el intake §17.6.P.7 y §17.6.P.8 declaran. Sus pasos, en el orden que la fuente declara: obtener el código, preparar las dos cadenas de herramientas, instalar dependencias en `visor/`, **generar el bundle y copiarlo a los recursos estáticos**, publicar el front, inyectar la configuración desde secretos, subir por FTP y **verificar que la dirección pública responde**.
+**El tercer camino es el que efectivamente entrega el artefacto a un usuario**, y no lo ejecuta este proyecto de código: es del flujo de trabajo que el intake §17.2.P.7 · GeometriaFactory-Web y §17.2.P.8 · GeometriaFactory-Web declaran. Sus pasos, en el orden que la fuente declara: obtener el código, preparar las dos cadenas de herramientas, instalar dependencias en `visor/`, **generar el bundle y copiarlo a los recursos estáticos**, publicar el front, inyectar la configuración desde secretos, subir por FTP y **verificar que la dirección pública responde**.
 
 **Variables de entorno requeridas por esta entrega: ninguna.** Las que ese flujo de trabajo necesita —dirección base del servicio de datos y credenciales de la subida— son del front y no de este artefacto.
 
@@ -74,11 +74,11 @@ Los comandos son los guiones que el intake §17.7.P.8 declara, y **no se inventa
 | 1 | **El artefacto corresponde al fuente que lo generó**: nunca se editó a mano | Revisión del pull request de la etapa, que **es** el punto de control | **0** ediciones manuales (`QG-09`, `CV-30`) |
 | 2 | **Es reproducible**: dos construcciones desde el mismo estado producen el mismo artefacto | Comparación de dos construcciones | Idénticos (`ADR-12006` §8) |
 | 3 | **El contrato entero se puede ejercer sin backend**: el sample **S-1** carga el bundle, se pega un texto y dibuja | Ejecución de S-1, en **cinco pasos o menos** | **6 de 6** funciones, con **0** servicios del backend disponibles (`ADR-12006` §8) |
-| 4 | **El front publicado responde** con el bundle nuevo servido | La verificación de que la dirección pública responde, que el intake §17.6.P.8 declara como cierre obligatorio de ese flujo | La dirección pública responde |
+| 4 | **El front publicado responde** con el bundle nuevo servido | La verificación de que la dirección pública responde, que el intake §17.2.P.8 · GeometriaFactory-Web declara como cierre obligatorio de ese flujo | La dirección pública responde |
 
 **La tercera es la más valiosa de las cuatro, y conviene decir por qué.** `ADR-12006` §5, punto 3, declara que el sample S-1 funciona **como prueba de contrato**: ejerce las seis funciones sin ninguna pieza del backend y por eso detecta un cambio incompatible **sin necesidad de levantar el producto**. Como ninguna de las tres clases de cambio mayor la detecta una compilación ([`Estrategia-Versionado.md`](Estrategia-Versionado.md) §1), S-1 es la barrera más temprana que existe contra un cambio mayor no declarado.
 
-**La cuarta no la ejecuta este proyecto de código**, y se declara igual porque es donde la entrega termina: el intake §17.6.P.8 declara que ese flujo **no termina en la subida, termina comprobando que la dirección pública responde**, y que una subida que deja la aplicación caída y se reporta como exitosa es peor que una falla visible.
+**La cuarta no la ejecuta este proyecto de código**, y se declara igual porque es donde la entrega termina: el intake §17.2.P.8 · GeometriaFactory-Web declara que ese flujo **no termina en la subida, termina comprobando que la dirección pública responde**, y que una subida que deja la aplicación caída y se reporta como exitosa es peor que una falla visible.
 
 ## 4. Reversión
 
@@ -87,10 +87,10 @@ Los comandos son los guiones que el intake §17.7.P.8 declara, y **no se inventa
 | Situación | Procedimiento | Fundamento |
 | --- | --- | --- |
 | El bundle entregado al anfitrión está roto, y todavía no se publicó | Volver a la **etiqueta de la etapa anterior** y **regenerar** el bundle desde ese estado. No se restaura un archivo: se reconstruye | [`Entornos-Deploy.md`](Entornos-Deploy.md) §2; `ADR-12006` §5, punto 2 |
-| El bundle roto ya está publicado en el hosting | **Volver a publicar desde la etiqueta anterior**, que es el procedimiento de reversión que el intake §17.6.P.8 declara para el front. La regeneración del bundle es parte de esa publicación | Intake §17.6.P.8 |
+| El bundle roto ya está publicado en el hosting | **Volver a publicar desde la etiqueta anterior**, que es el procedimiento de reversión que el intake §17.2.P.8 · GeometriaFactory-Web declara para el front. La regeneración del bundle es parte de esa publicación | Intake §17.2.P.8 · GeometriaFactory-Web |
 | Un cambio mayor del punto de extensión rompió al anfitrión en ejecución | Lo anterior, más la fila de cambio mayor en el registro de cambios del producto que faltó. **Ninguna compilación lo iba a detectar**: la mitigación previa es la revisión y S-1 | `ADR-12006` §2 y §6 |
 
-**Ventana y comunicación.** El intake §17.6.P.8 declara dos condiciones que alcanzan a toda entrega que llegue al hosting y que esta guía **no reescribe ni suaviza**: la subida **no es transaccional** —riesgo asumido— y **se despliega fuera del horario de uso**. La comunicación del producto es el punto de control de la etapa y su informe de cierre; no hay lista de integradores a quien avisar.
+**Ventana y comunicación.** El intake §17.2.P.8 · GeometriaFactory-Web declara dos condiciones que alcanzan a toda entrega que llegue al hosting y que esta guía **no reescribe ni suaviza**: la subida **no es transaccional** —riesgo asumido— y **se despliega fuera del horario de uso**. La comunicación del producto es el punto de control de la etapa y su informe de cierre; no hay lista de integradores a quien avisar.
 
 ## 5. Métricas
 

@@ -6,7 +6,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md` §1, §5; `NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5; `00-Contexto/Vision-Producto.md` §9; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE` **1.13** §4 (**F-26**, F-03, **F-04** precisada), §4.1 (**RN-08012**, **RN-08013 precisada**, RN-08007, RN-08014, RN-08015, **RN-08016**), §17.1.P.2 (**INV-09**), §7 (**CL-7** reescrito), §9 (**X-2 retirada**, X-1 vigente), §17.4 P.2, P.3, P.5 y P.8, §17.5 P.3 y P.5, §14 (**RA-01**, RA-03)
+**Trazabilidad upstream:** `01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md` §1, §5; `NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md` §1, §5; `00-Contexto/Vision-Producto.md` §9; `00-Contexto/Alcance-Producto.md` §4.1 y §5; `PRODUCT-INTAKE` **1.13** §4 (**F-26**, F-03, **F-04** precisada), §4.1 (**RN-08012**, **RN-08013 precisada**, RN-08007, RN-08014, RN-08015, **RN-08016**), §17.1.P.2 · GeometriaFactory-Domain (**INV-09**), §7 (**CL-7** reescrito), §9 (**X-2 retirada**, X-1 vigente), §17.4 P.2, P.3, P.5 y P.8, §17.5 P.3 y P.5, §14 (**RA-01**, RA-03)
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de este proyecto de código; `08-Calidad-Y-Pruebas`
 
 ---

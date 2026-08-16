@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.2.P.6, §17.2.P.8, §17.2.P.10 y §22
+**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.1.P.6 · GeometriaFactory-Application, §17.1.P.8 · GeometriaFactory-Application, §17.1.P.10 · GeometriaFactory-Application y §22
 **Trazabilidad downstream:** [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -52,15 +52,15 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
-| CV-09 | El caso de uso más pesado resuelve el envío del texto de **3** piezas de `E-1` **sin acceso a base** | **500 ms** **[ASUNCIÓN del intake §17.2.P.10, asunción `A-5` de §22]** | Cronometrado dentro de la batería unitaria con doble del puerto de validación, por `BT-04019` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
-| CV-10 | La cobertura alcanza **85 %** de líneas y **80 %** de ramas, **por componente y no como número global** | 85 / 80 **[ASUNCIÓN del intake §17.2.P.6, asunción `A-3` de §22]**, con los cuatro componentes que suben declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
-| CV-11 | Ninguna prueba de esta capa toca la base de datos real | **0** | `TC-04026` y revisión del pull request | **Bloqueante.** Es la puerta propia que el intake §17.2.P.8 declara |
+| CV-09 | El caso de uso más pesado resuelve el envío del texto de **3** piezas de `E-1` **sin acceso a base** | **500 ms** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Application, asunción `A-5` de §22]** | Cronometrado dentro de la batería unitaria con doble del puerto de validación, por `BT-04019` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
+| CV-10 | La cobertura alcanza **85 %** de líneas y **80 %** de ramas, **por componente y no como número global** | 85 / 80 **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Application, asunción `A-3` de §22]**, con los cuatro componentes que suben declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
+| CV-11 | Ninguna prueba de esta capa toca la base de datos real | **0** | `TC-04026` y revisión del pull request | **Bloqueante.** Es la puerta propia que el intake §17.1.P.8 · GeometriaFactory-Application declara |
 | CV-12 | El archivo de proyecto declara **1** referencia al producto y **0** a persistencia, transporte, serialización o marco web | 1 y 0 | `TC-04027` | **Bloqueante** |
 | CV-13 | Las consultas de listado no materializan componentes de pieza | **0** en los dos listados | `TC-04030` | **Bloqueante** |
 | CV-14 | El catálogo de condiciones cierra en las dos direcciones | 36 de 36 y 0 fuera | `TC-04028` | **Bloqueante** |
 | CV-15 | Las cuatro comprobaciones están ejercidas sin base de datos, con la prueba de orden presente | 4 de 4, 1 de orden | `TC-04011` y matriz §5 | **Bloqueante** |
 | CV-16 | Ningún caso de uso reparte su efecto entre dos unidades de trabajo | **A lo sumo 1** por caso de uso | `TC-04029`, con la baja como caso testigo | **Bloqueante** |
-| CV-17 | La construcción termina en 0 y **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.2.P.8 | **Bloqueante** |
+| CV-17 | La construcción termina en 0 y **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.1.P.8 · GeometriaFactory-Application | **Bloqueante** |
 
 **No hay criterio de throughput ni de disponibilidad, y es correcto que no lo haya**: este proyecto de código no atiende peticiones ni abre conexiones (`05` §8, cierre de la sección). Inventar un umbral de esos dos sería inventar un sujeto que no existe.
 

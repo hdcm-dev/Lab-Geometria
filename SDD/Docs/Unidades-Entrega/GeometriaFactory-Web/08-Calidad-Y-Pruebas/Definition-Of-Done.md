@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.6.P.8
+**Trazabilidad upstream:** [`Criterios-Validacion.md`](Criterios-Validacion.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5, que declara que la DoD vive acá; [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §5; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15 y §17.2.P.8 · GeometriaFactory-Web
 **Trazabilidad downstream:** [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md), que **referencia** esta DoD y no la redefine; `09-Devops`, que materializa sus criterios mecánicos como pasos del flujo de publicación
 
 ---
@@ -70,7 +70,7 @@ Cada criterio responde a «¿cómo se valida?» con una operación concreta.
 
 Se aplica cada vez que el flujo de publicación corre hacia el hosting público.
 
-- [ ] La construcción terminó **sin advertencias** y el bundle se generó **en el mismo flujo**. **Se valida** con el registro del flujo (intake §17.6.P.8).
+- [ ] La construcción terminó **sin advertencias** y el bundle se generó **en el mismo flujo**. **Se valida** con el registro del flujo (intake §17.2.P.8 · GeometriaFactory-Web).
 - [ ] La dirección del servicio de datos se inyectó desde los secretos y **la dirección real del servidor propio no quedó versionada**. **Se valida** por inspección del repositorio y del registro del flujo.
 - [ ] **El flujo no terminó en la subida: terminó comprobando que la dirección pública responde.** **Se valida** con el paso final del flujo. Es la única forma de que una subida no transaccional que deja la aplicación caída no se reporte como exitosa.
 - [ ] La etiqueta de la etapa existe y permite volver a cualquier demostración ya aprobada. **Se valida** con el registro de la etiqueta.
@@ -82,7 +82,7 @@ Se aplica cada vez que el flujo de publicación corre hacia el hosting público.
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
 | **`CV-13` no alcanzado** | **Nada.** No es condicionado: lo rotulado [ASUNCIÓN] es la **forma de la puerta**, y el intake §22 `A-4` deja a salvo su carácter bloqueante | El Product Owner, con constancia escrita, como en cualquier criterio bloqueante | La medición, su distancia al umbral y la remediación, en el informe de cierre |
-| Cobertura de líneas **no exigible** | El criterio `CV-30` se declara «no aplica» mientras no exista proyecto de pruebas propio | — | El fundamento del intake §17.6.P.6 |
+| Cobertura de líneas **no exigible** | El criterio `CV-30` se declara «no aplica» mientras no exista proyecto de pruebas propio | — | El fundamento del intake §17.2.P.6 · GeometriaFactory-Web |
 | Deriva **menor** | Se registra y **no bloquea** el cierre | — | La fila de la matriz, con su estado y su fecha |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva, con la etapa en que se cierra |
 | **Puerta técnica que no pasa** | **No se admite excepción.** El intake §15 declara que detiene la planificación de las etapas que dependen de ella y **no se arrastra como deuda**. Lo que se ejecuta es la salida que la puerta declara | El Product Owner decide la salida, no la excepción | La medición y la salida ejecutada |

@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-09), §4.1 (RN-06008, RN-06009), §11 (RN-B3), §17.3.P.3, §17.3.P.6, §17.3.P.11 puntos 1 y 2, §20.E-1 a §20.E-8 —con §20.E-8 «Qué verificar» punto 5, el desenlace del envío que fijó el intake 1.12— y §21; implementa el puerto de validación de figuras que declara `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3 y consume su [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md); alimenta [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) de GeometriaFactory-Domain
+**Trazabilidad upstream:** [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-09), §4.1 (RN-06008, RN-06009), §11 (RN-B3), §17.1.P.3 · GeometriaFactory-Infrastructure, §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure puntos 1 y 2, §20.E-1 a §20.E-8 —con §20.E-8 «Qué verificar» punto 5, el desenlace del envío que fijó el intake 1.12— y §21; implementa el puerto de validación de figuras que declara `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3 y consume su [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md); alimenta [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) de GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -35,7 +35,7 @@ Leer el texto que el alumno pegó tal como lo emite su programa, y devolver **cu
 
 Es la mitad de riesgo del producto. El intake lo declara sin rodeos en su §11: **el defecto que más veces se repite es escribir este validador sin leer el análisis**, porque el texto del alumno **no es JSON estrictamente válido** y un lector estricto lo rechaza entero (RN-B3). Por eso este contrato nace con las cuatro trampas del formato ya declaradas, y no las descubre después.
 
-Lo que este caso de uso **no** hace: no compara el valor declarado con el derivado —eso es `CU-06002`—, no decide el estado del trabajo —eso lo resuelve el dominio con el conjunto de observaciones que recibe—, no guarda nada y **no hace red** (`PRODUCT-INTAKE` §17.3.P.3).
+Lo que este caso de uso **no** hace: no compara el valor declarado con el derivado —eso es `CU-06002`—, no decide el estado del trabajo —eso lo resuelve el dominio con el conjunto de observaciones que recibe—, no guarda nada y **no hace red** (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Infrastructure).
 
 ## 2. Actores
 
@@ -49,7 +49,7 @@ El alumno es el sujeto de la regla: es quien escribió el texto. **No es actor**
 ## 3. Precondiciones
 
 - El consumidor aporta el **texto original** del trabajo, tal como el alumno lo pegó.
-- No hay ninguna otra precondición: este contrato **no consulta la base de datos, no abre conexiones y no lee configuración propia**. Es lo que permite ejercer las nueve pruebas obligatorias sin motor de persistencia (`PRODUCT-INTAKE` §14, §17.3.P.6).
+- No hay ninguna otra precondición: este contrato **no consulta la base de datos, no abre conexiones y no lee configuración propia**. Es lo que permite ejercer las nueve pruebas obligatorias sin motor de persistencia (`PRODUCT-INTAKE` §14, §17.1.P.6 · GeometriaFactory-Infrastructure).
 
 ## 4. Flujo principal
 
@@ -107,7 +107,7 @@ Los siete primeros y CA-12 son escenarios del intake, transcriptos por su identi
 | CA-08 | El texto de E-1 y un adaptador sin latencia añadida | Se interpreta | La interpretación completa resuelve en **menos de 200 ms**, medida sin acceso a base de datos. El valor está rotulado como asunción aguas arriba y se usa como vigente |
 | CA-09 | Un texto cualquiera de los escenarios anteriores | Se interpreta y se compara el texto devuelto con el recibido | Son **idénticos carácter por carácter**: este contrato no reescribe, no reordena y no normaliza el texto del alumno (RN-06008) |
 | CA-10 | Un texto que no se puede leer ni con tolerancia a comas finales | Se interpreta | Se devuelven **0 figuras, 0 piezas y 1 observación de error de validación**, y **no** el código `INTERPRETACION_NO_DISPONIBLE`: un texto ilegible es un resultado del producto, no una avería del adaptador |
-| CA-11 | Cualquiera de los textos anteriores, con la pestaña de red de un entorno de prueba observada | Se interpreta | **0 peticiones de red originadas por este contrato.** Recibe texto y devuelve observaciones (`PRODUCT-INTAKE` §17.3.P.3) |
+| CA-11 | Cualquiera de los textos anteriores, con la pestaña de red de un entorno de prueba observada | Se interpreta | **0 peticiones de red originadas por este contrato.** Recibe texto y devuelve observaciones (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Infrastructure) |
 | CA-12 | El texto del escenario **E-8**: un ortoedro válido en la posición 0 y un cubo en la posición 1 con `"Largo": "3,50"` y `"Ancho": "3,50"` como cadenas, porque el emisor escribe la coma decimal de su cultura | Se interpreta | Se devuelve cantidad de figuras del conjunto raíz **2**, **1 pieza reconstruida** —el ortoedro de la posición 0— y **1 observación de especie error de validación que indica posición 1 y campo `Largo`**. La posición 1 queda reservada. El código **no** es `JSON_INVALIDO`: el texto es JSON sintácticamente válido y lo que falla es la lectura de un valor. Por RN-06005 el trabajo **queda en `Borrador`** y no pasa a `Pendiente` (`PRODUCT-INTAKE` 1.12 §20.E-8 punto 5 y §21) |
 
 ## 9. Trazabilidad
@@ -125,7 +125,7 @@ Los siete primeros y CA-12 son escenarios del intake, transcriptos por su identi
 
 ## 10. Notas y supuestos
 
-- **Las cuatro trampas se declaran acá y no se descubren después.** T1, la clave sinónima del ortoedro; T2, las comas finales; T3, la cara del cubo con dos nombres; y T4, que los valores calculados erróneos **se señalan y no se rechazan**, que es de `CU-06002`. Las cuatro están en `PRODUCT-INTAKE` §17.3.P.11 punto 1 y ejercitadas por los escenarios de §20.
+- **Las cuatro trampas se declaran acá y no se descubren después.** T1, la clave sinónima del ortoedro; T2, las comas finales; T3, la cara del cubo con dos nombres; y T4, que los valores calculados erróneos **se señalan y no se rechazan**, que es de `CU-06002`. Las cuatro están en `PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Infrastructure punto 1 y ejercitadas por los escenarios de §20.
 - **La familia plana o volumétrica no viaja reconstruida como dato guardado**: se deriva del `Tipo`. Es decisión pre-tomada aguas arriba y su consecuencia sobre el almacén está en `RC-06004`.
 - **Una figura no reconstruida reserva su posición.** No se compacta el conjunto: si se compactara, la posición que la observación designa dejaría de coincidir con la figura que el alumno escribió, y RN-06009 dejaría de servirle para encontrarla.
 - **Un error de validación no es una condición de error de este contrato.** Es un resultado, es una entidad del dominio y es lo que el alumno tiene que ver. Confundirlos es el defecto que la §1.2 del catálogo de errores de la categoría 03 previene.

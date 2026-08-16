@@ -54,7 +54,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 7. Notas y supuestos
 
-**La contraseña llega ya derivada** y el dominio no ve valores en claro, no deriva y no compara credenciales por su cuenta (`05` §7, `PRODUCT-INTAKE` §17.1.P.5). Que la provisoria no sea adivinable y no se repita es `RN-02014`, y **su mecanismo vive en `GeometriaFactory-Infrastructure`**, no acá.
+**La contraseña llega ya derivada** y el dominio no ve valores en claro, no deriva y no compara credenciales por su cuenta (`05` §7, `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Domain). Que la provisoria no sea adivinable y no se repita es `RN-02014`, y **su mecanismo vive en `GeometriaFactory-Infrastructure`**, no acá.
 
 ## 8. Control de cambios
 

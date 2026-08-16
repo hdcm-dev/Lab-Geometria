@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web` y como el mecanismo de comprobación de
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.5.P.3 declara el punto de salud **consumido por la página de salud del front y por la comprobación del despliegue**, y `02` §11 registra que **la fuente declara su existencia pero no su ruta**. `PT-01.d`, que se mide en la etapa `a`, exige que **una llamada de salud devuelva datos reales del servidor propio**. El contrato de uso es [`CU-00011`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
+`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Api declara el punto de salud **consumido por la página de salud del front y por la comprobación del despliegue**, y `02` §11 registra que **la fuente declara su existencia pero no su ruta**. `PT-01.d`, que se mide en la etapa `a`, exige que **una llamada de salud devuelva datos reales del servidor propio**. El contrato de uso es [`CU-00011`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
 
 ## 3. Criterios de aceptación
 

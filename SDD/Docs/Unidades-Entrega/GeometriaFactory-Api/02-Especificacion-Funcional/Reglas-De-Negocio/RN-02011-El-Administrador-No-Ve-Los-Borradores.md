@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02011), §4 (F-12), §4.2 (tabla de quién puede qué en cada estado), §17.1.P.2 (las reglas sin invariante asociado), §6 (flujo 2.1); [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md) §5; [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02011), §4 (F-12), §4.2 (tabla de quién puede qué en cada estado), §17.1.P.2 · GeometriaFactory-Domain (las reglas sin invariante asociado), §6 (flujo 2.1); [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md) §5; [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -32,7 +32,7 @@ Un trabajo en estado `Borrador` está fuera del alcance del administrador: no fo
 
 `Borrador` significa exactamente que el texto todavía no verifica, o que el trabajo recién se creó: es material en curso del alumno y no una entrega (PRODUCT-INTAKE §4.2). Mostrarlo llenaría la revisión de la comisión con intentos a medio hacer y le quitaría sentido al listado, que existe para que el docente recorra la entrega de una sola vez (`NB-00007` §5). La regla es además la que hace coherente a RN-02004: el administrador elimina «cualquier trabajo que ve», y los borradores no lo son.
 
-**Esta regla no tiene invariante asociado**, y el intake lo declara explícitamente: es una regla de alcance de consulta y no una condición permanente sobre los datos (§17.1.P.2).
+**Esta regla no tiene invariante asociado**, y el intake lo declara explícitamente: es una regla de alcance de consulta y no una condición permanente sobre los datos (§17.1.P.2 · GeometriaFactory-Domain).
 
 ## 3. Ámbito de aplicación
 
@@ -57,4 +57,4 @@ Pruebas unitarias de dominio previstas en 08: el predicado de alcance devuelve f
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.0 | 2026-08-09 | Emisión inicial. Regla nueva del circuito de revisión que el Product Owner incorporó el 2026-08-08 y que `PRODUCT-INTAKE` 1.3 §4.1 declara. No existía en la fuente funcional original y no tiene invariante asociado, según §17.1.P.2. |
+| 1.0 | 2026-08-09 | Emisión inicial. Regla nueva del circuito de revisión que el Product Owner incorporó el 2026-08-08 y que `PRODUCT-INTAKE` 1.3 §4.1 declara. No existía en la fuente funcional original y no tiene invariante asociado, según §17.1.P.2 · GeometriaFactory-Domain. |

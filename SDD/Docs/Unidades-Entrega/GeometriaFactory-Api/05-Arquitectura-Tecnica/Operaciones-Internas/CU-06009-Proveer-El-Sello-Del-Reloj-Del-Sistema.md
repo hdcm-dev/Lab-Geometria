@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.2.P.11 punto 3 (el reloj es un puerto, para que las fechas de alta y de modificación sean verificables en prueba) y §17.3.P.4 (ampliación del 2026-08-09, sellos de tiempo del trabajo); implementa el puerto de reloj del sistema de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.11 · GeometriaFactory-Application punto 3 (el reloj es un puerto, para que las fechas de alta y de modificación sean verificables en prueba) y §17.1.P.4 · GeometriaFactory-Infrastructure (ampliación del 2026-08-09, sellos de tiempo del trabajo); implementa el puerto de reloj del sistema de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -89,7 +89,7 @@ Es también el motivo por el que **no aparece en el catálogo de condiciones de 
 
 ## 10. Notas y supuestos
 
-- **Los tres sellos —alta, modificación y desenlace— son metadatos de orquestación de la capa de aplicación**, no atributos que el modelo del dominio declare. La discrepancia está elevada al Product Owner por `GeometriaFactory-Domain` y esta categoría **no la reabre**. Lo que sí quedó resuelto aguas arriba son los **dos sellos del trabajo** —creación y última modificación—, que el intake incorpora al modelo de datos en su §17.3.P.4 con rótulo de decisión del Product Owner, y que `RC-06006` recoge.
+- **Los tres sellos —alta, modificación y desenlace— son metadatos de orquestación de la capa de aplicación**, no atributos que el modelo del dominio declare. La discrepancia está elevada al Product Owner por `GeometriaFactory-Domain` y esta categoría **no la reabre**. Lo que sí quedó resuelto aguas arriba son los **dos sellos del trabajo** —creación y última modificación—, que el intake incorpora al modelo de datos en su §17.1.P.4 · GeometriaFactory-Infrastructure con rótulo de decisión del Product Owner, y que `RC-06006` recoge.
 - **La zona horaria y la precisión del sello no están declaradas por ninguna fuente** y son de `05-Arquitectura-Tecnica`. Esta categoría no las fija y las anota como punto abierto.
 - **El `JSON` del alumno no lleva fechas y no se le agrega ninguna.** Los sellos viven en la fila del trabajo, nunca dentro del texto conservado.
 - **Que este contrato sea trivial es la prueba de que la inversión está bien hecha.** Si alguna vez tuviera lógica —redondeos, zonas, cachés—, sería señal de que una decisión del consumidor se filtró acá.

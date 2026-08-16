@@ -29,7 +29,7 @@
 
 **Qué cubre.** Los **treinta y cinco** casos de prueba de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), repartidos entre las **cinco** etapas del producto que este proyecto de código toca —`a`, `c`, `d`, `e` y `f`—, que son las que [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2 declara como sus épicas.
 
-**Qué no cubre, y dónde se cubre.** Las entidades, los invariantes y las máquinas de estado, en `GeometriaFactory-Domain`; la orquestación, la autorización y el alcance transaccional declarado, en `GeometriaFactory-Application`; **la persistencia real ejercida por la superficie del producto**, en `GeometriaFactory-Api`, que es donde el intake §17.3.P.6 ubica la batería de integración; las superficies y el dibujo, en `GeometriaFactory-Web` y `GeometriaFactory-Visor`.
+**Qué no cubre, y dónde se cubre.** Las entidades, los invariantes y las máquinas de estado, en `GeometriaFactory-Domain`; la orquestación, la autorización y el alcance transaccional declarado, en `GeometriaFactory-Application`; **la persistencia real ejercida por la superficie del producto**, en `GeometriaFactory-Api`, que es donde el intake §17.1.P.6 · GeometriaFactory-Infrastructure ubica la batería de integración; las superficies y el dibujo, en `GeometriaFactory-Web` y `GeometriaFactory-Visor`.
 
 **La unidad de planificación es la etapa y no el sprint.** El intake declara «sin plazo calendario; el avance se mide por etapas cerradas». Por eso §5 se titula «Plan por etapa» y **ninguna de sus filas lleva una fecha ni una duración**.
 
@@ -104,7 +104,7 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 | Datos | Los **ocho** textos literales de los escenarios del intake §20 y los cuatro fixtures de [`Estrategia-Testing.md`](Estrategia-Testing.md) §5. **Ningún texto de figuras se escribe a mano** |
 | Secretos de prueba | Una clave de firma **evidentemente ficticia**, provista por configuración de prueba, y la posibilidad de **no proveerla**, que es lo que `TC-06030` necesita |
 | Herramientas | Las de [`Estrategia-Testing.md`](Estrategia-Testing.md) §3, nombradas por función. Su elección concreta es de la etapa `a`, con la función de derivación de clave como punto abierto propio |
-| Guiones | `scripts/build.sh`, `scripts/test.sh` y el guion de reposición del almacén al estado de primer arranque, que el intake §17.3.P.8 declara como mecanismo de reversión |
+| Guiones | `scripts/build.sh`, `scripts/test.sh` y el guion de reposición del almacén al estado de primer arranque, que el intake §17.1.P.8 · GeometriaFactory-Infrastructure declara como mecanismo de reversión |
 
 ## 7. Control de cambios
 

@@ -12,13 +12,13 @@
 
 ## 1. Contexto
 
-Una superficie de servicio expuesta normalmente versiona sus rutas, porque tiene clientes que no controla. **Ésta no tiene ninguno.** El intake lo declara sin ambigüedad: el único consumidor es `GeometriaFactory-Web`, servidor a servidor, el navegador nunca la alcanza (`RA-01`), y **no hay versionado de rutas porque no hay clientes de terceros** (§17.5.P.3).
+Una superficie de servicio expuesta normalmente versiona sus rutas, porque tiene clientes que no controla. **Ésta no tiene ninguno.** El intake lo declara sin ambigüedad: el único consumidor es `GeometriaFactory-Web`, servidor a servidor, el navegador nunca la alcanza (`RA-01`), y **no hay versionado de rutas porque no hay clientes de terceros** (§17.1.P.3 · GeometriaFactory-Api).
 
 Lo que sostiene esa ausencia es una propiedad de composición: los dos extremos **compilan contra el mismo ensamblado de tipos de transferencia**, de modo que un cambio incompatible **rompe la compilación antes de romper el tiempo de ejecución**. Es toda la red que este producto tiene, y `GeometriaFactory-Contracts` la declaró como su política: «los dos extremos se despliegan juntos ante un cambio de contrato».
 
 Lo que esta ADR tiene que dejar dicho es **qué reemplaza al versionado**, porque una ausencia sin sustituto es un pendiente y no una decisión. Y hay un punto donde la red no alcanza y conviene nombrarlo: **la configuración de intercambio no rompe ninguna compilación** —por eso [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) la fija de un solo lado— y **el esquema del almacén tampoco se recompila**, porque sobrevive al despliegue.
 
-Motivación upstream: NB-00008; `PRODUCT-INTAKE` §9 (X-9), §14 (RA-01), §17.4.P.3, §17.5.P.3, §17.5.P.7, §17.5.P.8.
+Motivación upstream: NB-00008; `PRODUCT-INTAKE` §9 (X-9), §14 (RA-01), §17.1.P.3 · GeometriaFactory-Contracts, §17.1.P.3 · GeometriaFactory-Api, §17.1.P.7 · GeometriaFactory-Api, §17.1.P.8 · GeometriaFactory-Api.
 
 ## 2. Decisión
 
@@ -41,7 +41,7 @@ Motivación upstream: NB-00008; `PRODUCT-INTAKE` §9 (X-9), §14 (RA-01), §17.4
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Sin versionado de rutas, con despliegue conjunto y tres mecanismos para lo que la compilación no detecta (**adoptada**) | Ninguna superficie duplicada que mantener; el fallo de contrato aparece en la construcción, que es lo más temprano posible; los tres huecos de la red están nombrados y cubiertos | Obliga a desplegar dos piezas juntas, con la ventana de indisponibilidad de la que ya está en el servidor propio |
-| Versionado de rutas con prefijo | Permitiría desplegar los dos extremos en orden distinto y convivir dos versiones | **Descartada por el intake §17.5.P.3**: no hay clientes de terceros. Duplicaría la superficie que hay que proteger con la guardia, que es exactamente donde este proyecto de código tiene su defecto característico |
+| Versionado de rutas con prefijo | Permitiría desplegar los dos extremos en orden distinto y convivir dos versiones | **Descartada por el intake §17.1.P.3 · GeometriaFactory-Api**: no hay clientes de terceros. Duplicaría la superficie que hay que proteger con la guardia, que es exactamente donde este proyecto de código tiene su defecto característico |
 | Versionado por negociación de contenido | No ensucia las rutas | **Descartada** por lo mismo, y con el agravante de que la elección de versión pasaría a ser una configuración del cliente, que es la clase de cosa que **no rompe ninguna compilación** |
 | Despliegue independiente de las dos piezas, con tolerancia en la lectura | El front y el servicio se despliegan cuando cada uno esté listo | **Descartada.** La tolerancia en la lectura convierte un desajuste de versión en un dato perdido en silencio, que es lo que [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) descartó por escrito |
 | Implementar la pasarela de reenvío ahora | Dejaría el camino listo si algún día el navegador necesita el backend | **Descartada por el intake §9 X-9**: está especificada y no implementada, y su condición de reingreso está declarada |
@@ -81,7 +81,7 @@ Motivación upstream: NB-00008; `PRODUCT-INTAKE` §9 (X-9), §14 (RA-01), §17.4
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §9 (X-9), §14 (RA-01), §16.1, §17.4.P.3, §17.5.P.3, §17.5.P.7 y §17.5.P.8.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §9 (X-9), §14 (RA-01), §16.1, §17.1.P.3 · GeometriaFactory-Contracts, §17.1.P.3 · GeometriaFactory-Api, §17.1.P.7 · GeometriaFactory-Api y §17.1.P.8 · GeometriaFactory-Api.
 - [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §7, que declara las siete ausencias de la superficie con lo que las repone.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md`](../../10-Examples/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md).
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md`](../../../../Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md), que es la política que esta ADR aplica en la frontera.

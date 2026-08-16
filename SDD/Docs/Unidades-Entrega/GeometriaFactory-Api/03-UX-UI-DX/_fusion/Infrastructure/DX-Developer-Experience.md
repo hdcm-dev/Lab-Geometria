@@ -162,7 +162,7 @@ Los pasos son ejecutables a partir de la primera etapa, que es la que crea el an
 
 - Se ejecuta a mano, sobre un clon limpio, en el punto de control de cada etapa que toque este proyecto de código.
 - Si un paso deja de valer, el documento sube versión en la misma operación y declara el motivo en su control de cambios.
-- Los nombres de los guiones y las rutas salen del intake §16 y §17.3.P.6, y no se inventan acá.
+- Los nombres de los guiones y las rutas salen del intake §16 y §17.1.P.6 · GeometriaFactory-Infrastructure, y no se inventan acá.
 
 ## 4. Diátaxis
 

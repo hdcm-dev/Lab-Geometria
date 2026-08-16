@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00008`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.3.P.4, §17.3.P.7, §17.3.P.8, §17.3.P.11 punto 3, §17.5.P.4, §17.5.P.8 y §17.5.P.10 (el arranque en frío de CA-07, rotulado asunción allá); el arranque que lo invoca es responsabilidad declarada de `GeometriaFactory-Api`
+**Trazabilidad upstream:** [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00008`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.7 · GeometriaFactory-Infrastructure, §17.1.P.8 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure punto 3, §17.1.P.4 · GeometriaFactory-Api, §17.1.P.8 · GeometriaFactory-Api y §17.1.P.10 · GeometriaFactory-Api (el arranque en frío de CA-07, rotulado asunción allá); el arranque que lo invoca es responsabilidad declarada de `GeometriaFactory-Api`
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Infrastructure
 
 ---

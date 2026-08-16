@@ -12,13 +12,13 @@
 
 ## 1. Contexto
 
-`PRODUCT-INTAKE` §17.1.P.7 declara versionado semántico y convenciones de mensaje de confirmación **sin excepciones**, que la versión la calcula una herramienta que se ancla en la etapa `a`, que la biblioteca **no se publica en ningún repositorio de paquetes** y que el modelo de ramas es una rama por etapa con etiqueta al fusionar. `redistribuible` es false (`PRODUCT-MANIFEST` §2).
+`PRODUCT-INTAKE` §17.1.P.7 · GeometriaFactory-Domain declara versionado semántico y convenciones de mensaje de confirmación **sin excepciones**, que la versión la calcula una herramienta que se ancla en la etapa `a`, que la biblioteca **no se publica en ningún repositorio de paquetes** y que el modelo de ramas es una rama por etapa con etiqueta al fusionar. `redistribuible` es false (`PRODUCT-MANIFEST` §2).
 
-La tensión que hay que resolver es que un versionado semántico sin publicación puede leerse como un trámite vacío: si nadie consume el paquete por su versión, la pregunta es qué gobierna esa versión. Y la hay: los dos consumidores del dominio —`GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`— compilan contra él, y el producto declara que un cambio incompatible sube major en el registro de cambios del producto aunque no se publique en ningún feed (`PRODUCT-INTAKE` §17.4.P.7, dicho allá para el ensamblado de contratos y aplicable por analogía declarada acá).
+La tensión que hay que resolver es que un versionado semántico sin publicación puede leerse como un trámite vacío: si nadie consume el paquete por su versión, la pregunta es qué gobierna esa versión. Y la hay: los dos consumidores del dominio —`GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`— compilan contra él, y el producto declara que un cambio incompatible sube major en el registro de cambios del producto aunque no se publique en ningún feed (`PRODUCT-INTAKE` §17.1.P.7 · GeometriaFactory-Contracts, dicho allá para el ensamblado de contratos y aplicable por analogía declarada acá).
 
-Además hay una asimetría propia: el intake deja **abiertos los nombres de tipos y de espacios de nombres** hasta el punto de control de la etapa `a` (§17.1.P.11). Antes de ese punto no hay superficie estable que versionar.
+Además hay una asimetría propia: el intake deja **abiertos los nombres de tipos y de espacios de nombres** hasta el punto de control de la etapa `a` (§17.1.P.11 · GeometriaFactory-Domain). Antes de ese punto no hay superficie estable que versionar.
 
-Motivación upstream: `PRODUCT-INTAKE` §17.1.P.7, §17.1.P.8, §17.1.P.11 y §15 (puntos de control y ramas por etapa).
+Motivación upstream: `PRODUCT-INTAKE` §17.1.P.7 · GeometriaFactory-Domain, §17.1.P.8 · GeometriaFactory-Domain, §17.1.P.11 · GeometriaFactory-Domain y §15 (puntos de control y ramas por etapa).
 
 ## 2. Decisión
 
@@ -42,7 +42,7 @@ La superficie pública **empieza a ser estable en el punto de control de la etap
 ## 5. Consecuencias positivas
 
 1. Un cambio incompatible del dominio queda declarado como tal antes de que lo descubra la compilación de un consumidor.
-2. Las etiquetas por etapa permiten volver a cualquier demostración ya aprobada, que es la política de reversión que el intake declara (§17.1.P.8).
+2. Las etiquetas por etapa permiten volver a cualquier demostración ya aprobada, que es la política de reversión que el intake declara (§17.1.P.8 · GeometriaFactory-Domain).
 3. El criterio de §7 hace verificable, y no opinable, qué sube major.
 
 ## 6. Consecuencias negativas y trade-offs
@@ -61,7 +61,7 @@ Qué constituye cada clase de cambio en este proyecto de código:
 | **Menor** | Agregar un tipo, una operación o un atributo opcional; **agregar un valor a un conjunto cerrado**, que obliga al consumidor a contemplarlo pero no rompe su compilación; agregar una condición de error al catálogo |
 | **Parche** | Corregir el comportamiento de una guarda para que cumpla el invariante que ya declaraba, sin cambiar la superficie |
 
-- Una rama por etapa a partir de la principal, con etiqueta al fusionar (`PRODUCT-INTAKE` §17.1.P.7).
+- Una rama por etapa a partir de la principal, con etiqueta al fusionar (`PRODUCT-INTAKE` §17.1.P.7 · GeometriaFactory-Domain).
 - El registro de cambios del producto recibe la fila de todo cambio mayor de este proyecto de código.
 - **Los ADR de esta sección no se versionan en su archivo**: una decisión que evoluciona se registra en una ADR nueva y la anterior pasa a `Superado por ADR-YY`.
 
@@ -76,7 +76,7 @@ Qué constituye cada clase de cambio en este proyecto de código:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.7, §17.1.P.8, §17.1.P.11, §17.4.P.7 y §15.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.7 · GeometriaFactory-Domain, §17.1.P.8 · GeometriaFactory-Domain, §17.1.P.11 · GeometriaFactory-Domain, §17.1.P.7 · GeometriaFactory-Contracts y §15.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §2.
 - [`../Contratos-Abstractions.md`](../Contratos-Abstractions.md) §6, que aplica este criterio a cada elemento del contrato.
 - ADR relacionadas: [`ADR-02001`](ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md), [`ADR-02002`](ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md).

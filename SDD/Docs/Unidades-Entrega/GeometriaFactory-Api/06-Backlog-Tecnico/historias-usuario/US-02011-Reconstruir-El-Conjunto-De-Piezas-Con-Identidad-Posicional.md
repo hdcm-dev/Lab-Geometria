@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.1.P.11 punto 2 declara que la identidad de la pieza es su posición en el conjunto raíz, porque el texto no trae identificador. Es lo que este proyecto de código aporta a `NB-00006`, de forma parcial: el dibujo, el árbol y la sincronización son de `GeometriaFactory-Visor` y de `GeometriaFactory-Web` ([`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §5.2).
+`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain punto 2 declara que la identidad de la pieza es su posición en el conjunto raíz, porque el texto no trae identificador. Es lo que este proyecto de código aporta a `NB-00006`, de forma parcial: el dibujo, el árbol y la sincronización son de `GeometriaFactory-Visor` y de `GeometriaFactory-Web` ([`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §5.2).
 
 ## 3. Criterios de aceptación
 

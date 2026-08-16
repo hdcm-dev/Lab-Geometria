@@ -16,7 +16,7 @@ El intake declara, en su registro de riesgos de negocio, que **el defecto que m�
 
 La categoría 02 ya escribió esa mitigación como contrato: **cuatro trampas del formato** `T1` a `T4`, **siete garantías** `G-1` a `G-7`, los **ocho** escenarios y la cobertura de la batería. Lo que dejó abierto y derivó explícitamente a esta categoría es una cosa concreta: **de dónde sale el valor derivado del área de una pieza volumétrica**. El intake la muestra dos veces como **suma de los componentes** —el cilindro de `E-1` y el ortoedro de `E-2`— y una vez como **fórmula** —el cubo de `E-3`—, y las dos formas **coinciden** en ese cubo. No hay contradicción declarada, pero tampoco hay una regla enunciada, y `CU-06002` §10 adoptó la suma de componentes dejando dicho que la tabla por tipo la fija esta categoría.
 
-Motivación upstream: NB-00004, NB-00005, NB-00006; RN-06005, RN-06008, RN-06009; INV-04; `PRODUCT-INTAKE` §11 (RN-B3), §17.3.P.3, §17.3.P.10, §17.3.P.11 punto 1, §20 y §21.
+Motivación upstream: NB-00004, NB-00005, NB-00006; RN-06005, RN-06008, RN-06009; INV-04; `PRODUCT-INTAKE` §11 (RN-B3), §17.1.P.3 · GeometriaFactory-Infrastructure, §17.1.P.10 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure punto 1, §20 y §21.
 
 ## 2. Decisión
 
@@ -85,7 +85,7 @@ Motivación upstream: NB-00004, NB-00005, NB-00006; RN-06005, RN-06008, RN-06009
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §11 (RN-B3), §17.3.P.3, §17.3.P.10, §17.3.P.11 punto 1, §20 (los ocho escenarios) y §21 (matriz de cobertura).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §11 (RN-B3), §17.1.P.3 · GeometriaFactory-Infrastructure, §17.1.P.10 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure punto 1, §20 (los ocho escenarios) y §21 (matriz de cobertura).
 - [`../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md) completo, y en particular §2, §4, §6, §7 y §9.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md`](../Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) §10, que adopta la suma de componentes y deriva la tabla a esta categoría.
 - ADR relacionadas: [`ADR-06001`](ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md), [`ADR-06002`](ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md).

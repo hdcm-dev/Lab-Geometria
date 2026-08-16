@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9, §9.1, §9.2 y §9.3 (glosario raíz de la cadena); `02-Especificacion-Funcional/Glosario-Funcional.md` §2, §3 y §4; `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2.5, §4 y §7; §6 de CU-02001 a CU-02012; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.2, §12.1, §17.1.P.1, §17.1.P.3, §17.1.P.5; `Vocabulario-Rules.md` §2, §4 y §9
+**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9, §9.1, §9.2 y §9.3 (glosario raíz de la cadena); `02-Especificacion-Funcional/Glosario-Funcional.md` §2, §3 y §4; `02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md` §2.5, §4 y §7; §6 de CU-02001 a CU-02012; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.2, §12.1, §17.1.P.1 · GeometriaFactory-Domain, §17.1.P.3 · GeometriaFactory-Domain, §17.1.P.5 · GeometriaFactory-Domain; `Vocabulario-Rules.md` §2, §4 y §9
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Domain
 
 ---

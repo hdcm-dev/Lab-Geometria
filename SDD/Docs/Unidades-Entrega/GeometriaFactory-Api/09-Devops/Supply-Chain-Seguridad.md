@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-12
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) 1.0; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §1, §2 y §3; [`../../GeometriaFactory-Infrastructure/09-Devops/Supply-Chain-Seguridad.md`](_fusion/Infrastructure/Supply-Chain-Seguridad.md) 1.0 §1 y §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §11, §13, §14, §17.5.P.1, §17.5.P.5, §17.5.P.7, §17.5.P.9 y §17.5.P.10
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) 1.0; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §1, §2 y §3; [`../../GeometriaFactory-Infrastructure/09-Devops/Supply-Chain-Seguridad.md`](_fusion/Infrastructure/Supply-Chain-Seguridad.md) 1.0 §1 y §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §11, §13, §14, §17.1.P.1 · GeometriaFactory-Api, §17.1.P.5 · GeometriaFactory-Api, §17.1.P.7 · GeometriaFactory-Api, §17.1.P.9 · GeometriaFactory-Api y §17.1.P.10 · GeometriaFactory-Api
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -37,9 +37,9 @@
 | Qué entra a la imagen | De dónde viene | Quién lo ancla |
 | --- | --- | --- |
 | El entorno de ejecución de la plataforma, **sin kit de desarrollo ni depurador** | La imagen base de ejecución, **sin linaje con la del contenedor de desarrollo** | Esta categoría, en el archivo de construcción; la versión se ancla en la etapa `a` |
-| Las dependencias core de este proyecto de código, incluida la de **acceso firmado** | Intake §17.5.P.1 | El equipo, en la etapa `a` |
-| **Las dependencias externas de `GeometriaFactory-Infrastructure`**, que son **tres** y de las cuales **dos son sensibles** | Intake §17.3.P.1 | `GeometriaFactory-Infrastructure`; ver [`../../GeometriaFactory-Infrastructure/09-Devops/Supply-Chain-Seguridad.md`](_fusion/Infrastructure/Supply-Chain-Seguridad.md) §1 |
-| `GeometriaFactory-Application`, `GeometriaFactory-Domain` y `GeometriaFactory-Contracts`, **sin dependencias externas propias** | Intake §17.2.P.1, §17.1.P.1 y §17.4.P.1 | — |
+| Las dependencias core de este proyecto de código, incluida la de **acceso firmado** | Intake §17.1.P.1 · GeometriaFactory-Api | El equipo, en la etapa `a` |
+| **Las dependencias externas de `GeometriaFactory-Infrastructure`**, que son **tres** y de las cuales **dos son sensibles** | Intake §17.1.P.1 · GeometriaFactory-Infrastructure | `GeometriaFactory-Infrastructure`; ver [`../../GeometriaFactory-Infrastructure/09-Devops/Supply-Chain-Seguridad.md`](_fusion/Infrastructure/Supply-Chain-Seguridad.md) §1 |
+| `GeometriaFactory-Application`, `GeometriaFactory-Domain` y `GeometriaFactory-Contracts`, **sin dependencias externas propias** | Intake §17.1.P.1 · GeometriaFactory-Application, §17.1.P.1 · GeometriaFactory-Domain y §17.1.P.1 · GeometriaFactory-Contracts | — |
 | El **bundle del visor** | **No entra.** Viaja en la otra unidad desplegable | Intake §13 |
 
 **La tercera fila es la que obliga a que el inventario se tome sobre la imagen y no sobre el archivo de proyecto de este proyecto de código.** La mayor parte de las dependencias externas que llegan al servidor propio **no las declara este proyecto de código**: las trae `GeometriaFactory-Infrastructure`, y dos de ellas son las piezas más sensibles del producto. Un inventario tomado sobre la superficie propia describiría lo que menos riesgo tiene.
@@ -59,10 +59,10 @@
 
 | Requisito | Estado | Motivo |
 | --- | --- | --- |
-| Firma de la imagen | **No cumplido, y además no tendría objeto en este canal.** El intake §17.5.P.7 declara que **la imagen no se publica en ningún registro**: se construye en destino. **No hay artefacto en tránsito que firmar**, porque lo que viaja es el código fuente desde el repositorio | Intake §17.5.P.7 |
+| Firma de la imagen | **No cumplido, y además no tendría objeto en este canal.** El intake §17.1.P.7 · GeometriaFactory-Api declara que **la imagen no se publica en ningún registro**: se construye en destino. **No hay artefacto en tránsito que firmar**, porque lo que viaja es el código fuente desde el repositorio | Intake §17.1.P.7 · GeometriaFactory-Api |
 | Registro público de transparencia | **No cumplido** | Lo mismo, y además exigiría infraestructura que el intake §10 no financia |
 | Integridad de lo que sí viaja | **Parcialmente cumplido, y es lo que corresponde mirar acá.** Lo que llega al destino es **una etiqueta del repositorio**, y su integridad es la del propio repositorio | `05` §5; [`Estrategia-Versionado.md`](Estrategia-Versionado.md) §4 |
-| Integridad del origen | **Cumplido**: etiqueta por etapa cerrada, y reversión apoyada en ella | Intake §17.5.P.7 |
+| Integridad del origen | **Cumplido**: etiqueta por etapa cerrada, y reversión apoyada en ella | Intake §17.1.P.7 · GeometriaFactory-Api |
 
 **El desplazamiento que este canal produce, dicho sin suavizar.** En un modelo con registro, la firma protegería la imagen entre quien la construye y quien la corre. Acá **quien la construye es quien la corre**, de modo que la pregunta de confianza se desplaza al eslabón anterior: **que lo que el destino trae del repositorio sea lo que la etapa cerró**. Lo que hoy sostiene eso es la etiqueta y el control de acceso del propio repositorio, y **no hay una comprobación criptográfica declarada**. Es la brecha, y queda escrita.
 
@@ -94,7 +94,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Configuración de intercambio declarada en el producto | **1** sola | `QG-10`, con `TC-00029`, en el stage `build` | **Bloqueante** |
 | Actualización automática de dependencias | **No se declara ninguna.** Contradiría la regla de anclaje, y acá además haría divergir la imagen verificada de la desplegada | — | — |
 
-**La segunda fila es un control de superficie de ataque escrito como control de empaquetado.** Una imagen que llevara el kit de desarrollo al servidor domiciliario multiplicaría lo que un acceso indebido puede hacer ahí, y el intake §17.5.P.9 lo prohíbe con esas palabras. La Definition of Done §1.4 lo verifica **por inspección del archivo de construcción**, que es donde se ve el linaje.
+**La segunda fila es un control de superficie de ataque escrito como control de empaquetado.** Una imagen que llevara el kit de desarrollo al servidor domiciliario multiplicaría lo que un acceso indebido puede hacer ahí, y el intake §17.1.P.9 · GeometriaFactory-Api lo prohíbe con esas palabras. La Definition of Done §1.4 lo verifica **por inspección del archivo de construcción**, que es donde se ve el linaje.
 
 **La quinta fila tiene acá un motivo extra respecto del resto del producto.** En las bibliotecas, una actualización automática rompería la regla de anclaje; acá, además, **haría que la imagen desplegada dejara de corresponder a la verificada**, que es la brecha declarada en §3.
 
@@ -102,11 +102,11 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**» | Intake §17.5.P.8; `QG-01` |
+| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**» | Intake §17.1.P.8 · GeometriaFactory-Api; `QG-01` |
 | Estático de superficie | **Existe, bloquea y es la verificación característica de este proyecto de código**: `QG-05` sobre los **quince** puntos en las dos direcciones, `QG-06` sobre los **diecisiete** códigos del contrato, `QG-08` sobre las respuestas y el registro del servidor, y `QG-10` sobre la composición de raíz | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
-| **Dinámico** | **Existe, y es el más completo del producto**: la batería de integración **golpea la superficie real por su protocolo contra el almacén real**, y `QG-12` exige verificar **forzando la petición** y no por la interfaz | Intake §17.5.P.6; `Estrategia-Calidad.md` §1 |
+| **Dinámico** | **Existe, y es el más completo del producto**: la batería de integración **golpea la superficie real por su protocolo contra el almacén real**, y `QG-12` exige verificar **forzando la petición** y no por la interfaz | Intake §17.1.P.6 · GeometriaFactory-Api; `Estrategia-Calidad.md` §1 |
 | Dinámico sobre el artefacto empaquetado | **Existe**: el stage `imagen` arranca la imagen, aplica las transformaciones sobre un almacén vacío y comprueba salud | `PT-04`; `QG-13` |
-| Detección de secretos en las confirmaciones | **Recomendada, y acá con el sujeto más sensible**: el intake §17.5.P.5 declara que la clave de firma va **como secreto del repositorio, nunca en el archivo del flujo de trabajo** | [`Entornos-Deploy.md`](Entornos-Deploy.md) §6 |
+| Detección de secretos en las confirmaciones | **Recomendada, y acá con el sujeto más sensible**: el intake §17.1.P.5 · GeometriaFactory-Api declara que la clave de firma va **como secreto del repositorio, nunca en el archivo del flujo de trabajo** | [`Entornos-Deploy.md`](Entornos-Deploy.md) §6 |
 
 **La tercera fila es la que hace de este proyecto de código el que más superficie verifica del producto, y `QG-12` es su caso extremo.** `Estrategia-Calidad.md` §3 lo declara: es **el único criterio de verificación del producto que la fuente exige ejercer forzando la petición**, y no mirando una pantalla. Desde la cadena de suministro, la lectura es que **la comprobación de que un control existe no puede hacerse sobre el cliente que respeta el control**.
 
@@ -117,14 +117,14 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Vulnerabilidad sobre una de las **dos bibliotecas sensibles** que embebe —derivación de clave o emisión de acceso firmado— | Se ancla la versión corregida en `GeometriaFactory-Infrastructure` y **se despliega esta unidad**: es la única forma de que la corrección llegue al servidor. Los accesos vigentes caducan solos, porque la vigencia es **corta** y **no hay acceso de refresco** | El equipo ancla; el Product Owner despliega |
 | Vulnerabilidad sobre la **imagen base de ejecución** | Se ancla la versión corregida en el archivo de construcción y se vuelve a desplegar. **La reconstrucción en destino la trae**, y ése es el único caso donde ese canal juega a favor | El equipo, con constancia |
 | Vulnerabilidad sobre el **entorno del servidor propio**, fuera de la imagen | **Fuera del alcance de esta cadena.** Es la máquina del Product Owner | El Product Owner |
-| Exposición de la **clave de firma** | Se rota el valor en el ambiente y se reinicia el servicio. **El valor no está en el repositorio ni en la imagen**, de modo que la rotación no exige reconstruir | Intake §17.5.P.5 |
+| Exposición de la **clave de firma** | Se rota el valor en el ambiente y se reinicia el servicio. **El valor no está en el repositorio ni en la imagen**, de modo que la rotación no exige reconstruir | Intake §17.1.P.5 · GeometriaFactory-Api |
 | Exposición de la **dirección del servidor propio** | Se revisa por dónde se filtró: `QG-08` mide **0** respuestas que la expongan, sobre los **quince** puntos **y** sobre el registro del servidor. Es `RA-03`, y `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 lo ubica **en el último tramo antes de salir del servidor propio** | El equipo, con constancia |
 
 **No se declara ningún acuerdo de nivel de servicio de remediación en horas o días.** El intake §10 declara «sin plazo; el avance se mide por etapas cerradas». El mecanismo que reemplaza al plazo es el **punto de control bloqueante** de la etapa en curso.
 
 **Comunicación a integradores: no aplica.** No hay integradores externos y el intake §10 declara que **ninguna normativa de compliance aplica**.
 
-**Y dos riesgos aceptados por escrito que esta categoría transcribe y no reabre.** El intake §17.5.P.5 declara que **el tramo entre el front y este servicio viaja en claro si ese salto es HTTP plano**, con el túnel saliente como salida **documentada y no adoptada**; y registra la **nota de seguridad sobre el flujo de credenciales**, aceptado porque el intermediario es el propio front del mismo sistema, el tramo hacia el navegador es seguro y el alcance es un laboratorio de aula. Las dos son decisiones del Product Owner registradas aguas arriba.
+**Y dos riesgos aceptados por escrito que esta categoría transcribe y no reabre.** El intake §17.1.P.5 · GeometriaFactory-Api declara que **el tramo entre el front y este servicio viaja en claro si ese salto es HTTP plano**, con el túnel saliente como salida **documentada y no adoptada**; y registra la **nota de seguridad sobre el flujo de credenciales**, aceptado porque el intermediario es el propio front del mismo sistema, el tramo hacia el navegador es seguro y el alcance es un laboratorio de aula. Las dos son decisiones del Product Owner registradas aguas arriba.
 
 ## 7. La superficie expuesta como preocupación de cadena de suministro
 

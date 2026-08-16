@@ -18,7 +18,7 @@ Hay un antecedente que pesa y que viene del nivel 0. [`Domain ADR-02005`](ADR-02
 
 El orden importa por dos motivos distintos, y conviene no confundirlos. El primero es de corrección: `INV-09` enuncia que una cuenta con la marca puesta no ejerce **ninguna** capacidad, ni siquiera las que su papel y su pertenencia admitirían, de modo que comprobar la marca después de la pertenencia devolvería la negativa equivocada. El segundo es de filtración: la negativa por pertenencia oculta la existencia del recurso y la negativa por facultad no tiene nada que ocultar, así que ejercerlas en el orden equivocado permitiría averiguar por tanteo qué identificadores existen.
 
-Motivación upstream: NB-00001, NB-00002, NB-00003, NB-00007, NB-00009; RN-04001, RN-04003, RN-04006, RN-04010, RN-04011, RN-04013, RN-04015, RN-04016; INV-02, INV-03, INV-06, INV-07, INV-09; `PRODUCT-INTAKE` §17.2.P.5 y §17.1.P.2.
+Motivación upstream: NB-00001, NB-00002, NB-00003, NB-00007, NB-00009; RN-04001, RN-04003, RN-04006, RN-04010, RN-04011, RN-04013, RN-04015, RN-04016; INV-02, INV-03, INV-06, INV-07, INV-09; `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Application y §17.1.P.2 · GeometriaFactory-Domain.
 
 ## 2. Decisión
 
@@ -43,7 +43,7 @@ Además: **la negativa por pertenencia y la negativa por facultad no se colapsan
 | --- | --- | --- |
 | Orden fijo en un único componente (**adoptada**) | Cierra la dependencia de disciplina que el nivel 0 declaró que no podía cerrar; un solo lugar que auditar; el invariante se verifica con una prueba por comprobación y una por el orden | Depende de que ningún orquestador se saltee la guarda, y eso no lo garantiza el compilador |
 | Las cuatro comprobaciones repartidas en cada orquestador | No hay componente transversal que recordar; cada caso de uso se lee entero | **Once** lugares que mantener sincronizados. Es la misma forma en que se abrieron el P0 y el P1 del nivel 0, con la diferencia de que allá eran cuatro operaciones y acá serían once |
-| Comprobaciones en la capa que expone, con esta capa confiando en lo ya verificado | La capa que expone tiene la petición entera y podría cortar antes, sin recuperar el dato | La autorización por pertenencia dejaría de ser verificable sin infraestructura, que es la propiedad que `PRODUCT-INTAKE` §17.2.P.5 y §17.2.P.6 exigen. Además el front **no puede ser la última defensa de ninguna regla**, y quien atiende la petición tampoco tiene la entidad recuperada |
+| Comprobaciones en la capa que expone, con esta capa confiando en lo ya verificado | La capa que expone tiene la petición entera y podría cortar antes, sin recuperar el dato | La autorización por pertenencia dejaría de ser verificable sin infraestructura, que es la propiedad que `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Application y §17.1.P.6 · GeometriaFactory-Application exigen. Además el front **no puede ser la última defensa de ninguna regla**, y quien atiende la petición tampoco tiene la entidad recuperada |
 | Comprobaciones sin orden fijo, resueltas por conjunto de motivos | Devolvería todas las causas de una vez, que a veces es más útil | Rompe `INV-09`: una cuenta con la marca puesta recibiría además motivos que revelan qué existe y qué no. El orden **es** parte de la corrección, no una optimización |
 
 **La tercera alternativa merece una precisión.** No se descarta por desconfiar de la capa que expone, sino porque desplazar la comprobación allá la volvería inverificable con dobles. Nada impide que la capa que expone **también** acote lo que ofrece: eso es una decisión de presentación legítima, y `GeometriaFactory-Web` la toma. Lo que no puede es reemplazar a ésta.
@@ -88,7 +88,7 @@ Además: **la negativa por pertenencia y la negativa por facultad no se colapsan
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.4, la tabla de traducciones prohibidas.
 - [`../../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md`](ADR-02005-Guarda-Unica-De-Admisibilidad.md) §6 punto 1, que es la dependencia de disciplina que esta ADR cierra.
 - [`../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md), por el código único de las operaciones bloqueadas por la marca.
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.2.P.5, §17.1.P.2 (INV-02, INV-03, INV-09) y §4.1 (RN-04003, RN-04013, RN-04016).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.1.P.5 · GeometriaFactory-Application, §17.1.P.2 · GeometriaFactory-Domain (INV-02, INV-03, INV-09) y §4.1 (RN-04003, RN-04013, RN-04016).
 - ADR relacionadas: [`ADR-04001`](ADR-04001-Casos-De-Uso-Con-Inversion-De-Dependencias.md), [`ADR-04006`](ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md).
 
 ## 10. Control de cambios

@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-26), §4.1 (RN-02012, RN-02013, RN-02014, RN-02015, RN-02016), §9 (retiro de la exclusión X-2 y reescritura del caso límite CL-7), §17.1.P.5
+**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4 (F-26), §4.1 (RN-02012, RN-02013, RN-02014, RN-02015, RN-02016), §9 (retiro de la exclusión X-2 y reescritura del caso límite CL-7), §17.1.P.5 · GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** [`CU-00005`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md), [`CU-04011`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04011-Resetear-La-Contrasena-De-Un-Alumno.md) y [`CU-02013`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1
 

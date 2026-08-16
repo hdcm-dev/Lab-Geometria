@@ -59,7 +59,7 @@ Como **producto**, quiero **que la contraseña provisoria no aparezca en ningún
 
 ## 7. Notas y supuestos
 
-**El registro estructurado de cada error y de cada intento de acceso rechazado sí es obligatorio** (`PRODUCT-INTAKE` §17.5.P.10): lo que esta historia acota es **qué no puede entrar en él**. Las dos cosas se sostienen juntas, y `GeometriaFactory-Infrastructure` declara la misma pareja desde su lado.
+**El registro estructurado de cada error y de cada intento de acceso rechazado sí es obligatorio** (`PRODUCT-INTAKE` §17.1.P.10 · GeometriaFactory-Api): lo que esta historia acota es **qué no puede entrar en él**. Las dos cosas se sostienen juntas, y `GeometriaFactory-Infrastructure` declara la misma pareja desde su lado.
 
 ## 8. Control de cambios
 

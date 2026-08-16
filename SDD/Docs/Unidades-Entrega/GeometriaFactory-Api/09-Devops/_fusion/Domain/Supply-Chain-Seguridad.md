@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §8; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md) 1.0 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10 (normativa y presupuesto), §13, §17.1.P.1, §17.1.P.5 y §17.1.P.8
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §8; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md) 1.0 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10 (normativa y presupuesto), §13, §17.1.P.1 · GeometriaFactory-Domain, §17.1.P.5 · GeometriaFactory-Domain y §17.1.P.8 · GeometriaFactory-Domain
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -34,9 +34,9 @@
 
 | Hecho | Valor | Dónde está declarado |
 | --- | --- | --- |
-| Dependencias externas | **Ninguna**. Es biblioteca de clases **sin dependencias core**: no referencia persistencia, ni marco web, ni bibliotecas de serialización | Intake §17.1.P.1 |
+| Dependencias externas | **Ninguna**. Es biblioteca de clases **sin dependencias core**: no referencia persistencia, ni marco web, ni bibliotecas de serialización | Intake §17.1.P.1 · GeometriaFactory-Domain |
 | Referencias salientes admitidas | **0** a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | `05` §8, tercera fila; `QG-04` |
-| Artefacto publicado | **Ninguno**: `redistribuible` es false y no se publica en ningún feed | Intake §13 y §17.1.P.7 |
+| Artefacto publicado | **Ninguno**: `redistribuible` es false y no se publica en ningún feed | Intake §13 y §17.1.P.7 · GeometriaFactory-Domain |
 
 **Decisión: el inventario de componentes se emite en la unidad desplegable que embebe a esta biblioteca**, no acá. El inventario que le sirve a alguien es el de lo que sale del repositorio —la imagen del backend y la publicación del front—, y ahí es donde este proyecto de código aparece como un componente más, con su versión calculada según [`Estrategia-Versionado.md`](Estrategia-Versionado.md).
 
@@ -83,7 +83,7 @@
 | Estático | **Existe y bloquea**, integrado en el stage `build`: `CV-20` declara **0** advertencias nuevas del análisis estático, bloqueante por `CV-13`, que es el gate de construcción sin advertencias | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md) §5 y §3 |
 | Estático de superficie | **Existe y bloquea**: las pruebas de inspección `TC-02023`, `TC-02024`, `TC-02026` y `TC-02027` revisan el proyecto de código sobre sí mismo —catálogo de condiciones, dependencias salientes, invariantes ejercidos y condiciones que no viajan como excepción— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Testing.md) §1, «prueba de inspección» |
 | Dinámico | **No aplica, y se declara en lugar de omitirse** | Un análisis dinámico ejercita una aplicación en ejecución. Este proyecto de código **no atiende peticiones ni abre conexiones** (`05` §8, cierre), de modo que no hay superficie que ejercitar. El análisis dinámico del producto tiene sujeto en `GeometriaFactory-Api`, que es quien expone la superficie HTTP |
-| Detección de secretos en las confirmaciones | **Recomendada a nivel producto y no propia**: este proyecto de código no maneja secretos (intake §17.1.P.5), pero comparte repositorio con los que sí | Ver [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
+| Detección de secretos en las confirmaciones | **Recomendada a nivel producto y no propia**: este proyecto de código no maneja secretos (intake §17.1.P.5 · GeometriaFactory-Domain), pero comparte repositorio con los que sí | Ver [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
 
 **No se agrega ninguna herramienta nueva al pipeline.** Todo lo que esta sección declara ya está ejecutándose como gate de la categoría 08; lo que hace este documento es nombrarlo desde la perspectiva de la seguridad de la construcción, que es la que faltaba.
 

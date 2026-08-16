@@ -12,13 +12,13 @@
 
 ## 1. Contexto
 
-`PRODUCT-INTAKE` §17.7.P.7 declara cuatro cosas sobre el artefacto de este proyecto de código: versionado semántico y convenciones de mensaje de confirmación como el resto del producto; **no se publica en ningún repositorio de paquetes**; su artefacto **es un archivo generado**, que si se versiona en el repositorio se versiona como salida reproducible y si se ignora lo genera el guion de construcción antes de publicar; y **nunca se edita a mano**.
+`PRODUCT-INTAKE` §17.2.P.7 · GeometriaFactory-Visor declara cuatro cosas sobre el artefacto de este proyecto de código: versionado semántico y convenciones de mensaje de confirmación como el resto del producto; **no se publica en ningún repositorio de paquetes**; su artefacto **es un archivo generado**, que si se versiona en el repositorio se versiona como salida reproducible y si se ignora lo genera el guion de construcción antes de publicar; y **nunca se edita a mano**.
 
 Lo que hace especial al versionado acá es que este contrato **es el punto de extensión declarado del producto** (`PRODUCT-INTAKE` §18) y que `tiene_extensibilidad` es true sólo en este proyecto de código. La versión no gobierna a un consumidor externo —no lo hay— sino **la estabilidad de la promesa que hace posible reemplazar el motor de dibujo**.
 
 Hay además una asimetría con los otros proyectos de código del producto: el anfitrión **no compila contra este artefacto**. Lo carga en el navegador e invoca sus funciones por interoperabilidad, de modo que **un cambio incompatible no rompe ninguna compilación**: se manifiesta en tiempo de ejecución.
 
-Motivación upstream: `PRODUCT-INTAKE` §17.7.P.7, §17.7.P.8, §18; §16 (destino del bundle en el directorio de recursos estáticos del anfitrión).
+Motivación upstream: `PRODUCT-INTAKE` §17.2.P.7 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor, §18; §16 (destino del bundle en el directorio de recursos estáticos del anfitrión).
 
 ## 2. Decisión
 
@@ -83,7 +83,7 @@ Qué constituye cada clase de cambio sobre el punto de extensión:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.7.P.7, §17.7.P.8, §16, §16.1 y §18.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.2.P.7 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor, §16, §16.1 y §18.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §2 y §5.
 - [`../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §5.1 y §7.
 - [`../Extensibilidad.md`](../Extensibilidad.md), que desarrolla el punto de extensión y el proceso de crecimiento de la fachada.

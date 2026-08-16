@@ -20,7 +20,7 @@ La otra mitad es más delicada y la categoría 02 la dejó escrita: **la pieza p
 
 Hay un cuarto guardián que no es de papel sino de estado de cuenta: una cuenta con **cambio de contraseña pendiente** se autentica y **no obtiene sesión de trabajo**, y mientras la marca esté puesta no hay ninguna otra ruta a la que ir.
 
-Motivación upstream: NB-00001, NB-00002; `RN-10001`, `RN-10003`, `RN-10006`, `RN-10011`, `RN-10013`, `RN-10016`; `INV-02`, `INV-03`, `INV-06`, `INV-09`; `PRODUCT-INTAKE` §17.6.P.4, §17.6.P.5 y §4.1; restricciones transversales `RT-02`, `RT-09` y `RT-12` de la categoría 02.
+Motivación upstream: NB-00001, NB-00002; `RN-10001`, `RN-10003`, `RN-10006`, `RN-10011`, `RN-10013`, `RN-10016`; `INV-02`, `INV-03`, `INV-06`, `INV-09`; `PRODUCT-INTAKE` §17.2.P.4 · GeometriaFactory-Web, §17.2.P.5 · GeometriaFactory-Web y §4.1; restricciones transversales `RT-02`, `RT-09` y `RT-12` de la categoría 02.
 
 ## 2. Decisión
 
@@ -51,7 +51,7 @@ Esta emisión la resuelve del lado en que la decisión efectivamente rigió.
 | Credencial en el estado del circuito, del lado del servidor (**adoptada**) | La credencial no está al alcance de ningún guion del navegador; no hay que decidir cuánto dura en el navegador ni cómo se revoca ahí; es verificable con las herramientas de desarrollo | Se pierde con el reciclado del proceso del hosting, y hay que volver a entrar |
 | Credencial en almacenamiento del navegador | Sobreviviría al reciclado y evitaría re-autenticar | La pone al alcance de cualquier guion que se agregue después, en un producto donde ni siquiera los datos se guardan ahí. **Rompe el criterio de aceptación de que la credencial no aparece en el navegador.** Descartada por esta categoría |
 | Credencial en una marca de sesión legible por guion | Simple de implementar y sobrevive a la recarga de la página | Es la misma exposición que la anterior con otra forma; además la haría viajar en cada pedido del navegador, incluidos los de recursos estáticos. Descartada por esta categoría |
-| Confiar en los guardianes de ruta como control de acceso, sin verificación del otro lado | Menos ida y vuelta y menos código repetido | **El navegador no es confiable**: forzar la solicitud sin pasar por la pantalla saltearía todo. Es exactamente el defecto que 02 previno con sus criterios de aceptación. Descartada por `PRODUCT-INTAKE` §17.6.P.5 y por la categoría 02 §5 |
+| Confiar en los guardianes de ruta como control de acceso, sin verificación del otro lado | Menos ida y vuelta y menos código repetido | **El navegador no es confiable**: forzar la solicitud sin pasar por la pantalla saltearía todo. Es exactamente el defecto que 02 previno con sus criterios de aceptación. Descartada por `PRODUCT-INTAKE` §17.2.P.5 · GeometriaFactory-Web y por la categoría 02 §5 |
 
 ## 5. Consecuencias positivas
 
@@ -219,7 +219,7 @@ construcción del guardián. **Ninguna decisión cambia: §2 lo declaraba entero
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §4.1 (`RN-10013`, `RN-10016`), §17.1.P.2 (`INV-09`), §17.6.P.4 y §17.6.P.5.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §4.1 (`RN-10013`, `RN-10016`), §17.1.P.2 · GeometriaFactory-Domain (`INV-09`), §17.2.P.4 · GeometriaFactory-Web y §17.2.P.5 · GeometriaFactory-Web.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §2, §5 y §6 (`RT-02`, `RT-09`, `RT-12`).
 - [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §3.2, los dos shells y los tres destinos por papel.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md`](../../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), por la regla de exposición de la frontera y por el tratamiento de las credenciales en claro.

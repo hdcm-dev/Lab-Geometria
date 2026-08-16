@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **recibir un motivo cuando la
 
 ## 2. Contexto
 
-`RN-00006` fija que una cuenta `Pendiente` o `Bloqueado` no obtiene acceso, y `PRODUCT-INTAKE` §17.5.P.5 declara la respuesta **con motivo**, distinta de la genérica de credenciales inválidas. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
+`RN-00006` fija que una cuenta `Pendiente` o `Bloqueado` no obtiene acceso, y `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Api declara la respuesta **con motivo**, distinta de la genérica de credenciales inválidas. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 
 ## 3. Criterios de aceptación
 

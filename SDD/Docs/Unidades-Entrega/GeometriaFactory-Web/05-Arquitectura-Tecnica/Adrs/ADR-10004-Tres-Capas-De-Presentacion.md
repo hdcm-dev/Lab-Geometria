@@ -18,7 +18,7 @@ Si once superficies lo hicieran, once lugares tendrían que repetir la traducci�
 
 Hay además un dato que esta decisión tiene que respetar y que no es de arquitectura sino de historia: **la maqueta se aprobó**, con una línea de base identificada de **once** superficies, **setenta y tres** componentes, **setenta y cuatro** estados y **veinticuatro** rutas de navegación, y con **sesenta y una** filas de sensado de deriva que la codificación va a tener que ir verificando. La arquitectura tiene que hacer que esa línea de base sea sostenible, no que haya que reconstruirla.
 
-Motivación upstream: NB-00003, NB-00006, NB-00007, NB-00009; `PRODUCT-INTAKE` §17.6.P.2 y §17.6.P.6; las once superficies, los dos shells y las tres representaciones de la categoría 03.
+Motivación upstream: NB-00003, NB-00006, NB-00007, NB-00009; `PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Web y §17.2.P.6 · GeometriaFactory-Web; las once superficies, los dos shells y las tres representaciones de la categoría 03.
 
 ## 2. Decisión
 
@@ -80,7 +80,7 @@ Motivación upstream: NB-00003, NB-00006, NB-00007, NB-00009; `PRODUCT-INTAKE` �
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §15 (regla de no-regresión acumulativa y punto de control bloqueante), §17.6.P.2 y §17.6.P.6; §22 asunción A-4.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §15 (regla de no-regresión acumulativa y punto de control bloqueante), §17.2.P.2 · GeometriaFactory-Web y §17.2.P.6 · GeometriaFactory-Web; §22 asunción A-4.
 - [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §3.1 y §3.2; [`../../03-UX-UI-DX/README.md`](../../03-UX-UI-DX/README.md) §4.
 - [`../../03-UX-UI-DX/Linea-Base-Visual.md`](../../03-UX-UI-DX/Linea-Base-Visual.md) y [`../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md).
 - ADR relacionadas: [`ADR-10001`](ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md), [`ADR-10002`](ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md), [`ADR-10005`](ADR-10005-Estado-Degradado-Como-Superficie.md), [`ADR-10006`](ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md).

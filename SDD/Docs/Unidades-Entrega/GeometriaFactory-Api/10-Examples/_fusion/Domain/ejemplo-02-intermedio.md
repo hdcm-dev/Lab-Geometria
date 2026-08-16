@@ -24,7 +24,7 @@ Demostrar el ciclo de vida del trabajo dentro del dominio, con los datos reales 
 
 ## 3. Prerequisites
 
-Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido, porque el proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1).
+Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido, porque el proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Domain).
 
 **Un prerequisito de datos, no de herramientas:** los seis textos de escenario que el sample usa se transcriben del `PRODUCT-INTAKE` §20 **sin modificación**. Son datos reales emitidos por la aplicación de escritorio de los alumnos y no se sustituyen por datos sintéticos.
 

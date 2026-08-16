@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md) 1.2 §3 y §6 (las **seis** propiedades transversales con sus condiciones de medición); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2 (las **siete** garantías) y §6 (los **siete** códigos); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §14 (`RA-01`, `RA-02`), §15 (puertas `PT-02` y `PT-03`), §17.7.P.6, §17.7.P.8, §17.7.P.10 y §22
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md) 1.2 §3 y §6 (las **seis** propiedades transversales con sus condiciones de medición); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2 (las **siete** garantías) y §6 (los **siete** códigos); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §14 (`RA-01`, `RA-02`), §15 (puertas `PT-02` y `PT-03`), §17.2.P.6 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor, §17.2.P.10 · GeometriaFactory-Visor y §22
 **Trazabilidad downstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md), [`Plan-Pruebas.md`](Plan-Pruebas.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md), [`Guia-Testing-Extensibilidad.md`](../../Guia-Testing-Extensibilidad.md), [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md); `09-Devops`, `10-Examples` y `11-Documentacion`
 
 ---
@@ -39,7 +39,7 @@ Clasificación ISO/IEC 25010. Las **seis propiedades transversales** de `02` §6
 
 | Atributo ISO 25010 | Prioridad | Métrica y origen |
 | --- | --- | --- |
-| Seguridad | **Crítica**, y negativa por diseño | **0 peticiones** originadas por el archivo de guion, medidas **con los dos movimientos prendidos**, que es su peor caso (`02` §6; intake §17.7.P.10). Es el NFR más importante del proyecto de código según el propio intake |
+| Seguridad | **Crítica**, y negativa por diseño | **0 peticiones** originadas por el archivo de guion, medidas **con los dos movimientos prendidos**, que es su peor caso (`02` §6; intake §17.2.P.10 · GeometriaFactory-Visor). Es el NFR más importante del proyecto de código según el propio intake |
 | Fiabilidad | **Crítica** | **100 %** de las piezas no dibujadas enumeradas con su índice y su código, y **0** piezas que desaparezcan sin registro (garantía `G-5`) |
 | Adecuación funcional | **Crítica** | Los **seis** tipos dibujables, los **siete** códigos de condición y las **siete** garantías, sostenidos por las **seis** funciones |
 | Eficiencia de desempeño | **Alta** | **10** recorridos de ida y vuelta entre trabajos sin degradación, medidos **con los dos movimientos prendidos** (`PT-02`) |
@@ -48,13 +48,13 @@ Clasificación ISO/IEC 25010. Las **seis propiedades transversales** de `02` §6
 | Usabilidad | **Media, y ajena en su mayor parte** | La superficie visible la dibuja el componente anfitrión, que vive en `GeometriaFactory-Web`. Lo que este proyecto de código aporta es el equivalente accesible: la estructura del texto y la enumeración de piezas no dibujadas |
 | Portabilidad | **Media** | Requisito declarado **por capacidad** y no por versión de navegador, porque la fuente no la fija (`05` §5 y §11 `PA-04`) |
 
-**Sobre el atributo de eficiencia y su umbral ausente.** El intake §17.7.P.10 declara «interacción fluida al rotar y acercar **con el mouse**, sin tráfico de circuito durante el gesto» y **no fija un valor numérico**. `05` §8 se niega explícitamente a inventarlo y lo deja como punto abierto `PA-03`. **Esta categoría tampoco lo inventa**: la fluidez se verifica de forma cualitativa declarada junto con `PT-02`, y el umbral numérico queda abierto. Ver §3.
+**Sobre el atributo de eficiencia y su umbral ausente.** El intake §17.2.P.10 · GeometriaFactory-Visor declara «interacción fluida al rotar y acercar **con el mouse**, sin tráfico de circuito durante el gesto» y **no fija un valor numérico**. `05` §8 se niega explícitamente a inventarlo y lo deja como punto abierto `PA-03`. **Esta categoría tampoco lo inventa**: la fluidez se verifica de forma cualitativa declarada junto con `PT-02`, y el umbral numérico queda abierto. Ver §3.
 
 ## 3. Quality gates
 
 | Id | Condición | Cómo se verifica | Consecuencia si no se cumple |
 | --- | --- | --- | --- |
-| QG-01 | El bundle **se genera sin errores** | Etapa de empaquetado del pipeline (intake §17.7.P.8) | Bloquea la fusión |
+| QG-01 | El bundle **se genera sin errores** | Etapa de empaquetado del pipeline (intake §17.2.P.8 · GeometriaFactory-Visor) | Bloquea la fusión |
 | QG-02 | **`PT-03`**: el motor de dibujo tridimensional queda **dentro** del bundle y la página funciona **sin acceso a redes de distribución externas**; **0** dependencias traídas de una red externa en tiempo de ejecución | `TC-12019`, sobre el bundle generado | **Bloqueante, y detiene la planificación de la etapa `g`**. Ver §3.1 |
 | QG-03 | **`PT-02`**: el bundle carga en una página del anfitrión, la creación de instancia arma la escena, la carga del texto dibuja las **tres** figuras de `E-1` **incluido el ortoedro**, **diez** recorridos de ida y vuelta no degradan, y el árbol y la escena **se sincronizan por índice** | `TC-12020`, con los recorridos medidos **con los dos movimientos prendidos** | **Bloqueante, y detiene la planificación de la etapa `g`**. Ver §3.1 |
 | QG-04 | **Cero red**: exactamente **0** peticiones originadas por el archivo de guion, y **0** ocurrencias de las tres formas de petición en el código fuente **y en el bundle generado** | `TC-12016` y `TC-12018`, con la medición **con los dos movimientos prendidos y sostenidos** | Bloqueante, sin gradación. Es `RA-02`, y a través de ella `RA-01` |
@@ -62,15 +62,15 @@ Clasificación ISO/IEC 25010. Las **seis propiedades transversales** de `02` §6
 | QG-06 | Superficie del bundle: exactamente **6** funciones expuestas, bajo **1** nombre propio en el objeto global y **0** identificadores globales sueltos | `TC-12018` | Bloqueante |
 | QG-07 | **Ausencia de fallo silencioso**: **100 %** de las piezas no dibujadas enumeradas con su índice y su código, y **0** sin registro | `TC-12006` | Bloqueante, sin gradación. Es la garantía `G-5` |
 | QG-08 | Los códigos de condición son exactamente **siete** y **ninguno se acuña aguas abajo**; un curso nuevo se agrega como fila de curso y no como código | `TC-12021`, contra §6 del contrato de fachada | Se rechaza en revisión |
-| QG-09 | El bundle **nunca se edita a mano**: es un artefacto generado y reproducible | Revisión del pull request de la etapa (intake §17.7.P.7) | Se rechaza en revisión |
+| QG-09 | El bundle **nunca se edita a mano**: es un artefacto generado y reproducible | Revisión del pull request de la etapa (intake §17.2.P.7 · GeometriaFactory-Visor) | Se rechaza en revisión |
 
-**No hay gate de cobertura de líneas**, y su ausencia está declarada aguas arriba: el intake §17.7.P.6 fija como gate «verificable por inspección, **en lugar de cobertura de líneas**» la ausencia de las tres formas de petición de red —que el intake nombra una por una, y que este documento describe en vez de nombrar, fuera de las comillas—. `QG-04` es ese gate.
+**No hay gate de cobertura de líneas**, y su ausencia está declarada aguas arriba: el intake §17.2.P.6 · GeometriaFactory-Visor fija como gate «verificable por inspección, **en lugar de cobertura de líneas**» la ausencia de las tres formas de petición de red —que el intake nombra una por una, y que este documento describe en vez de nombrar, fuera de las comillas—. `QG-04` es ese gate.
 
 **No hay gate de fluidez numérica**, por lo declarado en §2.
 
 ### 3.1 Las dos puertas técnicas son vinculantes
 
-`PT-02` y `PT-03` **no son criterios de esta categoría**: las declara el intake §15 y §17.7.P.8, y el roadmap §2.2 las ubica **antes de comprometer la etapa `g`**. Su carácter vinculante tiene una consecuencia que este documento hereda y no relaja:
+`PT-02` y `PT-03` **no son criterios de esta categoría**: las declara el intake §15 y §17.2.P.8 · GeometriaFactory-Visor, y el roadmap §2.2 las ubica **antes de comprometer la etapa `g`**. Su carácter vinculante tiene una consecuencia que este documento hereda y no relaja:
 
 **Una puerta que no pasa detiene la planificación de la etapa `g` y no se arrastra como deuda.** Es el mismo fundamento por el que el Product Owner promovió la capacidad `F-13` a `Must Have` en el intake **1.19**: una capacidad citada por una puerta técnica deja de ser diferible. Esta categoría **no puede convertir `PT-02` ni `PT-03` en gates condicionados**, ni cambiar lo que miden, ni agregarles criterios.
 
@@ -106,5 +106,5 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **`H-09`.** Dos citas entrecomilladas del intake omitían palabras dentro de las comillas: §2 restituye «interacción fluida al rotar y acercar **con el mouse**…» (§17.7.P.10), y §3 saca de las comillas la descripción de las tres formas de petición, que el intake nombra una por una (§17.7.P.6). **El sentido no cambiaba y ningún umbral cambia**; lo que se corrige es que una comilla angular promete literalidad. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
+| 1.1 | 2026-08-11 | **`H-09`.** Dos citas entrecomilladas del intake omitían palabras dentro de las comillas: §2 restituye «interacción fluida al rotar y acercar **con el mouse**…» (§17.2.P.10 · GeometriaFactory-Visor), y §3 saca de las comillas la descripción de las tres formas de petición, que el intake nombra una por una (§17.2.P.6 · GeometriaFactory-Visor). **El sentido no cambiaba y ningún umbral cambia**; lo que se corrige es que una comilla angular promete literalidad. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara la definición de calidad en sus tres partes —garantías sostenidas, ausencia de fallo silencioso y cero red—, los ocho atributos ISO 25010 con su métrica tomada de las **seis** propiedades transversales de `02` §6 sin redefinirlas, y los **nueve** quality gates. Declara que `PT-02` y `PT-03` son **vinculantes y no convertibles en condicionadas**, con el fundamento de que una puerta que no pasa detiene la planificación de la etapa `g`, y que esta categoría sólo declara con qué caso de prueba y con qué condiciones se miden. Declara la ausencia de gate de cobertura de líneas —sustituido aguas arriba por el gate de inspección de cero red— y la ausencia de umbral numérico de fluidez, que esta categoría **no inventa**. Suma a la cadencia la revisión **sobre el bundle generado** ante todo cambio. |

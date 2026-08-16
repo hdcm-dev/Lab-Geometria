@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8 y §9; [`../05-Arquitectura-Tecnica/Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md); [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md) 1.1 §3 y §5; [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md) 1.0 §4; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §14, §15, §17.7.P.1, §17.7.P.4, §17.7.P.5, §17.7.P.8 y §17.7.P.11
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8 y §9; [`../05-Arquitectura-Tecnica/Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md); [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md) 1.1 §3 y §5; [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md) 1.0 §4; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §14, §15, §17.2.P.1 · GeometriaFactory-Visor, §17.2.P.4 · GeometriaFactory-Visor, §17.2.P.5 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor y §17.2.P.11 · GeometriaFactory-Visor
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Bundle-Visor.md`](../../Guia-Publicacion-Bundle-Visor.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -34,10 +34,10 @@
 
 | Hecho | Valor | Dónde está declarado |
 | --- | --- | --- |
-| Dependencias externas | **Existen.** El motor de dibujo tridimensional entra como dependencia declarada del manifiesto del paquete, más la cadena de herramientas de construcción | Intake §17.7.P.1 |
-| Dónde termina el motor de dibujo | **Dentro del bundle**, no traído de una red de distribución externa. Es la puerta técnica `PT-03` | Intake §17.7.P.1 y §17.7.P.8 |
-| Artefacto publicado externamente | **Ninguno**: `redistribuible` es false y no se publica | Intake §13 y §17.7.P.7 |
-| Dónde termina el bundle | Dentro de la publicación del front, servido al navegador de cada alumno | `05` §5; intake §17.6.P.8 |
+| Dependencias externas | **Existen.** El motor de dibujo tridimensional entra como dependencia declarada del manifiesto del paquete, más la cadena de herramientas de construcción | Intake §17.2.P.1 · GeometriaFactory-Visor |
+| Dónde termina el motor de dibujo | **Dentro del bundle**, no traído de una red de distribución externa. Es la puerta técnica `PT-03` | Intake §17.2.P.1 · GeometriaFactory-Visor y §17.2.P.8 · GeometriaFactory-Visor |
+| Artefacto publicado externamente | **Ninguno**: `redistribuible` es false y no se publica | Intake §13 y §17.2.P.7 · GeometriaFactory-Visor |
+| Dónde termina el bundle | Dentro de la publicación del front, servido al navegador de cada alumno | `05` §5; intake §17.2.P.8 · GeometriaFactory-Web |
 
 **Decisión de esta categoría: el stage de empaquetado emite el inventario de componentes del bundle**, a partir del archivo de bloqueo de dependencias, y se adjunta al informe de cierre de la etapa.
 
@@ -53,13 +53,13 @@ El bundle **sí es un archivo que se traslada** —se copia al anfitrión y se s
 
 | Garantía | Cómo se obtiene hoy |
 | --- | --- |
-| El artefacto corresponde al fuente | **No se traslada un artefacto guardado: se regenera.** El bundle no se versiona en el repositorio ([`Entornos-Deploy.md`](Entornos-Deploy.md) §2) y el flujo de trabajo del front lo **genera en su propio interior**, con un gate bloqueante que prohíbe tomarlo de un artefacto viejo (intake §17.6.P.8) |
+| El artefacto corresponde al fuente | **No se traslada un artefacto guardado: se regenera.** El bundle no se versiona en el repositorio ([`Entornos-Deploy.md`](Entornos-Deploy.md) §2) y el flujo de trabajo del front lo **genera en su propio interior**, con un gate bloqueante que prohíbe tomarlo de un artefacto viejo (intake §17.2.P.8 · GeometriaFactory-Web) |
 | El artefacto no fue alterado a mano | `QG-09` y `CV-30`, con objetivo **0** ediciones manuales |
 | El artefacto es reproducible | Métrica de `ADR-12006` §8: dos construcciones desde el mismo estado producen el mismo artefacto |
 
 **Firmar lo que se regenera en cada publicación no agrega garantía**: el receptor —el proceso del hosting— no verifica firmas de recursos estáticos, y el productor y el consumidor del archivo son el mismo flujo de trabajo. La firma tendría sujeto si el bundle se distribuyera por un canal a terceros, que es justamente lo que `ADR-12006` §4 descartó.
 
-**Lo que sí conviene declarar como límite:** la integridad del tramo final —la subida por FTP hasta el hosting— **no la garantiza este proyecto de código** y su riesgo está declarado en el producto: el intake §17.6.P.8 registra que la subida **no es transaccional** y que se despliega fuera del horario de uso. Es una preocupación de la categoría 09 de `GeometriaFactory-Web`.
+**Lo que sí conviene declarar como límite:** la integridad del tramo final —la subida por FTP hasta el hosting— **no la garantiza este proyecto de código** y su riesgo está declarado en el producto: el intake §17.2.P.8 · GeometriaFactory-Web registra que la subida **no es transaccional** y que se despliega fuera del horario de uso. Es una preocupación de la categoría 09 de `GeometriaFactory-Web`.
 
 ## 3. Nivel de integridad de la construcción
 
@@ -67,7 +67,7 @@ El bundle **sí es un archivo que se traslada** —se copia al anfitrión y se s
 
 | Requisito del nivel objetivo | Estado hoy | Fundamento |
 | --- | --- | --- |
-| Construcción **automatizada y reproducible por guion** | **Cumplido**, y con una exigencia extra que los otros dos proyectos de código no tienen: la instalación de dependencias es **reproducible desde el archivo de bloqueo** y `ADR-12006` §8 exige que dos construcciones desde el mismo estado produzcan el mismo artefacto | Intake §17.7.P.8; `ADR-12006` §8 |
+| Construcción **automatizada y reproducible por guion** | **Cumplido**, y con una exigencia extra que los otros dos proyectos de código no tienen: la instalación de dependencias es **reproducible desde el archivo de bloqueo** y `ADR-12006` §8 exige que dos construcciones desde el mismo estado produzcan el mismo artefacto | Intake §17.2.P.8 · GeometriaFactory-Visor; `ADR-12006` §8 |
 | **Procedencia** emitida del artefacto | **No cumplido.** Hoy no se emite ninguna | Decisión de esta categoría: se declara la brecha |
 
 **La reproducibilidad exigida acá es más fuerte que la del nivel objetivo**, y no por ambición de esta categoría: `ADR-12006` la fija como métrica de validación. Es lo que hace que la resolución de `PA-05` sea segura: si el artefacto no fuera reproducible, regenerarlo en cada publicación en lugar de guardarlo sería un riesgo y no una propiedad.
@@ -94,7 +94,7 @@ El bundle **sí es un archivo que se traslada** —se copia al anfitrión y se s
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático del fuente | **Existe**: la verificación de tipos del lenguaje fuente ocurre en el empaquetado, y su falla es falla de `QG-01` | Intake §17.7.P.1 y §17.7.P.8 |
+| Estático del fuente | **Existe**: la verificación de tipos del lenguaje fuente ocurre en el empaquetado, y su falla es falla de `QG-01` | Intake §17.2.P.1 · GeometriaFactory-Visor y §17.2.P.8 · GeometriaFactory-Visor |
 | Estático **del artefacto generado** | **Existe, bloquea y es la verificación característica de este proyecto de código**: recuentos sobre el bundle —funciones expuestas, identificadores globales, ocurrencias de las tres formas de petición, claves escritas— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Testing.md) §1 y §2; `QG-04`, `QG-05` y `QG-06` |
 | **Dinámico** | **Existe, y es el único de los tres proyectos de código de nivel topológico 0 que lo tiene**: la medición sobre una página real, con un conductor que cuenta peticiones de red y lee el almacenamiento del navegador, **con los dos movimientos prendidos** | [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md) §2 y §6 |
 | Detección de secretos en las confirmaciones | Recomendada a nivel producto; este proyecto de código no maneja ninguno | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
@@ -105,7 +105,7 @@ El bundle **sí es un archivo que se traslada** —se copia al anfitrión y se s
 
 | Situación | Salida | Quién decide |
 | --- | --- | --- |
-| Vulnerabilidad publicada sobre el **motor de dibujo tridimensional** | Se evalúa la actualización de la versión anclada. **No se aplica como efecto colateral**: la regla de anclaje del intake exige documentar el cambio, y el propio intake §17.7.P.1 declara que si la versión adoptada es posterior a la del visualizador previo **se documenta el cambio de interfaz que exija** | El Product Owner, en el punto de control, con la constancia del cambio de interfaz si lo hubo |
+| Vulnerabilidad publicada sobre el **motor de dibujo tridimensional** | Se evalúa la actualización de la versión anclada. **No se aplica como efecto colateral**: la regla de anclaje del intake exige documentar el cambio, y el propio intake §17.2.P.1 · GeometriaFactory-Visor declara que si la versión adoptada es posterior a la del visualizador previo **se documenta el cambio de interfaz que exija** | El Product Owner, en el punto de control, con la constancia del cambio de interfaz si lo hubo |
 | Vulnerabilidad publicada sobre una dependencia **de construcción** | No llega al navegador de nadie, pero puede comprometer la construcción. Se registra y se trata en el punto de control | El mismo |
 | Vulnerabilidad que exigiera **traer una dependencia por red de distribución externa** para mitigarla | **No se admite**: violaría `PT-03`, que es puerta técnica bloqueante del producto | Nadie: la puerta no es negociable por esta categoría |
 | Cualquier mitigación que introduzca una petición de red en el bundle | **No se admite**: violaría `RA-02` y, a través de ella, `RA-01`, que son reglas de nivel producto | Nadie |

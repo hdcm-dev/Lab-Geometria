@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) 1.9 §3 y §4; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md) 1.5 §6.1; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §8, §9 y §11; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md) 1.0; [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Domain/Mini-Plan.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.1.P.6, §17.1.P.8, §17.1.P.10 y §22
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Domain/Especificacion-Funcional.md) 1.9 §3 y §4; [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md) 1.5 §6.1; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §8, §9 y §11; [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../../../06-Backlog-Tecnico/_fusion/Domain/Definition-Of-Ready.md) 1.0; [`../07-Plan-Sprint/Mini-Plan.md`](../../../07-Plan-Sprint/_fusion/Domain/Mini-Plan.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §17.1.P.6 · GeometriaFactory-Domain, §17.1.P.8 · GeometriaFactory-Domain, §17.1.P.10 · GeometriaFactory-Domain y §22
 **Trazabilidad downstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md), [`Plan-Pruebas.md`](Plan-Pruebas.md), [`Criterios-Validacion.md`](Criterios-Validacion.md), [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`, que materializa como etapas del pipeline los quality gates de §3; `11-Documentacion`, que cita esta estrategia sin redefinirla
 
 ---
@@ -29,7 +29,7 @@
 
 `GeometriaFactory-Domain` tiene calidad cuando **ninguna de las dieciséis reglas de negocio y ninguno de los nueve invariantes puede violarse invocando su superficie pública**, y cuando cada rechazo que produce viaja como una de las **42** condiciones catalogadas, con su código estable y sin efecto parcial sobre la entidad.
 
-Es una definición estrecha a propósito. Este proyecto de código no atiende peticiones, no abre conexiones y no persiste nada ([`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) §17.1.P.3, P.4 y P.10), de modo que no hay disponibilidad, latencia ni throughput que medir acá. Lo único que puede fallar es que una guarda no esté, que esté en un solo componente y no en el otro, o que un rechazo llegue como excepción en lugar de como valor.
+Es una definición estrecha a propósito. Este proyecto de código no atiende peticiones, no abre conexiones y no persiste nada ([`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) §17.1.P.3 · GeometriaFactory-Domain, P.4 y P.10), de modo que no hay disponibilidad, latencia ni throughput que medir acá. Lo único que puede fallar es que una guarda no esté, que esté en un solo componente y no en el otro, o que un rechazo llegue como excepción en lugar de como valor.
 
 La consecuencia operativa es que **la calidad de este proyecto de código se mide entera con pruebas unitarias puras y con inspecciones**, y que un defecto suyo no se descubre en un ambiente: se descubre en una prueba que falla o en una revisión que rechaza.
 
@@ -41,28 +41,28 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los dos v
 | --- | --- | --- |
 | Adecuación funcional | **Crítica** | 100 % de los **trece** casos de uso con al menos un caso de prueba por criterio de aceptación; 100 % de los **nueve** invariantes con prueba de violación rechazada, sin dobles ([`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8) |
 | Fiabilidad | **Crítica** | 100 % de las **42** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md) alcanzadas por al menos una prueba, y **0** condiciones producidas por la biblioteca que no figuren en el catálogo (`05` §8) |
-| Mantenibilidad | **Alta** | **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización (`05` §8); **0** advertencias de construcción (intake §17.1.P.8) |
-| Eficiencia de desempeño | **Media**, y sólo de construcción | Batería de dominio completa en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10]. No hay métrica de runtime porque no hay runtime propio |
-| Seguridad | **Baja como implementación, alta como regla** | El proyecto de código no deriva ni compara credenciales: la contraseña llega ya derivada (intake §17.1.P.5). Lo que sí se verifica es `INV-06` e `INV-09`, que condicionan el acceso |
+| Mantenibilidad | **Alta** | **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización (`05` §8); **0** advertencias de construcción (intake §17.1.P.8 · GeometriaFactory-Domain) |
+| Eficiencia de desempeño | **Media**, y sólo de construcción | Batería de dominio completa en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain]. No hay métrica de runtime porque no hay runtime propio |
+| Seguridad | **Baja como implementación, alta como regla** | El proyecto de código no deriva ni compara credenciales: la contraseña llega ya derivada (intake §17.1.P.5 · GeometriaFactory-Domain). Lo que sí se verifica es `INV-06` e `INV-09`, que condicionan el acceso |
 | Compatibilidad | **Media** | La superficie pública es contrato para `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`; su estabilidad la gobierna [`ADR-02003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) |
 | Usabilidad | **No aplica como atributo de interfaz** | `tiene_ui_final` es false. Su equivalente es la experiencia del desarrollador, que documenta [`../03-UX-UI-DX/DX-Developer-Experience.md`](../../../03-UX-UI-DX/_fusion/Domain/DX-Developer-Experience.md) |
-| Portabilidad | **Baja** | Plataforma única sin sufijo de sistema operativo (intake §17.1.P.9). No hay matriz de plataformas que probar |
+| Portabilidad | **Baja** | Plataforma única sin sufijo de sistema operativo (intake §17.1.P.9 · GeometriaFactory-Domain). No hay matriz de plataformas que probar |
 
-**Los dos atributos críticos son los que justifican la existencia de este proyecto de código.** El intake declara que sus invariantes son «la última defensa de las reglas» (§17.1.P.6), y esa frase es la que fija la prioridad: si una guarda falla acá, ninguna capa de más arriba la repone.
+**Los dos atributos críticos son los que justifican la existencia de este proyecto de código.** El intake declara que sus invariantes son «la última defensa de las reglas» (§17.1.P.6 · GeometriaFactory-Domain), y esa frase es la que fija la prioridad: si una guarda falla acá, ninguna capa de más arriba la repone.
 
 ## 3. Quality gates
 
-Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cinco primeros los declara el intake §17.1.P.8; los tres siguientes los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8.
+Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los cinco primeros los declara el intake §17.1.P.8 · GeometriaFactory-Domain; los tres siguientes los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §8.
 
 | Id | Condición | Cómo se verifica | Consecuencia si no se cumple |
 | --- | --- | --- | --- |
-| QG-01 | El guion de construcción termina en **0 y sin advertencias** | Etapa `build` del pipeline | **Bloquea la fusión** (intake §17.1.P.8) |
+| QG-01 | El guion de construcción termina en **0 y sin advertencias** | Etapa `build` del pipeline | **Bloquea la fusión** (intake §17.1.P.8 · GeometriaFactory-Domain) |
 | QG-02 | El guion de pruebas pasa **entero**: cero pruebas rojas y cero deshabilitadas sin motivo escrito | Etapa `test` del pipeline | Bloquea la fusión |
-| QG-03 | La cobertura alcanza el mínimo declarado: **90 %** de líneas y **85 %** de ramas [ASUNCIÓN del intake §17.1.P.6] | Informe de cobertura de la etapa `test` | **Condicionado**, ver §3.1 |
+| QG-03 | La cobertura alcanza el mínimo declarado: **90 %** de líneas y **85 %** de ramas [ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Domain] | Informe de cobertura de la etapa `test` | **Condicionado**, ver §3.1 |
 | QG-04 | El archivo de proyecto declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | Inspección del archivo de proyecto, en revisión y como prueba de inspección (`TC-02024`) | Bloquea la fusión. Es la propiedad que justifica el estilo entero ([`ADR-02001`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md)) |
 | QG-05 | **100 %** de las **42** condiciones del catálogo alcanzadas por prueba, y **0** condiciones emitidas fuera del catálogo | Prueba de inspección en las dos direcciones (`TC-02023`) | Bloquea la fusión |
 | QG-06 | **100 %** de los **nueve** invariantes con al menos una prueba que verifique su violación rechazada, **sin dobles de prueba** | Matriz invariante contra prueba de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5, revisada al cerrar cada etapa (`TC-02026`) | Bloquea el cierre de la etapa |
-| QG-07 | La batería completa termina en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10] | Duración total reportada por el ejecutor en la etapa `test` | **Condicionado**, ver §3.1 |
+| QG-07 | La batería completa termina en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain] | Duración total reportada por el ejecutor en la etapa `test` | **Condicionado**, ver §3.1 |
 | QG-08 | Ninguna condición prevista viaja como excepción de control de flujo | Revisión de la superficie pública contra [`ADR-02002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Se rechaza en revisión aunque compile |
 
 ### 3.1 Qué significa que un gate esté condicionado

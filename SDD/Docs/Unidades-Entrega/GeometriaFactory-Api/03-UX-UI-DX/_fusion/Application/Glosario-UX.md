@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-09
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9, §9.1, §9.2 y §9.3 (glosario raíz de la cadena); `02-Especificacion-Funcional/Glosario-Funcional.md` §2, §3 y §4; `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4 y §11; §6 de CU-04001 a CU-04010; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.2, §12.1, §17.2.P.1, §17.2.P.3, §17.2.P.5, §17.2.P.11; `Vocabulario-Rules.md` §2, §4 y §9
+**Trazabilidad upstream:** `00-Contexto/Vision-Producto.md` §9, §9.1, §9.2 y §9.3 (glosario raíz de la cadena); `02-Especificacion-Funcional/Glosario-Funcional.md` §2, §3 y §4; `02-Especificacion-Funcional/Especificacion-Funcional.md` §1, §3, §4 y §11; §6 de CU-04001 a CU-04010; `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` §2; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.2, §12.1, §17.1.P.1 · GeometriaFactory-Application, §17.1.P.3 · GeometriaFactory-Application, §17.1.P.5 · GeometriaFactory-Application, §17.1.P.11 · GeometriaFactory-Application; `Vocabulario-Rules.md` §2, §4 y §9
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
 
 ---

@@ -41,7 +41,7 @@ Como **persona con cuenta**, quiero **cerrar mi sesión y que la aplicación só
 
 ## 5. Prioridad y estimación
 
-`Must` por derivar de `F-05`, `Must Have`, y porque la protección de rutas es criterio de aceptación declarado en `PRODUCT-INTAKE` §17.6.P.5.
+`Must` por derivar de `F-05`, `Must Have`, y porque la protección de rutas es criterio de aceptación declarado en `PRODUCT-INTAKE` §17.2.P.5 · GeometriaFactory-Web.
 
 **Estimación: sin fijar**, por [`../Product-Backlog.md`](../Product-Backlog.md) §4.1.
 

@@ -12,7 +12,7 @@
 
 ## 1. Contexto
 
-`PRODUCT-INTAKE` §17.7.P.2 declara **tres capas obligatorias** y dice explícitamente que son «el motivo por el que existe la fachada»: el componente anfitrión, que vive en `GeometriaFactory-Web` y no conoce el motor de dibujo ni los nombres internos del bundle; la fachada externa, que expone funciones planas y **no contiene lógica de dibujo**; y el servicio del visor, que tiene la escena, las mallas, el árbol y la disposición y **no conoce al anfitrión**.
+`PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Visor declara **tres capas obligatorias** y dice explícitamente que son «el motivo por el que existe la fachada»: el componente anfitrión, que vive en `GeometriaFactory-Web` y no conoce el motor de dibujo ni los nombres internos del bundle; la fachada externa, que expone funciones planas y **no contiene lógica de dibujo**; y el servicio del visor, que tiene la escena, las mallas, el árbol y la disposición y **no conoce al anfitrión**.
 
 El punto de extensión declarado del producto **es** ese contrato de fachada (`PRODUCT-INTAKE` §18), y `tiene_extensibilidad` es true sólo en este proyecto de código (`PRODUCT-MANIFEST` §5). Lo que la extensión compra es concreto: **el motor de dibujo tridimensional es reemplazable sin tocar ninguna página**.
 
@@ -35,8 +35,8 @@ Se adopta un **estilo de microkernel con fachada plana en tres capas**, con la r
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Tres capas con fachada plana (**adoptada**) | El motor de dibujo es reemplazable sin tocar ninguna página; la fachada se puede ejercer entera sin backend; el anfitrión se prueba contra seis funciones y no contra una escena | Una capa de indirección más; toda capacidad nueva del motor que el anfitrión necesite tiene que pasar por la fachada |
-| Exponer el servicio de dibujo directamente al anfitrión | Una capa menos; acceso inmediato a todo lo que el motor ofrece | Ata las páginas a los nombres internos del motor y **lo vuelve irreemplazable**, que es exactamente lo contrario del punto de extensión declarado. Descartada por `PRODUCT-INTAKE` §17.7.P.2 |
-| Portar el archivo del visualizador previo tal cual | Costo casi nulo; ya funciona | Arrastraría **527 de 1101 líneas** de código inactivo —el **48 %**— y dos controles inoperantes. Descartada por `PRODUCT-INTAKE` §17.7.P.2 |
+| Exponer el servicio de dibujo directamente al anfitrión | Una capa menos; acceso inmediato a todo lo que el motor ofrece | Ata las páginas a los nombres internos del motor y **lo vuelve irreemplazable**, que es exactamente lo contrario del punto de extensión declarado. Descartada por `PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Visor |
+| Portar el archivo del visualizador previo tal cual | Costo casi nulo; ya funciona | Arrastraría **527 de 1101 líneas** de código inactivo —el **48 %**— y dos controles inoperantes. Descartada por `PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Visor |
 | Un componente web autónomo en lugar de una fachada de funciones | El anfitrión lo usaría como un elemento más de la página, sin invocaciones explícitas | Movería a la capa 3 decisiones de presentación que son del anfitrión —ubicación, tamaño, estilo del elemento de dibujo— y haría que el ciclo de vida lo gobernara el navegador y no el anfitrión, que es quien sabe cuándo hay que liberar |
 
 ## 5. Consecuencias positivas
@@ -49,7 +49,7 @@ Se adopta un **estilo de microkernel con fachada plana en tres capas**, con la r
 ## 6. Consecuencias negativas y trade-offs
 
 1. **Se acepta una capa de indirección.** Toda capacidad del motor que el anfitrión necesite tiene que atravesar la fachada, y eso hace más caro exponerla. Es deliberado: es el costo de que el motor sea reemplazable.
-2. **Se acepta reescribir el port en lugar de copiar el archivo original**, con el costo de trabajo que implica (`PRODUCT-INTAKE` §17.7.P.12).
+2. **Se acepta reescribir el port en lugar de copiar el archivo original**, con el costo de trabajo que implica (`PRODUCT-INTAKE` §17.2.P.12 · GeometriaFactory-Visor).
 3. **Se acepta que la capa 1 no sea de este proyecto de código.** El anfitrión vive en `GeometriaFactory-Web` y su categoría 03 documenta la superficie donde la escena queda embebida; acá sólo se declara el contrato entre las dos.
 4. **Se acepta que agregar una función a la fachada sea un cambio menor y no un evento raro.** Ya pasó una vez, con la sexta función, y el proceso está declarado en [`../Extensibilidad.md`](../Extensibilidad.md) §5.
 
@@ -72,7 +72,7 @@ Se adopta un **estilo de microkernel con fachada plana en tres capas**, con la r
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.7.P.2, §17.7.P.10, §17.7.P.11 punto 3, §17.7.P.12, §18 y §15 (`PT-02`).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.2.P.2 · GeometriaFactory-Visor, §17.2.P.10 · GeometriaFactory-Visor, §17.2.P.11 · GeometriaFactory-Visor punto 3, §17.2.P.12 · GeometriaFactory-Visor, §18 y §15 (`PT-02`).
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §5 (`tiene_extensibilidad`).
 - [`../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §1, §3.1 y §3.2.
 - ADR relacionadas: [`ADR-12002`](ADR-12002-Superficie-De-Seis-Funciones-Planas.md), [`ADR-12004`](ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md).

@@ -152,7 +152,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | Caso **9** de la batería; `CU-06001`, `CU-06002`; `US-06002`, `US-06006`; NFR de tolerancia; pasos `P-1` a `P-7` |
 | Setup | Fixture con el texto literal de `E-1` |
 | Pasos | Given el texto semilla de `E-1`, When se lo interpreta y se verifican sus valores, Then se reconstruyen **3 piezas** con índices 0, 1 y 2, y se emiten **exactamente 2 advertencias**. Then **el cilindro no produce ninguna observación**: su área declarada 113.10 contra la suma de componentes 113.09 da una diferencia de **exactamente 0.01**, y con el operador **estricto** eso **no** produce advertencia. Then **ninguna observación es de severidad `Error`** |
-| Salida esperada | 3 piezas y **2** advertencias. **Una tercera advertencia significa que el operador de tolerancia dejó de ser estricto**, y el caso de prueba canónico del producto falla. El intake §17.3.P.10 declara este número con su fundamento y **lo excluye expresamente de las asunciones** |
+| Salida esperada | 3 piezas y **2** advertencias. **Una tercera advertencia significa que el operador de tolerancia dejó de ser estricto**, y el caso de prueba canónico del producto falla. El intake §17.1.P.10 · GeometriaFactory-Infrastructure declara este número con su fundamento y **lo excluye expresamente de las asunciones** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -214,7 +214,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | NFR de peticiones de red (`05` §8); `QG-08`; `CU-06001` CA-11 |
 | Setup | El árbol de dependencias de los dos motores |
 | Pasos | Given los dos motores, When se inspeccionan sus dependencias y se ejecuta la batería completa con el acceso a red observado, Then el recuento de peticiones originadas por ellos es exactamente **0**. Then **ninguno abre el almacén**: reciben texto y devuelven observaciones |
-| Salida esperada | Dos recuentos en cero. Es lo que el intake §17.3.P.3 declara —«el validador de figuras no hace red»— y lo que hace que la interpretación se pueda medir **sin almacén** |
+| Salida esperada | Dos recuentos en cero. Es lo que el intake §17.1.P.3 · GeometriaFactory-Infrastructure declara —«el validador de figuras no hace red»— y lo que hace que la interpretación se pueda medir **sin almacén** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -225,7 +225,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit, **medición** |
 | Cubre | NFR de tiempo de interpretación (`05` §8); `QG-14`; `US-06001` |
 | Setup | Fixture con el texto literal de `E-1`; medición **sin almacén** |
-| Pasos | Given el texto de **3** piezas de `E-1`, When se lo interpreta y se verifican sus valores, Then el tiempo total es menor a **200 ms**, medido **sin abrir el almacén**, que es la condición que el intake §17.3.P.10 declara |
+| Pasos | Given el texto de **3** piezas de `E-1`, When se lo interpreta y se verifican sus valores, Then el tiempo total es menor a **200 ms**, medido **sin abrir el almacén**, que es la condición que el intake §17.1.P.10 · GeometriaFactory-Infrastructure declara |
 | Salida esperada | Una medición registrada. El umbral viene rotulado **[ASUNCIÓN del intake §22, asunción `A-5`]** y su gate es **condicionado**: se mide y se registra, y no bloquea hasta la confirmación del Product Owner |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -436,7 +436,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | `CU-06010`; `US-06024`; NFR de aplicación de transformaciones; `QG-04` |
 | Setup | Un almacén **inexistente**, en una ubicación recibida por configuración de prueba |
 | Pasos | Given un almacén que no existe, When arranca la preparación, Then el almacén **se crea**, las transformaciones **se aplican solas** y **ningún paso manual hace falta**. When se vuelve a arrancar sobre el almacén ya preparado, Then **no se aplica nada dos veces** y el linaje queda registrado |
-| Salida esperada | **1 de 1** aplicación exitosa sobre almacén inexistente y una segunda ejecución idempotente. Es **criterio de aceptación de la etapa `c`** y etapa propia del pipeline (intake §17.3.P.8) |
+| Salida esperada | **1 de 1** aplicación exitosa sobre almacén inexistente y una segunda ejecución idempotente. Es **criterio de aceptación de la etapa `c`** y etapa propia del pipeline (intake §17.1.P.8 · GeometriaFactory-Infrastructure) |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 

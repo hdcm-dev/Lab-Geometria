@@ -12,7 +12,7 @@
 
 ## 1. Contexto
 
-`PRODUCT-INTAKE` §17.4.P.10 declara el único requerimiento no funcional propio de este proyecto de código, y es estructural: **el payload de listado de trabajos no incluye ni el texto original ni los componentes de las piezas**, para que el listado del administrador no arrastre el texto completo de cada trabajo. El valor viene rotulado `[ASUNCIÓN]` derivada de la fuente técnica.
+`PRODUCT-INTAKE` §17.1.P.10 · GeometriaFactory-Contracts declara el único requerimiento no funcional propio de este proyecto de código, y es estructural: **el payload de listado de trabajos no incluye ni el texto original ni los componentes de las piezas**, para que el listado del administrador no arrastre el texto completo de cada trabajo. El valor viene rotulado `[ASUNCIÓN]` derivada de la fuente técnica.
 
 La categoría 02 lo amplió en su restricción transversal `RT-04`: la proyección tampoco lleva **el comentario del administrador**. Y separó CU-08004 de CU-08005 con un fundamento explícito: la proyección de listado existe precisamente para **no** ser el detalle, y con un único contrato de uso de lectura la restricción no tendría dónde verificarse ([`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §3.1).
 
@@ -37,7 +37,7 @@ Motivación upstream: NB-00003, NB-00005, NB-00007, NB-00009; RN-08008, RN-08009
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Proyección estricta separada del detalle (**adoptada**) | El listado no crece con el tamaño del texto de cada trabajo; la restricción es verificable por inspección; el criterio de qué es listado y qué es detalle queda escrito | Dos familias de tipos que mantener; una pantalla que necesite un dato del detalle en el listado tiene que pedir el detalle |
-| Un único tipo de lectura, con los campos pesados opcionales | Un solo tipo que mantener; la pantalla pide lo que necesita | La restricción de `PRODUCT-INTAKE` §17.4.P.10 dejaría de ser verificable por inspección: un campo opcional **puede** venir poblado, y el defecto no se vería en la superficie sino en cada llamada |
+| Un único tipo de lectura, con los campos pesados opcionales | Un solo tipo que mantener; la pantalla pide lo que necesita | La restricción de `PRODUCT-INTAKE` §17.1.P.10 · GeometriaFactory-Contracts dejaría de ser verificable por inspección: un campo opcional **puede** venir poblado, y el defecto no se vería en la superficie sino en cada llamada |
 | Un tipo de listado por papel, uno para el alumno y otro para el administrador | Cada papel recibiría exactamente lo suyo | Es el mismo tipo con distinto alcance de datos, y dos tipos habrían duplicado la superficie sin declarar ninguna decisión de contrato. Es el criterio de fusión que la categoría 02 aplicó en CU-08004 |
 | El comentario del administrador como una observación más | Una sola colección que recorrer en la presentación | Un comentario no es una observación: no tiene especie, no tiene posición de pieza y no tiene par de valores. Contarlo entre las observaciones haría que un rechazo comentado se leyera como un defecto más del trabajo |
 
@@ -73,7 +73,7 @@ Motivación upstream: NB-00003, NB-00005, NB-00007, NB-00009; RN-08008, RN-08009
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.4.P.10, §12 (entrada «comentario») y §4 (F-21).
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.10 · GeometriaFactory-Contracts, §12 (entrada «comentario») y §4 (F-21).
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §3.1 y §6 (`RT-04`, `RT-09`).
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md`](../Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md) y [`CU-08005`](../Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md).
 - ADR relacionadas: [`ADR-08001`](ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md), [`ADR-08003`](ADR-08003-Versionado-Por-Compilacion-Compartida.md).

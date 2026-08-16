@@ -72,8 +72,8 @@ Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proye
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
-| Tiempo del caso de uso más pesado | Menos de **500 ms** para el envío que interpreta el texto de **3** piezas de `E-1`, medido **sin acceso a base** **[ASUNCIÓN del intake §17.2.P.10]** | Medición del pipeline por `BT-04019`, **no un caso de prueba de comportamiento**. Gate `QG-10`, condicionado | Cronometrado dentro de la batería unitaria, con doble del puerto de validación | `Pendiente` |
-| Cobertura de la biblioteca | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.2.P.6]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-03`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
+| Tiempo del caso de uso más pesado | Menos de **500 ms** para el envío que interpreta el texto de **3** piezas de `E-1`, medido **sin acceso a base** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Application]** | Medición del pipeline por `BT-04019`, **no un caso de prueba de comportamiento**. Gate `QG-10`, condicionado | Cronometrado dentro de la batería unitaria, con doble del puerto de validación | `Pendiente` |
+| Cobertura de la biblioteca | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Application]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-03`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
 | Pruebas de esta capa que tocan la base de datos real | Exactamente **0** | `TC-04026` | Prueba de inspección del proyecto de pruebas, y revisión del pull request | `Pendiente` |
 | Dependencias salientes del proyecto de código | Exactamente **1** al producto y **0** a persistencia, transporte, serialización o marco web | `TC-04027` | Inspección del archivo de proyecto | `Pendiente` |
 | Componentes de pieza en las consultas de listado | Exactamente **0** cargados, en los dos listados | `TC-04030` | Inspección de la proyección devuelta por la consulta | `Pendiente` |
@@ -162,7 +162,7 @@ La partición es por los **ocho** componentes de `05` §3.1, no por capas de des
 
 **«Sin medir» y no «0 %».** No hay código construido: un cero sería una afirmación falsa sobre el estado del sistema y no una ausencia de medición.
 
-**El umbral global de 85 / 80 viene rotulado [ASUNCIÓN] desde el intake §17.2.P.6.** El **mutation score de 60 %** no lo declara ninguna fuente del producto: es el piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library`, y esta categoría lo adopta como tal sin atribuírselo al intake.
+**El umbral global de 85 / 80 viene rotulado [ASUNCIÓN] desde el intake §17.1.P.6 · GeometriaFactory-Application.** El **mutation score de 60 %** no lo declara ninguna fuente del producto: es el piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library`, y esta categoría lo adopta como tal sin atribuírselo al intake.
 
 ## 8. Huecos identificados
 

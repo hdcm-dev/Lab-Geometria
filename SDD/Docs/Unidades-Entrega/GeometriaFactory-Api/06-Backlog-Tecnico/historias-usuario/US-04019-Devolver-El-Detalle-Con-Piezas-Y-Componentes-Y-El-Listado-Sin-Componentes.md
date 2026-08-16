@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el detalle traiga las
 
 ## 2. Contexto
 
-`NB-00006` pide visualización dentro del producto, y `02` §7.2 declara que **lo que esta capa aporta a esa necesidad es la entrega de las piezas con su identidad posicional y sus componentes en el detalle**. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md). `PRODUCT-INTAKE` §17.2.P.10 declara que las consultas de listado **nunca cargan los componentes**.
+`NB-00006` pide visualización dentro del producto, y `02` §7.2 declara que **lo que esta capa aporta a esa necesidad es la entrega de las piezas con su identidad posicional y sus componentes en el detalle**. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md). `PRODUCT-INTAKE` §17.1.P.10 · GeometriaFactory-Application declara que las consultas de listado **nunca cargan los componentes**.
 
 ## 3. Criterios de aceptación
 

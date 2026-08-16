@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-12
 **Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §1, §2 y §3; [`../05-Arquitectura-Tecnica/Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) 1.0; [`../../GeometriaFactory-Visor/09-Devops/Supply-Chain-Seguridad.md`](_fusion/Visor/Supply-Chain-Seguridad.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §14, §17.6.P.1, §17.6.P.5, §17.6.P.8, §17.6.P.9 y §17.7.P.1
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8, §9 y §11; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §1, §2 y §3; [`../05-Arquitectura-Tecnica/Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) 1.0; [`../../GeometriaFactory-Visor/09-Devops/Supply-Chain-Seguridad.md`](_fusion/Visor/Supply-Chain-Seguridad.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §14, §17.2.P.1 · GeometriaFactory-Web, §17.2.P.5 · GeometriaFactory-Web, §17.2.P.8 · GeometriaFactory-Web, §17.2.P.9 · GeometriaFactory-Web y §17.2.P.1 · GeometriaFactory-Visor
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -59,7 +59,7 @@
 | Integridad del origen | **Cumplido** | Etiqueta por etapa cerrada, y reversión apoyada en ella ([`Estrategia-Versionado.md`](Estrategia-Versionado.md) §4; `05` §5) |
 | Integridad del artefacto respecto de su fuente | **Cumplido para el bundle**, que es la parte generada: `QG-02` exige que se genere en el mismo flujo y `QG-09` de `GeometriaFactory-Visor` prohíbe editarlo a mano | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2 |
 
-**Lo que la ausencia de firma deja abierto, dicho sin suavizar**: quien reciba el contenido del hosting no tiene modo de comprobar que fue este flujo el que lo puso ahí. La mitigación disponible **no es criptográfica sino de acceso**: las credenciales del canal viven como secreto del repositorio, con alcance mínimo, y no entran al árbol de fuentes (intake §17.6.P.5).
+**Lo que la ausencia de firma deja abierto, dicho sin suavizar**: quien reciba el contenido del hosting no tiene modo de comprobar que fue este flujo el que lo puso ahí. La mitigación disponible **no es criptográfica sino de acceso**: las credenciales del canal viven como secreto del repositorio, con alcance mínimo, y no entran al árbol de fuentes (intake §17.2.P.5 · GeometriaFactory-Web).
 
 ## 3. Nivel de integridad de la construcción
 
@@ -93,7 +93,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático | **Existe y bloquea**: el gate de construcción es «sin advertencias» | Intake §17.6.P.8; `QG-01` |
+| Estático | **Existe y bloquea**: el gate de construcción es «sin advertencias» | Intake §17.2.P.8 · GeometriaFactory-Web; `QG-01` |
 | Estático de estructura | **Existe, bloquea, y es la verificación característica de este proyecto de código**: `QG-06` sobre el árbol de fuentes y las dependencias de guion, `QG-08` sobre el traductor de condiciones y `QG-09` sobre las invocaciones al bundle | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | **Dinámico** | **Existe, y acá sí tiene sujeto**, a diferencia de las cinco bibliotecas del producto: `QG-05`, `QG-07` y `QG-10` se miden **sobre el producto corriendo en un navegador**, contando peticiones, leyendo el almacenamiento y observando el tráfico del circuito | `Estrategia-Calidad.md` §3; `Plan-Pruebas.md` §3 |
 | Condición de las mediciones de ausencia | **`QG-05` se mide con los dos movimientos automáticos prendidos.** Un conteo con los movimientos apagados daría cero sin haber ejercitado el bucle de dibujo | `Estrategia-Calidad.md` §3, `QG-05` |
@@ -108,14 +108,14 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Vulnerabilidad sobre la biblioteca de componentes de interfaz | Se ancla la versión corregida y se registra en el punto de control de la etapa. **Si la versión corregida exige una plataforma que el hosting no soporta**, el conflicto es con `PT-01.a` y la salida declarada es bajar la versión objetivo del front, no la del backend | El equipo, y el Product Owner si hay que bajar la versión objetivo |
 | Vulnerabilidad sobre el motor de dibujo tridimensional | **No se remedia acá**: viaja dentro del bundle y su anclaje pertenece a `GeometriaFactory-Visor`. Lo que esta unidad tiene que hacer es **volver a publicar** para que el bundle corregido llegue al hosting | Categoría 09 de `GeometriaFactory-Visor`, y esta categoría publica |
 | Vulnerabilidad sobre la plataforma de ejecución del hosting | **No está bajo control del producto**: el hosting es un servicio gratuito de terceros. Lo que sí está bajo control es la versión objetivo del front | El Product Owner, con constancia |
-| Exposición de las credenciales del canal de publicación | **Rotación inmediata del secreto y republicación.** El valor no está en el repositorio, de modo que la rotación no exige tocar código | Intake §17.6.P.5 |
+| Exposición de las credenciales del canal de publicación | **Rotación inmediata del secreto y republicación.** El valor no está en el repositorio, de modo que la rotación no exige tocar código | Intake §17.2.P.5 · GeometriaFactory-Web |
 | Exposición de la dirección del servidor propio | Rotación del secreto, republicación y **revisión de por dónde se filtró**: `QG-08` mide **0** mensajes que la expongan, sobre los **diecisiete** códigos vivos y el camino de ausencia de respuesta | Es `RA-03`; `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 |
 
 **No se declara ningún acuerdo de nivel de servicio de remediación en horas o días.** El intake §10 declara «sin plazo; el avance se mide por etapas cerradas». El mecanismo que reemplaza al plazo es el **punto de control bloqueante** de la etapa en curso.
 
 **Comunicación a integradores: no aplica.** No hay integradores externos, y el intake §10 declara que **ninguna normativa de compliance aplica**: es un laboratorio de aula con cuentas creadas para la materia.
 
-**Y un riesgo aceptado por escrito que esta categoría no reabre.** El intake §17.5.P.5 declara que el tramo entre el front y el servicio de datos **viaja en claro si ese salto es HTTP plano**, con el túnel saliente como salida **documentada y no adoptada**. Es decisión del Product Owner registrada aguas arriba; esta categoría la transcribe y **no la suaviza ni la agrava**.
+**Y un riesgo aceptado por escrito que esta categoría no reabre.** El intake §17.1.P.5 · GeometriaFactory-Api declara que el tramo entre el front y el servicio de datos **viaja en claro si ese salto es HTTP plano**, con el túnel saliente como salida **documentada y no adoptada**. Es decisión del Product Owner registrada aguas arriba; esta categoría la transcribe y **no la suaviza ni la agrava**.
 
 ## 7. Las tres reglas de arquitectura como preocupación de cadena de suministro
 

@@ -67,7 +67,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 
 ## 4. Convenciones de los samples
 
-- **Autocontenidos.** Ninguno requiere servicios externos: el proyecto de código declara **una sola** dependencia saliente, `GeometriaFactory-Domain` (`PRODUCT-INTAKE` §17.2.P.1), y los **cuatro** puertos se satisfacen con dobles que viven dentro del propio sample.
+- **Autocontenidos.** Ninguno requiere servicios externos: el proyecto de código declara **una sola** dependencia saliente, `GeometriaFactory-Domain` (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Application), y los **cuatro** puertos se satisfacen con dobles que viven dentro del propio sample.
 - **Ejecutables en entorno limpio en cuatro pasos**, dentro del entorno de desarrollo contenido del repositorio, que es donde ocurre todo el ciclo porque el host no tiene la plataforma (`PRODUCT-INTAKE`, encabezado de la Parte C).
 - **Los dobles son de puerto y de nada más**, que es la política que [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Testing.md) §5 fija: ningún sample sustituye un componente interno de esta capa por un doble.
 - **Nivel declarado** en la §2 de cada markdown, y progresión por nivel y no por dominio.

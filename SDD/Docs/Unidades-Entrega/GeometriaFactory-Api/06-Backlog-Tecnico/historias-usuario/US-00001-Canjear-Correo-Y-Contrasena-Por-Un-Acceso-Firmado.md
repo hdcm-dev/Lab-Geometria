@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`, servidor a servidor**, quiero **canjea
 
 ## 2. Contexto
 
-`NB-00002` pide identidad propia del alumno. Es **el único punto de acceso que una fuente declara con su ruta** (`02` §11), y su flujo lo fija `PRODUCT-INTAKE` §17.5.P.5. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
+`NB-00002` pide identidad propia del alumno. Es **el único punto de acceso que una fuente declara con su ruta** (`02` §11), y su flujo lo fija `PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Api. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 
 ## 3. Criterios de aceptación
 

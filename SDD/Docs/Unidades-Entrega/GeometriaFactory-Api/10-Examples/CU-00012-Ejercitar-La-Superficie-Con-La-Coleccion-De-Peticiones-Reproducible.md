@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §16.1 (qué hay en la carpeta de muestras para el tipo `rest-api`), §18 (**S-2**, con su reproducibilidad de cinco pasos o menos), §15 (regla de delivery: **no se inventan textos de prueba**), §20 (**los ocho escenarios**, E-1 a E-8), §21 (matriz de cobertura), §17.5.P.6, §10 (host de desarrollo sin herramientas)
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §16.1 (qué hay en la carpeta de muestras para el tipo `rest-api`), §18 (**S-2**, con su reproducibilidad de cinco pasos o menos), §15 (regla de delivery: **no se inventan textos de prueba**), §20 (**los ocho escenarios**, E-1 a E-8), §21 (matriz de cobertura), §17.1.P.6 · GeometriaFactory-Api, §10 (host de desarrollo sin herramientas)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y **`10-Examples`** de GeometriaFactory-Api
 
 ---

@@ -74,7 +74,7 @@ Los tres conceptos —condición, observación y comentario— viajan en **tipos
 
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) —catálogo de 42 condiciones y los cinco identificadores retirados— y [`../../03-UX-UI-DX/README.md`](../../03-UX-UI-DX/README.md) §1.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 y §4.
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §4.1 (RN-02009) y §17.1.P.6.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §4.1 (RN-02009) y §17.1.P.6 · GeometriaFactory-Domain.
 - ADR relacionadas: [`ADR-02001`](ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md), [`ADR-02005`](ADR-02005-Guarda-Unica-De-Admisibilidad.md).
 
 ## 10. Control de cambios

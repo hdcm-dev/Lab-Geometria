@@ -12,7 +12,7 @@
 
 ## 1. Contexto
 
-El visualizador previo ubica las piezas con un **ordenamiento aleatorio**, de modo que dos previsualizaciones del mismo trabajo se ven distintas. El intake decide reemplazarlo por **posición derivada del índice** (`PRODUCT-INTAKE` §17.7.P.2 y §17.7.P.11 punto 5), y declara la disposición determinista como uno de los requerimientos no funcionales del proyecto de código: procesar el mismo trabajo dos veces produce la misma disposición.
+El visualizador previo ubica las piezas con un **ordenamiento aleatorio**, de modo que dos previsualizaciones del mismo trabajo se ven distintas. El intake decide reemplazarlo por **posición derivada del índice** (`PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Visor y §17.2.P.11 · GeometriaFactory-Visor punto 5), y declara la disposición determinista como uno de los requerimientos no funcionales del proyecto de código: procesar el mismo trabajo dos veces produce la misma disposición.
 
 Hay dos hechos del producto que atan la decisión más de lo que parece a primera vista:
 
@@ -79,7 +79,7 @@ Motivación upstream: NB-00006, y NB-00004 en su parte de piezas dibujadas; capa
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.7.P.2, §17.7.P.10, §17.7.P.11 punto 5, §4 (F-13, F-25) y §20 E-5.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.2.P.2 · GeometriaFactory-Visor, §17.2.P.10 · GeometriaFactory-Visor, §17.2.P.11 · GeometriaFactory-Visor punto 5, §4 (F-13, F-25) y §20 E-5.
 - [`../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §3.2 (G-6), §5.4 y §5.5.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §6, fila de disposición determinista.
 - ADR relacionadas: [`ADR-12002`](ADR-12002-Superficie-De-Seis-Funciones-Planas.md), [`ADR-12003`](ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md).

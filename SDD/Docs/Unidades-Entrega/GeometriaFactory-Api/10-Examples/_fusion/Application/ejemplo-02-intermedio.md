@@ -24,7 +24,7 @@ Demostrar el ciclo del trabajo tal como esta capa lo orquesta, con los **ocho** 
 
 ## 3. Prerequisites
 
-Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido: la única dependencia saliente del proyecto de código es `GeometriaFactory-Domain` (`PRODUCT-INTAKE` §17.2.P.1) y los puertos se satisfacen con dobles.
+Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido: la única dependencia saliente del proyecto de código es `GeometriaFactory-Domain` (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Application) y los puertos se satisfacen con dobles.
 
 **Un prerequisito de datos, no de herramientas.** El doble del puerto de validación devuelve, para cada uno de los ocho escenarios, **el resultado de interpretación que la sección «qué verificar» de ese escenario declara** en el `PRODUCT-INTAKE` §20, transcripto sin modificación. **No se compone ningún resultado nuevo**: esta capa no interpreta, y un resultado inventado acá sería un dato de geometría fabricado, que es exactamente lo que la regla de delivery del producto prohíbe.
 

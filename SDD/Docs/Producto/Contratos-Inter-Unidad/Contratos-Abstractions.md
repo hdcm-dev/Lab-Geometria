@@ -39,7 +39,7 @@ Los casos de uso que se materializan a través de este contrato son los **ocho**
 
 ## 2. Formato
 
-**Contrato de tipos compilados, declarado en prosa estructurada.** No hay descripción formal del servicio ni clientes generados: `PRODUCT-INTAKE` §17.4.P.2 descarta esa alternativa por costo de cadena de herramientas frente a dos consumidores compilados juntos, y [`ADR-08001`](../Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) la registra.
+**Contrato de tipos compilados, declarado en prosa estructurada.** No hay descripción formal del servicio ni clientes generados: `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Contracts descarta esa alternativa por costo de cadena de herramientas frente a dos consumidores compilados juntos, y [`ADR-08001`](../Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) la registra.
 
 **El formato de intercambio no se fija acá.** Este proyecto de código exige que los tipos sean serializables sin comportamiento; qué formato se usa y cómo se configura pertenece a `GeometriaFactory-Api` y a `GeometriaFactory-Web`. Es el punto abierto PA-03 de [`Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11.
 

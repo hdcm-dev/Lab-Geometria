@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`RN-02005`](../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md); [`RN-02008`](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §12 (entrada «valor declarado / valor derivado»), §17.1.P.11 punto 3, §17.3.P.10
+**Trazabilidad upstream:** [`RN-02005`](../../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md); [`RN-02008`](../../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §12 (entrada «valor declarado / valor derivado»), §17.1.P.11 · GeometriaFactory-Domain punto 3, §17.1.P.10 · GeometriaFactory-Infrastructure
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---

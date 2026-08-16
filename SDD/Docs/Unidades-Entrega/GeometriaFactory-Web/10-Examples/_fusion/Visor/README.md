@@ -32,7 +32,7 @@ Tres markdown explicativos con sus **diez** secciones obligatorias de `Rules-Exa
 
 Es la **pasada de diseño** de `Rules-Examples.md` §0.2: los tres contratos de verificación están completos salvo `evidencia`, que dice `No verificado — sin código` en los tres.
 
-**Los tres samples son las tres partes del sample `S-1` del `PRODUCT-INTAKE` §18**, la página integradora sin backend: un archivo que carga el archivo de guion, un área donde se pega un texto y una superficie de dibujo. No son tres samples que compiten con S-1: son su progresión didáctica, y entre los tres ejercen las **seis** funciones que §17.7.P.3 declara desde la versión 1.6 del intake. El `PRODUCT-INTAKE` §18 dice que S-1 «ejerce el contrato entero sin ninguna pieza del backend, que es exactamente la propiedad que hace reemplazable al motor 3D»; el ejemplo 03 es el que cierra esa promesa.
+**Los tres samples son las tres partes del sample `S-1` del `PRODUCT-INTAKE` §18**, la página integradora sin backend: un archivo que carga el archivo de guion, un área donde se pega un texto y una superficie de dibujo. No son tres samples que compiten con S-1: son su progresión didáctica, y entre los tres ejercen las **seis** funciones que §17.2.P.3 · GeometriaFactory-Visor declara desde la versión 1.6 del intake. El `PRODUCT-INTAKE` §18 dice que S-1 «ejerce el contrato entero sin ninguna pieza del backend, que es exactamente la propiedad que hace reemplazable al motor 3D»; el ejemplo 03 es el que cierra esa promesa.
 
 **Este es el único proyecto de código del producto cuyo `tiene_extensibilidad` es true** (`PRODUCT-MANIFEST` §5): el punto de extensión del producto es el contrato de esta fachada, y estos samples son su demostración ejecutable.
 
@@ -70,12 +70,12 @@ Es la **pasada de diseño** de `Rules-Examples.md` §0.2: los tres contratos de 
 
 ## 4. Convenciones de los samples
 
-- **Sin backend, y es la propiedad que define al proyecto de código.** Ninguno necesita servicio de datos, credencial ni acceso a redes de distribución externas. Es lo que el `PRODUCT-INTAKE` §17.7.P.6 exige no perder.
+- **Sin backend, y es la propiedad que define al proyecto de código.** Ninguno necesita servicio de datos, credencial ni acceso a redes de distribución externas. Es lo que el `PRODUCT-INTAKE` §17.2.P.6 · GeometriaFactory-Visor exige no perder.
 - **Ejecutables en entorno limpio en cinco pasos o menos**, dentro del entorno de desarrollo contenido del repositorio.
-- **El comando de construcción es el corto.** Los tres usan `scripts/build-visor.sh`, que produce **sólo** el archivo de guion; `scripts/build.sh` lo encadena con la compilación del resto del producto y no hace falta acá (`PRODUCT-INTAKE` §17.7.P.8).
+- **El comando de construcción es el corto.** Los tres usan `scripts/build-visor.sh`, que produce **sólo** el archivo de guion; `scripts/build.sh` lo encadena con la compilación del resto del producto y no hace falta acá (`PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Visor).
 - **Toda aserción de ausencia lleva su condición de medición**, y la condición es vinculante. Un umbral cero sin condición de medición es un criterio mal escrito, y así lo declara [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Testing.md) §4.
 - **Los datos son reales**, transcriptos del `PRODUCT-INTAKE` §20 sin modificación, en archivos `.txt` y no `.json`, porque el texto de `E-2` no es JSON estrictamente válido y una herramienta que lo reformateara rompería lo que ese escenario ejercita.
-- **El archivo de guion nunca se edita a mano.** Los tres samples lo consumen generado por el comando de construcción, que es la regla del `PRODUCT-INTAKE` §17.7.P.7.
+- **El archivo de guion nunca se edita a mano.** Los tres samples lo consumen generado por el comando de construcción, que es la regla del `PRODUCT-INTAKE` §17.2.P.7 · GeometriaFactory-Visor.
 - **Los samples no acuñan vocabulario ni códigos.** Los **siete** códigos de condición tienen fuente única en `Definicion-Contrato-De-Fachada.md` §6, y ninguno puede nacer acá.
 
 ## 5. Estructura de `/samples` y su desvío declarado
@@ -96,7 +96,7 @@ Tres desvíos, los tres declarados acá y ninguno de nomenclatura por dominio:
 
 > El punto de extensión del producto es el contrato de la fachada del visor (`inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento`, las **seis** que §17.7 P.3 declara desde 1.6).
 
-Las **seis**, por nombre y con el rótulo del recuento. §18, §17.7.P.3 y [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §4 **coinciden**, y contra las tres se escriben estos samples. **Lo que sí quedó desactualizado es el `PRODUCT-MANIFEST` §5**, que afirmaba que «la enumeración de §18 del intake sigue nombrando cinco»; esa línea se corrigió el 2026-08-11 al resolver el hallazgo **P1-2** del informe de auditoría de esta fase. **No hay nada que elevar al Product Owner sobre §18 por parte de este proyecto de código.**
+Las **seis**, por nombre y con el rótulo del recuento. §18, §17.2.P.3 · GeometriaFactory-Visor y [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §4 **coinciden**, y contra las tres se escriben estos samples. **Lo que sí quedó desactualizado es el `PRODUCT-MANIFEST` §5**, que afirmaba que «la enumeración de §18 del intake sigue nombrando cinco»; esa línea se corrigió el 2026-08-11 al resolver el hallazgo **P1-2** del informe de auditoría de esta fase. **No hay nada que elevar al Product Owner sobre §18 por parte de este proyecto de código.**
 
 ## 6. Cómo agregar un sample nuevo
 

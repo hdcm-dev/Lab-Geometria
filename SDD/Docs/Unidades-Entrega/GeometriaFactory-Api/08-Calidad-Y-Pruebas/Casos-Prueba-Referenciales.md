@@ -286,7 +286,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | `CU-00006`; `RN-00004`, `RN-00003`, `RN-00011`; `INV-02`, `INV-03`; punto `A-12`; `US-00020`; NFR de eliminaciones fuera de alcance; `QG-12` |
 | Setup | Trabajos propios en los cuatro estados, trabajos de otro alumno, y accesos de alumno y de administrador |
 | Pasos | Given un trabajo propio en `Borrador` y el alumno, When lo elimina, Then procede. Given un trabajo propio **fuera de `Borrador`**, When se **fuerza la petición** contra `A-12` sin pasar por la interfaz, Then **se rechaza**. Given un trabajo **que no pertenece al solicitante**, When se fuerza la petición, Then **se rechaza**, con la respuesta de recurso no visible. Given el administrador sobre los tres estados que ve, Then los tres se eliminan; sobre un `Borrador` ajeno, Then se rechaza |
-| Salida esperada | Cuatro eliminaciones y tres rechazos, con **0** eliminaciones fuera de alcance aceptadas. **Es el único criterio de verificación del producto que la fuente exige ejercer forzando la petición contra esta superficie**, y el intake §17.5.P.6 lo declara bloqueante |
+| Salida esperada | Cuatro eliminaciones y tres rechazos, con **0** eliminaciones fuera de alcance aceptadas. **Es el único criterio de verificación del producto que la fuente exige ejercer forzando la petición contra esta superficie**, y el intake §17.1.P.6 · GeometriaFactory-Api lo declara bloqueante |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -446,7 +446,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | NFR de arranque en frío (`05` §8); `QG-13` |
 | Setup | El contenedor detenido y un almacén vacío |
 | Pasos | Given el contenedor detenido, When se lo arranca, Then aplica las transformaciones y **responde salud en menos de 30 segundos**, medido desde el arranque hasta la primera respuesta de `A-16` |
-| Salida esperada | Una medición registrada. El umbral viene rotulado **[ASUNCIÓN del intake §17.5.P.10, asunción `A-5`]** y su gate es **condicionado**. Su razón de ser está declarada: **para que la comprobación del despliegue sirva de algo** |
+| Salida esperada | Una medición registrada. El umbral viene rotulado **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Api, asunción `A-5`]** y su gate es **condicionado**. Su razón de ser está declarada: **para que la comprobación del despliegue sirva de algo** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 

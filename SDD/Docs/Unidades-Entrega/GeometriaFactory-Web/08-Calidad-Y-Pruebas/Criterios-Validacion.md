@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-12
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.6.P.6, §17.6.P.8, §17.6.P.10 y §22
+**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) **1.2**; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §15, §17.2.P.6 · GeometriaFactory-Web, §17.2.P.8 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web y §22
 **Trazabilidad downstream:** [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -29,7 +29,7 @@
 
 Define qué significa que `GeometriaFactory-Web` está **validado**. A diferencia de los proyectos de código de biblioteca del producto, éste **sí es una unidad de entrega**: se publica en el hosting público y es el único punto de contacto del navegador. Por eso «validado» acá quiere decir **que la etapa puede demostrarse a la persona y publicarse sin dejar la aplicación caída**.
 
-El momento en que se aplican estos criterios es el **punto de control de cada etapa**, que el intake §15 declara bloqueante, y **el final del flujo de publicación**, que el intake §17.6.P.8 declara que no termina en la subida.
+El momento en que se aplican estos criterios es el **punto de control de cada etapa**, que el intake §15 declara bloqueante, y **el final del flujo de publicación**, que el intake §17.2.P.8 · GeometriaFactory-Web declara que no termina en la subida.
 
 **Un criterio de este documento se cumple o no se cumple; no hay cumplimiento parcial.** Cuando uno no se cumple, la salida es la de §6 y nunca el silencio.
 
@@ -56,7 +56,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-10 | `PT-01.b`: transporte del circuito | Semáforo; **amarillo aceptable** documentando la latencia percibida | `TC-10034` | **Puerta técnica**: sólo el rojo obliga a cambiar el modelo de front. **Un repliegue de mayor latencia no es motivo de rediseño** |
 | CV-11 | `PT-01.c`: estabilidad del proceso | **20 minutos** continuos sin reciclado, con reconexión funcional | `TC-10034` | **Puerta técnica**: es el peor escenario y **no tiene mitigación en el código** |
 | CV-12 | `PT-01.d`: salida hacia el backend | Una llamada de salud devuelve **datos reales** | `TC-10034` | **Puerta técnica**: si no pasa, publicar el servicio de datos en un puerto convencional |
-| CV-13 | Pasos del guion de demostración de la etapa **y de todas las anteriores** | **100 %** **[ASUNCIÓN del intake §17.6.P.6 en cuanto a expresarlo como puerta; asunción `A-4` de §22, que declara que cambia la forma del gate y no su carácter bloqueante]** | `TC-10035` | **Bloqueante.** Lo rotulado [ASUNCIÓN] es **la forma de la puerta**, y §22 declara que un cambio del Product Owner no toca su carácter. **La regla acumulativa rige igual**: no es asunción de nadie |
+| CV-13 | Pasos del guion de demostración de la etapa **y de todas las anteriores** | **100 %** **[ASUNCIÓN del intake §17.2.P.6 · GeometriaFactory-Web en cuanto a expresarlo como puerta; asunción `A-4` de §22, que declara que cambia la forma del gate y no su carácter bloqueante]** | `TC-10035` | **Bloqueante.** Lo rotulado [ASUNCIÓN] es **la forma de la puerta**, y §22 declara que un cambio del Product Owner no toca su carácter. **La regla acumulativa rige igual**: no es asunción de nadie |
 | CV-14 | Peticiones del navegador hacia el servicio de datos | **0**, medidas **con los dos movimientos prendidos** | `TC-10029` | **Bloqueante, sin gradación**. Una medición hecha sin la condición **no cuenta como medición** |
 | CV-15 | Salidas hacia el servicio de datos y bibliotecas de guion que consulten | **1** y **0** | `TC-10030` | **Bloqueante** |
 | CV-16 | Apariciones de la credencial de sesión en el navegador | **0** | `TC-10003` | **Bloqueante**. Criterio de aceptación de la etapa `c` |
@@ -67,7 +67,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 | CV-21 | Elementos de la línea de base demostrados | **11 de 11** superficies, **73 de 73** componentes, **74 de 74** estados, **24 de 24** rutas y **29 de 29** campos | Las **61** filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **Bloqueante al cierre de la etapa** para los elementos que la etapa toca |
 | CV-22 | Advertencias de construcción | **0** | Etapa de construcción del flujo de publicación | **Bloqueante** |
 
-**No hay criterio de cobertura de líneas ni de tiempo de respuesta, y las dos ausencias tienen fundamento declarado.** La primera, porque no hay proyecto de pruebas propio (intake §17.6.P.6). La segunda, porque las tolerancias de **400 ms** son de **diseño de la espera** y no compromisos de tiempo de respuesta (`05` §8 y `PA-04` de su §11). **Inventar cualquiera de las dos sería inventar una medición sin sujeto o un compromiso sobre un hosting cuya latencia la propia fuente declara incógnita.**
+**No hay criterio de cobertura de líneas ni de tiempo de respuesta, y las dos ausencias tienen fundamento declarado.** La primera, porque no hay proyecto de pruebas propio (intake §17.2.P.6 · GeometriaFactory-Web). La segunda, porque las tolerancias de **400 ms** son de **diseño de la espera** y no compromisos de tiempo de respuesta (`05` §8 y `PA-04` de su §11). **Inventar cualquiera de las dos sería inventar una medición sin sujeto o un compromiso sobre un hosting cuya latencia la propia fuente declara incógnita.**
 
 ## 4. Criterios de regresión y de deriva
 
@@ -87,7 +87,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-30 | Cobertura de líneas | **No aplica**: no hay proyecto de pruebas propio (intake §17.6.P.6) | **No exigible.** Si en alguna etapa se agregan pruebas automatizadas de componentes, su umbral se fija en ese momento y se registra en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 |
+| CV-30 | Cobertura de líneas | **No aplica**: no hay proyecto de pruebas propio (intake §17.2.P.6 · GeometriaFactory-Web) | **No exigible.** Si en alguna etapa se agregan pruebas automatizadas de componentes, su umbral se fija en ese momento y se registra en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 |
 | CV-31 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-22` |
 | CV-32 | Todo valor visual sale de un token del catálogo de diseño; no hay literales visuales ad hoc | 0 literales fuera del catálogo | **Bloqueante**, por la sonda `SD-10054` |
 | CV-33 | Ningún instrumento de la maqueta ni valor compuesto para la maqueta llega al sistema construido | 0 instrumentos y 0 valores | **Bloqueante, sin gradación**, por las sondas `SD-10059` y `SD-10060` |

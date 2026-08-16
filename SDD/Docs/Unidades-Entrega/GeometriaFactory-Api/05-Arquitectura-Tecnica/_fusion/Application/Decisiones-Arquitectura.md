@@ -34,7 +34,7 @@ El mínimo de tres cubre estilo, superficie pública y estrategia de versionado,
 | ADR | Por qué existe |
 | --- | --- |
 | ADR-04004 | El flag `tiene_auth` es **true** en este proyecto de código, y el `PRODUCT-MANIFEST` §5 declara explícitamente que el efecto de esa corrección «es que la categoría 05 de esos dos proyectos de código emite su ADR de autenticación, que con el valor anterior se habría omitido». Además cierra la dependencia de disciplina que [`GeometriaFactory-Domain ADR-02005`](../../Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) §6 declaró que el dominio no podía cerrar: dejarla como viñeta habría enterrado la decisión que sostiene `INV-09` |
-| ADR-04005 | El intake declara la persistencia de este proyecto de código como «no aplica directamente», pero le asigna **el alcance de la unidad de trabajo** (§17.2.P.4). Es la única decisión de persistencia que esta capa toma, y sin ella el límite de consistencia quedaría sin dueño entre el dominio —que no abre unidades— y el adaptador —que no sabe qué operaciones forman un acto— |
+| ADR-04005 | El intake declara la persistencia de este proyecto de código como «no aplica directamente», pero le asigna **el alcance de la unidad de trabajo** (§17.1.P.4 · GeometriaFactory-Application). Es la única decisión de persistencia que esta capa toma, y sin ella el límite de consistencia quedaría sin dueño entre el dominio —que no abre unidades— y el adaptador —que no sabe qué operaciones forman un acto— |
 | ADR-04006 | La categoría 03 catalogó **36** condiciones y ninguna fuente declaraba quién puede acuñar una nueva. Un catálogo que crece desde varios lugares deja de ser cerrado, y aguas abajo `GeometriaFactory-Api` tiene que traducir cada condición a una respuesta de protocolo |
 
 ## 4. Cobertura de las categorías de decisión
@@ -43,9 +43,9 @@ El mínimo de tres cubre estilo, superficie pública y estrategia de versionado,
 | --- | --- | --- |
 | Estilo | ADR-04001, ADR-04006 | — |
 | Persistencia | ADR-04005 | No hay persistencia propia: lo que la ADR gobierna es el **alcance** de la unidad de trabajo y la forma de las dos lecturas del puerto de repositorio |
-| Comunicación | ADR-04002 | Los cuatro puertos son la única frontera del proyecto de código. No hay comunicación entre procesos: §17.2.P.3 declara «no aplica» hacia afuera |
+| Comunicación | ADR-04002 | Los cuatro puertos son la única frontera del proyecto de código. No hay comunicación entre procesos: §17.1.P.3 · GeometriaFactory-Application declara «no aplica» hacia afuera |
 | Seguridad | ADR-04004 | Autorización, no autenticación: acá no se comparan contraseñas ni se emiten accesos |
-| Observabilidad | **Ninguna** | `tiene_observabilidad_critica` es false y §17.2.P.10 no declara observabilidad propia. Esta capa no instrumenta: la correlación la lleva `GeometriaFactory-Api`, que es quien tiene petición que correlacionar |
+| Observabilidad | **Ninguna** | `tiene_observabilidad_critica` es false y §17.1.P.10 · GeometriaFactory-Application no declara observabilidad propia. Esta capa no instrumenta: la correlación la lleva `GeometriaFactory-Api`, que es quien tiene petición que correlacionar |
 | Despliegue | ADR-04003 | No hay unidad de despliegue propia; lo que la ADR gobierna es la construcción, el versionado y la asimetría de las dos caras |
 | Extensibilidad | **Ninguna** | `tiene_extensibilidad` es false en el `PRODUCT-MANIFEST` §5. El punto de extensión declarado del producto es el contrato de la fachada del visor, que es de `GeometriaFactory-Visor` |
 

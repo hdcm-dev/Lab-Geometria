@@ -338,7 +338,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | NFR «Dependencias salientes» de `05` §8; `BT-02004`; `QG-04` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 |
 | Setup | El archivo de proyecto de la biblioteca |
 | Pasos | Given el archivo de proyecto, When se lo inspecciona, Then declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización |
-| Salida esperada | Dos recuentos en 0. Es la propiedad que justifica el estilo entero y el intake la declara como condición de la capa (§17.1.P.1) |
+| Salida esperada | Dos recuentos en 0. Es la propiedad que justifica el estilo entero y el intake la declara como condición de la capa (§17.1.P.1 · GeometriaFactory-Domain) |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 

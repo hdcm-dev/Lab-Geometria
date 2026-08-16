@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** DX Lead (AG-03)
 **Variante:** DX
-**Trazabilidad upstream:** §6 de los once casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-04001 a CU-04011), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3 (los cuatro puertos, los metadatos de orquestación y la cantidad de figuras del conjunto raíz), §4 (**las cuatro comprobaciones**, sus **cinco** precisiones y la equivalencia de la negativa de facultad), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-04001 a RN-04016 y las §6 de los doce casos de uso de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`, más **RN-04012** y **RN-04013** del `PRODUCT-INTAKE` **1.14** §4.1 y el invariante **INV-09** de su §17.1.P.2; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-00001, NB-00002, NB-00003, NB-00004, NB-00005, NB-00009); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10**, §4 (F-26), §4.1, §4.2, §15, §17.1.P.2, §17.2.P.3, §17.2.P.5, §17.2.P.10, §17.2.P.11, §17.2.P.12
+**Trazabilidad upstream:** §6 de los once casos de uso de `02-Especificacion-Funcional/Casos-De-Uso/` (CU-04001 a CU-04011), de donde se deriva cada entrada, con sus §3, §5, §7, §8, §9 y §10; `02-Especificacion-Funcional/Especificacion-Funcional.md` §3 (los cuatro puertos, los metadatos de orquestación y la cantidad de figuras del conjunto raíz), §4 (**las cuatro comprobaciones**, sus **cinco** precisiones y la equivalencia de la negativa de facultad), §6 y §11; `02-Especificacion-Funcional/Glosario-Funcional.md` §2 y §3; RN-04001 a RN-04016 y las §6 de los doce casos de uso de `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/`, más **RN-04012** y **RN-04013** del `PRODUCT-INTAKE` **1.14** §4.1 y el invariante **INV-09** de su §17.1.P.2 · GeometriaFactory-Domain; `00-Contexto/Vision-Producto.md` §9.1 y §9.2; `01-Necesidades-Negocio/Necesidades-Negocio.md` §2 (NB-00001, NB-00002, NB-00003, NB-00004, NB-00005, NB-00009); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10**, §4 (F-26), §4.1, §4.2, §15, §17.1.P.2 · GeometriaFactory-Domain, §17.1.P.3 · GeometriaFactory-Application, §17.1.P.5 · GeometriaFactory-Application, §17.1.P.10 · GeometriaFactory-Application, §17.1.P.11 · GeometriaFactory-Application, §17.1.P.12 · GeometriaFactory-Application
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `11-Documentacion` de GeometriaFactory-Application
 
 ---
@@ -83,7 +83,7 @@ En el sentido inverso: `OBSERVACION_MAL_FORMADA` y `CONJUNTO_DE_PIEZAS_MAL_FORMA
 
 ### 1.3 Qué emite esta capa y qué compone el consumidor
 
-Esta capa emite un **motivo**, no un texto. No produce mensajes para personas, no los formatea y no los traduce: no cruza ninguna frontera de proceso y sus contratos son referencias de proyecto de código dentro de la misma solución de código (`PRODUCT-INTAKE` §17.2.P.3).
+Esta capa emite un **motivo**, no un texto. No produce mensajes para personas, no los formatea y no los traduce: no cruza ninguna frontera de proceso y sus contratos son referencias de proyecto de código dentro de la misma solución de código (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Application).
 
 La columna «mensaje» de este catálogo es el **enunciado canónico en lenguaje plano** de cada condición: la base sobre la que la capa que expone compone lo que una persona lee. No es una cadena que la biblioteca produzca ni un recurso que exista en el código.
 
@@ -402,7 +402,7 @@ Dos excepciones declaradas a la regla de calificación de `Pendiente`, que no so
 
 **Esta capa no localiza nada.** Política, en tres reglas:
 
-1. **Los motivos son identificadores estables**, en mayúsculas y sin acentos, y **no se traducen nunca**. Son parte de la superficie pública: renombrar uno es un cambio incompatible para los consumidores y rompe su compilación, que es la señal más temprana posible (`PRODUCT-INTAKE` §17.2.P.3). La §17 de cada caso de uso declara qué cambio sobre la enumeración es compatible: **agregar un motivo lo es si el consumidor tiene un camino por defecto**; quitar o resignificar uno, no.
+1. **Los motivos son identificadores estables**, en mayúsculas y sin acentos, y **no se traducen nunca**. Son parte de la superficie pública: renombrar uno es un cambio incompatible para los consumidores y rompe su compilación, que es la señal más temprana posible (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Application). La §17 de cada caso de uso declara qué cambio sobre la enumeración es compatible: **agregar un motivo lo es si el consumidor tiene un camino por defecto**; quitar o resignificar uno, no.
 2. **El texto que una persona lee no se compone acá.** La traducción de un motivo a mensaje y a respuesta de protocolo pertenece a `GeometriaFactory-Api` y a la superficie que lo muestra. Esa traducción está sujeta a la tabla de traducciones prohibidas de §2.4, que no es una recomendación de estilo sino una regla del producto.
 3. **Un solo idioma en el producto v1**: español rioplatense. No hay compromiso de traducción y no hay catálogo de recursos que mantener. Si alguna vez lo hubiera, viviría en la capa que compone el mensaje y no acá.
 

@@ -62,7 +62,7 @@ Los once de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3, resumidos acá
 | QG-01 | Construcción en 0 y sin advertencias | Bloqueante |
 | QG-02 | Batería entera en verde, sin pruebas deshabilitadas sin motivo | Bloqueante |
 | QG-03 | Cobertura 85 % líneas y 80 % ramas **[ASUNCIÓN del intake]** | **Condicionado** |
-| QG-04 | **0** pruebas de esta capa tocan la base de datos real | Bloqueante, puerta propia del intake §17.2.P.8 |
+| QG-04 | **0** pruebas de esta capa tocan la base de datos real | Bloqueante, puerta propia del intake §17.1.P.8 · GeometriaFactory-Application |
 | QG-05 | **1** dependencia saliente al producto y **0** a persistencia, transporte, serialización o marco web | Bloqueante |
 | QG-06 | 36 de 36 condiciones alcanzadas y 0 fuera del catálogo | Bloqueante |
 | QG-07 | 4 de 4 comprobaciones ejercidas sin base, con 1 prueba de orden | Bloqueante al cierre de etapa |

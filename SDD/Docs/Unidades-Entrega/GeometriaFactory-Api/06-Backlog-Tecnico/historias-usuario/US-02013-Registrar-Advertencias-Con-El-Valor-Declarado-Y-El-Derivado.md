@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-`NB-00005` es la visibilidad del error de cálculo. La capacidad `F-10` del intake §4 declara la verificación de los valores recalculándolos y las advertencias **que no bloquean**. `PRODUCT-INTAKE` §17.1.P.11 punto 3 declara que el valor declarado y el derivado **se guardan por separado**.
+`NB-00005` es la visibilidad del error de cálculo. La capacidad `F-10` del intake §4 declara la verificación de los valores recalculándolos y las advertencias **que no bloquean**. `PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain punto 3 declara que el valor declarado y el derivado **se guardan por separado**.
 
 ## 3. Criterios de aceptación
 

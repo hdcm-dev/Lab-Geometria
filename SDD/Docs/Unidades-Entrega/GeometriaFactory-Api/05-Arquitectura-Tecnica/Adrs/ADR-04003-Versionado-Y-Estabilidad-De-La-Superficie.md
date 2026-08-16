@@ -21,7 +21,7 @@ Un cambio incompatible en la primera cara rompe a un consumidor; un cambio incom
 
 La fuente declara la estrategia de versionado de este proyecto de código idéntica a la del nivel 0: versionado semántico, convenciones de mensaje de confirmación, **sin publicación en ningún repositorio de paquetes**, y una rama y una etiqueta por etapa. `redistribuible` es false. Los dos proyectos de código que lo consumen se compilan dentro del mismo artefacto de agrupación.
 
-Motivación upstream: `PRODUCT-INTAKE` §17.2.P.3, §17.2.P.7 y §17.2.P.8; §15, regla de no-regresión acumulativa y punto de control bloqueante.
+Motivación upstream: `PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Application, §17.1.P.7 · GeometriaFactory-Application y §17.1.P.8 · GeometriaFactory-Application; §15, regla de no-regresión acumulativa y punto de control bloqueante.
 
 ## 2. Decisión
 
@@ -41,7 +41,7 @@ Sobre la clase de cambio se decide, además, la asimetría que la superficie de 
 | --- | --- | --- |
 | Compilación compartida, con la asimetría de las dos caras declarada (**adoptada**) | Rompe en construcción y no en ejecución; costo de cadena de herramientas nulo; refleja que los dos consumidores viven en el mismo artefacto de agrupación | No protege contra un cambio de **semántica** que no cambie ninguna firma: eso lo tiene que atrapar la revisión y la batería |
 | Publicar la biblioteca como paquete versionado | Permitiría consumidores fuera de la solución y deprecación gradual | `redistribuible` es false y no hay ningún consumidor fuera de la solución. Agregaría un feed y una ceremonia de publicación sin resolver ningún problema del producto |
-| Descripción formal del contrato, generada y verificada por herramienta | Contrato explícito, verificable fuera del compilador | No hay protocolo que describir: esta capa no cruza frontera de proceso (`PRODUCT-INTAKE` §17.2.P.3). Sería una descripción de una superficie de biblioteca que el propio compilador ya verifica |
+| Descripción formal del contrato, generada y verificada por herramienta | Contrato explícito, verificable fuera del compilador | No hay protocolo que describir: esta capa no cruza frontera de proceso (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Application). Sería una descripción de una superficie de biblioteca que el propio compilador ya verifica |
 | Tratar los puertos con la misma regla que los casos de uso | Una sola regla, más simple de recordar | Escondería la asimetría real: agregar una operación a un puerto **rompe a quien lo implementa**, y llamarlo cambio menor haría que se hiciera sin punto de control |
 
 ## 5. Consecuencias positivas
@@ -85,7 +85,7 @@ Sobre la clase de cambio se decide, además, la asimetría que la superficie de 
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §15, §17.2.P.3, §17.2.P.7 y §17.2.P.8; §17.1.P.7, al que §17.2.P.7 se declara idéntica.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §15, §17.1.P.3 · GeometriaFactory-Application, §17.1.P.7 · GeometriaFactory-Application y §17.1.P.8 · GeometriaFactory-Application; §17.1.P.7 · GeometriaFactory-Domain, al que §17.1.P.7 · GeometriaFactory-Application se declara idéntica.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2, por `redistribuible` == false.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md`](../../../../Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md), que toma la misma decisión para la frontera entre las dos unidades desplegables.
 - ADR relacionadas: [`ADR-04002`](ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md), [`ADR-04006`](ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md).

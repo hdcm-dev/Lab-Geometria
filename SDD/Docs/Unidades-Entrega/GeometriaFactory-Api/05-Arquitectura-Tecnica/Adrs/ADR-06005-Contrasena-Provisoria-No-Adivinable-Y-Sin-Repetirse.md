@@ -18,7 +18,7 @@ Esta es la delegación más explícita de todo el corpus. `GeometriaFactory-Appl
 
 Y acá la fuente se termina: **ninguna declara la longitud ni el alfabeto**. La categoría 02 dejó escrita la tensión que hay que resolver —el valor tiene que ser **transcribible de viva voz** porque el administrador se lo comunica al alumno en persona, y a la vez tiene que estar **lejos de lo adivinable**— y la derivó a esta categoría sin resolverla.
 
-Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; `PRODUCT-INTAKE` §4 (F-26, F-04 precisada), §4.1, §17.3.P.5.
+Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; `PRODUCT-INTAKE` §4 (F-26, F-04 precisada), §4.1, §17.1.P.5 · GeometriaFactory-Infrastructure.
 
 ## 2. Decisión
 
@@ -86,7 +86,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; 
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4 (F-26 y F-04 precisada), §4.1 (RN-06014, RN-06015, RN-06016) y §17.3.P.5.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4 (F-26 y F-04 precisada), §4.1 (RN-06014, RN-06015, RN-06016) y §17.1.P.5 · GeometriaFactory-Infrastructure.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md`](../Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) §3 y §10.
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.4 y §3.7.
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../_fusion/Application/Arquitectura-Proyecto-Codigo.md) §10.2, fila de RN-06014, que es la delegación explícita que esta ADR recibe.

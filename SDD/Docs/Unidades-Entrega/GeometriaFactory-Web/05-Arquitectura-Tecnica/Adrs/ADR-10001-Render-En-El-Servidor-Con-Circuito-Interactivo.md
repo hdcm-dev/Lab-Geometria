@@ -18,7 +18,7 @@ Esa partición produce una consecuencia que gobierna a este proyecto de código:
 
 Este proyecto de código es el único del producto que puede violar `RA-01`, porque es el único que sirve al navegador.
 
-Motivación upstream: NB-00008; `RA-01`, `RA-03`; `PRODUCT-INTAKE` §14, §17.6.P.2, §17.6.P.3, §17.6.P.10 (`PT-01.a`, `PT-01.b`), §17.6.P.11 punto 1 y §17.6.P.12; restricción transversal `RT-01` de la categoría 02.
+Motivación upstream: NB-00008; `RA-01`, `RA-03`; `PRODUCT-INTAKE` §14, §17.2.P.2 · GeometriaFactory-Web, §17.2.P.3 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web (`PT-01.a`, `PT-01.b`), §17.2.P.11 · GeometriaFactory-Web punto 1 y §17.2.P.12 · GeometriaFactory-Web; restricción transversal `RT-01` de la categoría 02.
 
 ## 2. Decisión
 
@@ -41,8 +41,8 @@ El repliegue del transporte a uno de mayor latencia es **aceptable y no se anunc
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Render en el servidor con circuito interactivo, salida única desde el servidor (**adoptada**) | Elimina contenido mixto, origen cruzado y exposición de la dirección del servidor propio de una sola vez; la credencial nunca necesita llegar al navegador; la topología se sostiene sin certificado en el servidor propio | Ata la experiencia a la estabilidad del proceso del hosting, que la fuente declara incógnita y sin mitigación en el código; y cada interacción cruza el circuito |
-| Ejecutar la aplicación dentro del navegador | Menos carga en el hosting, sin circuito que sostener, sin reciclado que temer | Reabre las tres propiedades de la topología y obliga a transporte seguro válido en un servidor de dirección dinámica. **Descartada por `PRODUCT-INTAKE` §17.6.P.2**, y registrada como **salida preferente** si `PT-01.b` o `PT-01.c` dan rojo |
-| Servir el front desde el propio contenedor del servidor propio | Un solo despliegue, sin hosting externo | Pierde el motivo por el que existe la topología: el bloqueo desde la red de la facultad. **Descartada por `PRODUCT-INTAKE` §17.6.P.2** |
+| Ejecutar la aplicación dentro del navegador | Menos carga en el hosting, sin circuito que sostener, sin reciclado que temer | Reabre las tres propiedades de la topología y obliga a transporte seguro válido en un servidor de dirección dinámica. **Descartada por `PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Web**, y registrada como **salida preferente** si `PT-01.b` o `PT-01.c` dan rojo |
+| Servir el front desde el propio contenedor del servidor propio | Un solo despliegue, sin hosting externo | Pierde el motivo por el que existe la topología: el bloqueo desde la red de la facultad. **Descartada por `PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Web** |
 | Render en el servidor, pero con algunas llamadas hechas desde el navegador para lo que «no es sensible» | Menos ida y vuelta en operaciones frecuentes | **Una excepción a `RA-01` la anula entera**: bastaría una sola llamada para reabrir origen cruzado y exponer la dirección. Además obligaría a mantener dos criterios de qué es sensible, que es donde el defecto entra. **Descartada por esta categoría** |
 
 ## 5. Consecuencias positivas
@@ -81,7 +81,7 @@ El repliegue del transporte a uno de mayor latencia es **aceptable y no se anunc
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-01`, `RA-03`), §17.6.P.2, §17.6.P.3, §17.6.P.10 y §17.6.P.12.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-01`, `RA-03`), §17.2.P.2 · GeometriaFactory-Web, §17.2.P.3 · GeometriaFactory-Web, §17.2.P.10 · GeometriaFactory-Web y §17.2.P.12 · GeometriaFactory-Web.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §2 y §6 (`RT-01`).
 - [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §2.4 y §7.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md`](../../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), que declara del otro lado que **todas** las solicitudes las arma el servidor de la unidad pública.

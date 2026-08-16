@@ -58,7 +58,7 @@ Siete filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificac
 
 | Caso de prueba | Qué verifica | A qué traza, según su campo «Cubre» | Estado |
 | --- | --- | --- | --- |
-| `TC-12020` La puerta `PT-02`: el bundle en una página del anfitrión | Los **cinco** tramos que la puerta exige, medidos juntos: el bundle carga, la creación de instancia arma la escena, el texto de `E-1` dibuja las **tres** figuras con el ortoedro, **diez** recorridos de ida y vuelta con los dos movimientos prendidos **no degradan**, y el árbol y la escena **se sincronizan por índice** | Puerta técnica **`PT-02`** del intake §15 y §17.7.P.8; `US-12001`, `US-12004`, `US-12009`, `US-12011`; `QG-03`; `BT-12014` | `Pendiente` |
+| `TC-12020` La puerta `PT-02`: el bundle en una página del anfitrión | Los **cinco** tramos que la puerta exige, medidos juntos: el bundle carga, la creación de instancia arma la escena, el texto de `E-1` dibuja las **tres** figuras con el ortoedro, **diez** recorridos de ida y vuelta con los dos movimientos prendidos **no degradan**, y el árbol y la escena **se sincronizan por índice** | Puerta técnica **`PT-02`** del intake §15 y §17.2.P.8 · GeometriaFactory-Visor; `US-12001`, `US-12004`, `US-12009`, `US-12011`; `QG-03`; `BT-12014` | `Pendiente` |
 
 **Dónde están sus criterios de validación.** Los tramos se cuentan en [`Criterios-Validacion.md`](Criterios-Validacion.md) §4, que es la sección de puertas técnicas que este proyecto de código tiene y los otros dos de nivel topológico 0 no: **cuatro** criterios, `CV-20` a `CV-23`, que reparten los cinco tramos —`CV-20` toma juntos la carga del bundle y la creación de la escena—. **`TC-12020` no está fuera de la trazabilidad; está en el instrumento que le corresponde**, y esta subsección lo enlaza desde la matriz para que el recorrido inverso `TC → matriz` cierre.
 
@@ -85,7 +85,7 @@ Ocho filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyec
 
 ## 4. Trazabilidad RN ↔ tests
 
-**Este proyecto de código no tiene reglas de dominio**, y no es una omisión: es un visualizador puro y las reglas del trabajo del alumno las decide el backend (`02` §5.2; intake §14 `RA-02`, §17.7.P.5 y P.11 punto 4). Lo que tiene son **condiciones de contrato**, que están en §6 de esta matriz.
+**Este proyecto de código no tiene reglas de dominio**, y no es una omisión: es un visualizador puro y las reglas del trabajo del alumno las decide el backend (`02` §5.2; intake §14 `RA-02`, §17.2.P.5 · GeometriaFactory-Visor y P.11 punto 4). Lo que tiene son **condiciones de contrato**, que están en §6 de esta matriz.
 
 La tabla se emite igual, con las **dieciséis** reglas del producto, para declarar de forma verificable **que ninguna se verifica acá y dónde se verifica cada una**. Dieciséis filas, ninguna agrupada.
 

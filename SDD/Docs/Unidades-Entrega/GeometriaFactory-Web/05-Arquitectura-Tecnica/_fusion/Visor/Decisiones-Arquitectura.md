@@ -42,7 +42,7 @@ El mínimo de tres cubre estilo, superficie pública y estrategia de versionado,
 | Categoría | ADR que la cubre | Observación |
 | --- | --- | --- |
 | Estilo | ADR-12001, ADR-12002, ADR-12005 | — |
-| Persistencia | **Ninguna, y es prohibición explícita** | `tiene_persistencia` es false y el intake declara «no aplica, y es prohibición explícita» en §17.7.P.4. La ausencia está registrada como garantía G-2 dentro de ADR-12003, que es su lugar |
+| Persistencia | **Ninguna, y es prohibición explícita** | `tiene_persistencia` es false y el intake declara «no aplica, y es prohibición explícita» en §17.2.P.4 · GeometriaFactory-Visor. La ausencia está registrada como garantía G-2 dentro de ADR-12003, que es su lugar |
 | Comunicación | **Ninguna** | Este proyecto de código no se comunica con nada: la ausencia de red es una decisión de seguridad y está en ADR-12003 |
 | Seguridad | ADR-12003 | Su contribución a la seguridad del producto es **negativa por diseño**: no hacer red |
 | Observabilidad | **Ninguna** | El bundle no instrumenta ni emite registros. `tiene_observabilidad_critica` es false |

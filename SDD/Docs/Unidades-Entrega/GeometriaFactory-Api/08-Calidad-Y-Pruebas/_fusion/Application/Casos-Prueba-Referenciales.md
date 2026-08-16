@@ -364,7 +364,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | NFR de pruebas que tocan la base real (`05` §8); `QG-04`; `BT-04006` |
 | Setup | Ninguno. Se inspecciona el propio proyecto de pruebas |
 | Pasos | Given el proyecto de pruebas de esta capa, When se lo inspecciona, Then **0** pruebas abren un almacén real, **0** referencian una biblioteca de acceso a datos y **0** leen una cadena de conexión |
-| Salida esperada | Tres recuentos en cero. Es la puerta propia y bloqueante que el intake §17.2.P.8 declara: una prueba que la incumpla **está mal ubicada** y pertenece a la batería de integración de `GeometriaFactory-Api` |
+| Salida esperada | Tres recuentos en cero. Es la puerta propia y bloqueante que el intake §17.1.P.8 · GeometriaFactory-Application declara: una prueba que la incumpla **está mal ubicada** y pertenece a la batería de integración de `GeometriaFactory-Api` |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -412,7 +412,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | NFR de componentes de pieza en las consultas de listado (`05` §8); `QG-09`; `US-04019` |
 | Setup | Doble del repositorio de trabajos que devuelve la proyección declarada |
 | Pasos | Given el listado del alumno y el de la comisión, When se los resuelve, Then la colección de componentes **no viene materializada** en ninguna de las dos. Given el detalle, Then **sí** viene |
-| Salida esperada | Dos listados sin componentes y un detalle con ellos. Es la decisión de modelado con efecto directo en el tiempo de respuesta del listado del administrador (intake §17.2.P.10) |
+| Salida esperada | Dos listados sin componentes y un detalle con ellos. Es la decisión de modelado con efecto directo en el tiempo de respuesta del listado del administrador (intake §17.1.P.10 · GeometriaFactory-Application) |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 

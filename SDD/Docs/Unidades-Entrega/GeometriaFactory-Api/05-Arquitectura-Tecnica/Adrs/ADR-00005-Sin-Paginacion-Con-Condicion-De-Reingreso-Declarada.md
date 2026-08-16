@@ -18,7 +18,7 @@ La guía de esta categoría exige registrar una decisión de paginación para el
 
 Lo que hace que la pregunta tenga respuesta es lo que ya está decidido aguas arriba: **la proyección de listado no arrastra el texto original ni los componentes de las piezas**, y ésa —y no la cantidad de filas— es la razón por la que ese percentil es alcanzable. Un listado de una comisión con las piezas cargadas sería pesado con paginación o sin ella.
 
-Motivación upstream: NB-00007, NB-00009; RN-00003, RN-00011; INV-02; `PRODUCT-INTAKE` §17.5.P.10, §17.4.P.10, §17.3.P.12.
+Motivación upstream: NB-00007, NB-00009; RN-00003, RN-00011; INV-02; `PRODUCT-INTAKE` §17.1.P.10 · GeometriaFactory-Api, §17.1.P.10 · GeometriaFactory-Contracts, §17.1.P.12 · GeometriaFactory-Infrastructure.
 
 ## 2. Decisión
 
@@ -79,7 +79,7 @@ Motivación upstream: NB-00007, NB-00009; RN-00003, RN-00011; INV-02; `PRODUCT-I
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-00003, RN-00011), §17.3.P.12, §17.4.P.10 y §17.5.P.10.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-00003, RN-00011), §17.1.P.12 · GeometriaFactory-Infrastructure, §17.1.P.10 · GeometriaFactory-Contracts y §17.1.P.10 · GeometriaFactory-Api.
 - [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y §4.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md`](../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), que es la decisión que sostiene el requerimiento de tiempo.
 - ADR relacionadas: [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00008`](ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md).

@@ -54,7 +54,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 7. Notas y supuestos
 
-`RN-02011` **no tiene invariante asociado**: es una regla de alcance de consulta y no una condición permanente sobre el estado (`PRODUCT-INTAKE` §17.1.P.2).
+`RN-02011` **no tiene invariante asociado**: es una regla de alcance de consulta y no una condición permanente sobre el estado (`PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain).
 
 ## 8. Control de cambios
 

@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md) §7; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4, §8 y §10.5; [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5; [`../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../../../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.3.P.6, §17.3.P.8, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md) §7; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4, §8 y §10.5; [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5; [`../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../../../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.8 · GeometriaFactory-Infrastructure, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 
 ---
@@ -33,19 +33,19 @@
 
 | Nivel | Qué cubre acá | Porcentaje objetivo | Justificación |
 | --- | --- | --- | --- |
-| Unit | Los **dos motores** —interpretación y verificación— sin almacén y sin red; los **dos mecanismos** de seguridad; y las pruebas de inspección estructural | **85 %** | Es donde vive la batería del validador, que es el corazón de este proyecto de código: **10** casos sobre **ocho** escenarios, todos sin almacén. El intake §17.3.P.10 pide medir la interpretación de `E-1` **sin almacén**, lo que sólo tiene sentido si el motor es probable así |
-| Integración interna | Los **dos adaptadores de repositorio**, el contexto de persistencia y **la preparación del almacén al arrancar**, contra un almacén creado y descartado por la propia prueba | **15 %** | No es una elección: estas cuatro cosas **no se pueden verificar sin almacén**. El intake §17.3.P.8 declara una etapa propia del pipeline —**verificación de transformaciones**— y un criterio de aceptación de la etapa `c` que exige que las transformaciones **se apliquen solas sobre un almacén inexistente**. Sin este nivel, esa puerta no tiene dónde medirse |
+| Unit | Los **dos motores** —interpretación y verificación— sin almacén y sin red; los **dos mecanismos** de seguridad; y las pruebas de inspección estructural | **85 %** | Es donde vive la batería del validador, que es el corazón de este proyecto de código: **10** casos sobre **ocho** escenarios, todos sin almacén. El intake §17.1.P.10 · GeometriaFactory-Infrastructure pide medir la interpretación de `E-1` **sin almacén**, lo que sólo tiene sentido si el motor es probable así |
+| Integración interna | Los **dos adaptadores de repositorio**, el contexto de persistencia y **la preparación del almacén al arrancar**, contra un almacén creado y descartado por la propia prueba | **15 %** | No es una elección: estas cuatro cosas **no se pueden verificar sin almacén**. El intake §17.1.P.8 · GeometriaFactory-Infrastructure declara una etapa propia del pipeline —**verificación de transformaciones**— y un criterio de aceptación de la etapa `c` que exige que las transformaciones **se apliquen solas sobre un almacén inexistente**. Sin este nivel, esa puerta no tiene dónde medirse |
 | E2E y snapshot | — | **0 %** | **No aplica y se declara así en lugar de omitirse.** El proyecto de código no es unidad de despliegue, no tiene proceso propio ni interfaz. Un recorrido de punta a punta pasa por `GeometriaFactory-Api`, y ahí es donde vive |
 
 **El apartamiento es de reparto, no de rigor.** Los cinco puntos que la regla asigna a extremo a extremo y snapshot se reasignan a unitario: el piso **sube** de 80 a 85. No se baja ninguna exigencia, de modo que no hace falta la ADR que §2.2 exige para bajar cobertura.
 
-**Dónde termina esta capa y empieza la batería de integración del producto, dicho con precisión.** El intake §17.3.P.6 declara que **«la persistencia real contra SQLite se prueba desde `GeometriaFactory.Integration.Tests`»**, y ese proyecto de pruebas **pertenece a `GeometriaFactory-Api`** (§17.5.P.6). La integración interna de acá no lo reemplaza y no lo duplica:
+**Dónde termina esta capa y empieza la batería de integración del producto, dicho con precisión.** El intake §17.1.P.6 · GeometriaFactory-Infrastructure declara que **«la persistencia real contra SQLite se prueba desde `GeometriaFactory.Integration.Tests`»**, y ese proyecto de pruebas **pertenece a `GeometriaFactory-Api`** (§17.1.P.6 · GeometriaFactory-Api). La integración interna de acá no lo reemplaza y no lo duplica:
 
 | Verificación | Dónde vive | Por qué |
 | --- | --- | --- |
-| Que el esquema se cree y se transforme sobre un almacén inexistente, y que el arranque se detenga ante uno dudoso | **Acá**, integración interna | Es puerta del pipeline **de este proyecto de código** y criterio de aceptación de la etapa `c` (intake §17.3.P.8) |
+| Que el esquema se cree y se transforme sobre un almacén inexistente, y que el arranque se detenga ante uno dudoso | **Acá**, integración interna | Es puerta del pipeline **de este proyecto de código** y criterio de aceptación de la etapa `c` (intake §17.1.P.8 · GeometriaFactory-Infrastructure) |
 | Que un adaptador materialice, recupere y retire respetando el todo o nada | **Acá**, integración interna | Es el contrato del puerto, y su forma de fallar es propia del adaptador |
-| Que el producto entero, atendiendo por su superficie, opere sobre el almacén real | **En `GeometriaFactory-Api`** | Es lo que el intake §17.3.P.6 y §17.5.P.6 declaran, y lo que golpea la superficie por su protocolo |
+| Que el producto entero, atendiendo por su superficie, opere sobre el almacén real | **En `GeometriaFactory-Api`** | Es lo que el intake §17.1.P.6 · GeometriaFactory-Infrastructure y §17.1.P.6 · GeometriaFactory-Api declaran, y lo que golpea la superficie por su protocolo |
 
 **Contra la pirámide invertida**: acá sería imposible, porque no hay recorrido de punta a punta que construir. **Contra la pirámide aplanada** —un número global sin distinguir capas— la defensa es §2, que reporta por componente, con el validador con un umbral propio y más alto que el resto.
 
@@ -56,19 +56,19 @@
 
 ## 2. Cobertura mínima por capa
 
-La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.3.P.6 y es **85 % de líneas y 80 % de ramas**; el validador tiene un piso propio de **95 % de líneas**. Los tres valores vienen rotulados **[ASUNCIÓN del intake §22, asunción `A-3`]**.
+La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Infrastructure y es **85 % de líneas y 80 % de ramas**; el validador tiene un piso propio de **95 % de líneas**. Los tres valores vienen rotulados **[ASUNCIÓN del intake §22, asunción `A-3`]**.
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
-| Contexto de persistencia y mapeo | 85 % | 80 % | 60 % | Piso del intake §17.3.P.6 |
+| Contexto de persistencia y mapeo | 85 % | 80 % | 60 % | Piso del intake §17.1.P.6 · GeometriaFactory-Infrastructure |
 | Adaptador de repositorio de trabajos | 90 % | 85 % | 60 % | Sube sobre el piso: sostiene el texto original conservado —tramo principal de `RN-06008`— y la proyección de listado, donde `05` §9 declara probabilidad **media-alta** de arrastrar componentes por defecto |
 | Adaptador de repositorio de cuentas | 90 % | 85 % | 60 % | Sube sobre el piso: sostiene la unicidad como segunda línea y **la marca que viaja sin ser un estado de cuenta** |
-| Motor de interpretación de figuras | **95 %** | 90 % | 60 % | **Piso propio del intake §17.3.P.6**: es el número más alto del producto y está donde la fuente señala el criterio que más veces se rompe. El 90 de ramas lo sube esta categoría |
+| Motor de interpretación de figuras | **95 %** | 90 % | 60 % | **Piso propio del intake §17.1.P.6 · GeometriaFactory-Infrastructure**: es el número más alto del producto y está donde la fuente señala el criterio que más veces se rompe. El 90 de ramas lo sube esta categoría |
 | Motor de verificación de valores | **95 %** | 90 % | 60 % | Ídem: los dos motores son «el validador de figuras» al que el intake le asigna el 95 |
 | Adaptador de reloj del sistema | 100 % | 100 % | — | Es el contrato más corto de la capa y no tiene ramas que valga la pena dejar sin cubrir. **Sin mutation score**: un umbral de mutación sobre una operación de una línea no aporta información |
 | Mecanismo de credenciales | 95 % | 90 % | 60 % | Sube sobre el piso: contiene la producción de la provisoria, cuyo modo de falla `05` §9 declara de impacto **muy alto** y que **no se nota hasta que alguien la usa** |
 | Mecanismo de acceso firmado y preparación del almacén | 95 % | 90 % | 60 % | Sube sobre el piso: contiene los otros dos modos de falla de impacto muy alto —emitir sin clave y recrear el almacén en lugar de transformarlo— |
-| **Proyecto de código completo** | **85 %** | **80 %** | **60 %** | Intake §17.3.P.6 [ASUNCIÓN] y `Rules-Calidad-Y-Pruebas.md` §2.2 para el mutation score |
+| **Proyecto de código completo** | **85 %** | **80 %** | **60 %** | Intake §17.1.P.6 · GeometriaFactory-Infrastructure [ASUNCIÓN] y `Rules-Calidad-Y-Pruebas.md` §2.2 para el mutation score |
 
 **De dónde sale cada número, sin mezclarlos.** El 85/80 global y el **95 de líneas del validador** son del intake y vienen rotulados **[ASUNCIÓN]**. El **mutation score de 60 %** no lo declara ninguna fuente del producto: es el piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library`, y esta categoría lo adopta como tal; **no se le atribuye al intake**. Los valores de ramas por encima del piso y los tres componentes que suben a 90 o 95 los sube esta categoría con el fundamento de la columna.
 
@@ -86,7 +86,7 @@ Se nombran por función y no por producto. La elección concreta y su anclaje de
 | Dobles | Sólo donde hace falta aislar el mundo: la **fuente de material impredecible**, para poder simular que no responde (`TC-06028`), y el **almacén interrumpido a mitad de operación** (`TC-06021`). El reloj **no se dobla acá**: acá se implementa |
 | Cobertura por líneas y ramas | Recolector de cobertura de la plataforma, con informe por componente **y con un informe acotado a los dos motores**, que es lo que `QG-06` mide |
 | Mutation score | Marco de pruebas de mutación de la plataforma. **Su incorporación al pipeline es un hueco declarado**, ver [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
-| Medición del tiempo de interpretación | Cronometrado dentro de la batería unitaria, **sin almacén**, que es la condición que el intake §17.3.P.10 declara |
+| Medición del tiempo de interpretación | Cronometrado dentro de la batería unitaria, **sin almacén**, que es la condición que el intake §17.1.P.10 · GeometriaFactory-Infrastructure declara |
 | Inspección estructural | El propio marco de pruebas, leyendo las dependencias de los dos motores, el conjunto de códigos emitidos y el registro del servidor |
 
 **No se nombra ningún producto comercial**, y no porque falte la decisión sino porque el intake la ata a la etapa `a`.
@@ -176,14 +176,14 @@ Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](..
 
 | Aspecto | Decisión |
 | --- | --- |
-| Dónde corre | Dentro del contenedor de desarrollo, porque el equipo anfitrión no tiene el kit de desarrollo instalado (intake §17.3.P.9) |
+| Dónde corre | Dentro del contenedor de desarrollo, porque el equipo anfitrión no tiene el kit de desarrollo instalado (intake §17.1.P.9 · GeometriaFactory-Infrastructure) |
 | Almacén | **Efímero, creado y descartado por cada prueba de integración interna.** Nunca el almacén de desarrollo ni el de producción. Su ubicación **se recibe por configuración de prueba y no se busca** |
 | Aislamiento entre pruebas | Total. Las unitarias no comparten estado; las de integración interna crean su propio almacén y lo descartan. Ninguna prueba depende del orden de ejecución |
 | Paralelismo | **Admitido en el nivel unitario. En integración interna, sólo si cada prueba tiene su propio archivo de almacén**: el motor de almacenamiento del producto es de **escritor único**, y dos pruebas sobre el mismo archivo se bloquearían entre sí |
 | Secretos | **Ninguno real.** La clave de firma de las pruebas es un valor evidentemente ficticio, declarado como tal, **provisto por configuración de prueba**. `TC-06030` verifica que **sin clave no hay emisión**, y para eso hace falta poder no proveerla |
 | Reloj | **Acá se implementa el reloj, no se consume**: `TC-06031` verifica que el sello sale del puerto. Ninguna prueba fija el reloj del entorno |
 | Datos de geometría | Los **ocho** textos del intake §20, literales. **Ningún texto de figuras se escribe a mano** |
-| Duración | **No se declara ningún tiempo de ejecución de la batería.** El único tiempo declarado es el de la **interpretación** del texto de `E-1`: menos de **200 ms**, medido sin almacén [ASUNCIÓN del intake §17.3.P.10]. Ninguna fuente da un tiempo de suite para esta capa, y no se inventa uno |
+| Duración | **No se declara ningún tiempo de ejecución de la batería.** El único tiempo declarado es el de la **interpretación** del texto de `E-1`: menos de **200 ms**, medido sin almacén [ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Infrastructure]. Ninguna fuente da un tiempo de suite para esta capa, y no se inventa uno |
 
 ## 8. Control de cambios
 

@@ -72,7 +72,7 @@ Se aplica cuando las **seis** etapas que este proyecto de código toca —`a`, `
 - [ ] Los **ocho** escenarios del intake §20 siguen siendo el material de los casos de prueba que los usan, sin sustitución por datos sintéticos. **Se valida** con `CV-06` y con el recuento de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) §3.
 - [ ] Los dos valores rotulados **[ASUNCIÓN]** están confirmados por el Product Owner, o su continuidad como asunción está declarada. **Se valida** leyendo el intake §22 y el estado de `BT-02015`.
 - [ ] No queda ningún punto abierto de `05` §11 sin desenlace declarado. **Se valida** leyendo esa tabla.
-- [ ] La versión de la biblioteca está calculada según la estrategia de versionado del intake §17.1.P.7 y la etiqueta de la etapa existe. **Se valida** con el registro de la etiqueta.
+- [ ] La versión de la biblioteca está calculada según la estrategia de versionado del intake §17.1.P.7 · GeometriaFactory-Domain y la etiqueta de la etapa existe. **Se valida** con el registro de la etiqueta.
 
 ## 2. Excepciones admitidas
 

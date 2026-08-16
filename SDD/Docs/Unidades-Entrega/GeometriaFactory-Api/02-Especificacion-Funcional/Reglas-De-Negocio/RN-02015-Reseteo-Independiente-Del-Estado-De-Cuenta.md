@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (enunciado de **RN-02015**, RN-02006, RN-02012, **RN-02016**), §4 (**F-26**, «el reseteo no exige que la cuenta esté habilitada»), §17.1.P.2 (**INV-06**, **INV-08**, y las reglas sin invariante asociado), §7 (**CL-7**); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.13** §4.1 (enunciado de **RN-02015**, RN-02006, RN-02012, **RN-02016**), §4 (**F-26**, «el reseteo no exige que la cuenta esté habilitada»), §17.1.P.2 · GeometriaFactory-Domain (**INV-06**, **INV-08**, y las reglas sin invariante asociado), §7 (**CL-7**); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1, §4 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -43,7 +43,7 @@ Lo que la regla **no** afloja es el cierre sobre la cuenta de administrador: és
 - **El reseteo no es una transición de la máquina de estados de cuenta**, y por eso no aparece en ninguna arista de `Definicion-Modelo-De-Dominio.md` §5.1. La máquina que sí mueve es la de la marca de cambio de contraseña pendiente, §5.3, que es otra.
 - **Sigue sin admitirse sobre la cuenta con papel `Administrador`**, y el fundamento es **INV-08** —esa cuenta está siempre `Habilitado` y no admite baja— junto con **RN-02001**, administrador único: un reseteo sobre sí mismo dejaría al laboratorio sin nadie capaz de habilitar, desbloquear ni revisar hasta que la marca de INV-09 se levante. El cierre es de papel, no de estado, y por eso esta regla no lo toca.
 - **La exigencia de credencial ya fijada, que esta regla dejaba en pie, quedó retirada por RN-02016.** Hasta `PRODUCT-INTAKE` 1.12, `CU-02013` rechazaba el reseteo sobre una cuenta que nunca había establecido contraseña, porque el único camino para dársela era el primer ingreso anónimo. **RN-02016 suprimió ese camino**, y con él el fundamento del rechazo: hoy el reseteo sobre una cuenta `Pendiente` sin credencial **fija** la provisoria en lugar de reemplazarla, y procede. El retiro **resuelve a favor de esta regla** una tensión que la versión 1.0 registraba sin verla: el rechazo alcanzaba precisamente a la cuenta `Pendiente` que este enunciado declara admitida.
-- **No tiene invariante asociado**, y el intake lo declara así en la prosa de §17.1.P.2: enuncia la ausencia de una precondición sobre una operación, no una condición permanente sobre los datos.
+- **No tiene invariante asociado**, y el intake lo declara así en la prosa de §17.1.P.2 · GeometriaFactory-Domain: enuncia la ausencia de una precondición sobre una operación, no una condición permanente sobre los datos.
 
 ## 4. Consecuencia si se viola
 

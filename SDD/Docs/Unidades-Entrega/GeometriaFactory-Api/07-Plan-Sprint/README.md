@@ -51,7 +51,7 @@
 | El conjunto cerrado de diecisiete códigos vivos | `GeometriaFactory-Contracts`. **Esta capa no agrega, no renombra y no traduce a texto ninguno** |
 | El nombre del cuarto puerto | El punto de control de la etapa `a`, **sobre la superficie de `GeometriaFactory-Application`** |
 | Los **dos huecos** del conjunto cerrado de códigos | Abiertos: `PA-03` y `PA-04` del backlog, elevados con BT-00015. **Esta categoría no inventa códigos** |
-| El despliegue | **Manual, por el docente** (`PRODUCT-INTAKE` §17.5.P.8). `09-Devops`, **todavía no emitida**, mide el mecanismo de construcción en destino con BT-00026 |
+| El despliegue | **Manual, por el docente** (`PRODUCT-INTAKE` §17.1.P.8 · GeometriaFactory-Api). `09-Devops`, **todavía no emitida**, mide el mecanismo de construcción en destino con BT-00026 |
 | La Definition of Done canónica | `08-Calidad-Y-Pruebas`, **todavía no emitida** |
 | La colección de peticiones como entregable de ejemplos | [`../10-Examples/`](../10-Examples/), **emitida el 2026-08-11** en su pasada de diseño. La colección es el sample 02, [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio.md), y su contrato de verificación `VER-00002` entra a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) como fila `SD-00002`. La fila se conserva con su desenlace en lugar de retirarse |
 

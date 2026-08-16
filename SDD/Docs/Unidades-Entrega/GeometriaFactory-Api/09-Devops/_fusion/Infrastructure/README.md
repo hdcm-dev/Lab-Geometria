@@ -44,7 +44,7 @@
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Guia-Publicacion-<tipo-artefacto>.md` | **Omitido** | `Rules-Devops.md` §2.1 lo declara obligatorio para «todos los tipos D8 **con artefacto publicable**» y lo omite para «tipos cuyo artefacto no se publica externamente». El intake §17.3.P.7 declara la estrategia idéntica a §17.1.P.7, **sin publicación en feed**, y §13 lo generaliza al producto. **La tensión con el criterio de aceptación de `Rules-Devops.md` §6 se declara en lugar de resolverse con un documento vacío**: no hay cuenta, ni token, ni comando de publicación, ni verificación posterior, ni retiro. A diferencia de `GeometriaFactory-Visor`, este ensamblado **tampoco se entrega**: se referencia dentro de la misma construcción |
+| `Guia-Publicacion-<tipo-artefacto>.md` | **Omitido** | `Rules-Devops.md` §2.1 lo declara obligatorio para «todos los tipos D8 **con artefacto publicable**» y lo omite para «tipos cuyo artefacto no se publica externamente». El intake §17.1.P.7 · GeometriaFactory-Infrastructure declara la estrategia idéntica a §17.1.P.7 · GeometriaFactory-Domain, **sin publicación en feed**, y §13 lo generaliza al producto. **La tensión con el criterio de aceptación de `Rules-Devops.md` §6 se declara en lugar de resolverse con un documento vacío**: no hay cuenta, ni token, ni comando de publicación, ni verificación posterior, ni retiro. A diferencia de `GeometriaFactory-Visor`, este ensamblado **tampoco se entrega**: se referencia dentro de la misma construcción |
 | `Pipeline-Producto.md` | **No es de esta sección** | Artefacto de nivel producto (`Rules-Devops.md` §2.1 y §4.9), emitido una sola vez bajo `Producto/` al cierre del bucle de proyectos de código |
 
 ## 4. Los catorce quality gates, y en qué stage corre cada uno
@@ -78,13 +78,13 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
-| Stages del pipeline | **4**: `restore`, `build`, `test` y `verificar-transformaciones` | Intake §17.3.P.8; `05` §5 |
+| Stages del pipeline | **4**: `restore`, `build`, `test` y `verificar-transformaciones` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure; `05` §5 |
 | Quality gates materializados | **14**, con **3** condicionados | `08` `Estrategia-Calidad.md` §3 |
 | Ambientes de despliegue propios | **0**; el ensamblado viaja embebido en **1** proceso | `05` §5; intake §13 |
-| Canales de publicación | **0** | Intake §17.3.P.7 |
-| Dependencias core externas | **3**, **2** de ellas sensibles | Intake §17.3.P.1 |
+| Canales de publicación | **0** | Intake §17.1.P.7 · GeometriaFactory-Infrastructure |
+| Dependencias core externas | **3**, **2** de ellas sensibles | Intake §17.1.P.1 · GeometriaFactory-Infrastructure |
 | Dependencias de infraestructura | **3**, **ninguna** de red | `05` §5 |
-| Secretos propios custodiados | **0**; **1** recibido y no custodiado: la clave de firma | Intake §17.3.P.5; `05` §5 |
+| Secretos propios custodiados | **0**; **1** recibido y no custodiado: la clave de firma | Intake §17.1.P.5 · GeometriaFactory-Infrastructure; `05` §5 |
 | Casos de uso | **10** | `02` §5, citado por `08` README §5 |
 | Casos de la batería del validador | **10** | `05` §10.5; intake §21 |
 | Escenarios del intake usados como entrada | **8 de 8** | `PRODUCT-INTAKE` §20 |
@@ -99,4 +99,4 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Infrastructure`. Lista los **cuatro** artefactos emitidos, el orden de lectura, la omisión de la guía de publicación **con la tensión frente al criterio de aceptación de `Rules-Devops.md` §6 declarada**, el resumen de los **catorce** quality gates con el stage donde corre cada uno —incluido el **cuarto stage propio de este proyecto de código**— y la constancia de que ninguno cambió de carácter, con la precisión de que **`QG-07` lleva número y no es condicionado**. Deja registrado que la puerta técnica `PT-04` se mide en la etapa `a` de este proyecto de código y que el cuarto stage es su mitad barata, y la tabla de recuentos con la fuente de cada uno. |
-| 1.1 | 2026-08-11 | **Constancia de las correcciones de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`.** Sube a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) —`H-03`, atribución de la procedencia de los gates a §17.3.P.8, y apertura de `PD-05` por `H-04`—, [`Entornos-Deploy.md`](Entornos-Deploy.md) —`H-02`, cita del intake §17.3.P.3, y `H-04`, apartamiento del modelo de canales sin la ADR que `Rules-Devops.md` §2.2 exige— y [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) —atribución de una cita que el informe no había listado—. Los puntos abiertos de la categoría pasan de **cuatro** a **cinco**. El intake **1.22** no cambia nada de este proyecto de código: sus dos decisiones son de §17.6.P.7 y alcanzan a las dos unidades desplegables. |
+| 1.1 | 2026-08-11 | **Constancia de las correcciones de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`.** Sube a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) —`H-03`, atribución de la procedencia de los gates a §17.1.P.8 · GeometriaFactory-Infrastructure, y apertura de `PD-05` por `H-04`—, [`Entornos-Deploy.md`](Entornos-Deploy.md) —`H-02`, cita del intake §17.1.P.3 · GeometriaFactory-Infrastructure, y `H-04`, apartamiento del modelo de canales sin la ADR que `Rules-Devops.md` §2.2 exige— y [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) —atribución de una cita que el informe no había listado—. Los puntos abiertos de la categoría pasan de **cuatro** a **cinco**. El intake **1.22** no cambia nada de este proyecto de código: sus dos decisiones son de §17.2.P.7 · GeometriaFactory-Web y alcanzan a las dos unidades desplegables. |

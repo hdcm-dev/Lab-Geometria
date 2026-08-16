@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-`RN-02013` declara que mientras la provisoria no se cambie la cuenta **se autentica pero no obtiene sesión de trabajo**, e `INV-09` lo expresa como condición permanente. El enunciado consolidado de `INV-09` en `PRODUCT-INTAKE` §17.1.P.2, desde su versión 1.14, declara que la marca la ponen únicamente el reseteo y la habilitación, y que la levanta únicamente el cambio efectivo hecho por la propia cuenta.
+`RN-02013` declara que mientras la provisoria no se cambie la cuenta **se autentica pero no obtiene sesión de trabajo**, e `INV-09` lo expresa como condición permanente. El enunciado consolidado de `INV-09` en `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain, desde su versión 1.14, declara que la marca la ponen únicamente el reseteo y la habilitación, y que la levanta únicamente el cambio efectivo hecho por la propia cuenta.
 
 ## 3. Criterios de aceptación
 

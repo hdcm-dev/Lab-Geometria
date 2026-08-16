@@ -39,7 +39,7 @@ Los casos de uso que se materializan a través de este contrato son los **diez**
 
 ## 2. Formato
 
-**Contrato de superficie de biblioteca, declarado en prosa estructurada.** No hay descripción formal de servicio, ni esquema de mensajes, ni definición de procedimiento remoto: el intake declara «no aplica» en comunicación e integración para este proyecto de código, porque **no expone puntos de acceso** (§17.3.P.3).
+**Contrato de superficie de biblioteca, declarado en prosa estructurada.** No hay descripción formal de servicio, ni esquema de mensajes, ni definición de procedimiento remoto: el intake declara «no aplica» en comunicación e integración para este proyecto de código, porque **no expone puntos de acceso** (§17.1.P.3 · GeometriaFactory-Infrastructure).
 
 **Los nombres de tipos, de operaciones y de espacios de nombres no se fijan acá.** El intake los ata al punto de control de la etapa `a`; este documento nombra los elementos en lenguaje de dominio, igual que hacen las categorías 02 y 03 de este proyecto de código. Los **tres** identificadores de puerto que el intake sí declara —`IWorkRepository`, `IFigureValidator` e `ISystemClock`— se citan en §3 y son la única cita de identificadores de código de esta cadena; el cuarto **no tiene identificador declarado** y esta categoría no lo inventa ([`ADR-06003`](../../Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §6).
 

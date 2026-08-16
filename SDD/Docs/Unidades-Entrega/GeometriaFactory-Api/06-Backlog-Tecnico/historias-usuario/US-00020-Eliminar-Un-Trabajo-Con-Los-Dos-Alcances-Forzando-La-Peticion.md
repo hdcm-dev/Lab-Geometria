@@ -19,7 +19,7 @@ Como **producto**, quiero **que la eliminación de un trabajo respete sus dos al
 
 ## 2. Contexto
 
-`RN-00004` acota la eliminación del alumno al estado `Borrador` y habilita al administrador sobre todo lo que ve. `02` §6 declara que **es la única regla del producto con un criterio de verificación que exige forzar la petición contra esta superficie**, y el intake §17.5.P.6 lo fija como criterio bloqueante. El contrato de uso es [`CU-00027`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md).
+`RN-00004` acota la eliminación del alumno al estado `Borrador` y habilita al administrador sobre todo lo que ve. `02` §6 declara que **es la única regla del producto con un criterio de verificación que exige forzar la petición contra esta superficie**, y el intake §17.1.P.6 · GeometriaFactory-Api lo fija como criterio bloqueante. El contrato de uso es [`CU-00027`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md).
 
 ## 3. Criterios de aceptación
 

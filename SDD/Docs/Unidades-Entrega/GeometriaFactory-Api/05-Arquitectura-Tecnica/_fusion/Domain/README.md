@@ -55,7 +55,7 @@ Los seis, con su objetivo numérico y su mecanismo, están en [`Arquitectura-Pro
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Modelo-Datos-Logico.md` | **Omitido** | La regla de la categoría lo omite para `library` puro sin estado. `tiene_persistencia` es false y el intake declara «no aplica» en §17.1.P.4. El modelo lógico que refleja a estas cinco entidades le corresponde a la categoría 05 de `GeometriaFactory-Infrastructure` |
+| `Modelo-Datos-Logico.md` | **Omitido** | La regla de la categoría lo omite para `library` puro sin estado. `tiene_persistencia` es false y el intake declara «no aplica» en §17.1.P.4 · GeometriaFactory-Domain. El modelo lógico que refleja a estas cinco entidades le corresponde a la categoría 05 de `GeometriaFactory-Infrastructure` |
 | `Flujo-Ejecucion.md` | **Omitido** | La regla lo recomienda para `library` **con motor de procesamiento**, y este proyecto de código no lo tiene: el motor del producto es el validador de figuras, que vive detrás de un puerto de `GeometriaFactory-Application` y se implementa en `GeometriaFactory-Infrastructure` (`Definicion-Modelo-De-Dominio.md` §7). Acá no hay canalización que documentar: cada operación es una guarda que acepta o rechaza |
 | `Extensibilidad.md` | **Omitido** | `tiene_extensibilidad` es false en el `PRODUCT-MANIFEST` §5. El punto de extensión declarado del producto es el contrato de la fachada del visor, no este proyecto de código |
 | `_legacy/` | **No existe** | Es la primera emisión de esta categoría en este proyecto de código: no hay ninguna versión superada que archivar |

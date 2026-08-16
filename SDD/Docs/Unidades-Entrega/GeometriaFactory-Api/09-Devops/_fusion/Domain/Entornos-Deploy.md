@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §7 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §4; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §14, §16, §17.1.P.4, §17.1.P.5 y §17.1.P.9
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §7 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §4; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Testing.md) 1.1 §7; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §14, §16, §17.1.P.4 · GeometriaFactory-Domain, §17.1.P.5 · GeometriaFactory-Domain y §17.1.P.9 · GeometriaFactory-Domain
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -55,7 +55,7 @@ De modo que la tabla de ambientes de este proyecto de código tiene una sola fil
 | Aspecto | Decisión | Fundamento |
 | --- | --- | --- |
 | Dónde ocurre todo el ciclo | Dentro del contenedor de desarrollo | Intake, encabezado de la Parte C, y §10: el host de desarrollo **no tiene ni va a tener** instalado el kit de desarrollo, y ningún guion puede asumirlo en el host |
-| Plataforma objetivo | `net10.0` sin sufijo de plataforma, sobre el sistema operativo del contenedor, que es el mismo del servidor del backend | Intake §17.1.P.9 |
+| Plataforma objetivo | `net10.0` sin sufijo de plataforma, sobre el sistema operativo del contenedor, que es el mismo del servidor del backend | Intake §17.1.P.9 · GeometriaFactory-Domain |
 | Dependencias de infraestructura | **Ninguna.** No requiere base de datos, ni almacén de secretos, ni servicio externo | `05` §5, tercera fila |
 | Base de datos para pruebas | **Ninguna.** `tiene_persistencia` es false | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Testing.md) §7 |
 | Definición del contenedor | `.devcontainer/devcontainer.json`, en la raíz del repositorio | Intake §16 |
@@ -86,14 +86,14 @@ Lo único que se aproxima a una declaración de entorno es el **archivo de defin
 
 | Afirmación | Dónde está declarada |
 | --- | --- |
-| No maneja secretos: la contraseña llega **ya derivada** y se guarda como valor de credencial derivada, nulo hasta el primer ingreso | Intake §17.1.P.5 |
+| No maneja secretos: la contraseña llega **ya derivada** y se guarda como valor de credencial derivada, nulo hasta el primer ingreso | Intake §17.1.P.5 · GeometriaFactory-Domain |
 | El proyecto de código no deriva ni compara credenciales | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md) §2, fila de seguridad |
 | Ninguno en el ambiente de pruebas | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Testing.md) §7 |
 
 **Consecuencias operativas, que sí son de esta categoría:**
 
 - El pipeline de este proyecto de código **no requiere ninguna credencial**: sus tres stages leen el repositorio y escriben informes. Un stage suyo que pidiera un secreto sería una señal de que algo se salió de su alcance.
-- La prohibición de confirmar secretos en el repositorio rige igual, y es del producto: el intake §17.6.P.5 declara que las credenciales del canal de publicación del front viven como secretos del repositorio y que **la dirección real del servidor propio no se versiona**. Este proyecto de código no aporta ninguno de los dos, pero comparte el repositorio.
+- La prohibición de confirmar secretos en el repositorio rige igual, y es del producto: el intake §17.2.P.5 · GeometriaFactory-Web declara que las credenciales del canal de publicación del front viven como secretos del repositorio y que **la dirección real del servidor propio no se versiona**. Este proyecto de código no aporta ninguno de los dos, pero comparte el repositorio.
 - **No se declara ninguna frecuencia de rotación**, porque no hay secreto propio que rotar. Los del producto pertenecen a la categoría 09 de `GeometriaFactory-Web` y de `GeometriaFactory-Api`.
 
 ## 6. Promoción
@@ -106,7 +106,7 @@ Lo único que se aproxima a una declaración de entorno es el **archivo de defin
 | --- | --- | --- |
 | El OK explícito del Product Owner, con constancia escrita | Informe de cierre de la etapa, en el directorio de avances que el intake §15 declara | Intake §15, regla de delivery 3 |
 | La medición de los dos gates condicionados con su distancia al umbral | El mismo informe | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md) §6 |
-| La etiqueta de la etapa | El repositorio | Intake §17.1.P.7 |
+| La etiqueta de la etapa | El repositorio | Intake §17.1.P.7 · GeometriaFactory-Domain |
 
 ## 7. Control de cambios
 

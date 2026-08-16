@@ -18,7 +18,7 @@ Hay tres cosas del despliegue que sólo esta capa conoce y que las de adentro ne
 
 Y hay una advertencia que la capa de aplicación dejó por escrito y que cae exactamente acá: su seguridad frente a invocaciones concurrentes vale **«siempre que dos hilos no compartan la misma instancia de entidad ni el mismo adaptador con estado», condición que le corresponde garantizar a la composición de raíz**.
 
-Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.5.P.1, §17.5.P.4, §17.5.P.5, §17.3.P.4.
+Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Api, §17.1.P.4 · GeometriaFactory-Api, §17.1.P.5 · GeometriaFactory-Api, §17.1.P.4 · GeometriaFactory-Infrastructure.
 
 ## 2. Decisión
 
@@ -79,7 +79,7 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.5.P.1, §17.5.P.
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §17.3.P.4, §17.5.P.1, §17.5.P.4 y §17.5.P.5.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.1 · GeometriaFactory-Api, §17.1.P.4 · GeometriaFactory-Api y §17.1.P.5 · GeometriaFactory-Api.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md`](../Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md).
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../_fusion/Application/Arquitectura-Proyecto-Codigo.md) §4, que es donde queda declarada la condición a cargo de la composición de raíz.
 - [`../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md`](ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md), que decide no autorregistrarse.

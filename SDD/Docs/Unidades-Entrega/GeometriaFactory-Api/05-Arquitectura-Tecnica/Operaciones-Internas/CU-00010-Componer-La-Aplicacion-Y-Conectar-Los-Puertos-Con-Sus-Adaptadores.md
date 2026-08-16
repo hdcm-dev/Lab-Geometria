@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §13 (dependencias y orden topológico), §14 (contratos entre proyectos de código; RA-03), §17.5.P.1, §17.5.P.2 («más la composición de raíz que conecta puertos con adaptadores»), §17.5.P.4, §17.5.P.5 (secretos por variable de entorno o archivo montado), §17.5.P.8, §17.5.P.11; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.3** §2 y §3; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara **los cuatro puertos**; `Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara los cuatro adaptadores, los dos mecanismos y la responsabilidad de arranque
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.26** §13 (dependencias y orden topológico), §14 (contratos entre proyectos de código; RA-03), §17.1.P.1 · GeometriaFactory-Api, §17.1.P.2 · GeometriaFactory-Api («más la composición de raíz que conecta puertos con adaptadores»), §17.1.P.4 · GeometriaFactory-Api, §17.1.P.5 · GeometriaFactory-Api (secretos por variable de entorno o archivo montado), §17.1.P.8 · GeometriaFactory-Api, §17.1.P.11 · GeometriaFactory-Api; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.3** §2 y §3; `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara **los cuatro puertos**; `Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, que declara los cuatro adaptadores, los dos mecanismos y la responsabilidad de arranque
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas` y `09-Devops` de GeometriaFactory-Api
 
 ---
@@ -32,9 +32,9 @@
 
 Declarar la **composición de raíz**: el único lugar del producto donde los puertos que declara `GeometriaFactory-Application` se encuentran con los adaptadores que los implementan en `GeometriaFactory-Infrastructure`, y donde la configuración que el despliegue provee entra al proceso.
 
-Es lo que el intake §17.5.P.2 declara junto a los puntos de acceso, y es lo que hace que **todo lo demás del backend sea probable sin nada**: las tres capas de adentro se prueban con dobles precisamente porque **ninguna de ellas conoce a la que la implementa**. La factura de esa propiedad se paga acá, una sola vez.
+Es lo que el intake §17.1.P.2 · GeometriaFactory-Api declara junto a los puntos de acceso, y es lo que hace que **todo lo demás del backend sea probable sin nada**: las tres capas de adentro se prueban con dobles precisamente porque **ninguna de ellas conoce a la que la implementa**. La factura de esa propiedad se paga acá, una sola vez.
 
-También es el único lugar del proceso donde entran los dos valores que el repositorio de código **no contiene**: la ubicación del almacén y la clave de firma. El intake §17.5.P.5 y §17.5.P.8 son explícitos: **ningún secreto entra al repositorio, ni siquiera en la construcción automatizada**.
+También es el único lugar del proceso donde entran los dos valores que el repositorio de código **no contiene**: la ubicación del almacén y la clave de firma. El intake §17.1.P.5 · GeometriaFactory-Api y §17.1.P.8 · GeometriaFactory-Api son explícitos: **ningún secreto entra al repositorio, ni siquiera en la construcción automatizada**.
 
 Este caso de uso **no es un punto de acceso** y no atiende ninguna petición. No traza a ninguna necesidad de negocio, y el índice maestro §7.2 declara por qué: conectar un puerto con su adaptador es construcción y no capacidad.
 

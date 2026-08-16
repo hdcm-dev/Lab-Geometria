@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02006), §4 (F-03 y F-04), §17.1.P.2 (INV-06), §17.1.P.5, §17.5.P.5, §6 (flujo 1); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §2 y §5; `00-Contexto/Vision-Producto.md` §9.2
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (enunciado de RN-02006), §4 (F-03 y F-04), §17.1.P.2 · GeometriaFactory-Domain (INV-06), §17.1.P.5 · GeometriaFactory-Domain, §17.1.P.5 · GeometriaFactory-Api, §6 (flujo 1); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §2 y §5; `00-Contexto/Vision-Producto.md` §9.2
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -43,7 +43,7 @@ El invariante que la expresa como condición permanente es **INV-06**.
 
 ## 4. Consecuencia si se viola
 
-Rechazo del ingreso. El dominio devuelve no admisible con el motivo `CUENTA_PENDIENTE` o `CUENTA_BLOQUEADA`, y el consumidor lo traduce en un aviso explícito, distinto del rechazo genérico por credencial inválida (PRODUCT-INTAKE §17.5.P.5). Ningún acceso se emite.
+Rechazo del ingreso. El dominio devuelve no admisible con el motivo `CUENTA_PENDIENTE` o `CUENTA_BLOQUEADA`, y el consumidor lo traduce en un aviso explícito, distinto del rechazo genérico por credencial inválida (PRODUCT-INTAKE §17.1.P.5 · GeometriaFactory-Api). Ningún acceso se emite.
 
 ## 5. CU afectados
 
@@ -59,4 +59,4 @@ Pruebas unitarias de dominio previstas en 08: la evaluación de admisibilidad de
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.0 | 2026-08-09 | Emisión inicial. La regla existía en la fuente funcional pero `PRODUCT-INTAKE` no transcribía su enunciado, y esta categoría la había elevado como ambigüedad en su versión anterior en lugar de inventarla. El intake 1.3 §4.1 la transcribe y §17.1.P.2 declara INV-06 como el invariante que la expresa. El enunciado se redacta con «acceso» y no con el nombre del mecanismo de sesión, que es vocabulario de otro proyecto de código. |
+| 1.0 | 2026-08-09 | Emisión inicial. La regla existía en la fuente funcional pero `PRODUCT-INTAKE` no transcribía su enunciado, y esta categoría la había elevado como ambigüedad en su versión anterior en lugar de inventarla. El intake 1.3 §4.1 la transcribe y §17.1.P.2 · GeometriaFactory-Domain declara INV-06 como el invariante que la expresa. El enunciado se redacta con «acceso» y no con el nombre del mecanismo de sesión, que es vocabulario de otro proyecto de código. |

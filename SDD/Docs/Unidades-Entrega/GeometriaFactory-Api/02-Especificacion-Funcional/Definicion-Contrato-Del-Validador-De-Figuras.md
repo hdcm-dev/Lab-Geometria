@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §1, §3 (D-1, D-2, D-3), §4 (F-09, F-10), §4.1 (RN-06005, RN-06008, RN-06009), §7 (CL-3, CL-4), §10 («formato de entrada no negociable»), §11 (**RN-B3**), §12, §14, §17.3.P.3, §17.3.P.6, §17.3.P.10, §17.3.P.11 punto 1, §20 completo (**E-1 a E-8**) y §21 (matriz de cobertura); `Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`, para la frontera entre lo que interpreta y lo que dibuja
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §1, §3 (D-1, D-2, D-3), §4 (F-09, F-10), §4.1 (RN-06005, RN-06008, RN-06009), §7 (CL-3, CL-4), §10 («formato de entrada no negociable»), §11 (**RN-B3**), §12, §14, §17.1.P.3 · GeometriaFactory-Infrastructure, §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.10 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Infrastructure punto 1, §20 completo (**E-1 a E-8**) y §21 (matriz de cobertura); `Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`, para la frontera entre lo que interpreta y lo que dibuja
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -37,7 +37,7 @@ Este documento es esa mitigación puesta por escrito **antes** de que alguien em
 
 ## 2. Las cuatro trampas del formato
 
-Las cuatro están declaradas en `PRODUCT-INTAKE` §17.3.P.11 punto 1, y el contrato **nace sabiéndolas**.
+Las cuatro están declaradas en `PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Infrastructure punto 1, y el contrato **nace sabiéndolas**.
 
 | Id | Trampa | Qué hace un lector ingenuo | Qué hace este contrato |
 | --- | --- | --- | --- |
@@ -103,7 +103,7 @@ Los ocho están transcriptos completos en `PRODUCT-INTAKE` §20, con su proceden
 | **E-7** | Los seis tipos dibujables, con `"Bases"` en el ortoedro | **La cobertura del mapeo de tipos**, y T1 por su otra clave | **6 piezas**, con las tres figuras planas como piezas del conjunto raíz. Cero errores de validación |
 | **E-8** | Un ortoedro válido y un cubo con `"Largo": "3,50"` como cadena | **El desenlace del envío, que el intake 1.12 resolvió como error** | **1 observación de especie error de validación con posición 1 y campo `Largo`**; el ortoedro de la posición 0 **se reconstruye igual** y la posición 1 queda reservada; y por RN-06005 el trabajo **queda en `Borrador`** y no pasa a `Pendiente`. Verificado por `CU-06001` **CA-12** |
 
-**Los siete primeros son los que `PRODUCT-INTAKE` §17.3.P.6 declara como entrada de la batería de este proyecto de código.** El octavo entró después, por el contrato de la pieza que dibuja, y **su desenlace del envío es de este contrato desde el intake 1.12**.
+**Los siete primeros son los que `PRODUCT-INTAKE` §17.1.P.6 · GeometriaFactory-Infrastructure declara como entrada de la batería de este proyecto de código.** El octavo entró después, por el contrato de la pieza que dibuja, y **su desenlace del envío es de este contrato desde el intake 1.12**.
 
 **Por qué E-8 es error y no advertencia, que es la pregunta que este contrato tenía abierta hasta el intake 1.12.** Lo decidió el Product Owner y el texto vivo lo lleva en §20.E-8 «Qué verificar» punto 5 y en la fila «Dimensión no legible» de §21. El fundamento es que una dimensión ilegible **no es un valor mal calculado sino un valor que no se pudo leer**: la diferencia con las advertencias de **E-3** es que allá el sistema entiende lo que el alumno escribió y discrepa del resultado, y acá **no lo entiende**. Dejarlo pasar como advertencia entregaría al docente un trabajo con una pieza invisible, y el alumno se enteraría de que le faltaba una figura recién al ver el rechazo. Y es el modo de falla **más probable de los ocho escenarios**, porque lo produce la configuración regional de la máquina —`double.ToString()` bajo cultura `es-AR` escribe la coma decimal— y no un error del alumno.
 
@@ -129,7 +129,7 @@ La batería obligatoria del producto tiene **nueve casos de prueba** —los de R
 Tres precisiones sobre la matriz, para que nadie las lea como huecos:
 
 1. **La matriz de §21 tiene diez filas y no nueve, y la décima sí tiene tramo en este proyecto de código.** La décima —«dimensión no legible», E-8— entró el 2026-08-09 con el contrato de la pieza que dibuja, y hasta el intake 1.11 su desenlace del envío no estaba prescripto. **El intake 1.12 lo prescribió** y la fila vigente dice: «En el visor, la pieza no se dibuja y se enumera con índice y código. **En el validador, error: el trabajo queda en `Borrador`**», con lugar de verificación **etapas `f` y `g`**. La etapa `f` es la del validador —lo confirman **ocho de las otras nueve filas** de esa misma matriz, que ubican en `f` sus casos de interpretación; la novena, «dimensión en `0`», no nombra etapa y remite a la batería de RT §11—, de modo que el caso se verifica **acá y también en la visualización**, y por eso es el caso 10 de la tabla de arriba. Los nueve primeros siguen siendo la batería obligatoria de RT §11; el décimo es el que §21 agregó.
-2. **E-7 no respalda ninguno de los nueve**, aunque §17.3.P.6 lo declare como entrada de este proyecto de código. Acá se usa igual, y su valor es real: es el único texto que ejercita el mapeo completo de los seis tipos y las figuras planas como piezas del conjunto raíz. Se declara como cobertura **adicional** y no como parte de la batería.
+2. **E-7 no respalda ninguno de los nueve**, aunque §17.1.P.6 · GeometriaFactory-Infrastructure lo declare como entrada de este proyecto de código. Acá se usa igual, y su valor es real: es el único texto que ejercita el mapeo completo de los seis tipos y las figuras planas como piezas del conjunto raíz. Se declara como cobertura **adicional** y no como parte de la batería.
 3. **Los cuatro casos que verifican valores son de `CU-06002` y los seis de estructura son de `CU-06001`**, con dos —el 7 y el 9— que tocan a los dos. Es la partición que este proyecto de código heredó del dominio.
 
 ## 8. La frontera con el visor

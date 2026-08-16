@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-02014**), §4 (**F-26**, «el sistema produce una contraseña provisoria» y «el panel **no lleva campo de contraseña**»), §17.1.P.2 (las reglas sin invariante asociado), §17.1.P.5 (el dominio no maneja secretos: la contraseña llega ya derivada), §7 (**CL-7**); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.10** §4.1 (enunciado de **RN-02014**), §4 (**F-26**, «el sistema produce una contraseña provisoria» y «el panel **no lleva campo de contraseña**»), §17.1.P.2 · GeometriaFactory-Domain (las reglas sin invariante asociado), §17.1.P.5 · GeometriaFactory-Domain (el dominio no maneja secretos: la contraseña llega ya derivada), §7 (**CL-7**); [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) §1 y §5; [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md) §1 y §5
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `06-Backlog-Tecnico` de GeometriaFactory-Domain; `08-Calidad-Y-Pruebas`
 
 ---
@@ -37,11 +37,11 @@ Lo que la regla protege es la promesa de RN-02013 y de INV-09: la provisoria val
 ## 3. Ámbito de aplicación
 
 - Se evalúa sobre **el valor provisorio que cada reseteo produce**, en el acto de producirlo, y no sobre la cuenta ni sobre sus trabajos.
-- **No se ejerce en este proyecto de código, y conviene decirlo con precisión.** El dominio **no produce la provisoria y no la conoce**: llega ya derivada (`PRODUCT-INTAKE` §17.1.P.5), de modo que acá no hay valor en claro contra el cual verificar ninguna de las dos propiedades. La regla se enuncia acá porque acá viven las reglas del producto, y **se ejerce donde el valor nace**: `GeometriaFactory-Application` `CU-02011` §10 las exige por escrito sin declarar mecanismo, `GeometriaFactory-Contracts` `CU-02008` §10 las exige del valor devuelto y las verifica en su `CA-10`, y la generación es de `GeometriaFactory-Infrastructure`.
+- **No se ejerce en este proyecto de código, y conviene decirlo con precisión.** El dominio **no produce la provisoria y no la conoce**: llega ya derivada (`PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Domain), de modo que acá no hay valor en claro contra el cual verificar ninguna de las dos propiedades. La regla se enuncia acá porque acá viven las reglas del producto, y **se ejerce donde el valor nace**: `GeometriaFactory-Application` `CU-02011` §10 las exige por escrito sin declarar mecanismo, `GeometriaFactory-Contracts` `CU-02008` §10 las exige del valor devuelto y las verifica en su `CA-10`, y la generación es de `GeometriaFactory-Infrastructure`.
 - **Alcanza a los dos reseteos sucesivos de la misma cuenta**, que es el caso de FA-01 de [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md): el segundo reseteo entrega una provisoria nueva y distinta de la primera.
 - **No alcanza a la contraseña que el alumno elige** al levantar la marca: ésa la escribe él, el administrador no la conoce (RN-02013) y su forma es asunto de otra decisión.
 - **Con qué mecanismo se produce un valor que cumpla las dos propiedades no es de esta categoría** ni de ninguna de las dos que la ejercen: es de `05-Arquitectura-Tecnica` y de la infraestructura. La regla exige propiedades, no algoritmo.
-- **No tiene invariante asociado**, y el intake lo declara así en la prosa de §17.1.P.2: describe cómo se produce un valor, no una condición permanente sobre los datos del dominio.
+- **No tiene invariante asociado**, y el intake lo declara así en la prosa de §17.1.P.2 · GeometriaFactory-Domain: describe cómo se produce un valor, no una condición permanente sobre los datos del dominio.
 
 ## 4. Consecuencia si se viola
 

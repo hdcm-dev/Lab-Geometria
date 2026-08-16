@@ -12,11 +12,11 @@
 
 ## 1. Contexto
 
-El intake declara la persistencia «la responsabilidad central del proyecto de código» y fija nueve decisiones de almacenamiento: motor de archivo único, ubicación configurable en un volumen persistente, modo de diario con registro por delante, **escritor único**, una unidad de trabajo por operación, transformaciones de esquema aplicadas al arrancar, el texto del alumno guardado como texto y no consultado por su contenido, una instancia por despliegue y respaldo por copia del archivo (`PRODUCT-INTAKE` §17.3.P.4).
+El intake declara la persistencia «la responsabilidad central del proyecto de código» y fija nueve decisiones de almacenamiento: motor de archivo único, ubicación configurable en un volumen persistente, modo de diario con registro por delante, **escritor único**, una unidad de trabajo por operación, transformaciones de esquema aplicadas al arrancar, el texto del alumno guardado como texto y no consultado por su contenido, una instancia por despliegue y respaldo por copia del archivo (`PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Infrastructure).
 
 Lo que esas nueve decisiones **no** resuelven es lo que esta ADR tiene que decidir: qué hace el adaptador cuando el almacén está tomado por otra escritura, cómo se garantiza que la baja no deje trabajos huérfanos, y con qué zona horaria y con qué precisión se guardan los tres tiempos que el modelo distingue. Los tres huecos tienen la misma forma: son decisiones de **mecanismo** sobre un alcance que la capa de aplicación ya fijó.
 
-Motivación upstream: NB-00001, NB-00003, NB-00009; RN-06004, RN-06007, RN-06008, RN-06012, RN-06013; INV-07, INV-09; `RC-06001`, `RC-06005`, `RC-06006`, `RC-06007`; `PRODUCT-INTAKE` §17.3.P.4, §17.3.P.12.
+Motivación upstream: NB-00001, NB-00003, NB-00009; RN-06004, RN-06007, RN-06008, RN-06012, RN-06013; INV-07, INV-09; `RC-06001`, `RC-06005`, `RC-06006`, `RC-06007`; `PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.12 · GeometriaFactory-Infrastructure.
 
 ## 2. Decisión
 
@@ -79,7 +79,7 @@ Motivación upstream: NB-00001, NB-00003, NB-00009; RN-06004, RN-06007, RN-06008
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-06004, RN-06007, RN-06008, RN-06012, RN-06013, RN-06015), §17.3.P.4 y §17.3.P.12.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-06004, RN-06007, RN-06008, RN-06012, RN-06013, RN-06015), §17.1.P.4 · GeometriaFactory-Infrastructure y §17.1.P.12 · GeometriaFactory-Infrastructure.
 - [`../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md`](../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md) §2, §6 y §7, y las reglas conceptuales `RC-06001`, `RC-06005`, `RC-06006` y `RC-06007`.
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md`](ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md), que fija el alcance que esta ADR materializa.
 - ADR relacionadas: [`ADR-06001`](ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md), [`ADR-06003`](ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md), [`ADR-06007`](ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md).

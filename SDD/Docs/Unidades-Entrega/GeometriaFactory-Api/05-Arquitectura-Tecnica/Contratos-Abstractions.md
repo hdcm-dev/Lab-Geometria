@@ -32,13 +32,13 @@ Este documento declara **qué expone `GeometriaFactory-Domain` a sus dos consumi
 
 Los casos de uso que se materializan a través de este contrato son los **trece** de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, sin excepción: cada uno describe un contrato de uso de esta superficie y no un flujo de pantallas.
 
-**Este contrato no cruza ninguna frontera de proceso.** Los datos que salen del proceso son los del ensamblado de tipos de transferencia, que es otro proyecto de código y tiene su propio contrato. La duplicación aparente entre las entidades de acá y esos tipos es deliberada (`PRODUCT-INTAKE` §17.1.P.12).
+**Este contrato no cruza ninguna frontera de proceso.** Los datos que salen del proceso son los del ensamblado de tipos de transferencia, que es otro proyecto de código y tiene su propio contrato. La duplicación aparente entre las entidades de acá y esos tipos es deliberada (`PRODUCT-INTAKE` §17.1.P.12 · GeometriaFactory-Domain).
 
 ## 2. Formato
 
 **Contrato de superficie de biblioteca, declarado en prosa estructurada.** No hay descripción formal de servicio, ni esquema de mensajes, ni definición de procedimiento remoto: no hay protocolo que describir.
 
-**Los nombres de tipos, de operaciones y de espacios de nombres no se fijan acá.** El intake los declara abiertos y los ata al punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11); este documento nombra los elementos en lenguaje de dominio, igual que hace [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md).
+**Los nombres de tipos, de operaciones y de espacios de nombres no se fijan acá.** El intake los declara abiertos y los ata al punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain); este documento nombra los elementos en lenguaje de dominio, igual que hace [`../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md).
 
 ## 3. Operaciones
 

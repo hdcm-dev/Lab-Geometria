@@ -44,7 +44,7 @@
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Guia-Publicacion-<tipo-artefacto>.md` | **Omitido** | `Rules-Devops.md` §2.1 lo declara obligatorio para «todos los tipos D8 **con artefacto publicable**» y lo omite para «tipos cuyo artefacto no se publica externamente». El intake §17.2.P.7 declara la estrategia idéntica a §17.1.P.7, **sin publicación en feed**, y §13 lo generaliza al producto. **La tensión con el criterio de aceptación de `Rules-Devops.md` §6 —que pide «al menos una» guía— se declara en lugar de resolverse escribiendo una guía vacía**: no hay cuenta, ni token, ni comando de publicación, ni verificación posterior, ni retiro. A diferencia de `GeometriaFactory-Visor`, este ensamblado **tampoco se entrega**: se referencia dentro de la misma construcción |
+| `Guia-Publicacion-<tipo-artefacto>.md` | **Omitido** | `Rules-Devops.md` §2.1 lo declara obligatorio para «todos los tipos D8 **con artefacto publicable**» y lo omite para «tipos cuyo artefacto no se publica externamente». El intake §17.1.P.7 · GeometriaFactory-Application declara la estrategia idéntica a §17.1.P.7 · GeometriaFactory-Domain, **sin publicación en feed**, y §13 lo generaliza al producto. **La tensión con el criterio de aceptación de `Rules-Devops.md` §6 —que pide «al menos una» guía— se declara en lugar de resolverse escribiendo una guía vacía**: no hay cuenta, ni token, ni comando de publicación, ni verificación posterior, ni retiro. A diferencia de `GeometriaFactory-Visor`, este ensamblado **tampoco se entrega**: se referencia dentro de la misma construcción |
 | `Pipeline-Producto.md` | **No es de esta sección** | Es artefacto de nivel producto (`Rules-Devops.md` §2.1 y §4.9). Se emite una sola vez bajo `Producto/`, al cierre del bucle de proyectos de código, y **no lo emite la Fase F de un proyecto de código** |
 
 ## 4. Los once quality gates, y en qué stage corre cada uno
@@ -73,11 +73,11 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
-| Stages del pipeline | **3**: `restore`, `build`, `test` | `05` §5; intake §17.2.P.8 |
+| Stages del pipeline | **3**: `restore`, `build`, `test` | `05` §5; intake §17.1.P.8 · GeometriaFactory-Application |
 | Quality gates materializados | **11**, con **2** condicionados | `08` `Estrategia-Calidad.md` §3 |
 | Ambientes de despliegue propios | **0**; el ensamblado viaja embebido en **1** proceso | `05` §5; intake §13 |
-| Canales de publicación | **0** | Intake §17.2.P.7 |
-| Dependencias externas | **0**; **1** referencia a otro proyecto de código del producto | Intake §17.2.P.1; `QG-05` |
+| Canales de publicación | **0** | Intake §17.1.P.7 · GeometriaFactory-Application |
+| Dependencias externas | **0**; **1** referencia a otro proyecto de código del producto | Intake §17.1.P.1 · GeometriaFactory-Application; `QG-05` |
 | Casos de uso | **11** | `02` §5, citado por `08` README §5 |
 | Puertos | **4** | `02` §3, citado por `08` README §5 |
 | Comprobaciones de autorización | **4** | `02` §4, citado por `08` README §5 |

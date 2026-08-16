@@ -49,7 +49,7 @@
 
 | Artefacto | Estado | Motivo |
 | --- | --- | --- |
-| `Guia-Publicacion-Openapi.md` | **Omitido** | `Rules-Devops.md` §2.2 lo admite como artefacto secundario para servicios, no para `web-monolith`, y acá no tendría sujeto por partida doble: esta unidad **no expone contrato a nadie** (intake §14) y el contrato del producto es un **ensamblado compartido**, no una descripción publicada. El intake §17.5.P.3 declara que **no hay versionado de rutas porque no hay clientes de terceros** |
+| `Guia-Publicacion-Openapi.md` | **Omitido** | `Rules-Devops.md` §2.2 lo admite como artefacto secundario para servicios, no para `web-monolith`, y acá no tendría sujeto por partida doble: esta unidad **no expone contrato a nadie** (intake §14) y el contrato del producto es un **ensamblado compartido**, no una descripción publicada. El intake §17.1.P.3 · GeometriaFactory-Api declara que **no hay versionado de rutas porque no hay clientes de terceros** |
 | `Guia-Publicacion-Image-Docker.md` | **No es de esta sección** | La única imagen de contenedor del producto es la del backend. Su guía vive en la categoría 09 de `GeometriaFactory-Api` |
 | `Pipeline-Producto.md` | **No es de esta sección** | Artefacto de nivel producto (`Rules-Devops.md` §2.1 y §4.9), emitido una sola vez bajo `Producto/` al cierre del bucle de proyectos de código |
 
@@ -73,7 +73,7 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | QG-10 | Pull request, conteo del tráfico de circuito (`TC-10033`) | Bloqueante |
 | QG-11 | Cierre de la etapa, recorrido de la matriz de sensado | Bloquea el cierre de etapa |
 
-**Ningún gate de este proyecto de código es condicionado.** El único con valor rotulado **[ASUNCIÓN]** es `QG-04`, y lo rotulado es **expresar la regla acumulativa como puerta**, no la regla: el intake §17.6.P.6 lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante». Es la distinción que la Fase E fijó y esta categoría la materializa sin reabrirla.
+**Ningún gate de este proyecto de código es condicionado.** El único con valor rotulado **[ASUNCIÓN]** es `QG-04`, y lo rotulado es **expresar la regla acumulativa como puerta**, no la regla: el intake §17.2.P.6 · GeometriaFactory-Web lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante». Es la distinción que la Fase E fijó y esta categoría la materializa sin reabrirla.
 
 **Tres gates corren dentro del flujo de publicación y ocho no**, y la distinción importa: **una publicación verde significa que la aplicación quedó en pie, no que hace lo que debe**.
 
@@ -83,26 +83,26 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 
 | # | Decisión | Dónde está su fundamento | Estado |
 | --- | --- | --- | --- |
-| 1 | **El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`**, que quedaba fuera aunque es entrada de compilación de esta unidad | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2, decisión 1 | Se elevó al Product Owner como `PD-01`, y **él la confirmó en el intake 1.22**: §17.6.P.7 enumera hoy las **tres** rutas. `PD-01` **cerrado** |
+| 1 | **El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`**, que quedaba fuera aunque es entrada de compilación de esta unidad | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2, decisión 1 | Se elevó al Product Owner como `PD-01`, y **él la confirmó en el intake 1.22**: §17.2.P.7 · GeometriaFactory-Web enumera hoy las **tres** rutas. `PD-01` **cerrado** |
 | 2 | **El despliegue conjunto lo sostiene `QG-08` de `GeometriaFactory-Contracts` y no el filtro de rutas**, porque el filtro dispara una construcción y no coordina dos despliegues, y uno de los dos es manual por decisión del Product Owner | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.1 y §3.2 | Adoptada |
 | 3 | **La exclusión del bundle del control de versiones queda asignada a `BT-10001`** de la etapa `a`, con el estado del repositorio verificado y fechado | [`Entornos-Deploy.md`](Entornos-Deploy.md) §2 | Asignada, registrada como `PD-02` |
 
-**Y un hallazgo que esta sección deja escrito, y que el intake 1.22 confirmó en lugar de derogar**: con el front publicándose automáticamente al fusionar y el backend desplegándose a mano, **el despliegue conjunto es siempre un acto humano coordinado**, y ninguna decisión sobre el filtro de rutas lo vuelve automático. Tampoco lo vuelve automático el orden de salida que el intake §17.6.P.7 fija desde 1.22 —**primero el backend**—: el orden reduce el daño del intervalo, **no lo elimina**, y el mecanismo que queda sigue siendo la constancia escrita antes de cerrar la etapa.
+**Y un hallazgo que esta sección deja escrito, y que el intake 1.22 confirmó en lugar de derogar**: con el front publicándose automáticamente al fusionar y el backend desplegándose a mano, **el despliegue conjunto es siempre un acto humano coordinado**, y ninguna decisión sobre el filtro de rutas lo vuelve automático. Tampoco lo vuelve automático el orden de salida que el intake §17.2.P.7 · GeometriaFactory-Web fija desde 1.22 —**primero el backend**—: el orden reduce el daño del intervalo, **no lo elimina**, y el mecanismo que queda sigue siendo la constancia escrita antes de cerrar la etapa.
 
 ## 6. Recuentos que esta sección sostiene
 
 | Magnitud | Valor | Fuente |
 | --- | --- | --- |
-| Pasos del flujo de publicación | **8** | Intake §17.6.P.8; `05` §5 enumera el mismo conjunto en **7** |
+| Pasos del flujo de publicación | **8** | Intake §17.2.P.8 · GeometriaFactory-Web; `05` §5 enumera el mismo conjunto en **7** |
 | Quality gates materializados | **11**, **ninguno** condicionado | `08` `Estrategia-Calidad.md` §3 y §3.1 |
 | Puertas técnicas que alcanzan a este proyecto de código | **3**: `PT-01` en sus **cuatro** partes, `PT-02` y `PT-03` | `08` `Estrategia-Calidad.md` §3.2 |
 | Ambientes | **2**: contenedor de desarrollo y hosting público | `05` §5; [`Entornos-Deploy.md`](Entornos-Deploy.md) §1 |
 | Unidades desplegables del producto | **2**, y ésta es una | Intake §13 y §14 |
 | Artefactos publicables de este proyecto de código | **1**: `Front-Ftp` | Intake §13; [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md) §0 |
-| Valores de configuración | **2**, los dos secretos, nombrados por su función | Intake §17.6.P.5; [`Entornos-Deploy.md`](Entornos-Deploy.md) §4 |
+| Valores de configuración | **2**, los dos secretos, nombrados por su función | Intake §17.2.P.5 · GeometriaFactory-Web; [`Entornos-Deploy.md`](Entornos-Deploy.md) §4 |
 | Casos de uso | **10** | `02` §3, citado por `08` README §6 |
 | Códigos vivos del contrato sobre los que se mide `QG-08` | **15** | `GeometriaFactory-Contracts`; `05` §3.1, traductor de condiciones |
-| Funciones de la fachada del visor, única vía de acceso al bundle | **6** | Intake §17.7.P.3, citado por §14 y por §17.6.P.3 |
+| Funciones de la fachada del visor, única vía de acceso al bundle | **6** | Intake §17.2.P.3 · GeometriaFactory-Visor, citado por §14 y por §17.2.P.3 · GeometriaFactory-Web |
 | Sondas de la matriz de sensado que `QG-11` recorre | **61** | `08` `Matriz-Sensado-Deriva.md` §4 |
 | Criterios de salida del plan de pruebas | **11** | `08` `Plan-Pruebas.md` §3 |
 | Etapas que este proyecto de código toca | **8**: `a` a `h`, **todas las comprometidas** | `06` `Product-Backlog.md` §2, citado por `08` README §6 |
@@ -113,4 +113,4 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Web`, **una de las dos unidades desplegables del producto**. Lista los **cinco** artefactos emitidos —incluida la guía de publicación, que acá **no se omite**—, el orden de lectura con la precisión de que el documento bisagra es el de entornos y no el de versionado, los **tres** artefactos que no corresponden con su motivo, los **once** quality gates con dónde corre cada uno y la constancia de que **ninguno es condicionado**, las **tres decisiones derivadas** de esta sección con su estado, el hallazgo de que **el despliegue conjunto es siempre un acto humano coordinado**, y la tabla de recuentos con la fuente de cada uno. |
-| 1.1 | 2026-08-11 | **Propagación de las dos decisiones de despliegue del Product Owner** del intake **1.22** §17.6.P.7. **(a)** El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`: la decisión 1 de §5 pasa de elevada a **confirmada por la fuente** y `PD-01` queda **cerrado**, con lo que la fila de recuentos declara **5** puntos abiertos con **4 vigentes**. **(b)** Cuando front y backend salen juntos, **primero el backend**: se agrega al hallazgo de §5 con la constancia de que el orden **no vuelve automático** el despliegue conjunto y de que el intervalo se minimiza en vez de eliminarse. Actualiza a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) y [`Entornos-Deploy.md`](Entornos-Deploy.md). |
+| 1.1 | 2026-08-11 | **Propagación de las dos decisiones de despliegue del Product Owner** del intake **1.22** §17.2.P.7 · GeometriaFactory-Web. **(a)** El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`: la decisión 1 de §5 pasa de elevada a **confirmada por la fuente** y `PD-01` queda **cerrado**, con lo que la fila de recuentos declara **5** puntos abiertos con **4 vigentes**. **(b)** Cuando front y backend salen juntos, **primero el backend**: se agrega al hallazgo de §5 con la constancia de que el orden **no vuelve automático** el despliegue conjunto y de que el intervalo se minimiza en vez de eliminarse. Actualiza a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) y [`Entornos-Deploy.md`](Entornos-Deploy.md). |

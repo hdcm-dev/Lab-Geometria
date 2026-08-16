@@ -33,7 +33,7 @@
 
 Describe el **esquema físico** de lo que el producto guarda: qué tablas hay, con qué tipos, con qué índices, con qué restricciones y con qué transformación inicial. Su origen conceptual es [`../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md`](../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md), entidad por entidad, y **no lo redefine**: lo materializa. Cuando los dos digan cosas distintas, manda el modelo del dominio, que es el que aquél a su vez materializa.
 
-**Emitirlo es un apartamiento declarado de la guía del tipo, con el mismo fundamento con el que la categoría 02 emitió su modelo conceptual.** La guía de esta categoría omite el modelo lógico para «`library` puro **sin estado**», y este proyecto de código no lo es: el `PRODUCT-MANIFEST` §5 declara `tiene_persistencia` en true acá, y el intake declara la persistencia «la responsabilidad central del proyecto de código» (§17.3.P.4). Omitirlo dejaría al producto **sin ningún documento que describa el esquema del dato guardado**: el otro proyecto de código con el flag en true es `GeometriaFactory-Api`, que delega en éste y sólo toma de configuración la ruta y dispara la preparación al arrancar.
+**Emitirlo es un apartamiento declarado de la guía del tipo, con el mismo fundamento con el que la categoría 02 emitió su modelo conceptual.** La guía de esta categoría omite el modelo lógico para «`library` puro **sin estado**», y este proyecto de código no lo es: el `PRODUCT-MANIFEST` §5 declara `tiene_persistencia` en true acá, y el intake declara la persistencia «la responsabilidad central del proyecto de código» (§17.1.P.4 · GeometriaFactory-Infrastructure). Omitirlo dejaría al producto **sin ningún documento que describa el esquema del dato guardado**: el otro proyecto de código con el flag en true es `GeometriaFactory-Api`, que delega en éste y sólo toma de configuración la ruta y dispara la preparación al arrancar.
 
 **Los nombres de tablas y de columnas de este documento son de lenguaje de dominio**, igual que en el resto de la cadena: los identificadores definitivos se anclan en el punto de control de la etapa `a`, con los demás nombres de tipos. Lo que sí es definitivo es la **forma**: qué columnas hay, de qué tipo, con qué nulabilidad, con qué índice y con qué restricción.
 
@@ -113,7 +113,7 @@ Entidad conceptual de origen: **Componente** (`Modelo-Conceptual.md` §3.5).
 | Dimensiones | Texto | No | Ninguno | Las que el texto del alumno trae |
 | Área declarada | Real | Sí | Ninguno | La que el texto trae |
 
-**Los componentes se persisten pese a su redundancia** —un cubo de lado 3 guarda seis caras idénticas para expresar un solo número— **porque son parte del ejercicio**, y se compensa **no cargándolos nunca en las consultas de listado** (`PRODUCT-INTAKE` §17.3.P.12).
+**Los componentes se persisten pese a su redundancia** —un cubo de lado 3 guarda seis caras idénticas para expresar un solo número— **porque son parte del ejercicio**, y se compensa **no cargándolos nunca en las consultas de listado** (`PRODUCT-INTAKE` §17.1.P.12 · GeometriaFactory-Infrastructure).
 
 ### 2.5 Observación
 
@@ -162,7 +162,7 @@ Entidad conceptual de origen: **Observación** (`Modelo-Conceptual.md` §3.6).
 | RE-12 | Observación | Clave foránea hacia Trabajo **con arrastre del retiro**; y **ninguna** hacia Pieza | `Modelo-Conceptual.md` §3.1, `RC-06005` |
 | RE-13 | Observación | Especie pertenece al conjunto cerrado de **2** valores | `Modelo-Conceptual.md` §4 |
 | RE-14 | Observación | El valor declarado y el valor derivado están los dos presentes o los dos ausentes, y sólo están presentes en la advertencia | `RC-06003` |
-| RE-15 | Todas | **Ninguna columna de borrado lógico y ninguna de pertenencia a instancia** | `RC-06005`, `INV-05`, `PRODUCT-INTAKE` §17.3.P.4 |
+| RE-15 | Todas | **Ninguna columna de borrado lógico y ninguna de pertenencia a instancia** | `RC-06005`, `INV-05`, `PRODUCT-INTAKE` §17.1.P.4 · GeometriaFactory-Infrastructure |
 
 **Los cuatro arrastres del retiro —RE-06, RE-09, RE-11 y RE-12— son lo que hace que el retiro físico sea comprobable por ausencia**, que es exactamente el criterio con el que `RN-06007` se verifica: no queda ningún trabajo del alumno dado de baja. La unidad de trabajo los cubre a los cuatro de una vez ([`ADR-06002`](Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md)).
 
@@ -173,9 +173,9 @@ Entidad conceptual de origen: **Observación** (`Modelo-Conceptual.md` §3.6).
 | Identificador | **TR-01**, primera transformación del linaje. Se versiona con el código de la etapa `a`, que es la que la introduce |
 | Qué hace | Crea las **cinco** tablas de §2, los **seis** índices de §3 y las **quince** restricciones de §4 sobre un almacén inexistente |
 | Cuándo se aplica | **Al arrancar**, automáticamente, antes de que el servicio atienda su primera petición ([`ADR-06007`](Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) |
-| Herramienta | La del mapeador que el intake ancla en la etapa `a`, instalada como **herramienta local del repositorio** para que su versión quede versionada junto al código (`PRODUCT-INTAKE` §17.3.P.1) |
+| Herramienta | La del mapeador que el intake ancla en la etapa `a`, instalada como **herramienta local del repositorio** para que su versión quede versionada junto al código (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Infrastructure) |
 | Inmutabilidad | **Una transformación ya fusionada no se edita.** Si hay que corregirla, entra una nueva. Es la causa frecuente de `MIGRACION_NO_APLICABLE` |
-| Verificación | Puerta bloqueante del pipeline: **las transformaciones se aplican solas sobre un almacén inexistente**, criterio de aceptación de la etapa `c` (`PRODUCT-INTAKE` §17.3.P.8) |
+| Verificación | Puerta bloqueante del pipeline: **las transformaciones se aplican solas sobre un almacén inexistente**, criterio de aceptación de la etapa `c` (`PRODUCT-INTAKE` §17.1.P.8 · GeometriaFactory-Infrastructure) |
 | Qué pasa si no se puede aplicar | **El arranque se detiene.** No se aplica un esquema por aproximación y **no se descarta el almacén** ([`ADR-06007`](Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) |
 
 ## 6. Estrategia de partición por instancia

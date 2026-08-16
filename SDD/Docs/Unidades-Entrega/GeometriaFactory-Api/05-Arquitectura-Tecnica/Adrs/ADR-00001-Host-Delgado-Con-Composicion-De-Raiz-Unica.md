@@ -12,13 +12,13 @@
 
 ## 1. Contexto
 
-`GeometriaFactory-Api` es el **proyecto de código principal** del producto y el único que ensambla a los demás. El intake ya fijó su forma —«host delgado: endpoints que traducen petición a caso de uso y resultado a tipo de transferencia, más la composición de raíz que conecta puertos con adaptadores»— y descartó dos alternativas: lógica en los puntos de acceso y servicio de fachada que devuelva vistas armadas (`PRODUCT-INTAKE` §17.5.P.2).
+`GeometriaFactory-Api` es el **proyecto de código principal** del producto y el único que ensambla a los demás. El intake ya fijó su forma —«host delgado: endpoints que traducen petición a caso de uso y resultado a tipo de transferencia, más la composición de raíz que conecta puertos con adaptadores»— y descartó dos alternativas: lógica en los puntos de acceso y servicio de fachada que devuelva vistas armadas (`PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Api).
 
 Lo que ninguna fuente resuelve es **qué significa «delgado» de forma verificable**. Sin un criterio, cualquier cosa que se agregue a un punto de acceso se justifica como «conveniencia del borde», y la propiedad que las tres capas de adentro compraron —que la autorización, el estado y la interpretación se prueban sin HTTP— se pierde de a poco y sin que nadie lo decida.
 
 Hay además un dato del intake que ordena la decisión: la pirámide de pruebas de este proyecto de código es **60 % de integración y 40 % unitarias**, **invertida a propósito**, «porque lo que este proyecto de código aporta es cableado, y el cableado se verifica ejerciéndolo». Un host que además decidiera cosas necesitaría pruebas unitarias que ese reparto no tiene.
 
-Motivación upstream: NB-00003, NB-00008; RN-00003, RN-00004, RN-00013; `PRODUCT-INTAKE` §17.5.P.2, §17.5.P.6, §17.5.P.11.
+Motivación upstream: NB-00003, NB-00008; RN-00003, RN-00004, RN-00013; `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Api, §17.1.P.6 · GeometriaFactory-Api, §17.1.P.11 · GeometriaFactory-Api.
 
 ## 2. Decisión
 
@@ -42,8 +42,8 @@ De ahí salen cuatro prohibiciones verificables:
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Host delgado con las cuatro prohibiciones verificables (**adoptada**) | Cada prohibición se comprueba por inspección; la pirámide invertida tiene sentido porque no hay lógica propia que probar unitariamente; las capas de adentro conservan la propiedad de probarse sin HTTP | Obliga a que casi todo camino de prueba pase por integración, que es más lenta de correr |
-| Lógica en los puntos de acceso | Menos capas y menos traducción; cada punto se lee entero | **Descartada por el intake §17.5.P.2**: haría inseparable la verificación de pertenencia de la capa de transporte y volvería obligatoria una prueba de integración para cada regla de negocio |
-| Servicio de fachada que devuelva vistas ya armadas | Menos viajes desde el front | **Descartada por el intake §17.5.P.2**: el front arma sus vistas en el servidor del hosting; una fachada agregaría un salto sin quitar ninguno |
+| Lógica en los puntos de acceso | Menos capas y menos traducción; cada punto se lee entero | **Descartada por el intake §17.1.P.2 · GeometriaFactory-Api**: haría inseparable la verificación de pertenencia de la capa de transporte y volvería obligatoria una prueba de integración para cada regla de negocio |
+| Servicio de fachada que devuelva vistas ya armadas | Menos viajes desde el front | **Descartada por el intake §17.1.P.2 · GeometriaFactory-Api**: el front arma sus vistas en el servidor del hosting; una fachada agregaría un salto sin quitar ninguno |
 | Host delgado, pero con la comprobación de pertenencia duplicada acá «por defensa en profundidad» | Un punto de acceso mal invocado fallaría antes | **Descartada.** Dos lugares que comprueban lo mismo terminan diciendo cosas distintas, y el criterio de verificación de `RN-00004` que la fuente exige —**forzar la petición contra esta superficie**— dejaría de probar lo que quiere probar: probaría el borde, no la regla |
 
 ## 5. Consecuencias positivas
@@ -81,7 +81,7 @@ De ahí salen cuatro prohibiciones verificables:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §17.5.P.2, §17.5.P.6 y §17.5.P.11.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §17.1.P.2 · GeometriaFactory-Api, §17.1.P.6 · GeometriaFactory-Api y §17.1.P.11 · GeometriaFactory-Api.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, §4 y §8.
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md`](ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md).
 - ADR relacionadas: [`ADR-00003`](ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md), [`ADR-00004`](ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md), [`ADR-00006`](ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md).

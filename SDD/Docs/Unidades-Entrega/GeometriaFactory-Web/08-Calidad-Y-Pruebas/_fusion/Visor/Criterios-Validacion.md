@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md) 1.2 §6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.7.P.6, §17.7.P.8 y §17.7.P.10
+**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.1 §3; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md) 1.2 §6; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) 1.0 §8 y §11; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.2.P.6 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor y §17.2.P.10 · GeometriaFactory-Visor
 **Trazabilidad downstream:** [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -67,7 +67,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 ## 4. Criterios de las puertas técnicas
 
-Las dos puertas las declara el intake §15 y §17.7.P.8. **Esta sección no las redefine, no las relaja y no les agrega criterios**: declara con qué caso de prueba se mide cada tramo.
+Las dos puertas las declara el intake §15 y §17.2.P.8 · GeometriaFactory-Visor. **Esta sección no las redefine, no las relaja y no les agrega criterios**: declara con qué caso de prueba se mide cada tramo.
 
 | Id | Puerta y tramo | Umbral | Test |
 | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ Las dos puertas las declara el intake §15 y §17.7.P.8. **Esta sección no las 
 | CV-29 | La regla de dependencias entre capas se respeta: la capa 1 no conoce el interior, la capa 2 **no contiene lógica de dibujo** y la capa 3 no conoce al anfitrión | 0 violaciones | **Bloqueante** |
 | CV-30 | El bundle **nunca se editó a mano**: es un artefacto generado y reproducible | 100 % generado | **Bloqueante** |
 | CV-31 | El motor de dibujo **nunca se expone al anfitrión** | 0 exposiciones | **Bloqueante** |
-| CV-32 | **Cobertura de líneas: no aplica como criterio.** El intake §17.7.P.6 fija el gate de inspección de cero red **en lugar de** la cobertura de líneas | — | **No aplicable, declarado** |
+| CV-32 | **Cobertura de líneas: no aplica como criterio.** El intake §17.2.P.6 · GeometriaFactory-Visor fija el gate de inspección de cero red **en lugar de** la cobertura de líneas | — | **No aplicable, declarado** |
 | CV-33 | **Mutation score: no aplica.** No hay forma de matar los mutantes del código de dibujo sin recurrir a la comparación de imágenes, que [`Estrategia-Testing.md`](Estrategia-Testing.md) §1 descarta con su fundamento | — | **No aplicable, declarado** |
 | CV-34 | **Snapshot de la escena: no aplica.** Una comparación de imágenes sería frágil y **no distinguiría un cambio legítimo de orientación de una deriva de posición**, cuando el determinismo comprometido es de posición | — | **No aplicable, declarado** |
 

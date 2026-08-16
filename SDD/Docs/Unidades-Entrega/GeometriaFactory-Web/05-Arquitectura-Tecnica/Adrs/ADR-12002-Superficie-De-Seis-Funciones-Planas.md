@@ -12,7 +12,7 @@
 
 ## 1. Contexto
 
-Toda la superficie pública de este proyecto de código son **seis funciones planas**, que `PRODUCT-INTAKE` §17.7.P.3 declara: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento`.
+Toda la superficie pública de este proyecto de código son **seis funciones planas**, que `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Visor declara: `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir` y `establecerMovimiento`.
 
 Eran cinco hasta el 2026-08-09. La sexta la acuñó [`../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §4.6 por decisión del Product Owner tomada al cerrar la validación visual de la Fase B2, y el intake **la consolidó en su versión 1.6**, de modo que la fuente vuelve a ser única. El motivo de la sexta es arquitectónico y conviene tenerlo presente: prender o apagar los movimientos con la escena andando, dentro de las cinco originales, exigía **reconstruir la instancia**, lo que pierde la selección de pieza y produce un parpadeo.
 
@@ -78,7 +78,7 @@ Cuatro decisiones de forma la acompañan:
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.7.P.2, §17.7.P.3, §17.7.P.11 punto 3, §18.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.2.P.2 · GeometriaFactory-Visor, §17.2.P.3 · GeometriaFactory-Visor, §17.2.P.11 · GeometriaFactory-Visor punto 3, §18.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §5, fundamento de `tiene_extensibilidad` con la enumeración de las seis funciones.
 - [`../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §3.2, §4, §5.1, §5.2, §6 y §7.
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §3.2, por la distinción entre unidad de contrato y unidad de catálogo.

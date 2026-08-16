@@ -74,8 +74,8 @@ Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyec
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
-| Tiempo de la batería de pruebas del dominio | Menos de **10 segundos** de punta a punta **[ASUNCIÓN del intake §17.1.P.10]** | Medición del pipeline, **no un caso de prueba**. Gate `QG-07`, condicionado | Duración total reportada por el ejecutor en la etapa `test` | `Pendiente` |
-| Cobertura de la biblioteca | **90 %** de líneas y **85 %** de ramas **[ASUNCIÓN del intake §17.1.P.6]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-03`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
+| Tiempo de la batería de pruebas del dominio | Menos de **10 segundos** de punta a punta **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain]** | Medición del pipeline, **no un caso de prueba**. Gate `QG-07`, condicionado | Duración total reportada por el ejecutor en la etapa `test` | `Pendiente` |
+| Cobertura de la biblioteca | **90 %** de líneas y **85 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Domain]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-03`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
 | Dependencias salientes del proyecto de código | Exactamente **0** y **0** | `TC-02024` | Inspección del archivo de proyecto, y revisión del pull request | `Pendiente` |
 | Cobertura del catálogo de condiciones | **100 %** de las **42** condiciones alcanzadas, y **0** emitidas fuera del catálogo | `TC-02023` | Prueba de inspección que compara los dos conjuntos en las dos direcciones | `Pendiente` |
 | Ejercicio de los invariantes | **100 %** de los **nueve** con prueba de violación rechazada, **sin dobles** | `TC-02026`, sobre la tabla de §5 | Prueba de inspección sobre la matriz, revisada al cerrar cada etapa | `Pendiente` |
@@ -108,7 +108,7 @@ Dieciséis filas, una por regla de [`../02-Especificacion-Funcional/Especificaci
 | RN-02015 Resetear no exige cuenta habilitada | Ninguno | `TC-02005`, `TC-02007` | Unit e integración interna | `Pendiente` |
 | RN-02016 Habilitar produce la provisoria | INV-09 | `TC-02003`, `TC-02009`, `TC-02010` | Unit e integración interna | `Pendiente` |
 
-**Dieciséis de dieciséis reglas con al menos un caso de prueba.** El reparto de la columna de invariante es **diez con invariante y seis sin él**, que es exactamente el que declaran `02` §4 y `05` §10.2; esta matriz lo refleja y no lo redefine. **RN-02012, RN-02013 y RN-02016 comparten INV-09**, con la lectura que la categoría 02 adoptó de la columna del propio invariante en el intake §17.1.P.2, declarando que la prosa de esa sección es ambigua; esta categoría hereda esa lectura y **no afirma que la prosa del intake la respalde**.
+**Dieciséis de dieciséis reglas con al menos un caso de prueba.** El reparto de la columna de invariante es **diez con invariante y seis sin él**, que es exactamente el que declaran `02` §4 y `05` §10.2; esta matriz lo refleja y no lo redefine. **RN-02012, RN-02013 y RN-02016 comparten INV-09**, con la lectura que la categoría 02 adoptó de la columna del propio invariante en el intake §17.1.P.2 · GeometriaFactory-Domain, declarando que la prosa de esa sección es ambigua; esta categoría hereda esa lectura y **no afirma que la prosa del intake la respalde**.
 
 **RN-02014 tiene caso de prueba aunque `05` §10.2 declare que ningún componente de este proyecto de código la gobierna.** Lo que se verifica acá no es la producción de la provisoria —que ocurre afuera— sino su consecuencia sobre la superficie: que la habilitación y el reseteo **exigen el valor ya derivado** y lo rechazan vacío.
 
@@ -145,7 +145,7 @@ La partición es por los **cinco** componentes de `05` §3.1, no por capas de de
 
 **«Sin medir» y no «0 %».** No hay código construido: un cero sería una afirmación falsa sobre el estado del sistema y no una ausencia de medición.
 
-**El umbral global de 90 / 85 viene rotulado [ASUNCIÓN] desde el intake §17.1.P.6.** El **mutation score de 60 %** no lo declara ninguna fuente del producto: es el piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library`, y esta categoría lo adopta como tal sin atribuírselo al intake.
+**El umbral global de 90 / 85 viene rotulado [ASUNCIÓN] desde el intake §17.1.P.6 · GeometriaFactory-Domain.** El **mutation score de 60 %** no lo declara ninguna fuente del producto: es el piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library`, y esta categoría lo adopta como tal sin atribuírselo al intake.
 
 ## 7. Huecos identificados
 

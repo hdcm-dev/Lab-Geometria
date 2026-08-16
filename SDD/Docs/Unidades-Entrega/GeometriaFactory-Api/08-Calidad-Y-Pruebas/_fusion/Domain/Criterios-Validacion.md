@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.1.P.6, §17.1.P.8, §17.1.P.10 y §22
+**Trazabilidad upstream:** [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) 1.1; [`Estrategia-Calidad.md`](Estrategia-Calidad.md) 1.0 §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §8; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.19** §15, §17.1.P.6 · GeometriaFactory-Domain, §17.1.P.8 · GeometriaFactory-Domain, §17.1.P.10 · GeometriaFactory-Domain y §22
 **Trazabilidad downstream:** [`Definition-Of-Done.md`](Definition-Of-Done.md); `09-Devops`
 
 ---
@@ -51,12 +51,12 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
-| CV-08 | La batería de dominio completa termina en menos de **10 segundos** | 10 s **[ASUNCIÓN del intake §17.1.P.10, asunción `A-5` de §22]** | Duración total reportada por el ejecutor en la etapa `test` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
-| CV-09 | La cobertura alcanza **90 %** de líneas y **85 %** de ramas, **por componente y no como número global** | 90 / 85 **[ASUNCIÓN del intake §17.1.P.6, asunción `A-3` de §22]**, con los tres componentes que suben declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
+| CV-08 | La batería de dominio completa termina en menos de **10 segundos** | 10 s **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain, asunción `A-5` de §22]** | Duración total reportada por el ejecutor en la etapa `test` | **Condicionado**: se mide y se registra; no bloquea hasta la confirmación |
+| CV-09 | La cobertura alcanza **90 %** de líneas y **85 %** de ramas, **por componente y no como número global** | 90 / 85 **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Domain, asunción `A-3` de §22]**, con los tres componentes que suben declarados en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | Informe de cobertura por componente de la etapa `test` | **Condicionado** |
 | CV-10 | El archivo de proyecto declara **0** referencias a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | 0 y 0 | `TC-02024` y revisión del pull request | **Bloqueante** |
 | CV-11 | El catálogo de condiciones cierra en las dos direcciones | 42 de 42 y 0 fuera | `TC-02023` | **Bloqueante** |
 | CV-12 | Los nueve invariantes están ejercidos sin dobles | 9 de 9, 0 dobles | `TC-02026` | **Bloqueante** |
-| CV-13 | La construcción termina en 0 y **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.1.P.8 | **Bloqueante** |
+| CV-13 | La construcción termina en 0 y **sin advertencias** | 0 advertencias | Etapa `build`; intake §17.1.P.8 · GeometriaFactory-Domain | **Bloqueante** |
 
 **No hay criterio de latencia, de throughput ni de disponibilidad, y es correcto que no lo haya**: este proyecto de código no atiende peticiones ni abre conexiones (`05` §8, cierre de la sección). Inventar un umbral de esos tres sería inventar un sujeto que no existe.
 

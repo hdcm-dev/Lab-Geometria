@@ -61,10 +61,10 @@ Cada omisión se declara con su motivo, y ninguna es una deuda pendiente.
 | Artefacto | Motivo de la omisión |
 | --- | --- |
 | `Experiencia-De-Uso.md` | Es de la variante UX/UI. `tiene_ui_final` == false y la tabla maestra de `Rules-UX-UI-DX.md` §2.1 lo omite explícitamente para `library`. La experiencia de las personas que usan el producto —el alumno y el administrador— se documenta en la categoría 03 de los proyectos de código de la pieza pública, no acá |
-| `wireframes-<superficie>.md` | Es de la variante UX/UI. El mínimo para `library` es **cero** (§2.2) y no hay ninguna superficie que dibujar: este proyecto de código no expone protocolo ni cruza frontera de proceso (`PRODUCT-INTAKE` §17.1.P.3) |
+| `wireframes-<superficie>.md` | Es de la variante UX/UI. El mínimo para `library` es **cero** (§2.2) y no hay ninguna superficie que dibujar: este proyecto de código no expone protocolo ni cruza frontera de proceso (`PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Domain) |
 | `representacion-<concepto>.md` | Condicional a que exista una representación visual o estructural reutilizada. No existe: el dominio no serializa, no dibuja y no exporta ningún documento. Dibujar las piezas es de `GeometriaFactory-Visor` y exponer datos hacia afuera es de `GeometriaFactory-Contracts` y `GeometriaFactory-Api` (`Definicion-Modelo-De-Dominio.md` §7) |
-| `DX-Portal-Developers.md` | `tiene_portal_developers` == false. No hay portal hospedado ni integradores externos: este proyecto de código no se publica en ningún feed y sus dos consumidores son proyectos de código del mismo producto (`PRODUCT-INTAKE` §17.1.P.7) |
-| `DX-Operability.md` | Es obligatorio para `worker-service` y este proyecto de código es `library`. No hay nada que operar: no atiende peticiones, no abre conexiones y no registra ni instrumenta (§17.1.P.10) |
+| `DX-Portal-Developers.md` | `tiene_portal_developers` == false. No hay portal hospedado ni integradores externos: este proyecto de código no se publica en ningún feed y sus dos consumidores son proyectos de código del mismo producto (`PRODUCT-INTAKE` §17.1.P.7 · GeometriaFactory-Domain) |
+| `DX-Operability.md` | Es obligatorio para `worker-service` y este proyecto de código es `library`. No hay nada que operar: no atiende peticiones, no abre conexiones y no registra ni instrumenta (§17.1.P.10 · GeometriaFactory-Domain) |
 | `Linea-Base-Visual.md` | `requiere_maqueta` == false: no hay Fase B2 de validación visual de maqueta para este proyecto de código |
 | `Contrato-Datos-Maqueta.md` | `requiere_maqueta` == false, por el mismo motivo |
 | `Bitacora-Validacion-Maqueta.md` | `requiere_maqueta` == false, por el mismo motivo |

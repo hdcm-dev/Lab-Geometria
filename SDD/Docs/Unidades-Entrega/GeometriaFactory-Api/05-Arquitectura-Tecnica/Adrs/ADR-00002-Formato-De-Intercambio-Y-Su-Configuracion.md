@@ -18,7 +18,7 @@
 
 El riesgo que la decisión tiene que cerrar es concreto y no teórico. Los dos extremos compilan contra el mismo ensamblado, de modo que **un cambio incompatible rompe la compilación antes que el tiempo de ejecución**: ésa es toda la red que este producto tiene. Pero una **configuración** distinta en cada extremo no rompe ninguna compilación: rompe en producción, con un campo que llega nulo y un estado que no se reconoce.
 
-Motivación upstream: NB-00003, NB-00004, NB-00009; RN-00008, RN-00009; `PRODUCT-INTAKE` §17.5.P.3, §17.4.P.3, §17.4.P.11 punto 2.
+Motivación upstream: NB-00003, NB-00004, NB-00009; RN-00008, RN-00009; `PRODUCT-INTAKE` §17.1.P.3 · GeometriaFactory-Api, §17.1.P.3 · GeometriaFactory-Contracts, §17.1.P.11 · GeometriaFactory-Contracts punto 2.
 
 ## 2. Decisión
 
@@ -89,7 +89,7 @@ Motivación upstream: NB-00003, NB-00004, NB-00009; RN-00008, RN-00009; `PRODUCT
 
 ## 9. Referencias
 
-- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §4.1 (RN-00008, RN-00009), §17.4.P.3, §17.4.P.11 punto 2, §17.5.P.3 y §20.E-8.
+- `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §4.1 (RN-00008, RN-00009), §17.1.P.3 · GeometriaFactory-Contracts, §17.1.P.11 · GeometriaFactory-Contracts punto 2, §17.1.P.3 · GeometriaFactory-Api y §20.E-8.
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md`](../../../../Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) §6 punto 4, que es el trade-off que esta ADR cierra.
 - [`../../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 `PA-03`, que reasigna la decisión a esta categoría.
 - [`../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md`](ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2 punto 3, que reasigna el límite de tamaño acá con la exigencia de rechazar y no truncar.

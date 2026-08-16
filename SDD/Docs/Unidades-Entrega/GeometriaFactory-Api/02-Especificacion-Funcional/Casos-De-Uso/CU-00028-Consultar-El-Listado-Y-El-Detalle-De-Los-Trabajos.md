@@ -7,7 +7,7 @@
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md); [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) (la verificación ocurre del lado del servidor); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-02003, RN-02004, RN-02009, RN-02011), §17.1.P.2 (INV-02, INV-03), §17.4.P.10 (la proyección de listado)
+**Trazabilidad upstream:** [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md); [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md) (la verificación ocurre del lado del servidor); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4.1 (RN-02003, RN-02004, RN-02009, RN-02011), §17.1.P.2 · GeometriaFactory-Domain (INV-02, INV-03), §17.1.P.10 · GeometriaFactory-Contracts (la proyección de listado)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de la unidad de entrega
 **Consolida a:** [`CU-00007`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md), [`CU-04006`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md), [`CU-04007`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md), [`CU-02009`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) y [`CU-02011`](../../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md), por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1
 
@@ -62,7 +62,7 @@ que es lo que le permite revisar **lo que el alumno entregó** y no una versión
 los hay.
 
 **La proyección de listado no arrastra el texto original, ni los componentes de las piezas, ni el
-comentario.** Es un requisito **estructural** declarado por el intake §17.4.P.10, y su motivo es
+comentario.** Es un requisito **estructural** declarado por el intake §17.1.P.10 · GeometriaFactory-Contracts, y su motivo es
 directo: **el listado del administrador cargaría el texto completo de cada trabajo de la comisión**.
 
 ## 2. Actores
@@ -207,7 +207,7 @@ ajeno** sino ejerciendo una facultad que no tiene, y ahí no hay nada que oculta
 
 Agregar a A-13 cualquier parámetro que amplíe el recorte —de estado, de dueño, de alcance— saca la
 regla de adentro y contradice CA-04. Agregar a la proyección de listado el texto original, los
-componentes o el comentario contradice el requisito estructural del intake §17.4.P.10 y CA-05.
+componentes o el comentario contradice el requisito estructural del intake §17.1.P.10 · GeometriaFactory-Contracts y CA-05.
 Distinguir en la respuesta el trabajo ajeno, el fuera de alcance y el inexistente contradice INV-02 y
 CA-09. Responder `403` en A-14 donde corresponde `404` revela la existencia del trabajo ajeno. Recortar
 la ubicación de una observación al cruzar la frontera contradice RN-02009 y CA-08, y deja al alumno

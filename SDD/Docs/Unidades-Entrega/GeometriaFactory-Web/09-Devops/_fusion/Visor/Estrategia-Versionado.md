@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../../../05-Arquitectura-Tecnica/Extensibilidad.md); [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Criterios-Validacion.md) 1.0 §6; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §15, §17.1.P.7, §17.7.P.3, §17.7.P.7 y §18
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../../../05-Arquitectura-Tecnica/Extensibilidad.md); [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Criterios-Validacion.md) 1.0 §6; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §10, §13, §15, §17.1.P.7 · GeometriaFactory-Domain, §17.2.P.3 · GeometriaFactory-Visor, §17.2.P.7 · GeometriaFactory-Visor y §18
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Bundle-Visor.md`](../../Guia-Publicacion-Bundle-Visor.md)
 
 ---
@@ -27,7 +27,7 @@
 
 ## 1. Versionado semántico
 
-Se adopta el **versionado semántico 2.0.0** en el archivo de manifiesto del paquete, junto con las convenciones de mensaje de confirmación, igual que el resto del producto (intake §17.7.P.7).
+Se adopta el **versionado semántico 2.0.0** en el archivo de manifiesto del paquete, junto con las convenciones de mensaje de confirmación, igual que el resto del producto (intake §17.2.P.7 · GeometriaFactory-Visor).
 
 **Qué gobierna la versión acá, y por qué es distinto de los otros dos proyectos de código de nivel topológico 0.** [`ADR-12006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §2 lo decide: gobierna **la superficie pública del punto de extensión** —las **seis** funciones, las **siete** garantías y los **siete** códigos de condición—, que es el punto de extensión declarado del producto (intake §18) y el único proyecto de código con `tiene_extensibilidad` en true.
 
@@ -63,7 +63,7 @@ Criterio de clase de cambio, transcripto de `ADR-12006` §7 **sin agregarle ni q
 
 ## 3. Herramienta de cálculo de la versión
 
-**Se declara por su función**, como en el resto del producto: el intake §17.1.P.7 —al que §17.7.P.7 se alinea— ata la elección al anclaje de la etapa `a`, y `ADR-12006` §6 acepta explícitamente que **la versión no la verifique ninguna herramienta** y que sea una convención sostenida por disciplina.
+**Se declara por su función**, como en el resto del producto: el intake §17.1.P.7 · GeometriaFactory-Domain —al que §17.2.P.7 · GeometriaFactory-Visor se alinea— ata la elección al anclaje de la etapa `a`, y `ADR-12006` §6 acepta explícitamente que **la versión no la verifique ninguna herramienta** y que sea una convención sostenida por disciplina.
 
 | Aspecto | Decisión |
 | --- | --- |
@@ -75,7 +75,7 @@ Las tres filas se apoyan en `ADR-12006` §6 y §8.
 
 ## 4. Modelo de ramas
 
-El del producto, sin variantes: una rama por etapa a partir de la principal, etiqueta al fusionar, un pull request por etapa que **es** el punto de control, etapas en serie y sin OK explícito no se avanza (intake §10, §15 y §17.1.P.7; `ADR-12006` §7, primera viñeta).
+El del producto, sin variantes: una rama por etapa a partir de la principal, etiqueta al fusionar, un pull request por etapa que **es** el punto de control, etapas en serie y sin OK explícito no se avanza (intake §10, §15 y §17.1.P.7 · GeometriaFactory-Domain; `ADR-12006` §7, primera viñeta).
 
 **Los momentos de este proyecto de código no son sólo etapas**, y el modelo de ramas tiene que convivir con eso. [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md) §1 declara **tres** momentos: la etapa `a`, el **momento de medición de `PT-02` y `PT-03`** —que no es una etapa y no crea una nueva— y la etapa `g`. La consecuencia para esta categoría es que **la medición de las dos puertas no espera a la rama de la etapa `g`**: si esperara, mediría después de comprometerla, que es justo lo que el intake §15 prohíbe al declarar que una puerta que no pasa **detiene la planificación** de lo que depende de ella.
 
@@ -83,7 +83,7 @@ El del producto, sin variantes: una rama por etapa a partir de la principal, eti
 
 ## 5. Canales
 
-**No hay canales de publicación.** El intake §17.7.P.7 declara que **no se publica** en ningún repositorio de paquetes del ecosistema del navegador, y [`ADR-12006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 descartó la alternativa con su fundamento. El apartamiento frente a `Rules-Devops.md` §2.2 queda registrado en [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.1.
+**No hay canales de publicación.** El intake §17.2.P.7 · GeometriaFactory-Visor declara que **no se publica** en ningún repositorio de paquetes del ecosistema del navegador, y [`ADR-12006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 descartó la alternativa con su fundamento. El apartamiento frente a `Rules-Devops.md` §2.2 queda registrado en [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.1.
 
 **Sin sufijos de anticipo.** No hay canal donde publicar un anticipo del punto de extensión ni integrador que lo consuma; el anfitrión carga el archivo que la construcción produjo.
 
@@ -101,7 +101,7 @@ Reemplaza a la política de obsolescencia de `Rules-Devops.md` §4.3, y el reemp
 | El bundle **nunca se edita a mano**; objetivo: exactamente **0** ediciones manuales | `QG-09` y `CV-30` | `ADR-12006` §8; `08` |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto; objetivo: **0** cambios mayores sin registro | Revisión del pull request de la etapa | `ADR-12006` §8 |
 
-**El antecedente que muestra que el procedimiento funciona ya ocurrió**: la sexta función de la fachada entró como cambio menor **sin romper a ningún anfitrión escrito contra las cinco anteriores** (`ADR-12006` §6, punto 3, y §7). El intake la consolidó en §17.7.P.3 en su versión 1.6. Es el recorrido completo de los seis pasos, hecho una vez y registrado.
+**El antecedente que muestra que el procedimiento funciona ya ocurrió**: la sexta función de la fachada entró como cambio menor **sin romper a ningún anfitrión escrito contra las cinco anteriores** (`ADR-12006` §6, punto 3, y §7). El intake la consolidó en §17.2.P.3 · GeometriaFactory-Visor en su versión 1.6. Es el recorrido completo de los seis pasos, hecho una vez y registrado.
 
 ## 7. Control de cambios
 

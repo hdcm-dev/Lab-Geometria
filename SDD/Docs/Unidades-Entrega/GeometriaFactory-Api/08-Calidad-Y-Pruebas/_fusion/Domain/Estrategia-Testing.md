@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.1.P.6, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) 1.0 §3.1, §4 y §8; [`../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §17.1.P.6 · GeometriaFactory-Domain, §20 (los **ocho** escenarios `E-1` a `E-8`), §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 
 ---
@@ -32,7 +32,7 @@
 
 | Nivel | Qué cubre acá | Porcentaje objetivo | Justificación |
 | --- | --- | --- | --- |
-| Unit | Las guardas, las transiciones y la constitución de las cinco entidades, sin dobles | **90 %** | El intake §17.1.P.6 declara «pruebas unitarias puras y sin dobles». Cero dependencias salientes significa que todo lo que hay que probar es entrada y salida de una operación |
+| Unit | Las guardas, las transiciones y la constitución de las cinco entidades, sin dobles | **90 %** | El intake §17.1.P.6 · GeometriaFactory-Domain declara «pruebas unitarias puras y sin dobles». Cero dependencias salientes significa que todo lo que hay que probar es entrada y salida de una operación |
 | Integración | Composición de dos o más de los cinco componentes de `05` §3.1 dentro del mismo proyecto de código: por ejemplo, adoptar la interpretación y después enviar | **10 %** | Es lo único que califica como integración acá: no hay base de datos, no hay red y no hay marco de aplicación con el que integrar |
 | E2E y snapshot | — | **0 %** | **No aplica y se declara así en lugar de omitirse.** El proyecto de código no es unidad de despliegue, no tiene proceso propio ni interfaz (`05` §4 y §5). Un recorrido de punta a punta del producto pasa por `GeometriaFactory-Api`, y ahí es donde vive |
 
@@ -47,16 +47,16 @@
 
 ## 2. Cobertura mínima por capa
 
-La partición no es en capas de despliegue —no las hay— sino en los **cinco componentes** de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 y es **90 % de líneas y 85 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
+La partición no es en capas de despliegue —no las hay— sino en los **cinco componentes** de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Domain y es **90 % de líneas y 85 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
-| Núcleo de entidades | 90 % | 85 % | 60 % | Piso del intake §17.1.P.6 |
+| Núcleo de entidades | 90 % | 85 % | 60 % | Piso del intake §17.1.P.6 · GeometriaFactory-Domain |
 | Guardas de cuenta | 95 % | 90 % | 60 % | Sube sobre el piso: es el componente donde el P0 del producto y su reincidencia se abrieron (`05` §9, segundo riesgo) |
 | Evaluador de admisibilidad | 100 % | 100 % | 60 % | Es la **puerta única** de `INV-06` y de `INV-09` ([`ADR-02005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md)). Una rama sin cubrir acá es una guarda que nadie ejerce |
 | Máquina de estados del trabajo | 95 % | 90 % | 60 % | Sostiene cinco de los nueve invariantes (`05` §10.3) |
 | Adopción de la interpretación | 90 % | 85 % | 60 % | Piso del intake |
-| **Proyecto de código completo** | **90 %** | **85 %** | **60 %** | Intake §17.1.P.6 [ASUNCIÓN] y `Rules-Calidad-Y-Pruebas.md` §2.2 para el mutation score |
+| **Proyecto de código completo** | **90 %** | **85 %** | **60 %** | Intake §17.1.P.6 · GeometriaFactory-Domain [ASUNCIÓN] y `Rules-Calidad-Y-Pruebas.md` §2.2 para el mutation score |
 
 **De dónde sale cada número, sin mezclarlos.** El 90/85 global es del intake y viene rotulado **[ASUNCIÓN]**: es el valor que el Product Owner tiene pendiente de confirmar. El **mutation score de 60 %** no lo declara ninguna fuente del producto: es el piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library` y esta categoría lo adopta como tal; **no se le atribuye al intake**. Los tres valores por encima del piso —95, 95 y 100— los sube esta categoría con el fundamento declarado en la columna, que es lo que §2.2 admite («los porcentajes son piso, no techo»).
 
@@ -69,7 +69,7 @@ Se nombran por función y no por producto, que es la convención que las categor
 | Nivel o propósito | Herramienta, por su función |
 | --- | --- |
 | Unit e integración interna | Marco de pruebas unitarias de la plataforma objetivo, ejecutado por `scripts/test.sh` |
-| Aserciones | Biblioteca de aserciones del mismo marco. Sin marcos de dobles: el intake §17.1.P.6 declara «sin dobles» |
+| Aserciones | Biblioteca de aserciones del mismo marco. Sin marcos de dobles: el intake §17.1.P.6 · GeometriaFactory-Domain declara «sin dobles» |
 | Cobertura por líneas y ramas | Recolector de cobertura de la plataforma, con informe por componente |
 | Mutation score | Marco de pruebas de mutación de la plataforma. **Su incorporación al pipeline es un hueco declarado**, ver [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §6 |
 | Pruebas basadas en propiedades | Marco de generación de casos de la plataforma, sólo donde §4 lo declara |
@@ -94,7 +94,7 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 
 ## 5. Mocks y fixtures
 
-**Política de dobles: ninguno.** El intake §17.1.P.6 declara «pruebas unitarias puras y sin dobles», y este proyecto de código lo permite porque no tiene dependencias que aislar. Lo que en otros proyectos de código exigiría un doble —el reloj y la unicidad del correo— acá **entra por parámetro** ([`ADR-02006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)): la prueba pasa el momento y la afirmación de unicidad como valores, y por eso es reproducible sin fijar el reloj del entorno.
+**Política de dobles: ninguno.** El intake §17.1.P.6 · GeometriaFactory-Domain declara «pruebas unitarias puras y sin dobles», y este proyecto de código lo permite porque no tiene dependencias que aislar. Lo que en otros proyectos de código exigiría un doble —el reloj y la unicidad del correo— acá **entra por parámetro** ([`ADR-02006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)): la prueba pasa el momento y la afirmación de unicidad como valores, y por eso es reproducible sin fijar el reloj del entorno.
 
 Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 
@@ -132,13 +132,13 @@ Fixtures que sí existen, todos como **constructores de entidad** compartidos:
 
 | Aspecto | Decisión |
 | --- | --- |
-| Dónde corre | Dentro del contenedor de desarrollo, porque el equipo anfitrión no tiene el kit de desarrollo instalado (intake, encabezado de la Parte C, y §17.1.P.9) |
+| Dónde corre | Dentro del contenedor de desarrollo, porque el equipo anfitrión no tiene el kit de desarrollo instalado (intake, encabezado de la Parte C, y §17.1.P.9 · GeometriaFactory-Domain) |
 | Aislamiento entre pruebas | Total y por construcción: no hay estado compartido entre invocaciones, no hay caché y no hay registro estático (`05` §4). Ninguna prueba depende del orden de ejecución |
 | Paralelismo | Admitido. `05` §4 declara que la batería puede correr en paralelo porque ninguna prueba comparte estado |
 | Base de datos | **Ninguna.** `tiene_persistencia` es false |
 | Variables de entorno y secretos | **Ninguno.** El proyecto de código no lee configuración (`05` §7) y la contraseña llega ya derivada |
 | Reloj | **No se fija ni se simula.** El momento entra por parámetro, de modo que la prueba lo elige ([`ADR-02006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)) |
-| Duración | La batería completa en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10]. **Ningún otro tiempo de ejecución se declara acá**: ninguna fuente da otro |
+| Duración | La batería completa en menos de **10 segundos** [ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain]. **Ningún otro tiempo de ejecución se declara acá**: ninguna fuente da otro |
 
 ## 8. Control de cambios
 

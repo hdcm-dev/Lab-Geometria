@@ -130,7 +130,7 @@ Cómo obtiene cada consumidor el artefacto de su productor, arista por arista. *
 
 **Que todas las aristas de compilación se resuelvan por build conjunto es lo que vuelve inofensiva la discrepancia del grafo.** Con un feed de paquetes de por medio, siete u ocho aristas serían dos configuraciones de publicación distintas; con un solo agrupador y un solo repositorio, la diferencia se reduce a si el archivo de proyecto de la `Api` declara la referencia directa o la recibe transitivamente. **No es motivo para cerrar la discrepancia por conveniencia**: sigue elevada.
 
-**El filtro de rutas del flujo que publica el front incluye las tres entradas de compilación de `GeometriaFactory-Web`.** El intake §17.6.P.7 declara el disparo por fusión a la rama principal restringido a cambios bajo el directorio del front, el del visor y el de los contratos. La tercera ruta entró por una corrección que `GeometriaFactory-Contracts` elevó: con sólo las dos primeras, un cambio del contrato no disparaba la publicación del front y las dos unidades quedaban desalineadas sin que nada fallara.
+**El filtro de rutas del flujo que publica el front incluye las tres entradas de compilación de `GeometriaFactory-Web`.** El intake §17.2.P.7 · GeometriaFactory-Web declara el disparo por fusión a la rama principal restringido a cambios bajo el directorio del front, el del visor y el de los contratos. La tercera ruta entró por una corrección que `GeometriaFactory-Contracts` elevó: con sólo las dos primeras, un cambio del contrato no disparaba la publicación del front y las dos unidades quedaban desalineadas sin que nada fallara.
 
 ## 5. Versionado del producto
 
@@ -152,7 +152,7 @@ Cómo obtiene cada consumidor el artefacto de su productor, arista por arista. *
 
 ## 6. Gate de integración de producto
 
-La verificación de que los proyectos de código integrados funcionan juntos **no vive en la canalización de ninguna biblioteca**: vive en la de `GeometriaFactory-Api`, que es donde el intake §17.5.P.6 pone la batería de integración, y se completa con las cinco puertas técnicas del producto.
+La verificación de que los proyectos de código integrados funcionan juntos **no vive en la canalización de ninguna biblioteca**: vive en la de `GeometriaFactory-Api`, que es donde el intake §17.1.P.6 · GeometriaFactory-Api pone la batería de integración, y se completa con las cinco puertas técnicas del producto.
 
 | Gate | Qué verifica del producto integrado | Dónde se mide | Carácter |
 | --- | --- | --- | --- |
@@ -180,7 +180,7 @@ El orden de reversión es el inverso al de construcción, con una asimetría que
 
 **El artefacto compartido que puede romper a varios consumidores es uno solo: el ensamblado de contratos.** Rompe a `Api` y a `Web` al mismo tiempo y en el mismo build, que es exactamente lo que la compilación compartida busca. Su reversión no tiene coordinación especial porque no tiene publicación: se revierte el repositorio.
 
-**El orden de salida cuando front y backend cambian juntos: primero el backend.** Es decisión del Product Owner registrada en el intake §17.6.P.7. El fundamento está escrito allí: un servicio nuevo normalmente acepta lo que mandaba el front anterior, mientras que un front nuevo contra un servicio viejo le pide algo que todavía no existe y el error lo ve el alumno. **El orden no vuelve automático el despliegue conjunto**: el front sale al fusionar y el backend se despliega a mano, de modo que el intervalo entre los dos se minimiza y se registra, no se elimina.
+**El orden de salida cuando front y backend cambian juntos: primero el backend.** Es decisión del Product Owner registrada en el intake §17.2.P.7 · GeometriaFactory-Web. El fundamento está escrito allí: un servicio nuevo normalmente acepta lo que mandaba el front anterior, mientras que un front nuevo contra un servicio viejo le pide algo que todavía no existe y el error lo ve el alumno. **El orden no vuelve automático el despliegue conjunto**: el front sale al fusionar y el backend se despliega a mano, de modo que el intervalo entre los dos se minimiza y se registra, no se elimina.
 
 **La asimetría que ningún procedimiento de reversión puede ignorar: el código vuelve atrás y el almacén no.**
 
