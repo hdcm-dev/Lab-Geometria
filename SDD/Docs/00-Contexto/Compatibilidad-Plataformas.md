@@ -347,7 +347,7 @@ Estado a la fecha de emisión 1.0: el producto no tiene código construido. La e
 | §2 Matriz de compatibilidad | 09-Devops | Matriz de sistema operativo, entorno de ejecución e integración continua; imágenes base y objetivos de construcción |
 | §2.3 Plataformas de construcción | 09-Devops | Definición del entorno de desarrollo contenido y de los guiones de construcción |
 | §2.6.2 Causa de la ausencia de WebSocket y entorno del sitio | 09-Devops, 05-Arquitectura-Tecnica | Que la habilitación es comercial y no de configuración, y las condiciones del entorno del sitio: sistema, servidor de información, proceso de 32 bits, canalización, HTTPS y cuotas |
-| §2.6 Resultado sobre el hosting real | 09-Devops, 05-Arquitectura-Tecnica | El mecanismo de publicación comprobado y el transporte disponible en producción. Lo consume [`../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md`](../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md) §2.1 |
+| §2.6 Resultado sobre el hosting real | 09-Devops, 05-Arquitectura-Tecnica | El mecanismo de publicación comprobado y el transporte disponible en producción. Lo consume [`../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md) §2.1 |
 | §3 Restricciones justificadas | 05-Arquitectura-Tecnica | Insumo de las decisiones de arquitectura sobre la partición del producto y sobre el aislamiento de la visualización |
 | §4 Alternativas | 05-Arquitectura-Tecnica, 09-Devops | Salidas ya documentadas ante el resultado de cada puerta técnica |
 | §5 Estado por plataforma | 08-Calidad-Y-Pruebas | Qué se mide, dónde y con qué umbral |

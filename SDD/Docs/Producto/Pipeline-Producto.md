@@ -61,11 +61,11 @@ Una fila por proyecto de código. La columna de artefacto publicable dice **qué
 | --- | --- | --- | --- | --- | --- |
 | `GeometriaFactory-Domain` | `library` | Ninguno | Sin feed | Sí: `Application` e `Infrastructure`, por referencia dentro del agrupador | — |
 | `GeometriaFactory-Contracts` | `library` | Ninguno | Sin feed | Sí: `Api` y `Web`, **los dos a la vez** | — |
-| `GeometriaFactory-Visor` | `library` (paquete Node) | El **bundle** del visor | Copia al directorio de recursos estáticos del front, dentro del repositorio | Sí: `Web` | [`Guia-Publicacion-Bundle-Visor.md`](../Proyectos/GeometriaFactory-Visor/09-Devops/Guia-Publicacion-Bundle-Visor.md) |
+| `GeometriaFactory-Visor` | `library` (paquete Node) | El **bundle** del visor | Copia al directorio de recursos estáticos del front, dentro del repositorio | Sí: `Web` | [`Guia-Publicacion-Bundle-Visor.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Bundle-Visor.md) |
 | `GeometriaFactory-Application` | `library` | Ninguno | Sin feed | Sí: `Infrastructure` y `Api` | — |
-| `GeometriaFactory-Web` | `web-monolith` | La **publicación del front** | Transferencia al hosting público, disparada por fusión a la rama principal | No | [`Guia-Publicacion-Front-Ftp.md`](../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md) |
+| `GeometriaFactory-Web` | `web-monolith` | La **publicación del front** | Transferencia al hosting público, disparada por fusión a la rama principal | No | [`Guia-Publicacion-Front-Ftp.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md) |
 | `GeometriaFactory-Infrastructure` | `library` | Ninguno | Sin feed | Sí: `Api` | — |
-| `GeometriaFactory-Api` | `rest-api` | La **imagen de contenedor**, construida en el destino desde el repositorio | Sin registro de imágenes: el destino construye | No por compilación; `Web` lo alcanza en **tiempo de ejecución** | [`Guia-Publicacion-Image-Docker.md`](../Proyectos/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md) |
+| `GeometriaFactory-Api` | `rest-api` | La **imagen de contenedor**, construida en el destino desde el repositorio | Sin registro de imágenes: el destino construye | No por compilación; `Web` lo alcanza en **tiempo de ejecución** | [`Guia-Publicacion-Image-Docker.md`](../Unidades-Entrega/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md) |
 
 **Tres guías de publicación para siete proyectos de código, y las cuatro ausencias son decisión declarada.** `Domain`, `Contracts`, `Application` e `Infrastructure` no emiten guía porque no tienen artefacto que salga; sus categorías `09` registran el apartamiento del modelo de canales `preview` / `stable` que la guía fija para el tipo `library`, cada una contra la ADR que lo sostiene.
 
@@ -124,9 +124,9 @@ Cómo obtiene cada consumidor el artefacto de su productor, arista por arista. *
 | `Infrastructure → Api` | Compilación | Build conjunto | `PRODUCT-MANIFEST` §2 y §3 |
 | `Contracts → Api` | Compilación | Build conjunto | `PRODUCT-MANIFEST` §2 y §3 |
 | `Contracts → Web` | Compilación | Build conjunto | `PRODUCT-MANIFEST` §2 y §3 |
-| `Visor → Web` | Compilación del empaquetado del front | **Copia del bundle generado** al directorio de recursos estáticos del anfitrión. El bundle **no se versiona en el repositorio**: lo genera la canalización antes de publicar | [`Visor/Entornos-Deploy.md`](../Proyectos/GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md) §2, que cerró el punto abierto `PA-05` de aquel proyecto de código |
+| `Visor → Web` | Compilación del empaquetado del front | **Copia del bundle generado** al directorio de recursos estáticos del anfitrión. El bundle **no se versiona en el repositorio**: lo genera la canalización antes de publicar | [`Visor/Entornos-Deploy.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/_fusion/Visor/Entornos-Deploy.md) §2, que cerró el punto abierto `PA-05` de aquel proyecto de código |
 | `Application → Api` | Compilación, **en disputa** | Build conjunto bajo las dos lecturas | Ver [`Vista-Producto.md`](Vista-Producto.md) §3.1: el manifiesto declara la arista en §2 y no la dibuja en §3 |
-| `Web → Api` | **Tiempo de ejecución**, HTTP servidor a servidor | La dirección del servicio de datos **llega por configuración**, no por referencia | [`Web ADR-10007`](../Proyectos/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) |
+| `Web → Api` | **Tiempo de ejecución**, HTTP servidor a servidor | La dirección del servicio de datos **llega por configuración**, no por referencia | [`Web ADR-10007`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) |
 
 **Que todas las aristas de compilación se resuelvan por build conjunto es lo que vuelve inofensiva la discrepancia del grafo.** Con un feed de paquetes de por medio, siete u ocho aristas serían dos configuraciones de publicación distintas; con un solo agrupador y un solo repositorio, la diferencia se reduce a si el archivo de proyecto de la `Api` declara la referencia directa o la recibe transitivamente. **No es motivo para cerrar la discrepancia por conveniencia**: sigue elevada.
 
@@ -140,13 +140,13 @@ Cómo obtiene cada consumidor el artefacto de su productor, arista por arista. *
 | --- | --- | --- |
 | Esquema de versión | Versionado semántico 2.0.0, sin excepciones | Intake §17 P.7 de cada proyecto de código |
 | Unidad de versionado | La **etapa cerrada** del producto, etiquetada en el repositorio | Intake §15 |
-| Sufijos de anticipo | **No se usan**: no hay canal donde publicar un anticipo | [`Web/Estrategia-Versionado.md`](../Proyectos/GeometriaFactory-Web/09-Devops/Estrategia-Versionado.md) |
+| Sufijos de anticipo | **No se usan**: no hay canal donde publicar un anticipo | [`Web/Estrategia-Versionado.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Estrategia-Versionado.md) |
 | Versionado del contrato compartido | **Por compilación compartida**: un cambio incompatible rompe la compilación de los dos extremos antes que el tiempo de ejecución | [`Contracts ADR-08003`](../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
-| Versionado de la superficie HTTP | **No se versionan las rutas**, y la contrapartida aceptada es el **despliegue conjunto** | [`Api ADR-00008`](../Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) |
+| Versionado de la superficie HTTP | **No se versionan las rutas**, y la contrapartida aceptada es el **despliegue conjunto** | [`Api ADR-00008`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) |
 
 **Cómo se coordina un cambio del productor con sus consumidores.** Un cambio incompatible de `GeometriaFactory-Contracts` no necesita coordinación de versiones porque no hay versiones que coordinar: rompe la compilación de `Api` y de `Web` en el mismo build. Lo que sí necesita coordinación es el **despliegue**, y ahí la regla es dura: las dos unidades salen desde el mismo estado del repositorio o la etapa no se cierra.
 
-**Tres clases de cambio del contrato compilan igual y no las detecta nada automático**: la configuración de intercambio, el esquema del almacén y las rutas. Cada una tiene su mecanismo propio, enumerado en [`Contratos-REST.md`](../Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) §7. Es la razón por la que el marcador de cambio incompatible en el mensaje de confirmación **se escribe a mano y no se deduce de que algo falle al construir**.
+**Tres clases de cambio del contrato compilan igual y no las detecta nada automático**: la configuración de intercambio, el esquema del almacén y las rutas. Cada una tiene su mecanismo propio, enumerado en [`Contratos-REST.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) §7. Es la razón por la que el marcador de cambio incompatible en el mensaje de confirmación **se escribe a mano y no se deduce de que algo falle al construir**.
 
 **La herramienta que calcula la versión a partir de los mensajes de confirmación no está elegida.** Tres proyectos de código lo declaran abierto y lo atan a la etapa `a`. Ver §9.
 
@@ -156,7 +156,7 @@ La verificación de que los proyectos de código integrados funcionan juntos **n
 
 | Gate | Qué verifica del producto integrado | Dónde se mide | Carácter |
 | --- | --- | --- | --- |
-| Batería de integración | La superficie real por su protocolo, contra el almacén real, con los tipos del contrato compartido | Stage `test` de [`Api/Pipeline-CI-CD.md`](../Proyectos/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md) §2.1 | Bloqueante |
+| Batería de integración | La superficie real por su protocolo, contra el almacén real, con los tipos del contrato compartido | Stage `test` de [`Api/Pipeline-CI-CD.md`](../Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md) §2.1 | Bloqueante |
 | `PT-01`, en sus cuatro partes | El modelo de front entero: transporte, estabilidad y comportamiento en el hosting | Etapa `a`, antes que cualquier otra cosa | Bloqueante para todo lo demás |
 | `PT-04` | Que la imagen del backend se construya y arranque desde el contenedor de desarrollo | Etapa `a`, stage `imagen` | Bloqueante |
 | `PT-02` y `PT-03` | Que el visor funcione embebido en el anfitrión y que el motor de dibujo quede dentro del bundle, sin depender de una red de distribución | Antes de comprometer la etapa `g` | Bloqueante para esa etapa |
@@ -192,12 +192,12 @@ Cada elemento de este documento contra la fuente que lo produce.
 | --- | --- |
 | Orden de construcción de §2 | `PRODUCT-MANIFEST` §3, orden topológico de cuatro niveles |
 | Cada arista de §4 | `PRODUCT-MANIFEST` §2, columna `Dependencias`, con la salvedad de §3.1 de la vista de producto |
-| Artefacto de `GeometriaFactory-Api` | [`Guia-Publicacion-Image-Docker.md`](../Proyectos/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md), tipo de artefacto `image-docker` |
-| Artefacto de `GeometriaFactory-Web` | [`Guia-Publicacion-Front-Ftp.md`](../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md), tipo de artefacto `Front-Ftp` |
-| Artefacto de `GeometriaFactory-Visor` | [`Guia-Publicacion-Bundle-Visor.md`](../Proyectos/GeometriaFactory-Visor/09-Devops/Guia-Publicacion-Bundle-Visor.md), tipo de artefacto `Bundle-Visor` |
+| Artefacto de `GeometriaFactory-Api` | [`Guia-Publicacion-Image-Docker.md`](../Unidades-Entrega/GeometriaFactory-Api/09-Devops/Guia-Publicacion-Image-Docker.md), tipo de artefacto `image-docker` |
+| Artefacto de `GeometriaFactory-Web` | [`Guia-Publicacion-Front-Ftp.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md), tipo de artefacto `Front-Ftp` |
+| Artefacto de `GeometriaFactory-Visor` | [`Guia-Publicacion-Bundle-Visor.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Bundle-Visor.md), tipo de artefacto `Bundle-Visor` |
 | Ausencia de guía en los otros cuatro | La sección de ambientes y canales de cada uno, bajo `Proyectos/<Nombre>/09-Devops/Entornos-Deploy.md`, con su apartamiento declarado |
-| Gates de §6 | [`Api/Pipeline-CI-CD.md`](../Proyectos/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md) §2.1 y §9; intake §15, tabla de puertas técnicas |
-| Reglas de despliegue conjunto de §5 y §7 | [`Api ADR-00008`](../Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) y [`Contracts ADR-08003`](../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
+| Gates de §6 | [`Api/Pipeline-CI-CD.md`](../Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md) §2.1 y §9; intake §15, tabla de puertas técnicas |
+| Reglas de despliegue conjunto de §5 y §7 | [`Api ADR-00008`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) y [`Contracts ADR-08003`](../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
 
 **Los 77 quality gates del producto no se reindexan acá.** Están repartidos por proyecto de código —`Api` 15, `Infrastructure` 14, `Application` 11, `Web` 11, `Contracts` 9, `Visor` 9 y `Domain` 8—, cada uno con su umbral y su carácter en la categoría `09` que lo declara. Copiarlos produciría una segunda fuente de verdad sobre setenta y siete umbrales, que es el defecto que este corpus tiene documentado como el más caro.
 
@@ -209,7 +209,7 @@ Este documento **no resuelve ninguno**: los registra con su titular, porque un p
 | --- | --- | --- | --- |
 | Cuántas aristas de compilación tiene el producto, siete u ocho | Abierto y elevado | Product Owner, sobre `PRODUCT-MANIFEST` §2, §3 y §4 | [`Vista-Producto.md`](Vista-Producto.md) §3.1 |
 | La herramienta que calcula la versión desde los mensajes de confirmación | Abierto, atado a la etapa `a` | El equipo, en el punto de control de la etapa `a` | `05` §11 de `Domain`, `Application` y `Visor` |
-| Que el motor de contenedores del destino resuelva la referencia al repositorio para construir la imagen | **[A VERIFICAR]** en la fuente; hay que probarlo una vez antes de depender del mecanismo | El equipo, antes de la etapa `i` | [`Api/Entornos-Deploy.md`](../Proyectos/GeometriaFactory-Api/09-Devops/Entornos-Deploy.md) §3 |
+| Que el motor de contenedores del destino resuelva la referencia al repositorio para construir la imagen | **[A VERIFICAR]** en la fuente; hay que probarlo una vez antes de depender del mecanismo | El equipo, antes de la etapa `i` | [`Api/Entornos-Deploy.md`](../Unidades-Entrega/GeometriaFactory-Api/09-Devops/Entornos-Deploy.md) §3 |
 | Las capacidades del hosting público, incluida la versión de plataforma que soporta | **[A VERIFICAR]**; es `PT-01.a`, y si no pasa se baja la versión objetivo del front y no la del backend | La medición de la etapa `a` | `Web` `05` §11 `PA-02` |
 | Los umbrales rotulados `[ASUNCIÓN]` que condicionan gates: coberturas, latencias, caudal y arranque en frío | Abiertos, pendientes de confirmación | Product Owner, sobre `PRODUCT-INTAKE` §22, asunciones `A-3`, `A-4` y `A-5` | `08` y `09` de cada proyecto de código, en los gates rotulados condicionados |
 | ~~El alcance de la colección de peticiones reproducible~~ | **Cerrado el 2026-08-12**: son los **ocho** escenarios `E-1` a `E-8`, y §18 `S-2` pasa a decir lo mismo que §16.1 ya decía | Resuelto por el Product Owner en `PRODUCT-INTAKE` **1.29** §18 | `Api` `05` §11 `PA-06`, fila resuelta |
