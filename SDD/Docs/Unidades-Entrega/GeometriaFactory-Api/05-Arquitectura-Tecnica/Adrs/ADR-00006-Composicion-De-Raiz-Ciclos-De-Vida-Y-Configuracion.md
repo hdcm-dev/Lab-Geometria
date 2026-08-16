@@ -80,7 +80,7 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.5.P.1, §17.5.P.
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §17.3.P.4, §17.5.P.1, §17.5.P.4 y §17.5.P.5.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md).
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md`](../Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md).
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../_fusion/Application/Arquitectura-Proyecto-Codigo.md) §4, que es donde queda declarada la condición a cargo de la composición de raíz.
 - [`../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md`](ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md), que decide no autorregistrarse.
 - ADR relacionadas: [`ADR-00001`](ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md), [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00007`](ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md).

@@ -9,7 +9,7 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/visor/03-avanzado/`
-**Trazabilidad upstream:** [`CU-12006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) y [`CU-12007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4.6, §5.4, §5.5 y §6; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §6, las **seis** propiedades transversales; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12013` a `TC-12021`; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md); `PRODUCT-INTAKE` 1.22 §15 puertas `PT-02` y `PT-03`, §17.7.P.6 y §18
+**Trazabilidad upstream:** [`CU-12006`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) y [`CU-12007`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §3.2, §4.6, §5.4, §5.5 y §6; [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) 1.2 §6, las **seis** propiedades transversales; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12013` a `TC-12021`; [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md); `PRODUCT-INTAKE` 1.22 §15 puertas `PT-02` y `PT-03`, §17.7.P.6 y §18
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-12003` como sonda `SD-12015`; [`../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md`](../08-Calidad-Y-Pruebas/Guia-Testing-Extensibilidad.md), que lo usa como batería de aceptación de un reemplazo; `11-Documentacion` cuando se emita
 
 ---
@@ -107,8 +107,8 @@ La última variación es el motivo por el que existe el punto de extensión: si 
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-12006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) | Caso de uso | Actos `[1]` y `[2]`. Es el caso de uso que **materializa el sample S-1** |
-| [`CU-12007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) | Caso de uso | Actos `[3]` a `[9]`: las **ocho** reglas de gobierno de §5.5 |
+| [`CU-12006`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) | Caso de uso | Actos `[1]` y `[2]`. Es el caso de uso que **materializa el sample S-1** |
+| [`CU-12007`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) | Caso de uso | Actos `[3]` a `[9]`: las **ocho** reglas de gobierno de §5.5 |
 | Garantía `G-1` · Cero red | Garantía del contrato de fachada | Actos `[10b]` y `[13]`, con su condición de medición |
 | Garantía `G-2` · Cero persistencia | Garantía del contrato de fachada | Acto `[14]` |
 | Garantía `G-3` · Sin configuración propia | Garantía del contrato de fachada | Acto `[3]` y la segunda variación |

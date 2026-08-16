@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que retirar un trabajo lo
 
 ## 2. Contexto
 
-`RN-06004` declara **borrado físico**. `02` §5 llama a este contrato de uso **la única operación destructiva del producto**, y `02` §8 declara por qué se separó del guardado: lo que hay que poder verificar del retiro es que **no queda nada**, y eso no es un caso más de la materialización. El contrato de uso es [`CU-06004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md).
+`RN-06004` declara **borrado físico**. `02` §5 llama a este contrato de uso **la única operación destructiva del producto**, y `02` §8 declara por qué se separó del guardado: lo que hay que poder verificar del retiro es que **no queda nada**, y eso no es un caso más de la materialización. El contrato de uso es [`CU-06004`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md).
 
 ## 3. Criterios de aceptación
 

@@ -83,7 +83,7 @@ Motivación upstream: NB-00008; `PRODUCT-INTAKE` §9 (X-9), §14 (RA-01), §17.4
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §9 (X-9), §14 (RA-01), §16.1, §17.4.P.3, §17.5.P.3, §17.5.P.7 y §17.5.P.8.
 - [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §7, que declara las siete ausencias de la superficie con lo que las repone.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md).
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md`](../../10-Examples/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md).
 - [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md`](../../../../Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md), que es la política que esta ADR aplica en la frontera.
 - ADR relacionadas: [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00005`](ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md), [`ADR-00007`](ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md).
 

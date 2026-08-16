@@ -9,7 +9,7 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/api/02-intermedio/`
-**Trazabilidad upstream:** [`CU-00012`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) 1.2 entero, y `CU-00003` a `CU-00008` de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, los **quince** puntos de acceso; [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md); [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) `TC-00035`; `PRODUCT-INTAKE` 1.23 §16.1, §18 **S-2**, §20 los **ocho** escenarios, y §21
+**Trazabilidad upstream:** [`CU-00012`](CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) 1.2 entero, y `CU-00003` a `CU-00008` de [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/); [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, los **quince** puntos de acceso; [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md); [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) `TC-00035`; `PRODUCT-INTAKE` 1.23 §16.1, §18 **S-2**, §20 los **ocho** escenarios, y §21
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-00002` como sonda; `11-Documentacion` cuando se emita
 
 ---
@@ -117,7 +117,7 @@ Pasos de la coleccion: 3 | Peticiones: 34 | Diferencias contra lo esperado: 0
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00012`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | Caso de uso | **Es** la colección que ese contrato declara, con su recorrido de ocho guiones y sus ocho criterios de aceptación |
+| [`CU-00012`](CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | Caso de uso | **Es** la colección que ese contrato declara, con su recorrido de ocho guiones y sus ocho criterios de aceptación |
 | [`CU-00003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md) | Caso de uso | Guiones 1 y 2: alta, administrador y credencial propia |
 | [`CU-00004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md) | Caso de uso | Guion 2: listado de cuentas y cambio de situación con la provisoria devuelta |
 | [`CU-00005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Guion 8: reseteo con la provisoria devuelta una sola vez |

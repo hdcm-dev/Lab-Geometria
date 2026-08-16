@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md); [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-03, F-24), §4.1 (RN-06004, RN-06007), §7 (CL-6), §17.3.P.4; implementa el retiro del puerto de repositorio de trabajos y del de cuentas de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, y materializa el arrastre que declara su [`CU-04002`](CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md)
+**Trazabilidad upstream:** [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md); [`NB-00003`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md); [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-03, F-24), §4.1 (RN-06004, RN-06007), §7 (CL-6), §17.3.P.4; implementa el retiro del puerto de repositorio de trabajos y del de cuentas de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3, y materializa el arrastre que declara su [`CU-04002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -95,8 +95,8 @@ El alumno y el administrador son sujetos de las reglas: uno pierde sus trabajos,
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-00001, NB-00003 y NB-00009 |
-| Reglas de negocio aplicables | [RN-02007](../Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) —en su mitad de arrastre; la confirmación escrita es del consumidor— y [RN-02004](../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md), en su mitad de **borrado físico** |
-| Reglas conceptuales de modelo | [`RC-06005`](../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06005-Retiro-Fisico-Con-Arrastre.md) |
+| Reglas de negocio aplicables | [RN-02007](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) —en su mitad de arrastre; la confirmación escrita es del consumidor— y [RN-02004](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md), en su mitad de **borrado físico** |
+| Reglas conceptuales de modelo | [`RC-06005`](../../02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06005-Retiro-Fisico-Con-Arrastre.md) |
 | Puertos que implementa | Repositorio de trabajos y repositorio de cuentas, en su operación de retiro |
 | Consumidor | `GeometriaFactory-Application`, sus CU-06002 y CU-06009 |
 | Historias de usuario a generar en 06 | US-06012, US-06013 |

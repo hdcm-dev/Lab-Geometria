@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **recibir las piezas del te
 
 ## 2. Contexto
 
-`NB-00004` pide interpretación fiel y `NB-00006` recibe de acá **la identidad posicional de la pieza**, que es el dato con el que después se dibuja y se arma el árbol (`02` §7.2). El contrato de uso es [`CU-06001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md), y `RC-06002` declara la identidad posicional.
+`NB-00004` pide interpretación fiel y `NB-00006` recibe de acá **la identidad posicional de la pieza**, que es el dato con el que después se dibuja y se arma el árbol (`02` §7.2). El contrato de uso es [`CU-06001`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md), y `RC-06002` declara la identidad posicional.
 
 ## 3. Criterios de aceptación
 

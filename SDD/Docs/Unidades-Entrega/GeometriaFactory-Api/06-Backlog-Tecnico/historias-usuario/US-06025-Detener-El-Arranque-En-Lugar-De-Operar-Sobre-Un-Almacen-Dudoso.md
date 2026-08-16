@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el servicio no atiend
 
 ## 2. Contexto
 
-`05` §4 declara esta forma de terminación como **la única que ninguna otra parte del producto tiene**: si la preparación del almacén no se completa, **el servicio no atiende ninguna petición**. Y agrega el fundamento: **un servicio que atiende sobre un almacén equivocado es peor que un servicio que no arranca**. `05` §9 declara los dos atajos que esta historia cierra, los dos con impacto **muy alto**. El contrato de uso es [`CU-06010`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md).
+`05` §4 declara esta forma de terminación como **la única que ninguna otra parte del producto tiene**: si la preparación del almacén no se completa, **el servicio no atiende ninguna petición**. Y agrega el fundamento: **un servicio que atiende sobre un almacén equivocado es peor que un servicio que no arranca**. `05` §9 declara los dos atajos que esta historia cierra, los dos con impacto **muy alto**. El contrato de uso es [`CU-06010`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md).
 
 ## 3. Criterios de aceptación
 

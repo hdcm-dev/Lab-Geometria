@@ -54,13 +54,13 @@ Un caso de uso de esta categoría en el que el alumno, el docente, el backend, u
 
 | ID | Caso de uso | Función de la fachada | Estado | Enlace |
 | --- | --- | --- | --- | --- |
-| CU-12001 | Inicializar una instancia del visor sobre un elemento de dibujo | `inicializar(elemento, opciones)` | Propuesto | [CU-12001](../../Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md) |
-| CU-12002 | Cargar el texto del trabajo y dibujar sus piezas | `cargarJson(id, texto)` | Propuesto | [CU-12002](../../Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) |
-| CU-12003 | Seleccionar una pieza por su índice | `seleccionarPieza(id, indice)` | Propuesto | [CU-12003](../../Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) |
-| CU-12004 | Redimensionar la escena al elemento de dibujo | `redimensionar(id)` | Propuesto | [CU-12004](../../Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md) |
-| CU-12005 | Destruir la instancia y liberar sus recursos | `destruir(id)` | Propuesto | [CU-12005](../../Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md) |
-| CU-12006 | Ejercitar la fachada completa sin backend | Las seis, en recorrido | Propuesto | [CU-12006](../../Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) |
-| CU-12007 | Gobernar el movimiento automático de la escena sobre una instancia viva | `establecerMovimiento(id, opciones)` | Propuesto | [CU-12007](../../Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) |
+| CU-12001 | Inicializar una instancia del visor sobre un elemento de dibujo | `inicializar(elemento, opciones)` | Propuesto | [CU-12001](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12001-Inicializar-Instancia-Del-Visor.md) |
+| CU-12002 | Cargar el texto del trabajo y dibujar sus piezas | `cargarJson(id, texto)` | Propuesto | [CU-12002](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) |
+| CU-12003 | Seleccionar una pieza por su índice | `seleccionarPieza(id, indice)` | Propuesto | [CU-12003](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) |
+| CU-12004 | Redimensionar la escena al elemento de dibujo | `redimensionar(id)` | Propuesto | [CU-12004](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12004-Redimensionar-La-Escena.md) |
+| CU-12005 | Destruir la instancia y liberar sus recursos | `destruir(id)` | Propuesto | [CU-12005](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md) |
+| CU-12006 | Ejercitar la fachada completa sin backend | Las seis, en recorrido | Propuesto | [CU-12006](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md) |
+| CU-12007 | Gobernar el movimiento automático de la escena sobre una instancia viva | `establecerMovimiento(id, opciones)` | Propuesto | [CU-12007](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md) |
 
 Siete casos de uso, sobre un mínimo de cinco declarado para el tipo `library` en `Rules-Especificacion-Funcional.md` §2.2.
 

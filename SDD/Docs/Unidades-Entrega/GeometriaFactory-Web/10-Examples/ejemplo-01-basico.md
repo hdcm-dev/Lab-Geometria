@@ -9,7 +9,7 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/visor/01-basico/`
-**Trazabilidad upstream:** [`CU-12001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md), [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) y [`CU-12005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.1, §4.2, §4.5, §5.1 y §5.2; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12001`, `TC-12004`, `TC-12005` y `TC-12009`; `PRODUCT-INTAKE` 1.22 §18 sample **S-1** y §20.E-1
+**Trazabilidad upstream:** [`CU-12001`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12001-Inicializar-Instancia-Del-Visor.md), [`CU-12002`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) y [`CU-12005`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.1, §4.2, §4.5, §5.1 y §5.2; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12001`, `TC-12004`, `TC-12005` y `TC-12009`; `PRODUCT-INTAKE` 1.22 §18 sample **S-1** y §20.E-1
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-12001` como sonda `SD-12013`; `11-Documentacion` cuando se emita
 
 ---
@@ -95,9 +95,9 @@ Funciones ejercidas: 3 de 6 | Servicios del backend disponibles: 0 | Excepciones
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-12001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md) | Caso de uso | Acto `[1]`, y las dos primeras variaciones |
-| [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[2]` a `[5]` |
-| [`CU-12005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md) | Caso de uso | Actos `[6]` y `[7]` |
+| [`CU-12001`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12001-Inicializar-Instancia-Del-Visor.md) | Caso de uso | Acto `[1]`, y las dos primeras variaciones |
+| [`CU-12002`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[2]` a `[5]` |
+| [`CU-12005`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md) | Caso de uso | Actos `[6]` y `[7]` |
 | Garantía `G-1` · Cero red | Garantía del contrato de fachada | Acto `[8]`. La medición en su **peor caso** es del ejemplo 03 |
 | Garantía `G-5` · Sin fallo silencioso | Garantía del contrato de fachada | `no dibujadas=0` en `[2]`: `E-1` no tiene piezas que queden fuera |
 | Garantía `G-6` · Determinismo | Garantía del contrato de fachada | Acto `[5]` |

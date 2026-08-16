@@ -97,7 +97,7 @@ Lo que este caso de uso **no** hace: no decide si la cuenta admite el acceso —
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-00002 |
-| Reglas de negocio aplicables | [RN-02006](../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) y [RN-02013](../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), **por lo que este contrato no decide**: las dos se resuelven antes y por eso una cuenta no admitida nunca llega acá |
+| Reglas de negocio aplicables | [RN-02006](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) y [RN-02013](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), **por lo que este contrato no decide**: las dos se resuelven antes y por eso una cuenta no admitida nunca llega acá |
 | Regla de arquitectura del producto | **RA-03**: ningún mensaje que se muestre incluye direcciones de servicios internos. Acá se ejerce en las respuestas de §6, y su registro del lado del servidor es el que permite diagnosticar sin exponer |
 | Mecanismo que provee | La emisión y la verificación del acceso firmado |
 | Consumidor | La composición de raíz de `GeometriaFactory-Api` |

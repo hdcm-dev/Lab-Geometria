@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que un trabajo se guarde 
 
 ## 2. Contexto
 
-`NB-00003` pide persistencia del trabajo. El alcance transaccional **llega decidido** desde `GeometriaFactory-Application` —un caso de uso, una unidad de trabajo— y acá se materializa como **una por operación** (`05` §2 propiedad 3). El contrato de uso es [`CU-06003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
+`NB-00003` pide persistencia del trabajo. El alcance transaccional **llega decidido** desde `GeometriaFactory-Application` —un caso de uso, una unidad de trabajo— y acá se materializa como **una por operación** (`05` §2 propiedad 3). El contrato de uso es [`CU-06003`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
 
 ## 3. Criterios de aceptación
 

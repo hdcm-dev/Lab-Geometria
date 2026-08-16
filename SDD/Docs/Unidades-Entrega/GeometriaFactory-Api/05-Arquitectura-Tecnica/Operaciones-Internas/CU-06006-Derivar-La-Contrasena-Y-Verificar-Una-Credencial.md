@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-04, F-05), §4.1 (RN-06006, RN-06013), §11 (RN-B5), §17.3.P.1, §17.3.P.5; provee el mecanismo que `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4 y su [`CU-04003`](CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) declaran fuera de su alcance
+**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-04, F-05), §4.1 (RN-06006, RN-06013), §11 (RN-B5), §17.3.P.1, §17.3.P.5; provee el mecanismo que `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §4 y su [`CU-04003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) declaran fuera de su alcance
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -100,7 +100,7 @@ El alumno y el administrador son sujetos de la regla: son quienes eligen la cont
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-00002 |
-| Reglas de negocio aplicables | [RN-02006](../Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) y [RN-02013](../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), las dos **por lo que este contrato no decide**: acá se responde si la credencial coincide, y si la cuenta llega a alguna parte lo resuelven el dominio y la capa de aplicación |
+| Reglas de negocio aplicables | [RN-02006](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) y [RN-02013](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), las dos **por lo que este contrato no decide**: acá se responde si la credencial coincide, y si la cuenta llega a alguna parte lo resuelven el dominio y la capa de aplicación |
 | Puerto o mecanismo que provee | La derivación y la verificación de credenciales, que `GeometriaFactory-Application` declara explícitamente fuera de su alcance |
 | Consumidor | `GeometriaFactory-Application` CU-06003, CU-06010 y CU-04011, y la composición de raíz de `GeometriaFactory-Api` |
 | Historias de usuario a generar en 06 | US-06017, US-06018 |

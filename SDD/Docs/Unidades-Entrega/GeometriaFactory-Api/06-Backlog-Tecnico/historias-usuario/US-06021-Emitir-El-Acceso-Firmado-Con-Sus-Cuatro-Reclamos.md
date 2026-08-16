@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **emitir y verificar el acc
 
 ## 2. Contexto
 
-`02` §3 declara el acceso firmado como uno de los **dos mecanismos** que esta capa provee y que **no son puertos de la capa de aplicación**: los consume la composición de raíz de `GeometriaFactory-Api`. El contrato de uso es [`CU-06008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06008-Emitir-El-Acceso-Firmado.md), y `02` §8 declara por qué la emisión y la verificación quedaron juntas: **las dos dependen de la misma clave**.
+`02` §3 declara el acceso firmado como uno de los **dos mecanismos** que esta capa provee y que **no son puertos de la capa de aplicación**: los consume la composición de raíz de `GeometriaFactory-Api`. El contrato de uso es [`CU-06008`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md), y `02` §8 declara por qué la emisión y la verificación quedaron juntas: **las dos dependen de la misma clave**.
 
 ## 3. Criterios de aceptación
 

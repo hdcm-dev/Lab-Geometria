@@ -27,7 +27,7 @@ Guardar sólo el declarado obligaría a rehacer la derivación cada vez que algu
 - Alcanza al `Area` de toda pieza y al `Volumen` de las volumétricas.
 - Alcanza también a la **advertencia**, que se guarda con los dos valores: sin ellos, el mensaje sería genérico y no le diría al alumno qué declaró contra qué dice la geometría.
 - **No alcanza al texto original**, que conserva los valores tal como el alumno los escribió y que nunca se toca.
-- **No fija cómo se deriva un valor**: eso es de [`CU-06002`](../../Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
+- **No fija cómo se deriva un valor**: eso es de [`CU-06002`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
 
 ## 4. Consecuencia si se viola
 
@@ -35,8 +35,8 @@ Guardar un solo valor no produce rechazo del almacén: **produce un producto que
 
 ## 5. CU afectados
 
-- [`CU-06002`](../../Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) — Verificar los valores: produce los dos.
-- [`CU-06003`](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: los conserva.
+- [`CU-06002`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) — Verificar los valores: produce los dos.
+- [`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: los conserva.
 
 ## 6. Pruebas que la verifican
 

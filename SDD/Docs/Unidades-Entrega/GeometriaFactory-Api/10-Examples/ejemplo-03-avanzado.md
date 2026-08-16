@@ -9,7 +9,7 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/api/03-avanzado/`
-**Trazabilidad upstream:** [`CU-00010`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) y [`CU-00011`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md); [`ADR-00001`](../05-Arquitectura-Tecnica/Adrs/ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md), [`ADR-00002`](../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00006`](../05-Arquitectura-Tecnica/Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) y [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md); [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, punto `A-16`
+**Trazabilidad upstream:** [`CU-00010`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) y [`CU-00011`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md); [`ADR-00001`](../05-Arquitectura-Tecnica/Adrs/ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md), [`ADR-00002`](../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00006`](../05-Arquitectura-Tecnica/Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) y [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md); [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, punto `A-16`
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-00003` como sonda; `11-Documentacion` cuando se emita
 
 ---
@@ -96,8 +96,8 @@ Actos recorridos: 4 | Arranques: 2 | Arranques detenidos: 1 | Diferencias contra
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00010`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | Caso de uso | Conecta **4 de 4** puertos con su adaptador, en un solo lugar, tomando la configuración del entorno |
-| [`CU-00011`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | Caso de uso | Arranca en dos fases, responde salud y **detiene** el arranque ante un linaje desconocido |
+| [`CU-00010`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | Caso de uso | Conecta **4 de 4** puertos con su adaptador, en un solo lugar, tomando la configuración del entorno |
+| [`CU-00011`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | Caso de uso | Arranca en dos fases, responde salud y **detiene** el arranque ante un linaje desconocido |
 | [`ADR-00001`](../05-Arquitectura-Tecnica/Adrs/ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md) | Decisión arquitectónica | **0** conexiones de puerto fuera de la composición de raíz |
 | [`ADR-00002`](../05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) | Decisión arquitectónica | **1** sola configuración de intercambio declarada en el proceso |
 | [`ADR-00006`](../05-Arquitectura-Tecnica/Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) | Decisión arquitectónica | Los ciclos de vida y la configuración resueltos en un único lugar |

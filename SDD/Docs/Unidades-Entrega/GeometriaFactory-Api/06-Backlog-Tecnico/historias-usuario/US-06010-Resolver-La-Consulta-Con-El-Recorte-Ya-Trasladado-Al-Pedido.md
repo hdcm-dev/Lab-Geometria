@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que una consulta de traba
 
 ## 2. Contexto
 
-`RN-06003` y `RN-06011` acotan lo que cada papel ve, y `02` §6 declara que esta capa las ejerce **de forma negativa**: **la consulta sin recorte declarado no se resuelve**. Esta capa **no comprueba pertenencia**; lo que hace es **no ofrecer el camino** por el que la regla se rompería. El contrato de uso es [`CU-06003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
+`RN-06003` y `RN-06011` acotan lo que cada papel ve, y `02` §6 declara que esta capa las ejerce **de forma negativa**: **la consulta sin recorte declarado no se resuelve**. Esta capa **no comprueba pertenencia**; lo que hace es **no ofrecer el camino** por el que la regla se rompería. El contrato de uso es [`CU-06003`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
 
 ## 3. Criterios de aceptación
 

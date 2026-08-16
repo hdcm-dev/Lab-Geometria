@@ -144,7 +144,7 @@ El catálogo entero, con las **18** entradas y qué hace el consumidor con cada 
 ## 5. Próximos pasos
 
 - **Para implementar un punto de acceso**: el caso de uso que lo describe, en [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/), y la fila del punto en la tabla de la superficie.
-- **Para traducir un motivo nuevo**: [`../02-Especificacion-Funcional/Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md), **entero**, y en particular su §10.
+- **Para traducir un motivo nuevo**: [`../02-Especificacion-Funcional/Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md), **entero**, y en particular su §10.
 - **Para entender por qué la superficie es como es**: [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §5 y §7.
 - **Para el vocabulario**: [`Glosario-UX.md`](Glosario-UX.md) y [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../02-Especificacion-Funcional/Glosario-Funcional.md) §3, sobre todo por las polisemias de «acceso» y «código».
 - **Para saber qué está sin decidir**: `../02-Especificacion-Funcional/Especificacion-Funcional.md` §11, y en particular los **dos huecos elevados al Product Owner**.

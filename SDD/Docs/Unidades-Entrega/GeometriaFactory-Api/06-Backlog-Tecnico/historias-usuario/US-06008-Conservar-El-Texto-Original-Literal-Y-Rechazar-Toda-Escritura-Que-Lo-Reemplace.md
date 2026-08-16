@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el texto original de 
 
 ## 2. Contexto
 
-`RN-06008` fija que el texto original se conserva íntegro y **nunca se reescribe**, y `02` §6 declara que **el tramo principal de esa regla está acá**: es la capa donde el texto se escribe y por lo tanto donde puede perderse. `RC-06001` lo declara como regla conceptual de modelo: el texto original se escribe **una sola vez**. El contrato de uso es [`CU-06003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
+`RN-06008` fija que el texto original se conserva íntegro y **nunca se reescribe**, y `02` §6 declara que **el tramo principal de esa regla está acá**: es la capa donde el texto se escribe y por lo tanto donde puede perderse. `RC-06001` lo declara como regla conceptual de modelo: el texto original se escribe **una sola vez**. El contrato de uso es [`CU-06003`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
 
 ## 3. Criterios de aceptación
 

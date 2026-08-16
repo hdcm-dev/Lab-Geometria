@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **interpretar el texto tal 
 
 ## 2. Contexto
 
-`NB-00004` pide interpretación fiel del dato del alumno; el intake §3 declara como diferenciador que el texto se acepte **tal como lo emite su programa**, y que hoy **ningún ortoedro generado por la aplicación se dibuja** porque el visor previo exige una clave que el programa no emite. El contrato de uso es [`CU-06001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md), y las **cuatro trampas** `T1` a `T4` están declaradas en `PRODUCT-INTAKE` §17.3.P.11 punto 1.
+`NB-00004` pide interpretación fiel del dato del alumno; el intake §3 declara como diferenciador que el texto se acepte **tal como lo emite su programa**, y que hoy **ningún ortoedro generado por la aplicación se dibuja** porque el visor previo exige una clave que el programa no emite. El contrato de uso es [`CU-06001`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md), y las **cuatro trampas** `T1` a `T4` están declaradas en `PRODUCT-INTAKE` §17.3.P.11 punto 1.
 
 ## 3. Criterios de aceptación
 

@@ -19,7 +19,7 @@ Como **producto**, quiero **que los cuatro puertos queden conectados con sus cua
 
 ## 2. Contexto
 
-`02` §3 declara la **composición de la aplicación** como una de las cinco responsabilidades. `05` §2.1 descartó repartirla en módulos por área con un fundamento propio: **el defecto característico de esta capa es de omisión**, y un puerto sin adaptador **se detecta comparando contra una lista, no leyendo un módulo**. El contrato de uso es [`CU-00010`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md).
+`02` §3 declara la **composición de la aplicación** como una de las cinco responsabilidades. `05` §2.1 descartó repartirla en módulos por área con un fundamento propio: **el defecto característico de esta capa es de omisión**, y un puerto sin adaptador **se detecta comparando contra una lista, no leyendo un módulo**. El contrato de uso es [`CU-00010`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md).
 
 ## 3. Criterios de aceptación
 

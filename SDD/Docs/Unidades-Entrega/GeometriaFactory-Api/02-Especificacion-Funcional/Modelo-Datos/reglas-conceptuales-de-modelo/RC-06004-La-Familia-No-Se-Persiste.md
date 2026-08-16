@@ -35,8 +35,8 @@ Persistir la familia no produce rechazo: produce la posibilidad de que una fila 
 
 ## 5. CU afectados
 
-- [`CU-06001`](../../Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — Interpretar y reconstruir: es donde el tipo se lee.
-- [`CU-06003`](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde la familia **no** se escribe.
+- [`CU-06001`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — Interpretar y reconstruir: es donde el tipo se lee.
+- [`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde la familia **no** se escribe.
 
 ## 6. Pruebas que la verifican
 

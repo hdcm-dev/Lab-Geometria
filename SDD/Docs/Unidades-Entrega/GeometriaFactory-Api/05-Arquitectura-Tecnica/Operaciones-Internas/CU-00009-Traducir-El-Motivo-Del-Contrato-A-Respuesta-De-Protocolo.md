@@ -109,7 +109,7 @@ Este contrato no declara condiciones propias: **es el que las traduce**. Lo que 
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-00004, por la ubicación que no se pierde; NB-00008, porque la respuesta neutra es lo que permite presentar estado degradado sin revelar la dirección del servicio que falló |
-| Reglas de negocio aplicables | [**RN-02003**](../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md), en la regla de asignación R-1. [RN-02009](../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md), por la ubicación que cruza sin recortarse |
+| Reglas de negocio aplicables | [**RN-02003**](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md), en la regla de asignación R-1. [RN-02009](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md), por la ubicación que cruza sin recortarse |
 | Regla de arquitectura del producto | **RA-03**, y es el contrato donde se ejerce entera: ninguna respuesta expone direcciones de servicios internos, y todo error respondido queda registrado del lado del servidor |
 | Puntos de acceso que gobierna | Los **15** que pueden fallar. El punto de salud responde por sí mismo y no pasa por este contrato |
 | Contrato de uso que transporta | `GeometriaFactory-Contracts` `CU-00006`, el transversal del ensamblado |

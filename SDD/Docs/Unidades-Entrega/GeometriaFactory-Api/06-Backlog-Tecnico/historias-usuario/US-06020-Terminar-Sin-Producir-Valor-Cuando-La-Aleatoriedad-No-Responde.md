@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la producción de la 
 
 ## 2. Contexto
 
-`05` §9 declara este riesgo con impacto **muy alto** y lo enuncia con todas las letras: si el valor se compusiera por un contador, la fecha o el correo, se produciría una provisoria adivinable **y el reseteo parecería haber funcionado**. Y agrega la asimetría que lo hace grave: **un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa**. El contrato de uso es [`CU-06007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md).
+`05` §9 declara este riesgo con impacto **muy alto** y lo enuncia con todas las letras: si el valor se compusiera por un contador, la fecha o el correo, se produciría una provisoria adivinable **y el reseteo parecería haber funcionado**. Y agrega la asimetría que lo hace grave: **un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa**. El contrato de uso es [`CU-06007`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md).
 
 ## 3. Criterios de aceptación
 

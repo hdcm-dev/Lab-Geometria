@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la verificación de u
 
 ## 2. Contexto
 
-`02` §8 declara que la derivación y la verificación quedaron en el mismo contrato de uso porque **son la misma función mirada desde los dos lados**: no se puede verificar sin saber cómo se derivó. El contrato de uso es [`CU-06006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md).
+`02` §8 declara que la derivación y la verificación quedaron en el mismo contrato de uso porque **son la misma función mirada desde los dos lados**: no se puede verificar sin saber cómo se derivó. El contrato de uso es [`CU-06006`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md).
 
 ## 3. Criterios de aceptación
 

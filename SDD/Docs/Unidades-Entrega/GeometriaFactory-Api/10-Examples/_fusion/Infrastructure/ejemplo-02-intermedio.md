@@ -97,9 +97,9 @@ Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-06003`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) | Caso de uso | Materializa los tres trabajos y resuelve las **dos** formas de lectura con el recorte ya trasladado |
-| [`CU-06004`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | Caso de uso | Retira un trabajo con todo lo que cuelga y arrastra los **2** restantes de una cuenta dada de baja |
-| [`CU-06005`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Responde las **dos** preguntas sobre el conjunto y transporta la marca sin alterar el estado |
+| [`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) | Caso de uso | Materializa los tres trabajos y resuelve las **dos** formas de lectura con el recorte ya trasladado |
+| [`CU-06004`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | Caso de uso | Retira un trabajo con todo lo que cuelga y arrastra los **2** restantes de una cuenta dada de baja |
+| [`CU-06005`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Responde las **dos** preguntas sobre el conjunto y transporta la marca sin alterar el estado |
 | [`RN-02002`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | Regla de negocio | La unicidad del correo la sostiene el almacén, no el consumidor |
 | [`RN-02001`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | La unicidad del administrador la sostiene el almacén |
 | [`RN-02007`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | Regla de negocio | El arrastre es todo o nada |

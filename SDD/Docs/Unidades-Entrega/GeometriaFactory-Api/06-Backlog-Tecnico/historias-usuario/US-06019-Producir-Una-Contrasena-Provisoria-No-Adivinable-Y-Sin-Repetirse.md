@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el sistema produzca l
 
 ## 2. Contexto
 
-`RN-06014` lo declara, y es **la única de las dieciséis reglas cuyo tramo principal y único está en esta capa**: `GeometriaFactory-Application` §6 declara que no tiene tramo allá, `GeometriaFactory-Contracts` la exige por sus propiedades **sin declarar mecanismo**, y la propia regla nombra a este proyecto de código como el lugar de la generación. `RN-06016` le suma un **segundo consumidor** —la habilitación— **sin agregar mecanismo**. El contrato de uso es [`CU-06007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md).
+`RN-06014` lo declara, y es **la única de las dieciséis reglas cuyo tramo principal y único está en esta capa**: `GeometriaFactory-Application` §6 declara que no tiene tramo allá, `GeometriaFactory-Contracts` la exige por sus propiedades **sin declarar mecanismo**, y la propia regla nombra a este proyecto de código como el lugar de la generación. `RN-06016` le suma un **segundo consumidor** —la habilitación— **sin agregar mecanismo**. El contrato de uso es [`CU-06007`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md).
 
 ## 3. Criterios de aceptación
 

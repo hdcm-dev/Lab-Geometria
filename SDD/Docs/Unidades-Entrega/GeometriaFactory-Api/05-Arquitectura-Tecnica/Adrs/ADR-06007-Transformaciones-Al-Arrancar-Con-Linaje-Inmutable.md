@@ -83,7 +83,7 @@ Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.3.P.4,
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §14 (RA-03), §17.3.P.4, §17.3.P.7, §17.3.P.8, §17.5.P.4 y §17.5.P.7.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md).
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md`](../Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md).
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.3 (forma de terminación «arranque detenido»), §2.4 y §3.9.
 - [`../Modelo-Datos-Logico.md`](../Modelo-Datos-Logico.md) §5, que declara la transformación inicial con su identificador.
 - ADR relacionadas: [`ADR-06002`](ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md), [`ADR-06004`](ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md).

@@ -50,7 +50,7 @@ Las nueve decisiones vienen del intake y se transcriben para que este documento 
 | Modo de diario | **WAL** |
 | Concurrencia de escritura | **Escritor único**: el motor no admite escrituras concurrentes |
 | Alcance de la unidad de trabajo | **Una por operación** |
-| Versionado del esquema | **Transformaciones aplicadas automáticamente al arrancar**, sobre base inexistente o desactualizada ([`CU-06010`](../Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md)) |
+| Versionado del esquema | **Transformaciones aplicadas automáticamente al arrancar**, sobre base inexistente o desactualizada ([`CU-06010`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md)) |
 | Almacenamiento del texto del alumno | **Como texto en la fila del trabajo.** No se consulta por su contenido |
 | Instancias por despliegue | **Una instancia, un curso, un administrador.** El modelo **no** lleva ninguna columna de pertenencia a instancia |
 | Respaldo | Copia del archivo con el diario activo, consistente. **Su frecuencia queda a definir por el docente** |

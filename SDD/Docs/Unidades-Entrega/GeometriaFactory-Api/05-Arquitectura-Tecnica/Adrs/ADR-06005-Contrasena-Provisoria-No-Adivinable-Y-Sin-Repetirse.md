@@ -87,7 +87,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; 
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4 (F-26 y F-04 precisada), §4.1 (RN-06014, RN-06015, RN-06016) y §17.3.P.5.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) §3 y §10.
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md`](../Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) §3 y §10.
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.4 y §3.7.
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../_fusion/Application/Arquitectura-Proyecto-Codigo.md) §10.2, fila de RN-06014, que es la delegación explícita que esta ADR recibe.
 - ADR relacionadas: [`ADR-06004`](ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md).

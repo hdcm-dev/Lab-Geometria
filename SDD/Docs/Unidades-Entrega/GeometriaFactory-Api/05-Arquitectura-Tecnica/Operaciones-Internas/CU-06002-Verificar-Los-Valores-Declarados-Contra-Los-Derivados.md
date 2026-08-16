@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00005`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md); [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §3 (D-2), §4 (F-10), §4.1 (RN-06005, RN-06008), §7 (CL-4), §17.3.P.10, §17.3.P.11 punto 1, §20.E-1 a §20.E-6 y §21; implementa la segunda mitad del puerto de validación de figuras de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; alimenta [`CU-02007`](CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) de GeometriaFactory-Domain
+**Trazabilidad upstream:** [`NB-00005`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md); [`NB-00004`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §3 (D-2), §4 (F-10), §4.1 (RN-06005, RN-06008), §7 (CL-4), §17.3.P.10, §17.3.P.11 punto 1, §20.E-1 a §20.E-6 y §21; implementa la segunda mitad del puerto de validación de figuras de `Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md` §3; alimenta [`CU-02007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) de GeometriaFactory-Domain
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
@@ -102,9 +102,9 @@ El alumno es el sujeto de la regla: es quien declaró los valores.
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-00005, y NB-00004 en cuanto la verificación opera sobre el dato fiel |
-| Reglas de negocio aplicables | [RN-02005](../Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) —una advertencia **no** impide el paso a estado `Pendiente`—, [RN-02008](../Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md), [RN-02009](../Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) por la ubicación de la observación |
+| Reglas de negocio aplicables | [RN-02005](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) —una advertencia **no** impide el paso a estado `Pendiente`—, [RN-02008](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md), [RN-02009](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) por la ubicación de la observación |
 | Puerto que implementa | Validación de figuras, en su mitad de verificación de valores |
-| Consumidor | `GeometriaFactory-Application` [`CU-04005`](CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) |
+| Consumidor | `GeometriaFactory-Application` [`CU-04005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) |
 | Escenarios del intake que lo ejercitan | E-1, E-2, E-3, E-4, E-6 (§20), con la matriz de §21 |
 | Historias de usuario a generar en 06 | US-06005, US-06006, US-06007 |
 | Componentes esperados en 05 | Adaptador de verificación de valores, con la tabla de derivación por tipo y el comparador de tolerancia |

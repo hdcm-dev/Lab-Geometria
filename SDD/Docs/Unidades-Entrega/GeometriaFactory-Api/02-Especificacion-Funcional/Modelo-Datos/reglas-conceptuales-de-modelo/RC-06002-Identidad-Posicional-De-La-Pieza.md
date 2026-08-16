@@ -41,8 +41,8 @@ Guardar una observación sobre una posición fuera del rango declarado sí produ
 
 ## 5. CU afectados
 
-- [`CU-06001`](../../Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — Interpretar y reconstruir: es donde la posición se calcula y se reserva.
-- [`CU-06003`](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde se conserva.
+- [`CU-06001`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — Interpretar y reconstruir: es donde la posición se calcula y se reserva.
+- [`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde se conserva.
 
 ## 6. Pruebas que la verifican
 

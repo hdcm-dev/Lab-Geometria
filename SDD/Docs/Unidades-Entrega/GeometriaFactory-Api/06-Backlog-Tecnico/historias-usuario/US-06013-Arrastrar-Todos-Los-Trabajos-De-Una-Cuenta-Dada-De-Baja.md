@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la baja de una cuenta
 
 ## 2. Contexto
 
-`RN-06007` declara que la baja física elimina la cuenta y **todos sus trabajos**. `05` §4 llama a esta operación **el caso testigo** del alcance transaccional de la capa, y `RC-06005` la declara como regla conceptual de modelo. El contrato de uso es [`CU-06004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md).
+`RN-06007` declara que la baja física elimina la cuenta y **todos sus trabajos**. `05` §4 llama a esta operación **el caso testigo** del alcance transaccional de la capa, y `RC-06005` la declara como regla conceptual de modelo. El contrato de uso es [`CU-06004`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md).
 
 ## 3. Criterios de aceptación
 

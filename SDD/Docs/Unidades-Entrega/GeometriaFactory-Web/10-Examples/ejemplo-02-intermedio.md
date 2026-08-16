@@ -9,7 +9,7 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** [`/samples/visor/02-intermedio/`](../../../../../samples/visor/02-intermedio/), esqueletada con su README local y su comando previsto
-**Trazabilidad upstream:** [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md), [`CU-12003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) y [`CU-12004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.3, §4.4, §5.2, §5.3 y §6; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12006`, `TC-12007`, `TC-12008`, `TC-12011` y `TC-12012`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-2`, `E-5`, `E-6`, `E-7` y `E-8`
+**Trazabilidad upstream:** [`CU-12002`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md), [`CU-12003`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) y [`CU-12004`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12004-Redimensionar-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.3, §4.4, §5.2, §5.3 y §6; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12006`, `TC-12007`, `TC-12008`, `TC-12011` y `TC-12012`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-2`, `E-5`, `E-6`, `E-7` y `E-8`
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-12002` como sonda `SD-12014`; `11-Documentacion` cuando se emita
 
 ---
@@ -92,9 +92,9 @@ Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones d
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-12002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[1]` a `[8]` |
-| [`CU-12003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) | Caso de uso | Actos `[9]` a `[11]` |
-| [`CU-12004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md) | Caso de uso | Actos `[12]` a `[14]` |
+| [`CU-12002`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[1]` a `[8]` |
+| [`CU-12003`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) | Caso de uso | Actos `[9]` a `[11]` |
+| [`CU-12004`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12004-Redimensionar-La-Escena.md) | Caso de uso | Actos `[12]` a `[14]` |
 | Garantía `G-5` · Sin fallo silencioso | Garantía del contrato de fachada | Actos `[5]`, `[6]`, `[7]` y el recuento final de piezas sin registro en 0 |
 | Garantía `G-7` · Terminación controlada | Garantía del contrato de fachada | Actos `[11]` y `[13]`: la instancia y la selección quedan como estaban |
 | §5.3 del contrato de fachada, tipos dibujables | Elemento del concepto | Actos `[1]` a `[4]` y `[7]` |

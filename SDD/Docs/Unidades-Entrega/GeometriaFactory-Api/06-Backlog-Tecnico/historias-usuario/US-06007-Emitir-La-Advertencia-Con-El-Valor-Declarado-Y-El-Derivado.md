@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que cada advertencia trai
 
 ## 2. Contexto
 
-El intake §3 declara este diferenciador: el sistema **señala** las discrepancias **sin corregirlas ni rechazarlas**. `RN-06008` prohíbe reescribir el texto original y `RC-06003` exige guardar el valor declarado y el derivado **por separado**. El contrato de uso es [`CU-06002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
+El intake §3 declara este diferenciador: el sistema **señala** las discrepancias **sin corregirlas ni rechazarlas**. `RN-06008` prohíbe reescribir el texto original y `RC-06003` exige guardar el valor declarado y el derivado **por separado**. El contrato de uso es [`CU-06002`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md).
 
 ## 3. Criterios de aceptación
 

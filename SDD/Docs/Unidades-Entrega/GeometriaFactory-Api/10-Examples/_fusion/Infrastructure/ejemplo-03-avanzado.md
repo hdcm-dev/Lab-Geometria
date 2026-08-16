@@ -104,11 +104,11 @@ Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-06006`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | Caso de uso | Deriva sin guardar en claro y distingue el veredicto falso del derivado ilegible |
-| [`CU-06007`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | Caso de uso | Produce **100** provisorias con **0** repetidas y se detiene cuando la aleatoriedad no responde |
-| [`CU-06008`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06008-Emitir-El-Acceso-Firmado.md) | Caso de uso | Emite con sus **cuatro** reclamos y rechaza sin clave de firma y con reclamos incompletos |
-| [`CU-06009`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | Caso de uso | Provee el sello por el puerto, con dos corridas que dan el mismo valor al fijarlo |
-| [`CU-06010`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Caso de uso | Aplica las transformaciones, registra el linaje y detiene el arranque ante un linaje desconocido |
+| [`CU-06006`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | Caso de uso | Deriva sin guardar en claro y distingue el veredicto falso del derivado ilegible |
+| [`CU-06007`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | Caso de uso | Produce **100** provisorias con **0** repetidas y se detiene cuando la aleatoriedad no responde |
+| [`CU-06008`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md) | Caso de uso | Emite con sus **cuatro** reclamos y rechaza sin clave de firma y con reclamos incompletos |
+| [`CU-06009`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | Caso de uso | Provee el sello por el puerto, con dos corridas que dan el mismo valor al fijarlo |
+| [`CU-06010`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Caso de uso | Aplica las transformaciones, registra el linaje y detiene el arranque ante un linaje desconocido |
 | [`RN-02014`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | Regla de negocio | La provisoria la produce el sistema, no adivinable y sin repetirse |
 | [`ADR-06004`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | Decisión arquitectónica | La derivación anclada con parámetros versionados |
 | [`ADR-06005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) | Decisión arquitectónica | Las **100** provisorias sin repetición y sin derivar de un dato de la cuenta |

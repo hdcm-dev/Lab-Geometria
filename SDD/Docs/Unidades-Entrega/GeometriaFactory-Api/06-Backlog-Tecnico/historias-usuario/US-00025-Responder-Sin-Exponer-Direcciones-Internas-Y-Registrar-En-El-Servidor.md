@@ -19,7 +19,7 @@ Como **producto**, quiero **que ninguna respuesta de esta superficie lleve la di
 
 ## 2. Contexto
 
-`RA-03` es regla de nivel producto, y `05` §10.4 declara que **acá es donde se puede violar hacia afuera**: es **la última vez que un dato del backend es tocado antes de salir del servidor propio**. Su contracara obligatoria es el registro: **sin él, la prohibición de exponer se convierte en imposibilidad de diagnosticar**, y el operador que despliega a mano se queda sin nada que mirar. El contrato de uso es [`CU-00009`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md).
+`RA-03` es regla de nivel producto, y `05` §10.4 declara que **acá es donde se puede violar hacia afuera**: es **la última vez que un dato del backend es tocado antes de salir del servidor propio**. Su contracara obligatoria es el registro: **sin él, la prohibición de exponer se convierte en imposibilidad de diagnosticar**, y el operador que despliega a mano se queda sin nada que mirar. El contrato de uso es [`CU-00009`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md).
 
 ## 3. Criterios de aceptación
 

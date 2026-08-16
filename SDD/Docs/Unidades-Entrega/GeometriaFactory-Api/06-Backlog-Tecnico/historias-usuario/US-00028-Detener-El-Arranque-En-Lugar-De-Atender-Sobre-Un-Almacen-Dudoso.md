@@ -19,7 +19,7 @@ Como **producto**, quiero **que el servicio no atienda ninguna petición si la p
 
 ## 2. Contexto
 
-`05` §4 declara el arranque en dos fases y su desenlace: si la preparación del almacén falla, **el arranque se detiene y ninguna petición se atiende**. `02` §8 declara por qué la composición se separó del arranque: **terminan distinto**, y ésta es una forma de terminación que **ninguna otra parte de esta capa tiene**. El contrato de uso es [`CU-00011`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
+`05` §4 declara el arranque en dos fases y su desenlace: si la preparación del almacén falla, **el arranque se detiene y ninguna petición se atiende**. `02` §8 declara por qué la composición se separó del arranque: **terminan distinto**, y ésta es una forma de terminación que **ninguna otra parte de esta capa tiene**. El contrato de uso es [`CU-00011`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
 
 ## 3. Criterios de aceptación
 

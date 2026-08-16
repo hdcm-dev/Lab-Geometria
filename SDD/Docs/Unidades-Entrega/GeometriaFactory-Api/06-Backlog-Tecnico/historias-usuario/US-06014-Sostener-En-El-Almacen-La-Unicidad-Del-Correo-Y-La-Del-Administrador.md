@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el almacén impida po
 
 ## 2. Contexto
 
-`RN-06001` y `RN-06002` fijan las dos unicidades, e `INV-01` e `INV-05` las sostienen. `02` §4 precisión 2 declara que **las restricciones de unicidad del almacén sí son una segunda línea, y eso es deliberado**: la consulta previa del consumidor **no es una garantía por sí sola**. El contrato de uso es [`CU-06005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md).
+`RN-06001` y `RN-06002` fijan las dos unicidades, e `INV-01` e `INV-05` las sostienen. `02` §4 precisión 2 declara que **las restricciones de unicidad del almacén sí son una segunda línea, y eso es deliberado**: la consulta previa del consumidor **no es una garantía por sí sola**. El contrato de uso es [`CU-06005`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md).
 
 ## 3. Criterios de aceptación
 

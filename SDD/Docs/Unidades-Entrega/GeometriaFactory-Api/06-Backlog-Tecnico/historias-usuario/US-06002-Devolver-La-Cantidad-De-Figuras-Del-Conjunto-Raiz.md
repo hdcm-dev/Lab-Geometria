@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **recibir cuántas figuras 
 
 ## 2. Contexto
 
-`GeometriaFactory-Application` §3 declara que **la cantidad de figuras del conjunto raíz la produce el validador** y que **no es derivable de las piezas adoptadas**, que admiten huecos. El dominio la exige como precondición de la reconstrucción y su registro de observaciones la hereda como rango de posiciones válidas. El contrato de uso es [`CU-06001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md).
+`GeometriaFactory-Application` §3 declara que **la cantidad de figuras del conjunto raíz la produce el validador** y que **no es derivable de las piezas adoptadas**, que admiten huecos. El dominio la exige como precondición de la reconstrucción y su registro de observaciones la hereda como rango de posiciones válidas. El contrato de uso es [`CU-06001`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md).
 
 ## 3. Criterios de aceptación
 

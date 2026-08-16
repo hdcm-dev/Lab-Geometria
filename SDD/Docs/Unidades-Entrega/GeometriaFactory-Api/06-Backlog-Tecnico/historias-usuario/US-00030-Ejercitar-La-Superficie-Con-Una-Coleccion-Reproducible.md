@@ -19,7 +19,7 @@ Como **integrador de la superficie —el propio equipo o quien la revise—**, q
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §16.1 declara, para el tipo de proyecto de código de esta pieza, una **colección de peticiones reproducible con los escenarios como cuerpo**: alta de trabajo, envío con texto que verifica y que no verifica, y **aprobación y rechazo por el administrador**, con los códigos de respuesta esperados. El contrato de uso es [`CU-00012`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md).
+`PRODUCT-INTAKE` §16.1 declara, para el tipo de proyecto de código de esta pieza, una **colección de peticiones reproducible con los escenarios como cuerpo**: alta de trabajo, envío con texto que verifica y que no verifica, y **aprobación y rechazo por el administrador**, con los códigos de respuesta esperados. El contrato de uso es [`CU-00012`](../../10-Examples/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md).
 
 ## 3. Criterios de aceptación
 

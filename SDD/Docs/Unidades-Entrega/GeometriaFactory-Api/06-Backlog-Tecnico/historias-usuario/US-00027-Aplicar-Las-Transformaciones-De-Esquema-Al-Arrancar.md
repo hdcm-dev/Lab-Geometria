@@ -19,7 +19,7 @@ Como **producto**, quiero **que el arranque del servicio dispare la preparación
 
 ## 2. Contexto
 
-`02` §4 declara que **aplicar las transformaciones al arrancar es de acá como disparo**, y que **la transformación la ejecuta el adaptador** de `GeometriaFactory-Infrastructure`. `PT-04`, que se mide en la etapa `a`, exige que la imagen **arranque, aplique sus actualizaciones de esquema sobre base vacía y responda salud**. El contrato de uso es [`CU-00011`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
+`02` §4 declara que **aplicar las transformaciones al arrancar es de acá como disparo**, y que **la transformación la ejecuta el adaptador** de `GeometriaFactory-Infrastructure`. `PT-04`, que se mide en la etapa `a`, exige que la imagen **arranque, aplique sus actualizaciones de esquema sobre base vacía y responda salud**. El contrato de uso es [`CU-00011`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
 
 ## 3. Criterios de aceptación
 

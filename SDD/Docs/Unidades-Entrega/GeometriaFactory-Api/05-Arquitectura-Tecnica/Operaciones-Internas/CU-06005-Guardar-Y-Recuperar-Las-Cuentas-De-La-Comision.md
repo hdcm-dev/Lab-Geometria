@@ -97,8 +97,8 @@ Lo que este caso de uso **no** hace: no deriva contraseñas ni las compara —es
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-00001, NB-00002 |
-| Reglas de negocio aplicables | [RN-02002](../Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md), [RN-02001](../Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md), [RN-02012](../Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) y [RN-02013](../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), las dos últimas por la conservación y el transporte de la marca |
-| Reglas conceptuales de modelo | [`RC-06007`](../Modelo-Datos/reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md) |
+| Reglas de negocio aplicables | [RN-02002](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md), [RN-02001](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md), [RN-02012](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) y [RN-02013](../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md), las dos últimas por la conservación y el transporte de la marca |
+| Reglas conceptuales de modelo | [`RC-06007`](../../02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md) |
 | Puerto que implementa | Repositorio de cuentas, cuyo **identificador es un punto abierto declarado aguas arriba** y que esta categoría no reabre |
 | Consumidor | `GeometriaFactory-Application`, sus CU-06001, CU-06002, CU-06003, CU-06007, CU-06010 y CU-04011 |
 | Historias de usuario a generar en 06 | US-06014, US-06015, US-06016 |

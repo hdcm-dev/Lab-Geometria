@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el área y el volumen
 
 ## 2. Contexto
 
-`NB-00005` pide visibilidad del error de cálculo y `F-10` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-06002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md), y la tabla de derivación por tipo vive en [`../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5.
+`NB-00005` pide visibilidad del error de cálculo y `F-10` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-06002`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md), y la tabla de derivación por tipo vive en [`../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5.
 
 ## 3. Criterios de aceptación
 

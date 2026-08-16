@@ -19,7 +19,7 @@ Como **producto**, quiero **que cada uno de los diecisiete códigos vivos del co
 
 ## 2. Contexto
 
-`02` §3 declara la **traducción a protocolo** como una de las cinco responsabilidades, y §2 lo enuncia: **acá se traduce, y traducir es decidir**; un motivo de la capa de aplicación **no es** un código de respuesta, y un código del contrato **no es** un número de protocolo. El contrato de uso es [`CU-00009`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md).
+`02` §3 declara la **traducción a protocolo** como una de las cinco responsabilidades, y §2 lo enuncia: **acá se traduce, y traducir es decidir**; un motivo de la capa de aplicación **no es** un código de respuesta, y un código del contrato **no es** un número de protocolo. El contrato de uso es [`CU-00009`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md).
 
 ## 3. Criterios de aceptación
 

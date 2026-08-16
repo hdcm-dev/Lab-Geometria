@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que cada error de validac
 
 ## 2. Contexto
 
-`RN-06009` exige que los mensajes de error indiquen **índice de figura y campo, nunca un texto genérico**, y `02` §6 declara que **el tramo principal de esa regla está acá**: es donde el mensaje ubicado se produce. El contrato de uso es [`CU-06001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md).
+`RN-06009` exige que los mensajes de error indiquen **índice de figura y campo, nunca un texto genérico**, y `02` §6 declara que **el tramo principal de esa regla está acá**: es donde el mensaje ubicado se produce. El contrato de uso es [`CU-06001`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md).
 
 ## 3. Criterios de aceptación
 

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **poder preguntar si un cor
 
 ## 2. Contexto
 
-`Domain ADR-06006` declara que **el dominio no lee el conjunto de entidades**, y `05` §2.2 identifica esa decisión como el origen de las **dos** preguntas sobre el conjunto que este adaptador responde. El contrato de uso es [`CU-06005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md).
+`Domain ADR-06006` declara que **el dominio no lee el conjunto de entidades**, y `05` §2.2 identifica esa decisión como el origen de las **dos** preguntas sobre el conjunto que este adaptador responde. El contrato de uso es [`CU-06005`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md).
 
 ## 3. Criterios de aceptación
 

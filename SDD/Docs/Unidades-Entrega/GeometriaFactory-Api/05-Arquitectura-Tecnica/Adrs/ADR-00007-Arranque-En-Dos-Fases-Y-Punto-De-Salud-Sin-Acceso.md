@@ -82,7 +82,7 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.5.P.3, §17.5.P.
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §14 (RA-03), §17.5.P.3, §17.5.P.4, §17.5.P.8 y §17.5.P.10.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md`](../Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md).
 - [`../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md`](ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md), que es la decisión que esta ADR dispara.
 - ADR relacionadas: [`ADR-00003`](ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md), [`ADR-00006`](ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md), [`ADR-00008`](ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md).
 

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la emisión del acces
 
 ## 2. Contexto
 
-`05` §9 declara este riesgo con impacto **muy alto**: si ante la ausencia de clave se generara una al vuelo o se emitiera sin firmar, **el sistema arranca, emite accesos y nadie lo nota hasta que alguien falsifica uno**. `PRODUCT-INTAKE` §17.3.P.5 fija que la clave **se provee o se genera en el primer arranque y vive fuera del repositorio de código y fuera de la imagen**, y `05` §5 que este proyecto de código **la recibe y no la busca**. El contrato de uso es [`CU-06008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06008-Emitir-El-Acceso-Firmado.md).
+`05` §9 declara este riesgo con impacto **muy alto**: si ante la ausencia de clave se generara una al vuelo o se emitiera sin firmar, **el sistema arranca, emite accesos y nadie lo nota hasta que alguien falsifica uno**. `PRODUCT-INTAKE` §17.3.P.5 fija que la clave **se provee o se genera en el primer arranque y vive fuera del repositorio de código y fuera de la imagen**, y `05` §5 que este proyecto de código **la recibe y no la busca**. El contrato de uso es [`CU-06008`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md).
 
 ## 3. Criterios de aceptación
 

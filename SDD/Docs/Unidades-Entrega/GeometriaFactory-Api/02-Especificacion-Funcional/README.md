@@ -47,10 +47,10 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 | CU-00006 | [`CU-00006` · Exponer el envío y la eliminación de un trabajo](Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md) | El texto que no se normaliza en el borde, y el envío que no verifica y **responde con éxito** |
 | CU-00007 | [`CU-00007` · Exponer el listado y el detalle de los trabajos](Casos-De-Uso/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Los dos puntos de lectura, sin ningún parámetro para pedir de más |
 | CU-00008 | [`CU-00008` · Exponer el desenlace de la revisión](Casos-De-Uso/CU-00008-Exponer-El-Desenlace-De-La-Revision.md) | La transición irreversible, y la terminalidad sostenida por ausencia |
-| CU-00009 | [`CU-00009` · Traducir el motivo del contrato a respuesta de protocolo](Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Las dos traducciones, las tres reglas de asignación y los dos huecos declarados |
-| CU-00010 | [`CU-00010` · Componer la aplicación y conectar los puertos con sus adaptadores](Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | La factura de que todo lo demás se pruebe con dobles, pagada una sola vez |
-| CU-00011 | [`CU-00011` · Arrancar el servicio y dejar el almacén en condiciones](Casos-De-Uso/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | El arranque que se detiene antes que atender sobre un almacén equivocado |
-| CU-00012 | [`CU-00012` · Ejercitar la superficie con la colección de peticiones reproducible](Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | La demostración ejecutable, con los ocho escenarios como cuerpo y en tres pasos |
+| CU-00009 | [`CU-00009` · Traducir el motivo del contrato a respuesta de protocolo](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Las dos traducciones, las tres reglas de asignación y los dos huecos declarados |
+| CU-00010 | [`CU-00010` · Componer la aplicación y conectar los puertos con sus adaptadores](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | La factura de que todo lo demás se pruebe con dobles, pagada una sola vez |
+| CU-00011 | [`CU-00011` · Arrancar el servicio y dejar el almacén en condiciones](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | El arranque que se detiene antes que atender sobre un almacén equivocado |
+| CU-00012 | [`CU-00012` · Ejercitar la superficie con la colección de peticiones reproducible](../10-Examples/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | La demostración ejecutable, con los ocho escenarios como cuerpo y en tres pasos |
 
 ## 3. Orden de lectura sugerido
 

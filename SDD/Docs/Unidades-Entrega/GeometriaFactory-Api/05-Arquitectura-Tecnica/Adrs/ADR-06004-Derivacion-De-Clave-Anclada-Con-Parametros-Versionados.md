@@ -83,7 +83,7 @@ Motivación upstream: NB-00002; RN-06001, RN-06006, RN-06013, RN-06016; INV-06, 
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §14 (RA-03), §17.3.P.5, §17.3.P.10 y §17.5.P.5.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) y [`CU-06008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06008-Emitir-El-Acceso-Firmado.md).
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md`](../Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) y [`CU-06008`](../Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md).
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §1.4 y §2.4.
 - ADR relacionadas: [`ADR-06005`](ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md), [`ADR-06007`](ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md).
 

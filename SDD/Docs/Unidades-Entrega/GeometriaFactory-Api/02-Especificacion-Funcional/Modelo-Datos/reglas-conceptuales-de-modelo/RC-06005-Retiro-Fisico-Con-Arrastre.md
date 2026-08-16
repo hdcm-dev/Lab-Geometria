@@ -31,14 +31,14 @@ El «todo o nada» no es una preferencia transaccional: una baja a medias deja *
 
 ## 4. Consecuencia si se viola
 
-Un pedido de baja que no declara el arrastre devuelve `RETIRO_PARCIAL_NO_ADMITIDO` y **no retira nada** ([`CU-06004`](../../Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) §6).
+Un pedido de baja que no declara el arrastre devuelve `RETIRO_PARCIAL_NO_ADMITIDO` y **no retira nada** ([`CU-06004`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) §6).
 
 Introducir un borrado lógico no produciría ningún rechazo: produciría un producto en el que la baja no da de baja, y en el que el criterio con el que la regla se verifica pasa sin haber verificado nada.
 
 ## 5. CU afectados
 
-- [`CU-06004`](../../Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) — Borrado físico y arrastre: es donde se hace cumplir.
-- [`CU-06007`](../../Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contraste**: el reseteo no pasa por acá.
+- [`CU-06004`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) — Borrado físico y arrastre: es donde se hace cumplir.
+- [`CU-06007`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contraste**: el reseteo no pasa por acá.
 
 ## 6. Pruebas que la verifican
 

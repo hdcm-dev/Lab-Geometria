@@ -42,16 +42,16 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 
 | CU | Nombre | En una línea |
 | --- | --- | --- |
-| CU-06001 | [`CU-06001` · Interpretar el texto original y reconstruir las piezas](../../Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | La lectura tolerante del dato real del alumno, con la posición y el campo de cada defecto |
-| CU-06002 | [`CU-06002` · Verificar los valores declarados contra los derivados](../../Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Señalar sin corregir ni rechazar, con tolerancia y operador estricto |
-| CU-06003 | [`CU-06003` · Guardar y recuperar los trabajos](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) | El texto original conservado literal y la consulta que llega ya acotada |
-| CU-06004 | [`CU-06004` · Ejecutar el borrado físico y el arrastre de la baja](../../Casos-De-Uso/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | La única operación destructiva: todo o nada, sin marca de borrado |
-| CU-06005 | [`CU-06005` · Guardar y recuperar las cuentas de la comisión](../../Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Las dos unicidades del almacén y la marca que viaja sin ser un estado |
-| CU-06006 | [`CU-06006` · Derivar la contraseña y verificar una credencial](../../Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | El único punto donde la contraseña en claro se convierte en el valor guardado, y el único que la compara |
-| CU-06007 | [`CU-06007` · Producir la contraseña provisoria del reseteo](../../Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | La delegación explícita de RN-06014: no adivinable y sin repetirse |
-| CU-06008 | [`CU-06008` · Emitir el acceso firmado](../../Casos-De-Uso/CU-06008-Emitir-El-Acceso-Firmado.md) | Cuatro reclamos, firma simétrica y una clave que no entra al repositorio de código |
-| CU-06009 | [`CU-06009` · Proveer el sello del reloj del sistema](../../Casos-De-Uso/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | El contrato más corto, y el que explica por qué la capa vecina se prueba sin nada |
-| CU-06010 | [`CU-06010` · Preparar el almacén al arrancar](../../Casos-De-Uso/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Transformar el esquema solo, y detener el arranque antes que confiar en un almacén equivocado |
+| CU-06001 | [`CU-06001` · Interpretar el texto original y reconstruir las piezas](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | La lectura tolerante del dato real del alumno, con la posición y el campo de cada defecto |
+| CU-06002 | [`CU-06002` · Verificar los valores declarados contra los derivados](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Señalar sin corregir ni rechazar, con tolerancia y operador estricto |
+| CU-06003 | [`CU-06003` · Guardar y recuperar los trabajos](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) | El texto original conservado literal y la consulta que llega ya acotada |
+| CU-06004 | [`CU-06004` · Ejecutar el borrado físico y el arrastre de la baja](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md) | La única operación destructiva: todo o nada, sin marca de borrado |
+| CU-06005 | [`CU-06005` · Guardar y recuperar las cuentas de la comisión](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) | Las dos unicidades del almacén y la marca que viaja sin ser un estado |
+| CU-06006 | [`CU-06006` · Derivar la contraseña y verificar una credencial](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | El único punto donde la contraseña en claro se convierte en el valor guardado, y el único que la compara |
+| CU-06007 | [`CU-06007` · Producir la contraseña provisoria del reseteo](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | La delegación explícita de RN-06014: no adivinable y sin repetirse |
+| CU-06008 | [`CU-06008` · Emitir el acceso firmado](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md) | Cuatro reclamos, firma simétrica y una clave que no entra al repositorio de código |
+| CU-06009 | [`CU-06009` · Proveer el sello del reloj del sistema](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | El contrato más corto, y el que explica por qué la capa vecina se prueba sin nada |
+| CU-06010 | [`CU-06010` · Preparar el almacén al arrancar](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Transformar el esquema solo, y detener el arranque antes que confiar en un almacén equivocado |
 
 ## 3. Las siete reglas conceptuales de modelo
 

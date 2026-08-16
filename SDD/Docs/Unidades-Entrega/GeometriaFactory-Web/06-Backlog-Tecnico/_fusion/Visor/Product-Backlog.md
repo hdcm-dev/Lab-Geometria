@@ -110,7 +110,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero crear una instancia del visor sobre un elemento de dibujo y recibir su identificador, para tener una escena viva a la que dirigir las otras cinco funciones.
 
-**Contexto.** Contrato de uso [`CU-12001`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-12001-Inicializar-Instancia-Del-Visor.md). Proviene de la primera fila de `02` §5.1, «US de creación de instancia». `PT-02` exige que la creación de instancia arme la escena.
+**Contexto.** Contrato de uso [`CU-12001`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12001-Inicializar-Instancia-Del-Visor.md). Proviene de la primera fila de `02` §5.1, «US de creación de instancia». `PT-02` exige que la creación de instancia arme la escena.
 
 **Criterios de aceptación.**
 
@@ -130,7 +130,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero pasarle a la instancia el texto del trabajo y que dibuje sus piezas, para que la persona vea en tres dimensiones lo que su programa modeló.
 
-**Contexto.** Contrato de uso [`CU-12002`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md). Proviene de la primera fila de `02` §5.1, «US de dibujo del trabajo». `PT-02` exige que dibuje las tres figuras del escenario `E-1` **incluido el ortoedro**.
+**Contexto.** Contrato de uso [`CU-12002`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md). Proviene de la primera fila de `02` §5.1, «US de dibujo del trabajo». `PT-02` exige que dibuje las tres figuras del escenario `E-1` **incluido el ortoedro**.
 
 **Criterios de aceptación.**
 
@@ -150,7 +150,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero resaltar la pieza de un índice dado, para que el árbol y la escena señalen lo mismo cuando la persona toca cualquiera de los dos.
 
-**Contexto.** Contrato de uso [`CU-12003`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md). Proviene de la tercera fila de `02` §5.1, «US de resaltado exclusivo por índice». `PT-02` exige que **el árbol y la escena se sincronicen por índice**.
+**Contexto.** Contrato de uso [`CU-12003`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md). Proviene de la tercera fila de `02` §5.1, «US de resaltado exclusivo por índice». `PT-02` exige que **el árbol y la escena se sincronicen por índice**.
 
 **Criterios de aceptación.**
 
@@ -170,7 +170,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero destruir una instancia y que libere sus recursos, para que recorrer trabajos de ida y vuelta no degrade la aplicación.
 
-**Contexto.** Contrato de uso [`CU-12005`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md). Proviene de la primera fila de `02` §5.1, «US de liberación de recursos». `PT-02` exige que recorrer diez veces de ida y vuelta no degrade.
+**Contexto.** Contrato de uso [`CU-12005`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md). Proviene de la primera fila de `02` §5.1, «US de liberación de recursos». `PT-02` exige que recorrer diez veces de ida y vuelta no degrade.
 
 **Criterios de aceptación.**
 
@@ -312,7 +312,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero pedirle a la instancia que recalcule su relación de aspecto cuando cambio el tamaño del elemento de dibujo, para que la escena no se deforme.
 
-**Contexto.** Contrato de uso [`CU-12004`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-12004-Redimensionar-La-Escena.md). Proviene de la primera fila de `02` §5.1, «US de ajuste al espacio disponible».
+**Contexto.** Contrato de uso [`CU-12004`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12004-Redimensionar-La-Escena.md). Proviene de la primera fila de `02` §5.1, «US de ajuste al espacio disponible».
 
 **Criterios de aceptación.**
 
@@ -332,7 +332,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero prender y apagar por separado la órbita de la cámara y el giro de las piezas sobre una instancia ya viva, para que la persona controle el movimiento sin perder lo que está mirando.
 
-**Contexto.** Contrato de uso [`CU-12007`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md), que existe porque `PRODUCT-INTAKE` §17.7.P.3 declara la **sexta función** de la fachada. Proviene de la quinta fila de `02` §5.1. El roadmap §5.2 lo incorporó como **séptimo criterio** de la transición `g` → `h`.
+**Contexto.** Contrato de uso [`CU-12007`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md), que existe porque `PRODUCT-INTAKE` §17.7.P.3 declara la **sexta función** de la fachada. Proviene de la quinta fila de `02` §5.1. El roadmap §5.2 lo incorporó como **séptimo criterio** de la transición `g` → `h`.
 
 **Criterios de aceptación.**
 
@@ -372,7 +372,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión —y como cualquier integrador del punto de extensión—, quiero recorrer las seis funciones de la fachada desde una página con un texto pegado a mano y sin ningún servicio del backend disponible, para comprobar que el bundle es de verdad un visualizador puro.
 
-**Contexto.** Contrato de uso [`CU-12006`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md), que es **transversal** y es además el sample `S-1` del producto (`PRODUCT-INTAKE` §16.1 y §18). `PRODUCT-INTAKE` §16.1 declara que es «una propiedad exigida explícitamente» y no un agregado de conveniencia.
+**Contexto.** Contrato de uso [`CU-12006`](../../../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12006-Ejercitar-La-Fachada-Sin-Backend.md), que es **transversal** y es además el sample `S-1` del producto (`PRODUCT-INTAKE` §16.1 y §18). `PRODUCT-INTAKE` §16.1 declara que es «una propiedad exigida explícitamente» y no un agregado de conveniencia.
 
 **Criterios de aceptación.**
 

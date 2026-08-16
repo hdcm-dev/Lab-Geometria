@@ -101,7 +101,7 @@ Peticiones ejecutadas: 14 | Respuestas comparadas: 14 | Diferencias: 0
 | --- | --- | --- |
 | [`CU-00001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00001-Canjear-Credenciales-Por-Un-Acceso-Firmado.md) | Caso de uso | Canjea correo y contraseña por un acceso firmado, y recorre sus tres desenlaces |
 | [`CU-00002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md) | Caso de uso | Ejercita la guardia en sus tres dimensiones: acceso, papel y marca |
-| [`CU-00009`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Caso de uso | Comprueba que los **6** códigos de contrato que aparecen se traducen según la tabla única, sin inventar ninguno |
+| [`CU-00009`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Caso de uso | Comprueba que los **6** códigos de contrato que aparecen se traducen según la tabla única, sin inventar ninguno |
 | [`RN-02005`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | `E-5` y `E-8` quedan en `Borrador` sin que la respuesta sea un fallo |
 | [`RN-02009`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en las dos observaciones de error |
 | [`RN-02013`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | La guardia del cambio pendiente sobre todos los puntos salvo uno |

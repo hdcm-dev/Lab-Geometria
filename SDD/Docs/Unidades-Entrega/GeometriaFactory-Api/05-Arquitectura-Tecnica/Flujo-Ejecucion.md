@@ -126,7 +126,7 @@ Los tipos son los **seis** que los escenarios ejercitan, más el que sólo apare
 
 | Dimensión | Referencia |
 | --- | --- |
-| CU que materializa | [`CU-06001`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) —pasos P-1 a P-5 y P-7— y [`CU-06002`](../02-Especificacion-Funcional/Casos-De-Uso/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) —paso P-6— |
+| CU que materializa | [`CU-06001`](Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) —pasos P-1 a P-5 y P-7— y [`CU-06002`](Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) —paso P-6— |
 | RN que sostiene | RN-06005 (produce el insumo), RN-06008 (**tramo principal**: el texto no se modifica ni cuando la interpretación falla), RN-06009 (**tramo principal**: toda observación con posición y campo) |
 | Invariantes | INV-04, al que aporta el conjunto completo de observaciones con su especie |
 | Garantías del contrato de la categoría 02 | Las **siete**, `G-1` a `G-7`: `G-1` en la ausencia de escritura sobre el texto, `G-2` en la continuidad del recorrido, `G-3` en las posiciones reservadas de P-3 y P-4, `G-4` en las columnas de observación de P-3 a P-5, `G-5` en P-6, `G-6` en §6 y `G-7` en la primera fila de §4 |

@@ -40,9 +40,9 @@ Modelar el comentario como entidad con historial tampoco produce rechazo: produc
 
 ## 5. CU afectados
 
-- [`CU-06005`](../../Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) — Guardar y recuperar las cuentas: es donde la marca se escribe, se conserva y viaja.
-- [`CU-06003`](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde el comentario vive como campo.
-- [`CU-06007`](../../Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contexto**: es la mitad del reseteo que produce el valor, y la que explica por qué la provisoria es provisoria por la marca y no por un vencimiento.
+- [`CU-06005`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md) — Guardar y recuperar las cuentas: es donde la marca se escribe, se conserva y viaja.
+- [`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde el comentario vive como campo.
+- [`CU-06007`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) — **por contexto**: es la mitad del reseteo que produce el valor, y la que explica por qué la provisoria es provisoria por la marca y no por un vencimiento.
 
 ## 6. Pruebas que la verifican
 

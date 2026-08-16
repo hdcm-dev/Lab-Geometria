@@ -123,7 +123,7 @@ Este contrato no produce condiciones propias: **las provoca a propósito** y com
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | **Ninguna**, y el índice maestro §7.2 lo declara con su motivo: esta colección no implementa, demuestra |
-| Reglas de negocio aplicables | Las que el paso 7 fuerza: [RN-02003](../Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md), [RN-02004](../Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) y [RN-02010](../Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md); y las que el paso 8 demuestra: [RN-02012](../Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) y [RN-02013](../Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) |
+| Reglas de negocio aplicables | Las que el paso 7 fuerza: [RN-02003](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md), [RN-02004](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) y [RN-02010](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md); y las que el paso 8 demuestra: [RN-02012](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) y [RN-02013](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) |
 | Escenarios que usa | **E-1 a E-8** del intake §20, **los ocho**, sin renumerar y sin modificar |
 | Puntos de acceso que ejercita | **13 de 15**. Los **dos** que no —`A-08` y `A-16`—, en §10 |
 | Muestra del producto | **S-2**, declarada en el intake §18 |

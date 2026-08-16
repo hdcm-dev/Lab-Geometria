@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la contraseña en cla
 
 ## 2. Contexto
 
-`02` §1 declara que acá viven **las dos piezas sensibles** del producto, y §4 que **éste es el único punto donde la contraseña en claro se convierte en el valor guardado**. `PRODUCT-INTAKE` §17.3.P.5 lo fija: derivación **nunca en claro ni con resumen simple**. El contrato de uso es [`CU-06006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md).
+`02` §1 declara que acá viven **las dos piezas sensibles** del producto, y §4 que **éste es el único punto donde la contraseña en claro se convierte en el valor guardado**. `PRODUCT-INTAKE` §17.3.P.5 lo fija: derivación **nunca en claro ni con resumen simple**. El contrato de uso es [`CU-06006`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md).
 
 ## 3. Criterios de aceptación
 

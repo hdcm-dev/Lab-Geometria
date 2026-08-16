@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la marca de cambio de
 
 ## 2. Contexto
 
-`RN-06013` y `RN-06012` gobiernan la marca; `RC-06007` declara que **la marca no es un estado de cuenta**. `02` §6 declara el tramo de esta capa: **conserva la marca y la hace viajar**; **la comprobación no es de acá**. El contrato de uso es [`CU-06005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md).
+`RN-06013` y `RN-06012` gobiernan la marca; `RC-06007` declara que **la marca no es un estado de cuenta**. `02` §6 declara el tramo de esta capa: **conserva la marca y la hace viajar**; **la comprobación no es de acá**. El contrato de uso es [`CU-06005`](../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md).
 
 ## 3. Criterios de aceptación
 

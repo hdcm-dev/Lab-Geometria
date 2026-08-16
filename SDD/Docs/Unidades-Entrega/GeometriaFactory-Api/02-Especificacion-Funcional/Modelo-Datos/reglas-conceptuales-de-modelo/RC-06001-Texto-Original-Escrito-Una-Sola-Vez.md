@@ -32,14 +32,14 @@ Y tiene una consecuencia negativa igual de deliberada: la edición o corrección
 
 ## 4. Consecuencia si se viola
 
-Una escritura que reemplace el texto conservado devuelve `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` y **no escribe nada** ([`CU-06003`](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) §6).
+Una escritura que reemplace el texto conservado devuelve `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` y **no escribe nada** ([`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) §6).
 
 Violarla en silencio —normalizando el texto al guardarlo, por ejemplo— produce un daño que no se nota hasta que alguien compara: el alumno vuelve a abrir su trabajo y ve un texto que él no escribió, las comas finales desaparecen y el escenario que documenta la tolerancia del formato deja de ser reproducible desde el almacén.
 
 ## 5. CU afectados
 
-- [`CU-06003`](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde se hace cumplir.
-- [`CU-06001`](../../Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — **por contraste**: el validador lee el texto y **no lo devuelve corregido**.
+- [`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar los trabajos: es donde se hace cumplir.
+- [`CU-06001`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) — **por contraste**: el validador lee el texto y **no lo devuelve corregido**.
 
 ## 6. Pruebas que la verifican
 

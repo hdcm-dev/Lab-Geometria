@@ -45,8 +45,8 @@ No hay rechazo del almacén: escribir el sello equivocado en la columna equivoca
 
 ## 5. CU afectados
 
-- [`CU-06009`](../../Casos-De-Uso/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) — Proveer el sello: es de donde salen los dos que produce el sistema.
-- [`CU-06003`](../../Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde los tres se escriben en columnas distintas.
+- [`CU-06009`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) — Proveer el sello: es de donde salen los dos que produce el sistema.
+- [`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) — Guardar y recuperar: es donde los tres se escriben en columnas distintas.
 
 ## 6. Pruebas que la verifican
 
