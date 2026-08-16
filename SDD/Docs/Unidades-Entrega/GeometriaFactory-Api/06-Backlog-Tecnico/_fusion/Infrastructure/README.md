@@ -53,7 +53,7 @@
 
 ## 6. Definition of Ready vigente
 
-La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of Done **no vive acá**: vive en [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Definition-Of-Done.md), **emitida desde la Fase E**.
+La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of Done **no vive acá**: vive en [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md), **emitida desde la Fase E**.
 
 ## 7. Control de cambios
 

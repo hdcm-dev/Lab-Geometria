@@ -10,7 +10,7 @@
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/infrastructure/02-intermedio/`
 **Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06003`, `CU-06004` y `CU-06005`; [`../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../../../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md), el esquema físico de las **cinco** entidades; [`../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) y [`ADR-06003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md); `PRODUCT-INTAKE` 1.23 §20, escenarios `E-1`, `E-2` y `E-5`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md), que toma `VER-06002` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06002` como sonda; `11-Documentacion` cuando se emita
 
 ---
 

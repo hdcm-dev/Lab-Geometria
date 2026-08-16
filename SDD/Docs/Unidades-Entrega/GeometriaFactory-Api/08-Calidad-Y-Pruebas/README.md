@@ -1,11 +1,11 @@
 # 08 · Calidad y pruebas — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.3
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto**
 
@@ -13,6 +13,7 @@
 
 ## Tabla de contenido
 
+- [0. Los ocho documentos son de la unidad de entrega, no de una capa](#0-los-ocho-documentos-son-de-la-unidad-de-entrega-no-de-una-capa)
 - [1. Artefactos de esta sección](#1-artefactos-de-esta-sección)
 - [2. Orden de lectura](#2-orden-de-lectura)
 - [3. Artefactos omitidos y su motivo](#3-artefactos-omitidos-y-su-motivo)
@@ -22,18 +23,50 @@
 
 ---
 
+
+## 0. Los ocho documentos son de la unidad de entrega, no de una capa
+
+**Los ocho artefactos de esta sección se consolidaron el 2026-08-16** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1).
+Hasta entonces, cada uno de los cuatro proyectos de código que componen la unidad —
+`GeometriaFactory-Api`, `-Domain`, `-Application` e `-Infrastructure`— tenía el suyo, y tres de los
+cuatro estaban estacionados en `_fusion/` esperando esta decisión.
+
+**Cada documento lleva ahora una subsección por proyecto de código**, con su texto transpuesto sin
+reescritura, y una **§0** con lo que sólo se ve poniendo los cuatro juntos. El más importante de esos
+§0 es el de [`Estrategia-Testing.md`](Estrategia-Testing.md), que reúne **los cuatro pisos de
+cobertura** —90/85, 85/80, 85/80 y 75/70— con la constancia de que **no se promedian**: un promedio
+de umbrales no es un umbral.
+
+**Los identificadores no colisionan y no hubo que renumerar nada.** La migración 6.0 → 8.x ya le
+había dado a cada capa su rango propio —`TC`, `CV`, `VER`—, de modo que la unión de catálogos fue
+directa. Es el rendimiento de haber renumerado antes de fundir.
+
+**Este `README` es el único de los ocho que no transpone, y hay que decir qué se perdió.** La salida
+que le corresponde es **reescribir el índice**, no unir cuatro índices: los `README` de las tres capas
+indexaban documentos que **hoy están archivados**, con sus versiones y sus descripciones de entonces.
+Son **108 líneas** que no tienen correspondencia acá, y **ninguna es contenido de calidad**: son la
+lista de artefactos de una categoría que dejó de existir como tal. Los tres siguen enteros en
+`_legacy/`, y quien quiera saber qué indexaba la categoría 08 de `GeometriaFactory-Domain` en agosto
+los tiene ahí.
+
+**Los otros siete documentos sí transponen, y ahí no se perdió nada**: 1649 líneas de contenido
+absorbidas, **0 sin correspondencia sustantiva**.
+
+Los **veinticuatro** documentos absorbidos están en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/08-Calidad-Y-Pruebas/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/08-Calidad-Y-Pruebas/).
+
 ## 1. Artefactos de esta sección
 
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
-| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | 1.1 | Propuesto | Definición de calidad, atributos ISO 25010, **quince** quality gates, **dos** puertas técnicas y la frontera del despliegue |
-| [`Estrategia-Testing.md`](Estrategia-Testing.md) | 1.1 | Propuesto | Pirámide **invertida** con su motivo, cobertura por componente, tooling, cero dobles en integración y los **ocho** escenarios como cuerpo de petición |
-| [`Plan-Pruebas.md`](Plan-Pruebas.md) | 1.1 | Propuesto | Alcance, criterios de entrada y salida, **once** riesgos de calidad y plan por etapa |
-| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | 1.1 | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, **punto de acceso ↔ tests**, invariante ↔ tests y cobertura por componente |
-| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | 1.0 | Propuesto | Catálogo de **treinta y siete** casos de verificación, `TC-00001` a `TC-00037` |
-| [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | **Cuarenta** criterios, `CV-01` a `CV-40`, con su carácter |
-| [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas, con la entrega del artefacto |
-| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | 1.0 | Propuesto | **Tres** sondas `VER-XX` tomadas de los contratos de verificación de [`../10-Examples/`](../10-Examples/), una de ellas la **colección de peticiones reproducible**, sin ninguna fila de línea de base visual |
+| [`Estrategia-Calidad.md`](Estrategia-Calidad.md) | **2.0** | Propuesto | Definición de calidad, atributos ISO 25010, **quince** quality gates, **dos** puertas técnicas y la frontera del despliegue |
+| [`Estrategia-Testing.md`](Estrategia-Testing.md) | **2.0** | Propuesto | Pirámide **invertida** con su motivo, cobertura por componente, tooling, cero dobles en integración y los **ocho** escenarios como cuerpo de petición |
+| [`Plan-Pruebas.md`](Plan-Pruebas.md) | **2.0** | Propuesto | Alcance, criterios de entrada y salida, **once** riesgos de calidad y plan por etapa |
+| [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) | **2.0** | Propuesto | Trazabilidad CU ↔ tests, NFR ↔ tests, RN ↔ tests, **punto de acceso ↔ tests**, invariante ↔ tests y cobertura por componente |
+| [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) | **2.0** | Propuesto | Catálogo de **treinta y siete** casos de verificación, `TC-00001` a `TC-00037` |
+| [`Criterios-Validacion.md`](Criterios-Validacion.md) | **2.0** | Propuesto | **Cuarenta** criterios, `CV-01` a `CV-40`, con su carácter |
+| [`Definition-Of-Done.md`](Definition-Of-Done.md) | **2.0** | Propuesto | **DoD canónica** del proyecto de código, en cuatro capas, con la entrega del artefacto |
+| [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **2.0** | Propuesto | **Tres** sondas `VER-XX` tomadas de los contratos de verificación de [`../10-Examples/`](../10-Examples/), una de ellas la **colección de peticiones reproducible**, sin ninguna fila de línea de base visual |
 
 ## 2. Orden de lectura
 
@@ -111,3 +144,4 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 | 1.1 | 2026-08-11 | Actualiza la tabla de artefactos: seis de los siete suben a **1.1**. Por `H-01`, los documentos afirmaban **en presente** que el intake escribe «nueve pruebas del validador» en §17.1.P.8 · GeometriaFactory-Api, y el **intake 1.20** dice **diez**; el hueco de la matriz **se conserva y queda cerrado** con su desenlace. Por `H-06`, la estrategia de testing declara ahora que su piso de cobertura de líneas —**75 %**— **baja** el **80 %** que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `rest-api`, con qué autoridad y qué le falta. Por `H-04`, la matriz suma §2.1 con `TC-00036`. Por `H-08`, el mutation score deja de atribuirse a la fila `rest-api` de §2.2, que no lo pide. **Ningún gate, umbral, caso ni recuento de esta sección cambia**: en particular el 75/70 **no se sube**. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Api`, proyecto de código **principal** del producto. Lista los **siete** artefactos emitidos con su versión y su estado, el orden de lectura, los **dos** artefactos omitidos con su motivo —con la constancia de que la matriz de sensado tendría un candidato natural en la colección de peticiones cuando se emita la categoría 10—, los **quince** quality gates con su carácter, las **dos** puertas técnicas y **la frontera del despliegue**, y la tabla de recuentos que esta sección sostiene con la fuente de cada uno. |
 | 1.3 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1). Pasa de indexar la categoría del proyecto de código `GeometriaFactory-Api` a indexar la de la **unidad de entrega**, con sus ocho artefactos consolidados en **2.0**. Entra **§0**, que declara qué se consolidó, dónde está lo absorbido y que **los cuatro pisos de cobertura no se promedian**. La carpeta `_fusion/` de esta categoría **se retira**: la fusión terminó acá. Sube **major**. |

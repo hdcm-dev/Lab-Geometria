@@ -10,7 +10,7 @@
 **Nivel:** Básico
 **Ubicación del código:** `/samples/application/01-basico/`
 **Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04001`, `CU-04003` y `CU-04010`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de alta de cuentas y de ingreso y credencial; [`../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) §2
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md), que toma `VER-04001` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-04001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 

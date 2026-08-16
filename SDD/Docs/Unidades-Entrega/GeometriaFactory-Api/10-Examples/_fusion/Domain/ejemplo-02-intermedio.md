@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** [`/samples/domain/02-intermedio/`](../../../../../samples/domain/02-intermedio/), esqueletada con su README local y su comando previsto
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02005` a `CU-02008`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-05` a `OP-08`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md) 1.0 `TC-02011` a `TC-02018`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md), que toma `VER-02002` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02005` a `CU-02008`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-05` a `OP-08`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02011` a `TC-02018`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02002` como sonda; `11-Documentacion` cuando se emita
 
 ---
 

@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/domain/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-01` a `OP-04` y `OP-12`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md) 1.0 `TC-02001`, `TC-02002`, `TC-02003`, `TC-02006`, `TC-02009` y `TC-02010`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md), que toma `VER-02001` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-01` a `OP-04` y `OP-12`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02001`, `TC-02002`, `TC-02003`, `TC-02006`, `TC-02009` y `TC-02010`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 

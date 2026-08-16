@@ -49,7 +49,7 @@
 
 ## 4. Los catorce quality gates, y en qué stage corre cada uno
 
-Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gate es el de [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md) §3**; el de dónde corre, el de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1. Esta categoría **no cambió el carácter de ninguno**.
+Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gate es el de [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3**; el de dónde corre, el de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1. Esta categoría **no cambió el carácter de ninguno**.
 
 | Gate | Stage donde corre | Carácter |
 | --- | --- | --- |
@@ -72,7 +72,7 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 
 **`QG-07` lleva número y no es condicionado**, y la distinción es de la fuente: el intake §22 enumera la tolerancia de **0.01** entre «lo que **NO** es asunción», con su fundamento. El caso testigo y la consecuencia de confundirlo están en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.3.
 
-**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/README.md) §4 declara que el backlog asigna `PT-04` a su épica de la etapa `a`. El stage `verificar-transformaciones` es **su mitad barata**: verifica la parte de las transformaciones **sin construir la imagen** ([`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2).
+**Una puerta técnica del producto se mide en la etapa `a` de este proyecto de código**: [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §4 declara que el backlog asigna `PT-04` a su épica de la etapa `a`. El stage `verificar-transformaciones` es **su mitad barata**: verifica la parte de las transformaciones **sin construir la imagen** ([`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2).
 
 ## 5. Recuentos que esta sección sostiene
 

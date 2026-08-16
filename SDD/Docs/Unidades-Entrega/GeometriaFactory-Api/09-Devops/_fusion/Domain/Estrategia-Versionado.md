@@ -76,9 +76,9 @@ El modelo lo declara el producto y este proyecto de código lo hereda entero. No
 - **Etapas en serie**: no se abre la rama de una etapa antes de que la anterior esté fusionada (intake §10 y §15).
 - **Sin OK explícito del Product Owner no se avanza** (intake §10, restricción «etapas en serie»).
 
-**Consecuencia sobre las reglas de protección de la rama principal**, que es lo que esta categoría sí aporta: la fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 en verde y la constancia del OK del punto de control. **No se exige un revisor humano independiente**, y no por relajación: `equipo_n` es 1 y [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md) §4 ya declara que lo que reemplaza al revisor independiente es el punto de control bloqueante de cada etapa.
+**Consecuencia sobre las reglas de protección de la rama principal**, que es lo que esta categoría sí aporta: la fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 en verde y la constancia del OK del punto de control. **No se exige un revisor humano independiente**, y no por relajación: `equipo_n` es 1 y [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4 ya declara que lo que reemplaza al revisor independiente es el punto de control bloqueante de cada etapa.
 
-**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Plan-Pruebas.md) §1. Las etapas `b` y `g` no producen rama de trabajo acá, y su ausencia está declarada allá.
+**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §1. Las etapas `b` y `g` no producen rama de trabajo acá, y su ausencia está declarada allá.
 
 ## 5. Canales
 

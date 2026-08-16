@@ -1,30 +1,36 @@
 # Matriz de sensado de deriva — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Matriz-Sensado-Deriva.md
-**Versión:** 1.2
-**Estado:** Aprobado
-**Fecha:** 2026-08-12
-**Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
-**Variante:** Sensado de deriva por contratos de verificación
-**Trazabilidad upstream:** [`../10-Examples/README.md`](../10-Examples/README.md) 1.1 §3 y los tres contratos de verificación de [`../10-Examples/ejemplo-01-basico.md`](../10-Examples/ejemplo-01-basico.md), [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio.md) y [`../10-Examples/ejemplo-03-avanzado.md`](../10-Examples/ejemplo-03-avanzado.md), los tres 1.0; `Deriva-Rules.md` §2.3, §2.4, §3 y §4
-**Trazabilidad downstream:** [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8, que declaraban su ausencia y ahora la citan; `09-Devops`, que resuelve dónde corren los comandos
+**Versión:** 2.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-16
+**Autor:** Ingeniero QA / SDET Senior (AG-08)
+**`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
+**Proyectos de código que la componen:** `GeometriaFactory-Api`, `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure` y `GeometriaFactory-Contracts`
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md); [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1** §17.1.P.6 y §22
+**Trazabilidad downstream:** `09-Devops` y `11-Documentacion`
+**Consolida a:** los documentos homónimos de `GeometriaFactory-Domain`, `GeometriaFactory-Application` e `GeometriaFactory-Infrastructure`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4
 
 ---
 
-## Tabla de contenido
+## 0. Cómo leer este documento
 
-- [1. Por qué existe esta matriz y por qué recién ahora](#1-por-qué-existe-esta-matriz-y-por-qué-recién-ahora)
-- [2. Contra qué se sensa](#2-contra-qué-se-sensa)
-- [3. La matriz](#3-la-matriz)
-- [4. Umbrales de deriva aplicados](#4-umbrales-de-deriva-aplicados)
-- [5. Qué no sensa esta matriz](#5-qué-no-sensa-esta-matriz)
-- [6. Control de cambios](#6-control-de-cambios)
+**La unidad de entrega tiene un solo documento de esta clase, y sus cuatro proyectos de código tenían
+el suyo.** Cada sección lleva **una subsección por proyecto**, con su texto **transpuesto sin
+reescritura**: lo que cambia es el orden y no el contenido.
+
+**Las cinco secciones son comunes a las cuatro capas.** La matriz de sensado de deriva es una
+**colección derivada** (`Root-Rules.md` §9.4): su tamaño es la suma de las tablas de línea de base
+que la alimentan, de modo que la de la unidad de entrega es la unión de las cuatro **por
+construcción**, no por decisión.
 
 ---
 
 ## 1. Por qué existe esta matriz y por qué recién ahora
+
+### 1.1 `GeometriaFactory-Api`
 
 `GeometriaFactory-Api` tiene `requiere_maqueta` en **false** (`PRODUCT-MANIFEST` §5): no ejecutó la Fase B2 y no tiene línea de base visual ni contrato de datos de maqueta. Hasta la emisión de `10-Examples` no había ninguna fuente de sondas, y por eso [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 declararon la omisión **condicionada y temporal**, con la frase de cierre «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`».
 
@@ -34,13 +40,65 @@ Eso es lo que hace este documento. `Deriva-Rules.md` §2.3 lo prevé, y su texto
 
 **Ninguna fila afirma nada sobre el estado del sistema construido.** Las tres nacen en `Sin verificar` y sin fecha, porque la biblioteca no está construida.
 
+### 1.2 `GeometriaFactory-Domain`
+
+`GeometriaFactory-Domain` tiene `requiere_maqueta` en **false** (`PRODUCT-MANIFEST` §5): no ejecutó la Fase B2 y no tiene línea de base visual ni contrato de datos de maqueta. Hasta la emisión de `10-Examples` no había ninguna fuente de sondas, y por eso [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7 declararon la omisión **condicionada y temporal**, con la frase de cierre «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`».
+
+Eso es lo que hace este documento. `Deriva-Rules.md` §2.3 lo prevé, y su texto completo es «Cuando el proyecto de código no ejecuta Fase B2 pero sí tiene categoría 10, la matriz se emite igual: **la abre AG-08 en la Fase E**, poblada solo con sondas `VER-XX` tomadas de los contratos de verificación» —el fragmento sobre la titularidad **no se elide**: el párrafo siguiente declara y fundamenta por qué acá la abre AG-10—. Y §6 lo exige: «ningún proyecto de código con categoría 10 queda sin `Matriz-Sensado-Deriva.md`, aunque no haya ejecutado Fase B2».
+
+**Quién la abre.** `Deriva-Rules.md` §2.3 se la asigna a AG-08 en la Fase E, para el caso general. Acá la abre **AG-10** al cerrar la fase que genera la categoría 10, que es el segundo momento de sensado de `Deriva-Rules.md` §4 —«alta de una sonda `VER-XX` por cada contrato de verificación declarado en la pasada de diseño, todas en `Sin verificar`»—, porque la Fase E de este proyecto de código ya cerró y en ese momento las sondas todavía no existían. **Ninguna fila cambia de titular por eso**: la incorporación a la estrategia de testing sigue siendo de AG-08.
+
+**Ninguna fila afirma nada sobre el estado del sistema construido.** Las tres nacen en `Sin verificar` y sin fecha, porque la biblioteca no está construida.
+
+### 1.3 `GeometriaFactory-Application`
+
+`GeometriaFactory-Application` tiene `requiere_maqueta` en **false** (`PRODUCT-MANIFEST` §5): no ejecutó la Fase B2 y no tiene línea de base visual ni contrato de datos de maqueta. Hasta la emisión de `10-Examples` no había ninguna fuente de sondas, y por eso [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 declararon la omisión **condicionada y temporal**, con la frase de cierre «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`».
+
+Eso es lo que hace este documento. `Deriva-Rules.md` §2.3 lo prevé, y su texto completo es «Cuando el proyecto de código no ejecuta Fase B2 pero sí tiene categoría 10, la matriz se emite igual: **la abre AG-08 en la Fase E**, poblada solo con sondas `VER-XX` tomadas de los contratos de verificación» —el fragmento sobre la titularidad **no se elide**: el párrafo siguiente declara y fundamenta por qué acá la abre AG-10—. Una matriz sin filas sería un proyecto de código sin instrumento de sensado, y eso es lo que había que evitar.
+
+**Quién la abre.** `Deriva-Rules.md` §2.3 se la asigna a AG-08 en la Fase E, para el caso general. Acá la abre **AG-10** al cerrar la fase que genera la categoría 10, que es el segundo momento de sensado de `Deriva-Rules.md` §4 —«alta de una sonda `VER-XX` por cada contrato de verificación declarado en la pasada de diseño, todas en `Sin verificar`»—, porque la Fase E de este proyecto de código ya cerró y en ese momento las sondas todavía no existían. **Ninguna fila cambia de titular por eso**: la incorporación a la estrategia de testing sigue siendo de AG-08.
+
+**Ninguna fila afirma nada sobre el estado del sistema construido.** Las tres nacen en `Sin verificar` y sin fecha, porque la biblioteca no está construida.
+
+### 1.4 `GeometriaFactory-Infrastructure`
+
+`GeometriaFactory-Infrastructure` tiene `requiere_maqueta` en **false** (`PRODUCT-MANIFEST` §5): no ejecutó la Fase B2 y no tiene línea de base visual ni contrato de datos de maqueta. Hasta la emisión de `10-Examples` no había ninguna fuente de sondas, y por eso [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 declararon la omisión **condicionada y temporal**, con la frase de cierre «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`».
+
+Eso es lo que hace este documento. `Deriva-Rules.md` §2.3 lo prevé, y su texto completo es «Cuando el proyecto de código no ejecuta Fase B2 pero sí tiene categoría 10, la matriz se emite igual: **la abre AG-08 en la Fase E**, poblada solo con sondas `VER-XX` tomadas de los contratos de verificación» —el fragmento sobre la titularidad **no se elide**: el párrafo siguiente declara y fundamenta por qué acá la abre AG-10—. Una matriz sin filas sería un proyecto de código sin instrumento de sensado, y eso es lo que había que evitar.
+
+**Quién la abre.** `Deriva-Rules.md` §2.3 se la asigna a AG-08 en la Fase E, para el caso general. Acá la abre **AG-10** al cerrar la fase que genera la categoría 10, que es el segundo momento de sensado de `Deriva-Rules.md` §4 —«alta de una sonda `VER-XX` por cada contrato de verificación declarado en la pasada de diseño, todas en `Sin verificar`»—, porque la Fase E de este proyecto de código ya cerró y en ese momento las sondas todavía no existían. **Ninguna fila cambia de titular por eso**: la incorporación a la estrategia de testing sigue siendo de AG-08.
+
+**Ninguna fila afirma nada sobre el estado del sistema construido.** Las tres nacen en `Sin verificar` y sin fecha, porque la biblioteca no está construida.
+
 ## 2. Contra qué se sensa
+
+### 2.1 `GeometriaFactory-Api`
+
+Contra los **contratos de verificación** de los tres samples de `10-Examples`, y contra nada más. No hay identificadores `SUP-XX`, `CMP-XX`, `EST-XX`, `NAV-XX` ni `DM-XX` que citar, porque este proyecto de código no tiene superficie visual ni maqueta.
+
+Es el caso que `Deriva-Rules.md` §2.4 describe: «no requieren maqueta… antes de esta extensión, esos proyectos de código quedaban sin ningún instrumento de sensado». Las tres sondas traen **su propio comando y su propia aserción**, de modo que su método de verificación es automatizable sin desvío, y su evidencia es el campo `evidencia` del sample, citado por identificador y no transcripto acá.
+
+### 2.2 `GeometriaFactory-Domain`
+
+Contra los **contratos de verificación** de los tres samples de `10-Examples`, y contra nada más. No hay identificadores `SUP-XX`, `CMP-XX`, `EST-XX`, `NAV-XX` ni `DM-XX` que citar, porque este proyecto de código no tiene superficie visual ni maqueta.
+
+Es el caso que `Deriva-Rules.md` §2.4 describe: «no requieren maqueta… antes de esta extensión, esos proyectos de código quedaban sin ningún instrumento de sensado». Las tres sondas traen **su propio comando y su propia aserción**, de modo que su método de verificación es automatizable sin desvío, y su evidencia es el campo `evidencia` del sample, citado por identificador y no transcripto acá.
+
+### 2.3 `GeometriaFactory-Application`
+
+Contra los **contratos de verificación** de los tres samples de `10-Examples`, y contra nada más. No hay identificadores `SUP-XX`, `CMP-XX`, `EST-XX`, `NAV-XX` ni `DM-XX` que citar, porque este proyecto de código no tiene superficie visual ni maqueta.
+
+Es el caso que `Deriva-Rules.md` §2.4 describe: «no requieren maqueta… antes de esta extensión, esos proyectos de código quedaban sin ningún instrumento de sensado». Las tres sondas traen **su propio comando y su propia aserción**, de modo que su método de verificación es automatizable sin desvío, y su evidencia es el campo `evidencia` del sample, citado por identificador y no transcripto acá.
+
+### 2.4 `GeometriaFactory-Infrastructure`
 
 Contra los **contratos de verificación** de los tres samples de `10-Examples`, y contra nada más. No hay identificadores `SUP-XX`, `CMP-XX`, `EST-XX`, `NAV-XX` ni `DM-XX` que citar, porque este proyecto de código no tiene superficie visual ni maqueta.
 
 Es el caso que `Deriva-Rules.md` §2.4 describe: «no requieren maqueta… antes de esta extensión, esos proyectos de código quedaban sin ningún instrumento de sensado». Las tres sondas traen **su propio comando y su propia aserción**, de modo que su método de verificación es automatizable sin desvío, y su evidencia es el campo `evidencia` del sample, citado por identificador y no transcripto acá.
 
 ## 3. La matriz
+
+### 3.1 `GeometriaFactory-Api`
 
 | ID | Elemento de línea de base | Afirmación a verificar | Método de verificación | Evidencia esperada | Umbral de deriva | Estado | Última verificación |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -52,7 +110,45 @@ Es el caso que `Deriva-Rules.md` §2.4 describe: «no requieren maqueta… antes
 
 **El método de verificación de las tres es el comando declarado en su contrato, sin desvío.** No hay ninguna fila resuelta por inspección, porque `Deriva-Rules.md` §2.4 declara que una sonda `VER-XX` «trae su propio comando y su propia aserción».
 
+### 3.2 `GeometriaFactory-Domain`
+
+| ID | Elemento de línea de base | Afirmación a verificar | Método de verificación | Evidencia esperada | Umbral de deriva | Estado | Última verificación |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `SD-02001` | `VER-02001` de [`../10-Examples/ejemplo-01-basico.md`](../10-Examples/_fusion/Domain/ejemplo-01-basico.md) §9 | El ciclo de vida de la cuenta cierra entero: la admisibilidad devuelve los **tres** desenlaces de `CU-02004` sobre la misma cuenta —`CUENTA_PENDIENTE`, `CAMBIO_DE_CONTRASENA_PENDIENTE` y admisible—, y las **9** operaciones invocadas producen **2** rechazos tipados y **0** excepciones | El comando del contrato: `dotnet run --project samples/domain/01-basico` | Campo `evidencia` de `VER-02001`, con su fecha | **Menor**: cambia el texto de una línea de salida sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, cambia el comando sin actualizar el contrato, aparecen precondiciones no declaradas, o alguno de `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` o `CU-02012` deja de estar cubierto | `Sin verificar` | — |
+| `SD-02002` | `VER-02002` de [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/_fusion/Domain/ejemplo-02-intermedio.md) §9 | Los **seis** escenarios reales del intake §20 recorren el ciclo del trabajo: `E-1` adopta **3** piezas y **2** advertencias y pasa a `Pendiente`; `E-3` produce la advertencia con el par 36.00 y 54.00 y `E-4` produce **0** observaciones; `E-5` y `E-8` quedan retenidos en `Borrador` con la observación localizada en el **índice 1**; el recuento final es **4** envíos a `Pendiente` y **2** retenidos | El comando del contrato: `dotnet run --project samples/domain/02-intermedio` | Campo `evidencia` de `VER-02002`, con su fecha | **Menor**: cambia el texto de una línea sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, un escenario se sustituye por datos sintéticos, el índice reportado pasa a ser 0, o alguno de `CU-02005` a `CU-02008` deja de estar cubierto | `Sin verificar` | — |
+| `SD-02003` | `VER-02003` de [`../10-Examples/ejemplo-03-avanzado.md`](../10-Examples/_fusion/Domain/ejemplo-03-avanzado.md) §9 | El trabajo ajeno y el inexistente devuelven resultados **idénticos campo por campo**; el alcance del administrador excluye el **1** borrador y admite eliminación en los **3** estados que ve; el reseteo conserva la situación y los **4** trabajos; y las tres inspecciones dan **0** dependencias salientes, resultado idéntico en dos corridas sin fijar el reloj, y **12** condiciones devueltas por valor con **0** excepciones de negocio | El comando del contrato: `dotnet run --project samples/domain/03-avanzado` | Campo `evidencia` de `VER-02003`, con su fecha | **Menor**: cambia el texto de una línea sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, aparece una excepción de negocio, el recuento de dependencias salientes deja de ser 0, o alguno de `CU-02009`, `CU-02010`, `CU-02011` o `CU-02013` deja de estar cubierto | `Sin verificar` | — |
+
+**Tres filas, una por contrato de verificación, sin contratos huérfanos ni filas sin contrato que las respalde**, que es lo que exige `Deriva-Rules.md` §6. La correspondencia es uno a uno: `SD-02001`↔`VER-02001`, `SD-02002`↔`VER-02002`, `SD-02003`↔`VER-02003`.
+
+**El método de verificación de las tres es el comando declarado en su contrato, sin desvío.** No hay ninguna fila resuelta por inspección, porque `Deriva-Rules.md` §2.4 declara que una sonda `VER-XX` «trae su propio comando y su propia aserción».
+
+### 3.3 `GeometriaFactory-Application`
+
+| ID | Elemento de línea de base | Afirmación a verificar | Método de verificación | Evidencia esperada | Umbral de deriva | Estado | Última verificación |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `SD-04001` | `VER-04001` de [`../10-Examples/ejemplo-01-basico.md`](../10-Examples/_fusion/Application/ejemplo-01-basico.md) §9 | La entrada al laboratorio cierra entera: el alta de alumno constituye la cuenta **sin credencial** y en situación pendiente, el segundo administrador se rechaza, la admisibilidad devuelve sus **tres** desenlaces con motivo, y la cuenta marcada queda confinada al reemplazo de su propia credencial —**la única excepción** de `ADR-04004` §2— que es además lo único que levanta la marca. Los **4** actos producen **5** rechazos tipados y **0** excepciones | El comando del contrato: `dotnet run --project samples/application/01-basico` | Campo `evidencia` de `VER-04001`, con su fecha | **Menor**: cambia el texto de una línea de salida sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, cambia el comando sin actualizar el contrato, aparecen precondiciones no declaradas, la comprobación de cambio de contraseña pendiente deja de cortar primero, o alguno de `CU-04001`, `CU-04003` o `CU-04010` deja de estar cubierto | `Sin verificar` | — |
+| `SD-04002` | `VER-04002` de [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/_fusion/Application/ejemplo-02-intermedio.md) §9 | Los **ocho** escenarios reales del intake §20 recorren el ciclo del trabajo con el resultado de interpretación que **el puerto** devuelve: `E-1` da 3 piezas y 2 advertencias, `E-3` la advertencia con el par 36.00 y 54.00, `E-4` **0** observaciones, `E-5` y `E-8` la observación de error en el **índice 1**; el recuento final es **6** envíos a `Pendiente` y **2** retenidos en `Borrador`; el listado propio distingue los cuatro estados; y el retiro de un trabajo ajeno responde como **inexistente para el solicitante** y no como falta de facultad | El comando del contrato: `dotnet run --project samples/application/02-intermedio` | Campo `evidencia` de `VER-04002`, con su fecha | **Menor**: cambia el texto de una línea sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, un escenario se sustituye por datos sintéticos o se reformatea, el índice reportado pasa a ser 0, la negativa por pertenencia se colapsa con la de facultad, o alguno de `CU-04004`, `CU-04005`, `CU-04006` o `CU-04009` deja de estar cubierto | `Sin verificar` | — |
+| `SD-04003` | `VER-04003` de [`../10-Examples/ejemplo-03-avanzado.md`](../10-Examples/_fusion/Application/ejemplo-03-avanzado.md) §9 | El gobierno del administrador cierra entero: la baja exige el correo escrito y arrastra **2** trabajos; la entrega de la comisión muestra **3** trabajos con **0** borradores visibles; la negativa por **alcance** y la negativa por **facultad** se distinguen y no se intercambian; el desenlace sobre un estado terminal se rechaza; y el reseteo sobre una cuenta **bloqueada** conserva la situación y los **2** trabajos. Los **4** actos producen **8** rechazos tipados y **0** excepciones | El comando del contrato: `dotnet run --project samples/application/03-avanzado` | Campo `evidencia` de `VER-04003`, con su fecha | **Mayor, sin gradación** en el tramo de borradores visibles: `RN-04011` no admite tolerancia y un solo borrador visible es deriva mayor. **Menor** en el resto: cambia el texto de una línea sin cambiar su semántica. **Mayor** además si el `criterio_aceptacion` falla, si la negativa por alcance se colapsa con la de pertenencia, o si alguno de `CU-04002`, `CU-04007`, `CU-04008` o `CU-04011` deja de estar cubierto | `Sin verificar` | — |
+
+**Tres filas, una por contrato de verificación, sin contratos huérfanos ni filas sin contrato que las respalde**, que es lo que exige `Deriva-Rules.md` §6. La correspondencia es uno a uno: `SD-04001`↔`VER-04001`, `SD-04002`↔`VER-04002`, `SD-04003`↔`VER-04003`.
+
+**El método de verificación de las tres es el comando declarado en su contrato, sin desvío.** No hay ninguna fila resuelta por inspección, porque `Deriva-Rules.md` §2.4 declara que una sonda `VER-XX` «trae su propio comando y su propia aserción».
+
+### 3.4 `GeometriaFactory-Infrastructure`
+
+| ID | Elemento de línea de base | Afirmación a verificar | Método de verificación | Evidencia esperada | Umbral de deriva | Estado | Última verificación |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `SD-06001` | `VER-06001` de [`../10-Examples/ejemplo-01-basico.md`](../10-Examples/_fusion/Infrastructure/ejemplo-01-basico.md) §9 | La mitad de la capa que **no abre el almacén** hace lo que promete sobre los **ocho** escenarios reales del intake §20 leídos como texto literal: `E-1` da **3** figuras del conjunto raíz, **3** piezas y **2** observaciones, con el cilindro en **0**; `E-2` parsea con comas finales y lee `Tapas` como bases; `E-4` da **0** observaciones frente a la advertencia de `E-3`; `E-6` no descarta la figura de dimensión `0.00`; `E-7` reconstruye **6** piezas; y `E-5` y `E-8` localizan el error en el **índice 1**. El recuento final es **2** observaciones de error, **4** advertencias y **0** excepciones | El comando del contrato: `dotnet run --project samples/infrastructure/01-basico` | Campo `evidencia` de `VER-06001`, con su fecha | **Menor**: cambia el texto de una línea de salida sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, cambia el comando sin actualizar el contrato, aparecen precondiciones no declaradas, el operador de tolerancia deja de ser estricto, un escenario se sustituye o se reformatea, el índice reportado pasa a ser 0, o `CU-06001` o `CU-06002` dejan de estar cubiertos | `Sin verificar` | — |
+| `SD-06002` | `VER-06002` de [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/_fusion/Infrastructure/ejemplo-02-intermedio.md) §9 | La mitad que **sí abre el almacén** sostiene sus cuatro propiedades: el trabajo de `E-1` se materializa con **3** piezas, **15** componentes y **2** observaciones y su texto se guarda **literal**; el listado devuelve **0** componentes y sin texto original, y el detalle los lleva; la consulta **sin alcance declarado** se rechaza en lugar de resolverse afuera; el retiro deja **0** dependientes; y el arrastre de la baja es todo o nada —**0** trabajos si se completa, **2** si se interrumpe, nunca **1**— | El comando del contrato: `dotnet run --project samples/infrastructure/02-intermedio` | Campo `evidencia` de `VER-06002`, con su fecha | **Mayor, sin gradación** en el tramo del texto original y en el del arrastre: `RN-06008` y el todo o nada de `ADR-06002` no admiten tolerancia. **Menor** en el resto: cambia el texto de una línea sin cambiar su semántica. **Mayor** además si el `criterio_aceptacion` falla, si el listado empieza a traer componentes, o si alguno de `CU-06003`, `CU-06004` o `CU-06005` deja de estar cubierto | `Sin verificar` | — |
+| `SD-06003` | `VER-06003` de [`../10-Examples/ejemplo-03-avanzado.md`](../10-Examples/_fusion/Infrastructure/ejemplo-03-avanzado.md) §9 | Los **cinco** mecanismos que sólo esta capa provee se detienen en lugar de cumplir a medias: la derivación no guarda nada en claro y distingue el derivado **ilegible** del veredicto falso; **100** provisorias con **0** repetidas y ninguna derivada de un dato de la cuenta, y **0** valores producidos cuando la fuente de aleatoriedad no responde; el acceso lleva sus **4** reclamos y **0** accesos se emiten sin clave de firma; el sello del reloj llega por el puerto y dos corridas con el puerto fijado dan el mismo valor; y el arranque se **detiene** ante un linaje desconocido. Las **2** inspecciones de umbral cero dan **0** y **0** | El comando del contrato: `dotnet run --project samples/infrastructure/03-avanzado` | Campo `evidencia` de `VER-06003`, con su fecha | **Mayor, sin gradación** en los cuatro tramos de modo de falla silencioso y en las **2** inspecciones de umbral cero: contraseña en claro guardada, provisoria repetida, provisoria derivada de un dato de la cuenta, valor producido sin aleatoriedad, y toda aparición de clave, contraseña o ruta del almacén. **Menor** en el resto. **Mayor** además si el `criterio_aceptacion` falla, si una corrida se hace **sin** las condiciones de medición declaradas en las precondiciones, o si alguno de `CU-06006` a `CU-06010` deja de estar cubierto | `Sin verificar` | — |
+
+**Tres filas, una por contrato de verificación, sin contratos huérfanos ni filas sin contrato que las respalde**, que es lo que exige `Deriva-Rules.md` §6. La correspondencia es uno a uno: `SD-06001`↔`VER-06001`, `SD-06002`↔`VER-06002`, `SD-06003`↔`VER-06003`.
+
+**El método de verificación de las tres es el comando declarado en su contrato, sin desvío.** No hay ninguna fila resuelta por inspección, porque `Deriva-Rules.md` §2.4 declara que una sonda `VER-XX` «trae su propio comando y su propia aserción».
+
 ## 4. Umbrales de deriva aplicados
+
+### 4.1 `GeometriaFactory-Api`
 
 Se toman de la fila «Contratos y comportamiento (`VER-XX`)» de `Deriva-Rules.md` §3, sin agregarle dimensiones.
 
@@ -66,7 +162,49 @@ Se toman de la fila «Contratos y comportamiento (`VER-XX`)» de `Deriva-Rules.m
 
 **Un `criterio_aceptacion` en `Falla` es un hallazgo del incremento en curso** y no se resuelve borrando la fila (`Rules-Examples.md` §4.4 y §4.5).
 
+### 4.2 `GeometriaFactory-Domain`
+
+Se toman de la fila «Contratos y comportamiento (`VER-XX`)» de `Deriva-Rules.md` §3, sin agregarle dimensiones.
+
+| Dimensión | Deriva menor, se registra y no bloquea | Deriva mayor, bloquea y exige decisión | Filas |
+| --- | --- | --- | --- |
+| Contratos y comportamiento (`VER-XX`) | Cambia el texto de un mensaje de salida sin cambiar su semántica, o cambia el formato de un registro | El `criterio_aceptacion` falla; cambia el comando de ejecución sin actualizar el contrato; aparecen precondiciones no declaradas; o el caso de uso que la sonda ejercita deja de estar cubierto | `SD-02001`, `SD-02002`, `SD-02003` |
+
+**Toda deriva mayor se resuelve por una de dos vías y nunca por omisión** (`Deriva-Rules.md` §3): se corrige la biblioteca para volver a lo que el contrato dice, o se cambia la especificación con aprobación humana explícita, en cuyo caso la categoría 02 la modifica, el sample se rehace y esta matriz se actualiza. **Un caso de uso no se cambia desde acá.**
+
+**Un `criterio_aceptacion` en `Falla` es un hallazgo del incremento en curso** y no se resuelve borrando la fila (`Rules-Examples.md` §4.4 y §4.5).
+
+### 4.3 `GeometriaFactory-Application`
+
+Se toman de la fila «Contratos y comportamiento (`VER-XX`)» de `Deriva-Rules.md` §3, sin agregarle dimensiones.
+
+| Dimensión | Deriva menor, se registra y no bloquea | Deriva mayor, bloquea y exige decisión | Filas |
+| --- | --- | --- | --- |
+| Contratos y comportamiento (`VER-XX`) | Cambia el texto de un mensaje de salida sin cambiar su semántica, o cambia el formato de un registro | El `criterio_aceptacion` falla; cambia el comando de ejecución sin actualizar el contrato; aparecen precondiciones no declaradas; o el caso de uso que la sonda ejercita deja de estar cubierto | `SD-04001`, `SD-04002`, `SD-04003` |
+
+**Un tramo sin gradación.** El de borradores visibles de `SD-04003` declara deriva mayor ante cualquier diferencia, porque verifica una regla de negocio —`RN-04011`— que no admite tolerancia. Las tres reglas de arquitectura del producto no aparecen acá porque **ninguna se ejerce en esta capa**: `RA-01` y `RA-03` se verifican en la superficie que expone y en la pieza pública, y `RA-02` en el visor.
+
+**Toda deriva mayor se resuelve por una de dos vías y nunca por omisión** (`Deriva-Rules.md` §3): se corrige la biblioteca para volver a lo que el contrato dice, o se cambia la especificación con aprobación humana explícita, en cuyo caso la categoría 02 la modifica, el sample se rehace y esta matriz se actualiza. **Un caso de uso no se cambia desde acá.**
+
+**Un `criterio_aceptacion` en `Falla` es un hallazgo del incremento en curso** y no se resuelve borrando la fila (`Rules-Examples.md` §4.4 y §4.5).
+
+### 4.4 `GeometriaFactory-Infrastructure`
+
+Se toman de la fila «Contratos y comportamiento (`VER-XX`)» de `Deriva-Rules.md` §3, sin agregarle dimensiones.
+
+| Dimensión | Deriva menor, se registra y no bloquea | Deriva mayor, bloquea y exige decisión | Filas |
+| --- | --- | --- | --- |
+| Contratos y comportamiento (`VER-XX`) | Cambia el texto de un mensaje de salida sin cambiar su semántica, o cambia el formato de un registro | El `criterio_aceptacion` falla; cambia el comando de ejecución sin actualizar el contrato; aparecen precondiciones no declaradas; o el caso de uso que la sonda ejercita deja de estar cubierto | `SD-06001`, `SD-06002`, `SD-06003` |
+
+**Varios tramos sin gradación.** Los declaran `SD-06002` —texto original y todo o nada del arrastre— y `SD-06003` —los cuatro modos de falla silenciosos y las dos inspecciones de umbral cero—, porque verifican reglas de negocio y prohibiciones de exposición que no admiten tolerancia. **`RA-03` sí se ejerce en esta capa**, y por eso está adentro de `SD-06003`: es la capa que conoce el valor derivado de una credencial, la clave de firma y la ruta del almacén, y de que no los exponga depende que la regla siga siendo cierta aguas arriba. `RA-01` y `RA-02` no se ejercen acá: la primera se verifica en la superficie que expone y en la pieza pública, y la segunda en el visor.
+
+**Toda deriva mayor se resuelve por una de dos vías y nunca por omisión** (`Deriva-Rules.md` §3): se corrige la biblioteca para volver a lo que el contrato dice, o se cambia la especificación con aprobación humana explícita, en cuyo caso la categoría 02 la modifica, el sample se rehace y esta matriz se actualiza. **Un caso de uso no se cambia desde acá.**
+
+**Un `criterio_aceptacion` en `Falla` es un hallazgo del incremento en curso** y no se resuelve borrando la fila (`Rules-Examples.md` §4.4 y §4.5).
+
 ## 5. Qué no sensa esta matriz
+
+### 5.1 `GeometriaFactory-Api`
 
 Se declara para que no se lea como cobertura completa del proyecto de código:
 
@@ -80,10 +218,48 @@ Se declara para que no se lea como cobertura completa del proyecto de código:
 
 **Las tres sondas no reemplazan a la batería de pruebas.** `CU-00012` §9 lo declara para la colección —«no reemplaza a las pruebas de integración y no se cuenta como cobertura»— y esta matriz no lo cambia: lo que las sondas agregan es una **aserción evaluable** sobre una demostración que hasta ahora se leía a ojo. Es la asimetría que `Deriva-Rules.md` §4 declara en su cuarto momento.
 
+### 5.2 `GeometriaFactory-Domain`
+
+Se declara para que no se lea como cobertura completa del proyecto de código:
+
+| Elemento | Quién lo verifica |
+| --- | --- |
+| Las **42** condiciones del catálogo de `03`, en las dos direcciones | `TC-02023` de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), en la batería de `tests/` |
+| Los **nueve** invariantes ejercidos sin dobles | `TC-02026`, sobre §5 de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) |
+| Cobertura de líneas y de ramas, y tiempo de la batería | El pipeline de `09-Devops`; son los dos gates condicionados `QG-03` y `QG-07` |
+| Las **dieciséis** reglas de negocio, una por una | Los **veintisiete** casos de prueba de `TC-02001` a `TC-02027` |
+
+**Las tres sondas no reemplazan a la batería de pruebas**: la complementan desde afuera, ejercitando la superficie pública tal como la ve un consumidor. Es la asimetría que `Deriva-Rules.md` §4 declara en su cuarto momento.
+
+### 5.3 `GeometriaFactory-Application`
+
+Se declara para que no se lea como cobertura completa del proyecto de código:
+
+| Elemento | Quién lo verifica |
+| --- | --- |
+| El catálogo cerrado de **36** condiciones de `03`, recorrido en las dos direcciones | La batería de `tests/GeometriaFactory.Application.Tests`, por los casos de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) |
+| Las **dieciséis** reglas de negocio y los **nueve** invariantes, uno por uno | Las tablas de regla y de invariante de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) |
+| Cobertura de líneas, de ramas y medición de mutación | El pipeline de `09-Devops`; los umbrales y su carácter están en [`Criterios-Validacion.md`](Criterios-Validacion.md) |
+| Los **once** quality gates de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 | Esa sección, con su carácter bloqueante o condicionado por gate |
+
+**Las tres sondas no reemplazan a la batería de pruebas**: la complementan desde afuera, ejercitando la superficie pública tal como la ve la composición de raíz. Es la asimetría que `Deriva-Rules.md` §4 declara en su cuarto momento.
+
+### 5.4 `GeometriaFactory-Infrastructure`
+
+Se declara para que no se lea como cobertura completa del proyecto de código:
+
+| Elemento | Quién lo verifica |
+| --- | --- |
+| Las **17** condiciones del catálogo de `03`, recorridas en las dos direcciones | La batería de `tests/`, por los casos de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) |
+| Las **siete** reglas conceptuales `RC-06001` a `RC-06007` del modelo | §5 de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) |
+| Los **diez** casos de la batería obligatoria del producto | Los diez primeros de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), que corren en el pipeline. **`SD-06001` no los reemplaza**: sensa que el sample siga produciendo lo que esa batería exige |
+| Cobertura de líneas y de ramas, y el piso propio del validador | El pipeline de `09-Devops`; los umbrales y su carácter están en [`Criterios-Validacion.md`](Criterios-Validacion.md) |
+| Los **catorce** quality gates de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 | Esa sección, con su carácter por gate |
+
+**Las tres sondas no reemplazan a la batería de pruebas**: la complementan desde afuera, ejercitando la superficie pública tal como la ve la composición de raíz de `GeometriaFactory-Api`. Es la asimetría que `Deriva-Rules.md` §4 declara en su cuarto momento.
+
 ## 6. Control de cambios
 
-| Versión | Fecha | Descripción |
+| Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.1 | 2026-08-11 | **Corrección del hallazgo P2-2 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** La §1 citaba `Deriva-Rules.md` §2.3 **elidiendo sin marca** el fragmento «la abre AG-08 en la Fase E», que es justamente el que asigna la titularidad y del que este documento se desvía en el párrafo siguiente. Se restituye la cita **completa**, contrastada carácter por carácter contra la fuente, y se remite explícitamente al párrafo «Quién la abre», que ya declaraba y fundamentaba el desvío hacia AG-10 apoyándose en el segundo momento de sensado de §4. Se actualiza la trazabilidad upstream al [`../10-Examples/README.md`](../10-Examples/README.md) en su **1.1**. **Ninguna fila, umbral, método ni evidencia esperada cambia.** Contrastado contra el texto vivo del `PRODUCT-INTAKE` **1.25**, en particular §16.1 y §18, y no contra lo que otro documento dice de ellas. Sube minor: corrige la forma de una cita, no una afirmación de sensado. |
-| 1.0 | 2026-08-11 | Emisión inicial del proyecto de código **principal** del producto, abierta por AG-10 al cerrar la fase que genera la categoría 10, que es el segundo momento de sensado de `Deriva-Rules.md` §4. Cierra el hueco que [`README.md`](README.md) §3 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 declararon como condicionado y temporal. Declara **tres** filas, `SD-00001` a `SD-00003`, una por cada contrato de verificación de `10-Examples`, con el comando del contrato como método, el campo `evidencia` del sample como evidencia esperada, el umbral de la fila «Contratos y comportamiento» de `Deriva-Rules.md` §3 —con un tramo sin gradación en `SD-00003` por `RN-00011`— y estado `Sin verificar` sin fecha. Declara además qué **no** sensa, para que la matriz no se lea como cobertura completa del proyecto de código. |
-| 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

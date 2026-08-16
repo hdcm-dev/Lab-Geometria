@@ -87,7 +87,7 @@ Lo único que se aproxima a una declaración de entorno es el **archivo de defin
 | Afirmación | Dónde está declarada |
 | --- | --- |
 | No maneja secretos: la contraseña llega **ya derivada** y se guarda como valor de credencial derivada, nulo hasta el primer ingreso | Intake §17.1.P.5 · GeometriaFactory-Domain |
-| El proyecto de código no deriva ni compara credenciales | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md) §2, fila de seguridad |
+| El proyecto de código no deriva ni compara credenciales | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §2, fila de seguridad |
 | Ninguno en el ambiente de pruebas | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
 
 **Consecuencias operativas, que sí son de esta categoría:**
@@ -105,7 +105,7 @@ Lo único que se aproxima a una declaración de entorno es el **archivo de defin
 | Qué queda registrado | Dónde | Fundamento |
 | --- | --- | --- |
 | El OK explícito del Product Owner, con constancia escrita | Informe de cierre de la etapa, en el directorio de avances que el intake §15 declara | Intake §15, regla de delivery 3 |
-| La medición de los dos gates condicionados con su distancia al umbral | El mismo informe | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md) §6 |
+| La medición de los dos gates condicionados con su distancia al umbral | El mismo informe | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §6 |
 | La etiqueta de la etapa | El repositorio | Intake §17.1.P.7 · GeometriaFactory-Domain |
 
 ## 7. Control de cambios

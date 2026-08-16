@@ -72,7 +72,7 @@ La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle c
 | Códigos del contrato | 17 vivos sobre 20 emitidos, 3 retirados | [`Contracts/Contratos-Abstractions.md`](Contratos-Inter-Unidad/Contratos-Abstractions.md) §5.1 |
 | Funciones de la fachada del visor | 6 | [`Visor/Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3 |
 | Escenarios de datos | 8, `E-1` a `E-8` | `PRODUCT-INTAKE` §20 |
-| Casos de la batería del validador | 10 | [`Infrastructure/08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Criterios-Validacion.md) `CV-02` |
+| Casos de la batería del validador | 10 | [`Infrastructure/08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md) `CV-02` |
 | Quality gates | 77 — `Api` 15, `Infrastructure` 14, `Application` 11, `Web` 11, `Contracts` 9, `Visor` 9, `Domain` 8 | `Proyectos/<Nombre>/09-Devops/` y `08-Calidad-Y-Pruebas/` |
 | Sondas de verificación `VER-XX` | 19 | `Proyectos/<Nombre>/10-Examples/ejemplo-XX-*.md`, sección de contrato de verificación |
 

@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8 y §9; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md) 1.0 §3; [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Criterios-Validacion.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §14, §17.1.P.1 · GeometriaFactory-Application, §17.1.P.5 · GeometriaFactory-Application y §17.1.P.8 · GeometriaFactory-Application
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5, §8 y §9; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.0 §3; [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md) 1.0; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §14, §17.1.P.1 · GeometriaFactory-Application, §17.1.P.5 · GeometriaFactory-Application y §17.1.P.8 · GeometriaFactory-Application
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md); `Producto/Pipeline-Producto.md`
 
 ---
@@ -76,7 +76,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
 | Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**», y no «sin errores» | Intake §17.1.P.8 · GeometriaFactory-Application, por remisión a §17.1.P.8 · GeometriaFactory-Domain; `QG-01` |
-| Estático de estructura | **Existe, bloquea, y es la verificación característica de este proyecto de código**: `QG-05` sobre el archivo de proyecto, `QG-06` sobre el catálogo de las **36** condiciones en las dos direcciones, `QG-08` sobre los **once** orquestadores y `QG-09` sobre la proyección de listado | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md) §3 |
+| Estático de estructura | **Existe, bloquea, y es la verificación característica de este proyecto de código**: `QG-05` sobre el archivo de proyecto, `QG-06` sobre el catálogo de las **36** condiciones en las dos direcciones, `QG-08` sobre los **once** orquestadores y `QG-09` sobre la proyección de listado | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | Dinámico | **No aplica acá, y tiene sujeto en otro proyecto de código**: este ensamblado no expone ninguna superficie de red. La que un análisis dinámico ejercitaría es la HTTP, que expone `GeometriaFactory-Api` | Intake §17.1.P.3 · GeometriaFactory-Application: «no aplica hacia afuera del proceso» |
 | Detección de secretos en las confirmaciones | **Recomendada a nivel producto**: este proyecto de código no maneja secretos, pero comparte repositorio con los que sí | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
 
@@ -97,7 +97,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 Esta sección existe porque en este proyecto de código la cadena de suministro clásica —dependencias, inventario, firma— **no es donde está el riesgo**, y decirlo sin ofrecer dónde sí está dejaría el documento vacío.
 
-El riesgo real de esta capa es **que una comprobación de autorización deje de ejercerse en un camino nuevo**, y no llega por una dependencia: llega por un caso de uso que alguien agrega. [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md) §2 lo pone como eje de la prioridad del proyecto de código citando su caso más agudo: `05` §9 declara como riesgo de impacto **muy alto** que aparezca un camino que ejerza una capacidad **sin resolver antes la marca de cambio de contraseña pendiente**. Sus tres propiedades, desde el punto de vista de la seguridad de la construcción:
+El riesgo real de esta capa es **que una comprobación de autorización deje de ejercerse en un camino nuevo**, y no llega por una dependencia: llega por un caso de uso que alguien agrega. [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §2 lo pone como eje de la prioridad del proyecto de código citando su caso más agudo: `05` §9 declara como riesgo de impacto **muy alto** que aparezca un camino que ejerza una capacidad **sin resolver antes la marca de cambio de contraseña pendiente**. Sus tres propiedades, desde el punto de vista de la seguridad de la construcción:
 
 | Propiedad | Por qué importa acá |
 | --- | --- |

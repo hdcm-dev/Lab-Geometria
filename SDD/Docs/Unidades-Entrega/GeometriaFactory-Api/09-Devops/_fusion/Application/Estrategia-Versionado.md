@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §2, §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11 (`PA-06`); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md) 1.0 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7 · GeometriaFactory-Domain, §17.1.P.3 · GeometriaFactory-Application y §17.1.P.7 · GeometriaFactory-Application
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) 1.0 §2, §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11 (`PA-06`); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.0 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7 · GeometriaFactory-Domain, §17.1.P.3 · GeometriaFactory-Application y §17.1.P.7 · GeometriaFactory-Application
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md)
 
 ---
@@ -79,9 +79,9 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 - La fusión exige los gates bloqueantes y los de rechazo en revisión de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1.
 - **Todo pull request que agregue o cambie un caso de uso, un puerto o una condición del catálogo ejecuta las inspecciones correspondientes** —`TC-04028` en las dos direcciones y `TC-04029` sobre el caso de uso tocado—, por la cadencia que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3 declara.
-- No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante, exactamente como lo declara [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md) §4.
+- No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante, exactamente como lo declara [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4.
 
-**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/README.md) §5.
+**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Application/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §5.
 
 ## 5. Canales
 

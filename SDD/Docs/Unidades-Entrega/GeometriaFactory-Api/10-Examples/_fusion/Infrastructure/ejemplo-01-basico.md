@@ -10,7 +10,7 @@
 **Nivel:** Básico
 **Ubicación del código:** `/samples/infrastructure/01-basico/`
 **Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) y [`CU-06002`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md); [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md); [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5, la tabla de derivación por tipo; `PRODUCT-INTAKE` 1.23 §20, los **ocho** escenarios, y §21
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md), que toma `VER-06001` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 

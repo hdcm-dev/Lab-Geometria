@@ -8,8 +8,8 @@
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **once** casos de uso; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1, los **ocho** componentes, y §3.4, los **cuatro** puertos; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Contratos-Abstractions.md); [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta y dos** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Casos-Prueba-Referenciales.md), los **treinta y un** casos de prueba; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md), que toma las tres sondas `VER-XX`; `11-Documentacion` cuando se emita, que referencia estos samples sin duplicar su código
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **once** casos de uso; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) §3.1, los **ocho** componentes, y §3.4, los **cuatro** puertos; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/_fusion/Application/Contratos-Abstractions.md); [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta y dos** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md), los **treinta y un** casos de prueba; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma las tres sondas `VER-XX`; `11-Documentacion` cuando se emita, que referencia estos samples sin duplicar su código
 
 ---
 
@@ -61,7 +61,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 | `VER-04002` | [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | CU-04004, CU-04005, CU-04006, CU-04009; US-04010 a US-04019, US-04026 | `dotnet run --project samples/application/02-intermedio` | No verificado — sin código | — |
 | `VER-04003` | [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | CU-04002, CU-04007, CU-04008, CU-04011; US-04004, US-04005, US-04006, US-04008, US-04020 a US-04025, US-04027, US-04029, US-04031 | `dotnet run --project samples/application/03-avanzado` | No verificado — sin código | — |
 
-**Tres sondas, ninguna redundante**: los conjuntos de casos de uso que verifican son disjuntos, y los de historias también. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
+**Tres sondas, ninguna redundante**: los conjuntos de casos de uso que verifican son disjuntos, y los de historias también. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
 
 **Qué queda fuera de las tres sondas, y por qué no es un hueco.** El catálogo cerrado de **36** condiciones de la categoría 03 recorrido en las dos direcciones, la cobertura de líneas y de ramas, y la medición de mutación no los verifica ningún sample: los verifica la batería de `tests/GeometriaFactory.Application.Tests` y el pipeline de `09-Devops`. Un sample que los duplicara sería el anti-patrón de `Rules-Examples.md` §4.5, «samples que duplican el `/src` sin agregar valor demostrativo».
 
@@ -96,7 +96,7 @@ El argumento que valió para `Domain` y `Contracts` es doble, y hay que comproba
 | Término del argumento | ¿Se cumple en `GeometriaFactory-Application`? | Comprobación |
 | --- | --- | --- |
 | **Hay una segunda audiencia declarada por la guía de la categoría** | **Sí** | `Rules-Examples.md` §0.1 declara la arista B con su destinatario: «al equipo que construye, y a los agentes de IA que codifican contra la especificación». El motivo que §16.1 da —la ausencia de integradores externos— alcanza a la **arista A** y no a la B |
-| **Sin categoría 10 el proyecto de código queda sin ninguna sonda de deriva** | **Sí** | `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5): no hay Fase B2 ni línea de base visual. Y [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/README.md) §3 omitió la matriz de sensado por las **dos** condiciones juntas, con la frase de cierre «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`» |
+| **Sin categoría 10 el proyecto de código queda sin ninguna sonda de deriva** | **Sí** | `requiere_maqueta` es **false** (`PRODUCT-MANIFEST` §5): no hay Fase B2 ni línea de base visual. Y [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §3 omitió la matriz de sensado por las **dos** condiciones juntas, con la frase de cierre «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX`» |
 
 **Los dos términos se cumplen, y por eso la conclusión es la misma que para `Domain` y `Contracts`.** `Deriva-Rules.md` §2.4 describe exactamente este caso —«un proyecto de código con `requiere_maqueta` en false… antes de esta extensión, esos proyectos de código quedaban sin ningún instrumento de sensado»— y §2.3 obliga a emitir la matriz cuando hay categoría 10.
 
@@ -114,7 +114,7 @@ Es decir: §16.1 **adoptó** la conclusión de esta sección y con los mismos do
 2. Copiar la cabecera de §4.1 y las **diez** secciones de §4.2 de esas reglas.
 3. Declarar el contrato de verificación en la §9, con un `VER-XX` no usado en este proyecto de código, y criterio de aceptación evaluable.
 4. Agregar la fila a las tablas de §2 y §3 de este README.
-5. Dar de alta la sonda en [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md), en `Sin verificar`, según `Deriva-Rules.md` §4.
+5. Dar de alta la sonda en [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en `Sin verificar`, según `Deriva-Rules.md` §4.
 
 ## 8. Vínculo con 05 y con 11
 

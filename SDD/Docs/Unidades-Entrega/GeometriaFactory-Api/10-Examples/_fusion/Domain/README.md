@@ -8,8 +8,8 @@
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **trece** casos de uso; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md), las **trece** operaciones; [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **veintisiete** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md) 1.0, los **veintisiete** casos de prueba; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md), que toma las tres sondas `VER-XX`; `11-Documentacion` cuando se emita, que referencia estos samples sin duplicar su código
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **trece** casos de uso; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md), las **trece** operaciones; [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **veintisiete** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0, los **veintisiete** casos de prueba; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma las tres sondas `VER-XX`; `11-Documentacion` cuando se emita, que referencia estos samples sin duplicar su código
 
 ---
 
@@ -46,7 +46,7 @@ Esta emisión es la **pasada de diseño** de `Rules-Examples.md` §0.2. Los tres
 
 **Cobertura de los trece casos de uso.** Los tres samples cubren **trece de trece**: `CU-02001` a `CU-02013`, sin repeticiones y sin huecos. Verificación uno por uno: `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012` en el 01; `CU-02005`, `CU-02006`, `CU-02007` y `CU-02008` en el 02; `CU-02009`, `CU-02010`, `CU-02011` y `CU-02013` en el 03.
 
-**Cobertura de los ocho escenarios reales.** El sample 02 usa **seis** de los ocho del `PRODUCT-INTAKE` §20 —`E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`—, transcriptos sin modificación. Los dos que no aparecen son `E-2` y `E-7`: `E-2` es el mismo ortoedro con volumen declarado incorrecto que `E-1` ya trae dentro, y su valor propio está en las dos trampas de formato del texto —clave `Tapas` y comas finales—, que son de la lectura del texto y no del dominio, que adopta la interpretación ya hecha; `E-7` ejercita los **seis** tipos dibujables, que es materia del proyecto de código que dibuja. Los dos sí están cubiertos por casos de prueba del proyecto de código: `E-7` en `TC-02013` y `E-2` en `TC-02017` de [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md). **Ningún escenario se sustituye por datos sintéticos.**
+**Cobertura de los ocho escenarios reales.** El sample 02 usa **seis** de los ocho del `PRODUCT-INTAKE` §20 —`E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`—, transcriptos sin modificación. Los dos que no aparecen son `E-2` y `E-7`: `E-2` es el mismo ortoedro con volumen declarado incorrecto que `E-1` ya trae dentro, y su valor propio está en las dos trampas de formato del texto —clave `Tapas` y comas finales—, que son de la lectura del texto y no del dominio, que adopta la interpretación ya hecha; `E-7` ejercita los **seis** tipos dibujables, que es materia del proyecto de código que dibuja. Los dos sí están cubiertos por casos de prueba del proyecto de código: `E-7` en `TC-02013` y `E-2` en `TC-02017` de [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md). **Ningún escenario se sustituye por datos sintéticos.**
 
 ## 3. Contratos de verificación
 
@@ -58,7 +58,7 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 | `VER-02002` | [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | CU-02005, CU-02006, CU-02007, CU-02008; US-02009 a US-02016 | `dotnet run --project samples/domain/02-intermedio` | No verificado — sin código | — |
 | `VER-02003` | [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | CU-02009, CU-02010, CU-02011, CU-02013; US-02018 a US-02023, US-02026 | `dotnet run --project samples/domain/03-avanzado` | No verificado — sin código | — |
 
-**Tres sondas, ninguna redundante**: los conjuntos de casos de uso que verifican son disjuntos. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
+**Tres sondas, ninguna redundante**: los conjuntos de casos de uso que verifican son disjuntos. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
 
 **Qué queda fuera de las tres sondas, y por qué no es un hueco.** Las **42** condiciones del catálogo de `03`, los **nueve** invariantes ejercidos sin dobles y los umbrales de cobertura y de tiempo de la batería no los verifica ningún sample: los verifica la batería de `tests/GeometriaFactory.Domain.Tests` por `TC-02023`, `TC-02026` y el pipeline. Un sample que los duplicara sería el anti-patrón de `Rules-Examples.md` §4.5, «samples que duplican el `/src` sin agregar valor demostrativo».
 
@@ -87,7 +87,7 @@ Dos desvíos, los dos declarados acá y ninguno de nomenclatura por dominio:
 
 - El motivo que §16.1 da —la ausencia de integradores externos— alcanza a la **arista A** de `Rules-Examples.md` §0.1. La **arista B** tiene otro destinatario, declarado en esa misma sección: «al equipo que construye, y a los agentes de IA que codifican contra la especificación». Ese destinatario existe en este proyecto de código.
 - `Deriva-Rules.md` §2.4 declara que los proyectos de código con `requiere_maqueta` en false «quedaban sin ningún instrumento de sensado» antes de la extensión `VER-XX`, y §6 exige que ninguno con categoría 10 quede sin matriz. `GeometriaFactory-Domain` es exactamente ese caso.
-- Los propios artefactos de `08` declararon la omisión de su matriz como **condicionada y temporal**, no como definitiva: «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX` y esta fila del README se retira» ([`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/README.md) §3).
+- Los propios artefactos de `08` declararon la omisión de su matriz como **condicionada y temporal**, no como definitiva: «cuando se emita la categoría 10, la matriz se abre con sus filas `VER-XX` y esta fila del README se retira» ([`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §3).
 
 **El punto que quedaba abierto está cerrado, y se conserva con su desenlace.** Este README declaraba como abierta la consolidación de §16.1 y la elevaba al Product Owner. **La consolidación se hizo**: el `PRODUCT-INTAKE` **1.23** reescribió esa fila el mismo 2026-08-11, y el **1.25** vigente la deja así —abierta en el documento y leída, no citada a través de otro artefacto—:
 
@@ -101,7 +101,7 @@ De modo que **la fuente vinculante de la estructura de `/samples/domain/` es §1
 2. Copiar la estructura de las **diez** secciones de `Rules-Examples.md` §4.2 y la cabecera de §4.1.
 3. Declarar el contrato de verificación en la §9, con un `VER-XX` no usado en este proyecto de código, y criterio de aceptación evaluable.
 4. Agregar la fila a las tablas de §2 y §3 de este README.
-5. Dar de alta la sonda en [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md), en `Sin verificar`, según `Deriva-Rules.md` §4.
+5. Dar de alta la sonda en [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en `Sin verificar`, según `Deriva-Rules.md` §4.
 
 ## 7. Vínculo con 05 y con 11
 

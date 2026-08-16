@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §5 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Definition-Of-Done.md) 1.1 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7 · GeometriaFactory-Domain, §17.1.P.4 · GeometriaFactory-Infrastructure y §17.1.P.7 · GeometriaFactory-Infrastructure
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) §5 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md); [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.1.P.7 · GeometriaFactory-Domain, §17.1.P.4 · GeometriaFactory-Infrastructure y §17.1.P.7 · GeometriaFactory-Infrastructure
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md)
 
 ---
@@ -95,7 +95,7 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 - **Ninguna fusión edita una transformación ya fusionada.** Se rechaza en revisión, y su fundamento es de la fuente y no de esta categoría.
 - No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante.
 
-**Las etapas que este proyecto de código toca son cinco** —`a`, `c`, `d`, `e` y `f`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/README.md) §5.
+**Las etapas que este proyecto de código toca son cinco** —`a`, `c`, `d`, `e` y `f`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/_fusion/Infrastructure/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §5.
 
 ## 6. Canales y política de cambios incompatibles
 

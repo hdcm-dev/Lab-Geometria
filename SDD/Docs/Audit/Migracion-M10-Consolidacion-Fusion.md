@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Migracion-M10-Consolidacion-Fusion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Fecha:** 2026-08-16
 **Regla:** `Migracion-Rules.md` §4.3.2
 **Cierra:** el hallazgo **M-10** de [`Informe-Migracion-6.0-a-8.6.md`](Informe-Migracion-6.0-a-8.6.md) 5.0
@@ -168,6 +168,31 @@ Los 61 enlaces del primer grupo quedaron reconectados, con su registro en
 `Migracion-M10-Registro-Reconexion.json`. **El grupo `Estrategia-Testing` queda como está** —ya
 consolidado— y `08-Calidad-Y-Pruebas` se termina como categoría, que es como se hará el resto.
 
+
+## 5.2 La reconexión se hace por resolución de destino, no por sustitución de patrón — aprendido en la primera categoría
+
+**Al terminar `08-Calidad-Y-Pruebas` intenté reconectar los enlaces con una sustitución de patrón
+sobre todo el árbol, y rompí 181 enlaces donde había 96.**
+
+El patrón parecía seguro: reescribir `../../../08-Calidad-Y-Pruebas/_fusion/<capa>/<doc>` a
+`../08-Calidad-Y-Pruebas/<doc>`. **Lo que no consideré es que la profundidad correcta depende de dónde
+está el documento que cita**, y el mismo texto de enlace es correcto desde una categoría e incorrecto
+desde dentro de un `_fusion/`. La sustitución alcanzó documentos de `GeometriaFactory-Web` que no
+tenían nada que ver con la consolidación y les rompió enlaces que estaban bien.
+
+Los archivos dañados se restauraron desde el commit anterior, y la reconexión se rehízo con otro
+método: **para cada enlace que no resuelve, buscar el destino real por nombre de archivo, acotado a la
+unidad de entrega del documento que cita o del destino roto, y calcular la ruta con `relpath`**. No
+reescribe ningún enlace que funcione, no depende de la profundidad y no puede alcanzar a un documento
+ajeno. Resolvió **92 de 94**; los dos restantes son los del informe de auditoría anterior a la
+migración, que citan por nombre ambiguo y son registro histórico.
+
+**Es la misma lección que la migración ya había aprendido dos veces, y la volví a cometer.** En M4 fue
+la etiqueta y el destino tomando desplazamientos distintos; en M2, el pase de citas reescribiendo mis
+propios encabezados. Las tres veces el defecto es el mismo: **una sustitución de patrón no sabe dónde
+está parada**. La regla que queda escrita para el resto de las categorías es que la reconexión se hace
+**resolviendo destinos, y sólo sobre los enlaces que ya no resuelven**.
+
 ## 6. Lo que este análisis no decide
 
 - **No consolida nada.** `Migracion-Rules.md` §4.3.2 reserva la decisión al humano, grupo por grupo,
@@ -187,3 +212,4 @@ consolidado— y `08-Calidad-Y-Pruebas` se termina como categoría, que es como 
 | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial. Inventario de los 67 grupos de consolidación con su medición de solapamiento —**5,9 % global**, del 1 % al 34 %—, que **corrige la hipótesis de partida**: no son duplicados, el 94 % del contenido es propio de una capa y consolidar es una unión con atribución. Cuatro salidas con su criterio, clasificación propuesta por categoría, orden de ejecución y lo que el análisis no decide. **Ningún documento fue consolidado.** |
 | 1.1 | 2026-08-16 | **§5.1 nueva, aprendida al consolidar el primer grupo.** La consolidación de `Estrategia-Testing.md` rompió **61 enlaces** de los documentos que seguían estacionados en las mismas carpetas `_fusion/`, que lo citaban como vecino. Es estructural y se repetiría en cada grupo, hasta nueve veces por carpeta. **La unidad de trabajo pasa a ser la categoría completa**, no el documento: se consolidan sus N documentos en una pasada y recién entonces se retira su `_fusion/`, con lo que cada carpeta se reconecta una vez y la categoría nunca queda en un estado intermedio incoherente. |
+| 1.2 | 2026-08-16 | **§5.2 nueva, aprendida al cerrar la primera categoría.** Una sustitución de patrón para reconectar los enlaces **rompió 181 donde había 96**, alcanzando documentos de la otra unidad de entrega: la profundidad correcta de un enlace depende de dónde está el documento que cita, y un patrón no lo sabe. Los dañados se restauraron desde el commit y la reconexión se rehízo **resolviendo destinos por nombre, acotada a la unidad de entrega y sólo sobre enlaces que ya no resuelven**: 92 de 94. Es la tercera vez que la migración tropieza con lo mismo —M4 con la etiqueta y el destino, M2 con los encabezados propios—, y queda como regla para las ocho categorías restantes. |
