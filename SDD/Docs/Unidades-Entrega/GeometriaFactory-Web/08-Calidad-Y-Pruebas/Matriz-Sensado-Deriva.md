@@ -1,30 +1,29 @@
 # Matriz de sensado de deriva — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Producto:** Fábrica de Geometría
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Matriz-Sensado-Deriva.md
-**Versión:** 1.5
-**Estado:** Aprobado
-**Fecha:** 2026-08-11
-**Autor:** Maquetador de validación visual (AG-03M); alta de la sonda `VER-XX` por Developer Advocate / Sample Engineer Senior (AG-10)
-**Variante:** Calidad y pruebas
-**Trazabilidad upstream:** `../03-UX-UI-DX/Linea-Base-Visual.md` íntegra —`SUP-10001` a `SUP-10011`, `CMP-10001` a `CMP-10073`, `EST-10001` a `EST-10074`, `NAV-10001` a `NAV-10024`—; `../03-UX-UI-DX/Contrato-Datos-Maqueta.md` —`DM-10001` a `DM-10029`, §3 y §6—; `../03-UX-UI-DX/Bitacora-Validacion-Maqueta.md`; `SDD/Maquetas/GeometriaFactory-Web/`; `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md` §3.2, §5.5 y §6; `Deriva-Rules.md` §2.3, §3 y §4
-**Trazabilidad upstream de la sonda `VER-XX`:** [`../10-Examples/README.md`](../10-Examples/README.md) 1.1 §3 y el contrato de verificación de [`../10-Examples/ejemplo-01-datos-seed.md`](../10-Examples/ejemplo-01-datos-seed.md) 1.1 §9
-**Trazabilidad downstream:** el resto de la categoría `08-Calidad-Y-Pruebas` cuando se genere en la Fase E, que incorpora esta matriz a la estrategia de testing; el resumen ejecutivo del handoff, que la entrega con el estado de cada fila
+**Versión:** 2.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-16
+**`tipo_unidad_entrega` (D8):** `web-monolith`
+**Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
+**Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
 
 ---
 
-## Tabla de contenido
+## 0. Cómo leer este documento
 
-- [1. Qué es esta matriz y quién la mueve](#1-qué-es-esta-matriz-y-quién-la-mueve)
-- [2. Estado de la categoría 08 al emitirse este documento](#2-estado-de-la-categoría-08-al-emitirse-este-documento)
-- [3. Cómo se agrupan las sondas](#3-cómo-se-agrupan-las-sondas)
-- [4. La matriz](#4-la-matriz)
-- [5. Umbrales de deriva aplicados](#5-umbrales-de-deriva-aplicados)
-- [6. Control de cambios](#6-control-de-cambios)
+**La unidad de entrega tiene un solo documento de esta clase**, y cada sección lleva **una subsección
+por proyecto de código**, con su texto **transpuesto sin reescritura**.
+
+**Las dos secciones de cada apartado son la del portal y la del bundle del visor.** **3 secciones existen sólo en `GeometriaFactory-Visor`** —«Qué es esta matriz y por qué existe una acá», «Contra qué se sensa, si este proyecto de código no tuvo maqueta propia», «Correspondencia con la matriz de `GeometriaFactory-Web`»—, y son las que el portal no podía declarar porque describen el componente empaquetado que viaja adentro.
 
 ---
 
 ## 1. Qué es esta matriz y quién la mueve
+
+### 1.1 `GeometriaFactory-Web`
 
 Convierte la línea de base aprobada en una lista de comprobaciones que el humano o un agente pueden correr en cualquier momento de la codificación. La emite AG-03M al cerrar la Fase B2, con **todas las filas en `Sin verificar`**, porque todavía no hay sistema construido contra el cual verificarlas.
 
@@ -42,11 +41,15 @@ Los momentos en que se mueve, de `Deriva-Rules.md` §4:
 
 ## 2. Estado de la categoría 08 al emitirse este documento
 
+### 2.1 `GeometriaFactory-Web`
+
 La categoría `08-Calidad-Y-Pruebas` de este proyecto de código **no se generó todavía**: se genera en la Fase E. Esta carpeta existe únicamente porque `Deriva-Rules.md` §2.3 fija acá la ubicación de la matriz y la Fase B2 la emite al cerrar.
 
 **Este archivo es el único artefacto de la categoría emitido por la Fase B2.** No se anticipó ningún otro documento de 08 —ni estrategia de testing, ni casos de prueba, ni plan de automatización—, y su ausencia no es una omisión de esta fase. Cuando AG-08 genere la categoría, incorpora esta matriz en lugar de crear una nueva.
 
 ## 3. Cómo se agrupan las sondas
+
+### 3.1 `GeometriaFactory-Web`
 
 La línea de base tiene doscientos once elementos identificados —once superficies, setenta y tres componentes, setenta y cuatro estados, veinticuatro rutas y veintinueve campos—. Los identificadores `SD-XX` son de **dos dígitos** como el resto de los identificadores del template, de modo que una fila por elemento no cabe y, sobre todo, no serviría: una matriz de doscientas filas se abandona en dos sprints, que es el anti-patrón que `Deriva-Rules.md` §7 nombra.
 
@@ -62,6 +65,8 @@ La agrupación aplicada, y su criterio:
 Cada fila declara en su columna de elemento **todos los identificadores que cubre**. Ningún identificador de la línea de base queda fuera de la matriz: la cobertura se verifica sumando las columnas de elemento, expandiendo los rangos.
 
 ## 4. La matriz
+
+### 4.1 `GeometriaFactory-Web`
 
 | ID | Elemento de línea de base | Afirmación a verificar | Método de verificación | Evidencia esperada | Umbral de deriva | Estado | Última verificación |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -153,7 +158,40 @@ Cada fila declara en su columna de elemento **todos los identificadores que cubr
 
 **Y una segunda ronda de lo mismo, que no es una capacidad nueva sino un comportamiento nuevo sobre algo ya validado.** La regla **`RN-10016`** —habilitar una cuenta produce su contraseña provisoria y **la superficie la muestra una sola vez** para que el administrador la comunique— entró con el `PRODUCT-INTAKE` **1.13**, también posterior a la aprobación de la maqueta, y `Wireframes-Panel-De-Cuentas.md` la absorbió en su **1.5**. La diferencia con F-26 importa acá: **habilitar es una de las cuatro operaciones que la maqueta sí validó**, de modo que **su sonda ya existe**. `SD-10009` sensa el panel de cuentas tal como se aprobó el 2026-08-09 —sin ninguna exhibición de provisoria, que la maqueta no tiene en ninguna parte— y por lo tanto **daría conforme sobre un panel que todavía no cumple RN-10016**. No se lo amplía por decreto y no se le inventa una sonda anclada en un identificador que la línea de base no contiene: se **acota** el alcance de `SD-10009`, se declara el hueco acá y en `../03-UX-UI-DX/Linea-Base-Visual.md` §6.1, y la sonda de la provisoria nace con la misma **iteración 5** de maqueta. Hasta entonces, lo que gobierna la construcción de ese comportamiento son `CU-10004`, `US-10009` y `Wireframes-Panel-De-Cuentas.md` en su versión vigente.
 
+### 4.2 `GeometriaFactory-Visor`
+
+| ID | Elemento del contrato | Afirmación a verificar | Método de verificación | Evidencia esperada | Umbral de deriva | Estado | Última verificación |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `SD-12001` | Las **seis** funciones de `Definicion-Contrato-De-Fachada.md` §4 | La superficie expone exactamente **6** funciones, con los nombres que el intake §17.2.P.3 · GeometriaFactory-Visor fija, bajo **1** nombre propio en el objeto global y **0** identificadores globales sueltos | Test automatizado: `TC-12018`, inspección del **bundle generado** | `[EV-XX \| ejecucion \| inspección del bundle generado \| recuento de funciones e identificadores globales \| fecha]` | **Menor**: cambia un nombre interno no expuesto. **Mayor**: falta una función, aparece una séptima, cambia un nombre expuesto o aparece un identificador global suelto | `Sin verificar` | — |
+| `SD-12002` | Garantía `G-1` · Cero red | El archivo de guion origina exactamente **0** peticiones, medidas **con los dos movimientos prendidos y sostenidos** y durante los gestos de rotar y acercar; y hay **0** ocurrencias de las tres formas de petición en el código fuente **y en el bundle generado** | Test automatizado: `TC-12016` y `TC-12018` | `[EV-XX \| ejecucion \| conteo de peticiones en la pestaña de red con los dos movimientos prendidos \| recuento \| fecha]` | **Mayor, sin gradación.** El umbral es exactamente 0. Una medición hecha **sin la condición** no cuenta como medición | `Sin verificar` | — |
+| `SD-12003` | Garantía `G-2` · Cero persistencia | **0** claves escritas en el almacenamiento del navegador por la fachada, con cualquier estado de los movimientos, y recargar la página **no repone** la preferencia. La exclusión de claves ajenas se hace **por espacio de nombres declarado y no por prefijo** | Test automatizado: `TC-12017` | `[EV-XX \| ejecucion \| recuento de claves del almacenamiento \| umbral 0 \| fecha]` | **Mayor, sin gradación** | `Sin verificar` | — |
+| `SD-12004` | Garantía `G-3` · Sin configuración propia | Todo lo que la instancia necesita llega por parámetro; la fachada **no consulta la preferencia de movimiento reducido del sistema** y **no conserva la elección** | Test automatizado: `TC-12003`; más inspección del bundle | `[EV-XX \| ejecucion \| inspección del bundle generado \| ausencia de consulta de preferencia \| fecha]` | **Mayor**: la fachada lee configuración por su cuenta. Es lo que hace que la prueba pueda prender los movimientos aunque el entorno declare la preferencia | `Sin verificar` | — |
+| `SD-12005` | Garantía `G-4` · Aislamiento entre instancias | Dos instancias vivas **no comparten** escena, ni selección, ni disposición; un identificador liberado no se reutiliza y produce `INSTANCIA_DESCONOCIDA` | Test automatizado: `TC-12001`, `TC-12004` | `[EV-XX \| ejecucion \| dos instancias en la misma página \| independencia verificada \| fecha]` | **Mayor**: dos instancias se afectan, o un identificador liberado vuelve a resolver | `Sin verificar` | — |
+| `SD-12006` | Garantía `G-5` · Sin fallo silencioso | **100 %** de las piezas no dibujadas quedan enumeradas con su índice y su código, y **0** desaparecen sin registro. Una pieza con dimensión en `0.00` **se dibuja** y no figura entre las no dibujadas | Test automatizado: `TC-12007`, con los escenarios `E-5`, `E-8` y `E-6` del intake §20 | `[EV-XX \| ejecucion \| caso de prueba de los escenarios E-5, E-8 y E-6 \| resultado de dibujo \| fecha]` | **Mayor, sin gradación.** Es el defecto original que `NB-00006` viene a cerrar, y perder la figura de `E-6` vaciaría la garantía | `Sin verificar` | — |
+| `SD-12007` | Garantía `G-6` · Determinismo, y §5.4 | Dos procesados del mismo texto producen la **misma disposición**, comparable pieza por pieza; **se compara posición, no orientación**, y ningún movimiento la altera | Test automatizado: `TC-12009`, con el escenario `E-1` en las cuatro combinaciones de movimiento | `[EV-XX \| ejecucion \| doble procesado del escenario E-1 \| comparación de posiciones \| fecha]` | **Mayor, sin gradación**: la disposición cambia entre dos procesados del mismo texto | `Sin verificar` | — |
+| `SD-12008` | Garantía `G-7` · Terminación controlada | Ninguna condición deja la instancia en estado indeterminado: o la operación surte efecto completo, o la instancia queda como estaba y la condición se informa por su código | Test automatizado: `TC-12002`, `TC-12010`, `TC-12011`, `TC-12012`, `TC-12013` | `[EV-XX \| ejecucion \| casos de condición del catálogo \| estado de la instancia tras cada uno \| fecha]` | **Mayor**: una condición deja la instancia a medio modificar | `Sin verificar` | — |
+| `SD-12009` | Los **siete** códigos de `Definicion-Contrato-De-Fachada.md` §6, en sus **ocho** cursos | El bundle informa exactamente los siete códigos del contrato y **ninguno más**; `INSTANCIA_DESCONOCIDA` aparece en **cinco** funciones y sigue siendo **un solo código**; `ELEMENTO_DE_DIBUJO_INVALIDO` se presenta en sus **dos cursos** y sigue siendo un solo código | Test automatizado: `TC-12021`, comparación en las dos direcciones | `[EV-XX \| ejecucion \| comparación del conjunto emitido contra el contrato \| 7 de 7 y 0 fuera \| fecha]` | **Mayor**: aparece un código que no está en la lista cerrada de siete, o un curso nuevo se acuña como código | `Sin verificar` | — |
+| `SD-12010` | §5.3 · Tipos dibujables y lectura de dimensiones | Se dibujan los **seis** tipos —tres volumétricos y tres planos—; las claves `Tapas` y `Bases` se aceptan como sinónimos; el ortoedro de `E-7` se dibuja con ancho 6, profundidad 4 y altura 8; y **el cero es una dimensión legible** | Test automatizado: `TC-12005`, `TC-12006`, `TC-12007`, con los escenarios `E-7`, `E-2`, `E-3`, `E-4` y `E-6` | `[EV-XX \| ejecucion \| caso de prueba de los escenarios E-7 y E-2 \| recuento de piezas dibujadas por tipo \| fecha]` | **Mayor**: falta un tipo dibujable, o un ortoedro con la clave `Tapas` deja de dibujarse. Es el defecto que hoy tiene el visualizador previo | `Sin verificar` | — |
+| `SD-12011` | §5.5 · Gobierno del movimiento automático | Los **dos** movimientos se prenden y se apagan por separado sobre una instancia viva, **sin reconstruirla** y sin perder la selección; el no nombrado conserva su estado; al apagar el giro las piezas **vuelven a su orientación de partida**; los dos se detienen mientras la persona arrastra y mientras la superficie no está visible, **sin cambiar el estado gobernado**; y el estado **sobrevive a la carga de otro texto** | Test automatizado: `TC-12013`, `TC-12014`, `TC-12003` | `[EV-XX \| ejecucion \| casos de prueba de CU-12007 \| estado efectivo de los dos movimientos \| fecha]` | **Menor**: cambia la velocidad de un movimiento. **Mayor**: el cambio reconstruye la instancia, se pierde la selección, o apagar el giro deja las piezas donde el tiempo las encontró | `Sin verificar` | — |
+| `SD-12012` | Las dos puertas técnicas `PT-02` y `PT-03` del intake §15 y §17.2.P.8 · GeometriaFactory-Visor | El motor de dibujo queda **dentro** del bundle y la página funciona sin acceso a redes externas; el bundle carga en una página del anfitrión, la creación arma la escena, la carga de `E-1` dibuja **las tres figuras incluido el ortoedro**, **diez** recorridos de ida y vuelta no degradan, y el árbol y la escena **se sincronizan por índice** | Test automatizado: `TC-12019` y `TC-12020`, con los recorridos medidos **con los dos movimientos prendidos** | `[EV-XX \| ejecucion \| medición de PT-02 y PT-03 \| los seis tramos, uno por uno \| fecha]` | **Mayor, sin gradación y sin excepción.** Una puerta que no pasa **detiene la planificación de la etapa `g`** y no se arrastra como deuda | `Sin verificar` | — |
+
+| `SD-12013` | `VER-12001` de [`../10-Examples/ejemplo-01-basico.md`](../10-Examples/ejemplo-01-basico.md) §9 | El recorrido mínimo de la página integradora cierra sin backend: se crea la instancia sin dibujar nada, el texto de `E-1` produce **3** piezas dibujadas y **0** no dibujadas —`Cilindro`, `Cubo` y `Ortoedro`, uno de cada—, dos procesados dan la **misma disposición**, el identificador liberado produce `INSTANCIA_DESCONOCIDA`, y las peticiones del archivo de guion son **0** | El comando del contrato: `bash scripts/build-visor.sh && npm --prefix samples/visor/01-basico run verify` | Campo `evidencia` de `VER-12001`, con su fecha | **Menor**: cambia el texto de una línea de salida sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, cambia el comando sin actualizar el contrato, aparecen precondiciones no declaradas, o `CU-12001`, `CU-12002` o `CU-12005` dejan de estar cubiertos | `Sin verificar` | — |
+| `SD-12014` | `VER-12002` de [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio.md) §9 | La lectura del dato del alumno y la selección por índice se sostienen: `E-7` da **6** piezas con **3** tipos volumétricos y **3** planos y el ortoedro con ancho 6, profundidad 4 y altura 8; las claves `Tapas` y `Bases` son sinónimos; `E-8` enumera la pieza del índice **1** con `DIMENSION_NO_LEGIBLE` y campo `Largo`; `E-6` **se dibuja**; y `ELEMENTO_DE_DIBUJO_INVALIDO` en su curso **C-2** deja la instancia viva | El comando del contrato: `bash scripts/build-visor.sh && npm --prefix samples/visor/02-intermedio run verify` | Campo `evidencia` de `VER-12002`, con su fecha | **Menor**: cambia el texto de una línea sin cambiar su semántica. **Mayor**: el `criterio_aceptacion` falla, la figura de `E-6` deja de dibujarse, un escenario se sustituye o se reformatea, o `CU-12002`, `CU-12003` o `CU-12004` dejan de estar cubiertos | `Sin verificar` | — |
+| `SD-12015` | `VER-12003` de [`../10-Examples/ejemplo-03-avanzado.md`](../10-Examples/ejemplo-03-avanzado.md) §9 | El contrato entero se ejerce sin backend: **6 de 6** funciones, **6 de 6** propiedades transversales y **2 de 2** puertas técnicas; el archivo de guion expone **6** funciones bajo **1** nombre global con **0** globales sueltas y **0** ocurrencias de las tres formas de petición en la fuente **y** en el bundle generado; las peticiones medidas **con los dos movimientos prendidos y sostenidos** son **0**; las claves escritas son **0**; y los códigos son **7 de 7** con **0** acuñados aguas abajo | El comando del contrato: `bash scripts/build-visor.sh && npm --prefix samples/visor/03-avanzado run verify` | Campo `evidencia` de `VER-12003`, con su fecha | **Mayor, sin gradación** en los tramos de umbral cero y en las dos puertas técnicas: son las mismas propiedades que `SD-12002`, `SD-12003` y `SD-12012` sensan desde el contrato. **Mayor** además si el `criterio_aceptacion` falla, si una corrida se hace **sin** las condiciones de medición declaradas en las precondiciones del contrato, o si `CU-12006` o `CU-12007` dejan de estar cubiertos | `Sin verificar` | — |
+
+**Cobertura declarada.** Las **doce** primeras filas cubren: las **seis** funciones (`SD-12001`), las **siete** garantías (`SD-12002` a `SD-12008`, una por garantía), los **siete** códigos en sus **ocho** cursos (`SD-12009`), los **seis** tipos dibujables y la lectura de dimensiones (`SD-12010`), las **ocho** reglas de gobierno del movimiento (`SD-12011`) y las **dos** puertas técnicas (`SD-12012`). Las **seis** propiedades transversales de `02` §6 quedan alcanzadas dentro de `SD-12002`, `SD-12003`, `SD-12006`, `SD-12007`, `SD-12012` y —la de ejercitarse sin backend— dentro de `SD-12012` y de `TC-12015`, que `SD-12001` cita como método.
+
+**Tres filas `VER-XX`, dadas de alta el 2026-08-11** al emitirse `10-Examples`. Son `SD-12013`, `SD-12014` y `SD-12015`, una por cada contrato de verificación de las tres partes del sample **S-1**, con el comando del contrato como método y sin ningún desvío. **Sin contratos huérfanos ni filas sin contrato que las respalde**, que es lo que exige `Deriva-Rules.md` §6: la correspondencia es uno a uno con `VER-12001`, `VER-12002` y `VER-12003` de `10-Examples`.
+
+**Por qué las tres se solapan con filas anteriores sin duplicarlas.** `SD-12001` a `SD-12012` sensan **elementos del contrato** —las seis funciones, las siete garantías, los siete códigos— por el método que la categoría 08 les resolvió, que son casos de prueba de la batería. `SD-12013` a `SD-12015` sensan **el sample**, con su propio comando y su propia aserción, que es lo que `Deriva-Rules.md` §2.4 declara como carácter distintivo de la clase. Cuando las dos miran lo mismo, la deriva mayor es la misma y el umbral no se contradice: se declaró igual en las dos.
+
+**Total: quince filas.** Doce ancladas en el contrato de la fachada y tres en los contratos de verificación de `10-Examples`. **Ninguna cita un identificador de línea de base visual.**
+
+**Esta matriz no está vacía**, que es la condición que `Deriva-Rules.md` §2.3 exige: una matriz sin filas sería un proyecto de código sin instrumento de sensado.
+
 ## 5. Umbrales de deriva aplicados
+
+### 5.1 `GeometriaFactory-Web`
 
 Los umbrales por fila se derivan de la tabla de `Deriva-Rules.md` §3, sin agregarle dimensiones:
 
@@ -177,13 +215,85 @@ Los umbrales por fila se derivan de la tabla de `Deriva-Rules.md` §3, sin agreg
 
 **Toda deriva mayor se resuelve por una de dos vías y nunca por omisión** (`Deriva-Rules.md` §3): se corrige el sistema construido para volver a la línea de base, o se actualiza la línea de base con aprobación humana explícita, en cuyo caso sube versión, la maqueta se corrige y la matriz de propagación de `Maqueta-Rules.md` §3.6 se aplica de nuevo.
 
-## 6. Control de cambios
+### 5.2 `GeometriaFactory-Visor`
+
+Derivados de la tabla de `Deriva-Rules.md` §3, sin agregarle dimensiones.
+
+| Dimensión | Deriva menor, se registra y no bloquea | Deriva mayor, bloquea y exige decisión | Filas |
+| --- | --- | --- | --- |
+| Superficie pública del contrato | Cambia un nombre interno no expuesto | Falta una función, aparece una séptima, cambia un nombre expuesto o aparece un identificador global suelto | `SD-12001` |
+| Garantías del contrato | — | Perder cualquiera de las siete. **Es cambio mayor aunque las seis firmas no se toquen** | `SD-12002` a `SD-12008` |
+| Conjunto cerrado de condiciones | — | Aparece un código fuera de la lista de siete, o un curso nuevo se acuña como código | `SD-12009` |
+| Lectura del dato del alumno | Cambia el orden en que se leen dos claves equivalentes | Falta un tipo dibujable, una variante de clave deja de aceptarse, o el cero deja de ser dimensión legible | `SD-12010` |
+| Gobierno del movimiento | Cambia la velocidad o la duración de una detención | El cambio reconstruye la instancia, se pierde la selección, o no se repone la orientación de partida | `SD-12011` |
+| Puertas técnicas | — | Cualquier tramo que no pase | `SD-12012`, `SD-12015` |
+| Contratos y comportamiento (`VER-XX`) | Cambia el texto de un mensaje de salida sin cambiar su semántica, o cambia el formato de un registro | El `criterio_aceptacion` falla; cambia el comando de ejecución sin actualizar el contrato; aparecen precondiciones no declaradas; o el caso de uso que la sonda ejercita deja de estar cubierto | `SD-12013`, `SD-12014`, `SD-12015` |
+
+**Las filas sin gradación** —`SD-12002`, `SD-12003`, `SD-12006`, `SD-12007`, `SD-12012` y los tramos de umbral cero y de puerta técnica de `SD-12015`— declaran deriva mayor ante cualquier diferencia, porque verifican garantías del contrato o puertas técnicas, que no admiten tolerancia.
+
+**Toda deriva mayor se resuelve por una de dos vías y nunca por omisión** (`Deriva-Rules.md` §3): se corrige el bundle para volver al contrato, o **se cambia el contrato con aprobación humana explícita**, en cuyo caso la categoría 02 lo modifica, el intake lo consolida y esta matriz se rehace. Una garantía o un código **no se cambian desde acá**.
+
+## 6. Qué es esta matriz y por qué existe una acá
+
+### 6.1 `GeometriaFactory-Visor`
+
+Convierte el contrato aprobado de la fachada en una lista de comprobaciones que se pueden correr en cualquier momento de la codificación, para responder si lo construido sigue siendo lo acordado.
+
+**Por qué existe una matriz para este proyecto de código.** `requiere_maqueta` es **true** en `GeometriaFactory-Visor` (`PRODUCT-MANIFEST` §5), de modo que `Rules-Calidad-Y-Pruebas.md` §2.1 la declara obligatoria. La emitió AG-03M al cerrar la Fase B2 en los proyectos de código con maqueta propia; **acá la abre AG-08 en la Fase E**, por el motivo que §2 desarrolla.
+
+**Ninguna fila afirma nada sobre el estado del sistema construido.** Todas declaran qué tendría que ser cierto. Todas nacen en `Sin verificar` y sin fecha, porque el bundle no está construido.
+
+Los momentos en que esta matriz se mueve, de `Deriva-Rules.md` §4:
+
+| Momento | Quién | Qué pasa |
+| --- | --- | --- |
+| Cierre de la Fase B2 | AG-03M | **No emitió matriz para este proyecto de código.** La validación de la fachada se integró en la maqueta de `GeometriaFactory-Web`, por decisión del Product Owner |
+| Cierre de la Fase E | AG-08 | **Abrió este documento** con doce filas, `SD-12001` a `SD-12012`, todas en `Sin verificar` y con su método de verificación resuelto |
+| Cierre de la fase que genera la categoría 10 | AG-10 | **Hecho el 2026-08-11.** Alta de una fila `VER-XX` por cada contrato de verificación de las tres partes del sample **S-1**: `SD-12013`, `SD-12014` y `SD-12015`, todas en `Sin verificar`, con el comando del contrato como método |
+| Cierre de cada momento del producto | La única persona del equipo | Verificación de las filas que el momento toca; estado y fecha actualizados; derivas mayores escaladas |
+
+## 7. Contra qué se sensa, si este proyecto de código no tuvo maqueta propia
+
+### 7.1 `GeometriaFactory-Visor`
+
+Hay que decirlo con precisión, porque de otro modo esta matriz parecería sensar contra una línea de base que no existe.
+
+**`GeometriaFactory-Visor` ejecutó su Fase B2 y quedó aprobada, pero no tuvo maqueta propia.** El `PRODUCT-MANIFEST` §5 lo declara: hubo **una sola maqueta**, la de `GeometriaFactory-Web`, y la validación de la fachada se integró en ella **por decisión del Product Owner**, porque la fachada no dibuja superficie propia y lo único observable de ella es la escena embebida en su anfitrión. En consecuencia, los tres artefactos de línea de base —`Linea-Base-Visual.md`, `Contrato-Datos-Maqueta.md` y `Bitacora-Validacion-Maqueta.md`— viven en la categoría 03 de `GeometriaFactory-Web` y **no se duplicaron** acá, como declara [`../03-UX-UI-DX/README.md`](../03-UX-UI-DX/README.md) §4.
+
+**De ahí se sigue qué sensa cada matriz, y por qué no se pisan:**
+
+| Matriz | Contra qué sensa | Qué mira |
+| --- | --- | --- |
+| La de [`GeometriaFactory-Web`](Matriz-Sensado-Deriva.md) | Los identificadores `SUP-XX`, `CMP-XX`, `EST-XX`, `NAV-XX` y `DM-XX` de su línea de base visual y su contrato de datos | Si lo construido **se parece a lo que el humano aprobó mirando**, incluida la escena embebida y sus controles |
+| **Ésta** | Los elementos del **contrato de la fachada** —las seis funciones, las siete garantías, los siete códigos y las seis propiedades transversales— | Si el bundle **sigue haciendo lo que su contrato dice**, aunque nadie lo mire |
+
+**Es exactamente la distinción de `Deriva-Rules.md` §2**: las sondas de maqueta miden el parecido con lo aprobado; las de contrato y comportamiento miden que el sistema siga haciendo lo que la especificación dice. Un proyecto de código sin interfaz visual propia **también tiene deriva que sensar**, y este documento es su instrumento.
+
+**Ninguna fila de esta matriz cita un identificador de línea de base visual.** Las que sensan un elemento que la maqueta sí validó lo declaran en §4, con la fila de la matriz de Web que lo mira desde el otro lado.
+
+## 8. Correspondencia con la matriz de `GeometriaFactory-Web`
+
+### 8.1 `GeometriaFactory-Visor`
+
+Se declara para que ninguna lectura posterior confunda las dos matrices, y para que ningún elemento se sense dos veces con umbrales distintos.
+
+| Fila de esta matriz | Fila de la matriz de Web que mira el mismo elemento desde el lado visual | Qué mira cada una |
+| --- | --- | --- |
+| `SD-12001` | `SD-12043` de Web | Acá: que la superficie del bundle sean seis funciones. Allá: que **la escena se opere exclusivamente por esas seis funciones** desde el componente anfitrión |
+| `SD-12002` | `SD-12043` de Web | Acá: el recuento sobre el bundle con los movimientos prendidos. Allá: el recuento durante la interacción con la escena |
+| `SD-12003` | `SD-12047` de Web | Acá: que la fachada no escriba ninguna clave. Allá: que **la preferencia de cada movimiento sea del componente anfitrión** |
+| `SD-12006` | `SD-12039` y `SD-12040` de Web | Acá: la enumeración en el resultado de dibujo. Allá: que la pieza de dimensión `0.00` **se dibuje** y que el recuento de piezas sin registro sea 0 |
+| `SD-12007` | `SD-12041` y `SD-12045` de Web | Acá: la comparación de dos procesados por posición. Allá: la comparación de disposiciones en las cuatro combinaciones de movimiento |
+| `SD-12009` | `SD-12018` de Web | Acá: el conjunto emitido contra el contrato. Allá: que **los ocho estados que materializan las siete condiciones existan y usen los códigos sin renombrarlos** |
+| `SD-12011` | `SD-12044`, `SD-12046` y `SD-12048` de Web | Acá: el gobierno por la fachada. Allá: los **controles** de los dos movimientos, su reposición de orientación y su comportamiento con preferencia de movimiento reducido declarada |
+| `SD-12012` | `SD-12042` de Web | Acá: las dos puertas enteras. Allá: los **diez recorridos** de ida y vuelta sin degradación |
+
+**Las dos matrices son complementarias y no redundantes.** La de Web ancla cada fila en un identificador de línea de base **validado visualmente**; ésta ancla cada fila en un elemento del **contrato**. Cuando las dos miran lo mismo, lo miran desde lados distintos: allá se pregunta si se parece a lo aprobado, acá si sigue haciendo lo que dice.
+
+**Un elemento que la maqueta no validó y esta matriz sí sensa**: la **sexta función**, `establecerMovimiento`. La matriz de Web declara en su §4 que se incorporó al contrato **después** de que el Product Owner aprobó la maqueta y que **no fue validada visualmente**, y por eso su `SD-12043` la sensa contra el contrato y no contra la maqueta. Acá no hay tensión que resolver: **todas** las filas de esta matriz se anclan en el contrato.
+
+## 9. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.5 | 2026-08-11 | **Cierra los hallazgos `NB2-02` (P2) y `NB2-03` (P2)** del informe [`../../../Audit/B2-Maqueta-GeometriaFactory-Web-r2.md`](../../../Audit/B2-Maqueta-GeometriaFactory-Web-r2.md) 1.0. **§4**, párrafo «Lo que esta matriz todavía no sensa»: la remisión constructiva de F-26 pasa de «sus wireframes **1.1**» a «sus wireframes **en su versión vigente**». Hoy `../03-UX-UI-DX/Wireframes-Panel-De-Cuentas.md` está en **1.6** y `../03-UX-UI-DX/Wireframes-Credencial-Propia.md` en **1.4**, cinco y tres versiones por delante del número citado, y entre medio se retiró el campo de contraseña del panel: quien siguiera la remisión literal construiría lo que la 1.2 eliminó. Es el mismo defecto que `F26-Propagacion-r1.md` levantó como `F26-13` sobre `Linea-Base-Visual.md` §6.1, corregido allá del mismo modo y **no acá**. **§4**: entra un párrafo nuevo por **`RN-10016`**, que entró con el `PRODUCT-INTAKE` **1.13** —posterior a la aprobación de la maqueta— y que el párrafo anterior no alcanzaba, porque hablaba sólo de F-26 y de la ronda del intake 1.7. Lo que se declara es la diferencia que importa: **RN-10016 cambia el comportamiento de `habilitar`, que la maqueta sí validó**, de modo que **su sonda existe y daría conforme sobre un panel que no cumple la regla**. **`SD-10009`** acota su alcance al comportamiento validado el 2026-08-09 y declara que **no cubre** la exhibición de la provisoria ni la marca de cambio pendiente. **No se abre ninguna sonda nueva y no se amplía ninguna existente por decreto**: las sondas de RN-10016 nacen con la **iteración 5** de maqueta, la misma vía que ya rige para F-26. **La cobertura de la matriz no cambia**: sigue siendo 211 de 211 identificadores sobre 62 filas, y ningún umbral de §5 se toca. Sube minor. |
-| 1.4 | 2026-08-11 | **Corrección del hallazgo P3-2 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0**, sobre el `PRODUCT-INTAKE` **1.25**. El párrafo de §4 «Qué aporta `SD-10062`…» atribuía umbral «mayor **sin gradación** en los dos casos» a `SD-10036` y a la fila de superficie del listado de la comisión, y **`SD-10010` no figura en la lista de filas sin gradación de §5** —que enumera `SD-10027`, `SD-10033`, `SD-10036` a `SD-10040`, `SD-10043`, `SD-10045`, `SD-10057`, `SD-10059` y `SD-10060`—. Se nombra ahora a `SD-10010` por su identificador y se escribe el umbral que **su propia fila** declara, «Mayor» sin tramo menor para ese supuesto, que basta para descartar la contradicción sin reclasificarla. **`SD-10010` no se agrega a la lista de §5**, porque eso modificaría una de las 61 filas de línea de base. Se actualiza la trazabilidad upstream a las versiones **1.1** de los dos artefactos de `10-Examples`. **Ninguna fila cambia**: la corrección es de la prosa que las describe. Sube minor. |
-| 1.3 | 2026-08-11 | **Alta de la sonda `VER-XX` por AG-10**, al cerrar la fase que genera [`../10-Examples/`](../10-Examples/). Es el segundo momento de sensado de `Deriva-Rules.md` §4, y **cierra el hueco que §1 y §4 declaraban** con la frase «ninguna fila `VER-XX`, porque este proyecto de código no tiene categoría 10 todavía». Suma **una** fila, `SD-10062`, tomada del único contrato de verificación de esa categoría, con el comando del contrato como método sin desvío, el campo `evidencia` del sample como evidencia esperada y estado `Sin verificar` sin fecha. La matriz pasa de **sesenta y una** a **sesenta y dos** filas. §5 suma la dimensión «Contratos y comportamiento (`VER-XX`)» de `Deriva-Rules.md` §3 y agrega los dos tramos de regla de negocio de `SD-10062` a las filas sin gradación. Se declara por qué `SD-10062` se solapa con `SD-10036` y con la fila del listado de la comisión **sin duplicarlas** —unas sensan el elemento de línea de base por inspección, ésta el sample por su propio comando— y que el umbral no se contradice entre ellas. **Ninguna de las sesenta y una filas anteriores cambia, y la cobertura de los doscientos once identificadores de la línea de base tampoco.** Sube minor: agrega una fila y una dimensión de umbral sin alterar ninguna afirmación ya emitida. |
-| 1.2 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, sin abrir ni modificar ninguna sonda. §4 suma la declaración de **lo que esta matriz todavía no sensa**: los elementos de interfaz que arrastra la capacidad **F-26** no tienen identificador en la línea de base, porque son posteriores a la aprobación de la maqueta, y una sonda anclada en un identificador inexistente diría comparar contra algo que la línea de base no contiene. Se declara que **`SD-10004` conserva su alcance de dos cursos** y que las sondas de F-26 nacen con la iteración 5 de maqueta. **Nada que corregir por F-25**: la corrección del hallazgo `AB2-02` ya había dejado a `SD-10043` en **seis** funciones y a `SD-10047` con la frontera correcta —el anfitrión manda dos valores de verdad y la fachada no lee la preferencia de movimiento reducido—, que es exactamente lo que 1.7 confirma. Sube minor: declara una brecha de cobertura, sin cambiar ningún umbral ni ninguna sonda. |
-| 1.1 | 2026-08-09 | Corrección de los hallazgos **`AB2-01`** (P0), **`AB2-02`**, **`AB2-12`** y **`AB2-18`** de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`. `AB2-01`: la nota de cobertura de §4 afirmaba cubrir los doscientos once identificadores de la línea de base y la enumeración que la respaldaba **no resolvía** para `CMP-10004`, `CMP-10005`, `CMP-10007` y `CMP-10008`, que no figuraban en ninguna fila. Se abre la sonda **`SD-10061`**, que sensa de verdad los cuatro componentes transversales del recorrido de acceso, y se rehace la nota de cobertura como tabla verificable, con la declaración explícita de por qué no se resolvió anotando los cuatro identificadores en una fila existente. `AB2-02`: `SD-10043` pasa de cinco a **seis** funciones de la fachada, con la declaración de que la sexta —`establecerMovimiento`— se decidió después de la aprobación, **no fue validada visualmente**, y que la fila la sensa contra el contrato y no contra la maqueta. `AB2-12`: §5 mapea las siete filas que no quedaban en ninguna dimensión —`SD-10041`, `SD-10042`, `SD-10046`, `SD-10047`, `SD-10054`, `SD-10055` y `SD-10058`— y declara que el umbral vinculante es el de la fila. `AB2-18`: `SD-10047` precisa la frontera bundle/anfitrión —dos valores de verdad, arranque apagado ante opciones ausentes— y exige que la exclusión de claves propias del recuento sea por espacio de nombres declarado y no por prefijo. |
-| 1.0 | 2026-08-09 | Emisión inicial por la Fase B2, al cerrar con la maqueta aprobada por el Product Owner. Sesenta sondas `SD-XX`, todas en estado `Sin verificar`, con su método de verificación, su evidencia esperada y su umbral; el criterio de agrupación que hace que sesenta filas cubran los doscientos once identificadores de la línea de base; y la declaración de que este archivo es el **único** artefacto de la categoría `08-Calidad-Y-Pruebas` emitido por esta fase, que el resto de la categoría se genera en la Fase E y que la matriz no nace con ninguna sonda `VER-XX` porque el proyecto de código no tiene categoría `10-Examples` todavía. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

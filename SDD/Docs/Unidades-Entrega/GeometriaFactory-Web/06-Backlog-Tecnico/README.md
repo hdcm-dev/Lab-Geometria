@@ -1,14 +1,24 @@
 # 06 · Backlog técnico — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-16
 **Autor:** Scrum Master (AG-06)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**Los cuatro documentos tienen las mismas secciones en los dos proyectos de código.** Las `US` y los `BT` conviven sin colisionar: la renumeración le dio al visor el rango `12xxx`.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/06-Backlog-Tecnico/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/06-Backlog-Tecnico/).
 
 ## 1. Documentos de esta sección
 
@@ -65,3 +75,4 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 | 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos y la carpeta de historias, declara la ausencia de `tareas-tecnicas/` con su motivo, fija el orden de lectura, resume las ocho épicas con su etapa del producto y la constancia de que este es el único proyecto de código que toca las ocho, y nombra las tareas técnicas prioritarias con el fundamento de cada una. |
 | 1.1 | 2026-08-11 | **Absorbe la promoción de `F-13` a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4. Las historias `Must Have` pasan de veintinueve a **treinta**, con el desenlace de `PA-02` —cerrado, con su fila conservada en `Product-Backlog.md` §6— y con la remisión al apartamiento del 100 % `Must` declarado en `Product-Backlog.md` §4.2. Ninguna épica, tarea técnica ni Definition of Ready cambia. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

@@ -15,7 +15,7 @@
 `RN-06002` declara que el correo del alumno es **único** y fija cómo se verifica: «registrar dos veces el mismo correo se rechaza con mensaje explícito». `INV-01` lo sostiene desde el dominio. Ninguna de las dos dice **qué significa «el mismo correo»**, y ésa es la pregunta que tres categorías se pasaron sin resolver:
 
 - `GeometriaFactory-Domain` la dejó abierta, porque el dominio no lee el conjunto de entidades.
-- `GeometriaFactory-Application` la reasignó explícitamente: «es el adaptador del puerto de repositorio de cuentas quien la materializa, y la decisión le corresponde a la categoría 05 de `GeometriaFactory-Infrastructure`, **junto con el índice que la sostenga**» ([`Application README`](../_fusion/Application/README.md) §7 y su `PA-03`).
+- `GeometriaFactory-Application` la reasignó explícitamente: «es el adaptador del puerto de repositorio de cuentas quien la materializa, y la decisión le corresponde a la categoría 05 de `GeometriaFactory-Infrastructure`, **junto con el índice que la sostenga**» ([`Application README`](../README.md) §7 y su `PA-03`).
 - La categoría 02 de este proyecto de código declaró que **acá se vuelve visible**, porque la restricción de unicidad del almacén la materializa, y la volvió a derivar a esta categoría.
 
 El caso concreto que obliga a decidir no es teórico. El alumno se registra escribiendo su correo; el administrador lo habilita y le comunica la provisoria **de viva voz**; el alumno vuelve a escribir el correo para entrar. Si «Alumno@Ejemplo.Com» y «alumno@ejemplo.com» son dos cuentas, el laboratorio tiene dos identidades para una persona, una de ellas con trabajos y la otra sin ninguno, y nadie se entera hasta que el alumno no encuentra su trabajo. Y si son dos cuentas para el almacén pero una sola para quien las mira, `RN-06002` deja de tener criterio de verificación ejecutable.
@@ -88,7 +88,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `P
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-06001, RN-06002) y §17.1.P.4 · GeometriaFactory-Infrastructure.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 precisión 2 y §11.
 - [`../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md`](../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md) §3.2 y §7.
-- [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/README.md`](../_fusion/Application/README.md) §7, que es donde la decisión quedó reasignada a esta categoría.
+- [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/README.md`](../README.md) §7, que es donde la decisión quedó reasignada a esta categoría.
 - ADR relacionadas: [`ADR-06001`](ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md), [`ADR-06002`](ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md).
 
 ## 10. Control de cambios

@@ -1,11 +1,11 @@
 # 09 · DevOps — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api` · **Proyecto de código principal del producto y unidad desplegable del servidor propio**
 
@@ -22,6 +22,26 @@
 - [7. Control de cambios](#7-control-de-cambios)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los cuatro documentos de esta categoría se consolidaron el 2026-08-16**, y es la categoría **más
+asimétrica** de las consolidadas: [`Entornos-Deploy.md`](Entornos-Deploy.md) tiene sólo **dos de doce
+secciones comunes** a las cuatro capas.
+
+El motivo es real y vale la pena tenerlo presente: **tres de las cuatro capas no se despliegan**, de
+modo que su «entorno» es el contenedor de desarrollo y poco más. Lo que la consolidación junta por
+primera vez son dos cosas que eran la misma preocupación vista desde capas distintas: **la dirección
+dinámica del servidor**, que el host declara como la restricción que ordena todo, y **la clave de
+firma que se recibe y no se busca**, que declaraba la infraestructura.
+
+Y en [`Estrategia-Versionado.md`](Estrategia-Versionado.md) quedan visibles **los dos linajes que el
+producto versiona además del suyo** —las transformaciones de esquema y los parámetros de derivación
+de clave—, que ninguna otra capa mencionaba y que **no siguen la versión del producto**.
+
+**La carpeta `_fusion/` de esta categoría se retira**: la fusión terminó acá. Los documentos absorbidos
+están en [`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/09-Devops/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/09-Devops/).
 
 ## 1. Artefactos de esta sección
 
@@ -122,3 +142,4 @@ Es la particularidad de esta sección y conviene tenerla de un vistazo. El intak
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 09 de `GeometriaFactory-Api`, **proyecto de código principal y unidad desplegable del servidor propio**. Lista los **cinco** artefactos emitidos —incluida la guía de publicación, que acá **no se omite**—, el orden de lectura que pone primero los dos documentos de despliegue con su motivo, los **tres** artefactos que no corresponden con su motivo, los **quince** quality gates con el stage donde corre cada uno y la constancia de que ninguno cambió de carácter, con la precisión de que **los cuatro rótulos de este proyecto de código son sobre umbrales** y por eso condicionan, al revés que en `GeometriaFactory-Web`. Declara **la frontera del despliegue** con qué queda de cada lado, y la tabla de recuentos con la fuente de cada uno. |
 | 1.1 | 2026-08-11 | **Propagación del intake 1.22 y constancia de las correcciones de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`.** El intake **1.22** §17.2.P.7 · GeometriaFactory-Web decide que, cuando front y backend salen juntos, sale **primero el backend**, con lo que `PD-05` queda **cerrado** y la fila de recuentos pasa a declarar **5** puntos abiertos con **4 vigentes**. Se actualizan a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) —que además corrige `H-01`, `H-03` y `H-05`—, [`Entornos-Deploy.md`](Entornos-Deploy.md) y [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md). |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**, con sus documentos consolidados en 2.0. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

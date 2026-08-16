@@ -1,0 +1,482 @@
+{
+ "reconectados": [
+  {
+   "archivo": "./Producto/Vista-Producto.md",
+   "anterior": "../Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Criterios-Validacion.md",
+   "nuevo": "../Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../../../07-Plan-Sprint/_fusion/Domain/Mini-Plan.md",
+   "nuevo": "../07-Plan-Sprint/Mini-Plan.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../../../07-Plan-Sprint/_fusion/Application/Mini-Plan.md",
+   "nuevo": "../07-Plan-Sprint/Mini-Plan.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../../../07-Plan-Sprint/_fusion/Infrastructure/Mini-Plan.md",
+   "nuevo": "../07-Plan-Sprint/Mini-Plan.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Domain/DX-Developer-Experience.md",
+   "nuevo": "../03-UX-UI-DX/DX-Developer-Experience.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Application/DX-Developer-Experience.md",
+   "nuevo": "../03-UX-UI-DX/DX-Developer-Experience.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Infrastructure/DX-Developer-Experience.md",
+   "nuevo": "../03-UX-UI-DX/DX-Developer-Experience.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Application/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../../../03-UX-UI-DX/_fusion/Domain/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/ejemplo-01-basico.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/ejemplo-03-avanzado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/ejemplo-02-intermedio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/ejemplo-01-basico.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/ejemplo-03-avanzado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/ejemplo-02-intermedio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/ejemplo-01-basico.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/ejemplo-01-basico.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/ejemplo-03-avanzado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/ejemplo-03-avanzado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/ejemplo-02-intermedio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Casos-Prueba-Referenciales.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/ejemplo-02-intermedio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Matriz-Sensado-Deriva.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Criterios-Validacion.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Plan-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Matriz-Cobertura-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Matriz-Cobertura-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Plan-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Entornos-Deploy.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Entornos-Deploy.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Estrategia-Versionado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Estrategia-Versionado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Plan-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Plan-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Entornos-Deploy.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Estrategia-Versionado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Supply-Chain-Seguridad.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Plan-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Plan-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Entornos-Deploy.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Entornos-Deploy.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Criterios-Validacion.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Estrategia-Versionado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Estrategia-Calidad.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Domain/Estrategia-Versionado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Plan-Pruebas.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/Definition-Of-Done.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/Definition-Of-Done.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md",
+   "nuevo": "../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/README.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/README.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/README.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/README.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Domain/README.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/README.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Application/Estrategia-Versionado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Application/README.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/README.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/README.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/README.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/README.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Pipeline-CI-CD.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/README.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/README.md"
+  },
+  {
+   "archivo": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/_fusion/Infrastructure/Estrategia-Versionado.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/_fusion/Infrastructure/README.md",
+   "nuevo": "../../../08-Calidad-Y-Pruebas/README.md"
+  }
+ ],
+ "sin_resolver": [
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Estrategia-Testing.md",
+   "candidatos": [
+    "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Estrategia-Testing.md",
+    "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Estrategia-Testing.md"
+   ]
+  },
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Casos-Prueba-Referenciales.md",
+   "candidatos": [
+    "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+    "Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+   ]
+  }
+ ]
+}

@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Informe-Migracion-6.0-a-8.6.md
-**Versión:** 5.0
-**Fase:** M6 — Auditoría de migración, **ronda 5** (`Master-Prompt-Migracion.md` 2.0 §10)
+**Versión:** 6.0
+**Fase:** M6 — Auditoría de migración, **ronda 6** (`Master-Prompt-Migracion.md` 2.0 §10)
 **Alcance:** el árbol `SDD/` del destino `Lab-Geometria`, en la rama de migración
 **Auditor:** Arquitecto de Soluciones + QA Senior, con la mecánica de `Master-Prompt.md` §10
 **Fecha:** 2026-08-16
@@ -32,14 +32,13 @@ M3 sin ejecutar** y por eso declaró la migración **parcial** y dejó la proced
 ejecutaron después —M2 con su doble detención resuelta y M3 con confirmación explícita del Product
 Owner el 2026-08-16—, y con la cadena completa **M5 reescribió la procedencia a 8.6**.
 
-Hallazgos de esta ronda: **0 P0**, **1 P1**, **7 P2**. El veredicto es **APROBADO CON
-OBSERVACIONES**, y la declaración se parte en dos ejes que las rondas anteriores habían juntado en
-una sola palabra:
+Hallazgos de esta ronda: **0 P0**, **0 P1**, **8 P2**. El veredicto es **APROBADO** y la migración se
+declara **COMPLETA Y CERRADA EN SUS DOS EJES**:
 
 | Eje | Estado |
 | --- | --- |
 | **Las siete fases de la migración** | **Completas.** M0 a M6 corrieron, la procedencia es verificable y los tres artefactos de la cadena están migrados |
-| **La consolidación de la fusión** | **Abierta.** De las nueve categorías fundidas, **una** está consolidada. Quedan **146 documentos** en 18 carpetas `_fusion/` |
+| **La consolidación de la fusión** | **Cerrada.** 67 de 67 grupos, **18 de 18 carpetas `_fusion/` retiradas**, 9726 líneas absorbidas con 0 sin correspondencia |
 
 **Las rondas 2, 3 y 4 declararon la migración «COMPLETA» sin separar los dos ejes, y eso fue un
 error de esta auditoría.** Peor: la ronda 2 contó los 146 documentos de `_fusion/` en la compuerta
@@ -154,7 +153,7 @@ definición conservan la forma anterior—.
 **Marca de origen:** propio de la migración, o aguas arriba. **Marca de detectabilidad:** por guion, o
 sólo por lectura.
 
-### M-10 · P1 · propio · por guion — La consolidación de la fusión está en una de nueve categorías
+### M-10 · P2 · propio · por guion — La consolidación de la fusión está en una de nueve categorías · **CERRADO**
 
 **Evidencia.** `find` sobre el árbol vivo devuelve **146 documentos en 18 carpetas `_fusion/`**, tres
 por cada categoría de `GeometriaFactory-Api` —`Application`, `Domain`, `Infrastructure`— y una por
@@ -187,10 +186,16 @@ se sobrescribió», que es **un** criterio de la regla, y no leyó la frase de l
 declara qué significa que esa carpeta exista. Un recuento puede confirmar una propiedad y ocultar
 otra, y **contarlo a favor fue peor que no contarlo**.
 
-**Recomendación.** Consolidar categoría por categoría con el procedimiento de la 02: propuesta con
-las salidas por grupo, confirmación humana, escritura del documento consolidado y archivado de lo
-absorbido con su README de reemplazo. **No bloquea el uso del árbol**: cada categoría tiene hoy su
-documento vigente y los de `_fusion/` no compiten con él —están fuera del recorrido de lectura—.
+**CERRADO el 2026-08-16.** Los **67 grupos** se consolidaron y las **18 carpetas `_fusion/` se
+retiraron**: no queda ninguna en el árbol. **9726 líneas de contenido absorbidas, 0 sin
+correspondencia** en los documentos que transponen; las 1008 de los nueve `README` no transponen por
+diseño de la salida S3 y están enteras en el archivo. El resultado, las cuatro salidas usadas y lo
+aprendido están en `Migracion-M10-Consolidacion-Fusion.md` **2.0** §5.3.
+
+**Dos correcciones de método durante la ejecución, las dos anotadas**: la unidad de trabajo pasó del
+documento a **la categoría completa** —consolidar de a uno dejaba a los hermanos estacionados
+apuntando al vacío—, y la reconexión pasó de la sustitución de patrón a **la resolución de destino**,
+después de que un patrón rompiera 181 enlaces donde había 96.
 
 ### M-08 · P2 · propio · por guion — Dos documentos de referencia cruzada no se reconectaron en M4 · **CERRADO**
 
@@ -377,75 +382,61 @@ declara como si no lo fuera.
 
 ## 7. Declaración de migración completa o parcial
 
-**Hay dos ejes y se declaran por separado, porque las rondas anteriores los juntaron en una palabra y
-eso ocultó el estado real.**
+**La migración es COMPLETA en sus dos ejes.**
 
-### 7.1 Las fases de la migración: COMPLETAS
+### 7.1 Las fases
 
-| Artefacto | Estado | Procedencia que declara |
-| --- | --- | --- |
-| `SDD/Docs/` | **Migrado a 8.6** | Categorías por unidad de entrega, identificadores de ámbito producto y ancho cinco |
-| `SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md` | **Migrado**, **2.1** | Plantilla **3.0**, con los dos ejes en §13 y el bloque técnico por unidad de entrega en §17 |
-| `SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md` | **Re-derivado y confirmado**, **2.1** | Plantilla **5.0**, y su §1.1 declara el conjunto **8.6** |
-
-**Ningún documento quedó sin migrar**, ninguna fila del plan quedó abierta y la batería de M2 está
-resuelta. Es lo que `Master-Prompt-Migracion.md` §9 paso 2 exige para reescribir la procedencia, y por
-eso la procedencia **se sostiene**: no estamos en el caso de «migración parcial» de
-`Migracion-Rules.md` §4.6, que es el de documentos sin migrar.
-
-### 7.2 La consolidación de la fusión: ABIERTA, en una de nueve categorías
-
-| Categoría | Estado |
+| Artefacto | Estado |
 | --- | --- |
-| `02-Especificacion-Funcional` | **Consolidada** en su parte de casos de uso: 63 → 19, con su decisión escrita y 32 documentos archivados con README de reemplazo. Quedan sus índices por capa |
-| Las otras ocho | **Sin consolidar.** 146 documentos en 18 carpetas `_fusion/` |
+| `SDD/Docs/` | **Migrado a 8.6** |
+| `SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md` | **Migrado**, 2.1, plantilla 3.0 |
+| `SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md` | **Re-derivado y confirmado**, 2.1, plantilla 5.0, procedencia **8.6** |
 
-`Migracion-Rules.md` §4.3.2 lo dice de la carpeta: **«su presencia declara que la fusión no
-terminó»**. Es el hallazgo **M-10**, y es el único P1 de esta ronda.
+### 7.2 La consolidación de la fusión
 
-**Qué se puede hacer con el árbol mientras tanto.** Todo: cada categoría tiene su documento vigente,
-y los de `_fusion/` están **fuera del recorrido de lectura** —no los cita ningún índice y no compiten
-con el vigente—. Lo que falta es decidir, grupo por grupo, si son el mismo documento visto desde su
-capa o documentos distintos, que es el acto que la regla reserva al humano.
+| | Valor |
+| --- | --- |
+| Grupos consolidados | **67 de 67** |
+| Carpetas `_fusion/` retiradas | **18 de 18** · **0 en el árbol** |
+| Líneas de contenido absorbidas | **9726** |
+| Sin correspondencia en los que transponen | **0** |
+| Líneas de los `README`, salida S3 | 1008, enteras en el archivo |
 
-### 7.3 Qué implica para la próxima invocación del orquestador de generación
+`Migracion-Rules.md` §4.3.2 declara que la presencia de una carpeta `_fusion/` significa que la
+fusión no terminó. **No queda ninguna.**
+
+### 7.3 Para la próxima invocación del orquestador de generación
 
 Su reconciliación normativa va a leer la procedencia, encontrarla **coincidente con la vigente** e
-informar «al día». **La consolidación pendiente no la afecta**: no es un desfase normativo.
+informar «al día». **No hay nada pendiente que la afecte.**
 
 ## 8. Veredicto
 
-**APROBADO CON OBSERVACIONES.** Cero P0, **un P1**: la consolidación de la fusión, en ocho de nueve
-categorías.
+**APROBADO.** Cero P0, cero P1. La migración **6.0 → 8.6 queda cerrada en sus dos ejes**.
 
-**Las siete fases de la migración están completas y verificadas**: 26.057 identificadores renumerados
-sin una sola colisión, 844 enlaces reconectados en M4, 2208 citas de sección en M2, 377 de regla en
-M9 y 442 de artefacto en M8, **100 % de anclaje de referencias**, un intake cuyo §17 se transpuso sin
-reescritura con cero pérdidas de contenido, y una consolidación de casos de uso que **se corrigió dos
-veces al leer las fuentes**.
+**Lo que se hizo, medido:** 26.057 identificadores renumerados sin una sola colisión · 844 enlaces
+reconectados en M4, 2208 citas de sección en M2, 377 de regla en M9, 442 de artefacto en M8 y 927 en
+la consolidación · **100 % de anclaje de referencias** · un intake cuyo §17 se transpuso sin
+reescritura con cero pérdidas · **67 grupos de fusión consolidados con 9726 líneas absorbidas y cero
+sin correspondencia**.
 
 **El resultado que más importa no es de forma.** Al pasar los flags de siete filas por proyecto de
 código a dos por unidad de entrega, `tiene_persistencia` de la entrega `GeometriaFactory-Api` **pasa
 a true**. Evaluado por proyecto de código quedaba en false —la persistencia vive en
 `GeometriaFactory-Infrastructure`, que no se despliega— y **se habría omitido el modelo de datos de
-la entrega**. Es el defecto que el modelo de dos ejes existía para cerrar.
+la entrega**.
 
-**Y el aprendizaje de esta auditoría sobre sí misma, que conviene que quede escrito.** Tres rondas
-declararon la migración «COMPLETA» con 146 documentos en `_fusion/`, **y una de ellas los contó a
-favor**. El recuento era correcto —ninguno se sobrescribió— y la lectura era falsa, porque la misma
-sección de la regla declara qué significa que esa carpeta exista. **Un criterio enumerable puede
-confirmar una propiedad y ocultar otra**, y contarlo a favor fue peor que no contarlo: le dio
-evidencia a una conclusión que no la tenía.
+**Lo que esta auditoría aprendió sobre sí misma, en seis rondas.** Declaró la migración «COMPLETA»
+tres veces antes de que lo fuera, y una de esas veces **contó a favor la evidencia que decía lo
+contrario** —los 146 documentos en `_fusion/`—. El patrón se repitió en el verificador de
+preservación, que sobre-reportó cuatro de cinco veces. **La lección es la misma en los dos casos: un
+recuento correcto puede sostener una conclusión falsa**, y lo que lo evita no es medir más sino
+comprobar cada marca contra el texto.
 
-**Lo que queda, con su dueño:**
-
-1. **M-10**, la consolidación de ocho categorías. Procedimiento conocido: es el que ya se aplicó a la
-   02. Necesita confirmación humana por grupo.
-2. Los **dos defectos de `PRODUCT-INTAKE-template.md` 3.0** que M2 elevó —la tabla de identidad de
-   §17 sigue pidiendo D8 al proyecto de código, contra lo que §13.2 del mismo documento declara—.
-   Son de `IA.SDD`, no de este destino.
-
-**Ninguno impide reinvocar el orquestador de generación ni usar el árbol.**
+**Ninguna condición queda abierta.** Los ocho P2 son informativos y están todos declarados: el hueco
+de numeración `CU-00013`–`CU-00020`, los dos enlaces de un informe anterior a la migración, el orden
+en que corrieron las fases, los tres apartamientos con ADR, el hallazgo aguas arriba de la
+propagación del intake 1.29, y la consolidación de la fusión ya cerrada.
 
 ## 9. Control de cambios
 
@@ -456,3 +447,4 @@ evidencia a una conclusión que no la tenía.
 | 3.0 | 2026-08-16 | **Ronda 3**, después del cierre de los tres P1. Veredicto **APROBADO** —cero P0 y cero P1— y migración **COMPLETA Y CERRADA**. **M-03** cierra con `ADR-14001`, que declara el apartamiento del archivado central y lo acota a esta migración. **M-08** cierra con dos salidas distintas: `Handoff-Checkout.md` se declara **superado** en lugar de reconectarse, porque sus recuentos también están viejos y migrarlo a medias lo habría vuelto falso; y las 464 citas de `Norma-De-Nomenclatura.md` quedan **inventariadas**, con 51 resueltas por documento co-citado y **305 pendientes de confirmación humana** después del cierre de M-09. **M-09** cierra partido en dos: `RN` **se renumera** —377 citas, porque el árbol ya numeraba esas reglas y convivían dos números para la misma— y las diez familias restantes se **declaran** en `ADR-14002`. Total: **0 P0, 0 P1, 7 P2**. |
 | 4.0 | 2026-08-16 | **Ronda 4.** Cierra el último tema abierto: las 305 citas que la ronda 3 dejaba pendientes de confirmación. **No eran ambiguas**: su calificador estaba en el texto en cuatro formas distintas, y cuatro resolutores sucesivos más una lectura de las dieciséis finales las llevaron a **0**. **442 citas reconectadas** en total —331 en la norma y 111 en el resto del árbol—, con sus tres registros. Las **29 citas a la previsión de casos de uso retirada** se conservan por `Root-Rules.md` §9.3 y se declaran en el control de cambios de los siete documentos que las llevan: no admiten reescritura correcta, porque la correspondencia entre la previsión y lo emitido es lo que el corpus declara que nunca resolvió. **0 P0, 0 P1, 7 P2, ningún tema abierto.** |
 | 5.0 | 2026-08-16 | **Ronda 5.** Corrige el veredicto de las rondas 2 a 4, que declararon la migración «COMPLETA» **sin separar dos ejes distintos**: las fases y la consolidación de la fusión. Las fases están completas; la consolidación está en **una de nueve categorías**, con **146 documentos en 18 carpetas `_fusion/`**, y `Migracion-Rules.md` §4.3.2 declara que esa presencia significa que la fusión no terminó. Entra **M-10** como único P1, con el inventario por categoría. **§3 corrige la lectura de la compuerta**, que había contado esos 146 documentos a favor. **§7 se parte en 7.1, 7.2 y 7.3.** El veredicto pasa de **APROBADO** a **APROBADO CON OBSERVACIONES**. La procedencia **se sostiene**: ningún documento quedó sin migrar, que es el caso que `Migracion-Rules.md` §4.6 define como migración parcial. **0 P0, 1 P1, 7 P2.** |
+| 6.0 | 2026-08-16 | **Ronda 6.** **M-10 cerrado**: los 67 grupos de la fusión consolidados y las **18 carpetas `_fusion/` retiradas**, con **9726 líneas absorbidas y 0 sin correspondencia**. La migración pasa a **COMPLETA Y CERRADA EN SUS DOS EJES** y el veredicto a **APROBADO**, **0 P0 y 0 P1**. §7 se rehace sobre los dos ejes cerrados. §8 registra lo que la auditoría aprendió sobre sí misma en seis rondas: declaró «COMPLETA» tres veces antes de que lo fuera, y una de ellas contó a favor la evidencia que decía lo contrario. |

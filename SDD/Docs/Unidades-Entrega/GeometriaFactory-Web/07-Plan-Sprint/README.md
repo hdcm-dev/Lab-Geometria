@@ -1,14 +1,24 @@
 # 07 · Plan de sprint — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.0
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-16
 **Autor:** Scrum Master (AG-07)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**Las nueve secciones son comunes a los dos.** El bundle del visor se construye antes que el portal que lo embebe, y ése es el único orden que este plan necesita declarar.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/07-Plan-Sprint/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/07-Plan-Sprint/).
 
 ## 1. Documento de esta sección
 
@@ -58,3 +68,4 @@
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Declara el único artefacto emitido, los **cuatro** que se omiten con el motivo de cada uno, el estado del plan con la constancia de que este proyecto de código toca **las ocho** etapas y de que el momento previo a la `g` no es una etapa nueva, y dónde vive lo que este plan no decide, incluidas las tres decisiones cuya titularidad es de otro lado y las dos categorías todavía no emitidas. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

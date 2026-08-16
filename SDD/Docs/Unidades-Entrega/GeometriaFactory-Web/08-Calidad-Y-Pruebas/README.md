@@ -1,11 +1,11 @@
 # 08 · Calidad y pruebas — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
 
@@ -22,6 +22,16 @@
 - [7. Control de cambios](#7-control-de-cambios)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**Los umbrales del portal y los del visor no se promedian**, por el mismo motivo que en la otra unidad de entrega. El visor tiene además su propio gate estructural —**cero llamadas de red**—, que es lo que sostiene `RA-02`: un visualizador puro.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/08-Calidad-Y-Pruebas/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/08-Calidad-Y-Pruebas/).
 
 ## 1. Artefactos de esta sección
 
@@ -59,7 +69,7 @@
 | Se **resolvió el método de verificación** de sus **61** filas, por familia, con el `TC-XX` que la ejerce y la etapa en que entra | [`Estrategia-Testing.md`](Estrategia-Testing.md) §8.1 |
 | Se declaró la **frontera** entre sonda y caso de verificación: la sonda aporta el **umbral de deriva**, el caso aporta el **criterio de aceptación**, y ninguno redefine al otro | [`Estrategia-Testing.md`](Estrategia-Testing.md) §8 y [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7 |
 | Se convirtió su verificación en **gate** y en criterio de cierre de etapa | `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3; [`Plan-Pruebas.md`](Plan-Pruebas.md) §3; [`Definition-Of-Done.md`](Definition-Of-Done.md) §1.3 |
-| Se **verificó desde este lado** la tabla de correspondencia que [`../../GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](_fusion/Visor/Matriz-Sensado-Deriva.md) declara contra ésta: **las ocho correspondencias son verdaderas** | [`Estrategia-Testing.md`](Estrategia-Testing.md) §8.2 |
+| Se **verificó desde este lado** la tabla de correspondencia que [`../../GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) declara contra ésta: **las ocho correspondencias son verdaderas** | [`Estrategia-Testing.md`](Estrategia-Testing.md) §8.2 |
 | **No se modificó ninguna fila, ningún umbral ni el recuento de 61** | — |
 | **No se abrieron filas para la capacidad `F-26`**, porque sus elementos de interfaz no tienen identificador en la línea de base. Se verifican con `TC-10006`, `TC-10007` y `TC-10010` contra los criterios de aceptación de `CU-10003` y `CU-10004`, **sin umbral de deriva**, y así queda declarado como hueco | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 
@@ -121,3 +131,4 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 | 1.1 | 2026-08-11 | **`H-02`.** La tabla de gates de §5 declaraba a `QG-04` **condicionado**. Pasa a **bloqueante**: §17.2.P.6 · GeometriaFactory-Web lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que lo que puede cambiar es la forma del gate y no su carácter. Se actualizan las versiones de los artefactos revisados. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Web`. Lista los **ocho** artefactos vigentes, **siete** emitidos por esta Fase E y uno —[`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.2— **emitido por la Fase B2 y ya existente**, con la columna que declara quién emitió cada uno. Su §3 declara qué hizo esta fase con esa matriz y qué no hizo, incluida la verificación desde este lado de la tabla de correspondencia de `GeometriaFactory-Visor`. Declara **un** artefacto omitido con su motivo, los **once** quality gates y las **tres** puertas técnicas con su carácter, y la tabla de recuentos con la fuente de cada uno. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

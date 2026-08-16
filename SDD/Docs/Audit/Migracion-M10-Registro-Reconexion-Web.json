@@ -1,0 +1,624 @@
+{
+ "reconectados": [
+  {
+   "archivo": "./Handoff-Checkout.md",
+   "anterior": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Handoff-Checkout.md",
+   "anterior": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/_fusion/Visor/Matriz-Sensado-Deriva.md",
+   "nuevo": "Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Handoff-Checkout.md",
+   "anterior": "Unidades-Entrega/GeometriaFactory-Web/11-Documentacion/_fusion/Visor/README.md",
+   "nuevo": "Unidades-Entrega/GeometriaFactory-Web/11-Documentacion/README.md"
+  },
+  {
+   "archivo": "./Producto/Vista-Producto.md",
+   "anterior": "../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Producto/Pipeline-Producto.md",
+   "anterior": "../Unidades-Entrega/GeometriaFactory-Web/09-Devops/_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Cobertura-Pruebas.md",
+   "anterior": "../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md",
+   "nuevo": "../02-Especificacion-Funcional/Especificacion-Funcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Cobertura-Pruebas.md",
+   "anterior": "../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Cobertura-Pruebas.md",
+   "anterior": "../../Estrategia-Testing.md",
+   "nuevo": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Cobertura-Pruebas.md",
+   "anterior": "../../Estrategia-Testing.md",
+   "nuevo": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Criterios-Validacion.md",
+   "anterior": "../../Estrategia-Testing.md",
+   "nuevo": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Estrategia-Testing.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/README.md",
+   "anterior": "_fusion/Visor/Matriz-Sensado-Deriva.md",
+   "nuevo": "Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../../Guia-Testing-Extensibilidad.md",
+   "nuevo": "Guia-Testing-Extensibilidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../07-Plan-Sprint/_fusion/Visor/Mini-Plan.md",
+   "nuevo": "../07-Plan-Sprint/Mini-Plan.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Definition-Of-Done.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Visor/README.md",
+   "nuevo": "../03-UX-UI-DX/README.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "anterior": "../../Matriz-Sensado-Deriva.md",
+   "nuevo": "Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../../Guia-Testing-Extensibilidad.md",
+   "nuevo": "Guia-Testing-Extensibilidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Estrategia-Calidad.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+   "anterior": "../../Estrategia-Testing.md",
+   "nuevo": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+   "anterior": "../../Estrategia-Testing.md",
+   "nuevo": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Definition-Of-Ready.md",
+   "nuevo": "../06-Backlog-Tecnico/Definition-Of-Ready.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../../Guia-Testing-Extensibilidad.md",
+   "nuevo": "Guia-Testing-Extensibilidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../../Estrategia-Testing.md",
+   "nuevo": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Plan-Pruebas.md",
+   "anterior": "../../Estrategia-Testing.md",
+   "nuevo": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md",
+   "anterior": "_fusion/Visor/Supply-Chain-Seguridad.md",
+   "nuevo": "Supply-Chain-Seguridad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Criterios-Validacion.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Supply-Chain-Seguridad.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "_fusion/Visor/Pipeline-CI-CD.md",
+   "nuevo": "Pipeline-CI-CD.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../../Guia-Publicacion-Bundle-Visor.md",
+   "nuevo": "Guia-Publicacion-Bundle-Visor.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/README.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/README.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Criterios-Validacion.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Criterios-Validacion.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../../Guia-Publicacion-Bundle-Visor.md",
+   "nuevo": "Guia-Publicacion-Bundle-Visor.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Criterios-Validacion.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Criterios-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md",
+   "anterior": "_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md",
+   "anterior": "_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md",
+   "anterior": "_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md",
+   "anterior": "../../Guia-Publicacion-Bundle-Visor.md",
+   "nuevo": "Guia-Publicacion-Bundle-Visor.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Estrategia-Calidad.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Estrategia-Calidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Estrategia-Versionado.md",
+   "anterior": "../../Guia-Publicacion-Bundle-Visor.md",
+   "nuevo": "Guia-Publicacion-Bundle-Visor.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Estrategia-Versionado.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/09-Devops/Estrategia-Versionado.md",
+   "anterior": "../08-Calidad-Y-Pruebas/_fusion/Visor/Plan-Pruebas.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Plan-Pruebas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md",
+   "nuevo": "Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md",
+   "nuevo": "Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md",
+   "nuevo": "Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md",
+   "nuevo": "Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md",
+   "nuevo": "Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md",
+   "nuevo": "Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md",
+   "nuevo": "Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md",
+   "nuevo": "Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md",
+   "nuevo": "Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md",
+   "nuevo": "Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md",
+   "nuevo": "../02-Especificacion-Funcional/Especificacion-Funcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../03-UX-UI-DX/_fusion/Visor/Glosario-UX.md",
+   "nuevo": "../03-UX-UI-DX/Glosario-UX.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md",
+   "nuevo": "../02-Especificacion-Funcional/Especificacion-Funcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md",
+   "nuevo": "Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md",
+   "nuevo": "Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md",
+   "nuevo": "Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md",
+   "nuevo": "Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md",
+   "nuevo": "Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md",
+   "nuevo": "Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md",
+   "nuevo": "Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md",
+   "nuevo": "Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md",
+   "nuevo": "Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Extensibilidad.md",
+   "nuevo": "Extensibilidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md",
+   "nuevo": "Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md",
+   "nuevo": "../02-Especificacion-Funcional/Especificacion-Funcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Contratos-Abstractions.md",
+   "nuevo": "Contratos-Abstractions.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../../Extensibilidad.md",
+   "nuevo": "Extensibilidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../09-Devops/_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "../09-Devops/Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "anterior": "../09-Devops/_fusion/Visor/Entornos-Deploy.md",
+   "nuevo": "../09-Devops/Entornos-Deploy.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Decisiones-Arquitectura.md",
+   "anterior": "../../Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md",
+   "nuevo": "Adrs/ADR-12001-Tres-Capas-Con-Fachada-Plana.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Decisiones-Arquitectura.md",
+   "anterior": "../../Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md",
+   "nuevo": "Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Decisiones-Arquitectura.md",
+   "anterior": "../../Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md",
+   "nuevo": "Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Decisiones-Arquitectura.md",
+   "anterior": "../../Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md",
+   "nuevo": "Adrs/ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Decisiones-Arquitectura.md",
+   "anterior": "../../Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md",
+   "nuevo": "Adrs/ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Decisiones-Arquitectura.md",
+   "anterior": "../../Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md",
+   "nuevo": "Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Decisiones-Arquitectura.md",
+   "anterior": "../../Extensibilidad.md",
+   "nuevo": "Extensibilidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/07-Plan-Sprint/Mini-Plan.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Product-Backlog.md",
+   "nuevo": "../06-Backlog-Tecnico/Product-Backlog.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/07-Plan-Sprint/Mini-Plan.md",
+   "anterior": "../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/07-Plan-Sprint/Mini-Plan.md",
+   "anterior": "../06-Backlog-Tecnico/_fusion/Visor/Backlog-Tecnico.md",
+   "nuevo": "../06-Backlog-Tecnico/Backlog-Tecnico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/07-Plan-Sprint/Mini-Plan.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/07-Plan-Sprint/Mini-Plan.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX/Glosario-UX.md",
+   "anterior": "../02-Especificacion-Funcional/_fusion/Visor/Glosario-Funcional.md",
+   "nuevo": "../02-Especificacion-Funcional/Glosario-Funcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Backlog-Tecnico.md",
+   "anterior": "../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md",
+   "nuevo": "../02-Especificacion-Funcional/Especificacion-Funcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md",
+   "anterior": "../../../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md",
+   "nuevo": "../../../Audit/D-06-07-Backlog-Siete-Proyectos-r1.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Definition-Of-Ready.md",
+   "anterior": "../02-Especificacion-Funcional/_fusion/Visor/Especificacion-Funcional.md",
+   "nuevo": "../02-Especificacion-Funcional/Especificacion-Funcional.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Definition-Of-Ready.md",
+   "anterior": "../05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/Definition-Of-Ready.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00003-Trabajo-Con-Dueno-Estado-Y-Persistencia.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00004-Interpretacion-Fiel-Del-Dato-Del-Alumno.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00005-Visibilidad-Del-Error-De-Calculo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00006-Visualizacion-Dentro-Del-Producto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md",
+   "nuevo": "../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Especificacion-Funcional.md",
+   "anterior": "../../Definicion-Contrato-De-Fachada.md",
+   "nuevo": "Definicion-Contrato-De-Fachada.md"
+  }
+ ],
+ "sin_resolver": [
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Casos-Prueba-Referenciales.md"
+  }
+ ]
+}

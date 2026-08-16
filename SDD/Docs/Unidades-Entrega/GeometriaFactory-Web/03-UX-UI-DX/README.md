@@ -1,10 +1,10 @@
 # 03 · UX / UI / DX — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-09
+**Fecha:** 2026-08-16
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
 **Variante:** UX/UI
 **Trazabilidad upstream:** `../02-Especificacion-Funcional/` completo —`Especificacion-Funcional.md` con sus §6 y §7, los diez casos de uso `CU-10001` a `CU-10010` y `Glosario-Funcional.md`—; `../../../00-Contexto/Vision-Producto.md` §2, §3, §9; `../../../00-Contexto/Alcance-Producto.md` §4.1; `../../../00-Contexto/Compatibilidad-Plataformas.md` §2.2 y §4; las nueve `NB-XX` de `../../../01-Necesidades-Negocio/Necesidades-De-Negocio/`; `../../GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §4, §4.2, §5, §6, §7, §14 y §17.6 íntegro; `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` §5 (flags del proyecto de código); catálogo de diseño de `Devs/References/Design/`
@@ -25,6 +25,16 @@
 - [9. Control de cambios](#9-control-de-cambios)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**Es la categoría donde el visor aporta más**: sus seis secciones propias describen la superficie visual del componente empaquetado, que el portal embebe pero no dibuja. **La maqueta de la Fase B2 fue una sola, la del portal**, y la validación de la fachada se integró en ella porque la fachada no dibuja superficie propia.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/03-UX-UI-DX/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/03-UX-UI-DX/).
 
 ## 1. Qué hay en esta carpeta
 
@@ -165,3 +175,4 @@ Cada superficie declara su **nombre canónico** en la sección 1 de su wireframe
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-11`**: §5 afirmaba que «el modelo UX-UI de `Devs/Modelos-UX-UI/` no está elegido a esta fecha» en el mismo documento que declara la Fase B2 ejecutada y cerrada. Pasa a declarar el **resultado del paso 1**: el catálogo de modelos estaba vacío, la única opción ofrecible era la de por defecto, el humano eligió el **catálogo base de `References/Design/`**, y no se capitalizó ningún modelo nuevo. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, con sus dos decisiones. **(a) F-26**: §1 declara el **tercer curso** de `Credencial-Propia`, y §6 corrige la enumeración de capacidades ausentes, que decía «no hay recuperación de contraseña» sin más: lo que no hay es recuperación **autónoma**, y el reseteo por el administrador sí existe. **(b) F-25**: §6 corrige la formulación de RA-02, que declaraba **cinco** funciones del bundle y son **seis**, y suma que es la pieza pública la que consulta el entorno del navegador y manda los dos valores de verdad. **Los recuentos de la sección no cambian**: siguen siendo veinte documentos, once wireframes y once superficies; F-26 no agrega superficie, porque el cambio forzado es un curso de `Credencial-Propia` y el reseteo es una operación de `Panel-De-Cuentas`. |
 | 1.2 | 2026-08-10 | Alineación con `PRODUCT-INTAKE` **1.13** §4.1 (**RN-10016**) y la precisión de **F-04**: habilitar produce la contraseña provisoria, con lo cual el curso de establecimiento **sin credencial vigente deja de existir** y el primer ingreso pasa a recorrer el mismo formulario de tres campos que los otros dos. §2 reescribe la fila de `Wireframes-Credencial-Propia.md`, que sigue teniendo **tres** cursos pero con el primero cambiado. Ningún artefacto se agrega ni se omite. (DX Lead (AG-03)). |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

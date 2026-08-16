@@ -1,15 +1,25 @@
 # 05 · Arquitectura técnica — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Arquitecto de Software Senior (AG-05)
 **Tipo de proyecto de código (D8):** `web-monolith`
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**`Arquitectura-Proyecto-Codigo.md` tiene las once secciones comunes a los dos**, y ahí se ve por qué el visor es un proyecto de código y no una unidad de entrega: produce un **bundle que se copia** a `wwwroot/js/`, no un artefacto que alguien despliegue. En `Contrato-Componente-Visor/` viven los siete documentos de su fachada.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/05-Arquitectura-Tecnica/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/05-Arquitectura-Tecnica/).
 
 ## 1. Punto de entrada
 
@@ -88,3 +98,4 @@ La maqueta de este proyecto de código **se ejecutó y quedó aprobada por el Pr
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de la sección: los tres documentos vigentes, las siete ADR con su estado, los NFR en una línea, el orden de lectura de seis pasos, los cuatro artefactos omitidos con su motivo —incluido el modelo lógico, omitido con ADR contra el valor por defecto de la regla—, el destino de los dos puntos abiertos que llegaron por nombre a esta categoría, y la relación con la Fase B2 aprobada y con la línea de base visual que la codificación tiene que sostener. |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

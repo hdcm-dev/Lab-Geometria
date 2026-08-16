@@ -1,32 +1,29 @@
 # Estrategia de versionado — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Versionado.md
-**Versión:** 1.0
-**Estado:** Aprobado
-**Fecha:** 2026-08-11
-**Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
-**Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5 y §11; [`../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md`](../05-Arquitectura-Tecnica/Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) 1.0; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.3 y §1.4; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.21** §10, §13, §15, §17.2.P.3 · GeometriaFactory-Contracts, §17.2.P.7 · GeometriaFactory-Web y §17.2.P.8 · GeometriaFactory-Web
-**Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md), [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md)
+**Versión:** 2.0
+**Estado:** Propuesto
+**Fecha:** 2026-08-16
+**`tipo_unidad_entrega` (D8):** `web-monolith`
+**Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
+**Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
 
 ---
 
-## Tabla de contenido
+## 0. Cómo leer este documento
 
-- [1. Versionado semántico](#1-versionado-semántico)
-- [2. Convenciones de mensaje de confirmación](#2-convenciones-de-mensaje-de-confirmación)
-- [3. Herramienta de cálculo de la versión](#3-herramienta-de-cálculo-de-la-versión)
-- [4. Modelo de ramas](#4-modelo-de-ramas)
-- [5. Canales](#5-canales)
-- [6. Qué versiona esta unidad, que no es lo que parece](#6-qué-versiona-esta-unidad-que-no-es-lo-que-parece)
-- [7. Política de cambios incompatibles](#7-política-de-cambios-incompatibles)
-- [8. Control de cambios](#8-control-de-cambios)
+**La unidad de entrega tiene un solo documento de esta clase**, y cada sección lleva **una subsección
+por proyecto de código**, con su texto **transpuesto sin reescritura**.
+
+**Las dos secciones de cada apartado son la del portal y la del bundle del visor.** **1 secciones existen sólo en `GeometriaFactory-Visor`** —«Política de crecimiento del punto de extensión»—, y son las que el portal no podía declarar porque describen el componente empaquetado que viaja adentro.
 
 ---
 
 ## 1. Versionado semántico
+
+### 1.1 `GeometriaFactory-Web`
 
 Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.2.P.7 · GeometriaFactory-Web lo declara **sin excepciones**, junto con las convenciones de mensaje de confirmación, y con rama, pull request y etiqueta por etapa.
 
@@ -45,7 +42,32 @@ De ahí que la clase de cambio se decida sobre **lo que la persona ve y puede ha
 
 **La tercera fila es la más importante de la tabla, y es la que distingue a este proyecto de código de todos los demás del producto.** `RA-01`, `RA-02` y `RA-03` son reglas de nivel producto (intake §14) y **este es el único proyecto de código desde el que se pueden violar las tres**, porque es el único que sirve el navegador. Un cambio que las rompe **compila, se publica y se ve bien**: sólo lo detectan los recuentos de `QG-05`, `QG-08` y `QG-09`.
 
+### 1.2 `GeometriaFactory-Visor`
+
+Se adopta el **versionado semántico 2.0.0** en el archivo de manifiesto del paquete, junto con las convenciones de mensaje de confirmación, igual que el resto del producto (intake §17.2.P.7 · GeometriaFactory-Visor).
+
+**Qué gobierna la versión acá, y por qué es distinto de los otros dos proyectos de código de nivel topológico 0.** [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §2 lo decide: gobierna **la superficie pública del punto de extensión** —las **seis** funciones, las **siete** garantías y los **siete** códigos de condición—, que es el punto de extensión declarado del producto (intake §18) y el único proyecto de código con `tiene_extensibilidad` en true.
+
+Y hay una asimetría que ordena todo lo demás, declarada en `ADR-12006` §1: **el anfitrión no compila contra este artefacto**. Lo carga en el navegador e invoca sus funciones por interoperabilidad, de modo que **un cambio incompatible no rompe ninguna compilación: se manifiesta en tiempo de ejecución**.
+
+Criterio de clase de cambio, transcripto de `ADR-12006` §7 **sin agregarle ni quitarle nada**:
+
+| Clase | Qué la produce | ¿Lo detecta una compilación? |
+| --- | --- | --- |
+| **Mayor** | Quitar una función, renombrarla o cambiar qué recibe: rompe al anfitrión y al sample S-1 | No |
+| **Mayor** | **Perder cualquiera de las siete garantías**, aunque las seis firmas no se toquen | No |
+| **Mayor** | Cambiar la semántica de una entrada ya declarada del resultado de dibujo | No |
+| **Menor** | Agregar una función. Así entró la sexta, sin romper a ningún anfitrión escrito contra las cinco anteriores | — |
+| **Menor** | Agregar una entrada nueva al resultado de dibujo, conservando la semántica de las declaradas | — |
+| **Menor** | Agregar un código de condición, que sólo puede nacer en la categoría 02 | — |
+| **Sin efecto de contrato** | Cambiar la forma interna del identificador de instancia, mientras siga siendo opaco y cumpla sus tres propiedades semánticas. Que el anfitrión dependa de su forma es un defecto del anfitrión | — |
+| **Parche** | Corregir el interior de la capa 3 sin cambiar la superficie ni las garantías | — |
+
+**Ninguna de las tres clases mayores la detecta una compilación**, y es la diferencia operativa más importante frente a `GeometriaFactory-Domain` y `GeometriaFactory-Contracts`, donde al menos una clase mayor se manifiesta al construir. La mitigación que `ADR-12006` §2 declara es **la revisión más el sample S-1**, que ejerce el contrato entero sin ninguna pieza del backend, y esta categoría la hace operativa en [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md) §3.
+
 ## 2. Convenciones de mensaje de confirmación
+
+### 2.1 `GeometriaFactory-Web`
 
 Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la versión que en el resto del producto:
 
@@ -58,7 +80,22 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 **Precisión propia de este proyecto de código.** Como ninguna de las seis clases de §1 la detecta un compilador, **el marcador de cambio incompatible no puede depender de que algo falle al construir**: se escribe porque el criterio de §1 dice que corresponde. Un cambio que quita una acción de una superficie y llega etiquetado `feat` es un cambio mayor mal marcado, y lo levanta la revisión del pull request más el guion acumulativo.
 
+### 2.2 `GeometriaFactory-Visor`
+
+**Conventional Commits 1.0.0**, con el mismo efecto sobre la versión que en el resto del producto:
+
+| Prefijo del mensaje | Efecto sobre la versión |
+| --- | --- |
+| `feat` | Sube **MINOR** |
+| `fix` | Sube **PATCH** |
+| `feat!`, o `BREAKING CHANGE` en el pie del mensaje | Sube **MAJOR** |
+| `refactor`, `perf`, `test`, `chore`, `docs`, `style`, `build`, `ci` | No sube nada |
+
+**Regla propia, y es la consecuencia directa de §1**: como **ninguna** clase mayor la detecta una compilación, el marcador de cambio incompatible se escribe **porque el criterio de `ADR-12006` §7 dice que corresponde**, y nunca porque algo se haya roto al construir. En particular, **perder una garantía es cambio mayor aunque las seis firmas queden intactas y el bundle compile y dibuje**: el archivo de confirmación es el único lugar donde eso se declara antes de que un anfitrión lo descubra en ejecución.
+
 ## 3. Herramienta de cálculo de la versión
+
+### 3.1 `GeometriaFactory-Web`
 
 **Se declara por su función, y esta categoría no la elige**, por el mismo motivo que en el resto del producto: ninguna fuente la nombra y la regla de anclaje del intake, en el encabezado de su Parte C, la ata al momento en que se introduce.
 
@@ -70,7 +107,21 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 **Y una versión que sí se ancla y no se calcula**: la de la **biblioteca de componentes de interfaz**, que la fuente deja explícitamente **[A VERIFICAR]** y declara que se registra al crear el andamiaje (intake §17.2.P.1 · GeometriaFactory-Web). Es `PA-01` de `05` §11 y `BT-10002` de la etapa `a`. **Esta categoría no la inventa.**
 
+### 3.2 `GeometriaFactory-Visor`
+
+**Se declara por su función**, como en el resto del producto: el intake §17.1.P.7 · GeometriaFactory-Domain —al que §17.2.P.7 · GeometriaFactory-Visor se alinea— ata la elección al anclaje de la etapa `a`, y `ADR-12006` §6 acepta explícitamente que **la versión no la verifique ninguna herramienta** y que sea una convención sostenida por disciplina.
+
+| Aspecto | Decisión |
+| --- | --- |
+| Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta, y reflejarla en el manifiesto del paquete |
+| Qué **no** puede calcular ninguna herramienta | La pérdida de una garantía y el cambio de semántica de una entrada del resultado de dibujo. Los dos son cambios mayores que no dejan rastro en ninguna firma |
+| Qué lo sustituye | La revisión del pull request de la etapa —que **es** el punto de control— y la batería de la categoría 08 sobre las **siete** garantías, con objetivo **7 de 7** verificadas antes de fusionar |
+
+Las tres filas se apoyan en `ADR-12006` §6 y §8.
+
 ## 4. Modelo de ramas
+
+### 4.1 `GeometriaFactory-Web`
 
 El del producto, heredado entero y sin variantes: **una rama por etapa** a partir de la principal, con etiqueta al fusionar; **un pull request por etapa, que es el punto de control**; **etapas en serie**, sin abrir la rama de una etapa antes de fusionar la anterior; y sin OK explícito no se avanza (intake §10, §15 y §17.2.P.7 · GeometriaFactory-Web).
 
@@ -83,7 +134,17 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 **Las etapas que este proyecto de código toca son ocho** —`a` a `h`, **todas las comprometidas**—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../08-Calidad-Y-Pruebas/README.md) §6. Es el único proyecto de código del producto que las toca todas, y la consecuencia para esta categoría es que **su guion acumulativo crece en cada una**: en la etapa `h` `QG-04` verifica los pasos de las ocho.
 
+### 4.2 `GeometriaFactory-Visor`
+
+El del producto, sin variantes: una rama por etapa a partir de la principal, etiqueta al fusionar, un pull request por etapa que **es** el punto de control, etapas en serie y sin OK explícito no se avanza (intake §10, §15 y §17.1.P.7 · GeometriaFactory-Domain; `ADR-12006` §7, primera viñeta).
+
+**Los momentos de este proyecto de código no son sólo etapas**, y el modelo de ramas tiene que convivir con eso. [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §1 declara **tres** momentos: la etapa `a`, el **momento de medición de `PT-02` y `PT-03`** —que no es una etapa y no crea una nueva— y la etapa `g`. La consecuencia para esta categoría es que **la medición de las dos puertas no espera a la rama de la etapa `g`**: si esperara, mediría después de comprometerla, que es justo lo que el intake §15 prohíbe al declarar que una puerta que no pasa **detiene la planificación** de lo que depende de ella.
+
+**Reglas de protección de la rama principal:** los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 en verde, incluidas las tres inspecciones **sobre el bundle generado**, y la constancia del OK del punto de control.
+
 ## 5. Canales
+
+### 5.1 `GeometriaFactory-Web`
 
 **No hay canales de publicación de paquete**, y hay **un** canal de despliegue.
 
@@ -95,7 +156,17 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 | Canal `stable` | **Se corresponde con el único destino**: el hosting público | Intake §17.2.P.7 · GeometriaFactory-Web |
 | Sufijos de anticipo `-alpha`, `-beta`, `-rc` | **No se usan** | No hay canal donde publicar un anticipo. Las etiquetas del producto son **de etapa cerrada**, no de anticipo (intake §15) |
 
+### 5.2 `GeometriaFactory-Visor`
+
+**No hay canales de publicación.** El intake §17.2.P.7 · GeometriaFactory-Visor declara que **no se publica** en ningún repositorio de paquetes del ecosistema del navegador, y [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 descartó la alternativa con su fundamento. El apartamiento frente a `Rules-Devops.md` §2.2 queda registrado en [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.1.
+
+**Sin sufijos de anticipo.** No hay canal donde publicar un anticipo del punto de extensión ni integrador que lo consuma; el anfitrión carga el archivo que la construcción produjo.
+
+**Y una consecuencia de la resolución de `PA-05`**: como el bundle **no se versiona en el repositorio** ([`Entornos-Deploy.md`](Entornos-Deploy.md) §2), no existe la figura de «la versión del bundle que está en el repositorio». La versión que importa es la del **estado del fuente**, y el artefacto se regenera desde ahí. Es lo que hace verificable la métrica de reproducibilidad de `ADR-12006` §8: dos construcciones desde el mismo estado producen el mismo artefacto.
+
 ## 6. Qué versiona esta unidad, que no es lo que parece
+
+### 6.1 `GeometriaFactory-Web`
 
 Hay una asimetría propia de este proyecto de código que conviene declarar, porque afecta a lo que una etiqueta garantiza:
 
@@ -111,6 +182,8 @@ Hay una asimetría propia de este proyecto de código que conviene declarar, por
 
 ## 7. Política de cambios incompatibles
 
+### 7.1 `GeometriaFactory-Web`
+
 Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §4.3 pide, y el reemplazo está fundado: **una política de obsolescencia da plazo de migración a integradores que no se controlan, y acá no hay ninguno.** Lo que rige en su lugar:
 
 | Obligación | Cómo se verifica | Fundamento |
@@ -125,8 +198,24 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 
 **Las seis métricas de [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8 se adoptan sin agregar ninguna**, y las cuatro que no figuran arriba como obligación de versionado figuran como gates en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2: la respuesta de la dirección pública, la salida hacia el servicio de datos, el bundle generado en el mismo flujo y las publicaciones que terminan sin comprobar.
 
-## 8. Control de cambios
+## 8. Política de crecimiento del punto de extensión
 
-| Versión | Fecha | Descripción |
+### 8.1 `GeometriaFactory-Visor`
+
+Reemplaza a la política de obsolescencia de `Rules-Devops.md` §4.3, y el reemplazo tiene fundamento: no hay integrador externo a quien dar plazo de migración —el único anfitrión es `GeometriaFactory-Web`, del mismo producto—. Lo que sí hay, y es más exigente que un plazo, es un **procedimiento para que la superficie crezca**.
+
+| Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
-| 1.0 | 2026-08-11 | Emisión inicial. Adopta el versionado semántico 2.0.0 y las Conventional Commits 1.0.0 que el intake §17.2.P.7 · GeometriaFactory-Web declara **sin excepciones**, y declara la consecuencia de que esta unidad sea **hoja del grafo y no exponga contrato a nadie**: la clase de cambio se decide sobre **lo que la persona ve y puede hacer**, con **seis** clases y **ninguna** detectable por un compilador, entre ellas la rotura de las tres reglas de arquitectura, que es la única clase que **compila, se publica y se ve bien**. Declara la herramienta de cálculo por su función sin elegirla, y la versión de la biblioteca de componentes como valor **[A VERIFICAR]** que no se inventa. Declara el modelo de ramas con la precisión de que **acá fusionar puede desencadenar un despliegue**, y que este es el único proyecto de código que toca **las ocho** etapas comprometidas. Declara la ausencia de canales de paquete con **un** canal de despliegue, la asimetría de **qué versiona realmente la etiqueta** —incluido el bundle, que se regenera y no se restaura— y la política de cambios incompatibles con **siete** obligaciones, adoptando las seis métricas de `ADR-10007` §8 sin agregar ninguna. |
+| Una función nueva en la fachada recorre **los seis pasos** de [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) §5 **enteros**, incluida la consolidación en el intake | Criterio de salida de [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §3, y Definition of Done §1.3 | `08` y `05` |
+| Un código de condición **sólo puede nacer en la categoría 02**; ninguno se acuña aguas abajo | `QG-08`, con `TC-12021`, comparando en las dos direcciones | `08` `Estrategia-Calidad.md` §3 |
+| **Perder una garantía es cambio mayor**, y las **siete** se verifican antes de fusionar | Objetivo **7 de 7** | `ADR-12006` §7 y §8 |
+| El bundle **nunca se edita a mano**; objetivo: exactamente **0** ediciones manuales | `QG-09` y `CV-30` | `ADR-12006` §8; `08` |
+| Todo cambio mayor recibe su fila en el registro de cambios del producto; objetivo: **0** cambios mayores sin registro | Revisión del pull request de la etapa | `ADR-12006` §8 |
+
+**El antecedente que muestra que el procedimiento funciona ya ocurrió**: la sexta función de la fachada entró como cambio menor **sin romper a ningún anfitrión escrito contra las cinco anteriores** (`ADR-12006` §6, punto 3, y §7). El intake la consolidó en §17.2.P.3 · GeometriaFactory-Visor en su versión 1.6. Es el recorrido completo de los seis pasos, hecho una vez y registrado.
+
+## 9. Control de cambios
+
+| Versión | Fecha | Cambios |
+| --- | --- | --- |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

@@ -1,10 +1,10 @@
 # 02 · Especificación Funcional — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 1.5
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-08-16
 **Autor:** Analista Funcional senior (AG-02)
 **Trazabilidad upstream:** [`Especificacion-Funcional.md`](Especificacion-Funcional.md) §3 (catálogo), §4 (matriz), §6 (restricciones transversales) y §9 (omisiones); `../../../00-Contexto/Vision-Producto.md` §3 y §9; `../../../00-Contexto/Alcance-Producto.md` §4.1 y §5; `../../../01-Necesidades-Negocio/Necesidades-Negocio.md` §2 y §5.3; `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13, §14 (RA-01 a RA-03) y §17.6
 **Trazabilidad downstream:** `../03-UX-UI-DX/` de este proyecto de código, que es el downstream más directo; `05-Arquitectura-Tecnica`; `06-Backlog-Tecnico`; `08-Calidad-Y-Pruebas`
@@ -20,6 +20,16 @@
 - [5. Control de cambios](#5-control-de-cambios)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
+
+**Los siete casos de uso del visor ya no están acá**: la consolidación de casos de uso los reubicó a `05-Arquitectura-Tecnica/Contrato-Componente-Visor/`, porque son la **API de un componente interno** y quien los ejerce es el portal, no una persona. Lo que este índice consolida es el marco y el vocabulario.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/02-Especificacion-Funcional/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/02-Especificacion-Funcional/).
 
 ## 1. Punto de entrada
 
@@ -81,3 +91,4 @@ Advertencias para las categorías aguas abajo:
 | 1.3 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: las reglas del producto pasan de trece a **quince** con **RN-10014** —la provisoria la produce el sistema— y **RN-10015** —resetear no exige cuenta habilitada—, y las cuatro que entraron después de la emisión inicial tienen archivo en `GeometriaFactory-Domain`, de modo que la nota de omisión de `Reglas-De-Negocio/` actualiza su recuento. **Ningún documento de esta sección, ningún caso de uso y ninguna restricción transversal cambia.** Sube minor. |
 | 1.4 | 2026-08-10 | Alineación con `PRODUCT-INTAKE` **1.13** §4.1 (**RN-10016**) y la precisión de **F-04**, que `CU-10002` 1.3, `CU-10003` 1.4 y `CU-10004` 1.6 absorben: habilitar una cuenta produce su contraseña provisoria y **no queda ninguna ruta que fije una contraseña sin credencial vigente**. §1 reescribe la línea de `CU-10003`. Ningún artefacto se agrega ni se omite y el orden de lectura no cambia. (Analista Funcional senior (AG-02)). |
 | 1.5 | 2026-08-10 | **Cierra el hallazgo `C-02` (P0) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** La fila de `Reglas-De-Negocio/` de **§4** declaraba «Las **quince** reglas viven en `GeometriaFactory-Domain`» y enumeraba las cuatro entradas tardías; el conjunto tiene **dieciséis** reglas, `RN-10001` a `RN-10016`, contadas sobre los archivos de `GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/`. Pasa a **dieciséis**, con **RN-10016** sumada a la enumeración de las entradas tardías —entró con el intake 1.13— y con «las otras once» recontado y sin cambio. **Ningún caso de uso, ninguna restricción transversal y ninguna fila de la matriz cambia**: acá las reglas se referencian y no se redactan. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

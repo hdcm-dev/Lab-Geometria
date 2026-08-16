@@ -1,0 +1,39 @@
+{
+ "reconectados": [
+  {
+   "archivo": "./Handoff-Checkout.md",
+   "anterior": "Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/_fusion/Domain/README.md",
+   "nuevo": "Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/README.md"
+  },
+  {
+   "archivo": "./Handoff-Checkout.md",
+   "anterior": "Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/_fusion/Application/README.md",
+   "nuevo": "Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/README.md"
+  },
+  {
+   "archivo": "./Handoff-Checkout.md",
+   "anterior": "Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/_fusion/Infrastructure/README.md",
+   "nuevo": "Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/README.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/Mini-Plan.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/Mini-Plan.md",
+   "anterior": "../00-Contexto/Roadmap-Producto.md",
+   "nuevo": "../../../00-Contexto/Roadmap-Producto.md"
+  }
+ ],
+ "sin_resolver": [
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Casos-Prueba-Referenciales.md"
+  }
+ ]
+}

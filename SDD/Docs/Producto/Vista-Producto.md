@@ -72,7 +72,7 @@ La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle c
 | Códigos del contrato | 17 vivos sobre 20 emitidos, 3 retirados | [`Contracts/Contratos-Abstractions.md`](Contratos-Inter-Unidad/Contratos-Abstractions.md) §5.1 |
 | Funciones de la fachada del visor | 6 | [`Visor/Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3 |
 | Escenarios de datos | 8, `E-1` a `E-8` | `PRODUCT-INTAKE` §20 |
-| Casos de la batería del validador | 10 | [`Infrastructure/08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/_fusion/Infrastructure/Criterios-Validacion.md) `CV-02` |
+| Casos de la batería del validador | 10 | [`Infrastructure/08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md) `CV-02` |
 | Quality gates | 77 — `Api` 15, `Infrastructure` 14, `Application` 11, `Web` 11, `Contracts` 9, `Visor` 9, `Domain` 8 | `Proyectos/<Nombre>/09-Devops/` y `08-Calidad-Y-Pruebas/` |
 | Sondas de verificación `VER-XX` | 19 | `Proyectos/<Nombre>/10-Examples/ejemplo-XX-*.md`, sección de contrato de verificación |
 
@@ -84,12 +84,12 @@ Refleja `PRODUCT-MANIFEST` **1.3** §2 y §5. **Ningún proyecto de código es `
 
 | `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | Tipo D8 | Rol en el producto | `redistribuible` | Arquitectura |
 | --- | --- | --- | --- | --- | --- |
-| `GeometriaFactory-Domain` | `GeometriaFactory.Domain` | `library` | Entidades e invariantes; centro de la regla de dependencias | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Domain/Arquitectura-Proyecto-Codigo.md) |
+| `GeometriaFactory-Domain` | `GeometriaFactory.Domain` | `library` | Entidades e invariantes; centro de la regla de dependencias | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
 | `GeometriaFactory-Contracts` | `GeometriaFactory.Contracts` | `library` | Tipos de transferencia; contrato compartido por los dos procesos desplegables | false | [`05`](../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
-| `GeometriaFactory-Visor` | `geometriafactory-visor` | `library` | Bundle JavaScript del visor 3D; visualizador puro (`RA-02`) | false | [`05`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/_fusion/Visor/Arquitectura-Proyecto-Codigo.md) |
-| `GeometriaFactory-Application` | `GeometriaFactory.Application` | `library` | Casos de uso y los cuatro puertos | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md) |
+| `GeometriaFactory-Visor` | `geometriafactory-visor` | `library` | Bundle JavaScript del visor 3D; visualizador puro (`RA-02`) | false | [`05`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
+| `GeometriaFactory-Application` | `GeometriaFactory.Application` | `library` | Casos de uso y los cuatro puertos | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
 | `GeometriaFactory-Web` | `GeometriaFactory.Web` | `web-monolith` | Front en el hosting público; **único punto de contacto del navegador** | false | [`05`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
-| `GeometriaFactory-Infrastructure` | `GeometriaFactory.Infrastructure` | `library` | Adaptadores de los cuatro puertos, seguridad y validador de figuras | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md) |
+| `GeometriaFactory-Infrastructure` | `GeometriaFactory.Infrastructure` | `library` | Adaptadores de los cuatro puertos, seguridad y validador de figuras | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
 | `GeometriaFactory-Api` | `GeometriaFactory.Api` | `rest-api` | Host en el servidor propio (**principal**) | false | [`05`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) |
 
 **Siete proyectos de código, tres tipos D8**: `library` (5), `web-monolith` (1) y `rest-api` (1). **Exactamente uno es principal**, `GeometriaFactory-Api`, como exige la validación bloqueante del manifiesto §4.
@@ -146,8 +146,8 @@ nivel 3: GeometriaFactory-Api
 | # | Arista | Contrato del productor | Qué cruza la frontera |
 | --- | --- | --- | --- |
 | 1 | `Domain` → `Application`, `Infrastructure` | [`Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-Abstractions.md) | Entidades e invariantes del dominio. **El dominio no lee el reloj ni el conjunto**: lo que no cruza es tan contrato como lo que cruza |
-| 2 | `Application` → `Infrastructure`, `Api` | [`Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Application/Contratos-Abstractions.md) | Los casos de uso y **los cuatro puertos**, que son la frontera hacia afuera del dominio |
-| 3 | `Infrastructure` → `Api` | [`Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Infrastructure/Contratos-Abstractions.md) | Los adaptadores de los cuatro puertos y los dos mecanismos de seguridad, más la responsabilidad de arranque |
+| 2 | `Application` → `Infrastructure`, `Api` | [`Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-Abstractions.md) | Los casos de uso y **los cuatro puertos**, que son la frontera hacia afuera del dominio |
+| 3 | `Infrastructure` → `Api` | [`Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-Abstractions.md) | Los adaptadores de los cuatro puertos y los dos mecanismos de seguridad, más la responsabilidad de arranque |
 | 4 | `Contracts` → `Api` **y** `Contracts` → `Web` | [`Contratos-Abstractions.md`](Contratos-Inter-Unidad/Contratos-Abstractions.md) | Los tipos de transferencia y el **conjunto cerrado de códigos del contrato**. Es el único contrato que **dos proyectos de código compilan a la vez**, y por eso es la red del producto |
 | 5 | `Api` → `Web` (**tiempo de ejecución**) | [`Contratos-REST.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) | Los **quince** puntos de acceso, los **diez** códigos de respuesta, la traducción de los **diecisiete** códigos del contrato y el **formato de intercambio fijado para los dos extremos**. Es el único contrato del producto que cruza una frontera de proceso |
 | 6 | `Visor` → `Web` | [`Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Contratos-Abstractions.md) | Las **seis** funciones de la fachada del bundle. Es el **punto de extensión declarado del producto** (`tiene_extensibilidad` == true), detallado en [`Extensibilidad.md`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Extensibilidad.md) |
