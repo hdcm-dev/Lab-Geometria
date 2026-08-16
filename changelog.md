@@ -295,8 +295,10 @@ Se actualiza **en la rama de la etapa, no después de la fusión** (intake §16 
 ## Etapa `f` — Importación y validación
 
 **Rama:** `codigo/etapa-f-validador`
-**EN CURSO.** Esta entrada se escribe **en la rama de la etapa**, como manda el intake §16, y se
-completa a medida que la etapa avanza. Lo que sigue es lo que ya está construido y verificado.
+Escrita **en la rama de la etapa**, como manda el intake §16, y completada a medida que la etapa
+avanzó. **Los cinco criterios de la transición `e` → `f` estaban cerrados desde la etapa anterior; lo
+que esta etapa cierra son los ocho de la `f` → `g`, menos `PT-02` y `PT-03`, que se miden antes de
+comprometer la `g` y no para cerrar ésta.**
 
 ### Agregado
 
@@ -329,8 +331,29 @@ completa a medida que la etapa avanza. Lo que sigue es lo que ya está construid
 - **El operador estricto de la tolerancia, anclado en una prueba y no sólo en la prosa**: una
   diferencia de 0.010 no advierte y una de 0.011 sí. Es lo que hace que `E-1` devuelva **dos**
   advertencias y no tres, porque el área del cilindro difiere en exactamente 0.01.
-- `Norma-De-Nomenclatura.md` **1.18** §6.21: los **40** identificadores que esta etapa necesitó —3
-  tipos, 12 valores de conjunto cerrado y 25 miembros—, agregados **antes** de escribirlos, por el
+- **La orquestación del envío**, que es lo que convierte al validador en producto: el envío
+  interpreta el texto, **adopta** el resultado en el trabajo y **deja que el dominio resuelva el
+  estado** con RN-05. Vale para el alta y para la reedición, porque **enviar es la única acción de
+  guardado** del alumno.
+- **`Work.AdoptInterpretation`** (`Domain BT-13`), la operación que la etapa `e` declaró pendiente.
+  **Reemplaza y no acumula**, y rechaza cuatro cosas que serían defectos del validador y no del
+  alumno: una posición fuera del rango del conjunto raíz, una especie desconocida, un error sin
+  ubicación y una advertencia sin los dos valores. **Los cuatro códigos ya estaban en el glosario:
+  cero filas nuevas**, que es la cuarta etapa seguida en que eso ocurre.
+- **Las tres tablas restantes del modelo de datos** —`Pieza`, `Componente` y `Observacion`— con su
+  transformación de esquema, sus arrastres y el índice único de trabajo y posición. **Con ellas las
+  cinco tablas del modelo existen**, y la transformación de la etapa `c` **no se editó**.
+- **El cuarto puerto conectado.** Con `IFigureValidator` ⟶ `LocalFigureValidator`, el cuadre de
+  `QG-10` queda **completo por primera vez desde la etapa `a`**: los cuatro puertos declarados
+  tienen adaptador.
+- **La colección de observaciones en el contrato**, que la etapa `e` declaró ausente anunciando que
+  entraba acá. Entra como el cambio **compatible** que aquella emisión anticipó.
+- **La pantalla que se las muestra al alumno**, con la forma que la maqueta aprobada ya tenía
+  diseñada —`gf-findings`, `gf-finding-location` y la grilla `gf-values`— esperando a la etapa que
+  la poblara: **no se inventó ni una clase**. Cada observación se lee con su figura, su posición y
+  su campo, y la advertencia muestra **los dos valores uno al lado del otro**.
+- `Norma-De-Nomenclatura.md` **1.18** §6.21: los **44** identificadores que esta etapa necesitó —5
+  tipos, 12 valores de conjunto cerrado y 27 miembros—, agregados **antes** de escribirlos, por el
   corolario 4 de §6.1.
 
 ### Decidido en esta etapa, y elevado al punto de control
@@ -368,15 +391,32 @@ completa a medida que la etapa avanza. Lo que sigue es lo que ya está construid
   con contenido —que las tres entidades sólo se escriban por sus propias fábricas, y que la
   observación no lleve mensaje redactado—.
 
-### No hecho, y declarado
+### Encontrado al construir, y corregido
 
-- **La etapa no está cerrada.** Lo construido es el validador con su batería. **Falta la
-  orquestación**: el caso de uso de envío que adopta la interpretación y deja que el dominio
-  resuelva el estado, su punto de acceso, el contrato de respuesta con las observaciones, y la
-  pantalla que se las muestra al alumno. Hasta que eso exista, **el puerto sigue sin conectar en la
-  composición** y todo trabajo sigue quedando en `Borrador`, igual que en la etapa `e`.
+- **Un defecto que sólo aparecía en el segundo envío de un trabajo.** El repositorio traía el
+  trabajo **sin sus colecciones**, de modo que la interpretación anterior no se borraba: el segundo
+  envío intentaba insertar una pieza en una posición que la del primero seguía ocupando, y el
+  índice único la rechazaba. La primera entrega de cada trabajo funcionaba perfecto. Lo encontró la
+  prueba de superficie de la reedición, que es la única que envía dos veces el mismo trabajo.
+- **Dos fixtures que decían ser escenarios del intake y no lo eran.** Las dos pruebas de trabajos de
+  la etapa `e` llamaban `ScenarioE2` a un objeto con una clave `Figuras` que **ninguna fuente
+  transcribe**. Pasó desapercibido porque hasta la etapa `e` el texto no se interpretaba y a la
+  fixture sólo se le pedía llegar entera al almacén. Se reemplazan por escenarios reales: es la
+  regla de delivery 5 de §15, y la etapa que interpreta es la primera que puede notar la diferencia.
+
+### No hecho, y declarado
 - **`PT-02` y `PT-03` no se midieron**: la transición `f` → `g` las exige **antes de comprometer la
   etapa `g`**, no para cerrar ésta.
+- **La visualización no se toca**: el dibujo es de la etapa `g`. La pantalla de envío **sigue sin
+  ofrecer «previsualizar»**, porque un control que no dibuja nada es una promesa incumplida.
+- **Tres apartamientos del modelo de datos, declarados y elevados**, los tres con el mismo
+  fundamento —el propio §1 del modelo de datos declara que **manda el modelo del dominio** cuando
+  los dos difieren—: la pieza **no lleva columna de dimensiones**, porque el modelo del dominio
+  enumera siete atributos y ninguno lo es; el componente lleva **tres columnas** en lugar de una de
+  texto, porque las claves del emisor son un conjunto cerrado y chico; y la posición de la
+  observación es **nulable**, porque hay dos observaciones que no son de ninguna figura y con la
+  columna obligatoria **no se podrían guardar**, que son justamente las únicas que el alumno tiene
+  para entender qué pasó cuando su texto no se pudo leer.
 - **Cuántos tipos reconstruibles hay sigue siendo punto abierto aguas arriba.** Los seis de
   `Definicion-Contrato-Del-Validador-De-Figuras.md` §5 son los que los escenarios ejercitan; el
   análisis menciona siete clases en `Ejemplo1` y diez en `Ejemplo2`, y **ninguna fuente las

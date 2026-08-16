@@ -124,7 +124,7 @@ public static class WorkEndpoints
             // `201`: se constituyó algo que antes no existía.
             return Results.Created(
                 $"{WorksRoute}/{outcome.WorkId}",
-                new WorkSubmissionResponse(outcome.WorkId, outcome.Status.ToString(), outcome.RegisteredAt));
+                new WorkSubmissionResponse(outcome.WorkId, outcome.Status.ToString(), outcome.RegisteredAt, ContractTranslation.Observations(outcome)));
         })
         .WithName("SubmitWork")
         .RequireAuthorization();
@@ -182,7 +182,7 @@ public static class WorkEndpoints
             log.LogInformation("Trabajo {WorkId} reeditado y resuelto en {Status}.", id, outcome.Status);
 
             return Results.Ok(
-                new WorkSubmissionResponse(outcome.WorkId, outcome.Status.ToString(), outcome.RegisteredAt));
+                new WorkSubmissionResponse(outcome.WorkId, outcome.Status.ToString(), outcome.RegisteredAt, ContractTranslation.Observations(outcome)));
         })
         .WithName("ResubmitWork")
         .RequireAuthorization();

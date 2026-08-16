@@ -13,13 +13,21 @@ namespace GeometriaFactory.Contracts.Works;
 /// EL ESTADO VIAJA POR SU NOMBRE Y NUNCA POR SU POSICIÓN (`Contratos-REST.md` §2): un valor
 /// insertado en el medio del conjunto cerrado cambiaría el significado de todo lo ya emitido.
 ///
-/// LA COLECCIÓN DE OBSERVACIONES NO ESTÁ, Y SU AUSENCIA ES DECLARADA. `Api CU-06` §4 paso 4 la
-/// nombra, y **en la etapa `e` no hay nada que poblar**: el texto no se interpreta hasta la etapa
-/// `f`, que es la que construye el validador de figuras. Declararla ahora obligaría a inventar la
-/// forma de la observación, que es lo que esa etapa decide; agregarla entonces es un cambio
-/// **compatible** (`Contratos-Abstractions.md` §6).
+/// LA COLECCIÓN DE OBSERVACIONES ENTRA EN LA ETAPA `f`, y entra como el cambio **compatible** que
+/// la etapa `e` anticipó al declarar su ausencia (`Contratos-Abstractions.md` §6): la etapa `e` no
+/// la declaró porque habría tenido que inventar la forma de la observación, que es lo que decide
+/// la etapa que construye el validador.
+///
+/// VIENE VACÍA CUANDO EL TEXTO VERIFICÓ SIN DISCREPANCIAS, y eso **no es lo mismo que no haberlo
+/// interpretado**: quien quiera distinguir los dos casos mira el estado, que en el primero es
+/// `Pendiente`.
 /// </remarks>
 /// <param name="WorkId">Identidad propia del trabajo, asignada por el producto.</param>
 /// <param name="Status">Estado resultante, por su nombre, del conjunto cerrado de cuatro valores.</param>
 /// <param name="RegisteredAt">Momento del registro, en tiempo universal coordinado.</param>
-public sealed record WorkSubmissionResponse(Guid WorkId, string Status, DateTimeOffset RegisteredAt);
+/// <param name="Observations">Lo que la interpretación emitió, de las dos especies.</param>
+public sealed record WorkSubmissionResponse(
+    Guid WorkId,
+    string Status,
+    DateTimeOffset RegisteredAt,
+    IReadOnlyList<WorkObservation> Observations);

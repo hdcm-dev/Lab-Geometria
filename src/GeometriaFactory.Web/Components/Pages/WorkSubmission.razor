@@ -63,10 +63,16 @@
         único que la persona lee mientras espera: prometer una interpretación ahí sería la misma
         mentira que el bloque de resultado evita. Se usa el verbo de la acción, que es el mismo que
         `Registro-De-Cuenta` ya declara en `data-gf-pending`.
-     3. **LA LISTA DE OBSERVACIONES DEL BLOQUE DE RESULTADO NO SE DIBUJA.** `WorkSubmissionResponse`
-        declara en su propio comentario que la colección **no está** y por qué: no hay nada que
-        poblar hasta la etapa `f`. Dibujar «Observaciones (0)» afirmaría que se interpretó y no
-        salió ninguna, que es la misma mentira con otro disfraz.
+     3. **LA LISTA DE OBSERVACIONES SE DIBUJA DESDE LA ETAPA `f`**, que es la que interpreta. Los
+        dos apartamientos de arriba **también caducan acá**: el estado en curso vuelve a decir
+        «Interpretando tu trabajo…», que es el texto del wireframe §5, porque ahora es cierto.
+        **La previsualización sigue sin dibujarse**: el dibujo lo trae el visor, que es de la
+        etapa `g`.
+
+     LA REDACCIÓN DE CADA OBSERVACIÓN VIVE ACÁ Y NO EN EL CONTRATO, y es la contracara de que el
+     contrato mande datos y no frases: la advertencia se lee «tu programa declara 36,00 y la
+     geometría da 54,00», con los dos valores que el alumno puede comparar contra su propio código,
+     y el error se lee con su figura y su campo. **Ningún mensaje es genérico** (RN-02009).
 
    RA-01: el envío sale desde el servidor de esta pieza, por `DataServiceClient`.
    RA-03: ningún mensaje de esta superficie nombra una dirección interna. *@
@@ -116,16 +122,63 @@ else if (_result is { } result)
             Tu trabajo quedó en estado <span class="gf-badge @BadgeClassOf(result.Status)">@LabelOf(result.Status)</span>
         </h2>
 
-        @* EL TEXTO PROPIO DE LA ETAPA `e`. Ver el bloque de la cabecera: dice lo que pasó, por qué
-           queda en borrador, y que de eso no se deduce nada sobre el texto del alumno. *@
         <p class="gf-caption gf-mt-3">
             Tu trabajo quedó guardado con todo lo que escribiste, y ya figura en tu listado.
         </p>
-        <p class="gf-caption gf-mt-2">
-            <strong>El laboratorio todavía no interpreta el texto, así que por ahora todos los trabajos quedan en borrador.</strong>
-            De eso no se deduce nada sobre lo que pegaste: no se revisó. Podés volver sobre él y
-            reenviarlo cuantas veces quieras.
-        </p>
+
+        @* EL TEXTO DEPENDE DEL DESENLACE, y los dos dicen qué pasó y qué sigue. El de borrador
+           NO acusa al programa del alumno de nada que el laboratorio no haya mirado: nombra las
+           figuras que no se pudieron interpretar y deja el resto en la lista de abajo. *@
+        @if (result.Status == "Submitted")
+        {
+            <p class="gf-caption gf-mt-2">
+                El texto se interpretó y quedó entregado.
+                @if (Warnings.Count > 0)
+                {
+                    <strong>Con @Warnings.Count @(Warnings.Count == 1 ? "advertencia" : "advertencias"), que no impiden la entrega:</strong>
+                    <span>son valores que tu programa declara y que no coinciden con la geometría de las dimensiones que él mismo emitió.</span>
+                }
+            </p>
+        }
+        else
+        {
+            <p class="gf-caption gf-mt-2">
+                <strong>El texto no se pudo interpretar entero, así que el trabajo queda en borrador.</strong>
+                <span>Abajo está qué figura y qué campo lo impidieron. Corregí tu programa, volvé a pegar el texto y reenvialo cuantas veces quieras.</span>
+            </p>
+        }
+
+        @* ---- La lista de observaciones (CMP-25), con la forma que la maqueta aprobada ya le dio:
+           `gf-findings` para el conjunto, `gf-finding-location` para la ubicación y `gf-values`
+           para el par declarado/derivado. NO SE INVENTÓ NINGUNA CLASE: la línea de base visual ya
+           tenía diseñado exactamente este bloque, esperando a la etapa que lo poblara. ---- *@
+        @if (result.Observations.Count > 0)
+        {
+            <h3 class="gf-subtitle gf-mt-4">Observaciones (@result.Observations.Count)</h3>
+            <ul class="gf-findings gf-mt-2">
+                @foreach (var observation in result.Observations)
+                {
+                    <li class="gf-finding">
+                        <span class="gf-badge @(observation.Kind == WorkObservationKind.ValidationError ? "gf-badge--danger" : "gf-badge--warning")">
+                            @(observation.Kind == WorkObservationKind.ValidationError ? "Error" : "Advertencia")
+                        </span>
+                        <div class="gf-finding-body">
+                            <p class="gf-finding-location">@LocationOf(observation)</p>
+                            <p>@Explain(observation)</p>
+                            @if (observation is { DeclaredValue: { } declared, DerivedValue: { } derived })
+                            {
+                                @* LOS DOS VALORES, UNO AL LADO DEL OTRO. Es lo único que le permite
+                                   al alumno comparar contra su propio programa. *@
+                                <dl class="gf-values">
+                                    <dt>Tu programa declara</dt><dd class="gf-num">@declared.ToString("N2")</dd>
+                                    <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
+                                </dl>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
 
         <dl class="gf-key-value gf-mt-4">
             <dt>Identificador del trabajo</dt><dd class="gf-num">@result.WorkId</dd>
@@ -428,4 +481,46 @@ else
         "Rejected" => "gf-badge--danger",
         _ => "gf-badge--neutral",
     };
+    /// <summary>Las advertencias del resultado, que no impiden la entrega.</summary>
+    private IReadOnlyList<WorkObservation> Warnings =>
+        _result is null
+            ? []
+            : [.. _result.Observations.Where(o => o.Kind == WorkObservationKind.Warning)];
+
+    /// <summary>Dónde está la observación, dicho como lo ve la persona.</summary>
+    /// <remarks>
+    /// SE NOMBRAN LAS DOS: la figura como la cuenta una persona —la primera es la 1— y la posición
+    /// como la cuenta el texto —la primera es la 0—. El alumno recorre su lista con la primera y
+    /// busca en su código con la segunda, y no declarar cuál es cuál es la forma más barata de que
+    /// corrija la figura equivocada.
+    /// </remarks>
+    private static string LocationOf(WorkObservation observation) =>
+        observation.PiecePosition is { } position
+            ? $"Figura {position + 1} · posición {position} · campo «{observation.Field}»"
+            : "En el texto completo";
+
+    /// <summary>
+    /// Redacta una observación para la persona que escribió el texto.
+    /// </summary>
+    /// <remarks>
+    /// ACÁ VIVE LA REDACCIÓN Y NO EN EL CONTRATO, que manda datos. Es lo que permite cambiar una
+    /// palabra sin cambiar el contrato, y lo que mantiene el idioma del producto en la capa que
+    /// habla con la persona.
+    ///
+    /// NINGÚN MENSAJE ES GENÉRICO (RN-02009): la ubicación la da `LocationOf` y los dos valores los
+    /// dibuja la grilla. Lo que redacta este método es **qué pasó**, no dónde.
+    /// </remarks>
+    private static string Explain(WorkObservation observation)
+    {
+        if (observation.Kind == WorkObservationKind.Warning)
+        {
+            return $"El valor de «{observation.Field}» que trae tu texto no coincide con el que se "
+                + "deriva de las dimensiones que tu propio programa emitió.";
+        }
+
+        return observation.PiecePosition is null
+            ? "No se pudo interpretar el texto. Revisá que sea el que emite tu programa, pegado entero."
+            : $"No se pudo interpretar el campo «{observation.Field}» de esta figura, así que la "
+                + "figura no se reconstruyó. El resto del texto sí se interpretó.";
+    }
 }

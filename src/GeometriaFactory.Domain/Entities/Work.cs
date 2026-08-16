@@ -38,6 +38,9 @@ namespace GeometriaFactory.Domain.Entities;
 /// </remarks>
 public sealed class Work
 {
+    private readonly List<Piece> _pieces = [];
+    private readonly List<Observation> _observations = [];
+
     /// <summary>
     /// Constructor de materialización. Lo usa el motor de persistencia y nadie más: el único
     /// camino de alta del producto es <see cref="Create"/>, y no hay un segundo.
@@ -104,6 +107,13 @@ public sealed class Work
     /// se valida una observación (RN-09) y la columna es parte de la tabla desde su creación.
     /// </remarks>
     public int? RootFigureCount { get; private set; }
+
+    /// <summary>Las piezas que la interpretación reconstruyó, en su posición del conjunto raíz.</summary>
+    /// <remarks>Vacío mientras el texto no se interpretó, y **con huecos** cuando alguna falló.</remarks>
+    public IReadOnlyList<Piece> Pieces => _pieces;
+
+    /// <summary>Las observaciones que la interpretación emitió, de las dos especies.</summary>
+    public IReadOnlyList<Observation> Observations => _observations;
 
     /// <summary>Momento en que el trabajo quedó constituido. Obligatorio y NO SE REESCRIBE.</summary>
     public DateTimeOffset CreatedAt { get; private set; }
@@ -228,7 +238,103 @@ public sealed class Work
         DeclaredDate = declaredDate.Trim();
         Description = description;
         OriginalJson = originalJson;
+
+        // LA INTERPRETACIÓN ANTERIOR SE DESCARTA ENTERA, y desde la etapa `f` eso ya no es sólo la
+        // cantidad de figuras: el texto nuevo es OTRO texto, y las piezas y observaciones que
+        // sobrevivieran describirían uno que ya no está guardado.
         RootFigureCount = null;
+        _pieces.Clear();
+        _observations.Clear();
+        UpdatedAt = updatedAt;
+
+        return DomainResult.Applied();
+    }
+
+    /// <summary>
+    /// `Domain BT-13` — Adopta el resultado de la interpretación, **reemplazando el anterior**.
+    /// </summary>
+    /// <remarks>
+    /// ETAPA `f`. Es la operación que la etapa `e` declaró pendiente en <see cref="RootFigureCount"/>
+    /// y en <see cref="Edit"/>: hasta hoy la interpretación no existía y no había nada que adoptar.
+    ///
+    /// REEMPLAZA Y NO ACUMULA. Un trabajo reenviado se interpreta de nuevo, y las piezas y
+    /// observaciones de la vez anterior **no sobreviven**: dejarlas convertiría el conjunto en la
+    /// unión de dos lecturas de dos textos distintos, y ninguna posición significaría nada.
+    ///
+    /// NO RESUELVE EL ESTADO, y por eso es una operación aparte de <see cref="Submit"/>: adoptar es
+    /// incorporar lo que el validador leyó, y decidir es aplicar RN-05 sobre eso. Juntarlas haría
+    /// imposible adoptar sin decidir, que es lo que la reedición necesita.
+    ///
+    /// LA POSICIÓN DE CADA OBSERVACIÓN TIENE QUE CAER EN EL RANGO DEL CONJUNTO RAÍZ (RN-09), y es
+    /// lo único que esta operación rechaza: una observación que señala una figura que el texto no
+    /// tiene es un defecto del validador, no del alumno, y adoptarla le mostraría a la persona una
+    /// ubicación que no puede encontrar.
+    /// </remarks>
+    /// <param name="rootFigureCount">Cuántas figuras trae el texto, **incluidas las fallidas**.</param>
+    /// <param name="pieces">Las piezas reconstruidas, con su posición.</param>
+    /// <param name="observations">Las observaciones emitidas, de las dos especies.</param>
+    /// <param name="updatedAt">Momento del cambio, aportado por el consumidor.</param>
+    public DomainResult AdoptInterpretation(
+        int rootFigureCount,
+        IEnumerable<Piece> pieces,
+        IEnumerable<Observation> observations,
+        DateTimeOffset updatedAt)
+    {
+        ArgumentNullException.ThrowIfNull(pieces);
+        ArgumentNullException.ThrowIfNull(observations);
+
+        if (IsTerminal)
+        {
+            return DomainResult.Rejected(ConditionCode.TransitionFromTerminalStatus);
+        }
+
+        if (rootFigureCount < 0)
+        {
+            return DomainResult.Rejected(ConditionCode.RequiredFieldMissing);
+        }
+
+        var adoptedPieces = pieces.ToList();
+        var adoptedObservations = observations.ToList();
+
+        // RN-09: la posición designada tiene que existir en el conjunto raíz. Vale para las piezas
+        // y para las observaciones, y por el mismo motivo.
+        if (adoptedPieces.Any(p => p.Position < 0 || p.Position >= rootFigureCount)
+            || adoptedObservations.Any(o => o.PiecePosition is { } position
+                && (position < 0 || position >= rootFigureCount)))
+        {
+            return DomainResult.Rejected(ConditionCode.ObservationOnMissingPiece);
+        }
+
+        // La especie, ANTES de contar errores: RN-05 se predica de ella, y contar sobre un conjunto
+        // con una especie desconocida daría un número que no significa nada.
+        if (adoptedObservations.Any(o => !Enum.IsDefined(o.Kind)))
+        {
+            return DomainResult.Rejected(ConditionCode.UnknownObservationKind);
+        }
+
+        // RN-09: ningún mensaje genérico. Un error sin campo, o sin posición cuando hay figuras a
+        // las que atribuirlo, es exactamente lo que la regla existe para impedir.
+        if (adoptedObservations.Any(o => o.Kind == ObservationKind.ValidationError
+            && (string.IsNullOrWhiteSpace(o.Field)
+                || (o.PiecePosition is null && rootFigureCount > 0))))
+        {
+            return DomainResult.Rejected(ConditionCode.ErrorWithoutLocation);
+        }
+
+        // Sin los dos valores el alumno no ve EN QUÉ discrepa su programa, que es lo único que la
+        // advertencia le aporta.
+        if (adoptedObservations.Any(o => o.Kind == ObservationKind.Warning
+            && (o.DeclaredValue is null || o.DerivedValue is null)))
+        {
+            return DomainResult.Rejected(ConditionCode.WarningMissingBothValues);
+        }
+
+        _pieces.Clear();
+        _pieces.AddRange(adoptedPieces);
+        _observations.Clear();
+        _observations.AddRange(adoptedObservations);
+
+        RootFigureCount = rootFigureCount;
         UpdatedAt = updatedAt;
 
         return DomainResult.Applied();

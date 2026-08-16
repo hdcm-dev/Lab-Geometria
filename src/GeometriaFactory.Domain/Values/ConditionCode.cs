@@ -92,6 +92,36 @@ public static class ConditionCode
     /// <summary>`RESETEO_CON_ARRASTRE_DE_TRABAJOS` — CU-13, RN-12. Resetear no es dar de baja.</summary>
     public const string ResetWithWorkCascade = "RESET_WITH_WORK_CASCADE";
 
+    // ---- LOS CUATRO QUE AGREGA LA ETAPA `f` -------------------------------------------------
+    // Los cuatro ya estaban en el catálogo y en `Norma-De-Nomenclatura.md` §6.8.1 con su nombre
+    // inglés fijado por `F-03`: acá se transcriben, no se acuñan. **Cero filas nuevas**, que es la
+    // cuarta vez seguida que el glosario hace exactamente lo que §6.1 promete.
+
+    /// <summary>
+    /// `OBSERVACION_SOBRE_PIEZA_INEXISTENTE` — CU-00026, RN-02009. La posición que la observación
+    /// designa no pertenece al rango del conjunto raíz interpretado. **Es un defecto del validador
+    /// y no del alumno**: adoptarla le mostraría a la persona una ubicación que no puede encontrar.
+    /// </summary>
+    public const string ObservationOnMissingPiece = "OBSERVATION_ON_MISSING_PIECE";
+
+    /// <summary>
+    /// `ERROR_SIN_UBICACION` — CU-00026, RN-02009. Un error de validación sin posición **atribuible
+    /// a una figura** o sin campo. Es el mensaje genérico que la regla existe para impedir.
+    /// </summary>
+    public const string ErrorWithoutLocation = "ERROR_WITHOUT_LOCATION";
+
+    /// <summary>
+    /// `ADVERTENCIA_SIN_LOS_DOS_VALORES` — CU-00026. Una advertencia de discrepancia que no trae el
+    /// declarado y el derivado. Sin los dos, el alumno no ve **en qué** discrepa su programa.
+    /// </summary>
+    public const string WarningMissingBothValues = "WARNING_MISSING_BOTH_VALUES";
+
+    /// <summary>
+    /// `ESPECIE_DE_OBSERVACION_DESCONOCIDA` — CU-00026, RN-02005. Una especie fuera del conjunto
+    /// cerrado de dos. Se rechaza **antes** de contar errores: RN-02005 se predica de la especie.
+    /// </summary>
+    public const string UnknownObservationKind = "UNKNOWN_OBSERVATION_KIND";
+
     // ---- LOS CATORCE QUE AGREGA LA ETAPA `e` -----------------------------------------------
     // Los catorce ya estaban en el catálogo y en `Norma-De-Nomenclatura.md` §6.8.1 con su nombre
     // inglés fijado por `F-03`: acá se transcriben, no se acuñan.

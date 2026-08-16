@@ -1,5 +1,7 @@
 using GeometriaFactory.Application.Accounts;
+using GeometriaFactory.Application.Works;
 using GeometriaFactory.Contracts.Errors;
+using GeometriaFactory.Contracts.Works;
 using GeometriaFactory.Domain.Values;
 
 namespace GeometriaFactory.Api.Endpoints;
@@ -265,5 +267,31 @@ public static class ContractTranslation
         return Results.Json(
             new ErrorResponse(translation.Code, translation.Message, details, occurredAt),
             statusCode: translation.StatusCode);
+    }
+    /// <summary>
+    /// Traduce las observaciones del dominio a las del contrato, **sin redactar ninguna frase**.
+    /// </summary>
+    /// <remarks>
+    /// ES UNA TRANSPOSICIÓN Y NO UNA REDACCIÓN: cambia el tipo y no el contenido. La especie viaja
+    /// por su nombre, la posición y el campo van tal como el dominio los emitió, y el campo
+    /// **conserva la clave del texto del alumno** —`Tipo`, `Largo`, `Area`— porque la persona la va
+    /// a buscar en su propio programa.
+    ///
+    /// EL ORDEN ES EL DE EMISIÓN, que es el del recorrido del conjunto raíz: la observación de la
+    /// figura 0 antes que la de la 1. Reordenar por especie pondría los errores primero y las
+    /// advertencias después, que se lee bien y **deja de decir dónde estaba cada cosa**.
+    /// </remarks>
+    public static IReadOnlyList<WorkObservation> Observations(WorkOutcomeSnapshot outcome)
+    {
+        ArgumentNullException.ThrowIfNull(outcome);
+
+        return outcome.Observations is null
+            ? []
+            : [.. outcome.Observations.Select(o => new WorkObservation(
+                o.Kind.ToString(),
+                o.PiecePosition,
+                o.Field,
+                o.DeclaredValue,
+                o.DerivedValue))];
     }
 }

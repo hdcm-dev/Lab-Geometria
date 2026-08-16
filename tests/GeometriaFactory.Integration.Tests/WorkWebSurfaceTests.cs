@@ -65,19 +65,20 @@ public sealed class WorkWebSurfaceTests : IDisposable
     /// `Tapas`. Se transcribe tal como lo emite el programa del alumno y **no se corrige**: es el
     /// texto con el que se comprueba que la pantalla no lo toca.
     /// </summary>
-    private const string ScenarioE2 = """
-        {
-          "Figuras": [
-            {
-              "Tipo": "Ortoedro",
-              "Largo": 7, "Ancho": 7, "Alto": 21,
-              "Tapas": 2,
-              "Area": 686.00,
-              "Volumen": 343.00,
-            }
-          ],
-        }
-        """;
+    /// <summary>
+    /// Un texto que **no verifica**: el del escenario `E-5`, con su figura 1 de tipo desconocido.
+    /// </summary>
+    /// <remarks>
+    /// **[CORRECCIÓN Y RELEVO DE LA ETAPA `f`, DECLARADOS.]** Esta constante se llamaba `TextThatDoesNotVerify`
+    /// y **no era el texto de `E-2`**: era un objeto inventado con una clave `Figuras` que ninguna
+    /// fuente transcribe. Pasó desapercibido porque hasta la etapa `e` el texto no se interpretaba
+    /// y a la fixture sólo se le pedía llegar entera al almacén.
+    ///
+    /// Se reemplaza por un escenario real, y se elige **el que no verifica** porque es lo que estas
+    /// pruebas necesitan: casi todas siembran o esperan trabajos en `Borrador`, y desde la etapa
+    /// `f` un texto correcto ya no queda en borrador.
+    /// </remarks>
+    private const string TextThatDoesNotVerify = Scenarios.E5;
 
     /// <summary>Forma de un acceso firmado: tres tramos separados por punto, el primero `eyJ`.</summary>
     private static readonly Regex SignedAccessShape =
@@ -137,7 +138,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         Assert.Contains("autocapitalize=\"off\"", formHtml, StringComparison.Ordinal);
 
         using var sent = await PostSubmissionAsync(
-            form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", "un ortoedro", ScenarioE2);
+            form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", "un ortoedro", TextThatDoesNotVerify);
         var sentHtml = Read(await sent.Content.ReadAsStringAsync());
 
         Trace("2 · POST del envío", sent);
@@ -152,10 +153,17 @@ public sealed class WorkWebSurfaceTests : IDisposable
         // Y LA PANTALLA NO SIMULA UNA ENTREGA QUE NO OCURRE, ni acusa al texto de no verificar.
         Assert.DoesNotContain("Ya está entregado", sentHtml, StringComparison.Ordinal);
         Assert.DoesNotContain("El texto no verificó", sentHtml, StringComparison.Ordinal);
-        Assert.Contains("todos los trabajos quedan en borrador", sentHtml, StringComparison.Ordinal);
+
+        // **[relevo de la etapa `f`.]** Hasta la etapa `e` la pantalla decía «todos los trabajos
+        // quedan en borrador», y era cierto porque nadie interpretaba. Ahora el texto **sí se
+        // interpreta**, y lo que la persona lee es POR QUÉ el suyo quedó en borrador, con la figura
+        // y el campo que lo impidieron. La pantalla sigue sin acusar a su programa de algo que el
+        // laboratorio no miró: lo que declara es lo que no pudo interpretar.
+        Assert.Contains("no se pudo interpretar entero", sentHtml, StringComparison.Ordinal);
+        Assert.Contains("Figura 2 · posición 1 · campo «Tipo»", sentHtml, StringComparison.Ordinal);
 
         // EL TEXTO SE LEE DEL ALMACÉN Y NO DE LA RESPUESTA: la pantalla no lo tocó.
-        Assert.Equal(ScenarioE2, await StoredTextAsync(workId));
+        Assert.Equal(TextThatDoesNotVerify, await StoredTextAsync(workId));
         Assert.Equal("Draft", await StoredStatusAsync(workId));
 
         // 3 · Y el listado propio lo trae, con su estado y sus tres acciones de borrador.
@@ -185,7 +193,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
     public async Task TheStudentReeditsADraftAndTheChangeIsVisible()
     {
         var mark = await SignInAsStudentAsync();
-        await LoadWorkThroughTheSurfaceAsync(mark, "Primer intento", ScenarioE2);
+        await LoadWorkThroughTheSurfaceAsync(mark, "Primer intento", TextThatDoesNotVerify);
 
         var workId = await OnlyWorkIdAsync();
         var editRoute = $"/trabajos/{workId}/editar";
@@ -198,10 +206,13 @@ public sealed class WorkWebSurfaceTests : IDisposable
         Assert.Equal(HttpStatusCode.OK, edit.StatusCode);
         Assert.Contains("Volver sobre tu borrador", editHtml, StringComparison.Ordinal);
         Assert.Contains("value=\"Primer intento\"", editHtml, StringComparison.Ordinal);
-        Assert.Contains("\"Tapas\": 2,", editHtml, StringComparison.Ordinal);
+        Assert.Contains("\"Tipo\": \"Piramide\"", editHtml, StringComparison.Ordinal);
 
-        // 2 · Se reenvía con otro nombre y otro texto.
-        const string Corrected = """{ "Figuras": [ { "Tipo": "Cubo", "Lado": 3 } ] }""";
+        // 2 · Se reenvía con otro nombre y otro texto. **[relevo de la etapa `f`.]** El texto
+        // corregido es el del escenario `E-4` —el cubo de `Ejemplo2`—, que verifica sin una sola
+        // observación: es el circuito entero que la persona vive, y hasta la etapa `e` no se podía
+        // ejercer porque ningún texto verificaba.
+        const string Corrected = Scenarios.E4;
 
         using var resent = await PostSubmissionAsync(
             edit, editHtml, editRoute, mark, "Primer intento corregido", "10/08/2026", "ahora un cubo", Corrected);
@@ -210,6 +221,15 @@ public sealed class WorkWebSurfaceTests : IDisposable
         Trace("2 · POST de la reedición", resent);
         Assert.Equal(HttpStatusCode.OK, resent.StatusCode);
         Assert.Contains("Tu trabajo quedó en estado", resentHtml, StringComparison.Ordinal);
+
+        // Y EL DESENLACE CAMBIÓ: el texto corregido verifica, el trabajo queda entregado y **no
+        // hay ninguna observación que mostrar**. Es el criterio negativo de `E-4`, visto por la
+        // persona: la pantalla no dibuja «Observaciones (0)», que afirmaría que se interpretó y no
+        // salió ninguna cuando lo cierto es que no salió ninguna porque estaba todo bien.
+        Assert.Contains("Pendiente", resentHtml, StringComparison.Ordinal);
+        Assert.Contains("El texto se interpretó y quedó entregado", resentHtml, StringComparison.Ordinal);
+        Assert.DoesNotContain("Observaciones (", resentHtml, StringComparison.Ordinal);
+        Assert.Equal("Submitted", await StoredStatusAsync(workId));
 
         // NO SE CONSTITUYÓ UN TRABAJO NUEVO: el identificador es el mismo y sigue habiendo uno solo.
         Assert.Equal(1, await CountWorksAsync());
@@ -242,8 +262,8 @@ public sealed class WorkWebSurfaceTests : IDisposable
         var mark = await SignInAsStudentAsync();
         var studentId = await IdOfAsync(StudentEmail);
 
-        var draftId = await SeedWorkAsync(studentId, "Prueba 2", ScenarioE2, WorkStatus.Draft);
-        var submittedId = await SeedWorkAsync(studentId, "Cubo y ortoedro", ScenarioE2, WorkStatus.Submitted);
+        var draftId = await SeedWorkAsync(studentId, "Prueba 2", TextThatDoesNotVerify, WorkStatus.Draft);
+        var submittedId = await SeedWorkAsync(studentId, "Cubo y ortoedro", TextThatDoesNotVerify, WorkStatus.Submitted);
 
         // 1 · LA PANTALLA ACOTA: sobre el borrador ofrece las tres acciones; sobre el entregado,
         //     sólo abrir. Lo que el estado no admite NO SE DIBUJA, ni siquiera inhabilitado.
@@ -317,7 +337,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         var mark = await SignInAsStudentAsync();
 
         var otherId = await EnrolOtherStudentAsync();
-        var foreignWorkId = await SeedWorkAsync(otherId, "Segundo intento", ScenarioE2, WorkStatus.Draft);
+        var foreignWorkId = await SeedWorkAsync(otherId, "Segundo intento", TextThatDoesNotVerify, WorkStatus.Draft);
 
         // EL TRABAJO AJENO EXISTE DE VERDAD EN EL ALMACÉN: esta prueba no pasa por ausencia.
         Assert.Equal("Draft", await StoredStatusAsync(foreignWorkId));
@@ -385,9 +405,9 @@ public sealed class WorkWebSurfaceTests : IDisposable
         var otherId = await EnrolOtherStudentAsync();
 
         // DOS BORRADORES DE DOS ALUMNOS DISTINTOS, Y UN ENTREGADO.
-        var draftOfStudent = await SeedWorkAsync(studentId, "Prueba 2", ScenarioE2, WorkStatus.Draft);
-        var draftOfOther = await SeedWorkAsync(otherId, "Borrador de Beto", ScenarioE2, WorkStatus.Draft);
-        var submitted = await SeedWorkAsync(studentId, "Cubo y ortoedro", ScenarioE2, WorkStatus.Submitted);
+        var draftOfStudent = await SeedWorkAsync(studentId, "Prueba 2", TextThatDoesNotVerify, WorkStatus.Draft);
+        var draftOfOther = await SeedWorkAsync(otherId, "Borrador de Beto", TextThatDoesNotVerify, WorkStatus.Draft);
+        var submitted = await SeedWorkAsync(studentId, "Cubo y ortoedro", TextThatDoesNotVerify, WorkStatus.Submitted);
 
         // ESTÁN DE VERDAD, leído del almacén: la prueba no pasa por ausencia.
         Assert.Equal("Draft", await StoredStatusAsync(draftOfStudent));
@@ -443,7 +463,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
     {
         var mark = await SignInAsStudentAsync();
         var studentId = await IdOfAsync(StudentEmail);
-        var draftId = await SeedWorkAsync(studentId, "Prueba 2", ScenarioE2, WorkStatus.Draft);
+        var draftId = await SeedWorkAsync(studentId, "Prueba 2", TextThatDoesNotVerify, WorkStatus.Draft);
 
         var token = SessionTokenOf(mark);
         _output.WriteLine($"testigo guardado del lado del servidor: {token.Length} caracteres");
@@ -467,7 +487,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
             Record("envío de trabajo", form, formHtml);
 
             using var sent = await PostSubmissionAsync(
-                form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", null, ScenarioE2);
+                form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", null, TextThatDoesNotVerify);
             Record("resultado del envío", sent, Read(await sent.Content.ReadAsStringAsync()));
         }
 

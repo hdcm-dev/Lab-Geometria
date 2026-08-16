@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Reflection;
 using GeometriaFactory.Domain.Entities;
 using Xunit;
@@ -45,6 +46,11 @@ public sealed class DependencyGateTests
     {
         var entities = typeof(Account).Assembly
             .GetTypes()
+            // LOS TIPOS QUE GENERA EL COMPILADOR NO SON ENTIDADES. Aparecen en el espacio de
+            // nombres desde que la etapa `f` escribió expresiones lambda dentro de una entidad, y
+            // contarlos haría fallar la prueba por una decisión de sintaxis. **[relevo de la etapa
+            // `f`, declarado: lo que la prueba afirma —cinco entidades y ninguna más— no cambia.]**
+            .Where(type => !Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute)))
             .Where(type => type.Namespace == "GeometriaFactory.Domain.Entities")
             .Select(type => type.Name)
             .OrderBy(name => name, StringComparer.Ordinal)

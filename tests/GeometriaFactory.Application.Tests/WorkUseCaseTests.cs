@@ -23,6 +23,25 @@ public sealed class WorkUseCaseTests
 {
     private static readonly DateTimeOffset Moment = new(2026, 4, 2, 10, 0, 0, TimeSpan.Zero);
 
+    /// <summary>
+    /// Doble del puerto de validación de figuras. **Interpreta cero figuras y no observa nada.**
+    /// </summary>
+    /// <remarks>
+    /// ESTE PROYECTO DE PRUEBAS NO CONOCE `GeometriaFactory-Infrastructure` Y NO TIENE QUE
+    /// CONOCERLO: lo que se ejerce acá es la orquestación —que el texto se interprete, que el
+    /// resultado se adopte y que **el estado lo resuelva el dominio**—, no la interpretación en sí,
+    /// que tiene su propia batería obligatoria con los ocho escenarios del intake.
+    ///
+    /// SIN OBSERVACIONES DE ERROR, DE MODO QUE EL TRABAJO PASA A `Submitted`. Es lo que hace
+    /// visible en estas pruebas el cambio que trae la etapa `f`: hasta la `e` el estado resultante
+    /// era siempre `Draft`, porque nadie podía declarar un resultado de interpretación.
+    /// </remarks>
+    private sealed class EmptyValidator : IFigureValidator
+    {
+        public FigureInterpretation Interpret(string originalJson) =>
+            FigureInterpretation.From(0, [], []);
+    }
+
     private sealed class FixedClock : ISystemClock
     {
         public DateTimeOffset UtcNow => Moment;
@@ -171,14 +190,20 @@ public sealed class WorkUseCaseTests
     {
         var (accounts, works, _) = World();
         var student = SeedStudent(accounts, "alumna@frre.utn.edu.ar");
-        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock());
+        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock(), new EmptyValidator());
 
         const string Text = "{ \"Figuras\": [ ], }";
 
         var result = await useCase.LoadAsync(student.Id, "Entrega 1", "2026-08-09", null, Text);
 
         Assert.True(result.Succeeded);
-        Assert.Equal(WorkStatus.Draft, result.Value!.Status);
+
+        // RELEVO DE LA ETAPA `f`, DECLARADO. Hasta la etapa `e` esta prueba exigía `Draft`, y era
+        // cierto: nadie podía declarar un resultado de interpretación y `Submit` rechazaba siempre.
+        // La etapa `f` conecta el validador, de modo que **el estado pasa a depender de lo que la
+        // interpretación devuelve**: sin observaciones de error, el trabajo entra en `Submitted`.
+        // Es el cambio que la transición `f` → `g` pide, visto desde la orquestación.
+        Assert.Equal(WorkStatus.Submitted, result.Value!.Status);
         Assert.Equal(Moment, result.Value.RegisteredAt);
         Assert.Equal(1, works.AddCount);
 
@@ -193,7 +218,7 @@ public sealed class WorkUseCaseTests
     {
         var (accounts, works, _) = World();
         var student = SeedStudent(accounts, "alumna@frre.utn.edu.ar");
-        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock());
+        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock(), new EmptyValidator());
 
         var result = await useCase.LoadAsync(student.Id, null, "2026-08-09", null, "{}");
 
@@ -211,7 +236,7 @@ public sealed class WorkUseCaseTests
         var a = SeedStudent(accounts, "a@frre.utn.edu.ar");
         var b = SeedStudent(accounts, "b@frre.utn.edu.ar");
         var work = works.Seed(NewWork(a.Id, "{}"));
-        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock());
+        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock(), new EmptyValidator());
 
         var result = await useCase.EditAsync(b.Id, work.Id, "otro", "2026-08-10", null, "{ }");
 
@@ -232,7 +257,7 @@ public sealed class WorkUseCaseTests
         var a = SeedStudent(accounts, "a@frre.utn.edu.ar");
         var b = SeedStudent(accounts, "b@frre.utn.edu.ar");
         var work = works.Seed(NewWork(a.Id, "{}"));
-        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock());
+        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock(), new EmptyValidator());
 
         var foreign = await useCase.EditAsync(b.Id, work.Id, "x", "2026-08-10", null, "{}");
         var missing = await useCase.EditAsync(b.Id, Guid.NewGuid(), "x", "2026-08-10", null, "{}");
@@ -251,7 +276,7 @@ public sealed class WorkUseCaseTests
         var (accounts, works, _) = World();
         var a = SeedStudent(accounts, "a@frre.utn.edu.ar");
         var work = works.Seed(Submitted(NewWork(a.Id, "{ \"original\": true }")));
-        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock());
+        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock(), new EmptyValidator());
 
         var result = await useCase.EditAsync(a.Id, work.Id, "x", "2026-08-10", null, "{ \"nuevo\": true }");
 
@@ -269,13 +294,21 @@ public sealed class WorkUseCaseTests
         var (accounts, works, _) = World();
         var a = SeedStudent(accounts, "a@frre.utn.edu.ar");
         var work = works.Seed(NewWork(a.Id, "{}"));
-        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock());
+        var useCase = new LoadAndEditOwnWorkUseCase(works, new FixedClock(), new EmptyValidator());
 
         var result = await useCase.EditAsync(a.Id, work.Id, "Entrega 1", "2026-08-10", "otra cosa", "{ \"x\": 1 }");
 
         Assert.True(result.Succeeded);
         Assert.Equal(1, works.UpdateCount);
-        Assert.Null(work.RootFigureCount);
+
+        // RELEVO DE LA ETAPA `f`, DECLARADO. La prueba exigía que la interpretación anterior
+        // quedara DESCARTADA, y lo comprobaba contra `null` porque en la etapa `e` no había una
+        // segunda interpretación que adoptar. Sigue exigiendo lo mismo, y ahora comprueba lo que
+        // de verdad pasa: la anterior se descarta y **se adopta la del texto nuevo**, que es la
+        // única que puede describir el texto que quedó guardado.
+        Assert.Equal(0, work.RootFigureCount);
+        Assert.Empty(work.Pieces);
+        Assert.Empty(work.Observations);
         Assert.Equal("{ \"x\": 1 }", work.OriginalJson);
     }
 

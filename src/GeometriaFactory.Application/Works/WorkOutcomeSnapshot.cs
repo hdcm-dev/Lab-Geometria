@@ -1,3 +1,4 @@
+using GeometriaFactory.Domain.Entities;
 using GeometriaFactory.Domain.Values;
 
 namespace GeometriaFactory.Application.Works;
@@ -16,4 +17,12 @@ namespace GeometriaFactory.Application.Works;
 /// <param name="WorkId">Identidad propia del trabajo.</param>
 /// <param name="Status">Estado con el que quedó.</param>
 /// <param name="RegisteredAt">Momento del registro, en tiempo universal coordinado.</param>
-public sealed record WorkOutcomeSnapshot(Guid WorkId, WorkStatus Status, DateTimeOffset RegisteredAt);
+/// <param name="Observations">
+/// Lo que la interpretación emitió. **Vacío en los rechazos**, donde no hubo interpretación que
+/// adoptar, y vacío también cuando el texto verificó sin discrepancias.
+/// </param>
+public sealed record WorkOutcomeSnapshot(
+    Guid WorkId,
+    WorkStatus Status,
+    DateTimeOffset RegisteredAt,
+    IReadOnlyList<Observation>? Observations = null);

@@ -47,8 +47,27 @@ public sealed class EfCoreWorkRepository : IWorkRepository
         _dbContext = dbContext;
     }
 
+    /// <summary>
+    /// Trae el trabajo **con su interpretación**: sus piezas, sus componentes y sus observaciones.
+    /// </summary>
+    /// <remarks>
+    /// LAS COLECCIONES SE CARGAN Y NO ES UN LUJO: la etapa `f` **reemplaza** la interpretación en
+    /// cada envío, y reemplazar lo que no se cargó no borra nada. Sin estas tres cargas, el
+    /// segundo envío de un trabajo intenta insertar una pieza en una posición que la del envío
+    /// anterior sigue ocupando, y el índice único de `trabajo, posición` lo rechaza. Es un defecto
+    /// que **no se ve en la primera entrega y aparece en la segunda**.
+    ///
+    /// ESTA CARGA ES DE LA CONSULTA POR IDENTIDAD Y NO DE LOS LISTADOS. El modelo de datos declara
+    /// que los componentes se persisten pese a su redundancia y que eso se compensa **no
+    /// cargándolos nunca en las consultas de listado** (intake §17.1.P.12): las dos proyecciones de
+    /// listado de este mismo repositorio siguen sin tocarlos.
+    /// </remarks>
     public Task<Work?> FindByIdAsync(Guid workId, CancellationToken cancellationToken = default) =>
-        _dbContext.Works.FirstOrDefaultAsync(work => work.Id == workId, cancellationToken);
+        _dbContext.Works
+            .Include(work => work.Pieces)
+                .ThenInclude(piece => piece.Components)
+            .Include(work => work.Observations)
+            .FirstOrDefaultAsync(work => work.Id == workId, cancellationToken);
 
     public async Task AddAsync(Work work, CancellationToken cancellationToken = default)
     {
