@@ -100,10 +100,10 @@ Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Ex
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-04004`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md) | Caso de uso | Carga el trabajo con dueño, identificador propio y sello del puerto de reloj, y recorre el rechazo de reedición |
-| [`CU-04005`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) | Caso de uso | Resuelve los **ocho** envíos: 6 a `Pendiente` y 2 retenidos en `Borrador` |
-| [`CU-04006`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md) | Caso de uso | Devuelve el listado propio con los cuatro estados distinguibles, y el detalle con componentes frente al listado sin ellos |
-| [`CU-04009`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04009-Eliminar-Un-Trabajo.md) | Caso de uso | Retira sólo desde `Borrador` y sólo lo propio, con las dos negativas distinguidas |
+| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Carga el trabajo con dueño, identificador propio y sello del puerto de reloj, y recorre el rechazo de reedición |
+| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Resuelve los **ocho** envíos: 6 a `Pendiente` y 2 retenidos en `Borrador` |
+| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Devuelve el listado propio con los cuatro estados distinguibles, y el detalle con componentes frente al listado sin ellos |
+| [`CU-00027`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md) | Caso de uso | Retira sólo desde `Borrador` y sólo lo propio, con las dos negativas distinguidas |
 | [`RN-02003`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Regla de negocio | El retiro de un trabajo ajeno responde como inexistente |
 | [`RN-02004`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | Regla de negocio | El retiro fuera de `Borrador` se rechaza |
 | [`RN-02005`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Las advertencias no impiden el envío; los errores de `E-5` y `E-8` sí |

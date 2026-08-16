@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **orquestar el reseteo de l
 
 ## 2. Contexto
 
-`F-26` del intake §4 es `Must Have` y cierra un agujero que hacía inutilizable el laboratorio al primer olvido: el único camino documentado era dar de baja y volver a dar de alta, y por `RN-04007` eso eliminaba todos los trabajos del alumno. El contrato de uso es [`CU-04011`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04011-Resetear-La-Contrasena-De-Un-Alumno.md). `RN-04015` declara que el reseteo **no exige que la cuenta esté habilitada**.
+`F-26` del intake §4 es `Must Have` y cierra un agujero que hacía inutilizable el laboratorio al primer olvido: el único camino documentado era dar de baja y volver a dar de alta, y por `RN-04007` eso eliminaba todos los trabajos del alumno. El contrato de uso es [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md). `RN-04015` declara que el reseteo **no exige que la cuenta esté habilitada**.
 
 ## 3. Criterios de aceptación
 

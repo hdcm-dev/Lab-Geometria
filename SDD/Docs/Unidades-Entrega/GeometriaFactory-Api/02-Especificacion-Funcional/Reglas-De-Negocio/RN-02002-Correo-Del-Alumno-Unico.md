@@ -47,8 +47,8 @@ Rechazo del alta, con mensaje explícito hacia la persona que se registra: el in
 
 ## 5. CU afectados
 
-- [CU-02001](../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) — Registrar el alta de un alumno.
-- [CU-02012](../Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) — Configurar la cuenta de administrador en el primer arranque, que es el otro camino de alta y también evalúa esta regla.
+- [CU-00021](../Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) — Registrar el alta de un alumno.
+- [CU-00025](../Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) — Configurar la cuenta de administrador en el primer arranque, que es el otro camino de alta y también evalúa esta regla.
 
 ## 6. Pruebas que la verifican
 

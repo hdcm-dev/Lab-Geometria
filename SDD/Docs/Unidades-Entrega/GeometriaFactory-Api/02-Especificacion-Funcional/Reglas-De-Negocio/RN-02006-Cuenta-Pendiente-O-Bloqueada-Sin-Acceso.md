@@ -47,9 +47,9 @@ Rechazo del ingreso. El dominio devuelve no admisible con el motivo `CUENTA_PEND
 
 ## 5. CU afectados
 
-- [CU-02004](../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) — Evaluar la admisibilidad de la cuenta para acceder al laboratorio.
-- [CU-02003](../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) — Fijar y reemplazar la credencial derivada, que exige la cuenta `Habilitado`.
-- [CU-02002](../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta, que es donde el estado cambia.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Evaluar la admisibilidad de la cuenta para acceder al laboratorio.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Fijar y reemplazar la credencial derivada, que exige la cuenta `Habilitado`.
+- [CU-00023](../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) — Gobernar el ciclo de vida de la cuenta, que es donde el estado cambia.
 
 ## 6. Pruebas que la verifican
 

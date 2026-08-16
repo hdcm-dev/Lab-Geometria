@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **exponer el desenlace de un 
 
 ## 2. Contexto
 
-`RN-00010` declara el desenlace **exclusivo del administrador y terminal**, y `F-23` y `F-21` del intake §4 son `Must Have`. El contrato de uso es [`CU-00008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00008-Exponer-El-Desenlace-De-La-Revision.md), y `02` §8 declara que aprobar y rechazar quedaron juntos **por la misma fusión que el ensamblado de contratos ya justificó**: se distinguen por el valor de un campo de conjunto cerrado.
+`RN-00010` declara el desenlace **exclusivo del administrador y terminal**, y `F-23` y `F-21` del intake §4 son `Must Have`. El contrato de uso es [`CU-00029`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md), y `02` §8 declara que aprobar y rechazar quedaron juntos **por la misma fusión que el ensamblado de contratos ya justificó**: se distinguen por el valor de un campo de conjunto cerrado.
 
 ## 3. Criterios de aceptación
 

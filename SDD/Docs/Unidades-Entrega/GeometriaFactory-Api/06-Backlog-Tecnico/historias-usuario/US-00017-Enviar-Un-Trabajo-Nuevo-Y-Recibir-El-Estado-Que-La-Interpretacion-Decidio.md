@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **enviar un trabajo y recibir
 
 ## 2. Contexto
 
-`F-22` del intake §4 declara `Must Have` el envío como **acción única de guardado**. `02` §6 declara que **`RN-00005` no tiene tramo acá** y explica la trampa: un envío cuyo texto no verifica **no es un fallo de protocolo**, y llamarla **la confusión más cara de esta capa**. El contrato de uso es [`CU-00006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md).
+`F-22` del intake §4 declara `Must Have` el envío como **acción única de guardado**. `02` §6 declara que **`RN-00005` no tiene tramo acá** y explica la trampa: un envío cuyo texto no verifica **no es un fallo de protocolo**, y llamarla **la confusión más cara de esta capa**. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md).
 
 ## 3. Criterios de aceptación
 

@@ -47,9 +47,9 @@ Rechazo de la operación, con el código `TEXTO_ORIGINAL_ALTERADO`. La regla no 
 
 ## 5. CU afectados
 
-- [CU-02005](../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) — Crear y reeditar un trabajo.
-- [CU-02006](../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — Reconstruir el conjunto de piezas del trabajo.
-- [CU-02007](../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Crear y reeditar un trabajo.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Reconstruir el conjunto de piezas del trabajo.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Registrar las observaciones del trabajo.
 
 ## 6. Pruebas que la verifican
 

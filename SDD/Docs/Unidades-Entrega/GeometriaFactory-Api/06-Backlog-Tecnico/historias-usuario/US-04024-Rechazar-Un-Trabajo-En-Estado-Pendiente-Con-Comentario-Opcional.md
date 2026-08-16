@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **orquestar el rechazo de u
 
 ## 2. Contexto
 
-`NB-00009` pide desenlace explícito y `F-23` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md). El intake §4.2 declara como consecuencia aceptada que `Rechazado` es **terminal** y que corregir un rechazo significa **cargar un trabajo nuevo**.
+`NB-00009` pide desenlace explícito y `F-23` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00029`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md). El intake §4.2 declara como consecuencia aceptada que `Rechazado` es **terminal** y que corregir un rechazo significa **cargar un trabajo nuevo**.
 
 ## 3. Criterios de aceptación
 

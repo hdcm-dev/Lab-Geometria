@@ -46,8 +46,8 @@ Rechazo del conjunto de observaciones, con el código `ERROR_SIN_UBICACION`. El 
 
 ## 5. CU afectados
 
-- [CU-02007](../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo.
-- [CU-02006](../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — Reconstruir el conjunto de piezas, en cuanto a la pieza de tipo desconocido que no se adopta.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Registrar las observaciones del trabajo.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Reconstruir el conjunto de piezas, en cuanto a la pieza de tipo desconocido que no se adopta.
 
 ## 6. Pruebas que la verifican
 

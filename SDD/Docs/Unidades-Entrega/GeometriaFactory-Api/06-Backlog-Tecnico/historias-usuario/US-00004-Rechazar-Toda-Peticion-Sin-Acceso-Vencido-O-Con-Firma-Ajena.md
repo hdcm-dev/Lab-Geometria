@@ -19,7 +19,7 @@ Como **producto**, quiero **que ninguna petición a un punto que exige acceso se
 
 ## 2. Contexto
 
-`02` §3 declara la **admisión de la petición** como una de las cinco responsabilidades de esta capa, y `05` §3.1 la aloja en un componente **transversal a los once puntos que exigen acceso**. El contrato de uso es [`CU-00002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md).
+`02` §3 declara la **admisión de la petición** como una de las cinco responsabilidades de esta capa, y `05` §3.1 la aloja en un componente **transversal a los once puntos que exigen acceso**. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 
 ## 3. Criterios de aceptación
 

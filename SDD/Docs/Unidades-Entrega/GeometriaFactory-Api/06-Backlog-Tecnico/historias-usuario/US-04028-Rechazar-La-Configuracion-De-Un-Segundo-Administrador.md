@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la configuración de 
 
 ## 2. Contexto
 
-`RN-04001` declara que existe **exactamente un** administrador y que su alta sólo es posible mientras no exista ninguno; `INV-05` lo sostiene como condición permanente. El contrato de uso es [`CU-04010`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md). La respuesta a la pregunta sobre el conjunto la aporta el puerto de repositorio de cuentas, porque el dominio no consulta conjuntos.
+`RN-04001` declara que existe **exactamente un** administrador y que su alta sólo es posible mientras no exista ninguno; `INV-05` lo sostiene como condición permanente. El contrato de uso es [`CU-00025`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md). La respuesta a la pregunta sobre el conjunto la aporta el puerto de repositorio de cuentas, porque el dominio no consulta conjuntos.
 
 ## 3. Criterios de aceptación
 

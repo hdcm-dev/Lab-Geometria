@@ -1,9 +1,9 @@
 # 02 · Especificación funcional — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.4
+**Versión:** 2.0
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -15,7 +15,7 @@
 ## Tabla de contenido
 
 - [1. Qué hay en esta carpeta](#1-qué-hay-en-esta-carpeta)
-- [2. Los doce casos de uso](#2-los-doce-casos-de-uso)
+- [2. Los nueve casos de uso](#2-los-nueve-casos-de-uso)
 - [3. Orden de lectura sugerido](#3-orden-de-lectura-sugerido)
 - [4. Artefactos omitidos y el que se emite](#4-artefactos-omitidos-y-el-que-se-emite)
 - [5. Notas de uso de esta sección](#5-notas-de-uso-de-esta-sección)
@@ -30,38 +30,44 @@
 | [`Especificacion-Funcional.md`](Especificacion-Funcional.md) | Índice maestro: las cinco responsabilidades, la frontera entre lo que se decide y lo que se transporta, el catálogo, la tabla de las dieciséis reglas, la matriz NB → CU → RN → US, el criterio de recorte, las omisiones y los once puntos abiertos. **Es el punto de entrada** | Propuesto |
 | [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) | Documento de concepto central: los quince puntos de acceso, los diez códigos de respuesta, las dos traducciones, la tabla de los diecisiete códigos del contrato, las **siete** ausencias declaradas y lo que ninguna respuesta puede decir | Propuesto |
 | [`Glosario-Funcional.md`](Glosario-Funcional.md) | Vocabulario que esta categoría acuña y los tres términos con más de un referente | Propuesto |
-| `Casos-De-Uso/` | Doce casos de uso, uno por archivo | Propuesto |
+| `Casos-De-Uso/` | **Nueve** casos de uso, uno por capacidad de la unidad de entrega y uno por archivo | Propuesto |
 | `README.md` | Este archivo: índice navegable, orden de lectura y omisiones | Propuesto |
 
-No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este proyecto de código.
+Los **treinta y dos** documentos que la consolidación 8.5 absorbió están en
+[`../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/`](../../../_legacy/2026-08-16-consolidacion-8.5/GeometriaFactory-Api/),
+con un README que declara qué caso de uso reemplaza a cada uno.
 
-## 2. Los doce casos de uso
+## 2. Los nueve casos de uso
 
 | CU | Nombre | En una línea |
 | --- | --- | --- |
-| CU-00001 | [`CU-00001` · Canjear credenciales por un acceso firmado](Casos-De-Uso/CU-00001-Canjear-Credenciales-Por-Un-Acceso-Firmado.md) | El único punto cuya ruta declara una fuente, con su respuesta genérica y sus tres motivos |
-| CU-00002 | [`CU-00002` · Admitir la petición: acceso, papel y marca](Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md) | La guardia de once puntos, cuyo defecto característico es no alcanzar a alguno |
-| CU-00003 | [`CU-00003` · Exponer el alta de cuenta y la credencial propia](Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md) | Los cuatro puntos que se ejercen sin acceso o sin que el papel importe |
-| CU-00004 | [`CU-00004` · Exponer el gobierno de las cuentas de la comisión](Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md) | Listado, situación y la única operación destructiva de la superficie |
-| CU-00005 | [`CU-00005` · Exponer el reseteo de la contraseña de un alumno](Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md) | El único punto que devuelve un valor de credencial, y no lo registra |
-| CU-00006 | [`CU-00006` · Exponer el envío y la eliminación de un trabajo](Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md) | El texto que no se normaliza en el borde, y el envío que no verifica y **responde con éxito** |
-| CU-00007 | [`CU-00007` · Exponer el listado y el detalle de los trabajos](Casos-De-Uso/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Los dos puntos de lectura, sin ningún parámetro para pedir de más |
-| CU-00008 | [`CU-00008` · Exponer el desenlace de la revisión](Casos-De-Uso/CU-00008-Exponer-El-Desenlace-De-La-Revision.md) | La transición irreversible, y la terminalidad sostenida por ausencia |
-| CU-00009 | [`CU-00009` · Traducir el motivo del contrato a respuesta de protocolo](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md) | Las dos traducciones, las tres reglas de asignación y los dos huecos declarados |
-| CU-00010 | [`CU-00010` · Componer la aplicación y conectar los puertos con sus adaptadores](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md) | La factura de que todo lo demás se pruebe con dobles, pagada una sola vez |
-| CU-00011 | [`CU-00011` · Arrancar el servicio y dejar el almacén en condiciones](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md) | El arranque que se detiene antes que atender sobre un almacén equivocado |
-| CU-00012 | [`CU-00012` · Ejercitar la superficie con la colección de peticiones reproducible](../10-Examples/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | La demostración ejecutable, con los ocho escenarios como cuerpo y en tres pasos |
+| CU-00021 | [`CU-00021` · Dar de alta una cuenta de alumno](Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | El auto-registro sin campo de contraseña, que deja la cuenta a la espera de la habilitación |
+| CU-00022 | [`CU-00022` · Ingresar al laboratorio y sostener la sesión](Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | El canje, la guardia de once puntos y el cambio de la contraseña propia. **La guardia es lo que esta unidad puede romper sin que nada falle** |
+| CU-00023 | [`CU-00023` · Gobernar las cuentas de la comisión](Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Listado, situación con la provisoria devuelta una sola vez, y la única operación destructiva |
+| CU-00024 | [`CU-00024` · Resetear la contraseña de un alumno](Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | El único punto que devuelve una credencial, y que conserva la cuenta y todos sus trabajos |
+| CU-00025 | [`CU-00025` · Configurar la cuenta de administrador en el primer arranque](Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | La ventana de alta que se cierra para siempre, y el punto que dice si sigue abierta |
+| CU-00026 | [`CU-00026` · Enviar un trabajo y ver sus observaciones](Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | La única acción de guardado. **Un texto que no verifica es una respuesta exitosa** |
+| CU-00027 | [`CU-00027` · Eliminar un trabajo](Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md) | Un punto con dos alcances de reglas opuestas, resueltos adentro y no en la superficie |
+| CU-00028 | [`CU-00028` · Consultar el listado y el detalle de los trabajos](Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Los dos únicos puntos que no escriben, con la proyección de listado que no arrastra el texto |
+| CU-00029 | [`CU-00029` · Dar desenlace a la revisión](Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | La única transición irreversible, con el comentario opcional en los dos desenlaces |
+
+**Los cuatro que no están, y por qué.** `CU-00009` —traducir el motivo del contrato a respuesta de
+protocolo—, `CU-00010` —componer la aplicación— y `CU-00011` —arrancar el servicio— describen
+operaciones internas que **ninguna persona ejecuta**, y viven en
+[`../05-Arquitectura-Tecnica/Operaciones-Internas/`](../05-Arquitectura-Tecnica/Operaciones-Internas/)
+y en `09-Devops`. `CU-00012` **es un sample**, no un caso de uso, y vive en
+[`../10-Examples/`](../10-Examples/). Los identificadores no se reciclan.
+
 
 ## 3. Orden de lectura sugerido
 
-1. [`Especificacion-Funcional.md`](Especificacion-Funcional.md) §1, §3 y §4: qué es esta capa, qué responsabilidades tiene y **qué decide y qué sólo transporta**. Sin §4, los doce casos de uso se leen como si acá se tomaran decisiones de negocio, que es exactamente lo que no pasa.
-2. [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) **entero, y antes que cualquier caso de uso**, con especial atención a su **§2**: qué declara una fuente y qué es derivación de esta categoría. Leer §3 sin §2 hace creer que las quince rutas están decididas, y ****catorce** de ellas no lo están**.
-3. **CU-00002**, la guardia, antes que los puntos que gobierna. Un punto de acceso leído sin la guardia parece más abierto de lo que es.
-4. Los casos de uso de puntos, en el orden del recorrido de la persona: **CU-00003** y **CU-00001** —el alta y la entrada—, después **CU-00006** y **CU-00007** —lo que el alumno hace—, después **CU-00004**, **CU-00005** y **CU-00008** —lo que el administrador hace—.
-5. **CU-00009**, que se lee mejor después de haber visto qué puede fallar en cada punto. Su §10 es donde están los dos huecos del conjunto cerrado.
-6. **CU-00010** y **CU-00011**, en ese orden: primero cómo se construye el proceso y después cómo arranca.
-7. **CU-00012** al final, que es el recorrido entero convertido en algo ejecutable.
-8. [`Glosario-Funcional.md`](Glosario-Funcional.md), en particular §3.1 y §3.2, que resuelven las dos polisemias que más caro salen acá: «acceso» y «código».
+1. [`Especificacion-Funcional.md`](Especificacion-Funcional.md) §1, §3 y §4: qué es esta unidad, qué responsabilidades tiene y **qué decide y qué sólo transporta**.
+2. [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) **entero, y antes que cualquier caso de uso**, con especial atención a su **§2**: qué declara una fuente y qué es derivación de esta categoría. Leer §3 sin §2 hace creer que las rutas están decididas, y **catorce de las quince no lo están**.
+3. **CU-00022**, porque lleva la guardia, y la guardia gobierna once de los dieciséis puntos. Un punto de acceso leído sin ella parece más abierto de lo que es.
+4. El recorrido de la persona, en orden: **CU-00025** y **CU-00021** —cómo nace el laboratorio y cómo nace una cuenta—, después **CU-00026**, **CU-00027** y **CU-00028** —lo que el alumno hace y ve—, después **CU-00023**, **CU-00024** y **CU-00029** —lo que el administrador hace—.
+5. [`Glosario-Funcional.md`](Glosario-Funcional.md), en particular §3.1 y §3.2, que resuelven las dos polisemias que más caro salen acá: «acceso» y «código».
+6. Y si hace falta saber **de dónde viene** un caso de uso, `Audit/Migracion-8.5-Consolidacion-Decidida.md` §2, que declara qué documentos absorbe cada uno y por qué.
+
 
 ## 4. Artefactos omitidos y el que se emite
 
@@ -74,8 +80,8 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 
 ## 5. Notas de uso de esta sección
 
-- **Los identificadores `CU-XX` son locales a este proyecto de código.** No coinciden con los de `GeometriaFactory-Application`, ni con los de `GeometriaFactory-Contracts`, ni con los de `GeometriaFactory-Infrastructure`. La correspondencia se lee por §3, §7.1 y §7.4 del índice maestro, **nunca por número**.
-- **Los `A-XX` no son casos de uso.** Son los quince puntos de acceso, y un caso de uso puede describir más de uno. La correspondencia está en `Definicion-Superficie-HTTP.md` §3.
+- **Los identificadores son de ámbito producto y de ancho fijo de cinco dígitos.** Ya no son locales a un proyecto de código: la unidad de entrega es una y sus capas son internas. Los identificadores absorbidos por la consolidación **no se reciclan**, y por eso los nueve empiezan en `CU-00021`.
+- **Los `A-XX` no son casos de uso.** Son los dieciséis puntos de acceso, y un caso de uso puede describir más de uno; **el reparto es de punto de acceso a capacidad**. La correspondencia está en `Definicion-Superficie-HTTP.md` §3.
 - **Catorce de las quince rutas son propuesta derivada de esta categoría**, rotuladas fila por fila. La única que declara una fuente es la del canje de credenciales. Leerlas como decididas es el error de lectura más probable de esta sección.
 - **Esta categoría no agrega ningún código al conjunto cerrado del contrato.** Donde falta uno, el hueco se **declara** y se eleva, y mientras tanto se usa el genérico. Los dos huecos están en `CU-00009` §10.
 - **Esta categoría no toma decisiones de arquitectura**: las rutas definitivas, los nombres de tipos, la herramienta de configuración, el formato del archivo de la colección y los ADR pertenecen a `05-Arquitectura-Tecnica`; la estrategia de pruebas, a `08-Calidad-Y-Pruebas`; el despliegue, que el intake declara **manual y a cargo del docente**, a `09-Devops`. Lo que acá se declara como «tests previstos» es una previsión, no un plan.
@@ -93,3 +99,4 @@ No hay carpeta `_legacy/`: es la emisión inicial de la categoría para este pro
 | 1.3 | 2026-08-11 | **Cierra el hallazgo `B-API-09` (P2)** del informe [`B-02-03-GeometriaFactory-Api-r1.md`](../../../Audit/B-02-03-GeometriaFactory-Api-r1.md) 1.0 y **absorbe la propagación de `B-API-12` (P2)**. **§4**, fila de la sección opcional §17: las ausencias de la superficie pasan de **seis** a **siete**; son siete desde que `RN-00016` agregó la del punto que fija una contraseña sin credencial, y **§1 de este mismo archivo ya decía siete**, de modo que el archivo se contradecía a catorce líneas de distancia. Contadas una por una sobre la tabla de [`Definicion-Superficie-HTTP.md`](Definicion-Superficie-HTTP.md) §7: CORS, WebSockets, pasarela de reenvío, versionado de rutas, sesión del lado del servidor, acceso de refresco y el punto que fija contraseña sin credencial. **§5**: el reparto de los once puntos abiertos pasa de siete propios y cuatro heredados a **seis y cinco**, alineado con [`Especificacion-Funcional.md`](Especificacion-Funcional.md) §11; y se corrige la enumeración de los dos huecos elevados al Product Owner, que nombraba **el hueco cerrado por `RN-00016`** en lugar de uno de los dos vivos —defecto que el informe no registra y que se levanta acá—. **Búsqueda de propagación hecha con `grep`**: «seis ausencias» no sobrevive en ningún otro lugar vivo del corpus; el reparto de puntos abiertos se corrige en los **tres** lugares vivos que lo citan, este archivo, `Especificacion-Funcional.md` §11 y `../03-UX-UI-DX/README.md` §6. **Ningún artefacto se agrega ni se omite y el orden de lectura no cambia.** Sube minor. |
 | 1.4 | 2026-08-12 | **Cierra el residuo vivo de `P2-1`** de `SDD/Docs/Audit/H-Final-Consolidado-r1.md` §4, reportado también como `N-01` en `Coherencia-Corpus-r2.md`. §5 decía «**quince** de ellas no lo están» sobre las quince rutas, cuando son **catorce**: la del canje de credenciales la declara una fuente. El mismo archivo ya decía lo correcto en su §7, de modo que se contradecía consigo mismo. Es la última de las dos líneas del hallazgo; la otra se corrigió el 2026-08-11 en el `README.md` de `03-UX-UI-DX`. Ninguna decisión, contrato ni caso de prueba cambia. **Autor:** Orquestador SDD |
 | 1.4 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación 8.5** (`Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2). Los casos de uso pasan de **doce a nueve**, uno por capacidad de la unidad de entrega: **cuatro de los doce no eran casos de uso de esta unidad** y se reubicaron —traducción del motivo, composición, arranque y la colección reproducible—, y los ocho restantes **agrupaban por perfil de autenticación y por recurso**, criterio transversal a las capacidades, de modo que `CU-00003` y `CU-00006` se reparten en tres y dos capacidades. Los identificadores nuevos empiezan en `CU-00021` porque **los absorbidos no se reciclan**. §1 declara la carpeta `_legacy/` de la consolidación, §2 lista los nueve, §3 rehace el orden de lectura sobre el recorrido de la persona, y §5 actualiza el ámbito de los identificadores. La cabecera pasa de «proyecto de código» a **unidad de entrega**. Sube major. |

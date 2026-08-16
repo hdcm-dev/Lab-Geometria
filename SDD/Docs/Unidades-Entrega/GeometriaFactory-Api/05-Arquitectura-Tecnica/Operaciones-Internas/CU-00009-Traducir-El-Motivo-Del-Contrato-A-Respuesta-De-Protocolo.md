@@ -58,7 +58,7 @@ Y una tercera que es una prohibición: **nada de lo que sale por acá puede expo
 
 1. Un punto de acceso termina con un motivo interno en lugar de un resultado.
 2. Se busca el código del contrato que le corresponde, dentro del conjunto cerrado de **diecisiete**.
-3. Se busca el código de respuesta que le corresponde a ese código, en la tabla de [`Definicion-Superficie-HTTP.md`](../Definicion-Superficie-HTTP.md) §6.
+3. Se busca el código de respuesta que le corresponde a ese código, en la tabla de [`Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §6.
 4. Se compone la respuesta de error del contrato: **código, texto neutro, detalles de ubicación cuando los hay y momento**, y nada más.
 5. Se verifica que el texto neutro **no contenga direcciones de servicio, rutas de archivo de datos ni valores de secreto**.
 6. Se responde, y **se registra del lado del servidor**.

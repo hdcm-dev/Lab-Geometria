@@ -48,9 +48,9 @@ Rechazo. Una solicitud de desenlace sin papel de administrador se rechaza con el
 
 ## 5. CU afectados
 
-- [CU-02010](../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) — Resolver el desenlace del trabajo.
-- [CU-02008](../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) — Gobernar el estado del trabajo en el envío, que rechaza toda transición desde un estado terminal.
-- [CU-02005](../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) y [CU-02006](../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) — En cuanto a que el contenido de un trabajo terminal tampoco cambia.
+- [CU-00029](../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) — Resolver el desenlace del trabajo.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Gobernar el estado del trabajo en el envío, que rechaza toda transición desde un estado terminal.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) y [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — En cuanto a que el contenido de un trabajo terminal tampoco cambia.
 
 ## 6. Pruebas que la verifican
 

@@ -80,7 +80,7 @@ El dominio **modela las condiciones de la autenticación y de la autorización p
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §5, fundamento de `tiene_auth` y de su corrección del 2026-08-09.
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.5, §4.1 (RN-02006, RN-02012 a RN-02016), §17.1.P.2 (INV-06, INV-08, INV-09), §14 (RA-03).
 - [`../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1, §5.1, §5.3 y §7.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) y [`CU-02013`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md).
+- [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) y [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md).
 - ADR relacionadas: [`ADR-02001`](ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md), [`ADR-02005`](ADR-02005-Guarda-Unica-De-Admisibilidad.md).
 
 ## 10. Control de cambios

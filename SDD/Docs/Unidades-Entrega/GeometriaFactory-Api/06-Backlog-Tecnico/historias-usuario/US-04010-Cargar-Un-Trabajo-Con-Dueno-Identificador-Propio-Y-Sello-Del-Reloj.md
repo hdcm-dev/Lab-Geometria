@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **constituir un trabajo con
 
 ## 2. Contexto
 
-`NB-00003` pide trabajo con dueño, estado y persistencia, y `F-06` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md). El **sello** entra por el puerto de reloj precisamente para que sea verificable en prueba (`PRODUCT-INTAKE` §17.2.P.11 punto 3).
+`NB-00003` pide trabajo con dueño, estado y persistencia, y `F-06` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md). El **sello** entra por el puerto de reloj precisamente para que sea verificable en prueba (`PRODUCT-INTAKE` §17.2.P.11 punto 3).
 
 ## 3. Criterios de aceptación
 

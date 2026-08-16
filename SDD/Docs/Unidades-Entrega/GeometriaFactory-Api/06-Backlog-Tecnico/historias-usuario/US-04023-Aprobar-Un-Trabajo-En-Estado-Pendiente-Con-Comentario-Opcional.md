@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **orquestar la aprobación 
 
 ## 2. Contexto
 
-`NB-00009` pide desenlace explícito, `RN-04010` lo declara exclusivo del administrador y terminal, y `F-23` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md).
+`NB-00009` pide desenlace explícito, `RN-04010` lo declara exclusivo del administrador y terminal, y `F-23` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00029`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md).
 
 ## 3. Criterios de aceptación
 

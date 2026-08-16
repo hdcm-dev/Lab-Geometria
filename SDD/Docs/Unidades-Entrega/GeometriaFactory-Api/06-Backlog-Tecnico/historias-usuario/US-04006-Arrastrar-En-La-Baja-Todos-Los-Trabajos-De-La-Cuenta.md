@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la baja de una cuenta
 
 ## 2. Contexto
 
-`RN-04007` declara que la baja física elimina la cuenta y **todos sus trabajos**. El contrato de uso es [`CU-04002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md). [`ADR-04005`](../../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md) declara esta baja como **el caso testigo** del alcance transaccional de la capa.
+`RN-04007` declara que la baja física elimina la cuenta y **todos sus trabajos**. El contrato de uso es [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md). [`ADR-04005`](../../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md) declara esta baja como **el caso testigo** del alcance transaccional de la capa.
 
 ## 3. Criterios de aceptación
 

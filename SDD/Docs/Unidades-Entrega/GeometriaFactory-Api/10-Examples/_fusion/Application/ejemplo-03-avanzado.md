@@ -100,10 +100,10 @@ Actos recorridos: 4 | Rechazos tipados: 8 | Excepciones: 0
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-04002`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Habilita, bloquea, rehabilita y da de baja con confirmación escrita y arrastre |
-| [`CU-04007`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md) | Caso de uso | Devuelve la entrega de la comisión con **0** borradores visibles y rechaza el pedido sin facultad |
-| [`CU-04008`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md) | Caso de uso | Aprueba con comentario y rechaza sin comentario desde `Pendiente`, y propaga la terminalidad |
-| [`CU-04011`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04011-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Resetea conservando situación y trabajos, y pone la marca |
+| [`CU-00023`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Habilita, bloquea, rehabilita y da de baja con confirmación escrita y arrastre |
+| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Devuelve la entrega de la comisión con **0** borradores visibles y rechaza el pedido sin facultad |
+| [`CU-00029`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Caso de uso | Aprueba con comentario y rechaza sin comentario desde `Pendiente`, y propaga la terminalidad |
+| [`CU-00024`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Resetea conservando situación y trabajos, y pone la marca |
 | [`RN-02007`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | Regla de negocio | La baja exige el correo escrito y arrastra los **2** trabajos |
 | [`RN-02010`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | Regla de negocio | El desenlace es exclusivo del administrador y los dos estados son terminales |
 | [`RN-02011`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | Regla de negocio | **0** borradores visibles en el listado de la comisión |

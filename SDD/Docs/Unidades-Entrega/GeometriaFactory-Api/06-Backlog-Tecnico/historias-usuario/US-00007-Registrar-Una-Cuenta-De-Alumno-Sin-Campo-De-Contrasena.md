@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **exponer el registro de una 
 
 ## 2. Contexto
 
-`F-02` del intake §4 es `Must Have`, y `PRODUCT-INTAKE` **1.15** §4.1 precisa que lo que `RN-00016` elimina es la escritura anónima **de credencial**, no la de cuenta: **el registro es anónimo por diseño y así debe seguir**, porque es como el alumno entra al laboratorio. El contrato de uso es [`CU-00003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md).
+`F-02` del intake §4 es `Must Have`, y `PRODUCT-INTAKE` **1.15** §4.1 precisa que lo que `RN-00016` elimina es la escritura anónima **de credencial**, no la de cuenta: **el registro es anónimo por diseño y así debe seguir**, porque es como el alumno entra al laboratorio. El contrato de uso es [`CU-00021`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md).
 
 ## 3. Criterios de aceptación
 

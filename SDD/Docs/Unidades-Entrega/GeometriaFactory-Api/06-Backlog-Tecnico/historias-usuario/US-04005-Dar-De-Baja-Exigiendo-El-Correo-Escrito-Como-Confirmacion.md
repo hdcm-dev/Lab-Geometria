@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la baja de una cuenta
 
 ## 2. Contexto
 
-`RN-04007` exige confirmación escrita y arrastre. El contrato de uso es [`CU-04002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md), y `02` §6 declara que **la comparación del correo escrito es de esta capa**. El criterio de transición `d` → `e` del roadmap §5.2 lo exige por escrito.
+`RN-04007` exige confirmación escrita y arrastre. El contrato de uso es [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md), y `02` §6 declara que **la comparación del correo escrito es de esta capa**. El criterio de transición `d` → `e` del roadmap §5.2 lo exige por escrito.
 
 ## 3. Criterios de aceptación
 

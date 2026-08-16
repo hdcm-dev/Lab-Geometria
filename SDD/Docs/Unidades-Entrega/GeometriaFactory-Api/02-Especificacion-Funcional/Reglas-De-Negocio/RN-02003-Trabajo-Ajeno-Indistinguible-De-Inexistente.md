@@ -45,7 +45,7 @@ Rechazo, con la forma exacta del rechazo como parte de la regla: la respuesta an
 
 ## 5. CU afectados
 
-- [CU-02009](../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) — Resolver el acceso de un alumno a un trabajo.
+- [CU-00028](../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) — Resolver el acceso de un alumno a un trabajo.
 
 ## 6. Pruebas que la verifican
 

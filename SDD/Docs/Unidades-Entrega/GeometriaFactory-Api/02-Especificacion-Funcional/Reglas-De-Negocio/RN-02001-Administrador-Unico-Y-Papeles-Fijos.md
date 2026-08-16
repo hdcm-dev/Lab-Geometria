@@ -47,10 +47,10 @@ La consecuencia de no hacerla cumplir no se agota en el acceso de una persona: s
 
 ## 5. CU afectados
 
-- [CU-02012](../Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) — Configurar la cuenta de administrador en el primer arranque.
-- [CU-02001](../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) — Registrar el alta de un alumno, **sólo** en cuanto al conjunto cerrado de dos papeles.
-- [CU-02002](../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta del alumno.
-- [CU-02004](../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) — Evaluar la admisibilidad de la cuenta, en cuanto al conjunto cerrado de papeles.
+- [CU-00025](../Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) — Configurar la cuenta de administrador en el primer arranque.
+- [CU-00021](../Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) — Registrar el alta de un alumno, **sólo** en cuanto al conjunto cerrado de dos papeles.
+- [CU-00023](../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) — Gobernar el ciclo de vida de la cuenta del alumno.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Evaluar la admisibilidad de la cuenta, en cuanto al conjunto cerrado de papeles.
 
 ## 6. Pruebas que la verifican
 

@@ -46,8 +46,8 @@ Exclusión, no rechazo con explicación: el trabajo en `Borrador` simplemente no
 
 ## 5. CU afectados
 
-- [CU-02011](../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) — Resolver el alcance del administrador sobre un trabajo.
-- [CU-02010](../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) — Resolver el desenlace del trabajo, que por esta regla nunca alcanza a un borrador.
+- [CU-00028](../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) — Resolver el alcance del administrador sobre un trabajo.
+- [CU-00029](../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) — Resolver el desenlace del trabajo, que por esta regla nunca alcanza a un borrador.
 
 ## 6. Pruebas que la verifican
 

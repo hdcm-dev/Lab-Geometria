@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **reenviar un trabajo que que
 
 ## 2. Contexto
 
-`F-07` del intake §4 declara `Must Have` reeditar el trabajo **sólo mientras está en `Borrador`**, y `F-22` unifica guardar y enviar. El contrato de uso es [`CU-00006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md).
+`F-07` del intake §4 declara `Must Have` reeditar el trabajo **sólo mientras está en `Borrador`**, y `F-22` unifica guardar y enviar. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md).
 
 ## 3. Criterios de aceptación
 

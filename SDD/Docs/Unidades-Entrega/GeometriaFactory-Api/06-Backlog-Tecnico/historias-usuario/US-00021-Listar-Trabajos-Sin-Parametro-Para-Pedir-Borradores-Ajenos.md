@@ -19,7 +19,7 @@ Como **producto**, quiero **que el punto de listado no ofrezca ningún parámetr
 
 ## 2. Contexto
 
-`RN-00011` declara que el administrador **no ve los trabajos en `Borrador`**. `02` §6 declara que esta capa la ejerce **de forma negativa**: **la superficie no declara ningún parámetro** con el que el administrador pueda pedir borradores; **el alcance llega decidido y acá no se ofrece la puerta**. El contrato de uso es [`CU-00007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md).
+`RN-00011` declara que el administrador **no ve los trabajos en `Borrador`**. `02` §6 declara que esta capa la ejerce **de forma negativa**: **la superficie no declara ningún parámetro** con el que el administrador pueda pedir borradores; **el alcance llega decidido y acá no se ofrece la puerta**. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md).
 
 ## 3. Criterios de aceptación
 

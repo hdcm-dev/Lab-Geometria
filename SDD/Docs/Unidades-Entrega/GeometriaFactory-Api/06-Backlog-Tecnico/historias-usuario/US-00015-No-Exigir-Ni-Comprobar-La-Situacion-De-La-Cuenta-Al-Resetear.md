@@ -19,7 +19,7 @@ Como **producto**, quiero **que el punto de reseteo no declare ningún parámetr
 
 ## 2. Contexto
 
-`RN-00015` declara que **resetear no exige que la cuenta esté habilitada**: procede sobre `Pendiente`, `Habilitado` y `Bloqueado`, porque **opera sobre la credencial y no es una transición de la máquina de estados de la cuenta**. `02` §6 declara que esta capa la ejerce **de forma estructural**. El contrato de uso es [`CU-00005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md).
+`RN-00015` declara que **resetear no exige que la cuenta esté habilitada**: procede sobre `Pendiente`, `Habilitado` y `Bloqueado`, porque **opera sobre la credencial y no es una transición de la máquina de estados de la cuenta**. `02` §6 declara que esta capa la ejerce **de forma estructural**. El contrato de uso es [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md).
 
 ## 3. Criterios de aceptación
 

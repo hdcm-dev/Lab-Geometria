@@ -36,17 +36,17 @@
 
 | CU | Nombre | En una línea |
 | --- | --- | --- |
-| CU-04001 | [`CU-04001` · Registrar el alta de una cuenta](../../Casos-De-Uso/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md) | Auto-registro del alumno: correo libre, cuenta en estado `Pendiente` y sin credencial |
-| CU-04002 | [`CU-04002` · Gobernar las cuentas de la comisión](../../Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md) | Las cuatro operaciones del administrador, con confirmación escrita y arrastre de trabajos en la baja |
-| CU-04003 | [`CU-04003` · Resolver el ingreso y la credencial del alumno](../../Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) | Admisibilidad con su motivo, y fijación y reemplazo de la credencial derivada |
-| CU-04004 | [`CU-04004` · Cargar y reeditar un trabajo propio](../../Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md) | Trabajo con dueño y texto original íntegro; reedición sólo en `Borrador` |
-| CU-04005 | [`CU-04005` · Enviar un trabajo e interpretar su texto](../../Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) | La única acción de guardado, con el validador detrás de un puerto |
-| CU-04006 | [`CU-04006` · Consultar los trabajos propios del alumno](../../Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md) | Listado acotado al dueño y sin componentes; detalle con desenlace y comentario |
-| CU-04007 | [`CU-04007` · Revisar los trabajos de la comisión](../../Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md) | La comisión sin borradores, con dueño para agrupar y filtrar |
-| CU-04008 | [`CU-04008` · Dar desenlace a un trabajo](../../Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad |
-| CU-04009 | [`CU-04009` · Eliminar un trabajo](../../Casos-De-Uso/CU-04009-Eliminar-Un-Trabajo.md) | Los dos alcances opuestos del retiro, en un solo contrato |
-| CU-04010 | [`CU-04010` · Configurar la cuenta de administrador](../../Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md) | El segundo camino de alta: cuenta única, `Habilitado` y con credencial, sólo en el primer arranque |
-| CU-04011 | [`CU-04011` · Resetear la contraseña de un alumno](../../Casos-De-Uso/CU-04011-Resetear-La-Contrasena-De-Un-Alumno.md) | Contraseña provisoria con marca de cambio pendiente, conservando la cuenta y todos sus trabajos |
+| CU-04001 | [`CU-00021`](../../Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Auto-registro del alumno: correo libre, cuenta en estado `Pendiente` y sin credencial |
+| CU-04002 | [`CU-00023`](../../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Las cuatro operaciones del administrador, con confirmación escrita y arrastre de trabajos en la baja |
+| CU-04003 | [`CU-00022`](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Admisibilidad con su motivo, y fijación y reemplazo de la credencial derivada |
+| CU-04004 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Trabajo con dueño y texto original íntegro; reedición sólo en `Borrador` |
+| CU-04005 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | La única acción de guardado, con el validador detrás de un puerto |
+| CU-04006 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Listado acotado al dueño y sin componentes; detalle con desenlace y comentario |
+| CU-04007 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | La comisión sin borradores, con dueño para agrupar y filtrar |
+| CU-04008 | [`CU-00029`](../../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad |
+| CU-04009 | [`CU-00027`](../../Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md) | Los dos alcances opuestos del retiro, en un solo contrato |
+| CU-04010 | [`CU-00025`](../../Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | El segundo camino de alta: cuenta única, `Habilitado` y con credencial, sólo en el primer arranque |
+| CU-04011 | [`CU-00024`](../../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Contraseña provisoria con marca de cambio pendiente, conservando la cuenta y todos sus trabajos |
 
 ## 3. Orden de lectura sugerido
 

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-La capacidad `F-02` del intake §4 fija los tres datos con los que el alumno se registra. [`CU-02001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) declara el rechazo como camino propio. La propiedad de terminación controlada de `05` §4 exige además que un rechazo no deje la entidad a medio modificar.
+La capacidad `F-02` del intake §4 fija los tres datos con los que el alumno se registra. [`CU-00021`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) declara el rechazo como camino propio. La propiedad de terminación controlada de `05` §4 exige además que un rechazo no deje la entidad a medio modificar.
 
 ## 3. Criterios de aceptación
 

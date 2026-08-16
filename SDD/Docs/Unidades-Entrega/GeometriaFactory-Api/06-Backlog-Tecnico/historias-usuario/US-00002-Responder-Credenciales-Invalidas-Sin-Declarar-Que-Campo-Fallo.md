@@ -19,7 +19,7 @@ Como **producto**, quiero **que el rechazo por credenciales inválidas no diga s
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.5.P.5 declara la respuesta **genérica ante credenciales inválidas, sin revelar cuál campo falló**. `05` §7 la cataloga como una de las **tres familias deliberadamente empobrecidas**: **tres respuestas dicen menos de lo que el servicio sabe, y en las tres es la decisión y no el defecto**. El contrato de uso es [`CU-00001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00001-Canjear-Credenciales-Por-Un-Acceso-Firmado.md).
+`PRODUCT-INTAKE` §17.5.P.5 declara la respuesta **genérica ante credenciales inválidas, sin revelar cuál campo falló**. `05` §7 la cataloga como una de las **tres familias deliberadamente empobrecidas**: **tres respuestas dicen menos de lo que el servicio sabe, y en las tres es la decisión y no el defecto**. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 
 ## 3. Criterios de aceptación
 

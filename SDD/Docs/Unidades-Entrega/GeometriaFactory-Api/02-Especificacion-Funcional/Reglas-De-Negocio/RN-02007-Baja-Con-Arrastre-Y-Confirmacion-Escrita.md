@@ -47,7 +47,7 @@ Rechazo. Una baja que declare conservar los trabajos se rechaza con el código `
 
 ## 5. CU afectados
 
-- [CU-02002](../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta del alumno, en su flujo alternativo de baja.
+- [CU-00023](../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) — Gobernar el ciclo de vida de la cuenta del alumno, en su flujo alternativo de baja.
 
 ## 6. Pruebas que la verifican
 

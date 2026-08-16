@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que un envío cuyas obser
 
 ## 2. Contexto
 
-`RN-04005` fija que un trabajo no pasa a estado `Pendiente` con errores de interpretación, y `RN-04009` exige que toda observación de error indique la posición de la pieza y el campo. El contrato de uso es [`CU-04005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md).
+`RN-04005` fija que un trabajo no pasa a estado `Pendiente` con errores de interpretación, y `RN-04009` exige que toda observación de error indique la posición de la pieza y el campo. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md).
 
 ## 3. Criterios de aceptación
 

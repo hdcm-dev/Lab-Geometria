@@ -19,7 +19,7 @@ Como **producto**, quiero **que cada punto de acceso declare qué papel exige y 
 
 ## 2. Contexto
 
-`02` §4 precisión 1 lo enuncia: **exigir el papel no es autorizar**. El papel viaja en el acceso firmado y esta capa lo exige por punto; **la verificación de pertenencia y la de facultad se hacen sobre el dato recuperado y son de la capa de aplicación**, y duplicarlas acá **crearía un segundo lugar donde la regla puede decir otra cosa**. El contrato de uso es [`CU-00002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md).
+`02` §4 precisión 1 lo enuncia: **exigir el papel no es autorizar**. El papel viaja en el acceso firmado y esta capa lo exige por punto; **la verificación de pertenencia y la de facultad se hacen sobre el dato recuperado y son de la capa de aplicación**, y duplicarlas acá **crearía un segundo lugar donde la regla puede decir otra cosa**. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 
 ## 3. Criterios de aceptación
 

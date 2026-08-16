@@ -95,10 +95,10 @@ La última variación es el puente hacia `09-Devops`: muestra que el gate de dep
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-02009`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | Caso de uso | Actos `[1]` a `[3]`: el ajeno y el inexistente con resultado idéntico |
-| [`CU-02010`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) | Caso de uso | Actos `[6]`, `[7]`, `[7b]` y `[7c]`: los dos desenlaces y sus dos rechazos |
-| [`CU-02011`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) | Caso de uso | Actos `[4]` y `[5]`: el borrador excluido y la eliminación en los tres estados que ve |
-| [`CU-02013`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) | Caso de uso | Acto `[8]`: la cuenta conserva su situación y sus cuatro trabajos |
+| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Actos `[1]` a `[3]`: el ajeno y el inexistente con resultado idéntico |
+| [`CU-00029`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Caso de uso | Actos `[6]`, `[7]`, `[7b]` y `[7c]`: los dos desenlaces y sus dos rechazos |
+| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Actos `[4]` y `[5]`: el borrador excluido y la eliminación en los tres estados que ve |
+| [`CU-00024`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Acto `[8]`: la cuenta conserva su situación y sus cuatro trabajos |
 | [`RN-02003`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Regla de negocio | La comparación campo por campo de `[3]` |
 | [`RN-02010`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | Regla de negocio | `[7b]` y `[7c]`: exclusividad y terminalidad |
 | [`RN-02011`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | Regla de negocio | El `fuera-de-alcance=1 (Borrador)` de `[4]` |

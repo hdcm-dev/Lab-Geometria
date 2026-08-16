@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que habilitar y rehabilit
 
 ## 2. Contexto
 
-`RN-04016` declara que habilitar una cuenta produce su contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que la del reseteo. El contrato de uso es [`CU-04003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md), en su fijación, solicitada por [`CU-04002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md). `05` §10.2 asigna el tramo de `RN-04016` a esta capa en las operaciones de habilitar y rehabilitar.
+`RN-04016` declara que habilitar una cuenta produce su contraseña provisoria, con el mismo mecanismo y el mismo tratamiento que la del reseteo. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md), en su fijación, solicitada por [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md). `05` §10.2 asigna el tramo de `RN-04016` a esta capa en las operaciones de habilitar y rehabilitar.
 
 ## 3. Criterios de aceptación
 

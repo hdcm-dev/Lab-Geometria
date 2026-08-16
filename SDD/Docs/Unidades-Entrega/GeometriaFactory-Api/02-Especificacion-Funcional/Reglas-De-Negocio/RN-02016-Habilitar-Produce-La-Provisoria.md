@@ -55,10 +55,10 @@ La segunda es **habilitar sin poner la marca**: la provisoria que el administrad
 
 ## 5. CU afectados
 
-- [CU-02002](../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — Gobernar el ciclo de vida de la cuenta, donde la regla se materializa: la habilitación exige la credencial derivada provisoria y deja la marca puesta.
-- [CU-02003](../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) — Fijar y reemplazar la credencial derivada: la fijación deja de ser un acto del alumno anónimo y pasa a ejercerse dentro de la habilitación; el alumno usa el **reemplazo**, que es el que levanta la marca.
-- [CU-02004](../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) — Evaluar la admisibilidad, de donde la regla **retira** el motivo `CREDENCIAL_NO_ESTABLECIDA`: con la regla puesta, una cuenta `Habilitado` sin credencial no puede existir.
-- [CU-02013](../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) — Resetear la contraseña, de donde la regla **retira** el rechazo `RESETEO_SOBRE_CREDENCIAL_NO_FIJADA`, por el mismo motivo.
+- [CU-00023](../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) — Gobernar el ciclo de vida de la cuenta, donde la regla se materializa: la habilitación exige la credencial derivada provisoria y deja la marca puesta.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Fijar y reemplazar la credencial derivada: la fijación deja de ser un acto del alumno anónimo y pasa a ejercerse dentro de la habilitación; el alumno usa el **reemplazo**, que es el que levanta la marca.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Evaluar la admisibilidad, de donde la regla **retira** el motivo `CREDENCIAL_NO_ESTABLECIDA`: con la regla puesta, una cuenta `Habilitado` sin credencial no puede existir.
+- [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) — Resetear la contraseña, de donde la regla **retira** el rechazo `RESETEO_SOBRE_CREDENCIAL_NO_FIJADA`, por el mismo motivo.
 
 ## 6. Pruebas que la verifican
 

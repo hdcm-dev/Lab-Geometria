@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que un envío cuyas obser
 
 ## 2. Contexto
 
-`NB-00005` pide visibilidad del error de cálculo y `RN-04005` declara que las advertencias **sí** permiten el paso a estado `Pendiente`. El contrato de uso es [`CU-04005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md). `05` §10.2 declara que **el tramo principal de `RN-04005` está en el dominio**: esta capa entrega el conjunto de observaciones y el dominio resuelve el estado.
+`NB-00005` pide visibilidad del error de cálculo y `RN-04005` declara que las advertencias **sí** permiten el paso a estado `Pendiente`. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md). `05` §10.2 declara que **el tramo principal de `RN-04005` está en el dominio**: esta capa entrega el conjunto de observaciones y el dominio resuelve el estado.
 
 ## 3. Criterios de aceptación
 

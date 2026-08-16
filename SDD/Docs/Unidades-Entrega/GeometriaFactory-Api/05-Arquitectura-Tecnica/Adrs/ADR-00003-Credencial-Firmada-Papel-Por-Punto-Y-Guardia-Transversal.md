@@ -85,7 +85,7 @@ Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-00013, RN-00016), §17.5.P.5 y §17.5.P.6.
 - [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y §7.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md).
+- [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 - [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md`](ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md), que es la comprobación que esta guardia garantiza que se ejerza siempre.
 - ADR relacionadas: [`ADR-00001`](ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md), [`ADR-00004`](ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md).
 

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el alumno pueda retir
 
 ## 2. Contexto
 
-`RN-04004` acota la eliminación del alumno al estado `Borrador` y `F-07` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04009`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04009-Eliminar-Un-Trabajo.md), que `02` §8 mantuvo **en un solo caso de uso con sus dos alcances**, porque los dos responden la misma pregunta y el actor primario del contrato es uno solo.
+`RN-04004` acota la eliminación del alumno al estado `Borrador` y `F-07` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00027`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md), que `02` §8 mantuvo **en un solo caso de uso con sus dos alcances**, porque los dos responden la misma pregunta y el actor primario del contrato es uno solo.
 
 ## 3. Criterios de aceptación
 

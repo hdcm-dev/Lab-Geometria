@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la interpretación de
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.2.P.11 punto 1 declara que **el validador de figuras es un puerto y no una dependencia concreta**, y §17.2.P.8 fija la puerta propia: ninguna prueba de esta capa toca la base de datos real. El contrato de uso es [`CU-04005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md).
+`PRODUCT-INTAKE` §17.2.P.11 punto 1 declara que **el validador de figuras es un puerto y no una dependencia concreta**, y §17.2.P.8 fija la puerta propia: ninguna prueba de esta capa toca la base de datos real. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md).
 
 ## 3. Criterios de aceptación
 

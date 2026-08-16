@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la reedición proceda
 
 ## 2. Contexto
 
-`RN-04003` y `RN-04004` acotan lo que el alumno reedita y elimina. El contrato de uso es [`CU-04004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md). La verificación de **pertenencia** es la segunda comprobación de `02` §4, y su negativa oculta la existencia del recurso.
+`RN-04003` y `RN-04004` acotan lo que el alumno reedita y elimina. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md). La verificación de **pertenencia** es la segunda comprobación de `02` §4, y su negativa oculta la existencia del recurso.
 
 ## 3. Criterios de aceptación
 

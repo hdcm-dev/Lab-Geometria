@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **exponer el cambio de situac
 
 ## 2. Contexto
 
-`F-03` del intake §4 es `Must Have`, y `RN-00016` agrega que **habilitar produce la provisoria**. `02` §6 declara el segundo efecto estructural de esa regla sobre esta superficie: **el resultado de este punto devuelve la provisoria**. El contrato de uso es [`CU-00004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md).
+`F-03` del intake §4 es `Must Have`, y `RN-00016` agrega que **habilitar produce la provisoria**. `02` §6 declara el segundo efecto estructural de esa regla sobre esta superficie: **el resultado de este punto devuelve la provisoria**. El contrato de uso es [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md).
 
 ## 3. Criterios de aceptación
 

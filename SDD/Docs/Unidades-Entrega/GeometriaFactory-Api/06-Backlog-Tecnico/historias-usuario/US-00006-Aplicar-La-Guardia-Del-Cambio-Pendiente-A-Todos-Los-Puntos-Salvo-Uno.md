@@ -19,7 +19,7 @@ Como **producto**, quiero **que ningún punto de acceso quede fuera de la guardi
 
 ## 2. Contexto
 
-`RN-00013` e `INV-09` lo exigen. `02` §6 declara que ésta es **una de las dos reglas que esta capa puede romper sola**: **un punto nuevo que quede fuera de la guardia la rompe sin que nada falle**. `05` §9 le asigna probabilidad **alta** e impacto **muy alto**, y agrega el diagnóstico: **los defectos de omisión no se ven leyendo el punto nuevo**. El contrato de uso es [`CU-00002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00002-Admitir-La-Peticion-Acceso-Papel-Y-Marca.md).
+`RN-00013` e `INV-09` lo exigen. `02` §6 declara que ésta es **una de las dos reglas que esta capa puede romper sola**: **un punto nuevo que quede fuera de la guardia la rompe sin que nada falle**. `05` §9 le asigna probabilidad **alta** e impacto **muy alto**, y agrega el diagnóstico: **los defectos de omisión no se ven leyendo el punto nuevo**. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 
 ## 3. Criterios de aceptación
 

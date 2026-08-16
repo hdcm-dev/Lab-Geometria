@@ -54,19 +54,19 @@ Lo que no está acá, y dónde está: la interpretación del texto del alumno, e
 
 | CU | Nombre | Contrato que describe | Estado |
 | --- | --- | --- | --- |
-| CU-02001 | [`CU-02001` · Registrar el alta de un alumno](../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | Constituir un alumno con cuenta `Pendiente`, sin credencial derivada y con correo único | Propuesto |
-| CU-02002 | [`CU-02002` · Gobernar el ciclo de vida de la cuenta del alumno](../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | Habilitar, bloquear, rehabilitar y dar de baja | Propuesto |
-| CU-02003 | [`CU-02003` · Fijar y reemplazar la credencial derivada](../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | Fijar la credencial en el acto de habilitación y reemplazarla después, que es el camino del primer ingreso y el del cambio posterior a un reseteo | Propuesto |
-| CU-02004 | [`CU-02004` · Evaluar la admisibilidad de la cuenta](../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Responder si la cuenta admite acceso y con qué motivo si no lo admite (INV-06) | Propuesto |
-| CU-02005 | [`CU-02005` · Crear y reeditar un trabajo](../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) | Constituir el trabajo con dueño, identidad propia y texto original íntegro | Propuesto |
-| CU-02006 | [`CU-02006` · Reconstruir el conjunto de piezas del trabajo](../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | Incorporar piezas y componentes con identidad posicional y valores separados | Propuesto |
-| CU-02007 | [`CU-02007` · Registrar las observaciones del trabajo](../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) | Incorporar advertencias y errores de validación bien formados | Propuesto |
-| CU-02008 | [`CU-02008` · Gobernar el estado del trabajo en el envío](../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) | Resolver entre `Borrador` y `Pendiente` en la única acción de guardado | Propuesto |
-| CU-02009 | [`CU-02009` · Resolver el acceso de un alumno a un trabajo](../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | Pertenencia del trabajo y acotación de lo que el alumno opera al borrador | Propuesto |
-| CU-02010 | [`CU-02010` · Resolver el desenlace del trabajo](../../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) | Aprobar o rechazar desde `Pendiente`, con comentario opcional y terminalidad | Propuesto |
-| CU-02011 | [`CU-02011` · Resolver el alcance del administrador sobre un trabajo](../../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) | Qué trabajos ve el administrador y cuáles puede eliminar | Propuesto |
-| CU-02012 | [`CU-02012` · Configurar la cuenta de administrador en el primer arranque](../../Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) | Constituir la única cuenta de administrador, `Habilitado` y con credencial, mientras no exista ninguna | Propuesto |
-| CU-02013 | [`CU-02013` · Resetear la contraseña de una cuenta de alumno](../../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) | Fijar una contraseña provisoria conservando la cuenta y todos sus trabajos, y poner la marca de cambio de contraseña pendiente (RN-02012, INV-09) | Propuesto |
+| CU-02001 | [`CU-00021`](../../Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Constituir un alumno con cuenta `Pendiente`, sin credencial derivada y con correo único | Propuesto |
+| CU-02002 | [`CU-00023`](../../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Habilitar, bloquear, rehabilitar y dar de baja | Propuesto |
+| CU-02003 | [`CU-00022`](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Fijar la credencial en el acto de habilitación y reemplazarla después, que es el camino del primer ingreso y el del cambio posterior a un reseteo | Propuesto |
+| CU-02004 | [`CU-00022`](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Responder si la cuenta admite acceso y con qué motivo si no lo admite (INV-06) | Propuesto |
+| CU-02005 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Constituir el trabajo con dueño, identidad propia y texto original íntegro | Propuesto |
+| CU-02006 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Incorporar piezas y componentes con identidad posicional y valores separados | Propuesto |
+| CU-02007 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Incorporar advertencias y errores de validación bien formados | Propuesto |
+| CU-02008 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Resolver entre `Borrador` y `Pendiente` en la única acción de guardado | Propuesto |
+| CU-02009 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Pertenencia del trabajo y acotación de lo que el alumno opera al borrador | Propuesto |
+| CU-02010 | [`CU-00029`](../../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Aprobar o rechazar desde `Pendiente`, con comentario opcional y terminalidad | Propuesto |
+| CU-02011 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Qué trabajos ve el administrador y cuáles puede eliminar | Propuesto |
+| CU-02012 | [`CU-00025`](../../Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Constituir la única cuenta de administrador, `Habilitado` y con credencial, mientras no exista ninguna | Propuesto |
+| CU-02013 | [`CU-00024`](../../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Fijar una contraseña provisoria conservando la cuenta y todos sus trabajos, y poner la marca de cambio de contraseña pendiente (RN-02012, INV-09) | Propuesto |
 
 Trece casos de uso, sobre un mínimo de cinco para el tipo `library`.
 

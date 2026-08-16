@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-La capacidad `F-05` del intake §4 declara el cambio de contraseña exigiendo la actual. El contrato de uso es [`CU-02003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md), y [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 declara que el **cambio forzado no tiene caso de uso propio**: es un flujo alternativo de este mismo reemplazo.
+La capacidad `F-05` del intake §4 declara el cambio de contraseña exigiendo la actual. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md), y [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3 declara que el **cambio forzado no tiene caso de uso propio**: es un flujo alternativo de este mismo reemplazo.
 
 ## 3. Criterios de aceptación
 

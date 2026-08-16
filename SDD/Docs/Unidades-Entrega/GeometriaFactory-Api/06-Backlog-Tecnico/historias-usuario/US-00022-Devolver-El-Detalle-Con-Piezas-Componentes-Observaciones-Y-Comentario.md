@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **obtener el detalle de un tr
 
 ## 2. Contexto
 
-`NB-00006` recibe de esta capa que **las piezas, sus componentes y el texto original lleguen al otro lado del proceso** (`02` §7.2), y `NB-00009` que el comentario cruce. El contrato de uso es [`CU-00007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md).
+`NB-00006` recibe de esta capa que **las piezas, sus componentes y el texto original lleguen al otro lado del proceso** (`02` §7.2), y `NB-00009` que el comentario cruce. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md).
 
 ## 3. Criterios de aceptación
 

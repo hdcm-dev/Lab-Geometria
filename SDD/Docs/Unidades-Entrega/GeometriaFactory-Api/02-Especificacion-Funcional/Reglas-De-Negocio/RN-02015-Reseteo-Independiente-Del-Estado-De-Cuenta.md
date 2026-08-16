@@ -53,9 +53,9 @@ El daño concreto es el que la regla evita: el administrador que resetea antes d
 
 ## 5. CU afectados
 
-- [CU-02013](../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) — Resetear la contraseña de una cuenta de alumno, donde la regla se materializa: §3 admite los tres estados, **FA-02** declara el reseteo sobre `Bloqueado` o `Pendiente` y §7 devuelve el estado sin cambio.
-- [CU-02002](../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — **por contraste**: es el contrato de las transiciones de la máquina de estados de cuenta, que son precisamente lo que el reseteo **no** es.
-- [CU-02004](../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) — porque es ahí, y no en el reseteo, donde una cuenta `Pendiente` o `Bloqueado` sigue sin obtener acceso, por INV-06.
+- [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) — Resetear la contraseña de una cuenta de alumno, donde la regla se materializa: §3 admite los tres estados, **FA-02** declara el reseteo sobre `Bloqueado` o `Pendiente` y §7 devuelve el estado sin cambio.
+- [CU-00023](../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) — **por contraste**: es el contrato de las transiciones de la máquina de estados de cuenta, que son precisamente lo que el reseteo **no** es.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — porque es ahí, y no en el reseteo, donde una cuenta `Pendiente` o `Bloqueado` sigue sin obtener acceso, por INV-06.
 
 ## 6. Pruebas que la verifican
 

@@ -99,7 +99,7 @@ Lo que este caso de uso **no** hace: no decide **cuándo** arrancar ni **dónde*
 | --- | --- |
 | Necesidad de negocio | NB-00003, y NB-00008 en cuanto un arranque que se detiene es preferible a un servicio que pierde datos en silencio |
 | Reglas de negocio aplicables | Ninguna directa. **Sostiene a todas indirectamente**: sin esquema al día no hay dónde hacer cumplir ninguna |
-| Reglas conceptuales de modelo | Las siete de [`Modelo-Datos/`](../Modelo-Datos/Modelo-Conceptual.md), que este contrato deja materializadas |
+| Reglas conceptuales de modelo | Las siete de [`Modelo-Datos/`](../../02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md), que este contrato deja materializadas |
 | Consumidor | `GeometriaFactory-Api`, en su arranque |
 | Historias de usuario a generar en 06 | US-06024, US-06025 |
 | Componentes esperados en 05 | Transformaciones de esquema versionadas y el paso de preparación invocado desde el arranque |

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-`NB-00002` pide que el alumno tenga identidad propia sin depender de un canal de correo, y la capacidad `F-02` del intake §4 la declara `Must Have`. El contrato de uso es [`CU-02001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md). Sin esta historia no hay ninguna cuenta de alumno sobre la que ejercer ninguna otra: es la primera del ciclo de vida.
+`NB-00002` pide que el alumno tenga identidad propia sin depender de un canal de correo, y la capacidad `F-02` del intake §4 la declara `Must Have`. El contrato de uso es [`CU-00021`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md). Sin esta historia no hay ninguna cuenta de alumno sobre la que ejercer ninguna otra: es la primera del ciclo de vida.
 
 ## 3. Criterios de aceptación
 

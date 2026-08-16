@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **resolver el listado de la
 
 ## 2. Contexto
 
-`NB-00007` pide revisión de la comisión desde un solo lugar, `RN-04011` declara que el administrador no ve los borradores y `F-12` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md). `05` §6 fija que el predicado de alcance **se traslada a la consulta** y no se aplica después.
+`NB-00007` pide revisión de la comisión desde un solo lugar, `RN-04011` declara que el administrador no ve los borradores y `F-12` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md). `05` §6 fija que el predicado de alcance **se traslada a la consulta** y no se aplica después.
 
 ## 3. Criterios de aceptación
 

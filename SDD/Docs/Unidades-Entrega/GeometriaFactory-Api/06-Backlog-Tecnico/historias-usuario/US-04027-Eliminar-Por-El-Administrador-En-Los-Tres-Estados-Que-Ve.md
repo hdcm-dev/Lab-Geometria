@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el administrador pued
 
 ## 2. Contexto
 
-`RN-04004` declara que el administrador elimina cualquier trabajo que ve, en cualquier estado, con borrado físico, y `F-24` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04009`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04009-Eliminar-Un-Trabajo.md), en su segundo alcance.
+`RN-04004` declara que el administrador elimina cualquier trabajo que ve, en cualquier estado, con borrado físico, y `F-24` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00027`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md), en su segundo alcance.
 
 ## 3. Criterios de aceptación
 

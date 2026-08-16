@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-La capacidad `F-01` del intake §4 declara la configuración del administrador en el primer arranque y **sólo mientras no exista ninguna**. Este contrato de uso, [`CU-02012`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md), nació de la corrección del primer P0 del producto: el administrador sobrevivía como flujo alternativo del alta de alumno y nacía en estado `Pendiente`, con lo que la instancia quedaba sin nadie capaz de habilitar a nadie ([`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §10, versión 1.2).
+La capacidad `F-01` del intake §4 declara la configuración del administrador en el primer arranque y **sólo mientras no exista ninguna**. Este contrato de uso, [`CU-00025`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md), nació de la corrección del primer P0 del producto: el administrador sobrevivía como flujo alternativo del alta de alumno y nacía en estado `Pendiente`, con lo que la instancia quedaba sin nadie capaz de habilitar a nadie ([`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §10, versión 1.2).
 
 ## 3. Criterios de aceptación
 

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **consultar la admisibilida
 
 ## 2. Contexto
 
-`RN-04006` fija que una cuenta `Pendiente` o `Bloqueado` no obtiene acceso, y `02` §6 asigna a esta capa **la consulta de admisibilidad con su motivo**. El contrato de uso es [`CU-04003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md). `Domain ADR-04005` declara la admisibilidad como **puerta única** de las guardas de acceso.
+`RN-04006` fija que una cuenta `Pendiente` o `Bloqueado` no obtiene acceso, y `02` §6 asigna a esta capa **la consulta de admisibilidad con su motivo**. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md). `Domain ADR-04005` declara la admisibilidad como **puerta única** de las guardas de acceso.
 
 ## 3. Criterios de aceptación
 

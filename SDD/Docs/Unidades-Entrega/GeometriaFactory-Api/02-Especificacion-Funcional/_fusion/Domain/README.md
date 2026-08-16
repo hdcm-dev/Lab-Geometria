@@ -43,19 +43,19 @@ Todos describen un **contrato de uso de la superficie pública**. El actor prima
 
 | CU | Título | NB que implementa |
 | --- | --- | --- |
-| CU-02001 | [`CU-02001` · Registrar el alta de un alumno](../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | NB-00002, NB-00001 |
-| CU-02002 | [`CU-02002` · Gobernar el ciclo de vida de la cuenta del alumno](../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | NB-00001 |
-| CU-02003 | [`CU-02003` · Fijar y reemplazar la credencial derivada](../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | NB-00002 |
-| CU-02004 | [`CU-02004` · Evaluar la admisibilidad de la cuenta](../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | NB-00001, NB-00002 |
-| CU-02005 | [`CU-02005` · Crear y reeditar un trabajo](../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) | NB-00003, NB-00004 |
-| CU-02006 | [`CU-02006` · Reconstruir el conjunto de piezas del trabajo](../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | NB-00004, NB-00006 |
-| CU-02007 | [`CU-02007` · Registrar las observaciones del trabajo](../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) | NB-00005, NB-00004 |
-| CU-02008 | [`CU-02008` · Gobernar el estado del trabajo en el envío](../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) | NB-00003, NB-00004, NB-00005 |
-| CU-02009 | [`CU-02009` · Resolver el acceso de un alumno a un trabajo](../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) | NB-00003 |
-| CU-02010 | [`CU-02010` · Resolver el desenlace del trabajo](../../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) | NB-00009, NB-00003 |
-| CU-02011 | [`CU-02011` · Resolver el alcance del administrador sobre un trabajo](../../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) | NB-00009, NB-00007 |
-| CU-02012 | [`CU-02012` · Configurar la cuenta de administrador en el primer arranque](../../Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) | NB-00001 |
-| CU-02013 | [`CU-02013` · Resetear la contraseña de una cuenta de alumno](../../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) | NB-00001, NB-00002 |
+| CU-02001 | [`CU-00021`](../../Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | NB-00002, NB-00001 |
+| CU-02002 | [`CU-00023`](../../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | NB-00001 |
+| CU-02003 | [`CU-00022`](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | NB-00002 |
+| CU-02004 | [`CU-00022`](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | NB-00001, NB-00002 |
+| CU-02005 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | NB-00003, NB-00004 |
+| CU-02006 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | NB-00004, NB-00006 |
+| CU-02007 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | NB-00005, NB-00004 |
+| CU-02008 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | NB-00003, NB-00004, NB-00005 |
+| CU-02009 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | NB-00003 |
+| CU-02010 | [`CU-00029`](../../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | NB-00009, NB-00003 |
+| CU-02011 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | NB-00009, NB-00007 |
+| CU-02012 | [`CU-00025`](../../Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | NB-00001 |
+| CU-02013 | [`CU-00024`](../../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | NB-00001, NB-00002 |
 
 ## 3. Las dieciséis reglas de negocio
 

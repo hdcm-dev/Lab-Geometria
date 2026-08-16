@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **orquestar el reemplazo de
 
 ## 2. Contexto
 
-`F-05` del intake §4 declara `Must Have` el cambio de contraseña exigiendo la actual. El contrato de uso es [`CU-04003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md), en su reemplazo. `02` §8 declara que esta operación **no se fusiona con el reseteo**: el sujeto es otro, la autorización es otra y la postcondición es opuesta.
+`F-05` del intake §4 declara `Must Have` el cambio de contraseña exigiendo la actual. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md), en su reemplazo. `02` §8 declara que esta operación **no se fusiona con el reseteo**: el sujeto es otro, la autorización es otra y la postcondición es opuesta.
 
 ## 3. Criterios de aceptación
 

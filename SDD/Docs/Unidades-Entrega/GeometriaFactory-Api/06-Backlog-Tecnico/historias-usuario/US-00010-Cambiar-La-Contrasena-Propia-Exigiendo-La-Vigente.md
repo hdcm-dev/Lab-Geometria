@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **exponer el cambio de contra
 
 ## 2. Contexto
 
-`F-05` del intake §4 declara `Must Have` el cambio de contraseña exigiendo la actual. El contrato de uso es [`CU-00003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md). `02` §8 declara por qué los cuatro puntos de alta y de credencial propia quedaron en un solo contrato de uso: **son los únicos que se ejercen sin acceso firmado o sin que el papel importe**.
+`F-05` del intake §4 declara `Must Have` el cambio de contraseña exigiendo la actual. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md). `02` §8 declara por qué los cuatro puntos de alta y de credencial propia quedaron en un solo contrato de uso: **son los únicos que se ejercen sin acceso firmado o sin que el papel importe**.
 
 ## 3. Criterios de aceptación
 

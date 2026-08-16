@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que la marca de cambio de
 
 ## 2. Contexto
 
-`RN-04013` declara que al cambiarla la marca se levanta y la cuenta opera con normalidad, y que **la contraseña nueva la elige el alumno y el administrador no la conoce**. El contrato de uso es [`CU-04003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md), en su reemplazo, que `02` §4 declara **el único lugar donde la marca se levanta**.
+`RN-04013` declara que al cambiarla la marca se levanta y la cuenta opera con normalidad, y que **la contraseña nueva la elige el alumno y el administrador no la conoce**. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md), en su reemplazo, que `02` §4 declara **el único lugar donde la marca se levanta**.
 
 ## 3. Criterios de aceptación
 

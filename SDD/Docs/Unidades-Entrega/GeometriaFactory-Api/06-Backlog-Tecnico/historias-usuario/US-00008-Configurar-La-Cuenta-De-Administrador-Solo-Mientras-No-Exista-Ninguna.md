@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **exponer la configuración d
 
 ## 2. Contexto
 
-`RN-00001` declara que existe **exactamente un** administrador y que su alta sólo es posible mientras no exista ninguno; `INV-05` lo sostiene. El contrato de uso es [`CU-00003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md).
+`RN-00001` declara que existe **exactamente un** administrador y que su alta sólo es posible mientras no exista ninguno; `INV-05` lo sostiene. El contrato de uso es [`CU-00025`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md).
 
 ## 3. Criterios de aceptación
 

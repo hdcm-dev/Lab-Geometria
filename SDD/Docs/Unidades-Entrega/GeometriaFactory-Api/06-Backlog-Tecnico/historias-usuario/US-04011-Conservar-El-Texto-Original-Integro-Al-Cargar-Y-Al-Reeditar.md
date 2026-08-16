@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el texto que el alumn
 
 ## 2. Contexto
 
-`RN-04008` fija que el texto original se conserva íntegro y nunca se reescribe. El contrato de uso es [`CU-04004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md), y `05` §10.2 declara el tramo de esta capa: el texto se entrega tal cual **ni cuando la interpretación falla**.
+`RN-04008` fija que el texto original se conserva íntegro y nunca se reescribe. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md), y `05` §10.2 declara el tramo de esta capa: el texto se entrega tal cual **ni cuando la interpretación falla**.
 
 ## 3. Criterios de aceptación
 

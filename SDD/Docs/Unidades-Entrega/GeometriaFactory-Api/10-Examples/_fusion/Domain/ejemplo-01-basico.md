@@ -95,11 +95,11 @@ Las cuatro variaciones son el puente hacia el ejemplo 02, donde el sujeto deja d
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-02001`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) | Caso de uso | Acto `[2]`: constituye el alumno con cuenta `Pendiente`, sin credencial y con papel `Alumno` |
-| [`CU-02002`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) | Caso de uso | Acto `[4]`: habilita la cuenta; la variación de bloqueo recorre la transición inversa |
-| [`CU-02003`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) | Caso de uso | Actos `[4]` y `[6]`: fija la provisoria y después la reemplaza exigiendo la vigente |
-| [`CU-02004`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Caso de uso | Actos `[3]`, `[5]` y `[7]`: los tres desenlaces de la puerta única |
-| [`CU-02012`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) | Caso de uso | Actos `[1]` y `[1b]`: la ventana de alta del administrador y su cierre |
+| [`CU-00021`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Caso de uso | Acto `[2]`: constituye el alumno con cuenta `Pendiente`, sin credencial y con papel `Alumno` |
+| [`CU-00023`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Acto `[4]`: habilita la cuenta; la variación de bloqueo recorre la transición inversa |
+| [`CU-00022`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Actos `[4]` y `[6]`: fija la provisoria y después la reemplaza exigiendo la vigente |
+| [`CU-00022`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Actos `[3]`, `[5]` y `[7]`: los tres desenlaces de la puerta única |
+| [`CU-00025`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Actos `[1]` y `[1b]`: la ventana de alta del administrador y su cierre |
 | [`RN-02001`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El rechazo de `[1b]` y la variación sobre la cuenta de administrador |
 | [`RN-02006`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | El motivo `CUENTA_PENDIENTE` de `[3]` |
 | [`RN-02013`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | El motivo de `[5]` y su levantamiento en `[6]` |

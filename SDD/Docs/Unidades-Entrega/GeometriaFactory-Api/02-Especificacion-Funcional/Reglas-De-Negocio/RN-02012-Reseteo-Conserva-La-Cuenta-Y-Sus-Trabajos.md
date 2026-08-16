@@ -48,8 +48,8 @@ Rechazo. Un reseteo que declare eliminar los trabajos del alumno o cambiar su es
 
 ## 5. CU afectados
 
-- [CU-02013](../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) — Resetear la contraseña de una cuenta de alumno, que es donde la regla se materializa.
-- [CU-02002](../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) — **por contraste**: es el contrato donde vive la baja con arrastre de RN-02007, y esta regla existe para que el reseteo no se confunda con ella.
+- [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) — Resetear la contraseña de una cuenta de alumno, que es donde la regla se materializa.
+- [CU-00023](../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) — **por contraste**: es el contrato donde vive la baja con arrastre de RN-02007, y esta regla existe para que el reseteo no se confunda con ella.
 
 ## 6. Pruebas que la verifican
 

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **recibir un motivo tipado 
 
 ## 2. Contexto
 
-`RN-04002` fija que el correo del alumno es único, y `02` §6 declara que **la verificación sobre el conjunto de cuentas es de esta capa, en los dos caminos de alta**. El contrato de uso es [`CU-04001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md). Sin esta historia, la colisión llegaría al consumidor como una excepción del almacén, que es exactamente lo que [`ADR-04006`](../../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md) descarta.
+`RN-04002` fija que el correo del alumno es único, y `02` §6 declara que **la verificación sobre el conjunto de cuentas es de esta capa, en los dos caminos de alta**. El contrato de uso es [`CU-00021`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md). Sin esta historia, la colisión llegaría al consumidor como una excepción del almacén, que es exactamente lo que [`ADR-04006`](../../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md) descarta.
 
 ## 3. Criterios de aceptación
 

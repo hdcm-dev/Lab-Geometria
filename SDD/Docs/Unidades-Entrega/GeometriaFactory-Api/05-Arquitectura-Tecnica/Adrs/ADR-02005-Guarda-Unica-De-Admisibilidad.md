@@ -74,7 +74,7 @@ En consecuencia, **ninguna otra operación del dominio vuelve a comprobar el est
 ## 9. Referencias
 
 - [`../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §4.1 (tercera precisión de ubicación) y §5.3.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md) y [`CU-02003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md).
+- [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) y [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 - `SDD/Docs/Audit/B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo H-01, por el antecedente de la familia de defectos.
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.1.P.2 (INV-06, INV-09) y §4.1 (RN-02013, RN-02016).
 - ADR relacionadas: [`ADR-02002`](ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), [`ADR-02004`](ADR-02004-Frontera-De-Autenticacion-Y-Autorizacion.md).

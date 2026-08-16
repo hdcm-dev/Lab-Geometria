@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el listado de la comi
 
 ## 2. Contexto
 
-`F-12` del intake §4 declara `Must Have` el listado del administrador **con agrupación y filtro por alumno**. El contrato de uso es [`CU-04007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md). El riesgo de esta historia es concreto: un filtro que se arme del lado del consumidor podría reemplazar el predicado de alcance en lugar de sumarse a él.
+`F-12` del intake §4 declara `Must Have` el listado del administrador **con agrupación y filtro por alumno**. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md). El riesgo de esta historia es concreto: un filtro que se arme del lado del consumidor podría reemplazar el predicado de alcance en lugar de sumarse a él.
 
 ## 3. Criterios de aceptación
 

@@ -92,9 +92,9 @@ Actos recorridos: 4 | Rechazos tipados: 5 | Excepciones: 0
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-04001`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md) | Caso de uso | Constituye la cuenta de alumno pendiente y sin credencial, y recorre el rechazo por correo ya registrado |
-| [`CU-04003`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) | Caso de uso | Resuelve la admisibilidad con su motivo en los tres desenlaces y reemplaza la credencial exigiendo la vigente |
-| [`CU-04010`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md) | Caso de uso | Configura el administrador mientras no exista ninguno y rechaza el segundo |
+| [`CU-00021`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Caso de uso | Constituye la cuenta de alumno pendiente y sin credencial, y recorre el rechazo por correo ya registrado |
+| [`CU-00022`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Resuelve la admisibilidad con su motivo en los tres desenlaces y reemplaza la credencial exigiendo la vigente |
+| [`CU-00025`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Configura el administrador mientras no exista ninguno y rechaza el segundo |
 | [`RN-02001`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El segundo administrador se rechaza |
 | [`RN-02002`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | Regla de negocio | El alta repetida con el mismo correo se rechaza |
 | [`RN-02006`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | La cuenta pendiente no es admisible, y el motivo se devuelve |

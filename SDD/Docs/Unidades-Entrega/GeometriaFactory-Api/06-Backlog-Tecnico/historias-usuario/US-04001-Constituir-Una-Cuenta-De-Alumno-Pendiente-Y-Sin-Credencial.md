@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **orquestar el auto-registr
 
 ## 2. Contexto
 
-`NB-00002` pide identidad propia del alumno sin canal de correo, y `F-02` del intake §4 la declara `Must Have`. El contrato de uso es [`CU-04001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md). Lo que esta capa aporta y el dominio no puede aportar es **la verificación de la unicidad sobre el conjunto**, que llega por el puerto de repositorio de cuentas (`05` §10.3 `INV-01`).
+`NB-00002` pide identidad propia del alumno sin canal de correo, y `F-02` del intake §4 la declara `Must Have`. El contrato de uso es [`CU-00021`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md). Lo que esta capa aporta y el dominio no puede aportar es **la verificación de la unicidad sobre el conjunto**, que llega por el puerto de repositorio de cuentas (`05` §10.3 `INV-01`).
 
 ## 3. Criterios de aceptación
 

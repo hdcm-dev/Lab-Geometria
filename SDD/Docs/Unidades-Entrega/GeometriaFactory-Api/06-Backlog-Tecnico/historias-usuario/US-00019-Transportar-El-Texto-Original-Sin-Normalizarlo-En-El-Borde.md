@@ -19,7 +19,7 @@ Como **producto**, quiero **que el texto del alumno cruce la frontera del proces
 
 ## 2. Contexto
 
-`RN-00008` conserva el texto íntegro, y `02` §6 declara el tramo propio de esta capa: **el borde del proceso es el primer lugar donde el texto puede alterarse** —por codificación, por normalización o por recorte de tamaño—. `05` §9 declara el riesgo con impacto alto: truncar **rompe `RN-00008` en silencio**, el trabajo se guarda con el texto mutilado y el alumno lo descubre al ver el dibujo. El contrato de uso es [`CU-00006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md).
+`RN-00008` conserva el texto íntegro, y `02` §6 declara el tramo propio de esta capa: **el borde del proceso es el primer lugar donde el texto puede alterarse** —por codificación, por normalización o por recorte de tamaño—. `05` §9 declara el riesgo con impacto alto: truncar **rompe `RN-00008` en silencio**, el trabajo se guarda con el texto mutilado y el alumno lo descubre al ver el dibujo. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md).
 
 ## 3. Criterios de aceptación
 

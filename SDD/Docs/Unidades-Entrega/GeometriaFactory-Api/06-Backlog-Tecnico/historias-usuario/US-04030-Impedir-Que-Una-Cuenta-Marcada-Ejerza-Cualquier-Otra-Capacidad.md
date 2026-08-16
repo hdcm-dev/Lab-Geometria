@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que una cuenta con la mar
 
 ## 2. Contexto
 
-`RN-04013` declara que mientras la provisoria no se cambie la cuenta **se autentica y no obtiene sesión de trabajo**, e `INV-09` lo sostiene. El contrato de uso es [`CU-04011`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04011-Resetear-La-Contrasena-De-Un-Alumno.md) junto con la **cuarta comprobación transversal** de `02` §4. `Domain ADR-04005` §6 punto 1 declaró que el dominio **no puede impedir** que exista un camino que saltee la admisibilidad: esa dependencia de disciplina cae acá.
+`RN-04013` declara que mientras la provisoria no se cambie la cuenta **se autentica y no obtiene sesión de trabajo**, e `INV-09` lo sostiene. El contrato de uso es [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) junto con la **cuarta comprobación transversal** de `02` §4. `Domain ADR-04005` §6 punto 1 declaró que el dominio **no puede impedir** que exista un camino que saltee la admisibilidad: esa dependencia de disciplina cae acá.
 
 ## 3. Criterios de aceptación
 

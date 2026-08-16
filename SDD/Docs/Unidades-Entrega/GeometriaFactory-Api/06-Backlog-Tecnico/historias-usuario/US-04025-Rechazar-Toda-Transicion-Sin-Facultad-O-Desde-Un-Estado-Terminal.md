@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que toda transición de d
 
 ## 2. Contexto
 
-`RN-04010` declara el desenlace exclusivo del administrador y los dos estados de cierre terminales. El contrato de uso es [`CU-04008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md). El criterio de transición `h` → `i…` exige que **un alumno que fuerce la transición contra el servicio de datos sea rechazado**.
+`RN-04010` declara el desenlace exclusivo del administrador y los dos estados de cierre terminales. El contrato de uso es [`CU-00029`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md). El criterio de transición `h` → `i…` exige que **un alumno que fuerce la transición contra el servicio de datos sea rechazado**.
 
 ## 3. Criterios de aceptación
 

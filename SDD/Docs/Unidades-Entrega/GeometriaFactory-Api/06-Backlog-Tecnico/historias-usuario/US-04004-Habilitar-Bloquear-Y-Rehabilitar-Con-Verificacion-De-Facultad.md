@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **orquestar las transicione
 
 ## 2. Contexto
 
-`NB-00001` pide control de admisión y `F-03` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md). La verificación de **facultad** es una de las cuatro comprobaciones transversales de `02` §4, y admite ser explícita porque **no hay recurso ajeno cuya existencia proteger**.
+`NB-00001` pide control de admisión y `F-03` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md). La verificación de **facultad** es una de las cuatro comprobaciones transversales de `02` §4, y admite ser explícita porque **no hay recurso ajeno cuya existencia proteger**.
 
 ## 3. Criterios de aceptación
 

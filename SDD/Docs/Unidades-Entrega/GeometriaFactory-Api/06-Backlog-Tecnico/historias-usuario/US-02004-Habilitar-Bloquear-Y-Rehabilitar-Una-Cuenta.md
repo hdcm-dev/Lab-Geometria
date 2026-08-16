@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-La capacidad `F-03` del intake §4 declara las cuatro operaciones del administrador sobre una cuenta; ésta cubre las tres no destructivas y la baja es US-02005. El contrato de uso es [`CU-02002`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md). `INV-08` acota el alcance: la cuenta de administrador no admite ninguna de las tres.
+La capacidad `F-03` del intake §4 declara las cuatro operaciones del administrador sobre una cuenta; ésta cubre las tres no destructivas y la baja es US-02005. El contrato de uso es [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md). `INV-08` acota el alcance: la cuenta de administrador no admite ninguna de las tres.
 
 ## 3. Criterios de aceptación
 

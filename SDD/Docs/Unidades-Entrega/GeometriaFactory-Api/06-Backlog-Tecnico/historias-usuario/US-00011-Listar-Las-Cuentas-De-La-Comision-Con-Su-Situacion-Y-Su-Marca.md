@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **obtener la lista de cuentas
 
 ## 2. Contexto
 
-`NB-00001` pide control de admisión y `F-03` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md). La **marca** viaja porque `GeometriaFactory-Infrastructure` la conserva y la hace viajar como atributo propio de la cuenta.
+`NB-00001` pide control de admisión y `F-03` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md). La **marca** viaja porque `GeometriaFactory-Infrastructure` la conserva y la hace viajar como atributo propio de la cuenta.
 
 ## 3. Criterios de aceptación
 

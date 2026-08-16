@@ -19,7 +19,7 @@ Como **producto**, quiero **que la contraseña provisoria no aparezca en ningún
 
 ## 2. Contexto
 
-`05` §7 declara que **ninguna respuesta lleva la provisoria fuera del cuerpo del reseteo**, y que el registro del servidor es la **contracara obligatoria** de `RA-03`: sin él, la prohibición de exponer se convierte en imposibilidad de diagnosticar; con él mal hecho, el secreto queda escrito. El contrato de uso es [`CU-00005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md).
+`05` §7 declara que **ninguna respuesta lleva la provisoria fuera del cuerpo del reseteo**, y que el registro del servidor es la **contracara obligatoria** de `RA-03`: sin él, la prohibición de exponer se convierte en imposibilidad de diagnosticar; con él mal hecho, el secreto queda escrito. El contrato de uso es [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md).
 
 ## 3. Criterios de aceptación
 

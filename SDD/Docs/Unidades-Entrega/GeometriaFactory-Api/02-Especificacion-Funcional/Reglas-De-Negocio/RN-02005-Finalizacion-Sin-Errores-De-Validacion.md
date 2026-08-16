@@ -47,15 +47,15 @@ El invariante que la expresa como condición permanente es **INV-04**: un trabaj
 
 El envío **no falla**: su resultado declarado es que el trabajo queda en `Borrador`, con sus observaciones de especie error de validación y su ubicación por posición de figura y campo.
 
-**No hay ninguna otra forma de llegar a estado `Pendiente`**, y por eso esta regla no acuña un código de rechazo propio: el envío es la única transición hacia ese estado y la decide el dominio, de modo que no existe una operación de «forzar el paso» que se pueda rechazar. Las solicitudes que sí se rechazan son las que caen fuera del envío, y sus códigos los declara [CU-02008](../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) §6: `ENVIO_FUERA_DE_BORRADOR` cuando el trabajo no está en `Borrador`, y `TRANSICION_DESDE_ESTADO_TERMINAL` cuando ya alcanzó un estado de cierre.
+**No hay ninguna otra forma de llegar a estado `Pendiente`**, y por eso esta regla no acuña un código de rechazo propio: el envío es la única transición hacia ese estado y la decide el dominio, de modo que no existe una operación de «forzar el paso» que se pueda rechazar. Las solicitudes que sí se rechazan son las que caen fuera del envío, y sus códigos los declara [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) §6: `ENVIO_FUERA_DE_BORRADOR` cuando el trabajo no está en `Borrador`, y `TRANSICION_DESDE_ESTADO_TERMINAL` cuando ya alcanzó un estado de cierre.
 
 En sentido inverso, impedir el paso a estado `Pendiente` de un trabajo cuyas observaciones son todas advertencias también viola esta regla: el carácter no bloqueante de la advertencia es parte del enunciado, no una tolerancia.
 
 ## 5. CU afectados
 
-- [CU-02008](../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) — Gobernar el estado del trabajo en el envío.
-- [CU-02007](../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) — Registrar las observaciones del trabajo, que es donde la especie queda fijada.
-- [CU-02010](../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md) — Resolver el desenlace del trabajo, que hereda la garantía sobre los trabajos en estado `Pendiente`.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Gobernar el estado del trabajo en el envío.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Registrar las observaciones del trabajo, que es donde la especie queda fijada.
+- [CU-00029](../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) — Resolver el desenlace del trabajo, que hereda la garantía sobre los trabajos en estado `Pendiente`.
 
 ## 6. Pruebas que la verifican
 

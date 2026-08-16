@@ -48,10 +48,10 @@ Rechazo. Para el alumno, con el motivo `OPERACION_FUERA_DE_BORRADOR`; para el ad
 
 ## 5. CU afectados
 
-- [CU-02009](../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) — Resolver el acceso de un alumno a un trabajo.
-- [CU-02011](../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) — Resolver el alcance del administrador sobre un trabajo.
-- [CU-02005](../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) — Crear y reeditar un trabajo, en cuanto al único estado que el alumno edita.
-- [CU-02008](../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) — Gobernar el estado del trabajo en el envío, en cuanto al estado desde el que el alumno opera.
+- [CU-00028](../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) — Resolver el acceso de un alumno a un trabajo.
+- [CU-00028](../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) — Resolver el alcance del administrador sobre un trabajo.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Crear y reeditar un trabajo, en cuanto al único estado que el alumno edita.
+- [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) — Gobernar el estado del trabajo en el envío, en cuanto al estado desde el que el alumno opera.
 
 ## 6. Pruebas que la verifican
 

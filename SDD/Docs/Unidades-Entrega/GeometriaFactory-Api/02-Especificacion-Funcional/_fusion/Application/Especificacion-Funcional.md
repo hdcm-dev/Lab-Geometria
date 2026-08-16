@@ -101,17 +101,17 @@ Cinco precisiones que rigen en toda la categoría:
 
 | CU | Nombre | Contrato que describe | Estado |
 | --- | --- | --- | --- |
-| CU-04001 | [`CU-04001` · Registrar el alta de una cuenta](../../Casos-De-Uso/CU-04001-Registrar-El-Alta-De-Una-Cuenta.md) | Auto-registro del alumno: correo libre, cuenta constituida en estado `Pendiente` y sin credencial | Propuesto |
-| CU-04002 | [`CU-04002` · Gobernar las cuentas de la comisión](../../Casos-De-Uso/CU-04002-Gobernar-Las-Cuentas-De-La-Comision.md) | Habilitar, bloquear, rehabilitar y dar de baja, con confirmación escrita y arrastre de los trabajos; **habilitar y rehabilitar producen además la contraseña provisoria** (RN-04016) | Propuesto |
-| CU-04003 | [`CU-04003` · Resolver el ingreso y la credencial del alumno](../../Casos-De-Uso/CU-04003-Resolver-El-Ingreso-Y-La-Credencial-Del-Alumno.md) | Admisibilidad de la cuenta con su motivo, y fijación —solicitada por CU-04002 al habilitar— y reemplazo de la credencial derivada | Propuesto |
-| CU-04004 | [`CU-04004` · Cargar y reeditar un trabajo propio](../../Casos-De-Uso/CU-04004-Cargar-Y-Reeditar-Un-Trabajo-Propio.md) | Constituir el trabajo con dueño y texto original íntegro, y reeditarlo sólo en `Borrador` | Propuesto |
-| CU-04005 | [`CU-04005` · Enviar un trabajo e interpretar su texto](../../Casos-De-Uso/CU-04005-Enviar-Un-Trabajo-E-Interpretar-Su-Texto.md) | La única acción de guardado: interpretar por el puerto, incorporar piezas y observaciones y dejar que el dominio resuelva el estado | Propuesto |
-| CU-04006 | [`CU-04006` · Consultar los trabajos propios del alumno](../../Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md) | Listado acotado al dueño y sin componentes, y detalle con desenlace y comentario | Propuesto |
-| CU-04007 | [`CU-04007` · Revisar los trabajos de la comisión](../../Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md) | Listado de la comisión sin borradores, con dueño para agrupar y filtrar, y detalle equivalente al del alumno | Propuesto |
-| CU-04008 | [`CU-04008` · Dar desenlace a un trabajo](../../Casos-De-Uso/CU-04008-Dar-Desenlace-A-Un-Trabajo.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad | Propuesto |
-| CU-04009 | [`CU-04009` · Eliminar un trabajo](../../Casos-De-Uso/CU-04009-Eliminar-Un-Trabajo.md) | Retiro con los dos alcances opuestos: el alumno sólo en `Borrador`, el administrador en todo lo que ve | Propuesto |
-| CU-04010 | [`CU-04010` · Configurar la cuenta de administrador](../../Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md) | El segundo camino de alta: cuenta única con papel `Administrador`, `Habilitado` y con credencial, sólo mientras no exista ninguna | Propuesto |
-| CU-04011 | [`CU-04011` · Resetear la contraseña de un alumno](../../Casos-De-Uso/CU-04011-Resetear-La-Contrasena-De-Un-Alumno.md) | Contraseña provisoria **producida por el sistema** y devuelta una vez, con marca de cambio pendiente, conservando la cuenta, **su estado —cualquiera sea—** y **todos sus trabajos** | Propuesto |
+| CU-04001 | [`CU-00021`](../../Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Auto-registro del alumno: correo libre, cuenta constituida en estado `Pendiente` y sin credencial | Propuesto |
+| CU-04002 | [`CU-00023`](../../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Habilitar, bloquear, rehabilitar y dar de baja, con confirmación escrita y arrastre de los trabajos; **habilitar y rehabilitar producen además la contraseña provisoria** (RN-04016) | Propuesto |
+| CU-04003 | [`CU-00022`](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Admisibilidad de la cuenta con su motivo, y fijación —solicitada por CU-04002 al habilitar— y reemplazo de la credencial derivada | Propuesto |
+| CU-04004 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Constituir el trabajo con dueño y texto original íntegro, y reeditarlo sólo en `Borrador` | Propuesto |
+| CU-04005 | [`CU-00026`](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | La única acción de guardado: interpretar por el puerto, incorporar piezas y observaciones y dejar que el dominio resuelva el estado | Propuesto |
+| CU-04006 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Listado acotado al dueño y sin componentes, y detalle con desenlace y comentario | Propuesto |
+| CU-04007 | [`CU-00028`](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Listado de la comisión sin borradores, con dueño para agrupar y filtrar, y detalle equivalente al del alumno | Propuesto |
+| CU-04008 | [`CU-00029`](../../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Aprobar o rechazar desde estado `Pendiente`, con comentario opcional y terminalidad | Propuesto |
+| CU-04009 | [`CU-00027`](../../Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md) | Retiro con los dos alcances opuestos: el alumno sólo en `Borrador`, el administrador en todo lo que ve | Propuesto |
+| CU-04010 | [`CU-00025`](../../Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | El segundo camino de alta: cuenta única con papel `Administrador`, `Habilitado` y con credencial, sólo mientras no exista ninguna | Propuesto |
+| CU-04011 | [`CU-00024`](../../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Contraseña provisoria **producida por el sistema** y devuelta una vez, con marca de cambio pendiente, conservando la cuenta, **su estado —cualquiera sea—** y **todos sus trabajos** | Propuesto |
 
 Once casos de uso, sobre un mínimo de cinco para el tipo `library`.
 
@@ -232,17 +232,17 @@ Los **doce** casos de uso de `GeometriaFactory-Domain` quedan orquestados por lo
 
 | CU de esta capa | CU de dominio que orquesta |
 | --- | --- |
-| CU-04001 | [CU-02001](../../Casos-De-Uso/CU-02001-Registrar-El-Alta-De-Un-Alumno.md) |
-| CU-04010 | [CU-02012](../../Casos-De-Uso/CU-02012-Configurar-La-Cuenta-De-Administrador.md) |
-| CU-04002 | [CU-02002](../../Casos-De-Uso/CU-02002-Gobernar-El-Ciclo-De-Vida-De-La-Cuenta.md) |
-| CU-04003 | [CU-02004](../../Casos-De-Uso/CU-02004-Evaluar-La-Admisibilidad-De-La-Cuenta.md), [CU-02003](../../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) |
-| CU-04004 | [CU-02005](../../Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md), [CU-02009](../../Casos-De-Uso/CU-02009-Resolver-El-Acceso-Del-Alumno-A-Un-Trabajo.md) |
-| CU-04005 | [CU-02006](../../Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md), [CU-02007](../../Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md), [CU-02008](../../Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md), CU-04009 |
+| CU-04001 | [CU-00021](../../Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) |
+| CU-04010 | [CU-00025](../../Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) |
+| CU-04002 | [CU-00023](../../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) |
+| CU-04003 | [CU-00022](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md), [CU-00022](../../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) |
+| CU-04004 | [CU-00026](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md), [CU-00028](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) |
+| CU-04005 | [CU-00026](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md), [CU-00026](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md), [CU-00026](../../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md), CU-04009 |
 | CU-04006 | CU-04009 |
-| CU-04007 | [CU-02011](../../Casos-De-Uso/CU-02011-Resolver-El-Alcance-Del-Administrador-Sobre-Un-Trabajo.md) |
-| CU-04008 | [CU-02010](../../Casos-De-Uso/CU-02010-Resolver-El-Desenlace-Del-Trabajo.md), CU-04011 |
+| CU-04007 | [CU-00028](../../Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) |
+| CU-04008 | [CU-00029](../../Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md), CU-04011 |
 | CU-04009 | CU-04009, CU-04011 |
-| CU-04011 | [CU-02013](../../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md), la operación de reseteo del dominio |
+| CU-04011 | [CU-00024](../../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md), la operación de reseteo del dominio |
 
 **CU-04003 del dominio ya no queda orquestado desde dos casos de uso de esta capa.** La versión anterior declaraba que CU-04011 invocaba el reemplazo de CU-04003 «por facultad y sin conocer la credencial vigente»; el dominio tiene una operación propia para eso —**CU-02013**—, que no exige estado `Habilitado` ni declaración de credencial vigente verificada, y CU-04011 pasa a invocarla. La distinción de sujeto y de autorización que aquella nota describía **sigue siendo cierta y ahora la sostiene el dominio**, con dos operaciones en lugar de dos invocaciones de la misma.
 

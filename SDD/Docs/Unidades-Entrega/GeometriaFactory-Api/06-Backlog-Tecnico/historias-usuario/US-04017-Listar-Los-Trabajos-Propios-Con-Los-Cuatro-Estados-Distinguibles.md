@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **resolver el listado de lo
 
 ## 2. Contexto
 
-`NB-00003` pide trabajo con dueño, estado y persistencia, y `F-08` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md). El **predicado de alcance se traslada a la consulta** y no se aplica después de traerla (`05` §6).
+`NB-00003` pide trabajo con dueño, estado y persistencia, y `F-08` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md). El **predicado de alcance se traslada a la consulta** y no se aplica después de traerla (`05` §6).
 
 ## 3. Criterios de aceptación
 

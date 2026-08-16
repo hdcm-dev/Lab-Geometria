@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **exponer el reseteo de la co
 
 ## 2. Contexto
 
-`F-26` del intake §4 es `Must Have` y cierra un agujero que hacía inutilizable el laboratorio al primer olvido. `02` §5 declara este contrato de uso como **el punto que devuelve la provisoria una sola vez y no la registra**. El contrato de uso es [`CU-00005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md).
+`F-26` del intake §4 es `Must Have` y cierra un agujero que hacía inutilizable el laboratorio al primer olvido. `02` §5 declara este contrato de uso como **el punto que devuelve la provisoria una sola vez y no la registra**. El contrato de uso es [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md).
 
 ## 3. Criterios de aceptación
 

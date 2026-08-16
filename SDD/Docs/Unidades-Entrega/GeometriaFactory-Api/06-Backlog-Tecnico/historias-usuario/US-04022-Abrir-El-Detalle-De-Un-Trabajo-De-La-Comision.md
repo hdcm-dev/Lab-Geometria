@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el detalle que recibe
 
 ## 2. Contexto
 
-`NB-00007` pide revisión de la comisión desde un solo lugar y el intake §5 historia 8 pide abrir cualquier trabajo con el mismo visor y el mismo árbol que ve el alumno. El contrato de uso es [`CU-04007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04007-Revisar-Los-Trabajos-De-La-Comision.md), que `02` §8 separó de CU-04006 porque las comprobaciones que los acotan son **opuestas**.
+`NB-00007` pide revisión de la comisión desde un solo lugar y el intake §5 historia 8 pide abrir cualquier trabajo con el mismo visor y el mismo árbol que ve el alumno. El contrato de uso es [`CU-00028`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md), que `02` §8 separó de CU-04006 porque las comprobaciones que los acotan son **opuestas**.
 
 ## 3. Criterios de aceptación
 

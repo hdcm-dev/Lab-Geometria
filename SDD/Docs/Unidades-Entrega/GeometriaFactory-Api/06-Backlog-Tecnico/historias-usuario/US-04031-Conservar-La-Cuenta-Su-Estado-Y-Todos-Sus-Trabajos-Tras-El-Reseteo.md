@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el reseteo deje intac
 
 ## 2. Contexto
 
-`RN-04012` declara que el reseteo conserva la cuenta y sus trabajos y que **no dispara `RN-04007`**. El contrato de uso es [`CU-04011`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04011-Resetear-La-Contrasena-De-Un-Alumno.md). `05` §10.2 declara el tramo de esta capa: la postcondición que deja todo intacto y la **ausencia deliberada** de todo retiro.
+`RN-04012` declara que el reseteo conserva la cuenta y sus trabajos y que **no dispara `RN-04007`**. El contrato de uso es [`CU-00024`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md). `05` §10.2 declara el tramo de esta capa: la postcondición que deja todo intacto y la **ausencia deliberada** de todo retiro.
 
 ## 3. Criterios de aceptación
 

@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **orquestar la configuraci�
 
 ## 2. Contexto
 
-`NB-00001` pide control de admisión al laboratorio y `F-01` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-04010`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04010-Configurar-La-Cuenta-De-Administrador.md), que `02` §8 separó de CU-04001 porque **no comparten casi nada**: el estado inicial es opuesto, la credencial se aporta en uno y se prohíbe en el otro, y la ventana de alta existe en uno y no en el otro.
+`NB-00001` pide control de admisión al laboratorio y `F-01` del intake §4 lo declara `Must Have`. El contrato de uso es [`CU-00025`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md), que `02` §8 separó de CU-04001 porque **no comparten casi nada**: el estado inicial es opuesto, la credencial se aporta en uno y se prohíbe en el otro, y la ventana de alta existe en uno y no en el otro.
 
 ## 3. Criterios de aceptación
 

@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **que el punto de baja transp
 
 ## 2. Contexto
 
-`RN-00007` exige confirmación escrita y arrastre. `02` §6 declara el tramo de esta capa: **el punto transporta el correo escrito y no procede sin él**; **la comparación y el arrastre son de las capas de adentro**. El contrato de uso es [`CU-00004`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md).
+`RN-00007` exige confirmación escrita y arrastre. `02` §6 declara el tramo de esta capa: **el punto transporta el correo escrito y no procede sin él**; **la comparación y el arrastre son de las capas de adentro**. El contrato de uso es [`CU-00023`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md).
 
 ## 3. Criterios de aceptación
 

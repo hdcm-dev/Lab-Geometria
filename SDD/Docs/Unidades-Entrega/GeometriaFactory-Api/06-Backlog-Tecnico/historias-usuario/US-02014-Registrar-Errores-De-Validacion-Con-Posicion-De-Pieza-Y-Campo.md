@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-`RN-02009` declara que los mensajes de error de validación indican índice de figura y campo, **nunca un texto genérico**. El contrato de uso es [`CU-02007`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md).
+`RN-02009` declara que los mensajes de error de validación indican índice de figura y campo, **nunca un texto genérico**. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md).
 
 ## 3. Criterios de aceptación
 

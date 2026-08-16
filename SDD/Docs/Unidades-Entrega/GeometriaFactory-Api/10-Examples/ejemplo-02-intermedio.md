@@ -118,12 +118,15 @@ Pasos de la coleccion: 3 | Peticiones: 34 | Diferencias contra lo esperado: 0
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
 | [`CU-00012`](CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) | Caso de uso | **Es** la colección que ese contrato declara, con su recorrido de ocho guiones y sus ocho criterios de aceptación |
-| [`CU-00003`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md) | Caso de uso | Guiones 1 y 2: alta, administrador y credencial propia |
-| [`CU-00004`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00004-Exponer-El-Gobierno-De-Las-Cuentas-De-La-Comision.md) | Caso de uso | Guion 2: listado de cuentas y cambio de situación con la provisoria devuelta |
-| [`CU-00005`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00005-Exponer-El-Reseteo-De-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Guion 8: reseteo con la provisoria devuelta una sola vez |
-| [`CU-00006`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00006-Exponer-El-Envio-Y-La-Eliminacion-De-Un-Trabajo.md) | Caso de uso | Guiones 4 y 7: los **ocho** envíos y las eliminaciones forzadas |
-| [`CU-00007`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00007-Exponer-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Guion 5: listado y detalle con los dos papeles, con **0** borradores para el administrador |
-| [`CU-00008`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00008-Exponer-El-Desenlace-De-La-Revision.md) | Caso de uso | Guion 6: aprobación con comentario y rechazo sin comentario |
+| [`CU-00021`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Caso de uso | Guion 1: el alta de la cuenta de alumno |
+| [`CU-00025`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Guion 1: la configuración del administrador en el primer arranque |
+| [`CU-00022`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Guiones 1 y 2: el ingreso, la guardia y el cambio de la credencial propia |
+| [`CU-00023`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Guion 2: listado de cuentas y cambio de situación con la provisoria devuelta |
+| [`CU-00024`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Guion 8: reseteo con la provisoria devuelta una sola vez |
+| [`CU-00026`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Guion 4: los **ocho** envíos, con su estado resuelto y sus observaciones localizadas |
+| [`CU-00027`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md) | Caso de uso | Guion 7: las eliminaciones forzadas, con los dos alcances |
+| [`CU-00028`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Guion 5: listado y detalle con los dos papeles, con **0** borradores para el administrador |
+| [`CU-00029`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Caso de uso | Guion 6: aprobación con comentario y rechazo sin comentario |
 | [`RN-02003`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Regla de negocio | El trabajo ajeno responde **404**, igual que el inexistente |
 | [`RN-02004`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | Regla de negocio | La eliminación fuera de `Borrador` responde **409**, forzada contra la superficie |
 | [`RN-02010`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | Regla de negocio | El desenlace pedido por un alumno responde **403** |

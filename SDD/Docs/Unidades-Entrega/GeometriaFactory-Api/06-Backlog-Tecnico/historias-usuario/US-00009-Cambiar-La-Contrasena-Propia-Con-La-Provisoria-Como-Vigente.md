@@ -19,7 +19,7 @@ Como **código de `GeometriaFactory-Web`**, quiero **que el mismo punto de cambi
 
 ## 2. Contexto
 
-`RN-00016` unificó los dos mecanismos de credencial inicial del producto, y `02` §11 registra que **el punto abierto más importante de esta categoría quedó cerrado** por esa vía: la escritura anónima de contraseña **se suprimió** en lugar de resolverse, y `A-04` quedó **retirado y no se recicla**. El contrato de uso es [`CU-00003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00003-Exponer-El-Alta-De-Cuenta-Y-La-Credencial-Propia.md).
+`RN-00016` unificó los dos mecanismos de credencial inicial del producto, y `02` §11 registra que **el punto abierto más importante de esta categoría quedó cerrado** por esa vía: la escritura anónima de contraseña **se suprimió** en lugar de resolverse, y `A-04` quedó **retirado y no se recicla**. El contrato de uso es [`CU-00022`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md).
 
 ## 3. Criterios de aceptación
 

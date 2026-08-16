@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca de dominio (`GeometriaFactory-Applica
 
 ## 2. Contexto
 
-La capacidad `F-06` del intake §4 declara la carga del trabajo con nombre, fecha, descripción y el texto de figuras, con identificador propio. `RN-02008` declara que el texto original se conserva íntegro y nunca se reescribe. El contrato de uso es [`CU-02005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md).
+La capacidad `F-06` del intake §4 declara la carga del trabajo con nombre, fecha, descripción y el texto de figuras, con identificador propio. `RN-02008` declara que el texto original se conserva íntegro y nunca se reescribe. El contrato de uso es [`CU-00026`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md).
 
 ## 3. Criterios de aceptación
 

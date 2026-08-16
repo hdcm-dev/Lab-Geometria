@@ -93,10 +93,10 @@ Trabajos recorridos: 6 | Envios a Pendiente: 4 | Envios retenidos en Borrador: 2
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-02005`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02005-Crear-Y-Reeditar-Un-Trabajo.md) | Caso de uso | Constituye el trabajo con dueño, identidad y texto original; la variación de reedición recorre el rechazo |
-| [`CU-02006`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02006-Reconstruir-El-Conjunto-De-Piezas-Del-Trabajo.md) | Caso de uso | Adopta las piezas de `E-1`, `E-5`, `E-6` con identidad posicional y familia derivada del tipo |
-| [`CU-02007`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02007-Registrar-Las-Observaciones-Del-Trabajo.md) | Caso de uso | Adopta la advertencia de `E-3` con su par de valores y el error de `E-5` con índice y campo |
-| [`CU-02008`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-02008-Gobernar-El-Estado-Del-Trabajo.md) | Caso de uso | Resuelve los seis envíos: cuatro a `Pendiente` y dos retenidos en `Borrador` |
+| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Constituye el trabajo con dueño, identidad y texto original; la variación de reedición recorre el rechazo |
+| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Adopta las piezas de `E-1`, `E-5`, `E-6` con identidad posicional y familia derivada del tipo |
+| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Adopta la advertencia de `E-3` con su par de valores y el error de `E-5` con índice y campo |
+| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Resuelve los seis envíos: cuatro a `Pendiente` y dos retenidos en `Borrador` |
 | [`RN-02005`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Las advertencias no impiden el envío; un error de validación sí |
 | [`RN-02008`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | Regla de negocio | `texto-identico=si` en `E-1` y `texto-original-intacto=si` en `E-8` |
 | [`RN-02009`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice 1 y campo en `E-5` y en `E-8`; la posición reservada |

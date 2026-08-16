@@ -38,21 +38,21 @@ Lo que la regla protege es la promesa de RN-02013 y de INV-09: la provisoria val
 
 - Se evalúa sobre **el valor provisorio que cada reseteo produce**, en el acto de producirlo, y no sobre la cuenta ni sobre sus trabajos.
 - **No se ejerce en este proyecto de código, y conviene decirlo con precisión.** El dominio **no produce la provisoria y no la conoce**: llega ya derivada (`PRODUCT-INTAKE` §17.1.P.5), de modo que acá no hay valor en claro contra el cual verificar ninguna de las dos propiedades. La regla se enuncia acá porque acá viven las reglas del producto, y **se ejerce donde el valor nace**: `GeometriaFactory-Application` `CU-02011` §10 las exige por escrito sin declarar mecanismo, `GeometriaFactory-Contracts` `CU-02008` §10 las exige del valor devuelto y las verifica en su `CA-10`, y la generación es de `GeometriaFactory-Infrastructure`.
-- **Alcanza a los dos reseteos sucesivos de la misma cuenta**, que es el caso de FA-01 de [CU-02013](../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md): el segundo reseteo entrega una provisoria nueva y distinta de la primera.
+- **Alcanza a los dos reseteos sucesivos de la misma cuenta**, que es el caso de FA-01 de [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md): el segundo reseteo entrega una provisoria nueva y distinta de la primera.
 - **No alcanza a la contraseña que el alumno elige** al levantar la marca: ésa la escribe él, el administrador no la conoce (RN-02013) y su forma es asunto de otra decisión.
 - **Con qué mecanismo se produce un valor que cumpla las dos propiedades no es de esta categoría** ni de ninguna de las dos que la ejercen: es de `05-Arquitectura-Tecnica` y de la infraestructura. La regla exige propiedades, no algoritmo.
 - **No tiene invariante asociado**, y el intake lo declara así en la prosa de §17.1.P.2: describe cómo se produce un valor, no una condición permanente sobre los datos del dominio.
 
 ## 4. Consecuencia si se viola
 
-**No hay código de rechazo del dominio**, y el motivo es el mismo por el que la regla no se ejerce acá: el dominio recibe un valor ya derivado y no puede distinguir uno producido por el sistema de uno escrito por el administrador. La única condición que el dominio sí comprueba sobre ese valor es que no esté vacío, y es `VALOR_DERIVADO_VACIO` de [CU-02013](../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) §6, que no es esta regla.
+**No hay código de rechazo del dominio**, y el motivo es el mismo por el que la regla no se ejerce acá: el dominio recibe un valor ya derivado y no puede distinguir uno producido por el sistema de uno escrito por el administrador. La única condición que el dominio sí comprueba sobre ese valor es que no esté vacío, y es `VALOR_DERIVADO_VACIO` de [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) §6, que no es esta regla.
 
 Violarla no produce un rechazo sino un daño silencioso: una provisoria escrita a mano y repetida, o derivable del correo del alumno, convierte el reseteo en una puerta abierta a la identidad de cualquier cuenta con la contraseña reseteada. Es un defecto que **sólo una prueba detecta**, y por eso §6 declara dónde vive esa prueba.
 
 ## 5. CU afectados
 
-- [CU-02013](../Casos-De-Uso/CU-02013-Resetear-La-Contrasena-De-Una-Cuenta-De-Alumno.md) — Resetear la contraseña de una cuenta de alumno: es el acto en cuya invocación el valor producido entra al dominio, ya derivado. Su §2 declara que lo genera la infraestructura y su §10 remite las dos propiedades a las capas que las ejercen.
-- [CU-02003](../Casos-De-Uso/CU-02003-Fijar-Y-Reemplazar-La-Credencial-Derivada.md) — **por contraste**: es el camino por el que entra la contraseña que **la propia persona elige**, y sobre la cual esta regla no dice nada.
+- [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) — Resetear la contraseña de una cuenta de alumno: es el acto en cuya invocación el valor producido entra al dominio, ya derivado. Su §2 declara que lo genera la infraestructura y su §10 remite las dos propiedades a las capas que las ejercen.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — **por contraste**: es el camino por el que entra la contraseña que **la propia persona elige**, y sobre la cual esta regla no dice nada.
 
 ## 6. Pruebas que la verifican
 
