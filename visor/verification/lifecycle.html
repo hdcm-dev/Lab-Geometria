@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <title>Medición de PT-02 · ciclo de vida del visor</title>
+  <style>
+    /* La escena necesita tamaño: sin alto, el render no tiene dónde dibujar. */
+    #escena { width: 480px; height: 320px; }
+  </style>
+</head>
+<body>
+  <!-- BANCO DE MEDICIÓN DE `PT-02`, y no una superficie del producto.
+
+       Mide LO QUE LA PUERTA MIDE: que crear y liberar la escena diez veces no degrade nada. La
+       navegación entre trabajos del producto es el ESCENARIO; el mecanismo que puede fallar es
+       este par —crear, liberar— y es el que se ejerce acá, sin levantar el producto entero.
+
+       Se carga el paquete construido tal cual se sirve, sin ninguna adaptación. -->
+  <div id="escena"></div>
+  <script src="../dist/geometriafactory-visor.js"></script>
+</body>
+</html>

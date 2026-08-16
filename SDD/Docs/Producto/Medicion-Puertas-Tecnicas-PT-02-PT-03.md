@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Medicion-Puertas-Tecnicas-PT-02-PT-03.md
-**Versión:** 1.0
-**Estado:** Emitido — **`PT-03` pasa; `PT-02` pasa en lo verificable acá y queda una mitad medida en navegador**
+**Versión:** 2.0
+**Estado:** Emitido — **las dos puertas PASAN**, las dos medidas sobre el artefacto construido
 **Fecha:** 2026-08-16
 **Autor:** Orquestador SDD
 **Nivel:** Producto
@@ -44,7 +44,7 @@ exactamente lo que `PT-03` prohíbe. En lugar de apagar el aviso, `webpack.confi
 presupuesto propio de 560 KiB**, tomado de la medición con un margen chico: el aviso sigue existiendo
 y vuelve a sonar si el paquete crece de verdad.
 
-## 3. `PT-02` — sin degradación tras diez navegaciones · **PASA LO VERIFICABLE ACÁ**
+## 3. `PT-02` — sin degradación tras diez navegaciones · **PASA**
 
 Esta puerta tiene **dos mitades**, y conviene separarlas porque se miden distinto.
 
@@ -71,22 +71,41 @@ previsualizar dos veces.
 `localStorage`, `sessionStorage`, `document.cookie`, `fetch(`, `XMLHttpRequest` y `WebSocket`
 dan **0** las seis. Es `RA-02` verificado sobre el artefacto y no sobre la intención.
 
-### 3.2 La mitad que NO se midió, y se declara
+### 3.2 La otra mitad, medida con navegador de verdad · **PASA**
 
-**Las diez navegaciones de ida y vuelta en un navegador real no se ejercieron.** El entorno donde se
-construyó esta etapa **no tiene navegador**: el paquete se compila y se inspecciona, y no se abre.
+**La versión 1.0 de este documento dejó esta mitad sin medir**, porque el entorno de desarrollo no
+tiene navegador. Se midió con uno en contenedor, y el guion queda en el árbol:
+`scripts/verify-viewer-lifecycle.sh`.
 
-**Qué falta exactamente**, para que quien lo mida no tenga que deducirlo:
+**Cómo se midió.** Diez ciclos de crear la escena, cargar las tres piezas del escenario `E-1` —ya
+reconstruidas, como el visor las recibe desde `ADR-08006`— y liberarla, sobre el paquete
+**construido** y con Chromium dibujando de verdad.
 
-1. Abrir un trabajo, volver al listado y repetir **diez veces**.
-2. Comprobar que la escena sigue dibujando en la décima igual que en la primera.
-3. Comprobar que la cantidad de contextos gráficos vivos **no crece**: el navegador corta el más
-   viejo cuando se pasa de su límite, y el síntoma es una escena que se apaga sin error.
+| Control | Resultado |
+| --- | --- |
+| La primera vuelta dibuja las **3** piezas | **Sí** |
+| La vuelta **10** dibuja las 3, igual que la primera | **Sí** |
+| Las diez vueltas dibujan las 3, sin una degradada | **Sí** |
+| Ninguna pieza queda sin dibujar en ninguna vuelta | **Sí** |
+| Nunca hay más de **un** lienzo vivo a la vez | **Sí** |
+| Liberar deja **cero** lienzos en la página | **Sí** |
+| Liberar deja **cero** instancias vivas | **Sí** |
+| El navegador **no avisó** desborde de contextos gráficos | **0 avisos** |
 
-**Por qué no se declara la puerta pasada entera.** Porque la mitad que falta es **justamente la que
-el intake nombra** —«sin degradación tras 10 navegaciones»— y darla por buena porque el código
-parece correcto es la forma más común de que una puerta técnica no sirva para nada. Lo que el código
-garantiza es que **hay con qué pasarla**; que se pase se ve corriéndola.
+**Los ocho controles pasan. Veredicto: `PT-02` PASA.**
+
+**Por qué se mide el mecanismo y no la ruta.** Una navegación de ida y vuelta hace por dentro un par
+«crear, liberar», y ese par es lo que puede fallar. Ejercerlo diez veces mide lo mismo **con menos
+piezas en el medio** y sin levantar el producto entero.
+
+**Lo que esta medición NO cubre, y se declara.** No ejerce la navegación del producto —listado,
+trabajo, listado— con su sesión y su servicio de datos. Si el defecto estuviera en **cuándo** la
+superficie llama a liberar, y no en si liberar libera, esta medición no lo vería. Es un riesgo
+menor y distinto, y queda nombrado en lugar de quedar tapado por un CONFORME.
+
+**El aviso que delata el defecto se mira explícitamente.** «Too many active WebGL contexts» no lanza
+excepción y no rompe nada visible: llega por la consola del navegador y por ningún otro lado. El
+guion la escucha entera y la cuenta.
 
 ## 4. Consecuencia sobre la planificación
 
@@ -94,14 +113,16 @@ garantiza es que **hay con qué pasarla**; que se pase se ve corriéndola.
 Acá:
 
 - **`PT-03` pasa**, y con eso el motor gráfico deja de ser un riesgo abierto.
-- **`PT-02` no está completa**, y lo que depende de ella es **comprometer la etapa `g`**, no
-  construirla. La construcción sigue; **el punto de control de la etapa `g` no debería cerrarse sin
-  la medición de §3.2**.
+- **`PT-02` pasa**, y con eso **la etapa `g` queda habilitada para comprometerse**: era la condición
+  que el roadmap le ponía.
 
-Queda elevado al Product Owner, con esa distinción explícita.
+**Las dos quedan con guion repetible**, que es lo que impide que una puerta medida una vez se
+convierta en una afirmación vieja: `scripts/verify-viewer-lifecycle.sh` para `PT-02`, y la
+inspección del paquete de §2 para `PT-03`.
 
 ## 5. Control de cambios
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial, al anclar el motor gráfico y escribir la capa 3 del visor. **`PT-03` PASA**, medida sobre el paquete construido: motor en versión exacta `0.169.0`, dentro del paquete, 494.455 bytes, y **cero** referencias a red de distribución o carga diferida. Declara el presupuesto de tamaño propio de 560 KiB que la medición obligó a fijar, en lugar de apagar el aviso del empaquetador que sugiere lo que `PT-03` prohíbe. **`PT-02` pasa en su mitad verificable**: se enumeran las seis liberaciones de `destroy`, se declara que `loadPieces` libera antes de cargar, y se mide **cero** uso de red, identidad y almacenamiento en el paquete. **La mitad de las diez navegaciones no se midió** —el entorno no tiene navegador— y se declara qué falta, paso por paso, con la consecuencia sobre la planificación: la etapa `g` se construye, y su punto de control no debería cerrarse sin esa medición. | Orquestador SDD |
+| 2.0 | 2026-08-16 | **`PT-02` pasa entera.** La mitad que la 1.0 dejó sin medir —las diez idas y vueltas— se midió **con Chromium de verdad** sobre el paquete construido, y los **ocho controles pasan**: las tres piezas dibujadas en la décima vuelta igual que en la primera, un solo lienzo vivo a la vez, cero lienzos y cero instancias después de liberar, y **cero avisos** de desborde de contextos gráficos. La medición queda como guion repetible, `scripts/verify-viewer-lifecycle.sh`, con el navegador en contenedor: el entorno de desarrollo declarado no tiene navegador y agregarle uno cambiaría el entorno de todos por una medición que corre de vez en cuando. **Se declara lo que la medición no cubre**: la navegación del producto con su sesión: si el defecto estuviera en *cuándo* la superficie llama a liberar, esta medición no lo vería. §4 pasa de «la etapa `g` no debería cerrarse sin esto» a **la etapa `g` queda habilitada para comprometerse**. | Orquestador SDD |
