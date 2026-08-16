@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/application/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04001`, `CU-04003` y `CU-04010`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de alta de cuentas y de ingreso y credencial; [`../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) §2
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-04001` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04001`, `CU-04003` y `CU-04010`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de alta de cuentas y de ingreso y credencial; [`../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md`](../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) §2
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-04001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -29,7 +29,7 @@ Demostrar el camino de entrada al laboratorio tal como esta capa lo orquesta: co
 - **Etapa `a` del plan de entrega cerrada**, que es donde quedan anclados el tooling y los nombres de tipo.
 - **Linux**, que es la plataforma del entorno contenido.
 
-Sin servicios externos, sin base de datos y sin frontera de proceso: los **cuatro** puertos de [`ADR-04002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) se satisfacen con dobles que viven dentro del sample.
+Sin servicios externos, sin base de datos y sin frontera de proceso: los **cuatro** puertos de [`ADR-04002`](../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) se satisfacen con dobles que viven dentro del sample.
 
 ## 4. Cómo correrlo
 
@@ -56,7 +56,7 @@ samples/application/01-basico/
     └── SalidaEsperada.<ext>          # Compara la salida contra el snapshot de §6
 ```
 
-**El reloj es un doble y no el reloj de la máquina, y eso es lo que hace comparable la salida.** El dominio no lee el reloj: lo recibe por parámetro ([`Domain ADR-02006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)), y esta capa es quien lo aporta por el puerto. Un sample que leyera el reloj real produciría una salida distinta en cada corrida y su criterio de aceptación dejaría de ser comparable.
+**El reloj es un doble y no el reloj de la máquina, y eso es lo que hace comparable la salida.** El dominio no lee el reloj: lo recibe por parámetro ([`Domain ADR-02006`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md)), y esta capa es quien lo aporta por el puerto. Un sample que leyera el reloj real produciría una salida distinta en cada corrida y su criterio de aceptación dejaría de ser comparable.
 
 ## 6. Qué esperar
 
@@ -77,7 +77,7 @@ Actos recorridos: 4 | Rechazos tipados: 5 | Excepciones: 0
 
 **Las tres líneas del acto `[4]` son el corazón del sample.** Muestran, en el mismo recorrido, la comprobación que corta primero, su **única** excepción declarada —el reemplazo de la propia credencial— y el hecho de que **es ese reemplazo, hecho por la propia cuenta, lo único que levanta la marca**. Es `ADR-04004` §2 punto 1, visto de punta a punta.
 
-**`Rechazos tipados: 5` y `Excepciones: 0` juntos no son adorno.** Toda negativa prevista viaja como resultado tipado y ninguna como excepción, que es lo que [`ADR-04006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md) decide y lo que el nivel 0 compró antes.
+**`Rechazos tipados: 5` y `Excepciones: 0` juntos no son adorno.** Toda negativa prevista viaja como resultado tipado y ninguna como excepción, que es lo que [`ADR-04006`](../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md) decide y lo que el nivel 0 compró antes.
 
 ## 7. Variaciones sugeridas
 
@@ -92,16 +92,16 @@ Actos recorridos: 4 | Rechazos tipados: 5 | Excepciones: 0
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00021`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Caso de uso | Constituye la cuenta de alumno pendiente y sin credencial, y recorre el rechazo por correo ya registrado |
-| [`CU-00022`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Resuelve la admisibilidad con su motivo en los tres desenlaces y reemplaza la credencial exigiendo la vigente |
-| [`CU-00025`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Configura el administrador mientras no exista ninguno y rechaza el segundo |
-| [`RN-02001`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El segundo administrador se rechaza |
-| [`RN-02002`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | Regla de negocio | El alta repetida con el mismo correo se rechaza |
-| [`RN-02006`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | La cuenta pendiente no es admisible, y el motivo se devuelve |
-| [`RN-02013`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | La cuenta marcada queda confinada al reemplazo de su credencial |
-| [`ADR-04004`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) | Decisión arquitectónica | El acto `[4]` recorre la comprobación que corta primero y su única excepción |
-| [`ADR-04006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md) | Decisión arquitectónica | Los **5** rechazos viajan como resultado tipado y **0** como excepción |
-| [`ADR-04002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) | Decisión arquitectónica | Los dos puertos que el sample necesita se satisfacen con dobles, sin base de datos |
+| [`CU-00021`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Caso de uso | Constituye la cuenta de alumno pendiente y sin credencial, y recorre el rechazo por correo ya registrado |
+| [`CU-00022`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Resuelve la admisibilidad con su motivo en los tres desenlaces y reemplaza la credencial exigiendo la vigente |
+| [`CU-00025`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Configura el administrador mientras no exista ninguno y rechaza el segundo |
+| [`RN-02001`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El segundo administrador se rechaza |
+| [`RN-02002`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) | Regla de negocio | El alta repetida con el mismo correo se rechaza |
+| [`RN-02006`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | La cuenta pendiente no es admisible, y el motivo se devuelve |
+| [`RN-02013`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | La cuenta marcada queda confinada al reemplazo de su credencial |
+| [`ADR-04004`](../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) | Decisión arquitectónica | El acto `[4]` recorre la comprobación que corta primero y su única excepción |
+| [`ADR-04006`](../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md) | Decisión arquitectónica | Los **5** rechazos viajan como resultado tipado y **0** como excepción |
+| [`ADR-04002`](../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) | Decisión arquitectónica | Los dos puertos que el sample necesita se satisfacen con dobles, sin base de datos |
 
 ## 9. Contrato de verificación
 

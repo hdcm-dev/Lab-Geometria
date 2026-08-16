@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** [`/samples/domain/02-intermedio/`](../../../../../samples/domain/02-intermedio/), esqueletada con su README local y su comando previsto
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02005` a `CU-02008`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-05` a `OP-08`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02011` a `TC-02018`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02002` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02005` a `CU-02008`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-05` a `OP-08`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02011` a `TC-02018`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02002` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -24,7 +24,7 @@ Demostrar el ciclo de vida del trabajo dentro del dominio, con los datos reales 
 
 ## 3. Prerequisites
 
-Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido, porque el proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Domain).
+Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico-api.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido, porque el proyecto de código declara **0** dependencias salientes (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Domain).
 
 **Un prerequisito de datos, no de herramientas:** los seis textos de escenario que el sample usa se transcriben del `PRODUCT-INTAKE` §20 **sin modificación**. Son datos reales emitidos por la aplicación de escritorio de los alumnos y no se sustituyen por datos sintéticos.
 
@@ -56,7 +56,7 @@ samples/domain/02-intermedio/
 
 **Los seis archivos de escenario llevan extensión `.txt` y no `.json`.** Es la convención de los siete proyectos de código del producto y tiene un motivo verificable: el texto de `E-2` **no es JSON estrictamente válido** —trae dos comas finales— y nombrar `.json` a un archivo de escenario invita a que una herramienta lo reformatee al abrirlo. Acá `E-2` no está entre los seis, de modo que el riesgo no se materializa en este sample; la convención se sigue igual para que la carpeta de escenarios sea la misma en los siete proyectos de código.
 
-**`Interpretacion.<ext>` no es un intérprete.** El dominio **no produce** el resultado de la interpretación: lo adopta ya producido ([`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, `OP-06` y `OP-07`). El archivo compone a mano, para cada escenario, el conjunto de piezas y observaciones que el consumidor le entregaría, y es deliberado que se vea así de explícito: es la frontera que el sample enseña.
+**`Interpretacion.<ext>` no es un intérprete.** El dominio **no produce** el resultado de la interpretación: lo adopta ya producido ([`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, `OP-06` y `OP-07`). El archivo compone a mano, para cada escenario, el conjunto de piezas y observaciones que el consumidor le entregaría, y es deliberado que se vea así de explícito: es la frontera que el sample enseña.
 
 ## 6. Qué esperar
 
@@ -93,15 +93,15 @@ Trabajos recorridos: 6 | Envios a Pendiente: 4 | Envios retenidos en Borrador: 2
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Constituye el trabajo con dueño, identidad y texto original; la variación de reedición recorre el rechazo |
-| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Adopta las piezas de `E-1`, `E-5`, `E-6` con identidad posicional y familia derivada del tipo |
-| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Adopta la advertencia de `E-3` con su par de valores y el error de `E-5` con índice y campo |
-| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Resuelve los seis envíos: cuatro a `Pendiente` y dos retenidos en `Borrador` |
-| [`RN-02005`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Las advertencias no impiden el envío; un error de validación sí |
-| [`RN-02008`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | Regla de negocio | `texto-identico=si` en `E-1` y `texto-original-intacto=si` en `E-8` |
-| [`RN-02009`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice 1 y campo en `E-5` y en `E-8`; la posición reservada |
-| [`ADR-02001`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) | Decisión arquitectónica | Las cuatro adopciones se rechazan por invariante y no por validación del consumidor |
-| [`ADR-02006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) | Decisión arquitectónica | Las fechas de creación y de modificación llegan por parámetro; el sample no fija el reloj |
+| [`CU-00026`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Constituye el trabajo con dueño, identidad y texto original; la variación de reedición recorre el rechazo |
+| [`CU-00026`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Adopta las piezas de `E-1`, `E-5`, `E-6` con identidad posicional y familia derivada del tipo |
+| [`CU-00026`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Adopta la advertencia de `E-3` con su par de valores y el error de `E-5` con índice y campo |
+| [`CU-00026`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Resuelve los seis envíos: cuatro a `Pendiente` y dos retenidos en `Borrador` |
+| [`RN-02005`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Las advertencias no impiden el envío; un error de validación sí |
+| [`RN-02008`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | Regla de negocio | `texto-identico=si` en `E-1` y `texto-original-intacto=si` en `E-8` |
+| [`RN-02009`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice 1 y campo en `E-5` y en `E-8`; la posición reservada |
+| [`ADR-02001`](../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) | Decisión arquitectónica | Las cuatro adopciones se rechazan por invariante y no por validación del consumidor |
+| [`ADR-02006`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) | Decisión arquitectónica | Las fechas de creación y de modificación llegan por parámetro; el sample no fija el reloj |
 | `PRODUCT-INTAKE` §20 `E-1`, `E-3`, `E-4`, `E-5`, `E-6`, `E-8` | Escenario con payload real | Los seis textos se transcriben sin modificación y son la entrada del recorrido |
 
 ## 9. Contrato de verificación

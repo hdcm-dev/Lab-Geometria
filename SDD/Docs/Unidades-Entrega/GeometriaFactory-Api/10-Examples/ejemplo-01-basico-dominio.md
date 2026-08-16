@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/domain/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-01` a `OP-04` y `OP-12`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02001`, `TC-02002`, `TC-02003`, `TC-02006`, `TC-02009` y `TC-02010`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02001` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-01` a `OP-04` y `OP-12`; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02001`, `TC-02002`, `TC-02003`, `TC-02006`, `TC-02009` y `TC-02010`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -20,7 +20,7 @@ Demostrar el camino más corto que un consumidor recorre contra esta biblioteca:
 
 ## 2. Nivel
 
-**Básico.** Es el punto de entrada absoluto del proyecto de código: no hay trabajo, ni interpretación, ni desenlace. Toca cinco de los **trece** casos de uso y dos de los **cinco** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 —guardas de cuenta y evaluador de admisibilidad—, apoyados en el núcleo de entidades.
+**Básico.** Es el punto de entrada absoluto del proyecto de código: no hay trabajo, ni interpretación, ni desenlace. Toca cinco de los **trece** casos de uso y dos de los **cinco** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 —guardas de cuenta y evaluador de admisibilidad—, apoyados en el núcleo de entidades.
 
 ## 3. Prerequisites
 
@@ -57,7 +57,7 @@ samples/domain/01-basico/
     └── SalidaEsperada.<ext>      # Compara la salida contra el snapshot de §6
 ```
 
-**Los nombres de tipos y de espacios de nombres no se fijan acá**: el intake los declara abiertos hasta el punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain) y [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §2 lo repite. El árbol de arriba nombra los archivos por el acto que ejecutan, no por el tipo que contienen.
+**Los nombres de tipos y de espacios de nombres no se fijan acá**: el intake los declara abiertos hasta el punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain) y [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §2 lo repite. El árbol de arriba nombra los archivos por el acto que ejecutan, no por el tipo que contienen.
 
 ## 6. Qué esperar
 
@@ -78,7 +78,7 @@ Operaciones invocadas: 9 | Rechazos tipados: 2 | Excepciones: 0
 
 **Las tres líneas de admisibilidad son el punto del sample.** `[3]`, `[5]` y `[7]` muestran los tres desenlaces de `CU-02004` sobre la misma cuenta a medida que avanza su ciclo de vida, y muestran que el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE` de `RN-02013` se levanta **sólo** con el cambio efectuado por la propia cuenta.
 
-**La última línea también es contrato**: `Excepciones: 0` materializa [`ADR-02002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), que reserva las excepciones a los defectos de programación del consumidor.
+**La última línea también es contrato**: `Excepciones: 0` materializa [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), que reserva las excepciones a los defectos de programación del consumidor.
 
 ## 7. Variaciones sugeridas
 
@@ -95,17 +95,17 @@ Las cuatro variaciones son el puente hacia el ejemplo 02, donde el sujeto deja d
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00021`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Caso de uso | Acto `[2]`: constituye el alumno con cuenta `Pendiente`, sin credencial y con papel `Alumno` |
-| [`CU-00023`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Acto `[4]`: habilita la cuenta; la variación de bloqueo recorre la transición inversa |
-| [`CU-00022`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Actos `[4]` y `[6]`: fija la provisoria y después la reemplaza exigiendo la vigente |
-| [`CU-00022`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Actos `[3]`, `[5]` y `[7]`: los tres desenlaces de la puerta única |
-| [`CU-00025`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Actos `[1]` y `[1b]`: la ventana de alta del administrador y su cierre |
-| [`RN-02001`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El rechazo de `[1b]` y la variación sobre la cuenta de administrador |
-| [`RN-02006`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | El motivo `CUENTA_PENDIENTE` de `[3]` |
-| [`RN-02013`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | El motivo de `[5]` y su levantamiento en `[6]` |
-| [`RN-02016`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | Habilitar produce la provisoria: la variación sin ella se rechaza |
-| [`ADR-02002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | La línea final con `Excepciones: 0` |
-| [`ADR-02005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) | Decisión arquitectónica | Las tres invocaciones de admisibilidad son la única puerta que el consumidor consulta |
+| [`CU-00021`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md) | Caso de uso | Acto `[2]`: constituye el alumno con cuenta `Pendiente`, sin credencial y con papel `Alumno` |
+| [`CU-00023`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Acto `[4]`: habilita la cuenta; la variación de bloqueo recorre la transición inversa |
+| [`CU-00022`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Actos `[4]` y `[6]`: fija la provisoria y después la reemplaza exigiendo la vigente |
+| [`CU-00022`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Actos `[3]`, `[5]` y `[7]`: los tres desenlaces de la puerta única |
+| [`CU-00025`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Actos `[1]` y `[1b]`: la ventana de alta del administrador y su cierre |
+| [`RN-02001`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El rechazo de `[1b]` y la variación sobre la cuenta de administrador |
+| [`RN-02006`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | El motivo `CUENTA_PENDIENTE` de `[3]` |
+| [`RN-02013`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | El motivo de `[5]` y su levantamiento en `[6]` |
+| [`RN-02016`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | Habilitar produce la provisoria: la variación sin ella se rechaza |
+| [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | La línea final con `Excepciones: 0` |
+| [`ADR-02005`](../05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md) | Decisión arquitectónica | Las tres invocaciones de admisibilidad son la única puerta que el consumidor consulta |
 
 ## 9. Contrato de verificación
 

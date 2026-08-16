@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/application/03-avanzado/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04002`, `CU-04007`, `CU-04008` y `CU-04011`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de gobierno de cuentas, de consulta y de desenlace; [`../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) §2, comprobaciones 3 y 4
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-04003` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04002`, `CU-04007`, `CU-04008` y `CU-04011`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de gobierno de cuentas, de consulta y de desenlace; [`../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md`](../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) §2, comprobaciones 3 y 4
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-04003` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -24,7 +24,7 @@ Demostrar todo lo que sólo el administrador puede hacer y **por qué esta capa 
 
 ## 3. Prerequisites
 
-Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux.
+Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico-api.md) §3: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux.
 
 **Un prerequisito propio.** El sample **no** parte del estado que dejaron los otros dos: lo reconstruye desde cero con los **cuatro** dobles de puerto, para que se pueda ejecutar solo. Ése es el motivo de que su tiempo de setup sea mayor, y no una dependencia externa.
 
@@ -57,7 +57,7 @@ samples/application/03-avanzado/
     └── SalidaEsperada.<ext>              # Compara la salida contra el snapshot de §6
 ```
 
-**Los datos de identidad de `ComisionDeEjemplo` son evidentemente ficticios y se declaran como tales.** Ningún escenario del `PRODUCT-INTAKE` §20 fija correos, nombres ni identificadores: los escenarios son datos de **geometría**, y los de identidad y orquestación no se toman de ahí ni se fabrican como si lo fueran. Es la regla de [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6.
+**Los datos de identidad de `ComisionDeEjemplo` son evidentemente ficticios y se declaran como tales.** Ningún escenario del `PRODUCT-INTAKE` §20 fija correos, nombres ni identificadores: los escenarios son datos de **geometría**, y los de identidad y orquestación no se toman de ahí ni se fabrican como si lo fueran. Es la regla de [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6.
 
 ## 6. Qué esperar
 
@@ -100,19 +100,19 @@ Actos recorridos: 4 | Rechazos tipados: 8 | Excepciones: 0
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00023`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Habilita, bloquea, rehabilita y da de baja con confirmación escrita y arrastre |
-| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Devuelve la entrega de la comisión con **0** borradores visibles y rechaza el pedido sin facultad |
-| [`CU-00029`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Caso de uso | Aprueba con comentario y rechaza sin comentario desde `Pendiente`, y propaga la terminalidad |
-| [`CU-00024`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Resetea conservando situación y trabajos, y pone la marca |
-| [`RN-02007`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | Regla de negocio | La baja exige el correo escrito y arrastra los **2** trabajos |
-| [`RN-02010`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | Regla de negocio | El desenlace es exclusivo del administrador y los dos estados son terminales |
-| [`RN-02011`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | Regla de negocio | **0** borradores visibles en el listado de la comisión |
-| [`RN-02012`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | Regla de negocio | Situación conservada y **2** trabajos conservados tras el reseteo |
-| [`RN-02014`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | Regla de negocio | La provisoria la produce el sistema y no llega de afuera |
-| [`RN-02015`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md) | Regla de negocio | El reseteo se aplica sobre una cuenta bloqueada |
-| [`RN-02016`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | Habilitar y rehabilitar producen la provisoria |
-| [`ADR-04004`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) | Decisión arquitectónica | Las comprobaciones **3** y **4** con sus negativas distinguidas |
-| [`ADR-04005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md) | Decisión arquitectónica | La baja con arrastre es todo o nada dentro de una sola unidad de trabajo |
+| [`CU-00023`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) | Caso de uso | Habilita, bloquea, rehabilita y da de baja con confirmación escrita y arrastre |
+| [`CU-00028`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Devuelve la entrega de la comisión con **0** borradores visibles y rechaza el pedido sin facultad |
+| [`CU-00029`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Caso de uso | Aprueba con comentario y rechaza sin comentario desde `Pendiente`, y propaga la terminalidad |
+| [`CU-00024`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Resetea conservando situación y trabajos, y pone la marca |
+| [`RN-02007`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) | Regla de negocio | La baja exige el correo escrito y arrastra los **2** trabajos |
+| [`RN-02010`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | Regla de negocio | El desenlace es exclusivo del administrador y los dos estados son terminales |
+| [`RN-02011`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | Regla de negocio | **0** borradores visibles en el listado de la comisión |
+| [`RN-02012`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | Regla de negocio | Situación conservada y **2** trabajos conservados tras el reseteo |
+| [`RN-02014`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | Regla de negocio | La provisoria la produce el sistema y no llega de afuera |
+| [`RN-02015`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md) | Regla de negocio | El reseteo se aplica sobre una cuenta bloqueada |
+| [`RN-02016`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | Habilitar y rehabilitar producen la provisoria |
+| [`ADR-04004`](../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md) | Decisión arquitectónica | Las comprobaciones **3** y **4** con sus negativas distinguidas |
+| [`ADR-04005`](../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md) | Decisión arquitectónica | La baja con arrastre es todo o nada dentro de una sola unidad de trabajo |
 
 ## 9. Contrato de verificación
 

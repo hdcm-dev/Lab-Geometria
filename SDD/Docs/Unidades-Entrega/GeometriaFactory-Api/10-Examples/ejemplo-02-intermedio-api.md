@@ -24,7 +24,7 @@
 
 ## 3. Prerequisites
 
-Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3: entorno de desarrollo contenido, almacén reiniciado, servicio levantado, dirección tomada del entorno y un cliente de peticiones nombrado por su función.
+Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico-api.md) §3: entorno de desarrollo contenido, almacén reiniciado, servicio levantado, dirección tomada del entorno y un cliente de peticiones nombrado por su función.
 
 **Un prerequisito de datos, no de herramientas.** Los ocho cuerpos se transcriben del `PRODUCT-INTAKE` §20 **sin modificación**, incluidas las **dos comas finales** y la clave `"Tapas"` de `E-2`. **No se inventa ningún texto de prueba**, y no es una preferencia de esta categoría: es una regla de delivery del producto (`PRODUCT-INTAKE` §15), medida como NFR con umbral **0** y verificada por `TC-00035`.
 

@@ -39,9 +39,9 @@ Esta emisión es la **pasada de diseño** de `Rules-Examples.md` §0.2. Los tres
 
 | Sample | Nivel | Tiempo de setup | CU ilustrados | Ubicación |
 | --- | --- | --- | --- | --- |
-| [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | Básico | < 5 min | CU-04001, CU-04003, CU-04010 | `/samples/application/01-basico/` |
-| [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | Intermedio | < 5 min | CU-04004, CU-04005, CU-04006, CU-04009 | `/samples/application/02-intermedio/` |
-| [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | Avanzado | 10-15 min | CU-04002, CU-04007, CU-04008, CU-04011 | `/samples/application/03-avanzado/` |
+| [`ejemplo-01-basico.md`](../../ejemplo-01-basico-aplicacion.md) | Básico | < 5 min | CU-04001, CU-04003, CU-04010 | `/samples/application/01-basico/` |
+| [`ejemplo-02-intermedio.md`](../../ejemplo-02-intermedio-aplicacion.md) | Intermedio | < 5 min | CU-04004, CU-04005, CU-04006, CU-04009 | `/samples/application/02-intermedio/` |
+| [`ejemplo-03-avanzado.md`](../../ejemplo-03-avanzado-aplicacion.md) | Avanzado | 10-15 min | CU-04002, CU-04007, CU-04008, CU-04011 | `/samples/application/03-avanzado/` |
 
 **Tres samples, el piso que `Rules-Examples.md` §2.2 fija para `library`.** El tiempo de setup del tercero es mayor porque necesita el conjunto de cuentas y de trabajos que los dos primeros dejan armado, y lo reconstruye desde cero con los cuatro dobles de puerto.
 
@@ -57,9 +57,9 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 
 | Sonda | Sample | Verifica | Comando | Estado | Última corrida |
 | --- | --- | --- | --- | --- | --- |
-| `VER-04001` | [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | CU-04001, CU-04003, CU-04010; US-04001, US-04002, US-04003, US-04007, US-04009, US-04028, US-04030, US-04032 | `dotnet run --project samples/application/01-basico` | No verificado — sin código | — |
-| `VER-04002` | [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | CU-04004, CU-04005, CU-04006, CU-04009; US-04010 a US-04019, US-04026 | `dotnet run --project samples/application/02-intermedio` | No verificado — sin código | — |
-| `VER-04003` | [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | CU-04002, CU-04007, CU-04008, CU-04011; US-04004, US-04005, US-04006, US-04008, US-04020 a US-04025, US-04027, US-04029, US-04031 | `dotnet run --project samples/application/03-avanzado` | No verificado — sin código | — |
+| `VER-04001` | [`ejemplo-01-basico.md`](../../ejemplo-01-basico-aplicacion.md) | CU-04001, CU-04003, CU-04010; US-04001, US-04002, US-04003, US-04007, US-04009, US-04028, US-04030, US-04032 | `dotnet run --project samples/application/01-basico` | No verificado — sin código | — |
+| `VER-04002` | [`ejemplo-02-intermedio.md`](../../ejemplo-02-intermedio-aplicacion.md) | CU-04004, CU-04005, CU-04006, CU-04009; US-04010 a US-04019, US-04026 | `dotnet run --project samples/application/02-intermedio` | No verificado — sin código | — |
+| `VER-04003` | [`ejemplo-03-avanzado.md`](../../ejemplo-03-avanzado-aplicacion.md) | CU-04002, CU-04007, CU-04008, CU-04011; US-04004, US-04005, US-04006, US-04008, US-04020 a US-04025, US-04027, US-04029, US-04031 | `dotnet run --project samples/application/03-avanzado` | No verificado — sin código | — |
 
 **Tres sondas, ninguna redundante**: los conjuntos de casos de uso que verifican son disjuntos, y los de historias también. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
 

@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/domain/03-avanzado/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02009`, `CU-02010`, `CU-02011` y `CU-02013`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-09` a `OP-11` y `OP-13`, y §5; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02005`, `TC-02007`, `TC-02019` a `TC-02022`, `TC-02024`, `TC-02025` y `TC-02027`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02003` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-02009`, `CU-02010`, `CU-02011` y `CU-02013`; [`../05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3, operaciones `OP-09` a `OP-11` y `OP-13`, y §5; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-02005`, `TC-02007`, `TC-02019` a `TC-02022`, `TC-02024`, `TC-02025` y `TC-02027`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-02003` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -24,7 +24,7 @@ Demostrar las tres decisiones que el dominio toma sobre un trabajo ya enviado �
 
 ## 3. Prerequisites
 
-Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3. Un agregado propio:
+Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico-api.md) §3. Un agregado propio:
 
 | Ítem | Versión mínima | Motivo |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ samples/domain/03-avanzado/
 
 **Las líneas `[1]`, `[2]` y `[3]` juntas son `RN-02003`.** No alcanza con que los dos casos devuelvan el mismo código: el sample los compara **campo por campo**, porque un resultado que trajera un dato distinto en cualquier otro campo volvería distinguible el trabajo ajeno del inexistente y vaciaría la regla.
 
-**La línea `[11]` es la que convierte al sample en arnés.** `Excepciones de negocio: 0` sobre **12** condiciones provocadas materializa [`ADR-02002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md); el recuento no cubre las **42** condiciones del catálogo de `03`, que es alcance de `TC-02023` y de la batería de `tests/`, no de un sample.
+**La línea `[11]` es la que convierte al sample en arnés.** `Excepciones de negocio: 0` sobre **12** condiciones provocadas materializa [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md); el recuento no cubre las **42** condiciones del catálogo de `03`, que es alcance de `TC-02023` y de la batería de `tests/`, no de un sample.
 
 ## 7. Variaciones sugeridas
 
@@ -95,17 +95,17 @@ La última variación es el puente hacia `09-Devops`: muestra que el gate de dep
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Actos `[1]` a `[3]`: el ajeno y el inexistente con resultado idéntico |
-| [`CU-00029`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Caso de uso | Actos `[6]`, `[7]`, `[7b]` y `[7c]`: los dos desenlaces y sus dos rechazos |
-| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Actos `[4]` y `[5]`: el borrador excluido y la eliminación en los tres estados que ve |
-| [`CU-00024`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Acto `[8]`: la cuenta conserva su situación y sus cuatro trabajos |
-| [`RN-02003`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Regla de negocio | La comparación campo por campo de `[3]` |
-| [`RN-02010`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | Regla de negocio | `[7b]` y `[7c]`: exclusividad y terminalidad |
-| [`RN-02011`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | Regla de negocio | El `fuera-de-alcance=1 (Borrador)` de `[4]` |
-| [`RN-02012`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | Regla de negocio | El recuento de trabajos antes y después de `[8]` |
-| [`ADR-02002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | Acto `[11]` |
-| [`ADR-02006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) | Decisión arquitectónica | Acto `[10]`: dos corridas consecutivas sin fijar el reloj |
-| NFR «Dependencias salientes» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 | Requisito no funcional | Acto `[9]`, con los dos recuentos en 0 |
+| [`CU-00028`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Actos `[1]` a `[3]`: el ajeno y el inexistente con resultado idéntico |
+| [`CU-00029`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md) | Caso de uso | Actos `[6]`, `[7]`, `[7b]` y `[7c]`: los dos desenlaces y sus dos rechazos |
+| [`CU-00028`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Actos `[4]` y `[5]`: el borrador excluido y la eliminación en los tres estados que ve |
+| [`CU-00024`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) | Caso de uso | Acto `[8]`: la cuenta conserva su situación y sus cuatro trabajos |
+| [`RN-02003`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Regla de negocio | La comparación campo por campo de `[3]` |
+| [`RN-02010`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) | Regla de negocio | `[7b]` y `[7c]`: exclusividad y terminalidad |
+| [`RN-02011`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) | Regla de negocio | El `fuera-de-alcance=1 (Borrador)` de `[4]` |
+| [`RN-02012`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | Regla de negocio | El recuento de trabajos antes y después de `[8]` |
+| [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | Acto `[11]` |
+| [`ADR-02006`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) | Decisión arquitectónica | Acto `[10]`: dos corridas consecutivas sin fijar el reloj |
+| NFR «Dependencias salientes» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 | Requisito no funcional | Acto `[9]`, con los dos recuentos en 0 |
 
 ## 9. Contrato de verificación
 

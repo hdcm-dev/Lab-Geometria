@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/infrastructure/03-avanzado/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06006` a `CU-06010`; [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md), [`ADR-06005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) y [`ADR-06007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §2.4, la regla de detenerse en lugar de cumplir a medias
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06003` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-06006` a `CU-06010`; [`../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md), [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) y [`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md); [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §2.4, la regla de detenerse en lugar de cumplir a medias
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06003` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -24,7 +24,7 @@ Demostrar los cinco mecanismos que esta capa provee y que **ninguna otra puede p
 
 ## 3. Prerequisites
 
-Los mismos ítems de [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) §3: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada, Linux y un almacén en su estado de primer arranque.
+Los mismos ítems de [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio-api.md) §3: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada, Linux y un almacén en su estado de primer arranque.
 
 **Y dos prerequisitos propios, los dos provistos por el entorno y nunca escritos en el sample:**
 
@@ -85,7 +85,7 @@ Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
 
 **La cuarta línea de `[1]` es la que más se confunde.** Un derivado **ilegible** no es lo mismo que una credencial **incorrecta**: la segunda es una respuesta legítima del mecanismo y la primera es un almacén en el que no se puede confiar. Colapsarlas haría que un dato corrupto se leyera como «contraseña equivocada» y nadie se enteraría nunca.
 
-**La segunda línea de `[2]` es la regla de detenerse dicha con números.** Sin fuente de material impredecible, los valores producidos son **0**: el mecanismo no compone la provisoria por otro medio, no cae hacia un sustituto y no la deriva de un dato de la cuenta. Es la regla que gobierna las **17** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../../03-UX-UI-DX/DX-Error-Messages.md) §2.4.
+**La segunda línea de `[2]` es la regla de detenerse dicha con números.** Sin fuente de material impredecible, los valores producidos son **0**: el mecanismo no compone la provisoria por otro medio, no cae hacia un sustituto y no la deriva de un dato de la cuenta. Es la regla que gobierna las **17** condiciones de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §2.4.
 
 **La línea `[4]` con el sello idéntico entre dos corridas es lo que hace reproducible a todo el resto del producto.** El reloj llega **por un puerto** para que las pruebas lo puedan fijar; si esta capa leyera el reloj del sistema directamente, ningún sample de ningún proyecto de código podría tener un criterio de aceptación comparable.
 
@@ -96,23 +96,23 @@ Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
 | Ruta del almacén ausente | Quitar la ruta de la configuración del entorno | `RUTA_DEL_ALMACEN_NO_DISPONIBLE`, y **el mensaje no nombra ninguna ruta**: es una dirección de servicio interno |
-| Provisoria derivada de la cuenta | Producir la provisoria a partir del correo | La línea `derivadas de un dato de la cuenta` pasa a `si` y el criterio de aceptación falla. Es lo que [`ADR-06005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) prohíbe |
-| Parámetros de derivación sin anclar | Cambiar los parámetros de derivación sin versionarlos | Las credenciales derivadas antes dejan de verificar, y nada lo declara. Es lo que [`ADR-06004`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) viene a impedir |
+| Provisoria derivada de la cuenta | Producir la provisoria a partir del correo | La línea `derivadas de un dato de la cuenta` pasa a `si` y el criterio de aceptación falla. Es lo que [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) prohíbe |
+| Parámetros de derivación sin anclar | Cambiar los parámetros de derivación sin versionarlos | Las credenciales derivadas antes dejan de verificar, y nada lo declara. Es lo que [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) viene a impedir |
 | Reloj del sistema en vez del puerto | Leer el reloj directamente en un acto | La línea `sello identico` pasa a `no` y el sample deja de ser comparable entre corridas |
 
 ## 8. Trazabilidad
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-06006`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | Caso de uso | Deriva sin guardar en claro y distingue el veredicto falso del derivado ilegible |
-| [`CU-06007`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | Caso de uso | Produce **100** provisorias con **0** repetidas y se detiene cuando la aleatoriedad no responde |
-| [`CU-06008`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md) | Caso de uso | Emite con sus **cuatro** reclamos y rechaza sin clave de firma y con reclamos incompletos |
-| [`CU-06009`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | Caso de uso | Provee el sello por el puerto, con dos corridas que dan el mismo valor al fijarlo |
-| [`CU-06010`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Caso de uso | Aplica las transformaciones, registra el linaje y detiene el arranque ante un linaje desconocido |
-| [`RN-02014`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | Regla de negocio | La provisoria la produce el sistema, no adivinable y sin repetirse |
-| [`ADR-06004`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | Decisión arquitectónica | La derivación anclada con parámetros versionados |
-| [`ADR-06005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) | Decisión arquitectónica | Las **100** provisorias sin repetición y sin derivar de un dato de la cuenta |
-| [`ADR-06007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) | Decisión arquitectónica | El linaje inmutable y el arranque detenido |
+| [`CU-06006`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md) | Caso de uso | Deriva sin guardar en claro y distingue el veredicto falso del derivado ilegible |
+| [`CU-06007`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) | Caso de uso | Produce **100** provisorias con **0** repetidas y se detiene cuando la aleatoriedad no responde |
+| [`CU-06008`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md) | Caso de uso | Emite con sus **cuatro** reclamos y rechaza sin clave de firma y con reclamos incompletos |
+| [`CU-06009`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md) | Caso de uso | Provee el sello por el puerto, con dos corridas que dan el mismo valor al fijarlo |
+| [`CU-06010`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md) | Caso de uso | Aplica las transformaciones, registra el linaje y detiene el arranque ante un linaje desconocido |
+| [`RN-02014`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md) | Regla de negocio | La provisoria la produce el sistema, no adivinable y sin repetirse |
+| [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | Decisión arquitectónica | La derivación anclada con parámetros versionados |
+| [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) | Decisión arquitectónica | Las **100** provisorias sin repetición y sin derivar de un dato de la cuenta |
+| [`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) | Decisión arquitectónica | El linaje inmutable y el arranque detenido |
 | `RA-03` | Regla de arquitectura del producto | Las dos inspecciones con umbral **0**: ninguna clave, contraseña ni ruta del almacén en la fuente del sample ni en su salida |
 
 ## 9. Contrato de verificación

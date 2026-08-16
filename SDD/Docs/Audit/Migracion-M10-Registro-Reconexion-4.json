@@ -1,0 +1,766 @@
+{
+ "reconectados": [
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../03-UX-UI-DX/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../03-UX-UI-DX/DX-Error-Messages.md",
+   "nuevo": "../03-UX-UI-DX/DX-Error-Messages.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Contratos-Abstractions.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Contratos-Abstractions.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Modelo-Datos-Logico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Contratos-Abstractions.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Contratos-Abstractions.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md",
+   "nuevo": "../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Flujo-Ejecucion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Contratos-Abstractions.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+   "nuevo": "../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00029-Dar-Desenlace-A-La-Revision.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md",
+   "nuevo": "../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md",
+   "nuevo": "../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+   "anterior": "../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+   "nuevo": "../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+  }
+ ],
+ "sin_resolver": [
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Estrategia-Testing.md"
+  },
+  {
+   "archivo": "./Audit/E-08-Calidad-Siete-Proyectos-r2.md",
+   "destino": "Casos-Prueba-Referenciales.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "destino": "ejemplo-01-basico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "destino": "ejemplo-02-intermedio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "destino": "ejemplo-03-avanzado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "destino": "ejemplo-01-basico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "destino": "ejemplo-02-intermedio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Application/README.md",
+   "destino": "ejemplo-03-avanzado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "destino": "ejemplo-01-basico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "destino": "ejemplo-02-intermedio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "destino": "ejemplo-03-avanzado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "destino": "ejemplo-01-basico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "destino": "ejemplo-02-intermedio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Infrastructure/README.md",
+   "destino": "ejemplo-03-avanzado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "destino": "ejemplo-01-basico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "destino": "ejemplo-02-intermedio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "destino": "ejemplo-03-avanzado.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "destino": "ejemplo-01-basico.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "destino": "ejemplo-02-intermedio.md"
+  },
+  {
+   "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/_fusion/Domain/README.md",
+   "destino": "ejemplo-03-avanzado.md"
+  }
+ ]
+}

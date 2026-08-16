@@ -3,7 +3,7 @@
 **Fecha:** 2026-08-16
 **Motivo:** `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.0
 **Regla:** `Migracion-Rules.md` §4.3.2
-**Estado:** **En curso.** 27 de 67 grupos consolidados · **6 de 18 carpetas `_fusion/` retiradas**
+**Estado:** **`GeometriaFactory-Api` cerrada: 9 de 9 categorías.** 37 de 67 grupos · **9 de 18 carpetas `_fusion/` retiradas**
 
 ---
 
@@ -22,29 +22,38 @@ una selección.
 
 | Categoría | Grupos | Documentos absorbidos | Salidas |
 | --- | --- | --- | --- |
-| `08-Calidad-Y-Pruebas` | 9 | 24 | **S1** en cinco, **S2** en tres, **S3** el índice |
-| `05-Arquitectura-Tecnica` | 4 | 11 | **S1** en uno, **S2** en dos, **S3** el índice |
-| `02-Especificacion-Funcional` | 3 | 9 + 3 snapshots `_legacy/` | **S1** el índice maestro, **S2** el glosario, **S3** el `README` |
-| `03-UX-UI-DX` | 5 | 15 | **S1** en dos, **S2** en dos, **S3** el índice |
-| `06-Backlog-Tecnico` | 4 | 12 | **S1** en uno, **S2** en dos, **S3** el índice |
-| `09-Devops` | 5 | 15 | **S1** en cuatro, **S3** el índice |
+| `08-Calidad-Y-Pruebas` | 9 | 24 | **S1** ×5, **S2** ×3, **S3** el índice |
+| `05-Arquitectura-Tecnica` | 4 | 11 | **S1** ×1, **S2** ×2, **S3** el índice |
+| `02-Especificacion-Funcional` | 3 | 9 + 3 snapshots | **S1** el índice maestro, **S2** el glosario, **S3** el `README` |
+| `03-UX-UI-DX` | 5 | 15 | **S1** ×2, **S2** ×2, **S3** el índice |
+| `06-Backlog-Tecnico` | 4 | 12 | **S1** ×1, **S2** ×2, **S3** el índice |
+| `09-Devops` | 5 | 15 | **S1** ×4, **S3** el índice |
+| `07-Plan-Sprint` | 2 | 6 | **S1** ×1, **S3** el índice |
+| `11-Documentacion` | 1 | 3 | **S3** el índice. **33 % de solapamiento, el más alto del inventario** |
+| `10-Examples` | 4 | 3 + **9 renombrados, no absorbidos** | **S4** los samples, **S3** el índice |
 
-**Preservación medida sobre los veintiún documentos que transponen: 6765 líneas de contenido
-absorbidas, 0 sin correspondencia.** Los seis `README` no transponen —les corresponde **S3**— y sus
-545 líneas están enteras acá.
+**Preservación medida sobre los veintitrés documentos que transponen: 7418 líneas de contenido
+absorbidas, 0 sin correspondencia.** Los nueve `README` no transponen —les corresponde **S3**— y sus
+715 líneas están enteras acá.
 
-**Un hueco encontrado y cerrado en la tercera tanda: el preámbulo.** La transposición leía sólo el
-contenido dentro de las secciones numeradas, y **el texto entre la cabecera y la §1 se perdía**.
-Alcanzaba a un solo documento —`Supply-Chain-Seguridad`, donde las tres capas declaraban por separado
-de dónde sale su política— y quedó recuperado como su §1. El verificador de preservación se corrigió
-para contarlo.
+**`10-Examples` es la excepción, y es una decisión.** Sus **doce samples no se fundieron**: los cuatro
+`ejemplo-01-basico` eran cuatro samples distintos —cada uno declara qué demuestra y no coinciden—, y
+un sample tiene contrato de verificación y evidencia de corrida. Fundir cuatro con contratos distintos
+produce uno que **no verifica ninguno**. Se les dio identidad visible con el sufijo del proyecto de
+código que ejercita cada uno, **renombrando los cuatro de cada nivel** para que ninguno quede
+privilegiado por conservar el nombre corto. **Es la única salida del inventario que no reduce
+documentos.**
 
-**Los snapshots `_legacy/` que viajaban dentro de `_fusion/` acompañan a sus documentos**, que es la
-decisión que el análisis §6 dejaba abierta.
+**Dos huecos encontrados y cerrados durante la ejecución:** el **preámbulo** entre la cabecera y la §1,
+que la transposición no leía —alcanzaba a dos documentos y quedó recuperado como su §1—, y la
+**reconexión por sustitución de patrón**, que rompió más de lo que arreglaba y se reemplazó por
+resolución de destino (§5.1 y §5.2 del análisis).
+
+**Los snapshots `_legacy/` que viajaban dentro de `_fusion/` acompañan a sus documentos.**
 
 ## Qué falta
 
-**40 grupos** en **3 categorías de `GeometriaFactory-Api`** —`07-Plan-Sprint`, `10-Examples` y `11-Documentacion`— y **las 9 de `GeometriaFactory-Web`**, con su clasificación propuesta y su orden en
+**30 grupos**, todos en **`GeometriaFactory-Web`**, con **9 carpetas `_fusion/`** y una sola capa estacionada, `Visor`, con su clasificación propuesta y su orden en
 `Audit/Migracion-M10-Consolidacion-Fusion.md` §4 y §5. Mientras un grupo no se consolide, sus
 documentos siguen en `<categoria>/_fusion/<Origen>/`, y **la presencia de esa carpeta declara que la
 fusión no terminó**.

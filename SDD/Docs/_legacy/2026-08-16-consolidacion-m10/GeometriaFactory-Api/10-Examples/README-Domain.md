@@ -38,9 +38,9 @@ Esta emisión es la **pasada de diseño** de `Rules-Examples.md` §0.2. Los tres
 
 | Sample | Nivel | Tiempo de setup | CU ilustrados | Ubicación |
 | --- | --- | --- | --- | --- |
-| [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | Básico | < 5 min | CU-02001, CU-02002, CU-02003, CU-02004, CU-02012 | `/samples/domain/01-basico/` |
-| [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | Intermedio | < 5 min | CU-02005, CU-02006, CU-02007, CU-02008 | `/samples/domain/02-intermedio/` |
-| [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | Avanzado | 10-15 min | CU-02009, CU-02010, CU-02011, CU-02013 | `/samples/domain/03-avanzado/` |
+| [`ejemplo-01-basico.md`](../../ejemplo-01-basico-dominio.md) | Básico | < 5 min | CU-02001, CU-02002, CU-02003, CU-02004, CU-02012 | `/samples/domain/01-basico/` |
+| [`ejemplo-02-intermedio.md`](../../ejemplo-02-intermedio-dominio.md) | Intermedio | < 5 min | CU-02005, CU-02006, CU-02007, CU-02008 | `/samples/domain/02-intermedio/` |
+| [`ejemplo-03-avanzado.md`](../../ejemplo-03-avanzado-dominio.md) | Avanzado | 10-15 min | CU-02009, CU-02010, CU-02011, CU-02013 | `/samples/domain/03-avanzado/` |
 
 **Tres samples, el piso que `Rules-Examples.md` §2.2 fija para `library`.** El tiempo de setup del tercero es mayor porque agrega la lectura del archivo de proyecto y dos corridas consecutivas sin fijar el reloj.
 
@@ -54,9 +54,9 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 
 | Sonda | Sample | Verifica | Comando | Estado | Última corrida |
 | --- | --- | --- | --- | --- | --- |
-| `VER-02001` | [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | CU-02001, CU-02002, CU-02003, CU-02004, CU-02012; US-02001, US-02004, US-02006, US-02024, US-02027 | `dotnet run --project samples/domain/01-basico` | No verificado — sin código | — |
-| `VER-02002` | [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | CU-02005, CU-02006, CU-02007, CU-02008; US-02009 a US-02016 | `dotnet run --project samples/domain/02-intermedio` | No verificado — sin código | — |
-| `VER-02003` | [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | CU-02009, CU-02010, CU-02011, CU-02013; US-02018 a US-02023, US-02026 | `dotnet run --project samples/domain/03-avanzado` | No verificado — sin código | — |
+| `VER-02001` | [`ejemplo-01-basico.md`](../../ejemplo-01-basico-dominio.md) | CU-02001, CU-02002, CU-02003, CU-02004, CU-02012; US-02001, US-02004, US-02006, US-02024, US-02027 | `dotnet run --project samples/domain/01-basico` | No verificado — sin código | — |
+| `VER-02002` | [`ejemplo-02-intermedio.md`](../../ejemplo-02-intermedio-dominio.md) | CU-02005, CU-02006, CU-02007, CU-02008; US-02009 a US-02016 | `dotnet run --project samples/domain/02-intermedio` | No verificado — sin código | — |
+| `VER-02003` | [`ejemplo-03-avanzado.md`](../../ejemplo-03-avanzado-dominio.md) | CU-02009, CU-02010, CU-02011, CU-02013; US-02018 a US-02023, US-02026 | `dotnet run --project samples/domain/03-avanzado` | No verificado — sin código | — |
 
 **Tres sondas, ninguna redundante**: los conjuntos de casos de uso que verifican son disjuntos. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
 

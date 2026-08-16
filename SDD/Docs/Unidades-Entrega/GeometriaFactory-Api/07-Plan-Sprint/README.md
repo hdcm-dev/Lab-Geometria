@@ -1,14 +1,25 @@
 # 07 · Plan de sprint — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.2
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Scrum Master + API PM (AG-07)
 
 ---
+
+
+## 0. Esta categoría es de la unidad de entrega
+
+**El mini-plan de esta categoría se consolidó el 2026-08-16**, absorbiendo los de las tres capas.
+El plan de la unidad es la unión de los cuatro, y **el orden entre ellos lo fija el grafo de
+compilación del manifiesto** —primero el dominio, después la aplicación y la infraestructura, y al
+final el host—, no este documento.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/07-Plan-Sprint/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/07-Plan-Sprint/).
 
 ## 1. Documento de esta sección
 
@@ -53,7 +64,7 @@
 | Los **dos huecos** del conjunto cerrado de códigos | Abiertos: `PA-03` y `PA-04` del backlog, elevados con BT-00015. **Esta categoría no inventa códigos** |
 | El despliegue | **Manual, por el docente** (`PRODUCT-INTAKE` §17.1.P.8 · GeometriaFactory-Api). `09-Devops`, **todavía no emitida**, mide el mecanismo de construcción en destino con BT-00026 |
 | La Definition of Done canónica | `08-Calidad-Y-Pruebas`, **todavía no emitida** |
-| La colección de peticiones como entregable de ejemplos | [`../10-Examples/`](../10-Examples/), **emitida el 2026-08-11** en su pasada de diseño. La colección es el sample 02, [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio.md), y su contrato de verificación `VER-00002` entra a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) como fila `SD-00002`. La fila se conserva con su desenlace en lugar de retirarse |
+| La colección de peticiones como entregable de ejemplos | [`../10-Examples/`](../10-Examples/), **emitida el 2026-08-11** en su pasada de diseño. La colección es el sample 02, [`../10-Examples/ejemplo-02-intermedio.md`](../10-Examples/ejemplo-02-intermedio-api.md), y su contrato de verificación `VER-00002` entra a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) como fila `SD-00002`. La fila se conserva con su desenlace en lugar de retirarse |
 
 **Dos filas más de esta tabla quedaron desactualizadas, y se declara acá en lugar de corregirlas desde esta categoría.** Las de `09-Devops` y `08-Calidad-Y-Pruebas` dicen «todavía no emitida», y **las dos están emitidas** desde el 2026-08-11. Actualizarlas pertenece a la categoría 07 en su próxima revisión: esta emisión sólo cierra la fila que la Fase G resuelve.
 
@@ -64,3 +75,4 @@
 | 1.1 | 2026-08-11 | **Cierre de la fila de `10-Examples`** de §4, que decía «todavía no emitida». La categoría se emitió en su pasada de diseño y la colección de peticiones es su sample 02, con el contrato `VER-00002` que entra a la matriz de sensado como `SD-00002`. La fila se **conserva** con su desenlace y su fecha. Se declara además que las filas de `08-Calidad-Y-Pruebas` y de `09-Devops` de esa misma tabla **también quedaron desactualizadas** y que corregirlas pertenece a esta categoría en su próxima revisión. **Ningún tramo del plan, ninguna puerta y ningún recuento cambian.** Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Declara el único artefacto emitido, los **cuatro** que se omiten con el motivo de cada uno, el estado del plan con sus **seis** tramos, sus quince puntos de acceso y la puerta `PT-04`, y dónde vive lo que este plan no decide, incluidos los dos huecos del conjunto cerrado de códigos y las tres categorías todavía no emitidas. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

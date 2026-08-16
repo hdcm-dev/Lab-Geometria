@@ -39,9 +39,9 @@ Esta emisión es la **pasada de diseño** de `Rules-Examples.md` §0.2. Los tres
 
 | Sample | Nivel | Tiempo de setup | CU ilustrados | Ubicación |
 | --- | --- | --- | --- | --- |
-| [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | Básico | < 5 min | CU-06001, CU-06002 | `/samples/infrastructure/01-basico/` |
-| [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | Intermedio | 10-15 min | CU-06003, CU-06004, CU-06005 | `/samples/infrastructure/02-intermedio/` |
-| [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | Avanzado | 10-15 min | CU-06006, CU-06007, CU-06008, CU-06009, CU-06010 | `/samples/infrastructure/03-avanzado/` |
+| [`ejemplo-01-basico.md`](../../ejemplo-01-basico-infraestructura.md) | Básico | < 5 min | CU-06001, CU-06002 | `/samples/infrastructure/01-basico/` |
+| [`ejemplo-02-intermedio.md`](../../ejemplo-02-intermedio-infraestructura.md) | Intermedio | 10-15 min | CU-06003, CU-06004, CU-06005 | `/samples/infrastructure/02-intermedio/` |
+| [`ejemplo-03-avanzado.md`](../../ejemplo-03-avanzado-infraestructura.md) | Avanzado | 10-15 min | CU-06006, CU-06007, CU-06008, CU-06009, CU-06010 | `/samples/infrastructure/03-avanzado/` |
 
 **Tres samples, el piso que `Rules-Examples.md` §2.2 fija para `library`.** El tiempo de setup crece a partir del segundo porque los samples 02 y 03 **sí abren el almacén**, y el primero no.
 
@@ -59,9 +59,9 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 
 | Sonda | Sample | Verifica | Comando | Estado | Última corrida |
 | --- | --- | --- | --- | --- | --- |
-| `VER-06001` | [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | CU-06001, CU-06002; US-06001 a US-06007 | `dotnet run --project samples/infrastructure/01-basico` | No verificado — sin código | — |
-| `VER-06002` | [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | CU-06003, CU-06004, CU-06005; US-06008 a US-06016 | `dotnet run --project samples/infrastructure/02-intermedio` | No verificado — sin código | — |
-| `VER-06003` | [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | CU-06006, CU-06007, CU-06008, CU-06009, CU-06010; US-06017 a US-06025 | `dotnet run --project samples/infrastructure/03-avanzado` | No verificado — sin código | — |
+| `VER-06001` | [`ejemplo-01-basico.md`](../../ejemplo-01-basico-infraestructura.md) | CU-06001, CU-06002; US-06001 a US-06007 | `dotnet run --project samples/infrastructure/01-basico` | No verificado — sin código | — |
+| `VER-06002` | [`ejemplo-02-intermedio.md`](../../ejemplo-02-intermedio-infraestructura.md) | CU-06003, CU-06004, CU-06005; US-06008 a US-06016 | `dotnet run --project samples/infrastructure/02-intermedio` | No verificado — sin código | — |
+| `VER-06003` | [`ejemplo-03-avanzado.md`](../../ejemplo-03-avanzado-infraestructura.md) | CU-06006, CU-06007, CU-06008, CU-06009, CU-06010; US-06017 a US-06025 | `dotnet run --project samples/infrastructure/03-avanzado` | No verificado — sin código | — |
 
 **Tres sondas, ninguna redundante**: los conjuntos de casos de uso y de historias que verifican son disjuntos, y entre las tres alcanzan a los diez casos de uso y a las veinticinco historias. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
 

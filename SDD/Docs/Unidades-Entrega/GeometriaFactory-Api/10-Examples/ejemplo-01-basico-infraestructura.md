@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/infrastructure/01-basico/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) y [`CU-06002`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md); [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../../../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md); [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../../../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5, la tabla de derivación por tipo; `PRODUCT-INTAKE` 1.23 §20, los **ocho** escenarios, y §21
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06001` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) y [`CU-06002`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md); [`../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md`](../02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md); [`../05-Arquitectura-Tecnica/Flujo-Ejecucion.md`](../05-Arquitectura-Tecnica/Flujo-Ejecucion.md) §5, la tabla de derivación por tipo; `PRODUCT-INTAKE` 1.23 §20, los **ocho** escenarios, y §21
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-06001` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -20,7 +20,7 @@ Demostrar la mitad de esta capa que **no toca el almacén**: leer el texto que e
 
 ## 2. Nivel
 
-**Básico.** Punto de entrada absoluto del proyecto de código. No supone ningún otro sample, no abre el archivo de datos y no necesita ninguna preparación previa: es la partición que [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §2 punto 2 declara —«la mitad de esta capa no toca el almacén»— vista como sample.
+**Básico.** Punto de entrada absoluto del proyecto de código. No supone ningún otro sample, no abre el archivo de datos y no necesita ninguna preparación previa: es la partición que [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §2 punto 2 declara —«la mitad de esta capa no toca el almacén»— vista como sample.
 
 ## 3. Prerequisites
 
@@ -98,12 +98,12 @@ Escenarios recorridos: 8 | Observaciones de error: 2 | Advertencias: 4 | Excepci
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-06001`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | Caso de uso | Lee los ocho textos con las cuatro tolerancias y reconstruye las piezas con su posición y sus componentes |
-| [`CU-06002`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Caso de uso | Deriva y compara con tolerancia **0.01** y operador estricto, y emite la advertencia con el par de valores |
-| [`RN-02005`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Distingue las **4** advertencias de las **2** observaciones de error, que es lo que después decide el estado |
-| [`RN-02009`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en `E-5` y en `E-8`, nunca un texto genérico |
-| [`ADR-06006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) | Decisión arquitectónica | Las cuatro tolerancias y la tabla de derivación por tipo, ejercidas sobre datos reales |
-| [`ADR-06001`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md) | Decisión arquitectónica | El validador se instancia solo, sin arrastrar la dependencia de persistencia. Es lo que hace barata a la batería obligatoria |
+| [`CU-06001`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md) | Caso de uso | Lee los ocho textos con las cuatro tolerancias y reconstruye las piezas con su posición y sus componentes |
+| [`CU-06002`](../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md) | Caso de uso | Deriva y compara con tolerancia **0.01** y operador estricto, y emite la advertencia con el par de valores |
+| [`RN-02005`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Distingue las **4** advertencias de las **2** observaciones de error, que es lo que después decide el estado |
+| [`RN-02009`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en `E-5` y en `E-8`, nunca un texto genérico |
+| [`ADR-06006`](../05-Arquitectura-Tecnica/Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) | Decisión arquitectónica | Las cuatro tolerancias y la tabla de derivación por tipo, ejercidas sobre datos reales |
+| [`ADR-06001`](../05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md) | Decisión arquitectónica | El validador se instancia solo, sin arrastrar la dependencia de persistencia. Es lo que hace barata a la batería obligatoria |
 | `PRODUCT-INTAKE` §20 `E-1` a `E-8` | Escenario con payload real | Los ocho textos se transcriben sin modificación y son la entrada del recorrido |
 | `PRODUCT-INTAKE` §21 | Matriz de cobertura | El reparto de las tolerancias `T1` a `T4` entre los escenarios, que §2 del [`README.md`](README.md) de esta carpeta recuenta |
 

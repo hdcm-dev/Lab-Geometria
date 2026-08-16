@@ -1,11 +1,11 @@
 # 10 · Ejemplos — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 1.3
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-16
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `rest-api`
 **Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **doce** casos de uso, y [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md), los **quince** puntos de acceso y los **diecisiete** códigos de contrato vivos; [`../02-Especificacion-Funcional/Casos-De-Uso/CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md`](CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md) 1.2; [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) y [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md); [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta** historias; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md), los **treinta y siete** casos; `PRODUCT-INTAKE` **1.25** §16.1, §18 **S-2**, §20 y §21
@@ -27,6 +27,31 @@
 
 ---
 
+
+## 0. Esta categoría es de la unidad de entrega
+
+**Esta categoría no consolidó sus samples, y es una decisión.**
+
+Los cuatro `ejemplo-01-basico` **no eran cuatro versiones de un sample: eran cuatro samples**. Cada
+uno declara qué demuestra, y no coinciden: el del host demuestra la frontera de la superficie —canjear
+credenciales y comprobar la guardia—, el de la aplicación el camino de entrada tal como esa capa lo
+orquesta, el del dominio el recorrido más corto contra la biblioteca, y el de la infraestructura **la
+mitad de esa capa que no toca el almacén**, con las cuatro tolerancias del lector de texto.
+
+**Un sample tiene contrato de verificación y evidencia de corrida** (`Rules-Examples.md`). Fundir
+cuatro con contratos distintos no produce uno con un contrato: produce uno que **no verifica ninguno
+de los cuatro**.
+
+Lo que sí se hizo es **darles identidad visible**: los doce pasan a llamarse
+`ejemplo-0N-<nivel>-<proyecto>.md`, con el proyecto de código que cada uno ejercita en el nombre. Se
+renombraron **los cuatro de cada nivel, incluido el del host**, para que ninguno quede privilegiado
+por conservar el nombre corto. Las citas se reconectaron desde registro.
+
+Es la salida **S4** del análisis, y **es la única del inventario que no reduce documentos**.
+
+**La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
+[`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/10-Examples/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/10-Examples/).
+
 ## 1. Qué hay en esta carpeta
 
 Tres markdown explicativos, uno por sample, con sus **diez** secciones obligatorias de `Rules-Examples.md` §4.2, y este índice. Cada markdown apunta a una carpeta ejecutable de [`/samples/api/`](../../../../../samples/api/) del repositorio, que esta pasada deja **esqueletada**: con su README local y su comando previsto, y sin corrida hecha. **Las tres carpetas existen** —[`01-basico/`](../../../../../samples/api/01-basico/), [`02-intermedio/`](../../../../../samples/api/02-intermedio/) y [`03-avanzado/`](../../../../../samples/api/03-avanzado/)—, cada una con su `README.md` local y el comando previsto de su contrato, y ninguna con código.
@@ -39,9 +64,9 @@ Esta emisión es la **pasada de diseño** de `Rules-Examples.md` §0.2. Los tres
 
 | Sample | Nivel | Tiempo de setup | CU ilustrados | Ubicación |
 | --- | --- | --- | --- | --- |
-| [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | Básico | 5-10 min | CU-00001, CU-00002, CU-00009 | `/samples/api/01-basico/` |
-| [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | Intermedio | 5-10 min | CU-00003, CU-00004, CU-00005, CU-00006, CU-00007, CU-00008, CU-00012 | `/samples/api/02-intermedio/` |
-| [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | Avanzado | 10-15 min | CU-00010, CU-00011 | `/samples/api/03-avanzado/` |
+| [`ejemplo-01-basico.md`](ejemplo-01-basico-api.md) | Básico | 5-10 min | CU-00001, CU-00002, CU-00009 | `/samples/api/01-basico/` |
+| [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio-api.md) | Intermedio | 5-10 min | CU-00003, CU-00004, CU-00005, CU-00006, CU-00007, CU-00008, CU-00012 | `/samples/api/02-intermedio/` |
+| [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado-api.md) | Avanzado | 10-15 min | CU-00010, CU-00011 | `/samples/api/03-avanzado/` |
 
 **Tres samples, el piso que `Rules-Examples.md` §2.2 fija para `rest-api`.** El tiempo de setup de los dos primeros es el mismo porque los dos necesitan lo mismo: el almacén reiniciado y el servicio levantado. El del tercero es mayor porque recorre el arranque **dos veces**, una sobre un almacén sano y otra sobre uno que no se puede entender.
 
@@ -59,9 +84,9 @@ Vista de conjunto de la arista B, en el formato de `Rules-Examples.md` §4.4.
 
 | Sonda | Sample | Verifica | Comando | Estado | Última corrida |
 | --- | --- | --- | --- | --- | --- |
-| `VER-00001` | [`ejemplo-01-basico.md`](ejemplo-01-basico.md) | CU-00001, CU-00002, CU-00009; US-00001 a US-00006, US-00024, US-00025 | `bash samples/api/01-basico/run.sh` | No verificado — sin código | — |
-| `VER-00002` | [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio.md) | CU-00003 a CU-00008, CU-00012; US-00007 a US-00023, US-00030 | `bash samples/api/02-intermedio/run.sh` | No verificado — sin código | — |
-| `VER-00003` | [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado.md) | CU-00010, CU-00011; US-00026 a US-00029 | `bash samples/api/03-avanzado/run.sh` | No verificado — sin código | — |
+| `VER-00001` | [`ejemplo-01-basico.md`](ejemplo-01-basico-api.md) | CU-00001, CU-00002, CU-00009; US-00001 a US-00006, US-00024, US-00025 | `bash samples/api/01-basico/run.sh` | No verificado — sin código | — |
+| `VER-00002` | [`ejemplo-02-intermedio.md`](ejemplo-02-intermedio-api.md) | CU-00003 a CU-00008, CU-00012; US-00007 a US-00023, US-00030 | `bash samples/api/02-intermedio/run.sh` | No verificado — sin código | — |
+| `VER-00003` | [`ejemplo-03-avanzado.md`](ejemplo-03-avanzado-api.md) | CU-00010, CU-00011; US-00026 a US-00029 | `bash samples/api/03-avanzado/run.sh` | No verificado — sin código | — |
 
 **Tres sondas, ninguna redundante**: los conjuntos de casos de uso y de historias que verifican son disjuntos, y entre las tres alcanzan a los doce casos de uso y a las treinta historias. Las tres entran a [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) con estado `Sin verificar`, que es lo que `Deriva-Rules.md` §2.4 declara para un contrato en `No verificado — sin código`.
 
@@ -129,3 +154,4 @@ Los tres samples ejercitan la superficie que declara [`../05-Arquitectura-Tecnic
 | 1.1 | 2026-08-11 | **Correcciones del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0, contrastadas contra el texto vivo del `PRODUCT-INTAKE` 1.25.** **P0-1**: las tres carpetas de [`/samples/api/`](../../../../../samples/api/) se crean de verdad, cada una con su README local y su comando previsto, y §1 lo declara con el enlace; el comando de las tres filas `VER-XX` de la matriz de sensado queda coherente con lo que existe. **P1-3**: se verifica contra §18 vigente que la **divergencia de alcance** que §4 declara —ocho cuerpos en §16.1 contra dos en §18 **S-2**— **sigue viva y sin resolver**, y que la precisión que la 1.25 agregó a §18 no la toca: precisa que las tres muestras `S-X` no son el conjunto de las carpetas, no cuántos cuerpos lleva `S-2`. §4 se conserva entero, con `PA-06` abierto y el Product Owner como responsable. Se actualiza la trazabilidad upstream a la versión **1.25** del intake. Ningún recuento, contrato, sample ni cobertura cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial de la categoría del proyecto de código **principal** del producto, en la **pasada de diseño** de `Rules-Examples.md` §0.2. Declara **tres** samples —el piso de §2.2 para `rest-api`—, con el segundo materializando la muestra **S-2** del `PRODUCT-INTAKE` §18, la tabla de contratos de verificación con las **tres** sondas `VER-00001` a `VER-00003` en `No verificado — sin código`, las convenciones y la estructura de `/samples/api/` con sus **tres** desvíos declarados respecto de §2.3. Declara la **divergencia viva** entre §16.1 y §18 S-2 sobre el alcance de la colección —**ocho** cuerpos contra **dos**—, hereda la lectura de la categoría 02 sin reabrirla, y deja escrito qué cambiaría si el Product Owner declarara el otro alcance. Verifica **12 de 12** casos de uso, **14 de 15** puntos de acceso entre los tres samples —**13 de 15** en la colección del sample 02— con el restante declarado, y **8 de 8** escenarios del intake §20; y declara el **residuo** de `CU-00012` §9, que escribe «13 de 16» contra el recuento vivo de quince puntos, sin corregirlo desde acá. |
 | 1.3 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Absorbe la decisión (b) del Product Owner** (`PRODUCT-INTAKE` **1.29** §18): el alcance de la colección de peticiones (`S-2`) son los **ocho escenarios `E-1` a `E-8`**, y la divergencia entre §16.1 y §18 queda resuelta a favor de los ocho. La lectura que este proyecto de código ya había adoptado **queda confirmada**: no cambia ningún paso, ningún criterio ni ningún recuento. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **11**. Sube minor. |
+| 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

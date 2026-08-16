@@ -1,0 +1,132 @@
+[
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/ejemplo-01-basico.md",
+  "nuevo": "../10-Examples/ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/ejemplo-02-intermedio.md",
+  "nuevo": "../10-Examples/ejemplo-02-intermedio-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/ejemplo-03-avanzado.md",
+  "nuevo": "../10-Examples/ejemplo-03-avanzado-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md",
+  "anterior": "ejemplo-02-intermedio.md",
+  "nuevo": "ejemplo-02-intermedio-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/README.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/README.md",
+  "anterior": "ejemplo-02-intermedio.md",
+  "nuevo": "ejemplo-02-intermedio-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/README.md",
+  "anterior": "ejemplo-03-avanzado.md",
+  "nuevo": "ejemplo-03-avanzado-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/README.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/README.md",
+  "anterior": "ejemplo-02-intermedio.md",
+  "nuevo": "ejemplo-02-intermedio-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/README.md",
+  "anterior": "ejemplo-03-avanzado.md",
+  "nuevo": "ejemplo-03-avanzado-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-api.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-dominio.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md",
+  "anterior": "ejemplo-01-basico.md",
+  "nuevo": "ejemplo-01-basico-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/07-Plan-Sprint/README.md",
+  "anterior": "../10-Examples/ejemplo-02-intermedio.md",
+  "nuevo": "../10-Examples/ejemplo-02-intermedio-api.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Domain/ejemplo-01-basico.md",
+  "nuevo": "../10-Examples/ejemplo-01-basico-dominio.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Domain/ejemplo-02-intermedio.md",
+  "nuevo": "../10-Examples/ejemplo-02-intermedio-dominio.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Domain/ejemplo-03-avanzado.md",
+  "nuevo": "../10-Examples/ejemplo-03-avanzado-dominio.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Application/ejemplo-01-basico.md",
+  "nuevo": "../10-Examples/ejemplo-01-basico-aplicacion.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Application/ejemplo-02-intermedio.md",
+  "nuevo": "../10-Examples/ejemplo-02-intermedio-aplicacion.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Application/ejemplo-03-avanzado.md",
+  "nuevo": "../10-Examples/ejemplo-03-avanzado-aplicacion.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Infrastructure/ejemplo-01-basico.md",
+  "nuevo": "../10-Examples/ejemplo-01-basico-infraestructura.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Infrastructure/ejemplo-02-intermedio.md",
+  "nuevo": "../10-Examples/ejemplo-02-intermedio-infraestructura.md"
+ },
+ {
+  "archivo": "./Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md",
+  "anterior": "../10-Examples/_fusion/Infrastructure/ejemplo-03-avanzado.md",
+  "nuevo": "../10-Examples/ejemplo-03-avanzado-infraestructura.md"
+ }
+]

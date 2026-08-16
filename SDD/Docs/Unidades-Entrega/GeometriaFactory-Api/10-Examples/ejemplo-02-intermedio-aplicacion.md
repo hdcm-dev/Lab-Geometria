@@ -9,8 +9,8 @@
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/application/02-intermedio/`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04004`, `CU-04005`, `CU-04006` y `CU-04009`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de orquestación del trabajo y de la consulta; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6, la tabla de los **ocho** escenarios; `PRODUCT-INTAKE` 1.23 §20, escenarios `E-1` a `E-8`
-**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../../../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-04002` como sonda; `11-Documentacion` cuando se emita
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/Casos-De-Uso/`](../02-Especificacion-Funcional/Casos-De-Uso/) `CU-04004`, `CU-04005`, `CU-04006` y `CU-04009`; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, componentes de orquestación del trabajo y de la consulta; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §6, la tabla de los **ocho** escenarios; `PRODUCT-INTAKE` 1.23 §20, escenarios `E-1` a `E-8`
+**Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-04002` como sonda; `11-Documentacion` cuando se emita
 
 ---
 
@@ -24,7 +24,7 @@ Demostrar el ciclo del trabajo tal como esta capa lo orquesta, con los **ocho** 
 
 ## 3. Prerequisites
 
-Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido: la única dependencia saliente del proyecto de código es `GeometriaFactory-Domain` (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Application) y los puertos se satisfacen con dobles.
+Los mismos cuatro ítems de [`ejemplo-01-basico.md`](ejemplo-01-basico-api.md) §3, sin agregados: **.NET 10**, entorno de desarrollo contenido del repositorio, etapa `a` cerrada y Linux. El sample sigue siendo autocontenido: la única dependencia saliente del proyecto de código es `GeometriaFactory-Domain` (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Application) y los puertos se satisfacen con dobles.
 
 **Un prerequisito de datos, no de herramientas.** El doble del puerto de validación devuelve, para cada uno de los ocho escenarios, **el resultado de interpretación que la sección «qué verificar» de ese escenario declara** en el `PRODUCT-INTAKE` §20, transcripto sin modificación. **No se compone ningún resultado nuevo**: esta capa no interpreta, y un resultado inventado acá sería un dato de geometría fabricado, que es exactamente lo que la regla de delivery del producto prohíbe.
 
@@ -100,16 +100,16 @@ Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Ex
 
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
-| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Carga el trabajo con dueño, identificador propio y sello del puerto de reloj, y recorre el rechazo de reedición |
-| [`CU-00026`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Resuelve los **ocho** envíos: 6 a `Pendiente` y 2 retenidos en `Borrador` |
-| [`CU-00028`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Devuelve el listado propio con los cuatro estados distinguibles, y el detalle con componentes frente al listado sin ellos |
-| [`CU-00027`](../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md) | Caso de uso | Retira sólo desde `Borrador` y sólo lo propio, con las dos negativas distinguidas |
-| [`RN-02003`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Regla de negocio | El retiro de un trabajo ajeno responde como inexistente |
-| [`RN-02004`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | Regla de negocio | El retiro fuera de `Borrador` se rechaza |
-| [`RN-02005`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Las advertencias no impiden el envío; los errores de `E-5` y `E-8` sí |
-| [`RN-02008`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | Regla de negocio | `texto-identico=si` en `E-1` y `texto-original-intacto=si` en la reedición rechazada |
-| [`RN-02009`](../../../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en `E-5` y en `E-8` |
-| [`ADR-04005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md) | Decisión arquitectónica | Cada uno de los ocho envíos es una unidad de trabajo, cuyo alcance fija esta capa |
+| [`CU-00026`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Carga el trabajo con dueño, identificador propio y sello del puerto de reloj, y recorre el rechazo de reedición |
+| [`CU-00026`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) | Caso de uso | Resuelve los **ocho** envíos: 6 a `Pendiente` y 2 retenidos en `Borrador` |
+| [`CU-00028`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md) | Caso de uso | Devuelve el listado propio con los cuatro estados distinguibles, y el detalle con componentes frente al listado sin ellos |
+| [`CU-00027`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00027-Eliminar-Un-Trabajo.md) | Caso de uso | Retira sólo desde `Borrador` y sólo lo propio, con las dos negativas distinguidas |
+| [`RN-02003`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) | Regla de negocio | El retiro de un trabajo ajeno responde como inexistente |
+| [`RN-02004`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md) | Regla de negocio | El retiro fuera de `Borrador` se rechaza |
+| [`RN-02005`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md) | Regla de negocio | Las advertencias no impiden el envío; los errores de `E-5` y `E-8` sí |
+| [`RN-02008`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md) | Regla de negocio | `texto-identico=si` en `E-1` y `texto-original-intacto=si` en la reedición rechazada |
+| [`RN-02009`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) | Regla de negocio | Índice **1** y campo en `E-5` y en `E-8` |
+| [`ADR-04005`](../05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md) | Decisión arquitectónica | Cada uno de los ocho envíos es una unidad de trabajo, cuyo alcance fija esta capa |
 | `PRODUCT-INTAKE` §20 `E-1` a `E-8` | Escenario con payload real | Los ocho textos se transcriben sin modificación y sus resultados de interpretación salen de la sección «qué verificar» de cada uno |
 
 ## 9. Contrato de verificación
