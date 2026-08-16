@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md
-**Versión:** 2.0
-**Estado:** Emitido — **dos decisiones tomadas, una abierta**
+**Versión:** 3.0
+**Estado:** Emitido — **las tres decisiones tomadas**. Queda una escritura pendiente, que es del Product Owner
 **Fecha:** 2026-08-16
 **Autor:** Orquestador SDD
 **Instrumento:** `Master-Prompt.md` §9, manejo de ambigüedad: un dato que el producto no puede resolver por su cuenta **se eleva y no se decide**
@@ -71,9 +71,9 @@ texto crudo necesita al laboratorio para convertirlo.
 | --- | --- | --- |
 | 1 | Qué se hace con `§20.E-7` punto 4 | **TOMADA el 2026-08-16: reescribirlo.** El intake **2.2** lo declara sobre el camino nuevo y agrega qué sigue ejercitando el bundle —el mapeo de los seis tipos— y qué dejó de ser suyo |
 | 2 | Qué se hace con `§20.E-8` puntos 2 y 3 | **TOMADA el 2026-08-16: reescribirlos.** El intake **2.2** declara que la pieza no llega al visor y que **la confusión que el escenario detecta cambia de par**: pasa a ser entre no poder dibujar y no poder interpretar. El punto 5 no se tocó |
-| 3 | Qué se hace con `RT` §8.3 | **ABIERTA.** Es la única que la decisión contradice de frente |
+| 3 | Qué se hace con `RT` §8.3 | **TOMADA el 2026-08-16: precisar la propiedad.** Pasa a ser «sin instalar nada y sin backend», **sin «pegando el texto»** |
 
-### 3.1 La que queda abierta
+### 3.1 La tercera, con lo que su decisión deja pendiente
 
 **`RT` §8.3 pide no perder que cualquiera pegue el texto y vea el dibujo, sin instalar nada.** Con
 `ADR-08006` se conservan «sin instalar nada» y «sin backend», y **no se conserva «pegando el
@@ -85,12 +85,17 @@ resolvió que corre **en el servicio de datos**, de modo que la pantalla le pide
 por `A-18` y le pasa el DTO al bundle. Esa decisión define **quién** interpreta; la de `RT` §8.3
 define **qué se hace con una propiedad que ya no se cumple entera**, y son preguntas distintas.
 
-**Las dos salidas, y lo que cuesta cada una:**
+**Lo decidido.** Se **precisa la propiedad**: «sin instalar nada y sin backend», sin «pegando el
+texto». La página de prueba del visor se entrega con los ocho escenarios **ya convertidos**, de modo
+que sigue abriéndose y dibujando sin levantar nada; lo que se pierde es pegar texto nuevo sin el
+laboratorio. La alternativa —sostenerla como estaba— habría obligado al bundle a seguir
+interpretando, y con eso `ADR-08006` no procedía.
 
-| Salida | Qué implica |
-| --- | --- |
-| **Precisar la propiedad** — «sin instalar nada y sin backend», sin «pegando el texto» | La página de prueba del visor se entrega con los ocho escenarios ya convertidos: sigue abriéndose y dibujando sin levantar nada. Se pierde pegar texto nuevo sin el laboratorio |
-| **Sostenerla como está** | El bundle tiene que seguir interpretando el texto, y `ADR-08006` **no procede como está**: volverían los dos lectores del mismo formato |
+**La escritura queda pendiente y es del Product Owner.** `Requerimientos-Tecnicos.md` **no vive en el
+árbol de este producto**: está en `Lab-Geometria.Documentacion/PROMPTs/`, que es material de su
+autor. Este orquestador **no escribe ahí** —lee y cita—, de modo que la precisión de §8.3 la aplica
+el Product Owner sobre su propio documento. **La decisión ya está tomada y registrada acá**; lo que
+falta es que el texto de la fuente la refleje.
 
 **La tercera es la que conviene mirar primero.** Las dos primeras son ajustes de redacción sobre
 escenarios; la tercera es una propiedad que el análisis declaró **como cosa a no perder**, y la
@@ -110,3 +115,4 @@ técnicos, que es trabajo del Product Owner y no del que construye.
 | --- | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial. Eleva las **tres afirmaciones aguas arriba** que `ADR-08006` alcanza —`§20.E-7` punto 4, `§20.E-8` puntos 2 y 3, y `RT` §8.3—, con el texto exacto de cada una, qué pasa a ser cierto, y la decisión que se le pide al Product Owner sobre cada una. Declara que **ninguna invalida la decisión** y que **la construcción no está bloqueada**, y señala que la tercera es la única que la decisión contradice de frente. | Orquestador SDD |
 | 2.0 | 2026-08-16 | **Dos de las tres decisiones tomadas.** El Product Owner resolvió **reescribir** los dos puntos de los escenarios, y el intake pasa a **2.2** con esa absorción. Queda **abierta la tercera**, `RT` §8.3, que es la única que la decisión contradice de frente, y §3.1 la desarrolla con sus dos salidas y lo que cuesta cada una. Se declara además que la decisión de **dónde corre el validador** —en el servicio de datos— **no resuelve ésta**: una dice quién interpreta y la otra qué se hace con una propiedad que ya no se cumple entera. | Orquestador SDD |
+| 3.0 | 2026-08-16 | **La tercera decisión, tomada: se precisa `RT` §8.3.** La propiedad pasa a ser «sin instalar nada y sin backend», sin «pegando el texto», y la página de prueba del visor se entrega con los ocho escenarios ya convertidos. **Queda una escritura pendiente que no es de este orquestador**: `Requerimientos-Tecnicos.md` vive en `Lab-Geometria.Documentacion/PROMPTs/`, material de su autor, donde este orquestador lee y no escribe. La decisión está registrada acá; falta que la fuente la refleje. | Product Owner (decisión) · Orquestador SDD |
