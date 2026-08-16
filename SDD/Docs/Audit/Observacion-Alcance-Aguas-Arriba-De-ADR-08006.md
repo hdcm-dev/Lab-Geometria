@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md
-**Versión:** 3.0
-**Estado:** Emitido — **las tres decisiones tomadas**. Queda una escritura pendiente, que es del Product Owner
+**Versión:** 4.0
+**Estado:** Cerrado — **las tres decisiones tomadas y las tres escrituras aplicadas**
 **Fecha:** 2026-08-16
 **Autor:** Orquestador SDD
 **Instrumento:** `Master-Prompt.md` §9, manejo de ambigüedad: un dato que el producto no puede resolver por su cuenta **se eleva y no se decide**
@@ -56,14 +56,30 @@ que cambia es que **deja de ser el camino normal de este escenario**.
 
 ### 2.3 `RT` §8.3 — la propiedad que se pide no perder
 
-**Qué dice hoy.** Que no se pierda la propiedad de `tools_json_figure_viewer`: cualquiera pega el
-texto y ve el dibujo, sin instalar nada.
+**CORRECCIÓN DE LA VERSIÓN 1.0, Y ES SUSTANTIVA.** Las versiones anteriores de esta observación
+declararon que `RT` §8.3 era «la única que la decisión contradice **de frente**». **Al leer el texto
+completo, es menos que eso y también es otra cosa.** Los dos hallazgos:
 
-**Qué pasa a ser cierto.** Se conserva «sin instalar nada» y se conserva «sin backend». **No se
-conserva «pegando el texto»**: para dibujar hay que pegar la estructura de piezas, y quien tenga el
-texto crudo necesita al laboratorio para convertirlo.
+**Primero: la fuente ya contemplaba lo decidido.** La tabla de §8.3 declara que el bundle recibe «el
+texto **o la estructura** del JSON de figuras, ya obtenida por el front». La estructura **ya estaba
+prevista**, de modo que `ADR-08006` no contradice esa fila: **elige entre dos opciones que la fuente
+había dejado abiertas.**
 
-**Es el costo declarado de la decisión**, y está anotado como tal en `ADR-08006` §3.2.
+**Segundo: hay una fila que sí se invierte, y no estaba enumerada.** La tabla de responsabilidades de
+§8.3 asignaba «interpretar el JSON para dibujar» al **bundle**, «con la tolerancia de claves de §6.3
+aplicada a la lectura». Esa es la afirmación que la decisión da vuelta, y **la versión 1.0 no la
+había visto**: se quedó en la consecuencia 2 y no leyó la tabla de abajo.
+
+**Lo que sí queda alcanzado, entonces, son dos frases y no una propiedad entera:**
+
+| Dónde | Qué decía | Qué pasa a decir |
+| --- | --- | --- |
+| Consecuencia 2 | «Se abre una página con **un JSON pegado a mano**» | «con **la estructura de piezas** puesta a mano». Probar sin backend **no se pierde**; cambia qué se pega |
+| Tabla de responsabilidades | Interpretar para dibujar: **bundle**, con la tolerancia de §6.3 | Interpretar: **backend**. El bundle recibe piezas reconstruidas y **no aplica ninguna tolerancia** |
+
+**`RA-02` no se toca**, y conviene decirlo porque es el encabezado de toda la sección: el bundle
+sigue sin conocer el sistema, sin leer configuración y **sin hacer una sola llamada de red**. Está
+medido sobre el paquete construido en `Medicion-Puertas-Tecnicas-PT-02-PT-03.md` §2.
 
 ## 3. Qué se le pide al Product Owner
 
@@ -71,7 +87,7 @@ texto crudo necesita al laboratorio para convertirlo.
 | --- | --- | --- |
 | 1 | Qué se hace con `§20.E-7` punto 4 | **TOMADA el 2026-08-16: reescribirlo.** El intake **2.2** lo declara sobre el camino nuevo y agrega qué sigue ejercitando el bundle —el mapeo de los seis tipos— y qué dejó de ser suyo |
 | 2 | Qué se hace con `§20.E-8` puntos 2 y 3 | **TOMADA el 2026-08-16: reescribirlos.** El intake **2.2** declara que la pieza no llega al visor y que **la confusión que el escenario detecta cambia de par**: pasa a ser entre no poder dibujar y no poder interpretar. El punto 5 no se tocó |
-| 3 | Qué se hace con `RT` §8.3 | **TOMADA el 2026-08-16: precisar la propiedad.** Pasa a ser «sin instalar nada y sin backend», **sin «pegando el texto»** |
+| 3 | Qué se hace con `RT` §8.3 | **TOMADA Y APLICADA el 2026-08-16**, con autorización explícita del Product Owner para escribir sobre su documento. Se reescriben **las dos frases** de §2.3 y nada más |
 
 ### 3.1 La tercera, con lo que su decisión deja pendiente
 
@@ -91,23 +107,29 @@ que sigue abriéndose y dibujando sin levantar nada; lo que se pierde es pegar t
 laboratorio. La alternativa —sostenerla como estaba— habría obligado al bundle a seguir
 interpretando, y con eso `ADR-08006` no procedía.
 
-**La escritura queda pendiente y es del Product Owner.** `Requerimientos-Tecnicos.md` **no vive en el
-árbol de este producto**: está en `Lab-Geometria.Documentacion/PROMPTs/`, que es material de su
-autor. Este orquestador **no escribe ahí** —lee y cita—, de modo que la precisión de §8.3 la aplica
-el Product Owner sobre su propio documento. **La decisión ya está tomada y registrada acá**; lo que
-falta es que el texto de la fuente la refleje.
+**La escritura se aplicó, y con autorización explícita.** `Requerimientos-Tecnicos.md` **no vive en
+el árbol de este producto**: está en `Lab-Geometria.Documentacion/PROMPTs/`, que es material de su
+autor, donde este orquestador lee y no escribe. El Product Owner **autorizó expresamente** esta
+escritura el 2026-08-16, acotada a las dos frases de §2.3. **La autorización es de este caso y no
+cambia la regla**: la carpeta sigue siendo suya.
 
 **La tercera es la que conviene mirar primero.** Las dos primeras son ajustes de redacción sobre
 escenarios; la tercera es una propiedad que el análisis declaró **como cosa a no perder**, y la
 decisión la pierde en parte. Puede ser un costo aceptable —el Product Owner ya lo aceptó al decidir—
 pero merece quedar aceptado **sobre este texto** y no sólo sobre el resumen.
 
-## 4. Qué NO está esperando esta observación
+## 4. Estado final
 
-**La construcción no está bloqueada.** `ADR-08006` habilita escribir la firma nueva, el punto de
-acceso `A-18` y el bloque de previsualización, y los tres documentos que declaran esas cosas ya
-están al día. Lo que espera acá es **qué dicen de sí mismos** el intake y los requerimientos
-técnicos, que es trabajo del Product Owner y no del que construye.
+**Las tres decisiones tomadas y las tres escrituras aplicadas.** El intake está en **2.2**, `RT`
+§8.3 lleva sus dos frases reescritas, y la construcción está hecha: la firma nueva, `A-18`, la capa
+3 del visor y el bloque de previsualización.
+
+**Esta observación queda cerrada.** Lo que deja como enseñanza, y por eso no se borra: **la versión
+1.0 declaró un conflicto más grande del que había, por leer una consecuencia y no la tabla de al
+lado del mismo apartado**. El barrido por concepto que `SDD-Development-Guide.md` §VI.3.1 pide —
+enumerar el término en todo el árbol, **incluido el interior de los archivos ya tocados**— es
+exactamente lo que faltó, y es la regla que el framework escribió después de tropezar tres veces con
+lo mismo.
 
 ## 5. Control de cambios
 
@@ -116,3 +138,4 @@ técnicos, que es trabajo del Product Owner y no del que construye.
 | 1.0 | 2026-08-16 | Emisión inicial. Eleva las **tres afirmaciones aguas arriba** que `ADR-08006` alcanza —`§20.E-7` punto 4, `§20.E-8` puntos 2 y 3, y `RT` §8.3—, con el texto exacto de cada una, qué pasa a ser cierto, y la decisión que se le pide al Product Owner sobre cada una. Declara que **ninguna invalida la decisión** y que **la construcción no está bloqueada**, y señala que la tercera es la única que la decisión contradice de frente. | Orquestador SDD |
 | 2.0 | 2026-08-16 | **Dos de las tres decisiones tomadas.** El Product Owner resolvió **reescribir** los dos puntos de los escenarios, y el intake pasa a **2.2** con esa absorción. Queda **abierta la tercera**, `RT` §8.3, que es la única que la decisión contradice de frente, y §3.1 la desarrolla con sus dos salidas y lo que cuesta cada una. Se declara además que la decisión de **dónde corre el validador** —en el servicio de datos— **no resuelve ésta**: una dice quién interpreta y la otra qué se hace con una propiedad que ya no se cumple entera. | Orquestador SDD |
 | 3.0 | 2026-08-16 | **La tercera decisión, tomada: se precisa `RT` §8.3.** La propiedad pasa a ser «sin instalar nada y sin backend», sin «pegando el texto», y la página de prueba del visor se entrega con los ocho escenarios ya convertidos. **Queda una escritura pendiente que no es de este orquestador**: `Requerimientos-Tecnicos.md` vive en `Lab-Geometria.Documentacion/PROMPTs/`, material de su autor, donde este orquestador lee y no escribe. La decisión está registrada acá; falta que la fuente la refleje. | Product Owner (decisión) · Orquestador SDD |
+| 4.0 | 2026-08-16 | **Cerrada: las tres escrituras aplicadas.** `RT` §8.3 se reescribe en sus dos frases, con autorización explícita del Product Owner sobre su propia carpeta —autorización **de este caso**, que no cambia la regla—. **Y §2.3 se corrige a sí misma, que es lo sustantivo de esta versión**: la 1.0 declaró que `RT` §8.3 contradecía la decisión «de frente», y al leer el texto completo son dos hallazgos distintos y menores. La fuente **ya contemplaba** que el bundle recibiera «el texto **o la estructura**», de modo que la decisión elige entre dos opciones abiertas en lugar de contradecir; y **hay una fila que sí se invierte y que la 1.0 no había visto**: la tabla de responsabilidades asignaba interpretar al bundle. Se declara la causa del error —leer una consecuencia y no la tabla de al lado, que es lo que el barrido por concepto existe para evitar— en lugar de corregir la cifra en silencio. | Orquestador SDD |

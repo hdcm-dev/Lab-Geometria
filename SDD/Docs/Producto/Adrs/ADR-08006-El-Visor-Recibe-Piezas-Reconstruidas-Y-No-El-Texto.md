@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aceptado
 **Fecha:** 2026-08-16
 **Autor:** Product Owner (la decisión) · Orquestador SDD (la redacción)
@@ -111,3 +111,4 @@ están: esta decisión cambia **a quién más le sirve** lo que ese validador ya
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial. Registra la decisión del Product Owner de que **el visor reciba las piezas reconstruidas y no el texto del alumno**, con su fundamento —el bundle dibuja y rota, interpretar es del laboratorio— y con sus dos consecuencias caras declaradas: la previsualización pasa a exigir una llamada al servicio de datos, y `E-7` y `RT` §8.3 dejan de ejercitar en el bundle una tolerancia que ya no es suya. Declara que **`RA-02` se conserva entero**: el bundle sigue sin hacer red y recibe su dato del anfitrión. Enumera las tres alternativas descartadas con su motivo. | Product Owner (decisión) · Orquestador SDD |
+| 1.1 | 2026-08-16 | **Las tres escrituras aguas arriba quedaron aplicadas**, y con eso §5 punto 2 se cumple: el intake pasa a **2.2** con los dos puntos de escenario reescritos, y `RT` §8.3 lleva sus dos frases al día con autorización explícita del Product Owner sobre su carpeta. **§3.2 se matiza con lo que la lectura completa mostró**: la fuente **ya contemplaba** que el bundle recibiera «el texto **o la estructura**», de modo que esta decisión elige entre dos opciones que estaban abiertas y no contradice esa fila; lo que sí invierte es la asignación de «interpretar para dibujar», que §8.3 le daba al bundle. La constancia está en [`../../Audit/Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md`](../../Audit/Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md) **4.0** §2.3. Ninguna decisión cambia. | Orquestador SDD |
