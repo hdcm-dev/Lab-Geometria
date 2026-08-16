@@ -336,7 +336,7 @@ printf '\n== GUARDIÁN 2 · ninguna ruta del panel es accesible sin sesión ==\n
 # estuviera. Esto ACOTA lo que se ofrece y no hace cumplir nada: quien verifica
 # la pertenencia y el papel sigue siendo el servicio de datos, en cada solicitud.
 PANEL='/mis-trabajos /trabajo-nuevo /trabajos/T-1 /trabajos/T-1/editar /cuentas /entrega-comision /mi-contrasena'
-PUBLICAS='/ /registro-de-cuenta /ingreso /credencial-propia/establecer /credencial-propia/cambio-obligado /estado /no-encontrado'
+PUBLICAS='/registro-de-cuenta /ingreso /credencial-propia/establecer /credencial-propia/cambio-obligado /estado /no-encontrado'
 
 printf '   -- sin marca: las siete del panel desvían a /ingreso --\n'
 for r in $PANEL; do
@@ -347,6 +347,10 @@ for r in $PANEL; do
 done
 
 printf '   -- sin marca: las públicas siguen respondiendo 200 --\n'
+# **[RELEVO DE LA ETAPA `g`, DECLARADO.]** La raíz salió de esta lista: dejó de ser una ruta que
+# responde y pasó a ser **el punto donde corre el guardián de aprovisionamiento**, que con
+# administrador constituido desvía al ingreso (`NAV-03`, la mitad que faltaba). Se comprueba abajo,
+# con su destino, en lugar de comprobarse acá con un 200 que ya no corresponde.
 # `/credencial-propia/cambio-obligado` está en esta lista a propósito: se llega
 # SIN sesión de trabajo (`INV-09`), y gatearla rompería `RN-13`.
 for r in $PUBLICAS; do
