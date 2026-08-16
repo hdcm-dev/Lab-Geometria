@@ -158,12 +158,45 @@ else
 
             <section class="gf-card" aria-labelledby="work-findings-heading">
                 <h2 id="work-findings-heading" class="gf-meta">Observaciones</h2>
-                @* Apartamiento 2 de la cabecera: NO se dice «Sin observaciones», porque eso
-                   afirmaría que se interpretó el texto y no salió ninguna. Se dice lo que pasa. *@
-                <p class="gf-caption gf-mt-3">
-                    El laboratorio todavía no interpreta el texto, así que por ahora no hay
-                    observaciones que mostrar.
-                </p>
+
+                @* DESDE LA ETAPA `f` HAY QUÉ MOSTRAR, y este bloque deja de decir que el texto no
+                   se interpreta. **Sigue sin decir «sin observaciones»** cuando no hay ninguna y el
+                   texto tampoco se interpretó: son dos cosas distintas y el estado las separa. *@
+                @if (_work.Observations.Count > 0)
+                {
+                    <ul class="gf-findings gf-mt-3">
+                        @foreach (var observation in _work.Observations)
+                        {
+                            <li class="gf-finding">
+                                <span class="gf-badge @(observation.Kind == WorkObservationKind.ValidationError ? "gf-badge--danger" : "gf-badge--warning")">
+                                    @(observation.Kind == WorkObservationKind.ValidationError ? "Error" : "Advertencia")
+                                </span>
+                                <div class="gf-finding-body">
+                                    <p class="gf-finding-location">@LocationOf(observation)</p>
+                                    @if (observation is { DeclaredValue: { } declared, DerivedValue: { } derived })
+                                    {
+                                        <dl class="gf-values">
+                                            <dt>Tu programa declara</dt><dd class="gf-num">@declared.ToString("N2")</dd>
+                                            <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
+                                        </dl>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                else if (_work.RootFigureCount is null)
+                {
+                    <p class="gf-caption gf-mt-3">
+                        Este trabajo todavía no se envió, así que su texto no se interpretó.
+                    </p>
+                }
+                else
+                {
+                    <p class="gf-caption gf-mt-3">
+                        El texto se interpretó y no salió ninguna observación.
+                    </p>
+                }
             </section>
 
             <section class="gf-card" aria-labelledby="work-text-heading">
@@ -194,40 +227,39 @@ else
                        mostrar algo distinto de lo que quedó guardado. *@
                     <div class="gf-scene gf-mt-2" data-gf-viewer-pieces="@PiecesForDrawing()">
                         <span class="gf-scene-label">Área de dibujo</span>
-                    </div>
-
                     @* LOS DOS MOVIMIENTOS, GOBERNADOS POR SEPARADO (`F-25`). Las dos casillas son
-                       independientes y su estado inicial lo fija esta superficie: apagadas, que es
-                       lo que corresponde mientras la preferencia de movimiento reducido no se
-                       consulte. **[decisión de la etapa `g`, declarada y elevada]**: consultarla
-                       exige un guion que lea `prefers-reduced-motion`, y el inventario de guiones
-                       autoriza uno solo con alcance declarado. Arrancar apagado nunca molesta a
-                       quien pidió menos movimiento; arrancar prendido sí. *@
-                    <div class="gf-scene-motion gf-mt-3">
-                        <span class="gf-scene-motion-option">
-                            <input type="checkbox" id="motion-camera-orbit" data-gf-motion="cameraOrbit"
-                                   aria-label="Órbita de la cámara"
-                                   aria-describedby="motion-camera-orbit-help" />
-                            <label for="motion-camera-orbit">Órbita de la cámara</label>
-                            @* La ayuda va en texto no visible y NO en `title`: el de `title` no llega
-                               ni al teclado ni a buena parte de los lectores de pantalla. Es lo que
-                               la maqueta aprobada ya resolvía así. *@
-                            <span class="gf-sr-only" id="motion-camera-orbit-help">La cámara gira sola alrededor de las figuras. Se detiene mientras arrastrás.</span>
-                        </span>
-                        <span class="gf-scene-motion-option">
-                            <input type="checkbox" id="motion-piece-spin" data-gf-motion="pieceSpin"
-                                   aria-label="Giro de las figuras"
-                                   aria-describedby="motion-piece-spin-help" />
-                            <label for="motion-piece-spin">Giro de las figuras</label>
-                            <span class="gf-sr-only" id="motion-piece-spin-help">Cada figura gira sobre sí misma. Se detiene mientras arrastrás.</span>
-                        </span>
+                           independientes y su estado inicial lo fija esta superficie: apagadas, que es
+                           lo que corresponde mientras la preferencia de movimiento reducido no se
+                           consulte. **[decisión de la etapa `g`, declarada y elevada]**: consultarla
+                           exige un guion que lea `prefers-reduced-motion`, y el inventario de guiones
+                           autoriza uno solo con alcance declarado. Arrancar apagado nunca molesta a
+                           quien pidió menos movimiento; arrancar prendido sí. *@
+                        <div class="gf-scene-motion gf-mt-3">
+                            <span class="gf-scene-motion-option">
+                                <input type="checkbox" id="motion-camera-orbit" data-gf-motion="cameraOrbit"
+                                       aria-label="Órbita de la cámara"
+                                       aria-describedby="motion-camera-orbit-help" />
+                                <label for="motion-camera-orbit">Órbita de la cámara</label>
+                                @* La ayuda va en texto no visible y NO en `title`: el de `title` no llega
+                                   ni al teclado ni a buena parte de los lectores de pantalla. Es lo que
+                                   la maqueta aprobada ya resolvía así. *@
+                                <span class="gf-sr-only" id="motion-camera-orbit-help">La cámara gira sola alrededor de las figuras. Se detiene mientras arrastrás.</span>
+                            </span>
+                            <span class="gf-scene-motion-option">
+                                <input type="checkbox" id="motion-piece-spin" data-gf-motion="pieceSpin"
+                                       aria-label="Giro de las figuras"
+                                       aria-describedby="motion-piece-spin-help" />
+                                <label for="motion-piece-spin">Giro de las figuras</label>
+                                <span class="gf-sr-only" id="motion-piece-spin-help">Cada figura gira sobre sí misma. Se detiene mientras arrastrás.</span>
+                            </span>
 
-                        @* SE DICE POR QUÉ ARRANCAN APAGADOS cuando el sistema pide menos
-                           movimiento: sin el aviso, la persona ve dos casillas apagadas y no sabe
-                           si es una falla. Lo enciende el guion, que es quien consulta la
-                           preferencia; servido viene oculto. *@
-                        <span class="gf-scene-motion-note" data-gf-motion-note hidden>arrancan apagados: tu sistema pide movimiento reducido</span>
-                        <span class="gf-sr-only" role="status" data-gf-motion-status></span>
+                            @* SE DICE POR QUÉ ARRANCAN APAGADOS cuando el sistema pide menos
+                               movimiento: sin el aviso, la persona ve dos casillas apagadas y no sabe
+                               si es una falla. Lo enciende el guion, que es quien consulta la
+                               preferencia; servido viene oculto. *@
+                            <span class="gf-scene-motion-note" data-gf-motion-note hidden>arrancan apagados: tu sistema pide movimiento reducido</span>
+                            <span class="gf-sr-only" role="status" data-gf-motion-status></span>
+                        </div>
                     </div>
 
                     @* LO QUE NO SE DIBUJÓ, JUNTO A LA ESCENA Y NUNCA EN LAS OBSERVACIONES: son dos
@@ -275,7 +307,7 @@ else
                        lados, sin traducir nada. *@
                     <div class="gf-card gf-scroll-box gf-mt-2">
                         <ul class="gf-tree" role="tree" aria-labelledby="work-tree-heading">
-                            @foreach (var piece in _work.Pieces)
+                            @foreach (var piece in _work.Pieces.OrderBy(piece => piece.Position))
                             {
                                 <li role="treeitem" aria-selected="false" aria-expanded="true"
                                     tabindex="0" data-gf-piece-node="@piece.Position">
@@ -285,7 +317,7 @@ else
                                         <span class="gf-caption">@piece.Components.Count componentes</span>
                                     </span>
                                     <ul class="gf-tree-children" role="group">
-                                        @foreach (var component in piece.Components)
+                                        @foreach (var component in piece.Components.OrderBy(component => component.Position))
                                         {
                                             <li role="treeitem" aria-selected="false">
                                                 <span class="gf-node gf-node--leaf">
@@ -466,4 +498,9 @@ else
 
         return parts.Count == 0 ? string.Empty : $"· {string.Join(" · ", parts)}";
     }
+    /// <summary>Dónde está la observación, dicho como lo ve la persona.</summary>
+    private static string LocationOf(WorkObservation observation) =>
+        observation.PiecePosition is { } position
+            ? $"Figura {position + 1} · posición {position} · campo «{observation.Field}»"
+            : "En el texto completo";
 }

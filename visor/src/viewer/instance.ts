@@ -30,6 +30,7 @@ export class ViewerInstance {
   private motion: MotionOptions = { cameraOrbit: false, pieceSpin: false };
   private orbitAngle = 0;
   private radius = 10;
+  private rowWidth = 0;
   private dragging = false;
 
   public constructor(element: HTMLElement, options?: ViewerOptions) {
@@ -74,9 +75,17 @@ export class ViewerInstance {
 
     const drawn: number[] = [];
     const undrawn: UndrawnPiece[] = [];
-    let extent = 1;
 
-    for (const piece of pieces) {
+    // LA FILA SE ARMA CON EL TAMAÑO DE CADA FIGURA Y NO CON UN PASO FIJO. Las figuras de un mismo
+    // trabajo tienen escalas muy distintas —el ortoedro de `E-1` mide 21 y el cubo 3—, y un paso
+    // fijo las superpone: la grande se come a las chicas y la escena muestra dos donde hay tres.
+    //
+    // EL ORDEN ES EL DE LA POSICIÓN Y NO EL DE LLEGADA, que es lo que sostiene el determinismo de
+    // `F-13`: el mismo trabajo procesado dos veces arma la misma fila.
+    const ordered = [...pieces].sort((a, b) => a.position - b.position);
+    const built: Array<{ position: number; mesh: THREE.Mesh; size: number }> = [];
+
+    for (const piece of ordered) {
       const outcome = meshFor(piece);
 
       if (outcome.mesh === null) {
@@ -84,15 +93,25 @@ export class ViewerInstance {
         continue;
       }
 
-      outcome.mesh.position.set(this.slotOf(piece.position), 0, 0);
-      this.scene.add(outcome.mesh);
-      this.pieces.set(piece.position, outcome.mesh);
-      drawn.push(piece.position);
-
-      extent = Math.max(extent, this.sizeOf(outcome.mesh));
+      built.push({ position: piece.position, mesh: outcome.mesh, size: this.sizeOf(outcome.mesh) });
     }
 
-    this.frameCamera(drawn.length, extent);
+    let cursor = 0;
+
+    for (const item of built) {
+      const half = item.size / 2;
+      cursor += half;
+
+      item.mesh.position.set(cursor, 0, 0);
+      this.scene.add(item.mesh);
+      this.pieces.set(item.position, item.mesh);
+      drawn.push(item.position);
+
+      // Un cuarto del tamaño de aire entre una figura y la siguiente: separa sin dispersar.
+      cursor += half + Math.max(item.size * 0.25, 0.5);
+    }
+
+    this.frameCamera(cursor, Math.max(1, ...built.map((item) => item.size)));
 
     return { drawn, undrawn };
   }
@@ -169,11 +188,6 @@ export class ViewerInstance {
     this.pieces.clear();
   }
 
-  private slotOf(position: number): number {
-    // La fila se arma por índice: la pieza N a la derecha de la N-1, siempre.
-    return position * 3;
-  }
-
   private sizeOf(mesh: THREE.Mesh): number {
     const box = new THREE.Box3().setFromObject(mesh);
     const size = new THREE.Vector3();
@@ -181,16 +195,26 @@ export class ViewerInstance {
     return Math.max(size.x, size.y, size.z);
   }
 
-  private frameCamera(count: number, extent: number): void {
-    this.radius = Math.max(6, count * 2 + extent * 2.2);
-    this.camera.position.set(this.radius, this.radius * 0.6, this.radius);
+  /**
+   * Encuadra la cámara sobre TODO lo dibujado.
+   *
+   * SE CALCULA DESDE EL ANCHO REAL DE LA FILA Y DE LA FIGURA MÁS GRANDE, no desde la cantidad de
+   * piezas: tres figuras chicas y tres enormes ocupan lo mismo en número y nada parecido en
+   * pantalla.
+   */
+  private frameCamera(rowWidth: number, largest: number): void {
+    this.rowWidth = rowWidth;
+    this.radius = Math.max(6, rowWidth * 0.9 + largest * 1.2);
+    this.camera.position.set(
+      this.centre().x + this.radius * 0.6,
+      this.radius * 0.5,
+      this.radius,
+    );
     this.camera.lookAt(this.centre());
   }
 
   private centre(): THREE.Vector3 {
-    const positions = [...this.pieces.keys()];
-    const middle = positions.length === 0 ? 0 : this.slotOf(Math.max(...positions)) / 2;
-    return new THREE.Vector3(middle, 0, 0);
+    return new THREE.Vector3(this.rowWidth / 2, 0, 0);
   }
 
   private aspect(): number {

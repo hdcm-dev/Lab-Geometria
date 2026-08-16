@@ -310,6 +310,8 @@
     //
     // Y NO CONOCE EL FORMATO DEL ALUMNO: lee piezas ya reconstruidas y se las pasa al visor tal
     // como llegaron (`ADR-08006`).
+    var pendingDraw = false;
+
     function drawScenes() {
         var scenes = document.querySelectorAll('[data-gf-viewer-pieces]');
 
@@ -323,8 +325,23 @@
             var viewer = window.GeometriaFactoryViewer;
 
             if (!viewer) {
-                // Sin visor cargado no hay escena, y **no se simula una**: el recuadro queda con su
-                // leyenda y la persona puede enviar igual, que es lo que la nota de al lado dice.
+                // TODAVÍA NO LLEGÓ, Y ESO ES LO NORMAL LA PRIMERA VEZ. Este guion se sirve en el
+                // encabezado y el paquete del visor en el cuerpo: los dos son diferidos, y los
+                // diferidos **se ejecutan en el orden del documento**, de modo que la primera
+                // pasada de esta función ocurre SIEMPRE antes de que el visor exista.
+                //
+                // Salir sin volver a intentar es el defecto que esto evita, y no se veía en
+                // ninguna prueba: el marcado quedaba perfecto, sin errores en consola, y la
+                // escena simplemente no aparecía. Se reintenta cuando la página termina de
+                // cargar, que es cuando el visor ya está.
+                //
+                // Si NUNCA llega, la escena no se dibuja y **no se simula una**: el recuadro queda
+                // con su leyenda y la persona envía igual.
+                if (!pendingDraw) {
+                    pendingDraw = true;
+                    window.addEventListener('load', drawScenes, { once: true });
+                }
+
                 continue;
             }
 
