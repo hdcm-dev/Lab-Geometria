@@ -79,7 +79,7 @@ Y una regla de forma sobre lo que la condición lleva: **ninguna condición de e
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §1.2, §2.3, §2.4 y §7, fuente única de las 36 condiciones.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4 y §6.
 - [`../../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md`](ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), la decisión del nivel 0 que ésta continúa.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), el conjunto cerrado del otro lado de la frontera.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), el conjunto cerrado del otro lado de la frontera.
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-03`), §17.2.P.11 punto 2 y §17.2.P.12.
 - ADR relacionadas: [`ADR-04003`](ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md), [`ADR-04004`](ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md).
 

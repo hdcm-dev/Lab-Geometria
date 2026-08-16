@@ -88,7 +88,7 @@ Motivación upstream: NB-00004, NB-00008, NB-00009; RN-00002, RN-00003, RN-00006
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-00003, RN-00006, RN-00009, RN-00010, RN-00015), §14 (RA-03), §17.5.P.5 y §17.5.P.10.
 - [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §4, §5 y §6, de donde sale la tabla que [`../Contratos-REST.md`](../Contratos-REST.md) §5 adopta.
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §1.5, §2.2, §2.3 y §2.4.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), que es el conjunto cerrado que esta ADR traduce y no amplía.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), que es el conjunto cerrado que esta ADR traduce y no amplía.
 - ADR relacionadas: [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00003`](ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md).
 
 ## 10. Control de cambios

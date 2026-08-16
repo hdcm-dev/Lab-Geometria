@@ -1,0 +1,707 @@
+[
+ {
+  "origen": "Handoff-Checkout.md",
+  "viejo": "Proyectos/GeometriaFactory-Contracts/11-Documentacion/README.md",
+  "nuevo": "_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/11-Documentacion/README.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md",
+  "viejo": "../../02-Especificacion-Funcional/Especificacion-Funcional.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md",
+  "viejo": "../Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md",
+  "viejo": "../../02-Especificacion-Funcional/Especificacion-Funcional.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "viejo": "../Contratos-Abstractions.md",
+  "nuevo": "../Contratos-Inter-Unidad/Contratos-Abstractions.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "viejo": "../../03-UX-UI-DX/DX-Error-Messages.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "viejo": "../../03-UX-UI-DX/DX-Error-Messages.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "viejo": "../Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "viejo": "../../02-Especificacion-Funcional/Especificacion-Funcional.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "viejo": "../Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "viejo": "../../02-Especificacion-Funcional/Especificacion-Funcional.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "viejo": "../../02-Especificacion-Funcional/Especificacion-Funcional.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "viejo": "../Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "viejo": "../../02-Especificacion-Funcional/Especificacion-Funcional.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md"
+ },
+ {
+  "origen": "Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "viejo": "../../02-Especificacion-Funcional/Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md",
+  "nuevo": "../Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02008-Texto-Original-Conservado-Integro.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02004-Eliminacion-Acotada-Al-Borrador.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02005-Finalizacion-Sin-Errores-De-Validacion.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "viejo": "../../05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+  "nuevo": "Contratos-Abstractions.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08007-Contrato-De-Desenlace-De-La-Revision.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08007-Contrato-De-Desenlace-De-La-Revision.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02014-Provisoria-Producida-Por-El-Sistema.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "viejo": "../../../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md",
+  "nuevo": "../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "../02-Especificacion-Funcional/Especificacion-Funcional.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md",
+  "nuevo": "../Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "../Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "../Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "nuevo": "../Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "../03-UX-UI-DX/DX-Error-Messages.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "nuevo": "../Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md",
+  "viejo": "Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Pipeline-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "nuevo": "Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md"
+ },
+ {
+  "origen": "Producto/Pipeline-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "nuevo": "Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+  "nuevo": "Contratos-Inter-Unidad/Contratos-Abstractions.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+  "nuevo": "Contratos-Inter-Unidad/Contratos-Abstractions.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md",
+  "nuevo": "Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "nuevo": "Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "nuevo": "Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Producto/Vista-Producto.md",
+  "viejo": "../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "nuevo": "Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/DX-Error-Messages.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+  "nuevo": "../../../Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "nuevo": "../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md",
+  "nuevo": "../../../Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Application/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "../../../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_fusion/Infrastructure/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_fusion/Application/Backlog-Tecnico.md",
+  "viejo": "../../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_fusion/Infrastructure/Backlog-Tecnico.md",
+  "viejo": "../../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/historias-usuario/US-04018-Ver-El-Desenlace-Y-El-Comentario-Del-Trabajo-Propio.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/historias-usuario/US-06011-Excluir-Componentes-Y-Texto-Original-Del-Resultado-De-Un-Listado.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/Estrategia-Versionado.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/09-Devops/Estrategia-Versionado.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Estrategia-Versionado.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10001-Registrar-La-Cuenta-De-Alumno.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10001-Registrar-La-Cuenta-De-Alumno.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10003-Establecer-Y-Cambiar-La-Contrasena-Propia.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10003-Establecer-Y-Cambiar-La-Contrasena-Propia.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10003-Establecer-Y-Cambiar-La-Contrasena-Propia.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10003-Establecer-Y-Cambiar-La-Contrasena-Propia.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10004-Administrar-Las-Cuentas-De-La-Comision.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10005-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10005-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10007-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10007-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10008-Recorrer-La-Entrega-De-La-Comision.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10008-Recorrer-La-Entrega-De-La-Comision.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10009-Resolver-Un-Trabajo-Con-Comentario-Opcional.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08007-Contrato-De-Desenlace-De-La-Revision.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08007-Contrato-De-Desenlace-De-La-Revision.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10009-Resolver-Un-Trabajo-Con-Comentario-Opcional.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10009-Resolver-Un-Trabajo-Con-Comentario-Opcional.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Casos-De-Uso/CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md",
+  "nuevo": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10005-Estado-Degradado-Como-Superficie.md",
+  "viejo": "../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md",
+  "nuevo": "../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md",
+  "nuevo": "../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md",
+  "nuevo": "../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/README.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md",
+  "nuevo": "../../../Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md"
+ },
+ {
+  "origen": "Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+  "viejo": "../../../Proyectos/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md",
+  "nuevo": "../../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/09-Devops/Pipeline-CI-CD.md"
+ }
+]

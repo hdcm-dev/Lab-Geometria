@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el detalle de un trab
 
 ## 2. Contexto
 
-`NB-00009` pide desenlace explícito de la entrega. El contrato de uso es [`CU-04006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md). El roadmap §5.2 precisa, en la transición `h` → `i…`, que el alumno ve **el desenlace en su propio listado** y **el comentario al abrir el trabajo** desde ese listado; el comentario no viaja en la proyección de listado, por [`Contracts ADR-08005`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md).
+`NB-00009` pide desenlace explícito de la entrega. El contrato de uso es [`CU-04006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-04006-Consultar-Los-Trabajos-Propios-Del-Alumno.md). El roadmap §5.2 precisa, en la transición `h` → `i…`, que el alumno ve **el desenlace en su propio listado** y **el comentario al abrir el trabajo** desde ese listado; el comentario no viaja en la proyección de listado, por [`Contracts ADR-08005`](../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md).
 
 ## 3. Criterios de aceptación
 

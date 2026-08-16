@@ -50,7 +50,7 @@ Motivación upstream: `PRODUCT-INTAKE` §17.4.P.3, §17.4.P.6, §17.4.P.7 y §17
 
 ## 6. Consecuencias negativas y trade-offs
 
-1. **Se acepta el acoplamiento de calendario entre las dos unidades desplegables.** Es el precio de no tener versionado de rutas, y el riesgo correspondiente está registrado en [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §9.
+1. **Se acepta el acoplamiento de calendario entre las dos unidades desplegables.** Es el precio de no tener versionado de rutas, y el riesgo correspondiente está registrado en [`../Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §9.
 2. **Se acepta que este proyecto de código no tenga batería propia.** Su verificación depende de que la batería de integración cubra todos los tipos, y ese porcentaje está rotulado `[ASUNCIÓN]`.
 3. **Se acepta que haya cambios incompatibles que la compilación no detecta.** §7 los enumera, y la mitigación es la revisión más las dos pruebas de inspección de CA-01 y CA-09 de CU-08006.
 
@@ -85,8 +85,8 @@ Qué constituye cada clase de cambio sobre este contrato:
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.4.P.3, §17.4.P.6, §17.4.P.7 y §17.4.P.8.
-- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §6, `RT-06` y `RT-07`.
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) §17.
+- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §6, `RT-06` y `RT-07`.
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §17.
 - ADR relacionadas: [`ADR-08001`](ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md), [`ADR-08002`](ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md).
 
 ## 10. Control de cambios

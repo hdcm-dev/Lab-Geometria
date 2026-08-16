@@ -94,7 +94,7 @@ Permitir que un alumno de la comisión se dé de alta en el laboratorio con su c
 | --- | --- |
 | Necesidad de negocio | [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md), [`NB-00001`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00001-Control-De-Admision-Al-Laboratorio.md) |
 | Reglas de negocio aplicables | [`RN-02002`](../../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md), [`RN-02006`](../../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md). Se hacen cumplir en `GeometriaFactory-Domain`; acá se respetan y se explican, nunca se reimplementan |
-| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08002](../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08002-Contrato-De-Administracion-De-Cuentas.md) pasos 1 y 2; [`CU-08006`](../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) |
+| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08002](../../../../Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md) pasos 1 y 2; [`CU-08006`](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) |
 | Fachada del visualizador | Ninguna función. Este caso de uso no dibuja |
 | Historias de usuario a generar en 06 | US-10001, US-10002 |
 | Componentes esperados en 05 | Página pública de registro y cliente tipado de la pieza de datos, ambos del lado del servidor de la pieza pública |

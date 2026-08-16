@@ -90,7 +90,7 @@ Motivación upstream: NB-00003, NB-00004, NB-00009; RN-00008, RN-00009; `PRODUCT
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.18** §4.1 (RN-00008, RN-00009), §17.4.P.3, §17.4.P.11 punto 2, §17.5.P.3 y §20.E-8.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) §6 punto 4, que es el trade-off que esta ADR cierra.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md`](../../../../Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) §6 punto 4, que es el trade-off que esta ADR cierra.
 - [`../../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 `PA-03`, que reasigna la decisión a esta categoría.
 - [`../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md`](ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2 punto 3, que reasigna el límite de tamaño acá con la exigencia de rechazar y no truncar.
 - ADR relacionadas: [`ADR-00004`](ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md), [`ADR-00006`](ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md), [`ADR-00008`](ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md).

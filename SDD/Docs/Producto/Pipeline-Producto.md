@@ -141,7 +141,7 @@ Cómo obtiene cada consumidor el artefacto de su productor, arista por arista. *
 | Esquema de versión | Versionado semántico 2.0.0, sin excepciones | Intake §17 P.7 de cada proyecto de código |
 | Unidad de versionado | La **etapa cerrada** del producto, etiquetada en el repositorio | Intake §15 |
 | Sufijos de anticipo | **No se usan**: no hay canal donde publicar un anticipo | [`Web/Estrategia-Versionado.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Estrategia-Versionado.md) |
-| Versionado del contrato compartido | **Por compilación compartida**: un cambio incompatible rompe la compilación de los dos extremos antes que el tiempo de ejecución | [`Contracts ADR-08003`](../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
+| Versionado del contrato compartido | **Por compilación compartida**: un cambio incompatible rompe la compilación de los dos extremos antes que el tiempo de ejecución | [`Contracts ADR-08003`](Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
 | Versionado de la superficie HTTP | **No se versionan las rutas**, y la contrapartida aceptada es el **despliegue conjunto** | [`Api ADR-00008`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) |
 
 **Cómo se coordina un cambio del productor con sus consumidores.** Un cambio incompatible de `GeometriaFactory-Contracts` no necesita coordinación de versiones porque no hay versiones que coordinar: rompe la compilación de `Api` y de `Web` en el mismo build. Lo que sí necesita coordinación es el **despliegue**, y ahí la regla es dura: las dos unidades salen desde el mismo estado del repositorio o la etapa no se cierra.
@@ -197,7 +197,7 @@ Cada elemento de este documento contra la fuente que lo produce.
 | Artefacto de `GeometriaFactory-Visor` | [`Guia-Publicacion-Bundle-Visor.md`](../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Bundle-Visor.md), tipo de artefacto `Bundle-Visor` |
 | Ausencia de guía en los otros cuatro | La sección de ambientes y canales de cada uno, bajo `Proyectos/<Nombre>/09-Devops/Entornos-Deploy.md`, con su apartamiento declarado |
 | Gates de §6 | [`Api/Pipeline-CI-CD.md`](../Unidades-Entrega/GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md) §2.1 y §9; intake §15, tabla de puertas técnicas |
-| Reglas de despliegue conjunto de §5 y §7 | [`Api ADR-00008`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) y [`Contracts ADR-08003`](../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
+| Reglas de despliegue conjunto de §5 y §7 | [`Api ADR-00008`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) y [`Contracts ADR-08003`](Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) |
 
 **Los 77 quality gates del producto no se reindexan acá.** Están repartidos por proyecto de código —`Api` 15, `Infrastructure` 14, `Application` 11, `Web` 11, `Contracts` 9, `Visor` 9 y `Domain` 8—, cada uno con su umbral y su carácter en la categoría `09` que lo declara. Copiarlos produciría una segunda fuente de verdad sobre setenta y siete umbrales, que es el defecto que este corpus tiene documentado como el más caro.
 

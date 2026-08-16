@@ -222,7 +222,7 @@ construcción del guardián. **Ninguna decisión cambia: §2 lo declaraba entero
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §4.1 (`RN-10013`, `RN-10016`), §17.1.P.2 (`INV-09`), §17.6.P.4 y §17.6.P.5.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §2, §5 y §6 (`RT-02`, `RT-09`, `RT-12`).
 - [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §3.2, los dos shells y los tres destinos por papel.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), por la regla de exposición de la frontera y por el tratamiento de las credenciales en claro.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md`](../../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), por la regla de exposición de la frontera y por el tratamiento de las credenciales en claro.
 - ADR relacionadas: [`ADR-10001`](ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md), [`ADR-10002`](ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md).
 
 ## 10. Control de cambios

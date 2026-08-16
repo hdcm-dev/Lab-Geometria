@@ -16,7 +16,7 @@ Todo fallo que cruza la frontera entre las dos unidades desplegables tiene que l
 
 A la vez, RA-03 prohíbe que un mensaje exponga la dirección de un servicio interno. Cada tipo capaz de transportar texto libre hacia la unidad pública es un lugar donde esa prohibición se puede violar, de modo que **la cantidad de tipos de error es una superficie de riesgo**.
 
-El conjunto de códigos tiene historia y conviene tenerla presente al decidir: creció de trece a catorce, a dieciséis y a diecisiete; **se achicó por primera vez a quince** cuando RN-08016 unificó los dos mecanismos de credencial inicial del producto y dos códigos perdieron su causa; y volvió a **diecisiete** cuando el Product Owner incorporó `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que **este proyecto de código emite formalmente** en [`../Contratos-Abstractions.md`](../Contratos-Abstractions.md) §5.1. El catálogo de la categoría 03 enumera hoy **veinte identificadores emitidos —diecisiete vivos y tres retirados—**, y es la única tabla del proyecto de código donde están juntos ([`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §3.2).
+El conjunto de códigos tiene historia y conviene tenerla presente al decidir: creció de trece a catorce, a dieciséis y a diecisiete; **se achicó por primera vez a quince** cuando RN-08016 unificó los dos mecanismos de credencial inicial del producto y dos códigos perdieron su causa; y volvió a **diecisiete** cuando el Product Owner incorporó `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que **este proyecto de código emite formalmente** en [`../Contratos-Abstractions.md`](../Contratos-Inter-Unidad/Contratos-Abstractions.md) §5.1. El catálogo de la categoría 03 enumera hoy **veinte identificadores emitidos —diecisiete vivos y tres retirados—**, y es la única tabla del proyecto de código donde están juntos ([`../../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) §3.2).
 
 Motivación upstream: NB-00002, NB-00004, NB-00008, NB-00009; RN-08003, RN-08009, RN-08010, RN-08011, RN-08013, RN-08015, RN-08016; RA-03.
 
@@ -30,7 +30,7 @@ Tres reglas que acompañan a la decisión:
 2. **El conjunto se cierra por abajo con `CONTRATO_ERROR_NO_CLASIFICADO`**, que garantiza que ningún fallo llegue sin representación y evita tener que agregar un código ante cada situación nueva.
 3. **Ningún identificador retirado se recicla.** Un identificador que salió del conjunto no vuelve a nombrar otra condición.
 
-La fuente de verdad del conjunto es el contrato de uso [`CU-08006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) de la categoría 02; esta ADR no acuña ningún código.
+La fuente de verdad del conjunto es el contrato de uso [`CU-08006`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) de la categoría 02; esta ADR no acuña ningún código.
 
 ## 3. Estado
 
@@ -41,7 +41,7 @@ La fuente de verdad del conjunto es el contrato de uso [`CU-08006`](../../02-Esp
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Un tipo de error único con conjunto cerrado (**adoptada**) | Un solo lugar donde se puede filtrar una dirección de servicio; el consumidor trata el error igual venga de donde venga; el conjunto es enumerable e inspeccionable | El tipo tiene que servir a ocho familias, así que sus campos son genéricos; y el conjunto crece con el producto |
-| Un tipo de error por familia de tipos | Cada familia declararía exactamente sus condiciones, con campos a medida | Multiplica por ocho los lugares donde RA-03 se puede violar, y obliga a la unidad pública a ocho tratamientos del mismo trabajo. Es la razón que declara [`CU-08006`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) §10 |
+| Un tipo de error por familia de tipos | Cada familia declararía exactamente sus condiciones, con campos a medida | Multiplica por ocho los lugares donde RA-03 se puede violar, y obliga a la unidad pública a ocho tratamientos del mismo trabajo. Es la razón que declara [`CU-08006`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §10 |
 | Conjunto **abierto** de códigos, con cadena libre | Nunca hay que agregar un código; el servicio de datos informa lo que quiera | El consumidor no puede tratar exhaustivamente los casos y termina mostrando texto crudo, que es por donde se filtra una dirección de servicio. Y el conjunto deja de ser verificable |
 | Un código por operación bloqueada por el cambio de contraseña pendiente | Le diría al consumidor exactamente qué operación rechazó | Información que el consumidor no usa: el trabajo que le queda es siempre el mismo, derivar al cambio de contraseña. Es el criterio que CA-07 y CA-08 de CU-08006 verifican |
 
@@ -80,8 +80,8 @@ La fuente de verdad del conjunto es el contrato de uso [`CU-08006`](../../02-Esp
 
 ## 9. Referencias
 
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) §6, §8, §10 y §17.
-- [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.2, §3.2 y §3.3.
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §6, §8, §10 y §17.
+- [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) §2.2, §3.2 y §3.3.
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-03), §17.4.P.5 y §4.1 (RN-08009, RN-08013, RN-08015, RN-08016).
 - ADR relacionadas: [`ADR-08004`](ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), [`ADR-08003`](ADR-08003-Versionado-Por-Compilacion-Compartida.md).
 

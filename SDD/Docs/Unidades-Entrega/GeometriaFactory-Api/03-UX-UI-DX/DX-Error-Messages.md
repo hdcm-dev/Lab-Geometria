@@ -140,7 +140,7 @@ Una respuesta de esta superficie con ese código sería una contradicción en su
 
 ### 2.4 Los dos huecos del conjunto cerrado, **cerrados**
 
-Estaban elevados al Product Owner y **el Product Owner los resolvió** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): el ensamblado de contratos incorporó **un código propio para cada uno**, y `GeometriaFactory-Contracts` los emite formalmente en [`../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md) §5.1. **Esta categoría no inventó ninguno**, que era la condición con la que los declaró abiertos.
+Estaban elevados al Product Owner y **el Product Owner los resolvió** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): el ensamblado de contratos incorporó **un código propio para cada uno**, y `GeometriaFactory-Contracts` los emite formalmente en [`../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Contratos-Abstractions.md`](../../../Producto/Contratos-Inter-Unidad/Contratos-Abstractions.md) §5.1. **Esta categoría no inventó ninguno**, que era la condición con la que los declaró abiertos.
 
 | Hueco | Qué faltaba | Con qué se cerró |
 | --- | --- | --- |

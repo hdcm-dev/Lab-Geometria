@@ -81,7 +81,7 @@ Motivación upstream: NB-00007, NB-00009; RN-00003, RN-00011; INV-02; `PRODUCT-I
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4.1 (RN-00003, RN-00011), §17.3.P.12, §17.4.P.10 y §17.5.P.10.
 - [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 y §4.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), que es la decisión que sostiene el requerimiento de tiempo.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md`](../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), que es la decisión que sostiene el requerimiento de tiempo.
 - ADR relacionadas: [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00008`](ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md).
 
 ## 10. Control de cambios

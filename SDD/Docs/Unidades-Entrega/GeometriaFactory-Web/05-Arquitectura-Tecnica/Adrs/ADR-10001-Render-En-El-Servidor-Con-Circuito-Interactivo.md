@@ -84,7 +84,7 @@ El repliegue del transporte a uno de mayor latencia es **aceptable y no se anunc
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §14 (`RA-01`, `RA-03`), §17.6.P.2, §17.6.P.3, §17.6.P.10 y §17.6.P.12.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §2 y §6 (`RT-01`).
 - [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §2.4 y §7.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), que declara del otro lado que **todas** las solicitudes las arma el servidor de la unidad pública.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md`](../../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md), que declara del otro lado que **todas** las solicitudes las arma el servidor de la unidad pública.
 - ADR relacionadas: [`ADR-10003`](ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md), [`ADR-10004`](ADR-10004-Tres-Capas-De-Presentacion.md), [`ADR-10006`](ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md).
 
 ## 10. Control de cambios

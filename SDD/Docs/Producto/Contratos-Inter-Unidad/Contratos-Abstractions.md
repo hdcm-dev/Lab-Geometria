@@ -33,15 +33,15 @@
 
 Este documento declara la superficie pública de `GeometriaFactory-Contracts`: **el conjunto de tipos que atraviesan la frontera entre las dos unidades desplegables del producto**, y el único que la atraviesa (`PRODUCT-INTAKE` §14).
 
-Los casos de uso que se materializan a través de este contrato son los **ocho** de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, y sus consumidores son **dos**: `GeometriaFactory-Api`, que produce, y `GeometriaFactory-Web`, que consume; los dos lo referencian por proyecto de código (`PRODUCT-MANIFEST` §2).
+Los casos de uso que se materializan a través de este contrato son los **ocho** de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §3, y sus consumidores son **dos**: `GeometriaFactory-Api`, que produce, y `GeometriaFactory-Web`, que consume; los dos lo referencian por proyecto de código (`PRODUCT-MANIFEST` §2).
 
 **No hay integradores externos.** `redistribuible` es false y los dos consumidores son del mismo producto, compilados contra el mismo ensamblado.
 
 ## 2. Formato
 
-**Contrato de tipos compilados, declarado en prosa estructurada.** No hay descripción formal del servicio ni clientes generados: `PRODUCT-INTAKE` §17.4.P.2 descarta esa alternativa por costo de cadena de herramientas frente a dos consumidores compilados juntos, y [`ADR-08001`](Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) la registra.
+**Contrato de tipos compilados, declarado en prosa estructurada.** No hay descripción formal del servicio ni clientes generados: `PRODUCT-INTAKE` §17.4.P.2 descarta esa alternativa por costo de cadena de herramientas frente a dos consumidores compilados juntos, y [`ADR-08001`](../Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) la registra.
 
-**El formato de intercambio no se fija acá.** Este proyecto de código exige que los tipos sean serializables sin comportamiento; qué formato se usa y cómo se configura pertenece a `GeometriaFactory-Api` y a `GeometriaFactory-Web`. Es el punto abierto PA-03 de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §11.
+**El formato de intercambio no se fija acá.** Este proyecto de código exige que los tipos sean serializables sin comportamiento; qué formato se usa y cómo se configura pertenece a `GeometriaFactory-Api` y a `GeometriaFactory-Web`. Es el punto abierto PA-03 de [`Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11.
 
 **Los nombres de tipos y de campos tampoco se fijan acá.** Se anclan en la etapa que implementa cada familia (punto abierto PA-01).
 
@@ -66,9 +66,9 @@ Los cuatro códigos que no figuran como propios de ninguna familia —`CONTRATO_
 
 ### 4.1 Familias de tipos
 
-Las ocho familias son los componentes de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §3.1. Dos precisiones de forma que gobiernan al resto:
+Las ocho familias son los componentes de [`Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. Dos precisiones de forma que gobiernan al resto:
 
-1. **La respuesta de sesión declara exactamente cuatro campos y ninguno más.** Las tres condiciones que impiden operar viajan como respuesta de error con código propio ([`ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md)).
+1. **La respuesta de sesión declara exactamente cuatro campos y ninguno más.** Las tres condiciones que impiden operar viajan como respuesta de error con código propio ([`ADR-08004`](../Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md)).
 2. **El tipo de error declara exactamente cuatro campos**: código, texto neutro, colección de detalles de ubicación y momento. Cada detalle lleva el nombre del campo señalado y, cuando el fallo proviene de la interpretación del texto del alumno, el índice de figura.
 
 ### 4.2 Conjuntos cerrados
@@ -86,19 +86,19 @@ Las ocho familias son los componentes de [`Arquitectura-Proyecto-Codigo.md`](Arq
 
 ### 4.3 Lo que ningún tipo lleva
 
-Es la lista cerrada de [`ADR-08004`](Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) §2, y se repite acá porque es parte del contrato y no de su fundamento: el hash de la contraseña, la clave de firma, cualquier dirección de servicio interno, las rutas de archivos de datos y las trazas de la implementación, y ninguna condición que impida operar como campo de la respuesta de sesión.
+Es la lista cerrada de [`ADR-08004`](../Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) §2, y se repite acá porque es parte del contrato y no de su fundamento: el hash de la contraseña, la clave de firma, cualquier dirección de servicio interno, las rutas de archivos de datos y las trazas de la implementación, y ninguna condición que impida operar como campo de la respuesta de sesión.
 
 Y tres ausencias más, de las que cada una tiene su motivo:
 
 | Ausencia | Motivo |
 | --- | --- |
-| La proyección de listado no lleva texto original, ni componentes de pieza, ni comentario del administrador | [`ADR-08005`](Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md) |
+| La proyección de listado no lleva texto original, ni componentes de pieza, ni comentario del administrador | [`ADR-08005`](../Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md) |
 | La solicitud de reseteo no lleva campo de contraseña | La provisoria la produce el sistema (RN-08014) |
 | No existe ningún tipo de establecimiento anónimo de contraseña | RN-08016 unificó los dos mecanismos de credencial inicial. El **registro de cuenta sigue siendo anónimo por diseño** y su solicitud es un tipo de este ensamblado |
 
 ## 5. Manejo de errores
 
-Un único tipo de error para las ocho familias, con conjunto cerrado de códigos ([`ADR-08002`](Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)). El texto es **neutro** y nunca contiene la dirección del servicio que falló.
+Un único tipo de error para las ocho familias, con conjunto cerrado de códigos ([`ADR-08002`](../Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md)). El texto es **neutro** y nunca contiene la dirección del servicio que falló.
 
 ### 5.1 Los diecisiete códigos vivos
 
@@ -124,7 +124,7 @@ La lista es la unión de las §6 de los ocho contratos de uso de la categoría 0
 | 16 | `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | CU-08003, CU-08006 |
 | 17 | `CONTRATO_ERROR_NO_CLASIFICADO` | CU-08006 |
 
-**Diecisiete códigos**, dos de ellos incorporados por decisión del Product Owner (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que este documento **emite formalmente**: el 15 y el 16. **Cinco** de ellos —el 1, el 2, el 3, el 6 y el 15— aparecen en más de un contrato de uso con la **misma** causa, y siguen siendo un código cada uno: la unidad del conjunto es la condición, no la operación. El catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) los desarrolla con su texto neutro propuesto.
+**Diecisiete códigos**, dos de ellos incorporados por decisión del Product Owner (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que este documento **emite formalmente**: el 15 y el 16. **Cinco** de ellos —el 1, el 2, el 3, el 6 y el 15— aparecen en más de un contrato de uso con la **misma** causa, y siguen siendo un código cada uno: la unidad del conjunto es la condición, no la operación. El catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) los desarrolla con su texto neutro propuesto.
 
 **Los dos códigos que entran, y por qué ninguno de los que había alcanzaba** (`PRODUCT-INTAKE` **1.29** §17.4 P.3).
 
@@ -163,7 +163,7 @@ Se catalogan para que no se traten como error, y **no se cuentan entre los dieci
 
 ## 6. Versionado del contrato
 
-Aplica el criterio de [`ADR-08003`](Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) §7. Lo esencial, sobre los elementos de este contrato:
+Aplica el criterio de [`ADR-08003`](../Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md) §7. Lo esencial, sobre los elementos de este contrato:
 
 | Cambio | Clase | ¿Lo detecta la compilación? |
 | --- | --- | --- |
@@ -182,8 +182,8 @@ Aplica el criterio de [`ADR-08003`](Adrs/ADR-08003-Versionado-Por-Compilacion-Co
 | Dimensión | Referencia |
 | --- | --- |
 | CU que lo consumen | CU-08001 a CU-08008, los ocho de la categoría 02 de este proyecto de código |
-| RN que cubre | Ninguna redactada acá. Transporta las dieciséis, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
-| Restricciones transversales que materializa | `RT-01` a `RT-11`, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2 |
+| RN que cubre | Ninguna redactada acá. Transporta las dieciséis, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.3 |
+| Restricciones transversales que materializa | `RT-01` a `RT-11`, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.2 |
 | ADR que lo gobiernan | ADR-08001, ADR-08002, ADR-08003, ADR-08004, ADR-08005 |
 | Consumidores | `GeometriaFactory-Api` y `GeometriaFactory-Web` |
 | Tests previstos en 08 | Al menos una prueba de integración por tipo; prueba de inspección de superficie pública para §4.3; prueba de inspección del conjunto cerrado para §5.1 y §5.2 |

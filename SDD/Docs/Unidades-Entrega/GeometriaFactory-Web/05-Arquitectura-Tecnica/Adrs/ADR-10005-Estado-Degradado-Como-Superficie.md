@@ -82,7 +82,7 @@ Y la regla que hace posible distinguir sin adivinar: **el listado vacío se dist
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §7 (`CL-2`), §14 (`RA-03`), §17.6.P.5 y §17.6.P.10.
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 (`RT-03`, `RT-07`) y [`CU-10010`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md).
 - [`../../03-UX-UI-DX/Wireframes-Estado-Degradado-Y-Reconexion.md`](../../03-UX-UI-DX/Wireframes-Estado-Degradado-Y-Reconexion.md) §1, la tabla que separa los dos tramos; [`../../03-UX-UI-DX/Experiencia-De-Uso.md`](../../03-UX-UI-DX/Experiencia-De-Uso.md) §4.1 y §8.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), el conjunto cerrado de diecisiete códigos vivos que este traductor cubre.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md`](../../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md), el conjunto cerrado de diecisiete códigos vivos que este traductor cubre.
 - ADR relacionadas: [`ADR-10002`](ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md), [`ADR-10004`](ADR-10004-Tres-Capas-De-Presentacion.md).
 
 ## 10. Control de cambios

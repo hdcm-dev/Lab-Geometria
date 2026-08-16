@@ -16,7 +16,7 @@ El producto tiene **dos unidades desplegables** —la pública, en el hosting, y
 
 `GeometriaFactory-Contracts` es **el único tipo de dato que cruza esa frontera** (`PRODUCT-INTAKE` §14, tabla de contratos expuestos). Es nivel 0 del orden topológico y no depende de nada; en particular, `PRODUCT-INTAKE` §17.4.P.8 declara como quality gate bloqueante que **no referencie `GeometriaFactory-Domain`**, «porque es la vía por la que el acoplamiento vuelve».
 
-Motivación upstream: NB-00001 a NB-00009, las nueve, en el grado que declara [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4.1; RN-08001 a RN-08016, todas transportadas y ninguna redactada acá; RA-01 y RA-03.
+Motivación upstream: NB-00001 a NB-00009, las nueve, en el grado que declara [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §4.1; RN-08001 a RN-08016, todas transportadas y ninguna redactada acá; RA-01 y RA-03.
 
 ## 2. Decisión
 
@@ -56,7 +56,7 @@ La unidad de organización interna es la **familia de tipos**, que es la unidad 
 ## 7. Implementación
 
 - Un archivo de proyecto **sin ninguna referencia** a otro proyecto de código del producto ni a bibliotecas de serialización.
-- Ocho familias de tipos, según [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1, con las dependencias apuntando a la familia de error y la única arista adicional de reseteo hacia cuentas.
+- Ocho familias de tipos, según [`../Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, con las dependencias apuntando a la familia de error y la única arista adicional de reseteo hacia cuentas.
 - Convención impuesta: **nada de comportamiento**. Ni descriptores de acceso con lógica, ni campos calculados, ni métodos de conveniencia que interpreten el texto original.
 - Los cuatro estados del trabajo viajan como conjunto cerrado, y **ningún tipo permite salir de `Finalizado` ni de `Rechazado`**, que es la restricción `RT-08` de la categoría 02.
 
@@ -74,7 +74,7 @@ La unidad de organización interna es la **familia de tipos**, que es la unidad 
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14, §17.4.P.1, §17.4.P.2, §17.4.P.3, §17.4.P.8, §17.4.P.11 y §17.4.P.12.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` 1.2 §2 y §3.
-- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §1, §3.1 y §6 (`RT-03`, `RT-05`, `RT-08`).
+- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §1, §3.1 y §6 (`RT-03`, `RT-05`, `RT-08`).
 - ADR relacionadas: [`ADR-08003`](ADR-08003-Versionado-Por-Compilacion-Compartida.md), [`ADR-08004`](ADR-08004-Regla-De-Exposicion-De-La-Frontera.md).
 
 ## 10. Control de cambios

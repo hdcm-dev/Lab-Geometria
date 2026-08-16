@@ -14,7 +14,7 @@
 
 `PRODUCT-INTAKE` §17.4.P.10 declara el único requerimiento no funcional propio de este proyecto de código, y es estructural: **el payload de listado de trabajos no incluye ni el texto original ni los componentes de las piezas**, para que el listado del administrador no arrastre el texto completo de cada trabajo. El valor viene rotulado `[ASUNCIÓN]` derivada de la fuente técnica.
 
-La categoría 02 lo amplió en su restricción transversal `RT-04`: la proyección tampoco lleva **el comentario del administrador**. Y separó CU-08004 de CU-08005 con un fundamento explícito: la proyección de listado existe precisamente para **no** ser el detalle, y con un único contrato de uso de lectura la restricción no tendría dónde verificarse ([`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3.1).
+La categoría 02 lo amplió en su restricción transversal `RT-04`: la proyección tampoco lleva **el comentario del administrador**. Y separó CU-08004 de CU-08005 con un fundamento explícito: la proyección de listado existe precisamente para **no** ser el detalle, y con un único contrato de uso de lectura la restricción no tendría dónde verificarse ([`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §3.1).
 
 Hay además una separación de forma que se decide en el mismo lugar: **el comentario del administrador viaja en el detalle como bloque propio y nunca como elemento de la colección de observaciones**, y no comparten ni un campo (`RT-09`). Son cosas distintas: la observación la emite el producto al interpretar el texto y hay tantas como defectos; el comentario lo escribe una persona y hay a lo sumo uno.
 
@@ -51,7 +51,7 @@ Motivación upstream: NB-00003, NB-00005, NB-00007, NB-00009; RN-08008, RN-08009
 ## 6. Consecuencias negativas y trade-offs
 
 1. **Se acepta un viaje adicional** cuando una pantalla necesita un dato del detalle sobre un elemento del listado.
-2. **Se acepta la presión constante de la capa de presentación** para incorporar un campo del detalle al listado. Está registrada como riesgo en [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §9, con probabilidad alta.
+2. **Se acepta la presión constante de la capa de presentación** para incorporar un campo del detalle al listado. Está registrada como riesgo en [`../Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §9, con probabilidad alta.
 3. **Se acepta que el alcance de lo que cada papel ve no se pueda verificar acá.** El contrato transporta lo mismo para los dos y la acotación es del dominio; la verificación de que el administrador no ve los borradores pertenece a la batería de integración.
 
 ## 7. Implementación
@@ -74,8 +74,8 @@ Motivación upstream: NB-00003, NB-00005, NB-00007, NB-00009; RN-08008, RN-08009
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.4.P.10, §12 (entrada «comentario») y §4 (F-21).
-- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3.1 y §6 (`RT-04`, `RT-09`).
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md) y [`CU-08005`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md).
+- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §3.1 y §6 (`RT-04`, `RT-09`).
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md`](../Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md) y [`CU-08005`](../Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md).
 - ADR relacionadas: [`ADR-08001`](ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md), [`ADR-08003`](ADR-08003-Versionado-Por-Compilacion-Compartida.md).
 
 ## 10. Control de cambios

@@ -70,7 +70,7 @@ Y dos decisiones de forma que la acompañan:
 
 ## 7. Implementación
 
-- Las ocho familias de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 se revisan contra la lista de §2, campo por campo.
+- Las ocho familias de [`../Arquitectura-Proyecto-Codigo.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 se revisan contra la lista de §2, campo por campo.
 - El tipo de error declara **cuatro** campos y ninguno capaz de transportar lo prohibido.
 - La respuesta de sesión declara **cuatro** campos y ninguno más.
 - La solicitud de reseteo lleva **sólo el identificador de cuenta**: no lleva campo de contraseña, porque la provisoria la produce el sistema (RN-08014).
@@ -90,8 +90,8 @@ Y dos decisiones de forma que la acompañan:
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §14 (RA-01, RA-02, RA-03), §17.4.P.5, §17.5.P.5 y §4.1 (RN-08013, RN-08014, RN-08016).
-- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §2 y §6 (`RT-01`, `RT-02`, `RT-10`, `RT-11`).
-- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) §7 y §8; [`CU-08001`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md); [`CU-08008`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md).
+- [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/02-Especificacion-Funcional/Especificacion-Funcional.md) §2 y §6 (`RT-01`, `RT-02`, `RT-10`, `RT-11`).
+- [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §7 y §8; [`CU-08001`](../Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md); [`CU-08008`](../Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md).
 - ADR relacionadas: [`ADR-08001`](ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md), [`ADR-08002`](ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md).
 
 ## 10. Control de cambios

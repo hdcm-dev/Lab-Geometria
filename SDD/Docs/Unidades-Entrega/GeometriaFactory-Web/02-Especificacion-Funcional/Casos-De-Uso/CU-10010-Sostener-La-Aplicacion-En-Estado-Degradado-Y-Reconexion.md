@@ -104,7 +104,7 @@ El actor primario es uno solo y no distingue papeles: el tratamiento es el mismo
 | --- | --- |
 | Necesidad de negocio | [`NB-00008`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md) |
 | Reglas de negocio aplicables | **Ninguna, y con motivo.** Las **dieciséis** reglas del producto restringen el dominio —cuentas, trabajos, estados y observaciones— y este caso de uso no toca ninguno de esos objetos: gobierna la presentación de la indisponibilidad. Lo que sí lo restringe es la regla de arquitectura de nivel producto RA-03, verificada en CA-02, y su enunciado vive en `PRODUCT-INTAKE` §14. Inventar una `RN-XX` acá sería redactar una regla que no existe aguas arriba |
-| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08006](../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) completo, en particular sus códigos `CONTRATO_SERVICIO_NO_DISPONIBLE` y `CONTRATO_ERROR_NO_CLASIFICADO` |
+| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08006](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) completo, en particular sus códigos `CONTRATO_SERVICIO_NO_DISPONIBLE` y `CONTRATO_ERROR_NO_CLASIFICADO` |
 | Fachada del visualizador | Ninguna función. El bundle no hace red y por eso no participa de ningún tramo |
 | Historias de usuario a generar en 06 | US-10026, US-10027 |
 | Componentes esperados en 05 | Tratamiento transversal de la respuesta de error del contrato, componente de estado degradado y cartel de reconexión del circuito |

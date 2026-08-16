@@ -87,7 +87,7 @@ Además: **la negativa por pertenencia y la negativa por facultad no se colapsan
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §4, con sus cinco precisiones.
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.4, la tabla de traducciones prohibidas.
 - [`../../../GeometriaFactory-Domain/05-Arquitectura-Tecnica/Adrs/ADR-02005-Guarda-Unica-De-Admisibilidad.md`](ADR-02005-Guarda-Unica-De-Admisibilidad.md) §6 punto 1, que es la dependencia de disciplina que esta ADR cierra.
-- [`../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md), por el código único de las operaciones bloqueadas por la marca.
+- [`../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md), por el código único de las operaciones bloqueadas por la marca.
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.2.P.5, §17.1.P.2 (INV-02, INV-03, INV-09) y §4.1 (RN-04003, RN-04013, RN-04016).
 - ADR relacionadas: [`ADR-04001`](ADR-04001-Casos-De-Uso-Con-Inversion-De-Dependencias.md), [`ADR-04006`](ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md).
 

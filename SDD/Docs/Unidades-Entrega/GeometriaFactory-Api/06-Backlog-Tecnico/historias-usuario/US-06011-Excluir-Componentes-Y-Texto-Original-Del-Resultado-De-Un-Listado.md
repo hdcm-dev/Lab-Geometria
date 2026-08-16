@@ -18,7 +18,7 @@ Como **código consumidor de la biblioteca**, quiero **que el resultado de un li
 
 ## 2. Contexto
 
-`PRODUCT-INTAKE` §17.3.P.12 declara que los componentes se persisten pese a su redundancia **porque son parte del ejercicio**, y que se compensa **no cargándolos nunca en las consultas de listado**. La proyección separada del detalle es además la decisión de [`Contracts ADR-08005`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md). El contrato de uso es [`CU-06003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
+`PRODUCT-INTAKE` §17.3.P.12 declara que los componentes se persisten pese a su redundancia **porque son parte del ejercicio**, y que se compensa **no cargándolos nunca en las consultas de listado**. La proyección separada del detalle es además la decisión de [`Contracts ADR-08005`](../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md). El contrato de uso es [`CU-06003`](../../02-Especificacion-Funcional/Casos-De-Uso/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md).
 
 ## 3. Criterios de aceptación
 

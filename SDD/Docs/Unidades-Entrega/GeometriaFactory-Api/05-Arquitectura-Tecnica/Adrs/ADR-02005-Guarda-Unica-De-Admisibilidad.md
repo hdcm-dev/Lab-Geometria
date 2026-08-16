@@ -45,7 +45,7 @@ En consecuencia, **ninguna otra operación del dominio vuelve a comprobar el est
 
 1. INV-06 e INV-09 se verifican en un solo componente, con una prueba por motivo.
 2. El catálogo de condiciones de 03 lo refleja: el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE` vive en CU-02004, que es donde el dominio ejerce la guarda.
-3. Aguas abajo, la capa que expone traduce **un solo código** para todas las operaciones bloqueadas por la marca, en lugar de uno por operación. Es exactamente lo que el contrato del producto ya decidió con `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` ([`../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) §10).
+3. Aguas abajo, la capa que expone traduce **un solo código** para todas las operaciones bloqueadas por la marca, en lugar de uno por operación. Es exactamente lo que el contrato del producto ya decidió con `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` ([`../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §10).
 4. Agregar una capacidad nueva al producto no obliga a agregarle una guarda de marca: le basta con pasar por la admisibilidad.
 
 ## 6. Consecuencias negativas y trade-offs

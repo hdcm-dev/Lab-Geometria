@@ -102,7 +102,7 @@ Darle al administrador un único lugar donde ver los trabajos de toda la comisi�
 | --- | --- |
 | Necesidad de negocio | [`NB-00007`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00007-Revision-De-La-Comision-En-Un-Solo-Lugar.md), [`NB-00009`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00009-Desenlace-Explicito-De-La-Entrega.md) |
 | Reglas de negocio aplicables | [`RN-02011`](../../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md), [`RN-02003`](../../../GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) |
-| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08004](../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08004-Contrato-De-Listado-De-Trabajos.md) flujo principal, FA-02, FA-03 y FA-04, y su señal §6.1; [`CU-08006`](../../../../Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md) |
+| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08004](../../../../Producto/Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md) flujo principal, FA-02, FA-03 y FA-04, y su señal §6.1; [`CU-08006`](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) |
 | Fachada del visualizador | Ninguna función. El listado no dibuja |
 | Historias de usuario a generar en 06 | US-10022, US-10023 |
 | Componentes esperados en 05 | Panel del administrador con el listado de la comisión, su agrupación y su filtro, y el panel de resumen de FA-04 |

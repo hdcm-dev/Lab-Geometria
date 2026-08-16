@@ -87,7 +87,7 @@ Sobre la clase de cambio se decide, además, la asimetría que la superficie de 
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §15, §17.2.P.3, §17.2.P.7 y §17.2.P.8; §17.1.P.7, al que §17.2.P.7 se declara idéntica.
 - `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2** §2, por `redistribuible` == false.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md), que toma la misma decisión para la frontera entre las dos unidades desplegables.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md`](../../../../Producto/Adrs/ADR-08003-Versionado-Por-Compilacion-Compartida.md), que toma la misma decisión para la frontera entre las dos unidades desplegables.
 - ADR relacionadas: [`ADR-04002`](ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md), [`ADR-04006`](ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md).
 
 ## 10. Control de cambios

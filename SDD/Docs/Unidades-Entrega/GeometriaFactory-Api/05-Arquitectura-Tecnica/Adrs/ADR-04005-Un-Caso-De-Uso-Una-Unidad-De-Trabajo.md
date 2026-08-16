@@ -80,7 +80,7 @@ Y sobre la forma de la consulta: **las consultas de listado no materializan los 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.16** §17.2.P.4, §17.2.P.10 y §4.1 (RN-04004, RN-04007, RN-04011, RN-04012).
 - [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../02-Especificacion-Funcional/Especificacion-Funcional.md) §3, última precisión.
 - [`../../../GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §7, donde el dominio deriva la atomicidad al puerto de repositorio que esta capa declara.
-- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md`](../../../../Proyectos/GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), la decisión equivalente del otro lado de la frontera.
+- [`../../../GeometriaFactory-Contracts/05-Arquitectura-Tecnica/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md`](../../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md), la decisión equivalente del otro lado de la frontera.
 - ADR relacionadas: [`ADR-04001`](ADR-04001-Casos-De-Uso-Con-Inversion-De-Dependencias.md), [`ADR-04002`](ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md).
 
 ## 10. Control de cambios
