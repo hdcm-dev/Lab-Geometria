@@ -344,11 +344,68 @@
 
             viewer.loadPieces(id, pieces);
 
+            // LA ESCENA Y EL ÁRBOL SE SINCRONIZAN POR ÍNDICE DE PIEZA (`F-13`), sin traducir
+            // ninguna identidad: el número del nodo es el mismo que el de la pieza, de los dos
+            // lados. Elegir un nodo resalta esa figura y sólo esa.
+            //
+            // LA OTRA DIRECCIÓN NO ESTÁ, y no es un olvido: el contrato de la fachada tiene seis
+            // funciones y **ninguna avisa al anfitrión** que la persona eligió algo en la escena.
+            // Sin ese aviso no hay por dónde enterarse. Queda declarado y elevado.
+            var nodes = document.querySelectorAll('[data-gf-piece-node]');
+
+            for (var n = 0; n < nodes.length; n++) {
+                bindNode(viewer, id, nodes[n]);
+            }
+
+            // Y LOS DOS MOVIMIENTOS, CADA UNO CON SU CASILLA: se gobiernan por separado, y quien
+            // fija su estado inicial es esta superficie y no el visor.
+            bindMotion(viewer, id);
+
             // LA INSTANCIA SE LIBERA AL DEJAR LA PÁGINA, que es la mitad de `PT-02` que se rompe
             // sin que nada falle hoy: diez navegaciones sin liberar dejan diez contextos vivos.
             scene.dataset.gfViewerDrawn = 'yes';
             window.addEventListener('pagehide', function () { viewer.destroy(id); }, { once: true });
         }
+    }
+
+
+    // Un nodo del árbol pide resaltar SU pieza, por su índice.
+    function bindNode(viewer, id, node) {
+        if (node.dataset.gfPieceNodeBound === 'yes') {
+            return;
+        }
+
+        node.dataset.gfPieceNodeBound = 'yes';
+        node.addEventListener('click', function () {
+            viewer.selectPiece(id, Number(node.dataset.gfPieceNode));
+        });
+    }
+
+    // Las dos casillas, LEÍDAS JUNTAS Y ENVIADAS JUNTAS. El visor recibe el estado de los dos
+    // movimientos en cada cambio, porque los gobierna por separado y no conserva ninguno.
+    function bindMotion(viewer, id) {
+        var boxes = document.querySelectorAll('[data-gf-motion]');
+
+        function push() {
+            var options = { cameraOrbit: false, pieceSpin: false };
+
+            for (var i = 0; i < boxes.length; i++) {
+                options[boxes[i].dataset.gfMotion] = boxes[i].checked;
+            }
+
+            viewer.setMotion(id, options);
+        }
+
+        for (var i = 0; i < boxes.length; i++) {
+            if (boxes[i].dataset.gfMotionBound === 'yes') {
+                continue;
+            }
+
+            boxes[i].dataset.gfMotionBound = 'yes';
+            boxes[i].addEventListener('change', push);
+        }
+
+        push();
     }
 
     if (document.readyState === 'loading') {

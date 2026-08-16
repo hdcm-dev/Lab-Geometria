@@ -49,7 +49,10 @@ public sealed record WorkDetail(
     string OwnerFirstName,
     string OwnerLastName,
     DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt)
+    DateTimeOffset UpdatedAt,
+    int? RootFigureCount,
+    IReadOnlyList<Piece> Pieces,
+    IReadOnlyList<Observation> Observations)
 {
     /// <summary>Compone el detalle con el trabajo y la cuenta de su dueño.</summary>
     public static WorkDetail Of(Work work, Account owner)
@@ -70,6 +73,12 @@ public sealed record WorkDetail(
             owner.FirstName,
             owner.LastName,
             work.CreatedAt,
-            work.UpdatedAt);
+            work.UpdatedAt,
+            // LAS PIEZAS Y LAS OBSERVACIONES SALEN DEL TRABAJO GUARDADO y no de una interpretación
+            // nueva: volver a leer el texto para dibujarlo abriría la puerta a que la vista muestre
+            // algo distinto de lo que el producto guardó al enviar.
+            work.RootFigureCount,
+            work.Pieces,
+            work.Observations);
     }
 }

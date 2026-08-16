@@ -793,3 +793,21 @@ th.gf-th-plain--brief  { font-size: var(--type-caption-size); }
   .gf-footer-actions .gf-btn { width: 100%; }
   .gf-filters .gf-field { min-width: 100%; }
 }
+
+/* ---- Controles de movimiento automático de la escena (F-25) ------------------------------------
+   PORTADAS DE LA MAQUETA APROBADA, valor por valor, con la traducción de `Norma-De-Nomenclatura.md`
+   §6.12: `mq-escena-movimiento` ⟶ `gf-scene-motion`. No se inventó ninguna regla ni ningún valor;
+   lo único que cambia es el nombre, que es lo que la norma manda. */
+.gf-scene-motion {
+  position: absolute; left: var(--space-3); bottom: var(--space-3); right: var(--space-3); z-index: 1;
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4);
+  font-size: var(--type-caption-size); color: var(--color-text-secondary);
+  background: var(--color-background-tertiary);
+  border: var(--border-hairline); border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-3);
+}
+.gf-scene-motion[hidden] { display: none; }
+.gf-scene-motion-option { display: inline-flex; align-items: center; gap: var(--space-2); }
+.gf-scene-motion-option input { width: 16px; height: 16px; margin: 0; accent-color: var(--color-brand-primary); }
+/* Objetivo de toque de al menos 24 px sin agrandar el recuadro visible. */
+.gf-scene-motion-option label { cursor: pointer; padding: var(--space-1) 0; min-height: 24px; display: inline-flex; align-items: center; }

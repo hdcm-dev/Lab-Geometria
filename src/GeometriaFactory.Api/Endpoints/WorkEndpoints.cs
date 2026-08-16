@@ -372,7 +372,10 @@ public static class WorkEndpoints
                 detail.OwnerFirstName,
                 detail.OwnerLastName,
                 detail.CreatedAt,
-                detail.UpdatedAt));
+                detail.UpdatedAt,
+                detail.RootFigureCount,
+                ContractTranslation.Pieces(detail.Pieces),
+                ContractTranslation.Observations(detail.Observations)));
         })
         .WithName("GetWork")
         .RequireAuthorization();

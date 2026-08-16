@@ -709,6 +709,71 @@ public sealed class WorkWebSurfaceTests : IDisposable
     /// <summary>
     /// Pide una previsualización desde la superficie: mismo formulario, **otra acción**.
     /// </summary>
+    /// <summary>
+    /// La vista de un trabajo entregado trae **la escena, el árbol y los dos controles**, con las
+    /// piezas que el producto guardó al enviar.
+    /// </summary>
+    [Fact]
+    public async Task TheWorkViewBringsTheSceneTheTreeAndTheTwoMotionControls()
+    {
+        var mark = await SignInAsStudentAsync();
+
+        // Se entrega un trabajo que SÍ verifica: es el que tiene piezas guardadas.
+        using var form = await GetAsync(NewWorkRoute, mark);
+        var formHtml = Read(await form.Content.ReadAsStringAsync());
+        using var sent = await PostSubmissionAsync(
+            form, formHtml, NewWorkRoute, mark, "El semilla", "09/08/2026", null, Scenarios.E1);
+        Assert.Equal(HttpStatusCode.OK, sent.StatusCode);
+
+        var workId = await OnlyWorkIdAsync();
+        Assert.Equal("Submitted", await StoredStatusAsync(workId));
+
+        using var view = await GetAsync($"/trabajos/{workId}", mark);
+        var html = Read(await view.Content.ReadAsStringAsync());
+
+        Trace("1 · GET de la vista del trabajo", view);
+        Assert.Equal(HttpStatusCode.OK, view.StatusCode);
+
+        // LA ESCENA, con las piezas GUARDADAS bajando dentro del marcado.
+        Assert.Contains("data-gf-viewer-pieces", html, StringComparison.Ordinal);
+        Assert.Contains("Cylinder", html, StringComparison.Ordinal);
+        Assert.Contains("js/geometriafactory-visor.js", html, StringComparison.Ordinal);
+
+        // EL ÁRBOL, con el índice de cada pieza a la vista: es la identidad que sincroniza.
+        Assert.Contains("data-gf-piece-node=\"0\"", html, StringComparison.Ordinal);
+        Assert.Contains("data-gf-piece-node=\"2\"", html, StringComparison.Ordinal);
+        Assert.Contains("Ortoedro", html, StringComparison.Ordinal);
+
+        // LOS DOS MOVIMIENTOS, GOBERNADOS POR SEPARADO: dos casillas y no una.
+        Assert.Contains("data-gf-motion=\"cameraOrbit\"", html, StringComparison.Ordinal);
+        Assert.Contains("data-gf-motion=\"pieceSpin\"", html, StringComparison.Ordinal);
+
+        // Y SE DECLARA EN POSITIVO que se dibujaron todas, en lugar de callar.
+        Assert.Contains("Se dibujaron las 3 figuras", html, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Un trabajo que nunca verificó **no simula una escena**: dice que no hay nada que dibujar.
+    /// </summary>
+    [Fact]
+    public async Task AWorkThatNeverVerifiedShowsNoSceneAndSaysWhy()
+    {
+        var mark = await SignInAsStudentAsync();
+        await LoadWorkThroughTheSurfaceAsync(mark, "Con una pirámide", TextThatDoesNotVerify);
+
+        var workId = await OnlyWorkIdAsync();
+
+        using var view = await GetAsync($"/trabajos/{workId}", mark);
+        var html = Read(await view.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, view.StatusCode);
+
+        // El escenario `E-5` reconstruye la primera figura, así que SÍ hay una pieza y sí hay
+        // escena: lo que no hay es la segunda, y eso se dice con su posición.
+        Assert.Contains("Figura 2 · posición 1", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("Se dibujaron las", html, StringComparison.Ordinal);
+    }
+
     private Task<HttpResponseMessage> PostPreviewAsync(
         HttpResponseMessage page,
         string html,

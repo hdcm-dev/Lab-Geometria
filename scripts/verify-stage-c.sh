@@ -271,7 +271,8 @@ ARCHIVO=src/GeometriaFactory.Web/wwwroot$GUION
 # escena. Los dos son **marcado servido**, no una vía nueva: el guion sigue sin pedir nada.
 AUTORIZADOS='data-gf-copy-source data-gf-copy-label data-gf-copy-done data-gf-copy-unavailable
 data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-dialog-dismiss
-data-gf-viewer-pieces data-gf-viewer-drawn'
+data-gf-viewer-pieces data-gf-viewer-drawn data-gf-piece-node data-gf-piece-node-bound
+data-gf-motion data-gf-motion-bound'
 
 printf '   -- 3.a · inventario cerrado de guiones propios, sobre las ocho direcciones --\n'
 ajenos=0
@@ -301,12 +302,12 @@ for prohibido in 'fetch *\(' 'XMLHttpRequest' 'WebSocket' 'EventSource' 'sendBea
   same "$n" 0 "el guion no contiene \`$prohibido\`"
 done
 
-printf '   -- 3.c · el alcance del guion son los ONCE atributos autorizados --\n'
+printf '   -- 3.c · el alcance del guion son los QUINCE atributos autorizados --\n'
 usados=$(grep -oE 'data-gf-[a-z-]+' "$ARCHIVO" | sort -u)
 echo "        atributos que el guion lee: $(echo "$usados" | tr '\n' ' ')"
 fuera=$(comm -23 <(echo "$usados") <(echo "$AUTORIZADOS" | tr ' ' '\n' | sort -u))
 if [ -z "$fuera" ]; then
-  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los once autorizados"
+  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los quince autorizados"
 else
   bad "el guion lee atributos NO autorizados: $(echo "$fuera" | tr '\n' ' ')"
 fi
