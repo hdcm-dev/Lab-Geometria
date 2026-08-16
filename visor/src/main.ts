@@ -2,119 +2,136 @@
  * Fachada externa del visor. Es la ÚNICA superficie que el front consume.
  *
  * Las seis funciones son las que `Norma-De-Nomenclatura.md` §5.1 y §6.6 fijaron el 2026-08-12:
- * `initialize`, `loadPieces`, `selectPiece`, `resize`, `destroy` y `setMotion`. El intake
- * §17.7.P.3 las dejaba «a fijar en la etapa que la implementa», de modo que nunca estuvieron
- * fijadas antes de esa decisión.
+ * `initialize`, `loadPieces`, `selectPiece`, `resize`, `destroy` y `setMotion`.
  *
  * `loadPieces` SE LLAMABA `loadJson` Y RECIBÍA EL TEXTO DEL ALUMNO. Cambió el 2026-08-16 por
- * `ADR-08006`: el visor recibe **las piezas ya reconstruidas** y no el texto. El nombre cambió
- * junto con la firma, porque una función que se llama «cargar JSON» y recibe otra cosa es un
- * nombre que promete lo que no cumple.
+ * `ADR-08006`: el visor recibe **las piezas ya reconstruidas**. El nombre cambió junto con la
+ * firma, porque una función que se llama «cargar JSON» y recibe otra cosa promete lo que no cumple.
  *
- * LO QUE ESO SACA DE ACÁ, Y ES LA MITAD QUE MÁS PESABA: la tolerancia del formato. Las cuatro
- * trampas del texto del alumno —la clave sinónima del ortoedro, las comas finales, la cara del
- * cubo con dos nombres y los valores calculados erróneos— las resuelve el validador del
- * laboratorio, con su batería obligatoria de diez casos. Este bundle **no las ve**: recibe piezas
- * con su tipo, sus dimensiones y sus componentes, y su trabajo es dibujarlas y rotarlas.
+ * ETAPA `g`: **la capa 3 existe**. `src/viewer/` construye las mallas y gobierna la escena; este
+ * archivo es la frontera y no dibuja: valida sus argumentos, resuelve la instancia y delega.
  *
- * LO QUE NO CAMBIA: este bundle NO HACE RED, no tiene identidad y no lee configuración propia
- * (`RA-02`). Las piezas se las da su componente anfitrión, que es lo que siempre hizo.
+ * ESTE BUNDLE NO HACE RED, NO TIENE IDENTIDAD Y NO LEE CONFIGURACIÓN (`RA-02`). Se puede comprobar
+ * sin leerlo entero: **no importa ningún cliente, no conoce ninguna dirección y todo lo que dibuja
+ * se lo dan por parámetro**. La única dependencia del paquete es el motor gráfico, que entra
+ * empaquetado y no por red de distribución (`PT-03`).
  *
- * ETAPA `a`: la fachada existe y NO CONTIENE LÓGICA DE DIBUJO (intake §17.7.P.2 y §17.7.P.3).
- * La capa 3 —`src/viewer/`— está vacía y llega en la etapa `g`, con `PT-02` y `PT-03` medidas
- * antes de comprometerla. Cada función registra su llamada y no hace nada más: es lo que
- * significa «vacío pero real».
+ * LOS ERRORES SE DEVUELVEN Y NO SE LANZAN. Un anfitrión que pasa un identificador viejo tiene que
+ * poder seguir: lanzar dejaría la página del alumno rota por un error de coordinación entre dos
+ * piezas del producto.
  */
 
-export interface ViewerOptions {
-  readonly background?: string;
-}
+import type { DrawOutcome, MotionOptions, Piece, ViewerOptions } from './contract';
+import { ViewerInstance } from './viewer/instance';
 
-export interface MotionOptions {
-  readonly enabled: boolean;
+export type { DrawOutcome, MotionOptions, Piece, PieceComponent, UndrawnPiece, ViewerOptions } from './contract';
+
+const UNKNOWN_INSTANCE = 'UNKNOWN_INSTANCE';
+const INVALID_CANVAS_ELEMENT = 'INVALID_CANVAS_ELEMENT';
+const GRAPHICS_CAPABILITY_MISSING = 'GRAPHICS_CAPABILITY_MISSING';
+const INDEX_OUT_OF_RANGE = 'INDEX_OUT_OF_RANGE';
+
+const instances = new Map<string, ViewerInstance>();
+let nextInstance = 0;
+
+function report(functionName: string, code: string): void {
+  // Castellano para la persona, código para quien programa (`Norma-De-Nomenclatura.md` §4).
+  console.warn(`[visor] ${functionName}: ${code}`);
 }
 
 /**
- * Un componente de una pieza, con las dimensiones desde las que se construye la malla.
- *
- * Las tres dimensiones son opcionales porque LA AUSENCIA ES UN DATO: un componente que no trae
- * radio no es uno con radio cero. Y un `0` presente es una dimensión legible: la figura no se
- * descarta por tenerlo.
+ * Crea una instancia viva sobre el elemento, y **no dibuja ninguna pieza hasta que se las den**.
  */
-export interface PieceComponent {
-  readonly position: number;
-  readonly role: string;
-  readonly type: string;
-  readonly declaredLength?: number | null;
-  readonly declaredWidth?: number | null;
-  readonly declaredRadius?: number | null;
-  readonly declaredArea?: number | null;
-}
-
-/**
- * Una pieza reconstruida, tal como el anfitrión se la entrega a `loadPieces`.
- *
- * LA POSICIÓN ES LA IDENTIDAD y no se recalcula: el conjunto **admite huecos**, porque una figura
- * que el laboratorio no pudo reconstruir no llega acá y su posición **no la ocupa la siguiente**.
- * Es el número con el que `selectPiece` selecciona y con el que el anfitrión resalta.
- *
- * LOS VALORES DECLARADO Y DERIVADO VIAJAN Y ESTE BUNDLE NO LOS USA para dibujar ni los juzga: son
- * del alumno y de quien arma la vista.
- */
-export interface Piece {
-  readonly position: number;
-  readonly type: string;
-  readonly declaredArea?: number | null;
-  readonly derivedArea?: number | null;
-  readonly declaredVolume?: number | null;
-  readonly derivedVolume?: number | null;
-  readonly components: readonly PieceComponent[];
-}
-
-const NOT_IMPLEMENTED_YET = 'Etapa `a`: la fachada del visor existe y la capa 3 llega en la etapa `g`.';
-
-function announce(functionName: string): void {
-  // Castellano: el mensaje lo lee una persona (Norma-De-Nomenclatura.md §4).
-  console.info(`[visor] ${functionName}: ${NOT_IMPLEMENTED_YET}`);
-}
-
 export function initialize(element: HTMLElement, options?: ViewerOptions): string {
-  void element;
-  void options;
-  announce('initialize');
-  return '';
+  if (element === null || element === undefined || typeof element.appendChild !== 'function') {
+    report('initialize', INVALID_CANVAS_ELEMENT);
+    return '';
+  }
+
+  try {
+    const id = `visor-${++nextInstance}`;
+    instances.set(id, new ViewerInstance(element, options));
+    return id;
+  } catch {
+    // Sin capacidad gráfica tridimensional no hay escena, y **se dice**: la alternativa es un
+    // recuadro vacío que la persona interpreta como que su trabajo no tiene figuras.
+    report('initialize', GRAPHICS_CAPABILITY_MISSING);
+    return '';
+  }
 }
 
 /**
- * Reemplaza por completo lo dibujado en la instancia con las piezas recibidas.
+ * Reemplaza por completo lo dibujado con las piezas recibidas.
  *
- * NO PIDE LAS PIEZAS POR SU CUENTA (G-1), no valida el trabajo, no emite observaciones, no
- * recalcula valores y **no interpreta el texto del alumno, que ya no recibe**.
+ * NO PIDE LAS PIEZAS POR SU CUENTA, no valida el trabajo, no emite observaciones, no recalcula
+ * valores y **no interpreta el texto del alumno, que ya no recibe**.
+ *
+ * DEVUELVE LAS DIBUJADAS **Y LAS NO DIBUJADAS CON SU MOTIVO**: ninguna pieza desaparece sin quedar
+ * enumerada, que es el fallo silencioso que este visor existe para eliminar.
  */
-export function loadPieces(id: string, pieces: readonly Piece[]): void {
-  void id;
-  void pieces;
-  announce('loadPieces');
+export function loadPieces(id: string, pieces: readonly Piece[]): DrawOutcome {
+  const instance = instances.get(id);
+
+  if (instance === undefined) {
+    report('loadPieces', UNKNOWN_INSTANCE);
+    return { drawn: [], undrawn: [] };
+  }
+
+  return instance.load(pieces ?? []);
 }
 
 export function selectPiece(id: string, index: number): void {
-  void id;
-  void index;
-  announce('selectPiece');
+  const instance = instances.get(id);
+
+  if (instance === undefined) {
+    report('selectPiece', UNKNOWN_INSTANCE);
+    return;
+  }
+
+  if (!instance.select(index)) {
+    report('selectPiece', INDEX_OUT_OF_RANGE);
+  }
 }
 
 export function resize(id: string): void {
-  void id;
-  announce('resize');
+  const instance = instances.get(id);
+
+  if (instance === undefined) {
+    report('resize', UNKNOWN_INSTANCE);
+    return;
+  }
+
+  instance.resize();
 }
 
+/** Libera la instancia entera. Llamarla dos veces sobre la misma no es un error. */
 export function destroy(id: string): void {
-  void id;
-  announce('destroy');
+  const instance = instances.get(id);
+
+  if (instance === undefined) {
+    report('destroy', UNKNOWN_INSTANCE);
+    return;
+  }
+
+  instance.dispose();
+  instances.delete(id);
 }
 
 export function setMotion(id: string, options: MotionOptions): void {
-  void id;
-  void options;
-  announce('setMotion');
+  const instance = instances.get(id);
+
+  if (instance === undefined) {
+    report('setMotion', UNKNOWN_INSTANCE);
+    return;
+  }
+
+  instance.setMotion(options);
+}
+
+/**
+ * Cuántas instancias hay vivas. **Es instrumento de medición de `PT-02`** y no superficie del
+ * producto: el front no la usa, y por eso no es una séptima función de la fachada.
+ */
+export function liveInstanceCount(): number {
+  return instances.size;
 }

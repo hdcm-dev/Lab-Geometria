@@ -51,6 +51,7 @@
   - [6.20 Agregados por la interfaz de la etapa `e`, fuera de los 155](#620-agregados-por-la-interfaz-de-la-etapa-e-fuera-de-los-155)
   - [6.21 Agregados por el validador de figuras de la etapa `f`, fuera de los 155](#621-agregados-por-el-validador-de-figuras-de-la-etapa-f-fuera-de-los-155)
   - [6.22 Agregados por `ADR-08006`, fuera de los 155](#622-agregados-por-adr-08006-fuera-de-los-155)
+  - [6.23 Agregados por la capa 3 del visor, etapa `g`, fuera de los 155](#623-agregados-por-la-capa-3-del-visor-etapa-g-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -362,6 +363,7 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Agregados por la interfaz de la etapa `e` (1.17), **fuera de los 155** | 27 | 27 | §6.20 |
 | Agregados por el validador de figuras de la etapa `f` (1.18), **fuera de los 155** | 44 | 44 | §6.21 |
 | Agregados por `ADR-08006` (1.19), **fuera de los 155** | 5 | 5 | §6.22 |
+| Agregados por la capa 3 del visor (1.21), **fuera de los 155** | 12 | 12 | §6.23 |
 
 **Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **para las 109 que agrega la etapa `c` en §6.13** —106 propias más las tres que la 1.8 sumó—, que desde la 1.7 es la décima, **para las 39 que agrega §6.14**, que desde la 1.8 es la undécima —27 las trajo la marca de sesión, 5 más el guardián de sesión de la 1.9, 5 más el arreglo del cambio forzado de la 1.10 y 2 más la guardia de arranque de la clave de firma de la 1.11— **para las 36 que agrega §6.15**, que desde la 1.12 es la duodécima —16 tipos y 20 miembros del ciclo de vida de la cuenta de alumno del lado del servicio— **para las 41 que agrega §6.16**, que desde la 1.13 es la decimotercera —2 tipos, 35 miembros, propiedades y valores, y 4 iconos de la interfaz de esa misma etapa— **y para las 19 que agrega §6.17**, que desde la 1.14 es la decimocuarta —2 superficies derivadas, 8 funciones del guion de interacción y 9 atributos de marcado que ese guion lee— **para las 8 que agrega §6.18**, que desde la 1.15 es la decimoquinta —3 tipos y 5 miembros del guardián 1 de `Web ADR-10003` §2 y del punto de acceso anónimo que lo hace posible— **para las 47 que agrega §6.19**, que desde la 1.16 es la decimosexta —16 tipos, 4 valores de conjunto cerrado y 27 miembros del trabajo con dueño, estado y persistencia— **y para las 27 que agrega §6.20**, que desde la 1.17 es la decimoséptima —3 tipos, 22 miembros, propiedades y valores, y 2 iconos de la interfaz de esa misma etapa—. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete. **La etapa `e` la reproduce sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, y entre ellos está el homónimo declarado de §6.9, `WORK_NOT_FOUND`, que la etapa escribió **dos veces, una por catálogo, y no unificó**, porque lo que los separa es el tipo que los contiene. **La etapa `d` reproduce la constancia sobre una población mayor**: de los **quince** códigos que escribió —siete del dominio, tres propios de la aplicación, uno de infraestructura y cuatro del contrato— **cero necesitaron fila nueva**, y entre ellos están los dos casos difíciles que `F-03` había dejado resueltos de antemano: la **unificación** de §6.9, que le da a `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` el mismo nombre inglés, y los **dos identificadores retirados por RN-02016** de §6.8.5, que la etapa `d` **no recicló**.
 
@@ -1979,6 +1981,35 @@ conceptos** cruzando otra frontera, y el corolario 1 de §6.1 prohíbe darles un
 que los separa es el tipo que los contiene, que es el mismo criterio con el que §6.20 resolvió
 `DeleteAsync`.
 
+### 6.23 Agregados por la capa 3 del visor, etapa `g`, fuera de los 155
+
+**Por qué existe esta sección.** La etapa `a` dejó `src/viewer/` **vacía y declarada**: la lógica de
+dibujo era de la etapa `g`. Esta tabla trae los identificadores con los que esa capa se escribió —la
+escena viva, la construcción de mallas y los tipos que cruzan la frontera hacia el bundle—, y **los
+códigos de condición no están acá**: los siete del visor ya tienen fila en §6.9 desde su catálogo, y
+la capa 3 **no acuñó ninguno**. Es la quinta etapa seguida en que el glosario alcanza.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `InstanciaDelVisor` | `ViewerInstance` | Clase de TypeScript, capa 3 | `Definicion-Contrato-De-Fachada.md` §2, «instancia del visor»: la escena viva asociada a un elemento de dibujo |
+| `ResultadoDeDibujo` | `DrawOutcome` | Tipo de TypeScript, frontera | Ídem §5.2: las dibujadas y **las no dibujadas con su motivo** |
+| `PiezaNoDibujada` | `UndrawnPiece` | Tipo de TypeScript, frontera | Ídem: ninguna pieza desaparece sin quedar enumerada |
+| `ResultadoDeMalla` | `MeshOutcome` | Tipo de TypeScript, capa 3 | La malla de una pieza, o el motivo por el que no se pudo construir |
+| `mallaDe` | `meshFor` | Función de la capa 3 | `Visor/03`, el mapeo de tipo a malla que `§20.E-7` ejercita |
+| `cargar` | `load` | Miembro de `ViewerInstance` | Lo que `loadPieces` delega. **No es un séptimo nombre de fachada**: es interno |
+| `seleccionar` | `select` | Miembro de `ViewerInstance` | Ídem, de `selectPiece` |
+| `liberar` | `dispose` | Miembro de `ViewerInstance` | Ídem, de `destroy`. Es lo que `PT-02` mide |
+| `orbitaDeCamara` | `cameraOrbit` | Miembro de `MotionOptions` | `F-25`: **los dos movimientos se gobiernan por separado** |
+| `giroDePiezas` | `pieceSpin` | Miembro de `MotionOptions` | Ídem, el otro |
+| `cantidadDeInstanciasVivas` | `liveInstanceCount` | Función de instrumentación | **No es superficie del producto**: es instrumento de medición de `PT-02`, y el front no la usa |
+| `cantidadDeMallasVivas` | `liveMeshCount` | Miembro de `ViewerInstance` | Ídem |
+
+**Doce filas: 4 tipos, 6 miembros y 2 funciones.**
+
+**Lo que NO lleva fila:** `Piece`, `PieceComponent`, `ViewerOptions` y `MotionOptions` como tipos, y
+`position`, `type`, `role` y las dimensiones declaradas, que ya están en **§6.21.3** y **§6.22**: son
+los mismos conceptos cruzando otra frontera, y el corolario 1 de §6.1 prohíbe renombrarlos.
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -2123,6 +2154,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.21 | 2026-08-16 | **Agrega §6.23, la vigésima tabla: las 12 filas de la capa 3 del visor**, que la etapa `a` dejó vacía y declarada para la `g`. Son **4 tipos** —la instancia viva, el resultado de dibujo, la pieza no dibujada y el resultado de malla—, **6 miembros** y **2 funciones de instrumentación**, que se declaran como tales: `liveInstanceCount` y `liveMeshCount` **no son superficie del producto**, son con lo que se mide `PT-02`, y por eso no vuelven séptima y octava a las seis funciones de la fachada. **Los siete códigos de condición del visor no necesitaron fila**: ya estaban en §6.9, y es la quinta etapa seguida en que el glosario alcanza. | Orquestador SDD |
 | 1.20 | 2026-08-16 | **Renombra una de las seis funciones de la fachada del visor**, que son la zona de frontera `F-01a` que el Product Owner fijó el 2026-08-12: `cargarJson` ⟶ `loadJson` pasa a **`cargarPiezas` ⟶ `loadPieces`**, por [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md). **El nombre cambia junto con la firma y no por gusto**: la función dejó de recibir el texto del alumno y recibe las piezas ya reconstruidas, de modo que seguir llamándola «cargar JSON» sería un nombre que promete una cosa y un parámetro que trae otra. **Las otras cinco no se tocan** y el recuento de la zona de frontera no cambia: siguen siendo seis funciones. §3 actualiza su ejemplo de función de TypeScript, que citaba la vieja. **Barrido por concepto sobre el árbol vivo**, que es lo que `SDD-Development-Guide.md` §VI.3.1 pide y lo que encontró dos filas más: `DIMENSION_NO_LEGIBLE` y `TEXTO_NO_LEGIBLE` de §6.9 nombraban a la función vieja. Las dos se reescriben, **y la segunda se eleva**: la fachada ya no recibe texto, de modo que `TEXTO_NO_LEGIBLE` **queda sin disparador**. No se retira desde acá porque retirar un código del catálogo del visor es de su categoría 03. Se conservan las citas de `Handoff-Checkout.md` y de `Plan-Etapa-A.md`, que son **registros fechados** y no declaraciones vigentes. | Product Owner (decisión) · Orquestador SDD |
 | 1.19 | 2026-08-16 | **Agrega §6.22, la decimonovena tabla: las 5 filas que [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) necesita**, agregadas antes de escribir los identificadores. Son **4 tipos de transferencia** —la pieza y su componente tal como cruzan la frontera hacia quien dibuja, y la solicitud y la respuesta de la interpretación que no guarda nada— y **1 miembro**, la ruta de `A-18`. **Catorce miembros no llevan fila y se declara por qué**: ya están en §6.21.3 y son los mismos conceptos cruzando otra frontera, que es lo que el corolario 1 de §6.1 prohíbe renombrar. | Orquestador SDD |
 | 1.18 | 2026-08-16 | **Agrega §6.21, la decimoctava tabla del glosario: las 44 filas que el validador de figuras de la etapa `f` necesita, agregadas ANTES de escribir el identificador** (corolario 4 de §6.1). Son **5 tipos** —`FigureType` y `ComponentRole`, los dos conjuntos cerrados que `Definicion-Modelo-De-Dominio.md` §2.3 y §2.4 declaran como atributos «Tipo» y «Papel», y `FigureInterpretation`, el resultado de tres partes que `Definicion-Contrato-Del-Validador-De-Figuras.md` §3 exige—, **12 valores** de esos dos conjuntos, con `Base` y `Lateral` como homónimos declarados, y **27 miembros** de `Piece`, `Component`, `Observation`, `FigureInterpretation`, `IFigureValidator`, `LocalFigureValidator`, `Work`, el caso de uso del envío y la superficie que muestra las observaciones. Del lado del contrato entran `WorkObservation` y `WorkObservationKind`, que es lo que permite que la pieza pública dibuje una observación **sin conocer al dominio**. **Ningún tipo nuevo del dominio**: las tres entidades existen desde la etapa `a` y lo que esta etapa les agrega son atributos, que es la diferencia entre un tipo que se llena y un concepto nuevo. Y **una declaración de frontera**: las once claves del texto del alumno —`Tipo`, `Largo`, `Ancho`, `Radio`, `Area`, `Volumen`, `Tapas`, `Bases`, `Laterales`, `Caras` y `Lado`— **no llevan fila y no se traducen**, porque son dato del alumno y viajan hacia afuera en el campo de cada observación: traducirlas dejaría a la persona buscando en su propio programa una clave que no existe. | Orquestador SDD |

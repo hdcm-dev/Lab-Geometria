@@ -29,5 +29,22 @@ module.exports = {
     ]
   },
   // Sin `externals`: nada se resuelve desde una red de distribución externa.
-  externals: {}
+  externals: {},
+
+  // EL PRESUPUESTO DE TAMAÑO SE DECLARA, EN LUGAR DE APAGAR EL AVISO.
+  //
+  // El valor por omisión de webpack son 244 KiB, y con el motor gráfico adentro el paquete pesa
+  // más. El aviso no es un defecto: es una recomendación que **supone que se puede partir el
+  // paquete o traer parte por red**, y este producto declara lo contrario en `PT-03` —el motor
+  // entra empaquetado, sin red de distribución— porque el front tiene que funcionar sin acceso a
+  // ninguna. Apagar el aviso dejaría de avisar el día que el paquete crezca de verdad.
+  //
+  // EL UMBRAL ES UNA MEDICIÓN Y NO UNA ASPIRACIÓN: sale del tamaño medido con el motor adentro
+  // —483 KiB el 2026-08-16— con un margen chico. Un crecimiento que lo pase vuelve a avisar, que
+  // es exactamente lo que se quiere conservar. **[decisión de la etapa `g`, declarada.]**
+  performance: {
+    hints: 'warning',
+    maxAssetSize: 560 * 1024,
+    maxEntrypointSize: 560 * 1024
+  }
 };
