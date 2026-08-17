@@ -422,3 +422,27 @@ comprometer la `g` y no para cerrar ésta.**
   análisis menciona siete clases en `Ejemplo1` y diez en `Ejemplo2`, y **ninguna fuente las
   enumera**. Un tipo fuera de los seis produce error de validación, que es correcto y puede no ser
   lo deseado. Lo resuelve el Product Owner con la enumeración de las clases de la Actividad 1.
+
+## Etapa `g` — Visualización 3D
+
+*En curso. Esta sección se completa al cerrar la etapa; lo que sigue son los cambios ya hechos.*
+
+### La superficie HTTP pasa a describirse a sí misma
+- **Documento OpenAPI generado** en `/openapi/v1.json` y **explorador navegable** en
+  `/documentacion`, por decisión del Product Owner. Revierte la renuncia declarada en el intake
+  §17.5 —«se renuncia a un contrato descrito en OpenAPI»— y su fundamento está en
+  `ADR-08008`: lo que la renuncia evitaba era **un segundo contrato escrito a mano que se
+  desincroniza**, y un documento **generado de los puntos que ya existen** no lo es. No se genera
+  ningún cliente y el contrato entre las dos piezas **sigue siendo el ensamblado**
+  `GeometriaFactory.Contracts`.
+- **El explorador no se publica solo.** En desarrollo está siempre; fuera de desarrollo hace falta
+  decir `Documentacion__Publicada=true`. El servicio de datos se expone a Internet y un explorador
+  **enumera todos los puntos ante cualquiera que abra la dirección**: puede estar bien —es una API
+  de laboratorio— pero es una decisión de quien despliega y no un efecto de agregar un paquete.
+- **Ningún punto cambia.** `A-01` a `A-18` son los mismos, con las mismas formas y los mismos
+  verbos. Lo que se agrega **los describe sin tocarlos**.
+- **Los activos del explorador se sirven desde el propio servicio**, no desde una red de terceros:
+  el servicio no adquiere ninguna dependencia de tiempo de ejecución hacia afuera.
+- **`ApiDocumentationSurfaceTests`, cuatro pruebas, y la que importa es la del cierre**: que en
+  desarrollo se vea lo nota cualquiera la primera vez que lo abre; que **deje de verse al
+  desplegar** no lo nota nadie hasta que ya está publicado.

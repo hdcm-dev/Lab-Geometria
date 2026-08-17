@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCompositionRoot(builder.Configuration);
 
+// La descripción navegable de la superficie. Qué se publica y dónde lo decide `ApiDocumentation`.
+builder.Services.AddApiDocumentation();
+
 var app = builder.Build();
 
 // Fase 1 — preparar el almacén. Nada atiende hasta que esto termina (`QG-11`, `US-27`, `US-28`).
@@ -32,6 +35,8 @@ app.UseAuthorization();
 // no como filtro por punto, porque el defecto que se quiere impedir es **olvidarse de un punto**
 // y un filtro se olvida en silencio (`Api CU-02` §1 y CA-05).
 app.UseMiddleware<PendingPasswordChangeGuard>();
+
+app.MapApiDocumentation();
 
 app.MapHealthEndpoint();
 app.MapAuthenticationEndpoints();

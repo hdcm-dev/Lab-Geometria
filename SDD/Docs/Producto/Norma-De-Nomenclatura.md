@@ -52,6 +52,7 @@
   - [6.21 Agregados por el validador de figuras de la etapa `f`, fuera de los 155](#621-agregados-por-el-validador-de-figuras-de-la-etapa-f-fuera-de-los-155)
   - [6.22 Agregados por `ADR-08006`, fuera de los 155](#622-agregados-por-adr-08006-fuera-de-los-155)
   - [6.23 Agregados por la capa 3 del visor y su anfitrión, etapa `g`, fuera de los 155](#623-agregados-por-la-capa-3-del-visor-y-su-anfitrión-etapa-g-fuera-de-los-155)
+  - [6.24 Agregados por la documentación de la superficie HTTP, etapa `g`, fuera de los 155](#624-agregados-por-la-documentación-de-la-superficie-http-etapa-g-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -364,6 +365,7 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Agregados por el validador de figuras de la etapa `f` (1.18), **fuera de los 155** | 44 | 44 | §6.21 |
 | Agregados por `ADR-08006` (1.19), **fuera de los 155** | 5 | 5 | §6.22 |
 | Agregados por la capa 3 del visor y su anfitrión (1.21), **fuera de los 155** | 44 | 44 | §6.23 |
+| Agregados por la documentación de la superficie HTTP (1.22), **fuera de los 155** | 10 | 10 | §6.24 |
 
 **Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **para las 109 que agrega la etapa `c` en §6.13** —106 propias más las tres que la 1.8 sumó—, que desde la 1.7 es la décima, **para las 39 que agrega §6.14**, que desde la 1.8 es la undécima —27 las trajo la marca de sesión, 5 más el guardián de sesión de la 1.9, 5 más el arreglo del cambio forzado de la 1.10 y 2 más la guardia de arranque de la clave de firma de la 1.11— **para las 36 que agrega §6.15**, que desde la 1.12 es la duodécima —16 tipos y 20 miembros del ciclo de vida de la cuenta de alumno del lado del servicio— **para las 41 que agrega §6.16**, que desde la 1.13 es la decimotercera —2 tipos, 35 miembros, propiedades y valores, y 4 iconos de la interfaz de esa misma etapa— **y para las 19 que agrega §6.17**, que desde la 1.14 es la decimocuarta —2 superficies derivadas, 8 funciones del guion de interacción y 9 atributos de marcado que ese guion lee— **para las 8 que agrega §6.18**, que desde la 1.15 es la decimoquinta —3 tipos y 5 miembros del guardián 1 de `Web ADR-10003` §2 y del punto de acceso anónimo que lo hace posible— **para las 47 que agrega §6.19**, que desde la 1.16 es la decimosexta —16 tipos, 4 valores de conjunto cerrado y 27 miembros del trabajo con dueño, estado y persistencia— **y para las 27 que agrega §6.20**, que desde la 1.17 es la decimoséptima —3 tipos, 22 miembros, propiedades y valores, y 2 iconos de la interfaz de esa misma etapa—. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete. **La etapa `e` la reproduce sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, y entre ellos está el homónimo declarado de §6.9, `WORK_NOT_FOUND`, que la etapa escribió **dos veces, una por catálogo, y no unificó**, porque lo que los separa es el tipo que los contiene. **La etapa `d` reproduce la constancia sobre una población mayor**: de los **quince** códigos que escribió —siete del dominio, tres propios de la aplicación, uno de infraestructura y cuatro del contrato— **cero necesitaron fila nueva**, y entre ellos están los dos casos difíciles que `F-03` había dejado resueltos de antemano: la **unificación** de §6.9, que le da a `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` el mismo nombre inglés, y los **dos identificadores retirados por RN-02016** de §6.8.5, que la etapa `d` **no recicló**.
 
@@ -2041,6 +2043,35 @@ la capa 3 **no acuñó ninguno**. Es la quinta etapa seguida en que el glosario 
 `position`, `type`, `role` y las dimensiones declaradas, que ya están en **§6.21.3** y **§6.22**: son
 los mismos conceptos cruzando otra frontera, y el corolario 1 de §6.1 prohíbe renombrarlos.
 
+### 6.24 Agregados por la documentación de la superficie HTTP, etapa `g`, fuera de los 155
+
+**Por qué existe esta sección.** [`ADR-08008`](Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md)
+revierte la renuncia del intake a describir el contrato en OpenAPI, y trae conceptos que **no
+existían**: el documento generado, el explorador que lo lee y **la llave que decide si se publican**.
+Se agregan por el corolario 4 de §6.1, antes de escribir el identificador.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `DocumentacionDeApi` | `ApiDocumentation` | Clase estática de composición | `ADR-08008` §2: el único lugar donde se decide qué se describe y qué se publica |
+| `RutaDelDocumento` | `DocumentRoute` | Miembro de `ApiDocumentation` | Ídem: dónde se sirve el documento OpenAPI **generado** |
+| `RutaDelExplorador` | `ExplorerRoute` | Miembro de `ApiDocumentation` | Ídem: dónde se sirve la página navegable |
+| `LlaveDePublicacion` | `PublishedSetting` | Miembro de `ApiDocumentation` | `ADR-08008` §4: **la llave es la decisión**, y por eso tiene nombre propio |
+| `AgregarDocumentacionDeApi` | `AddApiDocumentation` | Extensión de `IServiceCollection` | Registra el generador. Sigue el par `Add…` / `Map…` de `CompositionRoot` |
+| `MapearDocumentacionDeApi` | `MapApiDocumentation` | Extensión de `WebApplication` | Expone las dos rutas **si corresponde**, y devuelve si las expuso |
+| `PruebasDeSuperficieDeDocumentacionDeApi` | `ApiDocumentationSurfaceTests` | Batería de integración | `ADR-08008` §5: las dos mitades, y la que importa es la segunda |
+
+**Y dos superficies servidas, que no son identificadores de código:**
+
+| Superficie | Valor | Qué es |
+| --- | --- | --- |
+| Ruta del documento | `/openapi/v1.json` | El contrato en JSON, **generado de los puntos que ya existen** |
+| Ruta del explorador | `/documentacion` | La página navegable. **En castellano**, como toda ruta servida del producto |
+| Llave de configuración | `Documentacion:Publicada` (`Documentacion__Publicada` como variable de entorno) | Lo único que publica las dos fuera de desarrollo |
+
+**Siete filas de código y tres superficies.** **Ningún punto del producto lleva fila nueva**, y es lo
+que se esperaba: `A-01` a `A-18` son los mismos, y lo que esta sección agrega **los describe sin
+tocarlos**.
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -2185,6 +2216,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.22 | 2026-08-16 | **Agrega §6.24, la vigesimoprimera tabla: las 7 filas de código y las 3 superficies servidas que [`ADR-08008`](Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md) necesita**, agregadas antes de escribir el identificador. Son **1 clase estática de composición**, **3 miembros** —entre ellos `PublishedSetting`, que tiene nombre propio porque **la llave es la decisión**—, **2 extensiones** que siguen el par `Add…`/`Map…` de `CompositionRoot`, **1 batería** y las **3 superficies**: las dos rutas servidas y la variable de entorno que las publica. **Ningún punto del producto lleva fila nueva y es lo que se esperaba**: `A-01` a `A-18` son los mismos, y lo que esta sección agrega **los describe sin tocarlos**. | Orquestador SDD |
 | 1.21 | 2026-08-16 | **Agrega §6.23, la vigésima tabla: las 12 filas de la capa 3 del visor**, que la etapa `a` dejó vacía y declarada para la `g`. Son **4 tipos** —la instancia viva, el resultado de dibujo, la pieza no dibujada y el resultado de malla—, **6 miembros** y **2 funciones de instrumentación**, que se declaran como tales: `liveInstanceCount` y `liveMeshCount` **no son superficie del producto**, son con lo que se mide `PT-02`, y por eso no vuelven séptima y octava a las seis funciones de la fachada. **Los siete códigos de condición del visor no necesitaron fila**: ya estaban en §6.9, y es la quinta etapa seguida en que el glosario alcanza. **Suma además el anfitrión**: los cuatro miembros con los que la superficie de envío previsualiza, la función del guion que dibuja, y **los dos atributos de marcado** que llevan de nueve a **once** los que `verify-stage-c.sh` autoriza —los dos son marcado servido, y el guion sigue midiendo cero salidas a la red—. | Orquestador SDD |
 | 1.20 | 2026-08-16 | **Renombra una de las seis funciones de la fachada del visor**, que son la zona de frontera `F-01a` que el Product Owner fijó el 2026-08-12: `cargarJson` ⟶ `loadJson` pasa a **`cargarPiezas` ⟶ `loadPieces`**, por [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md). **El nombre cambia junto con la firma y no por gusto**: la función dejó de recibir el texto del alumno y recibe las piezas ya reconstruidas, de modo que seguir llamándola «cargar JSON» sería un nombre que promete una cosa y un parámetro que trae otra. **Las otras cinco no se tocan** y el recuento de la zona de frontera no cambia: siguen siendo seis funciones. §3 actualiza su ejemplo de función de TypeScript, que citaba la vieja. **Barrido por concepto sobre el árbol vivo**, que es lo que `SDD-Development-Guide.md` §VI.3.1 pide y lo que encontró dos filas más: `DIMENSION_NO_LEGIBLE` y `TEXTO_NO_LEGIBLE` de §6.9 nombraban a la función vieja. Las dos se reescriben, **y la segunda se eleva**: la fachada ya no recibe texto, de modo que `TEXTO_NO_LEGIBLE` **queda sin disparador**. No se retira desde acá porque retirar un código del catálogo del visor es de su categoría 03. Se conservan las citas de `Handoff-Checkout.md` y de `Plan-Etapa-A.md`, que son **registros fechados** y no declaraciones vigentes. | Product Owner (decisión) · Orquestador SDD |
 | 1.19 | 2026-08-16 | **Agrega §6.22, la decimonovena tabla: las 5 filas que [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) necesita**, agregadas antes de escribir los identificadores. Son **4 tipos de transferencia** —la pieza y su componente tal como cruzan la frontera hacia quien dibuja, y la solicitud y la respuesta de la interpretación que no guarda nada— y **1 miembro**, la ruta de `A-18`. **Catorce miembros no llevan fila y se declara por qué**: ya están en §6.21.3 y son los mismos conceptos cruzando otra frontera, que es lo que el corolario 1 de §6.1 prohíbe renombrar. | Orquestador SDD |
