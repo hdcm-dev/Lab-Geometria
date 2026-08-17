@@ -70,6 +70,11 @@ jobs:
           PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
         run: |
           set -euo pipefail
+          # LA COMPROBACION EXIGE SU SECRETO, igual que la inyeccion de la direccion del
+          # servicio de datos. Sin esta linea, un secreto vacio no falla acá: falla adentro de
+          # curl con «Malformed input to a URL function», que no nombra el secreto que falta y
+          # manda a buscar el problema al lugar equivocado. Ya pasó una vez.
+          test -n "$PUBLIC_URL" || { echo "Falta el secreto PUBLIC_URL del repositorio."; exit 1; }
           status_code="$(curl --silent --show-error --location --max-time 30 --output /dev/null --write-out '%{http_code}' "$PUBLIC_URL")"
           echo "La direccion publica respondio $status_code"
           test "$status_code" = "200"
