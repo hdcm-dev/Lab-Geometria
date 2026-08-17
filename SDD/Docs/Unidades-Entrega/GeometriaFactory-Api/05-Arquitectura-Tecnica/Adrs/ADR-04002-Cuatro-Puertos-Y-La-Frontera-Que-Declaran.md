@@ -59,7 +59,7 @@ Sobre el cuarto, la decisión tiene dos mitades:
 
 ## 7. Implementación
 
-- El componente **Declaración de puertos** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde los cuatro se declaran; §3.4 declara qué componente consume cada uno.
+- El componente **Declaración de puertos** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde los cuatro se declaran; §3.4 declara qué componente consume cada uno.
 - Ningún orquestador declara un puerto propio: si un caso de uso necesitara algo que ninguno de los cuatro ofrece, la decisión es **ampliar el puerto que corresponda o abrir uno nuevo con ADR propia**, nunca resolverlo dentro del orquestador.
 - Los adaptadores viven en `GeometriaFactory-Infrastructure` y la composición de raíz de `GeometriaFactory-Api` los conecta. Esta capa no nombra a ninguno de los dos proyectos de código.
 - Convención impuesta: mientras el cuarto puerto no tenga identificador, se lo nombra en lenguaje de dominio en todos los artefactos, igual que hacen 02 y 03.

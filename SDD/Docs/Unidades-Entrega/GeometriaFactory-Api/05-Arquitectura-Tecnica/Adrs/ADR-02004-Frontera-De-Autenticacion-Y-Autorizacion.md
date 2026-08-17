@@ -63,7 +63,7 @@ El dominio **modela las condiciones de la autenticación y de la autorización p
 - El componente **Guardas de cuenta** materializa las cuatro operaciones del ciclo de vida acotadas al papel `Alumno`, el reseteo y la fijación y el reemplazo de la credencial derivada.
 - El componente **Evaluador de admisibilidad** materializa INV-06 e INV-09.
 - La credencial derivada se declara como valor opaco: el contrato no expone ninguna operación de comparación ni de derivación.
-- La marca se nombra **siempre con la palabra «marca»**, y `Pendiente` siempre calificado, según la regla de vocabulario de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §7.
+- La marca se nombra **siempre con la palabra «marca»**, y `Pendiente` siempre calificado, según la regla de vocabulario de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §7.
 
 ## 8. Métricas de validación
 

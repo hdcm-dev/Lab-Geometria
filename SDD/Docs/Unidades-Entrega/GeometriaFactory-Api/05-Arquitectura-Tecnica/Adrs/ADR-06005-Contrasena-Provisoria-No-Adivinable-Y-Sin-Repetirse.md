@@ -32,7 +32,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; 
 
 **«No se repite» lo sostiene la impredecibilidad, no un registro de valores anteriores.** Esta ADR **hereda** la lectura que `CU-06007` §10 adoptó y no la reabre: conservar las provisorias anteriores para compararlas exigiría guardar contraseñas en claro, que es exactamente lo que el producto no hace. Lo que la longitud y el alfabeto compran es que esa lectura sea sostenible: con doce caracteres del alfabeto elegido, dos producciones consecutivas iguales no son un riesgo operativo.
 
-**La longitud y el alfabeto son derivación de esta categoría, rotulada como tal.** Ninguna fuente los declara, y siguen elevados al Product Owner en `PA-06` de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §11 junto con el criterio de no repetición.
+**La longitud y el alfabeto son derivación de esta categoría, rotulada como tal.** Ninguna fuente los declara, y siguen elevados al Product Owner en `PA-06` de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §11 junto con el criterio de no repetición.
 
 ## 3. Estado
 
@@ -66,7 +66,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; 
 
 ## 7. Implementación
 
-- El mecanismo de credenciales de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde una provisoria existe.
+- El mecanismo de credenciales de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde una provisoria existe.
 - **Convención impuesta:** la operación de producción **no declara ningún parámetro**. Si recibiera uno, alguien terminaría derivando el valor de él.
 - **Convención impuesta:** la provisoria no entra en ningún mensaje, en ningún registro ni en ninguna traza. Viaja en el resultado y en ningún otro lado.
 - Quien la fija como credencial es la escritura de la cuenta, que además **pone la marca de cambio de contraseña pendiente**; la marca es atributo propio y **no es un estado de cuenta** (`RC-06007`).
@@ -89,7 +89,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §4 (F-26 y F-04 precisada), §4.1 (RN-06014, RN-06015, RN-06016) y §17.1.P.5 · GeometriaFactory-Infrastructure.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md`](../Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md) §3 y §10.
 - [`../../03-UX-UI-DX/DX-Error-Messages.md`](../../03-UX-UI-DX/DX-Error-Messages.md) §2.4 y §3.7.
-- [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §10.2, fila de RN-06014, que es la delegación explícita que esta ADR recibe.
+- [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §10.2, fila de RN-06014, que es la delegación explícita que esta ADR recibe.
 - ADR relacionadas: [`ADR-06004`](ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md).
 
 ## 10. Control de cambios

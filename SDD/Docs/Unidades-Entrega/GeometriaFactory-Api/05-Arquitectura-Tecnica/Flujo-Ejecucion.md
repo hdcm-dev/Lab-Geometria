@@ -29,7 +29,7 @@ Este documento existe porque el tipo `library` lo pide **cuando el proyecto de c
 
 **No documenta los adaptadores de persistencia ni los dos mecanismos de seguridad**, que no son pipelines: su recorrido es una operación y su forma de terminación está en el catálogo de condiciones.
 
-Lo que gobierna este flujo es [`ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md), y lo que lo verifica es la batería de **10** casos de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.5.
+Lo que gobierna este flujo es [`ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md), y lo que lo verifica es la batería de **10** casos de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.5.
 
 ## 2. El pipeline en siete pasos
 
@@ -131,7 +131,7 @@ Los tipos son los **seis** que los escenarios ejercitan, más el que sólo apare
 | Invariantes | INV-04, al que aporta el conjunto completo de observaciones con su especie |
 | Garantías del contrato de la categoría 02 | Las **siete**, `G-1` a `G-7`: `G-1` en la ausencia de escritura sobre el texto, `G-2` en la continuidad del recorrido, `G-3` en las posiciones reservadas de P-3 y P-4, `G-4` en las columnas de observación de P-3 a P-5, `G-5` en P-6, `G-6` en §6 y `G-7` en la primera fila de §4 |
 | Trampas del formato | Las **cuatro**: `T2` en P-2, `T1` y `T3` en P-4 y P-5, `T4` en P-6 |
-| Escenarios | Los **ocho**, `E-1` a `E-8`, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.5 |
+| Escenarios | Los **ocho**, `E-1` a `E-8`, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.5 |
 | ADR que lo gobierna | [`ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) |
 | Tests previstos en 08 | La batería de **10** casos, **unitaria y sin almacén**, con una prueba por paso del pipeline; la prueba de las **2** advertencias exactas de `E-1`; la prueba de las **0** observaciones de `E-4`; y la prueba de **0** peticiones de red |
 

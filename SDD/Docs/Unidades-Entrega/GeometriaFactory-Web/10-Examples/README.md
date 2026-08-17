@@ -8,7 +8,7 @@
 **Fecha:** 2026-08-16
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Tipo de proyecto de código (D8):** `web-monolith`
-**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **diez** casos de uso; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, los **ocho** componentes en sus **tres** capas; [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta** historias; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §3 y §6; [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) 1.2, sus **61** filas; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
+**Trazabilidad upstream:** [`../02-Especificacion-Funcional/`](../02-Especificacion-Funcional/), los **diez** casos de uso; [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1, los **ocho** componentes en sus **tres** capas; [`../06-Backlog-Tecnico/historias-usuario/`](../06-Backlog-Tecnico/historias-usuario/), las **treinta** historias; [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) 1.1 §3 y §6; [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md) 1.2, sus **61** filas; `PRODUCT-INTAKE` **1.25** §16.1, §18 y §20
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que suma la sonda `VER-10001` como fila `SD-10062`; `11-Documentacion` cuando se emita
 
 ---
@@ -133,7 +133,7 @@ Dos desvíos, los dos declarados acá y ninguno de nomenclatura por dominio:
 
 ## 9. Vínculo con 05 y con 11
 
-El sample no invoca ningún componente interno de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1: habla con el servicio de datos por la misma superficie que el **cliente tipado** de capa 3 usa, y por eso lo que deja armado es exactamente lo que la pieza pública va a leer después.
+El sample no invoca ningún componente interno de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1: habla con el servicio de datos por la misma superficie que el **cliente tipado** de capa 3 usa, y por eso lo que deja armado es exactamente lo que la pieza pública va a leer después.
 
 **`11-Documentacion` todavía no está emitida** para este proyecto de código. Cuando lo esté, referencia este sample y lo contextualiza **sin duplicar su código**, que es la división que `Rules-Examples.md` §0 fija: 10 demuestra con código ejecutable y verificable, 11 explica, referencia y enlaza.
 

@@ -61,7 +61,7 @@ Motivación upstream: NB-00003, NB-00006, NB-00007, NB-00009; `PRODUCT-INTAKE` �
 
 ## 7. Implementación
 
-- Los ocho componentes de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 llevan declarada su capa; §3.2 declara las cinco precisiones de la regla de dependencias.
+- Los ocho componentes de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 llevan declarada su capa; §3.2 declara las cinco precisiones de la regla de dependencias.
 - Cada superficie declara su **nombre canónico**, que es el que la maqueta y la línea de base visual ya usan y que **no se cambia**: cambiarlo invalidaría filas de la matriz de sensado de deriva.
 - Las tres representaciones reutilizadas reciben datos por parámetro y no invocan a nadie.
 - La **sección 5 de cada wireframe es la lista de estados que hay que sostener**: un estado que la implementación no reproduzca es una deriva, y la matriz lo levanta.

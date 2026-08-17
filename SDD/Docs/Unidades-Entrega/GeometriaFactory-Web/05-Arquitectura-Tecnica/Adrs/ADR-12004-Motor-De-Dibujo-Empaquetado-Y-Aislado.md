@@ -52,8 +52,8 @@ Motivación upstream: NB-00006, NB-00008 en su arista de funcionamiento desde la
 
 1. **Se acepta el peso del motor dentro del bundle**, a cambio de funcionar sin acceso a redes externas. El intake lo declara explícitamente como trade-off aceptado.
 2. **Se acepta regenerar y volver a desplegar el artefacto** ante cualquier actualización del motor.
-3. **Se acepta que la versión del motor sea un punto abierto** hasta la etapa que implementa la capa 3, con el riesgo de retrabajo que registra [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §9 con probabilidad alta.
-4. **Se acepta que este proyecto de código no nombre el motor en su documentación.** La convención está declarada en [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §2.2, y tiene la contrapartida de que hay que abrir el intake para saber cuál es.
+3. **Se acepta que la versión del motor sea un punto abierto** hasta la etapa que implementa la capa 3, con el riesgo de retrabajo que registra [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §9 con probabilidad alta.
+4. **Se acepta que este proyecto de código no nombre el motor en su documentación.** La convención está declarada en [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §2.2, y tiene la contrapartida de que hay que abrir el intake para saber cuál es.
 
 ## 7. Implementación
 
@@ -76,7 +76,7 @@ Motivación upstream: NB-00006, NB-00008 en su arista de funcionamiento desde la
 ## 9. Referencias
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` 1.15 §17.2.P.1 · GeometriaFactory-Visor, §17.2.P.7 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor, §17.2.P.9 · GeometriaFactory-Visor, §17.2.P.11 · GeometriaFactory-Visor punto 2, §17.2.P.12 · GeometriaFactory-Visor y §15 (`PT-02`, `PT-03`); encabezado de la Parte C, regla de anclaje de versiones.
-- [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §2.2 y §5.
+- [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §2.2 y §5.
 - ADR relacionadas: [`ADR-12001`](ADR-12001-Tres-Capas-Con-Fachada-Plana.md), [`ADR-12006`](ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md).
 
 ## 10. Control de cambios

@@ -64,7 +64,7 @@ Además: **la negativa por pertenencia y la negativa por facultad no se colapsan
 
 ## 7. Implementación
 
-- El componente **Guarda de autorización** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único que ejerce las cuatro comprobaciones.
+- El componente **Guarda de autorización** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único que ejerce las cuatro comprobaciones.
 - La guarda **no lee el conjunto y no escribe**: trabaja sobre la entidad ya recuperada por el orquestador, que es lo que la hace ejercitable con dobles.
 - **Una sola negativa de facultad.** El dominio declara dos códigos para la misma negativa —uno en su resolución de desenlace y otro en la de alcance del administrador— y esta capa emite uno solo, porque corta con su propia verificación **antes** de invocar al dominio. Quien lea las dos capas no debe leer tres negativas de facultad donde hay una.
 - El **alcance del administrador** se traslada a la consulta y no se aplica después de traerla: un borrador no se filtra en memoria, no se trae.

@@ -56,7 +56,7 @@ En consecuencia, **ninguna otra operación del dominio vuelve a comprobar el est
 
 ## 7. Implementación
 
-- El componente **Evaluador de admisibilidad** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único que lee el estado de cuenta y la marca a efectos de acceso.
+- El componente **Evaluador de admisibilidad** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único que lee el estado de cuenta y la marca a efectos de acceso.
 - **Los otros cuatro componentes no leen la marca.** Las guardas de cuenta la **escriben** —la habilitación y el reseteo la ponen, el reemplazo la levanta—, que es una operación distinta de leerla para decidir acceso.
 - Convención impuesta al consumidor: resolver la admisibilidad **antes** de invocar cualquier otra operación en nombre de esa cuenta.
 - Verificación estructural sugerida a 08: recorrer los cinco componentes y comprobar que ninguno salvo el evaluador consulta la marca para decidir acceso.

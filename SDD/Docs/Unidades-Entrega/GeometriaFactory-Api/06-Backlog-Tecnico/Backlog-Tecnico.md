@@ -42,7 +42,7 @@ Las **veintiséis** tareas técnicas viven **inline**, porque el proyecto de có
 
 Las **dieciséis** tareas técnicas viven **inline** en este documento y no en archivos individuales, porque el proyecto de código está por debajo del umbral de treinta que fija la regla de la categoría. Cada una declara su fuente upstream por identificador, sus criterios de aceptación, sus dependencias, su tipo y las historias que la consumen.
 
-**Ninguna tarea inventa alcance.** Cada una nace de un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, de una ADR, de un NFR de su §8, de un punto abierto de su §11 o de una regla de delivery del intake §15. Las cuatro que cierran un punto abierto —BT-02002, BT-02003, BT-02015 y BT-02016— son la parte de este backlog que convierte en trabajo lo que las categorías anteriores dejaron declarado sin resolver, en lugar de resolverlo por su cuenta.
+**Ninguna tarea inventa alcance.** Cada una nace de un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1, de una ADR, de un NFR de su §8, de un punto abierto de su §11 o de una regla de delivery del intake §15. Las cuatro que cierran un punto abierto —BT-02002, BT-02003, BT-02015 y BT-02016— son la parte de este backlog que convierte en trabajo lo que las categorías anteriores dejaron declarado sin resolver, en lugar de resolverlo por su cuenta.
 
 **Estimación: sin fijar**, por el fundamento de [`Product-Backlog.md`](Product-Backlog.md) §4.1. Lo que ordena las tareas es la **etapa** y las dependencias de §3, no un tamaño relativo.
 
@@ -50,7 +50,7 @@ Las **dieciséis** tareas técnicas viven **inline** en este documento y no en a
 
 Las **veintiuna** tareas técnicas viven **inline** en este documento y no en archivos individuales, porque el proyecto de código está por debajo del umbral de treinta que fija la regla de la categoría. Cada una declara su fuente upstream por identificador, sus criterios de aceptación, sus dependencias, su tipo y las historias que la consumen.
 
-**Ninguna tarea inventa alcance.** Cada una nace de un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1, de una ADR, de un NFR de su §8, de un riesgo de su §9, de un punto abierto de su §11 o de una regla de delivery del intake §15. **Cinco** convierten en trabajo un punto abierto que las categorías anteriores dejaron declarado sin resolver, en lugar de resolverlo por su cuenta: BT-04002, BT-04003, BT-04018, BT-04020 y BT-04021.
+**Ninguna tarea inventa alcance.** Cada una nace de un componente de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1, de una ADR, de un NFR de su §8, de un riesgo de su §9, de un punto abierto de su §11 o de una regla de delivery del intake §15. **Cinco** convierten en trabajo un punto abierto que las categorías anteriores dejaron declarado sin resolver, en lugar de resolverlo por su cuenta: BT-04002, BT-04003, BT-04018, BT-04020 y BT-04021.
 
 **Dos particularidades de este backlog técnico, que conviene decir antes de leerlo.**
 

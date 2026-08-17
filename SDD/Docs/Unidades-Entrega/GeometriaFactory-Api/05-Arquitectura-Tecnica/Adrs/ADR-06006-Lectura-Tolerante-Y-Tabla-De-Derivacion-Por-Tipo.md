@@ -62,7 +62,7 @@ Motivación upstream: NB-00004, NB-00005, NB-00006; RN-06005, RN-06008, RN-06009
 
 ## 7. Implementación
 
-- El motor de interpretación y el motor de verificación de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 son los únicos lugares donde el texto del alumno se lee y donde un valor se deriva.
+- El motor de interpretación y el motor de verificación de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 son los únicos lugares donde el texto del alumno se lee y donde un valor se deriva.
 - El orden de los pasos, con sus transformaciones, está en [`../Flujo-Ejecucion.md`](../Flujo-Ejecucion.md); la tabla de derivación por tipo es su §5.
 - **Convención impuesta:** ninguna observación es genérica. Todo error de validación indica **posición y campo** (`G-4`).
 - **Convención impuesta:** un defecto en una figura **no descarta el resto del análisis** (`G-2`), y una dimensión presente con valor cero **no descarta la figura** (`E-6`): existencia no es veracidad.
@@ -73,7 +73,7 @@ Motivación upstream: NB-00004, NB-00005, NB-00006; RN-06005, RN-06008, RN-06009
 
 | Métrica | Objetivo | Cómo se mide |
 | --- | --- | --- |
-| Casos de la batería del validador que pasan | **10 de 10**, con los ocho escenarios como entrada | Etapa de `test` del pipeline, con la matriz de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §10.5 |
+| Casos de la batería del validador que pasan | **10 de 10**, con los ocho escenarios como entrada | Etapa de `test` del pipeline, con la matriz de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §10.5 |
 | Advertencias del escenario `E-1` | Exactamente **2**, no 3 | Caso 9 de la batería: es el que verifica el operador estricto |
 | Observaciones del escenario `E-4` | Exactamente **0** | Caso 4 de la batería: el criterio negativo |
 | Cobertura de líneas de los dos motores | **95 %** [ASUNCIÓN del intake] | Informe de cobertura acotado, bloqueante |

@@ -53,7 +53,7 @@ En consecuencia, **un caso de uso completo se ejerce con dobles de sus puertos**
 
 ## 7. Implementación
 
-- Los **seis** orquestadores de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 materializan los once casos de uso; los otros dos componentes —guarda de autorización y declaración de puertos— son transversales.
+- Los **seis** orquestadores de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 materializan los once casos de uso; los otros dos componentes —guarda de autorización y declaración de puertos— son transversales.
 - Ningún orquestador depende de otro orquestador: los seis se apoyan en la guarda, en los puertos y en el dominio.
 - El archivo de proyecto declara **una** referencia de proyecto de código y ninguna referencia a bibliotecas de persistencia, transporte, serialización o marco web.
 - Convención impuesta al consumidor: la composición de raíz de `GeometriaFactory-Api` conecta cada puerto con su adaptador de `GeometriaFactory-Infrastructure`; esta capa no conoce ninguno de los dos.

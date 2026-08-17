@@ -804,7 +804,7 @@ lado de la frontera, y la tabla es lo que permite verificar que el porte fue fie
 | Contenido previsto de la superficie | `SurfaceOutline` | Tipo, componente compartido | **Propuesta de la etapa `b`**, sobre `Linea-Base-Visual.md` §3 |
 | Superficie de dirección no encontrada | `NotFoundSurface` | Tipo, componente compartido | **Propuesta declarada de la etapa `b`**: ninguna fuente la declara, y por eso **no lleva `SUP-XX`** |
 | Página de dirección no encontrada | `NotFoundPage` | Tipo, componente de página | **Propuesta declarada de la etapa `b`**: punto de reejecución del código 404 |
-| Carpeta de componentes compartidos | `Shared/` | Carpeta, por debajo del nivel de espacio de nombres, dentro de `Components/` | Corolario de §6.11. Aloja las representaciones reutilizadas de `Arquitectura-Proyecto-Codigo.md` §3.1 |
+| Carpeta de componentes compartidos | `Shared/` | Carpeta, por debajo del nivel de espacio de nombres, dentro de `Components/` | Corolario de §6.11. Aloja las representaciones reutilizadas de `Arquitectura-Unidad-Entrega.md` §3.1 |
 | Carpeta de componentes del trabajo | `Work/` | Carpeta, por debajo del nivel, dentro de `Components/` | Corolario de §6.11. Aloja `SUP-08`, que no es página porque no tiene ruta |
 
 #### 6.12.2 Miembros y parámetros (13)

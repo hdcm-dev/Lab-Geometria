@@ -234,7 +234,7 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 
 ### 4.1 `GeometriaFactory-Web`
 
-Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md), ni rediseña superficies: ésas están en [`../03-UX-UI-DX/`](../03-UX-UI-DX/), emitidas y validadas contra una maqueta aprobada.
+Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md), ni rediseña superficies: ésas están en [`../03-UX-UI-DX/`](../03-UX-UI-DX/), emitidas y validadas contra una maqueta aprobada.
 
 **Orden**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) §3:
 
@@ -254,7 +254,7 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 
 ### 4.2 `GeometriaFactory-Visor`
 
-Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md).
+Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md).
 
 **Orden**, derivado de las dependencias de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) §3:
 

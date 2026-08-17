@@ -70,7 +70,7 @@ Este documento tiene una sección que los otros dos proyectos de código de nive
 
 ### 3.1 `GeometriaFactory-Web`
 
-Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8. El de los pasos del guion lleva su rótulo **[ASUNCIÓN]** porque así viene del intake en cuanto a su **forma de puerta**.
+Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8. El de los pasos del guion lleva su rótulo **[ASUNCIÓN]** porque así viene del intake en cuanto a su **forma de puerta**.
 
 | Id | Criterio | Umbral | Cómo se mide | Carácter |
 | --- | --- | --- | --- | --- |
@@ -93,7 +93,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md
 
 ### 3.2 `GeometriaFactory-Visor`
 
-Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8. **Los seis primeros son las seis propiedades transversales de `02` §6 y llevan su condición de medición, que es vinculante.**
+Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8. **Los seis primeros son las seis propiedades transversales de `02` §6 y llevan su condición de medición, que es vinculante.**
 
 | Id | Criterio | Umbral | Condición de medición | Test |
 | --- | --- | --- | --- | --- |

@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
-**Documento:** Arquitectura-Proyecto-Codigo.md
+**Documento:** Arquitectura-Unidad-Entrega.md
 **Versión:** 2.0
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
@@ -71,7 +71,7 @@ Este proyecto de código compila contra `GeometriaFactory-Contracts` y contra el
 | Ningún tipo del contrato habilita a que el navegador invoque el servicio de datos: **todas** las solicitudes las arma el servidor de la unidad pública, **incluidas las que llevan credenciales en claro** | [`Contracts ADR-08004`](../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) y su restricción `RT-11` | El canje, el cambio de contraseña y el reseteo salen del **servidor** de esta pieza. Ningún formulario los envía directo |
 | La proyección de listado no lleva texto original, ni componentes, ni comentario; el detalle sí | [`Contracts ADR-08005`](../../../Producto/Adrs/ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md) | Los dos listados **no pueden** mostrar el comentario ni el texto: pedirlos obligaría a traer el detalle de cada fila. La categoría 03 ya diseñó con esa restricción |
 | El bundle es un visualizador puro: **no hace red, no lee configuración y no conoce identidad**, y no consulta la preferencia de movimiento reducido | [`Visor ADR-12003`](Adrs/ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md) | **Es esta pieza la que consulta el entorno del navegador** y le manda dos valores de verdad por `establecerMovimiento`. La ignorancia del bundle es una obligación de esta pieza, no una comodidad |
-| La superficie del bundle son **seis** funciones planas bajo un nombre propio, y el componente anfitrión —capa 1— **vive en este proyecto de código** | [`Visor ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) y [`Visor Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §3.1 | El anfitrión es un componente **de esta** arquitectura, y su ciclo de vida —incluida la liberación— es responsabilidad de acá ([`ADR-10006`](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md)) |
+| La superficie del bundle son **seis** funciones planas bajo un nombre propio, y el componente anfitrión —capa 1— **vive en este proyecto de código** | [`Visor ADR-12002`](Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md) y [`Visor Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §3.1 | El anfitrión es un componente **de esta** arquitectura, y su ciclo de vida —incluida la liberación— es responsabilidad de acá ([`ADR-10006`](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md)) |
 
 ### 2.2 `GeometriaFactory-Visor`
 

@@ -60,7 +60,7 @@ Motivación upstream: NB-00003, NB-00004; RN-06003, RN-06008, RN-06009, RN-06011
 
 ## 7. Implementación
 
-- Los ocho componentes son los de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1, y §3.3 declara qué caso de uso cubre cada uno.
+- Los ocho componentes son los de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1, y §3.3 declara qué caso de uso cubre cada uno.
 - **Convención impuesta:** ningún componente que no toque el almacén puede declarar una dependencia hacia el contexto de persistencia. Una dependencia así se rechaza en revisión, porque rompe la propiedad de §2.
 - **Convención impuesta:** los adaptadores no se registran solos. La composición de raíz de `GeometriaFactory-Api` es el único lugar donde se conectan.
 - La proyección de listado y el detalle completo son dos operaciones distintas del mismo adaptador, declaradas en [`../Contratos-Abstractions.md`](../Contratos-Abstractions.md) §3.

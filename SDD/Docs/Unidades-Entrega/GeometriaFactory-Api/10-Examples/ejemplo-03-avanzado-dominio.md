@@ -105,7 +105,7 @@ La última variación es el puente hacia `09-Devops`: muestra que el gate de dep
 | [`RN-02012`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md) | Regla de negocio | El recuento de trabajos antes y después de `[8]` |
 | [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | Acto `[11]` |
 | [`ADR-02006`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) | Decisión arquitectónica | Acto `[10]`: dos corridas consecutivas sin fijar el reloj |
-| NFR «Dependencias salientes» de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8 | Requisito no funcional | Acto `[9]`, con los dos recuentos en 0 |
+| NFR «Dependencias salientes» de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8 | Requisito no funcional | Acto `[9]`, con los dos recuentos en 0 |
 
 ## 9. Contrato de verificación
 

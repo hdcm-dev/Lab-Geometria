@@ -43,7 +43,7 @@ Siete criterios, todos respondibles con sí o no. Los tres últimos son propios 
 1. **Traza a un caso de uso.** La historia declara al menos un `CU-XX` de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §3.
 2. **Declara su necesidad de negocio y su momento del producto**: la etapa `a`, el momento de medición de `PT-02` y `PT-03`, o la etapa `g`.
 3. **Tiene criterios de aceptación en Given/When/Then, con al menos dos escenarios**, uno de camino feliz y uno de borde.
-4. **Declara el componente de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 que la sostiene**, y su capa.
+4. **Declara el componente de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1 que la sostiene**, y su capa.
 5. **Declara qué garantías del contrato de fachada ejerce**, de las **siete** de [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §3.2, y ninguna de sus afirmaciones contradice a otra garantía.
 6. **Todo código de condición que la historia usa es uno de los siete** de ese mismo documento, §6. Una historia que necesite un código nuevo **no está lista**: un código sólo puede nacer allá, y un curso nuevo se agrega como fila de curso y no como código.
 7. **Ninguna persona, papel, servicio ni credencial interviene como actor ni condiciona un flujo.** Nombrarlos para declarar qué queda fuera del contrato es obligatorio; que intervengan es un defecto por definición (`02` §2).

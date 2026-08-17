@@ -60,7 +60,7 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.1.P.1 · Geometr
 
 ## 7. Implementación
 
-- La composición de raíz de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único componente que ve a los tres proyectos de código referenciados a la vez.
+- La composición de raíz de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único componente que ve a los tres proyectos de código referenciados a la vez.
 - **Convención impuesta:** ningún punto de acceso ni ninguna superficie construye una dependencia por su cuenta.
 - **Convención impuesta:** ningún componente lee configuración. La recibe.
 - La preparación del almacén se dispara **después** de construir el grafo y **antes** de escuchar ([`ADR-00007`](ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md)).
@@ -81,7 +81,7 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.1.P.1 · Geometr
 
 - `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.17** §17.1.P.4 · GeometriaFactory-Infrastructure, §17.1.P.1 · GeometriaFactory-Api, §17.1.P.4 · GeometriaFactory-Api y §17.1.P.5 · GeometriaFactory-Api.
 - [`../../02-Especificacion-Funcional/Casos-De-Uso/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md`](../Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md).
-- [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §4, que es donde queda declarada la condición a cargo de la composición de raíz.
+- [`../../../GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §4, que es donde queda declarada la condición a cargo de la composición de raíz.
 - [`../../../GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Adrs/ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md`](ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md), que decide no autorregistrarse.
 - ADR relacionadas: [`ADR-00001`](ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md), [`ADR-00002`](ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md), [`ADR-00007`](ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md).
 

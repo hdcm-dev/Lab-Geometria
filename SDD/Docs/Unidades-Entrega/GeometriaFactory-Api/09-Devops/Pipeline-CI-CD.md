@@ -603,7 +603,7 @@ Lo que sí hay, y es lo que este pipeline ejecuta y bloquea, son **los ocho qual
 
 ### 11.2 `GeometriaFactory-Application`
 
-`GeometriaFactory-Application` es una **biblioteca de casos de uso, no un servicio desplegable**. [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §5 lo declara sin unidad de despliegue propia: su artefacto se compila dentro del artefacto de agrupación del producto y **viaja embebido en la unidad desplegable del servidor propio, por la vía de `GeometriaFactory-Api`**. `redistribuible` es false y el intake §13 declara que **ningún proyecto de código del producto se publica como paquete redistribuible**.
+`GeometriaFactory-Application` es una **biblioteca de casos de uso, no un servicio desplegable**. [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §5 lo declara sin unidad de despliegue propia: su artefacto se compila dentro del artefacto de agrupación del producto y **viaja embebido en la unidad desplegable del servidor propio, por la vía de `GeometriaFactory-Api`**. `redistribuible` es false y el intake §13 declara que **ningún proyecto de código del producto se publica como paquete redistribuible**.
 
 De ahí el alcance: **compilación, prueba con dobles y verificación estructural**. No hay empaquetado propio, no hay publicación, no hay ambientes y no hay despliegue. Inventarle cualquiera de esas cuatro cosas sería inventar un acto que este proyecto de código no ejecuta.
 
@@ -613,7 +613,7 @@ Lo que este pipeline ejecuta y bloquea son **los once quality gates** que `Estra
 
 ### 11.3 `GeometriaFactory-Infrastructure`
 
-`GeometriaFactory-Infrastructure` es una **biblioteca de adaptadores, no un servicio desplegable**. [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §5 lo declara sin unidad de despliegue propia: se compila dentro del artefacto de agrupación y **viaja embebido en la unidad desplegable del servidor propio, por la vía de `GeometriaFactory-Api`**. `redistribuible` es false y el intake §13 declara que ningún proyecto de código del producto se publica como paquete redistribuible.
+`GeometriaFactory-Infrastructure` es una **biblioteca de adaptadores, no un servicio desplegable**. [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §5 lo declara sin unidad de despliegue propia: se compila dentro del artefacto de agrupación y **viaja embebido en la unidad desplegable del servidor propio, por la vía de `GeometriaFactory-Api`**. `redistribuible` es false y el intake §13 declara que ningún proyecto de código del producto se publica como paquete redistribuible.
 
 Pero **es la biblioteca del producto con más superficie de canalización**, y conviene decir por qué antes de la tabla de stages. Tres rasgos, los tres de la fuente:
 

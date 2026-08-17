@@ -9,7 +9,7 @@
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
 **Proyectos de código que la componen:** `GeometriaFactory-Api`, `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure` y `GeometriaFactory-Contracts`
-**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md); [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1** §17.1.P.6, §17.1.P.8, §20, §21 y §22
+**Trazabilidad upstream:** [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §2 y §3; [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md); [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1** §17.1.P.6, §17.1.P.8, §20, §21 y §22
 **Trazabilidad downstream:** [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md), [`Plan-Pruebas.md`](Plan-Pruebas.md); `09-Devops` y `11-Documentacion`
 **Consolida a:** las estrategias de `GeometriaFactory-Domain`, `GeometriaFactory-Application` e `GeometriaFactory-Infrastructure`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.0 §4, salida **S1**
 
@@ -162,7 +162,7 @@ test** que `Rules-Calidad-Y-Pruebas.md` §2.2 exige.
 
 ### 2.1 `GeometriaFactory-Api`
 
-La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Api y es **75 % de líneas y 70 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`]. **Es el piso más bajo del producto, y el motivo está declarado en la fuente**: este proyecto de código es cableado, y su valor se verifica ejerciéndolo y no cubriéndolo.
+La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Api y es **75 % de líneas y 70 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`]. **Es el piso más bajo del producto, y el motivo está declarado en la fuente**: este proyecto de código es cableado, y su valor se verifica ejerciéndolo y no cubriéndolo.
 
 **Este piso baja respecto del de la guía, y hay que decirlo.** `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `rest-api` **«80 % aplicación, 70 % infraestructura, 100 % de endpoints cubiertos por contract test»**, y agrega que «los porcentajes son piso, no techo. El equipo puede subir cobertura cuando el dominio lo exige, pero **no bajarla sin un ADR que lo justifique**». **75 < 80**: el piso global de líneas de este proyecto de código **baja** el de la guía en cinco puntos. El de ramas, **70 = 70**, no baja. Es el único de los siete proyectos de código del producto cuyo piso baja; `GeometriaFactory-Domain`, `-Application` e `-Infrastructure` hacen esta misma comparación y concluyen que el suyo **sube**.
 
@@ -188,7 +188,7 @@ La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Ar
 
 ### 2.2 `GeometriaFactory-Domain`
 
-La partición no es en capas de despliegue —no las hay— sino en los **cinco componentes** de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Domain y es **90 % de líneas y 85 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
+La partición no es en capas de despliegue —no las hay— sino en los **cinco componentes** de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Domain y es **90 % de líneas y 85 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -205,7 +205,7 @@ La partición no es en capas de despliegue —no las hay— sino en los **cinco 
 
 ### 2.3 `GeometriaFactory-Application`
 
-La partición no es en capas de despliegue —no las hay— sino en los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Application y es **85 % de líneas y 80 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
+La partición no es en capas de despliegue —no las hay— sino en los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Application y es **85 % de líneas y 80 % de ramas** [ASUNCIÓN del intake §22, asunción `A-3`].
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -225,7 +225,7 @@ La partición no es en capas de despliegue —no las hay— sino en los **ocho**
 
 ### 2.4 `GeometriaFactory-Infrastructure`
 
-La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Infrastructure y es **85 % de líneas y 80 % de ramas**; el validador tiene un piso propio de **95 % de líneas**. Los tres valores vienen rotulados **[ASUNCIÓN del intake §22, asunción `A-3`]**.
+La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1. El piso global lo fija el intake §17.1.P.6 · GeometriaFactory-Infrastructure y es **85 % de líneas y 80 % de ramas**; el validador tiene un piso propio de **95 % de líneas**. Los tres valores vienen rotulados **[ASUNCIÓN del intake §22, asunción `A-3`]**.
 
 | Componente | Líneas | Ramas | Mutation score | Fundamento del valor |
 | --- | --- | --- | --- | --- |
@@ -546,7 +546,7 @@ Fixtures compartidos:
 
 ### 6.1 Los ocho escenarios contra los diez casos de la batería
 
-Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.5, con la columna que a esta categoría le toca: **qué caso de prueba la materializa**. Ninguna fila se agrupa y ninguna se agrega.
+Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §10.5, con la columna que a esta categoría le toca: **qué caso de prueba la materializa**. Ninguna fila se agrupa y ninguna se agrega.
 
 | # | Caso de la batería | Escenario | CU | Paso del flujo | Caso de prueba |
 | --- | --- | --- | --- | --- | --- |

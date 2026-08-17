@@ -60,7 +60,7 @@ La reversión es **volver a publicar desde la etiqueta anterior**, y el desplieg
 
 ## 7. Implementación
 
-- El componente **Cliente tipado del servicio de datos** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 toma la dirección de configuración. Ningún otro componente la conoce, y ninguna superficie la muestra.
+- El componente **Cliente tipado del servicio de datos** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 toma la dirección de configuración. Ningún otro componente la conoce, y ninguna superficie la muestra.
 - El flujo de publicación recorre: obtención del código → preparación de las dos cadenas de herramientas → instalación reproducible y empaquetado del bundle con copia al directorio de recursos estáticos → publicación → inyección de la dirección desde secretos → subida → **comprobación de que la dirección pública responde**.
 - Se dispara manualmente y por fusión a la rama principal, **restringido a los cambios de este proyecto de código y del visor**.
 - Puertas bloqueantes: construcción **sin advertencias**; bundle generado en el mismo flujo; y la comprobación final.

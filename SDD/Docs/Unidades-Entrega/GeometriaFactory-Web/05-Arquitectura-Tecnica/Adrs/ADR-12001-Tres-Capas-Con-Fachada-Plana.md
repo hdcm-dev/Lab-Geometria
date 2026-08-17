@@ -55,7 +55,7 @@ Se adopta un **estilo de microkernel con fachada plana en tres capas**, con la r
 
 ## 7. Implementación
 
-- Los seis componentes de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1, con el grafo acíclico que esa sección declara.
+- Los seis componentes de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1, con el grafo acíclico que esa sección declara.
 - **El archivo de fachada no importa el motor de dibujo.** Es verificable por inspección y es la forma concreta en que «la capa 2 no contiene lógica de dibujo» se comprueba.
 - **La capa 3 no recibe ninguna referencia al anfitrión**: no toca la página más allá del elemento de dibujo que se le entregó.
 - El bundle expone **un solo nombre propio** en el objeto global del navegador, sin identificadores globales sueltos.

@@ -126,7 +126,7 @@ Ocurre en dos momentos y con el mismo alcance:
 | CU que recorre | `CU-12002` para la canalización; `CU-12001` y `CU-12005` para el ciclo de vida; `CU-12007` para el bucle de movimiento; `CU-12006` para el recorrido completo sin backend |
 | Garantías que sostiene | G-1, G-2, G-4, G-5, G-6 y G-7 |
 | ADR que lo gobiernan | ADR-12001, ADR-12003, ADR-12005 |
-| NFR que verifica | Cero red, liberación de recursos, disposición determinista y ausencia de fallo silencioso, con las condiciones de medición de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §8 |
+| NFR que verifica | Cero red, liberación de recursos, disposición determinista y ausencia de fallo silencioso, con las condiciones de medición de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §8 |
 | Material de dibujo | Escenarios **E-1** —tres piezas, con el ortoedro dibujado— y **E-7** —seis piezas que cubren los seis tipos dibujables— |
 | Tests previstos en 08 | Una prueba por paso con condición emisible; recorrido completo por el sample S-1; diez recorridos de ida y vuelta con los movimientos prendidos |
 

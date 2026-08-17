@@ -58,7 +58,7 @@ Y sobre la forma de la consulta: **las consultas de listado no materializan los 
 
 ## 7. Implementación
 
-- Los **seis** orquestadores de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 abren a lo sumo una unidad de trabajo cada uno; ninguno invoca a otro.
+- Los **seis** orquestadores de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 abren a lo sumo una unidad de trabajo cada uno; ninguno invoca a otro.
 - La unidad se abre **después** de que la guarda de autorización autorizó y **antes** de la primera escritura: la comprobación se hace sobre el dato recuperado y antes de escribir.
 - El caso de uso de gobierno de cuentas es el testigo: comparación del correo escrito, retiro de todos los trabajos y cambio de situación, en la misma unidad.
 - El puerto de repositorio de trabajos ofrece **dos** formas de lectura distintas: la proyección de listado —sin texto original, sin componentes y sin comentario— y el detalle completo. No es una optimización: es la forma del contrato.

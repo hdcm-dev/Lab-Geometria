@@ -55,7 +55,7 @@ Los agregados son **dos y no uno**: la cuenta y el trabajo. Ninguna invariante l
 
 - Un archivo de proyecto **sin ninguna referencia** a otro proyecto de código del producto ni a paquetes de persistencia, transporte o serialización.
 - Las cinco entidades de [`../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../../02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2, con sus atributos declarados como estado propio y no público de escritura libre.
-- Los cinco componentes de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1, con el grafo acíclico que esa misma sección declara.
+- Los cinco componentes de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1, con el grafo acíclico que esa misma sección declara.
 - Los nombres de tipos y de espacios de nombres **no se fijan acá**: quedan abiertos hasta el punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain).
 
 ## 8. Métricas de validación
