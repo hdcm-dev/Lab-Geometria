@@ -446,3 +446,16 @@ comprometer la `g` y no para cerrar ésta.**
 - **`ApiDocumentationSurfaceTests`, cuatro pruebas, y la que importa es la del cierre**: que en
   desarrollo se vea lo nota cualquiera la primera vez que lo abre; que **deje de verse al
   desplegar** no lo nota nadie hasta que ya está publicado.
+
+### La imagen se sella con su propia revisión
+- **El Dockerfile deriva el commit del `.git` del contexto** en lugar de recibirlo por argumento.
+  `SOURCE_REVISION_ID` queda como respaldo, para el tarball sin `.git` o para forzar una revisión.
+- **El motivo es que la falla anterior no tenía síntoma.** Con la revisión como argumento a mano,
+  actualizar el código sin actualizar la variable dejaba al servicio informando por `/salud` una
+  revisión que no era la suya, **andando perfecto**. Un error que no se ve es peor que uno que
+  rompe.
+- **La copia es tolerante a la ausencia** —`COPY .gi[t] ./.git/`—: un patrón que no encuentra nada
+  no rompe la construcción, así que el caso sin `.git` sigue funcionando con el argumento.
+- **Consecuencia para el despliegue**: la composición del host puede apuntar a una **rama** y
+  `docker compose up -d --build` actualiza de verdad, con el sello correcto, sin dos variables que
+  mantener parejas.

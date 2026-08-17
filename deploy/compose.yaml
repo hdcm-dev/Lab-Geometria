@@ -13,8 +13,10 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
       args:
-        # Se pasa al construir: `SOURCE_REVISION_ID=$(git rev-parse HEAD) docker compose build`.
-        # Sin él la imagen queda sin identificar y el punto de salud no dice de qué commit es.
+        # YA NO HACE FALTA PASARLO ACÁ: esta composición construye sobre el árbol de trabajo, que
+        # trae su `.git`, y el Dockerfile deriva la revisión de ahí. El argumento queda como
+        # respaldo para el único caso que no puede derivarla —construir desde un tarball sin
+        # `.git`— y porque forzarlo sigue siendo útil para reproducir una imagen puntual.
         SOURCE_REVISION_ID: ${SOURCE_REVISION_ID:-desconocida}
     restart: unless-stopped
     ports:
