@@ -1,7 +1,7 @@
 # RC-06007 — La marca de cambio de contraseña pendiente no es un estado de cuenta, y el comentario no es una observación
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md
 **Versión:** 1.4
 **Estado:** Aprobado

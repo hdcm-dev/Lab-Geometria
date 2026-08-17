@@ -1,6 +1,6 @@
 # ADR-10001 — Render en el servidor con circuito interactivo, y una sola salida hacia el servicio de datos
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md
 **Versión:** 1.0
 **Estado:** Aprobado

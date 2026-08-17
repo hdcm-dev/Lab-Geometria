@@ -1,6 +1,6 @@
 # CU-10010 — Sostener la aplicación en estado degradado y reconexión
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md
 **Versión:** 1.2
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # CU-10003 — Establecer y cambiar la contraseña propia
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10003-Establecer-Y-Cambiar-La-Contrasena-Propia.md
 **Versión:** 1.4
 **Estado:** Aprobado

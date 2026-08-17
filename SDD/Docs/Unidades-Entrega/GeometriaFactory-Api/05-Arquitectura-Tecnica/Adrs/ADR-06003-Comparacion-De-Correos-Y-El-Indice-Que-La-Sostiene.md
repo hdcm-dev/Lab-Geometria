@@ -1,6 +1,6 @@
 # ADR-06003 — Criterio de comparación de dos correos, y el índice que lo sostiene
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md
 **Versión:** 1.0
 **Estado:** Aprobado

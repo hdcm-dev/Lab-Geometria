@@ -1,6 +1,6 @@
 # ADR-02001 — Modelo de dominio rico con invariantes explícitas y cero dependencias
 
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-04020 — Listar los trabajos de la comisión excluyendo los borradores
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04020-Listar-Los-Trabajos-De-La-Comision-Excluyendo-Los-Borradores.md
 **Versión:** 1.0
 **Estado:** Aprobada

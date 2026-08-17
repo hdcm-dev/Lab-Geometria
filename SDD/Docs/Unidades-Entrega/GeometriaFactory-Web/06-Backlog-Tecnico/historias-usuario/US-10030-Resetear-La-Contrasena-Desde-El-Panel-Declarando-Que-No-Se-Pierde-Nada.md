@@ -1,7 +1,7 @@
 # US-10030 — Resetear la contraseña desde el panel, declarando que no se pierde ningún trabajo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10030-Resetear-La-Contrasena-Desde-El-Panel-Declarando-Que-No-Se-Pierde-Nada.md
 **Versión:** 1.1
 **Estado:** Aprobada

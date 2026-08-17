@@ -1,6 +1,6 @@
 # Línea de base visual — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Linea-Base-Visual.md
 **Versión:** 1.5
 **Estado:** Aprobado

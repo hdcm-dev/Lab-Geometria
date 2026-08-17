@@ -1,6 +1,6 @@
 # ADR-06005 — La contraseña provisoria: no adivinable, sin repetirse y transcribible de viva voz
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md
 **Versión:** 1.0
 **Estado:** Aprobado

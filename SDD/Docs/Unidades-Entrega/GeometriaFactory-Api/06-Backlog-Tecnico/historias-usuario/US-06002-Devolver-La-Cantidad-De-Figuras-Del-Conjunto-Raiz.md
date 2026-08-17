@@ -1,7 +1,7 @@
 # US-06002 — Devolver la cantidad de figuras del conjunto raíz, incluidas las no reconstruidas
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06002-Devolver-La-Cantidad-De-Figuras-Del-Conjunto-Raiz.md
 **Versión:** 1.0
 **Estado:** Aprobada

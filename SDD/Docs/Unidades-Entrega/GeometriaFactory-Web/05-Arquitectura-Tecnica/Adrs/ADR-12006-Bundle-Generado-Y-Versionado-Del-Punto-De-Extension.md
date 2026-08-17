@@ -1,6 +1,6 @@
 # ADR-12006 — El artefacto es un bundle generado, y su versionado es el del punto de extensión
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md
 **Versión:** 1.0
 **Estado:** Aprobado

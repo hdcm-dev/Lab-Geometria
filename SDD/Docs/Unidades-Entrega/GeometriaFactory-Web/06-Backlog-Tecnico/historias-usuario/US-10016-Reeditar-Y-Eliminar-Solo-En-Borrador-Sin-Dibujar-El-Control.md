@@ -1,7 +1,7 @@
 # US-10016 — Reeditar y eliminar sólo en `Borrador`, sin dibujar el control cuando no corresponde
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10016-Reeditar-Y-Eliminar-Solo-En-Borrador-Sin-Dibujar-El-Control.md
 **Versión:** 1.1
 **Estado:** Aprobada

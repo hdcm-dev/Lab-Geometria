@@ -1,7 +1,7 @@
 # US-00016 — No registrar la provisoria en ninguna traza
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00016-No-Registrar-La-Provisoria-En-Ninguna-Traza.md
 **Versión:** 1.1
 **Estado:** Aprobada

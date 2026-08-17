@@ -1,7 +1,7 @@
 # US-10001 — Registrar la cuenta con correo, nombre y apellido, sin campo de contraseña
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10001-Registrar-La-Cuenta-Sin-Campo-De-Contrasena.md
 **Versión:** 1.1
 **Estado:** Aprobada

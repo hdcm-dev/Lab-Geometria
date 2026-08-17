@@ -1,6 +1,6 @@
 # CU-12004 — Redimensionar la escena al elemento de dibujo
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12004-Redimensionar-La-Escena.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-10003 — La credencial de sesión vive en el estado del circuito, y las rutas acotan sin hacer cumplir
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md
 **Versión:** 1.3
 **Estado:** Aprobado

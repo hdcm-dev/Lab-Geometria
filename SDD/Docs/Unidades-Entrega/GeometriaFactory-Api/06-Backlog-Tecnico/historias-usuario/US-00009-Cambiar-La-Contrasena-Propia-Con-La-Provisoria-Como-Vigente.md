@@ -1,7 +1,7 @@
 # US-00009 — Cambiar la contraseña propia con la provisoria como vigente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00009-Cambiar-La-Contrasena-Propia-Con-La-Provisoria-Como-Vigente.md
 **Versión:** 1.2
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-02024 — Configurar la cuenta de administrador en el primer arranque, habilitada y con credencial
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02024-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # RN-02009 — Toda observación de error indica la posición de la pieza y el campo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md
 **Versión:** 1.1
 **Estado:** Aprobado

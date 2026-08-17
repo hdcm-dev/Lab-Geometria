@@ -1,7 +1,7 @@
 # US-04017 — Listar los trabajos propios con los cuatro estados distinguibles
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04017-Listar-Los-Trabajos-Propios-Con-Los-Cuatro-Estados-Distinguibles.md
 **Versión:** 1.0
 **Estado:** Aprobada

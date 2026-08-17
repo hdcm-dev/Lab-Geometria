@@ -1,7 +1,7 @@
 # US-04016 — Terminar de forma controlada cuando la interpretación no está disponible
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04016-Terminar-De-Forma-Controlada-Cuando-La-Interpretacion-No-Esta-Disponible.md
 **Versión:** 1.0
 **Estado:** Aprobada

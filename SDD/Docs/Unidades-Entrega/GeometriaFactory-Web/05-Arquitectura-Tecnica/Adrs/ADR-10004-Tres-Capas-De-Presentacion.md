@@ -1,6 +1,6 @@
 # ADR-10004 — Tres capas de presentación: ninguna superficie llega sola al servicio de datos
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10004-Tres-Capas-De-Presentacion.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # Ejemplo 02 — Un trabajo real del alumno: constitución, adopción de la interpretación y envío
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
 **Versión:** 1.1
 **Estado:** Aprobado

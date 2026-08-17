@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Fase auditada:** B — categorías `02-Especificacion-Funcional` y `03-UX-UI-DX`
-**Proyecto de código:** GeometriaFactory-Domain (`library`)
+**Unidad de entrega:** GeometriaFactory-Api
 **Alcance:** los treinta y dos documentos vivos de 02 y 03, los snapshots de `_legacy/2026-08-09/` y `_legacy/2026-08-09-b/`, y la nota de archivado omitido de `03-UX-UI-DX/_legacy/2026-08-09/`
 **Motivo de la ronda:** verificación de la resolución del **P0** que la auditoría de `GeometriaFactory-Application` reportó en `B-02-03-GeometriaFactory-Application-r1.md` (hallazgo H-01) y que el orquestador atribuyó a este proyecto de código: la cuenta del administrador nacía `Pendiente` y dejaba la instancia inutilizable en el primer arranque. **No es una re-auditoría de las rondas 1 y 2**, cuyos hallazgos están cerrados.
 **Auditor:** Arquitecto de Soluciones + QA Senior — auditor independiente, sin participación en la generación ni en las correcciones auditadas

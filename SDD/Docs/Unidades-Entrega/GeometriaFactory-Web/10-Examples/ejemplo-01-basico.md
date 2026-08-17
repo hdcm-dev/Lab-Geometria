@@ -1,7 +1,7 @@
 # Ejemplo 01 — La página integradora mínima: crear la escena, dibujar `E-1` y liberar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-01-basico.md
 **Versión:** 1.0
 **Estado:** Aprobado

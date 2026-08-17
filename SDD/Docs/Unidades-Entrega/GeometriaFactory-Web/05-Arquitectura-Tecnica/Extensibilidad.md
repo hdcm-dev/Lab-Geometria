@@ -1,7 +1,7 @@
 # Extensibilidad — GeometriaFactory-Visor
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Extensibilidad.md
 **Versión:** 1.0
 **Estado:** Aprobado

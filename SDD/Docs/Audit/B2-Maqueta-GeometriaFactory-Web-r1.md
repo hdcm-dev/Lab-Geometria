@@ -1,7 +1,7 @@
 # Auditoría de la Fase B2 — Validación visual de maqueta · GeometriaFactory-Web · ronda 1
 
 **Fase:** B2 — Validación visual de maqueta (última fase del nivel 1)
-**Proyecto de código:** `GeometriaFactory-Web` (`web-monolith`), con la validación del contrato de fachada de `GeometriaFactory-Visor` integrada en la misma maqueta por decisión del Product Owner
+**Unidad de entrega:** GeometriaFactory-Web
 **Alcance auditado:** `SDD/Maquetas/GeometriaFactory-Web/` íntegra; los tres artefactos de la fase en `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/` (`Linea-Base-Visual.md`, `Contrato-Datos-Maqueta.md`, `Bitacora-Validacion-Maqueta.md`); `SDD/Docs/Proyectos/GeometriaFactory-Web/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`; los once `Wireframes-*.md`, `Experiencia-De-Uso.md`, `Glosario-UX.md` y las tres `Representacion-*.md` de esa misma categoría; la categoría 02 y 03 completa de `GeometriaFactory-Visor`; `SDD/Docs/00-Contexto/` y `SDD/Docs/01-Necesidades-Negocio/`; `SDD/Intake/` (intake 1.6, manifiesto 1.1)
 **Criterios:** `Maqueta-Rules.md` 3.1 §8; `Deriva-Rules.md` 3.1 §2, §3 y §6; `Master-Prompt.md` §10, con sus tres hallazgos P0 propios de la fase; `Vocabulario-Rules.md` §9 y §10
 **Auditor:** Auditor independiente (Arquitecto de Soluciones + QA Senior), invocado desde cero, sin participación en la generación de la fase

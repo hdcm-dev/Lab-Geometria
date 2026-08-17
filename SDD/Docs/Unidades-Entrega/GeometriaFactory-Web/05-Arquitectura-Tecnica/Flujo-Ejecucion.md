@@ -1,7 +1,7 @@
 # Flujo de ejecución — GeometriaFactory-Visor
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Flujo-Ejecucion.md
 **Versión:** 1.0
 **Estado:** Aprobado

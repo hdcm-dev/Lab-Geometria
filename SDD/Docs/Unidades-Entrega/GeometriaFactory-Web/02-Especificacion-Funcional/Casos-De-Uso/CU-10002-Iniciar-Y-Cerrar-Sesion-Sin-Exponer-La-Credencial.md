@@ -1,6 +1,6 @@
 # CU-10002 — Iniciar y cerrar sesión sin exponer la credencial
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10002-Iniciar-Y-Cerrar-Sesion-Sin-Exponer-La-Credencial.md
 **Versión:** 1.4
 **Estado:** Aprobado

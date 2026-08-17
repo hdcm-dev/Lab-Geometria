@@ -1,6 +1,6 @@
 # CU-12001 — Inicializar una instancia del visor sobre un elemento de dibujo
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12001-Inicializar-Instancia-Del-Visor.md
 **Versión:** 1.0
 **Estado:** Aprobado

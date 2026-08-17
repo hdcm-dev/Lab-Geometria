@@ -1,7 +1,7 @@
 # US-10024 — Aprobar o rechazar un trabajo en estado `Pendiente` con comentario opcional
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10024-Aprobar-O-Rechazar-Con-Comentario-Opcional.md
 **Versión:** 1.1
 **Estado:** Aprobada

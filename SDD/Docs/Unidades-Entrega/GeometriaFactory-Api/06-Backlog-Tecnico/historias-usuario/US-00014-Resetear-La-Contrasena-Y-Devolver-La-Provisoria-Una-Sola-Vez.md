@@ -1,7 +1,7 @@
 # US-00014 — Resetear la contraseña de un alumno y devolver la provisoria **una sola vez**
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00014-Resetear-La-Contrasena-Y-Devolver-La-Provisoria-Una-Sola-Vez.md
 **Versión:** 1.1
 **Estado:** Aprobada

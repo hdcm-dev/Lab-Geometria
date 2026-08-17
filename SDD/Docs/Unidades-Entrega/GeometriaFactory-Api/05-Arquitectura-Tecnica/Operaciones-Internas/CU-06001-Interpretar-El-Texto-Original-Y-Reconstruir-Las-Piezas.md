@@ -1,7 +1,7 @@
 # CU-06001 — Interpretar el texto original y reconstruir las piezas
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md
 **Versión:** 1.1
 **Estado:** Aprobado

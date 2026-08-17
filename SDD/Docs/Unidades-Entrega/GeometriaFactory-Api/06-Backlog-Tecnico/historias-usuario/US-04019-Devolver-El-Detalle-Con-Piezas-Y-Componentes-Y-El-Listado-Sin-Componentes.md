@@ -1,7 +1,7 @@
 # US-04019 — Devolver el detalle con piezas y componentes, y el listado sin componentes
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04019-Devolver-El-Detalle-Con-Piezas-Y-Componentes-Y-El-Listado-Sin-Componentes.md
 **Versión:** 1.0
 **Estado:** Aprobada

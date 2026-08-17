@@ -1,7 +1,7 @@
 # US-06006 — Comparar con tolerancia absoluta y **operador estricto**
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06006-Comparar-Con-Tolerancia-Absoluta-Y-Operador-Estricto.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-06003 — Reconstruir las piezas con su posición, sus componentes y la posición reservada de las no reconstruidas
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06003-Reconstruir-Las-Piezas-Con-Su-Posicion-Y-Sus-Componentes.md
 **Versión:** 1.0
 **Estado:** Aprobada

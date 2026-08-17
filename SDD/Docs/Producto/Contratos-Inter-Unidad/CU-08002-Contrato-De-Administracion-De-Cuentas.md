@@ -1,6 +1,6 @@
 # CU-08002 — Contrato de administración de cuentas de alumno
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08002-Contrato-De-Administracion-De-Cuentas.md
 **Versión:** 1.7
 **Estado:** Aprobado

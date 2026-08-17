@@ -1,6 +1,6 @@
 # Wireframes — Panel de trabajos del alumno
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Panel-De-Trabajos-Del-Alumno.md
 **Versión:** 1.0
 **Estado:** Aprobado

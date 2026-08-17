@@ -1,7 +1,7 @@
 # RC-06004 — La familia plana o volumétrica no se persiste
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06004-La-Familia-No-Se-Persiste.md
 **Versión:** 1.1
 **Estado:** Aprobado

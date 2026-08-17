@@ -1,7 +1,7 @@
 # RN-02011 — El administrador no ve los trabajos en borrador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02011-El-Administrador-No-Ve-Los-Borradores.md
 **Versión:** 1.0
 **Estado:** Aprobado

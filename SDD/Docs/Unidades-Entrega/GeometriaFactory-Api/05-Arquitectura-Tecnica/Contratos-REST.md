@@ -1,7 +1,7 @@
 # Contrato de la superficie HTTP — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
 **Versión:** 1.3
 **Estado:** Aprobado

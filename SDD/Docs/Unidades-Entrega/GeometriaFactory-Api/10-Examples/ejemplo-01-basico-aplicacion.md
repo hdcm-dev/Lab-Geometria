@@ -1,7 +1,7 @@
 # Ejemplo 01 — La cuenta entra al laboratorio: alta, administrador, credencial y la guarda que corta primero
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-00006 — Composición de raíz única: ciclos de vida y configuración en un solo lugar
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-02026 — Resetear la contraseña de un alumno conservando su cuenta y todos sus trabajos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02026-Resetear-La-Contrasena-Conservando-Cuenta-Y-Trabajos.md
 **Versión:** 1.1
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-10022 — Recorrer la entrega de la comisión agrupada y filtrada por alumno
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10022-Recorrer-La-Entrega-De-La-Comision-Agrupada-Y-Filtrada.md
 **Versión:** 1.1
 **Estado:** Aprobada

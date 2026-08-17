@@ -1,7 +1,7 @@
 # US-02013 — Registrar advertencias con el valor declarado y el derivado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02013-Registrar-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md
 **Versión:** 1.0
 **Estado:** Aprobada

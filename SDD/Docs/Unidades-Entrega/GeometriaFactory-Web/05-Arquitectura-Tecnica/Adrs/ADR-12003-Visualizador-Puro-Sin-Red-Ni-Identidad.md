@@ -1,6 +1,6 @@
 # ADR-12003 — Visualizador puro: cero red, cero persistencia, cero configuración y cero identidad
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12003-Visualizador-Puro-Sin-Red-Ni-Identidad.md
 **Versión:** 1.0
 **Estado:** Aprobado

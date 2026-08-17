@@ -1,6 +1,6 @@
 # DX — Catálogo de condiciones de la fachada y su diagnóstico accionable
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** DX-Error-Messages.md
 **Versión:** 1.0
 **Estado:** Aprobado

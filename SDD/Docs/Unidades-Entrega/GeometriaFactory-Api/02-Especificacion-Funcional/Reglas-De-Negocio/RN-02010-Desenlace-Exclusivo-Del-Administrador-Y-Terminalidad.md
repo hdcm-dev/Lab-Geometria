@@ -1,7 +1,7 @@
 # RN-02010 — El desenlace es exclusivo del administrador y es terminal
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md
 **Versión:** 1.0
 **Estado:** Aprobado

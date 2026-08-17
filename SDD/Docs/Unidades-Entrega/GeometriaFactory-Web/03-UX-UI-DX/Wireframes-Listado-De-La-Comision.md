@@ -1,6 +1,6 @@
 # Wireframes — Listado de la comisión
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Listado-De-La-Comision.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-10014 — Ver los errores con índice de figura y campo, con el trabajo en `Borrador`
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10014-Ver-Los-Errores-Con-Indice-De-Figura-Y-Campo.md
 **Versión:** 1.1
 **Estado:** Aprobada

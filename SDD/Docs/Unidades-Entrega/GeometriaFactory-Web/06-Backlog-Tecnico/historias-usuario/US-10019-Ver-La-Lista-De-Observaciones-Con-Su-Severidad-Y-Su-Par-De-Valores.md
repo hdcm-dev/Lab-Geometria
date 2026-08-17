@@ -1,7 +1,7 @@
 # US-10019 — Ver la lista de observaciones con su severidad y su par de valores
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10019-Ver-La-Lista-De-Observaciones-Con-Su-Severidad-Y-Su-Par-De-Valores.md
 **Versión:** 1.1
 **Estado:** Aprobada

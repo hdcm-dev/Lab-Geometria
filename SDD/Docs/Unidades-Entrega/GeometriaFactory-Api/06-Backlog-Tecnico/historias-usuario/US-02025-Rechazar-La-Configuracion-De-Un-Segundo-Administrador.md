@@ -1,7 +1,7 @@
 # US-02025 — Rechazar la configuración de un segundo administrador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02025-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

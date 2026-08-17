@@ -1,6 +1,6 @@
 # ADR-06006 — Lectura tolerante en un solo lugar, y una tabla de derivación por tipo
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md
 **Versión:** 1.0
 **Estado:** Aprobado

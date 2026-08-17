@@ -1,7 +1,7 @@
 # Guía de publicación — Front por FTP
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Guia-Publicacion-Front-Ftp.md
 **Versión:** 1.2
 **Estado:** Aprobado

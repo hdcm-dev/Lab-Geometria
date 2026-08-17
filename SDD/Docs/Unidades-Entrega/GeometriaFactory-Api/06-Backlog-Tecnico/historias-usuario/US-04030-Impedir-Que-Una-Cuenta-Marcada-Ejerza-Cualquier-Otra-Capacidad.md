@@ -1,7 +1,7 @@
 # US-04030 — Impedir que una cuenta con cambio de contraseña pendiente ejerza cualquier otra capacidad
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04030-Impedir-Que-Una-Cuenta-Marcada-Ejerza-Cualquier-Otra-Capacidad.md
 **Versión:** 1.0
 **Estado:** Aprobada

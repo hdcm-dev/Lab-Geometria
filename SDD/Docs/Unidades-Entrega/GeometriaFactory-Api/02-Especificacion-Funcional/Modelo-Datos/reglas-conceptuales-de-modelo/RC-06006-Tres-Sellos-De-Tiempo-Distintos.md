@@ -1,7 +1,7 @@
 # RC-06006 — Los tres tiempos del trabajo son distintos y no se confunden
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06006-Tres-Sellos-De-Tiempo-Distintos.md
 **Versión:** 1.1
 **Estado:** Aprobado

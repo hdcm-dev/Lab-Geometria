@@ -1,6 +1,6 @@
 # ADR-00004 — Dos traducciones en orden, con una tabla única y sin inventar códigos
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md
 **Versión:** 1.1
 **Estado:** Aprobado

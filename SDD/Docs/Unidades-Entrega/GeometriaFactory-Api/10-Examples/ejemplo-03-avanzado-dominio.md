@@ -1,7 +1,7 @@
 # Ejemplo 03 — Acceso, alcance del administrador y desenlace, con la superficie tipada bajo inspección
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
 **Versión:** 1.0
 **Estado:** Aprobado

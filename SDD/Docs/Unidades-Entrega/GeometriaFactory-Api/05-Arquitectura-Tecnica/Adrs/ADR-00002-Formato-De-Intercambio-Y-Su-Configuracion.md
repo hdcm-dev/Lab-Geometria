@@ -1,6 +1,6 @@
 # ADR-00002 — El formato de intercambio y su configuración, fijados para los dos extremos
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md
 **Versión:** 1.1
 **Estado:** Aprobado

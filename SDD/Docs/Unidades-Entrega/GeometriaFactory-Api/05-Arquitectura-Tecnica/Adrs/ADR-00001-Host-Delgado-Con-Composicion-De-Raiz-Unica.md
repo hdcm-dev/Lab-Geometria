@@ -1,6 +1,6 @@
 # ADR-00001 — Host delgado, con la composición de raíz como único lugar de ensamblado
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md
 **Versión:** 1.0
 **Estado:** Aprobado

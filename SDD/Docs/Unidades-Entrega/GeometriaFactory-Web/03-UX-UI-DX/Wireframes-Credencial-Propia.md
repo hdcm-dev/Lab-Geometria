@@ -1,6 +1,6 @@
 # Wireframes — Credencial propia
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Credencial-Propia.md
 **Versión:** 1.5
 **Estado:** Aprobado

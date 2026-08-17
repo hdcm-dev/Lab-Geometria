@@ -1,6 +1,6 @@
 # ADR-10002 — Sin estado propio y sin persistencia, y por qué se omite el modelo de datos lógico
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md
 **Versión:** 1.0
 **Estado:** Aprobado

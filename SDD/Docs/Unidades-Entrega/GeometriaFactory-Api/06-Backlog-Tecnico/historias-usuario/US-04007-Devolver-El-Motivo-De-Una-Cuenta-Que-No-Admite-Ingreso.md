@@ -1,7 +1,7 @@
 # US-04007 — Devolver el motivo de una cuenta que no admite ingreso
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04007-Devolver-El-Motivo-De-Una-Cuenta-Que-No-Admite-Ingreso.md
 **Versión:** 1.0
 **Estado:** Aprobada

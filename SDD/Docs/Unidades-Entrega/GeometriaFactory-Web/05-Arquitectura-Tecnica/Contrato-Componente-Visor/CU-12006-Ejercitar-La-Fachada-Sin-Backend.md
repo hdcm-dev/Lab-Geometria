@@ -1,6 +1,6 @@
 # CU-12006 — Ejercitar la fachada completa sin backend
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12006-Ejercitar-La-Fachada-Sin-Backend.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-00005 — Sin paginación, con su condición de reingreso declarada
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md
 **Versión:** 1.0
 **Estado:** Aprobado

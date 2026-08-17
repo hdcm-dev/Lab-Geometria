@@ -1,7 +1,7 @@
 # Guía de publicación — Imagen de contenedor
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Guia-Publicacion-Image-Docker.md
 **Versión:** 1.1
 **Estado:** Aprobado

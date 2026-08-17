@@ -1,7 +1,7 @@
 # Ejemplo 03 — El administrador: gobierno de las cuentas, revisión de la comisión, desenlace y reseteo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
 **Versión:** 1.0
 **Estado:** Aprobado

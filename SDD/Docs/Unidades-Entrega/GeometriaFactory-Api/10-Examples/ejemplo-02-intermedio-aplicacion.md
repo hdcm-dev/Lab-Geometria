@@ -1,7 +1,7 @@
 # Ejemplo 02 — Los ocho trabajos del alumno: carga, envío interpretado, consulta y retiro
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
 **Versión:** 1.0
 **Estado:** Aprobado

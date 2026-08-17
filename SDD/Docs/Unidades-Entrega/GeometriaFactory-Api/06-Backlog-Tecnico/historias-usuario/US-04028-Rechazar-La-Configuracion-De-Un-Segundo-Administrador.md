@@ -1,7 +1,7 @@
 # US-04028 — Rechazar la configuración de un segundo administrador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04028-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

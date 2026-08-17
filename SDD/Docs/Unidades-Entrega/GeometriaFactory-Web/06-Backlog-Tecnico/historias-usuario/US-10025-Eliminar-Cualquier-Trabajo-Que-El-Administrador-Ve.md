@@ -1,7 +1,7 @@
 # US-10025 — Eliminar cualquier trabajo que el administrador ve, verificado forzando la solicitud
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10025-Eliminar-Cualquier-Trabajo-Que-El-Administrador-Ve.md
 **Versión:** 1.1
 **Estado:** Aprobada

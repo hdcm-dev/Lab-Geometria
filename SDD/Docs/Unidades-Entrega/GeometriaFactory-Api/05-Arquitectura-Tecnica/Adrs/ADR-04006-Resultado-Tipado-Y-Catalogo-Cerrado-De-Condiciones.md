@@ -1,6 +1,6 @@
 # ADR-04006 — Resultado tipado hacia arriba, con el catálogo de treinta y seis condiciones como conjunto cerrado
 
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-04001 — Casos de uso con inversión de dependencias, con una sola dependencia saliente
 
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-04001-Casos-De-Uso-Con-Inversion-De-Dependencias.md
 **Versión:** 1.0
 **Estado:** Aprobado

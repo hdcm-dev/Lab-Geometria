@@ -1,7 +1,7 @@
 # US-02008 — Evaluar la admisibilidad de la cuenta y devolver su motivo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02008-Evaluar-La-Admisibilidad-De-La-Cuenta.md
 **Versión:** 1.0
 **Estado:** Aprobada

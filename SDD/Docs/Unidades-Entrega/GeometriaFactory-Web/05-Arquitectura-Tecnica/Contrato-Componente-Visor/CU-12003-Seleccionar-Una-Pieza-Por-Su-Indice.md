@@ -1,6 +1,6 @@
 # CU-12003 — Seleccionar una pieza por su índice
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md
 **Versión:** 1.1
 **Estado:** Aprobado

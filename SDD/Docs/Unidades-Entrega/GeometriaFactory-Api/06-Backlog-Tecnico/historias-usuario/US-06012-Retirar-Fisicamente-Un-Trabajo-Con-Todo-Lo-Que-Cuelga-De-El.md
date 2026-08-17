@@ -1,7 +1,7 @@
 # US-06012 — Retirar físicamente un trabajo con todo lo que cuelga de él
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06012-Retirar-Fisicamente-Un-Trabajo-Con-Todo-Lo-Que-Cuelga-De-El.md
 **Versión:** 1.0
 **Estado:** Aprobada

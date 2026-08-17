@@ -1,7 +1,7 @@
 # US-10011 — Pegar el texto del trabajo y enviarlo sin que se reescriba un carácter
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10011-Pegar-El-Texto-Del-Trabajo-Y-Enviarlo-Sin-Reescribir-Un-Caracter.md
 **Versión:** 1.1
 **Estado:** Aprobada

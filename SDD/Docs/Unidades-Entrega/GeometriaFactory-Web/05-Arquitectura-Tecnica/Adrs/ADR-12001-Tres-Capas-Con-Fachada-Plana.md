@@ -1,6 +1,6 @@
 # ADR-12001 — Tres capas con fachada plana, y el motor de dibujo confinado a la capa interna
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12001-Tres-Capas-Con-Fachada-Plana.md
 **Versión:** 1.0
 **Estado:** Aprobado

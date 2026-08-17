@@ -1,7 +1,7 @@
 # RN-02005 — Un trabajo no pasa a estado `Pendiente` con errores de validación
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02005-Finalizacion-Sin-Errores-De-Validacion.md
 **Versión:** 1.1
 **Estado:** Aprobado

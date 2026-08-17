@@ -1,7 +1,7 @@
 # US-02018 — Resolver la pertenencia de un trabajo a su dueño
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02018-Resolver-La-Pertenencia-De-Un-Trabajo-A-Su-Dueno.md
 **Versión:** 1.0
 **Estado:** Aprobada

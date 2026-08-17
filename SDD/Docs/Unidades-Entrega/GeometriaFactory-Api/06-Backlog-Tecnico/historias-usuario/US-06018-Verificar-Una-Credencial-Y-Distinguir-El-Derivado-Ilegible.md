@@ -1,7 +1,7 @@
 # US-06018 — Verificar una credencial y distinguir el valor derivado ilegible de la contraseña equivocada
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06018-Verificar-Una-Credencial-Y-Distinguir-El-Derivado-Ilegible.md
 **Versión:** 1.0
 **Estado:** Aprobada

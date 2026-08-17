@@ -1,7 +1,7 @@
 # US-00012 — Cambiar la situación de una cuenta con verificación de papel
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00012-Cambiar-La-Situacion-De-Una-Cuenta-Con-Verificacion-De-Papel.md
 **Versión:** 1.1
 **Estado:** Aprobada

@@ -1,6 +1,6 @@
 # CU-08004 — Contrato de listado de trabajos
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08004-Contrato-De-Listado-De-Trabajos.md
 **Versión:** 1.4
 **Estado:** Aprobado

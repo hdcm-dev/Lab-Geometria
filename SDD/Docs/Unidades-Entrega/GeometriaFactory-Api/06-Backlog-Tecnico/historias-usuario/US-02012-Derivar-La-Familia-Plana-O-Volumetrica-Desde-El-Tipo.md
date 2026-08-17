@@ -1,7 +1,7 @@
 # US-02012 — Derivar la familia plana o volumétrica desde el tipo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02012-Derivar-La-Familia-Plana-O-Volumetrica-Desde-El-Tipo.md
 **Versión:** 1.0
 **Estado:** Aprobada

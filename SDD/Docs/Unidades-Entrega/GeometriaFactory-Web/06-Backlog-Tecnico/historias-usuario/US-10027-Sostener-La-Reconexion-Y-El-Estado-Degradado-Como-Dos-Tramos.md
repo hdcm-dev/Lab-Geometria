@@ -1,7 +1,7 @@
 # US-10027 — Sostener la reconexión y el estado degradado como dos tramos independientes
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10027-Sostener-La-Reconexion-Y-El-Estado-Degradado-Como-Dos-Tramos.md
 **Versión:** 1.1
 **Estado:** Aprobada

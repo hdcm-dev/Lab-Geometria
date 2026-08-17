@@ -1,6 +1,6 @@
 # ADR-06004 — Derivación de clave anclada, con sus parámetros versionados junto al valor guardado
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md
 **Versión:** 1.0
 **Estado:** Aprobado

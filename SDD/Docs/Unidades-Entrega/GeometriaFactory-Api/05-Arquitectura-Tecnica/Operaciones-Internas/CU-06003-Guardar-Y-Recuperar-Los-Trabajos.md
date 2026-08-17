@@ -1,7 +1,7 @@
 # CU-06003 — Guardar y recuperar los trabajos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md
 **Versión:** 1.1
 **Estado:** Aprobado

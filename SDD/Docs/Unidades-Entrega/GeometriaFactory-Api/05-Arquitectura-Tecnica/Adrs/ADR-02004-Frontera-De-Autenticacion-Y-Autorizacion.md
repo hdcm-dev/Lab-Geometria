@@ -1,6 +1,6 @@
 # ADR-02004 — Frontera de autenticación: el dominio modela la condición y no el mecanismo
 
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02004-Frontera-De-Autenticacion-Y-Autorizacion.md
 **Versión:** 1.0
 **Estado:** Aprobado

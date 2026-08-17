@@ -1,7 +1,7 @@
 # US-10008 — Configurar la cuenta de administrador una sola vez en la vida de la instancia
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10008-Configurar-La-Cuenta-De-Administrador-Una-Sola-Vez.md
 **Versión:** 1.1
 **Estado:** Aprobada

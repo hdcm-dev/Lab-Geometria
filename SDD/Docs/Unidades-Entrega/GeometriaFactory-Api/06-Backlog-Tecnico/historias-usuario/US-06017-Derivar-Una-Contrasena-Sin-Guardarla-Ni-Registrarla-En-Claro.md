@@ -1,7 +1,7 @@
 # US-06017 — Derivar una contraseña sin guardarla ni registrarla en claro
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06017-Derivar-Una-Contrasena-Sin-Guardarla-Ni-Registrarla-En-Claro.md
 **Versión:** 1.0
 **Estado:** Aprobada

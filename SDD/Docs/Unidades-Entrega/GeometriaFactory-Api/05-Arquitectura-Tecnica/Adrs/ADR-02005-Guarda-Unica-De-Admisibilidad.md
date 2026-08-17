@@ -1,6 +1,6 @@
 # ADR-02005 — Puerta única de admisibilidad para las guardas de acceso de la cuenta
 
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02005-Guarda-Unica-De-Admisibilidad.md
 **Versión:** 1.0
 **Estado:** Aprobado

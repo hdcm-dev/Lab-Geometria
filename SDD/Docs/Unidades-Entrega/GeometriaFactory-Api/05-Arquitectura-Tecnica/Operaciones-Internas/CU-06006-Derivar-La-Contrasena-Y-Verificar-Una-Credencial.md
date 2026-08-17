@@ -1,7 +1,7 @@
 # CU-06006 — Derivar la contraseña y verificar una credencial
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md
 **Versión:** 1.1
 **Estado:** Aprobado

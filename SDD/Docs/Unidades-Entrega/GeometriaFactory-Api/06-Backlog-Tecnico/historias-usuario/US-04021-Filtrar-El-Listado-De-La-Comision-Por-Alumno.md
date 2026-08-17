@@ -1,7 +1,7 @@
 # US-04021 — Filtrar el listado de la comisión por alumno, con el recorte vigente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04021-Filtrar-El-Listado-De-La-Comision-Por-Alumno.md
 **Versión:** 1.0
 **Estado:** Aprobada

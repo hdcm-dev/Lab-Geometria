@@ -1,6 +1,6 @@
 # CU-10009 — Resolver un trabajo con comentario opcional
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10009-Resolver-Un-Trabajo-Con-Comentario-Opcional.md
 **Versión:** 1.0
 **Estado:** Aprobado

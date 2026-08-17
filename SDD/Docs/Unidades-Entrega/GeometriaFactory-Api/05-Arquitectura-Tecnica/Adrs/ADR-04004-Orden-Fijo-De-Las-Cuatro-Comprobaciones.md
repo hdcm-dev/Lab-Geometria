@@ -1,6 +1,6 @@
 # ADR-04004 — Orden fijo de las cuatro comprobaciones de autorización, en un único componente
 
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-04004-Orden-Fijo-De-Las-Cuatro-Comprobaciones.md
 **Versión:** 1.0
 **Estado:** Aprobado

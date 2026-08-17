@@ -1,7 +1,7 @@
 # CU-06007 — Producir la contraseña provisoria del reseteo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md
 **Versión:** 1.4
 **Estado:** Aprobado

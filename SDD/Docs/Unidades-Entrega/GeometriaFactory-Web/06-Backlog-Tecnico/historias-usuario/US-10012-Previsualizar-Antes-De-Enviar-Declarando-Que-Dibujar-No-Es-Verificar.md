@@ -1,7 +1,7 @@
 # US-10012 — Previsualizar el trabajo antes de enviarlo, declarando que dibujar no es verificar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10012-Previsualizar-Antes-De-Enviar-Declarando-Que-Dibujar-No-Es-Verificar.md
 **Versión:** 1.1
 **Estado:** Aprobada

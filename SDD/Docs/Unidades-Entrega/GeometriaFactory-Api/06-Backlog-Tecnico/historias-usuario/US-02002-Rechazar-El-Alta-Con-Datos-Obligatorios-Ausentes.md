@@ -1,7 +1,7 @@
 # US-02002 — Rechazar el alta con datos obligatorios ausentes
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02002-Rechazar-El-Alta-Con-Datos-Obligatorios-Ausentes.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-06011 — Excluir componentes y texto original del resultado de un listado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06011-Excluir-Componentes-Y-Texto-Original-Del-Resultado-De-Un-Listado.md
 **Versión:** 1.0
 **Estado:** Aprobada

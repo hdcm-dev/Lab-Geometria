@@ -1,6 +1,6 @@
 # ADR-10005 — Un traductor único de condiciones, y el estado degradado como superficie y no como error
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10005-Estado-Degradado-Como-Superficie.md
 **Versión:** 1.1
 **Estado:** Aprobado

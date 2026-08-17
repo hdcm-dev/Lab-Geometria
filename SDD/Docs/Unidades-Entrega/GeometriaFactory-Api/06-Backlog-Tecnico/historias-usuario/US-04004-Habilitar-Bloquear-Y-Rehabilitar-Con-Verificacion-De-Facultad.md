@@ -1,7 +1,7 @@
 # US-04004 — Habilitar, bloquear y rehabilitar una cuenta con verificación de facultad
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04004-Habilitar-Bloquear-Y-Rehabilitar-Con-Verificacion-De-Facultad.md
 **Versión:** 1.0
 **Estado:** Aprobada

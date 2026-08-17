@@ -1,7 +1,7 @@
 # US-04022 — Abrir el detalle de un trabajo de la comisión con los mismos elementos que ve el alumno
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04022-Abrir-El-Detalle-De-Un-Trabajo-De-La-Comision.md
 **Versión:** 1.0
 **Estado:** Aprobada

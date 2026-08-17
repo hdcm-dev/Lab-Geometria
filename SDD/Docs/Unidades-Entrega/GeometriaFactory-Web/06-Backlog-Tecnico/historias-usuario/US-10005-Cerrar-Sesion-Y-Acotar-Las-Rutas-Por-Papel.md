@@ -1,7 +1,7 @@
 # US-10005 — Cerrar sesión y acotar las rutas por papel
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10005-Cerrar-Sesion-Y-Acotar-Las-Rutas-Por-Papel.md
 **Versión:** 1.1
 **Estado:** Aprobada

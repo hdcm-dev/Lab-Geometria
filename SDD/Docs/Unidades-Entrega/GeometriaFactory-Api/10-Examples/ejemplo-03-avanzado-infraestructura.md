@@ -1,7 +1,7 @@
 # Ejemplo 03 — Los mecanismos que no guardan nada: credencial, provisoria, acceso firmado, reloj y arranque
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
 **Versión:** 1.0
 **Estado:** Aprobado

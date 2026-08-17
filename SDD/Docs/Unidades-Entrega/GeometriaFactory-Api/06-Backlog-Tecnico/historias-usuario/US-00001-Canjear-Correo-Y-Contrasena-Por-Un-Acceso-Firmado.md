@@ -1,7 +1,7 @@
 # US-00001 — Canjear correo y contraseña por un acceso firmado con sus cuatro reclamos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00001-Canjear-Correo-Y-Contrasena-Por-Un-Acceso-Firmado.md
 **Versión:** 1.1
 **Estado:** Aprobada

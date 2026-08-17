@@ -1,6 +1,6 @@
 # ADR-04005 — Un caso de uso, una unidad de trabajo: el alcance lo fija esta capa
 
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md
 **Versión:** 1.0
 **Estado:** Aprobado

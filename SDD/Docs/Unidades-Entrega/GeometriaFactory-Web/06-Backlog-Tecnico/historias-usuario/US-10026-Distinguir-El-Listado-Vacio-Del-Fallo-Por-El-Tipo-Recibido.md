@@ -1,7 +1,7 @@
 # US-10026 — Distinguir el listado vacío del fallo por el tipo recibido y no por el conteo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10026-Distinguir-El-Listado-Vacio-Del-Fallo-Por-El-Tipo-Recibido.md
 **Versión:** 1.1
 **Estado:** Aprobada

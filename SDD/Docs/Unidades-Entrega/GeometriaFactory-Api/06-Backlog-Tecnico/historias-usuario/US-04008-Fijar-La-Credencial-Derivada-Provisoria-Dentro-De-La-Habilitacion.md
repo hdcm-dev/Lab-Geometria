@@ -1,7 +1,7 @@
 # US-04008 — Fijar la credencial derivada provisoria dentro de la habilitación
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04008-Fijar-La-Credencial-Derivada-Provisoria-Dentro-De-La-Habilitacion.md
 **Versión:** 1.0
 **Estado:** Aprobada

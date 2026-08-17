@@ -1,6 +1,6 @@
 # ADR-12004 — Motor de dibujo empaquetado dentro del bundle y aislado tras la capa 3
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12004-Motor-De-Dibujo-Empaquetado-Y-Aislado.md
 **Versión:** 1.0
 **Estado:** Aprobado

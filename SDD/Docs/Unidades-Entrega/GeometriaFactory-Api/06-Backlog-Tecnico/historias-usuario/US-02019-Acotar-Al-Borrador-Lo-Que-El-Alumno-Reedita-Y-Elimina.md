@@ -1,7 +1,7 @@
 # US-02019 — Acotar al estado `Borrador` lo que el alumno reedita y elimina
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02019-Acotar-Al-Borrador-Lo-Que-El-Alumno-Reedita-Y-Elimina.md
 **Versión:** 1.0
 **Estado:** Aprobada

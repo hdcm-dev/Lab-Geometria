@@ -1,6 +1,6 @@
 # ADR-08001 — Ensamblado de tipos de transferencia planos, sin comportamiento y sin dependencias
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md
 **Versión:** 1.0
 **Estado:** Aprobado

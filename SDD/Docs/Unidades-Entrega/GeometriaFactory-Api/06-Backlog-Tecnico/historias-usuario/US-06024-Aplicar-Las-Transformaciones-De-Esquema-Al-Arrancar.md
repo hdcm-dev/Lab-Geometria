@@ -1,7 +1,7 @@
 # US-06024 — Aplicar las transformaciones de esquema al arrancar, sobre base inexistente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06024-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md
 **Versión:** 1.0
 **Estado:** Aprobada

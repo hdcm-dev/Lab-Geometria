@@ -1,7 +1,7 @@
 # RN-02003 — Un trabajo ajeno es indistinguible de uno inexistente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md
 **Versión:** 1.1
 **Estado:** Aprobado

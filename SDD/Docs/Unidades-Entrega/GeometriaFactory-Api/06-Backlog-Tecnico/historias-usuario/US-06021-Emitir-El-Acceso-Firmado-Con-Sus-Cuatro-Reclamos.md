@@ -1,7 +1,7 @@
 # US-06021 — Emitir el acceso firmado con sus cuatro reclamos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06021-Emitir-El-Acceso-Firmado-Con-Sus-Cuatro-Reclamos.md
 **Versión:** 1.0
 **Estado:** Aprobada

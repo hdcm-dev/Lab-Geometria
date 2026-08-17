@@ -1,7 +1,7 @@
 # US-02001 — Constituir un alumno con cuenta `Pendiente` y sin credencial
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02001-Constituir-Un-Alumno-Con-Cuenta-Pendiente-Y-Sin-Credencial.md
 **Versión:** 1.0
 **Estado:** Aprobada

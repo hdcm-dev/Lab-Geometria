@@ -1,7 +1,7 @@
 # US-06013 — Arrastrar todos los trabajos de una cuenta dada de baja, todo o nada
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06013-Arrastrar-Todos-Los-Trabajos-De-Una-Cuenta-Dada-De-Baja.md
 **Versión:** 1.0
 **Estado:** Aprobada

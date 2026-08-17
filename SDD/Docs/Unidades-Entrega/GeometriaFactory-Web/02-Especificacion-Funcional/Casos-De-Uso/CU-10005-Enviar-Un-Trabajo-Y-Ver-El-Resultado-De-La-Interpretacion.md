@@ -1,6 +1,6 @@
 # CU-10005 — Enviar un trabajo y ver el resultado de la interpretación
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10005-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # CU-12007 — Gobernar el movimiento automático de la escena sobre una instancia viva
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md
 **Versión:** 1.1
 **Estado:** Aprobado

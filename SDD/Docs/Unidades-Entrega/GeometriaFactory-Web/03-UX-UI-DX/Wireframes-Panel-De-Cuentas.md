@@ -1,6 +1,6 @@
 # Wireframes — Panel de cuentas
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Panel-De-Cuentas.md
 **Versión:** 1.7
 **Estado:** Aprobado

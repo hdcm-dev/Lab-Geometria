@@ -1,7 +1,7 @@
 # US-00008 — Configurar la cuenta de administrador sólo mientras no exista ninguna
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00008-Configurar-La-Cuenta-De-Administrador-Solo-Mientras-No-Exista-Ninguna.md
 **Versión:** 1.1
 **Estado:** Aprobada

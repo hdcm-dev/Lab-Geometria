@@ -1,7 +1,7 @@
 # US-02009 — Constituir un trabajo con dueño, identidad propia y texto original
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02009-Constituir-Un-Trabajo-Con-Dueno-Identidad-Y-Texto-Original.md
 **Versión:** 1.0
 **Estado:** Aprobada

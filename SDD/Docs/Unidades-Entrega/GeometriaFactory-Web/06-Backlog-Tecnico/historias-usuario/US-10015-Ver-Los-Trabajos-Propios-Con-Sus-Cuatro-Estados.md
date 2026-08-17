@@ -1,7 +1,7 @@
 # US-10015 — Ver los trabajos propios con sus cuatro estados distinguibles
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10015-Ver-Los-Trabajos-Propios-Con-Sus-Cuatro-Estados.md
 **Versión:** 1.1
 **Estado:** Aprobada

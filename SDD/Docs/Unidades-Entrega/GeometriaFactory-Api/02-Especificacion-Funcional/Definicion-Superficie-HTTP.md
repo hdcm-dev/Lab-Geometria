@@ -1,7 +1,7 @@
 # Definición de la superficie HTTP
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Definicion-Superficie-HTTP.md
 **Versión:** 1.8
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # Contrato de datos de la maqueta — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Contrato-Datos-Maqueta.md
 **Versión:** 1.3
 **Estado:** Aprobado

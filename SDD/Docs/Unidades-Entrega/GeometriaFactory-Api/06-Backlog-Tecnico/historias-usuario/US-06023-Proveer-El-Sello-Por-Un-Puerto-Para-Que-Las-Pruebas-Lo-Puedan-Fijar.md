@@ -1,7 +1,7 @@
 # US-06023 — Proveer el sello por un puerto, para que las pruebas lo puedan fijar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06023-Proveer-El-Sello-Por-Un-Puerto-Para-Que-Las-Pruebas-Lo-Puedan-Fijar.md
 **Versión:** 1.0
 **Estado:** Aprobada

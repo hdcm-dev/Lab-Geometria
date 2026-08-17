@@ -1,7 +1,7 @@
 # US-02014 — Registrar errores de validación con posición de pieza y campo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02014-Registrar-Errores-De-Validacion-Con-Posicion-De-Pieza-Y-Campo.md
 **Versión:** 1.0
 **Estado:** Aprobada

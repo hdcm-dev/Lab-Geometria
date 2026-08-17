@@ -1,7 +1,7 @@
 # US-00025 — Responder sin exponer direcciones de servicios internos, y registrar del lado del servidor
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00025-Responder-Sin-Exponer-Direcciones-Internas-Y-Registrar-En-El-Servidor.md
 **Versión:** 1.1
 **Estado:** Aprobada

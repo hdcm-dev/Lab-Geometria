@@ -1,7 +1,7 @@
 # US-06016 — Conservar y transportar la marca de cambio de contraseña pendiente sin alterar el estado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06016-Conservar-Y-Transportar-La-Marca-Sin-Alterar-El-Estado.md
 **Versión:** 1.1
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # Ejemplo 01 — Ciclo de vida de una cuenta, de la configuración del administrador a la admisibilidad
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
 **Versión:** 1.0
 **Estado:** Aprobado

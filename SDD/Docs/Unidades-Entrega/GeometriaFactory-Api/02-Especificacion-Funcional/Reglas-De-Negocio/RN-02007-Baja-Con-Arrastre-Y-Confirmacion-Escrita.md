@@ -1,7 +1,7 @@
 # RN-02007 — La baja de una cuenta arrastra sus trabajos y exige confirmación escrita
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md
 **Versión:** 1.4
 **Estado:** Aprobado

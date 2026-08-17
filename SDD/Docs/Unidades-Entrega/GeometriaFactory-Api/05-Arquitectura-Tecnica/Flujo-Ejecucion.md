@@ -1,7 +1,7 @@
 # Flujo de ejecución del validador de figuras — GeometriaFactory-Infrastructure
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Flujo-Ejecucion.md
 **Versión:** 1.0
 **Estado:** Aprobado

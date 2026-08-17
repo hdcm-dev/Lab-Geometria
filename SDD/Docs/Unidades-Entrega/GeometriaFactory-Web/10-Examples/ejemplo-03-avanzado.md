@@ -1,7 +1,7 @@
 # Ejemplo 03 — Las seis funciones sin backend, con los dos movimientos prendidos y el contador de red en cero
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-03-avanzado.md
 **Versión:** 1.0
 **Estado:** Aprobado

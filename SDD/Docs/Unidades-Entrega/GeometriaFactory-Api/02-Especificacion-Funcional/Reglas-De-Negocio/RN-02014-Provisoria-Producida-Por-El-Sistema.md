@@ -1,7 +1,7 @@
 # RN-02014 — La contraseña provisoria la produce el sistema, no la escribe el administrador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02014-Provisoria-Producida-Por-El-Sistema.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-06004 — Emitir el error de validación con posición de figura y campo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06004-Emitir-El-Error-De-Validacion-Con-Posicion-De-Figura-Y-Campo.md
 **Versión:** 1.0
 **Estado:** Aprobada

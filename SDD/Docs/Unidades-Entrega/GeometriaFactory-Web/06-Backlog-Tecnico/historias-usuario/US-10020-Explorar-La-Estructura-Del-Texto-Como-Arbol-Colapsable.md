@@ -1,7 +1,7 @@
 # US-10020 — Explorar la estructura del texto como árbol colapsable
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10020-Explorar-La-Estructura-Del-Texto-Como-Arbol-Colapsable.md
 **Versión:** 1.1
 **Estado:** Aprobada

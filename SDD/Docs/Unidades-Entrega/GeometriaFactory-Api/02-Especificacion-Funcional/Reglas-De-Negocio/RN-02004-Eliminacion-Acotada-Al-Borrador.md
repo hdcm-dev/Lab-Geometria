@@ -1,7 +1,7 @@
 # RN-02004 — El alumno elimina sólo en borrador; el administrador, cualquier trabajo que ve
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02004-Eliminacion-Acotada-Al-Borrador.md
 **Versión:** 1.1
 **Estado:** Aprobado

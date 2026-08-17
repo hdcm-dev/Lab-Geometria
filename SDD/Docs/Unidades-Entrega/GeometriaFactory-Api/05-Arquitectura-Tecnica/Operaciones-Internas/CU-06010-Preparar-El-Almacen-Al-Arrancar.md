@@ -1,7 +1,7 @@
 # CU-06010 — Preparar el almacén al arrancar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06010-Preparar-El-Almacen-Al-Arrancar.md
 **Versión:** 1.1
 **Estado:** Aprobado

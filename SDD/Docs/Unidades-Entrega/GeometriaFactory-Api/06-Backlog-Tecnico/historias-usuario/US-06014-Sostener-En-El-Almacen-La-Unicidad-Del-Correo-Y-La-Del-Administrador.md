@@ -1,7 +1,7 @@
 # US-06014 — Sostener en el almacén la unicidad del correo y la del administrador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06014-Sostener-En-El-Almacen-La-Unicidad-Del-Correo-Y-La-Del-Administrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

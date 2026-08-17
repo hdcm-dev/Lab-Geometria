@@ -1,6 +1,6 @@
 # ADR-06002 — Archivo único, escritor único y una unidad de trabajo por operación
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md
 **Versión:** 1.0
 **Estado:** Aprobado

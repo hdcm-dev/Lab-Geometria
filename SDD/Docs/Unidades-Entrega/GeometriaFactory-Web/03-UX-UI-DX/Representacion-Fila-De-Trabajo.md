@@ -1,6 +1,6 @@
 # Representación — Fila de trabajo
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Representacion-Fila-De-Trabajo.md
 **Versión:** 1.0
 **Estado:** Aprobado

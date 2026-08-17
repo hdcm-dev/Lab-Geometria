@@ -1,6 +1,6 @@
 # ADR-06001 — Un adaptador por puerto, sin repositorio genérico y sin adaptador único
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md
 **Versión:** 1.0
 **Estado:** Aprobado

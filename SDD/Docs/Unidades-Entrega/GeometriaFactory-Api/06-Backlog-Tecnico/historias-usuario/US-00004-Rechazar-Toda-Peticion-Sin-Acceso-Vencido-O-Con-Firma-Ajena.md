@@ -1,7 +1,7 @@
 # US-00004 — Rechazar toda petición sin acceso, con acceso vencido o con firma que no corresponde
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00004-Rechazar-Toda-Peticion-Sin-Acceso-Vencido-O-Con-Firma-Ajena.md
 **Versión:** 1.1
 **Estado:** Aprobada

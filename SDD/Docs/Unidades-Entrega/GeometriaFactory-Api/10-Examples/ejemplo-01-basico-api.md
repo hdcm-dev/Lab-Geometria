@@ -1,7 +1,7 @@
 # Ejemplo 01 — El canje, la guardia y el envío que no verifica: por qué esa respuesta es exitosa
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
 **Versión:** 1.0
 **Estado:** Aprobado

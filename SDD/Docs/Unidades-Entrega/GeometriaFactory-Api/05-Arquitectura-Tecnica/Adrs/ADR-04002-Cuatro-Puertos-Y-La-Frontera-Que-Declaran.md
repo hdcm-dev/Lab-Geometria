@@ -1,6 +1,6 @@
 # ADR-04002 — Cuatro puertos, y qué significa que el cuarto no tenga nombre declarado
 
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md
 **Versión:** 1.1
 **Estado:** Aprobado

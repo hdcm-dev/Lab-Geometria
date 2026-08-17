@@ -1,6 +1,6 @@
 # ADR-08003 — Versionado por compilación compartida y despliegue conjunto, sin versionado de rutas
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** ADR-08003-Versionado-Por-Compilacion-Compartida.md
 **Versión:** 1.1
 **Estado:** Aprobado

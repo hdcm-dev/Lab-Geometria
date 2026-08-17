@@ -1,7 +1,7 @@
 # US-04003 — Configurar la cuenta de administrador con su ventana de alta
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04003-Configurar-La-Cuenta-De-Administrador-Con-Su-Ventana-De-Alta.md
 **Versión:** 1.0
 **Estado:** Aprobada

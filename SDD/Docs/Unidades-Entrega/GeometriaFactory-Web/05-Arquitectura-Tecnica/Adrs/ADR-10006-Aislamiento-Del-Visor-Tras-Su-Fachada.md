@@ -1,6 +1,6 @@
 # ADR-10006 — El visor se opera sólo por sus seis funciones, y es esta pieza la que consulta el entorno
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-06010 — Resolver la consulta con el recorte ya trasladado al pedido
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06010-Resolver-La-Consulta-Con-El-Recorte-Ya-Trasladado-Al-Pedido.md
 **Versión:** 1.0
 **Estado:** Aprobada

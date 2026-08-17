@@ -1,7 +1,7 @@
 # US-00020 — Eliminar un trabajo con los dos alcances, verificado **forzando la petición**
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00020-Eliminar-Un-Trabajo-Con-Los-Dos-Alcances-Forzando-La-Peticion.md
 **Versión:** 1.1
 **Estado:** Aprobada

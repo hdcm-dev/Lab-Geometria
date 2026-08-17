@@ -1,7 +1,7 @@
 # US-04018 — Ver el desenlace y el comentario del trabajo propio
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04018-Ver-El-Desenlace-Y-El-Comentario-Del-Trabajo-Propio.md
 **Versión:** 1.0
 **Estado:** Aprobada

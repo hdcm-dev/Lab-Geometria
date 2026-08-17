@@ -1,6 +1,6 @@
 # ADR-10007 — La dirección del servicio de datos viene de configuración, y el despliegue termina comprobando
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # CU-08007 — Contrato de desenlace de la revisión
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08007-Contrato-De-Desenlace-De-La-Revision.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-06007 — Transformaciones de esquema al arrancar, con linaje inmutable y arranque detenido
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md
 **Versión:** 1.0
 **Estado:** Aprobado

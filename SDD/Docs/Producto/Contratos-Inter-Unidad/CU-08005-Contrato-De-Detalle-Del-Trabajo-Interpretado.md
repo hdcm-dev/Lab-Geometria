@@ -1,6 +1,6 @@
 # CU-08005 — Contrato de detalle del trabajo interpretado
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md
 **Versión:** 1.3
 **Estado:** Aprobado

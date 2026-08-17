@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Fase auditada:** B (02-Especificacion-Funcional y 03-UX-UI-DX)
-**Proyecto de código:** GeometriaFactory-Infrastructure (`tipo_proyecto_codigo` = `library`, nivel 2 del orden topológico)
+**Unidad de entrega:** GeometriaFactory-Api
 **Alcance de la ronda:** los **27 documentos** vivos de `SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/` y `.../03-UX-UI-DX/`, todos en versión 1.0 y con fecha 2026-08-10. Contrastado contra `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12**, `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **1.2**, las nueve necesidades de `01-Necesidades-Negocio/Necesidades-De-Negocio/`, y los proyectos de código vecinos aguas arriba `GeometriaFactory-Domain`, `GeometriaFactory-Application` y `GeometriaFactory-Contracts`
 **Auditor:** Arquitecto de Soluciones + QA Senior, invocado desde cero, sin participación en la generación
 **Fecha:** 2026-08-10

@@ -1,7 +1,7 @@
 # US-10002 — Rechazar el registro con un correo ya usado, sin revelar de quién es
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10002-Rechazar-El-Registro-Con-Un-Correo-Ya-Usado.md
 **Versión:** 1.1
 **Estado:** Aprobada

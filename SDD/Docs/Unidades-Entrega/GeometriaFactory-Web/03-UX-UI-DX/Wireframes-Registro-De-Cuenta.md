@@ -1,6 +1,6 @@
 # Wireframes — Registro de cuenta
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Registro-De-Cuenta.md
 **Versión:** 1.2
 **Estado:** Aprobado

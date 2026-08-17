@@ -1,7 +1,7 @@
 # US-04032 — Levantar la marca con el cambio efectivo hecho por la propia cuenta, y sólo con él
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04032-Levantar-La-Marca-Con-El-Cambio-Hecho-Por-La-Propia-Cuenta.md
 **Versión:** 1.1
 **Estado:** Aprobada

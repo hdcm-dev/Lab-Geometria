@@ -1,7 +1,7 @@
 # US-10023 — No pedir los trabajos en `Borrador` y responder «no encontrado» al pedirlos por dirección directa
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10023-No-Pedir-Los-Borradores-Y-Responder-No-Encontrado.md
 **Versión:** 1.1
 **Estado:** Aprobada

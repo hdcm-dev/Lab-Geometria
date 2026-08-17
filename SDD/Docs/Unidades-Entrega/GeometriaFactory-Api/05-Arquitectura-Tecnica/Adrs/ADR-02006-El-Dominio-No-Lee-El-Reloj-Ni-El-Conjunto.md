@@ -1,6 +1,6 @@
 # ADR-02006 — El dominio no lee el reloj ni el conjunto de entidades: los dos entran por parámetro
 
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md
 **Versión:** 1.0
 **Estado:** Aprobado

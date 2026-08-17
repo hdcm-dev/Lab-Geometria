@@ -1,6 +1,6 @@
 # ADR-02002 — La superficie pública son guardas con resultado tipado, no excepciones
 
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md
 **Versión:** 1.0
 **Estado:** Aprobado

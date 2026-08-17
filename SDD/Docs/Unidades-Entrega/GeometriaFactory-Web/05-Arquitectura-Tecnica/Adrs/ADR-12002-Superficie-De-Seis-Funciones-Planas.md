@@ -1,6 +1,6 @@
 # ADR-12002 — La superficie pública son seis funciones planas, siete garantías y siete códigos
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12002-Superficie-De-Seis-Funciones-Planas.md
 **Versión:** 1.0
 **Estado:** Aprobado

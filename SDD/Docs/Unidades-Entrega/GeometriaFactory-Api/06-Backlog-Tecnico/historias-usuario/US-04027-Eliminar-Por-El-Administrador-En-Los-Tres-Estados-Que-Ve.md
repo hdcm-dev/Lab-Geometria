@@ -1,7 +1,7 @@
 # US-04027 — Eliminar por el administrador en los tres estados que ve
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04027-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md
 **Versión:** 1.0
 **Estado:** Aprobada

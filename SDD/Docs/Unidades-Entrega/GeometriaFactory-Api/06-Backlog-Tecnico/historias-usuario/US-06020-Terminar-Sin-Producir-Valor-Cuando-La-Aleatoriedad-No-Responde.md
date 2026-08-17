@@ -1,7 +1,7 @@
 # US-06020 — Terminar sin producir valor cuando la fuente de aleatoriedad no responde
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06020-Terminar-Sin-Producir-Valor-Cuando-La-Aleatoriedad-No-Responde.md
 **Versión:** 1.0
 **Estado:** Aprobada

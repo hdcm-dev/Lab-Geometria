@@ -1,7 +1,7 @@
 # US-06007 — Emitir la advertencia con el valor declarado y el derivado, sin corregir ninguno
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06007-Emitir-La-Advertencia-Con-El-Valor-Declarado-Y-El-Derivado.md
 **Versión:** 1.0
 **Estado:** Aprobada

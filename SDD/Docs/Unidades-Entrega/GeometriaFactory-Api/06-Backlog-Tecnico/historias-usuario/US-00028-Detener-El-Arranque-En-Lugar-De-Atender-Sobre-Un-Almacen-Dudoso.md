@@ -1,7 +1,7 @@
 # US-00028 — Detener el arranque en lugar de atender peticiones sobre un almacén en el que no se puede confiar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00028-Detener-El-Arranque-En-Lugar-De-Atender-Sobre-Un-Almacen-Dudoso.md
 **Versión:** 1.1
 **Estado:** Aprobada

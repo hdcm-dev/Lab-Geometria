@@ -1,7 +1,7 @@
 # CU-06004 — Ejecutar el borrado físico y el arrastre de la baja
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-00007 — Arranque en dos fases, y un punto de salud que no exige acceso
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md
 **Versión:** 1.0
 **Estado:** Aprobado

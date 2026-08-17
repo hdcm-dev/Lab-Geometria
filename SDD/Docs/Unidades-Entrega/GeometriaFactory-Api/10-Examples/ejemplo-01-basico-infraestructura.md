@@ -1,7 +1,7 @@
 # Ejemplo 01 — Leer el texto del alumno y verificar sus números, sin abrir el almacén
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # RN-02001 — Administrador único y papeles fijos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02001-Administrador-Unico-Y-Papeles-Fijos.md
 **Versión:** 1.3
 **Estado:** Aprobado

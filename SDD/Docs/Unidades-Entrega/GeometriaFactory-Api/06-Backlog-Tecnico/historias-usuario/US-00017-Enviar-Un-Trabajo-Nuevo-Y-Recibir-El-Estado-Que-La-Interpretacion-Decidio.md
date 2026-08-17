@@ -1,7 +1,7 @@
 # US-00017 — Enviar un trabajo nuevo y recibir el estado que la interpretación decidió
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00017-Enviar-Un-Trabajo-Nuevo-Y-Recibir-El-Estado-Que-La-Interpretacion-Decidio.md
 **Versión:** 1.1
 **Estado:** Aprobada

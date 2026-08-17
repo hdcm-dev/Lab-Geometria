@@ -1,6 +1,6 @@
 # ADR-00003 — Credencial firmada, papel exigido por punto y una guardia transversal sin excepciones sueltas
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md
 **Versión:** 1.0
 **Estado:** Aprobado

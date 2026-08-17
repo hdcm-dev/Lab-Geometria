@@ -1,7 +1,7 @@
 # US-00030 — Ejercitar la superficie con una colección reproducible en cinco pasos o menos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00030-Ejercitar-La-Superficie-Con-Una-Coleccion-Reproducible.md
 **Versión:** 1.1
 **Estado:** Aprobada

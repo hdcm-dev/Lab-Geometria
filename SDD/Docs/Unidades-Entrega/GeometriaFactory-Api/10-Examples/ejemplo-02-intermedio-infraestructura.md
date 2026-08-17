@@ -1,7 +1,7 @@
 # Ejemplo 02 — El almacén: guardar, recuperar con el recorte ya decidido, retirar y arrastrar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
 **Versión:** 1.0
 **Estado:** Aprobado

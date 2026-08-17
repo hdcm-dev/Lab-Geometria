@@ -1,7 +1,7 @@
 # US-02010 — Reeditar un trabajo en `Borrador` descartando la interpretación anterior
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02010-Reeditar-Un-Trabajo-En-Borrador-Descartando-La-Interpretacion-Anterior.md
 **Versión:** 1.0
 **Estado:** Aprobada
