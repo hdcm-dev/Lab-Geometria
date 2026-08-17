@@ -1,7 +1,7 @@
 # US-02021 — Rechazar un trabajo en estado `Pendiente`, con comentario opcional
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02021-Rechazar-Un-Trabajo-En-Estado-Pendiente.md
 **Versión:** 1.0
 **Estado:** Aprobada

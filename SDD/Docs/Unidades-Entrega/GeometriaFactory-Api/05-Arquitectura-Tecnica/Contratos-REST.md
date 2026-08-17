@@ -1,7 +1,7 @@
 # Contrato de la superficie HTTP — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
 **Versión:** 1.3
 **Estado:** Aprobado
@@ -222,8 +222,8 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | Códigos de respuesta | **Diez** distintos, de §4 |
 | Códigos del contrato | **Diecisiete** vivos sobre **veinte** identificadores emitidos por `GeometriaFactory-Contracts`; **dieciséis con destino acá y uno sin él** |
 | CU de la capa de aplicación | Los **once**, con el reparto de la columna de §3 y la correspondencia de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.4 |
-| RN que cubre | RN-00001 a RN-00016, las **dieciséis**, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2. **Trece** tienen tramo acá; RN-00005, RN-00014 y RN-00016 no. **Dos** se rompen desde acá: RN-00003 y RN-00013 |
-| Invariantes | INV-01 a INV-09, los **nueve**, con el aporte declarado en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
+| RN que cubre | RN-00001 a RN-00016, las **dieciséis**, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.2. **Trece** tienen tramo acá; RN-00005, RN-00014 y RN-00016 no. **Dos** se rompen desde acá: RN-00003 y RN-00013 |
+| Invariantes | INV-01 a INV-09, los **nueve**, con el aporte declarado en [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.3 |
 | Reglas de arquitectura | **Las tres.** `RA-01` la sostiene y es el único que puede romperla; `RA-02` no tiene tramo acá y se declara; `RA-03` se ejerce en §5.4 |
 | ADR que lo gobiernan | ADR-00002, ADR-00003, ADR-00004, ADR-00005, ADR-00008 |
 | Consumidor | **Uno solo**: `GeometriaFactory-Web`, servidor a servidor, por HTTP en tiempo de ejecución |

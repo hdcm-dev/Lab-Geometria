@@ -1,6 +1,6 @@
 # ADR-02003 — Versionado por versionado semántico sin publicación, y estabilidad de la superficie
 
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md
 **Versión:** 1.0
 **Estado:** Aprobado

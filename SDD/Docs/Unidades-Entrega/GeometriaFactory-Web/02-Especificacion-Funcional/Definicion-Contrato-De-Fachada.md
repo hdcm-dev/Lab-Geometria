@@ -1,6 +1,6 @@
 # Definición del Contrato de Fachada
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Definicion-Contrato-De-Fachada.md
 **Versión:** 2.1
 **Estado:** Aprobado

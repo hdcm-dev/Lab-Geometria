@@ -1,7 +1,7 @@
 # CU-00010 — Componer la aplicación y conectar los puertos con sus adaptadores
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md
 **Versión:** 1.2
 **Estado:** Aprobado

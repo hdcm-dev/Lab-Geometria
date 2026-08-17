@@ -16,7 +16,7 @@
 
 **Los documentos de esta categoría se consolidaron el 2026-08-16**, absorbiendo los de `GeometriaFactory-Visor`. Cada uno lleva una subsección por proyecto de código, con su texto transpuesto sin reescritura.
 
-**`Arquitectura-Proyecto-Codigo.md` tiene las once secciones comunes a los dos**, y ahí se ve por qué el visor es un proyecto de código y no una unidad de entrega: produce un **bundle que se copia** a `wwwroot/js/`, no un artefacto que alguien despliegue. En `Contrato-Componente-Visor/` viven los siete documentos de su fachada.
+**`Arquitectura-Unidad-Entrega.md` tiene las once secciones comunes a los dos**, y ahí se ve por qué el visor es un proyecto de código y no una unidad de entrega: produce un **bundle que se copia** a `wwwroot/js/`, no un artefacto que alguien despliegue. En `Contrato-Componente-Visor/` viven los siete documentos de su fachada.
 
 **La carpeta `_fusion/` se retira**: la fusión terminó acá. Lo absorbido está en
 [`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/05-Arquitectura-Tecnica/`](../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Web/05-Arquitectura-Tecnica/).
@@ -25,13 +25,13 @@
 
 `GeometriaFactory-Web` es la **pieza pública** del producto: el front desplegado en el hosting público, **el único punto de contacto del navegador** y el **anfitrión del bundle del visor**. Es una de las dos unidades desplegables y nivel 1 del orden topológico; compila contra `GeometriaFactory-Contracts` y contra el bundle de `GeometriaFactory-Visor`, y habla con el servicio de datos **en tiempo de ejecución, servidor a servidor**.
 
-Lo que hay que haber entendido antes de tocar esta sección: **este proyecto de código es el único del producto que puede violar las tres reglas de arquitectura**, porque es el único que sirve al navegador. Los otros seis las sostienen por construcción o no las alcanzan. El punto de entrada es [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md), y dentro de él, §10.4.
+Lo que hay que haber entendido antes de tocar esta sección: **este proyecto de código es el único del producto que puede violar las tres reglas de arquitectura**, porque es el único que sirve al navegador. Los otros seis las sostienen por construcción o no las alcanzan. El punto de entrada es [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md), y dentro de él, §10.4.
 
 ## 2. Documentos de esta sección
 
 | Documento | Propósito |
 | --- | --- |
-| [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) | Documento maestro: estilo, las cuatro vistas mínimas, cross-cutting, catorce NFR, siete riesgos, trazabilidad de las trece restricciones transversales, de las dieciséis reglas y de las tres reglas de arquitectura, y siete puntos abiertos |
+| [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) | Documento maestro: estilo, las cuatro vistas mínimas, cross-cutting, catorce NFR, siete riesgos, trazabilidad de las trece restricciones transversales, de las dieciséis reglas y de las tres reglas de arquitectura, y siete puntos abiertos |
 | [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) | Índice de las siete ADR, con la correspondencia contra las cinco decisiones que la regla exige para `web-monolith` y las dos categorías que quedan vacías |
 | [`Adrs/`](Adrs/) | Las siete decisiones, una por archivo |
 
@@ -51,18 +51,18 @@ Ninguna superada, ninguna rechazada.
 
 ## 4. NFR vigentes
 
-Los catorce, con su objetivo numérico y su mecanismo, están en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §8. En una línea: las **cuatro** mediciones de `PT-01` —**200** en la dirección pública, semáforo del transporte, **20 minutos** de estabilidad y una llamada de salud con datos reales—, **100 %** de los pasos del guion acumulativo, **0** peticiones del navegador hacia el servicio de datos, **1** sola salida, **0** apariciones de la credencial en el navegador, **0** mensajes que expongan una dirección de servicio sobre los **diecisiete** códigos vivos, **0** tráfico de circuito durante la interacción con la escena, **0** instancias del visor no liberadas tras **10** recorridos, **0** invocaciones al interior del bundle sobre sus **seis** funciones, la línea de base de **11** superficies, **73** componentes, **74** estados y **24** rutas sostenida por **61** filas de sensado de deriva, y **0** advertencias de construcción.
+Los catorce, con su objetivo numérico y su mecanismo, están en [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §8. En una línea: las **cuatro** mediciones de `PT-01` —**200** en la dirección pública, semáforo del transporte, **20 minutos** de estabilidad y una llamada de salud con datos reales—, **100 %** de los pasos del guion acumulativo, **0** peticiones del navegador hacia el servicio de datos, **1** sola salida, **0** apariciones de la credencial en el navegador, **0** mensajes que expongan una dirección de servicio sobre los **diecisiete** códigos vivos, **0** tráfico de circuito durante la interacción con la escena, **0** instancias del visor no liberadas tras **10** recorridos, **0** invocaciones al interior del bundle sobre sus **seis** funciones, la línea de base de **11** superficies, **73** componentes, **74** estados y **24** rutas sostenida por **61** filas de sensado de deriva, y **0** advertencias de construcción.
 
 **No hay cobertura de líneas, y la fuente lo declara así**: este proyecto de código no tiene proyecto de pruebas propio, y su verificación es el guion de demostración acumulativo más la batería de integración del servicio que consume.
 
 ## 5. Orden de lectura sugerido
 
-1. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.4, las tres reglas de arquitectura y cómo las trata esta pieza. Son media página y es lo primero: **una superficie o un componente que las viole es un defecto, no una alternativa**. La categoría 03 hace la misma recomendación con su §2.4, y por el mismo motivo.
-2. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §2.2 — las cuatro decisiones de `GeometriaFactory-Contracts` y de `GeometriaFactory-Visor` que esta pieza hereda y no reabre. Sin eso, el aislamiento del visor se lee como una precaución y no como una obligación heredada.
-3. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §3 — los ocho componentes en tres capas, y sobre todo **§3.2**, cuyas cinco precisiones son las que hacen auditable lo demás.
+1. [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.4, las tres reglas de arquitectura y cómo las trata esta pieza. Son media página y es lo primero: **una superficie o un componente que las viole es un defecto, no una alternativa**. La categoría 03 hace la misma recomendación con su §2.4, y por el mismo motivo.
+2. [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §2.2 — las cuatro decisiones de `GeometriaFactory-Contracts` y de `GeometriaFactory-Visor` que esta pieza hereda y no reabre. Sin eso, el aislamiento del visor se lee como una precaución y no como una obligación heredada.
+3. [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §3 — los ocho componentes en tres capas, y sobre todo **§3.2**, cuyas cinco precisiones son las que hacen auditable lo demás.
 4. [`Adrs/ADR-10001`](Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md) y [`ADR-10003`](Adrs/ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md) — juntas, porque la segunda sólo es posible por la primera.
 5. [`Adrs/ADR-10006`](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) — la decisión con más superficie de contacto con otro proyecto de código.
-6. [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10 — la trazabilidad, para consultar por restricción transversal, por regla o por regla de arquitectura.
+6. [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10 — la trazabilidad, para consultar por restricción transversal, por regla o por regla de arquitectura.
 
 ## 6. Artefactos omitidos y su motivo
 

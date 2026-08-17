@@ -1,7 +1,7 @@
 # US-04015 — Interpretar el texto por el puerto de validación, sin tocar la base de datos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04015-Interpretar-El-Texto-Por-El-Puerto-Sin-Tocar-La-Base-De-Datos.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-04025 — Rechazar toda transición pedida por quien no tiene la facultad o desde un estado terminal
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04025-Rechazar-Toda-Transicion-Sin-Facultad-O-Desde-Un-Estado-Terminal.md
 **Versión:** 1.0
 **Estado:** Aprobada

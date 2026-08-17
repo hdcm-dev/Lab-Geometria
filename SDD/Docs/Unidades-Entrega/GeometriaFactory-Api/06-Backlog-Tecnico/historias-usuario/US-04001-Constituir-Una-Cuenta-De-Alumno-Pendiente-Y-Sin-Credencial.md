@@ -1,7 +1,7 @@
 # US-04001 — Constituir una cuenta de alumno en estado `Pendiente` y sin credencial
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04001-Constituir-Una-Cuenta-De-Alumno-Pendiente-Y-Sin-Credencial.md
 **Versión:** 1.0
 **Estado:** Aprobada

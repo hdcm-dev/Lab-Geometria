@@ -1,6 +1,6 @@
 # ADR-00005 — Sin paginación, con su condición de reingreso declarada
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -61,7 +61,7 @@ Motivación upstream: NB-00007, NB-00009; RN-00003, RN-00011; INV-02; `PRODUCT-I
 
 ## 7. Implementación
 
-- Los tres puntos de lectura de colección son `A-06`, `A-13` y —como caso del segundo— el del administrador, en [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.4.
+- Los tres puntos de lectura de colección son `A-06`, `A-13` y —como caso del segundo— el del administrador, en [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.4.
 - **Convención impuesta:** ninguno de los tres declara parámetro de página, de tamaño, de orden ni de filtro.
 - **Convención impuesta:** esta capa **no recompone** lo que la proyección de listado dejó afuera. Si una pantalla necesita el detalle, pide el detalle.
 - La medición del percentil 99 vive en la batería de integración y es la que dispara la condición de reingreso de §2 punto 4.

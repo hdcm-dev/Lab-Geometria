@@ -1,7 +1,7 @@
 # RN-02006 — Una cuenta `Pendiente` o `Bloqueado` no obtiene acceso
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md
 **Versión:** 1.0
 **Estado:** Aprobado

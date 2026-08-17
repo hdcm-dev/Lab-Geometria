@@ -1,6 +1,6 @@
 # CU-08008 — Contrato de reseteo y de cambio obligatorio de contraseña
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md
 **Versión:** 1.7
 **Estado:** Aprobado

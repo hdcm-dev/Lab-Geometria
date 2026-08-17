@@ -1,7 +1,7 @@
 # US-02004 — Habilitar, bloquear y rehabilitar una cuenta
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02004-Habilitar-Bloquear-Y-Rehabilitar-Una-Cuenta.md
 **Versión:** 1.0
 **Estado:** Aprobada

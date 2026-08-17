@@ -1,7 +1,7 @@
 # US-00015 — No exigir ni comprobar la situación de la cuenta al resetear
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00015-No-Exigir-Ni-Comprobar-La-Situacion-De-La-Cuenta-Al-Resetear.md
 **Versión:** 1.1
 **Estado:** Aprobada

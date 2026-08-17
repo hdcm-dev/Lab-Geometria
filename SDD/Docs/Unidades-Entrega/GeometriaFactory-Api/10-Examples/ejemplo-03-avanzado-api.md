@@ -1,7 +1,7 @@
 # Ejemplo 03 — Composición de raíz y arranque en dos fases: qué pasa antes de la primera petición
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
 **Versión:** 1.0
 **Estado:** Aprobado

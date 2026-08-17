@@ -1,7 +1,7 @@
 # US-06022 — Rechazar la emisión sin clave de firma, sin generar una al vuelo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06022-Rechazar-La-Emision-Sin-Clave-De-Firma.md
 **Versión:** 1.0
 **Estado:** Aprobada

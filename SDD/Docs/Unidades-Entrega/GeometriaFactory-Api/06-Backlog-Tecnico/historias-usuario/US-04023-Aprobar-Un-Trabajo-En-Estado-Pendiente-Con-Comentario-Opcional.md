@@ -1,7 +1,7 @@
 # US-04023 — Aprobar un trabajo en estado `Pendiente`, con comentario opcional
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04023-Aprobar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md
 **Versión:** 1.0
 **Estado:** Aprobada

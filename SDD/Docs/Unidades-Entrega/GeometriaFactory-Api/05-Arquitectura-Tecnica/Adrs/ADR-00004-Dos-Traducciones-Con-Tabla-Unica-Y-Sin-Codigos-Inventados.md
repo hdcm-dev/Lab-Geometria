@@ -1,6 +1,6 @@
 # ADR-00004 — Dos traducciones en orden, con una tabla única y sin inventar códigos
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md
 **Versión:** 1.1
 **Estado:** Aprobado
@@ -64,7 +64,7 @@ Motivación upstream: NB-00004, NB-00008, NB-00009; RN-00002, RN-00003, RN-00006
 
 ## 7. Implementación
 
-- El traductor de motivos y códigos de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde se elige un código de respuesta.
+- El traductor de motivos y códigos de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde se elige un código de respuesta.
 - La tabla completa, con sus **diecisiete** filas, está en [`../Contratos-REST.md`](../Contratos-REST.md) §5, y **este documento no la duplica**.
 - **Convención impuesta:** ningún punto de acceso elige un código de respuesta por su cuenta, ni siquiera para un caso «obvio».
 - **Convención impuesta:** un motivo interno nuevo que no tenga código del contrato usa el genérico **y agrega una fila a la lista de huecos**, que se eleva al Product Owner. No se inventa un código.

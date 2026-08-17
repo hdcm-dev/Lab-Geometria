@@ -1,7 +1,7 @@
 # US-10017 — Ver el desenlace del trabajo propio en el listado, y el comentario al abrirlo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10017-Ver-El-Desenlace-Del-Trabajo-Propio-En-El-Listado.md
 **Versión:** 1.1
 **Estado:** Aprobada

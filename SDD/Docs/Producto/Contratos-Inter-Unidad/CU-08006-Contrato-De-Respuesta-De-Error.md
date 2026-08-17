@@ -1,6 +1,6 @@
 # CU-08006 — Contrato de respuesta de error
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08006-Contrato-De-Respuesta-De-Error.md
 **Versión:** 1.7
 **Estado:** Aprobado

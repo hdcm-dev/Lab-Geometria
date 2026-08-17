@@ -1,7 +1,7 @@
 # US-10028 — Cambiar la contraseña obligada tras un reseteo y levantar la marca
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10028-Cambiar-La-Contrasena-Obligada-Y-Levantar-La-Marca.md
 **Versión:** 1.2
 **Estado:** Aprobada

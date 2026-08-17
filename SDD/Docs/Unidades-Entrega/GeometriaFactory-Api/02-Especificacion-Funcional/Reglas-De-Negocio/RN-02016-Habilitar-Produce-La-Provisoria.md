@@ -1,7 +1,7 @@
 # RN-02016 — Habilitar una cuenta produce su contraseña provisoria
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02016-Habilitar-Produce-La-Provisoria.md
 **Versión:** 1.1
 **Estado:** Aprobado

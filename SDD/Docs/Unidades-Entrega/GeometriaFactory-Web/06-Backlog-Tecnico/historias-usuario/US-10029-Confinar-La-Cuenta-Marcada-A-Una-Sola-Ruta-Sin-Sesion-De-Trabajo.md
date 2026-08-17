@@ -1,7 +1,7 @@
 # US-10029 — Confinar la cuenta con cambio pendiente a una sola ruta, sin sesión de trabajo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10029-Confinar-La-Cuenta-Marcada-A-Una-Sola-Ruta-Sin-Sesion-De-Trabajo.md
 **Versión:** 1.2
 **Estado:** Aprobada

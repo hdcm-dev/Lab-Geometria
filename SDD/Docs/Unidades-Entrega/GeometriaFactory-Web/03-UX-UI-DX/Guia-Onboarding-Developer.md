@@ -1,6 +1,6 @@
 # Guía de onboarding — la primera hora sobre la fachada del visor
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Guia-Onboarding-Developer.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-10005 — Un traductor único de condiciones, y el estado degradado como superficie y no como error
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10005-Estado-Degradado-Como-Superficie.md
 **Versión:** 1.1
 **Estado:** Aprobado
@@ -59,7 +59,7 @@ Y la regla que hace posible distinguir sin adivinar: **el listado vacío se dist
 
 ## 7. Implementación
 
-- El componente **Traductor de condiciones a presentación** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único que produce mensajes para la persona.
+- El componente **Traductor de condiciones a presentación** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único que produce mensajes para la persona.
 - **No habla con el servicio de datos**: recibe el tipo de error ya traído, o la señal de que no hubo respuesta. Por eso se ejercita entero sin red.
 - Cada mensaje dice **qué pasó, por qué pasó y qué hacer**, que son las tres partes que la categoría 03 exige.
 - Los **dos tramos** de la superficie de degradación se tratan por separado: la indisponibilidad del servicio de datos deja el armazón intacto y avisa en el área de contenido; el corte de circuito se superpone en el borde superior.

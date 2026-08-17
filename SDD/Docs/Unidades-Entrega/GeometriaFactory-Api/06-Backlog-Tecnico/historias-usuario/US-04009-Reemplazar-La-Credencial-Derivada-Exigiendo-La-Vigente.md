@@ -1,7 +1,7 @@
 # US-04009 — Reemplazar la credencial derivada exigiendo la verificación de la vigente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04009-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md
 **Versión:** 1.0
 **Estado:** Aprobada

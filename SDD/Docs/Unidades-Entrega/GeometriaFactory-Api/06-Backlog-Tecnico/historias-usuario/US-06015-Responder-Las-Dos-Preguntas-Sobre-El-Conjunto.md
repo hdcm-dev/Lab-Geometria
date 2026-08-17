@@ -1,7 +1,7 @@
 # US-06015 — Responder si un correo está registrado y si ya existe una cuenta con papel `Administrador`
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06015-Responder-Las-Dos-Preguntas-Sobre-El-Conjunto.md
 **Versión:** 1.0
 **Estado:** Aprobada

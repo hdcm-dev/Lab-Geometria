@@ -27,7 +27,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 
 `GeometriaFactory-Web` tiene calidad cuando **las tres reglas de arquitectura del producto se sostienen desde acá y son verificables en un punto observable cada una**, cuando **lo construido no se aparta de la línea de base visual que el Product Owner aprobó**, y cuando **ninguna interrupción del servicio de datos ni del circuito deja una pantalla rota**.
 
-Las tres partes no son intercambiables. La primera es la razón de ser de la topología entera: `RA-01` sólo se puede violar desde acá, porque éste es el único proyecto de código que sirve el navegador ([`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.4). La segunda tiene instrumento propio y ya emitido: [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md), con sus **61** filas. La tercera es la única necesidad de negocio que este proyecto de código sostiene y ningún otro puede sostener del lado de la persona.
+Las tres partes no son intercambiables. La primera es la razón de ser de la topología entera: `RA-01` sólo se puede violar desde acá, porque éste es el único proyecto de código que sirve el navegador ([`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §10.4). La segunda tiene instrumento propio y ya emitido: [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md), con sus **61** filas. La tercera es la única necesidad de negocio que este proyecto de código sostiene y ningún otro puede sostener del lado de la persona.
 
 **Lo que esta definición deliberadamente no dice es «que las reglas de negocio se cumplan».** [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5 declara que esta pieza **no hace cumplir ninguna**: ocultar un control, no armar una ruta o no ofrecer una acción **acotan lo que se ofrece y no hacen cumplir nada**. La consecuencia para esta categoría es directa y está en §3: toda acotación se verifica **forzando la solicitud sin pasar por la pantalla**, y no mirando la pantalla.
 
@@ -79,7 +79,7 @@ Clasificación ISO/IEC 25010. Las **seis propiedades transversales** de `02` §6
 
 ### 3.1 `GeometriaFactory-Web`
 
-Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los tres primeros los declara el intake §17.2.P.8 · GeometriaFactory-Web; el cuarto, §17.2.P.6 · GeometriaFactory-Web; los demás los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8, con una fila por NFR. Las tres puertas técnicas van aparte, en §3.2.
+Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple. Los tres primeros los declara el intake §17.2.P.8 · GeometriaFactory-Web; el cuarto, §17.2.P.6 · GeometriaFactory-Web; los demás los deriva [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8, con una fila por NFR. Las tres puertas técnicas van aparte, en §3.2.
 
 | Id | Condición | Cómo se verifica | Consecuencia si no se cumple |
 | --- | --- | --- | --- |

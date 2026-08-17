@@ -1,6 +1,6 @@
 # ADR-00007 — Arranque en dos fases, y un punto de salud que no exige acceso
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -62,7 +62,7 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.1.P.3 · Geometr
 
 ## 7. Implementación
 
-- El componente de arranque y salud de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único que dispara la preparación y el único que aloja el punto de salud.
+- El componente de arranque y salud de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único que dispara la preparación y el único que aloja el punto de salud.
 - **Convención impuesta:** ninguna operación de superficie dispara la preparación del almacén.
 - **Convención impuesta:** el punto de salud no lleva ni ruta, ni esquema, ni versión de dependencia en su respuesta.
 - La ruta del almacén llega por la composición de raíz; **esta capa la toma de configuración y `GeometriaFactory-Infrastructure` la recibe** ([`ADR-00006`](ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md)).

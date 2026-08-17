@@ -1,6 +1,6 @@
 # Wireframes — Aprovisionamiento inicial
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Aprovisionamiento-Inicial.md
 **Versión:** 1.0
 **Estado:** Aprobado

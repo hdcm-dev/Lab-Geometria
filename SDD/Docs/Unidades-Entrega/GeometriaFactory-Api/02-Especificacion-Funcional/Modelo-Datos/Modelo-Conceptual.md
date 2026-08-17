@@ -1,7 +1,7 @@
 # Modelo conceptual de datos — GeometriaFactory-Infrastructure
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Modelo-Conceptual.md
 **Versión:** 1.3
 **Estado:** Aprobado

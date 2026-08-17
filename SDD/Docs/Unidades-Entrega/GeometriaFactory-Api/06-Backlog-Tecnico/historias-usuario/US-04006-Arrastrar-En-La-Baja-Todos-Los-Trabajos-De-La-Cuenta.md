@@ -1,7 +1,7 @@
 # US-04006 — Arrastrar en la baja todos los trabajos de la cuenta, en cualquier estado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04006-Arrastrar-En-La-Baja-Todos-Los-Trabajos-De-La-Cuenta.md
 **Versión:** 1.1
 **Estado:** Aprobada

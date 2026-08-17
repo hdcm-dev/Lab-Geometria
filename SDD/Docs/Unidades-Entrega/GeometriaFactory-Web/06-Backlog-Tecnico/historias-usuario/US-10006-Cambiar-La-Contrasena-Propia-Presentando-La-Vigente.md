@@ -1,7 +1,7 @@
 # US-10006 — Cambiar la contraseña propia presentando la vigente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10006-Cambiar-La-Contrasena-Propia-Presentando-La-Vigente.md
 **Versión:** 1.1
 **Estado:** Aprobada

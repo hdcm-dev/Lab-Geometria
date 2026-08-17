@@ -1,6 +1,6 @@
 # ADR-10001 — Render en el servidor con circuito interactivo, y una sola salida hacia el servicio de datos
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -62,7 +62,7 @@ El repliegue del transporte a uno de mayor latencia es **aceptable y no se anunc
 
 ## 7. Implementación
 
-- El componente **Cliente tipado del servicio de datos** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es la **única** salida hacia el servicio de datos.
+- El componente **Cliente tipado del servicio de datos** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es la **única** salida hacia el servicio de datos.
 - Ninguna superficie invoca al cliente tipado directamente: entre una superficie y la salida hay siempre un servicio de aplicación de front ([`ADR-10004`](ADR-10004-Tres-Capas-De-Presentacion.md)).
 - El circuito **termina en el servidor de esta pieza**: no llega al servicio de datos.
 - Convención impuesta: agregar una dependencia de guion al proyecto exige comprobar que no consulta servicios por su cuenta, y esa comprobación es bloqueante en revisión.

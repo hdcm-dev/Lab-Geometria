@@ -1,6 +1,6 @@
 # CU-10004 — Administrar las cuentas de la comisión
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10004-Administrar-Las-Cuentas-De-La-Comision.md
 **Versión:** 1.8
 **Estado:** Aprobado

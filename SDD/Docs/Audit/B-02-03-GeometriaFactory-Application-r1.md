@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Fase auditada:** B (02-Especificacion-Funcional y 03-UX-UI-DX)
-**Proyecto de código:** GeometriaFactory-Application (`tipo_proyecto_codigo` = `library`)
+**Unidad de entrega:** GeometriaFactory-Api
 **Alcance:** los diecisiete documentos de `SDD/Docs/Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/` y `.../03-UX-UI-DX/`, contra `Rules-Especificacion-Funcional.md`, `Rules-UX-UI-DX.md`, `Vocabulario-Rules.md`, D1-D9, el upstream de nivel producto (00, 01), el intake 1.3, el manifiesto 1.1 y `GeometriaFactory-Domain/02-Especificacion-Funcional/`
 **Auditor:** Arquitecto de Soluciones + QA Senior, invocado desde cero, sin participación en la generación
 **Fecha:** 2026-08-09

@@ -1,7 +1,7 @@
 # Contrato de la superficie pública — GeometriaFactory-Visor
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Contratos-Abstractions.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -148,7 +148,7 @@ Aplica el criterio de [`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-
 | CU que lo consumen | CU-12001 a CU-12007, los siete de la categoría 02 de este proyecto de código |
 | NB que sostiene | NB-00006, y NB-00004 parcialmente |
 | RN que cubre | **Ninguna.** Un visualizador puro no tiene reglas de dominio |
-| Garantías que compromete | G-1 a G-7, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2 |
+| Garantías que compromete | G-1 a G-7, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.2 |
 | ADR que lo gobiernan | ADR-12001, ADR-12002, ADR-12003, ADR-12004, ADR-12005, ADR-12006 |
 | Consumidor | El componente anfitrión, que vive en `GeometriaFactory-Web` |
 | Ejemplos | Sample **S-1**, la página integradora sin backend, que ejerce las seis funciones |

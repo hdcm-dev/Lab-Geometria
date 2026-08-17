@@ -1,6 +1,6 @@
 # CU-08001 — Contrato de canje de credenciales y de sesión
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md
 **Versión:** 1.6
 **Estado:** Aprobado

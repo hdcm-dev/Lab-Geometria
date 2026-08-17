@@ -1,7 +1,7 @@
 # US-10021 — Sincronizar el árbol y la escena por índice de pieza
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10021-Sincronizar-El-Arbol-Y-La-Escena-Por-Indice-De-Pieza.md
 **Versión:** 1.2
 **Estado:** Aprobada

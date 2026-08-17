@@ -103,7 +103,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 
 ### 4.1 `GeometriaFactory-Web`
 
-Alineados con los **siete** riesgos arquitectónicos de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §9, más tres propios de esta categoría.
+Alineados con los **siete** riesgos arquitectónicos de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §9, más tres propios de esta categoría.
 
 | Id | Riesgo | Impacto | Probabilidad | Mitigación en este plan |
 | --- | --- | --- | --- | --- |
@@ -120,7 +120,7 @@ Alineados con los **siete** riesgos arquitectónicos de [`../05-Arquitectura-Tec
 
 ### 4.2 `GeometriaFactory-Visor`
 
-Alineados con los **seis** riesgos arquitectónicos de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §9, más dos propios de esta categoría.
+Alineados con los **seis** riesgos arquitectónicos de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §9, más dos propios de esta categoría.
 
 | Id | Riesgo | Impacto | Probabilidad | Mitigación en este plan |
 | --- | --- | --- | --- | --- |

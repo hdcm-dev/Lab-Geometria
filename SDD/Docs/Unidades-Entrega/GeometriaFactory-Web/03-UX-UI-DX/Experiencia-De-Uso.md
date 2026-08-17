@@ -1,6 +1,6 @@
 # Experiencia de uso — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Experiencia-De-Uso.md
 **Versión:** 1.4
 **Estado:** Aprobado

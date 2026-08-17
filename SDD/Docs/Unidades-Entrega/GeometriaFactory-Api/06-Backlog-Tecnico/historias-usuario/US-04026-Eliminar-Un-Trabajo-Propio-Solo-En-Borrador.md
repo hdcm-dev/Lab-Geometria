@@ -1,7 +1,7 @@
 # US-04026 — Eliminar un trabajo propio sólo en `Borrador`
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04026-Eliminar-Un-Trabajo-Propio-Solo-En-Borrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-00029 — Responder por el estado del servicio en un punto que no exige acceso
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00029-Responder-Por-El-Estado-Del-Servicio-Sin-Exigir-Acceso.md
 **Versión:** 1.1
 **Estado:** Aprobada

@@ -1,6 +1,6 @@
 # ADR-10006 — El visor se opera sólo por sus seis funciones, y es esta pieza la que consulta el entorno
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -64,7 +64,7 @@ Y dos consecuencias que las superficies no pueden invertir:
 
 ## 7. Implementación
 
-- El componente **Anfitrión del visor** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único que invoca la fachada, y es la **capa 1** del contrato de fachada de `GeometriaFactory-Visor`.
+- El componente **Anfitrión del visor** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único que invoca la fachada, y es la **capa 1** del contrato de fachada de `GeometriaFactory-Visor`.
 - Las **dos** superficies que lo consumen son `Envio-De-Trabajo`, en la previsualización previa al envío, y `Vista-De-Trabajo`, que es la única que usa las seis funciones.
 - **El anfitrión opera el ciclo de vida completo**: crear la instancia después de que el elemento de dibujo tiene tamaño, cargar el texto una sola vez, resaltar por índice, recalcular la relación de aspecto cuando corresponde, gobernar los dos movimientos y liberar al descartar.
 - **La fachada no observa tamaños y no decide cuándo ajustar**: el recálculo lo invoca el anfitrión.

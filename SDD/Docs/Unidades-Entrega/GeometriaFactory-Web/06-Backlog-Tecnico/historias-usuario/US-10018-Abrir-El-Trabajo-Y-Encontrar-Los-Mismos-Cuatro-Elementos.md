@@ -1,7 +1,7 @@
 # US-10018 — Abrir el trabajo y encontrar los mismos cuatro elementos que ve el administrador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10018-Abrir-El-Trabajo-Y-Encontrar-Los-Mismos-Cuatro-Elementos.md
 **Versión:** 1.1
 **Estado:** Aprobada

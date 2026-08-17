@@ -1,7 +1,7 @@
 # Audit Fase B — 02 Especificación Funcional y 03 UX/UI/DX — GeometriaFactory-Web — ronda 1
 
 **Fase:** B (categorías 02 y 03; la 04 omitida por gating, `usa_llm` == false)
-**Proyecto de código:** `GeometriaFactory-Web`
+**Unidad de entrega:** GeometriaFactory-Web
 **Producto:** Fábrica de Geometría
 **`tipo_proyecto_codigo` (D8):** `web-monolith` · **Variante 03:** UX/UI
 **Alcance auditado:** los 30 documentos de `SDD/Docs/Proyectos/GeometriaFactory-Web/02-Especificacion-Funcional/` y `.../03-UX-UI-DX/`

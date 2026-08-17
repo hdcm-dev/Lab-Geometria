@@ -1,7 +1,7 @@
 # US-00021 — Listar trabajos con el alcance ya decidido y sin parámetro para pedir borradores ajenos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00021-Listar-Trabajos-Sin-Parametro-Para-Pedir-Borradores-Ajenos.md
 **Versión:** 1.1
 **Estado:** Aprobada

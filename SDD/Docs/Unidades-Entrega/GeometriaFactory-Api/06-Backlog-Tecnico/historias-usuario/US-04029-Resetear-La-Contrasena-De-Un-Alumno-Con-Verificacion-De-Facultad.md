@@ -1,7 +1,7 @@
 # US-04029 — Resetear la contraseña de un alumno fijando una provisoria, con verificación de facultad
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04029-Resetear-La-Contrasena-De-Un-Alumno-Con-Verificacion-De-Facultad.md
 **Versión:** 1.0
 **Estado:** Aprobada

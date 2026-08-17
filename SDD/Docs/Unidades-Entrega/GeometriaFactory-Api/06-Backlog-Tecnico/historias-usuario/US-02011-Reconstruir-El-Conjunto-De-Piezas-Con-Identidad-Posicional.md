@@ -1,7 +1,7 @@
 # US-02011 — Reconstruir el conjunto de piezas con identidad posicional
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02011-Reconstruir-El-Conjunto-De-Piezas-Con-Identidad-Posicional.md
 **Versión:** 1.0
 **Estado:** Aprobada

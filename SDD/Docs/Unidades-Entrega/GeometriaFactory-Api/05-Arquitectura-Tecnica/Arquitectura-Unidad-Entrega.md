@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
-**Documento:** Arquitectura-Proyecto-Codigo.md
+**Documento:** Arquitectura-Unidad-Entrega.md
 **Versión:** 2.0
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
@@ -92,7 +92,7 @@ Este proyecto de código depende por compilación de tres —`GeometriaFactory-A
 | Un caso de uso, una unidad de trabajo | [`Application ADR-04005`](Adrs/ADR-04005-Un-Caso-De-Uso-Una-Unidad-De-Trabajo.md) | **Una petición ejerce a lo sumo un caso de uso**, y esta capa no abre ninguna unidad de trabajo por su cuenta |
 | El conjunto cerrado de códigos del contrato, y la regla de exposición de la frontera | [`Contracts ADR-08002`](../../../Producto/Adrs/ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md) y [`Contracts ADR-08004`](../../../Producto/Adrs/ADR-08004-Regla-De-Exposicion-De-La-Frontera.md) | **Esta capa no agrega, no renombra y no traduce a texto ningún código del contrato**, y no agrega ni recorta campos de los tipos de transferencia |
 | El ensamblado de contratos **no impone formato de intercambio**, y la elección le corresponde a esta capa y al front | [`Contracts ADR-08001`](../../../Producto/Adrs/ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md) y su `PA-03` | **Esta categoría lo fija**, para los dos extremos, en [`ADR-00002`](Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) |
-| La dirección del servicio de datos llega al front por configuración, y el front adopta el formato que esta capa fije | [`Web ADR-10007`](../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) y `PA-03` de [`Web`](../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §11 | La decisión de formato **no se puede tomar de un solo lado**, y `GeometriaFactory-Web` declaró que la toma esta categoría y que él la adopta |
+| La dirección del servicio de datos llega al front por configuración, y el front adopta el formato que esta capa fije | [`Web ADR-10007`](../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) y `PA-03` de [`Web`](../../GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §11 | La decisión de formato **no se puede tomar de un solo lado**, y `GeometriaFactory-Web` declaró que la toma esta categoría y que él la adopta |
 | El motor de interpretación no impone límite de tamaño al texto, y exige que el borde **rechace y nunca trunque** | [`Infrastructure ADR-06006`](Adrs/ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md) §2 punto 3 | El límite de cuerpo lo fija esta categoría, con la forma de rechazo que aquella ADR le exige ([`ADR-00002`](Adrs/ADR-00002-Formato-De-Intercambio-Y-Su-Configuracion.md) §2 punto 6) |
 
 ### 2.2 `GeometriaFactory-Domain`

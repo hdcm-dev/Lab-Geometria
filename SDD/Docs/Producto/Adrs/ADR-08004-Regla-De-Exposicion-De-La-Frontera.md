@@ -1,6 +1,6 @@
 # ADR-08004 — Regla de exposición: lista cerrada de lo que nunca cruza la frontera
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** ADR-08004-Regla-De-Exposicion-De-La-Frontera.md
 **Versión:** 1.0
 **Estado:** Aprobado

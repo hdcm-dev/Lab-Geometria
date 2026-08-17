@@ -1,7 +1,7 @@
 # US-06005 — Derivar el valor desde las dimensiones y los componentes
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06005-Derivar-El-Valor-Desde-Las-Dimensiones-Y-Los-Componentes.md
 **Versión:** 1.0
 **Estado:** Aprobada

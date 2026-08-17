@@ -1,7 +1,7 @@
 # CU-00011 — Arrancar el servicio y dejar el almacén en condiciones
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md
 **Versión:** 1.2
 **Estado:** Aprobado

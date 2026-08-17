@@ -1,7 +1,7 @@
 # US-02016 — Enviar un trabajo que no verifica y queda en `Borrador` con sus errores
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02016-Enviar-Un-Trabajo-Que-No-Verifica-Y-Queda-En-Borrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-00026 — Conectar cada puerto con su adaptador y tomar de configuración lo que el despliegue provee
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00026-Conectar-Cada-Puerto-Con-Su-Adaptador-Y-Tomar-La-Configuracion.md
 **Versión:** 1.1
 **Estado:** Aprobada

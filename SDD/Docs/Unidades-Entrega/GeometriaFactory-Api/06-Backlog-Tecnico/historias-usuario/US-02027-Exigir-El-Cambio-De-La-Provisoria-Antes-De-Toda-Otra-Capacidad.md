@@ -1,7 +1,7 @@
 # US-02027 — Exigir el cambio de la contraseña provisoria antes de toda otra capacidad, y levantar la marca al cambiarla
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02027-Exigir-El-Cambio-De-La-Provisoria-Antes-De-Toda-Otra-Capacidad.md
 **Versión:** 1.0
 **Estado:** Aprobada

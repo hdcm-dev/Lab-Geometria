@@ -1,7 +1,7 @@
 # US-02006 — Fijar la credencial derivada provisoria en el acto de habilitación
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02006-Fijar-La-Credencial-Provisoria-En-El-Acto-De-Habilitacion.md
 **Versión:** 1.0
 **Estado:** Aprobada

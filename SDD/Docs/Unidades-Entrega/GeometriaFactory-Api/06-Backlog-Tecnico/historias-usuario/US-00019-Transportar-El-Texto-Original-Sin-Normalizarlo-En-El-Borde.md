@@ -1,7 +1,7 @@
 # US-00019 — Transportar el texto original **sin normalizarlo en el borde**
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00019-Transportar-El-Texto-Original-Sin-Normalizarlo-En-El-Borde.md
 **Versión:** 1.1
 **Estado:** Aprobada

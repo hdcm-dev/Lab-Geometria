@@ -1,6 +1,6 @@
 # CU-10007 — Abrir un trabajo y explorarlo en escena y árbol
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10007-Abrir-Un-Trabajo-Y-Explorarlo-En-Escena-Y-Arbol.md
 **Versión:** 1.2
 **Estado:** Aprobado

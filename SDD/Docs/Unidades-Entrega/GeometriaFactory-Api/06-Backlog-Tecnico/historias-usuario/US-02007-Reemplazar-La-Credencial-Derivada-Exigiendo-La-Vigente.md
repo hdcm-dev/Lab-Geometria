@@ -1,7 +1,7 @@
 # US-02007 — Reemplazar la credencial derivada exigiendo la vigente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02007-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md
 **Versión:** 1.0
 **Estado:** Aprobada

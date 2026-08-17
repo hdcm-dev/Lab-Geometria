@@ -1,6 +1,6 @@
 # ADR-06004 — Derivación de clave anclada, con sus parámetros versionados junto al valor guardado
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -63,7 +63,7 @@ Motivación upstream: NB-00002; RN-06001, RN-06006, RN-06013, RN-06016; INV-06, 
 
 ## 7. Implementación
 
-- El mecanismo de credenciales y el mecanismo de acceso firmado de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 son los únicos lugares donde una contraseña en claro y una clave de firma existen dentro del producto.
+- El mecanismo de credenciales y el mecanismo de acceso firmado de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 son los únicos lugares donde una contraseña en claro y una clave de firma existen dentro del producto.
 - **Convención impuesta:** ni la contraseña en claro, ni el valor derivado, ni la provisoria, ni la clave de firma entran en un mensaje, en un resultado de error ni en una traza. La contracara obligatoria es que **todo error que se muestre queda registrado del lado del servidor**.
 - **Convención impuesta:** ningún componente fuera de estos dos recibe la contraseña en claro. De acá para adentro circula sólo el valor derivado.
 - La columna del valor derivado del esquema físico está en [`../Modelo-Datos-Logico.md`](../Modelo-Datos-Logico.md) §2.1, y es **nula mientras la cuenta está `Pendiente`**: toma valor en el acto de habilitación, con la provisoria que produce [`ADR-06005`](ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md).

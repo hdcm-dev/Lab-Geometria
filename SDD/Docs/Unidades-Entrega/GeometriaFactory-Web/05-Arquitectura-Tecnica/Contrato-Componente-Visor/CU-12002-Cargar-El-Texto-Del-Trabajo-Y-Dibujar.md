@@ -1,6 +1,6 @@
 # CU-12002 — Cargar el texto del trabajo y dibujar sus piezas
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # ADR-06003 — Criterio de comparación de dos correos, y el índice que lo sostiene
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -33,7 +33,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `P
 
 **La misma normalización se usa para recuperar una cuenta por su correo.** Un criterio de comparación distinto entre el alta y el ingreso dejaría cuentas inalcanzables para su dueño.
 
-**Esta decisión es derivación de esta categoría, no transcripción**, y va rotulada como tal: ninguna fuente del producto la enuncia. Está elevada al Product Owner en `PA-01` de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §11 sólo en lo que hace al identificador del puerto; el criterio en sí lo cierra esta ADR.
+**Esta decisión es derivación de esta categoría, no transcripción**, y va rotulada como tal: ninguna fuente del producto la enuncia. Está elevada al Product Owner en `PA-01` de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §11 sólo en lo que hace al identificador del puerto; el criterio en sí lo cierra esta ADR.
 
 ## 3. Estado
 
@@ -66,7 +66,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `P
 
 ## 7. Implementación
 
-- El adaptador de repositorio de cuentas de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde la normalización se aplica.
+- El adaptador de repositorio de cuentas de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde la normalización se aplica.
 - **Convención impuesta:** ningún otro componente normaliza correos. Si dos lugares normalizan, tarde o temprano lo hacen distinto.
 - El esquema declara **dos** columnas para el correo y **un** índice único sobre la normalizada; el detalle está en [`../Modelo-Datos-Logico.md`](../Modelo-Datos-Logico.md) §2.1 y §3.
 - La colisión que la consulta previa no vio termina en `CORREO_YA_REGISTRADO`, con la precisión ya declarada por la categoría 03: **no se informa el estado ni el papel** de la cuenta que ocupa el correo.

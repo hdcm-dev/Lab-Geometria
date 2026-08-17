@@ -1,6 +1,6 @@
 # CU-12005 — Destruir la instancia y liberar sus recursos
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md
 **Versión:** 1.0
 **Estado:** Aprobado

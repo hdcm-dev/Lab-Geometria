@@ -1,7 +1,7 @@
 # US-06001 — Leer el texto real del alumno con tolerancia a comas finales y a las claves sinónimas
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06001-Leer-El-Texto-Real-Con-Tolerancia-A-Comas-Finales-Y-Claves-Sinonimas.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Fase auditada:** B (02-Especificacion-Funcional y 03-UX-UI-DX)
-**Proyecto de código:** GeometriaFactory-Application (`tipo_proyecto_codigo` = `library`)
+**Unidad de entrega:** GeometriaFactory-Api
 **Alcance de la ronda:** verificación de cierre de los catorce hallazgos de `B-02-03-GeometriaFactory-Application-r1.md` sobre los **dieciocho** documentos vivos de `SDD/Docs/Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/` y `.../03-UX-UI-DX/` —diecisiete de r1 más `CU-10`—, y verificación de que las correcciones no hayan degradado lo que r1 dio por válido. Contrastado contra D1-D9, §6 de `Rules-Especificacion-Funcional.md`, §6 de `Rules-UX-UI-DX.md`, `Vocabulario-Rules.md` §9 y §10, `Master-Prompt.md` §5, el upstream de nivel producto (00, 01), el intake 1.3, el manifiesto 1.1 y `GeometriaFactory-Domain/02-Especificacion-Funcional/`, **que también cambió y hoy tiene doce casos de uso**
 **Auditor:** Arquitecto de Soluciones + QA Senior, invocado desde cero, sin participación en la generación, en la corrección ni en la ronda 1
 **Fecha:** 2026-08-09

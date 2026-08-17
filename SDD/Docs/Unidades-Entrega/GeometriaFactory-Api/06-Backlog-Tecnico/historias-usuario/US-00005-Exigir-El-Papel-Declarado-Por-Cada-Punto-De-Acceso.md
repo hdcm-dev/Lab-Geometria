@@ -1,7 +1,7 @@
 # US-00005 — Exigir el papel declarado por cada punto de acceso
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00005-Exigir-El-Papel-Declarado-Por-Cada-Punto-De-Acceso.md
 **Versión:** 1.1
 **Estado:** Aprobada

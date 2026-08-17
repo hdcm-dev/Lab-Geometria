@@ -1,7 +1,7 @@
 # US-02003 — Exigir la unicidad del correo verificada en el alta
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02003-Exigir-La-Unicidad-Del-Correo-Verificada-En-El-Alta.md
 **Versión:** 1.0
 **Estado:** Aprobada

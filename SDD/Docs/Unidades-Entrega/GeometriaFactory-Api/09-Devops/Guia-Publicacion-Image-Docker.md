@@ -1,7 +1,7 @@
 # Guía de publicación — Imagen de contenedor
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Guia-Publicacion-Image-Docker.md
 **Versión:** 1.1
 **Estado:** Aprobado
@@ -9,7 +9,7 @@
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `rest-api`
 **Tipo de artefacto:** `image-docker`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5; [`../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) 1.0; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.4; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.22** §10, §13, §15, §16, §17.1.P.4 · GeometriaFactory-Api, §17.1.P.5 · GeometriaFactory-Api, §17.1.P.7 · GeometriaFactory-Api, §17.1.P.8 · GeometriaFactory-Api, §17.1.P.9 · GeometriaFactory-Api, §17.1.P.11 · GeometriaFactory-Api y §17.1.P.12 · GeometriaFactory-Api
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) 1.0 §5; [`../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) 1.0; [`../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) 1.0; [`../08-Calidad-Y-Pruebas/Definition-Of-Done.md`](../08-Calidad-Y-Pruebas/Definition-Of-Done.md) 1.1 §1.4; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3.3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.22** §10, §13, §15, §16, §17.1.P.4 · GeometriaFactory-Api, §17.1.P.5 · GeometriaFactory-Api, §17.1.P.7 · GeometriaFactory-Api, §17.1.P.8 · GeometriaFactory-Api, §17.1.P.9 · GeometriaFactory-Api, §17.1.P.11 · GeometriaFactory-Api y §17.1.P.12 · GeometriaFactory-Api
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md); `11-Documentacion` cuando se emita, que **cita esta política y no define una paralela** (`Rules-Devops.md` §0)
 
 ---

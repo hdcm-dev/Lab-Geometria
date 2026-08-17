@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Versionado.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -385,8 +385,56 @@ Esta sección reemplaza además a la política de obsolescencia que `Rules-Devop
 
 **La primera fila es la única obligación de versionado de todo el producto que alcanza a un dato que sobrevive al código.** Las demás protegen la construcción o la ejecución; ésa protege **almacenes que ya existen y que ninguna canalización toca**.
 
-## 11. Control de cambios
+## 11. Registro del avance y su responsable
+
+**Esta sección responde a los ítems 7 y 8 de `Rules-Devops.md` §4.3**, y se escribe con el caso
+observado de este mismo producto a la vista.
+
+### 11.1 Qué documento declara el avance, quién lo actualiza y en qué evento
+
+| Campo | Valor |
+| --- | --- |
+| **Documento que declara el avance** | `changelog.md`, en la raíz del repositorio de código. Es el único documento que declara en qué etapa va el producto |
+| **Quién lo actualiza** | **El equipo de desarrollo** —una persona más el agente de IA, `PRODUCT-INTAKE` §2— en la rama de la etapa. La responsabilidad no se delega al agente: quien abre el pull request responde por la fila |
+| **Quién verifica que se actualizó** | **El Product Owner**, en la revisión del pull request de la etapa, que `PRODUCT-INTAKE` §15 declara punto de control bloqueante |
+| **En qué evento** | **Antes de fusionar la rama de la etapa**, no después. Es la regla que la primera línea del propio `changelog.md` declara desde su emisión |
+| **Si ningún rol correspondiera** | La organización dueña del repositorio, la cátedra de Programación 2. No es el caso acá, y se declara para que el orden de resolución de `Master-Prompt-Reanudacion.md` §1.1 R2 quede cerrado |
+
+**Por qué esta fila existe.** La obligación estaba escrita sin sujeto —«se actualiza en la rama de la
+etapa»—, y una obligación sin sujeto no la incumple nadie en particular: **se incumplió tres veces
+seguidas**, en las etapas `c`, `d` y `e`, sin que nada chirriara. Lo encontró el orquestador de
+reanudación contrastando el documento contra el historial, y quedó registrado como la divergencia
+`D-01` de [`../../../Audit/Estado-Del-Destino-2026-08-16.md`](../../../Audit/Estado-Del-Destino-2026-08-16.md) §2.
+
+### 11.2 Instrumento preferido: el subproducto del acto
+
+**Entre un registro que hay que acordarse de actualizar y uno que el acto produce solo, manda el
+segundo.** Acá los tres instrumentos posibles se comportaron así, medido sobre el árbol:
+
+| Instrumento | ¿Es subproducto del acto? | Estado observado |
+| --- | --- | --- |
+| **Nombre de la etapa en el mensaje de confirmación de fusión** | **Sí**: fusionar lo escribe | **Intacto.** Es lo que permitió reconstruir que el código estaba en la etapa `e` cuando el registro decía `b` |
+| `changelog.md` | No: hay que acordarse | **Se degradó tres etapas.** Repuesto el 2026-08-16 desde los commits, marcado como repuesto |
+| **Etiqueta por etapa cerrada** | No: hay que crearla | **Nunca se creó ninguna.** `git tag` devuelve **cero** en todo el repositorio, contra el objetivo del 100 % que §1 y §10 declara |
+
+**El instrumento que manda es el historial del repositorio.** Cuando `changelog.md` y el historial no
+coinciden, **gana el historial** y la diferencia se repara sobre el registro en prosa, nunca al revés:
+es la regla de resolución de `Master-Prompt-Reanudacion.md` §1, y es la que se aplicó al reponer las
+tres etapas.
+
+**El registro en prosa se conserva igual, y no es redundante**: el historial dice *qué se fusionó* y
+`changelog.md` dice *qué significó*. Lo que cambia es que deja de ser la fuente que decide y pasa a
+ser la que explica.
+
+**Sobre las etiquetas, declarado y no disimulado.** El objetivo del 100 % de §1 y §10 está incumplido en
+su totalidad y esta sección **no lo cierra**: cerrarlo es crear las etiquetas de las etapas ya
+cerradas o retirar el objetivo, y las dos son decisiones de la categoría 09 con su propio acto. Se
+declara acá porque un ítem 8 que enumera un instrumento sin decir que no existe es exactamente la
+clase de afirmación que estos registros degradan.
+
+## 12. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-17 | Entra **§11, el registro del avance y su responsable**, con los ítems **7 y 8** que `Rules-Devops.md` **4.2** §4.3 agregó: qué documento declara la etapa, **quién lo actualiza y en qué evento**, y el **instrumento preferido**, que es el subproducto del acto. Se declara que **manda el historial del repositorio** sobre `changelog.md`, y que el objetivo del 100 % de etiquetas por etapa cerrada está **incumplido en su totalidad** —cero etiquetas en el árbol—, sin cerrarlo acá. Reparación de la divergencia `D-06` de `Audit/Estado-Del-Destino-2026-08-17.md` §2. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |

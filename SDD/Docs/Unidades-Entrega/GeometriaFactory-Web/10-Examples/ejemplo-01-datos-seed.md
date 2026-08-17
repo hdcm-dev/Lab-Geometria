@@ -1,7 +1,7 @@
 # Ejemplo 01 — Datos seed: la comisión desde la que arranca el guion de demostración
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-01-datos-seed.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-06008 — Conservar el texto original literal y rechazar toda escritura que lo reemplace
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06008-Conservar-El-Texto-Original-Literal-Y-Rechazar-Toda-Escritura-Que-Lo-Reemplace.md
 **Versión:** 1.0
 **Estado:** Aprobada

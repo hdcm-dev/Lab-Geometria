@@ -1,6 +1,6 @@
 # CU-10001 — Registrar la cuenta de alumno
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10001-Registrar-La-Cuenta-De-Alumno.md
 **Versión:** 1.1
 **Estado:** Aprobado

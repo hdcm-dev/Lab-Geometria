@@ -1,7 +1,7 @@
 # US-04010 — Cargar un trabajo con dueño, identificador propio y sello tomado del reloj
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04010-Cargar-Un-Trabajo-Con-Dueno-Identificador-Propio-Y-Sello-Del-Reloj.md
 **Versión:** 1.0
 **Estado:** Aprobada

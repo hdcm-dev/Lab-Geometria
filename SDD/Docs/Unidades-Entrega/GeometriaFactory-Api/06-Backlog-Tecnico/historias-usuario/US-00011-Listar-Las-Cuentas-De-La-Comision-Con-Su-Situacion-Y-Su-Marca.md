@@ -1,7 +1,7 @@
 # US-00011 — Listar las cuentas de la comisión con su situación y su marca
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00011-Listar-Las-Cuentas-De-La-Comision-Con-Su-Situacion-Y-Su-Marca.md
 **Versión:** 1.1
 **Estado:** Aprobada

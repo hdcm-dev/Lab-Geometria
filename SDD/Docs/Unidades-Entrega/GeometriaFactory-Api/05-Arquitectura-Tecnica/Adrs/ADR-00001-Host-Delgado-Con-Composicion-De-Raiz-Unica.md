@@ -1,6 +1,6 @@
 # ADR-00001 — Host delgado, con la composición de raíz como único lugar de ensamblado
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00001-Host-Delgado-Con-Composicion-De-Raiz-Unica.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -61,7 +61,7 @@ De ahí salen cuatro prohibiciones verificables:
 
 ## 7. Implementación
 
-- Los ocho componentes son los de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1, y §3.4 declara qué punto de acceso aloja cada superficie.
+- Los ocho componentes son los de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1, y §3.4 declara qué punto de acceso aloja cada superficie.
 - **Convención impuesta:** un punto de acceso que necesite más de un caso de uso es señal de que el recorte de la categoría 02 está mal, y ése no se reabre acá.
 - **Convención impuesta:** ninguna superficie depende de otra superficie.
 - El único artefacto de este proyecto de código que no es código de producción es la **colección de peticiones reproducible**, que vive en el árbol de muestras del repositorio y **no tiene componente**.

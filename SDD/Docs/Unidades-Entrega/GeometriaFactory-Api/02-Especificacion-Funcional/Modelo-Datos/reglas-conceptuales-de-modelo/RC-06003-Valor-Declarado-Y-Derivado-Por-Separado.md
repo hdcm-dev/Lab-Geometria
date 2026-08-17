@@ -1,7 +1,7 @@
 # RC-06003 — El valor declarado y el derivado se guardan por separado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06003-Valor-Declarado-Y-Derivado-Por-Separado.md
 **Versión:** 1.1
 **Estado:** Aprobado

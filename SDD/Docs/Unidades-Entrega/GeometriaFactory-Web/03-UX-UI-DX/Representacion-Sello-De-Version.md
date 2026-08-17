@@ -1,6 +1,6 @@
 # Representación — Sello de versión
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Representacion-Sello-De-Version.md
 **Versión:** 1.0
 **Estado:** Aprobado

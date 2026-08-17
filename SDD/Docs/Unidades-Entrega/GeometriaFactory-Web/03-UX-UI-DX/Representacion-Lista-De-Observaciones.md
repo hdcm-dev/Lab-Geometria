@@ -1,6 +1,6 @@
 # Representación — Lista de observaciones
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Representacion-Lista-De-Observaciones.md
 **Versión:** 1.0
 **Estado:** Aprobado

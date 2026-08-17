@@ -17,7 +17,7 @@ traces:
 # Plan documental — GeometriaFactory-Api
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** `GeometriaFactory-Api`
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md de la categoría 11
 **Versión:** 2.0
 **Estado:** Propuesto

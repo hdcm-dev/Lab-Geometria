@@ -1,6 +1,6 @@
 # ADR-10003 — La credencial de sesión vive en el estado del circuito, y las rutas acotan sin hacer cumplir
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10003-Credencial-De-Sesion-En-El-Estado-Del-Circuito.md
 **Versión:** 1.3
 **Estado:** Aprobado
@@ -198,7 +198,7 @@ construcción del guardián. **Ninguna decisión cambia: §2 lo declaraba entero
   las apruebe, y ese recorrido es anterior a que hubiera sesión. **El límite está probado y no sólo
   comentado**: `PanelSessionGateTests` levanta la pieza como `Production` con la opción en `true` y
   comprueba que las siete rutas desvían igual.
-- El componente **Sesión y estado del circuito** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único que custodia la credencial; el **Armazón y encaminamiento** es el único que aplica los cuatro guardianes.
+- El componente **Sesión y estado del circuito** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único que custodia la credencial; el **Armazón y encaminamiento** es el único que aplica los cuatro guardianes.
 - El **cliente tipado** adjunta la credencial del lado del servidor. Ninguna superficie la ve.
 - Las credenciales en claro del canje, del cambio de contraseña y del reseteo **también** viajan servidor a servidor, según la regla de exposición que `GeometriaFactory-Contracts` declara para su frontera.
 - El cuarto guardián se aplica **antes** que el de papel: una cuenta marcada no llega a ninguna ruta de su papel. Es la contraparte de superficie del orden fijo que `GeometriaFactory-Application` ejerce del otro lado.

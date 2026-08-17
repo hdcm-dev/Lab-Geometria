@@ -1,6 +1,6 @@
 # ADR-10002 — Sin estado propio y sin persistencia, y por qué se omite el modelo de datos lógico
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -60,7 +60,7 @@ Y la consecuencia que la primera obliga: **el listado vacío se distingue del fa
 
 ## 7. Implementación
 
-- Los **servicios de aplicación de front** de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 piden los datos al abrir cada superficie y no los conservan entre superficies.
+- Los **servicios de aplicación de front** de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 piden los datos al abrir cada superficie y no los conservan entre superficies.
 - **El tipo recibido decide el estado a mostrar**: colección con cero elementos produce el estado vacío, con su ilustración y su acción siguiente; ausencia de respuesta produce el estado indisponible. Nunca se decide por el conteo.
 - **Nunca una tabla vacía mientras carga**: el esqueleto por fila es lo que impide que la espera se confunda con el estado vacío.
 - El texto original del trabajo se entrega tal como la persona lo pegó, en el envío y en la presentación, **sin reescribir un carácter**.

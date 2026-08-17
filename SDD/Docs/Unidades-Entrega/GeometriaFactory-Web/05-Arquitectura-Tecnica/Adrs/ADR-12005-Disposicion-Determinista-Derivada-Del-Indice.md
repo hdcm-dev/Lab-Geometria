@@ -1,6 +1,6 @@
 # ADR-12005 — Disposición determinista derivada del índice, y el determinismo es de posición y no de orientación
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12005-Disposicion-Determinista-Derivada-Del-Indice.md
 **Versión:** 1.0
 **Estado:** Aprobado

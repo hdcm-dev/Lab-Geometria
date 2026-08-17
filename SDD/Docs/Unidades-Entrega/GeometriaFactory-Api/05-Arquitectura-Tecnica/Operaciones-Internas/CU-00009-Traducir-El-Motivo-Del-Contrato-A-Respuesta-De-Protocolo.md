@@ -1,7 +1,7 @@
 # CU-00009 — Traducir el motivo del contrato a respuesta de protocolo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md
 **Versión:** 1.3
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-04014 — Enviar un trabajo con errores de validación y que quede en `Borrador` con su ubicación
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04014-Enviar-Un-Trabajo-Con-Errores-Y-Que-Quede-En-Borrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

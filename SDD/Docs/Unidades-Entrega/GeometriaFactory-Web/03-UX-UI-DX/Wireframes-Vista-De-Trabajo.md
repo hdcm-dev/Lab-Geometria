@@ -1,6 +1,6 @@
 # Wireframes — Vista de trabajo
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Vista-De-Trabajo.md
 **Versión:** 1.1
 **Estado:** Aprobado

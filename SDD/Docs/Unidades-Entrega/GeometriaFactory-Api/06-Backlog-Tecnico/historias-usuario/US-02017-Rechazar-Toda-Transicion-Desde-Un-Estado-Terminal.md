@@ -1,7 +1,7 @@
 # US-02017 — Rechazar toda transición desde un estado terminal
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02017-Rechazar-Toda-Transicion-Desde-Un-Estado-Terminal.md
 **Versión:** 1.0
 **Estado:** Aprobada

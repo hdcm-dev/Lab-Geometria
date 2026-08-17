@@ -1,6 +1,6 @@
 # ADR-08005 — Proyección de listado separada del detalle, y el comentario como bloque propio
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** ADR-08005-Proyeccion-De-Listado-Separada-Del-Detalle.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # Guía de publicación — Bundle del visor
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Guia-Publicacion-Bundle-Visor.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -9,7 +9,7 @@
 **Autor:** Ingeniero DevOps Senior + Release Engineer (AG-09)
 **Tipo de proyecto de código (D8):** `library`
 **Tipo de artefacto:** `Bundle-Visor`
-**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0 §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) 1.0 §5; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §13, §16, §16.1, §17.2.P.7 · GeometriaFactory-Web, §17.2.P.8 · GeometriaFactory-Web, §17.2.P.7 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor y §18
+**Trazabilidad upstream:** [`../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) 1.0 §7 y §8; [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) 1.0 §5; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) 1.1 §3; [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.20** §13, §16, §16.1, §17.2.P.7 · GeometriaFactory-Web, §17.2.P.8 · GeometriaFactory-Web, §17.2.P.7 · GeometriaFactory-Visor, §17.2.P.8 · GeometriaFactory-Visor y §18
 **Trazabilidad downstream:** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md), [`Entornos-Deploy.md`](Entornos-Deploy.md); `10-Examples` (sample S-1) y `11-Documentacion` cuando se emitan
 
 ---

@@ -1,7 +1,7 @@
 # US-02005 — Dar de baja una cuenta arrastrando sus trabajos en cualquier estado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02005-Dar-De-Baja-Una-Cuenta-Arrastrando-Sus-Trabajos.md
 **Versión:** 1.0
 **Estado:** Aprobada

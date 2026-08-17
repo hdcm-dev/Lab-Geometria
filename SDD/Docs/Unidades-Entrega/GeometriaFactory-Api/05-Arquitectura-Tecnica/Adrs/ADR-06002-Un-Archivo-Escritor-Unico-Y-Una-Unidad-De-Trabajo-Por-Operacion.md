@@ -1,6 +1,6 @@
 # ADR-06002 — Archivo único, escritor único y una unidad de trabajo por operación
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -60,7 +60,7 @@ Motivación upstream: NB-00001, NB-00003, NB-00009; RN-06004, RN-06007, RN-06008
 
 ## 7. Implementación
 
-- El contexto de persistencia y mapeo de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde se abre y se cierra una unidad de trabajo.
+- El contexto de persistencia y mapeo de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde se abre y se cierra una unidad de trabajo.
 - **Convención impuesta:** ninguna operación de adaptador abre más de una unidad, y ninguna anida.
 - **Convención impuesta:** ningún adaptador espera activamente a que el almacén se libere. La espera, si la hubiera, es del consumidor.
 - El esquema físico que materializa estas decisiones está en [`../Modelo-Datos-Logico.md`](../Modelo-Datos-Logico.md), incluidas las restricciones de integridad que hacen que el arrastre sea comprobable y el índice de la fila siguiente.

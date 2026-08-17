@@ -1,7 +1,7 @@
 # Ejemplo 02 — Árbol y escena sincronizados por índice, y ninguna pieza que desaparezca sin aviso
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-02-intermedio.md
 **Versión:** 1.1
 **Estado:** Aprobado

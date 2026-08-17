@@ -1,7 +1,7 @@
 # RN-02012 — El reseteo de contraseña conserva la cuenta y sus trabajos
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md
 **Versión:** 1.4
 **Estado:** Aprobado

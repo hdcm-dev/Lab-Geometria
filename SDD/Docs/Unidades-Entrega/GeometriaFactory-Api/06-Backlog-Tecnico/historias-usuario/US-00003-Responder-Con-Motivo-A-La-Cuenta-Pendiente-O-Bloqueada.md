@@ -1,7 +1,7 @@
 # US-00003 — Responder con motivo a la cuenta `Pendiente` o `Bloqueado`
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00003-Responder-Con-Motivo-A-La-Cuenta-Pendiente-O-Bloqueada.md
 **Versión:** 1.1
 **Estado:** Aprobada

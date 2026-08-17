@@ -1,7 +1,7 @@
 # US-00027 — Aplicar las transformaciones de esquema al arrancar, sobre almacén inexistente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00027-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md
 **Versión:** 1.1
 **Estado:** Aprobada

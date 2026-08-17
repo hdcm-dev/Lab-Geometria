@@ -1,7 +1,7 @@
 # US-04002 — Rechazar el alta con un correo ya registrado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04002-Rechazar-El-Alta-Con-Un-Correo-Ya-Registrado.md
 **Versión:** 1.0
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # RC-06002 — La identidad de la pieza es su posición en el conjunto raíz
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06002-Identidad-Posicional-De-La-Pieza.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-10007 — Recorrer el mismo formulario de tres campos en los tres cursos de la credencial
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10007-Recorrer-El-Mismo-Formulario-En-Los-Tres-Cursos-De-La-Credencial.md
 **Versión:** 1.1
 **Estado:** Aprobada

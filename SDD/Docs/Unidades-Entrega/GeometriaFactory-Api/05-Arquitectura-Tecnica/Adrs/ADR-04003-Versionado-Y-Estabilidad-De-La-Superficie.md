@@ -1,6 +1,6 @@
 # ADR-04003 — Versionado por compilación compartida y estabilidad de la superficie de dos caras
 
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md
 **Versión:** 1.0
 **Estado:** Aprobado

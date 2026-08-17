@@ -92,7 +92,7 @@ Siete filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificac
 
 ### 3.1 `GeometriaFactory-Web`
 
-Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
+Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
@@ -119,7 +119,7 @@ Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Pro
 
 ### 3.2 `GeometriaFactory-Visor`
 
-Ocho filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8. Los seis primeros son las **seis propiedades transversales** de `02` §6, con las condiciones de medición que esa sección declara como lugar único.
+Ocho filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8. Los seis primeros son las **seis propiedades transversales** de `02` §6, con las condiciones de medición que esa sección declara como lugar único.
 
 | NFR | Objetivo numérico | Condición de medición | Test | Estado |
 | --- | --- | --- | --- | --- |

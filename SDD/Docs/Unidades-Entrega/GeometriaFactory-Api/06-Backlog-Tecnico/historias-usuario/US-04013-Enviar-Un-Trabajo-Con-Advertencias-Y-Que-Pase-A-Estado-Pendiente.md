@@ -1,7 +1,7 @@
 # US-04013 — Enviar un trabajo con advertencias y que pase a estado `Pendiente`
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04013-Enviar-Un-Trabajo-Con-Advertencias-Y-Que-Pase-A-Estado-Pendiente.md
 **Versión:** 1.0
 **Estado:** Aprobada

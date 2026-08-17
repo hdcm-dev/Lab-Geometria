@@ -1,7 +1,7 @@
 # US-04031 — Conservar la cuenta, su estado de habilitación y todos sus trabajos después del reseteo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04031-Conservar-La-Cuenta-Su-Estado-Y-Todos-Sus-Trabajos-Tras-El-Reseteo.md
 **Versión:** 1.0
 **Estado:** Aprobada

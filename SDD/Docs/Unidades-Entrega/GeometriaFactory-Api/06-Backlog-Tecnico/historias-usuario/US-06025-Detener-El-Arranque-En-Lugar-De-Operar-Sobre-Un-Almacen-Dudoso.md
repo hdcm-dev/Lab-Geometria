@@ -1,7 +1,7 @@
 # US-06025 — Detener el arranque en lugar de operar sobre un almacén en el que no se puede confiar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06025-Detener-El-Arranque-En-Lugar-De-Operar-Sobre-Un-Almacen-Dudoso.md
 **Versión:** 1.0
 **Estado:** Aprobada

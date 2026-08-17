@@ -1,6 +1,6 @@
 # DX — Experiencia del developer sobre la fachada del visor
 
-**Proyecto de código:** GeometriaFactory-Visor
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** DX-Developer-Experience.md
 **Versión:** 1.1
 **Estado:** Aprobado

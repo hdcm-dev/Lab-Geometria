@@ -1,7 +1,7 @@
 # RN-02013 — Con la contraseña provisoria sin cambiar, la cuenta no llega a ninguna otra parte
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md
 **Versión:** 1.3
 **Estado:** Aprobado

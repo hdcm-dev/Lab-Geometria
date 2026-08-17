@@ -1,7 +1,7 @@
 # Definición del modelo de dominio
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Definicion-Modelo-De-Dominio.md
 **Versión:** 1.10
 **Estado:** Aprobado

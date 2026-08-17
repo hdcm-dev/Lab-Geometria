@@ -1,6 +1,6 @@
 # CU-10006 — Consultar el listado propio y operar sobre el borrador
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md
 **Versión:** 1.0
 **Estado:** Aprobado

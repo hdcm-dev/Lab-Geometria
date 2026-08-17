@@ -1,7 +1,7 @@
 # US-00018 — Reenviar un trabajo en `Borrador` con el texto que la persona volvió a pegar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00018-Reenviar-Un-Trabajo-En-Borrador-Con-El-Texto-Que-La-Persona-Volvio-A-Pegar.md
 **Versión:** 1.1
 **Estado:** Aprobada

@@ -1,6 +1,6 @@
 # Bitácora de validación de la maqueta — GeometriaFactory-Web
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Bitacora-Validacion-Maqueta.md
 **Versión:** 1.4
 **Estado:** Aprobado

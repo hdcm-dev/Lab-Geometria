@@ -1,6 +1,6 @@
 # ADR-08002 — Un único tipo de error, con conjunto cerrado de diecisiete códigos
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md
 **Versión:** 1.1
 **Estado:** Aprobado

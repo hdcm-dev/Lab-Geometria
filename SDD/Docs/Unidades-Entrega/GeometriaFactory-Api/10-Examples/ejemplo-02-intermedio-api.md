@@ -1,7 +1,7 @@
 # Ejemplo 02 — La colección de peticiones reproducible: los ocho escenarios contra la superficie ensamblada
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
 **Versión:** 1.0
 **Estado:** Aprobado

@@ -272,8 +272,8 @@ Aplica el criterio general del producto —versionado semántico, sin publicaci�
 | Dimensión | Referencia |
 | --- | --- |
 | CU que lo consumen | CU-02001 a CU-02013, los trece |
-| RN que cubre | RN-02001 a RN-02016, las dieciséis, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2 |
-| Invariantes que sostiene | INV-01 a INV-09, los nueve, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
+| RN que cubre | RN-02001 a RN-02016, las dieciséis, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.2 |
+| Invariantes que sostiene | INV-01 a INV-09, los nueve, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.3 |
 | ADR que lo gobiernan | ADR-02001, ADR-02002, ADR-02003, ADR-02004, ADR-02005, ADR-02006 |
 | Consumidores | `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`, por referencia de proyecto de código |
 | Tests previstos en 08 | Una prueba por operación en su camino de efecto aplicado y al menos una por condición del catálogo; prueba de inspección de la superficie pública contra §4.2 y §5 |
@@ -284,8 +284,8 @@ Aplica el criterio general del producto —versionado semántico, sin publicaci�
 | --- | --- |
 | CU que lo consumen | CU-04001 a CU-04011, los **once** |
 | CU de dominio que orquesta | Los **trece** de `GeometriaFactory-Domain`, con el reparto de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.4. Ninguno queda sin orquestar |
-| RN que cubre | RN-04001 a RN-04016, las **dieciséis**, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2. **Quince** tienen tramo acá; RN-04014 no |
-| Invariantes | INV-01 a INV-09, los **nueve**, con el aporte de esta capa declarado en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
+| RN que cubre | RN-04001 a RN-04016, las **dieciséis**, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.2. **Quince** tienen tramo acá; RN-04014 no |
+| Invariantes | INV-01 a INV-09, los **nueve**, con el aporte de esta capa declarado en [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.3 |
 | ADR que lo gobiernan | ADR-04001, ADR-04002, ADR-04003, ADR-04004, ADR-04005, ADR-04006 |
 | Consumidores | `GeometriaFactory-Api`, por la cara de arriba; `GeometriaFactory-Infrastructure`, por la de abajo. Los dos por referencia de proyecto de código |
 | Tests previstos en 08 | Una prueba por operación en su camino de efecto aplicado y al menos una por condición del catálogo de 36; matriz comprobación contra prueba para las cuatro negativas; matriz puerto contra doble; prueba del arrastre de la baja como testigo de la unidad de trabajo |
@@ -296,8 +296,8 @@ Aplica el criterio general del producto —versionado semántico, sin publicaci�
 | --- | --- |
 | CU que lo consumen | CU-06001 a CU-06010, los **diez** |
 | Puertos que implementa | Los **cuatro** que declara [`GeometriaFactory-Application`](Contratos-Abstractions.md) §4. Ninguno queda sin adaptador y no hay adaptador sin puerto |
-| RN que cubre | RN-06001 a RN-06016, las **dieciséis**, con el reparto de [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.2. **Catorce** tienen tramo acá; RN-06006 y RN-06010 no. **Tres** lo tienen principal: RN-06008, RN-06009 y RN-06014 |
-| Invariantes | INV-01 a INV-09, los **nueve**, con el aporte de esta capa declarado en [`Arquitectura-Proyecto-Codigo.md`](Arquitectura-Proyecto-Codigo.md) §10.3 |
+| RN que cubre | RN-06001 a RN-06016, las **dieciséis**, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.2. **Catorce** tienen tramo acá; RN-06006 y RN-06010 no. **Tres** lo tienen principal: RN-06008, RN-06009 y RN-06014 |
+| Invariantes | INV-01 a INV-09, los **nueve**, con el aporte de esta capa declarado en [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.3 |
 | ADR que lo gobiernan | ADR-06001 a ADR-06007, las **siete** |
 | Consumidores | **Uno solo**: la composición de raíz de `GeometriaFactory-Api`, por referencia de proyecto de código |
 | Documentos hermanos | [`Modelo-Datos-Logico.md`](Modelo-Datos-Logico.md), para lo que cruza hacia el almacén; [`Flujo-Ejecucion.md`](Flujo-Ejecucion.md), para lo que ocurre dentro del puerto de validación |

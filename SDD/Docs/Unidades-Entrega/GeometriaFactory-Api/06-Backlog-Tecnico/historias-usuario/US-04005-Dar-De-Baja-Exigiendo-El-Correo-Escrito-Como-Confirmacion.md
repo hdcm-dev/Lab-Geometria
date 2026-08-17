@@ -1,7 +1,7 @@
 # US-04005 — Dar de baja una cuenta exigiendo el correo escrito como confirmación
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04005-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Como-Confirmacion.md
 **Versión:** 1.0
 **Estado:** Aprobada

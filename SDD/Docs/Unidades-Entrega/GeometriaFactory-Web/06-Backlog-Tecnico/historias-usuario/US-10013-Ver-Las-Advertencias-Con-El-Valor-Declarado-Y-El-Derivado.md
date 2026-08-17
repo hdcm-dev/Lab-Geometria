@@ -1,7 +1,7 @@
 # US-10013 — Ver las advertencias con el valor declarado y el derivado, sin bloqueo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10013-Ver-Las-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md
 **Versión:** 1.1
 **Estado:** Aprobada

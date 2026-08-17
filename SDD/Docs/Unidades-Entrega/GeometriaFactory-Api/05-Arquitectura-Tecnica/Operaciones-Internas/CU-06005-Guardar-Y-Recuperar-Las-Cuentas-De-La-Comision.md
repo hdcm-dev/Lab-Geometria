@@ -1,7 +1,7 @@
 # CU-06005 — Guardar y recuperar las cuentas de la comisión
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md
 **Versión:** 1.1
 **Estado:** Aprobado

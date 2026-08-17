@@ -1,7 +1,7 @@
 # US-04011 — Conservar el texto original íntegro al cargar y al reeditar
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04011-Conservar-El-Texto-Original-Integro-Al-Cargar-Y-Al-Reeditar.md
 **Versión:** 1.0
 **Estado:** Aprobada

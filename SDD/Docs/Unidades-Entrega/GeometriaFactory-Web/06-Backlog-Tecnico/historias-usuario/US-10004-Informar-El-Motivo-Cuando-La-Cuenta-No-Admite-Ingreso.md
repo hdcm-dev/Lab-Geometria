@@ -1,7 +1,7 @@
 # US-10004 — Informar el motivo cuando la cuenta no admite ingreso
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10004-Informar-El-Motivo-Cuando-La-Cuenta-No-Admite-Ingreso.md
 **Versión:** 1.1
 **Estado:** Aprobada

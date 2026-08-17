@@ -1,7 +1,7 @@
 # RC-06005 — El retiro es físico y la baja arrastra todo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06005-Retiro-Fisico-Con-Arrastre.md
 **Versión:** 1.1
 **Estado:** Aprobado

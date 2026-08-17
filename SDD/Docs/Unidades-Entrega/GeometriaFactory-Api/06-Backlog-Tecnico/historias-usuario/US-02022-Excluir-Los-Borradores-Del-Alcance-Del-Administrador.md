@@ -1,7 +1,7 @@
 # US-02022 — Excluir los trabajos en `Borrador` del alcance del administrador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02022-Excluir-Los-Borradores-Del-Alcance-Del-Administrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

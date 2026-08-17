@@ -1,6 +1,6 @@
 # ADR-06007 — Transformaciones de esquema al arrancar, con linaje inmutable y arranque detenido
 
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -63,7 +63,7 @@ Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.1.P.4 
 
 ## 7. Implementación
 
-- El componente de mecanismo de acceso firmado y preparación del almacén de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde el esquema se transforma.
+- El componente de mecanismo de acceso firmado y preparación del almacén de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde el esquema se transforma.
 - **Convención impuesta:** ninguna operación de adaptador dispara la preparación. Se ejecuta una vez, desde el arranque, y no a demanda.
 - **Convención impuesta:** la ubicación del almacén se recibe. Este proyecto de código no lee variables de entorno ni archivos de configuración por su cuenta.
 - **Convención impuesta:** una transformación fusionada no se edita. La revisión rechaza el cambio aunque compile y aunque el resultado sea equivalente.

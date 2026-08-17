@@ -1,7 +1,7 @@
 # US-10003 — Iniciar sesión sin que la credencial llegue al navegador
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10003-Iniciar-Sesion-Sin-Que-La-Credencial-Llegue-Al-Navegador.md
 **Versión:** 1.1
 **Estado:** Aprobada

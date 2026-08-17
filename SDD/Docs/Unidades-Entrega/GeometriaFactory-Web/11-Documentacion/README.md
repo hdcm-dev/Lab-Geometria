@@ -17,7 +17,7 @@ traces:
 # Plan documental — GeometriaFactory-Web
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** `GeometriaFactory-Web`
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md de la categoría 11
 **Versión:** 2.0
 **Estado:** Propuesto

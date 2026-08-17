@@ -1,7 +1,7 @@
 # US-04012 — Reeditar sólo un trabajo propio en `Borrador`, descartando la interpretación anterior
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Application
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-04012-Reeditar-Solo-Un-Trabajo-Propio-En-Borrador.md
 **Versión:** 1.0
 **Estado:** Aprobada

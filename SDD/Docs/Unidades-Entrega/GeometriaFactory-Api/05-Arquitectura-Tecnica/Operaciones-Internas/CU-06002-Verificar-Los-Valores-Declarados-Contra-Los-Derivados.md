@@ -1,7 +1,7 @@
 # CU-06002 — Verificar los valores declarados contra los derivados
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md
 **Versión:** 1.2
 **Estado:** Aprobado

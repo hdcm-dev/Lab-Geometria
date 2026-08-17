@@ -190,7 +190,7 @@ Diez filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificaci
 
 ### 3.1 `GeometriaFactory-Api`
 
-Diecisiete filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
+Diecisiete filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Estado |
 | --- | --- | --- | --- |
@@ -220,7 +220,7 @@ Diecisiete filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-
 
 ### 3.2 `GeometriaFactory-Domain`
 
-Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
+Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
@@ -237,7 +237,7 @@ Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyec
 
 ### 3.3 `GeometriaFactory-Application`
 
-Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
+Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
@@ -257,7 +257,7 @@ Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proye
 
 ### 3.4 `GeometriaFactory-Infrastructure`
 
-Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §8.
+Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §8.
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
@@ -340,7 +340,7 @@ Dieciséis filas, una por regla de [`../02-Especificacion-Funcional/Especificaci
 
 ### 4.3 `GeometriaFactory-Application`
 
-Dieciséis filas, una por regla. La columna de tramo es la que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 y [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §10.2 le asignan a cada una **en esta capa**; esta matriz la refleja y no la redefine. Las reglas se enuncian en `GeometriaFactory-Domain` y acá se referencian.
+Dieciséis filas, una por regla. La columna de tramo es la que [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §6 y [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §10.2 le asignan a cada una **en esta capa**; esta matriz la refleja y no la redefine. Las reglas se enuncian en `GeometriaFactory-Domain` y acá se referencian.
 
 | RN | Tramo en esta capa | Tests que lo verifican | Estado |
 | --- | --- | --- | --- |

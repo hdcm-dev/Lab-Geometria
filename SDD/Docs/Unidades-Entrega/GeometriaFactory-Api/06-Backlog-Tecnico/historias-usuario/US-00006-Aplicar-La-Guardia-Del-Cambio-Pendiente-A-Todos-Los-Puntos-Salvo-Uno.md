@@ -1,7 +1,7 @@
 # US-00006 — Aplicar la guardia del cambio de contraseña pendiente a todos los puntos salvo uno
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00006-Aplicar-La-Guardia-Del-Cambio-Pendiente-A-Todos-Los-Puntos-Salvo-Uno.md
 **Versión:** 1.1
 **Estado:** Aprobada

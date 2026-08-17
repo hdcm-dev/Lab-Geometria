@@ -1,7 +1,7 @@
 # US-10009 — Ver la lista de cuentas y habilitar, bloquear y rehabilitar, comunicando la provisoria
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10009-Ver-La-Lista-De-Cuentas-Y-Habilitar-Bloquear-Y-Rehabilitar.md
 **Versión:** 1.1
 **Estado:** Aprobada

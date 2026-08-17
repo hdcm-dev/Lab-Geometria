@@ -1,7 +1,7 @@
 # US-00024 — Traducir cada código del contrato al código de respuesta que le corresponde
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00024-Traducir-Cada-Codigo-Del-Contrato-Al-Codigo-De-Respuesta.md
 **Versión:** 1.1
 **Estado:** Aprobada

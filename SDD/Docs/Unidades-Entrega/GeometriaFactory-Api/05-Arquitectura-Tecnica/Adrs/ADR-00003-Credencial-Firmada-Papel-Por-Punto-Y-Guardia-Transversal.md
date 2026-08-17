@@ -1,6 +1,6 @@
 # ADR-00003 — Credencial firmada, papel exigido por punto y una guardia transversal sin excepciones sueltas
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00003-Credencial-Firmada-Papel-Por-Punto-Y-Guardia-Transversal.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -25,7 +25,7 @@ Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010
 **La admisión es un componente transversal por el que pasan los once puntos que exigen acceso, y la lista de los que no pasan es cerrada, contable y verificada por prueba.** Cinco reglas:
 
 1. **La guardia hace tres cosas, en este orden**: verifica la firma y la expiración del acceso; exige el papel que el punto declara; y aplica la guardia del cambio de contraseña pendiente. Un fallo en la primera es `401`; en las otras dos, `403` con motivo.
-2. **Cuatro puntos no exigen acceso firmado, y son exactamente cuatro**: el canje de credenciales, el registro de cuenta, la configuración del administrador y la salud. **Ni uno más.** La lista está en [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.4 y **una prueba de inspección la recorre en las dos direcciones**.
+2. **Cuatro puntos no exigen acceso firmado, y son exactamente cuatro**: el canje de credenciales, el registro de cuenta, la configuración del administrador y la salud. **Ni uno más.** La lista está en [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.4 y **una prueba de inspección la recorre en las dos direcciones**.
 3. **La guardia del cambio pendiente tiene una sola excepción declarada**: el cambio de la propia contraseña, que es lo único que la levanta. Ninguna otra excepción es admisible, y agregar una es un cambio de esta ADR y no de un punto de acceso.
 4. **Exigir el papel no es autorizar.** El papel viaja en el acceso y esta capa lo exige por punto; **la verificación de pertenencia y la de facultad se hacen sobre el dato recuperado y son de la capa de aplicación**. Que un punto exija `Administrador` no exime a la capa de adentro de comprobar.
 5. **La vigencia del acceso se toma de configuración**, con el criterio de que **caduque dentro de la sesión de trabajo de una clase** y con **renovación por reingreso**, sin acceso de refresco. El número se ancla en la etapa `a`.
@@ -63,7 +63,7 @@ Motivación upstream: NB-00001, NB-00002; RN-00001, RN-00004, RN-00006, RN-00010
 
 ## 7. Implementación
 
-- La guardia de admisión de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §3.1 es el único lugar donde se verifica el acceso y se exige el papel.
+- La guardia de admisión de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde se verifica el acceso y se exige el papel.
 - **Convención impuesta:** un punto de acceso nuevo entra a la tabla de §3.4 **en la misma intervención** en que se lo agrega. La prueba de inspección falla si no está.
 - **Convención impuesta:** ningún punto de acceso declara su propia excepción a la guardia del cambio pendiente.
 - El mecanismo de verificación del acceso es de `GeometriaFactory-Infrastructure`; lo que esta capa aporta es **exigirlo en cada punto**.

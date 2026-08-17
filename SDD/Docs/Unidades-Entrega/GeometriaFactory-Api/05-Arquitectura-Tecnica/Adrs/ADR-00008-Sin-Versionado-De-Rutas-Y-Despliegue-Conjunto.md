@@ -1,6 +1,6 @@
 # ADR-00008 — Sin versionado de rutas, con despliegue conjunto como regla operativa
 
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md
 **Versión:** 1.0
 **Estado:** Aprobado

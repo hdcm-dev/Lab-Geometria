@@ -1,7 +1,7 @@
 # CU-00012 — Ejercitar la superficie con la colección de peticiones reproducible
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00012-Ejercitar-La-Superficie-Con-La-Coleccion-De-Peticiones-Reproducible.md
 **Versión:** 1.4
 **Estado:** Aprobado

@@ -1,7 +1,7 @@
 # US-10010 — Dar de baja exigiendo el correo escrito y declarando el arrastre antes del intento
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** US-10010-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Y-Declarando-El-Arrastre.md
 **Versión:** 1.1
 **Estado:** Aprobada

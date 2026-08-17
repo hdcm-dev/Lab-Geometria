@@ -1,6 +1,6 @@
 # CU-08003 — Contrato de carga y edición del trabajo
 
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md
 **Versión:** 1.3
 **Estado:** Aprobado

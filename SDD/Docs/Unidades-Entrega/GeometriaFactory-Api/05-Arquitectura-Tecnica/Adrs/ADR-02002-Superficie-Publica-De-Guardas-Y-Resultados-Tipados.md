@@ -1,6 +1,6 @@
 # ADR-02002 — La superficie pública son guardas con resultado tipado, no excepciones
 
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -39,7 +39,7 @@ Los tres conceptos —condición, observación y comentario— viajan en **tipos
 | Resultado tipado (**adoptada**) | El rechazo es parte del valor de retorno y el consumidor no lo puede ignorar sin que se note; el conjunto de condiciones es enumerable y verificable contra el catálogo de 03 | Más ceremonia en cada invocación; obliga al consumidor a decidir qué hace con cada condición |
 | Excepción por regla de negocio violada | Escritura del camino feliz sin ruido; el rechazo se propaga solo | Un rechazo previsto pasa a costar como un fallo; el consumidor puede capturarlo genéricamente y perderlo, que es el fallo silencioso; y el conjunto de condiciones deja de ser enumerable por inspección de la firma |
 | Valor booleano más un mensaje de texto | Muy simple de implementar | El mensaje no es un código estable: no se puede verificar el catálogo, no se puede traducir aguas abajo y se rompe con cada reescritura del texto |
-| Registro de errores en una lista mutable de la entidad | Permite acumular varias condiciones de una operación | Deja la entidad modificada aunque la operación no proceda, lo que rompe la terminación controlada de [`../Arquitectura-Proyecto-Codigo.md`](../Arquitectura-Proyecto-Codigo.md) §4 |
+| Registro de errores en una lista mutable de la entidad | Permite acumular varias condiciones de una operación | Deja la entidad modificada aunque la operación no proceda, lo que rompe la terminación controlada de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §4 |
 
 ## 5. Consecuencias positivas
 

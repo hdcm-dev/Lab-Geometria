@@ -1,7 +1,7 @@
 # RN-02002 — El correo del alumno es único
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02002-Correo-Del-Alumno-Unico.md
 **Versión:** 1.1
 **Estado:** Aprobado

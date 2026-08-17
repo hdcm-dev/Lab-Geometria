@@ -1,7 +1,7 @@
 # Definición del contrato del validador de figuras
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Definicion-Contrato-Del-Validador-De-Figuras.md
 **Versión:** 1.1
 **Estado:** Aprobado

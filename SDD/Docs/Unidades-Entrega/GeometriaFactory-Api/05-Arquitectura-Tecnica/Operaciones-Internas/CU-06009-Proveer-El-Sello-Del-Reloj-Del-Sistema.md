@@ -1,7 +1,7 @@
 # CU-06009 — Proveer el sello del reloj del sistema
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md
 **Versión:** 1.2
 **Estado:** Aprobado

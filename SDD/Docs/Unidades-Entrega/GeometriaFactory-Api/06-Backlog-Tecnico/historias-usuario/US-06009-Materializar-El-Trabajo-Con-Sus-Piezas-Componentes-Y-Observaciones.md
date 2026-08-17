@@ -1,7 +1,7 @@
 # US-06009 — Materializar el trabajo con sus piezas, componentes y observaciones en una unidad de trabajo
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06009-Materializar-El-Trabajo-Con-Sus-Piezas-Componentes-Y-Observaciones.md
 **Versión:** 1.0
 **Estado:** Aprobada

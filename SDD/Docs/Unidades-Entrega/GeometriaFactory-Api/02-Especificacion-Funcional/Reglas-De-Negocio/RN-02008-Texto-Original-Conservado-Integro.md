@@ -1,7 +1,7 @@
 # RN-02008 — El texto original del alumno se conserva íntegro
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02008-Texto-Original-Conservado-Integro.md
 **Versión:** 1.2
 **Estado:** Aprobado

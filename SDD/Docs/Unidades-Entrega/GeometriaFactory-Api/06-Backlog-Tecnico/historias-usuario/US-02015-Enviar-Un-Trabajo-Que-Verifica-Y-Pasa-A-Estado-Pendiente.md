@@ -1,7 +1,7 @@
 # US-02015 — Enviar un trabajo que verifica y pasa a estado `Pendiente`
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-02015-Enviar-Un-Trabajo-Que-Verifica-Y-Pasa-A-Estado-Pendiente.md
 **Versión:** 1.0
 **Estado:** Aprobada

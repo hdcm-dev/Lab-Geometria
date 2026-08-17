@@ -1,7 +1,7 @@
 # US-00022 — Devolver el detalle con piezas, componentes, observaciones y comentario
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00022-Devolver-El-Detalle-Con-Piezas-Componentes-Observaciones-Y-Comentario.md
 **Versión:** 1.1
 **Estado:** Aprobada

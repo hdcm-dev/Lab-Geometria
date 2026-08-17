@@ -1,6 +1,6 @@
 # Wireframes — Ingreso
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Ingreso.md
 **Versión:** 1.4
 **Estado:** Aprobado

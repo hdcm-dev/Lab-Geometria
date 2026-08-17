@@ -1,7 +1,7 @@
 # US-00023 — Aprobar o rechazar un trabajo en estado `Pendiente`, con comentario opcional
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00023-Aprobar-O-Rechazar-Un-Trabajo-En-Estado-Pendiente.md
 **Versión:** 1.1
 **Estado:** Aprobada

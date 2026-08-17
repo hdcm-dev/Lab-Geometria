@@ -1,7 +1,7 @@
 # US-06019 — Producir una contraseña provisoria no adivinable y sin repetirse
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-06019-Producir-Una-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md
 **Versión:** 1.0
 **Estado:** Aprobada

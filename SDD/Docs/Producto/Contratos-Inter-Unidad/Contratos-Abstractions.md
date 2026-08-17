@@ -1,7 +1,7 @@
 # Contrato de la superficie pública — GeometriaFactory-Contracts
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Contracts
+**Producto:** Fábrica de Geometría
 **Documento:** Contratos-Abstractions.md
 **Versión:** 1.1
 **Estado:** Aprobado

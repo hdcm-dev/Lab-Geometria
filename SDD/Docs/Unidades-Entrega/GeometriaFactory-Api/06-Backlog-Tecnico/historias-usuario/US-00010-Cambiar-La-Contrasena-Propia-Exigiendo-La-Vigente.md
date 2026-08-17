@@ -1,7 +1,7 @@
 # US-00010 — Cambiar la contraseña propia exigiendo la vigente
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00010-Cambiar-La-Contrasena-Propia-Exigiendo-La-Vigente.md
 **Versión:** 1.1
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-00013 — Dar de baja una cuenta transportando el correo escrito como confirmación
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00013-Dar-De-Baja-Transportando-El-Correo-Escrito-Como-Confirmacion.md
 **Versión:** 1.1
 **Estado:** Aprobada

@@ -1,7 +1,7 @@
 # US-00002 — Responder credenciales inválidas **sin declarar cuál de los dos campos falló**
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Api
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** US-00002-Responder-Credenciales-Invalidas-Sin-Declarar-Que-Campo-Fallo.md
 **Versión:** 1.1
 **Estado:** Aprobada

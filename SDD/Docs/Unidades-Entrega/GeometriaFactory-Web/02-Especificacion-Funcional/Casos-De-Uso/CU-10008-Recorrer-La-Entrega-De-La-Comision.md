@@ -1,6 +1,6 @@
 # CU-10008 — Recorrer la entrega de la comisión
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10008-Recorrer-La-Entrega-De-La-Comision.md
 **Versión:** 1.0
 **Estado:** Aprobado

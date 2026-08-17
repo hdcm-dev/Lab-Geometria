@@ -1,7 +1,7 @@
 # RC-06001 — El texto original se escribe una sola vez y no se reescribe
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06001-Texto-Original-Escrito-Una-Sola-Vez.md
 **Versión:** 1.1
 **Estado:** Aprobado

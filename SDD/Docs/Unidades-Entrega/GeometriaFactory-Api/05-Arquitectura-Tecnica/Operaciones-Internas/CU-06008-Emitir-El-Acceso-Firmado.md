@@ -1,7 +1,7 @@
 # CU-06008 — Emitir el acceso firmado
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Infrastructure
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06008-Emitir-El-Acceso-Firmado.md
 **Versión:** 1.1
 **Estado:** Aprobado

@@ -1,6 +1,6 @@
 # Wireframes — Resolución del trabajo
 
-**Proyecto de código:** GeometriaFactory-Web
+**Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Resolucion-Del-Trabajo.md
 **Versión:** 1.0
 **Estado:** Aprobado

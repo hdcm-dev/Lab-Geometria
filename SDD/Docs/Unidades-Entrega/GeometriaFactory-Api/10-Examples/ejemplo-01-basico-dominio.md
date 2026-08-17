@@ -1,7 +1,7 @@
 # Ejemplo 01 — Ciclo de vida de una cuenta, de la configuración del administrador a la admisibilidad
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
 **Versión:** 1.0
 **Estado:** Aprobado
@@ -20,7 +20,7 @@ Demostrar el camino más corto que un consumidor recorre contra esta biblioteca:
 
 ## 2. Nivel
 
-**Básico.** Es el punto de entrada absoluto del proyecto de código: no hay trabajo, ni interpretación, ni desenlace. Toca cinco de los **trece** casos de uso y dos de los **cinco** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md`](../05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md) §3.1 —guardas de cuenta y evaluador de admisibilidad—, apoyados en el núcleo de entidades.
+**Básico.** Es el punto de entrada absoluto del proyecto de código: no hay trabajo, ni interpretación, ni desenlace. Toca cinco de los **trece** casos de uso y dos de los **cinco** componentes de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md) §3.1 —guardas de cuenta y evaluador de admisibilidad—, apoyados en el núcleo de entidades.
 
 ## 3. Prerequisites
 

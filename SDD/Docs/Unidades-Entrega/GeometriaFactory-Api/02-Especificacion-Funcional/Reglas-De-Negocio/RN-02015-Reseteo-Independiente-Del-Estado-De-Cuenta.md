@@ -1,7 +1,7 @@
 # RN-02015 — Resetear no exige que la cuenta esté habilitada
 
 **Producto:** Fábrica de Geometría
-**Proyecto de código:** GeometriaFactory-Domain
+**Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02015-Reseteo-Independiente-Del-Estado-De-Cuenta.md
 **Versión:** 1.2
 **Estado:** Aprobado
