@@ -187,7 +187,21 @@ else
                                                 @* ACCIÓN ÚNICA: abrir. No hay acciones de decisión:
                                                    un desenlace se decide mirando el trabajo, no
                                                    leyendo una fila. *@
-                                                <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)">
+                                                @*
+                                                    ---- LOS ENLACES A LAS SUPERFICIES QUE DIBUJAN LLEVAN CARGA REAL DE DOCUMENTO ----
+
+                                                    `data-enhance-nav="false"` no es decoración. La navegación mejorada de Blazor parcha el DOM en
+                                                    lugar de cargar la página, y **no vuelve a ejecutar los `<script>` de la página nueva**. El
+                                                    bundle del visor se sirve **sólo** en las superficies que dibujan —así lo exige el inventario
+                                                    cerrado de guiones de `verify-stage-c.sh`—, de modo que al llegar desde un enlace el bundle no
+                                                    estaba cargado y la escena quedaba **en blanco**.
+
+                                                    EL DEFECTO ERA INVISIBLE DESDE LAS PRUEBAS Y DESDE LA MEDICIÓN: escribiendo la dirección o
+                                                    recargando, todo funcionaba, y así se midió `PT-02`. Fallaba justo por el camino que usa la
+                                                    persona: entrar al listado y hacer clic. Lo encontró la verificación del árbol, en un navegador
+                                                    de verdad.
+                                                *@
+                                                <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)" data-enhance-nav="false">
                                                     <Icon Name="Open" />Abrir<span class="gf-sr-only"> «@work.Name»</span>
                                                 </a>
                                             </td>

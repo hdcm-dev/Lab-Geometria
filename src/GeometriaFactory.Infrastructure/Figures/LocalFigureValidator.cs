@@ -89,10 +89,12 @@ public sealed class LocalFigureValidator : IFigureValidator
         }
         catch (JsonException)
         {
+            // ÁRBOL NULO Y NO VACÍO: un texto que ni siquiera es JSON no tiene forma que mostrar.
             return FigureInterpretation.From(
                 0,
                 [],
-                [Observation.ValidationErrorAt(null, WholeTextField)]);
+                [Observation.ValidationErrorAt(null, WholeTextField)],
+                tree: null);
         }
 
         using (document)
@@ -146,7 +148,91 @@ public sealed class LocalFigureValidator : IFigureValidator
                 observations.AddRange(Verify(reconstruction.Piece!));
             }
 
-            return FigureInterpretation.From(figures.Count, pieces, observations);
+            // EL ÁRBOL SE ARMA ACÁ Y NO DESDE `pieces`, y es el punto entero: las figuras que no
+            // se pudieron reconstruir **no están en `pieces`** y sí tienen que estar en el árbol.
+            // El intake §20 lo declara: se lee lo que el alumno escribió, no lo que la escena
+            // logró representar. Un árbol derivado de las piezas escondería justamente la figura
+            // que el alumno está tratando de encontrar.
+            var tree = Shape(root);
+
+            return FigureInterpretation.From(figures.Count, pieces, observations, tree);
+        }
+    }
+
+    // ----------------------------------------------------------------- la forma del texto ---
+
+    /// <summary>
+    /// Arma el árbol del texto, marcando con su posición a las figuras del conjunto raíz.
+    /// </summary>
+    /// <remarks>
+    /// LA POSICIÓN NO SE INFIERE DE LA FORMA: se pasa la misma lista de figuras que el bucle de
+    /// reconstrucción recorrió, de modo que **el índice del árbol y el de la escena son el mismo
+    /// por construcción** y no por coincidencia. Es lo que `F-13` necesita, y es la clase de cosa
+    /// que se rompe en silencio si cada lado la calcula por su cuenta.
+    ///
+    /// EL CASO DE LA FIGURA SUELTA. Cuando el texto trae una figura sin envolver —§20.E-3 y
+    /// §20.E-4—, la raíz **es** esa figura: lleva la posición 0 ella misma, y no se le inventa un
+    /// nivel de lista que el alumno no escribió.
+    /// </remarks>
+    private static TextNode Shape(JsonElement root)
+    {
+        // LA POSICIÓN SE ASIGNA CON LA MISMA REGLA QUE USA EL BUCLE DE RECONSTRUCCIÓN, y por eso
+        // los dos índices son el mismo **por construcción**: si la raíz es una lista, cada
+        // elemento lleva su lugar en ella; si es una figura suelta —§20.E-3 y §20.E-4—, la raíz
+        // **es** la figura y lleva la posición 0.
+        //
+        // No se identifica ningún elemento por su contenido: dos figuras idénticas en el mismo
+        // texto son un caso perfectamente válido, y cualquier identidad derivada del contenido las
+        // confundiría. Lo que ubica a una figura es su lugar, que es lo mismo que dice `RC-06002`.
+        if (root.ValueKind == JsonValueKind.Array)
+        {
+            var figures = root.EnumerateArray()
+                .Select((figure, position) => Describe(figure, name: null, position))
+                .ToList();
+
+            return TextNode.Branch(null, TextNodeKind.Array, figures);
+        }
+
+        return Describe(root, name: null, position: 0);
+    }
+
+    private static TextNode Describe(JsonElement element, string? name, int? position = null)
+    {
+        switch (element.ValueKind)
+        {
+            case JsonValueKind.Object:
+            {
+                var children = element.EnumerateObject()
+                    .Select(property => Describe(property.Value, property.Name))
+                    .ToList();
+
+                return TextNode.Branch(name, TextNodeKind.Object, children, position);
+            }
+
+            case JsonValueKind.Array:
+            {
+                var children = element.EnumerateArray()
+                    .Select(item => Describe(item, name: null))
+                    .ToList();
+
+                return TextNode.Branch(name, TextNodeKind.Array, children, position);
+            }
+
+            // EL NÚMERO SE MUESTRA COMO EL ALUMNO LO ESCRIBIÓ, con `GetRawText`, y no formateado:
+            // `3.00` tiene que verse `3.00` y no `3`. Los ceros que escribió son información sobre
+            // lo que quiso decir, y perderlos al mostrar convierte al árbol en una interpretación.
+            case JsonValueKind.Number:
+                return TextNode.Leaf(name, TextNodeKind.Number, element.GetRawText());
+
+            case JsonValueKind.String:
+                return TextNode.Leaf(name, TextNodeKind.Text, element.GetString());
+
+            case JsonValueKind.True:
+            case JsonValueKind.False:
+                return TextNode.Leaf(name, TextNodeKind.Boolean, element.GetRawText());
+
+            default:
+                return TextNode.Leaf(name, TextNodeKind.Empty, null);
         }
     }
 

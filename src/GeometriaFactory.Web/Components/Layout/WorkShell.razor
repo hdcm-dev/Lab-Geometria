@@ -45,7 +45,12 @@
                        anuncio para quien navega con lector y el gancho de estilo de la hoja
                        (`.gf-nav a[aria-current="page"]`). No se usa `NavLink` porque su marca es
                        una clase CSS y el sistema visual portado no tiene regla para esa clase. *@
+                    @* LAS SUPERFICIES QUE DIBUJAN PIDEN CARGA REAL DE DOCUMENTO. La navegación
+                       mejorada parcha el DOM y no vuelve a ejecutar los `script` de la página
+                       nueva; el bundle del visor se sirve sólo en esas superficies, así que
+                       llegando desde acá la escena quedaba en blanco. Ver `Draws`. *@
                     <a href="@destination.Href"
+                       data-enhance-nav="@(destination.Draws ? "false" : null)"
                        aria-current="@(IsCurrent(destination) ? "page" : null)">
                         <Icon Name="@destination.Icon" SizeClass="gf-icon--20" />@destination.Label
                     </a>
@@ -79,12 +84,18 @@
 <DegradedStateOverlay />
 
 @code {
-    private sealed record Destination(string Label, string Href, string Icon);
+    /// <param name="Draws">
+    /// Si esa superficie trae el bundle del visor. **Decide si el enlace pide documento completo**:
+    /// la navegación mejorada no reejecuta los `script` de la página nueva, de modo que sin esto la
+    /// escena no se dibuja nunca al llegar desde el menú. Es la clase de defecto que sólo aparece
+    /// en un navegador, y que además se arregla solo al recargar, con lo cual cuesta creerlo.
+    /// </param>
+    private sealed record Destination(string Label, string Href, string Icon, bool Draws = false);
 
     private static readonly Destination[] StudentDestinations =
     [
         new("Mis trabajos",  "/mis-trabajos",  "Works"),
-        new("Trabajo nuevo", "/trabajo-nuevo", "New"),
+        new("Trabajo nuevo", "/trabajo-nuevo", "New", Draws: true),
         new("Mi contraseña", "/mi-contrasena?papel=alumno", "Key"),
     ];
 

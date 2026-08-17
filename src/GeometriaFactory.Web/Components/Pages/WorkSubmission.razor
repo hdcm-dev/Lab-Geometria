@@ -198,7 +198,7 @@ else if (_result is { } result)
 
         <div class="gf-footer-actions">
             <a class="gf-btn gf-btn--secondary" href="/mis-trabajos">Volver a mis trabajos</a>
-            <a class="gf-btn gf-btn--primary" href="@("/trabajos/" + result.WorkId)">Ver el trabajo</a>
+            <a class="gf-btn gf-btn--primary" href="@("/trabajos/" + result.WorkId)" data-enhance-nav="false">Ver el trabajo</a>
         </div>
     </section>
 }
@@ -343,6 +343,19 @@ else
                             }
                         </ul>
                     }
+
+                    @* EL ÁRBOL, JUNTO A LA ESCENA, que es la disposición que el intake §17 declara
+                       probada en el aula: canvas arriba y árbol abajo a la derecha.
+
+                       Y ES EL MISMO COMPONENTE QUE LA VISTA DEL TRABAJO, no una copia parecida:
+                       los wireframes lo exigen para que una corrección no haya que hacerla dos
+                       veces. Acá el alumno lo ve **antes** de enviar, que es para lo que sirve.
+
+                       MUESTRA LAS FIGURAS QUE LA ESCENA NO PUDO DIBUJAR. Es la razón por la que el
+                       árbol se arma del texto y no de las piezas: la lista de arriba dice **cuál**
+                       falta y el árbol dice **qué escribió** en ese lugar. *@
+                    <h3 class="gf-meta gf-mt-3">Árbol del texto</h3>
+                    <JsonTree Root="preview.Tree" />
                 }
                 else
                 {

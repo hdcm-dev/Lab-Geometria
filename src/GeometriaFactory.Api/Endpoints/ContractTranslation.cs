@@ -1,5 +1,6 @@
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Works;
+using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Errors;
 using GeometriaFactory.Contracts.Works;
 using GeometriaFactory.Domain.Entities;
@@ -343,4 +344,27 @@ public static class ContractTranslation
                 o.DerivedValue))
         ];
     }
+
+    /// <summary>
+    /// Traduce el árbol del texto al contrato. **Recursiva, como el árbol.**
+    /// </summary>
+    /// <remarks>
+    /// LA CLASE VIAJA POR SU NOMBRE, con el mismo criterio que el estado del trabajo y que la
+    /// especie de la observación: agregar una séptima clase no cambiaría el significado de lo ya
+    /// emitido. Traducirla a un número la ataría a un orden que nadie declaró.
+    ///
+    /// NULO ENTRA Y NULO SALE: un texto que no se pudo leer no tiene forma que mostrar, y esa
+    /// distinción —nulo, y no un árbol vacío— es la que deja a la superficie decir «no se pudo
+    /// leer» en lugar de dibujar un árbol sin nodos, que se parece demasiado a un texto sin
+    /// figuras.
+    /// </remarks>
+    public static WorkTextNode? Tree(TextNode? node) =>
+        node is null
+            ? null
+            : new WorkTextNode(
+                node.Name,
+                node.Kind.ToString(),
+                node.Value,
+                node.Position,
+                [.. node.Children.Select(child => Tree(child)!)]);
 }

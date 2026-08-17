@@ -60,7 +60,21 @@
         <p class="gf-subtitle">Todo lo que cargaste, con el estado en que está.</p>
     </div>
     @* Acción primaria presente en todos los estados, incluido el vacío. *@
-    <a class="gf-btn gf-btn--primary" href="/trabajo-nuevo"><Icon Name="New" />Trabajo nuevo</a>
+    @*
+        ---- LOS ENLACES A LAS SUPERFICIES QUE DIBUJAN LLEVAN CARGA REAL DE DOCUMENTO ----
+
+        `data-enhance-nav="false"` no es decoración. La navegación mejorada de Blazor parcha el DOM en
+        lugar de cargar la página, y **no vuelve a ejecutar los `<script>` de la página nueva**. El
+        bundle del visor se sirve **sólo** en las superficies que dibujan —así lo exige el inventario
+        cerrado de guiones de `verify-stage-c.sh`—, de modo que al llegar desde un enlace el bundle no
+        estaba cargado y la escena quedaba **en blanco**.
+
+        EL DEFECTO ERA INVISIBLE DESDE LAS PRUEBAS Y DESDE LA MEDICIÓN: escribiendo la dirección o
+        recargando, todo funcionaba, y así se midió `PT-02`. Fallaba justo por el camino que usa la
+        persona: entrar al listado y hacer clic. Lo encontró la verificación del árbol, en un navegador
+        de verdad.
+    *@
+    <a class="gf-btn gf-btn--primary" href="/trabajo-nuevo" data-enhance-nav="false"><Icon Name="New" />Trabajo nuevo</a>
 </div>
 
 @if (!Session.IsOpen)
@@ -178,7 +192,7 @@ else
                 <Icon Name="Empty" SizeClass="gf-icon--24" />
                 <h2 id="works-empty-heading">Todavía no cargaste ningún trabajo</h2>
                 <p>Cargá el texto que produjo tu programa de la Actividad 1 y mirálo dibujado.</p>
-                <a class="gf-btn gf-btn--primary gf-mt-5" href="/trabajo-nuevo">Cargar mi primer trabajo</a>
+                <a class="gf-btn gf-btn--primary gf-mt-5" href="/trabajo-nuevo" data-enhance-nav="false">Cargar mi primer trabajo</a>
             </section>
         }
         else if (Listed.Count == 0)
@@ -219,14 +233,14 @@ else
                                            verbo: una lista que anuncia «abrir, editar, eliminar»
                                            veinte veces seguidas es inutilizable con lector de
                                            pantalla (wireframe §7). *@
-                                        <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)">
+                                        <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)" data-enhance-nav="false">
                                             <Icon Name="Open" />Abrir<span class="gf-sr-only"> «@work.Name»</span>
                                         </a>
                                         @* LO QUE EL ESTADO NO ADMITE NO SE DIBUJA, ni siquiera
                                            inhabilitado. Editar y eliminar existen SÓLO en `Borrador`. *@
                                         @if (IsDraft(work))
                                         {
-                                            <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId + "/editar")">
+                                            <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId + "/editar")" data-enhance-nav="false">
                                                 <Icon Name="Edit" />Editar<span class="gf-sr-only"> «@work.Name»</span>
                                             </a>
                                             <a class="gf-btn gf-btn--destructive" href="@("/mis-trabajos?eliminar=" + work.WorkId)">

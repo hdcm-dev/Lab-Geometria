@@ -75,4 +75,16 @@ public sealed record WorkDetailResponse(
     /// </summary>
     int? RootFigureCount,
     IReadOnlyList<WorkPiece> Pieces,
-    IReadOnlyList<WorkObservation> Observations);
+    IReadOnlyList<WorkObservation> Observations,
+    /// <summary>
+    /// La forma del texto guardado, para mostrarla como árbol. Nula si no se pudo leer.
+    /// </summary>
+    /// <remarks>
+    /// ESTA SÍ SE DERIVA AL LEER, a diferencia de las piezas, y conviene decir por qué no
+    /// contradice el párrafo de arriba. Las piezas guardadas son **el resultado de la evaluación**
+    /// y reinterpretarlas dejaría que la vista muestre algo distinto de lo que el producto decidió.
+    /// El árbol no evalúa nada: es la forma del texto, y el texto está guardado literal e
+    /// inmutable. Guardar el árbol crearía **una segunda copia del texto capaz de decir otra
+    /// cosa**, que es exactamente lo que el puerto del validador evita al no devolver el texto.
+    /// </remarks>
+    WorkTextNode? Tree);

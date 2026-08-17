@@ -1,0 +1,145 @@
+@using GeometriaFactory.Contracts.Works
+
+@*
+    EL ÁRBOL DEL JSON — `F-11`, y la mitad de la etapa `g` que le da nombre junto con la escena.
+
+    UNA SOLA IMPLEMENTACIÓN PARA LAS DOS PANTALLAS, y no es una preferencia de estilo: los
+    wireframes lo exigen —«armarse con el mismo código que usa la vista de trabajo, para que una
+    corrección no haya que hacerla dos veces»—. La previsualización del alumno y la vista del
+    trabajo, la suya y la del administrador, muestran este mismo componente.
+
+    LO QUE SE MUESTRA ES EL TEXTO Y NO LA ESCENA. Los nodos vienen del validador, que es el único
+    que lee el texto, y por eso **están todas las figuras, incluida la que no se pudo dibujar**
+    (intake §20). Un árbol armado desde las piezas escondería justamente la figura que el alumno
+    está buscando cuando algo le salió mal.
+
+    LA SINCRONIZACIÓN ES POR POSICIÓN Y SIN TRADUCIR (`F-13`): el nodo de una figura del conjunto
+    raíz lleva `data-gf-piece-node` con el mismo índice que la pieza en la escena. Los nodos que no
+    son figuras del conjunto raíz no lo llevan: no tienen representación que resaltar.
+
+    COLAPSABLE SIN PEDIR NADA: el despliegue lo gobierna `aria-expanded` sobre el nodo y `hidden`
+    sobre sus hijos, que es lo que el sistema visual ya tenía portado de la maqueta. El guion
+    autorizado se encarga de alternarlos; sin guion, el árbol se ve **entero y desplegado**, que es
+    el estado correcto para leerlo.
+*@
+
+@if (Root is null)
+{
+    <p class="gf-empty gf-mt-2">
+        El texto no se pudo leer, así que no hay estructura que mostrar. Revisá las observaciones:
+        dicen dónde se cortó la lectura.
+    </p>
+}
+else
+{
+    <div class="gf-card gf-scroll-box gf-mt-2">
+        <ul class="gf-tree" role="tree" aria-label="Estructura del texto">
+            @RenderNode(Root, 0)
+        </ul>
+    </div>
+}
+
+@code {
+    /// <summary>La raíz del árbol. **Nula** cuando el texto no se pudo leer.</summary>
+    [Parameter]
+    public WorkTextNode? Root { get; set; }
+
+    /// <summary>
+    /// Hasta qué profundidad se muestra desplegado al abrir la pantalla.
+    /// </summary>
+    /// <remarks>
+    /// DOS NIVELES: el conjunto raíz y sus figuras. Es lo que deja ver de un vistazo **cuántas
+    /// figuras hay y de qué tipo es cada una** sin obligar a desplegar nada, que es la pregunta
+    /// que se hace primero. Los componentes de cada figura quedan plegados: son el detalle.
+    /// </remarks>
+    [Parameter]
+    public int OpenDepth { get; set; } = 2;
+
+    private RenderFragment RenderNode(WorkTextNode node, int depth) => __builder =>
+    {
+        var hasChildren = node.Children.Count > 0;
+        var open = depth < OpenDepth;
+
+        <li role="treeitem"
+            aria-selected="false"
+            aria-expanded="@(hasChildren ? (open ? "true" : "false") : null)"
+            tabindex="@(node.Position is null ? null : "0")"
+            data-gf-piece-node="@(node.Position?.ToString())">
+
+            <span class="@(hasChildren ? "gf-node gf-node--branch" : "gf-node gf-node--leaf")">
+                @if (hasChildren)
+                {
+                    <span class="gf-node-arrow" aria-hidden="true"></span>
+                }
+
+                @* LA POSICIÓN SE MUESTRA SÓLO EN LAS FIGURAS DEL CONJUNTO RAÍZ: es su identidad, la
+                   misma con la que se la resalta en la escena. En los demás nodos no significa nada. *@
+                @if (node.Position is not null)
+                {
+                    <span class="gf-node-index">@node.Position</span>
+                }
+
+                @if (node.Name is not null)
+                {
+                    <span class="gf-json-key">@node.Name</span>
+                }
+
+                @RenderValue(node)
+            </span>
+
+            @if (hasChildren)
+            {
+                <ul class="gf-tree-children" role="group" hidden="@(!open)">
+                    @foreach (var child in node.Children)
+                    {
+                        @RenderNode(child, depth + 1)
+                    }
+                </ul>
+            }
+        </li>
+    };
+
+    /// <summary>
+    /// El valor de un nodo, con el color que le corresponde a su clase.
+    /// </summary>
+    /// <remarks>
+    /// SE DISTINGUE EL NÚMERO DEL TEXTO A PROPÓSITO, y no es decoración: un `"Largo": "3.00"`
+    /// entre comillas **es un texto**, y verlo de otro color que un número es muchas veces la
+    /// explicación de por qué esa figura no se reconstruyó.
+    ///
+    /// LOS OBJETOS Y LAS LISTAS MUESTRAN CUÁNTOS HIJOS TIENEN en vez de un valor, que es lo que
+    /// deja leer un árbol plegado sin desplegarlo.
+    /// </remarks>
+    private static RenderFragment RenderValue(WorkTextNode node) => __builder =>
+    {
+        switch (node.Kind)
+        {
+            case "Object":
+            case "Array":
+                <span class="gf-json-count">@Count(node)</span>
+                break;
+
+            case "Number":
+                <span class="gf-json-number">@node.Value</span>
+                break;
+
+            case "Text":
+                <span class="gf-json-string">"@node.Value"</span>
+                break;
+
+            default:
+                <span class="gf-json-other">@(node.Value ?? "nulo")</span>
+                break;
+        }
+    };
+
+    private static string Count(WorkTextNode node)
+    {
+        var total = node.Children.Count;
+        var noun = node.Kind == "Array"
+            ? (total == 1 ? "elemento" : "elementos")
+            : (total == 1 ? "clave" : "claves");
+
+        return $"{total} {noun}";
+    }
+}

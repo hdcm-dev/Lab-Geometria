@@ -574,6 +574,53 @@ public sealed class WorkWebSurfaceTests : IDisposable
     /// El laboratorio con su administrador y la alumna habilitada **con su contraseña ya elegida**,
     /// y la sesión de la alumna abierta por la pantalla de ingreso.
     /// </summary>
+    /// <summary>
+    /// LOS ENLACES A LAS SUPERFICIES QUE DIBUJAN PIDEN CARGA REAL DE DOCUMENTO, y sin eso la
+    /// escena queda en blanco al llegar desde el listado.
+    /// </summary>
+    /// <remarks>
+    /// ESTA PRUEBA EXISTE POR UN DEFECTO QUE NINGUNA OTRA VEÍA. La navegación mejorada de Blazor
+    /// parcha el DOM en lugar de cargar la página y **no vuelve a ejecutar los `script` de la
+    /// página nueva**. El bundle del visor se sirve sólo en las superficies que dibujan —lo exige
+    /// el inventario cerrado de guiones—, de modo que al entrar desde un enlace no estaba cargado
+    /// y **la escena no se dibujaba nunca**.
+    ///
+    /// POR QUÉ NO LO VIO NADIE: escribiendo la dirección o recargando funcionaba, y así se probó y
+    /// así se midió `PT-02`. Fallaba justo por el camino que usa la persona. Lo encontró la
+    /// verificación del árbol, en un navegador de verdad, y esta prueba es la red para que la
+    /// próxima vez lo encuentre la batería.
+    ///
+    /// SE COMPRUEBA LA MARCA Y NO EL DIBUJO, que es lo que una prueba sin navegador puede afirmar
+    /// con honestidad: que el enlace pide documento completo. Que el documento después dibuje lo
+    /// mide `PT-02` con un navegador.
+    /// </remarks>
+    [Fact]
+    public async Task LinksToDrawingSurfacesAskForAFullDocumentLoad()
+    {
+        var mark = await SignInAsStudentAsync();
+
+        using var panel = await GetAsync("/mis-trabajos", mark);
+        var panelHtml = Read(await panel.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, panel.StatusCode);
+
+        // El enlace a la superficie de envío, que es la otra que dibuja.
+        var newWorkLink = LinkTo(panelHtml, NewWorkRoute);
+        Assert.Contains("data-enhance-nav=\"false\"", newWorkLink, StringComparison.Ordinal);
+    }
+
+    /// <summary>El fragmento de marcado del primer enlace hacia esa ruta.</summary>
+    private static string LinkTo(string html, string route)
+    {
+        var index = html.IndexOf("href=\"" + route + "\"", StringComparison.Ordinal);
+        Assert.True(index >= 0, $"No hay ningún enlace hacia {route} en la página.");
+
+        var start = html.LastIndexOf("<a ", index, StringComparison.Ordinal);
+        var end = html.IndexOf('>', index);
+
+        return html[start..end];
+    }
+
     private async Task<string> SignInAsStudentAsync()
     {
         await ConfigureAdministratorAsync();

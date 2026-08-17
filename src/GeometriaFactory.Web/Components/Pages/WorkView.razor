@@ -298,53 +298,28 @@ else
             </section>
 
             <section aria-labelledby="work-tree-heading">
-                <h2 id="work-tree-heading" class="gf-meta">Árbol de la estructura</h2>
+                <h2 id="work-tree-heading" class="gf-meta">Árbol del texto</h2>
 
-                @if (_work.Pieces.Count > 0)
+                @*
+                    EL ÁRBOL PASA A SER EL DEL TEXTO, y reemplaza al de piezas reconstruidas que
+                    tenía esta vista hasta la etapa `g`. El motivo es una exigencia del intake §20
+                    que el árbol anterior no podía cumplir: «muestra las dos piezas, **incluida la
+                    que no se dibujó**. Se lee lo que el alumno escribió, no lo que la escena logró
+                    representar». Una figura que falla no produce pieza —el validador emite su
+                    observación y reserva la posición—, así que el árbol viejo la hacía desaparecer
+                    justo cuando el alumno la estaba buscando.
+
+                    LA SINCRONIZACIÓN NO SE PIERDE: los nodos de las figuras del conjunto raíz
+                    llevan la misma posición, que es la misma identidad que usa la escena.
+                *@
+                <JsonTree Root="_work.Tree" />
+
+                @if (_work.Tree is not null && _work.Pieces.Count > 0)
                 {
-                    @* EL ÁRBOL LLEVA EL ÍNDICE DE CADA PIEZA A LA VISTA, y es lo que hace posible la
-                       sincronización de `F-13`: **la identidad es la posición**, la misma de los dos
-                       lados, sin traducir nada. *@
-                    <div class="gf-card gf-scroll-box gf-mt-2">
-                        <ul class="gf-tree" role="tree" aria-labelledby="work-tree-heading">
-                            @foreach (var piece in _work.Pieces.OrderBy(piece => piece.Position))
-                            {
-                                <li role="treeitem" aria-selected="false" aria-expanded="true"
-                                    tabindex="0" data-gf-piece-node="@piece.Position">
-                                    <span class="gf-node">
-                                        <span class="gf-node-index">@piece.Position</span>
-                                        @LabelOfType(piece.Type)
-                                        <span class="gf-caption">@piece.Components.Count componentes</span>
-                                    </span>
-                                    <ul class="gf-tree-children" role="group">
-                                        @foreach (var component in piece.Components.OrderBy(component => component.Position))
-                                        {
-                                            <li role="treeitem" aria-selected="false">
-                                                <span class="gf-node gf-node--leaf">
-                                                    <span class="gf-node-index">@component.Position</span>
-                                                    @LabelOfRole(component.Role) · @LabelOfType(component.Type)
-                                                    @Dimensions(component)
-                                                </span>
-                                            </li>
-                                        }
-                                    </ul>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-
-                    @* `F-13` COMPLETA, EN LAS DOS DIRECCIONES Y POR EL MISMO ÍNDICE: elegir un nodo
-                       resalta su pieza, y elegir una pieza en la escena marca su nodo. La vuelta la
-                       hace posible el aviso que el anfitrión le entrega al visor en las opciones de
-                       `initialize`, que es lo que `ADR-08007` decidió. *@
                     <p class="gf-caption gf-mt-2">
                         Elegí una figura del árbol y se resalta en la escena, o elegila en la escena
                         y se marca en el árbol.
                     </p>
-                }
-                else
-                {
-                    <div class="gf-card gf-scroll-box gf-mt-2"></div>
                 }
             </section>
         </div>
@@ -457,47 +432,6 @@ else
             .Where(position => !drawn.Contains(position));
     }
 
-    /// <summary>El tipo, con la etiqueta del emisor: es la que el alumno ve en su programa.</summary>
-    private static string LabelOfType(string type) => type switch
-    {
-        "Cylinder" => "Cilindro",
-        "Cube" => "Cubo",
-        "Orthohedron" => "Ortoedro",
-        "Rectangle" => "Rectangulo",
-        "Square" => "Cuadrado",
-        "Circle" => "Circulo",
-        "DevelopedRectangle" => "RectanguloDesarrollado",
-        _ => type,
-    };
-
-    /// <summary>El papel, con el vocabulario del emisor.</summary>
-    private static string LabelOfRole(string role) => role switch
-    {
-        "Cap" => "Tapa",
-        "Face" => "Cara",
-        "Base" => "Base",
-        "Lateral" => "Lateral",
-        "Side" => "Lado",
-        _ => role,
-    };
-
-    /// <summary>
-    /// Las dimensiones que el texto trajo para ese componente, **con las claves del alumno**.
-    /// </summary>
-    /// <remarks>
-    /// SE MUESTRAN LAS QUE ESTÁN Y NO SE COMPLETAN LAS QUE FALTAN: un componente sin `Radio` no
-    /// tiene radio cero, y escribir uno sería inventarle un dato a su programa.
-    /// </remarks>
-    private static string Dimensions(WorkPieceComponent component)
-    {
-        var parts = new List<string>(3);
-
-        if (component.DeclaredLength is { } length) parts.Add($"Largo {length:N2}");
-        if (component.DeclaredWidth is { } width) parts.Add($"Ancho {width:N2}");
-        if (component.DeclaredRadius is { } radius) parts.Add($"Radio {radius:N2}");
-
-        return parts.Count == 0 ? string.Empty : $"· {string.Join(" · ", parts)}";
-    }
     /// <summary>Dónde está la observación, dicho como lo ve la persona.</summary>
     private static string LocationOf(WorkObservation observation) =>
         observation.PiecePosition is { } position

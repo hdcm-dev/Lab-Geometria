@@ -21,7 +21,12 @@ namespace GeometriaFactory.Contracts.Works;
 /// <param name="RootFigureCount">Cuántas figuras trae el texto, **incluidas las que fallaron**.</param>
 /// <param name="Pieces">Las piezas reconstruidas, en su posición del conjunto raíz.</param>
 /// <param name="Observations">Lo que la interpretación emitió, de las dos especies.</param>
+/// <param name="Tree">
+/// La forma del texto, para mostrarla como árbol. **Nula si el texto no se pudo leer.** Trae
+/// **todas** las figuras, incluidas las que no produjeron pieza: ver <see cref="WorkTextNode"/>.
+/// </param>
 public sealed record WorkInterpretationResponse(
     int RootFigureCount,
     IReadOnlyList<WorkPiece> Pieces,
-    IReadOnlyList<WorkObservation> Observations);
+    IReadOnlyList<WorkObservation> Observations,
+    WorkTextNode? Tree);

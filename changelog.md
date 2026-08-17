@@ -459,3 +459,42 @@ comprometer la `g` y no para cerrar ésta.**
 - **Consecuencia para el despliegue**: la composición del host puede apuntar a una **rama** y
   `docker compose up -d --build` actualiza de verdad, con el sello correcto, sin dos variables que
   mantener parejas.
+
+### El árbol del texto — la otra mitad de la etapa `g`
+- **`F-11` cumplida**: la estructura del texto se ve como árbol colapsable, en la previsualización
+  del alumno y en la vista del trabajo, la suya y la del administrador.
+- **El árbol se arma del TEXTO y no de las piezas**, y es la decisión que lo define. El intake §20
+  lo exige: «muestra las dos piezas, **incluida la que no se dibujó**. Se lee lo que el alumno
+  escribió, no lo que la escena logró representar». Una figura que falla **no produce pieza**, así
+  que un árbol derivado de `Pieces` la haría desaparecer justo cuando el alumno la busca.
+- **Lo arma el validador**, que es el único componente que lee el texto. Armarlo en la pieza
+  pública la volvería un segundo intérprete: dos códigos leyendo lo mismo con criterios que se
+  separan el día que uno cambia.
+- **Un mismo componente para las dos pantallas** (`JsonTree`), como los wireframes exigen, para que
+  una corrección no haya que hacerla dos veces.
+- **El número se muestra como se escribió**: `2.50` no se muestra `2.5`. Y **un número entre
+  comillas se ve como texto**, que es muchas veces la explicación de por qué esa figura no se
+  reconstruyó.
+- **En el trabajo guardado el árbol se deriva al leer** y las piezas no, y la asimetría está
+  declarada: las piezas son el resultado de la evaluación y reinterpretarlas dejaría que la vista
+  muestre algo distinto de lo que el producto decidió; el árbol no evalúa nada, y guardarlo crearía
+  una segunda copia del texto capaz de decir otra cosa.
+- **`F-13` intacta**: los nodos de las figuras del conjunto raíz llevan la misma posición, sin
+  traducir, y siguen sincronizando con la escena en las dos direcciones.
+- **9 pruebas nuevas**, y la que justifica que el árbol exista es la de la figura que falla: todo lo
+  demás lo daría igual un árbol derivado de las piezas.
+
+### Un defecto que sólo aparecía llegando desde el menú
+- **La escena 3D no se dibujaba nunca al entrar desde un enlace**, y sí al escribir la dirección o
+  recargar. La navegación mejorada de Blazor parcha el DOM y **no vuelve a ejecutar los `script` de
+  la página nueva**; el bundle del visor se sirve sólo en las superficies que dibujan —lo exige el
+  inventario cerrado de guiones—, así que llegando desde el listado o desde el menú no estaba
+  cargado.
+- **Por qué no lo vio nadie**: las pruebas piden la página directamente y `PT-02` se midió igual.
+  Fallaba exactamente por el camino que usa la persona. Lo encontró la verificación del árbol, en
+  un navegador de verdad.
+- **Arreglo**: los enlaces a las dos superficies que dibujan piden carga real de documento. En el
+  menú lateral el dato es del destino —`Draws`—, no del marcado, para que agregar una superficie
+  que dibuje obligue a decidirlo.
+- **Y queda una red**: una prueba de la batería comprueba que esos enlaces la lleven. Que el
+  documento después dibuje lo sigue midiendo `PT-02`, con navegador.

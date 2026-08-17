@@ -177,7 +177,8 @@ public static class WorkEndpoints
             return Results.Ok(new WorkInterpretationResponse(
                 interpretation.RootFigureCount,
                 ContractTranslation.Pieces(interpretation.Pieces),
-                ContractTranslation.Observations(interpretation.Observations)));
+                ContractTranslation.Observations(interpretation.Observations),
+                ContractTranslation.Tree(interpretation.Tree)));
         })
         .WithName("InterpretWork")
         .RequireAuthorization();
@@ -282,6 +283,7 @@ public static class WorkEndpoints
             HttpContext context,
             ConsultOwnWorksUseCase consultOwnWorks,
             ReviewCommissionWorksUseCase reviewWorks,
+            IFigureValidator validator,
             ISystemClock clock,
             CancellationToken cancellationToken) =>
         {
@@ -336,6 +338,7 @@ public static class WorkEndpoints
             HttpContext context,
             ConsultOwnWorksUseCase consultOwnWorks,
             ReviewCommissionWorksUseCase reviewWorks,
+            IFigureValidator validator,
             ISystemClock clock,
             CancellationToken cancellationToken) =>
         {
@@ -375,7 +378,17 @@ public static class WorkEndpoints
                 detail.UpdatedAt,
                 detail.RootFigureCount,
                 ContractTranslation.Pieces(detail.Pieces),
-                ContractTranslation.Observations(detail.Observations)));
+                ContractTranslation.Observations(detail.Observations),
+
+                // EL ÁRBOL SE DERIVA ACÁ Y LAS PIEZAS NO, y la asimetría es deliberada. Las piezas
+                // guardadas son el resultado de la evaluación: reinterpretarlas dejaría que la
+                // vista muestre algo distinto de lo que el producto decidió. El árbol no evalúa
+                // nada —es la forma del texto, que está guardado literal e inmutable—, y guardarlo
+                // crearía una segunda copia del texto capaz de decir otra cosa.
+                //
+                // LO ARMA EL MISMO COMPONENTE QUE LEE EL TEXTO EN EL ENVÍO, así que el árbol de la
+                // previsualización y el de la vista **no pueden diferir**: es el mismo código.
+                ContractTranslation.Tree(validator.Interpret(detail.OriginalJson).Tree)));
         })
         .WithName("GetWork")
         .RequireAuthorization();

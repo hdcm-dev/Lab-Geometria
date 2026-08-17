@@ -410,6 +410,66 @@
         }
     }
 
+    // ---- el plegado del árbol (`F-11`, «árbol colapsable») ------------------------------
+    //
+    // SIN GUION EL ÁRBOL SE VE ENTERO, y es deliberado: el marcado sirve `aria-expanded` y `hidden`
+    // ya resueltos desde el servidor, de modo que la página es legible antes de que esto corra y
+    // sigue siéndolo si nunca corre. Lo que este bloque agrega es **poder plegar**, no poder ver.
+    //
+    // LA FLECHA PLIEGA Y EL RESTO DEL NODO SELECCIONA. Son dos gestos distintos sobre el mismo
+    // renglón y confundirlos es la molestia clásica de estos árboles: al elegir una figura para
+    // verla en la escena, el nodo se plegaba y escondía lo que la persona quería mirar.
+    function bindToggle(node) {
+        if (node.dataset.gfToggleBound === 'yes') {
+            return;
+        }
+
+        node.dataset.gfToggleBound = 'yes';
+
+        var arrow = node.querySelector(':scope > .gf-node > .gf-node-arrow');
+        var children = node.querySelector(':scope > .gf-tree-children');
+
+        if (!arrow || !children) {
+            return;
+        }
+
+        function toggle(event) {
+            event.stopPropagation();
+            var open = node.getAttribute('aria-expanded') === 'true';
+            node.setAttribute('aria-expanded', open ? 'false' : 'true');
+            children.hidden = open;
+        }
+
+        arrow.addEventListener('click', toggle);
+
+        node.addEventListener('keydown', function (event) {
+            // Las dos teclas que un árbol tiene que aceptar para plegar y desplegar, y sólo sobre
+            // el nodo propio: sin esto, un árbol sólo se puede recorrer con el puntero.
+            if (event.target !== node) {
+                return;
+            }
+
+            if (event.key === 'ArrowRight' && node.getAttribute('aria-expanded') === 'false') {
+                event.preventDefault();
+                node.setAttribute('aria-expanded', 'true');
+                children.hidden = false;
+            } else if (event.key === 'ArrowLeft' && node.getAttribute('aria-expanded') === 'true') {
+                event.preventDefault();
+                node.setAttribute('aria-expanded', 'false');
+                children.hidden = true;
+            }
+        });
+    }
+
+    // Se ata TODO nodo con hijos, tenga o no posición: el plegado no depende de que haya escena.
+    function bindTree() {
+        var nodes = document.querySelectorAll('.gf-tree [role="treeitem"][aria-expanded]');
+
+        for (var i = 0; i < nodes.length; i++) {
+            bindToggle(nodes[i]);
+        }
+    }
+
     // Del árbol a la escena: pide resaltar esa pieza por su índice.
     function bindNode(viewer, id, node) {
         if (node.dataset.gfPieceNodeBound === 'yes') {
@@ -520,12 +580,17 @@
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', applyEnhancements);
         document.addEventListener('DOMContentLoaded', drawScenes);
+        document.addEventListener('DOMContentLoaded', bindTree);
     } else {
         applyEnhancements();
         drawScenes();
+        bindTree();
     }
 
-    new MutationObserver(function () { applyEnhancements(); drawScenes(); }).observe(document.documentElement, {
+    // EL ÁRBOL SE ATA TAMBIÉN ACÁ porque la interactividad del servidor reemplaza fragmentos de la
+    // página: un árbol que llega después de la carga tiene que quedar plegable igual. `bindToggle`
+    // es idempotente, así que volver a pasar sobre lo ya atado no cuesta nada.
+    new MutationObserver(function () { applyEnhancements(); drawScenes(); bindTree(); }).observe(document.documentElement, {
         childList: true,
         subtree: true,
     });
