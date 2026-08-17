@@ -1,6 +1,13 @@
 # Registro de cambios — Fábrica de Geometría
 
-Se actualiza **en la rama de la etapa, no después de la fusión** (intake §16 y §17.5.P.7).
+**Quién lo actualiza:** el **equipo de desarrollo**, en la rama de la etapa (`PRODUCT-INTAKE` §2).
+**Quién verifica que se actualizó:** el **Product Owner**, en la revisión del pull request de la
+etapa, que es el punto de control bloqueante (`PRODUCT-INTAKE` §15).
+**Cuándo:** **en la rama de la etapa, no después de la fusión** (intake §16 y §17.5.P.7).
+
+**Cuando este documento y el historial del repositorio no coinciden, gana el historial** y la
+diferencia se repara acá, nunca al revés. El detalle está en
+[`SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Estrategia-Versionado.md`](SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/Estrategia-Versionado.md) §11.
 
 > ## Las etapas `c`, `d` y `e` se repusieron el 2026-08-16, después de la fusión
 >
