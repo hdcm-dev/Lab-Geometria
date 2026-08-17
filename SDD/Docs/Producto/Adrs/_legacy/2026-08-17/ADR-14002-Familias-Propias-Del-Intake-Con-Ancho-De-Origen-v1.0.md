@@ -2,13 +2,13 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14002-Familias-Propias-Del-Intake-Con-Ancho-De-Origen.md
-**Versión:** 1.1
+**Versión:** 1.0
 **Estado:** Aceptado
 **Fecha:** 2026-08-16
 **Autor:** Orquestador SDD
 **Nivel:** Producto
 **Tipo:** **Apartamiento declarado** (`Root-Rules.md` §11)
-**Cierra:** el hallazgo **M-09** de [`../../Audit/Informe-Migracion-6.0-a-8.6.md`](../../Audit/Informe-Migracion-6.0-a-8.6.md) 2.0 §5, en la parte que no era determinable
+**Cierra:** el hallazgo **M-09** de [`../../Audit/Informe-Migracion-6.0-a-8.6.md`](../../../../Audit/Informe-Migracion-6.0-a-8.6.md) 2.0 §5, en la parte que no era determinable
 **Trazabilidad upstream:** `Root-Rules.md` §9.2, ancho de cinco dígitos y familias alcanzadas
 **Trazabilidad downstream:** `SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md` 2.1
 
@@ -93,31 +93,8 @@ apartamiento** y esa familia se renumera, por el mismo motivo por el que `RN` se
 | **No renumerar ninguna, `RN` incluida** | Habría dejado vivo el único defecto real: dos números para la misma regla, sin nada que lo dijera. Un apartamiento no sirve para tapar una inconsistencia; sirve para declarar una diferencia deliberada |
 | **Dejar el hallazgo abierto sin decidir** | Es lo que venía pasando y es lo que `Root-Rules.md` §11 existe para evitar: un apartamiento sin declarar se evalúa como omisión y no como decisión |
 
-## 6. Estado del apartamiento
-
-**Campos 4, 5 y 6 de `Root-Rules.md` §11.** El **5** y el **6** entraron con `Root-Rules.md` **6.1**
-(SDD 9.7); el **4** ya estaba, bajo el título «Qué lo reabre» de §4.
-
-| Campo | Valor |
-| --- | --- |
-| **4 · Disparadores que superarían la decisión** | Declarado en **§4, «Qué lo reabre»**: que alguna de estas familias **pase a tener artefacto propio generado** —un archivo por invariante, como lo tienen hoy las reglas de negocio—. Esa familia se renumera entonces, por el mismo motivo por el que `RN` se renumeró |
-| **5 · Estado** | **`vigente`** |
-| **6 · Saltos de versión que sobrevivió** | **1** — la migración normativa **8.11 → 9.9** |
-
-**Por qué el resultado de la revisión fue «no contemplado».** Se leyeron las entradas del `CHANGELOG`
-del framework de la 8.12 a la 9.9, una por una, contra el disparador del campo 4: **ninguna le da
-artefacto propio generado** a `F`, `E`, `A`, `X`, `R`, `CL`, `CP`, `RF` ni `RA`. El disparador no se
-cumplió, la vigente sigue sin decir nada del caso, y el apartamiento **se preserva con su texto
-literal** —incluido su fundamento original— con su contador incrementado.
-
-**Qué pasa si llega a 2.** `Migracion-Rules.md` §4.7 declara que un apartamiento que sobrevive **dos o
-más saltos** sin ser contemplado ya demostró que no es de un producto, y se declara **candidato a
-regla del framework** en el informe de la migración que lo detecte. Con el contador en **1**, todavía
-no lo es.
-
-## 7. Control de cambios
+## 6. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 1.1 | 2026-08-17 | **Revisión de apartamientos de la migración 8.11 → 9.9, fase M4** (`Migracion-Rules.md` **3.7** §4.7, que la SDD 9.7 agregó al método). Entra **§6, el estado del apartamiento**, con los campos **4**, **5** y **6** que `Root-Rules.md` **6.1** §11 exige: el disparador que lo superaría, el estado **`vigente`** y el contador de saltos sobrevividos en **1**. El control de cambios pasa a §7. **Resultado de la revisión: no contemplado** —se leyeron las entradas del `CHANGELOG` del framework de la 8.12 a la 9.9 contra el disparador, y ninguna alcanza el caso—, de modo que el apartamiento **se preserva con su texto literal y su fundamento original**: §4.1 prohíbe re-fundamentarlo contra la normativa nueva. **El campo 4 ya estaba**, bajo el título «Qué lo reabre» de §4, y se cita en lugar de duplicarse. Sube **minor**: no cambia la decisión, agrega los campos que la vuelven evaluable en el salto siguiente. |
 | 1.0 | 2026-08-16 | Emisión inicial. Parte el hallazgo M-09 en dos: `RN` se renumera porque tenía numeración de destino y convivían dos números para la misma regla; las diez familias restantes conservan su ancho y el apartamiento se declara acá, con su motivo, su mitigación y la condición que lo reabre. |

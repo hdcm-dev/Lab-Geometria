@@ -2,12 +2,12 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Vista-Producto.md
-**Versión:** 1.5
+**Versión:** 1.6
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Nivel:** Producto
-**Trazabilidad upstream:** [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3** §1.2, §2, §3, §4 y §5; [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.26** §13 (composición del producto) y §14 (las tres reglas de arquitectura de nivel producto); las **siete** categorías `05-Arquitectura-Tecnica` emitidas bajo `Proyectos/`, con sus **45** ADR y sus **seis** contratos de superficie
+**Trazabilidad upstream:** [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **1.3** §1.2, §2, §3, §4 y §5; [`PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **1.26** §13 (composición del producto) y §14 (las tres reglas de arquitectura de nivel producto); las categorías `05-Arquitectura-Tecnica` emitidas bajo `Unidades-Entrega/`, con sus **45** ADR y sus **seis** contratos de superficie
 **Trazabilidad downstream:** `06-Backlog-Tecnico`, `08-Calidad-Y-Pruebas`, `09-Devops` y `11-Documentacion` de los siete proyectos de código; [`Pipeline-Producto.md`](Pipeline-Producto.md) y [`../README.md`](../README.md), emitidos en la misma consolidación
 
 ---
@@ -32,7 +32,7 @@
 
 **Este documento se sitúa por encima de la arquitectura de cada proyecto de código y no la duplica: referencia, no reescribe.** Lo que documenta es lo que ninguna de las siete categorías `05` puede documentar sola —el mapa, el grafo, los contratos que cruzan fronteras, lo transversal y los riesgos de integración—, y lo hace apuntando al documento que lo decide en cada caso.
 
-**El detalle interno de cada proyecto de código vive en su propia `Arquitectura-Unidad-Entrega.md`**, bajo `Proyectos/<Nombre-Proyecto-Codigo>/05-Arquitectura-Tecnica/`. Ninguna decisión se toma acá y ninguna se reabre: las **45** ADR emitidas son la fuente de toda decisión técnica del producto.
+**El detalle interno de cada proyecto de código vive en su propia `Arquitectura-Unidad-Entrega.md`**, bajo `Unidades-Entrega/<Nombre-Unidad-Entrega>/05-Arquitectura-Tecnica/`. Ninguna decisión se toma acá y ninguna se reabre: las **45** ADR emitidas son la fuente de toda decisión técnica del producto.
 
 **Se emite una sola vez, al cierre del bucle de proyectos de código.** El bucle está cerrado: los siete están emitidos, en tres olas y en orden topológico.
 
@@ -63,18 +63,18 @@ La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle c
 | --- | --- | --- |
 | Proyectos de código | 7 | `PRODUCT-MANIFEST` §2 |
 | Aristas de compilación | 7 u 8 según qué sección del manifiesto se lea | §3.1 de este documento |
-| Casos de uso | 71 — `Domain` 13, `Api` 12, `Application` 11, `Web` 10, `Infrastructure` 10, `Contracts` 8, `Visor` 7 | `Proyectos/<Nombre>/02-Especificacion-Funcional/Casos-De-Uso/` |
+| Casos de uso | 71 — `Domain` 13, `Api` 12, `Application` 11, `Web` 10, `Infrastructure` 10, `Contracts` 8, `Visor` 7 | `Unidades-Entrega/<Nombre-Unidad-Entrega>/02-Especificacion-Funcional/Casos-De-Uso/` |
 | Reglas de negocio | 16 | `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/`, `RN-02001` a `RN-02016` |
 | Invariantes del dominio | 9 | `PRODUCT-INTAKE` §14, `INV-01` a `INV-09` |
-| ADR | 45 | `Proyectos/<Nombre>/05-Arquitectura-Tecnica/Adrs/` |
+| ADR | 45 | `Unidades-Entrega/<Nombre-Unidad-Entrega>/05-Arquitectura-Tecnica/Adrs/` y `Producto/Adrs/` |
 | Contratos de superficie | 6 | §4 de este documento |
 | Puntos de acceso de la superficie HTTP | 15 | [`Api/Contratos-REST.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) §3 |
 | Códigos del contrato | 17 vivos sobre 20 emitidos, 3 retirados | [`Contracts/Contratos-Abstractions.md`](Contratos-Inter-Unidad/Contratos-Abstractions.md) §5.1 |
 | Funciones de la fachada del visor | 6 | [`Visor/Contratos-Abstractions.md`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Contratos-Abstractions.md) §3 |
 | Escenarios de datos | 8, `E-1` a `E-8` | `PRODUCT-INTAKE` §20 |
 | Casos de la batería del validador | 10 | [`Infrastructure/08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../Unidades-Entrega/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Criterios-Validacion.md) `CV-02` |
-| Quality gates | 77 — `Api` 15, `Infrastructure` 14, `Application` 11, `Web` 11, `Contracts` 9, `Visor` 9, `Domain` 8 | `Proyectos/<Nombre>/09-Devops/` y `08-Calidad-Y-Pruebas/` |
-| Sondas de verificación `VER-XX` | 19 | `Proyectos/<Nombre>/10-Examples/ejemplo-XX-*.md`, sección de contrato de verificación |
+| Quality gates | 77 — `Api` 15, `Infrastructure` 14, `Application` 11, `Web` 11, `Contracts` 9, `Visor` 9, `Domain` 8 | `Unidades-Entrega/<Nombre-Unidad-Entrega>/09-Devops/` y `08-Calidad-Y-Pruebas/` |
+| Sondas de verificación `VER-XX` | 19 | `Unidades-Entrega/<Nombre-Unidad-Entrega>/10-Examples/ejemplo-XX-*.md`, sección de contrato de verificación |
 
 **Ninguna de las 19 sondas tiene evidencia todavía**, y es lo esperado: la Fase G es la pasada de diseño y su campo `evidencia` queda en `No verificado — sin código` hasta la Fase I. Un producto que declarara evidencia acá estaría afirmando lo que no ocurrió.
 
@@ -228,3 +228,4 @@ Cada contrato inter-proyecto contra la dependencia del manifiesto que materializ
 | 1.1 | 2026-08-10 | Cierra `N-1` de `SDD/Docs/Audit/C-05-Arquitectura-Siete-Proyectos-r2.md` 1.0: §3 declaraba **siete** aristas de compilación mientras §4 y §8 enumeran **ocho**. Se corrige a ocho y se declara que el desacuerdo nace en el `PRODUCT-MANIFEST`, entre su §2 —que declara `Application → Api` como dependencia directa— y el diagrama de su §3, que no la dibuja. Queda elevado al Product Owner; el grafo es acíclico bajo las dos lecturas. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial de la vista de producto, **al cierre del bucle de proyectos de código**: los siete están emitidos, en tres olas y en orden topológico. **Cierra el hallazgo `C-05-06` (P3) del informe de auditoría [`../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md`](../Audit/C-05-Arquitectura-Siete-Proyectos-r1.md) 1.0**, que levantó que el artefacto era obligatorio para productos de más de un proyecto de código y que **ningún artefacto declaraba su ausencia**. Declara las **ocho** secciones que la guía de la categoría exige: el mapa de los siete proyectos de código con su tipo D8 y la excepción de nombre y path del visor; el grafo con sus **siete** aristas de compilación, la arista de tiempo de ejecución que **no** introduce ciclo y el orden topológico de cuatro niveles; los **seis** contratos inter-proyecto indexados contra la arista que materializan, **sin reescribirlos**; la ausencia declarada de `Producto/Adrs/` con las tres candidatas naturales resueltas en el productor, más las tres reglas de arquitectura de nivel producto con el mecanismo que las sostiene; **siete** preocupaciones transversales con el único lugar donde se decide cada una; **seis** riesgos de integración con impacto, probabilidad y mitigación escrita; y la trazabilidad de cada contrato contra su arista. **No toma ninguna decisión y no reabre ninguna de las 45 ADR emitidas**: referencia, no reescribe, como exige §4.8 de la guía. Declara además, con su motivo, que **no se emite `Contratos-Inter-Proyecto.md`**: los contratos son seis y la guía admite integrarlos como sección de esta vista, y un séptimo documento que los reindexara sería una segunda fuente de verdad sobre las mismas fronteras. |
 | 1.5 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **2**. Sube minor. |
+| 1.6 | 2026-08-17 | **Migración normativa 8.11 → 9.9, fase M4**, fila 5 del `Audit/Plan-Migracion-8.11-a-9.9.md`. **Seis rutas** pasan del layout anterior a la 8.0 al vigente: §2 y §3.2 —el detalle interno de cada unidad, y las categorías `05` emitidas— y las cuatro filas de la tabla de magnitudes que todavía apuntaban a `Proyectos/<Nombre>/` —casos de uso, ADR, quality gates y sondas `VER-XX`—. La fila de ADR pasa a nombrar **las dos ubicaciones reales**, `Unidades-Entrega/<Nombre-Unidad-Entrega>/05-Arquitectura-Tecnica/Adrs/` y `Producto/Adrs/`. **Se retiró el número «siete» de la frase de §2**, porque el cambio de ruta lo habría vuelto una afirmación falsa: **no se recontó nada, se retiró un número que dejaba de ser cierto**. **Las magnitudes NO se corrigieron, y dos están viejas**: la tabla declara **71** casos de uso y hay **48** —`Api` 23, `Web` 17, `Producto` 8—, y declara **45** ADR y hay **50**; quality gates y sondas no se reverificaron. Se declaran en el informe de M6 con lo medido, por decisión del Product Owner del 2026-08-17: recontar de paso mezcla migración con corrección de contenido, y la corrección merece ser un acto propio. Estado anterior archivado en `_legacy/2026-08-17/`. Sube **minor**. |
