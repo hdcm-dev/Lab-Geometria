@@ -41,6 +41,20 @@ namespace GeometriaFactory.Contracts.Works;
 /// <param name="OwnerLastName">Apellido del dueño.</param>
 /// <param name="CreatedAt">Momento de creación, en tiempo universal coordinado.</param>
 /// <param name="UpdatedAt">Momento de la última modificación, en tiempo universal coordinado.</param>
+/// <param name="RootFigureCount">El rango de posiciones del texto. **No es derivable de las piezas**, porque el conjunto admite huecos.</param>
+/// <param name="Pieces">
+/// Las piezas que la interpretación reconstruyó, **tal como quedaron guardadas al enviar**.
+/// </param>
+/// <param name="Observations">Lo que la interpretación emitió, de las dos especies.</param>
+/// <remarks>
+/// LAS PIEZAS Y LAS OBSERVACIONES ENTRAN EN LA ETAPA `g`, como agregado **compatible**: la vista del
+/// trabajo las necesita para dibujar y para mostrar lo que el producto observó, y **ya están
+/// guardadas** desde el envío. Reinterpretar el texto para dibujarlo abriría la puerta a que la
+/// vista muestre algo distinto de lo que el producto guardó.
+///
+/// VIENEN VACÍAS EN UN TRABAJO QUE NUNCA VERIFICÓ, y eso no es lo mismo que no haber interpretado:
+/// el estado lo distingue.
+/// </remarks>
 public sealed record WorkDetailResponse(
     Guid WorkId,
     string Name,
@@ -54,4 +68,11 @@ public sealed record WorkDetailResponse(
     string OwnerFirstName,
     string OwnerLastName,
     DateTimeOffset CreatedAt,
-    DateTimeOffset UpdatedAt);
+    DateTimeOffset UpdatedAt,
+    /// <summary>
+    /// Cuántas figuras trae el texto, **incluidas las que no se pudieron reconstruir**. Nula
+    /// mientras el texto no se interpretó.
+    /// </summary>
+    int? RootFigureCount,
+    IReadOnlyList<WorkPiece> Pieces,
+    IReadOnlyList<WorkObservation> Observations);

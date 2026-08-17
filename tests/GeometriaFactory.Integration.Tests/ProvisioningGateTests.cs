@@ -158,12 +158,25 @@ public sealed class ProvisioningGateTests : IDisposable
 
         // La mitad 1 deja de regir, y el guardián 2 pasa a ser el que decide sobre el panel: por
         // eso acá se piden las rutas que NO son del panel.
-        foreach (var route in new[] { "/", "/ingreso", "/registro-de-cuenta", "/estado" })
+        foreach (var route in new[] { "/ingreso", "/registro-de-cuenta", "/estado" })
         {
             using var response = await browser.GetAsync(route);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
+
+        // **[RELEVO DE LA ETAPA `g`, DECLARADO.]** La raíz salía de esta lista, y respondía `200`
+        // porque nadie la desviaba. Era la mitad de `NAV-03` que faltaba: `Linea-Base-Visual.md` §5
+        // declara que **con administrador constituido la entrada va al ingreso**, y hasta la etapa
+        // `f` quien escribía `/` en un laboratorio ya configurado se quedaba mirando el marcador de
+        // posición de la etapa `b`.
+        //
+        // Que deje de responder `200` NO es la mitad 1 volviendo: el desvío es al **ingreso** y no
+        // al aprovisionamiento, y esa diferencia es justamente lo que esta prueba comprueba.
+        using var root = await browser.GetAsync("/");
+
+        Assert.Equal(HttpStatusCode.Redirect, root.StatusCode);
+        Assert.EndsWith("/ingreso", root.Headers.Location!.ToString(), StringComparison.Ordinal);
     }
 
     // --------------------------------------------------------------------- la transición ----

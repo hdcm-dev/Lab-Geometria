@@ -2,6 +2,8 @@
 @layout AccessShell
 @inject DataServiceClient DataService
 @inject SessionState Session
+@inject PendingCredentialChangeStore PendingChanges
+@inject IWebHostEnvironment HostEnvironment
 @inject NavigationManager Navigation
 
 @* SUP-03 `Ingreso` — CU-02.
@@ -45,6 +47,21 @@
 <PageTitle>Ingreso</PageTitle>
 
 <h1 class="gf-mt-5">Ingresar al laboratorio</h1>
+
+@* LA PÁGINA VIEJA, DICHA EN CASTELLANO Y CON SALIDA. El marco rechaza un envío cuyo testigo ya no
+   puede verificar —pasa cuando la pantalla estuvo abierta mientras el front se desplegaba de nuevo—
+   y su mensaje es en inglés, sin marca del producto y sin qué hacer. `StaleFormMiddleware` lo
+   traduce a esta marca en la dirección, y acá se dice qué pasó y qué sigue.
+
+   NO SE REINTENTA SOLO: la persona vuelve a enviar cuando quiere, con el formulario ya servido de
+   nuevo y su testigo válido. *@
+@if (IsStale)
+{
+    <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
+        Esta pantalla estuvo abierta un rato largo y no pudimos verificar el envío.
+        Nada se perdió: volvé a escribir tu contraseña y reintentá el ingreso.
+    </p>
+}
 
 @if (_arrival == "confirmacion-aprovisionamiento")
 {
@@ -135,6 +152,37 @@ else if (_state is Outcome.PasswordChangeRequired)
 <p class="gf-caption">Si olvidaste tu contraseña, pedile al docente que te la resetee. Te va a dar una provisoria y vas a elegir una nueva al entrar. No perdés ninguno de tus trabajos.</p>
 
 @code {
+    /// <summary>Anota de quién es el cambio y deja la marca en el navegador.</summary>
+    /// <remarks>
+    /// LA MARCA ES `HttpOnly`, `Secure` FUERA DE DESARROLLO Y `SameSite=Strict`, con la misma
+    /// política que la marca de sesión: no la lee ningún guion y no viaja a otro sitio.
+    /// </remarks>
+    private void RememberPendingChange(string email)
+    {
+        if (HttpContext is null || string.IsNullOrWhiteSpace(email))
+        {
+            return;
+        }
+
+        var mark = PendingChanges.Remember(email.Trim());
+
+        HttpContext.Response.Cookies.Append(
+            PendingCredentialChangeStore.MarkName,
+            mark,
+            new CookieOptions
+            {
+                HttpOnly = true,
+                IsEssential = true,
+                Secure = !HostEnvironment.IsDevelopment(),
+                SameSite = SameSiteMode.Strict,
+                Path = "/",
+            });
+    }
+
+    /// <summary>Si esta petición viene de un envío que no se pudo verificar.</summary>
+    private bool IsStale =>
+        Navigation.ToAbsoluteUri(Navigation.Uri).Query.Contains(StaleFormMiddleware.StaleParameter, StringComparison.Ordinal);
+
     private enum Outcome { None, MissingFields, Rejected, PasswordChangeRequired, Unavailable }
 
     /// <summary>Los dos campos de la tarjeta, tal como el envío los trae de vuelta.</summary>
@@ -226,13 +274,18 @@ else if (_state is Outcome.PasswordChangeRequired)
             // de trabajo, así que acá no se abre nada y no se escribe ninguna marca. Con la
             // marca de cambio pendiente puesta, ninguna otra capacidad (INV-09).
             //
-            // Y NO SE ACARREA NADA HACIA LA PANTALLA DEL CAMBIO, que es el defecto que este
-            // arreglo retira. Esta superficie es estática: el envío es UNA petición, y la
-            // redirección abre otra, con su propio `SessionState` de ámbito, vacío. Lo que se
-            // anotara acá no llegaría del otro lado, y la pantalla del cambio quedaba sin saber
-            // de quién se trata —el alumno reseteado volvía a quedarse sin puerta—. La pantalla
-            // del cambio pide el correo ella misma y por eso funciona también con recarga, con
-            // enlace guardado y con quien llega de frente.
+            // DE QUIÉN ES EL CAMBIO SE ANOTA DEL LADO DEL SERVIDOR, contra una marca opaca, que
+            // es la misma forma con la que este producto ya guarda el testigo de sesión. Es lo que
+            // permite que la pantalla del cambio **no le pida el correo a quien acaba de
+            // escribirlo acá**: el estado de sesión es de ámbito de petición y no cruza la
+            // redirección, pero esta marca sí.
+            //
+            // LA MARCA NO DICE NADA DE NADIE y el correo NO viaja por la dirección, que es lo que
+            // el wireframe §5 no quiere.
+            //
+            // Y SI ALGO FALLA, NO HAY CALLEJÓN: la pantalla del cambio le pide el correo, como
+            // antes. Lo que cambia es que quien viene de acá ya no tiene que repetirlo.
+            RememberPendingChange(Form.Email);
             _state = Outcome.PasswordChangeRequired;
             Navigation.NavigateTo("/credencial-propia/cambio-obligado");
             return;

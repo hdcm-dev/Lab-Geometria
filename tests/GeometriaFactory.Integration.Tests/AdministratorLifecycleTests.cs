@@ -50,13 +50,20 @@ public sealed class AdministratorLifecycleTests : IDisposable
         using var connection = new SqliteConnection($"Data Source={_storePath}");
         await connection.OpenAsync();
 
-        // DOS TRANSFORMACIONES ASENTADAS DESDE LA ETAPA `e`: la de `Account`, de la etapa `c`, y
-        // la de `Work`. El recuento crece con el linaje, y crecerlo acá es lo que impide que una
-        // transformación entre sin que nadie la mire.
-        Assert.Equal(2L, await ScalarAsync(connection,
+        // CUATRO TRANSFORMACIONES ASENTADAS DESDE LA ETAPA `g`: la de `Account`, de la etapa `c`;
+        // la de `Work`, de la `e`; la de la interpretación, de la `f`; y **las dimensiones propias
+        // de la pieza**, que la etapa `g` agregó al descubrir que las figuras planas del conjunto
+        // raíz llevan su medida en sí mismas y la perdían al guardarse.
+        //
+        // El recuento crece con el linaje, y crecerlo acá es lo que impide que una transformación
+        // entre sin que nadie la mire. **Ninguna anterior se editó**: una ya fusionada no se toca
+        // (intake §17.3.P.7).
+        Assert.Equal(4L, await ScalarAsync(connection,
             "select count(*) from __EFMigrationsHistory"));
-        Assert.Equal(2L, await ScalarAsync(connection,
-            "select count(*) from sqlite_master where type = 'table' and name in ('Account', 'Work')"));
+
+        // LAS CINCO TABLAS DEL MODELO DE DATOS EXISTEN, por primera vez desde que se declararon.
+        Assert.Equal(5L, await ScalarAsync(connection,
+            "select count(*) from sqlite_master where type = 'table' and name in ('Account', 'Work', 'Pieza', 'Componente', 'Observacion')"));
         Assert.Equal(2L, await ScalarAsync(connection,
             "select count(*) from sqlite_master where type = 'index' and name in ('UX_Account_NormalizedEmail', 'UX_Account_SingleAdministrator')"));
 
@@ -64,6 +71,12 @@ public sealed class AdministratorLifecycleTests : IDisposable
         // las DOS consultas de listado del producto con una sola estructura.
         Assert.Equal(1L, await ScalarAsync(connection,
             "select count(*) from sqlite_master where type = 'index' and name = 'IX_Work_Owner_Status'"));
+
+        // Y el único índice que la etapa `f` agrega: trabajo y posición, ÚNICO. Es lo que impide
+        // que dos piezas del mismo trabajo digan ocupar el mismo lugar del conjunto raíz, que es
+        // la identidad de dominio de la pieza (`RC-06002`).
+        Assert.Equal(1L, await ScalarAsync(connection,
+            "select count(*) from sqlite_master where type = 'index' and name = 'IX_Pieza_WorkId_Position'"));
     }
 
     // ---- CRITERIO 1 · el administrador se configura, y sólo mientras no exista ninguno ----

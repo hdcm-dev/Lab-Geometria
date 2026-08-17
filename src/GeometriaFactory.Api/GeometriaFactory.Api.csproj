@@ -24,6 +24,7 @@
   <ItemGroup>
     <!-- La guardia de `CU-02`: verificación del acceso firmado. Versión anclada por la etapa `c`. -->
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
     <!--
       Herramienta de TIEMPO DE DISEÑO, y sólo eso: `dotnet ef` la exige en el proyecto de
       arranque para poder GENERAR una transformación de esquema. `PrivateAssets` la deja fuera de
@@ -34,6 +35,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Scalar.AspNetCore" Version="2.16.20" />
   </ItemGroup>
 
 </Project>

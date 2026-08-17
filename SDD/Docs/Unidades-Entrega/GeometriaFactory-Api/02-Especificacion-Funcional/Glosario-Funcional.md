@@ -439,7 +439,7 @@ Ya declarados en `00-Contexto/Vision-Producto.md` §9 con la misma semántica co
 
 ### 4.2 Del glosario de GeometriaFactory-Domain
 
-Ya declarados en `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md` §2. Esta categoría los usa con la misma semántica y no los redefine.
+Ya declarados en `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Glosario-Funcional.md` §2. Esta categoría los usa con la misma semántica y no los redefine.
 
 | Término | Qué designa, en una línea |
 | --- | --- |

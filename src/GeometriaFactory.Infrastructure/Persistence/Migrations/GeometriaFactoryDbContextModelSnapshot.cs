@@ -72,6 +72,123 @@ namespace GeometriaFactory.Infrastructure.Persistence.Migrations
                     b.ToTable("Account", (string)null);
                 });
 
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Component", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("DeclaredArea")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DeclaredLength")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DeclaredRadius")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DeclaredWidth")
+                        .HasColumnType("REAL");
+
+                    b.Property<Guid>("PieceId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PieceId");
+
+                    b.ToTable("Componente", (string)null);
+                });
+
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Observation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("DeclaredValue")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DerivedValue")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Field")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PiecePosition")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("WorkId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkId");
+
+                    b.ToTable("Observacion", (string)null);
+                });
+
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Piece", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("DeclaredArea")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DeclaredLength")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DeclaredRadius")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DeclaredVolume")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DeclaredWidth")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DerivedArea")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("DerivedVolume")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("WorkId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkId", "Position")
+                        .IsUnique();
+
+                    b.ToTable("Pieza", (string)null);
+                });
+
             modelBuilder.Entity("GeometriaFactory.Domain.Entities.Work", b =>
                 {
                     b.Property<Guid>("Id")
@@ -122,6 +239,33 @@ namespace GeometriaFactory.Infrastructure.Persistence.Migrations
                     b.ToTable("Work", (string)null);
                 });
 
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Component", b =>
+                {
+                    b.HasOne("GeometriaFactory.Domain.Entities.Piece", null)
+                        .WithMany("Components")
+                        .HasForeignKey("PieceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Observation", b =>
+                {
+                    b.HasOne("GeometriaFactory.Domain.Entities.Work", null)
+                        .WithMany("Observations")
+                        .HasForeignKey("WorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Piece", b =>
+                {
+                    b.HasOne("GeometriaFactory.Domain.Entities.Work", null)
+                        .WithMany("Pieces")
+                        .HasForeignKey("WorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GeometriaFactory.Domain.Entities.Work", b =>
                 {
                     b.HasOne("GeometriaFactory.Domain.Entities.Account", null)
@@ -129,6 +273,18 @@ namespace GeometriaFactory.Infrastructure.Persistence.Migrations
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Piece", b =>
+                {
+                    b.Navigation("Components");
+                });
+
+            modelBuilder.Entity("GeometriaFactory.Domain.Entities.Work", b =>
+                {
+                    b.Navigation("Observations");
+
+                    b.Navigation("Pieces");
                 });
 #pragma warning restore 612, 618
         }

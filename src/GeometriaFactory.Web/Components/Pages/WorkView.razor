@@ -3,6 +3,7 @@
 @inject NavigationManager Navigation
 @inject DataServiceClient DataService
 @inject SessionState Session
+@using System.Text.Json
 @using GeometriaFactory.Contracts.Works
 
 @* SUP-07 `Vista-De-Trabajo` — CU-07.
@@ -56,6 +57,11 @@
 
    RA-01: el detalle llega desde el servidor de esta pieza, por `DataServiceClient`.
    RA-02: acá no se toca el visor. RA-03: ningún mensaje nombra una dirección interna. *@
+
+@* El paquete del visor lo carga la superficie que dibuja, y no el documento común: el inventario
+   de guiones mide **un solo guion propio** sobre las ocho direcciones del producto, y su propio
+   comentario declara que este paquete no se sirve desde esas superficies. *@
+<script src="js/geometriafactory-visor.js" defer></script>
 
 <PageTitle>Vista de trabajo</PageTitle>
 
@@ -133,7 +139,7 @@ else
                 <h2 id="work-data-heading" class="gf-meta">Datos del trabajo</h2>
                 <dl class="gf-key-value gf-mt-3">
                     <dt>Nombre</dt><dd>@_work.Name</dd>
-                    <dt>Fecha del trabajo</dt><dd class="gf-num">@_work.DeclaredDate</dd>
+                    <dt>Fecha del trabajo</dt><dd class="gf-num">@DeclaredDateText.ToDisplay(_work.DeclaredDate)</dd>
                     <dt>Estado</dt><dd><span class="gf-badge @BadgeClassOf(_work.Status)">@LabelOf(_work.Status)</span></dd>
                     <dt>Alumno</dt><dd>@OwnerName</dd>
                     <dt>Descripción</dt><dd>@_work.Description</dd>
@@ -152,12 +158,45 @@ else
 
             <section class="gf-card" aria-labelledby="work-findings-heading">
                 <h2 id="work-findings-heading" class="gf-meta">Observaciones</h2>
-                @* Apartamiento 2 de la cabecera: NO se dice «Sin observaciones», porque eso
-                   afirmaría que se interpretó el texto y no salió ninguna. Se dice lo que pasa. *@
-                <p class="gf-caption gf-mt-3">
-                    El laboratorio todavía no interpreta el texto, así que por ahora no hay
-                    observaciones que mostrar.
-                </p>
+
+                @* DESDE LA ETAPA `f` HAY QUÉ MOSTRAR, y este bloque deja de decir que el texto no
+                   se interpreta. **Sigue sin decir «sin observaciones»** cuando no hay ninguna y el
+                   texto tampoco se interpretó: son dos cosas distintas y el estado las separa. *@
+                @if (_work.Observations.Count > 0)
+                {
+                    <ul class="gf-findings gf-mt-3">
+                        @foreach (var observation in _work.Observations)
+                        {
+                            <li class="gf-finding">
+                                <span class="gf-badge @(observation.Kind == WorkObservationKind.ValidationError ? "gf-badge--danger" : "gf-badge--warning")">
+                                    @(observation.Kind == WorkObservationKind.ValidationError ? "Error" : "Advertencia")
+                                </span>
+                                <div class="gf-finding-body">
+                                    <p class="gf-finding-location">@LocationOf(observation)</p>
+                                    @if (observation is { DeclaredValue: { } declared, DerivedValue: { } derived })
+                                    {
+                                        <dl class="gf-values">
+                                            <dt>Tu programa declara</dt><dd class="gf-num">@declared.ToString("N2")</dd>
+                                            <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
+                                        </dl>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                else if (_work.RootFigureCount is null)
+                {
+                    <p class="gf-caption gf-mt-3">
+                        Este trabajo todavía no se envió, así que su texto no se interpretó.
+                    </p>
+                }
+                else
+                {
+                    <p class="gf-caption gf-mt-3">
+                        El texto se interpretó y no salió ninguna observación.
+                    </p>
+                }
             </section>
 
             <section class="gf-card" aria-labelledby="work-text-heading">
@@ -173,24 +212,140 @@ else
             </section>
         </div>
 
-        @* Columna derecha: área de dibujo arriba, árbol abajo. LAS DOS SIGUEN SIN DIBUJAR y son de
-           la etapa `g`: acá no se toca el visor (`RA-02`). *@
+        @* Columna derecha: área de dibujo arriba, árbol abajo. ESTA SUPERFICIE ES EL COMPONENTE
+           ANFITRIÓN: provee el elemento, le entrega las piezas y **es quien consulta la preferencia
+           de movimiento reducido del sistema**, porque el visor no la consulta ni la conserva. *@
         <div class="gf-column gf-column--scene">
             <section aria-labelledby="work-scene-heading">
                 <h2 id="work-scene-heading" class="gf-meta">Escena</h2>
-                <div class="gf-scene gf-mt-2">
-                    <span class="gf-scene-label">Área de dibujo</span>
-                    <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
-                </div>
+
+                @if (_work.Pieces.Count > 0)
+                {
+                    @* LAS PIEZAS BAJAN DENTRO DEL MARCADO, igual que en la previsualización: el
+                       guion las lee y dibuja, y **no pide nada** (`RA-01`). Y son las que el
+                       producto GUARDÓ al enviar, no una interpretación nueva: la vista no puede
+                       mostrar algo distinto de lo que quedó guardado. *@
+                    <div class="gf-scene gf-mt-2" data-gf-viewer-pieces="@PiecesForDrawing()">
+                        <span class="gf-scene-label">Área de dibujo</span>
+                    @* LOS DOS MOVIMIENTOS, GOBERNADOS POR SEPARADO (`F-25`). Las dos casillas son
+                           independientes y su estado inicial lo fija esta superficie: apagadas, que es
+                           lo que corresponde mientras la preferencia de movimiento reducido no se
+                           consulte. **[decisión de la etapa `g`, declarada y elevada]**: consultarla
+                           exige un guion que lea `prefers-reduced-motion`, y el inventario de guiones
+                           autoriza uno solo con alcance declarado. Arrancar apagado nunca molesta a
+                           quien pidió menos movimiento; arrancar prendido sí. *@
+                        <div class="gf-scene-motion gf-mt-3">
+                            <span class="gf-scene-motion-option">
+                                <input type="checkbox" id="motion-camera-orbit" data-gf-motion="cameraOrbit"
+                                       aria-label="Órbita de la cámara"
+                                       aria-describedby="motion-camera-orbit-help" />
+                                <label for="motion-camera-orbit">Órbita de la cámara</label>
+                                @* La ayuda va en texto no visible y NO en `title`: el de `title` no llega
+                                   ni al teclado ni a buena parte de los lectores de pantalla. Es lo que
+                                   la maqueta aprobada ya resolvía así. *@
+                                <span class="gf-sr-only" id="motion-camera-orbit-help">La cámara gira sola alrededor de las figuras. Se detiene mientras arrastrás.</span>
+                            </span>
+                            <span class="gf-scene-motion-option">
+                                <input type="checkbox" id="motion-piece-spin" data-gf-motion="pieceSpin"
+                                       aria-label="Giro de las figuras"
+                                       aria-describedby="motion-piece-spin-help" />
+                                <label for="motion-piece-spin">Giro de las figuras</label>
+                                <span class="gf-sr-only" id="motion-piece-spin-help">Cada figura gira sobre sí misma. Se detiene mientras arrastrás.</span>
+                            </span>
+
+                            @* SE DICE POR QUÉ ARRANCAN APAGADOS cuando el sistema pide menos
+                               movimiento: sin el aviso, la persona ve dos casillas apagadas y no sabe
+                               si es una falla. Lo enciende el guion, que es quien consulta la
+                               preferencia; servido viene oculto. *@
+                            <span class="gf-scene-motion-note" data-gf-motion-note hidden>arrancan apagados: tu sistema pide movimiento reducido</span>
+                            <span class="gf-sr-only" role="status" data-gf-motion-status></span>
+                        </div>
+                    </div>
+
+                    @* LO QUE NO SE DIBUJÓ, JUNTO A LA ESCENA Y NUNCA EN LAS OBSERVACIONES: son dos
+                       cosas distintas, y el wireframe las separa a propósito. Con cero elementos
+                       **declara en positivo** que se dibujaron todas. *@
+                    @if (UndrawnPositions().Any())
+                    {
+                        <ul class="gf-findings gf-mt-3">
+                            @foreach (var position in UndrawnPositions())
+                            {
+                                <li class="gf-finding">
+                                    <span class="gf-badge gf-badge--neutral">No dibujada</span>
+                                    <div class="gf-finding-body">
+                                        <p class="gf-finding-location">Figura @(position + 1) · posición @position</p>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="gf-caption gf-mt-3">Se dibujaron las @_work.Pieces.Count figuras del trabajo.</p>
+                    }
+                }
+                else
+                {
+                    <div class="gf-scene gf-mt-2">
+                        <span class="gf-scene-label">Área de dibujo</span>
+                        <span class="gf-scene-caption">Este trabajo todavía no tiene figuras interpretadas</span>
+                    </div>
+                    <p class="gf-caption gf-mt-2">
+                        El texto de este trabajo no llegó a interpretarse, así que no hay nada que
+                        dibujar. Tu texto se guardó entero y está más arriba, en «Texto original».
+                    </p>
+                }
             </section>
 
             <section aria-labelledby="work-tree-heading">
                 <h2 id="work-tree-heading" class="gf-meta">Árbol de la estructura</h2>
-                <div class="gf-card gf-scroll-box gf-mt-2"></div>
-                @* La nota de sincronización del wireframe describe una interacción que todavía no
-                   existe: prometerla acá sería un control muerto en forma de texto. Se dice qué
-                   falta, y se retira cuando la etapa `g` traiga el dibujo. *@
-                <p class="gf-caption gf-mt-2">El dibujo y el árbol de la estructura todavía no están construidos. Tu texto se guardó entero y está más arriba, en «Texto original».</p>
+
+                @if (_work.Pieces.Count > 0)
+                {
+                    @* EL ÁRBOL LLEVA EL ÍNDICE DE CADA PIEZA A LA VISTA, y es lo que hace posible la
+                       sincronización de `F-13`: **la identidad es la posición**, la misma de los dos
+                       lados, sin traducir nada. *@
+                    <div class="gf-card gf-scroll-box gf-mt-2">
+                        <ul class="gf-tree" role="tree" aria-labelledby="work-tree-heading">
+                            @foreach (var piece in _work.Pieces.OrderBy(piece => piece.Position))
+                            {
+                                <li role="treeitem" aria-selected="false" aria-expanded="true"
+                                    tabindex="0" data-gf-piece-node="@piece.Position">
+                                    <span class="gf-node">
+                                        <span class="gf-node-index">@piece.Position</span>
+                                        @LabelOfType(piece.Type)
+                                        <span class="gf-caption">@piece.Components.Count componentes</span>
+                                    </span>
+                                    <ul class="gf-tree-children" role="group">
+                                        @foreach (var component in piece.Components.OrderBy(component => component.Position))
+                                        {
+                                            <li role="treeitem" aria-selected="false">
+                                                <span class="gf-node gf-node--leaf">
+                                                    <span class="gf-node-index">@component.Position</span>
+                                                    @LabelOfRole(component.Role) · @LabelOfType(component.Type)
+                                                    @Dimensions(component)
+                                                </span>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    @* `F-13` COMPLETA, EN LAS DOS DIRECCIONES Y POR EL MISMO ÍNDICE: elegir un nodo
+                       resalta su pieza, y elegir una pieza en la escena marca su nodo. La vuelta la
+                       hace posible el aviso que el anfitrión le entrega al visor en las opciones de
+                       `initialize`, que es lo que `ADR-08007` decidió. *@
+                    <p class="gf-caption gf-mt-2">
+                        Elegí una figura del árbol y se resalta en la escena, o elegila en la escena
+                        y se marca en el árbol.
+                    </p>
+                }
+                else
+                {
+                    <div class="gf-card gf-scroll-box gf-mt-2"></div>
+                }
             </section>
         </div>
     </div>
@@ -282,4 +437,70 @@ else
         "Rejected" => "gf-badge--danger",
         _ => "gf-badge--neutral",
     };
+    /// <summary>Las piezas guardadas, serializadas para que el guion autorizado las lea.</summary>
+    private string PiecesForDrawing() => JsonSerializer.Serialize(_work!.Pieces, DrawingJson);
+
+    private static readonly JsonSerializerOptions DrawingJson = new(JsonSerializerDefaults.Web);
+
+    /// <summary>Las posiciones del conjunto raíz sin pieza reconstruida.</summary>
+    /// <remarks>
+    /// SE CALCULAN CONTRA EL RANGO DECLARADO Y NO CONTRA LAS PIEZAS, y es la razón por la que la
+    /// cantidad de figuras del conjunto raíz viaja: **no es derivable de las piezas**, porque el
+    /// conjunto admite huecos y **el hueco puede estar al final**. Con el mayor índice presente,
+    /// un texto de tres figuras cuya última falló se vería como uno de dos que salió perfecto.
+    /// </remarks>
+    private IEnumerable<int> UndrawnPositions()
+    {
+        var drawn = _work!.Pieces.Select(piece => piece.Position).ToHashSet();
+
+        return Enumerable.Range(0, _work.RootFigureCount ?? drawn.Count)
+            .Where(position => !drawn.Contains(position));
+    }
+
+    /// <summary>El tipo, con la etiqueta del emisor: es la que el alumno ve en su programa.</summary>
+    private static string LabelOfType(string type) => type switch
+    {
+        "Cylinder" => "Cilindro",
+        "Cube" => "Cubo",
+        "Orthohedron" => "Ortoedro",
+        "Rectangle" => "Rectangulo",
+        "Square" => "Cuadrado",
+        "Circle" => "Circulo",
+        "DevelopedRectangle" => "RectanguloDesarrollado",
+        _ => type,
+    };
+
+    /// <summary>El papel, con el vocabulario del emisor.</summary>
+    private static string LabelOfRole(string role) => role switch
+    {
+        "Cap" => "Tapa",
+        "Face" => "Cara",
+        "Base" => "Base",
+        "Lateral" => "Lateral",
+        "Side" => "Lado",
+        _ => role,
+    };
+
+    /// <summary>
+    /// Las dimensiones que el texto trajo para ese componente, **con las claves del alumno**.
+    /// </summary>
+    /// <remarks>
+    /// SE MUESTRAN LAS QUE ESTÁN Y NO SE COMPLETAN LAS QUE FALTAN: un componente sin `Radio` no
+    /// tiene radio cero, y escribir uno sería inventarle un dato a su programa.
+    /// </remarks>
+    private static string Dimensions(WorkPieceComponent component)
+    {
+        var parts = new List<string>(3);
+
+        if (component.DeclaredLength is { } length) parts.Add($"Largo {length:N2}");
+        if (component.DeclaredWidth is { } width) parts.Add($"Ancho {width:N2}");
+        if (component.DeclaredRadius is { } radius) parts.Add($"Radio {radius:N2}");
+
+        return parts.Count == 0 ? string.Empty : $"· {string.Join(" · ", parts)}";
+    }
+    /// <summary>Dónde está la observación, dicho como lo ve la persona.</summary>
+    private static string LocationOf(WorkObservation observation) =>
+        observation.PiecePosition is { } position
+            ? $"Figura {position + 1} · posición {position} · campo «{observation.Field}»"
+            : "En el texto completo";
 }

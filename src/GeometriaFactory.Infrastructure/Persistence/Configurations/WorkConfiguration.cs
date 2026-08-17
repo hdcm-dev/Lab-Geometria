@@ -32,11 +32,14 @@ namespace GeometriaFactory.Infrastructure.Persistence.Configurations;
 /// referencia le daría al dominio un camino para recorrer el conjunto de cuentas que
 /// `Domain ADR-06` le niega.
 ///
-/// LAS OTRAS TRES TABLAS DEL MODELO SIGUEN SIN MAPEO, con el mismo fundamento con el que la etapa
-/// `c` dejó fuera a ésta: `Piece`, `Component` y `Observation` siguen sin atributos porque su
-/// modelado está anclado a la etapa `f`, que es la que interpreta el texto. Declararlas acá
-/// crearía tablas para un dominio que todavía no existe, y **una transformación de esquema ya
-/// fusionada no se edita** (intake §17.3.P.7).
+/// LAS OTRAS TRES TABLAS DEL MODELO ENTRAN CON LA ETAPA `f`, que es la que interpreta el texto:
+/// `PieceConfiguration`, `ComponentConfiguration` y `ObservationConfiguration`. Con ellas **las
+/// cinco tablas del modelo de datos existen**. La transformación de esquema de la etapa `c` no se
+/// edita —una ya fusionada no se toca (intake §17.3.P.7)—: las tres tablas entran en una nueva.
+///
+/// LAS DOS COLECCIONES CUELGAN DE ACÁ Y ARRASTRAN EL RETIRO. Las piezas y las observaciones **no
+/// tienen vida sin su trabajo**: borrar el trabajo se las lleva, y es la misma unidad de trabajo
+/// que RN-07 exige para la baja de una cuenta.
 ///
 /// Y POR ESO NO ESTÁN TRES COLUMNAS DE §2.2 DEL MODELO DE DATOS, con su motivo escrito:
 ///   · **Momento del comentario** y **Autor del comentario**: `Definicion-Modelo-De-Dominio.md`
@@ -115,5 +118,21 @@ public sealed class WorkConfiguration : IEntityTypeConfiguration<Work>
             .HasForeignKey(work => work.OwnerId)
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
+        // ---- LO QUE AGREGA LA ETAPA `f` --------------------------------------------------------
+        // Las dos colecciones de la interpretación, con su arrastre. Se recorren POR EL CAMPO y no
+        // por la propiedad: la entidad expone lectura y el motor escribe la lista de adentro.
+        builder.HasMany(w => w.Pieces)
+            .WithOne()
+            .HasForeignKey("WorkId")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Navigation(w => w.Pieces).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        builder.HasMany(w => w.Observations)
+            .WithOne()
+            .HasForeignKey("WorkId")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Navigation(w => w.Observations).UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

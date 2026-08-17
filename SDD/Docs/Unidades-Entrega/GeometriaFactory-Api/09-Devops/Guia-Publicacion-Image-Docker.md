@@ -64,7 +64,9 @@ Lo que sí hay es **un despliegue**, y esta guía documenta su procedimiento con
 | En la canalización, stage `imagen` | Automático | La imagen **se construye y se arranca desde el contenedor de desarrollo** para medir `PT-04`: aplica las transformaciones sobre un almacén vacío y responde salud. **Esa imagen no se guarda ni se despliega**: existe para verificar |
 | En el servidor propio | **El Product Owner, a mano** | Se levanta la composición desde la etiqueta; el motor construye la imagen en destino y arranca el servicio con el volumen y la clave de firma que el ambiente provee |
 
-**Variables requeridas por el despliegue: dos, nombradas por su función** —la **ruta del almacén**, apuntando al volumen persistente, y la **clave de firma del acceso**—. Ninguna otra, y ninguna con su valor escrito en el repositorio.
+**Variables requeridas por el despliegue: dos, nombradas por su función** —la **ruta del almacén**, apuntando al volumen persistente, y la **clave de firma del acceso**—. Ninguna otra requerida, y ninguna con su valor escrito en el repositorio.
+
+**Y una opcional, agregada en la etapa `g`: la publicación del explorador de la superficie.** Sin ella el servicio desplegado **no sirve ni el documento OpenAPI ni el explorador**, que es el comportamiento anterior a [`ADR-08008`](../../../Producto/Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md). Se dice explícitamente porque un explorador **enumera todos los puntos ante cualquiera que abra la dirección**, y eso es una decisión de quien despliega y no un efecto de haber agregado un paquete. Es la única variable de las tres cuya ausencia **no impide arrancar**.
 
 **Reemplazo de versión: detener y arrancar, con ventana de indisponibilidad.** El intake §17.1.P.8 · GeometriaFactory-Api lo declara y `05` §5 lo repite: **sin proxy inverso no hay despliegue con solapamiento**. Y hay un motivo más que se suma al de la fuente: el almacén es un archivo con **escritor único**, de modo que dos versiones vivas a la vez escribirían sobre el mismo archivo.
 

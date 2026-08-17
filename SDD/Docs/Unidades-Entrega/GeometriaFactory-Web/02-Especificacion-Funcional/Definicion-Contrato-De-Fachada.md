@@ -2,7 +2,7 @@
 
 **Proyecto de código:** GeometriaFactory-Visor
 **Documento:** Definicion-Contrato-De-Fachada.md
-**Versión:** 1.1
+**Versión:** 2.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -58,7 +58,8 @@ Los términos que esta categoría acuña están declarados en `Glosario-Funciona
 | Componente anfitrión | El componente que embebe el archivo de guion e invoca sus seis funciones. Es el actor primario de todos los casos de uso de esta categoría. La fachada no sabe qué componente es, ni qué persona lo está usando |
 | Elemento de dibujo | El elemento de la página sobre el que la instancia dibuja, provisto por el componente anfitrión |
 | Instancia del visor | La escena viva asociada a un elemento de dibujo, creada por `inicializar` y liberada por `destruir` |
-| Texto del trabajo | El texto que el componente anfitrión le entrega a `cargarJson`. Es un dato de entrada opaco para la fachada: no se guarda, no se reescribe y no se pide por su cuenta |
+| Piezas reconstruidas | Lo que el componente anfitrión le entrega a `cargarPiezas`: las figuras del conjunto raíz **ya interpretadas** por el laboratorio, cada una con su posición, su tipo, sus dimensiones y sus componentes. Es un dato de entrada para dibujar: no se guarda, no se reescribe y **no se pide por su cuenta** |
+| ~~Texto del trabajo~~ | **Retirado por [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md).** La fachada ya no recibe el texto del alumno: interpretarlo es del laboratorio, y tenerlo en dos lados es tener dos verdades sobre el mismo texto |
 
 ## 3. Semántica general de la fachada
 
@@ -68,7 +69,7 @@ Los términos que esta categoría acuña están declarados en `Glosario-Funciona
 stateDiagram-v2
     [*] --> Inexistente
     Inexistente --> Viva: inicializar(elemento, opciones)
-    Viva --> Viva: cargarJson(id, texto)
+    Viva --> Viva: cargarPiezas(id, piezas)
     Viva --> Viva: seleccionarPieza(id, indice)
     Viva --> Viva: redimensionar(id)
     Viva --> Viva: establecerMovimiento(id, opciones)
@@ -80,8 +81,8 @@ Reglas del ciclo de vida:
 
 1. `inicializar` es la única función que se invoca sin identificador de instancia; las otras cinco lo exigen.
 2. Una instancia liberada no vuelve a la vida: para volver a dibujar sobre el mismo elemento de dibujo, el componente anfitrión invoca `inicializar` otra vez y obtiene un identificador nuevo.
-3. `cargarJson`, `seleccionarPieza`, `redimensionar` y `establecerMovimiento` son invocables tantas veces como el componente anfitrión quiera, en cualquier orden, sobre una instancia viva.
-4. Cada invocación posterior de `cargarJson` reemplaza por completo el contenido dibujado de esa instancia y libera lo que la carga anterior había creado. Ese reemplazo es lo que sostiene el requerimiento de no degradar tras diez recorridos de ida y vuelta entre trabajos (PRODUCT-INTAKE §17.7 P.10).
+3. `cargarPiezas`, `seleccionarPieza`, `redimensionar` y `establecerMovimiento` son invocables tantas veces como el componente anfitrión quiera, en cualquier orden, sobre una instancia viva.
+4. Cada invocación posterior de `cargarPiezas` reemplaza por completo el contenido dibujado de esa instancia y libera lo que la carga anterior había creado. Ese reemplazo es lo que sostiene el requerimiento de no degradar tras diez recorridos de ida y vuelta entre trabajos (PRODUCT-INTAKE §17.7 P.10).
 
 ### 3.2 Qué garantiza la fachada en todas sus funciones
 
@@ -118,22 +119,57 @@ Los nombres de las cinco primeras son los que declara PRODUCT-INTAKE §17.7 P.3 
 | Aspecto | Definición |
 | --- | --- |
 | Firma declarada | `inicializar(elemento, opciones)` |
-| Qué recibe | El elemento de dibujo sobre el que montar la escena, y un conjunto de opciones de presentación provisto por el componente anfitrión. **Dos de esas opciones están declaradas y son de gobierno del movimiento automático (§5.5)**: el estado inicial de la órbita de la cámara y el estado inicial del giro de las figuras, cada uno prendido o apagado. Ausentes o parciales, la instancia arranca con los dos movimientos **apagados**: la fachada no consulta preferencias del sistema (G-3) y el arranque quieto es el que no sorprende. Estas opciones fijan el estado **con el que la instancia nace**; cambiarlo después, con la instancia viva, es de `establecerMovimiento` (§4.6) |
+| Qué recibe | El elemento de dibujo sobre el que montar la escena, y un conjunto de opciones provisto por el componente anfitrión —de presentación, y **el aviso de selección** ([`ADR-08007`](../../../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md))—. **Dos de esas opciones están declaradas y son de gobierno del movimiento automático (§5.5)**: el estado inicial de la órbita de la cámara y el estado inicial del giro de las figuras, cada uno prendido o apagado. Ausentes o parciales, la instancia arranca con los dos movimientos **apagados**: la fachada no consulta preferencias del sistema (G-3) y el arranque quieto es el que no sorprende. Estas opciones fijan el estado **con el que la instancia nace**; cambiarlo después, con la instancia viva, es de `establecerMovimiento` (§4.6) |
 | Qué devuelve | Un identificador de instancia, que el componente anfitrión conserva y usa en las otras cinco funciones |
-| Qué garantiza | Que queda una instancia viva con escena, iluminación y cámara orbital, aislada de cualquier otra instancia (G-4), y que la instancia no dibuja ninguna pieza hasta que se invoque `cargarJson` |
+| Qué garantiza | Que queda una instancia viva con escena, iluminación y cámara orbital, aislada de cualquier otra instancia (G-4), y que la instancia no dibuja ninguna pieza hasta que se invoque `cargarPiezas` |
 | Qué no hace | No lee configuración propia (G-3), no crea el elemento de dibujo ni lo ubica en la página, y no dibuja contenido |
 | Caso de uso | `CU-12001` |
 
-### 4.2 `cargarJson`
+### 4.2 `cargarPiezas`
+
+> **Renombrada y cambiada de firma por [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md).**
+> Se llamaba `cargarPiezas(id, piezas)` y recibía el texto del alumno. **El nombre cambia con la
+> firma**: seguir llamándola «cargar JSON» cuando ya no recibe JSON del alumno sería el peor de los
+> dos mundos —un nombre que promete una cosa y un parámetro que trae otra—.
+>
+> **La tolerancia del formato deja de vivir acá.** Las cuatro trampas —la clave sinónima del
+> ortoedro, las comas finales, la cara del cubo con dos nombres y los valores erróneos— las resuelve
+> el validador del laboratorio, con su batería obligatoria de diez casos. El bundle deja de tener
+> tabla de claves sinónimas y deja de tolerar comas finales, **porque ya no las ve**.
+>
+> **Lo que NO cambia: el bundle no habla con el servicio de datos.** `RA-02` se conserva entero. Las
+> piezas se las da su anfitrión, que es lo que siempre hizo; lo único distinto es la forma del dato.
 
 | Aspecto | Definición |
 | --- | --- |
-| Firma declarada | `cargarJson(id, texto)` |
-| Qué recibe | El identificador de una instancia viva y el texto del trabajo |
+| Firma declarada | `cargarPiezas(id, piezas)` |
+| Qué recibe | El identificador de una instancia viva y **las piezas reconstruidas** del trabajo |
 | Qué devuelve | El resultado de dibujo (§5.2): las piezas dibujadas con su índice y su tipo, las no dibujadas con su índice y el motivo de contrato, y la estructura del texto lista para presentarse como árbol |
 | Qué garantiza | Que reemplaza por completo el contenido anterior de esa instancia y libera lo que había creado; que la disposición es determinista (G-6); que ninguna pieza desaparece sin quedar enumerada (G-5); y que el texto recibido no se conserva ni se modifica (G-2) |
-| Qué no hace | No pide el texto por su cuenta (G-1), no valida el trabajo, no emite observaciones y no recalcula valores |
+| Qué no hace | No pide las piezas por su cuenta (G-1), no valida el trabajo, no emite observaciones, no recalcula valores y **no interpreta el texto del alumno, que ya no recibe** |
 | Caso de uso | `CU-12002` |
+
+**Qué pasa con la condición `DIMENSION_NO_LEGIBLE`.** Era el motivo con el que esta función
+enumeraba la pieza cuya dimensión no pudo leer —el caso de `§20.E-8`, `"3,50"` escrito con la coma
+decimal de la cultura del emisor—. **Con las piezas ya reconstruidas, esa pieza no llega hasta acá**:
+el validador la retuvo y emitió su error de validación con posición y campo, y el trabajo quedó en
+`Borrador`. La condición **se conserva declarada** para el caso en que el anfitrión entregue una
+pieza con una dimensión que la fachada no pueda usar, y **deja de ser el camino normal de ese
+escenario**. La frontera que `Definicion-Contrato-Del-Validador-De-Figuras.md` §8 describía en dos
+mitades pasa a tener una sola: **decidir si el trabajo verifica y decidir qué se dibuja dejan de leer
+el mismo texto**.
+
+**El aviso de selección, y por qué vive acá.** `F-13` exige que la escena y el árbol se sincronicen
+**en las dos direcciones**, y las seis funciones de esta fachada van todas del anfitrión hacia el
+visor: ninguna avisa de vuelta. El anfitrión entrega, entre las opciones, **una función que el visor
+llama cuando la persona elige una pieza en la escena**, con su posición.
+
+**No es una séptima función, y es deliberado**: las seis son órdenes que el anfitrión da, y esto es
+lo contrario. Meterlo entre ellas dejaría la superficie con seis cosas que se piden y una que se
+recibe, sin nada que las distinga —y tocaría la zona de frontera que el Product Owner fijó—.
+
+**El visor no guarda la selección ni decide qué hacer con ella**: avisa y resalta. Y `RA-02` no se
+mueve: el aviso **se lo dan**, como el color de fondo.
 
 ### 4.3 `seleccionarPieza`
 
@@ -195,7 +231,7 @@ Valor opaco que `inicializar` devuelve y que las otras cinco funciones exigen. S
 
 ### 5.2 Resultado de dibujo
 
-Es lo que `cargarJson` devuelve. PRODUCT-INTAKE §17.7 P.3 lo llama «el resultado de la interpretación»; dentro de este proyecto de código se lo nombra **resultado de dibujo** para que no se lo confunda con el resultado de la interpretación que emite el backend, que lleva observaciones y decide si el trabajo se puede finalizar. El resultado de dibujo **no lleva observaciones**.
+Es lo que `cargarPiezas` devuelve. PRODUCT-INTAKE §17.7 P.3 lo llama «el resultado de la interpretación»; dentro de este proyecto de código se lo nombra **resultado de dibujo** para que no se lo confunda con el resultado de la interpretación que emite el backend, que lleva observaciones y decide si el trabajo se puede finalizar. El resultado de dibujo **no lleva observaciones**.
 
 Contiene, en términos funcionales y sin fijar nombres de campo:
 
@@ -234,7 +270,7 @@ Reglas del gobierno, todas verificables:
 
 1. **Se prenden y se apagan por separado, y pueden estar prendidos los dos a la vez.** Son dos gobiernos, no un modo con tres valores.
 2. **Estado inicial por opción de `inicializar`** (§4.1). Con las opciones ausentes o parciales, los dos arrancan apagados.
-3. **Cambio con la instancia viva, por la sexta función.** El componente anfitrión que necesita prender o apagar un movimiento sobre una instancia ya cargada invoca `establecerMovimiento(id, opciones)` (§4.6). El cambio **no reconstruye la instancia**: la disposición, la selección vigente, el encuadre, el resultado de dibujo y el identificador quedan como estaban, y el movimiento no nombrado conserva su estado. **El estado de los movimientos sobrevive a `cargarJson`**: cargar otro texto reemplaza el contenido dibujado, no el gobierno de la escena. Desarrollo completo en `CU-12007`.
+3. **Cambio con la instancia viva, por la sexta función.** El componente anfitrión que necesita prender o apagar un movimiento sobre una instancia ya cargada invoca `establecerMovimiento(id, opciones)` (§4.6). El cambio **no reconstruye la instancia**: la disposición, la selección vigente, el encuadre, el resultado de dibujo y el identificador quedan como estaban, y el movimiento no nombrado conserva su estado. **El estado de los movimientos sobrevive a `cargarPiezas`**: cargar otro texto reemplaza el contenido dibujado, no el gobierno de la escena. Desarrollo completo en `CU-12007`.
 4. **Ninguno de los dos altera la disposición.** El determinismo comprometido en G-6 es de la **posición** de cada pieza, derivada de su índice, y no de su orientación en un instante. Dos personas que miran el mismo trabajo con el giro prendido ven la misma disposición aunque no vean la misma orientación.
 5. **Al apagar el giro de las figuras, las piezas vuelven a su orientación de partida.** Sin esa reposición, apagar el movimiento dejaría cada pieza donde el azar del tiempo la encontró, y dos personas que apagan el giro verían escenas distintas del mismo trabajo.
 6. **Los dos se detienen mientras la persona arrastra la cámara**, y mientras la superficie de dibujo no está visible. El primero evita pelearle el control a quien lo tomó; el segundo es lo que impide que un movimiento invisible siga consumiendo recursos.
@@ -253,7 +289,7 @@ Los códigos son **condiciones de contrato**, no observaciones de dominio. Se de
 | `ELEMENTO_DE_DIBUJO_INVALIDO` | **C-1, en creación** | El elemento recibido por `inicializar` no sirve como superficie de dibujo, o tiene tamaño nulo | **No se crea instancia** y no se devuelve identificador |
 | `ELEMENTO_DE_DIBUJO_INVALIDO` | **C-2, en ajuste** | El elemento de dibujo de una instancia viva dejó de servir como superficie, o pasó a tamaño cero, al invocar `redimensionar` —por ejemplo porque el componente anfitrión lo ocultó o lo desmontó de la página— | **La instancia sigue viva**, con su escena y su selección intactas. No se recalcula nada; una invocación posterior ajusta cuando el elemento vuelva a tener tamaño |
 | `INSTANCIA_DESCONOCIDA` | Único, en cinco funciones | El identificador recibido no corresponde a ninguna instancia viva, o corresponde a una ya liberada. Es también la condición que corresponde cuando se invoca `establecerMovimiento` con un identificador inválido | Ninguno: ninguna instancia cambia |
-| `TEXTO_NO_LEGIBLE` | Único | El texto recibido por `cargarJson` no permite obtener un conjunto de piezas | La instancia queda viva y vacía: se libera lo dibujado antes y no se dibuja nada nuevo |
+| `TEXTO_NO_LEGIBLE` | Único | El texto recibido por `cargarPiezas` no permite obtener un conjunto de piezas | La instancia queda viva y vacía: se libera lo dibujado antes y no se dibuja nada nuevo |
 | `TIPO_NO_DIBUJABLE` | Único, por pieza | Una pieza del conjunto raíz declara un tipo que no está entre los seis dibujables | Esa pieza no se dibuja; las demás sí |
 | `DIMENSION_NO_LEGIBLE` | Único, por pieza | Una pieza de un tipo dibujable **no expone** la dimensión necesaria para construir su malla: la clave o el componente del que se lee la medida está ausente. **Un valor de `0.00` no produce esta condición**: el cero es una dimensión legible y esa pieza se dibuja (§5.3) | Esa pieza no se dibuja; las demás sí |
 | `INDICE_FUERA_DE_RANGO` | Único | El índice recibido por `seleccionarPieza` no corresponde a ninguna **pieza dibujada** del resultado de dibujo vigente. Cubre los dos casos: el índice que no está en el conjunto raíz, y el índice de una pieza que el resultado de dibujo enumera como **no dibujada**, que figura en el resultado pero no tiene malla que resaltar | Ninguno: la selección vigente se conserva |
@@ -291,6 +327,8 @@ Sección propia de este documento de concepto. `Rules-Especificacion-Funcional.m
 | 1.0 | 2026-08-08 | Emisión inicial. Fija el vocabulario del contrato, el ciclo de vida de una instancia, las siete garantías transversales, las seis prohibiciones, la semántica de las cinco funciones declaradas por el intake, los cuatro elementos del concepto, los siete códigos de condición y la política de compatibilidad de la superficie pública. |
 | 1.0 | 2026-08-08 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Visor-r1.md`, sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-01**: §6 pasa a tener columna de curso y declara los dos cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` —C-1 en creación, sin instancia; C-2 en ajuste, con la instancia viva— con el fundamento de por qué es un código con dos cursos y no dos códigos; §4.4 suma la mención de la condición en «Qué no hace» de `redimensionar`. El total de códigos sigue siendo **siete**. **H-02**: §4.5 pasa a nombrar las **seis** propiedades transversales, con la membresía y los umbrales remitidos a `Especificacion-Funcional.md` §6 como lugar único. **H-09**: el enunciado de `INDICE_FUERA_DE_RANGO` pasa a decir «ninguna **pieza dibujada** del resultado de dibujo vigente», alineado con `CU-12003` paso 2, y declara que cubre el curso de la pieza enumerada como no dibujada. **H-10**: la cabecera sustituye las referencias sin sección por `Compatibilidad-Plataformas.md` §2.2 y §4, `Vision-Producto.md` §3 y §9, `Alcance-Producto.md` §4.1 y `NB-00006` §1, §4 y §5. **H-12**: §7 deja de citar `Rules-Especificacion-Funcional.md` §4.3 como fundamento de su propia existencia y declara que la sección homóloga §17 de esa regla gobierna los casos de uso, que no la repiten. |
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, dentro de la cual se validó este contrato por no tener maqueta propia. **Sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **(a) Capacidad F-25, movimiento automático de la escena** (`PRODUCT-INTAKE` 1.5, §4 y §17.7 P.10): nace **§5.5**, que declara los dos movimientos independientes —órbita de la cámara, portada del visualizador previo, y giro de las figuras, capacidad nueva—, sus ocho reglas de gobierno y el punto abierto sobre el cambio en vivo; **§4.1** declara las dos opciones de gobierno que `inicializar` recibe y el arranque apagado ante opciones ausentes o parciales; **§3.2** precisa **G-6**, que el determinismo es de la posición derivada del índice y no de la orientación en un instante; **§3.3** suma la prohibición correspondiente: la fachada no dibuja controles, no consulta la preferencia de movimiento reducido del sistema —lo que violaría G-3— y no conserva la preferencia —lo que violaría G-2—. Los siete códigos de **§6** no cambian: ningún movimiento emite condición. **(b) El cero como dimensión legible**: **§5.3** declara que una dimensión presente con valor `0.00` está expuesta y que la pieza se dibuja, y que `DIMENSION_NO_LEGIBLE` la produce la **ausencia** de la clave y nunca el valor; **§6** replica la precisión en la fila del código. Lo motivó la validación visual: el visualizador previo evaluaba la verdad del número y perdía la figura, lo que contradice el escenario `E-6` del intake §20 y vacía la garantía G-5. |
-| 1.0 | 2026-08-09 | Segunda absorción de la **Fase B2**: las **dos decisiones del Product Owner** tomadas al cerrar la validación visual de la maqueta. **Sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **(a) Sexta función de la fachada.** Prender o apagar los movimientos con la escena andando se resolvía reconstruyendo la instancia, lo que **pierde la selección de pieza** y produce un parpadeo; el Product Owner decidió agregar una función de gobierno. Nace **§4.6**, `establecerMovimiento(id, opciones)`, con qué recibe —el estado deseado de uno de los dos movimientos o de los dos, y el no nombrado conserva el suyo—, qué devuelve —el estado efectivo de los dos—, qué garantiza —reposición de la orientación de partida al apagar el giro, conservación de disposición, selección, encuadre, resultado de dibujo e identificador, e idempotencia— y qué no hace —no reconstruye, no recarga, no roza el determinismo y **no emite condición nueva**—. En consecuencia: **§1** y **§4** pasan de cinco a **seis funciones** y declaran que la sexta la acuña este documento hasta que el intake la consolide; **§3.1** suma la transición al ciclo de vida y corrige las reglas 1 y 3; **§4.1** precisa que sus dos opciones fijan el estado de nacimiento y que el cambio posterior es de §4.6; **§5.1** dice «las otras cinco funciones»; **§5.5 regla 3** se reescribe sobre la sexta función y declara que el estado de los movimientos **sobrevive a `cargarJson`**; **§5.5 regla 8** y **§6** confirman los **siete** códigos, con `INSTANCIA_DESCONOCIDA` presente ahora en **cinco** funciones; **§7 punto 1** declara la superficie en seis y agregar una función como cambio menor; **§8** suma `CU-12007`. **El punto abierto de §5.5 queda resuelto** y su texto pasa a declarar la resolución y lo que resta consolidar en el intake. **(b) Condiciones de medición de la garantía de red.** **G-1** en §3.2 pasa a declarar que ningún movimiento origina petición mientras corre y que la medición se hace **con los dos movimientos prendidos**, su peor caso, remitiendo a `Especificacion-Funcional.md` §6 como lugar único de las condiciones. Motivo: los entornos de prueba automatizados suelen declarar preferencia de movimiento reducido, con lo que los dos movimientos arrancarían apagados y la prueba mediría el caso fácil sin ejercitar el bucle de dibujo. El umbral no cambia: sigue siendo exactamente 0. |
+| 1.0 | 2026-08-09 | Segunda absorción de la **Fase B2**: las **dos decisiones del Product Owner** tomadas al cerrar la validación visual de la maqueta. **Sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **(a) Sexta función de la fachada.** Prender o apagar los movimientos con la escena andando se resolvía reconstruyendo la instancia, lo que **pierde la selección de pieza** y produce un parpadeo; el Product Owner decidió agregar una función de gobierno. Nace **§4.6**, `establecerMovimiento(id, opciones)`, con qué recibe —el estado deseado de uno de los dos movimientos o de los dos, y el no nombrado conserva el suyo—, qué devuelve —el estado efectivo de los dos—, qué garantiza —reposición de la orientación de partida al apagar el giro, conservación de disposición, selección, encuadre, resultado de dibujo e identificador, e idempotencia— y qué no hace —no reconstruye, no recarga, no roza el determinismo y **no emite condición nueva**—. En consecuencia: **§1** y **§4** pasan de cinco a **seis funciones** y declaran que la sexta la acuña este documento hasta que el intake la consolide; **§3.1** suma la transición al ciclo de vida y corrige las reglas 1 y 3; **§4.1** precisa que sus dos opciones fijan el estado de nacimiento y que el cambio posterior es de §4.6; **§5.1** dice «las otras cinco funciones»; **§5.5 regla 3** se reescribe sobre la sexta función y declara que el estado de los movimientos **sobrevive a `cargarPiezas`**; **§5.5 regla 8** y **§6** confirman los **siete** códigos, con `INSTANCIA_DESCONOCIDA` presente ahora en **cinco** funciones; **§7 punto 1** declara la superficie en seis y agregar una función como cambio menor; **§8** suma `CU-12007`. **El punto abierto de §5.5 queda resuelto** y su texto pasa a declarar la resolución y lo que resta consolidar en el intake. **(b) Condiciones de medición de la garantía de red.** **G-1** en §3.2 pasa a declarar que ningún movimiento origina petición mientras corre y que la medición se hace **con los dos movimientos prendidos**, su peor caso, remitiendo a `Especificacion-Funcional.md` §6 como lugar único de las condiciones. Motivo: los entornos de prueba automatizados suelen declarar preferencia de movimiento reducido, con lo que los dos movimientos arrancarían apagados y la prueba mediría el caso fácil sin ejercitar el bucle de dibujo. El umbral no cambia: sigue siendo exactamente 0. |
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-10`**: la fecha de cabecera decía 2026-08-08 y el documento tiene entradas de control de cambios fechadas 2026-08-09; pasa a **2026-08-09**, que es cuando se lo tocó por última vez. Ningún contenido cambia. |
+| 2.0 | 2026-08-16 | **Absorbe [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md), la decisión del Product Owner de que el visor reciba las piezas ya reconstruidas y no el texto del alumno.** §4.2 pasa de `cargarJson(id, texto)` a **`cargarPiezas(id, piezas)`**, con el nombre cambiado junto con la firma: seguir llamándola «cargar JSON» cuando ya no recibe JSON sería un nombre que promete una cosa y un parámetro que trae otra. §2 retira el término «texto del trabajo» y declara «piezas reconstruidas» en su lugar, con la constancia de por qué el anterior se fue. **La tolerancia del formato deja de vivir en el bundle**: las cuatro trampas las resuelve el validador del laboratorio con su batería de diez casos, y el bundle deja de tener tabla de claves sinónimas y de tolerar comas finales **porque ya no las ve**. La condición `DIMENSION_NO_LEGIBLE` **se conserva declarada y deja de ser el camino normal de `§20.E-8`**: esa pieza ya no llega hasta acá. **`RA-02` no se toca y se declara explícitamente**: el bundle sigue sin hacer red, sin identidad y sin pedir su dato por su cuenta —lo recibe de su anfitrión, que es lo que siempre hizo—. Sube **major**: cambia la firma de una función de la fachada. | Product Owner (decisión) · Orquestador SDD |
 | 1.1 | 2026-08-09 | **Cierra el hallazgo `F26-11`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. Tres lugares de este documento —la trazabilidad de cabecera, **§1** y **§5.5**— declaraban que el intake §17.7 P.3 **sigue declarando cinco funciones** y que la consolidación de la sexta estaba pendiente. **Ya no lo está**: el intake la consolidó en su versión **1.6**, y su §17.7 P.3 declara `establecerMovimiento(id, opciones)` como sexta función, rotulada como decisión del 2026-08-09 y remitiendo a §4.6 de este documento por su especificación. §5.5, que se titula «Punto abierto resuelto», dejaba abierto en su texto lo único que quedaba, de modo que un lector encontraba abierto lo que el título declaraba cerrado. Los tres pasajes se corrigen y §5.5 declara que no queda nada abierto en este punto. Ninguna función, garantía, prohibición, código de condición ni política de compatibilidad cambia: la superficie sigue siendo de seis funciones y siete códigos. |
+| 2.1 | 2026-08-16 | **Absorbe [`ADR-08007`](../../../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md)**: las opciones de `inicializar` suman **el aviso de selección**, que es la única vía del visor hacia su anfitrión y lo que permite cumplir `F-13` en su segunda dirección. **Las funciones siguen siendo seis** y ninguna cambia de firma ni de nombre: la zona de frontera `F-01a` no se toca. Se declara por qué no es una séptima función —las seis son órdenes que el anfitrión da, y un aviso es lo contrario— y que el visor **no guarda la selección**: avisa y resalta. Sube minor: amplía las opciones sin cambiar ninguna función. | Orquestador SDD |

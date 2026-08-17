@@ -44,22 +44,53 @@ public sealed class WorkSurfaceTests : IDisposable
     private const string AdministratorPassword = "la-que-eligio-el-docente";
 
     /// <summary>
-    /// El texto del escenario `E-2` del intake §20, con sus **2 comas finales** y su clave
-    /// `Tapas`. Se transcribe tal como lo emite el programa del alumno y **no se corrige**.
+    /// El texto del escenario **`E-2`** del intake §20, con sus **dos comas finales** y su clave
+    /// `Tapas`, transcripto carácter por carácter.
     /// </summary>
+    /// <remarks>
+    /// **[CORRECCIÓN DE LA ETAPA `f`, DECLARADA.]** Hasta hoy esta constante decía llamarse `E-2` y
+    /// **no era el texto de `E-2`**: era un objeto con una clave `Figuras`, dimensiones en `Largo`,
+    /// `Ancho` y `Alto`, y un `"Tapas": 2` numérico, que ninguna fuente transcribe. La etapa `e` lo
+    /// escribió cuando el texto no se interpretaba y ninguna prueba podía notar la diferencia: lo
+    /// único que se le pedía era llegar entero al almacén, y para eso cualquier cadena servía.
+    ///
+    /// Se reemplaza por el texto real porque **la etapa `f` sí lo interpreta**, y una fixture que
+    /// dice ser un escenario del intake sin serlo es exactamente lo que la regla de delivery 5 de
+    /// §15 prohíbe. Con el texto verdadero esta prueba pasa a ejercer también T1 y T2 de verdad.
+    /// </remarks>
     private const string ScenarioE2 = """
+        [
         {
-          "Figuras": [
-            {
-              "Tipo": "Ortoedro",
-              "Largo": 7, "Ancho": 7, "Alto": 21,
-              "Tapas": 2,
-              "Area": 686.00,
-              "Volumen": 343.00,
-            }
+          "Tipo": "Ortoedro",
+          "Tapas":
+          [
+            { "Tipo": "Rectangulo", "Largo": 7.00, "Ancho": 7.00, "Area": 49.00 },
+            { "Tipo": "Rectangulo", "Largo": 7.00, "Ancho": 7.00, "Area": 49.00 }
           ],
-        }
+          "Laterales":
+            [
+              { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 },
+              { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 },
+              { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 },
+              { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 },
+            ],
+          "Area": 686.00,
+          "Volumen": 343.00
+        },
+        ]
         """;
+
+    /// <summary>
+    /// Un texto que **no verifica**: el del escenario `E-5`, con su figura 1 de tipo desconocido.
+    /// </summary>
+    /// <remarks>
+    /// LAS PRUEBAS QUE NECESITAN UN TRABAJO EN `Borrador` NECESITAN UN TEXTO QUE NO VERIFIQUE, y
+    /// desde la etapa `f` eso dejó de ser cualquiera. Hasta la `e` alcanzaba con cualquier cadena
+    /// porque **ningún texto verificaba**: el validador no existía y `Submit` rechazaba siempre.
+    /// Usar un escenario del intake en lugar de inventar un texto roto mantiene la regla de
+    /// delivery 5 de §15. **[relevo de la etapa `f`, declarado.]**
+    /// </remarks>
+    private const string TextThatDoesNotVerify = Scenarios.E5;
 
     private readonly string _storePath = DataServiceHarness.ReserveStorePath();
     private readonly DataServiceHarness _dataService;
@@ -99,7 +130,16 @@ public sealed class WorkSurfaceTests : IDisposable
         var body = (await response.Content.ReadFromJsonAsync<WorkSubmissionResponse>())!;
 
         Assert.NotEqual(Guid.Empty, body.WorkId);
-        Assert.Equal(nameof(WorkStatus.Draft), body.Status);
+
+        // **[relevo de la etapa `f`.]** Con el texto real de `E-2` el trabajo PASA A `Pendiente`
+        // con su advertencia asociada, que es lo que §20.E-2 punto 7 declara. Hasta la etapa `e`
+        // acá decía `Borrador`, y era cierto por una razón que ya no vale: nadie interpretaba.
+        Assert.Equal(nameof(WorkStatus.Submitted), body.Status);
+        var warning = Assert.Single(body.Observations);
+        Assert.Equal(nameof(ObservationKind.Warning), warning.Kind);
+        Assert.Equal("Volumen", warning.Field);
+        Assert.Equal(343.00, warning.DeclaredValue);
+        Assert.Equal(1029.00, warning.DerivedValue!.Value, 2);
         Assert.NotEqual(default, body.RegisteredAt);
 
         // EL TEXTO SE LEE DEL ALMACÉN Y NO DE LA RESPUESTA.
@@ -109,6 +149,170 @@ public sealed class WorkSurfaceTests : IDisposable
 
         // Y el dueño es el solicitante, sin que ningún campo de la solicitud lo haya elegido.
         Assert.Equal(world.StudentId, await StoredOwnerAsync(body.WorkId));
+    }
+
+    // ---- A-18 · LA INTERPRETACIÓN QUE NO GUARDA NADA ------------------------------------------
+
+    /// <summary>
+    /// `E-1` interpretado sin guardar: devuelve las tres piezas para dibujar y sus dos
+    /// advertencias, **y el almacén queda igual que antes**.
+    /// </summary>
+    [Fact]
+    public async Task InterpretingReturnsThePiecesToDrawAndWritesNothing()
+    {
+        var world = await WorldAsync();
+
+        // El almacén ANTES: cero trabajos. Si no se contara antes, el cero de después no probaría
+        // nada.
+        Assert.Equal(0, await CountWorksAsync());
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/interpretaciones",
+            world.StudentToken,
+            new WorkInterpretationRequest(Scenarios.E1)));
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var body = (await response.Content.ReadFromJsonAsync<WorkInterpretationResponse>())!;
+
+        // LAS PIEZAS, QUE SON LO QUE EL VISOR VA A DIBUJAR, con su posición y sus componentes.
+        Assert.Equal(3, body.RootFigureCount);
+        Assert.Equal(3, body.Pieces.Count);
+        Assert.Equal([0, 1, 2], body.Pieces.Select(p => p.Position));
+        Assert.Equal("Cylinder", body.Pieces[0].Type);
+        Assert.Equal(3, body.Pieces[0].Components.Count);
+        Assert.Equal(6, body.Pieces[1].Components.Count);
+
+        // Y LAS OBSERVACIONES: previsualizar sin decir qué no se pudo interpretar sería el fallo
+        // silencioso que este producto viene a eliminar.
+        Assert.Equal(2, body.Observations.Count);
+
+        // EL ALMACÉN DESPUÉS: sigue en cero. Es la propiedad que este punto tiene que sostener.
+        Assert.Equal(0, await CountWorksAsync());
+    }
+
+    /// <summary>
+    /// Un texto que no verifica se interpreta igual: devuelve lo que sí se pudo reconstruir **y su
+    /// error ubicado**, sin guardar nada y sin hablar de estados.
+    /// </summary>
+    [Fact]
+    public async Task InterpretingATextThatDoesNotVerifyReturnsWhatItCouldRebuild()
+    {
+        var world = await WorldAsync();
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/interpretaciones",
+            world.StudentToken,
+            new WorkInterpretationRequest(Scenarios.E5)));
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        var body = (await response.Content.ReadFromJsonAsync<WorkInterpretationResponse>())!;
+
+        // DE DOS FIGURAS SE RECONSTRUYÓ UNA, y el recuento lo dice sin inventar la que falta: es
+        // lo que permite dibujar el cubo y explicar por qué se ve uno solo.
+        Assert.Equal(2, body.RootFigureCount);
+        var piece = Assert.Single(body.Pieces);
+        Assert.Equal(0, piece.Position);
+
+        var error = Assert.Single(body.Observations);
+        Assert.Equal(nameof(ObservationKind.ValidationError), error.Kind);
+        Assert.Equal(1, error.PiecePosition);
+        Assert.Equal("Tipo", error.Field);
+
+        Assert.Equal(0, await CountWorksAsync());
+    }
+
+    /// <summary>El texto vacío es campo ausente, y se nombra: `400` sin interpretar nada.</summary>
+    [Fact]
+    public async Task InterpretingWithoutTextIsRejectedNamingTheField()
+    {
+        var world = await WorldAsync();
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/interpretaciones",
+            world.StudentToken,
+            new WorkInterpretationRequest("   ")));
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.Equal(0, await CountWorksAsync());
+    }
+
+    // ---- LOS DOS DESENLACES DEL ENVÍO, QUE SON LO QUE LA TRANSICIÓN `f` -> `g` PIDE ----------
+
+    /// <summary>
+    /// `E-1`, el JSON semilla: el envío **verifica** y el trabajo pasa a `Pendiente`, con sus dos
+    /// advertencias y el texto intacto.
+    /// </summary>
+    [Fact]
+    public async Task AWorkWhoseTextVerifiesGoesToSubmittedWithItsWarnings()
+    {
+        var world = await WorldAsync();
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/trabajos",
+            world.StudentToken,
+            new WorkSubmissionRequest(null, "Entrega 1", "2026-08-09", "el semilla", Scenarios.E1)));
+
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+
+        var body = (await response.Content.ReadFromJsonAsync<WorkSubmissionResponse>())!;
+
+        // TRES PIEZAS Y DOS ADVERTENCIAS, que es el resultado canónico del producto, visto desde
+        // afuera y sobre HTTP real.
+        Assert.Equal(nameof(WorkStatus.Submitted), body.Status);
+        Assert.Equal(2, body.Observations.Count);
+        Assert.All(body.Observations, o => Assert.Equal(nameof(ObservationKind.Warning), o.Kind));
+
+        var area = Assert.Single(body.Observations, o => o.Field == "Area");
+        Assert.Equal(1, area.PiecePosition);
+        Assert.Equal(36.00, area.DeclaredValue);
+        Assert.Equal(54.00, area.DerivedValue!.Value, 2);
+
+        var volume = Assert.Single(body.Observations, o => o.Field == "Volumen");
+        Assert.Equal(2, volume.PiecePosition);
+        Assert.Equal(343.00, volume.DeclaredValue);
+        Assert.Equal(1029.00, volume.DerivedValue!.Value, 2);
+
+        // Y EL TEXTO SIGUE SIENDO EL DEL ALUMNO, carácter por carácter.
+        Assert.Equal(Scenarios.E1, await StoredTextAsync(body.WorkId));
+    }
+
+    /// <summary>
+    /// `E-5`, el tipo desconocido: el envío **no verifica**, el trabajo queda en `Borrador` y el
+    /// error viene **ubicado en la figura 1 y en el campo `Tipo`**.
+    /// </summary>
+    [Fact]
+    public async Task AWorkWhoseTextDoesNotVerifyStaysInDraftWithItsErrorLocated()
+    {
+        var world = await WorldAsync();
+
+        using var response = await SendAsync(Authorized(
+            HttpMethod.Post,
+            "/trabajos",
+            world.StudentToken,
+            new WorkSubmissionRequest(null, "Entrega 2", "2026-08-09", "con una pirámide", Scenarios.E5)));
+
+        // NO ES UN RECHAZO DE LA PETICIÓN, y es la confusión más cara de esta frontera: el trabajo
+        // se guardó entero y lo que no verificó es su texto.
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+
+        var body = (await response.Content.ReadFromJsonAsync<WorkSubmissionResponse>())!;
+
+        Assert.Equal(nameof(WorkStatus.Draft), body.Status);
+
+        var error = Assert.Single(body.Observations);
+        Assert.Equal(nameof(ObservationKind.ValidationError), error.Kind);
+        Assert.Equal(1, error.PiecePosition);
+        Assert.Equal("Tipo", error.Field);
+
+        // EL ÍNDICE ES 1 Y NO 0: la primera figura del escenario es válida a propósito, y es lo
+        // que comprueba que la ubicación se calcula en lugar de informar siempre la primera.
+        Assert.Equal(Scenarios.E5, await StoredTextAsync(body.WorkId));
     }
 
     /// <summary>Falta el nombre: `400` nombrando el campo ausente, y nada se guarda.</summary>
@@ -165,8 +369,10 @@ public sealed class WorkSurfaceTests : IDisposable
         Assert.Equal(nameof(WorkStatus.Draft), created.Status);
         Assert.Equal(Broken, await StoredTextAsync(created.WorkId));
 
-        // LA REEDICIÓN: el alumno corrige y vuelve a enviar. Sigue en `Borrador`, porque el texto
-        // no se interpreta hasta la etapa `f`.
+        // LA REEDICIÓN: el alumno corrige y vuelve a enviar. **Desde la etapa `f` el texto
+        // corregido se interpreta y el trabajo pasa a `Pendiente`**, que es el circuito completo
+        // que la persona vive: envía, ve qué falló, corrige y entrega. Hasta la etapa `e` esta
+        // prueba terminaba en `Borrador` porque nadie interpretaba. **[relevo declarado.]**
         using var edited = await SendAsync(Authorized(
             HttpMethod.Post, $"/trabajos/{created.WorkId}", world.StudentToken,
             new WorkSubmissionRequest(created.WorkId, "Entrega 1 corregida", "2026-08-10", "ya va", ScenarioE2)));
@@ -175,7 +381,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         var body = (await edited.Content.ReadFromJsonAsync<WorkSubmissionResponse>())!;
         Assert.Equal(created.WorkId, body.WorkId);
-        Assert.Equal(nameof(WorkStatus.Draft), body.Status);
+        Assert.Equal(nameof(WorkStatus.Submitted), body.Status);
 
         // El texto guardado es el nuevo, carácter por carácter, y sigue habiendo UN solo trabajo.
         Assert.Equal(ScenarioE2, await StoredTextAsync(created.WorkId));
@@ -214,7 +420,7 @@ public sealed class WorkSurfaceTests : IDisposable
     public async Task TheStudentDeletesTheirOwnDraft()
     {
         var world = await WorldAsync();
-        var created = await LoadAsync(world.StudentToken, "Entrega 1", ScenarioE2);
+        var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var response = await SendAsync(
             Authorized(HttpMethod.Delete, $"/trabajos/{created.WorkId}", world.StudentToken));
@@ -237,7 +443,7 @@ public sealed class WorkSurfaceTests : IDisposable
         WorkStatus status, string label)
     {
         var world = await WorldAsync();
-        var workId = await SeedWorkAsync(world.StudentId, "Entrega", ScenarioE2, status);
+        var workId = await SeedWorkAsync(world.StudentId, "Entrega", TextThatDoesNotVerify, status);
 
         using var response = await SendAsync(
             Authorized(HttpMethod.Delete, $"/trabajos/{workId}", world.StudentToken));
@@ -266,7 +472,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
         var other = await EnrolStudentAsync(world.AdministratorToken, "otro@frre.utn.edu.ar");
 
-        var created = await LoadAsync(world.StudentToken, "Entrega 1", ScenarioE2);
+        var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var foreign = await SendAsync(
             Authorized(HttpMethod.Delete, $"/trabajos/{created.WorkId}", other.Token));
@@ -302,7 +508,7 @@ public sealed class WorkSurfaceTests : IDisposable
     public async Task TheAdministratorDeletesTheThreeStatusesTheySee(WorkStatus status)
     {
         var world = await WorldAsync();
-        var workId = await SeedWorkAsync(world.StudentId, "Entrega", ScenarioE2, status);
+        var workId = await SeedWorkAsync(world.StudentId, "Entrega", TextThatDoesNotVerify, status);
 
         using var response = await SendAsync(
             Authorized(HttpMethod.Delete, $"/trabajos/{workId}", world.AdministratorToken));
@@ -319,7 +525,7 @@ public sealed class WorkSurfaceTests : IDisposable
     public async Task TheAdministratorCannotDeleteADraft()
     {
         var world = await WorldAsync();
-        var created = await LoadAsync(world.StudentToken, "Entrega 1", ScenarioE2);
+        var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var response = await SendAsync(
             Authorized(HttpMethod.Delete, $"/trabajos/{created.WorkId}", world.AdministratorToken));
@@ -341,7 +547,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
         var other = await EnrolStudentAsync(world.AdministratorToken, "otro@frre.utn.edu.ar");
 
-        var created = await LoadAsync(world.StudentToken, "Entrega 1", ScenarioE2);
+        var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var foreign = await SendAsync(
             Authorized(HttpMethod.Get, $"/trabajos/{created.WorkId}", other.Token));
@@ -369,7 +575,7 @@ public sealed class WorkSurfaceTests : IDisposable
     public async Task TheOwnerSeesTheirWorkWithTheWholeText()
     {
         var world = await WorldAsync();
-        var created = await LoadAsync(world.StudentToken, "Entrega 1", ScenarioE2);
+        var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var response = await SendAsync(
             Authorized(HttpMethod.Get, $"/trabajos/{created.WorkId}", world.StudentToken));
@@ -379,7 +585,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var detail = (await response.Content.ReadFromJsonAsync<WorkDetailResponse>())!;
 
         Assert.Equal(created.WorkId, detail.WorkId);
-        Assert.Equal(ScenarioE2, detail.OriginalJson);
+        Assert.Equal(TextThatDoesNotVerify, detail.OriginalJson);
         Assert.Equal(nameof(WorkStatus.Draft), detail.Status);
         Assert.Equal("alumna@frre.utn.edu.ar", detail.OwnerEmail);
         Assert.Null(detail.AdministratorComment);
@@ -393,7 +599,7 @@ public sealed class WorkSurfaceTests : IDisposable
     public async Task TheAdministratorOpeningADraftGetsNotFound()
     {
         var world = await WorldAsync();
-        var created = await LoadAsync(world.StudentToken, "Entrega 1", ScenarioE2);
+        var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var draft = await SendAsync(
             Authorized(HttpMethod.Get, $"/trabajos/{created.WorkId}", world.AdministratorToken));
@@ -423,9 +629,9 @@ public sealed class WorkSurfaceTests : IDisposable
         var second = await EnrolStudentAsync(world.AdministratorToken, "zulema@frre.utn.edu.ar");
 
         // Alumna A: un borrador y un enviado. Alumno Z: un borrador y un finalizado.
-        var draftOfA = await LoadAsync(world.StudentToken, "Borrador de A", ScenarioE2);
+        var draftOfA = await LoadAsync(world.StudentToken, "Borrador de A", TextThatDoesNotVerify);
         await SeedWorkAsync(world.StudentId, "Enviado de A", ScenarioE2, WorkStatus.Submitted);
-        var draftOfZ = await LoadAsync(second.Token, "Borrador de Z", ScenarioE2);
+        var draftOfZ = await LoadAsync(second.Token, "Borrador de Z", TextThatDoesNotVerify);
         await SeedWorkAsync(second.Id, "Finalizado de Z", ScenarioE2, WorkStatus.Approved);
 
         // Los dos borradores EXISTEN en el almacén: si no existieran, el criterio no probaría nada.
@@ -460,7 +666,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
         var second = await EnrolStudentAsync(world.AdministratorToken, "zulema@frre.utn.edu.ar");
 
-        await LoadAsync(world.StudentToken, "Borrador de A", ScenarioE2);
+        await LoadAsync(world.StudentToken, "Borrador de A", TextThatDoesNotVerify);
         await SeedWorkAsync(world.StudentId, "Enviado de A", ScenarioE2, WorkStatus.Submitted);
         await SeedWorkAsync(second.Id, "Enviado de Z", ScenarioE2, WorkStatus.Submitted);
 
@@ -501,7 +707,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
         var second = await EnrolStudentAsync(world.AdministratorToken, "zulema@frre.utn.edu.ar");
 
-        await LoadAsync(world.StudentToken, "Borrador", ScenarioE2);
+        await LoadAsync(world.StudentToken, "Borrador", TextThatDoesNotVerify);
         await SeedWorkAsync(world.StudentId, "Enviado", ScenarioE2, WorkStatus.Submitted);
         await SeedWorkAsync(world.StudentId, "Finalizado", ScenarioE2, WorkStatus.Approved);
         await SeedWorkAsync(world.StudentId, "Rechazado", ScenarioE2, WorkStatus.Rejected);

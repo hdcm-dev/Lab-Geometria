@@ -300,13 +300,232 @@
         }
     }, true);
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyEnhancements);
-    } else {
-        applyEnhancements();
+
+    // ---- El visor: dibujar lo que la pantalla ya trajo -------------------------------------
+    //
+    // ESTE BLOQUE NO PIDE NADA. Las piezas bajan **dentro del marcado**, en `data-gf-viewer-pieces`,
+    // porque esta pantalla ya se las pidió al servicio de datos del lado del servidor. Es lo que
+    // permite que este guion siga sin una sola salida a la red: `RA-01` prohíbe que un guion del
+    // navegador invoque al servicio, y el inventario de la etapa `c` lo mide con umbral cero.
+    //
+    // Y NO CONOCE EL FORMATO DEL ALUMNO: lee piezas ya reconstruidas y se las pasa al visor tal
+    // como llegaron (`ADR-08006`).
+    var pendingDraw = false;
+
+    function drawScenes() {
+        var scenes = document.querySelectorAll('[data-gf-viewer-pieces]');
+
+        for (var i = 0; i < scenes.length; i++) {
+            var scene = scenes[i];
+
+            if (scene.dataset.gfViewerDrawn === 'yes') {
+                continue;
+            }
+
+            var viewer = window.GeometriaFactoryViewer;
+
+            if (!viewer) {
+                // TODAVÍA NO LLEGÓ, Y ESO ES LO NORMAL LA PRIMERA VEZ. Este guion se sirve en el
+                // encabezado y el paquete del visor en el cuerpo: los dos son diferidos, y los
+                // diferidos **se ejecutan en el orden del documento**, de modo que la primera
+                // pasada de esta función ocurre SIEMPRE antes de que el visor exista.
+                //
+                // Salir sin volver a intentar es el defecto que esto evita, y no se veía en
+                // ninguna prueba: el marcado quedaba perfecto, sin errores en consola, y la
+                // escena simplemente no aparecía. Se reintenta cuando la página termina de
+                // cargar, que es cuando el visor ya está.
+                //
+                // Si NUNCA llega, la escena no se dibuja y **no se simula una**: el recuadro queda
+                // con su leyenda y la persona envía igual.
+                if (!pendingDraw) {
+                    pendingDraw = true;
+                    window.addEventListener('load', drawScenes, { once: true });
+                }
+
+                continue;
+            }
+
+            var pieces;
+
+            try {
+                pieces = JSON.parse(scene.dataset.gfViewerPieces);
+            } catch (error) {
+                continue;
+            }
+
+            // EL AVISO DE SELECCIÓN VIAJA EN LAS OPCIONES (`ADR-08007`), y es la vuelta que le
+            // faltaba a `F-13`: elegir una pieza EN LA ESCENA marca su nodo en el árbol, por el
+            // mismo índice y sin traducir ninguna identidad.
+            var id = viewer.initialize(scene, { onPieceSelected: markNode });
+
+            if (!id) {
+                continue;
+            }
+
+            viewer.loadPieces(id, pieces);
+
+            // LA ESCENA Y EL ÁRBOL SE SINCRONIZAN POR ÍNDICE DE PIEZA (`F-13`), sin traducir
+            // ninguna identidad: el número del nodo es el mismo que el de la pieza, de los dos
+            // lados. Elegir un nodo resalta esa figura y sólo esa.
+            //
+            // LA OTRA DIRECCIÓN NO ESTÁ, y no es un olvido: el contrato de la fachada tiene seis
+            // funciones y **ninguna avisa al anfitrión** que la persona eligió algo en la escena.
+            // Sin ese aviso no hay por dónde enterarse. Queda declarado y elevado.
+            var nodes = document.querySelectorAll('[data-gf-piece-node]');
+
+            for (var n = 0; n < nodes.length; n++) {
+                bindNode(viewer, id, nodes[n]);
+            }
+
+            // Y LOS DOS MOVIMIENTOS, CADA UNO CON SU CASILLA: se gobiernan por separado, y quien
+            // fija su estado inicial es esta superficie y no el visor.
+            bindMotion(viewer, id);
+
+            // LA INSTANCIA SE LIBERA AL DEJAR LA PÁGINA, que es la mitad de `PT-02` que se rompe
+            // sin que nada falle hoy: diez navegaciones sin liberar dejan diez contextos vivos.
+            scene.dataset.gfViewerDrawn = 'yes';
+            window.addEventListener('pagehide', function () { viewer.destroy(id); }, { once: true });
+        }
     }
 
-    new MutationObserver(applyEnhancements).observe(document.documentElement, {
+
+    // ---- La sincronización de `F-13`, en sus dos direcciones ------------------------------------
+
+    // De la escena al árbol: marca el nodo de esa pieza y lo trae a la vista.
+    //
+    // EL ESTADO VIVE EN EL `treeitem` Y NO EN LO QUE SE DIBUJA, que es donde la maqueta aprobada lo
+    // puso: es el único portador de rol y el que recibe el foco.
+    function markNode(position) {
+        var nodes = document.querySelectorAll('[data-gf-piece-node]');
+
+        for (var i = 0; i < nodes.length; i++) {
+            var selected = Number(nodes[i].dataset.gfPieceNode) === position;
+            nodes[i].setAttribute('aria-selected', selected ? 'true' : 'false');
+
+            if (selected && typeof nodes[i].scrollIntoView === 'function') {
+                // TRAERLO A LA VISTA ES PARTE DE LA INTERACCIÓN: un nodo marcado fuera de la
+                // ventana de desplazamiento no le dice nada a nadie.
+                nodes[i].scrollIntoView({ block: 'nearest' });
+            }
+        }
+    }
+
+    // Del árbol a la escena: pide resaltar esa pieza por su índice.
+    function bindNode(viewer, id, node) {
+        if (node.dataset.gfPieceNodeBound === 'yes') {
+            return;
+        }
+
+        node.dataset.gfPieceNodeBound = 'yes';
+
+        function choose() {
+            var position = Number(node.dataset.gfPieceNode);
+            viewer.selectPiece(id, position);
+            markNode(position);
+        }
+
+        node.addEventListener('click', choose);
+        node.addEventListener('keydown', function (event) {
+            // Con teclado, las dos activaciones que un elemento de árbol tiene que aceptar.
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                choose();
+            }
+        });
+    }
+
+    // ---- Los dos movimientos automáticos (`F-25`) -----------------------------------------------
+
+    // LA PREFERENCIA DEL SISTEMA LA LEE EL ANFITRIÓN, NUNCA EL VISOR: es la frontera que el contrato
+    // de la fachada fija, y la razón por la que el visor recibe dos valores de verdad en lugar de
+    // consultar nada.
+    function reducedMotion() {
+        try {
+            return !!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function bindMotion(viewer, id) {
+        var boxes = document.querySelectorAll('[data-gf-motion]');
+
+        if (boxes.length === 0) {
+            return;
+        }
+
+        var reduced = reducedMotion();
+
+        function push() {
+            var options = { cameraOrbit: false, pieceSpin: false };
+
+            for (var i = 0; i < boxes.length; i++) {
+                options[boxes[i].dataset.gfMotion] = boxes[i].checked;
+            }
+
+            viewer.setMotion(id, options);
+        }
+
+        for (var i = 0; i < boxes.length; i++) {
+            if (boxes[i].dataset.gfMotionBound === 'yes') {
+                continue;
+            }
+
+            boxes[i].dataset.gfMotionBound = 'yes';
+
+            // ESTADO INICIAL: PRENDIDO, SALVO QUE EL SISTEMA PIDA LO CONTRARIO. Es lo que la
+            // maqueta aprobada decidió, y el fundamento de `F-25`: la órbita ya existe en la
+            // visualización que la cátedra usa hoy, y arrancar apagado sería portar quitando algo
+            // que funciona.
+            boxes[i].checked = !reduced;
+            boxes[i].addEventListener('change', function () {
+                push();
+                announceMotion();
+            });
+        }
+
+        // Y CUANDO EL SISTEMA PIDE MENOS MOVIMIENTO, SE DICE POR QUÉ ARRANCAN APAGADOS: sin el
+        // aviso, la persona ve dos casillas apagadas y no sabe si es una falla.
+        var note = document.querySelector('[data-gf-motion-note]');
+
+        if (note !== null) {
+            note.hidden = !reduced;
+        }
+
+        push();
+    }
+
+    // El acuse de cada cambio, para quien no ve la escena.
+    function announceMotion() {
+        var status = document.querySelector('[data-gf-motion-status]');
+
+        if (status === null) {
+            return;
+        }
+
+        var boxes = document.querySelectorAll('[data-gf-motion]');
+        var on = [];
+
+        for (var i = 0; i < boxes.length; i++) {
+            if (boxes[i].checked) {
+                on.push(boxes[i].getAttribute('aria-label') || boxes[i].dataset.gfMotion);
+            }
+        }
+
+        status.textContent = on.length === 0
+            ? 'Movimiento automático apagado.'
+            : 'Movimiento automático: ' + on.join(' y ') + '.';
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyEnhancements);
+        document.addEventListener('DOMContentLoaded', drawScenes);
+    } else {
+        applyEnhancements();
+        drawScenes();
+    }
+
+    new MutationObserver(function () { applyEnhancements(); drawScenes(); }).observe(document.documentElement, {
         childList: true,
         subtree: true,
     });

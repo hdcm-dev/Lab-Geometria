@@ -1,5 +1,6 @@
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Domain.Entities;
+using GeometriaFactory.Domain.Guards;
 using GeometriaFactory.Domain.Values;
 
 namespace GeometriaFactory.Application.Works;
@@ -29,14 +30,57 @@ public sealed class LoadAndEditOwnWorkUseCase
 {
     private readonly IWorkRepository _works;
     private readonly ISystemClock _clock;
+    private readonly IFigureValidator _validator;
 
-    public LoadAndEditOwnWorkUseCase(IWorkRepository works, ISystemClock clock)
+    public LoadAndEditOwnWorkUseCase(IWorkRepository works, ISystemClock clock, IFigureValidator validator)
     {
         ArgumentNullException.ThrowIfNull(works);
         ArgumentNullException.ThrowIfNull(clock);
+        ArgumentNullException.ThrowIfNull(validator);
 
         _works = works;
         _clock = clock;
+        _validator = validator;
+    }
+
+    /// <summary>
+    /// `Application CU-05` — Interpreta el texto, adopta el resultado y **deja que el dominio
+    /// resuelva el estado**.
+    /// </summary>
+    /// <remarks>
+    /// ETAPA `f`. Es el paso que la etapa `e` declaró pendiente en las dos operaciones: hasta hoy
+    /// nadie podía declarar un resultado de interpretación, y por eso todo trabajo quedaba en
+    /// `Draft`.
+    ///
+    /// ESTA CAPA NO DECIDE EL ESTADO Y NO CUENTA ERRORES POR SU CUENTA: le entrega al dominio si
+    /// hubo observaciones de especie error de validación, y RN-05 hace el resto. Contar acá pondría
+    /// la regla en dos lugares.
+    ///
+    /// UN TEXTO QUE NO VERIFICA NO ES UN RECHAZO DE LA OPERACIÓN (`Domain CU-08` FA-01): el
+    /// resultado se aplica, el trabajo queda en `Draft` **con sus observaciones** y el alumno
+    /// corrige y vuelve a enviar. Lo único que se rechaza acá es que la interpretación misma no se
+    /// pueda adoptar, que es defecto del validador y no del alumno.
+    /// </remarks>
+    private DomainResult InterpretAndSubmit(Work work, DateTimeOffset now)
+    {
+        var interpretation = _validator.Interpret(work.OriginalJson);
+
+        var adoption = work.AdoptInterpretation(
+            interpretation.RootFigureCount,
+            interpretation.Pieces,
+            interpretation.Observations,
+            now);
+
+        if (!adoption.Succeeded)
+        {
+            return adoption;
+        }
+
+        return work.Submit(
+            parseResultDeclared: true,
+            validationErrorsDeclared: interpretation.Observations
+                .Any(o => o.Kind == ObservationKind.ValidationError),
+            now);
     }
 
     /// <summary>
@@ -77,10 +121,20 @@ public sealed class LoadAndEditOwnWorkUseCase
 
         var work = constitution.Value!;
 
+        // Paso 4 — ENVIAR ES LA ÚNICA ACCIÓN DE GUARDADO: el texto se interpreta acá mismo y el
+        // estado con el que el trabajo nace ya no es siempre `Draft`.
+        var submission = InterpretAndSubmit(work, now);
+
+        if (!submission.Succeeded)
+        {
+            // El repositorio no recibe ninguna escritura: nada quedó a medio constituir.
+            return ApplicationResult<WorkOutcomeSnapshot>.Rejected(submission.ConditionCode!);
+        }
+
         await _works.AddAsync(work, cancellationToken).ConfigureAwait(false);
 
         return ApplicationResult<WorkOutcomeSnapshot>.Applied(
-            new WorkOutcomeSnapshot(work.Id, work.Status, work.CreatedAt));
+            new WorkOutcomeSnapshot(work.Id, work.Status, work.CreatedAt, work.Observations));
     }
 
     /// <summary>
@@ -145,9 +199,16 @@ public sealed class LoadAndEditOwnWorkUseCase
             return ApplicationResult<WorkOutcomeSnapshot>.Rejected(edition.ConditionCode!);
         }
 
+        var resubmission = InterpretAndSubmit(work, now);
+
+        if (!resubmission.Succeeded)
+        {
+            return ApplicationResult<WorkOutcomeSnapshot>.Rejected(resubmission.ConditionCode!);
+        }
+
         await _works.UpdateAsync(work, cancellationToken).ConfigureAwait(false);
 
         return ApplicationResult<WorkOutcomeSnapshot>.Applied(
-            new WorkOutcomeSnapshot(work.Id, work.Status, work.UpdatedAt));
+            new WorkOutcomeSnapshot(work.Id, work.Status, work.UpdatedAt, work.Observations));
     }
 }

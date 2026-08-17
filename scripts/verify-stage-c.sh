@@ -266,8 +266,13 @@ grep -q "$EMAIL" /tmp/anonimo.html && bad "sin marca sigue dibujando la identida
 # superficie que ahora existe en lugar de sobre su ausencia.
 GUION=/interaction/surface-interaction.js
 ARCHIVO=src/GeometriaFactory.Web/wwwroot$GUION
+# Los NUEVE de la etapa `d` más los DOS que agrega la etapa `g`: el atributo con el que la
+# pantalla le baja las piezas al guion, y la marca con la que el guion recuerda que ya dibujó esa
+# escena. Los dos son **marcado servido**, no una vía nueva: el guion sigue sin pedir nada.
 AUTORIZADOS='data-gf-copy-source data-gf-copy-label data-gf-copy-done data-gf-copy-unavailable
-data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-dialog-dismiss'
+data-gf-pending data-gf-match-input data-gf-match-value data-gf-dialog data-gf-dialog-dismiss
+data-gf-viewer-pieces data-gf-viewer-drawn data-gf-piece-node data-gf-piece-node-bound
+data-gf-motion data-gf-motion-bound data-gf-motion-note data-gf-motion-status'
 
 printf '   -- 3.a · inventario cerrado de guiones propios, sobre las ocho direcciones --\n'
 ajenos=0
@@ -297,12 +302,12 @@ for prohibido in 'fetch *\(' 'XMLHttpRequest' 'WebSocket' 'EventSource' 'sendBea
   same "$n" 0 "el guion no contiene \`$prohibido\`"
 done
 
-printf '   -- 3.c · el alcance del guion son los NUEVE atributos autorizados --\n'
+printf '   -- 3.c · el alcance del guion son los DIECISIETE atributos autorizados --\n'
 usados=$(grep -oE 'data-gf-[a-z-]+' "$ARCHIVO" | sort -u)
 echo "        atributos que el guion lee: $(echo "$usados" | tr '\n' ' ')"
 fuera=$(comm -23 <(echo "$usados") <(echo "$AUTORIZADOS" | tr ' ' '\n' | sort -u))
 if [ -z "$fuera" ]; then
-  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los nueve autorizados"
+  ok "$(echo "$usados" | wc -l) atributos leídos, todos dentro de los diecisiete autorizados"
 else
   bad "el guion lee atributos NO autorizados: $(echo "$fuera" | tr '\n' ' ')"
 fi
@@ -331,7 +336,7 @@ printf '\n== GUARDIÁN 2 · ninguna ruta del panel es accesible sin sesión ==\n
 # estuviera. Esto ACOTA lo que se ofrece y no hace cumplir nada: quien verifica
 # la pertenencia y el papel sigue siendo el servicio de datos, en cada solicitud.
 PANEL='/mis-trabajos /trabajo-nuevo /trabajos/T-1 /trabajos/T-1/editar /cuentas /entrega-comision /mi-contrasena'
-PUBLICAS='/ /registro-de-cuenta /ingreso /credencial-propia/establecer /credencial-propia/cambio-obligado /estado /no-encontrado'
+PUBLICAS='/registro-de-cuenta /ingreso /credencial-propia/establecer /credencial-propia/cambio-obligado /estado /no-encontrado'
 
 printf '   -- sin marca: las siete del panel desvían a /ingreso --\n'
 for r in $PANEL; do
@@ -342,6 +347,10 @@ for r in $PANEL; do
 done
 
 printf '   -- sin marca: las públicas siguen respondiendo 200 --\n'
+# **[RELEVO DE LA ETAPA `g`, DECLARADO.]** La raíz salió de esta lista: dejó de ser una ruta que
+# responde y pasó a ser **el punto donde corre el guardián de aprovisionamiento**, que con
+# administrador constituido desvía al ingreso (`NAV-03`, la mitad que faltaba). Se comprueba abajo,
+# con su destino, en lugar de comprobarse acá con un 200 que ya no corresponde.
 # `/credencial-propia/cambio-obligado` está en esta lista a propósito: se llega
 # SIN sesión de trabajo (`INV-09`), y gatearla rompería `RN-13`.
 for r in $PUBLICAS; do

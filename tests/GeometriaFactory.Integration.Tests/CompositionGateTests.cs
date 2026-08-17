@@ -35,13 +35,14 @@ public sealed class CompositionGateTests
     }
 
     [Fact]
-    public void StageEConnectsThreeOfTheFourPortsAndNoneTwice()
+    public void StageFConnectsTheFourPortsAndNoneTwice()
     {
-        // Mitad derecha de `QG-10`, en el estado que la etapa `e` deja: TRES puertos conectados
-        // —los dos de la etapa `c` más el repositorio de trabajos—, cada uno con UN solo
-        // adaptador, y el que falta —el validador de figuras, de la etapa `f`— sigue declarado
-        // sin conectar, con su etapa escrita en la composición.
-        Assert.Equal(3, CompositionRoot.ConnectedPorts.Count);
+        // MITAD DERECHA DE `QG-10`, COMPLETA POR PRIMERA VEZ. La etapa `f` conecta el cuarto
+        // puerto —el validador de figuras— y con eso los cuatro puertos declarados en la etapa `a`
+        // tienen adaptador. El cuadre deja de tener una mitad incompleta, que es la condición que
+        // esta prueba viene arrastrando desde entonces y que crecía con cada etapa.
+        Assert.Equal(4, CompositionRoot.ConnectedPorts.Count);
+        Assert.Equal(CompositionRoot.DeclaredPorts.Count, CompositionRoot.ConnectedPorts.Count);
         Assert.All(CompositionRoot.ConnectedPorts, pair => Assert.Contains(pair.Key, CompositionRoot.DeclaredPorts));
         Assert.All(CompositionRoot.ConnectedPorts, pair => Assert.True(pair.Key.IsAssignableFrom(pair.Value)));
 

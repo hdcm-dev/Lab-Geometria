@@ -211,7 +211,7 @@ else
                                 <th scope="row" class="gf-body-strong gf-th-plain gf-th-plain--body">@work.Name</th>
                                 @* La fecha la DECLARA el alumno y viaja como texto: se muestra tal
                                    como la escribió, sin convertir de zona ni reformatear. *@
-                                <td class="gf-num">@work.DeclaredDate</td>
+                                <td class="gf-num">@DeclaredDateText.ToDisplay(work.DeclaredDate)</td>
                                 <td><span class="gf-badge @BadgeClassOf(work)">@LabelOf(work)</span></td>
                                 <td class="gf-td-actions">
                                     <span class="gf-row-actions">

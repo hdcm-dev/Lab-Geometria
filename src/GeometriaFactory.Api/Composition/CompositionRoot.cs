@@ -2,6 +2,7 @@ using System.Text;
 using GeometriaFactory.Application.Accounts;
 using GeometriaFactory.Application.Works;
 using GeometriaFactory.Application.Ports;
+using GeometriaFactory.Infrastructure.Figures;
 using GeometriaFactory.Infrastructure.Persistence;
 using GeometriaFactory.Infrastructure.Security;
 using GeometriaFactory.Infrastructure.Time;
@@ -45,12 +46,17 @@ public static class CompositionRoot
         typeof(ISystemClock)
     ];
 
-    /// <summary>Los puertos que la etapa `e` deja conectados, con su adaptador.</summary>
+    /// <summary>
+    /// Los puertos conectados, con su adaptador. **La etapa `f` cierra el cuadre de `QG-10`**: con
+    /// el validador de figuras los cuatro puertos declarados tienen adaptador, y la mitad derecha
+    /// deja de estar incompleta por primera vez desde la etapa `a`.
+    /// </summary>
     public static IReadOnlyDictionary<Type, Type> ConnectedPorts { get; } = new Dictionary<Type, Type>
     {
         [typeof(IAccountRepository)] = typeof(EfCoreAccountRepository),
         [typeof(ISystemClock)] = typeof(UtcSystemClock),
         [typeof(IWorkRepository)] = typeof(EfCoreWorkRepository),
+        [typeof(IFigureValidator)] = typeof(LocalFigureValidator),
     };
 
     /// <summary>Nombre de la cadena de conexión del almacén. Su valor llega por configuración.</summary>
@@ -100,6 +106,11 @@ public static class CompositionRoot
         services.AddScoped<IAccountRepository, EfCoreAccountRepository>();
         services.AddSingleton<ISystemClock, UtcSystemClock>();
         services.AddScoped<IWorkRepository, EfCoreWorkRepository>();
+
+        //   IFigureValidator   ⟶ LocalFigureValidator     (Infrastructure BT-16, etapa `f`)
+        // SINGLETON PORQUE NO TIENE ESTADO NI RECURSO QUE ADMINISTRAR: no abre conexiones, no lee
+        // configuración y no toca la base. Es una función del texto que recibe.
+        services.AddSingleton<IFigureValidator, LocalFigureValidator>();
 
         // Los dos mecanismos sensibles. Son los ÚNICOS lugares del producto donde existen una
         // contraseña en claro y una clave de firma (`Infrastructure ADR-04` §7).

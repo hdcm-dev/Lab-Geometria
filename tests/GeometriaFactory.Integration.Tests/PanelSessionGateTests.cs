@@ -52,9 +52,16 @@ public sealed class PanelSessionGateTests : IDisposable
     /// que haya dejado de ser pública: es que dejó de tener algo que ofrecer. Se verifica en
     /// `ProvisioningGateTests`.
     /// </remarks>
+    /// <remarks>
+    /// **[RELEVO DE LA ETAPA `g`, DECLARADO.]** La raíz salía de esta lista. Dejó de ser una ruta
+    /// que responde y pasó a ser **el punto donde corre el guardián**: con administrador
+    /// constituido desvía al ingreso (`NAV-03`), que es la mitad que faltaba. Lo que esta prueba
+    /// afirma —que sin marca de sesión las rutas públicas siguen respondiendo— no cambia; lo que
+    /// cambia es que la raíz **no es una de ellas**.
+    /// </remarks>
     private static readonly string[] PublicRoutes =
     [
-        "/", "/registro-de-cuenta", "/ingreso",
+         "/registro-de-cuenta", "/ingreso",
         "/credencial-propia/establecer", "/credencial-propia/cambio-obligado",
         "/estado", "/no-encontrado",
     ];
@@ -83,6 +90,37 @@ public sealed class PanelSessionGateTests : IDisposable
             Assert.Equal(HttpStatusCode.Found, response.StatusCode);
             Assert.Equal("/ingreso", response.Headers.Location?.OriginalString);
         }
+    }
+
+    /// <summary>
+    /// Un envío que el marco no puede verificar **no muestra el error del marco**: vuelve a la
+    /// pantalla, con su aviso y su testigo nuevo.
+    /// </summary>
+    [Fact]
+    public async Task AnUnverifiableSubmissionComesBackToTheScreenAndNotToTheFrameworkError()
+    {
+        using var browser = BrowserOf(_publicPiece);
+        await ConfigureAdministratorAsync();
+
+        // Un envío sin testigo es exactamente lo que le pasa a quien tenía la pantalla abierta
+        // cuando la pieza pública se desplegó de nuevo: su testigo ya no se puede verificar.
+        using var content = new FormUrlEncodedContent(
+            new Dictionary<string, string> { ["Input.Email"] = "quien@sea.ar" });
+
+        using var response = await browser.PostAsync("/ingreso", content);
+
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.Contains(
+            StaleFormMiddleware.StaleParameter,
+            response.Headers.Location!.ToString(),
+            StringComparison.Ordinal);
+
+        // Y LO QUE LA PERSONA LEE ES DEL PRODUCTO Y EN CASTELLANO, no el texto del marco.
+        using var back = await browser.GetAsync(response.Headers.Location!.ToString());
+        var html = await back.Content.ReadAsStringAsync();
+
+        Assert.Contains("Esta pantalla estuvo abierta", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("antiforgery", html, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

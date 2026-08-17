@@ -65,19 +65,20 @@ public sealed class WorkWebSurfaceTests : IDisposable
     /// `Tapas`. Se transcribe tal como lo emite el programa del alumno y **no se corrige**: es el
     /// texto con el que se comprueba que la pantalla no lo toca.
     /// </summary>
-    private const string ScenarioE2 = """
-        {
-          "Figuras": [
-            {
-              "Tipo": "Ortoedro",
-              "Largo": 7, "Ancho": 7, "Alto": 21,
-              "Tapas": 2,
-              "Area": 686.00,
-              "Volumen": 343.00,
-            }
-          ],
-        }
-        """;
+    /// <summary>
+    /// Un texto que **no verifica**: el del escenario `E-5`, con su figura 1 de tipo desconocido.
+    /// </summary>
+    /// <remarks>
+    /// **[CORRECCIÓN Y RELEVO DE LA ETAPA `f`, DECLARADOS.]** Esta constante se llamaba `TextThatDoesNotVerify`
+    /// y **no era el texto de `E-2`**: era un objeto inventado con una clave `Figuras` que ninguna
+    /// fuente transcribe. Pasó desapercibido porque hasta la etapa `e` el texto no se interpretaba
+    /// y a la fixture sólo se le pedía llegar entera al almacén.
+    ///
+    /// Se reemplaza por un escenario real, y se elige **el que no verifica** porque es lo que estas
+    /// pruebas necesitan: casi todas siembran o esperan trabajos en `Borrador`, y desde la etapa
+    /// `f` un texto correcto ya no queda en borrador.
+    /// </remarks>
+    private const string TextThatDoesNotVerify = Scenarios.E5;
 
     /// <summary>Forma de un acceso firmado: tres tramos separados por punto, el primero `eyJ`.</summary>
     private static readonly Regex SignedAccessShape =
@@ -137,7 +138,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         Assert.Contains("autocapitalize=\"off\"", formHtml, StringComparison.Ordinal);
 
         using var sent = await PostSubmissionAsync(
-            form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", "un ortoedro", ScenarioE2);
+            form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", "un ortoedro", TextThatDoesNotVerify);
         var sentHtml = Read(await sent.Content.ReadAsStringAsync());
 
         Trace("2 · POST del envío", sent);
@@ -152,10 +153,17 @@ public sealed class WorkWebSurfaceTests : IDisposable
         // Y LA PANTALLA NO SIMULA UNA ENTREGA QUE NO OCURRE, ni acusa al texto de no verificar.
         Assert.DoesNotContain("Ya está entregado", sentHtml, StringComparison.Ordinal);
         Assert.DoesNotContain("El texto no verificó", sentHtml, StringComparison.Ordinal);
-        Assert.Contains("todos los trabajos quedan en borrador", sentHtml, StringComparison.Ordinal);
+
+        // **[relevo de la etapa `f`.]** Hasta la etapa `e` la pantalla decía «todos los trabajos
+        // quedan en borrador», y era cierto porque nadie interpretaba. Ahora el texto **sí se
+        // interpreta**, y lo que la persona lee es POR QUÉ el suyo quedó en borrador, con la figura
+        // y el campo que lo impidieron. La pantalla sigue sin acusar a su programa de algo que el
+        // laboratorio no miró: lo que declara es lo que no pudo interpretar.
+        Assert.Contains("no se pudo interpretar entero", sentHtml, StringComparison.Ordinal);
+        Assert.Contains("Figura 2 · posición 1 · campo «Tipo»", sentHtml, StringComparison.Ordinal);
 
         // EL TEXTO SE LEE DEL ALMACÉN Y NO DE LA RESPUESTA: la pantalla no lo tocó.
-        Assert.Equal(ScenarioE2, await StoredTextAsync(workId));
+        Assert.Equal(TextThatDoesNotVerify, await StoredTextAsync(workId));
         Assert.Equal("Draft", await StoredStatusAsync(workId));
 
         // 3 · Y el listado propio lo trae, con su estado y sus tres acciones de borrador.
@@ -185,7 +193,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
     public async Task TheStudentReeditsADraftAndTheChangeIsVisible()
     {
         var mark = await SignInAsStudentAsync();
-        await LoadWorkThroughTheSurfaceAsync(mark, "Primer intento", ScenarioE2);
+        await LoadWorkThroughTheSurfaceAsync(mark, "Primer intento", TextThatDoesNotVerify);
 
         var workId = await OnlyWorkIdAsync();
         var editRoute = $"/trabajos/{workId}/editar";
@@ -198,10 +206,13 @@ public sealed class WorkWebSurfaceTests : IDisposable
         Assert.Equal(HttpStatusCode.OK, edit.StatusCode);
         Assert.Contains("Volver sobre tu borrador", editHtml, StringComparison.Ordinal);
         Assert.Contains("value=\"Primer intento\"", editHtml, StringComparison.Ordinal);
-        Assert.Contains("\"Tapas\": 2,", editHtml, StringComparison.Ordinal);
+        Assert.Contains("\"Tipo\": \"Piramide\"", editHtml, StringComparison.Ordinal);
 
-        // 2 · Se reenvía con otro nombre y otro texto.
-        const string Corrected = """{ "Figuras": [ { "Tipo": "Cubo", "Lado": 3 } ] }""";
+        // 2 · Se reenvía con otro nombre y otro texto. **[relevo de la etapa `f`.]** El texto
+        // corregido es el del escenario `E-4` —el cubo de `Ejemplo2`—, que verifica sin una sola
+        // observación: es el circuito entero que la persona vive, y hasta la etapa `e` no se podía
+        // ejercer porque ningún texto verificaba.
+        const string Corrected = Scenarios.E4;
 
         using var resent = await PostSubmissionAsync(
             edit, editHtml, editRoute, mark, "Primer intento corregido", "10/08/2026", "ahora un cubo", Corrected);
@@ -210,6 +221,15 @@ public sealed class WorkWebSurfaceTests : IDisposable
         Trace("2 · POST de la reedición", resent);
         Assert.Equal(HttpStatusCode.OK, resent.StatusCode);
         Assert.Contains("Tu trabajo quedó en estado", resentHtml, StringComparison.Ordinal);
+
+        // Y EL DESENLACE CAMBIÓ: el texto corregido verifica, el trabajo queda entregado y **no
+        // hay ninguna observación que mostrar**. Es el criterio negativo de `E-4`, visto por la
+        // persona: la pantalla no dibuja «Observaciones (0)», que afirmaría que se interpretó y no
+        // salió ninguna cuando lo cierto es que no salió ninguna porque estaba todo bien.
+        Assert.Contains("Pendiente", resentHtml, StringComparison.Ordinal);
+        Assert.Contains("El texto se interpretó y quedó entregado", resentHtml, StringComparison.Ordinal);
+        Assert.DoesNotContain("Observaciones (", resentHtml, StringComparison.Ordinal);
+        Assert.Equal("Submitted", await StoredStatusAsync(workId));
 
         // NO SE CONSTITUYÓ UN TRABAJO NUEVO: el identificador es el mismo y sigue habiendo uno solo.
         Assert.Equal(1, await CountWorksAsync());
@@ -242,8 +262,8 @@ public sealed class WorkWebSurfaceTests : IDisposable
         var mark = await SignInAsStudentAsync();
         var studentId = await IdOfAsync(StudentEmail);
 
-        var draftId = await SeedWorkAsync(studentId, "Prueba 2", ScenarioE2, WorkStatus.Draft);
-        var submittedId = await SeedWorkAsync(studentId, "Cubo y ortoedro", ScenarioE2, WorkStatus.Submitted);
+        var draftId = await SeedWorkAsync(studentId, "Prueba 2", TextThatDoesNotVerify, WorkStatus.Draft);
+        var submittedId = await SeedWorkAsync(studentId, "Cubo y ortoedro", TextThatDoesNotVerify, WorkStatus.Submitted);
 
         // 1 · LA PANTALLA ACOTA: sobre el borrador ofrece las tres acciones; sobre el entregado,
         //     sólo abrir. Lo que el estado no admite NO SE DIBUJA, ni siquiera inhabilitado.
@@ -317,7 +337,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         var mark = await SignInAsStudentAsync();
 
         var otherId = await EnrolOtherStudentAsync();
-        var foreignWorkId = await SeedWorkAsync(otherId, "Segundo intento", ScenarioE2, WorkStatus.Draft);
+        var foreignWorkId = await SeedWorkAsync(otherId, "Segundo intento", TextThatDoesNotVerify, WorkStatus.Draft);
 
         // EL TRABAJO AJENO EXISTE DE VERDAD EN EL ALMACÉN: esta prueba no pasa por ausencia.
         Assert.Equal("Draft", await StoredStatusAsync(foreignWorkId));
@@ -385,9 +405,9 @@ public sealed class WorkWebSurfaceTests : IDisposable
         var otherId = await EnrolOtherStudentAsync();
 
         // DOS BORRADORES DE DOS ALUMNOS DISTINTOS, Y UN ENTREGADO.
-        var draftOfStudent = await SeedWorkAsync(studentId, "Prueba 2", ScenarioE2, WorkStatus.Draft);
-        var draftOfOther = await SeedWorkAsync(otherId, "Borrador de Beto", ScenarioE2, WorkStatus.Draft);
-        var submitted = await SeedWorkAsync(studentId, "Cubo y ortoedro", ScenarioE2, WorkStatus.Submitted);
+        var draftOfStudent = await SeedWorkAsync(studentId, "Prueba 2", TextThatDoesNotVerify, WorkStatus.Draft);
+        var draftOfOther = await SeedWorkAsync(otherId, "Borrador de Beto", TextThatDoesNotVerify, WorkStatus.Draft);
+        var submitted = await SeedWorkAsync(studentId, "Cubo y ortoedro", TextThatDoesNotVerify, WorkStatus.Submitted);
 
         // ESTÁN DE VERDAD, leído del almacén: la prueba no pasa por ausencia.
         Assert.Equal("Draft", await StoredStatusAsync(draftOfStudent));
@@ -443,7 +463,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
     {
         var mark = await SignInAsStudentAsync();
         var studentId = await IdOfAsync(StudentEmail);
-        var draftId = await SeedWorkAsync(studentId, "Prueba 2", ScenarioE2, WorkStatus.Draft);
+        var draftId = await SeedWorkAsync(studentId, "Prueba 2", TextThatDoesNotVerify, WorkStatus.Draft);
 
         var token = SessionTokenOf(mark);
         _output.WriteLine($"testigo guardado del lado del servidor: {token.Length} caracteres");
@@ -467,7 +487,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
             Record("envío de trabajo", form, formHtml);
 
             using var sent = await PostSubmissionAsync(
-                form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", null, ScenarioE2);
+                form, formHtml, NewWorkRoute, mark, "Entrega 1", "09/08/2026", null, TextThatDoesNotVerify);
             Record("resultado del envío", sent, Read(await sent.Content.ReadAsStringAsync()));
         }
 
@@ -686,6 +706,102 @@ public sealed class WorkWebSurfaceTests : IDisposable
 
     // ---- Los envíos de formulario ----
 
+    /// <summary>
+    /// Pide una previsualización desde la superficie: mismo formulario, **otra acción**.
+    /// </summary>
+    /// <summary>
+    /// La vista de un trabajo entregado trae **la escena, el árbol y los dos controles**, con las
+    /// piezas que el producto guardó al enviar.
+    /// </summary>
+    [Fact]
+    public async Task TheWorkViewBringsTheSceneTheTreeAndTheTwoMotionControls()
+    {
+        var mark = await SignInAsStudentAsync();
+
+        // Se entrega un trabajo que SÍ verifica: es el que tiene piezas guardadas.
+        using var form = await GetAsync(NewWorkRoute, mark);
+        var formHtml = Read(await form.Content.ReadAsStringAsync());
+        using var sent = await PostSubmissionAsync(
+            form, formHtml, NewWorkRoute, mark, "El semilla", "09/08/2026", null, Scenarios.E1);
+        Assert.Equal(HttpStatusCode.OK, sent.StatusCode);
+
+        var workId = await OnlyWorkIdAsync();
+        Assert.Equal("Submitted", await StoredStatusAsync(workId));
+
+        using var view = await GetAsync($"/trabajos/{workId}", mark);
+        var html = Read(await view.Content.ReadAsStringAsync());
+
+        Trace("1 · GET de la vista del trabajo", view);
+        Assert.Equal(HttpStatusCode.OK, view.StatusCode);
+
+        // LA ESCENA, con las piezas GUARDADAS bajando dentro del marcado.
+        Assert.Contains("data-gf-viewer-pieces", html, StringComparison.Ordinal);
+        Assert.Contains("Cylinder", html, StringComparison.Ordinal);
+        Assert.Contains("js/geometriafactory-visor.js", html, StringComparison.Ordinal);
+
+        // EL ÁRBOL, con el índice de cada pieza a la vista: es la identidad que sincroniza.
+        Assert.Contains("data-gf-piece-node=\"0\"", html, StringComparison.Ordinal);
+        Assert.Contains("data-gf-piece-node=\"2\"", html, StringComparison.Ordinal);
+        Assert.Contains("Ortoedro", html, StringComparison.Ordinal);
+
+        // LOS DOS MOVIMIENTOS, GOBERNADOS POR SEPARADO: dos casillas y no una.
+        Assert.Contains("data-gf-motion=\"cameraOrbit\"", html, StringComparison.Ordinal);
+        Assert.Contains("data-gf-motion=\"pieceSpin\"", html, StringComparison.Ordinal);
+
+        // Y SE DECLARA EN POSITIVO que se dibujaron todas, en lugar de callar.
+        Assert.Contains("Se dibujaron las 3 figuras", html, StringComparison.Ordinal);
+
+        // EL ÁRBOL LLEVA LA FORMA DE LA MAQUETA APROBADA: roles de árbol y estado de selección en
+        // el `treeitem`, que es el único portador de rol y el que recibe el foco.
+        Assert.Contains("role=\"tree\"", html, StringComparison.Ordinal);
+        Assert.Contains("role=\"treeitem\"", html, StringComparison.Ordinal);
+        Assert.Contains("aria-selected=\"false\"", html, StringComparison.Ordinal);
+
+        // Y LA SINCRONIZACIÓN SE PROMETE EN LAS DOS DIRECCIONES, porque ahora ocurre en las dos.
+        Assert.Contains("o elegila en la escena", html, StringComparison.Ordinal);
+
+        // El aviso de movimiento reducido viaja SERVIDO Y OCULTO: lo enciende el guion, que es
+        // quien consulta la preferencia del sistema.
+        Assert.Contains("data-gf-motion-note", html, StringComparison.Ordinal);
+        Assert.Contains("tu sistema pide movimiento reducido", html, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Un trabajo que nunca verificó **no simula una escena**: dice que no hay nada que dibujar.
+    /// </summary>
+    [Fact]
+    public async Task AWorkThatNeverVerifiedShowsNoSceneAndSaysWhy()
+    {
+        var mark = await SignInAsStudentAsync();
+        await LoadWorkThroughTheSurfaceAsync(mark, "Con una pirámide", TextThatDoesNotVerify);
+
+        var workId = await OnlyWorkIdAsync();
+
+        using var view = await GetAsync($"/trabajos/{workId}", mark);
+        var html = Read(await view.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, view.StatusCode);
+
+        // El escenario `E-5` reconstruye la primera figura, así que SÍ hay una pieza y sí hay
+        // escena: lo que no hay es la segunda, y eso se dice con su posición.
+        Assert.Contains("Figura 2 · posición 1", html, StringComparison.Ordinal);
+        Assert.DoesNotContain("Se dibujaron las", html, StringComparison.Ordinal);
+    }
+
+    private Task<HttpResponseMessage> PostPreviewAsync(
+        HttpResponseMessage page,
+        string html,
+        string mark,
+        string originalJson) =>
+        PostAsync(page, html, mark, NewWorkRoute, "work-submission", new Dictionary<string, string>
+        {
+            ["Input.Name"] = string.Empty,
+            ["Input.DeclaredDate"] = string.Empty,
+            ["Input.Description"] = string.Empty,
+            ["Input.OriginalJson"] = originalJson,
+            ["Input.Action"] = "preview",
+        });
+
     private Task<HttpResponseMessage> PostSubmissionAsync(
         HttpResponseMessage page,
         string html,
@@ -702,6 +818,68 @@ public sealed class WorkWebSurfaceTests : IDisposable
             ["Input.Description"] = description ?? string.Empty,
             ["Input.OriginalJson"] = originalJson,
         });
+
+    // ---- LA PREVISUALIZACIÓN, QUE ES EL CIRCUITO ENTERO DE `ADR-08006` --------------------------
+
+    /// <summary>
+    /// El alumno pega el texto, previsualiza, y **las piezas bajan dentro del marcado** para que el
+    /// visor las dibuje. Sin guardar nada y sin que el navegador hable con el servicio de datos.
+    /// </summary>
+    [Fact]
+    public async Task PreviewingDrawsWithoutSavingAndWithoutTheBrowserCallingTheDataService()
+    {
+        var mark = await SignInAsStudentAsync();
+
+        using var form = await GetAsync(NewWorkRoute, mark);
+        var formHtml = Read(await form.Content.ReadAsStringAsync());
+
+        using var previewed = await PostPreviewAsync(form, formHtml, mark, Scenarios.E1);
+        var html = Read(await previewed.Content.ReadAsStringAsync());
+
+        Trace("1 · POST de la previsualización", previewed);
+        Assert.Equal(HttpStatusCode.OK, previewed.StatusCode);
+
+        // LAS PIEZAS ESTÁN EN EL MARCADO, que es lo que permite que el guion no salga a la red.
+        Assert.Contains("data-gf-viewer-pieces", html, StringComparison.Ordinal);
+        Assert.Contains("\"position\":0", html, StringComparison.Ordinal);
+        Assert.Contains("Cylinder", html, StringComparison.Ordinal);
+        Assert.Contains("3 de 3", html, StringComparison.Ordinal);
+
+        // Y EL PAQUETE DEL VISOR SE SIRVE **EN ESTA SUPERFICIE**, que es la que dibuja.
+        Assert.Contains("js/geometriafactory-visor.js", html, StringComparison.Ordinal);
+
+        // NO SE GUARDÓ NADA. Es la propiedad que `A-18` tiene que sostener, vista desde la
+        // pantalla: previsualizar no es una forma encubierta de guardar.
+        Assert.Equal(0, await CountWorksAsync());
+
+        // Y NO SE SIMULA UNA ENTREGA: la pantalla no habla de estados al previsualizar.
+        Assert.DoesNotContain("Tu trabajo quedó en estado", html, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Un texto con una figura que no se puede interpretar previsualiza igual: dibuja lo que se
+    /// pudo y **enumera la que falta con su posición**.
+    /// </summary>
+    [Fact]
+    public async Task PreviewingATextWithABadFigureListsTheOneThatCouldNotBeDrawn()
+    {
+        var mark = await SignInAsStudentAsync();
+
+        using var form = await GetAsync(NewWorkRoute, mark);
+        var formHtml = Read(await form.Content.ReadAsStringAsync());
+
+        using var previewed = await PostPreviewAsync(form, formHtml, mark, Scenarios.E5);
+        var html = Read(await previewed.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, previewed.StatusCode);
+
+        // DE DOS FIGURAS SE INTERPRETÓ UNA, y la que falta se nombra con su posición: que
+        // desaparezca sin decir cuál es el fallo silencioso que este producto elimina.
+        Assert.Contains("1 de 2", html, StringComparison.Ordinal);
+        Assert.Contains("Figura 2 · posición 1", html, StringComparison.Ordinal);
+
+        Assert.Equal(0, await CountWorksAsync());
+    }
 
     private Task<HttpResponseMessage> PostDeletionAsync(
         HttpResponseMessage page, string html, Guid workId, string mark) =>

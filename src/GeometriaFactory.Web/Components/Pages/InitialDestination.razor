@@ -15,27 +15,33 @@
    sea `/` es lo único que esta etapa PROPONE, y lo propone porque `/` es la única dirección que
    una persona escribe sin que nadie se la dé.
 
-   POR QUÉ NO REDIRIGE TODAVÍA. El guardián necesita saber si hay administrador constituido, y
-   eso es una consulta al servicio de datos. La etapa `b` no implementa comportamiento, así que
-   deja acá el lugar del guardián, con sus dos destinos alcanzables a mano. Redirigir a uno de
-   los dos por defecto sería inventar la respuesta que el guardián todavía no puede dar.
+   EL GUARDIÁN YA RESUELVE LAS DOS, y desde la etapa `g` **nadie ve esta página en el camino
+   normal**: sin administrador el desvío lleva a configurarlo (`NAV-01`) y con administrador lleva
+   al ingreso (`NAV-03`). Las dos las decide `ProvisioningGateMiddleware` antes de que acá se
+   dibuje nada.
 
-   QUÉ SE MUESTRA MIENTRAS TANTO — PROPUESTA DE LA ETAPA `b`. Ninguna fuente declara texto para
-   esta dirección, porque en el producto terminado nadie la ve: el guardián resuelve y redirige
-   antes de que haya nada que mirar. Lo que la raíz tiene que hacer hoy es no dejar a nadie
-   parado: se ofrecen las dos puertas, y se las nombra con el TÍTULO DE LA SUPERFICIE A LA QUE
-   LLEVAN —«Configurar el laboratorio» y «Ingresar al laboratorio», los dos `<h1>` de la maqueta
-   aprobada—, con la condición que la línea de base le asigna a cada una escrita en castellano
-   llano. Ni `NAV-01` ni `NAV-03` aparecen en pantalla: viven en este comentario. *@
+   ENTONCES, ¿CUÁNDO SE VE? Sólo cuando el guardián **no puede decidir**: con el servicio de datos
+   caído no hay forma de saber si hay administrador, y `Web ADR-10003` §6 declara que en ese caso
+   **no se desvía nada** —no saber no es lo mismo que saber que no—. Ahí esta página es lo único
+   que queda, y lo que tiene que hacer es no dejar a nadie parado: ofrece las dos puertas, nombradas
+   con el título de la superficie a la que llevan, y dice por qué está preguntando en lugar de
+   resolver.
+
+   YA NO LLEVA EL AVISO DE ETAPA EN CONSTRUCCIÓN: era cierto en la etapa `b` y dejó de serlo. Un
+   aviso que dice que nada se guarda, sobre un producto que guarda, es peor que no tener aviso. *@
 
 <PageTitle>Fábrica de Geometría</PageTitle>
-
-<StagePlaceholder />
 
 <h1 class="gf-mt-5">Fábrica de Geometría</h1>
 <p class="gf-subtitle">Laboratorio de geometría de Programación 2.</p>
 
-<ul class="gf-flat-list gf-mt-5">
+@* SE DICE POR QUÉ HAY QUE ELEGIR, en lugar de presentar dos puertas sin explicación: quien llega
+   acá es porque el laboratorio no pudo averiguar en qué estado está. *@
+<p class="gf-caption gf-mt-4">
+    No pudimos averiguar si el laboratorio ya está configurado. Elegí por dónde entrar:
+</p>
+
+<ul class="gf-flat-list gf-mt-3">
     <li><a href="/aprovisionamiento-inicial">Configurar el laboratorio</a>
         <span class="gf-caption"> — la primera vez, para crear la cuenta del docente.</span></li>
     <li><a href="/ingreso">Ingresar al laboratorio</a>

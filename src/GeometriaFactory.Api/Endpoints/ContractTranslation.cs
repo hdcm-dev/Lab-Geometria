@@ -1,5 +1,8 @@
 using GeometriaFactory.Application.Accounts;
+using GeometriaFactory.Application.Works;
 using GeometriaFactory.Contracts.Errors;
+using GeometriaFactory.Contracts.Works;
+using GeometriaFactory.Domain.Entities;
 using GeometriaFactory.Domain.Values;
 
 namespace GeometriaFactory.Api.Endpoints;
@@ -265,5 +268,79 @@ public static class ContractTranslation
         return Results.Json(
             new ErrorResponse(translation.Code, translation.Message, details, occurredAt),
             statusCode: translation.StatusCode);
+    }
+    /// <summary>
+    /// Traduce las observaciones del dominio a las del contrato, **sin redactar ninguna frase**.
+    /// </summary>
+    /// <remarks>
+    /// ES UNA TRANSPOSICIÓN Y NO UNA REDACCIÓN: cambia el tipo y no el contenido. La especie viaja
+    /// por su nombre, la posición y el campo van tal como el dominio los emitió, y el campo
+    /// **conserva la clave del texto del alumno** —`Tipo`, `Largo`, `Area`— porque la persona la va
+    /// a buscar en su propio programa.
+    ///
+    /// EL ORDEN ES EL DE EMISIÓN, que es el del recorrido del conjunto raíz: la observación de la
+    /// figura 0 antes que la de la 1. Reordenar por especie pondría los errores primero y las
+    /// advertencias después, que se lee bien y **deja de decir dónde estaba cada cosa**.
+    /// </remarks>
+    public static IReadOnlyList<WorkObservation> Observations(WorkOutcomeSnapshot outcome)
+    {
+        ArgumentNullException.ThrowIfNull(outcome);
+
+        return outcome.Observations is null ? [] : Observations(outcome.Observations);
+    }
+    /// <summary>
+    /// Traduce las piezas reconstruidas del dominio a las del contrato.
+    /// </summary>
+    /// <remarks>
+    /// TRANSPOSICIÓN Y NO REDACCIÓN, igual que las observaciones: cambia el tipo y no el contenido.
+    /// Los conjuntos cerrados —el tipo de figura y el papel del componente— viajan **por su nombre**
+    /// y nunca por su posición.
+    ///
+    /// EL ORDEN ES EL DEL CONJUNTO RAÍZ, y los componentes el de su pieza. Reordenar por tipo se
+    /// leería mejor y **rompería la única identidad que la pieza tiene**, que es su posición.
+    /// </remarks>
+    public static IReadOnlyList<WorkPiece> Pieces(IEnumerable<Piece> pieces)
+    {
+        ArgumentNullException.ThrowIfNull(pieces);
+
+        return
+        [
+            .. pieces.Select(piece => new WorkPiece(
+                piece.Position,
+                piece.Type.ToString(),
+                piece.DeclaredArea,
+                piece.DerivedArea,
+                piece.DeclaredVolume,
+                piece.DerivedVolume,
+                [
+                    .. piece.Components.Select(component => new WorkPieceComponent(
+                        component.Position,
+                        component.Role.ToString(),
+                        component.Type.ToString(),
+                        component.DeclaredLength,
+                        component.DeclaredWidth,
+                        component.DeclaredRadius,
+                        component.DeclaredArea))
+                ],
+                piece.DeclaredLength,
+                piece.DeclaredWidth,
+                piece.DeclaredRadius))
+        ];
+    }
+
+    /// <summary>Traduce las observaciones de una interpretación que **no se guardó**.</summary>
+    public static IReadOnlyList<WorkObservation> Observations(IEnumerable<Observation> observations)
+    {
+        ArgumentNullException.ThrowIfNull(observations);
+
+        return
+        [
+            .. observations.Select(o => new WorkObservation(
+                o.Kind.ToString(),
+                o.PiecePosition,
+                o.Field,
+                o.DeclaredValue,
+                o.DerivedValue))
+        ];
     }
 }

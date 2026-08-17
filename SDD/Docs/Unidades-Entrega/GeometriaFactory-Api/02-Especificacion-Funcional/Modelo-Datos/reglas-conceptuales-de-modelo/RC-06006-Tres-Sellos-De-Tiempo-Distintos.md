@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.4 · GeometriaFactory-Infrastructure, «Ampliación del 2026-08-09: sellos de tiempo del trabajo» **[DECISIÓN del Product Owner]**, y «El JSON del alumno no lleva fechas y no se le agrega ninguna» **[DECISIÓN 2026-08-09]**; §17.1.P.11 · GeometriaFactory-Application punto 3 (el reloj es un puerto); `Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Especificacion-Funcional.md` §9, que registra el cierre de este punto
+**Trazabilidad upstream:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §17.1.P.4 · GeometriaFactory-Infrastructure, «Ampliación del 2026-08-09: sellos de tiempo del trabajo» **[DECISIÓN del Product Owner]**, y «El JSON del alumno no lleva fechas y no se le agrega ninguna» **[DECISIÓN 2026-08-09]**; §17.1.P.11 · GeometriaFactory-Application punto 3 (el reloj es un puerto); `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md` §9, que registra el cierre de este punto
 **Trazabilidad downstream:** `05-Arquitectura-Tecnica` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---

@@ -1,0 +1,246 @@
+{
+  "registro": "Reconexion de etiquetas y rutas de texto al arbol de unidades de entrega",
+  "migracion": "8.6 -> 8.11",
+  "fase": "M5, reparacion previa al cierre de procedencia",
+  "fecha": "2026-08-16",
+  "metodo": "resolucion por destino, no sustitucion de patron (Migracion-Rules.md 3.4 §4.3.1)",
+  "criterio": "solo se reescribio la referencia cuyo destino resuelve en el arbol vivo; las que no, quedaron intactas y declaradas",
+  "reconectadas": 41,
+  "documentos": 27,
+  "sin_reconectar": [
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md",
+      "cita": "Proyectos/GeometriaFactory-Contracts/.../CU-00006-Contrato-De-Respuesta-De-Error.md",
+      "motivo": "el documento citado fue absorbido por la consolidacion de casos de uso; no existe bajo ningun nombre en el arbol vigente"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md",
+      "cita": "Proyectos/GeometriaFactory-Infrastructure/.../CU-00010-Preparar-El-Almacen-Al-Arrancar.md",
+      "motivo": "idem"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md",
+      "cita": "Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+      "motivo": "idem"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md",
+      "cita": "Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+      "motivo": "idem"
+    }
+  ],
+  "fuera_de_alcance": [
+    {
+      "documento": "SDD/Docs/Handoff-Checkout.md",
+      "ocurrencias": 11,
+      "motivo": "documento declarado superado por el hallazgo M-08 de la migracion 6.0 -> 8.6; no se reconecta por decision registrada"
+    }
+  ],
+  "entradas": [
+    {
+      "documento": "SDD/Docs/00-Contexto/Compatibilidad-Plataformas.md",
+      "origen": "../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/11-Documentacion/README.md",
+      "origen": "Proyectos/GeometriaFactory-Api/11-Documentacion/Guia-Contenedor.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/11-Documentacion/Guia-Contenedor.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/11-Documentacion/README.md",
+      "origen": "Proyectos/GeometriaFactory-Visor/11-Documentacion/Guia-Extension.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Web/11-Documentacion/Guia-Extension.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Adrs/ADR-14001-Archivado-Central-De-La-Migracion.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Norma-De-Nomenclatura.md",
+      "origen": "../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Norma-De-Nomenclatura.md",
+      "origen": "../Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Norma-De-Nomenclatura.md",
+      "origen": "../Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Norma-De-Nomenclatura.md",
+      "origen": "../Proyectos/GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Modelo-Datos-Logico.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Plan-Etapa-A.md",
+      "origen": "../Proyectos/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Plan-Etapa-A.md",
+      "origen": "../Proyectos/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Plan-Etapa-A.md",
+      "origen": "../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Entornos-Deploy.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Plan-Etapa-A.md",
+      "origen": "../Proyectos/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md",
+      "destino": "../Unidades-Entrega/GeometriaFactory-Web/09-Devops/Guia-Publicacion-Front-Ftp.md"
+    },
+    {
+      "documento": "SDD/Docs/Producto/Vista-Producto.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Reglas-De-Negocio/",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/"
+    },
+    {
+      "documento": "SDD/Docs/README.md",
+      "origen": "Proyectos/GeometriaFactory-Api",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api"
+    },
+    {
+      "documento": "SDD/Docs/README.md",
+      "origen": "Proyectos/GeometriaFactory-Api/",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/"
+    },
+    {
+      "documento": "SDD/Docs/README.md",
+      "origen": "Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md",
+      "origen": "Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Superficie-HTTP.md",
+      "origen": "Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Superficie-HTTP.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Superficie-HTTP.md",
+      "origen": "Proyectos/GeometriaFactory-Infrastructure/03-UX-UI-DX/DX-Error-Messages.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/DX-Error-Messages.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Glosario-Funcional.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Glosario-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Modelo-Datos/Modelo-Conceptual.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06002-Identidad-Posicional-De-La-Pieza.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06004-La-Familia-No-Se-Persiste.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Glosario-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Glosario-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06006-Tres-Sellos-De-Tiempo-Distintos.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/README.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/README.md",
+      "origen": "Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md",
+      "origen": "Proyectos/GeometriaFactory-Contracts/.../CU-00006-Contrato-De-Respuesta-De-Error.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/03-UX-UI-DX/DX-Error-Messages.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00010-Componer-La-Aplicacion-Y-Conectar-Los-Puertos-Con-Sus-Adaptadores.md",
+      "origen": "Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06001-Interpretar-El-Texto-Original-Y-Reconstruir-Las-Piezas.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06002-Verificar-Los-Valores-Declarados-Contra-Los-Derivados.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06009-Proveer-El-Sello-Del-Reloj-Del-Sistema.md",
+      "origen": "Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Especificacion-Funcional.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX/Contrato-Datos-Maqueta.md",
+      "origen": "Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md",
+      "destino": "Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md"
+    }
+  ]
+}

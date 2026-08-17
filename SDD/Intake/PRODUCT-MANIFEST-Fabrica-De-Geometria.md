@@ -17,9 +17,9 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 | Unidad de entrega principal | — | `GeometriaFactory-Api` |
 | Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **2.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
 | Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
-| Versión | — | 2.1 |
+| Versión | — | 2.2 |
 | Fecha | — | 2026-08-16 |
-| Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migración 6.0 → 8.6 **cerrada** |
+| Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6 y 8.6 → 8.11 **cerradas** |
 
 `Slug-Producto` es el único campo derivado: se obtiene de `Nombre-Producto` con el algoritmo de `Master-Prompt.md` §3.2 (`Fábrica de Geometría` → `Fabrica-De-Geometria`). `Raiz-Codigo` y `Artefacto-Agrupacion` se leen declarados del intake (cabecera y perfil de convención de §13), no se derivan.
 
@@ -27,16 +27,19 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 
 ### §1.1 Procedencia del framework
 
-**Reescrita por la fase M5 de la migración, el 2026-08-16, con la cadena completa.** Hasta esta
-emisión declaraba el conjunto **6.0**: era lo que seguía siendo cierto mientras el intake y este
-mismo manifiesto no estuvieran migrados. Con **M2** y **M3** cerradas, la afirmación pasa a ser
-verificable y se escribe.
+**Reescrita por la fase M5 de la migración 8.6 → 8.11, el 2026-08-16.** La emisión anterior declaraba
+el conjunto **8.6**, cerrado por la M5 de la migración 6.0 → 8.6 el mismo día. El salto a **8.11** se
+verificó **artefacto por artefacto** —no por el número de conjunto—: las **catorce** reglas de
+categoría y las **cuatro** transversales aplicadas **no cambiaron de versión**, de modo que ningún
+documento del árbol requirió migración. La lista de qué cambió en el framework y por qué cada cosa no
+toca a este destino está en `SDD/Docs/Audit/Plan-Migracion-8.6-a-8.11.md` §2, §3 y §5.
 
 | Artefacto del framework | Versión |
 |---|---|
-| Framework SDD (conjunto) | **8.6** |
-| `Master-Prompt` | 7.4 |
-| `Master-Prompt-Migracion` | 2.0 |
+| Framework SDD (conjunto) | **8.11** |
+| `Master-Prompt` | 7.7 |
+| `Master-Prompt-Migracion` | 2.3 |
+| `Master-Prompt-Reanudacion` | 1.1 |
 | `Root-Rules` | 5.2 |
 | `Rules-Contexto` | 4.1 |
 | `Rules-Necesidades-Negocio` | 4.0 |
@@ -49,18 +52,31 @@ verificable y se escribe.
 | `Rules-Devops` | 4.0 |
 | `Rules-Examples` | 6.0 |
 | `Rules-Documentacion` | 5.0 |
-| Reglas transversales aplicadas | `Intake-Rules` 4.0, `Vocabulario-Rules` 3.0, `Maqueta-Rules` 4.0 y `Deriva-Rules` 5.0 (Fase B2 confirmada para la unidad de entrega `GeometriaFactory-Web`). **`Migracion-Rules` 3.2 sí aplica**: este árbol atravesó la migración normativa 6.0 → 8.6, y su informe es `SDD/Docs/Audit/Informe-Migracion-6.0-a-8.6.md` |
-| `PRODUCT-INTAKE-template` | 3.0 |
+| Reglas transversales aplicadas | `Intake-Rules` 4.0, `Vocabulario-Rules` 3.0, `Maqueta-Rules` 4.0 y `Deriva-Rules` 5.0 (Fase B2 confirmada para la unidad de entrega `GeometriaFactory-Web`). **`Migracion-Rules` 3.4 sí aplica**: este árbol atravesó **dos** migraciones normativas, 6.0 → 8.6 y 8.6 → 8.11, con sus informes en `SDD/Docs/Audit/Informe-Migracion-6.0-a-8.6.md` y `SDD/Docs/Audit/Informe-Migracion-8.6-a-8.11.md` |
+| `PRODUCT-INTAKE-template` | 3.1 |
 | `PRODUCT-MANIFEST-template` | 5.0 |
 
 `Rules-Prompts-AI` no lleva fila: la categoría 04 queda omitida por gating (`usa_llm` == false en las **dos unidades de entrega**, ver §5).
 
-**Qué cambió respecto de la procedencia anterior, y qué no.** Las **catorce** reglas de categoría
-subieron de versión por la intervención que llevó la unidad de entrega a ser nivel del layout; las
-**cuatro** transversales también. Lo que entra nuevo son dos filas: `Master-Prompt-Migracion`, que en
-la 6.0 no existía, y `Migracion-Rules`, que **pasa de «no aplica» a aplicar**, porque este destino ya
-no es un árbol generado desde cero sino uno migrado, y esa es una propiedad que su procedencia tiene
-que declarar.
+**Qué cambió respecto de la procedencia anterior, y qué no.** **Ninguna regla cambió de versión**:
+las catorce de categoría y las cuatro transversales aplicadas están en la misma versión que declaraba
+la procedencia 8.6. Lo que cambia son **cinco filas**, todas de instrumento de proceso y ninguna de
+forma de artefacto: `Master-Prompt` 7.4 → 7.7, `Master-Prompt-Migracion` 2.0 → 2.3, `Migracion-Rules`
+3.2 → 3.4, `PRODUCT-INTAKE-template` 3.0 → 3.1, y **una fila nueva**, `Master-Prompt-Reanudacion`
+1.1, el tercer orquestador del método, que en la 8.6 no existía.
+
+**La plantilla de intake es el único cambio con superficie sobre un artefacto de este destino, y el
+destino ya cumplía.** La 3.1 corrige una contradicción de la 3.0 —§17 le pedía `tipo_unidad_entrega`
+(D8) y `redistribuible` al proyecto de código— **que se descubrió migrando este mismo destino**, en
+la fase M2 de la migración anterior: el intake emitió la contradicción como hallazgo aguas arriba en
+lugar de copiarla, y por eso su §17.1 y §17.2 ya declaran esos dos campos en la unidad de entrega y
+no en el proyecto de código. La verificación está en `Plan-Migracion-8.6-a-8.11.md` §5.
+
+**Por qué esta procedencia se puede escribir.** No se actualizó por el número de conjunto: se
+verificó artefacto por artefacto que el salto no obliga a reemitir ningún documento, y la
+verificación quedó escrita antes de tocar esta tabla. Es la condición que `Master-Prompt-Reanudacion.md`
+§4 exige para actualizar la procedencia sin migrar documentos, y que la fase M5 existe para hacer
+cumplir.
 
 
 #### Decisiones de reconciliación
@@ -233,6 +249,7 @@ correspondiente.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 2.2 | 2026-08-16 | **Cierre de procedencia por la fase M5 de la migración 8.6 → 8.11** (`Master-Prompt-Migracion.md` **2.3** §9), invocada desde la salida **B** del orquestador de reanudación con la decisión del Product Owner del 2026-08-16. **§1.1 se reescribe**: el conjunto pasa de **8.6 a 8.11**. **Ninguna de las catorce reglas de categoría ni de las cuatro transversales cambió de versión**, de modo que **ningún documento del árbol requirió migración**: las 450 filas del plan se clasificaron `no tocar` y las 450 quedaron resueltas. Cambian cinco filas de instrumento de proceso —`Master-Prompt` 7.4 → 7.7, `Master-Prompt-Migracion` 2.0 → 2.3, `Migracion-Rules` 3.2 → 3.4, `PRODUCT-INTAKE-template` 3.0 → 3.1— y entra **una fila nueva**, `Master-Prompt-Reanudacion` 1.1, que en la 8.6 no existía. **La verificación es artefacto por artefacto y no por número de conjunto**, escrita antes de tocar la tabla en `SDD/Docs/Audit/Plan-Migracion-8.6-a-8.11.md` §2, §3 y §5; el único cambio con superficie sobre un artefacto —la plantilla de intake 3.1— encuentra al intake **ya conforme**, porque el defecto que corrige se descubrió migrando este mismo destino. **M2 sin cambios, M3 sin corresponder, M4 sin trabajo.** El intake **no se tocó** y sigue en **2.0**, de modo que ninguna tabla de §2 a §5 de este manifiesto cambia: M5 sólo toca la procedencia. Sin archivado previo, por la misma razón y con el mismo criterio que la fila 2.1. Sube minor. | Orquestador de migración normativa SDD |
 | 2.1 | 2026-08-16 | **Cierre de procedencia por la fase M5 de la migración** (`Master-Prompt-Migracion.md` 2.0 §9), después de que el Product Owner confirmara la re-derivación de M3. La verificación de M5 encontró **la cadena completa**: intake **2.0** sobre plantilla 3.0, manifiesto **2.0** sobre plantilla 5.0, `SDD/Docs/` migrado, **0 filas del plan sin resolver**, **0 secciones pendientes sin respuesta del humano**, **0 enlaces rotos** y **1145 de 1145 referencias ancladas**. **Con dos conformidades de forma abiertas y declaradas**, que el informe de M6 levanta como P1 y que **no son documentos sin migrar**: dos documentos de referencia cruzada no se reconectaron en M4, y las familias de identificadores del propio intake conservan su ancho de origen. **§1.1 se reescribe**: el conjunto pasa de **6.0 a 8.6**, con las catorce reglas de categoría y las cuatro transversales en su versión vigente, y **dos filas nuevas** —`Master-Prompt-Migracion` 2.0, que en la 6.0 no existía, y `Migracion-Rules` 3.2, que **pasa de «no aplica» a aplicar**, porque este destino ya no es un árbol generado desde cero sino uno migrado—. El estado pasa a **Aprobado**. Ninguna tabla de §2 a §5 cambia: M5 sólo toca la procedencia. Sube minor. | Orquestador SDD |
 | 2.0 | 2026-08-16 | **Re-derivación por la fase M3 de la migración 6.0 → 8.6** (`Master-Prompt-Migracion.md` 2.0 §7), desde el intake **2.0** y sobre la plantilla **5.0**. El manifiesto pasa de una tabla de siete proyectos de código a **los dos ejes**: **§2.A** las dos unidades de entrega con su D8, su integración en runtime y su estado; **§2.B** los siete proyectos de código **agrupados por solución de código** —seis en `GeometriaFactory.sln` y `GeometriaFactory-Visor` sin solución, como proyecto Node independiente—, **sin valor D8**; y **§2.C** la matriz, que declara a `GeometriaFactory-Contracts` como **único proyecto compartido**. **§3** declara **dos grafos** en lugar de uno: el de integración, que ordena la generación, y el de compilación **por solución**, que ordena el build; la arista `Web → Api` vive en el primero y no en el segundo. **§4** valida sobre las unidades de entrega y suma la validación de que todo proyecto de código componga al menos una. **§5** pasa de **siete filas de flags a dos**, porque un proyecto de código no emite categorías y no tiene gating: con eso `tiene_persistencia` de `Api` pasa a **true** —evaluado por proyecto de código habría quedado en false y se habría omitido su modelo de datos—, `tiene_extensibilidad` viaja de `Visor` a `Web`, y `requiere_maqueta` deja de ser una excepción declarada y pasa a ser la derivación. **El bloque de procedencia de §1.1 no se toca y sigue declarando 6.0**: es trabajo de M5 y sólo procede con la cadena completa. **Estado `Propuesto`**: espera confirmación explícita del Product Owner. Sube **major**. | Orquestador SDD |
 | 1.4 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../Docs/Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`—. Acá son **3 ocurrencias**, las de la columna «qué expone» de `GeometriaFactory-Application` en §2, **derivadas del intake §13**, que se renombró en la misma edición: si la derivación no se moviera con su fuente quedaría reportando algo que §13 ya no dice. **Ningún flag, ningún tipo, ninguna arista del grafo y ningún orden topológico cambian.** **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-04001-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. | Orquestador SDD |

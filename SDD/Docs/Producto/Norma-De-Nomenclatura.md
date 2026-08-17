@@ -49,6 +49,10 @@
   - [6.18 Agregados por el guardián de aprovisionamiento, fuera de los 155](#618-agregados-por-el-guardián-de-aprovisionamiento-fuera-de-los-155)
   - [6.19 Agregados por la etapa `e`, fuera de los 155](#619-agregados-por-la-etapa-e-fuera-de-los-155)
   - [6.20 Agregados por la interfaz de la etapa `e`, fuera de los 155](#620-agregados-por-la-interfaz-de-la-etapa-e-fuera-de-los-155)
+  - [6.21 Agregados por el validador de figuras de la etapa `f`, fuera de los 155](#621-agregados-por-el-validador-de-figuras-de-la-etapa-f-fuera-de-los-155)
+  - [6.22 Agregados por `ADR-08006`, fuera de los 155](#622-agregados-por-adr-08006-fuera-de-los-155)
+  - [6.23 Agregados por la capa 3 del visor y su anfitrión, etapa `g`, fuera de los 155](#623-agregados-por-la-capa-3-del-visor-y-su-anfitrión-etapa-g-fuera-de-los-155)
+  - [6.24 Agregados por la documentación de la superficie HTTP, etapa `g`, fuera de los 155](#624-agregados-por-la-documentación-de-la-superficie-http-etapa-g-fuera-de-los-155)
 - [7. Cómo se verifica esta norma](#7-cómo-se-verifica-esta-norma)
 - [8. El plan de renombre](#8-el-plan-de-renombre)
   - [8.1 Los siete tramos](#81-los-siete-tramos)
@@ -169,7 +173,7 @@ Tres cosas, y son las que ordenan el resto del documento.
 
 **Segunda: el grueso del corpus sí está en juego, y la 1.1 decía lo contrario.** Las clases 1, 2 y 3 juntas —puertos, entidades, miembros— no son «38 identificadores en 37 documentos»: son **38 identificadores en 88 documentos, con 754 ocurrencias**. Lo que casi no existe todavía son los puertos y los miembros —15 documentos entre los dos—; las **entidades** están escritas en 46 documentos. La frase de la 1.1 —«ahí la norma se aplica sin negociación, porque casi nada existe todavía»— era verdadera para las clases 1 y 3 y **falsa para la clase 2**, y de esa falsedad salió el hueco del plan que §8 cierra con `R-2b`.
 
-**Tercera: `Pendiente` sola pesa más que las clases 1, 2 y 3 juntas, y no se puede renombrar por cadena.** **1983 ocurrencias en 351 documentos**, y **nombra dos cosas distintas**: una cuenta que espera habilitación y un trabajo que espera revisión. Tres cifras más, medidas, que deciden cómo se ejecuta `R-4`: **58 documentos traen los dos contextos** —estados de cuenta y estados de trabajo en el mismo archivo— **con 956 ocurrencias entre ellos**, que es donde un renombre por cadena elige mal; y **«pendiente» aparece 934 veces en 254 documentos fuera de toda región de código**, es decir en prosa, donde §4 manda que se quede. [`../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1 ya tuvo que declarar una forma calificada obligatoria —«marca de cambio de contraseña pendiente»— justamente porque «`Pendiente` a secas nombra un estado de cuenta y un estado de trabajo». Un identificador en inglés no habría tenido esa colisión: `Pending` y `Submitted` son palabras distintas.
+**Tercera: `Pendiente` sola pesa más que las clases 1, 2 y 3 juntas, y no se puede renombrar por cadena.** **1983 ocurrencias en 351 documentos**, y **nombra dos cosas distintas**: una cuenta que espera habilitación y un trabajo que espera revisión. Tres cifras más, medidas, que deciden cómo se ejecuta `R-4`: **58 documentos traen los dos contextos** —estados de cuenta y estados de trabajo en el mismo archivo— **con 956 ocurrencias entre ellos**, que es donde un renombre por cadena elige mal; y **«pendiente» aparece 934 veces en 254 documentos fuera de toda región de código**, es decir en prosa, donde §4 manda que se quede. [`../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1 ya tuvo que declarar una forma calificada obligatoria —«marca de cambio de contraseña pendiente»— justamente porque «`Pendiente` a secas nombra un estado de cuenta y un estado de trabajo». Un identificador en inglés no habría tenido esa colisión: `Pending` y `Submitted` son palabras distintas.
 
 ## 3. Zona 1 · Identificadores de código, en inglés
 
@@ -184,7 +188,7 @@ Tres cosas, y son las que ordenan el resto del documento.
 | Propiedades y métodos públicos | Inglés | `PascalCase` | `PasswordHash`, `OriginalJson` |
 | Parámetros y variables locales | Inglés | `camelCase` | `accountId` |
 | Campos privados | Inglés | `_camelCase` | `_clock` |
-| Funciones y variables de TypeScript | Inglés | `camelCase`; `PascalCase` para clases | `loadJson` |
+| Funciones y variables de TypeScript | Inglés | `camelCase`; `PascalCase` para clases | `loadPieces` |
 | Nombres de archivo de código | Inglés | Igual al tipo que contienen | `Account.cs` |
 
 **Tres reglas de forma que acompañan:**
@@ -249,7 +253,7 @@ Las tres tienen la misma forma: **un identificador que también es dato**. Se pe
 
 ### 5.1 `F-01` Las seis funciones de la fachada del visor · **decidida**
 
-**Qué son.** `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar`, `destruir`, `establecerMovimiento`. Son la superficie pública del *bundle* de TypeScript, expuesta como biblioteca en `window`, y **Blazor las invoca por interoperabilidad** contra `IJSRuntime`. Son el punto de extensión principal del producto: el sample `S-1` las ejerce enteras sin backend, que es lo que hace reemplazable al motor 3D.
+**Qué son.** `inicializar`, `cargarPiezas` —que hasta el 2026-08-16 se llamaba `cargarJson`, ver §6.6—, `seleccionarPieza`, `redimensionar`, `destruir`, `establecerMovimiento`. Son la superficie pública del *bundle* de TypeScript, expuesta como biblioteca en `window`, y **Blazor las invoca por interoperabilidad** contra `IJSRuntime`. Son el punto de extensión principal del producto: el sample `S-1` las ejerce enteras sin backend, que es lo que hace reemplazable al motor 3D.
 
 **Decisión del Product Owner, 2026-08-12: `F-01a`. Las seis pasan a inglés.** La correspondencia está en §6.6 y es la única fuente de esos seis nombres.
 
@@ -260,7 +264,7 @@ Los otros dos términos del fundamento, y son los que hacen que el momento sea e
 1. **El visor no existe como código.** La etapa `a` crea el proyecto y un *bundle* «vacío pero real» (intake §15), con la fachada declarada y sin lógica de dibujo. No hay una sola línea que renombrar.
 2. **Su único consumidor está en la misma solución.** El *bundle* sólo lo invoca `GeometriaFactory-Web`, que se compila y se despliega junto con él. No hay consumidor externo al que avisarle.
 
-**Costo contado, y es el que se paga.** **53 documentos** las nombran; **21** declaran las seis; **621 ocurrencias** en total, remedidas en la 1.2 —la 1.1 declaraba 52 y 593—. Los documentos que fijan su contrato son [`../Proyectos/GeometriaFactory-Visor/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md), su [`ADR-12002`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md), el intake §17.2.P.3 · GeometriaFactory-Visor, y las categorías 02, 03, 05 y 10 de `GeometriaFactory-Visor` y `GeometriaFactory-Web`. Es un renombre mecánico, verificable con recuento en las dos direcciones, **sin ninguna decisión por documento**.
+**Costo contado, y es el que se paga.** **53 documentos** las nombran; **21** declaran las seis; **621 ocurrencias** en total, remedidas en la 1.2 —la 1.1 declaraba 52 y 593—. Los documentos que fijan su contrato son [`../Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../Unidades-Entrega/GeometriaFactory-Web/02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md), su [`ADR-12002`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-12002-Superficie-De-Seis-Funciones-Planas.md), el intake §17.2.P.3 · GeometriaFactory-Visor, y las categorías 02, 03, 05 y 10 de `GeometriaFactory-Visor` y `GeometriaFactory-Web`. Es un renombre mecánico, verificable con recuento en las dos direcciones, **sin ninguna decisión por documento**.
 
 **La alternativa que se descartó** era `F-01b` —quedan en castellano, declarado como apartamiento—: dejaba la única superficie pública del producto en un idioma distinto del de todo el resto del código, y obligaba a `GeometriaFactory.Web.Integration` a traducir en el punto de invocación, que es el defecto que `RI-06` de [`Vista-Producto.md`](Vista-Producto.md) §7 declara con historia en este producto.
 
@@ -270,9 +274,9 @@ Los otros dos términos del fundamento, y son los que hacen que el momento sea e
 
 **Decisión del Product Owner, 2026-08-12: `F-02a`. Identificador en inglés, etiqueta en castellano, y la traducción en un solo lugar.** El código dice `Pending`; la pantalla dice «Pendiente». La correspondencia completa está en §6.7.
 
-**Por qué era frontera, y no es una sutileza.** Los valores se persisten y se serializan **por su nombre, nunca por su posición** — [`../Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) §2.2, y [`../Proyectos/GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Modelo-Datos-Logico.md) §2.1 y §2.2, que los guarda como texto. El identificador **es** el dato guardado y el dato transmitido. Y además el alumno lo ve traducido en pantalla.
+**Por qué era frontera, y no es una sutileza.** Los valores se persisten y se serializan **por su nombre, nunca por su posición** — [`../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) §2.2, y [`../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Modelo-Datos-Logico.md`](../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Modelo-Datos-Logico.md) §2.1 y §2.2, que los guarda como texto. El identificador **es** el dato guardado y el dato transmitido. Y además el alumno lo ve traducido en pantalla.
 
-**El fundamento decisivo: deshace la colisión ya declarada de `Pendiente`.** Hoy `Pendiente` nombra **dos cosas distintas** —una cuenta que espera habilitación y un trabajo que espera revisión— y el corpus ya tuvo que pagar por eso: [`../Proyectos/GeometriaFactory-Domain/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1 declaró obligatoria una forma calificada —«marca de cambio de contraseña pendiente»— justamente porque «`Pendiente` a secas nombra un estado de cuenta y un estado de trabajo». En inglés son dos palabras: la cuenta está `Pending` y el trabajo está `Submitted` —se envió y espera revisión—. **La forma calificada obligatoria deja de hacer falta**, y §6.7 declara cuál de los dos nombres va en cada contexto.
+**El fundamento decisivo: deshace la colisión ya declarada de `Pendiente`.** Hoy `Pendiente` nombra **dos cosas distintas** —una cuenta que espera habilitación y un trabajo que espera revisión— y el corpus ya tuvo que pagar por eso: [`../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.1 declaró obligatoria una forma calificada —«marca de cambio de contraseña pendiente»— justamente porque «`Pendiente` a secas nombra un estado de cuenta y un estado de trabajo». En inglés son dos palabras: la cuenta está `Pending` y el trabajo está `Submitted` —se envió y espera revisión—. **La forma calificada obligatoria deja de hacer falta**, y §6.7 declara cuál de los dos nombres va en cada contexto.
 
 **Costo contado, y es alto.** **399 documentos, 4461 ocurrencias candidatas**: es la clase más grande del corpus. Sólo `Pendiente` son **351 documentos y 1983 ocurrencias**, de las cuales **956 viven en los 58 documentos que traen los dos contextos a la vez**; y hay **934 ocurrencias más de «pendiente» en prosa, en 254 documentos**, que §4 deja donde están. Las cifras de la 1.1 eran 396 y 4259, y 349 y 1919.
 
@@ -358,6 +362,10 @@ La versión 1.0 emitió **42 conceptos** y dejó fuera los 101 códigos, porque 
 | Agregados por el guardián de aprovisionamiento (1.15), **fuera de los 155** | 8 | 8 | §6.18 |
 | Agregados por la etapa `e` (1.16), **fuera de los 155** | 47 | 47 | §6.19 |
 | Agregados por la interfaz de la etapa `e` (1.17), **fuera de los 155** | 27 | 27 | §6.20 |
+| Agregados por el validador de figuras de la etapa `f` (1.18), **fuera de los 155** | 44 | 44 | §6.21 |
+| Agregados por `ADR-08006` (1.19), **fuera de los 155** | 5 | 5 | §6.22 |
+| Agregados por la capa 3 del visor y su anfitrión (1.21), **fuera de los 155** | 44 | 44 | §6.23 |
+| Agregados por la documentación de la superficie HTTP (1.22), **fuera de los 155** | 10 | 10 | §6.24 |
 
 **Las cinco filas agregadas por la etapa `a` tampoco entran en los 155, y por el mismo motivo que las de §6.11:** son conceptos que **no existían** cuando se contaron las seis clases —el cuerpo de la respuesta del punto de salud y el nombre propio del *bundle* en `window`—, y entran por el corolario 4 de §6.1, que es lo que esta norma manda hacer cuando aparece un concepto sin fila. **Los recuentos de las seis clases no cambian**: 155 sigue siendo 155, y el control `V-1` cuadra contra las ocho tablas más estas cinco filas, que llevan su marca. **Lo mismo vale para las 214 que agrega la etapa `b` en §6.12**, que desde la 1.6 es la novena tabla del rango, **para las 109 que agrega la etapa `c` en §6.13** —106 propias más las tres que la 1.8 sumó—, que desde la 1.7 es la décima, **para las 39 que agrega §6.14**, que desde la 1.8 es la undécima —27 las trajo la marca de sesión, 5 más el guardián de sesión de la 1.9, 5 más el arreglo del cambio forzado de la 1.10 y 2 más la guardia de arranque de la clave de firma de la 1.11— **para las 36 que agrega §6.15**, que desde la 1.12 es la duodécima —16 tipos y 20 miembros del ciclo de vida de la cuenta de alumno del lado del servicio— **para las 41 que agrega §6.16**, que desde la 1.13 es la decimotercera —2 tipos, 35 miembros, propiedades y valores, y 4 iconos de la interfaz de esa misma etapa— **y para las 19 que agrega §6.17**, que desde la 1.14 es la decimocuarta —2 superficies derivadas, 8 funciones del guion de interacción y 9 atributos de marcado que ese guion lee— **para las 8 que agrega §6.18**, que desde la 1.15 es la decimoquinta —3 tipos y 5 miembros del guardián 1 de `Web ADR-10003` §2 y del punto de acceso anónimo que lo hace posible— **para las 47 que agrega §6.19**, que desde la 1.16 es la decimosexta —16 tipos, 4 valores de conjunto cerrado y 27 miembros del trabajo con dueño, estado y persistencia— **y para las 27 que agrega §6.20**, que desde la 1.17 es la decimoséptima —3 tipos, 22 miembros, propiedades y valores, y 2 iconos de la interfaz de esa misma etapa—. Y la etapa `c` deja además una constancia que vale la pena leer al revés: **de los veinte códigos de condición que escribió, cero necesitaron fila nueva**, porque los veinte ya estaban en §6.8 con su nombre inglés fijado por `F-03`. El glosario hizo exactamente lo que §6.1 promete. **La etapa `e` la reproduce sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, y entre ellos está el homónimo declarado de §6.9, `WORK_NOT_FOUND`, que la etapa escribió **dos veces, una por catálogo, y no unificó**, porque lo que los separa es el tipo que los contiene. **La etapa `d` reproduce la constancia sobre una población mayor**: de los **quince** códigos que escribió —siete del dominio, tres propios de la aplicación, uno de infraestructura y cuatro del contrato— **cero necesitaron fila nueva**, y entre ellos están los dos casos difíciles que `F-03` había dejado resueltos de antemano: la **unificación** de §6.9, que le da a `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` y a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` el mismo nombre inglés, y los **dos identificadores retirados por RN-02016** de §6.8.5, que la etapa `d` **no recicló**.
 
@@ -491,7 +499,7 @@ Decididas por `F-01` el 2026-08-12. **Ésta es la fuente de los seis nombres def
 | Castellano | Inglés | Clase | Dónde está declarado el concepto |
 | --- | --- | --- | --- |
 | `inicializar(elemento, opciones)` | `initialize(element, options)` | Función de fachada | Intake §17.2.P.3 · GeometriaFactory-Visor; `Definicion-Contrato-De-Fachada.md`; `Visor ADR-12002` |
-| `cargarJson(id, texto)` | `loadJson(id, text)` | Función de fachada | Intake §17.2.P.3 · GeometriaFactory-Visor; `Definicion-Contrato-De-Fachada.md` |
+| `cargarPiezas(id, piezas)` | `loadPieces(id, pieces)` | Función de fachada | Intake §17.2.P.3 · GeometriaFactory-Visor; `Definicion-Contrato-De-Fachada.md` **2.0** §4.2. **Renombrada el 2026-08-16 por [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md)**: se llamaba `cargarJson` ⟶ `loadJson` y recibía el texto del alumno. **El nombre cambia con la firma**, porque la función ya no recibe JSON del alumno: mantenerlo sería un nombre que promete una cosa y un parámetro que trae otra, que es el defecto que §6.1 corolario 1 evita por el otro lado |
 | `seleccionarPieza(id, indice)` | `selectPiece(id, index)` | Función de fachada | Intake §17.2.P.3 · GeometriaFactory-Visor; F-13 |
 | `redimensionar(id)` | `resize(id)` | Función de fachada | Intake §17.2.P.3 · GeometriaFactory-Visor |
 | `destruir(id)` | `destroy(id)` | Función de fachada | Intake §17.2.P.3 · GeometriaFactory-Visor |
@@ -618,11 +626,11 @@ Son las **siete condiciones de la fachada**, y las siete tienen escenario en el 
 | Castellano | Inglés | Clase | Dónde está declarado el concepto |
 | --- | --- | --- | --- |
 | `CAPACIDAD_GRAFICA_AUSENTE` | `GRAPHICS_CAPABILITY_MISSING` | Visor | `Visor/03` §3.1, entrada `E-VIS-01`, función `inicializar` |
-| `DIMENSION_NO_LEGIBLE` | `UNREADABLE_DIMENSION` | Visor | `Visor/03` §3.3, entrada `E-VIS-10`, función `cargarJson` por pieza; intake §20.E-8 |
+| `DIMENSION_NO_LEGIBLE` | `UNREADABLE_DIMENSION` | Visor | `Visor/03` §3.3, entrada `E-VIS-10`, función `cargarPiezas` por pieza; intake §20.E-8. **Desde [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) deja de ser el camino de `E-8`** —esa pieza no llega al visor— y queda para la pieza que el anfitrión entregue y la fachada no pueda usar |
 | `ELEMENTO_DE_DIBUJO_INVALIDO` | `INVALID_CANVAS_ELEMENT` | Visor | `Visor/03` §3.1, entradas `E-VIS-02` y `E-VIS-07` |
 | `INDICE_FUERA_DE_RANGO` | `INDEX_OUT_OF_RANGE` | Visor | `Visor/03` §3.4, entradas `E-VIS-11` y `E-VIS-12`, función `seleccionarPieza` |
 | `INSTANCIA_DESCONOCIDA` | `UNKNOWN_INSTANCE` | Visor | `Visor/03` §3.2, entradas `E-VIS-03` a `E-VIS-06` y `E-VIS-13`, en cinco funciones |
-| `TEXTO_NO_LEGIBLE` | `UNREADABLE_TEXT` | Visor | `Visor/03` §3.3, entrada `E-VIS-08`, función `cargarJson` |
+| `TEXTO_NO_LEGIBLE` | `UNREADABLE_TEXT` | Visor | `Visor/03` §3.3, entrada `E-VIS-08`, función `cargarPiezas`. **[Queda sin disparador por [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) y se eleva]**: la fachada ya no recibe texto, de modo que no hay texto suyo que pueda resultar ilegible. **No se retira acá**, porque retirar un código del catálogo del visor es de su categoría 03 y no de esta norma |
 | `TIPO_NO_DIBUJABLE` | `NON_DRAWABLE_TYPE` | Visor | `Visor/03` §3.3, entrada `E-VIS-09`; intake §20.E-5 |
 
 #### 6.8.5 Los 4 identificadores internos retirados
@@ -1853,6 +1861,217 @@ Los nombres del catálogo `ICONOS` de `assets/js/Maqueta.js`, con el mismo crite
 | `abrir` | `Open` | Valor de conjunto cerrado, catálogo de iconos | `ICONOS` de `assets/js/Maqueta.js`; `Representacion-Fila-De-Trabajo.md` §3, la acción que **las cuatro** variantes de estado ofrecen |
 | `editar` | `Edit` | Valor de conjunto cerrado, catálogo de iconos | Ídem; `Representacion-Fila-De-Trabajo.md` §3, variante «Propia, en estado `Borrador`». **Se distingue de la operación `Edit` de `Work`** de §6.19.2: aquélla es una operación del dominio y ésta el nombre de un trazo del catálogo, y el tipo que los contiene los separa |
 
+### 6.21 Agregados por el validador de figuras de la etapa `f`, fuera de los 155
+
+**Por qué existe esta sección.** La etapa `f` construye lo que las cinco anteriores dejaron
+declarado y vacío: **la interpretación del texto del alumno**. `Piece`, `Component` y `Observation`
+existen como tipos desde la etapa `a` —y tienen fila en §6.4— pero **sin un solo atributo**, porque
+el modelo se difirió hasta acá; y el puerto de validación de figuras está declarado **sin miembros**
+desde la misma etapa. Esta tabla trae los conceptos que hacen falta para escribirlos: el
+discriminante de figura y el papel del componente como conjuntos cerrados, el resultado que el
+puerto devuelve, y los miembros de las tres entidades del dominio. Entran por el **corolario 4 de
+§6.1**, con el mismo criterio de §6.19: **no cuentan dentro de los 155**, porque no existían cuando
+se contaron las seis clases.
+
+**Se agregan ANTES de escribir el identificador**, que es exactamente para lo que §6.1 existe.
+
+#### 6.21.1 Tipos
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `TipoDeFigura` | `FigureType` | Conjunto cerrado de `GeometriaFactory.Domain.Values` | [`../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md`](../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Modelo-De-Dominio.md) §2.3, atributo «Tipo»; `Definicion-Contrato-Del-Validador-De-Figuras.md` §5, que enumera las tres familias |
+| `PapelDelComponente` | `ComponentRole` | Conjunto cerrado de `GeometriaFactory.Domain.Values` | `Definicion-Modelo-De-Dominio.md` §2.4, atributo «Papel»: «conjunto cerrado del vocabulario del emisor» |
+| `InterpretacionDeFiguras` | `FigureInterpretation` | Tipo de resultado del puerto, en `GeometriaFactory.Application.Ports` | `Definicion-Contrato-Del-Validador-De-Figuras.md` §3, «qué devuelve el validador»: **tres cosas y no dos** |
+| `ObservacionDelTrabajo` | `WorkObservation` | Tipo de transferencia de `GeometriaFactory.Contracts.Works` | `Api CU-06` §4 paso 4, la colección que `WorkSubmissionResponse` declaró ausente en la etapa `e` **anunciando que entraba en la `f`** |
+| `EspecieDeObservacionDelTrabajo` | `WorkObservationKind` | Vocabulario del contrato, en `GeometriaFactory.Contracts.Works` | Los dos nombres con los que la especie viaja. Existe porque **la pieza pública no conoce al dominio**: sin él compararía contra cadenas escritas a mano |
+
+#### 6.21.2 Valores de los dos conjuntos cerrados
+
+**Los siete de `FigureType` conservan el discriminante del emisor y no se traducen dos veces:** el
+nombre inglés es el del tipo geométrico, y el valor que el texto del alumno trae —`Cilindro`,
+`Cubo`, …— es **dato del alumno** y se lee tal cual. Ver la declaración de frontera de abajo.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `Cilindro` | `Cylinder` | Valor de `FigureType` | `Definicion-Contrato-Del-Validador-De-Figuras.md` §5, familia volumétrica |
+| `Cubo` | `Cube` | Valor de `FigureType` | Ídem |
+| `Ortoedro` | `Orthohedron` | Valor de `FigureType` | Ídem |
+| `Rectangulo` | `Rectangle` | Valor de `FigureType` | Ídem, familia plana |
+| `Cuadrado` | `Square` | Valor de `FigureType` | Ídem |
+| `Circulo` | `Circle` | Valor de `FigureType` | Ídem |
+| `RectanguloDesarrollado` | `DevelopedRectangle` | Valor de `FigureType` | Ídem, «componente sin forma de pieza»: sólo aparece como `Lado` del cilindro |
+| `Tapa` | `Cap` | Valor de `ComponentRole` | `Definicion-Modelo-De-Dominio.md` §2.4; `Vision-Producto.md` §9.1 |
+| `Cara` | `Face` | Valor de `ComponentRole` | Ídem |
+| `Base` | `Base` | Valor de `ComponentRole` | Ídem. **Homónimo declarado**: el castellano y el inglés coinciden |
+| `Lateral` | `Lateral` | Valor de `ComponentRole` | Ídem. **Homónimo declarado** |
+| `Lado` | `Side` | Valor de `ComponentRole` | Ídem. Es el papel del `RectanguloDesarrollado` del cilindro, y **no se confunde con `Lateral`**: son dos papeles distintos del vocabulario del emisor |
+
+#### 6.21.3 Miembros
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `Posicion` | `Position` | Miembro de `Piece` y de `Component` | `Definicion-Modelo-De-Dominio.md` §2.3 y §2.4: **es la identidad de la pieza** |
+| `Tipo` | `Type` | Miembro de `Piece` y de `Component` | Ídem, atributo «Tipo» de las dos |
+| `AreaDeclarada` | `DeclaredArea` | Miembro de `Piece` y de `Component` | Ídem: «se guarda tal cual, sin corregir» |
+| `AreaDerivada` | `DerivedArea` | Miembro de `Piece` | Ídem: «se guarda por separado del declarado» |
+| `VolumenDeclarado` | `DeclaredVolume` | Miembro de `Piece` | Ídem. No aplica a las figuras planas |
+| `VolumenDerivado` | `DerivedVolume` | Miembro de `Piece` | Ídem |
+| `Componentes` | `Components` | Miembro de `Piece` | Ídem: «vacío admisible en las piezas planas del conjunto raíz» |
+| `Reconstruir` | `Reconstruct` | Miembro de `Piece` | `CU-06001` §4 paso 4, «reconstruye la pieza» |
+| `Papel` | `Role` | Miembro de `Component` | `Definicion-Modelo-De-Dominio.md` §2.4 |
+| `LargoDeclarado` | `DeclaredLength` | Miembro de `Component` | Ídem, «dimensiones declaradas»; `PRODUCT-INTAKE` §20, clave `Largo` |
+| `AnchoDeclarado` | `DeclaredWidth` | Miembro de `Component` | Ídem; clave `Ancho` |
+| `RadioDeclarado` | `DeclaredRadius` | Miembro de `Component` | Ídem; clave `Radio` del `Circulo` |
+| `Declarar` | `Declare` | Miembro de `Component` | `CU-06001` §4 paso 5, «y sus componentes» |
+| `Especie` | `Kind` | Miembro de `Observation` | `Definicion-Modelo-De-Dominio.md` §2.5: la entidad es una y su especie es un atributo |
+| `PosicionDePieza` | `PiecePosition` | Miembro de `Observation` | Ídem: «es la posición **en el texto**», de modo que una figura no reconstruida sigue siendo ubicable |
+| `Campo` | `Field` | Miembro de `Observation` | Ídem: obligatorio en toda observación de especie error de validación (RN-02009) |
+| `ValorDeclarado` | `DeclaredValue` | Miembro de `Observation` | Ídem: obligatorio en las advertencias de discrepancia de valor |
+| `ValorDerivado` | `DerivedValue` | Miembro de `Observation` | Ídem |
+| `ErrorDeValidacionEn` | `ValidationErrorAt` | Miembro de `Observation` | `CU-06001` §4 paso 6: observación con **posición y campo** |
+| `DiscrepanciaDeValorEn` | `ValueDiscrepancyAt` | Miembro de `Observation` | `CU-06002` CA-04: el mensaje expresa **los dos valores**, nunca un texto genérico |
+| `CantidadDeFigurasDelConjuntoRaiz` | `RootFigureCount` | Miembro de `FigureInterpretation` | `Definicion-Contrato-Del-Validador-De-Figuras.md` §3, primera fila. **Homónimo declarado** con el miembro de `Work`, que ya tiene fila en §6.19: es el mismo concepto y el corolario 1 de §6.1 prohíbe darle un segundo nombre |
+| `Piezas` | `Pieces` | Miembro de `FigureInterpretation` | Ídem, segunda fila |
+| `Observaciones` | `Observations` | Miembro de `FigureInterpretation` | Ídem, tercera fila |
+| `Interpretar` | `Interpret` | Miembro de `IFigureValidator` | `CU-06001` §1, «leer el texto … y devolver» |
+| `AdoptarInterpretacion` | `AdoptInterpretation` | Miembro de `Work` | `Domain BT-13`, la adopción que la etapa `e` declaró pendiente en `RootFigureCount` y en `Edit` |
+| `InterpretarYEnviar` | `InterpretAndSubmit` | Miembro de `LoadAndEditOwnWorkUseCase` | `Application CU-05`: interpreta, adopta y **deja que el dominio resuelva el estado** |
+| `UbicacionDe` | `LocationOf` | Miembro de `WorkSubmission` | `RN-02009`: la observación se muestra **con su figura y su campo**, nunca genérica |
+| `ToleranciaDeComparacion` | `ComparisonTolerance` | Miembro de `LocalFigureValidator` | `CU-06002` §10: «la tolerancia de 0.01 **no es una asunción**», sale de que el emisor redondea a dos decimales |
+
+**Cuarenta y cuatro filas: 5 tipos, 12 valores de conjunto cerrado y 27 miembros**, con dos homónimos
+declarados —`Base` y `Lateral`— y uno más entre catálogos, `RootFigureCount`.
+
+**Lo que NO lleva fila, y se declara para que `V-1` no lo levante como hueco:**
+
+- **`Piece`, `Component`, `Observation`, `ObservationKind` y sus dos valores, y `IFigureValidator` y
+  `LocalFigureValidator`**: los siete ya tienen fila —§6.4, §6.7 y §6.5— desde la etapa `a`. Lo que
+  la etapa `f` les agrega son **atributos y miembros**, que sí van arriba. Un tipo que se llena no
+  es un concepto nuevo.
+- **Las claves del texto del alumno** —`Tipo`, `Largo`, `Ancho`, `Radio`, `Area`, `Volumen`,
+  `Tapas`, `Bases`, `Laterales`, `Caras` y `Lado`— **no son identificadores de código y no se
+  traducen**. Son **dato del alumno**: las emite su programa y el producto se adapta al dato, nunca
+  al revés (`Definicion-Contrato-Del-Validador-De-Figuras.md` §1). Viajan además **hacia afuera**,
+  porque el campo de una observación se le muestra a la persona que escribió ese texto, y
+  traducirlo la dejaría buscando en su programa una clave que no existe. Es la misma frontera que
+  §5 declara para el vocabulario del emisor, aplicada al único lugar donde el producto **lee** ese
+  vocabulario en lugar de escribirlo.
+
+### 6.22 Agregados por `ADR-08006`, fuera de los 155
+
+**Por qué existe esta sección.** [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md)
+decide que el visor reciba **las piezas reconstruidas y no el texto del alumno**. Eso trae dos
+conceptos que no existían: **la pieza tal como cruza la frontera** —distinta de la entidad del
+dominio, porque viaja sin identidad de fila y con sus conjuntos cerrados por nombre— y **la
+interpretación que no guarda nada**, con su solicitud y su respuesta. Entran por el corolario 4 de
+§6.1 y **no cuentan dentro de los 155**.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `PiezaDelTrabajo` | `WorkPiece` | Tipo de transferencia de `GeometriaFactory.Contracts.Works` | `ADR-08006` §2; `Definicion-Contrato-De-Fachada.md` **2.0** §4.2, lo que `cargarPiezas` recibe |
+| `ComponenteDeLaPiezaDelTrabajo` | `WorkPieceComponent` | Tipo de transferencia de `GeometriaFactory.Contracts.Works` | Ídem: las dimensiones desde las que se construye la malla |
+| `SolicitudDeInterpretacion` | `WorkInterpretationRequest` | Tipo de transferencia de `GeometriaFactory.Contracts.Works` | `Definicion-Superficie-HTTP.md` **1.8**, `A-18` |
+| `RespuestaDeInterpretacion` | `WorkInterpretationResponse` | Tipo de transferencia de `GeometriaFactory.Contracts.Works` | Ídem. **No lleva estado de trabajo**, porque no hay trabajo |
+| `RutaDeInterpretaciones` | `InterpretationsRoute` | Miembro de `WorkEndpoints` | `Definicion-Superficie-HTTP.md` **1.8**: la ruta de `A-18`, que **no cuelga de `/trabajos`** |
+
+**Cinco filas: 4 tipos y 1 miembro.**
+
+**Lo que NO lleva fila:** `Position`, `Type`, `Role`, `DeclaredLength`, `DeclaredWidth`,
+`DeclaredRadius`, `DeclaredArea`, `DerivedArea`, `DeclaredVolume`, `DerivedVolume`, `Components`,
+`Pieces`, `Observations` y `RootFigureCount`, que ya tienen fila en **§6.21.3**: son **los mismos
+conceptos** cruzando otra frontera, y el corolario 1 de §6.1 prohíbe darles un segundo nombre. Lo
+que los separa es el tipo que los contiene, que es el mismo criterio con el que §6.20 resolvió
+`DeleteAsync`.
+
+### 6.23 Agregados por la capa 3 del visor y su anfitrión, etapa `g`, fuera de los 155
+
+**Por qué existe esta sección.** La etapa `a` dejó `src/viewer/` **vacía y declarada**: la lógica de
+dibujo era de la etapa `g`. Esta tabla trae los identificadores con los que esa capa se escribió —la
+escena viva, la construcción de mallas y los tipos que cruzan la frontera hacia el bundle—, y **los
+códigos de condición no están acá**: los siete del visor ya tienen fila en §6.9 desde su catálogo, y
+la capa 3 **no acuñó ninguno**. Es la quinta etapa seguida en que el glosario alcanza.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `InstanciaDelVisor` | `ViewerInstance` | Clase de TypeScript, capa 3 | `Definicion-Contrato-De-Fachada.md` §2, «instancia del visor»: la escena viva asociada a un elemento de dibujo |
+| `ResultadoDeDibujo` | `DrawOutcome` | Tipo de TypeScript, frontera | Ídem §5.2: las dibujadas y **las no dibujadas con su motivo** |
+| `PiezaNoDibujada` | `UndrawnPiece` | Tipo de TypeScript, frontera | Ídem: ninguna pieza desaparece sin quedar enumerada |
+| `ResultadoDeMalla` | `MeshOutcome` | Tipo de TypeScript, capa 3 | La malla de una pieza, o el motivo por el que no se pudo construir |
+| `mallaDe` | `meshFor` | Función de la capa 3 | `Visor/03`, el mapeo de tipo a malla que `§20.E-7` ejercita |
+| `cargar` | `load` | Miembro de `ViewerInstance` | Lo que `loadPieces` delega. **No es un séptimo nombre de fachada**: es interno |
+| `seleccionar` | `select` | Miembro de `ViewerInstance` | Ídem, de `selectPiece` |
+| `liberar` | `dispose` | Miembro de `ViewerInstance` | Ídem, de `destroy`. Es lo que `PT-02` mide |
+| `orbitaDeCamara` | `cameraOrbit` | Miembro de `MotionOptions` | `F-25`: **los dos movimientos se gobiernan por separado** |
+| `giroDePiezas` | `pieceSpin` | Miembro de `MotionOptions` | Ídem, el otro |
+| `cantidadDeInstanciasVivas` | `liveInstanceCount` | Función de instrumentación | **No es superficie del producto**: es instrumento de medición de `PT-02`, y el front no la usa |
+| `cantidadDeMallasVivas` | `liveMeshCount` | Miembro de `ViewerInstance` | Ídem |
+| `previsualizarAsinc` | `PreviewAsync` | Miembro de `WorkSubmission` | `Wireframes-Envio-De-Trabajo.md` **1.1** §4, la acción secundaria |
+| `accion` | `Action` | Miembro del modelo de formulario de `WorkSubmission` | Cuál de las dos acciones se pidió. **Enviar es el valor por omisión** |
+| `piezasParaDibujar` | `PiecesForDrawing` | Miembro de `WorkSubmission` | Las piezas serializadas **en el marcado**, que es lo que permite que el guion no salga a la red |
+| `posicionesFaltantes` | `MissingPositions` | Miembro de `WorkSubmission` | Las posiciones del conjunto raíz sin pieza: el conjunto **admite huecos** |
+| `dibujarEscenas` | `drawScenes` | Función del guion autorizado | Lee `data-gf-viewer-pieces` y le pasa las piezas al visor. **No pide nada** |
+| `mq-piezas-del-visor` | `data-gf-viewer-pieces` | Atributo de marcado autorizado | El atributo con el que la pantalla le baja las piezas al guion |
+| `mq-visor-dibujado` | `data-gf-viewer-drawn` | Atributo de marcado autorizado | La marca con la que el guion recuerda que ya dibujó esa escena |
+| `mq-nodo-de-pieza` | `data-gf-piece-node` | Atributo de marcado autorizado | El índice que un nodo del árbol lleva a la vista, y con el que pide resaltar su pieza (`F-13`) |
+| `mq-movimiento` | `data-gf-motion` | Atributo de marcado autorizado | Cuál de los dos movimientos gobierna cada casilla (`F-25`) |
+| `mq-escena-movimiento` | `gf-scene-motion` | Clase CSS | `Estilos-Maqueta.css` de la maqueta aprobada, portada valor por valor |
+| `mq-escena-movimiento__opcion` | `gf-scene-motion-option` | Clase CSS | Ídem |
+| `enlazarNodo` | `bindNode` | Función del guion autorizado | Un nodo del árbol pide resaltar su pieza |
+| `enlazarMovimiento` | `bindMotion` | Función del guion autorizado | Las dos casillas se leen juntas y se envían juntas |
+| `piezasParaDibujar` | `PiecesForDrawing` | Miembro de `WorkView` | **Homónimo declarado** con el de `WorkSubmission`: es el mismo concepto en otra superficie |
+| `posicionesNoDibujadas` | `UndrawnPositions` | Miembro de `WorkView` | Las posiciones del rango declarado sin pieza reconstruida |
+| `etiquetaDeTipo` | `LabelOfType` | Miembro de `WorkView` | El tipo con la etiqueta del emisor: es la que el alumno ve en su programa |
+| `etiquetaDePapel` | `LabelOfRole` | Miembro de `WorkView` | Ídem, para el papel del componente |
+| `dimensiones` | `Dimensions` | Miembro de `WorkView` | Las dimensiones que el texto trajo, **sin completar las que faltan** |
+| `alSeleccionarPieza` | `onPieceSelected` | Miembro de `ViewerOptions` | [`ADR-08007`](Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md): **la única vía del visor hacia su anfitrión**, y lo que cumple `F-13` en su segunda dirección |
+| `piezaEn` | `pieceAt` | Miembro de `ViewerInstance` | Qué pieza hay bajo el puntero |
+| `marcarNodo` | `markNode` | Función del guion autorizado | De la escena al árbol: marca el nodo y lo trae a la vista |
+| `movimientoReducido` | `reducedMotion` | Función del guion autorizado | **El anfitrión consulta la preferencia del sistema, nunca el visor** |
+| `acusarMovimiento` | `announceMotion` | Función del guion autorizado | El acuse de cada cambio, para quien no ve la escena |
+| `mq-nota-de-movimiento` | `data-gf-motion-note` | Atributo de marcado autorizado | El aviso de por qué arrancan apagados |
+| `mq-acuse-de-movimiento` | `data-gf-motion-status` | Atributo de marcado autorizado | La región que anuncia el cambio |
+| `mq-arbol` | `gf-tree` | Clase CSS | `Estilos-Maqueta.css`, portada valor por valor |
+| `mq-nodo` | `gf-node` | Clase CSS | Ídem |
+| `mq-nodo-indice` | `gf-node-index` | Clase CSS | Ídem |
+| `mq-nodo--hoja` | `gf-node--leaf` | Clase CSS | Ídem |
+| `mq-arbol-hijos` | `gf-tree-children` | Clase CSS | Ídem |
+| `mq-escena-movimiento__nota` | `gf-scene-motion-note` | Clase CSS | Ídem |
+
+**Cuarenta y cuatro filas: 4 tipos, 17 miembros, 8 funciones, 8 clases CSS portadas y 6 atributos de marcado.** Las ocho clases se **portaron de la maqueta aprobada valor por valor**: la puerta del sistema visual marcó en rojo las que se habían inventado, y la maqueta ya tenía diseñados el árbol y los controles de movimiento. Los atributos llevan a **diecisiete** los que `verify-stage-c.sh` autoriza, y los dos son **marcado servido**: el guion sigue sin pedir nada.
+
+**Lo que NO lleva fila:** `Piece`, `PieceComponent`, `ViewerOptions` y `MotionOptions` como tipos, y
+`position`, `type`, `role` y las dimensiones declaradas, que ya están en **§6.21.3** y **§6.22**: son
+los mismos conceptos cruzando otra frontera, y el corolario 1 de §6.1 prohíbe renombrarlos.
+
+### 6.24 Agregados por la documentación de la superficie HTTP, etapa `g`, fuera de los 155
+
+**Por qué existe esta sección.** [`ADR-08008`](Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md)
+revierte la renuncia del intake a describir el contrato en OpenAPI, y trae conceptos que **no
+existían**: el documento generado, el explorador que lo lee y **la llave que decide si se publican**.
+Se agregan por el corolario 4 de §6.1, antes de escribir el identificador.
+
+| Castellano | Inglés | Clase | Dónde está declarado el concepto |
+| --- | --- | --- | --- |
+| `DocumentacionDeApi` | `ApiDocumentation` | Clase estática de composición | `ADR-08008` §2: el único lugar donde se decide qué se describe y qué se publica |
+| `RutaDelDocumento` | `DocumentRoute` | Miembro de `ApiDocumentation` | Ídem: dónde se sirve el documento OpenAPI **generado** |
+| `RutaDelExplorador` | `ExplorerRoute` | Miembro de `ApiDocumentation` | Ídem: dónde se sirve la página navegable |
+| `LlaveDePublicacion` | `PublishedSetting` | Miembro de `ApiDocumentation` | `ADR-08008` §4: **la llave es la decisión**, y por eso tiene nombre propio |
+| `AgregarDocumentacionDeApi` | `AddApiDocumentation` | Extensión de `IServiceCollection` | Registra el generador. Sigue el par `Add…` / `Map…` de `CompositionRoot` |
+| `MapearDocumentacionDeApi` | `MapApiDocumentation` | Extensión de `WebApplication` | Expone las dos rutas **si corresponde**, y devuelve si las expuso |
+| `PruebasDeSuperficieDeDocumentacionDeApi` | `ApiDocumentationSurfaceTests` | Batería de integración | `ADR-08008` §5: las dos mitades, y la que importa es la segunda |
+
+**Y dos superficies servidas, que no son identificadores de código:**
+
+| Superficie | Valor | Qué es |
+| --- | --- | --- |
+| Ruta del documento | `/openapi/v1.json` | El contrato en JSON, **generado de los puntos que ya existen** |
+| Ruta del explorador | `/documentacion` | La página navegable. **En castellano**, como toda ruta servida del producto |
+| Llave de configuración | `Documentacion:Publicada` (`Documentacion__Publicada` como variable de entorno) | Lo único que publica las dos fuera de desarrollo |
+
+**Siete filas de código y tres superficies.** **Ningún punto del producto lleva fila nueva**, y es lo
+que se esperaba: `A-01` a `A-18` son los mismos, y lo que esta sección agrega **los describe sin
+tocarlos**.
+
 ## 7. Cómo se verifica esta norma
 
 Una norma sin instrumento de verificación es una intención. Siete controles, y **la 1.4 declara cuál de ellos se verifica tal como está escrito y cuál exige que alguien lo interprete** —la tabla está debajo de las tres formulaciones completas—:
@@ -1997,6 +2216,11 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.22 | 2026-08-16 | **Agrega §6.24, la vigesimoprimera tabla: las 7 filas de código y las 3 superficies servidas que [`ADR-08008`](Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md) necesita**, agregadas antes de escribir el identificador. Son **1 clase estática de composición**, **3 miembros** —entre ellos `PublishedSetting`, que tiene nombre propio porque **la llave es la decisión**—, **2 extensiones** que siguen el par `Add…`/`Map…` de `CompositionRoot`, **1 batería** y las **3 superficies**: las dos rutas servidas y la variable de entorno que las publica. **Ningún punto del producto lleva fila nueva y es lo que se esperaba**: `A-01` a `A-18` son los mismos, y lo que esta sección agrega **los describe sin tocarlos**. | Orquestador SDD |
+| 1.21 | 2026-08-16 | **Agrega §6.23, la vigésima tabla: las 12 filas de la capa 3 del visor**, que la etapa `a` dejó vacía y declarada para la `g`. Son **4 tipos** —la instancia viva, el resultado de dibujo, la pieza no dibujada y el resultado de malla—, **6 miembros** y **2 funciones de instrumentación**, que se declaran como tales: `liveInstanceCount` y `liveMeshCount` **no son superficie del producto**, son con lo que se mide `PT-02`, y por eso no vuelven séptima y octava a las seis funciones de la fachada. **Los siete códigos de condición del visor no necesitaron fila**: ya estaban en §6.9, y es la quinta etapa seguida en que el glosario alcanza. **Suma además el anfitrión**: los cuatro miembros con los que la superficie de envío previsualiza, la función del guion que dibuja, y **los dos atributos de marcado** que llevan de nueve a **once** los que `verify-stage-c.sh` autoriza —los dos son marcado servido, y el guion sigue midiendo cero salidas a la red—. | Orquestador SDD |
+| 1.20 | 2026-08-16 | **Renombra una de las seis funciones de la fachada del visor**, que son la zona de frontera `F-01a` que el Product Owner fijó el 2026-08-12: `cargarJson` ⟶ `loadJson` pasa a **`cargarPiezas` ⟶ `loadPieces`**, por [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md). **El nombre cambia junto con la firma y no por gusto**: la función dejó de recibir el texto del alumno y recibe las piezas ya reconstruidas, de modo que seguir llamándola «cargar JSON» sería un nombre que promete una cosa y un parámetro que trae otra. **Las otras cinco no se tocan** y el recuento de la zona de frontera no cambia: siguen siendo seis funciones. §3 actualiza su ejemplo de función de TypeScript, que citaba la vieja. **Barrido por concepto sobre el árbol vivo**, que es lo que `SDD-Development-Guide.md` §VI.3.1 pide y lo que encontró dos filas más: `DIMENSION_NO_LEGIBLE` y `TEXTO_NO_LEGIBLE` de §6.9 nombraban a la función vieja. Las dos se reescriben, **y la segunda se eleva**: la fachada ya no recibe texto, de modo que `TEXTO_NO_LEGIBLE` **queda sin disparador**. No se retira desde acá porque retirar un código del catálogo del visor es de su categoría 03. Se conservan las citas de `Handoff-Checkout.md` y de `Plan-Etapa-A.md`, que son **registros fechados** y no declaraciones vigentes. | Product Owner (decisión) · Orquestador SDD |
+| 1.19 | 2026-08-16 | **Agrega §6.22, la decimonovena tabla: las 5 filas que [`ADR-08006`](Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) necesita**, agregadas antes de escribir los identificadores. Son **4 tipos de transferencia** —la pieza y su componente tal como cruzan la frontera hacia quien dibuja, y la solicitud y la respuesta de la interpretación que no guarda nada— y **1 miembro**, la ruta de `A-18`. **Catorce miembros no llevan fila y se declara por qué**: ya están en §6.21.3 y son los mismos conceptos cruzando otra frontera, que es lo que el corolario 1 de §6.1 prohíbe renombrar. | Orquestador SDD |
+| 1.18 | 2026-08-16 | **Agrega §6.21, la decimoctava tabla del glosario: las 44 filas que el validador de figuras de la etapa `f` necesita, agregadas ANTES de escribir el identificador** (corolario 4 de §6.1). Son **5 tipos** —`FigureType` y `ComponentRole`, los dos conjuntos cerrados que `Definicion-Modelo-De-Dominio.md` §2.3 y §2.4 declaran como atributos «Tipo» y «Papel», y `FigureInterpretation`, el resultado de tres partes que `Definicion-Contrato-Del-Validador-De-Figuras.md` §3 exige—, **12 valores** de esos dos conjuntos, con `Base` y `Lateral` como homónimos declarados, y **27 miembros** de `Piece`, `Component`, `Observation`, `FigureInterpretation`, `IFigureValidator`, `LocalFigureValidator`, `Work`, el caso de uso del envío y la superficie que muestra las observaciones. Del lado del contrato entran `WorkObservation` y `WorkObservationKind`, que es lo que permite que la pieza pública dibuje una observación **sin conocer al dominio**. **Ningún tipo nuevo del dominio**: las tres entidades existen desde la etapa `a` y lo que esta etapa les agrega son atributos, que es la diferencia entre un tipo que se llena y un concepto nuevo. Y **una declaración de frontera**: las once claves del texto del alumno —`Tipo`, `Largo`, `Ancho`, `Radio`, `Area`, `Volumen`, `Tapas`, `Bases`, `Laterales`, `Caras` y `Lado`— **no llevan fila y no se traducen**, porque son dato del alumno y viajan hacia afuera en el campo de cada observación: traducirlas dejaría a la persona buscando en su propio programa una clave que no existe. | Orquestador SDD |
 | 1.17 | 2026-08-15 | **Agrega §6.20, la decimoséptima tabla del glosario: las 27 filas que exigió construir LA INTERFAZ de la etapa `e`, y no renombra nada del corpus.** §6.19 cubrió lo que la etapa `e` escribió del lado del servicio; ésta cubre la pieza pública, que hasta hoy tenía `Panel-De-Trabajos-Del-Alumno`, `Envio-De-Trabajo`, `Vista-De-Trabajo` y `Listado-De-La-Comision` como maqueta sin comportamiento. **27 filas: 3 tipos** —`WorkSubmissionForm`, `StudentOption` y `Group`—, **22 miembros, propiedades y valores** —las cinco salidas del cliente del servicio de datos hacia `A-10` a `A-14`, los miembros con los que las cuatro superficies dibujan el estado y sus acciones, los cuatro campos privados que nombran una decisión declarada, y los dos nombres de formulario que el marco lee— y **2 iconos** —`Open` y `Edit`, con los que el producto lleva quince de los veintiuno del catálogo de la maqueta—. Las 27 entran **antes** de escribir los identificadores, como manda el corolario 4 de §6.1, y **fuera de los 155**, con el mismo criterio de §6.12 a §6.19. **§6.1**: el rango del glosario pasa de dieciséis a **diecisiete** tablas, en la regla y en la prosa que la sigue. **§6.2**: fila nueva con las 27 y la prosa que las cuenta. **§7**: `V-1` pasa de dieciséis a **diecisiete** tablas en **sus dos apariciones** —la fila del control y la del veredicto de mecanicidad—. **Tabla de contenido**: entra §6.20. **Dos constancias que la sección deja escritas para que `V-1` no las levante como huecos**: una lista de catorce identificadores que **reusan** filas de §6.14.2, §6.15.2, §6.16.2 y §6.19.3 porque nombran **el mismo concepto** aplicado a un trabajo en lugar de a una cuenta —y el corolario 1 de §6.1 prohíbe darles un segundo nombre, que es la razón por la que el campo del diálogo se llama `_dialogsClosed` aunque acá haya un solo diálogo—, y **una colisión evitada** del mismo tipo que la de `SearchTerm` en §6.16: el filtro de estado **no** se llama `Status`, que ya nombra el estado del trabajo en §6.19.3, sino `StateFilter`. **Ninguna de las seis clases cambia de recuento**: 155 sigue siendo 155. | Orquestador SDD |
 | 1.16 | 2026-08-15 | **Agrega §6.19, la decimosexta tabla del glosario: las 47 filas que la etapa `e` necesitó, y no renombra nada del corpus.** La trae la etapa `e`, que construye **el trabajo con dueño, estado y persistencia** del lado del servicio —alta, listado, reedición y eliminación—, y que al hacerlo escribe los identificadores de la entidad `Work` y de su máquina de estados, de los cuatro casos de uso de la capa de aplicación, de los cuatro tipos que cruzan la frontera, del mapeo y del adaptador del repositorio de trabajos, y de los cinco puntos de acceso `A-10` a `A-14`. **47 filas: 16 tipos** —`WorkOperation`, `WorkOutcome`, `WorkListEntry`, `WorkDetail`, `WorkOutcomeSnapshot`, los cuatro casos de uso, los cuatro tipos del contrato, `WorkConfiguration`, `EfCoreWorkRepository` y `WorkEndpoints`—, **4 valores de conjunto cerrado** —`View` y `Delete` de `WorkOperation`, `Approve` y `Reject` de `WorkOutcome`— y **27 miembros y propiedades**. Las 47 entran **antes** de escribir los identificadores, como manda el corolario 4 de §6.1, y **fuera de los 155**, con el mismo criterio de §6.12 a §6.18. **§6.1**: el rango del glosario pasa de quince a **dieciséis** tablas, en la regla y en la prosa que la sigue. **§6.2**: fila nueva con las 47 y la prosa que las cuenta; y entra la constancia de la etapa `e` sobre los códigos, que es la de la `c` y la `d` **sobre la población más grande de las tres**: de los **diecisiete** códigos que escribió —catorce del dominio, tres propios de la aplicación y tres del contrato— **cero necesitaron fila nueva**, porque los diecisiete ya estaban en §6.8 con su nombre inglés fijado por `F-03`. **§7**: `V-1` pasa de quince a **dieciséis** tablas en **sus dos apariciones** —la fila del control y la del veredicto de mecanicidad—. **Tabla de contenido**: entra §6.19. **Tres constancias que la sección deja escritas para que `V-1` y `V-3` no las levanten como huecos**: el homónimo `WORK_NOT_FOUND` de §6.9 se escribió **dos veces, una por catálogo, y no se unificó**, porque lo que separa a los dos códigos es el tipo que los contiene y unificarlos habría hecho que la capa de aplicación dependiera del ensamblado de contratos; `WorkOperation` **no lleva etiqueta castellana** porque no llega a ninguna pantalla, de modo que `V-3` no lo alcanza; y `Edit` **no lleva fila de valor propia**, porque es el mismo concepto que la operación `Edit` de `Work` y el corolario 1 de §6.1 prohíbe darle un segundo nombre. **Ninguna de las seis clases cambia de recuento**: 155 sigue siendo 155. | Orquestador SDD |
 | 1.15 | 2026-08-15 | **Agrega §6.18, la decimoquinta tabla del glosario: las 8 filas que exigió construir el GUARDIÁN 1 de `Web ADR-10003` §2, y no renombra nada del corpus.** `Web ADR-10003` §2 declara **cuatro guardianes de ruta** y la etapa `c` construyó tres; el **guardián 1** —«mientras no exista la cuenta de administrador, cualquier ruta pedida desvía al aprovisionamiento inicial; una vez que existe, esa ruta deja de armar formulario para siempre y desvía de forma neutra, sin explicar por qué»— **no se construyó**, y la causa no fue un olvido sino **un faltante de la especificación**: la pieza pública no tenía **ningún punto de acceso con el que preguntar si el laboratorio ya tiene administrador** —`A-03` configura, `A-16` responde por la salud y `A-06` exige ser administrador—. **8 filas: 3 tipos** —`LaboratoryProvisioning`, el cuerpo de la respuesta del punto nuevo `A-17`, que va en el mismo espacio de nombres que `ServiceHealth` porque §6.10 ya lo declara para «estado del servicio»; `ProvisioningStateProbe`, que consulta y **recuerda**; y `ProvisioningGateMiddleware`, con la forma de nombre de `PanelSessionGateMiddleware`, que es el guardián 2— **y 5 miembros** —`AdministratorConfigured`, la **única** propiedad de la respuesta; `IsConfiguredAsync`, que lleva **el mismo nombre en las dos capas** que preguntan lo mismo, por el corolario 1 de §6.1; `GetLaboratoryProvisioningAsync`, con la forma de `GetServiceHealthAsync`, que es la otra consulta anónima de sólo lectura; `NeutralDestination`, cuyo nombre dice **neutro** para que nadie le cuelgue después un motivo en la dirección; y `ExemptPrefixes`, la lista **cerrada** de lo que el guardián no desvía—. **§6.18 trae cuatro declaraciones de ausencia**: las constantes de ruta, con el criterio de la etapa `c` y de la 1.12; `IsExempt`, mecánica privada, con el criterio con el que `PanelSessionGateMiddleware` dejó fuera `HasSession` e `IsOfThePanel`; la batería `ProvisioningGateTests`, con el criterio de §6.16 y §6.17; y **`WalkthroughSetting` con su valor `PanelWalkthroughWithoutSession`**, que el guardián 1 **reusa** en lugar de declarar una segunda puerta de servicio —sus filas de §6.14.2 amplían su tercera columna—. Se actualizan §6.1 —el rango pasa a **quince tablas**—, §6.2 —fila propia de §6.18 y prosa de la decimoquinta—, `V-1` de §7 en sus dos apariciones y la tabla de contenido. **No renombra ningún identificador del corpus, no toca las catorce tablas anteriores y no mueve ninguna cifra de §2 ni el total de 155.** Sube minor. | Guardián de aprovisionamiento (construcción y recuento) |

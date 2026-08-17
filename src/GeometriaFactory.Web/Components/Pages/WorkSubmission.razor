@@ -3,6 +3,7 @@
 @layout WorkShell
 @inject DataServiceClient DataService
 @inject SessionState Session
+@using System.Text.Json
 @using GeometriaFactory.Contracts.Works
 
 @* SUP-06 `Envio-De-Trabajo` — CU-05.
@@ -63,15 +64,32 @@
         único que la persona lee mientras espera: prometer una interpretación ahí sería la misma
         mentira que el bloque de resultado evita. Se usa el verbo de la acción, que es el mismo que
         `Registro-De-Cuenta` ya declara en `data-gf-pending`.
-     3. **LA LISTA DE OBSERVACIONES DEL BLOQUE DE RESULTADO NO SE DIBUJA.** `WorkSubmissionResponse`
-        declara en su propio comentario que la colección **no está** y por qué: no hay nada que
-        poblar hasta la etapa `f`. Dibujar «Observaciones (0)» afirmaría que se interpretó y no
-        salió ninguna, que es la misma mentira con otro disfraz.
+     3. **LA LISTA DE OBSERVACIONES SE DIBUJA DESDE LA ETAPA `f`**, que es la que interpreta. Los
+        dos apartamientos de arriba **también caducan acá**: el estado en curso vuelve a decir
+        «Interpretando tu trabajo…», que es el texto del wireframe §5, porque ahora es cierto.
+        **La previsualización sigue sin dibujarse**: el dibujo lo trae el visor, que es de la
+        etapa `g`.
+
+     LA REDACCIÓN DE CADA OBSERVACIÓN VIVE ACÁ Y NO EN EL CONTRATO, y es la contracara de que el
+     contrato mande datos y no frases: la advertencia se lee «tu programa declara 36,00 y la
+     geometría da 54,00», con los dos valores que el alumno puede comparar contra su propio código,
+     y el error se lee con su figura y su campo. **Ningún mensaje es genérico** (RN-02009).
 
    RA-01: el envío sale desde el servidor de esta pieza, por `DataServiceClient`.
    RA-03: ningún mensaje de esta superficie nombra una dirección interna. *@
 
 <PageTitle>Envío de trabajo</PageTitle>
+
+@* EL PAQUETE DEL VISOR SE CARGA ACÁ Y NO EN EL DOCUMENTO COMÚN, y no es una preferencia: el
+   inventario de guiones de `verify-stage-c.sh` mide **un solo guion propio** sobre las ocho
+   direcciones del producto, y su propio comentario declara que el paquete del visor —artefacto
+   generado, no versionado— **no se sirve desde esas superficies**. Servirlo en todas lo habría
+   convertido en un segundo guion global, que es exactamente lo que ese inventario existe para
+   impedir.
+
+   Lo carga la superficie que dibuja, y `defer` lo saca del camino del dibujo. Si no llega, esta
+   pantalla sigue funcionando: se carga y se envía igual, que es lo que la nota de al lado dice. *@
+<script src="js/geometriafactory-visor.js" defer></script>
 
 <a class="gf-btn gf-btn--pill gf-mt-5 gf-mb-4" href="/mis-trabajos"><Icon Name="Back" />Volver a mis trabajos</a>
 
@@ -116,16 +134,63 @@ else if (_result is { } result)
             Tu trabajo quedó en estado <span class="gf-badge @BadgeClassOf(result.Status)">@LabelOf(result.Status)</span>
         </h2>
 
-        @* EL TEXTO PROPIO DE LA ETAPA `e`. Ver el bloque de la cabecera: dice lo que pasó, por qué
-           queda en borrador, y que de eso no se deduce nada sobre el texto del alumno. *@
         <p class="gf-caption gf-mt-3">
             Tu trabajo quedó guardado con todo lo que escribiste, y ya figura en tu listado.
         </p>
-        <p class="gf-caption gf-mt-2">
-            <strong>El laboratorio todavía no interpreta el texto, así que por ahora todos los trabajos quedan en borrador.</strong>
-            De eso no se deduce nada sobre lo que pegaste: no se revisó. Podés volver sobre él y
-            reenviarlo cuantas veces quieras.
-        </p>
+
+        @* EL TEXTO DEPENDE DEL DESENLACE, y los dos dicen qué pasó y qué sigue. El de borrador
+           NO acusa al programa del alumno de nada que el laboratorio no haya mirado: nombra las
+           figuras que no se pudieron interpretar y deja el resto en la lista de abajo. *@
+        @if (result.Status == "Submitted")
+        {
+            <p class="gf-caption gf-mt-2">
+                El texto se interpretó y quedó entregado.
+                @if (Warnings.Count > 0)
+                {
+                    <strong>Con @Warnings.Count @(Warnings.Count == 1 ? "advertencia" : "advertencias"), que no impiden la entrega:</strong>
+                    <span>son valores que tu programa declara y que no coinciden con la geometría de las dimensiones que él mismo emitió.</span>
+                }
+            </p>
+        }
+        else
+        {
+            <p class="gf-caption gf-mt-2">
+                <strong>El texto no se pudo interpretar entero, así que el trabajo queda en borrador.</strong>
+                <span>Abajo está qué figura y qué campo lo impidieron. Corregí tu programa, volvé a pegar el texto y reenvialo cuantas veces quieras.</span>
+            </p>
+        }
+
+        @* ---- La lista de observaciones (CMP-25), con la forma que la maqueta aprobada ya le dio:
+           `gf-findings` para el conjunto, `gf-finding-location` para la ubicación y `gf-values`
+           para el par declarado/derivado. NO SE INVENTÓ NINGUNA CLASE: la línea de base visual ya
+           tenía diseñado exactamente este bloque, esperando a la etapa que lo poblara. ---- *@
+        @if (result.Observations.Count > 0)
+        {
+            <h3 class="gf-subtitle gf-mt-4">Observaciones (@result.Observations.Count)</h3>
+            <ul class="gf-findings gf-mt-2">
+                @foreach (var observation in result.Observations)
+                {
+                    <li class="gf-finding">
+                        <span class="gf-badge @(observation.Kind == WorkObservationKind.ValidationError ? "gf-badge--danger" : "gf-badge--warning")">
+                            @(observation.Kind == WorkObservationKind.ValidationError ? "Error" : "Advertencia")
+                        </span>
+                        <div class="gf-finding-body">
+                            <p class="gf-finding-location">@LocationOf(observation)</p>
+                            <p>@Explain(observation)</p>
+                            @if (observation is { DeclaredValue: { } declared, DerivedValue: { } derived })
+                            {
+                                @* LOS DOS VALORES, UNO AL LADO DEL OTRO. Es lo único que le permite
+                                   al alumno comparar contra su propio programa. *@
+                                <dl class="gf-values">
+                                    <dt>Tu programa declara</dt><dd class="gf-num">@declared.ToString("N2")</dd>
+                                    <dt>La geometría da</dt><dd class="gf-num">@derived.ToString("N2")</dd>
+                                </dl>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
 
         <dl class="gf-key-value gf-mt-4">
             <dt>Identificador del trabajo</dt><dd class="gf-num">@result.WorkId</dd>
@@ -188,11 +253,23 @@ else
                                value="@Form.Name" />
                     </div>
                     <div class="gf-field">
-                        @* La fecha la declara el alumno y se rotula como tal. Viaja como texto y no
-                           se convierte de zona: la escribe la persona y no es un sello del sistema. *@
+                        @* La fecha la declara el alumno y se rotula como tal. **No es un sello del
+                           sistema y no se convierte de zona**: es el día que la persona elige.
+
+                           CON CALENDARIO Y NO ESCRITA A MANO **[decisión de la etapa `g`,
+                           declarada]**. Escribirla a mano deja a cada persona resolviendo un
+                           formato —`1/1/2026`, `01/01/26`, `2026-1-1`— y el producto guardando
+                           cualquiera de ellos, que es lo contrario de un dato declarado. El
+                           control nativo da el calendario del sistema y **un solo formato**.
+
+                           LA CONSECUENCIA, DICHA: lo que se guarda pasa a ser `aaaa-mm-dd`, que es
+                           lo que este control entrega. Se sigue conservando **tal como la persona
+                           la declaró** —nadie la reescribe ni la convierte—, y quien la muestra la
+                           formatea para leerla. Las fechas cargadas antes, con su forma vieja, se
+                           siguen mostrando como están. *@
                         <label for="submission-date">Fecha del trabajo, la que declarás vos</label>
-                        <input class="gf-input" id="submission-date" name="Input.DeclaredDate" type="text"
-                               inputmode="numeric" placeholder="dd/mm/aaaa" value="@Form.DeclaredDate" />
+                        <input class="gf-input" id="submission-date" name="Input.DeclaredDate" type="date"
+                               value="@Form.DeclaredDate" />
                     </div>
                     <div class="gf-field">
                         <label for="submission-description">Descripción</label>
@@ -226,26 +303,82 @@ else
             <section aria-labelledby="submission-preview-heading">
                 <h2 id="submission-preview-heading" class="gf-meta">Previsualización</h2>
 
-                <div class="gf-scene gf-mt-2">
-                    <span class="gf-scene-label">Área de dibujo</span>
-                    <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
+                @* ---- El bloque de dibujo. ESTA SUPERFICIE ES EL COMPONENTE ANFITRIÓN: provee el
+                   elemento, y **le entrega las piezas ya reconstruidas al visor** (`ADR-08006`).
+
+                   POR QUÉ PREVISUALIZAR ES UN ENVÍO Y NO UN BOTÓN QUE LLAMA POR SU CUENTA. `RA-01`
+                   prohíbe que un guion del navegador invoque al servicio de datos, y el inventario
+                   de guiones de la etapa `d` mide **cero salidas a la red** sobre el único guion
+                   autorizado. De modo que el texto viaja como envío, esta pantalla le pide la
+                   interpretación al servicio por `A-18` —que no guarda nada—, y las piezas bajan
+                   **dentro del marcado**. El guion lee ese atributo y dibuja: no pide nada.
+
+                   Cuesta un viaje de página por previsualización, y es el costo que `ADR-08006`
+                   declaró al decidir que el visor no interpreta. ---- *@
+                @if (_preview is { } preview)
+                {
+                    <div class="gf-scene gf-mt-2" data-gf-viewer-pieces="@PiecesForDrawing(preview)">
+                        <span class="gf-scene-label">Área de dibujo</span>
+                    </div>
+
+                    <p class="gf-caption gf-mt-2">
+                        <strong>@preview.Pieces.Count de @preview.RootFigureCount</strong>
+                        @(preview.RootFigureCount == 1 ? " figura se pudo interpretar." : " figuras se pudieron interpretar.")
+                    </p>
+
+                    @* LAS QUE NO SE PUDIERON, ENUMERADAS JUNTO A LA ESCENA y nunca como observación
+                       del trabajo: el wireframe separa las dos cosas a propósito. Que falte una
+                       figura sin decir cuál es el fallo silencioso que este producto elimina. *@
+                    @if (preview.Pieces.Count < preview.RootFigureCount)
+                    {
+                        <ul class="gf-findings gf-mt-2">
+                            @foreach (var missing in MissingPositions(preview))
+                            {
+                                <li class="gf-finding">
+                                    <span class="gf-badge gf-badge--neutral">No dibujada</span>
+                                    <div class="gf-finding-body">
+                                        <p class="gf-finding-location">Figura @(missing + 1) · posición @missing</p>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <div class="gf-scene gf-mt-2">
+                        <span class="gf-scene-label">Área de dibujo</span>
+                        <span class="gf-scene-caption">Todavía no hay nada que dibujar</span>
+                    </div>
+                }
+
+                <div class="gf-footer-actions gf-mt-3">
+                    @* Acción SECUNDARIA, y con su propio nombre de formulario: el marco encamina
+                       cada envío por ese nombre, y así previsualizar no pasa por el guardado. *@
+                    <button type="submit" class="gf-btn gf-btn--secondary"
+                            name="Input.Action" value="preview"
+                            data-gf-pending="Interpretando tu trabajo…">
+                        Previsualizar
+                    </button>
                 </div>
 
-                @* Apartamiento 1 de la cabecera: en lugar del botón muerto, la nota que dice qué
-                   falta y que el envío no depende de eso. *@
-                <p class="gf-caption gf-mt-3">
-                    El dibujo todavía no está construido. Podés cargar y enviar tu trabajo igual:
-                    el envío no depende del dibujo.
-                </p>
                 @* Nota de alcance del wireframe, textual: el dibujo no verifica. *@
                 <p class="gf-caption gf-mt-2">El dibujo es sólo para que veas lo que modelaste. No decide si tu trabajo verifica.</p>
+
+                @if (_state is Outcome.PreviewUnavailable)
+                {
+                    <p class="gf-banner gf-banner--error gf-mt-2" role="alert">
+                        No pudimos interpretar tu trabajo para dibujarlo. Lo que escribiste sigue acá:
+                        podés enviarlo igual, el envío no depende del dibujo.
+                    </p>
+                }
             </section>
         </div>
     </form>
 }
 
 @code {
-    private enum Outcome { None, MissingField, NotFound, StateForbidsUpdate, Rejected, Unavailable }
+    private enum Outcome { None, MissingField, NotFound, StateForbidsUpdate, Rejected, Unavailable, PreviewUnavailable }
 
     private static readonly IReadOnlyDictionary<string, string> StatusLabels =
         new Dictionary<string, string>(StringComparer.Ordinal)
@@ -279,6 +412,21 @@ else
 
         /// <summary>El texto del alumno, tal como lo pegó. Esta propiedad no lo toca.</summary>
         public string OriginalJson { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Cuál de las dos acciones se pidió: vacío es **enviar** y `preview` es previsualizar.
+        /// </summary>
+        /// <remarks>
+        /// LAS DOS ACCIONES COMPARTEN FORMULARIO PORQUE COMPARTEN DATO: previsualizar necesita el
+        /// texto que la persona está escribiendo, y ese texto vive en este formulario. Dos
+        /// formularios obligarían a duplicar el área de texto o a copiarla con un guion, y lo
+        /// segundo es exactamente lo que el inventario de guiones no admite.
+        ///
+        /// **Enviar es el valor por omisión, y es deliberado**: un envío que llegue sin este campo
+        /// —por un navegador que no mande el valor del botón— guarda, que es la acción que la
+        /// persona no puede perder. Previsualizar, si se pierde, se vuelve a pedir.
+        /// </remarks>
+        public string Action { get; set; } = string.Empty;
     }
 
     [SupplyParameterFromForm(FormName = "work-submission")]
@@ -299,6 +447,9 @@ else
     private Outcome _state = Outcome.None;
     private string _rejectionMessage = string.Empty;
     private WorkSubmissionResponse? _result;
+
+    /// <summary>Lo que la última previsualización trajo. Nulo mientras nadie la pidió.</summary>
+    private WorkInterpretationResponse? _preview;
 
     /// <summary>El identificador de la ruta, o nulo si la ruta no trae uno reconocible.</summary>
     /// <remarks>
@@ -371,6 +522,17 @@ else
         _state = Outcome.None;
         _result = null;
 
+        // PREVISUALIZAR NO GUARDA Y SALE POR OTRA PUERTA. Se resuelve antes que ninguna comprobación
+        // de campos obligatorios: para dibujar alcanza con el texto, y exigirle nombre y fecha a
+        // quien todavía está mirando su figura sería pedirle que termine para poder mirar.
+        if (Form.Action == PreviewAction)
+        {
+            await PreviewAsync();
+            return;
+        }
+
+        _preview = null;
+
         if (string.IsNullOrWhiteSpace(Form.Name)
             || string.IsNullOrWhiteSpace(Form.DeclaredDate)
             || string.IsNullOrWhiteSpace(Form.OriginalJson))
@@ -428,4 +590,112 @@ else
         "Rejected" => "gf-badge--danger",
         _ => "gf-badge--neutral",
     };
+    /// <summary>Las advertencias del resultado, que no impiden la entrega.</summary>
+    private IReadOnlyList<WorkObservation> Warnings =>
+        _result is null
+            ? []
+            : [.. _result.Observations.Where(o => o.Kind == WorkObservationKind.Warning)];
+
+    /// <summary>Dónde está la observación, dicho como lo ve la persona.</summary>
+    /// <remarks>
+    /// SE NOMBRAN LAS DOS: la figura como la cuenta una persona —la primera es la 1— y la posición
+    /// como la cuenta el texto —la primera es la 0—. El alumno recorre su lista con la primera y
+    /// busca en su código con la segunda, y no declarar cuál es cuál es la forma más barata de que
+    /// corrija la figura equivocada.
+    /// </remarks>
+    private static string LocationOf(WorkObservation observation) =>
+        observation.PiecePosition is { } position
+            ? $"Figura {position + 1} · posición {position} · campo «{observation.Field}»"
+            : "En el texto completo";
+
+    /// <summary>
+    /// Redacta una observación para la persona que escribió el texto.
+    /// </summary>
+    /// <remarks>
+    /// ACÁ VIVE LA REDACCIÓN Y NO EN EL CONTRATO, que manda datos. Es lo que permite cambiar una
+    /// palabra sin cambiar el contrato, y lo que mantiene el idioma del producto en la capa que
+    /// habla con la persona.
+    ///
+    /// NINGÚN MENSAJE ES GENÉRICO (RN-02009): la ubicación la da `LocationOf` y los dos valores los
+    /// dibuja la grilla. Lo que redacta este método es **qué pasó**, no dónde.
+    /// </remarks>
+    private static string Explain(WorkObservation observation)
+    {
+        if (observation.Kind == WorkObservationKind.Warning)
+        {
+            return $"El valor de «{observation.Field}» que trae tu texto no coincide con el que se "
+                + "deriva de las dimensiones que tu propio programa emitió.";
+        }
+
+        return observation.PiecePosition is null
+            ? "No se pudo interpretar el texto. Revisá que sea el que emite tu programa, pegado entero."
+            : $"No se pudo interpretar el campo «{observation.Field}» de esta figura, así que la "
+                + "figura no se reconstruyó. El resto del texto sí se interpretó.";
+    }
+    /// <summary>El valor con el que el botón secundario se distingue del primario.</summary>
+    private const string PreviewAction = "preview";
+
+    /// <summary>
+    /// Pide la interpretación del texto **sin guardar nada** y deja las piezas listas para dibujar.
+    /// </summary>
+    /// <remarks>
+    /// VA AL SERVICIO POR `A-18`, y no interpreta acá: el validador vive del otro lado, con su
+    /// batería obligatoria, y tenerlo en dos lados sería tener dos verdades sobre el mismo texto.
+    ///
+    /// UN TEXTO VACÍO NO VIAJA: no hay nada que interpretar, y el aviso lo da la misma nota que ya
+    /// dice que todavía no hay nada que dibujar.
+    ///
+    /// SI EL SERVICIO NO RESPONDE, LO ESCRITO SIGUE ACÁ y el envío no queda bloqueado: el dibujo es
+    /// una ayuda para mirar, no un paso del guardado.
+    /// </remarks>
+    private async Task PreviewAsync()
+    {
+        _preview = null;
+
+        if (string.IsNullOrWhiteSpace(Form.OriginalJson))
+        {
+            return;
+        }
+
+        var outcome = await DataService.InterpretWorkAsync(Form.OriginalJson, Session.UseAccessToken());
+
+        if (!outcome.Succeeded)
+        {
+            _state = Outcome.PreviewUnavailable;
+            return;
+        }
+
+        _preview = outcome.Value!;
+    }
+
+    /// <summary>
+    /// Las piezas, serializadas para que el guion autorizado las lea **del marcado**.
+    /// </summary>
+    /// <remarks>
+    /// BAJAN DENTRO DE LA PÁGINA Y NO POR UNA SEGUNDA PETICIÓN, y es lo que permite que el guion
+    /// del navegador **no salga a la red** (`RA-01` y el inventario de guiones de la etapa `d`).
+    /// Quien pide es esta pantalla, del lado del servidor, con el acceso firmado que el navegador
+    /// nunca ve.
+    ///
+    /// SE SERIALIZA CON LOS NOMBRES QUE EL VISOR ESPERA, en minúscula inicial, que es la forma en
+    /// que el contrato viaja por la red en el resto del producto.
+    /// </remarks>
+    private static string PiecesForDrawing(WorkInterpretationResponse preview) =>
+        JsonSerializer.Serialize(preview.Pieces, DrawingJson);
+
+    private static readonly JsonSerializerOptions DrawingJson =
+        new(JsonSerializerDefaults.Web);
+
+    /// <summary>Las posiciones del conjunto raíz que no tienen pieza reconstruida.</summary>
+    /// <remarks>
+    /// SE CALCULAN CONTRA EL RANGO Y NO CONTRA LA LISTA: el conjunto **admite huecos**, y una figura
+    /// que no se pudo reconstruir no está entre las piezas. Sin el recuento del conjunto raíz no
+    /// habría con qué saber cuántas faltan, que es exactamente para lo que ese número viaja.
+    /// </remarks>
+    private static IEnumerable<int> MissingPositions(WorkInterpretationResponse preview)
+    {
+        var drawn = preview.Pieces.Select(piece => piece.Position).ToHashSet();
+
+        return Enumerable.Range(0, preview.RootFigureCount).Where(position => !drawn.Contains(position));
+    }
 }

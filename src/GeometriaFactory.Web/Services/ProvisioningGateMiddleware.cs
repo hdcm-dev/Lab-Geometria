@@ -167,17 +167,39 @@ public sealed class ProvisioningGateMiddleware
                 return;
             }
         }
-        else if (path.StartsWithSegments(ProvisioningPath, StringComparison.Ordinal))
+        else if (path.StartsWithSegments(ProvisioningPath, StringComparison.Ordinal)
+            || IsRoot(path))
         {
             // MITAD 2 — con administrador, el aprovisionamiento deja de armar formulario PARA
             // SIEMPRE y desvía de forma neutra. La respuesta no lleva ningún campo de formulario
             // y no lleva ningún texto que explique por qué: lo único que sale de acá es el desvío.
+            //
+            // Y LA RAÍZ DESVÍA IGUAL, que es `NAV-03` y la mitad que faltaba. `Linea-Base-Visual.md`
+            // §5 declara **dos** filas cuyo disparador es la resolución del destino inicial: sin
+            // administrador se va a configurarlo —`NAV-01`, la mitad 1 de arriba— y **con
+            // administrador se va al ingreso**. Hasta acá sólo estaba la primera, de modo que quien
+            // escribía `/` en un laboratorio ya configurado se quedaba mirando el marcador de
+            // posición de la etapa `b` en lugar de entrar. **[completa la etapa `g`.]**
+            //
+            // LA RAÍZ NO ES UNA SUPERFICIE: es el punto donde corre este guardián. Que su página
+            // exista es sólo para el caso en que el guardián **no pueda decidir**, que es el de
+            // abajo.
             context.Response.Redirect(NeutralDestination);
             return;
         }
 
         await _next(context).ConfigureAwait(false);
     }
+
+    /// <summary>
+    /// La raíz, y sólo la raíz.
+    /// </summary>
+    /// <remarks>
+    /// SE COMPARA EXACTO Y NO POR PREFIJO, porque `StartsWithSegments` sobre `/` da verdadero para
+    /// **toda** dirección del producto: usarlo acá desviaría el sitio entero al ingreso.
+    /// </remarks>
+    private static bool IsRoot(PathString path) =>
+        !path.HasValue || path.Value == "/";
 
     private static bool IsExempt(PathString path) =>
         ExemptPrefixes.Any(prefix => path.StartsWithSegments(prefix, StringComparison.Ordinal));
