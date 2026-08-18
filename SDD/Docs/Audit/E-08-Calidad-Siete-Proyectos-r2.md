@@ -207,7 +207,7 @@ Busqué las cinco clases que las correcciones producen. **Cuatro dan cero; la qu
 
 **Dónde está.** `Proyectos/GeometriaFactory-Infrastructure/08-Calidad-Y-Pruebas/Plan-Pruebas.md`, cabecera de trazabilidad upstream.
 
-**Qué dice.** «**Trazabilidad upstream:** [`Estrategia-Testing.md`](Estrategia-Testing.md) **1.0**; [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md) 1.0; …».
+**Qué dice.** `«**Trazabilidad upstream:** [Estrategia-Testing.md](Estrategia-Testing.md) **1.0**; [Casos-Prueba-Referenciales.md](Casos-Prueba-Referenciales.md) 1.0; …».`
 
 **Qué debería decir.** `Estrategia-Testing.md` **1.1**. Ese documento subió a 1.1 en `8d5be75` por `H-01`, y `Plan-Pruebas.md` de Infrastructure también se editó y subió a 1.1 en el mismo commit. La cita a `Casos-Prueba-Referenciales.md` 1.0 sí es correcta: ese documento no se tocó.
 

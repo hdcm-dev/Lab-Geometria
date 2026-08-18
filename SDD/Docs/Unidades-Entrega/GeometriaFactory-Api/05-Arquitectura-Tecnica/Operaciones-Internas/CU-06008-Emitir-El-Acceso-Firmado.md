@@ -7,7 +7,7 @@
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
-**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-05), §4.1 (RN-06006, RN-06013), §14 (RA-03), §17.1.P.1 · GeometriaFactory-Infrastructure, §17.1.P.5 · GeometriaFactory-Infrastructure, §17.1.P.5 · GeometriaFactory-Api; el flujo que lo consume vive en `Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`
+**Trazabilidad upstream:** [`NB-00002`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00002-Identidad-Propia-Del-Alumno-Sin-Correo.md); `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.12** §4 (F-05), §4.1 (RN-06006, RN-06013), §14 (RA-03), §17.1.P.1 · GeometriaFactory-Infrastructure, §17.1.P.5 · GeometriaFactory-Infrastructure, §17.1.P.5 · GeometriaFactory-Api; el flujo que lo consume vive en [`CU-08001-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md`](../../../../Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md)
 **Trazabilidad downstream:** `03-UX-UI-DX`, `05-Arquitectura-Tecnica`, `06-Backlog-Tecnico` y `08-Calidad-Y-Pruebas` de GeometriaFactory-Infrastructure
 
 ---
