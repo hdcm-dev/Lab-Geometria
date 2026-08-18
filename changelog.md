@@ -682,3 +682,80 @@ bucle tres veces habría creado tres lugares donde el formato y el manejo de fal
 otras tres no se migran**: `verify-stage-c.sh` levanta y reinicia los dos servicios,
 `verify-stage-g.sh` corre un navegador en contenedor y `verify-stage-h.sh` declara un criterio no
 mecánico. Forzarlas a esta forma la habría hecho más grande que el problema.
+
+---
+
+## Los prerrequisitos de la fase `i` — repuesto el 2026-08-18, después de la fusión
+
+**Rama:** `codigo/prerrequisitos-fase-i` (PR #61, fusionado el 2026-08-18)
+
+> **Esta entrada se escribió después de la fusión, y se marca como repuesta.** La regla de la
+> cabecera —*«en la rama de la etapa, no después de la fusión»*— se incumplió una vez más: la unidad
+> `codigo/prerrequisitos-fase-i` cambió el flujo de publicación y la composición de verificación
+> **sin escribir acá**, y este registro quedó afirmando que la última unidad era «Las puertas que
+> faltaban».
+>
+> **Lo encontró la tercera reanudación** del destino, al contrastar este documento contra el
+> historial del repositorio, y lo declaró como la divergencia `D-01` de
+> [`SDD/Docs/Audit/Estado-Del-Destino-2026-08-18.md`](SDD/Docs/Audit/Estado-Del-Destino-2026-08-18.md) §2.
+> Es la **reincidencia** de la `D-01` del 2026-08-16, en su forma menor: una unidad de diferencia en
+> lugar de tres etapas. Que sea menor es el resultado de contrastar seguido, no de que la regla se
+> haya cumplido.
+>
+> **Nada de lo que sigue se infirió**: cada afirmación sale del mensaje de la confirmación `4cc596b`
+> o de un archivo del árbol. No se reescribió ningún commit.
+
+*No es una etapa: son los tres cambios acotados que la fase `i` necesitaba antes de publicar de
+verdad, más un ADR.*
+
+### El flujo de FTP corre las puertas bloqueantes antes de subir
+
+`Api/09 Pipeline-CI-CD.md` §2.1 declara **QG-01** —construir en 0 y sin advertencias— y **QG-02** —la
+batería entera— como bloqueantes, y el flujo de publicación **no corría ninguna de las dos**.
+`dotnet publish` compila, así que un error de compilación frenaba la publicación; **una advertencia y
+la batería entera en rojo pasaban igual**, y la comprobación final tampoco lo veía: la página carga y
+responde 200 con el producto roto por dentro.
+
+- Los dos pasos invocan [`scripts/build.sh`](scripts/build.sh) y [`scripts/test.sh`](scripts/test.sh),
+  que son los que esa tabla nombra y los mismos que corren en la máquina de quien construye. Un
+  `dotnet test` escrito a mano en el YAML habría sido un segundo lugar donde la configuración puede
+  decir otra cosa.
+- **Se retira el paso suelto que empaquetaba el visor**: `build.sh` ya lo invoca. Dejarlos a los dos
+  habría corrido `npm ci` y webpack dos veces por publicación.
+
+### `deploy/compose.yaml` dice qué es
+
+Su primera línea decía «Despliegue en destino». **No lo es**: el despliegue en destino vive en
+`Container.Lab-Geometria`, que conoce la red macvlan, la IP en la LAN, el directorio de la base y los
+secretos. Este archivo es la composición de **verificación** de `PT-04`, y nada más.
+
+**No era una duda teórica.** Leyendo este archivo se informó al Product Owner que la composición del
+host estaba incompleta porque no declaraba la clave de firma. Era el archivo equivocado, y el nombre,
+la carpeta y la primera línea decían las tres lo mismo.
+
+La cabecera declara ahora el reparto —si para cambiarlo hay que conocer el fuente es del fuente; si
+hay que conocer el host es del proyecto de contenedor—, por qué este archivo **no** declara la clave,
+y que el intake §16 todavía lo describe como el despliegue en destino.
+
+**No se renombra el archivo**, aunque el nombre sea lo que más confunde: `deploy/compose.yaml` está
+declarado en el árbol de §16 del intake, que es documento humano con escritura controlada y bump
+major, y de ahí baja a `Pipeline-Producto` §4, `Entornos-Deploy` §3 y `Plan-Etapa-A`. **Queda
+elevado.**
+
+### ADR-14003, emitido para aprobar
+
+Declara como apartamiento que la dirección del backend viaje como **IP pública dinámica** y se
+actualice a mano, con su disparador —IP estática o DDNS—, su estado `vigente` y su contador en **0**.
+
+Registra que no hace falta republicar entero: `ApiBaseUrl` se lee una sola vez al arrancar, así que
+alcanza con subir `appsettings.json` y reiniciar. Y anticipa la consecuencia sobre **`PT-05`**: la
+medición registra la dirección usada **y su fecha**, porque una puerta en verde sobre una dirección
+que puede cambiar no es una garantía permanente.
+
+**Aprobado en la unidad siguiente.** El Product Owner lo aceptó el 2026-08-18 y el ADR pasó a **1.1,
+`Aceptado`**, sin modificar su contenido (`docs/adr-14003-aceptado`, PR #62). Con la aprobación, el
+apartamiento **cuenta como decisión y no como omisión** (`Root-Rules.md` §11).
+
+### Verificación
+
+**311 pruebas en verde. 4700 de 4700 enlaces resuelven, 0 rotos.**
