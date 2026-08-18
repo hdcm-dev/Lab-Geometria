@@ -175,6 +175,9 @@ public static class CompositionRoot
         services.AddScoped<ReviewCommissionWorksUseCase>();
         services.AddScoped<DeleteWorkUseCase>();
 
+        // `A-15` · el desenlace de la revisión. Etapa `h`.
+        services.AddScoped<ResolveWorkUseCase>();
+
         // La guardia de `CU-02`: verificar la firma y la expiración del acceso presentado.
         // El `401` de la guardia NO lleva código del contrato, y es deliberado: el conjunto
         // cerrado no declara ninguno para un acceso ausente, vencido o mal firmado, y esta capa

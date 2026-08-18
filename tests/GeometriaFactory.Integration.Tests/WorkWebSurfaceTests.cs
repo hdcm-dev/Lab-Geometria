@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Accounts;
+using GeometriaFactory.Contracts.Works;
 using GeometriaFactory.Domain.Entities;
 using GeometriaFactory.Domain.Values;
 using GeometriaFactory.Web.Services;
@@ -1147,6 +1148,88 @@ public sealed class WorkWebSurfaceTests : IDisposable
         // eso incluye poder mover la escena igual.
         Assert.Contains("data-gf-motion=\"cameraOrbit\"", administratorHtml, StringComparison.Ordinal);
         Assert.Contains("data-gf-motion=\"pieceSpin\"", administratorHtml, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Criterio **5** de la transición `h` → `i…`: el alumno ve **el desenlace** de su trabajo en su
+    /// propio listado, y **el comentario** al abrir el trabajo desde ese listado.
+    /// </summary>
+    /// <remarks>
+    /// SON DOS LUGARES DISTINTOS Y EL CRITERIO LOS SEPARA A PROPÓSITO. El desenlace va en el
+    /// listado, porque es lo que la persona busca de un vistazo; el comentario va **sólo** en el
+    /// detalle, porque es texto que se lee y no se escanea. Verificar uno solo dejaría pasar que el
+    /// comentario se filtre al listado —donde no cabe— o que el desenlace no llegue.
+    ///
+    /// EL RECORRIDO ES EL DE LA PERSONA: el docente resuelve, y después el alumno mira. No se
+    /// escribe el estado en el almacén a mano, porque entonces la prueba no diría nada sobre si el
+    /// desenlace del docente llega efectivamente hasta la pantalla del alumno.
+    /// </remarks>
+    [Fact]
+    public async Task TheStudentSeesTheOutcomeInTheirListingAndTheCommentOnOpeningTheWork()
+    {
+        var studentMark = await SignInAsStudentAsync();
+        var studentId = await IdOfAsync(StudentEmail);
+        var workId = await SeedWorkAsync(studentId, "La entrega revisada", TextThatDoesNotVerify, WorkStatus.Submitted);
+
+        const string Written = "Muy bien resuelto el cilindro. Revisá el área del cubo.";
+
+        // EL DOCENTE RESUELVE, por el mismo camino que la pantalla usa.
+        var administratorMark = await SignInAsAdministratorAsync();
+        using var resolved = await PostOutcomeAsync(workId, "Approve", Written, administratorMark);
+        Trace("1 · el docente aprueba con comentario", resolved);
+        Assert.Equal(HttpStatusCode.OK, resolved.StatusCode);
+        Assert.Equal("Approved", await StoredStatusAsync(workId));
+
+        // Y AHORA MIRA EL ALUMNO.
+        using var listing = await GetAsync(WorksRoute, studentMark);
+        var listingHtml = Read(await listing.Content.ReadAsStringAsync());
+        Trace("2 · el alumno abre su listado", listing);
+
+        // EL DESENLACE ESTÁ, con su etiqueta y su insignia de éxito.
+        Assert.Contains("Finalizado", listingHtml, StringComparison.Ordinal);
+        Assert.Contains("gf-badge--success", listingHtml, StringComparison.Ordinal);
+
+        // Y EL COMENTARIO NO ESTÁ EN EL LISTADO: es del detalle, y acá no cabe.
+        Assert.Equal(0, CountOf(listingHtml, Written));
+
+        using var detail = await GetAsync($"/trabajos/{workId}", studentMark);
+        var detailHtml = Read(await detail.Content.ReadAsStringAsync());
+        Trace("3 · el alumno abre el trabajo desde el listado", detail);
+
+        // EL COMENTARIO SÍ ESTÁ ACÁ, con su rótulo.
+        Assert.Contains(Written, detailHtml, StringComparison.Ordinal);
+        Assert.Contains("Comentario del docente", detailHtml, StringComparison.Ordinal);
+        Assert.Contains("Finalizado", detailHtml, StringComparison.Ordinal);
+
+        // Y EL BLOQUE DE RESOLUCIÓN NO SE LE DIBUJA AL ALUMNO, ni sobre un trabajo ya resuelto.
+        Assert.Equal(0, CountOf(detailHtml, "Resolver esta entrega"));
+    }
+
+    /// <summary>
+    /// Resuelve un trabajo POR LA SUPERFICIE DEL SERVICIO DE DATOS, que es el mismo punto `A-15`
+    /// que el bloque de resolución de la pantalla llama.
+    /// </summary>
+    /// <remarks>
+    /// NO SE APLICA EL DESENLACE SOBRE LA ENTIDAD A MANO, aunque sería más corto: entonces la
+    /// prueba no diría nada sobre si el desenlace del docente llega efectivamente hasta la pantalla
+    /// del alumno, que es lo único que el criterio afirma.
+    /// </remarks>
+    private async Task<HttpResponseMessage> PostOutcomeAsync(
+        Guid workId, string outcome, string? comment, string administratorMark)
+    {
+        var token = await AdministratorTokenAsync();
+
+        using var request = new HttpRequestMessage(
+            HttpMethod.Post, $"/trabajos/{workId}/desenlace")
+        {
+            Content = JsonContent.Create(new WorkOutcomeRequest(workId, outcome, comment)),
+        };
+
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        using var data = _dataService.CreateClient();
+
+        return await data.SendAsync(request);
     }
 
     /// <summary>Lee el valor de un atributo, tal cual viajó en el marcado.</summary>

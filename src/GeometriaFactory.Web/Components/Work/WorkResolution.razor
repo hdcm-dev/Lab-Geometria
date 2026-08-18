@@ -1,5 +1,5 @@
-@* SUP-08 `Resolucion-Del-Trabajo` — CU-09.
-   Wireframe: `SDD/Docs/Proyectos/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Resolucion-Del-Trabajo.md` §2 y §3.
+@* SUP-08 `Resolucion-Del-Trabajo` — CU-09, y desde la etapa `h` CON COMPORTAMIENTO.
+   Wireframe: `SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/03-UX-UI-DX/Wireframes-Resolucion-Del-Trabajo.md` §2 y §3.
    Maqueta: `SDD/Maquetas/GeometriaFactory-Web/Resolucion-Del-Trabajo.html`, estado `resoluble`.
    Componentes que la maqueta declara acá: CMP-56 a CMP-64.
 
@@ -8,17 +8,23 @@
    dé ruta propia es DERIVA MAYOR». Por eso este archivo vive en `Components/Work/` y no en
    `Components/Pages/`: no lleva `@page`.
 
-   El archivo `Resolucion-Del-Trabajo.html` de la maqueta la exhibe aislada porque el wireframe
-   exigía demostrar el bloque con su mapa de estados completo. Es instrumento de la maqueta.
+   CUÁNDO SE DIBUJA. Lo decide `SUP-07` con las dos condiciones del wireframe, las dos sobre el
+   dato: quien mira es el administrador Y el trabajo está en estado `Pendiente`. Acá no se repiten:
+   un bloque que decidiera por su cuenta si dibujarse crearía un segundo lugar donde la condición
+   puede decir otra cosa.
 
-   CUÁNDO SE DIBUJA. Cuando quien mira es el administrador y el trabajo está en estado
-   `Pendiente`. La etapa `b` no tiene estado de trabajo; el papel lo resuelve `SUP-07` por la
-   dirección, y es esa la condición que decide si este bloque se dibuja.
+   LAS DOS DECISIONES SON LA MISMA SOLICITUD CON OTRO VALOR (`Contracts CU-08007` FA-01), y por eso
+   los dos botones llaman al mismo método con el nombre del desenlace. Rechazar no es un control
+   destructivo: es una decisión legítima del docente, y el color lo dice.
 
-   ETAPA `b`: los textos son los de la maqueta aprobada, y NO hay comportamiento. Los dos
-   diálogos de confirmación (CMP-62 y CMP-63) y el bloque de trabajo resuelto (CMP-64) no se
-   dibujan: los dispara estado que esta etapa no tiene. El aviso de que la etapa no funciona lo
-   da una sola vez la superficie que aloja este bloque; acá no se repite. *@
+   **LA PANTALLA NO ES LA DEFENSA.** Que estos botones sólo existan sobre un trabajo en `Pendiente`
+   no prueba nada: quien acota el desenlace al papel y al estado es el servicio de datos, y lo hace
+   aunque la petición no pase por ninguna pantalla. *@
+
+@using GeometriaFactory.Contracts.Works
+@inject DataServiceClient DataService
+@inject SessionState Session
+@inject NavigationManager Navigation
 
 <section class="gf-card gf-mb-5" aria-labelledby="resolution-heading">
     <h2 id="resolution-heading" class="gf-title">Resolver esta entrega</h2>
@@ -28,18 +34,107 @@
            pantalla que anuncie sólo la etiqueta tiene que enterarse igual. *@
         <label for="resolution-comment">Comentario para el alumno (opcional)</label>
         <textarea class="gf-textarea gf-textarea--medium" id="resolution-comment"
+                  @bind="_comment" @bind:event="oninput" disabled="@_working"
                   aria-describedby="resolution-comment-destination"></textarea>
         <span class="gf-requirement" id="resolution-comment-destination">Lo va a ver al abrir el trabajo. Podés dejarlo vacío.</span>
     </div>
 
+    @* EL AVISO DE FALLA VA ARRIBA DE LOS BOTONES Y NO ABAJO: es lo que la persona necesita leer
+       antes de volver a apretar. `role="alert"` para que llegue sin tener que buscarlo. *@
+    @if (_failure is not null)
+    {
+        <p class="gf-notice gf-notice--danger gf-mt-3" role="alert" data-gf-resolution-error>@_failure</p>
+    }
+
     <div class="gf-footer-actions gf-justify-start">
-        <button type="button" class="gf-btn gf-btn--primary">Aprobar</button>
+        <button type="button" class="gf-btn gf-btn--primary" disabled="@_working"
+                data-gf-outcome="@WorkOutcomeName.Approve" @onclick="() => ResolveAsync(WorkOutcomeName.Approve)">Aprobar</button>
         @* Rechazar es una decisión legítima, no una destrucción: no es un control destructivo.
            Es la misma solicitud con el otro valor. *@
-        <button type="button" class="gf-btn gf-btn--secondary">Rechazar</button>
+        <button type="button" class="gf-btn gf-btn--secondary" disabled="@_working"
+                data-gf-outcome="@WorkOutcomeName.Reject" @onclick="() => ResolveAsync(WorkOutcomeName.Reject)">Rechazar</button>
         @* La acción de retirar queda visualmente separada de las dos decisiones, con su color de
            peligro y su propio diálogo. *@
         <span class="gf-flexible"></span>
-        <button type="button" class="gf-btn gf-btn--destructive">Retirar</button>
+        <button type="button" class="gf-btn gf-btn--destructive" disabled="@_working"
+                data-gf-withdraw @onclick="WithdrawAsync">Retirar</button>
     </div>
 </section>
+
+@code {
+    /// <summary>El trabajo que se resuelve. Lo aporta la superficie que aloja este bloque.</summary>
+    [Parameter, EditorRequired]
+    public Guid WorkId { get; set; }
+
+    private string? _comment;
+    private string? _failure;
+
+    /// <summary>
+    /// Mientras hay una solicitud en vuelo, los tres controles quedan inhabilitados.
+    /// </summary>
+    /// <remarks>
+    /// NO ES COSMÉTICO: los dos desenlaces son terminales, y el segundo clic sobre «Aprobar» no
+    /// aprueba dos veces —el servicio lo rechaza— pero deja a la persona leyendo una negativa por
+    /// un trabajo que ella misma acaba de resolver. Inhabilitar evita explicar eso.
+    /// </remarks>
+    private bool _working;
+
+    private async Task ResolveAsync(string outcome)
+    {
+        _failure = null;
+        _working = true;
+
+        try
+        {
+            var result = await DataService.ResolveWorkAsync(WorkId, outcome, _comment, Session.UseAccessToken());
+
+            if (!result.Succeeded)
+            {
+                // EL TEXTO DEL SERVICIO SE MUESTRA TAL CUAL: es el que la tabla única de traducción
+                // redactó para esa condición, y reescribirlo acá abriría un segundo lugar donde el
+                // mismo motivo puede decir otra cosa.
+                _failure = result.Error!.Message;
+                return;
+            }
+
+            // SE VUELVE AL LISTADO DE LA COMISIÓN, que es donde el trabajo ya figura con su estado
+            // nuevo (`Contracts CU-08007` §4, paso 5). Quedarse acá mostraría el mismo trabajo con
+            // el bloque de resolución retirado, que se lee como si algo se hubiera roto.
+            Navigation.NavigateTo("/comision", forceLoad: true);
+        }
+        finally
+        {
+            _working = false;
+        }
+    }
+
+    /// <summary>
+    /// `A-12` con el alcance del administrador: retira un trabajo que ve.
+    /// </summary>
+    /// <remarks>
+    /// LOS DOS ALCANCES SON OPUESTOS y este es el del administrador: alcanza los tres estados que
+    /// ve y ninguno más. El alumno elimina **sólo** borradores, que el administrador ni ve.
+    /// </remarks>
+    private async Task WithdrawAsync()
+    {
+        _failure = null;
+        _working = true;
+
+        try
+        {
+            var result = await DataService.DeleteWorkAsync(WorkId, Session.UseAccessToken());
+
+            if (!result.Succeeded)
+            {
+                _failure = result.Error!.Message;
+                return;
+            }
+
+            Navigation.NavigateTo("/comision", forceLoad: true);
+        }
+        finally
+        {
+            _working = false;
+        }
+    }
+}

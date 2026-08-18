@@ -832,6 +832,214 @@ public sealed class WorkSurfaceTests : IDisposable
 
     // ---- Andamiaje de escenario ---------------------------------------------------------------
 
+    // ================================================================================
+    // ETAPA `h` · los criterios de la transición `h` → `i…` que le tocan a esta superficie
+    // ================================================================================
+
+    /// <summary>
+    /// Criterio **1**: el administrador aprueba un trabajo en `Pendiente` y queda en `Finalizado`;
+    /// rechaza otro y queda en `Rechazado`.
+    /// </summary>
+    /// <remarks>
+    /// LOS DOS DESENLACES EN UNA SOLA PRUEBA, y no en dos: lo que el criterio afirma es que son **el
+    /// mismo camino con otro valor**, y separarlos dejaría que uno pasara con el otro roto sin que
+    /// la lectura lo note.
+    ///
+    /// EL ESTADO SE LEE DEL ALMACÉN Y NO DE LA RESPUESTA. Creerle a la respuesta sobre en qué estado
+    /// quedó el trabajo sería verificar lo que el producto dice de sí mismo.
+    /// </remarks>
+    [Fact]
+    public async Task TheAdministratorApprovesOneWorkAndRejectsAnotherAndBothLandOnTheirTerminalStatus()
+    {
+        var world = await WorldAsync();
+
+        var approved = await SeedWorkAsync(world.StudentId, "El que se aprueba", ScenarioE2, WorkStatus.Submitted);
+        var rejected = await SeedWorkAsync(world.StudentId, "El que se rechaza", ScenarioE2, WorkStatus.Submitted);
+
+        using var first = await SendAsync(Authorized(
+            HttpMethod.Post, $"/trabajos/{approved}/desenlace", world.AdministratorToken,
+            new WorkOutcomeRequest(approved, WorkOutcomeName.Approve, null)));
+
+        Assert.Equal(HttpStatusCode.OK, first.StatusCode);
+        var firstBody = await first.Content.ReadFromJsonAsync<WorkOutcomeResponse>();
+        Assert.Equal("Approved", firstBody!.Status);
+
+        using var second = await SendAsync(Authorized(
+            HttpMethod.Post, $"/trabajos/{rejected}/desenlace", world.AdministratorToken,
+            new WorkOutcomeRequest(rejected, WorkOutcomeName.Reject, null)));
+
+        Assert.Equal(HttpStatusCode.OK, second.StatusCode);
+        var secondBody = await second.Content.ReadFromJsonAsync<WorkOutcomeResponse>();
+        Assert.Equal("Rejected", secondBody!.Status);
+
+        // LEÍDO DEL ALMACÉN: es donde el estado quedó, y no donde el producto dice que quedó.
+        Assert.Equal("Approved", await StoredStatusAsync(approved));
+        Assert.Equal("Rejected", await StoredStatusAsync(rejected));
+    }
+
+    /// <summary>
+    /// Criterio **2**: el comentario se guarda cuando el administrador lo deja, y los dos desenlaces
+    /// funcionan **sin** comentario.
+    /// </summary>
+    /// <remarks>
+    /// LA SEGUNDA MITAD ES LA QUE IMPORTA Y ES LA QUE SE OLVIDA. Que el comentario se guarde lo
+    /// verifica cualquiera; que **rechazar sin comentario proceda** es lo que el contrato declara
+    /// explícitamente (FA-01) y lo que una validación agregada de más rompería sin que nadie lo note
+    /// hasta que un docente rechace en silencio.
+    ///
+    /// EL COMENTARIO VACÍO NO SE GUARDA COMO CADENA VACÍA sino como ausencia, que es lo que evita
+    /// que el alumno vea un bloque de comentario en blanco.
+    /// </remarks>
+    [Fact]
+    public async Task TheCommentIsStoredWhenWrittenAndBothOutcomesProceedWithoutIt()
+    {
+        var world = await WorldAsync();
+
+        var withComment = await SeedWorkAsync(world.StudentId, "Con comentario", ScenarioE2, WorkStatus.Submitted);
+        var approvedBare = await SeedWorkAsync(world.StudentId, "Aprobado sin nada", ScenarioE2, WorkStatus.Submitted);
+        var rejectedBare = await SeedWorkAsync(world.StudentId, "Rechazado sin nada", ScenarioE2, WorkStatus.Submitted);
+
+        const string Written = "Revisá el área del cubo: la fórmula que usaste no es la del área total.";
+
+        using var commented = await SendAsync(Authorized(
+            HttpMethod.Post, $"/trabajos/{withComment}/desenlace", world.AdministratorToken,
+            new WorkOutcomeRequest(withComment, WorkOutcomeName.Reject, Written)));
+        Assert.Equal(HttpStatusCode.OK, commented.StatusCode);
+        Assert.Equal(Written, await StoredCommentAsync(withComment));
+
+        // LOS DOS DESENLACES, SIN COMENTARIO: el contrato no lo impone ni siquiera al rechazar.
+        using var bareApproval = await SendAsync(Authorized(
+            HttpMethod.Post, $"/trabajos/{approvedBare}/desenlace", world.AdministratorToken,
+            new WorkOutcomeRequest(approvedBare, WorkOutcomeName.Approve, null)));
+        Assert.Equal(HttpStatusCode.OK, bareApproval.StatusCode);
+
+        using var bareRejection = await SendAsync(Authorized(
+            HttpMethod.Post, $"/trabajos/{rejectedBare}/desenlace", world.AdministratorToken,
+            new WorkOutcomeRequest(rejectedBare, WorkOutcomeName.Reject, "   ")));
+        Assert.Equal(HttpStatusCode.OK, bareRejection.StatusCode);
+
+        // NI CADENA VACÍA NI ESPACIOS: ausencia, que es lo que el alumno no ve.
+        Assert.Null(await StoredCommentAsync(approvedBare));
+        Assert.Null(await StoredCommentAsync(rejectedBare));
+        Assert.Equal("Approved", await StoredStatusAsync(approvedBare));
+        Assert.Equal("Rejected", await StoredStatusAsync(rejectedBare));
+    }
+
+    /// <summary>
+    /// Criterio **3**: aprobar y rechazar son facultad exclusiva del administrador, y un alumno que
+    /// fuerce la transición contra el servicio de datos es rechazado.
+    /// </summary>
+    /// <remarks>
+    /// LA PETICIÓN SE ARMA A MANO, con el acceso firmado legítimo del alumno y sin pasar por ninguna
+    /// pantalla, que es como el intake §17.5.P.6 exige verificar esta clase de regla. **Sobre su
+    /// propio trabajo**, para que la negativa no se pueda explicar por pertenencia.
+    ///
+    /// `403` Y NO `404`: acá no hay nada que ocultar. El alumno sabe que el trabajo existe, es suyo
+    /// y lo está mirando; lo que no alcanza es el papel.
+    ///
+    /// Y EL ESTADO NO SE MUEVE, leído del almacén: una negativa que igual aplicara el desenlace
+    /// sería el peor de los dos mundos.
+    /// </remarks>
+    [Fact]
+    public async Task TheStudentForcingTheOutcomeOnTheirOwnWorkIsRefusedAndNothingMoves()
+    {
+        var world = await WorldAsync();
+        var own = await SeedWorkAsync(world.StudentId, "El propio", ScenarioE2, WorkStatus.Submitted);
+
+        using var forced = await SendAsync(Authorized(
+            HttpMethod.Post, $"/trabajos/{own}/desenlace", world.StudentToken,
+            new WorkOutcomeRequest(own, WorkOutcomeName.Approve, "me lo apruebo yo")));
+
+        Assert.Equal(HttpStatusCode.Forbidden, forced.StatusCode);
+
+        var error = await forced.Content.ReadFromJsonAsync<ErrorResponse>();
+        Assert.Equal(ErrorCode.OperationAdminOnly, error!.Code);
+
+        Assert.Equal("Submitted", await StoredStatusAsync(own));
+        Assert.Null(await StoredCommentAsync(own));
+    }
+
+    /// <summary>
+    /// Criterio **4**: `Finalizado` y `Rechazado` son terminales — ninguna transición sale de ellos
+    /// y su contenido no cambia.
+    /// </summary>
+    /// <remarks>
+    /// SE EJERCEN LOS DOS TERMINALES Y CONTRA LOS DOS DESENLACES, que son cuatro intentos: un
+    /// terminal que rechazara aprobar pero aceptara rechazar seguiría siendo un terminal roto.
+    ///
+    /// `409` Y NO `403`: quien pide TIENE la facultad; lo que no procede es la operación sobre ese
+    /// estado. Y la respuesta declara el estado actual, que es lo que el administrador necesita para
+    /// saber que alguien lo resolvió antes.
+    ///
+    /// EL CONTENIDO NO CAMBIA, leído del almacén: el comentario que tenía sigue siendo el que tenía.
+    /// </remarks>
+    [Fact]
+    public async Task TheTerminalStatusesRefuseEveryOutcomeAndTheirContentDoesNotChange()
+    {
+        var world = await WorldAsync();
+
+        var approved = await SeedWorkAsync(world.StudentId, "Ya finalizado", ScenarioE2, WorkStatus.Approved);
+        var rejected = await SeedWorkAsync(world.StudentId, "Ya rechazado", ScenarioE2, WorkStatus.Rejected);
+
+        foreach (var (workId, expected) in new[] { (approved, "Approved"), (rejected, "Rejected") })
+        {
+            foreach (var outcome in new[] { WorkOutcomeName.Approve, WorkOutcomeName.Reject })
+            {
+                using var attempt = await SendAsync(Authorized(
+                    HttpMethod.Post, $"/trabajos/{workId}/desenlace", world.AdministratorToken,
+                    new WorkOutcomeRequest(workId, outcome, "esto no tiene que entrar")));
+
+                Assert.Equal(HttpStatusCode.Conflict, attempt.StatusCode);
+
+                var error = await attempt.Content.ReadFromJsonAsync<ErrorResponse>();
+                Assert.Equal(ErrorCode.StateForbidsUpdate, error!.Code);
+            }
+
+            // NI EL ESTADO NI EL CONTENIDO SE MOVIERON, después de los dos intentos.
+            Assert.Equal(expected, await StoredStatusAsync(workId));
+            Assert.Equal("comentario del docente", await StoredCommentAsync(workId));
+        }
+    }
+
+    /// <summary>
+    /// Criterio **6**: el administrador elimina un trabajo en estado `Pendiente` y el trabajo
+    /// desaparece.
+    /// </summary>
+    /// <remarks>
+    /// LA DESAPARICIÓN SE LEE DEL ALMACÉN, con un recuento: una respuesta `204` sobre un trabajo que
+    /// siguiera existiendo es exactamente el defecto que esta prueba busca.
+    ///
+    /// Y SE VERIFICA EL ALCANCE OPUESTO EN LA MISMA CORRIDA: el alumno **no** puede eliminar ese
+    /// mismo trabajo, porque su alcance termina en `Borrador`. Los dos alcances son opuestos y no
+    /// complementarios, y comprobar uno solo dejaría pasar que se hubieran vuelto iguales.
+    /// </remarks>
+    [Fact]
+    public async Task TheAdministratorDeletesASubmittedWorkAndItDisappearsWhileTheStudentCannot()
+    {
+        var world = await WorldAsync();
+        var submitted = await SeedWorkAsync(world.StudentId, "Pendiente a retirar", ScenarioE2, WorkStatus.Submitted);
+
+        // EL ALUMNO NO PUEDE, aunque el trabajo sea suyo: su alcance termina en `Borrador`.
+        using var byStudent = await SendAsync(Authorized(
+            HttpMethod.Delete, $"/trabajos/{submitted}", world.StudentToken));
+        Assert.Equal(HttpStatusCode.Conflict, byStudent.StatusCode);
+        Assert.Equal(1, await CountWorksAsync());
+
+        using var byAdministrator = await SendAsync(Authorized(
+            HttpMethod.Delete, $"/trabajos/{submitted}", world.AdministratorToken));
+        Assert.Equal(HttpStatusCode.NoContent, byAdministrator.StatusCode);
+
+        // DESAPARECIÓ, leído del almacén y no de la respuesta.
+        Assert.Equal(0, await CountWorksAsync());
+        Assert.Null(await StoredStatusAsync(submitted));
+    }
+
+    /// <summary>El comentario del docente, leído del almacén.</summary>
+    private async Task<string?> StoredCommentAsync(Guid workId) =>
+        await ScalarAsync(
+            "select AdministratorComment from Work where Id = $id collate nocase",
+            ("$id", workId.ToString())) as string;
+
     private sealed record World(string AdministratorToken, string StudentToken, Guid StudentId);
 
     private sealed record Student(Guid Id, string Token, string ProvisionalPassword);

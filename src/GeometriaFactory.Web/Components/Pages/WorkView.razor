@@ -127,7 +127,7 @@ else
        dato: quien mira es el administrador Y el trabajo está en estado `Pendiente`. *@
     @if (Session.IsAdministrator && string.Equals(_work.Status, "Submitted", StringComparison.Ordinal))
     {
-        <WorkResolution />
+        <WorkResolution WorkId="_work.WorkId" />
     }
 
     <div class="gf-two-columns">
