@@ -432,7 +432,50 @@ comprometer la `g` y no para cerrar ésta.**
 
 ## Etapa `g` — Visualización 3D
 
-*En curso. Esta sección se completa al cerrar la etapa; lo que sigue son los cambios ya hechos.*
+**Rama:** `codigo/etapa-g-puerta`
+
+*Cerrada. Los **siete** criterios de la transición `g` → `h` se verifican con `scripts/verify-stage-g.sh`.*
+
+### La puerta de la etapa, que no existía
+
+- **`scripts/verify-stage-g.sh` es nuevo, y con él la etapa `g` deja de cerrarse por lectura.** Las
+  etapas `b` y `c` tenían su guion; `d`, `e`, `f` y `g` no tenían ninguno, y el orquestador de
+  reanudación lo dejó declarado como estado observado. **Una puerta sin guion se verifica cuando
+  alguien se acuerda**, que es la forma en que este producto ya vio degradarse otras cosas.
+- **Cada criterio se mide donde se predica, y no donde es cómodo.** Cuatro —las tres figuras
+  dibujadas, la disposición determinista, la ausencia de peticiones y la sincronización por índice—
+  ocurren **dentro de la escena**, y ninguna prueba de integración puede afirmarlos: la prueba ve el
+  marcado que se sirve, no la escena que el navegador construye. Van a
+  `visor/verification/stage-g.mjs`, **con navegador de verdad**.
+- **`G-7` se mide en los dos lados, y es correcto que así sea**: que los dos movimientos se gobiernen
+  por separado y se detengan al arrastrar es de la escena; que la pieza pública les pase **dos
+  valores de verdad** —y no uno— es del marcado.
+- **`G-2` no se reescribió**: es `PT-02`, ya tenía su medición, y el guion la invoca.
+- **Se mide por la fachada pública y por los píxeles del lienzo, sin agregarle al paquete una sola
+  función de medición.** Las seis funciones las fijó el Product Owner, y un banco que necesitara una
+  séptima para poder medir **estaría midiendo otro producto**. La disposición se comprueba comparando
+  dos capturas —con las piezas pasadas **desordenadas** la segunda vez, que es lo que le da valor a la
+  comparación— y el movimiento, viendo si el lienzo cambia entre dos capturas separadas en el tiempo.
+
+### El criterio que no tenía prueba
+
+- **`TheAdministratorOpensTheWorkAndFindsExactlyWhatTheStudentSaw`.** El criterio `G-6` —«el
+  administrador abre cualquier trabajo que ve y encuentra **exactamente lo mismo** que vio el
+  alumno»— era el único de los siete sin ninguna verificación.
+- **Compara los portadores de dato y exige igualdad, no presencia.** Comprobar que la vista del
+  administrador «tiene escena y tiene árbol» dejaría pasar el defecto que el criterio existe para
+  atrapar: que tenga **otra** escena u **otro** árbol. Se comparan las piezas que bajan al visor
+  —carácter por carácter— y los índices de los nodos, en su orden.
+- **No se compara el documento entero, y se declara por qué**: el shell trae la identidad de quien
+  mira y su barra lateral, distintas por papel. El criterio se predica del trabajo, no del marco.
+
+### Un comentario que declaraba ausente lo que estaba doce líneas más arriba
+
+- **`surface-interaction.js` decía «LA OTRA DIRECCIÓN NO ESTÁ… queda declarado y elevado»** sobre la
+  sincronización escena → árbol, mientras el código de doce líneas antes ya la ataba con
+  `onPieceSelected`. Era cierto hasta que `ADR-08007` lo cerró, y sobrevivió a su propia solución.
+- Es la misma forma que este producto ya tiene registrada tres veces: **la decisión llega y la nota
+  se queda**. La encontró la puerta, al ir a verificar el criterio que ese comentario negaba.
 
 ### La superficie HTTP pasa a describirse a sí misma
 - **Documento OpenAPI generado** en `/openapi/v1.json` y **explorador navegable** en

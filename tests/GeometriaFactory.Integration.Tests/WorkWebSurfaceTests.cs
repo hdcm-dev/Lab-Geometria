@@ -1085,4 +1085,82 @@ public sealed class WorkWebSurfaceTests : IDisposable
 
         return result is DBNull ? null : result;
     }
+
+    /// <summary>
+    /// Criterio **6** de la transición `g` → `h` (`Roadmap-Producto.md` §5.2): «el administrador abre
+    /// cualquier trabajo que ve y encuentra **exactamente lo mismo** que vio el alumno».
+    ///
+    /// POR QUÉ SE COMPARA EL MARCADO Y NO UNA LISTA DE COSAS PRESENTES. Comprobar que la vista del
+    /// administrador «tiene escena y tiene árbol» dejaría pasar el defecto que este criterio existe
+    /// para atrapar: que tenga **otra** escena o **otro** árbol. Se comparan los portadores de dato
+    /// —las piezas que bajan al visor y los índices de los nodos— y se exige **igualdad**, no
+    /// presencia.
+    ///
+    /// LO QUE SÍ DIFIERE, y por eso no se compara el documento entero: el shell trae la identidad de
+    /// quien mira y su barra lateral, que son distintas por papel. El criterio se predica del
+    /// trabajo, no del marco.
+    /// </summary>
+    [Fact]
+    public async Task TheAdministratorOpensTheWorkAndFindsExactlyWhatTheStudentSaw()
+    {
+        var studentMark = await SignInAsStudentAsync();
+
+        using var form = await GetAsync(NewWorkRoute, studentMark);
+        var formHtml = Read(await form.Content.ReadAsStringAsync());
+        using var sent = await PostSubmissionAsync(
+            form, formHtml, NewWorkRoute, studentMark, "El semilla", "09/08/2026", null, Scenarios.E1);
+        Assert.Equal(HttpStatusCode.OK, sent.StatusCode);
+
+        var workId = await OnlyWorkIdAsync();
+        Assert.Equal("Submitted", await StoredStatusAsync(workId));
+
+        using var studentView = await GetAsync($"/trabajos/{workId}", studentMark);
+        var studentHtml = Read(await studentView.Content.ReadAsStringAsync());
+        Trace("1 · el alumno abre su trabajo", studentView);
+        Assert.Equal(HttpStatusCode.OK, studentView.StatusCode);
+
+        var administratorMark = await SignInAsAdministratorAsync();
+
+        using var administratorView = await GetAsync($"/trabajos/{workId}", administratorMark);
+        var administratorHtml = Read(await administratorView.Content.ReadAsStringAsync());
+        Trace("2 · el administrador abre el mismo trabajo", administratorView);
+        Assert.Equal(HttpStatusCode.OK, administratorView.StatusCode);
+
+        // LAS PIEZAS QUE BAJAN AL VISOR SON LAS MISMAS, carácter por carácter. Es el dato del que
+        // depende la escena: si estos dos difieren, los dos papeles ven figuras distintas.
+        var studentPieces = AttributeValue(studentHtml, "data-gf-viewer-pieces");
+        var administratorPieces = AttributeValue(administratorHtml, "data-gf-viewer-pieces");
+        Assert.False(string.IsNullOrWhiteSpace(studentPieces));
+        Assert.Equal(studentPieces, administratorPieces);
+
+        // EL ÁRBOL LLEVA LOS MISMOS ÍNDICES, que es la identidad con la que se sincroniza: mismos
+        // nodos, en el mismo orden.
+        Assert.Equal(NodeIndexes(studentHtml), NodeIndexes(administratorHtml));
+        Assert.NotEmpty(NodeIndexes(studentHtml));
+
+        // Y LO QUE SE DECLARA SOBRE EL DIBUJO ES LO MISMO: el administrador no ve un recuento
+        // distinto del que vio el alumno.
+        Assert.Contains("Se dibujaron las 3 figuras", studentHtml, StringComparison.Ordinal);
+        Assert.Contains("Se dibujaron las 3 figuras", administratorHtml, StringComparison.Ordinal);
+
+        // LOS DOS MOVIMIENTOS ESTÁN EN LAS DOS VISTAS: el criterio dice «exactamente lo mismo», y
+        // eso incluye poder mover la escena igual.
+        Assert.Contains("data-gf-motion=\"cameraOrbit\"", administratorHtml, StringComparison.Ordinal);
+        Assert.Contains("data-gf-motion=\"pieceSpin\"", administratorHtml, StringComparison.Ordinal);
+    }
+
+    /// <summary>Lee el valor de un atributo, tal cual viajó en el marcado.</summary>
+    private static string AttributeValue(string html, string attribute)
+    {
+        var match = Regex.Match(html, attribute + "=\"(?<valor>[^\"]*)\"");
+
+        return match.Success ? match.Groups["valor"].Value : string.Empty;
+    }
+
+    /// <summary>Los índices de los nodos del árbol, en el orden en que el marcado los trae.</summary>
+    private static IReadOnlyList<string> NodeIndexes(string html) =>
+        Regex.Matches(html, "data-gf-piece-node=\"(?<indice>[^\"]*)\"")
+            .Select(m => m.Groups["indice"].Value)
+            .ToList();
+
 }
