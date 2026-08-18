@@ -555,8 +555,16 @@ comprometer la `g` y no para cerrar ésta.**
 
 **Rama:** `codigo/etapa-h-revision`
 
-*Cerrada en sus **seis criterios mecánicos**, verificados con `scripts/verify-stage-h.sh`. El
-séptimo —«las ocho fases tienen OK explícito»— es del punto de control del Product Owner.*
+*Cerrada. Los seis criterios mecánicos verificados con `scripts/verify-stage-h.sh`, y el séptimo
+—«las ocho fases tienen OK explícito»— **declarado por el Product Owner el 2026-08-18**.*
+
+> ## El alcance comprometido está cerrado
+>
+> Con el OK explícito de las ocho fases, **`h` queda cerrada y demostrada** y el alcance que el
+> intake comprometió está completo: de `a` a `h`, con las ocho puertas verificables por guion.
+>
+> Es también la condición que el roadmap ponía para planificar `i…`, y esa planificación entró en
+> `Roadmap-Producto.md` **1.8** el mismo día.
 
 ### El desenlace, de punta a punta
 
