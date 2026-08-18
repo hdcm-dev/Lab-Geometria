@@ -60,6 +60,9 @@ public static class WorkEndpoints
     /// <summary>Ruta de `A-11`, `A-12` y `A-14`. [derivado] `Definicion-Superficie-HTTP.md` §3.</summary>
     public const string WorkRoute = "/trabajos/{id:guid}";
 
+    /// <summary>`A-15` — el desenlace de la revisión, colgando del trabajo que resuelve.</summary>
+    public const string WorkOutcomeRoute = "/trabajos/{id:guid}/desenlace";
+
     /// <summary>
     /// Nombre del parámetro de filtro por alumno de `A-13`. **[derivado de la etapa `e`]**
     /// </summary>
@@ -276,6 +279,62 @@ public static class WorkEndpoints
             return Results.NoContent();
         })
         .WithName("DeleteWork")
+        .RequireAuthorization();
+
+        // ---- A-15 · aprobar o rechazar un trabajo en estado `Pendiente` ---------------------
+        //
+        // UN SOLO PUNTO PARA LOS DOS DESENLACES, Y NO DOS. Lo que cambia entre aprobar y rechazar
+        // es un valor del conjunto cerrado, no la operación: dos puntos —`/aprobar` y `/rechazar`—
+        // habrían puesto en la ruta lo que el contrato ya declara en el cuerpo, y habrían obligado
+        // a mantener dos caminos para las mismas cuatro guardas.
+        //
+        // CUELGA DEL TRABAJO PORQUE ES UNA TRANSICIÓN SUYA, y `POST` porque no es idempotente en el
+        // sentido que importa: el segundo intento sobre el mismo trabajo YA NO PROCEDE, y esa
+        // negativa es información —alguien lo resolvió antes—, no un ruido a esconder.
+        endpoints.MapPost(WorkOutcomeRoute, async (
+            Guid id,
+            WorkOutcomeRequest request,
+            HttpContext context,
+            ResolveWorkUseCase resolveWork,
+            ISystemClock clock,
+            ILoggerFactory loggerFactory,
+            CancellationToken cancellationToken) =>
+        {
+            var now = clock.UtcNow;
+            var log = loggerFactory.CreateLogger(typeof(WorkEndpoints));
+
+            // EL IDENTIFICADOR DE LA RUTA GOBIERNA SOBRE EL DEL CUERPO, como en `A-11`: el contrato
+            // declara el campo porque el tipo es el mismo para los dos extremos, y acá se usa el de
+            // la ruta para que no haya un lugar donde los dos puedan no coincidir.
+            var result = await resolveWork
+                .ExecuteAsync(RoleOf(context.User), id, request.Outcome, request.Comment, cancellationToken)
+                .ConfigureAwait(false);
+
+            if (!result.Succeeded)
+            {
+                log.LogInformation(
+                    "Desenlace del trabajo {WorkId} rechazado con el motivo {Condition}.", id, result.ConditionCode);
+
+                return result.ConditionCode is ConditionCode.OutcomeOutsideSubmitted
+                    or ConditionCode.TransitionFromTerminalStatus
+                    ? ContractTranslation.WorkStateForbidsOutcome(now, result.Value!.Status)
+                    : ContractTranslation.Problem(result.ConditionCode, now);
+            }
+
+            var resolution = result.Value!;
+
+            // EL COMENTARIO NO SE REGISTRA EN LA TRAZA, y es deliberado: es texto que el docente le
+            // escribe a una persona sobre su trabajo. Lo que se registra es que hubo desenlace y
+            // cuál, que es lo que hace falta para reconstruir qué pasó.
+            log.LogInformation(
+                "Trabajo {WorkId} resuelto: quedó en {Status}.", resolution.WorkId, resolution.Status);
+
+            return Results.Ok(new WorkOutcomeResponse(
+                resolution.WorkId,
+                resolution.Status.ToString(),
+                resolution.ResolvedAt));
+        })
+        .WithName("ResolveWork")
         .RequireAuthorization();
 
         // ---- A-13 · el listado, con el alcance que el papel determina ------------------------

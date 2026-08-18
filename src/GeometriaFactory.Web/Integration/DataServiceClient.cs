@@ -324,6 +324,30 @@ public sealed class DataServiceClient
             : DataServiceOutcome<bool>.Failed(outcome.Error!);
     }
 
+    /// <summary>`A-15` — Aprueba o rechaza un trabajo en estado `Pendiente`.</summary>
+    /// <remarks>
+    /// EL COMENTARIO VIAJA SIN VALOR CUANDO NO SE ESCRIBIÓ, y no como cadena vacía: el contrato lo
+    /// declara opcional en los dos desenlaces, y una cadena vacía sería un comentario que el alumno
+    /// vería como un bloque en blanco.
+    ///
+    /// **LA PANTALLA NO ES LA DEFENSA**, con el mismo criterio que la eliminación: que la interfaz
+    /// sólo ofrezca los botones sobre un trabajo en `Pendiente` no prueba nada. Quien acota el
+    /// desenlace al papel de administrador y al estado `Pendiente` es el servicio de datos, y lo
+    /// hace aunque la solicitud no pase por ninguna pantalla.
+    /// </remarks>
+    public Task<DataServiceOutcome<WorkOutcomeResponse>> ResolveWorkAsync(
+        Guid workId,
+        string outcome,
+        string? comment,
+        string? accessToken,
+        CancellationToken cancellationToken = default) =>
+        SendAsync<WorkOutcomeRequest, WorkOutcomeResponse>(
+            HttpMethod.Post,
+            $"{WorksPath}/{workId}/desenlace",
+            new WorkOutcomeRequest(workId, outcome, string.IsNullOrWhiteSpace(comment) ? null : comment),
+            accessToken,
+            cancellationToken);
+
     /// <summary>`A-13` — Trae el listado de trabajos con el alcance que el papel determina.</summary>
     /// <remarks>
     /// EL ALCANCE NO ES UN PARÁMETRO Y NO SE PODRÍA PEDIR DESDE ACÁ: lo decide el servicio de

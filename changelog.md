@@ -548,3 +548,68 @@ comprometer la `g` y no para cerrar ésta.**
   que dibuje obligue a decidirlo.
 - **Y queda una red**: una prueba de la batería comprueba que esos enlaces la lleven. Que el
   documento después dibuje lo sigue midiendo `PT-02`, con navegador.
+
+---
+
+## Etapa `h` — Circuito de revisión del administrador
+
+**Rama:** `codigo/etapa-h-revision`
+
+*Cerrada en sus **seis criterios mecánicos**, verificados con `scripts/verify-stage-h.sh`. El
+séptimo —«las ocho fases tienen OK explícito»— es del punto de control del Product Owner.*
+
+### El desenlace, de punta a punta
+
+- **`F-21`, `F-23` y `F-24` cumplidas**: el administrador aprueba o rechaza un trabajo en
+  `Pendiente`, deja su comentario opcional y retira cualquier trabajo que ve; el alumno ve el
+  desenlace en su listado y el comentario al abrir el trabajo.
+- **El dominio ya estaba.** `Work.ApplyOutcome` y `AdministratorComment` existían desde antes, con
+  sus **cuatro guardas** —no terminal, sólo desde `Pendiente`, sólo administrador, desenlace del
+  conjunto cerrado—. Lo que faltaba era todo lo de arriba: contrato, caso de uso, punto de acceso y
+  superficie. **Ninguna guarda se reescribió en otra capa**: repetirlas habría creado un segundo
+  lugar donde pueden decir otra cosa.
+- **`A-15` es un solo punto para los dos desenlaces**, `POST /trabajos/{id}/desenlace`. Dos puntos
+  —`/aprobar` y `/rechazar`— habrían puesto en la ruta lo que el contrato ya declara en el cuerpo, y
+  habrían obligado a mantener dos caminos para las mismas cuatro guardas.
+- **`WorkOutcomeName` viaja por nombre y nunca por posición**, con el mismo criterio que
+  `WorkObservationKind`: un entero dejaría que agregar un valor al conjunto corriera el significado
+  de los que ya viajaron.
+- **La solicitud no lleva estado pretendido.** Se pide un desenlace y el dominio decide a qué estado
+  lleva: un campo de estado permitiría pedir `Finalizado` sin aprobar.
+
+### Dos motivos nuevos en la tabla única, y ningún código inventado
+
+- `OutcomeRequiresAdministratorRole` → **`403`**, con el código `OPERATION_ADMIN_ONLY` que ya
+  existía. **Facultad y no pertenencia**: el alumno sabe que su trabajo existe, es suyo y lo está
+  mirando; lo que no alcanza es el papel.
+- `UnknownOutcome` → **`400`**: un desenlace fuera del conjunto es un campo mal formado, no un
+  estado que impida la operación.
+- Los dos motivos de estado —fuera de `Pendiente` y desde un terminal— salen por
+  **`WorkStateForbidsOutcome`**, con **`409`** y declarando el estado actual. **El texto no los
+  distingue y es deliberado**: el dominio los separa porque son guardas distintas, pero para quien
+  pide la respuesta útil es la misma y es en qué estado quedó.
+
+### La superficie, con el bloque que la etapa `b` había dejado mudo
+
+- **`WorkResolution.razor` pasa de marcador de posición a comportamiento.** Sus tres controles
+  llaman al servicio; los dos desenlaces son **la misma solicitud con otro valor**.
+- **Los tres controles se inhabilitan mientras hay una solicitud en vuelo**, y no es cosmético: los
+  dos desenlaces son terminales, y el segundo clic dejaría a la persona leyendo una negativa por un
+  trabajo que ella misma acaba de resolver.
+- **El comentario vacío viaja como ausencia y no como cadena vacía**, para que el alumno no vea un
+  bloque de comentario en blanco.
+- **El aviso de falla muestra el texto del servicio tal cual**: reescribirlo en la pantalla abriría
+  un segundo lugar donde el mismo motivo dice otra cosa.
+
+### La puerta
+
+- **`scripts/verify-stage-h.sh` corre los seis criterios mecánicos** y **declara que el séptimo no
+  lo es**, en lugar de simular que lo marca. Un guion que dijera «OK» sobre «las ocho fases tienen
+  OK explícito» estaría afirmando lo que sólo el punto de control puede afirmar.
+- **`H-3` se verifica forzando la petición**, con el acceso firmado legítimo del alumno y sobre su
+  **propio** trabajo, para que la negativa no se pueda explicar por pertenencia.
+- **`H-4` ejerce los dos terminales contra los dos desenlaces**: cuatro intentos, porque un terminal
+  que rechazara aprobar y aceptara rechazar seguiría siendo un terminal roto.
+- **Lo que no se ve en una respuesta se lee del almacén**: el estado, el comentario y la
+  desaparición del trabajo eliminado.
+- **6 pruebas nuevas**, y la batería queda en **311 en verde**.

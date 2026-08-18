@@ -138,6 +138,25 @@ public static class ContractTranslation
             new Translation(ErrorCode.WorkNotFound, StatusCodes.Status404NotFound,
                 "No encontramos ese trabajo."),
 
+        // ---- LOS MOTIVOS QUE AGREGA LA ETAPA `h` -------------------------------------------
+
+        // FACULTAD Y NO PERTENENCIA, igual que `AdministratorRoleRequired`: el trabajo en
+        // `Pendiente` no es de nadie en el sentido del alcance —el administrador ve todos—, y lo
+        // que no alcanza es el papel. `403` y no `404`, porque acá no hay nada que ocultar: el
+        // alumno YA SABE que su trabajo existe, es suyo y lo está mirando.
+        ConditionCode.OutcomeRequiresAdministratorRole =>
+            new Translation(ErrorCode.OperationAdminOnly, StatusCodes.Status403Forbidden,
+                "Aprobar o rechazar es del docente a cargo del laboratorio."),
+
+        // EL DESENLACE QUE NO PERTENECE AL CONJUNTO CERRADO ES UN CAMPO MAL FORMADO, y por eso
+        // `400`: la petición no se puede interpretar, no es que el estado la impida. Es el único
+        // de los cuatro que una petición bien armada nunca produce.
+        ConditionCode.UnknownOutcome =>
+            new Translation(ErrorCode.RequiredFieldMissing, StatusCodes.Status400BadRequest,
+                "El desenlace tiene que ser aprobar o rechazar."),
+
+        // ---- FIN DE LOS MOTIVOS DE LA ETAPA `h` --------------------------------------------
+
         // Defectos de la capa que consume, no de la persona: esta superficie no tiene ningún
         // campo con el que pedirlos. El solicitante siempre viaja en el acceso firmado.
         ConditionCode.WorkWithoutOwner
@@ -169,6 +188,34 @@ public static class ContractTranslation
     ///
     /// ESTE CÓDIGO NO SE PRODUCE NUNCA EN EL CAMINO DEL ADMINISTRADOR: a él no lo acota el estado.
     /// </remarks>
+    /// <summary>
+    /// El administrador pide un desenlace sobre un trabajo que no está en `Pendiente`
+    /// (`Api CU-06` `A-15`, `Contracts CU-08007` §6).
+    /// </summary>
+    /// <remarks>
+    /// `409` Y NO `403`: quien pide TIENE la facultad. Lo que no procede es el desenlace sobre un
+    /// trabajo en ese estado, que es exactamente la distinción que el conjunto cerrado ya hace
+    /// entre `OperationAdminOnly` y los motivos de estado.
+    ///
+    /// LOS DOS MOTIVOS INTERNOS SALEN POR ACÁ Y EL TEXTO NO LOS DISTINGUE, y es deliberado: el
+    /// dominio separa «no está en `Pendiente`» de «ya está en un terminal» porque son guardas
+    /// distintas, pero para quien pide **la respuesta útil es la misma y es el estado actual**.
+    /// Es el mismo criterio con el que `TransitionFromTerminalStatus` ya era «un solo motivo para
+    /// los dos terminales».
+    ///
+    /// LA RESPUESTA DECLARA EL ESTADO ACTUAL, que es lo que el administrador necesita para saber
+    /// si alguien resolvió el trabajo antes que él, y **no sugiere ninguna forma de volver a
+    /// `Pendiente`**, porque no existe: los dos desenlaces son terminales.
+    /// </remarks>
+    public static IResult WorkStateForbidsOutcome(DateTimeOffset occurredAt, WorkStatus currentStatus) =>
+        Results.Json(
+            new ErrorResponse(
+                ErrorCode.StateForbidsUpdate,
+                $"Este trabajo está en «{LabelOf(currentStatus)}» y ya no admite un desenlace.",
+                [],
+                occurredAt),
+            statusCode: StatusCodes.Status409Conflict);
+
     public static IResult WorkStateForbidsDelete(DateTimeOffset occurredAt, WorkStatus currentStatus) =>
         Results.Json(
             new ErrorResponse(
