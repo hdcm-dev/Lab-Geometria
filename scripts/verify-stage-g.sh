@@ -97,6 +97,18 @@ echo
 # ---------------------------------------------------------------------------
 echo "-- G-6 y la mitad de marcado de G-7 · la batería --"
 
+# NO SE PUDO MEDIR NO ES LO MISMO QUE FALLA. Esta puerta necesita `docker` para el
+# navegador y `dotnet` para la batería: si falta uno de los dos, se declara que falta
+# el instrumento en lugar de reportar que el criterio falla —que sería inventar un
+# defecto del producto— o de saltearlo en silencio.
+if ! command -v dotnet >/dev/null 2>&1; then
+  printf '  \033[33mSIN MEDIR\033[0m G-6 y la mitad de marcado de G-7: este entorno no tiene `dotnet`\n'
+  printf '        Corré esta puerta donde `dotnet` y `docker` convivan, que es lo que el\n'
+  printf '        `devcontainer` declarado provee.\n\n'
+  printf 'INCOMPLETA · los criterios con navegador pasan; los de batería quedaron sin medir\n'
+  exit 2
+fi
+
 if dotnet test tests/GeometriaFactory.Integration.Tests --configuration Release \
      --filter "FullyQualifiedName~TheAdministratorOpensTheWorkAndFindsExactlyWhatTheStudentSaw|FullyQualifiedName~TheWorkViewBringsTheSceneTheTreeAndTheTwoMotionControls|FullyQualifiedName~PreviewingDrawsWithoutSavingAndWithoutTheBrowserCallingTheDataService" \
      >/tmp/etapa-g-bateria.log 2>&1; then

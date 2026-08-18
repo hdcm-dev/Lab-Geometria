@@ -613,3 +613,64 @@ séptimo —«las ocho fases tienen OK explícito»— es del punto de control d
 - **Lo que no se ve en una respuesta se lee del almacén**: el estado, el comentario y la
   desaparición del trabajo eliminado.
 - **6 pruebas nuevas**, y la batería queda en **311 en verde**.
+
+---
+
+## Las puertas que faltaban — `d`, `e` y `f`
+
+**Rama:** `codigo/puertas-d-e-f`
+
+*No es una etapa: es el cierre del hueco de verificación que el orquestador de reanudación dejó
+declarado el 2026-08-17. Con esto **las ocho etapas construidas tienen su puerta**.*
+
+### Qué faltaba, y qué no
+
+- **Los criterios ya estaban cubiertos por la batería.** Lo que faltaba era el guion que los reúne:
+  cerrar `d`, `e` o `f` dependía de que alguien recordara **cuáles** pruebas mirar.
+- **No se escribió ninguna prueba nueva, y es deliberado.** Si un criterio hubiera necesitado una
+  prueba que no existe, la etapa no habría estado cerrada. Estos guiones **verifican que lo esté**,
+  no la cierran.
+
+| Puerta | Criterios | Pruebas que corre |
+| --- | --- | --- |
+| `verify-stage-d.sh` · `d` → `e` | **10** | 31 |
+| `verify-stage-e.sh` · `e` → `f` | **5** | 28 |
+| `verify-stage-f.sh` · `f` → `g` | **8** | 27, más `PT-02` |
+
+### Cada criterio nombra sus pruebas, una por una
+
+- **Es lo que vuelve auditable la puerta**: la lista es el mapa entre `Roadmap-Producto.md` §5.2 y
+  la batería. Un filtro por clase habría pasado igual **sin decir qué criterio cubre qué**.
+- **Y el recuento se compara contra lo pedido.** Una prueba que se renombra deja de existir para el
+  filtro, y la corrida pasaría en verde **sin haberla corrido**: es el modo de falla que un filtro
+  por nombre tiene, y `lib-puerta.sh` lo cierra comparando cuántas se pidieron contra cuántas
+  corrieron.
+
+### «Sin medir» dejó de confundirse con «falla»
+
+- **`F-8` es `PT-02`, que corre con navegador en contenedor.** En un entorno sin `docker` el guion
+  reportaba **FALLA**, que es inventar un defecto del producto. Ahora declara **SIN MEDIR** y sale
+  con un código propio.
+- **`verify-stage-g.sh` recibe la misma corrección** por el problema simétrico: sin `dotnet` no
+  puede correr sus criterios de batería.
+- **Las dos alternativas eran peores**: reportar falla acusa al producto de algo que no se midió, y
+  saltear en silencio da por verificado lo que nadie miró.
+
+### Una discrepancia declarada y no resuelta
+
+**El criterio `F-1` del roadmap dice «los NUEVE casos de prueba obligatorios».** El intake **1.20**
+§17.1.P.8 escribe «las **diez** pruebas del validador pasan», y `Criterios-Validacion.md` `CV-26`
+dice «los **diez** casos de la batería». **El roadmap quedó con el recuento anterior a la aposición
+del décimo caso.**
+
+**El guion corre la batería entera y no elige un número.** Corregir el roadmap es un acto propio y
+del Product Owner: es un criterio de transición de una etapa **ya cerrada y demostrada**, y cambiarlo
+desde una puerta sería reescribir contra qué se cerró.
+
+### Por qué hay una biblioteca compartida, y por qué no la usan las otras tres
+
+`lib-puerta.sh` existe porque las tres puertas nuevas hacen exactamente lo mismo, y escribir ese
+bucle tres veces habría creado tres lugares donde el formato y el manejo de fallas divergen. **Las
+otras tres no se migran**: `verify-stage-c.sh` levanta y reinicia los dos servicios,
+`verify-stage-g.sh` corre un navegador en contenedor y `verify-stage-h.sh` declara un criterio no
+mecánico. Forzarlas a esta forma la habría hecho más grande que el problema.
