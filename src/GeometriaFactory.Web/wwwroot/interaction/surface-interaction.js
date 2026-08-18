@@ -368,9 +368,9 @@
             // ninguna identidad: el número del nodo es el mismo que el de la pieza, de los dos
             // lados. Elegir un nodo resalta esa figura y sólo esa.
             //
-            // LA OTRA DIRECCIÓN NO ESTÁ, y no es un olvido: el contrato de la fachada tiene seis
-            // funciones y **ninguna avisa al anfitrión** que la persona eligió algo en la escena.
-            // Sin ese aviso no hay por dónde enterarse. Queda declarado y elevado.
+            // LA OTRA DIRECCIÓN TAMBIÉN ESTÁ, desde `ADR-08007`: el aviso de selección viaja en
+            // las OPCIONES de `initialize` y no como séptima función de la fachada, de modo que las
+            // seis que el Product Owner fijó siguen siendo seis. Se ata doce líneas más arriba.
             var nodes = document.querySelectorAll('[data-gf-piece-node]');
 
             for (var n = 0; n < nodes.length; n++) {
