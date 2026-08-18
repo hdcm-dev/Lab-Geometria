@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14003-Direccion-Del-Backend-Por-IP-Dinamica.md
-**Versión:** 1.0
-**Estado:** **Propuesto** — esperando la aprobación del Product Owner
+**Versión:** 1.1
+**Estado:** **Aceptado** — aprobado por el Product Owner el 2026-08-18
 **Fecha:** 2026-08-18
 **Autor:** Orquestador SDD
 **Nivel:** Producto
@@ -114,4 +114,5 @@ que hay que actualizar a mano**, y que el DDNS dejó de ser «después» para se
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-18 | **Aprobado por el Product Owner.** Pasa de `Propuesto` a `Aceptado` sin ninguna modificación de su contenido: el fundamento, el disparador, el estado y el contador quedan como se emitieron. Con la aprobación, el apartamiento **cuenta como decisión y no como omisión** (`Root-Rules.md` §11), que es la diferencia que este ADR existe para producir. |
 | 1.0 | 2026-08-18 | Emisión inicial. Declara como apartamiento que la dirección del servicio de datos viaje como **IP pública dinámica** y se actualice a mano, decidido por el Product Owner el 2026-08-18 con el fundamento de ver el laboratorio funcionando antes de sumar infraestructura. Registra el procedimiento de actualización —subir `appsettings.json` y reiniciar, sin republicar entero—, las dos propiedades que abaratan el costo, y la consecuencia sobre `PT-05`: la medición registra la dirección usada y su fecha, porque una puerta en verde sobre una dirección que puede cambiar no es una garantía permanente. Disparador declarado: IP estática o DDNS. Contador en **0**. |
