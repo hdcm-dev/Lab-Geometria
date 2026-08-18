@@ -7,6 +7,20 @@
 #
 # Y NO TERMINA EN LA SUBIDA: termina comprobando que la dirección pública responde.
 #
+# NO EMPIEZA POR PUBLICAR, TAMPOCO. Antes de subir corre las dos puertas que
+# `Api/09 Pipeline-CI-CD.md` §2.1 declara **bloqueantes**: `QG-01` —la construcción termina en 0
+# y **sin advertencias**— y `QG-02` —la batería pasa entera, incluida la del validador—. Hasta el
+# 2026-08-18 este flujo no corría ninguna de las dos: `dotnet publish` compila, así que un error
+# de compilación frenaba la publicación, pero **una advertencia y la batería entera en rojo
+# pasaban igual**. La comprobación final tampoco lo veía: la página carga y responde 200 con el
+# producto roto por dentro.
+#
+# LOS DOS PASOS INVOCAN LOS GUIONES DEL REPOSITORIO y no reescriben sus órdenes: `scripts/build.sh`
+# y `scripts/test.sh` son los mismos que corren en la máquina de quien construye, y son los que esa
+# tabla de stages nombra. Un `dotnet test` escrito acá a mano sería un segundo lugar donde la
+# configuración puede decir otra cosa, que es el defecto que `verify-explicit-configuration.sh`
+# existe para impedir.
+#
 # Ninguna dirección real vive acá: todas llegan como secretos del repositorio.
 
 name: deploy-front-ftp
@@ -36,8 +50,15 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Generar el bundle del visor y copiarlo al front
-        run: ./scripts/build-visor.sh
+      # `build.sh` EMPAQUETA EL VISOR ADENTRO, y por eso el paso suelto que estaba acá se
+      # retiró: su línea 21 invoca `build-visor.sh` antes de compilar la solución. Dejarlos a
+      # los dos habría corrido `npm ci` y webpack dos veces por publicación, y habría dejado
+      # dos lugares desde donde se genera el mismo artefacto.
+      - name: Puerta QG-01 · construir sin advertencias, con el bundle del visor
+        run: ./scripts/build.sh
+
+      - name: Puerta QG-02 · la batería entera
+        run: ./scripts/test.sh
 
       - name: Publicar el front
         run: dotnet publish src/GeometriaFactory.Web/GeometriaFactory.Web.csproj -c Release -o ./publish

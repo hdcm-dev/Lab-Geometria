@@ -1,4 +1,35 @@
-# Despliegue en destino, construyendo desde el repositorio.
+# COMPOSICIÓN DE VERIFICACIÓN — no es la de despliegue.
+#
+# PARA QUÉ ES. Probar que **la imagen arranca**: que se construye, aplica sus transformaciones de
+# esquema sobre una base vacía y responde salud. Eso es `PT-04`, y es todo lo que este archivo
+# hace. Se levanta, se comprueba y se baja.
+#
+# ⚠️ EL DESPLIEGUE EN DESTINO NO ES ÉSTE. Vive en un repositorio aparte, `Container.Lab-Geometria`,
+# y es el que conoce con quién convive el servicio en el host: la red macvlan, su IP en la LAN, el
+# directorio del disco contra el que monta la base, el techo de memoria y los secretos del `.env`.
+#
+# POR QUÉ ESTÁN SEPARADOS, y no es una duplicación que haya que unificar. Son **dos objetos
+# distintos que comparten nombre de archivo**:
+#
+#   | | Esta composición | La de despliegue |
+#   | Para qué      | Probar que la imagen arranca | Correr el servicio en un host |
+#   | Qué sabe      | Del fuente                   | De la infraestructura         |
+#   | Red, IP, puertos | No tiene                  | Los tiene                     |
+#   | Volúmenes del host, `.env`, secretos | No tiene | Los tiene                  |
+#
+# El criterio del reparto es uno solo: **si para cambiarlo hay que conocer el fuente, es del
+# fuente; si hay que conocer el host, es del proyecto de contenedor.** Nada de lo que la segunda
+# sabe se puede averiguar desde acá.
+#
+# POR ESO ESTE ARCHIVO NO DECLARA LA CLAVE DE FIRMA, y su ausencia no es un descuido: la clave es
+# un secreto del host y vive en el `.env` del proyecto de despliegue, que no se versiona. Para
+# correr esta verificación alcanza con pasarla por la línea de comandos.
+#
+# ⚠️ EL INTAKE §16 TODAVÍA DESCRIBE ESTE ARCHIVO COMO «despliegue desde Git en destino», y con él
+# `Pipeline-Producto.md` §4 y `Entornos-Deploy.md` §3. Era cierto cuando se escribieron: el
+# proyecto de contenedor se creó después, y esa decisión **se tomó en otro árbol y nunca volvió**
+# al intake. Corregirlo es escritura controlada sobre documento humano y está elevado al Product
+# Owner.
 #
 # EL ACTO DE DESPLEGAR ES MANUAL Y DEL PRODUCT OWNER: la canalización termina en un artefacto
 # verificado y no en un servicio corriendo (intake §17.5.P.7 y §17.5.P.8;
