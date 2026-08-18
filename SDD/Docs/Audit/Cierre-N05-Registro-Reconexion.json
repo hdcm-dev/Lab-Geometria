@@ -1,0 +1,48 @@
+{
+  "hallazgo": "N-05",
+  "informe_origen": "Informe-Migracion-8.6-a-8.11.md 2.0 §6",
+  "fecha": "2026-08-17",
+  "correccion_del_motivo_registrado": "Migracion-8.11-Registro-Reconexion-Etiquetas.json declaraba «el documento citado fue absorbido por la consolidacion; no existe bajo ningun nombre en el arbol vigente». Es falso: los cuatro existen, renumerados y reubicados, con su titulo literal intacto.",
+  "reconexiones": [
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00009-Traducir-El-Motivo-Del-Contrato-A-Respuesta-De-Protocolo.md",
+      "cita_anterior": "Proyectos/GeometriaFactory-Contracts/.../CU-00006-Contrato-De-Respuesta-De-Error.md",
+      "identificador_anterior": "CU-00006",
+      "identificador_vigente": "CU-08006",
+      "destino_vigente": "SDD/Docs/Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md",
+      "enlace_escrito": "../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md",
+      "resolucion": "por destino: el titulo del artefacto coincide literalmente y su rol es el mismo; el identificador se renumero al consolidar la capa de contratos en Producto/Contratos-Inter-Unidad y al reubicar la operacion interna de Infrastructure",
+      "verificado": "el destino existe y el enlace resuelve"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-00011-Arrancar-El-Servicio-Y-Dejar-El-Almacen-En-Condiciones.md",
+      "cita_anterior": "Proyectos/GeometriaFactory-Infrastructure/.../CU-00010-Preparar-El-Almacen-Al-Arrancar.md",
+      "identificador_anterior": "CU-00010",
+      "identificador_vigente": "CU-06010",
+      "destino_vigente": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06010-Preparar-El-Almacen-Al-Arrancar.md",
+      "enlace_escrito": "CU-06010-Preparar-El-Almacen-Al-Arrancar.md",
+      "resolucion": "por destino: el titulo del artefacto coincide literalmente y su rol es el mismo; el identificador se renumero al consolidar la capa de contratos en Producto/Contratos-Inter-Unidad y al reubicar la operacion interna de Infrastructure",
+      "verificado": "el destino existe y el enlace resuelve"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06008-Emitir-El-Acceso-Firmado.md",
+      "cita_anterior": "Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+      "identificador_anterior": "CU-06001",
+      "identificador_vigente": "CU-08001",
+      "destino_vigente": "SDD/Docs/Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+      "enlace_escrito": "../../../../Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md",
+      "resolucion": "por destino: el titulo del artefacto coincide literalmente y su rol es el mismo; el identificador se renumero al consolidar la capa de contratos en Producto/Contratos-Inter-Unidad y al reubicar la operacion interna de Infrastructure",
+      "verificado": "el destino existe y el enlace resuelve"
+    },
+    {
+      "documento": "SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Operaciones-Internas/CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md",
+      "cita_anterior": "Proyectos/GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-06008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+      "identificador_anterior": "CU-06008",
+      "identificador_vigente": "CU-08008",
+      "destino_vigente": "SDD/Docs/Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+      "enlace_escrito": "../../../../Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md",
+      "resolucion": "por destino: el titulo del artefacto coincide literalmente y su rol es el mismo; el identificador se renumero al consolidar la capa de contratos en Producto/Contratos-Inter-Unidad y al reubicar la operacion interna de Infrastructure",
+      "verificado": "el destino existe y el enlace resuelve"
+    }
+  ]
+}
