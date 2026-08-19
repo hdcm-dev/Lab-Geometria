@@ -759,3 +759,82 @@ apartamiento **cuenta como decisión y no como omisión** (`Root-Rules.md` §11)
 ### Verificación
 
 **311 pruebas en verde. 4700 de 4700 enlaces resuelven, 0 rotos.**
+
+---
+
+## La puerta de la etapa `i` — escrita antes del despliegue, no después
+
+**Rama:** `codigo/puerta-etapa-i`
+
+*Esta entrada **se escribe en la rama**, que es lo que la cabecera pide y lo que la unidad anterior
+no hizo.*
+
+*No es la fase `i`: es su puerta. La fase `i` la cierra un despliegue real, y este guion es con qué
+se lo mide cuando exista.*
+
+### Por qué la puerta va antes que el despliegue
+
+Las ocho puertas anteriores se escribieron **con** su etapa o **después**. Ésta va antes por un
+motivo que las otras no tenían: **la fase `i` no ocurre en la máquina de quien construye**. Se
+publica en un hosting, se levanta en un servidor propio y se mide con una persona en la red de la
+facultad — y las tres cosas pasan **una sola vez cada una**. Llegar a ese momento sin saber qué hay
+que mirar es cómo se cierra una etapa por lectura, que es exactamente lo que
+`codigo/puertas-d-e-f` vino a corregir para las tres anteriores.
+
+### Qué mide, y qué se niega a medir
+
+`scripts/verify-stage-i.sh` cubre los siete criterios de la transición `i` → `j…` de
+`Roadmap-Producto.md` **1.8** §5.2, en tres clases:
+
+- **Mecánicos contra el despliegue vivo** — `I-1` la dirección pública responde y el flujo no tiene
+  ningún paso que espere a una persona; `I-2` el punto de salud informa una revisión sellada **y es
+  la de `main`**; `I-3` el navegador no llega al servicio de datos; `I-6` el almacén quedó
+  preparado.
+- **Delegado** — `I-7` comprueba que los ocho guiones de puerta existan y sean ejecutables, y
+  **declara que correrlos es un acto aparte**. Repetir sus criterios acá habría creado un segundo
+  lugar donde el criterio puede decir otra cosa.
+- **No mecánicos** — `I-4` y `I-5` necesitan personas. El guion **los declara y no los marca**,
+  igual que `verify-stage-h.sh` con su `H-7`.
+
+**`I-2` es el criterio que nació de un defecto real**, y por eso no alcanza con que el servicio
+responda: hasta el 2026-08-16 la revisión entraba por un argumento escrito a mano, y `/salud`
+informaba una revisión que no era la suya **sin ningún síntoma**. El guion compara lo que el
+servicio dice que corre contra lo que `main` tiene.
+
+### Sin las dos direcciones no mide, y lo dice
+
+`PUBLIC_URL` y `API_URL` llegan por entorno —ninguna dirección real vive en el árbol, igual que en
+`deploy-front-ftp.yml`— y si falta alguna el guion **sale con un código propio** en lugar de
+saltear en silencio. Es la misma corrección que las puertas de `d`, `e` y `f` incorporaron para
+`dotnet`: dar por verificado lo que nadie miró es peor que no haber corrido.
+
+### Dos defectos de la propia puerta, encontrados corriéndola
+
+**No se escribió y se dio por buena: se corrió, y las dos primeras corridas la corrigieron.**
+
+- **`curl --write-out` ya imprime `000` cuando no llega**, y además sale distinto de cero. El
+  `|| echo 000` que llevaba encima imprimía **`000000`**, que no es ningún código HTTP y se lee
+  como un defecto del guion. La resolución quedó en un solo lugar.
+- **Un host que no contesta daba `OK`.** La comprobación de que `/appsettings.json` no se sirve al
+  navegador leía cualquier respuesta que no fuera 200 como conforme — **incluida la de un servidor
+  inalcanzable**. Es el defecto simétrico del que la etapa `f` corrigió en sus guiones: allá «sin
+  medir» se reportaba como falla, acá se reportaba como **conforme**, que es peor, porque afirma
+  sobre el producto algo que nadie miró.
+
+### El formulario de `PT-05`, emitido vacío a propósito
+
+[`SDD/Docs/Audit/Medicion-PT-05.md`](SDD/Docs/Audit/Medicion-PT-05.md) entra **antes** de la
+medición, en estado **`SIN MEDIR`** y **sin un solo dato inventado**. Lleva los campos que
+`ADR-14003` **1.1** exige —la dirección usada **y su fecha**, porque una puerta en verde sobre una
+dirección que puede cambiar no es una garantía permanente— y declara que el resultado se registra
+**sea cual sea**: si el acceso no funciona, el número se anota igual y la topología se revisa.
+
+**Y el formulario vacío no pasa la puerta.** El guion comprueba que exista **y que su estado ya no
+diga `SIN MEDIR`**: que el archivo esté prueba que la pregunta se hizo, no que esté contestada.
+
+### Lo que esta unidad NO hace
+
+**No despliega nada.** Publicar el front, levantar el servicio de datos en el servidor propio y
+medir `PT-05` necesitan los secretos del hosting, el acceso al host y una persona en la red de la
+facultad. Los tres son del Product Owner, y el guion existe para que ese momento sea verificable en
+lugar de declarado.
