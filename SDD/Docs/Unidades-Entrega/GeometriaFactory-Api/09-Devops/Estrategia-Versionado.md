@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Versionado.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -107,6 +107,39 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 ## 3. Herramienta de cálculo de la versión
 
+### 3.0 El prefijo de etiqueta, fijado el 2026-08-18
+
+**Este apartado cierra un ítem obligatorio que las cuatro tablas de abajo venían difiriendo.**
+`Rules-Devops.md` §4.3 punto 3 exige que este documento declare, junto con la herramienta,
+**«Configuración base y prefijo de tag»**. Hasta la emisión 2.1 las cuatro filas «Prefijo de
+etiqueta» contestaban *«el que se fije al anclarla, registrado en el punto de control de la etapa
+`a`»*, y ese punto de control **cerró el 2026-08-13 sin registrarlo**.
+
+| Aspecto | Decisión |
+| --- | --- |
+| **Prefijo de etiqueta** | **`v`** — una sola vez para el repositorio entero, no por proyecto de código |
+| **Forma completa** | `v<MAJOR>.<MINOR>.<PATCH>`, sin sufijo, sobre el SemVer 2.0.0 que §1 adopta |
+| **Ámbito** | El repositorio de código. Las etiquetas son del repositorio y no de cada ensamblado: hay un solo espacio de nombres de etiquetas para los siete proyectos de código |
+
+**No se eligió por criterio propio, y esa es la diferencia que hace que se pueda escribir.** El
+prefijo sale del propio `Rules-Devops.md`, que en la tabla de canales de su §4.5 escribe la forma
+literal **«Sólo en tag `v<X.Y.Z>` sin sufijo»**. El framework no sólo pidió el prefijo: lo usa con
+`v` en su propio texto, y las cuatro herramientas que su §4.3 punto 3 nombra —MinVer, GitVersion,
+semantic-release, Nerdbank.GitVersioning— lo aceptan o lo traen por omisión.
+
+**Fijar el prefijo NO cierra la elección de la herramienta**, y las dos cosas venían empaquetadas
+en la misma fila sin necesidad: elegir `v` no exige haber elegido MinVer, y esperar a la
+herramienta dejó ocho etapas sin poder etiquetarse. **`PA-06` de `05` §11 sigue abierto** —«la
+herramienta que calcula la versión no está elegida»— y este apartado no lo toca.
+
+**Y una corrección propia sobre la emisión anterior.** La fila de §3.2 decía que el prefijo quedaba
+«abierto como `PD-01` de `Pipeline-CI-CD.md` §10». **Esa referencia no lo alcanza**: el `PD-01` de
+§10.2 es *«la herramienta concreta de cada stage —ejecutor de pruebas, recolector de cobertura y
+reglas de análisis estático»*, donde la herramienta de versionado no figura. El prefijo estaba
+diferido **hacia un punto abierto que no lo cubría**, es decir sin dueño real, que es la forma en
+que este mismo producto ya perdió el registro de tres etapas. Queda declarado en lugar de
+corregirse en silencio, y elevado al framework como el reporte `14` de `IA.SDD.Documentacion`.
+
 ### 3.1 `GeometriaFactory-Api`
 
 **Se declara por su función, y esta categoría no la elige**: ninguna fuente la nombra, y `PA-07` de `05` §11 deja los nombres definitivos y **las versiones exactas de los paquetes** anclados en la etapa `a`.
@@ -114,7 +147,7 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 | Aspecto | Decisión |
 | --- | --- |
 | Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta |
-| Prefijo de etiqueta | El que se fije al anclarla, registrado en el punto de control de la etapa `a` |
+| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
 | Qué **no** calcula la herramienta | **Las tres clases de §1 que la compilación no detecta.** Ninguna herramienta de comparación de superficie vería una configuración de intercambio divergente, un esquema que no cierra ni una ruta que sólo el consumidor conoce |
 
 ### 3.2 `GeometriaFactory-Domain`
@@ -124,9 +157,9 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 | Aspecto | Decisión |
 | --- | --- |
 | Función | Calcular la versión a partir de las etiquetas del repositorio y de los mensajes de confirmación desde la última etiqueta |
-| Prefijo de etiqueta | El que se fije al anclarla, registrado en el mismo punto de control |
+| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
 | Dónde se ancla | Etapa `a`, por la regla de anclaje de versiones del intake, encabezado de la Parte C: toda versión se fija explícitamente y su cambio mayor se documenta, nunca como efecto colateral de una actualización |
-| Qué se registra | La elección y su versión, en el punto de control de la etapa `a`. Queda abierto como `PD-01` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| Qué se registra | La elección de la herramienta y su versión. **Sigue abierta** como `PA-06` de `05` §11; el prefijo dejó de estar atado a ella en §3.0 |
 
 **Lo que no se hace es versionar a mano.** El anti-patrón está declarado en `Rules-Devops.md` §4.8 y el intake ya lo previene al exigir el cálculo por herramienta.
 
@@ -138,7 +171,7 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 | --- | --- |
 | Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta |
 | Dónde vive la versión | En el archivo de proyecto, calculada; `ADR-04003` §7 lo declara |
-| Prefijo de etiqueta | El que se fije al anclarla, registrado en el punto de control de la etapa `a` |
+| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
 | Qué **no** calcula la herramienta | La clase de cambio de la fila aditiva-mayor de §1. Ninguna herramienta de comparación de superficie la marcaría como mayor sin conocer que la cara de abajo la implementa otro proyecto de código |
 
 ### 3.4 `GeometriaFactory-Infrastructure`
@@ -148,7 +181,7 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 | Aspecto | Decisión |
 | --- | --- |
 | Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta |
-| Prefijo de etiqueta | El que se fije al anclarla, registrado en el punto de control de la etapa `a` |
+| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
 | Qué **no** calcula la herramienta | **Las dos clases mayores que compilan** de §1, y **el linaje de transformaciones**, que no es una versión semántica sino una secuencia ordenada |
 
 **Y dos versiones que se anclan y no se calculan**, las dos con efecto sobre la ejecución y no sobre el número de versión de este ensamblado:
@@ -415,7 +448,7 @@ segundo.** Acá los tres instrumentos posibles se comportaron así, medido sobre
 | --- | --- | --- |
 | **Nombre de la etapa en el mensaje de confirmación de fusión** | **Sí**: fusionar lo escribe | **Intacto.** Es lo que permitió reconstruir que el código estaba en la etapa `e` cuando el registro decía `b` |
 | `changelog.md` | No: hay que acordarse | **Se degradó tres etapas.** Repuesto el 2026-08-16 desde los commits, marcado como repuesto |
-| **Etiqueta por etapa cerrada** | No: hay que crearla | **Nunca se creó ninguna.** `git tag` devuelve **cero** en todo el repositorio, contra el objetivo del 100 % que §1 y §10 declara |
+| **Etiqueta por etapa cerrada** | No: hay que crearla | **Ninguna se creó a tiempo, y cinco se repusieron el 2026-08-18.** Hasta esa fecha `git tag` devolvía **cero** en todo el repositorio. Hoy están `v0.1.0`, `v0.2.0`, `v0.5.0`, `v0.7.0` y `v0.8.0`, **retroactivas y declaradas como tales**; `c`, `d` y `f` quedan sin etiqueta porque su ancla no sale del historial sin inventarla (`changelog.md`). El objetivo del 100 % **sigue incumplido**, ahora en tres etapas y no en ocho |
 
 **El instrumento que manda es el historial del repositorio.** Cuando `changelog.md` y el historial no
 coinciden, **gana el historial** y la diferencia se repara sobre el registro en prosa, nunca al revés:
@@ -436,5 +469,6 @@ clase de afirmación que estos registros degradan.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-18 | **Se fija el prefijo de etiqueta, que era un ítem obligatorio contestado con un diferimiento.** `Rules-Devops.md` §4.3 punto 3 exige declarar «configuración base y **prefijo de tag**», y las cuatro filas de §3 respondían *«el que se fije al anclarla, registrado en el punto de control de la etapa `a`»* — punto de control que **cerró el 2026-08-13 sin registrarlo**, y ocho etapas se construyeron sin poder etiquetarse. Entra **§3.0**, que fija **`v`** con la forma `v<MAJOR>.<MINOR>.<PATCH>` y ámbito de repositorio, **citando el propio `Rules-Devops.md` §4.5** —«Sólo en tag `v<X.Y.Z>` sin sufijo»— en lugar de elegirlo por criterio propio. Declara que **fijar el prefijo no cierra la elección de la herramienta**: `PA-06` sigue abierto, y empaquetar las dos cosas en la misma fila es lo que produjo el bloqueo. **Corrección propia:** la fila de §3.2 remitía el prefijo al `PD-01` de `Pipeline-CI-CD.md` §10, que es *«la herramienta concreta de cada stage»* y **no lo cubre**: el prefijo estaba diferido hacia un punto abierto sin dueño real. Se declara y se eleva al framework como el reporte `14`. **§11.2** deja de decir que nunca se creó ninguna etiqueta: cinco se repusieron el 2026-08-18 y el objetivo del 100 % sigue incumplido en tres. Sube **minor**: entra una sección y se corrigen cinco filas; ninguna regla de versionado cambia. | Orquestador SDD |
 | 2.1 | 2026-08-17 | Entra **§11, el registro del avance y su responsable**, con los ítems **7 y 8** que `Rules-Devops.md` **4.2** §4.3 agregó: qué documento declara la etapa, **quién lo actualiza y en qué evento**, y el **instrumento preferido**, que es el subproducto del acto. Se declara que **manda el historial del repositorio** sobre `changelog.md`, y que el objetivo del 100 % de etiquetas por etapa cerrada está **incumplido en su totalidad** —cero etiquetas en el árbol—, sin cerrarlo acá. Reparación de la divergencia `D-06` de `Audit/Estado-Del-Destino-2026-08-17.md` §2. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |
