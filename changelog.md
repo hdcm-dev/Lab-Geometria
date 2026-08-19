@@ -838,3 +838,77 @@ diga `SIN MEDIR`**: que el archivo esté prueba que la pregunta se hizo, no que 
 medir `PT-05` necesitan los secretos del hosting, el acceso al host y una persona en la red de la
 facultad. Los tres son del Product Owner, y el guion existe para que ese momento sea verificable en
 lugar de declarado.
+
+---
+
+## Las etiquetas que nunca se crearon — repuestas el 2026-08-18
+
+**Rama:** `codigo/etiquetas-retroactivas`
+
+*No es una etapa: cierra la divergencia `D-03`, la más vieja de las que quedaban abiertas.*
+
+### Qué estaba mal
+
+`Estrategia-Versionado.md` §1 declara, desde el intake §17.1.P.7, **una etiqueta por cada etapa
+cerrada y fusionada, para poder volver a cualquier demostración**, y su §2.4 punto 4 la nombra el
+instrumento de reversión: *«la reversión es volver a la etiqueta anterior y reconstruir»*.
+
+**`git tag` devolvía cero en todo el repositorio.** Ocho etapas cerradas, ninguna etiqueta. Lo
+declaró la reanudación del 2026-08-17 como `D-03` y quedó abierta; la del 2026-08-18 la volvió a
+encontrar, y el Product Owner decidió reponerlas antes de la fase `i`, que es donde poder volver
+atrás deja de ser teórico.
+
+### El prefijo, que era el verdadero bloqueo
+
+**No se podían crear porque nadie había fijado con qué prefijo.** `Rules-Devops.md` §4.3 punto 3
+exige que la estrategia declare «configuración base y **prefijo de tag**», y las cuatro filas de su
+§3 contestaban *«el que se fije al anclarla, registrado en el punto de control de la etapa `a`»* —un
+punto de control que **cerró el 2026-08-13 sin registrarlo**.
+
+Se fija **`v`**, y no por criterio propio: el propio `Rules-Devops.md` escribe la forma literal
+**«Sólo en tag `v<X.Y.Z>` sin sufijo»** en la tabla de canales de su §4.5. Queda en
+`Estrategia-Versionado.md` **2.2** §3.0, con la constancia de que **fijar el prefijo no cierra la
+elección de la herramienta**: `PA-06` sigue abierto, y empaquetar las dos cosas en la misma fila es
+lo que dejó ocho etapas sin poder etiquetarse.
+
+**Y una referencia que no alcanzaba lo que decía alcanzar.** §3.2 remitía el prefijo al `PD-01` de
+`Pipeline-CI-CD.md` §10, que es *«la herramienta concreta de cada stage —ejecutor de pruebas,
+recolector de cobertura y reglas de análisis estático»*: la herramienta de versionado no figura ahí.
+El prefijo estaba diferido **hacia un punto abierto que no lo cubría**, o sea sin dueño real. Queda
+declarado y elevado al framework como el reporte `14` de `IA.SDD.Documentacion`.
+
+### Las cinco etiquetas
+
+| Etiqueta | Etapa | Ancla | Fecha del ancla |
+|---|---|---|---|
+| `v0.1.0` | `a` · Esqueleto ambulante y verificación de viabilidad | `760effd` (#29 `etapa-a-pt01a-despliegue`) | 2026-08-13 |
+| `v0.2.0` | `b` · Navegación y sistema visual | `cf085fe` (#33 `etapa-b-limpiar-andamiaje`) | 2026-08-14 |
+| `v0.5.0` | `e` · Alta de trabajo y vista de trabajos | `718ce74` (#45 `etapa-e-pantallas`) | 2026-08-15 |
+| `v0.7.0` | `g` · Visualización 3D | `aaccd35` (#57 `etapa-g-puerta`) | 2026-08-17 |
+| `v0.8.0` | `h` · Circuito de revisión del administrador | `8ec80a4` (#58 `etapa-h-revision`) | 2026-08-17 |
+
+**Son anotadas y no livianas**, y cada una lleva en su mensaje que es retroactiva, con qué fecha se
+creó y sobre qué ancla. Una etiqueta puesta hoy sobre una fusión de agosto **que no dijera que es de
+hoy** sería el mismo defecto que este repositorio ya cometió con el registro de cambios.
+
+**`0.x` y una MINOR por etapa**, porque hasta la fase `i` no hubo despliegue real ni release
+público, y SemVer 2.0.0 reserva `0.y.z` para el desarrollo inicial.
+
+### Los tres huecos de numeración son deliberados
+
+**`v0.3.0`, `v0.4.0` y `v0.6.0` no existen, y no es un error de conteo.** Las etapas `c`, `d` y `f`
+**no se pueden etiquetar sin inventar el punto**, y renumerar para tapar los huecos habría roto la
+correspondencia entre la etapa y su MINOR, que es lo único que hace legible esta serie:
+
+- **`c` y `d`** tienen su fusión nominal —#34 y #40— pero **le siguen ramas que son de la etapa**:
+  `#35 sesion-por-cookie` y dos `arreglo/` en `c`, y `#41`, `#42` y `#43` en `d`. Etiquetar en la
+  fusión nominal dejaría afuera trabajo de la etapa; etiquetar después exige decidir dónde termina,
+  y ninguna fuente lo dice.
+- **`f` no tiene fusión propia.** Aterrizó dentro de `ff62b78` junto con `g` y con una migración, y
+  **el propio mensaje de esa fusión declara el apartamiento**: *«el intake §15 pide una rama y un
+  pull request por etapa, y esta fusión lleva tres tramos en una»*. La etapa cierra en el commit
+  `c2984ed`, que lo dice, pero es **un commit y no una fusión**.
+
+**Se eligió declararlo en lugar de resolverlo por criterio propio.** Las tres quedan sin etiqueta y
+con su motivo escrito, que es una afirmación verdadera y verificable; ponerles una etiqueta elegida
+por mí habría sido una afirmación cómoda sobre un punto que nadie decidió.
