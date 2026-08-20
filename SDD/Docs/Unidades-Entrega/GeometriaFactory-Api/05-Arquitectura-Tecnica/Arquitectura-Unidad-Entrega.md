@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Arquitectura-Unidad-Entrega.md
-**Versión:** 3.0
+**Versión:** 3.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -1155,7 +1155,13 @@ Los **ocho** escenarios están transcriptos completos en `PRODUCT-INTAKE` §20, 
 
 ### 11.1 `GeometriaFactory-Api`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+> **Correspondencia con `Root-Rules.md` §12.2.** La columna **`Punto abierto`** realiza sus campos
+> **1 · qué falta** —el enunciado en negrita— y **2 · por qué no se puede hoy** —el desarrollo que
+> sigue—; **`Quién lo cierra`** realiza el campo 3 y **`En qué evento se cierra`** el campo 4.
+> **`Estado` no es un campo de §12.2**: deriva de su tabla de escalamiento y se declara como tal.
+
+
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PA-01 | **Las rutas y los verbos definitivos.** Las **dos** únicas cosas que una fuente declara de la superficie son el punto de canje de credenciales, con su ruta, y la **existencia** de un punto de salud, cuya ruta la fuente no da. Las **quince** filas de la superficie son propuesta derivada rotulada fila por fila, y su forma definitiva se valida en el punto de control de la etapa `a`. **Esta categoría las adopta sin cambiarlas** y no las fija por su cuenta | El equipo en el punto de control de la etapa `a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
 | PA-02 | **RESUELTO.** **Qué código del contrato recibe una operación de administrador pedida por quien no lo es**, fuera del desenlace. El conjunto cerrado tenía **un solo** código de facultad y su enunciado estaba acotado al desenlace; el gobierno de cuentas, el reseteo y la revisión de la comisión no tenían ninguno, y esta categoría usaba el genérico con respuesta `403` **sin inventar un código**. El Product Owner incorporó `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` al conjunto cerrado y `GeometriaFactory-Contracts` lo emite en su `Contratos-Abstractions.md` §5.1; su fila de traducción con destino `403` está en [`Contratos-REST.md`](Contratos-REST.md) §5 | **Cerrado** por el Product Owner, `PRODUCT-INTAKE` **1.29** §17.4 P.3 | **Resuelto** el **2026-08-12** | **Cerrado** |
@@ -1174,7 +1180,7 @@ Los **ocho** escenarios están transcriptos completos en `PRODUCT-INTAKE` §20, 
 
 ### 11.2 `GeometriaFactory-Domain`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PA-01 | Los **nombres definitivos de tipos y de espacios de nombres** de la biblioteca. El intake los declara abiertos y los ata al punto de control de la etapa `a` (`PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Domain) | El Product Owner en el punto de control de la etapa `a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
 | PA-02 | Los dos valores rotulados **[ASUNCIÓN]** en §8 —tiempo de la batería y cobertura mínima— siguen pendientes de confirmación del Product Owner en `PRODUCT-INTAKE` §22. Se usan como vigentes | El Product Owner sobre su propio documento | `09-Devops/Estrategia-Versionado.md` y `09-Devops/Pipeline-CI-CD.md`, §ubicación de las puertas | **VENCIDO.** La categoría 09 está emitida desde el **2026-08-11** |
@@ -1185,7 +1191,7 @@ Los **ocho** escenarios están transcriptos completos en `PRODUCT-INTAKE` §20, 
 
 ### 11.3 `GeometriaFactory-Application`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PA-01 | El **identificador del puerto de repositorio de cuentas**. El intake nombra tres puertos y no éste; la categoría 02 lo elevó y lo derivó a esta categoría. Esta categoría **confirma que el puerto existe** y deja el nombre abierto: no es una regla nueva ni una decisión de alcance, es un nombre | El equipo en el punto de control de la etapa `a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
 | PA-02 | Los **nombres definitivos de tipos y de espacios de nombres**. Declarados abiertos aguas arriba y atados al punto de control de la etapa `a` | El Product Owner y el equipo en el punto de control de la etapa `a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
@@ -1198,7 +1204,7 @@ Los **ocho** escenarios están transcriptos completos en `PRODUCT-INTAKE` §20, 
 
 ### 11.4 `GeometriaFactory-Infrastructure`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PA-01 | El **identificador del puerto de repositorio de cuentas**. La categoría 02 de este proyecto de código lo derivó acá, pero **el puerto lo declara `GeometriaFactory-Application`** y su [`ADR-04002`](Adrs/ADR-04002-Cuatro-Puertos-Y-La-Frontera-Que-Declaran.md) —ya emitida— lo ató al punto de control de la etapa `a`. Esta categoría **no lo fija**, porque no puede nombrar un tipo que no declara sin contradecir una decisión emitida; lo que hace es dejar el criterio de nombrado del **adaptador** en [`ADR-06003`](Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §6, que es lo que sí le corresponde | El equipo en el punto de control de la etapa `a`, sobre la superficie de `GeometriaFactory-Application` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
 | PA-02 | Los **nombres definitivos de tipos y de espacios de nombres**. Declarados abiertos aguas arriba y atados al punto de control de la etapa `a` | El equipo en el punto de control de la etapa `a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
@@ -1221,4 +1227,5 @@ Los **ocho** escenarios están transcriptos completos en `PRODUCT-INTAKE` §20, 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con las capas juntas. Los documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |
-| 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **31** filas de puntos abiertos pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«Dónde se cierra (artefacto y sección)»** y entra la columna **«Estado»**. Un momento no deja rastro que alguien pueda abrir, y un cierre que nadie comprueba no ocurre. **Al nombrar el artefacto, 16 quedaron VENCIDAS**: su evento apunta a un punto de control de etapa ya cerrada o a la categoría 09 ya emitida. **5** quedan **sin evento declarado** —decían «sin fecha comprometida»— y §12.2 exige uno: **se marcan como no conformes y quedan para el Product Owner**, porque inventarles un evento sería exactamente lo que esta migración vino a impedir. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables. Sube **major**: cambia la estructura de la tabla. | Orquestador de migración normativa SDD |
+| 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **31** filas de puntos abiertos pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«En qué evento se cierra (artefacto y sección)»** y entra la columna **«Estado»**. Un momento no deja rastro que alguien pueda abrir, y un cierre que nadie comprueba no ocurre. **Al nombrar el artefacto, 16 quedaron VENCIDAS**: su evento apunta a un punto de control de etapa ya cerrada o a la categoría 09 ya emitida. **5** quedan **sin evento declarado** —decían «sin fecha comprometida»— y §12.2 exige uno: **se marcan como no conformes y quedan para el Product Owner**, porque inventarles un evento sería exactamente lo que esta migración vino a impedir. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables. Sube **major**: cambia la estructura de la tabla. | Orquestador de migración normativa SDD |
+| 3.1 | 2026-08-20 | **Conversión de nomenclatura, `N-01`.** La columna que la fase M4 emitió como «Dónde se cierra» pasa a **«En qué evento se cierra (artefacto y sección)»**, que es como `Root-Rules.md` **7.0** §12.2 nombra literalmente su **campo 4**. No es cosmético: *«dónde»* nombra un **lugar** y el campo nombra un **evento**, y esa distinción es la que §12.2 existe para sostener. Entra además la **nota de correspondencia** de los cuatro campos con las cinco columnas, que declara que `Punto abierto` realiza los campos **1 y 2** juntos y que **`Estado` no es un campo de §12.2** sino un derivado de su tabla de escalamiento. **Se declara en lugar de partir la columna**, porque partirla obligaría a reescribir la prosa de las filas que `Informe-Migracion-9.12-a-10.0.md` `A7` verificó **idénticas**. **Ninguna fila cambia de contenido, de estado ni de recuento.** Plan en `Audit/Plan-Conversion-Nomenclatura-Item-Diferido.md`. Sube **minor**: cambia un rótulo y entra una nota; la estructura de la tabla no se toca. | Orquestador SDD |

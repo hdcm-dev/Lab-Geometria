@@ -40,7 +40,7 @@ y comprobado de nuevo en `Audit/Plan-Migracion-9.12-a-10.0.md` §2.
 
 | Superficie | Medida | Desenlace |
 |---|---|---|
-| Citas a `Root-Rules.md` §12 → §12.1 | **0 ocurrencias** | No alcanza a este destino |
+| Citas a `Root-Rules.md` §12 → §12.1 | **0 ocurrencias** como cita normativa | No alcanza a este destino. **Exclusión enumerada**: las 2 ocurrencias vivas del patrón son la frase que nombra el propio barrido, acá y en el plan (`§VI.3.2`, regla 4 sobre el texto propio) |
 | El prefijo de tag como ítem propio | **1 documento** | `Estrategia-Versionado.md` **3.0** §3.b. **Ninguna decisión se reabre**: `v` ya estaba fijado |
 | Ítems diferidos sin la forma de §12.2 | **116 filas** en 6 documentos | Migradas: **76 vencidas**, 21 cerradas, **14 sin evento** y 5 vigentes |
 
