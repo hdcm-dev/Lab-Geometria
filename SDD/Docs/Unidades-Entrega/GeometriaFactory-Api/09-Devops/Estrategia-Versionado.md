@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Versionado.md
-**Versión:** 2.2
+**Versión:** 3.0
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -107,7 +107,12 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 ## 3. Herramienta de cálculo de la versión
 
-### 3.0 El prefijo de etiqueta, fijado el 2026-08-18
+### 3.b El prefijo de etiqueta — **ítem propio**, fijado el 2026-08-18
+
+**Esta subsección realiza el ítem 3.b de `Rules-Devops.md` §4.3**, que desde la regla **5.0** pide el
+prefijo **separado de la herramienta**. Hasta la 9.19 los dos venían en el punto 3, y este documento
+los contestaba juntos; **el prefijo se difería por arrastre cuando lo bloqueado era la herramienta**.
+La numeración `3.b` es literal y no decorativa: se lee contra el ítem de la regla que la exige.
 
 **Este apartado cierra un ítem obligatorio que las cuatro tablas de abajo venían difiriendo.**
 `Rules-Devops.md` §4.3 punto 3 exige que este documento declare, junto con la herramienta,
@@ -147,7 +152,7 @@ corregirse en silencio, y elevado al framework como el reporte `14` de `IA.SDD.D
 | Aspecto | Decisión |
 | --- | --- |
 | Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta |
-| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
+| Prefijo de etiqueta | **`v`** — ver **§3.b**, que es el ítem propio que `Rules-Devops.md` §4.3 punto 3.b exige |
 | Qué **no** calcula la herramienta | **Las tres clases de §1 que la compilación no detecta.** Ninguna herramienta de comparación de superficie vería una configuración de intercambio divergente, un esquema que no cierra ni una ruta que sólo el consumidor conoce |
 
 ### 3.2 `GeometriaFactory-Domain`
@@ -157,7 +162,7 @@ corregirse en silencio, y elevado al framework como el reporte `14` de `IA.SDD.D
 | Aspecto | Decisión |
 | --- | --- |
 | Función | Calcular la versión a partir de las etiquetas del repositorio y de los mensajes de confirmación desde la última etiqueta |
-| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
+| Prefijo de etiqueta | **`v`** — ver **§3.b**, que es el ítem propio que `Rules-Devops.md` §4.3 punto 3.b exige |
 | Dónde se ancla | Etapa `a`, por la regla de anclaje de versiones del intake, encabezado de la Parte C: toda versión se fija explícitamente y su cambio mayor se documenta, nunca como efecto colateral de una actualización |
 | Qué se registra | La elección de la herramienta y su versión. **Sigue abierta** como `PA-06` de `05` §11; el prefijo dejó de estar atado a ella en §3.0 |
 
@@ -171,7 +176,7 @@ corregirse en silencio, y elevado al framework como el reporte `14` de `IA.SDD.D
 | --- | --- |
 | Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta |
 | Dónde vive la versión | En el archivo de proyecto, calculada; `ADR-04003` §7 lo declara |
-| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
+| Prefijo de etiqueta | **`v`** — ver **§3.b**, que es el ítem propio que `Rules-Devops.md` §4.3 punto 3.b exige |
 | Qué **no** calcula la herramienta | La clase de cambio de la fila aditiva-mayor de §1. Ninguna herramienta de comparación de superficie la marcaría como mayor sin conocer que la cara de abajo la implementa otro proyecto de código |
 
 ### 3.4 `GeometriaFactory-Infrastructure`
@@ -181,7 +186,7 @@ corregirse en silencio, y elevado al framework como el reporte `14` de `IA.SDD.D
 | Aspecto | Decisión |
 | --- | --- |
 | Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta |
-| Prefijo de etiqueta | **`v`**, fijado en §3.0 el 2026-08-18 |
+| Prefijo de etiqueta | **`v`** — ver **§3.b**, que es el ítem propio que `Rules-Devops.md` §4.3 punto 3.b exige |
 | Qué **no** calcula la herramienta | **Las dos clases mayores que compilan** de §1, y **el linaje de transformaciones**, que no es una versión semántica sino una secuencia ordenada |
 
 **Y dos versiones que se anclan y no se calculan**, las dos con efecto sobre la ejecución y no sobre el número de versión de este ensamblado:
@@ -469,6 +474,7 @@ clase de afirmación que estos registros degradan.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 2.2 | 2026-08-18 | **Se fija el prefijo de etiqueta, que era un ítem obligatorio contestado con un diferimiento.** `Rules-Devops.md` §4.3 punto 3 exige declarar «configuración base y **prefijo de tag**», y las cuatro filas de §3 respondían *«el que se fije al anclarla, registrado en el punto de control de la etapa `a`»* — punto de control que **cerró el 2026-08-13 sin registrarlo**, y ocho etapas se construyeron sin poder etiquetarse. Entra **§3.0**, que fija **`v`** con la forma `v<MAJOR>.<MINOR>.<PATCH>` y ámbito de repositorio, **citando el propio `Rules-Devops.md` §4.5** —«Sólo en tag `v<X.Y.Z>` sin sufijo»— en lugar de elegirlo por criterio propio. Declara que **fijar el prefijo no cierra la elección de la herramienta**: `PA-06` sigue abierto, y empaquetar las dos cosas en la misma fila es lo que produjo el bloqueo. **Corrección propia:** la fila de §3.2 remitía el prefijo al `PD-01` de `Pipeline-CI-CD.md` §10, que es *«la herramienta concreta de cada stage»* y **no lo cubre**: el prefijo estaba diferido hacia un punto abierto sin dueño real. Se declara y se eleva al framework como el reporte `14`. **§11.2** deja de decir que nunca se creó ninguna etiqueta: cinco se repusieron el 2026-08-18 y el objetivo del 100 % sigue incumplido en tres. Sube **minor**: entra una sección y se corrigen cinco filas; ninguna regla de versionado cambia. | Orquestador SDD |
+| 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** `Rules-Devops.md` sube a **5.0** y su §4.3 **parte el punto 3 en dos**: la herramienta con su configuración base, y el **prefijo de tag** como **ítem propio 3.b**. La subsección que la emisión 2.2 había creado como **§3.0** pasa a numerarse **§3.b**, leída literalmente contra el ítem de la regla que la exige, y declara esa correspondencia en su primer párrafo. **Ninguna decisión se reabre**: el prefijo sigue siendo **`v`**, fijado el 2026-08-18 con cita de `Rules-Devops.md` §4.5, y la elección de la herramienta sigue abierta como `PA-06`. Las cuatro filas «Prefijo de etiqueta» de §3.1 a §3.4 apuntan al ítem nuevo. **Es reordenamiento y no contenido**: el destino ya cumplía el fondo de la regla nueva un día antes de que existiera, porque el defecto que la originó se midió acá. Sube **major**: cambia la estructura de §3 para corresponder con la de §4.3. | Orquestador de migración normativa SDD |
+| 2.2 | 2026-08-18 | **Se fija el prefijo de etiqueta, que era un ítem obligatorio contestado con un diferimiento.** `Rules-Devops.md` §4.3 punto 3 exige declarar «configuración base y **prefijo de tag**», y las cuatro filas de §3 respondían *«el que se fije al anclarla, registrado en el punto de control de la etapa `a`»* — punto de control que **cerró el 2026-08-13 sin registrarlo**, y ocho etapas se construyeron sin poder etiquetarse. Entra **§3.b**, que fija **`v`** con la forma `v<MAJOR>.<MINOR>.<PATCH>` y ámbito de repositorio, **citando el propio `Rules-Devops.md` §4.5** —«Sólo en tag `v<X.Y.Z>` sin sufijo»— en lugar de elegirlo por criterio propio. Declara que **fijar el prefijo no cierra la elección de la herramienta**: `PA-06` sigue abierto, y empaquetar las dos cosas en la misma fila es lo que produjo el bloqueo. **Corrección propia:** la fila de §3.2 remitía el prefijo al `PD-01` de `Pipeline-CI-CD.md` §10, que es *«la herramienta concreta de cada stage»* y **no lo cubre**: el prefijo estaba diferido hacia un punto abierto sin dueño real. Se declara y se eleva al framework como el reporte `14`. **§11.2** deja de decir que nunca se creó ninguna etiqueta: cinco se repusieron el 2026-08-18 y el objetivo del 100 % sigue incumplido en tres. Sube **minor**: entra una sección y se corrigen cinco filas; ninguna regla de versionado cambia. | Orquestador SDD |
 | 2.1 | 2026-08-17 | Entra **§11, el registro del avance y su responsable**, con los ítems **7 y 8** que `Rules-Devops.md` **4.2** §4.3 agregó: qué documento declara la etapa, **quién lo actualiza y en qué evento**, y el **instrumento preferido**, que es el subproducto del acto. Se declara que **manda el historial del repositorio** sobre `changelog.md`, y que el objetivo del 100 % de etiquetas por etapa cerrada está **incumplido en su totalidad** —cero etiquetas en el árbol—, sin cerrarlo acá. Reparación de la divergencia `D-06` de `Audit/Estado-Del-Destino-2026-08-17.md` §2. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |
