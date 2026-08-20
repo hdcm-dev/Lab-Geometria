@@ -17,9 +17,9 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 | Unidad de entrega principal | — | `GeometriaFactory-Api` |
 | Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **3.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
 | Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
-| Versión | — | 4.0 |
-| Fecha | — | 2026-08-19 |
-| Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12 y 9.12 → 10.0 **cerradas** |
+| Versión | — | 3.2 |
+| Fecha | — | 2026-08-17 |
+| Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10 y 9.10 → 9.12 **cerradas** |
 
 `Slug-Producto` es el único campo derivado: se obtiene de `Nombre-Producto` con el algoritmo de `Master-Prompt.md` §3.2 (`Fábrica de Geometría` → `Fabrica-De-Geometria`). `Raiz-Codigo` y `Artefacto-Agrupacion` se leen declarados del intake (cabecera y perfil de convención de §13), no se derivan.
 
@@ -27,40 +27,29 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 
 ### §1.1 Procedencia del framework
 
-**Reescrita por la fase M5 de la migración 9.12 → 10.0, el 2026-08-19.** Es la **sexta** migración
-normativa de este destino y **la primera desde la 8.11 → 9.9 que alcanza artefactos**.
+**Reescrita por la fase M5 de la migración 9.10 → 9.12, el 2026-08-17.** Es la **quinta** migración
+normativa de este destino y la **segunda consecutiva de alcance documental cero**.
 
-**Dos artefactos del framework la alcanzan, y los dos entran con la 10.0**: `Root-Rules` **7.0**, cuyo
-§12 se parte y estrena **§12.2, el ítem diferido**; y `Rules-Devops` **5.0**, cuyo §4.3 parte el punto
-3 para pedir el **prefijo de tag** como ítem propio. **Los siete saltos minor previos —9.13 a 9.19—
-tienen alcance documental cero**, verificado artefacto por artefacto en la reanudación del 2026-08-18
-y comprobado de nuevo en `Audit/Plan-Migracion-9.12-a-10.0.md` §2.
+**Dieciocho artefactos del framework se movieron y ninguno alcanza al árbol.** Por el número es el
+segundo salto más grande que este destino atravesó: cambiaron **las once reglas de categoría
+aplicadas**, `Root-Rules`, `Deriva-Rules`, `Maqueta-Rules` y `Migracion-Rules`, y entró un artefacto
+nuevo. **Lo que cambiaron todas es lo mismo**: la 9.11 agregó a cada tabla de anti-patrones una
+columna **`Detección`** con la marca `[enumerable]` o `[interpretativo]`.
 
-**Las tres superficies se midieron sobre el árbol y no se supusieron:**
-
-| Superficie | Medida | Desenlace |
-|---|---|---|
-| Citas a `Root-Rules.md` §12 → §12.1 | **0 ocurrencias** | No alcanza a este destino |
-| El prefijo de tag como ítem propio | **1 documento** | `Estrategia-Versionado.md` **3.0** §3.b. **Ninguna decisión se reabre**: `v` ya estaba fijado |
-| Ítems diferidos sin la forma de §12.2 | **116 filas** en 6 documentos | Migradas: **76 vencidas**, 21 cerradas, **14 sin evento** y 5 vigentes |
-
-**Y una consecuencia de esta migración que la procedencia tiene que declarar, porque no es un detalle
-de forma.** Al nombrar el evento de cierre como artefacto y sección, **76 puntos abiertos resultaron
-vencidos** —32 de ellos desde el 2026-08-13, cuando cerró la etapa `a`—, y **14 quedaron sin evento
-declarado, marcados como no conformes con §12.2 y elevados al Product Owner**. Ninguno se cerró y
-ninguno se inventó: la migración los volvió **contables**, que es lo único que la 10.0 pedía.
-
-**Este destino es el que originó la regla que ahora lo alcanza.** El reporte `14` del framework nació
-de su prefijo de etiqueta diferido a un punto de control que cerró sin registrarlo, y de sus ocho
-etapas sin poder etiquetarse.
+**No se dedujo del `CHANGELOG`: se midió.** Se comparó el snapshot `_legacy/9.10/` contra los archivos
+vivos, archivo por archivo, y el resultado es **cero líneas cambiadas fuera de esa tabla en las quince
+reglas** — ninguna §4.1 de cabecera, ninguna §4.2 de secciones obligatorias, ningún criterio de
+aceptación y ningún nombre de artefacto. **Una tabla de anti-patrones no describe la forma de un
+artefacto**, de modo que cambiarla no obliga a reemitir ninguno. La verificación está en
+`SDD/Docs/Audit/Plan-Migracion-9.10-a-9.12.md` §2 y §3, **escrita antes de tocar esta tabla**.
 
 | Artefacto del framework | Versión |
 |---|---|
-| Framework SDD (conjunto) | **10.0** |
-| `Master-Prompt` | 8.8 |
-| `Master-Prompt-Migracion` | 2.8 |
-| `Master-Prompt-Reanudacion` | 1.8 |
-| `Root-Rules` | **7.0** |
+| Framework SDD (conjunto) | **9.12** |
+| `Master-Prompt` | 8.4 |
+| `Master-Prompt-Migracion` | 2.7 |
+| `Master-Prompt-Reanudacion` | 1.6 |
+| `Root-Rules` | 6.2 |
 | `Rules-Contexto` | 4.4 |
 | `Rules-Necesidades-Negocio` | 4.3 |
 | `Rules-Especificacion-Funcional` | 5.4 |
@@ -69,11 +58,11 @@ etapas sin poder etiquetarse.
 | `Rules-Backlog-Tecnico` | 4.4 |
 | `Rules-Plan-Sprint` | 5.4 |
 | `Rules-Calidad-Y-Pruebas` | 4.5 |
-| `Rules-Devops` | **5.0** |
+| `Rules-Devops` | 4.6 |
 | `Rules-Examples` | 6.4 |
 | `Rules-Documentacion` | 5.4 |
-| Reglas transversales aplicadas | `Intake-Rules` 4.1, `Vocabulario-Rules` 3.1, `Maqueta-Rules` 4.3 y `Deriva-Rules` 5.3 (Fase B2 confirmada para la unidad de entrega `GeometriaFactory-Web`). **`Migracion-Rules` 3.15 sí aplica**: este árbol atravesó **seis** migraciones normativas —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12 y 9.12 → 10.0—, con sus informes en `SDD/Docs/Audit/` |
-| `Catalogo-De-Criterios` | 1.6 — **índice, no regla**: no define criterios y no gobierna ningún artefacto de este destino |
+| Reglas transversales aplicadas | `Intake-Rules` 4.1, `Vocabulario-Rules` 3.1, `Maqueta-Rules` 4.3 y `Deriva-Rules` 5.3 (Fase B2 confirmada para la unidad de entrega `GeometriaFactory-Web`). **`Migracion-Rules` 3.9 sí aplica**: este árbol atravesó **cinco** migraciones normativas —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10 y 9.10 → 9.12—, con sus informes en `SDD/Docs/Audit/` |
+| `Catalogo-De-Criterios` | 1.1 — **índice, no regla**: no define criterios y no gobierna ningún artefacto de este destino |
 | `PRODUCT-INTAKE-template` | 3.4 |
 | `PRODUCT-MANIFEST-template` | 6.0 |
 
@@ -269,7 +258,6 @@ correspondiente.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
-| 4.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M5**: cierre de procedencia. **Sexta** migración del destino y **la primera desde la 8.11 → 9.9 que alcanza artefactos**, después de dos saltos consecutivos de alcance cero. §1.1 se reescribe entera: el conjunto pasa de **9.12** a **10.0**, con `Root-Rules` **6.2 → 7.0** y `Rules-Devops` **4.6 → 5.0** como los **dos únicos** artefactos que alcanzan al árbol; los siete saltos minor 9.13 a 9.19 tienen **alcance documental cero**, verificado antes en la reanudación del 2026-08-18 y de nuevo en el plan. **Las tres superficies se midieron y no se supusieron**: las citas a §12 dan **cero**, el prefijo de tag es **un documento** —`Estrategia-Versionado.md` **3.0** §3.b— y los ítems diferidos son **116 filas** en seis documentos. **Se escribe recién después de verificar que M4 quedó completa**: ninguna tabla conserva la columna «Cuándo» y las 116 filas llevan su evento como artefacto y sección. §1.1 declara además el resultado que la migración destapó y que no es un detalle de forma: **76 puntos abiertos vencidos** —32 desde el 2026-08-13— y **14 sin evento declarado, elevados al Product Owner**; ninguno se cerró y ninguno se inventó. **M2 y M3 quedaron sin filas**: el intake no declara puntos abiertos con esta forma ni cita §12, de modo que el manifiesto no se re-deriva. Estado anterior archivado en `_legacy/2026-08-19/`. Sube **major**: el bloque de procedencia se reescribe entero. | Orquestador de migración normativa SDD |
 | 3.2 | 2026-08-17 | **Migración normativa 9.10 → 9.12, fase M5**: cierre de procedencia. Quinta migración del destino y **segunda consecutiva de alcance documental cero**. **Dieciocho artefactos del framework se movieron y ninguno alcanza al árbol**: la 9.11 agregó a cada tabla de anti-patrones una columna **`Detección`**, y la verificación **mecánica** —`diff` del snapshot `_legacy/9.10/` contra los archivos vivos— da **cero líneas cambiadas fuera de esa tabla en las quince reglas**. Entra `Catalogo-De-Criterios` **1.1**, artefacto nuevo del framework, **con su naturaleza de índice declarada**: no define ningún criterio y no gobierna ningún artefacto del destino; se lista para que la próxima migración no redescubra la pregunta. **Corrección propia:** la fila de reglas transversales de la emisión **3.1** decía «este árbol atravesó **tres** migraciones normativas» y enumeraba **cuatro** —el recuento no se actualizó al agregar el cuarto salto, error escrito por este mismo orquestador—; pasa a **cinco**, enumeradas, y queda declarado en `Audit/Plan-Migracion-9.10-a-9.12.md` §6 en lugar de corregirse en silencio. **Ningún documento del árbol se tocó**: M2, M3 y M4 quedaron sin filas. Sube **minor**. |
 | 3.1 | 2026-08-17 | **Migración normativa 9.9 → 9.10, fase M5**: cierre de procedencia. Es la **cuarta** migración de este destino y la primera con **alcance documental cero**. **Veintiuno de los veintidós artefactos del framework no cambiaron de versión**; el único que se movió es `Migracion-Rules` **3.7 → 3.8**, cuyas cinco reglas nuevas gobiernan **la consolidación al fundir árboles**: cambian cómo se migra, no la forma de ningún documento migrado. **Verificado sobre el árbol y no supuesto**: cero carpetas `_fusion/`, ninguna fila del salto anterior clasificada «regenerar», y la única consolidación del producto cerrada y auditada bajo su propia normativa. **Cero renombres**, comprobados por lectura de la entrada completa del `CHANGELOG`. La verificación artefacto por artefacto quedó escrita en `Audit/Plan-Migracion-9.9-a-9.10.md` §2 y §3 **antes** de tocar esta tabla, que es lo que `Master-Prompt-Reanudacion.md` §4 exige para actualizar la procedencia sin migrar documentos, y lo que la fase M5 existe para hacer cumplir. **Ningún documento del árbol se tocó**: las fases M2, M3 y M4 quedaron sin filas. Sube **minor**: cambia una fila de la tabla de procedencia y su nota, no el bloque entero. |
 | 3.0 | 2026-08-17 | **Migración normativa 8.11 → 9.9, fase M5** (`Master-Prompt-Migracion.md` 2.7 §9): **cierre de procedencia**. §1.1 pasa del conjunto **8.11** al **9.9**, con las versiones leídas del snapshot **`_legacy/9.9/`** del repositorio del framework y no de sus archivos vivos — el framework publicó **9.10** durante la corrida y el plan había congelado el objetivo en 9.9 declarando que no se reabre. **Se escribió recién después de verificar que las siete filas del plan quedaron resueltas**: intake 3.0 (M2), este manifiesto re-derivado 2.3 (M3), los dos apartamientos con su estado y su contador, y las once rutas del layout anterior en cuatro documentos de nivel producto (M4). Ninguna sección quedó pendiente por falta de fuente y ninguna fila sin resolver: reescribir la procedencia con migración parcial es **P0** por `Migracion-Rules.md` §4.6. **A diferencia del salto anterior, éste sí alcanzó artefactos**: cambiaron los veintidós artefactos del framework, aunque la mayor parte de su superficie —la cabecera de nivel de los 313 documentos generados y el renombre del artefacto de `05`— ya estaba reparada por la salida A del orquestador de reanudación, el mismo día y antes de que la migración empezara. §1.1 declara las tres superficies que sí abrió el salto y cómo se cerró cada una. Sube **major**: el bloque de procedencia se reescribe entero. |
