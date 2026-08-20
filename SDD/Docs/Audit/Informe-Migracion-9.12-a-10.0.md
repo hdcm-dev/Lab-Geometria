@@ -6,7 +6,7 @@
 **Fecha:** 2026-08-20
 **Instrumento:** `Master-Prompt-Migracion.md` **2.8** §10, fase M6
 **Alcance:** la migración **9.12 → 10.0**, sexta de este destino
-**Veredicto:** **APROBADO CON UN HALLAZGO** — 0 P0, 0 P1, **1 P2**, 0 P3
+**Veredicto:** **APROBADO CON UN HALLAZGO** — 0 P0, 0 P1, **1 P2 (cerrado el 2026-08-20)**, 0 P3
 
 ---
 
@@ -46,7 +46,7 @@ no reemplaza la independencia.
 
 ---
 
-## 2. Hallazgo `M-01` · La exclusión que el barrido no enumeró · **P2**
+## 2. Hallazgo `M-01` · La exclusión que el barrido no enumeró · **P2 — CERRADO el 2026-08-20**
 
 **La afirmación A1 dice «superficie CERO» y hoy el patrón devuelve 2.**
 
@@ -70,7 +70,7 @@ sin migrar: falta una declaración que vuelve auditable lo que ya está bien. **
 porque es exactamente la clase de omisión que el framework acaba de castigar —una obligación que
 nadie comprueba— y dejarla sin nivel la volvería a hacer invisible.
 
-**Remedio, y no se aplica en este informe.** El plan y §1.1 suman la enumeración: *«Exclusión: las dos
+**Remedio, aplicado el 2026-08-20 por `Plan-Conversion-Nomenclatura-Item-Diferido.md` §4.** El plan y §1.1 suman la enumeración: *«Exclusión: las dos
 ocurrencias que nombran el barrido en su propia declaración»*, con su motivo. Es del orquestador de
 migración, no del auditor.
 

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Arquitectura-Unidad-Entrega.md
-**Versión:** 3.0
+**Versión:** 3.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -544,7 +544,13 @@ Las siete filas están, `G-1` a `G-7`, sin agrupar. Son las de [`../02-Especific
 
 ### 11.1 `GeometriaFactory-Web`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+> **Correspondencia con `Root-Rules.md` §12.2.** La columna **`Punto abierto`** realiza sus campos
+> **1 · qué falta** —el enunciado en negrita— y **2 · por qué no se puede hoy** —el desarrollo que
+> sigue—; **`Quién lo cierra`** realiza el campo 3 y **`En qué evento se cierra`** el campo 4.
+> **`Estado` no es un campo de §12.2**: deriva de su tabla de escalamiento y se declara como tal.
+
+
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PA-01 | La **versión exacta de la biblioteca de componentes de interfaz**. La fuente la deja explícitamente **[A VERIFICAR]** y declara que se ancla al crear el andamiaje y se registra en ese momento | El equipo, al crear el andamiaje | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
 | PA-02 | La **versión de plataforma que soporta el hosting**, **[A VERIFICAR]** en la fuente. Es `PT-01.a`, y si no pasa la salida es bajar la versión objetivo del front y no la del backend | La medición de `PT-01.a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
@@ -558,7 +564,7 @@ Las siete filas están, `G-1` a `G-7`, sin agrupar. Son las de [`../02-Especific
 
 ### 11.2 `GeometriaFactory-Visor`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PA-01 | La **versión del motor de dibujo tridimensional** que se adopta. El intake declara que se ancla y se registra, y que si es posterior a la del visualizador previo se documenta el cambio de interfaz que exija | El equipo, al implementar la capa 3 | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `g` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `g` cerró el **2026-08-17** y el punto sigue abierto |
 | PA-02 | Los **nombres definitivos** de las funciones internas, de las clases y de los campos del resultado de dibujo. La categoría 02 los declara no fijados; los nombres de las seis funciones de la fachada, en cambio, **sí están fijados** por el intake §17.7 P.3 | El equipo, en la etapa que implementa la fachada | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `g` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `g` cerró el **2026-08-17** y el punto sigue abierto |
@@ -573,4 +579,5 @@ Las siete filas están, `G-1` a `G-7`, sin agrupar. Son las de [`../02-Especific
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
-| 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **12** filas de puntos abiertos pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«Dónde se cierra (artefacto y sección)»** y entra la columna **«Estado»**. Un momento no deja rastro que alguien pueda abrir, y un cierre que nadie comprueba no ocurre. **Al nombrar el artefacto, 8 quedaron VENCIDAS**: su evento apunta a un punto de control de etapa ya cerrada o a la categoría 09 ya emitida. **1** quedan **sin evento declarado** —decían «sin fecha comprometida»— y §12.2 exige uno: **se marcan como no conformes y quedan para el Product Owner**, porque inventarles un evento sería exactamente lo que esta migración vino a impedir. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables. Sube **major**: cambia la estructura de la tabla. | Orquestador de migración normativa SDD |
+| 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **12** filas de puntos abiertos pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«En qué evento se cierra (artefacto y sección)»** y entra la columna **«Estado»**. Un momento no deja rastro que alguien pueda abrir, y un cierre que nadie comprueba no ocurre. **Al nombrar el artefacto, 8 quedaron VENCIDAS**: su evento apunta a un punto de control de etapa ya cerrada o a la categoría 09 ya emitida. **1** quedan **sin evento declarado** —decían «sin fecha comprometida»— y §12.2 exige uno: **se marcan como no conformes y quedan para el Product Owner**, porque inventarles un evento sería exactamente lo que esta migración vino a impedir. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables. Sube **major**: cambia la estructura de la tabla. | Orquestador de migración normativa SDD |
+| 3.1 | 2026-08-20 | **Conversión de nomenclatura, `N-01`.** La columna que la fase M4 emitió como «Dónde se cierra» pasa a **«En qué evento se cierra (artefacto y sección)»**, que es como `Root-Rules.md` **7.0** §12.2 nombra literalmente su **campo 4**. No es cosmético: *«dónde»* nombra un **lugar** y el campo nombra un **evento**, y esa distinción es la que §12.2 existe para sostener. Entra además la **nota de correspondencia** de los cuatro campos con las cinco columnas, que declara que `Punto abierto` realiza los campos **1 y 2** juntos y que **`Estado` no es un campo de §12.2** sino un derivado de su tabla de escalamiento. **Se declara en lugar de partir la columna**, porque partirla obligaría a reescribir la prosa de las filas que `Informe-Migracion-9.12-a-10.0.md` `A7` verificó **idénticas**. **Ninguna fila cambia de contenido, de estado ni de recuento.** Plan en `Audit/Plan-Conversion-Nomenclatura-Item-Diferido.md`. Sube **minor**: cambia un rótulo y entra una nota; la estructura de la tabla no se toca. | Orquestador SDD |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Pipeline-CI-CD.md
-**Versión:** 3.0
+**Versión:** 3.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -352,7 +352,13 @@ Este proyecto de código tiene **dos plataformas y no una**, y confundirlas ser�
 
 ### 10.1 `GeometriaFactory-Web`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+> **Correspondencia con `Root-Rules.md` §12.2.** La columna **`Punto abierto`** realiza sus campos
+> **1 · qué falta** —el enunciado en negrita— y **2 · por qué no se puede hoy** —el desarrollo que
+> sigue—; **`Quién lo cierra`** realiza el campo 3 y **`En qué evento se cierra`** el campo 4.
+> **`Estado` no es un campo de §12.2**: deriva de su tabla de escalamiento y se declara como tal.
+
+
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PD-01 | ~~**La inclusión de `src/GeometriaFactory.Contracts/` en el filtro de rutas del flujo de publicación** (§3.2, decisión 1). Es la resolución que esta categoría propone al hallazgo que `GeometriaFactory-Contracts` elevó, y **cambia lo que el intake §17.2.P.7 · GeometriaFactory-Web enumera**, de modo que se eleva en lugar de darse por tomada~~ · **CERRADO el 2026-08-11**: el Product Owner la confirmó en el intake **1.22**, y §17.2.P.7 · GeometriaFactory-Web enumera hoy las **tres** rutas | El Product Owner, sobre el intake §17.2.P.7 · GeometriaFactory-Web | `PRODUCT-INTAKE` **1.22** §17.2.P.7 | **Cerrado** el 2026-08-11 |
 | PD-02 | La **exclusión en el control de versiones** del directorio de salida del empaquetado y del bundle copiado bajo los recursos estáticos. Es la acción pendiente que [`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](Entornos-Deploy.md) §2.2 declaró con su fecha de lectura, y su tramo de este lado lo resuelve [`Entornos-Deploy.md`](Entornos-Deploy.md) §2 | El equipo, con `BT-10001` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y esa sección registra cuatro decisiones, ninguna de éstas |
@@ -364,7 +370,7 @@ Este proyecto de código tiene **dos plataformas y no una**, y confundirlas ser�
 
 ### 10.2 `GeometriaFactory-Visor`
 
-| Id | Punto abierto | Quién lo cierra | Dónde se cierra (artefacto y sección) | Estado |
+| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
 | PD-01 | La **herramienta concreta** de cada stage —empaquetador, ejecutor de pruebas, conductor de navegador y generador del inventario de componentes— y su anclaje de versión | El equipo, en el punto de control de la etapa `a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y esa sección registra cuatro decisiones, ninguna de éstas |
 | PD-02 | Que el ejecutor de la canalización provea **navegador con capacidad gráfica tridimensional y conductor capaz de contar peticiones y leer el almacenamiento**. Sin eso, `QG-04`, `QG-05` y las dos puertas técnicas no se pueden medir en la canalización y quedarían como medición manual registrada | El equipo, antes del momento de medición | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `g` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `g` cerró el **2026-08-17** |
@@ -421,4 +427,5 @@ Este proyecto de código no se despliega, pero **su artefacto viaja dentro del d
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
-| 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **ocho** filas de puntos abiertos de §10 pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«Dónde se cierra (artefacto y sección)»**, y entra la columna **«Estado»**. El cambio no es de redacción: un momento no deja rastro que alguien pueda abrir, y §12.2 exige un evento comprobable. **Y al nombrarlo, siete de las ocho resultaron VENCIDAS**: seis apuntaban a los puntos de control de las etapas `a`, `c` y `g` —cerradas el 2026-08-13, el 08-14 y el 08-17— y la séptima al momento de medición de `PT-02`/`PT-03`, medidas en la `g`. **Verificado y no supuesto**: la sección «Decidido en esta etapa» de la etapa `a` en `changelog.md` registra **cuatro** decisiones y **ninguna es un anclaje de herramienta**. La única cerrada, `PD-01` de §10.1, ya lo estaba con el intake **1.22**. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables, y cerrarlos es del equipo y del Product Owner. Sube **major**: la estructura de la tabla de §10 cambia. | Orquestador de migración normativa SDD |
+| 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **ocho** filas de puntos abiertos de §10 pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«En qué evento se cierra (artefacto y sección)»**, y entra la columna **«Estado»**. El cambio no es de redacción: un momento no deja rastro que alguien pueda abrir, y §12.2 exige un evento comprobable. **Y al nombrarlo, siete de las ocho resultaron VENCIDAS**: seis apuntaban a los puntos de control de las etapas `a`, `c` y `g` —cerradas el 2026-08-13, el 08-14 y el 08-17— y la séptima al momento de medición de `PT-02`/`PT-03`, medidas en la `g`. **Verificado y no supuesto**: la sección «Decidido en esta etapa» de la etapa `a` en `changelog.md` registra **cuatro** decisiones y **ninguna es un anclaje de herramienta**. La única cerrada, `PD-01` de §10.1, ya lo estaba con el intake **1.22**. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables, y cerrarlos es del equipo y del Product Owner. Sube **major**: la estructura de la tabla de §10 cambia. | Orquestador de migración normativa SDD |
+| 3.1 | 2026-08-20 | **Conversión de nomenclatura, `N-01`.** La columna que la fase M4 emitió como «Dónde se cierra» pasa a **«En qué evento se cierra (artefacto y sección)»**, que es como `Root-Rules.md` **7.0** §12.2 nombra literalmente su **campo 4**. No es cosmético: *«dónde»* nombra un **lugar** y el campo nombra un **evento**, y esa distinción es la que §12.2 existe para sostener. Entra además la **nota de correspondencia** de los cuatro campos con las cinco columnas, que declara que `Punto abierto` realiza los campos **1 y 2** juntos y que **`Estado` no es un campo de §12.2** sino un derivado de su tabla de escalamiento. **Se declara en lugar de partir la columna**, porque partirla obligaría a reescribir la prosa de las filas que `Informe-Migracion-9.12-a-10.0.md` `A7` verificó **idénticas**. **Ninguna fila cambia de contenido, de estado ni de recuento.** Plan en `Audit/Plan-Conversion-Nomenclatura-Item-Diferido.md`. Sube **minor**: cambia un rótulo y entra una nota; la estructura de la tabla no se toca. | Orquestador SDD |

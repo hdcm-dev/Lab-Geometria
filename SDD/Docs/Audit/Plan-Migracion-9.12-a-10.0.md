@@ -53,6 +53,13 @@ renombres **vacía**, y las entradas 9.13 a 9.19 son minor y no llevan bloque.
 que la primera fila de la tabla de secciones movidas **no lo toca**. Se declara verificado y no
 supuesto.
 
+**Exclusión enumerada** (`SDD-Development-Guide.md` §VI.3.2). Las **2** ocurrencias vivas del patrón
+`Root-Rules.md §12` son **la frase que nombra este mismo barrido** —acá y en la tabla de superficies
+de `PRODUCT-MANIFEST` §1.1—, no citas de la sección como fuente normativa. §VI.3.2 prevé el caso al
+exigir que la regla 4 se corra **sobre el texto propio**. Cierra el hallazgo `M-01` de
+`Informe-Migracion-9.12-a-10.0.md` §2.
+
+
 ### 4.2 Ítems diferidos sin la forma de §12.2 · **superficie 92 filas**
 
 **Es la superficie real de esta migración, y es grande.** El destino declara sus decisiones pendientes
