@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Estado-Del-Destino-2026-08-23.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-23
 **Autor:** Orquestador de reanudación SDD
 **Nivel:** Producto
@@ -234,8 +234,28 @@ major ya cambiaron**, y agranda la migración futura en lugar de acercarla.
 | **Alcance acordado** | **`D-04` únicamente.** `D-02` no la repara `A`; `D-03'` queda declarada y abierta por decisión del Product Owner |
 | **Qué sigue** | **Recalcular y volver a preguntar.** Reparada `D-04`, se vuelve a R0 y la pregunta pendiente sigue siendo **migrar o seguir en la versión declarada** |
 
-**La recomendación fue `B` y su fundamento está en §6 y §7.** No se eligió: el Product Owner eligió
-`A`, que es la única salida que las otras cuatro dan por hecha.
+**La recomendación fue `B` y su fundamento está en §6 y §7.** En la primera vuelta no se eligió: el
+Product Owner eligió `A`, que es la única salida que las otras cuatro dan por hecha.
+
+### 8.1 La segunda vuelta, y su decisión
+
+**Fusionada la reparación de `D-04` (PR #79), se volvió a R0 sobre el árbol reparado** y la
+recomendación se recalculó. Ninguno de los dos factores que la fundaban se movió: el umbral sigue en
+**dos major con impacto** y las tres superficies de §6.1 quedaron intactas — reparar un recuento
+escrito en el roadmap no cambia lo que el framework hizo con `Rules-Backlog-Tecnico`, `Rules-Devops`
+y `Root-Rules`.
+
+| Campo | Valor |
+|---|---|
+| **Salida elegida** | **B · Migrar a la vigente** |
+| **Quién** | El Product Owner, el 2026-08-23, en la segunda vuelta |
+| **Sobre qué** | Las salidas recalculadas de R2, con la recomendación **B** y su alternativa **D** |
+| **Qué continúa** | `Master-Prompt-Migracion.md`, **con el diff normativo de §6 ya hecho**: su fase M1 lo verifica en lugar de construirlo |
+| **Qué no resuelve** | `D-03'`, que queda abierta, y el avance de construcción |
+
+**La decisión viaja con el despacho y M1 no la revisa.** Es lo que evita que el orquestador siguiente
+vuelva a detenerse en lo que acá ya se resolvió: preguntar dos veces lo mismo enseña a contestar sin
+leer.
 
 ---
 
@@ -277,13 +297,23 @@ recalcula**. `Master-Prompt-Reanudacion.md` §4.0.2 exige decirlo con estas pala
 eligió `A` sepa que está en la segunda vuelta y no lea la pregunta como nueva:
 
 > Reparada `D-04`, lo que sigue decidiendo es **migrar a la vigente o seguir en la versión
-> declarada**. La recomendación recalculada será **`B`**, por el umbral de §7.2 — dos major con
+> declarada**. La recomendación recalculada es **`B`**, por el umbral de §7.2 — dos major con
 > impacto, que la reparación de `D-04` no mueve.
+
+**Ocurrió, y su desenlace está en §8.1: el Product Owner eligió `B`.** Este renglón queda escrito en
+lugar de reemplazarse por el resultado, porque lo que hace auditable la decisión es que se vea que la
+pregunta se hizo dos veces y que la segunda no se disimuló como si fuera la primera.
 
 ### 10.2 Si la salida de la segunda vuelta es `B`
 
 `Master-Prompt-Migracion.md`, **con el diff normativo de §6 ya hecho**: su fase M1 lo verifica en
 lugar de construirlo. Las tres superficies de §6.1 son las filas del plan.
+
+**Ejecutado.** M0 reconoció el destino y M1 emitió
+[`Plan-Migracion-10.0-a-13.3.md`](Plan-Migracion-10.0-a-13.3.md) **1.0**, que está en detención
+esperando aprobación. **M1 verificó el diff de §6 y no lo rehizo**, y su §5 corrió la **revisión de
+apartamientos** que la migración anterior no había corrido: los tres ADR de este destino resultan
+**no contemplados** y cruzan el umbral de dos saltos.
 
 ### 10.3 Si la salida es `D` — la construcción, que no tiene prompt
 
@@ -323,4 +353,5 @@ dentro de la migración cierra las dos cosas de una vez.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-23 | **Registra la decisión de la segunda vuelta**, que es lo que la salida `A` obliga a volver a preguntar: fusionada la reparación de `D-04` en el PR #79, R0 corrió de nuevo sobre el árbol reparado, la recomendación **se recalculó sin moverse** —el umbral sigue en dos major con impacto y las tres superficies quedaron intactas— y el Product Owner eligió **`B` · Migrar a la vigente**. **§8.1 es nueva** y lleva la decisión con su autor y su fecha, para que el orquestador de migración **no vuelva a preguntar**; §10.1 conserva el renglón de la pregunta pendiente en lugar de reemplazarlo por su resultado, y §10.2 registra que **M1 ya emitió su plan**, `Plan-Migracion-10.0-a-13.3.md` 1.0, verificando el diff de §6 en lugar de reconstruirlo. | Orquestador de reanudación SDD |
 | 1.0 | 2026-08-23 | Emisión inicial. **Cuarta reanudación** del destino, con `Master-Prompt-Reanudacion.md` **1.9**. **§2 registra que T0 detuvo la corrida** por una entrega viva —el PR #78— y publica las dos compuertas, antes y después de T5. **La dimensión 5 coincide por primera vez**, y §3 declara por qué: desde el PR #66 no hubo trabajo de código. **§4 cuenta los ítems diferidos sobre el árbol** —116 filas, **33 vencidas**, **11 sin evento**, 5 vigentes, 67 cerradas— y el recuento coincide con el declarado. **§6 mide el diff normativo 10.0 → 13.3 artefacto por artefacto**: tres reglas **major** —`Root-Rules` 7.0 → 8.4, `Rules-Backlog-Tecnico` 4.4 → 5.1 y `Rules-Devops` 5.0 → 6.1— y **tres superficies medidas**: **144 archivos `US-*.md`** que empaquetan prioridad y estimación, los **cuatro ítems `.b`** de la 09, y **cinco filas** del mapa de documentación con la forma vieja de `AG`. Declara además que las **550 ocurrencias en 375 archivos** de `AG-NN` **no las renumera el destino**, por `Migracion-Rules.md` §4.3.1. **§7.2 aplica el umbral de continuidad**: **dos major con impacto**, y por eso **`C` no se ofrece como equivalente**. Recomendación **`B`** con alternativa **`D`**; el Product Owner eligió **`A`**, acotada a **`D-04`**, y **volver a preguntar** en la segunda vuelta. §9 registra la reparación de `D-04` y §10 el punto de continuación. | Orquestador de reanudación SDD |
