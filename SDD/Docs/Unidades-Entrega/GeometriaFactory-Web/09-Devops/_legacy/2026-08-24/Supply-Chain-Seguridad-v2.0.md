@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Supply-Chain-Seguridad.md
-**Versión:** 3.0
+**Versión:** 2.0
 **Estado:** Propuesto
-**Fecha:** 2026-08-24
+**Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -34,43 +34,6 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 
 ## 2. Inventario de componentes
 
-### 2.b El generador del inventario — **ítem propio**, y su formato no espera a él
-
-**Esta subsección realiza el ítem 1.b de `Rules-Devops.md` §4.6**, que desde la regla **6.0** separa el
-**generador** —único campo que puede depender del runtime— del **formato**, el **formato de salida**,
-la **publicación adjunta** y la **firma**, que se eligen hoy.
-
-**Acá los dos venían atados** en la fila «Formato y generador» de §2.1, que remitía a la etapa `a`.
-**La etapa `a` cerró el 2026-08-13**, de modo que esa remisión está **vencida** por `Root-Rules.md`
-§12.2.
-
-**Los tres campos que no dependen del runtime se fijan acá:**
-
-| Campo del ítem | Decisión | Fundamento |
-|---|---|---|
-| **Formato** | **CycloneDX** | Decidido por el Product Owner el **2026-08-24**, para las **dos** unidades de entrega. `Rules-Devops.md` §4.6 punto 1 admite CycloneDX o SPDX y no impone ninguno |
-| **Formato de salida** | **JSON** | La misma decisión |
-| **Publicación** | **Adjunta al informe de cierre de la etapa**, junto con el registro del flujo, que es lo que §2.1 ya declaraba | §2.1, fila «Dónde se adjunta» |
-| **Firma** | **No se firma el inventario por separado**: lo que esta unidad publica son recursos estáticos por FTP, y §3.1 ya declara qué garantía de integridad existe y cuál no | §3.1 de este documento |
-
-**Y el único que se difiere, con los cuatro campos que §12.2 obliga:**
-
-| Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
-|---|---|---|---|---|
-| `PD-01` | **El generador del inventario.** **No se puede fijar hoy**, y acá el motivo es más fuerte que el runtime: **ninguna herramienta de una sola cadena lo produce entero**, porque el motor de dibujo tridimensional viaja empaquetado **dentro del bundle** y no como dependencia declarada. Elegir generador exige resolver cómo inventariar lo que está adentro de un archivo de recursos estáticos | El equipo, al resolverlo | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.1, **fase `i` · Despliegue real**, que es cuando se publica de verdad y el inventario tiene destinatario | **Vigente.** La fase `i` no ocurrió |
-
-**Por qué el identificador es `PD-01`.** Es la misma forma `PD-NN` que
-[`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 usa en **su** ámbito, y los dos ámbitos son el documento:
-`PD-01` de acá y `PD-01` de allá no colisionan porque se citan siempre con su documento. Confirmado por
-el Product Owner el 2026-08-24, como `Migracion-Rules.md` §4.3.1 pasada 1.b exige.
-
-**Y la constancia que obliga a no repetir el evento anterior.** La fila vieja difería formato y
-generador juntos «a la etapa `a`», que **cerró el 2026-08-13**. Y el `PD-03` de
-[`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 —que nombra el «generador del inventario» en su
-enunciado— se declaró **Cerrado el 2026-08-20 «por lectura»** con una lista de herramientas que **no
-incluye ningún generador de inventario**. Queda declarado y elevado al informe de M6; este apartado
-**no reabre `PD-03`**, que es de otra categoría.
-
 ### 2.1 `GeometriaFactory-Web`
 
 **Decisión de esta categoría: se emite inventario, y cubre las dos cadenas.** Es una unidad desplegable con dos cadenas de herramientas, y un inventario tomado sobre una sola de ellas dejaría fuera exactamente lo que más importa.
@@ -87,8 +50,7 @@ incluye ningún generador de inventario**. Queda declarado y elevado al informe 
 | Cuándo se emite | En el flujo de publicación, sobre el estado que efectivamente se sube |
 | Qué cubre | Las dos cadenas, con el inventario del bundle incorporado y no recalculado |
 | Dónde se adjunta | Al **informe de cierre** de la etapa, junto con el registro del flujo |
-| Formato, salida, publicación y firma | **CycloneDX**, **JSON**, adjunto al informe de cierre y **sin firma propia**. Ver **§2.b** |
-| Generador | **Abierto**, diferido como `PD-01` de **§2.b**: inventariar lo que viaja dentro del bundle no es el mismo problema que elegir formato |
+| Formato y generador | **No se nombran.** Ninguna fuente los declara y su elección es de la etapa `a`, por la regla de anclaje de versiones. Ver `PD-03` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
 
 ### 2.2 `GeometriaFactory-Visor`
 
@@ -201,34 +163,6 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 ## 6. Análisis estático y dinámico
 
-### 6.b El análisis dinámico como ítem propio, separado del estático
-
-**Esta subsección realiza el ítem 5.b de `Rules-Devops.md` §4.6**, que desde la regla **6.0** separa
-**DAST** de **SAST**: el estático corre sobre el código y no espera a nada; el dinámico necesita un
-ambiente desplegado, y unidos **el bloqueado arrastra al que no lo está**.
-
-| Ítem | Herramienta | Paso o stage | Criterio de bloqueo |
-|---|---|---|---|
-| **SAST** — punto 5 | El compilador de la plataforma **con advertencias como error**, más las verificaciones de estructura de `QG-06`, `QG-08` y `QG-09` | **Paso 5 del flujo** para el front; stage **`empaquetar`** para el punto de extensión | **Bloquea**: el gate es «sin advertencias» (`QG-01`) |
-| **DAST** — punto 5.b | **El producto corriendo en un navegador**, con un conductor que cuenta peticiones, lee el almacenamiento y observa el tráfico | Stages **`inspeccionar`** y **`probar`** | **Bloquea**: `QG-05`, `QG-07` y `QG-10` |
-
-**Los pasos y los stages son los de esta unidad y no los de la hermana.** El front se verifica por
-**pasos numerados del flujo de publicación** y el punto de extensión por los stages `instalar`,
-`empaquetar`, `inspeccionar`, `probar` y `copiar`, que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2
-declara. **Esta unidad no tiene stages `build` ni `test`**: ésos son los de `GeometriaFactory-Api`.
-
-**La condición de ejecutor que el análisis dinámico necesita ya está satisfecha.** Requiere un
-navegador con capacidad gráfica tridimensional y su conductor, y eso era `PD-04` de
-[`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 — **cerrado el 2026-08-20**, con el ejecutor anclado en
-`mcr.microsoft.com/playwright:v1.48.0-jammy`. Por eso el criterio de bloqueo de la tabla dice
-**«bloquea»** y no «bloquea cuando puede correr»: la medición manual registrada era la salida mientras
-el ejecutor no estaba, y hoy está.
-
-**Separarlo del estático es exactamente lo que la 11.0 buscaba:** el SAST de esta unidad bloquea desde
-la etapa `a` y **nunca dependió del ejecutor**; mientras los dos vivían en un ítem, la condición del
-dinámico se leía como si alcanzara a los dos — y ahora que esa condición se cerró, tenerlos separados
-es lo que permite verlo.
-
 ### 6.1 `GeometriaFactory-Web`
 
 | Análisis | Estado | Fundamento |
@@ -329,6 +263,4 @@ La sección existe para que la canalización de nivel producto no trate a los tr
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Se reparan tres hallazgos del audit.** **P1**: §6.b nombraba los stages **`build` y `test`**, que son los de la unidad hermana — esta unidad verifica el front por **pasos numerados** y el punto de extensión por `instalar`, `empaquetar`, `inspeccionar`, `probar` y `copiar`. **P1**: §6.b declaraba viva la condición de ejecutor de `PD-04`, **Cerrado el 2026-08-20** con `playwright:v1.48.0-jammy` anclado, de modo que el DAST **bloquea** y no «bloquea cuando puede correr». **P1/P2**: el formato del inventario deja de diferirse —**CycloneDX / JSON**, decidido el 2026-08-24— y queda un solo ítem, `PD-01`, el generador, con su campo 2 escrito —ninguna herramienta de una sola cadena lo produce entero, porque el motor 3D viaja dentro del bundle— y evento en la **fase `i`**. El identificador toma la forma `PD-NN` del ámbito del documento. Se declara además que `PD-03` de `Pipeline-CI-CD.md` §10 se cerró «por lectura» **sin ningún generador de inventario en su lista**. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
-| 2.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entran **§2.b**, el generador del inventario como ítem propio, y **§6.b**, el análisis dinámico separado del estático, por los puntos **1.b** y **5.b** de `Rules-Devops.md` **6.0** §4.6. La fila «Formato y generador» de §2.1 remitía a la **etapa `a`**, que **cerró el 2026-08-13**: queda partida en `PD-SBOM-1` y `PD-SBOM-2` con los cuatro campos de `Root-Rules.md` §12.2 y **eventos que no ocurrieron**. **Y acá el generador tiene una dificultad propia que la partición deja a la vista**: ninguna herramienta de una sola cadena produce el inventario entero, porque el motor de dibujo tridimensional viaja **dentro del bundle** y no como dependencia declarada. **§6.b declara que el DAST de esta unidad bloquea cuando puede correr**, con su condición de ejecutor —navegador con capacidad tridimensional y su conductor, `PD-04`— que **nunca alcanzó al SAST** y que mientras vivían en un ítem se leía como si alcanzara a los dos. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
