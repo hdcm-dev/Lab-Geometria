@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Versionado.md
-**Versión:** 3.0
+**Versión:** 2.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-24
+**Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -95,34 +95,6 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 ## 3. Herramienta de cálculo de la versión
 
-### 3.b El prefijo de etiqueta — **ítem propio**, y por qué llega tarde a este documento
-
-**Esta subsección realiza el ítem 3.b de `Rules-Devops.md` §4.3**, que la regla **5.0** separó del punto
-3 y que este documento **nunca emitió**. La unidad `GeometriaFactory-Api` lo emitió el **2026-08-18**,
-en su `Estrategia-Versionado.md` §3.b; **acá quedó sin hacer, y su fila siguió difiriendo el prefijo a
-un evento que ya había ocurrido**.
-
-**Lo levantó el audit de la ronda 1 del corte 09 de la migración 10.0 → 13.3**, como hallazgo **P1**: se
-estaba emitiendo §5.b cuatro secciones más abajo mientras §3.1 seguía diciendo *«el que se fije al
-anclarla, registrado en el punto de control de la etapa `a`»* — **un punto de control que cerró el
-2026-08-13 sin registrarlo**. Es el mismo defecto que dejó a este producto ocho etapas sin poder
-etiquetarse, y estaba vivo en el documento que se estaba reescribiendo.
-
-| Aspecto | Decisión |
-| --- | --- |
-| **Prefijo de etiqueta** | **`v`** — el del repositorio entero, no uno propio de esta unidad |
-| **Forma completa** | `v<MAJOR>.<MINOR>.<PATCH>`, sin sufijo, sobre el SemVer 2.0.0 que §1 adopta |
-| **Ámbito** | El repositorio de código. **Las etiquetas son del repositorio y no de cada ensamblado**, de modo que esta unidad no acuña ni un prefijo propio ni un espacio de nombres propio |
-
-**No se elige acá y por eso se puede escribir sin decidir nada.** El prefijo ya estaba fijado el
-2026-08-18 en `Estrategia-Versionado.md` §3.b de `GeometriaFactory-Api`, con su fundamento —la tabla de
-canales de `Rules-Devops.md` §4.5 escribe la forma literal «Sólo en tag `v<X.Y.Z>` sin sufijo»— y **las
-cinco etiquetas del repositorio ya lo usan**: `v0.1.0`, `v0.2.0`, `v0.5.0`, `v0.7.0` y `v0.8.0`. Lo que
-faltaba acá no era la decisión: era **decir que esta unidad se rige por ella**.
-
-**Fijar el prefijo no cierra la elección de la herramienta.** `PA-06` sigue abierto, y empaquetar las
-dos cosas en la misma fila es lo que produjo el defecto.
-
 ### 3.1 `GeometriaFactory-Web`
 
 **Se declara por su función, y esta categoría no la elige**, por el mismo motivo que en el resto del producto: ninguna fuente la nombra y la regla de anclaje del intake, en el encabezado de su Parte C, la ata al momento en que se introduce.
@@ -130,7 +102,7 @@ dos cosas en la misma fila es lo que produjo el defecto.
 | Aspecto | Decisión |
 | --- | --- |
 | Función | Calcular la versión desde las etiquetas del repositorio y los mensajes de confirmación desde la última etiqueta |
-| Prefijo de etiqueta | **`v`**, el del repositorio entero — ver **§3.b**, que es el ítem propio que `Rules-Devops.md` §4.3 punto 3.b exige |
+| Prefijo de etiqueta | El que se fije al anclarla, registrado en el punto de control de la etapa `a` |
 | Qué **no** calcula la herramienta | **Ninguna de las seis clases de §1.** No hay superficie de tipos que comparar: lo que cambia es lo que la persona ve, y eso lo decide el criterio y lo verifica el guion |
 
 **Y una versión que sí se ancla y no se calcula**: la de la **biblioteca de componentes de interfaz**, que la fuente deja explícitamente **[A VERIFICAR]** y declara que se registra al crear el andamiaje (intake §17.2.P.1 · GeometriaFactory-Web). Es `PA-01` de `05` §11 y `BT-10002` de la etapa `a`. **Esta categoría no la inventa.**
@@ -171,25 +143,6 @@ El del producto, sin variantes: una rama por etapa a partir de la principal, eti
 **Reglas de protección de la rama principal:** los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 en verde, incluidas las tres inspecciones **sobre el bundle generado**, y la constancia del OK del punto de control.
 
 ## 5. Canales
-
-### 5.b La semántica de sufijos de anticipo — **ítem propio**
-
-**Esta subsección realiza el ítem 5.b de `Rules-Devops.md` §4.3**, que desde la regla **6.0** pide la
-semántica de sufijos **separada del conjunto de canales**: qué canales tiene el producto puede
-depender de una decisión de distribución abierta, **qué sufijo lleva una preview no depende de nada**.
-
-**Las dos mitades ya estaban contestadas en §5.1 y §5.2**, y esta subsección las reúne en el ítem
-propio que la regla exige, sin escribir nada nuevo.
-
-| Aspecto | Decisión |
-| --- | --- |
-| **Sufijos `-alpha`, `-beta`, `-rc`** | **No se usan**, ni en `GeometriaFactory-Web` ni en `GeometriaFactory-Visor` |
-| **Forma que sí se usa** | `v<MAJOR>.<MINOR>.<PATCH>` sin sufijo, la del repositorio entero |
-| **Motivo** | No hay canal donde publicar un anticipo ni integrador que lo consuma: el front se publica por FTP en un hosting y **el anfitrión carga el archivo que la construcción produjo** (intake §15 y §16) |
-| **Qué lo reabriría** | Que el punto de extensión pase a publicarse como paquete consumible por terceros. **§8 no declara esa condición** —sus cinco obligaciones son sobre cómo crece la superficie, no sobre publicación—, así que se declara acá y no se le atribuye a otra sección |
-
-**No se difiere y por eso no lleva la forma de `Root-Rules.md` §12.2**: está contestado, con su motivo
-y su condición de reapertura.
 
 ### 5.1 `GeometriaFactory-Web`
 
@@ -312,7 +265,5 @@ clase de afirmación que estos registros degradan.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Y entra §3.b, el prefijo de etiqueta, que este documento nunca emitió**: era un **P1** del audit. `GeometriaFactory-Api` lo emitió el 2026-08-18 y acá la fila de §3.1 siguió difiriendo el prefijo *«al punto de control de la etapa `a`»* —**que cerró el 2026-08-13 sin registrarlo**—, mientras la ronda 1 reescribía §5.b cuatro secciones más abajo. **No se decide nada nuevo**: el prefijo `v` ya estaba fijado y las cinco etiquetas del repositorio lo usan; lo que faltaba era declarar que esta unidad se rige por él. **Se corrige además una atribución falsa**: §5.b decía que la condición de reapertura «es la que §8 ya declara», y §8 no la declara —sus cinco obligaciones son sobre cómo crece la superficie, no sobre publicación—; **P2**. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
-| 2.2 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entra **§5.b, la semántica de sufijos de anticipo como ítem propio**, que `Rules-Devops.md` **6.0** §4.3 separa del conjunto de canales. **No se escribió nada nuevo**: §5.1 y §5.2 ya declaraban que no se usan, con su motivo —no hay canal donde publicar un anticipo y el anfitrión carga el archivo que la construcción produjo—. **No se difiere**: está contestado, con su condición de reapertura, que es la misma que §8 declara para el crecimiento del punto de extensión. Sube **minor**. |
 | 2.1 | 2026-08-17 | Entra **§9, el registro del avance y su responsable**, con los ítems **7 y 8** que `Rules-Devops.md` **4.2** §4.3 agregó: qué documento declara la etapa, **quién lo actualiza y en qué evento**, y el **instrumento preferido**, que es el subproducto del acto. Se declara que **manda el historial del repositorio** sobre `changelog.md`, y que el objetivo del 100 % de etiquetas por etapa cerrada está **incumplido en su totalidad** —cero etiquetas en el árbol—, sin cerrarlo acá. Reparación de la divergencia `D-06` de `Audit/Estado-Del-Destino-2026-08-17.md` §2. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

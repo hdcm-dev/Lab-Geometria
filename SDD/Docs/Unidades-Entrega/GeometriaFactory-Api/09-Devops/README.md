@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
@@ -48,10 +48,10 @@ están en [`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/0
 | Documento | Versión | Estado | Propósito |
 | --- | --- | --- | --- |
 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) | 1.1 | Propuesto | Los **cinco** stages con el quinto declarado fuera del alcance, los **quince** gates con su carácter, la matriz, la caché, la promoción en cuatro transiciones, la reversión y las **dos** puertas técnicas |
-| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 1.0 | Propuesto | Versionado semántico, las **cinco** reglas con las que `ADR-00008` reemplaza al versionado de rutas, y las **tres** clases de cambio que la compilación no detecta con dónde se atrapan |
-| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 1.1 | Propuesto | Los **dos** ambientes con el apartamiento del modelo declarado, cómo llega el código al destino, **la dirección dinámica** en sus tres tramos, configuración y secretos |
+| [`Estrategia-Versionado.md`](Estrategia-Versionado.md) | 4.0 | Propuesto | Versionado semántico, las **cinco** reglas con las que `ADR-00008` reemplaza al versionado de rutas, y las **tres** clases de cambio que la compilación no detecta con dónde se atrapan |
+| [`Entornos-Deploy.md`](Entornos-Deploy.md) | 3.0 | Propuesto | Los **dos** ambientes con el apartamiento del modelo declarado, cómo llega el código al destino, **la dirección dinámica** en sus tres tramos, configuración y secretos |
 | [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md) | 1.1 | Propuesto | Pre-requisitos, procedimiento de despliegue en destino, **la prueba única del mecanismo** que la fuente exige, **cinco** verificaciones posteriores, reversión y métricas |
-| [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 1.0 | Propuesto | Inventario sobre la imagen, la firma con su brecha y su desplazamiento, nivel de integridad con la brecha propia del canal, análisis, y la **superficie expuesta** como preocupación de cadena de suministro |
+| [`Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) | 3.0 | Propuesto | Inventario sobre la imagen, la firma con su brecha y su desplazamiento, nivel de integridad con la brecha propia del canal, análisis, y la **superficie expuesta** como preocupación de cadena de suministro |
 
 ## 2. Orden de lectura
 
@@ -143,3 +143,4 @@ Es la particularidad de esta sección y conviene tenerla de un vistazo. El intak
 | 1.1 | 2026-08-11 | **Propagación del intake 1.22 y constancia de las correcciones de la auditoría `F-09-Devops-Siete-Proyectos-r1.md`.** El intake **1.22** §17.2.P.7 · GeometriaFactory-Web decide que, cuando front y backend salen juntos, sale **primero el backend**, con lo que `PD-05` queda **cerrado** y la fila de recuentos pasa a declarar **5** puntos abiertos con **4 vigentes**. Se actualizan a 1.1 en §1 las versiones de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) —que además corrige `H-01`, `H-03` y `H-05`—, [`Entornos-Deploy.md`](Entornos-Deploy.md) y [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md). |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**, con sus documentos consolidados en 2.0. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |
+| 2.1 | 2026-08-24 | **Sincronización del índice con la ronda 2 del corte 09 de la migración 10.0 → 13.3.** Las tres filas de la tabla de documentos publicaban versiones **1.0 y 1.1** mientras los documentos iban por **2.x**: el desfasaje era **anterior** al corte, y el audit independiente lo levantó como **P3** porque la ronda 1 lo amplió en seis filas sin tocarlo ni declararlo. Quedan en las versiones que los documentos tienen hoy. **No se toca ninguna otra fila**: un índice que se corrige de más deja de ser comparable con el estado que describía. |

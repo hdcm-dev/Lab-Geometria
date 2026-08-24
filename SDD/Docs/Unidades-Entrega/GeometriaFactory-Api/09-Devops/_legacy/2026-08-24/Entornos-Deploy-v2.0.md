@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Entornos-Deploy.md
-**Versión:** 3.0
+**Versión:** 2.0
 **Estado:** Propuesto
-**Fecha:** 2026-08-24
+**Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
 **Proyectos de código que la componen:** `GeometriaFactory-Api`, `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure` y `GeometriaFactory-Contracts`
 **Trazabilidad upstream:** [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1**
@@ -61,25 +61,6 @@ esta consolidación vivían en documentos que no se citaban.
 **Lo que el apartamiento cuesta, declarado en lugar de disimulado.** Sin `STAGING`, **la primera vez que una versión corre contra el almacén real es en producción**; y sin canario, **un despliegue malo afecta al 100 % de las peticiones desde el primer segundo**. Lo que el producto pone en su lugar son tres cosas, y ninguna es un ambiente: **el arranque en dos fases**, que hace que un servicio que no puede confiar en su almacén **no escuche** ([`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md)); la puerta `PT-04`, que ejercita el arranque completo **antes** de que exista la oportunidad de desplegar; y el **estado degradado** del front cuando el servicio no responde.
 
 ## 2. Provisión
-
-### 2.b La aprobación de `plan` antes de `apply` — **ítem propio**
-
-**Esta subsección realiza el ítem 2.b de `Rules-Devops.md` §4.4**, que desde la regla **6.0** lo pide
-**separado de la herramienta**: es una **política de proceso** y no una consecuencia de qué
-herramienta se elija, de modo que esperar a elegirla para declararla es diferir por arrastre.
-
-| Aspecto | Decisión |
-| --- | --- |
-| **Aprobación de `plan` antes de `apply`** | **No aplica**, y no está diferida |
-| **Por qué** | El ítem gobierna el ciclo de una herramienta declarativa de infraestructura, y **acá no hay ninguna**: §2.1 lo declara con su fundamento —no hay nube que provisionar, el servidor domiciliario ya existe (intake §10)—. Sin herramienta no hay `plan` ni `apply` que aprobar |
-| **Qué ocupa su lugar** | El punto de control que sí existe: **una rama y un pull request por etapa**, con la revisión del Product Owner como punto bloqueante (intake §15). Todo cambio de `deploy/Dockerfile` y `deploy/compose.yaml` pasa por ahí, porque están versionados |
-| **Qué lo reabriría** | Que el producto adopte una herramienta declarativa —Terraform, Pulumi, Bicep o equivalente—, decisión que hoy ninguna fuente pide |
-| **Apartamiento que lo autoriza** | [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), que declara «no aplica» como tercera salida frente a un ítem obligatorio **sin objeto** en este producto. `Rules-Devops.md` §4.4 punto 2.b sólo ofrece dos, y omitir el ADR dejaba el apartamiento sin declarar |
-
-**«No aplica» y «diferido» no son lo mismo, y la diferencia importa.** Un ítem diferido es uno que hay
-que contestar más adelante y lleva los cuatro campos de `Root-Rules.md` §12.2. Éste **no se va a
-contestar nunca mientras no haya herramienta**, y declararlo pendiente dejaría en la tabla de puntos
-abiertos una fila que nadie puede cerrar.
 
 ### 2.1 `GeometriaFactory-Api`
 
@@ -490,6 +471,4 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
-| 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Y §2.b suma el apartamiento que le faltaba**: la figura «no aplica, y no está diferida» es una **tercera salida** que `Rules-Devops.md` §4.4 punto 2.b no prevé, y `Root-Rules.md` §11 pide ADR. Queda declarada en [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), **Propuesto**; era **P2** del audit. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
-| 2.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entra **§2.b, la aprobación de `plan` antes de `apply` como ítem propio**, que `Rules-Devops.md` **6.0** §4.4 separa de la herramienta por ser **política de proceso** y no consecuencia de ella. Se declara **no aplica** —§2.1 ya declaraba que no hay herramienta declarativa de infraestructura, con su fundamento en el intake §10— y se nombra **qué ocupa su lugar**: el pull request por etapa como punto de control bloqueante. **«No aplica» no es «diferido»**, y por eso no lleva los cuatro campos de §12.2: un ítem que nadie va a poder cerrar mientras no haya herramienta no es un pendiente, es una inaplicabilidad con su condición de reapertura escrita. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |

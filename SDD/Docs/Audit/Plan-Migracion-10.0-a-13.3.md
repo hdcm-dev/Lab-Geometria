@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Plan-Migracion-10.0-a-13.3.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-23
 **Instrumento:** `Master-Prompt-Migracion.md` **2.8**, fase **M1**
 **Estado:** **Detención obligatoria.** El plan se presenta completo y espera aprobación. **Ningún documento se modifica durante M1**
@@ -116,12 +116,16 @@ frente `A` del plan de cierre de pendientes; la 11.0 la vuelve obligatoria en 14
 **De la 11.0**, `Rules-Devops.md`. Cada ítem que empaquetaba dos decisiones se parte, y la mitad que
 no estaba bloqueada deja de arrastrar a la que sí.
 
-| Ítem que se parte | Documento alcanzado | Estado medido en el árbol |
-|---|---|---|
-| §4.3 punto 5.b · **semántica de sufijos** `-alpha`, `-beta`, `-rc` | `Estrategia-Versionado.md` de las **dos** unidades | A verificar en M4 |
-| §4.4 punto 2.b · **aprobación de `plan` antes de `apply`** | `Entornos-Deploy.md` de las **dos** unidades | A verificar en M4 |
-| §4.6 punto 1.b · **generador de SBOM**, separado del formato | `Supply-Chain-Seguridad.md` de las **dos** unidades | A verificar en M4 |
-| §4.6 punto 5.b · **DAST**, separado de SAST | `Supply-Chain-Seguridad.md` de las **dos** unidades | A verificar en M4 |
+| Ítem que se parte | Documento alcanzado | Fuente de contenido (§2.1) | Estado medido en el árbol |
+|---|---|---|---|
+| §4.3 punto 5.b · **semántica de sufijos** `-alpha`, `-beta`, `-rc` | `Estrategia-Versionado.md` de las **dos** unidades | **Documento de origen**: las subsecciones de §5 ya declaraban que no se usan | A verificar en M4 |
+| §4.4 punto 2.b · **aprobación de `plan` antes de `apply`** | `Entornos-Deploy.md` de las **dos** unidades | **Documento de origen**: la sección de provisión ya declaraba que no hay herramienta declarativa | A verificar en M4 |
+| §4.6 punto 1.b · **generador de SBOM**, separado del formato | `Supply-Chain-Seguridad.md` de las **dos** unidades | **Respuesta del humano** para el formato —ninguna fuente del producto lo declara— y **documento de origen** para el resto | A verificar en M4 |
+| §4.6 punto 5.b · **DAST**, separado de SAST | `Supply-Chain-Seguridad.md` de las **dos** unidades | **Documento de origen** y **documento hermano**: `Pipeline-CI-CD.md` §10 de la propia unidad, del que salen los stages y el estado de los puntos abiertos | A verificar en M4 |
+
+**La columna de fuente de contenido es la que vuelve verificable a §4.1 fila por fila**, y la emisión
+1.0 de este plan **no la traía**: lo levantó el audit independiente del corte 09 como hallazgo **P2**,
+y su ausencia dejó a la ronda 1 sin el instrumento contra el que se comprueba que nada se inventó.
 
 **El precedente ya está en el árbol y conviene seguirlo.** `Estrategia-Versionado.md` de
 `GeometriaFactory-Api` **ya tiene su §3.b** —el prefijo de etiqueta como ítem propio, fijado el
@@ -220,13 +224,38 @@ cada uno.
 
 ---
 
+## 7.1 Cómo se ejecuta «Regenerar contenido» en este salto, y por qué no es re-expresión completa
+
+**La clasificación por severidad de `Migracion-Rules.md` §4.3 dice «Regenerar contenido» para todo
+documento gobernado por una regla que subió major**, y su definición es *«el documento se re-expresa
+completo bajo la normativa vigente»*. **Este plan no ejecuta eso, y la constancia faltaba.**
+
+**Lo que se ejecuta es una partición quirúrgica**: se parten los ítems que la regla partió y **no se
+reescribe el resto del documento**. El fundamento es el bloque «Impacto sobre destinos existentes» de
+la **11.0**, que lo dice con estas palabras:
+
+> *«Un destino que ya declaraba las dos mitades de cada ítem **no tiene trabajo de contenido**: parte la
+> sección en dos y no escribe nada nuevo.»*
+
+**Y el motivo por el que conviene, más allá de que la entrada lo autorice.** Re-expresar completo un
+documento cuyo contenido no cambió **es la forma más barata de inventar**: obliga a reescribir prosa
+que nadie pidió que cambiara, y `Migracion-Rules.md` §4.1 califica de **P0** el contenido sin fuente.
+La partición, en cambio, **se verifica línea por línea contra el origen**.
+
+**Esto es un apartamiento de la mecánica de §4.3 y se declara como tal**, no como una lectura
+alternativa. Lo levantó el audit del corte 09 —**A9, no concluyente**— con el argumento exacto: la
+entrada de la 11.0 cubre el *contenido*, no la *clasificación*, y ningún archivo del árbol declaraba
+que se hubiera optado por partir en lugar de re-expresar.
+
+---
+
 ## 8. Clasificación y orden
 
 | Fase | Qué hace acá | Estado |
 |---|---|---|
 | **M2 · intake** | **Sin filas.** `PRODUCT-INTAKE-template` no se movió —3.4 en el origen y en la vigente—, así que no hay migración estructural del intake | Sin trabajo |
 | **M3 · manifiesto** | **Sin filas.** `PRODUCT-MANIFEST-template` sigue en 6.0 y M2 no cambia nada. El manifiesto se toca en M5, sólo por su §1.1 | Sin trabajo |
-| **M4 · `SDD/Docs/`** | **151 documentos**: 144 `US-*.md` (§4.1), 6 de la 09 (§4.2) y el README raíz (§4.3). Más la revisión de apartamientos de §5, que escribe el campo 6 de los tres ADR | **Es toda la migración** |
+| **M4 · `SDD/Docs/`** | **151 documentos**: 144 `US-*.md` (§4.1), 6 de la 09 (§4.2) y el README raíz (§4.3). Más la revisión de apartamientos de §5, que escribe el campo 6 de los tres ADR | **Es toda la migración.** Corte 09 **cerrado en ronda 2** |
 | **M5 · procedencia** | Reescribe `PRODUCT-MANIFEST` §1.1 a **13.3**, **sólo si M4 cerró completa**. Si no, se declara migración parcial por §4.6 | Pendiente |
 | **M6 · auditoría** | Auditor **independiente**, con el encargo de `Master-Prompt.md` §10: refutar y no verificar, con cita literal o el veredicto no vale. Declara los **tres candidatos a regla del framework** de §5.1 | Pendiente |
 
@@ -242,4 +271,5 @@ construido encima**: si la segunda ronda se va a encargar, conviene decidirlo an
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-24 | **Repara dos hallazgos del audit independiente del corte 09.** Entra la **columna de fuente de contenido** en la tabla de §4.2 —`Migracion-Rules.md` §2.1 la declara «la forma en que §4.1 se vuelve verificable fila por fila», y la 1.0 no la traía: **P2**—. Y entra **§7.1**, que declara que este plan ejecuta «Regenerar contenido» como **partición quirúrgica y no como re-expresión completa**, con su fundamento en el bloque de impacto de la 11.0 y con el motivo que lo hace preferible: re-expresar un documento cuyo contenido no cambió **es la forma más barata de inventar**, y §4.1 califica eso de P0. Se declara como **apartamiento de la mecánica de §4.3** y no como lectura alternativa, que es lo que el audit dejó **no concluyente** por falta de constancia. | Orquestador de migración normativa SDD |
 | 1.0 | 2026-08-23 | Emisión inicial del plan, **fase M1**, **séptima** migración de este destino y la primera que atraviesa **tres saltos major** —`Root-Rules` 7.0 → 8.4, `Rules-Backlog-Tecnico` 4.4 → 5.1 y `Rules-Devops` 5.0 → 6.1—. **El diff normativo no se reconstruyó: se verificó** contra las versiones vivas, por `Master-Prompt-Migracion.md` §5, desde `Estado-Del-Destino-2026-08-23.md` §6. **Renombres: catorce**, la familia `AG` completa, todos de **identificador** y ninguno de archivo; se declara que el destino **no renumera** las 550 ocurrencias del corpus por `Migracion-Rules.md` §4.3.1 y que su trabajo es **la cita en el mapa de documentación**. **Tres superficies medidas sobre el árbol**: **144** historias de usuario que empaquetan prioridad y estimación —con la estimación diferida **en prosa**, que la 11.0 califica **P1**—, los **cuatro ítems `.b`** de la 09 en seis documentos, y **cinco filas** del README raíz. **§5 corre la revisión de apartamientos**, que la migración anterior **no corrió**: los tres ADR resultan **no contemplados** y sus contadores suben **+2** —el salto 9.12 → 10.0 no contado y éste—, con lo cual **los tres cruzan el umbral de dos saltos y se declaran candidatos a regla del framework**. Declara la categoría **11 fuera de alcance** por el caso especial de §2.2, destino posterior al handoff. | Orquestador de migración normativa SDD |
