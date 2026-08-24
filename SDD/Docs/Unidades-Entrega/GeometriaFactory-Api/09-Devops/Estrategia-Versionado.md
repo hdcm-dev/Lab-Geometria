@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Versionado.md
-**Versión:** 3.0
+**Versión:** 3.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
 **Proyectos de código que la componen:** `GeometriaFactory-Api`, `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure` y `GeometriaFactory-Contracts`
 **Trazabilidad upstream:** [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1**
@@ -251,6 +251,29 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 ## 5. Canales
 
+### 5.b La semántica de sufijos de anticipo — **ítem propio**
+
+**Esta subsección realiza el ítem 5.b de `Rules-Devops.md` §4.3**, que desde la regla **6.0** pide la
+semántica de sufijos **separada del conjunto de canales**, por el mismo motivo por el que §3.b separó
+el prefijo de etiqueta de la herramienta: *«qué canales tiene el producto puede depender de una
+decisión de distribución todavía abierta; **qué sufijo lleva una preview no depende de nada**»*.
+
+**Acá las dos mitades ya estaban contestadas, y por eso esta subsección no escribe nada nuevo.** Lo
+que hace es reunir en un ítem propio lo que las cuatro subsecciones de abajo venían declarando por
+separado, para que se lea contra el ítem de la regla que lo exige.
+
+| Aspecto | Decisión |
+| --- | --- |
+| **Sufijos `-alpha`, `-beta`, `-rc`** | **No se usan**, en ningún proyecto de código de esta unidad de entrega |
+| **Forma que sí se usa** | `v<MAJOR>.<MINOR>.<PATCH>` **sin sufijo**, la que §3.b fija |
+| **Motivo** | Las etiquetas de este producto son **de etapa cerrada y no de anticipo** (intake §15 y §17.1.P.7 · GeometriaFactory-Api), y no hay canal donde publicar un anticipo ni integrador que lo consuma |
+| **Qué lo reabriría** | Que aparezca un canal de publicación. Mientras `redistribuible` sea false y la imagen se construya en destino, no hay a quién anticiparle nada |
+
+**No se difiere y por eso no lleva la forma de `Root-Rules.md` §12.2.** Un ítem se difiere cuando no
+se puede contestar hoy; éste se contesta: **no se usan**, con su motivo y su condición de reapertura.
+Declararlo como pendiente habría sido diferir algo ya decidido, que es el defecto simétrico del que
+la 11.0 vino a corregir.
+
 ### 5.1 `GeometriaFactory-Api`
 
 **No hay canales de publicación**, y hay **un** destino de despliegue.
@@ -474,6 +497,7 @@ clase de afirmación que estos registros degradan.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). `Rules-Devops.md` sube a **6.0** y **parte cuatro ítems más** con la misma mecánica que la 5.0 aplicó al prefijo de etiqueta: la mitad bloqueada arrastraba a la que no lo estaba. Acá entra el que alcanza a este documento: **§5.b, la semántica de sufijos de anticipo como ítem propio**, separada del conjunto de canales del punto 5. **No se escribió nada nuevo**: las cuatro subsecciones de §5 ya declaraban que `-alpha`, `-beta` y `-rc` **no se usan**, con su motivo, y §5.b las reúne para que se lea contra el ítem de la regla que lo exige. **No se difiere y por eso no lleva la forma de `Root-Rules.md` §12.2**: está contestado, con su condición de reapertura. Sube **minor**: parte una sección y no cambia ninguna decisión. |
 | 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** `Rules-Devops.md` sube a **5.0** y su §4.3 **parte el punto 3 en dos**: la herramienta con su configuración base, y el **prefijo de tag** como **ítem propio 3.b**. La subsección que la emisión 2.2 había creado como **§3.0** pasa a numerarse **§3.b**, leída literalmente contra el ítem de la regla que la exige, y declara esa correspondencia en su primer párrafo. **Ninguna decisión se reabre**: el prefijo sigue siendo **`v`**, fijado el 2026-08-18 con cita de `Rules-Devops.md` §4.5, y la elección de la herramienta sigue abierta como `PA-06`. Las cuatro filas «Prefijo de etiqueta» de §3.1 a §3.4 apuntan al ítem nuevo. **Es reordenamiento y no contenido**: el destino ya cumplía el fondo de la regla nueva un día antes de que existiera, porque el defecto que la originó se midió acá. Sube **major**: cambia la estructura de §3 para corresponder con la de §4.3. | Orquestador de migración normativa SDD |
 | 2.2 | 2026-08-18 | **Se fija el prefijo de etiqueta, que era un ítem obligatorio contestado con un diferimiento.** `Rules-Devops.md` §4.3 punto 3 exige declarar «configuración base y **prefijo de tag**», y las cuatro filas de §3 respondían *«el que se fije al anclarla, registrado en el punto de control de la etapa `a`»* — punto de control que **cerró el 2026-08-13 sin registrarlo**, y ocho etapas se construyeron sin poder etiquetarse. Entra **§3.b**, que fija **`v`** con la forma `v<MAJOR>.<MINOR>.<PATCH>` y ámbito de repositorio, **citando el propio `Rules-Devops.md` §4.5** —«Sólo en tag `v<X.Y.Z>` sin sufijo»— en lugar de elegirlo por criterio propio. Declara que **fijar el prefijo no cierra la elección de la herramienta**: `PA-06` sigue abierto, y empaquetar las dos cosas en la misma fila es lo que produjo el bloqueo. **Corrección propia:** la fila de §3.2 remitía el prefijo al `PD-01` de `Pipeline-CI-CD.md` §10, que es *«la herramienta concreta de cada stage»* y **no lo cubre**: el prefijo estaba diferido hacia un punto abierto sin dueño real. Se declara y se eleva al framework como el reporte `14`. **§11.2** deja de decir que nunca se creó ninguna etiqueta: cinco se repusieron el 2026-08-18 y el objetivo del 100 % sigue incumplido en tres. Sube **minor**: entra una sección y se corrigen cinco filas; ninguna regla de versionado cambia. | Orquestador SDD |
 | 2.1 | 2026-08-17 | Entra **§11, el registro del avance y su responsable**, con los ítems **7 y 8** que `Rules-Devops.md` **4.2** §4.3 agregó: qué documento declara la etapa, **quién lo actualiza y en qué evento**, y el **instrumento preferido**, que es el subproducto del acto. Se declara que **manda el historial del repositorio** sobre `changelog.md`, y que el objetivo del 100 % de etiquetas por etapa cerrada está **incumplido en su totalidad** —cero etiquetas en el árbol—, sin cerrarlo acá. Reparación de la divergencia `D-06` de `Audit/Estado-Del-Destino-2026-08-17.md` §2. Sube **minor**. |

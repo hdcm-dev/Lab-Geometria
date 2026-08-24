@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Entornos-Deploy.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -70,6 +70,23 @@ Lo que sí le toca a esta categoría es **el tramo de esa decisión que ocurre e
 **El estado se declara con su fecha de lectura**, para que la próxima categoría que lo verifique sepa contra qué estado se escribió este documento.
 
 ## 3. Provisión
+
+### 3.b La aprobación de `plan` antes de `apply` — **ítem propio**
+
+**Esta subsección realiza el ítem 2.b de `Rules-Devops.md` §4.4**, que desde la regla **6.0** lo pide
+separado de la herramienta por ser **política de proceso** y no consecuencia de la herramienta. La
+numeración local es `3.b` porque la provisión de esta unidad vive en §3; **el ítem de la regla que
+realiza es el 2.b**, y se lee contra él.
+
+| Aspecto | Decisión |
+| --- | --- |
+| **Aprobación de `plan` antes de `apply`** | **No aplica**, y no está diferida |
+| **Por qué** | §3.1 declara que **no hay infraestructura declarativa**: el hosting es un servicio de terceros que se contrata y se configura por fuera del repositorio. Sin herramienta no hay `plan` ni `apply` |
+| **Qué ocupa su lugar** | El pull request por etapa, y **las dos puertas bloqueantes que el flujo de publicación corre antes de subir** —`QG-01` y `QG-02` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1—, que es lo más parecido a un `plan` aprobado que este despliegue tiene: se verifica antes de tocar el destino |
+| **Qué lo reabriría** | Que el front pase a un hosting provisionado con código |
+
+**No se difiere**: está contestado con su motivo y su condición de reapertura, y por eso no lleva la
+forma de `Root-Rules.md` §12.2.
 
 ### 3.1 `GeometriaFactory-Web`
 
@@ -251,4 +268,5 @@ Consecuencias operativas concretas, y se declaran porque una decisión de esta c
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entra **§3.b, la aprobación de `plan` antes de `apply` como ítem propio** —numerada `3.b` porque la provisión de esta unidad vive en §3, y declarando que **el ítem de la regla que realiza es el 2.b** de `Rules-Devops.md` **6.0** §4.4—. Se declara **no aplica**, con el fundamento que §3.1 ya traía: el hosting es un servicio de terceros que se configura por fuera del repositorio. Y se nombra lo que ocupa su lugar: **las dos puertas bloqueantes que el flujo corre antes de subir**, `QG-01` y `QG-02`, que es lo más parecido a un `plan` aprobado que este despliegue tiene. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

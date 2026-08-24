@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Versionado.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -144,6 +144,25 @@ El del producto, sin variantes: una rama por etapa a partir de la principal, eti
 
 ## 5. Canales
 
+### 5.b La semántica de sufijos de anticipo — **ítem propio**
+
+**Esta subsección realiza el ítem 5.b de `Rules-Devops.md` §4.3**, que desde la regla **6.0** pide la
+semántica de sufijos **separada del conjunto de canales**: qué canales tiene el producto puede
+depender de una decisión de distribución abierta, **qué sufijo lleva una preview no depende de nada**.
+
+**Las dos mitades ya estaban contestadas en §5.1 y §5.2**, y esta subsección las reúne en el ítem
+propio que la regla exige, sin escribir nada nuevo.
+
+| Aspecto | Decisión |
+| --- | --- |
+| **Sufijos `-alpha`, `-beta`, `-rc`** | **No se usan**, ni en `GeometriaFactory-Web` ni en `GeometriaFactory-Visor` |
+| **Forma que sí se usa** | `v<MAJOR>.<MINOR>.<PATCH>` sin sufijo, la del repositorio entero |
+| **Motivo** | No hay canal donde publicar un anticipo ni integrador que lo consuma: el front se publica por FTP en un hosting y **el anfitrión carga el archivo que la construcción produjo** (intake §15 y §16) |
+| **Qué lo reabriría** | Que el punto de extensión pase a publicarse como paquete consumible por terceros, que es la condición que §8 ya declara para su crecimiento |
+
+**No se difiere y por eso no lleva la forma de `Root-Rules.md` §12.2**: está contestado, con su motivo
+y su condición de reapertura.
+
 ### 5.1 `GeometriaFactory-Web`
 
 **No hay canales de publicación de paquete**, y hay **un** canal de despliegue.
@@ -265,5 +284,6 @@ clase de afirmación que estos registros degradan.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entra **§5.b, la semántica de sufijos de anticipo como ítem propio**, que `Rules-Devops.md` **6.0** §4.3 separa del conjunto de canales. **No se escribió nada nuevo**: §5.1 y §5.2 ya declaraban que no se usan, con su motivo —no hay canal donde publicar un anticipo y el anfitrión carga el archivo que la construcción produjo—. **No se difiere**: está contestado, con su condición de reapertura, que es la misma que §8 declara para el crecimiento del punto de extensión. Sube **minor**. |
 | 2.1 | 2026-08-17 | Entra **§9, el registro del avance y su responsable**, con los ítems **7 y 8** que `Rules-Devops.md` **4.2** §4.3 agregó: qué documento declara la etapa, **quién lo actualiza y en qué evento**, y el **instrumento preferido**, que es el subproducto del acto. Se declara que **manda el historial del repositorio** sobre `changelog.md`, y que el objetivo del 100 % de etiquetas por etapa cerrada está **incumplido en su totalidad** —cero etiquetas en el árbol—, sin cerrarlo acá. Reparación de la divergencia `D-06` de `Audit/Estado-Del-Destino-2026-08-17.md` §2. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
