@@ -1,11 +1,24 @@
+> **Artefacto archivado — estado `Superado`**
+>
+> Copia archivada de `README.md` en su versión **1.6**, tomada el 2026-08-24 por el orquestador de migración normativa **antes** de aplicar el corte del README raíz de la fase M4 (`Master-Prompt.md` §5 y §8).
+>
+> - **Estado:** `Superado`
+> - **Versión que preserva:** 1.6
+> - **Fecha de archivado:** 2026-08-24
+> - **Versión vigente:** [`README.md`](../../README.md)
+>
+> El cuerpo que sigue **no se modifica**. Lo único que se tocó son **los enlaces relativos**, reescritos dos niveles para que sigan resolviendo desde esta ubicación.
+
+---
+
 # Fábrica de Geometría
 
 | Campo | Valor |
 | --- | --- |
 | Producto | Fábrica de Geometría |
-| Versión del documento | 2.0 |
+| Versión del documento | 1.6 |
 | Estado | Aprobado |
-| Fecha | 2026-08-24 |
+| Fecha | 2026-08-12 |
 | Stack principal | C# sobre .NET 10 —Blazor Interactive Server en el front, ASP.NET Core en el servicio de datos—, Entity Framework Core sobre SQLite, y TypeScript con webpack en el visor |
 | Composición | **2 unidades de entrega** y **7 proyectos de código** (ver §2) |
 | Unidad de entrega principal | `GeometriaFactory-Api` |
@@ -38,11 +51,11 @@ Fábrica de Geometría cierra esa cadena dentro de un solo producto. El alumno s
 
 La audiencia son dos personas concretas del aula —el alumno de la comisión y el docente— y no hay integradores externos, no hay áreas de auditoría y no hay clientes de terceros. Esa audiencia acotada explica buena parte de las decisiones técnicas del producto: una sola instancia, un solo curso, un solo administrador, sin versionado de rutas y sin escalera de ambientes.
 
-El detalle vive en [`00-Contexto/Vision-Producto.md`](00-Contexto/Vision-Producto.md).
+El detalle vive en [`00-Contexto/Vision-Producto.md`](../../00-Contexto/Vision-Producto.md).
 
 ## 2. Los dos ejes del producto
 
-Refleja [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **2.2** §2.A, §2.B y §2.C, sin divergencias.
+Refleja [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../../../Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md) **2.2** §2.A, §2.B y §2.C, sin divergencias.
 
 **El producto tiene dos ejes que no coinciden**: el de **entrega**, que dice qué se despliega, y el de **construcción**, que dice qué se compila. Confundirlos es el defecto que el modelo de dos ejes existe para hacer imposible.
 
@@ -73,7 +86,7 @@ Refleja [`PRODUCT-MANIFEST-Fabrica-De-Geometria.md`](../Intake/PRODUCT-MANIFEST-
 
 **Dos unidades desplegables.** El front vive en el hosting público y el servicio de datos en el servidor propio, y esa partición responde a una restricción de red declarada en el intake §14, no a una preferencia de estilo. Las tres reglas de arquitectura de nivel producto se derivan de ahí: **RA-01**, ningún guion del navegador invoca el servicio de datos; **RA-02**, el bundle del visor es un visualizador puro, sin red, sin configuración y sin identidad; **RA-03**, todo lo que el navegador obtiene del backend pasa por el front, y ningún mensaje expone la dirección de un servicio interno.
 
-El mapa completo, con el grafo, los contratos que cruzan fronteras y los riesgos de integración, está en [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md).
+El mapa completo, con el grafo, los contratos que cruzan fronteras y los riesgos de integración, está en [`Producto/Vista-Producto.md`](../../Producto/Vista-Producto.md).
 
 ## 3. Stack y composición
 
@@ -87,35 +100,20 @@ El mapa completo, con el grafo, los contratos que cruzan fronteras y los riesgos
 | `GeometriaFactory-Contracts` | C# sobre .NET 10, tipos de datos sin dependencias | Se carga en los **dos** procesos desplegables |
 | `GeometriaFactory-Visor` | TypeScript transpilado con webpack; el motor de dibujo entra en el bundle y no por red de distribución | El navegador, con capacidad gráfica tridimensional requerida |
 
-**La versión de plataforma del front está marcada para verificar** contra lo que soporte el hosting gratuito, y esa verificación es la puerta técnica `PT-01.a`. La matriz completa, con capacidades del navegador y restricciones justificadas, está en [`00-Contexto/Compatibilidad-Plataformas.md`](00-Contexto/Compatibilidad-Plataformas.md).
+**La versión de plataforma del front está marcada para verificar** contra lo que soporte el hosting gratuito, y esa verificación es la puerta técnica `PT-01.a`. La matriz completa, con capacidades del navegador y restricciones justificadas, está en [`00-Contexto/Compatibilidad-Plataformas.md`](../../00-Contexto/Compatibilidad-Plataformas.md).
 
 ## 4. Mapa de la documentación
 
 | Sección | Propósito | Responsable | Enlace |
 | --- | --- | --- | --- |
-| 00-Contexto (producto) | Visión, alcance, roadmap y compatibilidad de plataformas | AG-00000 | [00-Contexto](00-Contexto/) |
-| 01-Necesidades-Negocio (producto) | Las nueve necesidades de negocio, `NB-00001` a `NB-00009` | AG-00010 | [01-Necesidades-Negocio](01-Necesidades-Negocio/) |
-| Producto (producto) | Vista de producto, pipeline de producto y plan documental | AG-00050, AG-00090, AG-00110 | [Producto](Producto/) |
-| Audit (producto) | Informes de auditoría independiente, uno por fase | Auditor independiente | [Audit](Audit/) |
-| Unidades-Entrega/GeometriaFactory-Api | Documentación 02 a 11 de la unidad de entrega del servicio de datos, con los proyectos de código que la componen | AG-00020 a AG-00110 | [GeometriaFactory-Api](Unidades-Entrega/GeometriaFactory-Api/) |
-| Unidades-Entrega/GeometriaFactory-Web | Documentación 02 a 11 de la unidad de entrega del front, con los proyectos de código que la componen | AG-00020 a AG-00110 | [GeometriaFactory-Web](Unidades-Entrega/GeometriaFactory-Web/) |
+| 00-Contexto (producto) | Visión, alcance, roadmap y compatibilidad de plataformas | AG-00 | [00-Contexto](../../00-Contexto/) |
+| 01-Necesidades-Negocio (producto) | Las nueve necesidades de negocio, `NB-00001` a `NB-00009` | AG-01 | [01-Necesidades-Negocio](../../01-Necesidades-Negocio/) |
+| Producto (producto) | Vista de producto, pipeline de producto y plan documental | AG-05, AG-09, AG-11 | [Producto](../../Producto/) |
+| Audit (producto) | Informes de auditoría independiente, uno por fase | Auditor independiente | [Audit](../../Audit/) |
+| Unidades-Entrega/GeometriaFactory-Api | Documentación 02 a 11 de la unidad de entrega del servicio de datos, con los proyectos de código que la componen | AG-02 a AG-11 | [GeometriaFactory-Api](../../Unidades-Entrega/GeometriaFactory-Api/) |
+| Unidades-Entrega/GeometriaFactory-Web | Documentación 02 a 11 de la unidad de entrega del front, con los proyectos de código que la componen | AG-02 a AG-11 | [GeometriaFactory-Web](../../Unidades-Entrega/GeometriaFactory-Web/) |
 
-**La columna «Responsable» cita los roles con la forma vigente desde la migración 10.0 → 13.3**
-(framework **12.0**), que hizo cumplir a la familia `AG` el ancho de cinco dígitos de
-`Root-Rules.md` §9.2. El mapeo es el que el `CHANGELOG` del framework declara —`AG-00` → `AG-00000`,
-`AG-01` → `AG-00010`, y así las catorce— y **se lee al revés para reconocer la forma anterior**.
-
-**Los dos rangos se reescribieron y no se enumeraron**, que es una decisión y no un automatismo:
-`AG-02 a AG-11` pasa a `AG-00020 a AG-00110`. Enumerar los once habría cambiado lo que la fila dice
-—de un rango a una lista— sobre un conjunto que no cambió, y el mapeo de la 12.0 es token a token.
-
-**Y una ocurrencia de la forma anterior que queda deliberadamente sin tocar**: la fila **1.0** de §11
-cita `AG-ROOT` como autor de aquella emisión. **Es registro histórico**: reescribirla haría decir a
-una emisión del 2026-08-11 algo que no dijo, y es el mismo criterio por el que los informes de
-`Audit/` están fuera del alcance de la migración. Se declara acá para que no se lea como un residuo
-que el barrido no vio.
-
-**El árbol cuelga de la unidad de entrega y no del proyecto de código** desde la migración 6.0 → 8.6 (framework 8.0). Los **siete** proyectos de código de §2 **no tienen árbol documental propio**: su contenido se consolidó dentro de la unidad de entrega que componen —`Domain`, `Application`, `Infrastructure` y `Contracts` en `GeometriaFactory-Api`; `Visor` en `GeometriaFactory-Web`—, con una subsección por proyecto de código dentro de cada documento. El inventario del eje de construcción vive en [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md).
+**El árbol cuelga de la unidad de entrega y no del proyecto de código** desde la migración 6.0 → 8.6 (framework 8.0). Los **siete** proyectos de código de §2 **no tienen árbol documental propio**: su contenido se consolidó dentro de la unidad de entrega que componen —`Domain`, `Application`, `Infrastructure` y `Contracts` en `GeometriaFactory-Api`; `Visor` en `GeometriaFactory-Web`—, con una subsección por proyecto de código dentro de cada documento. El inventario del eje de construcción vive en [`Producto/Vista-Producto.md`](../../Producto/Vista-Producto.md).
 
 **La cadena de especificación se lee en este orden**: visión y alcance en 00, necesidades de negocio en 01, casos de uso y reglas en 02, experiencia de uso en 03, arquitectura y decisiones en 05, historias y tareas en 06, plan de trabajo en 07, calidad y pruebas en 08, canalización y publicación en 09, ejemplos verificables en 10, y cuerpo documental de entrega en 11. La categoría 04 no existe en ningún proyecto de código: ninguno usa modelos de lenguaje y su omisión está declarada en el manifiesto.
 
@@ -168,7 +166,7 @@ El producto está **especificado y en construcción**. La documentación está e
 | 11-Documentacion | Producto y las dos | **Planificado** |
 | Vista y pipeline de producto | Producto | Aprobado |
 
-**El árbol atravesó dos migraciones normativas**, 6.0 → 8.6 y 8.6 → 8.11, las dos cerradas y auditadas. Sus informes están en [`Audit/`](Audit/) y la procedencia vigente la declara el manifiesto §1.1.
+**El árbol atravesó dos migraciones normativas**, 6.0 → 8.6 y 8.6 → 8.11, las dos cerradas y auditadas. Sus informes están en [`Audit/`](../../Audit/) y la procedencia vigente la declara el manifiesto §1.1.
 
 ### 7.2 Construcción
 
@@ -182,13 +180,13 @@ El producto está **especificado y en construcción**. La documentación está e
 | `f` · Importación y validación | — | **Siguiente** |
 | `g` a `i…` | — | No comenzadas |
 
-**El registro de cambios del código es [`../../changelog.md`](../../changelog.md)** y es la única fuente del avance de construcción: este README publica su resultado y no lo replica.
+**El registro de cambios del código es [`../../changelog.md`](../../../../changelog.md)** y es la única fuente del avance de construcción: este README publica su resultado y no lo replica.
 
 ### 7.3 Magnitudes
 
 **Este README dejó de replicar las magnitudes del producto**, y es deliberado: las que publicaba eran las anteriores a la consolidación de la migración —71 casos de uso, cuando la unidad `Api` tiene **nueve** y la `Web` **diez**— y quedaron afirmando durante días un recuento que ninguna fuente sostenía. Un índice que copia cifras de otro documento **las hereda viejas sin avisar**.
 
-Las magnitudes vivas, cada una contada sobre su instrumento, están en [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md); la composición, en el manifiesto §2; y el detalle por etapa, con sus hitos internos y demostrables, en [`00-Contexto/Roadmap-Producto.md`](00-Contexto/Roadmap-Producto.md), que es la única fuente del roadmap.
+Las magnitudes vivas, cada una contada sobre su instrumento, están en [`Producto/Vista-Producto.md`](../../Producto/Vista-Producto.md); la composición, en el manifiesto §2; y el detalle por etapa, con sus hitos internos y demostrables, en [`00-Contexto/Roadmap-Producto.md`](../../00-Contexto/Roadmap-Producto.md), que es la única fuente del roadmap.
 
 ## 8. Lo que todavía no está decidido
 
@@ -196,8 +194,8 @@ Un producto que se entrega declarando lo que no está decidido vale más que uno
 
 | Punto abierto | Titular | Dónde está declarado |
 | --- | --- | --- |
-| Cuántas aristas de compilación tiene el producto: el manifiesto declara ocho en §2, dibuja siete en §3 y valida siete en §4 | Product Owner | [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) §3.1 |
-| ~~El **rechazo** del informe de auditoría de Fase B de `GeometriaFactory-Api`, emitido el 2026-08-11 con **diecisiete** hallazgos de recuento y de cita: falta la ronda 2 que lo levante.~~ **CERRADO el 2026-08-11.** La ronda 2 se emitió y su dictamen es **APROBADO**: verifica los diecisiete cerrados uno por uno sobre el instrumento y **levanta el rechazo**. Deja dos hallazgos nuevos, los dos P2 y los dos fuera de los 21 artefactos auditados, cerrados en esta misma tanda | Orquestador SDD | [`Audit/B-02-03-GeometriaFactory-Api-r2.md`](Audit/B-02-03-GeometriaFactory-Api-r2.md) §10 |
+| Cuántas aristas de compilación tiene el producto: el manifiesto declara ocho en §2, dibuja siete en §3 y valida siete en §4 | Product Owner | [`Producto/Vista-Producto.md`](../../Producto/Vista-Producto.md) §3.1 |
+| ~~El **rechazo** del informe de auditoría de Fase B de `GeometriaFactory-Api`, emitido el 2026-08-11 con **diecisiete** hallazgos de recuento y de cita: falta la ronda 2 que lo levante.~~ **CERRADO el 2026-08-11.** La ronda 2 se emitió y su dictamen es **APROBADO**: verifica los diecisiete cerrados uno por uno sobre el instrumento y **levanta el rechazo**. Deja dos hallazgos nuevos, los dos P2 y los dos fuera de los 21 artefactos auditados, cerrados en esta misma tanda | Orquestador SDD | [`Audit/B-02-03-GeometriaFactory-Api-r2.md`](../../Audit/B-02-03-GeometriaFactory-Api-r2.md) §10 |
 | El nombre del cuarto puerto, el de repositorio de cuentas: el puerto existe y su identificador no está fijado | Product Owner y equipo, en la etapa `a` | `Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/` §11, subsección de `GeometriaFactory-Application` |
 | El umbral numérico de fluidez del visor: ninguna fuente lo declara y ninguna categoría lo inventa | Product Owner | `Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/` §11, subsección de `GeometriaFactory-Visor` |
 | El alcance de la colección de peticiones reproducible: la fuente lo declara en dos lugares con alcances distintos | Product Owner | `Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/` §11 |
@@ -208,7 +206,7 @@ Un producto que se entrega declarando lo que no está decidido vale más que uno
 
 ## 9. Glosario rápido
 
-Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosarios de categoría: el del dominio del cliente está en [`00-Contexto/Vision-Producto.md`](00-Contexto/Vision-Producto.md) §9, y cada proyecto de código lleva el suyo en su categoría 02.
+Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosarios de categoría: el del dominio del cliente está en [`00-Contexto/Vision-Producto.md`](../../00-Contexto/Vision-Producto.md) §9, y cada proyecto de código lleva el suyo en su categoría 02.
 
 | Término | Definición en una línea |
 | --- | --- |
@@ -240,18 +238,17 @@ Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosario
 | --- | --- | --- |
 | Product Owner | El docente de Programación 2, responsable de la cátedra y de la Actividad 1 | El punto de control de cada etapa, con OK explícito |
 | Lead técnico | El mismo docente, asistido por agente de IA | El pull request de la etapa, que **es** el punto de control |
-| Auditoría | Auditor independiente, invocado desde cero en cada fase, sin participación en la generación | Los informes de [`Audit/`](Audit/) |
+| Auditoría | Auditor independiente, invocado desde cero en cada fase, sin participación en la generación | Los informes de [`Audit/`](../../Audit/) |
 | Dueño del problema | La cátedra de Programación 2 | Consultivo, a través del Product Owner |
 
 ## 11. Control de cambios
 
 | Versión | Fecha | Descripción del cambio |
 | --- | --- | --- |
-| 2.0 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4, corte del README raíz** (`Audit/Plan-Migracion-10.0-a-13.3.md` **1.2** §4.3). **La columna «Responsable» del mapa de documentación pasa a la forma vigente de la familia `AG`**: cinco filas, con el mapeo que el `CHANGELOG` del framework declara para su versión **12.0** —`AG-00` → `AG-00000`, `AG-01` → `AG-00010`, `AG-05, AG-09, AG-11` → `AG-00050, AG-00090, AG-00110`, y los dos rangos `AG-02 a AG-11` → `AG-00020 a AG-00110`—. **`Root-Rules.md` §4.4 es la regla que lo exige** —la Tabla A y su columna— y §9.2 aporta la forma; la 12.0 lo declara **campo bloqueante nuevo** para todo destino conforme. **Los rangos se reescriben y no se enumeran**, con su motivo escrito bajo la tabla: enumerar habría cambiado lo que la fila dice sobre un conjunto que no cambió. **Y la cita `AG-ROOT` de la fila 1.0 de esta misma tabla queda sin tocar, declarada**: es registro histórico, y reescribirla le haría decir a una emisión del 2026-08-11 algo que no dijo. **El destino no renumera el resto del corpus**: `Migracion-Rules.md` §4.3.1 declara que la renumeración de una familia del conjunto normativo **la hace el framework**, y acota el trabajo del destino a la cita de su mapa de documentación. Estado previo archivado en [`_legacy/2026-08-24/README-v1.6.md`](_legacy/2026-08-24/README-v1.6.md). Sube **major**, con el mismo criterio que la 09 adoptó en la ronda 2 del corte anterior: el salto de la regla que lo gobierna es major, y la clasificación se lee de la numeración. |
 | 1.6 | 2026-08-16 | **Reemisión sobre el modelo de dos ejes**, que cierra el hallazgo `N-01` del informe de migración 8.6 → 8.11. La 1.5 reconectó los punteros y **declaró que el contenido seguía siendo el del modelo anterior**; esta versión lo corrige en lugar de dejarlo declarado. **Cabecera**: la composición pasa de «7 proyectos de código» a **2 unidades de entrega y 7 proyectos de código**, el campo de proyecto principal pasa a **unidad de entrega principal**, y se declara que el documento refleja el `PRODUCT-MANIFEST` **2.2** —citaba el **1.3**—. **§2 se rehace entero**: de una tabla de siete proyectos de código con `Tipo D8` y `Redistribuible` —dos atributos que el modelo de dos ejes **no le asigna al proyecto de código**— pasa a **§2.1 el eje de entrega**, con las dos unidades, su D8, su integración en runtime y su `redistribuible`, y **§2.2 el eje de construcción**, con los siete proyectos de código, su identidad de código, sus dependencias de compilación y qué unidad compone cada uno, más la constancia de que la arista `Web → Api` vive en el grafo de integración y no en el de compilación. **§7 se parte en tres**: **7.1** documentación por categoría, con las dos migraciones normativas cerradas; **7.2 nueva**, el estado de construcción por etapa —`a` a `e` cerradas, `f` siguiente—, que reemplaza la afirmación «el producto está **especificado y todavía no construido**», falsa desde la etapa `c`; y **7.3**, donde este README **deja de replicar las magnitudes del producto** y remite a los documentos que las cuentan, con el fundamento: las que publicaba eran las anteriores a la consolidación —71 casos de uso, cuando `Api` tiene nueve y `Web` diez— y un índice que copia cifras las hereda viejas sin avisar. **§6** deja de predicar `redistribuible` y el tipo `rest-api` del proyecto de código y los predica de la unidad de entrega. Sube minor: ninguna decisión de producto cambia, y lo que se corrige es lo que el documento afirmaba de sí mismo. | Orquestador SDD |
 | 1.5 | 2026-08-16 | **Reconexión del mapa de documentación al árbol vigente**, por la verificación mecánica de la fase M5 de la migración 8.6 → 8.11, que encontró **siete enlaces colgados** en §4 y **tres rutas colgadas** en §8. Los diez apuntaban a `Proyectos/<nombre-del-proyecto-de-código>/`, **un árbol que la migración 6.0 → 8.6 reemplazó por `Unidades-Entrega/`** al mover el nivel de aplicación del proyecto de código a la unidad de entrega (framework 8.0). **§4**: las siete filas por proyecto de código pasan a **dos filas por unidad de entrega**, con la constancia de que los siete proyectos de código **no tienen árbol documental propio** y de dónde quedó el contenido de cada uno. **§8**: las tres rutas de puntos abiertos se reescriben sobre la unidad de entrega que hoy los contiene, nombrando la subsección del proyecto de código donde viven. **Reconexión de punteros por `Migracion-Rules.md` §4.3.1, no reemisión**: no se archivó el estado anterior porque no se reescribió ningún cuerpo. **Este documento conserva desactualizaciones de contenido que esta reparación NO toca y que quedan declaradas como hallazgo del informe de migración 8.6 → 8.11**: la cabecera y §2 citan el `PRODUCT-MANIFEST` **1.3** cuando el vigente es el **2.1**, §2 declara `tipo_unidad_entrega` (D8) y `redistribuible` **por proyecto de código** contra el modelo de dos ejes, §7 afirma que el producto está «especificado y todavía no construido» cuando el código está en la etapa `e`, y sus magnitudes son las anteriores a la consolidación. Repararlas es reemitir el documento, no reconectarlo. Sube minor. |
 | 1.4 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El recuento de §1 pasa de **15 códigos vivos sobre 18 emitidos** a **17 sobre 20**, con los **tres retirados intactos y ninguno reciclado**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. **Ninguna otra magnitud del producto, ningún proyecto de código y ninguna otra decisión cambia.** Sube minor. |
-| 1.3 | 2026-08-11 | **Registra la promoción del estado documental del corpus**, hecha el mismo día sobre `SDD/Docs/` según la política de versionado de documentos de `Master-Prompt.md` 5.2 §5. **§7**, columna «Estado»: las once filas de categoría que decían `Propuesto` pasan a **`Aprobado`**; la de `11-Documentacion` **no cambia** y sigue en `Planificado`, y la de `04-Prompts-AI` sigue omitida por gating. **La constancia única de la promoción —alcance contado, fundamento, los ocho documentos no promovidos y lo que queda fuera de `SDD/Docs/`— vive en [`Handoff-Checkout.md`](Handoff-Checkout.md) §2, y este README no la repite**: sólo publica su resultado por categoría. La cabecera de este documento pasó a `Aprobado` por la misma promoción, y **eso no sube versión**: lo que la sube es la reescritura de la columna de §7. **Ninguna magnitud del producto, ningún punto abierto y ninguna decisión cambia.** Sube minor. |
-| 1.2 | 2026-08-11 | **Absorbe la emisión de [`Audit/B-02-03-GeometriaFactory-Api-r2.md`](Audit/B-02-03-GeometriaFactory-Api-r2.md) 1.0, cuyo dictamen es APROBADO, y cierra con ella el hallazgo `N-02` (P2) de ese informe.** **§8**: el punto abierto del rechazo de la Fase B de `GeometriaFactory-Api` pasa a **CERRADO**, con la fila original tachada y conservada porque era correcta al escribirse; y el recuento de hallazgos de la ronda 1 pasa de **quince** a **diecisiete**, que es lo que suma su propio desglose —un P0, cinco P1, seis P2 y cinco P3— y lo que la ronda 2 verificó cerrado uno por uno. **§7**, fila de `02-Especificacion-Funcional`: se registra que el rechazo quedó levantado. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: «quince hallazgos» sobre ese informe vivía en **tres** documentos de nivel producto —éste §8, [`Handoff-Checkout.md`](Handoff-Checkout.md) §6.1 `B-1` y [`Producto/Vista-Producto.md`](Producto/Vista-Producto.md) §1.1—, y «falta la ronda 2» en esos **tres mismos** lugares; los tres se corrigen en esta tanda. El recuento de informes de auditoría vivía además en **dos** lugares de `Handoff-Checkout.md` —§2.1 y §5— y pasa de 30 y 32 a **33**. **Ninguna magnitud del producto, ningún proyecto de código y ninguna decisión cambia.** Sube minor. |
-| 1.1 | 2026-08-11 | **Absorbe la emisión de [`Audit/B-02-03-GeometriaFactory-Api-r1.md`](Audit/B-02-03-GeometriaFactory-Api-r1.md) y de [`Audit/B2-Maqueta-GeometriaFactory-Web-r2.md`](Audit/B2-Maqueta-GeometriaFactory-Web-r2.md), los dos del 2026-08-11.** **§7**, fila de `02-Especificacion-Funcional`: la Fase B pasa a estar auditada en **los siete** proyectos de código; ya no hay informe faltante, y lo que se declara es que el del proyecto de código principal llegó tarde y con dictamen rechazado. **§8**: el punto abierto deja de ser «falta el informe» —que dejó de ser cierto— y pasa a ser **«falta la ronda 2 que levante su rechazo»**, con el informe citado directamente. Se llega acá por la búsqueda de propagación que exige `B-02-03-GeometriaFactory-Api-r1.md` §10 para toda corrección de este tipo: este README y `Handoff-Checkout.md` §11 `D-3` eran los otros dos lugares vivos que afirmaban la ausencia del informe, y los dos se corrigen en la misma tanda. **Ninguna magnitud del producto, ningún proyecto de código y ninguna decisión cambia.** Sube minor. |
+| 1.3 | 2026-08-11 | **Registra la promoción del estado documental del corpus**, hecha el mismo día sobre `SDD/Docs/` según la política de versionado de documentos de `Master-Prompt.md` 5.2 §5. **§7**, columna «Estado»: las once filas de categoría que decían `Propuesto` pasan a **`Aprobado`**; la de `11-Documentacion` **no cambia** y sigue en `Planificado`, y la de `04-Prompts-AI` sigue omitida por gating. **La constancia única de la promoción —alcance contado, fundamento, los ocho documentos no promovidos y lo que queda fuera de `SDD/Docs/`— vive en [`Handoff-Checkout.md`](../../Handoff-Checkout.md) §2, y este README no la repite**: sólo publica su resultado por categoría. La cabecera de este documento pasó a `Aprobado` por la misma promoción, y **eso no sube versión**: lo que la sube es la reescritura de la columna de §7. **Ninguna magnitud del producto, ningún punto abierto y ninguna decisión cambia.** Sube minor. |
+| 1.2 | 2026-08-11 | **Absorbe la emisión de [`Audit/B-02-03-GeometriaFactory-Api-r2.md`](../../Audit/B-02-03-GeometriaFactory-Api-r2.md) 1.0, cuyo dictamen es APROBADO, y cierra con ella el hallazgo `N-02` (P2) de ese informe.** **§8**: el punto abierto del rechazo de la Fase B de `GeometriaFactory-Api` pasa a **CERRADO**, con la fila original tachada y conservada porque era correcta al escribirse; y el recuento de hallazgos de la ronda 1 pasa de **quince** a **diecisiete**, que es lo que suma su propio desglose —un P0, cinco P1, seis P2 y cinco P3— y lo que la ronda 2 verificó cerrado uno por uno. **§7**, fila de `02-Especificacion-Funcional`: se registra que el rechazo quedó levantado. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: «quince hallazgos» sobre ese informe vivía en **tres** documentos de nivel producto —éste §8, [`Handoff-Checkout.md`](../../Handoff-Checkout.md) §6.1 `B-1` y [`Producto/Vista-Producto.md`](../../Producto/Vista-Producto.md) §1.1—, y «falta la ronda 2» en esos **tres mismos** lugares; los tres se corrigen en esta tanda. El recuento de informes de auditoría vivía además en **dos** lugares de `Handoff-Checkout.md` —§2.1 y §5— y pasa de 30 y 32 a **33**. **Ninguna magnitud del producto, ningún proyecto de código y ninguna decisión cambia.** Sube minor. |
+| 1.1 | 2026-08-11 | **Absorbe la emisión de [`Audit/B-02-03-GeometriaFactory-Api-r1.md`](../../Audit/B-02-03-GeometriaFactory-Api-r1.md) y de [`Audit/B2-Maqueta-GeometriaFactory-Web-r2.md`](../../Audit/B2-Maqueta-GeometriaFactory-Web-r2.md), los dos del 2026-08-11.** **§7**, fila de `02-Especificacion-Funcional`: la Fase B pasa a estar auditada en **los siete** proyectos de código; ya no hay informe faltante, y lo que se declara es que el del proyecto de código principal llegó tarde y con dictamen rechazado. **§8**: el punto abierto deja de ser «falta el informe» —que dejó de ser cierto— y pasa a ser **«falta la ronda 2 que levante su rechazo»**, con el informe citado directamente. Se llega acá por la búsqueda de propagación que exige `B-02-03-GeometriaFactory-Api-r1.md` §10 para toda corrección de este tipo: este README y `Handoff-Checkout.md` §11 `D-3` eran los otros dos lugares vivos que afirmaban la ausencia del informe, y los dos se corrigen en la misma tanda. **Ninguna magnitud del producto, ningún proyecto de código y ninguna decisión cambia.** Sube minor. |
 | 1.0 | 2026-08-11 | Emisión inicial, en la consolidación de la Fase H. Presenta la identidad del producto, la tabla de los **siete** proyectos de código con su tipo D8, rol y dependencias reflejando el `PRODUCT-MANIFEST` **1.3** sin divergencias, el stack y las plataformas por proyecto de código, el mapa de la documentación con las categorías de nivel producto y la carpeta de cada proyecto de código, **cuatro** flujos de lectura por rol de intervención, el proceso de regeneración con la declaración fundamentada de los **tres** archivos satélite que no se emiten, el estado por categoría con su fase de cierre, los **siete** puntos abiertos de nivel producto con su titular, un glosario rápido de **veintiún** términos y la tabla de responsables. **No decide nada y no replica el roadmap**: enlaza a `00-Contexto/Roadmap-Producto.md`. **Autor:** Arquitecto de Soluciones Senior + API Designer (AG-ROOT) |
