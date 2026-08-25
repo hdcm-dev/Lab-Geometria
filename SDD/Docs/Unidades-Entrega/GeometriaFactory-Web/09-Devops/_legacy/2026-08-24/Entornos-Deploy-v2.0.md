@@ -1,5 +1,12 @@
 # Entornos y despliegue — GeometriaFactory-Web
 
+> **ARCHIVADO — estado `Superado`.** Esta es la versión **2.0**, superada el **2026-08-24** por la ronda 2 del corte 09 de la migración normativa SDD 10.0 → 13.3.
+>
+> **La versión vigente es la [3.0](../../Entornos-Deploy.md).**
+>
+> **El cuerpo no se modifica.** Lo único que se tocó al archivar son **los enlaces relativos**, reescritos para que sigan resolviendo dos niveles más abajo (`Master-Prompt.md` §8). Un snapshot copiado sin esa reescritura deja colgados tantos enlaces como referencias tuviera, y **la compuerta mecánica no los ve**: §10.0 excluye `_legacy/` como origen de la comprobación de enlaces.
+
+
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Entornos-Deploy.md
@@ -41,10 +48,10 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | Fundamento | Dónde se verifica |
 | --- | --- |
 | **El presupuesto declarado es cero.** El intake §10 declara «sin presupuesto monetario asignado» y enumera las **tres** piezas de infraestructura de costo cero: el hosting gratuito, el servidor domiciliario ya existente y el trabajo del docente más agente IA. Un `QA` y un `STAGING` son dos hostings más | Intake §10 |
-| **El aprobador sería el mismo en los cuatro.** `equipo_n` es 1: la misma persona construye, publica y aprueba. Una escalera de cuatro ambientes con un solo aprobador es ceremonia, no control | Intake §2; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4 |
+| **El aprobador sería el mismo en los cuatro.** `equipo_n` es 1: la misma persona construye, publica y aprueba. Una escalera de cuatro ambientes con un solo aprobador es ceremonia, no control | Intake §2; [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4 |
 | **Lo que un `STAGING` compraría, acá lo compra el paso 8 del flujo.** Un ambiente de ensayo existe para descubrir que la publicación quedó rota antes de que la vea un usuario; el intake §17.2.P.8 · GeometriaFactory-Web resuelve ese mismo problema haciendo que **el flujo no termine en la subida, sino comprobando que la dirección pública responde** | Intake §17.2.P.8 · GeometriaFactory-Web; `QG-03` |
 
-**El ADR que sostiene el apartamiento es [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md)**, que en su §4 evalúa cuatro alternativas de despliegue y adopta la comprobación final como sustituto del ensayo previo, y en su §6 acepta por escrito los dos trade-offs que ese apartamiento implica: la subida no transaccional y que una intermitencia del hosting pueda marcar en rojo un despliegue correcto.
+**El ADR que sostiene el apartamiento es [`ADR-10007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md)**, que en su §4 evalúa cuatro alternativas de despliegue y adopta la comprobación final como sustituto del ensayo previo, y en su §6 acepta por escrito los dos trade-offs que ese apartamiento implica: la subida no transaccional y que una intermitencia del hosting pueda marcar en rojo un despliegue correcto.
 
 **Lo que este apartamiento cuesta, y se declara en lugar de disimularse.** Sin ambiente de ensayo, **la primera vez que una publicación se ejerce en condiciones reales es en producción**. El producto lo compensa con tres cosas y ninguna es un cuarto ambiente: la comprobación final del flujo, la publicación **fuera del horario de uso** y la reversión por republicación desde la etiqueta anterior.
 
@@ -52,7 +59,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 
 ### 2.1 `GeometriaFactory-Web`
 
-[`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](Entornos-Deploy.md) §2 cerró el punto abierto `PA-05` de aquel proyecto de código: **el bundle generado no se versiona en el repositorio; se ignora, y lo genera la canalización antes de publicar.** Esta categoría **adopta la decisión y no la reabre**, y con eso queda cerrado también el `PA-07` de `05` §11 de este proyecto de código, que preguntaba lo mismo desde este lado y lo derivaba a 09.
+[`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](../../Entornos-Deploy.md) §2 cerró el punto abierto `PA-05` de aquel proyecto de código: **el bundle generado no se versiona en el repositorio; se ignora, y lo genera la canalización antes de publicar.** Esta categoría **adopta la decisión y no la reabre**, y con eso queda cerrado también el `PA-07` de `05` §11 de este proyecto de código, que preguntaba lo mismo desde este lado y lo derivaba a 09.
 
 Lo que sí le toca a esta categoría es **el tramo de esa decisión que ocurre en su directorio**. Aquella §2.2 declaró cuatro exigencias operativas y una quedó como acción pendiente, con la fecha de su lectura. Ésta es su verificación desde este lado:
 
@@ -60,10 +67,10 @@ Lo que sí le toca a esta categoría es **el tramo de esa decisión que ocurre e
 | --- | --- | --- |
 | El control de versiones **excluye el bundle copiado** bajo `src/GeometriaFactory.Web/wwwroot/js/` | **No cumplido todavía.** El archivo no excluye esa ruta. La línea que excluiría el directorio de recursos estáticos entero **está comentada**, y así debe seguir: ese directorio también contiene recursos escritos a mano, y excluirlo entero sacaría del repositorio archivos que sí deben estar | **Esta categoría lo asigna a `BT-10001`**, etapa `a` |
 | El control de versiones **excluye el directorio de salida del empaquetado** en `visor/` | **No cumplido todavía.** El archivo no excluye esa ruta; **sí excluye** el directorio de dependencias del ecosistema del navegador | El mismo `BT-10001`, en el mismo acto |
-| El flujo de publicación **genera el bundle en su propio interior** | **Cumplido por diseño**: es el paso 4 de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1, y `QG-02` lo hace bloqueante | Esta categoría |
+| El flujo de publicación **genera el bundle en su propio interior** | **Cumplido por diseño**: es el paso 4 de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.1, y `QG-02` lo hace bloqueante | Esta categoría |
 | Toda ejecución local que necesite el bundle **lo construye antes** | Declarado por el intake §17.2.P.8 · GeometriaFactory-Visor para el guion propio del bundle | Quien ejecuta |
 
-**Las dos primeras filas son una sola acción y esta categoría la cierra asignándola.** [`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](Entornos-Deploy.md) §2.2 la había dejado en «el equipo, en la etapa `a`, al poner en pie la cadena de construcción»; acá queda con dueño y con tarea: **`BT-10001` de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md)**, «crear el proyecto del front con su flujo de publicación», que es la tarea de la etapa `a` que pone en pie este flujo. Queda registrada como `PD-02` en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10.
+**Las dos primeras filas son una sola acción y esta categoría la cierra asignándola.** [`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](../../Entornos-Deploy.md) §2.2 la había dejado en «el equipo, en la etapa `a`, al poner en pie la cadena de construcción»; acá queda con dueño y con tarea: **`BT-10001` de [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../../../06-Backlog-Tecnico/Backlog-Tecnico.md)**, «crear el proyecto del front con su flujo de publicación», que es la tarea de la etapa `a` que pone en pie este flujo. Queda registrada como `PD-02` en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10.
 
 **Por qué la exclusión importa y no es higiene.** El intake §13 y §17.2.P.7 · GeometriaFactory-Visor declaran que el bundle **nunca se edita a mano**; el `QG-09` de `GeometriaFactory-Visor` lo rechaza en revisión. Un archivo generado, versionado y visible en cada revisión es exactamente el que alguien corrige «en el acto» cuando tiene apuro, y además produce en cada cambio del fuente una diferencia ilegible que **inutiliza la revisión que tendría que detectarlo**.
 
@@ -80,13 +87,13 @@ Lo que sí le toca a esta categoría es **el tramo de esa decisión que ocurre e
 | Herramienta declarativa de infraestructura | **Ninguna.** El hosting es un servicio gratuito de terceros que se contrata y se configura por fuera del repositorio; no se provisiona con código | Intake §10, tres piezas de infraestructura de costo cero |
 | Qué sí vive en el repositorio | **El flujo de publicación**, `.github/workflows/deploy-front-ftp.yml`, que el árbol del intake §16 declara. Es la única pieza de automatización de despliegue de este proyecto de código, y **está versionada** | Intake §16 |
 | Dependencias de infraestructura en ejecución | **Una**: el servicio de datos, por dirección tomada de configuración. **Ninguna base de datos, ningún almacén de secretos propio y ningún servicio adicional** | `05` §5 |
-| Estado del proceso | En memoria del servidor del hosting, y **se pierde en cada reciclado**. No hay volumen, no hay caché externa y no hay sesión persistente | Intake §17.2.P.4 · GeometriaFactory-Web; [`ADR-10002`](../05-Arquitectura-Tecnica/Adrs/ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md) |
+| Estado del proceso | En memoria del servidor del hosting, y **se pierde en cada reciclado**. No hay volumen, no hay caché externa y no hay sesión persistente | Intake §17.2.P.4 · GeometriaFactory-Web; [`ADR-10002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md) |
 
 **La cuarta fila es la que hace posible a la primera.** Un front sin estado propio no necesita provisión: no hay volumen que crear, ni base que migrar, ni caché que calentar. El intake §17.2.P.4 · GeometriaFactory-Web lo declara sin rodeos —«el front no guarda estado propio: es exactamente el problema que la topología evita»— y esa decisión es la que permite que el despliegue entero sea copiar archivos y comprobar que responden.
 
 ### 3.2 `GeometriaFactory-Visor`
 
-**No hay infraestructura declarativa atribuible a este proyecto de código**: no provisiona servidor, red ni almacenamiento. Lo que necesita del entorno es lo que declara §4 de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md): el contenedor de desarrollo para construir, y **un navegador con capacidad gráfica tridimensional más un conductor** para medir. Ese segundo requisito **no es un ambiente que se provisione con infraestructura declarativa**: es una capacidad del ejecutor, y su ausencia deja a este proyecto de código sin sus gates principales (`PD-02` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10).
+**No hay infraestructura declarativa atribuible a este proyecto de código**: no provisiona servidor, red ni almacenamiento. Lo que necesita del entorno es lo que declara §4 de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md): el contenedor de desarrollo para construir, y **un navegador con capacidad gráfica tridimensional más un conductor** para medir. Ese segundo requisito **no es un ambiente que se provisione con infraestructura declarativa**: es una capacidad del ejecutor, y su ausencia deja a este proyecto de código sin sus gates principales (`PD-02` de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10).
 
 La infraestructura del producto —imagen del backend y flujo de trabajo de publicación del front— pertenece a los dos proyectos de código que se despliegan y **no se describe acá**.
 
@@ -98,14 +105,14 @@ Configuración de doce factores: **fuera del código, en variables inyectadas al
 
 | Valor de configuración | De dónde sale | Quién lo conoce |
 | --- | --- | --- |
-| **Dirección del servicio de datos** | Del almacén de secretos del repositorio, inyectada en el paso 6 del flujo. **Nunca embebida en el código** | Únicamente el componente que hace de cliente tipado del servicio de datos. **Ningún otro componente la conoce y ninguna superficie la muestra** ([`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §7) |
+| **Dirección del servicio de datos** | Del almacén de secretos del repositorio, inyectada en el paso 6 del flujo. **Nunca embebida en el código** | Únicamente el componente que hace de cliente tipado del servicio de datos. **Ningún otro componente la conoce y ninguna superficie la muestra** ([`ADR-10007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §7) |
 | Credenciales del canal de publicación | Del mismo almacén, usadas en el paso 7 | El flujo de publicación |
-| Configuración del bundle | **Ninguna, y es prohibición explícita.** `RA-02`: el bundle no lee configuración propia | [`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](Entornos-Deploy.md) §4 |
-| Configuración que la persona pueda fijar | **Ninguna.** No hay superficies de configuración en el producto, y un parámetro que la superficie no gobierna **no se dibuja ni siquiera deshabilitado** | [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §4, tercera alternativa descartada |
+| Configuración del bundle | **Ninguna, y es prohibición explícita.** `RA-02`: el bundle no lee configuración propia | [`../../GeometriaFactory-Visor/09-Devops/Entornos-Deploy.md`](../../Entornos-Deploy.md) §4 |
+| Configuración que la persona pueda fijar | **Ninguna.** No hay superficies de configuración en el producto, y un parámetro que la superficie no gobierna **no se dibuja ni siquiera deshabilitado** | [`ADR-10007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §4, tercera alternativa descartada |
 
 **Sólo hay dos valores de configuración en todo este proyecto de código**, y los dos son secretos. No hay mapa de variables por ambiente porque **no hay dos ambientes con configuración distinta**: en desarrollo el front apunta al servicio de datos que corre en local, y en el hosting apunta al del servidor propio; es el mismo parámetro con otro valor.
 
-**La última fila es una decisión de producto y no de esta categoría.** Ofrecer una pantalla donde el docente escriba la dirección del servidor propio habría puesto **la dirección de un servicio interno en el navegador**, que es lo que `RA-03` prohíbe. La categoría 03 la descartó por eso y [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §4 lo registra.
+**La última fila es una decisión de producto y no de esta categoría.** Ofrecer una pantalla donde el docente escriba la dirección del servidor propio habría puesto **la dirección de un servicio interno en el navegador**, que es lo que `RA-03` prohíbe. La categoría 03 la descartó por eso y [`ADR-10007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §4 lo registra.
 
 ### 4.2 `GeometriaFactory-Visor`
 
@@ -135,12 +142,12 @@ Configuración de doce factores: **fuera del código, en variables inyectadas al
 
 | Paso | Qué se hace | Fundamento |
 | --- | --- | --- |
-| 1 | **Nada se recompila y nada se revierte.** El código no la contiene | [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §5, consecuencia positiva 2 |
+| 1 | **Nada se recompila y nada se revierte.** El código no la contiene | [`ADR-10007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §5, consecuencia positiva 2 |
 | 2 | Se actualiza el valor del secreto | El mismo |
-| 3 | Se vuelve a publicar el front, **con el flujo entero**, incluida la comprobación final del paso 8 | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 |
+| 3 | Se vuelve a publicar el front, **con el flujo entero**, incluida la comprobación final del paso 8 | [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.1 |
 | 4 | Se rehace la comprobación de `PT-01.d`: una llamada de salud que devuelva **datos reales** del servidor propio | Intake §17.2.P.10 · GeometriaFactory-Web, fila `PT-01.d` |
 
-**Cómo se entera alguien de que cambió, que es la parte incómoda.** Nada la detecta automáticamente: **ninguna fuente declara un vigilante, un servicio de monitoreo ni una alerta**, y esta categoría no inventa uno. Lo que sí está declarado es qué se ve cuando ocurre: el front entra en **estado degradado**, que es una superficie del producto ([`ADR-10005`](../05-Arquitectura-Tecnica/Adrs/ADR-10005-Estado-Degradado-Como-Superficie.md)), y **ese mensaje nunca incluye la dirección del servicio interno** (`QG-08`, `RA-03`). El síntoma es visible y el diagnóstico no se filtra: es exactamente el reparto que `RA-03` pide.
+**Cómo se entera alguien de que cambió, que es la parte incómoda.** Nada la detecta automáticamente: **ninguna fuente declara un vigilante, un servicio de monitoreo ni una alerta**, y esta categoría no inventa uno. Lo que sí está declarado es qué se ve cuando ocurre: el front entra en **estado degradado**, que es una superficie del producto ([`ADR-10005`](../../../05-Arquitectura-Tecnica/Adrs/ADR-10005-Estado-Degradado-Como-Superficie.md)), y **ese mensaje nunca incluye la dirección del servicio interno** (`QG-08`, `RA-03`). El síntoma es visible y el diagnóstico no se filtra: es exactamente el reparto que `RA-03` pide.
 
 **Si el Product Owner adopta el servicio de nombres dinámico** —que la fuente declara como recomendación y no como decisión—, el valor del secreto pasa a ser un nombre estable y los cuatro pasos de arriba dejan de ejecutarse ante cada cambio de dirección. **Esta categoría no lo adopta por su cuenta**: la fuente registra la decisión del Product Owner de admitir la dirección directa, y cambiarla es suya.
 
@@ -155,7 +162,7 @@ Configuración de doce factores: **fuera del código, en variables inyectadas al
 | **Cambio incompatible del contrato → etapa cerrada** | La constancia de que **las dos unidades desplegables salieron desde el mismo estado del repositorio**, **primero el backend** (intake §17.2.P.7 · GeometriaFactory-Web desde 1.22) | El mismo, con constancia escrita | La constancia en el informe de cierre. Es el `QG-08` de `GeometriaFactory-Contracts`, que bloquea la **publicación de la etapa** |
 | Etapa fusionada → etapa cerrada | Etiqueta al fusionar | El mismo | La etiqueta, más `QG-04` y `QG-11` en verde |
 
-**La tercera fila es la obligación que esta unidad recibe de otro proyecto de código**, y no la inventa esta categoría: el intake §17.2.P.3 · GeometriaFactory-Contracts declara que las dos unidades se despliegan juntas ante un cambio de contrato. Su tratamiento operativo entero, incluidas las tres decisiones derivadas y el hallazgo de que **el desfase de momentos es irreducible mientras un extremo se despliegue a mano**, está en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2.
+**La tercera fila es la obligación que esta unidad recibe de otro proyecto de código**, y no la inventa esta categoría: el intake §17.2.P.3 · GeometriaFactory-Contracts declara que las dos unidades se despliegan juntas ante un cambio de contrato. Su tratamiento operativo entero, incluidas las tres decisiones derivadas y el hallazgo de que **el desfase de momentos es irreducible mientras un extremo se despliegue a mano**, está en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §3.2.
 
 **La publicación se hace fuera del horario de uso.** No es una recomendación: el intake §17.2.P.8 · GeometriaFactory-Web lo declara como tratamiento de una subida **no transaccional** (`R-03`), y la Definition of Done §1.4 lo exige con la hora registrada.
 
@@ -189,15 +196,15 @@ Configuración de doce factores: **fuera del código, en variables inyectadas al
 
 ### 1.1 Apartamiento declarado del modelo de la categoría
 
-`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único. **Acá no hay feed**, y el ADR que lo justifica es anterior a esta categoría: [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 evaluó publicar el bundle en un repositorio público de paquetes y lo descartó porque el intake lo descarta explícitamente, `redistribuible` es false y no hay integradores externos: **sería un portal para una comunidad que no existe**.
+`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único. **Acá no hay feed**, y el ADR que lo justifica es anterior a esta categoría: [`ADR-12006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §4 evaluó publicar el bundle en un repositorio público de paquetes y lo descartó porque el intake lo descarta explícitamente, `redistribuible` es false y no hay integradores externos: **sería un portal para una comunidad que no existe**.
 
-**El caso de este proyecto de código tiene además un rasgo que los otros dos de nivel topológico 0 no tienen**: su artefacto sí es un archivo que se entrega —se copia al anfitrión— y por eso la categoría emite [`Guia-Publicacion-Bundle-Visor.md`](Guia-Publicacion-Bundle-Visor.md), que documenta esa entrega interna con la estructura que `Rules-Devops.md` §4.5 exige. **Entrega no es publicación**, y el documento lo declara en su primera sección para que nadie lea un canal donde no lo hay.
+**El caso de este proyecto de código tiene además un rasgo que los otros dos de nivel topológico 0 no tienen**: su artefacto sí es un archivo que se entrega —se copia al anfitrión— y por eso la categoría emite [`Guia-Publicacion-Bundle-Visor.md`](../../Guia-Publicacion-Bundle-Visor.md), que documenta esa entrega interna con la estructura que `Rules-Devops.md` §4.5 exige. **Entrega no es publicación**, y el documento lo declara en su primera sección para que nadie lea un canal donde no lo hay.
 
 ## 8. Resolución de `PA-05`: el bundle se ignora en el repositorio
 
 ### 8.1 `GeometriaFactory-Visor`
 
-`05` §11 registra el punto abierto `PA-05` —si el bundle generado **se versiona en el repositorio o se ignora**— y declara que **lo cierra la categoría 09, al emitirse**. [`ADR-12006`](../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §6, punto 4, acepta explícitamente que la decisión quede abierta y que la elección pertenezca a 09. **Se cierra acá.**
+`05` §11 registra el punto abierto `PA-05` —si el bundle generado **se versiona en el repositorio o se ignora**— y declara que **lo cierra la categoría 09, al emitirse**. [`ADR-12006`](../../../05-Arquitectura-Tecnica/Adrs/ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md) §6, punto 4, acepta explícitamente que la decisión quede abierta y que la elección pertenezca a 09. **Se cierra acá.**
 
 **Decisión: el bundle generado no se versiona en el repositorio. Se ignora, y lo genera la canalización antes de publicar.**
 
@@ -243,7 +250,7 @@ Consecuencias operativas concretas, y se declaran porque una decisión de esta c
 | Construcción | **Ninguno.** La instalación de dependencias se hace desde el registro público del ecosistema, sin credencial, y no hay publicación que autenticar | Intake §17.2.P.7 · GeometriaFactory-Visor: no se publica |
 | Ejecución | **Ninguno, y es imposible que los haya**: el bundle no hace red —`QG-04`, umbral **0**— y no lee configuración. No tiene por dónde recibir un secreto ni a dónde mandarlo | Intake §17.2.P.3 · GeometriaFactory-Visor y §17.2.P.5 · GeometriaFactory-Visor |
 
-**La contribución de este proyecto de código a la seguridad del producto es una ausencia**, y así lo declara [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §1: no hacer red es lo que hace **imposible** violar `RA-01` desde el navegador. Desde esta categoría, la consecuencia práctica es que **un stage de este proyecto de código que pidiera una credencial sería la señal de que algo se salió de su alcance**.
+**La contribución de este proyecto de código a la seguridad del producto es una ausencia**, y así lo declara [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §1: no hacer red es lo que hace **imposible** violar `RA-01` desde el navegador. Desde esta categoría, la consecuencia práctica es que **un stage de este proyecto de código que pidiera una credencial sería la señal de que algo se salió de su alcance**.
 
 **No se declara ninguna frecuencia de rotación**: no hay secreto propio. Los del producto pertenecen a la categoría 09 de `GeometriaFactory-Web` y de `GeometriaFactory-Api`.
 

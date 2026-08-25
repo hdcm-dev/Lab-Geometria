@@ -1,5 +1,12 @@
 # Estrategia de versionado — GeometriaFactory-Api
 
+> **ARCHIVADO — estado `Superado`.** Esta es la versión **3.0**, superada el **2026-08-24** por la ronda 2 del corte 09 de la migración normativa SDD 10.0 → 13.3.
+>
+> **La versión vigente es la [4.0](../../Estrategia-Versionado.md).**
+>
+> **El cuerpo no se modifica.** Lo único que se tocó al archivar son **los enlaces relativos**, reescritos para que sigan resolviendo dos niveles más abajo (`Master-Prompt.md` §8). Un snapshot copiado sin esa reescritura deja colgados tantos enlaces como referencias tuviera, y **la compuerta mecánica no los ve**: §10.0 excluye `_legacy/` como origen de la comprobación de enlaces.
+
+
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Versionado.md
@@ -8,7 +15,7 @@
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
 **Proyectos de código que la componen:** `GeometriaFactory-Api`, `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure` y `GeometriaFactory-Contracts`
-**Trazabilidad upstream:** [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1**
+**Trazabilidad upstream:** [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1**
 **Consolida a:** los documentos homónimos de las capas que componen la unidad, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
 
 ---
@@ -31,7 +38,7 @@ menciona, y que **no siguen la versión del producto**.
 
 Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.1.P.7 · GeometriaFactory-Api lo declara **sin excepciones**, junto con las convenciones de mensaje de confirmación, una rama y un pull request por etapa, y **una etiqueta por cada etapa cerrada y fusionada, para poder volver a cualquier demostración**. Declara además que **el registro de cambios se actualiza en la rama de la etapa, no después de la fusión**.
 
-**Y declara una ausencia con su sustituto, que es lo que ordena este documento.** El intake §17.1.P.3 · GeometriaFactory-Api dice que **no hay versionado de rutas porque no hay clientes de terceros**, y [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2 declara qué lo reemplaza, en cinco reglas que esta categoría transcribe y no reescribe:
+**Y declara una ausencia con su sustituto, que es lo que ordena este documento.** El intake §17.1.P.3 · GeometriaFactory-Api dice que **no hay versionado de rutas porque no hay clientes de terceros**, y [`ADR-00008`](../../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2 declara qué lo reemplaza, en cinco reglas que esta categoría transcribe y no reescribe:
 
 1. **Una sola versión de la superficie vive a la vez**: sin prefijo de versión en las rutas, sin convivencia de dos formas de un punto y sin deprecación gradual.
 2. **Todo cambio del ensamblado de contratos obliga al despliegue conjunto** de esta unidad y de la pública.
@@ -47,7 +54,7 @@ Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[
 | **Esquema del almacén** que no cierra | El stage `verificar-transformaciones` de `GeometriaFactory-Infrastructure`, y después el arranque en dos fases, que **detiene el arranque** si la preparación no se completó | 0 pasos manuales; el servicio **no escucha** si no cerró |
 | **Rutas** que cambian sin que el consumidor se entere | La batería de integración, que ejerce el servicio real por su protocolo | La batería entera en verde (`QG-02`) |
 
-**La segunda fila tiene una propiedad que las otras dos no tienen**: su falla **no se puede ignorar en ejecución**. [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2 declara que **no hay modo de sólo lectura ni arranque parcial**, con el fundamento de que un servicio que atiende sobre un almacén en el que no se puede confiar es peor que uno que no arranca: «el segundo se nota en el despliegue, el primero se nota cuando alguien busca su trabajo y no está».
+**La segunda fila tiene una propiedad que las otras dos no tienen**: su falla **no se puede ignorar en ejecución**. [`ADR-00007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2 declara que **no hay modo de sólo lectura ni arranque parcial**, con el fundamento de que un servicio que atiende sobre un almacén en el que no se puede confiar es peor que uno que no arranca: «el segundo se nota en el despliegue, el primero se nota cuando alguien busca su trabajo y no está».
 
 ## 2. Convenciones de mensaje de confirmación
 
@@ -204,12 +211,12 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 **Reglas de protección de la rama principal**, que es lo que esta categoría aporta:
 
-- La fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1, **incluida la batería de integración completa**, que vive acá y que ninguna otra canalización del producto puede correr.
-- **Todo pull request que agregue o cambie un punto de acceso reejecuta `TC-00007` en las dos direcciones sobre los quince.** [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §5 lo llama **el control que más veces hay que ejercer**.
+- La fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.1, **incluida la batería de integración completa**, que vive acá y que ninguna otra canalización del producto puede correr.
+- **Todo pull request que agregue o cambie un punto de acceso reejecuta `TC-00007` en las dos direcciones sobre los quince.** [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §5 lo llama **el control que más veces hay que ejercer**.
 - **Ninguna etapa se cierra sin etiqueta**, porque la reversión del servidor propio depende de ella: no hay imagen publicada a la que volver.
 - No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante.
 
-**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../08-Calidad-Y-Pruebas/README.md) §5.
+**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §5.
 
 ### 4.2 `GeometriaFactory-Domain`
 
@@ -220,9 +227,9 @@ El modelo lo declara el producto y este proyecto de código lo hereda entero. No
 - **Etapas en serie**: no se abre la rama de una etapa antes de que la anterior esté fusionada (intake §10 y §15).
 - **Sin OK explícito del Product Owner no se avanza** (intake §10, restricción «etapas en serie»).
 
-**Consecuencia sobre las reglas de protección de la rama principal**, que es lo que esta categoría sí aporta: la fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 en verde y la constancia del OK del punto de control. **No se exige un revisor humano independiente**, y no por relajación: `equipo_n` es 1 y [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4 ya declara que lo que reemplaza al revisor independiente es el punto de control bloqueante de cada etapa.
+**Consecuencia sobre las reglas de protección de la rama principal**, que es lo que esta categoría sí aporta: la fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.1 en verde y la constancia del OK del punto de control. **No se exige un revisor humano independiente**, y no por relajación: `equipo_n` es 1 y [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4 ya declara que lo que reemplaza al revisor independiente es el punto de control bloqueante de cada etapa.
 
-**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §1. Las etapas `b` y `g` no producen rama de trabajo acá, y su ausencia está declarada allá.
+**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §1. Las etapas `b` y `g` no producen rama de trabajo acá, y su ausencia está declarada allá.
 
 ### 4.3 `GeometriaFactory-Application`
 
@@ -230,11 +237,11 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 **Reglas de protección de la rama principal**, que es lo que esta categoría aporta:
 
-- La fusión exige los gates bloqueantes y los de rechazo en revisión de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1.
-- **Todo pull request que agregue o cambie un caso de uso, un puerto o una condición del catálogo ejecuta las inspecciones correspondientes** —`TC-04028` en las dos direcciones y `TC-04029` sobre el caso de uso tocado—, por la cadencia que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3 declara.
-- No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante, exactamente como lo declara [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4.
+- La fusión exige los gates bloqueantes y los de rechazo en revisión de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.1.
+- **Todo pull request que agregue o cambie un caso de uso, un puerto o una condición del catálogo ejecuta las inspecciones correspondientes** —`TC-04028` en las dos direcciones y `TC-04029` sobre el caso de uso tocado—, por la cadencia que [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §3 declara.
+- No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante, exactamente como lo declara [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §4.
 
-**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../08-Calidad-Y-Pruebas/README.md) §5.
+**Las etapas que este proyecto de código toca son seis** —`a`, `c`, `d`, `e`, `f` y `h`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §5.
 
 ### 4.4 `GeometriaFactory-Infrastructure`
 
@@ -242,12 +249,12 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 **Reglas de protección de la rama principal**, que es lo que esta categoría aporta:
 
-- La fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1.
+- La fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.1.
 - **Todo pull request que agregue o cambie una transformación de esquema ejecuta el stage `verificar-transformaciones` sobre un almacén inexistente y sobre el linaje completo**, y no sólo sobre la transformación nueva. Es la cadencia propia de este proyecto de código.
 - **Ninguna fusión edita una transformación ya fusionada.** Se rechaza en revisión, y su fundamento es de la fuente y no de esta categoría.
 - No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante.
 
-**Las etapas que este proyecto de código toca son cinco** —`a`, `c`, `d`, `e` y `f`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../08-Calidad-Y-Pruebas/README.md) §5.
+**Las etapas que este proyecto de código toca son cinco** —`a`, `c`, `d`, `e` y `f`—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../../../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../../../08-Calidad-Y-Pruebas/README.md) §5.
 
 ## 5. Canales
 
@@ -261,14 +268,14 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 | --- | --- | --- |
 | Canal `preview` | **No existe** | No hay registro ni integrador que consuma un anticipo. Lo que un anticipo compraría —probar antes de que llegue a producción— lo compra la puerta `PT-04`, que ejercita el arranque completo **antes** de que exista la oportunidad de desplegar |
 | Canal `stable` | **Se corresponde con el único destino**: el servidor propio | Intake §17.1.P.7 · GeometriaFactory-Api |
-| Despliegue **canario** | **No existe.** Sin proxy inverso no hay despliegue con solapamiento, y el almacén tiene **escritor único** | Intake §17.1.P.8 · GeometriaFactory-Api y §17.1.P.12 · GeometriaFactory-Api; [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.1 |
+| Despliegue **canario** | **No existe.** Sin proxy inverso no hay despliegue con solapamiento, y el almacén tiene **escritor único** | Intake §17.1.P.8 · GeometriaFactory-Api y §17.1.P.12 · GeometriaFactory-Api; [`Entornos-Deploy.md`](../../Entornos-Deploy.md) §1.1 |
 | Sufijos de anticipo `-alpha`, `-beta`, `-rc` | **No se usan** | Las etiquetas del producto son **de etapa cerrada**, no de anticipo (intake §15 y §17.1.P.7 · GeometriaFactory-Api) |
 
 ### 5.2 `GeometriaFactory-Domain`
 
 **No hay canales, y el motivo no es una omisión de esta categoría.** El intake §17.1.P.7 · GeometriaFactory-Domain declara que esta biblioteca **no se publica en ningún feed** y que se compila dentro de `GeometriaFactory.sln`; el intake §13 lo generaliza al producto entero. Sin feed no hay canal `preview` ni canal `stable` a los que promover: serían dos nombres sin destino.
 
-`Rules-Devops.md` §2.2 fija para el tipo `library` un modelo de canales `preview` / `stable` sobre feed único y admite quitar ambientes «con un ADR que lo justifique». **Ese ADR existe y es anterior a esta categoría**: [`ADR-02003`](../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md), que evaluó la publicación en un repositorio de paquetes interno como alternativa y la descartó porque el intake la descarta explícitamente y porque agregaría infraestructura a un producto que las fuentes declaran básico. El apartamiento queda desarrollado en [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.
+`Rules-Devops.md` §2.2 fija para el tipo `library` un modelo de canales `preview` / `stable` sobre feed único y admite quitar ambientes «con un ADR que lo justifique». **Ese ADR existe y es anterior a esta categoría**: [`ADR-02003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md), que evaluó la publicación en un repositorio de paquetes interno como alternativa y la descartó porque el intake la descarta explícitamente y porque agregaría infraestructura a un producto que las fuentes declaran básico. El apartamiento queda desarrollado en [`Entornos-Deploy.md`](../../Entornos-Deploy.md) §1.
 
 **Sufijos de versión de anticipo.** El formato admite `-alpha`, `-beta` y `-rc`, pero **este proyecto de código no los usa**, porque no hay canal donde publicar un anticipo ni integrador que lo consuma. La versión que la herramienta calcula entre etiquetas es de trabajo y no se entrega a nadie.
 
@@ -276,7 +283,7 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 **No hay canales de publicación.** El intake §17.1.P.7 · GeometriaFactory-Application, por remisión a §17.1.P.7 · GeometriaFactory-Domain, declara que no se publica en ningún feed, y §13 lo generaliza al producto entero: **ningún proyecto de código se publica como paquete redistribuible**. `05` §5 lo repite en su última fila.
 
-`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único y admite apartarse con un ADR que lo justifique: **el ADR existe y es [`ADR-04003`](../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md)**, cuyo §2 declara que no se publica en ningún repositorio de paquetes y que por eso **no hay deprecación gradual, ni versiones conviviendo, ni consumidor externo al que avisar**. El apartamiento queda desarrollado en [`Entornos-Deploy.md`](Entornos-Deploy.md) §1.
+`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único y admite apartarse con un ADR que lo justifique: **el ADR existe y es [`ADR-04003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md)**, cuyo §2 declara que no se publica en ningún repositorio de paquetes y que por eso **no hay deprecación gradual, ni versiones conviviendo, ni consumidor externo al que avisar**. El apartamiento queda desarrollado en [`Entornos-Deploy.md`](../../Entornos-Deploy.md) §1.
 
 **Tampoco se usan sufijos de anticipo** —`-alpha`, `-beta`, `-rc`—: no hay canal donde publicar un anticipo ni integrador que lo consuma. Los dos consumidores compilan contra el estado del repositorio.
 
@@ -284,7 +291,7 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 ### 6.1 `GeometriaFactory-Api`
 
-Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §4.3 pide, y el reemplazo lo funda la propia [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2: **no hay a quién darle plazo**, porque el único consumidor es del mismo producto. Lo que rige en su lugar son las convenciones impuestas de `ADR-00008` §7 y sus métricas de §8:
+Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §4.3 pide, y el reemplazo lo funda la propia [`ADR-00008`](../../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §2: **no hay a quién darle plazo**, porque el único consumidor es del mismo producto. Lo que rige en su lugar son las convenciones impuestas de `ADR-00008` §7 y sus métricas de §8:
 
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
@@ -295,7 +302,7 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 | Un punto de acceso nuevo **declara de qué lado de la guardia queda** | `QG-05`, con `TC-00007` en las dos direcciones. **Exactamente 4 fuera, ni uno más** | `05` §9, primer riesgo |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto, **escrita en la rama de la etapa** | Revisión del pull request, que **es** el punto de control | Intake §17.1.P.7 · GeometriaFactory-Api |
 
-**Las seis métricas de `ADR-00008` §8 se adoptan sin agregar ninguna**, y las seis figuran arriba o en [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md) §5.
+**Las seis métricas de `ADR-00008` §8 se adoptan sin agregar ninguna**, y las seis figuran arriba o en [`Guia-Publicacion-Image-Docker.md`](../../Guia-Publicacion-Image-Docker.md) §5.
 
 **Y una ausencia que `ADR-00008` §2 sostiene y esta categoría no reabre**: **la pasarela de reenvío del front no se implementa**. El intake la declara **especificada y no implementada**, y su condición de reingreso está escrita: descarga de archivos, carga directa desde el navegador o migración del front a ejecución en el navegador. **Ninguna de las tres está en el tramo comprometido**, y por eso esta canalización no la contempla.
 
@@ -320,7 +327,7 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 
 **Se adopta el versionado semántico en su versión 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.1.P.7 · GeometriaFactory-Domain lo declara «sin excepciones», junto con las convenciones de mensaje de confirmación.
 
-**Qué gobierna la versión acá, que es la pregunta que hay que contestar en un proyecto de código que no se publica.** [`ADR-02003`](../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §2 la contesta: gobierna la **compatibilidad de compilación de los dos consumidores del dominio**, `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`. Esta categoría no reabre esa decisión y no agrega criterios: transcribe el criterio de §7 de esa ADR porque es el que el pipeline tiene que hacer cumplir.
+**Qué gobierna la versión acá, que es la pregunta que hay que contestar en un proyecto de código que no se publica.** [`ADR-02003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §2 la contesta: gobierna la **compatibilidad de compilación de los dos consumidores del dominio**, `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure`. Esta categoría no reabre esa decisión y no agrega criterios: transcribe el criterio de §7 de esa ADR porque es el que el pipeline tiene que hacer cumplir.
 
 | Clase | Qué la produce, según `ADR-02003` §7 |
 | --- | --- |
@@ -336,7 +343,7 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 
 Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]`. El intake §17.1.P.7 · GeometriaFactory-Application declara la estrategia de este proyecto de código **idéntica a la de §17.1.P.7 · GeometriaFactory-Domain**: versionado semántico, convenciones de mensaje de confirmación, **sin publicación en feed**, y una rama y una etiqueta por etapa.
 
-**Qué gobierna la compatibilidad acá, y no lo decide esta categoría.** [`ADR-04003`](../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) §2 lo decide: **el contrato se protege por compilación compartida y no por descripción formal ni por convivencia de versiones**, un cambio incompatible rompe la compilación del artefacto de agrupación, y la política es corregir las dos caras **en la misma etapa**.
+**Qué gobierna la compatibilidad acá, y no lo decide esta categoría.** [`ADR-04003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md) §2 lo decide: **el contrato se protege por compilación compartida y no por descripción formal ni por convivencia de versiones**, un cambio incompatible rompe la compilación del artefacto de agrupación, y la política es corregir las dos caras **en la misma etapa**.
 
 **La superficie de este proyecto de código tiene dos caras, y de ahí sale su asimetría propia.** `ADR-04003` §2 la declara y esta categoría la transcribe sin tocarla: **agregar una operación a un puerto es cambio mayor**, porque obliga a todo implementador a proveerla, mientras que agregar un caso de uso es cambio menor. La tabla de clases se toma de `ADR-04003` §7 sin agregarle ni quitarle nada:
 
@@ -385,7 +392,7 @@ Lo que sí hay, y es obligatorio:
 | Un elemento que se va a quitar se marca como obsoleto en la superficie antes de removerse, dentro de la misma etapa o de la siguiente | Revisión del pull request | Decisión de esta categoría: es lo único que la ausencia de plazos deja sin cubrir, y no cuesta nada en un producto de dos consumidores compilados juntos |
 | Toda etapa cerrada lleva su etiqueta | Inspección de etiquetas contra la lista de etapas cerradas. Objetivo: **100 %** | `ADR-02003` §8, segunda métrica |
 
-**La reversión se apoya en la etiqueta y no en el retiro de una versión publicada**: ver [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §7.
+**La reversión se apoya en la etiqueta y no en el retiro de una versión publicada**: ver [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §7.
 
 ## 9. Los dos linajes que este proyecto de código versiona además del suyo
 
@@ -395,10 +402,10 @@ Es lo que distingue a este documento de los de las otras cuatro bibliotecas del 
 
 | Linaje | Qué es | Regla que lo gobierna | Qué pasa si se rompe |
 | --- | --- | --- | --- |
-| **Transformaciones de esquema** | La secuencia ordenada que lleva un almacén desde inexistente hasta el esquema en uso | **Se versiona con el código de su etapa y no se edita una ya fusionada** (intake §17.1.P.7 · GeometriaFactory-Infrastructure); el linaje es **inmutable** ([`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) | Un almacén existente tiene aplicado un linaje que ya no coincide con el del código. **Volver a una etiqueta anterior no lo deshace**: el esquema del almacén no se recompila |
-| **Parámetros de la derivación de clave** | Los parámetros con los que se derivó cada contraseña guardada | **Se versionan junto al valor derivado, sin valor por defecto silencioso** ([`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)) | Un cambio de parámetros dejaría sin verificar las contraseñas ya guardadas si no se conservara con qué se derivó cada una |
+| **Transformaciones de esquema** | La secuencia ordenada que lleva un almacén desde inexistente hasta el esquema en uso | **Se versiona con el código de su etapa y no se edita una ya fusionada** (intake §17.1.P.7 · GeometriaFactory-Infrastructure); el linaje es **inmutable** ([`ADR-06007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) | Un almacén existente tiene aplicado un linaje que ya no coincide con el del código. **Volver a una etiqueta anterior no lo deshace**: el esquema del almacén no se recompila |
+| **Parámetros de la derivación de clave** | Los parámetros con los que se derivó cada contraseña guardada | **Se versionan junto al valor derivado, sin valor por defecto silencioso** ([`ADR-06004`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)) | Un cambio de parámetros dejaría sin verificar las contraseñas ya guardadas si no se conservara con qué se derivó cada una |
 
-**Los dos son la razón por la que la reversión de este proyecto de código no es simétrica.** [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §7 lo declara: volver a la etiqueta anterior revierte el código, **no el almacén**. Una transformación equivocada se corrige **con otra transformación**, nunca editando la anterior; y el guion de restablecimiento, que sí deja el almacén como en el primer arranque, **no es un camino de producción** (`05` §5).
+**Los dos son la razón por la que la reversión de este proyecto de código no es simétrica.** [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §7 lo declara: volver a la etiqueta anterior revierte el código, **no el almacén**. Una transformación equivocada se corrige **con otra transformación**, nunca editando la anterior; y el guion de restablecimiento, que sí deja el almacén como en el primer arranque, **no es un camino de producción** (`05` §5).
 
 **Y una consecuencia que el producto ya declaró y esta categoría no reabre**: el intake §17.1.P.4 · GeometriaFactory-Infrastructure declara el respaldo como **copia del archivo con el diario activo**, consistente, con **frecuencia a definir por el docente**. Es el único mecanismo declarado para volver atrás sobre datos, y su cadencia **no la fija esta categoría**.
 
@@ -406,20 +413,20 @@ Es lo que distingue a este documento de los de las otras cuatro bibliotecas del 
 
 ### 10.1 `GeometriaFactory-Infrastructure`
 
-**No hay canales de publicación.** El intake §17.1.P.7 · GeometriaFactory-Infrastructure, por remisión a §17.1.P.7 · GeometriaFactory-Domain, declara que no se publica en ningún feed, y §13 lo generaliza al producto. `05` §5 lo repite en su última fila. `Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único; el apartamiento queda desarrollado en [`Entornos-Deploy.md`](Entornos-Deploy.md) §1. **Tampoco se usan sufijos de anticipo**: no hay canal donde publicar uno ni integrador que lo consuma.
+**No hay canales de publicación.** El intake §17.1.P.7 · GeometriaFactory-Infrastructure, por remisión a §17.1.P.7 · GeometriaFactory-Domain, declara que no se publica en ningún feed, y §13 lo generaliza al producto. `05` §5 lo repite en su última fila. `Rules-Devops.md` §2.2 fija para el tipo `library` el modelo `preview` / `stable` sobre feed único; el apartamiento queda desarrollado en [`Entornos-Deploy.md`](../../Entornos-Deploy.md) §1. **Tampoco se usan sufijos de anticipo**: no hay canal donde publicar uno ni integrador que lo consuma.
 
 Esta sección reemplaza además a la política de obsolescencia que `Rules-Devops.md` §4.3 pide, con el mismo fundamento que en el resto del producto —**no hay integrador externo a quien dar plazo**— y con las obligaciones que sí rigen:
 
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
-| **Ninguna transformación ya fusionada se edita** | Revisión del pull request de la etapa | Intake §17.1.P.7 · GeometriaFactory-Infrastructure; [`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) |
+| **Ninguna transformación ya fusionada se edita** | Revisión del pull request de la etapa | Intake §17.1.P.7 · GeometriaFactory-Infrastructure; [`ADR-06007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) |
 | Las transformaciones **se aplican solas sobre un almacén inexistente**, sin paso manual | `QG-04`, en el stage `verificar-transformaciones` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure, criterio de aceptación de la etapa `c` |
 | **0** advertencias de construcción | `QG-01`, en `build` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure |
 | **0** componentes de pieza y **0** apariciones del texto original en una proyección de listado | `QG-10`, con `TC-06019` | Es una de las dos clases mayores que compilan (§1) |
 | **0** escrituras que reemplacen el texto original conservado | `QG-11`, con `TC-06016` y `TC-06021` | La otra clase mayor que compila (§1) |
 | **0** etapas cerradas sin etiqueta | Inspección del historial contra el índice de informes de cierre | Intake §15 y §17.1.P.7 · GeometriaFactory-Infrastructure |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto | Revisión del pull request, que **es** el punto de control | Intake §15, regla de delivery 3 |
-| Los parámetros de derivación **viajan junto al valor derivado**, sin valor por defecto silencioso | Revisión, contra [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | El mismo ADR |
+| Los parámetros de derivación **viajan junto al valor derivado**, sin valor por defecto silencioso | Revisión, contra [`ADR-06004`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | El mismo ADR |
 
 **La primera fila es la única obligación de versionado de todo el producto que alcanza a un dato que sobrevive al código.** Las demás protegen la construcción o la ejecución; ésa protege **almacenes que ya existen y que ninguna canalización toca**.
 
@@ -442,7 +449,7 @@ observado de este mismo producto a la vista.
 etapa»—, y una obligación sin sujeto no la incumple nadie en particular: **se incumplió tres veces
 seguidas**, en las etapas `c`, `d` y `e`, sin que nada chirriara. Lo encontró el orquestador de
 reanudación contrastando el documento contra el historial, y quedó registrado como la divergencia
-`D-01` de [`../../../Audit/Estado-Del-Destino-2026-08-16.md`](../../../Audit/Estado-Del-Destino-2026-08-16.md) §2.
+`D-01` de [`../../../Audit/Estado-Del-Destino-2026-08-16.md`](../../../../../Audit/Estado-Del-Destino-2026-08-16.md) §2.
 
 ### 11.2 Instrumento preferido: el subproducto del acto
 

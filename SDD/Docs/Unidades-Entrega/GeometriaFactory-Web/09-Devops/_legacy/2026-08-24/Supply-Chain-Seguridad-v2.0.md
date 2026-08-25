@@ -1,5 +1,12 @@
 # Seguridad de la cadena de suministro — GeometriaFactory-Web
 
+> **ARCHIVADO — estado `Superado`.** Esta es la versión **2.0**, superada el **2026-08-24** por la ronda 2 del corte 09 de la migración normativa SDD 10.0 → 13.3.
+>
+> **La versión vigente es la [3.0](../../Supply-Chain-Seguridad.md).**
+>
+> **El cuerpo no se modifica.** Lo único que se tocó al archivar son **los enlaces relativos**, reescritos para que sigan resolviendo dos niveles más abajo (`Master-Prompt.md` §8). Un snapshot copiado sin esa reescritura deja colgados tantos enlaces como referencias tuviera, y **la compuerta mecánica no los ve**: §10.0 excluye `_legacy/` como origen de la comprobación de enlaces.
+
+
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Supply-Chain-Seguridad.md
@@ -30,7 +37,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 
 ### 1.2 `GeometriaFactory-Visor`
 
-**Nota previa sobre el origen de este documento.** Ninguna fuente del producto declara política de cadena de suministro; `Rules-Devops.md` §2.1 la exige para los ocho tipos D8. **Todo lo que este documento decide es decisión de esta categoría y va declarado como tal.** No se nombra ningún producto comercial ni ninguna versión de herramienta: la convención del corpus es nombrar por función, y la elección concreta pertenece al punto de control de la etapa `a` (`PD-01` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10).
+**Nota previa sobre el origen de este documento.** Ninguna fuente del producto declara política de cadena de suministro; `Rules-Devops.md` §2.1 la exige para los ocho tipos D8. **Todo lo que este documento decide es decisión de esta categoría y va declarado como tal.** No se nombra ningún producto comercial ni ninguna versión de herramienta: la convención del corpus es nombrar por función, y la elección concreta pertenece al punto de control de la etapa `a` (`PD-01` de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10).
 
 ## 2. Inventario de componentes
 
@@ -43,14 +50,14 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | **Plataforma** | La biblioteca de componentes de interfaz, cuya versión la fuente deja **[A VERIFICAR]** y se ancla al crear el andamiaje; y los tipos de `GeometriaFactory-Contracts` compilados adentro, que **no tienen dependencias** | Es la única cadena que un inventario convencional del ecosistema de la plataforma vería |
 | **Navegador** | **El motor de dibujo tridimensional, que queda dentro del bundle** por la puerta `PT-03` | Un inventario de la cadena de la plataforma **no lo vería**: no es una dependencia declarada de este proyecto de código, es código empaquetado dentro de un archivo de recursos estáticos que esta unidad transporta |
 
-**La segunda fila es la razón de esta decisión, y no es original de acá**: [`../../GeometriaFactory-Visor/09-Devops/Supply-Chain-Seguridad.md`](Supply-Chain-Seguridad.md) ya declaró que emite inventario **por el mismo motivo**, con su alcance acotado al bundle. Esta categoría **no lo duplica**: el inventario del bundle lo produce el proyecto de código que lo empaqueta, y el de esta unidad **lo incorpora** en el paso 4 del flujo, cuando el bundle entra a los recursos estáticos.
+**La segunda fila es la razón de esta decisión, y no es original de acá**: [`../../GeometriaFactory-Visor/09-Devops/Supply-Chain-Seguridad.md`](../../Supply-Chain-Seguridad.md) ya declaró que emite inventario **por el mismo motivo**, con su alcance acotado al bundle. Esta categoría **no lo duplica**: el inventario del bundle lo produce el proyecto de código que lo empaqueta, y el de esta unidad **lo incorpora** en el paso 4 del flujo, cuando el bundle entra a los recursos estáticos.
 
 | Aspecto del inventario | Decisión |
 | --- | --- |
 | Cuándo se emite | En el flujo de publicación, sobre el estado que efectivamente se sube |
 | Qué cubre | Las dos cadenas, con el inventario del bundle incorporado y no recalculado |
 | Dónde se adjunta | Al **informe de cierre** de la etapa, junto con el registro del flujo |
-| Formato y generador | **No se nombran.** Ninguna fuente los declara y su elección es de la etapa `a`, por la regla de anclaje de versiones. Ver `PD-03` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| Formato y generador | **No se nombran.** Ninguna fuente los declara y su elección es de la etapa `a`, por la regla de anclaje de versiones. Ver `PD-03` de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10 |
 
 ### 2.2 `GeometriaFactory-Visor`
 
@@ -79,8 +86,8 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | --- | --- | --- |
 | Firma del artefacto publicado | **No cumplido** | El canal de entrega es una **subida por FTP a un hosting gratuito de terceros**, y **ninguna fuente declara un mecanismo por el que quien recibe pueda verificar una firma**. Una firma emitida acá no tendría verificador: el navegador que consume el front verifica el transporte, no la autoría del despliegue |
 | Registro público de transparencia | **No cumplido** | Lo mismo, y además exigiría infraestructura que el intake §10 no financia |
-| Integridad del origen | **Cumplido** | Etiqueta por etapa cerrada, y reversión apoyada en ella ([`Estrategia-Versionado.md`](Estrategia-Versionado.md) §4; `05` §5) |
-| Integridad del artefacto respecto de su fuente | **Cumplido para el bundle**, que es la parte generada: `QG-02` exige que se genere en el mismo flujo y `QG-09` de `GeometriaFactory-Visor` prohíbe editarlo a mano | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2 |
+| Integridad del origen | **Cumplido** | Etiqueta por etapa cerrada, y reversión apoyada en ella ([`Estrategia-Versionado.md`](../../Estrategia-Versionado.md) §4; `05` §5) |
+| Integridad del artefacto respecto de su fuente | **Cumplido para el bundle**, que es la parte generada: `QG-02` exige que se genere en el mismo flujo y `QG-09` de `GeometriaFactory-Visor` prohíbe editarlo a mano | [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.2 |
 
 **Lo que la ausencia de firma deja abierto, dicho sin suavizar**: quien reciba el contenido del hosting no tiene modo de comprobar que fue este flujo el que lo puso ahí. La mitigación disponible **no es criptográfica sino de acceso**: las credenciales del canal viven como secreto del repositorio, con alcance mínimo, y no entran al árbol de fuentes (intake §17.2.P.5 · GeometriaFactory-Web).
 
@@ -92,7 +99,7 @@ El bundle **sí es un archivo que se traslada** —se copia al anfitrión y se s
 
 | Garantía | Cómo se obtiene hoy |
 | --- | --- |
-| El artefacto corresponde al fuente | **No se traslada un artefacto guardado: se regenera.** El bundle no se versiona en el repositorio ([`Entornos-Deploy.md`](Entornos-Deploy.md) §2) y el flujo de trabajo del front lo **genera en su propio interior**, con un gate bloqueante que prohíbe tomarlo de un artefacto viejo (intake §17.2.P.8 · GeometriaFactory-Web) |
+| El artefacto corresponde al fuente | **No se traslada un artefacto guardado: se regenera.** El bundle no se versiona en el repositorio ([`Entornos-Deploy.md`](../../Entornos-Deploy.md) §2) y el flujo de trabajo del front lo **genera en su propio interior**, con un gate bloqueante que prohíbe tomarlo de un artefacto viejo (intake §17.2.P.8 · GeometriaFactory-Web) |
 | El artefacto no fue alterado a mano | `QG-09` y `CV-30`, con objetivo **0** ediciones manuales |
 | El artefacto es reproducible | Métrica de `ADR-12006` §8: dos construcciones desde el mismo estado producen el mismo artefacto |
 
@@ -159,7 +166,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 **Sobre el carácter del análisis de composición.** Ninguna fuente del producto declara umbrales de severidad, de modo que esta categoría **no lo declara bloqueante por sí sola**: lo declara **obligatorio de ejecutar y de registrar**, y su resultado entra al punto de control de la etapa. Un hallazgo crítico o alto no puede quedar en silencio; qué se hace con él lo decide el Product Owner en el punto de control, que el intake §15 declara bloqueante. **Es el mismo tratamiento que la Fase E dio a lo que se mide y se registra sin bloquear automáticamente**, y se adopta acá por la misma razón: **el umbral no lo da ninguna fuente**.
 
-**La cuarta fila es la más importante de la tabla, y no es un gate de dependencias al uso.** `RQ-01` de [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §4 declara que la petición de red puede aparecer por dos causas —comodidad de quien escribe, o **una dependencia que la haga por dentro**— y que la segunda tiene probabilidad **media**, más alta que la primera. Por eso la inspección corre **sobre el bundle generado y no sólo sobre la fuente**: una petición hecha desde adentro de una dependencia no aparece en el código propio.
+**La cuarta fila es la más importante de la tabla, y no es un gate de dependencias al uso.** `RQ-01` de [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §4 declara que la petición de red puede aparecer por dos causas —comodidad de quien escribe, o **una dependencia que la haga por dentro**— y que la segunda tiene probabilidad **media**, más alta que la primera. Por eso la inspección corre **sobre el bundle generado y no sólo sobre la fuente**: una petición hecha desde adentro de una dependencia no aparece en el código propio.
 
 ## 6. Análisis estático y dinámico
 
@@ -168,23 +175,23 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
 | Estático | **Existe y bloquea**: el gate de construcción es «sin advertencias» | Intake §17.2.P.8 · GeometriaFactory-Web; `QG-01` |
-| Estático de estructura | **Existe, bloquea, y es la verificación característica de este proyecto de código**: `QG-06` sobre el árbol de fuentes y las dependencias de guion, `QG-08` sobre el traductor de condiciones y `QG-09` sobre las invocaciones al bundle | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
+| Estático de estructura | **Existe, bloquea, y es la verificación característica de este proyecto de código**: `QG-06` sobre el árbol de fuentes y las dependencias de guion, `QG-08` sobre el traductor de condiciones y `QG-09` sobre las invocaciones al bundle | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | **Dinámico** | **Existe, y acá sí tiene sujeto**, a diferencia de las cinco bibliotecas del producto: `QG-05`, `QG-07` y `QG-10` se miden **sobre el producto corriendo en un navegador**, contando peticiones, leyendo el almacenamiento y observando el tráfico del circuito | `Estrategia-Calidad.md` §3; `Plan-Pruebas.md` §3 |
 | Condición de las mediciones de ausencia | **`QG-05` se mide con los dos movimientos automáticos prendidos.** Un conteo con los movimientos apagados daría cero sin haber ejercitado el bucle de dibujo | `Estrategia-Calidad.md` §3, `QG-05` |
-| Detección de secretos en las confirmaciones | **Recomendada, y acá con sujeto propio**: este proyecto de código es el que administra los **dos** secretos del producto que viven en el repositorio | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
+| Detección de secretos en las confirmaciones | **Recomendada, y acá con sujeto propio**: este proyecto de código es el que administra los **dos** secretos del producto que viven en el repositorio | [`Entornos-Deploy.md`](../../Entornos-Deploy.md) §5 |
 
-**La tercera fila es lo que hace de este proyecto de código el único con análisis dinámico real del producto.** Y trae una dependencia de ejecutor que conviene no perder: sin **navegador con capacidad gráfica tridimensional y un conductor capaz de contar peticiones y leer el almacenamiento**, `QG-05`, `QG-07` y `QG-10` no se pueden medir en la canalización y quedan como medición manual registrada. Está declarado como `PD-04` en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10, y es el mismo requisito que `GeometriaFactory-Visor` registró del otro lado de la fachada.
+**La tercera fila es lo que hace de este proyecto de código el único con análisis dinámico real del producto.** Y trae una dependencia de ejecutor que conviene no perder: sin **navegador con capacidad gráfica tridimensional y un conductor capaz de contar peticiones y leer el almacenamiento**, `QG-05`, `QG-07` y `QG-10` no se pueden medir en la canalización y quedan como medición manual registrada. Está declarado como `PD-04` en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10, y es el mismo requisito que `GeometriaFactory-Visor` registró del otro lado de la fachada.
 
 ### 6.2 `GeometriaFactory-Visor`
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
 | Estático del fuente | **Existe**: la verificación de tipos del lenguaje fuente ocurre en el empaquetado, y su falla es falla de `QG-01` | Intake §17.2.P.1 · GeometriaFactory-Visor y §17.2.P.8 · GeometriaFactory-Visor |
-| Estático **del artefacto generado** | **Existe, bloquea y es la verificación característica de este proyecto de código**: recuentos sobre el bundle —funciones expuestas, identificadores globales, ocurrencias de las tres formas de petición, claves escritas— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §1 y §2; `QG-04`, `QG-05` y `QG-06` |
-| **Dinámico** | **Existe, y es el único de los tres proyectos de código de nivel topológico 0 que lo tiene**: la medición sobre una página real, con un conductor que cuenta peticiones de red y lee el almacenamiento del navegador, **con los dos movimientos prendidos** | [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §2 y §6 |
-| Detección de secretos en las confirmaciones | Recomendada a nivel producto; este proyecto de código no maneja ninguno | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
+| Estático **del artefacto generado** | **Existe, bloquea y es la verificación característica de este proyecto de código**: recuentos sobre el bundle —funciones expuestas, identificadores globales, ocurrencias de las tres formas de petición, claves escritas— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §1 y §2; `QG-04`, `QG-05` y `QG-06` |
+| **Dinámico** | **Existe, y es el único de los tres proyectos de código de nivel topológico 0 que lo tiene**: la medición sobre una página real, con un conductor que cuenta peticiones de red y lee el almacenamiento del navegador, **con los dos movimientos prendidos** | [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../../../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §2 y §6 |
+| Detección de secretos en las confirmaciones | Recomendada a nivel producto; este proyecto de código no maneja ninguno | [`Entornos-Deploy.md`](../../Entornos-Deploy.md) §5 |
 
-**El análisis dinámico de este proyecto de código verifica ausencias, no vulnerabilidades**, y es una forma poco habitual de la técnica que conviene nombrar: no busca qué hace de más el bundle sobre una superficie expuesta —no tiene ninguna—, sino que **cuenta que no haga nada de lo que tiene prohibido**. Umbral cero, y **con la condición de medición declarada**, porque una medición de ausencia sin su condición no cuenta como medición ([`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §3).
+**El análisis dinámico de este proyecto de código verifica ausencias, no vulnerabilidades**, y es una forma poco habitual de la técnica que conviene nombrar: no busca qué hace de más el bundle sobre una superficie expuesta —no tiene ninguna—, sino que **cuenta que no haga nada de lo que tiene prohibido**. Umbral cero, y **con la condición de medición declarada**, porque una medición de ausencia sin su condición no cuenta como medición ([`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §3).
 
 ## 7. Política ante vulnerabilidades publicadas
 
@@ -196,7 +203,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Vulnerabilidad sobre el motor de dibujo tridimensional | **No se remedia acá**: viaja dentro del bundle y su anclaje pertenece a `GeometriaFactory-Visor`. Lo que esta unidad tiene que hacer es **volver a publicar** para que el bundle corregido llegue al hosting | Categoría 09 de `GeometriaFactory-Visor`, y esta categoría publica |
 | Vulnerabilidad sobre la plataforma de ejecución del hosting | **No está bajo control del producto**: el hosting es un servicio gratuito de terceros. Lo que sí está bajo control es la versión objetivo del front | El Product Owner, con constancia |
 | Exposición de las credenciales del canal de publicación | **Rotación inmediata del secreto y republicación.** El valor no está en el repositorio, de modo que la rotación no exige tocar código | Intake §17.2.P.5 · GeometriaFactory-Web |
-| Exposición de la dirección del servidor propio | Rotación del secreto, republicación y **revisión de por dónde se filtró**: `QG-08` mide **0** mensajes que la expongan, sobre los **diecisiete** códigos vivos y el camino de ausencia de respuesta | Es `RA-03`; `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 |
+| Exposición de la dirección del servidor propio | Rotación del secreto, republicación y **revisión de por dónde se filtró**: `QG-08` mide **0** mensajes que la expongan, sobre los **diecisiete** códigos vivos y el camino de ausencia de respuesta | Es `RA-03`; `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../../../Producto/Vista-Producto.md) §7 |
 
 **No se declara ningún acuerdo de nivel de servicio de remediación en horas o días.** El intake §10 declara «sin plazo; el avance se mide por etapas cerradas». El mecanismo que reemplaza al plazo es el **punto de control bloqueante** de la etapa en curso.
 
@@ -213,7 +220,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Vulnerabilidad que exigiera **traer una dependencia por red de distribución externa** para mitigarla | **No se admite**: violaría `PT-03`, que es puerta técnica bloqueante del producto | Nadie: la puerta no es negociable por esta categoría |
 | Cualquier mitigación que introduzca una petición de red en el bundle | **No se admite**: violaría `RA-02` y, a través de ella, `RA-01`, que son reglas de nivel producto | Nadie |
 
-**Las dos últimas filas son las que hay que leer con atención.** Son el caso en que la política de cadena de suministro podría entrar en conflicto con una regla de arquitectura, y la respuesta está fijada aguas arriba y no se decide acá: **`RA-01` y `RA-02` no se relajan por una vulnerabilidad**, y `PT-02` y `PT-03` no admiten carácter condicionado ([`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3.1). Si una mitigación exigiera romperlas, lo que corresponde es elevar la decisión al Product Owner como cambio de alcance, no aplicarla.
+**Las dos últimas filas son las que hay que leer con atención.** Son el caso en que la política de cadena de suministro podría entrar en conflicto con una regla de arquitectura, y la respuesta está fijada aguas arriba y no se decide acá: **`RA-01` y `RA-02` no se relajan por una vulnerabilidad**, y `PT-02` y `PT-03` no admiten carácter condicionado ([`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3.1). Si una mitigación exigiera romperlas, lo que corresponde es elevar la decisión al Product Owner como cambio de alcance, no aplicarla.
 
 **No se declara ningún acuerdo de nivel de servicio de remediación en horas o días**: el intake §10 declara «sin plazo; el avance se mide por etapas cerradas». El mecanismo que reemplaza al plazo es el punto de control bloqueante.
 
@@ -225,12 +232,12 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 Esta sección existe porque el riesgo característico de este proyecto de código **no entra por una dependencia vulnerable**, y decirlo sin ofrecer dónde sí está dejaría el documento vacío.
 
-[`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §2 lo declara: **este proyecto de código no puede delegar la seguridad de la topología**, no porque maneje secretos sino porque **es el único punto de contacto del navegador**. Si acá aparece una petición del navegador hacia el servicio de datos, la partición del producto deja de existir.
+[`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §2 lo declara: **este proyecto de código no puede delegar la seguridad de la topología**, no porque maneje secretos sino porque **es el único punto de contacto del navegador**. Si acá aparece una petición del navegador hacia el servicio de datos, la partición del producto deja de existir.
 
 | Regla | Qué la rompería desde acá | Con qué recuento se mide | Qué pasa si se rompe |
 | --- | --- | --- | --- |
 | **`RA-01`** · ningún guion del navegador invoca el servicio de datos | Una biblioteca de guion agregada que consulte por su cuenta, o una llamada de red escrita en el navegador | `QG-05` (**0** peticiones, con los movimientos prendidos) y `QG-06` (**1** salida, **0** bibliotecas) | Reaparecen las tres propiedades que la topología cierra: contenido mixto, intercambio entre orígenes y **exposición de la dirección del servidor propio** |
-| **`RA-02`** · el bundle es un visualizador puro | Invocar el interior del bundle en lugar de su fachada, o pasarle configuración por un camino lateral | `QG-09` (**0** invocaciones al interior; **6 de 6** funciones como única vía; **0** accesos al elemento de dibujo fuera del anfitrión) | `RI-04` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7: el bundle adquiere capacidades y `RA-02` deja de ser cierta sin que nadie lo note |
+| **`RA-02`** · el bundle es un visualizador puro | Invocar el interior del bundle en lugar de su fachada, o pasarle configuración por un camino lateral | `QG-09` (**0** invocaciones al interior; **6 de 6** funciones como única vía; **0** accesos al elemento de dibujo fuera del anfitrión) | `RI-04` de [`../../../Producto/Vista-Producto.md`](../../../../../Producto/Vista-Producto.md) §7: el bundle adquiere capacidades y `RA-02` deja de ser cierta sin que nadie lo note |
 | **`RA-03`** · nada expone direcciones de servicios internos | Un mensaje de error que incluya la dirección, la ruta del almacén o una traza | `QG-08` (**0** sobre los **diecisiete** códigos vivos **y** sobre el camino de ausencia de respuesta) | `RI-05`: la violación directa de `RA-03`, en el último tramo antes de llegar a la persona |
 
 **Las tres comparten las mismas tres propiedades**, y son las que las hacen un problema de cadena de suministro y no de funcionalidad:
@@ -241,7 +248,7 @@ Esta sección existe porque el riesgo característico de este proyecto de códig
 | **Se verifican con un recuento, no con un juicio** | Los tres gates tienen umbral **0**, y `QG-09` además **6 de 6** |
 | **Una medición de ausencia sin su condición no cuenta** | `QG-05` medido con los movimientos apagados daría cero sin haber ejercitado el bucle de dibujo. Es el criterio que el producto aplica en las dos puntas de la fachada |
 
-**La conclusión operativa para el pipeline** es que las tres comprobaciones más valiosas de este proyecto de código corren **en cada pull request**, sobre el producto ejecutándose en un navegador, y **no en un stage periódico de análisis de dependencias**. Es la cadencia que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3 materializa.
+**La conclusión operativa para el pipeline** es que las tres comprobaciones más valiosas de este proyecto de código corren **en cada pull request**, sobre el producto ejecutándose en un navegador, y **no en un stage periódico de análisis de dependencias**. Es la cadencia que [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §3 materializa.
 
 ## 9. Por qué la cadena de suministro importa acá y no en los otros dos
 
