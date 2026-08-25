@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Supply-Chain-Seguridad.md
-**Versión:** 3.0
+**Versión:** 3.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -61,7 +61,7 @@ esa remisión está **vencida** en el sentido de `Root-Rules.md` §12.2: su even
 
 | Campo del ítem | Decisión | Fundamento |
 |---|---|---|
-| **Formato** | **CycloneDX** | Decidido por el Product Owner el **2026-08-24**. `Rules-Devops.md` §4.6 punto 1 admite CycloneDX o SPDX y **no impone ninguno**; la elección es de producto y esta categoría no la toma por su cuenta |
+| **Formato** | **CycloneDX** | Decidido por el Product Owner el **2026-08-24**, registrado en [`../../../Audit/A3-Decisiones-Del-Product-Owner.md`](../../../Audit/A3-Decisiones-Del-Product-Owner.md) §4. `Rules-Devops.md` §4.6 punto 1 admite CycloneDX o SPDX y **no impone ninguno**; la elección es de producto y esta categoría no la toma por su cuenta |
 | **Formato de salida** | **JSON** | La misma decisión, del conjunto que la regla admite —JSON o XML— |
 | **Publicación** | **Adjunta al informe de cierre de la etapa**, que es lo que §2.1 ya declaraba como destino del inventario | §2.1, fila «Dónde se adjunta» |
 | **Firma** | **No se firma el inventario por separado.** El artefacto de esta unidad **no se publica en ningún registro** —la imagen se construye en destino desde el repositorio— y §3.1 ya declara qué se firma y qué no | Intake §17.1.P.7 · GeometriaFactory-Api; §3.1 de este documento |
@@ -70,13 +70,22 @@ esa remisión está **vencida** en el sentido de `Root-Rules.md` §12.2: su even
 
 | Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 |---|---|---|---|---|
-| `PD-01` | **El generador del inventario**, la herramienta que lo produce sobre la imagen construida en el stage `imagen`. **No se puede fijar hoy** porque ninguna de las herramientas ancladas del producto lo produce, y elegir una exige medirla contra el runtime de la imagen, que sólo existe construida | El equipo, midiendo sobre la imagen | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.1, **fase `i` · Despliegue real**, que es cuando la imagen se construye y se publica de verdad | **Vigente.** La fase `i` no ocurrió |
+| `PD-10` | **El generador del inventario**, la herramienta que lo produce sobre la imagen construida en el stage `imagen`. **No se puede fijar hoy** porque ninguna de las herramientas ancladas del producto lo produce, y elegir una exige medirla contra el runtime de la imagen, que sólo existe construida | El equipo, midiendo sobre la imagen | [`../../../00-Contexto/Roadmap-Producto.md`](../../../00-Contexto/Roadmap-Producto.md) §2.1, **fase `i` · Despliegue real**, que es cuando la imagen se construye y se publica de verdad | **Vigente.** La fase `i` no ocurrió |
 
-**Por qué el identificador es `PD-01` y no una familia nueva.** Es un punto abierto de esta categoría,
-con la misma forma `PD-NN` que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 usa en **su** ámbito. Los
-dos ámbitos son el documento, no el producto, y por eso `PD-01` de acá y `PD-01` de allá no colisionan:
-se citan siempre con su documento. Confirmado por el Product Owner el 2026-08-24, que es lo que
-`Migracion-Rules.md` §4.3.1 pasada 1.b exige para toda familia que el destino acuñe.
+**Por qué el identificador es `PD-10`, y por qué el número no es arbitrario.** Es un punto abierto de
+esta categoría, con la misma forma `PD-NN` que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 usa en
+**su** ámbito, y sin acuñar familia nueva. **El ámbito es el documento**, y de ahí sale la regla de
+numeración: **la serie propia empieza donde no pisa ningún token que este documento cite**. Este
+documento cita `PD-02` y `PD-03` de `Pipeline-CI-CD.md`, así que la propia arranca en **`PD-10`**.
+
+**La emisión anterior lo numeró `PD-01` y fundó el ámbito en que «se citan siempre con su documento».
+Eso era falso y lo levantó el audit**: en `GeometriaFactory-Web`, el mismo documento ya citaba
+`PD-01` de su `Pipeline-CI-CD.md`, de modo que dentro de un ámbito declarado «el documento» el token
+denotaba **dos puntos abiertos distintos**. Una convención de cita no arregla una colisión de ámbito:
+la evita el número.
+
+Confirmado por el Product Owner el 2026-08-24 —ver [`../../../Audit/A3-Decisiones-Del-Product-Owner.md`](../../../Audit/A3-Decisiones-Del-Product-Owner.md) §4—,
+que es lo que `Migracion-Rules.md` §4.3.1 pasada 1.b exige para toda familia que el destino acuñe.
 
 **Y una constancia sobre el evento anterior, que no se puede callar porque es el motivo de este
 apartado.** La fila vieja difería formato y generador juntos «a la etapa `a`», que **cerró el
@@ -85,8 +94,9 @@ apartado.** La fila vieja difería formato y generador juntos «a la etapa `a`»
 «por lectura», y la lista de herramientas con que se lo cerró no incluye ningún generador de
 inventario**: `dotnet build`, `dotnet test`, `npm ci`, `webpack` y `playwright`. **Se cerró un ítem que
 empaquetaba una decisión sin resolver**, que es exactamente la figura que la 11.0 vino a corregir.
-Queda declarado acá y elevado al informe de M6; **este apartado no reabre `PD-02`**, porque cerrar o
-reabrir un punto de otra categoría no es suyo.
+Queda registrado como **`HM-01`** en [`../../../Audit/Plan-Migracion-10.0-a-13.3.md`](../../../Audit/Plan-Migracion-10.0-a-13.3.md) §5.2
+—no sólo «elevado al informe de M6», que es un artefacto que todavía no existe— y **este apartado no
+reabre `PD-02`**, porque cerrar o reabrir un punto de otra categoría no es suyo.
 
 ### 2.1 `GeometriaFactory-Api`
 
@@ -109,7 +119,7 @@ reabrir un punto de otra categoría no es suyo.
 | Cuándo se emite | En el stage `imagen`, sobre la imagen construida para medir `PT-04` |
 | Dónde se adjunta | Al **informe de cierre** de la etapa |
 | Formato, salida, publicación y firma | **CycloneDX**, **JSON**, adjunto al informe de cierre y **sin firma propia**. Ver **§2.b** |
-| Generador | **Abierto**, diferido como `PD-01` de **§2.b**, porque es el único campo que puede depender del runtime |
+| Generador | **Abierto**, diferido como `PD-10` de **§2.b**, porque es el único campo que puede depender del runtime |
 | Qué **no** cubre | Lo que el destino agregue al reconstruir. Ver §3 |
 
 ### 2.2 `GeometriaFactory-Domain`
@@ -506,6 +516,7 @@ Esta sección existe porque en este proyecto de código **la cadena de suministr
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.1 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **El identificador pasa de `PD-01` a `PD-10`** —**P2**—: la emisión anterior fundaba el ámbito en que «se citan siempre con su documento», y eso era falso; en `GeometriaFactory-Web` el token ya denotaba otro punto abierto **dentro del mismo documento**. La regla de numeración queda escrita: **la serie propia empieza donde no pisa ningún token que el documento cite**. La decisión del formato **CycloneDX / JSON** y la de la forma del identificador dejan de vivir sólo acá y se registran como `D9` y `D10` en [`../../../Audit/A3-Decisiones-Del-Product-Owner.md`](../../../Audit/A3-Decisiones-Del-Product-Owner.md) §4 —**P2**: una decisión del Product Owner que no se registra donde se la busca no es auditable en la ronda siguiente—. Y el hallazgo sobre `PD-02` deja de estar «elevado al informe de M6», **que es un artefacto que todavía no existe**: se registra como **`HM-01`** en el plan §5.2 (**P3**). |
 | 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Y se repara el hallazgo P1 más grave del corte: `PD-SBOM-2` se difería hacia un evento YA OCURRIDO.** Apuntaba a la fila de `Pipeline-CI-CD.md` §10 que declara la herramienta del stage, y esa fila es `PD-02`, **Cerrada el 2026-08-20**. **El formato deja de diferirse** —`Rules-Devops.md` §4.6 punto 1.b dice que formato, salida, publicación y firma **se eligen hoy** y que sólo el generador puede diferirse; diferir los cuatro era el arrastre invertido—: el Product Owner fijó **CycloneDX / JSON** el 2026-08-24, y queda **un** ítem diferido, `PD-01`, el generador, con evento en la **fase `i`**, que no ocurrió. El identificador pasa de `PD-SBOM-N` —familia que ninguna regla declaraba, **P2**— a la forma `PD-NN` del ámbito del documento, confirmada por el Product Owner como `Migracion-Rules.md` §4.3.1 pasada 1.b exige. **Y se declara un defecto ajeno que este apartado destapó**: `PD-02` nombra el «generador del inventario» en su enunciado y se cerró «por lectura» con una lista de herramientas que **no incluye ninguno** — se cerró un ítem que empaquetaba una decisión sin resolver. Se eleva al informe de M6 y **no se reabre desde acá**. §6.b pierde el «único del producto» —falso, porque el ejecutor de `-Web` quedó anclado— y la afirmación de que el ambiente de la fase `i` «ya existe», que contradecía a la fila de al lado. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
 | 2.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entran **§2.b**, el generador del inventario como ítem propio, y **§6.b**, el análisis dinámico separado del estático, que `Rules-Devops.md` **6.0** §4.6 parte en sus puntos **1.b** y **5.b**. **Y la partición destapó un ítem vencido**: la fila «Formato y generador» de §2.1 remitía a *«la etapa `a`»*, que **cerró el 2026-08-13 sin registrarlo**. Se parte en dos puntos abiertos con los cuatro campos de `Root-Rules.md` §12.2 —`PD-SBOM-1`, formato y publicación, que se cierra en la **fase `i`**; y `PD-SBOM-2`, el generador, que se cierra en `Pipeline-CI-CD.md` §10— **con eventos que todavía no ocurrieron**, en lugar de copiar el vencido. **§6.b se contesta y no se difiere**: este proyecto de código es el único del producto donde el análisis dinámico **no está bloqueado por falta de ambiente**, y se declara con su herramienta, su stage y su criterio de bloqueo. Sube **minor**: parte ítems y no cambia ninguna decisión. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |

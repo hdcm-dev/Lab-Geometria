@@ -1,5 +1,12 @@
 # Entornos y despliegue — GeometriaFactory-Api
 
+> **ARCHIVADO — estado `Superado`.** Esta es la versión **2.0**, superada el **2026-08-24** por la ronda 2 del corte 09 de la migración normativa SDD 10.0 → 13.3.
+>
+> **La versión vigente es la [3.0](../../Entornos-Deploy.md).**
+>
+> **El cuerpo no se modifica.** Lo único que se tocó al archivar son **los enlaces relativos**, reescritos para que sigan resolviendo dos niveles más abajo (`Master-Prompt.md` §8). Un snapshot copiado sin esa reescritura deja colgados tantos enlaces como referencias tuviera, y **la compuerta mecánica no los ve**: §10.0 excluye `_legacy/` como origen de la comprobación de enlaces.
+
+
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Entornos-Deploy.md
@@ -8,7 +15,7 @@
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
 **Proyectos de código que la componen:** `GeometriaFactory-Api`, `GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure` y `GeometriaFactory-Contracts`
-**Trazabilidad upstream:** [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1**
+**Trazabilidad upstream:** [`../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md`](../../../../../../Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md) **2.1**
 **Consolida a:** los documentos homónimos de las capas que componen la unidad, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
 
 ---
@@ -56,9 +63,9 @@ esta consolidación vivían en documentos que no se citaban.
 | Despliegue **canario** | **No hay proxy inverso, y sin él no hay despliegue con solapamiento.** El intake §17.1.P.8 · GeometriaFactory-Api lo declara: el reemplazo de versión es **detener y arrancar**, con ventana de indisponibilidad. Un canario requiere dos versiones vivas a la vez y un repartidor de tráfico que el producto no tiene | Intake §17.1.P.8 · GeometriaFactory-Api y §17.1.P.12 · GeometriaFactory-Api |
 | Despliegue **azul-verde** | Lo mismo, y con un agravante: el almacén es **un archivo único con escritor único**. Dos versiones vivas escribirían sobre el mismo archivo | Intake §17.1.P.4 · GeometriaFactory-Infrastructure, por la vía de `GeometriaFactory-Infrastructure`; `05` §5 |
 
-**El ADR que sostiene el apartamiento es [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md)**, que en su §6 acepta por escrito los cuatro trade-offs que implica, entre ellos el despliegue conjunto con su ventana de indisponibilidad y que **la reversión sea reconstruir desde una etiqueta, sin imagen publicada a la que volver**.
+**El ADR que sostiene el apartamiento es [`ADR-00008`](../../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md)**, que en su §6 acepta por escrito los cuatro trade-offs que implica, entre ellos el despliegue conjunto con su ventana de indisponibilidad y que **la reversión sea reconstruir desde una etiqueta, sin imagen publicada a la que volver**.
 
-**Lo que el apartamiento cuesta, declarado en lugar de disimulado.** Sin `STAGING`, **la primera vez que una versión corre contra el almacén real es en producción**; y sin canario, **un despliegue malo afecta al 100 % de las peticiones desde el primer segundo**. Lo que el producto pone en su lugar son tres cosas, y ninguna es un ambiente: **el arranque en dos fases**, que hace que un servicio que no puede confiar en su almacén **no escuche** ([`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md)); la puerta `PT-04`, que ejercita el arranque completo **antes** de que exista la oportunidad de desplegar; y el **estado degradado** del front cuando el servicio no responde.
+**Lo que el apartamiento cuesta, declarado en lugar de disimulado.** Sin `STAGING`, **la primera vez que una versión corre contra el almacén real es en producción**; y sin canario, **un despliegue malo afecta al 100 % de las peticiones desde el primer segundo**. Lo que el producto pone en su lugar son tres cosas, y ninguna es un ambiente: **el arranque en dos fases**, que hace que un servicio que no puede confiar en su almacén **no escuche** ([`ADR-00007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md)); la puerta `PT-04`, que ejercita el arranque completo **antes** de que exista la oportunidad de desplegar; y el **estado degradado** del front cuando el servicio no responde.
 
 ## 2. Provisión
 
@@ -88,7 +95,7 @@ Lo único que se aproxima a una declaración de entorno es el **archivo de defin
 
 **No hay infraestructura declarativa atribuible a este proyecto de código.** `05` §5 declara **ninguna** dependencia de infraestructura: no tiene servidor, red, almacenamiento ni servicio administrado propios, y todo lo que necesita del exterior entra por los cuatro puertos.
 
-Esa frase es más fuerte de lo que parece, y es lo que hace verificable a la definición de calidad de [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §1: **si un caso de uso necesitara algo del entorno que no entra por un puerto, dejaría de ser ejercible con dobles**, y con eso caería la propiedad que justifica el estilo entero del proyecto de código.
+Esa frase es más fuerte de lo que parece, y es lo que hace verificable a la definición de calidad de [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §1: **si un caso de uso necesitara algo del entorno que no entra por un puerto, dejaría de ser ejercible con dobles**, y con eso caería la propiedad que justifica el estilo entero del proyecto de código.
 
 La infraestructura del producto existe y está enumerada en el árbol del intake §16 —`deploy/Dockerfile`, `deploy/compose.yaml` y el flujo de trabajo de publicación del front—, pero **pertenece a los dos proyectos de código que se despliegan y no se describe acá**. Lo único de entorno que este proyecto de código usa es la definición del contenedor de desarrollo, común al producto.
 
@@ -121,9 +128,9 @@ El canal de entrega que el intake §17.1.P.7 · GeometriaFactory-Api declara es 
 
 **La segunda fila es lo que esta categoría agrega, y va declarada como decisión propia porque ninguna fuente la enuncia.** Construir en destino significa que **el servidor domiciliario necesita salida a la red en el momento del despliegue**, y que un corte de internet no sólo deja el servicio inalcanzable sino que **impide desplegar**. Es distinto de un modelo con registro, donde la imagen ya construida podría estar en la máquina. Se declara para que quien despliegue lo sepa, no para cambiar la decisión.
 
-**Y una consecuencia sobre la reversión que se sigue de lo mismo**: como no hay imagen publicada, **la reversión es volver a la etiqueta anterior y reconstruir**, y también necesita red. Está en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §7 y [`ADR-00008`](../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §6 lo acepta por escrito.
+**Y una consecuencia sobre la reversión que se sigue de lo mismo**: como no hay imagen publicada, **la reversión es volver a la etiqueta anterior y reconstruir**, y también necesita red. Está en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §7 y [`ADR-00008`](../../../05-Arquitectura-Tecnica/Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) §6 lo acepta por escrito.
 
-**El procedimiento paso a paso, con su verificación, vive en [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md)**, que es donde `Rules-Devops.md` §4.5 lo pide. Acá queda la política; ahí, el procedimiento.
+**El procedimiento paso a paso, con su verificación, vive en [`Guia-Publicacion-Image-Docker.md`](../../Guia-Publicacion-Image-Docker.md)**, que es donde `Rules-Devops.md` §4.5 lo pide. Acá queda la política; ahí, el procedimiento.
 
 ## 4. La dirección dinámica, que es la restricción que ordena todo
 
@@ -138,12 +145,12 @@ El intake §10 la declara entre las restricciones del cliente: **el servidor dom
 | Aspecto | Decisión | Fundamento |
 | --- | --- | --- |
 | Quién conoce la dirección | **Únicamente el proceso del front**, y dentro de él, únicamente su cliente tipado del servicio de datos | Intake §17.2.P.3 · GeometriaFactory-Web; `ADR-00007` de `GeometriaFactory-Web` §7 |
-| Dónde vive el valor | Como **secreto del repositorio** del front, inyectado al publicar. **La dirección real no se versiona** | Intake §17.2.P.5 · GeometriaFactory-Web; [`../../GeometriaFactory-Web/09-Devops/Entornos-Deploy.md`](../../GeometriaFactory-Web/09-Devops/Entornos-Deploy.md) §5 |
+| Dónde vive el valor | Como **secreto del repositorio** del front, inyectado al publicar. **La dirección real no se versiona** | Intake §17.2.P.5 · GeometriaFactory-Web; [`../../GeometriaFactory-Web/09-Devops/Entornos-Deploy.md`](../../../../GeometriaFactory-Web/09-Devops/Entornos-Deploy.md) §5 |
 | Qué sabe de su propia dirección este proyecto de código | **Nada, y es deliberado.** El servicio escucha en un puerto; **no conoce ni publica la dirección por la que se lo alcanza desde afuera**, y ningún punto de acceso la devuelve | `ADR-00007` §2, regla 4: el punto de salud **no dice dónde está el almacén, ni con qué esquema, ni qué ruta se configuró** |
 | Forma admitida del valor | **Dirección directa** —decisión registrada del Product Owner— **o nombre de un servicio de nombres dinámico**, que la fuente declara como recomendación | Intake §10 |
 | Cuál se ancla | **Esta categoría no lo decide.** La fuente registra la decisión del Product Owner de admitir la dirección directa, y adoptar la recomendación es suyo | Intake §10 |
 
-**La tercera fila es la que sostiene `RA-03` desde este lado**, y conviene ver por qué es contraintuitiva. El punto de salud es exactamente el lugar donde uno pondría información de diagnóstico —dónde está el almacén, qué esquema tiene, a qué dirección responde— y [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2 lo prohíbe con esa palabra: es «`RA-03` en el punto más tentador de todos: el que existe para diagnosticar». **Un servicio que no conoce su propia dirección externa no puede filtrarla.**
+**La tercera fila es la que sostiene `RA-03` desde este lado**, y conviene ver por qué es contraintuitiva. El punto de salud es exactamente el lugar donde uno pondría información de diagnóstico —dónde está el almacén, qué esquema tiene, a qué dirección responde— y [`ADR-00007`](../../../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2 lo prohíbe con esa palabra: es «`RA-03` en el punto más tentador de todos: el que existe para diagnosticar». **Un servicio que no conoce su propia dirección externa no puede filtrarla.**
 
 ### 4.2 Qué pasa cuando la dirección cambia
 
@@ -172,7 +179,7 @@ Las tres propiedades que hacen que la dirección nunca llegue al navegador, cada
 | **La dirección no viaja en ningún contenido servido al navegador** | Vive en la configuración del proceso del front y sólo la conoce su cliente tipado; **ninguna superficie la muestra** | `ADR-00007` de `GeometriaFactory-Web` §7 y §8, primera métrica: **0** apariciones en el repositorio |
 | **La dirección no se filtra por un mensaje de error** | Los mensajes se traducen en un solo lugar y **ninguno incluye direcciones de servicios internos** | `QG-08` de este proyecto de código —**0** sobre los **quince** puntos y sobre el registro del servidor— y `QG-08` de `GeometriaFactory-Web` —**0** sobre los **diecisiete** códigos vivos y el camino de ausencia de respuesta— |
 
-**Las tres se sostienen entre sí y ninguna alcanza sola.** La primera evita el tráfico; la segunda evita que la dirección esté en el navegador aunque no haya tráfico; la tercera evita que se filtre en el único camino que atraviesa las dos anteriores, que es un mensaje de error. `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 nombra exactamente ese modo de falla, y lo ubica **en el último tramo antes de salir del servidor propio**, que es este proyecto de código.
+**Las tres se sostienen entre sí y ninguna alcanza sola.** La primera evita el tráfico; la segunda evita que la dirección esté en el navegador aunque no haya tráfico; la tercera evita que se filtre en el único camino que atraviesa las dos anteriores, que es un mensaje de error. `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../../../Producto/Vista-Producto.md) §7 nombra exactamente ese modo de falla, y lo ubica **en el último tramo antes de salir del servidor propio**, que es este proyecto de código.
 
 ## 5. Configuración
 
@@ -184,22 +191,22 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 | --- | --- | --- |
 | **Ruta del almacén** | Configuración del ambiente, apuntando en producción a un **volumen persistente** | Este proyecto de código, que la toma y se la pasa a `GeometriaFactory-Infrastructure`. **Ningún punto de acceso la devuelve** (`ADR-00007` §2, regla 4) |
 | **Clave de firma del acceso** | Variable de entorno o archivo montado. Ver §6 | El adaptador de emisión de accesos, que **la recibe y no la busca** |
-| **Vigencia del acceso firmado** | Configuración. El intake la declara «corta» y **no fija número** | `PA-04` de `05` §11, registrado como `PD-04` en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
+| **Vigencia del acceso firmado** | Configuración. El intake la declara «corta» y **no fija número** | `PA-04` de `05` §11, registrado como `PD-04` en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10 |
 | **Límite de tamaño del cuerpo de una petición** | Configuración, **uno solo para todo el producto**, que **rechaza y nunca trunca**. El número se calibra en la etapa `a` | `PA-05` de `05` §11; `QG-09` mide **0** truncamientos silenciosos |
-| **Configuración de intercambio** | **Una sola declarada en todo el producto**, decidida acá porque este es el productor | [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §6; `QG-10` mide **1** |
+| **Configuración de intercambio** | **Una sola declarada en todo el producto**, decidida acá porque este es el productor | [`../../../Producto/Vista-Producto.md`](../../../../../Producto/Vista-Producto.md) §6; `QG-10` mide **1** |
 | Dirección externa del propio servicio | **No es configuración de este proyecto de código.** Ver §4.1 | — |
 
 **La última fila de la tabla de valores es la que más se busca y no está.** Un servicio suele conocer su dirección pública para armar enlaces; **éste no arma ninguno**, porque `RA-03` declara que todo lo que el navegador deba obtener del backend **pasa por el front**: descargas, imágenes y redirecciones se sirven desde el dominio del front, que a su vez las pide por su cliente tipado.
 
-**La quinta fila es la que `RI-01` del producto vigila.** [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 declara que **los dos extremos configurados distinto sin romper ninguna compilación** es el único modo de falla del contrato que la compilación compartida no atrapa, y su mitigación es una sola configuración en todo el producto **verificada ejerciendo el servicio real** —no comparando dos archivos—, que es lo que hace la batería de integración que vive acá.
+**La quinta fila es la que `RI-01` del producto vigila.** [`../../../Producto/Vista-Producto.md`](../../../../../Producto/Vista-Producto.md) §7 declara que **los dos extremos configurados distinto sin romper ninguna compilación** es el único modo de falla del contrato que la compilación compartida no atrapa, y su mitigación es una sola configuración en todo el producto **verificada ejerciendo el servicio real** —no comparando dos archivos—, que es lo que hace la batería de integración que vive acá.
 
 ### 5.2 `GeometriaFactory-Domain`
 
 | Aspecto | Decisión | Fundamento |
 | --- | --- | --- |
-| Configuración de ejecución | **Ninguna.** El proyecto de código no lee configuración | `05` §7, citado por [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
+| Configuración de ejecución | **Ninguna.** El proyecto de código no lee configuración | `05` §7, citado por [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
 | Variables de entorno | **Ninguna**, ni en construcción ni en prueba | `Estrategia-Testing.md` §7, fila de variables de entorno |
-| Reloj | **No se fija ni se simula**: el momento entra por parámetro | [`../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
+| Reloj | **No se fija ni se simula**: el momento entra por parámetro | [`../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02006-El-Dominio-No-Lee-El-Reloj-Ni-El-Conjunto.md) |
 
 **El principio de configuración externa se cumple de la forma más fuerte posible: no habiendo configuración.** Un mapa de variables por ambiente sería una tabla vacía con encabezados.
 
@@ -210,7 +217,7 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 | Configuración propia de ejecución | **Ninguna.** No lee variables de entorno ni archivos de configuración: lo que necesita se lo inyecta la composición de raíz de `GeometriaFactory-Api` | `05` §5; intake §17.1.P.2 · GeometriaFactory-Application |
 | Persistencia | **No aplica directamente.** Declara el puerto de repositorio y el alcance de la unidad de trabajo —**un caso de uso, una transacción**—, y la implementación es de `GeometriaFactory-Infrastructure` | Intake §17.1.P.4 · GeometriaFactory-Application |
 | Reloj | **Es un puerto**, para que las fechas de alta y modificación sean verificables en prueba. No se toma del sistema | Intake §17.1.P.11 · GeometriaFactory-Application, punto 3 |
-| Variables de entorno del pipeline | **Ninguna** | Decisión de esta categoría, derivada de la tabla de §2.1 de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md): sus tres stages leen el repositorio y escriben recuentos e informes |
+| Variables de entorno del pipeline | **Ninguna** | Decisión de esta categoría, derivada de la tabla de §2.1 de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md): sus tres stages leen el repositorio y escriben recuentos e informes |
 
 **La fila del reloj no es un detalle de estilo.** Un caso de uso que tomara la hora del sistema sería irreproducible en la canalización, y `QG-02` —batería entera en verde— empezaría a fallar por motivos que no son del código. Que el reloj entre por un puerto es lo que hace que la batería sea determinista en cualquier ejecutor.
 
@@ -236,8 +243,8 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 | Afirmación | Dónde está declarada |
 | --- | --- |
 | No maneja secretos: la contraseña llega **ya derivada** y se guarda como valor de credencial derivada, nulo hasta el primer ingreso | Intake §17.1.P.5 · GeometriaFactory-Domain |
-| El proyecto de código no deriva ni compara credenciales | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §2, fila de seguridad |
-| Ninguno en el ambiente de pruebas | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
+| El proyecto de código no deriva ni compara credenciales | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §2, fila de seguridad |
+| Ninguno en el ambiente de pruebas | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
 
 **Consecuencias operativas, que sí son de esta categoría:**
 
@@ -271,20 +278,20 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 | **Artefacto entregado → servicio desplegado** | Un **acto manual del Product Owner** sobre el servidor propio | El mismo, que es quien lo ejecuta | El registro del despliegue, con la ventana de indisponibilidad |
 | **Cambio incompatible del contrato → producto desplegado** | Las **dos** unidades desplegadas desde el mismo estado del repositorio, **esta primero** | El mismo | La constancia del despliegue conjunto, en el informe de cierre |
 
-**Las dos transiciones del medio son dos y no una**, y la Definition of Done §1.4 lo declara: **el artefacto queda entregado, no desplegado**. Es la frontera de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §1.
+**Las dos transiciones del medio son dos y no una**, y la Definition of Done §1.4 lo declara: **el artefacto queda entregado, no desplegado**. Es la frontera de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §1.
 
-**Sobre la última fila, y sobre el orden.** La obligación es del intake §17.1.P.3 · GeometriaFactory-Contracts y su tratamiento completo está en [`../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md`](../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md) §3.2. Lo que esta categoría agrega es que **el despliegue de esta unidad tiene ventana de indisponibilidad y el del front no**, de modo que el orden entre los dos deja siempre un intervalo de desajuste. **El intake §17.2.P.7 · GeometriaFactory-Web elige el orden desde 1.22: primero el backend**, o sea esta unidad, porque una API nueva normalmente acepta lo que mandaba el front anterior. Lo que esta categoría declaraba sigue vigente: el intervalo **se minimiza y se registra**, y **el orden no lo elimina**, porque el front sale al fusionar y esta unidad se despliega a mano. `PD-05` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 queda **cerrado**.
+**Sobre la última fila, y sobre el orden.** La obligación es del intake §17.1.P.3 · GeometriaFactory-Contracts y su tratamiento completo está en [`../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md`](../../../../GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md) §3.2. Lo que esta categoría agrega es que **el despliegue de esta unidad tiene ventana de indisponibilidad y el del front no**, de modo que el orden entre los dos deja siempre un intervalo de desajuste. **El intake §17.2.P.7 · GeometriaFactory-Web elige el orden desde 1.22: primero el backend**, o sea esta unidad, porque una API nueva normalmente acepta lo que mandaba el front anterior. Lo que esta categoría declaraba sigue vigente: el intervalo **se minimiza y se registra**, y **el orden no lo elimina**, porque el front sale al fusionar y esta unidad se despliega a mano. `PD-05` de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10 queda **cerrado**.
 
 ### 7.2 `GeometriaFactory-Domain`
 
-**No hay promoción entre ambientes ni entre canales, porque no hay ni ambientes ni canales.** Lo que existe es la promoción de estado del trabajo, declarada en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §6: rama de etapa → rama principal por fusión del pull request, y etapa fusionada → etapa cerrada por etiqueta, las dos con **OK explícito del Product Owner** en el punto de control (intake §15).
+**No hay promoción entre ambientes ni entre canales, porque no hay ni ambientes ni canales.** Lo que existe es la promoción de estado del trabajo, declarada en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §6: rama de etapa → rama principal por fusión del pull request, y etapa fusionada → etapa cerrada por etiqueta, las dos con **OK explícito del Product Owner** en el punto de control (intake §15).
 
 **Registro de auditoría de esa promoción**, que es lo que la reemplaza acá:
 
 | Qué queda registrado | Dónde | Fundamento |
 | --- | --- | --- |
 | El OK explícito del Product Owner, con constancia escrita | Informe de cierre de la etapa, en el directorio de avances que el intake §15 declara | Intake §15, regla de delivery 3 |
-| La medición de los dos gates condicionados con su distancia al umbral | El mismo informe | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §6 |
+| La medición de los dos gates condicionados con su distancia al umbral | El mismo informe | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../../../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §6 |
 | La etiqueta de la etapa | El repositorio | Intake §17.1.P.7 · GeometriaFactory-Domain |
 
 ### 7.3 `GeometriaFactory-Application`
@@ -331,7 +338,7 @@ De modo que la tabla de ambientes de este proyecto de código tiene una sola fil
 
 `Rules-Devops.md` §2.2 fija para el tipo `library` un modelo de canales `preview` / `stable` sobre feed único, y declara que los modelos son piso: no se quita ninguno sin un ADR que lo justifique.
 
-**El ADR existe y es anterior a esta categoría.** [`ADR-02003`](../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §4 evaluó como alternativa la publicación en un repositorio de paquetes interno y la descartó con dos motivos: el intake la descarta explícitamente, y agregaría infraestructura a un producto que las fuentes declaran básico. El apartamiento, entonces, **no lo decide 09**: 09 lo registra y lo hace operativo.
+**El ADR existe y es anterior a esta categoría.** [`ADR-02003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-02003-Versionado-Y-Estabilidad-De-La-Superficie.md) §4 evaluó como alternativa la publicación en un repositorio de paquetes interno y la descartó con dos motivos: el intake la descarta explícitamente, y agregaría infraestructura a un producto que las fuentes declaran básico. El apartamiento, entonces, **no lo decide 09**: 09 lo registra y lo hace operativo.
 
 **Y hay una razón de fondo para no simular los dos canales.** `Rules-Devops.md` §4.8 declara anti-patrón confundir publicación con despliegue. Declarar acá un canal `preview` y un canal `stable` sin feed detrás sería la versión inversa del mismo error: **inventar publicación donde sólo hay compilación**. Un canal es un destino del que alguien retira un artefacto; acá nadie retira nada, porque el consumidor lo obtiene por referencia de proyecto dentro de la misma construcción.
 
@@ -353,7 +360,7 @@ De modo que la tabla de ambientes de este proyecto de código tiene una sola fil
 
 ### 1.1 Apartamiento declarado del modelo de la categoría
 
-`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo de canales `preview` / `stable` sobre feed único, y admite apartarse con un ADR que lo justifique. **El ADR existe y es [`ADR-04003`](../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md)**, cuyo §2 declara que el contrato se protege por compilación compartida, que **no se publica en ningún repositorio de paquetes** y que por eso no hay deprecación gradual ni versiones conviviendo.
+`Rules-Devops.md` §2.2 fija para el tipo `library` el modelo de canales `preview` / `stable` sobre feed único, y admite apartarse con un ADR que lo justifique. **El ADR existe y es [`ADR-04003`](../../../05-Arquitectura-Tecnica/Adrs/ADR-04003-Versionado-Y-Estabilidad-De-La-Superficie.md)**, cuyo §2 declara que el contrato se protege por compilación compartida, que **no se publica en ningún repositorio de paquetes** y que por eso no hay deprecación gradual ni versiones conviviendo.
 
 **Declarar acá un `DEV`, un `QA` y un `PROD` sería duplicar los ambientes de `GeometriaFactory-Api` con otro nombre y otro dueño**, que es exactamente el anti-patrón que `Rules-Devops.md` §4.8 nombra: confundir publicación con despliegue. Los ambientes de ejecución donde este ensamblado termina son los de la unidad que lo embebe, y su dueño es la categoría 09 de `GeometriaFactory-Api`.
 
@@ -377,11 +384,11 @@ De modo que la tabla de ambientes de este proyecto de código tiene una sola fil
 
 `Rules-Devops.md` §2.2 fija para el tipo `library` el modelo de canales `preview` / `stable` sobre feed único, y admite apartarse con un ADR que lo justifique. **Acá no hay feed**: el intake §17.1.P.7 · GeometriaFactory-Infrastructure declara la estrategia idéntica a §17.1.P.7 · GeometriaFactory-Domain, sin publicación, y §13 lo generaliza al producto entero.
 
-**Y falta el instrumento que la regla nombra, así que se declara en lugar de darse por cubierto.** Las otras tres bibliotecas del producto anclan este mismo apartamiento en su `ADR-06003`; **este proyecto de código no tiene ninguna ADR sobre publicación ni sobre canales** —sus siete, `ADR-06001` a `ADR-06007`, tratan adaptadores, almacén, comparación de correos, derivación de clave, contraseña provisoria, lectura tolerante y transformaciones—, de modo que la cita al intake **sustituye** al ADR que `Rules-Devops.md` §2.2 pide y no lo reemplaza formalmente. El apartamiento es sustantivamente correcto —no hay feed, y no lo hay por decisión del producto—; lo que falta es el instrumento. **Queda registrado como `PD-05`** en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10, con la categoría 05 de este proyecto de código como dueña.
+**Y falta el instrumento que la regla nombra, así que se declara en lugar de darse por cubierto.** Las otras tres bibliotecas del producto anclan este mismo apartamiento en su `ADR-06003`; **este proyecto de código no tiene ninguna ADR sobre publicación ni sobre canales** —sus siete, `ADR-06001` a `ADR-06007`, tratan adaptadores, almacén, comparación de correos, derivación de clave, contraseña provisoria, lectura tolerante y transformaciones—, de modo que la cita al intake **sustituye** al ADR que `Rules-Devops.md` §2.2 pide y no lo reemplaza formalmente. El apartamiento es sustantivamente correcto —no hay feed, y no lo hay por decisión del producto—; lo que falta es el instrumento. **Queda registrado como `PD-05`** en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10, con la categoría 05 de este proyecto de código como dueña.
 
 **Declarar acá un `DEV`, un `QA` y un `PROD` sería duplicar los ambientes de `GeometriaFactory-Api` con otro nombre y otro dueño**, que es el anti-patrón que `Rules-Devops.md` §4.8 nombra. El ambiente de ejecución donde este ensamblado termina es el del servidor propio, y su dueño es la categoría 09 de `GeometriaFactory-Api`.
 
-**Y una precisión que este proyecto de código sí tiene y ninguna otra biblioteca del producto**: aunque no tenga ambientes propios, **es el que impone más restricciones sobre el ambiente ajeno**. El almacén va a un **volumen persistente y nunca dentro de la imagen**, el modo de diario está declarado, la concurrencia de escritura es de **escritor único** y las transformaciones se aplican **al arrancar** (intake §17.1.P.4 · GeometriaFactory-Infrastructure). Todo eso condiciona cómo se arma la unidad desplegable, y está recogido en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §9.
+**Y una precisión que este proyecto de código sí tiene y ninguna otra biblioteca del producto**: aunque no tenga ambientes propios, **es el que impone más restricciones sobre el ambiente ajeno**. El almacén va a un **volumen persistente y nunca dentro de la imagen**, el modo de diario está declarado, la concurrencia de escritura es de **escritor único** y las transformaciones se aplican **al arrancar** (intake §17.1.P.4 · GeometriaFactory-Infrastructure). Todo eso condiciona cómo se arma la unidad desplegable, y está recogido en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §9.
 
 ## 9. El único ambiente que existe: el contenedor de desarrollo
 
@@ -392,7 +399,7 @@ De modo que la tabla de ambientes de este proyecto de código tiene una sola fil
 | Dónde ocurre todo el ciclo | Dentro del contenedor de desarrollo | Intake, encabezado de la Parte C, y §10: el host de desarrollo **no tiene ni va a tener** instalado el kit de desarrollo, y ningún guion puede asumirlo en el host |
 | Plataforma objetivo | `net10.0` sin sufijo de plataforma, sobre el sistema operativo del contenedor, que es el mismo del servidor del backend | Intake §17.1.P.9 · GeometriaFactory-Domain |
 | Dependencias de infraestructura | **Ninguna.** No requiere base de datos, ni almacén de secretos, ni servicio externo | `05` §5, tercera fila |
-| Base de datos para pruebas | **Ninguna.** `tiene_persistencia` es false | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
+| Base de datos para pruebas | **Ninguna.** `tiene_persistencia` es false | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §7 |
 | Definición del contenedor | `.devcontainer/devcontainer.json`, en la raíz del repositorio | Intake §16 |
 
 **El contenedor de desarrollo no es un ambiente de despliegue disfrazado.** No sirve tráfico, no tiene URL y nadie promociona nada hacia él: es donde se construye y se prueba. Llamarlo `DEV` habría abierto la puerta a que alguien pidiera un `QA` detrás.
@@ -408,7 +415,7 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 | El proceso del **servidor propio** | Embebido en la imagen del backend, construida desde `deploy/Dockerfile` multietapa (intake §16), por la vía de `GeometriaFactory-Api` | Categoría 09 de `GeometriaFactory-Api` |
 | El proceso del **hosting público** | **No llega.** El front no lo referencia: sus dependencias son `GeometriaFactory-Contracts` y `GeometriaFactory-Visor` | — |
 
-**La segunda fila es la que distingue a este proyecto de código de `GeometriaFactory-Contracts`.** Aquél se carga en los dos procesos y por eso una decisión de plataforma del front lo alcanza; **éste llega a uno solo**. La consecuencia operativa es directa y está en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §9: un cambio suyo **no obliga a republicar el front**.
+**La segunda fila es la que distingue a este proyecto de código de `GeometriaFactory-Contracts`.** Aquél se carga en los dos procesos y por eso una decisión de plataforma del front lo alcanza; **éste llega a uno solo**. La consecuencia operativa es directa y está en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §9: un cambio suyo **no obliga a republicar el front**.
 
 ### 10.2 `GeometriaFactory-Infrastructure`
 
@@ -427,10 +434,10 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 | --- | --- | --- |
 | Ubicación del almacén | **Configurable, y la configuración la provee `GeometriaFactory-Api`.** En producción, un volumen persistente | Intake §17.1.P.4 · GeometriaFactory-Infrastructure; `05` §5 |
 | Modo de diario | **Declarado por la fuente**, no elegido acá | Intake §17.1.P.4 · GeometriaFactory-Infrastructure |
-| Concurrencia de escritura | **Escritor único.** No es una configuración: es una propiedad del motor que el producto acepta como trade-off | Intake §17.1.P.4 · GeometriaFactory-Infrastructure y §17.1.P.12 · GeometriaFactory-Infrastructure; [`ADR-06002`](../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) |
+| Concurrencia de escritura | **Escritor único.** No es una configuración: es una propiedad del motor que el producto acepta como trade-off | Intake §17.1.P.4 · GeometriaFactory-Infrastructure y §17.1.P.12 · GeometriaFactory-Infrastructure; [`ADR-06002`](../../../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) |
 | Versionado del esquema | **Transformaciones aplicadas automáticamente al arrancar**, sobre almacén inexistente o desactualizado | Intake §17.1.P.4 · GeometriaFactory-Infrastructure y §17.1.P.11 · GeometriaFactory-Infrastructure punto 3 |
 | Multi-inquilino | **No.** Una instancia, un curso, un administrador | Intake §17.1.P.4 · GeometriaFactory-Infrastructure; `INV-05` |
-| Variables de entorno del pipeline | **Ninguna.** Los cuatro stages leen el repositorio, crean almacenes desechables y escriben informes y recuentos | Decisión de esta categoría, derivada de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1 |
+| Variables de entorno del pipeline | **Ninguna.** Los cuatro stages leen el repositorio, crean almacenes desechables y escriben informes y recuentos | Decisión de esta categoría, derivada de [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §2.1 |
 
 **El respaldo del almacén, que es lo único de operación que la fuente dejó abierto y dirigió acá.** El intake §17.1.P.4 · GeometriaFactory-Infrastructure lo declara como **copia del archivo con el diario activo, consistente**, y su **frecuencia «a definir por el docente»**; `PA-07` de `05` §11 lo registra como punto abierto y lo dirige a esta categoría junto con el Product Owner.
 
@@ -439,11 +446,11 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 | Condición | Fundamento |
 | --- | --- |
 | Se copia **el archivo con el diario activo**, y la copia es consistente. No se copia el archivo a mano mientras el proceso escribe | Intake §17.1.P.4 · GeometriaFactory-Infrastructure |
-| **El respaldo es el único mecanismo del producto para volver atrás sobre datos.** Volver a una etiqueta revierte el código y no el almacén, y el guion de restablecimiento **deja el almacén vacío** | `05` §5; [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §7 |
+| **El respaldo es el único mecanismo del producto para volver atrás sobre datos.** Volver a una etiqueta revierte el código y no el almacén, y el guion de restablecimiento **deja el almacén vacío** | `05` §5; [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §7 |
 | La copia **vive fuera del volumen que respalda**, o no protege del modo de falla más probable de un servidor domiciliario | **Decisión de esta categoría**, declarada como tal |
 | **No se declara ninguna frecuencia, ninguna retención y ningún destino concreto** | Ninguna fuente los da, y el intake §10 declara «sin plazo». Un número puesto acá se propagaría como si fuera del producto |
 
-**El punto abierto queda registrado como `PD-04`** en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10, con el Product Owner como quien lo cierra.
+**El punto abierto queda registrado como `PD-04`** en [`Pipeline-CI-CD.md`](../../Pipeline-CI-CD.md) §10, con el Product Owner como quien lo cierra.
 
 ## 12. Secretos: la clave de firma que se recibe y no se busca
 
@@ -460,7 +467,7 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 | Momento | Secretos | Fundamento |
 | --- | --- | --- |
 | Construcción | **Ninguno.** El restaurador toma dependencias de repositorios públicos; no hay publicación que autenticar | Intake §17.1.P.7 · GeometriaFactory-Infrastructure |
-| Prueba | **Ninguno real.** Las contraseñas de los casos son ficticias, y los almacenes son desechables | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) |
+| Prueba | **Ninguno real.** Las contraseñas de los casos son ficticias, y los almacenes son desechables | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../../../08-Calidad-Y-Pruebas/Estrategia-Testing.md) |
 | Ejecución | **Uno, recibido y no custodiado**: la clave de firma | Intake §17.1.P.5 · GeometriaFactory-Infrastructure; `05` §5 |
 
 **Ningún secreto entra al repositorio, ni en la integración continua.** El intake §17.1.P.5 · GeometriaFactory-Infrastructure lo declara sin excepción. **No se declara ninguna frecuencia de rotación**: ninguna fuente la da, y el gobierno del valor pertenece a la categoría 09 de `GeometriaFactory-Api`, que es la que lo provee al ambiente.

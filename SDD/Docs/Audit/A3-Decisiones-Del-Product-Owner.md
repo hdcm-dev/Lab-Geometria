@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -106,7 +106,27 @@ decidirlo**, y deja el árbol diciendo la verdad.
 
 ---
 
-## 4. Lo que este documento no sabe
+## 4. Decisiones tomadas fuera de las ocho, y por qué se registran acá
+
+**Este documento se emitió para presentar decisiones, no para tomarlas.** Pero la migración 10.0 → 13.3
+obligó a dos que **no estaban entre las ocho** —el salto las volvió obligatorias—, y el audit
+independiente del corte 09 levantó como **P2** que vivieran **sólo en el documento que las usa**: una
+decisión del Product Owner que no se registra donde se la busca **no es auditable en la ronda
+siguiente**.
+
+| Id | Qué se decidió | Quién y cuándo | Dónde se aplica |
+|---|---|---|---|
+| **D9** | **El formato del inventario de componentes: CycloneDX, salida JSON.** Lo pide `Rules-Devops.md` §4.6 punto 1, que admite CycloneDX o SPDX y **no impone ninguno**. Se decide hoy porque la regla declara que **el formato no depende del runtime** y que sólo el generador puede diferirse: diferir los cuatro campos era el arrastre invertido que la 11.0 vino a corregir | El **Product Owner**, el **2026-08-24**, sobre el corte 09 de la migración | `Supply-Chain-Seguridad.md` §2.b de **las dos** unidades de entrega |
+| **D10** | **La forma de los identificadores de los puntos abiertos que la categoría 09 acuña**: `PD-NN`, sin familia nueva, con ámbito **el documento** y la serie propia empezando **donde no pisa ningún token que el documento cite**. Lo exige `Migracion-Rules.md` §4.3.1 pasada 1.b para toda familia que el destino acuñe | El **Product Owner**, el **2026-08-24**; la regla de numeración se corrigió el mismo día, en la ronda 3, al aparecer una colisión real en `GeometriaFactory-Web` | `Supply-Chain-Seguridad.md` §2.b de **las dos** unidades |
+
+**Lo que este registro no es.** No convierte a `D9` y `D10` en dos de las ocho: **las ocho siguen
+siendo las de §2**, y de ellas **`D1`, `D2`, `D3`, `D6` y `D7` continúan abiertas**. Estas dos entran
+por una vía distinta —un salto normativo que volvió obligatorio lo que antes no lo era— y se numeran a
+continuación para que no haya dos series.
+
+---
+
+## 5. Lo que este documento no sabe
 
 - **Los recuentos son aproximados.** El agrupamiento es por enunciado y varias familias se solapan;
   los números llevan `~` donde el solapamiento es real.
@@ -114,8 +134,9 @@ decidirlo**, y deja el árbol diciendo la verdad.
   configuración. **Si aparece, pasa a la lista de §1** y deja de ser tuya.
 - **Ninguna se evaluó por vigencia**, igual que en `A1` y en el plan.
 
-## 5. Control de cambios
+## 6. Control de cambios
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-24 | **Entra §4, las decisiones tomadas fuera de las ocho**, y las dos secciones siguientes corren a §5 y §6. La migración 10.0 → 13.3 obligó a dos que el salto volvió obligatorias —**`D9`**, el formato del inventario (**CycloneDX / JSON**), y **`D10`**, la forma de los identificadores que la 09 acuña— y el **audit independiente del corte 09 las levantó como P2** porque vivían **sólo en el documento que las usa**: una decisión del Product Owner que no se registra donde se la busca no es auditable en la ronda siguiente. Se numeran a continuación de las ocho **para que no haya dos series**, y §4 declara que **las ocho de §2 siguen siendo las ocho** y que cinco continúan abiertas. | Orquestador SDD |
 | 1.0 | 2026-08-20 | Emisión inicial, paso **A3**. Agrupa las **57** filas vencidas restantes por **lo que hay que decidir** en lugar de por fila. **~20 resultan cerrables leyendo** —el motor 3D anclado en `three 0.169.0`, la biblioteca de componentes **decidida por apartamiento** en el `.csproj`, `PBKDF2` en `PasswordDerivation.cs`, el punto de quiebre en `app.css`, `EmailIdentity.Normalize`, los 18 puntos de acceso y las herramientas de cada stage en los guiones— y van a una **segunda pasada de `A2`**. Las restantes se reducen a **ocho decisiones**, con **`D1` absorbiendo catorce filas en una sola**: confirmar la tabla de asunciones numéricas del intake §22, que además habilita cuatro `QG`. Propone el orden **D5 → D1 → D3/D4**, con `D6` resuelta por la propia fase `i` —es medición y no decisión— y declara que **retirar un punto es tan válido como decidirlo**, porque ninguna fila se evaluó por vigencia. | Orquestador SDD |

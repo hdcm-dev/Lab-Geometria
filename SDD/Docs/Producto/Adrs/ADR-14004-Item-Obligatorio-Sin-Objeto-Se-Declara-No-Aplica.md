@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** **Propuesto** — esperando la aprobación del Product Owner
 **Fecha:** 2026-08-24
 **Autor:** Orquestador de migración normativa SDD
@@ -115,7 +115,7 @@ audit lo levanta como tal.
 | **2 · Alcance** | Los dos `Entornos-Deploy.md` del producto, y **como criterio** todo ítem obligatorio futuro cuyo objeto no exista en este producto |
 | **3 · Fundamento** | §3 de este documento |
 | **4 · Disparadores que superarían la decisión** | Cualquiera de los dos: que **el framework incorpore la figura del ítem sin objeto** —con lo cual esto deja de ser un apartamiento y pasa a ser la regla—, o que **este producto adopte una herramienta declarativa de infraestructura**, con lo cual el ítem recupera sujeto y se contesta |
-| **5 · Estado** | **`vigente`** |
+| **5 · Estado** | **`vigente` desde que el ADR se acepte.** Hoy el documento está **`Propuesto`**, y el audit del corte 09 levantó como **P3** que el campo declarara `vigente` mientras la cabecera decía `Propuesto`: un apartamiento no rige antes de ser aceptado, y los dos `Entornos-Deploy.md` lo declaran así |
 | **6 · Saltos de versión que sobrevivió** | **0** — se emite en el conjunto **13.3** |
 
 **Qué pasa si el contador llega a 2.** `Migracion-Rules.md` §4.7 declara que un apartamiento que
@@ -130,4 +130,5 @@ incorpore, lo que el número va a estar diciendo es que al método le falta una 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-24 | **Ronda 3 del corte 09.** El **campo 5** declaraba el apartamiento **`vigente`** mientras la cabecera del ADR decía **`Propuesto`**: un apartamiento **no rige antes de ser aceptado**, y el audit lo levantó como **P3**. Queda declarado que rige **desde que el ADR se acepte**, y los dos `Entornos-Deploy.md` suman la fila que dice que hoy se apoyan en un instrumento todavía no aprobado. **La decisión no cambia**: cambia lo que el documento afirma sobre su propia vigencia. |
 | 1.0 | 2026-08-24 | Emisión inicial, **en la ronda 2 del corte 09** de la migración 10.0 → 13.3. Nace de un hallazgo **P2** del audit independiente de la ronda 1: el corte había introducido la figura «**no aplica, y no está diferida**» en los dos `Entornos-Deploy.md` **sin declarar el apartamiento** que `Root-Rules.md` §11 exige, y `Rules-Devops.md` §4.4 punto 2.b sólo ofrece dos salidas. Declara la figura **como criterio y no como excepción de una fila**, con sus tres partes obligatorias —que no aplica, por qué no tiene objeto con cita al propio documento, y qué lo reabriría—. Declara también el riesgo que ninguna comprobación mecánica cubre: **«no aplica» y «no lo contesté» se ven iguales para un guion**, y lo único que los separa es la cita del campo 2. |
