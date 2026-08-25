@@ -3,14 +3,14 @@
 | Campo | Valor |
 | --- | --- |
 | Producto | Fábrica de Geometría |
-| Versión del documento | 2.0 |
+| Versión del documento | 2.1 |
 | Estado | Aprobado |
 | Fecha | 2026-08-24 |
 | Stack principal | C# sobre .NET 10 —Blazor Interactive Server en el front, ASP.NET Core en el servicio de datos—, Entity Framework Core sobre SQLite, y TypeScript con webpack en el visor |
 | Composición | **2 unidades de entrega** y **7 proyectos de código** (ver §2) |
 | Unidad de entrega principal | `GeometriaFactory-Api` |
 | Documento | README raíz del producto |
-| Refleja | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **2.2**, derivado del intake **2.0** |
+| Refleja | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **4.0**, derivado del intake **3.0** |
 
 ---
 
@@ -106,7 +106,11 @@ El mapa completo, con el grafo, los contratos que cruzan fronteras y los riesgos
 `AG-01` → `AG-00010`, y así las catorce— y **se lee al revés para reconocer la forma anterior**.
 
 **Los dos rangos se reescribieron y no se enumeraron**, que es una decisión y no un automatismo:
-`AG-02 a AG-11` pasa a `AG-00020 a AG-00110`. Enumerar los once habría cambiado lo que la fila dice
+`AG-02 a AG-11` pasa a `AG-00020 a AG-00110`. **Son once y no diez**, y conviene decir cuál es el
+undécimo: además de los diez titulares de categoría —`02` a `11`— el intervalo contiene **`AG-00031`**,
+el subagente de fase que la 12.0 mapea desde `AG-03M`. **El rango nuevo lo dice mejor que el viejo**:
+`AG-00031` está inequívocamente dentro de `AG-00020 a AG-00110`, y no estaba inequívocamente dentro de
+`AG-02 a AG-11`. Enumerar los once habría cambiado lo que la fila dice
 —de un rango a una lista— sobre un conjunto que no cambió, y el mapeo de la 12.0 es token a token.
 
 **Y una ocurrencia de la forma anterior que queda deliberadamente sin tocar**: la fila **1.0** de §11
@@ -168,7 +172,7 @@ El producto está **especificado y en construcción**. La documentación está e
 | 11-Documentacion | Producto y las dos | **Planificado** |
 | Vista y pipeline de producto | Producto | Aprobado |
 
-**El árbol atravesó dos migraciones normativas**, 6.0 → 8.6 y 8.6 → 8.11, las dos cerradas y auditadas. Sus informes están en [`Audit/`](Audit/) y la procedencia vigente la declara el manifiesto §1.1.
+**El árbol atravesó seis migraciones normativas cerradas** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12 y 9.12 → 10.0—, **y la séptima, 10.0 → 13.3, está en curso** ([`Audit/Plan-Migracion-10.0-a-13.3.md`](Audit/Plan-Migracion-10.0-a-13.3.md) 1.2). Sus informes están en [`Audit/`](Audit/) y la procedencia vigente la declara el manifiesto §1.1.
 
 ### 7.2 Construcción
 
@@ -179,8 +183,10 @@ El producto está **especificado y en construcción**. La documentación está e
 | `c` · Administrador: alta inicial y sesión | Identidad del administrador, sesión y cambio de contraseña, persistidos | **Cerrada** |
 | `d` · Alumno: ciclo de vida de la cuenta | Registro, habilitación con provisoria, primer ingreso y reseteo de credencial | **Cerrada** |
 | `e` · Alta de trabajo y vista de trabajos | Alta, listado, reedición y eliminación de trabajos, y el listado de la comisión | **Cerrada** |
-| `f` · Importación y validación | — | **Siguiente** |
-| `g` a `i…` | — | No comenzadas |
+| `f` · Importación y validación | Interpretación del texto del alumno, la batería obligatoria de **diez** casos y el envío como única acción de guardado | **Cerrada** |
+| `g` · Visualización 3D | El dibujo de las piezas reconstruidas y el árbol del texto | **Cerrada** |
+| `h` · Circuito de revisión del administrador | Aprobación y rechazo con su comentario, y el desenlace visible para el alumno | **Cerrada** |
+| `i` · Despliegue real | **Su puerta está escrita y la fase no ocurrió**: `scripts/verify-stage-i.sh` con sus siete criterios, y `Audit/Medicion-PT-05.md` en `SIN MEDIR` | **Planificada, no ejecutada** |
 
 **El registro de cambios del código es [`../../changelog.md`](../../changelog.md)** y es la única fuente del avance de construcción: este README publica su resultado y no lo replica.
 
@@ -247,6 +253,7 @@ Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosario
 
 | Versión | Fecha | Descripción del cambio |
 | --- | --- | --- |
+| 2.1 | 2026-08-25 | **Cierra el hallazgo `C2-1` del audit independiente del corte del README raíz**, que fue **P1**: `Migracion-Rules.md` §4.3.1 no termina donde la emisión 2.0 lo citó. La oración siguiente del mismo párrafo dice que **«un documento cuyos recuentos también quedaron viejos no se reconecta a medias»**, porque reescribirle los identificadores y dejarle las cifras **«produce un documento que afirma cosas que nunca fueron ciertas, que es peor que uno viejo con su fecha declarada»** — y la 2.0 le puso fecha nueva, versión nueva e identificadores vigentes **a tres recuentos viejos**. Se corrigen contra su fuente, que es lo que la regla admite además de declararlos: **la cabecera** pasa de citar el manifiesto **2.2** e intake **2.0** a los vigentes **4.0** y **3.0**; **§7.1** pasa de «dos migraciones normativas» a **seis cerradas y la séptima en curso**; y **§7.2** deja de declarar `f` como «Siguiente» y `g` a `i…` como «No comenzadas» —el `changelog.md` tiene entrada propia para `f`, `g`, `h`, los prerrequisitos de `i` y su puerta— y publica las **ocho etapas cerradas** con la fase `i` **planificada y no ejecutada**. **Y el precedente estaba en este mismo documento**: la fila **1.5** reconectó punteros y **declaró lo que quedaba viejo**; la 2.0 no declaró nada, que es la diferencia que el audit señaló. Se cierran además **`C2-4`** —la nota bajo la Tabla A dice ahora **cuál es el undécimo del rango**, `AG-00031`, y por qué el rango nuevo lo dice mejor que el viejo— y se dejan registrados dos defectos que viven en el **mensaje de commit** de la 2.0 y que no se pueden editar allí: **`C2-2`**, el residuo de la forma anterior en este archivo es **14** y no 11 —la diferencia son las tres citas de `AG-ROOT`—, y **`C2-3`**, esos residuos caen en **dos** clases de exclusión de `SDD-Development-Guide.md` §VI.3.2 y no en una: **las filas de control de cambios** y **la declaración de la propia intervención**. Sube **minor**: corrige afirmaciones y no cambia ninguna decisión. |
 | 2.0 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4, corte del README raíz** (`Audit/Plan-Migracion-10.0-a-13.3.md` **1.2** §4.3). **La columna «Responsable» del mapa de documentación pasa a la forma vigente de la familia `AG`**: cinco filas, con el mapeo que el `CHANGELOG` del framework declara para su versión **12.0** —`AG-00` → `AG-00000`, `AG-01` → `AG-00010`, `AG-05, AG-09, AG-11` → `AG-00050, AG-00090, AG-00110`, y los dos rangos `AG-02 a AG-11` → `AG-00020 a AG-00110`—. **`Root-Rules.md` §4.4 es la regla que lo exige** —la Tabla A y su columna— y §9.2 aporta la forma; la 12.0 lo declara **campo bloqueante nuevo** para todo destino conforme. **Los rangos se reescriben y no se enumeran**, con su motivo escrito bajo la tabla: enumerar habría cambiado lo que la fila dice sobre un conjunto que no cambió. **Y la cita `AG-ROOT` de la fila 1.0 de esta misma tabla queda sin tocar, declarada**: es registro histórico, y reescribirla le haría decir a una emisión del 2026-08-11 algo que no dijo. **El destino no renumera el resto del corpus**: `Migracion-Rules.md` §4.3.1 declara que la renumeración de una familia del conjunto normativo **la hace el framework**, y acota el trabajo del destino a la cita de su mapa de documentación. Estado previo archivado en [`_legacy/2026-08-24/README-v1.6.md`](_legacy/2026-08-24/README-v1.6.md). Sube **major**, con el mismo criterio que la 09 adoptó en la ronda 2 del corte anterior: el salto de la regla que lo gobierna es major, y la clasificación se lee de la numeración. |
 | 1.6 | 2026-08-16 | **Reemisión sobre el modelo de dos ejes**, que cierra el hallazgo `N-01` del informe de migración 8.6 → 8.11. La 1.5 reconectó los punteros y **declaró que el contenido seguía siendo el del modelo anterior**; esta versión lo corrige en lugar de dejarlo declarado. **Cabecera**: la composición pasa de «7 proyectos de código» a **2 unidades de entrega y 7 proyectos de código**, el campo de proyecto principal pasa a **unidad de entrega principal**, y se declara que el documento refleja el `PRODUCT-MANIFEST` **2.2** —citaba el **1.3**—. **§2 se rehace entero**: de una tabla de siete proyectos de código con `Tipo D8` y `Redistribuible` —dos atributos que el modelo de dos ejes **no le asigna al proyecto de código**— pasa a **§2.1 el eje de entrega**, con las dos unidades, su D8, su integración en runtime y su `redistribuible`, y **§2.2 el eje de construcción**, con los siete proyectos de código, su identidad de código, sus dependencias de compilación y qué unidad compone cada uno, más la constancia de que la arista `Web → Api` vive en el grafo de integración y no en el de compilación. **§7 se parte en tres**: **7.1** documentación por categoría, con las dos migraciones normativas cerradas; **7.2 nueva**, el estado de construcción por etapa —`a` a `e` cerradas, `f` siguiente—, que reemplaza la afirmación «el producto está **especificado y todavía no construido**», falsa desde la etapa `c`; y **7.3**, donde este README **deja de replicar las magnitudes del producto** y remite a los documentos que las cuentan, con el fundamento: las que publicaba eran las anteriores a la consolidación —71 casos de uso, cuando `Api` tiene nueve y `Web` diez— y un índice que copia cifras las hereda viejas sin avisar. **§6** deja de predicar `redistribuible` y el tipo `rest-api` del proyecto de código y los predica de la unidad de entrega. Sube minor: ninguna decisión de producto cambia, y lo que se corrige es lo que el documento afirmaba de sí mismo. | Orquestador SDD |
 | 1.5 | 2026-08-16 | **Reconexión del mapa de documentación al árbol vigente**, por la verificación mecánica de la fase M5 de la migración 8.6 → 8.11, que encontró **siete enlaces colgados** en §4 y **tres rutas colgadas** en §8. Los diez apuntaban a `Proyectos/<nombre-del-proyecto-de-código>/`, **un árbol que la migración 6.0 → 8.6 reemplazó por `Unidades-Entrega/`** al mover el nivel de aplicación del proyecto de código a la unidad de entrega (framework 8.0). **§4**: las siete filas por proyecto de código pasan a **dos filas por unidad de entrega**, con la constancia de que los siete proyectos de código **no tienen árbol documental propio** y de dónde quedó el contenido de cada uno. **§8**: las tres rutas de puntos abiertos se reescriben sobre la unidad de entrega que hoy los contiene, nombrando la subsección del proyecto de código donde viven. **Reconexión de punteros por `Migracion-Rules.md` §4.3.1, no reemisión**: no se archivó el estado anterior porque no se reescribió ningún cuerpo. **Este documento conserva desactualizaciones de contenido que esta reparación NO toca y que quedan declaradas como hallazgo del informe de migración 8.6 → 8.11**: la cabecera y §2 citan el `PRODUCT-MANIFEST` **1.3** cuando el vigente es el **2.1**, §2 declara `tipo_unidad_entrega` (D8) y `redistribuible` **por proyecto de código** contra el modelo de dos ejes, §7 afirma que el producto está «especificado y todavía no construido» cuando el código está en la etapa `e`, y sus magnitudes son las anteriores a la consolidación. Repararlas es reemitir el documento, no reconectarlo. Sube minor. |
