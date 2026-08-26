@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Product-Backlog.md
-**Versión:** 4.0
+**Versión:** 4.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -177,61 +177,61 @@ Las **treinta** historias son las que [`../02-Especificacion-Funcional/Especific
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-00026](historias-usuario/US-00026-Conectar-Cada-Puerto-Con-Su-Adaptador-Y-Tomar-La-Configuracion.md) | Conectar cada puerto con su adaptador y tomar de configuración lo que el despliegue provee | Must | **No se estima** (§4.1) | Propuesta | CU-00010 | EP-00001 |
-| [US-00027](historias-usuario/US-00027-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md) | Aplicar las transformaciones de esquema al arrancar, sobre almacén inexistente | Must | **No se estima** (§4.1) | Propuesta | CU-00011 | EP-00001 |
-| [US-00028](historias-usuario/US-00028-Detener-El-Arranque-En-Lugar-De-Atender-Sobre-Un-Almacen-Dudoso.md) | Detener el arranque en lugar de atender peticiones sobre un almacén en el que no se puede confiar | Must | **No se estima** (§4.1) | Propuesta | CU-00011 | EP-00001 |
-| [US-00029](historias-usuario/US-00029-Responder-Por-El-Estado-Del-Servicio-Sin-Exigir-Acceso.md) | Responder por el estado del servicio en un punto que no exige acceso | Must | **No se estima** (§4.1) | Propuesta | CU-00011 | EP-00001 |
+| [US-00026](historias-usuario/US-00026-Conectar-Cada-Puerto-Con-Su-Adaptador-Y-Tomar-La-Configuracion.md) | Conectar cada puerto con su adaptador y tomar de configuración lo que el despliegue provee | Must | **No aplica** (§4.1) | Propuesta | CU-00010 | EP-00001 |
+| [US-00027](historias-usuario/US-00027-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md) | Aplicar las transformaciones de esquema al arrancar, sobre almacén inexistente | Must | **No aplica** (§4.1) | Propuesta | CU-00011 | EP-00001 |
+| [US-00028](historias-usuario/US-00028-Detener-El-Arranque-En-Lugar-De-Atender-Sobre-Un-Almacen-Dudoso.md) | Detener el arranque en lugar de atender peticiones sobre un almacén en el que no se puede confiar | Must | **No aplica** (§4.1) | Propuesta | CU-00011 | EP-00001 |
+| [US-00029](historias-usuario/US-00029-Responder-Por-El-Estado-Del-Servicio-Sin-Exigir-Acceso.md) | Responder por el estado del servicio en un punto que no exige acceso | Must | **No aplica** (§4.1) | Propuesta | CU-00011 | EP-00001 |
 
 ### 3.2 EP-00002 · Identidad del administrador y sesión
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-00001](historias-usuario/US-00001-Canjear-Correo-Y-Contrasena-Por-Un-Acceso-Firmado.md) | Canjear correo y contraseña por un acceso firmado con sus cuatro reclamos | Must | **No se estima** (§4.1) | Propuesta | CU-00001 | EP-00002 |
-| [US-00002](historias-usuario/US-00002-Responder-Credenciales-Invalidas-Sin-Declarar-Que-Campo-Fallo.md) | Responder credenciales inválidas **sin declarar cuál de los dos campos falló** | Must | **No se estima** (§4.1) | Propuesta | CU-00001 | EP-00002 |
-| [US-00003](historias-usuario/US-00003-Responder-Con-Motivo-A-La-Cuenta-Pendiente-O-Bloqueada.md) | Responder con motivo a la cuenta `Pendiente` o `Bloqueado` | Must | **No se estima** (§4.1) | Propuesta | CU-00001 | EP-00002 |
-| [US-00004](historias-usuario/US-00004-Rechazar-Toda-Peticion-Sin-Acceso-Vencido-O-Con-Firma-Ajena.md) | Rechazar toda petición sin acceso, con acceso vencido o con firma que no corresponde | Must | **No se estima** (§4.1) | Propuesta | CU-00002 | EP-00002 |
-| [US-00005](historias-usuario/US-00005-Exigir-El-Papel-Declarado-Por-Cada-Punto-De-Acceso.md) | Exigir el papel declarado por cada punto de acceso | Must | **No se estima** (§4.1) | Propuesta | CU-00002 | EP-00002 |
-| [US-00008](historias-usuario/US-00008-Configurar-La-Cuenta-De-Administrador-Solo-Mientras-No-Exista-Ninguna.md) | Configurar la cuenta de administrador sólo mientras no exista ninguna | Must | **No se estima** (§4.1) | Propuesta | CU-00003 | EP-00002 |
-| [US-00010](historias-usuario/US-00010-Cambiar-La-Contrasena-Propia-Exigiendo-La-Vigente.md) | Cambiar la contraseña propia exigiendo la vigente | Must | **No se estima** (§4.1) | Propuesta | CU-00003 | EP-00002 |
-| [US-00024](historias-usuario/US-00024-Traducir-Cada-Codigo-Del-Contrato-Al-Codigo-De-Respuesta.md) | Traducir cada código del contrato al código de respuesta que le corresponde | Must | **No se estima** (§4.1) | Propuesta | CU-00009 | EP-00002 |
-| [US-00025](historias-usuario/US-00025-Responder-Sin-Exponer-Direcciones-Internas-Y-Registrar-En-El-Servidor.md) | Responder sin exponer direcciones de servicios internos, y registrar del lado del servidor | Must | **No se estima** (§4.1) | Propuesta | CU-00009 | EP-00002 |
+| [US-00001](historias-usuario/US-00001-Canjear-Correo-Y-Contrasena-Por-Un-Acceso-Firmado.md) | Canjear correo y contraseña por un acceso firmado con sus cuatro reclamos | Must | **No aplica** (§4.1) | Propuesta | CU-00001 | EP-00002 |
+| [US-00002](historias-usuario/US-00002-Responder-Credenciales-Invalidas-Sin-Declarar-Que-Campo-Fallo.md) | Responder credenciales inválidas **sin declarar cuál de los dos campos falló** | Must | **No aplica** (§4.1) | Propuesta | CU-00001 | EP-00002 |
+| [US-00003](historias-usuario/US-00003-Responder-Con-Motivo-A-La-Cuenta-Pendiente-O-Bloqueada.md) | Responder con motivo a la cuenta `Pendiente` o `Bloqueado` | Must | **No aplica** (§4.1) | Propuesta | CU-00001 | EP-00002 |
+| [US-00004](historias-usuario/US-00004-Rechazar-Toda-Peticion-Sin-Acceso-Vencido-O-Con-Firma-Ajena.md) | Rechazar toda petición sin acceso, con acceso vencido o con firma que no corresponde | Must | **No aplica** (§4.1) | Propuesta | CU-00002 | EP-00002 |
+| [US-00005](historias-usuario/US-00005-Exigir-El-Papel-Declarado-Por-Cada-Punto-De-Acceso.md) | Exigir el papel declarado por cada punto de acceso | Must | **No aplica** (§4.1) | Propuesta | CU-00002 | EP-00002 |
+| [US-00008](historias-usuario/US-00008-Configurar-La-Cuenta-De-Administrador-Solo-Mientras-No-Exista-Ninguna.md) | Configurar la cuenta de administrador sólo mientras no exista ninguna | Must | **No aplica** (§4.1) | Propuesta | CU-00003 | EP-00002 |
+| [US-00010](historias-usuario/US-00010-Cambiar-La-Contrasena-Propia-Exigiendo-La-Vigente.md) | Cambiar la contraseña propia exigiendo la vigente | Must | **No aplica** (§4.1) | Propuesta | CU-00003 | EP-00002 |
+| [US-00024](historias-usuario/US-00024-Traducir-Cada-Codigo-Del-Contrato-Al-Codigo-De-Respuesta.md) | Traducir cada código del contrato al código de respuesta que le corresponde | Must | **No aplica** (§4.1) | Propuesta | CU-00009 | EP-00002 |
+| [US-00025](historias-usuario/US-00025-Responder-Sin-Exponer-Direcciones-Internas-Y-Registrar-En-El-Servidor.md) | Responder sin exponer direcciones de servicios internos, y registrar del lado del servidor | Must | **No aplica** (§4.1) | Propuesta | CU-00009 | EP-00002 |
 
 ### 3.3 EP-00003 · Ciclo de vida de la cuenta de alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-00006](historias-usuario/US-00006-Aplicar-La-Guardia-Del-Cambio-Pendiente-A-Todos-Los-Puntos-Salvo-Uno.md) | Aplicar la guardia del cambio de contraseña pendiente a todos los puntos salvo uno | Must | **No se estima** (§4.1) | Propuesta | CU-00002 | EP-00003 |
-| [US-00007](historias-usuario/US-00007-Registrar-Una-Cuenta-De-Alumno-Sin-Campo-De-Contrasena.md) | Registrar una cuenta de alumno sin campo de contraseña | Must | **No se estima** (§4.1) | Propuesta | CU-00003 | EP-00003 |
-| [US-00009](historias-usuario/US-00009-Cambiar-La-Contrasena-Propia-Con-La-Provisoria-Como-Vigente.md) | Cambiar la contraseña propia con la provisoria como vigente | Must | **No se estima** (§4.1) | Propuesta | CU-00003 | EP-00003 |
-| [US-00011](historias-usuario/US-00011-Listar-Las-Cuentas-De-La-Comision-Con-Su-Situacion-Y-Su-Marca.md) | Listar las cuentas de la comisión con su situación y su marca | Must | **No se estima** (§4.1) | Propuesta | CU-00004 | EP-00003 |
-| [US-00012](historias-usuario/US-00012-Cambiar-La-Situacion-De-Una-Cuenta-Con-Verificacion-De-Papel.md) | Cambiar la situación de una cuenta con verificación de papel | Must | **No se estima** (§4.1) | Propuesta | CU-00004 | EP-00003 |
-| [US-00013](historias-usuario/US-00013-Dar-De-Baja-Transportando-El-Correo-Escrito-Como-Confirmacion.md) | Dar de baja una cuenta transportando el correo escrito como confirmación | Must | **No se estima** (§4.1) | Propuesta | CU-00004 | EP-00003 |
-| [US-00014](historias-usuario/US-00014-Resetear-La-Contrasena-Y-Devolver-La-Provisoria-Una-Sola-Vez.md) | Resetear la contraseña de un alumno y devolver la provisoria **una sola vez** | Must | **No se estima** (§4.1) | Propuesta | CU-00005 | EP-00003 |
-| [US-00015](historias-usuario/US-00015-No-Exigir-Ni-Comprobar-La-Situacion-De-La-Cuenta-Al-Resetear.md) | No exigir ni comprobar la situación de la cuenta al resetear | Must | **No se estima** (§4.1) | Propuesta | CU-00005 | EP-00003 |
-| [US-00016](historias-usuario/US-00016-No-Registrar-La-Provisoria-En-Ninguna-Traza.md) | No registrar la provisoria en ninguna traza | Must | **No se estima** (§4.1) | Propuesta | CU-00005 | EP-00003 |
+| [US-00006](historias-usuario/US-00006-Aplicar-La-Guardia-Del-Cambio-Pendiente-A-Todos-Los-Puntos-Salvo-Uno.md) | Aplicar la guardia del cambio de contraseña pendiente a todos los puntos salvo uno | Must | **No aplica** (§4.1) | Propuesta | CU-00002 | EP-00003 |
+| [US-00007](historias-usuario/US-00007-Registrar-Una-Cuenta-De-Alumno-Sin-Campo-De-Contrasena.md) | Registrar una cuenta de alumno sin campo de contraseña | Must | **No aplica** (§4.1) | Propuesta | CU-00003 | EP-00003 |
+| [US-00009](historias-usuario/US-00009-Cambiar-La-Contrasena-Propia-Con-La-Provisoria-Como-Vigente.md) | Cambiar la contraseña propia con la provisoria como vigente | Must | **No aplica** (§4.1) | Propuesta | CU-00003 | EP-00003 |
+| [US-00011](historias-usuario/US-00011-Listar-Las-Cuentas-De-La-Comision-Con-Su-Situacion-Y-Su-Marca.md) | Listar las cuentas de la comisión con su situación y su marca | Must | **No aplica** (§4.1) | Propuesta | CU-00004 | EP-00003 |
+| [US-00012](historias-usuario/US-00012-Cambiar-La-Situacion-De-Una-Cuenta-Con-Verificacion-De-Papel.md) | Cambiar la situación de una cuenta con verificación de papel | Must | **No aplica** (§4.1) | Propuesta | CU-00004 | EP-00003 |
+| [US-00013](historias-usuario/US-00013-Dar-De-Baja-Transportando-El-Correo-Escrito-Como-Confirmacion.md) | Dar de baja una cuenta transportando el correo escrito como confirmación | Must | **No aplica** (§4.1) | Propuesta | CU-00004 | EP-00003 |
+| [US-00014](historias-usuario/US-00014-Resetear-La-Contrasena-Y-Devolver-La-Provisoria-Una-Sola-Vez.md) | Resetear la contraseña de un alumno y devolver la provisoria **una sola vez** | Must | **No aplica** (§4.1) | Propuesta | CU-00005 | EP-00003 |
+| [US-00015](historias-usuario/US-00015-No-Exigir-Ni-Comprobar-La-Situacion-De-La-Cuenta-Al-Resetear.md) | No exigir ni comprobar la situación de la cuenta al resetear | Must | **No aplica** (§4.1) | Propuesta | CU-00005 | EP-00003 |
+| [US-00016](historias-usuario/US-00016-No-Registrar-La-Provisoria-En-Ninguna-Traza.md) | No registrar la provisoria en ninguna traza | Must | **No aplica** (§4.1) | Propuesta | CU-00005 | EP-00003 |
 
 ### 3.4 EP-00004 · Gestión del trabajo
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-00019](historias-usuario/US-00019-Transportar-El-Texto-Original-Sin-Normalizarlo-En-El-Borde.md) | Transportar el texto original **sin normalizarlo en el borde** | Must | **No se estima** (§4.1) | Propuesta | CU-00006 | EP-00004 |
-| [US-00020](historias-usuario/US-00020-Eliminar-Un-Trabajo-Con-Los-Dos-Alcances-Forzando-La-Peticion.md) | Eliminar un trabajo con los dos alcances, verificado **forzando la petición** | Must | **No se estima** (§4.1) | Propuesta | CU-00006 | EP-00004 |
-| [US-00021](historias-usuario/US-00021-Listar-Trabajos-Sin-Parametro-Para-Pedir-Borradores-Ajenos.md) | Listar trabajos con el alcance ya decidido y sin parámetro para pedir borradores ajenos | Must | **No se estima** (§4.1) | Propuesta | CU-00007 | EP-00004 |
-| [US-00022](historias-usuario/US-00022-Devolver-El-Detalle-Con-Piezas-Componentes-Observaciones-Y-Comentario.md) | Devolver el detalle con piezas, componentes, observaciones y comentario | Must | **No se estima** (§4.1) | Propuesta | CU-00007 | EP-00004 |
+| [US-00019](historias-usuario/US-00019-Transportar-El-Texto-Original-Sin-Normalizarlo-En-El-Borde.md) | Transportar el texto original **sin normalizarlo en el borde** | Must | **No aplica** (§4.1) | Propuesta | CU-00006 | EP-00004 |
+| [US-00020](historias-usuario/US-00020-Eliminar-Un-Trabajo-Con-Los-Dos-Alcances-Forzando-La-Peticion.md) | Eliminar un trabajo con los dos alcances, verificado **forzando la petición** | Must | **No aplica** (§4.1) | Propuesta | CU-00006 | EP-00004 |
+| [US-00021](historias-usuario/US-00021-Listar-Trabajos-Sin-Parametro-Para-Pedir-Borradores-Ajenos.md) | Listar trabajos con el alcance ya decidido y sin parámetro para pedir borradores ajenos | Must | **No aplica** (§4.1) | Propuesta | CU-00007 | EP-00004 |
+| [US-00022](historias-usuario/US-00022-Devolver-El-Detalle-Con-Piezas-Componentes-Observaciones-Y-Comentario.md) | Devolver el detalle con piezas, componentes, observaciones y comentario | Must | **No aplica** (§4.1) | Propuesta | CU-00007 | EP-00004 |
 
 ### 3.5 EP-00005 · Interpretación y verificación del dato del alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-00017](historias-usuario/US-00017-Enviar-Un-Trabajo-Nuevo-Y-Recibir-El-Estado-Que-La-Interpretacion-Decidio.md) | Enviar un trabajo nuevo y recibir el estado que la interpretación decidió | Must | **No se estima** (§4.1) | Propuesta | CU-00006 | EP-00005 |
-| [US-00018](historias-usuario/US-00018-Reenviar-Un-Trabajo-En-Borrador-Con-El-Texto-Que-La-Persona-Volvio-A-Pegar.md) | Reenviar un trabajo en `Borrador` con el texto que la persona volvió a pegar | Must | **No se estima** (§4.1) | Propuesta | CU-00006 | EP-00005 |
+| [US-00017](historias-usuario/US-00017-Enviar-Un-Trabajo-Nuevo-Y-Recibir-El-Estado-Que-La-Interpretacion-Decidio.md) | Enviar un trabajo nuevo y recibir el estado que la interpretación decidió | Must | **No aplica** (§4.1) | Propuesta | CU-00006 | EP-00005 |
+| [US-00018](historias-usuario/US-00018-Reenviar-Un-Trabajo-En-Borrador-Con-El-Texto-Que-La-Persona-Volvio-A-Pegar.md) | Reenviar un trabajo en `Borrador` con el texto que la persona volvió a pegar | Must | **No aplica** (§4.1) | Propuesta | CU-00006 | EP-00005 |
 
 ### 3.6 EP-00006 · Desenlace de la entrega
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-00023](historias-usuario/US-00023-Aprobar-O-Rechazar-Un-Trabajo-En-Estado-Pendiente.md) | Aprobar o rechazar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No se estima** (§4.1) | Propuesta | CU-00008 | EP-00006 |
-| [US-00030](historias-usuario/US-00030-Ejercitar-La-Superficie-Con-Una-Coleccion-Reproducible.md) | Ejercitar la superficie con una colección reproducible en cinco pasos o menos | **Should** | **No se estima** (§4.1) | Propuesta | CU-00012 | EP-00006 |
+| [US-00023](historias-usuario/US-00023-Aprobar-O-Rechazar-Un-Trabajo-En-Estado-Pendiente.md) | Aprobar o rechazar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No aplica** (§4.1) | Propuesta | CU-00008 | EP-00006 |
+| [US-00030](historias-usuario/US-00030-Ejercitar-La-Superficie-Con-Una-Coleccion-Reproducible.md) | Ejercitar la superficie con una colección reproducible en cinco pasos o menos | **Should** | **No aplica** (§4.1) | Propuesta | CU-00012 | EP-00006 |
 
 ### 3.2 `GeometriaFactory-Domain`
 
@@ -245,53 +245,53 @@ Sin historias. La etapa `a` es un hito interno sin capacidad funcional asociada,
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-02007](historias-usuario/US-02007-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md) | Reemplazar la credencial derivada exigiendo la vigente | Must | **No se estima** (§4.1) | Propuesta | CU-02003 | EP-02002 |
-| [US-02008](historias-usuario/US-02008-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Evaluar la admisibilidad de la cuenta y devolver su motivo | Must | **No se estima** (§4.1) | Propuesta | CU-02004 | EP-02002 |
-| [US-02024](historias-usuario/US-02024-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Configurar la cuenta de administrador en el primer arranque, habilitada y con credencial | Must | **No se estima** (§4.1) | Propuesta | CU-02012 | EP-02002 |
-| [US-02025](historias-usuario/US-02025-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md) | Rechazar la configuración de un segundo administrador | Must | **No se estima** (§4.1) | Propuesta | CU-02012 | EP-02002 |
+| [US-02007](historias-usuario/US-02007-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md) | Reemplazar la credencial derivada exigiendo la vigente | Must | **No aplica** (§4.1) | Propuesta | CU-02003 | EP-02002 |
+| [US-02008](historias-usuario/US-02008-Evaluar-La-Admisibilidad-De-La-Cuenta.md) | Evaluar la admisibilidad de la cuenta y devolver su motivo | Must | **No aplica** (§4.1) | Propuesta | CU-02004 | EP-02002 |
+| [US-02024](historias-usuario/US-02024-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Configurar la cuenta de administrador en el primer arranque, habilitada y con credencial | Must | **No aplica** (§4.1) | Propuesta | CU-02012 | EP-02002 |
+| [US-02025](historias-usuario/US-02025-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md) | Rechazar la configuración de un segundo administrador | Must | **No aplica** (§4.1) | Propuesta | CU-02012 | EP-02002 |
 
 ### 3.3 EP-02003 · Ciclo de vida de la cuenta de alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-02001](historias-usuario/US-02001-Constituir-Un-Alumno-Con-Cuenta-Pendiente-Y-Sin-Credencial.md) | Constituir un alumno con cuenta `Pendiente` y sin credencial | Must | **No se estima** (§4.1) | Propuesta | CU-02001 | EP-02003 |
-| [US-02002](historias-usuario/US-02002-Rechazar-El-Alta-Con-Datos-Obligatorios-Ausentes.md) | Rechazar el alta con datos obligatorios ausentes | Must | **No se estima** (§4.1) | Propuesta | CU-02001 | EP-02003 |
-| [US-02003](historias-usuario/US-02003-Exigir-La-Unicidad-Del-Correo-Verificada-En-El-Alta.md) | Exigir la unicidad del correo verificada en el alta | Must | **No se estima** (§4.1) | Propuesta | CU-02001 | EP-02003 |
-| [US-02004](historias-usuario/US-02004-Habilitar-Bloquear-Y-Rehabilitar-Una-Cuenta.md) | Habilitar, bloquear y rehabilitar una cuenta | Must | **No se estima** (§4.1) | Propuesta | CU-02002 | EP-02003 |
-| [US-02005](historias-usuario/US-02005-Dar-De-Baja-Una-Cuenta-Arrastrando-Sus-Trabajos.md) | Dar de baja una cuenta arrastrando sus trabajos en cualquier estado | Must | **No se estima** (§4.1) | Propuesta | CU-02002 | EP-02003 |
-| [US-02006](historias-usuario/US-02006-Fijar-La-Credencial-Provisoria-En-El-Acto-De-Habilitacion.md) | Fijar la credencial derivada provisoria en el acto de habilitación | Must | **No se estima** (§4.1) | Propuesta | CU-02003, CU-02002 | EP-02003 |
-| [US-02026](historias-usuario/US-02026-Resetear-La-Contrasena-Conservando-Cuenta-Y-Trabajos.md) | Resetear la contraseña de un alumno conservando su cuenta y todos sus trabajos | Must | **No se estima** (§4.1) | Propuesta | CU-02013 | EP-02003 |
-| [US-02027](historias-usuario/US-02027-Exigir-El-Cambio-De-La-Provisoria-Antes-De-Toda-Otra-Capacidad.md) | Exigir el cambio de la contraseña provisoria antes de toda otra capacidad, y levantar la marca al cambiarla | Must | **No se estima** (§4.1) | Propuesta | CU-02004, CU-02003 | EP-02003 |
+| [US-02001](historias-usuario/US-02001-Constituir-Un-Alumno-Con-Cuenta-Pendiente-Y-Sin-Credencial.md) | Constituir un alumno con cuenta `Pendiente` y sin credencial | Must | **No aplica** (§4.1) | Propuesta | CU-02001 | EP-02003 |
+| [US-02002](historias-usuario/US-02002-Rechazar-El-Alta-Con-Datos-Obligatorios-Ausentes.md) | Rechazar el alta con datos obligatorios ausentes | Must | **No aplica** (§4.1) | Propuesta | CU-02001 | EP-02003 |
+| [US-02003](historias-usuario/US-02003-Exigir-La-Unicidad-Del-Correo-Verificada-En-El-Alta.md) | Exigir la unicidad del correo verificada en el alta | Must | **No aplica** (§4.1) | Propuesta | CU-02001 | EP-02003 |
+| [US-02004](historias-usuario/US-02004-Habilitar-Bloquear-Y-Rehabilitar-Una-Cuenta.md) | Habilitar, bloquear y rehabilitar una cuenta | Must | **No aplica** (§4.1) | Propuesta | CU-02002 | EP-02003 |
+| [US-02005](historias-usuario/US-02005-Dar-De-Baja-Una-Cuenta-Arrastrando-Sus-Trabajos.md) | Dar de baja una cuenta arrastrando sus trabajos en cualquier estado | Must | **No aplica** (§4.1) | Propuesta | CU-02002 | EP-02003 |
+| [US-02006](historias-usuario/US-02006-Fijar-La-Credencial-Provisoria-En-El-Acto-De-Habilitacion.md) | Fijar la credencial derivada provisoria en el acto de habilitación | Must | **No aplica** (§4.1) | Propuesta | CU-02003, CU-02002 | EP-02003 |
+| [US-02026](historias-usuario/US-02026-Resetear-La-Contrasena-Conservando-Cuenta-Y-Trabajos.md) | Resetear la contraseña de un alumno conservando su cuenta y todos sus trabajos | Must | **No aplica** (§4.1) | Propuesta | CU-02013 | EP-02003 |
+| [US-02027](historias-usuario/US-02027-Exigir-El-Cambio-De-La-Provisoria-Antes-De-Toda-Otra-Capacidad.md) | Exigir el cambio de la contraseña provisoria antes de toda otra capacidad, y levantar la marca al cambiarla | Must | **No aplica** (§4.1) | Propuesta | CU-02004, CU-02003 | EP-02003 |
 
 ### 3.4 EP-02004 · Gestión del trabajo
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-02009](historias-usuario/US-02009-Constituir-Un-Trabajo-Con-Dueno-Identidad-Y-Texto-Original.md) | Constituir un trabajo con dueño, identidad propia y texto original | Must | **No se estima** (§4.1) | Propuesta | CU-02005 | EP-02004 |
-| [US-02010](historias-usuario/US-02010-Reeditar-Un-Trabajo-En-Borrador-Descartando-La-Interpretacion-Anterior.md) | Reeditar un trabajo en `Borrador` descartando la interpretación anterior | Must | **No se estima** (§4.1) | Propuesta | CU-02005 | EP-02004 |
-| [US-02018](historias-usuario/US-02018-Resolver-La-Pertenencia-De-Un-Trabajo-A-Su-Dueno.md) | Resolver la pertenencia de un trabajo a su dueño | Must | **No se estima** (§4.1) | Propuesta | CU-02009 | EP-02004 |
-| [US-02019](historias-usuario/US-02019-Acotar-Al-Borrador-Lo-Que-El-Alumno-Reedita-Y-Elimina.md) | Acotar al estado `Borrador` lo que el alumno reedita y elimina | Must | **No se estima** (§4.1) | Propuesta | CU-02009 | EP-02004 |
-| [US-02022](historias-usuario/US-02022-Excluir-Los-Borradores-Del-Alcance-Del-Administrador.md) | Excluir los trabajos en `Borrador` del alcance del administrador | Must | **No se estima** (§4.1) | Propuesta | CU-02011 | EP-02004 |
+| [US-02009](historias-usuario/US-02009-Constituir-Un-Trabajo-Con-Dueno-Identidad-Y-Texto-Original.md) | Constituir un trabajo con dueño, identidad propia y texto original | Must | **No aplica** (§4.1) | Propuesta | CU-02005 | EP-02004 |
+| [US-02010](historias-usuario/US-02010-Reeditar-Un-Trabajo-En-Borrador-Descartando-La-Interpretacion-Anterior.md) | Reeditar un trabajo en `Borrador` descartando la interpretación anterior | Must | **No aplica** (§4.1) | Propuesta | CU-02005 | EP-02004 |
+| [US-02018](historias-usuario/US-02018-Resolver-La-Pertenencia-De-Un-Trabajo-A-Su-Dueno.md) | Resolver la pertenencia de un trabajo a su dueño | Must | **No aplica** (§4.1) | Propuesta | CU-02009 | EP-02004 |
+| [US-02019](historias-usuario/US-02019-Acotar-Al-Borrador-Lo-Que-El-Alumno-Reedita-Y-Elimina.md) | Acotar al estado `Borrador` lo que el alumno reedita y elimina | Must | **No aplica** (§4.1) | Propuesta | CU-02009 | EP-02004 |
+| [US-02022](historias-usuario/US-02022-Excluir-Los-Borradores-Del-Alcance-Del-Administrador.md) | Excluir los trabajos en `Borrador` del alcance del administrador | Must | **No aplica** (§4.1) | Propuesta | CU-02011 | EP-02004 |
 
 ### 3.5 EP-02005 · Interpretación y verificación del dato del alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-02011](historias-usuario/US-02011-Reconstruir-El-Conjunto-De-Piezas-Con-Identidad-Posicional.md) | Reconstruir el conjunto de piezas con identidad posicional | Must | **No se estima** (§4.1) | Propuesta | CU-02006 | EP-02005 |
-| [US-02012](historias-usuario/US-02012-Derivar-La-Familia-Plana-O-Volumetrica-Desde-El-Tipo.md) | Derivar la familia plana o volumétrica desde el tipo | Should | **No se estima** (§4.1) | Propuesta | CU-02006 | EP-02005 |
-| [US-02013](historias-usuario/US-02013-Registrar-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md) | Registrar advertencias con el valor declarado y el derivado | Must | **No se estima** (§4.1) | Propuesta | CU-02007 | EP-02005 |
-| [US-02014](historias-usuario/US-02014-Registrar-Errores-De-Validacion-Con-Posicion-De-Pieza-Y-Campo.md) | Registrar errores de validación con posición de pieza y campo | Must | **No se estima** (§4.1) | Propuesta | CU-02007 | EP-02005 |
-| [US-02015](historias-usuario/US-02015-Enviar-Un-Trabajo-Que-Verifica-Y-Pasa-A-Estado-Pendiente.md) | Enviar un trabajo que verifica y pasa a estado `Pendiente` | Must | **No se estima** (§4.1) | Propuesta | CU-02008 | EP-02005 |
-| [US-02016](historias-usuario/US-02016-Enviar-Un-Trabajo-Que-No-Verifica-Y-Queda-En-Borrador.md) | Enviar un trabajo que no verifica y queda en `Borrador` con sus errores | Must | **No se estima** (§4.1) | Propuesta | CU-02008 | EP-02005 |
-| [US-02017](historias-usuario/US-02017-Rechazar-Toda-Transicion-Desde-Un-Estado-Terminal.md) | Rechazar toda transición desde un estado terminal | Must | **No se estima** (§4.1) | Propuesta | CU-02008 | EP-02005 |
+| [US-02011](historias-usuario/US-02011-Reconstruir-El-Conjunto-De-Piezas-Con-Identidad-Posicional.md) | Reconstruir el conjunto de piezas con identidad posicional | Must | **No aplica** (§4.1) | Propuesta | CU-02006 | EP-02005 |
+| [US-02012](historias-usuario/US-02012-Derivar-La-Familia-Plana-O-Volumetrica-Desde-El-Tipo.md) | Derivar la familia plana o volumétrica desde el tipo | Should | **No aplica** (§4.1) | Propuesta | CU-02006 | EP-02005 |
+| [US-02013](historias-usuario/US-02013-Registrar-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md) | Registrar advertencias con el valor declarado y el derivado | Must | **No aplica** (§4.1) | Propuesta | CU-02007 | EP-02005 |
+| [US-02014](historias-usuario/US-02014-Registrar-Errores-De-Validacion-Con-Posicion-De-Pieza-Y-Campo.md) | Registrar errores de validación con posición de pieza y campo | Must | **No aplica** (§4.1) | Propuesta | CU-02007 | EP-02005 |
+| [US-02015](historias-usuario/US-02015-Enviar-Un-Trabajo-Que-Verifica-Y-Pasa-A-Estado-Pendiente.md) | Enviar un trabajo que verifica y pasa a estado `Pendiente` | Must | **No aplica** (§4.1) | Propuesta | CU-02008 | EP-02005 |
+| [US-02016](historias-usuario/US-02016-Enviar-Un-Trabajo-Que-No-Verifica-Y-Queda-En-Borrador.md) | Enviar un trabajo que no verifica y queda en `Borrador` con sus errores | Must | **No aplica** (§4.1) | Propuesta | CU-02008 | EP-02005 |
+| [US-02017](historias-usuario/US-02017-Rechazar-Toda-Transicion-Desde-Un-Estado-Terminal.md) | Rechazar toda transición desde un estado terminal | Must | **No aplica** (§4.1) | Propuesta | CU-02008 | EP-02005 |
 
 ### 3.6 EP-02006 · Desenlace de la entrega
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-02020](historias-usuario/US-02020-Aprobar-Un-Trabajo-En-Estado-Pendiente.md) | Aprobar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No se estima** (§4.1) | Propuesta | CU-02010 | EP-02006 |
-| [US-02021](historias-usuario/US-02021-Rechazar-Un-Trabajo-En-Estado-Pendiente.md) | Rechazar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No se estima** (§4.1) | Propuesta | CU-02010 | EP-02006 |
-| [US-02023](historias-usuario/US-02023-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md) | Eliminar por el administrador en los tres estados que ve | Must | **No se estima** (§4.1) | Propuesta | CU-02011 | EP-02006 |
+| [US-02020](historias-usuario/US-02020-Aprobar-Un-Trabajo-En-Estado-Pendiente.md) | Aprobar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No aplica** (§4.1) | Propuesta | CU-02010 | EP-02006 |
+| [US-02021](historias-usuario/US-02021-Rechazar-Un-Trabajo-En-Estado-Pendiente.md) | Rechazar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No aplica** (§4.1) | Propuesta | CU-02010 | EP-02006 |
+| [US-02023](historias-usuario/US-02023-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md) | Eliminar por el administrador en los tres estados que ve | Must | **No aplica** (§4.1) | Propuesta | CU-02011 | EP-02006 |
 
 ### 3.3 `GeometriaFactory-Application`
 
@@ -305,58 +305,58 @@ Sin historias. La etapa `a` es un hito interno sin capacidad funcional asociada,
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-04003](historias-usuario/US-04003-Configurar-La-Cuenta-De-Administrador-Con-Su-Ventana-De-Alta.md) | Configurar la cuenta de administrador con su ventana de alta | Must | **No se estima** (§4.1) | Propuesta | CU-04010 | EP-04002 |
-| [US-04007](historias-usuario/US-04007-Devolver-El-Motivo-De-Una-Cuenta-Que-No-Admite-Ingreso.md) | Devolver el motivo de una cuenta que no admite ingreso | Must | **No se estima** (§4.1) | Propuesta | CU-04003 | EP-04002 |
-| [US-04009](historias-usuario/US-04009-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md) | Reemplazar la credencial derivada exigiendo la verificación de la vigente | Must | **No se estima** (§4.1) | Propuesta | CU-04003 | EP-04002 |
-| [US-04028](historias-usuario/US-04028-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md) | Rechazar la configuración de un segundo administrador | Must | **No se estima** (§4.1) | Propuesta | CU-04010 | EP-04002 |
+| [US-04003](historias-usuario/US-04003-Configurar-La-Cuenta-De-Administrador-Con-Su-Ventana-De-Alta.md) | Configurar la cuenta de administrador con su ventana de alta | Must | **No aplica** (§4.1) | Propuesta | CU-04010 | EP-04002 |
+| [US-04007](historias-usuario/US-04007-Devolver-El-Motivo-De-Una-Cuenta-Que-No-Admite-Ingreso.md) | Devolver el motivo de una cuenta que no admite ingreso | Must | **No aplica** (§4.1) | Propuesta | CU-04003 | EP-04002 |
+| [US-04009](historias-usuario/US-04009-Reemplazar-La-Credencial-Derivada-Exigiendo-La-Vigente.md) | Reemplazar la credencial derivada exigiendo la verificación de la vigente | Must | **No aplica** (§4.1) | Propuesta | CU-04003 | EP-04002 |
+| [US-04028](historias-usuario/US-04028-Rechazar-La-Configuracion-De-Un-Segundo-Administrador.md) | Rechazar la configuración de un segundo administrador | Must | **No aplica** (§4.1) | Propuesta | CU-04010 | EP-04002 |
 
 ### 3.3 EP-04003 · Ciclo de vida de la cuenta de alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-04001](historias-usuario/US-04001-Constituir-Una-Cuenta-De-Alumno-Pendiente-Y-Sin-Credencial.md) | Constituir una cuenta de alumno en estado `Pendiente` y sin credencial | Must | **No se estima** (§4.1) | Propuesta | CU-04001 | EP-04003 |
-| [US-04002](historias-usuario/US-04002-Rechazar-El-Alta-Con-Un-Correo-Ya-Registrado.md) | Rechazar el alta con un correo ya registrado | Must | **No se estima** (§4.1) | Propuesta | CU-04001 | EP-04003 |
-| [US-04004](historias-usuario/US-04004-Habilitar-Bloquear-Y-Rehabilitar-Con-Verificacion-De-Facultad.md) | Habilitar, bloquear y rehabilitar una cuenta con verificación de facultad | Must | **No se estima** (§4.1) | Propuesta | CU-04002 | EP-04003 |
-| [US-04005](historias-usuario/US-04005-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Como-Confirmacion.md) | Dar de baja una cuenta exigiendo el correo escrito como confirmación | Must | **No se estima** (§4.1) | Propuesta | CU-04002 | EP-04003 |
-| [US-04006](historias-usuario/US-04006-Arrastrar-En-La-Baja-Todos-Los-Trabajos-De-La-Cuenta.md) | Arrastrar en la baja todos los trabajos de la cuenta, en cualquier estado | Must | **No se estima** (§4.1) | Propuesta | CU-04002 | EP-04003 |
-| [US-04008](historias-usuario/US-04008-Fijar-La-Credencial-Derivada-Provisoria-Dentro-De-La-Habilitacion.md) | Fijar la credencial derivada provisoria dentro de la habilitación | Must | **No se estima** (§4.1) | Propuesta | CU-04003, CU-04002 | EP-04003 |
-| [US-04029](historias-usuario/US-04029-Resetear-La-Contrasena-De-Un-Alumno-Con-Verificacion-De-Facultad.md) | Resetear la contraseña de un alumno fijando una provisoria, con verificación de facultad | Must | **No se estima** (§4.1) | Propuesta | CU-04011 | EP-04003 |
-| [US-04030](historias-usuario/US-04030-Impedir-Que-Una-Cuenta-Marcada-Ejerza-Cualquier-Otra-Capacidad.md) | Impedir que una cuenta con cambio de contraseña pendiente ejerza cualquier otra capacidad | Must | **No se estima** (§4.1) | Propuesta | CU-04011, y la comprobación transversal de `02` §4 | EP-04003 |
-| [US-04031](historias-usuario/US-04031-Conservar-La-Cuenta-Su-Estado-Y-Todos-Sus-Trabajos-Tras-El-Reseteo.md) | Conservar la cuenta, su estado de habilitación y todos sus trabajos después del reseteo | Must | **No se estima** (§4.1) | Propuesta | CU-04011 | EP-04003 |
-| [US-04032](historias-usuario/US-04032-Levantar-La-Marca-Con-El-Cambio-Hecho-Por-La-Propia-Cuenta.md) | Levantar la marca con el cambio efectivo hecho por la propia cuenta, y sólo con él | Must | **No se estima** (§4.1) | Propuesta | CU-04003 | EP-04003 |
+| [US-04001](historias-usuario/US-04001-Constituir-Una-Cuenta-De-Alumno-Pendiente-Y-Sin-Credencial.md) | Constituir una cuenta de alumno en estado `Pendiente` y sin credencial | Must | **No aplica** (§4.1) | Propuesta | CU-04001 | EP-04003 |
+| [US-04002](historias-usuario/US-04002-Rechazar-El-Alta-Con-Un-Correo-Ya-Registrado.md) | Rechazar el alta con un correo ya registrado | Must | **No aplica** (§4.1) | Propuesta | CU-04001 | EP-04003 |
+| [US-04004](historias-usuario/US-04004-Habilitar-Bloquear-Y-Rehabilitar-Con-Verificacion-De-Facultad.md) | Habilitar, bloquear y rehabilitar una cuenta con verificación de facultad | Must | **No aplica** (§4.1) | Propuesta | CU-04002 | EP-04003 |
+| [US-04005](historias-usuario/US-04005-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Como-Confirmacion.md) | Dar de baja una cuenta exigiendo el correo escrito como confirmación | Must | **No aplica** (§4.1) | Propuesta | CU-04002 | EP-04003 |
+| [US-04006](historias-usuario/US-04006-Arrastrar-En-La-Baja-Todos-Los-Trabajos-De-La-Cuenta.md) | Arrastrar en la baja todos los trabajos de la cuenta, en cualquier estado | Must | **No aplica** (§4.1) | Propuesta | CU-04002 | EP-04003 |
+| [US-04008](historias-usuario/US-04008-Fijar-La-Credencial-Derivada-Provisoria-Dentro-De-La-Habilitacion.md) | Fijar la credencial derivada provisoria dentro de la habilitación | Must | **No aplica** (§4.1) | Propuesta | CU-04003, CU-04002 | EP-04003 |
+| [US-04029](historias-usuario/US-04029-Resetear-La-Contrasena-De-Un-Alumno-Con-Verificacion-De-Facultad.md) | Resetear la contraseña de un alumno fijando una provisoria, con verificación de facultad | Must | **No aplica** (§4.1) | Propuesta | CU-04011 | EP-04003 |
+| [US-04030](historias-usuario/US-04030-Impedir-Que-Una-Cuenta-Marcada-Ejerza-Cualquier-Otra-Capacidad.md) | Impedir que una cuenta con cambio de contraseña pendiente ejerza cualquier otra capacidad | Must | **No aplica** (§4.1) | Propuesta | CU-04011, y la comprobación transversal de `02` §4 | EP-04003 |
+| [US-04031](historias-usuario/US-04031-Conservar-La-Cuenta-Su-Estado-Y-Todos-Sus-Trabajos-Tras-El-Reseteo.md) | Conservar la cuenta, su estado de habilitación y todos sus trabajos después del reseteo | Must | **No aplica** (§4.1) | Propuesta | CU-04011 | EP-04003 |
+| [US-04032](historias-usuario/US-04032-Levantar-La-Marca-Con-El-Cambio-Hecho-Por-La-Propia-Cuenta.md) | Levantar la marca con el cambio efectivo hecho por la propia cuenta, y sólo con él | Must | **No aplica** (§4.1) | Propuesta | CU-04003 | EP-04003 |
 
 ### 3.4 EP-04004 · Gestión del trabajo
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-04010](historias-usuario/US-04010-Cargar-Un-Trabajo-Con-Dueno-Identificador-Propio-Y-Sello-Del-Reloj.md) | Cargar un trabajo con dueño, identificador propio y sello tomado del reloj | Must | **No se estima** (§4.1) | Propuesta | CU-04004 | EP-04004 |
-| [US-04011](historias-usuario/US-04011-Conservar-El-Texto-Original-Integro-Al-Cargar-Y-Al-Reeditar.md) | Conservar el texto original íntegro al cargar y al reeditar | Must | **No se estima** (§4.1) | Propuesta | CU-04004 | EP-04004 |
-| [US-04012](historias-usuario/US-04012-Reeditar-Solo-Un-Trabajo-Propio-En-Borrador.md) | Reeditar sólo un trabajo propio en `Borrador`, descartando la interpretación anterior | Must | **No se estima** (§4.1) | Propuesta | CU-04004 | EP-04004 |
-| [US-04017](historias-usuario/US-04017-Listar-Los-Trabajos-Propios-Con-Los-Cuatro-Estados-Distinguibles.md) | Listar los trabajos propios con los cuatro estados distinguibles | Must | **No se estima** (§4.1) | Propuesta | CU-04006 | EP-04004 |
-| [US-04019](historias-usuario/US-04019-Devolver-El-Detalle-Con-Piezas-Y-Componentes-Y-El-Listado-Sin-Componentes.md) | Devolver el detalle con piezas y componentes, y el listado sin componentes | Must | **No se estima** (§4.1) | Propuesta | CU-04006 | EP-04004 |
-| [US-04020](historias-usuario/US-04020-Listar-Los-Trabajos-De-La-Comision-Excluyendo-Los-Borradores.md) | Listar los trabajos de la comisión excluyendo los borradores | Must | **No se estima** (§4.1) | Propuesta | CU-04007 | EP-04004 |
-| [US-04021](historias-usuario/US-04021-Filtrar-El-Listado-De-La-Comision-Por-Alumno.md) | Filtrar el listado de la comisión por alumno, con el recorte vigente | Must | **No se estima** (§4.1) | Propuesta | CU-04007 | EP-04004 |
-| [US-04022](historias-usuario/US-04022-Abrir-El-Detalle-De-Un-Trabajo-De-La-Comision.md) | Abrir el detalle de un trabajo de la comisión con los mismos elementos que ve el alumno | Must | **No se estima** (§4.1) | Propuesta | CU-04007 | EP-04004 |
-| [US-04026](historias-usuario/US-04026-Eliminar-Un-Trabajo-Propio-Solo-En-Borrador.md) | Eliminar un trabajo propio sólo en `Borrador` | Must | **No se estima** (§4.1) | Propuesta | CU-04009 | EP-04004 |
+| [US-04010](historias-usuario/US-04010-Cargar-Un-Trabajo-Con-Dueno-Identificador-Propio-Y-Sello-Del-Reloj.md) | Cargar un trabajo con dueño, identificador propio y sello tomado del reloj | Must | **No aplica** (§4.1) | Propuesta | CU-04004 | EP-04004 |
+| [US-04011](historias-usuario/US-04011-Conservar-El-Texto-Original-Integro-Al-Cargar-Y-Al-Reeditar.md) | Conservar el texto original íntegro al cargar y al reeditar | Must | **No aplica** (§4.1) | Propuesta | CU-04004 | EP-04004 |
+| [US-04012](historias-usuario/US-04012-Reeditar-Solo-Un-Trabajo-Propio-En-Borrador.md) | Reeditar sólo un trabajo propio en `Borrador`, descartando la interpretación anterior | Must | **No aplica** (§4.1) | Propuesta | CU-04004 | EP-04004 |
+| [US-04017](historias-usuario/US-04017-Listar-Los-Trabajos-Propios-Con-Los-Cuatro-Estados-Distinguibles.md) | Listar los trabajos propios con los cuatro estados distinguibles | Must | **No aplica** (§4.1) | Propuesta | CU-04006 | EP-04004 |
+| [US-04019](historias-usuario/US-04019-Devolver-El-Detalle-Con-Piezas-Y-Componentes-Y-El-Listado-Sin-Componentes.md) | Devolver el detalle con piezas y componentes, y el listado sin componentes | Must | **No aplica** (§4.1) | Propuesta | CU-04006 | EP-04004 |
+| [US-04020](historias-usuario/US-04020-Listar-Los-Trabajos-De-La-Comision-Excluyendo-Los-Borradores.md) | Listar los trabajos de la comisión excluyendo los borradores | Must | **No aplica** (§4.1) | Propuesta | CU-04007 | EP-04004 |
+| [US-04021](historias-usuario/US-04021-Filtrar-El-Listado-De-La-Comision-Por-Alumno.md) | Filtrar el listado de la comisión por alumno, con el recorte vigente | Must | **No aplica** (§4.1) | Propuesta | CU-04007 | EP-04004 |
+| [US-04022](historias-usuario/US-04022-Abrir-El-Detalle-De-Un-Trabajo-De-La-Comision.md) | Abrir el detalle de un trabajo de la comisión con los mismos elementos que ve el alumno | Must | **No aplica** (§4.1) | Propuesta | CU-04007 | EP-04004 |
+| [US-04026](historias-usuario/US-04026-Eliminar-Un-Trabajo-Propio-Solo-En-Borrador.md) | Eliminar un trabajo propio sólo en `Borrador` | Must | **No aplica** (§4.1) | Propuesta | CU-04009 | EP-04004 |
 
 ### 3.5 EP-04005 · Interpretación y verificación del dato del alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-04013](historias-usuario/US-04013-Enviar-Un-Trabajo-Con-Advertencias-Y-Que-Pase-A-Estado-Pendiente.md) | Enviar un trabajo con advertencias y que pase a estado `Pendiente` | Must | **No se estima** (§4.1) | Propuesta | CU-04005 | EP-04005 |
-| [US-04014](historias-usuario/US-04014-Enviar-Un-Trabajo-Con-Errores-Y-Que-Quede-En-Borrador.md) | Enviar un trabajo con errores de validación y que quede en `Borrador` con su ubicación | Must | **No se estima** (§4.1) | Propuesta | CU-04005 | EP-04005 |
-| [US-04015](historias-usuario/US-04015-Interpretar-El-Texto-Por-El-Puerto-Sin-Tocar-La-Base-De-Datos.md) | Interpretar el texto por el puerto de validación, sin tocar la base de datos | Must | **No se estima** (§4.1) | Propuesta | CU-04005 | EP-04005 |
-| [US-04016](historias-usuario/US-04016-Terminar-De-Forma-Controlada-Cuando-La-Interpretacion-No-Esta-Disponible.md) | Terminar de forma controlada cuando la interpretación no está disponible | **Should** | **No se estima** (§4.1) | Propuesta | CU-04005 | EP-04005 |
+| [US-04013](historias-usuario/US-04013-Enviar-Un-Trabajo-Con-Advertencias-Y-Que-Pase-A-Estado-Pendiente.md) | Enviar un trabajo con advertencias y que pase a estado `Pendiente` | Must | **No aplica** (§4.1) | Propuesta | CU-04005 | EP-04005 |
+| [US-04014](historias-usuario/US-04014-Enviar-Un-Trabajo-Con-Errores-Y-Que-Quede-En-Borrador.md) | Enviar un trabajo con errores de validación y que quede en `Borrador` con su ubicación | Must | **No aplica** (§4.1) | Propuesta | CU-04005 | EP-04005 |
+| [US-04015](historias-usuario/US-04015-Interpretar-El-Texto-Por-El-Puerto-Sin-Tocar-La-Base-De-Datos.md) | Interpretar el texto por el puerto de validación, sin tocar la base de datos | Must | **No aplica** (§4.1) | Propuesta | CU-04005 | EP-04005 |
+| [US-04016](historias-usuario/US-04016-Terminar-De-Forma-Controlada-Cuando-La-Interpretacion-No-Esta-Disponible.md) | Terminar de forma controlada cuando la interpretación no está disponible | **Should** | **No aplica** (§4.1) | Propuesta | CU-04005 | EP-04005 |
 
 ### 3.6 EP-04006 · Desenlace de la entrega
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-04018](historias-usuario/US-04018-Ver-El-Desenlace-Y-El-Comentario-Del-Trabajo-Propio.md) | Ver el desenlace y el comentario del trabajo propio | Must | **No se estima** (§4.1) | Propuesta | CU-04006 | EP-04006 |
-| [US-04023](historias-usuario/US-04023-Aprobar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md) | Aprobar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No se estima** (§4.1) | Propuesta | CU-04008 | EP-04006 |
-| [US-04024](historias-usuario/US-04024-Rechazar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md) | Rechazar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No se estima** (§4.1) | Propuesta | CU-04008 | EP-04006 |
-| [US-04025](historias-usuario/US-04025-Rechazar-Toda-Transicion-Sin-Facultad-O-Desde-Un-Estado-Terminal.md) | Rechazar toda transición pedida por quien no tiene la facultad o desde un estado terminal | Must | **No se estima** (§4.1) | Propuesta | CU-04008 | EP-04006 |
-| [US-04027](historias-usuario/US-04027-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md) | Eliminar por el administrador en los tres estados que ve | Must | **No se estima** (§4.1) | Propuesta | CU-04009 | EP-04006 |
+| [US-04018](historias-usuario/US-04018-Ver-El-Desenlace-Y-El-Comentario-Del-Trabajo-Propio.md) | Ver el desenlace y el comentario del trabajo propio | Must | **No aplica** (§4.1) | Propuesta | CU-04006 | EP-04006 |
+| [US-04023](historias-usuario/US-04023-Aprobar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md) | Aprobar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No aplica** (§4.1) | Propuesta | CU-04008 | EP-04006 |
+| [US-04024](historias-usuario/US-04024-Rechazar-Un-Trabajo-En-Estado-Pendiente-Con-Comentario-Opcional.md) | Rechazar un trabajo en estado `Pendiente`, con comentario opcional | Must | **No aplica** (§4.1) | Propuesta | CU-04008 | EP-04006 |
+| [US-04025](historias-usuario/US-04025-Rechazar-Toda-Transicion-Sin-Facultad-O-Desde-Un-Estado-Terminal.md) | Rechazar toda transición pedida por quien no tiene la facultad o desde un estado terminal | Must | **No aplica** (§4.1) | Propuesta | CU-04008 | EP-04006 |
+| [US-04027](historias-usuario/US-04027-Eliminar-Por-El-Administrador-En-Los-Tres-Estados-Que-Ve.md) | Eliminar por el administrador en los tres estados que ve | Must | **No aplica** (§4.1) | Propuesta | CU-04009 | EP-04006 |
 
 ### 3.4 `GeometriaFactory-Infrastructure`
 
@@ -366,8 +366,8 @@ Las **veinticinco** historias son las que [`../02-Especificacion-Funcional/Espec
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-06024](historias-usuario/US-06024-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md) | Aplicar las transformaciones de esquema al arrancar, sobre base inexistente | Must | **No se estima** (§4.1) | Propuesta | CU-06010 | EP-06001 |
-| [US-06025](historias-usuario/US-06025-Detener-El-Arranque-En-Lugar-De-Operar-Sobre-Un-Almacen-Dudoso.md) | Detener el arranque en lugar de operar sobre un almacén en el que no se puede confiar | Must | **No se estima** (§4.1) | Propuesta | CU-06010 | EP-06001 |
+| [US-06024](historias-usuario/US-06024-Aplicar-Las-Transformaciones-De-Esquema-Al-Arrancar.md) | Aplicar las transformaciones de esquema al arrancar, sobre base inexistente | Must | **No aplica** (§4.1) | Propuesta | CU-06010 | EP-06001 |
+| [US-06025](historias-usuario/US-06025-Detener-El-Arranque-En-Lugar-De-Operar-Sobre-Un-Almacen-Dudoso.md) | Detener el arranque en lugar de operar sobre un almacén en el que no se puede confiar | Must | **No aplica** (§4.1) | Propuesta | CU-06010 | EP-06001 |
 
 **Es la única de las cinco épicas de etapa `a` del producto que tiene historias**, y el motivo es que `PT-04` se mide en esa etapa: la imagen del servicio de datos **aplica sus actualizaciones de esquema sobre base vacía y responde salud** (`Roadmap-Producto.md` §5.2, transición `a` → `b`). Sin estas dos historias, esa puerta no se puede medir.
 
@@ -375,44 +375,44 @@ Las **veinticinco** historias son las que [`../02-Especificacion-Funcional/Espec
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-06014](historias-usuario/US-06014-Sostener-En-El-Almacen-La-Unicidad-Del-Correo-Y-La-Del-Administrador.md) | Sostener en el almacén la unicidad del correo y la del administrador | Must | **No se estima** (§4.1) | Propuesta | CU-06005 | EP-06002 |
-| [US-06015](historias-usuario/US-06015-Responder-Las-Dos-Preguntas-Sobre-El-Conjunto.md) | Responder si un correo está registrado y si ya existe una cuenta con papel `Administrador` | Must | **No se estima** (§4.1) | Propuesta | CU-06005 | EP-06002 |
-| [US-06017](historias-usuario/US-06017-Derivar-Una-Contrasena-Sin-Guardarla-Ni-Registrarla-En-Claro.md) | Derivar una contraseña sin guardarla ni registrarla en claro | Must | **No se estima** (§4.1) | Propuesta | CU-06006 | EP-06002 |
-| [US-06018](historias-usuario/US-06018-Verificar-Una-Credencial-Y-Distinguir-El-Derivado-Ilegible.md) | Verificar una credencial y distinguir el valor derivado ilegible de la contraseña equivocada | Must | **No se estima** (§4.1) | Propuesta | CU-06006 | EP-06002 |
-| [US-06021](historias-usuario/US-06021-Emitir-El-Acceso-Firmado-Con-Sus-Cuatro-Reclamos.md) | Emitir el acceso firmado con sus cuatro reclamos | Must | **No se estima** (§4.1) | Propuesta | CU-06008 | EP-06002 |
-| [US-06022](historias-usuario/US-06022-Rechazar-La-Emision-Sin-Clave-De-Firma.md) | Rechazar la emisión sin clave de firma, sin generar una al vuelo | Must | **No se estima** (§4.1) | Propuesta | CU-06008 | EP-06002 |
-| [US-06023](historias-usuario/US-06023-Proveer-El-Sello-Por-Un-Puerto-Para-Que-Las-Pruebas-Lo-Puedan-Fijar.md) | Proveer el sello por un puerto, para que las pruebas lo puedan fijar | **Should** | **No se estima** (§4.1) | Propuesta | CU-06009 | EP-06002 |
+| [US-06014](historias-usuario/US-06014-Sostener-En-El-Almacen-La-Unicidad-Del-Correo-Y-La-Del-Administrador.md) | Sostener en el almacén la unicidad del correo y la del administrador | Must | **No aplica** (§4.1) | Propuesta | CU-06005 | EP-06002 |
+| [US-06015](historias-usuario/US-06015-Responder-Las-Dos-Preguntas-Sobre-El-Conjunto.md) | Responder si un correo está registrado y si ya existe una cuenta con papel `Administrador` | Must | **No aplica** (§4.1) | Propuesta | CU-06005 | EP-06002 |
+| [US-06017](historias-usuario/US-06017-Derivar-Una-Contrasena-Sin-Guardarla-Ni-Registrarla-En-Claro.md) | Derivar una contraseña sin guardarla ni registrarla en claro | Must | **No aplica** (§4.1) | Propuesta | CU-06006 | EP-06002 |
+| [US-06018](historias-usuario/US-06018-Verificar-Una-Credencial-Y-Distinguir-El-Derivado-Ilegible.md) | Verificar una credencial y distinguir el valor derivado ilegible de la contraseña equivocada | Must | **No aplica** (§4.1) | Propuesta | CU-06006 | EP-06002 |
+| [US-06021](historias-usuario/US-06021-Emitir-El-Acceso-Firmado-Con-Sus-Cuatro-Reclamos.md) | Emitir el acceso firmado con sus cuatro reclamos | Must | **No aplica** (§4.1) | Propuesta | CU-06008 | EP-06002 |
+| [US-06022](historias-usuario/US-06022-Rechazar-La-Emision-Sin-Clave-De-Firma.md) | Rechazar la emisión sin clave de firma, sin generar una al vuelo | Must | **No aplica** (§4.1) | Propuesta | CU-06008 | EP-06002 |
+| [US-06023](historias-usuario/US-06023-Proveer-El-Sello-Por-Un-Puerto-Para-Que-Las-Pruebas-Lo-Puedan-Fijar.md) | Proveer el sello por un puerto, para que las pruebas lo puedan fijar | **Should** | **No aplica** (§4.1) | Propuesta | CU-06009 | EP-06002 |
 
 ### 3.3 EP-06003 · Ciclo de vida de la cuenta de alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-06013](historias-usuario/US-06013-Arrastrar-Todos-Los-Trabajos-De-Una-Cuenta-Dada-De-Baja.md) | Arrastrar todos los trabajos de una cuenta dada de baja, todo o nada | Must | **No se estima** (§4.1) | Propuesta | CU-06004 | EP-06003 |
-| [US-06016](historias-usuario/US-06016-Conservar-Y-Transportar-La-Marca-Sin-Alterar-El-Estado.md) | Conservar y transportar la marca de cambio de contraseña pendiente sin alterar el estado | Must | **No se estima** (§4.1) | Propuesta | CU-06005 | EP-06003 |
-| [US-06019](historias-usuario/US-06019-Producir-Una-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) | Producir una contraseña provisoria no adivinable y sin repetirse | Must | **No se estima** (§4.1) | Propuesta | CU-06007 | EP-06003 |
-| [US-06020](historias-usuario/US-06020-Terminar-Sin-Producir-Valor-Cuando-La-Aleatoriedad-No-Responde.md) | Terminar sin producir valor cuando la fuente de aleatoriedad no responde | Must | **No se estima** (§4.1) | Propuesta | CU-06007 | EP-06003 |
+| [US-06013](historias-usuario/US-06013-Arrastrar-Todos-Los-Trabajos-De-Una-Cuenta-Dada-De-Baja.md) | Arrastrar todos los trabajos de una cuenta dada de baja, todo o nada | Must | **No aplica** (§4.1) | Propuesta | CU-06004 | EP-06003 |
+| [US-06016](historias-usuario/US-06016-Conservar-Y-Transportar-La-Marca-Sin-Alterar-El-Estado.md) | Conservar y transportar la marca de cambio de contraseña pendiente sin alterar el estado | Must | **No aplica** (§4.1) | Propuesta | CU-06005 | EP-06003 |
+| [US-06019](historias-usuario/US-06019-Producir-Una-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) | Producir una contraseña provisoria no adivinable y sin repetirse | Must | **No aplica** (§4.1) | Propuesta | CU-06007 | EP-06003 |
+| [US-06020](historias-usuario/US-06020-Terminar-Sin-Producir-Valor-Cuando-La-Aleatoriedad-No-Responde.md) | Terminar sin producir valor cuando la fuente de aleatoriedad no responde | Must | **No aplica** (§4.1) | Propuesta | CU-06007 | EP-06003 |
 
 ### 3.4 EP-06004 · Gestión del trabajo
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-06008](historias-usuario/US-06008-Conservar-El-Texto-Original-Literal-Y-Rechazar-Toda-Escritura-Que-Lo-Reemplace.md) | Conservar el texto original literal y rechazar toda escritura que lo reemplace | Must | **No se estima** (§4.1) | Propuesta | CU-06003 | EP-06004 |
-| [US-06009](historias-usuario/US-06009-Materializar-El-Trabajo-Con-Sus-Piezas-Componentes-Y-Observaciones.md) | Materializar el trabajo con sus piezas, componentes y observaciones en una unidad de trabajo | Must | **No se estima** (§4.1) | Propuesta | CU-06003 | EP-06004 |
-| [US-06010](historias-usuario/US-06010-Resolver-La-Consulta-Con-El-Recorte-Ya-Trasladado-Al-Pedido.md) | Resolver la consulta con el recorte ya trasladado al pedido | Must | **No se estima** (§4.1) | Propuesta | CU-06003 | EP-06004 |
-| [US-06011](historias-usuario/US-06011-Excluir-Componentes-Y-Texto-Original-Del-Resultado-De-Un-Listado.md) | Excluir componentes y texto original del resultado de un listado | Must | **No se estima** (§4.1) | Propuesta | CU-06003 | EP-06004 |
-| [US-06012](historias-usuario/US-06012-Retirar-Fisicamente-Un-Trabajo-Con-Todo-Lo-Que-Cuelga-De-El.md) | Retirar físicamente un trabajo con todo lo que cuelga de él | Must | **No se estima** (§4.1) | Propuesta | CU-06004 | EP-06004 |
+| [US-06008](historias-usuario/US-06008-Conservar-El-Texto-Original-Literal-Y-Rechazar-Toda-Escritura-Que-Lo-Reemplace.md) | Conservar el texto original literal y rechazar toda escritura que lo reemplace | Must | **No aplica** (§4.1) | Propuesta | CU-06003 | EP-06004 |
+| [US-06009](historias-usuario/US-06009-Materializar-El-Trabajo-Con-Sus-Piezas-Componentes-Y-Observaciones.md) | Materializar el trabajo con sus piezas, componentes y observaciones en una unidad de trabajo | Must | **No aplica** (§4.1) | Propuesta | CU-06003 | EP-06004 |
+| [US-06010](historias-usuario/US-06010-Resolver-La-Consulta-Con-El-Recorte-Ya-Trasladado-Al-Pedido.md) | Resolver la consulta con el recorte ya trasladado al pedido | Must | **No aplica** (§4.1) | Propuesta | CU-06003 | EP-06004 |
+| [US-06011](historias-usuario/US-06011-Excluir-Componentes-Y-Texto-Original-Del-Resultado-De-Un-Listado.md) | Excluir componentes y texto original del resultado de un listado | Must | **No aplica** (§4.1) | Propuesta | CU-06003 | EP-06004 |
+| [US-06012](historias-usuario/US-06012-Retirar-Fisicamente-Un-Trabajo-Con-Todo-Lo-Que-Cuelga-De-El.md) | Retirar físicamente un trabajo con todo lo que cuelga de él | Must | **No aplica** (§4.1) | Propuesta | CU-06004 | EP-06004 |
 
 ### 3.5 EP-06005 · Interpretación y verificación del dato del alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-06001](historias-usuario/US-06001-Leer-El-Texto-Real-Con-Tolerancia-A-Comas-Finales-Y-Claves-Sinonimas.md) | Leer el texto real del alumno con tolerancia a comas finales y a las claves sinónimas | Must | **No se estima** (§4.1) | Propuesta | CU-06001 | EP-06005 |
-| [US-06002](historias-usuario/US-06002-Devolver-La-Cantidad-De-Figuras-Del-Conjunto-Raiz.md) | Devolver la cantidad de figuras del conjunto raíz, incluidas las no reconstruidas | Must | **No se estima** (§4.1) | Propuesta | CU-06001 | EP-06005 |
-| [US-06003](historias-usuario/US-06003-Reconstruir-Las-Piezas-Con-Su-Posicion-Y-Sus-Componentes.md) | Reconstruir las piezas con su posición, sus componentes y la posición reservada de las no reconstruidas | Must | **No se estima** (§4.1) | Propuesta | CU-06001 | EP-06005 |
-| [US-06004](historias-usuario/US-06004-Emitir-El-Error-De-Validacion-Con-Posicion-De-Figura-Y-Campo.md) | Emitir el error de validación con posición de figura y campo | Must | **No se estima** (§4.1) | Propuesta | CU-06001 | EP-06005 |
-| [US-06005](historias-usuario/US-06005-Derivar-El-Valor-Desde-Las-Dimensiones-Y-Los-Componentes.md) | Derivar el valor desde las dimensiones y los componentes | Must | **No se estima** (§4.1) | Propuesta | CU-06002 | EP-06005 |
-| [US-06006](historias-usuario/US-06006-Comparar-Con-Tolerancia-Absoluta-Y-Operador-Estricto.md) | Comparar con tolerancia absoluta y **operador estricto** | Must | **No se estima** (§4.1) | Propuesta | CU-06002 | EP-06005 |
-| [US-06007](historias-usuario/US-06007-Emitir-La-Advertencia-Con-El-Valor-Declarado-Y-El-Derivado.md) | Emitir la advertencia con el valor declarado y el derivado, sin corregir ninguno | Must | **No se estima** (§4.1) | Propuesta | CU-06002 | EP-06005 |
+| [US-06001](historias-usuario/US-06001-Leer-El-Texto-Real-Con-Tolerancia-A-Comas-Finales-Y-Claves-Sinonimas.md) | Leer el texto real del alumno con tolerancia a comas finales y a las claves sinónimas | Must | **No aplica** (§4.1) | Propuesta | CU-06001 | EP-06005 |
+| [US-06002](historias-usuario/US-06002-Devolver-La-Cantidad-De-Figuras-Del-Conjunto-Raiz.md) | Devolver la cantidad de figuras del conjunto raíz, incluidas las no reconstruidas | Must | **No aplica** (§4.1) | Propuesta | CU-06001 | EP-06005 |
+| [US-06003](historias-usuario/US-06003-Reconstruir-Las-Piezas-Con-Su-Posicion-Y-Sus-Componentes.md) | Reconstruir las piezas con su posición, sus componentes y la posición reservada de las no reconstruidas | Must | **No aplica** (§4.1) | Propuesta | CU-06001 | EP-06005 |
+| [US-06004](historias-usuario/US-06004-Emitir-El-Error-De-Validacion-Con-Posicion-De-Figura-Y-Campo.md) | Emitir el error de validación con posición de figura y campo | Must | **No aplica** (§4.1) | Propuesta | CU-06001 | EP-06005 |
+| [US-06005](historias-usuario/US-06005-Derivar-El-Valor-Desde-Las-Dimensiones-Y-Los-Componentes.md) | Derivar el valor desde las dimensiones y los componentes | Must | **No aplica** (§4.1) | Propuesta | CU-06002 | EP-06005 |
+| [US-06006](historias-usuario/US-06006-Comparar-Con-Tolerancia-Absoluta-Y-Operador-Estricto.md) | Comparar con tolerancia absoluta y **operador estricto** | Must | **No aplica** (§4.1) | Propuesta | CU-06002 | EP-06005 |
+| [US-06007](historias-usuario/US-06007-Emitir-La-Advertencia-Con-El-Valor-Declarado-Y-El-Derivado.md) | Emitir la advertencia con el valor declarado y el derivado, sin corregir ninguno | Must | **No aplica** (§4.1) | Propuesta | CU-06002 | EP-06005 |
 
 ## 4. Métricas de avance
 
@@ -420,11 +420,11 @@ Las **veinticinco** historias son las que [`../02-Especificacion-Funcional/Espec
 
 | Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
 | --- | --- | --- | --- |
-| Must | 29 | 96,7 % | **No se estima** (§4.1) |
-| Should | 1 | 3,3 % | **No se estima** (§4.1) |
+| Must | 29 | 96,7 % | **No aplica** (§4.1) |
+| Should | 1 | 3,3 % | **No aplica** (§4.1) |
 | Could | 0 | 0 % | — |
 | Won't (v1.0) | 0 | 0 % | — |
-| **Total** | **30** | **100 %** | **No se estima** |
+| **Total** | **30** | **100 %** | **No aplica** |
 
 | Métrica | Valor al 2026-08-10 |
 | --- | --- |
@@ -447,7 +447,7 @@ Las **veinticinco** historias son las que [`../02-Especificacion-Funcional/Espec
 
 **Y hay un motivo propio, que en este proyecto de código es el más pesado del producto**: de los **diecisiete** requerimientos no funcionales de `05` §8, **cinco vienen rotulados [ASUNCIÓN]** desde el intake y siguen pendientes de confirmación —latencia, caudal, arranque en frío, cobertura y **la forma misma de la pirámide de pruebas**—. Es la mayor concentración de valores sin confirmar de los siete proyectos de código. Un backlog que usa cinco números vigentes sin respaldo, y que además inventara puntos de historia, tendría seis.
 
-En consecuencia la columna `Estimación` dice **«No aplica»** en las las treinta historias y en las veintiséis tareas técnicas, y **el punto `PA-01` de §6 queda cerrado por lectura**: no era una decisión pendiente sino un hecho — **ocho etapas se cerraron sin una sola estimación**, con `equipo_n = 1` y sin capacidad numérica declarada (`Mini-Plan.md` §1.2). La figura es la de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), el ítem obligatorio **sin objeto**.
+En consecuencia la columna `Estimación` dice **«No aplica»** en las treinta historias de este backlog, y **también en las veintiséis tareas técnicas** de [`Backlog-Tecnico.md`](Backlog-Tecnico.md), a las que el cierre se propagó en la ronda 2 del corte, y **el punto `PA-01` de §6 queda cerrado por lectura**: no era una decisión pendiente sino un hecho — **ocho etapas se cerraron sin una sola estimación**, con `equipo_n = 1` y sin capacidad numérica declarada (`Mini-Plan.md` §1.2). La figura es la de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), el ítem obligatorio **sin objeto**.
 
 ### 4.2 Por qué la distribución MoSCoW es la que es
 
@@ -485,11 +485,11 @@ En consecuencia la columna `Estimación` dice **«No aplica»** en las las trein
 
 | Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
 | --- | --- | --- | --- |
-| Must | 26 | 96,3 % | **No se estima** (§4.1) |
-| Should | 1 | 3,7 % | **No se estima** (§4.1) |
+| Must | 26 | 96,3 % | **No aplica** (§4.1) |
+| Should | 1 | 3,7 % | **No aplica** (§4.1) |
 | Could | 0 | 0 % | — |
 | Won't (v1.0) | 0 | 0 % | — |
-| **Total** | **27** | **100 %** | **No se estima** |
+| **Total** | **27** | **100 %** | **No aplica** |
 
 | Métrica | Valor al 2026-08-10 |
 | --- | --- |
@@ -509,7 +509,7 @@ La regla de la categoría exige declarar una técnica de estimación y mantenerl
 
 El intake declara **sin plazo calendario, y que el avance se mide por etapas cerradas** (`Roadmap-Producto.md` §1.1, que lo cita de `PRODUCT-INTAKE` §10). No hay historial de iteraciones cerradas del que derivar una velocidad, no hay iteraciones —la unidad de planificación es la **etapa**, no el sprint (`Roadmap-Producto.md` §1.2)— y el equipo es de **una sola persona** (`PRODUCT-INTAKE` §2, `equipo_n = 1`). Poner puntos de historia o tallas acá produciría números que ninguna fuente sostiene y que la categoría 07 tomaría como capacidad.
 
-En consecuencia: la columna `Estimación` dice **«No aplica»** en las veintisiete historias y en las dieciséis tareas técnicas, y **`PA-01` de §6 queda cerrado por lectura**: el producto no estima, y **ocho etapas se cerraron sin una sola estimación**. Lo que sí se declara y se usa para ordenar es la **etapa** de cada ítem, que es la unidad que el producto sí tiene.
+En consecuencia: la columna `Estimación` dice **«No aplica»** en las veintisiete historias de este backlog, y **también en las dieciséis tareas técnicas** de [`Backlog-Tecnico.md`](Backlog-Tecnico.md), a las que el cierre se propagó en la ronda 2 del corte, y **`PA-01` de §6 queda cerrado por lectura**: el producto no estima, y **ocho etapas se cerraron sin una sola estimación**. Lo que sí se declara y se usa para ordenar es la **etapa** de cada ítem, que es la unidad que el producto sí tiene.
 
 ### 4.2 Por qué la distribución MoSCoW es la que es
 
@@ -547,11 +547,11 @@ La regla de la categoría marca como anti-patrón que todo sea `Must`. Este back
 
 | Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
 | --- | --- | --- | --- |
-| Must | 31 | 96,9 % | **No se estima** (§4.1) |
-| Should | 1 | 3,1 % | **No se estima** (§4.1) |
+| Must | 31 | 96,9 % | **No aplica** (§4.1) |
+| Should | 1 | 3,1 % | **No aplica** (§4.1) |
 | Could | 0 | 0 % | — |
 | Won't (v1.0) | 0 | 0 % | — |
-| **Total** | **32** | **100 %** | **No se estima** |
+| **Total** | **32** | **100 %** | **No aplica** |
 
 | Métrica | Valor al 2026-08-10 |
 | --- | --- |
@@ -574,7 +574,7 @@ La regla de la categoría exige declarar una técnica de estimación y mantenerl
 2. **No hay iteraciones**: la unidad de planificación es la **etapa**, no el sprint (`Roadmap-Producto.md` §1.2), de modo que no hay historial del que derivar una velocidad.
 3. **El equipo es de una sola persona** (`PRODUCT-INTAKE` §2, `equipo_n = 1`).
 
-En consecuencia, la columna `Estimación` dice **«No aplica»** en las treinta y dos historias y en las veintiuna tareas técnicas, y **`PA-01` de §6 queda cerrado por lectura**: el producto no estima, y **ocho etapas se cerraron sin una sola estimación**. Lo que sí se declara y ordena es la **etapa** de cada ítem.
+En consecuencia, la columna `Estimación` dice **«No aplica»** en las treinta y dos historias de este backlog, y **también en las veintiuna tareas técnicas** de [`Backlog-Tecnico.md`](Backlog-Tecnico.md), a las que el cierre se propagó en la ronda 2 del corte, y **`PA-01` de §6 queda cerrado por lectura**: el producto no estima, y **ocho etapas se cerraron sin una sola estimación**. Lo que sí se declara y ordena es la **etapa** de cada ítem.
 
 **Hay un motivo propio de este proyecto de código**, y conviene decirlo: el único NFR de tiempo que lo alcanza —los **500 ms** del caso de uso más pesado— viene **rotulado como asunción** desde el intake y sigue pendiente de confirmación del Product Owner (`05` §8 y §11 `PA-05`). Un backlog que usa como vigente un número que su propia fuente no confirmó, y que además inventara puntos de historia, tendría dos números sin respaldo en lugar de uno.
 
@@ -614,11 +614,11 @@ En consecuencia, la columna `Estimación` dice **«No aplica»** en las treinta 
 
 | Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
 | --- | --- | --- | --- |
-| Must | 24 | 96,0 % | **No se estima** (§4.1) |
-| Should | 1 | 4,0 % | **No se estima** (§4.1) |
+| Must | 24 | 96,0 % | **No aplica** (§4.1) |
+| Should | 1 | 4,0 % | **No aplica** (§4.1) |
 | Could | 0 | 0 % | — |
 | Won't (v1.0) | 0 | 0 % | — |
-| **Total** | **25** | **100 %** | **No se estima** |
+| **Total** | **25** | **100 %** | **No aplica** |
 
 | Métrica | Valor al 2026-08-10 |
 | --- | --- |
@@ -640,7 +640,7 @@ En consecuencia, la columna `Estimación` dice **«No aplica»** en las treinta 
 
 **Y hay un motivo propio, más fuerte todavía**: de los **catorce** NFR de `05` §8, **tres vienen rotulados [ASUNCIÓN]** desde el intake y siguen pendientes de confirmación del Product Owner —los 200 ms de la interpretación y las **tres** coberturas, incluida la de **95 %** del validador, que es el número más alto del producto—. Un backlog que usa como vigentes tres números sin confirmar, y que además inventara puntos de historia, tendría cuatro números sin respaldo en lugar de tres.
 
-En consecuencia la columna `Estimación` dice **«No aplica»** en las las veinticinco historias y en las veintiséis tareas técnicas, y **el punto `PA-01` de §6 queda cerrado por lectura**: no era una decisión pendiente sino un hecho — **ocho etapas se cerraron sin una sola estimación**, con `equipo_n = 1` y sin capacidad numérica declarada (`Mini-Plan.md` §1.2). La figura es la de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), el ítem obligatorio **sin objeto**.
+En consecuencia la columna `Estimación` dice **«No aplica»** en las veinticinco historias de este backlog, y **también en las veintiséis tareas técnicas** de [`Backlog-Tecnico.md`](Backlog-Tecnico.md), a las que el cierre se propagó en la ronda 2 del corte, y **el punto `PA-01` de §6 queda cerrado por lectura**: no era una decisión pendiente sino un hecho — **ocho etapas se cerraron sin una sola estimación**, con `equipo_n = 1` y sin capacidad numérica declarada (`Mini-Plan.md` §1.2). La figura es la de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), el ítem obligatorio **sin objeto**.
 
 ### 4.2 Por qué la distribución MoSCoW es la que es
 
@@ -804,3 +804,4 @@ En consecuencia la columna `Estimación` dice **«No aplica»** en las las veint
 | 3.3 | 2026-08-20 | **Segunda pasada del paso `A2`**: **4** punto(s) abierto(s) cerrados **por lectura del árbol**, sobre las familias que `Audit/A3-Decisiones-Del-Product-Owner.md` §1 dejó verificadas. Cada uno cita **el archivo que ya tenía la decisión** — el motor de dibujo anclado en `three 0.169.0`, `PBKDF2` en `PasswordDerivation.cs`, el `@media` de 768 px en `app.css`, `EmailIdentity.Normalize`, los 18 puntos de acceso, las herramientas de cada stage en los guiones, y **la biblioteca de componentes, que no existe porque la etapa `b` decidió no introducirla** y su `.csproj` lo declara como apartamiento. **Ninguno se cerró por criterio propio** y **ningún enunciado de punto abierto se tocó**. Sube minor. | Orquestador SDD |
 | 3.4 | 2026-08-20 | **1** punto(s) abierto(s) **cerrados por decisión del Product Owner** del 2026-08-20, sobre `Audit/A3-Decisiones-Del-Product-Owner.md`: el **volumen de la comisión** queda cerrado **por incognoscible** —el dato no se sabe ni se puede saber de antemano, y no se fija número—; el **límite de tamaño del cuerpo** adopta **el valor por omisión del servidor**, con la obligación derivada de declararlo explícitamente cuando se toque la composición; y el **mutation score** se cierra **con un no**, dejando `CV-19` declarado sin medir. **Ningún enunciado de punto abierto se tocó.** Sube minor. | Orquestador SDD |
 | 4.0 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06** (`Audit/Plan-Migracion-10.0-a-13.3.md` **1.2** §4.1). **`PA-01`, la unidad de estimación, queda CERRADO POR LECTURA en las cuatro tablas** —no por decisión—: no era un pendiente sino un hecho. `PRODUCT-INTAKE` §2 declara **`equipo_n = 1`**, y de ese dato el framework deriva que la 07 emita sólo `Mini-Plan.md`; su §1.2 declara que **no se declara capacidad numérica y es deliberado**; y el contraste que lo cierra es que **ocho etapas se cerraron sin una sola estimación**. **Estaba VENCIDO** —diferido al punto de control de la etapa `c`, que cerró el **2026-08-14** sin registrarlo— y las 114 historias de este backlog lo citaban: con la forma nueva de `Rules-Backlog-Tecnico.md` **5.0** §4.4 punto 5.b habría entrado a cada una como hallazgo **P1**. Se cierra **retirando el punto**, que `Audit/A3-Decisiones-Del-Product-Owner.md` §3 admite como cierre válido, con la figura del ítem **sin objeto** de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md). **La columna `Estimación` pasa de «Sin fijar» a «No aplica»** y §4.1 deja de titularse «por qué queda abierta». Estado previo archivado en [`_legacy/2026-08-25/Product-Backlog-v3.4.md`](_legacy/2026-08-25/Product-Backlog-v3.4.md). Sube **major**: el salto de la regla que lo gobierna es major. |
+| 4.1 | 2026-08-25 | **Ronda 2 del corte de la 06**, sobre el audit independiente que lo aprobó **con hallazgos**. **La columna `Estimación` pasa de «No se estima» a «No aplica»** (**P2**): la prosa citaba entre comillas una forma que las celdas no tenían, y el destino quedaba con **tres** literales para una decisión única. **Y la frase que afirmaba haber cambiado también las tareas técnicas se vuelve verdadera** (**P1**): el cierre se propagó de verdad a `Backlog-Tecnico.md`, que la ronda 1 describió sin abrir. **Y una constancia sobre los recuentos del mensaje de entrega de la ronda 1**, que el audit refutó (**P3**) y que no se pueden editar allí: los estados previos archivados son **148** y no 152 —144 historias, 2 `Product-Backlog` y 2 `Mini-Plan`—, y los enlaces reescritos **1099** y no 694. |

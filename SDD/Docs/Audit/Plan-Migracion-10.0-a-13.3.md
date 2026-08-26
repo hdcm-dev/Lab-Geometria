@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Plan-Migracion-10.0-a-13.3.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Fecha:** 2026-08-23
 **Instrumento:** `Master-Prompt-Migracion.md` **2.8**, fase **M1**
 **Estado:** **Detención obligatoria.** El plan se presenta completo y espera aprobación. **Ningún documento se modifica durante M1**
@@ -104,9 +104,15 @@ mecánico. Lo que no lo es: el bloque de impacto de la 11.0 declara **hallazgo P
 queda diferida sin la forma de `Root-Rules.md` §12.2**, y hoy está diferida **en prosa**, por
 remisión. Cerrarla exige una de dos cosas, y las dos son del Product Owner:
 
-- **Fijar la unidad de estimación** —que es la decisión `D2` de `A3-Decisiones-Del-Product-Owner.md`,
-  abierta— y estimar, o
-- **Diferirla con los cuatro campos de §12.2**, nombrando el artefacto y la sección donde se cierra.
+- **Fijar la unidad de estimación** —la decisión `D2` de `A3-Decisiones-Del-Product-Owner.md`— y estimar,
+- **Diferirla con los cuatro campos de §12.2**, nombrando el artefacto y la sección donde se cierra, o
+- **Retirar el punto**, que `A3` §3 admite como cierre válido.
+
+> **Desenlace, 2026-08-25.** Se tomó la tercera, y **por lectura y no por decisión de valor**: el corte
+> de la 06 comprobó que el producto **no estima** —`equipo_n = 1`, `Mini-Plan.md` §1.2 y **ocho etapas
+> cerradas sin una sola estimación**— y `PA-01` quedó cerrado en las seis tablas. **`D2` queda retirada**,
+> registrada como `D11` en `A3` §4. Este párrafo conserva la pregunta original en lugar de reemplazarla,
+> porque lo que vuelve auditable la decisión es que se vea contra qué alternativas se tomó.
 
 **Es la misma decisión, y por eso conviene tomarla acá y no dos veces.** `D2` estaba en la cola del
 frente `A` del plan de cierre de pendientes; la 11.0 la vuelve obligatoria en 144 documentos.
@@ -195,8 +201,7 @@ inexistente.
 | # | Hallazgo | Evidencia | Quién puede cerrarlo |
 |---|---|---|---|
 | **`HM-01`** | **`PD-02` de `Pipeline-CI-CD.md` §10.1 de `GeometriaFactory-Api` y `PD-03` del de `GeometriaFactory-Web` se cerraron con una decisión sin resolver adentro.** Los dos nombran en su enunciado el **«generador del inventario»**, y los dos se declararon **Cerrados el 2026-08-20 «por lectura»** con esta lista: `dotnet build`, `dotnet test`, `npm ci`, `webpack` y `playwright`. **Ninguna es un generador de inventario** | Las dos filas, con su estado y su lista. Y sobre el repositorio: no hay ninguna herramienta de inventario en `scripts/`, `.github/` ni `deploy/` | **La categoría 09**, reabriendo la parte no resuelta o partiéndola como ítem propio. **No lo hace esta migración**: el ítem es de otra categoría y cerrarlo o reabrirlo desde `Supply-Chain-Seguridad.md` sería decidir sobre un punto ajeno |
-
-| **`HM-02`** | **El método contrasta el diferimiento contra el calendario y no contra lo que el producto hizo.** Un ítem puede estar formalmente impecable —cuatro campos, evento futuro, `Vigente`— y estar difiriendo una pregunta que **los hechos ya cerraron**. `PA-01`, la unidad de estimación, es el caso medido: se difirió al punto de control de la etapa `c`, venció sin que nada chirriara, y **habría entrado a 144 historias** con la forma nueva. Ni la compuerta de `Master-Prompt.md` §10.0, ni el paso 4 de `Master-Prompt-Reanudacion.md` §2, ni la clasificación por enunciado de `Plan-Cierre-De-Pendientes.md` §2 lo detectan: **`A1` lo mandó a `F3`, «decisión del Product Owner», cuando el árbol ya lo tenía contestado** | **Ocho etapas cerradas sin una sola estimación** (`changelog.md`), `equipo_n = 1` (`PRODUCT-INTAKE` §2), y `Mini-Plan.md` §1.2: «no se declara capacidad numérica, y es deliberado». El ítem estuvo vencido **desde el 2026-08-14** y lo destapó la medición de este corte, no el test de vencimiento | **El framework.** Se eleva como **reporte `16`** de `IA.SDD.Documentacion`, que evalúa **SDD 12.1 o posterior** —la serie `00`–`15` está cerrada—. Propuesta de partida: un **tercer estado** junto a vencido y vigente, **sin objeto**, con obligación de citar el hecho que lo cerró; y que el paso 4 de la reanudación **contraste la premisa además del evento**. `ADR-14004` §6 campo 4 **ya declara este disparador** |
+| **`HM-02`** | **El método contrasta el diferimiento contra el calendario y no contra lo que el producto hizo.** Un ítem puede estar formalmente impecable —cuatro campos, evento futuro, `Vigente`— y estar difiriendo una pregunta que **los hechos ya cerraron**. `PA-01`, la unidad de estimación, es el caso medido: se difirió al punto de control de la etapa `c`, venció sin que nada chirriara, y **habría entrado a 144 historias** con la forma nueva. **Y hay que acotar qué es lo que el método no tiene, porque el hueco no está donde parecía.** La comprobación **6** de `Master-Prompt.md` §10.0 **sí** contiene el test del vencimiento —«es hallazgo el que nombre un evento de cierre que ya ocurrió»— y `PA-01` lo habría disparado, porque nombraba artefacto y sección. Lo que falló fue **la cobertura**: esa comprobación alcanza a «los que **el árbol de la fase** declara», y **ninguna fase volvió a abrir la 06 entre el 2026-08-14 y hoy**. **El hueco propio, el que ninguna comprobación cubre, es el otro**: un ítem cuyo **evento todavía no ocurrió** pero cuya **premisa ya murió**. Ése no lo detectan ni §10.0, ni el paso 4 de `Master-Prompt-Reanudacion.md` §2 —que contrasta el evento contra el calendario—, ni la clasificación por enunciado de `Plan-Cierre-De-Pendientes.md` §2, que **mandó `PA-01` a `F3`, «decisión del Product Owner», cuando el árbol ya lo tenía contestado** | **Ocho etapas cerradas sin una sola estimación** (`changelog.md`), `equipo_n = 1` (`PRODUCT-INTAKE` §2), y `Mini-Plan.md` §1.2: «no se declara capacidad numérica, y es deliberado». El ítem estuvo vencido **desde el 2026-08-14** y lo destapó la medición de este corte, no el test de vencimiento | **El framework.** Se eleva como **reporte `16`** de `IA.SDD.Documentacion`, que evalúa **SDD 12.1 o posterior** —la serie `00`–`15` está cerrada—. Propuesta de partida: un **tercer estado** junto a vencido y vigente, **sin objeto**, con obligación de citar el hecho que lo cerró; y que el paso 4 de la reanudación **contraste la premisa además del evento**. `ADR-14004` §6 campo 4 **ya declara este disparador** |
 
 **Es la misma figura que el salto vino a corregir, en el destino que la originó.** Un ítem que
 empaqueta dos decisiones se cierra con la evidencia de una, y la otra desaparece del radar sin que
@@ -222,8 +227,10 @@ producto.
 
 **El trabajo es ancho pero poco profundo, salvo en un punto.** De los 497 documentos vivos, el salto
 alcanza **151**: 144 historias de usuario, seis documentos de la 09 y el README raíz. En 150 de ellos
-el cambio es de **forma** —partir una sección en dos, reemplazar una cita—. **La excepción es la
-estimación**, y no es de forma: es una decisión que hoy no está tomada.
+el cambio es de **forma** —partir una sección en dos, reemplazar una cita—. **La excepción era la
+estimación**, y no era de forma. **Se resolvió el 2026-08-25, en el corte de la 06**: no era una
+decisión pendiente sino un hecho sin contrastar — el producto **no estima**, y `PA-01` quedó cerrado
+**por lectura**. Ver §4.1 y `A3` §4, `D11`.
 
 **La decisión de alcance está en §4.1 y es del Product Owner.** Si `D2` se decide, 144 documentos
 cierran con un valor. Si no, 144 documentos difieren con los cuatro campos de §12.2 — que es
@@ -291,6 +298,7 @@ construido encima**: si la segunda ronda se va a encargar, conviene decidirlo an
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.4 | 2026-08-25 | **Repara tres hallazgos del audit del corte de la 06.** **`C3-3`**: §4.1 y §7 seguían declarando que la estimación era «una decisión que hoy no está tomada» **en el mismo documento que subió de versión para registrar su cierre**; se declara el desenlace del 2026-08-25 y **se conserva la pregunta original**, porque lo que vuelve auditable una decisión es ver contra qué alternativas se tomó. **`C3-4`**: `HM-02` afirmaba que **ninguna** de las tres comprobaciones detecta el ítem sin objeto, y **la comprobación 6 de §10.0 sí tiene el test del vencimiento**; se acota al hueco real —**un ítem cuyo evento no ocurrió pero cuya premisa murió**— y se declara que lo de `PA-01` fue **falta de cobertura**: ninguna fase volvió a abrir la 06 desde el 2026-08-14. Un reporte al framework que le atribuya un hueco que no tiene se responde solo. **`C3-7`**: una línea en blanco dejaba a `HM-02` **fuera de la tabla** de §5.2. | Orquestador de migración normativa SDD |
 | 1.3 | 2026-08-25 | **§5.2 suma `HM-02`**, el hallazgo que el corte de la categoría 06 destapó y que **este destino no puede reparar**: el método contrasta el diferimiento **contra el calendario y no contra lo que el producto hizo**. `PA-01` estuvo vencido desde el 2026-08-14, **ninguna de las tres comprobaciones del método lo miró** —la compuerta mecánica, el paso 4 de la reanudación y la clasificación por enunciado del frente de cierre— y **habría entrado a 144 historias** con la forma nueva. Se eleva como **reporte `16`**, con su propuesta de partida: un tercer estado, **sin objeto**, y que la reanudación contraste la premisa. | Orquestador de migración normativa SDD |
 | 1.2 | 2026-08-24 | **Ronda 3 del corte 09**, sobre el re-audit **APROBADO CON HALLAZGOS**. Entra **§5.2**, que registra los hallazgos que la migración destapa y **no repara**, con `HM-01`: los dos `PD-02` / `PD-03` de la 09 se cerraron «por lectura» con el **generador del inventario adentro y sin resolver**. Estaba declarado sólo en los dos `Supply-Chain-Seguridad.md`, «elevado al informe de M6» — **un artefacto que todavía no existe**, de modo que si M6 no se corre el hallazgo se pierde. El audit lo levantó como **P3**. | Orquestador de migración normativa SDD |
 | 1.1 | 2026-08-24 | **Repara dos hallazgos del audit independiente del corte 09.** Entra la **columna de fuente de contenido** en la tabla de §4.2 —`Migracion-Rules.md` §2.1 la declara «la forma en que §4.1 se vuelve verificable fila por fila», y la 1.0 no la traía: **P2**—. Y entra **§7.1**, que declara que este plan ejecuta «Regenerar contenido» como **partición quirúrgica y no como re-expresión completa**, con su fundamento en el bloque de impacto de la 11.0 y con el motivo que lo hace preferible: re-expresar un documento cuyo contenido no cambió **es la forma más barata de inventar**, y §4.1 califica eso de P0. Se declara como **apartamiento de la mecánica de §4.3** y no como lectura alternativa, que es lo que el audit dejó **no concluyente** por falta de constancia. | Orquestador de migración normativa SDD |
