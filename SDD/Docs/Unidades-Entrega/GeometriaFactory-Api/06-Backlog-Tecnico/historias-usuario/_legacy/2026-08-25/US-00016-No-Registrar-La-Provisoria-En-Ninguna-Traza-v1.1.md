@@ -1,0 +1,82 @@
+> **Artefacto archivado — estado `Superado`**
+>
+> Copia archivada de `US-00016-No-Registrar-La-Provisoria-En-Ninguna-Traza.md` en su versión **1.1**, tomada el 2026-08-25 por el orquestador de migración normativa **antes** de aplicar el corte de la categoría 06 de la fase M4 (`Master-Prompt.md` §5 y §8).
+>
+> - **Estado:** `Superado`
+> - **Versión que preserva:** 1.1
+> - **Fecha de archivado:** 2026-08-25
+> - **Versión vigente:** [`US-00016-No-Registrar-La-Provisoria-En-Ninguna-Traza.md`](../../US-00016-No-Registrar-La-Provisoria-En-Ninguna-Traza.md)
+>
+> El cuerpo que sigue **no se modifica**. Lo único que se tocó son **los enlaces relativos**, reescritos dos niveles para que sigan resolviendo desde esta ubicación.
+
+---
+
+# US-00016 — No registrar la provisoria en ninguna traza
+
+**Producto:** Fábrica de Geometría
+**Unidad de entrega:** GeometriaFactory-Api
+**Documento:** US-00016-No-Registrar-La-Provisoria-En-Ninguna-Traza.md
+**Versión:** 1.1
+**Estado:** Aprobada
+**Fecha:** 2026-08-12
+**Autor:** Scrum Master + API Product Owner (AG-06)
+**Épica:** EP-00003 Ciclo de vida de la cuenta de alumno
+**Etapa del producto:** `d`
+**Punto de acceso:** `A-07` y `A-09`, bajo la guardia
+**Prioridad MoSCoW:** Must
+**Estimación:** Sin fijar (ver [`../Product-Backlog.md`](../../../Product-Backlog.md) §4.1)
+
+## 1. Historia
+
+Como **producto**, quiero **que la contraseña provisoria no aparezca en ningún registro del servidor ni en ninguna traza**, para **que una clave que sirve para entrar como el alumno no quede escrita en un archivo de diagnóstico**.
+
+## 2. Contexto
+
+`05` §7 declara que **ninguna respuesta lleva la provisoria fuera del cuerpo del reseteo**, y que el registro del servidor es la **contracara obligatoria** de `RA-03`: sin él, la prohibición de exponer se convierte en imposibilidad de diagnosticar; con él mal hecho, el secreto queda escrito. El contrato de uso es [`CU-00024`](../../../../02-Especificacion-Funcional/Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md).
+
+## 3. Criterios de aceptación
+
+- Given un reseteo exitoso, When se inspecciona el registro del servidor, Then la provisoria aparece exactamente **0** veces.
+- Given una habilitación que produce provisoria, When se inspecciona el registro, Then ocurre lo mismo.
+- Given cualquier respuesta de la superficie distinta del cuerpo del reseteo o del cambio de situación, When se la inspecciona, Then **la provisoria no está**.
+
+## 4. Trazabilidad
+
+| Dimensión | Referencia |
+| --- | --- |
+| NB upstream | NB-00002 |
+| CU cubiertos | CU-00005 |
+| RN que ejerce | RN-00014 en su parte de lo que **no** se hace con el valor |
+| Componente de `05` §3.1 | Superficie de gobierno de la comisión, Traductor de motivos y códigos |
+| ¿Decide qué se dice? | **No** |
+| Familia empobrecida | **No** |
+| BT derivadas | BT-00013, BT-00017 |
+| Tests previstos en 08 | Prueba de inspección sobre las respuestas de fallo de los quince puntos **y sobre el registro del servidor** |
+
+## 5. Prioridad y estimación
+
+`Must` porque `05` §7 declara `RA-03` como la regla que **se puede violar hacia afuera desde acá**: es la última vez que un dato del backend es tocado antes de salir del servidor propio.
+
+**Estimación: sin fijar**, por [`../Product-Backlog.md`](../../../Product-Backlog.md) §4.1.
+
+## 6. DoR check
+
+- [x] Declara al menos un caso de uso de 02
+- [x] Declara la necesidad de negocio y la etapa del roadmap
+- [x] Criterios en Given/When/Then, con camino feliz y caso de borde
+- [x] Declara el punto de acceso que la realiza y el componente de `05` §3.1 que lo aloja
+- [x] Declara si su punto está bajo la guardia, y si no lo está, cuál de las cuatro ausencias declaradas es
+- [x] Toda condición que transporta es uno de los diecisiete códigos vivos del contrato, con su destino declarado
+- [x] Declara que no decide qué se dice
+- [x] Declara si su respuesta pertenece a una de las tres familias deliberadamente empobrecidas
+
+## 7. Notas y supuestos
+
+**El registro estructurado de cada error y de cada intento de acceso rechazado sí es obligatorio** (`PRODUCT-INTAKE` §17.1.P.10 · GeometriaFactory-Api): lo que esta historia acota es **qué no puede entrar en él**. Las dos cosas se sostienen juntas, y `GeometriaFactory-Infrastructure` declara la misma pareja desde su lado.
+
+## 8. Control de cambios
+
+| Versión | Fecha | Descripción |
+| --- | --- | --- |
+| 1.0 | 2026-08-10 | Emisión inicial. Confirma y redacta la historia que [`../../02-Especificacion-Funcional/Especificacion-Funcional.md`](../../../../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.3 previó con este mismo identificador y este mismo contenido. |
+| 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

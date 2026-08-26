@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Mini-Plan.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
 **Consolida a:** los documentos homónimos de las capas que componen la unidad, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
 
@@ -31,7 +31,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | Etapas que toca este proyecto de código | **Seis**: `a`, `c`, `d`, `e`, `f` y `h` |
 | Duración de cada etapa | **Sin fecha.** El avance se mide por etapas cerradas (`Roadmap-Producto.md` §1.1) |
 | Tamaño del equipo | `equipo_n = 1` (`PRODUCT-INTAKE` §2) |
-| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1 |
+| Unidad de estimación | **No aplica.** El producto no estima: planifica por etapas con punto de control bloqueante. Ver [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1, donde `PA-01` quedó **cerrado por lectura** el 2026-08-25 |
 | Nivel topológico | **3**, el último: es el **único de los siete que ensambla a los demás** (`PRODUCT-INTAKE` §13) |
 | Unidad de despliegue | **Una imagen de contenedor**, y es la unidad desplegable del backend. Es una de las **dos** del producto |
 | Puertas técnicas propias | **`PT-04`**, medida en la etapa `a`: la imagen se construye, arranca, aplica las transformaciones sobre almacén vacío y responde salud |
@@ -60,7 +60,7 @@ Lo que **sí** limita la capacidad y está declarado es el **cuello de diseño**
 | Etapas que toca este proyecto de código | **Seis**: `a`, `c`, `d`, `e`, `f`, `h` |
 | Duración de cada etapa | **Sin fecha.** El intake declara sin plazo calendario y el avance se mide por etapas cerradas (`Roadmap-Producto.md` §1.1) |
 | Tamaño del equipo | `equipo_n = 1` (`PRODUCT-INTAKE` §2) |
-| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1 |
+| Unidad de estimación | **No aplica.** El producto no estima: planifica por etapas con punto de control bloqueante. Ver [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1, donde `PA-01` quedó **cerrado por lectura** el 2026-08-25 |
 | Nivel topológico | **0**, sin dependencias salientes (`Vista-Producto.md` §3) |
 | Paralelismo entre etapas | **Ninguno.** Las etapas son estrictamente secuenciales y sin OK explícito no se avanza (`Roadmap-Producto.md` §4) |
 
@@ -85,7 +85,7 @@ Lo que **sí** limita la capacidad y está declarado es el **cuello de diseño**
 | Etapas que toca este proyecto de código | **Seis**: `a`, `c`, `d`, `e`, `f` y `h` |
 | Duración de cada etapa | **Sin fecha.** El intake declara sin plazo calendario y el avance se mide por etapas cerradas (`Roadmap-Producto.md` §1.1) |
 | Tamaño del equipo | `equipo_n = 1` (`PRODUCT-INTAKE` §2) |
-| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1 |
+| Unidad de estimación | **No aplica.** El producto no estima: planifica por etapas con punto de control bloqueante. Ver [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1, donde `PA-01` quedó **cerrado por lectura** el 2026-08-25 |
 | Nivel topológico | **1**, con una sola dependencia saliente: `GeometriaFactory-Domain` (`Vista-Producto.md` §3) |
 | Etapas del pipeline | `restore` → `build` → `test`, con las puertas bloqueantes de `05` §8 (`05` §5) |
 | Paralelismo entre etapas | **Ninguno.** Las etapas son estrictamente secuenciales y sin OK explícito no se avanza (`Roadmap-Producto.md` §4) |
@@ -113,7 +113,7 @@ Lo que **sí** limita la capacidad y está declarado es el **cuello de diseño**
 | Etapas que toca este proyecto de código | **Cinco**: `a`, `c`, `d`, `e` y `f` |
 | Duración de cada etapa | **Sin fecha.** El avance se mide por etapas cerradas (`Roadmap-Producto.md` §1.1) |
 | Tamaño del equipo | `equipo_n = 1` (`PRODUCT-INTAKE` §2) |
-| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1 |
+| Unidad de estimación | **No aplica.** El producto no estima: planifica por etapas con punto de control bloqueante. Ver [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1, donde `PA-01` quedó **cerrado por lectura** el 2026-08-25 |
 | Nivel topológico | **2**, con dos dependencias de compilación y **un solo consumidor**: la composición de raíz de `GeometriaFactory-Api` |
 | Etapas del pipeline | `restore` → `build` → `test` → **verificación de transformaciones de esquema**, que es **propia de este proyecto de código** (`05` §5) |
 | Puertas técnicas del producto que lo alcanzan | **`PT-04`**, en su parte de que la imagen **aplique las actualizaciones de esquema sobre base vacía**, medida en la etapa `a` |
@@ -776,3 +776,4 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto sin reescritura. Sube **major**. |
+| 2.1 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06.** La fila **«Unidad de estimación»** decía «Sin fijar, por `Product-Backlog.md` §4.1», y ese punto —`PA-01`— **quedó cerrado por lectura el 2026-08-25**: el producto no estima, planifica por etapas con punto de control bloqueante. **Se toca este documento aunque no esté en la superficie declarada del plan**, y es deliberado: dejarlo habría producido exactamente lo que el audit del corte del README raíz levantó como **P1** —reescribir una parte y dejar las cifras viejas en otra, que es peor que un documento viejo con su fecha declarada—. §1.2 **no cambia**: ya decía que no se declara capacidad numérica y que es deliberado, y es una de las citas con las que `PA-01` se cerró. Estado previo archivado en [`_legacy/2026-08-25/Mini-Plan-v2.0.md`](_legacy/2026-08-25/Mini-Plan-v2.0.md). Sube **minor**: corrige una fila y no cambia ninguna decisión. |
