@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Mini-Plan.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -32,7 +32,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | Etapas que toca este proyecto de código | **Las ocho.** Es el único de los siete del que se puede decir |
 | Duración de cada etapa | **Sin fecha.** El avance se mide por etapas cerradas (`Roadmap-Producto.md` §1.1) |
 | Tamaño del equipo | `equipo_n = 1` (`PRODUCT-INTAKE` §2) |
-| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1 |
+| Unidad de estimación | **No aplica.** El producto no estima: planifica por etapas con punto de control bloqueante. Ver [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1, donde `PA-01` quedó **cerrado por lectura** el 2026-08-25 |
 | Nivel topológico | **1**, con dos dependencias de compilación: `GeometriaFactory-Contracts` y el bundle de `GeometriaFactory-Visor` (`Vista-Producto.md` §3) |
 | Unidad de despliegue | **Una propia**: la publicación en el hosting público. Es una de las **dos** unidades desplegables del producto |
 | Puertas técnicas propias | **`PT-01`** en sus cuatro partes, medida en la etapa `a` **antes que cualquier otra cosa**; y la parte de **`PT-02`** que se mide sobre una página de esta pieza |
@@ -67,7 +67,7 @@ Este proyecto de código toca **las ocho** etapas comprometidas, y además parti
 | Etapas que toca este proyecto de código | **Dos**: `a` y `g`, más el **momento de medición** de `PT-02` y `PT-03`, que precede a la `g` |
 | Duración de cada etapa | **Sin fecha.** El avance se mide por etapas cerradas (`Roadmap-Producto.md` §1.1) |
 | Tamaño del equipo | `equipo_n = 1` (`PRODUCT-INTAKE` §2) |
-| Unidad de estimación | **Sin fijar**, por [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1 |
+| Unidad de estimación | **No aplica.** El producto no estima: planifica por etapas con punto de control bloqueante. Ver [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §4.1, donde `PA-01` quedó **cerrado por lectura** el 2026-08-25 |
 | Nivel topológico | **0**, sin dependencias salientes (`Vista-Producto.md` §3) |
 | Etapas del pipeline | Instalación reproducible de dependencias → empaquetado → copia al directorio de recursos estáticos del anfitrión (`05` §5) |
 | Paralelismo entre etapas | **Ninguno** entre etapas del producto (`Roadmap-Producto.md` §4) |
@@ -410,3 +410,4 @@ La bitácora se completa **al cerrar cada tramo**. Para el tramo del medio, lo q
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
+| 2.1 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06.** La fila **«Unidad de estimación»** decía «Sin fijar, por `Product-Backlog.md` §4.1», y ese punto —`PA-01`— **quedó cerrado por lectura el 2026-08-25**: el producto no estima, planifica por etapas con punto de control bloqueante. **Se toca este documento aunque no esté en la superficie declarada del plan**, y es deliberado: dejarlo habría producido exactamente lo que el audit del corte del README raíz levantó como **P1** —reescribir una parte y dejar las cifras viejas en otra, que es peor que un documento viejo con su fecha declarada—. §1.2 **no cambia**: ya decía que no se declara capacidad numérica y que es deliberado, y es una de las citas con las que `PA-01` se cerró. Estado previo archivado en [`_legacy/2026-08-25/Mini-Plan-v2.0.md`](_legacy/2026-08-25/Mini-Plan-v2.0.md). Sube **minor**: corrige una fila y no cambia ninguna decisión. |

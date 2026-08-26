@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Product-Backlog.md
-**Versión:** 3.4
+**Versión:** 4.0
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -124,61 +124,61 @@ Sin historias. La etapa `b` es un hito interno: su entregable es el mapa de nave
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-10003](historias-usuario/US-10003-Iniciar-Sesion-Sin-Que-La-Credencial-Llegue-Al-Navegador.md) | Iniciar sesión sin que la credencial llegue al navegador | Must | Sin fijar (§4.1) | Propuesta | CU-10002 | EP-10003 |
-| [US-10004](historias-usuario/US-10004-Informar-El-Motivo-Cuando-La-Cuenta-No-Admite-Ingreso.md) | Informar el motivo cuando la cuenta no admite ingreso | Must | Sin fijar (§4.1) | Propuesta | CU-10002 | EP-10003 |
-| [US-10005](historias-usuario/US-10005-Cerrar-Sesion-Y-Acotar-Las-Rutas-Por-Papel.md) | Cerrar sesión y acotar las rutas por papel | Must | Sin fijar (§4.1) | Propuesta | CU-10002 | EP-10003 |
-| [US-10006](historias-usuario/US-10006-Cambiar-La-Contrasena-Propia-Presentando-La-Vigente.md) | Cambiar la contraseña propia presentando la vigente | Must | Sin fijar (§4.1) | Propuesta | CU-10003 | EP-10003 |
-| [US-10008](historias-usuario/US-10008-Configurar-La-Cuenta-De-Administrador-Una-Sola-Vez.md) | Configurar la cuenta de administrador una sola vez en la vida de la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-10004 FA-03 | EP-10003 |
-| [US-10026](historias-usuario/US-10026-Distinguir-El-Listado-Vacio-Del-Fallo-Por-El-Tipo-Recibido.md) | Distinguir el listado vacío del fallo por el tipo recibido y no por el conteo | Must | Sin fijar (§4.1) | Propuesta | CU-10010 | EP-10003 |
-| [US-10027](historias-usuario/US-10027-Sostener-La-Reconexion-Y-El-Estado-Degradado-Como-Dos-Tramos.md) | Sostener la reconexión y el estado degradado como dos tramos independientes | Must | Sin fijar (§4.1) | Propuesta | CU-10010 | EP-10003 |
+| [US-10003](historias-usuario/US-10003-Iniciar-Sesion-Sin-Que-La-Credencial-Llegue-Al-Navegador.md) | Iniciar sesión sin que la credencial llegue al navegador | Must | **No se estima** (§4.1) | Propuesta | CU-10002 | EP-10003 |
+| [US-10004](historias-usuario/US-10004-Informar-El-Motivo-Cuando-La-Cuenta-No-Admite-Ingreso.md) | Informar el motivo cuando la cuenta no admite ingreso | Must | **No se estima** (§4.1) | Propuesta | CU-10002 | EP-10003 |
+| [US-10005](historias-usuario/US-10005-Cerrar-Sesion-Y-Acotar-Las-Rutas-Por-Papel.md) | Cerrar sesión y acotar las rutas por papel | Must | **No se estima** (§4.1) | Propuesta | CU-10002 | EP-10003 |
+| [US-10006](historias-usuario/US-10006-Cambiar-La-Contrasena-Propia-Presentando-La-Vigente.md) | Cambiar la contraseña propia presentando la vigente | Must | **No se estima** (§4.1) | Propuesta | CU-10003 | EP-10003 |
+| [US-10008](historias-usuario/US-10008-Configurar-La-Cuenta-De-Administrador-Una-Sola-Vez.md) | Configurar la cuenta de administrador una sola vez en la vida de la instancia | Must | **No se estima** (§4.1) | Propuesta | CU-10004 FA-03 | EP-10003 |
+| [US-10026](historias-usuario/US-10026-Distinguir-El-Listado-Vacio-Del-Fallo-Por-El-Tipo-Recibido.md) | Distinguir el listado vacío del fallo por el tipo recibido y no por el conteo | Must | **No se estima** (§4.1) | Propuesta | CU-10010 | EP-10003 |
+| [US-10027](historias-usuario/US-10027-Sostener-La-Reconexion-Y-El-Estado-Degradado-Como-Dos-Tramos.md) | Sostener la reconexión y el estado degradado como dos tramos independientes | Must | **No se estima** (§4.1) | Propuesta | CU-10010 | EP-10003 |
 
 ### 3.4 EP-10004 · Ciclo de vida de la cuenta de alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-10001](historias-usuario/US-10001-Registrar-La-Cuenta-Sin-Campo-De-Contrasena.md) | Registrar la cuenta con correo, nombre y apellido, sin campo de contraseña | Must | Sin fijar (§4.1) | Propuesta | CU-10001 | EP-10004 |
-| [US-10002](historias-usuario/US-10002-Rechazar-El-Registro-Con-Un-Correo-Ya-Usado.md) | Rechazar el registro con un correo ya usado, sin revelar de quién es | Must | Sin fijar (§4.1) | Propuesta | CU-10001 | EP-10004 |
-| [US-10007](historias-usuario/US-10007-Recorrer-El-Mismo-Formulario-En-Los-Tres-Cursos-De-La-Credencial.md) | Recorrer el mismo formulario de tres campos en los tres cursos de la credencial | Must | Sin fijar (§4.1) | Propuesta | CU-10003 | EP-10004 |
-| [US-10009](historias-usuario/US-10009-Ver-La-Lista-De-Cuentas-Y-Habilitar-Bloquear-Y-Rehabilitar.md) | Ver la lista de cuentas y habilitar, bloquear y rehabilitar, comunicando la provisoria | Must | Sin fijar (§4.1) | Propuesta | CU-10004 | EP-10004 |
-| [US-10010](historias-usuario/US-10010-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Y-Declarando-El-Arrastre.md) | Dar de baja exigiendo el correo escrito y declarando el arrastre antes del intento | Must | Sin fijar (§4.1) | Propuesta | CU-10004 FA-02 | EP-10004 |
-| [US-10028](historias-usuario/US-10028-Cambiar-La-Contrasena-Obligada-Y-Levantar-La-Marca.md) | Cambiar la contraseña obligada tras un reseteo y levantar la marca | Must | Sin fijar (§4.1) | Propuesta | CU-10003 FA-04 | EP-10004 |
-| [US-10029](historias-usuario/US-10029-Confinar-La-Cuenta-Marcada-A-Una-Sola-Ruta-Sin-Sesion-De-Trabajo.md) | Confinar la cuenta con cambio pendiente a una sola ruta, sin sesión de trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-10002 FA-07, CU-10003 FA-05 | EP-10004 |
-| [US-10030](historias-usuario/US-10030-Resetear-La-Contrasena-Desde-El-Panel-Declarando-Que-No-Se-Pierde-Nada.md) | Resetear la contraseña desde el panel, declarando que no se pierde ningún trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-10004 FA-06 | EP-10004 |
+| [US-10001](historias-usuario/US-10001-Registrar-La-Cuenta-Sin-Campo-De-Contrasena.md) | Registrar la cuenta con correo, nombre y apellido, sin campo de contraseña | Must | **No se estima** (§4.1) | Propuesta | CU-10001 | EP-10004 |
+| [US-10002](historias-usuario/US-10002-Rechazar-El-Registro-Con-Un-Correo-Ya-Usado.md) | Rechazar el registro con un correo ya usado, sin revelar de quién es | Must | **No se estima** (§4.1) | Propuesta | CU-10001 | EP-10004 |
+| [US-10007](historias-usuario/US-10007-Recorrer-El-Mismo-Formulario-En-Los-Tres-Cursos-De-La-Credencial.md) | Recorrer el mismo formulario de tres campos en los tres cursos de la credencial | Must | **No se estima** (§4.1) | Propuesta | CU-10003 | EP-10004 |
+| [US-10009](historias-usuario/US-10009-Ver-La-Lista-De-Cuentas-Y-Habilitar-Bloquear-Y-Rehabilitar.md) | Ver la lista de cuentas y habilitar, bloquear y rehabilitar, comunicando la provisoria | Must | **No se estima** (§4.1) | Propuesta | CU-10004 | EP-10004 |
+| [US-10010](historias-usuario/US-10010-Dar-De-Baja-Exigiendo-El-Correo-Escrito-Y-Declarando-El-Arrastre.md) | Dar de baja exigiendo el correo escrito y declarando el arrastre antes del intento | Must | **No se estima** (§4.1) | Propuesta | CU-10004 FA-02 | EP-10004 |
+| [US-10028](historias-usuario/US-10028-Cambiar-La-Contrasena-Obligada-Y-Levantar-La-Marca.md) | Cambiar la contraseña obligada tras un reseteo y levantar la marca | Must | **No se estima** (§4.1) | Propuesta | CU-10003 FA-04 | EP-10004 |
+| [US-10029](historias-usuario/US-10029-Confinar-La-Cuenta-Marcada-A-Una-Sola-Ruta-Sin-Sesion-De-Trabajo.md) | Confinar la cuenta con cambio pendiente a una sola ruta, sin sesión de trabajo | Must | **No se estima** (§4.1) | Propuesta | CU-10002 FA-07, CU-10003 FA-05 | EP-10004 |
+| [US-10030](historias-usuario/US-10030-Resetear-La-Contrasena-Desde-El-Panel-Declarando-Que-No-Se-Pierde-Nada.md) | Resetear la contraseña desde el panel, declarando que no se pierde ningún trabajo | Must | **No se estima** (§4.1) | Propuesta | CU-10004 FA-06 | EP-10004 |
 
 ### 3.5 EP-10005 · Gestión del trabajo
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-10011](historias-usuario/US-10011-Pegar-El-Texto-Del-Trabajo-Y-Enviarlo-Sin-Reescribir-Un-Caracter.md) | Pegar el texto del trabajo y enviarlo sin que se reescriba un carácter | Must | Sin fijar (§4.1) | Propuesta | CU-10005 | EP-10005 |
-| [US-10015](historias-usuario/US-10015-Ver-Los-Trabajos-Propios-Con-Sus-Cuatro-Estados.md) | Ver los trabajos propios con sus cuatro estados distinguibles | Must | Sin fijar (§4.1) | Propuesta | CU-10006 | EP-10005 |
-| [US-10016](historias-usuario/US-10016-Reeditar-Y-Eliminar-Solo-En-Borrador-Sin-Dibujar-El-Control.md) | Reeditar y eliminar sólo en `Borrador`, sin dibujar el control cuando no corresponde | Must | Sin fijar (§4.1) | Propuesta | CU-10006 | EP-10005 |
-| [US-10022](historias-usuario/US-10022-Recorrer-La-Entrega-De-La-Comision-Agrupada-Y-Filtrada.md) | Recorrer la entrega de la comisión agrupada y filtrada por alumno | Must | Sin fijar (§4.1) | Propuesta | CU-10008 | EP-10005 |
-| [US-10023](historias-usuario/US-10023-No-Pedir-Los-Borradores-Y-Responder-No-Encontrado.md) | No pedir los trabajos en `Borrador` y responder «no encontrado» al pedirlos por dirección directa | Must | Sin fijar (§4.1) | Propuesta | CU-10008 | EP-10005 |
+| [US-10011](historias-usuario/US-10011-Pegar-El-Texto-Del-Trabajo-Y-Enviarlo-Sin-Reescribir-Un-Caracter.md) | Pegar el texto del trabajo y enviarlo sin que se reescriba un carácter | Must | **No se estima** (§4.1) | Propuesta | CU-10005 | EP-10005 |
+| [US-10015](historias-usuario/US-10015-Ver-Los-Trabajos-Propios-Con-Sus-Cuatro-Estados.md) | Ver los trabajos propios con sus cuatro estados distinguibles | Must | **No se estima** (§4.1) | Propuesta | CU-10006 | EP-10005 |
+| [US-10016](historias-usuario/US-10016-Reeditar-Y-Eliminar-Solo-En-Borrador-Sin-Dibujar-El-Control.md) | Reeditar y eliminar sólo en `Borrador`, sin dibujar el control cuando no corresponde | Must | **No se estima** (§4.1) | Propuesta | CU-10006 | EP-10005 |
+| [US-10022](historias-usuario/US-10022-Recorrer-La-Entrega-De-La-Comision-Agrupada-Y-Filtrada.md) | Recorrer la entrega de la comisión agrupada y filtrada por alumno | Must | **No se estima** (§4.1) | Propuesta | CU-10008 | EP-10005 |
+| [US-10023](historias-usuario/US-10023-No-Pedir-Los-Borradores-Y-Responder-No-Encontrado.md) | No pedir los trabajos en `Borrador` y responder «no encontrado» al pedirlos por dirección directa | Must | **No se estima** (§4.1) | Propuesta | CU-10008 | EP-10005 |
 
 ### 3.6 EP-10006 · Interpretación y verificación del dato del alumno
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-10012](historias-usuario/US-10012-Previsualizar-Antes-De-Enviar-Declarando-Que-Dibujar-No-Es-Verificar.md) | Previsualizar el trabajo antes de enviarlo, declarando que dibujar no es verificar | Must | Sin fijar (§4.1) | Propuesta | CU-10005 | EP-10006 |
-| [US-10013](historias-usuario/US-10013-Ver-Las-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md) | Ver las advertencias con el valor declarado y el derivado, sin bloqueo | Must | Sin fijar (§4.1) | Propuesta | CU-10005 | EP-10006 |
-| [US-10014](historias-usuario/US-10014-Ver-Los-Errores-Con-Indice-De-Figura-Y-Campo.md) | Ver los errores con índice de figura y campo, con el trabajo en `Borrador` | Must | Sin fijar (§4.1) | Propuesta | CU-10005 | EP-10006 |
+| [US-10012](historias-usuario/US-10012-Previsualizar-Antes-De-Enviar-Declarando-Que-Dibujar-No-Es-Verificar.md) | Previsualizar el trabajo antes de enviarlo, declarando que dibujar no es verificar | Must | **No se estima** (§4.1) | Propuesta | CU-10005 | EP-10006 |
+| [US-10013](historias-usuario/US-10013-Ver-Las-Advertencias-Con-El-Valor-Declarado-Y-El-Derivado.md) | Ver las advertencias con el valor declarado y el derivado, sin bloqueo | Must | **No se estima** (§4.1) | Propuesta | CU-10005 | EP-10006 |
+| [US-10014](historias-usuario/US-10014-Ver-Los-Errores-Con-Indice-De-Figura-Y-Campo.md) | Ver los errores con índice de figura y campo, con el trabajo en `Borrador` | Must | **No se estima** (§4.1) | Propuesta | CU-10005 | EP-10006 |
 
 ### 3.7 EP-10007 · Visualización del trabajo
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-10018](historias-usuario/US-10018-Abrir-El-Trabajo-Y-Encontrar-Los-Mismos-Cuatro-Elementos.md) | Abrir el trabajo y encontrar los mismos cuatro elementos que ve el administrador | Must | Sin fijar (§4.1) | Propuesta | CU-10007 | EP-10007 |
-| [US-10019](historias-usuario/US-10019-Ver-La-Lista-De-Observaciones-Con-Su-Severidad-Y-Su-Par-De-Valores.md) | Ver la lista de observaciones con su severidad y su par de valores | Must | Sin fijar (§4.1) | Propuesta | CU-10007 | EP-10007 |
-| [US-10020](historias-usuario/US-10020-Explorar-La-Estructura-Del-Texto-Como-Arbol-Colapsable.md) | Explorar la estructura del texto como árbol colapsable | Must | Sin fijar (§4.1) | Propuesta | CU-10007 | EP-10007 |
-| [US-10021](historias-usuario/US-10021-Sincronizar-El-Arbol-Y-La-Escena-Por-Indice-De-Pieza.md) | Sincronizar el árbol y la escena por índice de pieza | **Should** | Sin fijar (§4.1) | Propuesta | CU-10007 | EP-10007 |
+| [US-10018](historias-usuario/US-10018-Abrir-El-Trabajo-Y-Encontrar-Los-Mismos-Cuatro-Elementos.md) | Abrir el trabajo y encontrar los mismos cuatro elementos que ve el administrador | Must | **No se estima** (§4.1) | Propuesta | CU-10007 | EP-10007 |
+| [US-10019](historias-usuario/US-10019-Ver-La-Lista-De-Observaciones-Con-Su-Severidad-Y-Su-Par-De-Valores.md) | Ver la lista de observaciones con su severidad y su par de valores | Must | **No se estima** (§4.1) | Propuesta | CU-10007 | EP-10007 |
+| [US-10020](historias-usuario/US-10020-Explorar-La-Estructura-Del-Texto-Como-Arbol-Colapsable.md) | Explorar la estructura del texto como árbol colapsable | Must | **No se estima** (§4.1) | Propuesta | CU-10007 | EP-10007 |
+| [US-10021](historias-usuario/US-10021-Sincronizar-El-Arbol-Y-La-Escena-Por-Indice-De-Pieza.md) | Sincronizar el árbol y la escena por índice de pieza | **Should** | **No se estima** (§4.1) | Propuesta | CU-10007 | EP-10007 |
 
 ### 3.8 EP-10008 · Desenlace de la entrega
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| [US-10017](historias-usuario/US-10017-Ver-El-Desenlace-Del-Trabajo-Propio-En-El-Listado.md) | Ver el desenlace del trabajo propio en el listado, y el comentario al abrirlo | Must | Sin fijar (§4.1) | Propuesta | CU-10006, CU-10007 | EP-10008 |
-| [US-10024](historias-usuario/US-10024-Aprobar-O-Rechazar-Con-Comentario-Opcional.md) | Aprobar o rechazar un trabajo en estado `Pendiente` con comentario opcional | Must | Sin fijar (§4.1) | Propuesta | CU-10009 | EP-10008 |
-| [US-10025](historias-usuario/US-10025-Eliminar-Cualquier-Trabajo-Que-El-Administrador-Ve.md) | Eliminar cualquier trabajo que el administrador ve, verificado forzando la solicitud | Must | Sin fijar (§4.1) | Propuesta | CU-10009 FA-03 | EP-10008 |
+| [US-10017](historias-usuario/US-10017-Ver-El-Desenlace-Del-Trabajo-Propio-En-El-Listado.md) | Ver el desenlace del trabajo propio en el listado, y el comentario al abrirlo | Must | **No se estima** (§4.1) | Propuesta | CU-10006, CU-10007 | EP-10008 |
+| [US-10024](historias-usuario/US-10024-Aprobar-O-Rechazar-Con-Comentario-Opcional.md) | Aprobar o rechazar un trabajo en estado `Pendiente` con comentario opcional | Must | **No se estima** (§4.1) | Propuesta | CU-10009 | EP-10008 |
+| [US-10025](historias-usuario/US-10025-Eliminar-Cualquier-Trabajo-Que-El-Administrador-Ve.md) | Eliminar cualquier trabajo que el administrador ve, verificado forzando la solicitud | Must | **No se estima** (§4.1) | Propuesta | CU-10009 FA-03 | EP-10008 |
 
 ### 3.2 `GeometriaFactory-Visor`
 
@@ -192,20 +192,20 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 | US | Título | MoSCoW | Estimación | Estado | CU relacionados | Épica |
 | --- | --- | --- | --- | --- | --- | --- |
-| US-12001 | Crear una instancia del visor sobre un elemento de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-12001 | EP-12002 |
-| US-12002 | Fijar el estado inicial de los dos movimientos al crear la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-12001 | EP-12003 |
-| US-12003 | Informar la ausencia de capacidad gráfica en lugar de fallar en silencio | Must | Sin fijar (§4.1) | Propuesta | CU-12001 | EP-12003 |
-| US-12004 | Dibujar las piezas del texto del trabajo | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12002 |
-| US-12005 | Leer las dimensiones con las variantes de clave del emisor | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
-| US-12006 | Enumerar toda pieza no dibujada con su índice y su condición | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
-| US-12007 | Devolver la estructura del texto para que el anfitrión arme el árbol | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
-| US-12008 | Derivar la disposición de cada pieza de su índice | Must | Sin fijar (§4.1) | Propuesta | CU-12002 | EP-12003 |
-| US-12009 | Resaltar en exclusiva la pieza del índice indicado | Must | Sin fijar (§4.1) | Propuesta | CU-12003 | EP-12002 |
-| US-12010 | Ajustar la escena al tamaño del elemento de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-12004 | EP-12003 |
-| US-12011 | Liberar los recursos de la instancia y cortar su bucle de dibujo | Must | Sin fijar (§4.1) | Propuesta | CU-12005 | EP-12002 |
-| US-12012 | Gobernar en vivo los dos movimientos automáticos sin reconstruir la instancia | Must | Sin fijar (§4.1) | Propuesta | CU-12007 | EP-12003 |
-| US-12013 | Detener el movimiento mientras la persona arrastra y mientras la superficie no está visible | Must | Sin fijar (§4.1) | Propuesta | CU-12007 | EP-12003 |
-| US-12014 | Ejercitar las seis funciones desde una página integradora sin backend | Must | Sin fijar (§4.1) | Propuesta | CU-12006 | EP-12003 |
+| US-12001 | Crear una instancia del visor sobre un elemento de dibujo | Must | **No se estima** (§4.1) | Propuesta | CU-12001 | EP-12002 |
+| US-12002 | Fijar el estado inicial de los dos movimientos al crear la instancia | Must | **No se estima** (§4.1) | Propuesta | CU-12001 | EP-12003 |
+| US-12003 | Informar la ausencia de capacidad gráfica en lugar de fallar en silencio | Must | **No se estima** (§4.1) | Propuesta | CU-12001 | EP-12003 |
+| US-12004 | Dibujar las piezas del texto del trabajo | Must | **No se estima** (§4.1) | Propuesta | CU-12002 | EP-12002 |
+| US-12005 | Leer las dimensiones con las variantes de clave del emisor | Must | **No se estima** (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12006 | Enumerar toda pieza no dibujada con su índice y su condición | Must | **No se estima** (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12007 | Devolver la estructura del texto para que el anfitrión arme el árbol | Must | **No se estima** (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12008 | Derivar la disposición de cada pieza de su índice | Must | **No se estima** (§4.1) | Propuesta | CU-12002 | EP-12003 |
+| US-12009 | Resaltar en exclusiva la pieza del índice indicado | Must | **No se estima** (§4.1) | Propuesta | CU-12003 | EP-12002 |
+| US-12010 | Ajustar la escena al tamaño del elemento de dibujo | Must | **No se estima** (§4.1) | Propuesta | CU-12004 | EP-12003 |
+| US-12011 | Liberar los recursos de la instancia y cortar su bucle de dibujo | Must | **No se estima** (§4.1) | Propuesta | CU-12005 | EP-12002 |
+| US-12012 | Gobernar en vivo los dos movimientos automáticos sin reconstruir la instancia | Must | **No se estima** (§4.1) | Propuesta | CU-12007 | EP-12003 |
+| US-12013 | Detener el movimiento mientras la persona arrastra y mientras la superficie no está visible | Must | **No se estima** (§4.1) | Propuesta | CU-12007 | EP-12003 |
+| US-12014 | Ejercitar las seis funciones desde una página integradora sin backend | Must | **No se estima** (§4.1) | Propuesta | CU-12006 | EP-12003 |
 
 **Rol común a las catorce**: el **componente anfitrión** que embebe el bundle, que vive en `GeometriaFactory-Web` y que el contrato nombra como su actor primario.
 
@@ -499,11 +499,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 | Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
 | --- | --- | --- | --- |
-| Must | 30 | 100 % | Sin fijar (§4.1) |
+| Must | 30 | 100 % | **No se estima** (§4.1) |
 | Should | 0 | 0 % | — |
 | Could | 0 | 0 % | — |
 | Won't (v1.0) | 0 | 0 % | — |
-| **Total** | **30** | **100 %** | **Sin fijar** |
+| **Total** | **30** | **100 %** | **No se estima** |
 
 | Métrica | Valor al 2026-08-11 |
 | --- | --- |
@@ -519,13 +519,13 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **El porcentaje cerrado no es una medida de avance del producto.** El avance se mide por **etapas cerradas y demostradas** (`Roadmap-Producto.md` §1.1).
 
-### 4.1 Por qué la unidad de estimación queda abierta
+### 4.1 Por qué el producto no estima, y por qué eso no es un pendiente
 
 **Este backlog no fija técnica de estimación, y lo declara en lugar de inventarla**, por los mismos tres motivos que los proyectos de código ya emitidos: el intake declara **sin plazo calendario y avance medido por etapas cerradas**; la unidad de planificación es la **etapa** y no el sprint, de modo que no hay historial del que derivar una velocidad; y `equipo_n = 1`.
 
 **Y hay un motivo propio de este proyecto de código, que es el más fuerte de todos los emitidos hasta acá**: `05` §8 declara explícitamente que **no hay umbral numérico de latencia de respuesta y que esa categoría no lo inventa**, porque las tolerancias percibidas de la categoría 03 dicen a partir de cuándo se muestra un indicador y **no cuánto puede tardar el servidor**. Un backlog que se apoya en una arquitectura que se negó a inventar su único número faltante, y que a la vez inventara puntos de historia, sería incoherente consigo mismo.
 
-En consecuencia la columna `Estimación` dice **«Sin fijar»** en las treinta historias y en las veintitrés tareas técnicas, y la decisión queda como `PA-01` de §6.
+En consecuencia la columna `Estimación` dice **«No aplica»** en las las treinta historias y en las veintitrés tareas técnicas, y **el punto `PA-01` de §6 queda cerrado por lectura**: no era una decisión pendiente sino un hecho — **ocho etapas se cerraron sin una sola estimación**, con `equipo_n = 1` y sin capacidad numérica declarada (`Mini-Plan.md` §1.2). La figura es la de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), el ítem obligatorio **sin objeto**.
 
 ### 4.2 Por qué la distribución MoSCoW es la que es
 
@@ -564,11 +564,11 @@ En consecuencia la columna `Estimación` dice **«Sin fijar»** en las treinta h
 
 | Prioridad | Cantidad de historias | Porcentaje | Estimación acumulada |
 | --- | --- | --- | --- |
-| Must | 14 | 100 % | Sin fijar (§4.1) |
+| Must | 14 | 100 % | **No se estima** (§4.1) |
 | Should | 0 | 0 % | — |
 | Could | 0 | 0 % | — |
 | Won't (v1.0) | 0 | 0 % | — |
-| **Total** | **14** | **100 %** | **Sin fijar** |
+| **Total** | **14** | **100 %** | **No se estima** |
 
 | Métrica | Valor al 2026-08-11 |
 | --- | --- |
@@ -581,7 +581,7 @@ En consecuencia la columna `Estimación` dice **«Sin fijar»** en las treinta h
 | Etapas del producto que este proyecto de código toca | 2 de las 8 comprometidas: `a` y `g`, más el momento de medición de `PT-02` y `PT-03` que precede a la `g` |
 | Deuda declarada en el backlog | 4 tareas técnicas que cierran un punto abierto: BT-12003, BT-12009, BT-12017 y BT-12018 |
 
-### 4.1 Por qué la unidad de estimación queda abierta
+### 4.1 Por qué el producto no estima, y por qué eso no es un pendiente
 
 **Este backlog no fija técnica de estimación, y lo declara en lugar de inventarla**, por el mismo fundamento que los otros dos proyectos de código de nivel 0: el intake declara **sin plazo calendario, y que el avance se mide por etapas cerradas**; la unidad de planificación es la **etapa**; no hay historial del que derivar velocidad; y `equipo_n = 1`.
 
@@ -658,7 +658,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 
 | Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
-| PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `c` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `c` cerró el **2026-08-14** y el punto sigue abierto |
+| PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `c` § «Decidido en esta etapa, y elevado al punto de control» |**Cerrado** el 2026-08-25 · **por lectura, en el corte de la 06 de la migración 10.0 → 13.3**: el producto **no estima**, y no es una decisión pendiente sino un hecho. `PRODUCT-INTAKE` §2 declara `equipo_n = 1`; `Mini-Plan.md` §1.2 declara que **no hay capacidad numérica y es deliberado**; y **ocho etapas se cerraron sin una sola estimación**. Se cierra **retirando el punto**, que `A3-Decisiones-Del-Product-Owner.md` §3 admite como cierre válido, con la figura de `ADR-14004` |
 | PA-02 | ~~**La tensión entre la prioridad declarada de `F-13` y la puerta `PT-02`**: US-10021 está dentro de lo que la puerta mide antes de comprometer la etapa `g`, de modo que en la práctica no es diferible. Este backlog **no la repriorizó**; se elevó para que el Product Owner decidiera si `F-13` seguía siendo `Should Have`.~~ **CERRADO el 2026-08-10.** Desenlace: el Product Owner **promovió `F-13` a `Must Have`** en `PRODUCT-INTAKE` **1.19** §4, con el fundamento que este backlog había elevado —§17.7 P.8 incluye la sincronización por índice entre lo que `PT-02` mide antes de comprometer la etapa `g`, y una puerta que no pasa detiene la planificación—. US-10021 pasa a `Must` en consecuencia, y §4.2 recoge el desenlace. `GeometriaFactory-Visor` había elevado la misma tensión desde el otro lado de la fachada, como `PA-06` de su backlog, y queda cerrada por la misma decisión. **La fila se conserva para no dejar hueco de numeración** | Cerrado por el Product Owner sobre `PRODUCT-INTAKE` §4 | Cerrado el 2026-08-10 | **Cerrado** |
 | PA-03 | **La versión exacta de la biblioteca de componentes de interfaz**, que la fuente deja **[A VERIFICAR]** (`05` §11 `PA-01`). Convertido en trabajo como BT-10002 | El equipo, al crear el andamiaje | `src/GeometriaFactory.Web/GeometriaFactory.Web.csproj`, apartamiento declarado | **Cerrado** el 2026-08-20 · **A2b, por lectura**: **no hay biblioteca, y es una decisión** — el `.csproj` declara que *«la etapa `b` decide NO INTRODUCIR MudBlazor»* |
 | PA-04 | **La versión de plataforma que soporta el hosting**, **[A VERIFICAR]** en la fuente (`05` §11 `PA-02`). Es `PT-01.a`, y si no pasa la salida es **bajar la versión objetivo del front y no la del backend**. Convertido en trabajo como BT-10004 | La medición de `PT-01.a` | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `a` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `a` cerró el **2026-08-13** y el punto sigue abierto |
@@ -672,7 +672,7 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 
 | Id | Punto abierto | Quién lo cierra | En qué evento se cierra (artefacto y sección) | Estado |
 | --- | --- | --- | --- | --- |
-| PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | `06-Backlog-Tecnico/Product-Backlog.md`, épica `EP-12002` | **Vigente.** `EP-12002` no está declarada cerrada en el árbol |
+| PA-01 | **La unidad de estimación**, por lo declarado en §4.1 | El Product Owner, que es también quien ejecuta | `06-Backlog-Tecnico/Product-Backlog.md`, épica `EP-12002` |**Cerrado** el 2026-08-25 · **por lectura, en el corte de la 06 de la migración 10.0 → 13.3**: el producto **no estima**, y no es una decisión pendiente sino un hecho. `PRODUCT-INTAKE` §2 declara `equipo_n = 1`; `Mini-Plan.md` §1.2 declara que **no hay capacidad numérica y es deliberado**; y **ocho etapas se cerraron sin una sola estimación**. Se cierra **retirando el punto**, que `A3-Decisiones-Del-Product-Owner.md` §3 admite como cierre válido, con la figura de `ADR-14004` |
 | PA-02 | **La versión del motor de dibujo tridimensional** que se adopta, y el cambio de interfaz que exija si es posterior a la del visualizador previo (`05` §11 `PA-01`). Convertido en trabajo como BT-12009 | El equipo, al implementar la capa 3 | `visor/package.json`, dependencia `three` | **Cerrado** el 2026-08-20 · **A2b, por lectura**: anclado en **`"three": "0.169.0"`** |
 | PA-03 | **Los nombres definitivos** de las funciones internas, de las clases y de los campos del resultado de dibujo (`05` §11 `PA-02`). **Los nombres de las seis funciones de la fachada no están abiertos**: los fija `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Visor. Convertido en trabajo como BT-12017 | El equipo, en la etapa que implementa la fachada | [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.23**, la capa 3 del visor | **Cerrado** el 2026-08-20 · **A2, por lectura**: §6.23 fija `ResultadoDeDibujo`⟶`DrawOutcome`, `PiezaNoDibujada`⟶`UndrawnPiece` y `mallaDe`⟶`meshFor` |
 | PA-04 | **El umbral numérico de fluidez de la interacción.** Ninguna fuente lo declara y `05` §8 se niega explícitamente a inventarlo. Hasta que exista, la propiedad se verifica de forma cualitativa junto con `PT-02`. Convertido en trabajo como BT-12018 | El Product Owner, o la categoría 08 al fijar su guion de medición | [`../../../../../changelog.md`](../../../../../changelog.md), etapa `g` § «Decidido en esta etapa, y elevado al punto de control» | **VENCIDO.** La etapa `g` cerró el **2026-08-17** y el punto sigue abierto |
@@ -690,3 +690,4 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 | 3.2 | 2026-08-20 | **Paso `A2` del plan de cierre**: **3** punto(s) abierto(s) **cerrados por lectura del árbol**, cada uno con **cita al artefacto que ya tenía la decisión**. Ninguno se cerró por criterio propio: por la pregunta previa de `Master-Prompt.md` §8.1, una respuesta que se sostiene con cita literal **es trabajo propio y no detención**. Los que remitían a un caso de uso **se verificaron abriendo el `CU`**, que era la condición que `Clasificacion-Pendientes-A1.md` §4 puso: una fila que dice «el `CU` lo adopta» **no prueba que el `CU` lo diga**. **Ningún enunciado de punto abierto se tocó** y ninguna decisión se inventó. Sube minor. | Orquestador SDD |
 | 3.3 | 2026-08-20 | **Segunda pasada del paso `A2`**: **3** punto(s) abierto(s) cerrados **por lectura del árbol**, sobre las familias que `Audit/A3-Decisiones-Del-Product-Owner.md` §1 dejó verificadas. Cada uno cita **el archivo que ya tenía la decisión** — el motor de dibujo anclado en `three 0.169.0`, `PBKDF2` en `PasswordDerivation.cs`, el `@media` de 768 px en `app.css`, `EmailIdentity.Normalize`, los 18 puntos de acceso, las herramientas de cada stage en los guiones, y **la biblioteca de componentes, que no existe porque la etapa `b` decidió no introducirla** y su `.csproj` lo declara como apartamiento. **Ninguno se cerró por criterio propio** y **ningún enunciado de punto abierto se tocó**. Sube minor. | Orquestador SDD |
 | 3.4 | 2026-08-20 | **1** punto(s) abierto(s) **cerrados por decisión del Product Owner** del 2026-08-20, sobre `Audit/A3-Decisiones-Del-Product-Owner.md`: el **volumen de la comisión** queda cerrado **por incognoscible** —el dato no se sabe ni se puede saber de antemano, y no se fija número—; el **límite de tamaño del cuerpo** adopta **el valor por omisión del servidor**, con la obligación derivada de declararlo explícitamente cuando se toque la composición; y el **mutation score** se cierra **con un no**, dejando `CV-19` declarado sin medir. **Ningún enunciado de punto abierto se tocó.** Sube minor. | Orquestador SDD |
+| 4.0 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06** (`Audit/Plan-Migracion-10.0-a-13.3.md` **1.2** §4.1). **`PA-01`, la unidad de estimación, queda CERRADO POR LECTURA en las dos tablas** —no por decisión—: no era un pendiente sino un hecho. `PRODUCT-INTAKE` §2 declara **`equipo_n = 1`**, y de ese dato el framework deriva que la 07 emita sólo `Mini-Plan.md`; su §1.2 declara que **no se declara capacidad numérica y es deliberado**; y el contraste que lo cierra es que **ocho etapas se cerraron sin una sola estimación**. **Estaba VENCIDO** —diferido al punto de control de la etapa `c`, que cerró el **2026-08-14** sin registrarlo— y las 30 historias de este backlog lo citaban: con la forma nueva de `Rules-Backlog-Tecnico.md` **5.0** §4.4 punto 5.b habría entrado a cada una como hallazgo **P1**. Se cierra **retirando el punto**, que `Audit/A3-Decisiones-Del-Product-Owner.md` §3 admite como cierre válido, con la figura del ítem **sin objeto** de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md). **La columna `Estimación` pasa de «Sin fijar» a «No aplica»** y §4.1 deja de titularse «por qué queda abierta». Estado previo archivado en [`_legacy/2026-08-25/Product-Backlog-v3.4.md`](_legacy/2026-08-25/Product-Backlog-v3.4.md). Sube **major**: el salto de la regla que lo gobierna es major. |
