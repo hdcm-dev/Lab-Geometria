@@ -2,14 +2,30 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** D1-Confirmacion-De-Asunciones.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-26
 **Instrumento:** decisión `D1` de [`A3-Decisiones-Del-Product-Owner.md`](A3-Decisiones-Del-Product-Owner.md) §2
-**Estado:** **Detención.** Presenta la decisión; **no toma ninguna**
+**Estado:** **DECIDIDA.** El Product Owner confirmó los valores el **2026-08-26**, con el caudal excluido
 
 ---
 
-## 0. Por qué existe este documento
+## 0. El desenlace, primero
+
+> **Decidida el 2026-08-26.** El Product Owner **confirmó** los valores de §2 —`A-2`, `A-3`, `A-4` y
+> los umbrales de `A-5`— **con la excepción del caudal**, que queda fuera por lo que declara §1 y cuyo
+> valor sale de `PT-05`.
+>
+> **Qué produjo:** **12 filas vencidas cerradas** en tres documentos de `GeometriaFactory-Api`, y los
+> gates condicionados **pasaron a bloqueantes** — `QG-03`, `QG-04` y `QG-13` de `-Api`, `QG-03` y
+> `QG-07` de `-Domain`, `QG-03` y `QG-10` de `-Application`, y `QG-05`, `QG-06` y `QG-14` de
+> `-Infrastructure`. **`QG-14` de `-Api` pasó sólo en su percentil**: sigue condicionado en su caudal.
+>
+> **Lo que la confirmación no compra**, y §5 lo declaraba antes de tomarla: los umbrales **no quedan
+> medidos**, y **nadie midió qué haría cada gate si frenara**. Eso se ve en la primera corrida.
+
+---
+
+## 1. Por qué existe este documento
 
 **`D1` es la decisión más grande del frente `A` y la más barata**, y hasta hoy había que perseguirla
 por **doce filas vencidas repartidas en cinco documentos**. Este documento la trae a una tabla: cada
@@ -29,7 +45,7 @@ de configuración.
 
 ---
 
-## 1. Lo primero, porque cambia una fila: el caudal perdió su fundamento
+## 2. Lo primero, porque cambia una fila: el caudal perdió su fundamento
 
 **No es una asunción más, y conviene decidirla sabiendo esto.** El caudal de **20 peticiones por
 minuto** se derivaba de *«una comisión operando durante una clase»*. El 2026-08-20 cerraste `D5` —el
@@ -47,9 +63,9 @@ defecto que la 11.0 vino a corregir.
 
 ---
 
-## 2. Los valores, agrupados por lo que gobiernan
+## 3. Los valores, agrupados por lo que gobiernan
 
-### 2.1 Umbrales de latencia y de arranque · `A-5` del intake §22
+### 3.1 Umbrales de latencia y de arranque · `A-5` del intake §22
 
 | Valor | Dónde rige | De dónde salió | Si lo cambiás |
 |---|---|---|---|
@@ -60,7 +76,7 @@ defecto que la 11.0 vino a corregir.
 | **10 s** — batería de dominio | `05` §8; **28 documentos** | Ídem | Alcanza al gate de tiempo de la batería |
 | ~~**20 peticiones/minuto**~~ | — | **Su fundamento se cayó con `D5`.** Ver §1 | **No se confirma acá**: sale de `PT-05` |
 
-### 2.2 Coberturas mínimas · `A-3`
+### 3.2 Coberturas mínimas · `A-3`
 
 | Proyecto de código | Umbral | Nota |
 |---|---|---|
@@ -72,7 +88,7 @@ defecto que la 11.0 vino a corregir.
 
 **El motivo declarado:** *«`RT` §11 declara qué se prueba pero **no con qué umbral**»*.
 
-### 2.3 Gates que no son de cobertura de líneas · `A-4`
+### 3.3 Gates que no son de cobertura de líneas · `A-4`
 
 | Proyecto de código | Gate | Por qué no es de líneas |
 |---|---|---|
@@ -82,7 +98,7 @@ defecto que la 11.0 vino a corregir.
 
 **Confirmar `A-4` cambia la forma del gate, no su carácter bloqueante**, según declara el propio §22.
 
-### 2.4 Métricas de negocio · `A-2`
+### 3.4 Métricas de negocio · `A-2`
 
 | Métrica | Target |
 |---|---|
@@ -95,7 +111,7 @@ defecto que la 11.0 vino a corregir.
 
 ---
 
-## 3. Qué NO entra en esta decisión, y conviene no confundir
+## 4. Qué NO entra en esta decisión, y conviene no confundir
 
 El propio intake §22 lo separa, y se transcribe para que no se confirme de más:
 
@@ -109,7 +125,7 @@ y la contesta la fase `i`.
 
 ---
 
-## 4. Las tres salidas, y qué deja cada una
+## 5. Las tres salidas, y qué deja cada una
 
 | Salida | Qué pasa | Qué queda |
 |---|---|---|
@@ -122,7 +138,7 @@ y con la forma de `Root-Rules.md` §12.2 cada una es un hallazgo **P1**.
 
 ---
 
-## 5. Lo que este documento no sabe
+## 6. Lo que este documento no sabe
 
 - **Si los umbrales son los correctos.** Sólo declara de dónde salieron: ninguna fuente los fija, y se
   eligieron altos donde la fuente señala criticidad. **Confirmarlos no los vuelve medidos.**
@@ -132,8 +148,9 @@ y con la forma de `Root-Rules.md` §12.2 cada una es un hallazgo **P1**.
 
 ---
 
-## 6. Control de cambios
+## 7. Control de cambios
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-26 | **Registra el desenlace: `D1` fue confirmada** el 2026-08-26, con el caudal excluido. Entra **§0 con el resultado primero** —qué se confirmó, qué produjo y qué **no** compra— y las secciones corren un número. **12 filas vencidas cerradas** y los gates condicionados **pasan a bloqueantes**, salvo `QG-14` de `-Api`, que pasa **sólo en su percentil**. Se conserva el cuerpo entero de la propuesta, incluidas las tres salidas de §5 y lo que §6 declara que este documento no sabe, porque **lo que vuelve auditable una decisión es ver contra qué alternativas y con qué reservas se tomó**. | Orquestador SDD |
 | 1.0 | 2026-08-26 | Emisión inicial. Trae la decisión `D1` —**doce filas vencidas en cinco documentos**— a una sola tabla, agrupada por lo que cada valor gobierna: umbrales de latencia y arranque (`A-5`), coberturas (`A-3`), gates que no son de líneas (`A-4`) y métricas de negocio (`A-2`). **§1 separa el caudal del resto antes de la tabla**, porque su fundamento **se cayó con el cierre de `D5`** y confirmarlo por arrastre sería el defecto que la 11.0 vino a corregir: su valor sale de `PT-05`, no de esta decisión. Declara lo que se destraba —**cuatro `QG` pasan a bloqueantes sin ningún otro cambio**—, lo que **no** entra —los valores que las fuentes sí declaran, y las marcas `[A VERIFICAR]`, que se resuelven midiendo—, y **lo que este documento no sabe**: si los umbrales son correctos, y qué frenaría cada gate si frenara. | Orquestador SDD |
