@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.5
+**Versión:** 1.6
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -46,7 +46,7 @@ destapó.
 
 ## 2. Las ocho decisiones que sí son tuyas
 
-### D1 · Confirmar los valores `[ASUNCIÓN]` · **12 filas vencidas, una sola decisión**
+### D1 · Confirmar los valores `[ASUNCIÓN]` · **CONFIRMADA el 2026-08-26**
 
 > **Presentada en detalle el 2026-08-26** en [`D1-Confirmacion-De-Asunciones.md`](D1-Confirmacion-De-Asunciones.md):
 > los valores agrupados por lo que gobiernan, con lo que se destraba al confirmarlos y **el caudal
@@ -142,7 +142,7 @@ siguiente**.
 | **D11** | **`D2` queda RETIRADA: el producto no estima.** No es una decisión de valor sino el reconocimiento de un hecho que nadie había contrastado — `PRODUCT-INTAKE` §2 declara `equipo_n = 1`, `Mini-Plan.md` §1.2 declara que **no hay capacidad numérica y es deliberado**, y **ocho etapas se planificaron, se construyeron, se demostraron y se cerraron sin una sola estimación**. §3 de este documento ya admitía el retiro como cierre válido; lo que faltaba era el acto | El **Product Owner**, el **2026-08-25**, sobre la recomendación del orquestador en el corte de la 06 | `PA-01` cerrado **por lectura** en las **seis** tablas de los dos `Product-Backlog.md`; las **144** `US-*.md` con su §5.b «no aplica»; las **130** celdas de los dos `Backlog-Tecnico.md`; los dos `Mini-Plan.md` |
 
 **Lo que este registro no es.** No convierte a `D9` y `D10` en dos de las ocho: **las ocho siguen
-siendo las de §2**, y de ellas **`D1`, `D6` y `D7` continúan abiertas** —tres: `D2` quedó **retirada** el 2026-08-25 (ver `D11`) y `D3` se **reformuló por lectura** el 2026-08-26, con lo que queda de ella declarado en §2—. Estas dos entran
+siendo las de §2**, y de ellas **`D6` y `D7` continúan abiertas** —dos: `D1` se **confirmó** el 2026-08-26 con el caudal excluido, `D2` quedó **retirada** el 2026-08-25 (ver `D11`) y `D3` se **reformuló por lectura** el 2026-08-26, con lo que queda de ella declarado en §2—. Estas dos entran
 por una vía distinta —un salto normativo que volvió obligatorio lo que antes no lo era— y se numeran a
 continuación para que no haya dos series.
 
@@ -160,6 +160,7 @@ continuación para que no haya dos series.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.6 | 2026-08-26 | **`D1` confirmada.** El Product Owner confirmó los valores `[ASUNCIÓN]` el 2026-08-26, **con el caudal excluido** —su fundamento se cayó con `D5` y su valor sale de `PT-05`—. **12 filas vencidas cerradas** y los gates condicionados pasaron a **bloqueantes**. **Quedan abiertas `D6` y `D7`** —dos de las ocho—, y `D6` la contesta midiendo la fase `i`. | Orquestador SDD |
 | 1.5 | 2026-08-26 | **`D1` se presenta en detalle** en [`D1-Confirmacion-De-Asunciones.md`](D1-Confirmacion-De-Asunciones.md) 1.0: las **doce filas vencidas** repartidas en cinco documentos quedan en una sola tabla, agrupadas por lo que cada valor gobierna, con lo que se destraba al confirmarlas —**cuatro `QG` pasan a bloqueantes**— y con **el caudal separado del resto**, porque su fundamento se cayó al cerrarse `D5` y su valor sale de `PT-05`. El recuento de la cabecera pasa de «~14 filas» a **12**, contadas sobre el árbol. | Orquestador SDD |
 | 1.4 | 2026-08-26 | **`D3` se reformula por lectura, y §4 §5 lo había autorizado.** «Si aparece, pasa a la lista de §1 y deja de ser tuya» — **apareció**: la vigencia está fijada en **480 minutos** por omisión de `SigningOptions.cs:25`, sin nada que la sobreescriba. Las tres filas del árbol dejaron de afirmar que no hay número y **dejaron de estar vencidas**. **Lo que queda es una pregunta más chica**: si ocho horas cumplen el criterio de `ADR-00003` §5, que **no se puede contestar leyendo** porque ninguna fuente declara cuánto dura una clase. Más la obligación derivada de declarar el valor explícitamente, por el criterio de `D4`. **Siguen abiertas `D1`, `D6` y `D7`** — tres, no cuatro. | Orquestador SDD |
 | 1.3 | 2026-08-25 | **Corrige el recuento de §4**, que el audit de **M6** levantó como **P2**: §2 declaraba `D2` **retirada** y §4 la seguía contando entre las abiertas, en el mismo documento y a dieciocho líneas de distancia. Son **cuatro** las que continúan abiertas —`D1`, `D3`, `D6` y `D7`—, no cinco. | Orquestador SDD |

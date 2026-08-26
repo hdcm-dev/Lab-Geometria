@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Entornos-Deploy.md
-**Versión:** 3.1
+**Versión:** 3.2
 **Estado:** Propuesto
-**Fecha:** 2026-08-24
+**Fecha:** 2026-08-26
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -85,7 +85,7 @@ realiza es el 2.b**, y se lee contra él.
 | **Qué ocupa su lugar** | El pull request por etapa, y **las dos puertas bloqueantes que el flujo de publicación corre antes de subir** —`QG-01` y `QG-02` de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.1—, que es lo más parecido a un `plan` aprobado que este despliegue tiene: se verifica antes de tocar el destino |
 | **Qué lo reabriría** | Que el front pase a un hosting provisionado con código |
 | **Apartamiento que lo autoriza** | [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), que declara «no aplica» como tercera salida frente a un ítem obligatorio **sin objeto**, con sus tres partes obligatorias |
-| **Estado de ese apartamiento** | **`Propuesto`**, esperando la aprobación del Product Owner. Mientras tanto la declaración se apoya en un instrumento **todavía no aceptado**, y se dice en lugar de omitirse |
+| **Estado de ese apartamiento** | **`Aceptado`** — aprobado por el Product Owner el **2026-08-26**. La declaración deja de apoyarse en un instrumento sin aceptar, y el apartamiento **cuenta como decisión y no como omisión** |
 
 **No se difiere**: está contestado con su motivo y su condición de reapertura, y por eso no lleva la
 forma de `Root-Rules.md` §12.2.
@@ -271,6 +271,7 @@ Consecuencias operativas concretas, y se declaran porque una decisión de esta c
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 3.1 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **§3.b suma el estado del apartamiento en el que se apoya** (**P3**): `ADR-14004` está **`Propuesto`** y la emisión anterior lo citaba como si ya autorizara. |
+| 3.2 | 2026-08-26 | **El apartamiento en el que se apoya §3.b pasa a `Aceptado`.** El Product Owner aprobó [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md) el **2026-08-26**, sin modificar su contenido. La fila que declaraba que la figura «no aplica» se sostenía sobre un instrumento **todavía no aprobado** deja de hacer falta: con la aceptación, **el apartamiento cuenta como decisión y no como omisión** (`Root-Rules.md` §11), que es la diferencia que ese ADR existe para producir. **Nada más cambia**: el ítem sigue contestado igual, con su motivo y su condición de reapertura. Sube **minor**. |
 | 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Y §3.b suma la cita de [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md)**, el apartamiento que autoriza la figura «no aplica» y que la ronda 1 usó sin declarar; **P2** del audit. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
 | 2.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entra **§3.b, la aprobación de `plan` antes de `apply` como ítem propio** —numerada `3.b` porque la provisión de esta unidad vive en §3, y declarando que **el ítem de la regla que realiza es el 2.b** de `Rules-Devops.md` **6.0** §4.4—. Se declara **no aplica**, con el fundamento que §3.1 ya traía: el hosting es un servicio de terceros que se configura por fuera del repositorio. Y se nombra lo que ocupa su lugar: **las dos puertas bloqueantes que el flujo corre antes de subir**, `QG-01` y `QG-02`, que es lo más parecido a un `plan` aprobado que este despliegue tiene. Sube **minor**. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
