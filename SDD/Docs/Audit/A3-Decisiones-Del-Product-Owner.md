@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -62,10 +62,24 @@ interacción**.
 
 **Retirada, y cerrada por lectura**: el producto **no estima**. Ver §4, `D11`. **No se borra el enunciado**: un documento que hace desaparecer la pregunta deja de mostrar contra qué se decidió.
 
-### D3 · La vigencia exacta del acceso firmado · **3 filas**
+### D3 · La vigencia exacta del acceso firmado · **REFORMULADA el 2026-08-26**
 
-El intake la declara **«corta»** sin fijar número, y `ADR-00003` la toma de configuración. **No la
-encontré fijada en el árbol.**
+~~El intake la declara **«corta»** sin fijar número, y `ADR-00003` la toma de configuración. **No la
+encontré fijada en el árbol.**~~
+
+**Sí estaba fijada, y §5 de este documento ya anticipaba que si aparecía dejaba de ser tuya.** El valor
+en efecto es **480 minutos —ocho horas—**, por omisión de `SigningOptions.cs:25`, y **nada lo
+sobreescribe**: ni `appsettings`, ni la composición. Las tres filas se reformularon **por lectura** y
+**dejaron de estar vencidas**.
+
+**Lo que sigue siendo tuyo, y ahora es una pregunta más chica y más precisa:** `ADR-00003` §5 fija el
+criterio de que el acceso **«caduque dentro de la sesión de trabajo de una clase»**. **¿Ocho horas lo
+cumplen?** No se puede contestar leyendo, porque **ninguna fuente del producto declara cuánto dura una
+clase**.
+
+**Y una obligación derivada que no depende de tu respuesta**, con el mismo criterio con que cerraste
+`D4` el 2026-08-20: **el valor se declara explícitamente** en la configuración, en lugar de quedar como
+omisión del código.
 
 ### D4 · El límite de tamaño del cuerpo de una petición · **2 filas**
 
@@ -124,7 +138,7 @@ siguiente**.
 | **D11** | **`D2` queda RETIRADA: el producto no estima.** No es una decisión de valor sino el reconocimiento de un hecho que nadie había contrastado — `PRODUCT-INTAKE` §2 declara `equipo_n = 1`, `Mini-Plan.md` §1.2 declara que **no hay capacidad numérica y es deliberado**, y **ocho etapas se planificaron, se construyeron, se demostraron y se cerraron sin una sola estimación**. §3 de este documento ya admitía el retiro como cierre válido; lo que faltaba era el acto | El **Product Owner**, el **2026-08-25**, sobre la recomendación del orquestador en el corte de la 06 | `PA-01` cerrado **por lectura** en las **seis** tablas de los dos `Product-Backlog.md`; las **144** `US-*.md` con su §5.b «no aplica»; las **130** celdas de los dos `Backlog-Tecnico.md`; los dos `Mini-Plan.md` |
 
 **Lo que este registro no es.** No convierte a `D9` y `D10` en dos de las ocho: **las ocho siguen
-siendo las de §2**, y de ellas **`D1`, `D3`, `D6` y `D7` continúan abiertas** —cuatro, no cinco: `D2` quedó **retirada** el 2026-08-25, ver `D11`—. Estas dos entran
+siendo las de §2**, y de ellas **`D1`, `D6` y `D7` continúan abiertas** —tres: `D2` quedó **retirada** el 2026-08-25 (ver `D11`) y `D3` se **reformuló por lectura** el 2026-08-26, con lo que queda de ella declarado en §2—. Estas dos entran
 por una vía distinta —un salto normativo que volvió obligatorio lo que antes no lo era— y se numeran a
 continuación para que no haya dos series.
 
@@ -142,6 +156,7 @@ continuación para que no haya dos series.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.4 | 2026-08-26 | **`D3` se reformula por lectura, y §4 §5 lo había autorizado.** «Si aparece, pasa a la lista de §1 y deja de ser tuya» — **apareció**: la vigencia está fijada en **480 minutos** por omisión de `SigningOptions.cs:25`, sin nada que la sobreescriba. Las tres filas del árbol dejaron de afirmar que no hay número y **dejaron de estar vencidas**. **Lo que queda es una pregunta más chica**: si ocho horas cumplen el criterio de `ADR-00003` §5, que **no se puede contestar leyendo** porque ninguna fuente declara cuánto dura una clase. Más la obligación derivada de declarar el valor explícitamente, por el criterio de `D4`. **Siguen abiertas `D1`, `D6` y `D7`** — tres, no cuatro. | Orquestador SDD |
 | 1.3 | 2026-08-25 | **Corrige el recuento de §4**, que el audit de **M6** levantó como **P2**: §2 declaraba `D2` **retirada** y §4 la seguía contando entre las abiertas, en el mismo documento y a dieciocho líneas de distancia. Son **cuatro** las que continúan abiertas —`D1`, `D3`, `D6` y `D7`—, no cinco. | Orquestador SDD |
 | 1.2 | 2026-08-25 | **`D2` queda retirada y entra como `D11` en §4.** Lo levantó el audit del corte de la 06 como **P2**: el cierre se había ejecutado en **150 documentos** y este artefacto —el que declara **de quién es cada decisión**— seguía pidiéndosela al Product Owner en su §2. **La decisión no era de valor sino de hecho**: ocho etapas cerradas sin una sola estimación. §2 conserva el enunciado tachado en lugar de borrarlo, porque un documento que hace desaparecer la pregunta deja de mostrar contra qué se decidió. **Quedan cuatro de las ocho abiertas**: `D1`, `D3`, `D6` y `D7`. | Orquestador SDD |
 | 1.1 | 2026-08-24 | **Entra §4, las decisiones tomadas fuera de las ocho**, y las dos secciones siguientes corren a §5 y §6. La migración 10.0 → 13.3 obligó a dos que el salto volvió obligatorias —**`D9`**, el formato del inventario (**CycloneDX / JSON**), y **`D10`**, la forma de los identificadores que la 09 acuña— y el **audit independiente del corte 09 las levantó como P2** porque vivían **sólo en el documento que las usa**: una decisión del Product Owner que no se registra donde se la busca no es auditable en la ronda siguiente. Se numeran a continuación de las ocho **para que no haya dos series**, y §4 declara que **las ocho de §2 siguen siendo las ocho** y que cinco continúan abiertas. | Orquestador SDD |
