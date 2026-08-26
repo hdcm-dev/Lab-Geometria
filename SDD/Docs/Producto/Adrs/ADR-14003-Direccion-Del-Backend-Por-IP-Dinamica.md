@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14003-Direccion-Del-Backend-Por-IP-Dinamica.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** **Aceptado** — aprobado por el Product Owner el 2026-08-18
 **Fecha:** 2026-08-18
 **Autor:** Orquestador SDD
@@ -100,7 +100,7 @@ sobre el reenvío del router, que es del proyecto de contenedor.
 | --- | --- |
 | **4 · Disparadores que superarían la decisión** | Cualquiera de los dos: que el servidor propio obtenga una **IP pública estática**, o que se configure un **nombre DDNS** y `API_BASE_URL` pase a apuntar a ese nombre. En los dos casos la actualización manual deja de hacer falta y este apartamiento queda superado |
 | **5 · Estado** | **`vigente`** |
-| **6 · Saltos de versión que sobrevivió** | **0** — se emite en el conjunto **9.12** y ninguna migración lo revisó todavía |
+| **6 · Saltos de versión que sobrevivió** | **2** — se emitió en el conjunto **9.12** y sobrevivió **9.12 → 10.0** y **10.0 → 13.3**. **Revisado por la fase M4 de la migración 10.0 → 13.3, el 2026-08-25**, con resultado **no contemplado**: el campo 4 se contrastó contra las entradas **10.1 a 13.3** del `CHANGELOG.md` del framework y ninguna cumple el disparador. El incremento es de **+2** y no de +1 porque **la migración 9.12 → 10.0 no corrió esta revisión** —ni su plan ni su informe nombran la palabra «apartamiento»—, de modo que ese salto le pasó por encima sin contarse (`Audit/Plan-Migracion-10.0-a-13.3.md` §5.1) |
 
 **Qué pasa si el contador llega a 2.** `Migracion-Rules.md` §4.7 declara que un apartamiento que
 sobrevive dos o más saltos sin ser contemplado ya demostró que **no es de un producto**. Acá ese
@@ -116,3 +116,4 @@ que hay que actualizar a mano**, y que el DDNS dejó de ser «después» para se
 | --- | --- | --- |
 | 1.1 | 2026-08-18 | **Aprobado por el Product Owner.** Pasa de `Propuesto` a `Aceptado` sin ninguna modificación de su contenido: el fundamento, el disparador, el estado y el contador quedan como se emitieron. Con la aprobación, el apartamiento **cuenta como decisión y no como omisión** (`Root-Rules.md` §11), que es la diferencia que este ADR existe para producir. |
 | 1.0 | 2026-08-18 | Emisión inicial. Declara como apartamiento que la dirección del servicio de datos viaje como **IP pública dinámica** y se actualice a mano, decidido por el Product Owner el 2026-08-18 con el fundamento de ver el laboratorio funcionando antes de sumar infraestructura. Registra el procedimiento de actualización —subir `appsettings.json` y reiniciar, sin republicar entero—, las dos propiedades que abaratan el costo, y la consecuencia sobre `PT-05`: la medición registra la dirección usada y su fecha, porque una puerta en verde sobre una dirección que puede cambiar no es una garantía permanente. Disparador declarado: IP estática o DDNS. Contador en **0**. |
+| 1.2 | 2026-08-25 | **Primera revisión de este apartamiento, en la fase M4 de la migración 10.0 → 13.3** (`Migracion-Rules.md` **3.19** §4.7). **Resultado: no contemplado**: los dos disparadores del campo 4 —IP pública estática o nombre DDNS— son **infraestructura del destino**, y ninguna versión del framework los alcanza. El contador pasa de **0 a 2**: el ADR se emitió en el conjunto **9.12** y **la migración 9.12 → 10.0 no corrió la revisión**, de modo que su campo 6 siguió declarando «ninguna migración lo revisó todavía» hasta hoy. **Con el contador en 2 cruza el umbral**, y acá la lectura es la que el propio §6 anticipaba: lo que el número dice es que **el laboratorio lleva dos saltos de versión funcionando con una dirección que puede cambiar sola**. **Levantado por el audit de M6 como P0.** |

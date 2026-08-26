@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Plan-Migracion-10.0-a-13.3.md
-**Versión:** 1.5
+**Versión:** 1.6
 **Fecha:** 2026-08-23
 **Instrumento:** `Master-Prompt-Migracion.md` **2.8**, fase **M1**
 **Estado:** **Detención obligatoria.** El plan se presenta completo y espera aprobación. **Ningún documento se modifica durante M1**
@@ -181,7 +181,7 @@ mide saltos sobrevividos y el destino sobrevivió los dos.
 **Y es la consecuencia que más importa de esta fase.** Con el incremento, **los tres apartamientos
 cruzan el umbral de dos o más saltos**, y `Migracion-Rules.md` §4.7 dice qué significa: *«un
 apartamiento que sobrevive dos o más saltos sin ser contemplado ya demostró que no es de un
-producto»*. **Los tres se declaran candidatos a regla del framework** en el informe de M6, con su
+producto»*. **Escritos el 2026-08-25 con los valores 3, 3 y 2, los tres cruzan el umbral y se declaran candidatos a regla del framework** en el informe de M6, con su
 fundamento y su cuenta. La migración no los resuelve —el framework no se toca desde un destino— pero
 **el número los reporta**, que es exactamente para lo que existe.
 
@@ -282,7 +282,7 @@ que se hubiera optado por partir en lugar de re-expresar.
 |---|---|---|
 | **M2 · intake** | **Sin filas.** `PRODUCT-INTAKE-template` no se movió —3.4 en el origen y en la vigente—, así que no hay migración estructural del intake | Sin trabajo |
 | **M3 · manifiesto** | **Sin filas.** `PRODUCT-MANIFEST-template` sigue en 6.0 y M2 no cambia nada. El manifiesto se toca en M5, sólo por su §1.1 | Sin trabajo |
-| **M4 · `SDD/Docs/`** | **151 documentos**: 144 `US-*.md` (§4.1), 6 de la 09 (§4.2) y el README raíz (§4.3). Más la revisión de apartamientos de §5, que escribe el campo 6 de los tres ADR | **Es toda la migración.** Corte 09 **cerrado en ronda 2** |
+| **M4 · `SDD/Docs/`** | **151 documentos**: 144 `US-*.md` (§4.1), 6 de la 09 (§4.2) y el README raíz (§4.3). Más la revisión de apartamientos de §5, que escribe el campo 6 de los tres ADR | **COMPLETA.** Los 151 documentos en tres cortes, cada uno con su audit. **La revisión de apartamientos quedó sin ejecutar hasta el 2026-08-25**: el audit de **M6** la levantó como **P0** —fila del plan sin resolver y sin declarar— y los tres ADR pasaron a **1.2** con su campo 6 escrito |
 | **M5 · procedencia** | Reescribe `PRODUCT-MANIFEST` §1.1 a **13.3**, **sólo si M4 cerró completa**. Si no, se declara migración parcial por §4.6 | Pendiente |
 | **M6 · auditoría** | Auditor **independiente**, con el encargo de `Master-Prompt.md` §10: refutar y no verificar, con cita literal o el veredicto no vale. Declara los **tres candidatos a regla del framework** de §5.1 | Pendiente |
 
@@ -298,6 +298,7 @@ construido encima**: si la segunda ronda se va a encargar, conviene decidirlo an
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.6 | 2026-08-25 | **Cierra el `P0` que el audit de M6 levantó y que fundó el RECHAZO de la migración.** §8 mandaba a M4 escribir el campo 6 de los tres ADR y **M4 nunca los tocó** —su último commit era del 17 y 18 de agosto, anterior a este plan—; §5.1 declaraba el resultado en tiempo futuro y nadie lo aplicó. La verificación de M5 declaró «ninguna fila del plan quedó sin resolver» **cerrando cuatro de cinco**, y la procedencia se apoyó en esa frase. **Es el defecto que este mismo destino eleva al framework como `HM-02`**: una obligación atada a un evento que llega, pasa y no deja rastro de que nadie la miró. Los tres ADR pasan a **1.2** con sus contadores en **3, 3 y 2**, y con eso **los tres cruzan el umbral** —antes de escribirlos, ninguno lo cruzaba, que es el `M6-4`—. La fila de §8 declara el estado real en vez de darla por hecha. | Orquestador de migración normativa SDD |
 | 1.5 | 2026-08-25 | **Cierre de las filas del plan, en la verificación de M5.** Las **cuatro** filas de §4.2 pasan de «A verificar en M4» a su **resultado real**, que es lo que `Master-Prompt-Migracion.md` §9 paso 1 exige antes de tocar la procedencia: ninguna fila del plan puede quedar sin resolver. **Y se corrige un defecto de medición del propio plan**: la fila de `PRODUCT-INTAKE-template` decía **«3.4 → 3.4, sin cambio»** y el árbol lo tiene en **3.5** desde el framework **13.2**. La emisión 1.0 lo midió con un criterio que tomaba la última fila de la tabla en lugar de la mayor, y esa tabla no está ordenada. **No cambia el trabajo** —el bloque de impacto de la 13.2 declara «Ninguno» y la subsección nueva es opcional— pero la fila afirmaba algo falso, y la procedencia iba a apoyarse en ella. Los otros **23 artefactos** se re-verificaron uno por uno contra el árbol: coinciden. | Orquestador de migración normativa SDD |
 | 1.4 | 2026-08-25 | **Repara tres hallazgos del audit del corte de la 06.** **`C3-3`**: §4.1 y §7 seguían declarando que la estimación era «una decisión que hoy no está tomada» **en el mismo documento que subió de versión para registrar su cierre**; se declara el desenlace del 2026-08-25 y **se conserva la pregunta original**, porque lo que vuelve auditable una decisión es ver contra qué alternativas se tomó. **`C3-4`**: `HM-02` afirmaba que **ninguna** de las tres comprobaciones detecta el ítem sin objeto, y **la comprobación 6 de §10.0 sí tiene el test del vencimiento**; se acota al hueco real —**un ítem cuyo evento no ocurrió pero cuya premisa murió**— y se declara que lo de `PA-01` fue **falta de cobertura**: ninguna fase volvió a abrir la 06 desde el 2026-08-14. Un reporte al framework que le atribuya un hueco que no tiene se responde solo. **`C3-7`**: una línea en blanco dejaba a `HM-02` **fuera de la tabla** de §5.2. | Orquestador de migración normativa SDD |
 | 1.3 | 2026-08-25 | **§5.2 suma `HM-02`**, el hallazgo que el corte de la categoría 06 destapó y que **este destino no puede reparar**: el método contrasta el diferimiento **contra el calendario y no contra lo que el producto hizo**. `PA-01` estuvo vencido desde el 2026-08-14, **ninguna de las tres comprobaciones del método lo miró** —la compuerta mecánica, el paso 4 de la reanudación y la clasificación por enunciado del frente de cierre— y **habría entrado a 144 historias** con la forma nueva. Se eleva como **reporte `16`**, con su propuesta de partida: un tercer estado, **sin objeto**, y que la reanudación contraste la premisa. | Orquestador de migración normativa SDD |

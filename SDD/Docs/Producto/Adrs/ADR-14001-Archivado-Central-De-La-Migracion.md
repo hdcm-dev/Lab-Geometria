@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14001-Archivado-Central-De-La-Migracion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aceptado
 **Fecha:** 2026-08-16
 **Autor:** Orquestador SDD
@@ -83,7 +83,7 @@ no aplica.
 | --- | --- |
 | **4 · Disparadores que superarían la decisión** | Este apartamiento queda superado cuando **el framework declare cómo se archiva una migración estructural** —el caso en que la carpeta de origen de un documento deja de existir—, o cuando **una migración posterior de este destino vuelva a archivar de forma central**, porque entonces el archivado central deja de ser una excepción de una corrida y pasa a ser el patrón del producto |
 | **5 · Estado** | **`vigente`** |
-| **6 · Saltos de versión que sobrevivió** | **1** — la migración normativa **8.11 → 9.9** |
+| **6 · Saltos de versión que sobrevivió** | **3** — sobrevivió **8.11 → 9.9**, **9.12 → 10.0** y **10.0 → 13.3**. **Revisado por la fase M4 de la migración 10.0 → 13.3, el 2026-08-25**, con resultado **no contemplado**: el campo 4 se contrastó contra las entradas **10.1 a 13.3** del `CHANGELOG.md` del framework y ninguna cumple el disparador. El incremento es de **+2** y no de +1 porque **la migración 9.12 → 10.0 no corrió esta revisión** —ni su plan ni su informe nombran la palabra «apartamiento»—, de modo que ese salto le pasó por encima sin contarse (`Audit/Plan-Migracion-10.0-a-13.3.md` §5.1) |
 
 **El campo 4 se derivó del alcance que este ADR ya declaraba**, y no se inventó: su §4 acota el
 apartamiento a «la migración 6.0 → 8.6 y sólo esa», y deja dicho que el archivado ordinario sigue
@@ -102,8 +102,7 @@ en su fecha nadie decidió.
 
 **Qué pasa si llega a 2.** `Migracion-Rules.md` §4.7 declara que un apartamiento que sobrevive **dos o
 más saltos** sin ser contemplado ya demostró que no es de un producto, y se declara **candidato a
-regla del framework** en el informe de la migración que lo detecte. Con el contador en **1**, todavía
-no lo es. **Lo va a reportar el número y no la memoria de nadie.**
+regla del framework** en el informe de la migración que lo detecte. Con el contador en **3**, **ya lo es**, y el informe de M6 lo declara. **Lo va a reportar el número y no la memoria de nadie.**
 
 ## 7. Control de cambios
 
@@ -111,3 +110,4 @@ no lo es. **Lo va a reportar el número y no la memoria de nadie.**
 | --- | --- | --- |
 | 1.1 | 2026-08-17 | **Revisión de apartamientos de la migración 8.11 → 9.9, fase M4** (`Migracion-Rules.md` **3.7** §4.7, que la SDD 9.7 agregó al método). Entra **§6, el estado del apartamiento**, con los campos **4**, **5** y **6** que `Root-Rules.md` **6.1** §11 exige: el disparador que lo superaría, el estado **`vigente`** y el contador de saltos sobrevividos en **1**. El control de cambios pasa a §7. **Resultado de la revisión: no contemplado** —se leyeron las entradas del `CHANGELOG` del framework de la 8.12 a la 9.9 contra el disparador, y ninguna alcanza el caso—, de modo que el apartamiento **se preserva con su texto literal y su fundamento original**: §4.1 prohíbe re-fundamentarlo contra la normativa nueva. **El campo 4 no existía** y se derivó del alcance que el propio ADR declaraba, con aprobación del Product Owner en la batería de M1 (`Audit/Plan-Migracion-8.11-a-9.9.md` §3.1); el orquestador se negó a redactarlo por su cuenta. Sube **minor**: no cambia la decisión, agrega los campos que la vuelven evaluable en el salto siguiente. |
 | 1.0 | 2026-08-16 | Emisión inicial. Declara como apartamiento el archivado central de la migración 6.0 → 8.6, con su motivo, su alcance acotado a esa migración y las tres alternativas descartadas. Cierra el hallazgo **M-03** del informe de migración. |
+| 1.2 | 2026-08-25 | **Revisión de apartamientos de la migración 10.0 → 13.3, fase M4** (`Migracion-Rules.md` **3.19** §4.7). **Resultado: no contemplado.** Ninguna entrada de la 10.1 a la 13.3 declara **cómo se archiva una migración estructural**, que es el disparador del campo 4, y ninguna migración posterior de este destino volvió a archivar de forma central. El apartamiento **se preserva con su texto literal** y **sólo cambia su contador**, que sube **+2** —el salto 9.12 → 10.0, que **no corrió esta revisión**, y éste—. **Con el contador en 3 cruza el umbral de dos saltos**: `Migracion-Rules.md` §4.7 declara que un apartamiento que sobrevive dos o más ya demostró que **no es de un producto**, y queda declarado **candidato a regla del framework** en el informe de M6. **Lo levantó el audit de M6 como P0**: el plan mandaba a M4 escribir este campo y M4 no lo tocó, de modo que el contador seguía diciendo 1. |
