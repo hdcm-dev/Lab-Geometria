@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Plan-Migracion-10.0-a-13.3.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Fecha:** 2026-08-23
 **Instrumento:** `Master-Prompt-Migracion.md` **2.8**, fase **M1**
 **Estado:** **Detención obligatoria.** El plan se presenta completo y espera aprobación. **Ningún documento se modifica durante M1**
@@ -56,7 +56,7 @@ no coinciden.
 | `Master-Prompt-Reanudacion` | 1.8 | 1.9 | minor | Proceso |
 | `Catalogo-De-Criterios` | 1.6 | 1.13 | minor | Índice: no gobierna ningún artefacto |
 | `Rules-Base-Conocimiento` | no listado | 2.0 | — | **No alcanza**: no hay orquestador que la lea y las dos unidades tienen `usa_llm == false` |
-| `PRODUCT-INTAKE-template` | 3.4 | 3.4 | — | Sin cambio |
+| `PRODUCT-INTAKE-template` | 3.4 | **3.5** | minor | **No alcanza.** La 13.2 agregó `§17.P.13`, la cita de conocimiento, y su bloque de impacto declara: *«Ninguno. Un destino generado con la 13.1 no tiene trabajo: **la subsección es opcional y su ausencia no bloquea**»*. **La emisión 1.0 de este plan lo midió como «sin cambio» y era falso**: lo levantó la verificación de M5 |
 | `PRODUCT-MANIFEST-template` | 6.0 | 6.0 | — | Sin cambio |
 
 **Tres major, y es la primera vez que este destino atraviesa más de uno en un salto.** Los tres
@@ -124,10 +124,10 @@ no estaba bloqueada deja de arrastrar a la que sí.
 
 | Ítem que se parte | Documento alcanzado | Fuente de contenido (§2.1) | Estado medido en el árbol |
 |---|---|---|---|
-| §4.3 punto 5.b · **semántica de sufijos** `-alpha`, `-beta`, `-rc` | `Estrategia-Versionado.md` de las **dos** unidades | **Documento de origen**: las subsecciones de §5 ya declaraban que no se usan | A verificar en M4 |
-| §4.4 punto 2.b · **aprobación de `plan` antes de `apply`** | `Entornos-Deploy.md` de las **dos** unidades | **Documento de origen**: la sección de provisión ya declaraba que no hay herramienta declarativa | A verificar en M4 |
-| §4.6 punto 1.b · **generador de SBOM**, separado del formato | `Supply-Chain-Seguridad.md` de las **dos** unidades | **Respuesta del humano** para el formato —ninguna fuente del producto lo declara— y **documento de origen** para el resto | A verificar en M4 |
-| §4.6 punto 5.b · **DAST**, separado de SAST | `Supply-Chain-Seguridad.md` de las **dos** unidades | **Documento de origen** y **documento hermano**: `Pipeline-CI-CD.md` §10 de la propia unidad, del que salen los stages y el estado de los puntos abiertos | A verificar en M4 |
+| §4.3 punto 5.b · **semántica de sufijos** `-alpha`, `-beta`, `-rc` | `Estrategia-Versionado.md` de las **dos** unidades | **Documento de origen** | **RESUELTO** en el corte 09: §5.b emitida en las dos, **no se usan**, con su motivo y su condición de reapertura. **No se difiere**: está contestado |
+| §4.4 punto 2.b · **aprobación de `plan` antes de `apply`** | `Entornos-Deploy.md` de las **dos** unidades | **Documento de origen** | **RESUELTO** en el corte 09: **no aplica**, con la figura de `ADR-14004` —`Propuesto`— y su estado declarado en las dos |
+| §4.6 punto 1.b · **generador de SBOM**, separado del formato | `Supply-Chain-Seguridad.md` de las **dos** unidades | **Respuesta del humano** para el formato y **documento de origen** para el resto | **RESUELTO** en el corte 09 y su ronda 2: formato **CycloneDX / JSON** fijado (`A3` §4, `D9`); el generador queda diferido como `PD-10` con evento en la fase `i`, **que no ocurrió** |
+| §4.6 punto 5.b · **DAST**, separado de SAST | `Supply-Chain-Seguridad.md` de las **dos** unidades | **Documento de origen** y **documento hermano** | **RESUELTO** en el corte 09 y su ronda 3: §6.b emitida en las dos, con herramienta, dónde corre y criterio de bloqueo, **y sin condicional**: `PD-04` está cerrado |
 
 **La columna de fuente de contenido es la que vuelve verificable a §4.1 fila por fila**, y la emisión
 1.0 de este plan **no la traía**: lo levantó el audit independiente del corte 09 como hallazgo **P2**,
@@ -298,6 +298,7 @@ construido encima**: si la segunda ronda se va a encargar, conviene decidirlo an
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.5 | 2026-08-25 | **Cierre de las filas del plan, en la verificación de M5.** Las **cuatro** filas de §4.2 pasan de «A verificar en M4» a su **resultado real**, que es lo que `Master-Prompt-Migracion.md` §9 paso 1 exige antes de tocar la procedencia: ninguna fila del plan puede quedar sin resolver. **Y se corrige un defecto de medición del propio plan**: la fila de `PRODUCT-INTAKE-template` decía **«3.4 → 3.4, sin cambio»** y el árbol lo tiene en **3.5** desde el framework **13.2**. La emisión 1.0 lo midió con un criterio que tomaba la última fila de la tabla en lugar de la mayor, y esa tabla no está ordenada. **No cambia el trabajo** —el bloque de impacto de la 13.2 declara «Ninguno» y la subsección nueva es opcional— pero la fila afirmaba algo falso, y la procedencia iba a apoyarse en ella. Los otros **23 artefactos** se re-verificaron uno por uno contra el árbol: coinciden. | Orquestador de migración normativa SDD |
 | 1.4 | 2026-08-25 | **Repara tres hallazgos del audit del corte de la 06.** **`C3-3`**: §4.1 y §7 seguían declarando que la estimación era «una decisión que hoy no está tomada» **en el mismo documento que subió de versión para registrar su cierre**; se declara el desenlace del 2026-08-25 y **se conserva la pregunta original**, porque lo que vuelve auditable una decisión es ver contra qué alternativas se tomó. **`C3-4`**: `HM-02` afirmaba que **ninguna** de las tres comprobaciones detecta el ítem sin objeto, y **la comprobación 6 de §10.0 sí tiene el test del vencimiento**; se acota al hueco real —**un ítem cuyo evento no ocurrió pero cuya premisa murió**— y se declara que lo de `PA-01` fue **falta de cobertura**: ninguna fase volvió a abrir la 06 desde el 2026-08-14. Un reporte al framework que le atribuya un hueco que no tiene se responde solo. **`C3-7`**: una línea en blanco dejaba a `HM-02` **fuera de la tabla** de §5.2. | Orquestador de migración normativa SDD |
 | 1.3 | 2026-08-25 | **§5.2 suma `HM-02`**, el hallazgo que el corte de la categoría 06 destapó y que **este destino no puede reparar**: el método contrasta el diferimiento **contra el calendario y no contra lo que el producto hizo**. `PA-01` estuvo vencido desde el 2026-08-14, **ninguna de las tres comprobaciones del método lo miró** —la compuerta mecánica, el paso 4 de la reanudación y la clasificación por enunciado del frente de cierre— y **habría entrado a 144 historias** con la forma nueva. Se eleva como **reporte `16`**, con su propuesta de partida: un tercer estado, **sin objeto**, y que la reanudación contraste la premisa. | Orquestador de migración normativa SDD |
 | 1.2 | 2026-08-24 | **Ronda 3 del corte 09**, sobre el re-audit **APROBADO CON HALLAZGOS**. Entra **§5.2**, que registra los hallazgos que la migración destapa y **no repara**, con `HM-01`: los dos `PD-02` / `PD-03` de la 09 se cerraron «por lectura» con el **generador del inventario adentro y sin resolver**. Estaba declarado sólo en los dos `Supply-Chain-Seguridad.md`, «elevado al informe de M6» — **un artefacto que todavía no existe**, de modo que si M6 no se corre el hallazgo se pierde. El audit lo levantó como **P3**. | Orquestador de migración normativa SDD |
