@@ -17,7 +17,7 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 | Unidad de entrega principal | — | `GeometriaFactory-Api` |
 | Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **3.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
 | Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
-| Versión | — | 5.0 |
+| Versión | — | 5.1 |
 | Fecha | — | 2026-08-25 |
 | Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y **10.0 → 13.3** cerradas |
 
@@ -97,11 +97,20 @@ desde el framework **13.2**. **No cambió el trabajo** —el bloque de impacto d
 a apoyarse en ella. Corregida en `Plan-Migracion-10.0-a-13.3.md` **1.5**, con los otros **23
 artefactos re-verificados uno por uno**.
 
-**Por qué esta procedencia se puede escribir.** No se actualizó por el número de conjunto: se verificó
-artefacto por artefacto qué alcanzaba al destino, se ejecutaron los **tres cortes** de M4 —la 09, el
-README raíz y la 06—, cada uno con su **audit independiente**, y **ninguna fila del plan quedó sin
-resolver**. Es la condición que `Migracion-Rules.md` §4.6 exige, y cuya violación —reescribir la
-procedencia con migración parcial— es hallazgo **P0** del audit de M6.
+**Por qué esta procedencia se puede escribir, y por qué el 2026-08-25 todavía no se podía.** No se
+actualizó por el número de conjunto: se verificó artefacto por artefacto qué alcanzaba al destino y se
+ejecutaron los **tres cortes** de M4 —la 09, el README raíz y la 06—, cada uno con su audit.
+
+**Pero cuando esta tabla se escribió, la cadena no estaba completa, y la frase que decía que sí era
+falsa.** El audit de **M6** lo levantó como **P0**: el plan mandaba a M4 escribir el **campo 6 de los
+tres ADR de apartamiento** y **M4 nunca los tocó**; la verificación de M5 cerró cuatro de las cinco
+filas del plan y declaró que no quedaba ninguna. **La procedencia se apoyó en esa declaración.**
+
+**Quedó completa el mismo día, y se declara en lugar de disimularse.** Los tres ADR pasaron a **1.2**
+con sus contadores en **3, 3 y 2**, y los dos `README.md` de la 09 recibieron el archivado que les
+faltaba. Recién con eso se cumple la condición de `Migracion-Rules.md` §4.6 — y el orden en que
+ocurrió queda escrito, porque **una procedencia que no dice cuándo se volvió cierta no se puede
+auditar después**.
 
 #### Decisiones de reconciliación
 
@@ -121,7 +130,7 @@ Sin filas. `SDD/Docs/` estaba vacía al arrancar, de modo que la reconciliación
 ## §2 Los dos ejes del producto
 
 El producto tiene dos ejes que no coinciden: el de **entrega**, que dice qué se despliega, y el de
-**construcción**, que dice qué se compila. Se derivan de §13.1, §13.2 y §13.3 del intake **2.0**.
+**construcción**, que dice qué se compila. Se derivan de §13.1, §13.2 y §13.3 del intake **3.0**, que es el vigente y el que §1 declara como origen. **La cita decía 2.0 y era falsa**: la levantó el audit de M6 como **P2**, en el artefacto que declara la conformidad de todo lo demás.
 
 ### §2.A Tabla de unidades de entrega
 
@@ -273,6 +282,7 @@ correspondiente.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 5.1 | 2026-08-25 | **Cierra los tres `P0` del audit de M6, que había RECHAZADO la migración.** La emisión 5.0 declaró la cadena completa cuando no lo estaba: **la revisión de apartamientos de §4.7 nunca se ejecutó sobre el árbol** —los tres ADR seguían con sus contadores en 1, 1 y 0, del 17 y 18 de agosto— y **dos `README.md` de la 09 habían subido de versión sin archivar su estado previo**. §1.1 deja de afirmar que ninguna fila del plan quedó sin resolver y **declara el orden real**: qué faltaba, cuándo se completó y con qué. **Y se corrige la cita del intake de §2**, que decía **2.0** con el vigente en **3.0** (**P2** del mismo audit), en el artefacto que declara la conformidad de todo lo demás. Sube **minor**: no cambia ninguna versión de la tabla de procedencia, corrige lo que el documento afirmaba sobre sí mismo. |
 | 5.0 | 2026-08-25 | **Fase M5 de la séptima migración normativa, 10.0 → 13.3, y la primera que atraviesa tres saltos major.** §1.1 se reescribe con los **23 artefactos** en su versión viva, más `Rules-Base-Conocimiento` **2.0**, que entra por primera vez a la tabla **declarando que no alcanza** —no hay orquestador que lea la regla y las dos unidades tienen `usa_llm == false`—, para que su ausencia no se lea como omisión. **Las tres superficies del salto, medidas sobre el árbol**: **144** historias de usuario con su §5.b, **10** subsecciones `.b` en los seis documentos de la 09, y **5** filas del mapa de documentación con la forma nueva de `AG`. Se declara que **el destino no renumera las 550 ocurrencias del corpus**, por `Migracion-Rules.md` §4.3.1. **Y la consecuencia que no es de forma**: la partición del ítem de estimación destapó que `PA-01` estaba **vencido desde el 2026-08-14** y que **las 144 historias lo citaban** —habrían sido 144 hallazgos `P1`—; se cerró **contrastando contra el hecho**, con ocho etapas cerradas sin una sola estimación, y el retiro quedó registrado como `D11`. **La procedencia se escribe porque la cadena está completa**: tres cortes de M4, cada uno con su audit independiente, y **ninguna fila del plan sin resolver**; reescribirla con migración parcial es **P0** de M6. Estado previo archivado en `_legacy/2026-08-25/`. Sube **major**. |
 | 4.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M5**: cierre de procedencia. **Sexta** migración del destino y **la primera desde la 8.11 → 9.9 que alcanza artefactos**, después de dos saltos consecutivos de alcance cero. §1.1 se reescribe entera: el conjunto pasa de **9.12** a **10.0**, con `Root-Rules` **6.2 → 7.0** y `Rules-Devops` **4.6 → 5.0** como los **dos únicos** artefactos que alcanzan al árbol; los siete saltos minor 9.13 a 9.19 tienen **alcance documental cero**, verificado antes en la reanudación del 2026-08-18 y de nuevo en el plan. **Las tres superficies se midieron y no se supusieron**: las citas a §12 dan **cero**, el prefijo de tag es **un documento** —`Estrategia-Versionado.md` **3.0** §3.b— y los ítems diferidos son **116 filas** en seis documentos. **Se escribe recién después de verificar que M4 quedó completa**: ninguna tabla conserva la columna «Cuándo» y las 116 filas llevan su evento como artefacto y sección. §1.1 declara además el resultado que la migración destapó y que no es un detalle de forma: **76 puntos abiertos vencidos** —32 desde el 2026-08-13— y **14 sin evento declarado, elevados al Product Owner**; ninguno se cerró y ninguno se inventó. **M2 y M3 quedaron sin filas**: el intake no declara puntos abiertos con esta forma ni cita §12, de modo que el manifiesto no se re-deriva. Estado anterior archivado en `_legacy/2026-08-19/`. Sube **major**: el bloque de procedencia se reescribe entero. | Orquestador de migración normativa SDD |
 | 3.2 | 2026-08-17 | **Migración normativa 9.10 → 9.12, fase M5**: cierre de procedencia. Quinta migración del destino y **segunda consecutiva de alcance documental cero**. **Dieciocho artefactos del framework se movieron y ninguno alcanza al árbol**: la 9.11 agregó a cada tabla de anti-patrones una columna **`Detección`**, y la verificación **mecánica** —`diff` del snapshot `_legacy/9.10/` contra los archivos vivos— da **cero líneas cambiadas fuera de esa tabla en las quince reglas**. Entra `Catalogo-De-Criterios` **1.1**, artefacto nuevo del framework, **con su naturaleza de índice declarada**: no define ningún criterio y no gobierna ningún artefacto del destino; se lista para que la próxima migración no redescubra la pregunta. **Corrección propia:** la fila de reglas transversales de la emisión **3.1** decía «este árbol atravesó **tres** migraciones normativas» y enumeraba **cuatro** —el recuento no se actualizó al agregar el cuarto salto, error escrito por este mismo orquestador—; pasa a **cinco**, enumeradas, y queda declarado en `Audit/Plan-Migracion-9.10-a-9.12.md` §6 en lugar de corregirse en silencio. **Ningún documento del árbol se tocó**: M2, M3 y M4 quedaron sin filas. Sube **minor**. |

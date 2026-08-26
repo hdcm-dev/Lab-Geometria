@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -124,7 +124,7 @@ siguiente**.
 | **D11** | **`D2` queda RETIRADA: el producto no estima.** No es una decisión de valor sino el reconocimiento de un hecho que nadie había contrastado — `PRODUCT-INTAKE` §2 declara `equipo_n = 1`, `Mini-Plan.md` §1.2 declara que **no hay capacidad numérica y es deliberado**, y **ocho etapas se planificaron, se construyeron, se demostraron y se cerraron sin una sola estimación**. §3 de este documento ya admitía el retiro como cierre válido; lo que faltaba era el acto | El **Product Owner**, el **2026-08-25**, sobre la recomendación del orquestador en el corte de la 06 | `PA-01` cerrado **por lectura** en las **seis** tablas de los dos `Product-Backlog.md`; las **144** `US-*.md` con su §5.b «no aplica»; las **130** celdas de los dos `Backlog-Tecnico.md`; los dos `Mini-Plan.md` |
 
 **Lo que este registro no es.** No convierte a `D9` y `D10` en dos de las ocho: **las ocho siguen
-siendo las de §2**, y de ellas **`D1`, `D2`, `D3`, `D6` y `D7` continúan abiertas**. Estas dos entran
+siendo las de §2**, y de ellas **`D1`, `D3`, `D6` y `D7` continúan abiertas** —cuatro, no cinco: `D2` quedó **retirada** el 2026-08-25, ver `D11`—. Estas dos entran
 por una vía distinta —un salto normativo que volvió obligatorio lo que antes no lo era— y se numeran a
 continuación para que no haya dos series.
 
@@ -142,6 +142,7 @@ continuación para que no haya dos series.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.3 | 2026-08-25 | **Corrige el recuento de §4**, que el audit de **M6** levantó como **P2**: §2 declaraba `D2` **retirada** y §4 la seguía contando entre las abiertas, en el mismo documento y a dieciocho líneas de distancia. Son **cuatro** las que continúan abiertas —`D1`, `D3`, `D6` y `D7`—, no cinco. | Orquestador SDD |
 | 1.2 | 2026-08-25 | **`D2` queda retirada y entra como `D11` en §4.** Lo levantó el audit del corte de la 06 como **P2**: el cierre se había ejecutado en **150 documentos** y este artefacto —el que declara **de quién es cada decisión**— seguía pidiéndosela al Product Owner en su §2. **La decisión no era de valor sino de hecho**: ocho etapas cerradas sin una sola estimación. §2 conserva el enunciado tachado en lugar de borrarlo, porque un documento que hace desaparecer la pregunta deja de mostrar contra qué se decidió. **Quedan cuatro de las ocho abiertas**: `D1`, `D3`, `D6` y `D7`. | Orquestador SDD |
 | 1.1 | 2026-08-24 | **Entra §4, las decisiones tomadas fuera de las ocho**, y las dos secciones siguientes corren a §5 y §6. La migración 10.0 → 13.3 obligó a dos que el salto volvió obligatorias —**`D9`**, el formato del inventario (**CycloneDX / JSON**), y **`D10`**, la forma de los identificadores que la 09 acuña— y el **audit independiente del corte 09 las levantó como P2** porque vivían **sólo en el documento que las usa**: una decisión del Product Owner que no se registra donde se la busca no es auditable en la ronda siguiente. Se numeran a continuación de las ocho **para que no haya dos series**, y §4 declara que **las ocho de §2 siguen siendo las ocho** y que cinco continúan abiertas. | Orquestador SDD |
 | 1.0 | 2026-08-20 | Emisión inicial, paso **A3**. Agrupa las **57** filas vencidas restantes por **lo que hay que decidir** en lugar de por fila. **~20 resultan cerrables leyendo** —el motor 3D anclado en `three 0.169.0`, la biblioteca de componentes **decidida por apartamiento** en el `.csproj`, `PBKDF2` en `PasswordDerivation.cs`, el punto de quiebre en `app.css`, `EmailIdentity.Normalize`, los 18 puntos de acceso y las herramientas de cada stage en los guiones— y van a una **segunda pasada de `A2`**. Las restantes se reducen a **ocho decisiones**, con **`D1` absorbiendo catorce filas en una sola**: confirmar la tabla de asunciones numéricas del intake §22, que además habilita cuatro `QG`. Propone el orden **D5 → D1 → D3/D4**, con `D6` resuelta por la propia fase `i` —es medición y no decisión— y declara que **retirar un punto es tan válido como decidirlo**, porque ninguna fila se evaluó por vigencia. | Orquestador SDD |
