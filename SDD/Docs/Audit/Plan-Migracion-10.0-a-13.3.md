@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Plan-Migracion-10.0-a-13.3.md
-**Versión:** 1.6
+**Versión:** 1.8
 **Fecha:** 2026-08-23
 **Instrumento:** `Master-Prompt-Migracion.md` **2.8**, fase **M1**
 **Estado:** **Detención obligatoria.** El plan se presenta completo y espera aprobación. **Ningún documento se modifica durante M1**
@@ -191,6 +191,40 @@ haber decidido algo que en su fecha nadie decidió.
 
 ---
 
+## 5.1.1 Qué mide el contador en este destino, y por qué 3, 3 y 2
+
+**El audit de M6 levantó como `R-M6-1` que los tres números no se derivaban de ningún criterio
+declarado**, y tenía razón: eran derivables y no estaban escritos. Se declara acá.
+
+**El contador cuenta los saltos que alcanzaron artefactos de este destino, no todas las migraciones
+que atravesó.** Un apartamiento **no sobrevive a un salto que no lo pudo tocar**: si la normativa no
+alcanzó ningún artefacto, no hubo ocasión de contemplarlo ni de contradecirlo, y contarlo inflaría el
+número que `Migracion-Rules.md` §4.7 usa como señal.
+
+| Salto | ¿Alcanzó artefactos? | ¿Cuenta? |
+|---|---|---|
+| 6.0 → 8.6 | Sí | Anterior a la emisión de los tres ADR |
+| 8.6 → 8.11 | Sí | Anterior a la emisión de los tres ADR |
+| **8.11 → 9.9** | **Sí** | **Cuenta** para `ADR-14001` y `ADR-14002` |
+| 9.9 → 9.10 | **No** — su informe declara **alcance documental cero** | No cuenta |
+| 9.10 → 9.12 | **No** — ídem | No cuenta |
+| **9.12 → 10.0** | **Sí** — su plan lo declara *«la primera desde la 8.11 → 9.9 que alcanza artefactos»* | **Cuenta** para los tres |
+| **10.0 → 13.3** | **Sí** — tres reglas major | **Cuenta** para los tres |
+
+**De ahí salen los tres valores**: `ADR-14001` y `ADR-14002` cuentan **3** —8.11 → 9.9, 9.12 → 10.0 y
+éste—; `ADR-14003`, emitido en el conjunto **9.12**, cuenta **2** —9.12 → 10.0 y éste—.
+
+**Y una diferencia con la letra de `Root-Rules.md` §11 que conviene no tapar.** Su campo 6 define el
+contador como el entero que *«la migración incrementa **cada vez que revisa** el apartamiento y lo
+deja `vigente`»*. Bajo esa lectura los valores serían **2, 2 y 1**, porque **la migración 9.12 → 10.0
+no corrió la revisión** — y con eso `ADR-14003` **no cruzaría el umbral**. Este destino adopta la
+lectura del **nombre** del campo —«saltos de versión que sobrevivió»— porque **medir revisiones en vez
+de saltos premia el olvido**: un apartamiento que nadie revisó durante tres migraciones marcaría cero,
+y el instrumento existe para lo contrario. **La diferencia queda declarada y se eleva junto con
+`HM-02`**: es la misma clase de hueco.
+
+---
+
 ## 5.2 Hallazgos sobre el árbol que esta migración destapó y no repara
 
 **Se registran acá y no sólo en el documento que los encontró**, porque el informe de M6 todavía no
@@ -202,6 +236,8 @@ inexistente.
 |---|---|---|---|
 | **`HM-01`** | **`PD-02` de `Pipeline-CI-CD.md` §10.1 de `GeometriaFactory-Api` y `PD-03` del de `GeometriaFactory-Web` se cerraron con una decisión sin resolver adentro.** Los dos nombran en su enunciado el **«generador del inventario»**, y los dos se declararon **Cerrados el 2026-08-20 «por lectura»** con esta lista: `dotnet build`, `dotnet test`, `npm ci`, `webpack` y `playwright`. **Ninguna es un generador de inventario** | Las dos filas, con su estado y su lista. Y sobre el repositorio: no hay ninguna herramienta de inventario en `scripts/`, `.github/` ni `deploy/` | **La categoría 09**, reabriendo la parte no resuelta o partiéndola como ítem propio. **No lo hace esta migración**: el ítem es de otra categoría y cerrarlo o reabrirlo desde `Supply-Chain-Seguridad.md` sería decidir sobre un punto ajeno |
 | **`HM-02`** | **El método contrasta el diferimiento contra el calendario y no contra lo que el producto hizo.** Un ítem puede estar formalmente impecable —cuatro campos, evento futuro, `Vigente`— y estar difiriendo una pregunta que **los hechos ya cerraron**. `PA-01`, la unidad de estimación, es el caso medido: se difirió al punto de control de la etapa `c`, venció sin que nada chirriara, y **habría entrado a 144 historias** con la forma nueva. **Y hay que acotar qué es lo que el método no tiene, porque el hueco no está donde parecía.** La comprobación **6** de `Master-Prompt.md` §10.0 **sí** contiene el test del vencimiento —«es hallazgo el que nombre un evento de cierre que ya ocurrió»— y `PA-01` lo habría disparado, porque nombraba artefacto y sección. Lo que falló fue **la cobertura**: esa comprobación alcanza a «los que **el árbol de la fase** declara», y **ninguna fase volvió a abrir la 06 entre el 2026-08-14 y hoy**. **El hueco propio, el que ninguna comprobación cubre, es el otro**: un ítem cuyo **evento todavía no ocurrió** pero cuya **premisa ya murió**. Ése no lo detectan ni §10.0, ni el paso 4 de `Master-Prompt-Reanudacion.md` §2 —que contrasta el evento contra el calendario—, ni la clasificación por enunciado de `Plan-Cierre-De-Pendientes.md` §2, que **mandó `PA-01` a `F3`, «decisión del Product Owner», cuando el árbol ya lo tenía contestado** | **Ocho etapas cerradas sin una sola estimación** (`changelog.md`), `equipo_n = 1` (`PRODUCT-INTAKE` §2), y `Mini-Plan.md` §1.2: «no se declara capacidad numérica, y es deliberado». El ítem estuvo vencido **desde el 2026-08-14** y lo destapó la medición de este corte, no el test de vencimiento | **El framework.** Se eleva como **reporte `16`** de `IA.SDD.Documentacion`, que evalúa **SDD 12.1 o posterior** —la serie `00`–`15` está cerrada—. Propuesta de partida: un **tercer estado** junto a vencido y vigente, **sin objeto**, con obligación de citar el hecho que lo cerró; y que el paso 4 de la reanudación **contraste la premisa además del evento**. `ADR-14004` §6 campo 4 **ya declara este disparador** |
+
+| **`HM-03`** | **La política de archivado que este destino aplica no está escrita en ninguna parte, y es la que decide si algo es un defecto.** El destino archiva **el estado previo a la unidad de trabajo**, no cada estado superado dentro de ella: el README raíz archivó `v1.6` y no `v2.0`; `Supply-Chain-Seguridad.md` archivó `v2.0` y no `v2.1` ni `v3.0`; el manifiesto archivó `v4.0` y no `v5.0`. **`Master-Prompt.md` §5.1 no contempla la excepción**: dice «al ser superado, el archivo se copia completo». La práctica es razonable y uniforme en los diez commits; **lo que no existe es el documento que la declare** — y sin él, un archivado legítimo y uno omitido **se ven iguales**, que es exactamente lo que hizo falta discutir en el `M6-2` | Los diez commits de esta migración: **160 snapshots**, todos por unidad de trabajo y ninguno por estado intermedio | **El framework.** Se eleva junto con `HM-02` en el reporte `16`: o §5.1 admite la excepción y la nombra, o la práctica es incorrecta y hay que archivar cada estado. **Hoy el método no permite decidir cuál de las dos** |
 
 **Es la misma figura que el salto vino a corregir, en el destino que la originó.** Un ítem que
 empaqueta dos decisiones se cierra con la evidencia de una, y la otra desaparece del radar sin que
@@ -280,11 +316,11 @@ que se hubiera optado por partir en lugar de re-expresar.
 
 | Fase | Qué hace acá | Estado |
 |---|---|---|
-| **M2 · intake** | **Sin filas.** `PRODUCT-INTAKE-template` no se movió —3.4 en el origen y en la vigente—, así que no hay migración estructural del intake | Sin trabajo |
+| **M2 · intake** | **Sin filas.** `PRODUCT-INTAKE-template` pasó de **3.4 a 3.5** —la 13.2 agregó `§17.P.13`, la cita de conocimiento— y **su bloque de impacto declara «Ninguno»**: la subsección es **opcional** y su ausencia no bloquea. No hay migración estructural del intake. **La emisión 1.0 decía «no se movió» y era falso**; se corrigió en §2 en la 1.5 y acá en la 1.7 (`R-M6-3`) | Sin trabajo |
 | **M3 · manifiesto** | **Sin filas.** `PRODUCT-MANIFEST-template` sigue en 6.0 y M2 no cambia nada. El manifiesto se toca en M5, sólo por su §1.1 | Sin trabajo |
 | **M4 · `SDD/Docs/`** | **151 documentos**: 144 `US-*.md` (§4.1), 6 de la 09 (§4.2) y el README raíz (§4.3). Más la revisión de apartamientos de §5, que escribe el campo 6 de los tres ADR | **COMPLETA.** Los 151 documentos en tres cortes, cada uno con su audit. **La revisión de apartamientos quedó sin ejecutar hasta el 2026-08-25**: el audit de **M6** la levantó como **P0** —fila del plan sin resolver y sin declarar— y los tres ADR pasaron a **1.2** con su campo 6 escrito |
-| **M5 · procedencia** | Reescribe `PRODUCT-MANIFEST` §1.1 a **13.3**, **sólo si M4 cerró completa**. Si no, se declara migración parcial por §4.6 | Pendiente |
-| **M6 · auditoría** | Auditor **independiente**, con el encargo de `Master-Prompt.md` §10: refutar y no verificar, con cita literal o el veredicto no vale. Declara los **tres candidatos a regla del framework** de §5.1 | Pendiente |
+| **M5 · procedencia** | Reescribe `PRODUCT-MANIFEST` §1.1 a **13.3**, **sólo si M4 cerró completa**. Si no, se declara migración parcial por §4.6 | **EJECUTADA** el 2026-08-25, manifiesto **5.1**. Su condición se cumplió **después** de escribirla, y el propio §1.1 lo declara |
+| **M6 · auditoría** | Auditor **independiente**, con el encargo de `Master-Prompt.md` §10: refutar y no verificar, con cita literal o el veredicto no vale. Declara los **tres candidatos a regla del framework** de §5.1 | **EJECUTADA en dos rondas.** La primera **RECHAZÓ** con tres P0; la segunda **APROBÓ CON HALLAZGOS** y declaró **migración completa** |
 
 **Y una constancia sobre M6 que viene de la migración anterior.** Su informe declaró en §0 que **su
 auditor no fue independiente** y dejó tres cosas sin verificar. `Plan-Cierre-De-Pendientes.md` §5
@@ -298,6 +334,8 @@ construido encima**: si la segunda ronda se va a encargar, conviene decidirlo an
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.8 | 2026-08-25 | **§5.2 suma `HM-03`** y **§6 de `ADR-14003` deja el condicional** (`R-M6-2`). `HM-03` es el último hallazgo de la segunda ronda de M6: **la política de archivado que este destino aplica —el estado previo a la unidad de trabajo, no cada estado superado dentro de ella— no está escrita en ninguna parte**, y `Master-Prompt.md` §5.1 no contempla la excepción. Es uniforme en los diez commits y razonable; **el problema es que sin declararla, un archivado legítimo y uno omitido se ven iguales** — que es lo que hubo que discutir para resolver el `M6-2`. Se eleva junto con `HM-02`. | Orquestador de migración normativa SDD |
+| 1.7 | 2026-08-25 | **Cierra los hallazgos de la segunda ronda de M6.** Entra **§5.1.1**, que declara **qué mide el contador de apartamientos en este destino** —**saltos que alcanzaron artefactos**, no todas las migraciones— con la tabla de las siete y el alcance que su propio informe declara: de ahí salen **3, 3 y 2**, que eran derivables y no estaban escritos (`R-M6-1`). **Y declara la diferencia con la letra de `Root-Rules.md` §11**, que mide **revisiones** y daría 2, 2 y 1: se adopta la lectura del nombre del campo porque **medir revisiones premia el olvido** —un apartamiento que nadie miró durante tres migraciones marcaría cero—, y la diferencia se eleva junto con `HM-02`. **§8 deja de decir que la plantilla de intake «no se movió»** (`R-M6-3`) y **las filas de M5 y M6 dejan de decir «Pendiente»** con las dos fases ejecutadas (`R-M6-4`). | Orquestador de migración normativa SDD |
 | 1.6 | 2026-08-25 | **Cierra el `P0` que el audit de M6 levantó y que fundó el RECHAZO de la migración.** §8 mandaba a M4 escribir el campo 6 de los tres ADR y **M4 nunca los tocó** —su último commit era del 17 y 18 de agosto, anterior a este plan—; §5.1 declaraba el resultado en tiempo futuro y nadie lo aplicó. La verificación de M5 declaró «ninguna fila del plan quedó sin resolver» **cerrando cuatro de cinco**, y la procedencia se apoyó en esa frase. **Es el defecto que este mismo destino eleva al framework como `HM-02`**: una obligación atada a un evento que llega, pasa y no deja rastro de que nadie la miró. Los tres ADR pasan a **1.2** con sus contadores en **3, 3 y 2**, y con eso **los tres cruzan el umbral** —antes de escribirlos, ninguno lo cruzaba, que es el `M6-4`—. La fila de §8 declara el estado real en vez de darla por hecha. | Orquestador de migración normativa SDD |
 | 1.5 | 2026-08-25 | **Cierre de las filas del plan, en la verificación de M5.** Las **cuatro** filas de §4.2 pasan de «A verificar en M4» a su **resultado real**, que es lo que `Master-Prompt-Migracion.md` §9 paso 1 exige antes de tocar la procedencia: ninguna fila del plan puede quedar sin resolver. **Y se corrige un defecto de medición del propio plan**: la fila de `PRODUCT-INTAKE-template` decía **«3.4 → 3.4, sin cambio»** y el árbol lo tiene en **3.5** desde el framework **13.2**. La emisión 1.0 lo midió con un criterio que tomaba la última fila de la tabla en lugar de la mayor, y esa tabla no está ordenada. **No cambia el trabajo** —el bloque de impacto de la 13.2 declara «Ninguno» y la subsección nueva es opcional— pero la fila afirmaba algo falso, y la procedencia iba a apoyarse en ella. Los otros **23 artefactos** se re-verificaron uno por uno contra el árbol: coinciden. | Orquestador de migración normativa SDD |
 | 1.4 | 2026-08-25 | **Repara tres hallazgos del audit del corte de la 06.** **`C3-3`**: §4.1 y §7 seguían declarando que la estimación era «una decisión que hoy no está tomada» **en el mismo documento que subió de versión para registrar su cierre**; se declara el desenlace del 2026-08-25 y **se conserva la pregunta original**, porque lo que vuelve auditable una decisión es ver contra qué alternativas se tomó. **`C3-4`**: `HM-02` afirmaba que **ninguna** de las tres comprobaciones detecta el ítem sin objeto, y **la comprobación 6 de §10.0 sí tiene el test del vencimiento**; se acota al hueco real —**un ítem cuyo evento no ocurrió pero cuya premisa murió**— y se declara que lo de `PA-01` fue **falta de cobertura**: ninguna fase volvió a abrir la 06 desde el 2026-08-14. Un reporte al framework que le atribuya un hueco que no tiene se responde solo. **`C3-7`**: una línea en blanco dejaba a `HM-02` **fuera de la tabla** de §5.2. | Orquestador de migración normativa SDD |
