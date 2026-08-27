@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ============================================================================
 # verify-stage-i.sh — Puerta de los SIETE criterios de transición de la etapa
-# `i` (`Roadmap-Producto.md` **1.8** §5.2, `i` → `j…`), que es la del PRIMER
+# `i` (`Roadmap-Producto.md` **1.9** §5.2, `i` → `j…`), que es la del PRIMER
 # DESPLIEGUE REAL:
 #
 #   I-1  El front está publicado en el hosting por el flujo de FTP declarado, y

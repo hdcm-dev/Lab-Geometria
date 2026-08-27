@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Estado-Del-Destino-2026-08-27.md
-**Versión:** 1.0
+**Versión:** 1.2
 **Fecha:** 2026-08-27
 **Autor:** Orquestador de reanudación SDD
 **Nivel:** Producto
@@ -100,7 +100,7 @@ enterado**. Ver §9.
 
 | # | Dim. | Lectura declarativa | Lectura observable | Evidencia | Estado |
 |---|---|---|---|---|---|
-| **`D-06`** | 2 | Procedencia **SDD 13.3** | Framework vigente **SDD 13.7** | §6, diff artefacto por artefacto | **Abierta.** Por diseño, y esta vez **barata**: ver el umbral de §7.2 |
+| **`D-06`** | 2 | Procedencia **SDD 13.3** | Framework vigente **SDD 13.7** | §6, diff artefacto por artefacto | **CERRADA en la segunda vuelta** — §8.1: la salida `C` actualizó la procedencia a **13.7**, con la verificación de §6 como fundamento |
 | **`D-03'`** | 5' | `Estrategia-Versionado.md` §1 punto 4 y §4.1: «**ninguna etapa se cierra sin etiqueta**», en absoluto | **Cinco** etiquetas para **ocho** etapas | `git tag`; los tres huecos —`c`, `d` y `f`— declarados **en el `changelog.md` y no donde vive la regla** | **REPARADA** — §9, default `E-01` de la mesa |
 | **`D-05`** | 2 | `PRODUCT-MANIFEST` línea 3: «plantilla de referencia **5.0**»; `PRODUCT-INTAKE` línea 3: «**3.0**» | La **§1.1 del propio manifiesto** declara la plantilla en **6.0** y el intake en **3.5**, y el árbol del framework las tiene así | Hallazgo `H-04` de la mesa, ancla **E2** | **REPARADA** — §9, parche `P-04` |
 
@@ -207,6 +207,35 @@ el que cada uno queda afuera.
 elegir `B`, `C`, `D` o `E` con una divergencia abierta significa trabajar sobre un estado que el árbol
 declara mal.
 
+### 8.1 La segunda vuelta, y su decisión
+
+**Fusionada la reparación en el `PR #94`, se volvió a R0 sobre el árbol reparado** y la recomendación
+se recalculó. **Esta vez sí se movió**, y conviene decir por qué: el 2026-08-23 la reparación de `D-04`
+no tocó ninguno de los dos factores que fundaban la recomendación, y acá **las dos divergencias que
+hacían de `A` la única salida honesta quedaron cerradas** —`D-03'` y `D-05`—, de modo que lo único
+abierto pasó a ser el desfase de procedencia, que es exactamente lo que la pregunta decide.
+
+**T5, la verificación del merge:** `f3815fb` alcanzable desde `main` por `9fc28e5`, `main` **no trajo
+nada por encima de lo entregado**, la rama borrada y el árbol limpio. El recuento sobre el árbol
+fusionado confirma lo entregado: **118 filas, 9 vencidas, 86 cerradas, 12 vigentes, 11 sin evento**, y
+**5399 enlaces con 0 rotos**.
+
+| Campo | Valor |
+|---|---|
+| **Salida elegida** | **`C` · Seguir en la versión declarada, actualizando la procedencia a 13.7** — y **`D` a continuación**, en la misma sesión |
+| **Quién** | El Product Owner, el **2026-08-27**, en la segunda vuelta |
+| **Sobre qué** | Las salidas recalculadas de R2, con la recomendación **`C`** y su alternativa **`D`** |
+| **Qué continúa** | `Master-Prompt.md`, **con la decisión ya tomada**: su reconciliación normativa la recibe, informa el desfase **como decidido** y **no vuelve a detenerse** |
+| **Qué no resuelve** | Las tres escaladas abiertas de la mesa —`E-02`, `E-03` y `E-04`— y el avance de construcción, que es la salida `D` |
+
+**El acto de `C` fue una tabla y no un trabajo**, que es la diferencia con las siete migraciones
+anteriores: `PRODUCT-MANIFEST` **5.2 → 5.3**, con §1.1 reescrita a **13.7** y la lista de §6 como
+fundamento. **Ningún documento del corpus cambia.**
+
+**`B` no se eligió y el informe deja escrito por qué**, para que la decisión sea auditable después: un
+salto de cuatro versiones que sólo movió reglas de proceso **no toca ningún artefacto**, y migrar por el
+número es trabajo sin resultado.
+
 ---
 
 ## 9. Reparación de la salida A
@@ -249,19 +278,25 @@ eligió `A` sepa que está en la segunda vuelta y no lea la pregunta como nueva:
 > procedencia a 13.7**, por el umbral de §7.2 — **cero major con impacto**, y la verificación artefacto
 > por artefacto que `C` exige ya está escrita en §6.
 
+**Ocurrió, y su desenlace está en §8.1: el Product Owner eligió `C`, y `D` a continuación.** Este
+renglón queda escrito en lugar de reemplazarse por el resultado, porque lo que hace auditable la
+decisión es que se vea que la pregunta se hizo dos veces y que la segunda **no se disimuló como si
+fuera la primera**.
+
 **`B` no se recomienda y conviene decir por qué**, para que no se elija por el número: un salto de
 cuatro versiones que sólo movió reglas de proceso —cómo se reanuda, cómo se convoca una mesa, cómo se
 acuña un identificador del catálogo del framework— **no toca ningún artefacto**, y migrar por el número
 es trabajo sin resultado.
 
-### 10.2 Si la salida de la segunda vuelta es `C`
+### 10.2 La salida `C` — **EJECUTADA el 2026-08-27**
 
-`Master-Prompt.md`, **con la decisión ya tomada**: su reconciliación normativa la recibe, informa el
-desfase **como decidido** y no vuelve a detenerse. El acto concreto es **una tabla**: reescribir la
-procedencia de `PRODUCT-MANIFEST` §1.1 con los ocho artefactos movidos y la lista de §6 como
-fundamento.
+`Master-Prompt.md`, **con la decisión ya tomada**: su reconciliación normativa la recibió, informa el
+desfase **como decidido** y no volvió a detenerse. El acto concreto fue **una tabla**:
+`PRODUCT-MANIFEST` **5.2 → 5.3**, con §1.1 reescrita a **13.7**, la lista de §6 como fundamento y
+`Mesa-Rules` **1.0** incorporada como artefacto que **alcanza al destino aunque no a su corpus**.
+**Ningún documento del corpus cambió**, que es la condición que hacía a `C` correcta y barata.
 
-### 10.3 Si la salida es `D` — la construcción, que no tiene prompt
+### 10.3 La salida `D` — la construcción, que no tiene prompt · **ARRANCADA el 2026-08-27**
 
 **El alcance comprometido está cerrado.** Las ocho etapas `a` a `h` están construidas y demostradas, y
 la fase `i` tiene ya sus prerrequisitos y su puerta escritos desde el 2026-08-18.
@@ -279,6 +314,40 @@ la fase `i` tiene ya sus prerrequisitos y su puerta escritos desde el 2026-08-18
 | **Qué la bloquea** | **Sólo el Product Owner**: secretos del hosting, acceso al host y una persona en la red de la facultad |
 | **Qué destraba de paso** | **Ocho de los doce ítems vigentes**, cuyo evento de cierre es esta fase — incluidos los dos `PD-10` del generador del inventario y las tres filas que `P-06` reasignó |
 
+#### Qué se hizo el 2026-08-27 al arrancar `D`, y por qué es poco
+
+**Se corrió la puerta y se corrigió su cabecera. Nada más, y no por falta de ganas.**
+
+- `scripts/verify-stage-i.sh` citaba `Roadmap-Producto.md` **1.8** en su cabecera y el roadmap está en
+  **1.9**. Es **el mismo hallazgo `H-06`** que la mesa reparó en `Medicion-PT-05.md`, **en el único
+  lugar donde no lo había buscado**: un guion. Corregido. Los otros dos usos de «1.8» que quedan en el
+  árbol están en `changelog.md` y **son correctos**: registran lo que era cierto el día que se
+  escribieron.
+- **La puerta se corrió y se comportó como debe.** Sin `PUBLIC_URL` ni `API_URL` devuelve
+  `NO SE PUEDE MEDIR` y **sale con código 2** —distinto del 1 de «no conforme» y del 0 de «conforme»—,
+  que es la misma convención de `verify-stage-g.sh`. **No pasa en verde**, que es lo que se estaba
+  verificando: *«pasar en verde sería afirmar que se midió lo que no se miró»*.
+
+**Y acá se detiene, con la frontera declarada.** Los siete criterios de la transición `i` → `j…`
+**miden un despliegue que existe**, y este despliegue no existe todavía. `I-4` necesita **una persona
+en la red de la facultad** e `I-5` **dos personas recorriendo el circuito sobre el despliegue real**;
+los otros cinco necesitan **las dos direcciones**, que llegan por entorno y salen de secretos que no
+están en el repositorio —y que **no deben estarlo**—.
+
+**Lo que la fase `i` necesita, y es todo del Product Owner:**
+
+| # | Qué hace falta | Sin eso |
+|---|---|---|
+| 1 | Los **secretos del hosting** para el flujo de FTP declarado | `I-1` no se puede correr |
+| 2 | El **acceso al servidor propio** donde corre el servicio de datos | `I-2`, `I-3` y `I-6` no se pueden correr |
+| 3 | **Una persona en la red de la facultad**, y un alumno de verdad | `I-4` — `PT-05` — no se puede medir, y es **lo único que esta fase hace** |
+| 4 | **Dos personas** para el circuito de punta a punta | `I-5` no se puede declarar |
+
+**El resto ya está**, y está desde el 2026-08-18: los prerrequisitos —`deploy/compose.yaml`,
+`ADR-14003` y la configuración explícita—, la puerta con sus siete criterios, y
+[`Medicion-PT-05.md`](Medicion-PT-05.md) emitido **vacío a propósito**, en `SIN MEDIR`, esperando el
+número **sea cual sea**.
+
 ### 10.4 Lo que queda abierto y es del Product Owner
 
 - **`E-02` · `D7`, la herramienta que calcula la versión.** Cinco filas vencidas. Tres opciones con su
@@ -287,7 +356,7 @@ la fase `i` tiene ya sus prerrequisitos y su puerta escritos desde el 2026-08-18
   inventarlos.
 - **`E-04` · Los once ítems sin evento de cierre.** No conformes con §12.2: sin evento, nada los puede
   vencer nunca.
-- **`D-06`, la procedencia en 13.3.** La resuelve la segunda vuelta.
+- ~~**`D-06`, la procedencia en 13.3.**~~ **Cerrada** el 2026-08-27 por la salida `C` — §8.1 y §10.2.
 - **`HM-02` y `HM-03`**, que no son de este destino: van al **reporte `16`** del framework, junto con lo
   que esta corrida agrega — la mesa **encontró y descartó** los seis falsos enlaces rotos y **tumbó un
   hallazgo propio** por refutación, que es la primera medición del mecanismo que la 13.7 publicó.
@@ -298,4 +367,6 @@ la fase `i` tiene ya sus prerrequisitos y su puerta escritos desde el 2026-08-18
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.2 | 2026-08-27 | **Registra el arranque de la salida `D`**, elegida junto con `C` en la segunda vuelta. **§10.3 pasa de condicional a ejecutada** y declara lo poco que `D` pudo avanzar sin el Product Owner, con su frontera escrita: se corrió `scripts/verify-stage-i.sh`, que **devolvió `NO SE PUEDE MEDIR` con código 2** —la convención de `verify-stage-g.sh`, distinta del 1 de «no conforme»— y **no pasó en verde**, que es lo que se estaba verificando; y se corrigió su cabecera, que citaba `Roadmap-Producto.md` **1.8** con el roadmap en **1.9**. **Es el hallazgo `H-06` de la mesa en el único lugar donde no lo había buscado: un guion.** Se agrega la tabla de **las cuatro cosas que la fase `i` necesita**, las cuatro del Product Owner: secretos del hosting, acceso al servidor propio, una persona en la red de la facultad y dos personas para el circuito. | Orquestador de reanudación SDD |
+| 1.1 | 2026-08-27 | **Registra la decisión de la segunda vuelta**, que es lo que la salida `A` obliga a volver a preguntar. Fusionada la reparación en el `PR #94`, R0 corrió de nuevo sobre el árbol reparado y **la recomendación se recalculó y esta vez SÍ se movió**: `D-03'` y `D-05` quedaron cerradas y lo único abierto pasó a ser el desfase de procedencia, de modo que `A` dejó de ser la salida obligada y la recomendación pasó a **`C`**. El Product Owner eligió **`C` y `D`**, en ese orden y en la misma sesión. **§8.1 es nueva** y lleva la decisión con su autor, su fecha y la verificación de **T5**; **§5 marca `D-06` como cerrada** y **§10.2 registra `C` como ejecutada** — `PRODUCT-MANIFEST` **5.2 → 5.3**, procedencia a **13.7**, ningún documento del corpus tocado. **§10.1 conserva el renglón de la pregunta pendiente** en lugar de reemplazarlo por su resultado, para que se vea que la pregunta se hizo dos veces. | Orquestador de reanudación SDD |
 | 1.0 | 2026-08-27 | Emisión inicial. **Quinta reanudación** del destino, con `Master-Prompt-Reanudacion.md` **1.10**, y **la primera con mesa de evaluación** —`R1.5`, publicada hoy con el framework 13.7—, cuyo registro es [`Mesa-2026-08-27.md`](Mesa-2026-08-27.md) 1.0. **T0 no detuvo la corrida por primera vez en cinco reanudaciones.** **§4 corrige el recuento de ítems diferidos**: son **ocho documentos y 118 filas**, no seis y 116, porque la migración 10.0 → 13.3 emitió `PD-10` en las dos `Supply-Chain-Seguridad.md` y el recuento anterior no las incluyó. **§6 mide el diff 13.3 → 13.7 artefacto por artefacto**: ocho artefactos movidos, **cero major**, y los **cuatro** saltos con bloque de impacto vacío. **§7.2 aplica el umbral de continuidad y lo declara dado vuelta** respecto del 2026-08-23: de **dos major con impacto** a **cero**, de modo que `C` vuelve a ofrecerse y **la verificación artefacto por artefacto que exige ya está escrita**. Recomendación **`A`** con alternativa **`D`**; el Product Owner eligió **`A`**. **§9 registra la reparación**: **seis parches y un default**, once celdas en siete documentos, **vencidos de 13 a 9**, `D-03'` y `D-05` cerradas. §10 deja la segunda vuelta con su recomendación recalculada —**`C`**— y el punto de continuación de la fase `i`. | Orquestador de reanudación SDD |
