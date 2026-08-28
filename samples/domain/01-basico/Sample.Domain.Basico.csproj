@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Sample `domain/01-basico`, la pasada de EJECUCIÓN de `Rules-Examples.md` §0.2.
+    Gobernado por `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md`:
+    su §5 declara este árbol de archivos y su §6 la salida exacta, las dos escritas
+    ANTES que este código y no ajustadas después.
+
+    NO ENTRA EN `GeometriaFactory.sln` A PROPÓSITO. Si entrara, su ensamblado
+    contaría en la cobertura de `QG-03` y el sample —que existe para demostrar,
+    no para cubrir— movería un número que mide otra cosa. Se construye y se
+    corre por su ruta, que es lo que declara el comando previsto de §9.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Domain.Basico</RootNamespace>
+    <AssemblyName>sample-domain-01-basico</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Domain/GeometriaFactory.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

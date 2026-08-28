@@ -2,13 +2,14 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Estado-Del-Destino-2026-08-27.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Fecha:** 2026-08-27
 **Autor:** Orquestador de reanudación SDD
 **Nivel:** Producto
 **Instrumento:** `Master-Prompt-Reanudacion.md` **1.10**, fases R0 a R4
 **Supera a:** [`Estado-Del-Destino-2026-08-23.md`](Estado-Del-Destino-2026-08-23.md) 1.1
 **Registro de mesa:** [`Mesa-2026-08-27.md`](Mesa-2026-08-27.md) 1.0
+**Evaluación del código:** [`Evaluacion-Del-Codigo-2026-08-27.md`](Evaluacion-Del-Codigo-2026-08-27.md) 1.0
 
 ---
 
@@ -312,7 +313,7 @@ la fase `i` tiene ya sus prerrequisitos y su puerta escritos desde el 2026-08-18
 | **Puerta de salida** | `scripts/verify-stage-i.sh`, **siete criterios**; [`Medicion-PT-05.md`](Medicion-PT-05.md) **1.1** en `SIN MEDIR`, y el guion comprueba que ese estado **ya no lo diga** |
 | **Documentos que la gobiernan** | `Roadmap-Producto.md` **1.9** §2.1 y §5.2 · `Pipeline-CI-CD.md` §2.1 (`QG-01`, `QG-02`) · `Entornos-Deploy.md` §3 · `ADR-14003` 1.1 · `Estrategia-Versionado.md` **4.1** |
 | **Qué la bloquea** | **Sólo el Product Owner**: secretos del hosting, acceso al host y una persona en la red de la facultad |
-| **Qué destraba de paso** | **Ocho de los doce ítems vigentes**, cuyo evento de cierre es esta fase — incluidos los dos `PD-10` del generador del inventario y las tres filas que `P-06` reasignó |
+| **Qué destraba de paso** | **Once de los doce ítems vigentes**, cuyo evento de cierre es esta fase — incluidos los dos `PD-10` del generador del inventario y las tres filas que `P-06` reasignó. **El recuento decía «ocho» y estaba mal**: se corrigió el 2026-08-27 contándolo sobre el árbol, fila por fila. El único que no espera la fase `i` es `PD-05`, que espera la próxima emisión de la `05` de `-Web` |
 
 #### Qué se hizo el 2026-08-27 al arrancar `D`, y por qué es poco
 
@@ -367,6 +368,7 @@ número **sea cual sea**.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.3 | 2026-08-27 | **Corrige un recuento propio y suma la evaluación del código.** §10.3 declaraba que **ocho** de los doce ítems vigentes esperaban la fase `i`, y contados sobre el árbol fila por fila son **once**: el único que no la espera es `PD-05`. El número se había estimado y no contado, que es lo que `Root-Rules.md` §10 R2 existe para impedir; el «ocho» viajó además al mensaje del `PR #95`. Se agrega el enlace a [`Evaluacion-Del-Codigo-2026-08-27.md`](Evaluacion-Del-Codigo-2026-08-27.md), que mide el frente de codificación **corriendo el código** y que destapa tres hallazgos que ninguna corrida anterior tenía. | Orquestador de reanudación SDD |
 | 1.2 | 2026-08-27 | **Registra el arranque de la salida `D`**, elegida junto con `C` en la segunda vuelta. **§10.3 pasa de condicional a ejecutada** y declara lo poco que `D` pudo avanzar sin el Product Owner, con su frontera escrita: se corrió `scripts/verify-stage-i.sh`, que **devolvió `NO SE PUEDE MEDIR` con código 2** —la convención de `verify-stage-g.sh`, distinta del 1 de «no conforme»— y **no pasó en verde**, que es lo que se estaba verificando; y se corrigió su cabecera, que citaba `Roadmap-Producto.md` **1.8** con el roadmap en **1.9**. **Es el hallazgo `H-06` de la mesa en el único lugar donde no lo había buscado: un guion.** Se agrega la tabla de **las cuatro cosas que la fase `i` necesita**, las cuatro del Product Owner: secretos del hosting, acceso al servidor propio, una persona en la red de la facultad y dos personas para el circuito. | Orquestador de reanudación SDD |
 | 1.1 | 2026-08-27 | **Registra la decisión de la segunda vuelta**, que es lo que la salida `A` obliga a volver a preguntar. Fusionada la reparación en el `PR #94`, R0 corrió de nuevo sobre el árbol reparado y **la recomendación se recalculó y esta vez SÍ se movió**: `D-03'` y `D-05` quedaron cerradas y lo único abierto pasó a ser el desfase de procedencia, de modo que `A` dejó de ser la salida obligada y la recomendación pasó a **`C`**. El Product Owner eligió **`C` y `D`**, en ese orden y en la misma sesión. **§8.1 es nueva** y lleva la decisión con su autor, su fecha y la verificación de **T5**; **§5 marca `D-06` como cerrada** y **§10.2 registra `C` como ejecutada** — `PRODUCT-MANIFEST` **5.2 → 5.3**, procedencia a **13.7**, ningún documento del corpus tocado. **§10.1 conserva el renglón de la pregunta pendiente** en lugar de reemplazarlo por su resultado, para que se vea que la pregunta se hizo dos veces. | Orquestador de reanudación SDD |
 | 1.0 | 2026-08-27 | Emisión inicial. **Quinta reanudación** del destino, con `Master-Prompt-Reanudacion.md` **1.10**, y **la primera con mesa de evaluación** —`R1.5`, publicada hoy con el framework 13.7—, cuyo registro es [`Mesa-2026-08-27.md`](Mesa-2026-08-27.md) 1.0. **T0 no detuvo la corrida por primera vez en cinco reanudaciones.** **§4 corrige el recuento de ítems diferidos**: son **ocho documentos y 118 filas**, no seis y 116, porque la migración 10.0 → 13.3 emitió `PD-10` en las dos `Supply-Chain-Seguridad.md` y el recuento anterior no las incluyó. **§6 mide el diff 13.3 → 13.7 artefacto por artefacto**: ocho artefactos movidos, **cero major**, y los **cuatro** saltos con bloque de impacto vacío. **§7.2 aplica el umbral de continuidad y lo declara dado vuelta** respecto del 2026-08-23: de **dos major con impacto** a **cero**, de modo que `C` vuelve a ofrecerse y **la verificación artefacto por artefacto que exige ya está escrita**. Recomendación **`A`** con alternativa **`D`**; el Product Owner eligió **`A`**. **§9 registra la reparación**: **seis parches y un default**, once celdas en siete documentos, **vencidos de 13 a 9**, `D-03'` y `D-05` cerradas. §10 deja la segunda vuelta con su recomendación recalculada —**`C`**— y el punto de continuación de la fase `i`. | Orquestador de reanudación SDD |

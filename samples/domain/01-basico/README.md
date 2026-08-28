@@ -3,10 +3,10 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Nivel:** Básico
-**Estado de esta carpeta:** **Esqueleto — sin código.**
-**Documento que la gobierna:** [`ejemplo-01-basico.md`](../../../SDD/Docs/Proyectos/GeometriaFactory-Domain/10-Examples/ejemplo-01-basico.md) 1.0, del que este README es la copia corta de §1, §3 y §4
+**Estado de esta carpeta:** **IMPLEMENTADO el 2026-08-27.** Es el primer sample con código del producto, y con él la precondición dura de la Fase I (`Master-Prompt.md` §7.1) queda cumplida
+**Documento que la gobierna:** [`ejemplo-01-basico-dominio.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md) 1.0 — **la ruta se corrigió el 2026-08-27**: apuntaba a `SDD/Docs/Proyectos/GeometriaFactory-Domain/`, que la consolidación de las unidades de entrega retiró, y el documento se renombró además con el sufijo del proyecto de código, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-01`, declarado en la §9 de ese documento
-**Sonda de sensado:** [`SD-01`](../../../SDD/Docs/Proyectos/GeometriaFactory-Domain/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
+**Sonda de sensado:** `SD-01` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, todavía en estado `Sin verificar`: actualizarla es de la Fase I, no de esta carpeta
 
 **Comando previsto:**
 
@@ -35,10 +35,42 @@ Demostrar el camino más corto que un consumidor recorre contra esta biblioteca:
 3. Ejecutar el sample: `dotnet run --project samples/domain/01-basico`.
 4. Comparar la salida con §6 del documento que gobierna esta carpeta.
 
-## 4. Qué hay hoy acá, y qué falta
+## 4. Qué hay acá, y qué encontró al correr
 
-Hoy esta carpeta tiene **sólo este README**. La carpeta se crea en la **pasada de diseño** de `Rules-Examples.md` §0.2, que le asigna exactamente esto: la carpeta esqueletada, con su README local y su comando previsto. El código del sample lo produce la **pasada de ejecución**, durante la codificación.
+**El sample está implementado y corre.** El árbol es el que declara la §5 del documento que gobierna
+esta carpeta, sin desviarse: `Program.cs` con los cuatro actos, `Recorrido/` con un archivo por acto
+y `tests/SalidaEsperada.cs` con el snapshot de §6 y su comparación.
 
-**El comando previsto todavía no resuelve, y esta carpeta no promete lo contrario.** Es la consecuencia declarada de que el sample no esté implementado: el campo `evidencia` del contrato `VER-01` dice `No verificado — sin código`, sin fecha y sin salida, y la fila `SD-01` de la matriz de sensado nace en `Sin verificar`. Ninguna corrida se afirma acá.
+```bash
+dotnet run --project samples/domain/01-basico              # ejecuta el recorrido
+dotnet run --project samples/domain/01-basico -- --verificar   # y lo compara contra §6
+```
 
-**Qué va a vivir acá cuando la pasada de ejecución corra.** El árbol de archivos que el sample va a tener está declarado en la §5 del documento que gobierna esta carpeta, y la salida exacta que va a producir, en su §6. Los dos se escribieron antes que el código, a propósito.
+**No entra en `GeometriaFactory.sln` a propósito.** Si entrara, su ensamblado contaría en la
+cobertura de `QG-03` y movería un número que mide otra cosa.
+
+### Y lo primero que hizo fue encontrar una divergencia, que es para lo que sirve
+
+**Seis de las diez líneas coinciden con el snapshot; cuatro no**, y las cuatro por el mismo motivo:
+**el sistema emite los códigos de condición en inglés y toda la documentación los nombra en
+castellano.**
+
+| Lo que §6 declara | Lo que el sistema emite |
+| --- | --- |
+| `ADMINISTRADOR_YA_CONFIGURADO` | `ADMINISTRATOR_ALREADY_CONFIGURED` |
+| `DATO_OBLIGATORIO_AUSENTE` | `REQUIRED_FIELD_MISSING` |
+| `CUENTA_PENDIENTE` | `ACCOUNT_PENDING` |
+| `CAMBIO_DE_CONTRASENA_PENDIENTE` | `PASSWORD_CHANGE_PENDING` |
+
+**No es un defecto del sample y no se corrige acá.** La forma castellana aparece **21 veces en el
+corpus vivo y la inglesa ninguna**; la forma inglesa es la que viaja **por el cable**, desde
+`ConditionCode` del dominio hasta `ErrorCode` de la capa de contratos y la traducción de la Api.
+Elegir cuál de las dos es la buena **cambia el contrato público de errores**, y eso es del Product
+Owner. Queda declarado en
+[`../../../SDD/Docs/Audit/Evaluacion-Del-Codigo-2026-08-27.md`](../../../SDD/Docs/Audit/Evaluacion-Del-Codigo-2026-08-27.md).
+
+**Por eso el snapshot de `tests/SalidaEsperada.cs` NO se ajustó al código.** Ajustarlo habría hecho
+pasar la verificación decidiendo en silencio que el código le gana a veintiún documentos, que es
+exactamente lo que un snapshot existe para impedir. El sample sale **0** —el recorrido funciona, las
+nueve operaciones se invocan y las excepciones son cero— y `--verificar` sale **1** con el diff a la
+vista, hasta que alguien decida.
