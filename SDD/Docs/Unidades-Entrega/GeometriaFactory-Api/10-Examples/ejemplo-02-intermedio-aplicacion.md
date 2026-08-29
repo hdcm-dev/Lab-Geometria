@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -85,16 +85,16 @@ Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Ex
 
 **La línea `[E-7]` es la que separa el detalle del listado.** El detalle lleva piezas **y** componentes; el listado no lleva componentes ni texto original. Es la proyección que `US-04019` exige y que el contrato del producto ya había separado.
 
-**La línea de retiro del trabajo ajeno no dice «no autorizado».** Dice `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, porque `RN-04003` obliga a que el trabajo ajeno sea indistinguible del inexistente. Es la negativa por pertenencia de `ADR-04004` §2, que no se colapsa con la negativa por facultad ni se intercambia con ella.
+**La línea de retiro del trabajo ajeno no dice «no autorizado».** Dice `WORK_NOT_FOUND_FOR_REQUESTER`, porque `RN-04003` obliga a que el trabajo ajeno sea indistinguible del inexistente. Es la negativa por pertenencia de `ADR-04004` §2, que no se colapsa con la negativa por facultad ni se intercambia con ella.
 
 ## 7. Variaciones sugeridas
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Enviar sin interpretación disponible | Hacer que el doble del puerto de validación declare indisponibilidad | Rechazo `INTERPRETACION_NO_DISPONIBLE`; el trabajo queda en `Borrador` y la capa **termina de forma controlada** (`US-04016`) |
+| Enviar sin interpretación disponible | Hacer que el doble del puerto de validación declare indisponibilidad | Rechazo `PARSE_RESULT_UNAVAILABLE`; el trabajo queda en `Borrador` y la capa **termina de forma controlada** (`US-04016`) |
 | Reeditar el texto y compararlo | Reeditar `E-2` cambiando un solo carácter y volver a leer el guardado | El texto guardado es el reeditado, carácter por carácter, sin normalizar las comas finales |
 | Reformatear `E2.txt` | Abrir `E2.txt` con una herramienta que lo normalice y volver a correr | El texto deja de ser el del alumno; `texto-identico` pasa a `no` y el criterio de aceptación falla. **Es lo que la extensión `.txt` viene a evitar** |
-| Envío repetido sobre un trabajo ya enviado | Invocar `CU-04005` sobre un trabajo en `Pendiente` | Rechazo `ENVIO_FUERA_DE_BORRADOR` |
+| Envío repetido sobre un trabajo ya enviado | Invocar `CU-04005` sobre un trabajo en `Pendiente` | Rechazo `SUBMISSION_OUTSIDE_DRAFT` |
 
 ## 8. Trazabilidad
 
@@ -148,4 +148,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-04004`, `CU-04005`, `CU-04006` y `CU-04009` sobre los **ocho** escenarios reales `E-1` a `E-8` del `PRODUCT-INTAKE` §20, transcriptos sin modificación y con sus resultados de interpretación tomados de la sección «qué verificar» de cada uno. Declara por qué los archivos de escenario llevan extensión `.txt` y por qué el doble del puerto de validación no es un intérprete. El contrato `VER-04002` declara siete líneas exactas de salida y **dos aserciones negativas** —el índice reportado y la negativa por pertenencia que no puede salir como negativa por facultad—; `evidencia` queda en `No verificado — sin código`. |

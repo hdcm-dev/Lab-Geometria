@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -83,8 +83,8 @@ Actos recorridos: 4 | Rechazos tipados: 5 | Excepciones: 0
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Alta de alumno con credencial | Pasar una credencial en el alta de `CU-04001` | Rechazo `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA`: el alta de alumno **prohíbe** la credencial, y el de administrador la exige |
-| Administrador con el almacén ya poblado | Invocar `CU-04010` con una cuenta de administrador ya existente | `ADMINISTRADOR_YA_CONFIGURADO`, sin camino alternativo ofrecido |
+| Alta de alumno con credencial | Pasar una credencial en el alta de `CU-04001` | Rechazo `CREDENTIAL_NOT_ALLOWED_ON_REGISTRATION`: el alta de alumno **prohíbe** la credencial, y el de administrador la exige |
+| Administrador con el almacén ya poblado | Invocar `CU-04010` con una cuenta de administrador ya existente | `ADMINISTRATOR_ALREADY_CONFIGURED`, sin camino alternativo ofrecido |
 | Saltear la guarda | Invocar el orquestador de consulta sin pasar por la guarda de autorización | La cuenta marcada alcanza una capacidad que `INV-09` prohíbe. Es la dependencia de disciplina que `ADR-04004` §6 declara que el compilador no garantiza |
 | Reloj real en vez de doble | Reemplazar `RelojFijo` por el reloj del sistema | La salida deja de ser comparable entre corridas y el criterio de aceptación falla, aunque el comportamiento sea correcto |
 
@@ -136,4 +136,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-04001`, `CU-04003` y `CU-04010` con **dos** de los cuatro puertos satisfechos por dobles, y recorre la comprobación de cambio de contraseña pendiente con su **única** excepción declarada en `ADR-04004` §2. El contrato `VER-04001` declara seis líneas exactas de salida y **una aserción negativa** sobre la credencial en el alta de alumno; `evidencia` queda en `No verificado — sin código`. |

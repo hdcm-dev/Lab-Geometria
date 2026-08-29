@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** DX-Developer-Experience.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** DX Lead (AG-03)
@@ -92,7 +92,7 @@ Tres tramos, cada uno con un objetivo verificable: se cierra o no se cierra, sin
 | Tramo | Objetivo | Verificación de cierre |
 | --- | --- | --- |
 | **5 minutos** | Ver el visor dibujando sin haber tocado ni una línea del producto | La página integradora del sample S-1 dibuja las **6 piezas** del escenario E-7 del intake, con los índices 0 a 5, y la pestaña de red del navegador registra **0 peticiones** originadas por la fachada |
-| **30 minutos** | Entender el contrato ejerciéndolo entero, incluido lo que falla | Sobre la misma página: seleccionar la pieza de índice 3 y verla resaltada, pedir el índice 6 y obtener `INDICE_FUERA_DE_RANGO` sin perder la selección vigente, cambiar el tamaño del elemento de dibujo e invocar `redimensionar`, prender los dos movimientos con `establecerMovimiento` y ver que la pieza resaltada **sigue siendo la misma**, y destruir la instancia y comprobar que cualquier invocación posterior con ese identificador —las cinco que llevan identificador, incluida `establecerMovimiento`— informa `INSTANCIA_DESCONOCIDA` |
+| **30 minutos** | Entender el contrato ejerciéndolo entero, incluido lo que falla | Sobre la misma página: seleccionar la pieza de índice 3 y verla resaltada, pedir el índice 6 y obtener `INDEX_OUT_OF_RANGE` sin perder la selección vigente, cambiar el tamaño del elemento de dibujo e invocar `redimensionar`, prender los dos movimientos con `establecerMovimiento` y ver que la pieza resaltada **sigue siendo la misma**, y destruir la instancia y comprobar que cualquier invocación posterior con ese identificador —las cinco que llevan identificador, incluida `establecerMovimiento`— informa `UNKNOWN_INSTANCE` |
 | **1 hora** | Modificar el interior del archivo de guion sin cambiar el contrato, y demostrar que no lo cambió | Después de reconstruir el archivo de guion con el guion de construcción corto: el escenario E-1 vuelve a dibujar sus **3 piezas, ortoedro incluido**; dos cargas seguidas del mismo texto producen la **misma disposición**; y las **seis** firmas, las siete garantías y los siete códigos siguen siendo los mismos |
 
 **Por qué el tramo de 30 minutos incluye una condición de error y no sólo el camino feliz.** Un integrador que sólo vio el camino feliz no sabe qué hacer cuando la fachada informa, y lo primero que hace es suponer que el visor se rompió. Las condiciones de contrato de este proyecto de código no son fallas: son la forma en que un visualizador puro le devuelve el problema al único que puede resolverlo, que es el anfitrión.
@@ -106,7 +106,7 @@ Es el camino más corto desde el repositorio hasta ver una pieza dibujada. **Cin
 ### 3.1 Precondiciones del quick-start
 
 1. El repositorio abierto en el entorno de desarrollo contenido del producto. Nada instalado en el host, y nada que instalar.
-2. Un navegador con la **capacidad gráfica tridimensional** que `Compatibilidad-Plataformas.md` §2.2 declara requerida. Sin ella no hay instancia: `inicializar` informa `CAPACIDAD_GRAFICA_AUSENTE` y el recorrido de integración no arranca.
+2. Un navegador con la **capacidad gráfica tridimensional** que `Compatibilidad-Plataformas.md` §2.2 declara requerida. Sin ella no hay instancia: `inicializar` informa `GRAPHICS_CAPABILITY_MISSING` y el recorrido de integración no arranca.
 3. **Ningún servicio del backend en marcha.** No es una omisión del quick-start: es parte de lo que el quick-start demuestra (`CU-12006` §3, precondición 3).
 
 ### 3.2 Los cinco pasos
@@ -153,7 +153,7 @@ Tres reglas del recorrido de integración que un integrador nuevo suele romper:
 | **Retorno** | El **estado efectivo de los dos** movimientos después de la operación, para sincronizar el control del anfitrión con lo que la escena está haciendo. No se supone: se lee del retorno |
 | **Semántica de las opciones parciales** | **El movimiento no nombrado conserva el estado que tenía.** Es la diferencia con `inicializar`, donde lo ausente arranca **apagado**: allá la escena nace y hay que darle un estado; acá la escena ya tiene uno y nombrar un movimiento no es opinar sobre el otro |
 | **Qué no toca** | No reconstruye la instancia, no recarga el texto, no altera la disposición ni la selección vigente ni el encuadre, y **no invalida el identificador**. Es idempotente: fijar el estado que ya estaba no cambia nada. Al **apagar el giro**, cada pieza vuelve a su orientación de partida |
-| **Su única condición** | `INSTANCIA_DESCONOCIDA`, que ya existía y que con esta función pasa a presentarse en **cinco**. **No acuña ningún código**: la lista del contrato sigue cerrada en **siete**, y el catálogo la desarrolla en `DX-Error-Messages.md`, entrada `E-VIS-13` |
+| **Su única condición** | `UNKNOWN_INSTANCE`, que ya existía y que con esta función pasa a presentarse en **cinco**. **No acuña ningún código**: la lista del contrato sigue cerrada en **siete**, y el catálogo la desarrolla en `DX-Error-Messages.md`, entrada `E-VIS-13` |
 
 Las reglas 2 y 3 de arriba **no se relajan**: cada `cargarJson` sigue reemplazando lo dibujado y descartando la selección, y una instancia destruida sigue sin volver. Lo que la sexta función agrega es que el **estado de los movimientos sobrevive a `cargarJson`**: cargar otro texto reemplaza el contenido dibujado, no el gobierno de la escena, así que un anfitrión que recarga un trabajo **no tiene que volver a pedir el movimiento**.
 
@@ -161,9 +161,9 @@ Las reglas 2 y 3 de arriba **no se relajan**: cada `cargarJson` sigue reemplazan
 
 | Síntoma | Condición probable | Dónde está resuelto |
 | --- | --- | --- |
-| El paso 3 no dibuja nada y la instancia queda vacía | `TEXTO_NO_LEGIBLE` | `DX-Error-Messages.md`, entrada E-VIS-08 |
-| El paso 3 dibuja menos piezas de las esperadas y el resultado de dibujo enumera las que faltan | `TIPO_NO_DIBUJABLE` o `DIMENSION_NO_LEGIBLE` | `DX-Error-Messages.md`, entradas E-VIS-09 y E-VIS-10 |
-| El paso 4 no resalta nada | `INDICE_FUERA_DE_RANGO` | `DX-Error-Messages.md`, entradas E-VIS-11 y E-VIS-12 |
+| El paso 3 no dibuja nada y la instancia queda vacía | `UNREADABLE_TEXT` | `DX-Error-Messages.md`, entrada E-VIS-08 |
+| El paso 3 dibuja menos piezas de las esperadas y el resultado de dibujo enumera las que faltan | `NON_DRAWABLE_TYPE` o `UNREADABLE_DIMENSION` | `DX-Error-Messages.md`, entradas E-VIS-09 y E-VIS-10 |
+| El paso 4 no resalta nada | `INDEX_OUT_OF_RANGE` | `DX-Error-Messages.md`, entradas E-VIS-11 y E-VIS-12 |
 | El paso 5 registra alguna petición | No es una condición de la fachada: es una **violación del gate** de cero red | `DX-Error-Messages.md` §4 |
 
 ## 4. Diátaxis
@@ -208,7 +208,7 @@ Cinco principios propios de este proyecto de código, que salen de que es un vis
 4. **Ninguna pieza desaparece sin registro.** Toda pieza no dibujada queda enumerada con su índice en el resultado de dibujo (garantía G-5). El fallo silencioso es exactamente lo que el producto viene a eliminar, y volver a introducirlo por vía de un mensaje ausente sería reintroducir el defecto original. Es una de las **seis propiedades transversales**, cuya membresía y cuyo umbral se declaran una sola vez en `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6: este documento las invoca y no las re-enumera.
 5. **Ninguna condición deja la instancia a medias** (garantía G-7): o la operación surte efecto completo, o la instancia queda como estaba y se informa el código.
 
-Catálogo completo, con las **trece** entradas derivadas de los **siete** códigos de condición del contrato —la decimotercera es `INSTANCIA_DESCONOCIDA` desde `establecerMovimiento`, y no es un código nuevo—: [`DX-Error-Messages.md`](DX-Error-Messages.md).
+Catálogo completo, con las **trece** entradas derivadas de los **siete** códigos de condición del contrato —la decimotercera es `UNKNOWN_INSTANCE` desde `establecerMovimiento`, y no es un código nuevo—: [`DX-Error-Messages.md`](DX-Error-Messages.md).
 
 ## 6. Métricas DX
 
@@ -271,3 +271,4 @@ Sin comunidad externa que abra reportes, el lazo se cierra con cuatro vías, tod
 | 1.0 | 2026-08-09 | Alineación con la **sexta función de la fachada**, `establecerMovimiento(id, opciones)`, que el Product Owner decidió al cerrar la **Fase B2** y que `Definicion-Contrato-De-Fachada.md` §4.6 acuña, con contrato de uso en el **`CU-12007` nuevo** y consolidación en el intake **1.6**. **Sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **(a) La superficie pasa de cinco a seis funciones**, y **las siete garantías y los siete códigos no cambian**: §1.1, §1.3 enunciado 1, la tabla de roles —con «las **seis** firmas»—, §2 tramo de 1 hora, §3.3 regla 1 —«las otras **cinco** lo exigen»—, §4, §4.1 fila del modo reference, §6 «fugas de la fachada» y §8 se recuentan. **(b) La función nueva queda documentada en §3.3**, con su **firma**, su **retorno** —el estado efectivo de los dos movimientos—, su **semántica de opciones parciales** —el movimiento no nombrado conserva su estado, a diferencia de `inicializar`, donde lo ausente arranca apagado—, lo que **no toca** —no reconstruye, no recarga, no altera disposición ni selección, no invalida el identificador y es idempotente— y su **única condición**, `INSTANCIA_DESCONOCIDA`, que **ya existía** y pasa a presentarse en **cinco** funciones. El diagrama del recorrido de integración suma su nodo, y la vía anterior —`destruir` → `inicializar` → `cargarJson`, que perdía la selección— queda declarada **reemplazada**. Se declara además que el **estado de los movimientos sobrevive a `cargarJson`**. **(c) Frontera bundle/anfitrión**: §1.3 suma la tabla que deja del lado del anfitrión el **control visible**, la **consulta de la preferencia de movimiento reducido** —consultarla la fachada violaría **G-3**— y la **conservación de la elección** —guardarla violaría **G-2**—; la fachada sólo recibe el estado deseado y lo aplica. **(d) Condiciones de medición**: §6 declara que los dos movimientos se prenden con `establecerMovimiento` para medir el conteo de peticiones, remitiendo a `Especificacion-Funcional.md` §6 como lugar único; el umbral sigue siendo exactamente 0. **(e)** §5 y §8 recogen que el catálogo pasa a **trece** entradas —la nueva es `E-VIS-13`, `INSTANCIA_DESCONOCIDA` desde `establecerMovimiento`— **sin ningún código nuevo**, y §8 declara el orden de lectura de los casos de uso, con `CU-12007` antes del transversal `CU-12006`. |
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-10`**: la fecha de cabecera decía 2026-08-08 y el documento tiene entradas de control de cambios fechadas 2026-08-09; pasa a **2026-08-09**, que es cuando se lo tocó por última vez. Ningún contenido cambia. |
 | 1.1 | 2026-08-11 | **Absorbe la promoción de F-13 a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4. La trazabilidad upstream remitía a `Alcance-Producto.md` **§4.2**, «capacidades declaradas con prioridad menor», y esa remisión quedó falsa: F-13 pasó a **§4.1** con el resto del alcance comprometido en la versión 1.6 de ese documento, de modo que las dos capacidades que este documento cita viven hoy en el mismo apartado. Ninguna decisión de experiencia del developer, ninguna función de la fachada y ningún mensaje cambia. Sube minor. |
+| 1.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **7 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

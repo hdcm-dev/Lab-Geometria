@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Product-Backlog.md
-**Versión:** 4.2
+**Versión:** 4.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -241,7 +241,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 - Given el texto del escenario `E-1`, When se lo carga, Then se dibujan sus **tres** piezas, **ortoedro incluido**.
 - Given el texto del escenario `E-7`, When se lo carga, Then se dibujan los **seis** tipos dibujables, tres volumétricos y tres planos.
-- Given una pieza de un tipo fuera de esos seis, When se carga el texto, Then no se dibuja y **queda enumerada** con su índice y la condición `TIPO_NO_DIBUJABLE`.
+- Given una pieza de un tipo fuera de esos seis, When se carga el texto, Then no se dibuja y **queda enumerada** con su índice y la condición `NON_DRAWABLE_TYPE`.
 
 **Trazabilidad.** NB-00006, NB-00004 (parcial) · CU-12002 · Garantías `G-1`, `G-5`, `G-6` · Componentes: lector del texto, servicio de dibujo, motor de dibujo · BT-12007, BT-12008, BT-12009, BT-12014 · Tests en 08: escenarios `E-1` y `E-7` del intake §20 como material declarado.
 
@@ -261,7 +261,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 - Given una escena con piezas dibujadas, When se selecciona la pieza de un índice, Then queda resaltada **en exclusiva**: ninguna otra lo está.
 - Given un índice que no corresponde a ninguna pieza dibujada, When se lo selecciona, Then la instancia queda como estaba y se informa la condición correspondiente (garantía `G-7`).
-- Given un identificador de instancia que no corresponde a una instancia viva, When se invoca la selección, Then se informa `INSTANCIA_DESCONOCIDA`.
+- Given un identificador de instancia que no corresponde a una instancia viva, When se invoca la selección, Then se informa `UNKNOWN_INSTANCE`.
 
 **Trazabilidad.** NB-00006 · CU-12003 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-12004, BT-12005, BT-12008, BT-12014 · Tests en 08: `PT-02`, parte de sincronización por índice.
 
@@ -281,7 +281,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 - Given una instancia viva, When se la destruye, Then libera sus recursos gráficos y **corta su bucle de dibujo**.
 - Given diez recorridos de ida y vuelta entre trabajos **con los dos movimientos prendidos**, When se mide la degradación, Then no la hay: ése es el peor caso y es la condición de medición que `02` §6 declara.
-- Given una instancia ya destruida, When se la vuelve a usar, Then se informa `INSTANCIA_DESCONOCIDA`: el registro invalidó su identificador.
+- Given una instancia ya destruida, When se la vuelve a usar, Then se informa `UNKNOWN_INSTANCE`: el registro invalidó su identificador.
 
 **Trazabilidad.** NB-00006 · CU-12005 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-12005, BT-12012, BT-12014 · Tests en 08: propiedad de liberación de recursos con sus condiciones de medición, y `PT-02`.
 
@@ -317,11 +317,11 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 **Historia.** Como componente anfitrión, quiero que la creación de instancia me informe cuando el navegador no tiene capacidad gráfica tridimensional, para poder mostrar una alternativa en lugar de una escena vacía.
 
-**Contexto.** `PRODUCT-INTAKE` §17.2.P.9 · GeometriaFactory-Visor declara el requisito **por capacidad y no por versión de navegador**, y que sin esa capacidad el visor no es soportado. `05` §5 declara que la fachada informa `CAPACIDAD_GRAFICA_AUSENTE`.
+**Contexto.** `PRODUCT-INTAKE` §17.2.P.9 · GeometriaFactory-Visor declara el requisito **por capacidad y no por versión de navegador**, y que sin esa capacidad el visor no es soportado. `05` §5 declara que la fachada informa `GRAPHICS_CAPABILITY_MISSING`.
 
 **Criterios de aceptación.**
 
-- Given un navegador sin capacidad gráfica tridimensional, When se crea la instancia, Then se informa `CAPACIDAD_GRAFICA_AUSENTE` y no se crea ninguna escena.
+- Given un navegador sin capacidad gráfica tridimensional, When se crea la instancia, Then se informa `GRAPHICS_CAPABILITY_MISSING` y no se crea ninguna escena.
 - Given ese mismo caso, When se inspecciona el estado, Then no queda ninguna instancia a medio construir (garantía `G-7`).
 - Given cualquiera de los dos casos, When se cuentan los códigos de condición del contrato, Then siguen siendo **siete**: esta historia no acuña ninguno nuevo.
 
@@ -342,10 +342,10 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 **Criterios de aceptación.**
 
 - Given un texto con las variantes de clave del emisor real, When se lo carga, Then las piezas se dibujan igual.
-- Given una pieza a la que le **falta** la clave o el componente del que se lee la medida, When se la procesa, Then no se dibuja y queda enumerada con `DIMENSION_NO_LEGIBLE`.
+- Given una pieza a la que le **falta** la clave o el componente del que se lee la medida, When se la procesa, Then no se dibuja y queda enumerada con `UNREADABLE_DIMENSION`.
 - Given una dimensión cuyo valor es cero, When se la procesa, Then **la pieza se dibuja**: el cero es una dimensión legible, y lo que produce la condición es la **ausencia** de la clave, nunca el valor que trae.
 
-**Trazabilidad.** NB-00006, NB-00004 (parcial) · CU-12002 · Garantías `G-5` · Componentes: lector del texto · BT-12007 · Tests en 08: escenario `E-8` del intake §20, que se incorporó precisamente para `DIMENSION_NO_LEGIBLE`.
+**Trazabilidad.** NB-00006, NB-00004 (parcial) · CU-12002 · Garantías `G-5` · Componentes: lector del texto · BT-12007 · Tests en 08: escenario `E-8` del intake §20, que se incorporó precisamente para `UNREADABLE_DIMENSION`.
 
 **Prioridad.** `Must` por derivar de `F-11`, `Must Have` en `PRODUCT-INTAKE` §4.
 
@@ -423,7 +423,7 @@ La categoría 02 no numeró historias: su §5.1 las describió por contenido —
 
 - Given una instancia viva y un elemento de dibujo que cambió de tamaño, When se pide el ajuste, Then la escena recalcula su relación de aspecto y no se deforma.
 - Given un ajuste pedido, When se consulta el estado de la instancia, Then la disposición, la selección vigente y el estado de los movimientos **no cambian**.
-- Given un identificador que no corresponde a una instancia viva, When se pide el ajuste, Then se informa `INSTANCIA_DESCONOCIDA`.
+- Given un identificador que no corresponde a una instancia viva, When se pide el ajuste, Then se informa `UNKNOWN_INSTANCE`.
 
 **Trazabilidad.** NB-00006 · CU-12004 · Garantías `G-4`, `G-7` · Componentes: fachada plana, registro de instancias, servicio de dibujo · BT-12004, BT-12005, BT-12008 · Tests en 08: recorrido de `CU-12006`.
 
@@ -693,3 +693,4 @@ Hay un motivo propio de este proyecto de código, y es el más fuerte de los tre
 | 4.0 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06** (`Audit/Plan-Migracion-10.0-a-13.3.md` **1.2** §4.1). **`PA-01`, la unidad de estimación, queda CERRADO POR LECTURA en las dos tablas** —no por decisión—: no era un pendiente sino un hecho. `PRODUCT-INTAKE` §2 declara **`equipo_n = 1`**, y de ese dato el framework deriva que la 07 emita sólo `Mini-Plan.md`; su §1.2 declara que **no se declara capacidad numérica y es deliberado**; y el contraste que lo cierra es que **ocho etapas se cerraron sin una sola estimación**. **Estaba VENCIDO** —diferido al punto de control de la etapa `c`, que cerró el **2026-08-14** sin registrarlo— y las 30 historias de este backlog lo citaban: con la forma nueva de `Rules-Backlog-Tecnico.md` **5.0** §4.4 punto 5.b habría entrado a cada una como hallazgo **P1**. Se cierra **retirando el punto**, que `Audit/A3-Decisiones-Del-Product-Owner.md` §3 admite como cierre válido, con la figura del ítem **sin objeto** de [`../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md). **La columna `Estimación` pasa de «Sin fijar» a «No aplica»** y §4.1 deja de titularse «por qué queda abierta». Estado previo archivado en [`_legacy/2026-08-25/Product-Backlog-v3.4.md`](_legacy/2026-08-25/Product-Backlog-v3.4.md). Sube **major**: el salto de la regla que lo gobierna es major. |
 | 4.1 | 2026-08-25 | **Ronda 2 del corte de la 06**, sobre el audit independiente que lo aprobó **con hallazgos**. **La columna `Estimación` pasa de «No se estima» a «No aplica»** (**P2**): la prosa citaba entre comillas una forma que las celdas no tenían, y el destino quedaba con **tres** literales para una decisión única. **Y la frase que afirmaba haber cambiado también las tareas técnicas se vuelve verdadera** (**P1**): el cierre se propagó de verdad a `Backlog-Tecnico.md`, que la ronda 1 describió sin abrir. **Y una constancia sobre los recuentos del mensaje de entrega de la ronda 1**, que el audit refutó (**P3**) y que no se pueden editar allí: los estados previos archivados son **148** y no 152 —144 historias, 2 `Product-Backlog` y 2 `Mini-Plan`—, y los enlaces reescritos **1099** y no 694. |
 | 4.2 | 2026-08-27 | **Parches `P-02` y `P-06` de la mesa de evaluación del 2026-08-27** ([`../../../Audit/Mesa-2026-08-27.md`](../../../Audit/Mesa-2026-08-27.md)). **`PA-05`, el formato de intercambio, pasa de VENCIDO a cerrado por lectura** (hallazgo `H-02`, ancla **E2**, nivel **P1**): la fuente que la propia fila cita —`05` §11 `PA-03`— lo declara **Cerrado desde el 2026-08-10**, resuelto por `Api ADR-00002`, y esta fila se había quedado atrás en la propagación. **`PA-04`, la versión de plataforma del hosting, deja de estar vencida** (hallazgo `H-05`, ancla **E4**): su evento pasa del punto de control de la etapa `a` a la **fase `i`**, porque la fuente la rotula `[A VERIFICAR]` y `A3` §4 declara que esas marcas **se resuelven midiendo, no decidiendo**. **Vencidos de este documento: de 4 a 2.** Ninguna historia de usuario cambia. |
+| 4.3 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **8 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

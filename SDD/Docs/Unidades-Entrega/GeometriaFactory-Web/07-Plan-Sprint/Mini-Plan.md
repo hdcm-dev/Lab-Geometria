@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Mini-Plan.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -292,7 +292,7 @@ Criterios específicos que este plan agrega:
 2. **Las mediciones de ausencia se hacen con sus condiciones declaradas**, que `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6 fija como lugar único: cero red **con los dos movimientos prendidos y sostenidos**, y los diez recorridos **también con los movimientos prendidos**. Una medición sin esas condiciones no cuenta como hecha.
 3. **La verificación de cero red se hace sobre el bundle generado y no sólo sobre el código fuente.**
 4. **La etapa `g` no se compromete sin `PT-02` y `PT-03` medidas.** Una puerta que no pasa detiene la planificación y **no se arrastra como deuda**.
-5. **El material de dibujo son los escenarios `E-1` y `E-7` del intake §20**, y para `DIMENSION_NO_LEGIBLE` el `E-8`. **No se inventan textos de prueba.**
+5. **El material de dibujo son los escenarios `E-1` y `E-7` del intake §20**, y para `UNREADABLE_DIMENSION` el `E-8`. **No se inventan textos de prueba.**
 6. **El sample `S-1` está funcionando al cerrar la etapa `g`**: es el punto de extensión declarado del producto y su demostración, no un agregado de conveniencia.
 
 ## 6. Riesgos y mitigaciones
@@ -411,3 +411,4 @@ La bitácora se completa **al cerrar cada tramo**. Para el tramo del medio, lo q
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
 | 2.1 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06.** La fila **«Unidad de estimación»** decía «Sin fijar, por `Product-Backlog.md` §4.1», y ese punto —`PA-01`— **quedó cerrado por lectura el 2026-08-25**: el producto no estima, planifica por etapas con punto de control bloqueante. **Se toca este documento aunque no esté en la superficie declarada del plan**, y es deliberado: dejarlo habría producido exactamente lo que el audit del corte del README raíz levantó como **P1** —reescribir una parte y dejar las cifras viejas en otra, que es peor que un documento viejo con su fecha declarada—. §1.2 **no cambia**: ya decía que no se declara capacidad numérica y que es deliberado, y es una de las citas con las que `PA-01` se cerró. Estado previo archivado en [`_legacy/2026-08-25/Mini-Plan-v2.0.md`](_legacy/2026-08-25/Mini-Plan-v2.0.md). Sube **minor**: corrige una fila y no cambia ninguna decisión. |
+| 2.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

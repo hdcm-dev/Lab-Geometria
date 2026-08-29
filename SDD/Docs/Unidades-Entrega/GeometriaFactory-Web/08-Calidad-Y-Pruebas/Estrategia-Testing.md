@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Testing.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -183,7 +183,7 @@ Fixtures declarados:
 | Texto del escenario `E-8` | Un ortoedro dibujable y un cubo con dimensión no legible | Intake §20.E-8 |
 | Texto del escenario `E-6` | Una figura plana con una dimensión en `0.00` | Intake §20.E-6 |
 | Texto del escenario `E-5` | Dos figuras, la segunda con tipo fuera del conjunto conocido | Intake §20.E-5 |
-| Elemento de dibujo de tamaño cero | Una superficie de dibujo sin tamaño, para los dos cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` | Compuesto por esta categoría; **no es un dato de geometría** y no sustituye ningún escenario |
+| Elemento de dibujo de tamaño cero | Una superficie de dibujo sin tamaño, para los dos cursos de `INVALID_CANVAS_ELEMENT` | Compuesto por esta categoría; **no es un dato de geometría** y no sustituye ningún escenario |
 
 ## 6. Datos de prueba
 
@@ -219,12 +219,12 @@ Fixtures declarados:
 | `E-1` | Se dibujan **las tres figuras**, **ortoedro incluido**, y procesar el mismo trabajo dos veces produce la **misma disposición**. Es material declarado de `02` §6 y lo que `PT-02` mide | §20.E-1, punto 7 |
 | `E-2` | La clave `Tapas` como sinónimo de las bases: **en el visor, el ortoedro se dibuja**. Hoy, en el visualizador previo, ningún ortoedro generado por la aplicación se dibuja | §20.E-2, punto 8 |
 | `E-3` y `E-4` | El cubo de lado 3 con caras `Cuadrado` y con caras `Rectangulo`. Para la fachada los dos se dibujan igual: el campo que se usa es `Largo`. **La fachada no emite ninguna observación** sobre el área declarada: eso es del backend | §20.E-3 punto 1 y §20.E-4 punto 1 |
-| `E-5` | Una figura con tipo fuera de los seis dibujables: **no se dibuja y queda enumerada** con su índice y `TIPO_NO_DIBUJABLE`; la primera, válida, se dibuja igual | §20.E-5, punto 3, leído desde el lado del dibujo |
-| `E-6` | Una dimensión en `0.00`: **la figura se dibuja**, porque el cero es una dimensión legible y lo que produce `DIMENSION_NO_LEGIBLE` es la **ausencia** de la clave. Que una figura de dimensión cero no se vea **no es una falla del validador ni de la fachada** | §20.E-6, puntos 1 y 4; contrato de fachada §5.3 |
+| `E-5` | Una figura con tipo fuera de los seis dibujables: **no se dibuja y queda enumerada** con su índice y `NON_DRAWABLE_TYPE`; la primera, válida, se dibuja igual | §20.E-5, punto 3, leído desde el lado del dibujo |
+| `E-6` | Una dimensión en `0.00`: **la figura se dibuja**, porque el cero es una dimensión legible y lo que produce `UNREADABLE_DIMENSION` es la **ausencia** de la clave. Que una figura de dimensión cero no se vea **no es una falla del validador ni de la fachada** | §20.E-6, puntos 1 y 4; contrato de fachada §5.3 |
 | `E-7` | Los **seis** tipos dibujables como piezas del conjunto raíz; el ortoedro con ancho 6, profundidad 4 y altura 8; y **todo esto sin backend**, con **0 peticiones** originadas por el bundle | §20.E-7, puntos 1 a 5 |
-| `E-8` | El ortoedro del índice 0 **se dibuja** y la pieza del índice 1 **no**, reportada con **índice 1**, código `DIMENSION_NO_LEGIBLE` y el campo `Largo`. **El código es `DIMENSION_NO_LEGIBLE` y no `JSON_INVALIDO`**: confundirlos es el error que este escenario detecta | §20.E-8, puntos 1 a 3 |
+| `E-8` | El ortoedro del índice 0 **se dibuja** y la pieza del índice 1 **no**, reportada con **índice 1**, código `UNREADABLE_DIMENSION` y el campo `Largo`. **El código es `UNREADABLE_DIMENSION` y no `JSON_INVALIDO`**: confundirlos es el error que este escenario detecta | §20.E-8, puntos 1 a 3 |
 
-**Los ocho escenarios están alcanzados y ninguno se sustituye.** `E-8` es además el que cierra el hueco que la versión 1.5 del intake dejó abierto: hasta entonces `DIMENSION_NO_LEGIBLE` era la única de las siete condiciones del contrato **sin escenario propio en §20 ni fila en §21**.
+**Los ocho escenarios están alcanzados y ninguno se sustituye.** `E-8` es además el que cierra el hueco que la versión 1.5 del intake dejó abierto: hasta entonces `UNREADABLE_DIMENSION` era la única de las siete condiciones del contrato **sin escenario propio en §20 ni fila en §21**.
 
 **Una precisión de frontera que esta estrategia hereda y no relaja.** `E-8` punto 4 declara que **el visor informa por qué no dibujó una pieza y que decidir si el trabajo pasa a `Pendiente` es del validador, no del bundle**. Ningún caso de prueba de este proyecto de código verifica el desenlace del envío: eso pertenece a `GeometriaFactory-Domain` y a `GeometriaFactory-Infrastructure`.
 
@@ -247,7 +247,7 @@ Fixtures declarados:
 | Aspecto | Decisión |
 | --- | --- |
 | Dónde se construye | Dentro del contenedor de desarrollo; el gestor de paquetes corre ahí (intake §17.2.P.1 · GeometriaFactory-Visor) |
-| Dónde se ejecuta lo de extremo a extremo | Un navegador con **capacidad gráfica tridimensional**. Sin ella el visor no es soportado y la fachada informa `CAPACIDAD_GRAFICA_AUSENTE`, que es en sí mismo un caso de prueba |
+| Dónde se ejecuta lo de extremo a extremo | Un navegador con **capacidad gráfica tridimensional**. Sin ella el visor no es soportado y la fachada informa `GRAPHICS_CAPABILITY_MISSING`, que es en sí mismo un caso de prueba |
 | Runtime en ejecución | **Ninguno propio**: en tiempo de ejecución no hay entorno de la cadena de herramientas, hay un archivo servido como recurso estático (`05` §5) |
 | Backend | **Ninguno, y es una propiedad exigida.** El recorrido completo se hace con **0 servicios del backend disponibles** (`02` §6) |
 | Preferencia de movimiento reducido | Se simula en el conductor, según §5. Las mediciones de ausencia se hacen **con los dos movimientos prendidos** |
@@ -318,5 +318,6 @@ Las **61** filas de la matriz agrupadas por su método resuelto. La agrupación 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **6 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **1 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

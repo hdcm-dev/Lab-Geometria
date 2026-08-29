@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -88,7 +88,7 @@ Funciones ejercidas: 6 de 6 | Propiedades transversales verificadas: 6 de 6 | Pu
 
 **La línea `[10b]` inspecciona la fuente y el bundle generado, los dos.** Una dependencia que hiciera una petición por dentro no aparecería en la fuente, y el gate quedaría en verde sobre un archivo que sí hace red.
 
-**La línea `[15]` protege la distinción entre código y curso.** Los códigos son **siete** y su fuente única es §6 del contrato de fachada; `INSTANCIA_DESCONOCIDA` aparece en **cinco** funciones y `ELEMENTO_DE_DIBUJO_INVALIDO` en **dos cursos**, y ninguno de esos hechos multiplica el conjunto. La sexta función **no emite ninguna condición propia**.
+**La línea `[15]` protege la distinción entre código y curso.** Los códigos son **siete** y su fuente única es §6 del contrato de fachada; `UNKNOWN_INSTANCE` aparece en **cinco** funciones y `INVALID_CANVAS_ELEMENT` en **dos cursos**, y ninguno de esos hechos multiplica el conjunto. La sexta función **no emite ninguna condición propia**.
 
 **La línea `[12]` es `PT-02` entera, en sus cinco tramos, medidos juntos.** Una puerta que no pasa **detiene la planificación de la etapa `g`** y no se arrastra como deuda.
 
@@ -159,4 +159,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Tercera parte del sample **S-1**, la que cierra su promesa: ejerce las **seis** funciones de la fachada sin ninguna pieza del backend. Cubre `CU-12006` y `CU-12007`, las **ocho** reglas de gobierno del movimiento de §5.5, las **seis** propiedades transversales, los **siete** códigos y las **dos** puertas técnicas `PT-02` y `PT-03`. El contrato `VER-12003` declara nueve líneas exactas de salida y **tres precondiciones que son condiciones de medición vinculantes**; `evidencia` queda en `No verificado — sin código`. |

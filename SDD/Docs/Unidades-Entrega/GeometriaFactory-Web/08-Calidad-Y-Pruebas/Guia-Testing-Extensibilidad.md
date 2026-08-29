@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Guia-Testing-Extensibilidad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -47,7 +47,7 @@ La tabla de `05` `Extensibilidad.md` §3 declara qué es reemplazable. Esta guí
 | --- | --- | --- |
 | El **motor de dibujo tridimensional** | Sí, y es el propósito del punto de extensión | Que las **siete** garantías y los **siete** códigos se sostengan igual, y que el motor siga confinado a la capa 3 |
 | El **servicio de dibujo** entero, capa 3 | Sí | Lo mismo, más la disposición derivada del índice |
-| La **forma interna del identificador** de instancia | Sí, y **no es cambio de contrato** | Que las cinco funciones que lo exigen sigan resolviéndolo, y que un identificador liberado siga produciendo `INSTANCIA_DESCONOCIDA`. **Que el anfitrión dependa de su forma es un defecto del anfitrión**, y esta batería no lo cubre |
+| La **forma interna del identificador** de instancia | Sí, y **no es cambio de contrato** | Que las cinco funciones que lo exigen sigan resolviéndolo, y que un identificador liberado siga produciendo `UNKNOWN_INSTANCE`. **Que el anfitrión dependa de su forma es un defecto del anfitrión**, y esta batería no lo cubre |
 | La **disposición** de las piezas | No libremente | Que siga derivándose del índice y que dos procesados produzcan la misma **posición** |
 | Las **seis** funciones y sus nombres | No | Que sigan siendo seis, con los nombres que el intake §17.2.P.3 · GeometriaFactory-Visor fija |
 | Las **siete** garantías | No | Que ninguna se pierda: perder una es cambio mayor aunque las firmas no se toquen |
@@ -61,7 +61,7 @@ La tabla de `05` `Extensibilidad.md` §3 declara qué es reemplazable. Esta guí
 | --- | --- | --- | --- |
 | 1 | Las **seis** funciones, con sus nombres y con lo que cada una recibe y devuelve | `TC-12015`, `TC-12018` | Sample **S-1** |
 | 2 | Las **siete** garantías, verificadas con las **seis** propiedades transversales **y sus condiciones de medición** | `TC-12016`, `TC-12017`, `TC-12015`, `TC-12009`, `TC-12004`, `TC-12007`, más la tabla de garantías de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5 | `E-1`, `E-7` |
-| 3 | Los **siete** códigos, ni uno más ni uno menos, con los **dos cursos** de `ELEMENTO_DE_DIBUJO_INVALIDO` | `TC-12021`, `TC-12002`, `TC-12012` | Elemento de dibujo de tamaño cero |
+| 3 | Los **siete** códigos, ni uno más ni uno menos, con los **dos cursos** de `INVALID_CANVAS_ELEMENT` | `TC-12021`, `TC-12002`, `TC-12012` | Elemento de dibujo de tamaño cero |
 | 4 | Los **seis** tipos de pieza dibujables, **con el cero como dimensión legible** | `TC-12005`, `TC-12007` | `E-7` y `E-6` |
 | 5 | La disposición derivada del índice, con **posición reservada** para las figuras no reconstruidas | `TC-12009`, `TC-12007` | `E-1` y `E-5` |
 | 6 | Los **dos** movimientos gobernables por separado, con **reposición de la orientación de partida** al apagar el giro | `TC-12013`, `TC-12014`, `TC-12003` | `E-1` |
@@ -95,7 +95,7 @@ La tabla de `05` `Extensibilidad.md` §3 declara qué es reemplazable. Esta guí
 | 5 · Consolidarla en el intake §17.2.P.3 · GeometriaFactory-Visor | Nada, salvo verificar que la consolidación ocurrió antes de declarar la función terminada (`Definition-Of-Done.md` §1.3) |
 | 6 · Declararla cambio menor y registrarla | **Acá sí.** Un `TC-XX` nuevo por la función, y la verificación de que **ningún anfitrión escrito contra la superficie anterior se rompe**, que es la definición de cambio menor |
 
-**El proceso ya se recorrió entero una vez**, con la sexta función `establecerMovimiento`: la categoría 02 la acuñó con caso de uso propio `CU-12007`, **no acuñó garantía ni código** —la condición que puede informar, `INSTANCIA_DESCONOCIDA`, ya existía y pasó a presentarse en **cinco** funciones—, y el intake la consolidó en su versión **1.6**. Del lado de esta categoría, el efecto es que **`TC-12013` y `TC-12014` existen y que `TC-12021` verifica que el conjunto sigue cerrado en siete**: la superficie pasó de cinco funciones a seis **sin romper a ningún anfitrión escrito contra las cinco anteriores**.
+**El proceso ya se recorrió entero una vez**, con la sexta función `establecerMovimiento`: la categoría 02 la acuñó con caso de uso propio `CU-12007`, **no acuñó garantía ni código** —la condición que puede informar, `UNKNOWN_INSTANCE`, ya existía y pasó a presentarse en **cinco** funciones—, y el intake la consolidó en su versión **1.6**. Del lado de esta categoría, el efecto es que **`TC-12013` y `TC-12014` existen y que `TC-12021` verifica que el conjunto sigue cerrado en siete**: la superficie pasó de cinco funciones a seis **sin romper a ningún anfitrión escrito contra las cinco anteriores**.
 
 **El catálogo de diagnóstico de 03 sí creció**, de doce a **trece** entradas, porque su unidad de catalogación es la **función** y no el código. `TC-12021` protege esa distinción: crecer el catálogo no es crecer el conjunto de códigos, y confundir las dos cifras es el defecto que `05` §9 declara como sexto riesgo.
 
@@ -107,7 +107,7 @@ Se declaran para que ninguna prueba escrita más adelante los cometa. Los cinco 
 | --- | --- | --- |
 | **Probar el interior del motor de dibujo** | Ata la batería a un motor concreto: reemplazarlo obligaría a reescribir las pruebas, y el costo de reemplazo es exactamente lo que el punto de extensión viene a bajar | Probar contra la fachada y contra el **resultado de dibujo**, que son contrato |
 | **Sustituir el motor por un doble** | La prueba verificaría el doble y no la escena: se perderían el contexto gráfico, su liberación y el bucle, que son las tres cosas que `PT-02` mide | Usar una página real con capacidad gráfica ([`Estrategia-Testing.md`](Estrategia-Testing.md) §5) |
-| **Depender de la forma interna del identificador de instancia** | Es opaco por decisión, y su forma puede cambiar sin que sea cambio de contrato. Una prueba que la presuponga fallaría ante un cambio legítimo | Tratarlo como valor opaco: sólo verificar que resuelve, que se invalida y que produce `INSTANCIA_DESCONOCIDA` |
+| **Depender de la forma interna del identificador de instancia** | Es opaco por decisión, y su forma puede cambiar sin que sea cambio de contrato. Una prueba que la presuponga fallaría ante un cambio legítimo | Tratarlo como valor opaco: sólo verificar que resuelve, que se invalida y que produce `UNKNOWN_INSTANCE` |
 | **Comparar imágenes de la escena** | No distinguiría un cambio legítimo de **orientación** de una deriva de **posición**, y el determinismo comprometido por `G-6` es de posición | Comparar dos procesados pieza por pieza, por posición |
 | **Medir las propiedades de ausencia con los movimientos apagados** | Quedaría en verde sin haber ejercitado el bucle de dibujo, que es el caso donde una petición se colaría. Es el modo en que el gate más importante del proyecto de código pasa sin verificar nada | Prender los dos movimientos y sostenerlos, que es la condición de medición que `02` §6 declara |
 
@@ -115,4 +115,5 @@ Se declaran para que ninguna prueba escrita más adelante los cometa. Los cinco 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial. Declara qué clase de extensibilidad cubre esta guía —contrato angosto que hace reemplazable la pieza de atrás, y no registro de complementos— y qué queda fuera con su motivo. Traduce los **ocho** compromisos de `05` `Extensibilidad.md` §4 a los casos de prueba que los verifican, sin agregar compromisos ni cambiar los declarados, y fija el orden en que la batería se corre sobre un reemplazo, con dos pasos de descarte rápido al principio. Declara qué le corresponde a esta categoría en cada uno de los **seis** pasos del proceso por el que la fachada crece, con el precedente de la sexta función recorrido entero y con su efecto sobre las tablas de esta categoría. Declara **cinco** errores de prueba que romperían el punto de extensión, con lo que hay que hacer en su lugar. |

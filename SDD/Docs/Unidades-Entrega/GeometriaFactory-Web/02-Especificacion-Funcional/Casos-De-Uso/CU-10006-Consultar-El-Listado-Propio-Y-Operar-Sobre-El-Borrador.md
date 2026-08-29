@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10006-Consultar-El-Listado-Propio-Y-Operar-Sobre-El-Borrador.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -59,23 +59,23 @@ Darle al alumno un lugar donde ver todos sus trabajos con su estado —los cuatr
 | FA-01 | El alumno vuelve sobre un trabajo en estado `Borrador` | La pieza pública lo abre para editarlo y el envío se ejerce con CU-10005, FA-05 | El flujo vuelve al paso 1 con el estado que la interpretación haya decidido |
 | FA-02 | El alumno elimina un trabajo suyo en estado `Borrador` | La pieza pública pide confirmación e invoca el contrato de eliminación de `GeometriaFactory-Contracts` CU-10003, FA-02 | El flujo vuelve al paso 1, ya sin ese trabajo |
 | FA-03 | El alumno tiene un trabajo con desenlace | El listado muestra el estado `Finalizado` o `Rechazado`, que es donde el alumno se entera del desenlace. **El comentario no viaja en el listado**: lo ve al abrir el trabajo, en CU-10007 | El flujo continúa en el paso 5 |
-| FA-04 | El alumno todavía no cargó ningún trabajo | El contrato devuelve la colección con cero elementos —señal `CONTRATO_LISTADO_VACIO`—. La pieza pública muestra un listado vacío explicado, **distinguible del estado degradado por el tipo recibido y no por el conteo** | El flujo termina hasta que el alumno cargue uno |
+| FA-04 | El alumno todavía no cargó ningún trabajo | El contrato devuelve la colección con cero elementos —señal `EMPTY_LIST`—. La pieza pública muestra un listado vacío explicado, **distinguible del estado degradado por el tipo recibido y no por el conteo** | El flujo termina hasta que el alumno cargue uno |
 | FA-05 | El alumno quiere corregir un trabajo `Rechazado` | El estado es terminal: la pieza pública no ofrece editar ni eliminar. La única salida es cargar un trabajo nuevo por CU-10005 | El flujo continúa en CU-10005, paso 1 |
 
 ## 6. Excepciones y errores
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_TRABAJO_NO_ENCONTRADO` | El alumno pide por dirección directa un trabajo que no es suyo, o que no existe | La pieza pública muestra un mensaje neutro que **no distingue** el trabajo ajeno del inexistente, y devuelve al listado. No se confirma la existencia del recurso ajeno |
-| `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | El alumno fuerza la eliminación de un trabajo suyo que no está en estado `Borrador` | La eliminación no procede. La pieza pública declara el estado actual del trabajo y recarga el listado. Terminación controlada |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **No se muestra ningún listado**, porque la pieza pública no guarda copia de los datos |
-| `CONTRATO_ERROR_NO_CLASIFICADO` | Fallo que el contrato no previó | Handoff a CU-10010, con el mismo tratamiento |
+| `WORK_NOT_FOUND` | El alumno pide por dirección directa un trabajo que no es suyo, o que no existe | La pieza pública muestra un mensaje neutro que **no distingue** el trabajo ajeno del inexistente, y devuelve al listado. No se confirma la existencia del recurso ajeno |
+| `STATE_FORBIDS_DELETE` | El alumno fuerza la eliminación de un trabajo suyo que no está en estado `Borrador` | La eliminación no procede. La pieza pública declara el estado actual del trabajo y recarga el listado. Terminación controlada |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **No se muestra ningún listado**, porque la pieza pública no guarda copia de los datos |
+| `UNCLASSIFIED_ERROR` | Fallo que el contrato no previó | Handoff a CU-10010, con el mismo tratamiento |
 
 ### 6.1 Señal declarada que no es error
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_LISTADO_VACIO` | No hay trabajos que mostrar | Curso de FA-04: listado vacío explicado, nunca presentado como fallo |
+| `EMPTY_LIST` | No hay trabajos que mostrar | Curso de FA-04: listado vacío explicado, nunca presentado como fallo |
 
 ## 7. Postcondiciones
 
@@ -118,4 +118,5 @@ Darle al alumno un lugar donde ver todos sus trabajos con su estado —los cuatr
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **6 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-09 | Emisión inicial. |

@@ -2218,7 +2218,19 @@ Una norma sin instrumento de verificación es una intención. Siete controles, y
 > | **`R-3a`** | `GeometriaFactory-Api` · `03-UX-UI-DX` | **436** en 4 documentos | **Ejecutada el 2026-08-29** |
 > | **`R-3b`** | `GeometriaFactory-Api` · `02` y `08` | **335** en 32 documentos | **Ejecutada el 2026-08-29** |
 > | **`R-3c`** | Nivel producto y `05` de las dos unidades | **320** en 46 documentos | **Ejecutada el 2026-08-29** |
-> | `R-3d` | `GeometriaFactory-Web` · `06`, `07`, `09` y `10`, y el resto | **269** en 42 documentos | Pendiente |
+> | **`R-3d`** | `GeometriaFactory-Web` entero y el resto del corpus | **268** en 42 documentos | **Ejecutada el 2026-08-29** |
+>
+> **`R-3` queda CERRADO.** El barrido sobre el corpus vivo devuelve **cero** ocurrencias de uso propio
+> en forma castellana. Lo que queda son **573 filas de control de cambios**, **3 citas textuales** y
+> **1 línea de prosa que narra el renombre** — las 577 protegidas por §4.1, que es el número que
+> tiene que quedar y no cero.
+>
+> **Y una forma de §4.1 que este tramo tuvo que reconocer sobre la marcha.** Una línea que trae **la
+> forma vieja Y su par vigente** está **reportando** el renombre, no usando el identificador:
+> renombrarla produce una frase que se contradice sola —«el sistema emitía X y el documento pedía
+> X»—. Es la forma «reporte de fuente» que §4.1 ya declara, y el heurístico de las comillas
+> angulares no la ve porque vive en prosa. Apareció **una sola vez** en todo el corpus, en el
+> documento donde la Fase I narró el hallazgo que originó la reactivación de `R-3`.
 >
 > **La población total del tramo es 1162 ocurrencias de uso propio en 115 documentos**, y **no 2499**:
 > las otras 1337 son filas de control de cambios, informes de auditoría, citas textuales y la propia
@@ -2315,6 +2327,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.27 | 2026-08-29 | **`R-3d` ejecutado y `R-3` CERRADO.** 268 ocurrencias en 42 documentos, y el barrido sobre el corpus vivo devuelve **cero** usos propios en forma castellana. Los cuatro tramos suman **1359 ocurrencias** renombradas desde la reactivación del 2026-08-29. **§8 declara además una forma de §4.1 que el tramo reconoció sobre la marcha**: la línea que trae la forma vieja **y** su par vigente está **reportando** el renombre y no usando el identificador, y renombrarla la vuelve una frase que se contradice sola. Apareció una sola vez, en el documento donde la Fase I narró el hallazgo que reactivó `R-3`. Quedan protegidas **573 filas de control de cambios, 3 citas y 1 línea de prosa**: **577 es el número que tiene que quedar, y no cero.** | Orquestador SDD |
 | 1.26 | 2026-08-29 | **§8 registra el tramo `R-4`**, que no es de `F-03`: es el **renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner al **retirar el `ADR-14005` en lugar de aceptarlo**. **507 ocurrencias renumeradas** y **278 dejadas con la forma vieja a propósito**, porque su bloque no estaba en el texto y deducirlo habría sido inventarlo. Con el renumerado las dos familias **dejan de necesitar apartamiento**. | Orquestador SDD |
 | 1.25 | 2026-08-29 | **Tramos `R-3b` y `R-3c` ejecutados**, y §8 registra su recuento real: **335** ocurrencias en 32 documentos de la `02` y la `08` de `-Api`, y **320** en 46 del nivel producto y las dos `05`. **Y el guion del tramo se corrigió antes de `R-3c`**: **no excluía `Audit/`**, que §4.1 protege como registro histórico. No había mordido —las carpetas de `R-3a` y `R-3b` no tienen informes— y en `R-3c` habría falsificado actas de auditoría. Con la exclusión puesta, el recuento del corpus vivo cuadra con la medición independiente. Queda **`R-3d` con 269 en 42 documentos**. | Orquestador SDD |
 | 1.24 | 2026-08-29 | **§8 registra la reactivación de `R-3`**, decidida por el Product Owner el 2026-08-29. Es la primera vez que un tramo suspendido el 2026-08-13 vuelve a correr, y **el fundamento de la suspensión dejó de valer sólo para éste**: decía que los tramos *«renombraban identificadores en documentos que describen código que no existe»*, y para `F-03` el código existe y emite sus **56** códigos en la forma vigente. **Lo demostró un contrato de verificación fallando contra el sistema**, no una revisión de escritorio: `VER-02001`, el 2026-08-27, con cuatro de sus cinco criterios incumplidos. **Los otros tres tramos suspendidos conservan su fundamento intacto y siguen suspendidos.** §8 declara además la partición de `R-3` en **cuatro unidades**, la población real —**1162 ocurrencias de uso propio en 115 documentos, y no 2499**, porque §4.1 protege las otras 1337— y que **los dos huérfanos de §6.8.7 quedan fuera por construcción**. **`R-3a` queda ejecutada**: 436 ocurrencias en los 4 documentos de `GeometriaFactory-Api` `03-UX-UI-DX`. **Ninguna tabla del glosario cambia**: §6.8 es la fuente de este tramo y no su objeto. | Orquestador SDD |

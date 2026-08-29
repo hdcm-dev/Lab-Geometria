@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Glosario-UX.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -248,7 +248,7 @@ Puntero único: [`../02-Especificacion-Funcional/Glosario-Funcional.md`](../02-E
 | Resultado de dibujo | Lo que el anfitrión tiene que leer completo, incluidas las piezas no dibujadas |
 | Estructura del texto · Árbol · Índice de pieza · Selección | Material con el que el anfitrión sincroniza su árbol con la escena |
 | Tipo dibujable · Malla · Escena · Disposición | Vocabulario del dibujo, usado en las entradas del catálogo y en las verificaciones de los tramos |
-| Código de condición | Fuente única del catálogo de `DX-Error-Messages.md`. Los siete están declarados en `Definicion-Contrato-De-Fachada.md` §6 y esta categoría **no agrega ninguno**. La sexta función tampoco: `INSTANCIA_DESCONOCIDA` pasa a presentarse en **cinco** funciones y sigue siendo un solo código |
+| Código de condición | Fuente única del catálogo de `DX-Error-Messages.md`. Los siete están declarados en `Definicion-Contrato-De-Fachada.md` §6 y esta categoría **no agrega ninguno**. La sexta función tampoco: `UNKNOWN_INSTANCE` pasa a presentarse en **cinco** funciones y sigue siendo un solo código |
 | Movimiento automático · Órbita de la cámara · Giro de las figuras | Los dos movimientos independientes de la capacidad **F-25** y su superordinado, declarados en `Glosario-Funcional.md` §2 y desarrollados en `Definicion-Contrato-De-Fachada.md` §5.5. Esta categoría los usa para decir **qué gobierna el anfitrión invocando la fachada** y qué no toca por su cuenta; no los redefine y no los renombra |
 | Estado efectivo del movimiento | Lo que `establecerMovimiento` devuelve: el estado en que quedan **los dos** movimientos después de la operación. Es lo que el anfitrión lee para sincronizar su control visible con lo que la escena está haciendo, en lugar de suponerlo |
 | Cero red · Cero persistencia | Dos de las **seis propiedades transversales**, verificadas en el quick-start y en cada tramo del onboarding. Su membresía y su umbral se declaran una sola vez en `../02-Especificacion-Funcional/Especificacion-Funcional.md` §6, y esta categoría no los re-enumera |
@@ -290,4 +290,5 @@ Rige además el **choque de vocabulario** de `Vision-Producto.md` §9.3 y `PRODU
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

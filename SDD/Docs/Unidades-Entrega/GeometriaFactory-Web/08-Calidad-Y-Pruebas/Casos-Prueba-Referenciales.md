@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -526,7 +526,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 
 **Verificación de la cobertura de los ocho escenarios, uno por uno:** `E-1` en `TC-12005`, `TC-12009`, `TC-12015` y `TC-12020`; `E-2` en `TC-12006`; `E-3` y `E-4` en `TC-12006`; `E-5` en `TC-12007`; `E-6` en `TC-12007`; `E-7` en `TC-12005`, `TC-12006` y `TC-12015`; `E-8` en `TC-12007`, `TC-12008` y `TC-12011`. Ninguno se sustituye por datos sintéticos.
 
-**Verificación de los siete códigos, uno por uno:** `CAPACIDAD_GRAFICA_AUSENTE` en `TC-12002`; `ELEMENTO_DE_DIBUJO_INVALIDO` curso **C-1** en `TC-12002` y curso **C-2** en `TC-12012`; `INSTANCIA_DESCONOCIDA` en `TC-12004`, `TC-12011` y `TC-12013`; `TEXTO_NO_LEGIBLE` en `TC-12010`; `TIPO_NO_DIBUJABLE` en `TC-12007`; `DIMENSION_NO_LEGIBLE` en `TC-12007`; `INDICE_FUERA_DE_RANGO` en `TC-12011`, en los dos casos que su enunciado cubre.
+**Verificación de los siete códigos, uno por uno:** `GRAPHICS_CAPABILITY_MISSING` en `TC-12002`; `INVALID_CANVAS_ELEMENT` curso **C-1** en `TC-12002` y curso **C-2** en `TC-12012`; `UNKNOWN_INSTANCE` en `TC-12004`, `TC-12011` y `TC-12013`; `UNREADABLE_TEXT` en `TC-12010`; `NON_DRAWABLE_TYPE` en `TC-12007`; `UNREADABLE_DIMENSION` en `TC-12007`; `INDEX_OUT_OF_RANGE` en `TC-12011`, en los dos casos que su enunciado cubre.
 
 ## 4. Catálogo de casos de prueba
 
@@ -551,9 +551,9 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Extremo a extremo en página |
-| Cubre | `CU-12001`; garantía `G-7`; `US-12003`; códigos `CAPACIDAD_GRAFICA_AUSENTE` y `ELEMENTO_DE_DIBUJO_INVALIDO` **curso C-1**; entradas `E-VIS-01` y `E-VIS-02` de `03` |
+| Cubre | `CU-12001`; garantía `G-7`; `US-12003`; códigos `GRAPHICS_CAPABILITY_MISSING` y `INVALID_CANVAS_ELEMENT` **curso C-1**; entradas `E-VIS-01` y `E-VIS-02` de `03` |
 | Setup | Un navegador sin capacidad gráfica tridimensional; y una página con un elemento de dibujo de **tamaño nulo** |
-| Pasos | Given el navegador sin capacidad gráfica, When se invoca la creación, Then se informa `CAPACIDAD_GRAFICA_AUSENTE` y **no se devuelve identificador**. Given el elemento de tamaño nulo, When se invoca la creación, Then se informa `ELEMENTO_DE_DIBUJO_INVALIDO` en su curso **C-1** y **no se crea instancia** |
+| Pasos | Given el navegador sin capacidad gráfica, When se invoca la creación, Then se informa `GRAPHICS_CAPABILITY_MISSING` y **no se devuelve identificador**. Given el elemento de tamaño nulo, When se invoca la creación, Then se informa `INVALID_CANVAS_ELEMENT` en su curso **C-1** y **no se crea instancia** |
 | Salida esperada | Dos condiciones informadas por su código y **cero** instancias creadas. Es lo contrario del fallo silencioso: la fachada dice por qué no pudo |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -577,7 +577,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Tipo | Extremo a extremo en página |
 | Cubre | `CU-12005`; garantías `G-4`, `G-7`; `US-12011`; NFR «Liberación de recursos»; `BT-12005`, `BT-12012`, `BT-12014` |
 | Setup | Una página con dos trabajos entre los que se puede ir y volver, y el texto del escenario `E-1` |
-| Pasos | Given una instancia viva, When se la destruye, Then libera sus recursos gráficos y **corta su bucle de dibujo**. Given **diez recorridos de ida y vuelta** entre trabajos **con los dos movimientos prendidos**, When se cuentan los recursos gráficos vivos al final, Then no hay degradación. Given una instancia ya destruida, When se la vuelve a usar por cualquiera de las cinco funciones que exigen identificador, Then se informa `INSTANCIA_DESCONOCIDA` |
+| Pasos | Given una instancia viva, When se la destruye, Then libera sus recursos gráficos y **corta su bucle de dibujo**. Given **diez recorridos de ida y vuelta** entre trabajos **con los dos movimientos prendidos**, When se cuentan los recursos gráficos vivos al final, Then no hay degradación. Given una instancia ya destruida, When se la vuelve a usar por cualquiera de las cinco funciones que exigen identificador, Then se informa `UNKNOWN_INSTANCE` |
 | Salida esperada | Bucle cortado, sin recursos acumulados tras diez recorridos, y el identificador invalidado. **Los movimientos prendidos son la condición de medición declarada**: un bucle que sobreviviera a la destrucción es exactamente la degradación que hay que descartar, y con los movimientos apagados no se ejercitaría |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -613,10 +613,10 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Extremo a extremo en página |
-| Cubre | `CU-12002`; garantía `G-5`; `US-12006`; NFR «Ausencia de fallo silencioso»; códigos `TIPO_NO_DIBUJABLE` y `DIMENSION_NO_LEGIBLE`; entradas `E-VIS-09` y `E-VIS-10` de `03` |
+| Cubre | `CU-12002`; garantía `G-5`; `US-12006`; NFR «Ausencia de fallo silencioso»; códigos `NON_DRAWABLE_TYPE` y `UNREADABLE_DIMENSION`; entradas `E-VIS-09` y `E-VIS-10` de `03` |
 | Setup | Los textos de los escenarios `E-5`, `E-8` y `E-6` del intake §20 |
-| Pasos | Given el texto de `E-5`, cuya figura del índice 1 declara un tipo fuera de los seis dibujables, When se lo carga, Then esa pieza **no se dibuja y queda enumerada** con su índice y `TIPO_NO_DIBUJABLE`, y **la del índice 0 se dibuja igual**. Given el texto de `E-8`, Then el ortoedro del índice 0 **se dibuja**, la pieza del índice 1 **no**, y el resultado de dibujo la reporta con **índice 1**, código **`DIMENSION_NO_LEGIBLE`** y el campo `Largo`. Given el texto de `E-6`, cuya figura declara `"Largo": 0.00`, Then **la figura se dibuja**: el cero es una dimensión legible y **no produce `DIMENSION_NO_LEGIBLE`** |
-| Salida esperada | **100 %** de las piezas no dibujadas enumeradas con índice y código, y **0** piezas sin registro. Y una comprobación negativa: la de `E-6` **no** aparece entre las no dibujadas. **El código de `E-8` es `DIMENSION_NO_LEGIBLE` y no una condición de texto inválido**: el texto es sintácticamente válido y lo que falla es la lectura de un valor. Confundir los dos es el error que ese escenario detecta |
+| Pasos | Given el texto de `E-5`, cuya figura del índice 1 declara un tipo fuera de los seis dibujables, When se lo carga, Then esa pieza **no se dibuja y queda enumerada** con su índice y `NON_DRAWABLE_TYPE`, y **la del índice 0 se dibuja igual**. Given el texto de `E-8`, Then el ortoedro del índice 0 **se dibuja**, la pieza del índice 1 **no**, y el resultado de dibujo la reporta con **índice 1**, código **`UNREADABLE_DIMENSION`** y el campo `Largo`. Given el texto de `E-6`, cuya figura declara `"Largo": 0.00`, Then **la figura se dibuja**: el cero es una dimensión legible y **no produce `UNREADABLE_DIMENSION`** |
+| Salida esperada | **100 %** de las piezas no dibujadas enumeradas con índice y código, y **0** piezas sin registro. Y una comprobación negativa: la de `E-6` **no** aparece entre las no dibujadas. **El código de `E-8` es `UNREADABLE_DIMENSION` y no una condición de texto inválido**: el texto es sintácticamente válido y lo que falla es la lectura de un valor. Confundir los dos es el error que ese escenario detecta |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -649,9 +649,9 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Integración |
-| Cubre | `CU-12002`; garantía `G-7`; código `TEXTO_NO_LEGIBLE`; entrada `E-VIS-08` de `03` |
+| Cubre | `CU-12002`; garantía `G-7`; código `UNREADABLE_TEXT`; entrada `E-VIS-08` de `03` |
 | Setup | Una instancia con una escena ya dibujada a partir de `E-1` |
-| Pasos | Given un texto del que no se puede obtener un conjunto de piezas, When se lo carga, Then se informa `TEXTO_NO_LEGIBLE`, **la instancia queda viva y vacía**: se libera lo dibujado antes y no se dibuja nada nuevo |
+| Pasos | Given un texto del que no se puede obtener un conjunto de piezas, When se lo carga, Then se informa `UNREADABLE_TEXT`, **la instancia queda viva y vacía**: se libera lo dibujado antes y no se dibuja nada nuevo |
 | Salida esperada | La condición informada, la instancia viva y la escena vacía. **La instancia no queda en estado indeterminado** (`G-7`) |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -663,10 +663,10 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Extremo a extremo en página |
-| Cubre | `CU-12003`; garantías `G-4`, `G-7`; `US-12009`; `PT-02` en su tramo de sincronización; código `INDICE_FUERA_DE_RANGO`; entradas `E-VIS-11` y `E-VIS-12` de `03` |
+| Cubre | `CU-12003`; garantías `G-4`, `G-7`; `US-12009`; `PT-02` en su tramo de sincronización; código `INDEX_OUT_OF_RANGE`; entradas `E-VIS-11` y `E-VIS-12` de `03` |
 | Setup | Una escena dibujada con el texto del escenario `E-8`, que tiene una pieza dibujada y una no dibujada |
-| Pasos | Given la escena, When se selecciona la pieza del índice 0, Then queda resaltada **en exclusiva**: ninguna otra lo está. Given un índice que no está en el conjunto raíz, Then `INDICE_FUERA_DE_RANGO` y **la selección vigente se conserva**. Given el índice **1**, que el resultado enumera como **no dibujada**, Then también `INDICE_FUERA_DE_RANGO`: figura en el resultado pero **no tiene malla que resaltar**. Given un identificador que no corresponde a una instancia viva, Then `INSTANCIA_DESCONOCIDA` |
-| Salida esperada | Un resaltado exclusivo y tres condiciones, con la selección conservada en las tres. **Los dos casos que `INDICE_FUERA_DE_RANGO` cubre derivan del enunciado literal del contrato y no de una reinterpretación; son dos casos de un mismo curso, no dos cursos** |
+| Pasos | Given la escena, When se selecciona la pieza del índice 0, Then queda resaltada **en exclusiva**: ninguna otra lo está. Given un índice que no está en el conjunto raíz, Then `INDEX_OUT_OF_RANGE` y **la selección vigente se conserva**. Given el índice **1**, que el resultado enumera como **no dibujada**, Then también `INDEX_OUT_OF_RANGE`: figura en el resultado pero **no tiene malla que resaltar**. Given un identificador que no corresponde a una instancia viva, Then `UNKNOWN_INSTANCE` |
+| Salida esperada | Un resaltado exclusivo y tres condiciones, con la selección conservada en las tres. **Los dos casos que `INDEX_OUT_OF_RANGE` cubre derivan del enunciado literal del contrato y no de una reinterpretación; son dos casos de un mismo curso, no dos cursos** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -675,9 +675,9 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Extremo a extremo en página |
-| Cubre | `CU-12004`; garantía `G-7`; `US-12010`; código `ELEMENTO_DE_DIBUJO_INVALIDO` **curso C-2**; entrada `E-VIS-07` de `03` |
+| Cubre | `CU-12004`; garantía `G-7`; `US-12010`; código `INVALID_CANVAS_ELEMENT` **curso C-2**; entrada `E-VIS-07` de `03` |
 | Setup | Una instancia viva con su escena, sobre un elemento de dibujo cuyo tamaño se puede cambiar |
-| Pasos | Given un cambio de tamaño del elemento, When se invoca el ajuste, Then la relación de aspecto se recalcula. Given el elemento **ocultado o desmontado**, When se invoca el ajuste, Then se informa `ELEMENTO_DE_DIBUJO_INVALIDO` en su curso **C-2**, **la instancia sigue viva** con su escena y su selección intactas, y no se recalcula nada. Given el elemento devuelto a un tamaño válido, When se invoca de nuevo, Then el ajuste procede |
+| Pasos | Given un cambio de tamaño del elemento, When se invoca el ajuste, Then la relación de aspecto se recalcula. Given el elemento **ocultado o desmontado**, When se invoca el ajuste, Then se informa `INVALID_CANVAS_ELEMENT` en su curso **C-2**, **la instancia sigue viva** con su escena y su selección intactas, y no se recalcula nada. Given el elemento devuelto a un tamaño válido, When se invoca de nuevo, Then el ajuste procede |
 | Salida esperada | Un ajuste, una condición sin pérdida de instancia y un ajuste posterior exitoso. **Es el mismo código que `TC-12002` con otro curso**, y la diferencia está en el efecto sobre la instancia: allá no se crea, acá sigue viva |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -689,7 +689,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Tipo | Extremo a extremo en página |
 | Cubre | `CU-12007`; garantía `G-7`; `US-12012`; `BT-12011` |
 | Setup | Una instancia viva con el texto de `E-1` cargado y una pieza seleccionada |
-| Pasos | Given la instancia, When se prende o se apaga cada movimiento por separado, Then el cambio surte efecto **sin reconstruir la instancia**: la disposición, la selección vigente, el encuadre, el resultado de dibujo y el identificador **quedan como estaban**, y el movimiento **no nombrado conserva su estado**. When se invoca dos veces con el mismo valor, Then el resultado es el mismo. When se apaga el giro de las figuras, Then las piezas **vuelven a su orientación de partida**. When se carga otro texto, Then **el estado de los movimientos sobrevive**. When se invoca con un identificador inválido, Then `INSTANCIA_DESCONOCIDA` y **ningún movimiento cambia** |
+| Pasos | Given la instancia, When se prende o se apaga cada movimiento por separado, Then el cambio surte efecto **sin reconstruir la instancia**: la disposición, la selección vigente, el encuadre, el resultado de dibujo y el identificador **quedan como estaban**, y el movimiento **no nombrado conserva su estado**. When se invoca dos veces con el mismo valor, Then el resultado es el mismo. When se apaga el giro de las figuras, Then las piezas **vuelven a su orientación de partida**. When se carga otro texto, Then **el estado de los movimientos sobrevive**. When se invoca con un identificador inválido, Then `UNKNOWN_INSTANCE` y **ningún movimiento cambia** |
 | Salida esperada | Cambio en vivo con selección conservada, idempotencia, reposición de orientación, supervivencia a la carga de otro texto, y la condición informada sin efecto. **La sexta función no emite ninguna condición propia**: la lista sigue cerrada en siete |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -787,7 +787,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Tipo | Inspección del artefacto generado |
 | Cubre | Los **siete** códigos de `Definicion-Contrato-De-Fachada.md` §6; `QG-08`; `BT-12006`; `05` §9, sexto riesgo |
 | Setup | El conjunto de códigos que el bundle puede informar, y §6 del contrato de fachada como fuente única |
-| Pasos | Given los dos conjuntos, When se los compara **en las dos direcciones**, Then el bundle informa exactamente los **siete** códigos del contrato y **ninguno más**. Given `INSTANCIA_DESCONOCIDA`, When se lo provoca desde cada función que exige identificador, Then aparece en **cinco** funciones y **sigue siendo un solo código**. Given `ELEMENTO_DE_DIBUJO_INVALIDO`, Then se presenta en sus **dos cursos** y **sigue siendo un solo código** |
+| Pasos | Given los dos conjuntos, When se los compara **en las dos direcciones**, Then el bundle informa exactamente los **siete** códigos del contrato y **ninguno más**. Given `UNKNOWN_INSTANCE`, When se lo provoca desde cada función que exige identificador, Then aparece en **cinco** funciones y **sigue siendo un solo código**. Given `INVALID_CANVAS_ELEMENT`, Then se presenta en sus **dos cursos** y **sigue siendo un solo código** |
 | Salida esperada | 7 de 7 cubiertos, 0 acuñados aguas abajo, y la distinción entre código y curso verificada. **El catálogo de `03` puede crecer sin que crezca el conjunto de códigos** —hoy tiene **trece** entradas sobre siete códigos—, y esa distinción es la que este caso de prueba protege |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -796,5 +796,6 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **16 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **2 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

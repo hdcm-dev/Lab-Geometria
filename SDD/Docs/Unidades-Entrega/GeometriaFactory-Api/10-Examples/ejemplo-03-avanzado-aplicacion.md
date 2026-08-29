@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -91,9 +91,9 @@ Actos recorridos: 4 | Rechazos tipados: 8 | Excepciones: 0
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Habilitar sin que el puerto produzca la provisoria | Hacer que el doble devuelva ausencia de provisoria en la habilitación | Rechazo `HABILITACION_SIN_CREDENCIAL_PROVISORIA`: la habilitación **no procede** sin ella (`RN-04016`) |
-| Baja sin arrastre | Hacer que el doble del repositorio retire la cuenta y deje sus trabajos | Rechazo `BAJA_SIN_ARRASTRE_DE_TRABAJOS`; la unidad de trabajo es todo o nada (`ADR-04005`) |
-| Desenlace desde `Borrador` | Invocar `CU-04008` sobre un trabajo que no está en `Pendiente` | Rechazo `DESENLACE_FUERA_DE_PENDIENTE`, distinto del rechazo por estado terminal |
+| Habilitar sin que el puerto produzca la provisoria | Hacer que el doble devuelva ausencia de provisoria en la habilitación | Rechazo `ENABLE_WITHOUT_TEMPORARY_CREDENTIAL`: la habilitación **no procede** sin ella (`RN-04016`) |
+| Baja sin arrastre | Hacer que el doble del repositorio retire la cuenta y deje sus trabajos | Rechazo `DELETION_WITHOUT_WORK_CASCADE`; la unidad de trabajo es todo o nada (`ADR-04005`) |
+| Desenlace desde `Borrador` | Invocar `CU-04008` sobre un trabajo que no está en `Pendiente` | Rechazo `OUTCOME_OUTSIDE_SUBMITTED`, distinto del rechazo por estado terminal |
 | Alumno que pide el detalle de un trabajo propio en `Borrador` | Repetir la segunda línea de `[2]` con el dueño en lugar del administrador | Procede: el alcance del administrador excluye los borradores, y el del alumno no excluye los suyos |
 
 ## 8. Trazabilidad
@@ -150,4 +150,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-04002`, `CU-04007`, `CU-04008` y `CU-04011` con los **cuatro** puertos satisfechos por dobles y con semilla propia, y recorre las comprobaciones **3** y **4** de `ADR-04004` §2 con sus negativas distinguidas. El contrato `VER-04003` declara siete líneas exactas de salida y **dos aserciones negativas** —el borrador visible en la entrega de la comisión y el motivo que no puede colapsarse con el de pertenencia—; `evidencia` queda en `No verificado — sin código`. |

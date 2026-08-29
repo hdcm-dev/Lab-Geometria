@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -319,14 +319,14 @@ Ocho filas: **siete códigos**, uno de ellos con **dos cursos**, que es la forma
 
 | Código | Curso | Test | Entrada de `03` | Estado |
 | --- | --- | --- | --- | --- |
-| `CAPACIDAD_GRAFICA_AUSENTE` | Único | `TC-12002` | `E-VIS-01` | `Pendiente` |
-| `ELEMENTO_DE_DIBUJO_INVALIDO` | **C-1, en creación** | `TC-12002` | `E-VIS-02` | `Pendiente` |
-| `ELEMENTO_DE_DIBUJO_INVALIDO` | **C-2, en ajuste** | `TC-12012` | `E-VIS-07` | `Pendiente` |
-| `INSTANCIA_DESCONOCIDA` | Único, **en cinco funciones** | `TC-12004`, `TC-12011`, `TC-12013` | `E-VIS-03` a `E-VIS-06` y `E-VIS-13` | `Pendiente` |
-| `TEXTO_NO_LEGIBLE` | Único | `TC-12010` | `E-VIS-08` | `Pendiente` |
-| `TIPO_NO_DIBUJABLE` | Único, por pieza | `TC-12007` | `E-VIS-09` | `Pendiente` |
-| `DIMENSION_NO_LEGIBLE` | Único, por pieza | `TC-12007` | `E-VIS-10` | `Pendiente` |
-| `INDICE_FUERA_DE_RANGO` | Único, con **dos casos** | `TC-12011` | `E-VIS-11`, `E-VIS-12` | `Pendiente` |
+| `GRAPHICS_CAPABILITY_MISSING` | Único | `TC-12002` | `E-VIS-01` | `Pendiente` |
+| `INVALID_CANVAS_ELEMENT` | **C-1, en creación** | `TC-12002` | `E-VIS-02` | `Pendiente` |
+| `INVALID_CANVAS_ELEMENT` | **C-2, en ajuste** | `TC-12012` | `E-VIS-07` | `Pendiente` |
+| `UNKNOWN_INSTANCE` | Único, **en cinco funciones** | `TC-12004`, `TC-12011`, `TC-12013` | `E-VIS-03` a `E-VIS-06` y `E-VIS-13` | `Pendiente` |
+| `UNREADABLE_TEXT` | Único | `TC-12010` | `E-VIS-08` | `Pendiente` |
+| `NON_DRAWABLE_TYPE` | Único, por pieza | `TC-12007` | `E-VIS-09` | `Pendiente` |
+| `UNREADABLE_DIMENSION` | Único, por pieza | `TC-12007` | `E-VIS-10` | `Pendiente` |
+| `INDEX_OUT_OF_RANGE` | Único, con **dos casos** | `TC-12011` | `E-VIS-11`, `E-VIS-12` | `Pendiente` |
 
 **Siete de siete códigos cubiertos, en ocho filas de curso.** El catálogo de `03` los desarrolla en **trece** entradas porque su unidad de catalogación es la **función** y no el código; esta matriz sigue la unidad del contrato, que es la condición. `TC-12021` verifica que las dos cifras no se confundan y que **ningún código se acuñe aguas abajo**.
 
@@ -334,5 +334,6 @@ Ocho filas: **siete códigos**, uno de ellos con **dos cursos**, que es la forma
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **8 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **5 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

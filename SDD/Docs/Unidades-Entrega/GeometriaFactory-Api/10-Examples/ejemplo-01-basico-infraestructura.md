@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -92,7 +92,7 @@ Escenarios recorridos: 8 | Observaciones de error: 2 | Advertencias: 4 | Excepci
 | Tolerancia no estricta | Comparar con «mayor o igual» en lugar de estricto | `E-1` pasa a **3** advertencias y el escenario canónico del producto deja de dar 3 piezas y 2 advertencias |
 | Quitar el sinónimo de clave | Leer sólo `Bases` y no `Tapas` | `E-2` deja de reconstruirse: es el defecto que el visor original tiene y que este producto viene a corregir (`T1`) |
 | Reformatear `E2.txt` | Abrir el archivo con una herramienta que lo normalice | Las comas finales desaparecen, `T2` deja de ejercitarse y el sample **sigue pasando**. Es lo que la extensión `.txt` viene a evitar |
-| Texto que no parsea ni con tolerancia | Reemplazar un escenario por un texto arbitrario | Condición `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, que es error de interpretación y no advertencia |
+| Texto que no parsea ni con tolerancia | Reemplazar un escenario por un texto arbitrario | Condición `PIECE_SET_NOT_REBUILT`, que es error de interpretación y no advertencia |
 
 ## 8. Trazabilidad
 
@@ -144,4 +144,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06001` y `CU-06002` sobre los **ocho** escenarios reales del `PRODUCT-INTAKE` §20 como **texto literal**, transcriptos sin modificación, y ejercita las **cuatro** tolerancias `T1` a `T4`. Declara por qué los archivos llevan extensión `.txt` y por qué el sample no abre el almacén. El contrato `VER-06001` declara ocho líneas exactas de salida y **dos aserciones negativas** —el índice reportado y el cilindro sin observación, que es donde se rompe el operador estricto—; `evidencia` queda en `No verificado — sin código`. |

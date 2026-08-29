@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10005-Enviar-Un-Trabajo-Y-Ver-El-Resultado-De-La-Interpretacion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -65,7 +65,7 @@ Permitir que el alumno cargue un trabajo con su nombre, su fecha, su descripció
 | FA-01 | El texto verifica | El resultado trae estado `Pendiente`. El trabajo queda entregado y **deja de ser editable y eliminable por el alumno** | El flujo continúa en el paso 8, y sigue en CU-10009 cuando el administrador lo resuelva |
 | FA-02 | El texto no verifica | El envío **no falla**: el resultado trae estado `Borrador`, el texto conservado íntegro y las observaciones de error de validación con índice de figura y campo señalado. La pieza pública las presenta y ofrece volver a enviar | El flujo vuelve al paso 3, con el texto y los datos tal como quedaron |
 | FA-03 | El texto verifica pero trae discrepancias entre valor declarado y valor derivado | El trabajo pasa igual a estado `Pendiente`, y la pieza pública muestra las advertencias con los dos valores. **Ninguna advertencia bloquea el envío** | El flujo continúa en el paso 8 |
-| FA-04 | El navegador no provee la capacidad gráfica tridimensional | La fachada informa `CAPACIDAD_GRAFICA_AUSENTE` y no crea instancia. La pieza pública informa que la previsualización no está disponible en ese navegador y **mantiene disponible el envío**, que no depende del dibujo | El flujo continúa en el paso 5 |
+| FA-04 | El navegador no provee la capacidad gráfica tridimensional | La fachada informa `GRAPHICS_CAPABILITY_MISSING` y no crea instancia. La pieza pública informa que la previsualización no está disponible en ese navegador y **mantiene disponible el envío**, que no depende del dibujo | El flujo continúa en el paso 5 |
 | FA-05 | El alumno vuelve sobre un trabajo suyo en estado `Borrador` | La pieza pública lo abre con sus datos y su texto tal como quedaron, y el envío usa el mismo contrato con el identificador ya asignado | El flujo continúa en el paso 3 |
 | FA-06 | El alumno abandona la vista de trabajo, con o sin enviar | La pieza pública invoca `destruir` sobre la instancia del visualizador al descartar el componente. Nada de lo escrito sobrevive del lado de la pieza pública | El flujo termina |
 
@@ -73,18 +73,18 @@ Permitir que el alumno cargue un trabajo con su nombre, su fecha, su descripció
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | Falta el nombre, la fecha o el texto | La pieza pública señala el campo que el contrato nombra. Recuperación por corrección y reintento. **El texto vacío es campo ausente, no texto que no verifica** |
-| `CONTRATO_TRABAJO_NO_ENCONTRADO` | Se envía sobre un identificador que no corresponde a un trabajo del alumno, o que no existe | La pieza pública informa con texto neutro que **no distingue** el trabajo ajeno del inexistente, y devuelve al listado. Terminación controlada |
-| `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | Aparece sólo en el camino de eliminación de CU-10006, no en el de envío | No aplica acá; se declara para que la ausencia sea deliberada y no un olvido |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **La pieza pública conserva en la vista lo que el alumno escribió** para que pueda reintentar, y no lo guarda en ningún lado |
-| `TEXTO_NO_LEGIBLE` | La fachada del visualizador no obtiene piezas del texto en la previsualización | La instancia queda viva y vacía. La pieza pública avisa que la previsualización no pudo dibujar nada y **no deduce de eso ningún estado del trabajo**: quien decide es la pieza de datos, en el paso 7 |
-| `TIPO_NO_DIBUJABLE`, `DIMENSION_NO_LEGIBLE` | Una pieza no produjo dibujo en la previsualización | La pieza pública enumera esas piezas por su índice junto a la escena. **No las califica de error del trabajo**: no son observaciones |
+| `REQUIRED_FIELD_MISSING` | Falta el nombre, la fecha o el texto | La pieza pública señala el campo que el contrato nombra. Recuperación por corrección y reintento. **El texto vacío es campo ausente, no texto que no verifica** |
+| `WORK_NOT_FOUND` | Se envía sobre un identificador que no corresponde a un trabajo del alumno, o que no existe | La pieza pública informa con texto neutro que **no distingue** el trabajo ajeno del inexistente, y devuelve al listado. Terminación controlada |
+| `STATE_FORBIDS_DELETE` | Aparece sólo en el camino de eliminación de CU-10006, no en el de envío | No aplica acá; se declara para que la ausencia sea deliberada y no un olvido |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **La pieza pública conserva en la vista lo que el alumno escribió** para que pueda reintentar, y no lo guarda en ningún lado |
+| `UNREADABLE_TEXT` | La fachada del visualizador no obtiene piezas del texto en la previsualización | La instancia queda viva y vacía. La pieza pública avisa que la previsualización no pudo dibujar nada y **no deduce de eso ningún estado del trabajo**: quien decide es la pieza de datos, en el paso 7 |
+| `NON_DRAWABLE_TYPE`, `UNREADABLE_DIMENSION` | Una pieza no produjo dibujo en la previsualización | La pieza pública enumera esas piezas por su índice junto a la escena. **No las califica de error del trabajo**: no son observaciones |
 
 ### 6.1 Señal declarada que no es error
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_TEXTO_NO_INTERPRETABLE` | El texto enviado no verifica | El envío procede y devuelve estado `Borrador` con las observaciones. Es el curso de FA-02 y **no** es un fallo del envío |
+| `TEXT_NOT_PARSEABLE` | El texto enviado no verifica | El envío procede y devuelve estado `Borrador` con las observaciones. Es el curso de FA-02 y **no** es un fallo del envío |
 
 ## 7. Postcondiciones
 
@@ -132,3 +132,4 @@ Permitir que el alumno cargue un trabajo con su nombre, su fecha, su descripció
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, decisión **(b)**. §9 corrige el recuento de la fachada, que decía **cinco** funciones y son **seis** desde el intake 1.6, que incorporó `establecerMovimiento` para gobernar los dos movimientos automáticos de F-25. **Este caso de uso no la consume**: la previsualización previa al envío sigue usando `inicializar`, `cargarJson` y `destruir`, y el movimiento automático es de la vista de trabajo, CU-10007. Sube minor por alineación de una referencia al contrato de fachada, sin cambiar ningún flujo. |
+| 1.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **8 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
