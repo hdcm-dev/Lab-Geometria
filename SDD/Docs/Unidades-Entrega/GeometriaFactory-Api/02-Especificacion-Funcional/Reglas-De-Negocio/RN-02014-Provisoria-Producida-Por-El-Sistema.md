@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02014-Provisoria-Producida-Por-El-Sistema.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -45,7 +45,7 @@ Lo que la regla protege es la promesa de RN-02013 y de INV-09: la provisoria val
 
 ## 4. Consecuencia si se viola
 
-**No hay código de rechazo del dominio**, y el motivo es el mismo por el que la regla no se ejerce acá: el dominio recibe un valor ya derivado y no puede distinguir uno producido por el sistema de uno escrito por el administrador. La única condición que el dominio sí comprueba sobre ese valor es que no esté vacío, y es `VALOR_DERIVADO_VACIO` de [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) §6, que no es esta regla.
+**No hay código de rechazo del dominio**, y el motivo es el mismo por el que la regla no se ejerce acá: el dominio recibe un valor ya derivado y no puede distinguir uno producido por el sistema de uno escrito por el administrador. La única condición que el dominio sí comprueba sobre ese valor es que no esté vacío, y es `EMPTY_DERIVED_VALUE` de [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) §6, que no es esta regla.
 
 Violarla no produce un rechazo sino un daño silencioso: una provisoria escrita a mano y repetida, o derivable del correo del alumno, convierte el reseteo en una puerta abierta a la identidad de cualquier cuenta con la contraseña reseteada. Es un defecto que **sólo una prueba detecta**, y por eso §6 declara dónde vive esa prueba.
 
@@ -62,5 +62,6 @@ Violarla no produce un rechazo sino un daño silencioso: una provisoria escrita 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.1 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-09 | Emisión inicial, por la regla **RN-02014** que `PRODUCT-INTAKE` **1.10** §4.1 incorpora al transcribir la decisión del Product Owner del 2026-08-09 sobre quién produce la contraseña provisoria de la capacidad **F-26**. Declara el enunciado con sus dos propiedades —no adivinable y no repetida, ni entre cuentas ni entre reseteos—, la justificación de uso que el Product Owner dio, el ámbito **con la declaración explícita de que este proyecto de código no la ejerce** porque el valor le llega ya derivado y de dónde sí se ejerce, la consecuencia sin código de rechazo propio y las pruebas, que viven en `GeometriaFactory-Contracts` `CU-02008` CA-10. El contenido no se origina acá: estaba ya modelado en `CU-02013` §2 y §10 de esta categoría, en `GeometriaFactory-Application` `CU-02011` §10 y en `GeometriaFactory-Contracts` `CU-02008` §10, y esta emisión lo recoge bajo el identificador que la fuente le dio. |

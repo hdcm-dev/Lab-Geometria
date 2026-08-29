@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -163,7 +163,7 @@ Once filas, una por caso de uso de [`../02-Especificacion-Funcional/Especificaci
 
 | Caso de prueba | Qué verifica | A qué traza, según su campo «Cubre» | Estado |
 | --- | --- | --- | --- |
-| `TC-04031` Ninguna condición prevista viaja como excepción | Las **36** condiciones del catálogo se devuelven como valor con su código y **0** casos de uso lanzan; la indisponibilidad de un puerto tampoco lanza y devuelve `INTERPRETACION_NO_DISPONIBLE` | `QG-11`; [`ADR-04006`](../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md); el quinto riesgo de `05` §9 | `Pendiente` |
+| `TC-04031` Ninguna condición prevista viaja como excepción | Las **36** condiciones del catálogo se devuelven como valor con su código y **0** casos de uso lanzan; la indisponibilidad de un puerto tampoco lanza y devuelve `PARSE_RESULT_UNAVAILABLE` | `QG-11`; [`ADR-04006`](../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md); el quinto riesgo de `05` §9 | `Pendiente` |
 
 **Por qué no se le inventa un `CU-XX`.** Verifica una decisión de arquitectura que atraviesa los once casos de uso sin ser propiedad de ninguno; atarla a uno para que la tabla cerrara sería trazabilidad falsa. Lo que corresponde es que **esté enumerada**, y esta subsección es su instrumento.
 
@@ -615,10 +615,10 @@ Cuatro filas, una por comprobación de [`../02-Especificacion-Funcional/Especifi
 
 | Comprobación | Motivo que emite al fallar | Test de su negativa | Sin base de datos | Estado |
 | --- | --- | --- | --- | --- |
-| Cambio de contraseña pendiente (la **cuarta**, que corta primero) | `CAMBIO_DE_CONTRASENA_PENDIENTE` | `TC-04011`, `TC-04008`, `TC-04010` | Sí | `Pendiente` |
-| Pertenencia | `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | `TC-04012`, `TC-04014`, `TC-04020`, `TC-04025` | Sí | `Pendiente` |
-| Facultad | `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | `TC-04004`, `TC-04005`, `TC-04007`, `TC-04012`, `TC-04021`, `TC-04024` | Sí | `Pendiente` |
-| Alcance del administrador | `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | `TC-04022`, `TC-04024`, `TC-04025` | Sí | `Pendiente` |
+| Cambio de contraseña pendiente (la **cuarta**, que corta primero) | `PASSWORD_CHANGE_PENDING` | `TC-04011`, `TC-04008`, `TC-04010` | Sí | `Pendiente` |
+| Pertenencia | `WORK_NOT_FOUND_FOR_REQUESTER` | `TC-04012`, `TC-04014`, `TC-04020`, `TC-04025` | Sí | `Pendiente` |
+| Facultad | `ADMINISTRATOR_ROLE_REQUIRED` | `TC-04004`, `TC-04005`, `TC-04007`, `TC-04012`, `TC-04021`, `TC-04024` | Sí | `Pendiente` |
+| Alcance del administrador | `WORK_OUTSIDE_ADMINISTRATOR_SCOPE` | `TC-04022`, `TC-04024`, `TC-04025` | Sí | `Pendiente` |
 
 **Cuatro de cuatro con prueba de su negativa, y una sola prueba de orden.** `TC-04011` es esa prueba y verifica los **tres** cruces —marca contra pertenencia, marca contra facultad y marca contra alcance— más la única excepción declarada. `05` §8 fija el umbral en exactamente **1** prueba de orden, y esta matriz no agrega una segunda.
 
@@ -665,4 +665,5 @@ Es la tabla de `05` §10.5 con la columna del caso de prueba que la materializa.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **5 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

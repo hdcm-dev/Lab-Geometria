@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -124,13 +124,13 @@ existencia**: sólo procede mientras no exista ninguna cuenta de administrador.
 
 | Motivo interno | Código del contrato | Respuesta | Punto | Causa |
 | --- | --- | --- | --- | --- |
-| `DATO_OBLIGATORIO_AUSENTE` | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | A-03 | Falta el correo, el nombre, el apellido o la contraseña. La respuesta **nombra el campo ausente** |
-| `ADMINISTRADOR_YA_CONFIGURADO` | `CONTRATO_ADMINISTRADOR_YA_CONFIGURADO` | `409` | A-03 | Ya existe una cuenta con papel `Administrador` |
-| `CORREO_YA_REGISTRADO` | `CONTRATO_CORREO_YA_REGISTRADO` | `409` | A-03 | El correo ya pertenece a una cuenta. **La respuesta no declara el papel ni la situación de esa cuenta** |
-| `CONFIGURACION_SIN_CREDENCIAL` | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | A-03 | No se aporta contraseña, o su valor derivado está vacío. **Una cuenta de administrador sin credencial no podría entrar, y no hay ninguna otra que pudiera resolverlo** |
-| `UNICIDAD_DE_CORREO_NO_VERIFICADA` | — | — | A-03 | Se solicita la constitución sin declarar que la unicidad fue comprobada. **Inalcanzable por construcción**: el paso 8 declara siempre la verificación que el paso 6 hizo |
-| `ESTADO_INICIAL_NO_NEGOCIABLE` | — | — | A-03 | Se pide constituirla en una situación distinta de `Habilitado`. **Inalcanzable desde A-03 por construcción**: la superficie no declara la situación. Sigue declarado porque protege a la cuenta de cualquier consumidor interno: una cuenta de administrador `Pendiente` **dejaría a la instancia sin salida**, porque nadie podría habilitarla y por INV-06 tampoco obtendría acceso |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | A-03 | El almacén no está disponible. **La respuesta no incluye su ruta** |
+| `REQUIRED_FIELD_MISSING` | `REQUIRED_FIELD_MISSING` | `400` | A-03 | Falta el correo, el nombre, el apellido o la contraseña. La respuesta **nombra el campo ausente** |
+| `ADMINISTRATOR_ALREADY_CONFIGURED` | `ADMINISTRATOR_ALREADY_CONFIGURED` | `409` | A-03 | Ya existe una cuenta con papel `Administrador` |
+| `EMAIL_ALREADY_REGISTERED` | `EMAIL_ALREADY_REGISTERED` | `409` | A-03 | El correo ya pertenece a una cuenta. **La respuesta no declara el papel ni la situación de esa cuenta** |
+| `SETUP_WITHOUT_CREDENTIAL` | `REQUIRED_FIELD_MISSING` | `400` | A-03 | No se aporta contraseña, o su valor derivado está vacío. **Una cuenta de administrador sin credencial no podría entrar, y no hay ninguna otra que pudiera resolverlo** |
+| `EMAIL_UNIQUENESS_NOT_VERIFIED` | — | — | A-03 | Se solicita la constitución sin declarar que la unicidad fue comprobada. **Inalcanzable por construcción**: el paso 8 declara siempre la verificación que el paso 6 hizo |
+| `INITIAL_STATUS_NOT_NEGOTIABLE` | — | — | A-03 | Se pide constituirla en una situación distinta de `Habilitado`. **Inalcanzable desde A-03 por construcción**: la superficie no declara la situación. Sigue declarado porque protege a la cuenta de cualquier consumidor interno: una cuenta de administrador `Pendiente` **dejaría a la instancia sin salida**, porque nadie podría habilitarla y por INV-06 tampoco obtendría acceso |
+| — | `UNCLASSIFIED_ERROR` | `503` | A-03 | El almacén no está disponible. **La respuesta no incluye su ruta** |
 
 **A-17 no tiene ninguna condición de error, y su ausencia es informativa.** Es de sólo lectura, no
 declara ningún campo obligatorio y **no hay estado del laboratorio que vuelva inválida la petición**:
@@ -197,7 +197,7 @@ devuelve una contraseña, en claro ni derivada, ni la registra**.
   este dato es del laboratorio. Mezclarlos habría hecho que el guardián dependiera de un punto cuya
   forma cambia por otros motivos. Está registrado en
   [`Definicion-Superficie-HTTP.md`](../Definicion-Superficie-HTTP.md) §3.
-- **`ESTADO_INICIAL_NO_NEGOCIABLE` protege el único estado sin salida del producto.** Una cuenta de
+- **`INITIAL_STATUS_NOT_NEGOTIABLE` protege el único estado sin salida del producto.** Una cuenta de
   administrador `Pendiente` no obtendría acceso por INV-06 y nadie podría habilitarla, porque la única
   cuenta capaz de hacerlo **sería ella misma**.
 - **La decisión de incorporar A-17 la tomó el orquestador, con el Product Owner avisado, y quedaba a
@@ -207,6 +207,7 @@ devuelve una contraseña, en claro ni derivada, ni la registra**.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **8 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe los puntos **A-03 y A-17** de `CU-00003` 1.5, `CU-04010` 1.0 y `CU-02012` 1.2. **Es el caso de uso que la tabla de consolidación 1.0 dejaba sin ningún documento de la capa `Api`**, y ése fue el indicio que llevó a descubrir que los documentos de esa capa agrupan por perfil de autenticación y no por capacidad (§2.1.1 del documento de consolidación). La unión no es la suma: el actor primario pasa a ser el docente; el flujo empieza en la consulta del guardián y termina en la ventana cerrada, que es lo que hace visible por qué **A-17 y A-03 son el mismo caso de uso**; §6 queda en una sola tabla con los dos motivos **inalcanzables por construcción** marcados y con la constancia de que **A-17 no tiene condiciones de error**; y los criterios se rehacen sobre la capacidad y quedan **diez**, con **CA-08** y **CA-09** verificando en la superficie lo que las tres vistas afirmaban en prosa. Los dos documentos absorbidos enteros quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

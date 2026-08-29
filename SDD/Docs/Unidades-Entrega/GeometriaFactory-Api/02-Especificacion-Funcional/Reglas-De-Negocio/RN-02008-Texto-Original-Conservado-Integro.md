@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02008-Texto-Original-Conservado-Integro.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -43,7 +43,7 @@ El formato de entrada es una premisa fija y el producto se adapta al dato, nunca
 
 ## 4. Consecuencia si se viola
 
-Rechazo de la operación, con el código `TEXTO_ORIGINAL_ALTERADO`. La regla no admite compensación: un texto alterado ya no es el trabajo del alumno, y ninguna advertencia posterior lo repara.
+Rechazo de la operación, con el código `ORIGINAL_JSON_ALTERED`. La regla no admite compensación: un texto alterado ya no es el trabajo del alumno, y ninguna advertencia posterior lo repara.
 
 ## 5. CU afectados
 
@@ -62,3 +62,4 @@ Pruebas unitarias de dominio previstas en 08: comparación carácter por caráct
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | **Corrige la atribución de INV-04.** La versión anterior declaraba que INV-04 expresaba esta regla, siguiendo lo que `PRODUCT-INTAKE` §21 afirmaba antes de su corrección; el intake 1.3 §17.1.P.2 · GeometriaFactory-Domain transcribe los siete invariantes y deja ver que INV-04 enuncia que un trabajo `Finalizado` tiene el texto interpretado sin errores, y que sostiene a **RN-02005**. Esta regla queda **sin invariante asociado**, junto con RN-02007 y RN-02009, por describir un comportamiento y no una condición permanente. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §3 extiende el ámbito al envío, al desenlace y a los cuatro estados. |
 | 1.2 | 2026-08-10 | **Cierra la parte del hallazgo `N-4`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0 que alcanza a este archivo. Dos residuos de recuento: la **trazabilidad de cabecera** citaba «§20 (los siete escenarios)» y **§6** decía «con los siete escenarios del intake como cobertura». El intake §20 tiene **ocho** desde su versión 1.7, con **E-8** incorporado para `DIMENSION_NO_LEGIBLE`; contados `E-1` a `E-8` sobre la fuente viva. Los dos pasan a **ocho**. **El enunciado de la regla no cambia, ni su ámbito, ni su verificación**: la cobertura de prueba se amplía en un escenario, y E-8 conserva el texto original íntegro igual que los otros siete. Sube minor: corrige un recuento derivado. |
+| 1.3 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

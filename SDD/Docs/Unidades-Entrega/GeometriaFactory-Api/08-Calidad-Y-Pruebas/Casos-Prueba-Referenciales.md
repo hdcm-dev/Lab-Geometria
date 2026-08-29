@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -645,7 +645,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02001`; `RN-02001`, `RN-02002`; `INV-01`, `INV-05`, `INV-08`; `US-02002`, `US-02003` |
 | Setup | Ninguno |
-| Pasos | Given un alta a la que le falta el correo, el nombre o el apellido, When se la invoca, Then se rechaza con `DATO_OBLIGATORIO_AUSENTE`. Given un alta sin la declaración de unicidad comprobada, Then `UNICIDAD_DE_CORREO_NO_VERIFICADA`. Given un alta que aporta credencial derivada, Then `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA`. Given un alta que pide un estado distinto de `Pendiente`, Then `ESTADO_INICIAL_NO_NEGOCIABLE`. Given un alta que pide papel `Administrador`, Then `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` |
+| Pasos | Given un alta a la que le falta el correo, el nombre o el apellido, When se la invoca, Then se rechaza con `REQUIRED_FIELD_MISSING`. Given un alta sin la declaración de unicidad comprobada, Then `EMAIL_UNIQUENESS_NOT_VERIFIED`. Given un alta que aporta credencial derivada, Then `CREDENTIAL_NOT_ALLOWED_ON_REGISTRATION`. Given un alta que pide un estado distinto de `Pendiente`, Then `INITIAL_STATUS_NOT_NEGOTIABLE`. Given un alta que pide papel `Administrador`, Then `ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH` |
 | Salida esperada | Cinco rechazos, uno por condición, sin entidad constituida en ninguno de los cinco |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -657,7 +657,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02002`, `CU-02003`; `RN-02016`, `RN-02014`, `RN-02006`; `INV-09`; `US-02004`, `US-02006` |
 | Setup | Fixture de cuenta de alumno en los tres estados |
-| Pasos | Given una cuenta `Pendiente` y la credencial provisoria ya derivada, When se la habilita, Then queda `Habilitado`, con la credencial fijada y **con la marca de cambio de contraseña pendiente puesta**. Given la habilitación invocada sin aportar la provisoria derivada, Then se rechaza con `HABILITACION_SIN_CREDENCIAL_PROVISORIA`. Given una cuenta `Habilitado`, When se la bloquea y se la rehabilita, Then las dos transiciones proceden. Given un par estado-operación no declarado, Then `TRANSICION_DE_CUENTA_NO_ADMITIDA` |
+| Pasos | Given una cuenta `Pendiente` y la credencial provisoria ya derivada, When se la habilita, Then queda `Habilitado`, con la credencial fijada y **con la marca de cambio de contraseña pendiente puesta**. Given la habilitación invocada sin aportar la provisoria derivada, Then se rechaza con `ENABLE_WITHOUT_TEMPORARY_CREDENTIAL`. Given una cuenta `Habilitado`, When se la bloquea y se la rehabilita, Then las dos transiciones proceden. Given un par estado-operación no declarado, Then `ACCOUNT_TRANSITION_NOT_ALLOWED` |
 | Salida esperada | Tres transiciones aplicadas y dos rechazos con su condición; la marca puesta en cada habilitación |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -669,7 +669,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-02002`; `RN-02007`, `RN-02004`; `INV-03`; `US-02005` |
 | Setup | Fixture de cuenta de alumno `Habilitado` más fixture de trabajo en los cuatro estados, los cuatro pertenecientes a esa cuenta |
-| Pasos | Given una cuenta con trabajos en los cuatro estados y la confirmación escrita que coincide, When se da de baja, Then la cuenta y **los cuatro trabajos** se materializan como una sola unidad. Given la baja solicitada declarando que los trabajos se conservan, Then `BAJA_SIN_ARRASTRE_DE_TRABAJOS` |
+| Pasos | Given una cuenta con trabajos en los cuatro estados y la confirmación escrita que coincide, When se da de baja, Then la cuenta y **los cuatro trabajos** se materializan como una sola unidad. Given la baja solicitada declarando que los trabajos se conservan, Then `DELETION_WITHOUT_WORK_CASCADE` |
 | Salida esperada | Baja con arrastre a los cuatro estados, incluidos `Finalizado` y `Rechazado`; un rechazo con su condición |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -681,7 +681,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02002`, `CU-02013`; `RN-02001`, `RN-02015`; `INV-05`, `INV-08`; `US-02004`, `US-02005` |
 | Setup | Fixture de cuenta de administrador |
-| Pasos | Given la cuenta con papel `Administrador`, When se intenta habilitarla, bloquearla, rehabilitarla, darla de baja y resetear su contraseña, Then las **cinco** invocaciones se rechazan con `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` y la cuenta queda `Habilitado` |
+| Pasos | Given la cuenta con papel `Administrador`, When se intenta habilitarla, bloquearla, rehabilitarla, darla de baja y resetear su contraseña, Then las **cinco** invocaciones se rechazan con `OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT` y la cuenta queda `Habilitado` |
 | Salida esperada | Cinco rechazos con el mismo código, y la cuenta intacta. Es la prueba de regresión de la familia de defectos que se abrió dos veces (`05` §9, segundo riesgo) |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -693,7 +693,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02012`; `RN-02001`, `RN-02002`; `INV-05`, `INV-08`, `INV-01`; `US-02024`, `US-02025` |
 | Setup | Ninguno para el camino feliz; la ausencia de administrador previo llega declarada por el consumidor |
-| Pasos | Given la ausencia de administrador declarada, los datos obligatorios y la credencial ya derivada, When se configura, Then la cuenta nace `Habilitado`, con papel `Administrador` y con credencial. Given una segunda configuración, o una invocación sin la declaración de ausencia, Then `ADMINISTRADOR_YA_CONFIGURADO`. Given la configuración sin credencial derivada o con valor vacío, Then `CONFIGURACION_SIN_CREDENCIAL`. Given un estado pedido distinto de `Habilitado`, Then `ESTADO_INICIAL_NO_NEGOCIABLE`. Given la unicidad no declarada, Then `UNICIDAD_DE_CORREO_NO_VERIFICADA`. Given faltando un dato obligatorio, Then `DATO_OBLIGATORIO_AUSENTE` |
+| Pasos | Given la ausencia de administrador declarada, los datos obligatorios y la credencial ya derivada, When se configura, Then la cuenta nace `Habilitado`, con papel `Administrador` y con credencial. Given una segunda configuración, o una invocación sin la declaración de ausencia, Then `ADMINISTRATOR_ALREADY_CONFIGURED`. Given la configuración sin credencial derivada o con valor vacío, Then `SETUP_WITHOUT_CREDENTIAL`. Given un estado pedido distinto de `Habilitado`, Then `INITIAL_STATUS_NOT_NEGOTIABLE`. Given la unicidad no declarada, Then `EMAIL_UNIQUENESS_NOT_VERIFIED`. Given faltando un dato obligatorio, Then `REQUIRED_FIELD_MISSING` |
 | Salida esperada | Una configuración aplicada y cinco rechazos, uno por condición de `CU-02012` |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -705,7 +705,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-02013`; `RN-02012`, `RN-02014`, `RN-02015`; `INV-09`; `US-02026` |
 | Setup | Fixture de cuenta de alumno en los tres estados, cada una con trabajos en los cuatro estados |
-| Pasos | Given una cuenta `Pendiente`, una `Habilitado` y una `Bloqueado`, cada una con sus trabajos, When se resetea su contraseña con la provisoria ya derivada, Then en las tres la credencial se reemplaza, **la marca de cambio de contraseña pendiente queda puesta**, el estado de cuenta **no cambia** y **ningún trabajo se pierde ni cambia de estado**. Given una solicitud armada como si fuera una baja, Then `RESETEO_CON_ARRASTRE_DE_TRABAJOS`. Given una invocación con el valor derivado vacío, Then `VALOR_DERIVADO_VACIO` |
+| Pasos | Given una cuenta `Pendiente`, una `Habilitado` y una `Bloqueado`, cada una con sus trabajos, When se resetea su contraseña con la provisoria ya derivada, Then en las tres la credencial se reemplaza, **la marca de cambio de contraseña pendiente queda puesta**, el estado de cuenta **no cambia** y **ningún trabajo se pierde ni cambia de estado**. Given una solicitud armada como si fuera una baja, Then `RESET_WITH_WORK_CASCADE`. Given una invocación con el valor derivado vacío, Then `EMPTY_DERIVED_VALUE` |
 | Salida esperada | Tres reseteos aplicados sobre los tres estados de cuenta, con el recuento de trabajos y sus estados idénticos antes y después; dos rechazos |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -719,7 +719,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02003`; `RN-02006`; `INV-06`; `US-02007` |
 | Setup | Fixture de cuenta de alumno `Habilitado` con credencial fijada |
-| Pasos | Given la credencial vigente declarada verificada y un valor nuevo ya derivado, When se reemplaza, Then el valor se reemplaza y no se conserva historial. Given el reemplazo sin la declaración de verificación, Then `CREDENCIAL_VIGENTE_NO_VERIFICADA`. Given un valor derivado vacío, Then `VALOR_DERIVADO_VACIO`. Given una cuenta `Pendiente` o `Bloqueado`, Then `CUENTA_NO_HABILITADA_PARA_CREDENCIAL`. Given una fijación por primera vez sobre una credencial ya fijada, Then `CREDENCIAL_YA_FIJADA` |
+| Pasos | Given la credencial vigente declarada verificada y un valor nuevo ya derivado, When se reemplaza, Then el valor se reemplaza y no se conserva historial. Given el reemplazo sin la declaración de verificación, Then `CURRENT_CREDENTIAL_NOT_VERIFIED`. Given un valor derivado vacío, Then `EMPTY_DERIVED_VALUE`. Given una cuenta `Pendiente` o `Bloqueado`, Then `ACCOUNT_NOT_ENABLED_FOR_CREDENTIAL`. Given una fijación por primera vez sobre una credencial ya fijada, Then `CREDENTIAL_ALREADY_SET` |
 | Salida esperada | Un reemplazo aplicado y cuatro rechazos, uno por condición de `CU-02003` |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -731,7 +731,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-02003`, `CU-02004`; `RN-02013`, `RN-02012`, `RN-02016`; `INV-09`; `US-02027` |
 | Setup | Dos cuentas `Habilitado` con la marca puesta: una que la recibió al ser habilitada y otra al ser reseteada |
-| Pasos | Given cualquiera de las dos cuentas con la marca puesta, When se reemplaza la credencial declarando verificada la vigente, Then el reemplazo procede **y la marca se levanta**. Given la misma cuenta antes del cambio, When se evalúa su admisibilidad, Then no es admisible con motivo `CAMBIO_DE_CONTRASENA_PENDIENTE`; después del cambio, Then es admisible |
+| Pasos | Given cualquiera de las dos cuentas con la marca puesta, When se reemplaza la credencial declarando verificada la vigente, Then el reemplazo procede **y la marca se levanta**. Given la misma cuenta antes del cambio, When se evalúa su admisibilidad, Then no es admisible con motivo `PASSWORD_CHANGE_PENDING`; después del cambio, Then es admisible |
 | Salida esperada | La marca se levanta **únicamente** por el cambio efectuado por la propia cuenta, y el resultado es el mismo para los dos orígenes de la marca |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -743,7 +743,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02004`; `RN-02006`, `RN-02013`, `RN-02016`; `INV-06`, `INV-09`; `US-02008` |
 | Setup | Fixture de cuenta de alumno en los tres estados, con y sin la marca |
-| Pasos | Given una cuenta `Pendiente`, When se evalúa la admisibilidad, Then devuelve no admisible con motivo `CUENTA_PENDIENTE`. Given `Bloqueado`, Then `CUENTA_BLOQUEADA`. Given `Habilitado` con la marca puesta, Then `CAMBIO_DE_CONTRASENA_PENDIENTE`. Given `Habilitado` sin la marca, Then admisible |
+| Pasos | Given una cuenta `Pendiente`, When se evalúa la admisibilidad, Then devuelve no admisible con motivo `ACCOUNT_PENDING`. Given `Bloqueado`, Then `ACCOUNT_BLOCKED`. Given `Habilitado` con la marca puesta, Then `PASSWORD_CHANGE_PENDING`. Given `Habilitado` sin la marca, Then admisible |
 | Salida esperada | Tres motivos de resultado y un admisible. **La operación siempre devuelve resultado y nunca lanza**: los tres códigos son motivo de resultado y no rechazo (`03` §2.3) |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -757,7 +757,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02005`; `RN-02008`, `RN-02003`; `INV-02`; `US-02009` |
 | Setup | Fixture de cuenta de alumno `Habilitado` |
-| Pasos | Given un dueño, un nombre, una fecha declarada por el alumno y el texto original, When se constituye el trabajo, Then nace en `Borrador` con el texto **idéntico carácter por carácter** al recibido. Given la constitución sin dueño, Then `TRABAJO_SIN_DUENO`. Given sin nombre o sin fecha, Then `DATO_OBLIGATORIO_AUSENTE`. Given un texto declarado como corrección del que pegó el alumno, Then `TEXTO_ORIGINAL_ALTERADO` |
+| Pasos | Given un dueño, un nombre, una fecha declarada por el alumno y el texto original, When se constituye el trabajo, Then nace en `Borrador` con el texto **idéntico carácter por carácter** al recibido. Given la constitución sin dueño, Then `WORK_WITHOUT_OWNER`. Given sin nombre o sin fecha, Then `REQUIRED_FIELD_MISSING`. Given un texto declarado como corrección del que pegó el alumno, Then `ORIGINAL_JSON_ALTERED` |
 | Salida esperada | Un trabajo constituido con el texto íntegro, y tres rechazos. La comparación del texto es byte a byte |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -769,7 +769,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02005`, `CU-02009`; `RN-02004`, `RN-02010`; `INV-03`, `INV-07`; `US-02010`, `US-02019` |
 | Setup | Fixture de trabajo en los cuatro estados, del mismo dueño |
-| Pasos | Given un trabajo en `Borrador`, When se lo reedita, Then el texto nuevo lo reemplaza y **la interpretación anterior se descarta**. Given un trabajo en `Pendiente`, `Finalizado` o `Rechazado`, When se lo reedita, Then `REEDICION_FUERA_DE_BORRADOR` |
+| Pasos | Given un trabajo en `Borrador`, When se lo reedita, Then el texto nuevo lo reemplaza y **la interpretación anterior se descarta**. Given un trabajo en `Pendiente`, `Finalizado` o `Rechazado`, When se lo reedita, Then `EDIT_OUTSIDE_DRAFT` |
 | Salida esperada | Una reedición aplicada y tres rechazos, uno por cada estado que no es `Borrador` |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -781,7 +781,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-02006`; `RN-02009`; `US-02011`, `US-02012` |
 | Setup | Fixture de trabajo en `Borrador` y el **resultado de interpretación** derivado del escenario `E-7` del intake §20: seis piezas, tres volumétricas —`Cilindro`, `Cubo`, `Ortoedro`— y tres planas —`Rectangulo`, `Cuadrado`, `Circulo`— |
-| Pasos | Given ese conjunto, When se lo adopta, Then las seis piezas quedan con la posición que su figura ocupa en el conjunto raíz, **sin recalcularla**, y la familia plana o volumétrica se **deriva del tipo** y no se guarda. Given una posición repetida, negativa o fuera de rango, Then `POSICION_DE_PIEZA_INVALIDA`. Given la familia aportada como dato, Then `FAMILIA_DECLARADA_CONTRADICE_AL_TIPO`. Given un trabajo `Finalizado` o `Rechazado`, Then `RECONSTRUCCION_SOBRE_TRABAJO_TERMINAL` |
+| Pasos | Given ese conjunto, When se lo adopta, Then las seis piezas quedan con la posición que su figura ocupa en el conjunto raíz, **sin recalcularla**, y la familia plana o volumétrica se **deriva del tipo** y no se guarda. Given una posición repetida, negativa o fuera de rango, Then `INVALID_PIECE_POSITION`. Given la familia aportada como dato, Then `DECLARED_FAMILY_CONTRADICTS_TYPE`. Given un trabajo `Finalizado` o `Rechazado`, Then `REBUILD_ON_TERMINAL_WORK` |
 | Salida esperada | Seis piezas adoptadas con su posición y su familia derivada; tres rechazos |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -793,7 +793,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-02006`, `CU-02007`; `RN-02009`; `US-02011`, `US-02014` |
 | Setup | Resultado de interpretación derivado del escenario `E-5` del intake §20: dos figuras, la del índice 0 válida y la del índice 1 con tipo fuera del conjunto conocido |
-| Pasos | Given ese conjunto, When se lo adopta, Then la pieza del índice 0 **se adopta** y la del índice 1 no, con `TIPO_DE_PIEZA_DESCONOCIDO`; **la posición 1 queda reservada** y la 0 conserva la suya, sin renumerar. When se registra la observación de error sobre la posición 1, Then se adopta, porque una posición reservada **sí pertenece al rango** |
+| Pasos | Given ese conjunto, When se lo adopta, Then la pieza del índice 0 **se adopta** y la del índice 1 no, con `UNKNOWN_PIECE_TYPE`; **la posición 1 queda reservada** y la 0 conserva la suya, sin renumerar. When se registra la observación de error sobre la posición 1, Then se adopta, porque una posición reservada **sí pertenece al rango** |
 | Salida esperada | Una pieza adoptada, una posición reservada, y la observación de error aceptada sobre esa posición. Es el caso insignia de `RN-02009` |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -805,7 +805,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02007`; `US-02013` |
 | Setup | Resultados de interpretación derivados de los escenarios `E-3` y `E-4` del intake §20 |
-| Pasos | Given la advertencia de área de `E-3` con declarado 36.00 y derivado 54.00, When se la registra, Then se adopta con **los dos valores**. Given la misma advertencia emitida con un solo número, Then `ADVERTENCIA_SIN_LOS_DOS_VALORES`. Given el resultado de `E-4`, que trae **cero observaciones**, When se lo adopta, Then el trabajo queda sin ninguna |
+| Pasos | Given la advertencia de área de `E-3` con declarado 36.00 y derivado 54.00, When se la registra, Then se adopta con **los dos valores**. Given la misma advertencia emitida con un solo número, Then `WARNING_MISSING_BOTH_VALUES`. Given el resultado de `E-4`, que trae **cero observaciones**, When se lo adopta, Then el trabajo queda sin ninguna |
 | Salida esperada | Una advertencia con su par, un rechazo, y un conjunto vacío adoptado sin error. `E-3` y `E-4` son el mismo cubo de lado 3 emitido por los dos ejemplos de la cátedra, y el contraste es lo que prueba que la verificación mide la geometría y no la forma del texto |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -817,7 +817,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02007`; `RN-02009`; `US-02014` |
 | Setup | Resultado de interpretación derivado del escenario `E-5` del intake §20 |
-| Pasos | Given una observación de especie error de validación atribuible a una figura, con **índice de figura 1** y **campo `Tipo`**, When se la registra, Then se adopta. Given la misma sin posición ni campo, Then `ERROR_SIN_UBICACION`. Given una observación que designa una posición fuera del rango del conjunto raíz interpretado, Then `OBSERVACION_SOBRE_PIEZA_INEXISTENTE`. Given una especie que no es `Advertencia` ni error de validación, Then `ESPECIE_DE_OBSERVACION_DESCONOCIDA` |
+| Pasos | Given una observación de especie error de validación atribuible a una figura, con **índice de figura 1** y **campo `Tipo`**, When se la registra, Then se adopta. Given la misma sin posición ni campo, Then `ERROR_WITHOUT_LOCATION`. Given una observación que designa una posición fuera del rango del conjunto raíz interpretado, Then `OBSERVATION_ON_MISSING_PIECE`. Given una especie que no es `Advertencia` ni error de validación, Then `UNKNOWN_OBSERVATION_KIND` |
 | Salida esperada | Una observación adoptada con índice 1 y campo `Tipo`, y tres rechazos. El índice **1 y no 0** es lo que prueba que la ubicación se calcula |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -829,7 +829,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-02008`; `RN-02005`; `INV-04`; `US-02015` |
 | Setup | Trabajos en `Borrador` con los resultados de interpretación derivados de los escenarios `E-1`, `E-2`, `E-4` y `E-6` del intake §20 |
-| Pasos | Given el trabajo de `E-1`, con **3 piezas y 2 advertencias** y sin errores, When se lo envía, Then pasa a `Pendiente`. Given el de `E-2`, con 1 pieza y 1 advertencia de volumen, Then pasa a `Pendiente` **con la advertencia asociada**. Given el de `E-4`, con cero observaciones, Then pasa a `Pendiente`. Given el de `E-6`, que se interpreta y produce a lo sumo una advertencia, Then pasa a `Pendiente`. Given un trabajo ya en `Pendiente`, When se lo reenvía, Then `ENVIO_FUERA_DE_BORRADOR`. Given un envío antes de incorporar el resultado de la interpretación, Then `ENVIO_SIN_INTERPRETACION`. Given un desenlace pedido por esta vía, Then `DESENLACE_NO_ADMITIDO_EN_ESTE_CONTRATO` |
+| Pasos | Given el trabajo de `E-1`, con **3 piezas y 2 advertencias** y sin errores, When se lo envía, Then pasa a `Pendiente`. Given el de `E-2`, con 1 pieza y 1 advertencia de volumen, Then pasa a `Pendiente` **con la advertencia asociada**. Given el de `E-4`, con cero observaciones, Then pasa a `Pendiente`. Given el de `E-6`, que se interpreta y produce a lo sumo una advertencia, Then pasa a `Pendiente`. Given un trabajo ya en `Pendiente`, When se lo reenvía, Then `SUBMISSION_OUTSIDE_DRAFT`. Given un envío antes de incorporar el resultado de la interpretación, Then `SUBMISSION_WITHOUT_PARSE_RESULT`. Given un desenlace pedido por esta vía, Then `OUTCOME_NOT_ALLOWED_BY_CONTRACT` |
 | Salida esperada | Cuatro envíos que pasan a `Pendiente` —las advertencias **no** lo impiden— y tres rechazos |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -854,7 +854,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Cubre | `CU-02008`, `CU-02010`, `CU-02006`; `RN-02010`; `INV-07`; `US-02017` |
 | Setup | Fixture de trabajo en `Finalizado` y en `Rechazado` |
 | Pasos | Given un trabajo en cualquiera de los dos estados terminales, When se pide enviar, reeditar, reconstruir el conjunto de piezas o aplicar un desenlace nuevo, Then todas las invocaciones se rechazan y **ni el estado ni el contenido cambian** |
-| Salida esperada | Rechazo en los dos estados y en las cuatro operaciones, con `TRANSICION_DESDE_ESTADO_TERMINAL`, `REEDICION_FUERA_DE_BORRADOR` y `RECONSTRUCCION_SOBRE_TRABAJO_TERMINAL` según la operación |
+| Salida esperada | Rechazo en los dos estados y en las cuatro operaciones, con `TRANSITION_FROM_TERMINAL_STATUS`, `EDIT_OUTSIDE_DRAFT` y `REBUILD_ON_TERMINAL_WORK` según la operación |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -867,7 +867,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02009`; `RN-02003`, `RN-02004`; `INV-02`, `INV-03`; `US-02018`, `US-02019` |
 | Setup | Dos cuentas de alumno y un trabajo de cada una, en los cuatro estados |
-| Pasos | Given un trabajo de otro alumno cuyo identificador el solicitante conoce, y un identificador inexistente, When se resuelve el acceso, Then los **dos** devuelven `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, con resultado idéntico. Given un trabajo propio fuera de `Borrador`, When se consulta reeditar o eliminar, Then `OPERACION_FUERA_DE_BORRADOR`; When se consulta ver, Then procede en los cuatro estados. Given una operación fuera del conjunto declarado, Then `OPERACION_DESCONOCIDA` |
+| Pasos | Given un trabajo de otro alumno cuyo identificador el solicitante conoce, y un identificador inexistente, When se resuelve el acceso, Then los **dos** devuelven `WORK_NOT_FOUND_FOR_REQUESTER`, con resultado idéntico. Given un trabajo propio fuera de `Borrador`, When se consulta reeditar o eliminar, Then `OPERATION_OUTSIDE_DRAFT`; When se consulta ver, Then procede en los cuatro estados. Given una operación fuera del conjunto declarado, Then `UNKNOWN_OPERATION` |
 | Salida esperada | Dos resultados idénticos para el ajeno y el inexistente —comparados campo por campo—, la acotación al borrador de reeditar y eliminar, y ver admitido en los cuatro estados |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -879,7 +879,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02011`; `RN-02011`, `RN-02004`, `RN-02001`; `INV-05`; `US-02022`, `US-02023` |
 | Setup | Fixture de trabajo en los cuatro estados |
-| Pasos | Given un trabajo en `Borrador`, When el administrador consulta su alcance, Then `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`. Given los otros **tres** estados, Then entran en su alcance y **admiten eliminación**, incluidos los dos terminales. Given un papel que no es `Administrador`, Then `ALCANCE_SIN_PAPEL_DE_ADMINISTRADOR`. Given una operación fuera del conjunto declarado, Then `OPERACION_DESCONOCIDA` |
+| Pasos | Given un trabajo en `Borrador`, When el administrador consulta su alcance, Then `WORK_OUTSIDE_ADMINISTRATOR_SCOPE`. Given los otros **tres** estados, Then entran en su alcance y **admiten eliminación**, incluidos los dos terminales. Given un papel que no es `Administrador`, Then `SCOPE_REQUIRES_ADMINISTRATOR_ROLE`. Given una operación fuera del conjunto declarado, Then `UNKNOWN_OPERATION` |
 | Salida esperada | Un borrador excluido, tres estados con eliminación admitida, y dos motivos de resultado |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -891,7 +891,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-02010`; `RN-02010`, `RN-02011`, `RN-02001`; `INV-07`, `INV-05`; `US-02020`, `US-02021` |
 | Setup | Fixture de trabajo en los cuatro estados y fixture de cuenta de administrador |
-| Pasos | Given un trabajo en `Pendiente` y el papel `Administrador`, When se lo aprueba, Then pasa a `Finalizado`; When se lo rechaza, Then pasa a `Rechazado`; el comentario es **opcional** en los dos. Given un trabajo en otro estado, Then `DESENLACE_FUERA_DE_PENDIENTE`. Given un papel que no es `Administrador`, aun sobre un trabajo propio, Then `DESENLACE_SIN_PAPEL_DE_ADMINISTRADOR`. Given un desenlace que no es aprobar ni rechazar, Then `DESENLACE_DESCONOCIDO`. Given un trabajo terminal, Then `TRANSICION_DESDE_ESTADO_TERMINAL` |
+| Pasos | Given un trabajo en `Pendiente` y el papel `Administrador`, When se lo aprueba, Then pasa a `Finalizado`; When se lo rechaza, Then pasa a `Rechazado`; el comentario es **opcional** en los dos. Given un trabajo en otro estado, Then `OUTCOME_OUTSIDE_SUBMITTED`. Given un papel que no es `Administrador`, aun sobre un trabajo propio, Then `OUTCOME_REQUIRES_ADMINISTRATOR_ROLE`. Given un desenlace que no es aprobar ni rechazar, Then `UNKNOWN_OUTCOME`. Given un trabajo terminal, Then `TRANSITION_FROM_TERMINAL_STATUS` |
 | Salida esperada | Dos desenlaces aplicados, con y sin comentario, y cuatro rechazos |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -981,8 +981,8 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04001`; `RN-04001`, `RN-04002`; `INV-01`, `INV-05`; `US-04002` |
 | Setup | Doble del repositorio de cuentas en dos configuraciones: correo libre y correo ocupado |
-| Pasos | Given un correo que el repositorio declara ocupado, When se invoca el alta, Then `CORREO_YA_REGISTRADO`. Given el mismo correo declarado libre pero rechazado por la materialización, Then **el mismo motivo por el segundo camino**. Given un alta a la que le falta un dato obligatorio, Then `DATO_OBLIGATORIO_AUSENTE`. Given un alta que aporta credencial, Then `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA`. Given un alta que pide un estado distinto de `Pendiente`, Then `ESTADO_INICIAL_NO_NEGOCIABLE`. Given un alta que pide papel `Administrador`, Then `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` |
-| Salida esperada | Seis rechazos —`CORREO_YA_REGISTRADO` por sus **dos** caminos y cuatro motivos más—, **sin cuenta constituida** en ninguno y sin unidad de trabajo abierta |
+| Pasos | Given un correo que el repositorio declara ocupado, When se invoca el alta, Then `EMAIL_ALREADY_REGISTERED`. Given el mismo correo declarado libre pero rechazado por la materialización, Then **el mismo motivo por el segundo camino**. Given un alta a la que le falta un dato obligatorio, Then `REQUIRED_FIELD_MISSING`. Given un alta que aporta credencial, Then `CREDENTIAL_NOT_ALLOWED_ON_REGISTRATION`. Given un alta que pide un estado distinto de `Pendiente`, Then `INITIAL_STATUS_NOT_NEGOTIABLE`. Given un alta que pide papel `Administrador`, Then `ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH` |
+| Salida esperada | Seis rechazos —`EMAIL_ALREADY_REGISTERED` por sus **dos** caminos y cuatro motivos más—, **sin cuenta constituida** en ninguno y sin unidad de trabajo abierta |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -993,8 +993,8 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04010`; `RN-04001`, `RN-04002`, `RN-04006`; `INV-05`, `INV-08`, `INV-01`; `US-04003`, `US-04028` |
 | Setup | Doble del repositorio de cuentas que responde si ya existe una cuenta con papel `Administrador`, en sus dos formas; doble del reloj |
-| Pasos | Given que el repositorio declara que no existe administrador, los datos obligatorios y la credencial **ya derivada**, When se configura, Then la cuenta nace **`Habilitado`, con papel `Administrador` y con credencial**. Given que ya existe uno, Then `ADMINISTRADOR_YA_CONFIGURADO`. Given la configuración sin credencial derivada, Then `CONFIGURACION_SIN_CREDENCIAL`. Given un estado pedido distinto de `Habilitado`, Then `ESTADO_INICIAL_NO_NEGOCIABLE` **por la causa opuesta a la de `TC-04002`**. Given un correo ya registrado, Then `CORREO_YA_REGISTRADO`. Given un dato obligatorio ausente, Then `DATO_OBLIGATORIO_AUSENTE` |
-| Salida esperada | Una configuración aplicada y cinco rechazos. La fila de `ESTADO_INICIAL_NO_NEGOCIABLE` se verifica **en sus dos causas opuestas**, que es lo que [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §1.4 declara |
+| Pasos | Given que el repositorio declara que no existe administrador, los datos obligatorios y la credencial **ya derivada**, When se configura, Then la cuenta nace **`Habilitado`, con papel `Administrador` y con credencial**. Given que ya existe uno, Then `ADMINISTRATOR_ALREADY_CONFIGURED`. Given la configuración sin credencial derivada, Then `SETUP_WITHOUT_CREDENTIAL`. Given un estado pedido distinto de `Habilitado`, Then `INITIAL_STATUS_NOT_NEGOTIABLE` **por la causa opuesta a la de `TC-04002`**. Given un correo ya registrado, Then `EMAIL_ALREADY_REGISTERED`. Given un dato obligatorio ausente, Then `REQUIRED_FIELD_MISSING` |
+| Salida esperada | Una configuración aplicada y cinco rechazos. La fila de `INITIAL_STATUS_NOT_NEGOTIABLE` se verifica **en sus dos causas opuestas**, que es lo que [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md) §1.4 declara |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -1005,7 +1005,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04002`, `CU-04003`; `RN-04016`, `RN-04014`, `RN-04006`, `RN-04001`; `INV-09`, `INV-06`; `US-04004`, `US-04008` |
 | Setup | Fixture de cuenta de alumno en los tres estados; fixture de solicitante administrador sin marca; dobles del repositorio de cuentas y del reloj |
-| Pasos | Given una cuenta `Pendiente` y el administrador como solicitante, When se la habilita, Then queda `Habilitado`, con la credencial provisoria **ya derivada** fijada y **con la marca puesta**. Given la habilitación invocada sin aportar el valor derivado, Then `HABILITACION_SIN_CREDENCIAL_PROVISORIA`. Given el valor derivado vacío, Then `VALOR_DERIVADO_VACIO`. Given una cuenta `Habilitado`, When se la bloquea y se la rehabilita, Then las dos transiciones proceden y la rehabilitación **vuelve a poner la marca**. Given un par estado-operación no declarado, Then `TRANSICION_DE_CUENTA_NO_ADMITIDA`. Given un solicitante alumno, Then `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` |
+| Pasos | Given una cuenta `Pendiente` y el administrador como solicitante, When se la habilita, Then queda `Habilitado`, con la credencial provisoria **ya derivada** fijada y **con la marca puesta**. Given la habilitación invocada sin aportar el valor derivado, Then `ENABLE_WITHOUT_TEMPORARY_CREDENTIAL`. Given el valor derivado vacío, Then `EMPTY_DERIVED_VALUE`. Given una cuenta `Habilitado`, When se la bloquea y se la rehabilita, Then las dos transiciones proceden y la rehabilitación **vuelve a poner la marca**. Given un par estado-operación no declarado, Then `ACCOUNT_TRANSITION_NOT_ALLOWED`. Given un solicitante alumno, Then `ADMINISTRATOR_ROLE_REQUIRED` |
 | Salida esperada | Tres transiciones aplicadas con la marca puesta en las dos que producen provisoria, y cuatro rechazos con su motivo. **`RN-04014` no se ejerce acá**: lo que se verifica es que el valor llega ya producido y ya derivado y que la operación lo rechaza vacío |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1017,7 +1017,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04002`; `RN-04007`, `RN-04004`, `RN-04001`; `INV-03`, `INV-08`; `US-04005`, `US-04006` |
 | Setup | Fixture de cuenta de alumno `Habilitado` con trabajos en los **cuatro** estados; fixture de solicitante administrador; dobles de los repositorios de cuentas y de trabajos |
-| Pasos | Given la cuenta con sus cuatro trabajos y el correo escrito que **coincide**, When se da de baja, Then la cuenta y **los cuatro trabajos** se materializan en **una sola** unidad de trabajo. Given un correo escrito que no coincide, Then `CONFIRMACION_DE_BAJA_NO_COINCIDE` y **nada cambia**. Given la baja pedida sobre la cuenta de administrador, Then `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA`. Given un solicitante alumno, Then `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` |
+| Pasos | Given la cuenta con sus cuatro trabajos y el correo escrito que **coincide**, When se da de baja, Then la cuenta y **los cuatro trabajos** se materializan en **una sola** unidad de trabajo. Given un correo escrito que no coincide, Then `DELETION_CONFIRMATION_MISMATCH` y **nada cambia**. Given la baja pedida sobre la cuenta de administrador, Then `OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT`. Given un solicitante alumno, Then `ADMINISTRATOR_ROLE_REQUIRED` |
 | Salida esperada | Baja con arrastre a los cuatro estados, incluidos `Finalizado` y `Rechazado`, con **una** apertura de unidad de trabajo y no dos; tres rechazos sin efecto parcial. Es el caso testigo del NFR de unidades de trabajo por caso de uso |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1029,7 +1029,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04011`; `RN-04012`, `RN-04015`, `RN-04014`, `RN-04013`; `INV-09`; `US-04029`, `US-04031` |
 | Setup | Fixture de cuenta de alumno en los **tres** estados, cada una con trabajos en los cuatro; fixture de solicitante administrador; dobles de los repositorios y del reloj |
-| Pasos | Given una cuenta `Pendiente`, una `Habilitado` y una `Bloqueado`, cada una con sus trabajos, When el administrador resetea su contraseña con la provisoria **ya producida y ya derivada**, Then en las tres la credencial se reemplaza, **la marca queda puesta**, el estado de cuenta **no cambia** y **ningún trabajo se pierde ni cambia de estado ni pierde su comentario**. Given el valor derivado vacío, Then `VALOR_DERIVADO_VACIO`. Given una cuenta inexistente, Then `CUENTA_INEXISTENTE` |
+| Pasos | Given una cuenta `Pendiente`, una `Habilitado` y una `Bloqueado`, cada una con sus trabajos, When el administrador resetea su contraseña con la provisoria **ya producida y ya derivada**, Then en las tres la credencial se reemplaza, **la marca queda puesta**, el estado de cuenta **no cambia** y **ningún trabajo se pierde ni cambia de estado ni pierde su comentario**. Given el valor derivado vacío, Then `EMPTY_DERIVED_VALUE`. Given una cuenta inexistente, Then `ACCOUNT_NOT_FOUND` |
 | Salida esperada | Tres reseteos aplicados sobre los tres estados de cuenta, con el recuento de trabajos y sus estados idénticos antes y después; **cero** retiros pedidos al repositorio de trabajos; dos rechazos. La ausencia de comprobación de estado es lo que verifica `RN-04015` |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1041,7 +1041,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04011`; `RN-04001`, `RN-04015`; `INV-08`, `INV-05`; `US-04029` |
 | Setup | Fixture de cuenta de administrador; fixture de solicitante administrador y de solicitante alumno |
-| Pasos | Given la cuenta con papel `Administrador` como objeto del reseteo, When se lo pide, Then `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y la cuenta queda intacta. Given un solicitante alumno sobre una cuenta ajena, Then `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` **antes** de tocar el repositorio |
+| Pasos | Given la cuenta con papel `Administrador` como objeto del reseteo, When se lo pide, Then `RESET_LIMITED_TO_STUDENT_ACCOUNTS` y la cuenta queda intacta. Given un solicitante alumno sobre una cuenta ajena, Then `ADMINISTRATOR_ROLE_REQUIRED` **antes** de tocar el repositorio |
 | Salida esperada | Dos rechazos con su motivo, cero escrituras, y la constancia de que la negativa por facultad se resuelve sin consultar el repositorio de cuentas |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1055,8 +1055,8 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04003`; `RN-04006`, `RN-04013`; `INV-06`, `INV-09`; `US-04007` |
 | Setup | Fixture de cuenta de alumno en los tres estados, con y sin la marca; doble del repositorio de cuentas |
-| Pasos | Given una cuenta `Pendiente`, When se consulta la admisibilidad, Then **no admisible** con `CUENTA_PENDIENTE`. Given una `Bloqueado`, Then `CUENTA_BLOQUEADA`. Given una `Habilitado` sin marca, Then **admisible**. Given una `Habilitado` **con la marca puesta**, Then **no admisible** con `CAMBIO_DE_CONTRASENA_PENDIENTE`. Given un correo que no corresponde a ninguna cuenta, Then `CUENTA_INEXISTENTE` |
-| Salida esperada | Cinco resultados distintos, con los **motivos sin colapsar**: `CUENTA_PENDIENTE` y `CUENTA_BLOQUEADA` no se confunden entre sí ni con la marca. Ninguna invocación lanza |
+| Pasos | Given una cuenta `Pendiente`, When se consulta la admisibilidad, Then **no admisible** con `ACCOUNT_PENDING`. Given una `Bloqueado`, Then `ACCOUNT_BLOCKED`. Given una `Habilitado` sin marca, Then **admisible**. Given una `Habilitado` **con la marca puesta**, Then **no admisible** con `PASSWORD_CHANGE_PENDING`. Given un correo que no corresponde a ninguna cuenta, Then `ACCOUNT_NOT_FOUND` |
+| Salida esperada | Cinco resultados distintos, con los **motivos sin colapsar**: `ACCOUNT_PENDING` y `ACCOUNT_BLOCKED` no se confunden entre sí ni con la marca. Ninguna invocación lanza |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
 
@@ -1067,7 +1067,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04003`; `RN-04013`, `RN-04006`; `INV-09`, `INV-06`; `US-04009` |
 | Setup | Fixture de cuenta de alumno `Habilitado` con credencial fijada; doble del repositorio de cuentas |
-| Pasos | Given la credencial vigente declarada verificada y un valor nuevo **ya derivado**, When la propia cuenta la reemplaza, Then el valor se reemplaza. Given la vigente **no** verificada, Then `CREDENCIAL_VIGENTE_NO_VERIFICADA`. Given un valor derivado vacío, Then `VALOR_DERIVADO_VACIO`. Given una cuenta que no está habilitada, Then `CUENTA_NO_HABILITADA_PARA_CREDENCIAL`. Given una fijación sobre una cuenta que ya tiene credencial, Then `CREDENCIAL_YA_FIJADA` |
+| Pasos | Given la credencial vigente declarada verificada y un valor nuevo **ya derivado**, When la propia cuenta la reemplaza, Then el valor se reemplaza. Given la vigente **no** verificada, Then `CURRENT_CREDENTIAL_NOT_VERIFIED`. Given un valor derivado vacío, Then `EMPTY_DERIVED_VALUE`. Given una cuenta que no está habilitada, Then `ACCOUNT_NOT_ENABLED_FOR_CREDENTIAL`. Given una fijación sobre una cuenta que ya tiene credencial, Then `CREDENTIAL_ALREADY_SET` |
 | Salida esperada | Un reemplazo aplicado y cuatro rechazos, cada uno con su motivo y sin escritura parcial |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1091,7 +1091,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit, **prueba de orden** |
 | Cubre | Los **once** casos de uso, de forma transversal; las **cuatro** comprobaciones de `02` §4; `RN-04013`, `RN-04003`, `RN-04001`, `RN-04011`; `INV-09`, `INV-02`, `INV-03`; `US-04030` |
 | Setup | Fixture de solicitante en sus **cuatro** formas; fixture de trabajo propio y ajeno en los cuatro estados; dobles de los cuatro puertos, **sin base de datos** |
-| Pasos | Given un solicitante **con la marca puesta** que además pide un trabajo ajeno, When invoca cualquier caso de uso salvo el reemplazo de `CU-04003` FA-05, Then el motivo emitido es `CAMBIO_DE_CONTRASENA_PENDIENTE` y **no** `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`. Given un solicitante con la marca que además carece de facultad, Then el motivo es el de la marca y **no** `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`. Given un solicitante con la marca sobre un borrador ajeno al alcance del administrador, Then el motivo es el de la marca y **no** `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`. Given el reemplazo de `CU-04003` FA-05, Then la marca **no corta** y la operación procede |
+| Pasos | Given un solicitante **con la marca puesta** que además pide un trabajo ajeno, When invoca cualquier caso de uso salvo el reemplazo de `CU-04003` FA-05, Then el motivo emitido es `PASSWORD_CHANGE_PENDING` y **no** `WORK_NOT_FOUND_FOR_REQUESTER`. Given un solicitante con la marca que además carece de facultad, Then el motivo es el de la marca y **no** `ADMINISTRATOR_ROLE_REQUIRED`. Given un solicitante con la marca sobre un borrador ajeno al alcance del administrador, Then el motivo es el de la marca y **no** `WORK_OUTSIDE_ADMINISTRATOR_SCOPE`. Given el reemplazo de `CU-04003` FA-05, Then la marca **no corta** y la operación procede |
 | Salida esperada | La cuarta comprobación gana sobre las otras tres en los tres cruces, y cede **sólo** en la única excepción declarada. `05` §8 exige exactamente **1** prueba de este orden, y ésta es esa prueba |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1103,7 +1103,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04004`, `CU-04005`, `CU-04006`, `CU-04009`, `CU-04007`, `CU-04008`, `CU-04002`, `CU-04011`; `RN-04003`, `RN-04001`; `INV-02`; `US-04012`, `US-04025` |
 | Setup | Fixture de trabajo propio y ajeno; fixture de solicitante alumno y administrador, ninguno con marca; dobles de los cuatro puertos |
-| Pasos | Given un trabajo **ajeno** y un identificador **inexistente**, When el alumno los pide, Then los dos resultados son **idénticos**: `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`, sin ninguna diferencia observable. Given una operación reservada pedida por un alumno, Then `FACULTAD_DE_ADMINISTRADOR_REQUERIDA`, que sí es explícito. Given un solicitante no declarado, Then `SOLICITANTE_NO_DECLARADO`. Given un papel que no es ninguno de los dos, Then `PAPEL_NO_RECONOCIDO` |
+| Pasos | Given un trabajo **ajeno** y un identificador **inexistente**, When el alumno los pide, Then los dos resultados son **idénticos**: `WORK_NOT_FOUND_FOR_REQUESTER`, sin ninguna diferencia observable. Given una operación reservada pedida por un alumno, Then `ADMINISTRATOR_ROLE_REQUIRED`, que sí es explícito. Given un solicitante no declarado, Then `REQUESTER_NOT_DECLARED`. Given un papel que no es ninguno de los dos, Then `UNRECOGNIZED_ROLE` |
 | Salida esperada | Indistinguibilidad verificada en los dos sentidos y las dos negativas separadas. Es la mitigación del tercer riesgo de `05` §9 |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1117,7 +1117,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04004`; `RN-04008`, `RN-04003`; `INV-02`; `US-04010`, `US-04011` |
 | Setup | Doble del reloj con **dos momentos consecutivos distintos** elegidos por la prueba; doble del repositorio de trabajos |
-| Pasos | Given dueño, nombre, fecha declarada por el alumno y texto original, When se constituye el trabajo, Then nace en `Borrador`, con dueño, con identificador propio y con el sello tomado **del puerto de reloj** y no del reloj del entorno. Given un trabajo sin dueño, Then `TRABAJO_SIN_DUENO`. Given un dato obligatorio ausente, Then `DATO_OBLIGATORIO_AUSENTE`. Given el mismo texto de `E-2` cargado y recuperado, Then el texto es **idéntico carácter por carácter** |
+| Pasos | Given dueño, nombre, fecha declarada por el alumno y texto original, When se constituye el trabajo, Then nace en `Borrador`, con dueño, con identificador propio y con el sello tomado **del puerto de reloj** y no del reloj del entorno. Given un trabajo sin dueño, Then `WORK_WITHOUT_OWNER`. Given un dato obligatorio ausente, Then `REQUIRED_FIELD_MISSING`. Given el mismo texto de `E-2` cargado y recuperado, Then el texto es **idéntico carácter por carácter** |
 | Salida esperada | Trabajo constituido con los tres sellos distinguibles —la fecha del alumno y los del sistema—, texto íntegro y dos rechazos. Dos ejecuciones consecutivas con momentos distintos producen sellos distintos y **el mismo resultado por lo demás** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1129,7 +1129,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04004`; `RN-04003`, `RN-04004`, `RN-04008`; `INV-02`, `INV-03`; `US-04012`, `US-04011` |
 | Setup | Fixture de trabajo en los cuatro estados, propio y ajeno; dobles de los puertos |
-| Pasos | Given un trabajo propio en `Borrador`, When se lo reedita con un texto nuevo, Then el texto se reemplaza **entero** y la interpretación anterior se descarta. Given un trabajo propio fuera de `Borrador`, Then `OPERACION_FUERA_DE_BORRADOR`. Given un trabajo ajeno, Then `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`. Given una reedición que pretende alterar el texto conservado sin reemplazarlo, Then `TEXTO_ORIGINAL_ALTERADO` |
+| Pasos | Given un trabajo propio en `Borrador`, When se lo reedita con un texto nuevo, Then el texto se reemplaza **entero** y la interpretación anterior se descarta. Given un trabajo propio fuera de `Borrador`, Then `OPERATION_OUTSIDE_DRAFT`. Given un trabajo ajeno, Then `WORK_NOT_FOUND_FOR_REQUESTER`. Given una reedición que pretende alterar el texto conservado sin reemplazarlo, Then `ORIGINAL_JSON_ALTERED` |
 | Salida esperada | Una reedición aplicada en los tres estados donde no procede y tres rechazos; el texto nunca queda mezclado entre la versión vieja y la nueva |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1153,7 +1153,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04005`; `RN-04005`, `RN-04009`, `RN-04008`; `INV-04`; `US-04014` |
 | Setup | Doble del puerto de validación cargado con los resultados de **`E-5`** y **`E-8`**; fixture de trabajo propio en `Borrador` |
-| Pasos | Given el resultado de `E-5` —una observación de severidad **`Error`** con **índice de figura 1** y **campo `Tipo`**, y la primera pieza interpretada igual—, When se envía, Then el trabajo **queda en `Borrador`**, con su texto conservado y con la observación ubicada. Given el resultado de `E-8` —dimensión no legible—, Then **también es error y no advertencia**, y el trabajo **queda en `Borrador`** [DECISIÓN 2026-08-09 del intake §20.E-8 punto 5]. Given una observación sin índice de figura o sin campo, Then `OBSERVACION_MAL_FORMADA` |
+| Pasos | Given el resultado de `E-5` —una observación de severidad **`Error`** con **índice de figura 1** y **campo `Tipo`**, y la primera pieza interpretada igual—, When se envía, Then el trabajo **queda en `Borrador`**, con su texto conservado y con la observación ubicada. Given el resultado de `E-8` —dimensión no legible—, Then **también es error y no advertencia**, y el trabajo **queda en `Borrador`** [DECISIÓN 2026-08-09 del intake §20.E-8 punto 5]. Given una observación sin índice de figura o sin campo, Then `MALFORMED_OBSERVATION` |
 | Salida esperada | Dos envíos que **no** transicionan, con las observaciones localizadas por índice y campo, más un rechazo por observación mal formada. La distinción entre `E-3` —advertencia— y `E-8` —error— es lo que este caso separa |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1177,7 +1177,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04005`; `RN-04009`; `US-04015` |
 | Setup | Dobles de los cuatro puertos, con el de validación instrumentado para contar invocaciones |
-| Pasos | Given un envío, When se lo ejecuta, Then el puerto de validación se invoca **exactamente una vez** con el texto original tal cual, y el resultado —piezas, observaciones y **la cantidad de figuras del conjunto raíz**— se entrega al dominio sin recomponerlo. Given la cantidad de figuras que el puerto declara y una observación cuyo índice cae fuera de ese rango, Then `CONJUNTO_DE_PIEZAS_MAL_FORMADO` |
+| Pasos | Given un envío, When se lo ejecuta, Then el puerto de validación se invoca **exactamente una vez** con el texto original tal cual, y el resultado —piezas, observaciones y **la cantidad de figuras del conjunto raíz**— se entrega al dominio sin recomponerlo. Given la cantidad de figuras que el puerto declara y una observación cuyo índice cae fuera de ese rango, Then `MALFORMED_PIECE_SET` |
 | Salida esperada | Una invocación al puerto, cero al almacén real, y la cantidad de figuras usada como rango de validación de la posición. Es lo que `02` §3 declara que sólo `CU-04005` hace viajar |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1189,7 +1189,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04005`; `RN-04008`; `US-04016` |
 | Setup | Doble del puerto de validación configurado como **no disponible**; fixture de trabajo propio en `Borrador` con su texto |
-| Pasos | Given el puerto de validación no disponible, When se envía el trabajo, Then se devuelve `INTERPRETACION_NO_DISPONIBLE` **como valor y no como excepción**, el trabajo **queda en `Borrador`**, el texto original queda **intacto** y no se abre ninguna unidad de trabajo de escritura. Given un envío sobre un trabajo que no está en `Borrador`, Then `ENVIO_FUERA_DE_BORRADOR` |
+| Pasos | Given el puerto de validación no disponible, When se envía el trabajo, Then se devuelve `PARSE_RESULT_UNAVAILABLE` **como valor y no como excepción**, el trabajo **queda en `Borrador`**, el texto original queda **intacto** y no se abre ninguna unidad de trabajo de escritura. Given un envío sobre un trabajo que no está en `Borrador`, Then `SUBMISSION_OUTSIDE_DRAFT` |
 | Salida esperada | Un rechazo controlado sin efecto parcial y un rechazo por estado. Ninguna excepción escapa de la capa |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1215,7 +1215,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04007`; `RN-04011`, `RN-04001`; `US-04020`, `US-04021` |
 | Setup | Fixture de trabajo en los cuatro estados de **dos** alumnos distintos; fixture de solicitante administrador y alumno |
-| Pasos | Given trabajos de dos alumnos en los cuatro estados, When el administrador pide el listado de la comisión, Then **ningún trabajo en `Borrador`** aparece y cada fila trae su dueño. Given el filtro por un alumno, Then el recorte **se compone con** el predicado de alcance y no lo reemplaza. Given un solicitante alumno, Then `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` **sin consultar el repositorio de trabajos** |
+| Pasos | Given trabajos de dos alumnos en los cuatro estados, When el administrador pide el listado de la comisión, Then **ningún trabajo en `Borrador`** aparece y cada fila trae su dueño. Given el filtro por un alumno, Then el recorte **se compone con** el predicado de alcance y no lo reemplaza. Given un solicitante alumno, Then `ADMINISTRATOR_ROLE_REQUIRED` **sin consultar el repositorio de trabajos** |
 | Salida esperada | Listado sin borradores, filtro compuesto con el alcance, negativa por facultad resuelta antes de consultar |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1227,7 +1227,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04006`, `CU-04007`; `RN-04003`, `RN-04011`; `INV-02`; `US-04018`, `US-04019`, `US-04022` |
 | Setup | Doble del puerto de validación con el resultado de **`E-7`** —6 piezas, los seis tipos—; fixture de trabajo `Finalizado` con comentario y `Rechazado` con comentario |
-| Pasos | Given un trabajo propio con desenlace y comentario, When el alumno abre su detalle, Then recibe **piezas con su índice y sus componentes**, las observaciones, el desenlace y el comentario. Given el mismo trabajo, When el administrador lo abre, Then recibe **los mismos elementos**. Given un borrador ajeno pedido por el administrador, Then `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`. Given un trabajo ajeno pedido por un alumno, Then `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` |
+| Pasos | Given un trabajo propio con desenlace y comentario, When el alumno abre su detalle, Then recibe **piezas con su índice y sus componentes**, las observaciones, el desenlace y el comentario. Given el mismo trabajo, When el administrador lo abre, Then recibe **los mismos elementos**. Given un borrador ajeno pedido por el administrador, Then `WORK_OUTSIDE_ADMINISTRATOR_SCOPE`. Given un trabajo ajeno pedido por un alumno, Then `WORK_NOT_FOUND_FOR_REQUESTER` |
 | Salida esperada | Dos detalles equivalentes con las **seis** piezas de `E-7` y sus componentes, y dos negativas **distintas** según el papel, que es lo que separa el alcance del administrador de la pertenencia del alumno |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1239,7 +1239,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04008`; `RN-04010`, `RN-04011`; `INV-07`; `US-04023`, `US-04024` |
 | Setup | Fixture de trabajo en estado `Pendiente`; fixture de solicitante administrador; doble del reloj |
-| Pasos | Given un trabajo en `Pendiente` y el administrador, When se lo aprueba **sin comentario**, Then alcanza `Finalizado`. Given otro, When se lo rechaza **con comentario**, Then alcanza `Rechazado` y el comentario queda con su fecha y su autor. Given un desenlace que no es ninguno de los dos, Then `DESENLACE_DESCONOCIDO` |
+| Pasos | Given un trabajo en `Pendiente` y el administrador, When se lo aprueba **sin comentario**, Then alcanza `Finalizado`. Given otro, When se lo rechaza **con comentario**, Then alcanza `Rechazado` y el comentario queda con su fecha y su autor. Given un desenlace que no es ninguno de los dos, Then `UNKNOWN_OUTCOME` |
 | Salida esperada | Dos estados terminales alcanzados, el comentario opcional en las dos formas, y un rechazo. El sello de desenlace sale del puerto de reloj |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1251,7 +1251,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04008`; `RN-04010`, `RN-04001`, `RN-04011`; `INV-07`; `US-04025` |
 | Setup | Fixture de trabajo en los cuatro estados; fixture de solicitante alumno y administrador |
-| Pasos | Given un trabajo en `Pendiente` y un solicitante alumno, When pide el desenlace, Then `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` **antes** de comprobar el estado. Given un trabajo en `Borrador` y el administrador, Then `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`. Given un trabajo `Finalizado` o `Rechazado`, Then `TRANSICION_DESDE_ESTADO_TERMINAL` y **el contenido no cambia**. Given un trabajo que no está en `Pendiente` pero sí en el alcance, Then `DESENLACE_FUERA_DE_PENDIENTE`. Given un identificador que no existe, Then `TRABAJO_INEXISTENTE` |
+| Pasos | Given un trabajo en `Pendiente` y un solicitante alumno, When pide el desenlace, Then `ADMINISTRATOR_ROLE_REQUIRED` **antes** de comprobar el estado. Given un trabajo en `Borrador` y el administrador, Then `WORK_OUTSIDE_ADMINISTRATOR_SCOPE`. Given un trabajo `Finalizado` o `Rechazado`, Then `TRANSITION_FROM_TERMINAL_STATUS` y **el contenido no cambia**. Given un trabajo que no está en `Pendiente` pero sí en el alcance, Then `OUTCOME_OUTSIDE_SUBMITTED`. Given un identificador que no existe, Then `WORK_NOT_FOUND` |
 | Salida esperada | Cinco rechazos, con **el orden verificado**: facultad antes que alcance y alcance antes que estado, que es lo que impide que un rechazo por facultad se lea como rechazo por terminalidad |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1263,7 +1263,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-04009`; `RN-04004`, `RN-04011`, `RN-04003`; `INV-03`, `INV-02`; `US-04026`, `US-04027` |
 | Setup | Fixture de trabajo en los cuatro estados, propio y ajeno; fixture de solicitante alumno y administrador |
-| Pasos | Given un trabajo propio en `Borrador` y el alumno, When lo elimina, Then se retira. Given un trabajo propio fuera de `Borrador` y el alumno, Then `OPERACION_FUERA_DE_BORRADOR`. Given un trabajo ajeno y el alumno, Then `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`. Given los **tres** estados que el administrador ve, When los elimina, Then los tres se retiran. Given un `Borrador` y el administrador, Then `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` |
+| Pasos | Given un trabajo propio en `Borrador` y el alumno, When lo elimina, Then se retira. Given un trabajo propio fuera de `Borrador` y el alumno, Then `OPERATION_OUTSIDE_DRAFT`. Given un trabajo ajeno y el alumno, Then `WORK_NOT_FOUND_FOR_REQUESTER`. Given los **tres** estados que el administrador ve, When los elimina, Then los tres se retiran. Given un `Borrador` y el administrador, Then `WORK_OUTSIDE_ADMINISTRATOR_SCOPE` |
 | Salida esperada | Cuatro retiros —uno del alumno y tres del administrador— y tres rechazos. Los dos alcances son **opuestos** y ninguno se filtra en el otro |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1337,7 +1337,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit, **prueba de inspección** |
 | Cubre | `QG-11`; [`ADR-04006`](../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md); el quinto riesgo de `05` §9 |
 | Setup | Los mismos dobles con los que se ejercen las 36 condiciones |
-| Pasos | Given cada una de las **36** condiciones del catálogo, When se la provoca, Then el caso de uso **devuelve un valor** con su código y **no lanza**. Given la indisponibilidad de un puerto, Then tampoco lanza: devuelve `INTERPRETACION_NO_DISPONIBLE` |
+| Pasos | Given cada una de las **36** condiciones del catálogo, When se la provoca, Then el caso de uso **devuelve un valor** con su código y **no lanza**. Given la indisponibilidad de un puerto, Then tampoco lanza: devuelve `PARSE_RESULT_UNAVAILABLE` |
 | Salida esperada | 36 rechazos como valor y **0** excepciones de negocio. Las excepciones quedan reservadas a defectos de programación del consumidor, que es lo que `ADR-04006` decidió |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1365,7 +1365,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | Caso **2** de la batería (`T2`); `CU-06001`; `US-06001`; paso `P-2` |
 | Setup | Fixture con el texto literal de `E-2`, **con sus dos comas finales** |
-| Pasos | Given el texto tal como el programa lo emite, **con comas finales**, When se lo lee, Then **el parseo tiene éxito**. Given un texto con comentarios, Then también, por la misma tolerancia. Given un texto que no parsea **ni con tolerancia**, Then se emite una observación de validación y **no** `INTERPRETACION_NO_DISPONIBLE` |
+| Pasos | Given el texto tal como el programa lo emite, **con comas finales**, When se lo lee, Then **el parseo tiene éxito**. Given un texto con comentarios, Then también, por la misma tolerancia. Given un texto que no parsea **ni con tolerancia**, Then se emite una observación de validación y **no** `PARSE_RESULT_UNAVAILABLE` |
 | Salida esperada | Dos lecturas exitosas y un rechazo con el código correcto. La distinción entre **texto ilegible** y **motor no disponible** es la que `TC-06013` desarrolla |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1487,7 +1487,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-06001`; `RN-06009`; `US-06002`, `US-06003`; `RC-06002` |
 | Setup | Fixtures con los textos literales de `E-5` y de `E-1` |
-| Pasos | Given el texto de `E-5`, donde una figura **no se reconstruye**, When se lo interpreta, Then la **cantidad de figuras del conjunto raíz** que se devuelve **incluye la no reconstruida**, y **la posición de esa figura queda reservada**: la siguiente pieza **no se renumera**. Given `E-1`, Then la cantidad coincide con las tres piezas reconstruidas. Given un conjunto en el que la cantidad y las posiciones no cierran, Then `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` |
+| Pasos | Given el texto de `E-5`, donde una figura **no se reconstruye**, When se lo interpreta, Then la **cantidad de figuras del conjunto raíz** que se devuelve **incluye la no reconstruida**, y **la posición de esa figura queda reservada**: la siguiente pieza **no se renumera**. Given `E-1`, Then la cantidad coincide con las tres piezas reconstruidas. Given un conjunto en el que la cantidad y las posiciones no cierran, Then `PIECE_SET_NOT_REBUILT` |
 | Salida esperada | La cantidad que incluye lo no reconstruido, la posición reservada y un rechazo. Es lo que hace que el índice de una observación tenga un rango contra el que validarse |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1499,7 +1499,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-06001`; `US-06001`; el segundo riesgo de `05` §9 |
 | Setup | Un texto que no parsea ni con tolerancia; el texto ausente; y el motor forzado a no estar disponible |
-| Pasos | Given un texto ilegible, When se lo interpreta, Then se emite **una observación de validación** y **no** `INTERPRETACION_NO_DISPONIBLE`. Given el texto ausente, Then `TEXTO_ORIGINAL_AUSENTE`. Given el motor efectivamente no disponible, Then **sí** `INTERPRETACION_NO_DISPONIBLE` |
+| Pasos | Given un texto ilegible, When se lo interpreta, Then se emite **una observación de validación** y **no** `PARSE_RESULT_UNAVAILABLE`. Given el texto ausente, Then `ORIGINAL_JSON_MISSING`. Given el motor efectivamente no disponible, Then **sí** `PARSE_RESULT_UNAVAILABLE` |
 | Salida esperada | Tres resultados distintos y **ninguna confusión entre resultado y fallo**. `05` §9 le asigna probabilidad **alta**: es la garantía que más veces se rompe al implementar, porque el alumno vería «el servicio no está disponible» y esperaría a que se recupere de un problema que no tiene |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1537,7 +1537,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-06003`; `RN-06008`; `RC-06001`; `US-06008`; NFR de escrituras que reemplazan el texto |
 | Setup | Almacén efímero preparado; fixture con el texto literal de `E-2`, **con sus comas finales** |
-| Pasos | Given el texto de `E-2`, When se materializa el trabajo y se lo recupera, Then el texto guardado es **idéntico carácter por carácter** al original, con sus comas finales intactas. When se intenta materializar el **mismo trabajo** con un texto distinto, Then se rechaza con `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` y **el texto guardado no cambia** |
+| Pasos | Given el texto de `E-2`, When se materializa el trabajo y se lo recupera, Then el texto guardado es **idéntico carácter por carácter** al original, con sus comas finales intactas. When se intenta materializar el **mismo trabajo** con un texto distinto, Then se rechaza con `WRITE_REWRITES_ORIGINAL_JSON` y **el texto guardado no cambia** |
 | Salida esperada | Comparación byte a byte sin diferencias y un rechazo sin efecto. Es el **tramo principal de `RN-06008`**: ésta es la capa donde el texto se escribe, y por lo tanto donde puede perderse |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1549,7 +1549,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-06003`; `US-06009` |
 | Setup | Almacén efímero; fixture de trabajo con piezas, componentes y observaciones |
-| Pasos | Given un trabajo con sus piezas, sus componentes y sus observaciones, When se lo materializa, Then las cuatro cosas quedan en **una sola** unidad de trabajo. When el almacén se interrumpe a mitad, Then **no queda nada escrito**. Given una escritura concurrente sobre el mismo trabajo, Then `ESCRITURA_CONCURRENTE_RECHAZADA`. Given el almacén no disponible, Then `ALMACEN_NO_DISPONIBLE` |
+| Pasos | Given un trabajo con sus piezas, sus componentes y sus observaciones, When se lo materializa, Then las cuatro cosas quedan en **una sola** unidad de trabajo. When el almacén se interrumpe a mitad, Then **no queda nada escrito**. Given una escritura concurrente sobre el mismo trabajo, Then `CONCURRENT_WRITE_REJECTED`. Given el almacén no disponible, Then `STORE_UNAVAILABLE` |
 | Salida esperada | Una materialización completa, una interrupción sin efecto parcial y dos rechazos con su código |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1561,7 +1561,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-06003`; `RN-06003`, `RN-06011`; `US-06010` |
 | Setup | Almacén efímero con trabajos de dos alumnos en los cuatro estados |
-| Pasos | Given una consulta con el recorte por dueño **ya declarado**, When se la resuelve, Then devuelve sólo lo que ese recorte admite. Given una consulta con el predicado de alcance del administrador declarado, Then **ningún borrador viaja**. Given una consulta **sin recorte declarado**, Then `CONSULTA_SIN_ALCANCE_DECLARADO` y **no se resuelve** |
+| Pasos | Given una consulta con el recorte por dueño **ya declarado**, When se la resuelve, Then devuelve sólo lo que ese recorte admite. Given una consulta con el predicado de alcance del administrador declarado, Then **ningún borrador viaja**. Given una consulta **sin recorte declarado**, Then `QUERY_WITHOUT_DECLARED_SCOPE` y **no se resuelve** |
 | Salida esperada | Dos consultas acotadas y un rechazo. **Esta capa no comprueba pertenencia**: lo que hace es **no ofrecer el camino** por el que `RN-06003` y `RN-06011` se romperían |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1585,7 +1585,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-06004`; `RN-06004`; `RC-06005`; `US-06012` |
 | Setup | Almacén efímero con un trabajo con piezas, componentes y observaciones |
-| Pasos | Given un trabajo con todo lo que cuelga de él, When se lo retira, Then **se retira físicamente**, sin marca lógica, con sus piezas, sus componentes y sus observaciones. When se consulta después, Then no existe. Given un retiro que sólo alcanzaría a parte de lo que cuelga, Then `RETIRO_PARCIAL_NO_ADMITIDO` |
+| Pasos | Given un trabajo con todo lo que cuelga de él, When se lo retira, Then **se retira físicamente**, sin marca lógica, con sus piezas, sus componentes y sus observaciones. When se consulta después, Then no existe. Given un retiro que sólo alcanzaría a parte de lo que cuelga, Then `PARTIAL_DELETION_NOT_ALLOWED` |
 | Salida esperada | Un retiro completo y un rechazo. **No hay borrado lógico**: es la única operación destructiva del producto y se ejerce entera |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1609,7 +1609,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-06005`; `RN-06001`, `RN-06002`; `INV-01`, `INV-05`; `US-06014` |
 | Setup | Almacén efímero con una cuenta de alumno y una de administrador |
-| Pasos | Given una cuenta con un correo ya registrado, When se materializa otra con el mismo correo, Then el almacén la rechaza con `CORREO_YA_REGISTRADO`, **aunque la consulta previa del consumidor no lo hubiera visto**. Given una segunda cuenta con papel de administrador, Then `UNICIDAD_DE_ADMINISTRADOR_VIOLADA` |
+| Pasos | Given una cuenta con un correo ya registrado, When se materializa otra con el mismo correo, Then el almacén la rechaza con `EMAIL_ALREADY_REGISTERED`, **aunque la consulta previa del consumidor no lo hubiera visto**. Given una segunda cuenta con papel de administrador, Then `ADMINISTRATOR_UNIQUENESS_VIOLATED` |
 | Salida esperada | Dos rechazos del almacén. Es la **segunda línea deliberada**: la consulta previa del consumidor **no es una garantía por sí sola**, y la capa de aplicación ya declara este camino como flujo alternativo propio |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1647,7 +1647,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-06006`; `US-06017` |
 | Setup | Una contraseña en claro evidentemente ficticia, declarada como tal |
-| Pasos | Given una contraseña en claro, When se la deriva, Then se devuelve el valor derivado **con sus parámetros versionados junto a él**. Then **la contraseña en claro no queda escrita en ninguna parte** —ni en el almacén, ni en el registro del servidor, ni en el mensaje de ninguna condición—. Given la contraseña en claro ausente, Then `CONTRASENA_EN_CLARO_AUSENTE` |
+| Pasos | Given una contraseña en claro, When se la deriva, Then se devuelve el valor derivado **con sus parámetros versionados junto a él**. Then **la contraseña en claro no queda escrita en ninguna parte** —ni en el almacén, ni en el registro del servidor, ni en el mensaje de ninguna condición—. Given la contraseña en claro ausente, Then `PLAINTEXT_PASSWORD_MISSING` |
 | Salida esperada | Un valor derivado con sus parámetros y **0** apariciones del valor en claro en los tres lugares. Es el **único punto del producto donde la contraseña en claro se convierte en el valor guardado** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1659,7 +1659,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-06006`; `US-06018` |
 | Setup | Un valor derivado válido, uno con parámetros que no se pueden leer, y dos contraseñas en claro |
-| Pasos | Given la contraseña correcta y su valor derivado, When se verifica, Then el veredicto es afirmativo. Given una contraseña distinta, Then negativo. Given un valor derivado **ilegible** —parámetros ausentes o no interpretables—, Then `CREDENCIAL_DERIVADA_ILEGIBLE`, **que no es lo mismo que una contraseña equivocada** |
+| Pasos | Given la contraseña correcta y su valor derivado, When se verifica, Then el veredicto es afirmativo. Given una contraseña distinta, Then negativo. Given un valor derivado **ilegible** —parámetros ausentes o no interpretables—, Then `UNREADABLE_PASSWORD_HASH`, **que no es lo mismo que una contraseña equivocada** |
 | Salida esperada | Dos veredictos y un rechazo distinguible. Confundir el derivado ilegible con la contraseña equivocada haría que un dato corrupto se leyera como intento fallido |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1683,7 +1683,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit, con la fuente de material impredecible doblada |
 | Cubre | `CU-06007`; `RN-06014`; `US-06020`; el tercer riesgo de `05` §9 |
 | Setup | La fuente de material impredecible **que no responde** |
-| Pasos | Given la fuente que no responde, When se pide una provisoria, Then se devuelve `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` y **no se produce ningún valor**. Then **no se compone una provisoria por otro medio**: ni un contador, ni la fecha, ni el correo, ni el nombre |
+| Pasos | Given la fuente que no responde, When se pide una provisoria, Then se devuelve `RANDOMNESS_SOURCE_UNAVAILABLE` y **no se produce ningún valor**. Then **no se compone una provisoria por otro medio**: ni un contador, ni la fecha, ni el correo, ni el nombre |
 | Salida esperada | Un rechazo y **cero** valores producidos por un atajo. `05` §9 lo declara de impacto **muy alto** con un fundamento que conviene repetir: **un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1695,7 +1695,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-06008`; `RN-06001`; `US-06021` |
 | Setup | Una clave de firma evidentemente ficticia, provista por configuración de prueba |
-| Pasos | Given los **cuatro** reclamos y la clave, When se emite el acceso, Then lleva los cuatro y **la firma verifica**. When se lo verifica con una clave distinta, Then el veredicto es negativo. Given reclamos incompletos, Then `RECLAMOS_INCOMPLETOS` y **no se emite**. Then el acceso **transporta el papel sin decidir qué habilita** |
+| Pasos | Given los **cuatro** reclamos y la clave, When se emite el acceso, Then lleva los cuatro y **la firma verifica**. When se lo verifica con una clave distinta, Then el veredicto es negativo. Given reclamos incompletos, Then `INCOMPLETE_CLAIMS` y **no se emite**. Then el acceso **transporta el papel sin decidir qué habilita** |
 | Salida esperada | Una emisión con sus cuatro reclamos, dos veredictos y un rechazo. La decisión de qué habilita el papel **no es de acá** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1707,7 +1707,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Unit |
 | Cubre | `CU-06008`; `US-06022`; `QG-12`; el cuarto riesgo de `05` §9 |
 | Setup | La configuración de prueba **sin** clave de firma |
-| Pasos | Given la ausencia de clave, When se pide emitir un acceso, Then `CLAVE_DE_FIRMA_AUSENTE` y **no se emite ninguno**. Then **no se genera una clave al vuelo** y **no se emite sin firmar** |
+| Pasos | Given la ausencia de clave, When se pide emitir un acceso, Then `SIGNING_KEY_MISSING` y **no se emite ninguno**. Then **no se genera una clave al vuelo** y **no se emite sin firmar** |
 | Salida esperada | Un rechazo y **cero** accesos emitidos por cualquiera de los dos atajos. `05` §9 lo declara de impacto muy alto: con cualquiera de ellos **el sistema arranca, emite accesos y nadie lo nota hasta que alguien falsifica uno** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1745,7 +1745,7 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 | Tipo | Integración interna |
 | Cubre | `CU-06010`; `US-06025`; el quinto y el sexto riesgo de `05` §9 |
 | Setup | Tres almacenes: uno con un esquema que **no corresponde** al linaje esperado; una ubicación **no disponible**; y uno correcto |
-| Pasos | Given un almacén cuyo esquema no corresponde, When arranca la preparación, Then `MIGRACION_NO_APLICABLE` y **el arranque se detiene**. Then **el almacén no se descarta y no se recrea**. Given una ubicación no disponible, Then `RUTA_DEL_ALMACEN_NO_DISPONIBLE` y el arranque **se detiene**; Then **no se cae hacia una ruta alternativa dentro de la imagen**. Given el almacén correcto, Then el arranque procede |
+| Pasos | Given un almacén cuyo esquema no corresponde, When arranca la preparación, Then `MIGRATION_NOT_APPLICABLE` y **el arranque se detiene**. Then **el almacén no se descarta y no se recrea**. Given una ubicación no disponible, Then `STORE_PATH_UNAVAILABLE` y el arranque **se detiene**; Then **no se cae hacia una ruta alternativa dentro de la imagen**. Given el almacén correcto, Then el arranque procede |
 | Salida esperada | Dos detenciones y un arranque. La primera evita «el atajo más destructivo del producto» —dejar el servicio impecable y **sin los trabajos de nadie**—; la segunda evita que el servicio acepte trabajos de la comisión entera y **los pierda en el siguiente reemplazo de versión** |
 | Salida observada | Sin ejecutar |
 | Estado | `Pendiente` |
@@ -1780,4 +1780,5 @@ Cada `TC-XX` declara ocho campos, según `Rules-Calidad-Y-Pruebas.md` §4.6: ide
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **58 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

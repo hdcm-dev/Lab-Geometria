@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00029-Dar-Desenlace-A-La-Revision.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -105,12 +105,12 @@ conjunto **no es un desenlace desconocido que haya que interpretar: es una petic
 
 | Motivo interno | Código del contrato | Respuesta | Causa |
 | --- | --- | --- | --- |
-| — | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | Falta el identificador o el desenlace pretendido. **Nunca por el comentario**, que es opcional |
-| `DESENLACE_DESCONOCIDO` | — | `400` | El desenlace pretendido **no pertenece al conjunto cerrado de dos valores**. **No lleva código del contrato porque la petición nunca llega a ser el tipo del contrato**: es el mismo tratamiento que el `401` de la guardia |
-| `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | `CONTRATO_TRABAJO_NO_ENCONTRADO` | `404` | El identificador no existe o **está fuera de lo que el administrador ve, incluido el trabajo en `Borrador`**. **Las respuestas son indistinguibles**: un borrador **no se aprueba ni se rechaza**, y él ni siquiera lo ve |
-| `DESENLACE_FUERA_DE_PENDIENTE`, `TRANSICION_DESDE_ESTADO_TERMINAL` | `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | `409` | El trabajo no está en `Pendiente`: o nunca lo estuvo, o **ya recibió su desenlace y está en un estado terminal**. La respuesta **declara el estado actual y no sugiere ninguna forma de revertirlo** |
-| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | `403` | Quien pide no es el administrador, **aun sobre un trabajo propio en `Pendiente`**. **No se recupera ni se modifica el trabajo.** Es el **único** código de facultad del conjunto cerrado, y **éste es el único punto donde se produce** |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | El almacén no está disponible |
+| — | `REQUIRED_FIELD_MISSING` | `400` | Falta el identificador o el desenlace pretendido. **Nunca por el comentario**, que es opcional |
+| `UNKNOWN_OUTCOME` | — | `400` | El desenlace pretendido **no pertenece al conjunto cerrado de dos valores**. **No lleva código del contrato porque la petición nunca llega a ser el tipo del contrato**: es el mismo tratamiento que el `401` de la guardia |
+| `WORK_OUTSIDE_ADMINISTRATOR_SCOPE` | `WORK_NOT_FOUND` | `404` | El identificador no existe o **está fuera de lo que el administrador ve, incluido el trabajo en `Borrador`**. **Las respuestas son indistinguibles**: un borrador **no se aprueba ni se rechaza**, y él ni siquiera lo ve |
+| `OUTCOME_OUTSIDE_SUBMITTED`, `TRANSITION_FROM_TERMINAL_STATUS` | `STATE_FORBIDS_OUTCOME` | `409` | El trabajo no está en `Pendiente`: o nunca lo estuvo, o **ya recibió su desenlace y está en un estado terminal**. La respuesta **declara el estado actual y no sugiere ninguna forma de revertirlo** |
+| `ADMINISTRATOR_ROLE_REQUIRED` | `OUTCOME_ADMIN_ONLY` | `403` | Quien pide no es el administrador, **aun sobre un trabajo propio en `Pendiente`**. **No se recupera ni se modifica el trabajo.** Es el **único** código de facultad del conjunto cerrado, y **éste es el único punto donde se produce** |
+| — | `UNCLASSIFIED_ERROR` | `503` | El almacén no está disponible |
 
 **Ninguna condición deja escritura parcial**, y en particular **un desenlace rechazado por estado
 terminal no altera el comentario existente**.
@@ -177,6 +177,7 @@ casos **no hay nada que pueda hacer**.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **6 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe `CU-00008` 1.2, `CU-04008` 1.1 y `CU-02010` 1.1, que eran **tres vistas de la misma capacidad**. La unión no es la suma: el actor primario pasa a ser el administrador y el alumno queda como **destinatario del desenlace**, no como espectador; §6 queda en una sola tabla que **agrupa los dos motivos internos que comparten el `409`** y declara por qué distinguirlos no le serviría de nada a quien los recibe; y los criterios se rehacen sobre la capacidad y quedan **nueve**, con **CA-07** cubriendo la irreversibilidad de **los dos** estados de cierre en un solo criterio y **CA-08** nuevo, que verifica de punta a punta que el desenlace **llega al alumno** —afirmado por las tres vistas y sin criterio en ninguna—. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

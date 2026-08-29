@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02004-Eliminacion-Acotada-Al-Borrador.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -44,7 +44,7 @@ El invariante que la expresa como condición permanente es **INV-03**, deliberad
 
 ## 4. Consecuencia si se viola
 
-Rechazo. Para el alumno, con el motivo `OPERACION_FUERA_DE_BORRADOR`; para el administrador, con el motivo `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` cuando el trabajo está en `Borrador`. En los dos casos el trabajo queda intacto, con su estado, su texto original, sus piezas y sus observaciones.
+Rechazo. Para el alumno, con el motivo `OPERATION_OUTSIDE_DRAFT`; para el administrador, con el motivo `WORK_OUTSIDE_ADMINISTRATOR_SCOPE` cuando el trabajo está en `Borrador`. En los dos casos el trabajo queda intacto, con su estado, su texto original, sus piezas y sus observaciones.
 
 ## 5. CU afectados
 
@@ -63,3 +63,4 @@ Pruebas unitarias de dominio previstas en 08: eliminación por el alumno admitid
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe el enunciado completo que `PRODUCT-INTAKE` 1.3 §4.1 transcribe y la ampliación del 2026-08-08. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. La regla pasa de una sola mitad —el alumno elimina sólo en `Borrador`— a **las dos**, con el borrado físico del administrador en cualquier estado que ve. Se declara **INV-03** como el invariante que la expresa, con su recorte a la eliminación por parte de un alumno y el motivo de ese recorte. El ámbito suma la reedición y la exclusión de `Borrador` del alcance del administrador por RN-02011, y §5 suma CU-02011. **El nombre del archivo se conserva** aunque el enunciado se amplió: otras categorías ya lo citan por esta ruta y renombrarlo rompería sus enlaces. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

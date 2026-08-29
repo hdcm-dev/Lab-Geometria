@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02001-Administrador-Unico-Y-Papeles-Fijos.md
-**Versión:** 1.3
+**Versión:** 1.4
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -41,7 +41,7 @@ Es una decisión de negocio del Product Owner, declarada como exclusión: el pro
 
 ## 4. Consecuencia si se viola
 
-Rechazo. La constitución de una segunda cuenta con papel `Administrador` no procede, y **cualquiera de las cuatro operaciones sobre la cuenta de administrador** se rechaza con el código `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`. No hay compensación ni advertencia: la operación no se ejecuta.
+Rechazo. La constitución de una segunda cuenta con papel `Administrador` no procede, y **cualquiera de las cuatro operaciones sobre la cuenta de administrador** se rechaza con el código `OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT`. No hay compensación ni advertencia: la operación no se ejecuta.
 
 La consecuencia de no hacerla cumplir no se agota en el acceso de una persona: sin administrador nadie aprueba ni rechaza trabajos, de modo que **el circuito de revisión completo se detiene** y todos los trabajos quedan en estado `Pendiente` para siempre.
 
@@ -64,3 +64,4 @@ Pruebas unitarias puras de dominio previstas en 08: constitución rechazada de u
 | 1.1 | 2026-08-09 | Absorbe el enunciado completo que `PRODUCT-INTAKE` 1.3 §4.1 transcribe. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. El enunciado incorpora la condición de alta —«su alta sólo es posible mientras no exista ninguno»—, la cita de INV-05 pasa de §17.1.P.4 · GeometriaFactory-Infrastructure a §17.1.P.2 · GeometriaFactory-Domain, que es donde el intake ahora enuncia los siete invariantes, y §6 suma el criterio de verificación declarado por la fuente. |
 | 1.2 | 2026-08-09 | **Corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`. Esta regla se citaba en CU-02001 como fundamento del estado inicial `Pendiente` de toda cuenta, y **no dice eso**: declara que existe exactamente un administrador y que su alta sólo es posible mientras no exista ninguno. §3 lo precisa explícitamente y §5 reasigna el alta del administrador a **CU-02012**, que se emite con este cambio, dejando a CU-02001 sólo por el conjunto cerrado de dos papeles. |
 | 1.3 | 2026-08-09 | Corrección de la ronda r3 del audit, informe `B-02-03-GeometriaFactory-Domain-r3.md`, hallazgo **H-01**. La regla protegía la unicidad del administrador sólo contra la baja, y el bloqueo producía el mismo resultado sin estar prohibido. §3 extiende el ámbito a las cuatro operaciones citando la capacidad **F-03**, que ya las declara sobre cuentas de alumno; §4 pasa a citar el código único `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, que reemplaza al retirado `CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA`, y declara el efecto sobre el circuito de revisión; §6 suma el bloqueo a las pruebas previstas. |
+| 1.4 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

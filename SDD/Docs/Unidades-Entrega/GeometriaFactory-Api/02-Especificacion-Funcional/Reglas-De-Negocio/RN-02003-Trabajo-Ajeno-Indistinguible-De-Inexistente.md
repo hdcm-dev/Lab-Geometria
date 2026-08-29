@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -37,7 +37,7 @@ Es la regla declarada en PRODUCT-INTAKE §4.1 y la respuesta del cliente al caso
 - Se evalúa en toda consulta de un trabajo por su identificador, en sus cuatro estados.
 - Se evalúa antes de toda operación de reedición o de eliminación por parte de un alumno.
 - No alcanza al administrador, cuyo alcance sobre los trabajos de la comisión lo fijan RN-02011 y RN-02004.
-- El dominio devuelve el motivo `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`; la traducción a la respuesta que sale del proceso pertenece a `GeometriaFactory-Api`, que debe conservar la indistinguibilidad.
+- El dominio devuelve el motivo `WORK_NOT_FOUND_FOR_REQUESTER`; la traducción a la respuesta que sale del proceso pertenece a `GeometriaFactory-Api`, que debe conservar la indistinguibilidad.
 
 ## 4. Consecuencia si se viola
 
@@ -57,3 +57,4 @@ Pruebas unitarias de dominio previstas en 08: consulta de un trabajo del alumno 
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe el enunciado completo que `PRODUCT-INTAKE` 1.3 §4.1 transcribe y el enunciado de INV-02 de §17.1.P.2 · GeometriaFactory-Domain. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. El enunciado antepone la formulación de la fuente —«un alumno sólo ve y opera sus propios trabajos»— a la indistinguibilidad, que es su forma de verificación. §3 precisa que la regla alcanza a los cuatro estados y que no alcanza al administrador, cuyo alcance fijan RN-02011 y RN-02004. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

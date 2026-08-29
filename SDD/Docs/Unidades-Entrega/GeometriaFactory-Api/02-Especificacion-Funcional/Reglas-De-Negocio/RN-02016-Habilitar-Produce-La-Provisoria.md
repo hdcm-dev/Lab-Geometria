@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02016-Habilitar-Produce-La-Provisoria.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -57,8 +57,8 @@ La segunda es **habilitar sin poner la marca**: la provisoria que el administrad
 
 - [CU-00023](../Casos-De-Uso/CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md) — Gobernar el ciclo de vida de la cuenta, donde la regla se materializa: la habilitación exige la credencial derivada provisoria y deja la marca puesta.
 - [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Fijar y reemplazar la credencial derivada: la fijación deja de ser un acto del alumno anónimo y pasa a ejercerse dentro de la habilitación; el alumno usa el **reemplazo**, que es el que levanta la marca.
-- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Evaluar la admisibilidad, de donde la regla **retira** el motivo `CREDENCIAL_NO_ESTABLECIDA`: con la regla puesta, una cuenta `Habilitado` sin credencial no puede existir.
-- [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) — Resetear la contraseña, de donde la regla **retira** el rechazo `RESETEO_SOBRE_CREDENCIAL_NO_FIJADA`, por el mismo motivo.
+- [CU-00022](../Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) — Evaluar la admisibilidad, de donde la regla **retira** el motivo `CREDENTIAL_NOT_SET`: con la regla puesta, una cuenta `Habilitado` sin credencial no puede existir.
+- [CU-00024](../Casos-De-Uso/CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md) — Resetear la contraseña, de donde la regla **retira** el rechazo `RESET_ON_UNSET_CREDENTIAL`, por el mismo motivo.
 
 ## 6. Pruebas que la verifican
 
@@ -70,3 +70,4 @@ Pruebas unitarias de dominio previstas en 08: habilitar una cuenta `Pendiente` a
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial, por la regla **RN-02016** que `PRODUCT-INTAKE` **1.13** §4.1 incorpora al transcribir la decisión del Product Owner sobre la identificación de la cuenta en el primer ingreso, y por la precisión de **F-04** que la acompaña. Declara el enunciado, la justificación —dos mecanismos de credencial inicial que hacían lo mismo pasan a ser uno, y el que queda es el que ya estaba probado—, el ámbito con la consecuencia estructural de que **toda cuenta de alumno `Habilitado` tiene credencial** y con el origen doble de la marca de INV-09, la consecuencia en sus dos formas silenciosas, los cuatro CU afectados —dos que la materializan y dos de los que **retira** una condición— y las pruebas. (Analista Funcional + API Designer, AG-02). |
 | 1.1 | 2026-08-10 | **Absorbe la corrección de `PRODUCT-INTAKE` 1.15 §4.1**, que precisa el enunciado de esta misma regla. La 1.13 cerraba RN-02016 afirmando que «no existe ninguna escritura anónima **en el sistema**», y eso es falso: el **registro de cuenta** de RF-03 (F-02, `CU-02001`) es anónimo por diseño y debe seguir siéndolo, porque es como el alumno entra al laboratorio. Lo que la regla elimina es la escritura anónima **de credencial**. **§1** transcribe el enunciado corregido y deja escrito qué queda fuera de su alcance. **§2** acota del mismo modo el defecto que la regla cierra: lo que era único era la escritura de **contraseña** sin credencial de la superficie, no toda escritura sin credencial. **Ninguna decisión cambia y ningún ámbito de aplicación, consecuencia ni CU afectado se modifica**: es la letra de la fuente, corregida. Sube minor. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

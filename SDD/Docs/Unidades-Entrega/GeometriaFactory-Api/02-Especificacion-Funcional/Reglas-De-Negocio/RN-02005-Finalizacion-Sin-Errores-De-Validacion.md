@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02005-Finalizacion-Sin-Errores-De-Validacion.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -47,7 +47,7 @@ El invariante que la expresa como condición permanente es **INV-04**: un trabaj
 
 El envío **no falla**: su resultado declarado es que el trabajo queda en `Borrador`, con sus observaciones de especie error de validación y su ubicación por posición de figura y campo.
 
-**No hay ninguna otra forma de llegar a estado `Pendiente`**, y por eso esta regla no acuña un código de rechazo propio: el envío es la única transición hacia ese estado y la decide el dominio, de modo que no existe una operación de «forzar el paso» que se pueda rechazar. Las solicitudes que sí se rechazan son las que caen fuera del envío, y sus códigos los declara [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) §6: `ENVIO_FUERA_DE_BORRADOR` cuando el trabajo no está en `Borrador`, y `TRANSICION_DESDE_ESTADO_TERMINAL` cuando ya alcanzó un estado de cierre.
+**No hay ninguna otra forma de llegar a estado `Pendiente`**, y por eso esta regla no acuña un código de rechazo propio: el envío es la única transición hacia ese estado y la decide el dominio, de modo que no existe una operación de «forzar el paso» que se pueda rechazar. Las solicitudes que sí se rechazan son las que caen fuera del envío, y sus códigos los declara [CU-00026](../Casos-De-Uso/CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md) §6: `SUBMISSION_OUTSIDE_DRAFT` cuando el trabajo no está en `Borrador`, y `TRANSITION_FROM_TERMINAL_STATUS` cuando ya alcanzó un estado de cierre.
 
 En sentido inverso, impedir el paso a estado `Pendiente` de un trabajo cuyas observaciones son todas advertencias también viola esta regla: el carácter no bloqueante de la advertencia es parte del enunciado, no una tolerancia.
 
@@ -67,3 +67,4 @@ Pruebas unitarias de dominio previstas en 08, con los escenarios del intake como
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe el enunciado completo de `PRODUCT-INTAKE` 1.3 §4.1 y el modelo de estados de §4.2. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. **El momento de evaluación se adelanta del cierre al envío**: la regla deja de decir «no se finaliza con errores» y pasa a decir «no pasa a estado `Pendiente` con errores», con el trabajo quedando en `Borrador` en lugar de rechazarse la operación. Se declara **INV-04** como el invariante que la expresa, con la derivación por la que se sostiene, corrigiendo la atribución anterior que lo daba como el invariante del texto íntegro. §5 suma CU-02010. **El nombre del archivo se conserva** aunque el enunciado cambió de momento: otras categorías ya lo citan por esta ruta y renombrarlo rompería sus enlaces. **Corrección de la ronda r1 del audit, hallazgo P2-02**: §4 citaba `TRANSICION_DE_TRABAJO_NO_ADMITIDA`, un código que ningún caso de uso declara y que esta regla no debió acuñar. Se retira sin reemplazo y §4 declara por qué no corresponde ninguno —el envío es la única transición hacia estado `Pendiente` y la decide el dominio, así que no hay operación de «forzar el paso» que rechazar— y remite a los dos códigos que CU-02008 §6 sí declara para las solicitudes fuera del envío. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

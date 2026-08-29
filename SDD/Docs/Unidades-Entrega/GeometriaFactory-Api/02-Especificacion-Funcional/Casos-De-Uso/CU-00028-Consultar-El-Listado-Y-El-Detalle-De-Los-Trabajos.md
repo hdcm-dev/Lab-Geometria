@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00028-Consultar-El-Listado-Y-El-Detalle-De-Los-Trabajos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -117,12 +117,12 @@ llegan al otro lado **tal como se produjeron**.
 
 | Motivo interno | Código del contrato | Respuesta | Punto | Causa |
 | --- | --- | --- | --- | --- |
-| `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | `CONTRATO_TRABAJO_NO_ENCONTRADO` | `404` | A-14 | El identificador **no existe, o no es del solicitante, o está fuera de lo que ve**. **Las tres respuestas son indistinguibles**, y se traducen a «no encontrado» **y nunca a «no autorizado»**: confirmar que el recurso existe pero es ajeno **ya sería informar de más** |
-| `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | `CONTRATO_TRABAJO_NO_ENCONTRADO` | `404` | A-14 | El administrador pide el detalle de un trabajo en `Borrador`. **Es una de las tres del renglón anterior** |
-| `CUENTA_INEXISTENTE` | `CONTRATO_ALUMNO_NO_ENCONTRADO` | `404` | A-13 | El filtro por alumno referencia un identificador que no existe. **Recuperación: reintentar sin filtro** |
-| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | `403` | A-13 | Se pide el listado de la comisión con papel `Alumno`. **No se consulta el almacén.** Es una negativa **por facultad**, distinta de la negativa **por pertenencia** del renglón primero, y **no tiene nada que ocultar**: el recurso no es ajeno, lo que no alcanza es el papel |
-| `OPERACION_DESCONOCIDA` | — | `500` | A-13, A-14 | La operación consultada no pertenece al conjunto declarado. **Inalcanzable desde la superficie por construcción**: los dos puntos declaran su operación |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | A-13, A-14 | El almacén no está disponible |
+| `WORK_NOT_FOUND_FOR_REQUESTER` | `WORK_NOT_FOUND` | `404` | A-14 | El identificador **no existe, o no es del solicitante, o está fuera de lo que ve**. **Las tres respuestas son indistinguibles**, y se traducen a «no encontrado» **y nunca a «no autorizado»**: confirmar que el recurso existe pero es ajeno **ya sería informar de más** |
+| `WORK_OUTSIDE_ADMINISTRATOR_SCOPE` | `WORK_NOT_FOUND` | `404` | A-14 | El administrador pide el detalle de un trabajo en `Borrador`. **Es una de las tres del renglón anterior** |
+| `ACCOUNT_NOT_FOUND` | `STUDENT_NOT_FOUND` | `404` | A-13 | El filtro por alumno referencia un identificador que no existe. **Recuperación: reintentar sin filtro** |
+| `ADMINISTRATOR_ROLE_REQUIRED` | `OPERATION_ADMIN_ONLY` | `403` | A-13 | Se pide el listado de la comisión con papel `Alumno`. **No se consulta el almacén.** Es una negativa **por facultad**, distinta de la negativa **por pertenencia** del renglón primero, y **no tiene nada que ocultar**: el recurso no es ajeno, lo que no alcanza es el papel |
+| `UNKNOWN_OPERATION` | — | `500` | A-13, A-14 | La operación consultada no pertenece al conjunto declarado. **Inalcanzable desde la superficie por construcción**: los dos puntos declaran su operación |
+| — | `UNCLASSIFIED_ERROR` | `503` | A-13, A-14 | El almacén no está disponible |
 
 **El listado vacío no está en esta tabla, y es deliberado**: el ensamblado de contratos lo declara
 **señal y no error**, y acá viaja en una **respuesta exitosa**.
@@ -180,7 +180,7 @@ ajeno** sino ejerciendo una facultad que no tiene, y ahí no hay nada que oculta
 ## 10. Notas y supuestos
 
 - **El punto abierto del papel insuficiente está cerrado.**
-  `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` entró al conjunto cerrado el **2026-08-12**
+  `OPERATION_ADMIN_ONLY` entró al conjunto cerrado el **2026-08-12**
   (`PRODUCT-INTAKE` 1.29) y **nombra el listado de la comisión** entre sus tres caminos. `CU-00007`
   1.2 seguía respondiendo con el genérico: el alcance de esa propagación incompleta está en
   `CU-00023` §10.
@@ -201,6 +201,7 @@ ajeno** sino ejerciendo una facultad que no tiene, y ahí no hay nada que oculta
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **7 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe `CU-00007` 1.2, `CU-04006` 1.1, `CU-04007` 1.1, `CU-02009` 1.1 y `CU-02011` 1.1, que eran **cinco vistas de la misma capacidad**: el origen tenía **una vista por papel** en la capa de aplicación y **una resolución de alcance por papel** en el dominio, y acá los dos papeles quedan en un solo documento con sus alcances declarados como **complementarios y no anidados**. La unión no es la suma: los **dos** actores quedan como primarios; §6 queda en una sola tabla y declara **por qué tres causas comparten el `404` y el `403` del listado no las acompaña**, que las cinco vistas afirmaban por separado sin poder compararlas; y los criterios se rehacen sobre la capacidad y quedan **catorce**, con **CA-12** nuevo, que compara los dos detalles y verifica la afirmación —presente en las tres vistas y sin criterio en ninguna— de que el administrador ve exactamente lo que ve el alumno. Los cinco documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

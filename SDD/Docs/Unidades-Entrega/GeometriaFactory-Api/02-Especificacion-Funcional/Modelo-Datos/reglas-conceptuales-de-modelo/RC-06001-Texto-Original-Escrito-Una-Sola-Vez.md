@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RC-06001-Texto-Original-Escrito-Una-Sola-Vez.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -32,7 +32,7 @@ Y tiene una consecuencia negativa igual de deliberada: la edición o corrección
 
 ## 4. Consecuencia si se viola
 
-Una escritura que reemplace el texto conservado devuelve `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` y **no escribe nada** ([`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) §6).
+Una escritura que reemplace el texto conservado devuelve `WRITE_REWRITES_ORIGINAL_JSON` y **no escribe nada** ([`CU-06003`](../../../05-Arquitectura-Tecnica/Operaciones-Internas/CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md) §6).
 
 Violarla en silencio —normalizando el texto al guardarlo, por ejemplo— produce un daño que no se nota hasta que alguien compara: el alumno vuelve a abrir su trabajo y ve un texto que él no escribió, las comas finales desaparecen y el escenario que documenta la tolerancia del formato deja de ser reproducible desde el almacén.
 
@@ -51,3 +51,4 @@ Violarla en silencio —normalizando el texto al guardarlo, por ejemplo— produ
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../../Producto/Norma-De-Nomenclatura.md`](../../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
