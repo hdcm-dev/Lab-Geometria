@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Sample `application/03-avanzado`. Gobernado por `ejemplo-03-avanzado-aplicacion.md`. NO entra en la solución. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Application.Avanzado</RootNamespace>
+    <AssemblyName>sample-application-03-avanzado</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Application/GeometriaFactory.Application.csproj" />
+  </ItemGroup>
+</Project>
