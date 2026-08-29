@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Glosario-UX.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -131,7 +131,7 @@ Rigen sin excepción las resoluciones de vocabulario del producto: **`Pendiente`
 | Diagnóstico accionable | La tercera parte obligatoria de toda entrada del catálogo: qué hacer al respecto. Acá tiene **dos destinatarios**, el consumidor y el adaptador del puerto, según de dónde nazca la negativa | `DX-Error-Messages.md`, `DX-Developer-Experience.md` | «Acción sugerida», que es el nombre de la columna |
 | Categoría de error | Cada uno de los siete grupos en que el catálogo ordena las condiciones: entrada inválida, recurso ausente, conflicto de estado, conflicto de facultad, conflicto de alcance, error transitorio y error interno | `DX-Error-Messages.md`, `DX-Developer-Experience.md` | «Taxonomía» para el conjunto |
 | Forma de terminación | Dimensión ortogonal a la categoría, que dice qué le queda por hacer al consumidor: **negativa sin escritura**, **motivo de resultado** o **terminación degradada** | `DX-Error-Messages.md` | — |
-| Terminación degradada | La forma de terminación de una sola condición, `INTERPRETACION_NO_DISPONIBLE`: la operación no se completó por una causa que no depende del pedido, y el caso de uso lo declara en vez de fingir un resultado | `DX-Error-Messages.md`, `Guia-Onboarding-Developer.md` | «Estado degradado», que es la forma que usa CU-04005 §6 |
+| Terminación degradada | La forma de terminación de una sola condición, `PARSE_RESULT_UNAVAILABLE`: la operación no se completó por una causa que no depende del pedido, y el caso de uso lo declara en vez de fingir un resultado | `DX-Error-Messages.md`, `Guia-Onboarding-Developer.md` | «Estado degradado», que es la forma que usa CU-04005 §6 |
 | Condición agregada | Condición de esta capa que **reúne varios rechazos distintos del dominio** bajo un solo motivo, porque ninguno de ellos es un resultado que el alumno deba ver. Son dos: la del conjunto de piezas y la del conjunto de observaciones. El motivo fino queda del lado del dominio | `DX-Error-Messages.md`, `Guia-Onboarding-Developer.md` | — |
 | Rechazo inalcanzable por construcción | Rechazo que el dominio declara y que **esta capa no puede provocar**, porque su propio flujo resuelve antes la condición que lo dispararía. No es una condición del catálogo y su ausencia no es un olvido: está declarado | `DX-Error-Messages.md`, `Guia-Onboarding-Developer.md` | Se distingue del **rechazo equivalente**, que sí puede ocurrir pero esta capa nombra con un motivo propio, y del **agregado**, que es la fila anterior |
 | Adaptador de puerto | La implementación concreta de un puerto, que vive en `GeometriaFactory-Infrastructure`. Se nombra así cuando hay que decir de qué lado se corrige un defecto | `DX-Error-Messages.md`, `Guia-Onboarding-Developer.md` | «La implementación del puerto». No se dice «el puerto» a secas cuando el sujeto es la implementación |
@@ -217,7 +217,7 @@ Es la colisión central de esta sección y la que hay que dejar imposible de con
 | Referente | Forma que corresponde | Evidencia de colisión |
 | --- | --- | --- |
 | La guarda que impide una operación ilegítima del consumidor. No se guarda en ninguna parte y no sobrevive a la invocación | **«condición de error del dominio»**, o «código» cuando se nombra el identificador. La forma desnuda «error» **no se usa** para este referente | `DX-Error-Messages.md` §1.2 y §3 hablan de los tres referentes en la misma sección: catalogan condiciones, y sus enunciados nombran observaciones de especie error de validación |
-| El defecto que impide interpretar el texto del alumno como figuras, que es **una de las dos especies de observación** y que impide que el trabajo pase a estado `Pendiente` | **«error de validación», siempre completo.** Es entidad del dominio, no guarda | Declarado en `Vision-Producto.md` §9.1. `ERROR_SIN_UBICACION` y `ADVERTENCIA_SIN_LOS_DOS_VALORES` son condiciones **sobre** observaciones, y los dos sentidos aparecen en la misma fila del catálogo |
+| El defecto que impide interpretar el texto del alumno como figuras, que es **una de las dos especies de observación** y que impide que el trabajo pase a estado `Pendiente` | **«error de validación», siempre completo.** Es entidad del dominio, no guarda | Declarado en `Vision-Producto.md` §9.1. `ERROR_WITHOUT_LOCATION` y `WARNING_MISSING_BOTH_VALUES` son condiciones **sobre** observaciones, y los dos sentidos aparecen en la misma fila del catálogo |
 | Una falla no declarada del proyecto de código | **«defecto».** No es una condición del catálogo: su lugar es una prueba que falla | `DX-Error-Messages.md` §2.2 declara vacía la categoría «error interno» por este motivo |
 
 Regla de uso, en una línea: **«error» a secas no se escribe en esta sección**. Las tres formas son «condición de error del dominio», «error de validación» y «defecto».
@@ -236,7 +236,7 @@ Y la distinción que completa el cuadro, aunque no sea polisemia de la palabra: 
 Se declaran para que una revisión posterior no los levante como hallazgo, que es exactamente el falso positivo que `Vocabulario-Rules.md` §9.1 tipifica y que su §10 declara defecto del informe y no del documento auditado.
 
 - **«Observación»** tiene un solo referente y dos especies: es un término **superordinado**, no ambiguo. La relación con «advertencia» y «error de validación» es de hiperonimia, ya declarada en `Vision-Producto.md` §9.1 y en `Glosario-Funcional.md` §3.4. Lo que sí colisiona es «error», y está resuelto en §3.1.
-- **Los nombres de los códigos son identificadores literales del contrato** y no se califican. `CUENTA_PENDIENTE` se escribe así aunque `Pendiente` lleve forma calificada obligatoria en prosa; calificar un identificador sería el falso positivo que `Glosario-Funcional.md` §3.3 ya declaró como excepción. La misma excepción alcanza a las enumeraciones del conjunto cerrado de estados y a las filas de las tablas de transición cuyo encabezado ya fija el referente.
+- **Los nombres de los códigos son identificadores literales del contrato** y no se califican. `ACCOUNT_PENDING` se escribe así aunque `Pendiente` lleve forma calificada obligatoria en prosa; calificar un identificador sería el falso positivo que `Glosario-Funcional.md` §3.3 ya declaró como excepción. La misma excepción alcanza a las enumeraciones del conjunto cerrado de estados y a las filas de las tablas de transición cuyo encabezado ya fija el referente.
 
 ### 3.3 `GeometriaFactory-Application`
 
@@ -249,7 +249,7 @@ Es la colisión central de esta sección, y la misma que el proyecto de código 
 | Referente | Forma que corresponde | Evidencia de colisión |
 | --- | --- | --- |
 | La comprobación que impide una operación ilegítima o imposible. No se guarda en ninguna parte y no sobrevive a la invocación | **«condición de error del caso de uso»**, o **«motivo»** cuando se nombra el identificador. La forma desnuda «error» **no se usa** para este referente | `DX-Error-Messages.md` §1.2 y §3 hablan de varios referentes en la misma sección: catalogan condiciones, y sus enunciados nombran observaciones de especie error de validación |
-| El defecto que impide interpretar el texto del alumno como figuras, que es **una de las dos especies de observación** y que impide que el trabajo pase a estado `Pendiente` | **«error de validación», siempre completo.** Es entidad del dominio, no comprobación | Declarado en `Vision-Producto.md` §9.1. `OBSERVACION_MAL_FORMADA` es una condición **sobre** observaciones, y los dos sentidos aparecen en la misma fila del catálogo |
+| El defecto que impide interpretar el texto del alumno como figuras, que es **una de las dos especies de observación** y que impide que el trabajo pase a estado `Pendiente` | **«error de validación», siempre completo.** Es entidad del dominio, no comprobación | Declarado en `Vision-Producto.md` §9.1. `MALFORMED_OBSERVATION` es una condición **sobre** observaciones, y los dos sentidos aparecen en la misma fila del catálogo |
 | Lo que un adaptador de puerto devolvió y el contrato no admite | **«defecto del adaptador»**, y la categoría del catálogo se llama «error interno» sólo como nombre de categoría, donde el encabezado ya fija el referente | `DX-Error-Messages.md` §2.2 y §3.5 hablan de los dos referentes en la misma sección |
 | Una falla no declarada del proyecto de código | **«defecto».** No es una condición del catálogo: su lugar es una prueba que falla | `DX-Error-Messages.md` §2.2 lo declara al justificar la categoría de error interno |
 
@@ -271,7 +271,7 @@ La forma desnuda «negativa» sólo se admite cuando la calificación aparece en
 Se declaran para que una revisión posterior no los levante como hallazgo, que es exactamente el falso positivo que `Vocabulario-Rules.md` §9.1 tipifica.
 
 - **«Observación»** tiene un solo referente y dos especies: es un término **superordinado**, no ambiguo. La relación con «advertencia» y «error de validación» es de hiperonimia, ya declarada en `Vision-Producto.md` §9.1 y en `Glosario-Funcional.md` §3.6. Lo que sí colisiona es «error», y está resuelto en §3.1. **El comentario del administrador no es una observación.**
-- **Los nombres de los motivos son identificadores literales del contrato** y no se califican ni se traducen. `CUENTA_PENDIENTE` se escribe así aunque `Pendiente` lleve forma calificada obligatoria en prosa; calificar un identificador sería el falso positivo que `Glosario-Funcional.md` §3.3 ya declaró como excepción. La misma excepción alcanza a las enumeraciones del conjunto cerrado de estados.
+- **Los nombres de los motivos son identificadores literales del contrato** y no se califican ni se traducen. `ACCOUNT_PENDING` se escribe así aunque `Pendiente` lleve forma calificada obligatoria en prosa; calificar un identificador sería el falso positivo que `Glosario-Funcional.md` §3.3 ya declaró como excepción. La misma excepción alcanza a las enumeraciones del conjunto cerrado de estados.
 - **«Puerto»** designa acá una sola cosa: el contrato que esta capa declara y otra implementa. No tiene relación con ningún sentido de infraestructura de red, que no aparece en ningún artefacto de esta sección. Los contextos son disjuntos y por eso no se califica; la resolución es idéntica a la que declara `Glosario-Funcional.md` §3.6 y se conserva.
 
 ### 3.4 `GeometriaFactory-Infrastructure`
@@ -470,4 +470,5 @@ Los seis términos normativos del framework —producto, unidad de entrega, mód
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3a` del renombre `F-03`** —«los 101 códigos de condición van a inglés», decisión del Product Owner del 2026-08-12, reconfirmada el 2026-08-29—, que **reanuda los tramos que la [`Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **1.5** suspendió el 2026-08-13**. **6 ocurrencias** pasan de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**: el control de diff verificó que las 362 líneas modificadas del tramo difieren **exactamente** en un par del glosario y en nada más. | AG-00030 |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |

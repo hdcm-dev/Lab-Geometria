@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Documento:** Norma-De-Nomenclatura.md
 **Estado:** Aprobado
-**Fecha:** 2026-08-15
+**Fecha:** 2026-08-29
 **Autor:** Orquestador SDD (medición y redacción) · Product Owner (las tres decisiones de §5)
 **Nivel:** Producto
 **Origen:** Observación del Product Owner, 2026-08-12: el estándar nombra espacios de nombres, clases y variables en inglés, y el corpus se salió del estándar sin declararlo. La versión 1.1 incorpora las **tres decisiones tomadas por el Product Owner el 2026-08-12** sobre las zonas de frontera que la 1.0 elevó. La versión 1.2 **corrige el método**, no los nombres: el tramo de ensayo `R-1` de §8 se ejecutó y el método falló en cinco puntos, y ésta es la emisión que los repara antes de que arranque el tramo siguiente. La versión 1.3 **vuelve a corregir el método**, y por la misma vía: el tramo `R-1b` se ejecutó, **cerró limpio** —los siete controles aplicables cuadraron y las cifras de la 1.2 se reprodujeron exactas, lo que valida las correcciones de esa versión— y encontró **tres defectos nuevos**: `V-4` no admitía por escrito el motivo que cubrió diez de las diecisiete ocurrencias no renombradas, la fila de control de cambios del propio tramo rompía el cuadre literal, y el acto 2 de §8.2 no tenía lista previa aunque corre después del acto 1. Ésta los repara **antes de `R-2`**, que toca el intake. La versión 1.4 **corrige el método por tercera y última vez antes de `R-2`**, y no a partir de un tramo ejecutado sino de **la revisión de la propia 1.3**, que se preguntó qué otros controles prometen más de lo que pueden verificar —que es la clase de defecto que compartían los tres que la 1.3 reparó— y encontró **tres**: `V-1` no podía cuadrar §6.10 ni §6.11, que la propia norma agregó al glosario; `V-6` levantaba como falla las diez ocurrencias que la norma declaró correctas; y `V-7` ordenaba lo contrario que §8.2. Y declara, control por control, **cuál de los siete y de los tres barridos de §8.2 se verifica tal como está escrito** La versión 1.5 la trae una **decisión del Product Owner del 2026-08-13**, tomada al arrancar la etapa `a`: **los cinco tramos de renombre que quedaban se suspenden**, porque renombraban identificadores en documentos que describen código que no existe, y el glosario ya está completo para escribir ese código en inglés desde el primer archivo. §8 registra la suspensión y la regla que la reemplaza; §8.2 corrige además el defecto que `R-2` levantó al ejecutarse. La versión 1.17 la trae **la interfaz de la etapa `e`** —hacer funcionar las cuatro superficies de trabajo, que eran maqueta sin comportamiento—: agrega **§6.20** con 27 filas y amplía el rango del glosario a **diecisiete tablas**. La versión 1.16 la trae la **etapa `e`**, que construye el trabajo con dueño, estado y persistencia del lado del servicio: agrega **§6.19** con 47 filas y amplía el rango del glosario a **dieciséis tablas**. La versión 1.15 la trae **el guardián 1 de `Web ADR-10003` §2**, el único de los cuatro que nunca se construyó, y el punto de acceso anónimo sin el cual no se podía construir: agrega **§6.18** con 8 filas y amplía el rango del glosario a **quince tablas**. La versión 1.14 la trae **la interacción de superficie que el Product Owner autorizó** sobre el panel de cuentas y el registro —copiado de la provisoria, estado en curso, acción destructiva acotada a que lo escrito coincida, y diálogos que cierran con escape y confinan el foco—: agrega **§6.17** con 19 filas, amplía el rango del glosario a **catorce tablas** y **corrige el desfase de recuento que §6.14 arrastraba desde la 1.11**, con la evidencia de las propias tablas. La versión 1.13 la trae **la interfaz de la etapa `d`** —hacer funcionar `Registro-De-Cuenta` y `Panel-De-Cuentas`, que eran maqueta sin comportamiento—: agrega **§6.16** con 41 filas y amplía el rango del glosario a **trece tablas**. La versión 1.12 la trae la **etapa `d`**, que construye el ciclo de vida de la cuenta de alumno del lado del servicio: agrega **§6.15** con 36 filas, amplía el rango del glosario a **doce tablas** y corrige dos recuentos que estaban desactualizados —el de `V-1`, que decía nueve tablas desde la 1.6, y la tabla de contenido, que no listaba §6.14—. La versión 1.11 la trae la **guardia de arranque de la clave de firma**, y su origen es un hecho del despliegue y no una revisión de escritorio: el servicio de datos se levantó sin la clave, se comportó como si estuviera sano y falló recién con una persona adelante intentando entrar; agrega dos filas y **reconcilia dos recuentos que estaban mal desde la 1.8**. La versión 1.10 la trae el **arreglo del cambio forzado tras la fusión**: **retira dos identificadores** —`PasswordChangeEmail` y `BeginPasswordChange`—, que **conservan su fila con el motivo del retiro** porque eso es lo que §4.1 y §6.8.5 mandan con un identificador retirado, y **agrega cinco filas** a §6.14 con lo que la pantalla del cambio forzado necesitó para dejar de depender del estado de la petición anterior.
@@ -2168,6 +2168,40 @@ Una norma sin instrumento de verificación es una intención. Siete controles, y
 
 ## 8. El plan de renombre
 
+> ### La reactivación del Product Owner del 2026-08-29: `R-3` vuelve a correr
+>
+> **`R-3` —los códigos de condición, que es `F-03`— se reactiva.** Los otros tres tramos suspendidos
+> —`R-2b`, `R-4` y `R-5`— **siguen suspendidos y este párrafo no los toca**.
+>
+> **Qué cambió respecto del 2026-08-13, y es lo único que cambió.** El fundamento de la suspensión era
+> que esos tramos *«renombraban identificadores en documentos que describen código que no existe»*.
+> **Para `F-03` eso dejó de ser cierto**: el código existe, emite los 56 códigos en su forma vigente,
+> y la Fase I lo demostró con un contrato que **falló midiéndose contra el sistema** — `VER-02001`,
+> el 2026-08-27, con cuatro de sus cinco criterios incumplidos porque el documento pedía la forma
+> retirada. Los otros tres tramos conservan su fundamento intacto.
+>
+> **Y `§8` ya había previsto esto**, en el punto 3 de la suspensión: *«Los controles `V-4`, `V-6` y
+> `V-7` quedan sin población mientras no corra ningún tramo. **No se retiran: gobiernan cualquier
+> tramo que el Product Owner reactive**»*. Gobiernan `R-3`.
+>
+> **`R-3` se parte en cuatro unidades de entrega**, por volumen y para que cada una sea revisable:
+>
+> | Unidad | Alcance | Ocurrencias | Estado |
+> | --- | --- | --- | --- |
+> | **`R-3a`** | `GeometriaFactory-Api` · `03-UX-UI-DX` | **436** en 4 documentos | **Ejecutada el 2026-08-29** |
+> | `R-3b` | `GeometriaFactory-Api` · `02` y `08` | ~299 | Pendiente |
+> | `R-3c` | Nivel producto y `05` de las dos unidades | ~283 | Pendiente |
+> | `R-3d` | `GeometriaFactory-Web` entero y el resto | ~214 | Pendiente |
+>
+> **La población total del tramo es 1162 ocurrencias de uso propio en 115 documentos**, y **no 2499**:
+> las otras 1337 son filas de control de cambios, informes de auditoría, citas textuales y la propia
+> tabla de §6.8, que **§4.1 protege una por una**. Un renombre que las tocara **corregiría 1162 y
+> falsificaría 1337**.
+>
+> **Los dos huérfanos de §6.8.7 quedan fuera por construcción**, y el guion del tramo los excluye por
+> nombre: sin catálogo que los declare, traducirlos produciría una cita bien formada hacia un código
+> que no existe.
+
 > ### La decisión del Product Owner del 2026-08-13: los tramos que quedaban se **suspenden**
 >
 > **Los tramos ejecutados —`R-1`, `R-1b` y `R-2`— quedan como están.** Los que quedaban pendientes —`R-2b`, `R-3`, `R-4` y `R-5`— pasan a **suspendidos**.
@@ -2254,6 +2288,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.24 | 2026-08-29 | **§8 registra la reactivación de `R-3`**, decidida por el Product Owner el 2026-08-29. Es la primera vez que un tramo suspendido el 2026-08-13 vuelve a correr, y **el fundamento de la suspensión dejó de valer sólo para éste**: decía que los tramos *«renombraban identificadores en documentos que describen código que no existe»*, y para `F-03` el código existe y emite sus **56** códigos en la forma vigente. **Lo demostró un contrato de verificación fallando contra el sistema**, no una revisión de escritorio: `VER-02001`, el 2026-08-27, con cuatro de sus cinco criterios incumplidos. **Los otros tres tramos suspendidos conservan su fundamento intacto y siguen suspendidos.** §8 declara además la partición de `R-3` en **cuatro unidades**, la población real —**1162 ocurrencias de uso propio en 115 documentos, y no 2499**, porque §4.1 protege las otras 1337— y que **los dos huérfanos de §6.8.7 quedan fuera por construcción**. **`R-3a` queda ejecutada**: 436 ocurrencias en los 4 documentos de `GeometriaFactory-Api` `03-UX-UI-DX`. **Ninguna tabla del glosario cambia**: §6.8 es la fuente de este tramo y no su objeto. | Orquestador SDD |
 | 1.23 | 2026-08-16 | **Agrega §6.25, la vigesimosegunda tabla: las 14 filas del árbol del texto**, la mitad de la etapa `g` que le da nombre junto con la escena. Son **3 tipos** —`TextNode`, su conjunto cerrado de clases y el tipo de transferencia—, **6 valores**, **4 miembros** y **1 componente de superficie**. **La declaración va después de la escritura y queda registrada como apartamiento** del corolario 4 de §6.1. **Cinco clases CSS no necesitaron fila**: `gf-json-*` estaban portadas de la maqueta desde la etapa `b`, declaradas y sin usar, y esta etapa las estrena. **Y `Position` tampoco**: es la identidad posicional de §6.21.3, la misma sin traducir, que es lo que permite sincronizar el árbol con la escena. | Orquestador SDD |
 | 1.22 | 2026-08-16 | **Agrega §6.24, la vigesimoprimera tabla: las 7 filas de código y las 3 superficies servidas que [`ADR-08008`](Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md) necesita**, agregadas antes de escribir el identificador. Son **1 clase estática de composición**, **3 miembros** —entre ellos `PublishedSetting`, que tiene nombre propio porque **la llave es la decisión**—, **2 extensiones** que siguen el par `Add…`/`Map…` de `CompositionRoot`, **1 batería** y las **3 superficies**: las dos rutas servidas y la variable de entorno que las publica. **Ningún punto del producto lleva fila nueva y es lo que se esperaba**: `A-01` a `A-18` son los mismos, y lo que esta sección agrega **los describe sin tocarlos**. | Orquestador SDD |
 | 1.21 | 2026-08-16 | **Agrega §6.23, la vigésima tabla: las 12 filas de la capa 3 del visor**, que la etapa `a` dejó vacía y declarada para la `g`. Son **4 tipos** —la instancia viva, el resultado de dibujo, la pieza no dibujada y el resultado de malla—, **6 miembros** y **2 funciones de instrumentación**, que se declaran como tales: `liveInstanceCount` y `liveMeshCount` **no son superficie del producto**, son con lo que se mide `PT-02`, y por eso no vuelven séptima y octava a las seis funciones de la fachada. **Los siete códigos de condición del visor no necesitaron fila**: ya estaban en §6.9, y es la quinta etapa seguida en que el glosario alcanza. **Suma además el anfitrión**: los cuatro miembros con los que la superficie de envío previsualiza, la función del guion que dibuja, y **los dos atributos de marcado** que llevan de nueve a **once** los que `verify-stage-c.sh` autoriza —los dos son marcado servido, y el guion sigue midiendo cero salidas a la red—. | Orquestador SDD |
