@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Guia-Onboarding-Developer.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -278,7 +278,7 @@ El segundo resultado, que es el que tiene sentido de dominio, es **ver una guard
 
 | Given | When | Then |
 | --- | --- | --- |
-| Los datos de registro con apellido vacío y correo `ana@example.com` | La capa de aplicación solicita constituir el alumno | El dominio rechaza con el código `DATO_OBLIGATORIO_AUSENTE` y **no devuelve ninguna entidad** |
+| Los datos de registro con apellido vacío y correo `ana@example.com` | La capa de aplicación solicita constituir el alumno | El dominio rechaza con el código `REQUIRED_FIELD_MISSING` y **no devuelve ninguna entidad** |
 
 Y el contraste, que es CA-01 del mismo caso de uso:
 
@@ -292,7 +292,7 @@ Los dos criterios se materializan en `tests/GeometriaFactory.Domain.Tests` y se 
 
 Con el rechazo a la vista, el recorrido de lectura es siempre el mismo, y es lo que hay que automatizar en la cabeza:
 
-1. **El código** dice qué guarda se negó: `DATO_OBLIGATORIO_AUSENTE`.
+1. **El código** dice qué guarda se negó: `REQUIRED_FIELD_MISSING`.
 2. **El catálogo** ([`DX-Error-Messages.md`](DX-Error-Messages.md)) dice qué pasó, por qué pasó y qué hacer del lado del consumidor.
 3. **El caso de uso** que lo declara (§6 de CU-02001) dice cuál es la respuesta del dominio: rechaza la constitución, no se produce ninguna instancia, no hay efecto parcial.
 4. **La regla o el invariante** (§9 del mismo caso de uso) dice por qué la guarda existe.
@@ -312,11 +312,11 @@ Son las tres figuras que más se consultan durante la primera hora. Están compl
 | Auto-registro del alumno | CU-02001 | cuenta `Pendiente` | Sin valor: se fija **en el acto de habilitación** (CU-02002, que invoca la fijación de CU-02003) con la contraseña provisoria que el sistema produce (RN-02016) |
 | Configuración del administrador en el primer arranque | CU-02012 | cuenta **`Habilitado`** | Se aporta ya derivada en el mismo acto |
 
-**La cuenta del administrador nace habilitada porque es la que habilita a las demás**: ninguna cuenta anterior podría habilitarla a ella, y si naciera `Pendiente` por INV-06 tampoco obtendría acceso, de modo que la instancia quedaría inutilizable en el primer arranque. Cada camino **rechaza el del otro**, y por eso `ESTADO_INICIAL_NO_NEGOCIABLE` tiene causas opuestas en cada uno (`DX-Error-Messages.md` §1.4).
+**La cuenta del administrador nace habilitada porque es la que habilita a las demás**: ninguna cuenta anterior podría habilitarla a ella, y si naciera `Pendiente` por INV-06 tampoco obtendría acceso, de modo que la instancia quedaría inutilizable en el primer arranque. Cada camino **rechaza el del otro**, y por eso `INITIAL_STATUS_NOT_NEGOTIABLE` tiene causas opuestas en cada uno (`DX-Error-Messages.md` §1.4).
 
 Ningún estado vuelve a `Pendiente`. El administrador habilita, bloquea y rehabilita, siempre con acto explícito: no hay habilitación automática. La baja no es un estado: es la desaparición de la cuenta y de sus trabajos (RN-02007). Bloquear una cuenta `Pendiente` sin haber pasado por `Habilitado` no está declarado, y el dominio no lo infiere (CU-02002 FA-03).
 
-**Las cuatro operaciones alcanzan sólo a las cuentas con papel `Alumno`**, y no es una decisión del modelo: es el enunciado literal de la capacidad F-03, «habilitar, bloquear, rehabilitar y dar de baja física cuentas **de alumno**». Sobre la cuenta del administrador no procede ninguna de las cuatro, y el dominio las rechaza con `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`. El motivo es la contracara del anterior: **la cuenta que habilita a las demás no puede quedar en un estado del que nadie pueda sacarla**. Y el efecto no se agota en el acceso —que ya sería grave por INV-06—: **sin administrador nadie aprueba ni rechaza**, así que todo trabajo enviado queda en estado `Pendiente` para siempre y el circuito de revisión entero se detiene (RN-02010).
+**Las cuatro operaciones alcanzan sólo a las cuentas con papel `Alumno`**, y no es una decisión del modelo: es el enunciado literal de la capacidad F-03, «habilitar, bloquear, rehabilitar y dar de baja física cuentas **de alumno**». Sobre la cuenta del administrador no procede ninguna de las cuatro, y el dominio las rechaza con `OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT`. El motivo es la contracara del anterior: **la cuenta que habilita a las demás no puede quedar en un estado del que nadie pueda sacarla**. Y el efecto no se agota en el acceso —que ya sería grave por INV-06—: **sin administrador nadie aprueba ni rechaza**, así que todo trabajo enviado queda en estado `Pendiente` para siempre y el circuito de revisión entero se detiene (RN-02010).
 
 Las dos guardas, la del alta y la del ciclo de vida, son la misma familia vista en dos momentos, y es la propiedad que **INV-08** enuncia de una sola vez. **Está adoptado desde `PRODUCT-INTAKE` §17.1.P.2 · GeometriaFactory-Domain** y se cuenta entre los nueve invariantes vigentes de §7.1; la guía lo citaba como candidato y esa cita quedó desactualizada.
 
@@ -372,7 +372,7 @@ Y el contraste, que es CA-05 del mismo caso de uso y el ejemplo canónico de la 
 
 | Given | When | Then |
 | --- | --- | --- |
-| Un trabajo en `Borrador` del alumno A | El alumno B lo envía | El caso de uso devuelve el motivo `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` y **el validador doble registra 0 invocaciones** |
+| Un trabajo en `Borrador` del alumno A | El alumno B lo envía | El caso de uso devuelve el motivo `WORK_NOT_FOUND_FOR_REQUESTER` y **el validador doble registra 0 invocaciones** |
 
 Ese cero es lo que hay que mirar: la comprobación ocurrió **antes** de invocar al validador y antes de escribir nada. La pertenencia se verifica sobre el dato recuperado, no sobre lo que declara la petición (CU-04004 §10).
 
@@ -382,7 +382,7 @@ Ese cero es lo que hay que mirar: la comprobación ocurrió **antes** de invocar
 
 Con el motivo a la vista, el recorrido de lectura es siempre el mismo, y es lo que hay que automatizar en la cabeza:
 
-1. **El motivo** dice qué comprobación se negó: `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE`.
+1. **El motivo** dice qué comprobación se negó: `WORK_NOT_FOUND_FOR_REQUESTER`.
 2. **El catálogo** ([`DX-Error-Messages.md`](DX-Error-Messages.md)) dice qué pasó, por qué pasó y qué hacer —y de qué lado hacerlo, que acá no siempre es el del consumidor.
 3. **El caso de uso** que lo declara (§6 de CU-04004, CU-04005, CU-04006 o CU-04009) dice cuál es la respuesta: no procede, sin escritura y sin invocar al validador.
 4. **La regla de negocio** (§9 del mismo caso de uso) dice por qué la comprobación existe: RN-04003, que vive en `GeometriaFactory-Domain` y que esta capa **ejerce** sin volver a enunciarla.
@@ -397,10 +397,10 @@ Es el tramo que más rinde de la primera media hora, y el que se evalúa en el t
 
 | Se preguntó por | Negativa | ¿Oculta que el recurso existe? | Se traduce a |
 | --- | --- | --- | --- |
-| Un recurso que puede ser de otra persona | `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | **Sí, deliberadamente** | «No encontrado», **nunca** «no autorizado» |
-| Una facultad | `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | No, y no tiene por qué | Un mensaje explícito |
-| Un recurso fuera del alcance del papel | `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | No | Un mensaje explícito |
-| Cualquier cosa, desde una cuenta con la contraseña reseteada que no cambió su provisoria | `CAMBIO_DE_CONTRASENA_PENDIENTE` | No, y **corta antes que las otras tres** | La derivación al cambio de contraseña, que es lo único que esa cuenta puede hacer (INV-09, RN-04013) |
+| Un recurso que puede ser de otra persona | `WORK_NOT_FOUND_FOR_REQUESTER` | **Sí, deliberadamente** | «No encontrado», **nunca** «no autorizado» |
+| Una facultad | `ADMINISTRATOR_ROLE_REQUIRED` | No, y no tiene por qué | Un mensaje explícito |
+| Un recurso fuera del alcance del papel | `WORK_OUTSIDE_ADMINISTRATOR_SCOPE` | No | Un mensaje explícito |
+| Cualquier cosa, desde una cuenta con la contraseña reseteada que no cambió su provisoria | `PASSWORD_CHANGE_PENDING` | No, y **corta antes que las otras tres** | La derivación al cambio de contraseña, que es lo único que esa cuenta puede hacer (INV-09, RN-04013) |
 
 La frase que resume todo y conviene poder recitar: **el papel no reemplaza a la pertenencia, y la pertenencia no se confiesa.** Y antes que las tres, la cuarta: **una cuenta con la provisoria sin cambiar no ejerce ninguna capacidad**, ni siquiera las que su papel y su pertenencia admitirían.
 
@@ -491,7 +491,7 @@ Y una tercera lección, que es la que decide el escenario semilla del producto: 
 
 Con el código a la vista, el recorrido de lectura es siempre el mismo:
 
-1. **El código** dice qué no se pudo hacer: `RUTA_DEL_ALMACEN_NO_DISPONIBLE`.
+1. **El código** dice qué no se pudo hacer: `STORE_PATH_UNAVAILABLE`.
 2. **El catálogo** ([`DX-Error-Messages.md`](DX-Error-Messages.md)) dice qué pasó, por qué pasó y qué hacer —**y de qué lado hacerlo, que acá muchas veces es el del despliegue y no el del código**.
 3. **El caso de uso** que lo declara (§6 de CU-06010) dice cuál es la respuesta: el arranque se detiene y no se atiende ninguna petición.
 4. **La regla conceptual de modelo o la de negocio** (§9 del mismo caso de uso) dice por qué la condición existe.
@@ -529,10 +529,10 @@ Cuatro saltos, todos con enlace. Si en alguna condición la cadena se corta, es 
 | La batería de dominio tarda notablemente más de 10 segundos | Se coló una dependencia de entrada y salida en una prueba que debería ser pura y sin dobles | Buscar qué prueba toca algo externo. Este proyecto de código no tiene dependencias: una prueba que necesita preparar algo está probando otra capa |
 | Se busca dónde se guarda la entidad y no aparece | La persistencia está declarada como «no aplica» (§17.1.P.4 · GeometriaFactory-Domain). El dominio no guarda nada; la materialización es posterior y externa | Buscar en `GeometriaFactory-Infrastructure`. En el fallo de una operación de dominio no queda estado intermedio, justamente porque no guarda |
 | Se busca dónde se interpreta el texto del alumno | No está acá. La interpretación y el cálculo del valor derivado los hace el validador de figuras, detrás de un puerto de la capa de aplicación | `Definicion-Modelo-De-Dominio.md` §7. El dominio **recibe** el resultado de la interpretación por CU-02006 y CU-02007 |
-| La configuración del administrador rechaza con `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO`, o queda una cuenta de administrador `Pendiente` que nadie puede habilitar | Se está usando el camino del auto-registro para constituir el administrador. Son **dos caminos de alta distintos**, con estado inicial y credencial propios | Usar CU-02012, que constituye la cuenta `Habilitado` y con su credencial en el mismo acto. Es la corrección del P0: con el camino equivocado la instancia queda inutilizable en el primer arranque |
+| La configuración del administrador rechaza con `ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH`, o queda una cuenta de administrador `Pendiente` que nadie puede habilitar | Se está usando el camino del auto-registro para constituir el administrador. Son **dos caminos de alta distintos**, con estado inicial y credencial propios | Usar CU-02012, que constituye la cuenta `Habilitado` y con su credencial en el mismo acto. Es la corrección del P0: con el camino equivocado la instancia queda inutilizable en el primer arranque |
 | Se busca la comparación de contraseñas o la emisión del acceso | El dominio no implementa autenticación. Sí modela las reglas que la condicionan | [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.3 |
-| Una llamada de constitución rechaza con `UNICIDAD_DE_CORREO_NO_VERIFICADA` y el correo evidentemente está libre | El consumidor no **declaró** haber verificado la unicidad. El dominio no consulta: exige la declaración | Resolver la unicidad en la capa de aplicación con el puerto de repositorio y declararla al invocar (CU-02001 §3) |
-| Un envío rechaza con `ENVIO_SIN_INTERPRETACION` | Se envió un trabajo cuyo texto original nunca fue interpretado. El envío decide **sobre** el resultado de la interpretación | Invocar antes CU-02006 y CU-02007 con el resultado que produjo el validador, y recién después CU-02008 |
+| Una llamada de constitución rechaza con `EMAIL_UNIQUENESS_NOT_VERIFIED` y el correo evidentemente está libre | El consumidor no **declaró** haber verificado la unicidad. El dominio no consulta: exige la declaración | Resolver la unicidad en la capa de aplicación con el puerto de repositorio y declararla al invocar (CU-02001 §3) |
+| Un envío rechaza con `SUBMISSION_WITHOUT_PARSE_RESULT` | Se envió un trabajo cuyo texto original nunca fue interpretado. El envío decide **sobre** el resultado de la interpretación | Invocar antes CU-02006 y CU-02007 con el resultado que produjo el validador, y recién después CU-02008 |
 | Un envío devuelve el trabajo en `Borrador` y se lo interpreta como error | No es un error: es el resultado declarado del envío cuando hay al menos una observación de especie error de validación (CU-02008 FA-01). Las advertencias no lo impiden | No traducirlo a fallo hacia afuera: el alumno corrige y vuelve a enviar cuantas veces haga falta |
 | Se intenta corregir un trabajo `Rechazado` y todo rebota | `Rechazado` es terminal por decisión aceptada por escrito. Corregir un rechazo significa cargar un trabajo nuevo | CU-02010 FA-03. El rechazado queda como registro del intento y sólo el administrador puede quitarlo |
 | No se encuentra el identificador propio de una pieza | No existe: **la identidad de la pieza es su posición** en el conjunto raíz, porque el dato del alumno no trae identificador | `Definicion-Modelo-De-Dominio.md` §2.3 y §6. Por eso el orden del texto del alumno es significativo |
@@ -554,17 +554,17 @@ Cuatro saltos, todos con enlace. Si en alguna condición la cadena se corta, es 
 | Se busca el identificador del puerto de repositorio de cuentas y no aparece en el intake | Es correcto: el intake nombra tres puertos y no éste. Está declarado como **punto abierto** y esta sección no lo reabre | `Especificacion-Funcional.md` §3 y §11. Hasta que 05 lo fije, se lo nombra en lenguaje de dominio |
 | Se busca el nombre exacto de un tipo o de un espacio de nombres | Es el otro punto abierto declarado: se fija en 05 y se valida en el punto de control de la etapa `a` | `PRODUCT-INTAKE` §17.1.P.11 · GeometriaFactory-Application; `Especificacion-Funcional.md` §11 |
 | Un envío devuelve el trabajo en `Borrador` y se lo interpreta como error | No es un error y **no produjo ninguna condición del catálogo**: es el resultado declarado del envío cuando hay al menos una observación de especie error de validación (CU-04005 FA-01). Las advertencias no lo impiden | No traducirlo a fallo hacia afuera: el alumno corrige por CU-04004 y vuelve a enviar cuantas veces haga falta |
-| Un envío devuelve `INTERPRETACION_NO_DISPONIBLE` y se lo trata como dato inválido | No lo es: el puerto de validación no pudo completar la interpretación. El trabajo queda en `Borrador` con su texto intacto y el estado es **degradado**, no interpretado | Informar que la interpretación no está disponible. **No inventar observaciones y no pasar a estado `Pendiente`.** Esta capa no reintenta |
-| Un envío devuelve `OBSERVACION_MAL_FORMADA` y se busca qué corrigió mal el alumno | No es del alumno ni del consumidor: es un **defecto del adaptador del validador**, que devolvió un conjunto que el contrato no admite | Corregir el adaptador en `GeometriaFactory-Infrastructure`. Un conjunto mal formado no es un resultado que el alumno deba ver (CU-04005 §6) |
-| Una reedición rebota con `OPERACION_FUERA_DE_BORRADOR` y se lo confunde con la negativa de pertenencia | Son motivos distintos a propósito: acá **la existencia del trabajo ya está admitida para su dueño**, y lo que se niega es la operación, no el acceso | CU-04004 FA-03. **Ver** un trabajo propio sí procede en los cuatro estados; lo que se acota al borrador es operarlo |
+| Un envío devuelve `PARSE_RESULT_UNAVAILABLE` y se lo trata como dato inválido | No lo es: el puerto de validación no pudo completar la interpretación. El trabajo queda en `Borrador` con su texto intacto y el estado es **degradado**, no interpretado | Informar que la interpretación no está disponible. **No inventar observaciones y no pasar a estado `Pendiente`.** Esta capa no reintenta |
+| Un envío devuelve `MALFORMED_OBSERVATION` y se busca qué corrigió mal el alumno | No es del alumno ni del consumidor: es un **defecto del adaptador del validador**, que devolvió un conjunto que el contrato no admite | Corregir el adaptador en `GeometriaFactory-Infrastructure`. Un conjunto mal formado no es un resultado que el alumno deba ver (CU-04005 §6) |
+| Una reedición rebota con `OPERATION_OUTSIDE_DRAFT` y se lo confunde con la negativa de pertenencia | Son motivos distintos a propósito: acá **la existencia del trabajo ya está admitida para su dueño**, y lo que se niega es la operación, no el acceso | CU-04004 FA-03. **Ver** un trabajo propio sí procede en los cuatro estados; lo que se acota al borrador es operarlo |
 | Se busca cómo corregir un trabajo `Rechazado` y todo rebota | `Rechazado` es terminal por decisión aceptada por escrito. Corregir un rechazo significa cargar un trabajo nuevo | CU-04008 FA-03. El rechazado queda como registro del intento y sólo el administrador puede quitarlo, por CU-04009 |
-| Un alta rechaza con `CORREO_YA_REGISTRADO` aunque la consulta previa dijo que estaba libre | Es el camino declarado de CU-04001 FA-03: **la verificación previa no es una garantía por sí sola**, y la unicidad efectiva la sostiene también la capa que guarda | No materializar nada y devolver el motivo. Sin informar el estado ni el papel de la cuenta que ocupa el correo |
+| Un alta rechaza con `EMAIL_ALREADY_REGISTERED` aunque la consulta previa dijo que estaba libre | Es el camino declarado de CU-04001 FA-03: **la verificación previa no es una garantía por sí sola**, y la unicidad efectiva la sostiene también la capa que guarda | No materializar nada y devolver el motivo. Sin informar el estado ni el papel de la cuenta que ocupa el correo |
 | Dos correos que parecen el mismo se tratan como distintos | El criterio con el que dos correos se consideran el mismo es un **punto abierto declarado y no bloqueante**, que viene del dominio y esta categoría no reabre | `Especificacion-Funcional.md` §11. Lo resuelve 05 junto con la capa que ejerce la verificación |
 | Se busca dónde se enuncia una regla de negocio y no está | Las **dieciséis** reglas viven en `GeometriaFactory-Domain` y acá se **ejercen**, no se redactan. **Las dieciséis tienen archivo allá**, incluidas RN-04012 y RN-04013, que entraron con el `PRODUCT-INTAKE` 1.7, RN-04014 y RN-04015, que entraron con el 1.10, y **RN-04016**, que entró con el 1.13 | `Especificacion-Funcional.md` §6 dice, regla por regla, dónde se ejerce cada una en esta capa |
 | Se busca en CU-04001 el alta del administrador y no está | Son **dos caminos de alta con reglas opuestas** —estado inicial, credencial y ventana de alta—, y por eso son dos contratos: el auto-registro del alumno es CU-04001 y la configuración del administrador es CU-04010 | [`DX-Error-Messages.md`](DX-Error-Messages.md) §1.4, con la tabla de los cinco rasgos opuestos |
-| Un alta rechaza con `ESTADO_INICIAL_NO_NEGOCIABLE` y la causa parece contradecir a la del otro camino | No se contradicen: el enunciado es «el estado inicial de **este** camino no se elige», y cuál es ese estado lo fija el camino. `Pendiente` en el auto-registro, `Habilitado` en la configuración del administrador | Es el único motivo con fila completa en dos subsecciones del catálogo, con remisión mutua ([`DX-Error-Messages.md`](DX-Error-Messages.md) §3.1 y §3.10) |
+| Un alta rechaza con `INITIAL_STATUS_NOT_NEGOTIABLE` y la causa parece contradecir a la del otro camino | No se contradicen: el enunciado es «el estado inicial de **este** camino no se elige», y cuál es ese estado lo fija el camino. `Pendiente` en el auto-registro, `Habilitado` en la configuración del administrador | Es el único motivo con fila completa en dos subsecciones del catálogo, con remisión mutua ([`DX-Error-Messages.md`](DX-Error-Messages.md) §3.1 y §3.10) |
 | Se busca la cantidad de figuras del conjunto raíz y se la intenta derivar contando piezas | **No es derivable**: el conjunto de piezas adoptadas admite huecos, porque la posición de una figura no reconstruida queda reservada. La produce el validador al interpretar | §7.1 de esta guía. Sin ese dato el dominio no tiene rango contra el cual validar la posición de una observación |
-| Un envío rechaza con `CONJUNTO_DE_PIEZAS_MAL_FORMADO` o con `OBSERVACION_MAL_FORMADA` y se busca el motivo fino | Son **condiciones agregadas**: cada una reúne cuatro rechazos del dominio, y esta capa emite uno solo porque ninguno de los ocho es un resultado que el alumno deba ver | El motivo fino está en la 02 de `GeometriaFactory-Domain`. La agregación está declarada en [`DX-Error-Messages.md`](DX-Error-Messages.md) §2.5 |
+| Un envío rechaza con `MALFORMED_PIECE_SET` o con `MALFORMED_OBSERVATION` y se busca el motivo fino | Son **condiciones agregadas**: cada una reúne cuatro rechazos del dominio, y esta capa emite uno solo porque ninguno de los ocho es un resultado que el alumno deba ver | El motivo fino está en la 02 de `GeometriaFactory-Domain`. La agregación está declarada en [`DX-Error-Messages.md`](DX-Error-Messages.md) §2.5 |
 | Se busca en el catálogo un rechazo que el dominio declara y no aparece | Puede ser **inalcanzable por construcción**, equivalente a otro de esta capa, o estar agregado. Ninguna de las tres es un olvido, y las tres están declaradas | [`DX-Error-Messages.md`](DX-Error-Messages.md) §2.5, con las dieciséis filas y su lugar de declaración en la 02 |
 
 ### 4.4 `GeometriaFactory-Infrastructure`
@@ -579,7 +579,7 @@ Cuatro saltos, todos con enlace. Si en alguna condición la cadena se corta, es 
 | Una figura con `"Largo": 0.00` se descarta | Se está evaluando la **verosimilitud** del valor en lugar de la **existencia** del campo | Comparar por existencia. El escenario **E-6** es exactamente ese caso y exige que la figura se interprete |
 | El escenario semilla devuelve **3** advertencias en lugar de 2 | El operador de comparación no es estricto | Advertir cuando la diferencia es **mayor** que la tolerancia, no mayor o igual. El área del cilindro de E-1 difiere en exactamente 0.01 |
 | Se quiere «arreglar» el valor declarado que está mal | El producto **no corrige el dato del alumno**: lo señala. Es su mayor valor didáctico y una regla de negocio | Emitir la advertencia con **los dos valores** y dejar el texto intacto (RN-06008) |
-| Un texto ilegible devuelve `INTERPRETACION_NO_DISPONIBLE` | **Es la confusión más cara del producto.** Un texto que el alumno escribió mal es un **resultado**, no una avería | Devolver 0 figuras, 0 piezas y **una observación**. El criterio `CU-06001` CA-10 existe para eso |
+| Un texto ilegible devuelve `PARSE_RESULT_UNAVAILABLE` | **Es la confusión más cara del producto.** Un texto que el alumno escribió mal es un **resultado**, no una avería | Devolver 0 figuras, 0 piezas y **una observación**. El criterio `CU-06001` CA-10 existe para eso |
 | Se busca dónde el validador decide el estado del trabajo | No lo decide. Entrega el conjunto de observaciones y **el dominio resuelve** | `Especificacion-Funcional.md` §4. Un validador que decidiera el estado tendría dentro una regla que no le pertenece |
 | Se busca dónde comprobar que el solicitante es el dueño del trabajo | **Acá no se comprueba.** El recorte de la consulta **llega en el pedido**, ya decidido | `Especificacion-Funcional.md` §4. Lo único propio es negarse a resolver una consulta **sin** recorte |
 | La consulta de listado devuelve los componentes de las piezas | El listado **no los incluye**, y es una decisión de modelado con efecto en el tiempo de respuesta | `CU-06003` CA-04. El detalle sí los trae; el listado, nunca |
@@ -588,11 +588,11 @@ Cuatro saltos, todos con enlace. Si en alguna condición la cadena se corta, es 
 | Se busca dónde se guarda la contraseña en claro | **En ningún lado.** Se guarda su valor derivado, y el valor en claro no sale de `CU-06006` ni de `CU-06007` | `CU-06006` §7 y CA-07 |
 | Dos derivaciones de la misma contraseña dan valores distintos y parece un defecto | **No lo es**: es la propiedad esperada de una derivación con material aleatorio por credencial. Las dos verifican | `CU-06006` FA-03 y CA-04 |
 | Se quiere guardar la contraseña provisoria «por las dudas» | **No se guarda, no se registra y no se vuelve a producir.** Si se pierde, se resetea de nuevo | `CU-06007` §7 y CA-07. Guardarla vaciaría la regla que existe para que la clave no quede circulando |
-| El arranque se detiene con `MIGRACION_NO_APLICABLE` | El esquema del almacén no corresponde al linaje de transformaciones. Causa frecuente: **se editó una transformación ya fusionada** | Revisar el despliegue: restaurar el respaldo o revisar la transformación. **No descartar el almacén**: es el atajo que deja el servicio impecable y sin los trabajos de nadie |
-| El arranque se detiene con `RUTA_DEL_ALMACEN_NO_DISPONIBLE` | El volumen persistente no está montado | Revisar el montaje. **No caer hacia una ruta dentro de la imagen**: el servicio arrancaría y perdería todo en el siguiente reemplazo de versión |
+| El arranque se detiene con `MIGRATION_NOT_APPLICABLE` | El esquema del almacén no corresponde al linaje de transformaciones. Causa frecuente: **se editó una transformación ya fusionada** | Revisar el despliegue: restaurar el respaldo o revisar la transformación. **No descartar el almacén**: es el atajo que deja el servicio impecable y sin los trabajos de nadie |
+| El arranque se detiene con `STORE_PATH_UNAVAILABLE` | El volumen persistente no está montado | Revisar el montaje. **No caer hacia una ruta dentro de la imagen**: el servicio arrancaría y perdería todo en el siguiente reemplazo de versión |
 | Se busca el identificador del puerto de repositorio de cuentas y no aparece en el intake | Es correcto: el intake nombra tres puertos y no éste. Está declarado como **punto abierto** aguas arriba y esta sección **no lo reabre** | `Especificacion-Funcional.md` §11 |
 | Se busca si se ancla PBKDF2 o Argon2 | El intake declara «PBKDF2 o Argon2» y **no elige**. Es un punto abierto | `CU-06006` §10. El contrato declara la propiedad —nunca en claro, nunca resumen simple— y no el mecanismo |
-| Se busca qué hace el validador con el texto del escenario **E-8** | **Está declarado, y no es un punto abierto.** El `PRODUCT-INTAKE` **1.12** lo resolvió en §20.E-8 punto 5 y en la fila «Dimensión no legible» de §21: el desenlace del envío es **error**, el trabajo **queda en `Borrador`** y no pasa a `Pendiente`, con el mensaje localizado por índice de figura y campo. La condición `DIMENSION_NO_LEGIBLE`, en cambio, sigue siendo de la fachada del visor y no de esta capa | `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y §7, y `CU-06001` CA-12 |
+| Se busca qué hace el validador con el texto del escenario **E-8** | **Está declarado, y no es un punto abierto.** El `PRODUCT-INTAKE` **1.12** lo resolvió en §20.E-8 punto 5 y en la fila «Dimensión no legible» de §21: el desenlace del envío es **error**, el trabajo **queda en `Borrador`** y no pasa a `Pendiente`, con el mensaje localizado por índice de figura y campo. La condición `UNREADABLE_DIMENSION`, en cambio, sigue siendo de la fachada del visor y no de esta capa | `Definicion-Contrato-Del-Validador-De-Figuras.md` §6 y §7, y `CU-06001` CA-12 |
 | Se quiere agregar un texto de prueba nuevo | **No se inventan textos de prueba.** Es una regla de delivery del producto, y por eso los escenarios del intake son parte de su contrato | Usar los escenarios `E-1` a `E-7`. Si hace falta uno nuevo, lo decide el Product Owner sobre el intake |
 
 ## 5. Próximos pasos
@@ -717,7 +717,7 @@ No es un olvido y no hay que «completarlas». El motivo está declarado en `PRO
 
 Dos precisiones de ubicación, que evitan que alguien busque en la capa equivocada:
 
-- **INV-01 es del sistema y el dominio no lo puede verificar solo.** La unicidad se afirma sobre el conjunto de alumnos y una entidad no conoce a ese conjunto. Por eso el dominio la **exige declarada** —y rechaza con `UNICIDAD_DE_CORREO_NO_VERIFICADA` si no lo está— mientras quien la ejerce efectivamente es `GeometriaFactory-Application` con su puerto de repositorio.
+- **INV-01 es del sistema y el dominio no lo puede verificar solo.** La unicidad se afirma sobre el conjunto de alumnos y una entidad no conoce a ese conjunto. Por eso el dominio la **exige declarada** —y rechaza con `EMAIL_UNIQUENESS_NOT_VERIFIED` si no lo está— mientras quien la ejerce efectivamente es `GeometriaFactory-Application` con su puerto de repositorio.
 - **INV-06 se cumple aunque el acceso se materialice afuera.** El dominio modela la condición; el mecanismo que emite el acceso vive en `GeometriaFactory-Infrastructure` y en `GeometriaFactory-Api`. Es la frontera de autenticación de [`DX-Developer-Experience.md`](DX-Developer-Experience.md) §1.3.
 
 ### 7.3 El procedimiento de decisión
@@ -801,11 +801,11 @@ El patrón es siempre el mismo, y conviene poder reconocerlo antes de ver los ca
 
 | El atajo | Qué parece | Qué produce de verdad | Qué corresponde |
 | --- | --- | --- | --- |
-| **Componer la contraseña provisoria con un contador, con la fecha o con el correo** cuando la fuente de aleatoriedad no responde | Que el reseteo funcionó | Una provisoria **adivinable**. Y reproduce exactamente el defecto que la regla vino a cerrar: si la escribiera el docente, terminaría siendo la misma clave para toda la comisión — con un contador, termina siendo predecible **sin que nadie lo haya decidido** | Devolver `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` y **no completar el reseteo**. Un reseteo que no se completa es recuperable: se vuelve a intentar |
-| **Generar una clave de firma al vuelo**, o emitir sin firmar, cuando no hay clave provista | Que el servicio arrancó bien | Accesos que nadie puede verificar, o que cambian de validez en cada reinicio. **Nadie lo nota hasta que alguien falsifica uno** | Devolver `CLAVE_DE_FIRMA_AUSENTE`. La clave se provee en el despliegue, por variable de entorno o archivo montado, y **no entra al repositorio de código ni a la imagen** |
-| **Caer hacia una ruta dentro de la imagen** cuando el volumen no está montado | Que el almacén se creó y todo anda | El servicio acepta los trabajos de la comisión entera **y los pierde en el siguiente reemplazo de versión**. Nadie se entera hasta que alguien busca su trabajo y no está | Devolver `RUTA_DEL_ALMACEN_NO_DISPONIBLE` y **detener el arranque**. Es preferible un servicio caído y explicado a uno en pie sobre un almacén equivocado |
+| **Componer la contraseña provisoria con un contador, con la fecha o con el correo** cuando la fuente de aleatoriedad no responde | Que el reseteo funcionó | Una provisoria **adivinable**. Y reproduce exactamente el defecto que la regla vino a cerrar: si la escribiera el docente, terminaría siendo la misma clave para toda la comisión — con un contador, termina siendo predecible **sin que nadie lo haya decidido** | Devolver `RANDOMNESS_SOURCE_UNAVAILABLE` y **no completar el reseteo**. Un reseteo que no se completa es recuperable: se vuelve a intentar |
+| **Generar una clave de firma al vuelo**, o emitir sin firmar, cuando no hay clave provista | Que el servicio arrancó bien | Accesos que nadie puede verificar, o que cambian de validez en cada reinicio. **Nadie lo nota hasta que alguien falsifica uno** | Devolver `SIGNING_KEY_MISSING`. La clave se provee en el despliegue, por variable de entorno o archivo montado, y **no entra al repositorio de código ni a la imagen** |
+| **Caer hacia una ruta dentro de la imagen** cuando el volumen no está montado | Que el almacén se creó y todo anda | El servicio acepta los trabajos de la comisión entera **y los pierde en el siguiente reemplazo de versión**. Nadie se entera hasta que alguien busca su trabajo y no está | Devolver `STORE_PATH_UNAVAILABLE` y **detener el arranque**. Es preferible un servicio caído y explicado a uno en pie sobre un almacén equivocado |
 
-**Y un cuarto de la misma familia, el más destructivo de todos:** ante un esquema que no corresponde al linaje de transformaciones, **descartar el almacén y crearlo de nuevo**. Deja el servicio impecable y sin los trabajos de nadie. Corresponde `MIGRACION_NO_APLICABLE`, arranque detenido, y que una persona decida si restaura el respaldo o revisa la transformación.
+**Y un cuarto de la misma familia, el más destructivo de todos:** ante un esquema que no corresponde al linaje de transformaciones, **descartar el almacén y crearlo de nuevo**. Deja el servicio impecable y sin los trabajos de nadie. Corresponde `MIGRATION_NOT_APPLICABLE`, arranque detenido, y que una persona decida si restaura el respaldo o revisa la transformación.
 
 **Las tres reglas de negocio que sólo se rompen acá siguen el mismo patrón**, y por eso conviene leerlas juntas con esto: normalizar el texto al guardarlo no falla, compactar las posiciones no falla, y componer la provisoria por otro medio no falla. **Las tres se rompen produciendo algo válido**, y por eso sus criterios de aceptación comparan, cuentan o inspeccionan en lugar de esperar que algo se caiga.
 
@@ -831,4 +831,5 @@ La prueba de humo de todo el procedimiento: **si lo nuevo decide algo en lugar d
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3a` del renombre `F-03`** —«los 101 códigos de condición van a inglés», decisión del Product Owner del 2026-08-12, reconfirmada el 2026-08-29—, que **reanuda los tramos que la [`Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **1.5** suspendió el 2026-08-13**. **30 ocurrencias** pasan de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**: el control de diff verificó que las 362 líneas modificadas del tramo difieren **exactamente** en un par del glosario y en nada más. | AG-00030 |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0**. Los absorbidos quedan archivados. Sube **major**. |
