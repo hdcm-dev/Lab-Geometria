@@ -3,10 +3,10 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Nivel:** Básico
-**Estado de esta carpeta:** **Esqueleto — sin código.**
-**Documento que la gobierna:** [`ejemplo-01-basico.md`](../../../SDD/Docs/Proyectos/GeometriaFactory-Application/10-Examples/ejemplo-01-basico.md) 1.0, del que este README es la copia corta de §1, §3 y §4
+**Estado de esta carpeta:** **IMPLEMENTADO el 2026-08-29. Su contrato NO cumple, y el motivo es un hallazgo del sistema y no del sample**: ver §4
+**Documento que la gobierna:** [`ejemplo-01-basico.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-01`, declarado en la §9 de ese documento
-**Sonda de sensado:** [`SD-01`](../../../SDD/Docs/Proyectos/GeometriaFactory-Application/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
+**Sonda de sensado:** `SD-04001` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, en estado `Sin verificar`
 
 **Comando previsto:**
 
@@ -32,10 +32,49 @@ Demostrar el camino de entrada al laboratorio tal como esta capa lo orquesta: co
 3. Ejecutar el sample: `dotnet run --project samples/application/01-basico`.
 4. Comparar la salida con §6 del documento que gobierna esta carpeta.
 
-## 4. Qué hay hoy acá, y qué falta
+## 4. Qué hay acá, y qué encontró
 
-Hoy esta carpeta tiene **sólo este README**. La carpeta se crea en la **pasada de diseño** de `Rules-Examples.md` §0.2, que le asigna exactamente esto: la carpeta esqueletada, con su README local y su comando previsto. El código del sample lo produce la **pasada de ejecución**, durante la codificación.
+**El sample está implementado y corre.** Once de las doce líneas del snapshot de §6 coinciden.
 
-**El comando previsto todavía no resuelve, y esta carpeta no promete lo contrario.** Es la consecuencia declarada de que el sample no esté implementado: el campo `evidencia` del contrato `VER-01` dice `No verificado — sin código`, sin fecha y sin salida, y la fila `SD-01` de la matriz de sensado nace en `Sin verificar`. Ninguna corrida se afirma acá.
+```bash
+dotnet run --project samples/application/01-basico              # ejecuta los cuatro actos
+dotnet run --project samples/application/01-basico -- --verificar   # y lo compara contra §6
+```
 
-**Qué va a vivir acá cuando la pasada de ejecución corra.** El árbol de archivos que el sample va a tener está declarado en la §5 del documento que gobierna esta carpeta, y la salida exacta que va a producir, en su §6. Los dos se escribieron antes que el código, a propósito.
+### La línea que no coincide, y por qué no se la ajustó
+
+```
+esperada: [4] Cuenta marcada pide listar sus trabajos: rechazado PASSWORD_CHANGE_PENDING
+obtenida: [4] Cuenta marcada pide listar sus trabajos: PROCEDIÓ — la capa de aplicación no
+          comprueba la marca
+```
+
+**`ConsultOwnWorksUseCase.ListAsync` no comprueba la marca de cambio pendiente.** Comprueba que haya
+solicitante y lista. **Ningún caso de uso de la capa de aplicación la comprueba**: la comprobación
+vive en `GeometriaFactory.Api/Endpoints/PendingPasswordChangeGuard.cs`, un intermediario de la capa
+que expone.
+
+**Y eso es exactamente la alternativa que `ADR-04004` descartó**, con su motivo escrito:
+
+> *«Comprobaciones en la capa que expone, con esta capa confiando en lo ya verificado — se descarta
+> porque desplazar la comprobación allá **la volvería inverificable con dobles**.»*
+
+**Es lo que acaba de pasar.** Este sample intentó verificarla con dobles y no pudo, porque la
+comprobación no está donde el ADR dice que está. El ADR predijo el síntoma y el sample lo produjo.
+
+**Por eso el snapshot no se toca.** Ajustarlo dejaría el sample en verde y borraría la única
+evidencia de que el código contradice una decisión aceptada. La línea queda fallando hasta que el
+Product Owner decida si se mueve la guarda o se cambia el ADR.
+
+### Un defecto propio, corregido y anotado
+
+La primera versión del acto `[4]` **contaba esa línea como rechazo antes de mirar el resultado**, y
+con eso el recuento final cuadraba con el snapshot **tapando** que la petición había procedido. Un
+sample que fuerza su propio número deja de servir para lo único que sirve.
+
+### Un desvío declarado de §5
+
+El árbol de §5 enumera **dos dobles** y esta carpeta trae **tres**: el acto `[4]` ejerce la puerta a
+través de una petición de listado, y esa petición entra por un caso de uso que declara el puerto de
+trabajos en su constructor. Se **agrega** un archivo y no se renombra ni se quita ninguno de los que
+§5 declara.
