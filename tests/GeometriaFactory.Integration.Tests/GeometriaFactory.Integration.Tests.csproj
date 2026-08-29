@@ -11,6 +11,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <!--
       Levanta la aplicación REAL en memoria y la golpea por HTTP (intake §17.5.P.6). Es lo que
       permite verificar el cableado que la composición arma, y no una reconstrucción de prueba

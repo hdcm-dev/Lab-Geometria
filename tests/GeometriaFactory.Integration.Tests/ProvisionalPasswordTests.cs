@@ -90,16 +90,32 @@ public sealed class ProvisionalPasswordTests
     [Fact]
     public void NoProvisionalDerivesFromAccountDataNorFromTheClock()
     {
-        // LOS FRAGMENTOS SON DE CUATRO CARACTERES O MÁS, y es a propósito: sobre un alfabeto de
-        // 56 caracteres, tres caracteres seguidos aparecen por azar con probabilidad suficiente
-        // como para hacer intermitente la prueba, y una prueba intermitente no verifica nada. Lo
-        // que garantiza la propiedad no es este barrido sino que **la invocación no recibe
-        // ninguno de estos datos**; el barrido es la comprobación de segunda mano.
+        // LOS FRAGMENTOS SON DE SEIS CARACTERES O MÁS, y el piso subió de cuatro a seis el
+        // 2026-08-27 PORQUE CUATRO NO ALCANZABA Y SE MIDIÓ. La emisión anterior razonaba que
+        // tres caracteres eran pocos y cuatro suficientes, sin medirlo; el alfabeto real tiene
+        // 57 caracteres y la comparación ignora mayúsculas, de modo que cada letra vale DOS de
+        // 57. Con 200 valores de doce caracteres, esta prueba fallaba por azar el **0,44 % de
+        // las corridas** —una de cada 227—, y los dos fragmentos de cuatro, `frre` y `Diaz`,
+        // aportaban 0,40 de ese 0,44. Con el piso en seis, veinte mil corridas simuladas dieron
+        // **cero** fallos. Se observó en vivo el 2026-08-27: la provisoria `NfB2afFrrE9F`
+        // contiene `FrrE`, y la batería —que es `QG-02`, bloqueante— salió en rojo sin que nada
+        // estuviera mal.
+        //
+        // QUÉ SE PIERDE Y POR QUÉ NO IMPORTA. Deja de barrerse el apellido suelto, que en este
+        // caso tiene cuatro letras. **Lo que garantiza la propiedad no es este barrido sino que
+        // la invocación no recibe ninguno de estos datos**; el barrido es la comprobación de
+        // segunda mano, y una derivación real dejaría un rastro mucho más largo que cuatro
+        // caracteres. Una prueba intermitente no verifica nada, y encima entrena a repetirla.
         string[] accountData =
         [
-            "alumna", "frre", "Diaz", "utn.edu.ar", "alumna@frre.utn.edu.ar",
+            "alumna", "frre.utn", "utn.edu.ar", "alumna@frre.utn.edu.ar",
             DateTimeOffset.UtcNow.ToString("O"), DateTimeOffset.UtcNow.ToString("yyyyMMdd"),
         ];
+
+        Assert.All(accountData, d => Assert.True(
+            d.Length >= 6,
+            $"El fragmento «{d}» tiene {d.Length} caracteres y el piso de esta prueba es 6. "
+            + "Un fragmento más corto la vuelve intermitente: ver el comentario de arriba."));
 
         var produced = Enumerable.Range(0, 200).Select(_ => Provisionals.Produce()!).ToArray();
 
