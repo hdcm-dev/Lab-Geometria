@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Testing.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -356,7 +356,7 @@ Decisión de esta categoría: **no se adopta un marco de especificaciones ejecut
 | Terminación controlada | Para todo caso de uso y todo estado inicial admisible, o el efecto se aplica entero o el estado queda como estaba y se devuelve la condición (`05` §4) |
 | Conjunto cerrado de condiciones | Para toda invocación que rechaza, el código devuelto pertenece a las **36** condiciones del catálogo |
 | Indistinguibilidad | Para todo trabajo ajeno y todo identificador inexistente, el motivo emitido es el mismo (`RN-04003`, `INV-02`) |
-| Precedencia de la cuarta comprobación | Para toda cuenta con la marca puesta y todo caso de uso salvo el reemplazo de `CU-04003` FA-05, el motivo emitido es `CAMBIO_DE_CONTRASENA_PENDIENTE` **cualquiera sea** el resultado de las otras tres comprobaciones |
+| Precedencia de la cuarta comprobación | Para toda cuenta con la marca puesta y todo caso de uso salvo el reemplazo de `CU-04003` FA-05, el motivo emitido es `PASSWORD_CHANGE_PENDING` **cualquiera sea** el resultado de las otras tres comprobaciones |
 
 ### 4.4 `GeometriaFactory-Infrastructure`
 
@@ -491,7 +491,7 @@ Fixtures compartidos:
 | --- | --- | --- |
 | `E-1` | Conjunto de 3 piezas y 2 advertencias, sin errores. El trabajo **pasa a `Pendiente` al enviarlo** | §20.E-1, punto 6 de «Qué verificar» |
 | `E-2` | 1 pieza con 2 bases y 4 laterales, 1 advertencia de volumen y ningún error. **Pasa a `Pendiente` con la advertencia asociada** | §20.E-2, puntos 4, 6 y 7 |
-| `E-3` | Advertencia de área con el par declarado 36.00 y derivado 54.00. Es el caso insignia de `ADVERTENCIA_SIN_LOS_DOS_VALORES` | §20.E-3, punto 2 |
+| `E-3` | Advertencia de área con el par declarado 36.00 y derivado 54.00. Es el caso insignia de `WARNING_MISSING_BOTH_VALUES` | §20.E-3, punto 2 |
 | `E-4` | **Cero observaciones en total.** Es el criterio negativo: el envío pasa a `Pendiente` sin ninguna observación que adoptar | §20.E-4, punto 4 |
 | `E-5` | Observación de severidad **`Error`** con **índice de figura 1** y **campo `Tipo`**; la primera pieza, válida, se interpreta igual. El trabajo **queda en `Borrador`** | §20.E-5, puntos 1 a 4 |
 | `E-6` | Una figura que **se interpreta** y produce a lo sumo una advertencia; el trabajo pasa a `Pendiente` | §20.E-6, puntos 1 a 3 |
@@ -621,6 +621,7 @@ Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión, salida S1** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.0 §4). Pasa de ser la estrategia del proyecto de código `GeometriaFactory-Api` a ser la de la **unidad de entrega**, absorbiendo las de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Las siete secciones llevan **una subsección por proyecto de código**, con su texto **transpuesto sin reescritura**: lo que cambia es el orden y no el contenido. Entra **§0**, que declara lo que sólo se ve con los cuatro juntos: los **cuatro pisos de cobertura** —90/85, 85/80, 85/80 y 75/70—, que **no se promedian**, con la constancia de que el único que baja el de su tipo es el del host y de que **su ADR sigue faltando**; y las **cuatro pirámides**, donde se ve que la invertida del host y la ausencia de integración en la capa de aplicación **son la misma decisión vista desde dos lados**, cosa que leídas por separado no se veía. La cabecera pasa de «Proyecto de código» a **unidad de entrega** y enumera los proyectos que la componen. Los tres documentos absorbidos quedan archivados. Sube **major**. |
 | --- | --- | --- |
 | 1.1 | 2026-08-11 | **`H-06`.** §2 fijaba el piso global en 75/70 **sin compararlo con la guía**, siendo el único de los siete proyectos de código cuyo piso **baja**: `Rules-Calidad-Y-Pruebas.md` §2.2 fija 80 % de aplicación para el tipo `rest-api` y exige un **ADR** para bajar cobertura. §2 declara ahora el apartamiento, con qué autoridad se hace —el intake §17.1.P.6 · GeometriaFactory-Api, rotulado [ASUNCIÓN]—, que **la autoridad de la fuente no reemplaza a la ADR**, y qué lo compensa. **`H-08`.** El mutation score de 60 % se atribuía a §2.2 sin decir que esa tabla lo pide para el tipo `library` y no para `rest-api`. **Ningún umbral se toca**: el 75/70 no se sube ni se da por justificado por venir de la fuente. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |

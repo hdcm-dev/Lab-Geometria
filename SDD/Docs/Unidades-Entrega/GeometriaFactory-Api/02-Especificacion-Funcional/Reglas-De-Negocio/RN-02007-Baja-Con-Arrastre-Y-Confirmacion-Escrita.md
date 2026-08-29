@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -43,7 +43,7 @@ Es la respuesta declarada del cliente al caso límite de la eliminación de una 
 
 ## 4. Consecuencia si se viola
 
-Rechazo. Una baja que declare conservar los trabajos se rechaza con el código `BAJA_SIN_ARRASTRE_DE_TRABAJOS`, y una baja que llegue sin la confirmación escrita no procede. En ninguno de los dos casos se elimina nada.
+Rechazo. Una baja que declare conservar los trabajos se rechaza con el código `DELETION_WITHOUT_WORK_CASCADE`, y una baja que llegue sin la confirmación escrita no procede. En ninguno de los dos casos se elimina nada.
 
 ## 5. CU afectados
 
@@ -62,3 +62,4 @@ Pruebas unitarias de dominio previstas en 08: rechazo de la baja que declara con
 | 1.2 | 2026-08-09 | Absorbe `PRODUCT-INTAKE` **1.7**. **El enunciado de la regla no cambia**; lo que cambia es una premisa de su justificación que quedó falsa: §2 declaraba que la baja era «la única salida disponible ante una contraseña olvidada», y el intake incorpora **F-26**, retira **X-2** y reescribe **CL-7** sobre el reseteo, que conserva la cuenta y sus trabajos (**RN-02012**, CU-02013). Se reescribe ese párrafo dejando en pie la exigencia de confirmación escrita, cuyo fundamento es la irreversibilidad y no la frecuencia. §3 suma que **el reseteo no dispara esta regla**. |
 | 1.3 | 2026-08-10 | **Cierra la parte del hallazgo `N-5`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0 que alcanza a este archivo. La **trazabilidad de cabecera** citaba «§11 (RN-B6)» como riesgo vigente; el intake **1.10** lo tachó el 2026-08-09 al quedar sin objeto su mitigación, porque F-26 conserva la cuenta y sus trabajos. La cita se conserva con la constancia de que está tachada y remite a **§7 CL-6**, que es donde vive hoy lo que sostenía. **El enunciado de esta regla, su ámbito, su verificación y su relación con el reseteo no cambian**: la baja sigue arrastrando los trabajos y sigue exigiendo confirmación escrita. Sube minor: corrige una referencia a una fila retirada. |
 | 1.4 | 2026-08-10 | **Cierra el hallazgo `C-08` (P2) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0.** La cabecera de trazabilidad declaraba derivarse del `PRODUCT-INTAKE` **1.7**, versión archivada, y pasa a declarar la **1.14**, vigente. La **1.7** es la versión cuya letra sobre **RN-02013** e **INV-09** fue precisada en la 1.8 y corregida en la 1.14, que es exactamente el punto donde el corpus más se equivocó. Se revisó el cuerpo antes de mover la cabecera y **no arrastra ninguna decisión de las versiones intermedias**: no queda en él ningún recuento de «quince reglas» ni de «diecisiete códigos», ninguna cita a la exclusión **X-2** como vigente y ninguna afirmación de que la marca de cambio de contraseña pendiente la ponga únicamente el reseteo. **Ningún contenido normativo de este documento cambia: la corrección es de trazabilidad.** Sube minor. |
+| 1.5 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

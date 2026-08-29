@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00026-Enviar-Un-Trabajo-Y-Ver-Sus-Observaciones.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -130,16 +130,16 @@ cambia el código de respuesta**.
 
 | Motivo interno | Código del contrato | Respuesta | Punto | Causa |
 | --- | --- | --- | --- | --- |
-| `DATO_OBLIGATORIO_AUSENTE` | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | A-10, A-11 | Falta el nombre, la fecha o el texto original. La respuesta **nombra el campo ausente** |
-| `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | `CONTRATO_TRABAJO_NO_ENCONTRADO` | `404` | A-11 | El identificador no existe, **o no es del solicitante**. **Las dos respuestas son indistinguibles**, y es lo que impide averiguar por tanteo qué identificadores existen (INV-02). **No se invoca el motor de interpretación** |
-| `ENVIO_FUERA_DE_BORRADOR` | `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | `409` | A-11 | Se fuerza un reenvío sobre un trabajo en `Pendiente`: **ya salió de las manos del alumno**. La respuesta **declara el estado actual y no ofrece forma de volver a `Borrador`, porque no existe** |
-| `TRANSICION_DESDE_ESTADO_TERMINAL` | `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | `409` | A-11 | Se fuerza un reenvío sobre un trabajo `Finalizado` o `Rechazado`. Los dos estados de cierre **son terminales y de ellos no sale ninguna transición** (INV-07), y el invariante **no los distingue entre sí** |
-| `INTERPRETACION_NO_DISPONIBLE` | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | A-10, A-11 | El motor no puede completar la interpretación. **Termina de forma controlada, deja el trabajo en `Borrador` con su texto intacto y no inventa observaciones ni lo pasa a `Pendiente`** |
-| `TEXTO_ORIGINAL_ALTERADO` | — | `500` | A-10, A-11 | Se aporta como texto original una versión **corregida** del que pegó el alumno. **El producto no edita el dato del alumno** (RN-02008) |
-| `CONJUNTO_DE_PIEZAS_MAL_FORMADO` | — | `500` | A-10, A-11 | Posición **repetida, negativa o fuera del rango** del conjunto raíz declarado; tipo desconocido; familia declarada que contradice al tipo; o reconstrucción sobre un trabajo terminal. **Un hueco no es un defecto**: es la posición reservada de FA-03 |
-| `OBSERVACION_MAL_FORMADA` | — | `500` | A-10, A-11 | Especie desconocida; error de validación **sin ubicación** siendo atribuible; advertencia **sin los dos valores**; u observación sobre una posición que **no pertenece al rango del conjunto raíz**. **Una posición reservada no es una posición inexistente** |
-| `TRABAJO_SIN_DUENO` | — | — | A-10 | No se aporta la identidad del solicitante. **Inalcanzable desde la superficie por construcción**: la identidad viene de la sesión que la guardia ya verificó. **Un trabajo sin dueño no es un trabajo** |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `403`, `503` | A-10, A-11 | `403` cuando el papel no alcanza; `503` cuando el almacén no está disponible o rechazó una escritura concurrente |
+| `REQUIRED_FIELD_MISSING` | `REQUIRED_FIELD_MISSING` | `400` | A-10, A-11 | Falta el nombre, la fecha o el texto original. La respuesta **nombra el campo ausente** |
+| `WORK_NOT_FOUND_FOR_REQUESTER` | `WORK_NOT_FOUND` | `404` | A-11 | El identificador no existe, **o no es del solicitante**. **Las dos respuestas son indistinguibles**, y es lo que impide averiguar por tanteo qué identificadores existen (INV-02). **No se invoca el motor de interpretación** |
+| `SUBMISSION_OUTSIDE_DRAFT` | `STATE_FORBIDS_UPDATE` | `409` | A-11 | Se fuerza un reenvío sobre un trabajo en `Pendiente`: **ya salió de las manos del alumno**. La respuesta **declara el estado actual y no ofrece forma de volver a `Borrador`, porque no existe** |
+| `TRANSITION_FROM_TERMINAL_STATUS` | `STATE_FORBIDS_UPDATE` | `409` | A-11 | Se fuerza un reenvío sobre un trabajo `Finalizado` o `Rechazado`. Los dos estados de cierre **son terminales y de ellos no sale ninguna transición** (INV-07), y el invariante **no los distingue entre sí** |
+| `PARSE_RESULT_UNAVAILABLE` | `UNCLASSIFIED_ERROR` | `503` | A-10, A-11 | El motor no puede completar la interpretación. **Termina de forma controlada, deja el trabajo en `Borrador` con su texto intacto y no inventa observaciones ni lo pasa a `Pendiente`** |
+| `ORIGINAL_JSON_ALTERED` | — | `500` | A-10, A-11 | Se aporta como texto original una versión **corregida** del que pegó el alumno. **El producto no edita el dato del alumno** (RN-02008) |
+| `MALFORMED_PIECE_SET` | — | `500` | A-10, A-11 | Posición **repetida, negativa o fuera del rango** del conjunto raíz declarado; tipo desconocido; familia declarada que contradice al tipo; o reconstrucción sobre un trabajo terminal. **Un hueco no es un defecto**: es la posición reservada de FA-03 |
+| `MALFORMED_OBSERVATION` | — | `500` | A-10, A-11 | Especie desconocida; error de validación **sin ubicación** siendo atribuible; advertencia **sin los dos valores**; u observación sobre una posición que **no pertenece al rango del conjunto raíz**. **Una posición reservada no es una posición inexistente** |
+| `WORK_WITHOUT_OWNER` | — | — | A-10 | No se aporta la identidad del solicitante. **Inalcanzable desde la superficie por construcción**: la identidad viene de la sesión que la guardia ya verificó. **Un trabajo sin dueño no es un trabajo** |
+| — | `UNCLASSIFIED_ERROR` | `403`, `503` | A-10, A-11 | `403` cuando el papel no alcanza; `503` cuando el almacén no está disponible o rechazó una escritura concurrente |
 
 **Un texto que no verifica no aparece en esta tabla, y no es un olvido.** El ensamblado de contratos lo
 declara **señal y no error**. Los cinco `500` son **defectos del motor o de la orquestación, y ninguno
@@ -201,9 +201,9 @@ reenvío rechazado no reemplaza el texto guardado**.
 
 - **El punto abierto del reenvío fuera de `Borrador` está cerrado, y las vistas de origen no lo
   habían absorbido.** Hasta el `PRODUCT-INTAKE` 1.29 el conjunto cerrado sólo tenía
-  `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, **acotado a la eliminación**, y este camino respondía `409`
+  `STATE_FORBIDS_DELETE`, **acotado a la eliminación**, y este camino respondía `409`
   con el genérico. La decisión del Product Owner del **2026-08-12** incorporó
-  `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR`, con destino `409`, para el envío y la reedición forzados.
+  `STATE_FORBIDS_UPDATE`, con destino `409`, para el envío y la reedición forzados.
   `CU-00006` 1.2 seguía declarándolo abierto; el alcance de esa propagación incompleta está en
   `CU-00023` §10.
 - **La cantidad de figuras del conjunto raíz no es derivable de las piezas adoptadas**, porque el
@@ -223,6 +223,7 @@ reenvío rechazado no reemplaza el texto guardado**.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **12 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe los puntos **A-10 y A-11** de `CU-00006` 1.2, `CU-04004` 1.1, `CU-04005` 1.2, `CU-02005` 1.1, `CU-02006` 1.2, `CU-02007` 1.2 y `CU-02008` 1.1 — **siete vistas de un solo acto**. La versión 1.0 de la tabla de consolidación cortaba esto en dos capacidades, «cargar y reeditar» y «enviar e interpretar», que es **el corte por capa disfrazado de corte por capacidad**: las propias fuentes declaran que el alumno tiene **una sola acción de guardado**. El motivo del recorte está en §2.1.2 del documento de consolidación. La unión no es la suma: el actor primario pasa a ser el alumno; el flujo va del texto pegado a la respuesta con las observaciones localizadas, **sin cortes por capa**; §6 queda en una sola tabla con el motivo interno y su traducción, con los cinco `500` declarados como **defectos que el alumno no debe ver** y `TRABAJO_SIN_DUENO` marcado **inalcanzable por construcción**; y los criterios se rehacen sobre la capacidad y quedan **dieciséis**, cubriendo los escenarios **E-1, E-2, E-4, E-5, E-6 y E-8** del intake, que las siete vistas cubrían por separado y con solapamiento. Los seis documentos absorbidos enteros quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

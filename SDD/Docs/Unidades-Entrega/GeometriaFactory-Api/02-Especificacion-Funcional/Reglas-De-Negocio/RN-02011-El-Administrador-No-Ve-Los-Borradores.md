@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02011-El-Administrador-No-Ve-Los-Borradores.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -42,7 +42,7 @@ Un trabajo en estado `Borrador` está fuera del alcance del administrador: no fo
 
 ## 4. Consecuencia si se viola
 
-Exclusión, no rechazo con explicación: el trabajo en `Borrador` simplemente no está en el alcance. Cuando se consulta explícitamente sobre uno, el dominio devuelve no procede con el motivo `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR`. Un listado del administrador que incluya un borrador viola la regla aunque no se opere sobre él.
+Exclusión, no rechazo con explicación: el trabajo en `Borrador` simplemente no está en el alcance. Cuando se consulta explícitamente sobre uno, el dominio devuelve no procede con el motivo `WORK_OUTSIDE_ADMINISTRATOR_SCOPE`. Un listado del administrador que incluya un borrador viola la regla aunque no se opere sobre él.
 
 ## 5. CU afectados
 
@@ -57,4 +57,5 @@ Pruebas unitarias de dominio previstas en 08: el predicado de alcance devuelve f
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-09 | Emisión inicial. Regla nueva del circuito de revisión que el Product Owner incorporó el 2026-08-08 y que `PRODUCT-INTAKE` 1.3 §4.1 declara. No existía en la fuente funcional original y no tiene invariante asociado, según §17.1.P.2 · GeometriaFactory-Domain. |

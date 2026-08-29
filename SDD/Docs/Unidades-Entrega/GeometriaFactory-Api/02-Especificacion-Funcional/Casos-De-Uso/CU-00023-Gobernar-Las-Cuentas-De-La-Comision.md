@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00023-Gobernar-Las-Cuentas-De-La-Comision.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -124,19 +124,19 @@ Lo que se guarda es su forma derivada.
 
 | Motivo interno | Código del contrato | Respuesta | Punto | Causa |
 | --- | --- | --- | --- | --- |
-| — | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | A-07, A-08 | Falta el identificador, la situación pretendida o el correo de confirmación. La respuesta **nombra el campo ausente** |
-| `CONFIRMACION_DE_BAJA_NO_COINCIDE` | `CONTRATO_CONFIRMACION_NO_COINCIDE` | `400` | A-08 | El correo escrito no coincide con el de la cuenta. **La baja no procede y la respuesta no devuelve el correo esperado.** La unidad de trabajo **no se abre** |
-| `CUENTA_INEXISTENTE` | `CONTRATO_ALUMNO_NO_ENCONTRADO` | `404` | A-07, A-08 | La cuenta referenciada no existe |
-| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | `403` | Los tres | Quien pide no tiene papel `Administrador`. **No se recupera ni se modifica nada.** Es una negativa **por facultad y no por pertenencia**: acá la existencia de la cuenta destino no se oculta, porque quien pregunta no está pidiendo un recurso ajeno sino ejerciendo una facultad que no tiene |
-| `TRANSICION_DE_CUENTA_NO_ADMITIDA` | `CONTRATO_ERROR_NO_CLASIFICADO` | `500` | A-07 | El par situación actual y transición no figura en la tabla. Conserva la situación actual |
-| `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | `403` | A-07, A-08 | Se pide **cualquiera de las cuatro operaciones** sobre la cuenta con papel `Administrador`. Ninguna tiene inversa posible: la instancia quedaría sin nadie capaz de habilitar, desbloquear y revisar (INV-05, RN-02001) |
-| `HABILITACION_SIN_CREDENCIAL_PROVISORIA` | — | `500` | A-07 | Se llegó a la transición de habilitación **sin la credencial derivada provisoria**, porque el mecanismo de producción o el de derivación no la entregaron. Conserva la situación actual: **no hay camino por el que una cuenta quede `Habilitado` sin credencial** |
-| `VALOR_DERIVADO_VACIO` | — | `500` | A-07 | El valor derivado de la provisoria llegó vacío. Desde que la provisoria la produce el sistema, esta condición **no puede nacer de lo que escriba una persona** sino de un defecto de quien la produce |
-| `BAJA_SIN_ARRASTRE_DE_TRABAJOS` | — | — | A-08 | Se pide la baja declarando que los trabajos se conservan. **Inalcanzable desde A-08 por construcción**: la superficie no declara ninguna opción de conservarlos, y la baja arrastra siempre |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | Los tres | El almacén no está disponible. **La respuesta no incluye su ruta** |
+| — | `REQUIRED_FIELD_MISSING` | `400` | A-07, A-08 | Falta el identificador, la situación pretendida o el correo de confirmación. La respuesta **nombra el campo ausente** |
+| `DELETION_CONFIRMATION_MISMATCH` | `CONFIRMATION_MISMATCH` | `400` | A-08 | El correo escrito no coincide con el de la cuenta. **La baja no procede y la respuesta no devuelve el correo esperado.** La unidad de trabajo **no se abre** |
+| `ACCOUNT_NOT_FOUND` | `STUDENT_NOT_FOUND` | `404` | A-07, A-08 | La cuenta referenciada no existe |
+| `ADMINISTRATOR_ROLE_REQUIRED` | `OPERATION_ADMIN_ONLY` | `403` | Los tres | Quien pide no tiene papel `Administrador`. **No se recupera ni se modifica nada.** Es una negativa **por facultad y no por pertenencia**: acá la existencia de la cuenta destino no se oculta, porque quien pregunta no está pidiendo un recurso ajeno sino ejerciendo una facultad que no tiene |
+| `ACCOUNT_TRANSITION_NOT_ALLOWED` | `UNCLASSIFIED_ERROR` | `500` | A-07 | El par situación actual y transición no figura en la tabla. Conserva la situación actual |
+| `OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT` | `OPERATION_ADMIN_ONLY` | `403` | A-07, A-08 | Se pide **cualquiera de las cuatro operaciones** sobre la cuenta con papel `Administrador`. Ninguna tiene inversa posible: la instancia quedaría sin nadie capaz de habilitar, desbloquear y revisar (INV-05, RN-02001) |
+| `ENABLE_WITHOUT_TEMPORARY_CREDENTIAL` | — | `500` | A-07 | Se llegó a la transición de habilitación **sin la credencial derivada provisoria**, porque el mecanismo de producción o el de derivación no la entregaron. Conserva la situación actual: **no hay camino por el que una cuenta quede `Habilitado` sin credencial** |
+| `EMPTY_DERIVED_VALUE` | — | `500` | A-07 | El valor derivado de la provisoria llegó vacío. Desde que la provisoria la produce el sistema, esta condición **no puede nacer de lo que escriba una persona** sino de un defecto de quien la produce |
+| `DELETION_WITHOUT_WORK_CASCADE` | — | — | A-08 | Se pide la baja declarando que los trabajos se conservan. **Inalcanzable desde A-08 por construcción**: la superficie no declara ninguna opción de conservarlos, y la baja arrastra siempre |
+| — | `UNCLASSIFIED_ERROR` | `503` | Los tres | El almacén no está disponible. **La respuesta no incluye su ruta** |
 
 **Los dos `403` de facultad llevan código propio desde el `PRODUCT-INTAKE` 1.29.**
-`CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` entró al conjunto cerrado el 2026-08-12 y nombra el
+`OPERATION_ADMIN_ONLY` entró al conjunto cerrado el 2026-08-12 y nombra el
 gobierno de cuentas entre sus tres caminos. **Fue un punto abierto de esta unidad hasta esa fecha**:
 ver §10. Los dos `500` no llevan código del contrato porque **son defectos, no resultados que el
 administrador deba ver**.
@@ -200,17 +200,17 @@ una parte».
 
 - **El punto abierto del papel insuficiente está cerrado, y las vistas de origen no lo habían
   absorbido.** Hasta el `PRODUCT-INTAKE` 1.29 el conjunto cerrado declaraba
-  `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` sólo para el desenlace, y estos caminos respondían
+  `OUTCOME_ADMIN_ONLY` sólo para el desenlace, y estos caminos respondían
   `403` **sin código propio**. La decisión del Product Owner del **2026-08-12** incorporó
-  `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR`, con destino `403`, y nombra exactamente tres
+  `OPERATION_ADMIN_ONLY`, con destino `403`, y nombra exactamente tres
   caminos: **gobierno de cuentas, listado de la comisión y reseteo**. La propagación llegó a
   [`Definicion-Superficie-HTTP.md`](../Definicion-Superficie-HTTP.md) §6 y §9, al índice maestro, a
   `05-Arquitectura-Tecnica` y a `03-UX-UI-DX`, **pero no a los casos de uso**, que seguían
   declarándolo abierto. **La consolidación lo absorbe**, y el hecho queda registrado porque es el tipo
   de propagación incompleta que sólo se ve al leer las vistas juntas.
-- **`CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA` está retirado y no se recicla.** Cubría una sola de las
+- **`OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT` está retirado y no se recicla.** Cubría una sola de las
   cuatro operaciones y dejaba las otras tres sin guarda, que es como se llegó al hallazgo H-01 de la
-  ronda r3. Toda cita anterior resuelve a `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, que
+  ronda r3. Toda cita anterior resuelve a `OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT`, que
   cubre las cuatro.
 - **La marca no se acumula.** Habilitar sobre una cuenta que ya la tenía puesta produce una provisoria
   nueva y **deja la marca puesta**: no hay estado intermedio que distinguir.
@@ -224,6 +224,7 @@ una parte».
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **15 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe `CU-00004` 1.3, `CU-04002` 1.3 y `CU-02002` 1.3, que eran **tres vistas de la misma capacidad**. La unión no es la suma: el actor primario pasa a ser el administrador; el flujo declara de punta a punta la producción, derivación, fijación y devolución **por una sola vez** de la provisoria, que las tres vistas contaban por tramos; §6 queda en **una sola tabla** con el motivo interno y su traducción, con `BAJA_SIN_ARRASTRE_DE_TRABAJOS` marcado **inalcanzable por construcción** desde A-08 en lugar de omitido, y con los tres `403` sin código del contrato declarados como **punto abierto** en un solo lugar; y los criterios se rehacen sobre la capacidad y quedan **catorce**, **con los dos `CA-08` del origen desambiguados** —eran dos criterios distintos con el mismo identificador— y con **CA-10** cubriendo las cuatro operaciones sobre la cuenta de administrador en un solo criterio. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

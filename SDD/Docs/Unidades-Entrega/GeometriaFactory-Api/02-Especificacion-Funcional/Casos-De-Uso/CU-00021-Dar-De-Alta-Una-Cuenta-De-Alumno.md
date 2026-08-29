@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00021-Dar-De-Alta-Una-Cuenta-De-Alumno.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -109,13 +109,13 @@ persona que se registra.
 
 | Motivo interno | Código del contrato | Respuesta | Causa |
 | --- | --- | --- | --- |
-| `CORREO_YA_REGISTRADO` | `CONTRATO_CORREO_YA_REGISTRADO` | `409` | El correo ya pertenece a una cuenta. **La respuesta no declara la situación ni el papel de esa cuenta** |
-| `DATO_OBLIGATORIO_AUSENTE` | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | Falta el correo, el nombre o el apellido. La respuesta **nombra el campo ausente** |
-| `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA` | — | — | Se aporta una credencial derivada en el auto-registro. **Inalcanzable desde A-02 por construcción**: la superficie no declara ningún campo de contraseña |
-| `ESTADO_INICIAL_NO_NEGOCIABLE` | — | — | Se pide constituir la cuenta en una situación distinta de `Pendiente`. **Inalcanzable desde A-02 por construcción**: la superficie no declara la situación |
-| `PAPEL_DE_ADMINISTRADOR_FUERA_DE_ESTE_CAMINO` | — | — | Se pide constituir una cuenta con papel `Administrador` por el auto-registro. **Inalcanzable desde A-02 por construcción**: la superficie no declara el papel. El camino correcto es `CU-00025` |
-| `UNICIDAD_DE_CORREO_NO_VERIFICADA` | — | — | Se solicita la constitución sin declarar que la unicidad fue comprobada. **Inalcanzable por construcción**: el paso 5 declara siempre la verificación que el paso 3 hizo |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | El almacén no está disponible. **La respuesta no incluye su ruta** |
+| `EMAIL_ALREADY_REGISTERED` | `EMAIL_ALREADY_REGISTERED` | `409` | El correo ya pertenece a una cuenta. **La respuesta no declara la situación ni el papel de esa cuenta** |
+| `REQUIRED_FIELD_MISSING` | `REQUIRED_FIELD_MISSING` | `400` | Falta el correo, el nombre o el apellido. La respuesta **nombra el campo ausente** |
+| `CREDENTIAL_NOT_ALLOWED_ON_REGISTRATION` | — | — | Se aporta una credencial derivada en el auto-registro. **Inalcanzable desde A-02 por construcción**: la superficie no declara ningún campo de contraseña |
+| `INITIAL_STATUS_NOT_NEGOTIABLE` | — | — | Se pide constituir la cuenta en una situación distinta de `Pendiente`. **Inalcanzable desde A-02 por construcción**: la superficie no declara la situación |
+| `ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH` | — | — | Se pide constituir una cuenta con papel `Administrador` por el auto-registro. **Inalcanzable desde A-02 por construcción**: la superficie no declara el papel. El camino correcto es `CU-00025` |
+| `EMAIL_UNIQUENESS_NOT_VERIFIED` | — | — | Se solicita la constitución sin declarar que la unicidad fue comprobada. **Inalcanzable por construcción**: el paso 5 declara siempre la verificación que el paso 3 hizo |
+| — | `UNCLASSIFIED_ERROR` | `503` | El almacén no está disponible. **La respuesta no incluye su ruta** |
 
 **Por qué los cuatro motivos inalcanzables se listan igual.** Son los invariantes que la constitución
 sostiene, y siguen valiendo: protegen a la cuenta de cualquier consumidor interno, no sólo del punto
@@ -167,7 +167,7 @@ deja efecto parcial: la unidad de trabajo no se abre hasta el paso 7.
 
 - **La unicidad del correo se verifica en la orquestación y no en la constitución**, porque exige
   conocer el conjunto de cuentas y la constitución verifica sobre una entidad. El invariante sigue
-  existiendo en las dos capas, y por eso `UNICIDAD_DE_CORREO_NO_VERIFICADA` figura en §6 aunque sea
+  existiendo en las dos capas, y por eso `EMAIL_UNIQUENESS_NOT_VERIFIED` figura en §6 aunque sea
   inalcanzable.
 - **La situación inicial no la elige quien pide el alta.** Se fija distinta en cada camino:
   `Pendiente` en el auto-registro y `Habilitado` en la configuración del administrador. RN-02001 e
@@ -185,6 +185,7 @@ deja efecto parcial: la unidad de trabajo no se abre hasta el paso 7.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **8 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe el punto **A-02** de `CU-00003` 1.5, `CU-04001` 1.0 y `CU-02001` 1.4, que eran **tres vistas por capa de la misma capacidad**. La unión no es la suma: el actor primario pasa a ser la persona que se registra, en lugar del código de la capa de arriba, y §2 registra por qué; el flujo es de punta a punta, de la petición a la cuenta materializada; §6 declara los motivos internos y su traducción a respuesta **en una sola tabla**, con los cuatro que la superficie vuelve **inalcanzables por construcción** marcados como tales en lugar de omitidos; y los criterios de aceptación se rehacen sobre la capacidad, con **CA-09** nuevo, que verifica en la superficie lo que las tres vistas verificaban por separado en cada capa. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

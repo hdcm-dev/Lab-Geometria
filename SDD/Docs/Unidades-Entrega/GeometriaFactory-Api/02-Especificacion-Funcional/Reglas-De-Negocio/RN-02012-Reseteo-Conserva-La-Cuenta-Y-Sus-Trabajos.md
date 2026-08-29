@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02012-Reseteo-Conserva-La-Cuenta-Y-Sus-Trabajos.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -44,7 +44,7 @@ Es la respuesta declarada del Product Owner al caso límite de la contraseña ol
 
 ## 4. Consecuencia si se viola
 
-Rechazo. Un reseteo que declare eliminar los trabajos del alumno o cambiar su estado de cuenta se rechaza con el código `RESETEO_CON_ARRASTRE_DE_TRABAJOS`, y no se reemplaza ninguna credencial ni se pone ninguna marca. El daño que la regla evita es exactamente el que hacía inutilizable al laboratorio: perder trabajos ya aprobados por un olvido de contraseña.
+Rechazo. Un reseteo que declare eliminar los trabajos del alumno o cambiar su estado de cuenta se rechaza con el código `RESET_WITH_WORK_CASCADE`, y no se reemplaza ninguna credencial ni se pone ninguna marca. El daño que la regla evita es exactamente el que hacía inutilizable al laboratorio: perder trabajos ya aprobados por un olvido de contraseña.
 
 ## 5. CU afectados
 
@@ -59,6 +59,7 @@ Pruebas unitarias de dominio previstas en 08: reseteo de la contraseña de una c
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.5 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.4 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. **§1 se precisa** para que el sujeto quede explícito —«el reseteo de **la contraseña** de una cuenta de alumno conserva la cuenta y **todos** sus trabajos», y «resetear la contraseña no es dar de baja la cuenta»—, **sin perder el enunciado ni su verificación**. |
 | 1.0 | 2026-08-09 | Emisión inicial, por la regla **RN-02012** que `PRODUCT-INTAKE` 1.7 §4.1 transcribe junto con la capacidad **F-26**. Declara el enunciado, la justificación como cierre de un agujero de diseño con el retiro de **X-2** y la reescritura de **CL-7**, el ámbito sobre los tres estados de cuenta y los cuatro de trabajo, el cierre sobre la cuenta de administrador, la correspondencia con **INV-09** compartida con RN-02013, y el código de rechazo con el que se verifica. |
 | 1.1 | 2026-08-09 | Absorbe la decisión del Product Owner sobre **quién produce la contraseña provisoria**: **la produce el sistema y no la escribe el administrador**, porque una provisoria escrita por el docente termina siendo la misma clave para toda la comisión. §3 corrige la última viñeta, que decía que «la elige el administrador» y quedó falsa. **El enunciado de la regla, su ámbito sobre los estados de cuenta, su consecuencia y su código de rechazo no cambian**; en particular, la viñeta que declara que el reseteo procede **cualquiera sea el estado de cuenta** ya era correcta y el Product Owner la ratificó. |

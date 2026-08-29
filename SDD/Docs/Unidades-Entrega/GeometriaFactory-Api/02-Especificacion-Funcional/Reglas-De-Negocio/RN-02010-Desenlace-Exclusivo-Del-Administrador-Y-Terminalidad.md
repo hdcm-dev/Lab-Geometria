@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -44,7 +44,7 @@ La terminalidad se decidió con su consecuencia a la vista: corregir un rechazo 
 
 ## 4. Consecuencia si se viola
 
-Rechazo. Una solicitud de desenlace sin papel de administrador se rechaza con el código `DESENLACE_SIN_PAPEL_DE_ADMINISTRADOR`; una sobre un trabajo que no está en estado `Pendiente`, con `DESENLACE_FUERA_DE_PENDIENTE`; y cualquier transición sobre un trabajo terminal, con `TRANSICION_DESDE_ESTADO_TERMINAL`. En los tres casos el trabajo queda exactamente como estaba.
+Rechazo. Una solicitud de desenlace sin papel de administrador se rechaza con el código `OUTCOME_REQUIRES_ADMINISTRATOR_ROLE`; una sobre un trabajo que no está en estado `Pendiente`, con `OUTCOME_OUTSIDE_SUBMITTED`; y cualquier transición sobre un trabajo terminal, con `TRANSITION_FROM_TERMINAL_STATUS`. En los tres casos el trabajo queda exactamente como estaba.
 
 ## 5. CU afectados
 
@@ -60,4 +60,5 @@ Pruebas unitarias de dominio previstas en 08: aprobación y rechazo admitidos de
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-09 | Emisión inicial. Regla nueva del circuito de revisión que el Product Owner incorporó el 2026-08-08 y que `PRODUCT-INTAKE` 1.3 §4.1 declara; §17.1.P.2 · GeometriaFactory-Domain declara INV-07 como el invariante que la expresa. No existía en la fuente funcional original. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02002-Correo-Del-Alumno-Unico.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -43,7 +43,7 @@ El invariante que la expresa como condición permanente es **INV-01**.
 
 ## 4. Consecuencia si se viola
 
-Rechazo del alta, con mensaje explícito hacia la persona que se registra: el intake declara que registrar dos veces el mismo correo «se rechaza con mensaje explícito» (§4.1). En el dominio, el alta invocada sin la comprobación declarada se rechaza con el código `UNICIDAD_DE_CORREO_NO_VERIFICADA` y no se constituye ninguna entidad.
+Rechazo del alta, con mensaje explícito hacia la persona que se registra: el intake declara que registrar dos veces el mismo correo «se rechaza con mensaje explícito» (§4.1). En el dominio, el alta invocada sin la comprobación declarada se rechaza con el código `EMAIL_UNIQUENESS_NOT_VERIFIED` y no se constituye ninguna entidad.
 
 ## 5. CU afectados
 
@@ -60,3 +60,4 @@ Pruebas unitarias de dominio previstas en 08: el alta invocada sin declarar la c
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. La regla existía en la fuente funcional pero `PRODUCT-INTAKE` no transcribía su enunciado, y esta categoría la había elevado como ambigüedad en su versión anterior en lugar de inventarla. El intake 1.3 §4.1 la transcribe y §17.1.P.2 · GeometriaFactory-Domain declara INV-01 como el invariante que la expresa. |
 | 1.1 | 2026-08-09 | Alcanzada por la **corrección del P0** reportado por `B-02-03-GeometriaFactory-Application-r1.md`. §3 ya declaraba que la regla se evalúa «en el alta de toda cuenta, de alumno y de administrador», pero §5 listaba un solo caso de uso porque el alta del administrador no tenía el suyo. Con **CU-02012** emitido, §5 lo suma y la trazabilidad regla → caso de uso vuelve a ser bidireccional. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

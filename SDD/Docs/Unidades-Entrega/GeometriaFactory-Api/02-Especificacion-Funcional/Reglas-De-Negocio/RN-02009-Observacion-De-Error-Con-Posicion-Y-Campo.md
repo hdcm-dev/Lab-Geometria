@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -42,7 +42,7 @@ El alumno no tiene que adivinar dónde falla su salida: la localización del def
 
 ## 4. Consecuencia si se viola
 
-Rechazo del conjunto de observaciones, con el código `ERROR_SIN_UBICACION`. El trabajo conserva las observaciones que tuviera y el consumidor debe volver a entregar el conjunto bien formado.
+Rechazo del conjunto de observaciones, con el código `ERROR_WITHOUT_LOCATION`. El trabajo conserva las observaciones que tuviera y el consumidor debe volver a entregar el conjunto bien formado.
 
 ## 5. CU afectados
 
@@ -59,3 +59,4 @@ Pruebas unitarias de dominio previstas en 08 con el escenario E-5 como caso prin
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe el enunciado que `PRODUCT-INTAKE` 1.3 §4.1 transcribe. Sube minor y archiva el estado anterior por `Master-Prompt.md` §5. §3 declara que **esta regla no tiene invariante asociado**, según §17.1.P.2 · GeometriaFactory-Domain, y liga el registro de la observación al envío, que es el momento en que la ubicación del error se le muestra al alumno para que corrija y vuelva a enviar. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

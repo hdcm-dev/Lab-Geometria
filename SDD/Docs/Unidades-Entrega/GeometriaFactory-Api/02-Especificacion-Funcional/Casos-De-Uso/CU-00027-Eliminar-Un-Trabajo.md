@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00027-Eliminar-Un-Trabajo.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -99,12 +99,12 @@ se excluyen.
 
 | Motivo interno | Código del contrato | Respuesta | Causa |
 | --- | --- | --- | --- |
-| — | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | La solicitud llega sin identificador de trabajo |
-| `TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE` | `CONTRATO_TRABAJO_NO_ENCONTRADO` | `404` | El identificador **no existe, o no es del solicitante, o está fuera de lo que ve**. **Las tres respuestas son indistinguibles**, y se traducen a «no encontrado» **y nunca a «no autorizado»** |
-| `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` | `CONTRATO_TRABAJO_NO_ENCONTRADO` | `404` | El administrador pide eliminar un trabajo en `Borrador`. **Es una de las tres del renglón anterior**: para él ese trabajo **no existe** |
-| `OPERACION_FUERA_DE_BORRADOR` | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | `409` | **El alumno** pide eliminar un trabajo **suyo** que no está en `Borrador`. La respuesta **declara el estado actual**. Es un motivo distinto del `404` porque acá **la existencia ya está admitida para su dueño**. **Este código no se produce nunca en el camino del administrador**, porque a él no lo acota ningún estado |
-| `PAPEL_NO_RECONOCIDO` | — | `500` | El papel declarado no pertenece al conjunto cerrado de dos valores. **Termina sin evaluar ninguna de las dos resoluciones.** Inalcanzable desde la superficie mientras el reclamo de papel de la sesión pertenezca al conjunto, y se conserva declarado porque **es el único camino por el que se eliminaría sin resolver alcance** |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | El almacén no está disponible |
+| — | `REQUIRED_FIELD_MISSING` | `400` | La solicitud llega sin identificador de trabajo |
+| `WORK_NOT_FOUND_FOR_REQUESTER` | `WORK_NOT_FOUND` | `404` | El identificador **no existe, o no es del solicitante, o está fuera de lo que ve**. **Las tres respuestas son indistinguibles**, y se traducen a «no encontrado» **y nunca a «no autorizado»** |
+| `WORK_OUTSIDE_ADMINISTRATOR_SCOPE` | `WORK_NOT_FOUND` | `404` | El administrador pide eliminar un trabajo en `Borrador`. **Es una de las tres del renglón anterior**: para él ese trabajo **no existe** |
+| `OPERATION_OUTSIDE_DRAFT` | `STATE_FORBIDS_DELETE` | `409` | **El alumno** pide eliminar un trabajo **suyo** que no está en `Borrador`. La respuesta **declara el estado actual**. Es un motivo distinto del `404` porque acá **la existencia ya está admitida para su dueño**. **Este código no se produce nunca en el camino del administrador**, porque a él no lo acota ningún estado |
+| `UNRECOGNIZED_ROLE` | — | `500` | El papel declarado no pertenece al conjunto cerrado de dos valores. **Termina sin evaluar ninguna de las dos resoluciones.** Inalcanzable desde la superficie mientras el reclamo de papel de la sesión pertenezca al conjunto, y se conserva declarado porque **es el único camino por el que se eliminaría sin resolver alcance** |
+| — | `UNCLASSIFIED_ERROR` | `503` | El almacén no está disponible |
 
 **Ninguna condición deja el trabajo a medio retirar:** o se va entero, con sus piezas y sus
 observaciones, o no se toca.
@@ -161,7 +161,7 @@ sin explicación.
 - **El `404` del administrador sobre un borrador es coherente con el listado.** Él **no ve**
   borradores (RN-02011), de modo que decirle que ese trabajo no existe **no es una mentira
   defensiva**: es exactamente lo que su alcance declara.
-- **`PAPEL_NO_RECONOCIDO` se conserva declarado aunque la superficie lo vuelva inalcanzable**, porque
+- **`UNRECOGNIZED_ROLE` se conserva declarado aunque la superficie lo vuelva inalcanzable**, porque
   es **el único camino por el que un retiro ocurriría sin resolver alcance**. Suponerlo imposible es
   como se termina borrando sin verificar.
 - **La eliminación no arrastra nada fuera del trabajo.** Es la operación opuesta a la baja de cuenta
@@ -171,6 +171,7 @@ sin explicación.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **7 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe el punto **A-12** de `CU-00006` 1.2 y `CU-04009` 1.1. **La versión 1.0 de la tabla de consolidación no le daba fila propia**: la llevaba como cola de «cargar, reeditar y eliminar un trabajo». El motivo del recorte está en §2.1.2 del documento de consolidación: la eliminación la ejercen **dos actores con reglas que se excluyen**, no interpreta ningún texto y no resuelve ningún estado. La unión no es la suma: los **dos** actores quedan declarados como primarios y **ninguno como caso especial del otro**; §6 declara en una sola tabla por qué `TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR` **comparte respuesta** con el trabajo ajeno y por qué el `409` del dueño **no es intercambiable** con el `404`; y los criterios se rehacen sobre la capacidad y quedan **diez**, con **CA-08** verificando en la superficie que el alcance no es un parámetro. El documento absorbido entero queda archivado en `_legacy/2026-08-16-consolidacion-8.5/` y citado desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

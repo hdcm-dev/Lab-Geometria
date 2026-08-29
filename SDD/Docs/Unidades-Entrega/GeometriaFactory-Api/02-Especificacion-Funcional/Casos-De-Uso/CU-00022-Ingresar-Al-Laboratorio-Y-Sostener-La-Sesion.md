@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -133,21 +133,21 @@ código de respuesta, según [`Definicion-Superficie-HTTP.md`](../Definicion-Sup
 
 | Motivo interno | Código del contrato | Respuesta | Causa |
 | --- | --- | --- | --- |
-| — | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | Falta el correo o falta la contraseña. La respuesta **nombra el campo ausente**, que es un dato de la petición y no de la cuenta |
-| `CUENTA_INEXISTENTE` | `CONTRATO_CREDENCIAL_INVALIDA` | `401` | El par no corresponde a ninguna cuenta. **Genérico: no declara cuál de los dos campos falló** |
-| `CUENTA_PENDIENTE`, `CUENTA_BLOQUEADA` | `CONTRATO_CUENTA_NO_HABILITADA` | `403` | La cuenta está `Pendiente` o `Bloqueado`. **Con motivo**, para que la persona sepa en qué situación está su cuenta |
-| `CAMBIO_DE_CONTRASENA_PENDIENTE` | `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | `403` | La cuenta tiene una provisoria sin cambiar, producida por **la habilitación (RN-02016) o por el reseteo**. El portal lo convierte en el desvío a **A-05**. **No se emite sesión** |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | El almacén no está disponible. **La respuesta no incluye su ruta** |
-| ~~`CREDENCIAL_NO_ESTABLECIDA`~~ | ~~`CONTRATO_CONTRASENA_NO_ESTABLECIDA`~~ | — | **Retirados** por RN-02016: habilitar produce y fija la provisoria, de modo que ninguna cuenta llega a estar habilitada sin credencial. **Los identificadores no se reciclan**, y quien busque el encaminamiento del primer ingreso encuentra la fila anterior. Se conserva tachado para que una cita vieja no quede sin respuesta |
+| — | `REQUIRED_FIELD_MISSING` | `400` | Falta el correo o falta la contraseña. La respuesta **nombra el campo ausente**, que es un dato de la petición y no de la cuenta |
+| `ACCOUNT_NOT_FOUND` | `INVALID_CREDENTIALS` | `401` | El par no corresponde a ninguna cuenta. **Genérico: no declara cuál de los dos campos falló** |
+| `ACCOUNT_PENDING`, `ACCOUNT_BLOCKED` | `ACCOUNT_NOT_ENABLED` | `403` | La cuenta está `Pendiente` o `Bloqueado`. **Con motivo**, para que la persona sepa en qué situación está su cuenta |
+| `PASSWORD_CHANGE_PENDING` | `PASSWORD_CHANGE_REQUIRED` | `403` | La cuenta tiene una provisoria sin cambiar, producida por **la habilitación (RN-02016) o por el reseteo**. El portal lo convierte en el desvío a **A-05**. **No se emite sesión** |
+| — | `UNCLASSIFIED_ERROR` | `503` | El almacén no está disponible. **La respuesta no incluye su ruta** |
+| ~~`CREDENTIAL_NOT_SET`~~ | ~~`PASSWORD_NOT_SET`~~ | — | **Retirados** por RN-02016: habilitar produce y fija la provisoria, de modo que ninguna cuenta llega a estar habilitada sin credencial. **Los identificadores no se reciclan**, y quien busque el encaminamiento del primer ingreso encuentra la fila anterior. Se conserva tachado para que una cita vieja no quede sin respuesta |
 
 ### 6.2 La guardia, sobre los once puntos
 
 | Código del contrato | Respuesta | Causa |
 | --- | --- | --- |
 | — | `401` | No hay sesión, está vencida, o su firma no corresponde. **Las tres responden igual**: el cuerpo no declara cuál de las tres ocurrió |
-| `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | `403` | El papel de la sesión no es el que el punto exige, **en el punto del desenlace** |
-| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | `403` | Ídem **fuera del desenlace**: gobierno de cuentas, listado de la comisión y reseteo. Entró al conjunto cerrado por el `PRODUCT-INTAKE` 1.29, y **hasta entonces esos tres caminos respondían sin código**: ver §10 |
-| `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | `403` | La cuenta tiene una provisoria sin cambiar. **Un solo código para todas las operaciones bloqueadas**, porque lo que le queda por hacer es siempre lo mismo |
+| `OUTCOME_ADMIN_ONLY` | `403` | El papel de la sesión no es el que el punto exige, **en el punto del desenlace** |
+| `OPERATION_ADMIN_ONLY` | `403` | Ídem **fuera del desenlace**: gobierno de cuentas, listado de la comisión y reseteo. Entró al conjunto cerrado por el `PRODUCT-INTAKE` 1.29, y **hasta entonces esos tres caminos respondían sin código**: ver §10 |
+| `PASSWORD_CHANGE_REQUIRED` | `403` | La cuenta tiene una provisoria sin cambiar. **Un solo código para todas las operaciones bloqueadas**, porque lo que le queda por hacer es siempre lo mismo |
 
 **El `401` de la guardia no lleva código del contrato, y es deliberado.** El conjunto cerrado no tiene
 ninguno que describa una sesión ausente o inválida, y **esta capa no inventa códigos**: lo que el
@@ -157,12 +157,12 @@ contrato no declara, no viaja como código.
 
 | Motivo interno | Código del contrato | Respuesta | Causa |
 | --- | --- | --- | --- |
-| — | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | Falta una de las dos contraseñas |
-| `CREDENCIAL_VIGENTE_NO_VERIFICADA` | `CONTRATO_CREDENCIAL_INVALIDA` | `401` | La vigente presentada no corresponde. Texto neutro, **y la marca, si estaba, sigue puesta** |
-| `CUENTA_NO_HABILITADA_PARA_CREDENCIAL` | `CONTRATO_CUENTA_NO_HABILITADA` | `403` | La cuenta está `Pendiente` o `Bloqueado`. La credencial **se conserva como estaba** |
-| `VALOR_DERIVADO_VACIO` | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | La contraseña nueva está vacía |
-| `CREDENCIAL_YA_FIJADA` | — | — | Se pide fijar por primera vez una credencial que ya tiene valor. **Inalcanzable desde A-05 por construcción**: este punto **sólo reemplaza**, y la fijación ocurre dentro de la habilitación, en `CU-00023` |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | El almacén no está disponible |
+| — | `REQUIRED_FIELD_MISSING` | `400` | Falta una de las dos contraseñas |
+| `CURRENT_CREDENTIAL_NOT_VERIFIED` | `INVALID_CREDENTIALS` | `401` | La vigente presentada no corresponde. Texto neutro, **y la marca, si estaba, sigue puesta** |
+| `ACCOUNT_NOT_ENABLED_FOR_CREDENTIAL` | `ACCOUNT_NOT_ENABLED` | `403` | La cuenta está `Pendiente` o `Bloqueado`. La credencial **se conserva como estaba** |
+| `EMPTY_DERIVED_VALUE` | `REQUIRED_FIELD_MISSING` | `400` | La contraseña nueva está vacía |
+| `CREDENTIAL_ALREADY_SET` | — | — | Se pide fijar por primera vez una credencial que ya tiene valor. **Inalcanzable desde A-05 por construcción**: este punto **sólo reemplaza**, y la fijación ocurre dentro de la habilitación, en `CU-00023` |
+| — | `UNCLASSIFIED_ERROR` | `503` | El almacén no está disponible |
 
 **Ninguna condición de las tres tablas emite una sesión que no correspondía, devuelve una contraseña
 —en claro ni derivada— ni la registra.** Y **ninguna condición de la guardia llega al caso de uso del
@@ -235,9 +235,9 @@ registrados.
   falla**. Por eso CA-07 y CA-08 cuentan puntos en lugar de ejercer uno, y por eso §9 pide una prueba
   estructural.
 - **El punto abierto del papel insuficiente fuera del desenlace está cerrado.** El conjunto cerrado
-  declaraba `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` para el desenlace y nada para los demás,
+  declaraba `OUTCOME_ADMIN_ONLY` para el desenlace y nada para los demás,
   y la guardia respondía `403` sin código. El `PRODUCT-INTAKE` **1.29** incorporó
-  `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` el **2026-08-12**, con destino `403`, para los
+  `OPERATION_ADMIN_ONLY` el **2026-08-12**, con destino `403`, para los
   tres caminos restantes. `CU-00002` 1.3 seguía declarándolo abierto: el alcance de esa propagación
   incompleta está en `CU-00023` §10.
 - **La marca se levanta en un solo lugar de todo el producto**, y es el reemplazo de FA-07. Ninguna
@@ -253,6 +253,7 @@ registrados.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **17 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe el punto **A-05** de `CU-00003` 1.5, `CU-00001` 1.5, `CU-00002` 1.3, `CU-04003` 1.3, `CU-02003` 1.3 y `CU-02004` 1.3, que eran **seis vistas de la misma capacidad**: el canje, la guardia y el cambio propio son tres tramos de una sola cosa —entrar y seguir estando dentro— y la admisibilidad y la credencial son cómo se resuelven adentro. La unión no es la suma: el actor primario pasa a ser la persona que entra; §6 se parte en **tres tablas por tramo** con el motivo interno y su traducción a respuesta en la misma fila, y declara `CREDENCIAL_YA_FIJADA` como **inalcanzable por construcción** desde A-05 en lugar de omitirlo; los criterios de aceptación se rehacen sobre la capacidad y quedan **dieciséis**, con **CA-08** unificando las tres condiciones del `401` de la guardia en una sola cuenta de 33 respuestas indistinguibles. La **fijación** de la primera credencial **no queda acá**: ocurre dentro de la habilitación y es de `CU-00023`, y §1 lo declara para que su ausencia no se lea como omisión. Los cinco documentos absorbidos enteros quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-00024-Resetear-La-Contrasena-De-Un-Alumno.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -117,14 +117,14 @@ siquiera parcialmente.** Lo que se guarda es su forma derivada.
 
 | Motivo interno | Código del contrato | Respuesta | Causa |
 | --- | --- | --- | --- |
-| — | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | `400` | La solicitud llega sin identificador de cuenta |
-| `CUENTA_INEXISTENTE` | `CONTRATO_ALUMNO_NO_ENCONTRADO` | `404` | La cuenta referenciada no existe. **Acá no se oculta nada**, porque la operación ya exigió la facultad de administrador |
-| `RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | `409` | Se pidió el reseteo sobre la cuenta con papel `Administrador`. **No es `403`**: quien pide **tiene** la facultad, y lo que no procede es la operación sobre esa cuenta. El camino que sí existe es el cambio de la propia contraseña, por **A-05** |
-| `FACULTAD_DE_ADMINISTRADOR_REQUERIDA` | `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | `403` | Quien pide no tiene papel `Administrador`. **No se recupera ni se modifica nada.** El código entró al conjunto cerrado por el `PRODUCT-INTAKE` 1.29 y **nombra el reseteo** entre sus tres caminos: ver §10 |
-| `VALOR_DERIVADO_VACIO` | — | `500` | El valor derivado de la provisoria llegó vacío. **Desde que la provisoria la produce el sistema, esta condición no puede nacer de lo que escriba una persona sino de un defecto de quien la produce**; se conserva declarada en lugar de suponerla imposible, **porque suponerla imposible es como se termina escribiendo una credencial vacía** |
-| `RESETEO_CON_ARRASTRE_DE_TRABAJOS` | — | — | La solicitud declara que el reseteo elimina los trabajos o cambia la situación. **Inalcanzable desde A-09 por construcción**: la superficie no declara ninguno de los dos efectos |
-| — | `CONTRATO_ERROR_NO_CLASIFICADO` | `503` | El almacén no está disponible **o el mecanismo de producción de la provisoria no respondió** |
-| ~~`CUENTA_NO_HABILITADA_PARA_CREDENCIAL`~~ | ~~`CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA`~~ | — | **Retirados.** El primero exigía que la cuenta estuviera habilitada, y el Product Owner resolvió que el reseteo no lo exige; el segundo rechazaba el reseteo sobre una cuenta sin credencial, porque el camino declarado para ella era el primer ingreso anónimo, que **RN-02016** suprimió. En los dos casos **es una causa que dejó de existir, no un rechazo que se relaja**, y su retiro cierra la tensión con **RN-02015**, que declara que el reseteo procede sobre `Pendiente`. **Ninguno de los identificadores se recicla.** Se conservan tachados para que una cita vieja no quede sin respuesta |
+| — | `REQUIRED_FIELD_MISSING` | `400` | La solicitud llega sin identificador de cuenta |
+| `ACCOUNT_NOT_FOUND` | `STUDENT_NOT_FOUND` | `404` | La cuenta referenciada no existe. **Acá no se oculta nada**, porque la operación ya exigió la facultad de administrador |
+| `RESET_LIMITED_TO_STUDENT_ACCOUNTS` | `RESET_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT` | `409` | Se pidió el reseteo sobre la cuenta con papel `Administrador`. **No es `403`**: quien pide **tiene** la facultad, y lo que no procede es la operación sobre esa cuenta. El camino que sí existe es el cambio de la propia contraseña, por **A-05** |
+| `ADMINISTRATOR_ROLE_REQUIRED` | `OPERATION_ADMIN_ONLY` | `403` | Quien pide no tiene papel `Administrador`. **No se recupera ni se modifica nada.** El código entró al conjunto cerrado por el `PRODUCT-INTAKE` 1.29 y **nombra el reseteo** entre sus tres caminos: ver §10 |
+| `EMPTY_DERIVED_VALUE` | — | `500` | El valor derivado de la provisoria llegó vacío. **Desde que la provisoria la produce el sistema, esta condición no puede nacer de lo que escriba una persona sino de un defecto de quien la produce**; se conserva declarada en lugar de suponerla imposible, **porque suponerla imposible es como se termina escribiendo una credencial vacía** |
+| `RESET_WITH_WORK_CASCADE` | — | — | La solicitud declara que el reseteo elimina los trabajos o cambia la situación. **Inalcanzable desde A-09 por construcción**: la superficie no declara ninguno de los dos efectos |
+| — | `UNCLASSIFIED_ERROR` | `503` | El almacén no está disponible **o el mecanismo de producción de la provisoria no respondió** |
+| ~~`ACCOUNT_NOT_ENABLED_FOR_CREDENTIAL`~~ | ~~`RESET_NOT_APPLICABLE_TO_PASSWORDLESS_ACCOUNT`~~ | — | **Retirados.** El primero exigía que la cuenta estuviera habilitada, y el Product Owner resolvió que el reseteo no lo exige; el segundo rechazaba el reseteo sobre una cuenta sin credencial, porque el camino declarado para ella era el primer ingreso anónimo, que **RN-02016** suprimió. En los dos casos **es una causa que dejó de existir, no un rechazo que se relaja**, y su retiro cierra la tensión con **RN-02015**, que declara que el reseteo procede sobre `Pendiente`. **Ninguno de los identificadores se recicla.** Se conservan tachados para que una cita vieja no quede sin respuesta |
 
 **Ninguna fila por cuenta no habilitada, y su ausencia es informativa.** El ensamblado de contratos lo
 declara explícitamente: de las dos causas de reseteo rechazado que se habían llegado a plantear, la de
@@ -190,7 +190,7 @@ revés.**
 ## 10. Notas y supuestos
 
 - **El punto abierto del papel insuficiente está cerrado.**
-  `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` entró al conjunto cerrado el **2026-08-12**
+  `OPERATION_ADMIN_ONLY` entró al conjunto cerrado el **2026-08-12**
   (`PRODUCT-INTAKE` 1.29) y **nombra el reseteo** entre sus tres caminos. `CU-00005` 1.3 seguía
   declarándolo abierto: el alcance de esa propagación incompleta está en `CU-00023` §10.
 - **`409` y `403` no son intercambiables acá, y la distinción es de diseño.** El `403` dice que quien
@@ -205,6 +205,7 @@ revés.**
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **9 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-16 | Emisión inicial, como **caso de uso consolidado** de la unidad de entrega por `Audit/Migracion-8.5-Consolidacion-Decidida.md` 1.2 §2.1. Absorbe `CU-00005` 1.3, `CU-04011` 1.5 y `CU-02013` 1.3, que eran **tres vistas de la misma capacidad**. La unión no es la suma: el actor primario pasa a ser el administrador, con el alumno como sujeto y el aula como canal; el flujo declara de punta a punta la producción, derivación, fijación y devolución **por una sola vez** de la provisoria; §6 queda en **una sola tabla** con el motivo interno y su traducción, con `RESETEO_CON_ARRASTRE_DE_TRABAJOS` marcado **inalcanzable por construcción** y **los dos códigos retirados en una sola fila tachada** en lugar de en tres prosas separadas; y los criterios se rehacen sobre la capacidad y quedan **doce**, con **CA-09** verificando en la superficie las cuatro ausencias que las tres vistas afirmaban en prosa. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-8.5/` y citados desde la cabecera. |
 
 ## 17. Compatibilidad de la superficie pública

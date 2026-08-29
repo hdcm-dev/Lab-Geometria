@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Definicion-Contrato-Del-Validador-De-Figuras.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -74,7 +74,7 @@ Siete, y todas son verificables:
 | G-6 | **El contrato no hace red y no lee configuración propia**: recibe texto y devuelve observaciones | `CU-06001` CA-11 |
 | G-7 | **Un texto que el alumno escribió mal es un resultado, no una avería**: produce observaciones, no la condición degradada | `CU-06001` CA-10 |
 
-**G-7 es la que más veces se rompe al implementar**, y por eso tiene criterio propio: un texto ilegible tiene que devolver observaciones y no `INTERPRETACION_NO_DISPONIBLE`, porque el segundo dejaría al alumno sin saber qué corregir.
+**G-7 es la que más veces se rompe al implementar**, y por eso tiene criterio propio: un texto ilegible tiene que devolver observaciones y no `PARSE_RESULT_UNAVAILABLE`, porque el segundo dejaría al alumno sin saber qué corregir.
 
 ## 5. Los tipos que reconstruye
 
@@ -146,7 +146,7 @@ Es la frontera que más se confunde, porque los dos leen el mismo texto y los do
 
 El intake lo declara sin ambigüedad: el bundle tolera las mismas claves que el backend y **eso no es duplicar la validación**, porque el backend decide si el trabajo es válido y el bundle sólo necesita saber de dónde sacar una dimensión.
 
-**La consecuencia práctica** está en el escenario E-8, y hay que leerla en dos mitades que no se mezclan. La **condición** `DIMENSION_NO_LEGIBLE` es de la fachada y no de acá: es el código con el que el bundle enumera la pieza que no dibujó. El **desenlace del envío**, en cambio, es de acá, porque el propio escenario declara que **decidir si el trabajo pasa a estado `Pendiente` es del validador, no del bundle** (punto 4), y el intake 1.12 fijó cuál es esa decisión: **error**, con el trabajo en `Borrador` (punto 5). Que la fachada no haya podido dibujar una pieza no dice, por sí mismo, si el trabajo verifica; lo que dice que no verifica es que **este** contrato tampoco pudo leer la dimensión.
+**La consecuencia práctica** está en el escenario E-8, y hay que leerla en dos mitades que no se mezclan. La **condición** `UNREADABLE_DIMENSION` es de la fachada y no de acá: es el código con el que el bundle enumera la pieza que no dibujó. El **desenlace del envío**, en cambio, es de acá, porque el propio escenario declara que **decidir si el trabajo pasa a estado `Pendiente` es del validador, no del bundle** (punto 4), y el intake 1.12 fijó cuál es esa decisión: **error**, con el trabajo en `Borrador` (punto 5). Que la fachada no haya podido dibujar una pieza no dice, por sí mismo, si el trabajo verifica; lo que dice que no verifica es que **este** contrato tampoco pudo leer la dimensión.
 
 ## 9. Puntos abiertos de este contrato
 
@@ -164,3 +164,4 @@ El intake lo declara sin ambigüedad: el bundle tolera las mismas claves que el 
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Documento de concepto central del proyecto de código. Declara las cuatro trampas del formato con lo que hace un lector ingenuo y lo que hace este contrato, las tres cosas que devuelve y la que no, las siete garantías con su criterio de verificación, el conjunto de tipos que reconstruye, los ocho escenarios del intake con lo que a este contrato le toca en cada uno, la cobertura completa de la batería obligatoria de nueve casos contra los criterios de aceptación de `CU-06001` y `CU-06002`, la frontera con la pieza que dibuja y los cuatro puntos abiertos. |
 | 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-01**: la fila `E-8` de §6 deja de decir «nada declarado» y lleva el resultado esperado que el intake 1.12 fija en §20.E-8 punto 5 —**1 observación de especie error de validación con posición 1 y campo `Largo`**, el ortoedro de la posición 0 reconstruido, la posición 1 reservada y el trabajo en `Borrador` por RN-06005—, con el fundamento de por qué es error y no advertencia; §9 retira el punto abierto correspondiente y pasa de cuatro a **tres**. **H-03**: la precisión 1 de §7 se rehace contra la fila vigente de §21, que ubica la verificación en las **etapas `f` y `g`** y no sólo en la visualización; en consecuencia **la batería de este proyecto de código pasa de nueve a diez casos**, con la décima fila mapeada a `CU-06001` **CA-12**, y la precisión 3 pasa de cinco a **seis** casos de estructura. §8 separa las dos mitades de E-8: la condición `DIMENSION_NO_LEGIBLE` sigue siendo de la fachada y el desenlace del envío es de este contrato. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. |
+| 1.2 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
