@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Definition-Of-Done.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -243,7 +243,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
 | Criterio **condicionado** no alcanzado | Deja de bloquear el cierre, porque su umbral es un valor rotulado [ASUNCIÓN] sin confirmar | Nadie: es el tratamiento declarado en [`Criterios-Validacion.md`](Criterios-Validacion.md) §6 | La medición y su distancia al umbral |
-| Mutation score **no exigible todavía** | `CV-34` se reporta «sin medir» hasta que la herramienta corra. **La composición de raíz queda exenta** con su fundamento | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
+| Mutation score **no exigible todavía** | `CV-00034` se reporta «sin medir» hasta que la herramienta corra. **La composición de raíz queda exenta** con su fundamento | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva, con la etapa en que se cierra |
 | **Puerta técnica que no pasa** | **No se admite excepción.** El intake §15 declara que detiene la planificación de las etapas que dependen de ella | El Product Owner decide la salida | La medición y la salida ejecutada |
 | **Punto de acceso agregado sin declarar su ubicación respecto de la guardia** | **No se admite.** Es el primer riesgo de `05` §9 y **nada falla cuando ocurre** | — | — |
@@ -257,9 +257,9 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
 | Criterio **condicionado** no alcanzado | Deja de bloquear el cierre de la etapa, porque su umbral es un valor rotulado [ASUNCIÓN] sin confirmar | Nadie: es el tratamiento declarado en [`Criterios-Validacion.md`](Criterios-Validacion.md) §6, no una excepción concedida | La medición y su distancia al umbral, en el informe de cierre |
-| Mutation score **no exigible todavía** | El criterio `CV-19` se reporta «sin medir» hasta que la herramienta esté elegida y corra | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7 |
+| Mutation score **no exigible todavía** | El criterio `CV-02019` se reporta «sin medir» hasta que la herramienta esté elegida y corra | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7 |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva en el backlog técnico, con la etapa en que se cierra |
-| Caso de prueba deshabilitado | **No se admite sin motivo escrito en su fila** del catálogo. Un caso deshabilitado sin motivo incumple `CV-21` | — | — |
+| Caso de prueba deshabilitado | **No se admite sin motivo escrito en su fila** del catálogo. Un caso deshabilitado sin motivo incumple `CV-02021` | — | — |
 | Historia que la etapa sólo ejerce parcialmente | **No se admite.** Es la misma regla que la DoR §3 declara para la entrada: una historia que no cabe entera en su etapa está mal cortada y se redivide | — | — |
 
 ### 2.3 `GeometriaFactory-Application`
@@ -267,9 +267,9 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
 | Criterio **condicionado** no alcanzado | Deja de bloquear el cierre de la etapa, porque su umbral es un valor rotulado [ASUNCIÓN] sin confirmar | Nadie: es el tratamiento declarado en [`Criterios-Validacion.md`](Criterios-Validacion.md) §6, no una excepción concedida | La medición y su distancia al umbral, en el informe de cierre |
-| Mutation score **no exigible todavía** | El criterio `CV-24` se reporta «sin medir» hasta que la herramienta esté elegida y corra | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
+| Mutation score **no exigible todavía** | El criterio `CV-04024` se reporta «sin medir» hasta que la herramienta esté elegida y corra | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva en el backlog técnico, con la etapa en que se cierra |
-| Caso de prueba deshabilitado | **No se admite sin motivo escrito en su fila** del catálogo. Un caso deshabilitado sin motivo incumple `CV-26` | — | — |
+| Caso de prueba deshabilitado | **No se admite sin motivo escrito en su fila** del catálogo. Un caso deshabilitado sin motivo incumple `CV-04026` | — | — |
 | Prueba que abre el almacén real | **No se admite en ninguna forma.** El intake §17.1.P.8 · GeometriaFactory-Application declara la puerta propia y bloqueante, y la salida correcta es **reubicar la prueba** en la batería de integración de `GeometriaFactory-Api` porque ahí es donde pertenece, no para esquivar la puerta | — | — |
 | Historia que la etapa sólo ejerce parcialmente | **No se admite.** Es la misma regla que la Definition of Ready declara para la entrada: una historia que no cabe entera en su etapa está mal cortada y se redivide | — | — |
 
@@ -278,7 +278,7 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
 | Criterio **condicionado** no alcanzado | Deja de bloquear el cierre, porque su umbral es un valor rotulado [ASUNCIÓN] sin confirmar | Nadie: es el tratamiento declarado en [`Criterios-Validacion.md`](Criterios-Validacion.md) §6 | La medición y su distancia al umbral, en el informe de cierre |
-| Mutation score **no exigible todavía** | El criterio `CV-30` se reporta «sin medir» hasta que la herramienta esté elegida y corra | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
+| Mutation score **no exigible todavía** | El criterio `CV-06030` se reporta «sin medir» hasta que la herramienta esté elegida y corra | — | El hueco de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 | **Adaptador de reloj sin mutation score** | Queda exento con su fundamento declarado: un umbral de mutación sobre una operación de una línea no aporta información | — | La fila correspondiente de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva, con la etapa en que se cierra |
 | Caso de prueba deshabilitado | **No se admite sin motivo escrito en su fila** del catálogo | — | — |
@@ -331,4 +331,5 @@ Se aplica cuando las **cinco** etapas que este proyecto de código toca —`a`, 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **6 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

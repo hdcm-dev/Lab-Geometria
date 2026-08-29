@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Versionado.md
-**Versión:** 3.0
+**Versión:** 3.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -33,14 +33,14 @@ De ahí que la clase de cambio se decida sobre **lo que la persona ve y puede ha
 
 | Clase | Qué la produce en esta unidad | Cómo se detecta |
 | --- | --- | --- |
-| **Mayor** | Se quita una superficie, una ruta o una acción que la persona tenía | El guion de demostración acumulativo (`QG-04`): un paso de una etapa anterior deja de pasar |
+| **Mayor** | Se quita una superficie, una ruta o una acción que la persona tenía | El guion de demostración acumulativo (`QG-10004`): un paso de una etapa anterior deja de pasar |
 | **Mayor** | Cambia el desenlace de una acción sin que la persona lo pida: lo que antes guardaba ahora rechaza, o al revés | El mismo, y las filas de la matriz de sensado de la superficie afectada |
-| **Mayor** | Se rompe una de las tres reglas de arquitectura: aparece una petición del navegador al servicio de datos, el bundle adquiere red o configuración, o un mensaje expone una dirección de servicio | `QG-05`, `QG-09` y `QG-08`, **con umbral 0 cada uno**. Ninguna compilación lo detecta |
+| **Mayor** | Se rompe una de las tres reglas de arquitectura: aparece una petición del navegador al servicio de datos, el bundle adquiere red o configuración, o un mensaje expone una dirección de servicio | `QG-10005`, `QG-10009` y `QG-10008`, **con umbral 0 cada uno**. Ninguna compilación lo detecta |
 | **Menor** | Se agrega una superficie, una ruta o una acción sin quitar ninguna | El guion de la etapa nueva |
 | **Menor** | Se agrega un estado a una superficie existente sin cambiar los que había | Las filas nuevas de la matriz de sensado |
 | **Parche** | Se corrige lo construido para que coincida con la línea de base visual aprobada | La fila de la matriz de sensado que registraba la deriva |
 
-**La tercera fila es la más importante de la tabla, y es la que distingue a este proyecto de código de todos los demás del producto.** `RA-01`, `RA-02` y `RA-03` son reglas de nivel producto (intake §14) y **este es el único proyecto de código desde el que se pueden violar las tres**, porque es el único que sirve el navegador. Un cambio que las rompe **compila, se publica y se ve bien**: sólo lo detectan los recuentos de `QG-05`, `QG-08` y `QG-09`.
+**La tercera fila es la más importante de la tabla, y es la que distingue a este proyecto de código de todos los demás del producto.** `RA-01`, `RA-02` y `RA-03` son reglas de nivel producto (intake §14) y **este es el único proyecto de código desde el que se pueden violar las tres**, porque es el único que sirve el navegador. Un cambio que las rompe **compila, se publica y se ve bien**: sólo lo detectan los recuentos de `QG-10005`, `QG-10008` y `QG-10009`.
 
 ### 1.2 `GeometriaFactory-Visor`
 
@@ -155,12 +155,12 @@ El del producto, heredado entero y sin variantes: **una rama por etapa** a parti
 
 **Reglas de protección de la rama principal**, que es lo que esta categoría aporta:
 
-- La fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2 que corren en el pull request: `QG-01`, y las inspecciones `QG-05` a `QG-10`.
+- La fusión exige los gates bloqueantes de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2 que corren en el pull request: `QG-10001`, y las inspecciones `QG-10005` a `QG-10010`.
 - **La rama principal es la que publica.** Es el único proyecto de código del producto donde fusionar puede desencadenar un despliegue por sí solo, y por eso el filtro de rutas del flujo importa: ver [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.
-- El cierre de la etapa exige además `QG-04` sobre el guion acumulativo y `QG-11` sobre las filas de la matriz de sensado que la etapa tocó.
+- El cierre de la etapa exige además `QG-10004` sobre el guion acumulativo y `QG-10011` sobre las filas de la matriz de sensado que la etapa tocó.
 - No se exige revisor humano independiente: `equipo_n` es 1 y el filtro es el punto de control bloqueante.
 
-**Las etapas que este proyecto de código toca son ocho** —`a` a `h`, **todas las comprometidas**—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../08-Calidad-Y-Pruebas/README.md) §6. Es el único proyecto de código del producto que las toca todas, y la consecuencia para esta categoría es que **su guion acumulativo crece en cada una**: en la etapa `h` `QG-04` verifica los pasos de las ocho.
+**Las etapas que este proyecto de código toca son ocho** —`a` a `h`, **todas las comprometidas**—, según [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2, citado por [`../08-Calidad-Y-Pruebas/README.md`](../08-Calidad-Y-Pruebas/README.md) §6. Es el único proyecto de código del producto que las toca todas, y la consecuencia para esta categoría es que **su guion acumulativo crece en cada una**: en la etapa `h` `QG-10004` verifica los pasos de las ocho.
 
 ### 4.2 `GeometriaFactory-Visor`
 
@@ -223,9 +223,9 @@ Hay una asimetría propia de este proyecto de código que conviene declarar, por
 | Los tipos de `GeometriaFactory-Contracts` **compilados adentro** | Con el estado del repositorio en esa etiqueta, **no con una versión de paquete** | No hay versión intermedia que resolver: `ADR-10003` de aquel proyecto de código lo decide como **compilación compartida** |
 | El **bundle del visor** como recurso estático generado | **Con el fuente que lo generó, y no con un archivo guardado**: no está versionado, se regenera en cada flujo | Volver a la etiqueta anterior **regenera** el bundle; no lo restaura. Es una propiedad y no un costo: un archivo restaurado podría no corresponder al fuente |
 
-**La tercera fila es la que suele leerse mal.** Que el bundle no esté en el repositorio no debilita a la etiqueta: la etiqueta apunta al **fuente del visor** en ese estado, y el flujo lo reconstruye. Lo que se pierde es la posibilidad de servir un bundle sin construirlo, que es precisamente lo que `QG-02` prohíbe.
+**La tercera fila es la que suele leerse mal.** Que el bundle no esté en el repositorio no debilita a la etiqueta: la etiqueta apunta al **fuente del visor** en ese estado, y el flujo lo reconstruye. Lo que se pierde es la posibilidad de servir un bundle sin construirlo, que es precisamente lo que `QG-10002` prohíbe.
 
-**Y una asimetría que esta unidad no puede resolver sola**: `ADR-10006` §6 de `GeometriaFactory-Visor` acepta que un cambio mayor del punto de extensión del bundle **no lo detecta ninguna compilación** desde este lado. La mitigación desde acá es `QG-09` —**0** invocaciones al interior del bundle, con las **6** funciones de la fachada como única vía— más la revisión.
+**Y una asimetría que esta unidad no puede resolver sola**: `ADR-10006` §6 de `GeometriaFactory-Visor` acepta que un cambio mayor del punto de extensión del bundle **no lo detecta ninguna compilación** desde este lado. La mitigación desde acá es `QG-12009` —**0** invocaciones al interior del bundle, con las **6** funciones de la fachada como única vía— más la revisión.
 
 ## 7. Política de cambios incompatibles
 
@@ -235,12 +235,12 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
-| Ante un cambio **mayor** de los de §1, el guion de demostración de la etapa **y los de todas las anteriores** pasan al **100 %** antes del punto de control | `QG-04`, con `TC-10035`. **Bloqueante** | Intake §17.2.P.6 · GeometriaFactory-Web y §15, regla de no-regresión acumulativa |
-| Ante un cambio **incompatible del contrato**, **las dos unidades desplegables se despliegan juntas** | El `QG-08` de `GeometriaFactory-Contracts`, que bloquea la publicación de la etapa. Tratamiento operativo en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2 | Intake §17.2.P.3 · GeometriaFactory-Contracts |
-| **0** advertencias de construcción | `QG-01`, en el paso 5 del flujo | Intake §17.2.P.8 · GeometriaFactory-Web; [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8, sexta métrica |
+| Ante un cambio **mayor** de los de §1, el guion de demostración de la etapa **y los de todas las anteriores** pasan al **100 %** antes del punto de control | `QG-10004`, con `TC-10035`. **Bloqueante** | Intake §17.2.P.6 · GeometriaFactory-Web y §15, regla de no-regresión acumulativa |
+| Ante un cambio **incompatible del contrato**, **las dos unidades desplegables se despliegan juntas** | El `QG-08008` de `GeometriaFactory-Contracts`, que bloquea la publicación de la etapa. Tratamiento operativo en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2 | Intake §17.2.P.3 · GeometriaFactory-Contracts |
+| **0** advertencias de construcción | `QG-10001`, en el paso 5 del flujo | Intake §17.2.P.8 · GeometriaFactory-Web; [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8, sexta métrica |
 | **0** apariciones de la dirección del servidor propio en el repositorio | Inspección del árbol de fuentes y del historial | [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8, primera métrica |
 | **0** etapas cerradas sin etiqueta | Inspección del historial contra el índice de informes de cierre | Intake §17.2.P.7 · GeometriaFactory-Web |
-| Toda **deriva mayor** contra la línea de base visual se resuelve corrigiendo lo construido o actualizando la línea de base con aprobación humana, **nunca por omisión** | `QG-11`, al cerrar la etapa | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
+| Toda **deriva mayor** contra la línea de base visual se resuelve corrigiendo lo construido o actualizando la línea de base con aprobación humana, **nunca por omisión** | `QG-10011`, al cerrar la etapa | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto | Revisión del pull request de la etapa, que **es** el punto de control | Intake §15, regla de delivery 3 |
 
 **Las seis métricas de [`ADR-10007`](../05-Arquitectura-Tecnica/Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) §8 se adoptan sin agregar ninguna**, y las cuatro que no figuran arriba como obligación de versionado figuran como gates en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2: la respuesta de la dirección pública, la salida hacia el servicio de datos, el bundle generado en el mismo flujo y las publicaciones que terminan sin comprobar.
@@ -254,9 +254,9 @@ Reemplaza a la política de obsolescencia de `Rules-Devops.md` §4.3, y el reemp
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
 | Una función nueva en la fachada recorre **los seis pasos** de [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) §5 **enteros**, incluida la consolidación en el intake | Criterio de salida de [`../08-Calidad-Y-Pruebas/Plan-Pruebas.md`](../08-Calidad-Y-Pruebas/Plan-Pruebas.md) §3, y Definition of Done §1.3 | `08` y `05` |
-| Un código de condición **sólo puede nacer en la categoría 02**; ninguno se acuña aguas abajo | `QG-08`, con `TC-12021`, comparando en las dos direcciones | `08` `Estrategia-Calidad.md` §3 |
+| Un código de condición **sólo puede nacer en la categoría 02**; ninguno se acuña aguas abajo | `QG-12008`, con `TC-12021`, comparando en las dos direcciones | `08` `Estrategia-Calidad.md` §3 |
 | **Perder una garantía es cambio mayor**, y las **siete** se verifican antes de fusionar | Objetivo **7 de 7** | `ADR-12006` §7 y §8 |
-| El bundle **nunca se edita a mano**; objetivo: exactamente **0** ediciones manuales | `QG-09` y `CV-30` | `ADR-12006` §8; `08` |
+| El bundle **nunca se edita a mano**; objetivo: exactamente **0** ediciones manuales | `QG-12009` y `CV-12030` | `ADR-12006` §8; `08` |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto; objetivo: **0** cambios mayores sin registro | Revisión del pull request de la etapa | `ADR-12006` §8 |
 
 **El antecedente que muestra que el procedimiento funciona ya ocurrió**: la sexta función de la fachada entró como cambio menor **sin romper a ningún anfitrión escrito contra las cinco anteriores** (`ADR-12006` §6, punto 3, y §7). El intake la consolidó en §17.2.P.3 · GeometriaFactory-Visor en su versión 1.6. Es el recorrido completo de los seis pasos, hecho una vez y registrado.
@@ -312,6 +312,7 @@ clase de afirmación que estos registros degradan.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **14 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Y entra §3.b, el prefijo de etiqueta, que este documento nunca emitió**: era un **P1** del audit. `GeometriaFactory-Api` lo emitió el 2026-08-18 y acá la fila de §3.1 siguió difiriendo el prefijo *«al punto de control de la etapa `a`»* —**que cerró el 2026-08-13 sin registrarlo**—, mientras la ronda 1 reescribía §5.b cuatro secciones más abajo. **No se decide nada nuevo**: el prefijo `v` ya estaba fijado y las cinco etiquetas del repositorio lo usan; lo que faltaba era declarar que esta unidad se rige por él. **Se corrige además una atribución falsa**: §5.b decía que la condición de reapertura «es la que §8 ya declara», y §8 no la declara —sus cinco obligaciones son sobre cómo crece la superficie, no sobre publicación—; **P2**. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
 | 2.2 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entra **§5.b, la semántica de sufijos de anticipo como ítem propio**, que `Rules-Devops.md` **6.0** §4.3 separa del conjunto de canales. **No se escribió nada nuevo**: §5.1 y §5.2 ya declaraban que no se usan, con su motivo —no hay canal donde publicar un anticipo y el anfitrión carga el archivo que la construcción produjo—. **No se difiere**: está contestado, con su condición de reapertura, que es la misma que §8 declara para el crecimiento del punto de extensión. Sube **minor**. |
 | 2.1 | 2026-08-17 | Entra **§9, el registro del avance y su responsable**, con los ítems **7 y 8** que `Rules-Devops.md` **4.2** §4.3 agregó: qué documento declara la etapa, **quién lo actualiza y en qué evento**, y el **instrumento preferido**, que es el subproducto del acto. Se declara que **manda el historial del repositorio** sobre `changelog.md`, y que el objetivo del 100 % de etiquetas por etapa cerrada está **incumplido en su totalidad** —cero etiquetas en el árbol—, sin cerrarlo acá. Reparación de la divergencia `D-06` de `Audit/Estado-Del-Destino-2026-08-17.md` §2. Sube **minor**. |

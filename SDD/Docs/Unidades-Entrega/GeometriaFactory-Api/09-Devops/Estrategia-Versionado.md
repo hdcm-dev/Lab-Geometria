@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Versionado.md
-**Versión:** 4.1
+**Versión:** 4.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -43,9 +43,9 @@ Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[
 
 | Clase que la compilación no detecta | Dónde se la atrapa en la canalización | Umbral |
 | --- | --- | --- |
-| **Configuración de intercambio** divergente entre los dos extremos | `QG-10`, en el stage `build` | **1** sola configuración declarada en el producto |
+| **Configuración de intercambio** divergente entre los dos extremos | `QG-00010`, en el stage `build` | **1** sola configuración declarada en el producto |
 | **Esquema del almacén** que no cierra | El stage `verificar-transformaciones` de `GeometriaFactory-Infrastructure`, y después el arranque en dos fases, que **detiene el arranque** si la preparación no se completó | 0 pasos manuales; el servicio **no escucha** si no cerró |
-| **Rutas** que cambian sin que el consumidor se entere | La batería de integración, que ejerce el servicio real por su protocolo | La batería entera en verde (`QG-02`) |
+| **Rutas** que cambian sin que el consumidor se entere | La batería de integración, que ejerce el servicio real por su protocolo | La batería entera en verde (`QG-00002`) |
 
 **La segunda fila tiene una propiedad que las otras dos no tienen**: su falla **no se puede ignorar en ejecución**. [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2 declara que **no hay modo de sólo lectura ni arranque parcial**, con el fundamento de que un servicio que atiende sobre un almacén en el que no se puede confiar es peor que uno que no arranca: «el segundo se nota en el despliegue, el primero se nota cuando alguien busca su trabajo y no está».
 
@@ -64,7 +64,7 @@ Se adoptan las **Conventional Commits 1.0.0**, con el mismo efecto sobre la vers
 
 **Precisiones propias de este proyecto de código, y las dos salen de `ADR-00008` §7.** Primera: **todo cambio del ensamblado de contratos entra con el despliegue de las dos piezas en la misma etapa**, de modo que el mensaje que lo introduce no puede quedar aislado en una rama que se fusione sola. Segunda: **la colección de peticiones se actualiza en la misma intervención en que cambia la superficie**; una confirmación que agrega un punto de acceso y no toca la colección deja la demostración de la etapa fallando, que es la señal correcta.
 
-**Y una tercera que esta categoría agrega, derivada de `QG-05`**: agregar un punto de acceso **es siempre un cambio que hay que declarar**, aunque sea aditivo, porque cambia el recuento de la guardia de admisión. No sube mayor por sí solo; lo que exige es que el pull request diga **de qué lado de la guardia queda**, y `TC-00007` lo verifica en las dos direcciones.
+**Y una tercera que esta categoría agrega, derivada de `QG-00005`**: agregar un punto de acceso **es siempre un cambio que hay que declarar**, aunque sea aditivo, porque cambia el recuento de la guardia de admisión. No sube mayor por sí solo; lo que exige es que el pull request diga **de qué lado de la guardia queda**, y `TC-00007` lo verifica en las dos direcciones.
 
 ### 2.2 `GeometriaFactory-Domain`
 
@@ -312,10 +312,10 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
 | **Ninguna ruta lleva prefijo ni sufijo de versión**, y ningún punto de acceso convive con una forma anterior de sí mismo | Inspección de los **quince** puntos | `ADR-00008` §7 y §8, primeras dos métricas |
-| **Todo cambio del ensamblado de contratos entra con el despliegue de las dos piezas en la misma etapa** | `QG-08` de `GeometriaFactory-Contracts`, que bloquea la **publicación de la etapa**; revisión de cada etapa que toque el ensamblado | Intake §17.1.P.3 · GeometriaFactory-Contracts; `ADR-00008` §8, sexta métrica |
-| La **colección de peticiones** se actualiza en la misma intervención en que cambia la superficie, **se reproduce en cinco pasos o menos y no inventa datos de prueba** | `QG-15`, con `TC-00035`, al cierre de la etapa que la incorpora | `ADR-00008` §7 y §8, cuarta y quinta métrica |
+| **Todo cambio del ensamblado de contratos entra con el despliegue de las dos piezas en la misma etapa** | `QG-08008` de `GeometriaFactory-Contracts`, que bloquea la **publicación de la etapa**; revisión de cada etapa que toque el ensamblado | Intake §17.1.P.3 · GeometriaFactory-Contracts; `ADR-00008` §8, sexta métrica |
+| La **colección de peticiones** se actualiza en la misma intervención en que cambia la superficie, **se reproduce en cinco pasos o menos y no inventa datos de prueba** | `QG-00015`, con `TC-00035`, al cierre de la etapa que la incorpora | `ADR-00008` §7 y §8, cuarta y quinta métrica |
 | **0** etapas cerradas sin etiqueta | Inspección del historial | `ADR-00008` §8, tercera métrica |
-| Un punto de acceso nuevo **declara de qué lado de la guardia queda** | `QG-05`, con `TC-00007` en las dos direcciones. **Exactamente 4 fuera, ni uno más** | `05` §9, primer riesgo |
+| Un punto de acceso nuevo **declara de qué lado de la guardia queda** | `QG-00005`, con `TC-00007` en las dos direcciones. **Exactamente 4 fuera, ni uno más** | `05` §9, primer riesgo |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto, **escrita en la rama de la etapa** | Revisión del pull request, que **es** el punto de control | Intake §17.1.P.7 · GeometriaFactory-Api |
 
 **Las seis métricas de `ADR-00008` §8 se adoptan sin agregar ninguna**, y las seis figuran arriba o en [`Guia-Publicacion-Image-Docker.md`](Guia-Publicacion-Image-Docker.md) §5.
@@ -329,7 +329,7 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
 | Ante un cambio mayor, **las dos caras se corrigen en la misma etapa** | Imposible por construcción: el artefacto de agrupación no compila. Se verifica en cada pull request | `ADR-04003` §2 y §8, segunda métrica |
-| **0** advertencias de construcción | `QG-01`, en el stage `build` | `ADR-04003` §8, primera métrica |
+| **0** advertencias de construcción | `QG-04001`, en el stage `build` | `ADR-04003` §8, primera métrica |
 | **0** paquetes publicados en un repositorio de paquetes | Inspección del pipeline | `ADR-04003` §8, tercera métrica |
 | **0** etapas cerradas sin etiqueta | Inspección de etiquetas contra el índice de informes de cierre | `ADR-04003` §8, cuarta métrica |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto | Revisión del pull request de la etapa, que **es** el punto de control | Intake §15, regla de delivery 3; `changelog.md` del árbol del intake §16 |
@@ -351,7 +351,7 @@ Esta sección reemplaza a la política de obsolescencia que `Rules-Devops.md` §
 | **Menor** | Agregar un tipo, una operación o un atributo opcional; **agregar un valor a un conjunto cerrado**, que obliga al consumidor a contemplarlo pero no rompe su compilación; agregar una condición de error al catálogo |
 | **Parche** | Corregir el comportamiento de una guarda para que cumpla el invariante que ya declaraba, sin cambiar la superficie |
 
-**La fila que conviene no perder de vista es la última de «mayor»**: perder un invariante es cambio mayor aunque ninguna firma se toque. No lo detecta ninguna herramienta de resolución de dependencias; lo detecta `QG-06`, que exige los **nueve** invariantes ejercidos con prueba de violación rechazada y sin dobles.
+**La fila que conviene no perder de vista es la última de «mayor»**: perder un invariante es cambio mayor aunque ninguna firma se toque. No lo detecta ninguna herramienta de resolución de dependencias; lo detecta `QG-02006`, que exige los **nueve** invariantes ejercidos con prueba de violación rechazada y sin dobles.
 
 **Desde cuándo hay superficie que versionar.** `ADR-02003` §2 declara que la superficie pública empieza a ser estable en el **punto de control de la etapa `a`**, cuando se fijan los nombres de tipos y de espacios de nombres que el intake §17.1.P.11 · GeometriaFactory-Domain deja abiertos. Todo lo anterior es prehistoria de versionado y no genera cambio mayor.
 
@@ -386,12 +386,12 @@ Se adopta el **versionado semántico 2.0.0**, con el formato `MAJOR.MINOR.PATCH[
 | Clase de cambio sobre la superficie de código | Ejemplo | ¿Lo detecta la compilación? |
 | --- | --- | --- |
 | **Mayor** | Un adaptador deja de implementar una operación del puerto que declara | Sí |
-| **Mayor** | Cambia el comportamiento observable de un adaptador sin cambiar su firma: una consulta de listado empieza a cargar componentes de pieza | **No.** Lo detecta `QG-10`, con umbral **0** |
-| **Mayor** | Cambia lo que se conserva del texto original del alumno | **No.** Lo detecta `QG-11`, con umbral **0** |
+| **Mayor** | Cambia el comportamiento observable de un adaptador sin cambiar su firma: una consulta de listado empieza a cargar componentes de pieza | **No.** Lo detecta `QG-06010`, con umbral **0** |
+| **Mayor** | Cambia lo que se conserva del texto original del alumno | **No.** Lo detecta `QG-06011`, con umbral **0** |
 | **Menor** | Se agrega un adaptador para un puerto nuevo que la capa de aplicación declaró | Sí, si falta |
 | **Parche** | Se corrige un adaptador para que cumpla lo que ya declaraba | — |
 
-**Las dos filas del medio son las que importan acá.** Son cambios mayores **que compilan**, y las dos tocan lo que la fuente protege con más fuerza: la regla de no cargar componentes en los listados (intake §17.1.P.12 · GeometriaFactory-Infrastructure) y la conservación íntegra del texto original (`RN-06008`, intake §17.1.P.11 · GeometriaFactory-Infrastructure punto 2). Ninguna herramienta de comparación de superficie las vería; las ven `QG-10` y `QG-11`, y por eso son gates.
+**Las dos filas del medio son las que importan acá.** Son cambios mayores **que compilan**, y las dos tocan lo que la fuente protege con más fuerza: la regla de no cargar componentes en los listados (intake §17.1.P.12 · GeometriaFactory-Infrastructure) y la conservación íntegra del texto original (`RN-06008`, intake §17.1.P.11 · GeometriaFactory-Infrastructure punto 2). Ninguna herramienta de comparación de superficie las vería; las ven `QG-06010` y `QG-06011`, y por eso son gates.
 
 ## 8. Política de obsolescencia y de cambios incompatibles
 
@@ -404,7 +404,7 @@ Lo que sí hay, y es obligatorio:
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
 | Todo cambio mayor recibe su **fila en el registro de cambios del producto**, `changelog.md` | Revisión del pull request de la etapa. Objetivo: **0** cambios mayores sin fila | `ADR-02003` §7 y §8 |
-| Un cambio mayor exige que los **nueve** invariantes se verifiquen por prueba antes de fusionar | `QG-06`, con `TC-02026` | `ADR-02003` §8, cuarta métrica |
+| Un cambio mayor exige que los **nueve** invariantes se verifiquen por prueba antes de fusionar | `QG-02006`, con `TC-02026` | `ADR-02003` §8, cuarta métrica |
 | Un elemento que se va a quitar se marca como obsoleto en la superficie antes de removerse, dentro de la misma etapa o de la siguiente | Revisión del pull request | Decisión de esta categoría: es lo único que la ausencia de plazos deja sin cubrir, y no cuesta nada en un producto de dos consumidores compilados juntos |
 | Toda etapa cerrada lleva su etiqueta | Inspección de etiquetas contra la lista de etapas cerradas. Objetivo: **100 %** | `ADR-02003` §8, segunda métrica |
 
@@ -436,10 +436,10 @@ Esta sección reemplaza además a la política de obsolescencia que `Rules-Devop
 | Obligación | Cómo se verifica | Fundamento |
 | --- | --- | --- |
 | **Ninguna transformación ya fusionada se edita** | Revisión del pull request de la etapa | Intake §17.1.P.7 · GeometriaFactory-Infrastructure; [`ADR-06007`](../05-Arquitectura-Tecnica/Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md) |
-| Las transformaciones **se aplican solas sobre un almacén inexistente**, sin paso manual | `QG-04`, en el stage `verificar-transformaciones` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure, criterio de aceptación de la etapa `c` |
-| **0** advertencias de construcción | `QG-01`, en `build` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure |
-| **0** componentes de pieza y **0** apariciones del texto original en una proyección de listado | `QG-10`, con `TC-06019` | Es una de las dos clases mayores que compilan (§1) |
-| **0** escrituras que reemplacen el texto original conservado | `QG-11`, con `TC-06016` y `TC-06021` | La otra clase mayor que compila (§1) |
+| Las transformaciones **se aplican solas sobre un almacén inexistente**, sin paso manual | `QG-06004`, en el stage `verificar-transformaciones` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure, criterio de aceptación de la etapa `c` |
+| **0** advertencias de construcción | `QG-06001`, en `build` | Intake §17.1.P.8 · GeometriaFactory-Infrastructure |
+| **0** componentes de pieza y **0** apariciones del texto original en una proyección de listado | `QG-06010`, con `TC-06019` | Es una de las dos clases mayores que compilan (§1) |
+| **0** escrituras que reemplacen el texto original conservado | `QG-06011`, con `TC-06016` y `TC-06021` | La otra clase mayor que compila (§1) |
 | **0** etapas cerradas sin etiqueta | Inspección del historial contra el índice de informes de cierre | Intake §15 y §17.1.P.7 · GeometriaFactory-Infrastructure |
 | Todo cambio mayor recibe su fila en el registro de cambios del producto | Revisión del pull request, que **es** el punto de control | Intake §15, regla de delivery 3 |
 | Los parámetros de derivación **viajan junto al valor derivado**, sin valor por defecto silencioso | Revisión, contra [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) | El mismo ADR |
@@ -497,6 +497,7 @@ clase de afirmación que estos registros degradan.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 4.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **16 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 4.1 | 2026-08-27 | **Default `E-01` de la mesa de evaluación del 2026-08-27** ([`../../../Audit/Mesa-2026-08-27.md`](../../../Audit/Mesa-2026-08-27.md)), que cierra la divergencia **`D-03'`** abierta desde el 2026-08-18. **§1 punto 4 y §4.1 afirmaban en absoluto que ninguna etapa se cierra sin etiqueta**, y el árbol tiene **cinco etiquetas para ocho etapas**. Los tres huecos —`c`, `d` y `f`— estaban justificados **en el registro de cambios del producto y no acá**, que es donde vive la regla que incumplen. Se escribe la excepción con su motivo —el prefijo de etiqueta no existía hasta el 2026-08-18 y las repuestas no podían anclarlas sin inventar el punto— y **la regla no se retira**: rige desde la fase `i` en adelante. Alternativa descartada: retirar el absoluto, que habría eliminado la obligación en vez de acotarla. |
 | 4.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Corrección propia de este documento**: §5.b decía «las **cuatro** subsecciones de abajo» y §5 tiene **tres** —5.1, 5.2 y 5.3—; la cuarta declaración de sufijos vive en §10.1. `Root-Rules.md` §10 R1, levantado como **P3**. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
 | 3.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). `Rules-Devops.md` sube a **6.0** y **parte cuatro ítems más** con la misma mecánica que la 5.0 aplicó al prefijo de etiqueta: la mitad bloqueada arrastraba a la que no lo estaba. Acá entra el que alcanza a este documento: **§5.b, la semántica de sufijos de anticipo como ítem propio**, separada del conjunto de canales del punto 5. **No se escribió nada nuevo**: las cuatro subsecciones de §5 ya declaraban que `-alpha`, `-beta` y `-rc` **no se usan**, con su motivo, y §5.b las reúne para que se lea contra el ítem de la regla que lo exige. **No se difiere y por eso no lleva la forma de `Root-Rules.md` §12.2**: está contestado, con su condición de reapertura. Sube **minor**: parte una sección y no cambia ninguna decisión. |

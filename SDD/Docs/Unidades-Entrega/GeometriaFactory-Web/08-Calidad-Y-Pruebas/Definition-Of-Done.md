@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Definition-Of-Done.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -133,8 +133,8 @@ Se aplica cuando la etapa `a`, el momento de medición y la etapa `g` están cer
 
 | Caso | Qué se flexibiliza | Quién lo aprueba | Qué queda registrado |
 | --- | --- | --- | --- |
-| **`CV-13` no alcanzado** | **Nada.** No es condicionado: lo rotulado [ASUNCIÓN] es la **forma de la puerta**, y el intake §22 `A-4` deja a salvo su carácter bloqueante | El Product Owner, con constancia escrita, como en cualquier criterio bloqueante | La medición, su distancia al umbral y la remediación, en el informe de cierre |
-| Cobertura de líneas **no exigible** | El criterio `CV-30` se declara «no aplica» mientras no exista proyecto de pruebas propio | — | El fundamento del intake §17.2.P.6 · GeometriaFactory-Web |
+| **`CV-10013` no alcanzado** | **Nada.** No es condicionado: lo rotulado [ASUNCIÓN] es la **forma de la puerta**, y el intake §22 `A-4` deja a salvo su carácter bloqueante | El Product Owner, con constancia escrita, como en cualquier criterio bloqueante | La medición, su distancia al umbral y la remediación, en el informe de cierre |
+| Cobertura de líneas **no exigible** | El criterio `CV-10030` se declara «no aplica» mientras no exista proyecto de pruebas propio | — | El fundamento del intake §17.2.P.6 · GeometriaFactory-Web |
 | Deriva **menor** | Se registra y **no bloquea** el cierre | — | La fila de la matriz, con su estado y su fecha |
 | Deuda técnica que una etapa no alcanza a cerrar | El criterio se difiere **una sola vez**, y sólo si no es de los bloqueantes de §1.3 | El Product Owner, en el punto de control | Una `BT-XX` nueva, con la etapa en que se cierra |
 | **Puerta técnica que no pasa** | **No se admite excepción.** El intake §15 declara que detiene la planificación de las etapas que dependen de ella y **no se arrastra como deuda**. Lo que se ejecuta es la salida que la puerta declara | El Product Owner decide la salida, no la excepción | La medición y la salida ejecutada |
@@ -170,11 +170,12 @@ Se aplica cuando la etapa `a`, el momento de medición y la etapa `g` están cer
 
 - [`../07-Plan-Sprint/Mini-Plan.md`](../07-Plan-Sprint/Mini-Plan.md) y cualquier plan **referencian** esta DoD y no la redefinen.
 - [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §5 declara que la DoD vive en esta categoría y que hasta su emisión gobernaban el cierre los criterios de transición del roadmap §5 y las dos puertas técnicas. **Con esta emisión ese interinato termina**: los criterios de transición del roadmap siguen valiendo a nivel producto, las dos puertas siguen siendo del intake, y esta DoD las incorpora sin redefinirlas.
-- Esa misma sección de la DoR nombra tres condiciones de cierre que **no son suyas**: los diez recorridos sin degradación, la medición de peticiones con los movimientos prendidos y la página integradora funcionando. **Las tres viven acá**, en `CV-14`, `CV-10` y `CV-12` respectivamente, y su ubicación queda así confirmada.
+- Esa misma sección de la DoR nombra tres condiciones de cierre que **no son suyas**: los diez recorridos sin degradación, la medición de peticiones con los movimientos prendidos y la página integradora funcionando. **Las tres viven acá**, en `CV-12014`, `CV-12010` y `CV-12012` respectivamente, y su ubicación queda así confirmada.
 - Todo cambio en los criterios de §1 se registra en §4 y se comunica en el punto de control siguiente.
 
 ## 4. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **3 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

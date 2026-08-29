@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Calidad.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -135,7 +135,7 @@ Se declaran aparte de los gates porque su consecuencia es distinta: el intake §
 | QG-08 | Los códigos de condición son exactamente **siete** y **ninguno se acuña aguas abajo**; un curso nuevo se agrega como fila de curso y no como código | `TC-12021`, contra §6 del contrato de fachada | Se rechaza en revisión |
 | QG-09 | El bundle **nunca se edita a mano**: es un artefacto generado y reproducible | Revisión del pull request de la etapa (intake §17.2.P.7 · GeometriaFactory-Visor) | Se rechaza en revisión |
 
-**No hay gate de cobertura de líneas**, y su ausencia está declarada aguas arriba: el intake §17.2.P.6 · GeometriaFactory-Visor fija como gate «verificable por inspección, **en lugar de cobertura de líneas**» la ausencia de las tres formas de petición de red —que el intake nombra una por una, y que este documento describe en vez de nombrar, fuera de las comillas—. `QG-04` es ese gate.
+**No hay gate de cobertura de líneas**, y su ausencia está declarada aguas arriba: el intake §17.2.P.6 · GeometriaFactory-Visor fija como gate «verificable por inspección, **en lugar de cobertura de líneas**» la ausencia de las tres formas de petición de red —que el intake nombra una por una, y que este documento describe en vez de nombrar, fuera de las comillas—. `QG-12004` es ese gate.
 
 **No hay gate de fluidez numérica**, por lo declarado en §2.
 
@@ -157,7 +157,7 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 | --- | --- | --- |
 | AG-08, calidad y pruebas | La única persona del equipo, en este papel | Diseñar los casos de verificación, mantener la matriz de cobertura, **resolver el método de verificación de las 61 filas de la matriz de sensado** y declarar si un criterio de validación se cumple |
 | Product Owner | El docente de la cátedra, que es también quien ejecuta | Aprobar el cierre de cada etapa en su punto de control, confirmar el valor rotulado [ASUNCIÓN] y **decidir ante toda deriva mayor**: se corrige lo construido o se actualiza la línea de base |
-| Revisión mecánica | El flujo de publicación | Los gates `QG-01`, `QG-02`, `QG-03` y las mediciones automatizables de §3 |
+| Revisión mecánica | El flujo de publicación | Los gates `QG-10001`, `QG-10002`, `QG-10003` y las mediciones automatizables de §3 |
 | Verificación observada | La persona, en el navegador del equipo anfitrión | El guion de demostración y las filas de la matriz de sensado cuyo método es inspección visual. **No todo acá se automatiza, y decirlo es más honesto que declarar una automatización que no existe** |
 
 **Lo que reemplaza al revisor humano independiente es el punto de control bloqueante de cada etapa** (intake §15, regla de delivery 2). Esta categoría no inventa un segundo revisor que no existe.
@@ -170,7 +170,7 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 | --- | --- | --- |
 | AG-08, calidad y pruebas | La única persona del equipo, en este papel | Los casos de prueba, la matriz de cobertura, la matriz de sensado de deriva, la guía de testing de extensibilidad y la DoD |
 | Product Owner | El docente de la cátedra, que es también quien ejecuta | El OK del punto de control, y el umbral de fluidez si alguna vez lo fija (`PA-03`) |
-| Medición mecánica | El pipeline y el navegador | `QG-01` lo da el pipeline; `QG-02` a `QG-07` se miden sobre el bundle generado y sobre una página, no sobre el código fuente solamente |
+| Medición mecánica | El pipeline y el navegador | `QG-12001` lo da el pipeline; `QG-12002` a `QG-12007` se miden sobre el bundle generado y sobre una página, no sobre el código fuente solamente |
 
 **En este proyecto de código el filtro más duro no es la revisión: son las dos puertas medidas sobre el artefacto generado.** Lo declara [`../06-Backlog-Tecnico/Definition-Of-Ready.md`](../06-Backlog-Tecnico/Definition-Of-Ready.md) §4 y esta estrategia lo adopta: no dependen de que alguien las revise, se miden.
 
@@ -197,7 +197,7 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 | Al abrir la rama de la etapa `a` | Que la cadena de construcción sea reproducible y produzca un archivo **vacío pero real** | `BT-12001` cerrada |
 | **Antes de comprometer la etapa `g`** | `PT-02` y `PT-03` enteras | Las dos puertas medidas, o la etapa `g` sin comprometer |
 | Al cerrar la etapa `g` | Las **seis** propiedades transversales con sus condiciones de medición, las **siete** garantías y los **siete** códigos | Matriz de cobertura actualizada y matriz de sensado de deriva con su estado |
-| **Ante todo cambio del bundle** | `QG-04`, `QG-05` y `QG-06`, sobre el **bundle generado** y no sólo sobre la fuente | La constancia de la medición en el pull request |
+| **Ante todo cambio del bundle** | `QG-12004`, `QG-12005` y `QG-12006`, sobre el **bundle generado** y no sólo sobre la fuente | La constancia de la medición en el pull request |
 | Ante toda propuesta de función nueva en la fachada | Los seis pasos de [`../05-Arquitectura-Tecnica/Extensibilidad.md`](../05-Arquitectura-Tecnica/Extensibilidad.md) §5 | La especificación en 02, o el rechazo con su motivo |
 
 **La revisión sobre el bundle generado y no sólo sobre la fuente es propia de este proyecto de código.** Una dependencia que hace una petición por dentro no aparece en el código fuente y sí en el bundle; `05` §9 declara esa causa como de probabilidad **media**, más alta que la de escribir la petición a mano.
@@ -208,4 +208,5 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **4 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

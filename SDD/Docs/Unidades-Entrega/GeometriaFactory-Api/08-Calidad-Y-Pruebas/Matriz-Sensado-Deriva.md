@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Matriz-Sensado-Deriva.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -214,7 +214,7 @@ Se declara para que no se lea como cobertura completa del proyecto de código:
 | Los umbrales de latencia y de caudal, y la forma de la pirámide | `TC-00034` y `TC-00037`, con sus gates condicionados por venir rotulados **[ASUNCIÓN]** |
 | El punto de acceso **`A-08`**, la baja física de una cuenta | Las pruebas de integración. Ningún sample lo ejercita, y `CU-00012` §10 declara el motivo: dejaría a la colección sin el alumno con el que sigue el recorrido |
 | Cobertura de líneas y de ramas | El pipeline de `09-Devops`; los umbrales y su carácter están en [`Criterios-Validacion.md`](Criterios-Validacion.md) |
-| Los **quince** quality gates de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 | Esa sección, con su carácter por gate. **`QG-15` sí queda ejercido por `SD-00002`**, porque mide los pasos de la colección y los datos inventados |
+| Los **quince** quality gates de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 | Esa sección, con su carácter por gate. **`QG-00015` sí queda ejercido por `SD-00002`**, porque mide los pasos de la colección y los datos inventados |
 
 **Las tres sondas no reemplazan a la batería de pruebas.** `CU-00012` §9 lo declara para la colección —«no reemplaza a las pruebas de integración y no se cuenta como cobertura»— y esta matriz no lo cambia: lo que las sondas agregan es una **aserción evaluable** sobre una demostración que hasta ahora se leía a ojo. Es la asimetría que `Deriva-Rules.md` §4 declara en su cuarto momento.
 
@@ -226,7 +226,7 @@ Se declara para que no se lea como cobertura completa del proyecto de código:
 | --- | --- |
 | Las **42** condiciones del catálogo de `03`, en las dos direcciones | `TC-02023` de [`Casos-Prueba-Referenciales.md`](Casos-Prueba-Referenciales.md), en la batería de `tests/` |
 | Los **nueve** invariantes ejercidos sin dobles | `TC-02026`, sobre §5 de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) |
-| Cobertura de líneas y de ramas, y tiempo de la batería | El pipeline de `09-Devops`; son los dos gates condicionados `QG-03` y `QG-07` |
+| Cobertura de líneas y de ramas, y tiempo de la batería | El pipeline de `09-Devops`; son los dos gates condicionados `QG-02003` y `QG-02007` |
 | Las **dieciséis** reglas de negocio, una por una | Los **veintisiete** casos de prueba de `TC-02001` a `TC-02027` |
 
 **Las tres sondas no reemplazan a la batería de pruebas**: la complementan desde afuera, ejercitando la superficie pública tal como la ve un consumidor. Es la asimetría que `Deriva-Rules.md` §4 declara en su cuarto momento.
@@ -262,5 +262,6 @@ Se declara para que no se lea como cobertura completa del proyecto de código:
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **2 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.1 | 2026-08-29 | **Primera fila sensada de esta matriz — Fase I, incremento 1.** `SD-02001` pasa de `Sin verificar` a **`Verificado`**: el sample de su contrato corrió y su comparación contra el snapshot devolvió **CONFORME**. **La deriva sensada fue Mayor y está reparada**: el `criterio_aceptacion` de `VER-02001` incumplía cuatro de sus cinco `stdout_contiene` porque el contrato citaba los códigos de condición en la forma que `F-03` retiró el 2026-08-12; se reparó **en el documento y no en el código**. El enunciado de la fila adopta la forma vigente por el mismo motivo. **Quedan 88 filas en `Sin verificar`** —11 acá y 77 en `GeometriaFactory-Web`—, que son los incrementos siguientes. | Orquestador de Fase I |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

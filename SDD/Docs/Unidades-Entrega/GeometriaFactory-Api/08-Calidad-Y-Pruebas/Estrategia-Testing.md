@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Testing.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -119,7 +119,7 @@ test** que `Rules-Calidad-Y-Pruebas.md` §2.2 exige.
 | Nivel | Qué cubre acá | Porcentaje objetivo | Justificación |
 | --- | --- | --- | --- |
 | Unit | Los once casos de uso enteros, con **dobles de los cuatro puertos**, más las cuatro comprobaciones de autorización y las pruebas de inspección estructural | **100 %** | Lo declara el intake §17.1.P.6 · GeometriaFactory-Application. La inversión de dependencias existe precisamente para que un caso de uso entero sea unitario: no hay nada en esta capa que exija un ambiente |
-| Integración | — | **0 %** | **No aplica acá y se declara así en lugar de omitirse.** La batería de integración del producto existe y golpea la API real contra el almacén real, pero es de `GeometriaFactory-Api` (intake §17.1.P.6 · GeometriaFactory-Application y §17.1.P.6 · GeometriaFactory-Api). Una prueba de esta capa que abriera el almacén violaría `QG-04` |
+| Integración | — | **0 %** | **No aplica acá y se declara así en lugar de omitirse.** La batería de integración del producto existe y golpea la API real contra el almacén real, pero es de `GeometriaFactory-Api` (intake §17.1.P.6 · GeometriaFactory-Application y §17.1.P.6 · GeometriaFactory-Api). Una prueba de esta capa que abriera el almacén violaría `QG-00004` |
 | E2E y snapshot | — | **0 %** | El proyecto de código no es unidad de despliegue, no tiene proceso propio ni interfaz (`05` §4 y §5). Un recorrido de punta a punta del producto pasa por `GeometriaFactory-Api` y `GeometriaFactory-Web`, y ahí es donde vive |
 
 **El apartamiento es de reparto, no de rigor.** Los veinte puntos que la regla asigna a integración, extremo a extremo y snapshot **no se descartan: se reasignan a otro proyecto de código**, que es donde la fuente los pone. El piso unitario **sube** de 80 a 100, de modo que no se baja ninguna exigencia y no hace falta la ADR que §2.2 exige para bajar cobertura.
@@ -175,7 +175,7 @@ La partición es por los **ocho** componentes de [`../05-Arquitectura-Tecnica/Ar
 | Composición de raíz | 75 % | 70 % | — | Piso del intake. **Sin mutation score**: es declaración de cableado, y su verificación real es `TC-00028`, que **falla en construcción** si un puerto queda sin adaptador |
 | Guardia de admisión | **95 %** | **90 %** | 60 % | Sube muy por encima del piso: es donde se pierde `RN-00013` sin que nada falle, y `05` §9 le asigna probabilidad **alta** por ser un defecto de **omisión** |
 | Traductor de motivos y códigos | **95 %** | **90 %** | 60 % | Sube: es la única pieza con lógica propia, y es donde una decisión de adentro se deshace. **Ninguna capa de adentro puede reparar un error suyo** |
-| Superficie de acceso y credencial propia | 80 % | 75 % | 60 % | Sube sobre el piso: son los **cuatro** puntos que se ejercen sin acceso firmado, que es exactamente el conjunto que `QG-05` acota |
+| Superficie de acceso y credencial propia | 80 % | 75 % | 60 % | Sube sobre el piso: son los **cuatro** puntos que se ejercen sin acceso firmado, que es exactamente el conjunto que `QG-00005` acota |
 | Superficie de gobierno de la comisión | 75 % | 70 % | 60 % | Piso del intake |
 | Superficie de trabajos | 80 % | 75 % | 60 % | Sube sobre el piso: contiene el punto de eliminación, cuyo forzado es criterio bloqueante de la fuente, y el envío, donde el texto no se normaliza |
 | Superficie de desenlace | 75 % | 70 % | 60 % | Piso del intake |
@@ -302,7 +302,7 @@ Se nombran por función y no por producto. La elección concreta y su anclaje de
 | Integración interna | El mismo marco, con un **almacén efímero creado y descartado por cada prueba**, y con la ubicación del almacén recibida por configuración de prueba |
 | Aserciones | Biblioteca de aserciones del mismo marco |
 | Dobles | Sólo donde hace falta aislar el mundo: la **fuente de material impredecible**, para poder simular que no responde (`TC-06028`), y el **almacén interrumpido a mitad de operación** (`TC-06021`). El reloj **no se dobla acá**: acá se implementa |
-| Cobertura por líneas y ramas | Recolector de cobertura de la plataforma, con informe por componente **y con un informe acotado a los dos motores**, que es lo que `QG-06` mide |
+| Cobertura por líneas y ramas | Recolector de cobertura de la plataforma, con informe por componente **y con un informe acotado a los dos motores**, que es lo que `QG-06006` mide |
 | Mutation score | Marco de pruebas de mutación de la plataforma. **Su incorporación al pipeline es un hueco declarado**, ver [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
 | Medición del tiempo de interpretación | Cronometrado dentro de la batería unitaria, **sin almacén**, que es la condición que el intake §17.1.P.10 · GeometriaFactory-Infrastructure declara |
 | Inspección estructural | El propio marco de pruebas, leyendo las dependencias de los dos motores, el conjunto de códigos emitidos y el registro del servidor |
@@ -621,6 +621,7 @@ Es la tabla de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`](../
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **3 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión, salida S1** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.0 §4). Pasa de ser la estrategia del proyecto de código `GeometriaFactory-Api` a ser la de la **unidad de entrega**, absorbiendo las de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Las siete secciones llevan **una subsección por proyecto de código**, con su texto **transpuesto sin reescritura**: lo que cambia es el orden y no el contenido. Entra **§0**, que declara lo que sólo se ve con los cuatro juntos: los **cuatro pisos de cobertura** —90/85, 85/80, 85/80 y 75/70—, que **no se promedian**, con la constancia de que el único que baja el de su tipo es el del host y de que **su ADR sigue faltando**; y las **cuatro pirámides**, donde se ve que la invertida del host y la ausencia de integración en la capa de aplicación **son la misma decisión vista desde dos lados**, cosa que leídas por separado no se veía. La cabecera pasa de «Proyecto de código» a **unidad de entrega** y enumera los proyectos que la componen. Los tres documentos absorbidos quedan archivados. Sube **major**. |
 | --- | --- | --- |

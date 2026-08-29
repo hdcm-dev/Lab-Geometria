@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Supply-Chain-Seguridad.md
-**Versión:** 3.1
+**Versión:** 3.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-24
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -129,25 +129,25 @@ reabre `PD-02`**, porque cerrar o reabrir un punto de otra categoría no es suyo
 | Hecho | Valor | Dónde está declarado |
 | --- | --- | --- |
 | Dependencias externas | **Ninguna**. Es biblioteca de clases **sin dependencias core**: no referencia persistencia, ni marco web, ni bibliotecas de serialización | Intake §17.1.P.1 · GeometriaFactory-Domain |
-| Referencias salientes admitidas | **0** a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | `05` §8, tercera fila; `QG-04` |
+| Referencias salientes admitidas | **0** a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | `05` §8, tercera fila; `QG-02004` |
 | Artefacto publicado | **Ninguno**: `redistribuible` es false y no se publica en ningún feed | Intake §13 y §17.1.P.7 · GeometriaFactory-Domain |
 
 **Decisión: el inventario de componentes se emite en la unidad desplegable que embebe a esta biblioteca**, no acá. El inventario que le sirve a alguien es el de lo que sale del repositorio —la imagen del backend y la publicación del front—, y ahí es donde este proyecto de código aparece como un componente más, con su versión calculada según [`Estrategia-Versionado.md`](Estrategia-Versionado.md).
 
-**Lo que sí aporta este proyecto de código al inventario del producto es una propiedad verificable y bloqueante: su fila del inventario no tiene hijos.** `QG-04` lo hace cumplir en cada pull request. Un inventario con una dependencia nueva colgando de esta biblioteca es, antes que un hallazgo de cadena de suministro, un incumplimiento del gate que justifica el estilo entero del proyecto de código.
+**Lo que sí aporta este proyecto de código al inventario del producto es una propiedad verificable y bloqueante: su fila del inventario no tiene hijos.** `QG-02004` lo hace cumplir en cada pull request. Un inventario con una dependencia nueva colgando de esta biblioteca es, antes que un hallazgo de cadena de suministro, un incumplimiento del gate que justifica el estilo entero del proyecto de código.
 
 ### 2.3 `GeometriaFactory-Application`
 
 | Hecho | Valor | Dónde está declarado |
 | --- | --- | --- |
 | Dependencias externas | **Ninguna.** La única dependencia core es `GeometriaFactory.Domain`, que es del mismo producto y a su vez no tiene ninguna | Intake §17.1.P.1 · GeometriaFactory-Application y §17.1.P.1 · GeometriaFactory-Domain |
-| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-05`, con `TC-04027` |
-| Referencias a bibliotecas de persistencia, transporte, serialización o marco web | **0** | `QG-05`, bloqueante |
+| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-04005`, con `TC-04027` |
+| Referencias a bibliotecas de persistencia, transporte, serialización o marco web | **0** | `QG-04005`, bloqueante |
 | Artefacto publicado | **Ninguno**: `redistribuible` es false | Intake §13; `05` §5 |
 
-**Decisión: el inventario se emite en la unidad desplegable que embebe este ensamblado**, no acá. Lo que este proyecto de código aporta a ese inventario es **una fila con un solo hijo, que a su vez no tiene ninguno**, y un gate que lo sostiene: `QG-05`, con umbral **1 y 0**.
+**Decisión: el inventario se emite en la unidad desplegable que embebe este ensamblado**, no acá. Lo que este proyecto de código aporta a ese inventario es **una fila con un solo hijo, que a su vez no tiene ninguno**, y un gate que lo sostiene: `QG-04005`, con umbral **1 y 0**.
 
-**La ausencia de marco web merece un párrafo, porque es la que más se rompe sola.** La tentación característica de una capa de casos de uso es tomar prestado un tipo del marco web —un resultado, un tipo de acción, una excepción de protocolo— para no escribir el propio. `QG-05` lo prohíbe con umbral **0**, y el efecto sobre la cadena de suministro es que **este ensamblado no arrastra ninguna dependencia transitiva al proceso que lo carga**: todo lo que entra a la imagen del backend por esta vía es código del propio producto.
+**La ausencia de marco web merece un párrafo, porque es la que más se rompe sola.** La tentación característica de una capa de casos de uso es tomar prestado un tipo del marco web —un resultado, un tipo de acción, una excepción de protocolo— para no escribir el propio. `QG-04005` lo prohíbe con umbral **0**, y el efecto sobre la cadena de suministro es que **este ensamblado no arrastra ninguna dependencia transitiva al proceso que lo carga**: todo lo que entra a la imagen del backend por esta vía es código del propio producto.
 
 ### 2.4 `GeometriaFactory-Infrastructure`
 
@@ -200,7 +200,7 @@ reabre `PD-02`**, porque cerrar o reabrir un punto de otra categoría no es suyo
 | Preocupación | Qué firma | Quién verifica | Dónde vive en este corpus |
 | --- | --- | --- | --- |
 | Firma **de artefacto** | Un artefacto publicado, para que un integrador compruebe autoría e integridad | Un integrador externo, que acá **no existe** | No aplica en este proyecto de código |
-| Firma **de acceso** | El acceso que el producto emite a una persona ya autenticada | El propio servicio, al recibirlo | Intake §17.1.P.5 · GeometriaFactory-Infrastructure; gate `QG-12` |
+| Firma **de acceso** | El acceso que el producto emite a una persona ya autenticada | El propio servicio, al recibirlo | Intake §17.1.P.5 · GeometriaFactory-Infrastructure; gate `QG-06012` |
 
 **Lo que sí rige acá como integridad del origen**: etiqueta por etapa cerrada, reversión apoyada en ella, y **linaje de transformaciones inmutable** ([`Estrategia-Versionado.md`](Estrategia-Versionado.md) §4).
 
@@ -270,7 +270,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 | Anclaje explícito de **toda** versión que entra a la imagen | Toda versión **fijada explícitamente**; un cambio mayor **se documenta, nunca es efecto colateral** | Revisión de los archivos de proyecto y del de construcción, en la etapa `a` y en cada cambio. Acá es **el mecanismo principal**, por §3 | Bloqueante como regla del intake, encabezado de la Parte C |
 | Contenido de la imagen final | **Sólo el entorno de ejecución**, sin kit de desarrollo ni depurador, y **sin linaje con la imagen del contenedor de desarrollo** | Inspección del archivo de construcción | **Bloqueante**: Definition of Done §1.4 |
 | Puertos publicados hacia el enrutador | **Uno**, y es el único punto de entrada al servidor propio | Inspección del archivo de composición | `05` §5 |
-| Configuración de intercambio declarada en el producto | **1** sola | `QG-10`, con `TC-00029`, en el stage `build` | **Bloqueante** |
+| Configuración de intercambio declarada en el producto | **1** sola | `QG-00010`, con `TC-00029`, en el stage `build` | **Bloqueante** |
 | Actualización automática de dependencias | **No se declara ninguna.** Contradiría la regla de anclaje, y acá además haría divergir la imagen verificada de la desplegada | — | — |
 
 **La segunda fila es un control de superficie de ataque escrito como control de empaquetado.** Una imagen que llevara el kit de desarrollo al servidor domiciliario multiplicaría lo que un acceso indebido puede hacer ahí, y el intake §17.1.P.9 · GeometriaFactory-Api lo prohíbe con esas palabras. La Definition of Done §1.4 lo verifica **por inspección del archivo de construcción**, que es donde se ve el linaje.
@@ -283,7 +283,7 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Comprobación | Umbral | Cómo se ejecuta | Carácter |
 | --- | --- | --- | --- |
-| Referencias salientes del archivo de proyecto | **0** a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | `QG-04`, con `TC-02024` y la revisión del pull request | **Bloqueante** |
+| Referencias salientes del archivo de proyecto | **0** a otros proyectos de código del producto y **0** a bibliotecas de persistencia, transporte o serialización | `QG-02004`, con `TC-02024` y la revisión del pull request | **Bloqueante** |
 | Actualización automática de dependencias | **No aplica**: no hay dependencias que actualizar | — | — |
 
 **El día en que este proyecto de código adquiera una dependencia externa, el gate bloqueante se dispara antes que cualquier análisis de composición.** Es un orden afortunado: la primera pregunta no será «¿esa dependencia tiene vulnerabilidades?» sino «¿por qué el dominio adquirió una dependencia?», que es la que [`../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md`](../05-Arquitectura-Tecnica/Adrs/ADR-02001-Modelo-De-Dominio-Rico-Con-Invariantes-Explicitas.md) obliga a contestar.
@@ -294,12 +294,12 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Comprobación | Umbral | Cómo se ejecuta | Carácter |
 | --- | --- | --- | --- |
-| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-05`, con `TC-04027` y la revisión del pull request | **Bloqueante** |
+| Referencias a otros proyectos de código del producto | Exactamente **1** | `QG-04005`, con `TC-04027` y la revisión del pull request | **Bloqueante** |
 | Referencias a bibliotecas de persistencia, transporte, serialización o marco web | **0** | El mismo gate | **Bloqueante** |
-| Pruebas de esta capa que abren el almacén real | **0** | `QG-04`, con `TC-04026` | **Bloqueante** |
+| Pruebas de esta capa que abren el almacén real | **0** | `QG-04004`, con `TC-04026` | **Bloqueante** |
 | Actualización automática de dependencias | **No aplica**: no hay dependencias externas que actualizar | — | — |
 
-**Sin dependencias externas, el análisis de composición no tiene sujeto y lo que corresponde verificar es que ese cero se sostenga.** Las tres primeras filas son esa verificación, y las tres ya bloquean desde la Fase E: esta categoría no agrega ninguna comprobación nueva, las ubica en el stage donde corren. `QG-05` corre en `build`, que es el más barato, y es **la propiedad que sostiene a `QG-04`**: sin biblioteca de persistencia declarada, una prueba de esta capa no tiene con qué abrir un almacén.
+**Sin dependencias externas, el análisis de composición no tiene sujeto y lo que corresponde verificar es que ese cero se sostenga.** Las tres primeras filas son esa verificación, y las tres ya bloquean desde la Fase E: esta categoría no agrega ninguna comprobación nueva, las ubica en el stage donde corren. `QG-04005` corre en `build`, que es el más barato, y es **la propiedad que sostiene a `QG-04004`**: sin biblioteca de persistencia declarada, una prueba de esta capa no tiene con qué abrir un almacén.
 
 **La regla de anclaje de versiones del producto rige igual**: el intake, en el encabezado de su Parte C, declara que toda versión de paquete se fija explícitamente y que un cambio de versión mayor se documenta, **nunca como efecto colateral de una actualización**. Acá alcanza al ejecutor de pruebas y al recolector de cobertura, que son herramientas del proyecto de pruebas y no dependencias del ensamblado.
 
@@ -309,12 +309,12 @@ No se fija un nivel más alto por el mismo motivo que en el resto del producto: 
 
 | Comprobación | Umbral o criterio | Cómo se ejecuta | Carácter |
 | --- | --- | --- | --- |
-| Peticiones de red originadas por los **dos motores** | Exactamente **0** | `QG-08`, con `TC-06014`, inspección de dependencias de los dos motores | **Bloqueante** |
+| Peticiones de red originadas por los **dos motores** | Exactamente **0** | `QG-06008`, con `TC-06014`, inspección de dependencias de los dos motores | **Bloqueante** |
 | Anclaje explícito de las **tres** dependencias core y de la herramienta de transformaciones | Toda versión **fijada explícitamente**, nunca cambiada como efecto colateral | Revisión del archivo de proyecto y del archivo de herramientas, en la etapa `a` y en cada cambio | Bloqueante como regla del intake, encabezado de la Parte C |
 | Elección y anclaje de la **función de derivación de clave** | El intake declara dos opciones y **no elige**. La forma y el criterio los fija `ADR-06004`; la elección concreta es de la etapa `a` | Punto de control de la etapa `a`. Registrado como `PD-03` en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 | Bloqueante como tarea de la etapa `a` |
 | Actualización automática de dependencias | **No se declara ninguna.** Contradiría la regla de anclaje | — | — |
 
-**La primera fila es un gate de composición escrito como recuento, y conviene ver por qué está donde está.** El intake §17.1.P.3 · GeometriaFactory-Infrastructure declara que **el validador de figuras no hace red**: recibe texto y devuelve observaciones. `QG-08` no verifica esa intención en el código propio, sino **en las dependencias de los dos motores**: una biblioteca que hiciera una petición por dentro rompería la propiedad sin que ninguna línea del proyecto de código la mencione. Es exactamente el modo de falla que un análisis de composición existe para encontrar, y acá está escrito como **0**.
+**La primera fila es un gate de composición escrito como recuento, y conviene ver por qué está donde está.** El intake §17.1.P.3 · GeometriaFactory-Infrastructure declara que **el validador de figuras no hace red**: recibe texto y devuelve observaciones. `QG-06008` no verifica esa intención en el código propio, sino **en las dependencias de los dos motores**: una biblioteca que hiciera una petición por dentro rompería la propiedad sin que ninguna línea del proyecto de código la mencione. Es exactamente el modo de falla que un análisis de composición existe para encontrar, y acá está escrito como **0**.
 
 **La regla de anclaje de versiones no es una preferencia de esta categoría**: el intake, en el encabezado de su Parte C, la declara para los seis proyectos de código de la plataforma, y agrega que **un cambio de versión mayor es una decisión que se documenta**. En este proyecto de código alcanza a tres dependencias externas, a la herramienta de transformaciones y al motor de almacenamiento embebido (intake §17.1.P.9 · GeometriaFactory-Infrastructure).
 
@@ -348,19 +348,19 @@ propia condición.
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**» | Intake §17.1.P.8 · GeometriaFactory-Api; `QG-01` |
-| Estático de superficie | **Existe, bloquea y es la verificación característica de este proyecto de código**: `QG-05` sobre los **quince** puntos en las dos direcciones, `QG-06` sobre los **diecisiete** códigos del contrato, `QG-08` sobre las respuestas y el registro del servidor, y `QG-10` sobre la composición de raíz | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
-| **Dinámico** | **Existe, y es el más completo del producto**: la batería de integración **golpea la superficie real por su protocolo contra el almacén real**, y `QG-12` exige verificar **forzando la petición** y no por la interfaz | Intake §17.1.P.6 · GeometriaFactory-Api; `Estrategia-Calidad.md` §1 |
-| Dinámico sobre el artefacto empaquetado | **Existe**: el stage `imagen` arranca la imagen, aplica las transformaciones sobre un almacén vacío y comprueba salud | `PT-04`; `QG-13` |
+| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**» | Intake §17.1.P.8 · GeometriaFactory-Api; `QG-00001` |
+| Estático de superficie | **Existe, bloquea y es la verificación característica de este proyecto de código**: `QG-00005` sobre los **quince** puntos en las dos direcciones, `QG-00006` sobre los **diecisiete** códigos del contrato, `QG-00008` sobre las respuestas y el registro del servidor, y `QG-00010` sobre la composición de raíz | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
+| **Dinámico** | **Existe, y es el más completo del producto**: la batería de integración **golpea la superficie real por su protocolo contra el almacén real**, y `QG-00012` exige verificar **forzando la petición** y no por la interfaz | Intake §17.1.P.6 · GeometriaFactory-Api; `Estrategia-Calidad.md` §1 |
+| Dinámico sobre el artefacto empaquetado | **Existe**: el stage `imagen` arranca la imagen, aplica las transformaciones sobre un almacén vacío y comprueba salud | `PT-04`; `QG-00013` |
 | Detección de secretos en las confirmaciones | **Recomendada, y acá con el sujeto más sensible**: el intake §17.1.P.5 · GeometriaFactory-Api declara que la clave de firma va **como secreto del repositorio, nunca en el archivo del flujo de trabajo** | [`Entornos-Deploy.md`](Entornos-Deploy.md) §6 |
 
-**La tercera fila es la que hace de este proyecto de código el que más superficie verifica del producto, y `QG-12` es su caso extremo.** `Estrategia-Calidad.md` §3 lo declara: es **el único criterio de verificación del producto que la fuente exige ejercer forzando la petición**, y no mirando una pantalla. Desde la cadena de suministro, la lectura es que **la comprobación de que un control existe no puede hacerse sobre el cliente que respeta el control**.
+**La tercera fila es la que hace de este proyecto de código el que más superficie verifica del producto, y `QG-00012` es su caso extremo.** `Estrategia-Calidad.md` §3 lo declara: es **el único criterio de verificación del producto que la fuente exige ejercer forzando la petición**, y no mirando una pantalla. Desde la cadena de suministro, la lectura es que **la comprobación de que un control existe no puede hacerse sobre el cliente que respeta el control**.
 
 ### 6.2 `GeometriaFactory-Domain`
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático | **Existe y bloquea**, integrado en el stage `build`: `CV-20` declara **0** advertencias nuevas del análisis estático, bloqueante por `CV-13`, que es el gate de construcción sin advertencias | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §5 y §3 |
+| Estático | **Existe y bloquea**, integrado en el stage `build`: `CV-02020` declara **0** advertencias nuevas del análisis estático, bloqueante por `CV-02013`, que es el gate de construcción sin advertencias | [`../08-Calidad-Y-Pruebas/Criterios-Validacion.md`](../08-Calidad-Y-Pruebas/Criterios-Validacion.md) §5 y §3 |
 | Estático de superficie | **Existe y bloquea**: las pruebas de inspección `TC-02023`, `TC-02024`, `TC-02026` y `TC-02027` revisan el proyecto de código sobre sí mismo —catálogo de condiciones, dependencias salientes, invariantes ejercidos y condiciones que no viajan como excepción— | [`../08-Calidad-Y-Pruebas/Estrategia-Testing.md`](../08-Calidad-Y-Pruebas/Estrategia-Testing.md) §1, «prueba de inspección» |
 | Dinámico | **No aplica, y se declara en lugar de omitirse** | Un análisis dinámico ejercita una aplicación en ejecución. Este proyecto de código **no atiende peticiones ni abre conexiones** (`05` §8, cierre), de modo que no hay superficie que ejercitar. El análisis dinámico del producto tiene sujeto en `GeometriaFactory-Api`, que es quien expone la superficie HTTP |
 | Detección de secretos en las confirmaciones | **Recomendada a nivel producto y no propia**: este proyecto de código no maneja secretos (intake §17.1.P.5 · GeometriaFactory-Domain), pero comparte repositorio con los que sí | Ver [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
@@ -371,8 +371,8 @@ propia condición.
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**», y no «sin errores» | Intake §17.1.P.8 · GeometriaFactory-Application, por remisión a §17.1.P.8 · GeometriaFactory-Domain; `QG-01` |
-| Estático de estructura | **Existe, bloquea, y es la verificación característica de este proyecto de código**: `QG-05` sobre el archivo de proyecto, `QG-06` sobre el catálogo de las **36** condiciones en las dos direcciones, `QG-08` sobre los **once** orquestadores y `QG-09` sobre la proyección de listado | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
+| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**», y no «sin errores» | Intake §17.1.P.8 · GeometriaFactory-Application, por remisión a §17.1.P.8 · GeometriaFactory-Domain; `QG-02001` |
+| Estático de estructura | **Existe, bloquea, y es la verificación característica de este proyecto de código**: `QG-04005` sobre el archivo de proyecto, `QG-04006` sobre el catálogo de las **36** condiciones en las dos direcciones, `QG-04008` sobre los **once** orquestadores y `QG-04009` sobre la proyección de listado | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | Dinámico | **No aplica acá, y tiene sujeto en otro proyecto de código**: este ensamblado no expone ninguna superficie de red. La que un análisis dinámico ejercitaría es la HTTP, que expone `GeometriaFactory-Api` | Intake §17.1.P.3 · GeometriaFactory-Application: «no aplica hacia afuera del proceso» |
 | Detección de secretos en las confirmaciones | **Recomendada a nivel producto**: este proyecto de código no maneja secretos, pero comparte repositorio con los que sí | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
 
@@ -380,10 +380,10 @@ propia condición.
 
 | Análisis | Estado | Fundamento |
 | --- | --- | --- |
-| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**», que es la formulación de `QG-01`. El intake §17.1.P.8 · GeometriaFactory-Infrastructure la declara como «build en 0 sin advertencias» | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3, `QG-01`; intake §17.1.P.8 · GeometriaFactory-Infrastructure |
-| Estático de estructura | **Existe y bloquea**: `QG-10` sobre las proyecciones de listado, `QG-11` sobre el texto original conservado, `QG-12` sobre la emisión de accesos y `QG-13` sobre el catálogo de las **17** condiciones en las dos direcciones | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
+| Estático | **Existe y bloquea**: el gate de construcción es «en 0 **y sin advertencias**», que es la formulación de `QG-06001`. El intake §17.1.P.8 · GeometriaFactory-Infrastructure la declara como «build en 0 sin advertencias» | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3, `QG-06001`; intake §17.1.P.8 · GeometriaFactory-Infrastructure |
+| Estático de estructura | **Existe y bloquea**: `QG-06010` sobre las proyecciones de listado, `QG-06011` sobre el texto original conservado, `QG-06012` sobre la emisión de accesos y `QG-06013` sobre el catálogo de las **17** condiciones en las dos direcciones | [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](../08-Calidad-Y-Pruebas/Estrategia-Calidad.md) §3 |
 | Dinámico sobre superficie de red | **No aplica acá**: este ensamblado **no expone endpoints** y sus dos motores no hacen red. La superficie que un análisis dinámico ejercitaría es la HTTP, que expone `GeometriaFactory-Api` | Intake §17.1.P.3 · GeometriaFactory-Infrastructure |
-| **Dinámico sobre almacenamiento** | **Existe, y es propio de este proyecto de código**: el stage `verificar-transformaciones` ejercita el arranque **sobre un almacén inexistente** y comprueba que el esquema queda completo sin paso manual | `QG-04`; [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2 |
+| **Dinámico sobre almacenamiento** | **Existe, y es propio de este proyecto de código**: el stage `verificar-transformaciones` ejercita el arranque **sobre un almacén inexistente** y comprueba que el esquema queda completo sin paso manual | `QG-06004`; [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2 |
 | Detección de secretos en las confirmaciones | **Recomendada, y acá con el sujeto más sensible del producto**: este proyecto de código es el que trabaja con la clave de firma, aunque no la custodie | [`Entornos-Deploy.md`](Entornos-Deploy.md) §5 |
 
 ## 7. Política ante vulnerabilidades publicadas
@@ -396,7 +396,7 @@ propia condición.
 | Vulnerabilidad sobre la **imagen base de ejecución** | Se ancla la versión corregida en el archivo de construcción y se vuelve a desplegar. **La reconstrucción en destino la trae**, y ése es el único caso donde ese canal juega a favor | El equipo, con constancia |
 | Vulnerabilidad sobre el **entorno del servidor propio**, fuera de la imagen | **Fuera del alcance de esta cadena.** Es la máquina del Product Owner | El Product Owner |
 | Exposición de la **clave de firma** | Se rota el valor en el ambiente y se reinicia el servicio. **El valor no está en el repositorio ni en la imagen**, de modo que la rotación no exige reconstruir | Intake §17.1.P.5 · GeometriaFactory-Api |
-| Exposición de la **dirección del servidor propio** | Se revisa por dónde se filtró: `QG-08` mide **0** respuestas que la expongan, sobre los **quince** puntos **y** sobre el registro del servidor. Es `RA-03`, y `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 lo ubica **en el último tramo antes de salir del servidor propio** | El equipo, con constancia |
+| Exposición de la **dirección del servidor propio** | Se revisa por dónde se filtró: `QG-00008` mide **0** respuestas que la expongan, sobre los **quince** puntos **y** sobre el registro del servidor. Es `RA-03`, y `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 lo ubica **en el último tramo antes de salir del servidor propio** | El equipo, con constancia |
 
 **No se declara ningún acuerdo de nivel de servicio de remediación en horas o días.** El intake §10 declara «sin plazo; el avance se mide por etapas cerradas». El mecanismo que reemplaza al plazo es el **punto de control bloqueante** de la etapa en curso.
 
@@ -411,7 +411,7 @@ propia condición.
 | Situación | Salida | Quién decide |
 | --- | --- | --- |
 | Vulnerabilidad publicada sobre la plataforma de ejecución | Se trata como **decisión de plataforma del producto**, no como parche de este proyecto de código: la corrección es una actualización de la versión objetivo, que por la regla de anclaje del intake **se documenta y no se aplica como efecto colateral** | El Product Owner, con la constancia en el punto de control de la etapa en curso |
-| Vulnerabilidad publicada sobre una dependencia de este proyecto de código | **No tiene sujeto hoy**: no hay dependencias. Si alguna vez la hay, la vulnerabilidad es el segundo problema; el primero es `QG-04` | — |
+| Vulnerabilidad publicada sobre una dependencia de este proyecto de código | **No tiene sujeto hoy**: no hay dependencias. Si alguna vez la hay, la vulnerabilidad es el segundo problema; el primero es `QG-02004` | — |
 | Vulnerabilidad que afecta a la unidad desplegable que embebe esta biblioteca | Es de la categoría 09 de esa unidad. Este proyecto de código sólo tiene que poder **reconstruirse desde su etiqueta**, y puede | Categoría 09 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` |
 
 **No se declara ningún acuerdo de nivel de servicio de remediación en horas o días, y es deliberado.** El intake §10 declara «sin plazo; el avance se mide por etapas cerradas», y un plazo de remediación en horas sería exactamente el tipo de compromiso calendario que ninguna fuente da. Lo que sí rige es el mecanismo: **el punto de control de la etapa es bloqueante**, de modo que una vulnerabilidad conocida y no tratada llega a la mesa del Product Owner en el cierre de la etapa en curso y no puede quedar en silencio.
@@ -423,7 +423,7 @@ propia condición.
 | Situación | Salida | Quién decide |
 | --- | --- | --- |
 | Vulnerabilidad sobre la plataforma de ejecución | Decisión de plataforma del producto, no parche de este proyecto de código. A diferencia de `GeometriaFactory-Contracts`, **este ensamblado se carga en un solo proceso**, de modo que una bajada de versión del front no lo alcanza | El Product Owner, con constancia en el punto de control |
-| Vulnerabilidad sobre una dependencia de este proyecto de código | **No tiene sujeto**: no hay dependencias externas. Si alguna vez la hubiera, el primer problema es `QG-05` | — |
+| Vulnerabilidad sobre una dependencia de este proyecto de código | **No tiene sujeto**: no hay dependencias externas. Si alguna vez la hubiera, el primer problema es `QG-04005` | — |
 | Vulnerabilidad sobre la herramienta de pruebas o de cobertura | Se ancla la versión corregida por la regla de anclaje del intake, y se registra en el punto de control de la etapa. **No alcanza al ensamblado que se despliega**: son herramientas del proyecto de pruebas | El equipo, con constancia |
 | Vulnerabilidad sobre la unidad desplegable que lo embebe | Es de la categoría 09 de `GeometriaFactory-Api`. Este ensamblado sólo tiene que poder reconstruirse desde su etiqueta, y puede | Categoría 09 de `GeometriaFactory-Api` |
 
@@ -456,10 +456,10 @@ Esta sección existe porque acá, además de dependencias, **hay algo que ningun
 | Propiedad | Por qué es de cadena de suministro y no sólo de diseño |
 | --- | --- |
 | **Un solo punto de entrada al servidor propio** | `05` §5 lo declara: todo lo que este proyecto de código no exponga **no existe para nadie de afuera**. La superficie de ataque de la máquina **es exactamente la lista de quince puntos**, y por eso un punto nuevo es una decisión de exposición y no una funcionalidad |
-| **Exactamente 4 puntos fuera de la guardia, ni uno más** | `QG-05`, medido **en las dos direcciones**. `05` §9 declara el riesgo: un punto nuevo fuera de la guardia hace que una regla del producto deje de valer **y nada falla** |
+| **Exactamente 4 puntos fuera de la guardia, ni uno más** | `QG-00005`, medido **en las dos direcciones**. `05` §9 declara el riesgo: un punto nuevo fuera de la guardia hace que una regla del producto deje de valer **y nada falla** |
 | **El punto de salud no exige acceso y no diagnostica** | [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2, regla 4: responde por el estado del servicio y **no dice dónde está el almacén, ni con qué esquema, ni qué ruta se configuró**. Es el punto que **cualquiera puede llamar**, y por eso es el que menos puede contar |
-| **Ningún mensaje expone dirección, ruta, secreto ni traza** | `QG-08`, con umbral **0**, sobre los quince puntos **y sobre el registro del servidor** |
-| **Tres familias empobrecidas indistinguibles** | `QG-07`, **3 de 3** en cuerpo y en código. Es lo que impide que la superficie revele la existencia de un recurso ajeno, y `Estrategia-Calidad.md` §3 declara que **ninguna capa de adentro puede repararlo** |
+| **Ningún mensaje expone dirección, ruta, secreto ni traza** | `QG-00008`, con umbral **0**, sobre los quince puntos **y sobre el registro del servidor** |
+| **Tres familias empobrecidas indistinguibles** | `QG-00007`, **3 de 3** en cuerpo y en código. Es lo que impide que la superficie revele la existencia de un recurso ajeno, y `Estrategia-Calidad.md` §3 declara que **ninguna capa de adentro puede repararlo** |
 
 **Las cinco comparten la propiedad que las hace un problema de esta categoría y no sólo de la 05**: **su incumplimiento no produce ningún fallo**. Un punto agregado fuera de la guardia responde bien; una respuesta más informativa se ve mejor; un mensaje con la dirección adentro ayuda a diagnosticar. **Las cinco se miden con recuentos y ninguna con un juicio**, y por eso corren en cada pull request que toca la superficie, que es la cadencia que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3 materializa como trigger propio.
 
@@ -473,8 +473,8 @@ La tabla existe para que la próxima categoría 09 —la de un proyecto de códi
 
 | Preocupación | Dónde se decide |
 | --- | --- |
-| Cero dependencias salientes y su verificación | **Acá**, y ya bloquea: `QG-04` |
-| Cero advertencias de construcción y análisis estático | **Acá**, y ya bloquea: `QG-01` con `CV-20` |
+| Cero dependencias salientes y su verificación | **Acá**, y ya bloquea: `QG-02004` |
+| Cero advertencias de construcción y análisis estático | **Acá**, y ya bloquea: `QG-02001` con `CV-02020` |
 | Inventario de componentes de lo que se despliega | Categoría 09 de `GeometriaFactory-Api` y de `GeometriaFactory-Web` |
 | Firma del artefacto desplegado | Las mismas dos |
 | Procedencia de la construcción y elevación del nivel de integridad | Nivel producto, junto con la imagen del backend |
@@ -492,10 +492,10 @@ El riesgo real de esta capa es **que una comprobación de autorización deje de 
 | Propiedad | Por qué importa acá |
 | --- | --- |
 | **Entra de a un caso de uso por vez, y compila** | Ninguna herramienta de análisis de composición lo detectaría: no es una dependencia, es un orquestador nuevo que no llamó a una comprobación |
-| **Se verifica con un recuento, no con un juicio** | `QG-07` mide **4 de 4** comprobaciones con prueba de su negativa **sin base de datos**, y **1** sola prueba de que la cuarta corta antes que las otras tres |
+| **Se verifica con un recuento, no con un juicio** | `QG-04007` mide **4 de 4** comprobaciones con prueba de su negativa **sin base de datos**, y **1** sola prueba de que la cuarta corta antes que las otras tres |
 | **Su verificación no necesita ambiente** | Es la consecuencia útil de que la capa se pruebe entera con dobles: la comprobación más sensible del proyecto de código se puede ejercer en el stage `test`, sin levantar nada |
 
-**La conclusión operativa para el pipeline** es que la comprobación de seguridad más valiosa de este proyecto de código corre **en cada pull request que agrega o cambia un caso de uso**, y se cierra **al cerrar la etapa** con `QG-07` sobre la matriz entera. Es la cadencia que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3 materializa como trigger propio.
+**La conclusión operativa para el pipeline** es que la comprobación de seguridad más valiosa de este proyecto de código corre **en cada pull request que agrega o cambia un caso de uso**, y se cierra **al cerrar la etapa** con `QG-04007` sobre la matriz entera. Es la cadencia que [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3 materializa como trigger propio.
 
 ## 11. Las dos bibliotecas sensibles, y qué las hace distintas del resto
 
@@ -506,16 +506,17 @@ Esta sección existe porque en este proyecto de código **la cadena de suministr
 | Dependencia, por su función | Qué pasaría si estuviera comprometida | Qué la protege hoy |
 | --- | --- | --- |
 | **Derivación de clave** | Las contraseñas guardadas dejarían de estar protegidas, **sin ninguna señal visible**: el producto seguiría funcionando igual | El anclaje explícito de versión, los parámetros versionados junto al valor derivado ([`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md)) y la revisión de todo cambio de versión mayor como decisión documentada |
-| **Emisión de acceso firmado** | Se podrían emitir accesos válidos sin la clave, o filtrarse la clave. **Es la capacidad más sensible del producto** | El mismo anclaje, más `QG-12` —**0** emisiones sin clave de firma y **0** claves generadas al vuelo— y la clave viviendo **fuera del repositorio y fuera de la imagen** |
+| **Emisión de acceso firmado** | Se podrían emitir accesos válidos sin la clave, o filtrarse la clave. **Es la capacidad más sensible del producto** | El mismo anclaje, más `QG-06012` —**0** emisiones sin clave de firma y **0** claves generadas al vuelo— y la clave viviendo **fuera del repositorio y fuera de la imagen** |
 
 **Las dos comparten una propiedad que las distingue de cualquier otra dependencia del producto**: su compromiso **no produce ningún síntoma**. Un motor de dibujo comprometido se nota; una derivación de clave debilitada no. De ahí que el único mecanismo disponible sea **saber exactamente qué versión se está usando**, que es lo que la regla de anclaje del intake compra, y **no dejar que cambie sola**.
 
-**La contribución de este proyecto de código a la seguridad del producto tiene además una parte que no es una dependencia**, y es la contraseña provisoria: `QG-09` mide **0** provisorias repetidas y **0** derivables del nombre, del correo ni de la fecha, y [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) fija la longitud y el alfabeto que lo sostienen. **No se verifica contra un registro de provisorias anteriores**, porque conservarlas exigiría guardar contraseñas en claro; la sostiene la impredecibilidad, y así lo declara `PA-06` de `05` §11, que esta categoría **hereda y no reabre**.
+**La contribución de este proyecto de código a la seguridad del producto tiene además una parte que no es una dependencia**, y es la contraseña provisoria: `QG-06009` mide **0** provisorias repetidas y **0** derivables del nombre, del correo ni de la fecha, y [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) fija la longitud y el alfabeto que lo sostienen. **No se verifica contra un registro de provisorias anteriores**, porque conservarlas exigiría guardar contraseñas en claro; la sostiene la impredecibilidad, y así lo declara `PA-06` de `05` §11, que esta categoría **hereda y no reabre**.
 
 ## 12. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **37 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 3.1 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **El identificador pasa de `PD-01` a `PD-10`** —**P2**—: la emisión anterior fundaba el ámbito en que «se citan siempre con su documento», y eso era falso; en `GeometriaFactory-Web` el token ya denotaba otro punto abierto **dentro del mismo documento**. La regla de numeración queda escrita: **la serie propia empieza donde no pisa ningún token que el documento cite**. La decisión del formato **CycloneDX / JSON** y la de la forma del identificador dejan de vivir sólo acá y se registran como `D9` y `D10` en [`../../../Audit/A3-Decisiones-Del-Product-Owner.md`](../../../Audit/A3-Decisiones-Del-Product-Owner.md) §4 —**P2**: una decisión del Product Owner que no se registra donde se la busca no es auditable en la ronda siguiente—. Y el hallazgo sobre `PD-02` deja de estar «elevado al informe de M6», **que es un artefacto que todavía no existe**: se registra como **`HM-01`** en el plan §5.2 (**P3**). |
 | 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Y se repara el hallazgo P1 más grave del corte: `PD-SBOM-2` se difería hacia un evento YA OCURRIDO.** Apuntaba a la fila de `Pipeline-CI-CD.md` §10 que declara la herramienta del stage, y esa fila es `PD-02`, **Cerrada el 2026-08-20**. **El formato deja de diferirse** —`Rules-Devops.md` §4.6 punto 1.b dice que formato, salida, publicación y firma **se eligen hoy** y que sólo el generador puede diferirse; diferir los cuatro era el arrastre invertido—: el Product Owner fijó **CycloneDX / JSON** el 2026-08-24, y queda **un** ítem diferido, `PD-01`, el generador, con evento en la **fase `i`**, que no ocurrió. El identificador pasa de `PD-SBOM-N` —familia que ninguna regla declaraba, **P2**— a la forma `PD-NN` del ámbito del documento, confirmada por el Product Owner como `Migracion-Rules.md` §4.3.1 pasada 1.b exige. **Y se declara un defecto ajeno que este apartado destapó**: `PD-02` nombra el «generador del inventario» en su enunciado y se cerró «por lectura» con una lista de herramientas que **no incluye ninguno** — se cerró un ítem que empaquetaba una decisión sin resolver. Se eleva al informe de M6 y **no se reabre desde acá**. §6.b pierde el «único del producto» —falso, porque el ejecutor de `-Web` quedó anclado— y la afirmación de que el ambiente de la fase `i` «ya existe», que contradecía a la fila de al lado. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |
 | 2.1 | 2026-08-24 | **Migración normativa 10.0 → 13.3, fase M4** (`Audit/Plan-Migracion-10.0-a-13.3.md` 1.0 §4.2). Entran **§2.b**, el generador del inventario como ítem propio, y **§6.b**, el análisis dinámico separado del estático, que `Rules-Devops.md` **6.0** §4.6 parte en sus puntos **1.b** y **5.b**. **Y la partición destapó un ítem vencido**: la fila «Formato y generador» de §2.1 remitía a *«la etapa `a`»*, que **cerró el 2026-08-13 sin registrarlo**. Se parte en dos puntos abiertos con los cuatro campos de `Root-Rules.md` §12.2 —`PD-SBOM-1`, formato y publicación, que se cierra en la **fase `i`**; y `PD-SBOM-2`, el generador, que se cierra en `Pipeline-CI-CD.md` §10— **con eventos que todavía no ocurrieron**, en lugar de copiar el vencido. **§6.b se contesta y no se difiere**: este proyecto de código es el único del producto donde el análisis dinámico **no está bloqueado por falta de ambiente**, y se declara con su herramienta, su stage y su criterio de bloqueo. Sube **minor**: parte ítems y no cambia ninguna decisión. |

@@ -2168,6 +2168,33 @@ Una norma sin instrumento de verificación es una intención. Siete controles, y
 
 ## 8. El plan de renombre
 
+> ### El tramo `R-4`, del 2026-08-29: el renumerado de `QG` y `CV`
+>
+> **No es parte de `F-03` y no toca códigos de condición.** Se registra acá porque usa el mismo
+> instrumento —tramos, población medida, controles— y porque §8 es donde este producto lleva la cuenta
+> de lo que renombra.
+>
+> **Origen:** el Product Owner preguntó por qué un identificador era `QG-03` y no `QG-00003`. La
+> respuesta fue que **`QG` y `CV` eran las únicas familias del destino que ignoraban su propio mapa de
+> bloques** —`00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web,
+> `12` Visor—, que `US`, `CU`, `RN`, `RC`, `ADR`, `VER` y `SD` sí usan.
+>
+> **Se evaluó un apartamiento y se descartó.** El [`ADR-14005`](Adrs/ADR-14005-Familias-Acunadas-Por-El-Destino-Con-Ambito-De-Proyecto.md)
+> proponía declarar el ámbito y conservar los dos dígitos; el Product Owner lo **retiró sin aceptarlo**
+> y eligió renumerar. Con eso las dos familias **dejan de apartarse y pasan a cumplir** `Root-Rules.md`
+> §9.1 y §9.2.
+>
+> | | Ocurrencias | |
+> | --- | --- | --- |
+> | **Renumeradas** | **507** en 28 documentos | El bloque estaba en su línea o en su sección |
+> | **Dejadas con la forma vieja** | **278** en 27 documentos | Su bloque **no está en el texto**, y no se inventó |
+>
+> **Las 278 son el resultado buscado y no un residuo.** Antes eran ambigüedades invisibles —`QG-03` se
+> leía bien y significaba tres cosas—; ahora son **referencias que no resuelven**, y ésas **las levanta
+> la compuerta mecánica**. Su inventario está en
+> [`../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../Audit/Inventario-Renumerado-R-4-2026-08-29.md),
+> con su ítem diferido y su evento de cierre en la Fase J.
+
 > ### La reactivación del Product Owner del 2026-08-29: `R-3` vuelve a correr
 >
 > **`R-3` —los códigos de condición, que es `F-03`— se reactiva.** Los otros tres tramos suspendidos
@@ -2288,6 +2315,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.26 | 2026-08-29 | **§8 registra el tramo `R-4`**, que no es de `F-03`: es el **renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner al **retirar el `ADR-14005` en lugar de aceptarlo**. **507 ocurrencias renumeradas** y **278 dejadas con la forma vieja a propósito**, porque su bloque no estaba en el texto y deducirlo habría sido inventarlo. Con el renumerado las dos familias **dejan de necesitar apartamiento**. | Orquestador SDD |
 | 1.25 | 2026-08-29 | **Tramos `R-3b` y `R-3c` ejecutados**, y §8 registra su recuento real: **335** ocurrencias en 32 documentos de la `02` y la `08` de `-Api`, y **320** en 46 del nivel producto y las dos `05`. **Y el guion del tramo se corrigió antes de `R-3c`**: **no excluía `Audit/`**, que §4.1 protege como registro histórico. No había mordido —las carpetas de `R-3a` y `R-3b` no tienen informes— y en `R-3c` habría falsificado actas de auditoría. Con la exclusión puesta, el recuento del corpus vivo cuadra con la medición independiente. Queda **`R-3d` con 269 en 42 documentos**. | Orquestador SDD |
 | 1.24 | 2026-08-29 | **§8 registra la reactivación de `R-3`**, decidida por el Product Owner el 2026-08-29. Es la primera vez que un tramo suspendido el 2026-08-13 vuelve a correr, y **el fundamento de la suspensión dejó de valer sólo para éste**: decía que los tramos *«renombraban identificadores en documentos que describen código que no existe»*, y para `F-03` el código existe y emite sus **56** códigos en la forma vigente. **Lo demostró un contrato de verificación fallando contra el sistema**, no una revisión de escritorio: `VER-02001`, el 2026-08-27, con cuatro de sus cinco criterios incumplidos. **Los otros tres tramos suspendidos conservan su fundamento intacto y siguen suspendidos.** §8 declara además la partición de `R-3` en **cuatro unidades**, la población real —**1162 ocurrencias de uso propio en 115 documentos, y no 2499**, porque §4.1 protege las otras 1337— y que **los dos huérfanos de §6.8.7 quedan fuera por construcción**. **`R-3a` queda ejecutada**: 436 ocurrencias en los 4 documentos de `GeometriaFactory-Api` `03-UX-UI-DX`. **Ninguna tabla del glosario cambia**: §6.8 es la fuente de este tramo y no su objeto. | Orquestador SDD |
 | 1.23 | 2026-08-16 | **Agrega §6.25, la vigesimosegunda tabla: las 14 filas del árbol del texto**, la mitad de la etapa `g` que le da nombre junto con la escena. Son **3 tipos** —`TextNode`, su conjunto cerrado de clases y el tipo de transferencia—, **6 valores**, **4 miembros** y **1 componente de superficie**. **La declaración va después de la escritura y queda registrada como apartamiento** del corolario 4 de §6.1. **Cinco clases CSS no necesitaron fila**: `gf-json-*` estaban portadas de la maqueta desde la etapa `b`, declaradas y sin usar, y esta etapa las estrena. **Y `Position` tampoco**: es la identidad posicional de §6.21.3, la misma sin traducir, que es lo que permite sincronizar el árbol con la escena. | Orquestador SDD |

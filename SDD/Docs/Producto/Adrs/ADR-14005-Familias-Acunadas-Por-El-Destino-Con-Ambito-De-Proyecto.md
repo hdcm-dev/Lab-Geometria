@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14005-Familias-Acunadas-Por-El-Destino-Con-Ambito-De-Proyecto.md
-**Versión:** 1.1
-**Estado:** **Propuesto** — requiere la aceptación del Product Owner. **Corregido el 2026-08-29 por el ciclo 2 de la mesa**, que refutó su alcance: ver §1.1
+**Versión:** 2.0
+**Estado:** **RETIRADO** el 2026-08-29 por decisión del Product Owner, **sin haber sido aceptado**. El apartamiento que proponía dejó de hacer falta: las dos familias se renumeraron al mapa de bloques del destino y **pasaron a cumplir la norma en vez de apartarse de ella**. Ver §0
 **Fecha:** 2026-08-29
 **Autor:** Mesa evaluadora del 2026-08-29
 **Nivel:** Producto
@@ -11,6 +11,51 @@
 **Origen:** hallazgo `H-03` de [`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), levantado por el Product Owner el 2026-08-29
 **Trazabilidad upstream:** `Root-Rules.md` **8.6** §9.1, §9.2 y §9.5 · `Migracion-Rules.md` §4.3.1 pasada 1.b
 **Trazabilidad downstream:** las dos `Pipeline-CI-CD.md`, las dos `Criterios-Validacion.md`, `Roadmap-Producto.md` §2.2
+
+---
+
+## 0. Por qué este ADR se retira sin haber sido aceptado
+
+**El Product Owner lo evaluó el 2026-08-29 y eligió la salida que hace innecesario el apartamiento.**
+Este documento **se conserva** —no se borra— porque su §1 es el diagnóstico que llevó a la decisión, y
+porque un apartamiento propuesto y descartado es tan informativo como uno aceptado.
+
+**Los dos defectos que la evaluación le encontró:**
+
+1. **Inventaba un ámbito que el framework no tiene.** `Root-Rules.md` §9.1 declara **exactamente dos**
+   —el producto y el conjunto normativo vigente— y «proyecto de código» no es uno. Lo que este ADR
+   presentaba como un apartamiento de **ancho** era, en realidad, uno de **ámbito**: mucho más grande,
+   y sobre un conjunto que §9.1 declara cerrado.
+2. **Citaba `ADR-14002` para conservar el ancho, y citaba la mitad equivocada.** Aquél conservó el
+   ancho de diez familias con este motivo: *«renumerarlas no reconecta nada con nada: elige un número
+   nuevo»*. Es cierto de aquellas diez —colecciones internas de un documento, **que no colisionan**— y
+   **falso acá**: `QG` colisiona 15 de 15 y `CV` 35 de 40. Renumerarlas **sí reconecta algo**.
+
+**Y el dato que lo decidió: el destino ya tenía un mapa de bloques, y estas dos familias eran de las
+pocas que lo ignoraban.**
+
+| Bloque | `00` | `02` | `04` | `06` | `08` | `10` | `12` |
+|---|---|---|---|---|---|---|---|
+| Proyecto de código | Api | Domain | Application | Infrastructure | Contracts | Web | Visor |
+
+`US`, `CU`, `RN`, `RC`, `ADR`, `VER` y `SD` lo usan. Es exactamente el caso de `RN` en `ADR-14002` —el
+único que **sí se renumeró**— y no el de las diez: *«había una forma vigente y una cita que no la
+usaba»*.
+
+**Qué se hizo en su lugar, el 2026-08-29:** el tramo **`R-4`** renumeró **507 ocurrencias** en 28
+documentos al mapa de bloques. Las dos familias pasan a **cinco dígitos** y a **ámbito producto**, que
+son los que `Root-Rules.md` §9.2 y §9.1 piden. **No queda apartamiento que declarar.**
+
+**Y las 278 que no se pudieron renumerar quedaron a la vista, que era el punto.** Su bloque no se podía
+deducir ni de su línea ni de su sección, y **no se inventó**: conservan la forma `QG-NN`, que después
+del renumerado **ya no resuelve**. Pasaron de ser 278 ambigüedades invisibles a **278 referencias rotas
+que la compuerta mecánica de `Master-Prompt.md` §10.0 levanta**. Su inventario está en
+[`../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../Audit/Inventario-Renumerado-R-4-2026-08-29.md).
+
+**Lo que este retiro le debe al reporte `19`.** Aceptar este ADR habría creado exactamente la deuda que
+ese reporte denuncia: una regla declarada hacia adelante y un corpus que no la cumple, sin mecanismo
+que lo alcance. **El reporte se escribió el mismo día, y su primer efecto fue que su propio caso
+dejara de existir.**
 
 ---
 
@@ -37,9 +82,9 @@ Las acuñó este destino, y `Root-Rules.md` §9.5 exige que **toda familia decla
 
 **Y el ancho es el síntoma menor.** El grave es el ámbito:
 
-> `QG-03` en `GeometriaFactory-Api` pide **75 % de líneas y 70 % de ramas**.
-> `QG-03` en `GeometriaFactory-Domain` pide **90 y 85**.
-> `QG-03` en `GeometriaFactory-Application` pide **85 y 80**.
+> `QG-00003` en `GeometriaFactory-Api` pide **75 % de líneas y 70 % de ramas**.
+> `QG-02003` en `GeometriaFactory-Domain` pide **90 y 85**.
+> `QG-04003` en `GeometriaFactory-Application` pide **85 y 80**.
 
 **El mismo identificador nombra tres puertas con tres umbrales distintos.** `QG-05` tiene **cinco**
 enunciados distintos y `QG-14` **dos**. Un identificador que no es único en su ámbito **no es una
@@ -83,7 +128,7 @@ separado porque tienen fundamentos distintos.** `PT` queda fuera por §1.1.
 
 1. **El ámbito de `QG` y `CV` es el proyecto de código**, y se declara. No es una elección
    nueva: **es el ámbito que las tres ya ejercen**, y lo único que faltaba era escribirlo. Toda cita
-   desde fuera del proyecto de código **lo nombra**: `QG-03 de -Domain`, nunca `QG-03` a secas.
+   desde fuera del proyecto de código **lo nombra**: `QG-03 de -Domain`, nunca `QG-02003` a secas.
 2. **Las dos conservan el ancho de dos dígitos**, con este apartamiento declarado.
 
 ---
@@ -164,5 +209,6 @@ Elevado al framework como el **reporte `19`**.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 2.0 | 2026-08-29 | **RETIRADO sin haber sido aceptado**, por decisión del Product Owner, y §0 dice por qué. La evaluación le encontró dos defectos: **inventaba un ámbito que `Root-Rules.md` §9.1 no tiene** —presentado como apartamiento de ancho cuando era de ámbito— y **citaba la mitad equivocada de `ADR-14002`**, cuyo motivo para conservar el ancho *«renumerarlas no reconecta nada»* vale para diez familias que **no colisionan** y no para dos que colisionan **15 de 15** y **35 de 40**. El dato que lo decidió: **el destino ya tenía un mapa de bloques** y estas dos eran de las pocas que lo ignoraban. En su lugar corrió el tramo **`R-4`**: **507 ocurrencias renumeradas** y las **278** sin bloque deducible **dejadas a la vista como referencias rotas y detectables**. Sube MAJOR: el documento pasa de proponer un apartamiento a registrar por qué no hizo falta. | Product Owner y mesa evaluadora |
 | 1.1 | 2026-08-29 | **Corrección del ciclo 2 de la mesa, en §1.1: `PT` sale del alcance.** La emisión 1.0 agrupó a las tres familias **por su síntoma —dos dígitos, sin declaración— sin verificar que compartieran el defecto**, y no lo comparten: medidos los enunciados por identificador, `QG` colisiona **15 de 15**, `CV` **35 de 40** y **`PT` cero de cuatro**. `PT` es del producto, su tabla canónica está en `Roadmap-Producto.md` §2.2 y **sus 169 citas no son ambiguas**. El alcance pasa de 2141 ocurrencias a **1005** y las citas ambiguas de 458 a **289**. El ítem diferido de §4 se rehace con el recuento verdadero y **declara por qué existe en vez de repararse**: `Root-Rules.md` §11 pide seis campos y los seis son sobre la decisión, ninguno sobre el corpus que deja atrás. Elevado al framework como reporte `19`. | Mesa evaluadora, ciclo 2 |
 | 1.0 | 2026-08-29 | Emisión inicial, **a partir de una pregunta del Product Owner** —«¿no debería ser `QG-00003`?»— que al buscarse la respuesta destapó algo mayor: **`QG`, `CV` y `PT` son familias que el destino acuñó sin declarar prefijo, forma ni ámbito**, contra `Root-Rules.md` §9.5. Declara el **ámbito de proyecto de código** —que las tres ya ejercen— y **conserva el ancho de dos dígitos**, con el precedente de `ADR-14002` para el ancho y el de `D10` para la forma. Deja escrito que **`QG-03` nombra hoy tres puertas con tres umbrales distintos**, que es el defecto de fondo, y que **repararlo no es de este ADR**: queda como ítem diferido con evento en la Fase J. | Mesa evaluadora del 2026-08-29 |
