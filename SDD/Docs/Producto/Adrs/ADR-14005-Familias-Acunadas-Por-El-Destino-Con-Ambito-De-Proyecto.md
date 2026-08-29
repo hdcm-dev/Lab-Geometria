@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14005-Familias-Acunadas-Por-El-Destino-Con-Ambito-De-Proyecto.md
-**Versión:** 1.0
-**Estado:** **Propuesto** — requiere la aceptación del Product Owner
+**Versión:** 1.1
+**Estado:** **Propuesto** — requiere la aceptación del Product Owner. **Corregido el 2026-08-29 por el ciclo 2 de la mesa**, que refutó su alcance: ver §1.1
 **Fecha:** 2026-08-29
 **Autor:** Mesa evaluadora del 2026-08-29
 **Nivel:** Producto
@@ -47,15 +47,44 @@ dirección**, y `Root-Rules.md` §9.1 lo pide por ese motivo: para que una cita 
 
 ---
 
+### 1.1 Corrección del ciclo 2 de la mesa: **`PT` no va, y su inclusión era un error de esta emisión**
+
+**La emisión 1.0 puso a `QG`, `CV` y `PT` en la misma bolsa porque las tres compartían un síntoma
+—dos dígitos, sin declaración— y no verificó si compartían el defecto.** El ciclo 2 lo verificó y
+**no lo comparten**.
+
+**Se midió cuántos identificadores de cada familia tienen más de un enunciado en el corpus:**
+
+| Familia | Identificadores con enunciado | Con **más de uno** | Lectura |
+|---|---|---|---|
+| **`QG`** | 15 | **15** | **Colisiona entera.** `QG-01` es «construcción sin advertencias» en un proyecto de código y «el bundle se genera sin errores» en otro |
+| **`CV`** | 40 | **35** | **Colisiona casi entera.** `CV-02` es «la batería del validador pasa» acá y «los quince puntos de acceso están ejercidos» allá |
+| **`PT`** | 4 | **0** | **NO colisiona.** `PT-04` es «que la imagen del servicio de datos se construya y arranque» **en los diecisiete lugares donde aparece** |
+
+**`PT` es del producto y ya está declarada como tal**, en
+[`../../00-Contexto/Roadmap-Producto.md`](../../00-Contexto/Roadmap-Producto.md) §2.2, que enumera sus
+cinco puertas **una sola vez para todo el producto** y dice dónde se mide cada una. No le falta ámbito:
+lo tiene, es el producto, y su tabla canónica lo declara. **Sus 169 citas sin calificador no son
+ambiguas**, y calificarlas habría sido agregar ruido a un identificador que ya resuelve.
+
+**Qué se corrige, entonces:** este ADR alcanza a **`QG` y `CV`** y **no a `PT`**. Su recuento pasa de
+2141 ocurrencias a **1005**, y el de citas realmente ambiguas de 458 a **289**.
+
+**Y por qué queda escrito en lugar de reescribir la emisión 1.0.** El error es del método con que se
+armó el ADR —agrupar por síntoma sin verificar el defecto— y borrarlo dejaría el ADR correcto y la
+lección perdida. Es el mismo criterio con el que la mesa registra sus parches rechazados.
+
+---
+
 ## 2. Decisión
 
-**Las tres familias declaran su ámbito y conservan su ancho de dos dígitos, y las dos cosas se deciden
-por separado porque tienen fundamentos distintos.**
+**`QG` y `CV` declaran su ámbito y conservan su ancho de dos dígitos, y las dos cosas se deciden por
+separado porque tienen fundamentos distintos.** `PT` queda fuera por §1.1.
 
-1. **El ámbito de `QG`, `CV` y `PT` es el proyecto de código**, y se declara. No es una elección
+1. **El ámbito de `QG` y `CV` es el proyecto de código**, y se declara. No es una elección
    nueva: **es el ámbito que las tres ya ejercen**, y lo único que faltaba era escribirlo. Toda cita
    desde fuera del proyecto de código **lo nombra**: `QG-03 de -Domain`, nunca `QG-03` a secas.
-2. **Las tres conservan el ancho de dos dígitos**, con este apartamiento declarado.
+2. **Las dos conservan el ancho de dos dígitos**, con este apartamiento declarado.
 
 ---
 
@@ -97,14 +126,27 @@ que el apartamiento esté declarado y que el ancho sea consistente **dentro de**
 la regla hacia adelante; el barrido de las citas de `QG-NN` sin proyecto de código es trabajo propio, y
 queda como ítem diferido:
 
-> **Ítem diferido (`Root-Rules.md` §12.2) · las citas de `QG` sin ámbito.**
-> **1 · Qué falta:** barrer las citas de `QG-NN`, `CV-NN` y `PT-NN` que no nombran su proyecto de
-> código y calificarlas.
-> **2 · Por qué no se puede hoy:** son **2141 ocurrencias** y la calificación no es mecánica — una cita
-> dentro del documento de su propio proyecto de código **no necesita** el calificador.
-> **3 · Quién lo cierra:** las categorías 08 y 09 de las dos unidades de entrega.
+> **Ítem diferido (`Root-Rules.md` §12.2) · las 289 citas ambiguas de `QG` y `CV`.**
+> **1 · Qué falta:** calificar con su proyecto de código las **289** citas —204 de `QG` y 85 de `CV`—
+> que no lo nombran ni en su línea ni en su sección envolvente. Las otras **716 de las 1005 ya
+> resuelven** por su contexto, y `PT` queda fuera por §1.1.
+> **2 · Por qué no se puede hoy:** **no es mecánico y no es deducible del texto.** Las 289 son
+> exactamente las que quedaron después de descartar las que su línea o su sección desambigua: para
+> cada una hay que decidir a qué proyecto de código se refería quien la escribió, y eso es
+> interpretación. Es el mismo motivo con el que la mesa se negó a reconstruir el mapeo de las 40
+> historias pronosticadas: deducirlo del texto sería inventarlo.
+> **3 · Quién lo cierra:** las categorías 08 y 09 de las dos unidades de entrega, que son las que
+> acuñaron las dos familias.
 > **4 · En qué evento se cierra:** la **Fase J**, en su revisión de huecos y contradicciones entre
 > documentos.
+
+**Y hay que decir por qué este ítem existe en vez de repararse, porque no es una elección de este
+ADR.** `Root-Rules.md` §11 pide seis campos a todo apartamiento y **los seis son sobre la decisión**:
+qué obligación no se cumple, por qué, qué se descartó, qué la superaría, su estado y cuántos saltos
+sobrevivió. **Ninguno es sobre el corpus que la decisión deja atrás.** Un apartamiento declara una
+regla hacia adelante y el método **no tiene etapa que barra lo que la precede** — la revisión de
+`Migracion-Rules.md` §4.7 mira el ADR contra la normativa, nunca contra el corpus que gobierna.
+Elevado al framework como el **reporte `19`**.
 
 ---
 
@@ -122,4 +164,5 @@ queda como ítem diferido:
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-29 | **Corrección del ciclo 2 de la mesa, en §1.1: `PT` sale del alcance.** La emisión 1.0 agrupó a las tres familias **por su síntoma —dos dígitos, sin declaración— sin verificar que compartieran el defecto**, y no lo comparten: medidos los enunciados por identificador, `QG` colisiona **15 de 15**, `CV` **35 de 40** y **`PT` cero de cuatro**. `PT` es del producto, su tabla canónica está en `Roadmap-Producto.md` §2.2 y **sus 169 citas no son ambiguas**. El alcance pasa de 2141 ocurrencias a **1005** y las citas ambiguas de 458 a **289**. El ítem diferido de §4 se rehace con el recuento verdadero y **declara por qué existe en vez de repararse**: `Root-Rules.md` §11 pide seis campos y los seis son sobre la decisión, ninguno sobre el corpus que deja atrás. Elevado al framework como reporte `19`. | Mesa evaluadora, ciclo 2 |
 | 1.0 | 2026-08-29 | Emisión inicial, **a partir de una pregunta del Product Owner** —«¿no debería ser `QG-00003`?»— que al buscarse la respuesta destapó algo mayor: **`QG`, `CV` y `PT` son familias que el destino acuñó sin declarar prefijo, forma ni ámbito**, contra `Root-Rules.md` §9.5. Declara el **ámbito de proyecto de código** —que las tres ya ejercen— y **conserva el ancho de dos dígitos**, con el precedente de `ADR-14002` para el ancho y el de `D10` para la forma. Deja escrito que **`QG-03` nombra hoy tres puertas con tres umbrales distintos**, que es el defecto de fondo, y que **repararlo no es de este ADR**: queda como ítem diferido con evento en la Fase J. | Mesa evaluadora del 2026-08-29 |
