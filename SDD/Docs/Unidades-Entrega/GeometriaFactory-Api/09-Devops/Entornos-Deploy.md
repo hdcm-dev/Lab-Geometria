@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Entornos-Deploy.md
-**Versión:** 3.2
+**Versión:** 3.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-26
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -94,7 +94,7 @@ abiertos una fila que nadie puede cerrar.
 | Punto de entrada | **Un puerto publicado hacia el enrutador, y es el único punto de entrada al servidor propio.** Todo lo que este proyecto de código no exponga, **no existe para nadie de afuera** | `05` §5, fila de punto de entrada |
 | Comprobación de salud del contenedor | Declarada en el archivo de composición, contra el punto de salud del servicio | Intake §17.1.P.3 · GeometriaFactory-Api, fila de salud |
 
-**La cuarta fila es una decisión de seguridad y no de red.** Un único puerto publicado significa que la superficie expuesta del servidor domiciliario **es exactamente la que `05` §3.4 enumera**, y por eso el `QG-05` de la canalización —**4** puntos fuera de la guardia sobre **15**, ni uno más— es también un gate de exposición: cada punto nuevo es superficie nueva alcanzable desde afuera.
+**La cuarta fila es una decisión de seguridad y no de red.** Un único puerto publicado significa que la superficie expuesta del servidor domiciliario **es exactamente la que `05` §3.4 enumera**, y por eso el `QG-00005` de la canalización —**4** puntos fuera de la guardia sobre **15**, ni uno más— es también un gate de exposición: cada punto nuevo es superficie nueva alcanzable desde afuera.
 
 ### 2.2 `GeometriaFactory-Domain`
 
@@ -124,7 +124,7 @@ Lo que sí hace, y es lo que lo distingue, es **exigir tres cosas del ambiente q
 | La **ubicación del almacén tomada de configuración**, provista por `GeometriaFactory-Api` | Este proyecto de código **no la busca**: la recibe | La misma |
 | La **clave de firma provista desde afuera**, por variable de entorno o archivo montado | Ver §5 | La misma |
 
-**Las tres son restricciones y no provisiones.** Este proyecto de código no crea el volumen ni escribe el archivo de composición; lo que hace es **fallar de manera declarada si alguna de las tres no está**, que es preferible a arreglárselas solo. `QG-12` lo mide en la tercera: **0** emisiones de acceso sin clave de firma y **0** claves generadas al vuelo.
+**Las tres son restricciones y no provisiones.** Este proyecto de código no crea el volumen ni escribe el archivo de composición; lo que hace es **fallar de manera declarada si alguna de las tres no está**, que es preferible a arreglárselas solo. `QG-06012` lo mide en la tercera: **0** emisiones de acceso sin clave de firma y **0** claves generadas al vuelo.
 
 ## 3. Cómo llega el código al destino
 
@@ -188,9 +188,9 @@ Las tres propiedades que hacen que la dirección nunca llegue al navegador, cada
 
 | Propiedad | Mecanismo | Dónde se verifica |
 | --- | --- | --- |
-| **El navegador nunca llama a este servicio** | El único consumidor es el front, **servidor a servidor** | `RA-01`; intake §17.1.P.3 · GeometriaFactory-Api, fila de quién la consume. Gate `QG-05` de `GeometriaFactory-Web`: **0** peticiones del navegador hacia el servicio de datos |
+| **El navegador nunca llama a este servicio** | El único consumidor es el front, **servidor a servidor** | `RA-01`; intake §17.1.P.3 · GeometriaFactory-Api, fila de quién la consume. Gate `QG-00005` de `GeometriaFactory-Web`: **0** peticiones del navegador hacia el servicio de datos |
 | **La dirección no viaja en ningún contenido servido al navegador** | Vive en la configuración del proceso del front y sólo la conoce su cliente tipado; **ninguna superficie la muestra** | `ADR-00007` de `GeometriaFactory-Web` §7 y §8, primera métrica: **0** apariciones en el repositorio |
-| **La dirección no se filtra por un mensaje de error** | Los mensajes se traducen en un solo lugar y **ninguno incluye direcciones de servicios internos** | `QG-08` de este proyecto de código —**0** sobre los **quince** puntos y sobre el registro del servidor— y `QG-08` de `GeometriaFactory-Web` —**0** sobre los **diecisiete** códigos vivos y el camino de ausencia de respuesta— |
+| **La dirección no se filtra por un mensaje de error** | Los mensajes se traducen en un solo lugar y **ninguno incluye direcciones de servicios internos** | `QG-10008` de este proyecto de código —**0** sobre los **quince** puntos y sobre el registro del servidor— y `QG-10008` de `GeometriaFactory-Web` —**0** sobre los **diecisiete** códigos vivos y el camino de ausencia de respuesta— |
 
 **Las tres se sostienen entre sí y ninguna alcanza sola.** La primera evita el tráfico; la segunda evita que la dirección esté en el navegador aunque no haya tráfico; la tercera evita que se filtre en el único camino que atraviesa las dos anteriores, que es un mensaje de error. `RI-05` de [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §7 nombra exactamente ese modo de falla, y lo ubica **en el último tramo antes de salir del servidor propio**, que es este proyecto de código.
 
@@ -205,8 +205,8 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 | **Ruta del almacén** | Configuración del ambiente, apuntando en producción a un **volumen persistente** | Este proyecto de código, que la toma y se la pasa a `GeometriaFactory-Infrastructure`. **Ningún punto de acceso la devuelve** (`ADR-00007` §2, regla 4) |
 | **Clave de firma del acceso** | Variable de entorno o archivo montado. Ver §6 | El adaptador de emisión de accesos, que **la recibe y no la busca** |
 | **Vigencia del acceso firmado** | Configuración. El intake la declara «corta» y **no fija número** | `PA-04` de `05` §11, registrado como `PD-04` en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10 |
-| **Límite de tamaño del cuerpo de una petición** | Configuración, **uno solo para todo el producto**, que **rechaza y nunca trunca**. El número se calibra en la etapa `a` | `PA-05` de `05` §11; `QG-09` mide **0** truncamientos silenciosos |
-| **Configuración de intercambio** | **Una sola declarada en todo el producto**, decidida acá porque este es el productor | [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §6; `QG-10` mide **1** |
+| **Límite de tamaño del cuerpo de una petición** | Configuración, **uno solo para todo el producto**, que **rechaza y nunca trunca**. El número se calibra en la etapa `a` | `PA-05` de `05` §11; `QG-00009` mide **0** truncamientos silenciosos |
+| **Configuración de intercambio** | **Una sola declarada en todo el producto**, decidida acá porque este es el productor | [`../../../Producto/Vista-Producto.md`](../../../Producto/Vista-Producto.md) §6; `QG-00010` mide **1** |
 | Dirección externa del propio servicio | **No es configuración de este proyecto de código.** Ver §4.1 | — |
 
 **La última fila de la tabla de valores es la que más se busca y no está.** Un servicio suele conocer su dirección pública para armar enlaces; **éste no arma ninguno**, porque `RA-03` declara que todo lo que el navegador deba obtener del backend **pasa por el front**: descargas, imágenes y redirecciones se sirven desde el dominio del front, que a su vez las pide por su cliente tipado.
@@ -232,7 +232,7 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 | Reloj | **Es un puerto**, para que las fechas de alta y modificación sean verificables en prueba. No se toma del sistema | Intake §17.1.P.11 · GeometriaFactory-Application, punto 3 |
 | Variables de entorno del pipeline | **Ninguna** | Decisión de esta categoría, derivada de la tabla de §2.1 de [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md): sus tres stages leen el repositorio y escriben recuentos e informes |
 
-**La fila del reloj no es un detalle de estilo.** Un caso de uso que tomara la hora del sistema sería irreproducible en la canalización, y `QG-02` —batería entera en verde— empezaría a fallar por motivos que no son del código. Que el reloj entre por un puerto es lo que hace que la batería sea determinista en cualquier ejecutor.
+**La fila del reloj no es un detalle de estilo.** Un caso de uso que tomara la hora del sistema sería irreproducible en la canalización, y `QG-04002` —batería entera en verde— empezaría a fallar por motivos que no son del código. Que el reloj entre por un puerto es lo que hace que la batería sea determinista en cualquier ejecutor.
 
 ## 6. Secretos
 
@@ -245,7 +245,7 @@ Configuración de doce factores: **fuera del código, en variables de entorno o 
 
 **Ningún secreto entra al repositorio, ni al archivo del flujo de trabajo, ni a la imagen.** El intake §17.1.P.5 · GeometriaFactory-Api lo declara así, con la precisión de que en la integración continua viajan **como secreto del repositorio, nunca en el archivo del flujo de trabajo**, y la Definition of Done §1.4 lo verifica por inspección del repositorio, del archivo de construcción y del de composición.
 
-**Y el gate que lo sostiene en ejecución**: `QG-12` de `GeometriaFactory-Infrastructure` mide **0** emisiones de acceso sin clave de firma y **0** claves generadas al vuelo. Un servicio que generara una clave al arrancar cuando no la encuentra **arrancaría bien y emitiría accesos que dejan de valer en el siguiente reinicio**, sin ningún error en el momento de la falla.
+**Y el gate que lo sostiene en ejecución**: `QG-06012` de `GeometriaFactory-Infrastructure` mide **0** emisiones de acceso sin clave de firma y **0** claves generadas al vuelo. Un servicio que generara una clave al arrancar cuando no la encuentra **arrancaría bien y emitiría accesos que dejan de valer en el siguiente reinicio**, sin ningún error en el momento de la falla.
 
 **No se nombra ningún valor y no se declara ningún gestor de secretos concreto.** El intake §17.1.P.5 · GeometriaFactory-Api declara la forma —variable de entorno o archivo montado— y ninguna fuente nombra un producto. Elegir uno acá sería declarar una pieza de infraestructura que el intake §10 no financia.
 
@@ -314,9 +314,9 @@ La de estado del trabajo, igual que en el resto del producto:
 | Transición | Trigger | Aprobador | Registro |
 | --- | --- | --- | --- |
 | Rama de etapa → rama principal | Fusión del pull request | Product Owner, con OK explícito | Informe de cierre (intake §15) |
-| Etapa fusionada → etapa cerrada | Etiqueta al fusionar | El mismo | La etiqueta, y la constancia de `QG-07` sobre las **cuatro** comprobaciones |
+| Etapa fusionada → etapa cerrada | Etiqueta al fusionar | El mismo | La etiqueta, y la constancia de `QG-04007` sobre las **cuatro** comprobaciones |
 
-**Ninguna transición de este proyecto de código alcanza a un acto de despliegue**, y es lo que lo distingue de `GeometriaFactory-Contracts`, cuyo `QG-08` sí lo hace. Acá la promoción termina en la etiqueta: lo que se despliega es la unidad que lo embebe, y su promoción la gobierna la categoría 09 de `GeometriaFactory-Api`.
+**Ninguna transición de este proyecto de código alcanza a un acto de despliegue**, y es lo que lo distingue de `GeometriaFactory-Contracts`, cuyo `QG-00008` sí lo hace. Acá la promoción termina en la etiqueta: lo que se despliega es la unidad que lo embebe, y su promoción la gobierna la categoría 09 de `GeometriaFactory-Api`.
 
 ### 7.4 `GeometriaFactory-Infrastructure`
 
@@ -473,7 +473,7 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 
 | Secreto, nombrado por su función | Dónde vive | Cómo llega | Qué pasa si no llega |
 | --- | --- | --- | --- |
-| **Clave de firma del acceso** | **Fuera del repositorio y fuera de la imagen**: variable de entorno o archivo montado. Se genera o se provee en el primer arranque | La provee `GeometriaFactory-Api` desde la configuración del ambiente | **Falla con la condición declarada.** `05` §5: este proyecto de código **la recibe y no la busca**; `QG-12` mide **0** claves generadas al vuelo |
+| **Clave de firma del acceso** | **Fuera del repositorio y fuera de la imagen**: variable de entorno o archivo montado. Se genera o se provee en el primer arranque | La provee `GeometriaFactory-Api` desde la configuración del ambiente | **Falla con la condición declarada.** `05` §5: este proyecto de código **la recibe y no la busca**; `QG-00012` mide **0** claves generadas al vuelo |
 
 **La cuarta columna es la decisión de diseño que esta categoría subraya.** Un adaptador que, ante la falta de la clave, generara una al vuelo **arrancaría bien y emitiría accesos que nadie más puede verificar**: el producto funcionaría hasta el primer reinicio y después dejaría de reconocer sus propios accesos, sin ningún error visible en el momento de la falla. Por eso la ausencia es una condición declarada y no un valor por defecto.
 
@@ -485,12 +485,13 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 
 **Ningún secreto entra al repositorio, ni en la integración continua.** El intake §17.1.P.5 · GeometriaFactory-Infrastructure lo declara sin excepción. **No se declara ninguna frecuencia de rotación**: ninguna fuente la da, y el gobierno del valor pertenece a la categoría 09 de `GeometriaFactory-Api`, que es la que lo provee al ambiente.
 
-**Y una regla de higiene que alcanza al pipeline y no sólo al producto**: `QG-13` mide **0** mensajes o trazas con un secreto, la ruta del almacén o el texto del alumno. Eso incluye la salida de los cuatro stages: un registro de ejecución que imprimiera la ruta del almacén desechable o un fragmento de un escenario estaría produciendo, en la canalización, lo que el gate prohíbe en el producto.
+**Y una regla de higiene que alcanza al pipeline y no sólo al producto**: `QG-06013` mide **0** mensajes o trazas con un secreto, la ruta del almacén o el texto del alumno. Eso incluye la salida de los cuatro stages: un registro de ejecución que imprimiera la ruta del almacén desechable o un fragmento de un escenario estaría produciendo, en la canalización, lo que el gate prohíbe en el producto.
 
 ## 13. Control de cambios
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.3 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **12 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 3.1 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **§2.b suma el estado del apartamiento en el que se apoya** (**P3**): `ADR-14004` está **`Propuesto`**, no aceptado, y la emisión anterior lo citaba como si ya autorizara. Se dice en lugar de omitirse, con el precedente de `ADR-14003`, que pasó a `Aceptado` por un acto explícito del Product Owner. |
 | 3.2 | 2026-08-26 | **El apartamiento en el que se apoya §2.b pasa a `Aceptado`.** El Product Owner aprobó [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md) el **2026-08-26**, sin modificar su contenido. La fila que declaraba que la figura «no aplica» se sostenía sobre un instrumento **todavía no aprobado** deja de hacer falta: con la aceptación, **el apartamiento cuenta como decisión y no como omisión** (`Root-Rules.md` §11), que es la diferencia que ese ADR existe para producir. **Nada más cambia**: el ítem sigue contestado igual, con su motivo y su condición de reapertura. Sube **minor**. |
 | 3.0 | 2026-08-24 | **Ronda 2 del corte 09 de la migración 10.0 → 13.3**, que repara lo que el **audit independiente** de la ronda 1 levantó. **El veredicto fue RECHAZADO**, con un **P0**: `Migracion-Rules.md` §6 lista «estado previo no archivado» entre los hallazgos que **detienen la cadena**, y la ronda 1 no archivó. La justificación que había invocado —el precedente de editar en el lugar de la migración anterior— **la refuta el propio `ADR-14001` §4**, que acota su apartamiento a «la migración 6.0 → 8.6 y sólo esa» y declara que el archivado de un documento que **sube de versión sin cambiar de lugar sigue siendo por carpeta**. El estado previo queda en `_legacy/2026-08-24/`. **Y §2.b suma el apartamiento que le faltaba**: la figura «no aplica, y no está diferida» es una **tercera salida** que `Rules-Devops.md` §4.4 punto 2.b no prevé, y `Root-Rules.md` §11 pide ADR. Queda declarada en [`ADR-14004`](../../../Producto/Adrs/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md), **Propuesto**; era **P2** del audit. **Y sube MAJOR y no minor, corrigiendo el criterio de la fila anterior.** La ronda 1 bumpeó minor con el argumento de que partir una sección no cambia ninguna decisión; el propio destino había bumpeado **major** cinco días antes por la misma operación, con el argumento de que **cambia la estructura de la sección para corresponder con la de la regla**. Los dos razonamientos se sostienen por separado, pero convivir sin declararlo dejaba la serie midiendo con dos varas. **Se adopta el criterio anterior**, que es el que ya estaba escrito. |

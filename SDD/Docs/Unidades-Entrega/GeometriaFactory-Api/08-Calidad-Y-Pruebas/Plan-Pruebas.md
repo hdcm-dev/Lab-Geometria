@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Plan-Pruebas.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -134,8 +134,8 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] **`TC-00026` da 0 exposiciones** sobre las respuestas de fallo de los puntos que la etapa toca, y el registro del servidor los tiene todos.
 - [ ] **La batería del validador que corre desde acá pasa entera: 10 de 10**, a partir de la etapa `f`.
 - [ ] Todos los NFR con umbral **cero** que la etapa toca se midieron **en la condición declarada**, y no se dieron por cumplidos por no haberse observado lo contrario.
-- [ ] Los gates `QG-01`, `QG-02`, `QG-05`, `QG-06`, `QG-07`, `QG-08`, `QG-09`, `QG-10`, `QG-11`, `QG-12` y `QG-15` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
-- [ ] Los gates condicionados —`QG-03`, `QG-04`, `QG-13`, `QG-14`— **se midieron y se registraron**.
+- [ ] Los gates `QG-00001`, `QG-00002`, `QG-00005`, `QG-00006`, `QG-00007`, `QG-00008`, `QG-00009`, `QG-00010`, `QG-00011`, `QG-00012` y `QG-00015` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] Los gates condicionados —`QG-00003`, `QG-00004`, `QG-00013`, `QG-00014`— **se midieron y se registraron**.
 - [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada, **incluida su tabla de quince puntos**.
 - [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
 - [ ] El punto de control de la etapa tiene el OK explícito del Product Owner (intake §15, regla de delivery 2).
@@ -149,7 +149,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] La cobertura por componente alcanza los umbrales de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 en los componentes que la etapa toca. Gate condicionado mientras el valor siga rotulado [ASUNCIÓN].
 - [ ] `TC-02023` cierra en las dos direcciones sobre las condiciones que la etapa incorporó.
 - [ ] `TC-02026` cierra sobre los invariantes que la etapa toca: **cada uno con prueba de violación rechazada y sin dobles**.
-- [ ] Los gates `QG-01`, `QG-02`, `QG-04`, `QG-05`, `QG-06` y `QG-08` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] Los gates `QG-02001`, `QG-02002`, `QG-02004`, `QG-02005`, `QG-02006` y `QG-02008` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
 - [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró.
 - [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
 - [ ] El punto de control de la etapa tiene el OK explícito del Product Owner (intake §15).
@@ -165,7 +165,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] `TC-04027` sigue dando **1** dependencia saliente y **0** de las prohibidas.
 - [ ] `TC-04028` cierra en las dos direcciones sobre las condiciones que la etapa incorporó.
 - [ ] `TC-04011` y la tabla de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5 cierran sobre las comprobaciones que la etapa toca: **cada una con prueba de su negativa sin base de datos**.
-- [ ] Los gates `QG-01`, `QG-02`, `QG-04`, `QG-05`, `QG-06`, `QG-07`, `QG-08`, `QG-09` y `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] Los gates `QG-04001`, `QG-04002`, `QG-04004`, `QG-04005`, `QG-04006`, `QG-04007`, `QG-04008`, `QG-04009` y `QG-04011` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
 - [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró.
 - [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
 - [ ] El punto de control de la etapa tiene el OK explícito del Product Owner (intake §15, regla de delivery 2).
@@ -181,7 +181,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] `TC-06009` da **exactamente 2** advertencias sobre `E-1`, y no 3.
 - [ ] `TC-06034` cierra en las dos direcciones sobre las condiciones que la etapa incorporó, y `TC-06035` da **0** en sus dos recuentos —mensajes y registro del servidor—.
 - [ ] Todos los NFR con umbral **cero** que la etapa toca se midieron **en la condición declarada**, y no se dieron por cumplidos por no haberse observado lo contrario.
-- [ ] Los gates `QG-01`, `QG-02`, `QG-03`, `QG-04`, `QG-07`, `QG-08`, `QG-09`, `QG-10`, `QG-11`, `QG-12` y `QG-13` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] Los gates `QG-06001`, `QG-06002`, `QG-06003`, `QG-06004`, `QG-06007`, `QG-06008`, `QG-06009`, `QG-06010`, `QG-06011`, `QG-06012` y `QG-06013` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
 - [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró.
 - [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
 - [ ] El punto de control de la etapa tiene el OK explícito del Product Owner (intake §15, regla de delivery 2).
@@ -212,7 +212,7 @@ Alineados con los **cinco** riesgos arquitectónicos de [`../05-Arquitectura-Tec
 
 | Id | Riesgo | Impacto | Probabilidad | Mitigación en este plan |
 | --- | --- | --- | --- | --- |
-| RQ-01 | Que una dependencia se cuele en el nivel 0 y el dominio deje de ser probable sin infraestructura | Alto | Media | `TC-02024` corre en cada etapa, no sólo en la `a`; `QG-04` bloquea la fusión |
+| RQ-01 | Que una dependencia se cuele en el nivel 0 y el dominio deje de ser probable sin infraestructura | Alto | Media | `TC-02024` corre en cada etapa, no sólo en la `a`; `QG-02004` bloquea la fusión |
 | RQ-02 | Que un invariante se ejerza en un componente y no en otro, y quede una puerta por la que se lo saltea | Alto | Media, **con precedente registrado**: la familia se abrió dos veces | `TC-02005` como prueba de regresión de esa familia; `TC-02026` sobre los nueve invariantes; umbral de cobertura de 100 % de ramas en el evaluador de admisibilidad |
 | RQ-03 | Que el consumidor trate el resultado tipado como excepción y descarte los rechazos | Medio | Media | `TC-02027` verifica que ninguna condición prevista lance; el efecto sobre el consumidor se verifica en `GeometriaFactory-Application` |
 | RQ-04 | Que alguna operación lea el reloj por comodidad y rompa la reproducibilidad | Medio | Baja | `TC-02025`, con la comparación de dos ejecuciones consecutivas sin fijar el reloj |
@@ -226,7 +226,7 @@ Alineados con los **seis** riesgos arquitectónicos de [`../05-Arquitectura-Tecn
 
 | Id | Riesgo | Impacto | Probabilidad | Mitigación en este plan |
 | --- | --- | --- | --- | --- |
-| RQ-01 | Que un caso de uso consulte el almacén por su cuenta y deje de ser probable con dobles | Alto | Media | `TC-04026` y `TC-04027` corren en **cada** etapa, no sólo en la `a`; `QG-04` y `QG-05` bloquean la fusión |
+| RQ-01 | Que un caso de uso consulte el almacén por su cuenta y deje de ser probable con dobles | Alto | Media | `TC-04026` y `TC-04027` corren en **cada** etapa, no sólo en la `a`; `QG-04004` y `QG-04005` bloquean la fusión |
 | RQ-02 | Que aparezca un camino que ejerza una capacidad **sin** resolver antes la marca de cambio de contraseña pendiente | **Muy alto** | Media | `TC-04011` como prueba de orden en cada etapa a partir de la `d`; umbral de **100 %** de líneas y ramas en la guarda de autorización; criterio 5 de la Definition of Ready |
 | RQ-03 | Que la negativa por pertenencia y la negativa por facultad se confundan, y un trabajo ajeno responda «no autorizado» | Alto | Media | `TC-04012`, que verifica la indistinguibilidad **en los dos sentidos** contra la tabla de traducciones prohibidas de `03` §2.4 |
 | RQ-04 | Que un caso de uso reparta su efecto entre dos unidades de trabajo y la baja deje trabajos huérfanos | Alto | Baja | `TC-04029`, con la baja de cuenta como caso testigo y el recuento de aperturas instrumentado |
@@ -275,7 +275,7 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Etapa | Épica | Alcance de testing | Casos de prueba en alcance | Entregable de esta categoría |
 | --- | --- | --- | --- | --- |
-| `a` | EP-02001 Esqueleto ambulante | Ninguna capacidad funcional. Se ponen en pie las pruebas de inspección estructural y la batería vacía | `TC-02024` | Batería que corre; `QG-01`, `QG-02` y `QG-04` medidos por primera vez |
+| `a` | EP-02001 Esqueleto ambulante | Ninguna capacidad funcional. Se ponen en pie las pruebas de inspección estructural y la batería vacía | `TC-02024` | Batería que corre; `QG-02001`, `QG-02002` y `QG-02004` medidos por primera vez |
 | `c` | EP-02002 Identidad del administrador y sesión | Configuración del administrador, admisibilidad y reemplazo de credencial | `TC-02006`, `TC-02008`, `TC-02010`, `TC-02027` | Matriz con `CU-02003`, `CU-02004` y `CU-02012` cerrados |
 | `d` | EP-02003 Ciclo de vida de la cuenta de alumno | Alta, ciclo de vida, provisoria, reseteo y marca | `TC-02001`, `TC-02002`, `TC-02003`, `TC-02004`, `TC-02005`, `TC-02007`, `TC-02009`, `TC-02025`, `TC-02026` | `INV-09` ejercido en la puerta única; `BT-02015` y `BT-02016` cerradas o elevadas |
 | `e` | EP-02004 Gestión del trabajo | Constitución del trabajo, acceso del alumno y alcance del administrador | `TC-02011`, `TC-02012`, `TC-02020`, `TC-02021` | Matriz con `CU-02005`, `CU-02009` y `CU-02011` cerrados |
@@ -290,10 +290,10 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Etapa | Épica | Alcance de testing | Casos de prueba en alcance | Entregable de esta categoría |
 | --- | --- | --- | --- | --- |
-| `a` | EP-04001 Esqueleto ambulante y verificación de viabilidad | Ninguna capacidad funcional. Se ponen en pie las pruebas de inspección estructural y la batería vacía | `TC-04026`, `TC-04027` | Batería que corre; `QG-01`, `QG-02`, `QG-04` y `QG-05` medidos por primera vez; `BT-04002` cerrada con el nombre del cuarto puerto |
-| `c` | EP-04002 Identidad del administrador y sesión | Configuración del administrador, admisibilidad con su motivo y reemplazo de credencial | `TC-04003`, `TC-04008`, `TC-04009`, `TC-04031` | Matriz con `CU-04003` y `CU-04010` cerrados; primera medición de `QG-11` |
+| `a` | EP-04001 Esqueleto ambulante y verificación de viabilidad | Ninguna capacidad funcional. Se ponen en pie las pruebas de inspección estructural y la batería vacía | `TC-04026`, `TC-04027` | Batería que corre; `QG-04001`, `QG-04002`, `QG-04004` y `QG-04005` medidos por primera vez; `BT-04002` cerrada con el nombre del cuarto puerto |
+| `c` | EP-04002 Identidad del administrador y sesión | Configuración del administrador, admisibilidad con su motivo y reemplazo de credencial | `TC-04003`, `TC-04008`, `TC-04009`, `TC-04031` | Matriz con `CU-04003` y `CU-04010` cerrados; primera medición de `QG-04011` |
 | `d` | EP-04003 Ciclo de vida de la cuenta de alumno | Auto-registro, las cuatro operaciones de admisión, la provisoria, el reseteo y **la comprobación transversal de la marca** | `TC-04001`, `TC-04002`, `TC-04004`, `TC-04005`, `TC-04006`, `TC-04007`, `TC-04010`, `TC-04011`, `TC-04029` | `INV-09` ejercido con la prueba de orden; la baja como caso testigo de la unidad de trabajo; `BT-04018` cerrada o elevada |
-| `e` | EP-04004 Gestión del trabajo | Constitución y reedición del trabajo, las dos consultas con su predicado y la eliminación en sus dos alcances | `TC-04012`, `TC-04013`, `TC-04014`, `TC-04020`, `TC-04021`, `TC-04022`, `TC-04025`, `TC-04030` | Matriz con `CU-04004`, `CU-04006`, `CU-04007` y `CU-04009` cerrados; `QG-09` medido |
+| `e` | EP-04004 Gestión del trabajo | Constitución y reedición del trabajo, las dos consultas con su predicado y la eliminación en sus dos alcances | `TC-04012`, `TC-04013`, `TC-04014`, `TC-04020`, `TC-04021`, `TC-04022`, `TC-04025`, `TC-04030` | Matriz con `CU-04004`, `CU-04006`, `CU-04007` y `CU-04009` cerrados; `QG-04009` medido |
 | `f` | EP-04005 Interpretación y verificación del dato del alumno | El envío por el puerto, con los **ocho** escenarios del intake como resultado de interpretación, y la terminación controlada | `TC-04015`, `TC-04016`, `TC-04017`, `TC-04018`, `TC-04019`, `TC-04028` | Los ocho escenarios ejercitados; catálogo de **36** condiciones cerrado en las dos direcciones; `BT-04019` mide los 500 ms sobre `E-1` |
 | `h` | EP-04006 Desenlace de la entrega | Aprobar y rechazar desde `Pendiente`, con terminalidad, y la lectura del desenlace por el alumno | `TC-04023`, `TC-04024`, y reejecución de `TC-04022` y `TC-04025` | Matriz completa: 11 de 11 casos de uso, 16 de 16 reglas, 4 de 4 comprobaciones y 9 de 9 invariantes |
 
@@ -305,7 +305,7 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Etapa | Épica | Alcance de testing | Casos de prueba en alcance | Entregable de esta categoría |
 | --- | --- | --- | --- | --- |
-| `a` | EP-06001 Esqueleto ambulante y verificación de viabilidad | El almacén se crea y se transforma al arrancar, y el arranque se detiene antes que operar sobre uno dudoso. **`PT-04` se mide acá** | `TC-06032`, `TC-06033` | La etapa de **verificación de transformaciones** del pipeline en pie; `QG-01`, `QG-02` y `QG-04` medidos por primera vez; `PT-04` medida |
+| `a` | EP-06001 Esqueleto ambulante y verificación de viabilidad | El almacén se crea y se transforma al arrancar, y el arranque se detiene antes que operar sobre uno dudoso. **`PT-04` se mide acá** | `TC-06032`, `TC-06033` | La etapa de **verificación de transformaciones** del pipeline en pie; `QG-06001`, `QG-06002` y `QG-06004` medidos por primera vez; `PT-04` medida |
 | `c` | EP-06002 Identidad del administrador y sesión | Unicidad en el almacén, las dos preguntas sobre el conjunto, derivación y verificación de credenciales, y emisión del acceso firmado | `TC-06022`, `TC-06023`, `TC-06025`, `TC-06026`, `TC-06029`, `TC-06030`, `TC-06031`, `TC-06035` | **0** emisiones sin clave de firma y **0** apariciones de un secreto en mensajes o registro; los tres valores [ASUNCIÓN] confirmados o elevados |
 | `d` | EP-06003 Ciclo de vida de la cuenta de alumno | La provisoria que el sistema produce, la marca que viaja sin ser un estado de cuenta, y el arrastre de la baja | `TC-06021`, `TC-06024`, `TC-06027`, `TC-06028` | `RN-06014` ejercida en su tramo principal y único; **0** provisorias repetidas; **0** retiros parciales con el almacén interrumpido |
 | `e` | EP-06004 Gestión del trabajo | Materialización con el texto literal, consulta con el recorte ya trasladado y retiro físico | `TC-06016`, `TC-06017`, `TC-06018`, `TC-06019`, `TC-06020` | El texto original comparado carácter por carácter; **0** componentes y **0** texto original en la proyección de listado |
@@ -363,4 +363,5 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **12 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

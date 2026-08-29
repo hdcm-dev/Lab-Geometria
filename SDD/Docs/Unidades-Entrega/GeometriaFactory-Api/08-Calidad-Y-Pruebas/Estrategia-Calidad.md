@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Calidad.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -159,11 +159,11 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 
 ### 3.1 Qué significa que un gate esté condicionado
 
-`QG-03`, `QG-04`, `QG-13` y `QG-14` son los cuatro gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para el percentil, el caudal y el arranque en frío, y `A-3` para la forma de la pirámide en cuanto viene de §17.1.P.6 · GeometriaFactory-Api—. `05` §11 los registra y esta estrategia adopta el tratamiento sin cambiarlo: **los valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
+`QG-00003`, `QG-00004`, `QG-00013` y `QG-00014` son los cuatro gates cuyo umbral es un valor rotulado **[ASUNCIÓN]** en el intake §22 —`A-3` para la cobertura, `A-5` para el percentil, el caudal y el arranque en frío, y `A-3` para la forma de la pirámide en cuanto viene de §17.1.P.6 · GeometriaFactory-Api—. `05` §11 los registra y esta estrategia adopta el tratamiento sin cambiarlo: **los valores se usan como vigentes y la puerta no se declara bloqueante en `09-Devops` hasta que el Product Owner los confirme sobre su propio documento**.
 
 Condicionado no quiere decir opcional. La medición se hace igual y el resultado se registra; lo que queda en suspenso es la consecuencia automática.
 
-**Una precisión sobre `QG-04`.** Lo rotulado es **el reparto numérico**, no la decisión de invertir la pirámide: el intake §17.1.P.6 · GeometriaFactory-Api declara la inversión **a propósito**, «porque lo que este proyecto de código aporta es cableado, y el cableado se verifica ejerciéndolo». Esa decisión no es asunción y no queda en suspenso.
+**Una precisión sobre `QG-00004`.** Lo rotulado es **el reparto numérico**, no la decisión de invertir la pirámide: el intake §17.1.P.6 · GeometriaFactory-Api declara la inversión **a propósito**, «porque lo que este proyecto de código aporta es cableado, y el cableado se verifica ejerciéndolo». Esa decisión no es asunción y no queda en suspenso.
 
 ### 3.2 La batería del validador que corre desde acá
 
@@ -213,7 +213,7 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 | QG-02 | El guion de pruebas pasa **entero**: cero pruebas rojas y cero deshabilitadas sin motivo escrito | Etapa `test` del pipeline | Bloquea la fusión |
 | QG-03 | La cobertura alcanza el mínimo declarado: **85 %** de líneas y **80 %** de ramas [ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Application] | Informe de cobertura de la etapa `test`, **por componente** | **Condicionado**, ver §3.1 |
 | QG-04 | **Ninguna prueba de esta capa toca la base de datos real.** El umbral es exactamente **0** | Prueba de inspección `TC-04026` y revisión del pull request | **Bloquea la fusión.** Es la puerta propia que el intake §17.1.P.8 · GeometriaFactory-Application declara: «si una lo hace, está mal ubicada y pertenece a integración» |
-| QG-05 | El archivo de proyecto declara exactamente **1** referencia a otro proyecto de código del producto y **0** a bibliotecas de persistencia, transporte, serialización o marco web | Inspección del archivo de proyecto, en revisión y como prueba de inspección (`TC-04027`) | Bloquea la fusión. Es la propiedad que sostiene `QG-04` |
+| QG-05 | El archivo de proyecto declara exactamente **1** referencia a otro proyecto de código del producto y **0** a bibliotecas de persistencia, transporte, serialización o marco web | Inspección del archivo de proyecto, en revisión y como prueba de inspección (`TC-04027`) | Bloquea la fusión. Es la propiedad que sostiene `QG-04004` |
 | QG-06 | **100 %** de las **36** condiciones del catálogo alcanzadas por prueba, y **0** condiciones emitidas fuera del catálogo | Prueba de inspección en las dos direcciones (`TC-04028`) | Bloquea la fusión |
 | QG-07 | **4 de 4** comprobaciones de autorización con al menos una prueba de su negativa **sin base de datos**, y **1** sola prueba que verifique que la cuarta corta antes que las otras tres | Matriz comprobación contra prueba de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §5, revisada al cerrar cada etapa (`TC-04011`) | Bloquea el cierre de la etapa |
 | QG-08 | **A lo sumo 1** unidad de trabajo por caso de uso, y **0** casos de uso que repartan su efecto entre dos | Inspección de los once orquestadores y `TC-04029`, con la baja de cuenta como caso testigo | Bloquea la fusión |
@@ -375,4 +375,5 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **3 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

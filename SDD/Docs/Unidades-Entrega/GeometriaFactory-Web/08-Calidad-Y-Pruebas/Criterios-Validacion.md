@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Criterios-Validacion.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -133,7 +133,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
 | CV-30 | Cobertura de líneas | **No aplica**: no hay proyecto de pruebas propio (intake §17.2.P.6 · GeometriaFactory-Web) | **No exigible.** Si en alguna etapa se agregan pruebas automatizadas de componentes, su umbral se fija en ese momento y se registra en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 |
-| CV-31 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-22` |
+| CV-31 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-10022` |
 | CV-32 | Todo valor visual sale de un token del catálogo de diseño; no hay literales visuales ad hoc | 0 literales fuera del catálogo | **Bloqueante**, por la sonda `SD-10054` |
 | CV-33 | Ningún instrumento de la maqueta ni valor compuesto para la maqueta llega al sistema construido | 0 instrumentos y 0 valores | **Bloqueante, sin gradación**, por las sondas `SD-10059` y `SD-10060` |
 | CV-34 | Recorrido completo por teclado, foco visible y contraste de **4.5:1** en las once superficies | 11 de 11 | **Bloqueante**, por las sondas `SD-10051` y `SD-10052` |
@@ -147,9 +147,9 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| **Ningún criterio de este proyecto de código es condicionado.** `CV-13` lleva un valor rotulado [ASUNCIÓN], pero lo rotulado es **la forma de la puerta** y el intake §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante» | **No hay salida admitida**: `CV-13` no alcanzado **bloquea el cierre** como cualquier otro criterio bloqueante. Ejecutar sólo el guion de la etapa en curso no es una excepción admitida | El Product Owner, con constancia escrita, como en cualquier criterio bloqueante |
-| Criterio **no exigible** —`CV-30`— | Se declara «no aplica» con el fundamento citado. **No se reporta un número inventado** | — |
-| **Puerta técnica** que no pasa —`CV-09` a `CV-12`, `CV-19`— | **No hay excepción.** El intake §15 declara que una puerta que no pasa **detiene la planificación de las etapas que dependen de ella** y no se arrastra como deuda. La salida es la que cada puerta declara: bajar la versión objetivo del front, cambiar el modelo de front, publicar el servicio en un puerto convencional, o detener la etapa `g` | El Product Owner decide la salida, no la excepción |
+| **Ningún criterio de este proyecto de código es condicionado.** `CV-10013` lleva un valor rotulado [ASUNCIÓN], pero lo rotulado es **la forma de la puerta** y el intake §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante» | **No hay salida admitida**: `CV-10013` no alcanzado **bloquea el cierre** como cualquier otro criterio bloqueante. Ejecutar sólo el guion de la etapa en curso no es una excepción admitida | El Product Owner, con constancia escrita, como en cualquier criterio bloqueante |
+| Criterio **no exigible** —`CV-10030`— | Se declara «no aplica» con el fundamento citado. **No se reporta un número inventado** | — |
+| **Puerta técnica** que no pasa —`CV-10009` a `CV-10012`, `CV-10019`— | **No hay excepción.** El intake §15 declara que una puerta que no pasa **detiene la planificación de las etapas que dependen de ella** y no se arrastra como deuda. La salida es la que cada puerta declara: bajar la versión objetivo del front, cambiar el modelo de front, publicar el servicio en un puerto convencional, o detener la etapa `g` | El Product Owner decide la salida, no la excepción |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner, con constancia escrita en el informe de cierre |
 
 **Lo que no es una excepción admitida:** ejecutar el guion sólo de la etapa en curso; dar por verificada una acotación mirando que el control no se dibuja; dejar una deriva mayor en `Sin verificar` y seguir; contar peticiones del navegador **sin los dos movimientos prendidos**; sustituir un escenario del intake por un texto que dé el resultado esperado; publicar sin comprobar que la dirección pública responde.
@@ -181,7 +181,7 @@ Las dos puertas las declara el intake §15 y §17.2.P.8 · GeometriaFactory-Viso
 | CV-22 | **`PT-02`** · **Diez** recorridos de ida y vuelta **no degradan** | 10 sin degradación, **con los dos movimientos prendidos** | `TC-12020`, `TC-12004` |
 | CV-23 | **`PT-02`** · El árbol y la escena **se sincronizan por índice** | Sincronización verificada en los dos sentidos | `TC-12020`, `TC-12011` |
 
-**Las dos puertas son vinculantes y no admiten carácter condicionado.** Una que no pasa **detiene la planificación de la etapa `g`** y no se arrastra como deuda. Es el mismo fundamento con el que el Product Owner promovió `F-13` a `Must Have` en el intake **1.19**: una capacidad citada por una puerta técnica deja de ser diferible, y `CV-23` es exactamente esa capacidad.
+**Las dos puertas son vinculantes y no admiten carácter condicionado.** Una que no pasa **detiene la planificación de la etapa `g`** y no se arrastra como deuda. Es el mismo fundamento con el que el Product Owner promovió `F-13` a `Must Have` en el intake **1.19**: una capacidad citada por una puerta técnica deja de ser diferible, y `CV-12023` es exactamente esa capacidad.
 
 ## 8. Criterios de regresión
 
@@ -214,4 +214,5 @@ Las dos puertas las declara el intake §15 y §17.2.P.8 · GeometriaFactory-Viso
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **5 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

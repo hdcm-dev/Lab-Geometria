@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Testing.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -267,7 +267,7 @@ Fixtures declarados:
 | Incorporarla como artefacto vigente de la categoría, listado en [`README.md`](README.md) §1 | **Hecho** |
 | Resolver el **método de verificación** de sus filas, que es lo que su §1 le asigna al cierre de la Fase E | **Hecho en §8.1**, por familia de filas y con el `TC-XX` que la ejerce |
 | Exigir su actualización al cerrar cada etapa, con estado y fecha | **Hecho** en [`Plan-Pruebas.md`](Plan-Pruebas.md) §3 y en [`Definition-Of-Done.md`](Definition-Of-Done.md) §1.3 |
-| Convertirla en gate | **Hecho**: `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 |
+| Convertirla en gate | **Hecho**: `QG-10011` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 |
 | Modificar sus filas, sus umbrales o su recuento de línea de base, que sigue siendo **61** | **No se hace.** Un umbral de deriva se cambia con aprobación humana explícita, no desde esta categoría |
 | Abrir filas nuevas para la capacidad **F-26** | **No se hace**, y el motivo lo declara la propia matriz en su §4: los elementos de interfaz que arrastra esa capacidad **no tienen identificador en la línea de base**, porque son posteriores a la aprobación de la maqueta. Sus sondas nacen con la **iteración 5** de maqueta y la reemisión de la línea de base. **Que no tengan sonda no significa que no se verifiquen**: `TC-10006`, `TC-10007` y `TC-10010` de esta categoría las cubren contra los criterios de aceptación de `CU-10003` y `CU-10004`, que es lo que la propia matriz declara que gobierna esa construcción mientras tanto |
 | Abrir filas `VER-XX` | **No se hizo en la Fase E, y quedó hecho el 2026-08-11 por AG-10**: en ese momento `10-Examples` no estaba emitida y la matriz lo declaraba. Al emitirse, la matriz sumó la fila **`SD-10062`** desde el único contrato de verificación de [`../10-Examples/`](../10-Examples/), en `Sin verificar`. **El alta no es de esta categoría**: `Deriva-Rules.md` §4 se la asigna a AG-10 en el momento que cierra la categoría 10, y las **61** filas que esta categoría sí resolvió en §8.1 no cambian |
@@ -318,4 +318,5 @@ Las **61** filas de la matriz agrupadas por su método resuelto. La agrupación 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **1 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Plan-Pruebas.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -80,8 +80,8 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] **Ninguna deriva mayor queda sin resolver.** Se corrige lo construido, o se actualiza la línea de base con aprobación humana explícita. **Nunca por omisión.**
 - [ ] Las cinco inspecciones estructurales —`TC-10029` a `TC-10033`— dan **0** en cada uno de sus recuentos, en la condición declarada.
 - [ ] Los seis casos que verifican **forzando la solicitud** —`TC-10001`, `TC-10005`, `TC-10007`, `TC-10015`, `TC-10025`, `TC-10026`— se ejecutaron para las acotaciones que la etapa introdujo.
-- [ ] Los gates `QG-01`, `QG-02`, `QG-03`, `QG-05`, `QG-06`, `QG-07`, `QG-08`, `QG-09`, `QG-10` y `QG-11` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
-- [ ] `QG-04` **se cumple**: el guion de la etapa y los de todas las anteriores pasan al 100 %. Es **bloqueante**, no condicionado (ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1).
+- [ ] Los gates `QG-10001`, `QG-10002`, `QG-10003`, `QG-10005`, `QG-10006`, `QG-10007`, `QG-10008`, `QG-10009`, `QG-10010` y `QG-10011` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] `QG-10004` **se cumple**: el guion de la etapa y los de todas las anteriores pasan al 100 %. Es **bloqueante**, no condicionado (ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1).
 - [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró.
 - [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
 - [ ] El punto de control de la etapa tiene el OK explícito del Product Owner (intake §15, regla de delivery 2).
@@ -91,7 +91,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] Todos los `TC-XX` en alcance del momento están escritos, ejecutados y en verde.
 - [ ] Cada `TC-XX` de una propiedad de **ausencia** se ejecutó **con su condición de medición declarada**, y la condición quedó registrada junto al resultado. Un umbral cero medido sin su condición **no cuenta**.
 - [ ] **Ningún `TC-XX` que estaba en verde pasó a rojo** sin justificación escrita.
-- [ ] Los gates `QG-01`, `QG-04` a `QG-09` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] Los gates `QG-12001`, `QG-12004` a `QG-12009` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
 - [ ] En el momento de medición: **`PT-02` y `PT-03` pasan enteras**. Si alguna no pasa, **la etapa `g` no se compromete**; no se arrastra como deuda.
 - [ ] [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada, con sus cinco tablas.
 - [ ] [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) tiene el estado de cada fila actualizado con su fecha de verificación.
@@ -107,15 +107,15 @@ Alineados con los **siete** riesgos arquitectónicos de [`../05-Arquitectura-Tec
 
 | Id | Riesgo | Impacto | Probabilidad | Mitigación en este plan |
 | --- | --- | --- | --- | --- |
-| RQ-01 | Que aparezca un guion del navegador que llame al servicio de datos | **Muy alto** | Media | `TC-10029` y `TC-10030` en **cada** etapa, con el conteo hecho **con los dos movimientos prendidos**; `QG-05` y `QG-06` bloquean la fusión |
+| RQ-01 | Que aparezca un guion del navegador que llame al servicio de datos | **Muy alto** | Media | `TC-10029` y `TC-10030` en **cada** etapa, con el conteo hecho **con los dos movimientos prendidos**; `QG-10005` y `QG-10006` bloquean la fusión |
 | RQ-02 | Que el proceso del hosting recicle y la persona pierda la sesión en mitad de un acto | Alto | Media, y **medida**: es `PT-01.c` | No hay mitigación técnica que inventar. Lo que hay es tratamiento verificado: `TC-10027` ejerce el estado «sesión no restablecible», y el envío como **única** acción de guardado hace que un corte no deje un trabajo a medias |
 | RQ-03 | Que un mensaje mostrado lleve una dirección de servicio, una ruta de datos o una traza | Alto | Media, porque entra por el camino de excepción | `TC-10031` recorre los **diecisiete** códigos **y** el camino de ausencia de respuesta, sobre el traductor, que es el único punto por el que un mensaje llega a la persona |
 | RQ-04 | Que un componente termine tocando el interior del bundle porque la fachada no expone algo | Alto | Media | `TC-10032` en cada etapa a partir de la `g`; y el procedimiento del `Visor` para cuando falta algo en la fachada, que **no es tocar el interior** |
 | RQ-05 | Que la liberación de la instancia no se invoque y recorrer trabajos acumule contextos gráficos | Alto | Media, porque es la clase de omisión que no falla la primera vez | `TC-10021` como puerta `PT-02`, medida **antes de comprometer la etapa `g`** y reejecutada al cerrarla |
-| RQ-06 | Que una subida deje la aplicación caída y se reporte como exitosa | Alto | Media, porque la subida **no es transaccional** | `QG-03`: el flujo **no termina en la subida**, termina comprobando que la dirección pública responde |
+| RQ-06 | Que una subida deje la aplicación caída y se reporte como exitosa | Alto | Media, porque la subida **no es transaccional** | `QG-10003`: el flujo **no termina en la subida**, termina comprobando que la dirección pública responde |
 | RQ-07 | Que un listado incorpore un campo del detalle y arrastre el texto completo de cada trabajo | Medio | Alta | `TC-10015` y `TC-10024` verifican la forma del listado; la proyección separada es decisión de `GeometriaFactory-Contracts` y esta pieza la consume sin invertirla |
 | RQ-08 | **Que una acotación se dé por verificada mirando que el control no se dibuja**, sin forzar la solicitud | **Muy alto**: es la forma exacta en que una regla se cree cumplida y no lo está | Alta, porque es lo cómodo | Criterio de salida de §3: los **seis** casos que fuerzan la solicitud se ejecutan para toda acotación que la etapa introduce. La Definition of Ready §1 criterio 7 lo exige desde la entrada |
-| RQ-09 | **Que una deriva mayor se resuelva por omisión**, dejando la fila en `Sin verificar` y siguiendo | Alto: la línea de base deja de ser línea de base | Media | Criterio de salida de §3 y `QG-11`: ninguna deriva mayor queda sin resolver, y la decisión —corregir o actualizar la línea de base— es del Product Owner con constancia escrita |
+| RQ-09 | **Que una deriva mayor se resuelva por omisión**, dejando la fila en `Sin verificar` y siguiendo | Alto: la línea de base deja de ser línea de base | Media | Criterio de salida de §3 y `QG-10011`: ninguna deriva mayor queda sin resolver, y la decisión —corregir o actualizar la línea de base— es del Product Owner con constancia escrita |
 | RQ-10 | **Que el guion se ejecute sólo para la etapa en curso** y la regla acumulativa se erosione | Alto: es la única red de seguridad de regresión que este proyecto de código tiene | Alta, porque el guion crece en cada etapa y ejecutarlo entero se vuelve caro | `TC-10035` es acumulativo por definición y su criterio de salida lo exige. **La regla acumulativa no es la parte rotulada [ASUNCIÓN]**: lo rotulado es expresarla como puerta con umbral del 100 % |
 
 ### 4.2 `GeometriaFactory-Visor`
@@ -184,7 +184,7 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Momento | Épica | Alcance de testing | Casos de prueba en alcance | Entregable de esta categoría |
 | --- | --- | --- | --- | --- |
-| Etapa `a` | EP-12001 Esqueleto ambulante | La cadena de construcción y el artefacto vacío pero real. Ninguna capacidad funcional | Ninguno de los veintiuno: no hay fachada todavía. Se pone en pie el ejecutor y se mide `QG-01` | Batería que corre; `BT-12001`, `BT-12002` y `BT-12003` cerradas |
+| Etapa `a` | EP-12001 Esqueleto ambulante | La cadena de construcción y el artefacto vacío pero real. Ninguna capacidad funcional | Ninguno de los veintiuno: no hay fachada todavía. Se pone en pie el ejecutor y se mide `QG-12001` | Batería que corre; `BT-12001`, `BT-12002` y `BT-12003` cerradas |
 | **Antes de comprometer la etapa `g`** | EP-12002 Medición de las puertas técnicas | Todo lo que `PT-02` y `PT-03` exigen que ya funcione: crear instancia, dibujar `E-1` con el ortoedro, sincronizar por índice y liberar recursos | `TC-12001`, `TC-12002`, `TC-12004`, `TC-12005`, `TC-12006`, `TC-12007`, `TC-12008`, `TC-12009`, `TC-12010`, `TC-12011`, `TC-12012`, `TC-12016`, `TC-12017`, `TC-12018`, `TC-12019`, `TC-12020`, `TC-12021` | **Las dos puertas medidas.** Si alguna no pasa, la etapa `g` no se compromete |
 | Etapa `g` | EP-12003 Visualización del trabajo | Lo que la etapa integra: el movimiento automático de `F-25`, el árbol y la página integradora sin backend | `TC-12003`, `TC-12013`, `TC-12014`, `TC-12015`, y reejecución de `TC-12016`, `TC-12017` y `TC-12009` con los movimientos gobernados en vivo | Sample **S-1** en pie; las **seis** propiedades transversales verificadas juntas; `BT-12018` cerrada o elevada |
 
@@ -196,4 +196,5 @@ Sin fechas y sin duraciones, por lo declarado en §1.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **7 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.2
+**Versión:** 2.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero DevOps Senior + Platform Engineer (AG-09)
@@ -101,7 +101,7 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 
 **Los cuatro rótulos de este proyecto de código son sobre umbrales**, y por eso los cuatro condicionan. Es el caso contrario al de `GeometriaFactory-Web`, donde la única marca es sobre **la forma** del gate y el gate **bloquea**. La regla de reparto está en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §2.2, y **no la inventó esta categoría**: la fijó la Fase E.
 
-**Y lo que no es asunción dentro de `QG-04`**: la **inversión** de la pirámide. El intake §17.1.P.6 · GeometriaFactory-Api la declara a propósito, «porque lo que este proyecto de código aporta es cableado, y el cableado se verifica ejerciéndolo». Lo rotulado es el reparto numérico.
+**Y lo que no es asunción dentro de `QG-00004`**: la **inversión** de la pirámide. El intake §17.1.P.6 · GeometriaFactory-Api la declara a propósito, «porque lo que este proyecto de código aporta es cableado, y el cableado se verifica ejerciéndolo». Lo rotulado es el reparto numérico.
 
 ## 5. La frontera del despliegue, y qué queda de cada lado
 
@@ -145,3 +145,4 @@ Es la particularidad de esta sección y conviene tenerla de un vistazo. El intak
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**, con sus documentos consolidados en 2.0. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |
 | 2.2 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **La sincronización de la ronda 2 estaba a medias y el mensaje de commit la declaró completa** (**P3**): la fila de `Pipeline-CI-CD.md` publicaba **1.1** con el documento en **3.3**. Queda al día. **Se corrige la afirmación además de la fila**: un índice que dice estar sincronizado y no lo está es peor que uno visiblemente viejo. |
 | 2.1 | 2026-08-24 | **Sincronización del índice con la ronda 2 del corte 09 de la migración 10.0 → 13.3.** Las tres filas de la tabla de documentos publicaban versiones **1.0 y 1.1** mientras los documentos iban por **2.x**: el desfasaje era **anterior** al corte, y el audit independiente lo levantó como **P3** porque la ronda 1 lo amplió en seis filas sin tocarlo ni declararlo. Quedan en las versiones que los documentos tienen hoy. **No se toca ninguna otra fila**: un índice que se corrige de más deja de ser comparable con el estado que describía. |
+| 2.3 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **1 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |

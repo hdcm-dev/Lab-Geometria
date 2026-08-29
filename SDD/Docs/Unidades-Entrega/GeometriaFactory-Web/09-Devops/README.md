@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 2.2
+**Versión:** 2.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero DevOps Senior + Deploy Engineer (AG-09)
@@ -84,7 +84,7 @@ Resumen de lectura rápida. **El texto vinculante sobre el carácter de cada gat
 | QG-10 | Pull request, conteo del tráfico de circuito (`TC-10033`) | Bloqueante |
 | QG-11 | Cierre de la etapa, recorrido de la matriz de sensado | Bloquea el cierre de etapa |
 
-**Ningún gate de este proyecto de código es condicionado.** El único con valor rotulado **[ASUNCIÓN]** es `QG-04`, y lo rotulado es **expresar la regla acumulativa como puerta**, no la regla: el intake §17.2.P.6 · GeometriaFactory-Web lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante». Es la distinción que la Fase E fijó y esta categoría la materializa sin reabrirla.
+**Ningún gate de este proyecto de código es condicionado.** El único con valor rotulado **[ASUNCIÓN]** es `QG-10004`, y lo rotulado es **expresar la regla acumulativa como puerta**, no la regla: el intake §17.2.P.6 · GeometriaFactory-Web lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que un cambio del Product Owner «cambia la forma del gate, no su carácter bloqueante». Es la distinción que la Fase E fijó y esta categoría la materializa sin reabrirla.
 
 **Tres gates corren dentro del flujo de publicación y ocho no**, y la distinción importa: **una publicación verde significa que la aplicación quedó en pie, no que hace lo que debe**.
 
@@ -95,7 +95,7 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | # | Decisión | Dónde está su fundamento | Estado |
 | --- | --- | --- | --- |
 | 1 | **El filtro de rutas del flujo de publicación incluye `src/GeometriaFactory.Contracts/`**, que quedaba fuera aunque es entrada de compilación de esta unidad | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.2, decisión 1 | Se elevó al Product Owner como `PD-01`, y **él la confirmó en el intake 1.22**: §17.2.P.7 · GeometriaFactory-Web enumera hoy las **tres** rutas. `PD-01` **cerrado** |
-| 2 | **El despliegue conjunto lo sostiene `QG-08` de `GeometriaFactory-Contracts` y no el filtro de rutas**, porque el filtro dispara una construcción y no coordina dos despliegues, y uno de los dos es manual por decisión del Product Owner | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.1 y §3.2 | Adoptada |
+| 2 | **El despliegue conjunto lo sostiene `QG-08008` de `GeometriaFactory-Contracts` y no el filtro de rutas**, porque el filtro dispara una construcción y no coordina dos despliegues, y uno de los dos es manual por decisión del Product Owner | [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §3.1 y §3.2 | Adoptada |
 | 3 | **La exclusión del bundle del control de versiones queda asignada a `BT-10001`** de la etapa `a`, con el estado del repositorio verificado y fechado | [`Entornos-Deploy.md`](Entornos-Deploy.md) §2 | Asignada, registrada como `PD-02` |
 
 **Y un hallazgo que esta sección deja escrito, y que el intake 1.22 confirmó en lugar de derogar**: con el front publicándose automáticamente al fusionar y el backend desplegándose a mano, **el despliegue conjunto es siempre un acto humano coordinado**, y ninguna decisión sobre el filtro de rutas lo vuelve automático. Tampoco lo vuelve automático el orden de salida que el intake §17.2.P.7 · GeometriaFactory-Web fija desde 1.22 —**primero el backend**—: el orden reduce el daño del intervalo, **no lo elimina**, y el mecanismo que queda sigue siendo la constancia escrita antes de cerrar la etapa.
@@ -112,7 +112,7 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | Artefactos publicables de este proyecto de código | **1**: `Front-Ftp` | Intake §13; [`Guia-Publicacion-Front-Ftp.md`](Guia-Publicacion-Front-Ftp.md) §0 |
 | Valores de configuración | **2**, los dos secretos, nombrados por su función | Intake §17.2.P.5 · GeometriaFactory-Web; [`Entornos-Deploy.md`](Entornos-Deploy.md) §4 |
 | Casos de uso | **10** | `02` §3, citado por `08` README §6 |
-| Códigos vivos del contrato sobre los que se mide `QG-08` | **15** | `GeometriaFactory-Contracts`; `05` §3.1, traductor de condiciones |
+| Códigos vivos del contrato sobre los que se mide `QG-08008` | **15** | `GeometriaFactory-Contracts`; `05` §3.1, traductor de condiciones |
 | Funciones de la fachada del visor, única vía de acceso al bundle | **6** | Intake §17.2.P.3 · GeometriaFactory-Visor, citado por §14 y por §17.2.P.3 · GeometriaFactory-Web |
 | Sondas de la matriz de sensado que `QG-11` recorre | **61** | `08` `Matriz-Sensado-Deriva.md` §4 |
 | Criterios de salida del plan de pruebas | **11** | `08` `Plan-Pruebas.md` §3 |
@@ -128,3 +128,4 @@ Se listan acá porque son lo que esta categoría agregó al corpus, y para que s
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |
 | 2.2 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **Misma reparación que en la unidad hermana** (**P3**): `Pipeline-CI-CD.md` pasa de **1.1** a **3.3** y `Guia-Publicacion-Front-Ftp.md` de **1.0** a **1.2**. **Y entra la fila de `Guia-Publicacion-Bundle-Visor.md`**, que existe en la carpeta y **faltaba en esta tabla desde la emisión del índice**: el audit lo levantó al contar los archivos contra las filas. |
 | 2.1 | 2026-08-24 | **Sincronización del índice con la ronda 2 del corte 09 de la migración 10.0 → 13.3.** Las tres filas de la tabla de documentos publicaban versiones **1.0 y 1.1** mientras los documentos iban por **2.x**: el desfasaje era **anterior** al corte, y el audit independiente lo levantó como **P3** porque la ronda 1 lo amplió en seis filas sin tocarlo ni declararlo. Quedan en las versiones que los documentos tienen hoy. **No se toca ninguna otra fila**: un índice que se corrige de más deja de ser comparable con el estado que describía. |
+| 2.3 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **3 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |

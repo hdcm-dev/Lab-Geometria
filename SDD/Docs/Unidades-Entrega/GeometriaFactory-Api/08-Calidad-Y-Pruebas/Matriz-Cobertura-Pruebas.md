@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Matriz-Cobertura-Pruebas.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -194,11 +194,11 @@ Diecisiete filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-
 
 | NFR | Objetivo numérico | Cómo se verifica | Estado |
 | --- | --- | --- | --- |
-| Latencia del listado | **Percentil 99 por debajo de 500 ms**, medido **en el servidor** **[ASUNCIÓN]** | `TC-00034`. Gate `QG-14`, condicionado | `Pendiente` |
-| Caudal sostenido | **20 peticiones por minuto** **[ASUNCIÓN]** | `TC-00034`. Gate `QG-14`, condicionado | `Pendiente` |
-| Arranque en frío | Menos de **30 segundos** **[ASUNCIÓN]** | `TC-00033`. Gate `QG-13`, condicionado | `Pendiente` |
-| Cobertura del proyecto de código | **75 %** de líneas y **70 %** de ramas **[ASUNCIÓN]** | Informe del pipeline, **no un caso de verificación**. Gate `QG-03`, condicionado | `Pendiente` |
-| Forma de la pirámide de pruebas | **60 %** integración y **40 %** unitarias **[ASUNCIÓN en cuanto al reparto]** | `TC-00037`. Gate `QG-04`, condicionado. **La inversión no es asunción** | `Pendiente` |
+| Latencia del listado | **Percentil 99 por debajo de 500 ms**, medido **en el servidor** **[ASUNCIÓN]** | `TC-00034`. Gate `QG-00014`, condicionado | `Pendiente` |
+| Caudal sostenido | **20 peticiones por minuto** **[ASUNCIÓN]** | `TC-00034`. Gate `QG-00014`, condicionado | `Pendiente` |
+| Arranque en frío | Menos de **30 segundos** **[ASUNCIÓN]** | `TC-00033`. Gate `QG-00013`, condicionado | `Pendiente` |
+| Cobertura del proyecto de código | **75 %** de líneas y **70 %** de ramas **[ASUNCIÓN]** | Informe del pipeline, **no un caso de verificación**. Gate `QG-00003`, condicionado | `Pendiente` |
+| Forma de la pirámide de pruebas | **60 %** integración y **40 %** unitarias **[ASUNCIÓN en cuanto al reparto]** | `TC-00037`. Gate `QG-00004`, condicionado. **La inversión no es asunción** | `Pendiente` |
 | Puntos de acceso fuera de la guardia | Exactamente **4** sobre **15**, **ni uno más** | `TC-00007`, inspección en las dos direcciones | `Pendiente` |
 | Puntos que fijan una contraseña sobre una cuenta existente sin credencial | Exactamente **0** | `TC-00010`, inspección de los cuatro puntos que no exigen acceso | `Pendiente` |
 | Códigos del contrato con traducción declarada | **16 de 17**, con **1** sin destino y su motivo; **0** inventados y **0** renombrados | `TC-00024` y `TC-00027`, en las dos direcciones | `Pendiente` |
@@ -208,9 +208,9 @@ Diecisiete filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-
 | Textos originales alterados en el borde | **0** caracteres de diferencia y **0** truncamientos silenciosos | `TC-00019` | `Pendiente` |
 | Puertos conectados a su adaptador | **4 de 4**, con **0** sin adaptador o con más de uno | `TC-00028`, con fallo en construcción | `Pendiente` |
 | Peticiones atendidas con la preparación del almacén incompleta | Exactamente **0** | `TC-00031` | `Pendiente` |
-| Eliminaciones fuera de alcance aceptadas al forzar la petición | Exactamente **0** | `TC-00020`. Gate `QG-12` | `Pendiente` |
-| Advertencias de construcción | Exactamente **0** | Gate `QG-01`, **no un caso de verificación** | `Pendiente` |
-| Pasos de la colección de peticiones reproducible | **5 o menos**, con **0** datos de prueba inventados | `TC-00035`. Gate `QG-15` | `Pendiente` |
+| Eliminaciones fuera de alcance aceptadas al forzar la petición | Exactamente **0** | `TC-00020`. Gate `QG-00012` | `Pendiente` |
+| Advertencias de construcción | Exactamente **0** | Gate `QG-00001`, **no un caso de verificación** | `Pendiente` |
+| Pasos de la colección de peticiones reproducible | **5 o menos**, con **0** datos de prueba inventados | `TC-00035`. Gate `QG-00015` | `Pendiente` |
 
 **Los valores rotulados [ASUNCIÓN] se citan con su rótulo y no se convierten en compromiso.** Su confirmación está pendiente del Product Owner en el intake §22 —asunción `A-3` para la cobertura y la forma de la pirámide, `A-5` para el percentil, el caudal y el arranque en frío—.
 
@@ -224,12 +224,12 @@ Seis filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
-| Tiempo de la batería de pruebas del dominio | Menos de **10 segundos** de punta a punta **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain]** | Medición del pipeline, **no un caso de prueba**. Gate `QG-07`, condicionado | Duración total reportada por el ejecutor en la etapa `test` | `Pendiente` |
-| Cobertura de la biblioteca | **90 %** de líneas y **85 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Domain]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-03`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
+| Tiempo de la batería de pruebas del dominio | Menos de **10 segundos** de punta a punta **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Domain]** | Medición del pipeline, **no un caso de prueba**. Gate `QG-02007`, condicionado | Duración total reportada por el ejecutor en la etapa `test` | `Pendiente` |
+| Cobertura de la biblioteca | **90 %** de líneas y **85 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Domain]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-02003`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
 | Dependencias salientes del proyecto de código | Exactamente **0** y **0** | `TC-02024` | Inspección del archivo de proyecto, y revisión del pull request | `Pendiente` |
 | Cobertura del catálogo de condiciones | **100 %** de las **42** condiciones alcanzadas, y **0** emitidas fuera del catálogo | `TC-02023` | Prueba de inspección que compara los dos conjuntos en las dos direcciones | `Pendiente` |
 | Ejercicio de los invariantes | **100 %** de los **nueve** con prueba de violación rechazada, **sin dobles** | `TC-02026`, sobre la tabla de §5 | Prueba de inspección sobre la matriz, revisada al cerrar cada etapa | `Pendiente` |
-| Advertencias de construcción | Exactamente **0** | Gate `QG-01`, **no un caso de prueba** | Etapa `build` del pipeline | `Pendiente` |
+| Advertencias de construcción | Exactamente **0** | Gate `QG-02001`, **no un caso de prueba** | Etapa `build` del pipeline | `Pendiente` |
 
 **Los dos valores rotulados [ASUNCIÓN] se citan con su rótulo y no se convierten en compromiso.** Su confirmación está pendiente del Product Owner en el intake §22 —asunción `A-3` para la cobertura y `A-5` para el tiempo— y su conversión en trabajo es `BT-02015`. Hasta entonces sus gates son **condicionados** ([`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1): se miden y se registran, y no bloquean la fusión.
 
@@ -241,15 +241,15 @@ Nueve filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unida
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
-| Tiempo del caso de uso más pesado | Menos de **500 ms** para el envío que interpreta el texto de **3** piezas de `E-1`, medido **sin acceso a base** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Application]** | Medición del pipeline por `BT-04019`, **no un caso de prueba de comportamiento**. Gate `QG-10`, condicionado | Cronometrado dentro de la batería unitaria, con doble del puerto de validación | `Pendiente` |
-| Cobertura de la biblioteca | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Application]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-03`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
+| Tiempo del caso de uso más pesado | Menos de **500 ms** para el envío que interpreta el texto de **3** piezas de `E-1`, medido **sin acceso a base** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Application]** | Medición del pipeline por `BT-04019`, **no un caso de prueba de comportamiento**. Gate `QG-04010`, condicionado | Cronometrado dentro de la batería unitaria, con doble del puerto de validación | `Pendiente` |
+| Cobertura de la biblioteca | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Application]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-04003`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
 | Pruebas de esta capa que tocan la base de datos real | Exactamente **0** | `TC-04026` | Prueba de inspección del proyecto de pruebas, y revisión del pull request | `Pendiente` |
 | Dependencias salientes del proyecto de código | Exactamente **1** al producto y **0** a persistencia, transporte, serialización o marco web | `TC-04027` | Inspección del archivo de proyecto | `Pendiente` |
 | Componentes de pieza en las consultas de listado | Exactamente **0** cargados, en los dos listados | `TC-04030` | Inspección de la proyección devuelta por la consulta | `Pendiente` |
 | Cobertura del catálogo de condiciones | **100 %** de las **36** alcanzadas, y **0** emitidas fuera del catálogo | `TC-04028` | Prueba de inspección que compara los dos conjuntos en las dos direcciones | `Pendiente` |
 | Ejercicio de las cuatro comprobaciones | **4 de 4** con prueba de su negativa **sin base de datos**, y **1** sola prueba de que la cuarta corta antes que las otras tres | `TC-04011`, sobre la tabla de §5 | Prueba de orden y matriz de §5, revisada al cerrar cada etapa | `Pendiente` |
 | Unidades de trabajo por caso de uso | **A lo sumo 1**, y **0** casos de uso que repartan su efecto | `TC-04029` | Dobles instrumentados que cuentan aperturas, con la baja como caso testigo | `Pendiente` |
-| Advertencias de construcción | Exactamente **0** | Gate `QG-01`, **no un caso de prueba** | Etapa `build` del pipeline | `Pendiente` |
+| Advertencias de construcción | Exactamente **0** | Gate `QG-04001`, **no un caso de prueba** | Etapa `build` del pipeline | `Pendiente` |
 
 **Los dos valores rotulados [ASUNCIÓN] se citan con su rótulo y no se convierten en compromiso.** Su confirmación está pendiente del Product Owner en el intake §22 —asunción `A-3` para la cobertura y `A-5` para los 500 ms— y su conversión en trabajo es `BT-04018`. Hasta entonces sus gates son **condicionados** ([`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1): se miden y se registran, y no bloquean la fusión.
 
@@ -261,20 +261,20 @@ Catorce filas, una por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Uni
 
 | NFR | Objetivo numérico | Cómo se verifica | Herramienta de medición | Estado |
 | --- | --- | --- | --- | --- |
-| Tiempo de interpretación del texto semilla | Menos de **200 ms** para el texto de **3** piezas de `E-1`, **sin almacén** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Infrastructure]** | `TC-06015`. Gate `QG-14`, condicionado | Cronometrado dentro de la batería unitaria, sin abrir el almacén | `Pendiente` |
-| Cobertura del proyecto de código | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Infrastructure]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-05`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
-| Cobertura del validador de figuras | **95 %** de líneas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Infrastructure]**. Es el número más alto del producto | Informe del pipeline acotado a los **dos motores**, **no un caso de prueba**. Gate `QG-06`, condicionado | Recolector de cobertura con alcance acotado | `Pendiente` |
+| Tiempo de interpretación del texto semilla | Menos de **200 ms** para el texto de **3** piezas de `E-1`, **sin almacén** **[ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Infrastructure]** | `TC-06015`. Gate `QG-06014`, condicionado | Cronometrado dentro de la batería unitaria, sin abrir el almacén | `Pendiente` |
+| Cobertura del proyecto de código | **85 %** de líneas y **80 %** de ramas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Infrastructure]** | Informe del pipeline, **no un caso de prueba**. Gate `QG-06005`, condicionado | Recolector de cobertura, con informe por componente | `Pendiente` |
+| Cobertura del validador de figuras | **95 %** de líneas **[ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Infrastructure]**. Es el número más alto del producto | Informe del pipeline acotado a los **dos motores**, **no un caso de prueba**. Gate `QG-06006`, condicionado | Recolector de cobertura con alcance acotado | `Pendiente` |
 | Tolerancia de comparación de valores | **0.01** absoluta con operador **estricto**. **No es asunción**: sale de que el emisor redondea a 2 decimales | `TC-06009`, que debe dar **exactamente 2** advertencias y no 3 | Caso de prueba del escenario `E-1` | `Pendiente` |
-| Casos de la batería del validador que pasan | **10 de 10**, con los **ocho** escenarios como entrada | `TC-06001` a `TC-06010`, contra la tabla de §6 | Etapa `test` del pipeline. Gate `QG-03` | `Pendiente` |
+| Casos de la batería del validador que pasan | **10 de 10**, con los **ocho** escenarios como entrada | `TC-06001` a `TC-06010`, contra la tabla de §6 | Etapa `test` del pipeline. Gate `QG-06003` | `Pendiente` |
 | Peticiones de red originadas por los dos motores | Exactamente **0** | `TC-06014` | Inspección de dependencias de los dos motores | `Pendiente` |
-| Aplicación de transformaciones sobre almacén inexistente | **1 de 1** intento exitoso, sin paso manual | `TC-06032` | Etapa de verificación de transformaciones del pipeline. Gate `QG-04` | `Pendiente` |
+| Aplicación de transformaciones sobre almacén inexistente | **1 de 1** intento exitoso, sin paso manual | `TC-06032` | Etapa de verificación de transformaciones del pipeline. Gate `QG-06004` | `Pendiente` |
 | Provisorias iguales en dos producciones consecutivas | Exactamente **0**, sobre la misma cuenta y entre cuentas distintas | `TC-06027` | Prueba que produce dos provisorias y compara, y prueba de no derivabilidad | `Pendiente` |
 | Componentes de pieza y texto original en una consulta de listado | Exactamente **0** y **0** | `TC-06019` | Inspección de la proyección devuelta | `Pendiente` |
 | Escrituras que reemplazan el texto original conservado | Exactamente **0** aceptadas | `TC-06016` | Prueba que materializa un trabajo existente con un texto distinto | `Pendiente` |
 | Retiros parciales tras una baja interrumpida | Exactamente **0** | `TC-06021` | Prueba de baja **con el almacén interrumpido a mitad de operación** | `Pendiente` |
 | Mensajes y trazas con un secreto, la ruta del almacén o el texto del alumno | Exactamente **0** | `TC-06035` | Prueba de inspección sobre las 17 condiciones **y sobre el registro del servidor**, en las dos direcciones | `Pendiente` |
 | Cobertura del catálogo de condiciones | **100 %** de las **17** alcanzadas, y **0** emitidas fuera del catálogo | `TC-06034` | Prueba de inspección que compara los dos conjuntos en las dos direcciones | `Pendiente` |
-| Advertencias de construcción | Exactamente **0** | Gate `QG-01`, **no un caso de prueba** | Etapa `build` del pipeline | `Pendiente` |
+| Advertencias de construcción | Exactamente **0** | Gate `QG-06001`, **no un caso de prueba** | Etapa `build` del pipeline | `Pendiente` |
 
 **Los tres valores rotulados [ASUNCIÓN] se citan con su rótulo y no se convierten en compromiso.** Su confirmación está pendiente del Product Owner en el intake §22 —asunción `A-3` para las dos coberturas y `A-5` para los 200 ms— y `PA-11` de `05` §11 los registra. Hasta entonces sus gates son **condicionados**.
 
@@ -568,7 +568,7 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 | ~~**El intake escribía «nueve pruebas del validador» en el gate de este proyecto de código** —§17.1.P.8 · GeometriaFactory-Api— **y esa batería tiene diez**~~ **CERRADO** | Un lector del gate podía dar la puerta por cumplida con nueve, dejando `E-8` sin cubrir | **Cerrado por el intake 1.20**, que corrigió §17.1.P.8 · GeometriaFactory-Api —y los otros cuatro lugares que decían nueve— sobre el hallazgo que levantó esta categoría. No queda nada derivado al Product Owner por este motivo. Esta categoría aplicó **diez** desde su emisión, siguiendo la Fase C de `GeometriaFactory-Infrastructure`. Ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 |
 | **El piso de cobertura de líneas baja el de la guía y no hay ADR** | `Rules-Calidad-Y-Pruebas.md` §2.2 fija **80 %** de aplicación para el tipo `rest-api` y este proyecto de código fija **75 %**, por el valor que el intake §17.1.P.6 · GeometriaFactory-Api declara con rótulo [ASUNCIÓN]. §2.2 exige un **ADR** para bajar cobertura, y no hay ninguna | **La categoría 05**, que es donde viven las ADR, con la constancia de que el número viene del intake y no de esta categoría. Mientras tanto la caída queda **declarada** en [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 y compensada componente por componente, y **no se sube el número por cuenta propia** |
 | **La medición de mutación no está en el pipeline** y su herramienta no está elegida | El umbral de 60 % no se puede exigir todavía en los siete componentes con umbral | Elección y anclaje junto con el resto del tooling de la etapa `a`; hasta que corra, se reporta «sin medir» y no bloquea |
-| **Los valores rotulados [ASUNCIÓN]** —cobertura, forma de la pirámide, percentil, caudal y arranque en frío— siguen sin confirmar | Los gates `QG-03`, `QG-04`, `QG-13` y `QG-14` son condicionados y no bloquean la fusión | El Product Owner sobre el intake §22, antes de fijar las puertas en `09-Devops` |
+| **Los valores rotulados [ASUNCIÓN]** —cobertura, forma de la pirámide, percentil, caudal y arranque en frío— siguen sin confirmar | Los gates `QG-00003`, `QG-00004`, `QG-00013` y `QG-00014` son condicionados y no bloquean la fusión | El Product Owner sobre el intake §22, antes de fijar las puertas en `09-Devops` |
 | **El formato de intercambio y su configuración** no están fijados, y **la decisión es de esta categoría 05 como productor** | `TC-00029` verifica que haya **1** sola configuración; **cuál sea** no está decidido, y los dos extremos tienen que coincidir o el contrato deja de ser el mismo | La categoría 05 de este proyecto de código, con `GeometriaFactory-Web` como consumidor |
 | **La forma definitiva de las rutas se valida en el punto de control de la etapa `a`** | Los casos de verificación citan los puntos por su identificador `A-XX` y **no por su ruta**, precisamente para no atarse a un valor que todavía se valida | El punto de control de la etapa `a`. **Los identificadores no cambian** |
 | **El mecanismo de construcción de la imagen en destino está rotulado [A VERIFICAR] por la fuente** | `PT-04` verifica que la imagen se construya y arranque **desde el contenedor de desarrollo**; que se construya **en destino desde el repositorio** es otra cosa y la fuente pide probarlo **una vez antes de depender de él** | El Product Owner y `09-Devops`, antes del despliegue real. **No es criterio de esta categoría**: el despliegue es manual y del Product Owner |
@@ -579,7 +579,7 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 | Hueco | Consecuencia | Plan de remediación |
 | --- | --- | --- |
 | **La medición de mutación no está en el pipeline** y su herramienta no está elegida | El umbral de 60 % no se puede exigir todavía en ninguno de los cinco componentes | Elección y anclaje de la herramienta junto con el resto del tooling de la etapa `a`; hasta que corra, el mutation score se reporta como «sin medir» y no bloquea |
-| **Los dos valores rotulados [ASUNCIÓN]** —cobertura y tiempo de la batería— siguen sin confirmar | Los gates `QG-03` y `QG-07` son condicionados y no bloquean la fusión | `BT-02015` del backlog técnico, antes de fijar la puerta de cobertura en `09-Devops` |
+| **Los dos valores rotulados [ASUNCIÓN]** —cobertura y tiempo de la batería— siguen sin confirmar | Los gates `QG-02003` y `QG-02007` son condicionados y no bloquean la fusión | `BT-02015` del backlog técnico, antes de fijar la puerta de cobertura en `09-Devops` |
 | **El criterio de comparación de dos correos no está decidido** (`02` §9, `BT-02016`) | `TC-02001` y `TC-02002` verifican que la unicidad llegue **declarada**, no cómo se compara. Mientras la decisión no exista, la normalización no se puede probar acá | `BT-02016`, junto con la capa que ejerce la verificación, antes de cerrar la etapa `d` |
 | **El alcance efectivo de `INV-09` fuera de la admisibilidad** (`02` §9, `05` §11 `PA-03`) | `TC-02010` y `TC-02009` verifican la guarda **en la puerta única**. Si alguna capa de más arriba habilitara un camino que no pase por la admisibilidad, la marca tendría que volver a comprobarse ahí y esta matriz no lo detectaría | La categoría 02 de `GeometriaFactory-Api`, al fijar por dónde entra cada petición. No es bloqueante para este proyecto de código |
 | ~~**Ninguna fila `VER-XX` y ninguna matriz de sensado de deriva**~~ · **Cerrado el 2026-08-11** | Se declaraba porque este proyecto de código no ejecutó la Fase B2 —`requiere_maqueta` es false— y no tenía categoría 10 emitida | **Cerrado**: se emitió [`../10-Examples/`](../10-Examples/) con **tres** contratos de verificación, `VER-02001` a `VER-02003`, y con ellos [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.0, que declara **tres** filas `SD-02001` a `SD-02003`, todas en `Sin verificar`. La matriz nace **sin ninguna fila de línea de base visual**, porque la Fase B2 sigue sin haberse ejecutado: es el caso de `Deriva-Rules.md` §2.3. La fila se conserva con su desenlace en lugar de retirarse |
@@ -589,7 +589,7 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 | Hueco | Consecuencia | Plan de remediación |
 | --- | --- | --- |
 | **La medición de mutación no está en el pipeline** y su herramienta no está elegida | El umbral de 60 % no se puede exigir todavía en ninguno de los siete componentes con umbral | Elección y anclaje de la herramienta junto con el resto del tooling de la etapa `a`; hasta que corra, el mutation score se reporta como «sin medir» y no bloquea |
-| **Los dos valores rotulados [ASUNCIÓN]** —cobertura y 500 ms— siguen sin confirmar | Los gates `QG-03` y `QG-10` son condicionados y no bloquean la fusión | `BT-04018` del backlog técnico, antes de fijar la puerta de cobertura en `09-Devops` |
+| **Los dos valores rotulados [ASUNCIÓN]** —cobertura y 500 ms— siguen sin confirmar | Los gates `QG-04003` y `QG-04010` son condicionados y no bloquean la fusión | `BT-04018` del backlog técnico, antes de fijar la puerta de cobertura en `09-Devops` |
 | **El nombre del cuarto puerto no está fijado** (`05` §11 `PA-01`, `BT-04002`) | Los dobles de `Estrategia-Testing.md` §5 se escriben contra un nombre en lenguaje de dominio, y renombrarlos después es retrabajo en los cuatro componentes que lo consumen | `BT-04002`, en el punto de control de la etapa `a`, **antes** de escribir los casos de prueba que lo usan |
 | **El criterio de comparación de dos correos no está decidido** (`05` §11 `PA-03`) | `TC-04001` y `TC-04002` verifican que la unicidad llegue **resuelta por el puerto**, no cómo se comparan dos correos. La normalización no se puede probar acá | La categoría 05 de `GeometriaFactory-Infrastructure`, junto con el índice que la sostenga. **No es bloqueante para este proyecto de código** |
 | **Los sellos de alta, de modificación y de desenlace no son atributos del modelo del dominio** (`05` §11 `PA-04`, `BT-04020`) | `TC-04013` y `TC-04023` verifican que el sello sale **del puerto de reloj** y no del entorno; si el Product Owner decide incorporarlos al modelo, la verificación se muda de capa | El Product Owner, y `GeometriaFactory-Domain`. Sin fecha comprometida |
@@ -601,7 +601,7 @@ La partición es por los **ocho** componentes de `05` §3.1. Los umbrales son lo
 | --- | --- | --- |
 | ~~**El intake escribía «nueve pruebas del validador» en dos gates** —§17.1.P.8 · GeometriaFactory-Infrastructure y §17.1.P.8 · GeometriaFactory-Api— **y la batería tiene diez**~~ **CERRADO** | Un lector del gate podía dar la puerta por cumplida con nueve casos, dejando `E-8` sin cubrir, que es justamente el escenario que cerró la única condición del contrato de fachada sin dato de prueba | **Cerrado por el intake 1.20**, que corrigió los cinco lugares que decían nueve —los dos gates, §17.1.P.6 · GeometriaFactory-Infrastructure, §17.1.P.11 · GeometriaFactory-Application y el encabezado de §21— sobre el hallazgo que levantó esta categoría. Ya no hay nada derivado al Product Owner por este motivo. Esta categoría aplicó **diez** desde su emisión, siguiendo `05` §8 y §10.5, y no bajó la batería para que coincidiera con la redacción. Ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.2 |
 | **La medición de mutación no está en el pipeline** y su herramienta no está elegida | El umbral de 60 % no se puede exigir todavía en ninguno de los siete componentes con umbral de mutación | Elección y anclaje junto con el resto del tooling de la etapa `a`; hasta que corra, se reporta «sin medir» y no bloquea |
-| **Los tres valores rotulados [ASUNCIÓN]** —las dos coberturas y los 200 ms— siguen sin confirmar | Los gates `QG-05`, `QG-06` y `QG-14` son condicionados y no bloquean la fusión | `PA-11` de `05` §11, antes de fijar la puerta de cobertura en `09-Devops` |
+| **Los tres valores rotulados [ASUNCIÓN]** —las dos coberturas y los 200 ms— siguen sin confirmar | Los gates `QG-06005`, `QG-06006` y `QG-06014` son condicionados y no bloquean la fusión | `PA-11` de `05` §11, antes de fijar la puerta de cobertura en `09-Devops` |
 | **Cuál de las dos funciones de derivación de clave se ancla** no está decidido (`05` §11 `PA-03`) | `TC-06025` y `TC-06026` verifican **la forma** —parámetros versionados junto al valor derivado, sin valor por defecto silencioso— y no la función concreta. Los casos de prueba no cambian con la elección; los valores esperados de las pruebas de derivación sí | El equipo en la etapa `a`, aplicando el criterio que la ADR correspondiente declara |
 | **Hasta dónde llega el conjunto de tipos reconstruibles** no está enumerado por ninguna fuente (`05` §11 `PA-04`) | `TC-06011` verifica los **seis** que los escenarios ejercitan. Un séptimo tipo produciría error de validación, que es correcto **pero puede no ser lo deseado** | El Product Owner, con la enumeración de las clases de la actividad. **No se agrega ningún tipo acá**, porque ninguna fuente lo enumera |
 | **Cómo se sostiene que la provisoria «no se repite»** (`05` §11 `PA-06`) | `TC-06027` verifica **impredecibilidad y no repetición observada en dos producciones**; verificarla contra un registro de provisorias anteriores exigiría conservarlas, y el producto no guarda contraseñas en claro. Esta categoría **hereda la lectura y no la reabre** | El Product Owner, para confirmarla o reemplazarla |
@@ -638,7 +638,7 @@ Siete filas, una por regla conceptual de [`../02-Especificacion-Funcional/Modelo
 | [RC-06006](../02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06006-Tres-Sellos-De-Tiempo-Distintos.md) | Los **tres** sellos de tiempo del trabajo son distintos y no se confunden: la fecha que el alumno declara y los dos que registra el sistema | `TC-06017`, `TC-06031` | `Pendiente` |
 | [RC-06007](../02-Especificacion-Funcional/Modelo-Datos/reglas-conceptuales-de-modelo/RC-06007-La-Marca-No-Es-Un-Estado-De-Cuenta.md) | **La marca no es un estado de cuenta**: no ocupa su lugar ni lo reemplaza | `TC-06024` | `Pendiente` |
 
-**Siete de siete con caso de prueba.** `RC-06001`, `RC-06005` y `RC-06007` son las tres que sostienen directamente un NFR con umbral cero, y por eso sus casos son también los que `QG-11` y `QG-10` miden.
+**Siete de siete con caso de prueba.** `RC-06001`, `RC-06005` y `RC-06007` son las tres que sostienen directamente un NFR con umbral cero, y por eso sus casos son también los que `QG-06011` y `QG-06010` miden.
 
 ## 11. La batería del validador contra los escenarios
 
@@ -665,5 +665,6 @@ Es la tabla de `05` §10.5 con la columna del caso de prueba que la materializa.
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **25 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.1 | 2026-08-29 | **Tramo `R-3b` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **5 línea(s)** de este documento pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios ni lo que está entre «…». **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Criterios-Validacion.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -145,7 +145,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 **No hay criterio de disponibilidad, y es correcto que no lo haya.** El intake declara «sin SLO»: el servidor es domiciliario y su caída se responde con **estado degradado en el front**, no con redundancia.
 
-**No se declara ningún tiempo de ejecución de la batería.** Los tres tiempos de este proyecto de código —`CV-11`, `CV-12` y `CV-13`— son **del servicio** y vienen del intake con su rótulo.
+**No se declara ningún tiempo de ejecución de la batería.** Los tres tiempos de este proyecto de código —`CV-00011`, `CV-00012` y `CV-00013`— son **del servicio** y vienen del intake con su rótulo.
 
 ### 3.2 `GeometriaFactory-Domain`
 
@@ -162,7 +162,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 **No hay criterio de latencia, de throughput ni de disponibilidad, y es correcto que no lo haya**: este proyecto de código no atiende peticiones ni abre conexiones (`05` §8, cierre de la sección). Inventar un umbral de esos tres sería inventar un sujeto que no existe.
 
-**No se declara ningún otro tiempo de ejecución.** El único que existe es el de `CV-08`, y viene del intake con su rótulo.
+**No se declara ningún otro tiempo de ejecución.** El único que existe es el de `CV-02008`, y viene del intake con su rótulo.
 
 ### 3.3 `GeometriaFactory-Application`
 
@@ -182,7 +182,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 **No hay criterio de throughput ni de disponibilidad, y es correcto que no lo haya**: este proyecto de código no atiende peticiones ni abre conexiones (`05` §8, cierre de la sección). Inventar un umbral de esos dos sería inventar un sujeto que no existe.
 
-**No se declara ningún tiempo de ejecución de la batería.** El único tiempo de este proyecto de código es el de `CV-09`, que es por caso de uso y viene del intake con su rótulo. Ninguna fuente da un tiempo de suite para esta capa.
+**No se declara ningún tiempo de ejecución de la batería.** El único tiempo de este proyecto de código es el de `CV-04009`, que es por caso de uso y viene del intake con su rótulo. Ninguna fuente da un tiempo de suite para esta capa.
 
 ### 3.4 `GeometriaFactory-Infrastructure`
 
@@ -207,7 +207,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 **No hay criterio de disponibilidad ni de caudal, y es correcto que no lo haya.** El intake §17.1.P.10 · GeometriaFactory-Infrastructure declara «sin SLO» para este proyecto de código, y quien tiene sujeto para el caudal es `GeometriaFactory-Api`, que es el que recibe peticiones.
 
-**No se declara ningún tiempo de ejecución de la batería.** El único tiempo de este proyecto de código es el de `CV-10`, que es de **interpretación** y viene del intake con su rótulo.
+**No se declara ningún tiempo de ejecución de la batería.** El único tiempo de este proyecto de código es el de `CV-06010`, que es de **interpretación** y viene del intake con su rótulo.
 
 ## 4. Criterios de regresión
 
@@ -232,7 +232,7 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 | CV-16 | Todo defecto cerrado generó al menos un `TC-XX` nuevo o extendió uno existente, con su fila en la matriz | 1 caso de prueba por defecto cerrado, como mínimo |
 | CV-17 | `TC-02005` —las cinco operaciones rechazadas sobre la cuenta de administrador— se ejecuta en **todas** las etapas a partir de la `d` | Presente en cada ejecución. Es la prueba de regresión de la familia de defectos que en este producto **se abrió dos veces** |
 
-**La regla de no regresión es acumulativa por diseño.** El intake declara que cada etapa reejecuta lo anterior, y eso es lo que hace caro que la batería crezca en tiempo: es el motivo por el que `CV-08` existe.
+**La regla de no regresión es acumulativa por diseño.** El intake declara que cada etapa reejecuta lo anterior, y eso es lo que hace caro que la batería crezca en tiempo: es el motivo por el que `CV-02008` existe.
 
 ### 4.3 `GeometriaFactory-Application`
 
@@ -264,9 +264,9 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-33 | Cobertura por componente cumplida, con los **ocho** reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-14` |
+| CV-33 | Cobertura por componente cumplida, con los **ocho** reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-00014` |
 | CV-34 | Mutation score | **60 %**, piso que `Rules-Calidad-Y-Pruebas.md` §2.2 fija **para el tipo `library`**; la fila `rest-api`, que es la de este proyecto de código, **no pide mutation score**. **Ninguna fuente del producto lo declara.** Se adopta igual, con más exigencia que la que la guía pide | **No exigible todavía**: la herramienta no está elegida ni corre. **La composición de raíz queda exenta** con su fundamento |
-| CV-35 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-26` |
+| CV-35 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-00026` |
 | CV-36 | Ningún caso de verificación está deshabilitado sin motivo escrito en su fila | 0 deshabilitados sin motivo | **Bloqueante** |
 | CV-37 | Ninguna prueba de la batería de integración usa dobles: golpea **la superficie real contra el almacén real** | 0 dobles en integración | **Bloqueante**. Doblar algo ahí la convierte en otra cosa |
 | CV-38 | Ninguna prueba usa el almacén de desarrollo ni el de producción: cada una **crea y descarta el suyo** | 0 usos del almacén compartido | **Bloqueante** |
@@ -277,9 +277,9 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-18 | Cobertura por componente cumplida, con los cinco componentes reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-09` |
+| CV-18 | Cobertura por componente cumplida, con los cinco componentes reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-02009` |
 | CV-19 | Mutation score en dominio | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2 para el tipo `library`. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre en el pipeline (hueco declarado en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §7). Hasta entonces se reporta «sin medir» |
-| CV-20 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-13` |
+| CV-20 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-02013` |
 | CV-21 | Ningún caso de prueba está deshabilitado sin motivo escrito en su fila del catálogo | 0 deshabilitados sin motivo | **Bloqueante** |
 | CV-22 | Ningún caso de prueba depende del orden de ejecución ni de un reloj del entorno | 0 dependencias de orden; dos ejecuciones consecutivas con resultado idéntico (`TC-02025`) | **Bloqueante** |
 
@@ -287,9 +287,9 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-23 | Cobertura por componente cumplida, con los siete componentes con umbral reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-10` |
+| CV-23 | Cobertura por componente cumplida, con los siete componentes con umbral reportados por separado | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-04010` |
 | CV-24 | Mutation score | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2 para el tipo `library`. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre en el pipeline (hueco declarado en [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8). Hasta entonces se reporta «sin medir» |
-| CV-25 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-17` |
+| CV-25 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-04017` |
 | CV-26 | Ningún caso de prueba está deshabilitado sin motivo escrito en su fila del catálogo | 0 deshabilitados sin motivo | **Bloqueante** |
 | CV-27 | Ningún caso de prueba depende del orden de ejecución ni del reloj del entorno | 0 dependencias de orden; el momento entra siempre por el doble del puerto de reloj (`TC-04013`) | **Bloqueante** |
 | CV-28 | Ninguna prueba sustituye un componente interno con un doble: los dobles son **sólo de puerto** | 0 dobles de componente interno | **Bloqueante**, por [`Estrategia-Testing.md`](Estrategia-Testing.md) §5 |
@@ -298,9 +298,9 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Id | Criterio | Umbral | Carácter |
 | --- | --- | --- | --- |
-| CV-29 | Cobertura por componente cumplida, con los **ocho** componentes reportados por separado y **el informe de los dos motores reportado aparte** | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-11` y `CV-12` |
+| CV-29 | Cobertura por componente cumplida, con los **ocho** componentes reportados por separado y **el informe de los dos motores reportado aparte** | Tabla de [`Estrategia-Testing.md`](Estrategia-Testing.md) §2 | **Condicionado**, por depender de `CV-06011` y `CV-06012` |
 | CV-30 | Mutation score | **60 %**, piso de `Rules-Calidad-Y-Pruebas.md` §2.2 para el tipo `library`. **Ninguna fuente del producto lo declara** | **No exigible todavía**: la herramienta no está elegida ni corre en el pipeline. Hasta entonces se reporta «sin medir». **El adaptador de reloj queda exento con su fundamento** |
-| CV-31 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-23` |
+| CV-31 | El análisis estático no introduce advertencias nuevas | 0 advertencias nuevas | **Bloqueante**, por `CV-06023` |
 | CV-32 | Ningún caso de prueba está deshabilitado sin motivo escrito en su fila del catálogo | 0 deshabilitados sin motivo | **Bloqueante** |
 | CV-33 | Ninguna prueba de integración interna usa el almacén de desarrollo ni el de producción: cada una **crea y descarta el suyo** | 0 usos del almacén compartido | **Bloqueante** |
 | CV-34 | Ningún texto de figuras usado como dato de prueba está escrito a mano: **todos salen del intake §20** | 0 textos escritos a mano | **Bloqueante**. Es la mitigación del riesgo de negocio que la fuente pone primero |
@@ -314,12 +314,12 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-11` a `CV-15`, `CV-33`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] sin confirmar | Nadie: es el tratamiento declarado, no una excepción concedida |
-| Criterio **no exigible todavía** —`CV-34`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado** | — |
+| Criterio **condicionado** —`CV-00011` a `CV-00015`, `CV-00033`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] sin confirmar | Nadie: es el tratamiento declarado, no una excepción concedida |
+| Criterio **no exigible todavía** —`CV-00034`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado** | — |
 | **Puerta técnica que no pasa** —`PT-04`— | **No hay excepción.** El intake §15 declara que detiene la planificación de las etapas que dependen de ella y **no se arrastra como deuda** | El Product Owner decide la salida, no la excepción |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner, con constancia escrita |
 
-**Sobre `CV-31` y el recuento de la batería del validador.** El intake **1.20** escribe «incluidas las **diez** pruebas del validador» en §17.1.P.8 · GeometriaFactory-Api —y «las **diez** pruebas del validador pasan» en §17.1.P.8 · GeometriaFactory-Infrastructure—, y su §21 tiene **diez** filas, la décima incorporada con `E-8` bajo el rótulo **[DECISIÓN 2026-08-09]**. **Hasta 1.19 los dos gates escribían nueve**; la Fase C de `GeometriaFactory-Infrastructure` ya había resuelto la lectura en **diez**, este documento la heredó, y la fuente lo confirmó en 1.20. **Cerrar la etapa con nueve casos no es una excepción admitida.**
+**Sobre `CV-00031` y el recuento de la batería del validador.** El intake **1.20** escribe «incluidas las **diez** pruebas del validador» en §17.1.P.8 · GeometriaFactory-Api —y «las **diez** pruebas del validador pasan» en §17.1.P.8 · GeometriaFactory-Infrastructure—, y su §21 tiene **diez** filas, la décima incorporada con `E-8` bajo el rótulo **[DECISIÓN 2026-08-09]**. **Hasta 1.19 los dos gates escribían nueve**; la Fase C de `GeometriaFactory-Infrastructure` ya había resuelto la lectura en **diez**, este documento la heredó, y la fuente lo confirmó en 1.20. **Cerrar la etapa con nueve casos no es una excepción admitida.**
 
 **Lo que tampoco es una excepción admitida:** agregar un punto de acceso sin declarar si queda dentro de la guardia; enriquecer una respuesta de una familia empobrecida «para que sea más útil»; truncar un cuerpo en lugar de rechazarlo; dar por verificada la eliminación fuera de alcance **sin forzar la petición**; declarar cumplido un NFR de umbral cero por no haber observado lo contrario; o dejar un secreto real en una prueba.
 
@@ -329,8 +329,8 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-08`, `CV-09`, `CV-18`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-02015`) | Nadie: es el tratamiento declarado, no una excepción concedida |
-| Criterio **no exigible todavía** —`CV-19`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado ni se declara cumplido** | — |
+| Criterio **condicionado** —`CV-02008`, `CV-02009`, `CV-02018`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-02015`) | Nadie: es el tratamiento declarado, no una excepción concedida |
+| Criterio **no exigible todavía** —`CV-02019`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado ni se declara cumplido** | — |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito en el punto de control | El Product Owner, con constancia escrita en el informe de cierre |
 
 **Lo que no es una excepción admitida:** bajar un umbral para que cierre, deshabilitar un caso de prueba para que la batería pase, sustituir un escenario del intake por un dato que dé el resultado esperado, o declarar cumplido un criterio cuya medición no se hizo.
@@ -341,11 +341,11 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-09`, `CV-10`, `CV-23`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-04018`) | Nadie: es el tratamiento declarado, no una excepción concedida |
-| Criterio **no exigible todavía** —`CV-24`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado ni se declara cumplido** | — |
+| Criterio **condicionado** —`CV-04009`, `CV-04010`, `CV-04023`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre de la etapa, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó (`BT-04018`) | Nadie: es el tratamiento declarado, no una excepción concedida |
+| Criterio **no exigible todavía** —`CV-04024`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado ni se declara cumplido** | — |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito en el punto de control | El Product Owner, con constancia escrita en el informe de cierre |
 
-**Lo que no es una excepción admitida:** bajar un umbral para que cierre, deshabilitar un caso de prueba para que la batería pase, mover una prueba a la batería de integración de `GeometriaFactory-Api` **para esquivar `CV-11`** en lugar de porque ahí es donde pertenece, sustituir un escenario del intake por un resultado que dé el desenlace esperado, o declarar cumplido un criterio cuya medición no se hizo.
+**Lo que no es una excepción admitida:** bajar un umbral para que cierre, deshabilitar un caso de prueba para que la batería pase, mover una prueba a la batería de integración de `GeometriaFactory-Api` **para esquivar `CV-00011`** en lugar de porque ahí es donde pertenece, sustituir un escenario del intake por un resultado que dé el desenlace esperado, o declarar cumplido un criterio cuya medición no se hizo.
 
 ### 6.4 `GeometriaFactory-Infrastructure`
 
@@ -353,11 +353,11 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Situación | Salida admitida | Quién la aprueba |
 | --- | --- | --- |
-| Criterio **condicionado** —`CV-10`, `CV-11`, `CV-12`, `CV-29`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó | Nadie: es el tratamiento declarado, no una excepción concedida |
-| Criterio **no exigible todavía** —`CV-30`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado** | — |
+| Criterio **condicionado** —`CV-06010`, `CV-06011`, `CV-06012`, `CV-06029`— no alcanzado | Se registra la medición y su distancia al umbral en el informe de cierre, y **no bloquea**, porque el umbral es un valor rotulado [ASUNCIÓN] que el Product Owner todavía no confirmó | Nadie: es el tratamiento declarado, no una excepción concedida |
+| Criterio **no exigible todavía** —`CV-06030`— | Se reporta «sin medir» con el hueco citado. **No se reporta un número inventado** | — |
 | Criterio **bloqueante** no cumplido | Se abre una tarea técnica en [`../06-Backlog-Tecnico/Backlog-Tecnico.md`](../06-Backlog-Tecnico/Backlog-Tecnico.md) con la remediación, y la etapa **no cierra** hasta que se cumpla o hasta que el Product Owner acepte la excepción por escrito | El Product Owner, con constancia escrita |
 
-**Sobre `CV-02` y el recuento de la batería.** El intake **1.20** escribe «las **diez** pruebas del validador pasan» en §17.1.P.8 · GeometriaFactory-Infrastructure e «incluidas las **diez** pruebas del validador» en §17.1.P.8 · GeometriaFactory-Api, y su §21 tiene **diez** filas, la décima incorporada con `E-8` bajo el rótulo **[DECISIÓN 2026-08-09]**. **Hasta 1.19 los dos gates escribían nueve**, y esta categoría aplicó diez igual, apoyada en `05` §8 y §10.5, que ya habían resuelto la lectura; la fuente lo corrigió en 1.20 y la divergencia está cerrada. **Cerrar la etapa con nueve casos y declarar cumplido `CV-02` no es una excepción admitida**: dejaría sin cubrir el escenario que cerró la única condición del contrato de fachada que no tenía dato de prueba.
+**Sobre `CV-00002` y el recuento de la batería.** El intake **1.20** escribe «las **diez** pruebas del validador pasan» en §17.1.P.8 · GeometriaFactory-Infrastructure e «incluidas las **diez** pruebas del validador» en §17.1.P.8 · GeometriaFactory-Api, y su §21 tiene **diez** filas, la décima incorporada con `E-8` bajo el rótulo **[DECISIÓN 2026-08-09]**. **Hasta 1.19 los dos gates escribían nueve**, y esta categoría aplicó diez igual, apoyada en `05` §8 y §10.5, que ya habían resuelto la lectura; la fuente lo corrigió en 1.20 y la divergencia está cerrada. **Cerrar la etapa con nueve casos y declarar cumplido `CV-00002` no es una excepción admitida**: dejaría sin cubrir el escenario que cerró la única condición del contrato de fachada que no tenía dato de prueba.
 
 **Lo que tampoco es una excepción admitida:** bajar un umbral para que cierre; deshabilitar un caso de prueba para que la batería pase; **escribir a mano un texto de figuras porque el del intake es largo**; declarar cumplido un NFR de umbral cero por no haber observado lo contrario, sin haberlo medido en su condición; o dejar un secreto real en una prueba.
 
@@ -365,4 +365,5 @@ Uno por cada NFR de [`../05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md`
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **24 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

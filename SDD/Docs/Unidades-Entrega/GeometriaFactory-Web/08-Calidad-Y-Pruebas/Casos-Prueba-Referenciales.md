@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Casos-Prueba-Referenciales.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -761,7 +761,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Inspección del artefacto generado y extremo a extremo en página |
-| Cubre | Puerta técnica **`PT-03`** del intake §15 y §17.2.P.8 · GeometriaFactory-Visor; NFR «Dependencias traídas de una red de distribución externa»; `QG-02`; `BT-12013` |
+| Cubre | Puerta técnica **`PT-03`** del intake §15 y §17.2.P.8 · GeometriaFactory-Visor; NFR «Dependencias traídas de una red de distribución externa»; `QG-12002`; `BT-12013` |
 | Setup | El bundle generado y una página abierta **sin acceso a redes de distribución externas** |
 | Pasos | Given el bundle, When se lo inspecciona, Then el motor de dibujo tridimensional **está dentro**. Given la página sin acceso a redes externas, When se la abre y se ejerce la fachada, Then **funciona**: hay exactamente **0** dependencias traídas de una red externa en tiempo de ejecución |
 | Salida esperada | El motor dentro y el recuento en 0. **Una puerta que no pasa detiene la planificación de la etapa `g`** y no se arrastra como deuda |
@@ -773,7 +773,7 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 | Campo | Valor |
 | --- | --- |
 | Tipo | Extremo a extremo en página |
-| Cubre | Puerta técnica **`PT-02`** del intake §15 y §17.2.P.8 · GeometriaFactory-Visor; `US-12001`, `US-12004`, `US-12009`, `US-12011`; `QG-03`; `BT-12014` |
+| Cubre | Puerta técnica **`PT-02`** del intake §15 y §17.2.P.8 · GeometriaFactory-Visor; `US-12001`, `US-12004`, `US-12009`, `US-12011`; `QG-12003`; `BT-12014` |
 | Setup | Una página del componente anfitrión con el bundle cargado, y el texto del escenario `E-1` |
 | Pasos | Given la página del anfitrión, When se carga el bundle, Then carga. When se crea la instancia, Then **arma la escena**. When se carga el texto de `E-1`, Then **dibuja las tres figuras, incluido el ortoedro**. When se hacen **diez recorridos de ida y vuelta** entre trabajos **con los dos movimientos prendidos**, Then **no degrada**. When se selecciona una pieza desde el árbol y desde la escena, Then **los dos se sincronizan por índice** |
 | Salida esperada | Los **cinco** tramos que la puerta exige, medidos juntos. La sincronización por índice es la que dejó de ser diferible cuando el Product Owner promovió `F-13` a `Must Have` en el intake **1.19**, con el fundamento de que una capacidad citada por una puerta no puede ser de prioridad menor |
@@ -796,4 +796,5 @@ Cada `TC-XX` declara los ocho campos de `Rules-Calidad-Y-Pruebas.md` §4.6. **To
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **2 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
