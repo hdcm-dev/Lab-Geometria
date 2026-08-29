@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08007-Contrato-De-Desenlace-De-La-Revision.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -97,9 +97,16 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 | --- | --- |
 | Necesidad de negocio | NB-00009, y NB-00007 por el listado desde el que se ejerce |
 | Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-02010`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) —el desenlace es exclusivo del administrador y es terminal— sobre CA-03 y CA-04, y [`RN-02011`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) sobre CA-06, las dos de `GeometriaFactory-Domain`. Ver `Especificacion-Funcional.md` §5 |
-| Historias de usuario a generar en 06 | US-08017 tipo de solicitud de desenlace con su conjunto cerrado de dos valores; US-08018 campo de comentario opcional y su transporte en el detalle |
+| Historias de usuario a generar en 06 | **Pronóstico de la pasada de diseño, superado y no acuñado.** Esta celda anunciaba las 2 historia(s) `US-08017`, `US-08018` «a generar en 06» cuando `GeometriaFactory-Contracts` era un proyecto de código con rango propio. **La consolidación de las unidades de entrega lo retiró y esas historias nunca se acuñaron con ese identificador**: las que cubren este contrato viven hoy en los dos [`Product-Backlog.md`](../../Unidades-Entrega/) con la numeración de su unidad. **La correspondencia una a una NO se reconstruye acá**: ningún registro de reconexión la conserva, y deducirla del texto sería inventarla. Queda como ítem diferido — ver la nota de abajo |
 | Componentes esperados en 05 | Familia de tipos de transferencia de desenlace del ensamblado de contratos |
 | Tests previstos en 08 | Pruebas de integración contra el servicio real de la aprobación sin comentario (CA-01), del rechazo con comentario (CA-02), del desenlace sobre estado terminal (CA-03), del desenlace forzado por un alumno (CA-04) y del desenlace sobre un trabajo en estado `Borrador` (CA-06); inspección de superficie pública para CA-05 |
+
+
+> **Ítem diferido (`Root-Rules.md` §12.2) · la correspondencia de las historias pronosticadas.**
+> **1 · Qué falta:** el mapeo de `US-08017`, `US-08018` a las historias vigentes que cubren este contrato.
+> **2 · Por qué no se puede hoy:** **ningún registro de reconexión de la consolidación lo conserva**, y reconstruirlo comparando prosa es interpretación y no evidencia. El pronóstico se escribió antes de que existieran las historias reales.
+> **3 · Quién lo cierra:** la categoría 06 de las dos unidades de entrega, que es la que las acuñó.
+> **4 · En qué evento se cierra:** la **próxima emisión de la 06**, o la **Fase J**, lo que ocurra primero.
 
 ## 10. Notas y supuestos
 
@@ -114,6 +121,7 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-09 | Emisión inicial, derivada de la incorporación del circuito de revisión del administrador en `PRODUCT-INTAKE` 1.3 §4 (F-21, F-23), §4.1 (RN-08010) y §4.2, y de `NB-00009` de 01. Declara la solicitud de desenlace con su conjunto cerrado de dos valores, el comentario opcional, el resultado con el estado terminal alcanzado y los dos códigos de error nuevos del ensamblado. |
 | 1.1 | 2026-08-10 | **Cierra el hallazgo `C-08` (P2) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0.** La cabecera de trazabilidad declaraba derivarse del `PRODUCT-INTAKE` **1.3**, versión archivada, y pasa a declarar la **1.14**, vigente. Entre la **1.3** y la **1.14** el intake atravesó once emisiones, entre ellas las que incorporaron **F-25**, **F-26** y las reglas **RN-08012** a **RN-08016**: una cabecera que declaraba 1.3 declaraba derivarse de un intake que no conocía ni el reseteo ni la habilitación con contraseña provisoria. Se revisó el cuerpo antes de mover la cabecera y **no arrastra ninguna decisión de las versiones intermedias**: no queda en él ningún recuento de «quince reglas» ni de «diecisiete códigos», ninguna cita a la exclusión **X-2** como vigente y ninguna afirmación de que la marca de cambio de contraseña pendiente la ponga únicamente el reseteo. **Ningún contenido normativo de este documento cambia: la corrección es de trazabilidad.** Sube minor. |
 

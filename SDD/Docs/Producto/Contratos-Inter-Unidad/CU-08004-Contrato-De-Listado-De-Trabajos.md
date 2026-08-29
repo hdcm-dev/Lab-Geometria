@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08004-Contrato-De-Listado-De-Trabajos.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -102,9 +102,16 @@ Se separan de la tabla anterior porque no producen respuesta de error y no forma
 | --- | --- |
 | Necesidad de negocio | NB-00003, NB-00007, y NB-00009 por el estado de desenlace que el listado transporta |
 | Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-02011`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02011-El-Administrador-No-Ve-Los-Borradores.md) sobre CA-06 y [`RN-02003`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre el alcance del listado propio, las dos de `GeometriaFactory-Domain`. Ver `Especificacion-Funcional.md` §5 |
-| Historias de usuario a generar en 06 | US-08008 tipo de elemento de listado de trabajo con la restricción estructural; US-08009 tipos de solicitud de listado y de filtro por alumno; US-08010 tipo de resumen por alumno y por estado |
+| Historias de usuario a generar en 06 | **Pronóstico de la pasada de diseño, superado y no acuñado.** Esta celda anunciaba las 3 historia(s) `US-08008`, `US-08009`, `US-08010` «a generar en 06» cuando `GeometriaFactory-Contracts` era un proyecto de código con rango propio. **La consolidación de las unidades de entrega lo retiró y esas historias nunca se acuñaron con ese identificador**: las que cubren este contrato viven hoy en los dos [`Product-Backlog.md`](../../Unidades-Entrega/) con la numeración de su unidad. **La correspondencia una a una NO se reconstruye acá**: ningún registro de reconexión la conserva, y deducirla del texto sería inventarla. Queda como ítem diferido — ver la nota de abajo |
 | Componentes esperados en 05 | Familia de tipos de transferencia de listado del ensamblado de contratos |
 | Tests previstos en 08 | Prueba de inspección de superficie pública para CA-01; pruebas de integración del listado propio con los cuatro estados (CA-02), del listado de comisión con y sin filtro (CA-03), del recorte que excluye los borradores del listado del administrador (CA-06) y del listado vacío (CA-05) |
+
+
+> **Ítem diferido (`Root-Rules.md` §12.2) · la correspondencia de las historias pronosticadas.**
+> **1 · Qué falta:** el mapeo de `US-08008`, `US-08009`, `US-08010` a las historias vigentes que cubren este contrato.
+> **2 · Por qué no se puede hoy:** **ningún registro de reconexión de la consolidación lo conserva**, y reconstruirlo comparando prosa es interpretación y no evidencia. El pronóstico se escribió antes de que existieran las historias reales.
+> **3 · Quién lo cierra:** la categoría 06 de las dos unidades de entrega, que es la que las acuñó.
+> **4 · En qué evento se cierra:** la **próxima emisión de la 06**, o la **Fase J**, lo que ocurra primero.
 
 ## 10. Notas y supuestos
 
@@ -118,6 +125,7 @@ Se separan de la tabla anterior porque no producen respuesta de error y no forma
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.5 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-08 | Emisión inicial. Declara el elemento de listado de trabajo como proyección sin texto original ni componentes, y el tipo de resumen por alumno y por estado. |
 | 1.0 | 2026-08-08 | Correcciones absorbidas de la ronda 1 de auditoría (`Audit/B-02-03-GeometriaFactory-Contracts-r1.md`), sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-14**: `CONTRATO_LISTADO_VACIO`, que el propio texto declara que no es error, sale de la tabla de §6 y pasa a la subsección nueva §6.1 de señales declaradas que no son error, que adopta en 02 la resolución que el catálogo de 03 ya usaba. La decisión de diseño no cambia. **H-09**: la sección opcional se renumera de §12 a §17, el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna para `library`. |
 | 1.1 | 2026-08-09 | Actualización por contenido nuevo aguas arriba: `PRODUCT-INTAKE` 1.3 §4 (F-08, F-12), §4.1 (RN-08011), §4.2 (modelo de estados), §6 (flujo 2.1), y `NB-00007` y `NB-00009` de 01. Cambios: el conjunto cerrado que el elemento de listado transporta pasa a **cuatro** estados; el paso 3 y FA-01 declaran que el alcance de la colección depende del papel y que el administrador **no recibe los trabajos en estado `Borrador`**; se agrega FA-03, la apertura de un trabajo para resolverlo con CU-08007, y el recuento pasa a FA-04; CA-02 y CA-03 se reescriben sobre el modelo vigente y se agrega **CA-06**, que verifica el recorte de RN-08011; §9 refiere `RN-08011` y `RN-08003` por identificador y suma NB-00009; §10 declara por qué el comentario del administrador no viaja en el listado. **Autor:** Analista Funcional + API Designer (AG-02) |
