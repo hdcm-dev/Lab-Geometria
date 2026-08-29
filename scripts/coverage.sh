@@ -39,7 +39,7 @@ cd "$raiz"
 
 rm -rf TestResults
 if ! dotnet test GeometriaFactory.sln -c Release \
-     --collect:"XPlat Code Coverage" --logger "trx" --results-directory ./TestResults; then
+     --collect:"XPlat Code Coverage" --settings coverlet.runsettings --logger "trx" --results-directory ./TestResults; then
   echo
   echo "NO SE PUEDE MEDIR · la batería no pasó."
   echo "QG-02 frena antes que QG-03: no se mide cobertura sobre rojo."

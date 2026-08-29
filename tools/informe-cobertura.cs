@@ -79,7 +79,21 @@ var lineas = new Dictionary<string, Dictionary<(string, string), bool>>();
 var ramas = new Dictionary<string, Dictionary<(string, string), (long Cubiertas, long Totales)>>();
 foreach (var archivo in cobertura)
 {
-    foreach (var paquete in XDocument.Load(archivo).Descendants("package"))
+    var documento = XDocument.Load(archivo);
+
+    // LA RAÍZ DE `<sources>` CAMBIA ENTRE INFORMES Y HAY QUE RESOLVERLA, o la unión no
+    // une. El mismo archivo aparece como `GeometriaFactory.Domain/Entities/Account.cs`
+    // en el informe de un proyecto de prueba y como `Entities/Account.cs` en el de otro,
+    // porque cada uno escribe su `filename` relativo a SU raíz. Con la ruta cruda como
+    // clave, los dos registros de la misma línea no se reconocen y la línea se cuenta
+    // dos veces: una cubierta y otra no.
+    //
+    // Se observó midiendo: `GeometriaFactory.Domain` daba **77,7 %** con la ruta cruda y
+    // da **96,0 %** con la ruta resuelta, sobre exactamente la misma corrida. El primero
+    // fundó una escalada al Product Owner que no tenía objeto.
+    var raizDeFuentes = documento.Descendants("source").Select(x => x.Value).FirstOrDefault() ?? "";
+
+    foreach (var paquete in documento.Descendants("package"))
     {
         var nombre = (string?)paquete.Attribute("name") ?? "(sin nombre)";
         if (!lineas.TryGetValue(nombre, out var porLinea))
@@ -90,7 +104,8 @@ foreach (var archivo in cobertura)
         var porRama = ramas[nombre];
         foreach (var clase in paquete.Descendants("class"))
         {
-            var archivoFuente = (string?)clase.Attribute("filename") ?? "";
+            var archivoFuente = Path.GetFullPath(
+                Path.Combine(raizDeFuentes, (string?)clase.Attribute("filename") ?? ""));
             foreach (var linea in clase.Descendants("line"))
             {
                 var clave = (archivoFuente, (string?)linea.Attribute("number") ?? "");
