@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Nivel:** Básico
-**Estado de esta carpeta:** **IMPLEMENTADO el 2026-08-27.** Es el primer sample con código del producto, y con él la precondición dura de la Fase I (`Master-Prompt.md` §7.1) queda cumplida
+**Estado de esta carpeta:** **IMPLEMENTADO y VERIFICADO.** Implementado el 2026-08-27 —con él la precondición dura de la Fase I (`Master-Prompt.md` §7.1) quedó cumplida— y **verificado el 2026-08-29** en la Fase I, incremento 1: su contrato `VER-02001` cumple los cinco criterios
 **Documento que la gobierna:** [`ejemplo-01-basico-dominio.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-dominio.md) 1.0 — **la ruta se corrigió el 2026-08-27**: apuntaba a `SDD/Docs/Proyectos/GeometriaFactory-Domain/`, que la consolidación de las unidades de entrega retiró, y el documento se renombró además con el sufijo del proyecto de código, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-01`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-01` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, todavía en estado `Sin verificar`: actualizarla es de la Fase I, no de esta carpeta
@@ -49,28 +49,24 @@ dotnet run --project samples/domain/01-basico -- --verificar   # y lo compara co
 **No entra en `GeometriaFactory.sln` a propósito.** Si entrara, su ensamblado contaría en la
 cobertura de `QG-03` y movería un número que mide otra cosa.
 
-### Y lo primero que hizo fue encontrar una divergencia, que es para lo que sirve
+### Y lo primero que hizo fue encontrar una divergencia — **resuelta el 2026-08-29**
 
-**Seis de las diez líneas coinciden con el snapshot; cuatro no**, y las cuatro por el mismo motivo:
-**el sistema emite los códigos de condición en inglés y toda la documentación los nombra en
-castellano.**
+**Su primera corrida, el 2026-08-27, incumplió cuatro de los cinco `stdout_contiene` del contrato.**
+El sistema emitía `ADMINISTRATOR_ALREADY_CONFIGURED` y el documento pedía
+`ADMINISTRADOR_YA_CONFIGURADO`, y lo mismo con otros tres códigos.
 
-| Lo que §6 declara | Lo que el sistema emite |
-| --- | --- |
-| `ADMINISTRADOR_YA_CONFIGURADO` | `ADMINISTRATOR_ALREADY_CONFIGURED` |
-| `DATO_OBLIGATORIO_AUSENTE` | `REQUIRED_FIELD_MISSING` |
-| `CUENTA_PENDIENTE` | `ACCOUNT_PENDING` |
-| `CAMBIO_DE_CONTRASENA_PENDIENTE` | `PASSWORD_CHANGE_PENDING` |
+**No era un defecto del sistema.** Era el residuo del renombre **`F-03`** —«los 101 códigos de
+condición van a inglés», decisión del Product Owner del **2026-08-12**, en
+[`../../../SDD/Docs/Producto/Norma-De-Nomenclatura.md`](../../../SDD/Docs/Producto/Norma-De-Nomenclatura.md)
+§5.3—, cuyos tramos documentales **se suspendieron el 2026-08-13** porque renombraban documentos que
+describían código que todavía no existía. El código se escribió en inglés desde el primer archivo; la
+documentación quedó a mitad de camino.
 
-**No es un defecto del sample y no se corrige acá.** La forma castellana aparece **21 veces en el
-corpus vivo y la inglesa ninguna**; la forma inglesa es la que viaja **por el cable**, desde
-`ConditionCode` del dominio hasta `ErrorCode` de la capa de contratos y la traducción de la Api.
-Elegir cuál de las dos es la buena **cambia el contrato público de errores**, y eso es del Product
-Owner. Queda declarado en
-[`../../../SDD/Docs/Audit/Evaluacion-Del-Codigo-2026-08-27.md`](../../../SDD/Docs/Audit/Evaluacion-Del-Codigo-2026-08-27.md).
+**El Product Owner lo reconfirmó el 2026-08-29** y el documento que gobierna esta carpeta pasó a la
+forma vigente, **con el mapeo leído de `ConditionCode.cs`** y no elegido a mano. Hoy el sample
+**cumple su contrato**: `--verificar` devuelve `CONFORME · las 10 líneas coinciden` y sale 0.
 
-**Por eso el snapshot de `tests/SalidaEsperada.cs` NO se ajustó al código.** Ajustarlo habría hecho
-pasar la verificación decidiendo en silencio que el código le gana a veintiún documentos, que es
-exactamente lo que un snapshot existe para impedir. El sample sale **0** —el recorrido funciona, las
-nueve operaciones se invocan y las excepciones son cero— y `--verificar` sale **1** con el diff a la
-vista, hasta que alguien decida.
+**Lo que conviene no perder de este episodio** es que el snapshot **no se ajustó al código durante
+esos dos días**, aunque hubiera sido un renglón. Ajustarlo habría decidido en silencio que el código
+le gana a veintiún documentos, y lo que había debajo era una decisión del Product Owner a medio
+aplicar, que sólo se ve si alguien se detiene.
