@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -25,7 +25,7 @@ Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.1.P.4 
 **El almacén se deja en condiciones antes de la primera petición, y si no se puede, el arranque se detiene.** Cinco reglas:
 
 1. **La preparación ocurre una sola vez, al arrancar, y antes de que el servicio atienda.** No es un paso manual de despliegue y no se dispara a demanda desde ninguna operación.
-2. **El linaje de transformaciones es inmutable.** Una transformación ya fusionada no se edita: si hay que corregirla, entra una nueva. La causa frecuente de `MIGRACION_NO_APLICABLE` es exactamente esa edición.
+2. **El linaje de transformaciones es inmutable.** Una transformación ya fusionada no se edita: si hay que corregirla, entra una nueva. La causa frecuente de `MIGRATION_NOT_APPLICABLE` es exactamente esa edición.
 3. **Un esquema que no corresponde al linaje conocido detiene el arranque.** No se aplica un esquema por aproximación y **no se descarta el almacén**: la salida es restaurar el respaldo o revisar la transformación, y las dos son decisiones de una persona.
 4. **Una ubicación que no admite escritura detiene el arranque.** **No se cae hacia una ruta alternativa dentro de la imagen**, y el mensaje **no incluye la ruta** (`RA-03`).
 5. **No hay modo de sólo lectura ni arranque parcial.** Un servicio que atiende sobre un almacén en el que no se puede confiar es peor que un servicio que no arranca: el segundo se nota enseguida, el primero se nota cuando alguien busca su trabajo y no está.
@@ -92,4 +92,5 @@ Motivación upstream: NB-00003, NB-00008; RN-06008; `PRODUCT-INTAKE` §17.1.P.4 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Fija la preparación del almacén antes de la primera petición, el linaje inmutable de transformaciones y el arranque detenido como única salida ante un esquema que no corresponde o una ubicación que no admite escritura, con los dos atajos destructivos cerrados por decisión y no por recomendación. Evalúa cinco alternativas, declara cuatro trade-offs y fija seis métricas de validación. |

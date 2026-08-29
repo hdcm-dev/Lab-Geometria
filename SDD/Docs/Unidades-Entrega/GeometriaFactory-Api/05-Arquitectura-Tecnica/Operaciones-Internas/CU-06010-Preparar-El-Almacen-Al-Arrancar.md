@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06010-Preparar-El-Almacen-Al-Arrancar.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -69,8 +69,8 @@ Lo que este caso de uso **no** hace: no decide **cuándo** arrancar ni **dónde*
 
 | Código | Causa | Respuesta del caso de uso |
 | --- | --- | --- |
-| `MIGRACION_NO_APLICABLE` | Una transformación de esquema no se puede aplicar sobre el almacén encontrado: el esquema diverge del linaje de transformaciones conocido, o está por delante de él | **Detiene el arranque** y lo declara. No se atiende ninguna petición. **No se aplica un esquema por aproximación y no se descarta el almacén**: los dos caminos perderían datos de alumnos, y el remedio —restaurar el respaldo, o revisar la transformación— es una decisión de la persona que despliega, no del programa |
-| `RUTA_DEL_ALMACEN_NO_DISPONIBLE` | La ruta configurada no es alcanzable o no admite escritura: típicamente el volumen persistente no está montado | **Detiene el arranque** y lo declara. **No se cae hacia una ruta alternativa dentro de la imagen**: el servicio arrancaría, aceptaría trabajos y los perdería en el siguiente reemplazo de versión, sin que nadie lo notara hasta entonces |
+| `MIGRATION_NOT_APPLICABLE` | Una transformación de esquema no se puede aplicar sobre el almacén encontrado: el esquema diverge del linaje de transformaciones conocido, o está por delante de él | **Detiene el arranque** y lo declara. No se atiende ninguna petición. **No se aplica un esquema por aproximación y no se descarta el almacén**: los dos caminos perderían datos de alumnos, y el remedio —restaurar el respaldo, o revisar la transformación— es una decisión de la persona que despliega, no del programa |
+| `STORE_PATH_UNAVAILABLE` | La ruta configurada no es alcanzable o no admite escritura: típicamente el volumen persistente no está montado | **Detiene el arranque** y lo declara. **No se cae hacia una ruta alternativa dentro de la imagen**: el servicio arrancaría, aceptaría trabajos y los perdería en el siguiente reemplazo de versión, sin que nadie lo notara hasta entonces |
 
 **Las dos comparten forma de terminación y es propia de este contrato: el arranque se detiene.** Ninguna de las dos deja el servicio en pie sobre un almacén en el que no se puede confiar.
 
@@ -87,8 +87,8 @@ Lo que este caso de uso **no** hace: no decide **cuándo** arrancar ni **dónde*
 | CA-01 | Una ruta configurada donde no existe ningún archivo | Se prepara el almacén | El archivo se crea, **todas** las transformaciones se aplican solas y el esquema queda completo. Es el criterio de aceptación de la etapa que declara el intake |
 | CA-02 | Un almacén con el esquema al día | Se prepara dos veces seguidas | El resultado es el mismo las dos veces y **no se aplica ninguna transformación** en la segunda |
 | CA-03 | Un almacén preparado | Se consulta su modo de diario | Es **WAL** |
-| CA-04 | Un almacén cuyo esquema no corresponde al linaje de transformaciones conocido | Se prepara | Devuelve `MIGRACION_NO_APLICABLE`, **el arranque se detiene** y **el almacén no se modifica ni se descarta** |
-| CA-05 | Una ruta configurada que no admite escritura | Se prepara | Devuelve `RUTA_DEL_ALMACEN_NO_DISPONIBLE`, el arranque se detiene y **no se crea ningún archivo en ninguna otra ruta** |
+| CA-04 | Un almacén cuyo esquema no corresponde al linaje de transformaciones conocido | Se prepara | Devuelve `MIGRATION_NOT_APPLICABLE`, **el arranque se detiene** y **el almacén no se modifica ni se descarta** |
+| CA-05 | Una ruta configurada que no admite escritura | Se prepara | Devuelve `STORE_PATH_UNAVAILABLE`, el arranque se detiene y **no se crea ningún archivo en ninguna otra ruta** |
 | CA-06 | Un almacén recién preparado en su primer arranque | Se consultan las cuentas | **No hay ninguna**, y en particular no hay ninguna cuenta de administrador sembrada |
 | CA-07 | El arranque completo desde una base inexistente | Se cronometra | Aplica las transformaciones y el servicio responde su comprobación de salud en **menos de 30 segundos**. El valor está rotulado como asunción aguas arriba y se usa como vigente |
 | CA-08 | Un almacén preparado y el guion de reinicio del repositorio | Se ejecuta el guion y se prepara de nuevo | El almacén queda en el **estado de primer arranque**, que es el camino de vuelta declarado del producto |
@@ -107,7 +107,7 @@ Lo que este caso de uso **no** hace: no decide **cuándo** arrancar ni **dónde*
 
 ## 10. Notas y supuestos
 
-- **Cada transformación de esquema se versiona con el código de su etapa, y las ya fusionadas no se editan.** Editar una fusionada rompería el linaje contra el que `MIGRACION_NO_APLICABLE` compara, y el defecto aparecería recién en el despliegue de destino.
+- **Cada transformación de esquema se versiona con el código de su etapa, y las ya fusionadas no se editan.** Editar una fusionada rompería el linaje contra el que `MIGRATION_NOT_APPLICABLE` compara, y el defecto aparecería recién en el despliegue de destino.
 - **El motor es un archivo único y no un servicio cliente-servidor.** Es coherente con un despliegue domiciliario de un contenedor, y es lo que hace que preparar el almacén sea parte del arranque y no una operación aparte.
 - **El respaldo es la copia del archivo con WAL activo**, y su frecuencia queda a definir por el docente. Este contrato no lo ejecuta y no lo programa: lo hace posible al fijar el modo de diario.
 - **La detención del arranque no es una elección conservadora, es la única segura.** Las dos condiciones de §6 tienen en común que la alternativa deja el servicio en pie sobre datos que no son los que cree tener. El intake declara que el servidor domiciliario no tiene alta disponibilidad y que su caída se responde con estado degradado en la pieza pública: una detención declarada entra en ese camino, un almacén equivocado no.
@@ -119,6 +119,7 @@ Lo que este caso de uso **no** hace: no decide **cuándo** arrancar ni **dónde*
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **5 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 
 ## 17. Compatibilidad de la superficie pública
 

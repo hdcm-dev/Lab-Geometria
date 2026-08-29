@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06006-Derivar-La-Contrasena-Y-Verificar-Una-Credencial.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -72,8 +72,8 @@ El alumno y el administrador son sujetos de la regla: son quienes eligen la cont
 
 | Código | Causa | Respuesta del caso de uso |
 | --- | --- | --- |
-| `CONTRASENA_EN_CLARO_AUSENTE` | Se pidió derivar o verificar sin contraseña: nula o cadena vacía | Termina sin derivar y sin verificar. **No se deriva la cadena vacía**: produciría un valor derivado válido para una credencial que nadie eligió, y `GeometriaFactory-Application` `CU-06003` §6 ya rechaza el valor derivado vacío del otro lado de la frontera |
-| `CREDENCIAL_DERIVADA_ILEGIBLE` | El valor derivado guardado no permite verificar: no lleva los parámetros con los que se produjo, o su forma no corresponde a la función anclada | Termina sin responder sí ni no. **Es un defecto del almacén o de una migración de parámetros, no de quien intenta entrar**, y responder «no» lo haría indistinguible de una contraseña equivocada: la cuenta quedaría inaccesible sin que nadie supiera por qué |
+| `PLAINTEXT_PASSWORD_MISSING` | Se pidió derivar o verificar sin contraseña: nula o cadena vacía | Termina sin derivar y sin verificar. **No se deriva la cadena vacía**: produciría un valor derivado válido para una credencial que nadie eligió, y `GeometriaFactory-Application` `CU-06003` §6 ya rechaza el valor derivado vacío del otro lado de la frontera |
+| `UNREADABLE_PASSWORD_HASH` | El valor derivado guardado no permite verificar: no lleva los parámetros con los que se produjo, o su forma no corresponde a la función anclada | Termina sin responder sí ni no. **Es un defecto del almacén o de una migración de parámetros, no de quien intenta entrar**, y responder «no» lo haría indistinguible de una contraseña equivocada: la cuenta quedaría inaccesible sin que nadie supiera por qué |
 
 **Ninguna de las dos escribe nada** —este contrato no persiste— y **ninguna incluye la contraseña ni el valor derivado en lo que devuelve**.
 
@@ -91,8 +91,8 @@ El alumno y el administrador son sujetos de la regla: son quienes eligen la cont
 | CA-02 | Una contraseña y su valor derivado | Se verifica con la misma contraseña | Responde **sí** |
 | CA-03 | El mismo valor derivado | Se verifica con otra contraseña | Responde **no**, y la respuesta **no dice** en qué se diferencian |
 | CA-04 | Una misma contraseña derivada dos veces | Se comparan los dos valores derivados | Son **distintos entre sí** y **los dos verifican** contra la contraseña original |
-| CA-05 | Una petición de derivación con cadena vacía | Se deriva | Devuelve `CONTRASENA_EN_CLARO_AUSENTE` y **0 valores derivados** |
-| CA-06 | Un valor derivado guardado que no corresponde a la función anclada | Se verifica | Devuelve `CREDENCIAL_DERIVADA_ILEGIBLE`, y **no** «no coincide» |
+| CA-05 | Una petición de derivación con cadena vacía | Se deriva | Devuelve `PLAINTEXT_PASSWORD_MISSING` y **0 valores derivados** |
+| CA-06 | Un valor derivado guardado que no corresponde a la función anclada | Se verifica | Devuelve `UNREADABLE_PASSWORD_HASH`, y **no** «no coincide» |
 | CA-07 | Cualquiera de las operaciones anteriores, con el registro del servidor observado | Se ejecutan | En el registro **no aparece la contraseña en claro ni el valor derivado**, en ninguna forma |
 
 ## 9. Trazabilidad
@@ -121,6 +121,7 @@ El alumno y el administrador son sujetos de la regla: son quienes eligen la cont
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 
 ## 17. Compatibilidad de la superficie pública
 

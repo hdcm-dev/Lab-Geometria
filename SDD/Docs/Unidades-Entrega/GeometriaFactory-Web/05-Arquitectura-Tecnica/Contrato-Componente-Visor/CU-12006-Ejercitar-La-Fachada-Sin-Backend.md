@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12006-Ejercitar-La-Fachada-Sin-Backend.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -73,9 +73,9 @@ Permitir que un componente anfitrión mínimo —una página integradora sin nin
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CAPACIDAD_GRAFICA_AUSENTE` | El navegador donde se abre la página integradora no provee la capacidad gráfica tridimensional | El recorrido se detiene en el paso 2 sin instancia creada. La combinación está declarada no soportada; la página integradora informa la condición y termina de forma controlada |
-| `TEXTO_NO_LEGIBLE` | Se pega un texto del que no se puede obtener un conjunto de piezas | La instancia queda viva y vacía; el recorrido continúa pegando otro texto. La fachada no emite advertencias ni errores de validación: no le corresponde |
-| `INDICE_FUERA_DE_RANGO` | Se pide resaltar un índice que no está en el resultado de dibujo vigente | La selección vigente se conserva y el recorrido continúa |
+| `GRAPHICS_CAPABILITY_MISSING` | El navegador donde se abre la página integradora no provee la capacidad gráfica tridimensional | El recorrido se detiene en el paso 2 sin instancia creada. La combinación está declarada no soportada; la página integradora informa la condición y termina de forma controlada |
+| `UNREADABLE_TEXT` | Se pega un texto del que no se puede obtener un conjunto de piezas | La instancia queda viva y vacía; el recorrido continúa pegando otro texto. La fachada no emite advertencias ni errores de validación: no le corresponde |
+| `INDEX_OUT_OF_RANGE` | Se pide resaltar un índice que no está en el resultado de dibujo vigente | La selección vigente se conserva y el recorrido continúa |
 | Petición de red observada | La pestaña de red registra una petición originada por la fachada | **El caso de uso falla.** El umbral es exactamente 0 y no admite excepción: una sola petición viola RA-02 y reabre lo que RA-01 sostiene. La medición vale **con los dos movimientos prendidos** (`Especificacion-Funcional.md` §6) |
 
 ## 7. Postcondiciones
@@ -117,6 +117,7 @@ Permitir que un componente anfitrión mínimo —una página integradora sin nin
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-08 | Emisión inicial. Caso de uso transversal que recorre las cinco funciones desde una página integradora sin backend, con cuatro flujos alternativos, cuatro condiciones de error —incluida la petición de red observada, que hace fallar el caso— y seis criterios de aceptación. |
 | 1.0 | 2026-08-08 | Corrección absorbida del audit `B-02-03-GeometriaFactory-Visor-r1.md`, sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-02**: §1 pasa a nombrar las **seis** propiedades transversales, con la misma membresía que `Especificacion-Funcional.md` §6 y `Definicion-Contrato-De-Fachada.md` §4.6, y remite a §6 como lugar único de los umbrales. |
 | 1.0 | 2026-08-09 | Absorción de las **dos decisiones del Product Owner** de la **Fase B2**. **Sin subir versión** por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **(a) Sexta función**: el recorrido pasa de cinco a **seis** funciones —§1, §2, §7 y CA-01 y CA-06—, y el flujo principal suma el **paso 7**, que invoca `establecerMovimiento` prendiendo los dos movimientos y verifica que la selección y la disposición no se pierden; los pasos siguientes se renumeran a 8 y 9. §10 deja de decir que este caso «no agrega una sexta función» y remite a `CU-12007`. **(b) Condiciones de medición**: **CA-02** pasa a medir las 0 peticiones **con los dos movimientos prendidos** durante al menos 60 segundos, que es el peor caso declarado en `Especificacion-Funcional.md` §6; **CA-05** y **FA-02** completan los 10 recorridos con los movimientos prendidos, para que ningún bucle de dibujo que sobreviva a `destruir` pase inadvertido; **CA-03** verifica además que la preferencia de movimiento **no se conserva** al recargar. Ningún código de condición nuevo. |

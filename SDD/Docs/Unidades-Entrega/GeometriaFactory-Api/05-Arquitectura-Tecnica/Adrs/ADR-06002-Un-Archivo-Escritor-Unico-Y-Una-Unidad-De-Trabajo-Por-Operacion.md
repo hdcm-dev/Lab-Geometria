@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -23,8 +23,8 @@ Motivación upstream: NB-00001, NB-00003, NB-00009; RN-06004, RN-06007, RN-06008
 **Una unidad de trabajo por operación, con el todo o nada como propiedad exigible, y ninguna anidada.** El alcance lo fija `GeometriaFactory-Application` —un caso de uso, una unidad de trabajo— y acá se materializa el mecanismo. Cuatro concreciones:
 
 1. **El arrastre de la baja ocurre dentro de la misma unidad que el retiro de la cuenta.** O se retira la cuenta con todos sus trabajos, o no se retira nada. Es la propiedad entera del contrato de retiro y su caso testigo.
-2. **La escritura que llega con el almacén tomado no espera: termina.** El adaptador emite `ESCRITURA_CONCURRENTE_RECHAZADA` como terminación degradada, **y esta capa no reintenta**. Reintentar es del consumidor, que es el que sabe si la operación es repetible.
-3. **El texto original se escribe una sola vez.** Toda materialización que aporte, para un trabajo existente, un texto distinto del conservado se rechaza con `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` (`RN-06008`, `RC-06001`). La reedición cambia los datos del trabajo y el texto que la persona **vuelve a pegar**, nunca el ya guardado.
+2. **La escritura que llega con el almacén tomado no espera: termina.** El adaptador emite `CONCURRENT_WRITE_REJECTED` como terminación degradada, **y esta capa no reintenta**. Reintentar es del consumidor, que es el que sabe si la operación es repetible.
+3. **El texto original se escribe una sola vez.** Toda materialización que aporte, para un trabajo existente, un texto distinto del conservado se rechaza con `WRITE_REWRITES_ORIGINAL_JSON` (`RN-06008`, `RC-06001`). La reedición cambia los datos del trabajo y el texto que la persona **vuelve a pegar**, nunca el ya guardado.
 4. **Los tres tiempos del trabajo se guardan en tiempo universal coordinado**, con la precisión que el puerto de reloj entrega y **sin truncarla**. La `Fecha` que el alumno escribe se guarda tal como la escribió y **no se convierte**, porque no es un sello. La conversión a la zona de quien lee es de la superficie que lo muestra. Es la decisión que cierra el punto abierto de zona horaria y precisión que la categoría 02 derivó acá.
 
 **Sin borrado lógico y sin marca de baja.** El retiro es físico, y por eso el arrastre es verificable comprobando que **no queda nada**.
@@ -88,4 +88,5 @@ Motivación upstream: NB-00001, NB-00003, NB-00009; RN-06004, RN-06007, RN-06008
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Materializa el alcance transaccional que la capa de aplicación fijó, con el todo o nada del arrastre como propiedad exigible, la ausencia declarada de reintento y de espera activa, la escritura única del texto original, y la zona horaria y la precisión de los tres tiempos del trabajo, que cierra un punto abierto derivado por la categoría 02. Evalúa cinco alternativas, declara cuatro trade-offs y fija seis métricas de validación. |

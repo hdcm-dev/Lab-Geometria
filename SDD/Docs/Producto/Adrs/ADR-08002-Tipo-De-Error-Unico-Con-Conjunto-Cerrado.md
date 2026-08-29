@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-08002-Tipo-De-Error-Unico-Con-Conjunto-Cerrado.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -16,7 +16,7 @@ Todo fallo que cruza la frontera entre las dos unidades desplegables tiene que l
 
 A la vez, RA-03 prohíbe que un mensaje exponga la dirección de un servicio interno. Cada tipo capaz de transportar texto libre hacia la unidad pública es un lugar donde esa prohibición se puede violar, de modo que **la cantidad de tipos de error es una superficie de riesgo**.
 
-El conjunto de códigos tiene historia y conviene tenerla presente al decidir: creció de trece a catorce, a dieciséis y a diecisiete; **se achicó por primera vez a quince** cuando RN-08016 unificó los dos mecanismos de credencial inicial del producto y dos códigos perdieron su causa; y volvió a **diecisiete** cuando el Product Owner incorporó `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que **este proyecto de código emite formalmente** en [`../Contratos-Abstractions.md`](../Contratos-Inter-Unidad/Contratos-Abstractions.md) §5.1. El catálogo de la categoría 03 enumera hoy **veinte identificadores emitidos —diecisiete vivos y tres retirados—**, y es la única tabla del proyecto de código donde están juntos ([`../../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) §3.2).
+El conjunto de códigos tiene historia y conviene tenerla presente al decidir: creció de trece a catorce, a dieciséis y a diecisiete; **se achicó por primera vez a quince** cuando RN-08016 unificó los dos mecanismos de credencial inicial del producto y dos códigos perdieron su causa; y volvió a **diecisiete** cuando el Product Owner incorporó `OPERATION_ADMIN_ONLY` y `STATE_FORBIDS_UPDATE` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que **este proyecto de código emite formalmente** en [`../Contratos-Abstractions.md`](../Contratos-Inter-Unidad/Contratos-Abstractions.md) §5.1. El catálogo de la categoría 03 enumera hoy **veinte identificadores emitidos —diecisiete vivos y tres retirados—**, y es la única tabla del proyecto de código donde están juntos ([`../../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) §3.2).
 
 Motivación upstream: NB-00002, NB-00004, NB-00008, NB-00009; RN-08003, RN-08009, RN-08010, RN-08011, RN-08013, RN-08015, RN-08016; RA-03.
 
@@ -26,8 +26,8 @@ Motivación upstream: NB-00002, NB-00004, NB-00008, NB-00009; RN-08003, RN-08009
 
 Tres reglas que acompañan a la decisión:
 
-1. **Un código se justifica por lo que el consumidor tiene que hacer**, no por la causa que lo produjo. Por eso `CONTRATO_TRABAJO_NO_ENCONTRADO` cubre tres causas —inexistente, ajeno y fuera del alcance del solicitante— con un solo código, y `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` cubre todas las operaciones bloqueadas y los **dos** orígenes de la marca.
-2. **El conjunto se cierra por abajo con `CONTRATO_ERROR_NO_CLASIFICADO`**, que garantiza que ningún fallo llegue sin representación y evita tener que agregar un código ante cada situación nueva.
+1. **Un código se justifica por lo que el consumidor tiene que hacer**, no por la causa que lo produjo. Por eso `WORK_NOT_FOUND` cubre tres causas —inexistente, ajeno y fuera del alcance del solicitante— con un solo código, y `PASSWORD_CHANGE_REQUIRED` cubre todas las operaciones bloqueadas y los **dos** orígenes de la marca.
+2. **El conjunto se cierra por abajo con `UNCLASSIFIED_ERROR`**, que garantiza que ningún fallo llegue sin representación y evita tener que agregar un código ante cada situación nueva.
 3. **Ningún identificador retirado se recicla.** Un identificador que salió del conjunto no vuelve a nombrar otra condición.
 
 La fuente de verdad del conjunto es el contrato de uso [`CU-08006`](../Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) de la categoría 02; esta ADR no acuña ningún código.
@@ -91,3 +91,4 @@ La fuente de verdad del conjunto es el contrato de uso [`CU-08006`](../Contratos
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra el tipo de error único con conjunto cerrado de quince códigos vivos sobre dieciocho identificadores emitidos, las tres reglas que lo acompañan —código justificado por el trabajo del consumidor, cierre por abajo y no reciclado—, cuatro alternativas evaluadas y seis métricas de validación. |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **5**. Sube minor. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

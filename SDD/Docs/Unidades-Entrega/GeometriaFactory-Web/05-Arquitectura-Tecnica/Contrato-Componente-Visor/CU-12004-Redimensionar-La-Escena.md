@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12004-Redimensionar-La-Escena.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -65,8 +65,8 @@ Permitir que el componente anfitrión le avise a una instancia viva que el eleme
 
 | Código | Causa | Respuesta de la fachada |
 | --- | --- | --- |
-| `INSTANCIA_DESCONOCIDA` | El identificador no corresponde a ninguna instancia viva, o corresponde a una ya liberada | Ninguna instancia cambia y se informa el código. Es la condición esperable cuando el anfitrión avisa un cambio de tamaño después de haber destruido la instancia |
-| `ELEMENTO_DE_DIBUJO_INVALIDO` | El elemento de dibujo de la instancia pasó a tener tamaño cero, por ejemplo porque quedó oculto | No se recalcula nada, la instancia sigue viva con su escena y su selección, y se informa el código. Cuando el elemento vuelva a tener tamaño, una invocación nueva ajusta |
+| `UNKNOWN_INSTANCE` | El identificador no corresponde a ninguna instancia viva, o corresponde a una ya liberada | Ninguna instancia cambia y se informa el código. Es la condición esperable cuando el anfitrión avisa un cambio de tamaño después de haber destruido la instancia |
+| `INVALID_CANVAS_ELEMENT` | El elemento de dibujo de la instancia pasó a tener tamaño cero, por ejemplo porque quedó oculto | No se recalcula nada, la instancia sigue viva con su escena y su selección, y se informa el código. Cuando el elemento vuelva a tener tamaño, una invocación nueva ajusta |
 
 ## 7. Postcondiciones
 
@@ -80,7 +80,7 @@ Permitir que el componente anfitrión le avise a una instancia viva que el eleme
 | CA-01 | Una instancia viva sobre un elemento de dibujo de 800 × 600, con el texto del escenario E-1 cargado y sus tres piezas dibujadas | El elemento de dibujo pasa a 400 × 600 y el componente anfitrión invoca `redimensionar(id)` | La escena se ajusta a 400 × 600, las tres piezas conservan su proporción —ninguna queda achatada— y siguen dentro del encuadre |
 | CA-02 | La misma instancia, con la pieza de índice 2 resaltada | El componente anfitrión invoca `redimensionar(id)` | La pieza de índice 2 sigue siendo la única resaltada y la disposición de las tres piezas no cambia |
 | CA-03 | Una instancia viva cuyo elemento de dibujo mide 800 × 600 y no cambió de tamaño | El componente anfitrión invoca `redimensionar(id)` tres veces seguidas | El encuadre resultante es el mismo después de cada invocación: la operación es idempotente |
-| CA-04 | Una instancia ya liberada con `destruir` | El componente anfitrión invoca `redimensionar(id)` con ese identificador | La fachada informa `INSTANCIA_DESCONOCIDA` y ninguna otra instancia viva se altera |
+| CA-04 | Una instancia ya liberada con `destruir` | El componente anfitrión invoca `redimensionar(id)` con ese identificador | La fachada informa `UNKNOWN_INSTANCE` y ninguna otra instancia viva se altera |
 | CA-05 | Una instancia viva con el texto del escenario E-7 cargado y la pestaña de red vacía | El componente anfitrión invoca `redimensionar(id)` después de llevar el elemento de dibujo a 1200 × 400 | La escena se ajusta y la pestaña de red registra exactamente 0 peticiones originadas por la fachada |
 
 ## 9. Trazabilidad
@@ -104,6 +104,7 @@ Permitir que el componente anfitrión le avise a una instancia viva que el eleme
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-08 | Emisión inicial. Contrato de uso de `redimensionar`, con tres flujos alternativos, dos condiciones de error y cinco criterios de aceptación con medidas concretas del elemento de dibujo. |
 | 1.0 | 2026-08-08 | Corrección absorbida del audit `B-02-03-GeometriaFactory-Visor-r1.md`, sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-10**: la cabecera sustituye la referencia a `Compatibilidad-Plataformas.md` sin sección por §2.2 y §4, y completa con su sección concreta la referencia a `NB-00006`. §6 no se modifica: el audit lo declara correcto, y el defecto de `ELEMENTO_DE_DIBUJO_INVALIDO` (H-01) se corrigió en `Definicion-Contrato-De-Fachada.md` §6, que ahora declara este curso como C-2. |
 | 1.0 | 2026-08-09 | Absorción de la **Fase B2**, por la decisión del Product Owner de agregar una **sexta función** a la fachada. **Sin subir versión** por `Master-Prompt.md` §5 (documento en estado `Propuesto`). §10 pasa a decir «ninguna de las **seis** funciones» y distingue los gestos de la persona —que no atraviesan la fachada— del movimiento automático, que sí se gobierna por ella y tiene su contrato de uso en `CU-12007`. El contrato de `redimensionar` no cambia: ajustar la escena es inocuo respecto del estado de los movimientos. |

@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aceptado
 **Fecha:** 2026-08-16
 **Autor:** Product Owner (la decisión) · Orquestador SDD (la redacción)
@@ -58,7 +58,7 @@ del laboratorio, y tenerlo en dos lados es tener dos verdades sobre el mismo tex
 - **Una sola tolerancia, con una sola batería.** Las cuatro trampas del formato viven en un solo
   lugar y las verifican los diez casos obligatorios. El hueco de las dos lecturas **se cierra por
   construcción**, no con una prueba de coherencia entre ellas.
-- **La condición `DIMENSION_NO_LEGIBLE` de la fachada pierde su razón de ser.** Era el código con el
+- **La condición `UNREADABLE_DIMENSION` de la fachada pierde su razón de ser.** Era el código con el
   que el bundle enumeraba la pieza cuya dimensión no pudo leer —el escenario `E-8`, `"3,50"` como
   cadena—. Con las piezas ya reconstruidas, **esa pieza no le llega**: el validador la retuvo y emitió
   su error de validación con posición y campo. La frontera que `Definicion-Contrato-Del-Validador-De-Figuras.md`
@@ -112,3 +112,4 @@ están: esta decisión cambia **a quién más le sirve** lo que ese validador ya
 | --- | --- | --- | --- |
 | 1.0 | 2026-08-16 | Emisión inicial. Registra la decisión del Product Owner de que **el visor reciba las piezas reconstruidas y no el texto del alumno**, con su fundamento —el bundle dibuja y rota, interpretar es del laboratorio— y con sus dos consecuencias caras declaradas: la previsualización pasa a exigir una llamada al servicio de datos, y `E-7` y `RT` §8.3 dejan de ejercitar en el bundle una tolerancia que ya no es suya. Declara que **`RA-02` se conserva entero**: el bundle sigue sin hacer red y recibe su dato del anfitrión. Enumera las tres alternativas descartadas con su motivo. | Product Owner (decisión) · Orquestador SDD |
 | 1.1 | 2026-08-16 | **Las tres escrituras aguas arriba quedaron aplicadas**, y con eso §5 punto 2 se cumple: el intake pasa a **2.2** con los dos puntos de escenario reescritos, y `RT` §8.3 lleva sus dos frases al día con autorización explícita del Product Owner sobre su carpeta. **§3.2 se matiza con lo que la lectura completa mostró**: la fuente **ya contemplaba** que el bundle recibiera «el texto **o la estructura**», de modo que esta decisión elige entre dos opciones que estaban abiertas y no contradice esa fila; lo que sí invierte es la asignación de «interpretar para dibujar», que §8.3 le daba al bundle. La constancia está en [`../../Audit/Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md`](../../Audit/Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md) **4.0** §2.3. Ninguna decisión cambia. | Orquestador SDD |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. | AG-00050 |

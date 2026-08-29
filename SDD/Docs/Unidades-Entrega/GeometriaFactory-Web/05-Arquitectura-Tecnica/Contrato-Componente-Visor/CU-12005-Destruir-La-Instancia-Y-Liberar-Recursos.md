@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12005-Destruir-La-Instancia-Y-Liberar-Recursos.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -52,7 +52,7 @@ Permitir que el componente anfitrión libere una instancia del visor cuando deja
 | 3 | Fachada del visor | Libera el contexto gráfico tridimensional que la instancia había tomado sobre el elemento de dibujo |
 | 4 | Fachada del visor | Deja de atender los gestos sobre esa escena y descarta la selección vigente y el resultado de dibujo |
 | 5 | Fachada del visor | Invalida el identificador de instancia y confirma la liberación |
-| 6 | Componente anfitrión | Descarta el identificador: cualquier invocación posterior con él produce `INSTANCIA_DESCONOCIDA` |
+| 6 | Componente anfitrión | Descarta el identificador: cualquier invocación posterior con él produce `UNKNOWN_INSTANCE` |
 
 ## 5. Flujos alternativos
 
@@ -66,7 +66,7 @@ Permitir que el componente anfitrión libere una instancia del visor cuando deja
 
 | Código | Causa | Respuesta de la fachada |
 | --- | --- | --- |
-| `INSTANCIA_DESCONOCIDA` | El identificador no corresponde a ninguna instancia viva, o corresponde a una ya liberada | No se libera nada, ninguna instancia viva se altera y se informa el código. Destruir dos veces el mismo identificador no rompe nada: la segunda invocación informa esta condición y termina |
+| `UNKNOWN_INSTANCE` | El identificador no corresponde a ninguna instancia viva, o corresponde a una ya liberada | No se libera nada, ninguna instancia viva se altera y se informa el código. Destruir dos veces el mismo identificador no rompe nada: la segunda invocación informa esta condición y termina |
 
 Es la única condición de error del caso de uso: `destruir` no puede fallar a medias sobre una instancia viva. Si alguno de los recursos ya no estaba tomado, la liberación continúa con los demás y el identificador queda invalidado igual (garantía G-7 del contrato de fachada).
 
@@ -80,7 +80,7 @@ Es la única condición de error del caso de uso: `destruir` no puede fallar a m
 | ID | Given | When | Then |
 | --- | --- | --- | --- |
 | CA-01 | Una instancia viva con el texto del escenario E-1 cargado y sus tres piezas dibujadas | El componente anfitrión invoca `destruir(id)` | La fachada confirma la liberación, el elemento de dibujo queda sin contenido dibujado y el identificador deja de ser válido |
-| CA-02 | Una instancia recién destruida | El componente anfitrión invoca `cargarJson(id, texto)`, `seleccionarPieza(id, 0)`, `redimensionar(id)`, `establecerMovimiento(id, opciones)` o `destruir(id)` con ese identificador | Cada una de las cinco invocaciones informa `INSTANCIA_DESCONOCIDA` y ninguna instancia viva se altera |
+| CA-02 | Una instancia recién destruida | El componente anfitrión invoca `cargarJson(id, texto)`, `seleccionarPieza(id, 0)`, `redimensionar(id)`, `establecerMovimiento(id, opciones)` o `destruir(id)` con ese identificador | Cada una de las cinco invocaciones informa `UNKNOWN_INSTANCE` y ninguna instancia viva se altera |
 | CA-03 | Dos instancias vivas, A y B, cada una con el texto del escenario E-7 cargado y 6 piezas dibujadas | El componente anfitrión invoca `destruir` sobre A | B conserva sus 6 piezas, su selección y su encuadre, y sigue respondiendo a las seis funciones |
 | CA-04 | Una página integradora que crea la instancia, carga el escenario E-1, **prende los dos movimientos automáticos**, la destruye y repite el recorrido completo | El componente anfitrión completa **10 recorridos de ida y vuelta** con los movimientos prendidos en cada uno | Los 10 recorridos terminan dibujando las 3 piezas, sin degradación de la visualización, sin acumulación de contextos gráficos y **sin ningún bucle de dibujo que sobreviva a `destruir`**. Es la condición de medición que declara `Especificacion-Funcional.md` §6 |
 | CA-05 | Una instancia viva y la pestaña de red vacía, con el almacenamiento del navegador sin claves de la fachada | El componente anfitrión invoca `destruir(id)` | La pestaña de red registra exactamente 0 peticiones originadas por la fachada y el almacenamiento del navegador sigue sin ninguna clave de la fachada |
@@ -106,5 +106,6 @@ Es la única condición de error del caso de uso: `destruir` no puede fallar a m
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-08 | Emisión inicial. Contrato de uso de `destruir`, con tres flujos alternativos, una condición de error y cinco criterios de aceptación, incluido el de los 10 recorridos de ida y vuelta. |
 | 1.0 | 2026-08-09 | Absorción de las **dos decisiones del Product Owner** de la **Fase B2**. **Sin subir versión** por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **(a) Sexta función**: **CA-02** suma `establecerMovimiento(id, opciones)` a las invocaciones que sobre un identificador liberado informan `INSTANCIA_DESCONOCIDA` —la sexta función no emite condición nueva— y **CA-03** pasa a decir «las **seis** funciones». **(b) Condiciones de medición**: **CA-04** completa los 10 recorridos **con los dos movimientos automáticos prendidos**, que es el peor caso de la propiedad de liberación de recursos: un bucle de dibujo que sobreviviera a `destruir` es exactamente la degradación que esta función tiene que descartar, y con los movimientos apagados no se ejercitaría (`Especificacion-Funcional.md` §6). |

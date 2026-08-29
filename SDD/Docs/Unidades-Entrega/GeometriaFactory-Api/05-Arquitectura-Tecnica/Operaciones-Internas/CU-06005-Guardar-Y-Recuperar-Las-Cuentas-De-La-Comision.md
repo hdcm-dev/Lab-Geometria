@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06005-Guardar-Y-Recuperar-Las-Cuentas-De-La-Comision.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -70,9 +70,9 @@ Lo que este caso de uso **no** hace: no deriva contraseñas ni las compara —es
 
 | Código | Causa | Respuesta del caso de uso |
 | --- | --- | --- |
-| `CORREO_YA_REGISTRADO` | La materialización colisionó con una cuenta que ya ocupa ese correo | Termina sin escribir nada. **Es la segunda línea de la unicidad del correo**, y por eso existe: el consumidor consulta antes, pero la verificación previa no es una garantía por sí sola, y `GeometriaFactory-Application` `CU-06001` **FA-02** declara explícitamente ese flujo alternativo: el puerto de repositorio rechaza la materialización por una colisión que la consulta previa no vio, y el caso de uso devuelve el mismo motivo. **No se informa el estado ni el papel de la cuenta que ocupa el correo** |
-| `UNICIDAD_DE_ADMINISTRADOR_VIOLADA` | La materialización habría dejado **dos** cuentas con papel `Administrador` en la instancia | Termina sin escribir nada. Sostiene el invariante de administrador único desde el almacén. **No sustituye a la ventana de alta**, que la resuelve el consumidor: acá se impide el resultado, no se explica el camino |
-| `ALMACEN_NO_DISPONIBLE` | El archivo del almacén no está alcanzable | Termina de forma **degradada**, sin escribir nada. Tiene su entrada en `CU-06003` §6, con la misma causa |
+| `EMAIL_ALREADY_REGISTERED` | La materialización colisionó con una cuenta que ya ocupa ese correo | Termina sin escribir nada. **Es la segunda línea de la unicidad del correo**, y por eso existe: el consumidor consulta antes, pero la verificación previa no es una garantía por sí sola, y `GeometriaFactory-Application` `CU-06001` **FA-02** declara explícitamente ese flujo alternativo: el puerto de repositorio rechaza la materialización por una colisión que la consulta previa no vio, y el caso de uso devuelve el mismo motivo. **No se informa el estado ni el papel de la cuenta que ocupa el correo** |
+| `ADMINISTRATOR_UNIQUENESS_VIOLATED` | La materialización habría dejado **dos** cuentas con papel `Administrador` en la instancia | Termina sin escribir nada. Sostiene el invariante de administrador único desde el almacén. **No sustituye a la ventana de alta**, que la resuelve el consumidor: acá se impide el resultado, no se explica el camino |
+| `STORE_UNAVAILABLE` | El archivo del almacén no está alcanzable | Termina de forma **degradada**, sin escribir nada. Tiene su entrada en `CU-06003` §6, con la misma causa |
 
 ## 7. Postcondiciones
 
@@ -84,9 +84,9 @@ Lo que este caso de uso **no** hace: no deriva contraseñas ni las compara —es
 
 | ID | Given | When | Then |
 | --- | --- | --- | --- |
-| CA-01 | Un almacén con una cuenta cuyo correo es el mismo que se va a materializar | Se materializa la cuenta nueva | Devuelve `CORREO_YA_REGISTRADO` y **no queda ninguna cuenta nueva**. La respuesta **no incluye** el estado ni el papel de la cuenta que ocupa el correo |
+| CA-01 | Un almacén con una cuenta cuyo correo es el mismo que se va a materializar | Se materializa la cuenta nueva | Devuelve `EMAIL_ALREADY_REGISTERED` y **no queda ninguna cuenta nueva**. La respuesta **no incluye** el estado ni el papel de la cuenta que ocupa el correo |
 | CA-02 | Un almacén vacío | Se pregunta si ya existe una cuenta con papel `Administrador` | Responde **no** |
-| CA-03 | Un almacén con la cuenta de administrador ya configurada | Se pregunta lo mismo | Responde **sí**, y una materialización de una segunda cuenta con ese papel devuelve `UNICIDAD_DE_ADMINISTRADOR_VIOLADA` |
+| CA-03 | Un almacén con la cuenta de administrador ya configurada | Se pregunta lo mismo | Responde **sí**, y una materialización de una segunda cuenta con ese papel devuelve `ADMINISTRATOR_UNIQUENESS_VIOLATED` |
 | CA-04 | Una cuenta de alumno en estado `Bloqueado` | Se materializa sobre ella la marca de cambio de contraseña pendiente | La cuenta queda **`Bloqueado` y marcada**. El estado no cambió: la marca no es un estado de cuenta |
 | CA-05 | Una cuenta con marca puesta | Se recupera | El resultado trae la marca. Sin ella, la comprobación transversal del consumidor no tendría sobre qué decidir |
 | CA-06 | Una cuenta con credencial derivada | Se recupera | El resultado trae la credencial **derivada** y **en ningún caso un valor en claro**, que nunca entró al almacén |
@@ -118,6 +118,7 @@ Lo que este caso de uso **no** hace: no deriva contraseñas ni las compara —es
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **5 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 
 ## 17. Compatibilidad de la superficie pública
 

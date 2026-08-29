@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06003-Guardar-Y-Recuperar-Los-Trabajos.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -70,10 +70,10 @@ Lo que este caso de uso **no** hace: no decide quién puede ver qué —eso lo r
 
 | Código | Causa | Respuesta del caso de uso |
 | --- | --- | --- |
-| `CONSULTA_SIN_ALCANCE_DECLARADO` | Llegó una consulta de listado sin dueño y sin predicado de alcance | Termina sin consultar. Un listado sin recorte sería el listado de todos los trabajos de la comisión, que es exactamente el resultado que RN-06003 y RN-06011 vienen a impedir. **El recorte se traslada al pedido, no se aplica después** |
-| `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` | Una materialización aportó, para un trabajo existente, un texto original distinto del conservado | Termina sin escribir nada. **Es la condición que hace exigible RN-06008 en el único lugar donde el texto puede perderse.** El producto no edita el dato del alumno, y conservarlo es lo que permite reprocesar el mismo trabajo cuando el validador mejora |
-| `ESCRITURA_CONCURRENTE_RECHAZADA` | Otra unidad de trabajo tenía el almacén tomado para escribir | Termina de forma **degradada**, sin escritura parcial. **SQLite no admite escrituras concurrentes** y el backend opera como escritor único; la concurrencia real es baja porque el alcance es de aula. **Este contrato no reintenta**: quien decida reintentar es el consumidor |
-| `ALMACEN_NO_DISPONIBLE` | El archivo del almacén no está alcanzable: la ruta configurada no responde, o el volumen no está montado | Termina de forma **degradada**. No hay réplica ni caché: el intake declara que el front muestra estado degradado y que los datos no están disponibles hasta que el servidor vuelva. Esta condición vuelve a declararse en `CU-06004` y en `CU-06005` |
+| `QUERY_WITHOUT_DECLARED_SCOPE` | Llegó una consulta de listado sin dueño y sin predicado de alcance | Termina sin consultar. Un listado sin recorte sería el listado de todos los trabajos de la comisión, que es exactamente el resultado que RN-06003 y RN-06011 vienen a impedir. **El recorte se traslada al pedido, no se aplica después** |
+| `WRITE_REWRITES_ORIGINAL_JSON` | Una materialización aportó, para un trabajo existente, un texto original distinto del conservado | Termina sin escribir nada. **Es la condición que hace exigible RN-06008 en el único lugar donde el texto puede perderse.** El producto no edita el dato del alumno, y conservarlo es lo que permite reprocesar el mismo trabajo cuando el validador mejora |
+| `CONCURRENT_WRITE_REJECTED` | Otra unidad de trabajo tenía el almacén tomado para escribir | Termina de forma **degradada**, sin escritura parcial. **SQLite no admite escrituras concurrentes** y el backend opera como escritor único; la concurrencia real es baja porque el alcance es de aula. **Este contrato no reintenta**: quien decida reintentar es el consumidor |
+| `STORE_UNAVAILABLE` | El archivo del almacén no está alcanzable: la ruta configurada no responde, o el volumen no está montado | Termina de forma **degradada**. No hay réplica ni caché: el intake declara que el front muestra estado degradado y que los datos no están disponibles hasta que el servidor vuelva. Esta condición vuelve a declararse en `CU-06004` y en `CU-06005` |
 
 ## 7. Postcondiciones
 
@@ -86,11 +86,11 @@ Lo que este caso de uso **no** hace: no decide quién puede ver qué —eso lo r
 | ID | Given | When | Then |
 | --- | --- | --- | --- |
 | CA-01 | Un trabajo con el texto del escenario **E-2**, con sus dos comas finales | Se materializa y se recupera | El texto recuperado es **idéntico carácter por carácter** al materializado, comas finales incluidas. El almacén guarda el texto **tal cual**, sin normalizarlo ni reindentarlo |
-| CA-02 | Un trabajo ya materializado con el texto de E-2 | Se materializa de nuevo con un texto original distinto | Devuelve `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` y el texto conservado **no cambia** |
+| CA-02 | Un trabajo ya materializado con el texto de E-2 | Se materializa de nuevo con un texto original distinto | Devuelve `WRITE_REWRITES_ORIGINAL_JSON` y el texto conservado **no cambia** |
 | CA-03 | Un alumno con un trabajo en `Borrador` y otro en `Pendiente` | Se consulta el listado con el alcance del administrador | El resultado trae **sólo el trabajo en estado `Pendiente`**, y el recorte se resolvió en el pedido: el borrador **no viajó** |
 | CA-04 | Un trabajo con tres piezas y sus componentes | Se consulta el listado que lo incluye | El resultado **no trae los componentes de las piezas ni el texto original** |
 | CA-05 | El mismo trabajo | Se recupera su detalle | El resultado **sí** trae las piezas con su posición, sus componentes y sus observaciones |
-| CA-06 | Una consulta de listado sin dueño y sin predicado de alcance | Se resuelve | Devuelve `CONSULTA_SIN_ALCANCE_DECLARADO` y **0 filas leídas del almacén** |
+| CA-06 | Una consulta de listado sin dueño y sin predicado de alcance | Se resuelve | Devuelve `QUERY_WITHOUT_DECLARED_SCOPE` y **0 filas leídas del almacén** |
 | CA-07 | Una materialización de un trabajo con sus piezas y sus observaciones, interrumpida antes de terminar | Se recupera el trabajo | El almacén está **como antes de la operación**: ni piezas huérfanas ni observaciones sin trabajo |
 | CA-08 | Un trabajo con una figura no reconstruida, cuya posición quedó reservada | Se materializa y se recupera | La observación de esa figura conserva **la misma posición**, que sigue perteneciendo al rango de figuras del conjunto raíz aunque no haya pieza en ella |
 
@@ -122,6 +122,7 @@ Lo que este caso de uso **no** hace: no decide quién puede ver qué —eso lo r
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **6 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 
 ## 17. Compatibilidad de la superficie pública
 

@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -29,7 +29,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `P
 1. **Se compara sin distinguir mayúsculas de minúsculas**, sobre la cadena completa.
 2. **No se aplica ninguna otra normalización.** No se quitan puntos, no se recorta lo que sigue a un signo de suma, no se resuelven alias de dominio y no se recortan espacios interiores. Los espacios al principio y al final sí se descartan, porque son un artefacto de escritura y no parte del correo.
 3. **El correo se guarda tal como la persona lo escribió**, y lo que se compara y se indexa es su **forma normalizada**. La forma escrita es lo que se muestra; la normalizada es lo que decide la identidad.
-4. **La unicidad la sostiene un índice único sobre la forma normalizada**, y es la **segunda línea**: la consulta previa del consumidor no es una garantía por sí sola, y la colisión que la consulta no vio termina en `CORREO_YA_REGISTRADO`, camino que `GeometriaFactory-Application` `CU-06001` **FA-02** ya declara.
+4. **La unicidad la sostiene un índice único sobre la forma normalizada**, y es la **segunda línea**: la consulta previa del consumidor no es una garantía por sí sola, y la colisión que la consulta no vio termina en `EMAIL_ALREADY_REGISTERED`, camino que `GeometriaFactory-Application` `CU-06001` **FA-02** ya declara.
 
 **La misma normalización se usa para recuperar una cuenta por su correo.** Un criterio de comparación distinto entre el alta y el ingreso dejaría cuentas inalcanzables para su dueño.
 
@@ -69,7 +69,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `P
 - El adaptador de repositorio de cuentas de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único lugar donde la normalización se aplica.
 - **Convención impuesta:** ningún otro componente normaliza correos. Si dos lugares normalizan, tarde o temprano lo hacen distinto.
 - El esquema declara **dos** columnas para el correo y **un** índice único sobre la normalizada; el detalle está en [`../Modelo-Datos-Logico.md`](../Modelo-Datos-Logico.md) §2.1 y §3.
-- La colisión que la consulta previa no vio termina en `CORREO_YA_REGISTRADO`, con la precisión ya declarada por la categoría 03: **no se informa el estado ni el papel** de la cuenta que ocupa el correo.
+- La colisión que la consulta previa no vio termina en `EMAIL_ALREADY_REGISTERED`, con la precisión ya declarada por la categoría 03: **no se informa el estado ni el papel** de la cuenta que ocupa el correo.
 - La restricción de unicidad del papel `Administrador` es otro índice del mismo componente y no comparte criterio con éste: se compara por valor de conjunto cerrado, sin normalización.
 
 ## 8. Métricas de validación
@@ -95,4 +95,5 @@ Motivación upstream: NB-00001, NB-00002; RN-06001, RN-06002; INV-01, INV-05; `P
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. **Cierra el punto abierto que `GeometriaFactory-Domain` abrió y `GeometriaFactory-Application` reasignó a esta categoría**: dos correos son el mismo ignorando mayúsculas y minúsculas y nada más, la forma escrita se conserva, la normalizada decide la identidad, y un índice único sobre ella la sostiene como segunda línea. Evalúa cinco alternativas, declara cuatro trade-offs —incluido el de no fijar acá el identificador del puerto, con el criterio de nombrado del adaptador que sí le corresponde— y fija seis métricas de validación. |

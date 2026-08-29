@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08007-Contrato-De-Desenlace-De-La-Revision.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -68,11 +68,11 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 
 | Código | Causa | Respuesta del contrato |
 | --- | --- | --- |
-| `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | El trabajo no está en estado `Pendiente`: o nunca lo estuvo, o ya recibió su desenlace y está en un estado terminal | Respuesta de error de CU-08006 que declara el estado actual del trabajo. Terminación controlada: el contrato no ofrece camino para revertir un estado terminal |
-| `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | Quien solicita el desenlace no es el administrador, aun sobre un trabajo propio en estado `Pendiente` | Respuesta de error de CU-08006 con texto neutro. Terminación controlada |
-| `CONTRATO_TRABAJO_NO_ENCONTRADO` | El identificador no corresponde a ningún trabajo que el solicitante vea, o no existe. Incluye el trabajo en estado `Borrador`, que el administrador no ve | Respuesta de error de CU-08006 con texto neutro que no distingue los casos. Terminación controlada |
-| `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | La solicitud llega sin identificador o sin desenlace pretendido. **Nunca por el comentario**, que es opcional | Respuesta de error de CU-08006 que nombra el campo ausente. Recuperación por corrección y reintento |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado |
+| `STATE_FORBIDS_OUTCOME` | El trabajo no está en estado `Pendiente`: o nunca lo estuvo, o ya recibió su desenlace y está en un estado terminal | Respuesta de error de CU-08006 que declara el estado actual del trabajo. Terminación controlada: el contrato no ofrece camino para revertir un estado terminal |
+| `OUTCOME_ADMIN_ONLY` | Quien solicita el desenlace no es el administrador, aun sobre un trabajo propio en estado `Pendiente` | Respuesta de error de CU-08006 con texto neutro. Terminación controlada |
+| `WORK_NOT_FOUND` | El identificador no corresponde a ningún trabajo que el solicitante vea, o no existe. Incluye el trabajo en estado `Borrador`, que el administrador no ve | Respuesta de error de CU-08006 con texto neutro que no distingue los casos. Terminación controlada |
+| `REQUIRED_FIELD_MISSING` | La solicitud llega sin identificador o sin desenlace pretendido. **Nunca por el comentario**, que es opcional | Respuesta de error de CU-08006 que nombra el campo ausente. Recuperación por corrección y reintento |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado |
 
 ## 7. Postcondiciones
 
@@ -86,10 +86,10 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 | --- | --- | --- | --- |
 | CA-01 | Un trabajo en estado `Pendiente` y una sesión de papel administrador | El código de la pieza pública solicita el desenlace con el valor aprobar y el comentario sin poblar | El resultado trae estado alcanzado `Finalizado`, y la solicitud es válida con **0 campos de comentario poblados** |
 | CA-02 | El mismo trabajo en estado `Pendiente` | El código de la pieza pública solicita el desenlace con el valor rechazar y el comentario poblado con `Revisá la fórmula del área del cubo` | El resultado trae estado alcanzado `Rechazado`, y el comentario queda accesible con ese texto exacto en el detalle de CU-08005 |
-| CA-03 | Un trabajo en estado `Finalizado` | El código de la pieza pública solicita cualquiera de los dos desenlaces | La respuesta es el tipo de error de CU-08006 con código `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` y declara el estado actual `Finalizado`: **0 transiciones salen de un estado terminal** |
-| CA-04 | Un trabajo propio en estado `Pendiente` y una sesión de papel alumno | El código de la pieza pública solicita el desenlace forzando la petición al servicio de datos | La respuesta es el tipo de error de CU-08006 con código `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`: **0 desenlaces ejecutados por un alumno** |
+| CA-03 | Un trabajo en estado `Finalizado` | El código de la pieza pública solicita cualquiera de los dos desenlaces | La respuesta es el tipo de error de CU-08006 con código `STATE_FORBIDS_OUTCOME` y declara el estado actual `Finalizado`: **0 transiciones salen de un estado terminal** |
+| CA-04 | Un trabajo propio en estado `Pendiente` y una sesión de papel alumno | El código de la pieza pública solicita el desenlace forzando la petición al servicio de datos | La respuesta es el tipo de error de CU-08006 con código `OUTCOME_ADMIN_ONLY`: **0 desenlaces ejecutados por un alumno** |
 | CA-05 | El tipo de solicitud de desenlace | Se inspecciona su superficie pública | Declara tres campos —identificador, desenlace pretendido y comentario—, el conjunto cerrado del desenlace tiene exactamente **2 valores**, y el comentario declara **0 campos de nota, de escala y de puntaje**: no es una calificación |
-| CA-06 | Un trabajo en estado `Borrador` de un alumno cualquiera | El administrador solicita su desenlace con el identificador que consiguió por otra vía | La respuesta es el tipo de error de CU-08006 con código `CONTRATO_TRABAJO_NO_ENCONTRADO`, con el mismo texto que produce un identificador inexistente |
+| CA-06 | Un trabajo en estado `Borrador` de un alumno cualquiera | El administrador solicita su desenlace con el identificador que consiguió por otra vía | La respuesta es el tipo de error de CU-08006 con código `WORK_NOT_FOUND`, con el mismo texto que produce un identificador inexistente |
 
 ## 9. Trazabilidad
 
@@ -121,6 +121,7 @@ Declarar el tipo de transferencia con el que el administrador resuelve un trabaj
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.3 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **8 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.2 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-09 | Emisión inicial, derivada de la incorporación del circuito de revisión del administrador en `PRODUCT-INTAKE` 1.3 §4 (F-21, F-23), §4.1 (RN-08010) y §4.2, y de `NB-00009` de 01. Declara la solicitud de desenlace con su conjunto cerrado de dos valores, el comentario opcional, el resultado con el estado terminal alcanzado y los dos códigos de error nuevos del ensamblado. |
 | 1.1 | 2026-08-10 | **Cierra el hallazgo `C-08` (P2) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0.** La cabecera de trazabilidad declaraba derivarse del `PRODUCT-INTAKE` **1.3**, versión archivada, y pasa a declarar la **1.14**, vigente. Entre la **1.3** y la **1.14** el intake atravesó once emisiones, entre ellas las que incorporaron **F-25**, **F-26** y las reglas **RN-08012** a **RN-08016**: una cabecera que declaraba 1.3 declaraba derivarse de un intake que no conocía ni el reseteo ni la habilitación con contraseña provisoria. Se revisó el cuerpo antes de mover la cabecera y **no arrastra ninguna decisión de las versiones intermedias**: no queda en él ningún recuento de «quince reglas» ni de «diecisiete códigos», ninguna cita a la exclusión **X-2** como vigente y ninguna afirmación de que la marca de cambio de contraseña pendiente la ponga únicamente el reseteo. **Ningún contenido normativo de este documento cambia: la corrección es de trazabilidad.** Sube minor. |

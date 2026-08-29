@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Producto:** Fábrica de Geometría
 **Documento:** Contratos-Abstractions.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -51,16 +51,16 @@ Un ensamblado de tipos no expone operaciones: expone **familias de tipos** que o
 
 | Familia | Qué transporta | Contrato de uso | Códigos de error propios |
 | --- | --- | --- | --- |
-| Sesión | Solicitud de canje de credenciales y respuesta de sesión de cuatro campos | CU-08001 | `CONTRATO_CREDENCIAL_INVALIDA`, `CONTRATO_CUENTA_NO_HABILITADA` |
-| Cuentas | Registro, credencial, listado de cuentas, cambio de situación, confirmación escrita de la baja y cambio de contraseña | CU-08002 | `CONTRATO_CORREO_YA_REGISTRADO`, `CONTRATO_CONFIRMACION_NO_COINCIDE`, `CONTRATO_ADMINISTRADOR_YA_CONFIGURADO` |
-| Trabajo | Envío, eliminación y estado del trabajo, con el texto original como cadena no interpretada | CU-08003 | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` |
-| Listado | Proyección de trabajos, con alcance distinto según el papel | CU-08004 | `CONTRATO_ALUMNO_NO_ENCONTRADO` |
+| Sesión | Solicitud de canje de credenciales y respuesta de sesión de cuatro campos | CU-08001 | `INVALID_CREDENTIALS`, `ACCOUNT_NOT_ENABLED` |
+| Cuentas | Registro, credencial, listado de cuentas, cambio de situación, confirmación escrita de la baja y cambio de contraseña | CU-08002 | `EMAIL_ALREADY_REGISTERED`, `CONFIRMATION_MISMATCH`, `ADMINISTRATOR_ALREADY_CONFIGURED` |
+| Trabajo | Envío, eliminación y estado del trabajo, con el texto original como cadena no interpretada | CU-08003 | `STATE_FORBIDS_DELETE`, `STATE_FORBIDS_UPDATE` |
+| Listado | Proyección de trabajos, con alcance distinto según el papel | CU-08004 | `STUDENT_NOT_FOUND` |
 | Detalle | Trabajo interpretado: piezas, componentes, observaciones y comentario del administrador | CU-08005 | Ninguno propio |
-| Error | El único tipo con el que un fallo cruza la frontera, y el conjunto cerrado de diecisiete códigos | CU-08006 | `CONTRATO_ERROR_NO_CLASIFICADO` |
-| Desenlace | Aprobación o rechazo de un trabajo en estado `Pendiente`, con comentario opcional | CU-08007 | `CONTRATO_ESTADO_NO_PERMITE_DESENLACE`, `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` |
-| Reseteo | Reseteo por el administrador y cambio obligatorio por la propia cuenta | CU-08008 | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR`, `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` |
+| Error | El único tipo con el que un fallo cruza la frontera, y el conjunto cerrado de diecisiete códigos | CU-08006 | `UNCLASSIFIED_ERROR` |
+| Desenlace | Aprobación o rechazo de un trabajo en estado `Pendiente`, con comentario opcional | CU-08007 | `STATE_FORBIDS_OUTCOME`, `OUTCOME_ADMIN_ONLY` |
+| Reseteo | Reseteo por el administrador y cambio obligatorio por la propia cuenta | CU-08008 | `RESET_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT`, `PASSWORD_CHANGE_REQUIRED` |
 
-Los cuatro códigos que no figuran como propios de ninguna familia —`CONTRATO_CAMPO_REQUERIDO_AUSENTE`, `CONTRATO_SERVICIO_NO_DISPONIBLE`, `CONTRATO_TRABAJO_NO_ENCONTRADO` y `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR`— son **transversales a varias familias** y por eso no se atribuyen a una sola; §5.1 declara en qué contrato de uso aparece cada uno.
+Los cuatro códigos que no figuran como propios de ninguna familia —`REQUIRED_FIELD_MISSING`, `SERVICE_UNAVAILABLE`, `WORK_NOT_FOUND` y `OPERATION_ADMIN_ONLY`— son **transversales a varias familias** y por eso no se atribuyen a una sola; §5.1 declara en qué contrato de uso aparece cada uno.
 
 ## 4. Esquemas de datos
 
@@ -106,23 +106,23 @@ La lista es la unión de las §6 de los ocho contratos de uso de la categoría 0
 
 | # | Código | Dónde se declara |
 | --- | --- | --- |
-| 1 | `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | CU-08001, CU-08002, CU-08003, CU-08006, CU-08007, CU-08008 |
-| 2 | `CONTRATO_SERVICIO_NO_DISPONIBLE` | Los ocho contratos de uso |
-| 3 | `CONTRATO_TRABAJO_NO_ENCONTRADO` | CU-08003, CU-08005, CU-08006, CU-08007 |
-| 4 | `CONTRATO_CREDENCIAL_INVALIDA` | CU-08001, CU-08002, CU-08008 |
-| 5 | `CONTRATO_CUENTA_NO_HABILITADA` | CU-08001 |
-| 6 | `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` | CU-08001, CU-08006, CU-08008 |
-| 7 | `CONTRATO_CORREO_YA_REGISTRADO` | CU-08002 |
-| 8 | `CONTRATO_CONFIRMACION_NO_COINCIDE` | CU-08002 |
-| 9 | `CONTRATO_ADMINISTRADOR_YA_CONFIGURADO` | CU-08002 |
-| 10 | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | CU-08003 |
-| 11 | `CONTRATO_ALUMNO_NO_ENCONTRADO` | CU-08004 |
-| 12 | `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | CU-08006, CU-08007 |
-| 13 | `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | CU-08006, CU-08007 |
-| 14 | `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` | CU-08006, CU-08008 |
-| 15 | `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | CU-08002, CU-08004, CU-08006, CU-08008 |
-| 16 | `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | CU-08003, CU-08006 |
-| 17 | `CONTRATO_ERROR_NO_CLASIFICADO` | CU-08006 |
+| 1 | `REQUIRED_FIELD_MISSING` | CU-08001, CU-08002, CU-08003, CU-08006, CU-08007, CU-08008 |
+| 2 | `SERVICE_UNAVAILABLE` | Los ocho contratos de uso |
+| 3 | `WORK_NOT_FOUND` | CU-08003, CU-08005, CU-08006, CU-08007 |
+| 4 | `INVALID_CREDENTIALS` | CU-08001, CU-08002, CU-08008 |
+| 5 | `ACCOUNT_NOT_ENABLED` | CU-08001 |
+| 6 | `PASSWORD_CHANGE_REQUIRED` | CU-08001, CU-08006, CU-08008 |
+| 7 | `EMAIL_ALREADY_REGISTERED` | CU-08002 |
+| 8 | `CONFIRMATION_MISMATCH` | CU-08002 |
+| 9 | `ADMINISTRATOR_ALREADY_CONFIGURED` | CU-08002 |
+| 10 | `STATE_FORBIDS_DELETE` | CU-08003 |
+| 11 | `STUDENT_NOT_FOUND` | CU-08004 |
+| 12 | `STATE_FORBIDS_OUTCOME` | CU-08006, CU-08007 |
+| 13 | `OUTCOME_ADMIN_ONLY` | CU-08006, CU-08007 |
+| 14 | `RESET_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT` | CU-08006, CU-08008 |
+| 15 | `OPERATION_ADMIN_ONLY` | CU-08002, CU-08004, CU-08006, CU-08008 |
+| 16 | `STATE_FORBIDS_UPDATE` | CU-08003, CU-08006 |
+| 17 | `UNCLASSIFIED_ERROR` | CU-08006 |
 
 **Diecisiete códigos**, dos de ellos incorporados por decisión del Product Owner (`PRODUCT-INTAKE` **1.29** §17.4 P.3), que este documento **emite formalmente**: el 15 y el 16. **Cinco** de ellos —el 1, el 2, el 3, el 6 y el 15— aparecen en más de un contrato de uso con la **misma** causa, y siguen siendo un código cada uno: la unidad del conjunto es la condición, no la operación. El catálogo de [`../03-UX-UI-DX/DX-Error-Messages.md`](../../_legacy/2026-08-15-migracion-8.2/GeometriaFactory-Contracts/03-UX-UI-DX/DX-Error-Messages.md) los desarrolla con su texto neutro propuesto.
 
@@ -130,8 +130,8 @@ La lista es la unión de las §6 de los ocho contratos de uso de la categoría 0
 
 | Código | Condición que representa | Código vecino que no la cubría |
 | --- | --- | --- |
-| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | El papel no alcanza para la operación pedida **fuera del desenlace de un trabajo**: gobernar las cuentas de la comisión, resetear la contraseña de una cuenta de alumno y ver el listado de trabajos de la comisión | `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR`, **acotado por su enunciado** a aprobar y a rechazar. Sin código propio, las tres caían en el genérico y el consumidor no podía distinguir «no tenés permiso» de «algo salió mal» |
-| `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | Se pidió **enviar o reeditar** un trabajo que está en `Pendiente`, `Finalizado` o `Rechazado`, y por lo tanto es de **sólo lectura** | `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`, **acotado a la eliminación**, que no cubre las otras dos escrituras que el mismo estado prohíbe |
+| `OPERATION_ADMIN_ONLY` | El papel no alcanza para la operación pedida **fuera del desenlace de un trabajo**: gobernar las cuentas de la comisión, resetear la contraseña de una cuenta de alumno y ver el listado de trabajos de la comisión | `OUTCOME_ADMIN_ONLY`, **acotado por su enunciado** a aprobar y a rechazar. Sin código propio, las tres caían en el genérico y el consumidor no podía distinguir «no tenés permiso» de «algo salió mal» |
+| `STATE_FORBIDS_UPDATE` | Se pidió **enviar o reeditar** un trabajo que está en `Pendiente`, `Finalizado` o `Rechazado`, y por lo tanto es de **sólo lectura** | `STATE_FORBIDS_DELETE`, **acotado a la eliminación**, que no cubre las otras dos escrituras que el mismo estado prohíbe |
 
 Los dos son códigos de **rechazo sin escritura**: la operación no ocurre y el estado no cambia. **Ninguno reemplaza a los quince que había ni recicla a los tres retirados**, y ninguno cambia los cuatro campos del tipo de error ni la regla de exposición de §4.3.
 
@@ -141,9 +141,9 @@ Los dos son códigos de **rechazo sin escritura**: la operación no ocurre y el 
 
 | Identificador retirado | Cuándo salió | Por qué |
 | --- | --- | --- |
-| `CONTRATO_TEXTO_NO_INTERPRETABLE` | Al unificarse guardar y enviar en una sola acción | Ninguna operación falla ya por ese motivo: el envío procede y el trabajo queda en `Borrador` con sus observaciones. Pasó a ser **señal declarada** |
-| `CONTRATO_CONTRASENA_NO_ESTABLECIDA` | Con **RN-08016** | Su causa dejó de ser posible: habilitar produce y fija la contraseña provisoria, de modo que ninguna cuenta llega a estar habilitada sin contraseña |
-| `CONTRATO_RESETEO_NO_APLICABLE_A_CUENTA_SIN_CONTRASENA` | Con **RN-08016** | Su causa dejó de ser posible: el reseteo sobre una cuenta sin contraseña la fija en lugar de rechazarla |
+| `TEXT_NOT_PARSEABLE` | Al unificarse guardar y enviar en una sola acción | Ninguna operación falla ya por ese motivo: el envío procede y el trabajo queda en `Borrador` con sus observaciones. Pasó a ser **señal declarada** |
+| `PASSWORD_NOT_SET` | Con **RN-08016** | Su causa dejó de ser posible: habilitar produce y fija la contraseña provisoria, de modo que ninguna cuenta llega a estar habilitada sin contraseña |
+| `RESET_NOT_APPLICABLE_TO_PASSWORDLESS_ACCOUNT` | Con **RN-08016** | Su causa dejó de ser posible: el reseteo sobre una cuenta sin contraseña la fija en lugar de rechazarla |
 
 **Ninguno se recicla**, y **reponer cualquiera de los dos últimos se rechaza aunque compile**: contradice CA-09 de CU-08006 y describe situaciones que RN-08016 no admite.
 
@@ -155,9 +155,9 @@ Se catalogan para que no se traten como error, y **no se cuentan entre los dieci
 
 | Señal | Dónde se declara | Qué significa |
 | --- | --- | --- |
-| `CONTRATO_TEXTO_NO_INTERPRETABLE` | CU-08003 §6.1 | El envío **procede**: el resultado trae estado `Borrador`, el texto conservado íntegro y las observaciones con índice de figura y campo |
-| `CONTRATO_LISTADO_VACIO` | CU-08004 §6.1 | La colección viene con cero elementos. La unidad pública distingue vacío de fallo por el tipo recibido, no por el conteo |
-| `CONTRATO_TEXTO_NO_INTERPRETABLE` | CU-08005 §6.1 | El detalle llega con la colección de piezas en cero elementos y las observaciones pobladas |
+| `TEXT_NOT_PARSEABLE` | CU-08003 §6.1 | El envío **procede**: el resultado trae estado `Borrador`, el texto conservado íntegro y las observaciones con índice de figura y campo |
+| `EMPTY_LIST` | CU-08004 §6.1 | La colección viene con cero elementos. La unidad pública distingue vacío de fallo por el tipo recibido, no por el conteo |
+| `TEXT_NOT_PARSEABLE` | CU-08005 §6.1 | El detalle llega con la colección de piezas en cero elementos y las observaciones pobladas |
 
 **Tres señales sobre dos identificadores**, porque la primera y la tercera son el mismo identificador visto desde dos contratos de uso. El cambio de contraseña pendiente **no es una señal**: impide la operación pedida, de modo que es un error transportado.
 
@@ -194,3 +194,4 @@ Aplica el criterio de [`ADR-08003`](../Adrs/ADR-08003-Versionado-Por-Compilacion
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara las ocho familias de tipos con sus códigos propios, los seis conjuntos cerrados, la lista de lo que ningún tipo lleva, el inventario completo de los **quince** códigos vivos con el contrato de uso donde se declara cada uno, los **tres** identificadores retirados con su motivo y la regla de no reciclado, las **tres** señales declaradas sobre dos identificadores, y el criterio de versionado con la columna que declara cuáles cambios no detecta la compilación. |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **22**. Sube minor. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **33 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

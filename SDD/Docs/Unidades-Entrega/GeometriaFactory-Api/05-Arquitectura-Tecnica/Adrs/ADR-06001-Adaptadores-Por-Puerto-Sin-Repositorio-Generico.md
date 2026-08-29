@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06001-Adaptadores-Por-Puerto-Sin-Repositorio-Generico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -40,7 +40,7 @@ Motivación upstream: NB-00003, NB-00004; RN-06003, RN-06008, RN-06009, RN-06011
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Un adaptador por puerto, con los mecanismos como componentes propios (**adoptada**) | La frontera queda en cuatro lugares contables; la mitad que no toca el almacén se prueba unitariamente; cada adaptador se sustituye por un doble sin arrastrar a los demás | Más tipos que en cualquiera de las alternativas, y la responsabilidad de conectarlos cae afuera |
-| Repositorio genérico sobre el conjunto de entidades | Un solo tipo para las cinco entidades | **Descartada por el intake §17.1.P.2 · GeometriaFactory-Infrastructure**: diluye las consultas que sí importan y obliga a armar el recorte del lado del consumidor, que es lo que `CONSULTA_SIN_ALCANCE_DECLARADO` viene a impedir |
+| Repositorio genérico sobre el conjunto de entidades | Un solo tipo para las cinco entidades | **Descartada por el intake §17.1.P.2 · GeometriaFactory-Infrastructure**: diluye las consultas que sí importan y obliga a armar el recorte del lado del consumidor, que es lo que `QUERY_WITHOUT_DECLARED_SCOPE` viene a impedir |
 | Consultas escritas a mano sobre el almacén | Control total de cada consulta | **Descartada por el intake §17.1.P.2 · GeometriaFactory-Infrastructure**: las transformaciones de esquema aplicadas al arrancar son decisión tomada y el mapeador las provee |
 | Un adaptador único que implemente los cuatro puertos | Menos tipos; la unidad de trabajo queda evidente en un solo lugar | **Descartada acá.** El validador arrastraría la dependencia de persistencia y la batería obligatoria dejaría de correr sin almacén, que es exactamente la propiedad que la mitigación del riesgo `RN-B3` necesita |
 | Registrar los adaptadores desde este proyecto de código, con un punto de entrada de composición propio | Un solo lugar donde se conectan, escrito por quien los conoce | Haría que la frontera dejara de ser contable desde afuera y que `GeometriaFactory-Api` no pudiera sustituir un adaptador por un doble en su batería de integración sin tocar esta biblioteca |
@@ -87,4 +87,5 @@ Motivación upstream: NB-00003, NB-00004; RN-06003, RN-06008, RN-06009, RN-06011
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Fija un adaptador por puerto y la partición en ocho componentes, con la frontera de prueba pasando entre lo que toca el almacén y lo que no; evalúa cinco alternativas, dos de ellas ya descartadas por el intake; declara tres trade-offs y seis métricas de validación. |

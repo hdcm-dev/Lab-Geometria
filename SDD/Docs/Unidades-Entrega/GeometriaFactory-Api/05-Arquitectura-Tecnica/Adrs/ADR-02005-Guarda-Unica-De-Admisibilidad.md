@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-02005-Guarda-Unica-De-Admisibilidad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -44,8 +44,8 @@ En consecuencia, **ninguna otra operación del dominio vuelve a comprobar el est
 ## 5. Consecuencias positivas
 
 1. INV-06 e INV-09 se verifican en un solo componente, con una prueba por motivo.
-2. El catálogo de condiciones de 03 lo refleja: el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE` vive en CU-02004, que es donde el dominio ejerce la guarda.
-3. Aguas abajo, la capa que expone traduce **un solo código** para todas las operaciones bloqueadas por la marca, en lugar de uno por operación. Es exactamente lo que el contrato del producto ya decidió con `CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO` ([`../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §10).
+2. El catálogo de condiciones de 03 lo refleja: el motivo `PASSWORD_CHANGE_PENDING` vive en CU-02004, que es donde el dominio ejerce la guarda.
+3. Aguas abajo, la capa que expone traduce **un solo código** para todas las operaciones bloqueadas por la marca, en lugar de uno por operación. Es exactamente lo que el contrato del producto ya decidió con `PASSWORD_CHANGE_REQUIRED` ([`../../../GeometriaFactory-Contracts/02-Especificacion-Funcional/Casos-De-Uso/CU-08006-Contrato-De-Respuesta-De-Error.md`](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) §10).
 4. Agregar una capacidad nueva al producto no obliga a agregarle una guarda de marca: le basta con pasar por la admisibilidad.
 
 ## 6. Consecuencias negativas y trade-offs
@@ -83,4 +83,5 @@ En consecuencia, **ninguna otra operación del dominio vuelve a comprobar el est
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra en el plano arquitectónico la puerta única de admisibilidad que la categoría 02 había declarado como decisión derivada, evalúa cuatro alternativas —con la tercera descartada por poco y con la condición bajo la cual merecería una ADR que supere a ésta—, declara la consecuencia para la capa que expone y fija cinco métricas de validación. |

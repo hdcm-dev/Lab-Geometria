@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06008-Emitir-El-Acceso-Firmado.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -69,8 +69,8 @@ Lo que este caso de uso **no** hace: no decide si la cuenta admite el acceso —
 
 | Código | Causa | Respuesta del caso de uso |
 | --- | --- | --- |
-| `CLAVE_DE_FIRMA_AUSENTE` | No hay clave de firma provista en el arranque | Termina sin emitir y sin verificar. **No se genera una clave de reemplazo al vuelo y no se emite sin firmar**: un acceso sin firma verificable es peor que ningún acceso, porque el sistema seguiría funcionando y nadie lo notaría hasta que alguien lo falsifique |
-| `RECLAMOS_INCOMPLETOS` | Se pidió emitir sin identificador de cuenta, sin correo, sin papel o sin expiración | Termina sin emitir. **Ninguno de los cuatro se completa con un valor por defecto**: un acceso sin papel dejaría a las capas de adentro decidiendo sobre un dato que nadie declaró, y uno sin expiración no vencería nunca |
+| `SIGNING_KEY_MISSING` | No hay clave de firma provista en el arranque | Termina sin emitir y sin verificar. **No se genera una clave de reemplazo al vuelo y no se emite sin firmar**: un acceso sin firma verificable es peor que ningún acceso, porque el sistema seguiría funcionando y nadie lo notaría hasta que alguien lo falsifique |
+| `INCOMPLETE_CLAIMS` | Se pidió emitir sin identificador de cuenta, sin correo, sin papel o sin expiración | Termina sin emitir. **Ninguno de los cuatro se completa con un valor por defecto**: un acceso sin papel dejaría a las capas de adentro decidiendo sobre un dato que nadie declaró, y uno sin expiración no vencería nunca |
 
 **Ninguna de las dos escribe nada** y **ninguna incluye en su respuesta la clave de firma ni la dirección de ningún servicio interno**.
 
@@ -87,8 +87,8 @@ Lo que este caso de uso **no** hace: no decide si la cuenta admite el acceso —
 | CA-01 | Una cuenta de alumno admitida y una clave de firma provista | Se emite el acceso | El acceso lleva **identificador, correo, papel `Alumno` y expiración**, y verifica con la misma clave |
 | CA-02 | El mismo acceso y **otra** clave de firma | Se verifica | Responde **no válido** |
 | CA-03 | Un acceso cuya expiración ya pasó | Se verifica | Responde **no válido por expiración**, y **no** un código de error de este contrato |
-| CA-04 | Un arranque sin clave de firma provista | Se pide emitir | Devuelve `CLAVE_DE_FIRMA_AUSENTE` y **0 accesos emitidos**. En particular **no** se emite un acceso sin firma ni con una clave generada al vuelo |
-| CA-05 | Una petición de emisión sin papel | Se emite | Devuelve `RECLAMOS_INCOMPLETOS` y **0 accesos emitidos** |
+| CA-04 | Un arranque sin clave de firma provista | Se pide emitir | Devuelve `SIGNING_KEY_MISSING` y **0 accesos emitidos**. En particular **no** se emite un acceso sin firma ni con una clave generada al vuelo |
+| CA-05 | Una petición de emisión sin papel | Se emite | Devuelve `INCOMPLETE_CLAIMS` y **0 accesos emitidos** |
 | CA-06 | Cualquiera de los códigos de §6, con el mensaje que llega al consumidor observado | Se produce la condición | El mensaje **no contiene la clave de firma, ni la dirección de ningún servicio interno, ni la ruta del archivo del almacén**, y el error queda registrado del lado del servidor |
 | CA-07 | El repositorio de código y la imagen de despliegue | Se inspeccionan | **No contienen ninguna clave de firma.** El valor llega por variable de entorno o por archivo montado |
 
@@ -119,6 +119,7 @@ Lo que este caso de uso **no** hace: no decide si la cuenta admite el acceso —
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 
 ## 17. Compatibilidad de la superficie pública
 

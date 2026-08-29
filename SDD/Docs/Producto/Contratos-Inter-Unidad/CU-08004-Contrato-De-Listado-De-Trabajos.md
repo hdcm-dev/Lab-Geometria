@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08004-Contrato-De-Listado-De-Trabajos.md
-**Versión:** 1.5
+**Versión:** 1.6
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -68,9 +68,9 @@ Declarar el tipo de transferencia con el que viaja un listado de trabajos, tanto
 
 | Código | Causa | Respuesta del contrato |
 | --- | --- | --- |
-| `CONTRATO_ALUMNO_NO_ENCONTRADO` | El filtro por alumno referencia un identificador inexistente | Respuesta de error de CU-08006 con texto neutro. Recuperación: reintento sin filtro |
-| `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` | Se pide el **listado de trabajos de la comisión** (F-12), que es el alcance exclusivo del administrador, y quien la pide no tiene el papel `Administrador` | Respuesta de error de CU-08006 con texto neutro y **sin escritura**: la operación no ocurre y ningún estado cambia. Terminación controlada. Entra al conjunto cerrado por `PRODUCT-INTAKE` **1.29** §17.4 P.3 |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado, que se distingue del listado vacío |
+| `STUDENT_NOT_FOUND` | El filtro por alumno referencia un identificador inexistente | Respuesta de error de CU-08006 con texto neutro. Recuperación: reintento sin filtro |
+| `OPERATION_ADMIN_ONLY` | Se pide el **listado de trabajos de la comisión** (F-12), que es el alcance exclusivo del administrador, y quien la pide no tiene el papel `Administrador` | Respuesta de error de CU-08006 con texto neutro y **sin escritura**: la operación no ocurre y ningún estado cambia. Terminación controlada. Entra al conjunto cerrado por `PRODUCT-INTAKE` **1.29** §17.4 P.3 |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado, que se distingue del listado vacío |
 
 ### 6.1 Señales declaradas que no son error
 
@@ -78,7 +78,7 @@ Se separan de la tabla anterior porque no producen respuesta de error y no forma
 
 | Código | Causa | Respuesta del contrato |
 | --- | --- | --- |
-| `CONTRATO_LISTADO_VACIO` | No hay trabajos que satisfagan el filtro | El contrato devuelve la colección con cero elementos. La pieza pública distingue vacío de fallo por el tipo recibido, no por el conteo |
+| `EMPTY_LIST` | No hay trabajos que satisfagan el filtro | El contrato devuelve la colección con cero elementos. La pieza pública distingue vacío de fallo por el tipo recibido, no por el conteo |
 
 ## 7. Postcondiciones
 
@@ -125,6 +125,7 @@ Se separan de la tabla anterior porque no producen respuesta de error y no forma
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.6 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **5 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.5 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-08 | Emisión inicial. Declara el elemento de listado de trabajo como proyección sin texto original ni componentes, y el tipo de resumen por alumno y por estado. |
 | 1.0 | 2026-08-08 | Correcciones absorbidas de la ronda 1 de auditoría (`Audit/B-02-03-GeometriaFactory-Contracts-r1.md`), sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-14**: `CONTRATO_LISTADO_VACIO`, que el propio texto declara que no es error, sale de la tabla de §6 y pasa a la subsección nueva §6.1 de señales declaradas que no son error, que adopta en 02 la resolución que el catálogo de 03 ya usaba. La decisión de diseño no cambia. **H-09**: la sección opcional se renumera de §12 a §17, el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna para `library`. |
@@ -137,7 +138,7 @@ Se separan de la tabla anterior porque no producen respuesta de error y no forma
 
 Sección opcional de `Rules-Especificacion-Funcional.md` §4.3, que la numera **§17** y la reserva para `library`. Se conserva su número de la regla, aunque deje un hueco tras §11, para que un lector automatizado que busque §17 en cualquier caso de uso del producto encuentre siempre lo mismo.
 
-- **Esta emisión es un cambio incompatible**: **entra** al conjunto cerrado de CU-08006 el código `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` para el rechazo por papel ante el listado de la comisión (`PRODUCT-INTAKE` **1.29** §17.4 P.3), y obliga al despliegue conjunto de las dos piezas desplegables (`RT-06`). **No recicla ningún identificador retirado.**
+- **Esta emisión es un cambio incompatible**: **entra** al conjunto cerrado de CU-08006 el código `OPERATION_ADMIN_ONLY` para el rechazo por papel ante el listado de la comisión (`PRODUCT-INTAKE` **1.29** §17.4 P.3), y obliga al despliegue conjunto de las dos piezas desplegables (`RT-06`). **No recicla ningún identificador retirado.**
 - Agregar el texto original o los componentes al elemento de listado compila sin error y **aun así se rechaza**: viola el requisito estructural de CA-01, que es el motivo por el que este tipo existe separado del detalle de CU-08005.
 - Agregar un campo de recuento al elemento de listado es compatible.
 - Agregar un estado al conjunto cerrado que el elemento transporta se trata como incompatible: la pieza pública dejaría de cubrir todos los casos aunque compile.

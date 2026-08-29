@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-08001-Tipos-De-Transferencia-Planos-Sin-Dependencias.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -50,7 +50,7 @@ La unidad de organización interna es la **familia de tipos**, que es la unidad 
 
 1. **Se acepta duplicar forma** entre las entidades del dominio y los tipos de transferencia. Es deliberado y es lo que impide que un cambio de dominio rompa el contrato (`PRODUCT-INTAKE` §17.1.P.12 · GeometriaFactory-Domain y §17.1.P.12 · GeometriaFactory-Contracts).
 2. **Se renuncia a un contrato descrito formalmente y a clientes generados.** Con dos consumidores compilados juntos, el costo no se paga.
-3. **Se acepta que la validación de forma de una solicitud viva fuera del ensamblado.** Un campo obligatorio ausente lo detecta el servicio de datos y lo informa con `CONTRATO_CAMPO_REQUERIDO_AUSENTE`, no el tipo.
+3. **Se acepta que la validación de forma de una solicitud viva fuera del ensamblado.** Un campo obligatorio ausente lo detecta el servicio de datos y lo informa con `REQUIRED_FIELD_MISSING`, no el tipo.
 4. **Se acepta que el ensamblado no imponga formato de intercambio.** La contrapartida es que dos consumidores mal configurados podrían serializar distinto; la mitigación es que los dos se configuran en el mismo producto y que las pruebas de integración golpean el servicio real.
 
 ## 7. Implementación
@@ -81,4 +81,5 @@ La unidad de organización interna es la **familia de tipos**, que es la unidad 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra el ensamblado de tipos planos sin dependencias, da definición operativa y verificable a «plano» y a «sin dependencias», evalúa cuatro alternativas y fija cinco métricas de validación. |

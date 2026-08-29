@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12007-Gobernar-El-Movimiento-Automatico-De-La-Escena.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -70,9 +70,9 @@ Permitir que el componente anfitrión prenda o apague, **por separado y con la i
 
 | Código | Causa | Respuesta de la fachada |
 | --- | --- | --- |
-| `INSTANCIA_DESCONOCIDA` | El identificador no corresponde a ninguna instancia viva, o corresponde a una ya liberada | Ninguna instancia cambia y se informa el código. Es la condición esperable cuando el anfitrión mueve su control después de haber destruido la instancia |
+| `UNKNOWN_INSTANCE` | El identificador no corresponde a ninguna instancia viva, o corresponde a una ya liberada | Ninguna instancia cambia y se informa el código. Es la condición esperable cuando el anfitrión mueve su control después de haber destruido la instancia |
 
-**Esta función no emite ninguna condición nueva.** La lista de `Definicion-Contrato-De-Fachada.md` §6 sigue cerrada en **siete** códigos: un movimiento que no arranca porque la instancia no existe es `INSTANCIA_DESCONOCIDA` y nada más. Un estado de movimiento que no se puede satisfacer no es una condición concebible del contrato, porque prender y apagar no admite fallo parcial: o la instancia existe y el estado queda fijado, o la instancia no existe (garantía G-7).
+**Esta función no emite ninguna condición nueva.** La lista de `Definicion-Contrato-De-Fachada.md` §6 sigue cerrada en **siete** códigos: un movimiento que no arranca porque la instancia no existe es `UNKNOWN_INSTANCE` y nada más. Un estado de movimiento que no se puede satisfacer no es una condición concebible del contrato, porque prender y apagar no admite fallo parcial: o la instancia existe y el estado queda fijado, o la instancia no existe (garantía G-7).
 
 ## 7. Postcondiciones
 
@@ -86,7 +86,7 @@ Permitir que el componente anfitrión prenda o apague, **por separado y con la i
 | CA-01 | Una instancia viva con el texto del escenario E-1 cargado, sus 3 piezas dibujadas, la pieza de índice 2 resaltada y los dos movimientos apagados | El componente anfitrión invoca `establecerMovimiento(id, opciones)` prendiendo la órbita de la cámara y el giro de las figuras | Los dos movimientos corren; la pieza de índice 2 **sigue siendo la única resaltada**; la disposición de las 3 piezas es idéntica pieza por pieza a la previa; el identificador de instancia sigue siendo el mismo y sigue siendo válido |
 | CA-02 | La misma instancia, con el giro de las figuras prendido desde hace un tiempo y las piezas en una orientación cualquiera | Dos personas apagan el giro en momentos distintos, cada una invocando `establecerMovimiento(id, opciones)` | Las dos escenas quedan **iguales**: cada pieza vuelve a su orientación de partida, y la disposición no se movió |
 | CA-03 | Una instancia viva con la órbita apagada y el giro prendido | El componente anfitrión invoca `establecerMovimiento(id, opciones)` nombrando **sólo** la órbita, para prenderla | La órbita queda prendida y el giro **sigue prendido**: el movimiento no nombrado conserva su estado, y el estado efectivo devuelto declara los dos |
-| CA-04 | Una instancia ya liberada con `destruir` | El componente anfitrión invoca `establecerMovimiento(id, opciones)` con ese identificador | La fachada informa `INSTANCIA_DESCONOCIDA`, ninguna otra instancia viva se altera y **no aparece ningún código de condición fuera de los siete declarados** |
+| CA-04 | Una instancia ya liberada con `destruir` | El componente anfitrión invoca `establecerMovimiento(id, opciones)` con ese identificador | La fachada informa `UNKNOWN_INSTANCE`, ninguna otra instancia viva se altera y **no aparece ningún código de condición fuera de los siete declarados** |
 | CA-05 | Una instancia viva con el texto del escenario E-7 cargado y la pestaña de red abierta y vacía | El componente anfitrión prende los dos movimientos con `establecerMovimiento(id, opciones)` y deja la escena moviéndose durante 60 segundos | La pestaña de red registra exactamente **0 peticiones** originadas por la fachada durante todo el movimiento, y el almacenamiento del navegador queda sin ninguna clave nueva |
 | CA-06 | Una instancia viva con el texto del escenario E-7 cargado, 6 piezas dibujadas y el resultado de dibujo vigente en manos del anfitrión | El componente anfitrión prende y apaga los dos movimientos cinco veces seguidas | En ninguna de las diez invocaciones se vuelve a leer el texto ni se recrea el contexto gráfico: el resultado de dibujo vigente es el mismo, las 6 piezas conservan sus índices y su disposición, y no hubo parpadeo de reconstrucción |
 
@@ -115,3 +115,4 @@ Permitir que el componente anfitrión prenda o apague, **por separado y con la i
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial, originada en la **Fase B2** de validación de maqueta del proyecto de código `GeometriaFactory-Web` y en la decisión del Product Owner del 2026-08-09 de agregar una **sexta función** a la fachada. Contrato de uso de `establecerMovimiento(id, opciones)`, con cinco flujos alternativos, una sola condición de error —`INSTANCIA_DESCONOCIDA`, ya declarada— y seis criterios de aceptación. Resuelve el punto abierto que `Definicion-Contrato-De-Fachada.md` §5.5 había elevado sobre el cambio de movimiento con la instancia viva. |
 | 1.1 | 2026-08-09 | **Cierra la parte del hallazgo `F26-11`** que alcanza a este caso de uso, del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0, contra `PRODUCT-INTAKE` **1.9**. **§9** declaraba la capacidad de origen **F-25** como `Should Have`, y el Product Owner la subió a **`Must Have`** en el intake 1.7, con la constancia escrita en la propia celda de §4 de la fuente; la fila registra además que la necesidad de negocio le prevé caso de uso propio a nivel producto, **CU-10028** de `NB-00006` §7. Ningún flujo, condición de error ni criterio de aceptación cambia. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

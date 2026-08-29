@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Flujo-Ejecucion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -61,11 +61,11 @@ Es lo que ocurre dentro de `cargarJson`.
 
 | Paso | Componente | Qué hace | Qué puede fallar |
 | --- | --- | --- | --- |
-| 1 | Fachada | Resuelve el identificador contra el registro de instancias | `INSTANCIA_DESCONOCIDA`, y no se ejecuta ningún paso más |
+| 1 | Fachada | Resuelve el identificador contra el registro de instancias | `UNKNOWN_INSTANCE`, y no se ejecuta ningún paso más |
 | 2 | Servicio de dibujo | **Libera lo que la carga anterior había creado** | Nada: es incondicional, y es lo que sostiene el requerimiento de no degradar |
-| 3 | Lector del texto | Obtiene del texto el conjunto raíz de figuras y su estructura jerárquica | `TEXTO_NO_LEGIBLE`: la instancia queda **viva y vacía** |
-| 4 | Lector del texto | Recorre el conjunto raíz **por índice** y, para cada figura, resuelve su tipo | `TIPO_NO_DIBUJABLE`, **por pieza**: esa figura no se dibuja y las demás sí |
-| 5 | Lector del texto | Para cada figura de tipo dibujable, lee su dimensión de sus componentes, tolerando las variantes de clave del emisor | `DIMENSION_NO_LEGIBLE`, **por pieza**, y sólo por **ausencia** de la clave o del componente: un valor de `0.00` es legible y esa pieza se dibuja |
+| 3 | Lector del texto | Obtiene del texto el conjunto raíz de figuras y su estructura jerárquica | `UNREADABLE_TEXT`: la instancia queda **viva y vacía** |
+| 4 | Lector del texto | Recorre el conjunto raíz **por índice** y, para cada figura, resuelve su tipo | `NON_DRAWABLE_TYPE`, **por pieza**: esa figura no se dibuja y las demás sí |
+| 5 | Lector del texto | Para cada figura de tipo dibujable, lee su dimensión de sus componentes, tolerando las variantes de clave del emisor | `UNREADABLE_DIMENSION`, **por pieza**, y sólo por **ausencia** de la clave o del componente: un valor de `0.00` es legible y esa pieza se dibuja |
 | 6 | Servicio de dibujo | Construye la malla de cada pieza legible | — |
 | 7 | Servicio de dibujo | Ubica cada malla en la escena, **en la celda que le asigna su índice** | — |
 | 8 | Servicio de dibujo | Compone el resultado de dibujo: piezas dibujadas, piezas no dibujadas con su condición, y la estructura del texto | — |
@@ -85,12 +85,12 @@ Es lo que ocurre dentro de `cargarJson`.
 
 | Condición | Paso de la canalización | Alcance |
 | --- | --- | --- |
-| `INSTANCIA_DESCONOCIDA` | 1 | La invocación entera; no se ejecuta ningún paso más |
-| `TEXTO_NO_LEGIBLE` | 3 | La invocación entera; la instancia queda viva y vacía |
-| `TIPO_NO_DIBUJABLE` | 4 | Una pieza |
-| `DIMENSION_NO_LEGIBLE` | 5 | Una pieza |
+| `UNKNOWN_INSTANCE` | 1 | La invocación entera; no se ejecuta ningún paso más |
+| `UNREADABLE_TEXT` | 3 | La invocación entera; la instancia queda viva y vacía |
+| `NON_DRAWABLE_TYPE` | 4 | Una pieza |
+| `UNREADABLE_DIMENSION` | 5 | Una pieza |
 
-Las otras tres condiciones del contrato **no se emiten en esta canalización**: `CAPACIDAD_GRAFICA_AUSENTE` y el curso de creación de `ELEMENTO_DE_DIBUJO_INVALIDO` pertenecen a `inicializar`, el curso de ajuste pertenece a `redimensionar`, e `INDICE_FUERA_DE_RANGO` pertenece a `seleccionarPieza`.
+Las otras tres condiciones del contrato **no se emiten en esta canalización**: `GRAPHICS_CAPABILITY_MISSING` y el curso de creación de `INVALID_CANVAS_ELEMENT` pertenecen a `inicializar`, el curso de ajuste pertenece a `redimensionar`, e `INDEX_OUT_OF_RANGE` pertenece a `seleccionarPieza`.
 
 ## 4. El bucle de dibujo
 
@@ -134,4 +134,5 @@ Ocurre en dos momentos y con el mismo alcance:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **9 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Documenta el ciclo de vida de una instancia con sus seis transiciones, la canalización de dibujo en ocho pasos con lo que puede fallar en cada uno, las cuatro transformaciones de datos con lo que se pierde en cada una, el mapa de en qué paso se emite cada condición y cuáles no pertenecen a esta canalización, el bucle de dibujo con sus dos condiciones de detención, y los dos momentos de liberación de recursos con su alcance. |

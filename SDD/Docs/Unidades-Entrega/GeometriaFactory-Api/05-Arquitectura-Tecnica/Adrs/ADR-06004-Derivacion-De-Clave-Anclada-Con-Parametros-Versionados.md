@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -14,7 +14,7 @@
 
 Acá viven las dos piezas sensibles del producto. El intake las declara juntas: **derivación de la contraseña** —«nunca en claro ni con resumen simple»— y **emisión del acceso firmado con clave simétrica**, con la clave «provista o generada en el primer arranque», viviendo **fuera del repositorio de código y fuera de la imagen** (`PRODUCT-INTAKE` §17.1.P.5 · GeometriaFactory-Infrastructure).
 
-Lo que la fuente **no** decide es cuál de las dos funciones de derivación admitidas se ancla: declara «PBKDF2 o Argon2» y deja la elección a la regla de anclaje de versiones de la etapa `a`. La categoría 02 lo derivó a esta categoría, y esta ADR tiene que resolver algo más urgente que el nombre: **qué se guarda junto al valor derivado**. Sin esa decisión, la condición `CREDENCIAL_DERIVADA_ILEGIBLE` que la categoría 03 declara no tiene forma de distinguirse de una contraseña equivocada, y una cuenta puede quedar inaccesible sin que nadie sepa por qué.
+Lo que la fuente **no** decide es cuál de las dos funciones de derivación admitidas se ancla: declara «PBKDF2 o Argon2» y deja la elección a la regla de anclaje de versiones de la etapa `a`. La categoría 02 lo derivó a esta categoría, y esta ADR tiene que resolver algo más urgente que el nombre: **qué se guarda junto al valor derivado**. Sin esa decisión, la condición `UNREADABLE_PASSWORD_HASH` que la categoría 03 declara no tiene forma de distinguirse de una contraseña equivocada, y una cuenta puede quedar inaccesible sin que nadie sepa por qué.
 
 Hay un tercer hueco que esta ADR cierra por su carácter y no por su número: **la vigencia del acceso firmado**. El intake la declara «corta» y sin acceso de refresco, y no da número.
 
@@ -24,10 +24,10 @@ Motivación upstream: NB-00002; RN-06001, RN-06006, RN-06013, RN-06016; INV-06, 
 
 **El valor derivado que se guarda lleva consigo los parámetros con los que se produjo, y la verificación los lee de ahí y no de la configuración vigente.** De esa decisión cuelgan cinco reglas:
 
-1. **Ningún valor por defecto silencioso.** Si el valor guardado no declara sus parámetros o su forma no corresponde a la función anclada, la verificación termina en `CREDENCIAL_DERIVADA_ILEGIBLE` y **no responde «no coincide»**: responderlo lo haría indistinguible de una contraseña equivocada.
-2. **La cadena vacía no se deriva.** `CONTRASENA_EN_CLARO_AUSENTE` cubre el valor nulo y el vacío: derivar la cadena vacía produciría un valor válido para una credencial que nadie eligió.
-3. **La clave de firma se recibe y no se busca.** Si no llega, `CLAVE_DE_FIRMA_AUSENTE`, y **no se genera una al vuelo ni se emite sin firmar**. Un acceso sin firma verificable es peor que ningún acceso, porque el sistema seguiría funcionando hasta que alguien lo falsifique; y una clave generada al vuelo invalida todos los accesos en cada reinicio, con lo cual el síntoma visible es otro.
-4. **Los cuatro reclamos del acceso son obligatorios y ninguno se completa por defecto**: identificador, correo, papel y expiración. Uno sin papel dejaría a las capas de adentro decidiendo sobre un dato que nadie declaró; uno sin expiración no vencería nunca (`RECLAMOS_INCOMPLETOS`).
+1. **Ningún valor por defecto silencioso.** Si el valor guardado no declara sus parámetros o su forma no corresponde a la función anclada, la verificación termina en `UNREADABLE_PASSWORD_HASH` y **no responde «no coincide»**: responderlo lo haría indistinguible de una contraseña equivocada.
+2. **La cadena vacía no se deriva.** `PLAINTEXT_PASSWORD_MISSING` cubre el valor nulo y el vacío: derivar la cadena vacía produciría un valor válido para una credencial que nadie eligió.
+3. **La clave de firma se recibe y no se busca.** Si no llega, `SIGNING_KEY_MISSING`, y **no se genera una al vuelo ni se emite sin firmar**. Un acceso sin firma verificable es peor que ningún acceso, porque el sistema seguiría funcionando hasta que alguien lo falsifique; y una clave generada al vuelo invalida todos los accesos en cada reinicio, con lo cual el síntoma visible es otro.
+4. **Los cuatro reclamos del acceso son obligatorios y ninguno se completa por defecto**: identificador, correo, papel y expiración. Uno sin papel dejaría a las capas de adentro decidiendo sobre un dato que nadie declaró; uno sin expiración no vencería nunca (`INCOMPLETE_CLAIMS`).
 5. **La vigencia del acceso se toma de configuración**, y el criterio de arquitectura que esta ADR fija es que **caduque dentro de la sesión de trabajo de una clase** y que la renovación sea **reingreso**, sin acceso de refresco. El número concreto se ancla en la etapa `a` y sigue como punto abierto.
 
 **Cuál de las dos funciones se ancla no lo decide esta ADR, y el criterio de decisión sí:** entre las dos que la fuente admite, se ancla la que la plataforma base provea **sin agregar una dependencia nueva al proyecto de código**; si las dos lo hacen, la de mayor resistencia a hardware dedicado. El coste se calibra midiendo en el equipo objetivo y se anota con su versión, como toda versión del producto.
@@ -41,7 +41,7 @@ Motivación upstream: NB-00002; RN-06001, RN-06006, RN-06013, RN-06016; INV-06, 
 | Alternativa | Pros | Contras |
 | --- | --- | --- |
 | Parámetros versionados junto al valor derivado (**adoptada**) | Permite subir el coste sin invalidar las credenciales existentes; hace diagnosticable el valor ilegible; la migración de parámetros es posible sin que nadie pierda el acceso | El valor guardado ocupa más y su forma es parte del contrato del dato: cambiarla es una transformación de esquema |
-| Parámetros en la configuración, valor derivado desnudo en el almacén | El valor guardado es más corto y el esquema más simple | **Descartada.** Cambiar el coste invalidaría todas las credenciales existentes de golpe, y no habría forma de distinguir un valor producido con parámetros viejos de uno corrupto: `CREDENCIAL_DERIVADA_ILEGIBLE` dejaría de ser diagnosticable |
+| Parámetros en la configuración, valor derivado desnudo en el almacén | El valor guardado es más corto y el esquema más simple | **Descartada.** Cambiar el coste invalidaría todas las credenciales existentes de golpe, y no habría forma de distinguir un valor producido con parámetros viejos de uno corrupto: `UNREADABLE_PASSWORD_HASH` dejaría de ser diagnosticable |
 | Elegir acá una de las dos funciones de derivación | Cierra el punto abierto de inmediato | **Descartada.** El intake declara las dos y ata la elección a la regla de anclaje de versiones de la etapa `a`; elegir acá adelantaría una decisión que la fuente puso en otro lado, sobre un criterio —qué provee la plataforma sin dependencia nueva— que se verifica midiendo y no razonando |
 | Generar la clave de firma al vuelo cuando no llega | El servicio siempre arranca | **Descartada.** Es uno de los tres atajos que la categoría 03 declara como «fallar hacia el lado seguro»: el sistema arranca, emite accesos y nadie lo nota hasta que alguien falsifica uno |
 | Emitir un acceso de refresco de vigencia larga | Evita que la persona vuelva a escribir su contraseña cuando el acceso vence | **Descartada por el intake §17.1.P.5 · GeometriaFactory-Api**: vigencia corta y renovación por reingreso, sin acceso de refresco en este alcance |
@@ -91,4 +91,5 @@ Motivación upstream: NB-00002; RN-06001, RN-06006, RN-06013, RN-06016; INV-06, 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **6 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Fija que el valor derivado lleva consigo sus parámetros, con las cinco reglas que cuelgan de esa decisión —sin valor por defecto silencioso, sin derivar la cadena vacía, la clave de firma recibida y no buscada, los cuatro reclamos obligatorios y la vigencia con criterio y sin número—, y deja el criterio de elección de la función de derivación para el punto de control de la etapa `a`. Evalúa cinco alternativas, declara cuatro trade-offs y fija seis métricas de validación. |
