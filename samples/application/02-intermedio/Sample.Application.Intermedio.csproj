@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Sample `application/02-intermedio`. Gobernado por `ejemplo-02-intermedio-aplicacion.md`:
+    su §5 declara este árbol y su §6 la salida exacta. NO entra en la solución.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Application.Intermedio</RootNamespace>
+    <AssemblyName>sample-application-02-intermedio</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Application/GeometriaFactory.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Escenarios/*.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

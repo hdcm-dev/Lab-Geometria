@@ -3,10 +3,10 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Nivel:** Intermedio
-**Estado de esta carpeta:** **Esqueleto — sin código.**
-**Documento que la gobierna:** [`ejemplo-02-intermedio.md`](../../../SDD/Docs/Proyectos/GeometriaFactory-Application/10-Examples/ejemplo-02-intermedio.md) 1.0, del que este README es la copia corta de §1, §3 y §4
+**Estado de esta carpeta:** **IMPLEMENTADO el 2026-08-29. Trece de sus catorce líneas coinciden**; la que falta es una divergencia del sistema y no del sample: ver §4
+**Documento que la gobierna:** [`ejemplo-02-intermedio-aplicacion.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-02`, declarado en la §9 de ese documento
-**Sonda de sensado:** [`SD-02`](../../../SDD/Docs/Proyectos/GeometriaFactory-Application/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
+**Sonda de sensado:** `SD-04002` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, en estado `Sin verificar`
 
 **Comando previsto:**
 
@@ -32,10 +32,41 @@ Demostrar el ciclo del trabajo tal como esta capa lo orquesta, con los **ocho** 
 3. Ejecutar el sample: `dotnet run --project samples/application/02-intermedio`.
 4. Comparar la salida con §6 del documento que gobierna esta carpeta.
 
-## 4. Qué hay hoy acá, y qué falta
+## 4. Qué hay acá, y qué encontró
 
-Hoy esta carpeta tiene **sólo este README**. La carpeta se crea en la **pasada de diseño** de `Rules-Examples.md` §0.2, que le asigna exactamente esto: la carpeta esqueletada, con su README local y su comando previsto. El código del sample lo produce la **pasada de ejecución**, durante la codificación.
+**El sample está implementado y corre. Trece de las catorce líneas del snapshot coinciden.**
 
-**El comando previsto todavía no resuelve, y esta carpeta no promete lo contrario.** Es la consecuencia declarada de que el sample no esté implementado: el campo `evidencia` del contrato `VER-02` dice `No verificado — sin código`, sin fecha y sin salida, y la fila `SD-02` de la matriz de sensado nace en `Sin verificar`. Ninguna corrida se afirma acá.
+```bash
+dotnet run --project samples/application/02-intermedio              # los ocho escenarios
+dotnet run --project samples/application/02-intermedio -- --verificar   # y la comparación
+```
 
-**Qué va a vivir acá cuando la pasada de ejecución corra.** El árbol de archivos que el sample va a tener está declarado en la §5 del documento que gobierna esta carpeta, y la salida exacta que va a producir, en su §6. Los dos se escribieron antes que el código, a propósito.
+### La línea que no coincide
+
+```
+esperada: [Reedicion] Trabajo fuera de Borrador: rechazado EDIT_OUTSIDE_DRAFT
+obtenida: [Reedicion] Trabajo fuera de Borrador: rechazado OPERATION_OUTSIDE_DRAFT
+```
+
+**Los dos códigos existen y describen la misma situación desde dos guardas distintas.**
+`Work.Edit()` rechaza con `EDIT_OUTSIDE_DRAFT`, y `LoadAndEditOwnWorkUseCase.EditAsync` **nunca
+llega a llamarlo**: antes resuelve el acceso con `ResolveStudentAccess(…, Edit)`, que rechaza con
+`OPERATION_OUTSIDE_DRAFT`.
+
+**Y ese orden es deliberado.** `ADR-04004` decide que las comprobaciones se ejercen **en un orden
+fijo y antes de cualquier escritura**, de modo que la guarda de acceso corta primero **por diseño**.
+El código hace lo que el ADR manda; lo que quedó desactualizado es **§6 de este contrato**, que
+esperaba el código del dominio.
+
+**No se ajusta el snapshot y no se toca el código.** Es una decisión del Product Owner con dos
+salidas legítimas: corregir §6 al código que la guarda emite —lo más probable, porque el orden es
+el que el ADR fija—, o hacer que la capa **transporte el código específico del dominio** cuando lo
+haya. La segunda no es absurda: `EDIT_OUTSIDE_DRAFT` dice **qué** se intentaba, y
+`OPERATION_OUTSIDE_DRAFT` sólo dice que no procedía.
+
+### Dos desvíos declarados de §5
+
+El árbol enumera **tres dobles** y esta carpeta trae **cuatro**: `ConsultOwnWorksUseCase` declara el
+puerto de cuentas en su constructor —para poner el correo y el nombre de la persona dueña en el
+detalle— y sin ese doble los actos `[E-7]` y `[Consulta]` no se pueden recorrer. **Se agrega un
+archivo y no se renombra ni se quita ninguno de los que §5 declara.**
