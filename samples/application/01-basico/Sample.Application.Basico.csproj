@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Sample `application/01-basico`, pasada de ejecución de `Rules-Examples.md` §0.2.
+    Gobernado por `ejemplo-01-basico-aplicacion.md`: su §5 declara este árbol y su §6
+    la salida exacta.
+
+    NO ENTRA EN `GeometriaFactory.sln`, como los tres de `domain`.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Application.Basico</RootNamespace>
+    <AssemblyName>sample-application-01-basico</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Application/GeometriaFactory.Application.csproj" />
+  </ItemGroup>
+
+</Project>
