@@ -58,24 +58,69 @@ if (cobertura.Length == 0)
     return 2;
 }
 
-var acum = new Dictionary<string, long[]>(); // [lineas cubiertas, válidas, ramas cubiertas, válidas]
+// LOS INFORMES SE UNEN, NO SE SUMAN, y la diferencia no es de estilo: es la
+// diferencia entre medir la cobertura y medir cualquier otra cosa. La corrida
+// deja UN informe POR PROYECTO DE PRUEBA, y los tres traen el ensamblado
+// entero: sumar registros cuenta cada línea tres veces y da por cubierta sólo
+// la fracción de corridas que la tocó. Una clase que sólo ejercita la batería
+// de dominio daba **exactamente 33,3 %** —uno sobre tres— y el número no
+// hablaba de la clase sino del divisor.
+//
+// La unión es por (archivo, número de línea): la línea está cubierta si LA
+// TOCÓ ALGUNA corrida, que es lo que significa estar cubierta.
+//
+// SOBRE LAS RAMAS, la aproximación y su límite. Cobertura informa un conteo
+// —«3/4»— y no cuáles ramas. Sin identidad de rama no hay unión exacta
+// posible, y se toma **el máximo entre corridas**, que es un PISO de la unión
+// real: si dos corridas cubren ramas distintas de la misma línea, el máximo se
+// queda corto. Se declara acá porque un número que se sabe piso se lee
+// distinto de uno que se cree exacto.
+var lineas = new Dictionary<string, Dictionary<(string, string), bool>>();
+var ramas = new Dictionary<string, Dictionary<(string, string), (long Cubiertas, long Totales)>>();
 foreach (var archivo in cobertura)
 {
     foreach (var paquete in XDocument.Load(archivo).Descendants("package"))
     {
         var nombre = (string?)paquete.Attribute("name") ?? "(sin nombre)";
-        if (!acum.TryGetValue(nombre, out var a)) acum[nombre] = a = new long[4];
-        foreach (var linea in paquete.Descendants("line"))
+        if (!lineas.TryGetValue(nombre, out var porLinea))
         {
-            a[1]++;
-            if (int.Parse((string?)linea.Attribute("hits") ?? "0", CultureInfo.InvariantCulture) > 0) a[0]++;
-            var cc = (string?)linea.Attribute("condition-coverage");
-            if (cc is null || !cc.Contains('(')) continue;
-            var partes = cc[(cc.IndexOf('(') + 1)..].TrimEnd(')').Split('/');
-            a[2] += long.Parse(partes[0], CultureInfo.InvariantCulture);
-            a[3] += long.Parse(partes[1], CultureInfo.InvariantCulture);
+            lineas[nombre] = porLinea = new Dictionary<(string, string), bool>();
+            ramas[nombre] = new Dictionary<(string, string), (long, long)>();
+        }
+        var porRama = ramas[nombre];
+        foreach (var clase in paquete.Descendants("class"))
+        {
+            var archivoFuente = (string?)clase.Attribute("filename") ?? "";
+            foreach (var linea in clase.Descendants("line"))
+            {
+                var clave = (archivoFuente, (string?)linea.Attribute("number") ?? "");
+                var tocada = int.Parse((string?)linea.Attribute("hits") ?? "0", CultureInfo.InvariantCulture) > 0;
+                porLinea[clave] = porLinea.TryGetValue(clave, out var antes) ? antes || tocada : tocada;
+
+                var cc = (string?)linea.Attribute("condition-coverage");
+                if (cc is null || !cc.Contains('(')) continue;
+                var partes = cc[(cc.IndexOf('(') + 1)..].TrimEnd(')').Split('/');
+                var cubiertas = long.Parse(partes[0], CultureInfo.InvariantCulture);
+                var totales = long.Parse(partes[1], CultureInfo.InvariantCulture);
+                porRama[clave] = porRama.TryGetValue(clave, out var previo)
+                    ? (Math.Max(previo.Cubiertas, cubiertas), totales)
+                    : (cubiertas, totales);
+            }
         }
     }
+}
+
+var acum = new Dictionary<string, long[]>(); // [líneas cubiertas, válidas, ramas cubiertas, válidas]
+foreach (var (nombre, porLinea) in lineas)
+{
+    var porRama = ramas[nombre];
+    acum[nombre] = new[]
+    {
+        (long)porLinea.Values.Count(v => v),
+        (long)porLinea.Count,
+        porRama.Values.Sum(r => r.Cubiertas),
+        porRama.Values.Sum(r => r.Totales),
+    };
 }
 
 var fallos = new List<string>();

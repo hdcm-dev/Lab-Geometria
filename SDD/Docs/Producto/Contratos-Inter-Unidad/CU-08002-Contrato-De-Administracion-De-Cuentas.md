@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08002-Contrato-De-Administracion-De-Cuentas.md
-**Versión:** 1.7
+**Versión:** 1.8
 **Estado:** Aprobado
 **Fecha:** 2026-08-14
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -110,9 +110,16 @@ Declarar los tipos de transferencia del ciclo de vida de una cuenta: el registro
 | --- | --- |
 | Necesidad de negocio | NB-00001, NB-00002 |
 | Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-02001`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) —administrador único y papeles fijos—, [`RN-02002`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02002-Correo-Del-Alumno-Unico.md) —el correo del alumno es único, que sostiene el código `CONTRATO_CORREO_YA_REGISTRADO`—, [`RN-02006`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) —una cuenta que no está habilitada no obtiene sesión— y [`RN-02007`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02007-Baja-Con-Arrastre-Y-Confirmacion-Escrita.md) —la baja arrastra los trabajos y exige confirmación escrita—, las cuatro de `GeometriaFactory-Domain`. Ver `Especificacion-Funcional.md` §5 |
-| Historias de usuario a generar en 06 | US-08003 tipos de registro y de credencial; US-08004 tipos de listado y de cambio de situación de cuenta, **con la provisoria en el resultado de la habilitación**; US-08005 solicitud de baja con confirmación escrita |
+| Historias de usuario a generar en 06 | **Pronóstico de la pasada de diseño, superado y no acuñado.** Esta celda anunciaba las 3 historia(s) `US-08003`, `US-08004`, `US-08005` «a generar en 06» cuando `GeometriaFactory-Contracts` era un proyecto de código con rango propio. **La consolidación de las unidades de entrega lo retiró y esas historias nunca se acuñaron con ese identificador**: las que cubren este contrato viven hoy en los dos [`Product-Backlog.md`](../../Unidades-Entrega/) con la numeración de su unidad. **La correspondencia una a una NO se reconstruye acá**: ningún registro de reconexión la conserva, y deducirla del texto sería inventarla. Queda como ítem diferido — ver la nota de abajo |
 | Componentes esperados en 05 | Familia de tipos de transferencia de cuentas del ensamblado de contratos |
 | Tests previstos en 08 | Pruebas de integración del recorrido de alta de punta a punta —registro, habilitación **que devuelve la provisoria**, canje que devuelve el desvío, cambio de contraseña, ingreso—, de la habilitación que no repite provisoria (CA-07), de la inspección de superficie que verifica **0 tipos con contraseña nueva sin vigente** (CA-08), de la baja con confirmación errónea y del intento de configurar una segunda cuenta de administrador |
+
+
+> **Ítem diferido (`Root-Rules.md` §12.2) · la correspondencia de las historias pronosticadas.**
+> **1 · Qué falta:** el mapeo de `US-08003`, `US-08004`, `US-08005` a las historias vigentes que cubren este contrato.
+> **2 · Por qué no se puede hoy:** **ningún registro de reconexión de la consolidación lo conserva**, y reconstruirlo comparando prosa es interpretación y no evidencia. El pronóstico se escribió antes de que existieran las historias reales.
+> **3 · Quién lo cierra:** la categoría 06 de las dos unidades de entrega, que es la que las acuñó.
+> **4 · En qué evento se cierra:** la **próxima emisión de la 06**, o la **Fase J**, lo que ocurra primero.
 
 ## 10. Notas y supuestos
 
@@ -129,6 +136,7 @@ Declarar los tipos de transferencia del ciclo de vida de una cuenta: el registro
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.8 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-08 | Emisión inicial. Declara los tipos de registro, credencial, listado de cuentas y cambio de situación, con la confirmación escrita de la baja como campo del contrato. |
 | 1.0 | 2026-08-08 | Correcciones absorbidas de la ronda 1 de auditoría (`Audit/B-02-03-GeometriaFactory-Contracts-r1.md`), sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-13**: §1 dejaba leer «dar de baja» como una cuarta transición del conjunto cerrado de situaciones que §3 cierra en tres valores; se reformula para nombrar la baja como solicitud aparte, que es lo que FA-01 ya hacía. **H-07**: la fila de reglas de negocio de §9 pasa a referir por identificador `RN-08001` y `RN-08007` de `GeometriaFactory-Domain`, con enlaces relativos. **H-09**: la sección opcional se renumera de §12 a §17, el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna para `library`. |
 | 1.1 | 2026-08-09 | Actualización por contenido nuevo aguas arriba: `PRODUCT-INTAKE` 1.3 §4.1, que transcribe completas las once reglas del producto y da de alta `RN-08002` y `RN-08006`. Cambios: §9 suma las referencias por identificador a `RN-08002`, que sostiene el código `CONTRATO_CORREO_YA_REGISTRADO`, y a `RN-08006`; §10 declara que la baja arrastra los trabajos en cualquiera de los cuatro estados, incluidos los que ya recibieron desenlace, y que el contrato no ofrece campo para conservarlos. **Ningún tipo, campo ni criterio de aceptación de este contrato cambia**: el circuito de revisión no toca la administración de cuentas. **Autor:** Analista Funcional + API Designer (AG-02) |
