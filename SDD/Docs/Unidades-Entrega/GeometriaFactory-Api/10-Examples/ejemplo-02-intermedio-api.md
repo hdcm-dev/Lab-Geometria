@@ -69,7 +69,7 @@ samples/api/02-intermedio/
 ## 6. Qué esperar
 
 ```
-[1] Configurar administrador: 201 | Segundo intento: 409 CONTRATO_ADMINISTRADOR_YA_CONFIGURADO
+[1] Configurar administrador: 201 | Segundo intento: 409 ADMINISTRATOR_ALREADY_CONFIGURED
 [2] Registrar alumno: 201 | Habilitar: 200 con provisoria | Cambiar contrasena: 200
 [3] Canje como alumno: 200 | Canje como administrador: 200
 [4] E-1: 201 estado=Pendiente | piezas=3 observaciones=2
@@ -87,7 +87,7 @@ samples/api/02-intermedio/
 [7] Eliminar un trabajo propio fuera de Borrador: 409 | Eliminar un trabajo ajeno: 404
 [7] Desenlace pedido por un alumno: 403 | Reenvio sobre un trabajo que no esta en Borrador: 409
 [7] Caminos prohibidos forzados: 4 | Rechazados por el servicio: 4 | Rechazados por una pantalla: 0
-[8] Reseteo: 200 con provisoria | Listado pedido por el alumno: 403 CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO
+[8] Reseteo: 200 con provisoria | Listado pedido por el alumno: 403 PASSWORD_CHANGE_REQUIRED
 [8] Cambio de contrasena: 200 | La misma peticion de listado: 200
 [cobertura] Puntos de acceso ejercitados: 13 de 15
 [datos] Cuerpos inventados: 0 | Cuerpos modificados: 0
@@ -162,7 +162,7 @@ verificacion:
         status: 403
       - punto: "listado pedido por el alumno inmediatamente después del reseteo"
         status: 403
-        body_json: { codigo: "CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO" }
+        body_json: { codigo: "PASSWORD_CHANGE_REQUIRED" }
     stdout_contiene:
       - "[4] E-4: 201 estado=Pendiente | observaciones=0"
       - "[4] E-5: 201 estado=Borrador | error indice-figura=1 campo=Tipo"

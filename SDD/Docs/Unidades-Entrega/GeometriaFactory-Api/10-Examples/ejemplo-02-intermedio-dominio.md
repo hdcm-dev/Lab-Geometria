@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.2
+**Versión:** 2.0
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -67,7 +67,7 @@ samples/domain/02-intermedio/
 [E-3] Observacion adoptada: especie=Advertencia campo=Area declarado=36.00 derivado=54.00
 [E-4] Observaciones adoptadas: 0 (mismo cubo de lado 3, area declarada coincidente)
 [E-6] Piezas adoptadas: 1 | Envio: estado=Pendiente (el cero es un valor, no una ausencia)
-[E-5] Pieza del indice 0 adoptada | Pieza del indice 1 rechazada: TIPO_DE_PIEZA_DESCONOCIDO
+[E-5] Pieza del indice 0 adoptada | Pieza del indice 1 rechazada: UNKNOWN_PIECE_TYPE
 [E-5] Posicion 1 reservada: observacion de error aceptada sobre esa posicion
 [E-5] Observacion de error: indice-figura=1 campo=Tipo
 [E-5] Envio: estado=Borrador (RN-02005: un error de validacion retiene el trabajo)
@@ -128,8 +128,30 @@ verificacion:
     stdout_no_contiene:
       - "indice-figura=0 campo=Tipo"
   evidencia:
-    estado: "No verificado — sin código"
+    estado: "VERIFICADO"
+    fecha: "2026-08-29"
+    corrida: "Fase I, incremento 2, dentro del entorno contenido con .NET 10"
+    exit_code: 0
+    stdout: |
+      [E-1] Trabajo constituido: texto-identico=si estado=Borrador
+      [E-1] Piezas adoptadas: 3 | Observaciones adoptadas: 2 | Errores de validacion: 0
+      [E-1] Envio: estado=Pendiente (las advertencias no impiden el envio)
+      [E-3] Observacion adoptada: especie=Advertencia campo=Area declarado=36.00 derivado=54.00
+      [E-4] Observaciones adoptadas: 0 (mismo cubo de lado 3, area declarada coincidente)
+      [E-6] Piezas adoptadas: 1 | Envio: estado=Pendiente (el cero es un valor, no una ausencia)
+      [E-5] Pieza del indice 0 adoptada | Pieza del indice 1 rechazada: TIPO_DE_PIEZA_DESCONOCIDO
+      [E-5] Posicion 1 reservada: observacion de error aceptada sobre esa posicion
+      [E-5] Observacion de error: indice-figura=1 campo=Tipo
+      [E-5] Envio: estado=Borrador (RN-02005: un error de validacion retiene el trabajo)
+      [E-8] Observacion de error localizada: indice-figura=1 campo=Largo
+      [E-8] Envio: estado=Borrador | texto-original-intacto=si
+      Trabajos recorridos: 6 | Envios a Pendiente: 4 | Envios retenidos en Borrador: 2 | Excepciones: 0
+    comparacion_contra_snapshot: "CONFORME · las 13 líneas coinciden,
+      verificado por `dotnet run --project samples/domain/02-intermedio -- --verificar`, que sale 0"
 ```
+
+**La salida de arriba es la corrida real y no una promesa.** El estado anterior de este campo era
+`No verificado — sin código`, y llevaba **dieciocho días** siéndolo con el código ya escrito.
 
 **Por qué el criterio incluye una aserción negativa.** `indice-figura=0 campo=Tipo` no debe aparecer: el primer elemento de `E-5` es válido a propósito, y que el índice reportado sea **1 y no 0** es lo que prueba que la ubicación se calcula en lugar de informar siempre la primera figura (`PRODUCT-INTAKE` §20.E-5, punto 2).
 
@@ -137,6 +159,7 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.0 | 2026-08-29 | **Pasada de ejecución — Fase I, incremento 2.** El sample está **implementado y corrido**, y el campo `evidencia` de §9 pasa de `No verificado — sin código` a **VERIFICADO** con la salida real, su fecha y su exit code. **`VER-02002` cumple sus criterios** y la comparación completa contra el snapshot de §6 devuelve CONFORME. **Ninguna otra sección cambia**: §6 no se tocó, y que el sample coincida con él a la primera es lo que se estaba verificando. Sube MAJOR porque §9 cambia para el consumidor del documento. | Orquestador de Fase I |
 | 1.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.1 | 2026-08-11 | **Corrección del hallazgo P3-1 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** El árbol de §5 nombraba los **seis** archivos de escenario con extensión `.json` —`E1`, `E3`, `E4`, `E5`, `E6` y `E8`—, contra la convención `.txt` que declaran los otros seis proyectos de código del producto, y este proyecto de código no declaraba el fundamento en ninguna parte de su categoría 10. Se corrigen las **dos** líneas del árbol y se agrega el fundamento debajo. **Ningún dato estaba en riesgo**: el único escenario que no es JSON estrictamente válido es `E-2`, que no está entre los seis. Se corrige además, fuera del informe, la §2, que declaraba «los **ocho** escenarios reales del intake §20 como material de entrada» cuando el sample usa **seis** y su propia §5, su §6 y el `README.md` de la categoría dicen seis. Se enlaza la carpeta esqueletada de `/samples` creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento del contrato cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-02005` a `CU-02008` con las operaciones `OP-05` a `OP-08`, sobre los **seis** escenarios reales `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8` del `PRODUCT-INTAKE` §20, transcriptos sin modificación. El contrato `VER-02002` declara seis líneas exactas de salida y **una aserción negativa** sobre el índice reportado; `evidencia` queda en `No verificado — sin código`. |

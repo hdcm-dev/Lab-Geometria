@@ -75,9 +75,9 @@ samples/application/02-intermedio/
 [E-8] Envio: observacion Error indice-figura=1 campo=Largo -> Borrador (RN-04005)
 [Consulta] Listado propio: 8 trabajos | Pendiente=6 Borrador=2 Aprobado=0 Rechazado=0
 [Retiro] Trabajo en Borrador por su dueno: retirado
-[Retiro] Trabajo en Pendiente por su dueno: rechazado OPERACION_FUERA_DE_BORRADOR
-[Retiro] Trabajo ajeno: rechazado TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE
-[Reedicion] Trabajo fuera de Borrador: rechazado REEDICION_FUERA_DE_BORRADOR | texto-original-intacto=si
+[Retiro] Trabajo en Pendiente por su dueno: rechazado OPERATION_OUTSIDE_DRAFT
+[Retiro] Trabajo ajeno: rechazado WORK_NOT_FOUND_FOR_REQUESTER
+[Reedicion] Trabajo fuera de Borrador: rechazado EDIT_OUTSIDE_DRAFT | texto-original-intacto=si
 Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Excepciones: 0
 ```
 
@@ -133,11 +133,11 @@ verificacion:
       - "[E-5] Envio: observacion Error indice-figura=1 campo=Tipo -> Borrador (RN-04005)"
       - "[E-8] Envio: observacion Error indice-figura=1 campo=Largo -> Borrador (RN-04005)"
       - "[Consulta] Listado propio: 8 trabajos | Pendiente=6 Borrador=2 Aprobado=0 Rechazado=0"
-      - "[Retiro] Trabajo ajeno: rechazado TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE"
+      - "[Retiro] Trabajo ajeno: rechazado WORK_NOT_FOUND_FOR_REQUESTER"
       - "Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Excepciones: 0"
     stdout_no_contiene:
       - "indice-figura=0"
-      - "[Retiro] Trabajo ajeno: rechazado FACULTAD_DE_ADMINISTRADOR_REQUERIDA"
+      - "[Retiro] Trabajo ajeno: rechazado ADMINISTRATOR_ROLE_REQUIRED"
   evidencia:
     estado: "No verificado — sin código"
 ```

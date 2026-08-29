@@ -71,7 +71,7 @@ samples/visor/01-basico/
 [4] Estructura del texto devuelta para el arbol: piezas=3
 [5] Segundo procesado del mismo texto: disposicion identica pieza por pieza=si
 [6] Instancia destruida: recursos graficos liberados | bucle de dibujo cortado
-[7] Uso posterior del identificador liberado: INSTANCIA_DESCONOCIDA
+[7] Uso posterior del identificador liberado: UNKNOWN_INSTANCE
 [8] Peticiones de red originadas por el archivo de guion durante todo el recorrido: 0
 Funciones ejercidas: 3 de 6 | Servicios del backend disponibles: 0 | Excepciones: 0
 ```
@@ -128,7 +128,7 @@ verificacion:
       - "[2] Texto de E-1 cargado: piezas dibujadas=3 | no dibujadas=0"
       - "[3] Piezas por tipo: Cilindro=1 Cubo=1 Ortoedro=1"
       - "[5] Segundo procesado del mismo texto: disposicion identica pieza por pieza=si"
-      - "[7] Uso posterior del identificador liberado: INSTANCIA_DESCONOCIDA"
+      - "[7] Uso posterior del identificador liberado: UNKNOWN_INSTANCE"
       - "[8] Peticiones de red originadas por el archivo de guion durante todo el recorrido: 0"
       - "Funciones ejercidas: 3 de 6 | Servicios del backend disponibles: 0 | Excepciones: 0"
   evidencia:

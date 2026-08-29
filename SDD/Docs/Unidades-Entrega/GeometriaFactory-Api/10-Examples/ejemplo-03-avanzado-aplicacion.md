@@ -64,20 +64,20 @@ samples/application/03-avanzado/
 ```
 [1] Habilitar cuenta pendiente: habilitada | provisoria producida por el sistema: si
 [1] Bloquear cuenta habilitada: bloqueada | Rehabilitar: habilitada + provisoria nueva
-[1] Transicion no admitida sobre una cuenta habilitada: rechazada TRANSICION_DE_CUENTA_NO_ADMITIDA
-[1] Baja con el correo escrito distinto: rechazada CONFIRMACION_DE_BAJA_NO_COINCIDE
+[1] Transicion no admitida sobre una cuenta habilitada: rechazada ACCOUNT_TRANSITION_NOT_ALLOWED
+[1] Baja con el correo escrito distinto: rechazada DELETION_CONFIRMATION_MISMATCH
 [1] Baja con el correo escrito coincidente: dada de baja | trabajos arrastrados: 2
-[1] Baja de la cuenta de administrador: rechazada CUENTA_DE_ADMINISTRADOR_NO_ADMITE_BAJA
+[1] Baja de la cuenta de administrador: rechazada OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT
 [2] Listado de la comision: 3 trabajos | borradores visibles: 0 (RN-04011)
-[2] Detalle de un trabajo en Borrador pedido por el administrador: TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR
-[2] Listado de la comision pedido por un alumno: rechazado ALCANCE_SIN_PAPEL_DE_ADMINISTRADOR
+[2] Detalle de un trabajo en Borrador pedido por el administrador: WORK_OUTSIDE_ADMINISTRATOR_SCOPE
+[2] Listado de la comision pedido por un alumno: rechazado SCOPE_REQUIRES_ADMINISTRATOR_ROLE
 [3] Aprobar desde Pendiente con comentario: Aprobado
 [3] Rechazar desde Pendiente sin comentario: Rechazado (el comentario es opcional)
-[3] Desenlace sobre un trabajo ya Aprobado: rechazado TRANSICION_DESDE_ESTADO_TERMINAL
-[3] Desenlace pedido por un alumno: rechazado DESENLACE_SIN_PAPEL_DE_ADMINISTRADOR
+[3] Desenlace sobre un trabajo ya Aprobado: rechazado TRANSITION_FROM_TERMINAL_STATUS
+[3] Desenlace pedido por un alumno: rechazado OUTCOME_REQUIRES_ADMINISTRATOR_ROLE
 [4] Reseteo de un alumno bloqueado: aplicado | situacion conservada=Bloqueada trabajos conservados=2
-[4] Reseteo sobre la cuenta de administrador: rechazado RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO
-[4] Tras el reseteo, el alumno pide su listado: rechazado CAMBIO_DE_CONTRASENA_PENDIENTE
+[4] Reseteo sobre la cuenta de administrador: rechazado RESET_LIMITED_TO_STUDENT_ACCOUNTS
+[4] Tras el reseteo, el alumno pide su listado: rechazado PASSWORD_CHANGE_PENDING
 Actos recorridos: 4 | Rechazos tipados: 8 | Excepciones: 0
 ```
 
@@ -132,14 +132,14 @@ verificacion:
     stdout_contiene:
       - "[1] Baja con el correo escrito coincidente: dada de baja | trabajos arrastrados: 2"
       - "[2] Listado de la comision: 3 trabajos | borradores visibles: 0 (RN-04011)"
-      - "[2] Detalle de un trabajo en Borrador pedido por el administrador: TRABAJO_FUERA_DEL_ALCANCE_DEL_ADMINISTRADOR"
-      - "[2] Listado de la comision pedido por un alumno: rechazado ALCANCE_SIN_PAPEL_DE_ADMINISTRADOR"
-      - "[3] Desenlace sobre un trabajo ya Aprobado: rechazado TRANSICION_DESDE_ESTADO_TERMINAL"
+      - "[2] Detalle de un trabajo en Borrador pedido por el administrador: WORK_OUTSIDE_ADMINISTRATOR_SCOPE"
+      - "[2] Listado de la comision pedido por un alumno: rechazado SCOPE_REQUIRES_ADMINISTRATOR_ROLE"
+      - "[3] Desenlace sobre un trabajo ya Aprobado: rechazado TRANSITION_FROM_TERMINAL_STATUS"
       - "[4] Reseteo de un alumno bloqueado: aplicado | situacion conservada=Bloqueada trabajos conservados=2"
       - "Actos recorridos: 4 | Rechazos tipados: 8 | Excepciones: 0"
     stdout_no_contiene:
       - "borradores visibles: 1"
-      - "[2] Detalle de un trabajo en Borrador pedido por el administrador: TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE"
+      - "[2] Detalle de un trabajo en Borrador pedido por el administrador: WORK_NOT_FOUND_FOR_REQUESTER"
   evidencia:
     estado: "No verificado — sin código"
 ```

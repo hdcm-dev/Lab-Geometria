@@ -65,14 +65,14 @@ samples/infrastructure/02-intermedio/
 [1] Trabajo de E-5 materializado: piezas=1 observaciones=1
 [2] Consulta de listado: 3 trabajos | componentes en el resultado: 0 | texto original en el resultado: no
 [2] Consulta de detalle: 1 trabajo | piezas y componentes presentes: si | texto original presente: si
-[2] Consulta sin alcance declarado: rechazada CONSULTA_SIN_ALCANCE_DECLARADO
+[2] Consulta sin alcance declarado: rechazada QUERY_WITHOUT_DECLARED_SCOPE
 [3] Retiro de un trabajo: retirado | piezas, componentes y observaciones que quedaron: 0
 [4] Baja de la cuenta con 2 trabajos: arrastre aplicado | trabajos que quedaron de esa cuenta: 0
-[4] Arrastre interrumpido a la mitad: RETIRO_PARCIAL_NO_ADMITIDO | trabajos que quedaron: 2
-[5] Alta con un correo ya registrado: rechazada CORREO_YA_REGISTRADO
-[5] Segunda cuenta con papel Administrador: rechazada UNICIDAD_DE_ADMINISTRADOR_VIOLADA
+[4] Arrastre interrumpido a la mitad: PARTIAL_DELETION_NOT_ALLOWED | trabajos que quedaron: 2
+[5] Alta con un correo ya registrado: rechazada EMAIL_ALREADY_REGISTERED
+[5] Segunda cuenta con papel Administrador: rechazada ADMINISTRATOR_UNIQUENESS_VIOLATED
 [5] Cuenta recuperada con su marca de cambio pendiente: si | estado sin alterar: si
-[6] Escritura que reemplaza el texto original: rechazada ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL
+[6] Escritura que reemplaza el texto original: rechazada WRITE_REWRITES_ORIGINAL_JSON
 Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0
 ```
 
@@ -128,11 +128,11 @@ verificacion:
     stdout_contiene:
       - "[1] Trabajo de E-1 materializado: piezas=3 componentes=15 observaciones=2 | texto original: guardado literal"
       - "[2] Consulta de listado: 3 trabajos | componentes en el resultado: 0 | texto original en el resultado: no"
-      - "[2] Consulta sin alcance declarado: rechazada CONSULTA_SIN_ALCANCE_DECLARADO"
+      - "[2] Consulta sin alcance declarado: rechazada QUERY_WITHOUT_DECLARED_SCOPE"
       - "[3] Retiro de un trabajo: retirado | piezas, componentes y observaciones que quedaron: 0"
       - "[4] Baja de la cuenta con 2 trabajos: arrastre aplicado | trabajos que quedaron de esa cuenta: 0"
-      - "[4] Arrastre interrumpido a la mitad: RETIRO_PARCIAL_NO_ADMITIDO | trabajos que quedaron: 2"
-      - "[6] Escritura que reemplaza el texto original: rechazada ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL"
+      - "[4] Arrastre interrumpido a la mitad: PARTIAL_DELETION_NOT_ALLOWED | trabajos que quedaron: 2"
+      - "[6] Escritura que reemplaza el texto original: rechazada WRITE_REWRITES_ORIGINAL_JSON"
       - "Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0"
     stdout_no_contiene:
       - "componentes en el resultado: 15"
