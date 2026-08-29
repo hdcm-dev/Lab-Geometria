@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Configuración del recolector de cobertura, que es el instrumento de `QG-03`.
+
+  POR QUÉ EXISTE ESTE ARCHIVO. Sin él, el denominador de las ramas incluye el código
+  que EMITEN LOS GENERADORES y el que emite el compilador, que nadie escribió y nadie
+  puede cubrir con una prueba. Medido el 2026-08-29 sobre `GeometriaFactory.Api`:
+  **202 de sus 407 ramas** —la mitad— salían de `OpenApiXmlCommentSupport_generated`,
+  el generador de fuentes del soporte de comentarios XML de OpenAPI.
+
+  Excluirlo NO AFLOJA LA PUERTA: la corre contra lo que la puerta quiere medir. Un
+  umbral que se compara contra un denominador con código ajeno adentro no mide la
+  cobertura del producto — mide cuánto generador trae la plataforma.
+
+  Y SE EXCLUYE SÓLO `GeneratedCodeAttribute`, QUE ES LO JUSTO. La primera versión sumaba
+  `CompilerGeneratedAttribute` y `SkipAutoProps`, y excluyó de más: `GeometriaFactory.Application`
+  pasó de **148 ramas a 6** —los `record` del dominio de aplicación llevan miembros que el
+  compilador marca como suyos— y con seis ramas el porcentaje deja de medir nada. Un
+  denominador demasiado chico miente igual que uno demasiado grande, y encima no se nota.
+-->
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <!-- Lo que emite un generador o el compilador queda fuera del denominador. -->
+          <ExcludeByAttribute>GeneratedCodeAttribute</ExcludeByAttribute>
+          <Format>cobertura</Format>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
