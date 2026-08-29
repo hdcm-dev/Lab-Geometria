@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -61,15 +61,15 @@ samples/domain/03-avanzado/
 ## 6. Qué esperar
 
 ```
-[1] Trabajo ajeno: TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE
-[2] Trabajo inexistente: TRABAJO_INEXISTENTE_PARA_EL_SOLICITANTE
+[1] Trabajo ajeno: WORK_NOT_FOUND_FOR_REQUESTER
+[2] Trabajo inexistente: WORK_NOT_FOUND_FOR_REQUESTER
 [3] Resultados [1] y [2] comparados campo por campo: identicos=si
 [4] Alcance del administrador: en-alcance=3 fuera-de-alcance=1 (Borrador)
 [5] Eliminacion por el administrador admitida en: Pendiente, Finalizado, Rechazado
 [6] Aprobar trabajo en Pendiente: estado=Finalizado comentario=ausente
 [7] Rechazar trabajo en Pendiente: estado=Rechazado comentario=presente
-[7b] Desenlace sobre estado terminal: TRANSICION_DESDE_ESTADO_TERMINAL
-[7c] Desenlace sin papel de administrador: DESENLACE_SIN_PAPEL_DE_ADMINISTRADOR
+[7b] Desenlace sobre estado terminal: TRANSITION_FROM_TERMINAL_STATUS
+[7c] Desenlace sin papel de administrador: OUTCOME_REQUIRES_ADMINISTRATOR_ROLE
 [8] Reseteo: estado-de-cuenta=sin-cambio trabajos-antes=4 trabajos-despues=4
 [9] Dependencias salientes declaradas: 0 | Bibliotecas de persistencia o transporte: 0
 [10] Dos corridas consecutivas sin fijar el reloj: resultado-identico=si
@@ -130,12 +130,35 @@ verificacion:
       - "[10] Dos corridas consecutivas sin fijar el reloj: resultado-identico=si"
       - "[11] Condiciones provocadas: 12 | Devueltas por valor: 12 | Excepciones de negocio: 0"
   evidencia:
-    estado: "No verificado — sin código"
+    estado: "VERIFICADO"
+    fecha: "2026-08-29"
+    corrida: "Fase I, incremento 2, dentro del entorno contenido con .NET 10"
+    exit_code: 0
+    stdout: |
+      [1] Trabajo ajeno: WORK_NOT_FOUND_FOR_REQUESTER
+      [2] Trabajo inexistente: WORK_NOT_FOUND_FOR_REQUESTER
+      [3] Resultados [1] y [2] comparados campo por campo: identicos=si
+      [4] Alcance del administrador: en-alcance=3 fuera-de-alcance=1 (Borrador)
+      [5] Eliminacion por el administrador admitida en: Pendiente, Finalizado, Rechazado
+      [6] Aprobar trabajo en Pendiente: estado=Finalizado comentario=ausente
+      [7] Rechazar trabajo en Pendiente: estado=Rechazado comentario=presente
+      [7b] Desenlace sobre estado terminal: TRANSITION_FROM_TERMINAL_STATUS
+      [7c] Desenlace sin papel de administrador: OUTCOME_REQUIRES_ADMINISTRATOR_ROLE
+      [8] Reseteo: estado-de-cuenta=sin-cambio trabajos-antes=4 trabajos-despues=4
+      [9] Dependencias salientes declaradas: 0 | Bibliotecas de persistencia o transporte: 0
+      [10] Dos corridas consecutivas sin fijar el reloj: resultado-identico=si
+      [11] Condiciones provocadas: 12 | Devueltas por valor: 12 | Excepciones de negocio: 0
+    comparacion_contra_snapshot: "CONFORME · las 13 líneas coinciden,
+      verificado por `dotnet run --project samples/domain/03-avanzado -- --verificar`, que sale 0"
 ```
+
+**La salida de arriba es la corrida real y no una promesa.** El estado anterior de este campo era
+`No verificado — sin código`, y llevaba **dieciocho días** siéndolo con el código ya escrito.
 
 ## 10. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.0 | 2026-08-29 | **Pasada de ejecución — Fase I, incremento 2.** El sample está **implementado y corrido**, y el campo `evidencia` de §9 pasa de `No verificado — sin código` a **VERIFICADO** con la salida real, su fecha y su exit code. **`VER-02003` cumple sus criterios** y la comparación completa contra el snapshot de §6 devuelve CONFORME. **Ninguna otra sección cambia**: §6 no se tocó, y que el sample coincida con él a la primera es lo que se estaba verificando. Sube MAJOR porque §9 cambia para el consumidor del documento. | Orquestador de Fase I |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-02009`, `CU-02010`, `CU-02011` y `CU-02013` con las operaciones `OP-09` a `OP-11` y `OP-13`, y agrega tres inspecciones estructurales —dependencias salientes, ausencia de lectura de reloj y condiciones tipadas— que ejercen desde afuera del pipeline los gates `QG-04` y `QG-08`. El contrato `VER-02003` declara seis líneas exactas de salida; `evidencia` queda en `No verificado — sin código`. |

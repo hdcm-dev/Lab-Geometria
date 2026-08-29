@@ -3,10 +3,10 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Domain
 **Nivel:** Avanzado
-**Estado de esta carpeta:** **Esqueleto — sin código.**
-**Documento que la gobierna:** [`ejemplo-03-avanzado.md`](../../../SDD/Docs/Proyectos/GeometriaFactory-Domain/10-Examples/ejemplo-03-avanzado.md) 1.0, del que este README es la copia corta de §1, §3 y §4
+**Estado de esta carpeta:** **IMPLEMENTADO y VERIFICADO el 2026-08-29**, en la Fase I, incremento 2. Su contrato cumple y la comparación contra el snapshot de §6 devuelve CONFORME
+**Documento que la gobierna:** [`ejemplo-03-avanzado-dominio.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-dominio.md) — **la ruta se corrigió el 2026-08-29**: apuntaba a `SDD/Docs/Proyectos/GeometriaFactory-Domain/`, que la consolidación de las unidades de entrega retiró, y el documento se renombró con el sufijo del proyecto de código 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-03`, declarado en la §9 de ese documento
-**Sonda de sensado:** [`SD-03`](../../../SDD/Docs/Proyectos/GeometriaFactory-Domain/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
+**Sonda de sensado:** `SD-02003` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, en estado `Sin verificar`
 
 **Comando previsto:**
 
@@ -33,10 +33,19 @@ Demostrar las tres decisiones que el dominio toma sobre un trabajo ya enviado �
 3. Ejecutar el sample: `dotnet run --project samples/domain/03-avanzado`.
 4. Comparar la salida con §6 del documento que gobierna esta carpeta.
 
-## 4. Qué hay hoy acá, y qué falta
+## 4. Qué hay acá
 
-Hoy esta carpeta tiene **sólo este README**. La carpeta se crea en la **pasada de diseño** de `Rules-Examples.md` §0.2, que le asigna exactamente esto: la carpeta esqueletada, con su README local y su comando previsto. El código del sample lo produce la **pasada de ejecución**, durante la codificación.
+**El sample está implementado y corre.** El árbol es el que declara la §5 del documento que gobierna
+esta carpeta, sin desviarse.
 
-**El comando previsto todavía no resuelve, y esta carpeta no promete lo contrario.** Es la consecuencia declarada de que el sample no esté implementado: el campo `evidencia` del contrato `VER-03` dice `No verificado — sin código`, sin fecha y sin salida, y la fila `SD-03` de la matriz de sensado nace en `Sin verificar`. Ninguna corrida se afirma acá.
+```bash
+dotnet run --project samples/domain/03-avanzado              # ejecuta el recorrido
+dotnet run --project samples/domain/03-avanzado -- --verificar   # y lo compara contra §6
+```
 
-**Qué va a vivir acá cuando la pasada de ejecución corra.** El árbol de archivos que el sample va a tener está declarado en la §5 del documento que gobierna esta carpeta, y la salida exacta que va a producir, en su §6. Los dos se escribieron antes que el código, a propósito.
+**No entra en `GeometriaFactory.sln` a propósito**, como los otros dos: su ensamblado contaría en la
+cobertura de `QG-00003` y movería un número que mide otra cosa.
+
+**Y coincidió con su snapshot a la primera**, que es lo que se estaba verificando: §6 se escribió
+**antes** que este código y el código lo reprodujo sin que hubiera que tocar el contrato. La fila de
+sensado de deriva quedó en `Verificado` con **cero deriva**.

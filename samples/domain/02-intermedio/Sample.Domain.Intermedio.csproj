@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Sample `domain/02-intermedio`, pasada de ejecución de `Rules-Examples.md` §0.2.
+    Gobernado por `ejemplo-02-intermedio-dominio.md`: su §5 declara este árbol y su
+    §6 la salida exacta, las dos escritas ANTES que este código.
+
+    NO ENTRA EN `GeometriaFactory.sln`, por el mismo motivo que el `01-basico`: su
+    ensamblado contaría en la cobertura de `QG-00003` y movería un número que mide
+    otra cosa.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Domain.Intermedio</RootNamespace>
+    <AssemblyName>sample-domain-02-intermedio</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Domain/GeometriaFactory.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Los seis textos viajan con el ejecutable: el sample los LEE, no los incrusta. -->
+    <None Include="Escenarios/*.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

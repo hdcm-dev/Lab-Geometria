@@ -174,10 +174,10 @@ Los ocho últimos estados de esta tabla, más `EST-10025` a `EST-10028`, son los
 | `EST-10022` | `verifico-con-advertencias` | Verificó con advertencias | `Envio-De-Trabajo` |
 | `EST-10023` | `no-verifico` | No verificó (queda en Borrador) | `Envio-De-Trabajo` |
 | `EST-10024` | `previsualizado` | Previsualizado | `Envio-De-Trabajo` |
-| `EST-10025` | `escena-no-disponible` | Escena no disponible · CAPACIDAD_GRAFICA_AUSENTE | `Envio-De-Trabajo`, `Estado-Degradado-Y-Reconexion`, `Vista-De-Trabajo` |
-| `EST-10026` | `texto-no-legible` | Texto no legible · TEXTO_NO_LEGIBLE | `Envio-De-Trabajo`, `Vista-De-Trabajo` |
-| `EST-10027` | `piezas-no-dibujadas` | Piezas no dibujadas · TIPO_NO_DIBUJABLE | `Envio-De-Trabajo`, `Vista-De-Trabajo` |
-| `EST-10028` | `elemento-sin-tamano` | Elemento de dibujo sin tamaño, en creación · ELEMENTO_DE_DIBUJO_INVALIDO (C-1) | `Envio-De-Trabajo`, `Vista-De-Trabajo` |
+| `EST-10025` | `escena-no-disponible` | Escena no disponible · GRAPHICS_CAPABILITY_MISSING | `Envio-De-Trabajo`, `Estado-Degradado-Y-Reconexion`, `Vista-De-Trabajo` |
+| `EST-10026` | `texto-no-legible` | Texto no legible · UNREADABLE_TEXT | `Envio-De-Trabajo`, `Vista-De-Trabajo` |
+| `EST-10027` | `piezas-no-dibujadas` | Piezas no dibujadas · NON_DRAWABLE_TYPE | `Envio-De-Trabajo`, `Vista-De-Trabajo` |
+| `EST-10028` | `elemento-sin-tamano` | Elemento de dibujo sin tamaño, en creación · INVALID_CANVAS_ELEMENT (C-1) | `Envio-De-Trabajo`, `Vista-De-Trabajo` |
 | `EST-10029` | `trabajo-ajeno` | Trabajo ajeno o inexistente | `Envio-De-Trabajo`, `Panel-De-Trabajos-Del-Alumno`, `Resolucion-Del-Trabajo` |
 | `EST-10030` | `indisponible-conservado` | Indisponible, con lo escrito conservado | `Envio-De-Trabajo`, `Estado-Degradado-Y-Reconexion` |
 | `EST-10031` | `reconectado` | Reconectado tras el corte | `Estado-Degradado-Y-Reconexion` |
@@ -220,10 +220,10 @@ Los ocho últimos estados de esta tabla, más `EST-10025` a `EST-10028`, son los
 | `EST-10068` | `sin-comentario` | Sin comentario | `Vista-De-Trabajo` |
 | `EST-10069` | `con-comentario` | Con comentario | `Vista-De-Trabajo` |
 | `EST-10070` | `borrador-con-errores` | Trabajo en borrador con errores | `Vista-De-Trabajo` |
-| `EST-10071` | `elemento-sin-tamano-ajuste` | Elemento de dibujo sin tamaño, en ajuste · ELEMENTO_DE_DIBUJO_INVALIDO (C-2) | `Vista-De-Trabajo` |
-| `EST-10072` | `instancia-desconocida` | Instancia desconocida · INSTANCIA_DESCONOCIDA | `Vista-De-Trabajo` |
-| `EST-10073` | `dimension-no-legible` | Pieza sin dimensión legible · DIMENSION_NO_LEGIBLE | `Vista-De-Trabajo` |
-| `EST-10074` | `indice-sin-representacion` | Índice sin representación en la escena · INDICE_FUERA_DE_RANGO | `Vista-De-Trabajo` |
+| `EST-10071` | `elemento-sin-tamano-ajuste` | Elemento de dibujo sin tamaño, en ajuste · INVALID_CANVAS_ELEMENT (C-2) | `Vista-De-Trabajo` |
+| `EST-10072` | `instancia-desconocida` | Instancia desconocida · UNKNOWN_INSTANCE | `Vista-De-Trabajo` |
+| `EST-10073` | `dimension-no-legible` | Pieza sin dimensión legible · UNREADABLE_DIMENSION | `Vista-De-Trabajo` |
+| `EST-10074` | `indice-sin-representacion` | Índice sin representación en la escena · INDEX_OUT_OF_RANGE | `Vista-De-Trabajo` |
 
 ## 5. Rutas de navegación (`NAV-XX`)
 

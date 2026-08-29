@@ -66,18 +66,18 @@ samples/infrastructure/03-avanzado/
 [1] Derivacion de contrasena: valor derivado producido | contrasena en claro guardada: no
 [1] Verificacion con la credencial correcta: verdadera
 [1] Verificacion con la credencial incorrecta: falsa
-[1] Verificacion contra un derivado ilegible: CREDENCIAL_DERIVADA_ILEGIBLE (distinto de falsa)
-[1] Derivacion sin contrasena en claro: rechazada CONTRASENA_EN_CLARO_AUSENTE
+[1] Verificacion contra un derivado ilegible: UNREADABLE_PASSWORD_HASH (distinto de falsa)
+[1] Derivacion sin contrasena en claro: rechazada PLAINTEXT_PASSWORD_MISSING
 [2] Provisorias producidas: 100 | repetidas: 0 | derivadas de un dato de la cuenta: no
-[2] Produccion sin fuente de aleatoriedad: FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE | valores producidos: 0
+[2] Produccion sin fuente de aleatoriedad: RANDOMNESS_SOURCE_UNAVAILABLE | valores producidos: 0
 [3] Acceso emitido: reclamos presentes=4 | verificacion del acceso propio: valida
 [3] Acceso con firma ajena: invalido | Acceso vencido: invalido
-[3] Emision sin clave de firma: rechazada CLAVE_DE_FIRMA_AUSENTE | accesos emitidos: 0
-[3] Emision con reclamos incompletos: rechazada RECLAMOS_INCOMPLETOS
+[3] Emision sin clave de firma: rechazada SIGNING_KEY_MISSING | accesos emitidos: 0
+[3] Emision con reclamos incompletos: rechazada INCOMPLETE_CLAIMS
 [4] Sello del reloj por el puerto: obtenido | dos corridas con el puerto fijado: sello identico
 [5] Preparacion del almacen: transformaciones aplicadas | linaje registrado
 [5] Segunda preparacion sobre el mismo almacen: sin transformaciones nuevas
-[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido MIGRACION_NO_APLICABLE
+[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido MIGRATION_NOT_APPLICABLE
 [insp] Ocurrencias de clave de firma, contrasena real o ruta del almacen en la fuente del sample: 0
 [insp] Ocurrencias de contrasena en claro o de valor derivado en la salida producida: 0
 Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
@@ -134,13 +134,13 @@ verificacion:
     exit_code: 0
     stdout_contiene:
       - "[1] Derivacion de contrasena: valor derivado producido | contrasena en claro guardada: no"
-      - "[1] Verificacion contra un derivado ilegible: CREDENCIAL_DERIVADA_ILEGIBLE (distinto de falsa)"
+      - "[1] Verificacion contra un derivado ilegible: UNREADABLE_PASSWORD_HASH (distinto de falsa)"
       - "[2] Provisorias producidas: 100 | repetidas: 0 | derivadas de un dato de la cuenta: no"
-      - "[2] Produccion sin fuente de aleatoriedad: FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE | valores producidos: 0"
+      - "[2] Produccion sin fuente de aleatoriedad: RANDOMNESS_SOURCE_UNAVAILABLE | valores producidos: 0"
       - "[3] Acceso emitido: reclamos presentes=4 | verificacion del acceso propio: valida"
-      - "[3] Emision sin clave de firma: rechazada CLAVE_DE_FIRMA_AUSENTE | accesos emitidos: 0"
+      - "[3] Emision sin clave de firma: rechazada SIGNING_KEY_MISSING | accesos emitidos: 0"
       - "[4] Sello del reloj por el puerto: obtenido | dos corridas con el puerto fijado: sello identico"
-      - "[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido MIGRACION_NO_APLICABLE"
+      - "[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido MIGRATION_NOT_APPLICABLE"
       - "[insp] Ocurrencias de clave de firma, contrasena real o ruta del almacen en la fuente del sample: 0"
       - "[insp] Ocurrencias de contrasena en claro o de valor derivado en la salida producida: 0"
       - "Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0"

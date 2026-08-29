@@ -2220,8 +2220,13 @@ Una norma sin instrumento de verificación es una intención. Siete controles, y
 > | **`R-3c`** | Nivel producto y `05` de las dos unidades | **320** en 46 documentos | **Ejecutada el 2026-08-29** |
 > | **`R-3d`** | `GeometriaFactory-Web` entero y el resto del corpus | **268** en 42 documentos | **Ejecutada el 2026-08-29** |
 >
-> **`R-3` queda CERRADO.** El barrido sobre el corpus vivo devuelve **cero** ocurrencias de uso propio
-> en forma castellana. Lo que queda son **573 filas de control de cambios**, **3 citas textuales** y
+> **`R-3` queda cerrado para los tokens entrecomillados, y le faltaba un tramo.** El barrido devuelve
+> **cero** ocurrencias entrecomilladas de uso propio en forma castellana — **y esa medición era
+> demasiado angosta**. El **tramo `R-3e`, del mismo día**, renombró **73 ocurrencias SIN comillas
+> invertidas** en 12 documentos, casi todas dentro de los **bloques de salida de `10-Examples`**, que
+> es donde un código de condición se escribe como lo imprime el programa y no como lo cita la prosa.
+> **Lo encontró un sample al no poder reproducir su propio snapshot**, no una revisión del corpus.
+> Con `R-3e`, `R-3` queda cerrado de verdad. Lo que queda son **573 filas de control de cambios**, **3 citas textuales** y
 > **1 línea de prosa que narra el renombre** — las 577 protegidas por §4.1, que es el número que
 > tiene que quedar y no cero.
 >
@@ -2327,6 +2332,7 @@ Bajo la regla acotada, `R-1b` no habría sido apartamiento. **Se registra como a
 
 | Versión | Fecha | Cambios | Autor |
 | --- | --- | --- | --- |
+| 1.28 | 2026-08-29 | **Tramo `R-3e`, y una corrección de lo que la 1.27 declaró.** «`R-3` cerrado, cero pendientes» era cierto para los tokens **entrecomillados** y demasiado ancho para lo que decía: quedaban **73 ocurrencias sin comillas invertidas** en 12 documentos, **casi todas en los bloques de salida de `10-Examples`**. Renombradas. **Lo encontró un sample al no poder reproducir su propio snapshot**, y por eso el hallazgo es predictivo: las 73 estaban esperando en los snapshots de los 16 samples que faltan. | Orquestador SDD |
 | 1.27 | 2026-08-29 | **`R-3d` ejecutado y `R-3` CERRADO.** 268 ocurrencias en 42 documentos, y el barrido sobre el corpus vivo devuelve **cero** usos propios en forma castellana. Los cuatro tramos suman **1359 ocurrencias** renombradas desde la reactivación del 2026-08-29. **§8 declara además una forma de §4.1 que el tramo reconoció sobre la marcha**: la línea que trae la forma vieja **y** su par vigente está **reportando** el renombre y no usando el identificador, y renombrarla la vuelve una frase que se contradice sola. Apareció una sola vez, en el documento donde la Fase I narró el hallazgo que reactivó `R-3`. Quedan protegidas **573 filas de control de cambios, 3 citas y 1 línea de prosa**: **577 es el número que tiene que quedar, y no cero.** | Orquestador SDD |
 | 1.26 | 2026-08-29 | **§8 registra el tramo `R-4`**, que no es de `F-03`: es el **renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner al **retirar el `ADR-14005` en lugar de aceptarlo**. **507 ocurrencias renumeradas** y **278 dejadas con la forma vieja a propósito**, porque su bloque no estaba en el texto y deducirlo habría sido inventarlo. Con el renumerado las dos familias **dejan de necesitar apartamiento**. | Orquestador SDD |
 | 1.25 | 2026-08-29 | **Tramos `R-3b` y `R-3c` ejecutados**, y §8 registra su recuento real: **335** ocurrencias en 32 documentos de la `02` y la `08` de `-Api`, y **320** en 46 del nivel producto y las dos `05`. **Y el guion del tramo se corrigió antes de `R-3c`**: **no excluía `Audit/`**, que §4.1 protege como registro histórico. No había mordido —las carpetas de `R-3a` y `R-3b` no tienen informes— y en `R-3c` habría falsificado actas de auditoría. Con la exclusión puesta, el recuento del corpus vivo cuadra con la medición independiente. Queda **`R-3d` con 269 en 42 documentos**. | Orquestador SDD |

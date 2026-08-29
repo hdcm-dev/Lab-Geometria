@@ -66,11 +66,11 @@ samples/api/01-basico/
 
 ```
 [canje] Credenciales validas: 200 | acceso firmado recibido: si
-[canje] Credenciales invalidas: 401 CONTRATO_CREDENCIAL_INVALIDA | campo que fallo declarado: no
-[canje] Cuenta pendiente: 403 CONTRATO_CUENTA_NO_HABILITADA | motivo presente: si
+[canje] Credenciales invalidas: 401 INVALID_CREDENTIALS | campo que fallo declarado: no
+[canje] Cuenta pendiente: 403 ACCOUNT_NOT_ENABLED | motivo presente: si
 [guardia] Peticion sin acceso: 401 | Peticion con acceso vencido: 401 | Firma ajena: 401
 [guardia] Papel insuficiente sobre un punto de administracion: 403
-[guardia] Cuenta con cambio pendiente sobre cualquier punto salvo uno: 403 CONTRATO_CAMBIO_DE_CONTRASENA_REQUERIDO
+[guardia] Cuenta con cambio pendiente sobre cualquier punto salvo uno: 403 PASSWORD_CHANGE_REQUIRED
 [envio] E-5: 201 | estado del trabajo: Borrador
 [envio] E-5: observacion de error indice-figura=1 campo=Tipo
 [envio] E-8: 201 | estado del trabajo: Borrador
@@ -131,7 +131,7 @@ verificacion:
         status: 200
       - punto: "canje con credenciales inválidas"
         status: 401
-        body_json: { codigo: "CONTRATO_CREDENCIAL_INVALIDA" }
+        body_json: { codigo: "INVALID_CREDENTIALS" }
       - punto: "envío del escenario E-5"
         status: 201
         body_json: { estado: "Borrador" }

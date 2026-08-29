@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Sample `domain/03-avanzado`, pasada de ejecución de `Rules-Examples.md` §0.2.
+    Gobernado por `ejemplo-03-avanzado-dominio.md`: su §5 declara este árbol y su §6
+    la salida exacta.
+
+    NO ENTRA EN `GeometriaFactory.sln`, como los otros dos.
+
+    LA REFERENCIA AL DOMINIO ES LA ÚNICA, y este archivo es además el DATO que el
+    acto `[9]` inspecciona: el sample cuenta sus propias referencias salientes para
+    demostrar que el dominio no arrastra persistencia ni transporte.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Domain.Avanzado</RootNamespace>
+    <AssemblyName>sample-domain-03-avanzado</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Domain/GeometriaFactory.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
