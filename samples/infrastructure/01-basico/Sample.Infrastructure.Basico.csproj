@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Sample `infrastructure/01-basico`. Gobernado por `ejemplo-01-basico-infraestructura.md`.
+    NO entra en `GeometriaFactory.sln`.
+
+    SIN CARPETA `Dobles/` Y NO ES UN OLVIDO: los dos componentes que ejercita —el
+    intérprete y el reconstructor de piezas— no dependen de nada del producto salvo
+    el dominio. Correrlos contra el componente REAL es el punto del sample.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Infrastructure.Basico</RootNamespace>
+    <AssemblyName>sample-infrastructure-01-basico</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Infrastructure/GeometriaFactory.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Escenarios/*.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
