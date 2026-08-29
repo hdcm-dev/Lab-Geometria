@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Contratos-Abstractions.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -56,7 +56,7 @@ La salida se expone como **biblioteca bajo un solo nombre propio en el objeto gl
 | 5 | `destruir(id)` | Identificador | La confirmación de la liberación | Fachada, Registro de instancias, Servicio de dibujo |
 | 6 | `establecerMovimiento(id, opciones)` | Identificador y el estado deseado de uno de los dos movimientos, o de los dos | El estado efectivo de **los dos** movimientos, o la condición que impidió aplicarlo | Fachada, Servicio de dibujo |
 
-**Seis funciones.** `inicializar` es la única que se invoca **sin** identificador; las otras cinco lo exigen, y por eso `INSTANCIA_DESCONOCIDA` se presenta en cinco funciones.
+**Seis funciones.** `inicializar` es la única que se invoca **sin** identificador; las otras cinco lo exigen, y por eso `UNKNOWN_INSTANCE` se presenta en cinco funciones.
 
 Tres reglas de ciclo de vida que el contrato impone y que la arquitectura tiene que sostener:
 
@@ -68,7 +68,7 @@ Tres reglas de ciclo de vida que el contrato impone y que la arquitectura tiene 
 
 ### 4.1 Identificador de instancia
 
-**Valor opaco.** Su forma no se fija ni en 02 ni acá, y cambiarla **no es cambio de contrato** mientras conserve sus tres propiedades semánticas: identifica una instancia viva y sólo una; deja de ser válido en cuanto `destruir` retorna y **no se reutiliza**; y un identificador que no corresponde a ninguna instancia viva produce `INSTANCIA_DESCONOCIDA` y ninguna otra consecuencia.
+**Valor opaco.** Su forma no se fija ni en 02 ni acá, y cambiarla **no es cambio de contrato** mientras conserve sus tres propiedades semánticas: identifica una instancia viva y sólo una; deja de ser válido en cuanto `destruir` retorna y **no se reutiliza**; y un identificador que no corresponde a ninguna instancia viva produce `UNKNOWN_INSTANCE` y ninguna otra consecuencia.
 
 **Que el anfitrión dependa de su forma es un defecto del anfitrión.**
 
@@ -112,17 +112,17 @@ Las mismas dos opciones en las dos funciones que las reciben, **con una diferenc
 
 | # | Código | Cuándo se produce | Efecto sobre la instancia |
 | --- | --- | --- | --- |
-| 1 | `CAPACIDAD_GRAFICA_AUSENTE` | El navegador no provee la capacidad gráfica tridimensional requerida | No se crea instancia |
-| 2 | `ELEMENTO_DE_DIBUJO_INVALIDO` | **Dos cursos**: en creación, el elemento no sirve como superficie; en ajuste, el elemento de una instancia viva dejó de servir | En creación, no se crea instancia. En ajuste, **la instancia sigue viva** con su escena y su selección intactas |
-| 3 | `INSTANCIA_DESCONOCIDA` | El identificador no corresponde a ninguna instancia viva. Se presenta en **cinco** funciones | Ninguno |
-| 4 | `TEXTO_NO_LEGIBLE` | El texto recibido no permite obtener un conjunto de piezas | La instancia queda viva y vacía |
-| 5 | `TIPO_NO_DIBUJABLE` | Una pieza declara un tipo que no está entre los seis dibujables | Esa pieza no se dibuja; las demás sí |
-| 6 | `DIMENSION_NO_LEGIBLE` | Una pieza de tipo dibujable **no expone** la dimensión necesaria. **Un valor de `0.00` no produce esta condición** | Esa pieza no se dibuja; las demás sí |
-| 7 | `INDICE_FUERA_DE_RANGO` | El índice recibido no corresponde a ninguna **pieza dibujada** del resultado vigente | Ninguno: la selección vigente se conserva |
+| 1 | `GRAPHICS_CAPABILITY_MISSING` | El navegador no provee la capacidad gráfica tridimensional requerida | No se crea instancia |
+| 2 | `INVALID_CANVAS_ELEMENT` | **Dos cursos**: en creación, el elemento no sirve como superficie; en ajuste, el elemento de una instancia viva dejó de servir | En creación, no se crea instancia. En ajuste, **la instancia sigue viva** con su escena y su selección intactas |
+| 3 | `UNKNOWN_INSTANCE` | El identificador no corresponde a ninguna instancia viva. Se presenta en **cinco** funciones | Ninguno |
+| 4 | `UNREADABLE_TEXT` | El texto recibido no permite obtener un conjunto de piezas | La instancia queda viva y vacía |
+| 5 | `NON_DRAWABLE_TYPE` | Una pieza declara un tipo que no está entre los seis dibujables | Esa pieza no se dibuja; las demás sí |
+| 6 | `UNREADABLE_DIMENSION` | Una pieza de tipo dibujable **no expone** la dimensión necesaria. **Un valor de `0.00` no produce esta condición** | Esa pieza no se dibuja; las demás sí |
+| 7 | `INDEX_OUT_OF_RANGE` | El índice recibido no corresponde a ninguna **pieza dibujada** del resultado vigente | Ninguno: la selección vigente se conserva |
 
-**Curso y código no son lo mismo.** `ELEMENTO_DE_DIBUJO_INVALIDO` tiene **dos cursos y un solo código**, porque la causa y la reacción que le queda al anfitrión son las mismas y lo que cambia es el momento del ciclo de vida. Un curso nuevo se agrega como fila de curso; un código nuevo, nunca aguas abajo. La consecuencia de esa distinción se ve en la categoría 03: su catálogo creció de **doce a trece** entradas al entrar la sexta función, **sin** que el conjunto de códigos creciera, porque su unidad de catalogación es la **función** y la de este contrato es la **condición**.
+**Curso y código no son lo mismo.** `INVALID_CANVAS_ELEMENT` tiene **dos cursos y un solo código**, porque la causa y la reacción que le queda al anfitrión son las mismas y lo que cambia es el momento del ciclo de vida. Un curso nuevo se agrega como fila de curso; un código nuevo, nunca aguas abajo. La consecuencia de esa distinción se ve en la categoría 03: su catálogo creció de **doce a trece** entradas al entrar la sexta función, **sin** que el conjunto de códigos creciera, porque su unidad de catalogación es la **función** y la de este contrato es la **condición**.
 
-**Ninguno de los dos movimientos automáticos emite condición.** Un movimiento que no arranca porque la instancia no existe es `INSTANCIA_DESCONOCIDA` y nada más.
+**Ninguno de los dos movimientos automáticos emite condición.** Un movimiento que no arranca porque la instancia no existe es `UNKNOWN_INSTANCE` y nada más.
 
 ## 6. Versionado del contrato
 
@@ -158,4 +158,5 @@ Aplica el criterio de [`ADR-12006`](Adrs/ADR-12006-Bundle-Generado-Y-Versionado-
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **11 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara las seis funciones con el componente que sirve a cada una y las tres reglas de ciclo de vida, los cuatro elementos del resultado de dibujo con la garantía que sostienen, la asimetría de las opciones de movimiento entre `inicializar` y `establecerMovimiento`, los tres conjuntos cerrados, los siete códigos con la distinción entre curso y código, y el criterio de versionado con la constancia de que ningún cambio mayor lo detecta una compilación. |

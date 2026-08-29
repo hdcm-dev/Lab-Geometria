@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Extensibilidad.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -62,7 +62,7 @@ Un reemplazo de la capa 3 —otro motor de dibujo, u otra implementación del se
 | --- | --- | --- |
 | 1 | Las **seis** funciones, con sus nombres y con lo que cada una recibe y devuelve | Recorrido del sample S-1 |
 | 2 | Las **siete** garantías: cero red, cero persistencia, sin configuración propia, aislamiento entre instancias, sin fallo silencioso, determinismo de posición y terminación controlada | Las seis propiedades transversales de la categoría 02, con sus condiciones de medición |
-| 3 | Los **siete** códigos de condición, ni uno más ni uno menos, con sus dos cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` | Inspección contra §6 del contrato de fachada |
+| 3 | Los **siete** códigos de condición, ni uno más ni uno menos, con sus dos cursos de `INVALID_CANVAS_ELEMENT` | Inspección contra §6 del contrato de fachada |
 | 4 | Los **seis** tipos de pieza dibujables, con el cero como dimensión legible | Escenario **E-7**, que cubre los seis tipos |
 | 5 | La disposición derivada del índice, con **posición reservada** para las figuras no reconstruidas | Escenario **E-5** y comparación de dos procesados |
 | 6 | Los **dos** movimientos automáticos gobernables por separado, con reposición de la orientación de partida al apagar el giro | Los criterios de aceptación de `CU-12007` |
@@ -126,4 +126,5 @@ Se declara para que ninguna categoría aguas abajo lo busque ni lo invente.
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara qué clase de extensibilidad es ésta —contrato angosto que hace reemplazable la pieza de atrás, y no registro de complementos—, qué se puede reemplazar y qué no, los ocho compromisos que un reemplazo tiene que cumplir con su forma de verificación sin backend, el proceso de seis pasos por el que la fachada crece con el precedente de la sexta función recorrido entero, el sample S-1 como ejemplo canónico y las cinco cosas que este proyecto de código **no** ofrece como extensión. |

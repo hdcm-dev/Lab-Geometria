@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06007-Producir-La-Contrasena-Provisoria-Del-Reseteo.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -72,7 +72,7 @@ El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y c
 
 | Código | Causa | Respuesta del caso de uso |
 | --- | --- | --- |
-| `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` | La fuente de material impredecible del sistema no responde | Termina de forma **degradada** y **no devuelve ningún valor**. Es la condición más importante de este contrato: la alternativa —componer el valor con lo que haya a mano, un contador o la fecha— produciría una provisoria **adivinable**, que es exactamente lo que RN-06014 prohíbe, y lo haría en silencio. **Un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa** |
+| `RANDOMNESS_SOURCE_UNAVAILABLE` | La fuente de material impredecible del sistema no responde | Termina de forma **degradada** y **no devuelve ningún valor**. Es la condición más importante de este contrato: la alternativa —componer el valor con lo que haya a mano, un contador o la fecha— produciría una provisoria **adivinable**, que es exactamente lo que RN-06014 prohíbe, y lo haría en silencio. **Un reseteo que no se completa es recuperable; una provisoria adivinable no se nota hasta que alguien la usa** |
 
 **Es la única condición de este contrato.** No escribe nada —no persiste— y no devuelve ningún valor parcial.
 
@@ -89,7 +89,7 @@ El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y c
 | CA-02 | Cualquier cuenta | Se piden 1000 provisorias | **No hay ninguna repetida.** El criterio expresa como prueba lo que la regla enuncia como propiedad |
 | CA-03 | Una cuenta con correo, nombre, apellido y fecha de alta conocidos | Se pide una provisoria | El valor devuelto **no contiene ni se deriva** del correo, del nombre, del apellido, del identificador ni de la fecha. La invocación **no recibió ninguno de esos datos**, que es la forma estructural de garantizarlo |
 | CA-04 | Dos provisorias pedidas en el mismo instante observable | Se comparan | Son distintas: **el momento no interviene en la composición** |
-| CA-05 | Una fuente de aleatoriedad simulada que no responde | Se pide una provisoria | Devuelve `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` y **0 valores**. En particular **no** devuelve un valor compuesto por otro medio |
+| CA-05 | Una fuente de aleatoriedad simulada que no responde | Se pide una provisoria | Devuelve `RANDOMNESS_SOURCE_UNAVAILABLE` y **0 valores**. En particular **no** devuelve un valor compuesto por otro medio |
 | CA-06 | Una provisoria producida, con el registro del servidor y el almacén observados | Se completa el reseteo | El valor en claro **no aparece en el registro ni en el almacén**: lo que se guarda es su forma derivada, que produce `CU-06006` |
 | CA-07 | Una provisoria ya entregada al administrador | Se pide volver a obtener **ese mismo** valor | No hay forma: este contrato no lo conserva. El camino declarado es **resetear de nuevo**, que produce un valor nuevo |
 
@@ -120,6 +120,7 @@ El administrador y el alumno son sujetos de la regla: uno acciona el reseteo y c
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.5 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.4 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Actualización de la cita del `PRODUCT-INTAKE` de **1.11** a **1.12** en la trazabilidad upstream: 1.11 quedó archivada al resolver el Product Owner el desenlace del envío del escenario `E-8`. Corrige el hallazgo **H-02** del informe de auditoría `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` (ronda 1). El delta entre 1.11 y 1.12 se revisó y sólo alcanza a `E-8`, que no toca lo que este documento declara: sin cambios de contenido. |

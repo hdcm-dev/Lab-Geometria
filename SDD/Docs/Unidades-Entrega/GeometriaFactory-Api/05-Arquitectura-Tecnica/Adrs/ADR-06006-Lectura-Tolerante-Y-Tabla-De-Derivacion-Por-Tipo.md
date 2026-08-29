@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06006-Lectura-Tolerante-Y-Tabla-De-Derivacion-Por-Tipo.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -67,7 +67,7 @@ Motivación upstream: NB-00004, NB-00005, NB-00006; RN-06005, RN-06008, RN-06009
 - **Convención impuesta:** ninguna observación es genérica. Todo error de validación indica **posición y campo** (`G-4`).
 - **Convención impuesta:** un defecto en una figura **no descarta el resto del análisis** (`G-2`), y una dimensión presente con valor cero **no descarta la figura** (`E-6`): existencia no es veracidad.
 - **Convención impuesta:** el motor no decide el estado del trabajo. Entrega el conjunto de observaciones con su especie y **el dominio resuelve**.
-- La condición `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` protege el orden de los dos motores y **es derivación de la categoría 02**, que esta ADR hereda sin reabrir.
+- La condición `PIECE_SET_NOT_REBUILT` protege el orden de los dos motores y **es derivación de la categoría 02**, que esta ADR hereda sin reabrir.
 
 ## 8. Métricas de validación
 
@@ -94,4 +94,5 @@ Motivación upstream: NB-00004, NB-00005, NB-00006; RN-06005, RN-06008, RN-06009
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. **Cierra el punto abierto del valor derivado del área que la categoría 02 derivó acá**: la forma canónica es la suma de los componentes y la fórmula por tipo se usa sólo donde no hay componentes que sumar. Fija además el punto único de lectura tolerante, la ausencia de límite propio de tamaño con la exigencia de que el borde rechace y no trunque, y la garantía de que un texto mal escrito es un resultado y no una avería. No reabre la tolerancia de 0.01 con operador estricto ni el desenlace de `E-8`, que el intake ya fijó. Evalúa cinco alternativas, declara cuatro trade-offs y fija nueve métricas de validación. |

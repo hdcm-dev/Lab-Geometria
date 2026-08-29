@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-Abstractions.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -201,7 +201,7 @@ Toda operación que pueda rechazar devuelve un resultado con dos salidas posible
 
 - **El conjunto de condiciones es cerrado y su fuente única es la categoría 03**: las **17** de [`../03-UX-UI-DX/DX-Error-Messages.md`](../03-UX-UI-DX/DX-Error-Messages.md). Este contrato no acuña ninguna y no las transcribe: las referencia.
 - **Código, no texto y no excepción.** Esta capa emite un código estable de una enumeración cerrada. No produce mensajes para personas, no los formatea y no los traduce.
-- **Ningún código es un código de protocolo.** Su traducción pertenece a `GeometriaFactory-Api`, y una sola condición tiene destinatario declarado aguas arriba: `INTERPRETACION_NO_DISPONIBLE`, que `GeometriaFactory-Application` `CU-06005` §6 espera por el puerto de validación.
+- **Ningún código es un código de protocolo.** Su traducción pertenece a `GeometriaFactory-Api`, y una sola condición tiene destinatario declarado aguas arriba: `PARSE_RESULT_UNAVAILABLE`, que `GeometriaFactory-Application` `CU-06005` §6 espera por el puerto de validación.
 - **Dos categorías de conflicto están vacías, y no es un hueco**: facultad y alcance. **Esta capa no autoriza** y no recibe la identidad del solicitante para comprobar nada. Quien busque acá una negativa de autorización está buscando en la capa equivocada.
 - **Cuatro condiciones son de terminación degradada y dos detienen el arranque.** Esta capa **no reintenta**: reintentar, si corresponde, lo decide el consumidor.
 - **Ninguna condición deja efecto parcial.** Todas las escrituras ocurren dentro de una unidad de trabajo que se cierra entera o no se cierra.
@@ -392,4 +392,5 @@ Las once filas están, sin agrupar. Son las comprobaciones de [`../02-Especifica
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4). Pasa de ser el documento de un proyecto de código a ser el de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con las capas juntas. Los documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

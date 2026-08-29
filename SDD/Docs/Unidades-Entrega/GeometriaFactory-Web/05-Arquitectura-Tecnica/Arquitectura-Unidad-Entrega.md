@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Arquitectura-Unidad-Entrega.md
-**Versión:** 3.5
+**Versión:** 3.6
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -202,7 +202,7 @@ Las capas 2 y 3 son de este proyecto de código. La capa 1, el componente anfitr
 | --- | --- | --- | --- | --- | --- |
 | Componente anfitrión | 1, **fuera de este proyecto de código** | Ciclo de vida, referencia al elemento de dibujo, invocación de las seis funciones, controles de movimiento y consulta de la preferencia de movimiento reducido | Eventos de la persona y datos del backend | Invocaciones a la fachada | La fachada, y nada del interior |
 | Fachada plana | 2 | Exponer las seis funciones, resolver el identificador de instancia y devolver resultados y condiciones | Las seis invocaciones | Identificador, resultado de dibujo, estado efectivo de los movimientos, condiciones | Registro de instancias, Servicio de dibujo |
-| Registro de instancias | 2 | Asociar cada identificador con su instancia viva; invalidarlo al liberarla | Identificador | Instancia viva, o la condición `INSTANCIA_DESCONOCIDA` | Ninguna |
+| Registro de instancias | 2 | Asociar cada identificador con su instancia viva; invalidarlo al liberarla | Identificador | Instancia viva, o la condición `UNKNOWN_INSTANCE` | Ninguna |
 | Lector del texto | 3 | Obtener del texto recibido las piezas, sus componentes y sus dimensiones, tolerando las variantes de clave del emisor | Texto del trabajo | Piezas legibles con su índice, y las no legibles con su condición | Ninguna |
 | Servicio de dibujo | 3 | Escena, mallas, disposición, selección, encuadre, bucle de dibujo y liberación de recursos | Piezas legibles y órdenes de la fachada | Escena viva y resultado de dibujo | Lector del texto, Motor de dibujo |
 | Motor de dibujo tridimensional | 3, **empaquetado** | Primitivas de escena, cámara, luces, geometrías y materiales | Órdenes del servicio de dibujo | Representación gráfica | Ninguna dentro del producto |
@@ -300,7 +300,7 @@ El proyecto de código nace de un visualizador previo, y qué se conserva de él
 | Aspecto | Decisión |
 | --- | --- |
 | Unidad de despliegue | Ninguna propia. Su artefacto es **un archivo de guion generado**, que se copia al directorio de recursos estáticos de `GeometriaFactory-Web` y viaja dentro del despliegue de esa unidad |
-| Runtime objetivo | El navegador, con capacidad gráfica tridimensional. Sin esa capacidad el visor **no es soportado**, y la fachada informa `CAPACIDAD_GRAFICA_AUSENTE` (`PRODUCT-INTAKE` §17.2.P.9 · GeometriaFactory-Visor) |
+| Runtime objetivo | El navegador, con capacidad gráfica tridimensional. Sin esa capacidad el visor **no es soportado**, y la fachada informa `GRAPHICS_CAPABILITY_MISSING` (`PRODUCT-INTAKE` §17.2.P.9 · GeometriaFactory-Visor) |
 | Runtime de construcción | El entorno de ejecución de la cadena de herramientas del proyecto, sólo en tiempo de construcción: **en tiempo de ejecución no hay ninguno**, hay un archivo servido como recurso estático |
 | Etapas del pipeline | Instalación reproducible de dependencias → empaquetado → copia al directorio de recursos estáticos del anfitrión (`PRODUCT-INTAKE` §17.2.P.8 · GeometriaFactory-Visor) |
 | Puertas bloqueantes | El bundle se genera sin errores; **PT-03**, el motor de dibujo queda dentro del bundle y la página funciona sin acceso a redes de distribución externas; **PT-02**, el bundle carga en una página del anfitrión, `inicializar` crea la escena, `cargarJson` dibuja las tres figuras del escenario E-1 incluido el ortoedro, recorrer diez veces de ida y vuelta no degrada, y el árbol y la escena se sincronizan por índice |
@@ -327,8 +327,8 @@ El proyecto de código nace de un visualizador previo, y qué se conserva de él
 - **Estado en memoria, y sólo mientras la página vive**: por instancia, la escena, la disposición, la selección vigente, el resultado de dibujo y el estado de los dos movimientos.
 - **Una asimetría deliberada del estado en memoria**: el estado de los movimientos **sobrevive a `cargarJson`**, porque cargar otro texto reemplaza el contenido dibujado y no el gobierno de la escena. La selección vigente y el resultado de dibujo, en cambio, se reemplazan.
 - **La preferencia de quien mira no vive acá.** El anfitrión dibuja los controles, consulta la preferencia de movimiento reducido del sistema y conserva la elección; la fachada la recibe y la ejerce.
-- **Seis tipos de pieza dibujables**: tres volumétricos y tres planos. Un tipo fuera de esos seis no se dibuja y queda enumerado con `TIPO_NO_DIBUJABLE`.
-- **El cero es una dimensión legible.** Lo que produce `DIMENSION_NO_LEGIBLE` es la **ausencia** de la clave o del componente del que se lee la medida, nunca el valor que trae. El visualizador previo evaluaba la verdad del número y perdía la figura, que es lo que la garantía G-5 viene a impedir.
+- **Seis tipos de pieza dibujables**: tres volumétricos y tres planos. Un tipo fuera de esos seis no se dibuja y queda enumerado con `NON_DRAWABLE_TYPE`.
+- **El cero es una dimensión legible.** Lo que produce `UNREADABLE_DIMENSION` es la **ausencia** de la clave o del componente del que se lee la medida, nunca el valor que trae. El visualizador previo evaluaba la verdad del número y perdía la figura, que es lo que la garantía G-5 viene a impedir.
 
 ## 7. Cross-cutting concerns
 
@@ -585,3 +585,4 @@ Las siete filas están, `G-1` a `G-7`, sin agrupar. Son las de [`../02-Especific
 | 3.3 | 2026-08-20 | **Segunda pasada del paso `A2`**: **3** punto(s) abierto(s) cerrados **por lectura del árbol**, sobre las familias que `Audit/A3-Decisiones-Del-Product-Owner.md` §1 dejó verificadas. Cada uno cita **el archivo que ya tenía la decisión** — el motor de dibujo anclado en `three 0.169.0`, `PBKDF2` en `PasswordDerivation.cs`, el `@media` de 768 px en `app.css`, `EmailIdentity.Normalize`, los 18 puntos de acceso, las herramientas de cada stage en los guiones, y **la biblioteca de componentes, que no existe porque la etapa `b` decidió no introducirla** y su `.csproj` lo declara como apartamiento. **Ninguno se cerró por criterio propio** y **ningún enunciado de punto abierto se tocó**. Sube minor. | Orquestador SDD |
 | 3.4 | 2026-08-20 | **1** punto(s) abierto(s) **cerrados por decisión del Product Owner** del 2026-08-20, sobre `Audit/A3-Decisiones-Del-Product-Owner.md`: el **volumen de la comisión** queda cerrado **por incognoscible** —el dato no se sabe ni se puede saber de antemano, y no se fija número—; el **límite de tamaño del cuerpo** adopta **el valor por omisión del servidor**, con la obligación derivada de declararlo explícitamente cuando se toque la composición; y el **mutation score** se cierra **con un no**, dejando `CV-19` declarado sin medir. **Ningún enunciado de punto abierto se tocó.** Sube minor. | Orquestador SDD |
 | 3.5 | 2026-08-27 | **Parches `P-03` y `P-06` de la mesa de evaluación del 2026-08-27** ([`../../../Audit/Mesa-2026-08-27.md`](../../../Audit/Mesa-2026-08-27.md)). **`PA-03` corrige el identificador de su evidencia de cierre** (hallazgo `H-03`, ancla **E2**, nivel **P2**): decía «Resuelto en `Api ADR-10002`» y **`ADR-10002` existe y es otro** —«Sin estado propio y sin persistencia», de esta misma unidad—; el correcto es `ADR-00002`, al que el enlace de la columna anterior ya apuntaba bien. Ningún verificador de enlaces podía detectarlo, porque no hay enlace. **`PA-02`, la versión de plataforma del hosting, deja de estar vencida** (hallazgo `H-05`, ancla **E4**): su evento pasa a la **fase `i`**, que es donde se mide. **Vencidos de este documento: de 3 a 2.** |
+| 3.6 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

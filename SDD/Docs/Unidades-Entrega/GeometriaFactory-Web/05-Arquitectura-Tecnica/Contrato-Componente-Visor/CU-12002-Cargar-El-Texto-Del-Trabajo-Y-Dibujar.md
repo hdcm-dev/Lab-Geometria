@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -63,19 +63,19 @@ Permitir que el componente anfitrión entregue el texto de un trabajo a una inst
 | Id | Disparador | Curso | Punto de retorno |
 | --- | --- | --- | --- |
 | FA-01 · Carga sucesiva sobre la misma instancia | El componente anfitrión invoca `cargarJson` sobre una instancia que ya tenía un trabajo dibujado | El paso 2 libera por completo lo anterior antes de dibujar lo nuevo. La selección vigente se descarta: después de una carga no hay ninguna pieza resaltada | Paso 3 del flujo principal |
-| FA-02 · Piezas de tipo no dibujable dentro de un trabajo con piezas dibujables | Al menos una pieza declara un tipo que no está entre los seis dibujables | Las piezas dibujables se dibujan; las otras quedan enumeradas con `TIPO_NO_DIBUJABLE` y su índice. La carga es exitosa | Paso 5, con el subconjunto dibujable |
+| FA-02 · Piezas de tipo no dibujable dentro de un trabajo con piezas dibujables | Al menos una pieza declara un tipo que no está entre los seis dibujables | Las piezas dibujables se dibujan; las otras quedan enumeradas con `NON_DRAWABLE_TYPE` y su índice. La carga es exitosa | Paso 5, con el subconjunto dibujable |
 | FA-03 · Conjunto raíz vacío | El texto trae un conjunto raíz sin ninguna pieza | La instancia queda viva y con la escena vacía, y el resultado de dibujo devuelve 0 piezas dibujadas y 0 no dibujadas. No es una condición de error | Paso 7 del flujo principal |
 | FA-04 · Variante de clave para las bases del volumen | El texto nombra las bases del ortoedro con una clave y no con la otra | La fachada lee la dimensión igual en los dos casos y la pieza se dibuja. Es lectura de dimensión, no validación del trabajo | Paso 5 del flujo principal |
-| FA-05 · Pieza con una dimensión en `0.00` | Una pieza de tipo dibujable expone la dimensión que su malla necesita, con valor `0.00` | **La pieza se dibuja.** El cero es una dimensión legible: lo que hace ilegible una dimensión es la **ausencia** de la clave o del componente, nunca su valor. La malla puede resultar visualmente degenerada, y eso es consecuencia legítima del dato del alumno. **No** se emite `DIMENSION_NO_LEGIBLE` y la pieza **no** queda entre las no dibujadas | Paso 5 del flujo principal |
+| FA-05 · Pieza con una dimensión en `0.00` | Una pieza de tipo dibujable expone la dimensión que su malla necesita, con valor `0.00` | **La pieza se dibuja.** El cero es una dimensión legible: lo que hace ilegible una dimensión es la **ausencia** de la clave o del componente, nunca su valor. La malla puede resultar visualmente degenerada, y eso es consecuencia legítima del dato del alumno. **No** se emite `UNREADABLE_DIMENSION` y la pieza **no** queda entre las no dibujadas | Paso 5 del flujo principal |
 
 ## 6. Excepciones y errores
 
 | Código | Causa | Respuesta de la fachada |
 | --- | --- | --- |
-| `INSTANCIA_DESCONOCIDA` | El identificador recibido no corresponde a ninguna instancia viva | No se dibuja nada, ninguna instancia cambia y se informa el código |
-| `TEXTO_NO_LEGIBLE` | Del texto recibido no se puede obtener un conjunto de piezas | La instancia queda viva y vacía: lo anterior se libera igual y no se dibuja nada nuevo. Se informa el código. La fachada **no** califica el texto de inválido ni emite observación: eso es del backend |
-| `TIPO_NO_DIBUJABLE` | Una pieza declara un tipo fuera de los seis dibujables | Esa pieza no se dibuja y queda enumerada con su índice; el resto del trabajo se dibuja |
-| `DIMENSION_NO_LEGIBLE` | Una pieza de tipo dibujable **no expone** la dimensión necesaria para construir su malla: la clave o el componente del que se lee la medida está ausente. **Un valor de `0.00` no es causa de esta condición** (FA-05) | Esa pieza no se dibuja y queda enumerada con su índice; el resto del trabajo se dibuja |
+| `UNKNOWN_INSTANCE` | El identificador recibido no corresponde a ninguna instancia viva | No se dibuja nada, ninguna instancia cambia y se informa el código |
+| `UNREADABLE_TEXT` | Del texto recibido no se puede obtener un conjunto de piezas | La instancia queda viva y vacía: lo anterior se libera igual y no se dibuja nada nuevo. Se informa el código. La fachada **no** califica el texto de inválido ni emite observación: eso es del backend |
+| `NON_DRAWABLE_TYPE` | Una pieza declara un tipo fuera de los seis dibujables | Esa pieza no se dibuja y queda enumerada con su índice; el resto del trabajo se dibuja |
+| `UNREADABLE_DIMENSION` | Una pieza de tipo dibujable **no expone** la dimensión necesaria para construir su malla: la clave o el componente del que se lee la medida está ausente. **Un valor de `0.00` no es causa de esta condición** (FA-05) | Esa pieza no se dibuja y queda enumerada con su índice; el resto del trabajo se dibuja |
 
 Ninguna de las cuatro condiciones deja la instancia en estado indeterminado ni obliga a destruirla: después de cualquiera de ellas, la instancia admite una carga nueva.
 
@@ -92,10 +92,10 @@ Ninguna de las cuatro condiciones deja la instancia en estado indeterminado ni o
 | CA-02 | Una instancia viva y el texto del escenario E-7 del intake, con seis piezas que cubren los seis tipos dibujables | El componente anfitrión invoca `cargarJson(id, texto)` | El resultado de dibujo enumera **6 piezas dibujadas** con los índices 0 a 5: `Cilindro`, `Cubo`, `Ortoedro`, `Rectangulo`, `Cuadrado` y `Circulo` |
 | CA-03 | Una instancia viva y el texto del escenario E-7, cuyo ortoedro declara bases de 6.00 × 4.00 y laterales de altura 8.00 | El componente anfitrión invoca `cargarJson(id, texto)` | La pieza de índice 2 se dibuja con ancho 6, profundidad 4 y altura 8, coherente con el volumen declarado de 192.00 |
 | CA-04 | Una instancia viva y el texto del escenario E-1 | El componente anfitrión invoca `cargarJson(id, texto)` dos veces seguidas con el mismo texto | Las dos cargas producen la **misma disposición** de las tres piezas, comparable pieza por pieza, y el mismo resultado de dibujo |
-| CA-05 | Una instancia viva y un texto cuyo conjunto raíz tiene 3 piezas, y la de índice 1 declara un tipo que no está entre los seis dibujables | El componente anfitrión invoca `cargarJson(id, texto)` | Se dibujan 2 piezas, con índices 0 y 2, y el resultado de dibujo enumera la pieza de índice 1 como no dibujada con el código `TIPO_NO_DIBUJABLE`: ninguna pieza desaparece sin registro |
-| CA-06 | Una instancia viva y un texto del que no se puede obtener ningún conjunto de piezas | El componente anfitrión invoca `cargarJson(id, texto)` | La fachada informa `TEXTO_NO_LEGIBLE`, la escena queda vacía, la instancia sigue viva y no se emite ninguna advertencia ni ningún error de validación |
+| CA-05 | Una instancia viva y un texto cuyo conjunto raíz tiene 3 piezas, y la de índice 1 declara un tipo que no está entre los seis dibujables | El componente anfitrión invoca `cargarJson(id, texto)` | Se dibujan 2 piezas, con índices 0 y 2, y el resultado de dibujo enumera la pieza de índice 1 como no dibujada con el código `NON_DRAWABLE_TYPE`: ninguna pieza desaparece sin registro |
+| CA-06 | Una instancia viva y un texto del que no se puede obtener ningún conjunto de piezas | El componente anfitrión invoca `cargarJson(id, texto)` | La fachada informa `UNREADABLE_TEXT`, la escena queda vacía, la instancia sigue viva y no se emite ninguna advertencia ni ningún error de validación |
 | CA-07 | Una instancia viva, la pestaña de red vacía y el texto del escenario E-7 | El componente anfitrión invoca `cargarJson(id, texto)` | La pestaña de red registra exactamente **0 peticiones** originadas por la fachada, y el almacenamiento del navegador queda sin ninguna clave nueva |
-| CA-08 | Una instancia viva y el texto del escenario E-6 del intake, un `Rectangulo` con `Largo` en `0.00` | El componente anfitrión invoca `cargarJson(id, texto)` | El resultado de dibujo enumera **1 pieza dibujada** con índice 0 y **0 piezas no dibujadas**: la pieza no se descarta, no se emite `DIMENSION_NO_LEGIBLE` y la figura no desaparece de la escena |
+| CA-08 | Una instancia viva y el texto del escenario E-6 del intake, un `Rectangulo` con `Largo` en `0.00` | El componente anfitrión invoca `cargarJson(id, texto)` | El resultado de dibujo enumera **1 pieza dibujada** con índice 0 y **0 piezas no dibujadas**: la pieza no se descarta, no se emite `UNREADABLE_DIMENSION` y la figura no desaparece de la escena |
 
 ## 9. Trazabilidad
 
@@ -121,6 +121,7 @@ Ninguna de las cuatro condiciones deja la instancia en estado indeterminado ni o
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **9 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-08 | Emisión inicial. Contrato de uso de `cargarJson`, con cuatro flujos alternativos, cuatro condiciones de error y siete criterios de aceptación anclados en los escenarios E-1 y E-7 del intake. |
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, dentro de la cual se validó la fachada de este proyecto de código. **Sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **El cero como dimensión legible**: nace **FA-05**, una pieza con una dimensión en `0.00` se dibuja; **§6** precisa que la causa de `DIMENSION_NO_LEGIBLE` es la ausencia de la clave o del componente y nunca el valor; y nace **CA-08**, anclado en el escenario `E-6` del intake §20. Lo motivó la validación visual: el visualizador previo evaluaba la verdad del número y perdía la figura sin aviso, lo que contradice ese escenario declarado y vacía la garantía G-5 del contrato. Concuerda con `Definicion-Contrato-De-Fachada.md` §5.3 y §6. |
 | 1.0 | 2026-08-09 | Segunda absorción de la **Fase B2**, por la decisión del Product Owner de agregar una **sexta función** a la fachada. **Sin subir versión** por `Master-Prompt.md` §5 (documento en estado `Propuesto`). §10 suma la nota que declara que **el estado de los movimientos automáticos sobrevive a `cargarJson`**: la carga reemplaza el contenido dibujado y no el gobierno de la escena, que es de `establecerMovimiento` (`CU-12007`). El contrato de `cargarJson` no cambia por lo demás. |

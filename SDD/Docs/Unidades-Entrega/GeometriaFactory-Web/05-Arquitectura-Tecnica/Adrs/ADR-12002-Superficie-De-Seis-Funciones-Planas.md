@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12002-Superficie-De-Seis-Funciones-Planas.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -16,7 +16,7 @@ Toda la superficie pública de este proyecto de código son **seis funciones pla
 
 Eran cinco hasta el 2026-08-09. La sexta la acuñó [`../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) §4.6 por decisión del Product Owner tomada al cerrar la validación visual de la Fase B2, y el intake **la consolidó en su versión 1.6**, de modo que la fuente vuelve a ser única. El motivo de la sexta es arquitectónico y conviene tenerlo presente: prender o apagar los movimientos con la escena andando, dentro de las cinco originales, exigía **reconstruir la instancia**, lo que pierde la selección de pieza y produce un parpadeo.
 
-Junto con las seis funciones, el contrato declara **siete garantías** transversales, **siete prohibiciones** y **siete códigos de condición** con lista cerrada. **La sexta función no acuñó garantía ni código**: la única condición que puede informar, `INSTANCIA_DESCONOCIDA`, ya existía y pasó a presentarse en cinco funciones.
+Junto con las seis funciones, el contrato declara **siete garantías** transversales, **siete prohibiciones** y **siete códigos de condición** con lista cerrada. **La sexta función no acuñó garantía ni código**: la única condición que puede informar, `UNKNOWN_INSTANCE`, ya existía y pasó a presentarse en cinco funciones.
 
 Motivación upstream: NB-00006, NB-00004 parcial; capacidades F-11, F-13 y F-25; RA-02.
 
@@ -42,7 +42,7 @@ Cuatro decisiones de forma la acompañan:
 | Seis funciones planas con instancias identificadas (**adoptada**) | Superficie mínima y enumerable; dos escenas vivas en la misma página; el identificador opaco deja libre la representación interna | Cinco de las seis funciones llevan un parámetro de identificador; el anfitrión tiene que conservarlo |
 | Una instancia global única, sin identificador | Firmas más cortas; el anfitrión no conserva nada | Rompe **G-4**: no habría dos escenas vivas en la misma página, y `destruir` sería ambiguo. Además obligaría al bundle a tener estado global, que es lo contrario de lo que su versión anterior corrigió |
 | Reconstruir la instancia para cambiar el movimiento, en lugar de agregar la sexta función | Cinco funciones en lugar de seis | **Pierde la selección de pieza y produce un parpadeo**, y obliga al anfitrión a reponer la selección. Es exactamente el problema que la decisión del Product Owner del 2026-08-09 resolvió |
-| Un código de condición por función en lugar de por condición | Cada entrada de catálogo tendría su código propio | Multiplicaría los códigos sin agregar información: `INSTANCIA_DESCONOCIDA` significa lo mismo en las cinco funciones que lo informan, y el anfitrión hace lo mismo en las cinco. Es la distinción entre unidad de contrato —la condición— y unidad de catálogo —la función— que la categoría 03 ya declara |
+| Un código de condición por función en lugar de por condición | Cada entrada de catálogo tendría su código propio | Multiplicaría los códigos sin agregar información: `UNKNOWN_INSTANCE` significa lo mismo en las cinco funciones que lo informan, y el anfitrión hace lo mismo en las cinco. Es la distinción entre unidad de contrato —la condición— y unidad de catálogo —la función— que la categoría 03 ya declara |
 
 ## 5. Consecuencias positivas
 
@@ -88,4 +88,5 @@ Cuatro decisiones de forma la acompañan:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra la superficie de seis funciones planas con instancias identificadas, las siete garantías como parte del contrato, la lista cerrada de siete códigos con la distinción entre curso y código, la separación entre resultado de dibujo y resultado de la interpretación del backend, cuatro alternativas evaluadas y seis métricas de validación. |

@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -67,8 +67,8 @@ Permitir que el componente anfitrión resalte en la escena la pieza que correspo
 
 | Código | Causa | Respuesta de la fachada |
 | --- | --- | --- |
-| `INSTANCIA_DESCONOCIDA` | El identificador no corresponde a ninguna instancia viva | Ninguna instancia cambia y se informa el código |
-| `INDICE_FUERA_DE_RANGO` | El índice no corresponde a ninguna pieza del resultado de dibujo vigente, o no hay resultado de dibujo vigente porque no se cargó nada | La selección vigente se conserva y se informa el código. No se resalta ninguna pieza por aproximación |
+| `UNKNOWN_INSTANCE` | El identificador no corresponde a ninguna instancia viva | Ninguna instancia cambia y se informa el código |
+| `INDEX_OUT_OF_RANGE` | El índice no corresponde a ninguna pieza del resultado de dibujo vigente, o no hay resultado de dibujo vigente porque no se cargó nada | La selección vigente se conserva y se informa el código. No se resalta ninguna pieza por aproximación |
 
 Las dos condiciones terminan de forma controlada y dejan la escena exactamente como estaba.
 
@@ -83,7 +83,7 @@ Las dos condiciones terminan de forma controlada y dejan la escena exactamente c
 | --- | --- | --- | --- |
 | CA-01 | Una instancia con el texto del escenario E-1 cargado, con tres piezas de índices 0, 1 y 2, y ninguna pieza resaltada | El componente anfitrión invoca `seleccionarPieza(id, 2)` | Queda resaltada la pieza de índice 2, que es el ortoedro, y ninguna otra |
 | CA-02 | La misma instancia, con la pieza de índice 2 resaltada | El componente anfitrión invoca `seleccionarPieza(id, 0)` | Queda resaltada únicamente la pieza de índice 0, que es el cilindro: el resaltado es exclusivo |
-| CA-03 | Una instancia con el texto del escenario E-7 cargado, con seis piezas de índices 0 a 5 | El componente anfitrión invoca `seleccionarPieza(id, 6)` | La fachada informa `INDICE_FUERA_DE_RANGO`, la selección vigente se conserva y ninguna pieza se resalta por aproximación |
+| CA-03 | Una instancia con el texto del escenario E-7 cargado, con seis piezas de índices 0 a 5 | El componente anfitrión invoca `seleccionarPieza(id, 6)` | La fachada informa `INDEX_OUT_OF_RANGE`, la selección vigente se conserva y ninguna pieza se resalta por aproximación |
 | CA-04 | Una instancia con el texto del escenario E-7 cargado y la pieza de índice 3 resaltada | El componente anfitrión invoca `seleccionarPieza(id, 3)` otra vez | La pieza de índice 3 sigue resaltada y no hay dos piezas resaltadas a la vez |
 | CA-05 | Una instancia con el texto del escenario E-1 cargado y la pestaña de red vacía | El componente anfitrión invoca `seleccionarPieza(id, 1)` | Queda resaltada la pieza de índice 1, que es el cubo, y la pestaña de red registra exactamente 0 peticiones originadas por la fachada |
 
@@ -111,3 +111,4 @@ Las dos condiciones terminan de forma controlada y dejan la escena exactamente c
 | --- | --- | --- |
 | 1.0 | 2026-08-08 | Emisión inicial. Contrato de uso de `seleccionarPieza`, con cuatro flujos alternativos, dos condiciones de error y cinco criterios de aceptación anclados en los índices de los escenarios E-1 y E-7. |
 | 1.1 | 2026-08-11 | **Absorbe la promoción de F-13 a `Must Have`**, decidida por el Product Owner y registrada en `PRODUCT-INTAKE` **1.19** §4. La trazabilidad upstream remitía a `Alcance-Producto.md` **§4.2**, «capacidades declaradas con prioridad menor», y esa remisión quedó falsa: F-13 pasó a **§4.1** con el resto del alcance comprometido en la versión 1.6 de ese documento. Se corrige la sección y se declara la prioridad vigente. Ningún flujo, condición de error ni criterio de aceptación de este contrato de uso cambia: la sincronización por índice ya se especificaba entera, porque `PRODUCT-INTAKE` §17.7 P.8 la incluye entre lo que `PT-02` mide antes de comprometer la etapa `g`, que es precisamente el fundamento de la promoción. Sube minor. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |

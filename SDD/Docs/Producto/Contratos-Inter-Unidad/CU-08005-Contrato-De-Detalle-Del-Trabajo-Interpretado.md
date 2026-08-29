@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -71,8 +71,8 @@ Declarar el tipo de transferencia que devuelve un trabajo completo: sus datos, s
 
 | Código | Causa | Respuesta del contrato |
 | --- | --- | --- |
-| `CONTRATO_TRABAJO_NO_ENCONTRADO` | El identificador no corresponde a un trabajo visible para el solicitante, o no existe | Respuesta de error de CU-08006 con texto neutro que no distingue los dos casos. Terminación controlada |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado |
+| `WORK_NOT_FOUND` | El identificador no corresponde a un trabajo visible para el solicitante, o no existe | Respuesta de error de CU-08006 con texto neutro que no distingue los dos casos. Terminación controlada |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado |
 
 ### 6.1 Señales declaradas que no son error
 
@@ -80,7 +80,7 @@ Se separa de la tabla anterior porque no produce respuesta de error. **Este cód
 
 | Código | Causa | Respuesta del contrato |
 | --- | --- | --- |
-| `CONTRATO_TEXTO_NO_INTERPRETABLE` | El texto original no produjo ninguna pieza | El detalle llega con la colección de piezas en cero elementos y con las observaciones de error de validación pobladas. Recuperación: la persona corrige y reedita por CU-08003 |
+| `TEXT_NOT_PARSEABLE` | El texto original no produjo ninguna pieza | El detalle llega con la colección de piezas en cero elementos y con las observaciones de error de validación pobladas. Recuperación: la persona corrige y reedita por CU-08003 |
 
 ## 7. Postcondiciones
 
@@ -106,7 +106,7 @@ Se separa de la tabla anterior porque no produce respuesta de error. **Este cód
 | Dimensión | Referencia |
 | --- | --- |
 | Necesidad de negocio | NB-00004, NB-00005, NB-00006, NB-00007, NB-00009 |
-| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-02009`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) sobre CA-04, [`RN-02003`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre la excepción `CONTRATO_TRABAJO_NO_ENCONTRADO` y [`RN-02010`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) sobre CA-07 y CA-09, las tres de `GeometriaFactory-Domain`. La tolerancia de claves, la reconstrucción de piezas y el recálculo de valores son también invariantes de ese proyecto de código, sin identificador nombrable desde acá al momento de esta emisión. Ver `Especificacion-Funcional.md` §5 |
+| Reglas de negocio aplicables | Ninguna propia: este proyecto de código no las redacta. Aplican [`RN-02009`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02009-Observacion-De-Error-Con-Posicion-Y-Campo.md) sobre CA-04, [`RN-02003`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02003-Trabajo-Ajeno-Indistinguible-De-Inexistente.md) sobre la excepción `WORK_NOT_FOUND` y [`RN-02010`](../../Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/RN-02010-Desenlace-Exclusivo-Del-Administrador-Y-Terminalidad.md) sobre CA-07 y CA-09, las tres de `GeometriaFactory-Domain`. La tolerancia de claves, la reconstrucción de piezas y el recálculo de valores son también invariantes de ese proyecto de código, sin identificador nombrable desde acá al momento de esta emisión. Ver `Especificacion-Funcional.md` §5 |
 | Historias de usuario a generar en 06 | **Pronóstico de la pasada de diseño, superado y no acuñado.** Esta celda anunciaba las 4 historia(s) `US-08011`, `US-08012`, `US-08013`, `US-08020` «a generar en 06» cuando `GeometriaFactory-Contracts` era un proyecto de código con rango propio. **La consolidación de las unidades de entrega lo retiró y esas historias nunca se acuñaron con ese identificador**: las que cubren este contrato viven hoy en los dos [`Product-Backlog.md`](../../Unidades-Entrega/) con la numeración de su unidad. **La correspondencia una a una NO se reconstruye acá**: ningún registro de reconexión la conserva, y deducirla del texto sería inventarla. Queda como ítem diferido — ver la nota de abajo |
 | Componentes esperados en 05 | Familia de tipos de transferencia de detalle del ensamblado de contratos |
 | Tests previstos en 08 | Pruebas de integración sobre los escenarios E-1, E-3, E-4 y E-5 del intake; comparación de la carga útil recibida por los dos papeles para CA-06; detalle de un trabajo rechazado con comentario (CA-07) y de uno aprobado sin comentario (CA-09); inspección de superficie pública de los dos bloques para CA-08 |
@@ -132,6 +132,7 @@ Se separa de la tabla anterior porque no produce respuesta de error. **Este cód
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.5 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.4 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-08 | Emisión inicial. Declara el detalle del trabajo interpretado, con piezas, componentes y observaciones con severidad, índice de figura, campo señalado y el par de valor declarado y valor derivado. |
 | 1.0 | 2026-08-08 | Correcciones absorbidas de la ronda 1 de auditoría (`Audit/B-02-03-GeometriaFactory-Contracts-r1.md`), sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-12**: CA-06 declaraba cinco bloques y verificaba «4 de 4»; pasa a «5 de 5» con el quinto bloque nombrado, que es el conteo que §4 paso 2 sostiene. **H-14**: `CONTRATO_TEXTO_NO_INTERPRETABLE`, que en este caso de uso el propio texto declara que no es respuesta de error, sale de la tabla de §6 y pasa a la subsección nueva §6.1, que además declara por qué el mismo código sí es error en CU-08003. **H-07**: la fila de reglas de negocio de §9 pasa a referir por identificador `RN-08003` y `RN-08009` de `GeometriaFactory-Domain`, con enlaces relativos. **H-09**: la sección opcional se renumera de §12 a §17, el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna para `library`. |

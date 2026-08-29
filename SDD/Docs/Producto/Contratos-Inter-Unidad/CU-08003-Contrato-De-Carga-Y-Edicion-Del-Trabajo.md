@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -71,15 +71,15 @@ Dos rasgos del modelo vigente ordenan el resto. **Enviar es la única acción de
 
 | Código | Causa | Respuesta del contrato |
 | --- | --- | --- |
-| `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | La solicitud llega sin nombre, sin fecha o sin texto original | Respuesta de error de CU-08006 que nombra el campo ausente. Recuperación por corrección y reintento |
-| `CONTRATO_TRABAJO_NO_ENCONTRADO` | El identificador no corresponde a un trabajo del solicitante, o no existe | Respuesta de error de CU-08006 con texto neutro que **no distingue** el caso de trabajo ajeno del de trabajo inexistente. Terminación controlada |
-| `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | **El alumno** pide eliminar un trabajo suyo que no está en estado `Borrador`. Enunciado revisado: el código expresa que el estado del trabajo no habilita al solicitante a eliminarlo, y sólo se produce en el camino del alumno | Respuesta de error de CU-08006 que declara el estado actual del trabajo. Terminación controlada |
-| `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` | Se pide **enviar o reeditar** un trabajo que está en `Pendiente`, `Finalizado` o `Rechazado`, y que por lo tanto es de **sólo lectura** para el alumno | Respuesta de error de CU-08006 que declara el estado actual del trabajo, **sin escritura**: ni el texto original ni el estado cambian. Terminación controlada. Entra al conjunto cerrado por `PRODUCT-INTAKE` **1.29** §17.4 P.3 |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado |
+| `REQUIRED_FIELD_MISSING` | La solicitud llega sin nombre, sin fecha o sin texto original | Respuesta de error de CU-08006 que nombra el campo ausente. Recuperación por corrección y reintento |
+| `WORK_NOT_FOUND` | El identificador no corresponde a un trabajo del solicitante, o no existe | Respuesta de error de CU-08006 con texto neutro que **no distingue** el caso de trabajo ajeno del de trabajo inexistente. Terminación controlada |
+| `STATE_FORBIDS_DELETE` | **El alumno** pide eliminar un trabajo suyo que no está en estado `Borrador`. Enunciado revisado: el código expresa que el estado del trabajo no habilita al solicitante a eliminarlo, y sólo se produce en el camino del alumno | Respuesta de error de CU-08006 que declara el estado actual del trabajo. Terminación controlada |
+| `STATE_FORBIDS_UPDATE` | Se pide **enviar o reeditar** un trabajo que está en `Pendiente`, `Finalizado` o `Rechazado`, y que por lo tanto es de **sólo lectura** para el alumno | Respuesta de error de CU-08006 que declara el estado actual del trabajo, **sin escritura**: ni el texto original ni el estado cambian. Terminación controlada. Entra al conjunto cerrado por `PRODUCT-INTAKE` **1.29** §17.4 P.3 |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Respuesta de error de CU-08006 con texto neutro y sin dirección del servicio que falló. Handoff al estado degradado |
 
-**`CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` no cubría estas dos escrituras.** Su enunciado está **acotado a la eliminación** y al camino del alumno; el envío y la reedición forzados sobre un trabajo ya entregado son otras dos escrituras que el mismo estado prohíbe, y hasta esta emisión caían en el genérico. Los dos códigos conviven y **ninguno reemplaza al otro**.
+**`STATE_FORBIDS_DELETE` no cubría estas dos escrituras.** Su enunciado está **acotado a la eliminación** y al camino del alumno; el envío y la reedición forzados sobre un trabajo ya entregado son otras dos escrituras que el mismo estado prohíbe, y hasta esta emisión caían en el genérico. Los dos códigos conviven y **ninguno reemplaza al otro**.
 
-**Por qué los dos caminos de eliminación comparten los códigos y no hacen falta más.** Al alumno lo acotan dos cosas: la pertenencia, que resuelve `CONTRATO_TRABAJO_NO_ENCONTRADO` sin revelar la existencia del trabajo ajeno, y el estado, que resuelve `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR`. Al administrador **no lo acota ningún estado**, de modo que ese segundo código no se produce nunca en su camino; lo único que lo acota es la visibilidad, y un trabajo en estado `Borrador` le resulta indistinguible de uno inexistente, que es exactamente lo que `CONTRATO_TRABAJO_NO_ENCONTRADO` ya expresa. Un código nuevo por papel no agregaría ninguna distinción verificable y sí agregaría superficie donde el contrato puede filtrar información sobre recursos que el solicitante no debería saber que existen.
+**Por qué los dos caminos de eliminación comparten los códigos y no hacen falta más.** Al alumno lo acotan dos cosas: la pertenencia, que resuelve `WORK_NOT_FOUND` sin revelar la existencia del trabajo ajeno, y el estado, que resuelve `STATE_FORBIDS_DELETE`. Al administrador **no lo acota ningún estado**, de modo que ese segundo código no se produce nunca en su camino; lo único que lo acota es la visibilidad, y un trabajo en estado `Borrador` le resulta indistinguible de uno inexistente, que es exactamente lo que `WORK_NOT_FOUND` ya expresa. Un código nuevo por papel no agregaría ninguna distinción verificable y sí agregaría superficie donde el contrato puede filtrar información sobre recursos que el solicitante no debería saber que existen.
 
 ### 6.1 Señales declaradas que no son error
 
@@ -87,7 +87,7 @@ Se separa de la tabla anterior porque no produce respuesta de error y no forma p
 
 | Código | Causa | Respuesta del contrato |
 | --- | --- | --- |
-| `CONTRATO_TEXTO_NO_INTERPRETABLE` | El texto original enviado no verifica | El envío **procede**: el resultado trae estado `Borrador`, el texto conservado íntegro y las observaciones de error de validación con índice de figura y campo. Recuperación: la persona corrige y vuelve a enviar. Dejó de ser código de error en esta versión, porque con el envío como acción única ya no existe una operación que falle por este motivo |
+| `TEXT_NOT_PARSEABLE` | El texto original enviado no verifica | El envío **procede**: el resultado trae estado `Borrador`, el texto conservado íntegro y las observaciones de error de validación con índice de figura y campo. Recuperación: la persona corrige y vuelve a enviar. Dejó de ser código de error en esta versión, porque con el envío como acción única ya no existe una operación que falle por este motivo |
 
 ## 7. Postcondiciones
 
@@ -102,8 +102,8 @@ Se separa de la tabla anterior porque no produce respuesta de error y no forma p
 | --- | --- | --- | --- |
 | CA-01 | El tipo de solicitud de envío de trabajo | Se inspecciona su superficie pública | El texto original está declarado como **una sola cadena**, y el tipo declara 0 campos de pieza, de componente, de valor derivado, de observación y de estado pretendido: el estado lo decide la interpretación, no el consumidor |
 | CA-02 | El texto del escenario E-2 del intake —un ortoedro con dos comas finales y la clave `Tapas`— | El código de la pieza pública arma la solicitud de envío con ese texto | El campo de texto original transporta las dos comas finales y la clave `Tapas` sin modificación: 0 caracteres alterados respecto del original |
-| CA-03 | Un trabajo propio en estado `Pendiente` y una sesión de papel alumno | El código de la pieza pública arma la solicitud de eliminación con su identificador | La respuesta es el tipo de error de CU-08006 con código `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` y declara el estado actual |
-| CA-04 | El trabajo de otra persona, cuyo identificador se conoce | El código de la pieza pública pide su envío con el identificador ajeno | La respuesta es el tipo de error de CU-08006 con código `CONTRATO_TRABAJO_NO_ENCONTRADO`, con el mismo texto que produce un identificador inexistente |
+| CA-03 | Un trabajo propio en estado `Pendiente` y una sesión de papel alumno | El código de la pieza pública arma la solicitud de eliminación con su identificador | La respuesta es el tipo de error de CU-08006 con código `STATE_FORBIDS_DELETE` y declara el estado actual |
+| CA-04 | El trabajo de otra persona, cuyo identificador se conoce | El código de la pieza pública pide su envío con el identificador ajeno | La respuesta es el tipo de error de CU-08006 con código `WORK_NOT_FOUND`, con el mismo texto que produce un identificador inexistente |
 | CA-05 | Un trabajo cuyo texto original es el escenario E-5 del intake, con una figura de tipo desconocido en la posición 1 | El código de la pieza pública lo envía | **El envío no produce error**: el resultado trae estado `Borrador` y una observación de error de validación con índice de figura 1 y campo `Tipo`; el trabajo **no** pasa a estado `Pendiente` |
 | CA-06 | El texto del escenario E-4 del intake, un cubo cuyos valores declarados coinciden con los derivados | El código de la pieza pública lo envía | El resultado trae estado `Pendiente` y 0 observaciones: un texto que verifica **no puede** quedar en estado `Borrador` |
 | CA-07 | Un trabajo en estado `Pendiente` de un alumno cualquiera y una sesión de papel administrador | El código de la pieza pública arma la solicitud de eliminación con su identificador | La eliminación procede y el resultado la confirma: al administrador no lo acota el estado. Es la misma solicitud de CA-03, que para el alumno falla |
@@ -135,6 +135,7 @@ Se separa de la tabla anterior porque no produce respuesta de error y no forma p
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.5 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../Norma-De-Nomenclatura.md`](../Norma-De-Nomenclatura.md) §8. **11 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.4 | 2026-08-29 | **Parche `P-02` de la mesa evaluadora del 2026-08-29** ([`../../Audit/Mesa-2026-08-29.md`](../../Audit/Mesa-2026-08-29.md), hallazgo `H-02`, evidencia **E2**, severidad **S2**). La fila «Historias de usuario a generar en 06» de §9 anunciaba historias del rango `08` **que nunca se acuñaron**: la consolidación de las unidades de entrega retiró ese rango y las historias que cubren este contrato se generaron con la numeración de su unidad. La celda pasa a declarar el hecho en lugar de seguir prometiendo artefactos inexistentes, y **la correspondencia una a una NO se reconstruye**: ningún registro de reconexión la conserva y deducirla del texto sería inventarla. Queda como **ítem diferido** con sus cuatro campos, con evento de cierre en la próxima emisión de la 06 o en la Fase J. **Ninguna otra sección cambia.** |
 | 1.0 | 2026-08-08 | Emisión inicial. Declara los tipos de alta, edición, eliminación y finalización del trabajo, con el texto original como cadena no interpretada en el contrato. |
 | 1.0 | 2026-08-08 | Correcciones absorbidas de la ronda 1 de auditoría (`Audit/B-02-03-GeometriaFactory-Contracts-r1.md`), sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-07**: la fila de reglas de negocio de §9 pasa a referir por identificador `RN-08003`, `RN-08004`, `RN-08005` y `RN-08008` de `GeometriaFactory-Domain`, cada una contra el criterio de aceptación que sostiene, con enlaces relativos. **H-09**: la sección opcional se renumera de §12 a §17, el número que `Rules-Especificacion-Funcional.md` §4.3 le asigna para `library`. |
@@ -146,7 +147,7 @@ Se separa de la tabla anterior porque no produce respuesta de error y no forma p
 
 Sección opcional de `Rules-Especificacion-Funcional.md` §4.3, que la numera **§17** y la reserva para `library`. Se conserva su número de la regla, aunque deje un hueco tras §11, para que un lector automatizado que busque §17 en cualquier caso de uso del producto encuentre siempre lo mismo.
 
-- **Esta emisión es un cambio incompatible**: **entra** al conjunto cerrado de CU-08006 el código `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` para el envío y la reedición fuera de `Borrador` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), y obliga al despliegue conjunto de las dos piezas desplegables (`RT-06`). **`CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` no cambia de enunciado y no se recicla ningún identificador retirado.**
+- **Esta emisión es un cambio incompatible**: **entra** al conjunto cerrado de CU-08006 el código `STATE_FORBIDS_UPDATE` para el envío y la reedición fuera de `Borrador` (`PRODUCT-INTAKE` **1.29** §17.4 P.3), y obliga al despliegue conjunto de las dos piezas desplegables (`RT-06`). **`STATE_FORBIDS_DELETE` no cambia de enunciado y no se recicla ningún identificador retirado.**
 - Cambiar el campo de texto original de cadena a una estructura interpretada es el cambio incompatible de mayor impacto de todo el ensamblado: contradice la decisión pre-tomada de `PRODUCT-INTAKE` §17.4 P.11 y obliga a rehacer los dos extremos.
 - Agregar un estado al conjunto cerrado del trabajo se trata como incompatible: la pieza pública deja de cubrir todos los casos aunque compile.
 - Agregar un campo opcional a la solicitud de alta es compatible.

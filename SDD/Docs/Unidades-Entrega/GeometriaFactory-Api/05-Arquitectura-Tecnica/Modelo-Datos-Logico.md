@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Modelo-Datos-Logico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -135,8 +135,8 @@ Entidad conceptual de origen: **Observación** (`Modelo-Conceptual.md` §3.6).
 
 | Índice | Tabla | Columnas | Tipo | Motivación |
 | --- | --- | --- | --- | --- |
-| IX-01 | Cuenta | Correo normalizado | **Único** | Es **la segunda línea de `RN-06002` e `INV-01`**: la consulta previa del consumidor no es garantía por sí sola. La colisión que la consulta no vio termina en `CORREO_YA_REGISTRADO` ([`ADR-06003`](Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md)) |
-| IX-02 | Cuenta | Papel | **Único parcial**, sólo sobre las filas con papel `Administrador` | Sostiene `INV-05` y `RN-06001` en el almacén: la materialización que dejaría dos administradores termina en `UNICIDAD_DE_ADMINISTRADOR_VIOLADA`. Es **parcial** porque las cuentas de alumno no son únicas por papel |
+| IX-01 | Cuenta | Correo normalizado | **Único** | Es **la segunda línea de `RN-06002` e `INV-01`**: la consulta previa del consumidor no es garantía por sí sola. La colisión que la consulta no vio termina en `EMAIL_ALREADY_REGISTERED` ([`ADR-06003`](Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md)) |
+| IX-02 | Cuenta | Papel | **Único parcial**, sólo sobre las filas con papel `Administrador` | Sostiene `INV-05` y `RN-06001` en el almacén: la materialización que dejaría dos administradores termina en `ADMINISTRATOR_UNIQUENESS_VIOLATED`. Es **parcial** porque las cuentas de alumno no son únicas por papel |
 | IX-03 | Trabajo | Dueño | Compuesto con Estado | Sostiene las **dos** consultas de listado del producto: la del alumno, acotada por dueño; y la del administrador, acotada por estado —sin borradores— y agrupable por dueño. Es el índice del que depende el requerimiento de tiempo del listado |
 | IX-04 | Pieza | Trabajo, Posición en el conjunto raíz | **Único compuesto** | Sostiene `RC-06002`: dos piezas del mismo trabajo no pueden ocupar la misma posición, que es la identidad de dominio de la pieza |
 | IX-05 | Componente | Pieza | Simple | Sostiene la carga del detalle, y **sólo** del detalle: el listado nunca lo recorre |
@@ -155,7 +155,7 @@ Entidad conceptual de origen: **Observación** (`Modelo-Conceptual.md` §3.6).
 | RE-05 | Cuenta | A lo sumo **una** fila con papel `Administrador` (IX-02) | `RN-06001`, `INV-05` |
 | RE-06 | Trabajo | Clave primaria sobre la identidad, y clave foránea de dueño hacia Cuenta **con arrastre del retiro** | `RN-06007`, `RC-06005` |
 | RE-07 | Trabajo | Estado pertenece al conjunto cerrado de **4** valores | `Modelo-Conceptual.md` §4 |
-| RE-08 | Trabajo | El texto original no admite ser reemplazado por uno distinto en una fila existente | `RN-06008`, `RC-06001`, `ESCRITURA_QUE_REESCRIBE_EL_TEXTO_ORIGINAL` |
+| RE-08 | Trabajo | El texto original no admite ser reemplazado por uno distinto en una fila existente | `RN-06008`, `RC-06001`, `WRITE_REWRITES_ORIGINAL_JSON` |
 | RE-09 | Pieza | Clave foránea hacia Trabajo **con arrastre del retiro**, y posición única por trabajo (IX-04) | `RC-06002`, `RC-06005` |
 | RE-10 | Pieza | La posición es mayor o igual que cero y menor que la cantidad de figuras del conjunto raíz del trabajo | `RC-06002` |
 | RE-11 | Componente | Clave foránea hacia Pieza **con arrastre del retiro** | `RC-06005` |
@@ -174,7 +174,7 @@ Entidad conceptual de origen: **Observación** (`Modelo-Conceptual.md` §3.6).
 | Qué hace | Crea las **cinco** tablas de §2, los **seis** índices de §3 y las **quince** restricciones de §4 sobre un almacén inexistente |
 | Cuándo se aplica | **Al arrancar**, automáticamente, antes de que el servicio atienda su primera petición ([`ADR-06007`](Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) |
 | Herramienta | La del mapeador que el intake ancla en la etapa `a`, instalada como **herramienta local del repositorio** para que su versión quede versionada junto al código (`PRODUCT-INTAKE` §17.1.P.1 · GeometriaFactory-Infrastructure) |
-| Inmutabilidad | **Una transformación ya fusionada no se edita.** Si hay que corregirla, entra una nueva. Es la causa frecuente de `MIGRACION_NO_APLICABLE` |
+| Inmutabilidad | **Una transformación ya fusionada no se edita.** Si hay que corregirla, entra una nueva. Es la causa frecuente de `MIGRATION_NOT_APPLICABLE` |
 | Verificación | Puerta bloqueante del pipeline: **las transformaciones se aplican solas sobre un almacén inexistente**, criterio de aceptación de la etapa `c` (`PRODUCT-INTAKE` §17.1.P.8 · GeometriaFactory-Infrastructure) |
 | Qué pasa si no se puede aplicar | **El arranque se detiene.** No se aplica un esquema por aproximación y **no se descarta el almacén** ([`ADR-06007`](Adrs/ADR-06007-Transformaciones-Al-Arrancar-Con-Linaje-Inmutable.md)) |
 
@@ -217,4 +217,5 @@ La consecuencia sobre este modelo es concreta y verificable: **ninguna de las ci
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial del modelo lógico, como **apartamiento declarado** de la guía del tipo `library` con el mismo fundamento con el que la categoría 02 emitió su modelo conceptual. Declara las cinco tablas con sus tipos físicos y su nulabilidad, los seis índices con su motivación —incluido el único sobre la forma normalizada del correo y el único parcial del papel `Administrador`—, las quince restricciones con los cuatro arrastres del retiro, la transformación inicial `TR-01` con su inmutabilidad y su verificación, la ausencia declarada de partición por instancia, la trazabilidad tabla por tabla contra las cinco entidades conceptuales y las siete reglas conceptuales, y cuatro puntos abiertos. |

@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-12001-Inicializar-Instancia-Del-Visor.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-08
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -69,8 +69,8 @@ Permitir que el componente anfitrión cree una instancia del visor sobre un elem
 
 | Código | Causa | Respuesta de la fachada |
 | --- | --- | --- |
-| `CAPACIDAD_GRAFICA_AUSENTE` | El navegador no provee la capacidad gráfica tridimensional | No se crea instancia, no se devuelve identificador y se informa el código. La combinación está declarada no soportada en `Compatibilidad-Plataformas.md`; el componente anfitrión decide qué mostrar en su lugar |
-| `ELEMENTO_DE_DIBUJO_INVALIDO` | El elemento recibido no sirve como superficie de dibujo, o su tamaño es cero | No se crea instancia y se informa el código. La página queda como estaba: la fachada no crea, no mueve ni redimensiona elementos de la página |
+| `GRAPHICS_CAPABILITY_MISSING` | El navegador no provee la capacidad gráfica tridimensional | No se crea instancia, no se devuelve identificador y se informa el código. La combinación está declarada no soportada en `Compatibilidad-Plataformas.md`; el componente anfitrión decide qué mostrar en su lugar |
+| `INVALID_CANVAS_ELEMENT` | El elemento recibido no sirve como superficie de dibujo, o su tamaño es cero | No se crea instancia y se informa el código. La página queda como estaba: la fachada no crea, no mueve ni redimensiona elementos de la página |
 
 Las dos excepciones terminan de forma controlada: no dejan escena a medio crear ni contexto gráfico tomado sin dueño (garantía G-7 del contrato de fachada).
 
@@ -85,8 +85,8 @@ Las dos excepciones terminan de forma controlada: no dejan escena a medio crear 
 | --- | --- | --- | --- |
 | CA-01 | Una página con el archivo de guion cargado y un elemento de dibujo de 800 × 600 en un navegador con capacidad gráfica tridimensional | El componente anfitrión invoca `inicializar(elemento, opciones)` | La fachada devuelve un identificador de instancia y la escena queda creada con 0 piezas dibujadas |
 | CA-02 | La misma página, con la instancia ya creada por CA-01 | El componente anfitrión invoca `inicializar` sobre un segundo elemento de dibujo de 400 × 300 | La fachada devuelve un segundo identificador distinto del primero, y las dos instancias quedan vivas y aisladas: seleccionar una pieza en una no altera la otra |
-| CA-03 | Una página cuyo navegador no provee la capacidad gráfica tridimensional | El componente anfitrión invoca `inicializar(elemento, opciones)` | La fachada no devuelve identificador, informa `CAPACIDAD_GRAFICA_AUSENTE` y no deja escena creada |
-| CA-04 | Una página con un elemento de dibujo de 0 × 0 | El componente anfitrión invoca `inicializar(elemento, opciones)` | La fachada no devuelve identificador e informa `ELEMENTO_DE_DIBUJO_INVALIDO` |
+| CA-03 | Una página cuyo navegador no provee la capacidad gráfica tridimensional | El componente anfitrión invoca `inicializar(elemento, opciones)` | La fachada no devuelve identificador, informa `GRAPHICS_CAPABILITY_MISSING` y no deja escena creada |
+| CA-04 | Una página con un elemento de dibujo de 0 × 0 | El componente anfitrión invoca `inicializar(elemento, opciones)` | La fachada no devuelve identificador e informa `INVALID_CANVAS_ELEMENT` |
 | CA-05 | Una página con el archivo de guion cargado y la pestaña de red abierta y vacía | El componente anfitrión invoca `inicializar(elemento, opciones)` | La pestaña de red registra exactamente 0 peticiones originadas por la fachada, y el almacenamiento del navegador queda sin ninguna clave nueva |
 | CA-06 | Una página con un elemento de dibujo válido y opciones que declaran la órbita de la cámara prendida y el giro de las figuras apagado | El componente anfitrión invoca `inicializar(elemento, opciones)` y luego `cargarJson` con el texto del escenario E-1 | La cámara gira sola alrededor del conjunto, las tres piezas quedan quietas, y la disposición es la misma que con los dos movimientos apagados, comparable pieza por pieza |
 | CA-07 | La misma página, invocando `inicializar` **sin** la parte de opciones que gobierna el movimiento | El componente anfitrión invoca `inicializar(elemento, opciones)` | Los dos movimientos quedan apagados: la escena sólo se mueve por acción de la persona, y el almacenamiento del navegador sigue sin ninguna clave nueva |
@@ -114,6 +114,7 @@ Las dos excepciones terminan de forma controlada: no dejan escena a medio crear 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-08 | Emisión inicial. Contrato de uso de `inicializar`, con tres flujos alternativos, dos condiciones de error y cinco criterios de aceptación con valores concretos. |
 | 1.0 | 2026-08-08 | Corrección absorbida del audit `B-02-03-GeometriaFactory-Visor-r1.md`, sin subir versión por `Master-Prompt.md` §5 (documento en estado `Propuesto`). **H-10**: la cabecera sustituye la referencia a `Compatibilidad-Plataformas.md` sin sección por §2.2 y §4, y completa con su sección concreta las referencias a `NB-00006`, `Vision-Producto.md` y `Alcance-Producto.md`. |
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, dentro de la cual se validó la fachada de este proyecto de código. **Sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **Capacidad F-25, movimiento automático de la escena**: §4 paso 1 declara las **dos opciones de gobierno** que `inicializar` recibe y el paso 4 las ejerce al crear la escena; **FA-03** precisa que con opciones ausentes o parciales los dos movimientos arrancan apagados, porque consultar la preferencia de movimiento reducido del sistema violaría la garantía G-3; y nacen **CA-06** y **CA-07**, que verifican el gobierno y el arranque apagado sin romper el determinismo de la disposición ni la garantía G-2. Ningún código de condición nuevo. Concuerda con `Definicion-Contrato-De-Fachada.md` §4.1 y §5.5. |

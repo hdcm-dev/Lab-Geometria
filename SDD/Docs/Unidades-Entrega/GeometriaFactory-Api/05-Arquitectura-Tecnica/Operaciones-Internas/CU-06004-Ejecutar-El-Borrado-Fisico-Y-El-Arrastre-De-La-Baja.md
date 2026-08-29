@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** CU-06004-Ejecutar-El-Borrado-Fisico-Y-El-Arrastre-De-La-Baja.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional + API Designer (AG-02)
@@ -71,8 +71,8 @@ El alumno y el administrador son sujetos de las reglas: uno pierde sus trabajos,
 
 | Código | Causa | Respuesta del caso de uso |
 | --- | --- | --- |
-| `RETIRO_PARCIAL_NO_ADMITIDO` | Se pidió la baja de una cuenta **sin declarar el arrastre** de sus trabajos, o declarándolo sobre un subconjunto | Termina sin retirar nada. **La baja arrastra todo o no ocurre** (RN-06007). Aceptar un arrastre parcial dejaría trabajos sin dueño en el almacén, y el criterio con el que la regla se verifica es precisamente que **no quede ningún trabajo del alumno dado de baja** |
-| `ALMACEN_NO_DISPONIBLE` | El archivo del almacén no está alcanzable | Termina de forma **degradada**, sin retirar nada. Tiene su entrada en `CU-06003` §6, con la misma causa |
+| `PARTIAL_DELETION_NOT_ALLOWED` | Se pidió la baja de una cuenta **sin declarar el arrastre** de sus trabajos, o declarándolo sobre un subconjunto | Termina sin retirar nada. **La baja arrastra todo o no ocurre** (RN-06007). Aceptar un arrastre parcial dejaría trabajos sin dueño en el almacén, y el criterio con el que la regla se verifica es precisamente que **no quede ningún trabajo del alumno dado de baja** |
+| `STORE_UNAVAILABLE` | El archivo del almacén no está alcanzable | Termina de forma **degradada**, sin retirar nada. Tiene su entrada en `CU-06003` §6, con la misma causa |
 
 ## 7. Postcondiciones
 
@@ -86,7 +86,7 @@ El alumno y el administrador son sujetos de las reglas: uno pierde sus trabajos,
 | --- | --- | --- | --- |
 | CA-01 | Un trabajo en estado `Pendiente` con 3 piezas, sus componentes y 2 observaciones | Se retira | No queda **ninguna** fila del trabajo, de sus piezas, de sus componentes ni de sus observaciones. El borrado es físico y no deja marca |
 | CA-02 | Una cuenta de alumno con tres trabajos, uno en `Borrador`, uno en `Rechazado` —con comentario— y uno en `Finalizado` | Se da de baja con su arrastre declarado | No queda la cuenta ni **ninguno de los tres trabajos**, ni el comentario del rechazado. Es el criterio con el que RN-06007 se verifica |
-| CA-03 | La misma cuenta | Se pide la baja **sin declarar el arrastre** | Devuelve `RETIRO_PARCIAL_NO_ADMITIDO` y **la cuenta y los tres trabajos siguen enteros** |
+| CA-03 | La misma cuenta | Se pide la baja **sin declarar el arrastre** | Devuelve `PARTIAL_DELETION_NOT_ALLOWED` y **la cuenta y los tres trabajos siguen enteros** |
 | CA-04 | Una cuenta sin ningún trabajo | Se da de baja con su arrastre declarado | La cuenta se retira y la operación es exitosa |
 | CA-05 | Una baja de cuenta con tres trabajos, interrumpida después del primero | Se consulta el almacén | Están **los tres trabajos y la cuenta**: la unidad de trabajo no se cerró y no quedó retiro parcial |
 
@@ -116,6 +116,7 @@ El alumno y el administrador son sujetos de las reglas: uno pierde sus trabajos,
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. |
 | 1.1 | 2026-08-10 | Ronda 2 de auditoría: correcciones de `SDD/Docs/Audit/B-02-03-GeometriaFactory-Infrastructure-r1.md` contra el `PRODUCT-INTAKE` **1.12**. **H-05**: la primera nota de §10 atribuía a `CU-06007` la conservación de la cuenta y de todos sus trabajos, que el `CU-06007` local —«Producir la contraseña provisoria del reseteo»— no hace, porque no persiste, no toca la cuenta y no ve sus trabajos. La atribución pasa a **RN-06012**, cuyo tramo en esta capa `Especificacion-Funcional.md` §6 asigna a `CU-06005` y a este `CU-06004` por contraste. **H-02**: la trazabilidad upstream cita el `PRODUCT-INTAKE` **1.12**. |
+| 1.2 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 
 ## 17. Compatibilidad de la superficie pública
 

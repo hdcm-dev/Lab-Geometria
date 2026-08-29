@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Flujo-Ejecucion.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -49,7 +49,7 @@ flowchart TD
 
 | Paso | Qué hace | Tolerancia que aplica | Observaciones que puede emitir |
 | --- | --- | --- | --- |
-| **P-1** | Admitir la entrada. Un texto nulo o vacío **no es un texto del alumno**: es un defecto de la invocación | Ninguna | Ninguna. Emite `TEXTO_ORIGINAL_AUSENTE` y termina |
+| **P-1** | Admitir la entrada. Un texto nulo o vacío **no es un texto del alumno**: es un defecto de la invocación | Ninguna | Ninguna. Emite `ORIGINAL_JSON_MISSING` y termina |
 | **P-2** | Leer el texto **con tolerancia a comas finales y omisión de comentarios**. El texto del alumno **no es estrictamente válido y eso es un hecho del producto** | **T2** | Si no se puede leer ni con la tolerancia: **0 figuras y una observación**, nunca la condición degradada (`G-7`) |
 | **P-3** | Contar las figuras del conjunto raíz —**incluidas las que después no se puedan reconstruir**— y resolver el tipo de cada una | Ninguna | Error de validación con **posición y campo `Tipo`** por cada tipo desconocido (`E-5`) |
 | **P-4** | Reconstruir cada pieza con sus dimensiones, aceptando las **claves sinónimas** del ortoedro y las **dos formas de cara** del cubo | **T1**, **T3** | Error de validación con posición y campo por cada dimensión que **no se pudo leer** (`E-8`). Una dimensión presente con valor cero **se lee y no descarta la figura** (`E-6`) |
@@ -78,14 +78,14 @@ flowchart TD
 | Terminación | Cuándo | Qué devuelve | Forma |
 | --- | --- | --- | --- |
 | **Resultado completo** | El recorrido llegó a P-7, con cero o más observaciones de cualquier especie | Cantidad, piezas y observaciones | Resultado normal. **Un texto que el alumno escribió mal termina acá**, no en la fila siguiente |
-| **Negativa sin recorrido** | La entrada no es utilizable: texto nulo o vacío (P-1) | `TEXTO_ORIGINAL_AUSENTE` | Negativa sin escritura |
-| **Terminación degradada** | El adaptador no pudo completar la interpretación **por una causa que no depende del texto** | `INTERPRETACION_NO_DISPONIBLE` | Terminación degradada. **No se inventan observaciones, no se devuelve un conjunto vacío como si fuera un resultado y no se informan figuras que no se contaron.** Esta capa no reintenta |
+| **Negativa sin recorrido** | La entrada no es utilizable: texto nulo o vacío (P-1) | `ORIGINAL_JSON_MISSING` | Negativa sin escritura |
+| **Terminación degradada** | El adaptador no pudo completar la interpretación **por una causa que no depende del texto** | `PARSE_RESULT_UNAVAILABLE` | Terminación degradada. **No se inventan observaciones, no se devuelve un conjunto vacío como si fuera un resultado y no se informan figuras que no se contaron.** Esta capa no reintenta |
 
 **La confusión que estas tres filas previenen es la más cara de la capa**, y `CU-06001` CA-10 existe para ella: si un texto ilegible devolviera la tercera en lugar de la primera, el producto le diría al alumno que el servicio no está disponible cuando lo que pasa es que su programa emitió algo que no se puede leer, y el alumno esperaría a que se recupere de un problema que no tiene.
 
 **Y una cuarta cosa que no es una terminación de este pipeline: el estado del trabajo.** El motor entrega el conjunto de observaciones con su especie y **el dominio resuelve**. Sólo el error de validación impide el paso a estado `Pendiente`; la advertencia no lo impide.
 
-**La verificación de valores no se puede pedir sin haber recorrido P-3 a P-5.** Si se la invoca sobre un conjunto sin reconstruir, termina en `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO` y **no devuelve «0 advertencias»**: sería indistinguible de un trabajo verificado sin discrepancias, y convertiría un defecto de orquestación en un resultado creíble. Es una condición **derivada por la categoría 02**, que ninguna fuente enuncia, y esta categoría la hereda sin reabrirla.
+**La verificación de valores no se puede pedir sin haber recorrido P-3 a P-5.** Si se la invoca sobre un conjunto sin reconstruir, termina en `PIECE_SET_NOT_REBUILT` y **no devuelve «0 advertencias»**: sería indistinguible de un trabajo verificado sin discrepancias, y convertiría un defecto de orquestación en un resultado creíble. Es una condición **derivada por la categoría 02**, que ninguna fuente enuncia, y esta categoría la hereda sin reabrirla.
 
 ## 5. Tabla de derivación por tipo
 
@@ -139,4 +139,5 @@ Los tipos son los **seis** que los escenarios ejercitan, más el que sólo apare
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. Declara el pipeline del validador en siete pasos con la tolerancia que aplica cada uno y las observaciones que puede emitir, la transformación de dato paso a paso, las tres terminaciones posibles con la confusión que previenen, la **tabla de derivación por tipo con sus siete filas** —que cierra el punto abierto derivado por la categoría 02—, lo que el pipeline deliberadamente no hace, y la trazabilidad contra las siete garantías, las cuatro trampas y los ocho escenarios. |

@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -26,7 +26,7 @@ Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; 
 
 1. **Ningún carácter proviene de otra fuente.** Ni del correo, ni del nombre, ni de la fecha, ni de un contador, ni de la identidad de la cuenta. La invocación **no recibe** ningún dato de la cuenta ni del acto que la motiva, de modo que no puede distinguir la habilitación del reseteo ni derivar el valor de nada.
 2. **Longitud fija de doce caracteres**, sobre un alfabeto de letras mayúsculas, minúsculas y dígitos **sin los caracteres que se confunden al dictarlos** —el cero con la o mayúscula, el uno con la ele minúscula y la i mayúscula—. **Sin signos de puntuación**, porque su nombre hablado es ambiguo y su escritura depende de la disposición del teclado.
-3. **Si la fuente de material impredecible no responde, no se produce valor.** Termina en `FUENTE_DE_ALEATORIEDAD_NO_DISPONIBLE` como terminación degradada, y el camino declarado es **volver a intentar el reseteo**, que produce un valor nuevo.
+3. **Si la fuente de material impredecible no responde, no se produce valor.** Termina en `RANDOMNESS_SOURCE_UNAVAILABLE` como terminación degradada, y el camino declarado es **volver a intentar el reseteo**, que produce un valor nuevo.
 4. **El valor se devuelve una sola vez, al consumidor, y no se registra en ninguna traza.** No se guarda en claro: lo que se guarda es su valor derivado, por el mecanismo de [`ADR-06004`](ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md).
 5. **La producción no recibe el estado de la cuenta.** Es la forma estructural de `RN-06015`: no puede comprobarlo, de modo que resetear no puede exigir que la cuenta esté habilitada.
 
@@ -96,4 +96,5 @@ Motivación upstream: NB-00001, NB-00002; RN-06014, RN-06015, RN-06016; INV-09; 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) §8. **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-10 | Emisión inicial. **Cierra el punto abierto de longitud y alfabeto que la categoría 02 derivó a esta categoría**, resolviendo la tensión declarada entre transcribible de viva voz y lejos de lo adivinable: doce caracteres alfanuméricos sin caracteres ambiguos, producidos íntegramente desde la fuente de material impredecible, sin parámetros de entrada y sin registro. Hereda sin reabrir la lectura de `CU-06007` §10 sobre cómo se sostiene la no repetición. Evalúa seis alternativas, declara cuatro trade-offs y fija siete métricas de validación. |
