@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10010-Sostener-La-Aplicacion-En-Estado-Degradado-Y-Reconexion.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -54,7 +54,7 @@ El actor primario es uno solo y no distingue papeles: el tratamiento es el mismo
 
 1. La persona ejecuta una acción que necesita datos: abrir un listado, abrir un trabajo, enviar, resolver.
 2. La pieza pública invoca desde su servidor el contrato correspondiente contra la pieza de datos.
-3. La pieza de datos no responde, o responde fuera de tiempo, y el contrato devuelve `CONTRATO_SERVICIO_NO_DISPONIBLE`.
+3. La pieza de datos no responde, o responde fuera de tiempo, y el contrato devuelve `SERVICE_UNAVAILABLE`.
 4. La pieza pública **no propaga ninguna excepción sin manejar** y entra en estado degradado sobre la ruta en la que la persona estaba.
 5. La pieza pública informa explícitamente que el laboratorio no tiene los datos en este momento, con un mensaje que **no incluye ninguna dirección de servicio interno**, ningún nombre de archivo de datos y ninguna traza de la implementación.
 6. La pieza pública conserva a la vista lo que la persona había escrito y le ofrece reintentar la misma acción.
@@ -74,10 +74,10 @@ El actor primario es uno solo y no distingue papeles: el tratamiento es el mismo
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde o responde fuera de tiempo | Estado degradado explícito sobre la ruta vigente, con reintento disponible. Es el curso del flujo principal |
-| `CONTRATO_ERROR_NO_CLASIFICADO` | Un fallo que el contrato no previó | Mismo tratamiento que el anterior, con un mensaje que declara que la acción no pudo completarse. **Es la garantía de que ningún fallo llega sin representación**, que es la definición de fallo silencioso que el producto viene a eliminar |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde o responde fuera de tiempo | Estado degradado explícito sobre la ruta vigente, con reintento disponible. Es el curso del flujo principal |
+| `UNCLASSIFIED_ERROR` | Un fallo que el contrato no previó | Mismo tratamiento que el anterior, con un mensaje que declara que la acción no pudo completarse. **Es la garantía de que ningún fallo llega sin representación**, que es la definición de fallo silencioso que el producto viene a eliminar |
 | Fallo no representado en el contrato | Un defecto de la propia pieza pública | Se presenta como estado degradado con mensaje neutro y se registra del lado del servidor. En ningún caso llega a la persona una traza, una dirección interna ni una pantalla rota |
-| `CAPACIDAD_GRAFICA_AUSENTE` | El navegador no provee la capacidad gráfica tridimensional | No es indisponibilidad del laboratorio: se informa como limitación del navegador y el resto del producto sigue disponible. Su tratamiento está en CU-10005 FA-04 y CU-10007 FA-05 |
+| `GRAPHICS_CAPABILITY_MISSING` | El navegador no provee la capacidad gráfica tridimensional | No es indisponibilidad del laboratorio: se informa como limitación del navegador y el resto del producto sigue disponible. Su tratamiento está en CU-10005 FA-04 y CU-10007 FA-05 |
 
 ## 7. Postcondiciones
 
@@ -104,7 +104,7 @@ El actor primario es uno solo y no distingue papeles: el tratamiento es el mismo
 | --- | --- |
 | Necesidad de negocio | [`NB-00008`](../../../../01-Necesidades-Negocio/Necesidades-De-Negocio/NB-00008-Alcance-Del-Laboratorio-Desde-El-Aula.md) |
 | Reglas de negocio aplicables | **Ninguna, y con motivo.** Las **dieciséis** reglas del producto restringen el dominio —cuentas, trabajos, estados y observaciones— y este caso de uso no toca ninguno de esos objetos: gobierna la presentación de la indisponibilidad. Lo que sí lo restringe es la regla de arquitectura de nivel producto RA-03, verificada en CA-02, y su enunciado vive en `PRODUCT-INTAKE` §14. Inventar una `RN-XX` acá sería redactar una regla que no existe aguas arriba |
-| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08006](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) completo, en particular sus códigos `CONTRATO_SERVICIO_NO_DISPONIBLE` y `CONTRATO_ERROR_NO_CLASIFICADO` |
+| Contratos de uso consumidos | [`GeometriaFactory-Contracts` CU-08006](../../../../Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md) completo, en particular sus códigos `SERVICE_UNAVAILABLE` y `UNCLASSIFIED_ERROR` |
 | Fachada del visualizador | Ninguna función. El bundle no hace red y por eso no participa de ningún tramo |
 | Historias de usuario a generar en 06 | US-10026, US-10027 |
 | Componentes esperados en 05 | Tratamiento transversal de la respuesta de error del contrato, componente de estado degradado y cartel de reconexión del circuito |
@@ -124,6 +124,7 @@ El actor primario es uno solo y no distingue papeles: el tratamiento es el mismo
 | 1.0 | 2026-08-09 | Emisión inicial. |
 | 1.1 | 2026-08-09 | Absorbe el `PRODUCT-INTAKE` **1.10**: la fila «Reglas de negocio aplicables» de §9 fundamenta su **ninguna** sobre el recuento de reglas del producto, que pasó de once a **quince**. El fundamento no cambia —las reglas restringen el dominio y este caso de uso no toca ninguno de esos objetos, mientras que lo que sí lo restringe es la regla de arquitectura **RA-03**—; lo que se corrige es el número. **Ningún flujo, estado, criterio de aceptación ni verificación de este caso de uso cambia.** Sube minor. |
 | 1.2 | 2026-08-10 | Alineación de recuento con `PRODUCT-INTAKE` **1.13**, que incorpora la regla **RN-10016** —habilitar una cuenta produce su contraseña provisoria— y lleva las reglas de negocio del producto de quince a **dieciséis**. §9 actualiza el recuento de las reglas del producto que este caso de uso declara **no** aplicables; el motivo de la ausencia es el mismo y **RN-10016 tampoco lo alcanza**: gobierna el circuito de credenciales y este caso de uso gobierna la presentación de la indisponibilidad. **Ninguna decisión de este documento cambia.** Sube minor. |
+| 1.3 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **5 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 
 ## 13. Interacción multiusuario y concurrencia
 

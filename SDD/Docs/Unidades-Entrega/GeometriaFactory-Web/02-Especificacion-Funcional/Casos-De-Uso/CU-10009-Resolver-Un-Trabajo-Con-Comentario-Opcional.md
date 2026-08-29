@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10009-Resolver-Un-Trabajo-Con-Comentario-Opcional.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -70,12 +70,12 @@ Permitir que el administrador le dé desenlace a un trabajo en estado `Pendiente
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_ESTADO_NO_PERMITE_DESENLACE` | El trabajo no está en estado `Pendiente`: nunca lo estuvo, o ya recibió su desenlace | La pieza pública declara el estado actual del trabajo y recarga el listado. Terminación controlada: **no hay camino para revertir un estado terminal** |
-| `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` | Quien pide el desenlace no es el administrador, aun sobre un trabajo propio en estado `Pendiente` | La solicitud no procede. La pieza pública devuelve al panel del solicitante con un mensaje neutro. Terminación controlada |
-| `CONTRATO_TRABAJO_NO_ENCONTRADO` | El identificador no corresponde a ningún trabajo que el solicitante vea, o no existe. Incluye el trabajo en estado `Borrador` | Mensaje neutro que no distingue los casos y regreso al listado |
-| `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | Falta el identificador o la decisión. **Nunca por el comentario**, que es opcional | La pieza pública señala el campo que el contrato nombra. Recuperación por corrección y reintento |
-| `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` | No se produce en el camino del administrador: a él no lo acota el estado sino la visibilidad | Se declara para que la ausencia sea deliberada y no un olvido |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **El trabajo conserva el estado que tenía** y el administrador puede reintentar |
+| `STATE_FORBIDS_OUTCOME` | El trabajo no está en estado `Pendiente`: nunca lo estuvo, o ya recibió su desenlace | La pieza pública declara el estado actual del trabajo y recarga el listado. Terminación controlada: **no hay camino para revertir un estado terminal** |
+| `OUTCOME_ADMIN_ONLY` | Quien pide el desenlace no es el administrador, aun sobre un trabajo propio en estado `Pendiente` | La solicitud no procede. La pieza pública devuelve al panel del solicitante con un mensaje neutro. Terminación controlada |
+| `WORK_NOT_FOUND` | El identificador no corresponde a ningún trabajo que el solicitante vea, o no existe. Incluye el trabajo en estado `Borrador` | Mensaje neutro que no distingue los casos y regreso al listado |
+| `REQUIRED_FIELD_MISSING` | Falta el identificador o la decisión. **Nunca por el comentario**, que es opcional | La pieza pública señala el campo que el contrato nombra. Recuperación por corrección y reintento |
+| `STATE_FORBIDS_DELETE` | No se produce en el camino del administrador: a él no lo acota el estado sino la visibilidad | Se declara para que la ausencia sea deliberada y no un olvido |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **El trabajo conserva el estado que tenía** y el administrador puede reintentar |
 
 ## 7. Postcondiciones
 
@@ -120,10 +120,11 @@ Permitir que el administrador le dé desenlace a un trabajo en estado `Pendiente
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **7 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-09 | Emisión inicial. |
 
 ## 13. Interacción multiusuario y concurrencia
 
 Sección opcional admitida por `Rules-Especificacion-Funcional.md` §4.3 para el tipo `web-monolith`.
 
-Hay un solo administrador, de modo que no existen dos desenlaces simultáneos sobre el mismo trabajo. Lo que sí puede coincidir es un desenlace con el alumno dueño mirando su listado: el listado no se actualiza solo, y el alumno ve el estado nuevo la próxima vez que lo pida. Y puede coincidir un desenlace con un envío del alumno sobre otro trabajo suyo: son trabajos distintos y no compiten. El caso que sí colisiona —el administrador resuelve un trabajo que ya fue resuelto en otra pestaña— lo cierra `CONTRATO_ESTADO_NO_PERMITE_DESENLACE`, que declara el estado actual y no aplica nada.
+Hay un solo administrador, de modo que no existen dos desenlaces simultáneos sobre el mismo trabajo. Lo que sí puede coincidir es un desenlace con el alumno dueño mirando su listado: el listado no se actualiza solo, y el alumno ve el estado nuevo la próxima vez que lo pida. Y puede coincidir un desenlace con un envío del alumno sobre otro trabajo suyo: son trabajos distintos y no compiten. El caso que sí colisiona —el administrador resuelve un trabajo que ya fue resuelto en otra pestaña— lo cierra `STATE_FORBIDS_OUTCOME`, que declara el estado actual y no aplica nada.

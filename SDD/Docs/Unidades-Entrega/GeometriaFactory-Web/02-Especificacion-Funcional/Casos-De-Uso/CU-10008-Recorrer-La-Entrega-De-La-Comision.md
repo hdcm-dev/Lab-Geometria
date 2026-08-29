@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10008-Recorrer-La-Entrega-De-La-Comision.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** Analista Funcional senior (AG-02)
@@ -61,22 +61,22 @@ Darle al administrador un único lugar donde ver los trabajos de toda la comisi�
 | --- | --- | --- | --- |
 | FA-01 | El administrador abre un trabajo en estado `Pendiente` para resolverlo | El listado le entrega el identificador. El desenlace se ejerce en CU-10009, no desde el listado: **el elemento de listado no transporta ningún campo de decisión** | El flujo vuelve al paso 1, con el trabajo ya en un estado terminal |
 | FA-02 | El administrador quiere ver quién todavía no entregó | El listado agrupado muestra sólo alumnos con trabajos visibles. La pieza pública lo declara explícitamente para que la ausencia de un alumno no se lea como un trabajo perdido | El flujo continúa en el paso 5 |
-| FA-03 | No hay trabajos que satisfagan el filtro | El contrato devuelve la colección con cero elementos —señal `CONTRATO_LISTADO_VACIO`—. La pieza pública muestra un listado vacío explicado, **distinguible del estado degradado por el tipo recibido y no por el conteo** | El flujo vuelve al paso 5 |
+| FA-03 | No hay trabajos que satisfagan el filtro | El contrato devuelve la colección con cero elementos —señal `EMPTY_LIST`—. La pieza pública muestra un listado vacío explicado, **distinguible del estado degradado por el tipo recibido y no por el conteo** | El flujo vuelve al paso 5 |
 | FA-04 | El administrador consulta el recuento por alumno y por estado | La pieza pública invoca el contrato de resumen de `GeometriaFactory-Contracts` CU-10004, FA-04, con una fila por alumno y el recuento por cada uno de los tres estados. Es capacidad de prioridad menor, prevista para la etapa `i` | El flujo vuelve al paso 1 |
 
 ## 6. Excepciones y errores
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_ALUMNO_NO_ENCONTRADO` | El filtro referencia un alumno que ya no existe, por ejemplo porque fue dado de baja en CU-10004 | La pieza pública informa y recarga el listado sin filtro. Recuperación por reintento |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **No se muestra ningún listado**, porque la pieza pública no guarda copia de los datos |
-| `CONTRATO_ERROR_NO_CLASIFICADO` | Fallo que el contrato no previó | Handoff a CU-10010, con el mismo tratamiento |
+| `STUDENT_NOT_FOUND` | El filtro referencia un alumno que ya no existe, por ejemplo porque fue dado de baja en CU-10004 | La pieza pública informa y recarga el listado sin filtro. Recuperación por reintento |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | Handoff a CU-10010: estado degradado explícito, sin dirección de servicio interno. **No se muestra ningún listado**, porque la pieza pública no guarda copia de los datos |
+| `UNCLASSIFIED_ERROR` | Fallo que el contrato no previó | Handoff a CU-10010, con el mismo tratamiento |
 
 ### 6.1 Señal declarada que no es error
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_LISTADO_VACIO` | No hay trabajos que satisfagan el filtro | Curso de FA-03: listado vacío explicado, nunca presentado como fallo |
+| `EMPTY_LIST` | No hay trabajos que satisfagan el filtro | Curso de FA-03: listado vacío explicado, nunca presentado como fallo |
 
 ## 7. Postcondiciones
 
@@ -118,4 +118,5 @@ Darle al administrador un único lugar donde ver los trabajos de toda la comisi�
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **5 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-09 | Emisión inicial. |

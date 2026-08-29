@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -88,9 +88,9 @@ Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Dos escritores a la vez | Lanzar dos operaciones de escritura simultáneas | `ESCRITURA_CONCURRENTE_RECHAZADA`. **Esta capa no reintenta**: la decisión de reintentar es del consumidor, y `05` §2.1 declara por qué |
-| Almacén ausente | Correr sin ejecutar el paso 3 | `ALMACEN_NO_DISPONIBLE`, y **no** un valor compuesto por otro medio |
-| Materializar sin texto original | Quitar el texto del trabajo antes de guardarlo | `TEXTO_ORIGINAL_AUSENTE`: el trabajo no se guarda a medias |
+| Dos escritores a la vez | Lanzar dos operaciones de escritura simultáneas | `CONCURRENT_WRITE_REJECTED`. **Esta capa no reintenta**: la decisión de reintentar es del consumidor, y `05` §2.1 declara por qué |
+| Almacén ausente | Correr sin ejecutar el paso 3 | `STORE_UNAVAILABLE`, y **no** un valor compuesto por otro medio |
+| Materializar sin texto original | Quitar el texto del trabajo antes de guardarlo | `ORIGINAL_JSON_MISSING`: el trabajo no se guarda a medias |
 | Correos que difieren sólo en mayúsculas | Dar de alta dos cuentas con el mismo correo escrito distinto | Depende del criterio de comparación, que **no está decidido todavía** ([`ADR-06003`](../05-Arquitectura-Tecnica/Adrs/ADR-06003-Comparacion-De-Correos-Y-El-Indice-Que-La-Sostiene.md) §6). El sample lo declara como variación y **no afirma un resultado** |
 
 ## 8. Trazabilidad
@@ -147,4 +147,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06003`, `CU-06004` y `CU-06005` sobre un almacén real llevado a su estado de primer arranque, con **tres** de los ocho escenarios materializados y sus interpretaciones reusadas del ejemplo 01 sin recalcular. Declara por qué la ruta del almacén no se escribe en el sample y por qué la variación de comparación de correos **no afirma un resultado**, dado que `ADR-06003` §6 la deja abierta. El contrato `VER-06002` declara ocho líneas exactas de salida y **tres aserciones negativas** —los componentes en el listado, el estado intermedio del arrastre y el trabajo que no se retiró—; `evidencia` queda en `No verificado — sin código`. |

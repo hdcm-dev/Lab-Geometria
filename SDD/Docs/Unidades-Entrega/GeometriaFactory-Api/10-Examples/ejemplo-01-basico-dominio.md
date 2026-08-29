@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -85,7 +85,7 @@ Operaciones invocadas: 9 | Rechazos tipados: 2 | Excepciones: 0
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
 | Habilitar sin aportar la provisoria derivada | Quitar el valor derivado del acto `[4]` | Rechazo `ENABLE_WITHOUT_TEMPORARY_CREDENTIAL` (`RN-02016`), y la cuenta queda `Pendiente` |
-| Operar sobre la cuenta de administrador | Invocar habilitar, bloquear o resetear sobre la cuenta del acto `[1]` | Rechazo `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` (`RN-02001`), la cuenta queda `Habilitado` |
+| Operar sobre la cuenta de administrador | Invocar habilitar, bloquear o resetear sobre la cuenta del acto `[1]` | Rechazo `OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT` (`RN-02001`), la cuenta queda `Habilitado` |
 | Bloquear y volver a preguntar | Bloquear la cuenta después del acto `[7]` | La admisibilidad pasa a no admisible con motivo `ACCOUNT_BLOCKED` (`RN-02006`), sin perder la credencial |
 | Alta que aporta credencial derivada | Pasar un valor derivado en el acto `[2]` | Rechazo `CREDENTIAL_NOT_ALLOWED_ON_REGISTRATION`: la credencial se fija al habilitar y no antes |
 
@@ -168,5 +168,6 @@ lugar de taparla.
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.0 | 2026-08-29 | **Pasada de ejecución — Fase I, incremento 1.** El sample está **implementado y corrido**, y el campo `evidencia` de §9 pasa de `No verificado — sin código` a **VERIFICADO** con la salida real, su fecha y su exit code. **§6 pasa a la forma vigente de los códigos de condición**: once ocurrencias en siete códigos, de castellano a inglés, con el mapeo **leído de `ConditionCode.cs`** y no elegido acá. Es el residuo del renombre **`F-03`** —decisión del Product Owner del **2026-08-12**, `Norma-De-Nomenclatura.md` §5.3— cuyos tramos documentales se suspendieron el 2026-08-13 y que el Product Owner **reconfirmó el 2026-08-29**. **Lo destapó el propio sample**: su primera corrida, el 2026-08-27, incumplió cuatro de los cinco `stdout_contiene`, y **el snapshot no se ajustó al código hasta que hubo decisión**, para no resolver en silencio una contradicción entre el sistema y veintiún documentos. **Sube MAJOR** porque el contenido de §6 y de §9 cambia para el consumidor del documento, no sólo su redacción. Ninguna otra sección se toca. | Orquestador de Fase I |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2: el markdown explicativo queda completo y el contrato de verificación `VER-02001` declara `verifica`, `comando`, `precondiciones` y `criterio_aceptacion`, con `evidencia` en `No verificado — sin código`. Cubre `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012` con las operaciones `OP-01` a `OP-04` y `OP-12` del contrato de uso del proyecto de código. El criterio de aceptación es exit code más cuatro líneas exactas de salida, sin prosa evaluable por una persona. |

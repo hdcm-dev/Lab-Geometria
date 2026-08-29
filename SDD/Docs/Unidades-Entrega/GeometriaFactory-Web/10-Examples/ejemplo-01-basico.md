@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-01-basico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -86,9 +86,9 @@ Funciones ejercidas: 3 de 6 | Servicios del backend disponibles: 0 | Excepciones
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Superficie de dibujo de tamaño nulo | Poner la superficie en tamaño cero antes de crear | `ELEMENTO_DE_DIBUJO_INVALIDO` en su curso **C-1**, y **no se crea instancia** |
+| Superficie de dibujo de tamaño nulo | Poner la superficie en tamaño cero antes de crear | `INVALID_CANVAS_ELEMENT` en su curso **C-1**, y **no se crea instancia** |
 | Dos instancias en la misma página | Agregar una segunda superficie y crear otra instancia | Las dos quedan aisladas: no comparten escena, ni selección, ni disposición (`G-4`) |
-| Texto del que no se obtienen piezas | Reemplazar `E1.txt` por un texto sin conjunto de piezas | `TEXTO_NO_LEGIBLE`, y la instancia queda **viva y vacía**: `G-7` |
+| Texto del que no se obtienen piezas | Reemplazar `E1.txt` por un texto sin conjunto de piezas | `UNREADABLE_TEXT`, y la instancia queda **viva y vacía**: `G-7` |
 | Diez recorridos de ida y vuelta | Crear y destruir la instancia diez veces seguidas | Sin acumulación de recursos gráficos. Es el tramo de `PT-02` que el ejemplo 03 mide entero |
 
 ## 8. Trazabilidad
@@ -139,4 +139,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2. Primera de las tres partes del sample **S-1** del `PRODUCT-INTAKE` §18. Cubre `CU-12001`, `CU-12002` y `CU-12005` con **tres** de las **seis** funciones de la fachada, sobre el escenario `E-1` transcripto sin modificación. El contrato `VER-12001` declara seis líneas exactas de salida, con el recuento de peticiones en **0** y el ortoedro dibujado; `evidencia` queda en `No verificado — sin código`. |

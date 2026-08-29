@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -95,7 +95,7 @@ Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Ruta del almacén ausente | Quitar la ruta de la configuración del entorno | `RUTA_DEL_ALMACEN_NO_DISPONIBLE`, y **el mensaje no nombra ninguna ruta**: es una dirección de servicio interno |
+| Ruta del almacén ausente | Quitar la ruta de la configuración del entorno | `STORE_PATH_UNAVAILABLE`, y **el mensaje no nombra ninguna ruta**: es una dirección de servicio interno |
 | Provisoria derivada de la cuenta | Producir la provisoria a partir del correo | La línea `derivadas de un dato de la cuenta` pasa a `si` y el criterio de aceptación falla. Es lo que [`ADR-06005`](../05-Arquitectura-Tecnica/Adrs/ADR-06005-Contrasena-Provisoria-No-Adivinable-Y-Sin-Repetirse.md) prohíbe |
 | Parámetros de derivación sin anclar | Cambiar los parámetros de derivación sin versionarlos | Las credenciales derivadas antes dejan de verificar, y nada lo declara. Es lo que [`ADR-06004`](../05-Arquitectura-Tecnica/Adrs/ADR-06004-Derivacion-De-Clave-Anclada-Con-Parametros-Versionados.md) viene a impedir |
 | Reloj del sistema en vez del puerto | Leer el reloj directamente en un acto | La línea `sello identico` pasa a `no` y el sample deja de ser comparable entre corridas |
@@ -159,4 +159,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06006` a `CU-06010`, los cinco mecanismos que sólo esta capa provee, con **dos** inspecciones de umbral **cero** y su condición de medición declarada. El contrato `VER-06003` declara once líneas exactas de salida y **cuatro aserciones negativas**, una por cada modo de falla silencioso de la capa; `evidencia` queda en `No verificado — sin código`. |

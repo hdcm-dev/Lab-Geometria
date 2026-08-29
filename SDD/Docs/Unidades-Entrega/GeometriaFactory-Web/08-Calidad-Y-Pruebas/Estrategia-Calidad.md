@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Calidad.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -69,7 +69,7 @@ Clasificación ISO/IEC 25010. Las **seis propiedades transversales** de `02` §6
 | Adecuación funcional | **Crítica** | Los **seis** tipos dibujables, los **siete** códigos de condición y las **siete** garantías, sostenidos por las **seis** funciones |
 | Eficiencia de desempeño | **Alta** | **10** recorridos de ida y vuelta entre trabajos sin degradación, medidos **con los dos movimientos prendidos** (`PT-02`) |
 | Mantenibilidad | **Alta** | Superficie de exactamente **6** funciones, bajo **1** nombre propio en el objeto global y **0** identificadores globales sueltos (`05` §8) |
-| Compatibilidad | **Alta** | **0** dependencias traídas de una red de distribución externa en tiempo de ejecución (`PT-03`). Navegadores con capacidad gráfica tridimensional; sin ella el visor **no es soportado** y la fachada informa `CAPACIDAD_GRAFICA_AUSENTE` |
+| Compatibilidad | **Alta** | **0** dependencias traídas de una red de distribución externa en tiempo de ejecución (`PT-03`). Navegadores con capacidad gráfica tridimensional; sin ella el visor **no es soportado** y la fachada informa `GRAPHICS_CAPABILITY_MISSING` |
 | Usabilidad | **Media, y ajena en su mayor parte** | La superficie visible la dibuja el componente anfitrión, que vive en `GeometriaFactory-Web`. Lo que este proyecto de código aporta es el equivalente accesible: la estructura del texto y la enumeración de piezas no dibujadas |
 | Portabilidad | **Media** | Requisito declarado **por capacidad** y no por versión de navegador, porque la fuente no la fija (`05` §5 y §11 `PA-04`) |
 
@@ -208,5 +208,6 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **4 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -73,11 +73,11 @@ samples/visor/02-intermedio/
 Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones de red: 0
 ```
 
-**Las líneas `[6]` y `[7]` juntas son la distinción que el producto viene a instalar.** En `E-8` la dimensión **está ausente** y la pieza no se dibuja, pero **queda enumerada** con su índice y su campo; en `E-6` la dimensión **está y vale `0.00`**, y la pieza **se dibuja**. Lo que produce `DIMENSION_NO_LEGIBLE` es la ausencia de la clave, nunca el valor que trae. El visualizador previo perdía la figura de `E-6` sin aviso porque evaluaba la verdad del número en lugar de su presencia.
+**Las líneas `[6]` y `[7]` juntas son la distinción que el producto viene a instalar.** En `E-8` la dimensión **está ausente** y la pieza no se dibuja, pero **queda enumerada** con su índice y su campo; en `E-6` la dimensión **está y vale `0.00`**, y la pieza **se dibuja**. Lo que produce `UNREADABLE_DIMENSION` es la ausencia de la clave, nunca el valor que trae. El visualizador previo perdía la figura de `E-6` sin aviso porque evaluaba la verdad del número en lugar de su presencia.
 
-**La línea `[10]` no es un error del sample.** Un índice que el resultado de dibujo enumera como **no dibujado** figura en el resultado pero **no tiene malla que resaltar**, y por eso `seleccionarPieza` informa `INDICE_FUERA_DE_RANGO`. Es uno de los dos casos que ese código cubre, y los dos son **un mismo curso**, no dos.
+**La línea `[10]` no es un error del sample.** Un índice que el resultado de dibujo enumera como **no dibujado** figura en el resultado pero **no tiene malla que resaltar**, y por eso `seleccionarPieza` informa `INDEX_OUT_OF_RANGE`. Es uno de los dos casos que ese código cubre, y los dos son **un mismo curso**, no dos.
 
-**Las líneas `[13]` y `[14]` son el segundo curso de `ELEMENTO_DE_DIBUJO_INVALIDO`.** Es el mismo código que la primera variación del ejemplo 01, con otro efecto: allá **no se crea** la instancia, acá **sigue viva** con su escena y su selección intactas, y una invocación posterior ajusta.
+**Las líneas `[13]` y `[14]` son el segundo curso de `INVALID_CANVAS_ELEMENT`.** Es el mismo código que la primera variación del ejemplo 01, con otro efecto: allá **no se crea** la instancia, acá **sigue viva** con su escena y su selección intactas, y una invocación posterior ajusta.
 
 ## 7. Variaciones sugeridas
 
@@ -137,5 +137,6 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.1 | 2026-08-11 | **Corrección de precisión de recuento, hallada al resolver el informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0 y no reportada por él.** La fila de `ADR-12002` de la §8 decía «Las cinco funciones se invocan desde el anfitrión y ninguna otra», atribuyéndole a esa ADR una superficie de **cinco** funciones cuando declara **seis** desde su título y su §2 —las cinco son las que **este sample** invoca, no las que la ADR declara—. Se enlaza además la carpeta esqueletada de [`/samples/visor/02-intermedio/`](../../../../../samples/visor/02-intermedio/) creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento del contrato cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Segunda parte del sample **S-1**. Cubre `CU-12002`, `CU-12003` y `CU-12004`, lleva las funciones ejercidas a **5 de 6** y usa **cinco** escenarios del `PRODUCT-INTAKE` §20 transcriptos sin modificación. Verifica los **seis** tipos dibujables, los dos sinónimos de clave del emisor, los **dos** cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` y los **dos** casos de `INDICE_FUERA_DE_RANGO`. El contrato `VER-12002` declara siete líneas exactas de salida y **una aserción negativa** sobre la figura de `E-6`; `evidencia` queda en `No verificado — sin código`. |

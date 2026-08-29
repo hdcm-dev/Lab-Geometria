@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -85,8 +85,8 @@ samples/domain/03-avanzado/
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
 | Dar de baja arrastrando los trabajos | Invocar la baja con la confirmación escrita coincidente sobre la cuenta del acto `[8]` | La cuenta y sus **cuatro** trabajos se materializan como una sola unidad (`RN-02007`); con la confirmación no coincidente, rechazo |
-| Baja declarando que los trabajos se conservan | Pedir la baja sin arrastre | Rechazo `BAJA_SIN_ARRASTRE_DE_TRABAJOS`: no hay baja parcial |
-| Consultar un trabajo propio fuera de `Borrador` | Pedir reeditar y eliminar sobre el trabajo en `Pendiente` | `OPERACION_FUERA_DE_BORRADOR` en los dos; **ver** procede en los cuatro estados |
+| Baja declarando que los trabajos se conservan | Pedir la baja sin arrastre | Rechazo `DELETION_WITHOUT_WORK_CASCADE`: no hay baja parcial |
+| Consultar un trabajo propio fuera de `Borrador` | Pedir reeditar y eliminar sobre el trabajo en `Pendiente` | `OPERATION_OUTSIDE_DRAFT` en los dos; **ver** procede en los cuatro estados |
 | Agregar una referencia al archivo de proyecto | Declarar una referencia a otro proyecto de código del producto | El acto `[9]` deja de dar 0 y el sample falla: es la puerta `QG-04` ejercida desde afuera del pipeline |
 
 La última variación es el puente hacia `09-Devops`: muestra que el gate de dependencias salientes no depende del pipeline para detectarse.
@@ -137,4 +137,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-02009`, `CU-02010`, `CU-02011` y `CU-02013` con las operaciones `OP-09` a `OP-11` y `OP-13`, y agrega tres inspecciones estructurales —dependencias salientes, ausencia de lectura de reloj y condiciones tipadas— que ejercen desde afuera del pipeline los gates `QG-04` y `QG-08`. El contrato `VER-02003` declara seis líneas exactas de salida; `evidencia` queda en `No verificado — sin código`. |

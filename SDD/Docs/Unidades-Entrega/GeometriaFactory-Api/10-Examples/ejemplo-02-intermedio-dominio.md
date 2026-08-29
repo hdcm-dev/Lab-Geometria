@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -84,10 +84,10 @@ Trabajos recorridos: 6 | Envios a Pendiente: 4 | Envios retenidos en Borrador: 2
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Advertencia con un solo número | Emitir la observación de `E-3` sin el valor derivado | Rechazo `ADVERTENCIA_SIN_LOS_DOS_VALORES`: la observación no se adopta |
-| Error sin ubicación | Quitar el índice y el campo de la observación de `E-5` | Rechazo `ERROR_SIN_UBICACION` (`RN-02009`) |
-| Reeditar fuera del borrador | Reeditar el trabajo de `E-1` después de que pasó a `Pendiente` | Rechazo `REEDICION_FUERA_DE_BORRADOR` (`RN-02004`), el texto no cambia |
-| Enviar sin interpretación | Invocar el envío antes de adoptar el resultado | Rechazo `ENVIO_SIN_INTERPRETACION`; el trabajo queda en `Borrador` |
+| Advertencia con un solo número | Emitir la observación de `E-3` sin el valor derivado | Rechazo `WARNING_MISSING_BOTH_VALUES`: la observación no se adopta |
+| Error sin ubicación | Quitar el índice y el campo de la observación de `E-5` | Rechazo `ERROR_WITHOUT_LOCATION` (`RN-02009`) |
+| Reeditar fuera del borrador | Reeditar el trabajo de `E-1` después de que pasó a `Pendiente` | Rechazo `EDIT_OUTSIDE_DRAFT` (`RN-02004`), el texto no cambia |
+| Enviar sin interpretación | Invocar el envío antes de adoptar el resultado | Rechazo `SUBMISSION_WITHOUT_PARSE_RESULT`; el trabajo queda en `Borrador` |
 
 ## 8. Trazabilidad
 
@@ -137,5 +137,6 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.1 | 2026-08-11 | **Corrección del hallazgo P3-1 del informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0.** El árbol de §5 nombraba los **seis** archivos de escenario con extensión `.json` —`E1`, `E3`, `E4`, `E5`, `E6` y `E8`—, contra la convención `.txt` que declaran los otros seis proyectos de código del producto, y este proyecto de código no declaraba el fundamento en ninguna parte de su categoría 10. Se corrigen las **dos** líneas del árbol y se agrega el fundamento debajo. **Ningún dato estaba en riesgo**: el único escenario que no es JSON estrictamente válido es `E-2`, que no está entre los seis. Se corrige además, fuera del informe, la §2, que declaraba «los **ocho** escenarios reales del intake §20 como material de entrada» cuando el sample usa **seis** y su propia §5, su §6 y el `README.md` de la categoría dicen seis. Se enlaza la carpeta esqueletada de `/samples` creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento del contrato cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-02005` a `CU-02008` con las operaciones `OP-05` a `OP-08`, sobre los **seis** escenarios reales `E-1`, `E-3`, `E-4`, `E-5`, `E-6` y `E-8` del `PRODUCT-INTAKE` §20, transcriptos sin modificación. El contrato `VER-02002` declara seis líneas exactas de salida y **una aserción negativa** sobre el índice reportado; `evidencia` queda en `No verificado — sin código`. |

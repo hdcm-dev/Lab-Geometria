@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** CU-10001-Registrar-La-Cuenta-De-Alumno.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Analista Funcional senior (AG-02)
@@ -67,10 +67,10 @@ Permitir que un alumno de la comisión se dé de alta en el laboratorio con su c
 
 | Código | Causa | Respuesta del sistema |
 | --- | --- | --- |
-| `CONTRATO_CORREO_YA_REGISTRADO` | El correo ya pertenece a una cuenta | La pieza pública muestra un mensaje explícito sobre el campo de correo, sin revelar ningún dato de la cuenta existente. Recuperación: el alumno corrige el correo y reintenta |
-| `CONTRATO_CAMPO_REQUERIDO_AUSENTE` | La solicitud llegó incompleta pese a la verificación del paso 4 | La pieza pública señala el campo que el contrato nombra. Recuperación por corrección y reintento |
-| `CONTRATO_SERVICIO_NO_DISPONIBLE` | La pieza de datos no responde | La pieza pública entra en estado degradado según CU-10010: informa que el laboratorio no tiene los datos en este momento, **sin nombrar ninguna dirección de servicio interno**, conserva lo escrito y deja reintentar. Nunca una excepción sin manejar |
-| `CONTRATO_ERROR_NO_CLASIFICADO` | Fallo que el contrato no previó | Handoff a CU-10010, con el mismo tratamiento de estado degradado |
+| `EMAIL_ALREADY_REGISTERED` | El correo ya pertenece a una cuenta | La pieza pública muestra un mensaje explícito sobre el campo de correo, sin revelar ningún dato de la cuenta existente. Recuperación: el alumno corrige el correo y reintenta |
+| `REQUIRED_FIELD_MISSING` | La solicitud llegó incompleta pese a la verificación del paso 4 | La pieza pública señala el campo que el contrato nombra. Recuperación por corrección y reintento |
+| `SERVICE_UNAVAILABLE` | La pieza de datos no responde | La pieza pública entra en estado degradado según CU-10010: informa que el laboratorio no tiene los datos en este momento, **sin nombrar ninguna dirección de servicio interno**, conserva lo escrito y deja reintentar. Nunca una excepción sin manejar |
+| `UNCLASSIFIED_ERROR` | Fallo que el contrato no previó | Handoff a CU-10010, con el mismo tratamiento de estado degradado |
 
 ## 7. Postcondiciones
 
@@ -112,3 +112,4 @@ Permitir que un alumno de la comisión se dé de alta en el laboratorio con su c
 | --- | --- | --- |
 | 1.0 | 2026-08-09 | Emisión inicial. |
 | 1.1 | 2026-08-10 | **Cierra el hallazgo `C-06` (P1) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0, contra `PRODUCT-INTAKE` 1.14.** La nota de **§10** fundaba la ausencia de canal de correo en «las exclusiones **X-1 y X-2**», y `PRODUCT-INTAKE` §9 muestra la fila de **X-2 tachada**, con el texto «Exclusión retirada el 2026-08-09» al incorporarse **F-26**: la nota citaba como vigente y como fundamento una exclusión que la fuente había retirado. Pasa a citar **sólo X-1**, con la constancia de que X-2 fue retirada, de qué sigue excluido —la recuperación autónoma por correo— y de que la contraseña provisoria del producto la produce la habilitación (RN-10016) y no este registro. La **cabecera de trazabilidad**, que citaba «§9 (X-1, X-2)» con el mismo defecto y que el informe no registra, se corrige igual. **Ningún curso, ningún criterio de aceptación y ningún desenlace cambia**: el registro sigue terminando en una cuenta `Pendiente` y no en una sesión. Sube minor. |
+| 1.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **4 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../../Producto/Norma-De-Nomenclatura.md`](../../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
