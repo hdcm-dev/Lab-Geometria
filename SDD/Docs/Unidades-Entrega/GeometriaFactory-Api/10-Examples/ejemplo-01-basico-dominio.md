@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
-**Versión:** 1.0
+**Versión:** 2.0
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
@@ -65,18 +65,18 @@ Salida esperada en consola, línea por línea. Es el snapshot contra el que comp
 
 ```
 [1] Administrador configurado: papel=Administrador estado=Habilitado credencial=fijada
-[1b] Segundo administrador rechazado: ADMINISTRADOR_YA_CONFIGURADO
+[1b] Segundo administrador rechazado: ADMINISTRATOR_ALREADY_CONFIGURED
 [2] Alumno constituido: papel=Alumno estado=Pendiente credencial=sin-valor
-[2b] Alta sin correo rechazada: DATO_OBLIGATORIO_AUSENTE
-[3] Admisibilidad de la cuenta Pendiente: no-admisible motivos=CUENTA_PENDIENTE
+[2b] Alta sin correo rechazada: REQUIRED_FIELD_MISSING
+[3] Admisibilidad de la cuenta Pendiente: no-admisible motivos=ACCOUNT_PENDING
 [4] Cuenta habilitada: estado=Habilitado credencial=fijada cambio-pendiente=puesta
-[5] Admisibilidad tras habilitar: no-admisible motivos=CAMBIO_DE_CONTRASENA_PENDIENTE
+[5] Admisibilidad tras habilitar: no-admisible motivos=PASSWORD_CHANGE_PENDING
 [6] Credencial reemplazada por la propia cuenta: cambio-pendiente=levantada
 [7] Admisibilidad final: admisible motivos=0
 Operaciones invocadas: 9 | Rechazos tipados: 2 | Excepciones: 0
 ```
 
-**Las tres líneas de admisibilidad son el punto del sample.** `[3]`, `[5]` y `[7]` muestran los tres desenlaces de `CU-02004` sobre la misma cuenta a medida que avanza su ciclo de vida, y muestran que el motivo `CAMBIO_DE_CONTRASENA_PENDIENTE` de `RN-02013` se levanta **sólo** con el cambio efectuado por la propia cuenta.
+**Las tres líneas de admisibilidad son el punto del sample.** `[3]`, `[5]` y `[7]` muestran los tres desenlaces de `CU-02004` sobre la misma cuenta a medida que avanza su ciclo de vida, y muestran que el motivo `PASSWORD_CHANGE_PENDING` de `RN-02013` se levanta **sólo** con el cambio efectuado por la propia cuenta.
 
 **La última línea también es contrato**: `Excepciones: 0` materializa [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md), que reserva las excepciones a los defectos de programación del consumidor.
 
@@ -84,10 +84,10 @@ Operaciones invocadas: 9 | Rechazos tipados: 2 | Excepciones: 0
 
 | Variación | Qué cambiar | Resultado |
 | --- | --- | --- |
-| Habilitar sin aportar la provisoria derivada | Quitar el valor derivado del acto `[4]` | Rechazo `HABILITACION_SIN_CREDENCIAL_PROVISORIA` (`RN-02016`), y la cuenta queda `Pendiente` |
+| Habilitar sin aportar la provisoria derivada | Quitar el valor derivado del acto `[4]` | Rechazo `ENABLE_WITHOUT_TEMPORARY_CREDENTIAL` (`RN-02016`), y la cuenta queda `Pendiente` |
 | Operar sobre la cuenta de administrador | Invocar habilitar, bloquear o resetear sobre la cuenta del acto `[1]` | Rechazo `OPERACION_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` (`RN-02001`), la cuenta queda `Habilitado` |
-| Bloquear y volver a preguntar | Bloquear la cuenta después del acto `[7]` | La admisibilidad pasa a no admisible con motivo `CUENTA_BLOQUEADA` (`RN-02006`), sin perder la credencial |
-| Alta que aporta credencial derivada | Pasar un valor derivado en el acto `[2]` | Rechazo `CREDENCIAL_NO_ADMITIDA_EN_EL_ALTA`: la credencial se fija al habilitar y no antes |
+| Bloquear y volver a preguntar | Bloquear la cuenta después del acto `[7]` | La admisibilidad pasa a no admisible con motivo `ACCOUNT_BLOCKED` (`RN-02006`), sin perder la credencial |
+| Alta que aporta credencial derivada | Pasar un valor derivado en el acto `[2]` | Rechazo `CREDENTIAL_NOT_ALLOWED_ON_REGISTRATION`: la credencial se fija al habilitar y no antes |
 
 Las cuatro variaciones son el puente hacia el ejemplo 02, donde el sujeto deja de ser la cuenta y pasa a ser el trabajo.
 
@@ -101,7 +101,7 @@ Las cuatro variaciones son el puente hacia el ejemplo 02, donde el sujeto deja d
 | [`CU-00022`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00022-Ingresar-Al-Laboratorio-Y-Sostener-La-Sesion.md) | Caso de uso | Actos `[3]`, `[5]` y `[7]`: los tres desenlaces de la puerta única |
 | [`CU-00025`](../02-Especificacion-Funcional/Casos-De-Uso/CU-00025-Configurar-La-Cuenta-De-Administrador-En-El-Primer-Arranque.md) | Caso de uso | Actos `[1]` y `[1b]`: la ventana de alta del administrador y su cierre |
 | [`RN-02001`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02001-Administrador-Unico-Y-Papeles-Fijos.md) | Regla de negocio | El rechazo de `[1b]` y la variación sobre la cuenta de administrador |
-| [`RN-02006`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | El motivo `CUENTA_PENDIENTE` de `[3]` |
+| [`RN-02006`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02006-Cuenta-Pendiente-O-Bloqueada-Sin-Acceso.md) | Regla de negocio | El motivo `ACCOUNT_PENDING` de `[3]` |
 | [`RN-02013`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02013-Cambio-Forzado-Antes-De-Toda-Otra-Capacidad.md) | Regla de negocio | El motivo de `[5]` y su levantamiento en `[6]` |
 | [`RN-02016`](../02-Especificacion-Funcional/Reglas-De-Negocio/RN-02016-Habilitar-Produce-La-Provisoria.md) | Regla de negocio | Habilitar produce la provisoria: la variación sin ella se rechaza |
 | [`ADR-02002`](../05-Arquitectura-Tecnica/Adrs/ADR-02002-Superficie-Publica-De-Guardas-Y-Resultados-Tipados.md) | Decisión arquitectónica | La línea final con `Excepciones: 0` |
@@ -122,18 +122,51 @@ verificacion:
   criterio_aceptacion:
     exit_code: 0
     stdout_contiene:
-      - "[3] Admisibilidad de la cuenta Pendiente: no-admisible motivos=CUENTA_PENDIENTE"
-      - "[5] Admisibilidad tras habilitar: no-admisible motivos=CAMBIO_DE_CONTRASENA_PENDIENTE"
+      - "[3] Admisibilidad de la cuenta Pendiente: no-admisible motivos=ACCOUNT_PENDING"
+      - "[5] Admisibilidad tras habilitar: no-admisible motivos=PASSWORD_CHANGE_PENDING"
       - "[7] Admisibilidad final: admisible motivos=0"
       - "Operaciones invocadas: 9 | Rechazos tipados: 2 | Excepciones: 0"
     stdout_no_contiene:
       - "Excepciones: 1"
   evidencia:
-    estado: "No verificado — sin código"
+    estado: "VERIFICADO"
+    fecha: "2026-08-29"
+    corrida: "Fase I, incremento 1, dentro del entorno contenido con .NET 10"
+    exit_code: 0
+    criterios_cumplidos: 5
+    criterios_incumplidos: 0
+    stdout: |
+      [1] Administrador configurado: papel=Administrador estado=Habilitado credencial=fijada
+      [1b] Segundo administrador rechazado: ADMINISTRATOR_ALREADY_CONFIGURED
+      [2] Alumno constituido: papel=Alumno estado=Pendiente credencial=sin-valor
+      [2b] Alta sin correo rechazada: REQUIRED_FIELD_MISSING
+      [3] Admisibilidad de la cuenta Pendiente: no-admisible motivos=ACCOUNT_PENDING
+      [4] Cuenta habilitada: estado=Habilitado credencial=fijada cambio-pendiente=puesta
+      [5] Admisibilidad tras habilitar: no-admisible motivos=PASSWORD_CHANGE_PENDING
+      [6] Credencial reemplazada por la propia cuenta: cambio-pendiente=levantada
+      [7] Admisibilidad final: admisible motivos=0
+      Operaciones invocadas: 9 | Rechazos tipados: 2 | Excepciones: 0
+    comparacion_contra_snapshot: "CONFORME · las 10 líneas coinciden, verificado por
+      `dotnet run --project samples/domain/01-basico -- --verificar`, que sale 0"
 ```
+
+**La salida de arriba es la corrida real y no una promesa**, que es lo que la pasada de ejecución de
+`Rules-Examples.md` §0.2 convierte. El estado anterior de este campo era `No verificado — sin código`
+y llevaba **dieciocho días** siéndolo con el código ya escrito.
+
+**Y hay que decir cómo llegó a cumplirse, porque la primera corrida NO cumplió.** El 2026-08-27, al
+implementarse el sample, **cuatro de los cinco `stdout_contiene` fallaron**: el sistema emitía
+`ADMINISTRATOR_ALREADY_CONFIGURED` y este documento pedía `ADMINISTRADOR_YA_CONFIGURADO`. **No era un
+defecto del sistema**: era el residuo del renombre `F-03` —«los 101 códigos de condición van a
+inglés», decisión del Product Owner del **2026-08-12**— cuyos tramos documentales **se suspendieron el
+2026-08-13**. El Product Owner lo reconfirmó el **2026-08-29** y §6 de este documento pasó a la forma
+vigente, **con el mapeo leído del propio `ConditionCode.cs`** y no elegido acá. El sample **no se
+ajustó al documento antes de esa confirmación**, y por eso quedó dos días declarando la divergencia en
+lugar de taparla.
 
 ## 10. Control de cambios
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.0 | 2026-08-29 | **Pasada de ejecución — Fase I, incremento 1.** El sample está **implementado y corrido**, y el campo `evidencia` de §9 pasa de `No verificado — sin código` a **VERIFICADO** con la salida real, su fecha y su exit code. **§6 pasa a la forma vigente de los códigos de condición**: once ocurrencias en siete códigos, de castellano a inglés, con el mapeo **leído de `ConditionCode.cs`** y no elegido acá. Es el residuo del renombre **`F-03`** —decisión del Product Owner del **2026-08-12**, `Norma-De-Nomenclatura.md` §5.3— cuyos tramos documentales se suspendieron el 2026-08-13 y que el Product Owner **reconfirmó el 2026-08-29**. **Lo destapó el propio sample**: su primera corrida, el 2026-08-27, incumplió cuatro de los cinco `stdout_contiene`, y **el snapshot no se ajustó al código hasta que hubo decisión**, para no resolver en silencio una contradicción entre el sistema y veintiún documentos. **Sube MAJOR** porque el contenido de §6 y de §9 cambia para el consumidor del documento, no sólo su redacción. Ninguna otra sección se toca. | Orquestador de Fase I |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2: el markdown explicativo queda completo y el contrato de verificación `VER-02001` declara `verifica`, `comando`, `precondiciones` y `criterio_aceptacion`, con `evidencia` en `No verificado — sin código`. Cubre `CU-02001`, `CU-02002`, `CU-02003`, `CU-02004` y `CU-02012` con las operaciones `OP-01` a `OP-04` y `OP-12` del contrato de uso del proyecto de código. El criterio de aceptación es exit code más cuatro líneas exactas de salida, sin prosa evaluable por una persona. |
