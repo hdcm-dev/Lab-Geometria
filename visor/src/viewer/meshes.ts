@@ -30,10 +30,22 @@ import { palette } from './palette';
 /** Lo mínimo que una medida puede valer sin que la malla deje de existir. */
 const MINIMUM_EXTENT = 0.0001;
 
-export interface MeshOutcome {
-  readonly mesh: THREE.Mesh | null;
-  readonly reason: string | null;
-}
+/**
+ * El resultado de intentar construir la malla de una pieza: **o hay malla, o hay motivo**.
+ *
+ * ES UNA UNIÓN DISCRIMINADA Y NO UN PAR DE CAMPOS OPCIONALES, y el cambio es del 2026-08-30. Antes
+ * era `{ mesh: Mesh | null; reason: string | null }`, que admite las cuatro combinaciones —incluida
+ * «sin malla y sin motivo»—, y su consumidor se defendía con `reason ?? 'UNKNOWN'`: un código que
+ * **el contrato de la fachada no declara**, acuñado aguas abajo para cubrir un caso que este archivo
+ * nunca produjo.
+ *
+ * Con la unión, ese caso **no compila**. La garantía que antes dependía de leer las dos salidas de
+ * `meshFor` ahora la sostiene el tipo, y ninguna pieza puede quedar sin dibujar y sin enumerar, que
+ * es la razón por la que este visor existe.
+ */
+export type MeshOutcome =
+  | { readonly mesh: THREE.Mesh; readonly reason: null }
+  | { readonly mesh: null; readonly reason: string };
 
 const UNREADABLE_DIMENSION = 'UNREADABLE_DIMENSION';
 const NON_DRAWABLE_TYPE = 'NON_DRAWABLE_TYPE';

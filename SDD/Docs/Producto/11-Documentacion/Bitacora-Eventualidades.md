@@ -5,7 +5,7 @@ title: Bitácora de eventualidades — Fábrica de Geometría
 status: Vigente
 rol_intervencion: [operador, mantenedor]
 owner: Technical Writer / Documentation Lead (AG-00110)
-version: "1.0"
+version: "1.1"
 last_review: 2026-08-30
 momento: 2
 traces:
@@ -31,11 +31,11 @@ Durante la construcción y las primeras corridas aparecen situaciones que **ning
 
 **No se confunde con el sensado de deriva.** La deriva mide divergencia contra una línea de base aprobada: algo se apartó de lo acordado. Una eventualidad es un hecho del entorno que nadie había previsto: no hay línea de base de la cual apartarse.
 
-## 2. Por qué esta bitácora nace con siete entradas y no vacía
+## 2. Por qué esta bitácora nace poblada y no vacía
 
 **Se emite el 2026-08-30, con `I-01` abierto desde el 2026-08-29**, y el hallazgo decía que el paso 3 de la fase da la bitácora por existente y no existía. Emitir un archivo vacío habría cerrado el hallazgo **sin capitalizar nada**, que es exactamente el instrumento ceremonial que estas reglas evitan.
 
-Las siete entradas son reales y están fechadas: **salieron de implementar los dieciséis samples** entre el 2026-08-27 y el 2026-08-30. Las siete cumplen la definición de §0.6 —hechos del entorno que ningún documento predijo— y las siete costaron tiempo de diagnóstico.
+Las entradas son reales y están fechadas: **salieron de implementar los dieciséis samples y de corregir los primeros defectos que dejaron**, entre el 2026-08-27 y el 2026-08-30. Todas cumplen la definición de §0.6 —hechos del entorno que ningún documento predijo— y todas costaron tiempo de diagnóstico.
 
 ---
 
@@ -132,16 +132,29 @@ Las siete entradas son reales y están fechadas: **salieron de implementar los d
 | `intentos_descartados` | Reutilizar el `gf-api` que ya corría, descartado por lo mismo que la resolución explica |
 | `destino` | `Guia-Contenedor` → convivencia con el despliegue de trabajo. **Pendiente de propagación**. Se relaciona con la decisión que `scripts/store-path.sh` ya documenta desde el incidente del 2026-08-15 |
 
+### `EVE-00008` · Una batería en verde reportada como puerta en rojo
+
+| Campo | Contenido |
+| --- | --- |
+| `ambito` | `producto` |
+| `fecha` | 2026-08-30 |
+| `momento` | Construcción |
+| `sintoma` | `scripts/coverage.sh` termina en **2** con *«NO SE PUEDE MEDIR · la batería no pasó»*, y tres líneas más arriba la misma salida dice `Passed! - Failed: 0, Passed: 344`. Las 494 pruebas pasan y la puerta dice rojo |
+| `causa` | **No es la batería: es el recolector de cobertura.** Su proceso auxiliar muere con `System.IO.IOException: Broken pipe` al escribir sobre `--results-directory`, y `dotnet test` devuelve distinto de cero aunque las pruebas hayan pasado. Lo dispara el **estado acumulado** de corridas anteriores: carpetas `TestResults/` dentro de cada proyecto de prueba, algunas escritas por un contenedor que corrió como root |
+| `resolucion` | Borrar `TestResults/` de la raíz **y de cada proyecto de prueba** antes de medir, y corregir el dueño si alguna corrida las escribió como root. `coverage.sh` ya borra la de la raíz; las de los proyectos no |
+| `intentos_descartados` | Buscar el defecto en el cambio de código recién hecho, que era la sospecha natural; se descartó midiendo el **mismo guion sobre `main` en un árbol de trabajo limpio**, donde pasaba. Y volver a correr sin limpiar, que reproduce el fallo idénticamente |
+| `destino` | `Guia-Contribucion` → cómo se corre la puerta de cobertura. **Pendiente de propagación.** Y una mejora candidata a `coverage.sh`: que borre también las `TestResults/` de los proyectos, que es donde el estado se acumula |
+
 ---
 
 ## 4. Triaje
 
-**Ninguna de las siete está cerrada**, y el estado es correcto: `Rules-Documentacion.md` §0.6 exige que el triaje se ejecute **en cada corte del Momento 2**, y las siete tienen su destino **asignado** —que es lo que la regla dura pide— y **no propagado** todavía.
+**Ninguna está cerrada**, y el estado es correcto: `Rules-Documentacion.md` §0.6 exige que el triaje se ejecute **en cada corte del Momento 2**, y todas tienen su destino **asignado** —que es lo que la regla dura pide— y **no propagado** todavía.
 
 | Destino | Entradas |
 | --- | --- |
 | `Guia-Contenedor` | `EVE-00001`, `EVE-00002`, `EVE-00007` |
-| `Guia-Contribucion` | `EVE-00005`, `EVE-00006` |
+| `Guia-Contribucion` | `EVE-00005`, `EVE-00006`, `EVE-00008` |
 | `Runbook-Operacion` | `EVE-00003` |
 | `Conceptos-Fundamentales` del visor | `EVE-00004` |
 | `No absorbida` | ninguna |
@@ -154,4 +167,5 @@ Las siete entradas son reales y están fechadas: **salieron de implementar los d
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
-| 1.0 | 2026-08-30 | Emisión inicial, que cierra el hallazgo `I-01` del incremento `I-1` de la Fase I. **Nace con siete entradas reales y no vacía**, todas de la implementación de los dieciséis samples entre el 2026-08-27 y el 2026-08-30: emitir un archivo vacío habría cerrado el hallazgo sin capitalizar nada. Las siete tienen destino asignado y ninguna propagada; tres de los cuatro documentos de destino están `Planificado` en el plan de la categoría. |
+| 1.1 | 2026-08-30 | Entra **`EVE-00008`**: una batería en verde reportada como puerta en rojo, por estado acumulado de `TestResults/` que hace morir al recolector de cobertura. Se descartó que fuera el cambio de código midiendo el mismo guion sobre `main` en un árbol de trabajo limpio. Deja además una mejora candidata a `coverage.sh`. |
+| 1.0 | 2026-08-30 | Emisión inicial, que cierra el hallazgo `I-01` del incremento `I-1` de la Fase I. **Nace poblada y no vacía**, todas de la implementación de los dieciséis samples entre el 2026-08-27 y el 2026-08-30: emitir un archivo vacío habría cerrado el hallazgo sin capitalizar nada. Las siete tienen destino asignado y ninguna propagada; tres de los cuatro documentos de destino están `Planificado` en el plan de la categoría. |

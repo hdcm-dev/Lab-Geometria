@@ -32,8 +32,24 @@ decir(`[10] Superficie del archivo de guion: funciones=${presentes}`
 // archivo que sí hace red. Por eso se mira también el generado.
 const formas = [/\bfetch\s*\(/g, /XMLHttpRequest/g, /new\s+WebSocket/g];
 const contar = (texto) => formas.reduce((total, f) => total + (texto.match(f) ?? []).length, 0);
+// LOS COMENTARIOS SE QUITAN ANTES DE CONTAR, y no es prolijidad: es corrección.
+//
+// La primera versión contaba sobre el texto crudo, y el 2026-08-30 dio un falso
+// positivo que se ve solo cuando se arregla lo que medía. Se retiró el respaldo
+// `?? 'UNKNOWN'` del código y se dejó escrito en dos comentarios POR QUÉ se
+// retiró —que es lo que este repositorio pide hacer—; la inspección siguió
+// contando `UNKNOWN` como código acuñado, leyendo la explicación de su propio
+// retiro.
+//
+// Es la misma clase de falso positivo que la mesa del 2026-08-27 midió con los
+// seis enlaces rotos que no eran enlaces: **un identificador nombrado en prosa
+// no es un identificador emitido**, y un instrumento que no los distingue mide
+// de qué se habla en vez de qué se hace.
+const sinComentarios = (texto) => texto
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/^\s*\/\/.*$/gm, '');
 const fuentes = ['src/main.ts', 'src/contract.ts', 'src/viewer/instance.ts', 'src/viewer/meshes.ts', 'src/viewer/palette.ts']
-  .map((f) => readFileSync(join(raiz, '../../../visor', f), 'utf8')).join('\n');
+  .map((f) => sinComentarios(readFileSync(join(raiz, '../../../visor', f), 'utf8'))).join('\n');
 const generado = readFileSync(join(raiz, '../../../visor/dist/geometriafactory-visor.js'), 'utf8');
 decir(`[10b] Ocurrencias de las tres formas de peticion, en la fuente y en el bundle generado: `
   + `${contar(fuentes)} y ${contar(generado)}`);

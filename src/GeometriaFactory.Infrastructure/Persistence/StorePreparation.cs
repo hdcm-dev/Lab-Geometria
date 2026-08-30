@@ -32,7 +32,34 @@ public sealed class StorePreparation
     /// </summary>
     public async Task PrepareAsync(CancellationToken cancellationToken = default)
     {
-        await _dbContext.Database.MigrateAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            await _dbContext.Database.MigrateAsync(cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception falla) when (falla is not OperationCanceledException)
+        {
+            // EL MENSAJE NOMBRA LA CAUSA Y NO EL SÍNTOMA, y antes decía el síntoma.
+            //
+            // Sin este envoltorio, un almacén que alguien tocó por fuera detenía el arranque con la
+            // excepción cruda del proveedor —«table "Account" already exists»— y una traza de pila
+            // entera. Quien despliega leía eso y salía a buscar una tabla duplicada: el síntoma. La
+            // causa es otra, y es la que importa: **el almacén tiene un linaje que el servicio no
+            // entiende**, y por eso no se puede operar sobre él.
+            //
+            // LA TRAZA NO SE PROPAGA HACIA AFUERA Y TAMPOCO SE PIERDE. `RA-03` gobierna lo que el
+            // servicio DICE, y una traza de pila en el mensaje del arranque es lo que más tienta a
+            // incluir justamente cuando quien lo lee está diagnosticando. Queda como
+            // `InnerException`, disponible para quien la busque y ausente de lo que se muestra.
+            //
+            // NO SE INTENTA REPARAR NADA. Atender peticiones sobre un almacén que no se entiende es
+            // peor que no atender ninguna (`US-00028`), y adivinar el linaje sería inventarlo.
+            throw new InvalidOperationException(
+                "El almacén no se pudo preparar: su linaje no corresponde al de este servicio. " +
+                "Puede ser un almacén de otra versión, uno modificado por fuera de las " +
+                "transformaciones del producto, o uno creado a mano. El arranque se detiene en " +
+                "lugar de atender sobre un esquema que no corresponde.",
+                falla);
+        }
 
         var pending = await _dbContext.Database
             .GetPendingMigrationsAsync(cancellationToken)
