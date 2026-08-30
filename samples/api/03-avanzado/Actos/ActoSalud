@@ -1,0 +1,27 @@
+# Acto 2 — `A-16`, sin acceso firmado.
+#
+# LAS DOS LÍNEAS JUNTAS EXPLICAN POR QUÉ ESTE PUNTO NO EXIGE ACCESO: tiene que
+# poder responder ANTES de que exista una credencial válida, porque es lo que el
+# guion de ejecución espera para saber que puede seguir.
+
+respuesta="$(curl -s -w $'\n%{http_code}' "$base/salud")"
+estado_salud="${respuesta##*$'\n'}"
+
+# «Acceso exigido» no se afirma: se comprueba que la MISMA petición sin ninguna
+# credencial responde igual, y que el servicio no pide una.
+sin_credencial="$(curl -s -D - -o /dev/null "$base/salud" | grep -ci 'WWW-Authenticate')"
+decir "[2] Punto de salud sin acceso firmado: $estado_salud | acceso exigido: $([ "$sin_credencial" -gt 0 ] && echo si || echo no)"
+
+# DIVERGENCIA D-1 CONTRA §6, y es estructural.
+#
+# §6 espera `503` con el almacén indisponible, y `Contratos-REST.md` §3 le da a
+# `A-16` exactamente esos dos códigos. La rama existe en el código —
+# `HealthEndpoint` devuelve 503 cuando `StoreIsPrepared` es falso— pero NO SE
+# PUEDE ALCANZAR: `StorePreparation` o termina poniendo la marca en verdadero, o
+# lanza; y si lanza, el arranque se detiene y el proceso no llega a escuchar.
+#
+# NO ES UN DEFECTO, ES UNA CONSECUENCIA: el producto eligió detenerse en el
+# arranque en lugar de atender degradado, y esa decisión deja el 503 sin camino.
+# Lo que sí se puede medir es el otro lado de la misma moneda, y es el acto 3:
+# con el almacén indisponible no hay 503 porque no hay servicio.
+decir "[2] Punto de salud con el almacen indisponible: sin camino, el arranque se detiene antes de escuchar"

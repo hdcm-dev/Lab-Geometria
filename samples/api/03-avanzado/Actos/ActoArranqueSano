@@ -1,0 +1,37 @@
+# Acto 1 — `CU-00011`, las dos fases del arranque.
+#
+# LA FASE 1 SE MIDE POR AUSENCIA, y es la única forma de medirla. Mientras las
+# transformaciones se aplican, el escucha NO está abierto: cada intento de
+# petición muere en la conexión y no devuelve un código HTTP. Lo que se cuenta
+# no son respuestas de error, son RESPUESTAS: si alguna llegara, habría habido
+# una petición atendida sobre un almacén a medio preparar.
+
+almacen_sano="$trabajo/sano.db"
+rm -f "$almacen_sano" "$almacen_sano"-wal "$almacen_sano"-shm
+
+arrancar "$almacen_sano" "$trabajo/sano.log"
+
+# Se sondea a ritmo alto desde el instante del lanzamiento. `curl` devuelve 7
+# —«no se pudo conectar»— mientras el escucha no está; cualquier otra cosa es
+# una respuesta, y cuenta.
+atendidas_en_fase_1=0
+listo=no
+for _ in $(seq 1 600); do
+  codigo="$(curl -s -o /dev/null -w '%{http_code}' --max-time 2 "$base/salud" 2>/dev/null)"
+  resultado=$?
+  if [ "$resultado" -eq 0 ] && [ "$codigo" = "200" ]; then listo=si; break; fi
+  if [ "$resultado" -eq 0 ] && [ -n "$codigo" ] && [ "$codigo" != "000" ]; then
+    atendidas_en_fase_1=$((atendidas_en_fase_1 + 1))
+  fi
+  sleep 0.2
+done
+
+# El linaje aplicado se lee del propio almacén: es la constancia de que la fase
+# 1 hizo lo suyo, y no la ausencia de un error en un registro.
+transformaciones="$(linaje_de "$almacen_sano")"
+decir "[1] Arranque, fase 1: $([ "$transformaciones" -gt 0 ] && echo 'transformaciones aplicadas sobre el almacen' || echo 'NINGUNA TRANSFORMACION') | peticiones atendidas durante la fase 1: $atendidas_en_fase_1"
+
+# LOS PUNTOS EXPUESTOS SE CUENTAN SOBRE EL DOCUMENTO QUE EL SERVICIO PUBLICA, no
+# sobre el código ni sobre una tabla: es lo que un consumidor puede alcanzar.
+operaciones=$(curl -s "$base/openapi/v1.json" | tr ',' '\n' | grep -coP '"(get|post|put|delete|patch)"')
+decir "[1] Arranque, fase 2: $([ "$listo" = si ] && echo 'la superficie atiende' || echo 'LA SUPERFICIE NO ATIENDE') | puntos de acceso expuestos: $operaciones"

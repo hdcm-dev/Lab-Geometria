@@ -1,0 +1,33 @@
+# Acto 4 — `CU-00010`: los cuatro puertos y la configuración.
+#
+# ESTE ACTO NO PIDE NADA AL SERVICIO, y no es una excepción: lo que mira son
+# propiedades de la COMPOSICIÓN, y una petición no las puede mostrar. Un puerto
+# registrado dos veces, o registrado fuera de la composición de raíz, responde
+# igual de bien a una petición y rompe lo mismo.
+
+raiz="$aqui/../../../src"
+composicion="$raiz/GeometriaFactory.Api/Composition/CompositionRoot.cs"
+
+puertos=(IAccountRepository IWorkRepository IFigureValidator ISystemClock)
+conectados=0; fuera=0
+for puerto in "${puertos[@]}"; do
+  grep -qP "Add(Scoped|Singleton|Transient)<$puerto, *\w+>" "$composicion" && conectados=$((conectados + 1))
+  # LO QUE SE BUSCA AFUERA ES EL REGISTRO, no la mención: un `<see cref>` en un
+  # comentario nombra el puerto y no lo conecta.
+  fuera=$((fuera + $(grep -rlP "Add(Scoped|Singleton|Transient)<$puerto, *\w+>" "$raiz" --include='*.cs' \
+    | grep -vc 'CompositionRoot.cs')))
+done
+decir "[4] Puertos conectados con su adaptador: $conectados de ${#puertos[@]} | conectados fuera de la composicion de raiz: $fuera"
+
+# «CONFIGURACIÓN DE INTERCAMBIO» ES EL DOCUMENTO QUE DESCRIBE EL INTERCAMBIO, y
+# se cuenta una vez: el producto declara UNA y no varias versiones conviviendo.
+intercambio=$(grep -rho 'AddOpenApi()' "$raiz/GeometriaFactory.Api" --include='*.cs' | wc -l | tr -d ' ')
+decir "[4] Configuraciones de intercambio declaradas en el proceso: $intercambio"
+
+# UMBRAL EXACTAMENTE CERO, Y ES `RA-01`. No hay configuración de intercambio de
+# origen cruzado y no hay canal de sesión interactiva **porque el navegador no
+# alcanza esta superficie**: el circuito del front termina en el front.
+# Configurar cualquiera de las dos sería declarar que sí la alcanza.
+cruzado=$(grep -rho 'AddCors\|UseCors' "$raiz/GeometriaFactory.Api" --include='*.cs' | wc -l | tr -d ' ')
+interactivo=$(grep -rho 'AddSignalR\|MapHub\|UseWebSockets' "$raiz/GeometriaFactory.Api" --include='*.cs' | wc -l | tr -d ' ')
+decir "[5] Configuracion de intercambio de origen cruzado: $([ "$cruzado" -eq 0 ] && echo ausente || echo PRESENTE) | canal de sesion interactiva: $([ "$interactivo" -eq 0 ] && echo ausente || echo PRESENTE)"
