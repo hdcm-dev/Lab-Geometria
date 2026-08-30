@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <title>Sample visor/03-avanzado · las seis funciones y el gobierno del movimiento</title>
+  <style>
+    /* SIN NADA DE AFUERA. `PT-03` mide que el paquete no toque ninguna red de
+       distribución, y el sample no puede ser el que la abra. */
+    body { font-family: system-ui, sans-serif; margin: 1rem; display: flex; gap: 1rem; }
+    #escena { width: 480px; height: 320px; border: 1px solid #999; }
+    #arbol { min-width: 16rem; font-family: ui-monospace, monospace; font-size: .85rem; }
+    fieldset { margin-top: .75rem; }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Sample <code>visor/03-avanzado</code></h1>
+    <div id="escena"></div>
+
+    <!-- LOS DOS CONTROLES SON DOS Y NO UNO, y es `F-25`: los movimientos se
+         gobiernan por separado. Un solo interruptor para los dos haría imposible
+         la línea `[4]`, que es la que comprueba que gobernar uno no toca al otro. -->
+    <fieldset>
+      <legend>Movimiento</legend>
+      <label><input type="checkbox" id="orbita" /> Órbita de cámara</label>
+      <label><input type="checkbox" id="giro" /> Giro de piezas</label>
+    </fieldset>
+  </div>
+
+  <div>
+    <h2>Árbol</h2>
+    <ul id="arbol"></ul>
+  </div>
+
+  <script src="../../../visor/dist/geometriafactory-visor.js"></script>
+  <script src="./datos/trabajos.js"></script>
+  <script src="./anfitrion.js"></script>
+</body>
+</html>
