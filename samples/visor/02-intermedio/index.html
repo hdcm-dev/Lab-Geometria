@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <title>Sample visor/02-intermedio · árbol y selección</title>
+  <style>
+    /* SIN NADA DE AFUERA, igual que el sample 01: `PT-03` mide que el paquete no toque
+       ninguna red de distribución, y una hoja o una biblioteca traídas de afuera lo
+       romperían desde el sample. */
+    body { font-family: system-ui, sans-serif; margin: 1rem; display: flex; gap: 1rem; }
+    #escena { width: 480px; height: 320px; border: 1px solid #999; }
+    #arbol { min-width: 18rem; font-family: ui-monospace, monospace; font-size: .85rem; }
+    #arbol li.no-dibujada { color: #b00; }
+    #arbol li.resaltada { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Sample <code>visor/02-intermedio</code></h1>
+    <p>
+      <label for="escenario">Escenario:</label>
+      <select id="escenario"></select>
+    </p>
+    <div id="escena"></div>
+  </div>
+
+  <!-- EL ÁRBOL LO DIBUJA EL ANFITRIÓN Y NO LA FACHADA, y es la frontera que más fácil se
+       cruza sin darse cuenta. El visor devuelve qué dibujó y qué no, con el motivo; qué
+       se muestra con eso, y cómo, es del anfitrión. -->
+  <div>
+    <h2>Árbol</h2>
+    <ul id="arbol"></ul>
+  </div>
+
+  <script src="../../../visor/dist/geometriafactory-visor.js"></script>
+  <script src="./datos/piezas.js"></script>
+  <script src="./anfitrion.js"></script>
+</body>
+</html>

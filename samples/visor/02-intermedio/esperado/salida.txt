@@ -1,0 +1,15 @@
+[1] E-7 cargado: piezas dibujadas=6 | tipos volumetricos=3 | tipos planos=3
+[2] E-7, ortoedro: ancho=6 profundidad=4 altura=8
+[3] E-2, clave Tapas: el ortoedro se dibuja=si
+[4] E-7, clave Bases: el ortoedro se dibuja=si (las dos claves son sinonimos)
+[5] E-5 cargado: dibujadas=1 no dibujadas=1 | indice=1 codigo=NON_DRAWABLE_TYPE
+[6] E-8 cargado: dibujadas=1 no dibujadas=1 | indice=1 codigo=UNREADABLE_DIMENSION campo=Largo
+[7] E-6 cargado: dibujadas=1 no dibujadas=0 (el cero es una dimension legible)
+[8] Estructura del texto de E-8: piezas=2 (incluida la que no se dibujo)
+[9] Seleccion del indice 0: resaltadas=1 | resaltado exclusivo=si
+[10] Seleccion del indice 1 de E-8, enumerado como no dibujado: INDEX_OUT_OF_RANGE
+[11] Seleccion de un indice fuera del conjunto raiz: INDEX_OUT_OF_RANGE | seleccion vigente conservada=si
+[12] Redimensionar tras cambiar el tamano: relacion de aspecto recalculada=si
+[13] Redimensionar con la superficie oculta: INVALID_CANVAS_ELEMENT curso C-2 | instancia viva=si
+[14] Redimensionar con la superficie devuelta a un tamano valido: ajuste aplicado=si
+Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones de red: 0
