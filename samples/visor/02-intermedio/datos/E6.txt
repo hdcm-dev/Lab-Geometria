@@ -1,0 +1,3 @@
+[
+  { "Tipo": "Rectangulo", "Largo": 0.00, "Ancho": 5.00, "Area": 0.00 }
+]
