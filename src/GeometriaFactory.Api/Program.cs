@@ -20,7 +20,40 @@ var app = builder.Build();
 if (!EF.IsDesignTime)
 {
     var startup = app.Services.GetRequiredService<TwoPhaseStartup>();
-    await startup.PrepareStoreAsync(app.Lifetime.ApplicationStopping);
+
+    try
+    {
+        await startup.PrepareStoreAsync(app.Lifetime.ApplicationStopping);
+    }
+    catch (InvalidOperationException noSePudoPreparar)
+    {
+        // DETENERSE ES UNA DECISIÓN Y NO UN CUELGUE, y hasta el 2026-08-30 era un cuelgue.
+        //
+        // La fase 1 ya se detenía ante un almacén que no se entiende —eso lo exige `US-00028` y
+        // funcionaba—, pero lo hacía **dejando escapar la excepción**: el runtime imprimía la
+        // cadena entera, con la traza de pila del proveedor y su mensaje sobre una tabla que ya
+        // existe. Quien despliega leía el síntoma y una traza, y no la causa.
+        //
+        // ENVOLVER LA EXCEPCIÓN NO ALCANZABA, y esa fue la primera corrección intentada: el runtime
+        // imprime también las internas, así que la traza salía igual. Lo que hace falta es
+        // **atraparla acá y terminar por decisión propia**, que es lo que este bloque hace.
+        //
+        // LA CAUSA VIAJA AL OPERADOR Y LA TRAZA AL REGISTRO. El mensaje dice qué pasó y qué hacer;
+        // el detalle técnico se registra por el canal de registro, que es donde lo busca quien
+        // programa y no quien despliega. `RA-03` gobierna lo que el servicio DICE.
+        var registro = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Arranque");
+        registro.LogError(noSePudoPreparar, "La preparación del almacén falló.");
+
+        await Console.Error.WriteLineAsync(noSePudoPreparar.Message);
+        await Console.Error.WriteLineAsync(
+            "El servicio no atendió ninguna petición. Revisá la ruta del almacén en la " +
+            "configuración, o partí de un almacén en su estado de primer arranque.");
+
+        // 78 es `EX_CONFIG` de la convención `sysexits`: la configuración del entorno no sirve.
+        // Un código propio distingue esta parada de un cuelgue, que es lo que un orquestador de
+        // contenedores necesita para no reintentar indefinidamente algo que no se va a arreglar solo.
+        return 78;
+    }
 }
 
 // Fase 2 — recién ahora se abre la superficie HTTP.
@@ -45,6 +78,8 @@ app.MapCommissionAccountEndpoints();
 app.MapWorkEndpoints();
 
 await app.RunAsync();
+
+return 0;
 
 /// <summary>
 /// Hace visible el punto de entrada para `GeometriaFactory.Integration.Tests`, que levanta esta

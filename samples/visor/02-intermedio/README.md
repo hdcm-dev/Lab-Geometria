@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Nivel:** Intermedio
-**Estado de esta carpeta:** **Implementado.** Corre en 0; **9 de 15 líneas coinciden con §6**. Las otras 6 son divergencias declaradas, y **una de ellas es un defecto del visor** (abajo).
+**Estado de esta carpeta:** **Implementado.** Corre en 0; **10 de 15 líneas coinciden con §6** y las otras 5 son divergencias declaradas. **El defecto que este sample encontró está cerrado** (abajo).
 **Documento que la gobierna:** [`ejemplo-02-intermedio.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/10-Examples/ejemplo-02-intermedio.md) 1.1, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-02`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-14`, en estado `Sin verificar`
@@ -43,13 +43,13 @@ La página con el árbol y el selector de escenarios, el anfitrión que sincroni
 
 ## 5. Un defecto, y cinco divergencias con una sola causa
 
-### El defecto: una selección rechazada borra la vigente
+### El defecto que este sample encontró, y que ya está cerrado
 
-§6 dice, en `[11]`, que al pedir un índice fuera del conjunto la **selección vigente se conserva**. No se conserva.
+§6 dice, en `[11]`, que al pedir un índice fuera del conjunto la selección vigente **se conserva**. Hasta el **2026-08-30 no se conservaba**.
 
-`ViewerInstance.select` recorre **todas** las mallas apagando el resalte de las que no coinciden, y recién al terminar el recorrido descubre que ninguna coincidía. Para cuando `INDEX_OUT_OF_RANGE` se informa, el estado ya se tocó: **la comprobación está después del efecto en lugar de antes.**
+`ViewerInstance.select` recorría **todas** las mallas apagando el resalte de las que no coinciden, y recién al terminar el recorrido descubría que ninguna coincidía. Para cuando `INDEX_OUT_OF_RANGE` se informaba, el estado ya se había tocado: **la comprobación estaba después del efecto**. El código que informaba era el correcto; lo que fallaba es que informarlo no deshacía nada.
 
-El código que se informa es el correcto. Lo que falla es que informarlo no deshace nada. Se ve mirando: el cuadro posterior al rechazo no es el anterior.
+**Se corrigió invirtiendo el orden** —la comprobación va primero y una selección que no procede no toca nada—, y **este sample es su verificación**: el renglón `[11]` pasó de `conservada=no` a `conservada=si`, y la divergencia `D-4` que lo declaraba **se retiró en la misma tanda**. Una divergencia declarada que ya no ocurre es exactamente la clase de afirmación vieja que este sample existe para encontrar.
 
 ### Las cinco divergencias, todas de `ADR-08006`
 

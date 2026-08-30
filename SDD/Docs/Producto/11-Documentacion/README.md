@@ -108,7 +108,7 @@ Se generan una sola vez para todo el producto, bajo `SDD/Docs/Producto/11-Docume
 | `Vision-General-Sistema.md` | Todos | 2 | Planificado | — |
 | `Guia-Inicio-Rapido.md` | Mantenedor, operador | 2 | Planificado | — |
 | `Guia-Despliegue.md` | Operador | 2 | Planificado | — |
-| `Bitacora-Eventualidades.md` | Operador, mantenedor | 2, con triaje en cada corte | **Vigente** 1.0, con **siete entradas** y ninguna propagada todavía | 2026-08-30 |
+| `Bitacora-Eventualidades.md` | Operador, mantenedor | 2, con triaje en cada corte | **Vigente** 1.1, con **ocho entradas** y ninguna propagada todavía | 2026-08-30 |
 | `Contrato-Agentes.md` | Todos | 2, refrescado en cada corrida | **Vigente** 1.0 | 2026-08-30 |
 | `AGENTS.md`, en la **raíz del repositorio** | Agentes de IA | 2, derivado del contrato | **Vigente**, derivado de `Contrato-Agentes.md` 1.0 | 2026-08-30 |
 

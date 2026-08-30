@@ -87,7 +87,6 @@ printf '%s\n' "${lineas[@]}"
 
 declare -A divergencias=(
   [2]="D-1 · el servicio expone DIECISIETE operaciones sobre trece rutas, no quince. Contratos-REST.md declara dieciseis puntos de acceso —A-01 a A-17 sin el A-04, retirado— y la operacion que sobra es POST /interpretaciones, que esta implementada, exige acceso firmado y papel Alumno, y NO FIGURA en esa tabla"
-  [6]="D-2 · el mensaje del arranque detenido NO lleva la ruta ni ninguna direccion, pero SI lleva una traza de pila entera: es la excepcion no controlada del proveedor, tal cual. Y dice «table Account already exists», que es el sintoma; el linaje que no se entiende, que es la causa, no aparece. Quien despliega lee lo primero"
   [4]="D-3 · el 503 de A-16 NO TIENE CAMINO. La rama existe en HealthEndpoint, pero StorePreparation o pone la marca en verdadero o lanza, y si lanza el proceso no llega a escuchar. Es consecuencia de que el producto eligiera detenerse en el arranque en vez de atender degradado; el acto 3 mide el otro lado de la misma moneda"
 )
 

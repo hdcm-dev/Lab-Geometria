@@ -44,19 +44,22 @@ Los cuatro actos de §5. **Este es el único sample de la unidad que levanta el 
 
 **Todo ocurre en un directorio temporal propio que se borra al terminar.** Componer un almacén roto cerca del almacén de trabajo sería exactamente el descuido que `scripts/store-path.sh` documenta.
 
-## 5. Las tres divergencias contra §6
+## 5. Las dos divergencias contra §6, y la que se cerró
 
 | # | §6 espera | El árbol |
 | --- | --- | --- |
 | `D-1` | `puntos de acceso expuestos: 15` | **17 operaciones sobre 13 rutas** |
-| `D-2` | `sin ruta, sin direccion y sin traza` | ruta: no · dirección: no · **traza: sí** |
 | `D-3` | `Punto de salud con el almacen indisponible: 503` | **sin camino** |
 
 **`D-1` — hay una operación expuesta que el contrato REST no declara.** `Contratos-REST.md` lista dieciséis puntos de acceso —`A-01` a `A-17`, sin el `A-04`, retirado—. El servicio expone diecisiete operaciones, y la que sobra es **`POST /interpretaciones`**: está implementada, exige acceso firmado y papel `Alumno`, tiene sus comentarios de diseño escritos… y **no figura en esa tabla**. No es un punto olvidado en el código: es un punto olvidado en el contrato.
 
-**`D-2` — dos tercios de `RA-03` se cumplen y el tercio que falta es el que más se ve.** El mensaje del arranque detenido **no lleva la ruta del almacén ni ninguna dirección**, que era lo más delicado. Pero lleva **la traza de pila entera**: es la excepción no controlada del proveedor, tal cual sale.
+### La que se cerró: el mensaje del arranque detenido
 
-Y hay algo peor que la traza, aunque §6 no lo pida: el mensaje dice **`table "Account" already exists`**. Ése es el síntoma. La causa —un linaje que el servicio no entiende— no aparece por ningún lado. Quien despliega lee lo primero y sale a buscar una tabla duplicada.
+Hasta el **2026-08-30** el arranque **se colgaba** ante un almacén de linaje desconocido: se detenía —eso `US-00028` lo exige y funcionaba— pero dejando escapar la excepción, así que el runtime volcaba la cadena entera, con la traza del proveedor y su mensaje sobre una tabla que ya existe. Quien despliega leía **el síntoma y una traza**, no la causa.
+
+**Envolver la excepción no alcanzó**, y fue la primera corrección intentada: el runtime imprime también las internas. Lo que hacía falta era **atraparla en el arranque y terminar por decisión propia**, con código de salida `78` —`EX_CONFIG`—, que además distingue esta parada de un cuelgue para un orquestador de contenedores.
+
+**Y al cerrarlo hubo que corregir la medición.** Antes había una sola cosa que mirar; ahora hay dos y son de naturaleza distinta: **el mensaje**, que es lo que `RA-03` gobierna y hoy sale limpio, y **el registro**, donde la excepción original queda con su traza — que es donde tiene que estar. Medirlas juntas decía que había traza en el mensaje cuando la traza estaba en el registro: **medir dos cosas y reportar una**. El sample las separa, y deja constancia de que el detalle técnico no se perdió.
 
 **`D-3` — el `503` de `A-16` no tiene camino.** `Contratos-REST.md` §3 le da a ese punto exactamente dos códigos, y la rama existe en `HealthEndpoint`. Pero `StorePreparation` o termina poniendo la marca en verdadero, o lanza; y si lanza, el proceso no llega a escuchar. **No es un defecto: es la consecuencia de que el producto eligiera detenerse en el arranque en lugar de atender degradado.** Con el almacén indisponible no hay `503` porque no hay servicio, y el acto 3 mide exactamente ese otro lado.
 

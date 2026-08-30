@@ -103,7 +103,11 @@ export class ViewerInstance {
       const outcome = meshFor(piece);
 
       if (outcome.mesh === null) {
-        undrawn.push({ position: piece.position, reason: outcome.reason ?? 'UNKNOWN' });
+        // EL RESPALDO `?? 'UNKNOWN'` SE RETIRÓ, y no por limpieza: `UNKNOWN` era un código que el
+        // contrato de la fachada no declara, acuñado aguas abajo. Hoy `MeshOutcome` es una unión
+        // discriminada, así que **el compilador garantiza que sin malla hay motivo** y el respaldo
+        // dejó de tener sentido además de no tener camino.
+        undrawn.push({ position: piece.position, reason: outcome.reason });
         continue;
       }
 
@@ -136,8 +140,24 @@ export class ViewerInstance {
   }
 
   /** Resalta la pieza de esa posición. Devuelve falso si esa posición no está dibujada. */
+  /**
+   * LA COMPROBACIÓN VA ANTES DEL EFECTO, Y ANTES IBA DESPUÉS. Este método recorría **todas** las
+   * mallas apagando el resalte de las que no coinciden y recién al terminar el recorrido descubría
+   * que ninguna coincidía: devolvía `false`, la fachada informaba `INDEX_OUT_OF_RANGE`, y para
+   * entonces **el resalte que había ya se había apagado**.
+   *
+   * NO ERA UN DETALLE DE ORDEN: informar el rechazo no deshacía nada. La persona hacía clic en una
+   * fila legítima del árbol —una pieza que el árbol muestra y la escena no dibujó— y **perdía el
+   * resaltado que tenía**, sin ningún mensaje que lo explicara. Lo midió el sample
+   * `visor/02-intermedio`, comparando el cuadro anterior con el posterior al rechazo.
+   *
+   * UNA SELECCIÓN QUE NO PROCEDE NO TOCA NADA. Es la misma forma que el resto del producto ya
+   * aplica: el dominio comprueba y después muta, y nunca al revés.
+   */
   public select(position: number): boolean {
-    const target = this.pieces.get(position);
+    if (!this.pieces.has(position)) {
+      return false;
+    }
 
     for (const [key, mesh] of this.pieces) {
       const material = mesh.material as THREE.MeshStandardMaterial;
@@ -149,7 +169,7 @@ export class ViewerInstance {
       }
     }
 
-    return target !== undefined;
+    return true;
   }
 
   public resize(): void {

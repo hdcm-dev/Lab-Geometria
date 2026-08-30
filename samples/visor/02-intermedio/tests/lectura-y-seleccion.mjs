@@ -129,9 +129,15 @@ await hoja.evaluate(() => window.anfitrion.seleccionar(0));
 decir(`[10] Seleccion del indice de E-8 enumerado como no dibujado: ${codigoDelAviso(await ultimoAviso())}`);
 
 // ---- [11] fuera del conjunto raíz ----
-// ACÁ APARECE UN DEFECTO, y por eso las dos mitades del renglón se miden por
-// separado. El código que se informa es el correcto; lo que no se cumple es que
-// la selección vigente sobreviva al rechazo.
+// ACÁ APARECIÓ UN DEFECTO Y ACÁ SE VERIFICA QUE ESTÁ CERRADO. Hasta el
+// 2026-08-30 `select` recorría todas las mallas apagando el resalte y recién al
+// final descubría que ninguna coincidía: informaba `INDEX_OUT_OF_RANGE` con el
+// estado ya tocado, y este renglón decía `conservada=no`.
+//
+// LAS DOS MITADES SE SIGUEN MIDIENDO POR SEPARADO, y no se juntan ahora que las
+// dos pasan: son dos cosas distintas —qué código se informa y qué le pasa a lo
+// que había— y un renglón que las colapse deja de poder distinguirlas la próxima
+// vez que una de las dos se rompa.
 await hoja.evaluate(() => window.anfitrion.cargar('E7'));
 await hoja.evaluate(() => window.anfitrion.seleccionar(2));
 const vigente = await escena.screenshot();
@@ -193,7 +199,6 @@ const divergencias = {
   6: 'D-1 (misma causa) · el codigo y el mecanismo son EXACTAMENTE los que §6 describe —UNREADABLE_DIMENSION por una dimension ausente—; lo que cambia son los numeros, porque el laboratorio entrego una sola pieza y no dos',
   8: 'D-2 · el visor no devuelve la estructura del texto, y es lo mismo que en visor/01-basico: no recibe el texto. Lo que el arbol necesita —dibujadas y no dibujadas con su motivo— si lo devuelve, y el anfitrion arma con eso las filas que se cuentan al lado',
   10: 'D-1 (misma causa) · el renglon dice lo mismo que §6 salvo el indice: en E-8 la pieza enumerada como no dibujada es la 0 y no la 1, porque el laboratorio entrego una sola',
-  11: 'D-4 · DEFECTO. §6 dice que la seleccion vigente se conserva y NO se conserva: una seleccion rechazada la BORRA. `ViewerInstance.select` recorre todas las mallas apagando el resalte de las que no coinciden, y recien al final descubre que ninguna coincidia; para cuando `INDEX_OUT_OF_RANGE` se informa, el estado ya se toco. La comprobacion esta despues del efecto en lugar de antes. Se ve mirando: el cuadro posterior al rechazo no es el anterior',
   13: 'D-3 · INVALID_CANVAS_ELEMENT NO se emite en este curso. `resize` no comprueba el tamano: cae a `clientWidth || 1` y redimensiona a un pixel. La mitad que §6 afirma si se cumple —la instancia sigue viva con su escena y su seleccion intactas—; lo que falta es el aviso',
 };
 

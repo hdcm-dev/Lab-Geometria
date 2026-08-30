@@ -61,10 +61,12 @@ El bucle deja de incrementar `mesh.rotation.y` y nada más. **Apagar no es desha
 
 | # | §6 espera | El árbol |
 | --- | --- | --- |
-| `D-2` `[15]` | `7 de 7` códigos, `0` acuñados | **6 de 7**, y **1 acuñado** |
+| `D-2` `[15]` | `7 de 7` códigos, `0` acuñados | **6 de 7**; los acuñados **ya son 0** |
 | `D-3` `[10]` | `globales sueltas: 0` | **1 — `__THREE__`** |
 
-**`D-2` tiene dos mitades y sólo una es un hallazgo.** El código que falta es `UNREADABLE_TEXT`, y no es un olvido: era el código del texto del alumno, que la fachada ya no recibe desde `ADR-08006`. Pero hay **uno acuñado aguas abajo** —`UNKNOWN`, el respaldo de `reason ?? 'UNKNOWN'`— y §6 exige que sean cero. Hoy no es alcanzable, porque `meshFor` siempre pone motivo cuando no hay malla; sigue siendo un código que el contrato no declara.
+**`D-2` tenía dos mitades y una ya está cerrada.** El código que falta es `UNREADABLE_TEXT`, y no es un olvido: era el código del texto del alumno, que la fachada ya no recibe desde `ADR-08006`. La otra mitad —**uno acuñado aguas abajo**, `UNKNOWN`, el respaldo de `reason ?? 'UNKNOWN'`— **se cerró el 2026-08-30**: se retiró el respaldo y `MeshOutcome` pasó a ser una unión discriminada, de modo que el caso que lo justificaba **no compila**. Hoy el renglón dice `0`.
+
+**Y al cerrarla apareció un falso positivo del propio instrumento.** Retirado el literal, la inspección lo seguía contando: leía los dos comentarios que explican **por qué** se retiró. Ahora quita los comentarios antes de contar. Es la misma clase de falso positivo que la mesa del 2026-08-27 midió con los seis enlaces rotos que no eran enlaces — **un identificador nombrado en prosa no es un identificador emitido**.
 
 **`D-3` no lo pone el producto.** `__THREE__` la registra el motor gráfico al cargarse, para avisar si hay dos copias suyas en la página. El nombre propio del paquete sigue siendo uno solo y las seis funciones están donde tienen que estar.
 
