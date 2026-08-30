@@ -3,10 +3,10 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Nivel:** Avanzado
-**Estado de esta carpeta:** **Esqueleto — sin código.**
-**Documento que la gobierna:** [`ejemplo-03-avanzado.md`](../../../SDD/Docs/Proyectos/GeometriaFactory-Visor/10-Examples/ejemplo-03-avanzado.md) 1.0, del que este README es la copia corta de §1, §3 y §4
+**Estado de esta carpeta:** **Implementado.** Corre en 0; **14 de 17 líneas coinciden con §6**, estable en corridas repetidas. Las otras 3 son divergencias declaradas, y **una es un defecto** (abajo).
+**Documento que la gobierna:** [`ejemplo-03-avanzado.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/10-Examples/ejemplo-03-avanzado.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-03`, declarado en la §9 de ese documento
-**Sonda de sensado:** [`SD-15`](../../../SDD/Docs/Proyectos/GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
+**Sonda de sensado:** `SD-15`, en estado `Sin verificar`
 
 **Comando previsto:**
 
@@ -35,10 +35,50 @@ Demostrar el punto de extensión del producto entero: las **seis** funciones de 
 4. Para mirarlo a mano, abrir `samples/visor/03-avanzado/index.html` y usar los dos controles de movimiento.
 5. Comparar con §6 del documento que gobierna esta carpeta.
 
-## 4. Qué hay hoy acá, y qué falta
+## 4. Qué hay acá
 
-Hoy esta carpeta tiene **sólo este README**. La carpeta se crea en la **pasada de diseño** de `Rules-Examples.md` §0.2, que le asigna exactamente esto: la carpeta esqueletada, con su README local y su comando previsto. El código del sample lo produce la **pasada de ejecución**, durante la codificación.
+Los tres recorridos de §5 —las seis funciones, el gobierno del movimiento, y las dos puertas técnicas—, más un cuarto que compara contra §6. Todo contra Chromium de verdad y **sin backend**.
 
-**El comando previsto todavía no resuelve, y esta carpeta no promete lo contrario.** Es la consecuencia declarada de que el sample no esté implementado: el campo `evidencia` del contrato `VER-03` dice `No verificado — sin código`, sin fecha y sin salida, y la fila `SD-15` de la matriz de sensado nace en `Sin verificar`. Ninguna corrida se afirma acá.
+**El anfitrión conserva la preferencia y la fachada no.** Es la línea divisoria de `G-2` y `G-3`, y no es una sutileza de diseño: gracias a eso el recorrido puede prender los dos movimientos aunque el entorno declare preferencia de movimiento reducido. Sin esa propiedad, la medición de cero red de `[13]` quedaría en verde **sin haber ejercitado nunca el bucle de dibujo**.
 
-**Qué va a vivir acá cuando la pasada de ejecución corra.** El árbol de archivos que el sample va a tener está declarado en la §5 del documento que gobierna esta carpeta, y la salida exacta que va a producir, en su §6. Los dos se escribieron antes que el código, a propósito.
+**Las piezas vienen ya reconstruidas**, producidas corriendo el intérprete real sobre los `.txt` de `datos/`.
+
+## 5. Un defecto y dos divergencias
+
+### El defecto: apagar un movimiento no deshace lo que hizo
+
+| | §6 espera | El árbol |
+| --- | --- | --- |
+| `[7]` | piezas de vuelta en su orientación de partida | **quedan donde estaban** |
+
+El bucle deja de incrementar `mesh.rotation.y` y nada más. **Apagar no es deshacer**, y acá la diferencia se ve: el cuadro posterior al apagado no es el anterior al encendido.
+
+**Lo mismo vale para la cámara**, aunque §6 no lo pida en un renglón propio: prender la órbita la mueve y apagarla la deja donde quedó. Es la misma causa, y por eso el sample la nombra en `[5]` en vez de dejarla implícita.
+
+*(Es la segunda vez que este patrón aparece en el visor: en `visor/02-intermedio`, una selección rechazada borraba la vigente. Las dos son «el efecto ya ocurrió cuando se decide sobre él».)*
+
+### Las dos divergencias
+
+| # | §6 espera | El árbol |
+| --- | --- | --- |
+| `D-2` `[15]` | `7 de 7` códigos, `0` acuñados | **6 de 7**, y **1 acuñado** |
+| `D-3` `[10]` | `globales sueltas: 0` | **1 — `__THREE__`** |
+
+**`D-2` tiene dos mitades y sólo una es un hallazgo.** El código que falta es `UNREADABLE_TEXT`, y no es un olvido: era el código del texto del alumno, que la fachada ya no recibe desde `ADR-08006`. Pero hay **uno acuñado aguas abajo** —`UNKNOWN`, el respaldo de `reason ?? 'UNKNOWN'`— y §6 exige que sean cero. Hoy no es alcanzable, porque `meshFor` siempre pone motivo cuando no hay malla; sigue siendo un código que el contrato no declara.
+
+**`D-3` no lo pone el producto.** `__THREE__` la registra el motor gráfico al cargarse, para avisar si hay dos copias suyas en la página. El nombre propio del paquete sigue siendo uno solo y las seis funciones están donde tienen que estar.
+
+## 6. Lo que sí salió como está escrito
+
+- **`PT-02` entera, en sus cinco tramos**: carga, escena, `E-1` con su ortoedro, **diez recorridos de ida y vuelta sin degradar**, y sincronización por índice. Diez está elegido por encima del límite de contextos gráficos vivos del navegador, que es lo que hace aparecer el defecto si `destroy` no libera.
+- **`PT-03`**: motor de dibujo dentro del bundle, comprobado buscando su firma en el archivo generado y no confiando en el `package.json`.
+- **Cero peticiones de red con los dos movimientos prendidos y sostenidos, y durante rotar y acercar.** La condición de medición es vinculante: medirlo con los movimientos apagados dejaría la prueba en verde sin haber ejercitado el bucle.
+- **Cero ocurrencias de las tres formas de petición, en la fuente y en el bundle generado.** Las dos inspecciones hacen falta: una dependencia que pidiera por dentro no aparecería en la fuente.
+- **Cero claves en el almacenamiento del navegador**, contadas después de haber ejercitado la fachada entera.
+
+## 7. Dos cosas que el sample resolvió corriéndose
+
+- **El orden en que se puede medir no es el orden en que §6 se lee.** `[13]` y `[14]` sólo se pueden medir con el movimiento gobernado —son del segundo recorrido— y §6 los lee después de las puertas técnicas, que son del tercero. El comparador ubica cada renglón **por su etiqueta**: se reordena la emisión, nunca la medición.
+- **Y las divergencias se anotan por etiqueta, no por número de renglón.** Con número falló en silencio: `[10b]` corre la numeración un lugar, así que la declaración de `[15]` apuntaba al renglón equivocado y aparecía como no declarada.
+
+**`[5]` se mide sin dejar correr un solo cuadro entre prender y apagar**, y la ausencia de espera es deliberada. Lo que §6 afirma es que **gobernar** no mueve nada más; si se dejara correr la órbita, la cámara se movería por el movimiento y no por el acto de gobernarlo. Sin esa precisión el renglón daba distinto en dos corridas iguales.
