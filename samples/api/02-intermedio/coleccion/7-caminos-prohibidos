@@ -1,0 +1,37 @@
+# Paso 7 — A-12, A-15, A-11, FORZADOS contra la superficie.
+#
+# ES EL PASO QUE JUSTIFICA QUE ESTA COLECCIÓN EXISTA. El intake declara
+# bloqueante que estos controles se verifiquen forzando la petición contra el
+# servicio: que un control no se dibuje en una pantalla no prueba nada.
+forzados=0; rechazados=0
+forzar() {
+  forzados=$((forzados + 1))
+  [ "$1" -ge 400 ] && rechazados=$((rechazados + 1))
+}
+
+# LAS DOS PRIMERAS NO SON INTERCAMBIABLES Y LA DIFERENCIA ES DELIBERADA.
+# Eliminar un trabajo propio fuera de `Borrador` responde 409 —el estado no lo
+# permite—; eliminar uno ajeno responde 404, porque `RN-00003` hace que el
+# ajeno sea INDISTINGUIBLE del inexistente. Colapsarlas en un 403 revelaría que
+# ese trabajo existe, que es justamente lo que la regla evita.
+pedir DELETE "/trabajos/${trabajo_de[E3]}" "" "$acceso_alumno" A-12
+propio_fuera="$estado"; forzar "$estado"
+
+pedir DELETE "/trabajos/${trabajo_de[E3]}" "" "$acceso_otro" A-12
+ajeno="$estado"; forzar "$estado"
+decir "[7] Eliminar un trabajo propio fuera de Borrador: $propio_fuera | Eliminar un trabajo ajeno: $ajeno"
+
+pedir POST "/trabajos/${trabajo_de[E4]}/desenlace" \
+  "{\"workId\":\"${trabajo_de[E4]}\",\"outcome\":\"Approve\",\"comment\":null}" "$acceso_alumno" A-15
+por_alumno="$estado"; forzar "$estado"
+
+pedir POST "/trabajos/${trabajo_de[E4]}" \
+  "{\"workId\":\"${trabajo_de[E4]}\",\"name\":\"Reenvio\",\"declaredDate\":\"2026-08-30\",\"description\":null,\"originalJson\":\"[]\"}" \
+  "$acceso_alumno" A-11
+reenvio="$estado"; forzar "$estado"
+decir "[7] Desenlace pedido por un alumno: $por_alumno | Reenvio sobre un trabajo que no esta en Borrador: $reenvio"
+
+# «RECHAZADOS POR UNA PANTALLA: 0» ES UNA AFIRMACIÓN SOBRE EL INSTRUMENTO, y por
+# eso vale: acá no hay pantalla. Las cuatro peticiones salieron por HTTP y las
+# cuatro las contestó el servicio.
+decir "[7] Caminos prohibidos forzados: $forzados | Rechazados por el servicio: $rechazados | Rechazados por una pantalla: 0"

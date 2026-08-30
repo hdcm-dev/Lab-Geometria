@@ -1,0 +1,24 @@
+# Paso 8 — A-09, A-05, A-13: `RN-00013` de punta a punta.
+#
+# LAS DOS LÍNEAS SON UNA SOLA REGLA. Después del reseteo el alumno queda
+# CONFINADO al cambio de contraseña, y recién después de cambiarla la MISMA
+# petición funciona. Que sea la misma petición es la mitad que importa: una
+# petición distinta no probaría que el confinamiento se levantó.
+pedir POST "/cuentas/$id_alumno/reseteo-de-contrasena" \
+  "{\"accountId\":\"$id_alumno\"}" "$acceso_admin" A-09
+reseteo="$estado"
+nueva_provisoria="$(campo provisionalPassword "$cuerpo_recibido")"
+
+# EL ACCESO SIGUE SIENDO EL DE ANTES DEL RESETEO, y sigue vigente: la marca se
+# lee del almacén y no del acceso presentado. Es lo que hace que el
+# confinamiento corte sin esperar a que el acceso venza.
+pedir GET /trabajos "" "$acceso_alumno" A-13
+decir "[8] Reseteo: $reseteo con $([ -n "$nueva_provisoria" ] && echo provisoria || echo SIN-PROVISORIA) | Listado pedido por el alumno: $estado $(campo code "$cuerpo_recibido")"
+
+clave_final="$(inventar_clave)"
+pedir POST /cuenta/contrasena \
+  "{\"email\":\"$correo_alumno\",\"currentPassword\":\"$nueva_provisoria\",\"newPassword\":\"$clave_final\"}" "" A-05
+cambio="$estado"
+
+pedir GET /trabajos "" "$acceso_alumno" A-13
+decir "[8] Cambio de contrasena: $cambio | La misma peticion de listado: $estado"

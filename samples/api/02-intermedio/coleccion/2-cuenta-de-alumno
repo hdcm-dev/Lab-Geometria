@@ -1,0 +1,25 @@
+# Paso 2 — A-02, A-01, A-06, A-07, A-05.
+#
+# EL ALTA Y LA HABILITACIÓN SON DOS ACTOS: la cuenta nace `Pending` y sin
+# credencial; la provisoria la produce el servicio en la habilitación (RN-16).
+correo_alumno="alumno@ejemplo.edu"
+clave_alumno="$(inventar_clave)"
+
+pedir POST /cuentas \
+  "{\"email\":\"$correo_alumno\",\"firstName\":\"Nadia\",\"lastName\":\"Ferrer\"}" "" A-02
+alta="$estado"
+id_alumno="$(campo accountId "$cuerpo_recibido")"
+
+pedir POST /auth/token "{\"email\":\"$correo_admin\",\"password\":\"$clave_admin\"}" "" A-01
+acceso_admin="$(campo accessToken "$cuerpo_recibido")"
+
+pedir GET /cuentas "" "$acceso_admin" A-06
+
+pedir POST "/cuentas/$id_alumno/situacion" \
+  "{\"accountId\":\"$id_alumno\",\"intendedStatus\":\"Enabled\"}" "$acceso_admin" A-07
+habilitacion="$estado"
+provisoria="$(campo provisionalPassword "$cuerpo_recibido")"
+
+pedir POST /cuenta/contrasena \
+  "{\"email\":\"$correo_alumno\",\"currentPassword\":\"$provisoria\",\"newPassword\":\"$clave_alumno\"}" "" A-05
+decir "[2] Registrar alumno: $alta | Habilitar: $habilitacion con $([ -n "$provisoria" ] && echo provisoria || echo SIN-PROVISORIA) | Cambiar contrasena: $estado"

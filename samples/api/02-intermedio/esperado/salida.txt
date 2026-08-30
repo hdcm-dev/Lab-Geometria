@@ -1,0 +1,23 @@
+[1] Configurar administrador: 201 | Segundo intento: 409 ADMINISTRATOR_ALREADY_CONFIGURED
+[2] Registrar alumno: 201 | Habilitar: 200 con provisoria | Cambiar contrasena: 200
+[3] Canje como alumno: 200 | Canje como administrador: 200
+[4] E-1: 201 estado=Pendiente | piezas=3 observaciones=2
+[4] E-2: 201 estado=Pendiente | piezas=1 advertencia de volumen declarado=343.00 derivado=1029.00
+[4] E-3: 201 estado=Pendiente | advertencia de area declarado=36.00 derivado=54.00
+[4] E-4: 201 estado=Pendiente | observaciones=0
+[4] E-5: 201 estado=Borrador | error indice-figura=1 campo=Tipo
+[4] E-6: 201 estado=Pendiente | la figura se interpreta y no se descarta
+[4] E-7: 201 estado=Pendiente | piezas=6
+[4] E-8: 201 estado=Borrador | error localizado por indice de figura y campo
+[4] Envios: 8 | Respuestas de exito: 8 | Pendiente: 6 | Borrador: 2
+[5] Listado del alumno: 200 con 8 | Listado del administrador: 200 con 6 | borradores visibles: 0
+[5] Detalle con los dos papeles: 200 | componentes presentes: si
+[6] Aprobar con comentario: 200 estado=Aprobado | Rechazar sin comentario: 200 estado=Rechazado
+[7] Eliminar un trabajo propio fuera de Borrador: 409 | Eliminar un trabajo ajeno: 404
+[7] Desenlace pedido por un alumno: 403 | Reenvio sobre un trabajo que no esta en Borrador: 409
+[7] Caminos prohibidos forzados: 4 | Rechazados por el servicio: 4 | Rechazados por una pantalla: 0
+[8] Reseteo: 200 con provisoria | Listado pedido por el alumno: 403 PASSWORD_CHANGE_REQUIRED
+[8] Cambio de contrasena: 200 | La misma peticion de listado: 200
+[cobertura] Puntos de acceso ejercitados: 13 de 15
+[datos] Cuerpos inventados: 0 | Cuerpos modificados: 0
+Pasos de la coleccion: 3 | Peticiones: 34 | Diferencias contra lo esperado: 0

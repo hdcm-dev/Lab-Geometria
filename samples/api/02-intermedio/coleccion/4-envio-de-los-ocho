@@ -1,0 +1,76 @@
+declare -A cuerpo_envio=() estado_envio=() situacion_envio=()
+# Paso 4 — A-10, un trabajo por escenario.
+#
+# LOS OCHO RESPONDEN CON ÉXITO Y NINGUNO CON FALLO, y ésa es la propiedad más
+# importante que esta colección demuestra: **el estado del trabajo no es el
+# código de respuesta**. Dos quedan en `Borrador` y los ocho se guardaron
+# (`CA-03` de `CU-00012` §8). Un servicio que devolviera 400 acá estaría
+# diciendo que la petición está mal formada, y no lo está.
+declare -A trabajo_de=()
+exitos=0; pendientes=0; borradores=0
+
+for e in E1 E2 E3 E4 E5 E6 E7 E8; do
+  texto="$(awk -f "$aqui/cuerpos/escapar.awk" "$aqui/cuerpos/$e.txt")"
+  pedir POST /trabajos \
+    "{\"name\":\"Trabajo $e\",\"declaredDate\":\"2026-08-30\",\"description\":null,\"originalJson\":$texto}" \
+    "$acceso_alumno" A-10
+
+  crudo="$(campo status "$cuerpo_recibido")"
+  situacion="$(castellano "$crudo")"
+  trabajo_de[$e]="$(campo workId "$cuerpo_recibido")"
+  [ "$estado" = "201" ] && exitos=$((exitos + 1))
+  [ "$crudo" = "Submitted" ] && pendientes=$((pendientes + 1))
+  [ "$crudo" = "Draft" ] && borradores=$((borradores + 1))
+
+  cuerpo_envio[$e]="$cuerpo_recibido"
+  estado_envio[$e]="$estado"
+  situacion_envio[$e]="$situacion"
+done
+
+# El detalle se pide sólo donde §6 cuenta piezas. Cada pieza del detalle trae su
+# propia lista de componentes, así que las piezas se cuentan por ahí.
+piezas_de() {
+  pedir GET "/trabajos/${trabajo_de[$1]}" "" "$acceso_alumno" A-14
+  contar '"components":' "$cuerpo_recibido"
+}
+
+obs_de() { contar '"kind":' "${cuerpo_envio[$1]}"; }
+advertencia_de() {
+  printf '%s' "${cuerpo_envio[$1]}" \
+    | sed -n "s/.*\"kind\":\"Warning\",\"piecePosition\":[0-9]*,\"field\":\"$2\",\"declaredValue\":\([0-9.]*\),\"derivedValue\":\([0-9.]*\).*/\1 \2/p" \
+    | head -1
+}
+con_dos_decimales() { awk -v v="$1" 'BEGIN{printf "%.2f", v}'; }
+
+decir "[4] E-1: ${estado_envio[E1]} estado=${situacion_envio[E1]} | piezas=$(piezas_de E1) observaciones=$(obs_de E1)"
+
+read -r decl2 der2 <<< "$(advertencia_de E2 Volumen)"
+decir "[4] E-2: ${estado_envio[E2]} estado=${situacion_envio[E2]} | piezas=$(piezas_de E2) advertencia de volumen declarado=$(con_dos_decimales "$decl2") derivado=$(con_dos_decimales "$der2")"
+
+read -r decl3 der3 <<< "$(advertencia_de E3 Area)"
+decir "[4] E-3: ${estado_envio[E3]} estado=${situacion_envio[E3]} | advertencia de area declarado=$(con_dos_decimales "$decl3") derivado=$(con_dos_decimales "$der3")"
+
+decir "[4] E-4: ${estado_envio[E4]} estado=${situacion_envio[E4]} | observaciones=$(obs_de E4)"
+
+indice5=$(printf '%s' "${cuerpo_envio[E5]}" | sed -n 's/.*"kind":"ValidationError","piecePosition":\([0-9]*\).*/\1/p')
+campo5=$(printf '%s' "${cuerpo_envio[E5]}" | sed -n 's/.*"kind":"ValidationError","piecePosition":[0-9]*,"field":"\([^"]*\)".*/\1/p')
+decir "[4] E-5: ${estado_envio[E5]} estado=${situacion_envio[E5]} | error indice-figura=$indice5 campo=$campo5"
+
+# E-6 ES UN CRITERIO NEGATIVO: la dimensión en cero se interpreta y NO se
+# descarta, así que lo que hay que ver es que la pieza esté y no que falte.
+piezas6=$(piezas_de E6)
+decir "[4] E-6: ${estado_envio[E6]} estado=${situacion_envio[E6]} | $([ "$piezas6" -gt 0 ] && echo 'la figura se interpreta y no se descarta' || echo 'LA FIGURA SE DESCARTO')"
+
+# NINGUNA FUENTE DECLARA EL RECUENTO DE OBSERVACIONES DE E-7 y esta categoría no
+# lo calcula: la abstención es la misma que `CU-00012` §6 declara en su fila.
+decir "[4] E-7: ${estado_envio[E7]} estado=${situacion_envio[E7]} | piezas=$(piezas_de E7)"
+
+indice8=$(printf '%s' "${cuerpo_envio[E8]}" | sed -n 's/.*"kind":"ValidationError","piecePosition":\([0-9]*\).*/\1/p')
+campo8=$(printf '%s' "${cuerpo_envio[E8]}" | sed -n 's/.*"kind":"ValidationError","piecePosition":[0-9]*,"field":"\([^"]*\)".*/\1/p')
+if [ -n "$indice8" ] && [ -n "$campo8" ]; then
+  decir "[4] E-8: ${estado_envio[E8]} estado=${situacion_envio[E8]} | error localizado por indice de figura y campo"
+else
+  decir "[4] E-8: ${estado_envio[E8]} estado=${situacion_envio[E8]} | error SIN LOCALIZAR"
+fi
+
+decir "[4] Envios: 8 | Respuestas de exito: $exitos | Pendiente: $pendientes | Borrador: $borradores"

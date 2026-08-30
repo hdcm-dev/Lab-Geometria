@@ -1,0 +1,30 @@
+# Paso 3 — A-01 con los dos papeles.
+pedir POST /auth/token "{\"email\":\"$correo_alumno\",\"password\":\"$clave_alumno\"}" "" A-01
+canje_alumno="$estado"
+acceso_alumno="$(campo accessToken "$cuerpo_recibido")"
+
+pedir POST /auth/token "{\"email\":\"$correo_admin\",\"password\":\"$clave_admin\"}" "" A-01
+acceso_admin="$(campo accessToken "$cuerpo_recibido")"
+decir "[3] Canje como alumno: $canje_alumno | Canje como administrador: $estado"
+
+# UN SEGUNDO ALUMNO, Y NO ES DECORADO: sin él, «un trabajo ajeno» del paso 7 no
+# se puede pedir. El administrador NO sirve para eso —tiene alcance sobre los
+# trabajos de la comisión y la baja le procede—, y usarlo mediría lo contrario
+# de lo que `RN-00003` dice. Se vio corriendo el sample: con el administrador
+# como solicitante, la baja del trabajo «ajeno» devolvió 204.
+correo_otro="otro-alumno@ejemplo.edu"
+clave_otro="$(inventar_clave)"
+
+pedir POST /cuentas \
+  "{\"email\":\"$correo_otro\",\"firstName\":\"Ivo\",\"lastName\":\"Paz\"}" "" A-02
+id_otro="$(campo accountId "$cuerpo_recibido")"
+
+pedir POST "/cuentas/$id_otro/situacion" \
+  "{\"accountId\":\"$id_otro\",\"intendedStatus\":\"Enabled\"}" "$acceso_admin" A-07
+provisoria_otro="$(campo provisionalPassword "$cuerpo_recibido")"
+
+pedir POST /cuenta/contrasena \
+  "{\"email\":\"$correo_otro\",\"currentPassword\":\"$provisoria_otro\",\"newPassword\":\"$clave_otro\"}" "" A-05
+
+pedir POST /auth/token "{\"email\":\"$correo_otro\",\"password\":\"$clave_otro\"}" "" A-01
+acceso_otro="$(campo accessToken "$cuerpo_recibido")"
