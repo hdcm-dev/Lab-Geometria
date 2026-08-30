@@ -1,0 +1,58 @@
+[
+  {
+  "Tipo": "Cilindro",
+  "Tapas":
+  [
+    {
+  "Tipo":"Circulo",
+  "Radio": 3.00,
+  "Area": 28.27
+},
+    {
+  "Tipo":"Circulo",
+  "Radio": 3.00,
+  "Area": 28.27
+}
+  ],
+  "Lado":
+{
+  "Tipo": "RectanguloDesarrollado",
+  "Largo": 3.00,
+  "Ancho": 18.85,
+  "Area": 56.55
+},
+  "Area": 113.10,
+  "Volumen": 84.82
+},
+  {
+  "Tipo": "Cubo",
+  "Caras":
+  [
+    { "Tipo":"Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+    { "Tipo":"Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+    { "Tipo":"Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+    { "Tipo":"Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+    { "Tipo":"Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+    { "Tipo":"Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 }
+  ],
+  "Area": 36.00,
+  "Volumen": 27.00
+},
+  {
+  "Tipo": "Ortoedro",
+  "Bases":
+  [
+    { "Tipo": "Rectangulo", "Largo": 7.00, "Ancho": 7.00, "Area": 49.00 },
+    { "Tipo": "Rectangulo", "Largo": 7.00, "Ancho": 7.00, "Area": 49.00 }
+  ],
+  "Laterales":
+    [
+      { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 },
+      { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 },
+      { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 },
+      { "Tipo": "Rectangulo", "Largo": 21.00, "Ancho": 7.00, "Area": 147.00 }
+    ],
+  "Area": 686.00,
+  "Volumen": 343.00
+}
+]
