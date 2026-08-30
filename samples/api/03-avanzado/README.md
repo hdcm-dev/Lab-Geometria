@@ -3,8 +3,8 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Nivel:** Avanzado
-**Estado de esta carpeta:** **Esqueleto — sin código.**
-**Documento que la gobierna:** [`ejemplo-03-avanzado.md`](../../../SDD/Docs/Proyectos/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado.md) 1.0, del que este README es la copia corta de §1, §3 y §4
+**Estado de esta carpeta:** **Implementado.** Corre en 0; **7 de 10 líneas coinciden con §6** y las otras 3 son divergencias declaradas (abajo). **Dos de las tres son hallazgos sobre el producto.**
+**Documento que la gobierna:** [`ejemplo-03-avanzado.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-api.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-03`, declarado en la §9 de ese documento
 **Sonda de sensado:** [`SD-03`](../../../SDD/Docs/Proyectos/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
 
@@ -36,10 +36,31 @@ Demostrar lo que este proyecto de código tiene de propio y ningún otro del pro
 4. Ejecutar el sample: `bash samples/api/03-avanzado/run.sh`.
 5. Comparar la salida con §6 del documento que gobierna esta carpeta.
 
-## 4. Qué hay hoy acá, y qué falta
+## 4. Qué hay acá
 
-Hoy esta carpeta tiene **sólo este README**. La carpeta se crea en la **pasada de diseño** de `Rules-Examples.md` §0.2, que le asigna exactamente esto: la carpeta esqueletada, con su README local y su comando previsto. El código del sample lo produce la **pasada de ejecución**, durante la codificación.
+Los cuatro actos de §5. **Este es el único sample de la unidad que levanta el servicio él mismo**, y tiene que ser así: lo que mide son propiedades del arranque, y un servicio que ya está arriba no tiene arranque que mostrar. Arranca **dos veces** —una sobre un almacén sano y otra sobre uno de linaje desconocido— y la segunda no debe llegar a escuchar.
 
-**El comando previsto todavía no resuelve, y esta carpeta no promete lo contrario.** Es la consecuencia declarada de que el sample no esté implementado: el campo `evidencia` del contrato `VER-03` dice `No verificado — sin código`, sin fecha y sin salida, y la fila `SD-03` de la matriz de sensado nace en `Sin verificar`. Ninguna corrida se afirma acá.
+**El almacén de linaje desconocido lo compone el sample**, y `almacenes/linaje-desconocido.md` deja constancia de eso para que nadie lo lea como un dato del producto. Lo compone `almacenes/almacen.cs`, una aplicación de un solo archivo: en el entorno contenido no hay `sqlite3` ni `python3`, y el repositorio ya resolvió esto antes de la misma forma con `tools/informe-cobertura.cs`.
 
-**Qué va a vivir acá cuando la pasada de ejecución corra.** El árbol de archivos que el sample va a tener está declarado en la §5 del documento que gobierna esta carpeta, y la salida exacta que va a producir, en su §6. Los dos se escribieron antes que el código, a propósito.
+**Todo ocurre en un directorio temporal propio que se borra al terminar.** Componer un almacén roto cerca del almacén de trabajo sería exactamente el descuido que `scripts/store-path.sh` documenta.
+
+## 5. Las tres divergencias contra §6
+
+| # | §6 espera | El árbol |
+| --- | --- | --- |
+| `D-1` | `puntos de acceso expuestos: 15` | **17 operaciones sobre 13 rutas** |
+| `D-2` | `sin ruta, sin direccion y sin traza` | ruta: no · dirección: no · **traza: sí** |
+| `D-3` | `Punto de salud con el almacen indisponible: 503` | **sin camino** |
+
+**`D-1` — hay una operación expuesta que el contrato REST no declara.** `Contratos-REST.md` lista dieciséis puntos de acceso —`A-01` a `A-17`, sin el `A-04`, retirado—. El servicio expone diecisiete operaciones, y la que sobra es **`POST /interpretaciones`**: está implementada, exige acceso firmado y papel `Alumno`, tiene sus comentarios de diseño escritos… y **no figura en esa tabla**. No es un punto olvidado en el código: es un punto olvidado en el contrato.
+
+**`D-2` — dos tercios de `RA-03` se cumplen y el tercio que falta es el que más se ve.** El mensaje del arranque detenido **no lleva la ruta del almacén ni ninguna dirección**, que era lo más delicado. Pero lleva **la traza de pila entera**: es la excepción no controlada del proveedor, tal cual sale.
+
+Y hay algo peor que la traza, aunque §6 no lo pida: el mensaje dice **`table "Account" already exists`**. Ése es el síntoma. La causa —un linaje que el servicio no entiende— no aparece por ningún lado. Quien despliega lee lo primero y sale a buscar una tabla duplicada.
+
+**`D-3` — el `503` de `A-16` no tiene camino.** `Contratos-REST.md` §3 le da a ese punto exactamente dos códigos, y la rama existe en `HealthEndpoint`. Pero `StorePreparation` o termina poniendo la marca en verdadero, o lanza; y si lanza, el proceso no llega a escuchar. **No es un defecto: es la consecuencia de que el producto eligiera detenerse en el arranque en lugar de atender degradado.** Con el almacén indisponible no hay `503` porque no hay servicio, y el acto 3 mide exactamente ese otro lado.
+
+## 6. Dos cosas que el sample resolvió corriéndose
+
+- **La fase 1 sólo se puede medir por ausencia.** Mientras las transformaciones se aplican el escucha no está abierto, así que cada sondeo muere en la conexión y no devuelve código HTTP. Lo que el sample cuenta no son respuestas de error: son **respuestas**. Si alguna llegara, habría habido una petición atendida sobre un almacén a medio preparar. Salió **0**, las dos veces.
+- **El orden de los actos se escribe y no se deja al directorio.** La primera versión los recorrió con un comodín y salieron en orden alfabético: el arranque detenido antes que el sano. Ninguna medición fue falsa —cada acto midió lo suyo— pero la salida no se podía comparar con §6, y un sample cuya salida depende de cómo ordena el sistema de archivos no es reproducible.
