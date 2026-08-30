@@ -1,0 +1,16 @@
+# Paso 1 — A-03, y el segundo intento que no procede.
+#
+# EL SEGUNDO INTENTO NO ES UN CAPRICHO: `INV-05` dice que hay UN administrador,
+# y una regla de unicidad que nadie intenta violar no está verificada.
+correo_admin="admin@ejemplo.edu"
+clave_admin="$(inventar_clave)"
+
+pedir POST /cuentas/administrador \
+  "{\"email\":\"$correo_admin\",\"firstName\":\"Carla\",\"lastName\":\"Vega\",\"password\":\"$clave_admin\"}" \
+  "" A-03
+primero="$estado"
+
+pedir POST /cuentas/administrador \
+  "{\"email\":\"otro@ejemplo.edu\",\"firstName\":\"Dario\",\"lastName\":\"Luna\",\"password\":\"$(inventar_clave)\"}" \
+  "" A-03
+decir "[1] Configurar administrador: $primero | Segundo intento: $estado $(campo code "$cuerpo_recibido")"

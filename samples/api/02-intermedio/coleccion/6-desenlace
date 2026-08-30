@@ -1,0 +1,15 @@
+# Paso 6 — A-15, uno aprobado y uno rechazado.
+#
+# EL COMENTARIO ES OPCIONAL Y SE MIDEN LAS DOS FORMAS: aprobar con comentario y
+# rechazar sin él. Si el comentario fuera obligatorio en un camino y no en el
+# otro, medir uno solo no lo mostraría.
+pedir POST "/trabajos/${trabajo_de[E1]}/desenlace" \
+  "{\"workId\":\"${trabajo_de[E1]}\",\"outcome\":\"Approve\",\"comment\":\"Muy bien resuelto.\"}" \
+  "$acceso_admin" A-15
+aprobado="$estado"
+situacion_aprobado="$(castellano "$(campo status "$cuerpo_recibido")")"
+
+pedir POST "/trabajos/${trabajo_de[E2]}/desenlace" \
+  "{\"workId\":\"${trabajo_de[E2]}\",\"outcome\":\"Reject\",\"comment\":null}" \
+  "$acceso_admin" A-15
+decir "[6] Aprobar con comentario: $aprobado estado=$situacion_aprobado | Rechazar sin comentario: $estado estado=$(castellano "$(campo status "$cuerpo_recibido")")"

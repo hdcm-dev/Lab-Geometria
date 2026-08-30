@@ -1,0 +1,27 @@
+# Paso 5 — A-13 y A-14, con los dos papeles.
+#
+# EL ALUMNO VE OCHO Y EL ADMINISTRADOR SEIS, y la diferencia son exactamente los
+# dos borradores: el alumno ve los suyos porque son su propio trabajo, y `RN-11`
+# los deja fuera del alcance del administrador. No hay valor del filtro con el
+# que pedir un borrador ajeno.
+pedir GET /trabajos "" "$acceso_alumno" A-13
+del_alumno="$estado"
+cuantos_alumno=$(contar '"workId":' "$cuerpo_recibido")
+
+pedir GET /trabajos "" "$acceso_admin" A-13
+cuantos_admin=$(contar '"workId":' "$cuerpo_recibido")
+borradores_visibles=$(contar '"status":"Draft"' "$cuerpo_recibido")
+decir "[5] Listado del alumno: $del_alumno con $cuantos_alumno | Listado del administrador: $estado con $cuantos_admin | borradores visibles: $borradores_visibles"
+
+# EL DETALLE SE PIDE CON LOS DOS PAPELES sobre el MISMO trabajo: que el dueño lo
+# vea no dice nada sobre el administrador, y al revés tampoco.
+pedir GET "/trabajos/${trabajo_de[E1]}" "" "$acceso_alumno" A-14
+detalle_alumno="$estado"
+componentes_alumno=$(contar '"role":' "$cuerpo_recibido")
+
+pedir GET "/trabajos/${trabajo_de[E1]}" "" "$acceso_admin" A-14
+componentes_admin=$(contar '"role":' "$cuerpo_recibido")
+
+if [ "$detalle_alumno" = "200" ] && [ "$estado" = "200" ]; then los_dos=200; else los_dos="$detalle_alumno/$estado"; fi
+if [ "$componentes_alumno" -gt 0 ] && [ "$componentes_admin" -gt 0 ]; then presentes=si; else presentes=no; fi
+decir "[5] Detalle con los dos papeles: $los_dos | componentes presentes: $presentes"
