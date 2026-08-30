@@ -1,0 +1,12 @@
+{
+  "name": "sample-visor-01-basico",
+  "private": true,
+  "type": "module",
+  "description": "Sample `visor/01-basico`. El comando `verify` es el contrato de verificación de §9.",
+  "scripts": {
+    "verify": "node tests/recorrido-basico.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.48.0"
+  }
+}

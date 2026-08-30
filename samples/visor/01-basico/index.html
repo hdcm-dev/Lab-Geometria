@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <title>Sample visor/01-basico · la página integradora mínima</title>
+  <style>
+    /* SIN HOJA DE ESTILO EXTERNA, y no es minimalismo: `PT-03` mide que este paquete no
+       toque ninguna red de distribución, y una hoja traída de afuera lo rompería desde el
+       sample. Todo lo que la página necesita está acá adentro. */
+    body { font-family: system-ui, sans-serif; margin: 1rem; }
+    #escena { width: 480px; height: 320px; border: 1px solid #999; }
+    textarea { width: 480px; height: 8rem; font-family: ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <!-- LA PÁGINA INTEGRADORA MÍNIMA. Carga el archivo de guion desde una ruta local del
+       repositorio y nada más: sin bibliotecas de interfaz, sin hojas externas y sin ninguna
+       referencia a una red de distribución. Es la misma propiedad que `PT-03` mide sobre el
+       producto, ejercida acá desde el sample. -->
+  <h1>Sample <code>visor/01-basico</code></h1>
+
+  <div id="escena"></div>
+
+  <!-- EL ÁREA DE TEXTO SIGUE ACÁ, y lo que dice al lado importa: el visor NO la lee.
+       `ADR-08006` sacó el texto del alumno de la fachada el 2026-08-16. Está para que
+       quien mire el sample a mano vea el escenario del que salen las piezas, y para que la
+       diferencia entre «el dato de origen» y «lo que el visor recibe» quede a la vista. -->
+  <p><label for="texto">Escenario <code>E-1</code>, el dato de origen — <strong>el visor no lo lee</strong>:</label></p>
+  <textarea id="texto" readonly></textarea>
+
+  <script src="../../../visor/dist/geometriafactory-visor.js"></script>
+  <script src="./datos/E1-piezas.js"></script>
+  <script src="./anfitrion.js"></script>
+</body>
+</html>
