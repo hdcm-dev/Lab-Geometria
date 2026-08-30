@@ -1,0 +1,5 @@
+# A-01 · POST /auth/token
+# El objeto del sample empieza acá. Los tres desenlaces se piden con este mismo
+# cuerpo cambiando el correo y la contraseña.
+POST /auth/token
+{"email":"{{CORREO}}","password":"{{CLAVE}}"}

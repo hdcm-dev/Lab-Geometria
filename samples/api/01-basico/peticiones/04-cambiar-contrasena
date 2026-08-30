@@ -1,0 +1,5 @@
+# A-05 · POST /cuenta/contrasena, con la provisoria como vigente
+# `A-04` —el punto anónimo que fijaba la contraseña— está RETIRADO desde
+# `PRODUCT-INTAKE` 1.13: hoy el alumno cambia la suya por acá.
+POST /cuenta/contrasena
+{"email":"{{CORREO_ALUMNA}}","currentPassword":"{{PROVISORIA}}","newPassword":"{{CLAVE_ALUMNA}}"}

@@ -1,0 +1,5 @@
+# A-10 · POST /trabajos, con E5.txt y E8.txt como cuerpo
+# El texto del alumno viaja SIN NORMALIZAR (`US-00019`): `{{TEXTO}}` se sustituye
+# por el archivo de `cuerpos/` escapado como literal JSON y nada más.
+POST /trabajos
+{"name":"Trabajo {{ETIQUETA}}","declaredDate":"2026-08-30","description":null,"originalJson":{{TEXTO}}}

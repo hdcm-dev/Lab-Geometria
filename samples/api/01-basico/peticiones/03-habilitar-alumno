@@ -1,0 +1,4 @@
+# A-07 · POST /cuentas/{id}/situacion — devuelve la provisoria
+# La provisoria la produce el servicio y NO viaja en este archivo.
+POST /cuentas/{{ID_ALUMNA}}/situacion
+{"accountId":"{{ID_ALUMNA}}","intendedStatus":"Enabled"}
