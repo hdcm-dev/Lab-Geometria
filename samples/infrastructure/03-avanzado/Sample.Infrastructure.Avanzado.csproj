@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Sample `infrastructure/03-avanzado`. Gobernado por `ejemplo-03-avanzado-infraestructura.md`.
+    NO entra en `GeometriaFactory.sln`.
+
+    LA FUENTE DEL SAMPLE SE COPIA A LA SALIDA, y no es una rareza: la inspección
+    `SinSecretosEnLaFuente` cuenta ocurrencias SOBRE EL ÁRBOL DE FUENTES, con umbral cero,
+    y para contar sobre él tiene que poder leerlo cuando corre. Sin esto la inspección
+    tendría que adivinar dónde quedó el código, que es justo lo que un umbral cero sin
+    condición de medición no puede permitirse.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Infrastructure.Avanzado</RootNamespace>
+    <AssemblyName>sample-infrastructure-03-avanzado</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Infrastructure/GeometriaFactory.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="**/*.cs" Exclude="bin/**;obj/**"
+          Link="Fuente/%(RecursiveDir)%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
