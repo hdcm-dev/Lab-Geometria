@@ -1,0 +1,20 @@
+[
+  {
+    "Tipo": "Ortoedro",
+    "Bases": [
+      { "Tipo": "Rectangulo", "Largo": 6.00, "Ancho": 4.00, "Area": 24.00 },
+      { "Tipo": "Rectangulo", "Largo": 6.00, "Ancho": 4.00, "Area": 24.00 }
+    ],
+    "Altura": 8.00,
+    "Area": 208.00,
+    "Volumen": 192.00
+  },
+  {
+    "Tipo": "Cubo",
+    "Caras": [
+      { "Tipo": "Cuadrado", "Largo": "3,50", "Ancho": "3,50", "Area": 12.25 }
+    ],
+    "Area": 73.50,
+    "Volumen": 42.875
+  }
+]

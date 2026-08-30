@@ -1,0 +1,13 @@
+[seed] Administrador configurado: si
+[seed] Cuentas de alumno habilitadas: 2
+[seed] Trabajos enviados con los ocho escenarios: 8
+[seed] Estados resultantes: Pendiente=4 Borrador=2 Aprobado=1 Rechazado=1
+[verif] Listado propio del alumno 1: 8 trabajos
+[verif] Trabajos con desenlace visible en el listado propio: 2
+[verif] Listado de la comision pedido por el administrador: 6 trabajos
+[verif] Borradores visibles en el listado de la comision: 0
+[verif] Detalle de un trabajo: texto original identico al enviado: si
+[verif] Observaciones de E-3: 1 advertencia de area declarado=36.00 derivado=54.00
+[verif] Observaciones de E-4: 0
+[verif] Observaciones de E-5: 1 error indice-figura=1 campo=Tipo
+Seed completo | Trabajos: 8 | Verificaciones: 8 | Fallas: 0
