@@ -3,10 +3,10 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Nivel:** Básico
-**Estado de esta carpeta:** **Esqueleto — sin código.**
-**Documento que la gobierna:** [`ejemplo-01-basico.md`](../../../SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/10-Examples/ejemplo-01-basico.md) 1.0, del que este README es la copia corta de §1, §3 y §4
+**Estado de esta carpeta:** **IMPLEMENTADO y VERIFICADO el 2026-08-29.** Sus trece líneas coinciden con el snapshot **a la primera**
+**Documento que la gobierna:** [`ejemplo-01-basico-infraestructura.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-infraestructura.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-01`, declarado en la §9 de ese documento
-**Sonda de sensado:** [`SD-01`](../../../SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
+**Sonda de sensado:** `SD-06001` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, en estado `Sin verificar`
 
 **Comando previsto:**
 
@@ -33,10 +33,20 @@ Demostrar la mitad de esta capa que **no toca el almacén**: leer el texto que e
 3. Ejecutar el sample: `dotnet run --project samples/infrastructure/01-basico`.
 4. Comparar la salida con §6 del documento que gobierna esta carpeta.
 
-## 4. Qué hay hoy acá, y qué falta
+## 4. Qué hay acá
 
-Hoy esta carpeta tiene **sólo este README**. La carpeta se crea en la **pasada de diseño** de `Rules-Examples.md` §0.2, que le asigna exactamente esto: la carpeta esqueletada, con su README local y su comando previsto. El código del sample lo produce la **pasada de ejecución**, durante la codificación.
+**El sample está implementado y sus trece líneas coinciden.**
 
-**El comando previsto todavía no resuelve, y esta carpeta no promete lo contrario.** Es la consecuencia declarada de que el sample no esté implementado: el campo `evidencia` del contrato `VER-01` dice `No verificado — sin código`, sin fecha y sin salida, y la fila `SD-01` de la matriz de sensado nace en `Sin verificar`. Ninguna corrida se afirma acá.
+```bash
+dotnet run --project samples/infrastructure/01-basico              # los ocho escenarios
+dotnet run --project samples/infrastructure/01-basico -- --verificar   # y la comparación
+```
 
-**Qué va a vivir acá cuando la pasada de ejecución corra.** El árbol de archivos que el sample va a tener está declarado en la §5 del documento que gobierna esta carpeta, y la salida exacta que va a producir, en su §6. Los dos se escribieron antes que el código, a propósito.
+**Corre contra el intérprete REAL y sin un solo doble**, que es lo contrario del sample de la capa
+de aplicación — y por eso los dos existen. Allá el intérprete era un doble que devolvía lo
+declarado, para que se viera que **la capa no interpreta**; acá es el componente de verdad, porque
+lo que hay que ver es **qué interpreta**.
+
+**Y coincidió a la primera**, sin tocar el contrato. Las tres tolerancias que el snapshot nombra
+—`T1` la clave leída con otro nombre, `T2` las comas finales, `T3` las caras de dos tipos— salieron
+tal como §6 las describía desde el 2026-08-11.
