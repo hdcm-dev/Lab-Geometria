@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Sample `infrastructure/02-intermedio`. Gobernado por `ejemplo-02-intermedio-infraestructura.md`.
+    NO entra en `GeometriaFactory.sln`.
+
+    SIN CARPETA `Dobles/`, igual que el `01`: los dos adaptadores que ejercita —el repositorio de
+    trabajos y el de cuentas— se corren contra SQLite DE VERDAD, con las migraciones del producto
+    aplicadas por `StorePreparation`. Un almacén en memoria no serviría: la mitad de lo que este
+    sample mira —los índices únicos, la unidad de trabajo del arrastre— vive en el esquema.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GeometriaFactory.Samples.Infrastructure.Intermedio</RootNamespace>
+    <AssemblyName>sample-infrastructure-02-intermedio</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/GeometriaFactory.Infrastructure/GeometriaFactory.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Escenarios/*.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
