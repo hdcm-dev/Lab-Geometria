@@ -1,0 +1,16 @@
+[
+  {
+    "Tipo": "Cubo",
+    "Caras": [
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 }
+    ],
+    "Area": 54.00,
+    "Volumen": 27.00
+  },
+  { "Tipo": "Piramide", "Largo": 5.00, "Ancho": 5.00, "Area": 25.00 }
+]

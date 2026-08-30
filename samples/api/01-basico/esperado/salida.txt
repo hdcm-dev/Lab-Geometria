@@ -1,0 +1,13 @@
+[canje] Credenciales validas: 200 | acceso firmado recibido: si
+[canje] Credenciales invalidas: 401 INVALID_CREDENTIALS | campo que fallo declarado: no
+[canje] Cuenta pendiente: 403 ACCOUNT_NOT_ENABLED | motivo presente: si
+[guardia] Peticion sin acceso: 401 | Peticion con acceso vencido: 401 | Firma ajena: 401
+[guardia] Papel insuficiente sobre un punto de administracion: 403
+[guardia] Cuenta con cambio pendiente sobre cualquier punto salvo uno: 403 PASSWORD_CHANGE_REQUIRED
+[envio] E-5: 201 | estado del trabajo: Borrador
+[envio] E-5: observacion de error indice-figura=1 campo=Tipo
+[envio] E-8: 201 | estado del trabajo: Borrador
+[envio] E-8: observacion de error localizada por indice de figura y campo
+[traduccion] Respuestas con codigo del contrato reconocido: 6 de 6
+[traduccion] Respuestas con direccion, ruta, traza o secreto: 0
+Peticiones ejecutadas: 14 | Respuestas comparadas: 14 | Diferencias: 0
