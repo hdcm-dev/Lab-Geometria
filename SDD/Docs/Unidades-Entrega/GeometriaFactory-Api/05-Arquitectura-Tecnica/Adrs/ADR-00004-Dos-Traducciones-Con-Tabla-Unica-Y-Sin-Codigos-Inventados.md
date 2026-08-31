@@ -2,9 +2,9 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00004-Dos-Traducciones-Con-Tabla-Unica-Y-Sin-Codigos-Inventados.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-12
+**Fecha:** 2026-08-31
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Comunicación
 
@@ -33,9 +33,26 @@ Motivación upstream: NB-00004, NB-00008, NB-00009; RN-00002, RN-00003, RN-00006
 
 **El orden de las dos traducciones no se invierte y no se saltea.** Un punto de acceso que eligiera su código de respuesta directamente desde un motivo interno estaría reimplementando media tabla en un lugar donde nadie la va a comparar.
 
+### 2.1 Los dos huecos, con la forma de apartamiento que les faltaba
+
+**La regla 2 de §2 los declara desde la 1.1 y con el recuento correcto. Lo que no tenían es la forma que `Root-Rules.md` §11 exige**, y sin ella un apartamiento **no se puede vencer**: no lleva estado, no lleva disparadores, y ninguna migración sabe que tiene que revisarlo.
+
+Los dos son el mismo apartamiento aplicado a tres motivos, y por eso se declaran juntos.
+
+| Campo de §11 | Contenido |
+| --- | --- |
+| **1 · Qué obligación no se cumple** | [`../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) **§6** le da al código genérico **sólo `500` y `503`**. Este producto lo emite además con **`409`** —transición de cuenta no admitida, y operación de `CU-02` pedida sobre la cuenta de administrador— y con **`403`** —escritura de trabajos pedida por quien no es alumno—. Las listas de códigos de `A-07`, `A-08`, `A-10` y `A-11` de su §3 tampoco incluyen esos dos destinos |
+| **2 · Por qué no aplica** | Porque `500` **mentiría**. §4 del mismo documento define `409` como «la operación es legítima y el estado no la admite» y `403` como la negativa por papel, que es **literalmente** lo que pasa en los tres motivos. Un `500` le diría a la persona que el producto falló cuando lo que pasa es que su pedido no procede, y el producto **sí sabe** cuál de las dos cosas es |
+| **3 · Alternativas descartadas** | **(a) Usar `500`, que cumple la letra**: descartada porque cumple la letra mintiendo, y porque `RA-03` obliga a que la respuesta diga el motivo sin origen — no a que diga un motivo falso. **(b) Inventar tres códigos**: la prohíbe la **regla 2 de este mismo ADR**, y los códigos son del ensamblado de contratos y no de esta capa. **(c) Elevar los tres al Product Owner**: se hizo, y para **otros dos** huecos: los cerró el **2026-08-12** con `OPERATION_ADMIN_ONLY` y `STATE_FORBIDS_UPDATE` (`PRODUCT-INTAKE` 1.29 §17.4 P.3). **Estos tres no se elevaron**, y ésa es la deuda que este apartamiento declara en lugar de esconder |
+| **4 · Disparadores que lo superarían** | Cualquiera de tres: **(i)** que el conjunto cerrado incorpore un código para «el estado de la cuenta no admite esa transición» y otro para «la escritura de trabajos es del alumno»; **(ii)** que `Definicion-Superficie-HTTP.md` §6 amplíe los destinos del genérico y los declare; **(iii)** que el Product Owner resuelva los tres motivos como resolvió los otros dos el 2026-08-12 |
+| **5 · Estado** | **`vigente`** |
+| **6 · Saltos de versión sobrevividos** | **0 revisados, y siete transcurridos.** Entre el 2026-08-12 y hoy cerraron **siete migraciones normativas** —6.0→8.6, 8.6→8.11, 8.11→9.9, 9.9→9.10, 9.10→9.12, 9.12→10.0 y 10.0→13.3— y **ninguna lo revisó**, porque `Migracion-Rules.md` §4.7 revisa **apartamientos declarados** y éste no lo estaba |
+
+**El contador dice algo, y §11 dice qué.** «Un apartamiento que sobrevive dos o más saltos sin ser contemplado ya demostró que **no es de un producto**: si fuera circunstancial, alguna versión lo habría alcanzado». **Éste transcurrió siete.** No los sobrevivió —nadie lo miró— y ésa es la otra mitad del dato: **la figura no vino con un mecanismo que encuentre los apartamientos no declarados**, y el que no se declara no se revisa nunca.
+
 ## 3. Estado
 
-**Propuesto** desde 2026-08-10.
+**Aprobado** el 2026-08-31, en su versión 2.0. Estuvo **`Propuesto` desde el 2026-08-10** y nunca se aceptó, mientras el código se construía sobre él y siete migraciones normativas pasaban al lado.
 
 ## 4. Alternativas consideradas
 
@@ -97,3 +114,4 @@ Motivación upstream: NB-00004, NB-00008, NB-00009; RN-00002, RN-00003, RN-00006
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Fija el traductor único con tabla única sobre los **quince** códigos vivos del conjunto cerrado —catorce con destino y uno declarado sin él—, las dos respuestas sin código, las tres familias deliberadamente empobrecidas con la prueba que las cubre a las tres, las dos señales que viajan en respuestas exitosas y la prohibición de `RA-03` con su contracara de registro. Declara los **dos** huecos del conjunto cerrado como el síntoma medible de los cuatro destinos del código genérico, en lugar de inventar identificadores. Evalúa cinco alternativas, declara cuatro trade-offs y fija ocho métricas de validación. |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **6**. Sube minor. |
+| 2.0 | 2026-08-31 | **Pasa de `Propuesto` a `Aprobado`, y entra §2.1 con la forma de apartamiento que a los dos huecos les faltaba.** La regla 2 de §2 los declaraba desde la 1.1 y con el recuento correcto —cuatro destinos del genérico, dos huecos—, pero **sin la forma de `Root-Rules.md` §11**: sin estado, sin disparadores y sin contador. Un apartamiento así **no se puede vencer**, y ninguna migración sabe que tiene que revisarlo. Se declaran los seis campos, con las tres alternativas descartadas y los tres disparadores que lo superarían. **El contador es el dato que más dice: 0 revisados y SIETE transcurridos** —las siete migraciones normativas entre el 2026-08-12 y hoy—, y ninguna lo miró porque §4.7 revisa apartamientos **declarados**. §11 dice que un apartamiento que sobrevive dos o más saltos ya demostró que no es de un producto; éste transcurrió siete sin que nadie lo mirara, que es la otra mitad del dato. Cierra `H-12` del reporte de hallazgos. Sube **major**: el ADR pasa a aprobado y suma una declaración obligatoria. |
