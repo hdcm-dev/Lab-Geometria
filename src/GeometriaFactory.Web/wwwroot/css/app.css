@@ -444,6 +444,14 @@ a { color: var(--color-brand-primary); }
   font-family: inherit; font-size: var(--type-body-strong-size); font-weight: 500; cursor: pointer;
 }
 .gf-group-count { margin-left: auto; font-size: var(--type-caption-size); color: var(--color-text-secondary); }
+/* El encabezado del grupo es un `h2` DENTRO del `summary`, para que la página tenga
+   niveles de encabezado por los que saltar. Esta regla lo devuelve a la tipografía y a
+   la disposición que el `summary` ya tenía: sin ella, la tipografía por omisión de un
+   `h2` rompe la cabecera. No cambia nada de lo que se ve. */
+.gf-group-heading {
+  margin: 0; width: 100%; display: flex; align-items: center; gap: var(--space-3);
+  font-size: inherit; font-weight: inherit; font-family: inherit;
+}
 
 /* Tarjetas apiladas: versión angosta de la fila de trabajo y de cuenta */
 .gf-stacked-cards { display: none; flex-direction: column; gap: var(--space-3); }
@@ -777,7 +785,12 @@ th.gf-th-plain--brief  { font-size: var(--type-caption-size); }
   .gf-sidebar-footer { margin-top: 0; width: 100%; border-top: 0; padding-top: 0; flex-direction: row; align-items: center; gap: var(--space-4); }
   .gf-shell-content { padding: var(--space-5) var(--space-4); }
 
-  /* Las filas dejan de ser filas de tabla y pasan a tarjetas apiladas */
+  /* Las filas dejan de ser filas de tabla y pasan a tarjetas apiladas.
+     LAS TARJETAS LAS EMITEN LOS TRES LISTADOS DESDE EL 2026-08-31, y hasta ese día no
+     las emitía ninguno: esta regla ocultaba la tabla y encendía una clase sin emisor,
+     de modo que por debajo de 768 px no se dibujaba NINGUNA fila. Es `MI-02`, un `P0`.
+     `verify-visual-system.sh` `C-5` comprueba desde hoy que toda clase que esta sección
+     enciende la emita algún componente, para que no pueda volver a pasar. */
   .gf-table-wrapper { display: none; }
   .gf-stacked-cards { display: flex; }
 

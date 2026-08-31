@@ -254,6 +254,38 @@ else
                     </tbody>
                 </table>
             </div>
+
+            @* LAS TARJETAS QUE LA VERSIÓN ANGOSTA ENCIENDE. Ver `MI-02` de la mesa del
+               2026-08-31: `app.css` ocultaba la tabla por debajo de 768 px y encendía una
+               clase que ningún componente emitía, de modo que el alumno en un teléfono
+               veía el encabezado y los filtros y NINGÚN trabajo. Las acciones son las
+               mismas y con el mismo criterio: lo que el estado no admite no se dibuja. *@
+            <div class="gf-stacked-cards" role="list">
+                @foreach (var work in Listed)
+                {
+                    <article class="gf-row-card" role="listitem">
+                        <div class="gf-row-card-header">
+                            <span class="gf-body-strong">@work.Name</span>
+                            <span class="gf-badge @BadgeClassOf(work)">@LabelOf(work)</span>
+                        </div>
+                        <p class="gf-caption gf-num gf-mt-2">@DeclaredDateText.ToDisplay(work.DeclaredDate)</p>
+                        <div class="gf-row-actions">
+                            <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)" data-enhance-nav="false">
+                                <Icon Name="Open" />Abrir<span class="gf-sr-only"> «@work.Name»</span>
+                            </a>
+                            @if (IsDraft(work))
+                            {
+                                <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId + "/editar")" data-enhance-nav="false">
+                                    <Icon Name="Edit" />Editar<span class="gf-sr-only"> «@work.Name»</span>
+                                </a>
+                                <a class="gf-btn gf-btn--destructive" href="@("/mis-trabajos?eliminar=" + work.WorkId)">
+                                    <Icon Name="Delete" />Eliminar<span class="gf-sr-only"> «@work.Name»</span>
+                                </a>
+                            }
+                        </div>
+                    </article>
+                }
+            </div>
         }
     }
 }

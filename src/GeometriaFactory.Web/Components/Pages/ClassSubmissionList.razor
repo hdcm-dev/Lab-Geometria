@@ -159,10 +159,20 @@ else
                     @* El grupo colapsado CONSERVA SU RECUENTO A LA VISTA, porque el recuento está
                        dentro de la propia cabecera. *@
                     <details class="gf-disclosure" open>
+                        @* EL ENCABEZADO DEL GRUPO ES UN `h2`, y no lo era.
+                           La maqueta aprobada lo emite así (`Listado-De-La-Comision.html`, el grupo
+                           abre con `<h2><button …>`), y sin él la página tiene un solo nivel de
+                           encabezado: quien navega por encabezados —que es cómo se recorre una
+                           página larga con lector de pantalla— no puede saltar de alumno a alumno
+                           y tiene que atravesar todas las filas. El `summary` conserva su papel de
+                           control de apertura; el `h2` va adentro, que es donde la estructura del
+                           documento lo necesita. *@
                         <summary class="gf-group-header">
-                            <span class="gf-initials" aria-hidden="true">@group.Initials</span>
-                            @group.Name — @group.Email
-                            <span class="gf-group-count gf-num">@group.Count</span>
+                            <h2 class="gf-group-heading">
+                                <span class="gf-initials" aria-hidden="true">@group.Initials</span>
+                                @group.Name — @group.Email
+                                <span class="gf-group-count gf-num">@group.Count</span>
+                            </h2>
                         </summary>
 
                         <div class="gf-table-wrapper">
@@ -209,6 +219,41 @@ else
                                     }
                                 </tbody>
                             </table>
+                        </div>
+
+                        @* ---- LO QUE LA VERSIÓN ANGOSTA ENCIENDE, Y HASTA HOY NO EXISTÍA ----
+
+                           `app.css` §772 abre `@@media (max-width: 768px)` y hace dos cosas: oculta
+                           `.gf-table-wrapper` y enciende `.gf-stacked-cards`. La primera funcionaba.
+                           La segunda apuntaba a una clase que **ningún componente emitía**, de modo
+                           que por debajo de 768 px esta pantalla mostraba el encabezado, los filtros
+                           y las cabeceras de grupo con su recuento —«Ana Pérez — 2 trabajos»— y
+                           CERO FILAS, sin ningún aviso de que faltaba algo.
+
+                           No era degradación de estilo: era contenido y acción inalcanzables, sin
+                           ruta alternativa, en las tres superficies de listado del producto. Es
+                           `MI-02` de la mesa del 2026-08-31, un `P0` votado 5-0, y estuvo once días
+                           detrás de un punto abierto que se cerró «por lectura» comprobando que la
+                           regla estaba escrita — sin mirar qué enciende.
+
+                           La forma es la de la maqueta aprobada: contenedor `role="list"`, una
+                           `article` por trabajo con `role="listitem"`, y la misma acción única. *@
+                        <div class="gf-stacked-cards" role="list">
+                            @foreach (var work in group.Works)
+                            {
+                                <article class="gf-row-card" role="listitem">
+                                    <div class="gf-row-card-header">
+                                        <span class="gf-body-strong">@work.Name</span>
+                                        <span class="gf-badge @BadgeClassOf(work.Status)">@LabelOf(work.Status)</span>
+                                    </div>
+                                    <p class="gf-caption gf-num gf-mt-2">@DeclaredDateText.ToDisplay(work.DeclaredDate)</p>
+                                    <div class="gf-row-actions">
+                                        <a class="gf-btn gf-btn--secondary" href="@("/trabajos/" + work.WorkId)" data-enhance-nav="false">
+                                            <Icon Name="Open" />Abrir<span class="gf-sr-only"> «@work.Name»</span>
+                                        </a>
+                                    </div>
+                                </article>
+                            }
                         </div>
                     </details>
                 </section>
