@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Calidad.md
-**Versión:** 2.2
+**Versión:** 2.3
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **`tipo_unidad_entrega` (D8):** `web-monolith`
@@ -54,7 +54,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. El valor 
 | Compatibilidad | **Alta** | `PT-01` en sus **cuatro** partes, que el intake §17.2.P.10 · GeometriaFactory-Web declara como los NFR de este proyecto de código; capacidad gráfica tridimensional requerida **por capacidad y no por número de versión**, con el resto del producto disponible sin ella (`RT-11`) |
 | Eficiencia de desempeño | **Media** | **0** tráfico de circuito durante la interacción con la escena, y el texto del trabajo viajando **una sola vez por trabajo**. **No hay umbral de tiempo de respuesta**, y esta categoría no lo inventa: ver §3 y `PA-04` de `05` §11 |
 | Mantenibilidad | **Alta** | **1** sola salida hacia el servicio de datos y **0** bibliotecas de guion agregadas que consulten servicios por su cuenta; **0** invocaciones al interior del bundle, con las **6** funciones de la fachada como única vía; **0** advertencias de construcción |
-| Portabilidad | **Media** | Servidor: el hosting público, con su versión de plataforma **[A VERIFICAR]** en la fuente y medida por `PT-01.a`. Navegador: cualquiera con capacidad gráfica tridimensional y circuito, persistente o replegado |
+| Portabilidad | **Media** | Servidor: el hosting público, con su versión de plataforma **medida por `PT-01.a` el 2026-08-13: soporta `net10.0`** —la fuente la rotulaba `[A VERIFICAR]` y la marca quedó resuelta midiendo—. Navegador: cualquiera con capacidad gráfica tridimensional y circuito, persistente o replegado |
 
 **El atributo que este proyecto de código no puede delegar es la seguridad de la topología.** No porque maneje secretos —la clave de firma es de `GeometriaFactory-Infrastructure`— sino porque es el único punto de contacto del navegador: si acá aparece una petición del navegador hacia el servicio de datos, la partición del producto deja de existir.
 
@@ -208,6 +208,7 @@ Lo que sí hace esta categoría es **declarar con qué caso de prueba se mide ca
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.3 | 2026-08-31 | **Cierre de las dos incógnitas `[A VERIFICAR]` que ya no tenían pregunta**, sobre el inventario [`Inventario-Marcas-A-Verificar-2026-08-31.md`](../../../Audit/Inventario-Marcas-A-Verificar-2026-08-31.md), que clasificó las **71** apariciones vivas del corpus en **cinco** incógnitas. **(a) La versión de plataforma del hosting quedó RESUELTA el 2026-08-13, midiendo**: `PT-01.a` pasa con **200** y el hosting soporta `net10.0`, confirmado desde el panel; no hizo falta bajar la versión objetivo del front. **(b) La versión de la biblioteca de componentes queda SIN OBJETO**: la biblioteca nunca se introdujo y su ausencia es una decisión declarada en el `.csproj` — `PA-01` de `Web/05` §11 **ya lo había cerrado por lectura el 2026-08-20** y el desenlace no bajó. **Ninguna de las dos se decide acá: las dos se leen.**  **Ningún umbral, ningún contrato y ninguna decisión cambian.** |
 | 2.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **4 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

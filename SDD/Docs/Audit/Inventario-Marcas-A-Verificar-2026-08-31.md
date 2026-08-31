@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Inventario-Marcas-A-Verificar-2026-08-31.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-31
 **Instrumento:** clasificación previa a la edición, con el precedente de [`Inventario-Renombre-F03-2026-08-31.md`](Inventario-Renombre-F03-2026-08-31.md)
 **Estado:** **Emitido.** Clasifica; **no toca una sola marca**
@@ -21,8 +21,8 @@
 
 | | Incógnita | Apariciones | Estado, medido contra el árbol |
 |---|---|---|---|
-| **`I-1`** | La **versión de plataforma que soporta el hosting** | **18** | **RESUELTA el 2026-08-13, midiendo.** Y nueve documentos la siguen declarando abierta |
-| **`I-2`** | La **versión de la biblioteca de componentes de interfaz** | **12** | **SIN OBJETO.** No hay biblioteca, y su ausencia es una decisión declarada |
+| **`I-1`** | La **versión de plataforma que soporta el hosting** | **18** | **RESUELTA el 2026-08-13, midiendo.** La declaraban abierta **10 apariciones en 9 documentos** |
+| **`I-2`** | La **versión de la biblioteca de componentes de interfaz** | **12** | **SIN OBJETO — y CERRADA EN ORIGEN desde el 2026-08-20.** El desenlace nunca bajó a los diez lugares que la seguían pidiendo |
 | **`I-3`** | La **construcción de la imagen en destino desde el repositorio** | **22** | **VIVA, y bien declarada.** Se mide en la fase `i`; `BT-00026` la prueba |
 | **`I-4`** | La **disponibilidad de un dominio propio** para el túnel saliente | **1** | **VIVA.** Atada a `X-10`, que es una exclusión |
 | **`I-5`** | El **volumen de la comisión** | **9** | **VIVA, y es del Product Owner: es `D5`.** **No figura en `PRODUCT-INTAKE` §22** |
@@ -94,8 +94,23 @@ más plazo a una pregunta ya contestada**.
 
 **No hay biblioteca de componentes en el producto.** `GeometriaFactory.Web.csproj` declara **una sola**
 referencia de proyecto y lleva escrito el apartamiento: *«la etapa `b` decide NO INTRODUCIR MudBlazor»*,
-con sus tres razones medidas sobre la maqueta aprobada. `A3` §1 ya lo clasificó como **cerrable
-leyendo** el 2026-08-20: *«No hay biblioteca, y es una decisión declarada»*.
+con sus tres razones medidas sobre la maqueta aprobada.
+
+**Y acá hay que corregir a este mismo inventario, que en su emisión 1.0 lo dijo de menos.** No es que
+`I-2` *deba* cerrarse: **ya está cerrada, y desde el 2026-08-20**. `Web/05` §11 **`PA-01`** y
+`Web/06` **`PA-03`** llevan escrito, con esa fecha, el desenlace exacto —*«Cerrado · A2b, por lectura:
+no hay biblioteca, y es una decisión»*—, y `A3` §1 la clasificó como cerrable leyendo el mismo día.
+
+**Lo que quedó abierto no es la incógnita: es su propagación.** El desenlace no bajó a `BT-10002`, ni a
+`BT-02` y `V-5` del checkout, ni a la cláusula de `PD-03`, ni a `Estrategia-Versionado.md`, ni a las dos
+filas de `Supply-Chain-Seguridad.md`, ni a la guía de publicación, ni —sobre todo— a
+`PRODUCT-INTAKE` §17.2.P.1, que es **la fuente que acuñó la marca**. **Diez lugares siguieron pidiendo
+anclar la versión de una biblioteca que el producto había decidido no tener, durante once días.**
+
+**Es la tercera vez en la misma jornada que aparece este patrón**, y las tres con distinto disparador:
+`D1` confirmada y no propagada al §22; `PT-01.a` medida y no propagada a nueve documentos; y ahora
+`PA-01` cerrada y no propagada a diez. **Ninguna de las tres es un error de juicio: las tres son
+decisiones correctas que no volvieron sobre quien había hecho la pregunta.**
 
 **Una incógnita sobre la versión de algo que no existe no se resuelve midiendo: no tiene objeto.** Es la
 figura de `ADR-14004`, y exige condición de reapertura declarada — que la hay: **si una etapa introduce
@@ -140,8 +155,8 @@ cierra* el ítem, y el ítem que se cierra distinto se quedó afuera.
 
 | | Acción | Alcance |
 |---|---|---|
-| 1 | **`I-1` se cierra por lectura**, citando las tres fuentes de la medición | Las nueve apariciones que la declaran abierta |
-| 2 | **`I-2` se cierra sin objeto**, con la figura de `ADR-14004` y su condición de reapertura | Las apariciones que la declaran abierta |
+| 1 | **`I-1` se cierra por lectura**, citando las tres fuentes de la medición | Las **10** apariciones, en 9 documentos, que la declaran abierta |
+| 2 | **`I-2` propaga el cierre que `PA-01` tiene desde el 2026-08-20**, con la figura de `ADR-14004` y su condición de reapertura | Las **10** apariciones que la seguían pidiendo |
 | 3 | **`I-5` se registra en `PRODUCT-INTAKE` §22** como quinta marca, con su naturaleza de decisión | El §22 |
 | 4 | **`I-3` e `I-4` no se tocan**: están bien declaradas | — |
 
@@ -251,4 +266,5 @@ después de esta tanda.
 
 | Versión | Fecha | Descripción | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-31 | **Dos correcciones a la emisión 1.0, las dos encontradas al ejecutar el cierre que este inventario habilitó.** **(a)** Decía que `I-1` la declaraban abiertas «nueve documentos»; son **10 apariciones en 9 documentos** —`Web/05` lleva dos—. **(b)** Presentaba a `I-2` como una incógnita **a cerrar**, y **ya estaba cerrada desde el 2026-08-20**: `PA-01` de `Web/05` §11 y `PA-03` de `Web/06` llevan el desenlace escrito con esa fecha. **Lo que estaba abierto no era la incógnita sino su propagación**: el desenlace no bajó a diez lugares, `PRODUCT-INTAKE` §17.2.P.1 —la fuente que acuñó la marca— entre ellos, y durante once días el corpus siguió pidiendo anclar la versión de una biblioteca que el producto había decidido no tener. **Con esto son tres los casos del mismo patrón en una sola jornada** —`D1` sin propagar al §22, `PT-01.a` sin propagar a nueve documentos, `PA-01` sin propagar a diez—, y ninguno es un error de juicio: **las tres son decisiones correctas que no volvieron sobre quien había hecho la pregunta.** | Orquestador SDD |
 | 1.0 | 2026-08-31 | Emisión inicial. Clasifica las **71** apariciones vivas de `[A VERIFICAR]` en **cinco** incógnitas, aplicando `Migracion-Rules.md` §4.1 —clasificar antes de editar— con el precedente del hallazgo `I-03`, donde una estimación de ~731 ocurrencias tenía una población real de **una**. Encuentra que **`I-1` está resuelta desde el 2026-08-13** y nueve documentos la declaran abierta; que **`I-2` no tiene objeto**; y que **`I-5`, el volumen de la comisión, no figura en `PRODUCT-INTAKE` §22** pese a estar rotulada en nueve lugares y a ser la única de las cinco que **se decide y no se mide**. Registra además que el parche `P-06` de la mesa del 2026-08-27 **le dio más plazo a una pregunta ya contestada**, que es el hallazgo `HM-02` del reporte 17 al framework **medido por segunda vez**. **No toca ninguna marca.** | Orquestador SDD |
