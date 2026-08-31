@@ -1,7 +1,7 @@
 [1] Instancia creada: identificador presente | escena viva | piezas dibujadas: 0
-[2] Texto de E-1 cargado: piezas dibujadas=3 | no dibujadas=0
+[2] Piezas de E-1 cargadas: piezas dibujadas=3 | no dibujadas=0
 [3] Piezas por tipo: Cilindro=1 Cubo=1 Ortoedro=1
-[4] Estructura del texto devuelta para el arbol: piezas=3
+[4] Estructura del texto devuelta para el arbol: no la devuelve, el visor ya no recibe el texto
 [5] Segundo procesado del mismo texto: disposicion identica pieza por pieza=si
 [6] Instancia destruida: recursos graficos liberados | bucle de dibujo cortado
 [7] Uso posterior del identificador liberado: UNKNOWN_INSTANCE

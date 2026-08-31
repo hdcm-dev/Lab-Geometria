@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Reporte-Hallazgos-De-Los-Samples-2026-08-30.md
-**Versión:** 2.0
+**Versión:** 3.0
 **Estado:** Abierto — **cuatro vivos de doce emitidos**. Cinco cerrados, dos retirados tras verificarlos contra el contrato, y tres nuevos que salieron de esa verificación
 **Fecha:** 2026-08-30
 **Autor:** Orquestador SDD
@@ -189,13 +189,13 @@ Y una contradicción de documento, sin consecuencia sobre el código: `ejemplo-0
 | # | Hallazgo | Quién decide |
 | --- | --- | --- |
 | ~~`H-01`~~ | **CERRADO.** La comprobación va antes del efecto; el sample `visor/02` lo verifica | Hecho |
-| `H-02` | Si «apagar un movimiento» significa detener o volver | Product Owner |
+| ~~`H-02`~~ | **CERRADO.** El Product Owner decidió que apagar es **detener**; el §6 del ejemplo pasó a 2.0 | Hecho |
 | `H-03` | Qué se hace con `POST /interpretaciones`: entra al contrato o sale del código | Product Owner |
 | ~~`H-04`~~ | **RETIRADO.** El arranque ya se detiene sin clave; la rama es defensiva e inalcanzable | — |
-| `H-05` | Si la capa de infraestructura debe declarar los códigos que sus ejemplos le piden, o si los ejemplos deben decir lo que la capa hace | Product Owner |
+| ~~`H-05`~~ | **CERRADO.** Los ejemplos dicen lo que la capa hace; no se agregan cuatro códigos sin consumidor | Hecho |
 | ~~`H-06`~~ | **CERRADO.** Detenerse pasó a ser una decisión, con salida `78` | Hecho |
 | ~~`H-07`~~ | **RETIRADO.** El contrato declara esas dos respuestas sin código. Se corrigió el ejemplo |  — |
-| `H-08` | **Qué se hace con los tres §6 del visor, y si el barrido de alcance debe incluir la categoría 10 por regla** | Product Owner |
+| ~~`H-08`~~ | **CERRADO en el producto.** Los cuatro §6 pasaron a 2.0 y sus samples cierran sin divergencias; la observación de `ADR-08006` pasó a 5.0 con la cuarta afirmación. **Lo que sigue abierto es del framework**: `Reporte 21` | Hecho / framework |
 | ~~`H-09`~~ | **CERRADO.** Retirado, y la unión discriminada lo volvió imposible | Hecho |
 | ~~`H-10`~~ | **CERRADO.** Los dos entornos se comportan igual; el detalle va al registro | Hecho |
 | ~~`H-11`~~ | **CERRADO.** El defecto no previsto sale con el código genérico | Hecho |
@@ -221,3 +221,4 @@ Correr los dieciséis samples es exactamente eso: volver a leerlos, con el produ
 | --- | --- | --- |
 | 2.0 | 2026-08-30 | **Dos hallazgos se retiran, tres entran, y cinco pasan a cerrados.** `H-07` no era un hallazgo: `Contratos-REST.md` §5.1 declara las dos respuestas sin código, deliberadamente y por escrito; el que contradecía al contrato era el §6 del ejemplo, corregido a 1.1 y con su sample en 13/13. `H-04` tampoco: `CompositionRoot` ya detiene el arranque sin clave de firma, de modo que la rama de `Issue` es defensiva e inalcanzable en la aplicación compuesta, y el sample la alcanzó construyendo el emisor directamente. **Los dos errores son del mismo método** —leer una sola fuente, y medir un componente aislado para afirmar del producto— y por eso se dejan tachados en lugar de borrados. De verificarlos salieron **`H-10`**, **`H-11`** y **`H-12`**: los dos primeros ya cerrados, el tercero abierto. `H-01`, `H-06` y `H-09` pasan a cerrados. Sube **major**: el conjunto de hallazgos cambia. |
 | 1.0 | 2026-08-30 | Emisión. Nueve hallazgos de la implementación de los dieciséis samples, más tres divergencias investigadas y cerradas como no-hallazgo. Ninguno decidido. |
+| 3.0 | 2026-08-30 | **`H-02`, `H-05` y `H-08` cerrados.** Los cuatro §6 que describían algo que el producto no hace —los tres del visor y el de `03-avanzado-infraestructura`— pasaron a **2.0**, y sus cuatro samples cierran **sin divergencias**. En los cuatro se corrigió **el documento y no el producto**, con un motivo escrito por línea. `H-02` llevó una decisión del Product Owner: **«apagar» un movimiento significa detener y no volver**, porque la cámara la puede haber movido la persona y `F-25` gobierna los dos movimientos de forma simétrica. La observación de `ADR-08006` pasó a **5.0** declarando que su alcance era de **cuatro** afirmaciones y no de tres. **Del reporte quedan vivos `H-03` y `H-12`.** Sube **major**. |

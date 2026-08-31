@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/infrastructure/03-avanzado/`
@@ -67,21 +67,31 @@ samples/infrastructure/03-avanzado/
 [1] Verificacion con la credencial correcta: verdadera
 [1] Verificacion con la credencial incorrecta: falsa
 [1] Verificacion contra un derivado ilegible: UNREADABLE_PASSWORD_HASH (distinto de falsa)
-[1] Derivacion sin contrasena en claro: rechazada PLAINTEXT_PASSWORD_MISSING
+[1] Derivacion sin contrasena en claro: nulo, sin codigo tipado
 [2] Provisorias producidas: 100 | repetidas: 0 | derivadas de un dato de la cuenta: no
-[2] Produccion sin fuente de aleatoriedad: RANDOMNESS_SOURCE_UNAVAILABLE | valores producidos: 0
+[2] Produccion sin fuente de aleatoriedad: no provocable desde el sample | caminos alternativos en la fuente del componente: 0
 [3] Acceso emitido: reclamos presentes=4 | verificacion del acceso propio: valida
 [3] Acceso con firma ajena: invalido | Acceso vencido: invalido
-[3] Emision sin clave de firma: rechazada SIGNING_KEY_MISSING | accesos emitidos: 0
-[3] Emision con reclamos incompletos: rechazada INCOMPLETE_CLAIMS
+[3] Emision sin clave de firma: nulo, sin codigo tipado | accesos emitidos: 0
+[3] Emision con reclamos incompletos: nulo, sin codigo tipado | distinguible de la anterior: no
 [4] Sello del reloj por el puerto: obtenido | dos corridas con el puerto fijado: sello identico
 [5] Preparacion del almacen: transformaciones aplicadas | linaje registrado
 [5] Segunda preparacion sobre el mismo almacen: sin transformaciones nuevas
-[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido MIGRATION_NOT_APPLICABLE
+[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido InvalidOperationException, sin codigo tipado
 [insp] Ocurrencias de clave de firma, contrasena real o ruta del almacen en la fuente del sample: 0
 [insp] Ocurrencias de contrasena en claro o de valor derivado en la salida producida: 0
-Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0
+Actos recorridos: 5 | Rechazos tipados: 1 | Excepciones: 0
 ```
+
+**Cinco líneas cambiaron en la versión 2.0, y las cinco dicen lo mismo: esta capa señala con `null` y no con código tipado.** Declara **dos** códigos —`UNREADABLE_PASSWORD_HASH` y `RANDOMNESS_SOURCE_UNAVAILABLE`— y este §6 le pedía **seis**. Los cuatro que faltaban **no existen en el árbol** y nunca existieron: `PLAINTEXT_PASSWORD_MISSING`, `SIGNING_KEY_MISSING`, `INCOMPLETE_CLAIMS` y `MIGRATION_NOT_APPLICABLE`.
+
+**No se agregan, y el motivo es que no tienen consumidor.** La capa señala con nulo de forma consistente y sus consumidores lo manejan así; cuatro códigos que nadie lee serían trabajo sin destinatario. **La conducta que este documento describía se cumple entera en los cuatro casos**: sin contraseña no se deriva nada, sin clave de firma no se emite ningún acceso, con reclamos incompletos tampoco, y el arranque se detiene ante un linaje que no entiende.
+
+**Con una excepción que sí se corrigió, y no acá.** `SIGNING_KEY_MISSING` describía una condición que **la aplicación compuesta no puede alcanzar**: `CompositionRoot` detiene el arranque si la clave falta o es más corta que el mínimo. El sample la alcanza porque construye el emisor **directamente**, que es legítimo para un sample de capa — pero lo que mide ahí es una **rama defensiva del componente** y no una condición del producto.
+
+**`RANDOMNESS_SOURCE_UNAVAILABLE` sí existe, y su línea cambió por otro motivo.** La condición **no es provocable desde un sample**: la fuente es el generador criptográfico del sistema operativo, y fabricar su falla con un doble mediría el doble. Lo que el sample mide en su lugar es **la mitad que importa** —que no haya un segundo camino por el que la provisoria se componga igual— y da cero.
+
+**La línea de `[5]` mejoró el 2026-08-30 aunque siga sin código.** Antes el arranque se detenía dejando escapar la excepción cruda del proveedor, con su traza y un mensaje sobre una tabla que ya existe. Hoy **se detiene por decisión propia**, con un mensaje que nombra la causa —el linaje no corresponde— y sin traza; el detalle queda en el registro.
 
 **La cuarta línea de `[1]` es la que más se confunde.** Un derivado **ilegible** no es lo mismo que una credencial **incorrecta**: la segunda es una respuesta legítima del mecanismo y la primera es un almacén en el que no se puede confiar. Colapsarlas haría que un dato corrupto se leyera como «contraseña equivocada» y nadie se enteraría nunca.
 
@@ -136,14 +146,14 @@ verificacion:
       - "[1] Derivacion de contrasena: valor derivado producido | contrasena en claro guardada: no"
       - "[1] Verificacion contra un derivado ilegible: UNREADABLE_PASSWORD_HASH (distinto de falsa)"
       - "[2] Provisorias producidas: 100 | repetidas: 0 | derivadas de un dato de la cuenta: no"
-      - "[2] Produccion sin fuente de aleatoriedad: RANDOMNESS_SOURCE_UNAVAILABLE | valores producidos: 0"
+      - "[2] Produccion sin fuente de aleatoriedad: no provocable desde el sample | caminos alternativos en la fuente del componente: 0"
       - "[3] Acceso emitido: reclamos presentes=4 | verificacion del acceso propio: valida"
-      - "[3] Emision sin clave de firma: rechazada SIGNING_KEY_MISSING | accesos emitidos: 0"
+      - "[3] Emision sin clave de firma: nulo, sin codigo tipado | accesos emitidos: 0"
       - "[4] Sello del reloj por el puerto: obtenido | dos corridas con el puerto fijado: sello identico"
-      - "[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido MIGRATION_NOT_APPLICABLE"
+      - "[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido InvalidOperationException, sin codigo tipado"
       - "[insp] Ocurrencias de clave de firma, contrasena real o ruta del almacen en la fuente del sample: 0"
       - "[insp] Ocurrencias de contrasena en claro o de valor derivado en la salida producida: 0"
-      - "Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0"
+      - "Actos recorridos: 5 | Rechazos tipados: 1 | Excepciones: 0"
     stdout_no_contiene:
       - "contrasena en claro guardada: si"
       - "repetidas: 1"
@@ -161,3 +171,4 @@ verificacion:
 | --- | --- | --- |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06006` a `CU-06010`, los cinco mecanismos que sólo esta capa provee, con **dos** inspecciones de umbral **cero** y su condición de medición declarada. El contrato `VER-06003` declara once líneas exactas de salida y **cuatro aserciones negativas**, una por cada modo de falla silencioso de la capa; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-30 | **§6 se alinea con lo que la capa hace.** Cinco líneas pedían códigos tipados que **no existen en el árbol** —`PLAINTEXT_PASSWORD_MISSING`, `SIGNING_KEY_MISSING`, `INCOMPLETE_CLAIMS` y `MIGRATION_NOT_APPLICABLE`— y una sexta pedía uno que existe pero cuya condición **no es provocable** desde un sample. Esta capa declara **dos** códigos y señala el resto con `null`. **No se agregan cuatro códigos sin consumidor**: la conducta que este documento describía se cumple entera en los cuatro casos, y lo que faltaba era el nombre. Se deja constancia de que `SIGNING_KEY_MISSING` describía una condición que **la aplicación compuesta no puede alcanzar** —`CompositionRoot` detiene el arranque sin clave— y que el sample la alcanza construyendo el emisor directamente. La línea de `[5]` mejoró en la misma tanda: el arranque **se detiene por decisión propia**, con un mensaje que nombra la causa y sin traza. Sube **major**: cinco líneas del snapshot cambian de contenido. |

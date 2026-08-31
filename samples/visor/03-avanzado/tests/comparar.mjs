@@ -26,13 +26,13 @@ for (const [clave, valor] of porEtiqueta) {
 // número y falló en silencio: `[10b]` corre la numeración un lugar, así que la
 // declaración de `[15]` apuntaba al renglón equivocado y aparecía como no declarada.
 // La etiqueta es del renglón; el número es de su posición.
-const divergencias = {
-  '[5]': 'D-1 (misma causa que [7]) · el encuadre NO vuelve. Prender la orbita mueve la camara y apagarla la deja donde quedo: el bucle deja de moverla, no la devuelve. El identificador y el resultado de dibujo si quedan intactos, que son las dos cosas del renglon que se pueden leer por separado',
-  '[10]': 'D-3 · el bundle deja UNA global suelta, `__THREE__`, y no la pone el producto: la registra el motor grafico al cargarse, para avisar si hay dos copias suyas en la pagina. El nombre propio del paquete sigue siendo uno solo y las seis funciones estan; lo que §6 pide en cero es esto, y esto viene adentro del motor',
-  '[15]': 'D-2 · el bundle declara SEIS de los siete codigos del contrato. El que falta es UNREADABLE_TEXT, y no es un olvido: era el codigo del texto del alumno, que la fachada ya no recibe desde ADR-08006. LA SEGUNDA MITAD DE ESTA DIVERGENCIA SE CERRO EL 2026-08-30: habia UNO acunado aguas abajo —UNKNOWN, el respaldo de `reason ?? UNKNOWN`— y hoy son cero. Se retiro, y `MeshOutcome` paso a ser una union discriminada para que el caso que lo justificaba no compile',
-  '[7]': 'D-1 · DEFECTO. §6 dice que al apagar el giro las piezas vuelven a su orientacion de partida. No vuelven: el bucle deja de incrementar `mesh.rotation.y` y las piezas se quedan donde estaban. Apagar no es deshacer, y aca la diferencia se ve: el cuadro posterior al apagado no es el anterior al encendido',
-  15: 'D-2 · el bundle declara SEIS de los siete codigos del contrato. El que falta es UNREADABLE_TEXT, y no es un olvido: era el codigo del texto del alumno, que la fachada ya no recibe desde ADR-08006. Y hay UNO acunado aguas abajo —`UNKNOWN`, el respaldo de `reason ?? UNKNOWN`—, que §6 exige que sean cero; no es alcanzable hoy, porque `meshFor` siempre pone motivo cuando no hay malla, pero es un codigo que el contrato no declara',
-};
+// SIN DIVERGENCIAS, y las tres que había se cerraron el 2026-08-30 corrigiendo el
+// DOCUMENTO: `[7]` afirmaba que apagar el giro devuelve la orientación —el Product
+// Owner decidió que apagar es detener—, `[10]` exigía cero globales sueltas cuando
+// la que hay la pone el motor gráfico, y `[15]` contaba siete códigos cuando el
+// séptimo era el del texto que la fachada ya no recibe.
+const divergencias = {};
+
 
 let declaradas = 0;
 let noDeclaradas = 0;
@@ -63,7 +63,9 @@ for (const l of verificacion) console.log(l);
 console.log('');
 const coinciden = esperadas.length - declaradas - noDeclaradas;
 if (noDeclaradas === 0) {
-  console.log(`  CONFORME CON DIVERGENCIAS DECLARADAS · ${coinciden}/${esperadas.length} líneas coinciden, ${declaradas} difieren por motivo escrito`);
+  console.log(declaradas === 0
+    ? `  CONFORME · las ${esperadas.length} líneas coinciden con el snapshot de §6`
+    : `  CONFORME CON DIVERGENCIAS DECLARADAS · ${coinciden}/${esperadas.length} líneas coinciden, ${declaradas} por motivo escrito`);
   process.exit(0);
 }
 console.log(`  NO CONFORME · ${noDeclaradas} línea(s) difieren sin motivo declarado`);

@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Nivel:** Avanzado
-**Estado de esta carpeta:** **Implementado.** Corre en 0; **14 de 17 líneas coinciden con §6**, estable en corridas repetidas. Las otras 3 son divergencias declaradas, y **una es un defecto** (abajo).
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 17 líneas coinciden con §6**, desde que el 2026-08-30 su documento pasó a 2.0 y el Product Owner decidió que «apagar» un movimiento significa detener.
 **Documento que la gobierna:** [`ejemplo-03-avanzado.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/10-Examples/ejemplo-03-avanzado.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-03`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-15`, en estado `Sin verificar`

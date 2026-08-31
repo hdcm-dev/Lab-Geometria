@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Visor
 **Nivel:** Intermedio
-**Estado de esta carpeta:** **Implementado.** Corre en 0; **10 de 15 líneas coinciden con §6** y las otras 5 son divergencias declaradas. **El defecto que este sample encontró está cerrado** (abajo).
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 15 líneas coinciden con §6**, desde que el 2026-08-30 su documento pasó a 2.0. El defecto que este sample encontró también está cerrado.
 **Documento que la gobierna:** [`ejemplo-02-intermedio.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/10-Examples/ejemplo-02-intermedio.md) 1.1, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-02`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-14`, en estado `Sin verificar`

@@ -2,9 +2,9 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md
-**Versión:** 4.0
-**Estado:** Cerrado — **las tres decisiones tomadas y las tres escrituras aplicadas**
-**Fecha:** 2026-08-16
+**Versión:** 5.0
+**Estado:** Reabierta y vuelta a cerrar — **el alcance era de cuatro afirmaciones y no de tres**, y la cuarta apareció el 2026-08-29 al correr los samples
+**Fecha:** 2026-08-30
 **Autor:** Orquestador SDD
 **Instrumento:** `Master-Prompt.md` §9, manejo de ambigüedad: un dato que el producto no puede resolver por su cuenta **se eleva y no se decide**
 **Alcanza a:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §20.E-7 y §20.E-8; `Requerimientos-Tecnicos.md` §8.3
@@ -25,6 +25,20 @@ decisión.
 **Ninguna de las tres invalida la decisión.** Las tres describen propiedades que la decisión cambia,
 y la pregunta no es si la decisión está bien —ya está tomada— sino **qué se hace con lo que esas
 tres afirmaban**.
+
+## 1bis. La cuarta afirmación, que este barrido no encontró
+
+**Esta observación se cerró en 4.0 con tres afirmaciones enumeradas y sus tres escrituras aplicadas. Faltaba una cuarta, y era una categoría entera.**
+
+`ADR-08006` cambió la fachada del visor el **2026-08-16**. Los §6 de las tres categorías `10-Examples` del visor describían la fachada anterior —un texto que se carga, una estructura que se devuelve— y **siguieron describiéndola**. Este documento **no menciona la categoría 10 ni una vez**: se verificó con `grep`, cero ocurrencias de `10-Examples`, `ejemplo-0` y `samples/`.
+
+**Lo más filoso es que este mismo documento decía la respuesta.** Su §2.2 escribe que la pieza de `E-8` «**no llega al visor**» — que es exactamente lo que el ejemplo de `02-intermedio` contradecía en su §6, y nadie los leyó juntos.
+
+**Cuánto duró.** El ejemplo del visor se emitió el **2026-08-11**, el ADR es del **2026-08-16**, y el primero que volvió a leer ese §6 fue quien lo implementó, el **2026-08-29**. **Dieciocho días**, con la decisión que lo invalidaba adentro.
+
+**Qué se hizo.** Los cuatro documentos —los tres del visor y `ejemplo-03-avanzado-infraestructura`— pasaron a **2.0** el 2026-08-30, con sus §6 alineados y el motivo escrito en cada uno. Los cuatro samples cierran ahora **sin divergencias**.
+
+**Y qué queda, que no es del producto.** El hueco es de método: el framework tiene una **matriz de propagación** para la retroalimentación de maqueta —`Maqueta-Rules.md` §3.6— y **ninguna para un ADR**, de modo que la cobertura del barrido depende de que quien lo hace se acuerde de la categoría. Está reportado como **`Reporte 21`** en `IA.SDD.Documentacion`, junto con la propuesta de un campo que declare **contra qué lista se verificó** el barrido y no sólo qué se encontró.
 
 ## 2. Las tres afirmaciones alcanzadas
 
@@ -139,3 +153,4 @@ lo mismo.
 | 2.0 | 2026-08-16 | **Dos de las tres decisiones tomadas.** El Product Owner resolvió **reescribir** los dos puntos de los escenarios, y el intake pasa a **2.2** con esa absorción. Queda **abierta la tercera**, `RT` §8.3, que es la única que la decisión contradice de frente, y §3.1 la desarrolla con sus dos salidas y lo que cuesta cada una. Se declara además que la decisión de **dónde corre el validador** —en el servicio de datos— **no resuelve ésta**: una dice quién interpreta y la otra qué se hace con una propiedad que ya no se cumple entera. | Orquestador SDD |
 | 3.0 | 2026-08-16 | **La tercera decisión, tomada: se precisa `RT` §8.3.** La propiedad pasa a ser «sin instalar nada y sin backend», sin «pegando el texto», y la página de prueba del visor se entrega con los ocho escenarios ya convertidos. **Queda una escritura pendiente que no es de este orquestador**: `Requerimientos-Tecnicos.md` vive en `Lab-Geometria.Documentacion/PROMPTs/`, material de su autor, donde este orquestador lee y no escribe. La decisión está registrada acá; falta que la fuente la refleje. | Product Owner (decisión) · Orquestador SDD |
 | 4.0 | 2026-08-16 | **Cerrada: las tres escrituras aplicadas.** `RT` §8.3 se reescribe en sus dos frases, con autorización explícita del Product Owner sobre su propia carpeta —autorización **de este caso**, que no cambia la regla—. **Y §2.3 se corrige a sí misma, que es lo sustantivo de esta versión**: la 1.0 declaró que `RT` §8.3 contradecía la decisión «de frente», y al leer el texto completo son dos hallazgos distintos y menores. La fuente **ya contemplaba** que el bundle recibiera «el texto **o la estructura**», de modo que la decisión elige entre dos opciones abiertas en lugar de contradecir; y **hay una fila que sí se invierte y que la 1.0 no había visto**: la tabla de responsabilidades asignaba interpretar al bundle. Se declara la causa del error —leer una consecuencia y no la tabla de al lado, que es lo que el barrido por concepto existe para evitar— en lugar de corregir la cifra en silencio. | Orquestador SDD |
+| 5.0 | 2026-08-30 | **El alcance era de cuatro afirmaciones y no de tres.** Entra §1bis: los §6 de las tres categorías `10-Examples` del visor —y el de `03-avanzado-infraestructura`— describían la fachada anterior a `ADR-08006`, y **este documento no menciona la categoría 10 ni una vez** (verificado con `grep`: cero ocurrencias). Su propio §2.2 escribía que la pieza de `E-8` «no llega al visor», que es lo que el ejemplo contradecía, y nadie los leyó juntos. Duró **dieciocho días**, hasta que alguien corrió el sample. Los cuatro documentos pasaron a 2.0 y sus cuatro samples cierran **sin divergencias**. El hueco de método —que no hay matriz de propagación para un ADR, como sí la hay para la maqueta— está reportado al framework como **`Reporte 21`**. Sube **major**: el alcance de la observación cambia, y una observación cerrada que enumeraba tres pasa a enumerar cuatro. |

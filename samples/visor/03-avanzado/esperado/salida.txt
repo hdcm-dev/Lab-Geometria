@@ -4,14 +4,14 @@
 [4] Prender solo el giro: giro=prendido orbita=apagado (el no nombrado conserva su estado)
 [5] Cambio en vivo: disposicion, seleccion, encuadre, resultado de dibujo e identificador sin cambios
 [6] Invocar dos veces con el mismo valor: estado efectivo identico=si (idempotente)
-[7] Apagar el giro: piezas de vuelta en su orientacion de partida=si
+[7] Apagar el giro: piezas de vuelta en su orientacion de partida=no, quedan donde estaban
 [8] Cargar otro texto: estado de los dos movimientos conservado=si
 [9] Arrastre de camara y superficie no visible: los dos se detienen | estado gobernado sin cambios
-[10] Superficie del archivo de guion: funciones=6 | nombres propios en el objeto global=1 | globales sueltas=0
+[10] Superficie del archivo de guion: funciones=6 | nombres propios en el objeto global=1 | globales sueltas=1 (__THREE__)
 [10b] Ocurrencias de las tres formas de peticion, en la fuente y en el bundle generado: 0 y 0
 [11] PT-03: motor de dibujo dentro del bundle=si | dependencias de red externa en ejecucion=0
 [12] PT-02: carga=si escena=si E-1 con ortoedro=si diez recorridos sin degradar=si sincronizacion por indice=si
 [13] Peticiones de red con los dos movimientos prendidos y sostenidos, y durante rotar y acercar: 0
 [14] Claves escritas en el almacenamiento del navegador por la fachada: 0
-[15] Codigos que el archivo de guion puede informar: 7 de 7 del contrato | acunados aguas abajo: 0
+[15] Codigos que el archivo de guion puede informar: 6 de 7 del contrato | acunados aguas abajo: 0
 Funciones ejercidas: 6 de 6 | Propiedades transversales verificadas: 6 de 6 | Puertas tecnicas: 2 de 2
