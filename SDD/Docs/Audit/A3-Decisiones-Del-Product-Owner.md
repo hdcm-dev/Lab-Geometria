@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.9
+**Versión:** 1.10
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -46,8 +46,9 @@ destapó.
 
 ## 2. Las ocho decisiones que sí son tuyas
 
-> **Índice de estado — el único lugar donde se lee cuántas quedan.** Al **2026-08-31**: **UNA abierta,
-> cinco cerradas, dos retiradas.**
+> **Índice de estado — el único lugar donde se lee cuántas quedan.** Al **2026-08-31**: **NINGUNA espera
+> una decisión del Product Owner.** Cinco cerradas, dos retiradas y una **diferida con evento** a la
+> fase `i`, donde la toma el equipo.
 >
 > | | Decisión | Estado |
 > |---|---|---|
@@ -57,7 +58,7 @@ destapó.
 > | `D4` | El límite de tamaño del cuerpo | **DECIDIDA** el 2026-08-20: se adopta el valor por omisión del servidor |
 > | `D5` | El volumen de la comisión | **CERRADA POR INCOGNOSCIBLE** el 2026-08-20. No se fija número |
 > | `D6` | La versión de plataforma del hosting | **RETIRADA** el 2026-08-31: ya estaba contestada |
-> | `D7` | La herramienta que calcula la versión | **ABIERTA — la única** |
+> | `D7` | La herramienta que calcula la versión | **DIFERIDA a la fase `i`** el 2026-08-30, por `E-02`. La elige **el equipo**, no vos |
 > | `D8` | Si el *mutation score* entra al flujo | **DECIDIDA con un NO** el 2026-08-20. No entra |
 >
 > **Este índice existe porque el documento no registraba desenlaces, y en la emisión 1.8 eso me hizo
@@ -166,11 +167,30 @@ del calendario. Ver [`Inventario-Marcas-A-Verificar-2026-08-31.md`](Inventario-M
 *[CORREGIDO en la emisión 1.8: la 1.7 decía «el mismo hueco que este documento arrastra en otras tres
 entradas» y **no las había contado**. Son dos, `D2` y `D6`.]*
 
-### D7 · La herramienta que calcula la versión — `PA-06` · **5 filas** · **ABIERTA, y es la ÚNICA**
+### D7 · La herramienta que calcula la versión · **5 filas** · **DIFERIDA A LA FASE `i` por el Product Owner el 2026-08-30**
 
-**Verificado que sigue abierta**: no hay MinVer, GitVersion, Nerdbank ni semantic-release en el árbol.
-Es la única de la familia de anclajes que no se cerró sola, y es coherente con que el prefijo `v` se
-fijara sin elegirla.
+**Verificado que la herramienta sigue sin elegirse**: no hay MinVer, GitVersion, Nerdbank ni
+semantic-release en el árbol. Es la única de la familia de anclajes que no se cerró sola, y es coherente
+con que el prefijo `v` se fijara sin elegirla.
+
+**Pero no es una decisión pendiente del Product Owner, y decirlo así era el error.** La mesa del
+2026-08-27 la escaló como `E-02` con **tres opciones** —(a) elegir la herramienta entre las cuatro que
+`Rules-Devops.md` §4.3 nombra, (b) retirar el punto con la figura de `ADR-14004`, (c) reasignar el evento
+a la fase `i`— y **el Product Owner contestó el 2026-08-30: opción (c)**.
+
+**Está decidido cuándo se decide**, que es una respuesta y no una postergación: **la fase `i` es cuando
+aparece el primer release real que hay que versionar**, y elegir antes sería anclar una herramienta sin
+ejercerla —el mismo criterio con el que la etapa `b` decidió no introducir la biblioteca de componentes—.
+**El titular deja de ser el Product Owner y pasa a ser el equipo, en la fase `i`.**
+
+Las cinco filas —`-Api` `05` (`PA-04` y `PA-06`), `06` (`PA-03` y `PA-04`) y `09` (`PD-03`)— llevan el
+evento reasignado desde ese día y **dejaron de estar vencidas**. Ver
+[`Mesa-2026-08-27.md`](Mesa-2026-08-27.md) §9 `E-02`.
+
+*[CORREGIDO el 2026-08-31. La emisión 1.9 la declaró «ABIERTA, y es la única», leyendo que la
+herramienta no está en el árbol. **Lo que no está en el árbol es la herramienta; lo que estaba decidido
+es el evento.** Es el mismo defecto que este documento arrastró con `D4`, `D5` y `D8`, y la cuarta vez
+que una decisión del Product Owner no llega hasta acá.]*
 
 ### D8 · Si el *mutation score* entra al pipeline · **1 fila** · **DECIDIDA con un NO el 2026-08-20**
 
@@ -191,7 +211,7 @@ pipeline**. `CV-19` queda declarado sin medir, con su motivo, y **deja de ser un
 | **2º** | **D1**, los `[ASUNCIÓN]` | Cierra **14 filas de un saque** y habilita cuatro `QG` |
 | ~~**3º**~~ | ~~**D3** y **D4**~~ **TOMADAS las dos** | ~~Son valores de configuración, y los dos alcanzan al despliegue de `i`~~ `D3` reformulada por lectura el 2026-08-26; `D4` decidida el 2026-08-20 adoptando el valor por omisión |
 | ~~**junto con `i`**~~ | ~~**D6**~~ | ~~La fase `i` la contesta midiendo~~ **Ya la contestó la fase `a`, el 2026-08-13. `D6` queda RETIRADA el 2026-08-31** |
-| **cuando quieras** | ~~**D2**~~, **D7**, ~~**D8**~~ | No bloquean nada. **`D7` es la única que queda de las ocho**, y conviene antes de la primera etiqueta calculada. *(`D2` quedó **retirada** el 2026-08-25; `D8` se decidió **con un NO** el 2026-08-20.)* |
+| ~~**cuando quieras**~~ **NINGUNA** | ~~**D2**, **D7**, **D8**~~ | ~~No bloquean nada~~ **Las ocho están resueltas o diferidas con evento.** `D2` retirada el 2026-08-25; `D8` decidida **con un NO** el 2026-08-20; **`D7` diferida a la fase `i`** el 2026-08-30, y la elige el equipo. La recomendación de tomar `D7` «antes de la primera etiqueta calculada» **queda absorbida por su evento**: la fase `i` **es** el primer release real |
 
 **Y una salida que vale para todas: retirar también cierra.** Ninguna de las 57 se evaluó por
 vigencia. Si `D2` ya no importa porque el backlog no se estima, **retirar el punto es tan válido como
@@ -252,6 +272,7 @@ continuación para que no haya dos series.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.10 | 2026-08-31 | **`D7` no era una decisión pendiente del Product Owner: estaba diferida a la fase `i` desde el 2026-08-30.** La mesa del 2026-08-27 la escaló como `E-02` con tres opciones —elegir la herramienta, retirar el punto con `ADR-14004`, o reasignar el evento— y **el Product Owner contestó la (c)**: la elección va a la **fase `i` · Despliegue real**, que es cuando aparece el primer release real que hay que versionar. **El titular deja de ser el Product Owner y pasa a ser el equipo.** Las cinco filas de `-Api` `05`, `06` y `09` llevan el evento reasignado desde ese día y **dejaron de estar vencidas**; lo que faltaba era que llegara hasta acá. **Con esto no queda ninguna decisión esperando al Product Owner**: de las ocho de `A3`, cinco están cerradas, dos retiradas y una diferida con evento. Es la **cuarta** vez en dos días que una decisión suya no alcanza al documento que la enumera, y la segunda que me hace afirmar lo contrario de lo que pasó — ver el **reporte 24** al framework. | Orquestador SDD |
 | 1.9 | 2026-08-31 | **Revierte el error central de la emisión 1.8: `D4`, `D5` y `D8` NO estaban abiertas. Estaban decididas desde el 2026-08-20.** El commit `b4a4804` las cerró ese día sobre **cinco documentos de las dos unidades de entrega** y **no tocó éste**. `D4`: se adopta el **valor por omisión** del servidor HTTP, con la obligación derivada de declararlo explícitamente cuando se toque la composición. `D5`: **cerrada por INCOGNOSCIBLE** —el dato no se sabe ni se puede saber, y no se fija número—, con la consecuencia de que el **caudal** pierde su fundamento y queda provisorio hasta `PT-05`. `D8`: **cerrada con un NO**, el *mutation score* no entra al pipeline. **El recuento de §4 que la 1.8 declaró equivocado era el correcto**: las abiertas eran dos, `D6` y `D7`. Lo que faltaba no era el total sino **las entradas de §2**. Hoy, con `D6` retirada, **queda UNA: `D7`**. **Y lo que este ida y vuelta deja es la lección más cara del día, porque contradice la que veníamos sacando.** El error de la 1.8 no fue dejar de mirar el árbol: **fue mirarlo y concluir al revés.** Se verificó que no hay `MaxRequestBodySize`, ni herramienta de cálculo de versión, ni herramienta de mutación, y se tomaron esas ausencias por «sin decidir». Pero `D4` y `D8` son decisiones **cuyo cumplimiento consiste en que no haya nada**: en el árbol, **«decidido que no» y «sin decidir» son indistinguibles**, y ninguna verificación sobre el código puede separarlos. **Para esa clase de decisión el registro es la única fuente** — y el registro era exactamente lo que `b4a4804` no había actualizado. Se corrigen en consecuencia el índice de estado de §2, las tres entradas, el orden recomendado de §3 y el cierre de §4. | Orquestador SDD |
 | 1.8 | 2026-08-31 | **El recuento de decisiones abiertas estaba mal, y el documento que existe para que no se pierda una decisión perdía tres.** §4 cerraba afirmando que «`D6` y `D7` continúan abiertas — **dos**» y daba cuenta de cinco de las ocho: **`D4`, `D5` y `D8` no tenían desenlace en §2 ni entraban en el total**. **Eran cinco abiertas, no dos.** Entra un **índice de estado** al frente de §2 —la misma medicina que `M-03` de la mesa del 2026-08-31 le recetó al reporte de hallazgos: un índice que se arma **contando** encuentra lo que uno armado **recordando** no—, y `D4`, `D5` y `D8` reciben desenlace explícito. **Hoy quedan cuatro abiertas**: `D4`, `D5`, `D7` y `D8`. **`D5` se declara la más consecuente**, con tres razones medidas: `D1` se tomó sin ella y por eso el caudal quedó excluido y es **el único valor abierto del §22**; condiciona la ausencia de paginación en dos superficies; y **es la única marca `[A VERIFICAR]` del producto que se decide y no se mide**, motivo por el cual faltaba en el §22 hasta hoy. Se registra además que **el orden recomendado por §3 no se respetó**: `D5` era la primera y se tomó `D1`. **Ninguna de las tres omitidas estaba mal argumentada: se perdieron por no estar contadas.** Se corrige por último una afirmación de la emisión **1.7**, en `D6`: decía «el mismo hueco que este documento arrastra en **otras tres** entradas» **sin haberlas contado**; son **dos**, `D2` y `D6`. | Orquestador SDD |
 | 1.7 | 2026-08-31 | **Cierre de las dos incógnitas `[A VERIFICAR]` que ya no tenían pregunta**, sobre el inventario [`Inventario-Marcas-A-Verificar-2026-08-31.md`](Inventario-Marcas-A-Verificar-2026-08-31.md), que clasificó las **71** apariciones vivas del corpus en **cinco** incógnitas. **(a) La versión de plataforma del hosting quedó RESUELTA el 2026-08-13, midiendo**: `PT-01.a` pasa con **200** y el hosting soporta `net10.0`, confirmado desde el panel; no hizo falta bajar la versión objetivo del front. **(b) La versión de la biblioteca de componentes queda SIN OBJETO**: la biblioteca nunca se introdujo y su ausencia es una decisión declarada en el `.csproj` — `PA-01` de `Web/05` §11 **ya lo había cerrado por lectura el 2026-08-20** y el desenlace no bajó. **Ninguna de las dos se decide acá: las dos se leen.** **`D6` queda RETIRADA: ya estaba contestada cuando este documento la presentó.** Se emitió el 2026-08-20 diciendo que «la fase `i` la hace sola», y la fase `a` la había hecho el **2026-08-13**, publicando el front contra el hosting real — exactamente el acto que la entrada anticipaba. **El diagnóstico era correcto y el pronóstico llegó tarde**, porque la entrada se contrastó contra lo que faltaba por hacer y no contra lo que el producto ya había hecho. **Ningún umbral, ningún contrato y ninguna decisión cambian.** | Orquestador SDD |
