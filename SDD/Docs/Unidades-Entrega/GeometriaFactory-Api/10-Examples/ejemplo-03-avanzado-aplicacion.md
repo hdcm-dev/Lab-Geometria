@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/application/03-avanzado/`
@@ -70,7 +70,7 @@ samples/application/03-avanzado/
 [1] Baja de la cuenta de administrador: rechazada OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT
 [2] Listado de la comision: 3 trabajos | borradores visibles: 0 (RN-04011)
 [2] Detalle de un trabajo en Borrador pedido por el administrador: WORK_OUTSIDE_ADMINISTRATOR_SCOPE
-[2] Listado de la comision pedido por un alumno: rechazado SCOPE_REQUIRES_ADMINISTRATOR_ROLE
+[2] Listado de la comision pedido por un alumno: rechazado ADMINISTRATOR_ROLE_REQUIRED
 [3] Aprobar desde Pendiente con comentario: Aprobado
 [3] Rechazar desde Pendiente sin comentario: Rechazado (el comentario es opcional)
 [3] Desenlace sobre un trabajo ya Aprobado: rechazado TRANSITION_FROM_TERMINAL_STATUS
@@ -86,6 +86,10 @@ Actos recorridos: 4 | Rechazos tipados: 8 | Excepciones: 0
 **La línea del reseteo con la situación conservada es `RN-04012` y `RN-04015` juntas.** El reseteo se aplica sobre una cuenta **bloqueada** —no exige ni comprueba la situación— y no la cambia; y los trabajos siguen siendo dos. Lo único que cambia es la marca, que la última línea de `[4]` muestra en su efecto.
 
 **`provisoria producida por el sistema: si` es `RN-04014` y `RN-04016` juntas.** La habilitación **produce** la contraseña provisoria y esta capa no la recibe de afuera; el mecanismo que la fabrica vive detrás del puerto, en otro proyecto de código.
+
+**La línea `[2]` cambió de código en la versión 2.0, y el cambio es de capa.** Los dos existen, y en catálogos distintos: `SCOPE_REQUIRES_ADMINISTRATOR_ROLE` es del **dominio** y `ADMINISTRATOR_ROLE_REQUIRED` es de la **capa de aplicación**. El que sale es el segundo, porque quien rechaza es el caso de uso: comprueba el papel **antes** de pedirle nada al repositorio, y por eso el dominio no llega a opinar.
+
+**No es un detalle de nombre.** Que el rechazo salga con el código de la capa que lo emite es lo que permite saber, leyendo la respuesta, **dónde se detuvo el pedido**.
 
 ## 7. Variaciones sugeridas
 
@@ -133,7 +137,7 @@ verificacion:
       - "[1] Baja con el correo escrito coincidente: dada de baja | trabajos arrastrados: 2"
       - "[2] Listado de la comision: 3 trabajos | borradores visibles: 0 (RN-04011)"
       - "[2] Detalle de un trabajo en Borrador pedido por el administrador: WORK_OUTSIDE_ADMINISTRATOR_SCOPE"
-      - "[2] Listado de la comision pedido por un alumno: rechazado SCOPE_REQUIRES_ADMINISTRATOR_ROLE"
+      - "[2] Listado de la comision pedido por un alumno: rechazado ADMINISTRATOR_ROLE_REQUIRED"
       - "[3] Desenlace sobre un trabajo ya Aprobado: rechazado TRANSITION_FROM_TERMINAL_STATUS"
       - "[4] Reseteo de un alumno bloqueado: aplicado | situacion conservada=Bloqueada trabajos conservados=2"
       - "Actos recorridos: 4 | Rechazos tipados: 8 | Excepciones: 0"
@@ -152,3 +156,4 @@ verificacion:
 | --- | --- | --- |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-04002`, `CU-04007`, `CU-04008` y `CU-04011` con los **cuatro** puertos satisfechos por dobles y con semilla propia, y recorre las comprobaciones **3** y **4** de `ADR-04004` §2 con sus negativas distinguidas. El contrato `VER-04003` declara siete líneas exactas de salida y **dos aserciones negativas** —el borrador visible en la entrega de la comisión y el motivo que no puede colapsarse con el de pertenencia—; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-30 | **§6 corrige el código del listado de la comisión pedido por un alumno.** Nombraba `SCOPE_REQUIRES_ADMINISTRATOR_ROLE`, que es del **dominio**; el que sale es `ADMINISTRATOR_ROLE_REQUIRED`, de la **capa de aplicación**, porque el caso de uso comprueba el papel antes de pedirle nada al repositorio y el dominio no llega a opinar. Sube **major**: una línea del snapshot cambia de contenido. |

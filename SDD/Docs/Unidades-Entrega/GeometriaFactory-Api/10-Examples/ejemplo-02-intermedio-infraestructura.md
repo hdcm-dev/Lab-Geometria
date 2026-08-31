@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/infrastructure/02-intermedio/`
@@ -65,18 +65,24 @@ samples/infrastructure/02-intermedio/
 [1] Trabajo de E-5 materializado: piezas=1 observaciones=1
 [2] Consulta de listado: 3 trabajos | componentes en el resultado: 0 | texto original en el resultado: no
 [2] Consulta de detalle: 1 trabajo | piezas y componentes presentes: si | texto original presente: si
-[2] Consulta sin alcance declarado: rechazada QUERY_WITHOUT_DECLARED_SCOPE
+[2] Consulta sin alcance declarado: sin camino en el puerto | operaciones de listado sin recorte: 0
 [3] Retiro de un trabajo: retirado | piezas, componentes y observaciones que quedaron: 0
 [4] Baja de la cuenta con 2 trabajos: arrastre aplicado | trabajos que quedaron de esa cuenta: 0
-[4] Arrastre interrumpido a la mitad: PARTIAL_DELETION_NOT_ALLOWED | trabajos que quedaron: 2
+[4] Arrastre no declarado: DELETION_WITHOUT_WORK_CASCADE | trabajos que quedaron: 2
 [5] Alta con un correo ya registrado: rechazada EMAIL_ALREADY_REGISTERED
-[5] Segunda cuenta con papel Administrador: rechazada ADMINISTRATOR_UNIQUENESS_VIOLATED
+[5] Segunda cuenta con papel Administrador: rechazada ADMINISTRATOR_ALREADY_CONFIGURED
 [5] Cuenta recuperada con su marca de cambio pendiente: si | estado sin alterar: si
-[6] Escritura que reemplaza el texto original: rechazada WRITE_REWRITES_ORIGINAL_JSON
-Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0
+[6] Escritura que reemplaza el texto original: rechazada ORIGINAL_JSON_ALTERED | texto en el almacen: intacto
+Actos recorridos: 5 | Rechazos tipados: 4 | Excepciones: 0
 ```
 
-**La línea `[2]` de la consulta sin alcance es la razón de ser de este sample.** El adaptador **no filtra después**: exige que el recorte venga en el pedido. Un repositorio genérico que devolviera todo y dejara el recorte del lado del consumidor es exactamente lo que esa condición viene a impedir, y es la alternativa que `05` §2.1 descarta con ese fundamento.
+**Cinco líneas cambiaron en la versión 2.0, y las cinco nombraban códigos que no existen en el árbol.** Tres existen **con otro nombre y en otra capa** —`DELETION_WITHOUT_WORK_CASCADE`, `ADMINISTRATOR_ALREADY_CONFIGURED` y `ORIGINAL_JSON_ALTERED`, los tres del **dominio**— y uno **no existe en ninguna**.
+
+**Los tres que se mudaron dicen algo sobre el producto.** Las condiciones se corrieron del adaptador hacia el dominio, y al mudarse **se quedaron con el nombre de lo que impiden** y no con el de lo que evitan: no es «baja parcial no admitida» sino «baja sin arrastre declarado». **Ninguna conducta falta**: las tres se ejercitan y las tres rechazan.
+
+**La línea `[2]` de la consulta sin alcance es la razón de ser de este sample, y hoy lo es por un motivo más fuerte que el que este documento escribió.** El adaptador **no filtra después**: exige que el recorte venga en el pedido. Un repositorio genérico que devolviera todo y dejara el recorte del lado del consumidor es exactamente lo que esa condición viene a impedir, y es la alternativa que `05` §2.1 descarta con ese fundamento.
+
+**Y el producto la impidió mejor de lo que este §6 pedía.** Se esperaba un rechazo tipado, `QUERY_WITHOUT_DECLARED_SCOPE`; ese código **no existe**, y su ausencia está declarada por escrito en `IWorkRepository`: el puerto **no expone ninguna operación de listado sin recorte**, de modo que la condición **no tiene camino que la produzca**. Un rechazo en tiempo de ejecución se puede alcanzar y hay que probarlo; **una operación que no existe no compila.**
 
 **Las dos líneas de `[4]` son la unidad de trabajo vista desde afuera.** Cuando el arrastre se completa quedan **0** trabajos de esa cuenta; cuando se interrumpe quedan **2**, los mismos que había. No hay estado intermedio observable: es el todo o nada que [`ADR-06002`](../05-Arquitectura-Tecnica/Adrs/ADR-06002-Un-Archivo-Escritor-Unico-Y-Una-Unidad-De-Trabajo-Por-Operacion.md) fija, con la baja con arrastre como caso testigo.
 
@@ -128,12 +134,12 @@ verificacion:
     stdout_contiene:
       - "[1] Trabajo de E-1 materializado: piezas=3 componentes=15 observaciones=2 | texto original: guardado literal"
       - "[2] Consulta de listado: 3 trabajos | componentes en el resultado: 0 | texto original en el resultado: no"
-      - "[2] Consulta sin alcance declarado: rechazada QUERY_WITHOUT_DECLARED_SCOPE"
+      - "[2] Consulta sin alcance declarado: sin camino en el puerto | operaciones de listado sin recorte: 0"
       - "[3] Retiro de un trabajo: retirado | piezas, componentes y observaciones que quedaron: 0"
       - "[4] Baja de la cuenta con 2 trabajos: arrastre aplicado | trabajos que quedaron de esa cuenta: 0"
-      - "[4] Arrastre interrumpido a la mitad: PARTIAL_DELETION_NOT_ALLOWED | trabajos que quedaron: 2"
-      - "[6] Escritura que reemplaza el texto original: rechazada WRITE_REWRITES_ORIGINAL_JSON"
-      - "Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0"
+      - "[4] Arrastre no declarado: DELETION_WITHOUT_WORK_CASCADE | trabajos que quedaron: 2"
+      - "[6] Escritura que reemplaza el texto original: rechazada ORIGINAL_JSON_ALTERED | texto en el almacen: intacto"
+      - "Actos recorridos: 5 | Rechazos tipados: 4 | Excepciones: 0"
     stdout_no_contiene:
       - "componentes en el resultado: 15"
       - "trabajos que quedaron: 1"
@@ -149,3 +155,4 @@ verificacion:
 | --- | --- | --- |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-06003`, `CU-06004` y `CU-06005` sobre un almacén real llevado a su estado de primer arranque, con **tres** de los ocho escenarios materializados y sus interpretaciones reusadas del ejemplo 01 sin recalcular. Declara por qué la ruta del almacén no se escribe en el sample y por qué la variación de comparación de correos **no afirma un resultado**, dado que `ADR-06003` §6 la deja abierta. El contrato `VER-06002` declara ocho líneas exactas de salida y **tres aserciones negativas** —los componentes en el listado, el estado intermedio del arrastre y el trabajo que no se retiró—; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-30 | **§6 se alinea con lo que la capa hace.** Cinco líneas nombraban códigos que no existen en el árbol. Tres existen **con otro nombre y en otra capa** —`DELETION_WITHOUT_WORK_CASCADE`, `ADMINISTRATOR_ALREADY_CONFIGURED` y `ORIGINAL_JSON_ALTERED`, los tres del dominio—: las condiciones se corrieron del adaptador hacia adentro y se quedaron con el nombre de **lo que impiden** y no de lo que evitan. **Ninguna conducta falta.** El cuarto, `QUERY_WITHOUT_DECLARED_SCOPE`, **no existe en ninguna capa y su ausencia está declarada**: `IWorkRepository` no expone ninguna operación de listado sin recorte, así que la condición no tiene camino que la produzca — **el producto la impidió mejor de lo que este §6 pedía**, porque una operación que no existe no compila. El pie pasa de cinco rechazos tipados a cuatro, que es la consecuencia. Sube **major**: cinco líneas del snapshot cambian de contenido. |

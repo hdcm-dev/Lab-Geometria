@@ -17,7 +17,7 @@ internal static class SalidaEsperada
         "[Retiro] Trabajo en Borrador por su dueno: retirado",
         "[Retiro] Trabajo en Pendiente por su dueno: rechazado OPERATION_OUTSIDE_DRAFT",
         "[Retiro] Trabajo ajeno: rechazado WORK_NOT_FOUND_FOR_REQUESTER",
-        "[Reedicion] Trabajo fuera de Borrador: rechazado EDIT_OUTSIDE_DRAFT | texto-original-intacto=si",
+        "[Reedicion] Trabajo fuera de Borrador: rechazado OPERATION_OUTSIDE_DRAFT | texto-original-intacto=si",
         "Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Excepciones: 0",
     ];
 

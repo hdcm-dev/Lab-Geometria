@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Nivel:** Intermedio
-**Estado de esta carpeta:** **IMPLEMENTADO el 2026-08-29. Trece de sus catorce líneas coinciden**; la que falta es una divergencia del sistema y no del sample: ver §4
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 14 líneas coinciden con §6**, desde que el 2026-08-30 su documento pasó a 2.0. La línea que faltaba era del documento: nombraba el código de la segunda barrera sobre un recorrido que se detiene en la primera. La comparación además dejó de estar detrás de una bandera: **el comando documentado ahora verifica**.
 **Documento que la gobierna:** [`ejemplo-02-intermedio-aplicacion.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-aplicacion.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-02`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-04002` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, en estado `Sin verificar`
@@ -37,7 +37,7 @@ Demostrar el ciclo del trabajo tal como esta capa lo orquesta, con los **ocho** 
 **El sample está implementado y corre. Trece de las catorce líneas del snapshot coinciden.**
 
 ```bash
-dotnet run --project samples/application/02-intermedio              # los ocho escenarios
+dotnet run --project samples/application/02-intermedio
 dotnet run --project samples/application/02-intermedio -- --verificar   # y la comparación
 ```
 

@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Reporte-Hallazgos-De-Los-Samples-2026-08-30.md
-**Versión:** 3.0
+**Versión:** 4.0
 **Estado:** Abierto — **cuatro vivos de doce emitidos**. Cinco cerrados, dos retirados tras verificarlos contra el contrato, y tres nuevos que salieron de esa verificación
 **Fecha:** 2026-08-30
 **Autor:** Orquestador SDD
@@ -205,7 +205,23 @@ Y una contradicción de documento, sin consecuencia sobre el código: `ejemplo-0
 
 **Y dos de los doce no eran hallazgos.** Se dejan tachados y con su motivo en lugar de borrarlos: un reporte que hace desaparecer lo que se equivocó no deja aprender de qué se equivocó.
 
+## 8bis. `H-13` — Siete de los nueve samples de .NET no verificaban con su comando documentado — **CERRADO**
+
+**Se encontró el 2026-08-30, al terminar de alinear los §6, y es el hallazgo más incómodo de la serie: estaba en el instrumento con el que se hicieron todos los demás.**
+
+`domain` ×3, `application` ×3 e `infrastructure/01` corrían su comparación **sólo con `-- --verificar`**. El comando que el §4 de cada documento declara —y que el contrato de verificación de su §9 cita— **no pasa esa bandera**. Corridos como está documentado, imprimían sus renglones y **devolvían cero sin comparar nada**.
+
+**Un instrumento que se lee como verde sin haber verificado**, que es exactamente el defecto que estos samples existen para encontrar en otros lados.
+
+**Lo primero que se hizo fue comprobar si alguna afirmación previa era falsa.** Se corrieron los siete con la bandera puesta: `domain` ×3 e `infrastructure/01` en CONFORME, y `application` ×3 con **una** divergencia cada uno — exactamente lo que se había reportado. **Ninguna afirmación previa era falsa**, pero ninguna estaba respaldada por el comando documentado.
+
+**Cerrado**: la comparación corre siempre, y las tres divergencias de `application` resultaron ser tres errores de §6 de tres naturalezas distintas —una comprobación que esa capa no hace ni debe hacer, un código de la segunda barrera sobre un recorrido que se detiene en la primera, y un código del dominio donde correspondía el de la aplicación—. Los tres documentos pasaron a 2.0.
+
+**Los nueve samples de .NET cierran hoy en CONFORME con el comando de su documento.**
+
 ## 9. Una observación sobre el instrumento
+
+**Y el último hallazgo fue sobre los samples mismos.** `H-13` estaba en el instrumento: siete de los nueve no verificaban con su comando documentado. Lo encontró terminar de arreglar todo lo demás, que es la única forma en que un instrumento se audita a sí mismo.
 
 **Los samples encontraron más en los documentos que en el código.** De los nueve hallazgos, **dos** son defectos de código; los otros siete son huecos entre lo que el producto hace y lo que sus contratos y ejemplos afirman.
 
@@ -222,3 +238,4 @@ Correr los dieciséis samples es exactamente eso: volver a leerlos, con el produ
 | 2.0 | 2026-08-30 | **Dos hallazgos se retiran, tres entran, y cinco pasan a cerrados.** `H-07` no era un hallazgo: `Contratos-REST.md` §5.1 declara las dos respuestas sin código, deliberadamente y por escrito; el que contradecía al contrato era el §6 del ejemplo, corregido a 1.1 y con su sample en 13/13. `H-04` tampoco: `CompositionRoot` ya detiene el arranque sin clave de firma, de modo que la rama de `Issue` es defensiva e inalcanzable en la aplicación compuesta, y el sample la alcanzó construyendo el emisor directamente. **Los dos errores son del mismo método** —leer una sola fuente, y medir un componente aislado para afirmar del producto— y por eso se dejan tachados en lugar de borrados. De verificarlos salieron **`H-10`**, **`H-11`** y **`H-12`**: los dos primeros ya cerrados, el tercero abierto. `H-01`, `H-06` y `H-09` pasan a cerrados. Sube **major**: el conjunto de hallazgos cambia. |
 | 1.0 | 2026-08-30 | Emisión. Nueve hallazgos de la implementación de los dieciséis samples, más tres divergencias investigadas y cerradas como no-hallazgo. Ninguno decidido. |
 | 3.0 | 2026-08-30 | **`H-02`, `H-05` y `H-08` cerrados.** Los cuatro §6 que describían algo que el producto no hace —los tres del visor y el de `03-avanzado-infraestructura`— pasaron a **2.0**, y sus cuatro samples cierran **sin divergencias**. En los cuatro se corrigió **el documento y no el producto**, con un motivo escrito por línea. `H-02` llevó una decisión del Product Owner: **«apagar» un movimiento significa detener y no volver**, porque la cámara la puede haber movido la persona y `F-25` gobierna los dos movimientos de forma simétrica. La observación de `ADR-08006` pasó a **5.0** declarando que su alcance era de **cuatro** afirmaciones y no de tres. **Del reporte quedan vivos `H-03` y `H-12`.** Sube **major**. |
+| 4.0 | 2026-08-30 | **Entra `H-13`, ya cerrado, y es el más incómodo de la serie: estaba en el instrumento.** Siete de los nueve samples de .NET corrían su comparación **sólo detrás de `--verificar`**, y el comando que su documento declara no la pasa: devolvían **cero sin comparar nada**. Se verificó primero si alguna afirmación previa era falsa —**ninguna lo era**— y después se hizo que la comparación corra siempre. Las tres divergencias de `application` que eso destapó resultaron **tres errores de §6 de tres naturalezas distintas**, y sus documentos pasaron a 2.0. Se alineó además el §6 de `infrastructure/02`, que nombraba cuatro códigos inexistentes —tres viven en el dominio con otro nombre y uno **no existe en ninguna capa**, con su ausencia declarada por escrito en el puerto—. **Los dieciséis samples cierran hoy sin divergencias, con el comando de su documento.** Sube **major**. |

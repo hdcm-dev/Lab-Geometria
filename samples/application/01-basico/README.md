@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Nivel:** Básico
-**Estado de esta carpeta:** **IMPLEMENTADO el 2026-08-29. Su contrato NO cumple, y el motivo es un hallazgo del sistema y no del sample**: ver §4
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 12 líneas coinciden con §6**, desde que el 2026-08-30 su documento pasó a 2.0. La línea que su contrato no cumplía era del documento y no del código: pedía que esta capa comprobara la marca de cambio de contraseña, que comprueba la guarda de la superficie HTTP. La comparación además dejó de estar detrás de una bandera: **el comando documentado ahora verifica**.
 **Documento que la gobierna:** [`ejemplo-01-basico.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-aplicacion.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-01`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-04001` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, en estado `Sin verificar`

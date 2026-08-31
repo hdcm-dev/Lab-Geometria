@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** `/samples/application/02-intermedio/`
@@ -77,7 +77,7 @@ samples/application/02-intermedio/
 [Retiro] Trabajo en Borrador por su dueno: retirado
 [Retiro] Trabajo en Pendiente por su dueno: rechazado OPERATION_OUTSIDE_DRAFT
 [Retiro] Trabajo ajeno: rechazado WORK_NOT_FOUND_FOR_REQUESTER
-[Reedicion] Trabajo fuera de Borrador: rechazado EDIT_OUTSIDE_DRAFT | texto-original-intacto=si
+[Reedicion] Trabajo fuera de Borrador: rechazado OPERATION_OUTSIDE_DRAFT | texto-original-intacto=si
 Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Excepciones: 0
 ```
 
@@ -86,6 +86,10 @@ Escenarios recorridos: 8 | Envios a Pendiente: 6 | Retenidos en Borrador: 2 | Ex
 **La línea `[E-7]` es la que separa el detalle del listado.** El detalle lleva piezas **y** componentes; el listado no lleva componentes ni texto original. Es la proyección que `US-04019` exige y que el contrato del producto ya había separado.
 
 **La línea de retiro del trabajo ajeno no dice «no autorizado».** Dice `WORK_NOT_FOUND_FOR_REQUESTER`, porque `RN-04003` obliga a que el trabajo ajeno sea indistinguible del inexistente. Es la negativa por pertenencia de `ADR-04004` §2, que no se colapsa con la negativa por facultad ni se intercambia con ella.
+
+**La línea de la reedición cambió de código en la versión 2.0, y el motivo es el orden de las comprobaciones.** Los dos códigos existen: `EDIT_OUTSIDE_DRAFT`, que `Work.Edit` devuelve, y `OPERATION_OUTSIDE_DRAFT`, que `Work.ResolveStudentAccess` devuelve. **El que sale es el segundo**, porque la resolución del acceso corre **antes** y corta: el caso de uso nunca llega a invocar la edición.
+
+**`EDIT_OUTSIDE_DRAFT` no sobra por eso.** Cubre a quien invoque la edición sin resolver el acceso primero, que es un camino que el caso de uso no toma y que la entidad no puede impedir. Lo que este §6 afirmaba era el código de la segunda barrera sobre un recorrido que se detiene en la primera.
 
 ## 7. Variaciones sugeridas
 
@@ -150,3 +154,4 @@ verificacion:
 | --- | --- | --- |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-04004`, `CU-04005`, `CU-04006` y `CU-04009` sobre los **ocho** escenarios reales `E-1` a `E-8` del `PRODUCT-INTAKE` §20, transcriptos sin modificación y con sus resultados de interpretación tomados de la sección «qué verificar» de cada uno. Declara por qué los archivos de escenario llevan extensión `.txt` y por qué el doble del puerto de validación no es un intérprete. El contrato `VER-04002` declara siete líneas exactas de salida y **dos aserciones negativas** —el índice reportado y la negativa por pertenencia que no puede salir como negativa por facultad—; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-30 | **§6 corrige el código de la reedición fuera de `Borrador`.** Nombraba `EDIT_OUTSIDE_DRAFT`, que es el de `Work.Edit`; el que sale es `OPERATION_OUTSIDE_DRAFT`, porque **la resolución del acceso corre antes y corta**, y el caso de uso nunca llega a invocar la edición. El primero no sobra: cubre a quien edite sin resolver acceso. §6 suma el párrafo del orden de comprobaciones. Sube **major**: una línea del snapshot cambia de contenido. |
