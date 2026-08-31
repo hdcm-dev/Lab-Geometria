@@ -343,6 +343,49 @@ else
                     </tbody>
                 </table>
             </div>
+
+            @* LAS TARJETAS QUE LA VERSIÓN ANGOSTA ENCIENDE. Ver `MI-02` de la mesa del
+               2026-08-31. Acá la omisión era la más cara de las tres: por debajo de 768 px
+               el administrador no veía ninguna cuenta y por lo tanto **no podía habilitar a
+               un alumno**, que es la operación sin la cual nadie entra al laboratorio.
+
+               EL NOMBRE DEL FORMULARIO LLEVA SUFIJO. Dos `@@formname` iguales en la misma
+               página se pisan, y la tabla y las tarjetas coexisten en el documento —lo que
+               cambia con el ancho es cuál se muestra—: sin el sufijo, el envío de la
+               versión angosta resolvería contra el formulario de la tabla. *@
+            <div class="gf-stacked-cards" role="list">
+                @foreach (var account in Listed)
+                {
+                    <article class="gf-row-card" role="listitem">
+                        <div class="gf-row-card-header">
+                            <span class="gf-body-strong">
+                                <span class="gf-initials" aria-hidden="true">@InitialsOf(account)</span>
+                                @NameOf(account)
+                            </span>
+                            <span class="gf-badge @BadgeClassOf(account)">@StandingOf(account)</span>
+                        </div>
+                        <p class="gf-caption gf-mt-2">@account.Email</p>
+                        <p class="gf-caption gf-num">Registro: @account.RegisteredAt.ToLocalTime().ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)</p>
+                        <div class="gf-row-actions">
+                            <form method="post" @formname="@("account-standing-card-" + account.AccountId.ToString("N", CultureInfo.InvariantCulture))"
+                                  @onsubmit="() => ChangeStandingAsync(account)"
+                                  data-gf-pending="Aplicando un cambio de situación">
+                                <AntiforgeryToken />
+                                <button type="submit" class="gf-btn gf-btn--secondary"
+                                        aria-label="@(VerbOf(account) + " la cuenta de " + NameOf(account))">@VerbOf(account)</button>
+                            </form>
+                            <a class="gf-btn gf-btn--secondary" href="@("/cuentas?reseteo=" + account.AccountId)"
+                               aria-label="@("Resetear la contraseña de la cuenta de " + NameOf(account))">
+                                <Icon Name="Key" />Resetear la contraseña
+                            </a>
+                            <a class="gf-btn gf-btn--destructive" href="@("/cuentas?baja=" + account.AccountId)"
+                               aria-label="@("Dar de baja la cuenta de " + NameOf(account))">
+                                <Icon Name="Delete" />Dar de baja
+                            </a>
+                        </div>
+                    </article>
+                }
+            </div>
         }
     }
 }

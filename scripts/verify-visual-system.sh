@@ -4,13 +4,26 @@
 # etapa `b`: «La interfaz usa el sistema visual adoptado, sin estilos
 # improvisados fuera de él» (`Roadmap-Producto.md`).
 #
-# Cuatro controles, y los cuatro son de pasa/falla:
+# Cinco controles, y los cinco son de pasa/falla:
 #
 #   C-1  Ningún literal de color en `app.css` fuera del bloque `:root`.
 #   C-2  Ningún atributo `style=` en línea en ningún `.razor`.
 #   C-3  Toda clase `gf-*` que un `.razor` usa está definida en `app.css`.
 #   C-4  Los tokens de `app.css` son EXACTAMENTE los de la maqueta aprobada,
 #        nombre por nombre y valor por valor.
+#   C-5  Toda clase que la versión angosta ENCIENDE la emite algún componente.
+#
+# POR QUÉ `C-5` EXISTE, Y POR QUÉ `C-3` NO LO CUBRÍA. `C-3` pregunta si toda clase
+# USADA está DEFINIDA. Es la dirección correcta para atrapar una clase inventada, y
+# **por construcción no puede ver la falla inversa**: una clase definida, encendida
+# por una regla, y que ningún componente emite. Eso fue `MI-02` —un `P0` votado 5-0
+# el 2026-08-31—: `@media (max-width: 768px)` ocultaba la tabla y encendía
+# `.gf-stacked-cards`, que **cero componentes emitían**, y por debajo de 768 px las
+# TRES superficies de lista del producto no dibujaban ninguna fila. Los cuatro
+# controles pasaban, y las 504 pruebas también.
+#
+# Es el diagnóstico de esa mesa en un caso concreto: **este producto verifica sus
+# condiciones y no verifica sus efectos.** `C-5` mira en la dirección que faltaba.
 #
 # Se corre desde la raíz del repositorio y no necesita .NET.
 # ============================================================================
@@ -67,6 +80,23 @@ else
   echo "NO CONFORME:"; cat /tmp/tok.diff; fails=$((fails + 1))
 fi
 
+banner "C-5 · clases que la versión angosta enciende, contra las que algún componente emite"
+# Se recorta el bloque `@media (max-width: 768px)` y se toman las clases a las que esa
+# sección les da un `display` distinto de `none` —o sea, las que ENCIENDE—. Una regla que
+# apaga algo no necesita emisor; una que lo enciende, sí.
+sed -n '/@media (max-width: 768px)/,/^}/p' "$CSS" \
+  | grep -oE '^\s+\.gf-[a-zA-Z0-9_-]+\s*\{[^}]*display:\s*[^n][^;]*;' \
+  | grep -oE '\.gf-[a-zA-Z0-9_-]+' | sed 's/^\.//' | sort -u > /tmp/gf-encendidas.txt
+sin_emisor=$(comm -23 /tmp/gf-encendidas.txt /tmp/gf-usadas.txt)
+if [ -z "$sin_emisor" ]; then
+  echo "CONFORME · $(wc -l < /tmp/gf-encendidas.txt) clase(s) encendida(s) por la versión angosta, todas con emisor"
+else
+  echo "NO CONFORME · la versión angosta enciende clases que NINGÚN componente emite:"
+  echo "$sin_emisor"
+  echo "  Por debajo de 768 px eso deja la superficie SIN el contenido que la regla iba a mostrar."
+  fails=$((fails + 1))
+fi
+
 printf '\n== RESULTADO ==\n'
-if [ "$fails" -eq 0 ]; then echo "CONFORME · los cuatro controles pasan"; exit 0; fi
+if [ "$fails" -eq 0 ]; then echo "CONFORME · los cinco controles pasan"; exit 0; fi
 echo "NO CONFORME · $fails control(es) fallan"; exit 1
