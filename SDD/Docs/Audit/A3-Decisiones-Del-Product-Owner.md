@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.6
+**Versión:** 1.7
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -93,10 +93,20 @@ omisión del código.
 
 Cuántos alumnos. Es un dato tuyo, y alimenta las asunciones de caudal de `D1`.
 
-### D6 · La versión de plataforma que soporta el hosting · **3 filas** · `[A VERIFICAR]`
+### D6 · La versión de plataforma que soporta el hosting · **3 filas** · `[A VERIFICAR]` · **RETIRADA el 2026-08-31: ya estaba contestada cuando se presentó**
 
-**No es una decisión: es una medición**, y **la fase `i` la hace sola**. Publicar el front contra el
-hosting real la contesta.
+~~**No es una decisión: es una medición**, y **la fase `i` la hace sola**. Publicar el front contra el
+hosting real la contesta.~~
+
+**El diagnóstico era correcto y el pronóstico llegó tarde.** Es una medición, sí — y **ya se había
+hecho**: el **2026-08-13**, publicando el front contra el hosting real, exactamente como esta entrada
+anticipaba. `PT-01.a` **pasa** con **200** en la ruta pública, el hosting soporta **`net10.0`** y está
+confirmado desde el panel de la cuenta. Este documento se emitió el **2026-08-20**, siete días después,
+y presentó al Product Owner como pendiente una pregunta que el producto ya había respondido.
+
+**No es un descuido de redacción: es el mismo hueco que este documento arrastra en otras tres entradas.**
+`D6` no se contrastó contra lo que el producto hizo, sino contra lo que faltaba por hacer. Ver
+[`Inventario-Marcas-A-Verificar-2026-08-31.md`](Inventario-Marcas-A-Verificar-2026-08-31.md) §2.1.
 
 ### D7 · La herramienta que calcula la versión — `PA-06` · **5 filas**
 
@@ -160,6 +170,7 @@ continuación para que no haya dos series.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.7 | 2026-08-31 | **Cierre de las dos incógnitas `[A VERIFICAR]` que ya no tenían pregunta**, sobre el inventario [`Inventario-Marcas-A-Verificar-2026-08-31.md`](Inventario-Marcas-A-Verificar-2026-08-31.md), que clasificó las **71** apariciones vivas del corpus en **cinco** incógnitas. **(a) La versión de plataforma del hosting quedó RESUELTA el 2026-08-13, midiendo**: `PT-01.a` pasa con **200** y el hosting soporta `net10.0`, confirmado desde el panel; no hizo falta bajar la versión objetivo del front. **(b) La versión de la biblioteca de componentes queda SIN OBJETO**: la biblioteca nunca se introdujo y su ausencia es una decisión declarada en el `.csproj` — `PA-01` de `Web/05` §11 **ya lo había cerrado por lectura el 2026-08-20** y el desenlace no bajó. **Ninguna de las dos se decide acá: las dos se leen.** **`D6` queda RETIRADA: ya estaba contestada cuando este documento la presentó.** Se emitió el 2026-08-20 diciendo que «la fase `i` la hace sola», y la fase `a` la había hecho el **2026-08-13**, publicando el front contra el hosting real — exactamente el acto que la entrada anticipaba. **El diagnóstico era correcto y el pronóstico llegó tarde**, porque la entrada se contrastó contra lo que faltaba por hacer y no contra lo que el producto ya había hecho. **Ningún umbral, ningún contrato y ninguna decisión cambian.** | Orquestador SDD |
 | 1.6 | 2026-08-26 | **`D1` confirmada.** El Product Owner confirmó los valores `[ASUNCIÓN]` el 2026-08-26, **con el caudal excluido** —su fundamento se cayó con `D5` y su valor sale de `PT-05`—. **12 filas vencidas cerradas** y los gates condicionados pasaron a **bloqueantes**. **Quedan abiertas `D6` y `D7`** —dos de las ocho—, y `D6` la contesta midiendo la fase `i`. | Orquestador SDD |
 | 1.5 | 2026-08-26 | **`D1` se presenta en detalle** en [`D1-Confirmacion-De-Asunciones.md`](D1-Confirmacion-De-Asunciones.md) 1.0: las **doce filas vencidas** repartidas en cinco documentos quedan en una sola tabla, agrupadas por lo que cada valor gobierna, con lo que se destraba al confirmarlas —**cuatro `QG` pasan a bloqueantes**— y con **el caudal separado del resto**, porque su fundamento se cayó al cerrarse `D5` y su valor sale de `PT-05`. El recuento de la cabecera pasa de «~14 filas» a **12**, contadas sobre el árbol. | Orquestador SDD |
 | 1.4 | 2026-08-26 | **`D3` se reformula por lectura, y §4 §5 lo había autorizado.** «Si aparece, pasa a la lista de §1 y deja de ser tuya» — **apareció**: la vigencia está fijada en **480 minutos** por omisión de `SigningOptions.cs:25`, sin nada que la sobreescriba. Las tres filas del árbol dejaron de afirmar que no hay número y **dejaron de estar vencidas**. **Lo que queda es una pregunta más chica**: si ocho horas cumplen el criterio de `ADR-00003` §5, que **no se puede contestar leyendo** porque ninguna fuente declara cuánto dura una clase. Más la obligación derivada de declarar el valor explícitamente, por el criterio de `D4`. **Siguen abiertas `D1`, `D6` y `D7`** — tres, no cuatro. | Orquestador SDD |
