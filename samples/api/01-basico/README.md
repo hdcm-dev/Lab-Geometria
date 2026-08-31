@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Nivel:** Básico
-**Estado de esta carpeta:** **Implementado.** Corre en 0; **11 de 13 líneas coinciden con §6** y las otras 2 son divergencias declaradas (abajo).
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 13 líneas coinciden con §6**, desde que el 2026-08-30 se corrigió §6 contra el contrato de la unidad (abajo).
 **Documento que la gobierna:** [`ejemplo-01-basico.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-01-basico-api.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-01`, declarado en la §9 de ese documento
 **Sonda de sensado:** [`SD-01`](../../../SDD/Docs/Proyectos/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
@@ -45,18 +45,22 @@ Un punto de entrada único —`run.sh`—, los seis archivos de petición de §5
 
 **El almacén es propio del sample y el servicio se levanta aparte.** El recorrido da de baja y resetea cuentas; correrlo contra el almacén de trabajo se llevaría puesto lo que haya. `ConnectionStrings__Store` apunta a un archivo del sample.
 
-## 5. Las dos divergencias contra §6
+## 5. Lo que este sample encontró: el ejemplo contradecía al contrato de su unidad
 
-| # | §6 espera | El árbol |
+Durante un tiempo este sample cerró en **11 de 13**, con dos divergencias declaradas contra el producto. **Las dos eran del documento y no del servicio**, y se corrigieron el 2026-08-30.
+
+| §6 decía | El árbol | Quién tenía razón |
 | --- | --- | --- |
-| `D-1` | `codigo del contrato reconocido: 6 de 6` | **4 de 4** |
-| `D-2` | `Peticiones ejecutadas: 14 \| Respuestas comparadas: 14` | **17 y 13** |
+| `codigo del contrato reconocido: 6 de 6` | **4 de 4** | el servicio |
+| `Peticiones ejecutadas: 14 \| Respuestas comparadas: 14` | **17 y 13** | el servicio |
 
-**`D-1` es el hallazgo, y no es un problema de conteo.** De las cuatro respuestas de error con cuerpo, **las cuatro** traen un código del contrato reconocido: en eso §6 acierta del todo. Lo que falta son las otras dos, y faltan porque **los tres `401` de autenticación vuelven con `Content-Length: 0` y ningún código**. Los emite la tubería de autenticación de ASP.NET, antes de que corra una línea de código del producto, así que la traducción de errores nunca los ve.
+**La primera es la que importa.** [`Contratos-REST.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Contratos-REST.md) **§5.1** declara **dos respuestas sin código del contrato** —el `401` de la guardia y el `400` de petición ilegible— y las declara *«para que su ausencia de código no se lea como un olvido»*. Los tres `401` de este recorrido son de la guardia.
 
-No es una fuga —no hay nada adentro que pueda filtrarse, y por eso la línea siguiente da cero igual— pero sí rompe la uniformidad que §6 daba por sentada: un cliente que espere un código en toda respuesta de error se encuentra con tres que no lo traen. **Y son justamente las tres que un cliente ve más seguido**, porque son las de la sesión vencida.
+**Exigirles código era pedirle al servicio que contradijera al contrato de su propia unidad.** De las cuatro respuestas de error con cuerpo, las cuatro traen código reconocido: eso es lo que hay que medir, y da `4 de 4`.
 
-**`D-2` es aritmética del recorrido.** Con las tres sondas del guardia, el reseteo y la cuenta pendiente, hacen falta diecisiete peticiones. Bajarlo a catorce exigiría no medir algo que §6 pide en otra línea.
+**La segunda es aritmética del recorrido**: con las tres sondas de la guardia, el reseteo y la cuenta pendiente, hacen falta diecisiete peticiones.
+
+**El sample no se acomodó al documento: el documento se corrigió contra el contrato**, pasó a 1.1 con su fila de control de cambios, y recién después se actualizó esta transcripción. El orden importa — al revés, el sample habría dejado de transcribir §6 y habría empezado a inventarlo.
 
 ## 6. Dos cosas que el sample resolvió corriéndolo
 

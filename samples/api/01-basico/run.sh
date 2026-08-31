@@ -240,10 +240,16 @@ printf '%s\n' "${lineas[@]}"
 # de §6 y el motivo. El snapshot esperado se transcribió sin tocar una coma:
 # reescribirlo para que la corrida diera CONFORME convertiría al sample en una
 # copia de sí mismo.
-declare -A divergencias=(
-  [11]="D-1 · el sample produce CUATRO respuestas con codigo del contrato y no seis. Los tres 401 de autenticacion vuelven con Content-Length: 0 y ningun codigo: los emite la tuberia de autenticacion, antes de que corra codigo del producto, asi que la traduccion de errores nunca los ve"
-  [13]="D-2 · consecuencia de la forma real del recorrido: hacen falta 17 peticiones y no 14, y los renglones de salida son 13"
-)
+# SIN DIVERGENCIAS DECLARADAS, y las dos que había se cerraron el 2026-08-30 corrigiendo el
+# DOCUMENTO y no el producto.
+#
+# La `D-1` acusaba al servicio de no poner código en tres respuestas; `Contratos-REST.md` §5.1
+# declara esas dos respuestas sin código, deliberadamente y por escrito. El ejemplo contradecía
+# al contrato de su propia unidad, y lo que el sample encontró fue eso.
+#
+# La `D-2` era aritmética del recorrido, y también era del documento: hacen falta diecisiete
+# peticiones y salen trece renglones.
+declare -A divergencias=()
 
 mapfile -t esperadas < "$aqui/esperado/salida.txt"
 declaradas=0; no_declaradas=0
@@ -275,7 +281,11 @@ printf '%s' "$salida_verificacion"
 echo
 coinciden=$((${#esperadas[@]} - declaradas - no_declaradas))
 if [ "$no_declaradas" -eq 0 ]; then
-  echo "  CONFORME CON DIVERGENCIAS DECLARADAS · $coinciden/${#esperadas[@]} líneas coinciden, $declaradas difieren por motivo escrito"
+  if [ "$declaradas" -eq 0 ]; then
+    echo "  CONFORME · las ${#esperadas[@]} líneas coinciden con el snapshot de §6"
+  else
+    echo "  CONFORME CON DIVERGENCIAS DECLARADAS · $coinciden/${#esperadas[@]} líneas coinciden, $declaradas por motivo escrito"
+  fi
   exit 0
 fi
 echo "  NO CONFORME · $no_declaradas línea(s) difieren sin motivo declarado"

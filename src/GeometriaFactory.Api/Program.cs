@@ -12,6 +12,10 @@ builder.Services.AddCompositionRoot(builder.Configuration);
 // La descripción navegable de la superficie. Qué se publica y dónde lo decide `ApiDocumentation`.
 builder.Services.AddApiDocumentation();
 
+// EL BORDE DE ERRORES SE REGISTRA ANTES DE CONSTRUIR, y se conecta abajo con `UseExceptionHandler`.
+// Qué cubre y qué deja deliberadamente sin cubrir está en `ContractErrorHandler`.
+builder.Services.AddExceptionHandler<ContractErrorHandler>();
+
 var app = builder.Build();
 
 // Fase 1 — preparar el almacén. Nada atiende hasta que esto termina (`QG-11`, `US-27`, `US-28`).
@@ -59,6 +63,10 @@ if (!EF.IsDesignTime)
 // Fase 2 — recién ahora se abre la superficie HTTP.
 // La guardia de `Api CU-02` va ANTES que cualquier punto: verificar el acceso y su expiración
 // ocurre antes de que el punto haga nada, y un rechazo no lee ni escribe nada del almacén.
+// PRIMERO DE LA TUBERÍA: lo que atrapa tiene que incluir lo que fallan las capas de abajo, y el
+// enlace de la petición al tipo del contrato falla más abajo que el enrutamiento.
+app.UseExceptionHandler(_ => { });
+
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

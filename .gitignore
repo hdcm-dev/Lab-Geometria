@@ -453,3 +453,7 @@ geometriafactory*.db
 # Salida de `dotnet publish` para el despliegue manual del front. Es artefacto, no fuente:
 # se regenera con `dotnet publish` y nunca se versiona.
 .publish-web/
+
+# Volcados de proceso. Los deja un recolector que muere —ver EVE-00008— y caen al lado
+# de archivos versionados, donde un `git add -A` los barreria: 124 MB en la primera vez.
+core.*
