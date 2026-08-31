@@ -35,6 +35,45 @@ public sealed class StorePreparation
         try
         {
             await _dbContext.Database.MigrateAsync(cancellationToken).ConfigureAwait(false);
+
+            // EL MODO DE DIARIO SE FIJA ACÁ, Y SE LEE LO QUE EL MOTOR CONTESTA.
+            //
+            // `PRODUCT-INTAKE` §17.1.P.4 declara diario **WAL** y `Entornos-Deploy.md` §11.1 lo
+            // transcribe como condición obligatoria del respaldo. Hasta el 2026-08-31 nadie lo
+            // fijaba: `CompositionRoot` llama a `UseSqlite(cadena)` a secas y SQLite se queda en
+            // `delete`, de modo que la condición estaba escrita y el motor hacía otra cosa.
+            //
+            // VA UNA VEZ EN LA PREPARACIÓN Y NO POR CONEXIÓN, porque el PRAGMA es **persistente**:
+            // queda grabado en el archivo y sobrevive al reinicio. Ponerlo por conexión sería
+            // repetir en cada petición algo que el almacén ya recuerda.
+            //
+            // SE LEE EL RESULTADO Y NO SE ASUME, que es la mitad que importa. Sobre un almacén en
+            // memoria, o sobre un sistema de archivos sin mapeo compartido, SQLite **se queda en
+            // `delete` y no falla**: devuelve el modo que pudo aplicar y sigue. Un `ExecuteSql` a
+            // ciegas dejaría exactamente el defecto que este bloque viene a reparar —una condición
+            // declarada que nadie contrasta—, y el respaldo tomaría copias inconsistentes sin
+            // avisar.
+            //
+            // EL `catch` DE ABAJO LO ENVUELVE A PROPÓSITO: su criterio —nombrar la causa y no el
+            // síntoma— vale igual para esto que para el linaje.
+            var conexion = _dbContext.Database.GetDbConnection();
+            await _dbContext.Database.OpenConnectionAsync(cancellationToken).ConfigureAwait(false);
+            await using (var orden = conexion.CreateCommand())
+            {
+                orden.CommandText = "PRAGMA journal_mode=WAL;";
+                var modo = (await orden.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false))
+                    ?.ToString();
+
+                if (!string.Equals(modo, "wal", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new InvalidOperationException(
+                        $"El almacén no quedó en modo de diario WAL: el motor informó '{modo ?? "nada"}'. " +
+                        "La fuente lo declara WAL y el procedimiento de respaldo depende de él: sin " +
+                        "WAL, una copia tomada con el servicio escribiendo puede quedar inconsistente. " +
+                        "Suele deberse a un almacén en memoria o a un sistema de archivos que no " +
+                        "admite el mapeo compartido que WAL necesita.");
+                }
+            }
         }
         catch (Exception falla) when (falla is not OperationCanceledException)
         {

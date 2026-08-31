@@ -47,10 +47,23 @@ WORKDIR /app
 ENV ASPNETCORE_URLS=http://+:8080 \
     ConnectionStrings__Store="Data Source=/datos/geometriafactory.db"
 
-# `curl` entra sólo porque el `healthcheck` de `compose.yaml` lo necesita: la imagen de
-# ejecución no lo trae. Es la única cosa que se agrega sobre el entorno de ejecución.
+# DOS HERRAMIENTAS, Y CADA UNA CON SU MOTIVO. Son las únicas que se agregan sobre el
+# entorno de ejecución, y la lista no crece sin que alguien escriba acá por qué.
+#
+#   `curl`    — el `healthcheck` de `compose.yaml` lo necesita y la imagen no lo trae.
+#   `sqlite3` — para que la copia consistente del almacén se pueda tomar DESDE ADENTRO
+#               del contenedor. Sin esto, `respaldo-almacen.sh --desde-contenedor`
+#               dependería de lo que el host del destino tenga instalado, que es
+#               justamente lo que no se puede saber de antemano: el destino es la
+#               máquina del docente. `Entornos-Deploy.md` §11.1 declara el respaldo como
+#               el único mecanismo de vuelta atrás del producto, y un mecanismo que
+#               depende de una herramienta que puede no estar no es un mecanismo.
+#
+# NINGUNA DE LAS DOS LLEVA VERSIÓN ANCLADA, y es el precedente que `curl` ya sentó: son
+# herramientas del sistema operativo base y no dependencias del producto. Si algún día se
+# anclan, SE ANCLAN LAS DOS JUNTAS, y eso es otra decisión.
 RUN apt-get update \
-    && apt-get install --yes --no-install-recommends curl \
+    && apt-get install --yes --no-install-recommends curl sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /datos
