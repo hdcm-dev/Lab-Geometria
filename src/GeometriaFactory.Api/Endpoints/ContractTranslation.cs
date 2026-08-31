@@ -166,6 +166,35 @@ public static class ContractTranslation
             new Translation(ErrorCode.UnclassifiedError, StatusCodes.Status500InternalServerError,
                 "No pudimos completar la operación. Probá de nuevo en un rato."),
 
+        // ---- LAS TRES QUE EL BARRIDO DEL 2026-08-31 SACÓ DEL GENÉRICO ----------------------
+        //
+        // POR QUÉ ÉSTAS TRES Y NO LAS QUINCE QUE EL BARRIDO ENCONTRÓ. La capa de dominio emite
+        // quince condiciones que **ningún lugar de la capa API nombraba**, de modo que las quince
+        // caían acá abajo y respondían `500`. El criterio con el que se separaron **no es si son
+        // alcanzables** —esa pregunta se contesta hoy y deja de valer mañana— sino **de quién
+        // sería el defecto si se alcanzaran**:
+        //
+        //   · Doce hablan de **lo que el llamador pasó**: una unicidad que no verificó, un estado
+        //     inicial que no corresponde, una operación fuera del conjunto cerrado. Si alguna se
+        //     alcanza, **el defecto es del producto** y `500` es la respuesta correcta. No se
+        //     tocan, y quedan inventariadas en `Audit/Mesa-2026-08-31.md`.
+        //
+        //   · Estas **tres** hablan de **quién pide** o de **el estado del agregado**. Si alguna
+        //     se alcanza, la persona pidió algo que su papel o el estado del trabajo no admite, y
+        //     `500` le diría que el producto falló cuando lo que pasa es que su pedido no procede.
+        //
+        // NO SE COMPRUEBA SI SON ALCANZABLES, Y ES DELIBERADO: hoy sus invocadores comprueban antes
+        // y ninguna llega, pero eso **no lo garantiza el compilador**. Tres filas cuestan menos que
+        // volver a razonar la alcanzabilidad cada vez que alguien agregue un invocador.
+
+        ConditionCode.ScopeRequiresAdministratorRole =>
+            new Translation(ErrorCode.OperationAdminOnly, StatusCodes.Status403Forbidden,
+                "Esta operación es del docente a cargo del laboratorio."),
+
+        ConditionCode.EditOutsideDraft or ConditionCode.SubmissionOutsideDraft =>
+            new Translation(ErrorCode.StateForbidsUpdate, StatusCodes.Status409Conflict,
+                "Este trabajo ya no está en «Borrador» y no se puede modificar."),
+
         // Los defectos que el conjunto cerrado no describe y que ninguna petición bien formada
         // alcanza. No se inventa un código para ellos: el genérico existe exactamente para que
         // ningún fallo llegue sin representación.
