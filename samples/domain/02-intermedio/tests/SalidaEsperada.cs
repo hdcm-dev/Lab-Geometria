@@ -16,7 +16,7 @@ internal static class SalidaEsperada
         "[E-3] Observacion adoptada: especie=Advertencia campo=Area declarado=36.00 derivado=54.00",
         "[E-4] Observaciones adoptadas: 0 (mismo cubo de lado 3, area declarada coincidente)",
         "[E-6] Piezas adoptadas: 1 | Envio: estado=Pendiente (el cero es un valor, no una ausencia)",
-        "[E-5] Pieza del indice 0 adoptada | Pieza del indice 1 rechazada: TIPO_DE_PIEZA_DESCONOCIDO",
+        "[E-5] Pieza del indice 0 adoptada | Pieza del indice 1 rechazada: UNKNOWN_PIECE_TYPE",
         "[E-5] Posicion 1 reservada: observacion de error aceptada sobre esa posicion",
         "[E-5] Observacion de error: indice-figura=1 campo=Tipo",
         "[E-5] Envio: estado=Borrador (RN-02005: un error de validacion retiene el trabajo)",
