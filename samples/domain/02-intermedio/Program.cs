@@ -56,7 +56,15 @@ var e5 = ActoConstituirTrabajo.Ejecutar(bitacora, alumna, "E-5", Texto("E5"), mo
 ActoAdoptarPiezas.Ejecutar(bitacora, e5, Interpretacion.E5(), momento);
 bitacora.Escribir(
     $"[E-5] Pieza del indice {e5.Pieces[0].Position} adoptada "
-    + "| Pieza del indice 1 rechazada: TIPO_DE_PIEZA_DESCONOCIDO");
+    // EL CODIGO VA EN INGLES AUNQUE LA CONSTANTE NO EXISTA TODAVIA, y es lo que `F-03` decidió:
+    // el glosario fija el nombre de los 101 códigos, y `UNKNOWN_PIECE_TYPE` es uno de los ocho de
+    // la etapa `f` que el dominio deliberadamente no escribió —«escribir los nueve restantes sería
+    // declarar condiciones que ninguna operación de estas etapas puede producir»—.
+    //
+    // ESTA LINEA ERA EL ULTIMO RESIDUO DEL RENOMBRE `F-03` en el corpus vivo, y se encontró
+    // clasificando sus 723 ocurrencias candidatas: 580 son registro histórico, 138 son el glosario
+    // hablando de sí mismo, y ésta era la única de uso propio.
+    + "| Pieza del indice 1 rechazada: UNKNOWN_PIECE_TYPE");
 var reservada = e5.Observations.Any(o => o.Kind == ObservationKind.ValidationError && o.PiecePosition == 1);
 bitacora.Escribir(
     $"[E-5] Posicion 1 reservada: observacion de error {(reservada ? "aceptada" : "rechazada")} sobre esa posicion");
