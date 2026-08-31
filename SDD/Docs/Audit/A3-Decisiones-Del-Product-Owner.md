@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.8
+**Versión:** 1.9
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -46,27 +46,34 @@ destapó.
 
 ## 2. Las ocho decisiones que sí son tuyas
 
-> **Índice de estado — el único lugar donde se lee cuántas quedan.** Al **2026-08-31**: **cuatro
-> abiertas, tres cerradas, una retirada.**
+> **Índice de estado — el único lugar donde se lee cuántas quedan.** Al **2026-08-31**: **UNA abierta,
+> cinco cerradas, dos retiradas.**
 >
 > | | Decisión | Estado |
 > |---|---|---|
 > | `D1` | Confirmar los valores `[ASUNCIÓN]` | **CONFIRMADA** el 2026-08-26, con el caudal excluido |
 > | `D2` | La unidad de estimación | **RETIRADA** el 2026-08-25 (ver `D11`) |
 > | `D3` | La vigencia del acceso firmado | **REFORMULADA por lectura** el 2026-08-26 |
-> | `D4` | El límite de tamaño del cuerpo | **ABIERTA** |
-> | `D5` | El volumen de la comisión | **ABIERTA**, y es la más consecuente de las cuatro |
+> | `D4` | El límite de tamaño del cuerpo | **DECIDIDA** el 2026-08-20: se adopta el valor por omisión del servidor |
+> | `D5` | El volumen de la comisión | **CERRADA POR INCOGNOSCIBLE** el 2026-08-20. No se fija número |
 > | `D6` | La versión de plataforma del hosting | **RETIRADA** el 2026-08-31: ya estaba contestada |
-> | `D7` | La herramienta que calcula la versión | **ABIERTA** |
-> | `D8` | Si el *mutation score* entra al flujo | **ABIERTA** |
+> | `D7` | La herramienta que calcula la versión | **ABIERTA — la única** |
+> | `D8` | Si el *mutation score* entra al flujo | **DECIDIDA con un NO** el 2026-08-20. No entra |
 >
-> **Este índice existe porque el documento se equivocó contando.** Hasta la emisión 1.7, §4 cerraba
-> afirmando que «`D6` y `D7` continúan abiertas — **dos**», y sólo daba cuenta de `D1`, `D2` y `D3`:
-> **`D4`, `D5` y `D8` no tenían desenlace en §2 ni entraban en el recuento**. Eran **cinco**, no dos. Un
-> documento que existe para que no se te pierda una decisión **te estaba perdiendo tres**, y ninguna de
-> las tres se pierde por estar mal argumentada: se pierden **por no estar contadas**. Es la misma
-> medicina que `M-03` de la mesa del 2026-08-31 le recetó al reporte de hallazgos — un índice que se arma
-> **contando** encuentra lo que uno armado **recordando** no.
+> **Este índice existe porque el documento no registraba desenlaces, y en la emisión 1.8 eso me hizo
+> concluir exactamente al revés.** Hasta la 1.7, §4 cerraba afirmando que «`D6` y `D7` continúan abiertas
+> — **dos**» mientras `D4`, `D5` y `D8` **no tenían desenlace escrito en §2**. La 1.8 leyó esa ausencia
+> como que estaban **abiertas** y declaró «eran cinco, no dos». **Es falso, y al revés:** las tres
+> estaban **decididas desde el 2026-08-20** —commit `b4a4804`, que las cerró en **cinco documentos** y
+> **no tocó éste**—. **El recuento de §4 era correcto y lo que faltaba eran las entradas.**
+>
+> **Y el error no fue no mirar el árbol: fue mirar el árbol equivocado.** Antes de escribir la 1.8
+> verifiqué contra el código —no hay `MaxRequestBodySize`, no hay herramienta de cálculo de versión, no
+> hay herramienta de mutación— y tomé esas ausencias por «sin decidir». Pero **`D4` se decidió adoptando
+> el valor por omisión y `D8` se decidió con un NO**: son decisiones **cuyo cumplimiento consiste en que
+> no haya nada**. En el árbol, *decidido que no* y *sin decidir* **se ven idénticos**. Para esa clase de
+> decisión el árbol no puede ser la fuente: sólo el registro puede, y el registro era justamente lo que
+> no se había actualizado.
 
 ### D1 · Confirmar los valores `[ASUNCIÓN]` · **CONFIRMADA el 2026-08-26**
 
@@ -107,37 +114,37 @@ clase**.
 `D4` el 2026-08-20: **el valor se declara explícitamente** en la configuración, en lugar de quedar como
 omisión del código.
 
-### D4 · El límite de tamaño del cuerpo de una petición · **2 filas** · **ABIERTA al 2026-08-31**
+### D4 · El límite de tamaño del cuerpo de una petición · **2 filas** · **DECIDIDA el 2026-08-20**
 
 **Verificado: no está fijado en el código.** No hay `MaxRequestBodySize` ni equivalente.
 
-**Desenlace:** ninguno. **No bloquea nada hoy** —el producto acepta el cuerpo que llegue— y por eso `§3`
-la agrupa con `D3` entre las que «alcanzan al despliegue de `i`». **Retirarla también cierra**, si el
-Product Owner considera que un laboratorio con una comisión no necesita el límite.
+**Y eso no significa que estuviera sin decidir: significa que la decisión FUE ÉSA.** El Product Owner
+resolvió el **2026-08-20** —commit `b4a4804`— **adoptar el valor por omisión del servidor HTTP y no fijar
+uno propio**. Queda una **obligación derivada**, declarada en las filas de destino: por la regla que
+`scripts/verify-explicit-configuration.sh` hace cumplir —*una configuración que se sobreentiende acierta
+hasta el día en que alguien cambia el otro lado*—, **el valor por omisión se declara explícitamente
+cuando se toque la composición**. No hay trabajo de código pendiente hoy.
 
-### D5 · El volumen de la comisión · **2 filas** · `[A VERIFICAR]` · **ABIERTA al 2026-08-31, y es la más consecuente de las cuatro**
+### D5 · El volumen de la comisión · **2 filas** · **CERRADA POR INCOGNOSCIBLE el 2026-08-20**
 
-Cuántos alumnos. Es un dato tuyo, y alimenta las asunciones de caudal de `D1`.
+Cuántos alumnos. **El Product Owner declaró que el dato no se sabe ni se puede saber de antemano, y por
+lo tanto NO SE FIJA NÚMERO** —commit `b4a4804`—. **Es mejor desenlace que inventar uno**, y es un cierre
+legítimo: la pregunta no queda pendiente, queda contestada con «no es cognoscible».
 
-**Lo que se sabe hoy y no se sabía al emitir este documento**, y que sube su prioridad en lugar de
-bajarla:
+**Y tiene una consecuencia que está escrita y no hay que perder de vista**, porque es lo único que
+sobrevive de esta decisión: el **caudal de 20 peticiones por minuto** de `Web/05` §8 **se derivaba de
+«una comisión operando durante una clase»**. Sin tamaño conocido, **ese fundamento se cae**. El número
+queda marcado **provisorio** en la propia fila de la tabla de NFR, se conserva como referencia, y **su
+valor definitivo sale de lo que `PT-05` mida sobre el uso real**, en la fase `i`.
 
-1. **`D1` se tomó sin ella.** El 2026-08-26 se confirmaron `A-2`, `A-3`, `A-4` y los umbrales de `A-5`
-   **con el caudal excluido**, precisamente porque `§3` de este documento declara que **sin saber
-   cuántos alumnos, confirmar el caudal es adivinar**. `D5` era la **primera** en el orden recomendado y
-   se tomó la segunda. **El caudal de 20 peticiones por minuto es hoy el único valor abierto de todo el
-   §22 del intake**, y `QG-14` de `-Api` sigue condicionado en él.
-2. **Condiciona una decisión de diseño ya tomada.** Los dos listados **no incorporan paginación**, y el
-   fundamento escrito es que suponen decenas y no cientos. Si el número es otro, hay rediseño de
-   superficie, no ajuste de umbral.
-3. **Es la única marca `[A VERIFICAR]` del producto que se DECIDE y no se mide**, y por eso faltaba en
-   `PRODUCT-INTAKE` §22 hasta el 2026-08-31: la sección enumeraba por *cómo se cierra* el ítem y ésta no
-   entraba en la frase. Ver
-   [`Inventario-Marcas-A-Verificar-2026-08-31.md`](Inventario-Marcas-A-Verificar-2026-08-31.md) §3.1.
+**Por eso el caudal quedó fuera de la confirmación `D1` del 2026-08-26**, y no por falta de decisión:
+`D5` estaba decidida seis días antes, y lo que `D1` no podía hacer era confirmar un número **cuyo
+fundamento esta decisión había retirado**.
 
-**Y no se puede cerrar por lectura ni por medición.** Las otras cuatro incógnitas del inventario se
-resuelven solas al desplegar; ésta no: **no hay dónde ir a mirarla.** Es un número que existe fuera del
-árbol.
+**Lo que el diseño de los dos listados sigue suponiendo —decenas y no cientos— no queda validado por
+esto**, y tampoco refutado: queda **sin dato**, que es exactamente lo que el Product Owner declaró. Ver
+[`Medicion-Volumen-De-Comision-2026-08-31.md`](Medicion-Volumen-De-Comision-2026-08-31.md), que mide qué
+volumen sostiene el servicio de datos ya que el número de la comisión no se puede saber.
 
 ### D6 · La versión de plataforma que soporta el hosting · **3 filas** · `[A VERIFICAR]` · **RETIRADA el 2026-08-31: ya estaba contestada cuando se presentó**
 
@@ -159,18 +166,20 @@ del calendario. Ver [`Inventario-Marcas-A-Verificar-2026-08-31.md`](Inventario-M
 *[CORREGIDO en la emisión 1.8: la 1.7 decía «el mismo hueco que este documento arrastra en otras tres
 entradas» y **no las había contado**. Son dos, `D2` y `D6`.]*
 
-### D7 · La herramienta que calcula la versión — `PA-06` · **5 filas**
+### D7 · La herramienta que calcula la versión — `PA-06` · **5 filas** · **ABIERTA, y es la ÚNICA**
 
 **Verificado que sigue abierta**: no hay MinVer, GitVersion, Nerdbank ni semantic-release en el árbol.
 Es la única de la familia de anclajes que no se cerró sola, y es coherente con que el prefijo `v` se
 fijara sin elegirla.
 
-### D8 · Si el *mutation score* entra al pipeline · **1 fila** · **ABIERTA al 2026-08-31**
+### D8 · Si el *mutation score* entra al pipeline · **1 fila** · **DECIDIDA con un NO el 2026-08-20**
 
-**Verificado: no hay herramienta.** `CV-19` se reporta «sin medir» con su hueco declarado.
+**Verificado: no hay herramienta.** `CV-19` de `Api/08` §5.2 se reporta «sin medir» con su hueco
+declarado, contra el piso del **60 %** que `Rules-Calidad-Y-Pruebas.md` §2.2 fija para el tipo `library`.
 
-**Desenlace:** ninguno. **Es la más barata de las cuatro y la que menos cuesta retirar**: el hueco está
-declarado, nada depende de él, y el producto tiene sus dos puertas de cobertura bloqueantes desde `D1`.
+**Y otra vez, la ausencia de herramienta ES el cumplimiento de la decisión, no su falta.** El Product
+Owner cerró **con un NO** el **2026-08-20** —commit `b4a4804`—: **el *mutation score* no entra al
+pipeline**. `CV-19` queda declarado sin medir, con su motivo, y **deja de ser un pendiente**.
 
 ---
 
@@ -178,11 +187,11 @@ declarado, nada depende de él, y el producto tiene sus dos puertas de cobertura
 
 | Orden | Cuáles | Por qué |
 |---|---|---|
-| **1º** | **D5**, el volumen de la comisión | **Alimenta a `D1`**: sin saber cuántos alumnos, confirmar el caudal es adivinar. **Y el orden no se respetó**: `D1` se tomó el 2026-08-26 y `D5` sigue abierta, con lo cual el caudal quedó excluido de la confirmación y es hoy **el único valor abierto del §22**. Sigue siendo la primera |
+| ~~**1º**~~ | ~~**D5**, el volumen de la comisión~~ **TOMADA el 2026-08-20** | ~~**Alimenta a `D1`**: sin saber cuántos alumnos, confirmar el caudal es adivinar~~ **El orden SÍ se respetó**: `D5` se tomó el 2026-08-20 y `D1` el 2026-08-26, seis días después. Y se tomó del único modo posible —**incognoscible, sin número**—, que es la razón por la que `D1` **no podía** confirmar el caudal: no le faltaba la decisión, le faltaba el **fundamento**, que `D5` había retirado |
 | **2º** | **D1**, los `[ASUNCIÓN]` | Cierra **14 filas de un saque** y habilita cuatro `QG` |
-| **3º** | **D3** y **D4** | Son valores de configuración, y los dos alcanzan al despliegue de `i` |
+| ~~**3º**~~ | ~~**D3** y **D4**~~ **TOMADAS las dos** | ~~Son valores de configuración, y los dos alcanzan al despliegue de `i`~~ `D3` reformulada por lectura el 2026-08-26; `D4` decidida el 2026-08-20 adoptando el valor por omisión |
 | ~~**junto con `i`**~~ | ~~**D6**~~ | ~~La fase `i` la contesta midiendo~~ **Ya la contestó la fase `a`, el 2026-08-13. `D6` queda RETIRADA el 2026-08-31** |
-| **cuando quieras** | ~~**D2**~~, **D7**, **D8** | No bloquean nada. `D7` conviene antes de la primera etiqueta calculada. *(`D2` salió de esta fila: quedó **retirada** el 2026-08-25.)* |
+| **cuando quieras** | ~~**D2**~~, **D7**, ~~**D8**~~ | No bloquean nada. **`D7` es la única que queda de las ocho**, y conviene antes de la primera etiqueta calculada. *(`D2` quedó **retirada** el 2026-08-25; `D8` se decidió **con un NO** el 2026-08-20.)* |
 
 **Y una salida que vale para todas: retirar también cierra.** Ninguna de las 57 se evaluó por
 vigencia. Si `D2` ya no importa porque el backlog no se estima, **retirar el punto es tan válido como
@@ -208,17 +217,22 @@ siguiente**.
 **Lo que este registro no es.** No convierte a `D9` y `D10` en dos de las ocho: **las ocho siguen
 siendo las de §2**. ~~De ellas **`D6` y `D7` continúan abiertas** —dos: `D1` se **confirmó** el 2026-08-26 con el caudal excluido, `D2` quedó **retirada** el 2026-08-25 (ver `D11`) y `D3` se **reformuló por lectura** el 2026-08-26, con lo que queda de ella declarado en §2—.~~
 
-**CORREGIDO el 2026-08-31, y el error era de recuento, no de criterio.** Esa frase daba cuenta de
-**cinco** de las ocho —`D1` confirmada, `D2` retirada, `D3` reformulada, `D6` y `D7` abiertas— y
-**omitía a `D4`, `D5` y `D8`**, que no tenían desenlace en §2 y tampoco entraban en el total. **Las
-abiertas eran cinco, no dos.** Hoy, con `D6` retirada por estar ya contestada, **quedan cuatro: `D4`,
-`D5`, `D7` y `D8`**, y las cuatro figuran en el índice de estado de §2.
+**Esa frase era CORRECTA, y la emisión 1.8 la «corrigió» hacia el error.** Daba cuenta de cinco de las
+ocho y omitía a `D4`, `D5` y `D8`, que **no tenían desenlace escrito en §2**. La 1.8 leyó esa ausencia
+como que estaban abiertas y declaró «eran cinco, no dos». **Las tres estaban decididas desde el
+2026-08-20**, por el commit `b4a4804`, que las cerró en **cinco documentos de las dos unidades de
+entrega** y **no tocó éste**. El recuento estaba bien; **lo que faltaba eran las entradas**.
 
-**Por qué importa más de lo que parece.** Ninguna de las tres omitidas estaba mal argumentada: `D4`
-tenía su verificación contra el código, `D5` su fundamento y su lugar en el orden recomendado, `D8` su
-hueco declarado. **Se perdieron por no estar contadas** — y una de ellas, `D5`, es la que hoy sostiene
-abierto el último valor del §22 del intake y la ausencia de paginación en dos superficies. **El
-documento que existía para que no se te perdiera una decisión te estaba perdiendo tres.**
+**Restituido el 2026-08-31 en la emisión 1.9.** Hoy, con `D6` retirada, **queda UNA sola abierta: `D7`.**
+
+**Lo que este ida y vuelta deja, y es lo más caro del día.** El error de la 1.8 no fue dejar de mirar el
+árbol: **fue mirar el árbol y sacar la conclusión opuesta.** Se verificó que no hay `MaxRequestBodySize`,
+que no hay herramienta de cálculo de versión y que no hay herramienta de mutación, y se tomaron esas tres
+ausencias por «sin decidir». Pero **`D4` se decidió adoptando el valor por omisión y `D8` se decidió con
+un NO**: son decisiones **cuyo cumplimiento consiste, exactamente, en que no haya nada**. En el árbol,
+**«decidido que no» y «sin decidir» son indistinguibles**, y ninguna verificación sobre el código puede
+separarlos. Para esa clase de decisión **el registro es la única fuente** — y el registro era justamente
+lo que `b4a4804` no había actualizado.
 
 `D9` y `D10` entran
 por una vía distinta —un salto normativo que volvió obligatorio lo que antes no lo era— y se numeran a
@@ -238,6 +252,7 @@ continuación para que no haya dos series.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.9 | 2026-08-31 | **Revierte el error central de la emisión 1.8: `D4`, `D5` y `D8` NO estaban abiertas. Estaban decididas desde el 2026-08-20.** El commit `b4a4804` las cerró ese día sobre **cinco documentos de las dos unidades de entrega** y **no tocó éste**. `D4`: se adopta el **valor por omisión** del servidor HTTP, con la obligación derivada de declararlo explícitamente cuando se toque la composición. `D5`: **cerrada por INCOGNOSCIBLE** —el dato no se sabe ni se puede saber, y no se fija número—, con la consecuencia de que el **caudal** pierde su fundamento y queda provisorio hasta `PT-05`. `D8`: **cerrada con un NO**, el *mutation score* no entra al pipeline. **El recuento de §4 que la 1.8 declaró equivocado era el correcto**: las abiertas eran dos, `D6` y `D7`. Lo que faltaba no era el total sino **las entradas de §2**. Hoy, con `D6` retirada, **queda UNA: `D7`**. **Y lo que este ida y vuelta deja es la lección más cara del día, porque contradice la que veníamos sacando.** El error de la 1.8 no fue dejar de mirar el árbol: **fue mirarlo y concluir al revés.** Se verificó que no hay `MaxRequestBodySize`, ni herramienta de cálculo de versión, ni herramienta de mutación, y se tomaron esas ausencias por «sin decidir». Pero `D4` y `D8` son decisiones **cuyo cumplimiento consiste en que no haya nada**: en el árbol, **«decidido que no» y «sin decidir» son indistinguibles**, y ninguna verificación sobre el código puede separarlos. **Para esa clase de decisión el registro es la única fuente** — y el registro era exactamente lo que `b4a4804` no había actualizado. Se corrigen en consecuencia el índice de estado de §2, las tres entradas, el orden recomendado de §3 y el cierre de §4. | Orquestador SDD |
 | 1.8 | 2026-08-31 | **El recuento de decisiones abiertas estaba mal, y el documento que existe para que no se pierda una decisión perdía tres.** §4 cerraba afirmando que «`D6` y `D7` continúan abiertas — **dos**» y daba cuenta de cinco de las ocho: **`D4`, `D5` y `D8` no tenían desenlace en §2 ni entraban en el total**. **Eran cinco abiertas, no dos.** Entra un **índice de estado** al frente de §2 —la misma medicina que `M-03` de la mesa del 2026-08-31 le recetó al reporte de hallazgos: un índice que se arma **contando** encuentra lo que uno armado **recordando** no—, y `D4`, `D5` y `D8` reciben desenlace explícito. **Hoy quedan cuatro abiertas**: `D4`, `D5`, `D7` y `D8`. **`D5` se declara la más consecuente**, con tres razones medidas: `D1` se tomó sin ella y por eso el caudal quedó excluido y es **el único valor abierto del §22**; condiciona la ausencia de paginación en dos superficies; y **es la única marca `[A VERIFICAR]` del producto que se decide y no se mide**, motivo por el cual faltaba en el §22 hasta hoy. Se registra además que **el orden recomendado por §3 no se respetó**: `D5` era la primera y se tomó `D1`. **Ninguna de las tres omitidas estaba mal argumentada: se perdieron por no estar contadas.** Se corrige por último una afirmación de la emisión **1.7**, en `D6`: decía «el mismo hueco que este documento arrastra en **otras tres** entradas» **sin haberlas contado**; son **dos**, `D2` y `D6`. | Orquestador SDD |
 | 1.7 | 2026-08-31 | **Cierre de las dos incógnitas `[A VERIFICAR]` que ya no tenían pregunta**, sobre el inventario [`Inventario-Marcas-A-Verificar-2026-08-31.md`](Inventario-Marcas-A-Verificar-2026-08-31.md), que clasificó las **71** apariciones vivas del corpus en **cinco** incógnitas. **(a) La versión de plataforma del hosting quedó RESUELTA el 2026-08-13, midiendo**: `PT-01.a` pasa con **200** y el hosting soporta `net10.0`, confirmado desde el panel; no hizo falta bajar la versión objetivo del front. **(b) La versión de la biblioteca de componentes queda SIN OBJETO**: la biblioteca nunca se introdujo y su ausencia es una decisión declarada en el `.csproj` — `PA-01` de `Web/05` §11 **ya lo había cerrado por lectura el 2026-08-20** y el desenlace no bajó. **Ninguna de las dos se decide acá: las dos se leen.** **`D6` queda RETIRADA: ya estaba contestada cuando este documento la presentó.** Se emitió el 2026-08-20 diciendo que «la fase `i` la hace sola», y la fase `a` la había hecho el **2026-08-13**, publicando el front contra el hosting real — exactamente el acto que la entrada anticipaba. **El diagnóstico era correcto y el pronóstico llegó tarde**, porque la entrada se contrastó contra lo que faltaba por hacer y no contra lo que el producto ya había hecho. **Ningún umbral, ningún contrato y ninguna decisión cambian.** | Orquestador SDD |
 | 1.6 | 2026-08-26 | **`D1` confirmada.** El Product Owner confirmó los valores `[ASUNCIÓN]` el 2026-08-26, **con el caudal excluido** —su fundamento se cayó con `D5` y su valor sale de `PT-05`—. **12 filas vencidas cerradas** y los gates condicionados pasaron a **bloqueantes**. **Quedan abiertas `D6` y `D7`** —dos de las ocho—, y `D6` la contesta midiendo la fase `i`. | Orquestador SDD |
