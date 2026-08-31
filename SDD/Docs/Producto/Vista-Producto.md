@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Vista-Producto.md
-**Versión:** 1.8
+**Versión:** 1.9
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -62,7 +62,7 @@ La versión 1.0 se emitió cuando sólo la Fase C estaba cerrada. Hoy el bucle c
 | Magnitud | Cantidad | Dónde se cuenta |
 | --- | --- | --- |
 | Proyectos de código | 7 | `PRODUCT-MANIFEST` §2 |
-| Aristas de compilación | 7 u 8 según qué sección del manifiesto se lea | §3.1 de este documento |
+| Aristas de compilación | **8**, de dos clases: **7** referencias de proyecto y **1** activo de construcción (`Visor → Web`) | §3.1 de este documento, **cerrada el 2026-08-31** contra los seis `.csproj` |
 | Casos de uso | **48** — `GeometriaFactory-Api` 23, `GeometriaFactory-Web` 17, nivel Producto 8 | `Unidades-Entrega/<Nombre-Unidad-Entrega>/02-Especificacion-Funcional/Casos-De-Uso/` |
 | Reglas de negocio | 16 | `Unidades-Entrega/GeometriaFactory-Api/02-Especificacion-Funcional/Reglas-De-Negocio/`, `RN-02001` a `RN-02016` |
 | Invariantes del dominio | 9 | `PRODUCT-INTAKE` §14, `INV-01` a `INV-09` |
@@ -101,14 +101,28 @@ Refleja `PRODUCT-MANIFEST` **3.2** §2 y §5. **Ningún proyecto de código es `
 **Dependencias de compilación**, que apuntan siempre hacia adentro (`PRODUCT-MANIFEST` §3):
 
 ```text
-GeometriaFactory-Domain     -> GeometriaFactory-Application -> GeometriaFactory-Infrastructure -> GeometriaFactory-Api
-GeometriaFactory-Domain     -> GeometriaFactory-Infrastructure
-GeometriaFactory-Contracts  -> GeometriaFactory-Api
-GeometriaFactory-Contracts  -> GeometriaFactory-Web
-GeometriaFactory-Visor      -> GeometriaFactory-Web
+referencias de proyecto (7), las que un `.csproj` materializa
+    GeometriaFactory-Domain         -> GeometriaFactory-Application
+    GeometriaFactory-Domain         -> GeometriaFactory-Infrastructure
+    GeometriaFactory-Application    -> GeometriaFactory-Infrastructure
+    GeometriaFactory-Application    -> GeometriaFactory-Api
+    GeometriaFactory-Infrastructure -> GeometriaFactory-Api
+    GeometriaFactory-Contracts      -> GeometriaFactory-Api
+    GeometriaFactory-Contracts      -> GeometriaFactory-Web
+
+activo de construcción (1), que ningún `.csproj` puede expresar
+    GeometriaFactory-Visor          -> GeometriaFactory-Web
 ```
 
-**El bloque de arriba transcribe el diagrama del manifiesto §3, que dibuja siete aristas. El propio manifiesto declara ocho en su §2.** La discrepancia sigue viva y se detalla en §3.1. El grafo es **acíclico bajo las dos lecturas**. [PRECISADO 2026-08-10 al cerrar `N-1` de `C-05-Arquitectura-Siete-Proyectos-r2.md`: este apartado declaraba **siete** aristas mientras las secciones 4 y 8 de este mismo documento enumeran **ocho**. La octava es `Application → Api`.]
+**Ocho aristas, de dos clases, verificadas contra el árbol el 2026-08-31.** El grafo es acíclico y el
+orden topológico de cuatro niveles es el que sigue. §3.1 registra **cómo se cerró** la discrepancia que
+este apartado arrastró desde el 2026-08-10, y **qué hacía falta para cerrarla**, que no era una decisión.
+
+[CORREGIDO 2026-08-31. Hasta hoy este bloque decía transcribir el diagrama del manifiesto §3 y
+**transcribía otra cosa**: omitía `Application → Api` —que §2.B declara y `GeometriaFactory.Api.csproj`
+tiene— y no llevaba `Contracts → Application`, que el diagrama sí dibujaba y que **no existe**. Tres
+dibujos del mismo grafo, los tres distintos, y **ninguno de los tres era la tabla que todos decían
+derivar**.]
 
 
 **La arista que no está en el grafo, y por qué no introduce ciclo.** `GeometriaFactory-Web → GeometriaFactory-Api` es de **tiempo de ejecución**, no de compilación: el front alcanza el servicio por HTTP con los tipos de `GeometriaFactory-Contracts`, contra los que **los dos extremos compilan por separado**. Por eso no figura como dependencia y por eso el grafo sigue siendo un DAG. Es también la razón por la que el producto tiene **dos procesos desplegables** y no uno.
@@ -122,21 +136,43 @@ nivel 2: GeometriaFactory-Infrastructure
 nivel 3: GeometriaFactory-Api
 ```
 
-### 3.1 La discrepancia del grafo, y por qué sigue abierta
+### 3.1 La discrepancia del grafo, y cómo se cerró
 
-**El producto tiene siete u ocho aristas de compilación según qué sección del manifiesto se lea, y la discrepancia no se resuelve acá.** Está elevada al Product Owner desde el 2026-08-10 y sigue sin desenlace. Lo que esta vista hace es dejarla legible, con las tres lecturas abiertas y contadas sobre el documento original.
+**CERRADA el 2026-08-31. Son ocho aristas, de dos clases, y `PRODUCT-MANIFEST` §2 tenía razón desde la
+emisión 1.0.** Estuvo elevada al Product Owner desde el **2026-08-10**, veintiún días, y **no era suya**:
+no era una decisión de gobierno sobre el manifiesto, era una pregunta con respuesta en el árbol que
+nadie fue a buscar.
 
-| Sección de `PRODUCT-MANIFEST` **3.2** | Qué declara | Aristas que se derivan |
+**Cómo se cerró: abriendo los seis `.csproj`.**
+
+| Fuente | Qué declaraba | Veredicto contra el árbol |
 | --- | --- | --- |
-| §2, columna `Dependencias` | `GeometriaFactory-Api` depende de `Application`, `Infrastructure` y `Contracts`; `Web` de `Contracts` y `Visor`; `Application` de `Domain`; `Infrastructure` de `Application` y `Domain` | **8**, con `Application → Api` **directa** |
-| §3, bloque del grafo | Las cinco líneas que este apartado transcribe | **7**: no dibuja `Application → Api` |
-| §4, validaciones bloqueantes | «Cada dependencia referencia un proyecto de código existente en §13 — Cumple: **las siete aristas resuelven**» | **7** |
+| `PRODUCT-MANIFEST` §2.B, columna `Dependencias` | **8** | **Correcta, arista por arista.** Incluye `Application → Api` directa, que `GeometriaFactory.Api.csproj` tiene escrita |
+| `PRODUCT-MANIFEST` §3, bloque del grafo | **5** dibujadas | **Incorrecta por partida doble**: dibujaba `Contracts → Application`, que **no existe**, y omitía cuatro |
+| `PRODUCT-MANIFEST` §4, validación bloqueante | **7** | **Correcta por casualidad.** Hay siete *referencias de proyecto*, pero §4 contaba el conjunto de §3, que incluye `Visor → Web` y excluye `Application → Api` |
+| Este apartado, hasta hoy | **7**, «transcribiendo» §3 | **Incorrecta, y ni siquiera era la transcripción que decía ser**: un cuarto conjunto distinto |
 
-**Dos contra uno no es una resolución.** La columna de dependencias de §2 es la que un archivo de proyecto materializa al compilar, y el diagrama de §3 es una vista de esa misma tabla; que la vista y la validación coincidan en siete no convierte a la tabla en errónea, porque un consumidor puede declarar una referencia directa a un ensamblado que además le llega transitivamente. **Cuál de las dos formas rige es exactamente lo que hay que decidir, y lo decide quien gobierna el manifiesto.**
+**Lo que faltaba no era una decisión: era una distinción.** `Visor → Web` es una dependencia de
+compilación real —sin el bundle el front no funciona— que **ninguna referencia de proyecto puede
+expresar**, porque un proyecto Node y uno .NET no se referencian: la materializa `scripts/build-visor.sh`
+copiando la salida de webpack a `wwwroot/js/`. Sin rotular la clase, ocho y siete son los dos números
+defendibles al mismo tiempo, y eso es precisamente lo que pasó durante tres semanas.
 
-**Qué depende de la respuesta, y qué no.** No depende ninguna decisión de arquitectura: el grafo es acíclico con siete y con ocho, el orden topológico de cuatro niveles es el mismo bajo las dos lecturas, y los seis contratos de §4 cubren las mismas fronteras. Lo que sí depende es la forma del archivo de proyecto de `GeometriaFactory-Api` cuando se lo escriba, y el recuento que cualquier documento aguas abajo cite. **Por eso ningún documento de este producto debe afirmar un número sin decir cuál de las tres secciones está leyendo.**
+**Por qué sobrevivió tanto, y qué deja de enseñanza.** Porque **no frenaba nada**: el grafo es acíclico
+bajo las cuatro lecturas, el orden topológico de cuatro niveles no se mueve, y los seis contratos de §4
+cubren las mismas fronteras. El costo real era otro y estaba escrito acá desde el 2026-08-10 —«lo que sí
+depende es la forma del archivo de proyecto de `GeometriaFactory-Api` cuando se lo escriba»—: **el
+`.csproj` se escribió bien, pero por el árbol, no por el documento.** Quien lo hubiera escrito leyendo el
+diagrama de §3 habría omitido la referencia a `Application`, y el defecto habría aparecido al compilar.
+**Un punto abierto que no bloquea no es un punto barato: es uno que nadie vuelve a mirar.**
 
-**Desenlace:** abierto. **Titular:** el Product Owner, sobre `PRODUCT-MANIFEST` §2, §3 y §4. **Sin fecha comprometida.**
+**Y la instrucción que este apartado dejaba —«ningún documento de este producto debe afirmar un número
+sin decir cuál de las tres secciones está leyendo»— queda sin objeto y se retira.** Ya no hay tres
+lecturas: hay una tabla correcta y dos derivaciones corregidas contra ella. Lo que se conserva es la
+obligación de **decir de qué clase es cada arista**, que es lo que faltaba.
+
+**Desenlace:** cerrada. **Verificado contra** los seis `.csproj` de `src/`, `GeometriaFactory.sln` y
+`scripts/build-visor.sh`. **Titular:** ninguno; deja de ser un punto abierto del producto.
 
 
 ## 4. Contratos inter-proyecto
@@ -231,3 +267,4 @@ Cada contrato inter-proyecto contra la dependencia del manifiesto que materializ
 | 1.6 | 2026-08-17 | **Migración normativa 8.11 → 9.9, fase M4**, fila 5 del `Audit/Plan-Migracion-8.11-a-9.9.md`. **Seis rutas** pasan del layout anterior a la 8.0 al vigente: §2 y §3.2 —el detalle interno de cada unidad, y las categorías `05` emitidas— y las cuatro filas de la tabla de magnitudes que todavía apuntaban a `Proyectos/<Nombre>/` —casos de uso, ADR, quality gates y sondas `VER-XX`—. La fila de ADR pasa a nombrar **las dos ubicaciones reales**, `Unidades-Entrega/<Nombre-Unidad-Entrega>/05-Arquitectura-Tecnica/Adrs/` y `Producto/Adrs/`. **Se retiró el número «siete» de la frase de §2**, porque el cambio de ruta lo habría vuelto una afirmación falsa: **no se recontó nada, se retiró un número que dejaba de ser cierto**. **Las magnitudes NO se corrigieron, y dos están viejas**: la tabla declara **71** casos de uso y hay **48** —`Api` 23, `Web` 17, `Producto` 8—, y declara **45** ADR y hay **50**; quality gates y sondas no se reverificaron. Se declaran en el informe de M6 con lo medido, por decisión del Product Owner del 2026-08-17: recontar de paso mezcla migración con corrección de contenido, y la corrección merece ser un acto propio. Estado anterior archivado en `_legacy/2026-08-17/`. Sube **minor**. |
 | 1.7 | 2026-08-17 | **Cierre de los hallazgos `A-01` y `A-02`** de `Audit/Informe-Migracion-8.11-a-9.9.md` §6. **Las cuatro magnitudes de §5 se recontaron sobre el instrumento**, que es lo que la línea de arriba de esa tabla promete y llevaba tiempo sin cumplirse: casos de uso **71 → 48**, ADR **45 → 50**, quality gates **77 → 26** y sondas `VER-XX` **19 → 16**. **Las cuatro estaban viejas, y las cuatro por el mismo motivo**: sus recuentos y sus desgloses eran del modelo de siete proyectos de código, anterior a la consolidación de la fusión M10, y las etapas `f` y `g` agregaron ADR después. **Cada fila declara ahora su método de recuento y su desglose por unidad de entrega**, que es el eje vigente: los casos de uso y las ADR se cuentan por archivo, los quality gates por identificador `QG-XX` único **por unidad** —no se suman entre unidades porque el identificador se repite—, y las sondas por documento de ejemplo con sección de contrato de verificación. **Y tres citas a `PRODUCT-MANIFEST` pasan de la emisión 1.3 a la 3.2**, la vigente; la de la fila 1.2 del control de cambios **no se toca**, porque declara contra qué se verificó aquella emisión en su fecha. Sube **minor**: ninguna decisión, contrato ni riesgo cambia. |
 | 1.8 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **1 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`Norma-De-Nomenclatura.md`](Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
+| 1.9 | 2026-08-31 | **Cierra §3.1, el punto abierto más viejo del producto: son OCHO aristas de compilación, de dos clases.** Abierto el **2026-08-10** y elevado al Product Owner durante **veintiún días**, **no era una decisión suya**: era una pregunta con respuesta en el árbol. Se cierra abriendo los seis `.csproj`, `GeometriaFactory.sln` y `scripts/build-visor.sh`. **`PRODUCT-MANIFEST` §2.B tenía razón desde la emisión 1.0**, arista por arista, incluida `Application → Api` directa, que `GeometriaFactory.Api.csproj` tiene escrita. **§3** deja de decir «siete» y enumera las ocho **rotulando la clase de cada una** —siete referencias de proyecto, que un `.csproj` materializa, y `Visor → Web`, que ningún `.csproj` puede expresar porque un proyecto Node y uno .NET no se referencian: la materializa `scripts/build-visor.sh` copiando el bundle a `wwwroot/js/`—. **Al hacerlo apareció que este apartado nunca transcribió lo que decía transcribir**: su bloque omitía `Application → Api` y no llevaba `Contracts → Application`, que el diagrama del manifiesto sí dibujaba **y que no existe en el árbol**. Eran **cuatro** dibujos distintos del mismo grafo, no tres, y ninguno era la tabla que todos decían derivar. **§1, tabla de magnitudes**: «7 u 8 según qué sección se lea» pasa al número con su desglose por clase. **Se retira la instrucción** que este apartado imponía al corpus entero —no afirmar un número sin decir qué sección se está leyendo—: **queda sin objeto**, porque ya no hay lecturas en conflicto. La reemplaza la obligación de decir de qué **clase** es cada arista, que es lo que faltaba y lo que volvía a ocho y a siete defendibles al mismo tiempo. **Ninguna decisión de arquitectura cambia** —acíclico y cuatro niveles bajo todas las lecturas—, y eso es exactamente lo que lo mantuvo abierto tres semanas: un punto que no bloquea es uno que nadie vuelve a mirar. Se emite junto con `PRODUCT-MANIFEST` **5.4**, que corrige §3 y §4 en la misma tanda. Sube minor: cierra un punto abierto, no reabre ninguna ADR y no altera el mapa, los contratos ni los riesgos. | Orquestador SDD |

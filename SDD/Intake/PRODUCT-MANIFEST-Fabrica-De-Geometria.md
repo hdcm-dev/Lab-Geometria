@@ -17,8 +17,8 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 | Unidad de entrega principal | — | `GeometriaFactory-Api` |
 | Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **3.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
 | Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
-| Versión | — | 5.3 |
-| Fecha | — | 2026-08-27 |
+| Versión | — | 5.4 |
+| Fecha | — | 2026-08-31 |
 | Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y **10.0 → 13.3** cerradas, y **procedencia actualizada a 13.7 sin migrar** el 2026-08-27, por la salida `C` de la quinta reanudación |
 
 `Slug-Producto` es el único campo derivado: se obtiene de `Nombre-Producto` con el algoritmo de `Master-Prompt.md` §3.2 (`Fábrica de Geometría` → `Fabrica-De-Geometria`). `Raiz-Codigo` y `Artefacto-Agrupacion` se leen declarados del intake (cabecera y perfil de convención de §13), no se derivan.
@@ -202,11 +202,21 @@ Orden topológico de generación: nivel 0 `GeometriaFactory-Api`; nivel 1 `Geome
 arista es de **runtime**: el front habla con la API por HTTP.
 
 **Grafo de compilación de `GeometriaFactory.sln`**, derivado de la columna de dependencias de §2.B.
-Acíclico. Ordena el **build**:
+Acíclico. Ordena el **build**. **Ocho aristas, de dos clases**, y la distinción de clase es la que
+hacía que el recuento no cerrara —se explica debajo del bloque—:
 
 ```text
-[Domain, Contracts]  ->  [Application]  ->  [Infrastructure]  ->  [Api]
-[Contracts]  ->  [Web]
+referencias de proyecto (7), las que un `.csproj` materializa
+    Domain         ->  Application
+    Domain         ->  Infrastructure
+    Application    ->  Infrastructure
+    Application    ->  Api            <- directa; §2.B la declara y el árbol la tiene
+    Infrastructure ->  Api
+    Contracts      ->  Api
+    Contracts      ->  Web
+
+activo de construcción (1), que ningún `.csproj` puede expresar
+    Visor          ->  Web            <- el bundle, copiado a wwwroot/js/
 ```
 
 Orden topológico de compilación: nivel 0 `GeometriaFactory-Domain` y `GeometriaFactory-Contracts`;
@@ -216,9 +226,17 @@ nivel 1 `GeometriaFactory-Application` y `GeometriaFactory-Web`; nivel 2
 **Grafo de compilación del proyecto Node.js:** un solo nodo, `GeometriaFactory-Visor`, sin
 dependencias de compilación. Su salida se consume como artefacto.
 
+**Por qué el grafo tiene dos clases de arista, y por qué esto se corrige recién hoy.** `Visor → Web` es
+una dependencia de compilación real —sin el bundle el front no funciona— pero **no es una referencia de
+proyecto**: la materializa `scripts/build-visor.sh`, que copia la salida de webpack a
+`src/GeometriaFactory.Web/wwwroot/js/`. Un proyecto Node y uno .NET no se referencian entre sí. Contar
+las ocho juntas obliga a decir de qué clase es cada una; **no decirlo es lo que produjo tres recuentos
+distintos en este mismo documento**, y la clase estaba implícita en §2.B desde la emisión 1.0.
+
 **Los dos grafos no coinciden, y es lo que hay que no confundir.** La arista `Web → Api` está en el de
-integración y **no** en el de compilación; las cuatro aristas internas del backend están en el de
-compilación y **no** en el de integración, porque esas capas no se despliegan.
+integración y **no** en el de compilación; las **seis** aristas internas del backend —las de §2.B que no
+tocan a `Contracts` ni al `Visor`— están en el de compilación y **no** en el de integración, porque esas
+capas no se despliegan.
 
 ---
 
@@ -229,7 +247,7 @@ compilación y **no** en el de integración, porque esas capas no se despliegan.
 | Cada `tipo_unidad_entrega` pertenece al conjunto cerrado D8 | Cumple: `rest-api` (1) y `web-monolith` (1), sobre las **dos** unidades de entrega |
 | Exactamente una unidad de entrega principal | Cumple: `GeometriaFactory-Api` |
 | Sin colisión de `Nombre-Proyecto-Codigo` ni de `Identidad-Codigo` | Cumple: siete nombres y siete identidades distintas |
-| Cada dependencia de compilación referencia un proyecto de código existente | Cumple: las siete aristas resuelven |
+| Cada dependencia de compilación referencia un proyecto de código existente | Cumple: **las ocho aristas resuelven** — siete referencias de proyecto y un activo de construcción, contadas sobre la columna de dependencias de §2.B y **verificadas contra los seis `.csproj` y `scripts/build-visor.sh` el 2026-08-31** |
 | Grafo de compilación acíclico, por solución de código | Cumple: cuatro niveles en `GeometriaFactory.sln`; un solo nodo en el proyecto Node |
 | Todo proyecto de código compone al menos una unidad de entrega | Cumple: los siete tienen marca en §2.C |
 | `Nombre-Producto` en prosa de negocio, independiente de `Raiz-Codigo` | Cumple |
@@ -281,6 +299,7 @@ correspondiente.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 5.4 | 2026-08-31 | **El recuento de aristas de compilación queda resuelto contra el árbol: son OCHO, y §2.B tenía razón desde la emisión 1.0.** Cierra el punto abierto que `../Docs/Producto/Vista-Producto.md` §3.1 sostenía desde el **2026-08-10** y que el §8 del README del producto listaba como el primero de sus cuatro. **No hubo que decidir nada: hubo que abrir los `.csproj`.** Los seis proyectos .NET declaran **siete referencias de proyecto** y `scripts/build-visor.sh` materializa la octava, `Visor → Web`, copiando el bundle a `wwwroot/js/`. La columna de dependencias de §2.B enumera **exactamente esas ocho**, arista por arista, incluida `Application → Api` **directa**, que `GeometriaFactory.Api.csproj` tiene escrita. **Los otros dos recuentos estaban mal, y de maneras distintas.** El bloque de §3 dibujaba **cinco** aristas, una de ellas —`Contracts → Application`— **inexistente en el árbol y ausente de §2.B**, y omitía cuatro; se reescribe enumerando las ocho y **rotulando su clase**. El §4 declaraba «las siete aristas resuelven»: **el número coincidía por casualidad** con la cantidad de referencias de proyecto, pero contando un conjunto distinto —el de §3, que incluye `Visor → Web` y excluye `Application → Api`—. **Un recuento correcto por la razón equivocada es peor que uno incorrecto**: quien hubiera escrito el `.csproj` de la Api leyendo el diagrama habría omitido una referencia y el error habría aparecido recién al compilar. Se corrige además la prosa que hablaba de «cuatro aristas internas del backend», que son **seis**. **Ninguna decisión de arquitectura cambia** —el grafo es acíclico y el orden topológico de cuatro niveles es el mismo bajo las tres lecturas—, y por eso esto nunca frenó nada, que es exactamente por lo que sobrevivió veintiún días. Emitido como **parche a mano sobre un artefacto derivado**, con el precedente de la 5.2: corregir un defecto de derivación no exige re-derivar el documento entero. | Orquestador SDD |
 | 5.3 | 2026-08-27 | **Procedencia actualizada a SDD 13.7 sin migrar**, por la **salida `C`** del orquestador de reanudación, decidida por el Product Owner el 2026-08-27 en la **segunda vuelta** de [`../Docs/Audit/Estado-Del-Destino-2026-08-27.md`](../Docs/Audit/Estado-Del-Destino-2026-08-27.md) §8.1. **No es una migración y §1.1 lo dice en su primera línea**: es el caso que `Master-Prompt-Reanudacion.md` §4 llama «actualizar la procedencia sin migrar», y que **sólo procede con la verificación artefacto por artefacto hecha** — la lista de los **ocho artefactos que se movieron**, con el motivo por el que cada uno **no** toca al destino, está en §6 de ese informe y resumida en la tabla nueva de §1.1. **Cero major**, y los cuatro saltos con bloque de impacto vacío. **Ningún documento del corpus cambia**: es la única diferencia con las siete migraciones anteriores, y es la que hace que esta actualización sea una tabla y no un trabajo. Entra **`Mesa-Rules` 1.0** a la tabla de artefactos, que **sí alcanza al destino aunque no a su corpus**: gobierna la fase `R1.5`, que corrió ese día. **§1.1 deja de arrastrar el relato completo de la migración 10.0 → 13.3** —vive en las entradas 5.0 y 5.1 de este control de cambios— y conserva de ella lo que no es de forma: el cierre de `PA-01` y el retiro de `D2`. Se agrega la constancia de por qué las citas del intake **3.0** siguen siendo correctas con el intake en **3.1**. | Orquestador de reanudación SDD |
 | 5.2 | 2026-08-27 | **Parche `P-04` de la mesa de evaluación del 2026-08-27** ([`../Docs/Audit/Mesa-2026-08-27.md`](../Docs/Audit/Mesa-2026-08-27.md), hallazgo **H-04**, ancla **E2**, nivel **P2**). La línea 3 declaraba «plantilla de referencia **5.0**» mientras **§1.1 de este mismo documento** declara la **6.0**: dos lecturas del mismo dato dentro del mismo archivo, y la de arriba es la que un lector ve primero. Se corrige la línea 3 y se la remite a §1.1, que es la fuente. **La procedencia de §1.1 no se toca** y sigue en SDD **13.3**. | Orquestador de reanudación SDD |
 | 5.1 | 2026-08-25 | **Cierra los tres `P0` del audit de M6, que había RECHAZADO la migración.** La emisión 5.0 declaró la cadena completa cuando no lo estaba: **la revisión de apartamientos de §4.7 nunca se ejecutó sobre el árbol** —los tres ADR seguían con sus contadores en 1, 1 y 0, del 17 y 18 de agosto— y **dos `README.md` de la 09 habían subido de versión sin archivar su estado previo**. §1.1 deja de afirmar que ninguna fila del plan quedó sin resolver y **declara el orden real**: qué faltaba, cuándo se completó y con qué. **Y se corrige la cita del intake de §2**, que decía **2.0** con el vigente en **3.0** (**P2** del mismo audit), en el artefacto que declara la conformidad de todo lo demás. Sube **minor**: no cambia ninguna versión de la tabla de procedencia, corrige lo que el documento afirmaba sobre sí mismo. |
