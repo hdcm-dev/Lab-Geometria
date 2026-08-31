@@ -2,14 +2,49 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Reporte-Hallazgos-De-Los-Samples-2026-08-30.md
-**Versión:** 10.0
-**Estado:** Abierto — **cuatro vivos de doce emitidos**. Cinco cerrados, dos retirados tras verificarlos contra el contrato, y tres nuevos que salieron de esa verificación
+**Versión:** 11.0
+**Estado:** **Sin hallazgos vivos.** Catorce emitidos: **doce cerrados y dos retirados**. Ver el índice de §0
 **Fecha:** 2026-08-30
 **Autor:** Orquestador SDD
 **Instrumento:** La implementación de los dieciséis samples de las categorías `10-Examples`, corrida contra el producto real
 **Alcanza a:** `visor/src/viewer/instance.ts`; `Contratos-REST.md`; `Definicion-Contrato-De-Fachada.md`; `AccessTokenIssuer`; `TwoPhaseStartup`; las categorías `10-Examples` de las dos unidades de entrega
 
 ---
+
+---
+
+## 0. Índice de estado — **el único lugar donde se lee cuántos hay vivos**
+
+**Catorce hallazgos emitidos. Doce cerrados, dos retirados, CERO vivos.**
+
+| # | Qué era | Estado | Dónde se cerró |
+| --- | --- | --- | --- |
+| `H-01` | Una selección rechazada borraba la vigente | **Cerrado** 08-30 | La comprobación va antes del efecto |
+| `H-02` | Apagar un movimiento no deshace lo que hizo | **Cerrado** 08-30 | Decisión del PO: apagar es **detener**; §6 corregido |
+| `H-03` | `POST /interpretaciones` expuesto y sin contrato | **Cerrado** 08-31 | Adoptado como `A-18` en `Contratos-REST.md` 1.5 |
+| `H-04` | `Issue` devuelve el mismo `null` para dos fallas | **RETIRADO** | El arranque ya se detiene sin clave; rama inalcanzable |
+| `H-05` | Infraestructura declara 2 códigos y le piden 6 | **Cerrado** 08-30 | Los ejemplos dicen lo que la capa hace |
+| `H-06` | Traza y síntoma en el arranque detenido | **Cerrado** 08-30 | Detenerse pasó a ser una decisión, salida `78` |
+| `H-07` | Los `401` vuelven sin código de contrato | **RETIRADO** | `Contratos-REST.md` §5.1 lo declara deliberado |
+| `H-08` | El barrido de `ADR-08006` no llegó a la categoría 10 | **Cerrado** 08-30 | Cuatro §6 a 2.0; la observación a 5.0 |
+| `H-09` | El código `UNKNOWN`, acuñado aguas abajo | **Cerrado** 08-30 | Retirado; la unión discriminada lo volvió imposible |
+| `H-10` | `RA-03` dependía de una variable de entorno | **Cerrado** 08-30 | Los dos entornos iguales; el detalle al registro |
+| `H-11` | Sin manejador: el defecto no previsto daba `500` vacío | **Cerrado** 08-30 | `ContractErrorHandler`, con cuatro pruebas |
+| `H-12` | Los apartamientos del genérico sin forma de §11 | **Cerrado** 08-31 | `ADR-00004` 2.0 §2.1, con sus seis campos |
+| `H-13` | Siete samples no verificaban con su comando | **Cerrado** 08-30 | La comparación corre siempre; 9 de 9 en CONFORME |
+| `H-14` | Códigos de facultad sin traducción | **Cerrado** 08-31 | Eran **quince**; 3 parcheados y 12 correctos |
+
+**Tres quedaron abiertos fuera de este reporte, y no son del producto:**
+
+| Dónde | Qué |
+| --- | --- |
+| Framework, [`Reporte 21`](https://github.com/hdcm-dev/IA.SDD.Documentacion) | No hay matriz de propagación para un ADR: es la causa de `H-03` y de `H-08` |
+| `ADR-00004` §2.1, disparador **(iii)** | Tres motivos que nunca se elevaron al Product Owner, y que el apartamiento declara |
+| `Mesa-2026-08-31.md` §8bis | La mesa no tiene rol que concilie criterios entre roles |
+
+**Por qué este índice existe, y es un hallazgo de la mesa.** Hasta la versión 11.0 el estado vivo **sólo se podía reconstruir leyendo diez filas de control de cambios**, y el rol de lector sin contexto necesitó **tres consultas** para saber cuántos había abiertos. Es `M-03` de [`Mesa-2026-08-31.md`](Mesa-2026-08-31.md), y por §5.1 de `Mesa-Rules.md` **cada consulta que tiene respuesta en el árbol y aun así hay que hacer es un hallazgo**.
+
+**Y al construirlo apareció que `H-13` nunca tuvo fila en §8**: se emitió como prosa en §8bis y el recuento de §8 quedó en trece para catorce hallazgos. Un índice que se arma contando es lo que encuentra eso; uno que se arma recordando, no.
 
 ## 1. Por qué existe este documento
 
@@ -200,6 +235,7 @@ Y una contradicción de documento, sin consecuencia sobre el código: `ejemplo-0
 | ~~`H-10`~~ | **CERRADO.** Los dos entornos se comportan igual; el detalle va al registro | Hecho |
 | ~~`H-11`~~ | **CERRADO.** El defecto no previsto sale con el código genérico | Hecho |
 | ~~`H-12`~~ | **CERRADO el 2026-08-31**, y era menos de lo que decía: el apartamiento **ya estaba en un ADR** —`ADR-00004` §2 regla 2, desde el 2026-08-12, con el recuento correcto— y lo que le faltaba era **la forma de §11**. Enunciado previo (`M-04` de la mesa). No es **un** apartamiento sino **dos** —el `409` y el `403`—, y no son tres destinos del genérico sino **cuatro** —`503`, `500`, `409` y `403`—, por **dos** apartamientos declarados en un comentario de código. §5.2 afirmaba «bajó de cuatro a dos»: el contrato 1.5 suma la constancia de que tiene cuatro. Falta darles forma de ADR | Product Owner |
+| ~~`H-13`~~ | **CERRADO el 2026-08-30.** Siete de los nueve samples de .NET no verificaban con el comando que su documento declara: la comparación corre ahora siempre, y los nueve cierran en CONFORME. **Esta fila faltaba hasta la 11.0**: el hallazgo se emitió como prosa en §8bis y nunca entró a esta tabla | Hecho |
 | ~~`H-14`~~ | **CERRADO el 2026-08-31, y era más grande y distinto de lo reportado: quince y no dos.** Uno de los dos que nombraba —`ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH`— **se queda en `500` y es correcto**: habla de lo que el llamador pasó, no de quién pide. El otro procede. Ver `M-06` de la mesa. Enunciado original: dos códigos de facultad sin traducción —`ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH` y `SCOPE_REQUIRES_ADMINISTRATOR_ROLE`— caerían al genérico con `500` donde corresponde `403`. **Los dos son inalcanzables hoy**, verificado uno por uno; declarado en `ADR-04004` §7.1 | Equipo, dos líneas |
 
 **Ninguno impide seguir.** Los dieciséis samples corren y los dieciséis declaran por escrito lo que no coincide.
@@ -246,3 +282,4 @@ Correr los dieciséis samples es exactamente eso: volver a leerlos, con el produ
 | 8.0 | 2026-08-31 | **La mesa del 2026-08-31 corrigió el enunciado de `H-12`** (`M-04`): describía un estado anterior —un apartamiento y tres destinos— cuando son **dos apartamientos y cuatro destinos**, medidos el día anterior. **Y el contraste del contrato de entrada de esa mesa encontró tres puntos abiertos del `README.md` §8 que ya estaban cerrados**, uno de ellos desde el **2026-08-12**. Los dos hallazgos vivos de este reporte pasan a declarar **en qué evento se cierran**, que es lo que `M-05` levantó: ninguno lo declaraba, y sin evento nada los puede vencer nunca. Sube **major**. |
 | 9.0 | 2026-08-31 | **`H-14` cerrado, y el barrido lo encontró más grande y distinto.** No eran dos códigos sino **quince** los que el dominio emite y la capa API no nombraba, y el criterio con el que se separaron **no fue la alcanzabilidad** —que se contesta hoy y caduca mañana— sino **de quién sería el defecto si se alcanzaran**. Con él: **tres** proceden y se parchearon, **doce** responden `500` correctamente porque el defecto sería del producto, y **una** está declarada sin uso. **El criterio contradijo al enunciado de `H-14`**, que pedía `403` para sus dos códigos: sólo uno lo merece. Queda `ContractCoverageTests` como red permanente —el catálogo particionado en cuatro listas declaradas, de modo que una condición nueva **rompe la prueba** en vez de caer al genérico por omisión— y `tools/barrido-cobertura-de-contrato.cs` como instrumento. **Del reporte queda vivo `H-12`.** Sube **major**. |
 | 10.0 | 2026-08-31 | **`H-12` cerrado, y era menos de lo que el hallazgo decía.** No estaba «en un comentario de código y no como ADR»: `ADR-00004` §2 regla 2 lo declara **desde el 2026-08-12**, y con el recuento correcto —cuatro destinos, dos huecos—. Lo que le faltaba era **la forma de `Root-Rules.md` §11**: estado, disparadores y contador. Se agregó como §2.1 con los seis campos, y el ADR pasó de `Propuesto` a **`Aprobado`** —estuvo propuesto veintiún días mientras el código se construía sobre él—. **El contador es el dato que más dice: 0 revisados y SIETE transcurridos**, porque `Migracion-Rules.md` §4.7 revisa apartamientos **declarados** y éste no lo estaba. §11 dice que uno que sobrevive dos o más saltos ya demostró que no es de un producto. **Con esto el reporte no tiene hallazgos vivos.** Sube **major**. |
+| 11.0 | 2026-08-31 | **Entra §0, el índice de estado, y con él el reporte deja de exigir que se lea su control de cambios para saber qué hay vivo.** Es `M-03` de la mesa del 2026-08-31: el rol de lector sin contexto necesitó **tres consultas** para contar los hallazgos abiertos, y por §5.1 de `Mesa-Rules.md` cada consulta que tiene respuesta en el árbol es un hallazgo. **Al construirlo apareció que `H-13` nunca había tenido fila en §8** —se emitió como prosa en §8bis— y el recuento quedaba en trece para catorce hallazgos: un índice que se arma **contando** encuentra eso, uno que se arma recordando no. El índice declara además **los tres abiertos que no son de este reporte ni del producto**. Estado: **catorce emitidos, doce cerrados, dos retirados, cero vivos**. Sube **major**: el documento cambia de estructura. |
