@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-01-basico.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/visor/01-basico/`
@@ -66,9 +66,9 @@ samples/visor/01-basico/
 
 ```
 [1] Instancia creada: identificador presente | escena viva | piezas dibujadas: 0
-[2] Texto de E-1 cargado: piezas dibujadas=3 | no dibujadas=0
+[2] Piezas de E-1 cargadas: piezas dibujadas=3 | no dibujadas=0
 [3] Piezas por tipo: Cilindro=1 Cubo=1 Ortoedro=1
-[4] Estructura del texto devuelta para el arbol: piezas=3
+[4] Estructura del texto devuelta para el arbol: no la devuelve, el visor ya no recibe el texto
 [5] Segundo procesado del mismo texto: disposicion identica pieza por pieza=si
 [6] Instancia destruida: recursos graficos liberados | bucle de dibujo cortado
 [7] Uso posterior del identificador liberado: UNKNOWN_INSTANCE
@@ -78,9 +78,15 @@ Funciones ejercidas: 3 de 6 | Servicios del backend disponibles: 0 | Excepciones
 
 **La línea `[3]` es el caso insignia del producto.** `Ortoedro=1` significa que el ortoedro **se dibuja**: en el visualizador previo ningún ortoedro generado por la aplicación de los alumnos se dibujaba, y recuperarlo es lo que `PT-02` mide con este mismo escenario.
 
-**La línea `[1]` dice `piezas dibujadas: 0` a propósito.** `inicializar` garantiza que la instancia **no dibuja ninguna pieza** hasta que se invoque `cargarJson` (`Definicion-Contrato-De-Fachada.md` §4.1). Una escena que naciera con contenido sería deriva.
+**La línea `[1]` dice `piezas dibujadas: 0` a propósito.** `initialize` garantiza que la instancia **no dibuja ninguna pieza** hasta que se invoque `loadPieces` (`Definicion-Contrato-De-Fachada.md` §4.1). Una escena que naciera con contenido sería deriva.
 
-**La línea `[5]` es la garantía `G-6`**, y compara **posición** y no orientación: el determinismo comprometido es el de la posición derivada del índice.
+**Las líneas `[2]` y `[4]` cambiaron en la versión 2.0, y las dos por la misma decisión.** [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md), del **2026-08-16**, sacó el texto del alumno de la fachada: `cargarJson` pasó a llamarse `loadPieces` y **recibe las piezas ya reconstruidas**, porque quien reconstruye es el laboratorio. El nombre cambió junto con la firma, porque una función que se llama «cargar JSON» y recibe otra cosa promete lo que no cumple.
+
+De ahí salen las dos: si el visor no recibe el texto, **no carga un texto** —`[2]`— y **no tiene estructura de texto que devolver** —`[4]`—. **Ninguna capacidad falta.** Lo que el visor sí devuelve es lo dibujado **y lo no dibujado con su motivo**, que es la garantía por la que existe; el árbol lo arma el anfitrión con las piezas que ya tiene.
+
+**Por qué esto se corrige recién ahora, y es lo que más conviene mirar de esta versión.** El barrido de alcance de `ADR-08006` enumeró tres afirmaciones desalineadas y aplicó las tres correcciones —está en [`../../../Audit/Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md`](../../../Audit/Observacion-Alcance-Aguas-Arriba-De-ADR-08006.md), cerrada—, y **ninguna de las tres era de esta categoría**: alcanzó el intake y los requerimientos técnicos, y la categoría 10 quedó afuera. Este §6 siguió describiendo la fachada anterior **dieciocho días**, hasta que alguien corrió el sample. El hueco de método está reportado al framework como [`Reporte 21`](https://github.com/hdcm-dev/IA.SDD.Documentacion).
+
+**La línea `[5]` es la garantía `G-6`**, y compara **posición** y no orientación: el determinismo comprometido es el de la posición derivada del índice. El sample la mide **comparando imágenes**, porque la fachada no publica la disposición: dos cargas iguales tienen que producir el mismo cuadro.
 
 ## 7. Variaciones sugeridas
 
@@ -125,7 +131,7 @@ verificacion:
   criterio_aceptacion:
     exit_code: 0
     stdout_contiene:
-      - "[2] Texto de E-1 cargado: piezas dibujadas=3 | no dibujadas=0"
+      - "[2] Piezas de E-1 cargadas: piezas dibujadas=3 | no dibujadas=0"
       - "[3] Piezas por tipo: Cilindro=1 Cubo=1 Ortoedro=1"
       - "[5] Segundo procesado del mismo texto: disposicion identica pieza por pieza=si"
       - "[7] Uso posterior del identificador liberado: UNKNOWN_INSTANCE"
@@ -141,3 +147,4 @@ verificacion:
 | --- | --- | --- |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño** de `Rules-Examples.md` §0.2. Primera de las tres partes del sample **S-1** del `PRODUCT-INTAKE` §18. Cubre `CU-12001`, `CU-12002` y `CU-12005` con **tres** de las **seis** funciones de la fachada, sobre el escenario `E-1` transcripto sin modificación. El contrato `VER-12001` declara seis líneas exactas de salida, con el recuento de peticiones en **0** y el ortoedro dibujado; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-30 | **§6 se alinea con la fachada vigente, dieciocho días tarde.** Las líneas `[2]` y `[4]` describían `cargarJson` recibiendo el texto del alumno y devolviendo su estructura; [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) lo cambió el **2026-08-16** —`loadPieces` recibe las piezas ya reconstruidas— y **el barrido de alcance de esa decisión no alcanzó a esta categoría**: enumeró tres afirmaciones, las tres del intake y de los requerimientos técnicos. Lo encontró la implementación del sample el 2026-08-29. §6 suma los dos párrafos que explican la decisión y por qué la corrección llega ahora, y `[1]` pasa a nombrar las funciones por su nombre vigente. **Ninguna capacidad falta y el objeto del ejemplo no cambia**: lo que el visor devuelve —lo dibujado y lo no dibujado con su motivo— sigue siendo lo que el árbol necesita. El hueco de método está reportado al framework. Sube **major**: dos líneas del snapshot cambian de contenido, y un consumidor que comparaba contra ellas obtenía otro resultado. |

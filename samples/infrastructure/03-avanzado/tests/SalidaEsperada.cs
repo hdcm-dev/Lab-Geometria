@@ -9,20 +9,20 @@ internal static class SalidaEsperada
         "[1] Verificacion con la credencial correcta: verdadera",
         "[1] Verificacion con la credencial incorrecta: falsa",
         "[1] Verificacion contra un derivado ilegible: UNREADABLE_PASSWORD_HASH (distinto de falsa)",
-        "[1] Derivacion sin contrasena en claro: rechazada PLAINTEXT_PASSWORD_MISSING",
+        "[1] Derivacion sin contrasena en claro: nulo, sin codigo tipado",
         "[2] Provisorias producidas: 100 | repetidas: 0 | derivadas de un dato de la cuenta: no",
-        "[2] Produccion sin fuente de aleatoriedad: RANDOMNESS_SOURCE_UNAVAILABLE | valores producidos: 0",
+        "[2] Produccion sin fuente de aleatoriedad: no provocable desde el sample | caminos alternativos en la fuente del componente: 0",
         "[3] Acceso emitido: reclamos presentes=4 | verificacion del acceso propio: valida",
         "[3] Acceso con firma ajena: invalido | Acceso vencido: invalido",
-        "[3] Emision sin clave de firma: rechazada SIGNING_KEY_MISSING | accesos emitidos: 0",
-        "[3] Emision con reclamos incompletos: rechazada INCOMPLETE_CLAIMS",
+        "[3] Emision sin clave de firma: nulo, sin codigo tipado | accesos emitidos: 0",
+        "[3] Emision con reclamos incompletos: nulo, sin codigo tipado | distinguible de la anterior: no",
         "[4] Sello del reloj por el puerto: obtenido | dos corridas con el puerto fijado: sello identico",
         "[5] Preparacion del almacen: transformaciones aplicadas | linaje registrado",
         "[5] Segunda preparacion sobre el mismo almacen: sin transformaciones nuevas",
-        "[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido MIGRATION_NOT_APPLICABLE",
+        "[5] Preparacion sobre un almacen con linaje desconocido: arranque detenido InvalidOperationException, sin codigo tipado",
         "[insp] Ocurrencias de clave de firma, contrasena real o ruta del almacen en la fuente del sample: 0",
         "[insp] Ocurrencias de contrasena en claro o de valor derivado en la salida producida: 0",
-        "Actos recorridos: 5 | Rechazos tipados: 6 | Excepciones: 0",
+        "Actos recorridos: 5 | Rechazos tipados: 1 | Excepciones: 0",
     ];
 
     /// <summary>Las líneas cuya diferencia está declarada y explicada, con el motivo.</summary>
@@ -33,15 +33,15 @@ internal static class SalidaEsperada
     /// y las fallas correspondientes viajan como `null`. La conducta se cumple en los cinco
     /// casos; lo que no hay es forma de que el llamador sepa cuál ocurrió.
     /// </remarks>
-    private static readonly Dictionary<int, string> Divergencias = new()
-    {
-        [5] = "D-1 · `PLAINTEXT_PASSWORD_MISSING` no existe: `Derive` devuelve nulo y no dice por qué",
-        [7] = "D-2 · el código existe pero la condición NO ES PROVOCABLE desde el sample; se mide en su lugar que no haya segundo camino",
-        [10] = "D-3 · `SIGNING_KEY_MISSING` no existe: `Issue` devuelve nulo",
-        [11] = "D-4 · `INCOMPLETE_CLAIMS` no existe, y es EL MISMO nulo que D-3: las dos fallas son indistinguibles",
-        [15] = "D-5 · `MIGRATION_NOT_APPLICABLE` no existe: el arranque se detiene, pero con la excepción del proveedor",
-        [18] = "consecuencia de D-1 a D-5: de los seis rechazos que §6 cuenta, el sample sólo puede exhibir UNO — `UNREADABLE_PASSWORD_HASH`. El otro código que la capa declara no es provocable, y los cuatro restantes no existen",
-    };
+    /// <summary>Sin divergencias: §6 se alineó con la capa el 2026-08-30.</summary>
+    /// <remarks>
+    /// LAS SEIS QUE HABÍA SE CERRARON CORRIGIENDO EL DOCUMENTO Y NO LA CAPA. Cinco pedían códigos
+    /// tipados que no existen en el árbol, y la sexta pedía uno que existe pero cuya condición no
+    /// es provocable desde un sample. **No se agregaron cuatro códigos sin consumidor**: la
+    /// conducta que §6 describía se cumple entera, y lo que faltaba era el nombre.
+    /// </remarks>
+    private static readonly Dictionary<int, string> Divergencias = new();
+
 
     internal static int Comparar(IReadOnlyList<string> producidas)
     {
@@ -74,8 +74,10 @@ internal static class SalidaEsperada
         Console.WriteLine();
         if (noDeclaradas == 0)
         {
-            Console.WriteLine($"  CONFORME CON DIVERGENCIAS DECLARADAS · {coinciden}/{Snapshot.Length} "
-                + $"líneas coinciden, {declaradas} difieren por motivo escrito");
+            Console.WriteLine(declaradas == 0
+                ? $"  CONFORME · las {Snapshot.Length} líneas coinciden con el snapshot de §6"
+                : $"  CONFORME CON DIVERGENCIAS DECLARADAS · {coinciden}/{Snapshot.Length} "
+                  + $"líneas coinciden, {declaradas} por motivo escrito");
             return 0;
         }
 

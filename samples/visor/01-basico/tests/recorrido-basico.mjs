@@ -132,10 +132,12 @@ await navegador.close();
 // --------------------------------------------------------------------------
 for (const l of lineas) console.log(l);
 
-const divergencias = {
-  2: 'D-1 · el renglon dice «Texto de E-1 cargado» y lo que se carga son PIEZAS: `loadPieces` se llamaba `loadJson` y recibia el texto del alumno hasta que `ADR-08006` lo saco de la fachada, el 2026-08-16. Los numeros son los que §6 espera',
-  4: 'D-2 · el visor NO devuelve la estructura del texto, y es la otra cara de D-1: no recibe el texto, asi que no tiene estructura que devolver. El arbol lo arma el anfitrion con las piezas que ya tiene',
-};
+// SIN DIVERGENCIAS, y las dos que había se cerraron el 2026-08-30 corrigiendo el
+// DOCUMENTO. Su §6 describía la fachada anterior a `ADR-08006` —un texto que se
+// carga y una estructura que se devuelve—, y el barrido de alcance de esa decisión
+// no había alcanzado a la categoría 10. Lo encontró este sample.
+const divergencias = {};
+
 
 const esperadas = readFileSync(join(aqui, '..', 'esperado', 'salida.txt'), 'utf8').split('\n').filter((l) => l.length > 0);
 let declaradas = 0;
@@ -166,7 +168,9 @@ for (const l of verificacion) console.log(l);
 console.log('');
 const coinciden = esperadas.length - declaradas - noDeclaradas;
 if (noDeclaradas === 0) {
-  console.log(`  CONFORME CON DIVERGENCIAS DECLARADAS · ${coinciden}/${esperadas.length} líneas coinciden, ${declaradas} difieren por motivo escrito`);
+  console.log(declaradas === 0
+    ? `  CONFORME · las ${esperadas.length} líneas coinciden con el snapshot de §6`
+    : `  CONFORME CON DIVERGENCIAS DECLARADAS · ${coinciden}/${esperadas.length} líneas coinciden, ${declaradas} por motivo escrito`);
   process.exit(0);
 }
 console.log(`  NO CONFORME · ${noDeclaradas} línea(s) difieren sin motivo declarado`);

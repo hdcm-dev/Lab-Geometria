@@ -194,13 +194,11 @@ await navegador.close();
 // --------------------------------------------------------------------------
 for (const l of lineas) console.log(l);
 
-const divergencias = {
-  5: 'D-1 · el laboratorio NO entrega la figura mal escrita de E-5: la rechaza con una observacion y nunca se vuelve pieza. Desde ADR-08006, «no dibujada» del lado del visor y «rechazada» del lado del laboratorio son dos cosas en dos componentes distintos, y §6 —escrito antes— las trataba como una. NON_DRAWABLE_TYPE queda ademas SIN CAMINO: el laboratorio solo reconstruye los seis tipos que el visor dibuja, y el septimo, RectanguloDesarrollado, lo rechaza como figura raiz',
-  6: 'D-1 (misma causa) · el codigo y el mecanismo son EXACTAMENTE los que §6 describe —UNREADABLE_DIMENSION por una dimension ausente—; lo que cambia son los numeros, porque el laboratorio entrego una sola pieza y no dos',
-  8: 'D-2 · el visor no devuelve la estructura del texto, y es lo mismo que en visor/01-basico: no recibe el texto. Lo que el arbol necesita —dibujadas y no dibujadas con su motivo— si lo devuelve, y el anfitrion arma con eso las filas que se cuentan al lado',
-  10: 'D-1 (misma causa) · el renglon dice lo mismo que §6 salvo el indice: en E-8 la pieza enumerada como no dibujada es la 0 y no la 1, porque el laboratorio entrego una sola',
-  13: 'D-3 · INVALID_CANVAS_ELEMENT NO se emite en este curso. `resize` no comprueba el tamano: cae a `clientWidth || 1` y redimensiona a un pixel. La mitad que §6 afirma si se cumple —la instancia sigue viva con su escena y su seleccion intactas—; lo que falta es el aviso',
-};
+// SIN DIVERGENCIAS, y las cinco que había se cerraron el 2026-08-30 corrigiendo el
+// DOCUMENTO. Cuatro eran de `ADR-08006` —su §6 describía la fachada anterior— y la
+// quinta afirmaba un `INVALID_CANVAS_ELEMENT` que `resize` no emite.
+const divergencias = {};
+
 
 const esperadas = readFileSync(join(raiz, 'esperado', 'salida.txt'), 'utf8').split('\n').filter((l) => l.length > 0);
 let declaradas = 0;
@@ -231,7 +229,9 @@ for (const l of verificacion) console.log(l);
 console.log('');
 const coinciden = esperadas.length - declaradas - noDeclaradas;
 if (noDeclaradas === 0) {
-  console.log(`  CONFORME CON DIVERGENCIAS DECLARADAS · ${coinciden}/${esperadas.length} líneas coinciden, ${declaradas} difieren por motivo escrito`);
+  console.log(declaradas === 0
+    ? `  CONFORME · las ${esperadas.length} líneas coinciden con el snapshot de §6`
+    : `  CONFORME CON DIVERGENCIAS DECLARADAS · ${coinciden}/${esperadas.length} líneas coinciden, ${declaradas} por motivo escrito`);
   process.exit(0);
 }
 console.log(`  NO CONFORME · ${noDeclaradas} línea(s) difieren sin motivo declarado`);

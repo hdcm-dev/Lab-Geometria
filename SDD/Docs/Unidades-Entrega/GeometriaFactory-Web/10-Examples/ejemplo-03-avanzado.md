@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/visor/03-avanzado/`
@@ -71,22 +71,34 @@ samples/visor/03-avanzado/
 [4] Prender solo el giro: giro=prendido orbita=apagado (el no nombrado conserva su estado)
 [5] Cambio en vivo: disposicion, seleccion, encuadre, resultado de dibujo e identificador sin cambios
 [6] Invocar dos veces con el mismo valor: estado efectivo identico=si (idempotente)
-[7] Apagar el giro: piezas de vuelta en su orientacion de partida=si
+[7] Apagar el giro: piezas de vuelta en su orientacion de partida=no, quedan donde estaban
 [8] Cargar otro texto: estado de los dos movimientos conservado=si
 [9] Arrastre de camara y superficie no visible: los dos se detienen | estado gobernado sin cambios
-[10] Superficie del archivo de guion: funciones=6 | nombres propios en el objeto global=1 | globales sueltas=0
+[10] Superficie del archivo de guion: funciones=6 | nombres propios en el objeto global=1 | globales sueltas=1 (__THREE__)
 [10b] Ocurrencias de las tres formas de peticion, en la fuente y en el bundle generado: 0 y 0
 [11] PT-03: motor de dibujo dentro del bundle=si | dependencias de red externa en ejecucion=0
 [12] PT-02: carga=si escena=si E-1 con ortoedro=si diez recorridos sin degradar=si sincronizacion por indice=si
 [13] Peticiones de red con los dos movimientos prendidos y sostenidos, y durante rotar y acercar: 0
 [14] Claves escritas en el almacenamiento del navegador por la fachada: 0
-[15] Codigos que el archivo de guion puede informar: 7 de 7 del contrato | acunados aguas abajo: 0
+[15] Codigos que el archivo de guion puede informar: 6 de 7 del contrato | acunados aguas abajo: 0
 Funciones ejercidas: 6 de 6 | Propiedades transversales verificadas: 6 de 6 | Puertas tecnicas: 2 de 2
 ```
 
 **La línea `[13]` sólo vale con la condición de medición que declara.** El umbral es exactamente **0**, medido **con los dos movimientos prendidos y sostenidos**, que es el peor caso porque el bucle de dibujo corre de continuo, y **durante los gestos de rotar y acercar**. Medirlo con los movimientos apagados —lo que ocurre por defecto en un entorno que declara preferencia de movimiento reducido— dejaría la prueba en verde sin haber ejercitado nunca el bucle. La condición es **vinculante**, no una recomendación.
 
 **La línea `[10b]` inspecciona la fuente y el bundle generado, los dos.** Una dependencia que hiciera una petición por dentro no aparecería en la fuente, y el gate quedaría en verde sobre un archivo que sí hace red.
+
+**La línea `[7]` cambió en la versión 2.0, y es una decisión del Product Owner y no una corrección de redacción.** Este documento afirmaba que al apagar el giro las piezas **vuelven** a su orientación de partida. El bucle **deja de incrementar** `rotation.y` y nada más: las piezas se quedan donde estaban. Lo mismo la cámara con la órbita.
+
+**Se decidió que «apagar» significa detener y no volver**, y por dos motivos. El primero es que **la cámara la puede haber movido la persona** arrastrando, y devolverla al encuadre de partida le pisaría el suyo. El segundo es que `F-25` gobierna los dos movimientos **por separado y de forma simétrica**: si el giro volviera y la cámara no, dejarían de ser simétricos y habría que declarar por qué.
+
+**Lo que no se hace es dejar la afirmación vieja.** Un documento que dice «vuelven» sobre un producto que detiene le promete a quien integra algo que no va a pasar.
+
+**La línea `[10]` deja de exigir cero globales sueltas y declara la que hay.** `__THREE__` **no la pone el producto**: la registra el motor gráfico al cargarse, para avisar si hay dos copias suyas en la página. El nombre propio del paquete sigue siendo **uno solo** y las seis funciones están donde tienen que estar, que es lo que esta línea existe para medir. Exigir cero obligaría a parchear el motor, que es peor que declarar la global que trae.
+
+**La línea `[15]` pasa de siete códigos a seis, y el que falta lo retiró una decisión.** `UNREADABLE_TEXT` era el código del **texto del alumno**, que la fachada ya no recibe desde [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md). **No se retira del contrato de la fachada**, que lo declara para el caso en que el anfitrión entregue algo que la fachada no pueda usar; lo que deja de ser cierto es que el bundle pueda informar los siete.
+
+**Los acuñados aguas abajo siguen en cero, y estuvieron en uno.** Hasta el 2026-08-30 el bundle tenía `UNKNOWN` como respaldo de `reason ?? 'UNKNOWN'`, un código que el contrato no declara. Se retiró, y `MeshOutcome` pasó a ser una **unión discriminada** para que el caso que lo justificaba **no compile**.
 
 **La línea `[15]` protege la distinción entre código y curso.** Los códigos son **siete** y su fuente única es §6 del contrato de fachada; `UNKNOWN_INSTANCE` aparece en **cinco** funciones y `INVALID_CANVAS_ELEMENT` en **dos cursos**, y ninguno de esos hechos multiplica el conjunto. La sexta función **no emite ninguna condición propia**.
 
@@ -141,13 +153,13 @@ verificacion:
     exit_code: 0
     stdout_contiene:
       - "[1] Recorrido de las seis funciones con E-1: crear, cargar, seleccionar, ajustar, gobernar, destruir=6 de 6"
-      - "[7] Apagar el giro: piezas de vuelta en su orientacion de partida=si"
-      - "[10] Superficie del archivo de guion: funciones=6 | nombres propios en el objeto global=1 | globales sueltas=0"
+      - "[7] Apagar el giro: piezas de vuelta en su orientacion de partida=no, quedan donde estaban"
+      - "[10] Superficie del archivo de guion: funciones=6 | nombres propios en el objeto global=1 | globales sueltas=1 (__THREE__)"
       - "[10b] Ocurrencias de las tres formas de peticion, en la fuente y en el bundle generado: 0 y 0"
       - "[12] PT-02: carga=si escena=si E-1 con ortoedro=si diez recorridos sin degradar=si sincronizacion por indice=si"
       - "[13] Peticiones de red con los dos movimientos prendidos y sostenidos, y durante rotar y acercar: 0"
       - "[14] Claves escritas en el almacenamiento del navegador por la fachada: 0"
-      - "[15] Codigos que el archivo de guion puede informar: 7 de 7 del contrato | acunados aguas abajo: 0"
+      - "[15] Codigos que el archivo de guion puede informar: 6 de 7 del contrato | acunados aguas abajo: 0"
       - "Funciones ejercidas: 6 de 6 | Propiedades transversales verificadas: 6 de 6 | Puertas tecnicas: 2 de 2"
   evidencia:
     estado: "No verificado — sin código"
@@ -161,3 +173,4 @@ verificacion:
 | --- | --- | --- |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **1 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Tercera parte del sample **S-1**, la que cierra su promesa: ejerce las **seis** funciones de la fachada sin ninguna pieza del backend. Cubre `CU-12006` y `CU-12007`, las **ocho** reglas de gobierno del movimiento de §5.5, las **seis** propiedades transversales, los **siete** códigos y las **dos** puertas técnicas `PT-02` y `PT-03`. El contrato `VER-12003` declara nueve líneas exactas de salida y **tres precondiciones que son condiciones de medición vinculantes**; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-30 | **§6 se alinea con lo construido, en tres líneas y por tres motivos distintos.** **`[7]`** afirmaba que al apagar el giro las piezas vuelven a su orientación de partida: **detienen y no vuelven**, y el Product Owner decidió el 2026-08-30 que **«apagar» significa detener** —la cámara la puede haber movido la persona, y `F-25` gobierna los dos movimientos de forma simétrica—. **`[10]`** exigía cero globales sueltas y hay una, `__THREE__`, que **no la pone el producto** sino el motor gráfico al cargarse; exigir cero obligaría a parchearlo. **`[15]`** pasa de siete códigos a seis: `UNREADABLE_TEXT` era el del texto del alumno, que la fachada ya no recibe desde [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) —y **no se retira del contrato**, que lo declara para otro caso—. **Los acuñados aguas abajo siguen en cero y estuvieron en uno**: el respaldo `UNKNOWN` se retiró el 2026-08-30 y la unión discriminada de `MeshOutcome` volvió imposible el caso que lo justificaba. Las tres las encontró la implementación del sample. Sube **major**: tres líneas del snapshot cambian de contenido. |

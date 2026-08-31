@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Nivel:** Avanzado
-**Estado de esta carpeta:** **Implementado.** Corre en 0 y con 0 excepciones; **12 de 18 líneas coinciden con §6** y las otras 6 son divergencias declaradas (abajo). **Las dos inspecciones de umbral cero dan 0, medidas.**
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 18 líneas coinciden con §6**, desde que el 2026-08-30 su documento pasó a 2.0 y dejó de pedirle a la capa cuatro códigos que no existen. **Las dos inspecciones de umbral cero dan 0, medidas.**
 **Documento que la gobierna:** [`ejemplo-03-avanzado-infraestructura.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-infraestructura.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-03`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-03`, en estado `Sin verificar`
