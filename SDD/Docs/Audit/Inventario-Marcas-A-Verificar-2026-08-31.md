@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Inventario-Marcas-A-Verificar-2026-08-31.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Fecha:** 2026-08-31
 **Instrumento:** clasificación previa a la edición, con el precedente de [`Inventario-Renombre-F03-2026-08-31.md`](Inventario-Renombre-F03-2026-08-31.md)
 **Estado:** **Emitido.** Clasifica; **no toca una sola marca**
@@ -25,7 +25,7 @@
 | **`I-2`** | La **versión de la biblioteca de componentes de interfaz** | **12** | **SIN OBJETO — y CERRADA EN ORIGEN desde el 2026-08-20.** El desenlace nunca bajó a los diez lugares que la seguían pidiendo |
 | **`I-3`** | La **construcción de la imagen en destino desde el repositorio** | **22** | **VIVA, y bien declarada.** Se mide en la fase `i`; `BT-00026` la prueba |
 | **`I-4`** | La **disponibilidad de un dominio propio** para el túnel saliente | **1** | **VIVA.** Atada a `X-10`, que es una exclusión |
-| **`I-5`** | El **volumen de la comisión** | **9** | **VIVA, y es del Product Owner: es `D5`.** **No figura en `PRODUCT-INTAKE` §22** |
+| **`I-5`** | El **volumen de la comisión** | **9** | **CERRADA POR INCOGNOSCIBLE el 2026-08-20**, y no figuraba en `PRODUCT-INTAKE` §22. Lo que sobrevive es su **consecuencia**: el caudal quedó provisorio |
 | | *Prosa que habla de las marcas sin ser ninguna* | **9** | Recuentos, definiciones y filas que agregan varias |
 | | **Total** | **71** | |
 
@@ -124,7 +124,7 @@ comportamiento sobre las superficies**, la pregunta vuelve, y vuelve mejor plant
 |---|---|---|---|
 | **`I-3`** · imagen en destino | **Midiendo**, en la fase `i`. `BT-00026` la prueba una vez antes de depender de ella | Se resuelve sola al desplegar | **Consistente.** Las 22 apariciones dicen lo mismo, y tres declaran expresamente que la categoría escribe *cómo se prueba* pero **no declara que funcione** |
 | **`I-4`** · dominio propio | **Midiendo**, si aparece un dominio | Atada a `X-10`, exclusión vigente | **Consistente.** Una sola aparición dedicada |
-| **`I-5`** · volumen de la comisión | **Decidiendo.** Es un dato del Product Owner | **El Product Owner.** Es `D5` | **Inconsistente: no está en `PRODUCT-INTAKE` §22** |
+| ~~**`I-5`** · volumen de la comisión~~ **Ya no viva** | **Decidiendo** — y **decidida el 2026-08-20 por INCOGNOSCIBLE** | El Product Owner, que ya la tomó | **Inconsistente por partida doble: no estaba en `PRODUCT-INTAKE` §22, y `A3` no registraba su cierre** |
 
 ### 3.1 `I-5`, la incógnita que el §22 nunca registró
 
@@ -266,5 +266,6 @@ después de esta tanda.
 
 | Versión | Fecha | Descripción | Autor |
 |---|---|---|---|
+| 1.2 | 2026-08-31 | **Tercera corrección del día, y la más importante: `I-5` NO está viva.** El volumen de la comisión se **cerró por INCOGNOSCIBLE el 2026-08-20** —el Product Owner declaró que el dato no se sabe ni se puede saber, y que no se fija número—, en el commit `b4a4804` y sobre **cinco documentos**. Las emisiones 1.0 y 1.1 la dieron por viva porque la leyeron de `A3-Decisiones-Del-Product-Owner.md`, **que nunca registró ese desenlace**. **Lo sustantivo del hallazgo se mantiene**: la marca faltaba de verdad en `PRODUCT-INTAKE` §22, y el motivo de su ausencia —es la única de las cinco que **se decide y no se mide**— sigue en pie. Lo que cambia es su estado y, sobre todo, **qué sobrevive de ella**: no la pregunta, sino su consecuencia — el **caudal** de `A-5` perdió el fundamento del que se derivaba y quedó **provisorio** hasta `PT-05`. **Y la lección es distinta de la de las otras dos correcciones.** Acá el error no fue dejar de mirar el árbol: fue **mirar el árbol y concluir al revés**. Se verificó que no hay `MaxRequestBodySize`, ni herramienta de versión, ni herramienta de mutación, y se tomaron esas ausencias por «sin decidir» — cuando **`D4` se decidió adoptando el valor por omisión y `D8` se decidió con un NO**. Son decisiones **cuyo cumplimiento consiste en que no haya nada**, y en el árbol **«decidido que no» y «sin decidir» son indistinguibles**. Para esa clase de decisión el registro es la única fuente posible. | Orquestador SDD |
 | 1.1 | 2026-08-31 | **Dos correcciones a la emisión 1.0, las dos encontradas al ejecutar el cierre que este inventario habilitó.** **(a)** Decía que `I-1` la declaraban abiertas «nueve documentos»; son **10 apariciones en 9 documentos** —`Web/05` lleva dos—. **(b)** Presentaba a `I-2` como una incógnita **a cerrar**, y **ya estaba cerrada desde el 2026-08-20**: `PA-01` de `Web/05` §11 y `PA-03` de `Web/06` llevan el desenlace escrito con esa fecha. **Lo que estaba abierto no era la incógnita sino su propagación**: el desenlace no bajó a diez lugares, `PRODUCT-INTAKE` §17.2.P.1 —la fuente que acuñó la marca— entre ellos, y durante once días el corpus siguió pidiendo anclar la versión de una biblioteca que el producto había decidido no tener. **Con esto son tres los casos del mismo patrón en una sola jornada** —`D1` sin propagar al §22, `PT-01.a` sin propagar a nueve documentos, `PA-01` sin propagar a diez—, y ninguno es un error de juicio: **las tres son decisiones correctas que no volvieron sobre quien había hecho la pregunta.** | Orquestador SDD |
 | 1.0 | 2026-08-31 | Emisión inicial. Clasifica las **71** apariciones vivas de `[A VERIFICAR]` en **cinco** incógnitas, aplicando `Migracion-Rules.md` §4.1 —clasificar antes de editar— con el precedente del hallazgo `I-03`, donde una estimación de ~731 ocurrencias tenía una población real de **una**. Encuentra que **`I-1` está resuelta desde el 2026-08-13** y nueve documentos la declaran abierta; que **`I-2` no tiene objeto**; y que **`I-5`, el volumen de la comisión, no figura en `PRODUCT-INTAKE` §22** pese a estar rotulada en nueve lugares y a ser la única de las cinco que **se decide y no se mide**. Registra además que el parche `P-06` de la mesa del 2026-08-27 **le dio más plazo a una pregunta ya contestada**, que es el hallazgo `HM-02` del reporte 17 al framework **medido por segunda vez**. **No toca ninguna marca.** | Orquestador SDD |
