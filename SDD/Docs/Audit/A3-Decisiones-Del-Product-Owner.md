@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** A3-Decisiones-Del-Product-Owner.md
-**Versión:** 1.10
+**Versión:** 1.11
 **Fecha:** 2026-08-20
 **Instrumento:** paso **A3** de `Plan-Cierre-De-Pendientes.md` §2.2
 **Estado:** **Detención.** Presenta decisiones; **no toma ninguna**
@@ -260,6 +260,29 @@ continuación para que no haya dos series.
 
 ---
 
+## 4bis. Cuatro decisiones que no son de las ocho, y que tampoco esperan a la fase `i`
+
+**Las ocho de §2 están resueltas o diferidas con evento. Pero eso no quiere decir que no te quede nada
+por decidir**, y este documento sería engañoso si terminara ahí.
+
+Hay **cuatro puntos abiertos** que no entraron nunca a la lista de las ocho —son de categoría, no de
+producto— y que la escalada `E-04` cerró el 2026-08-30 asignándoles el **punto de control de la fase
+`i`**. **Ninguno de los cuatro se contesta en la fase `i`**: llegaron ahí porque el último punto de
+control es el destino por defecto de lo que no tiene evento propio.
+
+| Punto | Lo que rige hoy, medido contra el árbol |
+|---|---|
+| La **frecuencia del respaldo** | **No hay respaldo.** Ningún guion, ninguna tarea, nada en `deploy/` |
+| La **fecha de última modificación de la cuenta** | **No existe.** `Account.cs` sólo declara el sello de alta |
+| El **sello de desenlace** | **Existe disfrazado de `UpdatedAt`**, y es correcto sólo porque un invariante impide tocar un trabajo resuelto |
+| El **conjunto de tipos reconstruibles** | **Seis**, contra las siete y diez clases que el análisis menciona |
+
+**Los cuatro están presentados, con lo que rige de hecho y con una recomendación fundada**, en
+[`Fase-i-Que-Contesta-Y-Que-No-2026-08-31.md`](Fase-i-Que-Contesta-Y-Que-No-2026-08-31.md) §3. Ahí también
+está el barrido completo: **de los diez asuntos atados a la fase `i`, seis la necesitan y cuatro no**.
+
+---
+
 ## 5. Lo que este documento no sabe
 
 - **Los recuentos son aproximados.** El agrupamiento es por enunciado y varias familias se solapan;
@@ -272,6 +295,7 @@ continuación para que no haya dos series.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.11 | 2026-08-31 | **Entra §4bis, porque este documento estaba a punto de volverse engañoso.** Con las ocho de §2 resueltas o diferidas, el índice decía «ninguna espera una decisión del Product Owner» — **y eso es cierto de las ocho y falso del producto**. Quedan **cuatro puntos de categoría** que la escalada `E-04` cerró el 2026-08-30 asignándoles el punto de control de la fase `i`, y **ninguno de los cuatro se contesta ahí**: llegaron al último punto de control **porque es el destino por defecto de lo que no tiene evento propio**. Se los nombra con lo que rige de hecho, medido contra el árbol —**no hay respaldo**; la fecha de última modificación de la cuenta **no existe**; el sello de desenlace **existe disfrazado de `UpdatedAt`** y sólo es correcto porque un invariante protege el dato; los tipos reconstruibles son **seis**— y se remite a [`Fase-i-Que-Contesta-Y-Que-No-2026-08-31.md`](Fase-i-Que-Contesta-Y-Que-No-2026-08-31.md), que los presenta con recomendación. **Este documento sigue sin tomar ninguna decisión.** | Orquestador SDD |
 | 1.10 | 2026-08-31 | **`D7` no era una decisión pendiente del Product Owner: estaba diferida a la fase `i` desde el 2026-08-30.** La mesa del 2026-08-27 la escaló como `E-02` con tres opciones —elegir la herramienta, retirar el punto con `ADR-14004`, o reasignar el evento— y **el Product Owner contestó la (c)**: la elección va a la **fase `i` · Despliegue real**, que es cuando aparece el primer release real que hay que versionar. **El titular deja de ser el Product Owner y pasa a ser el equipo.** Las cinco filas de `-Api` `05`, `06` y `09` llevan el evento reasignado desde ese día y **dejaron de estar vencidas**; lo que faltaba era que llegara hasta acá. **Con esto no queda ninguna decisión esperando al Product Owner**: de las ocho de `A3`, cinco están cerradas, dos retiradas y una diferida con evento. Es la **cuarta** vez en dos días que una decisión suya no alcanza al documento que la enumera, y la segunda que me hace afirmar lo contrario de lo que pasó — ver el **reporte 24** al framework. | Orquestador SDD |
 | 1.9 | 2026-08-31 | **Revierte el error central de la emisión 1.8: `D4`, `D5` y `D8` NO estaban abiertas. Estaban decididas desde el 2026-08-20.** El commit `b4a4804` las cerró ese día sobre **cinco documentos de las dos unidades de entrega** y **no tocó éste**. `D4`: se adopta el **valor por omisión** del servidor HTTP, con la obligación derivada de declararlo explícitamente cuando se toque la composición. `D5`: **cerrada por INCOGNOSCIBLE** —el dato no se sabe ni se puede saber, y no se fija número—, con la consecuencia de que el **caudal** pierde su fundamento y queda provisorio hasta `PT-05`. `D8`: **cerrada con un NO**, el *mutation score* no entra al pipeline. **El recuento de §4 que la 1.8 declaró equivocado era el correcto**: las abiertas eran dos, `D6` y `D7`. Lo que faltaba no era el total sino **las entradas de §2**. Hoy, con `D6` retirada, **queda UNA: `D7`**. **Y lo que este ida y vuelta deja es la lección más cara del día, porque contradice la que veníamos sacando.** El error de la 1.8 no fue dejar de mirar el árbol: **fue mirarlo y concluir al revés.** Se verificó que no hay `MaxRequestBodySize`, ni herramienta de cálculo de versión, ni herramienta de mutación, y se tomaron esas ausencias por «sin decidir». Pero `D4` y `D8` son decisiones **cuyo cumplimiento consiste en que no haya nada**: en el árbol, **«decidido que no» y «sin decidir» son indistinguibles**, y ninguna verificación sobre el código puede separarlos. **Para esa clase de decisión el registro es la única fuente** — y el registro era exactamente lo que `b4a4804` no había actualizado. Se corrigen en consecuencia el índice de estado de §2, las tres entradas, el orden recomendado de §3 y el cierre de §4. | Orquestador SDD |
 | 1.8 | 2026-08-31 | **El recuento de decisiones abiertas estaba mal, y el documento que existe para que no se pierda una decisión perdía tres.** §4 cerraba afirmando que «`D6` y `D7` continúan abiertas — **dos**» y daba cuenta de cinco de las ocho: **`D4`, `D5` y `D8` no tenían desenlace en §2 ni entraban en el total**. **Eran cinco abiertas, no dos.** Entra un **índice de estado** al frente de §2 —la misma medicina que `M-03` de la mesa del 2026-08-31 le recetó al reporte de hallazgos: un índice que se arma **contando** encuentra lo que uno armado **recordando** no—, y `D4`, `D5` y `D8` reciben desenlace explícito. **Hoy quedan cuatro abiertas**: `D4`, `D5`, `D7` y `D8`. **`D5` se declara la más consecuente**, con tres razones medidas: `D1` se tomó sin ella y por eso el caudal quedó excluido y es **el único valor abierto del §22**; condiciona la ausencia de paginación en dos superficies; y **es la única marca `[A VERIFICAR]` del producto que se decide y no se mide**, motivo por el cual faltaba en el §22 hasta hoy. Se registra además que **el orden recomendado por §3 no se respetó**: `D5` era la primera y se tomó `D1`. **Ninguna de las tres omitidas estaba mal argumentada: se perdieron por no estar contadas.** Se corrige por último una afirmación de la emisión **1.7**, en `D6`: decía «el mismo hueco que este documento arrastra en **otras tres** entradas» **sin haberlas contado**; son **dos**, `D2` y `D6`. | Orquestador SDD |
