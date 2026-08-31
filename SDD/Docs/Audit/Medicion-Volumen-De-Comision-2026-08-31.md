@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Medicion-Volumen-De-Comision-2026-08-31.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-31
 **Instrumento:** [`tools/medicion-volumen-de-comision.sh`](../../../tools/medicion-volumen-de-comision.sh)
 **Estado:** **Emitido.** Mide el servicio de datos; **no cierra `PT-05`**
@@ -98,18 +98,34 @@ cientos» de `Web/05` §11 `PA-06` es sobre **la superficie**, no sobre el servi
 agrupadas por alumno, no de devolver JSON. Esta medición dice que **el servicio de datos no va a ser el
 motivo** de un rediseño por volumen; no dice nada sobre el otro lado.
 
-**Y el otro lado tiene una particularidad que conviene tener presente sin exagerarla.** El front es
-Blazor Interactive Server y **el hosting no ofrece WebSocket**: la sesión va por *long polling* sobre
-HTTP. **Eso está medido y funciona** — `PT-01.b` cerrado en **amarillo estable** y `PT-01.c` cerrado
-sobre el hosting real con navegador real, veinte minutos de navegación continua sin que el aviso de
-reconexión apareciera una sola vez. **No es un problema abierto**: el intake lo declara aceptado, con el
-fundamento de que la interacción continua —rotar, acercar, recorrer el árbol— **no viaja por el
-circuito**, porque el visor resuelve todo en el navegador. Por el circuito van actos discretos.
+~~**Y el otro lado tiene una particularidad que conviene tener presente sin exagerarla.** […] Lo único
+que corresponde anotar es que **pintar un listado grande es uno de esos actos discretos**, y su costo del
+lado del front **no está medido**.~~
 
-Lo único que corresponde anotar es que **pintar un listado grande es uno de esos actos discretos**, y su
-costo del lado del front **no está medido**. El producto ya tiene declarada la señal que lo delataría:
-que el aviso de reconexión aparezca seguido, o que la respuesta se degrade al crecer la cantidad de
-alumnos conectados. **Medirlo exige el front publicado, o sea la fase `i`.**
+> **CORREGIDO el 2026-08-31, el mismo día, en la emisión 1.1.** Este apartado afirmaba que **pintar el
+> listado viaja por el circuito de la sesión interactiva**, y **es falso para esa superficie**.
+> `ClassSubmissionList.razor` **no declara `@rendermode`** —la pieza pública registra el modo interactivo
+> y **sólo ocho componentes lo adoptan**, y éste no está—, y su filtro es un `<form method="get">`. El
+> propio código lo dice: *«los dos viajan por la dirección porque esta superficie es de render
+> estático»*. **La sesión interactiva no participa.**
+>
+> **La consecuencia es buena y por eso importa corregirlo:** el comportamiento del listado ante el
+> volumen **no depende del transporte**, de modo que el repliegue a long polling del hosting —medido,
+> aceptado y cerrado como `PT-01.b`— **no lo afecta**. Lo que se mide en local es **representativo**,
+> salvo la latencia de red, y **no un piso**.
+>
+> **Y el costo del front ya está medido**, desde el mismo día:
+> [`Medicion-Pintado-Del-Listado-2026-08-31.md`](Medicion-Pintado-Del-Listado-2026-08-31.md) — **96 ms a
+> treinta trabajos, 1,6 s y 1,2 MB a mil**, con un hallazgo propio: el esqueleto que el wireframe declara
+> para esta pantalla **no existe, y bajo render estático no puede existir**.
+
+**Lo que del párrafo original sigue en pie, y no es poco.** El hosting **no ofrece WebSocket** y la
+sesión va por *long polling*: está medido y **funciona** —`PT-01.b` en amarillo estable, `PT-01.c`
+cerrado sobre el hosting real con veinte minutos de navegación continua sin un solo aviso de
+reconexión—. El intake lo declara aceptado, con el fundamento de que la interacción continua —rotar,
+acercar, recorrer el árbol— **no viaja por el circuito** porque el visor resuelve todo en el navegador.
+**Eso no cambia.** Lo que cambia es que **el listado tampoco viaja por ahí**, y por lo tanto la reserva
+que este apartado dejaba abierta sobre él **no tenía objeto**.
 
 **Y no cierra `PT-05`.** `PT-05` mide la premisa completa de la topología **sobre uso real desde la
 facultad**, con alumnos de verdad y una red de verdad. Esto es un servicio en `localhost` contra un
@@ -149,4 +165,5 @@ Variables: `GF_MEDICION_CORTES` (por omisión `30 100 300 1000`), `GF_MEDICION_R
 
 | Versión | Fecha | Descripción | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-31 | **Corrige §4 el mismo día de la emisión.** Este informe advertía que **pintar el listado viaja por el circuito de la sesión interactiva**, y **es falso**: `ClassSubmissionList.razor` es de **render estático** —no declara `@rendermode`, y su filtro es un `<form method="get">`—, con lo cual la sesión interactiva no participa. **La consecuencia es buena**: el comportamiento del listado ante el volumen **no depende del transporte**, y el repliegue a long polling del hosting no lo afecta. La reserva que §4 dejaba abierta sobre el front **no tenía objeto**, y el costo real **ya está medido** en [`Medicion-Pintado-Del-Listado-2026-08-31.md`](Medicion-Pintado-Del-Listado-2026-08-31.md). **Lo que del párrafo sigue en pie se conserva**: el hosting no ofrece WebSocket, la sesión va por long polling, está medido y funciona. | Orquestador SDD |
 | 1.0 | 2026-08-31 | Emisión inicial. Mide `GET /trabajos` del administrador en cuatro cortes —30, 102, 300 y 1002 trabajos, de 10 a 334 alumnos— contra el umbral de **p99 ≤ 500 ms** que `D1` confirmó el 2026-08-26. **El servicio de datos no es el límite del volumen: 12,3 ms a mil trabajos, margen de cuarenta veces.** Verifica de paso, y sin proponérselo, el **NFR estructural** de `A-5` para `GeometriaFactory-Contracts`: el peso por fila se mantiene entre 257 y 262 bytes en los cuatro cortes, o sea que el payload de listado **no arrastra el `OriginalJson`** aunque los mil trabajos lleven el mismo texto real de `E1`. Declara explícitamente lo que **no** contesta: el costo de pintar el listado del lado de la pieza pública, que exige el front publicado, y `PT-05`, que mide sobre uso real desde la facultad. Nace de que **`D5` se cerró por incognoscible** el 2026-08-20 y la pregunta útil dejó de ser «cuántos alumnos» para pasar a ser «cuánto sostiene». | Orquestador SDD |
