@@ -13,7 +13,7 @@ internal static class SalidaEsperada
         "[1] Baja de la cuenta de administrador: rechazada OPERATION_NOT_APPLICABLE_TO_ADMINISTRATOR_ACCOUNT",
         "[2] Listado de la comision: 3 trabajos | borradores visibles: 0 (RN-04011)",
         "[2] Detalle de un trabajo en Borrador pedido por el administrador: WORK_OUTSIDE_ADMINISTRATOR_SCOPE",
-        "[2] Listado de la comision pedido por un alumno: rechazado SCOPE_REQUIRES_ADMINISTRATOR_ROLE",
+        "[2] Listado de la comision pedido por un alumno: rechazado ADMINISTRATOR_ROLE_REQUIRED",
         "[3] Aprobar desde Pendiente con comentario: Aprobado",
         "[3] Rechazar desde Pendiente sin comentario: Rechazado (el comentario es opcional)",
         "[3] Desenlace sobre un trabajo ya Aprobado: rechazado TRANSITION_FROM_TERMINAL_STATUS",

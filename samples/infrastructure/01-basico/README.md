@@ -38,8 +38,7 @@ Demostrar la mitad de esta capa que **no toca el almacén**: leer el texto que e
 **El sample está implementado y sus trece líneas coinciden.**
 
 ```bash
-dotnet run --project samples/infrastructure/01-basico              # los ocho escenarios
-dotnet run --project samples/infrastructure/01-basico -- --verificar   # y la comparación
+dotnet run --project samples/infrastructure/01-basico
 ```
 
 **Corre contra el intérprete REAL y sin un solo doble**, que es lo contrario del sample de la capa

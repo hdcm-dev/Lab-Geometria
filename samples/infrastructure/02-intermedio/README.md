@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Infrastructure
 **Nivel:** Intermedio
-**Estado de esta carpeta:** **Implementado.** Corre en 0 y con 0 excepciones; **9 de 14 líneas coinciden con §6** y las otras 5 son divergencias declaradas (abajo).
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 14 líneas coinciden con §6**, desde que el 2026-08-30 su documento pasó a 2.0. Las cinco que faltaban eran del documento: nombraban códigos que viven en el dominio con otro nombre, y uno que no existe en ninguna capa. La comparación además dejó de estar detrás de una bandera: **el comando documentado ahora verifica**.
 **Documento que la gobierna:** [`ejemplo-02-intermedio-infraestructura.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-02-intermedio-infraestructura.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-02`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-02`, en estado `Sin verificar`

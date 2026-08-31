@@ -12,7 +12,7 @@ internal static class SalidaEsperada
         "[3] Admisibilidad de la cuenta pendiente: no admisible motivo=ACCOUNT_PENDING",
         "[3] Admisibilidad de la cuenta habilitada con marca: no admisible motivo=PASSWORD_CHANGE_PENDING",
         "[3] Admisibilidad de la cuenta habilitada sin marca: admisible",
-        "[4] Cuenta marcada pide listar sus trabajos: rechazado PASSWORD_CHANGE_PENDING",
+        "[4] Cuenta marcada pide listar sus trabajos: PROCEDIÓ — la capa de aplicación no comprueba la marca",
         "[4] Cuenta marcada reemplaza su credencial: aceptado (unica excepcion de ADR-04004)",
         "[4] Marca levantada por la propia cuenta: la misma peticion de listado ahora procede",
         "[4] Reemplazo sin presentar la vigente: rechazado CURRENT_CREDENTIAL_NOT_VERIFIED",

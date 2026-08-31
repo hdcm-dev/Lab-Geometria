@@ -77,6 +77,13 @@ bitacora.Escribir(
 
 bitacora.Cerrar();
 
-return args.Contains("--verificar", StringComparer.Ordinal)
-    ? SalidaEsperada.Comparar(bitacora.Lineas)
-    : 0;
+// LA COMPARACIÓN CORRE SIEMPRE, Y ANTES ERA OPCIONAL.
+//
+// Hasta el 2026-08-30 estaba detrás de `--verificar`, y el comando que el §4 del documento declara
+// —y que el contrato de verificación de su §9 cita— **no pasa esa bandera**. Corrido como está
+// documentado, el sample imprimía sus renglones y devolvía **cero sin comparar nada**.
+//
+// ERA UN INSTRUMENTO QUE SE LEÍA COMO VERDE SIN HABER VERIFICADO, que es el defecto que estos
+// samples existen para encontrar en otros lados. Se midió sobre los nueve de .NET: **siete estaban
+// así**. Quien sólo quiera ver la salida la sigue viendo; lo que se agrega es el veredicto.
+return SalidaEsperada.Comparar(bitacora.Lineas);

@@ -88,4 +88,17 @@ var altura = lateral?.DeclaredWidth ?? lateral?.DeclaredLength;
 Escribir($"[E-7] Ortoedro: ancho={baseOrto.DeclaredLength:F2} profundidad={baseOrto.DeclaredWidth:F2} "
     + $"altura={altura:F2}");
 
-return args.Contains("--verificar", StringComparer.Ordinal) ? SalidaEsperada.Comparar(lineas) : 0;
+// LA COMPARACIÓN CORRE SIEMPRE, Y ANTES ERA OPCIONAL.
+//
+// Hasta el 2026-08-30 esto decía `args.Contains("--verificar") ? Comparar(lineas) : 0`, y el
+// comando que el §4 del documento declara —y que el contrato de verificación de su §9 cita— **no
+// pasa esa bandera**. Corrido como está documentado, el sample imprimía sus renglones y devolvía
+// **cero sin comparar nada**.
+//
+// ERA UN INSTRUMENTO QUE SE LEÍA COMO VERDE SIN HABER VERIFICADO, que es exactamente el defecto
+// que estos samples existen para encontrar en otros lados. Se midió sobre los nueve samples de
+// .NET: **siete estaban así**.
+//
+// Quien sólo quiera ver la salida la sigue viendo: los renglones se imprimen igual, y lo que se
+// agrega abajo es el veredicto.
+return SalidaEsperada.Comparar(lineas);

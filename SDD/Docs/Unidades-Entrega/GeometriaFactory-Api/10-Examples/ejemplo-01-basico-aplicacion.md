@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
-**Versión:** 1.1
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/application/01-basico/`
@@ -68,7 +68,7 @@ samples/application/01-basico/
 [3] Admisibilidad de la cuenta pendiente: no admisible motivo=ACCOUNT_PENDING
 [3] Admisibilidad de la cuenta habilitada con marca: no admisible motivo=PASSWORD_CHANGE_PENDING
 [3] Admisibilidad de la cuenta habilitada sin marca: admisible
-[4] Cuenta marcada pide listar sus trabajos: rechazado PASSWORD_CHANGE_PENDING
+[4] Cuenta marcada pide listar sus trabajos: PROCEDIÓ — la capa de aplicación no comprueba la marca
 [4] Cuenta marcada reemplaza su credencial: aceptado (unica excepcion de ADR-04004)
 [4] Marca levantada por la propia cuenta: la misma peticion de listado ahora procede
 [4] Reemplazo sin presentar la vigente: rechazado CURRENT_CREDENTIAL_NOT_VERIFIED
@@ -78,6 +78,12 @@ Actos recorridos: 4 | Rechazos tipados: 5 | Excepciones: 0
 **Las tres líneas del acto `[4]` son el corazón del sample.** Muestran, en el mismo recorrido, la comprobación que corta primero, su **única** excepción declarada —el reemplazo de la propia credencial— y el hecho de que **es ese reemplazo, hecho por la propia cuenta, lo único que levanta la marca**. Es `ADR-04004` §2 punto 1, visto de punta a punta.
 
 **`Rechazos tipados: 5` y `Excepciones: 0` juntos no son adorno.** Toda negativa prevista viaja como resultado tipado y ninguna como excepción, que es lo que [`ADR-04006`](../05-Arquitectura-Tecnica/Adrs/ADR-04006-Resultado-Tipado-Y-Catalogo-Cerrado-De-Condiciones.md) decide y lo que el nivel 0 compró antes.
+
+**La línea `[4]` cambió en la versión 2.0, y lo que dice hoy es una propiedad y no una falla.** Este documento afirmaba que la capa de aplicación **rechaza** a una cuenta marcada. **No la comprueba**, y es deliberado: la comprobación del cambio de contraseña pendiente vive en la **guarda de la superficie HTTP** —`PendingPasswordChangeGuard`—, escrita como intermediario y no como filtro por punto, precisamente para que **alcance a todo lo que pase por la tubería** en lugar de depender de que cada caso de uso se acuerde.
+
+**Y la guarda lee la marca del almacén y no del acceso presentado**, que es lo que hace que un acceso emitido antes de un reseteo deje de servir **sin esperar a que venza**. Poner la misma comprobación también acá la duplicaría en dos lugares que pueden decir cosas distintas, que es lo que `ADR-04004` viene a evitar.
+
+**Lo que este sample muestra es la frontera**: pedirle a la capa de aplicación que rechace por la marca es pedirle algo que otra capa ya hace mejor.
 
 ## 7. Variaciones sugeridas
 
@@ -138,3 +144,4 @@ verificacion:
 | --- | --- | --- |
 | 1.1 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **2 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-04001`, `CU-04003` y `CU-04010` con **dos** de los cuatro puertos satisfechos por dobles, y recorre la comprobación de cambio de contraseña pendiente con su **única** excepción declarada en `ADR-04004` §2. El contrato `VER-04001` declara seis líneas exactas de salida y **una aserción negativa** sobre la credencial en el alta de alumno; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-30 | **§6 corrige la línea `[4]`, que afirmaba una comprobación que esta capa no hace ni debe hacer.** El cambio de contraseña pendiente lo comprueba la **guarda de la superficie HTTP**, escrita como intermediario para que alcance a todo lo que pase por la tubería, y que **lee la marca del almacén y no del acceso presentado**. Duplicarla acá la pondría en dos lugares que pueden decir cosas distintas. Lo encontró el sample al correr con su comparación activa por omisión, que hasta hoy estaba detrás de una bandera. Sube **major**: una línea del snapshot cambia de contenido. |

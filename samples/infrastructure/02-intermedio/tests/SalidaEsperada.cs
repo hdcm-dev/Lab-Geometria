@@ -22,26 +22,27 @@ internal static class SalidaEsperada
         "[1] Trabajo de E-5 materializado: piezas=1 observaciones=1",
         "[2] Consulta de listado: 3 trabajos | componentes en el resultado: 0 | texto original en el resultado: no",
         "[2] Consulta de detalle: 1 trabajo | piezas y componentes presentes: si | texto original presente: si",
-        "[2] Consulta sin alcance declarado: rechazada QUERY_WITHOUT_DECLARED_SCOPE",
+        "[2] Consulta sin alcance declarado: sin camino en el puerto | operaciones de listado sin recorte: 0",
         "[3] Retiro de un trabajo: retirado | piezas, componentes y observaciones que quedaron: 0",
         "[4] Baja de la cuenta con 2 trabajos: arrastre aplicado | trabajos que quedaron de esa cuenta: 0",
-        "[4] Arrastre interrumpido a la mitad: PARTIAL_DELETION_NOT_ALLOWED | trabajos que quedaron: 2",
+        "[4] Arrastre no declarado: DELETION_WITHOUT_WORK_CASCADE | trabajos que quedaron: 2",
         "[5] Alta con un correo ya registrado: rechazada EMAIL_ALREADY_REGISTERED",
-        "[5] Segunda cuenta con papel Administrador: rechazada ADMINISTRATOR_UNIQUENESS_VIOLATED",
+        "[5] Segunda cuenta con papel Administrador: rechazada ADMINISTRATOR_ALREADY_CONFIGURED",
         "[5] Cuenta recuperada con su marca de cambio pendiente: si | estado sin alterar: si",
-        "[6] Escritura que reemplaza el texto original: rechazada WRITE_REWRITES_ORIGINAL_JSON",
-        "Actos recorridos: 5 | Rechazos tipados: 5 | Excepciones: 0",
+        "[6] Escritura que reemplaza el texto original: rechazada ORIGINAL_JSON_ALTERED | texto en el almacen: intacto",
+        "Actos recorridos: 5 | Rechazos tipados: 4 | Excepciones: 0",
     ];
 
     /// <summary>Las líneas cuya diferencia está declarada y explicada, con el motivo.</summary>
-    private static readonly Dictionary<int, string> Divergencias = new()
-    {
-        [6] = "D-1 · `QUERY_WITHOUT_DECLARED_SCOPE` no existe: el puerto no declara ninguna operación que la produzca",
-        [9] = "D-2 · el código es `DELETION_WITHOUT_WORK_CASCADE` y vive en el dominio",
-        [11] = "D-3 · el código es `ADMINISTRATOR_ALREADY_CONFIGURED` y vive en el dominio",
-        [13] = "D-4 · el código es `ORIGINAL_JSON_ALTERED` y vive en el dominio",
-        [14] = "consecuencia de D-1: los rechazos tipados alcanzables son cuatro y no cinco",
-    };
+    /// <summary>Sin divergencias: §6 se alineó con la capa el 2026-08-30.</summary>
+    /// <remarks>
+    /// LAS CINCO QUE HABÍA SE CERRARON CORRIGIENDO EL DOCUMENTO. Tres nombraban códigos que
+    /// existen **con otro nombre y en otra capa** —las condiciones se corrieron al dominio—, y
+    /// una nombraba uno que **no existe en ninguna** y cuya ausencia el puerto declara por
+    /// escrito. Ninguna conducta faltaba.
+    /// </remarks>
+    private static readonly Dictionary<int, string> Divergencias = new();
+
 
     internal static int Comparar(IReadOnlyList<string> producidas)
     {
@@ -74,8 +75,10 @@ internal static class SalidaEsperada
         Console.WriteLine();
         if (noDeclaradas == 0)
         {
-            Console.WriteLine($"  CONFORME CON DIVERGENCIAS DECLARADAS · {coinciden}/{Snapshot.Length} "
-                + $"líneas coinciden, {declaradas} difieren por motivo escrito");
+            Console.WriteLine(declaradas == 0
+                ? $"  CONFORME · las {Snapshot.Length} líneas coinciden con el snapshot de §6"
+                : $"  CONFORME CON DIVERGENCIAS DECLARADAS · {coinciden}/{Snapshot.Length} "
+                  + $"líneas coinciden, {declaradas} por motivo escrito");
             return 0;
         }
 

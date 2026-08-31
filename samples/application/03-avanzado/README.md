@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Application
 **Nivel:** Avanzado
-**Estado de esta carpeta:** **IMPLEMENTADO el 2026-08-29. Catorce de sus quince líneas coinciden**; la que falta es la misma divergencia que el `02-intermedio`: ver §4
+**Estado de esta carpeta:** **Implementado.** Corre en 0 y **las 15 líneas coinciden con §6**, desde que el 2026-08-30 su documento pasó a 2.0. La línea que faltaba era del documento: nombraba un código del dominio donde correspondía el de la capa de aplicación. La comparación además dejó de estar detrás de una bandera: **el comando documentado ahora verifica**.
 **Documento que la gobierna:** [`ejemplo-03-avanzado-aplicacion.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-aplicacion.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-03`, declarado en la §9 de ese documento
 **Sonda de sensado:** `SD-04003` de la `Matriz-Sensado-Deriva.md` de `GeometriaFactory-Api`, en estado `Sin verificar`
