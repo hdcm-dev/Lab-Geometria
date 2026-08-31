@@ -2,8 +2,8 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Reporte-Hallazgos-De-Los-Samples-2026-08-30.md
-**Versión:** 1.0
-**Estado:** Abierto — **nueve hallazgos, ninguno decidido**
+**Versión:** 2.0
+**Estado:** Abierto — **cuatro vivos de doce emitidos**. Cinco cerrados, dos retirados tras verificarlos contra el contrato, y tres nuevos que salieron de esa verificación
 **Fecha:** 2026-08-30
 **Autor:** Orquestador SDD
 **Instrumento:** La implementación de los dieciséis samples de las categorías `10-Examples`, corrida contra el producto real
@@ -34,7 +34,7 @@ Entre el 2026-08-27 y el 2026-08-30 se implementaron los **dieciséis samples** 
 
 **Los dos extremos dicen lo mismo desde lados opuestos.** Los de dominio cierran exactos porque el dominio **no depende de nada**: ninguna decisión de arquitectura posterior lo alcanzó. `web/01-datos-seed` cierra exacto porque es el documento **más nuevo**, el que menos decisiones atravesó desde que se escribió. Los que más divergen —los tres del visor— son los que quedaron entre una decisión y la otra.
 
-## 3. Los dos defectos
+## 3. Los dos defectos — **los dos cerrados el 2026-08-30**
 
 Son los únicos dos hallazgos donde el producto hace algo que ninguna fuente respalda. Los dos son del visor y **los dos son el mismo patrón**: el efecto ya ocurrió cuando se decide sobre él.
 
@@ -60,7 +60,7 @@ Son los únicos dos hallazgos donde el producto hace algo que ninguna fuente res
 
 **Lo que hace falta decidir.** Si «apagar» significa **detener** o significa **volver**. Las dos son defendibles; hoy el código hace la primera y el ejemplo afirma la segunda, y **nada declara cuál es la buena**. La decisión alcanza a los dos movimientos por igual.
 
-## 4. Los tres huecos entre el código y su contrato
+## 4. Los huecos entre el código y su contrato
 
 ### 4.1 `H-03` — Hay un punto HTTP expuesto que el contrato REST no declara
 
@@ -70,15 +70,15 @@ Son los únicos dos hallazgos donde el producto hace algo que ninguna fuente res
 
 **No es un punto olvidado en el código: es un punto olvidado en el contrato.** Lo mide `samples/api/03-avanzado`, contando sobre el documento OpenAPI que el propio servicio publica.
 
-### 4.2 `H-04` — `Issue` devuelve el mismo `null` para dos fallas de clase distinta
+### 4.2 ~~`H-04` — `Issue` devuelve el mismo `null` para dos fallas de clase distinta~~ — **RETIRADO**
 
-**Dónde:** `AccessTokenIssuer.Issue`.
+**No es un hallazgo, y el error es de método: se midió un componente aislado y se afirmó del producto.**
 
-**Qué pasa.** Devuelve `null` cuando falta la clave de firma **y** cuando faltan reclamos, junto con otros tres casos. Quien lo llama no puede distinguirlos.
+`CompositionRoot` **ya detiene el arranque** si la clave de firma falta o es más corta que el mínimo, con un mensaje que nombra la llave y nunca el valor. En la aplicación compuesta, la rama de clave ausente de `Issue` **es inalcanzable**.
 
-**Por qué no son la misma clase de falla.** Reclamos incompletos es un **pedido mal armado**: el llamador tiene el defecto y lo puede corregir. Clave de firma ausente es un **despliegue mal configurado**: nadie que pida un acceso lo puede arreglar, y el servicio no debería estar atendiendo. `scripts/store-path.sh` cuenta que este producto **ya eligió detenerse en el arranque ante configuración faltante**, por exactamente ese motivo. Acá el arranque sigue y la falla aparece, mucho después, como un acceso que no se emite.
+El sample `infrastructure/03` la alcanzó porque construye `AccessTokenIssuer` **directamente** — legítimo para un sample de capa. Lo que la versión 1.0 llamó «dos fallas indistinguibles del producto» es **una rama defensiva de un componente**, de la misma familia que `H-09` y que `NON_DRAWABLE_TYPE`.
 
-**Lo que la fuente esperaba.** `ejemplo-03-avanzado-infraestructura.md` §6 pide `SIGNING_KEY_MISSING` e `INCOMPLETE_CLAIMS`, dos códigos que no existen.
+**Queda como constancia y no se borra**: se emitió, se verificó, no procede.
 
 ### 4.3 `H-05` — La capa de infraestructura declara dos códigos tipados y sus ejemplos le piden seis
 
@@ -88,7 +88,7 @@ Son los únicos dos hallazgos donde el producto hace algo que ninguna fuente res
 
 **No es el mismo caso que `infrastructure/02`.** Allá los códigos existían con otro nombre y en otra capa —`DELETION_WITHOUT_WORK_CASCADE`, `ADMINISTRATOR_ALREADY_CONFIGURED`, `ORIGINAL_JSON_ALTERED`, los tres en el dominio—. Acá no existen.
 
-## 5. Los dos que se ven hacia afuera
+## 5. Los que se ven hacia afuera
 
 ### 5.1 `H-06` — El mensaje del arranque detenido lleva una traza, y nombra el síntoma
 
@@ -100,11 +100,53 @@ Son los únicos dos hallazgos donde el producto hace algo que ninguna fuente res
 
 **El arranque sí se detiene**, que es lo que `US-00028` exige, y con cero peticiones atendidas durante todo el intento.
 
-### 5.2 `H-07` — Los `401` de autenticación vuelven sin código de contrato
+### 5.2 ~~`H-07` — Los `401` de autenticación vuelven sin código de contrato~~ — **RETIRADO**
 
-**Qué pasa.** Los tres —sin acceso, acceso vencido, firma ajena— responden con `Content-Length: 0`. Los emite la tubería de autenticación, **antes de que corra una línea de código del producto**, así que la traducción de errores nunca los ve.
+**No es un hallazgo: el contrato lo declara, y el que estaba mal era el ejemplo.**
 
-**No es una fuga:** no hay nada adentro que pueda filtrarse. Pero rompe la uniformidad que `ejemplo-01-basico-api.md` §6 daba por sentada, **y justo en las respuestas que un cliente ve más seguido**: las de la sesión vencida.
+`Contratos-REST.md` **§5.1** se titula «Las dos respuestas sin código del contrato» y declara exactamente las dos que el sample midió:
+
+| Respuesta | Por qué no lleva código, según el contrato |
+| --- | --- |
+| `401` de la guardia | *«El conjunto cerrado no declara ninguno que describa una credencial ausente o inválida, y esta capa no inventa códigos»* |
+| `400` de petición ilegible | *«Ocurre antes de que la petición llegue a ser el tipo del contrato: no hay contrato con el que hablar todavía»* |
+
+Y cierra: ***«Las dos son deliberadas y se declaran para que su ausencia de código no se lea como un olvido.»***
+
+**El hallazgo real es el inverso del reportado**: el §6 del ejemplo `01-basico-api` esperaba `6 de 6` y **contradecía al contrato de su propia unidad**. Se corrigió el documento —pasó a **1.1**— y el sample cierra en **13 de 13**.
+
+**Lección de método:** un sample que discrepa del producto obliga a leer **las dos** fuentes antes de decidir cuál está mal. La versión 1.0 leyó una.
+
+## 5bis. Los tres que salieron de verificar los dos retirados
+
+Al golpear la superficie de error completa **en los dos entornos** —que es lo que la versión 1.0 no hizo— aparecieron tres cosas que ningún sample medía.
+
+### 5bis.1 `H-10` — La garantía de `RA-03` dependía de una variable de entorno — **CERRADO**
+
+Ante un cuerpo ilegible el servicio respondía **distinto según el entorno**: en `Production` un `400` vacío; en `Development`, `text/plain` con `BadHttpRequestException` **y el nombre de un tipo interno del producto**.
+
+§5.4 prohíbe *«nombres de tipos internos»* **y no admite excepción por entorno**. Un despliegue arrancado con `ASPNETCORE_ENVIRONMENT=Development` filtraba, **y nadie se enteraba**, porque en la máquina de desarrollo siempre se vio así.
+
+**Decidido por el Product Owner:** que los dos entornos se comporten igual. El detalle no se pierde, **se muda al registro**, que es donde el propio §5.4 dice que tiene que estar.
+
+### 5bis.2 `H-11` — No había manejador de excepciones — **CERRADO**
+
+Un defecto no previsto respondía `500` **con el cuerpo vacío**. §4 le pide «nunca lleva detalle de implementación» —se cumplía— y §5.4 pide, para lo que no se puede decir, **«el código genérico, con su código de respuesta»**. Vacío no es el genérico: `UNCLASSIFIED_ERROR` existe y por esa vía no llegaba nunca.
+
+Se cerró con `ContractErrorHandler`, que **no toca** el `401`, el `404`, el `405` ni el `415`: los dos primeros están declarados sin código, los otros son del protocolo y no del producto. Darles un código haría crecer un conjunto cerrado por motivos ajenos al producto.
+
+**Quedó fijado con cuatro pruebas**, una sobre la decisión que más fácil se revierte por descuido: que el `400` de petición ilegible **siga yendo sin cuerpo**.
+
+### 5bis.3 `H-12` — Un apartamiento que vive en un comentario de código — **ABIERTO**
+
+`ContractTranslation.cs` declara en su cabecera un **apartamiento** con su fundamento: `UNCLASSIFIED_ERROR` sale con `409` en dos motivos y no con `500`, porque «un `500` le diría a la persona que el producto falló cuando lo que pasa es que la operación no procede sobre esa cuenta». **El fundamento se sostiene.**
+
+Dos cosas no:
+
+- **`Root-Rules.md` §11 pide que un apartamiento sea un ADR con seis campos**, no un comentario en un archivo de código. Un comentario no tiene estado, ni disparadores que lo superen, ni cuenta de saltos de versión sobrevividos — y es exactamente lo que el reporte `19` al framework describe desde otro lado.
+- **`Contratos-REST.md` §5.2 afirma que el genérico «bajó de cuatro destinos a dos».** Tiene **tres**: `503`, `409` y `500`. El documento dice algo que el código contradice, y no lo sabe.
+
+**Se propone** emitir el ADR y corregir el recuento — **no** retirar el `409`.
 
 ## 6. El hallazgo de fondo: una decisión que se propagó hacia arriba y no hacia abajo
 
@@ -146,17 +188,22 @@ Y una contradicción de documento, sin consecuencia sobre el código: `ejemplo-0
 
 | # | Hallazgo | Quién decide |
 | --- | --- | --- |
-| `H-01` | La selección rechazada que borra la vigente. **Es un defecto y no tiene lectura alternativa** | Equipo, con corrección |
+| ~~`H-01`~~ | **CERRADO.** La comprobación va antes del efecto; el sample `visor/02` lo verifica | Hecho |
 | `H-02` | Si «apagar un movimiento» significa detener o volver | Product Owner |
 | `H-03` | Qué se hace con `POST /interpretaciones`: entra al contrato o sale del código | Product Owner |
-| `H-04` | Si las dos fallas de `Issue` deben distinguirse, y si la clave ausente debe detener el arranque como ya hace el almacén | Product Owner |
+| ~~`H-04`~~ | **RETIRADO.** El arranque ya se detiene sin clave; la rama es defensiva e inalcanzable | — |
 | `H-05` | Si la capa de infraestructura debe declarar los códigos que sus ejemplos le piden, o si los ejemplos deben decir lo que la capa hace | Product Owner |
-| `H-06` | La traza en el mensaje del arranque detenido, y que nombre el síntoma en vez de la causa | Equipo |
-| `H-07` | Si los `401` de la tubería deben llevar código de contrato | Product Owner |
+| ~~`H-06`~~ | **CERRADO.** Detenerse pasó a ser una decisión, con salida `78` | Hecho |
+| ~~`H-07`~~ | **RETIRADO.** El contrato declara esas dos respuestas sin código. Se corrigió el ejemplo |  — |
 | `H-08` | **Qué se hace con los tres §6 del visor, y si el barrido de alcance debe incluir la categoría 10 por regla** | Product Owner |
-| `H-09` | El código `UNKNOWN` acuñado aguas abajo | Equipo |
+| ~~`H-09`~~ | **CERRADO.** Retirado, y la unión discriminada lo volvió imposible | Hecho |
+| ~~`H-10`~~ | **CERRADO.** Los dos entornos se comportan igual; el detalle va al registro | Hecho |
+| ~~`H-11`~~ | **CERRADO.** El defecto no previsto sale con el código genérico | Hecho |
+| `H-12` | El apartamiento del `409` como ADR, y el recuento de §5.2 del contrato | Product Owner |
 
 **Ninguno impide seguir.** Los dieciséis samples corren y los dieciséis declaran por escrito lo que no coincide.
+
+**Y dos de los doce no eran hallazgos.** Se dejan tachados y con su motivo en lugar de borrarlos: un reporte que hace desaparecer lo que se equivocó no deja aprender de qué se equivocó.
 
 ## 9. Una observación sobre el instrumento
 
@@ -172,4 +219,5 @@ Correr los dieciséis samples es exactamente eso: volver a leerlos, con el produ
 
 | Versión | Fecha | Cambio |
 | --- | --- | --- |
+| 2.0 | 2026-08-30 | **Dos hallazgos se retiran, tres entran, y cinco pasan a cerrados.** `H-07` no era un hallazgo: `Contratos-REST.md` §5.1 declara las dos respuestas sin código, deliberadamente y por escrito; el que contradecía al contrato era el §6 del ejemplo, corregido a 1.1 y con su sample en 13/13. `H-04` tampoco: `CompositionRoot` ya detiene el arranque sin clave de firma, de modo que la rama de `Issue` es defensiva e inalcanzable en la aplicación compuesta, y el sample la alcanzó construyendo el emisor directamente. **Los dos errores son del mismo método** —leer una sola fuente, y medir un componente aislado para afirmar del producto— y por eso se dejan tachados en lugar de borrados. De verificarlos salieron **`H-10`**, **`H-11`** y **`H-12`**: los dos primeros ya cerrados, el tercero abierto. `H-01`, `H-06` y `H-09` pasan a cerrados. Sube **major**: el conjunto de hallazgos cambia. |
 | 1.0 | 2026-08-30 | Emisión. Nueve hallazgos de la implementación de los dieciséis samples, más tres divergencias investigadas y cerradas como no-hallazgo. Ninguno decidido. |

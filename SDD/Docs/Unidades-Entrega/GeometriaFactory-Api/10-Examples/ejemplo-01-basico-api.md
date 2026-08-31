@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-01-basico.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-30
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Básico
 **Ubicación del código:** `/samples/api/01-basico/`
@@ -75,14 +75,16 @@ samples/api/01-basico/
 [envio] E-5: observacion de error indice-figura=1 campo=Tipo
 [envio] E-8: 201 | estado del trabajo: Borrador
 [envio] E-8: observacion de error localizada por indice de figura y campo
-[traduccion] Respuestas con codigo del contrato reconocido: 6 de 6
+[traduccion] Respuestas con codigo del contrato reconocido: 4 de 4
 [traduccion] Respuestas con direccion, ruta, traza o secreto: 0
-Peticiones ejecutadas: 14 | Respuestas comparadas: 14 | Diferencias: 0
+Peticiones ejecutadas: 17 | Respuestas comparadas: 13 | Diferencias: 0
 ```
 
 **Las dos líneas de `[envio]` con `201` y `Borrador` juntas son la lección entera.** El código es de **éxito** y el trabajo quedó guardado; lo que no verificó es **el texto del alumno**, y eso viaja en el cuerpo y no en el número. Un servicio que devolviera `400` acá estaría diciendo que la petición está mal formada, y no lo está: el alumno mandó exactamente lo que su programa emite.
 
 **`E-8` está en este sample y no sólo en la colección** porque es el modo de falla que el propio `PRODUCT-INTAKE` §20.E-8 llama **el más probable de todos**: lo produce la configuración regional de la máquina —la coma decimal— y no un error de programación del alumno.
+
+**La primera línea de `[traduccion]` cuenta sobre las respuestas que LLEVAN cuerpo, y son cuatro.** No es que falten dos: [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) §5.1 declara **dos respuestas sin código del contrato** —el `401` de la guardia y el `400` de petición ilegible—, y las declara *«para que su ausencia de código no se lea como un olvido»*. Los tres `401` de este recorrido son de la guardia. **Contarlos como si debieran traer código haría que este ejemplo contradijera al contrato de su propia unidad**, que es lo que su versión 1.0 hacía.
 
 **La última línea de `[traduccion]` tiene umbral exactamente cero y es `RA-03`.** Ninguna respuesta lleva la dirección de un servicio interno, la ruta del archivo del almacén, una traza ni un secreto. Esta capa es **la última que toca un dato del backend antes de que salga del servidor propio**, y por eso acá es donde esa regla se puede violar hacia afuera.
 
@@ -140,9 +142,9 @@ verificacion:
         body_json: { estado: "Borrador" }
     stdout_contiene:
       - "[envio] E-5: observacion de error indice-figura=1 campo=Tipo"
-      - "[traduccion] Respuestas con codigo del contrato reconocido: 6 de 6"
+      - "[traduccion] Respuestas con codigo del contrato reconocido: 4 de 4"
       - "[traduccion] Respuestas con direccion, ruta, traza o secreto: 0"
-      - "Peticiones ejecutadas: 14 | Respuestas comparadas: 14 | Diferencias: 0"
+      - "Peticiones ejecutadas: 17 | Respuestas comparadas: 13 | Diferencias: 0"
     stdout_no_contiene:
       - "[envio] E-5: 400"
       - "indice-figura=0"
@@ -157,4 +159,5 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-30 | **§6 se corrige contra el contrato de la unidad, después de que el sample lo midiera.** La línea de `[traduccion]` esperaba `6 de 6` respuestas con código; el árbol da `4 de 4`, y el que estaba mal era este documento: [`../05-Arquitectura-Tecnica/Contratos-REST.md`](../05-Arquitectura-Tecnica/Contratos-REST.md) **§5.1** declara **dos respuestas sin código del contrato** —el `401` de la guardia y el `400` de petición ilegible— y las declara deliberadas. Los tres `401` del recorrido son de la guardia, así que exigirles código era contradecir al contrato de la propia unidad. **Se corrige además el pie**, que declaraba 14 peticiones y 14 renglones: el recorrido necesita **17** peticiones —las tres sondas de la guardia, el reseteo y la cuenta pendiente— y produce **13** renglones. §6 suma el párrafo que explica por qué son cuatro y no seis. Sube **minor**: corrige afirmaciones de este documento y no cambia el objeto del ejemplo ni ninguna decisión del producto. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-00001`, `CU-00002` y `CU-00009` sobre **seis** puntos de acceso y **dos** escenarios reales, `E-5` y `E-8`, transcriptos sin modificación. Declara por qué los archivos de cuerpo llevan extensión `.txt`, por qué las cuatro primeras peticiones son preparación y no objeto, y por qué `A-04` no aparece. El contrato `VER-00001` declara **cuatro** aserciones de respuesta HTTP con código y cuerpo, cuatro líneas exactas de salida y **tres aserciones negativas**; `evidencia` queda en `No verificado — sin código`. |
