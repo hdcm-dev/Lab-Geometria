@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Reporte-Hallazgos-De-Los-Samples-2026-08-30.md
-**Versión:** 5.0
+**Versión:** 6.0
 **Estado:** Abierto — **cuatro vivos de doce emitidos**. Cinco cerrados, dos retirados tras verificarlos contra el contrato, y tres nuevos que salieron de esa verificación
 **Fecha:** 2026-08-30
 **Autor:** Orquestador SDD
@@ -190,7 +190,7 @@ Y una contradicción de documento, sin consecuencia sobre el código: `ejemplo-0
 | --- | --- | --- |
 | ~~`H-01`~~ | **CERRADO.** La comprobación va antes del efecto; el sample `visor/02` lo verifica | Hecho |
 | ~~`H-02`~~ | **CERRADO.** El Product Owner decidió que apagar es **detener**; el §6 del ejemplo pasó a 2.0 | Hecho |
-| `H-03` | Qué se hace con `POST /interpretaciones`: entra al contrato o sale del código | Product Owner |
+| ~~`H-03`~~ | **CERRADO.** Entra al contrato como `A-18`, que la categoría 02 ya declaraba. `Contratos-REST.md` 1.5 | Hecho |
 | ~~`H-04`~~ | **RETIRADO.** El arranque ya se detiene sin clave; la rama es defensiva e inalcanzable | — |
 | ~~`H-05`~~ | **CERRADO.** Los ejemplos dicen lo que la capa hace; no se agregan cuatro códigos sin consumidor | Hecho |
 | ~~`H-06`~~ | **CERRADO.** Detenerse pasó a ser una decisión, con salida `78` | Hecho |
@@ -199,7 +199,7 @@ Y una contradicción de documento, sin consecuencia sobre el código: `ejemplo-0
 | ~~`H-09`~~ | **CERRADO.** Retirado, y la unión discriminada lo volvió imposible | Hecho |
 | ~~`H-10`~~ | **CERRADO.** Los dos entornos se comportan igual; el detalle va al registro | Hecho |
 | ~~`H-11`~~ | **CERRADO.** El defecto no previsto sale con el código genérico | Hecho |
-| `H-12` | El apartamiento del `409` como ADR, y el recuento de §5.2 del contrato | Product Owner |
+| `H-12` | **Agrandado y elevado.** No son tres destinos del genérico sino **cuatro** —`503`, `500`, `409` y `403`—, por **dos** apartamientos declarados en un comentario de código. §5.2 afirmaba «bajó de cuatro a dos»: el contrato 1.5 suma la constancia de que tiene cuatro. Falta darles forma de ADR | Product Owner |
 | `H-14` | **Dos códigos de facultad sin traducción** —`ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH` y `SCOPE_REQUIRES_ADMINISTRATOR_ROLE`— caerían al genérico con `500` donde corresponde `403`. **Los dos son inalcanzables hoy**, verificado uno por uno; declarado en `ADR-04004` §7.1 | Equipo, dos líneas |
 
 **Ninguno impide seguir.** Los dieciséis samples corren y los dieciséis declaran por escrito lo que no coincide.
@@ -241,3 +241,4 @@ Correr los dieciséis samples es exactamente eso: volver a leerlos, con el produ
 | 3.0 | 2026-08-30 | **`H-02`, `H-05` y `H-08` cerrados.** Los cuatro §6 que describían algo que el producto no hace —los tres del visor y el de `03-avanzado-infraestructura`— pasaron a **2.0**, y sus cuatro samples cierran **sin divergencias**. En los cuatro se corrigió **el documento y no el producto**, con un motivo escrito por línea. `H-02` llevó una decisión del Product Owner: **«apagar» un movimiento significa detener y no volver**, porque la cámara la puede haber movido la persona y `F-25` gobierna los dos movimientos de forma simétrica. La observación de `ADR-08006` pasó a **5.0** declarando que su alcance era de **cuatro** afirmaciones y no de tres. **Del reporte quedan vivos `H-03` y `H-12`.** Sube **major**. |
 | 4.0 | 2026-08-30 | **Entra `H-13`, ya cerrado, y es el más incómodo de la serie: estaba en el instrumento.** Siete de los nueve samples de .NET corrían su comparación **sólo detrás de `--verificar`**, y el comando que su documento declara no la pasa: devolvían **cero sin comparar nada**. Se verificó primero si alguna afirmación previa era falsa —**ninguna lo era**— y después se hizo que la comparación corra siempre. Las tres divergencias de `application` que eso destapó resultaron **tres errores de §6 de tres naturalezas distintas**, y sus documentos pasaron a 2.0. Se alineó además el §6 de `infrastructure/02`, que nombraba cuatro códigos inexistentes —tres viven en el dominio con otro nombre y uno **no existe en ninguna capa**, con su ausencia declarada por escrito en el puerto—. **Los dieciséis samples cierran hoy sin divergencias, con el comando de su documento.** Sube **major**. |
 | 5.0 | 2026-08-31 | **`ADR-04004` pasa a 2.0, de `Propuesto` a `Aprobado`, y con la decisión cambiada.** Exigía las cuatro comprobaciones en **un único componente**; lo construido son **cuatro lugares**, y se corrigió el ADR y no el código porque la distribución es mejor que lo que pedía: mover la pertenencia y el alcance fuera del dominio las volvería invisibles para quien lee la entidad, y mover la marca fuera del intermediario reintroduce el defecto de que un punto nuevo se olvide y **nada falle**. **Todo lo demás del ADR se verificó cierto y se conservó**: el orden y sus dos motivos, el `404` que nunca es `403`, el código único de la marca y el alcance trasladado a la consulta. **Entra `H-14`**, medido al hacerlo: dos códigos de facultad sin traducción que responderían `500` donde corresponde `403`, los dos inalcanzables hoy. Es la **quinta** rama defensiva inalcanzable que aparece en este producto, y la primera cuya respuesta sería incorrecta. Sube **major**. |
+| 6.0 | 2026-08-31 | **`H-03` cerrado, y su causa resultó ser la misma que la de `H-08`.** `POST /interpretaciones` no era un punto olvidado en el código: **`ADR-08006` lo creó como su contrapartida declarada** —si el visor recibe piezas y no texto, previsualizar necesita que alguien las reconstruya— y la categoría **02 lo declara como `A-18`**. El barrido de alcance de esa decisión **llegó a la 02, y no a la 05 ni a la 10**: tres categorías alcanzadas, dos omitidas. Se adoptó en `Contratos-REST.md` **1.5** con sus cuatro recuentos, y el sample `api/03` pasó de 7/10 a **9/10**. **`H-12` se agranda**: el genérico no tiene tres destinos sino **cuatro**, por **dos** apartamientos en comentarios de código, y §5.2 afirmaba que «bajó de cuatro a dos» — el contrato suma la constancia y eleva la forma. Sube **major**. |
