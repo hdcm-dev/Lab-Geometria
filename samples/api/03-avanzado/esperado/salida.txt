@@ -1,5 +1,5 @@
 [1] Arranque, fase 1: transformaciones aplicadas sobre el almacen | peticiones atendidas durante la fase 1: 0
-[1] Arranque, fase 2: la superficie atiende | puntos de acceso expuestos: 15
+[1] Arranque, fase 2: la superficie atiende | puntos de acceso expuestos: 17
 [2] Punto de salud sin acceso firmado: 200 | acceso exigido: no
 [2] Punto de salud con el almacen indisponible: 503
 [3] Arranque sobre un almacen de linaje desconocido: detenido | peticiones atendidas: 0

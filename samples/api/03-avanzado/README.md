@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Proyecto de código:** GeometriaFactory-Api
 **Nivel:** Avanzado
-**Estado de esta carpeta:** **Implementado.** Corre en 0; **7 de 10 líneas coinciden con §6** y las otras 3 son divergencias declaradas (abajo). **Dos de las tres son hallazgos sobre el producto.**
+**Estado de esta carpeta:** **Implementado.** Corre en 0; **9 de 10 líneas coinciden con §6** y la única divergencia es el `503` de `A-16`, que **no tiene camino** y está declarado como tal.
 **Documento que la gobierna:** [`ejemplo-03-avanzado.md`](../../../SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/10-Examples/ejemplo-03-avanzado-api.md) 1.0, del que este README es la copia corta de §1, §3 y §4
 **Contrato de verificación:** `VER-03`, declarado en la §9 de ese documento
 **Sonda de sensado:** [`SD-03`](../../../SDD/Docs/Proyectos/GeometriaFactory-Api/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), en estado `Sin verificar`
@@ -48,10 +48,13 @@ Los cuatro actos de §5. **Este es el único sample de la unidad que levanta el 
 
 | # | §6 espera | El árbol |
 | --- | --- | --- |
-| `D-1` | `puntos de acceso expuestos: 15` | **17 operaciones sobre 13 rutas** |
 | `D-3` | `Punto de salud con el almacen indisponible: 503` | **sin camino** |
 
-**`D-1` — hay una operación expuesta que el contrato REST no declara.** `Contratos-REST.md` lista dieciséis puntos de acceso —`A-01` a `A-17`, sin el `A-04`, retirado—. El servicio expone diecisiete operaciones, y la que sobra es **`POST /interpretaciones`**: está implementada, exige acceso firmado y papel `Alumno`, tiene sus comentarios de diseño escritos… y **no figura en esa tabla**. No es un punto olvidado en el código: es un punto olvidado en el contrato.
+### La otra que se cerró: el punto expuesto que el contrato no declaraba
+
+Este sample contaba **diecisiete** operaciones expuestas contra **dieciséis** declaradas en `Contratos-REST.md`. La que sobraba era **`A-18`** —`POST /interpretaciones`—, y no era un punto olvidado en el código: **estaba declarado en la categoría 02** y `ADR-08006` lo creó como su contrapartida. El barrido de alcance de esa decisión **llegó a la 02 y no a la 05**.
+
+Se adoptó en `Contratos-REST.md` **1.5** el 2026-08-31, con sus cuatro recuentos actualizados. Hoy el servicio expone diecisiete y el contrato declara diecisiete.
 
 ### La que se cerró: el mensaje del arranque detenido
 

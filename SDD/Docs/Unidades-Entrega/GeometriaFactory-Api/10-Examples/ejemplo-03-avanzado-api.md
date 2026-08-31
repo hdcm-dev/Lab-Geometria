@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ejemplo-03-avanzado.md
-**Versión:** 1.0
+**Versión:** 2.0
 **Estado:** Aprobado
-**Fecha:** 2026-08-11
+**Fecha:** 2026-08-31
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Avanzado
 **Ubicación del código:** `/samples/api/03-avanzado/`
@@ -62,7 +62,7 @@ samples/api/03-avanzado/
 
 ```
 [1] Arranque, fase 1: transformaciones aplicadas sobre el almacen | peticiones atendidas durante la fase 1: 0
-[1] Arranque, fase 2: la superficie atiende | puntos de acceso expuestos: 15
+[1] Arranque, fase 2: la superficie atiende | puntos de acceso expuestos: 17
 [2] Punto de salud sin acceso firmado: 200 | acceso exigido: no
 [2] Punto de salud con el almacen indisponible: 503
 [3] Arranque sobre un almacen de linaje desconocido: detenido | peticiones atendidas: 0
@@ -128,7 +128,7 @@ verificacion:
         status: 503
     stdout_contiene:
       - "[1] Arranque, fase 1: transformaciones aplicadas sobre el almacen | peticiones atendidas durante la fase 1: 0"
-      - "[1] Arranque, fase 2: la superficie atiende | puntos de acceso expuestos: 15"
+      - "[1] Arranque, fase 2: la superficie atiende | puntos de acceso expuestos: 17"
       - "[3] Arranque sobre un almacen de linaje desconocido: detenido | peticiones atendidas: 0"
       - "[3] Mensaje del arranque detenido: sin ruta, sin direccion y sin traza"
       - "[4] Puertos conectados con su adaptador: 4 de 4 | conectados fuera de la composicion de raiz: 0"
@@ -152,3 +152,4 @@ verificacion:
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Cubre `CU-00010` y `CU-00011`, que son lo que este proyecto de código tiene de propio: la composición de raíz con **4 de 4** puertos y **0** conexiones fuera de ella, y el arranque en dos fases con **0** peticiones atendidas en la primera y el arranque **detenido** ante un linaje desconocido. Ejercita `A-16`, el único punto que la colección del sample 02 deja fuera de su archivo, y verifica `RA-01` y `RA-03` con umbral cero. El contrato `VER-00003` declara **dos** aserciones de respuesta HTTP, ocho líneas exactas de salida y **tres aserciones negativas** sobre defectos que dejan el servicio aparentemente funcionando; `evidencia` queda en `No verificado — sin código`. |
+| 2.0 | 2026-08-31 | **`[1]` pasa de quince puntos de acceso expuestos a diecisiete**, que es lo que el servicio publica en su documento OpenAPI y lo que `../05-Arquitectura-Tecnica/Contratos-REST.md` **1.5** declara desde hoy. La diferencia era `A-18` —`POST /interpretaciones`, la previsualización que `ADR-08006` creó como su contrapartida—: estaba declarado en la categoría 02, implementado en el código, y **ausente del contrato REST**, porque el barrido de alcance de esa decisión no llegó a la categoría 05. Lo encontró este sample contando sobre el documento que el propio servicio publica. Sube **major**: una línea del snapshot cambia de contenido. |

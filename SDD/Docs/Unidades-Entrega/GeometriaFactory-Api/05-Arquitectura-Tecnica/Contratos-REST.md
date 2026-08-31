@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
-**Fecha:** 2026-08-15
+**Fecha:** 2026-08-31
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -16,7 +16,7 @@
 - [2. Formato](#2-formato)
   - [2.1 Por qué no hay descripción formal de servicio](#21-por-qué-no-hay-descripción-formal-de-servicio)
   - [2.2 El formato de intercambio y su configuración](#22-el-formato-de-intercambio-y-su-configuración)
-- [3. Operaciones: los dieciséis puntos de acceso](#3-operaciones-los-dieciséis-puntos-de-acceso)
+- [3. Operaciones: los diecisiete puntos de acceso](#3-operaciones-los-diecisiete-puntos-de-acceso)
 - [4. Los diez códigos de respuesta](#4-los-diez-códigos-de-respuesta)
 - [5. Manejo de errores: la tabla de traducción de los diecisiete códigos](#5-manejo-de-errores-la-tabla-de-traducción-de-los-diecisiete-códigos)
   - [5.1 Las dos respuestas sin código del contrato](#51-las-dos-respuestas-sin-código-del-contrato)
@@ -70,9 +70,9 @@ Emitir una descripción formal contra esa decisión crearía **una segunda fuent
 
 **Transporte.** Petición y respuesta, **sin estado**, con la credencial firmada en la cabecera de autorización. En desarrollo se escucha **sin certificado**, para evitar la fricción del certificado de confianza dentro del contenedor. **Un puerto publicado hacia el enrutador es el único punto de entrada al servidor propio.**
 
-## 3. Operaciones: los dieciséis puntos de acceso
+## 3. Operaciones: los diecisiete puntos de acceso
 
-Los dieciséis son los de [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, y **este contrato los adopta sin cambiarlos**: las rutas siguen siendo propuesta derivada de aquella categoría, rotulada fila por fila, y su forma definitiva se valida en el punto de control de la etapa `a`. Lo que esta tabla agrega es la columna de **caso de uso de la capa de aplicación** que cada punto ejerce, que es lo que ata la superficie a lo que realmente ocurre.
+Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, y **este contrato los adopta sin cambiarlos**: las rutas siguen siendo propuesta derivada de aquella categoría, rotulada fila por fila, y su forma definitiva se valida en el punto de control de la etapa `a`. Lo que esta tabla agrega es la columna de **caso de uso de la capa de aplicación** que cada punto ejerce, que es lo que ata la superficie a lo que realmente ocurre.
 
 | Punto | Verbo | Qué hace | Papel exigido | Códigos | CU de la capa de aplicación |
 | --- | --- | --- | --- | --- | --- |
@@ -92,8 +92,9 @@ Los dieciséis son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 | A-15 | `POST` | Aprobar o rechazar un trabajo en estado `Pendiente`, con comentario opcional | `Administrador` | `200`, `400`, `401`, `403`, `404`, `409` | Desenlace del trabajo |
 | A-16 | `GET` | Responder por el estado del servicio. **No exige acceso** | Ninguno | `200`, `503` | Ninguno: invoca la preparación del almacén |
 | A-17 | `GET` | Responder **si el laboratorio ya tiene administrador**, y nada más. **No exige acceso** y es de **sólo lectura** | Ninguno | `200` | Configuración de la cuenta de administrador, en su consulta |
+| A-18 | `POST` | **Interpretar un texto sin guardar nada**, para la previsualización. **No constituye ningún trabajo**: devuelve la estructura reconstruida y no deja rastro | `Alumno` | `200`, `400`, `401`, `403` | Envío del trabajo e interpretación de su texto, en su camino sin persistencia |
 
-**Dieciséis puntos: cinco sin credencial firmada —A-01, A-02, A-03, A-16 y A-17— y once bajo la guardia. Cinco más once son dieciséis.**
+**Diecisiete puntos: cinco sin credencial firmada —A-01, A-02, A-03, A-16 y A-17— y doce bajo la guardia. Cinco más doce son diecisiete.**
 
 **A-17 entra porque el guardián 1 de `Web ADR-00003` §2 no se podía construir sin él**, y esa constancia va acá y no sólo en 02 porque es una propiedad de **esta** tabla: **ninguno de los quince puntos anteriores servía para que un anónimo preguntara si el laboratorio ya tiene administrador**. `A-03` configura —es escritura—, `A-16` responde por la salud del servicio y `A-06` exige el papel. El fundamento entero, lo que el punto revela y **por qué el dato no se le agregó a `A-16`** —la salud la consume el chequeo del contenedor de `deploy/compose.yaml`, y mezclarle un hecho del producto acopla dos cosas que cambian por motivos distintos— están en [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, que es donde se decide. **La decisión la tomó el orquestador, con el Product Owner avisado, y queda a ratificación.**
 
@@ -170,6 +171,8 @@ Estaban elevados al Product Owner, con la constancia de que **esta categoría no
 
 **Ningún código vecino cambió de enunciado**, y **ninguno de los dos recicla un identificador retirado**.
 
+**Y una constancia que esta sección debía y no daba, agregada en la 1.5.** Este párrafo afirmaba que `UNCLASSIFIED_ERROR` **«bajó de cuatro destinos a dos»**. **Tiene cuatro**: `503`, `500`, `409` y `403`. Los dos que sobran son **apartamientos declarados en la cabecera de la pieza que traduce**, con su fundamento escrito —un `500` diría que el producto falló cuando lo que pasa es que la operación no procede sobre esa cuenta, o que quien pide no es un alumno— y **el fundamento se sostiene**. Lo que falta es su forma: `Root-Rules.md` §11 pide que un apartamiento sea un ADR con seis campos, y un comentario en un archivo de código no tiene estado, ni disparadores que lo superen, ni cuenta de saltos sobrevividos. **Queda elevado y no se resuelve acá.**
+
 ### 5.3 Las dos señales que no son fallos
 
 | Señal | Qué viaja | Por qué no es un fallo |
@@ -218,7 +221,7 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | Dimensión | Referencia |
 | --- | --- |
 | CU que lo materializan | **Once** de los doce de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §5. `CU-00012` lo **ejercita** en lugar de exponerlo |
-| Puntos de acceso | **Dieciséis**: A-01 a A-03 y A-05 a A-17. `A-04` retirado y **no reciclado** |
+| Puntos de acceso | **Diecisiete**: A-01 a A-03 y A-05 a A-18. `A-04` retirado y **no reciclado** |
 | Códigos de respuesta | **Diez** distintos, de §4 |
 | Códigos del contrato | **Diecisiete** vivos sobre **veinte** identificadores emitidos por `GeometriaFactory-Contracts`; **dieciséis con destino acá y uno sin él** |
 | CU de la capa de aplicación | Los **once**, con el reparto de la columna de §3 y la correspondencia de [`../02-Especificacion-Funcional/Especificacion-Funcional.md`](../02-Especificacion-Funcional/Especificacion-Funcional.md) §7.4 |
@@ -238,3 +241,4 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. Se cierran con su fila, su desenlace y su fecha los puntos abiertos que estas decisiones resolvían. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **18**. Sube minor. |
 | 1.3 | 2026-08-15 | **Adopta el punto de acceso `A-17`, que `../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` 1.7 agrega a la superficie.** El punto responde **si el laboratorio ya tiene administrador, y nada más**: `GET /aprovisionamiento`, **sin papel exigido**, de **sólo lectura** y con **un solo código de respuesta**, `200`. Existe porque el **guardián 1 de `Web ADR-00003` §2** —el único de los cuatro que nunca se construyó— **no se podía construir**: ninguno de los quince puntos anteriores servía para que un anónimo preguntara eso. **§3**: fila del punto, columna de caso de uso de la capa de aplicación —la configuración de la cuenta de administrador, en su consulta—, recuento de **cinco sin credencial firmada más once bajo la guardia = dieciséis**, y la constancia de que la clase «fijar una contraseña sobre una cuenta existente sin credencial» **sigue ausente**, porque `A-16` y `A-17` son de sólo lectura. **§7**: los puntos de acceso pasan a **dieciséis**, A-01 a A-03 y A-05 a A-17, con `A-04` retirado y **no reciclado**. **Ningún código de respuesta, ninguna fila de la tabla de traducción de §5, ninguna regla de versionado de §6 y ningún otro recuento de §7 cambia.** Este contrato **adopta y no decide**: la decisión está en 02, la tomó el orquestador con el Product Owner avisado, y **queda a ratificación**. Sube minor. |
 | 1.4 | 2026-08-29 | **Tramo `R-3c` del renombre `F-03`**, reactivado por el Product Owner el 2026-08-29 y registrado en [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) §8. **19 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni los informes de `Audit/`. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
+| 1.5 | 2026-08-31 | **Adopta el punto de acceso `A-18`**, que `../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` declara y este contrato no había recogido: `POST /interpretaciones`, interpretar un texto **sin guardar nada**, para la previsualización. **Lo creó [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) como su contrapartida declarada**: si el visor recibe piezas reconstruidas en lugar del texto, previsualizar necesita que alguien las reconstruya. **El barrido de alcance de esa decisión llegó a la categoría 02 y no a ésta**, de modo que el servicio exponía diecisiete operaciones contra dieciséis declaradas acá — lo encontró el sample `api/03-avanzado` contando sobre el documento OpenAPI que el propio servicio publica. Es el mismo hueco que dejó los §6 de la categoría 10 describiendo la fachada anterior, reportado al framework como `Reporte 21`. Se actualizan los cuatro recuentos: encabezado, prosa de §3, cierre de §3 —cinco sin credencial y **doce** bajo la guardia— y la fila de §7. **§5.2 suma una constancia que debía**: afirmaba que el genérico «bajó de cuatro destinos a dos» y **tiene cuatro** —`503`, `500`, `409` y `403`—, los dos últimos por apartamientos declarados en un comentario de código y no como ADR; queda elevado. Sube minor: adopta lo que otra categoría ya declaró y no cambia ninguna decisión. |
