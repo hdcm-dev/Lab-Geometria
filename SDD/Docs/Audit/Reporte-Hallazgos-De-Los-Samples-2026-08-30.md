@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Reporte-Hallazgos-De-Los-Samples-2026-08-30.md
-**Versión:** 4.0
+**Versión:** 5.0
 **Estado:** Abierto — **cuatro vivos de doce emitidos**. Cinco cerrados, dos retirados tras verificarlos contra el contrato, y tres nuevos que salieron de esa verificación
 **Fecha:** 2026-08-30
 **Autor:** Orquestador SDD
@@ -200,6 +200,7 @@ Y una contradicción de documento, sin consecuencia sobre el código: `ejemplo-0
 | ~~`H-10`~~ | **CERRADO.** Los dos entornos se comportan igual; el detalle va al registro | Hecho |
 | ~~`H-11`~~ | **CERRADO.** El defecto no previsto sale con el código genérico | Hecho |
 | `H-12` | El apartamiento del `409` como ADR, y el recuento de §5.2 del contrato | Product Owner |
+| `H-14` | **Dos códigos de facultad sin traducción** —`ADMINISTRATOR_ROLE_OUTSIDE_THIS_PATH` y `SCOPE_REQUIRES_ADMINISTRATOR_ROLE`— caerían al genérico con `500` donde corresponde `403`. **Los dos son inalcanzables hoy**, verificado uno por uno; declarado en `ADR-04004` §7.1 | Equipo, dos líneas |
 
 **Ninguno impide seguir.** Los dieciséis samples corren y los dieciséis declaran por escrito lo que no coincide.
 
@@ -239,3 +240,4 @@ Correr los dieciséis samples es exactamente eso: volver a leerlos, con el produ
 | 1.0 | 2026-08-30 | Emisión. Nueve hallazgos de la implementación de los dieciséis samples, más tres divergencias investigadas y cerradas como no-hallazgo. Ninguno decidido. |
 | 3.0 | 2026-08-30 | **`H-02`, `H-05` y `H-08` cerrados.** Los cuatro §6 que describían algo que el producto no hace —los tres del visor y el de `03-avanzado-infraestructura`— pasaron a **2.0**, y sus cuatro samples cierran **sin divergencias**. En los cuatro se corrigió **el documento y no el producto**, con un motivo escrito por línea. `H-02` llevó una decisión del Product Owner: **«apagar» un movimiento significa detener y no volver**, porque la cámara la puede haber movido la persona y `F-25` gobierna los dos movimientos de forma simétrica. La observación de `ADR-08006` pasó a **5.0** declarando que su alcance era de **cuatro** afirmaciones y no de tres. **Del reporte quedan vivos `H-03` y `H-12`.** Sube **major**. |
 | 4.0 | 2026-08-30 | **Entra `H-13`, ya cerrado, y es el más incómodo de la serie: estaba en el instrumento.** Siete de los nueve samples de .NET corrían su comparación **sólo detrás de `--verificar`**, y el comando que su documento declara no la pasa: devolvían **cero sin comparar nada**. Se verificó primero si alguna afirmación previa era falsa —**ninguna lo era**— y después se hizo que la comparación corra siempre. Las tres divergencias de `application` que eso destapó resultaron **tres errores de §6 de tres naturalezas distintas**, y sus documentos pasaron a 2.0. Se alineó además el §6 de `infrastructure/02`, que nombraba cuatro códigos inexistentes —tres viven en el dominio con otro nombre y uno **no existe en ninguna capa**, con su ausencia declarada por escrito en el puerto—. **Los dieciséis samples cierran hoy sin divergencias, con el comando de su documento.** Sube **major**. |
+| 5.0 | 2026-08-31 | **`ADR-04004` pasa a 2.0, de `Propuesto` a `Aprobado`, y con la decisión cambiada.** Exigía las cuatro comprobaciones en **un único componente**; lo construido son **cuatro lugares**, y se corrigió el ADR y no el código porque la distribución es mejor que lo que pedía: mover la pertenencia y el alcance fuera del dominio las volvería invisibles para quien lee la entidad, y mover la marca fuera del intermediario reintroduce el defecto de que un punto nuevo se olvide y **nada falle**. **Todo lo demás del ADR se verificó cierto y se conservó**: el orden y sus dos motivos, el `404` que nunca es `403`, el código único de la marca y el alcance trasladado a la consulta. **Entra `H-14`**, medido al hacerlo: dos códigos de facultad sin traducción que responderían `500` donde corresponde `403`, los dos inalcanzables hoy. Es la **quinta** rama defensiva inalcanzable que aparece en este producto, y la primera cuya respuesta sería incorrecta. Sube **major**. |
