@@ -1,0 +1,66 @@
+# Integración continua: LAS DOS PUERTAS BLOQUEANTES, EN TODO CAMBIO.
+#
+# EL HUECO QUE ESTE FLUJO TAPA, y está medido, no supuesto. Hasta hoy el repositorio tenía
+# UN SOLO flujo —`deploy-front-ftp`— y ese flujo se dispara por filtro de rutas:
+#
+#     src/GeometriaFactory.Web/**   visor/**   src/GeometriaFactory.Contracts/**
+#
+# De modo que un cambio en `GeometriaFactory.Api`, en `GeometriaFactory.Infrastructure`, en
+# `GeometriaFactory.Domain`, en `scripts/` o en las tres baterías de prueba **no disparaba
+# absolutamente nada**. `QG-01` y `QG-02` —que `Api/09 Pipeline-CI-CD.md` §2.1 declara
+# BLOQUEANTES— sólo corrían cuando el cambio tocaba el front por casualidad.
+#
+# Y NO ES TEÓRICO. Buena parte de las unidades entregadas esta semana —el guion de respaldo,
+# la salud del almacén, el modo WAL, la agrupación de conexiones— viven íntegramente fuera de
+# ese filtro. Se fusionaron sin que ninguna puerta se ejecutara en la máquina de integración.
+# Las dos que resultaron rotas —`U-01` y `U-03`— están en esa lista.
+#
+# EL PROPIO ARCHIVO DEL FLUJO TAMPOCO ESTABA EN EL FILTRO, y eso se acaba de pagar: el cambio
+# que agregó los reintentos de FTP se fusionó y NO DISPARÓ NADA. Hubo que lanzarlo a mano.
+# Acá `.github/workflows/**` está incluido a propósito: un flujo que no se prueba a sí mismo
+# es un flujo que se descubre roto el día que se lo necesita.
+#
+# ============================ POR QUÉ SEPARADO Y NO AMPLIANDO EL FILTRO =====================
+#
+# Porque son dos cosas distintas y ahora estaban pegadas:
+#
+#   VERIFICAR   es barato, no tiene efectos, y debe correr SIEMPRE y en TODA rama.
+#   PUBLICAR    toca un servidor real, depende de secretos y de un anfitrión que a veces
+#               tiene los archivos tomados; NO debe correr en cada empujón.
+#
+# Con un solo flujo, ampliar el filtro para cubrir el `Api` habría significado publicar el
+# front cada vez que alguien toca el dominio. La separación deja que cada uno corra por su
+# propia razón.
+#
+# ESTE FLUJO NO PUBLICA NADA y no lee ningún secreto. Corre las dos puertas y termina.
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  puertas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Anclar el kit de desarrollo
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # El visor se empaqueta dentro de `build.sh`, y por eso Node hace falta también acá.
+      - name: Anclar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Puerta QG-01 · construir sin advertencias, con el bundle del visor
+        run: ./scripts/build.sh
+
+      - name: Puerta QG-02 · la batería entera
+        run: ./scripts/test.sh
