@@ -130,7 +130,7 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 | Etapa | ID | Tipo | Descripción corta | Prioridad | Estimación | Asignado | Estado |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `a` | BT-10001 | Tarea técnica | Crear el proyecto del front con su flujo de publicación | Alta | Sin fijar | Equipo (1) | Pendiente |
-| `a` | BT-10002 | Tarea técnica | Anclar la versión de la biblioteca de componentes de interfaz | Alta | Sin fijar | Equipo (1) | Pendiente |
+| `a` | BT-10002 | Tarea técnica | ~~Anclar la versión de la biblioteca de componentes de interfaz~~ **SIN OBJETO** | Alta | Sin fijar | Equipo (1) | ~~Pendiente~~ **Cerrada el 2026-08-31**: no hay biblioteca de componentes, y su ausencia es una decisión declarada en el `.csproj` (`PA-01` de `05` §11, cerrado el 2026-08-20). **La encontró `verify-propagacion.sh` en su primera corrida**: el desenlace había llegado al backlog técnico y no acá |
 | `a` | BT-10005 | Tarea técnica | Dirección del servicio de datos desde configuración, con secretos | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `a` | BT-10003 | Tarea técnica | Página de salud que consume el punto de salud del servicio de datos | Alta | Sin fijar | Equipo (1) | Pendiente |
 | `a` | BT-10006 | Tarea técnica | Puerta de publicación que comprueba que la dirección pública responde | Alta | Sin fijar | Equipo (1) | Pendiente |
