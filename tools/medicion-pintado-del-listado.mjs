@@ -25,12 +25,21 @@
 // participa. Lo medido en local es por lo tanto REPRESENTATIVO —salvo la latencia
 // de red hasta el hosting— y no un piso.
 //
-// Uso:  node medicion-pintado-del-listado.mjs <base> <correo> <clave> <grupos> <filas>
+// DOS COLUMNAS DE PESO, Y NO SON LO MISMO. `content().length` es el **marcado emitido**, en
+// unidades UTF-16 del DOM ya reserializado por el navegador. `transferSize` es lo que
+// **cruzó el cable**, comprimido si el canal comprime. Hasta el 2026-08-31 este instrumento
+// reportaba sólo el primero bajo el rótulo «Documento», y lo comparaba contra los bytes de
+// respuesta HTTP del servicio: dos cosas distintas con el mismo nombre. Es `N-1` de la mesa.
+// Con las dos columnas separadas, activar la compresión —que hoy NO está activa: `grep -rniE
+// 'UseResponseCompression|Brotli|Gzip' src/ deploy/` devuelve 0— se puede decidir midiendo.
+//
+// Uso:  node medicion-pintado-del-listado.mjs <base> <correo> <clave> <ruta> <grupos> <filas>
+//       `grupos` en 0 significa «esta superficie no agrupa».
 // Salida: una línea JSON por corrida, a stdout.
 // ============================================================================
 import { chromium } from 'playwright';
 
-const [base, correo, clave, gruposEsperados, filasEsperadas] = process.argv.slice(2);
+const [base, correo, clave, ruta, gruposEsperados, filasEsperadas] = process.argv.slice(2);
 const nGrupos = Number(gruposEsperados);
 const nFilas = Number(filasEsperadas);
 
@@ -59,7 +68,7 @@ if (pagina.url().includes('/ingreso')) await morir('el ingreso no prosperó');
 // cargada y el listado a medio pintar. Se espera a que estén los grupos y las
 // filas que la siembra dejó, que es lo único que significa «el docente ya lo ve».
 const t0 = performance.now();
-await pagina.goto(`${base}/entrega-comision`, { waitUntil: 'commit' });
+await pagina.goto(`${base}${ruta}`, { waitUntil: 'commit' });
 try {
   await pagina.waitForFunction(
     ([g, f]) =>
@@ -75,11 +84,19 @@ try {
 }
 const pintura = performance.now() - t0;
 
-const bytes = (await pagina.content()).length;
+const marcado = (await pagina.content()).length;
+
+// LO QUE CRUZÓ EL CABLE, que es un número distinto y el que importa sobre una conexión de
+// facultad. Se lee de la entrada de navegación del propio navegador. Si el canal comprimiera,
+// aquí se vería y en `marcado` no.
+const transferido = await pagina.evaluate(() => {
+  const [nav] = performance.getEntriesByType('navigation');
+  return nav ? Math.round(nav.transferSize) : null;
+});
 const grupos = await pagina.locator('section.gf-group').count();
 const filas = await pagina.locator('table.gf-table tbody tr').count();
 
-// ---- 2 · Filtro por alumno --------------------------------------------------
+// ---- 2 · Filtro (sólo donde la superficie lo tiene) --------------------------
 // Se elige el segundo `option` de `#submissions-student` —el primero es «todos»—
 // y se envía el formulario. Es una navegación completa, no una actualización
 // parcial: se mide hasta que el documento nuevo tiene UN solo grupo.
@@ -103,9 +120,11 @@ if (valor) {
 }
 
 console.log(JSON.stringify({
+  ruta,
   pintura_ms: Math.round(pintura),
   filtro_ms: filtro === null ? null : Math.round(filtro),
-  bytes,
+  marcado_emitido: marcado,
+  bytes_transferidos: transferido,
   grupos,
   filas,
 }));

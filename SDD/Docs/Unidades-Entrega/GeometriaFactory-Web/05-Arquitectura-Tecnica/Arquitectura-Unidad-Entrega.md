@@ -368,6 +368,22 @@ Todas las decisiones transversales viven acá y no repartidas por superficie.
 
 ### 8.1 `GeometriaFactory-Web`
 
+> **POR QUÉ EL NFR DE PESO ES DE BYTES Y NO DE TIEMPO, y es la decisión de esta fila.** La superficie
+> más pesada del producto está medida —**96 ms y 40 KB a 30 trabajos, 1579 ms y 1,2 MB a 1002**— y
+> **ninguna puerta del producto puede ponerse en rojo por eso**: `QG-14` es del servicio de datos y tiene
+> margen de cuarenta veces, `PT-05` mide caudal, y esta categoría declaró ausentes sus dos puertas de
+> latencia. Es `MI-10` y `MI-12` de la mesa del 2026-08-31.
+>
+> **Un umbral de latencia no es la respuesta.** Comprometería un tiempo sobre un hosting **cuya latencia
+> la fuente declara incógnita** y cuyo transporte va replegado a long polling: la puerta se pondría roja
+> por la red del día y no por el producto, que es la forma más rápida de que una puerta se apague. Por
+> eso `PA-04` **se queda en NO APLICA**.
+>
+> **Los bytes sí son del producto.** No dependen del anfitrión, se miden sin hosting, y **crecen
+> exactamente cuando alguien agrega marcado por fila** — que es la causa real de los 1,2 MB. La línea de
+> base se registra **después** de las tarjetas apiladas de `U-02`, o la puerta nacería en rojo el mismo
+> día: es la lección de `C-3`.
+
 Los cuatro primeros son las **cuatro mediciones de `PT-01`**, que `PRODUCT-INTAKE` §17.2.P.10 · GeometriaFactory-Web declara como los requerimientos no funcionales de este proyecto de código y que se miden en la etapa `a`; esta tabla los toma como están y **no los redefine**. El quinto viene rotulado **[ASUNCIÓN]** en cuanto a expresarlo como puerta. Los demás los deriva esta categoría y se declaran como tales.
 
 | NFR | Objetivo numérico | Mecanismo de medición | ADR relacionada |
@@ -376,6 +392,36 @@ Los cuatro primeros son las **cuatro mediciones de `PT-01`**, que `PRODUCT-INTAK
 | `PT-01.b` · Transporte del circuito | Semáforo: verde con conexión persistente; **amarillo aceptable** con el repliegue de mayor latencia, documentando la latencia percibida; rojo sin circuito. **Sólo el rojo obliga a cambiar el modelo de front** | Inspección del transporte negociado en la etapa `a` | [`ADR-10001`](Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md) |
 | `PT-01.c` · Estabilidad del proceso | **20 minutos** de navegación continua sin que el proceso recicle el circuito, y reconexión funcional al cortar y restablecer la red | Recorrido cronometrado en la etapa `a`. **Es el peor escenario: no tiene mitigación en el código** (`R-06`) | [`ADR-10002`](Adrs/ADR-10002-Sin-Estado-Propio-Y-Sin-Persistencia.md) |
 | `PT-01.d` · Salida hacia el backend | Una llamada de salud devuelve **datos reales** del servidor propio | Recorrido en la etapa `a`. Si no pasa, publicar el servicio de datos en un puerto convencional (`R-05`) | [`ADR-10007`](Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) |
+| **Peso del documento por corte de volumen** (`QG-10012`, `CV-36`) | **≤ 110 %** de la línea de base registrada, por superficie y por corte. Cuatro cortes —30, 100, 300 y 1000 trabajos— sobre **dos** superficies: `Listado-De-La-Comisión` y `Panel-De-Cuentas`. Se miden **dos columnas distintas y no se promedian**: el **marcado emitido** y los **bytes transferidos** | `tools/medicion-pintado-del-listado.sh`, que siembra por el circuito real del producto y mide con navegador. **Determinista y sin hosting**: no depende de la latencia de la red ni del anfitrión | [`ADR-10001`](Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md) |
+**LÍNEA DE BASE REGISTRADA, tomada el 2026-09-01 con `tools/medicion-pintado-del-listado.sh`.** El
+NFR de arriba se mide contra esta tabla y no contra un número inventado. **Se tomó DESPUÉS de las
+tarjetas apiladas**, o la puerta habría nacido en rojo el mismo día.
+
+| Superficie | Filas | 1ª pintura | Marcado emitido | Bytes transferidos |
+|---|---:|---:|---:|---:|
+| `/entrega-comision` | 30 | 102 ms | **69 KB** | 69 KB |
+| `/entrega-comision` | 102 | 457 ms | **221 KB** | 220 KB |
+| `/entrega-comision` | 300 | 557 ms | **641 KB** | 633 KB |
+| `/entrega-comision` | 1002 | 1958 ms | **2,1 MB** | 2,1 MB |
+| `/cuentas` | 10 | 102 ms | **49 KB** | 50 KB |
+| `/cuentas` | 34 | 265 ms | **154 KB** | 153 KB |
+| `/cuentas` | 100 | 261 ms | **441 KB** | 436 KB |
+| `/cuentas` | 334 | 1115 ms | **1,5 MB** | 1,5 MB |
+
+**Tres lecturas que esta tabla obliga a escribir, y ninguna es cómoda:**
+
+1. **`transferido ≈ marcado` en los ocho cortes.** El canal **no comprime** —`UseResponseCompression`
+   no está en ninguna parte—, y hasta el 2026-08-31 el instrumento reportaba una sola columna
+   llamada «Documento» comparándola contra bytes HTTP del servicio: **dos unidades distintas con el
+   mismo nombre**. Es `N-1` de la mesa, y ahora se ve.
+2. **Las tarjetas apiladas casi duplicaron el documento**: a 300 trabajos pasó de **358 KB a
+   641 KB**. Es el costo del arreglo del `P0`, y es estructural — **la tabla y las tarjetas se
+   emiten las dos siempre**, y lo que cambia con el ancho es cuál se muestra. Elegir una u otra
+   exigiría saber el ancho **en el servidor**, que con render estático no se sabe.
+3. **La fila de `/cuentas` pesa el doble que la del listado** —4,5 KB por cuenta contra 2,2 KB por
+   trabajo— por su formulario con antifalsificación y sus dos anclas con icono. **Nunca se había
+   medido**, porque el instrumento no navegaba ahí.
+
 | Pasos del guion de demostración | **100 %** de los pasos del guion de la etapa **y de todas las anteriores** se ejecutan y pasan antes del punto de control [ASUNCIÓN en cuanto a expresarlo como puerta; la regla acumulativa es de la fuente] | Ejecución del guion en el navegador del equipo anfitrión, bloqueante para el punto de control | [`ADR-10004`](Adrs/ADR-10004-Tres-Capas-De-Presentacion.md) |
 | Peticiones del navegador hacia el servicio de datos | Exactamente **0** | Conteo en la pestaña de red durante un recorrido completo, **incluida la interacción con la escena y con los dos movimientos automáticos prendidos**, que es el peor caso declarado por la Fase C del visor | [`ADR-10001`](Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md) |
 | Salidas del proyecto de código hacia el servicio de datos | Exactamente **1**, el cliente tipado, y **0** bibliotecas de guion agregadas que consulten servicios por su cuenta | Inspección del árbol de fuentes y de las dependencias de guion [derivado de `PRODUCT-INTAKE` §17.2.P.3 · GeometriaFactory-Web] | [`ADR-10001`](Adrs/ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md) |

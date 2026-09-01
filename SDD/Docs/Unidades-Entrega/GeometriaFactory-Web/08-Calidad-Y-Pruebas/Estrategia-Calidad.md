@@ -95,13 +95,15 @@ Cada gate declara condición, cómo se verifica y qué pasa cuando no se cumple.
 | QG-10 | **0** tráfico de circuito durante la interacción con la escena, y el texto del trabajo viaja **una sola vez por trabajo** | `TC-10033`, conteo en la pestaña de red mientras se rota y se acerca | Bloquea la fusión |
 | QG-11 | Las **61** filas de [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) que la etapa toca están verificadas, con estado y fecha, y **ninguna deriva mayor queda sin resolver** | Recorrido de la matriz al cerrar la etapa | Bloquea el cierre de la etapa. Una deriva mayor se resuelve corrigiendo lo construido o actualizando la línea de base con aprobación humana, **nunca por omisión** |
 
-**Once gates, y ninguno inventado.** Los que no salen del intake salen de una fila de `05` §8. **No se declara ningún gate de cobertura de líneas**, y el motivo lo da la fuente: este proyecto de código **no tiene proyecto de pruebas propio** en el árbol del repositorio (intake §17.2.P.6 · GeometriaFactory-Web). Inventarle un umbral de cobertura sería inventar una medición sin sujeto.
+| QG-12 | **Peso del documento** por corte de volumen: **≤ 110 %** de la línea de base registrada, en **dos** superficies —`Listado-De-La-Comisión` y `Panel-De-Cuentas`— y cuatro cortes, sobre **dos columnas que no se promedian**: marcado emitido y bytes transferidos | `tools/medicion-pintado-del-listado.sh`; `CV-36` | **Bloqueante.** Nace de `05` §8, que es donde nace un NFR |
+
+**Doce gates, y ninguno inventado.** Los que no salen del intake salen de una fila de `05` §8. **No se declara ningún gate de cobertura de líneas**, y el motivo lo da la fuente: este proyecto de código **no tiene proyecto de pruebas propio** en el árbol del repositorio (intake §17.2.P.6 · GeometriaFactory-Web). Inventarle un umbral de cobertura sería inventar una medición sin sujeto.
 
 **Tampoco se declara ningún gate de tiempo de respuesta.** `05` §8 lo declara expresamente: las tolerancias de **400 ms** de [`../03-UX-UI-DX/Experiencia-De-Uso.md`](../03-UX-UI-DX/Experiencia-De-Uso.md) §7 son de **diseño de la espera** —dicen a partir de cuándo se muestra un indicador— y no compromisos de tiempo de respuesta. Esta categoría hereda esa distinción y no la convierte en umbral. Queda como `PA-04` de `05` §11.
 
 ### 3.1 Ningún gate de este proyecto de código queda condicionado
 
-**Los once gates de §3 bloquean** —cada uno lo que su columna de consecuencia declara: la fusión, la publicación, el flujo, el punto de control o el cierre de la etapa— **y ninguno es condicionado**. El único que lleva un valor rotulado **[ASUNCIÓN]** es `QG-04`, y **no por eso queda condicionado**.
+**Los doce gates de §3 bloquean** —cada uno lo que su columna de consecuencia declara: la fusión, la publicación, el flujo, el punto de control o el cierre de la etapa— **y ninguno es condicionado**. El único que lleva un valor rotulado **[ASUNCIÓN]** es `QG-04`, y **no por eso queda condicionado**.
 
 El intake §17.2.P.6 · GeometriaFactory-Web lo escribe así: **«Gate bloqueante y numérico en lugar de cobertura de líneas: el 100 % de los pasos del guion de demostración de la etapa y de todas las anteriores se ejecuta y pasa antes del punto de control»**, con el rótulo **[ASUNCIÓN en cuanto a expresarlo como gate; la regla acumulativa es de RF §9.4]**. Y el intake §22, fila `A-4`, columna «Si el Product Owner la cambia», dice: **«Cambia la forma del gate, no su carácter bloqueante»**.
 

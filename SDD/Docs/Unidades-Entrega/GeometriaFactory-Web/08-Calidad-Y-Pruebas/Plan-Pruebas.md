@@ -81,6 +81,7 @@ Lo que tiene que cumplirse para declarar el plan ejecutado con éxito en una eta
 - [ ] Las cinco inspecciones estructurales —`TC-10029` a `TC-10033`— dan **0** en cada uno de sus recuentos, en la condición declarada.
 - [ ] Los seis casos que verifican **forzando la solicitud** —`TC-10001`, `TC-10005`, `TC-10007`, `TC-10015`, `TC-10025`, `TC-10026`— se ejecutaron para las acotaciones que la etapa introdujo.
 - [ ] Los gates `QG-10001`, `QG-10002`, `QG-10003`, `QG-10005`, `QG-10006`, `QG-10007`, `QG-10008`, `QG-10009`, `QG-10010` y `QG-10011` de [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3 pasan.
+- [ ] `QG-10012` **se cumple**: el peso del documento de `Listado-De-La-Comisión` y de `Panel-De-Cuentas` está **dentro del 110 %** de su línea de base en los cuatro cortes, con las dos columnas —marcado emitido y bytes transferidos— registradas por separado (`CV-36`).
 - [ ] `QG-10004` **se cumple**: el guion de la etapa y los de todas las anteriores pasan al 100 %. Es **bloqueante**, no condicionado (ver [`Estrategia-Calidad.md`](Estrategia-Calidad.md) §3.1).
 - [ ] La matriz de [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) está actualizada: ninguna fila dice `Pendiente` para un elemento que la etapa cerró.
 - [ ] Todo defecto cerrado durante la etapa generó al menos un `TC-XX` nuevo o extendió uno existente.
