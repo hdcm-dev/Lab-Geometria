@@ -83,49 +83,70 @@ jobs:
           path.write_text(json.dumps(settings, ensure_ascii=False, indent=2), encoding='utf-8')
           PY
 
-      # ---- LA SUBIDA SE REINTENTA, Y NO ES PRUDENCIA GENERICA -------------------------
+      # ---- BAJAR LA APLICACION ANTES DE SUBIR, Y LEVANTARLA SIEMPRE -------------------
       #
-      # El anfitrion tiene la aplicacion CORRIENDO con sus `.dll` abiertos, y la subida
-      # intenta reemplazarlos en caliente. Windows no lo permite y el servidor contesta:
+      # EL `550` NO ERA TRANSITORIO, Y POR ESO REINTENTAR NO SERVIA. Medido el 2026-09-01
+      # sobre el anfitrion real, en la corrida #37:
       #
-      #     FTPError: 550 The process cannot access the file because it is being used by
-      #     another process.
+      #     Subir por FTP · intento 1   ->  550, en GeometriaFactory.Web.pdb
+      #     Subir por FTP · intento 2   ->  550, el mismo archivo   (tras esperar  90 s)
+      #     Subir por FTP · intento 3   ->  550, el mismo archivo   (tras esperar 180 s)
       #
-      # Medido el 2026-09-01: las corridas 33, 35 y 36 fallaron las tres ahi, con la 34
-      # exitosa en el medio — la diferencia es si el sitio estaba dormido cuando llego la
-      # subida. Es TRANSITORIO y depende del reciclado del anfitrion, de modo que esperar y
-      # volver a intentar es la respuesta correcta y no un parche.
+      # IIS tiene los ensamblados abiertos MIENTRAS LA APLICACION CORRE, y no los suelta por
+      # esperar. La unica corrida que subio bien —la #34, de las 11:19— subio porque el sitio
+      # estaba DORMIDO: somee duerme las aplicaciones ociosas, y una aplicacion dormida suelta
+      # sus archivos. Desde que se empezo a mirar el sitio para probarlo, deja de dormirse, y
+      # la publicacion dejo de funcionar. «Antes andaba» tiene exactamente esa explicacion, y
+      # la version anterior de este bloque —tres intentos con esperas— fue una hipotesis
+      # equivocada: trataba como transitorio algo permanente. Se retira entera.
       #
-      # POR QUE TRES PASOS Y NO UNA ACCION DE REINTENTO: incorporar una accion de terceros
-      # nueva es una decision de cadena de suministro que este flujo no toma de paso
-      # (`Supply-Chain-Seguridad.md`). Se repite la accion YA ANCLADA, que es mas verboso y
-      # no agrega una dependencia.
+      # `app_offline.htm` ES EL MECANISMO DE IIS PARA ESTO, no un truco. Al aparecer ese
+      # archivo en la raiz, el anfitrion detiene la aplicacion —libera los ensamblados— y
+      # sirve su contenido; al borrarlo, la levanta. VERIFICADO A MANO CONTRA EL ANFITRION
+      # REAL antes de escribirlo aca: con el archivo puesto el sitio devuelve 503, y al
+      # sacarlo `/estado` volvio en 200 mostrando la version y el reloj DEL SERVICIO DE DATOS.
       #
-      # Y EL ULTIMO INTENTO NO LLEVA `continue-on-error`: si los tres fallan, la corrida
-      # falla. Una subida que se rinde en silencio deja el sitio viejo con la corrida en
-      # verde, que es exactamente la clase de mentira que este flujo ya cometio.
+      # Y RESUELVE UN SEGUNDO DEFECTO QUE ESTABA TAPADO POR EL PRIMERO. `Program.cs` linea 70
+      # lee `ApiBaseUrl` UNA SOLA VEZ, al construir el `HttpClient`. Subir un `appsettings.json`
+      # nuevo NO CAMBIA NADA mientras el proceso siga vivo. El 2026-09-01 la direccion correcta
+      # estuvo en disco durante horas —habia subido bien, porque va antes del archivo que
+      # traba— con la aplicacion todavia llamando al tunel muerto, y el sitio mostrando «no
+      # pudimos crear la cuenta». UNA PUBLICACION QUE NO REINICIA NO ES UNA PUBLICACION.
+      #
+      # EL PASO QUE LA LEVANTA LLEVA `if: always()`, Y ES LO MAS IMPORTANTE DE ESTE BLOQUE:
+      # si la subida falla y nadie borra el archivo, EL SITIO QUEDA CAIDO. El paso corre
+      # aunque la subida haya fallado, y si el borrado mismo falla, la corrida falla y se ve.
+      #
+      # NI LA BARRA FINAL NI EL ESQUEMA SE SUPONEN, y no es celo vacio: el registro del
+      # proveedor anota la direccion como `ftp://aplicada.somee.com`, mientras que el parametro
+      # `server:` de la accion quiere un nombre pelado. El mismo secreto sirve a los dos usos,
+      # asi que el guion le saca el `ftp://` y la barra sobrante. Una ruta mal armada aca no
+      # da un error claro: DEJA EL SITIO ABAJO, porque el borrado del `app_offline.htm` apunta
+      # a un lugar que no existe.
 
-      - name: Subir por FTP · intento 1
-        id: ftp1
-        continue-on-error: true
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./publish/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-
-      - name: Esperar a que el anfitrion suelte los archivos
-        if: steps.ftp1.outcome == 'failure'
+      - name: Bajar la aplicacion del anfitrion
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          echo "El primer intento no pudo escribir. Se espera 90 s a que el sitio quede quieto."
-          sleep 90
+          set -euo pipefail
+          host="${FTP_SERVER#ftp://}"; host="${host%/}"
+          dir="/${FTP_DIR#/}"; dir="${dir%/}"
+          cat > app_offline.htm <<'HTM'
+          <!doctype html><meta charset="utf-8"><title>Fabrica de Geometria · actualizando</title>
+          <body style="font-family:system-ui;max-width:34rem;margin:6rem auto;padding:0 1rem">
+          <h1 style="font-size:1.25rem">Estamos actualizando el laboratorio</h1>
+          <p>Vuelve en un minuto. Nada de lo guardado se pierde.</p>
+          HTM
+          curl --silent --show-error --fail --max-time 120 \
+            --upload-file app_offline.htm \
+            "ftp://${host}${dir}/app_offline.htm" \
+            --user "${FTP_USERNAME}:${FTP_PASSWORD}"
+          echo "Aplicacion detenida. Los ensamblados quedaron libres."
 
-      - name: Subir por FTP · intento 2
-        id: ftp2
-        if: steps.ftp1.outcome == 'failure'
-        continue-on-error: true
+      - name: Subir por FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -133,22 +154,27 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./publish/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          exclude: |
+            **/app_offline.htm
 
-      - name: Esperar mas antes del ultimo intento
-        if: steps.ftp1.outcome == 'failure' && steps.ftp2.outcome == 'failure'
+      - name: Levantar la aplicacion
+        if: always()
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          echo "El segundo intento tampoco. Se espera 180 s antes del ultimo."
-          sleep 180
-
-      - name: Subir por FTP · intento 3, el ultimo
-        if: steps.ftp1.outcome == 'failure' && steps.ftp2.outcome == 'failure'
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./publish/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          set -euo pipefail
+          host="${FTP_SERVER#ftp://}"; host="${host%/}"
+          dir="/${FTP_DIR#/}"; dir="${dir%/}"
+          curl --silent --show-error --fail --max-time 120 \
+            "ftp://${host}${dir}/" \
+            --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
+            --quote "-DELE ${dir}/app_offline.htm" --output /dev/null
+          echo "Aplicacion levantada. Arranca leyendo el appsettings.json recien subido."
+          echo "Se le dan 25 s para el arranque en frio antes de comprobarla."
+          sleep 25
 
       - name: Comprobar que la direccion publica responde
         env:
