@@ -96,6 +96,9 @@ public static class CompositionRoot
         // Contexto por operación (intake §17.3.P.4): alcance de petición, nunca compartido.
         services.AddDbContext<GeometriaFactoryDbContext>(options => options.UseSqlite(connectionString));
         services.AddScoped<StorePreparation>();
+        // La salud del almacén se EVALÚA en cada sondeo y no se recuerda del arranque
+        // (`MI-09` de la mesa del 2026-08-31). Ámbito por petición, como su hermana.
+        services.AddScoped<StoreHealth>();
         services.AddSingleton<TwoPhaseStartup>();
 
         // CONEXIÓN DE LOS PUERTOS. Tres de cuatro, con la etapa del que falta declarada:
