@@ -121,18 +121,49 @@ fi
 copia="$destino/$nombre"
 [ -s "$copia" ] || morir "la copia quedó vacía."
 
-if command -v sqlite3 >/dev/null 2>&1; then
-  veredicto="$(sqlite3 "$copia" 'PRAGMA integrity_check;' 2>&1 | head -1)"
-else
-  veredicto="$(docker compose exec -T "$servicio" sh -lc 'true' 2>/dev/null \
-    && docker run --rm -v "$destino:/c" -w /c "$(docker compose images -q "$servicio" 2>/dev/null | head -1)" \
-         sh -lc "sqlite3 '/c/$nombre' 'PRAGMA integrity_check;'" 2>/dev/null | head -1)"
-fi
+# «NO PUDE VERIFICAR» Y «NO VERIFICÓ» SON COSAS DISTINTAS, y confundirlas destruyó copias sanas.
+#
+# La emisión del 2026-08-31 tenía una sola rama: si el veredicto no decía `ok`, borraba. Y el
+# verificador del modo contenedor **no arrancaba nunca**: hacía `docker run` sobre una imagen cuyo
+# `ENTRYPOINT` es `["dotnet","GeometriaFactory.Api.dll"]`, sin `--entrypoint sh`. El `2>/dev/null`
+# se tragaba el error, el veredicto quedaba vacío, y la copia recién tomada **se borraba**. Corrido
+# de punta a punta por la mesa del 2026-09-01: «RESPALDO NO TOMADO · la copia NO verificó ('sin
+# respuesta') y se borró», con el destino vacío.
+#
+# ES EL PEOR MODO DE FALLA POSIBLE PARA UN RESPALDO: creés que lo tenés y no lo tenés.
+#
+# Ahora son tres desenlaces y no dos: verificó y sale 0; NO verificó y se borra, porque una copia
+# corrupta ocupa el lugar de la que falta; y NO SE PUDO verificar, que **conserva la copia** y sale
+# 1 diciendo por qué. Ante la duda se guarda: una copia sin verificar sirve más que ninguna.
+verificar_copia() {
+  if command -v sqlite3 >/dev/null 2>&1; then
+    sqlite3 "$copia" 'PRAGMA integrity_check;' 2>&1 | head -1
+    return
+  fi
+  # Sin `sqlite3` en el anfitrión se usa el del contenedor, que la imagen instala desde el
+  # 2026-08-31. `--entrypoint sh` es obligatorio: sin él se ejecuta el servicio, no el comando.
+  local img; img="$(docker compose images -q "$servicio" 2>/dev/null | head -1)"
+  [ -n "$img" ] || { echo "SIN-VERIFICADOR: no se pudo resolver la imagen del servicio '$servicio'"; return; }
+  docker run --rm --entrypoint sh -v "$destino:/c" -w /c "$img" \
+    -lc "sqlite3 '/c/$nombre' 'PRAGMA integrity_check;'" 2>&1 | head -1
+}
+veredicto="$(verificar_copia)"
 
-if [ "$veredicto" != "ok" ]; then
-  rm -f "$copia"
-  morir "la copia NO verificó ('${veredicto:-sin respuesta}') y se borró. El almacén original no se tocó."
-fi
+case "$veredicto" in
+  ok)
+    ;;
+  SIN-VERIFICADOR:*|*"could not be loaded"*|*"not found"*|*"executable file"*|'')
+    echo "COPIA TOMADA Y SIN VERIFICAR · $copia" >&2
+    echo "  No se pudo correr la comprobación de integridad: ${veredicto:-sin respuesta}." >&2
+    echo "  LA COPIA NO SE BORRÓ. Verificala a mano con:" >&2
+    echo "    sqlite3 '$copia' 'PRAGMA integrity_check;'" >&2
+    exit 1
+    ;;
+  *)
+    rm -f "$copia"
+    morir "la copia NO verificó ('$veredicto') y se borró. El almacén original no se tocó."
+    ;;
+esac
 
 tamano="$(du -h "$copia" | cut -f1)"
 echo "Copia verificada."

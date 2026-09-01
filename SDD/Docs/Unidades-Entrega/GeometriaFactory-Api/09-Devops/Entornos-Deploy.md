@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Entornos-Deploy.md
-**Versión:** 3.4
+**Versión:** 3.5
 **Estado:** Propuesto
 **Fecha:** 2026-08-26
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -467,6 +467,31 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 
 **La ventana de indisponibilidad de la restitución, declarada por primera vez.** El respaldo **no la tiene** —no detiene el servicio—. La restitución **sí**: exige el servicio detenido, y dura lo que tarde copiar el archivo. **No hace falta decidir nada nuevo para aceptarla**: es la misma indisponibilidad que [`ADR-00007`](../05-Arquitectura-Tecnica/Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §6 punto 3 ya acepta —«se acepta la ventana de indisponibilidad de cada reemplazo de versión, ya aceptada por la fuente a cambio de no montar un proxy inverso»—, y por el mismo motivo de fondo: un proceso, un almacén, un curso.
 
+> **CORREGIDO el 2026-09-01, y hay que decir qué estuvo mal entre medio.** La emisión del
+> 2026-08-31 declaró el mecanismo construido **sin haberlo corrido una sola vez de punta a punta**, y
+> tenía dos defectos que lo volvían inservible justo donde importa —la máquina del docente—:
+>
+> 1. **El respaldo tomaba la copia y después la borraba él mismo.** Su verificador hacía `docker run`
+>    sobre una imagen cuyo `ENTRYPOINT` es el servicio, sin `--entrypoint sh`; el error se lo tragaba
+>    un `2>/dev/null`, el veredicto quedaba vacío y la rama de «no verificó» **borraba una copia
+>    sana**. Es el peor modo de falla posible para un respaldo: **creés que lo tenés y no lo tenés**.
+> 2. **La restitución no tenía modo contenedor**, de modo que la copia se podía tomar y **no se podía
+>    devolver**.
+>
+> Los dos los levantó la mesa del 2026-09-01 corriendo los guiones, que es lo que la emisión anterior
+> no hizo. Ahora el verificador tiene tres desenlaces y no dos —verificó, **no** verificó, y **no se
+> pudo** verificar, que **conserva la copia**— y la restitución tiene `--desde-contenedor`.
+>
+> **El ciclo completo, corrido el 2026-09-01:**
+>
+> ```text
+> estado inicial            cuentas=3  trabajos=5
+> respaldo                  Copia verificada · integridad: ok · exit=0
+> pérdida total             el almacén ya no existe
+> restitución               contiene: 3 cuenta(s) · 5 trabajo(s) · exit=0
+> recuento tras restituir   cuentas=3  trabajos=5
+> ```
+
 > **Lo que cambió el 2026-08-31, y por qué esta tabla se reescribió entera.** Hasta ese día las cuatro condiciones estaban declaradas y **ninguna tenía con qué cumplirse**: el barrido de `scripts/`, `deploy/` y `.github/` devolvía una sola coincidencia, `reset-db.sh`, que es el guion que **vacía** el almacén. Es el hallazgo `MI-01` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md), un `P0` votado 5-0, y su segunda mitad era peor que la primera: **la especificación escrita para construir el respaldo describía un modo de diario que el producto no usaba**, de modo que el `P0` no se cerraba siguiendo el corpus.
 
 **`PD-04` sigue abierto y CAMBIA DE CONTENIDO, no de dueño.** Ya no dice «no hay respaldo»: dice **falta la política** —cada cuánto, dónde y cuánto se conserva—, que es del Product Owner. **El mecanismo existe; mientras `PD-04` siga abierto, la copia existe si alguien la corrió.** Registrado en [`Pipeline-CI-CD.md`](Pipeline-CI-CD.md) §10.
@@ -497,6 +522,7 @@ Es la tabla que reemplaza a la de ambientes, y dice lo que un lector de esta cat
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.5 | 2026-09-01 | **El mecanismo de respaldo se corrigió y se CORRIÓ, que es lo que la emisión anterior no hizo.** La mesa del 2026-09-01 lo ejerció y encontró dos defectos que lo volvían inservible en la máquina del docente: el respaldo **borraba la copia que acababa de tomar** —su verificador hacía `docker run` sin `--entrypoint sh` sobre una imagen cuyo `ENTRYPOINT` es el servicio, un `2>/dev/null` se tragaba el error y la rama de «no verificó» destruía una copia sana— y **la restitución no tenía modo contenedor**, de modo que la copia se podía tomar y no devolver. Ahora el verificador tiene **tres** desenlaces y no dos: verificó, **no** verificó —y borra, porque una copia corrupta ocupa el lugar de la que falta— y **no se pudo** verificar, que **conserva la copia** y sale 1 diciendo por qué. **Ante la duda se guarda.** Se pega el **ciclo completo corrido**: 3 cuentas y 5 trabajos, respaldo verificado, pérdida total del almacén, restitución, y el mismo recuento del otro lado. | Orquestador SDD |
 | 3.4 | 2026-08-31 | **`U-01` del plan de la mesa del 2026-08-31: el respaldo existe, y el diario es el que la fuente declara.** Cierra el hallazgo `MI-01`, un `P0` votado 5-0: el respaldo era **el único mecanismo de vuelta atrás que el corpus declaraba** y **no existía en ningún árbol** —el barrido de `scripts/`, `deploy/` y `.github/` devolvía una sola coincidencia, `reset-db.sh`, que es el guion que **vacía** el almacén—. **Y su segunda mitad era peor**: la especificación escrita para construirlo describía diario **WAL** mientras `UseSqlite(cadena)` a secas dejaba el motor en `delete`, de modo que **el `P0` no se cerraba siguiendo el corpus**. Entra `StorePreparation` fijando `PRAGMA journal_mode=WAL` y **leyendo lo que el motor contesta** —sobre un almacén en memoria SQLite se queda en `delete` y **no falla**—; `sqlite3` entra a la imagen de ejecución con su motivo escrito, para que la copia se pueda tomar **desde adentro del contenedor** y no dependa de lo que el host del destino tenga; y entran `scripts/respaldo-almacen.sh` —`VACUUM INTO` y no `cp`, sin detener el servicio, negándose si el destino es el directorio del almacén, y con `integrity_check` que **borra la copia si no verifica**— y `scripts/restaurar-almacen.sh`, que **no borra el almacén anterior: lo aparta con sello**, que es la lección del 2026-08-15. **La política sigue sin declararse y es deliberado**: la frecuencia, el destino y la retención son `PD-04` y son del Product Owner. **Un número puesto en el guion se propaga como si fuera del producto.** |
 | 3.3 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **12 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 3.1 | 2026-08-24 | **Ronda 3 del corte 09 de la migración 10.0 → 13.3**, sobre el re-audit independiente, que pasó de RECHAZADO a **APROBADO CON HALLAZGOS**: el P0 y los cinco P1 quedaron cerrados y aparecieron cuatro P2 y tres P3. **§2.b suma el estado del apartamiento en el que se apoya** (**P3**): `ADR-14004` está **`Propuesto`**, no aceptado, y la emisión anterior lo citaba como si ya autorizara. Se dice en lugar de omitirse, con el precedente de `ADR-14003`, que pasó a `Aceptado` por un acto explícito del Product Owner. |
