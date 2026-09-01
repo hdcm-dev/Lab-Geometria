@@ -7,6 +7,12 @@
 **Instrumento:** entrega P4 de la mesa registrada en [`Mesa-2026-08-31-B.md`](Mesa-2026-08-31-B.md)
 **Estado:** **Propuesto.** Ninguna unidad se ejecutó; **espera aprobación del Product Owner**
 
+> **AVISO SOBRE LOS NÚMEROS DE LÍNEA DE `ClassSubmissionList.razor`.** Este plan se escribió antes de
+> `U-02`, que **agregó ~48 líneas** a ese archivo. Las citas del tipo `:323`, `:331`, `:340` y `:275-281`
+> corresponden al árbol **anterior** a esa unidad; hoy son `:368`, `:376`, `:385` y `:320-326`. **Los
+> hechos que citan no cambiaron** —las dos llamadas al servicio siguen ahí, y la primera sigue siendo sin
+> criterio—: lo que se movió es dónde están. Verificado el 2026-08-31 al ejecutar `U-08`.
+>
 > **Los identificadores de hallazgo se renumeraron de `F-NN` a `MI-NN` al emitir.** La mesa los produjo
 > con el prefijo `F`, que **ya nombra 294 apariciones en `Audit/`** —los informes de Fase F—, y
 > `Mesa-Rules.md` §2.2 punto 1 prohíbe reusar una familia presente en la carpeta. `MI` se verificó libre
