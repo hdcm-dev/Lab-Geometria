@@ -47,9 +47,36 @@ const morir = async (motivo) => {
     process.exit(2);
 };
 
-navegador = await chromium.launch();
-const pagina = await (await navegador.newContext()).newPage();
+// La huella del certificado efímero, cuando la verificación corre sobre HTTPS: hace que
+// Chromium lo trate como VÁLIDO, que es lo único que le permite guardar cookies `Secure`.
+const spki = process.env.GF_SPKI || '';
+navegador = await chromium.launch({
+    args: spki ? ['--ignore-certificate-errors-spki-list=' + spki.trim()] : [],
+});
+// El certificado del banco es propio y efímero: el navegador lo acepta a propósito.
+const pagina = await (await navegador.newContext({ ignoreHTTPSErrors: true })).newPage();
 pagina.setDefaultTimeout(15000);
+
+// ---- LO QUE PASA DEL LADO DEL NAVEGADOR SE MIRA, NO SE SUPONE --------------
+// El circuito puede no engancharse sin que la pantalla diga nada: el marcado
+// prerrenderizado queda igual y los botones quedan muertos. Sin esto, un
+// «no pasa nada» no distingue entre el manejador ausente y el circuito caído.
+const bitacora = [];
+pagina.on('console', (m) => bitacora.push(`consola[${m.type()}] ${m.text().slice(0, 220)}`));
+pagina.on('pageerror', (e) => bitacora.push(`EXCEPCIÓN DE PÁGINA · ${String(e).slice(0, 220)}`));
+pagina.on('requestfailed', (r) => bitacora.push(`petición fallida · ${r.url().slice(0, 140)} · ${r.failure()?.errorText}`));
+pagina.on('response', (r) => {
+    const u = r.url();
+    if (u.includes('_blazor') || u.includes('blazor.web.js')) {
+        bitacora.push(`respuesta ${r.status()} · ${u.slice(0, 140)}`);
+    }
+});
+pagina.on('websocket', (ws) => bitacora.push(`websocket abierto · ${ws.url().slice(0, 120)}`));
+
+const volcarBitacora = () => {
+    console.log('   ---- bitácora del navegador ----');
+    for (const linea of bitacora.slice(-25)) console.log(`   ${linea}`);
+};
 
 // ---- Entrar como administrador ---------------------------------------------
 await pagina.goto(`${base}/ingreso`, { waitUntil: 'load' });
@@ -60,11 +87,31 @@ await Promise.all([
     pagina.click('button[type="submit"]'),
 ]);
 
+// EL INGRESO SE COMPRUEBA, NO SE SUPONE. Si no entró, todo lo que siga mide otra
+// cosa: el 2026-09-01 esta verificación informó «el bloque no se dibujó» cuando
+// en realidad el navegador estaba parado en `/ingreso`, y eso hizo creer por un
+// rato que el producto fallaba en `Production`.
+console.log(`   tras enviar el ingreso, el navegador quedó en: ${pagina.url()}`);
+if (new URL(pagina.url()).pathname === '/ingreso') {
+    const banda = await pagina.locator('.gf-banner--error').count() > 0
+        ? (await pagina.locator('.gf-banner--error').first().innerText()).replace(/\s+/g, ' ')
+        : '(sin banda de error: el formulario volvió limpio, así que la MARCA DE SESIÓN no se conservó)';
+    const galletas = await pagina.context().cookies();
+    console.log(`   cookies tras el ingreso: ${galletas.map((c) => `${c.name}[secure=${c.secure},sameSite=${c.sameSite}]`).join(', ') || '(ninguna)'}`);
+    await morir(`el ingreso no prosperó · ${banda}`);
+}
+
 // ---- 1 · el bloque se dibuja -----------------------------------------------
 await pagina.goto(`${base}/trabajos/${trabajoId}`, { waitUntil: 'load' });
 
 const aprobar = pagina.locator('[data-gf-outcome="Approve"]');
 if (await aprobar.count() === 0) {
+    // NO SE MUERE SIN DECIR QUÉ SE VIO. Un «no se dibujó» a secas no distingue
+    // entre no haber entrado, haber entrado sin papel de administrador y que el
+    // trabajo esté en otro estado; y esas tres tienen arreglos distintos.
+    const cuerpo = (await pagina.locator('body').innerText()).replace(/\s+/g, ' ').slice(0, 400);
+    console.log(`   dirección: ${pagina.url()}`);
+    console.log(`   la página dice: ${cuerpo}`);
     await morir('el bloque de resolución no se dibujó para el administrador.');
 }
 paso(1, 'El bloque de resolución se dibuja', true);
@@ -93,6 +140,8 @@ try {
 
 paso(2, 'Apretar «Aprobar» abre el diálogo de confirmación', abrio,
     abrio ? '' : 'EL BOTÓN NO HIZO NADA: no hay diálogo. Es el defecto reportado.');
+
+if (!abrio) volcarBitacora();
 
 if (!abrio) {
     // Sin diálogo no hay nada más que comprobar, y hay que decir si además
