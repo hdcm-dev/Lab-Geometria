@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -65,6 +65,7 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.1.P.3 · Geometr
 - El componente de arranque y salud de [`../Arquitectura-Unidad-Entrega.md`](../Arquitectura-Unidad-Entrega.md) §3.1 es el único que dispara la preparación y el único que aloja el punto de salud.
 - **Convención impuesta:** ninguna operación de superficie dispara la preparación del almacén.
 - **Convención impuesta:** el punto de salud no lleva ni ruta, ni esquema, ni versión de dependencia en su respuesta.
+- **Convención impuesta desde el 2026-08-31:** el punto de salud **evalúa el almacén en cada consulta y no publica un sello del arranque**. `StoreHealth` cuenta las transformaciones aplicadas —abrir la conexión no alcanza: **SQLite crea el archivo al abrirlo**— e intenta una escritura que deshace. **Esta decisión no cambia: §2 puntos 4 y 5 ya la habían tomado y no se había realizado.** Hasta ese día `HealthEndpoint` publicaba `StoreIsPrepared`, un booleano escrito una sola vez en el arranque, y el sondeo de la composición lo consultaba cada 30 segundos: el servicio informaba **200 «Ready» indefinidamente con el almacén borrado, de sólo lectura o corrupto** (`MI-09` de [`../../../../Audit/Mesa-2026-08-31-B.md`](../../../../Audit/Mesa-2026-08-31-B.md), votado 5-0).
 - La ruta del almacén llega por la composición de raíz; **esta capa la toma de configuración y `GeometriaFactory-Infrastructure` la recibe** ([`ADR-00006`](ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md)).
 - La reversión declarada es volver a la etiqueta de la etapa anterior y reconstruir; el guion de restablecimiento del almacén **reproduce el estado de primer arranque** y no es un camino de producción.
 
@@ -91,3 +92,4 @@ Motivación upstream: NB-00003, NB-00008; `PRODUCT-INTAKE` §17.1.P.3 · Geometr
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Fija el arranque en dos fases sin escuchar hasta terminar, con el punto de salud sin credencial y sin detalle de dependencias, y sin modo de sólo lectura. Es lo que hace que la puerta de imagen del pipeline compruebe lo que declara y que el requerimiento de arranque en frío sea medible de punta a punta. Evalúa seis alternativas, declara cuatro trade-offs y fija seis métricas de validación. |
+| 1.1 | 2026-08-31 | **§7 suma una convención y la decisión NO cambia: el punto de salud evalúa el almacén en cada consulta.** §2 puntos 4 y 5 ya declaraban que responde por el **estado** del servicio y no por haber arrancado; **la decisión estaba bien tomada y no se había realizado**. `HealthEndpoint` publicaba `StoreIsPrepared`, que `TwoPhaseStartup` escribe **una sola vez**, y el sondeo de la composición lo consultaba cada 30 segundos: **200 «Ready» indefinidamente con el almacén borrado, de sólo lectura o corrupto** — `MI-09`, votado 5-0. Entra `StoreHealth` con dos comprobaciones: contar las transformaciones aplicadas —**abrir la conexión no alcanza, SQLite crea el archivo al abrirlo**— e intentar una escritura que deshace. `compose.yaml` **no se toca**. | Orquestador SDD |
