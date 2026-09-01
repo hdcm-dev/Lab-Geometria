@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Registro-De-Cuenta.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -112,7 +112,7 @@ Estado de éxito, que reemplaza el contenido de la tarjeta:
 | Estado | Condición que lo produce | Representación esperada |
 | --- | --- | --- |
 | **Vacío** | **No aplica**: la superficie no presenta ninguna colección | Se declara para que la ausencia sea deliberada |
-| **Cargando** | La superficie se está armando | Esqueleto de tres campos dentro de la tarjeta |
+| **Cargando** | La superficie se está armando | Esqueleto de tres campos dentro de la tarjeta **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 | **Con datos** | Formulario listo | Tarjeta completa, foco inicial en el campo de correo |
 | **Enviando** | El alta está en curso | Acción primaria inhabilitada con indicador dentro. **Previene el doble envío** |
 | **Requisito no cumplido** | Falta uno de los tres campos | Borde de peligro en el campo faltante y banda de error. **No sale ninguna solicitud hacia el servicio de datos** |
@@ -120,7 +120,7 @@ Estado de éxito, que reemplaza el contenido de la tarjeta:
 | **Error de operación · campo que el contrato nombra** | La solicitud llegó incompleta pese a la verificación previa | Se señala el campo que el contrato nombra |
 | **Éxito** | La cuenta quedó creada | El formulario se reemplaza por el bloque de éxito, que declara que **todavía no puede ingresar** y que **no se envió ningún correo** |
 | **Indisponible** | El servicio de datos no responde | Aviso de indisponibilidad dentro de la tarjeta. **Conserva lo escrito** y deja reintentar. El mensaje no nombra ninguna dirección de servicio interno. Ver [`Wireframes-Estado-Degradado-Y-Reconexion.md`](Wireframes-Estado-Degradado-Y-Reconexion.md) |
-| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto; la tarjeta permanece |
+| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto; la tarjeta permanece **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 
 ## 6. Versión angosta
 
@@ -162,3 +162,4 @@ Estado de éxito, que reemplaza el contenido de la tarjeta:
 | 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-00002` y `NB-00001` de la cabecera pasan a citarse con sección y criterio numerado. |
 | 1.1 | 2026-08-09 | **Propagación del `PRODUCT-INTAKE` 1.7**, que **retiró la exclusión X-2**. §3 corrige la única afirmación de este documento que 1.7 volvió falsa: decía que «no existe recuperación en este producto» y lo que no existe es la recuperación **autónoma**; el reseteo por el docente sí existe, aunque **tampoco se pide desde esta superficie**. Es el único cambio: la superficie de registro no gana ni pierde ningún componente, y sigue teniendo tres campos y ningún campo de contraseña. |
 | 1.2 | 2026-08-10 | **Cierra el hallazgo `C-08` (P2) del informe de auditoría `SDD/Docs/Audit/Coherencia-Corpus-r1.md` 1.0.** La cabecera de trazabilidad declaraba derivarse del `PRODUCT-INTAKE` **1.7**, versión archivada, y pasa a declarar la **1.14**, vigente. La **1.7** es la versión cuya letra sobre **RN-10013** e **INV-09** fue precisada en la 1.8 y corregida en la 1.14, que es exactamente el punto donde el corpus más se equivocó. Se revisó el cuerpo antes de mover la cabecera y **no arrastra ninguna decisión de las versiones intermedias**: no queda en él ningún recuento de «quince reglas» ni de «diecisiete códigos», ninguna cita a la exclusión **X-2** como vigente y ninguna afirmación de que la marca de cambio de contraseña pendiente la ponga únicamente el reseteo. **Ningún contenido normativo de este documento cambia: la corrección es de trazabilidad.** Sube minor. |
+| 1.3 | 2026-08-31 | **`U-06` del plan de la mesa: las promesas que este modo de render no puede cumplir se acotan, y no se retiran.** `ADR-10001` **1.1** §2.1 declaró el reparto real —**seis superficies interactivas de catorce**— y de ahí se sigue que en las estáticas **no existe el instante que un esqueleto ocupa** ni circuito que se pueda cortar: el servidor entrega el documento completo o nada. Las filas **Cargando** y **Reconectando** de las superficies estáticas quedan marcadas **NO APLICA**, y `Credencial-Propia` **parcialmente aplicable**, porque tiene tres componentes y uno es estático. **Ninguna fila se borra**: un estado prometido que se retira sin dejar rastro obliga al próximo lector a redescubrir por qué. Cierra `MI-07`, `MI-10` y `MI-12`. |

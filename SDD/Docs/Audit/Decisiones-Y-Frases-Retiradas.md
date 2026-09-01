@@ -103,6 +103,7 @@ la fase `i`» también.
 | `DF-03` | **`restart: unless-stopped` no reacciona** a un `healthcheck` en rojo | Docker reinicia por salida del proceso, no por salud; hoy no hay ciclo que corregir | Que entre al despliegue un supervisor que **sí** reaccione a la salud | Equipo |
 | `DF-04` | El **peso del documento** se mide en unidades del DOM y no en bytes transferidos | El instrumento reporta `content().length`; la compresión no está activa | `U-09`, que separa las dos columnas | Equipo |
 | `DF-05` | **`gf-notice`** existía como clase inventada; se retiró usando `gf-banner` | El sistema visual no tiene un aviso propio para este caso | Que la maqueta incorpore un aviso distinto del `banner` | Equipo |
+| `DF-07` | **`[StreamRendering]` para las tres superficies de listado** — es la única salida que permite un esqueleto sin volver la página interactiva | El producto no lo usa en ninguna parte; adoptarlo es una decisión de arquitectura de la pieza pública y no un arreglo de wireframe | Que una medición sobre el destino real muestre la primera pintura por encima de **400 ms** con el volumen que la comisión tenga | Equipo, con `ADR-10001` |
 | `DF-06` | **`NotFoundPage` es interactiva sin motivo declarado** — residuo de la etapa `b`, la única de las seis que no justifica su modo en la cabecera | Volverla estática es un cambio de código que `ADR-10001` 1.1 **no ordena**; la ADR fija el criterio, no reescribe lo existente | Que se toque esa superficie por cualquier otro motivo, o que la salida preferente de `ADR-10001` §7 se active | Equipo |
 
 ---

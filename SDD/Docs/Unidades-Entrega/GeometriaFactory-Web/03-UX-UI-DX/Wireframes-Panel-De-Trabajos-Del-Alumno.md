@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Panel-De-Trabajos-Del-Alumno.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -107,7 +107,7 @@ Estado vacío, que es el primero que el alumno ve en su vida en el producto:
 | Estado | Condición que lo produce | Representación esperada |
 | --- | --- | --- |
 | **Vacío** | La colección llegó con cero elementos, declarado **por el tipo recibido y no por el conteo** | Ilustración neutra, texto orientativo y la acción de cargar el primer trabajo. **Distinguible del aviso de indisponibilidad** |
-| **Cargando** | El listado está en camino | Esqueleto por fila. **Nunca una tabla vacía mientras carga**: se confundiría con el estado vacío |
+| **Cargando** | El listado está en camino | Esqueleto por fila. **Nunca una tabla vacía mientras carga**: se confundiría con el estado vacío **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 | **Con datos** | Hay trabajos | Filas con su insignia y sus acciones por estado |
 | **Filtrado sin resultados** | El filtro no deja ninguna fila | Estado vacío de filtro, con la acción de limpiar el filtro. **Distinto del vacío de colección**: acá sí hay trabajos |
 | **Acciones por estado** | Cada fila, según su estado | `Borrador`: abrir, editar, eliminar. `Pendiente`, `Finalizado` y `Rechazado`: **sólo abrir**. Lo que el estado no admite **no se dibuja**, ni siquiera inhabilitado |
@@ -117,7 +117,7 @@ Estado vacío, que es el primero que el alumno ve en su vida en el producto:
 | **Error de operación** | Se fuerza la eliminación de un trabajo que no está en estado `Borrador` | La eliminación no procede. Se declara **el estado actual del trabajo** y se recarga el listado. Terminación controlada |
 | **Trabajo ajeno o inexistente** | Se pidió por dirección directa un trabajo que no es del alumno | Mensaje neutro que no distingue los dos casos, y regreso al listado, **que no cambia** |
 | **Indisponible** | El servicio de datos no responde | Aviso de indisponibilidad en lugar del listado. **No se muestra ningún listado con datos viejos**, porque la pieza pública no guarda copia |
-| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto; el listado permanece a la vista |
+| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto; el listado permanece a la vista **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 
 ## 6. Versión angosta
 
@@ -136,6 +136,10 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 **Accesibilidad.** El listado se marca como tabla con encabezados de columna asociados en la versión ancha, y como lista de artículos en la angosta. **Cada acción por fila declara sobre qué trabajo actúa**, no sólo su verbo: una fila de acciones que anuncia «abrir, editar, eliminar» tres veces seguidas es inutilizable con lector de pantalla. Las cuatro insignias llevan texto y no se comunican sólo por color. El diálogo de confirmación toma el foco al abrirse y lo devuelve al control que lo abrió al cerrarse, sin trampa de foco. El estado vacío tiene su ilustración marcada como decorativa: **la información crítica está en el texto**, no en el dibujo. Objetivos de toque de al menos 24×24 px en todas las acciones por fila.
 
 **Performance percibida.** Esqueleto por fila por encima de 400 ms, con la cantidad de filas del último recorrido conocido o tres si no hay ninguno. El filtro es local y responde de inmediato.
+
+> **EL ESQUELETO NO SE PUEDE DIBUJAR EN ESTA SUPERFICIE, y la promesa se acota en lugar de retirarse.** Es de **render estático** (`ADR-10001` §2.1): el componente pide los datos en `OnInitializedAsync` y el servidor entrega **el documento completo o nada**. No hay ningún instante en el que el navegador tenga la página sin los datos, que es exactamente el instante que un esqueleto ocupa. El listado propio tiene tope natural —los trabajos de una persona— y **no se midió por separado**: queda registrado que su volumen es acotado por construcción.
+>
+> **No es imposible en general: es imposible con este modo de render.** La salida existe y es acotada —`[StreamRendering]`, que manda un marcador y después transmite **sin volver la página interactiva**— y **el producto no la usa en ninguna parte**. Mientras no se adopte, lo que la persona ve mientras carga es la página anterior. `MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md).
 
 **Internacionalización.** La fecha del trabajo la declara el alumno y se rotula como tal, distinta de cualquier fecha que produzca el sistema. Los recuentos usan números tabulares para que las columnas alineen.
 
@@ -162,3 +166,4 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | 1.0 | 2026-08-09 | Emisión inicial. Listado propio con los cuatro estados y sus acciones por estado dibujadas por ausencia y no por inhabilitación, filtro local que no origina peticiones, estado vacío como invitación distinguible del aviso de indisponibilidad por el tipo recibido, declaración explícita de que el comentario no viaja en el listado y de por qué el estado nuevo no aparece solo, versión angosta con reflujo de filas a tarjetas, y doce estados declarados para la Fase B2. |
 | 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-00003` y `NB-00009` de la cabecera pasan a citarse con sección y criterio numerado. |
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-04** (recuentos sin dato declarado): las columnas de piezas y de advertencias de `Entrega 1` pasan de `4 / 1` a `1 / 0` y las de `Primer intento` de `2 / 3` a `1 / 1`, que son los valores de los escenarios `E-4` y `E-3` del `PRODUCT-INTAKE` §20 que esos trabajos materializan; las cifras anteriores no correspondían a ningún escenario declarado. **H-03**: §2 suma la nota que declara a este documento dueño único del conjunto de datos de ejemplo del alumno, del que `Wireframes-Listado-De-La-Comision.md` deriva el suyo. |
+| 1.1 | 2026-08-31 | **`U-06` del plan de la mesa: las promesas que este modo de render no puede cumplir se acotan, y no se retiran.** `ADR-10001` **1.1** §2.1 declaró el reparto real —**seis superficies interactivas de catorce**— y de ahí se sigue que en las estáticas **no existe el instante que un esqueleto ocupa** ni circuito que se pueda cortar: el servidor entrega el documento completo o nada. Las filas **Cargando** y **Reconectando** de las superficies estáticas quedan marcadas **NO APLICA**, y `Credencial-Propia` **parcialmente aplicable**, porque tiene tres componentes y uno es estático. **Ninguna fila se borra**: un estado prometido que se retira sin dejar rastro obliga al próximo lector a redescubrir por qué. Cierra `MI-07`, `MI-10` y `MI-12`. |
