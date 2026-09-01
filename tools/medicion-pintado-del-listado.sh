@@ -156,8 +156,8 @@ alta_y_envios() {
 # Medición
 # ---------------------------------------------------------------------------
 echo
-printf '%-9s %-9s %-16s %-18s %-12s\n' TRABAJOS ALUMNOS "1ª PINTURA" "FILTRO (navegación)" "DOCUMENTO"
-printf '%s\n' "----------------------------------------------------------------------------"
+printf '%-20s %-7s %-8s %-12s %-10s %-12s %s\n' SUPERFICIE FILAS ALUMNOS "1a PINTURA" "FILTRO" "MARCADO" "TRANSFERIDO"
+printf '%s\n' "---------------------------------------------------------------------------------------------"
 
 alumnos=0
 for corte in $cortes; do
@@ -166,18 +166,28 @@ for corte in $cortes; do
     alumnos=$((alumnos + 1)); alta_y_envios "$alumnos" || morir "falló el alta del alumno $alumnos."
   done
   filas=$((alumnos * por_alumno))
-  salida="$(docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp --network host \
-    -v "$raiz/tools:/t" -w /t "$imagen_pw" \
-    bash -c "npm install --no-save playwright@1.48.0 >/dev/null 2>&1 && \
-             node medicion-pintado-del-listado.mjs '$base_web' '$correo_admin' '$clave_admin' $alumnos $filas" \
-    2>/dev/null | tail -1)"
-  err="$(printf '%s' "$salida" | sed -n 's/.*"error":"\([^"]*\)".*/\1/p')"
-  [ -n "$err" ] && morir "el navegador no pudo medir a $filas trabajos: $err"
-  leer() { printf '%s' "$salida" | sed -n "s/.*\"$1\":\([^,}]*\).*/\1/p"; }
-  printf '%-9s %-9s %-16s %-18s %-12s\n' \
-    "$(leer filas)" "$(leer grupos)" "$(leer pintura_ms) ms" \
-    "$( [ "$(leer filtro_ms)" = "null" ] && echo 'no se pudo' || echo "$(leer filtro_ms) ms" )" \
-    "$(numfmt --to=iec "$(leer bytes)" 2>/dev/null || leer bytes)"
+  # `/cuentas` espera UNA FILA POR ALUMNO y no una más: el panel lista **cuentas de
+  # alumno** y la del administrador no figura —«Todavía no hay ninguna cuenta de alumno»
+  # es su vacío—. La primera corrida esperó `alumnos + 1` y falló con 10 de 11: la
+  # expectativa estaba mal, no el producto. Y no agrupa, por eso el 0.
+  for superficie in "entrega-comision:$alumnos:$filas" "cuentas:0:$alumnos"; do
+    ruta="/${superficie%%:*}"; resto="${superficie#*:}"
+    g="${resto%%:*}"; f="${resto##*:}"
+    salida="$(docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp --network host \
+      -v "$raiz/tools:/t" -w /t "$imagen_pw" \
+      bash -c "npm install --no-save playwright@1.48.0 >/dev/null 2>&1 && \
+               node medicion-pintado-del-listado.mjs '$base_web' '$correo_admin' '$clave_admin' '$ruta' $g $f" \
+      2>/dev/null | tail -1)"
+    err="$(printf '%s' "$salida" | sed -n 's/.*"error":"\([^"]*\)".*/\1/p')"
+    [ -n "$err" ] && morir "el navegador no pudo medir $ruta con $f fila(s): $err"
+    leer() { printf '%s' "$salida" | sed -n "s/.*\"$1\":\([^,}]*\).*/\1/p"; }
+    filtro="$(leer filtro_ms)"
+    printf '%-20s %-7s %-8s %-12s %-10s %-12s %s\n' \
+      "$ruta" "$(leer filas)" "$alumnos" "$(leer pintura_ms) ms" \
+      "$( [ "$filtro" = "null" ] && echo '--' || echo "$filtro ms" )" \
+      "$(numfmt --to=iec "$(leer marcado_emitido)" 2>/dev/null || leer marcado_emitido)" \
+      "$(numfmt --to=iec "$(leer bytes_transferidos)" 2>/dev/null || leer bytes_transferidos)"
+  done
 done
 
 echo
