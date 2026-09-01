@@ -130,6 +130,7 @@ jobs:
           FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
         run: |
           set -euo pipefail
           host="${FTP_SERVER#ftp://}"; host="${host%/}"
@@ -144,7 +145,32 @@ jobs:
             --upload-file app_offline.htm \
             "ftp://${host}${dir}/app_offline.htm" \
             --user "${FTP_USERNAME}:${FTP_PASSWORD}"
-          echo "Aplicacion detenida. Los ensamblados quedaron libres."
+          echo "app_offline.htm en su lugar. Ahora hay que ESPERAR A QUE BAJE DE VERDAD."
+
+          # SUBIR EL ARCHIVO NO ES QUE LA APLICACION ESTE ABAJO, y confundir las dos cosas
+          # costo la corrida #39: el paso subia el archivo y arrancaba a copiar en el acto,
+          # IIS todavia no habia terminado de drenar, y la copia murio con 550 en
+          # `GeometriaFactory.Contracts.dll`. Medido a mano contra el anfitrion real:
+          #
+          #     aplicacion arriba   ->  curl: (25) Failed FTP upload: 550
+          #     sitio en HTTP 503   ->  subio
+          #
+          # Asi que no se supone: se espera hasta VER el 503, y si no llega, se falla acá
+          # —con la aplicacion abajo— en vez de fallar a mitad de la copia con el sitio en
+          # un estado mezclado. Es el mismo defecto que la mesa del 2026-09-01 nombro para
+          # todo el producto: VERIFICAR LA CONDICION Y NO EL EFECTO.
+          for intento in $(seq 1 30); do
+            codigo="$(curl --silent --output /dev/null --write-out '%{http_code}' \
+                      --max-time 15 "$PUBLIC_URL" || true)"
+            if [ "$codigo" = "503" ]; then
+              echo "La aplicacion esta abajo (HTTP 503) tras $((intento * 5)) s. Los ensamblados quedaron libres."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::app_offline.htm esta puesto pero el sitio sigue respondiendo $codigo despues de 150 s."
+          echo "No se copia nada: una copia sobre la aplicacion viva falla a la mitad y deja el sitio mezclado."
+          exit 1
 
       - name: Subir por FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -164,6 +190,7 @@ jobs:
           FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
         run: |
           set -euo pipefail
           host="${FTP_SERVER#ftp://}"; host="${host%/}"
@@ -172,9 +199,21 @@ jobs:
             "ftp://${host}${dir}/" \
             --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
             --quote "-DELE ${dir}/app_offline.htm" --output /dev/null
-          echo "Aplicacion levantada. Arranca leyendo el appsettings.json recien subido."
-          echo "Se le dan 25 s para el arranque en frio antes de comprobarla."
-          sleep 25
+          echo "app_offline.htm retirado. Se espera a que la aplicacion vuelva a atender."
+
+          # Y ACA TAMBIEN SE MIRA EL EFECTO. Un arranque en frio de Blazor sobre este
+          # anfitrion tarda; darle un `sleep` fijo y seguir haria que la comprobacion final
+          # falle por impaciencia y no por un defecto real.
+          for intento in $(seq 1 24); do
+            codigo="$(curl --silent --output /dev/null --write-out '%{http_code}' \
+                      --max-time 20 "$PUBLIC_URL" || true)"
+            case "$codigo" in
+              503|000) sleep 5 ;;
+              *) echo "La aplicacion volvio (HTTP $codigo) tras $((intento * 5)) s, leyendo el appsettings.json recien subido."; exit 0 ;;
+            esac
+          done
+          echo "::error::La aplicacion no volvio a atender despues de 120 s: sigue en $codigo."
+          exit 1
 
       - name: Comprobar que la direccion publica responde
         env:
