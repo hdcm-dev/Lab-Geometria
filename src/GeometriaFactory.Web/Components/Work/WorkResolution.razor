@@ -6,7 +6,7 @@
    NO ES UN DESTINO DE NAVEGACIÓN Y NO TIENE RUTA. `Linea-Base-Visual.md` §2 lo declara así:
    es la única superficie ALOJADA, se dibuja dentro de `SUP-07`, y «un sistema construido que le
    dé ruta propia es DERIVA MAYOR». Por eso este archivo vive en `Components/Work/` y no en
-   `Components/Pages/`: no lleva `@page`.
+   `Components/Pages/`: no lleva `@@page`.
 
    CUÁNDO SE DIBUJA. Lo decide `SUP-07` con las dos condiciones del wireframe, las dos sobre el
    dato: quien mira es el administrador Y el trabajo está en estado `Pendiente`. Acá no se repiten:
@@ -19,7 +19,26 @@
 
    **LA PANTALLA NO ES LA DEFENSA.** Que estos botones sólo existan sobre un trabajo en `Pendiente`
    no prueba nada: quien acota el desenlace al papel y al estado es el servicio de datos, y lo hace
-   aunque la petición no pase por ninguna pantalla. *@
+   aunque la petición no pase por ninguna pantalla.
+
+   ============================================================================================
+   ESTE BLOQUE ESTUVO INERTE DESDE QUE SE CONSTRUYÓ, y lo reportó el Product Owner el 2026-09-01:
+   «cuando hago aprobar trabajo no lo hace». No fallaba: NO HACÍA NADA. Sin error, sin aviso.
+
+   LA CAUSA. Los tres controles son `@@onclick`, y un `@@onclick` sólo se cablea si el componente
+   se dibuja en modo INTERACTIVO. `SUP-07` —la superficie que lo aloja— no declara `@@rendermode`,
+   de modo que todo el árbol se dibujaba en render estático de servidor y los tres manejadores no
+   llegaban nunca al navegador. El barrido de las catorce superficies dio que sólo SEIS declaraban
+   modo interactivo, y `SUP-07` no era una de ellas.
+
+   POR QUÉ EL MODO SE DECLARA EN LA INSTANCIA Y NO EN LA PÁGINA. `SUP-07` es una superficie de
+   LECTURA —datos, observaciones, texto original, el visor— y volverla interactiva entera abriría
+   un circuito para dibujar cosas que no lo necesitan, en un anfitrión donde la conexión de tiempo
+   real ni siquiera consigue WebSockets y se repliega a sondeo largo. `Blazor` permite declarar el
+   modo POR COMPONENTE, así que lo lleva la instancia de este bloque: la página sigue estática y
+   sólo el pedazo que tiene botones toma circuito. `WorkId`, `Name` y `OwnerName` son
+   serializables, que es lo que ese modo exige de los parámetros.
+   ============================================================================================ *@
 
 @using GeometriaFactory.Contracts.Works
 @inject DataServiceClient DataService
@@ -64,30 +83,116 @@
     }
 
     <div class="gf-footer-actions gf-justify-start">
+        @* LOS TRES CONTROLES ABREN SU DIÁLOGO Y NO APLICAN NADA, que es lo que el wireframe §3
+           declara para los tres: «Abre el diálogo de confirmación» para las dos decisiones y
+           «Abre su propio diálogo» para el retiro. La versión anterior aplicaba en el acto —los
+           dos diálogos declarados NO ESTABAN CONSTRUIDOS—, y eso pasaba desapercibido nada más
+           que porque los botones estaban inertes. Al volverlos vivos, «Retirar» habría borrado un
+           trabajo de un solo clic. *@
         <button type="button" class="gf-btn gf-btn--primary" disabled="@_working"
-                data-gf-outcome="@WorkOutcomeName.Approve" @onclick="() => ResolveAsync(WorkOutcomeName.Approve)">Aprobar</button>
+                data-gf-outcome="@WorkOutcomeName.Approve" @onclick="() => Ask(WorkOutcomeName.Approve)">Aprobar</button>
         @* Rechazar es una decisión legítima, no una destrucción: no es un control destructivo.
            Es la misma solicitud con el otro valor. *@
         <button type="button" class="gf-btn gf-btn--secondary" disabled="@_working"
-                data-gf-outcome="@WorkOutcomeName.Reject" @onclick="() => ResolveAsync(WorkOutcomeName.Reject)">Rechazar</button>
+                data-gf-outcome="@WorkOutcomeName.Reject" @onclick="() => Ask(WorkOutcomeName.Reject)">Rechazar</button>
         @* La acción de retirar queda visualmente separada de las dos decisiones, con su color de
-           peligro y su propio diálogo. *@
+           peligro y su propio diálogo. El rótulo accesible NOMBRA EL TRABAJO y no sólo el verbo,
+           que es lo que pide el wireframe §7. *@
         <span class="gf-flexible"></span>
         <button type="button" class="gf-btn gf-btn--destructive" disabled="@_working"
-                data-gf-withdraw @onclick="WithdrawAsync">Retirar</button>
+                aria-label="Retirar «@Name»"
+                data-gf-withdraw @onclick="() => Ask(Withdrawal)">Retirar</button>
     </div>
 </section>
 
+@* ---- Diálogo de confirmación del desenlace (wireframe §2) ------------------------------------
+   DECLARA LA TERMINALIDAD ANTES DE APLICARLA, y la asocia por descripción accesible a la acción
+   que confirma —`aria-describedby` sobre el botón—, para que un lector de pantalla la anuncie
+   JUNTO CON ELLA y antes de activarla. Es literalmente lo que pide el wireframe §7.
+
+   LA CONFIRMACIÓN NO ES ESCRITA, a diferencia de la baja de cuenta: el trabajo sigue existiendo
+   después del desenlace, y exigir transcribir su nombre trataría dos cosas distintas como si
+   fueran la misma. El wireframe §3 lo dice con esas palabras. *@
+@if (_pending is { } outcome && outcome != Withdrawal)
+{
+    <dialog class="gf-dialog" aria-labelledby="resolution-confirm-heading" data-gf-dialog data-gf-dialog-modal>
+        <h2 id="resolution-confirm-heading">@VerbOf(outcome) «@Name»</h2>
+        <p id="resolution-confirm-terminality">
+            El trabajo pasa a @StateOf(outcome). Es definitivo: no se puede volver atrás.
+            Si @OwnerName quiere corregir, tiene que cargar un trabajo nuevo.
+        </p>
+        @* EL COMENTARIO SE MUESTRA TAL COMO QUEDÓ ESCRITO, para que se lea antes de aplicarlo
+           (wireframe §5, estado «Comentario escrito»). Si está vacío no se dibuja la línea: el
+           desenlace procede igual y el estado lo expresa por sí solo. *@
+        @if (!string.IsNullOrWhiteSpace(_comment))
+        {
+            <p class="gf-margin-top-2">Comentario: «@_comment»</p>
+        }
+        <div class="gf-footer-actions">
+            <button type="button" class="gf-btn gf-btn--secondary"
+                    data-gf-dialog-dismiss @onclick="Dismiss">Cancelar</button>
+            <button type="button" class="gf-btn @ButtonClassOf(outcome)" disabled="@_working"
+                    aria-describedby="resolution-confirm-terminality"
+                    data-gf-confirm-outcome="@outcome" @onclick="() => ResolveAsync(outcome)">@VerbOf(outcome)</button>
+        </div>
+    </dialog>
+}
+
+@* ---- Diálogo de confirmación del retiro (wireframe §2) ---------------------------------------
+   LLEVA BANDA DE ATENCIÓN Y EL OTRO NO, y la diferencia no es de énfasis: el desenlace deja el
+   trabajo en pie y el retiro lo hace desaparecer también del listado del alumno. Es el mismo par
+   —advertir una pérdida real contra descartar una supuesta— que el panel de cuentas ya distingue
+   con `gf-banner--warning` y `gf-banner--info`. Clase existente, ninguna acuñada acá. *@
+@if (_pending == Withdrawal)
+{
+    <dialog class="gf-dialog" aria-labelledby="resolution-withdraw-heading" data-gf-dialog data-gf-dialog-modal>
+        <h2 id="resolution-withdraw-heading">Retirar «@Name»</h2>
+        <p class="gf-banner gf-banner--warning" id="resolution-withdraw-warning">
+            El trabajo deja de existir y desaparece también del listado de @OwnerName.
+            No se puede deshacer.
+        </p>
+        <div class="gf-footer-actions">
+            <button type="button" class="gf-btn gf-btn--secondary"
+                    data-gf-dialog-dismiss @onclick="Dismiss">Cancelar</button>
+            <button type="button" class="gf-btn gf-btn--destructive" disabled="@_working"
+                    aria-describedby="resolution-withdraw-warning"
+                    data-gf-confirm-withdraw @onclick="WithdrawAsync">Retirar</button>
+        </div>
+    </dialog>
+}
+
 @code {
+    /// <summary>Nombre del desenlace ficticio que representa al retiro dentro de `_pending`.</summary>
+    /// <remarks>
+    /// NO ES UN DESENLACE Y NO VIAJA A NINGÚN LADO: los desenlaces reales son los dos de
+    /// <see cref="WorkOutcomeName"/> y el retiro es otra operación —un borrado—. Comparte la
+    /// variable de estado porque los tres diálogos son mutuamente excluyentes, y tenerlos en un
+    /// solo campo es lo que garantiza que nunca haya dos abiertos: el guion de superficie busca
+    /// `[data-gf-dialog]` con `querySelector`, en singular, y con dos abiertos atraparía el foco
+    /// en el primero.
+    /// </remarks>
+    private const string Withdrawal = "Withdrawal";
+
     /// <summary>El trabajo que se resuelve. Lo aporta la superficie que aloja este bloque.</summary>
     [Parameter, EditorRequired]
     public Guid WorkId { get; set; }
 
+    /// <summary>Nombre del trabajo. Los dos diálogos lo nombran, y el wireframe §2 lo exige.</summary>
+    [Parameter, EditorRequired]
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>Nombre del alumno dueño del trabajo, para el texto de los dos diálogos.</summary>
+    [Parameter, EditorRequired]
+    public string OwnerName { get; set; } = string.Empty;
+
     private string? _comment;
     private string? _failure;
 
+    /// <summary>Qué diálogo está abierto, o nulo si no hay ninguno.</summary>
+    private string? _pending;
+
     /// <summary>
-    /// Mientras hay una solicitud en vuelo, los tres controles quedan inhabilitados.
+    /// Mientras hay una solicitud en vuelo, los controles quedan inhabilitados.
     /// </summary>
     /// <remarks>
     /// NO ES COSMÉTICO: los dos desenlaces son terminales, y el segundo clic sobre «Aprobar» no
@@ -95,6 +200,44 @@
     /// un trabajo que ella misma acaba de resolver. Inhabilitar evita explicar eso.
     /// </remarks>
     private bool _working;
+
+    /// <summary>
+    /// Trae la identidad de la marca de sesión antes de que nada la lea.
+    /// </summary>
+    /// <remarks>
+    /// SIN ESTO EL BLOQUE FALLARÍA JUSTO DESPUÉS DE EMPEZAR A FUNCIONAR, y sería el peor de los
+    /// dos mundos: el botón por fin haría algo, y ese algo sería una negativa por falta de
+    /// credencial. Bajo render estático la identidad vive en el contexto de la petición y
+    /// <see cref="SessionState"/> la lee sola; dentro de un circuito ese contexto YA NO EXISTE
+    /// —lo dice la documentación de `LoadAsync`—, y la única fuente es el proveedor de estado de
+    /// autenticación, que responde de forma asincrónica. Al declarar el modo interactivo en la
+    /// instancia, este componente pasa a tener su propio alcance de servicios, distinto del de la
+    /// página que lo aloja: la carga hay que pedirla acá.
+    /// </remarks>
+    protected override Task OnInitializedAsync() => Session.LoadAsync();
+
+    /// <summary>Abre el diálogo de la acción pedida. No aplica nada.</summary>
+    /// <remarks>
+    /// ACÁ NO SE ENFOCA NI SE ABRE NADA A MANO, y es deliberado: los dos diálogos se sirven SIN el
+    /// atributo `open` y los promueve `surface-interaction.js`, que ya observa el documento y
+    /// reaplica sus mejoras cuando el circuito inserta marcado. Ese guion los abre con
+    /// `showModal()` —que es lo que los pone en la CAPA SUPERIOR, por encima del lienzo del visor
+    /// que si no se come los clics— y el navegador les da el foco al abrirlos. Poner acá una
+    /// tercera vía sería un segundo lugar decidiendo lo mismo.
+    /// </remarks>
+    private void Ask(string action)
+    {
+        _failure = null;
+        _pending = action;
+    }
+
+    /// <summary>Cierra el diálogo sin aplicar nada.</summary>
+    /// <remarks>
+    /// EL COMENTARIO ESCRITO SE CONSERVA. Cancelar es volver atrás sobre la decisión, no sobre lo
+    /// que la persona venía redactando; borrarlo la obligaría a escribirlo de nuevo por haber
+    /// querido releerlo.
+    /// </remarks>
+    private void Dismiss() => _pending = null;
 
     private async Task ResolveAsync(string outcome)
     {
@@ -110,14 +253,24 @@
                 // EL TEXTO DEL SERVICIO SE MUESTRA TAL CUAL: es el que la tabla única de traducción
                 // redactó para esa condición, y reescribirlo acá abriría un segundo lugar donde el
                 // mismo motivo puede decir otra cosa.
+                //
+                // Y EL DIÁLOGO SE CIERRA PARA QUE EL AVISO SE VEA: vive en la tarjeta, detrás del
+                // diálogo. Dejarlo abierto mostraría la falla tapada por lo que la produjo.
                 _failure = result.Error!.Message;
+                _pending = null;
                 return;
             }
 
             // SE VUELVE AL LISTADO DE LA COMISIÓN, que es donde el trabajo ya figura con su estado
             // nuevo (`Contracts CU-08007` §4, paso 5). Quedarse acá mostraría el mismo trabajo con
             // el bloque de resolución retirado, que se lee como si algo se hubiera roto.
-            Navigation.NavigateTo("/comision", forceLoad: true);
+            //
+            // LA RUTA ES `/entrega-comision`, Y HASTA HOY DECÍA `/comision`, QUE NO EXISTE. Era el
+            // segundo defecto de este bloque, y estaba TAPADO POR EL PRIMERO: con los botones
+            // inertes nadie llegaba nunca a esta línea. Arreglar sólo la interactividad habría
+            // dejado al administrador aprobando bien y cayendo en la pantalla de «no encontrado»,
+            // que se lee exactamente como si la aprobación hubiera fallado.
+            Navigation.NavigateTo("/entrega-comision", forceLoad: true);
         }
         finally
         {
@@ -144,14 +297,31 @@
             if (!result.Succeeded)
             {
                 _failure = result.Error!.Message;
+                _pending = null;
                 return;
             }
 
-            Navigation.NavigateTo("/comision", forceLoad: true);
+            Navigation.NavigateTo("/entrega-comision", forceLoad: true);
         }
         finally
         {
             _working = false;
         }
     }
+
+    /// <summary>El verbo de la decisión, que es el mismo del botón que abrió el diálogo.</summary>
+    /// <remarks>
+    /// EL WIREFRAME §3 EXIGE EL VERBO EXACTO, y que el título del diálogo y su acción usen la
+    /// misma palabra que el control de origen es lo que hace que la persona reconozca qué apretó.
+    /// </remarks>
+    private static string VerbOf(string outcome) =>
+        string.Equals(outcome, WorkOutcomeName.Approve, StringComparison.Ordinal) ? "Aprobar" : "Rechazar";
+
+    /// <summary>El estado al que el trabajo llega, con el rótulo que el resto del producto usa.</summary>
+    private static string StateOf(string outcome) =>
+        string.Equals(outcome, WorkOutcomeName.Approve, StringComparison.Ordinal) ? "Finalizado" : "Rechazado";
+
+    /// <summary>El color de la acción que confirma es el mismo que el del control que la abrió.</summary>
+    private static string ButtonClassOf(string outcome) =>
+        string.Equals(outcome, WorkOutcomeName.Approve, StringComparison.Ordinal) ? "gf-btn--primary" : "gf-btn--secondary";
 }
