@@ -77,7 +77,65 @@ jobs:
           path.write_text(json.dumps(settings, ensure_ascii=False, indent=2), encoding='utf-8')
           PY
 
-      - name: Subir por FTP
+      # ---- LA SUBIDA SE REINTENTA, Y NO ES PRUDENCIA GENERICA -------------------------
+      #
+      # El anfitrion tiene la aplicacion CORRIENDO con sus `.dll` abiertos, y la subida
+      # intenta reemplazarlos en caliente. Windows no lo permite y el servidor contesta:
+      #
+      #     FTPError: 550 The process cannot access the file because it is being used by
+      #     another process.
+      #
+      # Medido el 2026-09-01: las corridas 33, 35 y 36 fallaron las tres ahi, con la 34
+      # exitosa en el medio — la diferencia es si el sitio estaba dormido cuando llego la
+      # subida. Es TRANSITORIO y depende del reciclado del anfitrion, de modo que esperar y
+      # volver a intentar es la respuesta correcta y no un parche.
+      #
+      # POR QUE TRES PASOS Y NO UNA ACCION DE REINTENTO: incorporar una accion de terceros
+      # nueva es una decision de cadena de suministro que este flujo no toma de paso
+      # (`Supply-Chain-Seguridad.md`). Se repite la accion YA ANCLADA, que es mas verboso y
+      # no agrega una dependencia.
+      #
+      # Y EL ULTIMO INTENTO NO LLEVA `continue-on-error`: si los tres fallan, la corrida
+      # falla. Una subida que se rinde en silencio deja el sitio viejo con la corrida en
+      # verde, que es exactamente la clase de mentira que este flujo ya cometio.
+
+      - name: Subir por FTP · intento 1
+        id: ftp1
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./publish/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+
+      - name: Esperar a que el anfitrion suelte los archivos
+        if: steps.ftp1.outcome == 'failure'
+        run: |
+          echo "El primer intento no pudo escribir. Se espera 90 s a que el sitio quede quieto."
+          sleep 90
+
+      - name: Subir por FTP · intento 2
+        id: ftp2
+        if: steps.ftp1.outcome == 'failure'
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./publish/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+
+      - name: Esperar mas antes del ultimo intento
+        if: steps.ftp1.outcome == 'failure' && steps.ftp2.outcome == 'failure'
+        run: |
+          echo "El segundo intento tampoco. Se espera 180 s antes del ultimo."
+          sleep 180
+
+      - name: Subir por FTP · intento 3, el ultimo
+        if: steps.ftp1.outcome == 'failure' && steps.ftp2.outcome == 'failure'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -98,4 +156,24 @@ jobs:
           test -n "$PUBLIC_URL" || { echo "Falta el secreto PUBLIC_URL del repositorio."; exit 1; }
           status_code="$(curl --silent --show-error --location --max-time 30 --output /dev/null --write-out '%{http_code}' "$PUBLIC_URL")"
           echo "La direccion publica respondio $status_code"
+          test "$status_code" = "200" || { echo "La direccion publica no respondio 200."; exit 1; }
+
+          # ---- Y AHORA SE MIRA EL CONTENIDO, PORQUE EL 200 NO ALCANZA -------------------
+          #
+          # Hasta el 2026-09-01 esta comprobacion terminaba en la linea de arriba, y por eso
+          # el flujo podia declarar `success` con el sitio PUBLICADO Y SIN DATOS: la pagina
+          # de estado devuelve 200 aunque adentro diga que el servicio de datos no responde.
+          # La mesa del 2026-09-01 lo levanto, y el Product Owner lo vio antes que nadie:
+          # «hasta ahora no vi resultados funcionando».
+          #
+          # PUBLICADO Y ROTO NO ES UN EXITO. La pagina de estado existe para decir si el dato
+          # es real; si dice que no, la publicacion no cumplio su proposito.
+          estado="$(curl --silent --show-error --location --max-time 40 "${PUBLIC_URL%/}/estado" || true)"
+          if printf '%s' "$estado" | grep -q 'class="failure"'; then
+            echo "::error::El sitio esta publicado y NO alcanza al servicio de datos."
+            printf '%s' "$estado" | grep -oE '<p class="failure"[^>]*>[^<]{0,160}' | head -1
+            echo "Revisar el secreto API_BASE_URL y que esa direccion sea alcanzable DESDE somee."
+            exit 1
+          fi
+          echo "El sitio publicado alcanza al servicio de datos."
           test "$status_code" = "200"
