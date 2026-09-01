@@ -170,7 +170,13 @@ else
                         <summary class="gf-group-header">
                             <h2 class="gf-group-heading">
                                 <span class="gf-initials" aria-hidden="true">@group.Initials</span>
-                                @group.Name — @group.Email
+                                @* EL NOMBRE Y EL CORREO VAN EN SU PROPIO ELEMENTO, y no sueltos.
+                                   Sueltos son un nodo de texto que en una fila flexible NO SE PUEDE
+                                   ACOTAR, y a 360 px empujaban el recuento fuera de la pantalla: la
+                                   cabecera decía «Camila Rossi — camila.rossi@ejemplo.test 3 TRABAJ…»
+                                   con el número cortado contra el borde. Se vio en una captura, no
+                                   en una prueba: los conteos daban bien. *@
+                                <span class="gf-group-name">@group.Name — @group.Email</span>
                                 <span class="gf-group-count gf-num">@group.Count</span>
                             </h2>
                         </summary>

@@ -438,19 +438,51 @@ a { color: var(--color-brand-primary); }
 
 .gf-group { border: var(--border-hairline); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: var(--space-4); background: var(--color-background-primary); }
 .gf-group-header {
+  /* `box-sizing` EXPLÍCITO, y no debería hacer falta. La hoja tiene el reset global en su §Base
+     —`html { box-sizing: border-box }` más `*, *::before, *::after { box-sizing: inherit }`— y aun
+     así este `summary` computa `content-box`: MEDIDO en el navegador, con la cadena de ancestros
+     en `border-box` hasta el `details` y el corte exactamente acá.
+     La consecuencia era visible: `width: 100%` sobre 330 px de padre daba 330 + 28 de relleno =
+     358, el encabezado se salía 28 px del grupo —que recorta con `overflow: hidden`— y el
+     recuento «3 trabajos» quedaba cortado contra el borde a 360 px.
+     NO ES UN CASO AISLADO Y NO SE ARREGLA ACÁ: la misma medición contó **450 de 533 elementos**
+     de la página en `content-box`. Queda declarado como `DF-09`, porque cambiar el reset a lo
+     ancho del producto puede mover cualquier disposición y eso no se hace de paso. */
+  box-sizing: border-box;
   width: 100%; display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-3) var(--space-4); background: var(--color-background-tertiary);
   border: 0; border-bottom: var(--border-hairline); text-align: left;
   font-family: inherit; font-size: var(--type-body-strong-size); font-weight: 500; cursor: pointer;
 }
-.gf-group-count { margin-left: auto; font-size: var(--type-caption-size); color: var(--color-text-secondary); }
+.gf-group-count {
+  margin-left: auto; font-size: var(--type-caption-size); color: var(--color-text-secondary);
+  /* NO SE ENCOGE Y NO SE PARTE. `margin-left: auto` lo empuja al final, pero sin esto el
+     recuento seguía siendo un elemento flexible encogible: a 360 px se partía en dos líneas
+     y «trabajos» quedaba cortado contra el borde. Truncar el nombre no alcanzaba —hizo falta
+     también decir que el recuento es lo último que cede—. Dos correcciones para el mismo
+     defecto, y la segunda la encontró la captura DE LA PRIMERA. */
+  flex: 0 0 auto; white-space: nowrap;
+}
 /* El encabezado del grupo es un `h2` DENTRO del `summary`, para que la página tenga
    niveles de encabezado por los que saltar. Esta regla lo devuelve a la tipografía y a
    la disposición que el `summary` ya tenía: sin ella, la tipografía por omisión de un
    `h2` rompe la cabecera. No cambia nada de lo que se ve. */
 .gf-group-heading {
-  margin: 0; width: 100%; display: flex; align-items: center; gap: var(--space-3);
+  /* `flex: 1 1 auto; min-width: 0` y NO `width: 100%`. El `summary` que lo contiene es una fila
+     flexible CON RELLENO lateral: un hijo al 100 % del padre mide más que el espacio disponible y
+     desborda, y lo que se sale por la derecha es el recuento. Costó tres capturas encontrarlo,
+     porque las dos primeras correcciones —truncar el nombre y no dejar que el recuento se encoja—
+     eran necesarias y NINGUNA ERA LA CAUSA. */
+  margin: 0; flex: 1 1 auto; min-width: 0;
+  display: flex; align-items: center; gap: var(--space-3);
   font-size: inherit; font-weight: inherit; font-family: inherit;
+}
+/* El nombre y el correo ceden espacio antes que el recuento. `min-width: 0` es la mitad que
+   importa: sin él un elemento flexible NO SE ENCOGE por debajo de su contenido, y el recuento
+   —que se alinea al final— termina fuera de la pantalla. A 360 px pasaba exactamente eso. */
+.gf-group-name {
+  flex: 1 1 auto; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 /* Tarjetas apiladas: versión angosta de la fila de trabajo y de cuenta */
@@ -793,7 +825,10 @@ th.gf-th-plain--brief  { font-size: var(--type-caption-size); }
   .gf-shell-sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); }
   .gf-shell-sidebar .gf-identity { margin-bottom: 0; }
   .gf-nav { flex-direction: row; flex-wrap: wrap; }
-  .gf-sidebar-footer { margin-top: 0; width: 100%; border-top: 0; padding-top: 0; flex-direction: row; align-items: center; gap: var(--space-4); }
+  /* El pie de la barra pasa a fila, y TIENE QUE PODER DOBLARSE: con el botón de cerrar sesión
+     y el sello de versión en la misma línea, a 360 px el sello quedaba cortado contra el borde
+     —«VERSIÓN NO IDENTIFICA…»—. Se vio en una captura. */
+  .gf-sidebar-footer { margin-top: 0; width: 100%; border-top: 0; padding-top: 0; flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
   .gf-shell-content { padding: var(--space-5) var(--space-4); }
 
   /* Las filas dejan de ser filas de tabla y pasan a tarjetas apiladas.
