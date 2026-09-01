@@ -537,8 +537,22 @@ a { color: var(--color-brand-primary); }
    `failed` y `rejected` NO se muestran a propósito: la maqueta aprobó un solo texto, el de
    reintento, y mostrarlo cuando los reintentos se agotaron diría algo falso. Ver `DF-08`. */
 #components-reconnect-modal { display: none; }
-#components-reconnect-modal.components-reconnect-show { display: flex; }
+#components-reconnect-modal.components-reconnect-show,
+#components-reconnect-modal.components-reconnect-failed,
+#components-reconnect-modal.components-reconnect-rejected { display: flex; }
 #components-reconnect-modal.components-reconnect-hide { display: none; }
+
+/* CADA TRAMO MUESTRA SU PROPIO TEXTO. La emisión del 2026-08-31 sólo definía `show` y `hide`, y el
+   resultado fue que al AGOTARSE los reintentos el aviso desaparecía: pantalla viva, controles
+   muertos y cero aviso —el «vencimiento silencioso» que `Wireframes-Estado-Degradado-Y-Reconexion.md`
+   §5 prohíbe por escrito—. Es `R-1` de la mesa del 2026-09-01, y estuvo en producción. */
+#components-reconnect-modal .gf-reconnect-agotado { display: none; }
+#components-reconnect-modal.components-reconnect-failed .gf-reconnect-reintentando,
+#components-reconnect-modal.components-reconnect-rejected .gf-reconnect-reintentando { display: none; }
+#components-reconnect-modal.components-reconnect-failed .gf-reconnect-agotado,
+#components-reconnect-modal.components-reconnect-rejected .gf-reconnect-agotado {
+  display: inline; }
+.gf-reconnect-salida { color: inherit; font-weight: 600; margin-left: var(--space-2); }
 
 body.gf-inert .gf-shell,
 body.gf-inert .gf-canvas { pointer-events: none; filter: grayscale(.35) opacity(.7); }

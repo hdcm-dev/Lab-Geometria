@@ -27,14 +27,37 @@
    trabajo del componente ni de los shells —por eso `[Parameter] Visible` desaparece, y por eso
    instanciarlo a secas, como los dos shells ya lo hacen, pasa a ser correcto—.
 
-   LOS TRAMOS `failed` Y `rejected` QUEDAN SIN TEXTO A PROPÓSITO. La maqueta aprobó **un** texto,
-   el de reintento. Escribir los otros dos sería inventar castellano de producto, que es
-   exactamente lo que el sistema visual y textual prohíbe. Queda declarado y con disparador.
+   ---- Y ACÁ ESTUVO EL ERROR MÁS CARO DE ESTE COMPONENTE, corregido el 2026-09-01 ----
 
-   Y ESTO NO LLEGA AL SITIO PUBLICADO HASTA LA PRÓXIMA PUBLICACIÓN: el front vive en somee y se
-   despliega por su propio flujo. Hasta entonces, lo que se ve ahí sigue siendo el aviso del marco. *@
+   La emisión anterior dejó `failed` y `rejected` SIN MOSTRARSE, con este argumento: «la maqueta
+   aprobó un solo texto, el de reintento, y mostrarlo cuando los reintentos se agotaron diría algo
+   falso». El argumento sobre el texto era correcto. **La conclusión fue desastrosa.**
+
+   Lo que no vi: **el aviso por omisión del marco SÍ cubría ese caso**, y al declarar este elemento
+   se lo quité. Con la hoja definiendo sólo `show` y `hide`, al agotarse los reintentos el elemento
+   caía en `display: none`: **pantalla viva, controles muertos, CERO AVISO.** O sea que este
+   componente, que existe para avisar, dejó a la persona con menos aviso del que tenía antes — y
+   estuvo así EN PRODUCCIÓN. Lo levantó la mesa del 2026-09-01 como `R-1`.
+
+   POR QUÉ NO ALCANZABA CON «NO HAY TEXTO APROBADO». Porque el corpus SÍ declara el principio, y lo
+   declara para el caso vecino: `Wireframes-Estado-Degradado-Y-Reconexion.md` §5, estado «Sesión no
+   restablecible», exige **«regreso a `Ingreso` con el motivo declarado. NUNCA un vencimiento
+   silencioso que se manifieste como un error»**. Un circuito que no vuelve es funcionalmente eso, y
+   lo que la emisión anterior dejó es **exactamente el vencimiento silencioso que la regla prohíbe**.
+
+   QUÉ SE HACE ENTONCES. Los tres tramos del marco se cubren con el texto que corresponde a cada uno,
+   y el de reintento sigue siendo el de la maqueta, palabra por palabra. Los otros dos son
+   **derivación declarada del principio de §5**, no invención: dicen lo que pasó y ofrecen la única
+   salida que hay sin circuito, que es volver a entrar. **El texto exacto sigue esperando a la
+   maqueta** —`DF-08`—, y hasta que llegue esto es mejor que el silencio. *@
 
 <div id="components-reconnect-modal" class="gf-reconnect-notice" role="status">
     <Icon Name="Alert" />
-    <span>Se cortó la conexión con el laboratorio. Reintentando…</span>
+    @* UN `span` POR TRAMO, y la hoja muestra el que corresponde. El marco aplica su clase de estado
+       al elemento, no a un hijo, así que la selección tiene que hacerse desde acá. *@
+    <span class="gf-reconnect-reintentando">Se cortó la conexión con el laboratorio. Reintentando…</span>
+    <span class="gf-reconnect-agotado">
+        No se pudo restablecer la conexión con el laboratorio.
+        <a class="gf-reconnect-salida" href="/">Volver a entrar</a>
+    </span>
 </div>
