@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Ingreso.md
-**Versión:** 1.4
+**Versión:** 1.5
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -107,7 +107,7 @@ Shell de acceso, sin navegación.
 | Estado | Condición que lo produce | Representación esperada |
 | --- | --- | --- |
 | **Vacío** | **No aplica**: no presenta ninguna colección | Se declara para que la ausencia sea deliberada |
-| **Cargando** | La superficie se está armando | Esqueleto de dos campos |
+| **Cargando** | La superficie se está armando | Esqueleto de dos campos **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 | **Con datos** | Formulario listo | Tarjeta completa, foco inicial en el correo |
 | **Enviando** | El canje está en curso | Acción inhabilitada con indicador dentro. **Previene el doble envío** |
 | **Requisito no cumplido** | Falta el correo o la contraseña | Borde de peligro en el campo y banda de error |
@@ -122,7 +122,7 @@ Shell de acceso, sin navegación.
 | **Sesión vencida o no restablecible** | El circuito se perdió y la sesión no se pudo restablecer | Banda que declara el estado de la sesión. **No es un error arbitrario en una acción cualquiera**: se vuelve acá con el motivo declarado |
 | **Éxito** | El canje procedió | Navegación a la ruta inicial del papel: el listado propio si es alumno, el de la comisión si es administrador |
 | **Indisponible** | El servicio de datos no responde | Aviso de indisponibilidad dentro de la tarjeta, con reintento y sin dirección de servicio interno. Ver [`Wireframes-Estado-Degradado-Y-Reconexion.md`](Wireframes-Estado-Degradado-Y-Reconexion.md) |
-| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto |
+| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 | **Versión preliminar** / **Origen indeterminado** | Según el contrato de identidad de versión | Sello con distintivo o con marcador, textual en los dos casos |
 
 ## 6. Versión angosta
@@ -166,3 +166,4 @@ Shell de acceso, sin navegación.
 | 1.2 | 2026-08-09 | **Reconciliación con el `PRODUCT-INTAKE` 1.8.** La versión 1.1 se escribió sobre el enunciado de RN-10013 anterior a la precisión, y declaraba en **§4** y en **§5** que el ingreso con la provisoria **otorgaba sesión**. El intake 1.8 §4.1 precisa que la cuenta se autentica y **no obtiene sesión de trabajo**: el sistema reconoce la credencial y la deriva al cambio, que es el paralelo del ingreso con la contraseña todavía sin establecer de la fila anterior. Las dos filas se corrigen y la distinción frente a la cuenta no habilitada deja de ser «acá hay sesión» y pasa a ser «acá hay un destino». La cabecera cita el intake **1.8**. **Nada de la disposición, del recorrido ni de las bandas cambia**: la derivación era y sigue siendo a `Credencial-Propia` en su curso de cambio forzado, que ya se dibujaba sobre el shell de acceso. |
 | 1.3 | 2026-08-09 | **Cierra la parte del hallazgo `F26-13`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r1.md` 1.0 que alcanza a este archivo, contra `PRODUCT-INTAKE` **1.10**. **§8** describía la prueba de la etapa `d` como «el ingreso con provisoria que deriva al cambio forzado **con sesión otorgada**», contra §4 y §5 de este mismo archivo, que desde la versión 1.2 dicen **«sin sesión otorgada»**, y contra RN-10013, que declara que la cuenta con provisoria **se autentica pero no obtiene sesión de trabajo**. La fila 1.2 declaraba haber corregido §4 y §5, y §8 quedó sin tocar. **Ningún componente, estado, ruta ni criterio de esta superficie cambia**: sólo se alinea la descripción de la prueba con lo que la superficie ya especifica. Sube minor. |
 | 1.4 | 2026-08-10 | **Absorbe `PRODUCT-INTAKE` 1.13 §4.1 (RN-10016) y la precisión de F-04**: habilitar produce la contraseña provisoria, con lo cual **el ingreso de una cuenta habilitada sin contraseña deja de ser posible**. §1 y §4 reescriben las dos referencias al establecimiento: la fila de comportamiento pasa a describir el ingreso con la provisoria del primer ingreso, que deriva al mismo destino que la del reseteo, y la del acuse de recibo nombra el cambio de contraseña en lugar del establecimiento. **Ningún elemento visual, ningún estado y ninguna ruta de esta superficie cambia.** Sube minor. (DX Lead (AG-03)). |
+| 1.5 | 2026-08-31 | **`U-06` del plan de la mesa: las promesas que este modo de render no puede cumplir se acotan, y no se retiran.** `ADR-10001` **1.1** §2.1 declaró el reparto real —**seis superficies interactivas de catorce**— y de ahí se sigue que en las estáticas **no existe el instante que un esqueleto ocupa** ni circuito que se pueda cortar: el servidor entrega el documento completo o nada. Las filas **Cargando** y **Reconectando** de las superficies estáticas quedan marcadas **NO APLICA**, y `Credencial-Propia` **parcialmente aplicable**, porque tiene tres componentes y uno es estático. **Ninguna fila se borra**: un estado prometido que se retira sin dejar rastro obliga al próximo lector a redescubrir por qué. Cierra `MI-07`, `MI-10` y `MI-12`. |

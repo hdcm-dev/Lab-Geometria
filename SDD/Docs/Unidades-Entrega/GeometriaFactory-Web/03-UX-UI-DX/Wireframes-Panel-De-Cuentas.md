@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Panel-De-Cuentas.md
-**Versión:** 1.7
+**Versión:** 1.8
 **Estado:** Aprobado
 **Fecha:** 2026-08-11
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -182,7 +182,7 @@ Orientación posterior, sólo la primera vez, sobre el mismo shell:
 | Estado | Condición que lo produce | Representación esperada |
 | --- | --- | --- |
 | **Vacío** | No hay ninguna cuenta de alumno todavía | Ilustración neutra y texto que explica que las cuentas aparecen cuando los alumnos se registran, **sin ofrecer una acción de crear**: el administrador no crea cuentas de alumno |
-| **Cargando** | La lista está en camino | Esqueleto por fila. **Nunca una tabla vacía mientras carga** |
+| **Cargando** | La lista está en camino | Esqueleto por fila. **Nunca una tabla vacía mientras carga** **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 | **Con datos** | Hay cuentas | Filas con su insignia y su acción de situación |
 | **Filtrado sin resultados** | El filtro no deja ninguna fila | Estado vacío de filtro con la acción de limpiarlo. **Distinto del vacío de colección** |
 | **Aplicando un cambio de situación** | La operación está en curso | Acción de esa fila inhabilitada con indicador. **Previene el doble disparo** |
@@ -198,7 +198,7 @@ Orientación posterior, sólo la primera vez, sobre el mismo shell:
 | **Error de operación · administrador ya configurado** | Se intenta configurar una segunda cuenta de administrador | Se informa que ya existe y se deriva a `Ingreso`. **Terminación controlada: no hay camino alternativo** |
 | **Orientación posterior** | Primera llegada tras el aprovisionamiento | Banda de confirmación y grilla de tres tarjetas de acceso. **No bloquea nada** |
 | **Indisponible** | El servicio de datos no responde | Aviso de indisponibilidad en lugar de la lista. **La lista no se muestra con datos viejos.** Ver [`Wireframes-Estado-Degradado-Y-Reconexion.md`](Wireframes-Estado-Degradado-Y-Reconexion.md) |
-| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto; la lista permanece a la vista |
+| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto; la lista permanece a la vista **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 
 ## 6. Versión angosta
 
@@ -218,6 +218,10 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 **Accesibilidad.** Cada acción por fila declara **sobre qué cuenta actúa**, no sólo su verbo: sin eso, la lista suena como una sucesión de «habilitar, resetear la contraseña, dar de baja» indistinguibles. El diálogo de baja y el de reseteo toman el foco al abrirse, lo confinan mientras están abiertos y lo devuelven al control que los abrió al cerrarse; se cierran con la tecla de escape. **La contraseña provisoria se anuncia como texto y es seleccionable**: quien usa lector de pantalla tiene que poder oírla carácter por carácter, y el copiado no puede ser el único camino. **El aviso de arrastre se asocia por descripción accesible al campo de confirmación**, de modo que se anuncie antes de que la persona escriba. Las tres insignias de situación llevan texto. El resultado de cada operación se anuncia como región activa. Objetivos de toque de al menos 24×24 px.
 
 **Performance percibida.** Esqueleto por fila por encima de 400 ms. El cambio de situación es puntual: control inhabilitado con indicador dentro de la propia fila, sin bloquear la lista entera.
+
+> **EL ESQUELETO NO SE PUEDE DIBUJAR EN ESTA SUPERFICIE, y la promesa se acota en lugar de retirarse.** Es de **render estático** (`ADR-10001` §2.1): el componente pide los datos en `OnInitializedAsync` y el servidor entrega **el documento completo o nada**. No hay ningún instante en el que el navegador tenga la página sin los datos, que es exactamente el instante que un esqueleto ocupa. **Esta superficie no se midió**, y la mesa la señaló como la que tiene el mismo riesgo que el listado sin que nadie lo hubiera mirado (`MI-10`). Se mide en `U-09`.
+>
+> **No es imposible en general: es imposible con este modo de render.** La salida existe y es acotada —`[StreamRendering]`, que manda un marcador y después transmite **sin volver la página interactiva**— y **el producto no la usa en ninguna parte**. Mientras no se adopte, lo que la persona ve mientras carga es la página anterior. `MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md).
 
 **Internacionalización.** «Situación» y no «estado» para la cuenta, por decisión de vocabulario aguas arriba. Fecha de registro producida por el sistema, rotulada como tal.
 
@@ -241,6 +245,7 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 1.8 | 2026-08-31 | **`U-06` del plan de la mesa: las promesas que este modo de render no puede cumplir se acotan, y no se retiran.** `ADR-10001` **1.1** §2.1 declaró el reparto real —**seis superficies interactivas de catorce**— y de ahí se sigue que en las estáticas **no existe el instante que un esqueleto ocupa** ni circuito que se pueda cortar: el servidor entrega el documento completo o nada. Las filas **Cargando** y **Reconectando** de las superficies estáticas quedan marcadas **NO APLICA**, y `Credencial-Propia` **parcialmente aplicable**, porque tiene tres componentes y uno es estático. **Ninguna fila se borra**: un estado prometido que se retira sin dejar rastro obliga al próximo lector a redescubrir por qué. Cierra `MI-07`, `MI-10` y `MI-12`. |
 | 1.7 | 2026-08-11 | **Unificación de nomenclatura del reseteo: se resetea la contraseña de la cuenta, no la cuenta.** Corrección pedida por el Product Owner —«ese resetear cuenta hay que corregirlo por resetear clave de cuenta de usuario alumno»— y corregida primero en la fuente, `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **1.28**: leído literal, «resetear la cuenta» sugiere darla de baja y volver a darla de alta, que es exactamente el remedio que **F-26** vino a reemplazar. Acá se reescriben **1** ocurrencia a «resetear / reseteo **de la contraseña** de la cuenta» y «cuenta **con la contraseña reseteada**». El caso de la **cuenta de administrador** se reescribe como «resetear **la contraseña de** la cuenta de administrador», que sigue sin admitirse (**INV-08**, **RN-10015**): no se cambia el sujeto a «de alumno», que invertiría el sentido de la regla. No cambia ninguna regla ni su verificación, y **no se toca ningún identificador** de código de error ni de regla —`RESETEO_ACOTADO_A_CUENTAS_DE_ALUMNO` y `CONTRATO_RESETEO_NO_APLICABLE_A_LA_CUENTA_DE_ADMINISTRADOR` se conservan tal cual—. |
 | 1.0 | 2026-08-09 | Emisión inicial. Lista de cuentas con las cuatro operaciones, insignia de situación con vocabulario propio para no colisionar con el estado del trabajo, diálogo de baja con confirmación escrita y aviso de arrastre en el mismo lugar donde se pide la confirmación, orientación posterior al aprovisionamiento que sugiere sin bloquear, enumeración de lo que la superficie no dibuja por los dos papeles fijos y el administrador único, y catorce estados declarados para la Fase B2. |
 | 1.0 | 2026-08-09 | Correcciones absorbidas del audit `B-02-03-GeometriaFactory-Web-r1.md` (ronda 1), **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-06**: las `NB-00001` y `NB-00002` de la cabecera pasan a citarse con sección y criterio numerado. **H-10**: §3 sustituye una forma desnuda de «pantalla» en el referente de superficie, que `Glosario-UX.md` §4 prohíbe, por «superficie». Las demás ocurrencias de la palabra en el documento designan el dispositivo o la interfaz como capa y **no se tocan**, por `Vocabulario-Rules.md` §9.1. |

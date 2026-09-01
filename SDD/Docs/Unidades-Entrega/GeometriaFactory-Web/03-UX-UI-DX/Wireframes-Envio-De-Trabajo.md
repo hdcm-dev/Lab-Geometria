@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Wireframes-Envio-De-Trabajo.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-09
 **Autor:** UX/UI Designer + Frontend Lead (AG-03)
@@ -128,7 +128,7 @@ Estado de resultado, que reemplaza el contenido tras el envío y antes de volver
 | Estado | Condición que lo produce | Representación esperada |
 | --- | --- | --- |
 | **Vacío** | Curso de creación, formulario recién abierto | Campos vacíos y bloque de previsualización con su marco y su leyenda de que todavía no hay nada que dibujar. **No es un hueco sin explicar** |
-| **Cargando** | Curso de reedición, trayendo el borrador | Esqueleto en los campos y en el área de texto |
+| **Cargando** | Curso de reedición, trayendo el borrador | Esqueleto en los campos y en el área de texto **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 | **Con datos** | Formulario poblado | Campos y texto a la vista |
 | **Previsualizado** | Se dibujó la escena | Escena viva, y la lista de piezas no dibujadas si corresponde |
 | **Enviando** | El envío está en curso | Acción primaria inhabilitada con indicador y texto que declara que se está interpretando el trabajo. **Previene el doble envío.** Sin cuenta regresiva |
@@ -142,7 +142,7 @@ Estado de resultado, que reemplaza el contenido tras el envío y antes de volver
 | **Elemento de dibujo sin tamaño** | El elemento no sirve como superficie | No hay instancia. Se informa que la previsualización no está disponible y se conserva el resto |
 | **Trabajo ajeno o inexistente** | Se envía sobre un identificador que no corresponde | Mensaje neutro que **no distingue** los dos casos, y regreso al listado |
 | **Indisponible** | El servicio de datos no responde | Aviso de indisponibilidad. **Conserva a la vista el texto y los datos escritos** para el reintento, y no los guarda en ningún lado. Ver [`Wireframes-Estado-Degradado-Y-Reconexion.md`](Wireframes-Estado-Degradado-Y-Reconexion.md) |
-| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto. La escena permanece a la vista y sigue girándose |
+| **Reconectando** | Se corta el circuito | Cartel de reconexión superpuesto. La escena permanece a la vista y sigue girándose **NO APLICA desde el 2026-08-31: esta superficie es de RENDER ESTÁTICO** (`ADR-10001` §2.1). El servidor entrega el documento completo o nada: **no existe el instante que un esqueleto ocupa**, ni circuito que se pueda cortar. La fila se conserva con su desenlace en lugar de retirarse — `MI-06`/`MI-12` de [`../../../Audit/Mesa-2026-08-31-B.md`](../../../Audit/Mesa-2026-08-31-B.md). |
 
 ## 6. Versión angosta
 
@@ -190,3 +190,4 @@ Punto de quiebre principal en 768 px [ASUNCIÓN].
 | 1.0 | 2026-08-09 | Retroalimentación de la Fase B2 de validación de maqueta del proyecto de código `GeometriaFactory-Web`, **sin subir versión** por `Master-Prompt.md` §5, que lo admite mientras el documento está en estado `Propuesto`. **H-02** (coma contra punto): §2 escribe los cuatro valores `declarado` y `derivado` del bloque de resultado **con punto**, y suma la nota que lo declara deliberado, con la misma redacción que llevan `Wireframes-Vista-De-Trabajo.md` §2 y `Representacion-Lista-De-Observaciones.md` §1. *(La nota se incorporó efectivamente en la ronda de corrección de la auditoría B2: hasta entonces esta entrada la declaraba y §2 no la tenía —hallazgo `AB2-09`—.)* El defecto era interno al propio documento: §2 reformateaba a coma los mismos valores que el bloque de texto del alumno de §2 dibuja con punto, y que §7 prohíbe reformatear. |
 | 1.0 | 2026-08-09 | Corrección absorbida de la auditoría `B2-Maqueta-GeometriaFactory-Web-r1.md`, **sin subir versión** por `Master-Prompt.md` §5. **`AB2-09`**: §2 suma la nota que declara deliberado el punto decimal de `declarado` y `derivado`, con la misma redacción que llevan `Wireframes-Vista-De-Trabajo.md` §2 y `Representacion-Lista-De-Observaciones.md` §1. La entrada de control de cambios de la retroalimentación de la Fase B2 declaraba esa nota como incorporada y **la nota no estaba en el documento**: la entrada quedó anotada con esa constancia, para no borrar la traza de la discrepancia. |
 | 1.1 | 2026-08-16 | **Absorbe [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md).** §3 y §4: la acción de previsualizar deja de declararse «sin ninguna llamada al servicio de datos» y pasa a **pedir la interpretación sin guardar** y entregarle las piezas reconstruidas al visor. **Es la contrapartida directa de la decisión y no un efecto imprevisto**: el visor ya no interpreta, de modo que alguien tiene que reconstruir las piezas y quien sabe hacerlo está del otro lado. **Enviar sigue siendo la única acción de guardado** y la previsualización sigue sin escribir nada. La nota de alcance **no cambia y se explicita por qué sigue siendo cierta**: que las piezas se hayan podido reconstruir para dibujarlas no dice que el trabajo verifique —un trabajo con advertencias se dibuja entero—. Sube minor: ninguna acción se agrega ni se retira, y lo que cambia es de dónde sale el dato que la previsualización dibuja. | Product Owner (decisión) · Orquestador SDD |
+| 1.2 | 2026-08-31 | **`U-06` del plan de la mesa: las promesas que este modo de render no puede cumplir se acotan, y no se retiran.** `ADR-10001` **1.1** §2.1 declaró el reparto real —**seis superficies interactivas de catorce**— y de ahí se sigue que en las estáticas **no existe el instante que un esqueleto ocupa** ni circuito que se pueda cortar: el servidor entrega el documento completo o nada. Las filas **Cargando** y **Reconectando** de las superficies estáticas quedan marcadas **NO APLICA**, y `Credencial-Propia` **parcialmente aplicable**, porque tiene tres componentes y uno es estático. **Ninguna fila se borra**: un estado prometido que se retira sin dejar rastro obliga al próximo lector a redescubrir por qué. Cierra `MI-07`, `MI-10` y `MI-12`. |
