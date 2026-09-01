@@ -163,7 +163,17 @@ jobs:
             codigo="$(curl --silent --output /dev/null --write-out '%{http_code}' \
                       --max-time 15 "$PUBLIC_URL" || true)"
             if [ "$codigo" = "503" ]; then
-              echo "La aplicacion esta abajo (HTTP 503) tras $((intento * 5)) s. Los ensamblados quedaron libres."
+              echo "El anfitrion ya sirve la pagina de mantenimiento (HTTP 503) a los $(( (intento - 1) * 5 )) s."
+              # EL 503 NO ES QUE LOS ENSAMBLADOS ESTEN LIBRES. IIS sirve `app_offline.htm` en
+              # el acto, pero el proceso obrero tarda un poco mas en morir y soltar los
+              # handles. La corrida #40 lo dejo al segundo: vio el 503 a las 15:25:25.311 y
+              # el `.dll` fallo con 550 a las 15:25:26.786 —UN SEGUNDO Y MEDIO despues—.
+              #
+              # Medido a mano contra el anfitrion real, reemplazando el mismo `.dll` por una
+              # copia identica en un bucle: SE PUDO REEMPLAZAR 3 s DESPUES DEL 503. Los 20 s
+              # de aca son ese numero con seis veces de margen, no una cifra elegida a ojo.
+              echo "Se le dan 20 s mas para que el proceso obrero suelte los ensamblados."
+              sleep 20
               exit 0
             fi
             sleep 5
@@ -172,7 +182,32 @@ jobs:
           echo "No se copia nada: una copia sobre la aplicacion viva falla a la mitad y deja el sitio mezclado."
           exit 1
 
+      # DOS INTENTOS, Y ESTA VEZ EL REINTENTO SI CORRESPONDE. La version del 2026-09-01 de la
+      # manana reintentaba con la aplicacion VIVA, y por eso los tres intentos fallaron: el
+      # candado era permanente. Con `app_offline.htm` puesto el candado es transitorio y dura
+      # segundos, asi que un segundo intento cubre la variacion del anfitrion sin fingir que
+      # esperar arregla algo por si solo. La aplicacion sigue abajo entre los dos intentos.
       - name: Subir por FTP
+        id: ftp
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./publish/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          exclude: |
+            **/app_offline.htm
+
+      - name: Esperar antes del segundo intento
+        if: steps.ftp.outcome == 'failure'
+        run: |
+          echo "El primer intento no pudo escribir con la aplicacion abajo. Se esperan 30 s."
+          sleep 30
+
+      - name: Subir por FTP · segundo intento
+        if: steps.ftp.outcome == 'failure'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -209,7 +244,7 @@ jobs:
                       --max-time 20 "$PUBLIC_URL" || true)"
             case "$codigo" in
               503|000) sleep 5 ;;
-              *) echo "La aplicacion volvio (HTTP $codigo) tras $((intento * 5)) s, leyendo el appsettings.json recien subido."; exit 0 ;;
+              *) echo "La aplicacion volvio (HTTP $codigo) a los $(( (intento - 1) * 5 )) s, leyendo el appsettings.json recien subido."; exit 0 ;;
             esac
           done
           echo "::error::La aplicacion no volvio a atender despues de 120 s: sigue en $codigo."
