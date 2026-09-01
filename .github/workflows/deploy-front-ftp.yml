@@ -32,6 +32,12 @@ on:
       - 'src/GeometriaFactory.Web/**'
       - 'visor/**'
       - 'src/GeometriaFactory.Contracts/**'
+      # LA CUARTA ENTRADA, y entró por un defecto pagado el 2026-09-01: el cambio que agregó
+      # los reintentos de FTP se fusionó a `main` y NO DISPARÓ ESTA PUBLICACIÓN, porque el
+      # archivo del flujo no estaba en su propio filtro. Hubo que lanzarla a mano para saber
+      # si el arreglo servía. UN PUBLICADOR QUE NO SE EJERCITA CUANDO SE LO MODIFICA se
+      # descubre roto el día que se lo necesita, que es exactamente lo que pasó.
+      - '.github/workflows/deploy-front-ftp.yml'
   workflow_dispatch:
 
 jobs:
