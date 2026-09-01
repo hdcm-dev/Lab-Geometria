@@ -43,7 +43,24 @@
        antes de volver a apretar. `role="alert"` para que llegue sin tener que buscarlo. *@
     @if (_failure is not null)
     {
-        <p class="gf-notice gf-notice--danger gf-mt-3" role="alert" data-gf-resolution-error>@_failure</p>
+        @* LA CLASE ES LA MISMA QUE LA DE TODOS LOS DEMÁS AVISOS DE FALLA DEL PRODUCTO, y no
+           lo era. Hasta el 2026-08-31 esta línea decía `gf-notice gf-notice--danger`: **dos
+           clases que no existen en la hoja** y que tampoco están en la maqueta aprobada —se
+           acuñaron acá, en la etapa `h`, el 2026-08-17—. El resultado es que **el único aviso
+           de que un desenlace falló se dibujaba sin ningún estilo**: texto plano, sin el fondo
+           ni el borde que lo distinguen de un párrafo cualquiera, justo cuando la persona
+           necesita verlo.
+
+           No se definieron las dos clases: **se usa la que el sistema visual ya tiene**. Otras
+           veinte superficies del producto muestran su falla con `gf-banner gf-banner--error`
+           —el ingreso, el envío, el panel de cuentas, el cambio de contraseña—, y ésta era la
+           única excepción. Definir un par nuevo habría sido improvisar fuera del sistema visual
+           adoptado, que es exactamente lo que el criterio de transición de la etapa `b`
+           prohíbe.
+
+           Lo detectó el control `C-3` de `verify-visual-system.sh`, que **venía informándolo
+           desde hace catorce días**: la puerta estaba en rojo en `main` y nadie la corría. *@
+        <p class="gf-banner gf-banner--error gf-mt-3" role="alert" data-gf-resolution-error>@_failure</p>
     }
 
     <div class="gf-footer-actions gf-justify-start">
