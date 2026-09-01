@@ -13,8 +13,8 @@
 //
 // Y ACÁ HAY QUE DESHACER UNA SUPOSICIÓN QUE PARECÍA OBVIA Y ES FALSA. Esta
 // superficie NO USA EL CIRCUITO: `ClassSubmissionList.razor` no declara
-// `@rendermode` —sólo ocho componentes de la pieza pública lo hacen, y éste no
-// está— y su filtro es un `<form method="get">`. El propio código lo dice:
+// `@rendermode` —sólo SEIS componentes de la pieza pública lo hacen, contados en
+// `ADR-10001` §2.1, y éste no está— y su filtro es un `<form method="get">`. El propio código lo dice:
 // «los dos viajan por la dirección porque esta superficie es de render
 // estático». De modo que el filtro es UNA NAVEGACIÓN, no un viaje por la sesión
 // interactiva.

@@ -2,7 +2,7 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-10001-Render-En-El-Servidor-Con-Circuito-Interactivo.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-10
 **Autor:** Arquitecto de Software Senior (AG-05)
@@ -32,9 +32,53 @@ Motivación upstream: NB-00008; `RA-01`, `RA-03`; `PRODUCT-INTAKE` §14, §17.2.
 
 El repliegue del transporte a uno de mayor latencia es **aceptable y no se anuncia a la persona**: es un trade-off aceptado aguas arriba y no es una degradación del laboratorio. **Sólo la ausencia total de circuito obliga a cambiar el modelo de front.**
 
+### 2.1 El reparto de modos de render, que entra a la decisión el 2026-08-31
+
+**«La interacción viaja por un circuito» describía a las once pantallas de marcador de posición de la
+etapa `b`, y dejó de describir al producto en la etapa `c`.** Al construirles comportamiento, la mayoría
+de las superficies pasó a **render estático de servidor** con formularios que hacen `POST` de verdad, y
+cada una dejó su motivo escrito en la cabecera de su componente. **Lo que faltaba no era el criterio:
+faltaba que estuviera acá, en la capa que decide.** Es `MI-06` de la mesa del 2026-08-31.
+
+**El reparto real, contado sobre el árbol el 2026-08-31** —`grep -rln '^@rendermode' Components/Pages/`—:
+**quince rutas sobre catorce componentes**, de los cuales **seis son interactivos y ocho estáticos**.
+
+| Superficie | Ruta | Modo | Por qué |
+| --- | --- | --- | --- |
+| `InitialDestination` | `/` | **Interactiva** | Decide destino según la sesión y redirige sin intervención de la persona |
+| `InitialProvisioning` | `/aprovisionamiento-inicial` | **Interactiva** | Sondea la existencia del administrador y cambia de estado sola |
+| `OwnCredentialSetup` | `/credencial-propia/establecer` | **Interactiva** | Valida los requisitos de la contraseña **mientras se escribe**, sin consultar al servidor |
+| `OwnCredentialChange` | `/mi-contrasena` | **Interactiva** | Ídem |
+| `Status` | `/estado` | **Interactiva** | Es la pantalla que **muestra** el estado del circuito; sin circuito no tendría qué mostrar |
+| `NotFoundPage` | `/no-encontrado` | **Interactiva** | Heredada de la etapa `b`; **no tiene motivo propio y es la única sin justificación en su cabecera** |
+| `SignIn` | `/ingreso` | Estática | `POST` con antifalsificación; la credencial no debe vivir en un circuito |
+| `AccountRegistration` | `/registro-de-cuenta` | Estática | Apartamiento declarado en su cabecera: pasó de interactiva a estática al construirle comportamiento |
+| `OwnCredentialForcedChange` | `/credencial-propia/cambio-obligado` | Estática | Mismo patrón que `SignIn` |
+| `ClassSubmissionList` | `/entrega-comision` | Estática | El filtro viaja por la dirección: es un `<form method="get">` |
+| `StudentWorkPanel` | `/mis-trabajos` | Estática | Ídem |
+| `AccountsPanel` | `/cuentas` | Estática | Ídem, con `POST` por operación |
+| `WorkSubmission` | `/trabajo-nuevo` y `/editar` | Estática | `POST` del texto pegado |
+| `WorkView` | `/trabajos/{WorkId}` | Estática | El visor dibuja en el navegador y **no usa el circuito** (`RA-02`) |
+
+**La convención, que es la parte vinculante de este apartado.** **Una superficie nueva es ESTÁTICA salvo
+que declare en su cabecera por qué no puede serlo.** El motivo se escribe en el componente, no acá: esta
+ADR gobierna el criterio y no la lista, que envejece. Las tres razones admitidas hoy son las que las seis
+interactivas ejercen: **decidir y redirigir sin intervención**, **validar mientras se escribe sin
+consultar al servidor**, y **mostrar el estado del propio circuito**.
+
+**`NotFoundPage` queda señalada y no se toca.** Es interactiva sin motivo declarado —residuo de la etapa
+`b`— y volverla estática es un cambio de código que esta ADR no ordena. Queda como deuda con disparador
+en [`../../../../Audit/Decisiones-Y-Frases-Retiradas.md`](../../../../Audit/Decisiones-Y-Frases-Retiradas.md) §3.
+
+**Y esto NO relaja `RA-01`.** Ninguna superficie, interactiva o estática, llama al servicio de datos
+desde el navegador. El reparto es sobre **dónde se procesa la interacción**, no sobre **quién habla con
+los datos**: eso sigue siendo el cliente tipado y sólo él.
+
 ## 3. Estado
 
-**Propuesto** desde 2026-08-10.
+**Aprobado** desde 2026-08-10. *[CORREGIDO el 2026-08-31: este apartado decía «Propuesto» mientras la
+cabecera del documento decía «Aprobado» desde la emisión inicial. La mesa lo levantó como parte de
+`MI-06`. Rige la cabecera: la decisión está en el código desde la etapa `b`.]*
 
 ## 4. Alternativas consideradas
 
@@ -43,6 +87,7 @@ El repliegue del transporte a uno de mayor latencia es **aceptable y no se anunc
 | Render en el servidor con circuito interactivo, salida única desde el servidor (**adoptada**) | Elimina contenido mixto, origen cruzado y exposición de la dirección del servidor propio de una sola vez; la credencial nunca necesita llegar al navegador; la topología se sostiene sin certificado en el servidor propio | Ata la experiencia a la estabilidad del proceso del hosting, que la fuente declara incógnita y sin mitigación en el código; y cada interacción cruza el circuito |
 | Ejecutar la aplicación dentro del navegador | Menos carga en el hosting, sin circuito que sostener, sin reciclado que temer | Reabre las tres propiedades de la topología y obliga a transporte seguro válido en un servidor de dirección dinámica. **Descartada por `PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Web**, y registrada como **salida preferente** si `PT-01.b` o `PT-01.c` dan rojo |
 | Servir el front desde el propio contenedor del servidor propio | Un solo despliegue, sin hosting externo | Pierde el motivo por el que existe la topología: el bloqueo desde la red de la facultad. **Descartada por `PRODUCT-INTAKE` §17.2.P.2 · GeometriaFactory-Web** |
+| **Render en el servidor con reparto por superficie: interactivo donde la interacción lo exige, estático donde alcanza un `POST`** (**la que el código adoptó, incorporada el 2026-08-31**) | Sostiene `RA-01` igual que la adoptada; **una superficie estática no abre circuito y por lo tanto no puede perderlo**, lo que la vuelve inmune al reciclado del proceso del hosting —que es el trade-off más caro de la primera fila—; y el documento pesa lo que pesa sin depender de un canal | Obliga a decidir el modo superficie por superficie y a justificarlo, que es trabajo por cada pantalla nueva; y **las promesas escritas para «todas las superficies» dejan de aplicar a todas** — es lo que `U-06` va a acotar |
 | Render en el servidor, pero con algunas llamadas hechas desde el navegador para lo que «no es sensible» | Menos ida y vuelta en operaciones frecuentes | **Una excepción a `RA-01` la anula entera**: bastaría una sola llamada para reabrir origen cruzado y exponer la dirección. Además obligaría a mantener dos criterios de qué es sensible, que es donde el defecto entra. **Descartada por esta categoría** |
 
 ## 5. Consecuencias positivas
@@ -66,6 +111,8 @@ El repliegue del transporte a uno de mayor latencia es **aceptable y no se anunc
 - Ninguna superficie invoca al cliente tipado directamente: entre una superficie y la salida hay siempre un servicio de aplicación de front ([`ADR-10004`](ADR-10004-Tres-Capas-De-Presentacion.md)).
 - El circuito **termina en el servidor de esta pieza**: no llega al servicio de datos.
 - Convención impuesta: agregar una dependencia de guion al proyecto exige comprobar que no consulta servicios por su cuenta, y esa comprobación es bloqueante en revisión.
+- **Convención impuesta desde el 2026-08-31: una superficie nueva es ESTÁTICA salvo que declare en su cabecera por qué no puede serlo** (§2.1). Las tres razones admitidas son decidir y redirigir sin intervención, validar mientras se escribe sin consultar al servidor, y mostrar el estado del propio circuito.
+- **La salida preferente alcanza a SEIS superficies y no a quince.** Si `PT-01.b` o `PT-01.c` dieran rojo, lo que habría que rehacer es el modo de las seis interactivas; las ocho estáticas **no abren circuito y no se enteran**. La contingencia de §4 quedaba dimensionada sobre el producto de la etapa `b`, cuando las once pantallas eran interactivas.
 - El árbol de fuentes no contiene ninguna forma de petición de red escrita en guion de navegador, salvo las que el bundle del visor **no** tiene, porque su propia arquitectura las prohíbe.
 
 ## 8. Métricas de validación
@@ -91,4 +138,5 @@ El repliegue del transporte a uno de mayor latencia es **aceptable y no se anunc
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-08-31 | **El reparto de modos de render entra a la capa que decide, que es `U-05` del plan de la mesa y cierra `MI-06`.** §2 declaraba «la interacción viaja por un circuito», y eso describía a las **once pantallas de marcador de posición de la etapa `b`**: al construirles comportamiento en la etapa `c`, la mayoría pasó a render estático con `POST` de verdad, cada una con su motivo en la cabecera de su componente. **El criterio existía y no estaba acá.** Entra **§2.1** con el reparto contado sobre el árbol —**quince rutas sobre catorce componentes, seis interactivos y ocho estáticos**— y con la convención vinculante: **una superficie nueva es estática salvo que declare por qué no puede serlo**. Entra la **quinta alternativa**, que es la que el código adoptó y que §4 no evaluaba. **§3 pasa de «Propuesto» a «Aprobado»**, que es lo que la cabecera decía desde la emisión inicial. Y §7 **re-dimensiona la contingencia**: la salida preferente alcanza a **seis** superficies, no a quince, porque una superficie estática no abre circuito y por lo tanto no puede perderlo. **La dirección de la corrección es vinculante y se declara: se actualiza la ADR al código, el código no se toca** — alinear al revés volvería interactivas nueve superficies sobre un hosting sin WebSocket, y eso toca topología cerrada. `NotFoundPage` queda señalada como la única interactiva **sin motivo declarado**, y no se toca: es deuda con disparador. **`RA-01` no se relaja**: el reparto es sobre dónde se procesa la interacción, no sobre quién habla con los datos. |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra el render en el servidor con circuito interactivo y la salida única hacia el servicio de datos como materialización de `RA-01`, evalúa cuatro alternativas —dos descartadas por el intake, una por esta categoría— con la salida preferente registrada por si la medición la supera, declara cuatro trade-offs y fija seis métricas de validación. |
