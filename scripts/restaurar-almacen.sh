@@ -23,7 +23,20 @@
 #      2026-08-15, cuando una corrida de guiones se llevó la cuenta de
 #      administrador del Product Owner y `store-path.sh` la dejó escrita.
 #
-# USO:  scripts/restaurar-almacen.sh <archivo-de-copia>
+# DOS FORMAS DE USO, y la segunda faltaba. Sin ella el ciclo respaldo -> restauración era
+# IMPOSIBLE en la máquina del docente, que es el único lugar donde importa: el respaldo tenía
+# modo contenedor y esto no, de modo que se podía tomar la copia y no se podía devolver. Lo
+# levantó la mesa del 2026-09-01 —`grep -c 'desde-contenedor' restaurar-almacen.sh` daba **0**—.
+#
+#   scripts/restaurar-almacen.sh <archivo-de-copia>
+#       Local. Resuelve el almacén por `store-path.sh`.
+#
+#   scripts/restaurar-almacen.sh --desde-contenedor <servicio> <archivo-de-copia>
+#       La del destino real. **Detiene el servicio**, instala la copia en el volumen y lo vuelve a
+#       levantar. Se corre desde el directorio donde vive la composición de despliegue.
+#       Detener y levantar es parte de la operación y no un descuido: restituir bajo un escritor
+#       vivo produce un almacén que el servicio pisa en el siguiente `checkpoint`, y la ventana de
+#       indisponibilidad es la que `ADR-00007` §6 punto 3 ya acepta.
 #
 # CÓDIGOS DE SALIDA, con la convención de `coverage.sh`:
 #   0  restituido, y el almacén anterior quedó apartado
@@ -36,13 +49,62 @@ raiz="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 morir() { echo "NO SE RESTITUYÓ · $1" >&2; exit "${2:-1}"; }
 
-copia="${1:-}"
-[ -n "$copia" ] || { echo "uso: restaurar-almacen.sh <archivo-de-copia>" >&2; exit 2; }
+modo_contenedor=0
+servicio=""
+if [ "${1:-}" = "--desde-contenedor" ]; then
+  modo_contenedor=1; servicio="${2:-}"; copia="${3:-}"
+  [ -n "$servicio" ] && [ -n "$copia" ] || {
+    echo "uso: restaurar-almacen.sh --desde-contenedor <servicio> <archivo-de-copia>" >&2; exit 2; }
+else
+  copia="${1:-}"
+fi
+[ -n "$copia" ] || { echo "uso: restaurar-almacen.sh [--desde-contenedor <servicio>] <archivo-de-copia>" >&2; exit 2; }
 [ -f "$copia" ] || morir "no existe el archivo '$copia'." 2
 copia="$(cd "$(dirname "$copia")" && pwd)/$(basename "$copia")"
 
+# ---------------------------------------------------------------------------
+# Modo contenedor: la copia se verifica y se instala DENTRO, con el servicio detenido.
+# ---------------------------------------------------------------------------
+if [ "$modo_contenedor" = 1 ]; then
+  command -v docker >/dev/null 2>&1 || morir "no hay 'docker' en esta máquina." 2
+  img="$(docker compose images -q "$servicio" 2>/dev/null | head -1)"
+  [ -n "$img" ] || morir "no se pudo resolver la imagen del servicio '$servicio'." 2
+
+  interna="$(docker compose exec -T "$servicio" sh -lc \
+      'printf %s "${ConnectionStrings__Store#*[Dd]ata [Ss]ource=}"' 2>/dev/null | sed 's/;.*//')"
+  [ -n "$interna" ] || morir "el servicio '$servicio' no declara 'ConnectionStrings__Store'." 2
+
+  # SE VERIFICA ANTES DE DETENER NADA. Detener el laboratorio para descubrir después que la copia
+  # no servía es cambiar una pérdida por dos.
+  ver="$(docker run --rm --entrypoint sh -v "$(dirname "$copia"):/c" "$img" \
+        -lc "sqlite3 '/c/$(basename "$copia")' 'PRAGMA integrity_check;'" 2>&1 | head -1)"
+  [ "$ver" = "ok" ] || morir "la copia no verifica ('$ver'). El servicio NO se detuvo y el almacén NO se tocó."
+
+  echo "Copia verificada. Deteniendo '$servicio'…"
+  docker compose stop "$servicio" >/dev/null || morir "no se pudo detener el servicio. Nada se tocó."
+
+  sello="$(date -u +%Y%m%dT%H%M%SZ)"
+  docker compose run --rm --entrypoint sh -v "$(dirname "$copia"):/c" "$servicio" -lc "
+      set -e
+      if [ -f '$interna' ]; then
+        mv '$interna' '$interna.apartado-$sello'
+        for s in -wal -shm; do [ -f '$interna'\$s ] && mv '$interna'\$s '$interna.apartado-$sello'\$s; done
+      fi
+      cp '/c/$(basename "$copia")' '$interna'" >/dev/null \
+    || { docker compose start "$servicio" >/dev/null; morir "no se pudo instalar la copia. El servicio se volvió a levantar."; }
+
+  docker compose start "$servicio" >/dev/null
+  echo "Restituido dentro del contenedor."
+  echo "  desde   : $copia"
+  echo "  almacén : $interna (en '$servicio')"
+  echo "  anterior: $interna.apartado-$sello — NO SE BORRÓ"
+  echo
+  echo "El servicio vuelve a fijar el diario en WAL al arrancar (\`StorePreparation\`)."
+  exit 0
+fi
+
 command -v sqlite3 >/dev/null 2>&1 \
-  || morir "no hay 'sqlite3' en esta máquina. Corré dentro del contenedor de desarrollo." 2
+  || morir "no hay 'sqlite3' en esta máquina. Corré dentro del contenedor de desarrollo, o usá --desde-contenedor." 2
 
 # shellcheck disable=SC1091
 . "$raiz/scripts/store-path.sh"

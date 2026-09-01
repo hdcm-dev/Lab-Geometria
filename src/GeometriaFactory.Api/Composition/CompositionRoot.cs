@@ -94,7 +94,35 @@ public static class CompositionRoot
         }
 
         // Contexto por operación (intake §17.3.P.4): alcance de petición, nunca compartido.
-        services.AddDbContext<GeometriaFactoryDbContext>(options => options.UseSqlite(connectionString));
+        //
+        // ---- `Pooling=False`, Y NO ES UNA AFINACIÓN: ES LO QUE HACE QUE LA SALUD NO MIENTA ----
+        //
+        // `StoreHealth` existe para contestar si el almacén SIGUE estando, y con el agrupamiento de
+        // conexiones activo **no lo puede contestar**: SQLite conserva el descriptor abierto sobre el
+        // inodo, de modo que si alguien borra el archivo, la conexión agrupada sigue leyendo el
+        // fantasma y `SELECT COUNT(*) FROM __EFMigrationsHistory` devuelve filas de una base que ya
+        // no existe en el disco.
+        //
+        // MEDIDO SOBRE EL BINARIO, no razonado: con el servicio corriendo y el almacén borrado,
+        // `/salud` contestaba `200 {"ready":true}` a los 2, 7, 12 y 17 segundos. Es exactamente el
+        // síntoma que `MI-09` decía haber cerrado, y lo levantó la mesa del 2026-09-01 como `R-2`.
+        //
+        // Y LA CONFESIÓN ESTABA EN LAS PROPIAS PRUEBAS: las cuatro de `StoreHealthTests` llaman
+        // `SqliteConnection.ClearAllPools()` antes de romper el almacén — algo que el servicio
+        // corriendo **jamás hace**. La prueba pasaba y el defecto seguía vivo. Es la forma más cara
+        // de verde: la que se consigue poniendo en la prueba la condición que falta en el producto.
+        //
+        // EL COSTO ES REAL Y SE ACEPTA. Sin agrupamiento, cada operación abre y cierra su conexión.
+        // Sobre SQLite local eso son microsegundos, y el producto tiene **un solo escritor** y una
+        // comisión de alumnos: la medición del 2026-08-31 dio p99 de 12,3 ms a mil trabajos contra
+        // un umbral de 500. Se paga eso a cambio de que la sonda de salud diga la verdad, porque
+        // **una sonda que miente en verde es peor que no tenerla**: el `healthcheck` de la
+        // composición le cree mientras el almacén no existe.
+        var cadenaSinAgrupar = connectionString.Contains("Pooling", StringComparison.OrdinalIgnoreCase)
+            ? connectionString
+            : $"{connectionString.TrimEnd(';')};Pooling=False";
+
+        services.AddDbContext<GeometriaFactoryDbContext>(options => options.UseSqlite(cadenaSinAgrupar));
         services.AddScoped<StorePreparation>();
         // La salud del almacén se EVALÚA en cada sondeo y no se recuerda del arranque
         // (`MI-09` de la mesa del 2026-08-31). Ámbito por petición, como su hermana.
