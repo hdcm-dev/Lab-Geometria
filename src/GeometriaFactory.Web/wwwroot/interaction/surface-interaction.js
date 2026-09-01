@@ -261,6 +261,34 @@
                 focusables[0].focus();
             }
         }
+
+        // ---- Diálogos que piden CAPA SUPERIOR -----------------------------
+        // POR QUÉ HACE FALTA, y está medido. Un `<dialog>` con el atributo
+        // `open` NO es modal: queda en el flujo normal del documento, con el
+        // apilado que le toca por su lugar en el marcado, y **todo lo que se
+        // pinta después lo tapa**. En la vista de trabajo eso pasa de verdad:
+        // el lienzo de three.js vive en un hermano posterior y se come los
+        // clics del diálogo de confirmación. Playwright lo dejó por escrito:
+        //
+        //     <canvas data-engine="three.js r169"> … intercepts pointer events
+        //
+        // `showModal()` lo pone en la CAPA SUPERIOR del navegador, por encima
+        // de todo y sin depender del apilado. Y además es lo que la hoja de
+        // estilos ya suponía: `.gf-dialog::backdrop` sólo pinta si el diálogo
+        // se abrió como modal, de modo que hasta hoy ESE FONDO NO SE VEÍA EN
+        // NINGÚN LADO.
+        //
+        // ES OPCIÓN EXPLÍCITA Y NO SE APLICA A TODOS. Los diálogos del panel
+        // de cuentas se sirven con `open` y funcionan porque nada se pinta
+        // encima de ellos; pasarlos a modal les cambiaría el fondo y el
+        // manejo nativo de la tecla de escape, que ese panel resuelve a su
+        // manera. Eso es una decisión de sistema visual y no un arreglo de
+        // paso: quien la quiera, la pide con `data-gf-dialog-modal`.
+        const promovible = document.querySelector('[data-gf-dialog-modal]');
+
+        if (promovible !== null && typeof promovible.showModal === 'function' && !promovible.open) {
+            promovible.showModal();
+        }
     }
 
     // ---- Los enganches, delegados en el documento -------------------------

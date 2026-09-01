@@ -127,7 +127,23 @@ else
        dato: quien mira es el administrador Y el trabajo está en estado `Pendiente`. *@
     @if (Session.IsAdministrator && string.Equals(_work.Status, "Submitted", StringComparison.Ordinal))
     {
-        <WorkResolution WorkId="_work.WorkId" />
+        @* EL MODO INTERACTIVO VA ACÁ, EN LA INSTANCIA, Y NO ARRIBA EN LA SUPERFICIE.
+           `SUP-08` son tres botones `@@onclick`, y un `@@onclick` sólo se cablea si el componente
+           se dibuja en modo interactivo. Esta superficie NO declaraba modo, de modo que el bloque
+           se dibujaba estático y LOS TRES BOTONES NO HACÍAN NADA: sin error y sin aviso. Lo
+           reportó el Product Owner el 2026-09-01 —«cuando hago aprobar trabajo no lo hace»—.
+
+           Y NO SE DECLARA EN LA PÁGINA porque esta superficie es de LECTURA: datos, observaciones,
+           texto original y el visor de figuras. Volverla interactiva entera abriría un circuito
+           para dibujar todo eso, en un anfitrión donde la conexión de tiempo real ni siquiera
+           consigue WebSockets y se repliega a sondeo largo. Declararlo por componente deja la
+           página estática y le da circuito nada más que al pedazo que tiene botones.
+
+           LOS TRES PARÁMETROS CRUZAN EL LÍMITE Y POR ESO SON SERIALIZABLES —un identificador y dos
+           cadenas—, que es lo que ese modo exige. El nombre y el dueño no son adorno: los dos
+           diálogos de confirmación que el wireframe §2 declara nombran el trabajo y al alumno. *@
+        <WorkResolution WorkId="_work.WorkId" Name="@_work.Name" OwnerName="@OwnerName"
+                        @rendermode="InteractiveServer" />
     }
 
     <div class="gf-two-columns">
