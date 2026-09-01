@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Medicion-Pintado-Del-Listado-2026-08-31.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Fecha:** 2026-08-31
 **Instrumento:** [`tools/medicion-pintado-del-listado.sh`](../../../tools/medicion-pintado-del-listado.sh) y su conductor de navegador
 **Estado:** **Emitido.** Mide la pieza pública; **no cierra `PT-05`**
@@ -115,10 +115,50 @@ página interactiva**—, y **el producto no la usa en ninguna parte**.
 acciones y accesibilidad **cuesta marcado**— pero explica por qué el documento llega a 1,2 MB con mil
 trabajos, y **1,2 MB es una descarga real sobre una conexión de facultad**.
 
-**El filtro no escala con el total, y es la buena noticia estructural.** Se mantiene entre 97 y 305 ms
+~~**El filtro no escala con el total, y es la buena noticia estructural.** Se mantiene entre 97 y 305 ms
 en todo el rango, porque **el recorte lo hace el servicio**: filtrar por alumno devuelve los trabajos de
-un alumno, no los mil. La agrupación con el filtro, que es lo que el negocio pidió en lugar de
-paginación, **funciona como forma de acotar el volumen**.
+un alumno, no los mil.~~
+
+> **CORREGIDO el 2026-08-31 en la emisión 1.1. La afirmación es FALSA, y era la más consecuente del
+> informe.** La levantó el hallazgo `MI-03` de [`Mesa-2026-08-31-B.md`](Mesa-2026-08-31-B.md), y la mesa
+> tuvo razón: **la petición filtrada hace DOS llamadas al servicio, y la primera es SIN CRITERIO.**
+>
+> `ClassSubmissionList.razor` lo dice en tres líneas que hay que leer juntas:
+>
+> ```text
+> :368   var everything = await DataService.ListWorksAsync(token);      <- SIN criterio
+> :376   _unfiltered = everything.Value!;
+> :385   var filtered  = await DataService.ListWorksAsync(token, student);
+> ```
+>
+> El comentario que precede a la segunda —*«el criterio va al servicio […] no se filtra acá»*— **describe
+> correctamente esa llamada y calla la primera**, que es lo que me hizo leer mal. Y el documento filtrado
+> **sigue dibujando un `<option>` por cada alumno de la comisión entera** (`:116` sobre `Students`, que
+> `:320-326` deriva de `_unfiltered`).
+>
+> **Y los propios números lo mostraban.** Filtro: **101 · 129 · 97 · 305 ms**. El corte de mil es **tres
+> veces** el de treinta, y es justo donde la primera llamada trae 1002 filas y 257 KB y el selector dibuja
+> 334 opciones. **Yo leí la palabra «se mantiene» sobre una serie que no se mantiene.**
+
+**Lo que sí se sostiene, acotado.** El filtro **no escala como la primera pintura** —305 ms contra
+1579 ms al mismo volumen—, porque lo que se **dibuja** sí es sólo un alumno. Lo que escala es lo que se
+**pide**.
+
+**Y la primera llamada no es un defecto: es una necesidad mal descrita.** El selector de alumnos tiene
+que ofrecer **la comisión entera**, no los alumnos del filtro vigente, o filtrar sería un camino de ida.
+Ese dato sale de algún lado, y hoy sale de traer todo. Lo que estaba mal era el informe, no el código.
+
+> **La consecuencia que este error tenía, y por la que la corrección importa más que el número.** Esta
+> frase se convirtió en argumento de diseño en la emisión 1.0 —«le da la razón al diseño que eligió
+> agrupación y filtro en lugar de paginación»— y quedó en el control de cambios de un documento de
+> `Audit` emitido. **La única evidencia medida que sostenía no paginar se apoyaba en una propiedad que el
+> código no tiene.** No se sigue de esto que haya que paginar: se sigue que **esa decisión vuelve a estar
+> sin evidencia medida a favor**, que es distinto y es lo que corresponde escribir.
+>
+> **Segunda consecuencia, sobre el caudal.** Cada acción de filtrar del docente cuesta **dos** peticiones
+> a `A-13`, una de ellas de la colección completa. El caudal de 20 pet/min de `A-5` está provisorio y
+> `PT-05` lo va a medir en la fase `i`: **si se mide contando acciones del docente en vez de peticiones
+> HTTP, el número va a salir a la mitad del que corresponde.**
 
 ---
 
@@ -151,4 +191,5 @@ lo que pasa. Está anotado en el guion.
 
 | Versión | Fecha | Descripción | Autor |
 |---|---|---|---|
+| 1.1 | 2026-08-31 | **`U-08` del plan de la mesa: se corrige la afirmación más consecuente de la emisión 1.0, que era falsa.** «El filtro no escala con el total, porque el recorte lo hace el servicio» **no es cierto**: la petición filtrada hace **dos** llamadas y **la primera es sin criterio** —`:368`, `:376`, `:385`—, y el selector sigue dibujando una opción por alumno de la comisión entera. **Los propios números del informe lo mostraban** —101 · 129 · 97 · **305** ms, con el corte de mil al triple del de treinta— y se leyó «se mantiene» sobre una serie que no se mantiene. Lo levantó `MI-03` de [`Mesa-2026-08-31-B.md`](Mesa-2026-08-31-B.md). **Lo que importa no es el número sino lo que la frase sostenía**: se había convertido en argumento de diseño —«le da la razón al diseño que eligió agrupación y filtro en lugar de paginación»— y era **la única evidencia medida a favor de no paginar**. No se sigue que haya que paginar: se sigue que esa decisión **vuelve a estar sin evidencia medida**. Se registra además que **cada acción de filtrar cuesta dos peticiones a `A-13`**, con lo cual `PT-05` medirá mal el caudal si cuenta acciones del docente en vez de peticiones HTTP. Y se aclara que **la primera llamada no es un defecto sino una necesidad mal descrita**: el selector tiene que ofrecer la comisión entera o filtrar sería un camino de ida. | Orquestador SDD |
 | 1.0 | 2026-08-31 | Emisión inicial. Mide la **primera pintura** y el **filtro** de `/entrega-comision` en cuatro cortes, de 30 a 1002 trabajos: **96 ms y 40 KB** en el extremo bajo, **1579 ms y 1,2 MB** en el alto. **Corrige una afirmación del informe del servicio emitido hoy**, que advertía que pintar el listado viaja por el circuito: **no es así**, `ClassSubmissionList.razor` es de **render estático** —no declara `@rendermode`, y su filtro es un `<form method="get">`—, de modo que el repliegue a long polling del hosting **no la afecta** y lo medido es representativo, no un piso. **Hallazgo:** el wireframe declara «esqueleto por fila por encima de 400 ms», **la medición cruza los 400 ms entre los 100 y los 300 trabajos**, y el esqueleto **no existe en ninguna página** pese a que el sistema visual trae sus clases; bajo render estático **no puede existir**, porque el servidor entrega el documento completo o nada, y la salida —`[StreamRendering]`— no se usa en el producto. Registra además que **el marcado multiplica por casi cinco** el peso por trabajo respecto del JSON, y que **el filtro no escala con el total** porque el recorte lo hace el servicio, lo que le da la razón al diseño que eligió agrupación y filtro en lugar de paginación. Declara sus límites: **una corrida por corte y no percentiles**, sin latencia de red, y **no cierra `PT-05`**. | Orquestador SDD |
