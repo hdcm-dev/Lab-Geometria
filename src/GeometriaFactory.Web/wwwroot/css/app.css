@@ -497,6 +497,17 @@ a { color: var(--color-brand-primary); }
   border-bottom: 1px solid var(--color-text-warning);
   font-size: var(--type-body-size);
 }
+
+/* EL MARCO ES QUIEN LO ENCIENDE, Y POR ESO ESTAS TRES REGLAS EXISTEN.
+   Blazor busca `#components-reconnect-modal` al desconectarse; si lo encuentra, no crea el suyo
+   —que viene en inglés y fuera de este sistema visual— y le aplica sus clases de estado. El
+   elemento se dibuja siempre y se muestra sólo cuando el marco lo pide.
+   `failed` y `rejected` NO se muestran a propósito: la maqueta aprobó un solo texto, el de
+   reintento, y mostrarlo cuando los reintentos se agotaron diría algo falso. Ver `DF-08`. */
+#components-reconnect-modal { display: none; }
+#components-reconnect-modal.components-reconnect-show { display: flex; }
+#components-reconnect-modal.components-reconnect-hide { display: none; }
+
 body.gf-inert .gf-shell,
 body.gf-inert .gf-canvas { pointer-events: none; filter: grayscale(.35) opacity(.7); }
 
