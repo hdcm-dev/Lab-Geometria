@@ -38,7 +38,7 @@ esos actos discretos que viajan por el circuito».** Es falso para esta superfic
 primero porque cambia cómo se leen los números.
 
 `ClassSubmissionList.razor` **no declara `@rendermode`**. La pieza pública registra el modo interactivo y
-**sólo ocho componentes lo adoptan**; éste no está entre ellos. Su filtro es un `<form method="get">`, y
+**sólo seis lo adoptan**; éste no está entre ellos. *(Contados el 2026-08-31 en `ADR-10001` §2.1. Una cuenta anterior decía ocho: incluía dos componentes que **mencionan** `@rendermode` en su prosa, escapado, sin declararlo.)* Su filtro es un `<form method="get">`, y
 el propio código lo dice sin ambigüedad:
 
 > *«los dos viajan por la dirección porque esta superficie es de render estático»*

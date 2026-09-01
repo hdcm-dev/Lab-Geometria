@@ -16,7 +16,7 @@
 #
 # Y HAY UNA SUPOSICIÓN QUE PARECÍA OBVIA Y ES FALSA, que conviene leer antes que
 # los números: ESTA SUPERFICIE NO USA EL CIRCUITO. `ClassSubmissionList.razor` no
-# declara `@rendermode` —sólo ocho componentes de la pieza pública lo hacen— y su
+# declara `@rendermode` —sólo SEIS componentes lo hacen, `ADR-10001` §2.1— y su
 # filtro es un `<form method="get">`. El propio código lo dice: «los dos viajan
 # por la dirección porque esta superficie es de render estático».
 #

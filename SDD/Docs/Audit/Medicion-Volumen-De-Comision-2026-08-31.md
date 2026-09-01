@@ -105,7 +105,7 @@ lado del front **no está medido**.~~
 > **CORREGIDO el 2026-08-31, el mismo día, en la emisión 1.1.** Este apartado afirmaba que **pintar el
 > listado viaja por el circuito de la sesión interactiva**, y **es falso para esa superficie**.
 > `ClassSubmissionList.razor` **no declara `@rendermode`** —la pieza pública registra el modo interactivo
-> y **sólo ocho componentes lo adoptan**, y éste no está—, y su filtro es un `<form method="get">`. El
+> y **sólo seis lo adoptan**, y éste no está —contados el 2026-08-31 en `ADR-10001` §2.1; una cuenta anterior decía ocho porque incluía dos que **mencionan** `@rendermode` en prosa sin declararlo—, y su filtro es un `<form method="get">`. El
 > propio código lo dice: *«los dos viajan por la dirección porque esta superficie es de render
 > estático»*. **La sesión interactiva no participa.**
 >
