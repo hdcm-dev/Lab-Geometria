@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    PRUEBAS DE EXTREMO A EXTREMO CONTRA UN DESPLIEGUE REAL.
+
+    NO SE AGREGA A `GeometriaFactory.sln` A PROPOSITO, y es la decisión más importante de este
+    archivo. `scripts/test.sh` corre la solución entera y es la puerta `QG-02` de CADA PR: si estas
+    pruebas entraran ahí, cada PR intentaría abrir un navegador contra un sitio publicado —que puede
+    estar caído, o al que el runner puede no llegar— y la puerta se pondría en rojo por razones que
+    no son del cambio. Una compuerta que se pone en rojo sola termina apagada.
+
+    Se corren desde su propio flujo, contra la dirección que se le pase.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="Microsoft.Playwright.NUnit" Version="1.49.0" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
+    <PackageReference Include="NUnit.Analyzers" Version="4.3.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+
+  <!--
+    NO REFERENCIA NINGUN PROYECTO DEL PRODUCTO, y tampoco es un descuido: una prueba de extremo a
+    extremo que compila contra el producto puede afirmar cosas que sólo son ciertas del lado del
+    servidor. Lo único que ve es lo que ve una persona: el navegador y la dirección pública.
+  -->
+
+</Project>
