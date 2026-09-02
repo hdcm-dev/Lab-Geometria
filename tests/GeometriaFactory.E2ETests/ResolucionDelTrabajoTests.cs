@@ -49,7 +49,14 @@ public sealed class ResolucionDelTrabajoTests : PruebaE2E
         // y el listado volvia mudo: habia que buscar la fila para saber si habia salido. Es el
         // reporte original del Product Owner —«el boton no funciona»— sobreviviendo a un producto
         // que ya funciona, y por eso la afirmacion del acuse va JUNTO a la del dato.
-        await Expect(Page.GetByText("quedo finalizado")).ToBeVisibleAsync(new() { Timeout = EsperaDelCircuito });
+        //
+        // SE BUSCA EL TEXTO CON SU TILDE, Y ESO NO ES UN DETALLE DE ORTOGRAFIA. Este aserto decia
+        // «quedo finalizado» y el producto emite «quedó finalizado» —`ClassSubmissionList.razor`
+        // §345—: nunca pudo coincidir. Entro en `main` el 2026-09-02 junto con el acuse que
+        // verifica, en la misma unidad, sin que la suite se volviera a correr contra un producto
+        // que ya lo emitia. Lo encontro el banco local el mismo dia. La coincidencia de texto NO
+        // normaliza acentos: «quedo» y «quedó» son dos cadenas distintas.
+        await Expect(Page.GetByText("quedó finalizado")).ToBeVisibleAsync(new() { Timeout = EsperaDelCircuito });
 
         // LA AFIRMACION QUE VALE.
         Assert.That(await ElLaboratorio.EstadoDelTrabajoAsync(trabajo), Is.EqualTo("Approved"));

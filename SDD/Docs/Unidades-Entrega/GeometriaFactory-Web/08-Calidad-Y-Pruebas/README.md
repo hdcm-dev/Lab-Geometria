@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-16
+**Fecha:** 2026-09-02
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
 **Tipo de proyecto de código (D8):** `web-monolith`
 
@@ -45,6 +45,7 @@
 | [`Criterios-Validacion.md`](Criterios-Validacion.md) | 1.1 | Propuesto | Fase E, AG-08 | **Treinta y cinco** criterios, `CV-01` a `CV-35`, con su carácter |
 | [`Definition-Of-Done.md`](Definition-Of-Done.md) | 1.1 | Propuesto | Fase E, AG-08 | **DoD canónica** del proyecto de código, en cuatro capas |
 | [`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) | **1.2** | Propuesto | **Fase B2, AG-03M** | **Ya existía antes de esta fase.** Las **61** sondas `SD-10001` a `SD-10061` contra la línea de base visual aprobada. Ver §3 |
+| [`Pruebas-Extremo-A-Extremo.md`](Pruebas-Extremo-A-Extremo.md) | **1.0** | Propuesto | **Construcción, 2026-09-02** | **Documenta una batería que ya corre**, no una que se propone: `tests/GeometriaFactory.E2ETests`, sus **dos modos de corrida**, sus ocho clases y **32** casos, y sus cuatro apartamientos. Ver §3.1 |
 
 ## 2. Orden de lectura
 
@@ -56,6 +57,7 @@
 6. [`Plan-Pruebas.md`](Plan-Pruebas.md) — cuándo se ejecuta cada cosa, por etapa.
 7. [`Criterios-Validacion.md`](Criterios-Validacion.md) — cuándo se declara validado.
 8. [`Definition-Of-Done.md`](Definition-Of-Done.md) — cuándo se declara terminado.
+9. [`Pruebas-Extremo-A-Extremo.md`](Pruebas-Extremo-A-Extremo.md) — qué batería automatizada existe hoy, cómo se corre y qué **no** puede ver.
 
 ## 3. La matriz de sensado de deriva, que ya existía
 
@@ -72,6 +74,23 @@
 | Se **verificó desde este lado** la tabla de correspondencia que [`../../GeometriaFactory-Visor/08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) declara contra ésta: **las ocho correspondencias son verdaderas** | [`Estrategia-Testing.md`](Estrategia-Testing.md) §8.2 |
 | **No se modificó ninguna fila, ningún umbral ni el recuento de 61** | — |
 | **No se abrieron filas para la capacidad `F-26`**, porque sus elementos de interfaz no tienen identificador en la línea de base. Se verifican con `TC-10006`, `TC-10007` y `TC-10010` contra los criterios de aceptación de `CU-10003` y `CU-10004`, **sin umbral de deriva**, y así queda declarado como hueco | [`Matriz-Cobertura-Pruebas.md`](Matriz-Cobertura-Pruebas.md) §8 |
+
+### 3.1 La batería de extremo a extremo, que no existía cuando se emitió esta categoría
+
+**Esta categoría se emitió el 2026-08-16 y en ese momento la verificación de pantalla era manual**:
+[`Estrategia-Testing.md`](Estrategia-Testing.md) §3.1 la nombra, con todas las letras, como «una
+persona ejecutando pasos». **Eso sigue siendo cierto del guion de demostración de cada etapa.**
+
+**Lo que cambió es que además hay una batería automatizada**, incorporada en la construcción entre
+el 2026-09-02 y documentada en [`Pruebas-Extremo-A-Extremo.md`](Pruebas-Extremo-A-Extremo.md).
+Se declara en un documento propio y **no reescribiendo los ocho existentes**, por la misma razón
+por la que la matriz de sensado se incorporó en lugar de duplicarse: lo emitido dice la verdad
+sobre lo que había, y corregirlo le haría decir a una emisión vieja algo que no dijo.
+
+**Qué agrega, en una línea:** abre un navegador de verdad contra la pieza pública, en dos modos
+—un banco que ella misma levanta, y el laboratorio desplegado—, y cubre además **la versión
+angosta**, que es donde vivió el `P0` `MI-02` durante catorce días con toda la construcción en
+verde.
 
 ## 4. Artefactos omitidos y su motivo
 
@@ -128,6 +147,7 @@ Se declaran acá para que cualquier lectura posterior pueda verificarlos contra 
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.1 | 2026-09-02 | **Entra un artefacto: [`Pruebas-Extremo-A-Extremo.md`](Pruebas-Extremo-A-Extremo.md) 1.0.** Documenta la batería automatizada de extremo a extremo que la construcción incorporó y que **no existía cuando se emitió esta categoría**. Se agrega la fila a §1, el paso 9 al orden de lectura y §3.1 con el motivo de declararla en documento propio en lugar de reescribir los ocho existentes. **No cambia ningún gate, ningún umbral ni ningún recuento**: los once `QG` y las tres puertas técnicas quedan como estaban. Sube minor. |
 | 1.1 | 2026-08-11 | **`H-02`.** La tabla de gates de §5 declaraba a `QG-04` **condicionado**. Pasa a **bloqueante**: §17.2.P.6 · GeometriaFactory-Web lo escribe como «gate bloqueante y numérico» y §22 `A-4` declara que lo que puede cambiar es la forma del gate y no su carácter. Se actualizan las versiones de los artefactos revisados. Corrige contra [`../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md`](../../../Audit/E-08-Calidad-Siete-Proyectos-r1.md) 1.0 y contra el texto vivo del intake **1.20**. |
 | 1.0 | 2026-08-11 | Emisión inicial del índice de la categoría 08 de `GeometriaFactory-Web`. Lista los **ocho** artefactos vigentes, **siete** emitidos por esta Fase E y uno —[`Matriz-Sensado-Deriva.md`](Matriz-Sensado-Deriva.md) 1.2— **emitido por la Fase B2 y ya existente**, con la columna que declara quién emitió cada uno. Su §3 declara qué hizo esta fase con esa matriz y qué no hizo, incluida la verificación desde este lado de la tabla de correspondencia de `GeometriaFactory-Visor`. Declara **un** artefacto omitido con su motivo, los **once** quality gates y las **tres** puertas técnicas con su carácter, y la tabla de recuentos con la fuente de cada uno. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |

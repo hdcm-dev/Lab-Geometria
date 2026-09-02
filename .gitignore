@@ -472,3 +472,11 @@ core.*
 # ============================================================================
 App_Data/
 **/App_Data/
+
+# ============================================================================
+# LA SALIDA DE LA CORRIDA DE EXTREMO A EXTREMO. Informes, trazas y capturas: es
+# evidencia DE UNA CORRIDA, se regenera con `scripts/pruebas-e2e.sh` y puede pesar
+# decenas de megabytes por traza. Lo que sí se versiona es la evidencia elegida,
+# en `evidencia/<fecha>/`, que es la que alguien decidió que valía la pena guardar.
+# ============================================================================
+resultados-e2e/

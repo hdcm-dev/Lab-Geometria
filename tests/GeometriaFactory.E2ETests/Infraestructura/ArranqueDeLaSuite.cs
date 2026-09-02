@@ -16,9 +16,21 @@ namespace GeometriaFactory.E2ETests;
 public sealed class ArranqueDeLaSuite
 {
     [OneTimeSetUp]
-    public async Task PrepararAsync()
+    public Task PrepararAsync() => ElLaboratorio.PrepararAsync();
+
+    /// <summary>Baja el banco local, si esta corrida levantó uno.</summary>
+    /// <remarks>
+    /// SE DESMONTA SIEMPRE, incluso cuando la corrida terminó en rojo: dos piezas del producto y
+    /// un almacén dejados en pie después de la suite se acumulan corrida tras corrida y terminan
+    /// ocupando los puertos de la siguiente. En el modo desplegado no hay nada que bajar y esto
+    /// no hace nada.
+    /// </remarks>
+    [OneTimeTearDown]
+    public void Terminar()
     {
-        ElLaboratorio.Leer();
-        await ElLaboratorio.ExigirQueElLaboratorioRespondaAsync();
+        if (BancoLocal.EnPie)
+        {
+            BancoLocal.Bajar();
+        }
     }
 }
