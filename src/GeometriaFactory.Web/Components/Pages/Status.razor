@@ -4,6 +4,7 @@
    aplicación, y volver a declararlo dentro de un subárbol que ya es interactivo es un error de
    ejecución, no una redundancia inofensiva. *@
 @inject DataServiceClient DataService
+@inject DataProtectionState Claves
 @inject ILogger<Status> Logger
 
 @* APARTAMIENTO AP-03 (`Plan-Etapa-A.md` §2.3): esta página NO es una de las once superficies
@@ -58,6 +59,37 @@ else
 {
     <p>Sin datos todavía.</p>
 }
+
+@* ---- LA SALUD DE ESTA PIEZA, NO LA DEL SERVICIO DE DATOS ----------------------------------
+   POR QUÉ SE PUBLICA ACÁ. El 2026-09-01 el anfitrión real estuvo corriendo con las claves de
+   protección de datos EN MEMORIA, y la única señal era un aviso al arrancar en un registro
+   apagado. Costó semanas de fallos sin síntoma legible —formularios rechazados, sesiones
+   caídas y COMPONENTES INTERACTIVOS DIBUJADOS Y MUERTOS, porque los descriptores de componente
+   de Blazor también viajan protegidos—.
+
+   Y NO ALCANZA CON QUE EL ARRANQUE LO HAYA PEDIDO: eso es la condición. El efecto es que HAYA
+   CLAVES ESCRITAS, y es lo único que se puede comprobar mirando el sitio. Es la misma regla que
+   la mesa levantó para todo el producto.
+
+   EL NÚMERO DE CLAVES ES EL DATO, Y LA RUTA NO SE MUESTRA: nombrar una ruta interna del
+   anfitrión en una página pública es exactamente lo que `RA-03` prohíbe. *@
+<dl class="health">
+    <dt>Claves de protección de datos</dt>
+    <dd>
+        @switch (Claves.CountKeys())
+        {
+            case null:
+                <span class="failure">No se puede leer el almacén de claves.</span>
+                break;
+            case 0:
+                <span>Almacén persistido y todavía vacío: el marco escribe la primera cuando haga falta.</span>
+                break;
+            case var n:
+                <span>Persistidas · @n en el almacén. Sobreviven al reciclado del proceso.</span>
+                break;
+        }
+    </dd>
+</dl>
 
 @code {
     private ServiceHealth? _health;

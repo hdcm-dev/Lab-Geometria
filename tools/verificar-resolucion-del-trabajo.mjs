@@ -141,7 +141,7 @@ try {
 paso(2, 'Apretar «Aprobar» abre el diálogo de confirmación', abrio,
     abrio ? '' : 'EL BOTÓN NO HIZO NADA: no hay diálogo. Es el defecto reportado.');
 
-if (!abrio) volcarBitacora();
+volcarBitacora();
 
 if (!abrio) {
     // Sin diálogo no hay nada más que comprobar, y hay que decir si además

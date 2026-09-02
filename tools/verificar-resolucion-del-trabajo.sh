@@ -210,8 +210,14 @@ pedir POST /auth/token "{\"email\":\"$correo_alumno\",\"password\":\"$clave_alum
 acceso_alumno="$(campo accessToken "$cuerpo")"
 [ -n "$acceso_alumno" ] || morir "el alumno no pudo entrar."
 
-texto="$(awk -f "$raiz/samples/web/01-datos-seed/datos/escapar.awk" \
-             "$raiz/samples/web/01-datos-seed/datos/E1.txt")"
+# EL DATO DEL TRABAJO ES UNA VARIABLE, y hace falta que lo sea: un defecto que
+# depende de lo que el alumno escribió no aparece con la muestra de siempre. Con
+# `GF_VERIF_DATOS` se le pasa el texto original de un trabajo REAL —por ejemplo
+# el que un reporte señala— y se verifica sobre ese.
+datos="${GF_VERIF_DATOS:-$raiz/samples/web/01-datos-seed/datos/E1.txt}"
+[ -f "$datos" ] || morir "no existe el archivo de datos '$datos'."
+echo "Datos del trabajo: $datos"
+texto="$(awk -f "$raiz/samples/web/01-datos-seed/datos/escapar.awk" "$datos")"
 nombre_trabajo="Cubo y ortoedro"
 pedir POST /trabajos \
   "{\"name\":\"$nombre_trabajo\",\"declaredDate\":\"2026-08-30\",\"description\":null,\"originalJson\":$texto}" \
