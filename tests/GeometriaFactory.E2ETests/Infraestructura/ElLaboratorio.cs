@@ -331,7 +331,17 @@ public static class ElLaboratorio
     }
 
     /// <summary>Carga un trabajo enviado a nombre del alumno sembrado.</summary>
-    public static async Task<Guid> SembrarTrabajoEnviadoAsync(AlumnoSembrado alumno, string nombre)
+    public static Task<Guid> SembrarTrabajoEnviadoAsync(AlumnoSembrado alumno, string nombre) =>
+        SembrarTrabajoEnviadoAsync(alumno, nombre, TextoDeUnTrabajo);
+
+    /// <summary>Idem, con el texto que el caso necesita en vez del texto canónico.</summary>
+    /// <remarks>
+    /// EL TEXTO ES PARTE DEL CASO cuando lo que se prueba es qué dice la pantalla sobre lo que se
+    /// pudo interpretar. `FiguraQueNoSePudoLeerTests` necesita uno cuyas claves el producto NO
+    /// reconozca, y ése no puede salir de la constante compartida.
+    /// </remarks>
+    public static async Task<Guid> SembrarTrabajoEnviadoAsync(
+        AlumnoSembrado alumno, string nombre, string textoDelTrabajo)
     {
         using var cliente = Cliente();
         var canje = await cliente.PostAsJsonAsync("auth/token",
@@ -345,7 +355,7 @@ public static class ElLaboratorio
             name = nombre,
             declaredDate = "2026-08-30",
             description = (string?)null,
-            originalJson = TextoDeUnTrabajo,
+            originalJson = textoDelTrabajo,
         });
 
         envio.EnsureSuccessStatusCode();

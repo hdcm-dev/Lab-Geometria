@@ -43,7 +43,13 @@ public sealed class ResolucionDelTrabajoTests : PruebaE2E
         await Expect(dialogo).ToContainTextAsync("Aprobado por la suite de extremo a extremo.");
 
         await Page.ClickAsync("[data-gf-confirm-outcome='Approve']");
-        await Page.WaitForURLAsync(new Regex(@"/entrega-comision$"), new() { Timeout = EsperaDelCircuito });
+        await Page.WaitForURLAsync(new Regex(@"/entrega-comision"), new() { Timeout = EsperaDelCircuito });
+
+        // EL DOCENTE TIENE QUE ENTERARSE DE QUE PASO. Hasta el 2026-09-02 la operacion se aplicaba
+        // y el listado volvia mudo: habia que buscar la fila para saber si habia salido. Es el
+        // reporte original del Product Owner —«el boton no funciona»— sobreviviendo a un producto
+        // que ya funciona, y por eso la afirmacion del acuse va JUNTO a la del dato.
+        await Expect(Page.GetByText("quedo finalizado")).ToBeVisibleAsync(new() { Timeout = EsperaDelCircuito });
 
         // LA AFIRMACION QUE VALE.
         Assert.That(await ElLaboratorio.EstadoDelTrabajoAsync(trabajo), Is.EqualTo("Approved"));
@@ -74,7 +80,7 @@ public sealed class ResolucionDelTrabajoTests : PruebaE2E
         await (await ControlListoAsync("[data-gf-outcome='Reject']")).ClickAsync();
         await Expect(Page.Locator("dialog[data-gf-dialog]")).ToBeVisibleAsync(new() { Timeout = EsperaDelCircuito });
         await Page.ClickAsync("[data-gf-confirm-outcome='Reject']");
-        await Page.WaitForURLAsync(new Regex(@"/entrega-comision$"), new() { Timeout = EsperaDelCircuito });
+        await Page.WaitForURLAsync(new Regex(@"/entrega-comision"), new() { Timeout = EsperaDelCircuito });
 
         await Page.GotoAsync($"/trabajos/{trabajo}", new() { WaitUntil = WaitUntilState.Load });
 

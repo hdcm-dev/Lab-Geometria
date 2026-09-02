@@ -230,6 +230,25 @@ else
                         El texto se interpretó y no salió ninguna observación.
                     </p>
                 }
+
+                @* «NO SALIÓ NINGUNA OBSERVACIÓN» NO PUEDE SIGNIFICAR DOS COSAS.
+                   El producto compara el valor declarado contra el derivado sólo cuando **puede
+                   derivarlo**, y eso está bien: advertir contra un valor que nadie calculó sería
+                   inventar una discrepancia (`LocalFigureValidator.Discrepant`). Lo que faltaba es
+                   decirlo. Un usuario de la mesa del 2026-09-02 entregó a propósito un cubo de lado
+                   4 declarando volumen 48 y el producto le contestó que no había ninguna
+                   observación; su conclusión textual fue «las dos cajas se contradicen y no sé a
+                   cuál creerle».
+                   Esta banda aparece TAMBIÉN cuando hubo observaciones: que una figura se haya
+                   verificado no dice nada de las otras. *@
+                @if (UncheckedPositions().Any())
+                {
+                    <p class="gf-banner gf-banner--warning gf-mt-3" role="status">
+                        De @DescribeUnchecked() no se pudo derivar ningún valor con lo que trae tu
+                        texto, así que sus números no se compararon. Suele pasar cuando las claves
+                        no son las que el laboratorio reconoce.
+                    </p>
+                }
             </section>
 
             <section class="gf-card" aria-labelledby="work-text-heading">
@@ -243,6 +262,40 @@ else
                     <pre class="gf-original-text">@_work.OriginalJson</pre>
                 </details>
             </section>
+
+    @* QUÉ PUEDE HACER EL ALUMNO DESDE ACÁ, DICHO ACÁ.
+       Esta es la pantalla donde se leen las observaciones, y hasta el 2026-09-02 su única acción
+       era «Volver a mis trabajos»: el alumno leía qué estaba mal y no tenía desde dónde corregirlo.
+       El usuario estándar `US-2` de la mesa lo recorrió y dedujo solo que había que arrancar un
+       trabajo nuevo y retipear todo; el comentario del docente le decía «reenvialo corregido» y ese
+       verbo no existía en ninguna parte de la interfaz.
+
+       NO SE INVENTA UNA ACCIÓN QUE EL DOMINIO NO TIENE. `Work.cs:475` sólo admite editar o borrar
+       un **borrador**: un trabajo entregado no se reescribe, y eso es una decisión del intake, no
+       un defecto de esta pantalla. Lo que faltaba no era el botón de editar sino **decir qué se
+       puede hacer en cada estado**, que es distinto y es lo que se agrega. *@
+    @if (!IsAdministrator)
+    {
+        <div class="gf-footer-actions">
+            @switch (_work.Status)
+            {
+                case "Draft":
+                    <p class="gf-caption">Todavía es un borrador: podés seguir trabajándolo y entregarlo cuando quieras.</p>
+                    <a class="gf-btn gf-btn--primary" href="@($"/trabajos/{_work.WorkId}/editar")">Seguir con este borrador</a>
+                    break;
+
+                case "Rejected":
+                    <p class="gf-caption">Para corregir esto entregás un trabajo nuevo: el que ya entregaste queda como está, con lo que te dijeron.</p>
+                    <a class="gf-btn gf-btn--primary" href="/trabajo-nuevo">Entregar una corrección</a>
+                    break;
+
+                case "Submitted":
+                    <p class="gf-caption">Ya lo entregaste, así que no se puede cambiar. Cuando el docente lo resuelva vas a ver su desenlace acá.</p>
+                    break;
+            }
+        </div>
+    }
+
         </div>
 
         @* Columna derecha: área de dibujo arriba, árbol abajo. ESTA SUPERFICIE ES EL COMPONENTE
@@ -483,11 +536,66 @@ else
     /// </remarks>
     private IEnumerable<int> UndrawnPositions()
     {
-        var drawn = _work!.Pieces.Select(piece => piece.Position).ToHashSet();
+        var drawn = _work!.Pieces
+            .Where(HasSomethingToDraw)
+            .Select(piece => piece.Position)
+            .ToHashSet();
 
         return Enumerable.Range(0, _work.RootFigureCount ?? drawn.Count)
             .Where(position => !drawn.Contains(position));
     }
+
+    /// <summary>Las posiciones cuyo texto no permitió derivar ningún valor que comparar.</summary>
+    /// <remarks>
+    /// NO ES LO MISMO QUE «SIN OBSERVACIONES», y ésa es toda la cuestión. Sin área ni volumen
+    /// derivados no hay con qué contrastar lo que el alumno declaró, de modo que la ausencia de
+    /// advertencias sobre esa figura **no dice que sus números estén bien**: dice que nadie los
+    /// miró. El valor central del producto es volver visible el error de fórmula, y callarse acá
+    /// lo desactiva justo para el alumno que todavía no acertó el formato.
+    /// </remarks>
+    private IEnumerable<int> UncheckedPositions() =>
+        _work!.Pieces
+            .Where(piece => piece.DerivedArea is null && piece.DerivedVolume is null)
+            .Select(piece => piece.Position)
+            .OrderBy(position => position);
+
+    /// <summary>Nombra en castellano las figuras que no se pudieron verificar.</summary>
+    private string DescribeUnchecked()
+    {
+        var positions = UncheckedPositions().Select(position => position + 1).ToList();
+
+        return positions.Count == 1
+            ? $"la figura {positions[0]}"
+            : $"las figuras {string.Join(", ", positions)}";
+    }
+
+    /// <summary>¿Esta pieza trae alguna medida con la que se pueda dibujar algo?</summary>
+    /// <remarks>
+    /// RECONSTRUIDA NO ES DIBUJABLE, y hasta el 2026-09-02 esta pantalla las confundía. Una figura
+    /// cuyo texto trae claves que el producto no reconoce —`Lado` en vez de `Largo`, sin `Caras`—
+    /// **se reconstruye igual**, con su tipo y sin una sola dimensión, y entraba en el conjunto de
+    /// las dibujadas por el solo hecho de existir. El resultado, medido por la mesa UX/UI del
+    /// 2026-09-02 en el laboratorio publicado y a 1440 px, con `p-20-visor-inventadas-1440.png`:
+    ///
+    ///     área de dibujo vacía   ·   «Se dibujaron las 1 figuras del trabajo.»
+    ///
+    /// El mismo cubo con las claves del contrato dibuja y advierte la discrepancia
+    /// (`p-20-visor-contrato-1440.png`). O sea que el producto **hace lo que promete cuando puede
+    /// leer la figura**, y lo que fallaba era decir la verdad cuando no podía.
+    ///
+    /// SE RESUELVE ACÁ Y NO EN EL GUION. El acuse del navegador ya distingue «no hay capacidad 3D»
+    /// de «se dibujó», y esa parte funciona. Lo que faltaba es anterior y es del servidor: **qué
+    /// piezas tienen algo que dibujar**. Una pieza sin ninguna dimensión propia y sin ningún
+    /// componente que traiga una no produce malla, la dibuje quien la dibuje.
+    /// </remarks>
+    private static bool HasSomethingToDraw(WorkPiece piece) =>
+        piece.DeclaredLength is not null
+        || piece.DeclaredWidth is not null
+        || piece.DeclaredRadius is not null
+        || piece.Components.Any(component =>
+            component.DeclaredLength is not null
+            || component.DeclaredWidth is not null
+            || component.DeclaredRadius is not null);
 
     /// <summary>Dónde está la observación, dicho como lo ve la persona.</summary>
     private static string LocationOf(WorkObservation observation) =>

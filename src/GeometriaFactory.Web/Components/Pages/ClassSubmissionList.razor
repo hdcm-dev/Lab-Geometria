@@ -63,6 +63,21 @@
     </div>
 </div>
 
+@* ACUSE DE RECIBO DE LO QUE SE RESOLVIÓ EN OTRA SUPERFICIE.
+   Aprobar, rechazar y retirar FUNCIONAN —la mesa UX/UI del 2026-09-02 lo verificó sobre el
+   laboratorio publicado, con captura antes y después de cada acción— y sin embargo el docente
+   volvía acá sin una sola palabra y tenía que buscar la fila para saber si había salido. El
+   usuario estándar `US-3` lo dijo así: «aprobé y no me enteré». Es el reporte original del
+   Product Owner —«el botón no funciona»— sobreviviendo a un producto que ya funciona.
+
+   VIAJA POR LA DIRECCIÓN Y NO POR ESTADO porque la vuelta es un `forceLoad`: no hay nada que
+   sobreviva entre las dos peticiones salvo la dirección. Es exactamente lo que ya hace `/ingreso`
+   con su parámetro `estado`, y se copia esa forma en vez de inventar otra. *@
+@if (ResolutionAcknowledgement() is { } acknowledgement)
+{
+    <p class="gf-banner gf-banner--confirmation gf-mt-5" role="status">@acknowledgement</p>
+}
+
 @if (!Session.IsOpen)
 {
     <p class="gf-banner gf-banner--info gf-width-medium" role="status">
@@ -303,6 +318,36 @@ else
     /// <summary>El estado elegido en el filtro. Acota lo ya recibido.</summary>
     [SupplyParameterFromQuery(Name = "estado")]
     private string? StateFilter { get; set; }
+
+    /// <summary>El desenlace que se acaba de aplicar en la vista del trabajo, para acusarlo.</summary>
+    [SupplyParameterFromQuery(Name = "resuelto")]
+    private string? ResolvedOutcome { get; set; }
+
+    /// <summary>El nombre del trabajo resuelto, para que el acuse diga cuál.</summary>
+    [SupplyParameterFromQuery(Name = "trabajo")]
+    private string? ResolvedWork { get; set; }
+
+    /// <summary>El texto del acuse, o nulo si no se viene de resolver nada.</summary>
+    /// <remarks>
+    /// EL CONJUNTO ES CERRADO Y SE VALIDA. Lo que llega por la dirección lo escribe cualquiera:
+    /// sólo se acusan los tres desenlaces que el producto tiene, y un valor que no sea uno de ellos
+    /// no dibuja nada. El nombre del trabajo se dibuja como texto —el marco lo escapa— y se recorta,
+    /// porque un título largo en una banda de confirmación empuja el listado hacia abajo.
+    /// </remarks>
+    private string? ResolutionAcknowledgement()
+    {
+        var subject = string.IsNullOrWhiteSpace(ResolvedWork)
+            ? "El trabajo"
+            : $"«{(ResolvedWork!.Length > 60 ? ResolvedWork[..60] + "…" : ResolvedWork)}»";
+
+        return ResolvedOutcome switch
+        {
+            "aprobado"  => $"{subject} quedó finalizado. El alumno ya lo ve con ese desenlace.",
+            "rechazado" => $"{subject} quedó rechazado, con tu comentario. El alumno ya lo ve.",
+            "retirado"  => $"{subject} se retiró y ya no figura en la entrega de la comisión.",
+            _ => null,
+        };
+    }
 
     /// <summary>Lo que la superficie dibuja: la colección que el alcance del papel dejó pasar.</summary>
     private IReadOnlyList<WorkListItem> _works = [];
