@@ -314,7 +314,31 @@ else
                     }
                     else
                     {
-                        <p class="gf-caption gf-mt-3">Se dibujaron las @_work.Pieces.Count figuras del trabajo.</p>
+                        @* EL ACUSE DICE LO QUE ES CIERTO AL DIBUJARSE, Y EL GUION LO CORRIGE CUANDO SABE MÁS.
+                           Hasta el 2026-09-02 esta línea afirmaba «Se dibujaron las N figuras» SIN SABERLO:
+                           la escribe el servidor, que no puede saber si el navegador dibujó algo. El
+                           peritaje lo reprodujo en una máquina sin capacidad 3D:
+
+                             con3d · canvas en la escena: 1
+                             sin3d · canvas en la escena: 0   ·   TEXTO IDENTICO
+
+                           O sea que en una PC del laboratorio sin aceleración, o en un escritorio
+                           remoto, o si el paquete del visor no llegó, el alumno ve un recuadro liso y
+                           la página le dice EN LETRAS que se dibujaron sus figuras. El único aviso era
+                           un `console.warn` que nadie lee.
+
+                           LOS TRES ESTADOS SON DISTINTOS Y AHORA SE DISTINGUEN:
+                             · sin guion, o antes de dibujar → un hecho que siempre es cierto: cuántas
+                               figuras TIENE el trabajo. No afirma nada sobre el dibujo.
+                             · dibujada                      → el guion lo confirma.
+                             · no se pudo dibujar            → el guion lo dice, y dice qué hacer.
+
+                           No se acuña ninguna clase: `gf-caption` y `gf-banner--warning` ya existen. *@
+                        <p class="gf-caption gf-mt-3" data-gf-escena-acuse
+                           data-gf-escena-dibujada="Se dibujaron las @_work.Pieces.Count figuras del trabajo."
+                           data-gf-escena-sin-dibujar="Este equipo no pudo dibujar la escena. Los datos del trabajo están completos: mirá el árbol del texto y las observaciones.">
+                            El trabajo tiene @_work.Pieces.Count figuras.
+                        </p>
                     }
                 }
                 else

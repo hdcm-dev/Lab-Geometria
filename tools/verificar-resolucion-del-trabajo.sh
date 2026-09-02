@@ -238,6 +238,16 @@ docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp --network host \
                 '$id_trabajo' '$nombre_trabajo'"
 veredicto=$?
 
+# ---- EL ACUSE DE LA ESCENA, EN LOS DOS ESTADOS -----------------------------
+# Un acuse que sólo se probó con 3D disponible no prueba nada: el defecto vivía
+# del otro lado. Ver `verificar-acuse-de-la-escena.mjs`.
+echo "---------------------------------------------------------------------------"
+docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp --network host \
+  -v "$raiz/tools:/t" -w /t "$imagen_pw" \
+  bash -c "npm install --no-save playwright@1.48.0 >/dev/null 2>&1 && \
+           GF_SPKI='$spki' node verificar-acuse-de-la-escena.mjs '$base_web' '$correo_admin' \
+             '$clave_admin' '$id_trabajo'" || veredicto=1
+
 # ---- EL PASO 6 LO CONTESTA EL SERVICIO DE DATOS, NO LA PANTALLA ------------
 # Que la pieza pública haya navegado bien no prueba que el desenlace se aplicó.
 # Lo único que lo prueba es preguntárselo a quien guarda el dato.

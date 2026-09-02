@@ -360,6 +360,47 @@
     // como llegaron (`ADR-08006`).
     var pendingDraw = false;
 
+    /**
+     * Le dice al acuse de la escena qué pasó de verdad.
+     *
+     * POR QUE EXISTE. La frase «Se dibujaron las N figuras» la escribe el servidor, que NO PUEDE
+     * SABER si el navegador dibujó algo. En una máquina sin capacidad 3D el recuadro queda liso y
+     * la página afirmaba igual que había dibujado. El único aviso era un `console.warn`.
+     *
+     * EL ACUSE SE SIRVE CON UN HECHO QUE SIEMPRE ES CIERTO —cuántas figuras TIENE el trabajo— y
+     * este guion lo mueve a «se dibujaron» o a «no se pudo» según lo que efectivamente ocurrió.
+     * Sin guion, el texto servido sigue siendo verdadero: esa es la propiedad que se buscaba.
+     */
+    function acusarEscena(scene, dibujada) {
+        const acuse = scene.parentElement === null
+            ? null
+            : scene.parentElement.querySelector('[data-gf-escena-acuse]');
+
+        if (acuse === null) {
+            return;
+        }
+
+        const texto = dibujada
+            ? acuse.getAttribute('data-gf-escena-dibujada')
+            : acuse.getAttribute('data-gf-escena-sin-dibujar');
+
+        if (texto === null) {
+            return;
+        }
+
+        acuse.textContent = texto;
+
+        // EL FALLO SE VE, NO SE SUSURRA. Cuando no se pudo dibujar, el acuse deja de ser una
+        // leyenda al pie y toma la forma de aviso que el resto del producto ya usa.
+        acuse.classList.toggle('gf-banner', !dibujada);
+        acuse.classList.toggle('gf-banner--warning', !dibujada);
+        acuse.classList.toggle('gf-caption', dibujada);
+
+        if (!dibujada) {
+            acuse.setAttribute('role', 'status');
+        }
+    }
+
     function drawScenes() {
         var scenes = document.querySelectorAll('[data-gf-viewer-pieces]');
 
@@ -387,7 +428,20 @@
                 // con su leyenda y la persona envía igual.
                 if (!pendingDraw) {
                     pendingDraw = true;
-                    window.addEventListener('load', drawScenes, { once: true });
+                    window.addEventListener('load', function () {
+                        drawScenes();
+
+                        // SI DESPUES DE LA CARGA EL VISOR SIGUE SIN ESTAR, YA NO VA A ESTAR, y la
+                        // pantalla tiene que decirlo en vez de dejar el acuse afirmando un dibujo
+                        // que no ocurrió.
+                        if (!window.GeometriaFactoryViewer) {
+                            var huerfanas = document.querySelectorAll('[data-gf-viewer-pieces]');
+
+                            for (var h = 0; h < huerfanas.length; h++) {
+                                acusarEscena(huerfanas[h], false);
+                            }
+                        }
+                    }, { once: true });
                 }
 
                 continue;
@@ -407,6 +461,9 @@
             var id = viewer.initialize(scene, { onPieceSelected: markNode });
 
             if (!id) {
+                // SIN CAPACIDAD 3D. Hasta hoy se salía sin decirle nada a la pantalla, y el acuse
+                // seguía afirmando que se había dibujado. Es el caso que el peritaje reprodujo.
+                acusarEscena(scene, false);
                 continue;
             }
 
@@ -432,6 +489,7 @@
             // LA INSTANCIA SE LIBERA AL DEJAR LA PÁGINA, que es la mitad de `PT-02` que se rompe
             // sin que nada falle hoy: diez navegaciones sin liberar dejan diez contextos vivos.
             scene.dataset.gfViewerDrawn = 'yes';
+            acusarEscena(scene, true);
             window.addEventListener('pagehide', function () { viewer.destroy(id); }, { once: true });
         }
     }
