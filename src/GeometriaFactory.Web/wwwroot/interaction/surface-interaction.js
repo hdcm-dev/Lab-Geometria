@@ -490,6 +490,26 @@
             // sin que nada falle hoy: diez navegaciones sin liberar dejan diez contextos vivos.
             scene.dataset.gfViewerDrawn = 'yes';
             acusarEscena(scene, true);
+            // ---- LA ESCENA ACOMPAÑA EL TAMAÑO DEL RECUADRO -------------------------------
+            // `resize` EXISTIA, ESTABA EXPORTADO Y NADIE LO LLAMABA. El peritaje del 2026-09-02 lo
+            // midió: al cambiar el tamaño de la ventana la escena quedaba dibujada con la medida
+            // vieja —recortada al 26 %— y la persona veía un recuadro casi vacío. Le pasa al alumno
+            // que GIRA EL TELEFONO, que es el gesto más común que hay sobre un dibujo.
+            //
+            // Y NO ALCANZABA CON ESCUCHAR LA VENTANA: este producto tiene una consulta de medios que
+            // apila las tarjetas por debajo de cierto ancho, de modo que el recuadro cambia de
+            // tamaño SIN que la ventana cambie. Se observa EL ELEMENTO, que es lo que importa.
+            if (typeof ResizeObserver === 'function') {
+                var observador = new ResizeObserver(function () { viewer.resize(id); });
+                observador.observe(scene);
+                window.addEventListener('pagehide', function () { observador.disconnect(); }, { once: true });
+            } else {
+                // Repliegue para navegadores sin observador: la ventana es lo único que queda.
+                var alCambiar = function () { viewer.resize(id); };
+                window.addEventListener('resize', alCambiar);
+                window.addEventListener('pagehide', function () { window.removeEventListener('resize', alCambiar); }, { once: true });
+            }
+
             window.addEventListener('pagehide', function () { viewer.destroy(id); }, { once: true });
         }
     }
