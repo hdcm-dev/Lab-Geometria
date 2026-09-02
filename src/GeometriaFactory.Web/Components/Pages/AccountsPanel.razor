@@ -105,7 +105,12 @@ else
     @* ---- La provisoria, la única vez que se ve ------------------------------------------ *@
     @if (_provisional is not null)
     {
-        <dialog class="gf-dialog" open aria-labelledby="accounts-provisional-heading" data-gf-dialog>
+        @* `data-gf-dialog-irreversible`: LA TECLA DE ESCAPE NO CIERRA ESTE DIALOGO. Es el único del
+           producto que lo lleva, y la razón está en el renglón de abajo: «No se vuelve a mostrar».
+           Escapar acá no es arrepentirse —como en la baja o en el reseteo— sino perder para siempre
+           la clave que hay que transmitirle al alumno. Lo encontró el peritaje del 2026-09-02. *@
+        <dialog class="gf-dialog" open aria-labelledby="accounts-provisional-heading"
+                data-gf-dialog data-gf-dialog-irreversible>
             <h2 id="accounts-provisional-heading">Contraseña provisoria de @_provisionalFor</h2>
             <p>
                 Dictásela, o pasásela por el canal que uses con la comisión.
