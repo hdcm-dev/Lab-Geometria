@@ -269,7 +269,15 @@ else
                            siguen mostrando como están. *@
                         <label for="submission-date">Fecha del trabajo, la que declarás vos</label>
                         <input class="gf-input" id="submission-date" name="Input.DeclaredDate" type="date"
-                               value="@Form.DeclaredDate" />
+                               value="@Form.DeclaredDate"
+                               aria-describedby="@(_fechaNoRepresentable is null ? null : "submission-date-vieja")" />
+                        @if (_fechaNoRepresentable is { } fechaVieja)
+                        {
+                            <span class="gf-requirement" id="submission-date-vieja" data-gf-fecha-no-representable>
+                                El día que habías declarado es <strong>@fechaVieja</strong>, y este control no lo
+                                puede mostrar con esa forma. Elegilo de nuevo en el calendario.
+                            </span>
+                        }
                     </div>
                     <div class="gf-field">
                         <label for="submission-description">Descripción</label>
@@ -476,6 +484,15 @@ else
 
     private string Heading => InEdition ? "Volver sobre tu borrador" : "Trabajo nuevo";
 
+    /// <summary>El día declarado que el control de fecha no puede representar, si lo hay.</summary>
+    /// <remarks>
+    /// EXISTE PARA QUE LA PANTALLA MUESTRE EL DATO EN VEZ DE ACUSAR. Cuando lo guardado no tiene la
+    /// forma `aaaa-mm-dd` ni ninguna de las viejas conocidas, el control queda vacío por fuerza; lo
+    /// que NO tiene por qué pasar es que el alumno se entere recién al ser rechazado, y sin poder
+    /// leer qué había declarado.
+    /// </remarks>
+    private string? _fechaNoRepresentable;
+
     protected override async Task OnInitializedAsync()
     {
         await Session.LoadAsync();
@@ -512,7 +529,19 @@ else
         if (!HttpMethods.IsPost(HttpContext?.Request.Method ?? HttpMethods.Get))
         {
             Form.Name = work.Name;
-            Form.DeclaredDate = work.DeclaredDate;
+
+            // LA FECHA SE CONVIERTE A LA FORMA QUE EL CONTROL SABE RECIBIR. `<input type="date">`
+            // acepta `aaaa-mm-dd` y descarta cualquier otra cosa EN SILENCIO: un borrador con la
+            // forma vieja abría el formulario sin fecha, y al enviar la pantalla le decía al alumno
+            // que le faltaba la que él había declarado. Ver `DeclaredDateText.ToControlValue`.
+            Form.DeclaredDate = DeclaredDateText.ToControlValue(work.DeclaredDate);
+
+            // Y SI NO SE PUDO CONVERTIR, LA PANTALLA LO DICE EN VEZ DE CULPARLO. Un control vacío
+            // sin explicación es lo que convertía un dato ilegible para el navegador en un reproche
+            // al alumno.
+            _fechaNoRepresentable = Form.DeclaredDate.Length == 0 && !string.IsNullOrWhiteSpace(work.DeclaredDate)
+                ? work.DeclaredDate
+                : null;
             Form.Description = work.Description ?? string.Empty;
             Form.OriginalJson = work.OriginalJson;
         }
