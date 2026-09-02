@@ -248,6 +248,15 @@ docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp --network host \
            GF_SPKI='$spki' node verificar-acuse-de-la-escena.mjs '$base_web' '$correo_admin' \
              '$clave_admin' '$id_trabajo'" || veredicto=1
 
+# ---- LA ESCENA ACOMPAÑA EL TAMAÑO DEL RECUADRO -----------------------------
+# `resize` estaba exportado por el visor y NADIE LO LLAMABA: al girar el teléfono
+# la escena quedaba con la medida vieja. Ver `verificar-escena-al-cambiar-de-tamano.mjs`.
+docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp --network host \
+  -v "$raiz/tools:/t" -w /t "$imagen_pw" \
+  bash -c "npm install --no-save playwright@1.48.0 >/dev/null 2>&1 && \
+           GF_SPKI='$spki' node verificar-escena-al-cambiar-de-tamano.mjs '$base_web' \
+             '$correo_admin' '$clave_admin' '$id_trabajo'" || veredicto=1
+
 # ---- EL PASO 6 LO CONTESTA EL SERVICIO DE DATOS, NO LA PANTALLA ------------
 # Que la pieza pública haya navegado bien no prueba que el desenlace se aplicó.
 # Lo único que lo prueba es preguntárselo a quien guarda el dato.
