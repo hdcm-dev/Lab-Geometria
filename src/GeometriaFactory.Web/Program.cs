@@ -2,12 +2,81 @@ using GeometriaFactory.Web;
 using GeometriaFactory.Web.Integration;
 using GeometriaFactory.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// ============================================================================================
+// LAS CLAVES DE PROTECCIÓN DE DATOS TIENEN QUE SOBREVIVIR AL PROCESO, y hasta el 2026-09-01 NO
+// LO HACÍAN. No había ninguna llamada a `AddDataProtection` en el producto, así que regía el
+// comportamiento por omisión, y en el anfitrión real ese comportamiento es EL PEOR POSIBLE. Su
+// propio registro lo venía diciendo, apagado, desde el primer día:
+//
+//     warn: EphemeralXmlRepository[50]
+//           Using an in-memory repository. Keys will not be persisted to storage.
+//     warn: XmlKeyManager[59]
+//           Neither user profile nor HKLM registry available. Using an ephemeral key repository.
+//
+// QUÉ SIGNIFICA, MEDIDO Y NO SUPUESTO. El 2026-09-01 arrancaron CINCO procesos en cinco horas y
+// media, cada uno con su propio juego de claves, y el registro trae TRES fallos con TRES claves
+// distintas —dos de ellas generadas por procesos anteriores—:
+//
+//     fail: Antiforgery[7] The antiforgery token could not be decrypted.
+//           The key {e226af34-…} was not found in the key ring.
+//
+// Eso no es un aviso teórico: es la prueba de que HAY CARGAS PROTEGIDAS POR UN PROCESO QUE SE
+// PRESENTAN A OTRO. Y por ahí pasan TRES cosas del producto, no una:
+//
+//   1. Los testigos de antifalsificación — el envío de cualquier formulario falla.
+//   2. La marca de sesión — la persona se encuentra afuera sin haber salido.
+//   3. LOS DESCRIPTORES DE COMPONENTE DE BLAZOR, que viajan protegidos dentro del marcado
+//      prerrenderizado. Si no se pueden descifrar al arrancar el circuito, EL COMPONENTE NUNCA
+//      SE VUELVE INTERACTIVO y el navegador no muestra ningún error: los botones quedan
+//      dibujados y muertos.
+//
+// EL DIRECTORIO VA FUERA DE `wwwroot` A PROPÓSITO. `App_Data` es la convención de IIS para datos
+// del sitio que no se sirven, y además esta pieza sólo publica archivos estáticos desde
+// `wwwroot`: las claves no tienen por dónde salir aunque el anfitrión se distraiga.
+//
+// SE FALLA AL ARRANCAR SI NO SE PUEDE PERSISTIR, y es deliberado. La alternativa es exactamente
+// lo que ya pasó: seguir andando con claves efímeras, romper de a ratos y sin síntoma legible, y
+// que nadie se entere durante semanas. Un almacén de claves que no se puede escribir es un
+// defecto de despliegue, y un defecto de despliegue tiene que impedir el despliegue.
+//
+// `SetApplicationName` fija el propósito: sin él, dos despliegues que compartan carpeta se
+// pisarían las claves.
+// ============================================================================================
+var directorioDeClaves = builder.Configuration["DataProtection:KeysDirectory"] is { Length: > 0 } declarado
+    ? Path.IsPathRooted(declarado) ? declarado : Path.Combine(builder.Environment.ContentRootPath, declarado)
+    : Path.Combine(builder.Environment.ContentRootPath, "App_Data", "claves");
+
+try
+{
+    Directory.CreateDirectory(directorioDeClaves);
+    var sonda = Path.Combine(directorioDeClaves, ".escritura");
+    File.WriteAllText(sonda, string.Empty);
+    File.Delete(sonda);
+}
+catch (Exception falla)
+{
+    throw new InvalidOperationException(
+        $"No se puede escribir el almacén de claves en '{directorioDeClaves}'. Sin claves persistidas, " +
+        "los testigos de antifalsificación, la marca de sesión y los componentes interactivos dejan de " +
+        "funcionar cada vez que el anfitrión recicla el proceso, y lo hacen SIN MOSTRAR NINGÚN ERROR. " +
+        "Se puede declarar otra ruta con 'DataProtection:KeysDirectory'.", falla);
+}
+
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(directorioDeClaves))
+    .SetApplicationName("GeometriaFactory.Web");
+
+// LA RUTA QUEDA DISPONIBLE PARA QUE LA PÁGINA DE ESTADO LA PUEDA DECLARAR: que esto funcione no
+// se comprueba leyendo un registro que puede estar apagado —lo estuvo— sino mirando el sitio.
+builder.Services.AddSingleton(new DataProtectionState(directorioDeClaves));
 
 // INTERACTIVIDAD POR PÁGINA, Y NO GLOBAL. `App.razor` explica por qué: la superficie de ingreso
 // tiene que poder escribir la marca de sesión, y eso sólo se puede hacer durante una petición
