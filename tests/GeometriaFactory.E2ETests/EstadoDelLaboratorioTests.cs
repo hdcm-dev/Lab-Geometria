@@ -53,12 +53,23 @@ public sealed class EstadoDelLaboratorioTests : PruebaE2E
     {
         await Page.GotoAsync("/estado", new() { WaitUntil = WaitUntilState.Load });
 
-        var antes = await Page.Locator(".read-at").InnerTextAsync();
+        // ═══ SE MIRA EL MOMENTO DEL SERVIDOR, Y NO LA MARCA DE LECTURA ═══
+        //
+        // La marca de lectura se imprime con `HH:mm:ss` —resolución de UN SEGUNDO— y eso la vuelve
+        // un testigo intermitente: contra el anfitrión remoto la ida y vuelta tarda más de un
+        // segundo y el texto siempre cambia, pero contra un banco local la consulta entera entra
+        // adentro del mismo segundo y el texto queda IDENTICO. La prueba fallaba entonces diciendo
+        // «la interactividad no está viva» cuando lo que pasaba era que estaba demasiado viva.
+        // Lo encontró el banco local el 2026-09-02.
+        //
+        // El momento del servidor se imprime con formato `O` —hasta la diezmillonésima de
+        // segundo— y además lo produce EL SERVICIO DE DATOS, no la página: si cambia, el manejador
+        // corrió del otro lado del circuito Y ADEMAS salió a buscar el dato. Es un testigo más
+        // fuerte y no depende de cuánto tarde la red.
+        var momentoDelServidor = Page.Locator("dl.health dd").Nth(2);
+        var antes = await momentoDelServidor.InnerTextAsync();
         await (await ControlListoAsync("button.action")).ClickAsync();
 
-        // LA MARCA DE LECTURA LA REESCRIBE EL SERVIDOR: si cambia, el manejador corrió allá y
-        // volvió por el circuito. Es la prueba de vida más barata que este producto da de sí mismo,
-        // y contesta una pregunta que nadie podía contestar antes del 2026-09-01.
-        await Expect(Page.Locator(".read-at")).Not.ToHaveTextAsync(antes, new() { Timeout = EsperaDelCircuito });
+        await Expect(momentoDelServidor).Not.ToHaveTextAsync(antes, new() { Timeout = EsperaDelCircuito });
     }
 }

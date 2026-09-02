@@ -40,6 +40,17 @@
     <NumberOfTestWorkers>2</NumberOfTestWorkers>
   </NUnit>
 
+  <!--
+    DONDE QUEDA LA EVIDENCIA, Y SON DOS LUGARES. Esta ruta es RELATIVA AL DIRECTORIO DESDE EL QUE
+    SE INVOCA `dotnet test` —con la invocación declarada, la raíz del repositorio— y es donde cae
+    el informe de la corrida.
+
+    Las trazas y las capturas NO caen acá: las escribe la propia suite, y lo hace en
+    `tests/GeometriaFactory.E2ETests/resultados-e2e/`, que resuelve desde los binarios y por lo
+    tanto NO DEPENDE de desde dónde se invocó. Son dos rutas a propósito, y el flujo sube las dos.
+    Las dos están ignoradas por `.gitignore`: la evidencia que se conserva se elige y se copia a
+    `evidencia/<fecha>/`.
+  -->
   <RunConfiguration>
     <ResultsDirectory>resultados-e2e</ResultsDirectory>
   </RunConfiguration>

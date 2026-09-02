@@ -20,6 +20,16 @@
 # momento en que la pregunta «¿esto anda?» tiene una respuesta nueva.
 #
 # ============================================================================================
+# Y HAY UN SEGUNDO RECORRIDO, EL DEL BANCO LOCAL, QUE SI CORRE EN CADA CAMBIO. Las dos razones
+# de arriba —toca datos reales, depende de un sitio ajeno— son razones del modo desplegado y de
+# NINGUN otro: cuando la suite levanta su propio laboratorio no toca ningún dato del docente y no
+# depende de ningún anfitrión. Lo único que hacía falta para poder correrla en cada cambio era
+# que la suite supiera montar el producto, y desde el 2026-09-02 sabe.
+#
+# ES EL RECORRIDO QUE HUBIERA ATRAPADO EL DEFECTO DE LAS 768 px —una pantalla de teléfono sin
+# ninguna fila— catorce días antes de que lo encontrara una persona mirando.
+#
+# ============================================================================================
 # CORRE EN EL RUNNER PROPIO, `i7infra-dev`, Y NO ES POR VELOCIDAD. El servicio de datos del
 # laboratorio vive en la red del docente; un runner alojado por GitHub tendría que alcanzarlo por
 # la dirección pública, que es exactamente lo que no se quiere que estas pruebas dependan.
@@ -27,6 +37,9 @@
 name: e2e
 
 on:
+  push:
+    branches: [main]
+  pull_request:
   workflow_dispatch:
     inputs:
       navegadores:
@@ -40,11 +53,74 @@ on:
 # UNA CORRIDA A LA VEZ, Y LA NUEVA ESPERA A LA VIEJA. Dos corridas simultáneas sembrarían cuentas
 # en el mismo laboratorio y se pisarían el panel. `cancel-in-progress: false` a propósito: cancelar
 # a mitad de camino dejaría cuentas sembradas sin limpiar.
+#
+# EL GRUPO ES DEL FLUJO ENTERO Y NO SOLO DEL MODO DESPLEGADO, y se deja así a sabiendas de que
+# serializa de más: el banco local no se pisa con nadie —almacén propio, puertos pedidos al
+# sistema— y podría correr en paralelo. Pero los dos trabajos comparten un único runner propio, y
+# dos corridas suyas a la vez compiten por la misma máquina. Serializar es lo honesto acá.
 concurrency:
   group: e2e-laboratorio
   cancel-in-progress: false
 
 jobs:
+  banco-local:
+    name: Recorrido sobre el banco local
+    # CORRE EN EL RUNNER PROPIO IGUAL QUE EL OTRO, pero por un motivo distinto: acá no hay ninguna
+    # red que alcanzar —el laboratorio se levanta adentro del propio trabajo—, lo que hace falta es
+    # una máquina que aguante publicar dos piezas y abrir un navegador sin cobrar por minuto.
+    runs-on: [self-hosted, i7infra-dev]
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Anclar el kit de desarrollo
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # EL BUNDLE DEL VISOR HACE FALTA Y NO SE VERSIONA: es artefacto, lo genera la canalización.
+      # Sin él la escena 3D no carga y los casos que la miran fallarían por algo que no es del
+      # producto.
+      - name: Anclar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Empaquetar el visor
+        run: ./scripts/build-visor.sh
+
+      - name: Compilar las pruebas
+        run: dotnet build tests/GeometriaFactory.E2ETests -c Release --nologo
+
+      - name: Instalar el navegador y sus dependencias
+        run: |
+          set -euo pipefail
+          guion="$(find tests/GeometriaFactory.E2ETests/bin/Release -name playwright.ps1 | head -1)"
+          [ -n "$guion" ] || { echo "::error::No apareció playwright.ps1 en la salida de compilación."; exit 1; }
+          pwsh "$guion" install --with-deps chromium
+
+      # SIN NINGUNA VARIABLE DE ENTORNO, Y ESO ES EL PUNTO: sin `URL_BASE` la suite publica y
+      # levanta el producto entero por su cuenta, con un almacén de esta corrida. No lee ningún
+      # secreto y no toca ningún dato del docente.
+      - name: Ejecutar el recorrido
+        run: |
+          dotnet test tests/GeometriaFactory.E2ETests \
+            -c Release --no-build --nologo \
+            --settings pruebas-e2e.runsettings \
+            --logger "trx;LogFileName=banco-local.trx" \
+            -- Playwright.BrowserName=chromium
+
+      - name: Guardar los resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-banco-local
+          path: |
+            resultados-e2e/**
+            tests/GeometriaFactory.E2ETests/resultados-e2e/**
+          if-no-files-found: warn
+          retention-days: 14
+
   matriz:
     name: Preparar la matriz
     runs-on: ubuntu-latest
@@ -120,13 +196,14 @@ jobs:
         with:
           name: e2e-${{ matrix.navegador }}
           path: |
+            resultados-e2e/**
             tests/GeometriaFactory.E2ETests/resultados-e2e/**
           if-no-files-found: warn
           retention-days: 14
 
   resumen:
     name: Resumen
-    needs: pruebas
+    needs: [banco-local, pruebas]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -134,11 +211,26 @@ jobs:
         run: |
           set -euo pipefail
           estado="${{ needs.pruebas.result }}"
+          banco="${{ needs.banco-local.result }}"
           {
             echo "## Recorrido de extremo a extremo"
             echo
-            echo "Resultado de la matriz: **$estado**"
+            echo "| Recorrido | Resultado |"
+            echo "|---|---|"
+            echo "| Banco local (chromium) | **$banco** |"
+            echo "| Laboratorio desplegado (matriz de navegadores) | **$estado** |"
             echo
-            echo "Los resultados por navegador quedan en los artefactos de esta corrida."
+            echo "Los resultados de cada uno quedan en los artefactos de esta corrida."
           } >> "$GITHUB_STEP_SUMMARY"
-          [ "$estado" = "success" ] || { echo "::error::El recorrido falló en al menos un navegador."; exit 1; }
+
+          # UN SALTO NO ES UN ROJO. El modo desplegado no se dispara en un pull request y llega
+          # como `skipped`; tratarlo como fallo pondría en rojo cada cambio, y una compuerta que
+          # se pone en rojo sola se termina apagando —este repositorio ya lo pagó con `C-3`,
+          # catorce días en rojo sin que nadie lo leyera—.
+          malo=0
+          [ "$banco" = "success" ] || { echo "::error::El recorrido sobre el banco local falló."; malo=1; }
+          case "$estado" in
+            success|skipped) ;;
+            *) echo "::error::El recorrido contra el laboratorio desplegado falló."; malo=1 ;;
+          esac
+          exit "$malo"

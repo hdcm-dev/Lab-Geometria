@@ -912,3 +912,88 @@ correspondencia entre la etapa y su MINOR, que es lo único que hace legible est
 **Se eligió declararlo en lugar de resolverlo por criterio propio.** Las tres quedan sin etiqueta y
 con su motivo escrito, que es una afirmación verdadera y verificable; ponerles una etiqueta elegida
 por mí habría sido una afirmación cómoda sobre un punto que nadie decidió.
+
+## El recorrido que se puede correr sin permiso de nadie — 2026-09-02
+
+**Rama:** `e2e-banco-local-navegacion-y-responsivo`
+
+### El problema, dicho sin vueltas
+
+**La batería de extremo a extremo existía desde el 2026-09-02 a la mañana y no se podía correr.**
+Exigía cuatro variables de entorno —dos de ellas secretas—, abría el navegador contra el sitio
+publicado y **sembraba cuentas en el laboratorio del docente**. Eso tiene tres consecuencias, y las
+tres se pagaron el mismo día:
+
+1. **Nadie podía correrla antes de empujar un cambio**, porque hacía falta la credencial del
+   administrador del laboratorio real.
+2. **El rojo del anfitrión se confundía con el rojo del producto**: trece casos rojos con nombres de
+   producto en la primera corrida, y ninguno era del producto.
+3. **La forma de correrla no estaba versionada.** Se usó una imagen `gf-e2e:local` armada a mano que
+   nunca entró al repositorio. Una prueba que sólo una persona puede correr no es una compuerta.
+
+### Agregado
+
+- **El banco local** (`tests/GeometriaFactory.E2ETests/Infraestructura/BancoLocal.cs`). Sin
+  `URL_BASE`, la suite **publica y levanta el producto entero**: servicio de datos, pieza pública y
+  un almacén de esta corrida, sobre **puertos que le pide al sistema** —los contenedores del Product
+  Owner no se rozan— y con un administrador que ella misma siembra. Al terminar baja todo y borra lo
+  que creó. **No hace falta ningún secreto y no se toca ningún dato ajeno.**
+- **`deploy/e2e/Dockerfile` y `scripts/pruebas-e2e.sh`.** La imagen de la corrida deja de vivir en la
+  memoria de una sesión. El guion construye la imagen la primera vez, genera el bundle del visor y
+  corre la batería, en cualquiera de los dos modos y en cualquiera de los tres navegadores.
+- **`NavegacionTests` — diez casos.** El armazón, que es la única parte del producto que se dibuja en
+  todas las pantallas y que **ninguna otra clase miraba**: las cinco rutas del panel desvían al
+  ingreso sin sesión, la barra del administrador trae sus tres destinos **y ninguno del alumno**, el
+  destino en curso se marca, la dirección inventada responde **404 y no 200**, y cerrar sesión
+  cierra de verdad —la marca del navegador incluida—.
+- **`DisenoResponsivoTests` — seis casos.** La versión angosta, medida en una ventana de 390 px.
+  Es la clase que cuida el `P0` `MI-02` —los tres listados sin dibujar **ninguna fila** por debajo de
+  768 px, catorce días con toda la construcción en verde— y la regla `R-06` —la acción destructiva
+  por encima de la primaria en el teléfono—. Cada caso verifica una regla **escrita en la hoja de
+  estilos**, y los dos casos de pantalla ancha son el contrapeso: sin ellos, apilar los botones
+  siempre haría pasar el caso angosto y rompería el ancho sin que nadie se entere.
+- **Traza y captura de lo que falla**, en `resultados-e2e/`. Las capturas de la versión angosta
+  quedan **aunque el caso pase**: en esta casa la evidencia de lo visual se mira, y un conteo en
+  verde ya dio por bueno un teléfono con tres recortes.
+- **El trabajo `banco-local` en `.github/workflows/e2e.yml`**, sobre el runner propio
+  `[self-hosted, i7infra-dev]`, **en cada empujón y en cada pull request**. Las dos razones por las
+  que el recorrido no corría en cada cambio —toca datos reales, depende de un sitio ajeno— son
+  razones del modo desplegado y de ningún otro.
+
+### Corregido
+
+- **`AprobarPideConfirmacionYAplicaElDesenlace` estaba en rojo en `main` y nadie lo sabía.** El
+  aserto buscaba «quedo finalizado» y el producto emite «quedó finalizado»: **nunca pudo
+  coincidir**. Las dos cosas entraron en la misma fusión del 2026-09-02 —el acuse y la prueba que lo
+  verifica— sin que la suite se volviera a correr. Lo encontró el banco local la primera vez que
+  corrió.
+- **`LaInteractividadEstaVivaEnElAnfitrion` era intermitente por construcción.** Miraba la marca de
+  lectura, que se imprime con resolución de **un segundo**: contra el anfitrión remoto la ida y
+  vuelta tarda más y el texto siempre cambia; contra un banco local la consulta entera entra en el
+  mismo segundo y el texto queda idéntico. Ahora mira **el momento del servidor**, que lo produce el
+  servicio de datos y se imprime hasta la diezmillonésima.
+
+### Documentado
+
+- **`SDD/.../08-Calidad-Y-Pruebas/Pruebas-Extremo-A-Extremo.md` 1.0**, artefacto nuevo de la
+  categoría: los dos modos, las ocho clases, los treinta y dos casos, la evidencia y **cuatro
+  apartamientos declarados** —entre ellos que el banco local corre sobre HTTP y por lo tanto **no
+  puede ver un defecto que dependa de la marca `Secure` de la cookie**—.
+- `08-Calidad-Y-Pruebas/README.md` 2.1 y `Estrategia-Testing.md` 2.3 lo incorporan **sin reescribir
+  lo emitido**: la fila que dice que el guion de demostración es «una persona ejecutando pasos»
+  sigue siendo verdadera y no se toca.
+- `09-Devops/Pipeline-CI-CD.md` 3.7 declara el flujo, sus dos trabajos y por qué uno corre siempre y
+  el otro no. **Queda dicho que la batería no está registrada como puerta bloqueante de rama**: eso
+  lo decide el Product Owner.
+
+### Lo que queda abierto
+
+- **`H-E2E-01` · `firefox` no termina la batería sobre el banco local.** `chromium` recorre los 32
+  casos en 18 s; `firefox` pasa los casos que no necesitan el circuito interactivo —`IngresoTests`,
+  3 de 3 en 7 s— y **agota sus 30 s en cada caso que espera a que el circuito habilite un control**,
+  sin terminar la corrida completa en 25 minutos. Medido tres veces, con la máquina cargada y
+  descargada, con traza y sin traza. **No se sabe de quién es** —del banco, del navegador o del
+  producto en ese navegador— y **no se resolvió subiendo el margen de espera**, que sería tapar la
+  pregunta con un número. Queda declarado en la especificación de la batería.
+- **Que este recorrido sea puerta bloqueante de rama** es decisión del Product Owner. Hoy corre y
+  reporta; no bloquea la fusión.

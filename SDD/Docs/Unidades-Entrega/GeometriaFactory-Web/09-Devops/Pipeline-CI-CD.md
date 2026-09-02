@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Pipeline-CI-CD.md
-**Versión:** 3.6
+**Versión:** 3.7
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-09-02
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -196,6 +196,32 @@ Esta categoría es la dueña del flujo y le correspondió resolverlo. Antes de d
 **Y el orden de salida, que la misma versión del intake decidió.** Cuando front y backend salen juntos, **primero el backend**: una API nueva normalmente acepta lo que mandaba el front anterior, mientras que un front nuevo contra una API vieja le pide algo que todavía no existe. El tratamiento completo está en [`../../GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md`](../../GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md) §6, que es la categoría dueña del despliegue del backend.
 
 **Lo que esta categoría no hace.** No convierte el despliegue del backend en automático —lo prohíbe el intake §10 y §17.1.P.8 · GeometriaFactory-Api—, no relaja `QG-00008` y no declara resuelto el desfase de momentos: **el intake 1.22 declara expresamente que el orden no vuelve automático el despliegue conjunto**, de modo que el desfase sigue siendo **irreducible mientras un extremo se despliegue a mano** y el mecanismo sigue siendo la constancia escrita y no un disparador. Lo que el orden logra es que el intervalo **se minimice y no se elimine**.
+
+### 3.3 El flujo de extremo a extremo, que es otro flujo
+
+**No es un stage de la publicación y no se agrega a los ocho pasos.** Vive en
+`.github/workflows/e2e.yml` y corre sobre el **runner propio `[self-hosted, i7infra-dev]`**, con
+dos trabajos que se disparan por razones distintas:
+
+| Trabajo | Cuándo | Qué prueba | Secretos |
+| --- | --- | --- | --- |
+| `banco-local` | Empujón a la rama principal, pull request, y disparo manual | Un laboratorio que **la propia corrida levanta**: dos piezas y un almacén efímero, sobre puertos que le pide al sistema | **Ninguno** |
+| `pruebas` | Disparo manual, y **después de una publicación exitosa** | El sitio **realmente publicado**, en los tres navegadores de la matriz | Los cuatro del laboratorio |
+
+**Por qué el modo desplegado no corre en cada cambio, y el otro sí.** El desplegado **toca datos
+reales** —siembra un alumno y trabajos en el laboratorio del docente— y **depende de un anfitrión
+que puede estar caído por razones ajenas al cambio**. Las dos razones son del modo desplegado y de
+ningún otro: el banco local no toca ningún dato ajeno y no depende de ningún anfitrión. **Una
+compuerta que se pone en rojo por el entorno se termina apagando**, y este repositorio ya lo pagó
+con `C-3` catorce días en rojo sin que nadie lo leyera.
+
+**Por qué el runner propio en los dos casos, y no es la misma razón.** El desplegado, porque el
+servicio de datos vive en la red del docente. El banco local, porque publicar dos piezas y abrir un
+navegador pide una máquina que aguante, y ésta ya está.
+
+**Este flujo no está registrado como puerta bloqueante de rama.** Que la protección de rama lo
+exija es **decisión del Product Owner** y no de esta categoría. El detalle de la batería está en
+[`../08-Calidad-Y-Pruebas/Pruebas-Extremo-A-Extremo.md`](../08-Calidad-Y-Pruebas/Pruebas-Extremo-A-Extremo.md).
 
 ## 4. Matriz de plataformas
 
@@ -426,6 +452,7 @@ Este proyecto de código no se despliega, pero **su artefacto viaja dentro del d
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.7 | 2026-09-02 | **Entra §3.3: el flujo de extremo a extremo.** Declara `e2e.yml` sobre el runner propio `[self-hosted, i7infra-dev]`, sus **dos trabajos** —banco local en cada cambio, laboratorio desplegado a mano y tras publicar—, por qué uno corre siempre y el otro no, y que **no está registrado como puerta bloqueante de rama**: eso es decisión del Product Owner. **No cambia ningún stage, ningún gate ni el filtro de rutas de la publicación**: es un flujo aparte. Sube minor. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
 | 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **ocho** filas de puntos abiertos de §10 pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«En qué evento se cierra (artefacto y sección)»**, y entra la columna **«Estado»**. El cambio no es de redacción: un momento no deja rastro que alguien pueda abrir, y §12.2 exige un evento comprobable. **Y al nombrarlo, siete de las ocho resultaron VENCIDAS**: seis apuntaban a los puntos de control de las etapas `a`, `c` y `g` —cerradas el 2026-08-13, el 08-14 y el 08-17— y la séptima al momento de medición de `PT-02`/`PT-03`, medidas en la `g`. **Verificado y no supuesto**: la sección «Decidido en esta etapa» de la etapa `a` en `changelog.md` registra **cuatro** decisiones y **ninguna es un anclaje de herramienta**. La única cerrada, `PD-01` de §10.1, ya lo estaba con el intake **1.22**. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables, y cerrarlos es del equipo y del Product Owner. Sube **major**: la estructura de la tabla de §10 cambia. | Orquestador de migración normativa SDD |
 | 3.1 | 2026-08-20 | **Conversión de nomenclatura, `N-01`.** La columna que la fase M4 emitió como «Dónde se cierra» pasa a **«En qué evento se cierra (artefacto y sección)»**, que es como `Root-Rules.md` **7.0** §12.2 nombra literalmente su **campo 4**. No es cosmético: *«dónde»* nombra un **lugar** y el campo nombra un **evento**, y esa distinción es la que §12.2 existe para sostener. Entra además la **nota de correspondencia** de los cuatro campos con las cinco columnas, que declara que `Punto abierto` realiza los campos **1 y 2** juntos y que **`Estado` no es un campo de §12.2** sino un derivado de su tabla de escalamiento. **Se declara en lugar de partir la columna**, porque partirla obligaría a reescribir la prosa de las filas que `Informe-Migracion-9.12-a-10.0.md` `A7` verificó **idénticas**. **Ninguna fila cambia de contenido, de estado ni de recuento.** Plan en `Audit/Plan-Conversion-Nomenclatura-Item-Diferido.md`. Sube **minor**: cambia un rótulo y entra una nota; la estructura de la tabla no se toca. | Orquestador SDD |

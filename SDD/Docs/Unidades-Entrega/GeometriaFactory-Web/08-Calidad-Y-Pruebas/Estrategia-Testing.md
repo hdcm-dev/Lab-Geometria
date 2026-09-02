@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Estrategia-Testing.md
-**Versión:** 2.2
+**Versión:** 2.3
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-09-02
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -115,8 +115,17 @@ Se nombran por función y no por producto. La elección concreta y su anclaje de
 | Medición de contraste | Herramienta de medición de contraste sobre los pares de color del catálogo de diseño |
 | Verificación forzando la solicitud | Un cliente de peticiones que arma la solicitud **sin pasar por la pantalla**, contra el servicio de datos, con la credencial de una sesión válida |
 | Comprobación de la dirección pública | El paso final del flujo de publicación, que verifica que la dirección responde |
+| **Recorrido automatizado de la pantalla, en dos modos** | **Un conductor de navegador manejado desde la batería de pruebas del entorno de ejecución del servicio**, contra un laboratorio que la propia corrida levanta o contra el desplegado. Ver [`Pruebas-Extremo-A-Extremo.md`](Pruebas-Extremo-A-Extremo.md) |
+| **Medición de la versión angosta** | **El mismo conductor, con la ventana fijada en un ancho en píxeles** —y no con un descriptor de dispositivo—, porque lo que el sistema visual declara es un ancho |
 
 **No se nombra ningún producto comercial.** La biblioteca de componentes es la única pieza que la fuente nombra, y su versión es un punto abierto declarado.
+
+**Las dos últimas filas se agregaron el 2026-09-02 y no contradicen a la primera.** La fila del
+guion de demostración sigue diciendo la verdad: **es una persona ejecutando pasos**, y esa
+verificación no se retira. Lo que se agrega es una batería automatizada que **cubre otra cosa**
+—el recorrido y la versión angosta— y que **existe y corre**; su alcance, sus dos modos y sus
+cuatro apartamientos están en [`Pruebas-Extremo-A-Extremo.md`](Pruebas-Extremo-A-Extremo.md).
+**Ningún umbral de §2 cambia por esto**: la batería no reporta cobertura de línea.
 
 ### 3.2 `GeometriaFactory-Visor`
 
@@ -318,6 +327,7 @@ Las **61** filas de la matriz agrupadas por su método resuelto. La agrupación 
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.3 | 2026-09-02 | **Entran dos filas al tooling de §3.1**: el recorrido automatizado de la pantalla en sus dos modos, y la medición de la versión angosta por ancho de ventana. **No se retira ni se reescribe ninguna fila existente** —el guion de demostración sigue siendo una persona ejecutando pasos, y eso sigue siendo cierto—, **no cambia ningún umbral de §2** y no cambia la pirámide de §1: la batería nueva no reporta cobertura de línea. El detalle vive en el artefacto nuevo de la categoría, [`Pruebas-Extremo-A-Extremo.md`](Pruebas-Extremo-A-Extremo.md) 1.0. Sube minor. |
 | 2.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **6 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **1 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

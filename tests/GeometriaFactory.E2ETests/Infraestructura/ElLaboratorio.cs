@@ -52,16 +52,57 @@ public static class ElLaboratorio
     private static string _correoAdministrador = string.Empty;
     private static string _claveAdministrador = string.Empty;
 
-    /// <summary>Lee la configuración de la corrida, o falla diciendo exactamente qué falta.</summary>
-    public static void Leer()
-    {
-        UrlBase = Exigir("URL_BASE", "la dirección pública del laboratorio, por ejemplo https://aplicada.somee.com").TrimEnd('/');
-        UrlDelServicioDeDatos = Exigir("API_BASE_URL", "la dirección del servicio de datos, la misma que la publicación le inyecta al front").TrimEnd('/');
-        _correoAdministrador = Exigir("E2E_ADMIN_EMAIL", "el correo del administrador del laboratorio");
-        _claveAdministrador = Exigir("E2E_ADMIN_PASSWORD", "la contraseña de ese administrador");
+    /// <summary>Contra qué se está probando: un laboratorio desplegado o un banco de esta corrida.</summary>
+    /// <remarks>
+    /// HAY CASOS QUE SOLO VALEN EN UNO DE LOS DOS MODOS, y por eso el modo es público. El
+    /// ejemplo vivo es el aprovisionamiento inicial: contra el laboratorio real el administrador
+    /// ya existe desde hace semanas y esa pantalla no se puede visitar sin romper el laboratorio.
+    /// </remarks>
+    public static bool ModoBancoLocal { get; private set; }
 
-        TestContext.Progress.WriteLine($"Laboratorio: {UrlBase}");
-        TestContext.Progress.WriteLine($"Servicio de datos: {UrlDelServicioDeDatos}");
+    /// <summary>
+    /// Deja la corrida lista: o apunta a un laboratorio desplegado, o levanta uno propio.
+    /// </summary>
+    /// <remarks>
+    /// ═══════════════════════════════════════════════════════════════════════════════════════
+    /// LA VARIABLE `URL_BASE` ES LA QUE DECIDE, y esa es toda la regla:
+    ///
+    ///   CON `URL_BASE`  → modo desplegado. Se prueba lo que está publicado, con la credencial
+    ///                     del docente, sembrando y limpiando lo propio. Es el único modo que
+    ///                     puede decir «el sitio publicado anda».
+    ///   SIN `URL_BASE`  → banco local. Se publica y se levanta el producto entero acá, con un
+    ///                     almacén de esta corrida. No hace falta ningún secreto, no se toca
+    ///                     ningún dato ajeno, y es el modo que se corre antes de empujar.
+    ///
+    /// SE ELIGIO EL MISMO INTERRUPTOR QUE EL LABORATORIO DE REFERENCIA a propósito: quien
+    /// aprendió a correr aquéllas no tiene que aprender otra cosa acá.
+    /// ═══════════════════════════════════════════════════════════════════════════════════════
+    /// </remarks>
+    public static async Task PrepararAsync()
+    {
+        var direccionPublicada = Environment.GetEnvironmentVariable("URL_BASE");
+
+        if (!string.IsNullOrWhiteSpace(direccionPublicada))
+        {
+            ModoBancoLocal = false;
+            UrlBase = direccionPublicada.TrimEnd('/');
+            UrlDelServicioDeDatos = Exigir("API_BASE_URL", "la dirección del servicio de datos, la misma que la publicación le inyecta al front").TrimEnd('/');
+            _correoAdministrador = Exigir("E2E_ADMIN_EMAIL", "el correo del administrador del laboratorio");
+            _claveAdministrador = Exigir("E2E_ADMIN_PASSWORD", "la contraseña de ese administrador");
+
+            TestContext.Progress.WriteLine($"Laboratorio DESPLEGADO: {UrlBase}");
+            TestContext.Progress.WriteLine($"Servicio de datos: {UrlDelServicioDeDatos}");
+
+            await ExigirQueElLaboratorioRespondaAsync();
+            return;
+        }
+
+        ModoBancoLocal = true;
+        var banco = await BancoLocal.LevantarAsync();
+        UrlBase = banco.UrlBase;
+        UrlDelServicioDeDatos = banco.UrlApi;
+        _correoAdministrador = banco.Correo;
+        _claveAdministrador = banco.Clave;
     }
 
     private static string Exigir(string nombre, string queEs)
