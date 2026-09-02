@@ -245,9 +245,9 @@ pedir GET "/trabajos/$id_trabajo" "" "$acceso_admin"
 final="$(campo status "$cuerpo")"
 echo "---------------------------------------------------------------------------"
 if [ "$final" = "Approved" ]; then
-  echo "PASA  6. El servicio de datos dice que el trabajo quedó en $final —«Finalizado»—"
+  echo "PASA  9. El servicio de datos dice que el trabajo quedó en $final —«Finalizado»—"
 else
-  echo "FALLA 6. El servicio de datos dice que el trabajo quedó en '$final', no en 'Approved'"
+  echo "FALLA 9. El servicio de datos dice que el trabajo quedó en '$final', no en 'Approved'"
   veredicto=1
 fi
 
