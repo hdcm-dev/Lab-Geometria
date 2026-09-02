@@ -1,6 +1,7 @@
 @inherits LayoutComponentBase
 @inject NavigationManager Navigation
 @inject SessionState Session
+@inject DataServiceReachability Servicio
 
 @* SHELL DE TRABAJO — `Experiencia-De-Uso.md` §3.2, segundo diagrama.
    «Barra lateral fija con la identidad del laboratorio arriba, tres destinos según el papel al
@@ -76,6 +77,44 @@
 
     <div class="gf-shell-content">
         <main id="main-content" tabindex="-1">
+            @* ---- EL ESTADO DEL SERVICIO DE DATOS, A LA VISTA Y SIEMPRE ------------------------
+               POR QUÉ ESTÁ ACÁ Y NO SÓLO CUANDO ALGO FALLA. El laboratorio corre en una
+               infraestructura hogareña y su dirección pública **puede cambiar sin aviso**. El día
+               que cambia, el sitio sigue en pie y deja de alcanzar los datos; hasta ahora eso se
+               descubría cuando alguien intentaba hacer algo y le fallaba —le pasó al Product
+               Owner— y no antes.
+
+               UN AVISO QUE APARECE RECIÉN CON EL PRIMER ERROR LLEGA TARDE POR DEFINICIÓN. Por eso
+               el indicador se dibuja **también cuando todo anda**: es lo que permite mirar la
+               pantalla y saber que el laboratorio está entero, en vez de enterarse por un alumno.
+
+               Y EL TEXTO ES DISTINTO SEGÚN QUIÉN MIRA, porque la acción es distinta: el docente
+               puede arreglarlo y el alumno no. Decirle a un alumno que actualice un secreto de
+               publicación sería pedirle algo que no puede hacer; decirle al docente «avisá al
+               docente» sería no decirle nada. *@
+            @if (_servicio is { Responde: false })
+            {
+                <p class="gf-banner gf-banner--error" role="alert" data-gf-servicio="caido">
+                    <strong>El laboratorio no está alcanzando sus datos.</strong>
+                    @if (Session.IsAdministrator)
+                    {
+                        @:La causa más frecuente en este despliegue es que haya cambiado la dirección
+                        @:pública del laboratorio. Hay que actualizarla en el secreto de publicación
+                        @:y volver a publicar. Nada de lo cargado se pierde.
+                    }
+                    else
+                    {
+                        @:No se pierde nada de lo que hayas cargado. Avisale al docente y probá de nuevo en un rato.
+                    }
+                </p>
+            }
+            else if (_servicio is { Responde: true })
+            {
+                <p class="gf-caption" data-gf-servicio="en-linea">
+                    Servicio de datos en línea · comprobado a las @_servicio.Momento.ToLocalTime().ToString("HH:mm:ss")
+                </p>
+            }
+
             @Body
         </main>
     </div>
@@ -84,6 +123,30 @@
 <DegradedStateOverlay />
 
 @code {
+    private DataServiceReachability.Lectura? _servicio;
+
+    /// <summary>
+    /// Se pregunta al dibujar el armazón, que es lo que hace que el aviso esté en TODAS las
+    /// pantallas del panel sin repetirlo en ninguna.
+    /// </summary>
+    /// <remarks>
+    /// NO PUEDE TUMBAR LA PÁGINA. Si la consulta falla, el indicador no se dibuja y el resto de la
+    /// pantalla sigue igual: sería el colmo que el aviso de caída impidiera ver la pantalla que
+    /// iba a mostrarlo. La lectura viene de un servicio que guarda la respuesta unos segundos, así
+    /// que esto no agrega una llamada de red por cada dibujo.
+    /// </remarks>
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _servicio = await Servicio.LeerAsync();
+        }
+        catch
+        {
+            _servicio = null;
+        }
+    }
+
     /// <param name="Draws">
     /// Si esa superficie trae el bundle del visor. **Decide si el enlace pide documento completo**:
     /// la navegación mejorada no reejecuta los `script` de la página nueva, de modo que sin esto la
