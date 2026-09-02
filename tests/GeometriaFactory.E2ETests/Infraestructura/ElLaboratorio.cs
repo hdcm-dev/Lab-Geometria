@@ -248,6 +248,88 @@ public static class ElLaboratorio
         }
     }
 
+    /// <summary>
+    /// Habilita, por correo, una cuenta que se registró POR PANTALLA, y devuelve su provisoria.
+    /// </summary>
+    /// <remarks>
+    /// EXISTE PARA EL RECORRIDO DEL ALUMNO, donde el registro es parte de lo que se prueba y por
+    /// lo tanto no se puede sembrar por atajo. Lo que sí es preparación —y va por acá— es la
+    /// habilitación, que es un acto del administrador y tiene su propia clase de pruebas.
+    ///
+    /// LA IDENTIDAD SE BUSCA EN EL LISTADO Y NO SE ADIVINA: el registro por pantalla no le
+    /// devuelve el identificador a nadie, y componerlo del lado de la prueba sería inventarse un
+    /// contrato que el producto no ofrece.
+    /// </remarks>
+    public static async Task<(Guid Cuenta, string Provisoria)> HabilitarPorCorreoAsync(string correo)
+    {
+        var testigo = await TestigoDelAdministradorAsync();
+        using var cliente = Cliente();
+        cliente.DefaultRequestHeaders.Authorization = new("Bearer", testigo);
+
+        var listado = await cliente.GetAsync("cuentas");
+        listado.EnsureSuccessStatusCode();
+        var cuentas = await listado.Content.ReadFromJsonAsync<JsonElement>(Json);
+
+        var id = Guid.Empty;
+
+        foreach (var cuenta in cuentas.EnumerateArray())
+        {
+            if (string.Equals(cuenta.GetProperty("email").GetString(), correo, StringComparison.OrdinalIgnoreCase))
+            {
+                id = cuenta.GetProperty("accountId").GetGuid();
+                break;
+            }
+        }
+
+        if (id == Guid.Empty)
+        {
+            throw new InvalidOperationException(
+                $"La cuenta «{correo}» no aparece en el listado del administrador después de " +
+                "registrarse por pantalla. El registro no prosperó, o el listado no la muestra.");
+        }
+
+        var habilitacion = await cliente.PostAsJsonAsync($"cuentas/{id}/situacion",
+            new { accountId = id, intendedStatus = "Enabled" });
+        habilitacion.EnsureSuccessStatusCode();
+
+        var provisoria = (await habilitacion.Content.ReadFromJsonAsync<JsonElement>(Json))
+            .GetProperty("provisionalPassword").GetString()!;
+
+        return (id, provisoria);
+    }
+
+    /// <summary>El único trabajo de una cuenta. Falla si hay más de uno, o ninguno.</summary>
+    /// <remarks>
+    /// FALLA EN VEZ DE TOMAR EL PRIMERO. Si un recorrido que carga un solo trabajo encuentra dos,
+    /// algo pasó que la prueba no entiende, y elegir uno al azar convertiría ese desconcierto en
+    /// un verde o en un rojo arbitrario.
+    /// </remarks>
+    public static async Task<Guid> UnicoTrabajoDeAsync(Guid cuenta)
+    {
+        var testigo = await TestigoDelAdministradorAsync();
+        using var cliente = Cliente();
+        cliente.DefaultRequestHeaders.Authorization = new("Bearer", testigo);
+
+        var listado = await cliente.GetAsync("trabajos");
+        listado.EnsureSuccessStatusCode();
+        var trabajos = await listado.Content.ReadFromJsonAsync<JsonElement>(Json);
+
+        var suyos = new List<Guid>();
+
+        foreach (var trabajo in trabajos.EnumerateArray())
+        {
+            if (trabajo.TryGetProperty("ownerId", out var duenio) && duenio.GetGuid() == cuenta)
+            {
+                suyos.Add(trabajo.GetProperty("workId").GetGuid());
+            }
+        }
+
+        return suyos.Count == 1
+            ? suyos[0]
+            : throw new InvalidOperationException(
+                $"Se esperaba UN trabajo de la cuenta {cuenta} y hay {suyos.Count}.");
+    }
+
     /// <summary>Carga un trabajo enviado a nombre del alumno sembrado.</summary>
     public static async Task<Guid> SembrarTrabajoEnviadoAsync(AlumnoSembrado alumno, string nombre)
     {
