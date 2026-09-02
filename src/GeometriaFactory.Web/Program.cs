@@ -7,6 +7,15 @@ using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// EL PRODUCTO ESCUCHA A SU PROPIO MARCO, Y ESTO VA PRIMERO PORQUE SI NO NO OYE EL PRINCIPIO.
+// `AB-2` de la mesa 2026-09-01-C: el anfitrión venía diciendo desde el primer despliegue que las
+// claves de protección eran efímeras, en la primera línea de cada arranque, y **nadie lo leyó
+// nunca** porque su registro estaba apagado. Ver `StartupObservations` para por qué se escucha
+// sólo el arranque y sólo unas pocas categorías.
+var observaciones = new StartupObservations();
+builder.Services.AddSingleton(observaciones);
+builder.Logging.AddProvider(new StartupObservationsProvider(observaciones));
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -73,6 +82,23 @@ catch (Exception falla)
 builder.Services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(directorioDeClaves))
     .SetApplicationName("GeometriaFactory.Web");
+
+// LAS CLAVES QUEDAN SIN CIFRAR EN DISCO, Y ESO ES UN APARTAMIENTO DECLARADO, no un descuido.
+// El marco lo avisa —`XmlKeyManager[35] No XML encryptor configured`— y el aviso ES CIERTO.
+//
+// SE INTENTÓ CIFRARLAS Y SE RETIRÓ, con motivo medido. En Windows la vía es DPAPI, y el mismo
+// registro del anfitrión que destapó todo esto dice por qué no sirve acá:
+//
+//     warn: XmlKeyManager[59] Neither user profile nor HKLM registry available.
+//
+// Sin perfil de usuario, DPAPI de ámbito de usuario FALLA AL CREAR LA CLAVE: habría roto el sitio
+// para tapar un aviso. El ámbito de máquina, en un anfitrión compartido, deja la clave legible
+// para cualquier proceso de esa máquina, que no es una mejora honesta. Y cifrar con certificado
+// exige un certificado que este laboratorio no tiene —decisión declarada del Product Owner: es un
+// proyecto académico en infraestructura hogareña—.
+//
+// De modo que el aviso se declara y se muestra COMO DECLARADO en la página de estado, en vez de
+// silenciarlo o de dejar que tumbe cada publicación. Ver `StartupObservations.Declarados`.
 
 // LA RUTA QUEDA DISPONIBLE PARA QUE LA PÁGINA DE ESTADO LA PUEDA DECLARAR: que esto funcione no
 // se comprueba leyendo un registro que puede estar apagado —lo estuvo— sino mirando el sitio.
@@ -155,6 +181,11 @@ builder.Services.AddHttpClient<DataServiceClient>(client =>
 });
 
 var app = builder.Build();
+
+// LA VENTANA DE ARRANQUE SE CIERRA CUANDO EL SERVIDOR EMPIEZA A ATENDER. Lo que venga después es
+// funcionamiento, y el funcionamiento tiene causas legítimas —una pestaña vieja, por ejemplo— que
+// un despliegue no debería tomar por defectos.
+app.Lifetime.ApplicationStarted.Register(observaciones.Cerrar);
 
 // La dirección que no existe se reejecuta contra `/no-encontrado` CONSERVANDO el código 404:
 // sin esto el cuerpo llega vacío, porque el `<NotFound>` del enrutador no gobierna el render

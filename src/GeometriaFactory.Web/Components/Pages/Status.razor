@@ -5,6 +5,7 @@
    ejecución, no una redundancia inofensiva. *@
 @inject DataServiceClient DataService
 @inject DataProtectionState Claves
+@inject StartupObservations Arranque
 @inject ILogger<Status> Logger
 
 @* APARTAMIENTO AP-03 (`Plan-Etapa-A.md` §2.3): esta página NO es una de las once superficies
@@ -73,7 +74,54 @@ else
 
    EL NÚMERO DE CLAVES ES EL DATO, Y LA RUTA NO SE MUESTRA: nombrar una ruta interna del
    anfitrión en una página pública es exactamente lo que `RA-03` prohíbe. *@
+@* ---- LO QUE EL MARCO DIJO AL ARRANCAR ------------------------------------------------------
+   `AB-2` de la mesa 2026-09-01-C. El anfitrión venía avisando desde el primer despliegue que las
+   claves de protección eran efímeras —primera línea de cada arranque— y **nadie lo leyó nunca**,
+   porque su registro estaba apagado. Ahora el producto escucha a su propio marco y lo declara acá.
+
+   Y ESTO NO ES SÓLO PARA MIRAR: la comprobación final de la publicación falla cuando esta página
+   trae un `class="failure"`, de modo que **un aviso de arranque tumba el despliegue**. Es lo que
+   convierte el hallazgo en una compuerta y no en una buena intención. *@
 <dl class="health">
+    <dt>Avisos del arranque</dt>
+    <dd>
+        @* SE DISTINGUE LO DECLARADO DE LA NOVEDAD, y sólo la novedad usa la clase de falla —que
+           es la que hace fallar la publicación—. Un aviso declarado ya se miró, se decidió y se
+           firmó su motivo; volver a tratarlo como hallazgo pondría la compuerta en rojo
+           permanente, y una compuerta en rojo permanente es una compuerta apagada. Pero SE SIGUE
+           MOSTRANDO, con su razón al lado: declarado no es lo mismo que silenciado. *@
+        @if (Arranque.Avisos.Count == 0)
+        {
+            <span>Ninguno. El marco no objetó nada al levantar la pieza.</span>
+        }
+        else
+        {
+            @if (Arranque.SinDeclarar.Count > 0)
+            {
+                <span class="failure">
+                    @Arranque.SinDeclarar.Count aviso(s) SIN DECLARAR al arrancar. Un arranque con
+                    avisos que nadie miró es un despliegue mal armado, no una molestia.
+                </span>
+            }
+            else
+            {
+                <span>Sólo avisos ya declarados. Nada nuevo que mirar.</span>
+            }
+            <ul>
+                @foreach (var aviso in Arranque.Avisos)
+                {
+                    <li>
+                        <strong>@aviso.NombreCorto</strong> · @aviso.Mensaje
+                        @if (aviso.Motivo is { } motivo)
+                        {
+                            <br /><em>Declarado:</em> @motivo
+                        }
+                    </li>
+                }
+            </ul>
+        }
+    </dd>
+
     <dt>Claves de protección de datos</dt>
     <dd>
         @switch (Claves.CountKeys())
