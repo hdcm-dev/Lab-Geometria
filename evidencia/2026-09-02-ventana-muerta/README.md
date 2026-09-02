@@ -43,3 +43,29 @@ CONFORME · los 8 pasos pasaron
 PASA  9. El servicio de datos dice que el trabajo quedó en Approved —«Finalizado»—
 CONFORME · el botón de aprobar hace lo que dice
 ```
+
+---
+
+## La misma ventana muerta estaba en otras dos pantallas
+
+El barrido posterior encontró que el defecto **no era del bloque de resolución**, sino de toda
+superficie interactiva:
+
+| Superficie | Cómo envía | Estado |
+| --- | --- | --- |
+| `/aprovisionamiento-inicial` | `<form @onsubmit>` **sin** `method="post"` | **expuesta** — y es lo primero que hace un laboratorio nuevo |
+| `/mi-contrasena` | ídem | **expuesta** |
+| `/credencial-propia/cambio-obligado` | `method="post"` + `@formname` | a salvo: publica por POST de verdad |
+
+Las dos expuestas **no tienen red de seguridad**: fuera del circuito el navegador recarga la
+página y se lleva lo tipeado, sin crear nada y sin decir nada.
+
+### El primer arranque, probado por pantalla por primera vez
+
+```text
+PASA 1. La pantalla de aprovisionamiento se dibuja en un laboratorio vacío
+PASA 2. Inhabilitado Y lo dice mientras el circuito no engancha
+PASA 3. Se habilita solo
+PASA 4. Se crea el administrador y avanza a /ingreso
+        el servicio de datos: {"administratorConfigured":true}
+```
