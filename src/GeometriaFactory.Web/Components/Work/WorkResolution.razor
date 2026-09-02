@@ -45,6 +45,22 @@
 @inject SessionState Session
 @inject NavigationManager Navigation
 
+@* ═══════════════════════════════════════════════════════════════════════════════════════════
+   DOS FORMAS, LA MISMA SUPERFICIE. El wireframe §3 y §5 declaran DOS bloques y hasta hoy sólo
+   estaba construido uno:
+
+     · `Pendiente`            → «Resolver esta entrega»: comentario, las dos decisiones y retirar.
+     · con desenlace aplicado → «Bloque de trabajo resuelto»: fecha, estado alcanzado y
+                                 **sólo la acción de retirar**.
+
+   EL SEGUNDO FALTABA, Y NO ERA COSMÉTICO. `SUP-07` sólo dibujaba este bloque con el trabajo en
+   `Pendiente`, de modo que **al aprobar o rechazar, el administrador PERDÍA la acción de
+   retirar**. El wireframe §5 la declara disponible «en cualquiera de sus tres estados visibles»,
+   y `A-12` con el alcance del administrador dice lo mismo. Se descubrió el 2026-09-02, al
+   revisar qué quedaba abierto después de que el desenlace por fin funcionara.
+   ═══════════════════════════════════════════════════════════════════════════════════════════ *@
+@if (EsResoluble)
+{
 <section class="gf-card gf-mb-5" aria-labelledby="resolution-heading">
     <h2 id="resolution-heading" class="gf-title">Resolver esta entrega</h2>
 
@@ -53,7 +69,7 @@
            pantalla que anuncie sólo la etiqueta tiene que enterarse igual. *@
         <label for="resolution-comment">Comentario para el alumno (opcional)</label>
         <textarea class="gf-textarea gf-textarea--medium" id="resolution-comment"
-                  @bind="_comment" @bind:event="oninput" disabled="@_working"
+                  @bind="_comment" @bind:event="oninput" disabled="@(_working || !_listo)"
                   aria-describedby="resolution-comment-destination"></textarea>
         <span class="gf-requirement" id="resolution-comment-destination">Lo va a ver al abrir el trabajo. Podés dejarlo vacío.</span>
     </div>
@@ -89,21 +105,78 @@
            dos diálogos declarados NO ESTABAN CONSTRUIDOS—, y eso pasaba desapercibido nada más
            que porque los botones estaban inertes. Al volverlos vivos, «Retirar» habría borrado un
            trabajo de un solo clic. *@
-        <button type="button" class="gf-btn gf-btn--primary" disabled="@_working"
+        <button type="button" class="gf-btn gf-btn--primary" disabled="@(_working || !_listo)"
                 data-gf-outcome="@WorkOutcomeName.Approve" @onclick="() => Ask(WorkOutcomeName.Approve)">Aprobar</button>
         @* Rechazar es una decisión legítima, no una destrucción: no es un control destructivo.
            Es la misma solicitud con el otro valor. *@
-        <button type="button" class="gf-btn gf-btn--secondary" disabled="@_working"
+        <button type="button" class="gf-btn gf-btn--secondary" disabled="@(_working || !_listo)"
                 data-gf-outcome="@WorkOutcomeName.Reject" @onclick="() => Ask(WorkOutcomeName.Reject)">Rechazar</button>
         @* La acción de retirar queda visualmente separada de las dos decisiones, con su color de
            peligro y su propio diálogo. El rótulo accesible NOMBRA EL TRABAJO y no sólo el verbo,
            que es lo que pide el wireframe §7. *@
         <span class="gf-flexible"></span>
-        <button type="button" class="gf-btn gf-btn--destructive" disabled="@_working"
+        <button type="button" class="gf-btn gf-btn--destructive" disabled="@(_working || !_listo)"
                 aria-label="Retirar «@Name»"
                 data-gf-withdraw @onclick="() => Ask(Withdrawal)">Retirar</button>
     </div>
+
+    @if (!_listo)
+    {
+        @* EL AVISO DE QUE TODAVÍA NO SE PUEDE, Y POR QUÉ EXISTE. Medido contra el anfitrión real
+           el 2026-09-02: la página termina de cargar a los 0.9 s y **el botón recién responde a
+           los 6.4 s**. En el medio hay CINCO SEGUNDOS Y MEDIO en que la pantalla parece lista y no
+           lo está, porque en ese anfitrión WebSockets no pasa y la conexión de tiempo real tiene
+           que fallar el intento antes de replegarse a sondeo largo.
+
+           EL PRODUCT OWNER APRETÓ EN ESE HUECO, tres veces, y reportó «no hace nada». Tenía razón:
+           no hacía nada, y NADA SE LO DECÍA. Un control que parece disponible y no lo está es
+           peor que un control ausente: el primero se lee como un producto roto.
+
+           Y EL CAMPO DE COMENTARIO SE INHABILITA CON ELLOS, que no es celo: lo que se escriba
+           antes de que el circuito enganche NO ESTÁ en la copia del servidor, y al engancharse el
+           marco redibuja con la suya —vacía—. Es decir que el texto se perdería sin aviso. *@
+        <p class="gf-caption gf-mt-3" role="status" data-gf-preparando>
+            Preparando los controles… La conexión de tiempo real tarda unos segundos en este
+            servidor. Ahí se habilitan.
+        </p>
+    }
 </section>
+}
+else
+{
+    @* EL BLOQUE DE TRABAJO RESUELTO. Declara el desenlace YA APLICADO —no lo ofrece— y por eso
+       no lleva ni comentario ni decisiones: la única acción es retirar. El wireframe §3 lo dice
+       con esas palabras: «No ofrece las dos decisiones». *@
+    <section class="gf-card gf-mb-5" aria-labelledby="resolution-resolved-heading">
+        <h2 id="resolution-resolved-heading" class="gf-title">
+            Resuelto el @ResolvedAt.ToLocalTime().ToString("dd/MM/yyyy")
+            <span class="gf-badge @StatusBadgeClass">@StatusLabel</span>
+        </h2>
+        <p class="gf-margin-top-2">Esta entrega ya tiene desenlace y no se puede cambiar.</p>
+
+        @if (_failure is not null)
+        {
+            <p class="gf-banner gf-banner--error gf-mt-3" role="alert" data-gf-resolution-error>@_failure</p>
+        }
+
+        <div class="gf-footer-actions">
+            @* MISMO CONTROL, MISMO DIÁLOGO Y MISMO MÉTODO que en la forma resoluble: retirar es
+               una sola acción con un solo camino, y tenerla dos veces escrita sería un segundo
+               lugar donde puede comportarse distinto. *@
+            <button type="button" class="gf-btn gf-btn--destructive" disabled="@(_working || !_listo)"
+                    aria-label="Retirar «@Name»"
+                    data-gf-withdraw @onclick="() => Ask(Withdrawal)">Retirar</button>
+        </div>
+
+        @if (!_listo)
+        {
+            <p class="gf-caption gf-mt-3" role="status" data-gf-preparando>
+                Preparando los controles… La conexión de tiempo real tarda unos segundos en este
+                servidor. Ahí se habilita.
+            </p>
+        }
+    </section>
+}
 
 @* ---- Diálogo de confirmación del desenlace (wireframe §2) ------------------------------------
    DECLARA LA TERMINALIDAD ANTES DE APLICARLA, y la asocia por descripción accesible a la acción
@@ -185,6 +258,40 @@
     [Parameter, EditorRequired]
     public string OwnerName { get; set; } = string.Empty;
 
+    /// <summary>Estado del trabajo, tal como lo nombra el servicio de datos.</summary>
+    [Parameter, EditorRequired]
+    public string Status { get; set; } = string.Empty;
+
+    /// <summary>Cuándo se aplicó el desenlace. Sólo se dibuja en la forma resuelta.</summary>
+    [Parameter]
+    public DateTimeOffset ResolvedAt { get; set; }
+
+    /// <summary>El rótulo del estado, YA TRADUCIDO por la superficie que aloja este bloque.</summary>
+    /// <remarks>
+    /// LLEGA CALCULADO Y NO SE TRADUCE ACÁ, y es una decisión con motivo. La tabla que convierte
+    /// `Approved` en «Finalizado» ya está copiada en CUATRO componentes de esta pieza; escribir
+    /// una quinta copia acá agregaría un quinto lugar donde el mismo estado puede terminar
+    /// diciendo otra cosa. Recibirlo resuelto deja una sola fuente para esta superficie.
+    ///
+    /// La duplicación de esas cuatro copias es un defecto anterior y sigue abierto: no se arregla
+    /// de paso en esta unidad, se anota.
+    /// </remarks>
+    [Parameter, EditorRequired]
+    public string StatusLabel { get; set; } = string.Empty;
+
+    /// <summary>La clase del distintivo del estado, por el mismo motivo que el rótulo.</summary>
+    [Parameter, EditorRequired]
+    public string StatusBadgeClass { get; set; } = string.Empty;
+
+    /// <summary>Si el trabajo admite todavía un desenlace.</summary>
+    /// <remarks>
+    /// LA CONDICIÓN VIVE ACÁ Y NO EN LA SUPERFICIE QUE ALOJA, a diferencia de «quién puede ver
+    /// este bloque», que sigue siendo de `SUP-07`. Son dos preguntas distintas: **si se dibuja
+    /// algo** lo decide el papel de quien mira, y **qué forma toma** lo decide el estado del
+    /// trabajo. Mezclarlas fue lo que hizo que al resolver desapareciera todo el bloque.
+    /// </remarks>
+    private bool EsResoluble => string.Equals(Status, "Submitted", StringComparison.Ordinal);
+
     private string? _comment;
     private string? _failure;
 
@@ -215,6 +322,26 @@
     /// página que lo aloja: la carga hay que pedirla acá.
     /// </remarks>
     protected override Task OnInitializedAsync() => Session.LoadAsync();
+
+    /// <summary>Si el circuito ya está enganchado y los controles hacen algo.</summary>
+    /// <remarks>
+    /// CÓMO SE SABE, Y POR QUÉ ESTA ES LA SEÑAL CORRECTA. `OnAfterRender` **no corre durante el
+    /// prerrenderizado**: sólo corre cuando el componente vive en el circuito. De modo que la
+    /// primera vez que corre es, por definición, el instante exacto en que los `@@onclick`
+    /// empiezan a llegar al servidor. No hay que medir tiempos ni preguntarle nada al navegador.
+    /// </remarks>
+    private bool _listo;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        _listo = true;
+        StateHasChanged();
+    }
 
     /// <summary>Abre el diálogo de la acción pedida. No aplica nada.</summary>
     /// <remarks>

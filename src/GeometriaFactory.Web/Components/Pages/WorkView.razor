@@ -125,7 +125,13 @@ else
     @* SUP-08 se aloja ACÁ y no tiene ruta propia. `Linea-Base-Visual.md` §2: «Un sistema construido
        que le dé ruta propia es deriva mayor». LAS DOS CONDICIONES DEL WIREFRAME, las dos sobre el
        dato: quien mira es el administrador Y el trabajo está en estado `Pendiente`. *@
-    @if (Session.IsAdministrator && string.Equals(_work.Status, "Submitted", StringComparison.Ordinal))
+    @* LA CONDICIÓN DE ACÁ ES SÓLO EL PAPEL, Y ANTES ERA PAPEL **Y** ESTADO. Mezclar las dos
+       preguntas hizo que al aprobar o rechazar desapareciera el bloque entero, y con él la acción
+       de retirar —que el wireframe §5 declara disponible «en cualquiera de sus tres estados
+       visibles»—. Ahora **si se dibuja algo** lo decide quién mira, y **qué forma toma** lo decide
+       el estado, adentro del bloque. El administrador no ve borradores, así que los tres estados
+       que puede alcanzar acá son los tres que el bloque sabe dibujar. *@
+    @if (Session.IsAdministrator)
     {
         @* EL MODO INTERACTIVO VA ACÁ, EN LA INSTANCIA, Y NO ARRIBA EN LA SUPERFICIE.
            `SUP-08` son tres botones `@@onclick`, y un `@@onclick` sólo se cablea si el componente
@@ -142,7 +148,12 @@ else
            LOS TRES PARÁMETROS CRUZAN EL LÍMITE Y POR ESO SON SERIALIZABLES —un identificador y dos
            cadenas—, que es lo que ese modo exige. El nombre y el dueño no son adorno: los dos
            diálogos de confirmación que el wireframe §2 declara nombran el trabajo y al alumno. *@
+        @* EL RÓTULO Y EL DISTINTIVO VAN CALCULADOS DESDE ACÁ. La tabla que convierte `Approved`
+           en «Finalizado» ya está copiada en cuatro componentes de esta pieza; pasarla resuelta
+           evita una quinta copia. Esa duplicación es un defecto anterior y queda anotado. *@
         <WorkResolution WorkId="_work.WorkId" Name="@_work.Name" OwnerName="@OwnerName"
+                        Status="@_work.Status" ResolvedAt="_work.UpdatedAt"
+                        StatusLabel="@LabelOf(_work.Status)" StatusBadgeClass="@BadgeClassOf(_work.Status)"
                         @rendermode="InteractiveServer" />
     }
 
