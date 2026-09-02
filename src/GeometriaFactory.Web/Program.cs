@@ -131,6 +131,14 @@ builder.Services.AddSingleton<PendingCredentialChangeStore>();
 // está fundamentada en el comentario de `ProvisioningStateProbe`.
 builder.Services.AddSingleton<ProvisioningStateProbe>();
 
+// EL ESTADO DEL SERVICIO DE DATOS ES DEL LABORATORIO, NO DE UNA SESIÓN, y por eso es singleton:
+// que dos personas mirando dos pestañas compartan la misma lectura es lo correcto, y es lo que
+// evita una llamada de red por página dibujada. Ver `DataServiceReachability` para la decisión
+// del Product Owner que lo origina —descartó el nombre público estable por ser un laboratorio
+// académico, y pidió en su lugar que la desconexión SE VEA VENIR—.
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<DataServiceReachability>();
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<SessionState>();
 
