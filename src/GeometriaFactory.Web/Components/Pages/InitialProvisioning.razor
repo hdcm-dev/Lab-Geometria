@@ -76,26 +76,26 @@ else if (_state is Outcome.Rejected)
     <div class="gf-field">
         <label for="provisioning-email">Correo</label>
         <input class="gf-input" id="provisioning-email" name="email" type="email" autocomplete="username"
-               @bind="_email" @bind:event="oninput" disabled="@_sending" />
+               @bind="_email" @bind:event="oninput" disabled="@(_sending || !_listo)" />
     </div>
 
     <div class="gf-field">
         <label for="provisioning-first-name">Nombre</label>
         <input class="gf-input" id="provisioning-first-name" name="firstName" type="text" autocomplete="given-name"
-               @bind="_firstName" @bind:event="oninput" disabled="@_sending" />
+               @bind="_firstName" @bind:event="oninput" disabled="@(_sending || !_listo)" />
     </div>
 
     <div class="gf-field">
         <label for="provisioning-last-name">Apellido</label>
         <input class="gf-input" id="provisioning-last-name" name="lastName" type="text" autocomplete="family-name"
-               @bind="_lastName" @bind:event="oninput" disabled="@_sending" />
+               @bind="_lastName" @bind:event="oninput" disabled="@(_sending || !_listo)" />
     </div>
 
     <div class="gf-field">
         <label for="provisioning-password">Contraseña</label>
         <input class="gf-input" id="provisioning-password" name="password" type="password"
                autocomplete="new-password" aria-describedby="provisioning-requirement"
-               @bind="_password" @bind:event="oninput" disabled="@_sending" />
+               @bind="_password" @bind:event="oninput" disabled="@(_sending || !_listo)" />
         @* Requisito declarado antes del intento, no recién al fallar. *@
         <span class="gf-requirement" id="provisioning-requirement">Vas a usarla para entrar; no hay forma de recuperarla.</span>
     </div>
@@ -103,12 +103,12 @@ else if (_state is Outcome.Rejected)
     <div class="gf-field">
         <label for="provisioning-password-repeat">Repetir contraseña</label>
         <input class="gf-input" id="provisioning-password-repeat" name="passwordRepeat" type="password"
-               autocomplete="new-password" @bind="_passwordRepeat" @bind:event="oninput" disabled="@_sending" />
+               autocomplete="new-password" @bind="_passwordRepeat" @bind:event="oninput" disabled="@(_sending || !_listo)" />
     </div>
 
     @* No hay acción secundaria y no hay «cancelar»: en el primer arranque no existe un estado
        previo al que volver. *@
-    <button type="submit" class="gf-btn gf-btn--primary gf-btn--full" disabled="@_sending">
+    <button type="submit" class="gf-btn gf-btn--primary gf-btn--full" disabled="@(_sending || !_listo)">
         @if (_sending)
         {
             <span class="gf-spinner"></span>
@@ -121,7 +121,46 @@ else if (_state is Outcome.Rejected)
     </button>
 </form>
 
+@if (!_listo)
+{
+    @* EL AVISO DE QUE TODAVÍA NO SE PUEDE. Un control que parece disponible y no lo está es peor
+       que un control ausente: el primero se lee como un producto roto. Lo sufrió el Product Owner
+       cuatro veces en la resolución del trabajo, y acá el precio sería el mismo. *@
+    <p class="gf-caption gf-mt-3" role="status" data-gf-preparando>
+        Preparando el formulario… La conexión de tiempo real tarda unos segundos en este servidor.
+        Ahí se habilita.
+    </p>
+}
+
+
 @code {
+    /// <summary>Si el circuito ya está enganchado y el formulario hace algo.</summary>
+    /// <remarks>
+    /// LA MISMA VENTANA MUERTA QUE SE MIDIÓ EN LA RESOLUCIÓN DEL TRABAJO, y acá pesa igual o más.
+    /// Contra el anfitrión real, el 2026-09-02: la página termina de cargar a los 0.9 s y el
+    /// control recién responde a los 6.4 s. En el medio la pantalla PARECE lista.
+    ///
+    /// Y ESTE FORMULARIO NO TIENE RED DE SEGURIDAD: se declara `<form @@onsubmit>` **sin**
+    /// `method="post"`, de modo que fuera del circuito no hay envío que valga —el navegador
+    /// recarga la página y se lleva lo tipeado—. No es como el cambio obligado, que sí publica
+    /// por POST de verdad y funciona sin circuito.
+    ///
+    /// `OnAfterRender` NO CORRE DURANTE EL PRERRENDERIZADO: la primera vez que corre es, por
+    /// definición, el instante en que el envío empieza a llegar al servidor.
+    /// </remarks>
+    private bool _listo;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        _listo = true;
+        StateHasChanged();
+    }
+
     private enum Outcome { None, MissingFields, Mismatch, AlreadyConfigured, Rejected, Unavailable }
 
     private string _email = string.Empty;
