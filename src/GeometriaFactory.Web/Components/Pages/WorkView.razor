@@ -61,7 +61,13 @@
 @* El paquete del visor lo carga la superficie que dibuja, y no el documento común: el inventario
    de guiones mide **un solo guion propio** sobre las ocho direcciones del producto, y su propio
    comentario declara que este paquete no se sirve desde esas superficies. *@
-<script src="js/geometriafactory-visor.js" defer></script>
+@* Y SE PIDE CON PRIORIDAD BAJA, que es la otra mitad del mismo problema. Este paquete pesa
+   MEDIO MEGA y hasta hoy competía con el guion del circuito por el ancho de banda de los primeros
+   segundos —justo los segundos en que los botones no responden—. El visor puede llegar tarde sin
+   consecuencia: `surface-interaction.js` ya reintenta dibujar al terminar la carga, y su propio
+   comentario explica que la primera pasada ocurre SIEMPRE antes de que el visor exista. La
+   interacción no puede llegar tarde. Mesa 2026-09-02, acción A-1. *@
+<script src="js/geometriafactory-visor.js" defer fetchpriority="low"></script>
 
 <PageTitle>Vista de trabajo</PageTitle>
 

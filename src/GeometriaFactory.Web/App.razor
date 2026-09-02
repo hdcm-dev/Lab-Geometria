@@ -30,6 +30,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
+    @* EL GUION DEL CIRCUITO SE PIDE TEMPRANO Y CON PRIORIDAD ALTA, y no es micro-optimización.
+       En este anfitrión NO HAY WEBSOCKET —lo declara su propia negociación: sólo ofrece
+       `ServerSentEvents` y `LongPolling`—, de modo que establecer el circuito cuesta segundos, y
+       mientras tanto los controles no responden. Medido el 2026-09-02: la página del trabajo
+       carga a los 0.9 s y su botón recién responde a los 6.4 s.
+
+       Ese guion vive al final del cuerpo y hasta hoy competía por el ancho de banda con el
+       paquete del visor, que pesa MEDIO MEGA. Pedirlo desde el encabezado hace que el navegador
+       lo empiece a bajar antes de terminar de leer el documento. Mesa 2026-09-02, acción A-1. *@
+    <link rel="preload" as="script" href="_framework/blazor.web.js" fetchpriority="high" />
     <link rel="stylesheet" href="css/app.css" />
     @* EL ÚNICO GUION PROPIO DE LA PIEZA PÚBLICA, y se carga acá por el mismo motivo que la hoja:
        una sola vez, para todas las superficies. Hasta la etapa `d` no había ninguno, y su ausencia
