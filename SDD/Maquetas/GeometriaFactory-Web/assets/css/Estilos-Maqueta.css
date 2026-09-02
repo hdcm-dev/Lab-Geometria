@@ -77,19 +77,62 @@
   --color-text-on-brand-soft:   rgba(255, 255, 255, .85);
   --color-backdrop:             rgba(26, 26, 24, .45);
 
-  /* --- tipografía (base §2.2) ------------------------------------------- */
+  /* --- tipografía (base §2.2 · escala modular de razón 1,25 sobre 16 px) ---
+     LA ESCALA ANTERIOR NO ERA UNA ESCALA, y está medido: 17/14/13/12/11 px daba
+     cuatro razones distintas —1,214 · 1,077 · 1,083 · 1,091—, tres de ellas por
+     debajo de 1,10. Una diferencia de 1 px no se lee como jerarquía; se lee como
+     irregularidad. El título de una pantalla quedaba 1,31 veces el párrafo que lo
+     seguía, y entre `h1` y `h2` no había ni tamaño ni peso que los separara.
+
+     LA RAZÓN ES 1,25 Y ESTÁ DECLARADA. Los pasos son 0,8 · 1 · 1,25 · 1,5625 rem,
+     con el cuerpo anclado en 1 rem = 16 px. Título contra cuerpo: **1,5625**.
+
+     CINCO ROLES SOBRE CUATRO PASOS, a propósito. `caption` y `meta` comparten el
+     paso 0,8 rem y se distinguen por caja, peso y color —que es como se distinguen
+     en cualquier sistema de diseño—, en vez de por un píxel que nadie percibe.
+
+     EL CUERPO ES 16 px Y NO ES ESTÉTICA. Los campos de formulario heredan este
+     token, y Safari en iOS **hace zoom automático** sobre un campo cuyo texto mide
+     menos de 16 px, dejando la página desencuadrada al salir del campo. El alumno
+     entra desde el teléfono.
+
+     EL TÍTULO ES FLUIDO porque la densidad no puede ser la misma a 390 px que a
+     1440 px: `clamp` lo lleva de 22 px en el teléfono a 25 px en el escritorio,
+     sin un punto de quiebre que lo salte de golpe. */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  --type-title-size:        17px; --type-title-weight:        500;
-  --type-body-strong-size:  14px; --type-body-strong-weight:  500;
-  --type-body-size:         13px; --type-body-weight:         400;
-  --type-caption-size:      12px; --type-caption-weight:      400;
-  --type-meta-size:         11px; --type-meta-weight:         500;
+  --type-title-size: clamp(1.375rem, 1.15rem + 1vw, 1.5625rem); --type-title-weight: 600;
+  --type-body-strong-size:  1.25rem; --type-body-strong-weight:  600;
+  --type-body-size:         1rem; --type-body-weight:         400;
+  --type-caption-size:      0.8rem; --type-caption-weight:      400;
+  --type-meta-size:         0.8rem; --type-meta-weight:         600;
 
-  /* --- espaciado (base §2.3, escala base 4) ------------------------------ */
-  --space-1:  4px; --space-2:  8px; --space-3: 12px; --space-4: 14px;
-  --space-5: 16px; --space-6: 18px; --space-7: 20px; --space-8: 22px;
-  --space-9: 28px;
+  /* --- alturas de línea y medida (base §2.2) -----------------------------
+     `--lh-body` es 1,5 y no 1,45: el 1,45 anterior quedaba por debajo del piso de
+     WCAG 1.4.8 y sin holgura para 1.4.12. `--measure` acota la medida de línea de
+     la prosa: sin él un párrafo medía **171 caracteres por renglón** a 1440 px, más
+     del doble de lo que cualquier fuente tipográfica admite, y al final de la línea
+     el ojo pierde cuál es la siguiente. */
+  --lh-body:  1.5;
+  --lh-tight: 1.2;
+  --measure:  72ch;
+
+  /* --- espaciado (base §2.3, escala base 4) ------------------------------
+     LA ESCALA DECÍA «base 4» Y TRES DE SUS NUEVE PASOS NO LO ERAN: 14, 18 y 22.
+     Del paso 3 al 8 avanzaba de 2 en 2, o sea seis nombres distintos para cubrir
+     10 px: seis formas igualmente defendibles de separar dos cosas, que es la causa
+     mecánica de que la ubicación de los controles se sintiera arbitraria.
+     Ahora los nueve son múltiplos de 4 y la progresión abre de verdad hacia arriba,
+     que es lo que hace falta cuando la letra crece. */
+  --space-1:  4px; --space-2:  8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-7: 28px; --space-8: 32px;
+  --space-9: 40px;
+
+  /* --- ancho útil (base §2.3) --------------------------------------------
+     El envoltorio de contenido no tenía tope: a 1440 px una fila separaba el nombre
+     del trabajo de su botón «Abrir» por **1136 px medidos**. Con tope, el dato y su
+     acción vuelven a caber en un solo golpe de vista. */
+  --content-max: 1120px;
 
   /* --- radios y bordes (base §2.3) --------------------------------------- */
   --radius-md:   9px;
@@ -105,7 +148,7 @@
   --motion-ease: ease;
 
   /* --- layout del shell (base §3.1) -------------------------------------- */
-  --shell-sidebar-width: 168px;
+  --shell-sidebar-width: 232px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -124,7 +167,7 @@ body.mq-body {
   margin: 0;
   font-family: var(--font-sans);
   font-size: var(--type-body-size);
-  line-height: 1.45;
+  line-height: var(--lh-body);
   color: var(--color-text-primary);
   background: var(--color-background-tertiary);
   /* espacio para la barra de validación fija al pie */
@@ -883,4 +926,191 @@ th.mq-th-plano--breve  { font-size: var(--type-caption-size); }
   .mq-acciones-pie { flex-direction: column-reverse; }
   .mq-acciones-pie .mq-btn { width: 100%; }
   .mq-filtros .mq-campo { min-width: 100%; }
+}
+
+
+/* ============================================================================
+   AJUSTE DE PROPORCIÓN, UBICACIÓN Y DIMENSIONAMIENTO
+   Mesa UX/UI del 2026-09-02 · `PROMPTs/Fixs/01-Ajuste-UX/OUTPUTs/`
+   ----------------------------------------------------------------------------
+   Esta sección va ÚLTIMA a propósito: corrige reglas de componente que ya
+   existen más arriba, y la única forma de hacerlo sin reescribirlas —y sin
+   inventar especificidad con `!important`— es el orden de la cascada.
+
+   Cada bloque nombra la raíz que corrige (`R-nn` del Acta 04) y el hallazgo que
+   la fundó. Ningún valor es nuevo: todos salen de los tokens de `:root`.
+   ============================================================================ */
+
+/* R-03 · El encabezado de grupo era el texto más chico de la pantalla.
+   `.mq-disclosure summary` —pensada para el desplegable «Texto original»—
+   alcanzaba también al `summary` de los grupos de alumno y lo degradaba a
+   versalitas de 11 px en color secundario, dejando el correo del alumno como
+   «ADOLFOVER4@GMAIL.COM». La maqueta lo emite en caja mixta y a un paso por
+   encima del cuerpo. Ningún dato de identidad de una persona lleva versalitas:
+   se lee carácter por carácter y se transcribe. */
+.mq-grupo-cabecera,
+.mq-grupo-cabecera .mq-grupo-cabecera h2 {
+  font-size: var(--type-body-strong-size);
+  font-weight: var(--type-body-strong-weight);
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-text-primary);
+}
+
+/* R-04 · El contenido no tenía tope de ancho: a 1440 px el nombre de un trabajo
+   quedaba a 1136 px medidos de su propio botón «Abrir». El relleno lateral
+   absorbe el sobrante y centra sin necesidad de un envoltorio nuevo en el
+   marcado, que habría que agregar en las trece pantallas y en la maqueta. */
+.mq-shell-contenido {
+  padding-inline: max(var(--space-6), (100% - var(--content-max)) / 2);
+}
+
+/* R-04 · La medida de línea sólo estaba acotada en el subtítulo. Un párrafo
+   suelto medía 171 caracteres por renglón: al terminar la línea el ojo no
+   encuentra la siguiente. Se acota toda prosa, no un caso. */
+.mq-shell-contenido p,
+.mq-subtitulo {
+  max-width: var(--measure);
+}
+
+/* R-05 · Las cinco tablas hermanas de «Entrega de la comisión» no compartían
+   retícula: la misma columna arrancaba en cinco abscisas distintas, con 163 px
+   de dispersión, porque cada tabla se dimensionaba sola por su contenido.
+   Con retícula fija todas empiezan donde la anterior, que es lo que permite
+   recorrer la lista con la mirada en vertical. */
+.mq-tabla {
+  table-layout: fixed;
+}
+.mq-tabla td {
+  overflow-wrap: anywhere;
+}
+/* EL ENCABEZADO NO SE PARTE A MITAD DE PALABRA. Con `anywhere` heredado, la
+   columna «ADVERTENCIAS» salía «ADVERTENCI / AS» y una fecha salía
+   «12/08/20 / 26». Se vio en la captura del parche anterior. */
+.mq-tabla th {
+  overflow-wrap: normal;
+  padding-inline: var(--space-3);
+}
+
+/* R-03 · LA CELDA DE ENCABEZADO DE FILA LLEVA UN DATO, NO UN RÓTULO.
+   El nombre de la cuenta es un `<th scope="row">` —y está bien que lo sea: es lo que le dice a un
+   lector de pantalla de quién es cada fila—, pero sin clase heredaba la tipografía del encabezado
+   de columna y salía «ALUMNO MESA» en versalitas grises sobre fondo de cabecera. El dato no está
+   en mayúsculas: lo ponía el estilo. Ningún nombre de persona lleva `text-transform: uppercase`;
+   se lee peor y no es como se escribe. */
+.mq-tabla tbody th {
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-strong-weight);
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-text-primary);
+  background: transparent;
+  overflow-wrap: anywhere;
+  padding: var(--space-3) var(--space-4);
+}
+
+/* R-05 · La columna de acciones recibía menos ancho del que sus botones
+   necesitan, así que envolvían en dos y tres renglones con el borde derecho
+   dentado. EN RETÍCULA FIJA EL ANCHO SE DECIDE EN LA FILA DE ENCABEZADO, y no
+   en la celda: puesto en el `td`, un `width: 1%` se tomaba literal y le daba
+   **10 px medidos** a la columna, con el botón «Abrir» partido en seis
+   renglones y la fila estirada a 139 px. Lo encontró la captura del parche. */
+/* SÓLO SE FIJA LA COLUMNA DE ACCIONES. Fijar además la primera dejaba a las del
+   medio con 109 px y ahí es donde se partían las fechas: en retícula fija, cada
+   ancho que se declara se lo saca a las que no se declaran. */
+.mq-tabla thead th:last-child { width: 13rem; }
+
+/* LAS ACCIONES DE FILA SE APILAN, y es una decisión, no un efecto. Tres botones
+   en línea necesitaban 402,6 px medidos y la columna les daba 374,8 a 1440 px y
+   214,4 a 1024: envolvían en dos y tres renglones, cada fila de una manera, con
+   el borde izquierdo dentado. Apiladas, las acciones de filas hermanas empiezan
+   todas en la misma abscisa —que es lo que permite recorrer la columna con la
+   mirada— y la destructiva queda separada por un hueco propio y no por los
+   mismos 8 px que hay entre dos acciones neutras. */
+.mq-tabla .mq-td-acciones { white-space: normal; }
+.mq-tabla .mq-td-acciones .mq-acciones-fila {
+  flex-direction: column;
+  align-items: stretch;
+}
+.mq-tabla .mq-td-acciones .mq-acciones-fila .mq-btn--destructivo {
+  margin-inline-start: 0;
+  margin-top: var(--space-4);
+}
+
+/* R-05 · El campo de filtro tenía un mínimo fijo de 180 px que no dependía del
+   espacio disponible: el marcador «nombre, apellido o correo» se recortaba
+   justo a 1440 px, donde sobraba lugar, y no a 390 px. Ahora crece con el
+   espacio y no baja del mínimo. */
+.mq-filtros .mq-campo {
+  flex: 1 1 22ch;
+  min-width: 22ch;
+  max-width: 40ch;
+}
+
+/* R-06 · Blanco de toque. Los botones medían 34 px de alto y 36 px en la fila
+   de acciones, por debajo de los 44 pt que pide Apple y de los 48 dp de
+   Material. No es un mínimo estético: es el que hace que el dedo acierte. */
+.mq-btn {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* R-06 · La acción destructiva se separa de las neutras. Estaban a los mismos
+   8 px de distancia que «Bloquear» de «Resetear», de modo que la mano no tenía
+   ninguna señal antes de la única acción que no se puede deshacer. */
+.mq-acciones-fila .mq-btn--destructivo,
+.mq-acciones-pie .mq-btn--destructivo {
+  margin-inline-start: var(--space-6);
+}
+
+/* R-08 · El anillo de foco dejaba de significar «acá podés actuar».
+   `FocusOnNavigate` enfoca el `h1` de cada pantalla —y hace bien: es lo que le
+   anuncia la pantalla nueva a un lector—, pero el `h1` no es interactivo, y el
+   anillo genérico se lo dibujaba igual. Tres usuarios estándar, ciegos entre
+   sí, creyeron que el título era un campo de texto para completar.
+   NO SE QUITA EL FOCO: se quita el anillo del elemento que no hace nada, y
+   sólo de él. El anuncio a la tecnología asistiva sigue igual. */
+h1[tabindex="-1"]:focus,
+h1[tabindex="-1"]:focus-visible,
+main[tabindex="-1"]:focus,
+main[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+/* R-10 · Contraste del sello de versión: 2,04:1 sobre la barra lateral, menos
+   de la mitad del piso de 4,5:1 de WCAG 1.4.3. La causa era una cadena, no un
+   color: la regla de la barra pintaba el contenedor y el `.mq-meta` de adentro
+   volvía a poner el color secundario, pensado para fondo claro. */
+.mq-shell-sidebar .mq-sello .mq-meta {
+  color: inherit;
+}
+
+/* R-10 · El marcador de posición medía 3,48:1. El token terciario está pensado
+   para texto de apoyo sobre fondo claro, no para el único texto que hay dentro
+   de un campo vacío. */
+.mq-input::placeholder,
+.mq-textarea::placeholder {
+  color: var(--color-text-secondary);
+}
+
+/* R-07 · La identidad de la persona se derramaba de la barra lateral: 182 px de
+   contenido en 144 px útiles, en las cinco pantallas del armazón. Se recortaba
+   sin decirlo —«fernandofilipuzzi.utn@gmail»—, que es la peor forma de recortar
+   un dato que se lee entero o no se lee. Ahora se parte donde puede. */
+.mq-sidebar-persona {
+  overflow-wrap: anywhere;
+  line-height: var(--lh-tight);
+}
+
+/* ----------------------------------------------------------------------------
+   R-06 · Pantalla angosta: el orden de las acciones estaba invertido.
+   `column-reverse` en el pie ponía «Retirar» —la acción que borra— en el primer
+   lugar de la pantalla, a 583 px del borde superior, y hundía «Aprobar» al
+   fondo, a 731 px. En el teléfono el primer lugar es el que el pulgar alcanza
+   sin mirar. La primaria va primera y la destructiva última.
+   ---------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .mq-acciones-pie { flex-direction: column; }
+  .mq-acciones-pie .mq-btn--destructivo { margin-inline-start: 0; margin-top: var(--space-4); }
+  .mq-acciones-fila .mq-btn--destructivo { margin-inline-start: 0; }
 }

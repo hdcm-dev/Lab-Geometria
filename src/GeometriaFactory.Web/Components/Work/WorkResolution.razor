@@ -397,7 +397,11 @@ else
             // inertes nadie llegaba nunca a esta línea. Arreglar sólo la interactividad habría
             // dejado al administrador aprobando bien y cayendo en la pantalla de «no encontrado»,
             // que se lee exactamente como si la aprobación hubiera fallado.
-            Navigation.NavigateTo("/entrega-comision", forceLoad: true);
+            // Y LLEVA QUÉ PASÓ. Hasta el 2026-09-02 volvía en silencio: la operación se
+            // aplicaba y el administrador aterrizaba en el listado entero sin una palabra, de modo
+            // que tenía que buscar la fila para saber si había salido. `/cuentas` sí acusa recibo
+            // desde siempre; ésta era la única familia de acciones del producto que no.
+            Navigation.NavigateTo(AcknowledgedList(Applied(outcome)), forceLoad: true);
         }
         finally
         {
@@ -428,7 +432,7 @@ else
                 return;
             }
 
-            Navigation.NavigateTo("/entrega-comision", forceLoad: true);
+            Navigation.NavigateTo(AcknowledgedList("retirado"), forceLoad: true);
         }
         finally
         {
@@ -443,6 +447,20 @@ else
     /// </remarks>
     private static string VerbOf(string outcome) =>
         string.Equals(outcome, WorkOutcomeName.Approve, StringComparison.Ordinal) ? "Aprobar" : "Rechazar";
+
+    /// <summary>El desenlace aplicado, con la palabra con la que el listado lo va a acusar.</summary>
+    private static string Applied(string outcome) =>
+        string.Equals(outcome, WorkOutcomeName.Approve, StringComparison.Ordinal)
+            ? "aprobado"
+            : "rechazado";
+
+    /// <summary>La dirección del listado, con el acuse de lo que se acaba de aplicar.</summary>
+    /// <remarks>
+    /// EL NOMBRE VIAJA ESCAPADO. Es un título que escribe el alumno y puede traer cualquier
+    /// carácter; sin escapar, un `&amp;` partiría la dirección en dos parámetros.
+    /// </remarks>
+    private string AcknowledgedList(string applied) =>
+        $"/entrega-comision?resuelto={applied}&trabajo={Uri.EscapeDataString(Name ?? string.Empty)}";
 
     /// <summary>El estado al que el trabajo llega, con el rótulo que el resto del producto usa.</summary>
     private static string StateOf(string outcome) =>

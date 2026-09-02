@@ -291,8 +291,46 @@ else
                            autocapitalización. Y NO SE LE APLICA `Trim` EN NINGÚN PUNTO del camino
                            hacia el servicio de datos (RN-08). *@
                         <textarea class="gf-textarea gf-textarea--work-text" id="submission-text"
-                                  name="Input.OriginalJson"
+                                  name="Input.OriginalJson" aria-describedby="submission-text-shape"
                                   spellcheck="false" autocapitalize="off" autocorrect="off">@Form.OriginalJson</textarea>
+
+                        @* QUÉ CLAVES RECONOCE EL LABORATORIO, DICHO EN LA PANTALLA QUE LAS PIDE.
+                           Hasta el 2026-09-02 el único instructivo era «Pegá el texto tal como lo
+                           devolvió tu programa», y eso alcanza sólo si el programa ya emite las
+                           claves que el producto lee. Tres personas de la mesa UX/UI se trabaron
+                           acá: una acertó al tercer intento adivinando, otra tuvo que abrir
+                           `samples/` fuera del producto, y la tercera copió la forma de un trabajo
+                           ajeno.
+
+                           Y NO ES UNA MOLESTIA DE REDACCIÓN: una figura con claves que el producto
+                           no reconoce se acepta igual, no se dibuja y no se verifica, de modo que
+                           el alumno recibe tres señales de éxito sobre un texto que el laboratorio
+                           no pudo leer. Declarar el vocabulario acá es lo que evita ese camino.
+
+                           EL EJEMPLO ES EL CUBO DEL INTAKE, con sus valores correctos: 6 caras de
+                           3, área 54 y volumen 27. Va colapsado para no empujar el formulario. *@
+                        <p class="gf-caption gf-mt-2" id="submission-text-shape">
+                            Es el texto JSON que imprime tu programa. El laboratorio lee las claves
+                            <code>Tipo</code>, <code>Largo</code>, <code>Ancho</code>,
+                            <code>Radio</code>, <code>Altura</code>, <code>Area</code>,
+                            <code>Volumen</code> y los conjuntos de componentes
+                            (<code>Caras</code>, <code>Bases</code>, <code>Laterales</code>,
+                            <code>Tapas</code>). Una clave con otro nombre se guarda, pero
+                            <strong>no se dibuja ni se verifica</strong>.
+                        </p>
+                        <details class="gf-disclosure gf-mt-2">
+                            <summary>Ver un ejemplo</summary>
+                            <pre class="gf-original-text">[
+  {
+    "Tipo": "Cubo",
+    "Caras": [
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 }
+    ],
+    "Area": 54.00,
+    "Volumen": 27.00
+  }
+]</pre>
+                        </details>
                     </div>
                 </div>
             </section>
