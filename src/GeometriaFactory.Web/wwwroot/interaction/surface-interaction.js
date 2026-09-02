@@ -80,6 +80,26 @@
      * ninguna operación y no tiene a quién pedírsela.
      */
     function dismissDialog(dialog) {
+        // HAY UN DIALOGO QUE LA TECLA DE ESCAPE NO PUEDE CERRAR, y la excepción tiene nombre
+        // propio. En los diálogos de baja y de reseteo, «Cancelar» no pierde nada: escapar
+        // equivale a arrepentirse. Pero el de la contraseña provisoria es **la única vez que esa
+        // clave se ve** —el wireframe lo declara así y el propio cartel lo dice: «No se vuelve a
+        // mostrar»—, y su control de salida es un enlace que NAVEGA. Ahí escapar no es
+        // arrepentirse: es tirar a la basura un dato irrecuperable, sin pregunta y sin aviso.
+        //
+        // Medido por el peritaje del 2026-09-02:
+        //
+        //     después:     {"encabezados":["Contraseña provisoria de Ana Diaz"]}
+        //     tras Escape: https://localhost:5296/cuentas · {"dialogos":0}
+        //
+        // NO ES UN APARTAMIENTO DE ACCESIBILIDAD: la guía de patrones exceptúa expresamente el
+        // cierre con escape cuando cerrar pierde datos. Lo que sí sería un defecto es la
+        // alternativa que se descartó —pedir una confirmación para escapar—, porque agrega un
+        // paso a la persona que ya está mirando la clave que necesita.
+        if (dialog.hasAttribute('data-gf-dialog-irreversible')) {
+            return;
+        }
+
         const exit = dialog.querySelector('[data-gf-dialog-dismiss]');
 
         if (exit !== null) {
