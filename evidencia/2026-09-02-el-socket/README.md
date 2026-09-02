@@ -45,3 +45,29 @@ ANTES (despliegue #48)
    carga 0.9 s → control listo 3.0 s
    PROMEDIO hasta control listo: 3.3 s
 ```
+
+### El después — y la acción no dio resultado
+
+```text
+DESPUÉS (despliegue #49)
+   carga 1.0 s → control listo 3.1 s
+   carga 1.0 s → control listo 3.1 s
+   carga 0.9 s → control listo 3.0 s
+   PROMEDIO hasta control listo: 3.0 s
+```
+
+| | mediana |
+| --- | --- |
+| **Antes** (3.9 / 3.1 / 3.0) | **3.1 s** |
+| **Después** (3.1 / 3.1 / 3.0) | **3.1 s** |
+
+**No cambió nada.** El promedio del «antes» estaba inflado por una primera vuelta en frío;
+compararlo contra el promedio del «después» habría dejado declarar una mejora del 9 % que no
+existe. **La hipótesis era equivocada**: el cuello no es el ancho de banda, son los ~3 s que
+cuesta establecer el sondeo largo contra este anfitrión.
+
+El cambio se conserva porque es correcto por sí solo y no cuesta nada, **pero no se le atribuye
+ninguna mejora**.
+
+**La ventana muerta no se puede eliminar en este anfitrión.** Lo que importaba no era acortarla
+sino **dejar de mentir durante ella**, y eso ya está hecho.
