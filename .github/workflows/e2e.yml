@@ -1,0 +1,144 @@
+# Pruebas de extremo a extremo contra el laboratorio DESPLEGADO.
+#
+# ============================================================================================
+# QUE PRUEBA, Y CONTRA QUE. No levanta nada: abre un navegador contra la dirección publicada y
+# hace lo que hace una persona. Es lo que faltaba, y su ausencia costó cuatro reportes del
+# Product Owner —«el botón de aprobar no funciona»— que ninguna de las 372 pruebas de la
+# solución podía ver, porque llegan al punto de acceso del servicio de datos y no a la pantalla.
+#
+# ============================================================================================
+# POR QUE NO SE DISPARA SOLO CON CADA EMPUJON, y es la decisión de diseño de este archivo:
+#
+#   1. TOCA DATOS REALES. Siembra un alumno y trabajos en el laboratorio del docente. Aceptable
+#      cuando alguien lo pide; inaceptable como efecto de fondo de cada cambio de una coma.
+#   2. DEPENDE DE UN SITIO QUE PUEDE ESTAR CAIDO por razones ajenas al cambio —el anfitrión
+#      recicla, la dirección pública del laboratorio puede cambiar—. Una compuerta que se pone en
+#      rojo por el entorno se termina apagando: ya pasó en este repositorio, con `C-3` en rojo
+#      catorce días sin que nadie lo leyera.
+#
+# Se dispara A MANO, y automáticamente DESPUES DE UNA PUBLICACION EXITOSA, que es el único
+# momento en que la pregunta «¿esto anda?» tiene una respuesta nueva.
+#
+# ============================================================================================
+# CORRE EN EL RUNNER PROPIO, `i7infra-dev`, Y NO ES POR VELOCIDAD. El servicio de datos del
+# laboratorio vive en la red del docente; un runner alojado por GitHub tendría que alcanzarlo por
+# la dirección pública, que es exactamente lo que no se quiere que estas pruebas dependan.
+
+name: e2e
+
+on:
+  workflow_dispatch:
+    inputs:
+      navegadores:
+        description: 'Navegadores a recorrer, separados por coma'
+        required: false
+        default: 'chromium,firefox,webkit'
+  workflow_run:
+    workflows: [deploy-front-ftp]
+    types: [completed]
+
+# UNA CORRIDA A LA VEZ, Y LA NUEVA ESPERA A LA VIEJA. Dos corridas simultáneas sembrarían cuentas
+# en el mismo laboratorio y se pisarían el panel. `cancel-in-progress: false` a propósito: cancelar
+# a mitad de camino dejaría cuentas sembradas sin limpiar.
+concurrency:
+  group: e2e-laboratorio
+  cancel-in-progress: false
+
+jobs:
+  matriz:
+    name: Preparar la matriz
+    runs-on: ubuntu-latest
+    outputs:
+      navegadores: ${{ steps.armar.outputs.navegadores }}
+    # NO SE CORRE DETRAS DE UNA PUBLICACION QUE FALLO: probar un sitio que no se llegó a publicar
+    # sólo produce un rojo que no dice nada.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - id: armar
+        run: |
+          set -euo pipefail
+          entrada="${{ inputs.navegadores }}"
+          [ -n "$entrada" ] || entrada="chromium,firefox,webkit"
+          lista="$(printf '%s' "$entrada" | tr -d ' ' | tr ',' '\n' | grep -E '^(chromium|firefox|webkit)$' | sort -u | paste -sd, -)"
+          [ -n "$lista" ] || { echo "::error::Ningún navegador válido en «$entrada»."; exit 1; }
+          echo "navegadores=$(printf '%s' "$lista" | python3 -c 'import sys,json; print(json.dumps(sys.stdin.read().split(",")))')" >> "$GITHUB_OUTPUT"
+          echo "Se recorren: $lista"
+
+  pruebas:
+    name: Recorrido (${{ matrix.navegador }})
+    needs: matriz
+    runs-on: [self-hosted, i7infra-dev]
+    # LA MATRIZ NO SE CORTA CON EL PRIMER ROJO. Que falle en un navegador y ande en los otros ES el
+    # dato: dice que el defecto es del navegador y no del producto.
+    strategy:
+      fail-fast: false
+      matrix:
+        navegador: ${{ fromJSON(needs.matriz.outputs.navegadores) }}
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Anclar el kit de desarrollo
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Compilar las pruebas
+        run: dotnet build tests/GeometriaFactory.E2ETests -c Release --nologo
+
+      # EL NAVEGADOR SE INSTALA DESDE EL PROPIO PROYECTO, con el guion que el paquete deja en la
+      # salida de compilación. Instalar sólo el de esta celda de la matriz y no los tres ahorra
+      # varios minutos por corrida.
+      - name: Instalar el navegador y sus dependencias
+        run: |
+          set -euo pipefail
+          guion="$(find tests/GeometriaFactory.E2ETests/bin/Release -name playwright.ps1 | head -1)"
+          [ -n "$guion" ] || { echo "::error::No apareció playwright.ps1 en la salida de compilación."; exit 1; }
+          pwsh "$guion" install --with-deps ${{ matrix.navegador }}
+
+      - name: Ejecutar el recorrido
+        env:
+          # LA DIRECCION PUBLICA Y LA DEL SERVICIO DE DATOS SON LAS MISMAS QUE USA LA PUBLICACION.
+          # Reusar los secretos que ya existen evita que la suite pruebe un laboratorio distinto del
+          # que se publicó, que es un modo de falla difícil de ver.
+          URL_BASE: ${{ secrets.PUBLIC_URL }}
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          E2E_ADMIN_EMAIL: ${{ secrets.E2E_ADMIN_EMAIL }}
+          E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD }}
+        run: |
+          dotnet test tests/GeometriaFactory.E2ETests \
+            -c Release --no-build --nologo \
+            --settings pruebas-e2e.runsettings \
+            --logger "trx;LogFileName=${{ matrix.navegador }}.trx" \
+            -- Playwright.BrowserName=${{ matrix.navegador }}
+
+      - name: Guardar los resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-${{ matrix.navegador }}
+          path: |
+            tests/GeometriaFactory.E2ETests/resultados-e2e/**
+          if-no-files-found: warn
+          retention-days: 14
+
+  resumen:
+    name: Resumen
+    needs: pruebas
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reflejar el resultado
+        run: |
+          set -euo pipefail
+          estado="${{ needs.pruebas.result }}"
+          {
+            echo "## Recorrido de extremo a extremo"
+            echo
+            echo "Resultado de la matriz: **$estado**"
+            echo
+            echo "Los resultados por navegador quedan en los artefactos de esta corrida."
+          } >> "$GITHUB_STEP_SUMMARY"
+          [ "$estado" = "success" ] || { echo "::error::El recorrido falló en al menos un navegador."; exit 1; }

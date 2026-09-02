@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Configuración de las pruebas de extremo a extremo.
+
+  EL NAVEGADOR ES UNA OPCION DE LA CORRIDA, no un proyecto dentro del archivo: en el binding de
+  .NET no hay bloque `projects` como en el runner de JavaScript. Se pisa desde la línea de
+  comandos, pasando `Playwright.BrowserName=firefox` DESPUES DEL SEPARADOR DE ARGUMENTOS de
+  `dotnet test` —los dos guiones sueltos, que no se pueden escribir acá: un comentario XML no
+  admite esa secuencia, y el archivo entero deja de leerse—.
+
+  Y CUANDO DEJA DE LEERSE, `dotnet test` NO CORRE NADA Y NO LO DICE con esas palabras: informa
+  el problema del archivo y termina. Un vistazo distraído lee «cero fallos» donde en realidad no
+  se ejecutó una sola prueba. Pasó al escribir este archivo, el 2026-09-02.
+  Es el mecanismo que usa el flujo para recorrer la matriz de navegadores sin tocar este archivo.
+-->
+<RunSettings>
+  <Playwright>
+    <BrowserName>chromium</BrowserName>
+
+    <!--
+      DIEZ SEGUNDOS, Y EL NUMERO SALE DE MEDIR. Este anfitrión no ofrece WebSocket —su negociación
+      declara `ServerSentEvents` y `LongPolling`—, de modo que cada ida y vuelta del circuito pasa
+      por sondeo largo. Los cinco segundos que trae de fábrica el laboratorio de referencia dan
+      rojos que no son del producto. Las esperas del circuito propiamente dichas son más largas y
+      se declaran en `PruebaE2E.EsperaDelCircuito`, junto con su motivo.
+    -->
+    <ExpectTimeout>10000</ExpectTimeout>
+
+    <LaunchOptions>
+      <Headless>true</Headless>
+    </LaunchOptions>
+  </Playwright>
+
+  <!--
+    DOS CLASES A LA VEZ, y no más: cada clase siembra su propio alumno contra un servicio de datos
+    que corre en una casa, detrás de una conexión hogareña. Subir esto no acelera la suite, agrega
+    ruido de red.
+  -->
+  <NUnit>
+    <NumberOfTestWorkers>2</NumberOfTestWorkers>
+  </NUnit>
+
+  <RunConfiguration>
+    <ResultsDirectory>resultados-e2e</ResultsDirectory>
+  </RunConfiguration>
+</RunSettings>
