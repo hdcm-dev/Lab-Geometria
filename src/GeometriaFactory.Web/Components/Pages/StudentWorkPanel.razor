@@ -164,25 +164,33 @@ else
             </dialog>
         }
 
-        @* ---- Barra de filtros ---------------------------------------------------------- *@
-        <form class="gf-filters" method="get">
-            <div class="gf-field gf-field-search">
-                <label for="works-search">Buscar por nombre</label>
-                <Icon Name="Search" />
-                <input class="gf-input" id="works-search" name="buscar" type="search"
-                       placeholder="nombre del trabajo" value="@SearchTerm" />
-            </div>
-            <div class="gf-field">
-                <label for="works-state">Estado</label>
-                <select class="gf-select" id="works-state" name="estado">
-                    @foreach (var option in StateOptions)
-                    {
-                        <option value="@option" selected="@(string.Equals(option, StateFilter, StringComparison.Ordinal))">@option</option>
-                    }
-                </select>
-            </div>
-            <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
-        </form>
+        @* H-13 · LOS FILTROS NO SE DIBUJAN SOBRE UNA COLECCIÓN VACÍA. Un buscador, un
+           selector de estado y un botón «Filtrar» sobre una lista que no tiene ni un
+           elemento son tres controles que no pueden hacer nada, compitiendo con la única
+           acción que sí sirve. El vacío de FILTRO es otra cosa y ahí la barra se queda:
+           sin ella no habría cómo deshacer el filtro que dejó la lista en nada. *@
+        @if (_works.Count > 0)
+        {
+            @* ---- Barra de filtros ---------------------------------------------------------- *@
+            <form class="gf-filters" method="get" data-gf-pending="Filtrando">
+                <div class="gf-field gf-field-search">
+                    <label for="works-search">Buscar por nombre</label>
+                    <Icon Name="Search" />
+                    <input class="gf-input" id="works-search" name="buscar" type="search"
+                           placeholder="nombre del trabajo" value="@SearchTerm" />
+                </div>
+                <div class="gf-field">
+                    <label for="works-state">Estado</label>
+                    <select class="gf-select" id="works-state" name="estado">
+                        @foreach (var option in StateOptions)
+                        {
+                            <option value="@option" selected="@(string.Equals(option, StateFilter, StringComparison.Ordinal))">@option</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
+            </form>
+        }
 
         @if (_works.Count == 0)
         {
@@ -208,7 +216,7 @@ else
         else
         {
             <div class="gf-table-wrapper">
-                <table class="gf-table">
+                <table class="gf-table gf-table--works">
                     <caption class="gf-sr-only">Mis trabajos, con su estado y las acciones que ese estado admite</caption>
                     <thead>
                         <tr>

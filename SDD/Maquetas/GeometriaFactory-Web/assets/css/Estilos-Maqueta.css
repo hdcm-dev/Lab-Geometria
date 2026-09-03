@@ -38,7 +38,15 @@
   --color-background-tertiary:  #F7F6F4;
   --color-text-primary:         #1A1A18;
   --color-text-secondary:       #5C5C57;
-  --color-text-tertiary:        #8A8A82;
+  /* H-01 (mesa UX/UI del 2026-09-03) · El valor anterior, #8A8A82, medía 3,48:1
+     sobre `--color-background-primary` y 3,22:1 sobre `--color-background-tertiary`:
+     por debajo del piso de 4,5:1 de WCAG 1.4.3 en las dos superficies sobre las que
+     el rol aparece. La medición está en
+     `PROMPTs/Fixs/02-Ajuste-UX-2.0/OUTPUTs/`. El valor nuevo mide 4,91:1 y 4,55:1.
+     Se cambia ACÁ y no sólo en la hoja del producto porque el control `C-4` de
+     `scripts/verify-visual-system.sh` exige que los dos catálogos digan lo mismo:
+     un token que difiere entre la maqueta y el producto deja de ser un token. */
+  --color-text-tertiary:        #71716B;
   --color-text-danger:          #A03030;
   --color-border-secondary:     #D9D9D4;
   --color-border-tertiary:      #E6E6E1;

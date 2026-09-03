@@ -45,7 +45,13 @@
   --color-background-tertiary:  #F7F6F4;
   --color-text-primary:         #1A1A18;
   --color-text-secondary:       #5C5C57;
-  --color-text-tertiary:        #8A8A82;
+  /* H-01 (mesa 2026-09-03) · MEDÍA 3,48:1 SOBRE BLANCO, contra el piso de 4,5:1
+     de WCAG 1.4.3, y el valor viejo venía de la maqueta sin que ningún documento
+     declarara la medición del par. No es un color nuevo: es el mismo rol un paso
+     más oscuro, elegido para pasar en las DOS superficies sobre las que el token
+     aparece —4,91:1 sobre `#FFFFFF` y 4,55:1 sobre `#F7F6F4`—, que es la razón
+     por la que no alcanzaba con acercarlo al piso sobre blanco. */
+  --color-text-tertiary:        #71716B;
   --color-text-danger:          #A03030;
   --color-border-secondary:     #D9D9D4;
   --color-border-tertiary:      #E6E6E1;
@@ -1136,4 +1142,106 @@ main[tabindex="-1"]:focus-visible {
   .gf-footer-actions { flex-direction: column; }
   .gf-footer-actions .gf-btn--destructive { margin-inline-start: 0; margin-top: var(--space-4); }
   .gf-row-actions .gf-btn--destructive { margin-inline-start: 0; }
+}
+
+/* ============================================================================
+   AJUSTE DE PROPORCIÓN, UBICACIÓN Y DIMENSIONAMIENTO — SEGUNDA MESA
+   Mesa UX/UI agéntica del 2026-09-03 · `PROMPTs/Fixs/02-Ajuste-UX-2.0/OUTPUTs/`
+   ----------------------------------------------------------------------------
+   Misma disciplina que la sección anterior: cada bloque nombra el hallazgo que
+   lo funda, ningún valor sale de fuera de los tokens de `:root`, y va después
+   de lo que corrige porque corrige reglas que ya existen más arriba.
+   ============================================================================ */
+
+/* H-02 · LA RETÍCULA FIJA REPARTÍA PARTES IGUALES. `table-layout: fixed` de R-05
+   alineó las tablas hermanas, que era lo que hacía falta, pero dejó sin declarar
+   el reparto: las cuatro columnas de datos de «Cuentas» medían exactamente lo
+   mismo —67 px a 769, 99 a 900, 130 a 1024, 170 a 1200— y una fecha de diez
+   caracteres recibía tanto ancho como un correo de treinta y cinco. Con
+   `overflow-wrap: anywhere` heredado, el correo salía en ocho renglones y la
+   fecha en tres.
+
+   Y EL ENCABEZADO NO SE PARTÍA, ASÍ QUE PISABA. La corrección de R-05
+   —`overflow-wrap: normal` en el `th`— evitó «ADVERTENCI/AS», pero en una
+   columna de 67 px con `overflow: visible` el texto no se parte NI se recorta:
+   «SITUACIÓN» medía 83 px y pintaba hasta la abscisa 484 con su columna
+   terminando en 456. Pisaba «FECHA DE REGISTRO». Está en la captura
+   `evidencia/20-cuentas-769.png` de la mesa.
+
+   POR QUÉ SE DECLARAN TODAS Y NO UNA. R-05 dejó dicho que fijar la primera
+   además de la de acciones dejaba a las del medio con 109 px: eso es lo que pasa
+   cuando se declara una parte, porque en retícula fija lo declarado se le resta
+   a lo que no se declaró. Se declaran TODAS, por forma de tabla, y entonces el
+   reparto es el que se quiso y no el que sobró.
+
+   Y EL MÍNIMO, QUE ES LO QUE EVITA VOLVER AL PRINCIPIO. Entre 769 px —el primer
+   ancho con tabla, porque debajo manda `.gf-stacked-cards`— y ~1100 px no hay
+   reparto que alcance: son cinco columnas y una de ellas mide 13 rem. Con
+   `min-width` la tabla desborda DENTRO de `.gf-table-wrapper`, que para eso
+   tiene `overflow-x: auto`, y se recorre de costado. Desplazar una tabla ancha
+   es una operación que se entiende; leer un correo en ocho renglones, no. */
+.gf-table--works    { min-width: 40rem; }
+.gf-table--accounts { min-width: 48rem; }
+
+/* Trabajo · Fecha · Estado · [acciones, 13 rem de R-05] */
+.gf-table--works thead th:nth-child(1) { width: 42%; }
+.gf-table--works thead th:nth-child(2) { width: 18%; }
+.gf-table--works thead th:nth-child(3) { width: 16%; }
+
+/* Cuenta · Correo · Situación · Fecha de registro · [operaciones, 13 rem] */
+.gf-table--accounts thead th:nth-child(1) { width: 22%; }
+.gf-table--accounts thead th:nth-child(2) { width: 26%; }
+.gf-table--accounts thead th:nth-child(3) { width: 14%; }
+.gf-table--accounts thead th:nth-child(4) { width: 14%; }
+
+/* LA FECHA NO SE PARTE NUNCA. Es un dato de diez caracteres que se lee de un
+   golpe o no se lee: partido en «17/08/» y «2026» deja de ser una fecha. El
+   `anywhere` de R-05 sigue rigiendo para el resto de las celdas, que es donde
+   hace falta —un correo largo tiene que poder partirse en algún lado—. */
+.gf-table td.gf-num { overflow-wrap: normal; }
+
+/* H-09 · «DAR DE BAJA» ERA EL ELEMENTO DE MÁS PESO VISUAL DE LA PANTALLA: borde
+   propio, tinte de peligro e ícono, sobre una acción que se usa una vez por
+   cuatrimestre, mientras «Habilitar» —la operación sin la cual no entra nadie—
+   se dibujaba igual que ella. El peso visual va con la frecuencia de uso, no con
+   la gravedad; la gravedad la sostienen el color y la confirmación escrita, que
+   siguen donde estaban.
+
+   NO SE DESAPILAN. R-05 decidió apilarlas y esa decisión no se toca: tres
+   botones en línea no entran, y apiladas empiezan todas en la misma abscisa. Lo
+   que cambia es cuánto pesa cada uno, no dónde está. */
+.gf-table .gf-td-actions .gf-row-actions .gf-btn--destructive,
+.gf-row-card .gf-row-actions .gf-btn--destructive {
+  background: transparent;
+  border-color: transparent;
+}
+.gf-table .gf-td-actions .gf-row-actions .gf-btn--destructive:hover,
+.gf-row-card .gf-row-actions .gf-btn--destructive:hover {
+  border-color: var(--color-border-danger);
+}
+
+/* H-03 · LA PROPORCIÓN DEL ENVÍO ESTABA AL REVÉS DE LA TAREA. `.gf-two-columns` reparte
+   1fr / 2fr, y en la VISTA de trabajo eso es correcto: el dibujo es el contenido y la
+   columna angosta lo acompaña. En el ENVÍO la tarea es la contraria —la persona viene a
+   pegar un texto y el dibujo todavía no existe—, y la misma regla le daba al «Texto del
+   trabajo» **247 × 132 px medidos**, con `white-space: pre` y barra de desplazamiento
+   horizontal sobre el dato central del producto, mientras la previsualización VACÍA se
+   quedaba con 578 × 450. «Enviar» caía en la ordenada 949, fuera de una ventana de 900,
+   y el que se veía era «Previsualizar», que es el secundario.
+
+   SE INVIERTE LA PROPORCIÓN, NO SE CAMBIA EL PATRÓN. Las dos columnas siguen siendo las
+   mismas, en el mismo orden, con el mismo comportamiento por debajo de 768 px. Es la
+   alternativa A de la propuesta C del informe de la mesa, aprobada el 2026-09-03.
+
+   Y EL CAMPO CRECE, que es la otra mitad. `min-height: 132px` es el de `.gf-textarea`,
+   pensado para una descripción de dos renglones; el texto que imprime el programa del
+   alumno tiene decenas. El ejemplo que la propia pantalla ofrece mide catorce renglones:
+   ése es el piso honesto. Sigue siendo redimensionable a mano (`resize: vertical`). */
+.gf-two-columns--submission { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.gf-textarea--work-text { min-height: 320px; }
+
+@media (max-width: 768px) {
+  /* En pantalla angosta no hay dos columnas que repartir: la regla de arriba no aplica y
+     el orden declarado en R-06 —datos primero, previsualización después— sigue mandando. */
+  .gf-two-columns--submission { grid-template-columns: minmax(0, 1fr); }
 }

@@ -93,10 +93,18 @@
 
 <a class="gf-btn gf-btn--pill gf-mt-5 gf-mb-4" href="/mis-trabajos"><Icon Name="Back" />Volver a mis trabajos</a>
 
+@* H-08 · EL ENCABEZADO SEGUÍA PIDIENDO LO QUE YA SE HIZO. Enviado el trabajo, el
+   formulario desaparece y en su lugar queda el bloque de resultado, pero el título seguía
+   diciendo «Trabajo nuevo» y el subtítulo «Pegá el texto tal como lo devolvió tu programa»
+   encabezando un panel que dice que el trabajo ya se envió. Dos afirmaciones opuestas en la
+   misma pantalla, y la de arriba es la que se lee primero. *@
 <div class="gf-page-header">
     <div>
-        <h1>@Heading</h1>
-        <p class="gf-subtitle">Pegá el texto tal como lo devolvió tu programa. No hace falta que le cambies nada.</p>
+        <h1>@(_result is null ? Heading : "Tu trabajo se envió")</h1>
+        @if (_result is null)
+        {
+            <p class="gf-subtitle">Pegá el texto tal como lo devolvió tu programa. No hace falta que le cambies nada.</p>
+        }
     </div>
 </div>
 
@@ -147,7 +155,7 @@ else if (_result is { } result)
                 El texto se interpretó y quedó entregado.
                 @if (Warnings.Count > 0)
                 {
-                    <strong>Con @Warnings.Count @(Warnings.Count == 1 ? "advertencia" : "advertencias"), que no impiden la entrega:</strong>
+                    <strong>Con @Warnings.Count @(Warnings.Count == 1 ? "advertencia, que no impide" : "advertencias, que no impiden") la entrega:</strong>
                     <span>son valores que tu programa declara y que no coinciden con la geometría de las dimensiones que él mismo emitió.</span>
                 }
             </p>
@@ -192,9 +200,11 @@ else if (_result is { } result)
             </ul>
         }
 
-        <dl class="gf-key-value gf-mt-4">
-            <dt>Identificador del trabajo</dt><dd class="gf-num">@result.WorkId</dd>
-        </dl>
+        @* H-06 · ACÁ SE MOSTRABA EL IDENTIFICADOR INTERNO DEL TRABAJO —un `Guid` de treinta y
+           seis caracteres— al alumno que acababa de enviarlo. `Experiencia-De-Uso.md` §6 lo
+           prohíbe con todas las letras: «no aparecen números de código, nombres de contrato ni
+           identificadores internos». No se reemplaza por nada: el trabajo se nombra por su
+           nombre, que es el que la persona escribió, y se alcanza por «Ver el trabajo». *@
 
         <div class="gf-footer-actions">
             <a class="gf-btn gf-btn--secondary" href="/mis-trabajos">Volver a mis trabajos</a>
@@ -308,9 +318,21 @@ else
                            no pudo leer. Declarar el vocabulario acá es lo que evita ese camino.
 
                            EL EJEMPLO ES EL CUBO DEL INTAKE, con sus valores correctos: 6 caras de
-                           3, área 54 y volumen 27. Va colapsado para no empujar el formulario. *@
+                           3, área 54 y volumen 27. Va colapsado para no empujar el formulario.
+
+                           H-05 · LAS SEIS CARAS SE ESCRIBEN, Y ESO NO ES VERBOSIDAD. Hasta el
+                           2026-09-03 el ejemplo declaraba «6 caras» en este comentario y emitía
+                           UNA, con el área de las seis. Pegado tal cual —que es exactamente para
+                           lo que está— el laboratorio contestaba «Tu programa declara 54.00 · La
+                           geometría da 9.00»: el área derivada suma lo que el texto emite, y el
+                           texto emitía una sola cara. El alumno que copiaba el ejemplo para
+                           aprender la forma recibía una advertencia sobre el ejemplo del producto,
+                           en la única pantalla que existe para volver visible el error de fórmula.
+                           Medido en la corrida de la mesa: trabajo `8d7a2adb` de la cuenta de
+                           prueba. La regla de derivación NO se tocó: el que estaba mal era el
+                           ejemplo. *@
                         <p class="gf-caption gf-mt-2" id="submission-text-shape">
-                            Es el texto JSON que imprime tu programa. El laboratorio lee las claves
+                            Es el texto que imprime tu programa. El laboratorio lee las claves
                             <code>Tipo</code>, <code>Largo</code>, <code>Ancho</code>,
                             <code>Radio</code>, <code>Altura</code>, <code>Area</code>,
                             <code>Volumen</code> y los conjuntos de componentes
@@ -324,6 +346,11 @@ else
   {
     "Tipo": "Cubo",
     "Caras": [
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
+      { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 },
       { "Tipo": "Cuadrado", "Largo": 3.00, "Ancho": 3.00, "Area": 9.00 }
     ],
     "Area": 54.00,
@@ -383,7 +410,7 @@ else
                                 <li class="gf-finding">
                                     <span class="gf-badge gf-badge--neutral">No dibujada</span>
                                     <div class="gf-finding-body">
-                                        <p class="gf-finding-location">Figura @(missing + 1) · posición @missing</p>
+                                        <p class="gf-finding-location">Figura @(missing + 1) · posición @missing en el texto</p>
                                     </div>
                                 </li>
                             }
@@ -685,7 +712,11 @@ else
     /// </remarks>
     private static string LocationOf(WorkObservation observation) =>
         observation.PiecePosition is { } position
-            ? $"Figura {position + 1} · posición {position} · campo «{observation.Field}»"
+            @* H-11 · LOS DOS NÚMEROS SE QUEDAN —la decisión de nombrarlos está declarada arriba y
+               es correcta—, pero «Figura 1 · posición 0» no decía cuál contaba qué, y dos números
+               distintos para la misma figura, pegados y sin rótulo, se leen como un error del
+               producto. Se nombra de dónde sale el que empieza en cero. *@
+            ? $"Figura {position + 1} · posición {position} en el texto · campo «{observation.Field}»"
             : "En el texto completo";
 
     /// <summary>

@@ -121,7 +121,14 @@ public sealed class ForcedPasswordChangeSurfaceTests : IDisposable
         Trace("2 · POST del cambio", changed);
 
         Assert.Equal(HttpStatusCode.Found, changed.StatusCode);
-        Assert.Equal("/ingreso?estado=confirmacion-contrasena", changed.Headers.Location?.PathAndQuery);
+        // EL CORREO VIAJA EN LA REDIRECCIÓN (H-10001 de la mesa UX/UI del 2026-09-03, hallazgo
+        // `H-07`): el ingreso al que este paso devuelve lo usa para poblar el campo, y así la
+        // persona no escribe su correo por tercera vez. No autentica nada: la sesión se sigue
+        // obteniendo en el ingreso y con la contraseña nueva, que es lo que el resto del caso
+        // comprueba.
+        Assert.Equal(
+            "/ingreso?estado=confirmacion-contrasena&correo=" + Uri.EscapeDataString(StudentEmail),
+            changed.Headers.Location?.PathAndQuery);
 
         // La marca se levantó, leída DEL ALMACÉN (INV-09).
         Assert.False(await MarkOfAsync(StudentEmail));
@@ -171,7 +178,14 @@ public sealed class ForcedPasswordChangeSurfaceTests : IDisposable
         Trace("3 · POST del cambio", changed);
 
         Assert.Equal(HttpStatusCode.Found, changed.StatusCode);
-        Assert.Equal("/ingreso?estado=confirmacion-contrasena", changed.Headers.Location?.PathAndQuery);
+        // EL CORREO VIAJA EN LA REDIRECCIÓN (H-10001 de la mesa UX/UI del 2026-09-03, hallazgo
+        // `H-07`): el ingreso al que este paso devuelve lo usa para poblar el campo, y así la
+        // persona no escribe su correo por tercera vez. No autentica nada: la sesión se sigue
+        // obteniendo en el ingreso y con la contraseña nueva, que es lo que el resto del caso
+        // comprueba.
+        Assert.Equal(
+            "/ingreso?estado=confirmacion-contrasena&correo=" + Uri.EscapeDataString(StudentEmail),
+            changed.Headers.Location?.PathAndQuery);
         Assert.False(await MarkOfAsync(StudentEmail));
 
         // 4 · La provisoria ya no sirve: vuelve a la pantalla de ingreso con el rechazo dibujado,

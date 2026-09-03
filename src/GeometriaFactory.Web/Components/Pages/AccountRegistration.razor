@@ -72,7 +72,7 @@ else
     {
         <p class="gf-banner gf-banner--error gf-mt-5" role="alert">
             Faltan datos. Completá el correo, el nombre y el apellido.
-            No salió ninguna solicitud hacia el servicio de datos.
+            Todavía no se registró nada.
         </p>
     }
     else if (_state is Outcome.EmailAlreadyRegistered)
@@ -110,24 +110,27 @@ else
     <form class="gf-mt-5" method="post" @formname="account-registration" @onsubmit="SubmitAsync"
           data-gf-pending="Enviando">
         <AntiforgeryToken />
-        <div class="gf-field @(_state is Outcome.EmailAlreadyRegistered ? "gf-field--error" : null)">
+        <div class="gf-field @(_state is Outcome.EmailAlreadyRegistered || Falta(Form.Email) ? "gf-field--error" : null)">
             <label for="registration-email">Correo</label>
             <input class="gf-input" id="registration-email" name="Input.Email" type="email"
-                   autocomplete="email" aria-describedby="registration-email-error" value="@Form.Email" />
+                   autocomplete="email" aria-describedby="registration-email-error" value="@Form.Email"
+                   aria-invalid="@(_state is Outcome.EmailAlreadyRegistered || Falta(Form.Email) ? "true" : null)" />
             @if (_state is Outcome.EmailAlreadyRegistered)
             {
                 <span class="gf-requirement" id="registration-email-error">Ese correo ya está registrado.</span>
             }
         </div>
-        <div class="gf-field">
+        <div class="gf-field @(Falta(Form.FirstName) ? "gf-field--error" : null)">
             <label for="registration-first-name">Nombre</label>
             <input class="gf-input" id="registration-first-name" name="Input.FirstName" type="text"
-                   autocomplete="given-name" value="@Form.FirstName" />
+                   autocomplete="given-name" value="@Form.FirstName"
+                   aria-invalid="@(Falta(Form.FirstName) ? "true" : null)" />
         </div>
-        <div class="gf-field">
+        <div class="gf-field @(Falta(Form.LastName) ? "gf-field--error" : null)">
             <label for="registration-last-name">Apellido</label>
             <input class="gf-input" id="registration-last-name" name="Input.LastName" type="text"
-                   autocomplete="family-name" value="@Form.LastName" />
+                   autocomplete="family-name" value="@Form.LastName"
+                   aria-invalid="@(Falta(Form.LastName) ? "true" : null)" />
         </div>
 
         <button type="submit" class="gf-btn gf-btn--primary gf-btn--full">Registrarme</button>
@@ -164,6 +167,14 @@ else
     private RegistrationForm Form => Input ??= new RegistrationForm();
 
     private Outcome _state = Outcome.None;
+
+    /// <summary>
+    /// Si el campo hay que marcarlo (H-10 · WCAG 3.3.1). Acá los tres valores vuelven al marcado
+    /// —no hay ninguna contraseña de por medio—, así que se resuelve mirando el propio valor y no
+    /// hace falta recordar nada del envío.
+    /// </summary>
+    private bool Falta(string? valor) =>
+        _state is Outcome.MissingFields && string.IsNullOrWhiteSpace(valor);
 
     private async Task SubmitAsync()
     {

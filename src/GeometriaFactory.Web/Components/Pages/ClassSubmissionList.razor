@@ -120,31 +120,41 @@ else
     }
     else
     {
-        <form class="gf-filters" method="get">
-            @* El filtro por alumno VUELVE A PEDIR LA COLECCIÓN con el criterio poblado, que es lo
-               que el wireframe §3 y §4 declaran; el de estado acota lo ya recibido. Los dos viajan
-               por la dirección porque esta superficie es de render estático. *@
-            <div class="gf-field">
-                <label for="submissions-student">Alumno</label>
-                <select class="gf-select" id="submissions-student" name="alumno">
-                    <option value="">todos</option>
-                    @foreach (var student in Students)
-                    {
-                        <option value="@student.Id" selected="@(student.Id == StudentFilter)">@student.Name</option>
-                    }
-                </select>
-            </div>
-            <div class="gf-field">
-                <label for="submissions-state">Estado del trabajo</label>
-                <select class="gf-select" id="submissions-state" name="estado">
-                    @foreach (var option in StateOptions)
-                    {
-                        <option value="@option" selected="@(string.Equals(option, StateFilter, StringComparison.Ordinal))">@option</option>
-                    }
-                </select>
-            </div>
-            <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
-        </form>
+        @* H-13 · LOS FILTROS NO SE DIBUJAN SOBRE UNA COLECCIÓN VACÍA: dos selectores y un
+           botón sobre una entrega sin un solo trabajo son controles que no pueden hacer nada.
+           LA CONDICIÓN LLEVA EL FILTRO POR ALUMNO Y NO SÓLO EL CONTEO, y es la diferencia
+           que importa acá: el filtro por alumno **vuelve a pedir la colección**, así que un
+           alumno sin entregas deja `_works` en cero con el filtro puesto. Sin esa mitad, la
+           barra desaparecería justo cuando hace falta para deshacerlo, y el administrador
+           quedaría encerrado en un alumno vacío. *@
+        @if (_works.Count > 0 || StudentFilter is not null)
+        {
+            <form class="gf-filters" method="get" data-gf-pending="Filtrando">
+                @* El filtro por alumno VUELVE A PEDIR LA COLECCIÓN con el criterio poblado, que es lo
+                   que el wireframe §3 y §4 declaran; el de estado acota lo ya recibido. Los dos viajan
+                   por la dirección porque esta superficie es de render estático. *@
+                <div class="gf-field">
+                    <label for="submissions-student">Alumno</label>
+                    <select class="gf-select" id="submissions-student" name="alumno">
+                        <option value="">todos</option>
+                        @foreach (var student in Students)
+                        {
+                            <option value="@student.Id" selected="@(student.Id == StudentFilter)">@student.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="gf-field">
+                    <label for="submissions-state">Estado del trabajo</label>
+                    <select class="gf-select" id="submissions-state" name="estado">
+                        @foreach (var option in StateOptions)
+                        {
+                            <option value="@option" selected="@(string.Equals(option, StateFilter, StringComparison.Ordinal))">@option</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
+            </form>
+        }
 
         @if (_works.Count == 0)
         {
@@ -197,7 +207,7 @@ else
                         </summary>
 
                         <div class="gf-table-wrapper">
-                            <table class="gf-table">
+                            <table class="gf-table gf-table--works">
                                 <caption class="gf-sr-only">Trabajos entregados por @group.Name</caption>
                                 <thead>
                                     <tr>
