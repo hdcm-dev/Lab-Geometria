@@ -1,5 +1,6 @@
 @page "/ingreso"
 @layout AccessShell
+@using Microsoft.AspNetCore.WebUtilities
 @inject DataServiceClient DataService
 @inject SessionState Session
 @inject PendingCredentialChangeStore PendingChanges
@@ -126,15 +127,15 @@ else if (_state is Outcome.PasswordChangeRequired)
 
 <form class="gf-mt-5" method="post" @formname="sign-in" @onsubmit="SubmitAsync">
     <AntiforgeryToken />
-    <div class="gf-field">
+    <div class="gf-field @(_faltaCorreo ? "gf-field--error" : null)">
         <label for="signin-email">Correo</label>
         <input class="gf-input" id="signin-email" name="Input.Email" type="email" autocomplete="username"
-               value="@Form.Email" />
+               value="@Form.Email" aria-invalid="@(_faltaCorreo ? "true" : null)" />
     </div>
-    <div class="gf-field">
+    <div class="gf-field @(_faltaClave ? "gf-field--error" : null)">
         <label for="signin-password">Contraseña</label>
         <input class="gf-input" id="signin-password" name="Input.Password" type="password"
-               autocomplete="current-password" />
+               autocomplete="current-password" aria-invalid="@(_faltaClave ? "true" : null)" />
     </div>
 
     <button type="submit" class="gf-btn gf-btn--primary gf-btn--full">Ingresar</button>
@@ -209,6 +210,18 @@ else if (_state is Outcome.PasswordChangeRequired)
     private SignInForm Form => Input ??= new SignInForm();
 
     private Outcome _state = Outcome.None;
+
+    /// <summary>
+    /// Cuál de los dos campos faltaba, para poder marcarlo (H-10 · WCAG 3.3.1).
+    /// </summary>
+    /// <remarks>
+    /// SE RESUELVEN EN EL ENVÍO Y NO EN EL MARCADO, y esa es toda la razón por la que existen:
+    /// la contraseña en claro deja de existir apenas se la toma —tres líneas más abajo—, así que
+    /// al volver a dibujar el formulario ya no hay forma de saber si estaba vacía. El mensaje
+    /// global se queda donde está: marcar el campo no lo reemplaza, lo acompaña.
+    /// </remarks>
+    private bool _faltaCorreo;
+    private bool _faltaClave;
     private string _rejectionMessage = string.Empty;
     private string? _arrival;
 
@@ -235,6 +248,23 @@ else if (_state is Outcome.PasswordChangeRequired)
             : query.Contains("estado=sesion-cerrada", StringComparison.Ordinal) ? "sesion-cerrada"
             : query.Contains("estado=sesion-no-restablecible", StringComparison.Ordinal) ? "sesion-no-restablecible"
             : null;
+
+        // H-07 · EL CORREO VIENE PUESTO CUANDO EL PRODUCTO YA LO SABE. Quien acaba de elegir su
+        // contraseña en el cambio obligado llega hasta acá habiendo escrito su correo dos veces,
+        // y el campo lo esperaba vacío una tercera. La superficie del cambio obligado ya declara
+        // este mismo criterio para su propio campo —«volver a pedírselo lo trata como si el
+        // producto no se acordara»—; lo que faltaba era sostenerlo un paso más.
+        //
+        // SÓLO SE PRELLENA, NUNCA SE AUTENTICA: el correo no es un secreto y no abre nada por sí
+        // solo. Y SÓLO EN EL PEDIDO DE LA PÁGINA: durante el envío mandaría lo que la persona
+        // escribió. La contrapartida, dicha: el correo queda en el historial del navegador y en
+        // el registro del servidor, como cualquier parámetro de dirección.
+        if (HttpMethods.IsGet(HttpContext.Request.Method)
+            && QueryHelpers.ParseQuery(query).TryGetValue("correo", out var correo)
+            && !string.IsNullOrWhiteSpace(correo))
+        {
+            Form.Email = correo.ToString();
+        }
     }
 
     private async Task SubmitAsync()
@@ -244,7 +274,10 @@ else if (_state is Outcome.PasswordChangeRequired)
         // marcado es el correo y nada más.
         Form.Password = string.Empty;
 
-        if (string.IsNullOrWhiteSpace(Form.Email) || string.IsNullOrWhiteSpace(password))
+        _faltaCorreo = string.IsNullOrWhiteSpace(Form.Email);
+        _faltaClave = string.IsNullOrWhiteSpace(password);
+
+        if (_faltaCorreo || _faltaClave)
         {
             _state = Outcome.MissingFields;
             return;

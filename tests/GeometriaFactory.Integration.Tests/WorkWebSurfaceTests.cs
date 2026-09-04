@@ -161,7 +161,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         // y el campo que lo impidieron. La pantalla sigue sin acusar a su programa de algo que el
         // laboratorio no miró: lo que declara es lo que no pudo interpretar.
         Assert.Contains("no se pudo interpretar entero", sentHtml, StringComparison.Ordinal);
-        Assert.Contains("Figura 2 · posición 1 · campo «Tipo»", sentHtml, StringComparison.Ordinal);
+        Assert.Contains("Figura 2 · posición 1 en el texto · campo «Tipo»", sentHtml, StringComparison.Ordinal);
 
         // EL TEXTO SE LEE DEL ALMACÉN Y NO DE LA RESPUESTA: la pantalla no lo tocó.
         Assert.Equal(TextThatDoesNotVerify, await StoredTextAsync(workId));

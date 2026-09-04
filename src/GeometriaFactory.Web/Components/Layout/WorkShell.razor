@@ -111,7 +111,12 @@
             else if (_servicio is { Responde: true })
             {
                 <p class="gf-caption" data-gf-servicio="en-linea">
-                    Servicio de datos en línea · comprobado a las @_servicio.Momento.ToLocalTime().ToString("HH:mm:ss")
+                    @* H-06 · DECÍA «Servicio de datos en línea», que es el nombre interno de una
+                       pieza de la arquitectura, encabezando TODAS las pantallas del panel y también
+                       las del alumno. Su hermano de dos renglones más arriba —el aviso de caída— ya
+                       estaba escrito en el vocabulario de la cátedra: «El laboratorio no está
+                       alcanzando sus datos». Se dicen igual los dos. *@
+                    El laboratorio está en línea · comprobado a las @_servicio.Momento.ToLocalTime().ToString("HH:mm:ss")
                 </p>
             }
 

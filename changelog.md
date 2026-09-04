@@ -997,3 +997,80 @@ tres se pagaron el mismo día:
   pregunta con un número. Queda declarado en la especificación de la batería.
 - **Que este recorrido sea puerta bloqueante de rama** es decisión del Product Owner. Hoy corre y
   reporta; no bloquea la fusión.
+
+---
+
+## Lo que la segunda mesa de UX/UI midió y reparó — 2026-09-03
+
+**Qué la fundó.** Una revisión agéntica del front desplegado, con el procedimiento de
+`Lab-Geometria.Documentacion/PROMPTs/Fixs/02-Ajuste-UX-2.0/`, sobre los dos papeles y nueve
+pantallas. El informe, con las mediciones, las capturas y la clasificación A/B/C de cada hallazgo,
+está en `OUTPUTs/Revision-UX-GeometriaFactory.Web-2026-09-02.md` de esa misma carpeta.
+
+**El sistema visual salió bien parado y no se rehízo nada:** la escala tipográfica, el espaciado, el
+anillo de foco, la marca del ítem de menú activo y las fichas de la versión angosta pasaron la
+revisión sin observaciones. Lo que sigue son doce reparaciones puntuales.
+
+### Reparado en el sistema visual
+
+- **`--color-text-tertiary` no llegaba al piso de contraste.** Medía **3,48:1** sobre blanco y
+  **3,22:1** sobre el fondo terciario, contra el 4,5:1 de WCAG 1.4.3, y lo usaba texto de cuerpo:
+  los recuentos del árbol del texto y las notas de la escena. Pasa a `#71716B` —4,91:1 y 4,55:1—
+  **en la hoja del producto y en la de la maqueta**, porque el control `C-4` de
+  `verify-visual-system.sh` exige que los dos catálogos digan lo mismo.
+- **La retícula fija repartía partes iguales.** `R-05` alineó las tablas hermanas pero dejó sin
+  declarar el reparto: las cuatro columnas de datos de «Cuentas» medían lo mismo —67 px a 769— y el
+  correo salía en ocho renglones. Peor: con el encabezado sin partir y `overflow: visible`,
+  «SITUACIÓN» pintaba 28 px sobre «FECHA DE REGISTRO». Se declaran **todas** las columnas por forma
+  de tabla, y un `min-width` que hace desbordar la tabla dentro de su envoltorio en vez de astillar
+  el texto.
+- **La proporción del envío estaba al revés de la tarea.** El campo donde se pega el trabajo medía
+  247 × 132 px con desplazamiento horizontal y la previsualización vacía 578 × 450. Se invierte la
+  proporción **sólo en el envío** y el campo pasa a 537 × 320. Es la alternativa A de la propuesta
+  C del informe, aprobada. **Queda abierto** que la acción primaria sigue fuera de la primera
+  pantalla, ahora en la ordenada 1061.
+- **«Dar de baja» era el elemento de más peso visual de «Cuentas»**, sobre una acción que se usa una
+  vez por cuatrimestre. Pierde recuadro y relleno; conserva color de peligro, ícono y confirmación
+  escrita. No se desapilan: esa decisión es de `R-05` y se respeta.
+
+### Reparado en las superficies
+
+- **Los tres formularios de filtro no mostraban espera.** Con la red lenta la pantalla se iba a
+  blanco —`main` en `null`— mientras `Experiencia-De-Uso.md` §2.1 promete indicador en toda acción
+  que cruza al servidor, y el mecanismo ya existía. Llevan `data-gf-pending`.
+- **El ejemplo de la pantalla de envío producía una advertencia.** Declaraba el área de las seis
+  caras del cubo y emitía **una**: pegado tal cual, el laboratorio contestaba «declara 54.00, la
+  geometría da 9.00». Se escriben las seis caras. La regla de derivación no se tocó.
+- **Jerga de implementación en cuatro lugares:** «No salió ninguna solicitud hacia el servicio de
+  datos» (cuatro superficies), «Servicio de datos en línea» encabezando todas las pantallas del
+  panel, «el texto **JSON**» y el `Guid` del trabajo mostrado al alumno. `Experiencia-De-Uso.md`
+  §2.1 y §6 los prohíben con todas las letras.
+- **El encabezado seguía pidiendo lo que ya se había hecho:** enviado el trabajo, el título decía
+  «Trabajo nuevo» sobre un panel que decía que el trabajo ya estaba enviado.
+- **Tres tipeos de credenciales para entrar la primera vez.** El correo viaja en la redirección del
+  cambio obligado y el ingreso llega con el campo puesto.
+- **Los errores de formulario no marcaban el campo:** cero elementos con `aria-invalid` en las
+  cuatro formas probadas (WCAG 3.3.1). Ahora se marca el que falló, y sólo ése.
+- **Los filtros se dibujaban sobre listas vacías.** No se dibujan con la colección vacía; el vacío
+  de filtro conserva la barra, porque sin ella no habría cómo deshacerlo.
+- **Concordancia** en «Con 1 advertencia, que no impiden la entrega», y se nombra de dónde sale el
+  índice que empieza en cero: «posición 0 **en el texto**».
+
+### Verificación
+
+Construcción sin advertencias (`QG-01`). `verify-visual-system.sh` **conforme en los cinco
+controles**. **522 pruebas pasan, 0 fallan.** Tres pruebas de integración afirmaban la copia y la
+redirección anteriores y se actualizaron con el cambio.
+
+Las mediciones de antes y después se tomaron **contra el producto levantado desde el fuente** —base
+propia y vacía, datos creados en la corrida—, no contra el despliegue público, que sigue sirviendo
+la versión anterior.
+
+### Lo que queda abierto
+
+- **La acción primaria del envío sigue fuera de la primera pantalla** (ordenada 1061 a 1440 × 900),
+  porque el campo que la precede creció. Cerrarlo pide una decisión —mover «Enviar el trabajo» a la
+  columna de la previsualización, o achicar el campo otra vez—, no un ajuste fino de espaciados.
+- **En «Entrega de la comisión», un alumno filtrado sin entregas muestra el vacío de colección** y
+  no el de filtro. Encontrado mientras se reparaba lo anterior; fuera del alcance aprobado y sin
+  tocar.

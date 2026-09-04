@@ -254,25 +254,33 @@ else
             </dialog>
         }
 
-        @* ---- Barra de filtros ---------------------------------------------------------- *@
-        <form class="gf-filters" method="get">
-            <div class="gf-field gf-field-search">
-                <label for="accounts-search">Buscar por correo o nombre</label>
-                <Icon Name="Search" />
-                <input class="gf-input" id="accounts-search" name="buscar" type="search"
-                       placeholder="nombre, apellido o correo" value="@SearchTerm" />
-            </div>
-            <div class="gf-field">
-                <label for="accounts-standing">Situación de la cuenta</label>
-                <select class="gf-select" id="accounts-standing" name="situacion">
-                    @foreach (var option in StandingOptions)
-                    {
-                        <option value="@option" selected="@(string.Equals(option, Standing, StringComparison.Ordinal))">@option</option>
-                    }
-                </select>
-            </div>
-            <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
-        </form>
+        @* H-13 · LOS FILTROS NO SE DIBUJAN SOBRE UNA COLECCIÓN VACÍA. Un buscador, un
+           selector de estado y un botón «Filtrar» sobre una lista que no tiene ni un
+           elemento son tres controles que no pueden hacer nada, compitiendo con la única
+           acción que sí sirve. El vacío de FILTRO es otra cosa y ahí la barra se queda:
+           sin ella no habría cómo deshacer el filtro que dejó la lista en nada. *@
+        @if (_accounts.Count > 0)
+        {
+            @* ---- Barra de filtros ---------------------------------------------------------- *@
+            <form class="gf-filters" method="get" data-gf-pending="Filtrando">
+                <div class="gf-field gf-field-search">
+                    <label for="accounts-search">Buscar por correo o nombre</label>
+                    <Icon Name="Search" />
+                    <input class="gf-input" id="accounts-search" name="buscar" type="search"
+                           placeholder="nombre, apellido o correo" value="@SearchTerm" />
+                </div>
+                <div class="gf-field">
+                    <label for="accounts-standing">Situación de la cuenta</label>
+                    <select class="gf-select" id="accounts-standing" name="situacion">
+                        @foreach (var option in StandingOptions)
+                        {
+                            <option value="@option" selected="@(string.Equals(option, Standing, StringComparison.Ordinal))">@option</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="gf-btn gf-btn--secondary">Filtrar</button>
+            </form>
+        }
 
         @if (_accounts.Count == 0)
         {
@@ -297,7 +305,7 @@ else
         else
         {
             <div class="gf-table-wrapper">
-                <table class="gf-table">
+                <table class="gf-table gf-table--accounts">
                     <caption class="gf-sr-only">Cuentas de la comisión, con su situación y la operación que esa situación admite</caption>
                     <thead>
                         <tr>
