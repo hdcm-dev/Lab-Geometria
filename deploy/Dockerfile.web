@@ -1,0 +1,118 @@
+# Imagen del front. MULTIETAPA, con sólo el entorno de ejecución en la imagen final y SIN LINAJE
+# con la imagen del contenedor de desarrollo, igual que `Dockerfile` —el del servicio de datos—.
+#
+# POR QUÉ EXISTE, Y QUÉ RETIRA. Hasta hoy el front se publicaba por transferencia al hosting
+# externo (`deploy-front-ftp.yml`), y esa vía arrastraba dos costos que no son del producto:
+#
+#   1. `550` AL SUBIR. IIS tiene los ensamblados abiertos mientras la aplicación corre; la
+#      publicación sólo entraba con el sitio dormido, y dejó de entrar en cuanto el sitio se
+#      empezó a mirar. `app_offline.htm` lo resuelve, pero al precio de un corte por publicación.
+#   2. LA DIRECCIÓN DEL SERVICIO DE DATOS SE ESCRIBÍA EN EL ARTEFACTO. El flujo de publicación
+#      reescribe `ApiBaseUrl` dentro de `publish/appsettings.json` y hay que reiniciar la
+#      aplicación para que surta efecto — que es el apartamiento que declara `ADR-14003`.
+#
+# ACÁ NO PASA NINGUNA DE LAS DOS. `Program.cs` lee `ApiBaseUrl` de `IConfiguration`, y una
+# variable de entorno la satisface sin tocar el artefacto: la misma imagen sirve para cualquier
+# destino, y cambiar de destino es cambiar el entorno, no reconstruir.
+#
+# LO QUE ESTA IMAGEN NO CAMBIA: `Program.cs` sigue leyendo la dirección UNA SOLA VEZ, al construir
+# el `HttpClient`. Cambiar `ApiBaseUrl` exige reiniciar el contenedor, y eso vale acá igual que en
+# el hosting. La diferencia es que un reinicio de contenedor son dos segundos.
+
+# ---------------------------------------------------------------------------------------------
+# ETAPA 1 · el bundle del visor.
+#
+# HACE FALTA UNA ETAPA APARTE, Y NO ES OPCIONAL. El `.csproj` del front NO invoca a `npm`: el
+# bundle lo produce webpack en `visor/` y `scripts/build-visor.sh` lo copia a `wwwroot/js/`, que
+# está en el `.gitignore`. Un clon limpio construye un front SIN VISOR y sin que nada falle —la
+# página carga, el visor no aparece—. Por eso la construcción de la imagen tiene que generarlo.
+#
+# SE INVOCA EL GUION DEL REPOSITORIO en lugar de repetir sus órdenes acá. Es el mismo criterio que
+# `deploy-front-ftp.yml` dejó escrito cuando retiró su paso suelto: dos lugares desde donde se
+# genera el mismo artefacto es un lugar de más.
+#
+# LA VERSIÓN DE NODE ES LA QUE EL REPOSITORIO YA DECLARA — `node-version: '22'` en los tres flujos
+# de la canalización—. Si allá cambia, cambia acá.
+# ---------------------------------------------------------------------------------------------
+FROM node:22 AS visor
+
+WORKDIR /source
+
+# Sólo lo que el empaquetado necesita, para no invalidar la caché con cambios del back.
+COPY visor/package.json visor/package-lock.json ./visor/
+RUN cd visor && npm ci
+
+COPY visor/ ./visor/
+COPY scripts/build-visor.sh ./scripts/
+
+RUN bash scripts/build-visor.sh
+
+# ---------------------------------------------------------------------------------------------
+# ETAPA 2 · compilación del front.
+# ---------------------------------------------------------------------------------------------
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /source
+
+# LA IMAGEN SE SELLA A SÍ MISMA, y sólo cae en el argumento si no puede. Es la misma mecánica
+# —y el mismo motivo— que el `Dockerfile` del servicio de datos: una imagen que informa una
+# revisión que no es la suya falla SIN SÍNTOMA. La forma `.gi[t]` es un patrón, y un patrón que no
+# encuentra nada no rompe la construcción: desde un tarball sin `.git` manda el argumento.
+ARG SOURCE_REVISION_ID=desconocida
+
+COPY Directory.Build.props ./
+COPY GeometriaFactory.sln ./
+COPY src/ ./src/
+
+RUN dotnet restore src/GeometriaFactory.Web/GeometriaFactory.Web.csproj
+
+# EL BUNDLE ENTRA ANTES DE `publish`, o no queda en la salida: `wwwroot` se copia al publicar.
+COPY --from=visor /source/src/GeometriaFactory.Web/wwwroot/js/ ./src/GeometriaFactory.Web/wwwroot/js/
+
+# Va DESPUÉS del restore para no invalidarle la caché en cada commit.
+COPY .gi[t] ./.git/
+
+RUN set -eu; \
+    revision="$SOURCE_REVISION_ID"; \
+    if [ -f .git/HEAD ]; then revision="$(git -c safe.directory='*' rev-parse HEAD)"; fi; \
+    echo "Sellando la imagen con la revisión $revision"; \
+    dotnet publish src/GeometriaFactory.Web/GeometriaFactory.Web.csproj \
+      -c Release -o /publish --no-restore \
+      -p:SourceRevisionId="$revision"
+
+# ---------------------------------------------------------------------------------------------
+# ETAPA 3 · ejecución.
+# ---------------------------------------------------------------------------------------------
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+
+# EL FRONT NO TIENE ALMACÉN. No monta volumen y no guarda nada: todo su estado vive en el
+# servicio de datos, al que llega por `ApiBaseUrl`.
+ENV ASPNETCORE_URLS=http://+:8080
+
+# UNA SOLA HERRAMIENTA, Y CON SU MOTIVO — mismo criterio que la otra imagen: la lista no crece sin
+# que alguien escriba acá por qué.
+#
+#   `curl` — el `healthcheck` de la composición lo necesita y la imagen no lo trae.
+#
+# El servicio de datos suma `sqlite3` porque tiene almacén; acá no hay nada que respaldar.
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /publish ./
+EXPOSE 8080
+
+# LA IMAGEN SÍ LLEVA UN VALOR DE `ApiBaseUrl`, Y HAY QUE SABERLO. Es el de `appsettings.json`
+# —`http://localhost:5080/`, la dirección del contenedor de desarrollo—, y viaja adentro del
+# artefacto publicado. COMPROBADO sobre esta imagen el 2026-09-06.
+#
+# CONSECUENCIA, y es la que importa: `Program.cs` lanza cuando el valor FALTA, pero acá no falta,
+# así que un contenedor sin configurar ARRANCA SANO y apunta a un servicio que en su red no
+# existe. La página carga, responde 200, y falla al hablar con la API — la falla silenciosa que
+# `ADR-14003` §4 describe.
+#
+# LA GUARDA NO PUEDE VIVIR EN ESTA IMAGEN, porque el valor de desarrollo es legítimo cuando se
+# corre con `dotnet run`. Vive donde se describe el despliegue: la composición del proyecto de
+# contenedor exige la variable con `${API_BASE_URL:?...}` y se niega a levantar sin ella.
+
+ENTRYPOINT ["dotnet", "GeometriaFactory.Web.dll"]
