@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.0
+**Versión:** 2.2
 **Estado:** Aprobado
-**Fecha:** 2026-08-16
+**Fecha:** 2026-09-12
 **Autor:** Scrum Master + API Product Owner (AG-06)
 
 ---
@@ -28,11 +28,12 @@ están en [`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/0
 | Documento | Propósito |
 | --- | --- |
 | [`Product-Backlog.md`](Product-Backlog.md) | Índice maestro priorizado: seis épicas, treinta historias, métricas y refinamiento |
-| [`Backlog-Tecnico.md`](Backlog-Tecnico.md) | Cinco épicas técnicas, veintiséis tareas técnicas inline y la matriz BT ↔ US ↔ CU con la columna de puntos de acceso |
+| [`Backlog-Tecnico.md`](Backlog-Tecnico.md) | Seis épicas técnicas; treinta y cinco tareas técnicas en archivo individual (bloque `GeometriaFactory-Api`) y sesenta y tres inline (`GeometriaFactory-Domain`, `-Application` e `-Infrastructure`); la matriz BT ↔ US ↔ CU con la columna de puntos de acceso |
 | [`Definition-Of-Ready.md`](Definition-Of-Ready.md) | Ocho criterios de entrada para las historias y seis para las tareas técnicas |
 | [`historias-usuario/`](historias-usuario/) | Las **treinta** historias, una por archivo |
+| [`tareas-tecnicas/`](tareas-tecnicas/) | Las **treinta y cinco** tareas técnicas del bloque `00xxx` (`GeometriaFactory-Api`), una por archivo, desde esta apertura |
 
-**No hay `tareas-tecnicas/`**, y es decisión declarada: las **veintiséis** tareas están por debajo del umbral de treinta. **Sí hay `historias-usuario/`**, porque las treinta superan el umbral de veinte.
+**Ahora hay `tareas-tecnicas/` para el bloque `GeometriaFactory-Api`.** La lectura que ya regía de hecho en esta unidad —el umbral de treinta `BT` de `Rules-Backlog-Tecnico.md` §3.3 se mide **por proyecto de código dentro del documento consolidado**, no por unidad de entrega— es la que `Backlog-Tecnico.md` §1.2 a §1.4 ya aplicaban sin ambigüedad y la que confirma de forma independiente `Audit/D-06-07-Backlog-Siete-Proyectos-r1.md` l.306. Con esa lectura, la apertura de la fase `k` sumó nueve `BT` al bloque `00xxx` (26 → **35**) y cruzó el umbral: **3.0** de `Backlog-Tecnico.md` lo dejó `No verificado con esta corrida`, y **3.1** lo resuelve y mueve las 35 a archivo individual. **Los otros tres bloques —`GeometriaFactory-Domain` (16), `-Application` (21) e `-Infrastructure` (26)— siguen inline**, porque están por debajo del umbral y esta apertura no los tocó. **`historias-usuario/`** sigue existiendo porque las treinta historias superan el umbral de veinte. **La sexta épica técnica (EP-T06, exposición pública y versionado) no suma historia de usuario**: sus nueve tareas se justifican como infraestructura compartida (`Backlog-Tecnico.md` §3.1), por lo que `Product-Backlog.md` no se reabre con esta apertura — ver su control de cambios.
 
 ## 2. Orden de lectura
 
@@ -76,3 +77,5 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 | 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos y la carpeta de historias, declara la ausencia de `tareas-tecnicas/` con su motivo, fija el orden de lectura, resume las seis épicas con su etapa del producto y las dos que no producen épica, y nombra las tareas técnicas prioritarias con el fundamento de cada una, incluidas las dos inspecciones que detectan defectos de omisión. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**, con sus documentos consolidados en 2.0. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |
+| 2.1 | 2026-09-12 | **Apertura de la fase `k`** (`Backlog-Tecnico.md` **3.0**): suma la sexta épica técnica EP-T06 y nueve `BT` (BT-00027 a BT-00035) al proyecto `GeometriaFactory-Api`, que pasa de veintiséis a **treinta y cinco** tareas. §1 actualiza el recuento y declara sin verificar la lectura del umbral de treinta de `Rules-Backlog-Tecnico.md` §3.3 sobre un documento consolidado. `Product-Backlog.md` **no se reabre**: las nueve tareas nuevas son infraestructura compartida sin historia de usuario consumidora. §3 (épicas funcionales) no cambia: EP-T06 es una épica técnica y no tiene contraparte en `Product-Backlog.md`. Sube **minor**: agrega recuento y una constancia, no reestructura ninguna sección. |
+| 2.2 | 2026-09-12 | **Autocorrección de la misma corrida** (`Master-Prompt.md` §8.1; `ORIGEN DEL HECHO: de la corrida`; base `9167e68`), sobre lo que **2.1** dejó sin verificar. Resuelve la lectura del umbral por proyecto de código (`Backlog-Tecnico.md` §1.2-§1.4; `Audit/D-06-07-Backlog-Siete-Proyectos-r1.md` l.306) y declara que la apertura de la fase `k` la cruzó para el bloque `00xxx`: §1 suma la fila de [`tareas-tecnicas/`](tareas-tecnicas/) con las **35** `BT` de `GeometriaFactory-Api`, una por archivo, y precisa que los otros tres bloques (16+21+26 = 63 `BT`) siguen inline por seguir bajo el umbral. Ningún otro § cambia. Sube **minor**. Evidencia en [`../../../Audit/Apertura-Fase-k-2026-09-12.md`](../../../Audit/Apertura-Fase-k-2026-09-12.md). |
