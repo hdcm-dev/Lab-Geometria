@@ -3,8 +3,8 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00027-Reescribir-Adr-00008-Adoptando-V-Major-Para-La-Superficie-Publica.md
-**Versión:** 1.0
-**Estado:** Borrador
+**Versión:** 1.1
+**Estado:** Ready
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T06 · Exposición pública y versionado del contrato
@@ -52,3 +52,4 @@ Ninguna.
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-09-12 | **Extracción a archivo individual** de la fila BT-00027 de [`../Backlog-Tecnico.md`](../Backlog-Tecnico.md) v3.0 §3.1, por cruce del umbral de treinta `BT` que fija `Rules-Backlog-Tecnico.md` §3.3 para el bloque `00xxx` (`GeometriaFactory-Api`, 35 tareas con la apertura de la fase `k`). **Contenido transpuesto sin reescritura** desde la fila del catálogo (§3.1), la épica EP-T06 de §2.1 y la fila correspondiente de la matriz de trazabilidad (§4.1). Autocorrección de la misma corrida (`Master-Prompt.md` §8.1), `ORIGEN DEL HECHO: de la corrida`, base `9167e68`. Evidencia en [`../../../../Audit/Apertura-Fase-k-2026-09-12.md`](../../../../Audit/Apertura-Fase-k-2026-09-12.md). |
+| 1.1 | 2026-09-12 | **Evaluación de DoR** (`Definition-Of-Ready.md` §2.1). Cumple los seis criterios sin corrección: el criterio 1 se sostiene en `ADR-00008` vigente, citada en §2 y en §7 («Fuente de arquitectura»), que **es** una de las fuentes admitidas por el criterio (una ADR); el criterio 2 se sostiene en la misma ADR, que es lo que esta tarea reescribe; los criterios 3, 5 y 6 se verifican por inspección directa de la ficha. Pasa a **Ready**. Evidencia en [`../../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../../Audit/DoR-Tramo-k-2026-09-12.md). |
