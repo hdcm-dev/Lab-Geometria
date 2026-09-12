@@ -42,8 +42,8 @@ dotnet run --project samples/domain/02-intermedio              # ejecuta el reco
 dotnet run --project samples/domain/02-intermedio -- --verificar   # y lo compara contra §6
 ```
 
-**No entra en `GeometriaFactory.sln` a propósito**, como los otros dos: su ensamblado contaría en la
-cobertura de `QG-00003` y movería un número que mide otra cosa.
+**Entra en `GeometriaFactory.sln` desde el 2026-09-12**, como los otros dos (`Rules-Examples.md` §3.4);
+`QG-00003` se midió antes y después y no cambia.
 
 **Y coincidió con su snapshot a la primera**, que es lo que se estaba verificando: §6 se escribió
 **antes** que este código y el código lo reprodujo sin que hubiera que tocar el contrato. La fila de

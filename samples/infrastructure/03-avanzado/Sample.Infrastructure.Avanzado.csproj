@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--
     Sample `infrastructure/03-avanzado`. Gobernado por `ejemplo-03-avanzado-infraestructura.md`.
-    NO entra en `GeometriaFactory.sln`.
+    Entra en `GeometriaFactory.sln` desde el 2026-09-12 (`Rules-Examples.md` §3.4).
 
     LA FUENTE DEL SAMPLE SE COPIA A LA SALIDA, y no es una rareza: la inspección
     `SinSecretosEnLaFuente` cuenta ocurrencias SOBRE EL ÁRBOL DE FUENTES, con umbral cero,

@@ -1074,3 +1074,43 @@ la versión anterior.
 - **En «Entrega de la comisión», un alumno filtrado sin entregas muestra el vacío de colección** y
   no el de filtro. Encontrado mientras se reparaba lo anterior; fuera del alcance aprobado y sin
   tocar.
+
+## El bundle lo genera el `.csproj`, y todo entra al árbol de solución — 2026-09-12
+
+**Rama:** `estructura-solucion-visor-y-samples`. Cierre de la Feature 20 del framework
+(`IA.SDD.Documentacion/PROMPTs/Features/20-Agregar-BundleJS-Estructura-Solucion/`), tras dos ciclos de
+mesa evaluadora. Evidencia en `evidencia/2026-09-12-estructura-solucion/`.
+
+### Cambiado
+
+- `GeometriaFactory.Web.csproj` **genera el bundle del visor** con el target `BuildVisor` —sólo cuando
+  cambió una fuente del visor, apagable con `-p:SkipVisorBuild=true`—, lo **declara como recurso
+  estático dentro del target** (sin eso no entra al manifiesto en la primera construcción, medido) y
+  **lo sella por contenido** (`SealVisorAsset`: `?v=<sha256>` en `WorkSubmission` y `WorkView`).
+  Un clon limpio ya no construye un front sin visor sin que nada falle. `Web ADR-10008`.
+- **Un solo generador.** `build.sh`, `e2e.yml`, `pruebas-e2e.sh` y `deploy-front-ftp.yml` dejan de
+  invocar `build-visor.sh`; `BancoLocal.cs` cambia su aviso. `Dockerfile.web` publica con la bandera
+  y conserva su etapa `node:22`.
+- **`GeometriaFactory.sln` pasa de 9 a 20 proyectos**, por decisión del Product Owner del 2026-09-11
+  («todos bajo el árbol de solución, aunque sea bajo carpetas virtuales»): `visor/geometriafactory-visor.csproj`
+  como nodo sin construcción (`Microsoft.Build.NoTargets`, lista fuentes por patrón, no ejecuta nada),
+  los nueve `Sample.*.csproj` **construidos con la solución** (`Rules-Examples.md` §3.4; `QG-03` medido
+  antes y después: igual) y `tests/GeometriaFactory.E2ETests` visible sin `.Build.0` (se corre por su
+  ruta, como siempre). Los doce textos que decían «NO ENTRA EN `GeometriaFactory.sln`» se reescriben.
+- `PRODUCT-INTAKE` **4.1** (§13.2, §13.3, §16) y `PRODUCT-MANIFEST` **6.0** re-derivado: el visor está
+  en el agrupador; la ruta `visor/`, la identidad npm y la clase «activo de construcción» no cambian.
+  `Vista-Producto` 1.10, `Plan-Etapa-A` 1.12, `Web/09 Pipeline-CI-CD` 3.8, `ADR-12006` 1.1,
+  `Web/05` README y `Decisiones-Arquitectura` 2.1.
+- `samples/visor/02-intermedio` suma el acto `[15]`: **selección desde la escena por `onPieceSelected`**
+  (`ADR-08007`), la única vía del visor hacia el anfitrión, que ningún sample ejercía. Documento
+  `ejemplo-02-intermedio.md` 2.1 con `evidencia` completada.
+- `samples/README.md` 2.0: estado real por carpeta con fecha de la última corrida (dieciséis corren,
+  tres en esqueleto) y diecinueve enlaces que apuntaban a `SDD/Docs/Proyectos/…`, ruta inexistente,
+  pasan a `Unidades-Entrega/`.
+
+### Verificado
+
+`dotnet publish` limpio en una invocación con bundle y manifiesto; segunda construcción sin `npm ci`;
+sin Node y sin bandera falla, con bandera 0/0; `build.sh` 0/0; `test.sh` 522/522; `coverage.sh`
+`QG-03` idéntico; los doce samples sin servicio y los tres del visor conformes; el bundle sellado
+servido antes del guardián de aprovisionamiento. Detalle en `evidencia/2026-09-12-estructura-solucion/verificacion.md`.

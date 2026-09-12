@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Vista-Producto.md
-**Versión:** 1.9
+**Versión:** 1.10
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -110,7 +110,7 @@ referencias de proyecto (7), las que un `.csproj` materializa
     GeometriaFactory-Contracts      -> GeometriaFactory-Api
     GeometriaFactory-Contracts      -> GeometriaFactory-Web
 
-activo de construcción (1), que ningún `.csproj` puede expresar
+activo de construcción (1), que un `.csproj` expresa con un target y no con una referencia
     GeometriaFactory-Visor          -> GeometriaFactory-Web
 ```
 
@@ -154,7 +154,8 @@ nadie fue a buscar.
 
 **Lo que faltaba no era una decisión: era una distinción.** `Visor → Web` es una dependencia de
 compilación real —sin el bundle el front no funciona— que **ninguna referencia de proyecto puede
-expresar**, porque un proyecto Node y uno .NET no se referencian: la materializa `scripts/build-visor.sh`
+expresar**, porque un proyecto Node y uno .NET no se referencian: la materializa el target `BuildVisor` de
+`GeometriaFactory.Web.csproj` ([`Web ADR-10008`](../Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md), desde el 2026-09-12; hasta entonces, `scripts/build-visor.sh` invocado a mano)
 copiando la salida de webpack a `wwwroot/js/`. Sin rotular la clase, ocho y siete son los dos números
 defendibles al mismo tiempo, y eso es precisamente lo que pasó durante tres semanas.
 
@@ -258,6 +259,7 @@ Cada contrato inter-proyecto contra la dependencia del manifiesto que materializ
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.10 | 2026-09-12 | **§3.1 deja de decir que ningún `.csproj` puede expresar la arista `Visor → Web`**: desde el 2026-09-12 la expresa el target `BuildVisor` de `GeometriaFactory.Web.csproj` (`Web ADR-10008`), y la clase «activo de construcción» **se conserva** —sigue sin ser una referencia de proyecto—. Además el visor entra a `GeometriaFactory.sln` como nodo sin construcción por decisión del Product Owner (intake 4.0, manifiesto 6.0); el §2 no cambia porque la excepción de nombre y de ruta sigue vigente. Sube minor: cambia una justificación, no el grafo, los recuentos ni las decisiones. |
 | 1.4 | 2026-08-11 | **Absorbe la emisión de [`B-02-03-GeometriaFactory-Api-r2.md`](../Audit/B-02-03-GeometriaFactory-Api-r2.md) 1.0 y cierra con ella el hallazgo `N-02` (P2) de ese informe.** **§1.1**, párrafo del hueco de auditoría: el recuento de hallazgos de la ronda 1 pasa de **quince** a **diecisiete** —el desglose «un P0, cinco P1, seis P2 y cinco P3» estaba escrito al lado y suma diecisiete— y se registra que la **ronda 2 levanta el rechazo con dictamen APROBADO**, citado y no redecidido. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: «quince hallazgos» y «falta la ronda 2» vivían en **tres** documentos de nivel producto —éste, [`../README.md`](../README.md) §8 y [`../Handoff-Checkout.md`](../Handoff-Checkout.md) §6.1 `B-1`—, y los tres se corrigen en la misma tanda. **Ninguna magnitud, ningún proyecto de código y ninguna decisión de arquitectura cambia.** |
 | 1.3 | 2026-08-11 | **Cierra el hallazgo `NB2-01` (P1)** del informe [`B2-Maqueta-GeometriaFactory-Web-r2.md`](../Audit/B2-Maqueta-GeometriaFactory-Web-r2.md) 1.0. **§1.1**, fila **B2**: la fila remitía a `B2-Maqueta-GeometriaFactory-Web-r1.md` «cuyo rechazo levanta `F26-Propagacion-r2.md`», y eso es falso: abierto ese informe, su §7 dice «**APROBADO. Se levanta el rechazo de `F26-Propagacion-r1.md`**» y su alcance son tres commits de propagación de F-26, no la Fase B2. **Un informe no puede levantar el rechazo de una fase que no audita, y no dice haberlo hecho.** La fila pasa a citar **`B2-Maqueta-GeometriaFactory-Web-r2.md`**, emitido el 2026-08-11, que sí audita la fase y sí dice levantar el rechazo de la ronda 1, y el dictamen pasa a «Rechazado en ronda 1; **aprobado en ronda 2**». **§1.1**, párrafo del hueco de auditoría: se registra la emisión del informe faltante de Fase B de `GeometriaFactory-Api` —hallazgo que ningún informe levanta y que la búsqueda de propagación de esta tanda dejó al descubierto: el párrafo afirmaba que ese informe **no existe**, y desde el 2026-08-11 existe—, con su dictamen **RECHAZADO** citado y no redecidido. **Búsqueda de propagación hecha con `grep` sobre todo el corpus vivo**: la atribución falsa a `F26-Propagacion-r2.md` no aparece en ningún otro documento; la salvedad `B-2` de [`../Handoff-Checkout.md`](../Handoff-Checkout.md), que decía lo contrario **y con razón al escribirse**, se actualiza en la misma tanda. **Ninguna magnitud, ningún proyecto de código y ninguna decisión de arquitectura cambia.** |
 | 1.2 | 2026-08-11 | **Consolidación de la Fase H.** Se revisa el documento entero contra `PRODUCT-MANIFEST` **1.3** y `PRODUCT-INTAKE` **1.26**, que son las versiones vivas; la 1.1 citaba el manifiesto 1.2 y el intake 1.18. **(a)** Nueva §1.1 con el estado real de cierre: las ocho fases con el informe de auditoría que cierra cada una y su dictamen, la constancia de que cada proyecto de código tiene **ocho** categorías emitidas y no siete —`04` omitida por gating con `usa_llm` false en los siete—, y las catorce magnitudes del producto **contadas sobre el instrumento** el día de esta emisión. **(b)** Se declara un **hueco de auditoría**: hay seis informes `B-02-03-` para siete proyectos de código, y el que falta es el de `GeometriaFactory-Api`. Queda registrado y **sin cerrar**: no es una decisión de arquitectura. **(c)** Nueva §3.1 con la discrepancia del grafo desplegada contra las tres secciones del manifiesto que la producen —§2 declara ocho aristas, §3 dibuja siete, §4 valida siete— y con lo que depende y lo que no depende de la respuesta. **Sigue abierta y elevada al Product Owner; esta versión no la cierra.** §3 y §8 dejan de afirmar un número único y remiten a §3.1. Sube minor: no reabre ninguna ADR, no altera el mapa, los contratos ni los riesgos, y agrega estado verificable. **Autor:** Arquitecto de Software Senior (AG-05) |

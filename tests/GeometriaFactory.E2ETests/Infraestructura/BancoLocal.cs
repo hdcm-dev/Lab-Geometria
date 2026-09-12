@@ -291,9 +291,10 @@ public static class BancoLocal
 
         Console.Error.WriteLine(
             "[E2E] NO ESTA EL BUNDLE DEL VISOR (`wwwroot/js/geometriafactory-visor.js`). No se " +
-            "versiona: lo genera `scripts/build-visor.sh`, y `scripts/pruebas-e2e.sh` lo corre " +
-            "antes de probar. Sin él la escena 3D no carga y los casos que la miran van a fallar " +
-            "por una razón que NO es del producto.");
+            "versiona: lo genera `GeometriaFactory.Web.csproj` (target `BuildVisor`) al publicar " +
+            "el front, salvo que se haya pasado `SkipVisorBuild=true` o falte Node. Sin él la " +
+            "escena 3D no carga y los casos que la miran van a fallar por una razón que NO es " +
+            "del producto.");
     }
 
     private static void Matar(ref Process? proceso)

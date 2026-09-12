@@ -5,9 +5,8 @@
     Gobernado por `ejemplo-02-intermedio-dominio.md`: su §5 declara este árbol y su
     §6 la salida exacta, las dos escritas ANTES que este código.
 
-    NO ENTRA EN `GeometriaFactory.sln`, por el mismo motivo que el `01-basico`: su
-    ensamblado contaría en la cobertura de `QG-00003` y movería un número que mide
-    otra cosa.
+    ENTRA EN `GeometriaFactory.sln` desde el 2026-09-12, como el `01-basico`, y por el
+    mismo motivo (`Rules-Examples.md` §3.4); `QG-03` no cambia.
   -->
 
   <PropertyGroup>

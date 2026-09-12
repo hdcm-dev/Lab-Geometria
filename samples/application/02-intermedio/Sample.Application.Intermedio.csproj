@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--
     Sample `application/02-intermedio`. Gobernado por `ejemplo-02-intermedio-aplicacion.md`:
-    su §5 declara este árbol y su §6 la salida exacta. NO entra en la solución.
+    su §5 declara este árbol y su §6 la salida exacta. Entra en `GeometriaFactory.sln` desde el 2026-09-12 (`Rules-Examples.md` §3.4).
   -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>

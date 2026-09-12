@@ -177,6 +177,33 @@ const recuperada = await hoja.evaluate(() => window.anfitrion.tamanoDeLaSuperfic
 decir(`[14] Redimensionar con la superficie devuelta a un tamano valido: ajuste aplicado=`
   + `${recuperada.ancho === despues.ancho ? 'si' : 'no'}`);
 
+// ---- [15] selección desde la escena ----
+// LA DIRECCIÓN INVERSA DE [9]: la persona elige EN LA ESCENA y el anfitrión se entera por
+// `onPieceSelected` (`ADR-08007`), con la misma clave —el índice— con la que marca el árbol.
+// El punto exacto donde hay una pieza depende de la disposición, que es determinista pero
+// no se calcula acá: se recorre una grilla sobre la superficie y se suelta el puntero sin
+// arrastrar hasta que el visor avisa. Soltar donde no hay pieza no avisa, y eso también
+// es parte de lo que se verifica.
+await hoja.evaluate(() => { document.getElementById('escena').style.width = '480px'; });
+await hoja.evaluate(() => window.anfitrion.redimensionar());
+await hoja.evaluate(() => window.anfitrion.cargar('E7'));
+await hoja.evaluate(() => { window.anfitrion.seleccionadaDesdeLaEscena = null; });
+const marco = await escena.boundingBox();
+let avisada = null;
+let intentos = 0;
+for (let fy = 0.2; fy <= 0.8 && avisada === null; fy += 0.15) {
+  for (let fx = 0.1; fx <= 0.9 && avisada === null; fx += 0.1) {
+    intentos += 1;
+    await hoja.mouse.move(marco.x + marco.width * fx, marco.y + marco.height * fy);
+    await hoja.mouse.down();
+    await hoja.mouse.up();
+    avisada = await hoja.evaluate(() => window.anfitrion.seleccionadaDesdeLaEscena);
+  }
+}
+const marcadaDesdeLaEscena = await hoja.locator('#arbol li.resaltada').getAttribute('data-posicion');
+decir(`[15] Seleccion desde la escena: el anfitrion recibio la posicion=${avisada !== null ? 'si' : 'no'}`
+  + ` | el arbol marca la misma posicion=${marcadaDesdeLaEscena === String(avisada) ? 'si' : 'no'}`);
+
 // ---- cola ----
 // «PIEZAS NO DIBUJADAS SIN REGISTRO» ES EL UMBRAL CERO DE ESTE SAMPLE: cada pieza
 // entregada tiene que estar dibujada o enumerada, y ninguna puede faltar en los dos.

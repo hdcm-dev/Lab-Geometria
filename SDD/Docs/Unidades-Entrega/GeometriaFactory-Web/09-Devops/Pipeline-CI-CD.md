@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Pipeline-CI-CD.md
-**Versión:** 3.7
+**Versión:** 3.8
 **Estado:** Propuesto
-**Fecha:** 2026-09-02
+**Fecha:** 2026-09-12
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -101,7 +101,7 @@ No lo decide esta categoría: [`../08-Calidad-Y-Pruebas/Estrategia-Calidad.md`](
 
 ### 2.2 `GeometriaFactory-Visor`
 
-Los stages son los que declaran el intake §17.2.P.8 · GeometriaFactory-Visor y `05` §5: **instalación reproducible de dependencias → empaquetado → copia al directorio de recursos estáticos del anfitrión**. Los guiones son los que el intake §16 y §17.2.P.8 · GeometriaFactory-Visor declaran: `scripts/build-visor.sh` hace **sólo** el bundle, para el ciclo corto de trabajo sobre el visor, y `scripts/build.sh` lo encadena con la compilación del resto del producto.
+Los stages son los que declaran el intake §17.2.P.8 · GeometriaFactory-Visor y `05` §5: **instalación reproducible de dependencias → empaquetado → copia al directorio de recursos estáticos del anfitrión**. Los guiones son los que el intake §16 y §17.2.P.8 · GeometriaFactory-Visor declaran: `scripts/build-visor.sh` hace **sólo** el bundle, para el ciclo corto de trabajo sobre el visor, y desde el 2026-09-12 **lo ejecuta el target `BuildVisor` de `GeometriaFactory.Web.csproj`** cuando cambió una fuente del visor ([`Web ADR-10008`](../05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md)): `scripts/build.sh` ya no lo invoca, lo hace `dotnet build`. Donde no hay Node se pasa `-p:SkipVisorBuild=true` y el bundle llega hecho (la etapa 1 de `deploy/Dockerfile.web`).
 
 **Todo corre dentro del contenedor de desarrollo**, incluido el gestor de paquetes del ecosistema del navegador (intake §17.2.P.1 · GeometriaFactory-Visor y §10).
 
@@ -110,7 +110,7 @@ Los stages son los que declaran el intake §17.2.P.8 · GeometriaFactory-Visor y
 | Stage | Qué ejecuta | Gate que verifica | Umbral | Carácter |
 | --- | --- | --- | --- | --- |
 | `instalar` | Instalación **reproducible** de dependencias desde el archivo de bloqueo, dentro del contenedor de desarrollo | Ninguno propio: su falla detiene la construcción | — | Bloqueante por construcción |
-| `empaquetar` | `scripts/build-visor.sh`: el empaquetador produce el bundle | `QG-01`: el bundle **se genera sin errores** | 0 errores | **Bloqueante** |
+| `empaquetar` | `scripts/build-visor.sh`, ejecutado por el target `BuildVisor` del `.csproj` del front: el empaquetador produce el bundle | `QG-01`: el bundle **se genera sin errores** | 0 errores | **Bloqueante** |
 | `inspeccionar` | Recuentos sobre el **bundle generado** y sobre el fuente (`TC-12016`, `TC-12018`) | `QG-04`: **0** peticiones originadas por el archivo de guion y **0** ocurrencias de las tres formas de petición en el fuente **y en el bundle** | 0 y 0, **medido con los dos movimientos prendidos y sostenidos** | **Bloqueante, sin gradación** |
 | `inspeccionar` | Lectura del almacenamiento del navegador (`TC-12017`) | `QG-05`: **0** claves escritas y ningún estado conservado entre páginas | 0 | **Bloqueante, sin gradación** |
 | `inspeccionar` | Recuento de la superficie expuesta por el bundle (`TC-12018`) | `QG-06`: exactamente **6** funciones, **1** nombre propio en el objeto global y **0** identificadores globales sueltos | 6, 1 y 0 | **Bloqueante** |
@@ -452,6 +452,7 @@ Este proyecto de código no se despliega, pero **su artefacto viaja dentro del d
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 3.8 | 2026-09-12 | §2.2: el stage `empaquetar` lo dispara el target `BuildVisor` de `GeometriaFactory.Web.csproj` (`Web ADR-10008`), único generador del bundle; `build.sh`, `e2e.yml` y `pruebas-e2e.sh` dejan de invocar el guion. Los stages y las puertas no cambian. Sube minor. |
 | 3.7 | 2026-09-02 | **Entra §3.3: el flujo de extremo a extremo.** Declara `e2e.yml` sobre el runner propio `[self-hosted, i7infra-dev]`, sus **dos trabajos** —banco local en cada cambio, laboratorio desplegado a mano y tras publicar—, por qué uno corre siempre y el otro no, y que **no está registrado como puerta bloqueante de rama**: eso es decisión del Product Owner. **No cambia ningún stage, ningún gate ni el filtro de rutas de la publicación**: es un flujo aparte. Sube minor. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |
 | 3.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M4.** Las **ocho** filas de puntos abiertos de §10 pasan a la forma de `Root-Rules.md` **§12.2**: la columna «Cuándo» —que nombraba **momentos**— se reemplaza por **«En qué evento se cierra (artefacto y sección)»**, y entra la columna **«Estado»**. El cambio no es de redacción: un momento no deja rastro que alguien pueda abrir, y §12.2 exige un evento comprobable. **Y al nombrarlo, siete de las ocho resultaron VENCIDAS**: seis apuntaban a los puntos de control de las etapas `a`, `c` y `g` —cerradas el 2026-08-13, el 08-14 y el 08-17— y la séptima al momento de medición de `PT-02`/`PT-03`, medidas en la `g`. **Verificado y no supuesto**: la sección «Decidido en esta etapa» de la etapa `a` en `changelog.md` registra **cuatro** decisiones y **ninguna es un anclaje de herramienta**. La única cerrada, `PD-01` de §10.1, ya lo estaba con el intake **1.22**. **Ningún punto abierto se cierra acá y ninguno se inventa**: la migración los vuelve contables, y cerrarlos es del equipo y del Product Owner. Sube **major**: la estructura de la tabla de §10 cambia. | Orquestador de migración normativa SDD |

@@ -6,10 +6,13 @@
     su §5 declara este árbol de archivos y su §6 la salida exacta, las dos escritas
     ANTES que este código y no ajustadas después.
 
-    NO ENTRA EN `GeometriaFactory.sln` A PROPÓSITO. Si entrara, su ensamblado
-    contaría en la cobertura de `QG-03` y el sample —que existe para demostrar,
-    no para cubrir— movería un número que mide otra cosa. Se construye y se
-    corre por su ruta, que es lo que declara el comando previsto de §9.
+    ENTRA EN `GeometriaFactory.sln` DESDE EL 2026-09-12, y se construye con ella: es la
+    forma de cumplir `Rules-Examples.md` §3.4 («su CI debe garantizar que siempre compila
+    contra la versión actual del producto»), y la decisión del Product Owner de que todo
+    proyecto quede bajo el árbol de solución. El temor anterior —que su ensamblado moviera
+    `QG-03`— se midió antes y después de entrar: la cobertura no cambia, porque `coverlet`
+    instrumenta lo que carga el proceso de pruebas y ningún test referencia un sample.
+    Se sigue corriendo por su ruta, que es lo que declara el comando previsto de §9.
   -->
 
   <PropertyGroup>

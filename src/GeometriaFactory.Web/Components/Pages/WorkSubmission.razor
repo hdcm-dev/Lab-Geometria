@@ -89,7 +89,9 @@
 
    Lo carga la superficie que dibuja, y `defer` lo saca del camino del dibujo. Si no llega, esta
    pantalla sigue funcionando: se carga y se envía igual, que es lo que la nota de al lado dice. *@
-<script src="js/geometriafactory-visor.js" defer></script>
+@* El sello `?v=` es el SHA-256 del bundle, generado en la construcción (`SealVisorAsset`): un bundle nuevo
+   con el mismo nombre no puede quedar cacheado (`Web ADR-10008`). *@
+<script src="js/geometriafactory-visor.js?v=@VisorSeal.Value" defer></script>
 
 <a class="gf-btn gf-btn--pill gf-mt-5 gf-mb-4" href="/mis-trabajos"><Icon Name="Back" />Volver a mis trabajos</a>
 

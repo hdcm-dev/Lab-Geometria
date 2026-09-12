@@ -50,4 +50,72 @@
     <ProjectReference Include="../GeometriaFactory.Contracts/GeometriaFactory.Contracts.csproj" />
   </ItemGroup>
 
+  <!--
+    EL BUNDLE DEL VISOR LO GENERA ESTE PROYECTO, Y ES EL ÚNICO QUE LO GENERA (`Web ADR-10008`).
+    Hasta el 2026-09-12 la arista `Visor → Web` la materializaba `scripts/build-visor.sh` invocado
+    a mano desde cuatro lugares, y un clon limpio construía un front SIN VISOR sin que nada
+    fallara. Ahora el `.csproj` la expresa: `BuildVisor` corre el mismo guion —que sigue siendo
+    el ciclo corto de trabajo sobre el visor— antes de compilar, sólo cuando cambió una fuente
+    del visor (`Inputs`/`Outputs`), y se apaga con `-p:SkipVisorBuild=true` donde no hay Node
+    (la etapa de compilación de `deploy/Dockerfile.web`, que recibe el bundle de su etapa 1).
+
+    EL ARCHIVO GENERADO SE DECLARA COMO CONTENIDO DENTRO DE UN TARGET, y no es un detalle: un
+    archivo escrito en `wwwroot/` durante la construcción NO entra al manifiesto de recursos
+    estáticos en la primera construcción si se lo declara estáticamente, porque los ítems se
+    evalúan antes de que corra ningún target (medido: el endpoint faltaba en el build 1 y
+    aparecía en el 2). Declararlo en `DeclareVisorAsset` lo mete en la misma invocación.
+  -->
+  <PropertyGroup>
+    <VisorDir>$(MSBuildThisFileDirectory)../../visor/</VisorDir>
+    <VisorBundle>wwwroot/js/geometriafactory-visor.js</VisorBundle>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <VisorSource Include="$(VisorDir)src/**/*.ts;$(VisorDir)package-lock.json;$(VisorDir)webpack.config.js;$(VisorDir)tsconfig.json" />
+  </ItemGroup>
+
+  <Target Name="BuildVisor" BeforeTargets="BeforeBuild"
+          Inputs="@(VisorSource)" Outputs="$(VisorBundle)"
+          Condition="'$(SkipVisorBuild)' != 'true'">
+    <Exec Command="bash &quot;$(MSBuildThisFileDirectory)../../scripts/build-visor.sh&quot;" />
+  </Target>
+
+  <Target Name="DeclareVisorAsset" AfterTargets="BuildVisor" BeforeTargets="ResolveProjectStaticWebAssets"
+          Condition="Exists('$(MSBuildThisFileDirectory)$(VisorBundle)')">
+    <!-- `Exclude="@(Content)"`: si el archivo ya existía al evaluar, el glob por omisión de
+         `wwwroot/**` ya lo trajo y agregarlo dos veces es NETSDK1022. -->
+    <ItemGroup>
+      <Content Include="$(VisorBundle)" Exclude="@(Content)" />
+      <Content Include="$(VisorBundle).map" Exclude="@(Content)" Condition="Exists('$(MSBuildThisFileDirectory)$(VisorBundle).map')" />
+    </ItemGroup>
+  </Target>
+
+  <!--
+    EL SELLO DE CACHÉ SALE DEL CONTENIDO, NO DE UNA CONSTANTE ESCRITA A MANO. Con `BuildVisor` el
+    bundle cambia en cada construcción con el mismo nombre de archivo, y sin sello el navegador
+    sigue sirviendo el anterior. Las páginas lo referencian como `js/geometriafactory-visor.js?v=<sello>`.
+    No se usa la huella de recursos estáticos del propio marco (`MapStaticAssets`) porque sus rutas
+    se resuelven DESPUÉS de `UseRouting`, es decir, dentro del alcance del guardián de
+    aprovisionamiento, que desviaría el pedido del archivo (`Program.cs`, guardián 1): los
+    recursos se sirven por `UseStaticFiles`, antes, y por eso el sello va en la consulta.
+  -->
+  <Target Name="SealVisorAsset" AfterTargets="DeclareVisorAsset" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <VisorSealFile>$(IntermediateOutputPath)VisorSeal.g.cs</VisorSealFile>
+      <VisorSeal>sin-bundle</VisorSeal>
+    </PropertyGroup>
+    <GetFileHash Files="$(VisorBundle)" Algorithm="SHA256" HashEncoding="hex" Condition="Exists('$(MSBuildThisFileDirectory)$(VisorBundle)')">
+      <Output TaskParameter="Hash" PropertyName="VisorSealHash" />
+    </GetFileHash>
+    <PropertyGroup Condition="'$(VisorSealHash)' != ''">
+      <VisorSeal>$(VisorSealHash.Substring(0, 12).ToLowerInvariant())</VisorSeal>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(VisorSealFile)" Overwrite="true" WriteOnlyWhenDifferent="true"
+                      Lines="// Generado por el target SealVisorAsset. No se edita a mano.;namespace GeometriaFactory.Web%3B;/// &lt;summary&gt;Sello de caché del bundle del visor, derivado de su contenido.&lt;/summary&gt;;public static class VisorSeal;{;    /// &lt;summary&gt;Los primeros doce caracteres del SHA-256 del bundle, o «sin-bundle».&lt;/summary&gt;;    public const string Value = &quot;$(VisorSeal)&quot;%3B;}" />
+    <ItemGroup>
+      <Compile Include="$(VisorSealFile)" />
+      <FileWrites Include="$(VisorSealFile)" />
+    </ItemGroup>
+  </Target>
+
 </Project>

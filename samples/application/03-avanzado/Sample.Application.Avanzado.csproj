@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- Sample `application/03-avanzado`. Gobernado por `ejemplo-03-avanzado-aplicacion.md`. NO entra en la solución. -->
+  <!-- Sample `application/03-avanzado`. Gobernado por `ejemplo-03-avanzado-aplicacion.md`. Entra en `GeometriaFactory.sln` desde el 2026-09-12 (`Rules-Examples.md` §3.4). -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RootNamespace>GeometriaFactory.Samples.Application.Avanzado</RootNamespace>

@@ -56,10 +56,9 @@ jobs:
         with:
           node-version: '22'
 
-      # `build.sh` EMPAQUETA EL VISOR ADENTRO, y por eso el paso suelto que estaba acá se
-      # retiró: su línea 21 invoca `build-visor.sh` antes de compilar la solución. Dejarlos a
-      # los dos habría corrido `npm ci` y webpack dos veces por publicación, y habría dejado
-      # dos lugares desde donde se genera el mismo artefacto.
+      # EL VISOR LO EMPAQUETA `GeometriaFactory.Web.csproj` (target `BuildVisor`) al construir
+      # la solución, y por eso no hay un paso suelto acá ni en `build.sh`: un solo lugar desde
+      # donde se genera el mismo artefacto (`Web ADR-10008`).
       - name: Puerta QG-01 · construir sin advertencias, con el bundle del visor
         run: ./scripts/build.sh
 

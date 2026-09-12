@@ -46,8 +46,10 @@ dotnet run --project samples/domain/01-basico              # ejecuta el recorrid
 dotnet run --project samples/domain/01-basico -- --verificar   # y lo compara contra §6
 ```
 
-**No entra en `GeometriaFactory.sln` a propósito.** Si entrara, su ensamblado contaría en la
-cobertura de `QG-03` y movería un número que mide otra cosa.
+**Entra en `GeometriaFactory.sln` desde el 2026-09-12** y se construye con ella (`Rules-Examples.md`
+§3.4: el sample compila siempre contra la versión actual del producto). El temor de que su ensamblado
+moviera `QG-03` se midió antes y después: la cobertura no cambia, porque el proceso de pruebas no lo
+carga.
 
 ### Y lo primero que hizo fue encontrar una divergencia — **resuelta el 2026-08-29**
 

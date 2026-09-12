@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** Decisiones-Arquitectura.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Propuesto
-**Fecha:** 2026-08-16
+**Fecha:** 2026-09-12
 **`tipo_unidad_entrega` (D8):** `web-monolith`
 **Proyectos de código que la componen:** `GeometriaFactory-Web`, `GeometriaFactory-Visor` y `GeometriaFactory-Contracts`
 **Consolida a:** el documento homónimo de `GeometriaFactory-Visor`, por `Audit/Migracion-M10-Consolidacion-Fusion.md` 1.2 §4
@@ -44,6 +44,7 @@ por proyecto de código**, con su texto **transpuesto sin reescritura**.
 | [ADR-10005](Adrs/ADR-10005-Estado-Degradado-Como-Superficie.md) | Un traductor único de condiciones, y el estado degradado como superficie y no como error | Comunicación | Propuesto | 2026-08-10 |
 | [ADR-10006](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) | El visor se opera sólo por sus seis funciones, y es esta pieza la que consulta el entorno | Comunicación | Propuesto | 2026-08-10 |
 | [ADR-10007](Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) | La dirección del servicio de datos viene de configuración, y el despliegue termina comprobando | Despliegue | Propuesto | 2026-08-10 |
+| [ADR-10008](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md) | El bundle del visor lo genera el proyecto del front, y es el único que lo genera | Despliegue | Aprobado | 2026-09-12 |
 
 **Siete ADR**, sobre el mínimo de cinco que la regla de la categoría fija para el tipo `web-monolith`. Ninguna superada, ninguna rechazada.
 
@@ -131,4 +132,5 @@ El mínimo de tres cubre estilo, superficie pública y estrategia de versionado,
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.1 | 2026-09-12 | Suma [`ADR-10008`](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md): el bundle del visor lo genera `GeometriaFactory.Web.csproj` con un target, y es el único generador. Lo decidió la mesa evaluadora de la Feature 20 del framework (2026-09-11) sobre tres hechos medidos. Sube minor: una decisión nueva, ninguna reabierta. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, absorbiendo el de `GeometriaFactory-Visor`, con su texto transpuesto sin reescritura. Entra §0. Sube **major**. |

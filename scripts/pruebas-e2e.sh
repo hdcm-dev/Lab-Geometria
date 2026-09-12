@@ -54,14 +54,9 @@ if ! docker image inspect "$imagen" >/dev/null 2>&1; then
   docker build -t "$imagen" "$raiz/deploy/e2e"
 fi
 
-# EL BUNDLE DEL VISOR SE GENERA ANTES, Y NO ES OPCIONAL. No se versiona —es artefacto—, y sin él
-# la escena 3D no carga: los casos que la miran fallarían por una razón que no es del producto.
-# `build-visor.sh` corre `npm ci` cuando hay candado, así que es reproducible.
-if [ ! -f src/GeometriaFactory.Web/wwwroot/js/geometriafactory-visor.js ]; then
-  echo "== Generando el bundle del visor =="
-  docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp \
-    -v "$raiz:/repo" -w /repo "$imagen" scripts/build-visor.sh
-fi
+# EL BUNDLE DEL VISOR YA NO SE GENERA ACÁ. Lo genera el `.csproj` del front (target `BuildVisor`)
+# cuando el banco local publica el Web dentro de la misma imagen, que trae Node. Un solo lugar
+# desde donde se genera el mismo artefacto (`Web ADR-10008`).
 
 echo "== Recorrido en $navegador =="
 
