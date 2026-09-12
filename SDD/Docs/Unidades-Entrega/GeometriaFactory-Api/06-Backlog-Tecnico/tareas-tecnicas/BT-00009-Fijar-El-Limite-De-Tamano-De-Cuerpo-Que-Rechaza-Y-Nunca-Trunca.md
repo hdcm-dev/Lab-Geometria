@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00009-Fijar-El-Limite-De-Tamano-De-Cuerpo-Que-Rechaza-Y-Nunca-Trunca.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Done
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T02 · Superficie y formato de intercambio

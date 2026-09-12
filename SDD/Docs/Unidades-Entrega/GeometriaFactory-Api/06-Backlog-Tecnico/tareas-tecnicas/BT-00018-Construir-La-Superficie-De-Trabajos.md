@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00018-Construir-La-Superficie-De-Trabajos.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Done
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T04 · Las cuatro superficies de acceso

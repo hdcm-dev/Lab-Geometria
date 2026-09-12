@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00004-Construir-La-Imagen-Multietapa-Y-Medir-Pt-04.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Done
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T01 · Fundaciones, composición de raíz y arranque

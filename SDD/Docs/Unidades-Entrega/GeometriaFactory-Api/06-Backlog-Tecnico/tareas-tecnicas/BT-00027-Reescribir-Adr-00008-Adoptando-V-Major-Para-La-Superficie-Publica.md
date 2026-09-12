@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00027-Reescribir-Adr-00008-Adoptando-V-Major-Para-La-Superficie-Publica.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Borrador
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T06 · Exposición pública y versionado del contrato

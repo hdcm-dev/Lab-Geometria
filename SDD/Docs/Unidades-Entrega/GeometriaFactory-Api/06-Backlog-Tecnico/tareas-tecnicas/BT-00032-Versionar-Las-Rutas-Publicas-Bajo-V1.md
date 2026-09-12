@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00032-Versionar-Las-Rutas-Publicas-Bajo-V1.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Borrador
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T06 · Exposición pública y versionado del contrato

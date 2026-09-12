@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00005-Anclar-Nombres-De-Tipos-Espacios-De-Nombres-Y-Versiones-De-Paquetes.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Done
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T01 · Fundaciones, composición de raíz y arranque

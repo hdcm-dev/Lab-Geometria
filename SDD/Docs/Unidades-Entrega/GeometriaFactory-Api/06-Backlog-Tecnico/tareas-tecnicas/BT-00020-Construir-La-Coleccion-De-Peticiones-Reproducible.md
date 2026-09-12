@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00020-Construir-La-Coleccion-De-Peticiones-Reproducible.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Done
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T05 · Verificación, muestras y despliegue

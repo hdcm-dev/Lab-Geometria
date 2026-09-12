@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00031-Publicar-Openapi-Scalar-En-El-Ambiente-De-Produccion.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Borrador
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T06 · Exposición pública y versionado del contrato

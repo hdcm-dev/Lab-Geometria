@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00003-Construir-El-Arranque-En-Dos-Fases-Con-El-Punto-De-Salud-Sin-Acceso.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Done
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T01 · Fundaciones, composición de raíz y arranque

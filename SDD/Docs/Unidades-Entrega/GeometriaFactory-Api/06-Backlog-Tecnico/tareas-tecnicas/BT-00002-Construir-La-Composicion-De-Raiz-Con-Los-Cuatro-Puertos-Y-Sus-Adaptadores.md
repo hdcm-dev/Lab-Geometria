@@ -4,7 +4,7 @@
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00002-Construir-La-Composicion-De-Raiz-Con-Los-Cuatro-Puertos-Y-Sus-Adaptadores.md
 **Versión:** 1.0
-**Estado:** Aprobada
+**Estado:** Done
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
 **Épica:** EP-T01 · Fundaciones, composición de raíz y arranque
