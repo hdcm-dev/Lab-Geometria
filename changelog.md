@@ -1075,6 +1075,37 @@ la versión anterior.
   no el de filtro. Encontrado mientras se reparaba lo anterior; fuera del alcance aprobado y sin
   tocar.
 
+## Dockerizar el front — 2026-09-06 (repuesta el 2026-09-12, después de la fusión)
+
+**Rama:** `dockerizar-el-front`. PR #186, fusionado `89f3ab3`, ancla `6fa6844`.
+
+> **Se repone tarde, y se dice.** La regla de este documento es actualizarse en la rama de la etapa,
+> no después de la fusión (l.6). Esta entrada se escribe en la séptima reanudación del destino, sobre
+> la base `5c95dab`, y **el hecho es ajeno a esta corrida**: el trabajo y su fusión son del
+> 2026-09-06, seis días antes de que empezara. Es la **cuarta** vez que este documento llega tarde a
+> una fusión propia — después de las etapas `c`, `d`, `e` (repuestas el 2026-08-16) y del PR #186 de
+> `dockerizar-el-front` en su momento, hoy corregido.
+
+### Cambiado
+
+- El front deja de publicarse por transferencia al hosting externo y pasa a construirse como imagen
+  Docker (`deploy/Dockerfile.web`), publicada en un contenedor del servidor propio de i7infra. La
+  etapa de Node **no es opcional**: el bundle del visor lo produce `webpack` en `visor/`, y un clon
+  limpio sin esa etapa construye un front sin visor, sin que nada falle.
+- `Program.cs` lee `ApiBaseUrl` de `IConfiguration`: la misma imagen sirve para cualquier destino
+  variando una variable de entorno, sin tocar el artefacto publicado (el apartamiento que `ADR-14003`
+  documentaba para el hosting deja de ser necesario para este canal).
+- Verificado contra el equipo: la imagen construye y queda sellada con la revisión del árbol; el
+  bundle viaja adentro (501 676 bytes, servidos en `/js/`); con `ApiBaseUrl` apuntando al servicio de
+  datos por nombre de red, `/estado` informa la versión y el reloj **del servicio de datos**.
+- **Limitación registrada en el propio archivo**: la imagen hereda de `appsettings.json` un
+  `ApiBaseUrl` de desarrollo, de modo que un contenedor sin configurar arranca sano y falla en
+  silencio; la guarda vive en la composición, no en el `Dockerfile`.
+- **No se retira el canal de FTP.** Queda vivo hasta la decisión del Product Owner del 2026-09-06 de
+  conservarlo como alternativa y antecedente de despliegue (asentada en `PRODUCT-INTAKE` **4.2**,
+  `Roadmap-Producto.md` **1.10**), y sin disparador automático desde esta misma reanudación
+  (`.github/workflows/deploy-front-ftp.yml`).
+
 ## El bundle lo genera el `.csproj`, y todo entra al árbol de solución — 2026-09-12
 
 **Rama:** `estructura-solucion-visor-y-samples`. Cierre de la Feature 20 del framework
