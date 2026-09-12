@@ -22,23 +22,28 @@
 # existe para impedir.
 #
 # Ninguna dirección real vive acá: todas llegan como secretos del repositorio.
+#
+# CANAL ALTERNATIVO, NO PRODUCTIVO, DESDE EL 2026-09-06 (séptima reanudación, 2026-09-12).
+# El canal vigente de despliegue es el túnel con dominio propio sobre contenedores del servidor
+# propio de i7infra (`PRODUCT-INTAKE` §14 F-14 **4.2**, `Roadmap-Producto.md` **1.10** §2.1/§5.2,
+# `changelog.md` «Dockerizar el front», 2026-09-06). Este flujo publica al hosting externo
+# (somee.com), que el Product Owner decidió **conservar como alternativa y antecedente de
+# despliegue, no como canal vigente**. Por eso deja de dispararse solo con cada fusión que toque
+# estas rutas —lo hacía, y por eso `main` se publicó dos veces a dos topologías el mismo día,
+# 2026-09-12— y pasa a ser **manual**: se corre a propósito, con `workflow_dispatch`, cuando haga
+# falta ese antecedente. Los cinco secretos que usa siguen vivos porque el canal no se retira.
 
 name: deploy-front-ftp
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'src/GeometriaFactory.Web/**'
-      - 'visor/**'
-      - 'src/GeometriaFactory.Contracts/**'
+  workflow_dispatch:
       # LA CUARTA ENTRADA, y entró por un defecto pagado el 2026-09-01: el cambio que agregó
       # los reintentos de FTP se fusionó a `main` y NO DISPARÓ ESTA PUBLICACIÓN, porque el
       # archivo del flujo no estaba en su propio filtro. Hubo que lanzarla a mano para saber
       # si el arreglo servía. UN PUBLICADOR QUE NO SE EJERCITA CUANDO SE LO MODIFICA se
       # descubre roto el día que se lo necesita, que es exactamente lo que pasó.
-      - '.github/workflows/deploy-front-ftp.yml'
-  workflow_dispatch:
+      # Con el disparo automático retirado, esta nota queda como antecedente: si el canal
+      # vuelve a activarse por push, el archivo del flujo tiene que volver a su propio filtro.
 
 jobs:
   publish-front:
