@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-16
+**Fecha:** 2026-09-12
 **Autor:** Scrum Master + API Product Owner (AG-06)
 
 ---
@@ -28,11 +28,11 @@ están en [`../../../_legacy/2026-08-16-consolidacion-m10/GeometriaFactory-Api/0
 | Documento | Propósito |
 | --- | --- |
 | [`Product-Backlog.md`](Product-Backlog.md) | Índice maestro priorizado: seis épicas, treinta historias, métricas y refinamiento |
-| [`Backlog-Tecnico.md`](Backlog-Tecnico.md) | Cinco épicas técnicas, veintiséis tareas técnicas inline y la matriz BT ↔ US ↔ CU con la columna de puntos de acceso |
+| [`Backlog-Tecnico.md`](Backlog-Tecnico.md) | Seis épicas técnicas, treinta y cinco tareas técnicas inline y la matriz BT ↔ US ↔ CU con la columna de puntos de acceso |
 | [`Definition-Of-Ready.md`](Definition-Of-Ready.md) | Ocho criterios de entrada para las historias y seis para las tareas técnicas |
 | [`historias-usuario/`](historias-usuario/) | Las **treinta** historias, una por archivo |
 
-**No hay `tareas-tecnicas/`**, y es decisión declarada: las **veintiséis** tareas están por debajo del umbral de treinta. **Sí hay `historias-usuario/`**, porque las treinta superan el umbral de veinte.
+**No hay `tareas-tecnicas/` para `GeometriaFactory-Api`**, con la misma decisión que ya regía desde la consolidación del 2026-08-16: el documento entero de la unidad consolida **89** tareas de las cuatro capas (26+16+21+26 antes de esta apertura) inline por proyecto de código, y esta apertura suma nueve más al proyecto `GeometriaFactory-Api` (26 → 35) sin abrir ese punto de nuevo. **No verificado con esta corrida**: si el umbral de treinta de `Rules-Backlog-Tecnico.md` §3.3 se mide por unidad de entrega o por proyecto de código dentro de un documento consolidado, es una lectura que la consolidación de 2026-08-16 ya fijó sin declararla, y que esta apertura no tiene mandato para revisar. **Sí hay `historias-usuario/`**, porque las treinta superan el umbral de veinte. **La sexta épica técnica (EP-T06, exposición pública y versionado) no suma historia de usuario**: sus nueve tareas se justifican como infraestructura compartida (`Backlog-Tecnico.md` §3.1), por lo que `Product-Backlog.md` no se reabre con esta apertura — ver su control de cambios.
 
 ## 2. Orden de lectura
 
@@ -76,3 +76,4 @@ La de [`Definition-Of-Ready.md`](Definition-Of-Ready.md) 1.0. La Definition of D
 | 1.1 | 2026-08-11 | **Corrección de `N-1` del informe `G-10-Examples-Siete-Proyectos-r2.md` 1.0.** Esta sección declaraba que la Definition of Done «vive en `08-Calidad-Y-Pruebas`, que todavía no está emitida», y **`08` está emitida y auditada desde la Fase E**: el residuo quedó vivo cuando la corrección de la ronda 1 arregló sólo los tres proyectos que aquel informe nombraba, de los **siete** que lo tenían. Ninguna decisión, recuento ni artefacto cambia. **Autor:** Orquestador SDD |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Enumera los tres artefactos y la carpeta de historias, declara la ausencia de `tareas-tecnicas/` con su motivo, fija el orden de lectura, resume las seis épicas con su etapa del producto y las dos que no producen épica, y nombra las tareas técnicas prioritarias con el fundamento de cada una, incluidas las dos inspecciones que detectan defectos de omisión. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**, con sus documentos consolidados en 2.0. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |
+| 2.1 | 2026-09-12 | **Apertura de la fase `k`** (`Backlog-Tecnico.md` **3.0**): suma la sexta épica técnica EP-T06 y nueve `BT` (BT-00027 a BT-00035) al proyecto `GeometriaFactory-Api`, que pasa de veintiséis a **treinta y cinco** tareas. §1 actualiza el recuento y declara sin verificar la lectura del umbral de treinta de `Rules-Backlog-Tecnico.md` §3.3 sobre un documento consolidado. `Product-Backlog.md` **no se reabre**: las nueve tareas nuevas son infraestructura compartida sin historia de usuario consumidora. §3 (épicas funcionales) no cambia: EP-T06 es una épica técnica y no tiene contraparte en `Product-Backlog.md`. Sube **minor**: agrega recuento y una constancia, no reestructura ninguna sección. |
