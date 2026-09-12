@@ -2,12 +2,12 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** Medicion-PT-05.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** **SIN MEDIR** — el formulario existe, la medición no se hizo
 **Fecha:** —
 **Autor:** —
 **Nivel:** Producto
-**Puerta técnica:** `PT-05`, fase `i` (`Roadmap-Producto.md` **1.9** §2.2)
+**Puerta técnica:** `PT-05`, fase `i` (`Roadmap-Producto.md` **1.10** §2.2)
 **Regla que valida:** `RN-B1`
 
 ---
@@ -62,5 +62,6 @@ fecha no se sabe hasta cuándo valió.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
+| 1.2 | 2026-09-12 | **Cita corregida por dato derivado** (`Root-Rules.md` §10): la cabecera citaba `Roadmap-Producto.md` **1.9** y el roadmap está en **1.10** desde la reapertura de la fila `i` por el evento de `Rules-Contexto.md` §3.5 (séptima reanudación, salida `A`). **§2.2 no cambió**: `PT-05` sigue siendo lo único que la fase `i` hace y su criterio de medición no varía con el cambio de topología. **Sigue `SIN MEDIR`**: esta intervención no fabrica una medición — item diferido, evento de cierre «una persona en la red de la facultad corre el formulario», ciclo de origen: mesa · producto · base `5c95dab`. | Orquestador de reanudación SDD |
 | 1.1 | 2026-08-27 | **Parche `P-05` de la mesa de evaluación del 2026-08-27** ([`Mesa-2026-08-27.md`](Mesa-2026-08-27.md), hallazgo **H-06**, ancla **E2**, nivel **P3**). La cabecera citaba `Roadmap-Producto.md` **1.8** y el roadmap está en **1.9** desde la reparación de `D-04` del 2026-08-23. **§2.2 no cambió entre las dos versiones** —lo que la 1.9 corrigió es el recuento del criterio `F-1` de §5.2—, de modo que **el formulario no cambia y sigue en `SIN MEDIR`**: lo que se corrige es la cita, que es un dato derivado (`Root-Rules.md` §10). | Orquestador de reanudación SDD |
 | 1.0 | 2026-08-18 | Emisión del formulario, **antes de la medición y sin ningún dato inventado**. Declara qué mide `PT-05`, por qué su resultado se registra sea cual sea, y los campos que `ADR-14003` **1.1** exige —la dirección usada **y su fecha**—. Estado **`SIN MEDIR`**, que es lo que `verify-stage-i.sh` comprueba para que un formulario vacío no pase la puerta. | Orquestador SDD |

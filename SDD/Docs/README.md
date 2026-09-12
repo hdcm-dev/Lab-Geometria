@@ -3,14 +3,15 @@
 | Campo | Valor |
 | --- | --- |
 | Producto | Fábrica de Geometría |
-| Versión del documento | 2.5 |
+| Versión del documento | 2.6 |
 | Estado | Aprobado |
-| Fecha | 2026-08-30 |
+| Fecha | 2026-09-12 |
 | Stack principal | C# sobre .NET 10 —Blazor Interactive Server en el front, ASP.NET Core en el servicio de datos—, Entity Framework Core sobre SQLite, y TypeScript con webpack en el visor |
 | Composición | **2 unidades de entrega** y **7 proyectos de código** (ver §2) |
 | Unidad de entrega principal | `GeometriaFactory-Api` |
 | Documento | README raíz del producto |
-| Refleja | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **4.0**, derivado del intake **3.0** |
+| Responsable de §7 (`Master-Prompt-Reanudacion.md` §1.1) | El Orquestador de reanudación SDD, en cada reanudación; en su ausencia, el Product Owner |
+| Refleja | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` **6.0**, derivado del intake **4.2** |
 
 ---
 
@@ -152,7 +153,7 @@ Quien intervenga sobre el corpus tiene tres obligaciones que la auditoría de es
 
 ## 7. Estado actual y roadmap
 
-El producto está **especificado y en construcción**. La documentación está emitida y auditada por categoría, y el código va por la **etapa `e`** de las nueve del roadmap.
+El producto está **especificado y en construcción**. La documentación está emitida y auditada por categoría; el estado de la construcción por etapa está en la tabla de §7.2 y no se repite acá — la última afirmación en prosa (**«etapa `e`»**) quedó desactualizada, y **§7.2 misma la contradecía** desde que se emitió: se corrige contra su propia tabla, que declara `a` a `h` cerradas.
 
 ### 7.1 Documentación
 
@@ -172,7 +173,7 @@ El producto está **especificado y en construcción**. La documentación está e
 | 11-Documentacion | Producto y las dos | **Planificado** |
 | Vista y pipeline de producto | Producto | Aprobado |
 
-**El árbol atravesó seis migraciones normativas cerradas** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12 y 9.12 → 10.0—, **y la séptima, 10.0 → 13.3, está en curso** ([`Audit/Plan-Migracion-10.0-a-13.3.md`](Audit/Plan-Migracion-10.0-a-13.3.md) 1.2). Sus informes están en [`Audit/`](Audit/) y la procedencia vigente la declara el manifiesto §1.1.
+**El árbol atravesó siete migraciones normativas, las siete cerradas** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y 10.0 → 13.3 ([`Audit/Informe-Migracion-10.0-a-13.3.md`](Audit/Informe-Migracion-10.0-a-13.3.md), **APROBADO CON HALLAZGOS**, 2026-08-25)—. Desde entonces la procedencia se actualizó **sin migrar** hasta **SDD 13.7** (quinta reanudación, salida `C`), verificada de nuevo en la séptima reanudación contra **SDD 13.14**: cero saltos major con impacto entre medio. Sus informes están en [`Audit/`](Audit/) y la procedencia vigente la declara el manifiesto §1.1.
 
 ### 7.2 Construcción
 
@@ -266,6 +267,7 @@ Veintiún términos para leer el resto sin tropezar. No reemplaza a los glosario
 
 | Versión | Fecha | Descripción del cambio |
 | --- | --- | --- |
+| 2.6 | 2026-09-12 | **Séptima reanudación, salida `A` — corrige DIV-03 del informe de estado.** §7 enunciaba estado en prosa contra su propia tabla: decía «etapa `e`» cuando §7.2 ya declaraba `a` a `h` cerradas y «séptima migración en curso» cuando `Informe-Migracion-10.0-a-13.3.md` está **APROBADO CON HALLAZGOS** desde el 2026-08-25. Deja de enunciar estado y remite a §7.2 y al informe de migración; corrige la cabecera (manifiesto **6.0**, intake **4.2**, antes citaba 4.0/3.0); suma responsable de §7 (`Master-Prompt-Reanudacion.md` §1.1). Sube minor: corrige afirmaciones, no cambia ninguna decisión. | Orquestador de reanudación SDD |
 | 2.5 | 2026-08-31 | **Corrige la emisión 2.4 el mismo día: el punto que queda NO es `D5`.** El volumen de la comisión está **decidido desde el 2026-08-20**, cerrado **por INCOGNOSCIBLE** —no se sabe, no se puede saber, no se fija número—, en el commit `b4a4804` y sobre cinco documentos que **`A3` nunca reflejó**, que es de donde la 2.4 lo leyó. **El punto que queda vivo es su consecuencia**: el **caudal de 20 peticiones por minuto**, que se derivaba de «una comisión operando durante una clase» y **perdió ese fundamento** al cerrarse `D5`. Queda **provisorio**, y su evento de cierre es **`PT-05`, en la fase `i`** — o sea que, a diferencia de lo que la 2.4 afirmaba, **sí tiene dónde mirarse**. **Y la sección gana su ejemplo más nítido de lo que viene documentando**, esta vez producido por quien la escribió: el error no fue omitir la verificación contra el árbol sino **hacerla y concluir al revés**, porque `D4` y `D8` se decidieron **con un no** y en el árbol *decidido que no* y *sin decidir* **se ven idénticos**. |
 | 2.4 | 2026-08-31 | **§8 rehecho desde las fuentes corregidas: de cuatro puntos vivos a UNO.** Se cierran los tres restantes y ninguno se cerró decidiendo — **los tres se cerraron mirando**. **(a) Las aristas de compilación son ocho**, de dos clases; `PRODUCT-MANIFEST` §2.B tenía razón desde la emisión 1.0 y el punto estuvo abierto **veintiún días** sin ser una decisión de nadie. **(b) Los umbrales de asunción los confirmó el Product Owner el 2026-08-26** con `D1`; esta fila decía «las tres vigentes» durante cinco días porque la decisión no volvió al §22 que la planteaba. **(c) Las «ocho marcas `[A VERIFICAR]`» no eran ocho ni tres temas**: clasificadas las **71** apariciones vivas del corpus son **cinco** incógnitas, dos ya sin pregunta, dos que se miden solas en la fase `i` y una que es `D5`. **(d) Los hallazgos de los samples son cero vivos**, no dos: `H-12` y `H-14` se cerraron el 2026-08-31 y la fila se escribió antes que ellos. **Queda `D5`, el volumen de la comisión**, y se declara **distinto de todos los demás**: es el único pendiente del producto **sin evento de cierre**, porque no hay medición que lo conteste — es un número que existe fuera del árbol, y sostiene el caudal de `A-5` y la ausencia de paginación en dos superficies. **Se agrega lo que esta sección aprendió sobre sí misma**: de los ocho puntos que llegó a listar, **seis se cerraron sin que nadie tocara la tabla**, y ninguno se perdió por estar mal argumentado — **un resumen derivado no tiene forma de saber que su fuente cambió**. Se registra el patrón medido tres veces en esta jornada, elevado al framework como el **reporte 21**, y el caso de la mesa del 2026-08-27, que es `HM-02` del **reporte 17** medido por segunda vez. |
 | 2.3 | 2026-08-31 | **§8 se rehace contra el árbol, y tres de sus filas vivas resultaron falsas.** Las levantó el contraste del contrato de entrada de [`Audit/Mesa-2026-08-31.md`](Audit/Mesa-2026-08-31.md) (`M-01`), que abre la fuente antes de citarla: **el cuarto puerto** —se llama `IAccountRepository`, el glosario lo nombra doce veces y el archivo existe desde la etapa `c`—, **el umbral de fluidez del visor** —cerrado el 2026-08-30 con `ADR-14004`— y **el alcance de la colección de peticiones** —cerrado el **2026-08-12**, con dos documentos que lo registran tachado y esta fila sin enterarse—. Las tres se **tachan con su desenlace** y no se retiran: un punto abierto que ya se cerró cuesta el mismo trabajo que uno real, y quien lo tome merece encontrar por qué no estaba. **Los cuatro vivos declaran ahora en qué evento se cierran** (`M-05`), que es el punto de control de la fase `i`; ninguno lo declaraba, y sin evento nada los puede vencer nunca. Se corrige además el párrafo de cierre, que ataba los puntos al **punto de control de la etapa `a`**, cerrada el 2026-08-13. La fila de los hallazgos de los samples pasa de «los nueve» a **catorce emitidos y dos vivos**. Sube **minor**: corrige el inventario de lo que no está decidido y no cambia ninguna decisión. |

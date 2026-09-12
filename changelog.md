@@ -1075,6 +1075,37 @@ la versión anterior.
   no el de filtro. Encontrado mientras se reparaba lo anterior; fuera del alcance aprobado y sin
   tocar.
 
+## Dockerizar el front — 2026-09-06 (repuesta el 2026-09-12, después de la fusión)
+
+**Rama:** `dockerizar-el-front`. PR #186, fusionado `89f3ab3`, ancla `6fa6844`.
+
+> **Se repone tarde, y se dice.** La regla de este documento es actualizarse en la rama de la etapa,
+> no después de la fusión (l.6). Esta entrada se escribe en la séptima reanudación del destino, sobre
+> la base `5c95dab`, y **el hecho es ajeno a esta corrida**: el trabajo y su fusión son del
+> 2026-09-06, seis días antes de que empezara. Es la **cuarta** vez que este documento llega tarde a
+> una fusión propia — después de las etapas `c`, `d`, `e` (repuestas el 2026-08-16) y del PR #186 de
+> `dockerizar-el-front` en su momento, hoy corregido.
+
+### Cambiado
+
+- El front deja de publicarse por transferencia al hosting externo y pasa a construirse como imagen
+  Docker (`deploy/Dockerfile.web`), publicada en un contenedor del servidor propio de i7infra. La
+  etapa de Node **no es opcional**: el bundle del visor lo produce `webpack` en `visor/`, y un clon
+  limpio sin esa etapa construye un front sin visor, sin que nada falle.
+- `Program.cs` lee `ApiBaseUrl` de `IConfiguration`: la misma imagen sirve para cualquier destino
+  variando una variable de entorno, sin tocar el artefacto publicado (el apartamiento que `ADR-14003`
+  documentaba para el hosting deja de ser necesario para este canal).
+- Verificado contra el equipo: la imagen construye y queda sellada con la revisión del árbol; el
+  bundle viaja adentro (501 676 bytes, servidos en `/js/`); con `ApiBaseUrl` apuntando al servicio de
+  datos por nombre de red, `/estado` informa la versión y el reloj **del servicio de datos**.
+- **Limitación registrada en el propio archivo**: la imagen hereda de `appsettings.json` un
+  `ApiBaseUrl` de desarrollo, de modo que un contenedor sin configurar arranca sano y falla en
+  silencio; la guarda vive en la composición, no en el `Dockerfile`.
+- **No se retira el canal de FTP.** Queda vivo hasta la decisión del Product Owner del 2026-09-06 de
+  conservarlo como alternativa y antecedente de despliegue (asentada en `PRODUCT-INTAKE` **4.2**,
+  `Roadmap-Producto.md` **1.10**), y sin disparador automático desde esta misma reanudación
+  (`.github/workflows/deploy-front-ftp.yml`).
+
 ## El bundle lo genera el `.csproj`, y todo entra al árbol de solución — 2026-09-12
 
 **Rama:** `estructura-solucion-visor-y-samples`. Cierre de la Feature 20 del framework
@@ -1114,3 +1145,29 @@ mesa evaluadora. Evidencia en `evidencia/2026-09-12-estructura-solucion/`.
 sin Node y sin bandera falla, con bandera 0/0; `build.sh` 0/0; `test.sh` 522/522; `coverage.sh`
 `QG-03` idéntico; los doce samples sin servicio y los tres del visor conformes; el bundle sellado
 servido antes del guardián de aprovisionamiento. Detalle en `evidencia/2026-09-12-estructura-solucion/verificacion.md`.
+
+## Decisiones del Product Owner sobre las tres escaladas del ciclo 1 — 2026-09-12
+
+**Sin código.** Entrada de intake y de roadmap, no de una rama de etapa: el Product Owner contestó,
+fuera de toda corrida del orquestador, las tres escaladas `E-02`, `E-04` y `E-05` de
+`SDD/Docs/Audit/Mesa-2026-09-12.md` §9, y una mesa de ciclo 2
+(`SDD/Docs/Audit/Mesa-2026-09-12-ciclo-2.md`) convirtió `E-02` y `E-04` en plan.
+
+- **`E-02`** — «la API debe ser expuesta públicamente; la idea es ofrecerla para otros clientes».
+  Cambio de alcance: la API deja de estar reservada a `GeometriaFactory.Web`. Quién es el cliente
+  externo concreto queda **diferido** (`D-01`): el Product Owner no lo tiene decidido todavía.
+- **`E-04`** — «buscar una forma de nomenclar el versionado, según el estándar de la industria».
+  SemVer 2.0.0 se mantiene para el producto; el contrato REST público se versiona en la ruta, sólo el
+  `MAJOR` (`/v{MAJOR}/`), compartido con el del producto; evento de etiqueta = fusión a `main` con
+  cambio de código de producto, por Conventional Commits y MinVer; plazo de convivencia entre
+  versiones de un cuatrimestre. **No se reescriben `ADR-00008` ni `Estrategia-Versionado.md`** en esta
+  entrada: son dos de los diez ítems del plan que abre `Roadmap-Producto.md` **1.11**, fila `k`.
+- **`E-05`** — el estado durable. Front: riesgo aceptado por escrito (perder la clave de protección de
+  datos cuesta un re-login a los alumnos, no hay datos en juego). Backend: se respalda el SQLite de
+  `lab-geometria-api/data`; el requisito queda escrito en el intake, el mecanismo lo implementa el
+  Product Owner en su despliegue.
+
+**Asentado en:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **4.3** (§17.1.P.3, §17.1.P.5, `X-9`,
+`RA-01`, §11 `RN-B7`/`RN-B8`), `Roadmap-Producto.md` **1.11** (fila `k`, diez ítems, estado
+pendiente), `Mesa-2026-09-12.md` **1.1** (§9 respondida, §8 con los dos ítems diferidos que quedan
+abiertos: `D-01` y el mecanismo de respaldo del backend).
