@@ -1145,3 +1145,29 @@ mesa evaluadora. Evidencia en `evidencia/2026-09-12-estructura-solucion/`.
 sin Node y sin bandera falla, con bandera 0/0; `build.sh` 0/0; `test.sh` 522/522; `coverage.sh`
 `QG-03` idéntico; los doce samples sin servicio y los tres del visor conformes; el bundle sellado
 servido antes del guardián de aprovisionamiento. Detalle en `evidencia/2026-09-12-estructura-solucion/verificacion.md`.
+
+## Decisiones del Product Owner sobre las tres escaladas del ciclo 1 — 2026-09-12
+
+**Sin código.** Entrada de intake y de roadmap, no de una rama de etapa: el Product Owner contestó,
+fuera de toda corrida del orquestador, las tres escaladas `E-02`, `E-04` y `E-05` de
+`SDD/Docs/Audit/Mesa-2026-09-12.md` §9, y una mesa de ciclo 2
+(`SDD/Docs/Audit/Mesa-2026-09-12-ciclo-2.md`) convirtió `E-02` y `E-04` en plan.
+
+- **`E-02`** — «la API debe ser expuesta públicamente; la idea es ofrecerla para otros clientes».
+  Cambio de alcance: la API deja de estar reservada a `GeometriaFactory.Web`. Quién es el cliente
+  externo concreto queda **diferido** (`D-01`): el Product Owner no lo tiene decidido todavía.
+- **`E-04`** — «buscar una forma de nomenclar el versionado, según el estándar de la industria».
+  SemVer 2.0.0 se mantiene para el producto; el contrato REST público se versiona en la ruta, sólo el
+  `MAJOR` (`/v{MAJOR}/`), compartido con el del producto; evento de etiqueta = fusión a `main` con
+  cambio de código de producto, por Conventional Commits y MinVer; plazo de convivencia entre
+  versiones de un cuatrimestre. **No se reescriben `ADR-00008` ni `Estrategia-Versionado.md`** en esta
+  entrada: son dos de los diez ítems del plan que abre `Roadmap-Producto.md` **1.11**, fila `k`.
+- **`E-05`** — el estado durable. Front: riesgo aceptado por escrito (perder la clave de protección de
+  datos cuesta un re-login a los alumnos, no hay datos en juego). Backend: se respalda el SQLite de
+  `lab-geometria-api/data`; el requisito queda escrito en el intake, el mecanismo lo implementa el
+  Product Owner en su despliegue.
+
+**Asentado en:** `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **4.3** (§17.1.P.3, §17.1.P.5, `X-9`,
+`RA-01`, §11 `RN-B7`/`RN-B8`), `Roadmap-Producto.md` **1.11** (fila `k`, diez ítems, estado
+pendiente), `Mesa-2026-09-12.md` **1.1** (§9 respondida, §8 con los dos ítems diferidos que quedan
+abiertos: `D-01` y el mecanismo de respaldo del backend).
