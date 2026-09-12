@@ -67,7 +67,9 @@
    consecuencia: `surface-interaction.js` ya reintenta dibujar al terminar la carga, y su propio
    comentario explica que la primera pasada ocurre SIEMPRE antes de que el visor exista. La
    interacción no puede llegar tarde. Mesa 2026-09-02, acción A-1. *@
-<script src="js/geometriafactory-visor.js" defer fetchpriority="low"></script>
+@* El sello `?v=` es el SHA-256 del bundle, generado en la construcción (`SealVisorAsset`): un bundle nuevo
+   con el mismo nombre no puede quedar cacheado (`Web ADR-10008`). *@
+<script src="js/geometriafactory-visor.js?v=@VisorSeal.Value" defer fetchpriority="low"></script>
 
 <PageTitle>Vista de trabajo</PageTitle>
 

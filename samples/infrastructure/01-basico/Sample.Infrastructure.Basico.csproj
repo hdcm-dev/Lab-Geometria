@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--
     Sample `infrastructure/01-basico`. Gobernado por `ejemplo-01-basico-infraestructura.md`.
-    NO entra en `GeometriaFactory.sln`.
+    Entra en `GeometriaFactory.sln` desde el 2026-09-12 (`Rules-Examples.md` §3.4).
 
     SIN CARPETA `Dobles/` Y NO ES UN OLVIDO: los dos componentes que ejercita —el
     intérprete y el reconstructor de piezas— no dependen de nada del producto salvo

@@ -18,8 +18,9 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-"$repo_root/scripts/build-visor.sh"
-
+# EL BUNDLE DEL VISOR YA NO SE GENERA ACÁ: lo genera `GeometriaFactory.Web.csproj` (target
+# `BuildVisor`) al construir la solución, y sólo cuando cambió una fuente del visor. Un solo lugar
+# desde donde se genera el mismo artefacto (`Web ADR-10008`).
 cd "$repo_root"
 dotnet restore GeometriaFactory.sln
 dotnet build GeometriaFactory.sln --configuration Release --no-restore

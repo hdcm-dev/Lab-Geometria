@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** README.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-16
+**Fecha:** 2026-09-12
 **Autor:** Arquitecto de Software Senior (AG-05)
 **Tipo de proyecto de código (D8):** `web-monolith`
 
@@ -46,6 +46,7 @@ Lo que hay que haber entendido antes de tocar esta sección: **este proyecto de 
 | [ADR-10005](Adrs/ADR-10005-Estado-Degradado-Como-Superficie.md) | Un traductor único de condiciones, y el estado degradado como superficie y no como error | Comunicación | Propuesto |
 | [ADR-10006](Adrs/ADR-10006-Aislamiento-Del-Visor-Tras-Su-Fachada.md) | El visor se opera sólo por sus seis funciones, y es esta pieza la que consulta el entorno | Comunicación | Propuesto |
 | [ADR-10007](Adrs/ADR-10007-Direccion-Del-Servicio-De-Datos-Desde-Configuracion.md) | La dirección del servicio de datos viene de configuración, y el despliegue termina comprobando | Despliegue | Propuesto |
+| [ADR-10008](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md) | El bundle del visor lo genera el proyecto del front, y es el único que lo genera | Despliegue | Aprobado |
 
 Ninguna superada, ninguna rechazada.
 
@@ -96,6 +97,7 @@ La maqueta de este proyecto de código **se ejecutó y quedó aprobada por el Pr
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.1 | 2026-09-12 | Suma [`ADR-10008`](Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md): el bundle del visor lo genera `GeometriaFactory.Web.csproj` con un target, y es el único generador. Lo decidió la mesa evaluadora de la Feature 20 del framework (2026-09-11) sobre tres hechos medidos. Sube minor: una decisión nueva, ninguna reabierta. |
 | 1.0 | 2026-08-10 | Emisión inicial. Índice navegable de la sección: los tres documentos vigentes, las siete ADR con su estado, los NFR en una línea, el orden de lectura de seis pasos, los cuatro artefactos omitidos con su motivo —incluido el modelo lógico, omitido con ADR contra el valor por defecto de la regla—, el destino de los dos puntos abiertos que llegaron por nombre a esta categoría, y la relación con la Fase B2 aprobada y con la línea de base visual que la codificación tiene que sostener. |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a indexar la categoría de la **unidad de entrega**. Entra §0. La carpeta `_fusion/` **se retira**. Sube major. |

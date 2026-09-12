@@ -3,13 +3,13 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ejemplo-02-intermedio.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-30
+**Fecha:** 2026-09-12
 **Autor:** Developer Advocate / Sample Engineer Senior (AG-10)
 **Nivel:** Intermedio
 **Ubicación del código:** [`/samples/visor/02-intermedio/`](../../../../../samples/visor/02-intermedio/), esqueletada con su README local y su comando previsto
-**Trazabilidad upstream:** [`CU-12002`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md), [`CU-12003`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) y [`CU-12004`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12004-Redimensionar-La-Escena.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.3, §4.4, §5.2, §5.3 y §6; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12006`, `TC-12007`, `TC-12008`, `TC-12011` y `TC-12012`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-2`, `E-5`, `E-6`, `E-7` y `E-8`
+**Trazabilidad upstream:** [`CU-12002`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md), [`CU-12003`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) y [`CU-12004`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12004-Redimensionar-La-Escena.md); [`ADR-08007`](../../../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md); [`../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md`](../02-Especificacion-Funcional/Definicion-Contrato-De-Fachada.md) 1.1 §4.3, §4.4, §5.2, §5.3 y §6; [`../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md`](../08-Calidad-Y-Pruebas/Casos-Prueba-Referenciales.md) 1.0 `TC-12006`, `TC-12007`, `TC-12008`, `TC-12011` y `TC-12012`; `PRODUCT-INTAKE` **1.25** §20, escenarios `E-2`, `E-5`, `E-6`, `E-7` y `E-8`
 **Trazabilidad downstream:** [`../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md`](../08-Calidad-Y-Pruebas/Matriz-Sensado-Deriva.md), que toma `VER-12002` como sonda `SD-12014`; `11-Documentacion` cuando se emita
 
 ---
@@ -70,8 +70,11 @@ samples/visor/02-intermedio/
 [12] Redimensionar tras cambiar el tamano: relacion de aspecto recalculada=si
 [13] Redimensionar con la superficie oculta: sin aviso, redimensiona a 1x1 | instancia viva=si
 [14] Redimensionar con la superficie devuelta a un tamano valido: ajuste aplicado=si
+[15] Seleccion desde la escena: el anfitrion recibio la posicion=si | el arbol marca la misma posicion=si
 Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones de red: 0
 ```
+
+**La línea `[15]` entró en la versión 2.1 y es la dirección inversa de `[9]`.** Hasta entonces los tres samples del visor invocaban las seis funciones de la fachada pero ninguno ejercía **la única vía del visor hacia su anfitrión**, el aviso `onPieceSelected` que [`ADR-08007`](../../../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md) puso en las opciones y no como séptima función; lo levantó la mesa evaluadora de la Feature 20 del framework el 2026-09-11. El anfitrión lo recibe en `initialize`, guarda la posición y marca el árbol **con la misma clave** que usa `[9]`: el índice. El punto donde hay una pieza depende de la disposición —determinista, pero no se calcula en el sample—: el recorrido suelta el puntero sin arrastrar sobre una grilla de la superficie hasta que el visor avisa, y soltar donde no hay pieza no avisa.
 
 **Cinco líneas cambiaron en la versión 2.0, y cuatro tienen una sola causa.** [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md), del 2026-08-16, sacó el texto del alumno de la fachada: **el visor recibe las piezas ya reconstruidas**, y quien reconstruye es el laboratorio.
 
@@ -105,7 +108,8 @@ Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones d
 | Artefacto upstream | Tipo | Cómo lo ilustra este sample |
 | --- | --- | --- |
 | [`CU-12002`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12002-Cargar-El-Texto-Del-Trabajo-Y-Dibujar.md) | Caso de uso | Actos `[1]` a `[8]` |
-| [`CU-12003`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) | Caso de uso | Actos `[9]` a `[11]` |
+| [`CU-12003`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12003-Seleccionar-Una-Pieza-Por-Su-Indice.md) | Caso de uso | Actos `[9]` a `[11]`, y `[15]` en la dirección inversa |
+| [`ADR-08007`](../../../Producto/Adrs/ADR-08007-El-Aviso-De-Seleccion-Va-En-Las-Opciones.md) | Decisión arquitectónica | Acto `[15]`: el aviso de selección entra por las opciones de `initialize`, no como séptima función, y el anfitrión decide qué marcar |
 | [`CU-12004`](../05-Arquitectura-Tecnica/Contrato-Componente-Visor/CU-12004-Redimensionar-La-Escena.md) | Caso de uso | Actos `[12]` a `[14]` |
 | Garantía `G-5` · Sin fallo silencioso | Garantía del contrato de fachada | Actos `[5]`, `[6]`, `[7]` y el recuento final de piezas sin registro en 0 |
 | Garantía `G-7` · Terminación controlada | Garantía del contrato de fachada | Actos `[11]` y `[13]`: la instancia y la selección quedan como estaban |
@@ -136,11 +140,14 @@ verificacion:
       - "[6] E-8 cargado: dibujadas=0 no dibujadas=1 | indice=0 codigo=UNREADABLE_DIMENSION"
       - "[7] E-6 cargado: dibujadas=1 no dibujadas=0 (el cero es una dimension legible)"
       - "[13] Redimensionar con la superficie oculta: sin aviso, redimensiona a 1x1 | instancia viva=si"
+      - "[15] Seleccion desde la escena: el anfitrion recibio la posicion=si | el arbol marca la misma posicion=si"
       - "Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones de red: 0"
     stdout_no_contiene:
       - "E-6 cargado: dibujadas=0"
   evidencia:
-    estado: "No verificado — sin código"
+    estado: "Verificado"
+    fecha: "2026-09-12"
+    salida: "CONFORME · las 16 líneas coinciden con el snapshot de §6 (imagen mcr.microsoft.com/playwright:v1.48.0-jammy)"
 ```
 
 **Por qué el criterio incluye una aserción negativa.** `E-6 cargado: dibujadas=0` no debe aparecer nunca: perder esa figura vaciaría la garantía `G-5` y repetiría el defecto del visualizador previo, que es lo que el producto viene a corregir.
@@ -149,6 +156,7 @@ verificacion:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.1 | 2026-09-12 | **Suma el acto `[15]`, la dirección inversa de `[9]`**: el anfitrión recibe `onPieceSelected` (`ADR-08007`) y marca el árbol con el mismo índice. Lo pidió la mesa evaluadora de la Feature 20 del framework (2026-09-11): el conjunto de samples del visor cubría las seis funciones y **no la única vía del visor hacia el anfitrión**. §6 suma la línea y su párrafo; §8 suma la fila de `ADR-08007`; §9 suma la aserción y completa `evidencia` con la corrida del 2026-09-12. Sube **minor**: se agrega un acto sin cambiar ninguna línea existente. |
 | 1.2 | 2026-08-29 | **Tramo `R-3d` del renombre `F-03`, que lo cierra.** **3 línea(s)** pasan los códigos de condición de la forma castellana a la vigente, con el mapeo de [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) **§6.8** —101 pares— y **sin elegir ninguno acá**. Se respeta **§4.1**: no se tocan las filas de control de cambios, ni lo que está entre «…», ni **la prosa que narra el renombre** —una línea que trae la forma vieja y su par vigente está reportando, no usando—. **Ninguna palabra de prosa cambia**, verificado con el control de diff del tramo. |
 | 1.1 | 2026-08-11 | **Corrección de precisión de recuento, hallada al resolver el informe `G-10-Examples-Siete-Proyectos-r1.md` 1.0 y no reportada por él.** La fila de `ADR-12002` de la §8 decía «Las cinco funciones se invocan desde el anfitrión y ninguna otra», atribuyéndole a esa ADR una superficie de **cinco** funciones cuando declara **seis** desde su título y su §2 —las cinco son las que **este sample** invoca, no las que la ADR declara—. Se enlaza además la carpeta esqueletada de [`/samples/visor/02-intermedio/`](../../../../../samples/visor/02-intermedio/) creada al resolver el **P0-1**, y se actualiza la trazabilidad al `PRODUCT-INTAKE` **1.25**. Ningún acto, criterio de aceptación ni recuento del contrato cambia. |
 | 1.0 | 2026-08-11 | Emisión inicial en la **pasada de diseño**. Segunda parte del sample **S-1**. Cubre `CU-12002`, `CU-12003` y `CU-12004`, lleva las funciones ejercidas a **5 de 6** y usa **cinco** escenarios del `PRODUCT-INTAKE` §20 transcriptos sin modificación. Verifica los **seis** tipos dibujables, los dos sinónimos de clave del emisor, los **dos** cursos de `ELEMENTO_DE_DIBUJO_INVALIDO` y los **dos** casos de `INDICE_FUERA_DE_RANGO`. El contrato `VER-12002` declara siete líneas exactas de salida y **una aserción negativa** sobre la figura de `E-6`; `evidencia` queda en `No verificado — sin código`. |

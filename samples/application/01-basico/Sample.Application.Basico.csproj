@@ -5,7 +5,7 @@
     Gobernado por `ejemplo-01-basico-aplicacion.md`: su §5 declara este árbol y su §6
     la salida exacta.
 
-    NO ENTRA EN `GeometriaFactory.sln`, como los tres de `domain`.
+    ENTRA EN `GeometriaFactory.sln` desde el 2026-09-12, como los tres de `domain` (`Rules-Examples.md` §3.4).
   -->
 
   <PropertyGroup>

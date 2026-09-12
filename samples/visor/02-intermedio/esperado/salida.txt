@@ -12,4 +12,5 @@
 [12] Redimensionar tras cambiar el tamano: relacion de aspecto recalculada=si
 [13] Redimensionar con la superficie oculta: sin aviso, redimensiona a 1x1 | instancia viva=si
 [14] Redimensionar con la superficie devuelta a un tamano valido: ajuste aplicado=si
+[15] Seleccion desde la escena: el anfitrion recibio la posicion=si | el arbol marca la misma posicion=si
 Funciones ejercidas: 5 de 6 | Piezas no dibujadas sin registro: 0 | Peticiones de red: 0

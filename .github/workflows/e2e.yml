@@ -86,9 +86,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Empaquetar el visor
-        run: ./scripts/build-visor.sh
-
+      # El bundle del visor lo genera `GeometriaFactory.Web.csproj` cuando el banco local publica
+      # el front; por eso Node se ancla y no se invoca `build-visor.sh` a mano (`Web ADR-10008`).
       - name: Compilar las pruebas
         run: dotnet build tests/GeometriaFactory.E2ETests -c Release --nologo
 

@@ -2,9 +2,9 @@
 
 **Unidad de entrega:** GeometriaFactory-Web
 **Documento:** ADR-12006-Bundle-Generado-Y-Versionado-Del-Punto-De-Extension.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Aprobado
-**Fecha:** 2026-08-10
+**Fecha:** 2026-09-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Despliegue
 
@@ -68,8 +68,8 @@ Qué constituye cada clase de cambio sobre el punto de extensión:
 | **Parche** | Corregir el interior de la capa 3 sin cambiar la superficie ni las garantías | — |
 
 - Convenciones de mensaje de confirmación y una rama por etapa, como el resto del producto.
-- **El artefacto nunca se edita a mano.** Un guion propio genera sólo el bundle para el ciclo corto de trabajo; el guion general lo encadena con el resto de la construcción.
-- El bundle se copia al directorio de recursos estáticos del anfitrión como paso final.
+- **El artefacto nunca se edita a mano.** Un guion propio genera sólo el bundle para el ciclo corto de trabajo; desde el 2026-09-12 lo ejecuta el target `BuildVisor` del proyecto del anfitrión, que es el único generador ([`ADR-10008`](ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md)).
+- El bundle se copia al directorio de recursos estáticos del anfitrión como paso final, y el anfitrión lo declara como recurso estático en la misma construcción.
 
 ## 8. Métricas de validación
 
@@ -93,4 +93,5 @@ Qué constituye cada clase de cambio sobre el punto de extensión:
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 1.1 | 2026-09-12 | §7: quién ejecuta el guion que genera el bundle pasa a ser el target del proyecto del anfitrión (`ADR-10008`); la decisión —generado, nunca editado a mano, versionado por el punto de extensión— no cambia. Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra el versionado semántico sin publicación con el artefacto como salida reproducible, declara que lo que la versión gobierna es la superficie del punto de extensión, fija el criterio de cambio mayor con la columna que declara que **ninguno lo detecta una compilación**, evalúa cuatro alternativas y fija cinco métricas. |

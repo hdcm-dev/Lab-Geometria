@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.56">
+
+  <!--
+    NODO DE SOLUCIÓN DEL VISOR: visible en `GeometriaFactory.sln`, INERTE en la construcción.
+
+    Existe porque el Product Owner decidió el 2026-09-11 que todos los proyectos de código queden
+    bajo el árbol de solución, aunque sea bajo carpetas virtuales (intake §13.2, control de
+    cambios). Un Solution Folder con `SolutionItems` habría cumplido la letra, pero es una lista
+    archivo por archivo que ningún comando mantiene: un `.ts` nuevo no aparece. Este nodo lista
+    las fuentes por glob y no hace nada más.
+
+    QUIÉN CONSTRUYE EL BUNDLE NO ES ESTE ARCHIVO: es `GeometriaFactory.Web.csproj` (target
+    `BuildVisor`, `Web ADR-10008`), que corre `scripts/build-visor.sh`. Acá no corre `npm`, no hay
+    `Exec`, no hay `ProjectReference` hacia ni desde este nodo: la arista `Visor → Web` sigue
+    siendo un activo de construcción (manifiesto §3), no una referencia de proyecto.
+
+    `Microsoft.Build.NoTargets` es un SDK de construcción que produce un proyecto sin ensamblado;
+    entra por el restore como cualquier paquete. `EnableDefaultItems=false` evita que el glob por
+    omisión arrastre `node_modules/` (6.592 ítems medidos).
+  -->
+
+  <PropertyGroup>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="src/**/*.ts;package.json;package-lock.json;webpack.config.js;tsconfig.json;verification/**" />
+  </ItemGroup>
+
+</Project>

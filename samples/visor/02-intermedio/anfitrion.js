@@ -18,8 +18,19 @@
     escenario: '',
     ultimo: { drawn: [], undrawn: [] },
 
+    // LA ÚNICA VÍA DEL VISOR HACIA EL ANFITRIÓN entra por las opciones (`ADR-08007`): cuando la
+    // persona elige una pieza EN LA ESCENA, el visor resalta y avisa con la posición; qué se
+    // marca en el árbol sigue siendo de acá. Es la misma clave —el índice— en las dos direcciones.
+    seleccionadaDesdeLaEscena: null,
+
     inicializar: function () {
-      this.identificador = fachada.initialize(document.getElementById('escena'));
+      var anfitrion = this;
+      this.identificador = fachada.initialize(document.getElementById('escena'), {
+        onPieceSelected: function (posicion) {
+          anfitrion.seleccionadaDesdeLaEscena = posicion;
+          anfitrion.marcarEnElArbol(posicion);
+        },
+      });
       var selector = document.getElementById('escenario');
       Object.keys(window.PIEZAS).forEach(function (nombre) {
         var opcion = document.createElement('option');
@@ -59,8 +70,12 @@
 
     seleccionar: function (indice) {
       fachada.selectPiece(this.identificador, indice);
-      // El árbol se marca acá: el visor resalta en la escena y avisa, pero no decide
-      // qué se marca afuera.
+      this.marcarEnElArbol(indice);
+    },
+
+    // El árbol se marca acá: el visor resalta en la escena y avisa, pero no decide
+    // qué se marca afuera. Lo usan las dos direcciones: desde el árbol y desde la escena.
+    marcarEnElArbol: function (indice) {
       var filas = document.querySelectorAll('#arbol li');
       for (var i = 0; i < filas.length; i += 1) {
         filas[i].classList.toggle('resaltada', filas[i].dataset.posicion === String(indice));

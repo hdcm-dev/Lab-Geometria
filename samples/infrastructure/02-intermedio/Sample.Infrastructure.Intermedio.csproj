@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--
     Sample `infrastructure/02-intermedio`. Gobernado por `ejemplo-02-intermedio-infraestructura.md`.
-    NO entra en `GeometriaFactory.sln`.
+    Entra en `GeometriaFactory.sln` desde el 2026-09-12 (`Rules-Examples.md` §3.4).
 
     SIN CARPETA `Dobles/`, igual que el `01`: los dos adaptadores que ejercita —el repositorio de
     trabajos y el de cuentas— se corren contra SQLite DE VERDAD, con las migraciones del producto

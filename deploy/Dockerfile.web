@@ -66,6 +66,9 @@ COPY src/ ./src/
 RUN dotnet restore src/GeometriaFactory.Web/GeometriaFactory.Web.csproj
 
 # EL BUNDLE ENTRA ANTES DE `publish`, o no queda en la salida: `wwwroot` se copia al publicar.
+# ESTA ETAPA NO TIENE NODE, y por eso `publish` corre con `SkipVisorBuild=true`: el `.csproj` del
+# front genera el bundle por sí mismo (`BuildVisor`) en todo ambiente con Node, y acá lo recibe
+# hecho de la etapa 1. Sin la bandera el target intentaría `npm ci` y fallaría.
 COPY --from=visor /source/src/GeometriaFactory.Web/wwwroot/js/ ./src/GeometriaFactory.Web/wwwroot/js/
 
 # Va DESPUÉS del restore para no invalidarle la caché en cada commit.
@@ -77,7 +80,8 @@ RUN set -eu; \
     echo "Sellando la imagen con la revisión $revision"; \
     dotnet publish src/GeometriaFactory.Web/GeometriaFactory.Web.csproj \
       -c Release -o /publish --no-restore \
-      -p:SourceRevisionId="$revision"
+      -p:SourceRevisionId="$revision" \
+      -p:SkipVisorBuild=true
 
 # ---------------------------------------------------------------------------------------------
 # ETAPA 3 · ejecución.

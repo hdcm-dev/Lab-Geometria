@@ -17,8 +17,8 @@ Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-G
 | Unidad de entrega principal | — | `GeometriaFactory-Api` |
 | Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **3.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
 | Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
-| Versión | — | 6.0 |
-| Fecha | — | 2026-09-12 |
+| Versión | — | 5.4 |
+| Fecha | — | 2026-08-31 |
 | Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y **10.0 → 13.3** cerradas, y **procedencia actualizada a 13.7 sin migrar** el 2026-08-27, por la salida `C` de la quinta reanudación |
 
 `Slug-Producto` es el único campo derivado: se obtiene de `Nombre-Producto` con el algoritmo de `Master-Prompt.md` §3.2 (`Fábrica de Geometría` → `Fabrica-De-Geometria`). `Raiz-Codigo` y `Artefacto-Agrupacion` se leen declarados del intake (cabecera y perfil de convención de §13), no se derivan.
@@ -143,7 +143,7 @@ El producto tiene dos ejes que no coinciden: el de **entrega**, que dice qué se
 
 ### §2.B Tabla de proyectos de código
 
-**Solución de código `GeometriaFactory.sln`** — seis proyectos .NET que se construyen con un solo comando, más el nodo sin construcción del visor (abajo):
+**Solución de código `GeometriaFactory.sln`** — seis proyectos, un solo comando de construcción:
 
 | `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | Stack | Rol en la arquitectura | Dependencias de compilación | Path `/src` |
 |---|---|---|---|---|---|
@@ -154,20 +154,19 @@ El producto tiene dos ejes que no coinciden: el de **entrega**, que dice qué se
 | `GeometriaFactory-Infrastructure` | `GeometriaFactory.Infrastructure` | C# sobre .NET 10, EF Core con proveedor SQLite | Persistencia, seguridad y validador de figuras | `GeometriaFactory-Application`, `GeometriaFactory-Domain` | `src/GeometriaFactory.Infrastructure/` |
 | `GeometriaFactory-Contracts` | `GeometriaFactory.Contracts` | C# sobre .NET 10 | DTOs de la API. **Proyecto compartido** | — | `src/GeometriaFactory.Contracts/` |
 
-**En `GeometriaFactory.sln` como nodo sin construcción** (intake §13.2, desde la 4.0) — un paquete Node.js que el agrupador muestra y no construye:
+**Sin solución de código** — un proyecto Node.js independiente:
 
 | `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | Stack | Rol en la arquitectura | Dependencias de compilación | Path |
 |---|---|---|---|---|---|
-| `GeometriaFactory-Visor` | `geometriafactory-visor` | Node.js con TypeScript y webpack; nodo `Microsoft.Build.NoTargets` en el agrupador | Produce el bundle del visor 3D. Visualizador puro (RA-02) | — | `visor/` (archivo de proyecto `visor/geometriafactory-visor.csproj`) |
+| `GeometriaFactory-Visor` | `geometriafactory-visor` | Node.js con TypeScript y webpack | Produce el bundle del visor 3D. Visualizador puro (RA-02) | — | `visor/` |
 
 **Ningún proyecto de código lleva valor D8**: el tipo es atributo de la entrega, no de la compilación.
 Los cinco que la emisión 1.4 declaraba `library` no perdieron rol: perdieron un atributo que el modelo
 de dos ejes le asigna a la unidad que los contiene.
 
-**El visor está en `GeometriaFactory.sln` desde el 2026-09-12 como nodo sin construcción**, y su grafo de
-compilación sigue siendo propio: su artefacto llega a `GeometriaFactory-Web` como **bundle copiado a
-`wwwroot/js/`** por un target de `GeometriaFactory.Web.csproj` (`Web ADR-10008`), no como referencia de
-proyecto. Es un consumo de artefacto que ahora expresa un `.csproj`, no una arista del grafo de referencias.
+**El visor no pertenece a `GeometriaFactory.sln`**, y por eso su grafo de compilación es propio: su
+artefacto llega a `GeometriaFactory-Web` como **bundle copiado a `wwwroot/js/`**, no como referencia
+de proyecto. Es un consumo de artefacto entre soluciones, no una arista del grafo de la solución .NET.
 
 ### §2.C Matriz de composición
 
@@ -216,8 +215,8 @@ referencias de proyecto (7), las que un `.csproj` materializa
     Contracts      ->  Api
     Contracts      ->  Web
 
-activo de construcción (1), que un `.csproj` expresa con un target y no con una referencia
-    Visor          ->  Web            <- el bundle, generado y copiado a wwwroot/js/ por `GeometriaFactory.Web.csproj`
+activo de construcción (1), que ningún `.csproj` puede expresar
+    Visor          ->  Web            <- el bundle, copiado a wwwroot/js/
 ```
 
 Orden topológico de compilación: nivel 0 `GeometriaFactory-Domain` y `GeometriaFactory-Contracts`;
@@ -225,14 +224,12 @@ nivel 1 `GeometriaFactory-Application` y `GeometriaFactory-Web`; nivel 2
 `GeometriaFactory-Infrastructure`; nivel 3 `GeometriaFactory-Api`.
 
 **Grafo de compilación del proyecto Node.js:** un solo nodo, `GeometriaFactory-Visor`, sin
-dependencias de compilación. Su salida se consume como artefacto. Que el nodo aparezca en
-`GeometriaFactory.sln` no lo suma al grafo de referencias: el nodo no construye nada.
+dependencias de compilación. Su salida se consume como artefacto.
 
 **Por qué el grafo tiene dos clases de arista, y por qué esto se corrige recién hoy.** `Visor → Web` es
 una dependencia de compilación real —sin el bundle el front no funciona— pero **no es una referencia de
-proyecto**: la materializa el target `BuildVisor` de `GeometriaFactory.Web.csproj`, que ejecuta
-`scripts/build-visor.sh` —la salida de webpack copiada a `src/GeometriaFactory.Web/wwwroot/js/`— y
-declara el archivo como recurso estático. Un proyecto Node y uno .NET no se referencian entre sí. Contar
+proyecto**: la materializa `scripts/build-visor.sh`, que copia la salida de webpack a
+`src/GeometriaFactory.Web/wwwroot/js/`. Un proyecto Node y uno .NET no se referencian entre sí. Contar
 las ocho juntas obliga a decir de qué clase es cada una; **no decirlo es lo que produjo tres recuentos
 distintos en este mismo documento**, y la clase estaba implícita en §2.B desde la emisión 1.0.
 
@@ -251,7 +248,7 @@ capas no se despliegan.
 | Exactamente una unidad de entrega principal | Cumple: `GeometriaFactory-Api` |
 | Sin colisión de `Nombre-Proyecto-Codigo` ni de `Identidad-Codigo` | Cumple: siete nombres y siete identidades distintas |
 | Cada dependencia de compilación referencia un proyecto de código existente | Cumple: **las ocho aristas resuelven** — siete referencias de proyecto y un activo de construcción, contadas sobre la columna de dependencias de §2.B y **verificadas contra los seis `.csproj` y `scripts/build-visor.sh` el 2026-08-31** |
-| Grafo de compilación acíclico, por solución de código | Cumple: cuatro niveles en `GeometriaFactory.sln`; el nodo del visor no participa del grafo de referencias |
+| Grafo de compilación acíclico, por solución de código | Cumple: cuatro niveles en `GeometriaFactory.sln`; un solo nodo en el proyecto Node |
 | Todo proyecto de código compone al menos una unidad de entrega | Cumple: los siete tienen marca en §2.C |
 | `Nombre-Producto` en prosa de negocio, independiente de `Raiz-Codigo` | Cumple |
 | `Raiz-Codigo` declarado en el intake | Cumple: declarado, no asumido |
@@ -302,7 +299,6 @@ correspondiente.
 
 | Versión | Fecha | Cambios | Autor |
 |---|---|---|---|
-| 6.0 | 2026-09-12 | **Re-derivado del intake 4.0** (`Master-Prompt.md` §13, caso (a)): el visor pasa a `GeometriaFactory.sln` como **nodo sin construcción** por decisión del Product Owner del 2026-09-11; §2.B reordena su bloque, §3 reexpresa la clase «activo de construcción» —sigue siendo una, pero ahora la expresa un `.csproj` con un target y ya no un guion invocado a mano— y §4 ajusta la validación de aciclicidad. **Las ocho aristas, sus clases y el orden topológico no cambian.** Estado anterior en `_legacy/2026-09-12/`. Sube **major** con el intake. | Orquestador, sobre decisión del Product Owner |
 | 5.4 | 2026-08-31 | **El recuento de aristas de compilación queda resuelto contra el árbol: son OCHO, y §2.B tenía razón desde la emisión 1.0.** Cierra el punto abierto que `../Docs/Producto/Vista-Producto.md` §3.1 sostenía desde el **2026-08-10** y que el §8 del README del producto listaba como el primero de sus cuatro. **No hubo que decidir nada: hubo que abrir los `.csproj`.** Los seis proyectos .NET declaran **siete referencias de proyecto** y `scripts/build-visor.sh` materializa la octava, `Visor → Web`, copiando el bundle a `wwwroot/js/`. La columna de dependencias de §2.B enumera **exactamente esas ocho**, arista por arista, incluida `Application → Api` **directa**, que `GeometriaFactory.Api.csproj` tiene escrita. **Los otros dos recuentos estaban mal, y de maneras distintas.** El bloque de §3 dibujaba **cinco** aristas, una de ellas —`Contracts → Application`— **inexistente en el árbol y ausente de §2.B**, y omitía cuatro; se reescribe enumerando las ocho y **rotulando su clase**. El §4 declaraba «las siete aristas resuelven»: **el número coincidía por casualidad** con la cantidad de referencias de proyecto, pero contando un conjunto distinto —el de §3, que incluye `Visor → Web` y excluye `Application → Api`—. **Un recuento correcto por la razón equivocada es peor que uno incorrecto**: quien hubiera escrito el `.csproj` de la Api leyendo el diagrama habría omitido una referencia y el error habría aparecido recién al compilar. Se corrige además la prosa que hablaba de «cuatro aristas internas del backend», que son **seis**. **Ninguna decisión de arquitectura cambia** —el grafo es acíclico y el orden topológico de cuatro niveles es el mismo bajo las tres lecturas—, y por eso esto nunca frenó nada, que es exactamente por lo que sobrevivió veintiún días. Emitido como **parche a mano sobre un artefacto derivado**, con el precedente de la 5.2: corregir un defecto de derivación no exige re-derivar el documento entero. | Orquestador SDD |
 | 5.3 | 2026-08-27 | **Procedencia actualizada a SDD 13.7 sin migrar**, por la **salida `C`** del orquestador de reanudación, decidida por el Product Owner el 2026-08-27 en la **segunda vuelta** de [`../Docs/Audit/Estado-Del-Destino-2026-08-27.md`](../Docs/Audit/Estado-Del-Destino-2026-08-27.md) §8.1. **No es una migración y §1.1 lo dice en su primera línea**: es el caso que `Master-Prompt-Reanudacion.md` §4 llama «actualizar la procedencia sin migrar», y que **sólo procede con la verificación artefacto por artefacto hecha** — la lista de los **ocho artefactos que se movieron**, con el motivo por el que cada uno **no** toca al destino, está en §6 de ese informe y resumida en la tabla nueva de §1.1. **Cero major**, y los cuatro saltos con bloque de impacto vacío. **Ningún documento del corpus cambia**: es la única diferencia con las siete migraciones anteriores, y es la que hace que esta actualización sea una tabla y no un trabajo. Entra **`Mesa-Rules` 1.0** a la tabla de artefactos, que **sí alcanza al destino aunque no a su corpus**: gobierna la fase `R1.5`, que corrió ese día. **§1.1 deja de arrastrar el relato completo de la migración 10.0 → 13.3** —vive en las entradas 5.0 y 5.1 de este control de cambios— y conserva de ella lo que no es de forma: el cierre de `PA-01` y el retiro de `D2`. Se agrega la constancia de por qué las citas del intake **3.0** siguen siendo correctas con el intake en **3.1**. | Orquestador de reanudación SDD |
 | 5.2 | 2026-08-27 | **Parche `P-04` de la mesa de evaluación del 2026-08-27** ([`../Docs/Audit/Mesa-2026-08-27.md`](../Docs/Audit/Mesa-2026-08-27.md), hallazgo **H-04**, ancla **E2**, nivel **P2**). La línea 3 declaraba «plantilla de referencia **5.0**» mientras **§1.1 de este mismo documento** declara la **6.0**: dos lecturas del mismo dato dentro del mismo archivo, y la de arriba es la que un lector ve primero. Se corrige la línea 3 y se la remite a §1.1, que es la fuente. **La procedencia de §1.1 no se toca** y sigue en SDD **13.3**. | Orquestador de reanudación SDD |

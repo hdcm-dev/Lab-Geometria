@@ -5,7 +5,7 @@
     Gobernado por `ejemplo-03-avanzado-dominio.md`: su §5 declara este árbol y su §6
     la salida exacta.
 
-    NO ENTRA EN `GeometriaFactory.sln`, como los otros dos.
+    ENTRA EN `GeometriaFactory.sln` desde el 2026-09-12, como los otros dos (`Rules-Examples.md` §3.4).
 
     LA REFERENCIA AL DOMINIO ES LA ÚNICA, y este archivo es además el DATO que el
     acto `[9]` inspecciona: el sample cuenta sus propias referencias salientes para
