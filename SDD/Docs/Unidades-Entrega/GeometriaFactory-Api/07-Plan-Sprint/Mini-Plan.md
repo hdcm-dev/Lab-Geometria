@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Mini-Plan.md
-**Versión:** 2.1
+**Versión:** 3.0
 **Estado:** Propuesto
 **Fecha:** 2026-08-25
 **`tipo_unidad_entrega` (D8):** `rest-api` · **Unidad de entrega principal del producto**
@@ -145,8 +145,11 @@ Lo que **sí** limita la capacidad y está declarado es el **cuello de diseño**
 | `e` | Los cinco puntos sobre trabajos están en pie, con el texto que **no se normaliza en el borde**, la eliminación verificada **forzando la petición** y el listado sin parámetro para pedir borradores ajenos. |
 | `f` | El envío y el reenvío **responden con éxito** transportando el estado que la interpretación decidió, y el texto viaja byte a byte. |
 | `h` | El desenlace está expuesto con su terminalidad, y **la colección de peticiones se reproduce en cinco pasos o menos sin datos inventados**. |
+| `k` | La superficie pública queda expuesta a clientes externos bajo `/v1/`, con la premisa de versionado reescrita, `OpenAPI`/Scalar publicados y la política de deprecación declarada, sin tocar el ROPC de los alumnos ni las siete etapas anteriores. Trazado a `Roadmap-Producto.md` §2.1 fila `k` y a `Backlog-Tecnico.md` §2.6 (EP-T06). **No comprometido**: `Roadmap-Producto.md` §3 lo declara «sin release comprometido: pendiente», a diferencia de las seis etapas anteriores, que **cierran el alcance comprometido** en `h`. |
 
 **Las etapas `b` y `g` no producen trabajo en este proyecto de código**, y por eso no tienen fila. El motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2: la `b` no agrega ningún punto de acceso, y **todo lo que la `g` necesita de esta superficie ya está expuesto en la `e`**.
+
+**La etapa `k` es la séptima que este proyecto de código toca**, y la primera que no pertenece al alcance original de ocho etapas de §1.1: `PRODUCT-INTAKE` **4.3** la abre el 2026-09-12 sobre una decisión del Product Owner posterior al handoff (`E-02` y `E-04`, `Mesa-2026-09-12-ciclo-2.md` §4), y `Roadmap-Producto.md` §4 declara que depende de `i` y no de `j…`. Los otros tres proyectos de código de esta unidad (`GeometriaFactory-Domain`, `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure`) **no tienen tramo `k`**: sus nueve BT nuevas son íntegramente de `GeometriaFactory-Api` (ver §3.2, §3.3 y §3.4).
 
 ### 2.2 `GeometriaFactory-Domain`
 
@@ -311,6 +314,8 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**. La 
 
 **Total comprometido: 27 historias y 16 tareas técnicas, repartidas en seis etapas.** La prioridad de la columna es de ejecución dentro de la etapa y no reemplaza a la MoSCoW del backlog, que vive en 06.
 
+**Este proyecto de código no tiene tramo `k`.** Las nueve BT de la épica EP-T06 (exposición pública y versionado del contrato) son íntegramente de `GeometriaFactory-Api`: `GeometriaFactory-Domain` no expone superficie ni conoce clientes externos, y no hay fila `k` que agregar acá.
+
 ### 3.3 `GeometriaFactory-Application`
 
 Los identificadores son los del backlog de 06 y **ninguno se inventa acá**. La columna de estimación queda sin valor por §1.2 y la de asignación es la única persona del equipo.
@@ -375,6 +380,8 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**. La 
 
 **US-04016 figura con prioridad de ejecución `Media`**, y su MoSCoW en 06 es `Should`. Es la única historia de este backlog donde las dos coinciden en señalar lo mismo: si la etapa `f` aprieta, es la primera candidata a diferirse.
 
+**Este proyecto de código no tiene tramo `k`.** Las nueve BT de la épica EP-T06 son íntegramente de `GeometriaFactory-Api`: la orquestación de casos de uso no cambia por exponer la superficie a un cliente externo, y no hay fila `k` que agregar acá.
+
 ### 3.4 `GeometriaFactory-Infrastructure`
 
 Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
@@ -437,6 +444,50 @@ Los identificadores son los del backlog de 06 y **ninguno se inventa acá**.
 
 **US-06023 figura con prioridad de ejecución `Media`**, y su MoSCoW en 06 es `Should`: es la única historia de este backlog donde las dos coinciden en señalar lo mismo.
 
+**Este proyecto de código no tiene tramo `k`.** Las nueve BT de la épica EP-T06 son íntegramente de `GeometriaFactory-Api`: ningún adaptador ni mecanismo cambia por exponer la superficie a un cliente externo, y no hay fila `k` que agregar acá.
+
+### 3.5 `GeometriaFactory-Api` — tramo `k`, exposición pública y versionado del contrato
+
+Los identificadores son los del backlog de 06 (`EP-T06`, `BT-00027` a `BT-00035`) y **ninguno se inventa
+acá**. La etapa `k` **no forma parte del alcance original de ocho etapas comprometidas** de §1.1: entra
+por decisión del Product Owner posterior al handoff (`PRODUCT-INTAKE` **4.3**), y `Roadmap-Producto.md`
+§3 la declara «sin release comprometido: pendiente». Por esa razón, la tabla de comprometidas de esta
+sección **queda separada** de la de §3.1 en lugar de fusionarse con sus seis etapas.
+
+**Comprometidas (`Ready` en la evaluación de DoR, [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md)):**
+
+| Etapa | ID | Tipo | Descripción corta | Prioridad | Estimación | Asignado | Estado |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `k` | BT-00027 | Tarea técnica | Reescribir `ADR-00008` adoptando `/v{MAJOR}/` para la superficie pública | Alta | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00029 | Tarea técnica | Rate limiting por clave o por IP | Alta | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00030 | Tarea técnica | Declarar CORS, condicional al cliente que aparezca (`D-01`) | Media | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00032 | Tarea técnica | Versionar las rutas públicas bajo `/v1/` | Alta | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00033 | Tarea técnica | Adoptar MinVer y etiquetar los commits de producción | Media | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00034 | Tarea técnica | Sample de onboarding para un cliente externo contra `/v1/` | Media | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00035 | Tarea técnica | Política de deprecación en `Estrategia-Versionado.md` | Media | No aplica | Equipo (1) | Pendiente |
+
+**Total comprometido: 0 historias y 7 tareas técnicas**, repartidas en una sola etapa (`k`). Ninguna
+historia de usuario acompaña a esta épica: `Backlog-Tecnico.md` §3.1 declara que las nueve tareas de
+EP-T06 se justifican como **infraestructura compartida**, porque ninguna US existente ni nueva las
+consume — son la exposición del contrato hacia un cliente externo, no una capacidad que un alumno o un
+administrador ejerzan.
+
+**No comprometidas (quedan en `Borrador` tras la evaluación de DoR):**
+
+| ID | Qué le falta | Qué la destraba |
+| --- | --- | --- |
+| BT-00028 — Autenticación por cliente para terceros (API key o `client_credentials`) | Criterio 1 de la DoR: sin fuente admitida en `05` (componente, ADR, NFR, riesgo o punto abierto) ni en la superficie de `02`. La decisión de diseño ya está en `PRODUCT-INTAKE` §17.1.P.5, pero no tiene ADR propia | Que la categoría 05 (arquitectura) emita una ADR de autenticación de clientes externos, análoga a `ADR-00003` para el ROPC de alumnos, y esta ficha la cite |
+| BT-00031 — Publicar OpenAPI/Scalar en el ambiente de producción | Criterio 1 de la DoR: sin fuente admitida en `05` ni en la superficie de `02` ni en las reglas de delivery del intake §15 | Que la categoría 05 registre esta decisión (un NFR nuevo en §8 o un punto abierto en §11), o que el Product Owner la eleve como punto abierto explícito |
+
+**Consecuencia sobre lo comprometido.** `BT-00028` es dependencia directa de `BT-00029` y de `BT-00030`,
+y transitiva de `BT-00032`, `BT-00034` y `BT-00035` (ver §4.1 y la verificación de ciclo en
+[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §5). Las seis BT
+que dependen de ella, directa o transitivamente, están individualmente `Ready` por DoR, pero **no
+pueden ejecutarse** hasta que `BT-00028` se destrabe: se comprometen igual, porque el criterio 5 de la
+DoR no exige que la dependencia esté `Ready`, y el orden de construcción de §4.1 refleja la espera.
+`BT-00031` no bloquea a ninguna otra (`Dependencias: Ninguna`, y ninguna BT depende de ella), de modo
+que su ausencia no frena al resto del tramo.
+
 ## 4. Alcance técnico y orden de construcción
 
 ### 4.1 `GeometriaFactory-Api`
@@ -451,6 +502,26 @@ Esta sección **no redefine arquitectura**: referencia la de [`../05-Arquitectur
 4. `e`: BT-00018 sobre BT-00008, BT-00011 y BT-00013; las cuatro historias; **BT-00023 y BT-00024 al cerrar**, porque son las dos pruebas de criterio propio del producto.
 5. `f`: las dos historias sobre BT-00018; **BT-00012 se vuelve a correr**.
 6. `h`: BT-00019 sobre BT-00011 y BT-00013; US-00023 después; **BT-00020 al final**, porque la colección recorre la superficie entera e incluye la aprobación y el rechazo; BT-00021 y BT-00026 antes del punto de control.
+7. `k`: **BT-00027 primero**, porque reescribe la premisa de `ADR-00008` que las demás asumen cambiada. **BT-00031 y BT-00033 no tienen dependencias declaradas y pueden ir en paralelo** con el resto del tramo, incluso antes que BT-00027, porque ninguna de las dos toca la superficie de versionado de rutas. Sobre BT-00027: **BT-00028** (queda `Borrador`, ver destrabe en §3.5); sobre BT-00028: **BT-00029 y BT-00030**, que pueden ir en paralelo entre sí. **BT-00032 al cierre del grupo**, porque depende de las cuatro anteriores (`BT-00027`, `BT-00028`, `BT-00029`, `BT-00030`) y versiona los quince puntos de una sola vez. **BT-00034 y BT-00035 después de BT-00032**, y pueden ir en paralelo entre sí.
+
+**Verificación de que el orden anterior no tiene ciclo**, con el mismo comando que
+[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §5 usa sobre las
+nueve BT:
+
+```
+$ tsort tramo-k-deps.txt; echo "exit: $?"
+BT-00027
+BT-00028
+BT-00030
+BT-00029
+BT-00032
+BT-00035
+BT-00034
+exit: 0
+```
+
+`tsort` devuelve un orden topológico válido y termina en `0`: no hay ciclo. `BT-00031` y `BT-00033`
+quedan fuera del grafo por no declarar dependencias, y son trivialmente compatibles con cualquier orden.
 
 **Reglas de dependencia interna que ninguna tarea puede cruzar** (`05` §3.2): **ninguna superficie depende de otra superficie** —un punto que invocara a otro sería una petición encadenada, y **una petición ejerce a lo sumo un caso de uso**—; **el traductor está después de las cinco superficies**, incluidas las que no exigen acceso, de modo que **ningún camino de fallo sale sin pasar por la tabla única**; y **la composición de raíz no atiende peticiones**: construye el grafo y desaparece.
 
@@ -777,3 +848,4 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto sin reescritura. Sube **major**. |
 | 2.1 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06.** La fila **«Unidad de estimación»** decía «Sin fijar, por `Product-Backlog.md` §4.1», y ese punto —`PA-01`— **quedó cerrado por lectura el 2026-08-25**: el producto no estima, planifica por etapas con punto de control bloqueante. **Se toca este documento aunque no esté en la superficie declarada del plan**, y es deliberado: dejarlo habría producido exactamente lo que el audit del corte del README raíz levantó como **P1** —reescribir una parte y dejar las cifras viejas en otra, que es peor que un documento viejo con su fecha declarada—. §1.2 **no cambia**: ya decía que no se declara capacidad numérica y que es deliberado, y es una de las citas con las que `PA-01` se cerró. Estado previo archivado en [`_legacy/2026-08-25/Mini-Plan-v2.0.md`](_legacy/2026-08-25/Mini-Plan-v2.0.md). Sube **minor**: corrige una fila y no cambia ninguna decisión. |
+| 3.0 | 2026-09-12 | **Agrega el tramo `k`** (exposición pública y versionado del contrato, `Roadmap-Producto.md` §2.1 fila `k`, `Backlog-Tecnico.md` §2.6 EP-T06), abierto por decisión del Product Owner posterior al handoff (`PRODUCT-INTAKE` **4.3**, `E-02` y `E-04`). §2.1 suma el objetivo del tramo y declara que **no forma parte del alcance original de ocho etapas comprometidas** (`Roadmap-Producto.md` §3 lo marca «sin release comprometido: pendiente»). §3.1 abre una subsección `3.5` con las **siete** BT que la evaluación de DoR de [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) deja en `Ready` (`BT-00027`, `BT-00029`, `BT-00030`, `BT-00032` a `BT-00035`) como comprometidas, y las **dos** que quedan en `Borrador` (`BT-00028`, `BT-00031`) como no comprometidas, con qué les falta y qué las destraba. §4.1 suma el orden de construcción del tramo (punto 7) con la verificación de ausencia de ciclo por `tsort`. `GeometriaFactory-Domain`, `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure` declaran en una línea, en sus respectivas §3.2 a §3.4, que **no tienen tramo `k`**: las nueve BT de `EP-T06` son íntegramente de `GeometriaFactory-Api`. Estado previo archivado en [`_legacy/2026-09-12/Mini-Plan-v2.1.md`](_legacy/2026-09-12/Mini-Plan-v2.1.md). Sube **major**: agrega una etapa nueva con ítems comprometidos, que es el mismo evento que `Rules-Backlog-Tecnico.md` §3.6 usa para pasar el backlog técnico a `v2.0` — modifica el contenido de la matriz de `Roadmap-Producto.md` §3 (fila `k`, nueva). |
