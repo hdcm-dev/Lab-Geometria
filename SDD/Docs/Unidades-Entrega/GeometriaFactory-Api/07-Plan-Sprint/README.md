@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.0
+**Versión:** 2.1
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Scrum Master + API PM (AG-07)
@@ -38,16 +38,17 @@ final el host—, no este documento.
 
 ## 3. Estado del plan
 
-| Aspecto | Valor al 2026-08-10 |
+| Aspecto | Valor al 2026-09-12 |
 | --- | --- |
-| Etapas comprometidas del producto | 8 (`a` a `h`) |
-| Etapas que toca este proyecto de código | 6: `a`, `c`, `d`, `e`, `f` y `h` |
+| Etapas comprometidas del producto (alcance original) | 8 (`a` a `h`) |
+| Etapas que toca este proyecto de código, alcance original | 6: `a`, `c`, `d`, `e`, `f` y `h` |
 | Etapas cerradas | 0 |
 | Etapa abierta | Ninguna: el producto está en fase de especificación |
-| Historias comprometidas | 30 de 30 |
-| Tareas técnicas comprometidas | 26 |
+| Historias comprometidas (alcance original) | 30 de 30 |
+| Tareas técnicas comprometidas (alcance original) | 26 |
 | Puntos de acceso que el plan pone en pie | 15 de 15; `A-04` está **retirado y no se recicla** |
 | Puertas técnicas propias | **`PT-04`**, medida en la etapa `a` |
+| Tramo `k` (exposición pública y versionado, **no comprometido**: `Roadmap-Producto.md` §3 lo declara «pendiente») | 9 tareas técnicas evaluadas por DoR: **7 en `Ready`** (`BT-00027`, `BT-00029`, `BT-00030`, `BT-00032` a `BT-00035`) y **2 en `Borrador`** (`BT-00028`, `BT-00031`), ver [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) |
 
 **Las etapas `b` y `g` no producen trabajo acá**, y el motivo está en [`../06-Backlog-Tecnico/Product-Backlog.md`](../06-Backlog-Tecnico/Product-Backlog.md) §2: la `b` no agrega ningún punto de acceso y **todo lo que la `g` necesita de esta superficie ya está expuesto en la `e`**.
 
@@ -72,6 +73,7 @@ final el host—, no este documento.
 
 | Versión | Fecha | Descripción |
 | --- | --- | --- |
+| 2.1 | 2026-09-12 | **Suma el tramo `k`** a la tabla de §3: 9 tareas técnicas evaluadas por DoR, 7 en `Ready` y 2 en `Borrador`, con enlace a [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md). La fecha de corte de §3 pasa de 2026-08-10 a 2026-09-12 y las filas del alcance original se rotulan como tales, para no confundirlas con el tramo nuevo, que **no está comprometido**. Ningún otro contenido de este README cambia. Sube minor. |
 | 1.1 | 2026-08-11 | **Cierre de la fila de `10-Examples`** de §4, que decía «todavía no emitida». La categoría se emitió en su pasada de diseño y la colección de peticiones es su sample 02, con el contrato `VER-00002` que entra a la matriz de sensado como `SD-00002`. La fila se **conserva** con su desenlace y su fecha. Se declara además que las filas de `08-Calidad-Y-Pruebas` y de `09-Devops` de esa misma tabla **también quedaron desactualizadas** y que corregirlas pertenece a esta categoría en su próxima revisión. **Ningún tramo del plan, ninguna puerta y ningún recuento cambian.** Sube minor. |
 | 1.0 | 2026-08-10 | Emisión inicial del índice de la sección. Declara el único artefacto emitido, los **cuatro** que se omiten con el motivo de cada uno, el estado del plan con sus **seis** tramos, sus quince puntos de acceso y la puerta `PT-04`, y dónde vive lo que este plan no decide, incluidos los dos huecos del conjunto cerrado de códigos y las tres categorías todavía no emitidas. |
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
