@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** BT-00028-Autenticacion-Por-Cliente-Para-Terceros-Api-Key-O-Client-Credentials.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Borrador
 **Fecha:** 2026-09-12
 **Autor:** Scrum Master + Backlog Curator (AG-06)
@@ -54,3 +54,4 @@ Autenticación por cliente para terceros (API key o `client_credentials`).
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
 | 1.0 | 2026-09-12 | **Extracción a archivo individual** de la fila BT-00028 de [`../Backlog-Tecnico.md`](../Backlog-Tecnico.md) v3.0 §3.1, por cruce del umbral de treinta `BT` que fija `Rules-Backlog-Tecnico.md` §3.3 para el bloque `00xxx` (`GeometriaFactory-Api`, 35 tareas con la apertura de la fase `k`). **Contenido transpuesto sin reescritura** desde la fila del catálogo (§3.1), la épica EP-T06 de §2.1 y la fila correspondiente de la matriz de trazabilidad (§4.1). Autocorrección de la misma corrida (`Master-Prompt.md` §8.1), `ORIGEN DEL HECHO: de la corrida`, base `9167e68`. Evidencia en [`../../../../Audit/Apertura-Fase-k-2026-09-12.md`](../../../../Audit/Apertura-Fase-k-2026-09-12.md). |
+| 1.1 | 2026-09-12 | **Evaluación de DoR** (`Definition-Of-Ready.md` §2.1): **queda en Borrador**. El criterio 1 no se cumple en la letra: §2 y §7 citan `Mesa-2026-09-12-ciclo-2.md` §4 (un registro de mesa) y `PRODUCT-INTAKE` §17.1.P.5 (una sección del intake que no es su §15), ninguna de las dos admitida por el criterio; el ítem diferido `D-01` tampoco lo es, porque no figura como punto abierto de `05` §11. Se buscó una fuente admitida que sostuviera «autenticación por cliente» en `05` §3.1 (componentes), §8 (NFR), §9 (riesgos) y §11 (puntos abiertos) de las cuatro capas, y en la superficie de `02`: **no existe ninguna**. La decisión de diseño ya está tomada en el intake (§17.1.P.5, API key o `client_credentials`), pero **no tiene ADR propia** en `05`; escribirla es trabajo de la categoría 05 (una ADR nueva), no de esta ficha, y esta ficha no la inventa. Queda **abierto** hasta que `05` emita esa ADR. Evidencia en [`../../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../../Audit/DoR-Tramo-k-2026-09-12.md). |
