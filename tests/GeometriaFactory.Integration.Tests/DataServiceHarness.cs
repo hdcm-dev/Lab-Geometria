@@ -25,18 +25,26 @@ namespace GeometriaFactory.Integration.Tests;
 /// EL ALMACÉN ES UN ARCHIVO Y NO MEMORIA, y es deliberado: el segundo criterio de transición de
 /// la etapa `c` exige que el cambio **persista entre reinicios**, y un almacén en memoria no
 /// sobrevive al reinicio por definición, con lo cual la prueba no probaría nada.
+///
+/// ADMITE CONFIGURACIÓN ADICIONAL, Y NADA MÁS. Las llaves que una batería pase por el constructor
+/// se aplican después de las tres de arriba, por el mismo camino por el que llegan en el despliegue:
+/// es lo que le permite a `RateLimitingTests` declarar una red de proxy conocida o un umbral en cero
+/// sin sustituir ningún servicio. No es `sealed` por el mismo motivo: esa batería necesita simular
+/// la dirección del zócalo, que el servidor en memoria no tiene, y lo hace derivando de acá.
 /// </remarks>
-public sealed class DataServiceHarness : WebApplicationFactory<TwoPhaseStartup>
+public class DataServiceHarness : WebApplicationFactory<TwoPhaseStartup>
 {
     /// <summary>Clave de firma de prueba. No es la de ningún entorno: llega por configuración, como la real.</summary>
     public const string SigningKey = "clave-de-firma-solo-para-la-bateria-de-pruebas-32+";
 
     private readonly string _storePath;
+    private readonly IReadOnlyDictionary<string, string?> _settings;
 
-    public DataServiceHarness(string storePath)
+    public DataServiceHarness(string storePath, IReadOnlyDictionary<string, string?>? settings = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(storePath);
         _storePath = storePath;
+        _settings = settings ?? new Dictionary<string, string?>();
     }
 
     protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder)
@@ -46,6 +54,11 @@ public sealed class DataServiceHarness : WebApplicationFactory<TwoPhaseStartup>
         builder.UseSetting("ConnectionStrings:Store", $"Data Source={_storePath}");
         builder.UseSetting($"AccessToken:{nameof(SigningKey)}", SigningKey);
         builder.UseSetting("PasswordDerivation:Iterations", "1");
+
+        foreach (var (key, value) in _settings)
+        {
+            builder.UseSetting(key, value);
+        }
     }
 
     /// <summary>Una carpeta temporal propia, con un archivo de almacén que TODAVÍA NO EXISTE.</summary>

@@ -4,6 +4,7 @@ using GeometriaFactory.Application.Ports;
 using GeometriaFactory.Contracts.Accounts;
 using GeometriaFactory.Contracts.Errors;
 using GeometriaFactory.Infrastructure.Security;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace GeometriaFactory.Api.Endpoints;
@@ -97,7 +98,12 @@ public static class AuthenticationEndpoints
                 identity.Role.ToString()));
         })
         .WithName("ExchangeCredentials")
-        .AllowAnonymous();
+        .AllowAnonymous()
+        // LA CUOTA DEL CANJE ES PROPIA Y MÁS ESTRICTA QUE LA DEL GRUPO, siempre por dirección de
+        // origen: es el único punto que recibe una contraseña en claro y cada intento cuesta una
+        // derivación anclada, se acierte o no. Declararla acá reemplaza a la del grupo `/v1` sobre
+        // este punto; las cifras y su fundamento están en `ContractRateLimiting`.
+        .RequireRateLimiting(Composition.ContractRateLimiting.CredentialExchangePolicy);
 
         return endpoints;
     }
