@@ -46,7 +46,15 @@ jobs:
   puertas:
     runs-on: ubuntu-latest
     steps:
+      # CON TODO EL HISTORIAL Y LAS ETIQUETAS, y no es un lujo. `Directory.Build.props` adopta
+      # MinVer, que calcula la versión desde la última etiqueta `v*` alcanzable. El checkout por
+      # omisión trae UN commit y ninguna etiqueta, y sobre eso MinVer calcula `0.0.0-alpha.0` sin
+      # advertir: las puertas pasarían igual, pero verificarían un artefacto que se dice de otra
+      # versión. El historial completo cuesta 8,5 MiB (`git count-objects -vH`, 2026-09-12), y
+      # por eso no se recorta con filtros parciales: no hay nada que ahorrar.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Anclar el kit de desarrollo
         uses: actions/setup-dotnet@v4

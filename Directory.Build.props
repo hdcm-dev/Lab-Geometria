@@ -26,4 +26,37 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <!--
+    LA VERSIÓN LA CALCULA MINVER DESDE LAS ETIQUETAS, y no se escribe en ningún archivo.
+    Es la decisión `D-03` de la mesa del 2026-09-12 (ciclo 2, §3.3 y §8), que cierra los puntos
+    abiertos `PA-06` de Application y `PA-04` de Domain en `05` §11: hasta acá el SDK sellaba
+    `1.0.0` por omisión y `/salud` lo informaba como si fuera una versión del producto.
+
+    CÓMO CALCULA. Toma la última etiqueta `v<MAJOR>.<MINOR>.<PATCH>` alcanzable desde el commit
+    —el prefijo `v` es el que `Estrategia-Versionado.md` §3.b fija— y, si el commit no es el
+    etiquetado, sube PATCH y agrega `-alpha.0.<altura>`, donde la altura cuenta los commits por el
+    camino de fusiones: `0.8.1-alpha.0.134` sobre `main` el 2026-09-12, 134 fusiones después de
+    `v0.8.0`. Ese sufijo NO es un canal de anticipo (§5.b los descarta): es la marca de
+    MinVer de que la construcción no corresponde a ninguna etiqueta y no se entrega. La versión
+    limpia sólo sale sobre un commit etiquetado, que es exactamente lo que se quiere.
+
+    EL SHA LO SIGUE PONIENDO EL SDK. `AssemblyInformationalVersion` queda `<versión>+<sha>` porque
+    los dos `Dockerfile` pasan `-p:SourceRevisionId`; MinVer no toca esa parte.
+
+    NECESITA EL HISTORIAL Y LAS ETIQUETAS. Un clon superficial sin etiquetas calcula
+    `0.0.0-alpha.0.<n>` sin fallar: por eso `ci.yml` pide `fetch-depth: 0` y los dos `Dockerfile`
+    completan el historial cuando el contexto llega recortado.
+
+    Vive acá y no en cada `.csproj` por el mismo motivo que el resto del archivo: una sola vez
+    para los veinte proyectos de la solución. La versión del paquete está anclada exacta por la
+    regla de anclaje de arriba, y `PrivateAssets="All"` evita que viaje como dependencia de nada.
+  -->
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+  </PropertyGroup>
+
 </Project>

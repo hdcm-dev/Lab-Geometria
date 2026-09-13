@@ -1238,3 +1238,44 @@ sobre `cfb11f7`). Ninguna ruta cambia: el prefijo `/v1/` lo implementa `BT-00032
 
 **Evidencia:** `SDD/Docs/Audit/BT-00027-Cierre-2026-09-12.md` (las cinco verificaciones con comando y
 salida) y la ficha `BT-00027` **2.0**, `Done`.
+## La versión la calcula MinVer, y el evento de etiqueta deja de esperar al cierre de etapa — 2026-09-12
+
+**Rama:** `fase-k/bt-00033-minver` (`BT-00033`, fase `k`). Decisión `D-03` y respuesta `E-04` del Product
+Owner en `SDD/Docs/Audit/Mesa-2026-09-12-ciclo-2.md` §8.
+
+### Cambiado
+
+- **`Directory.Build.props` adopta MinVer 8.0.0**, anclado exacto y con `MinVerTagPrefix=v`, sin más
+  configuración. La versión deja de ser el `1.0.0` que el SDK sellaba por omisión y que `/salud`
+  informaba como si fuera del producto: sobre `main` hoy es `0.8.1-alpha.0.134+<sha>` —`v0.8.0` más
+  134 fusiones, marcada como no entregada— y sobre un commit etiquetado es la etiqueta. **`/salud` no
+  cambió**: ya leía `AssemblyInformationalVersion`.
+- **Los dos `Dockerfile` completan el clon antes de publicar.** Medido, no supuesto: el despliegue
+  construye desde la URL del repositorio y BuildKit deja el checkout con `--depth=1 --no-tags` aunque
+  conserve el `.git`; sobre eso MinVer calcula `0.0.0-alpha.0` **sin advertir**. Si `.git/shallow`
+  existe, `git fetch --unshallow --tags origin`; si no puede, avisa y no rompe la construcción.
+  `ci.yml` pide `fetch-depth: 0` por el mismo motivo.
+- **`Estrategia-Versionado.md` 5.0**: §3.1 a §3.4 dejan de declarar la herramienta «por su función»
+  —es MinVer— y entra **§3.c, el evento de etiqueta**: toda fusión a `main` que cambie código de
+  producción, número por Conventional Commits, MAJOR compartido con el contrato REST. `05` 3.11 cierra
+  `PA-04` (Domain) y `PA-06` (Application), abiertos desde la etapa `a`.
+
+### Lo que queda para el Product Owner, con `SI NO RESPONDÉS`
+
+- **`PD-VER-01` · quién crea la etiqueta.** Un job en `ci.yml` que la cree en cada `push` a `main` con
+  código de producción (subproducto del acto, pero una acción externa e irreversible desde CI), o a mano
+  con el número que MinVer sugiere. **Default: a mano**, hasta que apruebe el job.
+- **`PD-VER-02` · qué es «código de producción».** `src/**` y `visor/**` son indiscutidos; si entran
+  `Directory.Build.props`, los `*.csproj`, la solución y `deploy/Dockerfile*`. **Default: entran.**
+- **`PD-VER-03` · `89f3ab3` y `5c95dab`.** No se etiquetaron acá: etiquetar es irreversible y no se
+  puede calcular —**ninguna confirmación de `main` lleva `feat` ni `fix`**, y por MinVer el siguiente
+  número sería `0.8.1`, que afirmaría que en 129 fusiones sólo hubo correcciones—. **Propuesta**:
+  `v0.9.0` sobre `89f3ab3` y `v0.9.1` sobre `5c95dab`, anotadas y declaradas retroactivas. **Default:
+  ninguna**; `BT-00033` queda `En curso` por ese criterio.
+- **Producción sigue diciendo `1.0.0+5c95dab`** hasta que se reconstruya desde `main` con esta fusión.
+
+### Verificado
+
+`dotnet build` Release 0 advertencias (igual que `main`); `dotnet test` 522/522; MinVer sobre `HEAD`
+`0.8.1-alpha.0.135`; imagen del servicio construida sobre `cfb11f7` desde un clon superficial sin
+etiquetas responde `/salud` con `0.8.1-alpha.0.133+cfb11f75…`; `git tag -l` sin cambios. Detalle en la ficha, §8 fila 1.2.

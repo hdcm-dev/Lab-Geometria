@@ -74,9 +74,19 @@ COPY --from=visor /source/src/GeometriaFactory.Web/wwwroot/js/ ./src/GeometriaFa
 # Va DESPUÉS del restore para no invalidarle la caché en cada commit.
 COPY .gi[t] ./.git/
 
+# SI EL CLON ES SUPERFICIAL, SE COMPLETA ANTES DE PUBLICAR — misma mecánica y mismo motivo que el
+# `Dockerfile` del servicio de datos, donde está explicado: MinVer calcula la versión desde la última
+# etiqueta `v*`, y el checkout que BuildKit deja desde una URL trae un commit y cero etiquetas.
 RUN set -eu; \
     revision="$SOURCE_REVISION_ID"; \
-    if [ -f .git/HEAD ]; then revision="$(git -c safe.directory='*' rev-parse HEAD)"; fi; \
+    if [ -f .git/HEAD ]; then \
+      revision="$(git -c safe.directory='*' rev-parse HEAD)"; \
+      if [ -f .git/shallow ]; then \
+        echo "El clon es superficial: se completa el historial y las etiquetas para calcular la versión"; \
+        git -c safe.directory='*' fetch --unshallow --tags origin \
+          || echo "AVISO: no se pudo completar el historial; la versión saldrá como 0.0.0-alpha.0"; \
+      fi; \
+    fi; \
     echo "Sellando la imagen con la revisión $revision"; \
     dotnet publish src/GeometriaFactory.Web/GeometriaFactory.Web.csproj \
       -c Release -o /publish --no-restore \
