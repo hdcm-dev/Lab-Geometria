@@ -1,0 +1,34 @@
+# E-020 · M6-07: filas derivadas cuyo fragmento ya existía en otro archivo de SDD/ en el padre del commit de alta (elegidas por la regla de linaje de E-006h, Mesa-2026-09-13 veredicto 1)
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1190 | PA-02 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Api/03-UX-UI-DX/DX-Error-Messages.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1191 | PA-03 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Api/02-Especificacion-Funcional/Especificacion-Funcional.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1224 | PA-06 | e176845 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Domain/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1233 | PA-02 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1235 | PA-04 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Definicion-Contrato-Del-Validador-De-Figuras.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1237 | PA-06 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1238 | PA-07 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1240 | PA-09 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md |
+| GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 1242 | PA-11 | 0a71935 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 741 | PA-01 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Contracts/06-Backlog-Tecnico/Product-Backlog.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 745 | PA-05 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Api/02-Especificacion-Funcional/Definicion-Superficie-HTTP.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 746 | PA-06 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 750 | PA-10 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Api/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 760 | PA-03 | 914cc43 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 763 | PA-06 | 914cc43 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Application/02-Especificacion-Funcional/Casos-De-Uso/CU-01-Registrar-El-Alta-De-Una-Cuenta.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 769 | PA-01 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Domain/06-Backlog-Tecnico/Product-Backlog.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 772 | PA-04 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 773 | PA-05 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 781 | PA-01 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Contracts/06-Backlog-Tecnico/Product-Backlog.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 783 | PA-03 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 784 | PA-04 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md |
+| GeometriaFactory-Api/06-Backlog-Tecnico/Product-Backlog.md | 786 | PA-06 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Infrastructure/02-Especificacion-Funcional/Especificacion-Funcional.md |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 584 | PD-01 | 87fbb3b | ya en: SDD/Docs/Proyectos/GeometriaFactory-Domain/09-Devops/Pipeline-CI-CD.md |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 585 | PD-02 | 87fbb3b | ya en: SDD/Docs/Proyectos/GeometriaFactory-Domain/09-Devops/Pipeline-CI-CD.md |
+| GeometriaFactory-Api/09-Devops/Pipeline-CI-CD.md | 586 | PD-03 | 87fbb3b | ya en: SDD/Docs/Proyectos/GeometriaFactory-Application/05-Arquitectura-Tecnica/Adrs/ADR-03-Versionado-Y-Estabilidad-De-La-Superficie.md |
+| GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Unidad-Entrega.md | 618 | PA-04 | ee73c99 | ya en: SDD/Docs/Audit/B-02-03-GeometriaFactory-Visor-r1.md |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 661 | PA-01 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Contracts/06-Backlog-Tecnico/Product-Backlog.md |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 664 | PA-04 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 668 | PA-08 | 818997f | ya en: SDD/Docs/Proyectos/GeometriaFactory-Web/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 677 | PA-03 | 914cc43 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Visor/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Web/06-Backlog-Tecnico/Product-Backlog.md | 678 | PA-04 | 914cc43 | ya en: SDD/Docs/Proyectos/GeometriaFactory-Visor/05-Arquitectura-Tecnica/Arquitectura-Proyecto-Codigo.md |
+| GeometriaFactory-Web/09-Devops/Pipeline-CI-CD.md | 392 | PD-04 | 87fbb3b | ya en: SDD/Docs/Proyectos/GeometriaFactory-Visor/09-Devops/Pipeline-CI-CD.md |
+# 32 de 95 filas derivadas se eligieron por linaje entre más de un candidato; las otras 63 tienen un único alta.

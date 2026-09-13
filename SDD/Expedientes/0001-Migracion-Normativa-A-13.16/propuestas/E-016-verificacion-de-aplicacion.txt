@@ -1,33 +1,49 @@
-
-== A-6 · configuraciones de la solución ==
+$ bash aplicar-propuestas.sh …, sobre un worktree descartable (HEAD 5682307). Versión 3 del guion (M6-04, M6-16, M6-17).
+# (1) sin actuación de aprobación: debe abortar con mensaje
+ABORTA: no existe la actuación 999 de aprobación del Product Owner (actuaciones/999-testimonio-aprobacion-*.md)
+exit=1
+# (2) actuación que NIEGA la aprobación: debe abortar
+ABORTA: la actuación 998 contiene un rechazo o una negación de la aprobación
+exit=1
+# (3) actuación sin fecha: debe abortar
+ABORTA: la actuación 997 no está fechada
+exit=1
+# (4) actuación de prueba válida, sólo en este worktree: 999, «Aprobado, 2026-09-20», con --fecha 2026-09-20
+# (4a) fase docs antes que intake: debe abortar
+ABORTA: el manifiesto 7.0 no está aplicado (fase manifiesto primero)
+exit=1
+# (4b) intake
+aplicada P-01-intake-5.0 (fecha 2026-09-20)
+exit=0
+marcadores sin completar: 0
+actuación 999
+| 5.0 | 2026-09-20 |
+PRODUCT-INTAKE-Fabrica-De-Geometria-v4.6.md
+# (4c) manifiesto
+aplicada P-02-manifiesto-7.0 (fecha 2026-09-20)
+exit=0
+# (4d) docs
 
 El árbol de solución está completo.
-== snapshots
-?? SDD/Docs/Producto/Adrs/_legacy/2026-09-13/
-?? SDD/Docs/Producto/_legacy/2026-09-13/
-?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_legacy/
-?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_legacy/2026-09-13/
-?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/_legacy/2026-09-13/
-?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/_legacy/
-?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/_legacy/2026-09-13/
-?? SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/_legacy/2026-09-13/
-?? SDD/Intake/_legacy/2026-09-13/PRODUCT-INTAKE-Fabrica-De-Geometria-v4.6.md
-?? SDD/Intake/_legacy/2026-09-13/PRODUCT-MANIFEST-Fabrica-De-Geometria-v6.1.md
-== enlaces rotos en los archivos tocados
-archivos 16 enlaces rotos 0
-== ocurrencias vivas de «activo de construcción» tras aplicar
-SDD/Docs/Handoff-Checkout.md:606:| `X-1` | ~~**Cuántas aristas de compilación tiene el producto.** El manifi
-SDD/Docs/Handoff-Checkout.md:775:| 1.7 | 2026-08-31 | **Cierra `X-1`, la discrepancia más vieja del checkout:
-SDD/Docs/Producto/11-Documentacion/README.md:196:| ~~Cuántas aristas de compilación tiene el producto, siete
-SDD/Docs/Producto/11-Documentacion/README.md:213:| 1.4 | 2026-08-31 | **Cierra el primero de los tres puntos a
-SDD/Docs/Producto/Vista-Producto.md:65:| Aristas de compilación | **8**, de dos clases: **7** referencias de 
-SDD/Docs/Producto/Vista-Producto.md:263:| 1.10 | 2026-09-12 | **§3.1 deja de decir que ningún `.csproj` pued
-SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-G
-SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-G
-SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:426:**El visor pertenece a `GeometriaFactory.sln` porque `Ge
-SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:1962:| 5.0 | 2026-09-13 | **Migración normativa 13.7 → 13
-SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:1969:| 4.0 | 2026-09-12 | **Reescritura de §13.2 y §13.3 p
-SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md:300:| 6.0 | 2026-09-12 | **Re-derivado del intake 4.0** (`
-changelog.md:1132:  en el agrupador; la ruta `visor/`, la identidad npm y la clase «activo de construcción»
-evidencia/2026-09-12-estructura-solucion/README.md:16:`visor/` sigue en la raíz (apartamiento vigente); la ar
-visor/geometriafactory-visor.csproj:15:    siendo un activo de construcción (manifiesto §3), no una referenc
+exit=0
+== archivos del corpus tocados: 24; snapshots creados en _legacy/2026-09-20: 24
+== carpetas _legacy con la fecha vieja creadas por el guion: 0
+== filas de control de cambios nuevas fechadas 2026-09-20: 24  · con la fecha vieja: 0
+== enlaces rotos y versión de cabecera, en los archivos del corpus tocados
+archivos 24 | enlaces rotos 0 | versión de cabecera = máxima del registro en 24 de 24
+== residuos del término viejo tras aplicar (fuera de _legacy, Expedientes y Audit): registro, salvo las tres vivas que D-3 declara (Vista :65 lleva el nombre vigente al lado; 11-Documentacion :196 → DD-6; csproj :15 → DD-2)
+SDD/Docs/Handoff-Checkout.md:606
+SDD/Docs/Handoff-Checkout.md:775
+SDD/Docs/Producto/11-Documentacion/README.md:196
+SDD/Docs/Producto/11-Documentacion/README.md:213
+SDD/Docs/Producto/Vista-Producto.md:65
+SDD/Docs/Producto/Vista-Producto.md:263
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md:21
+SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/Adrs/ADR-10008-El-Bundle-Del-Visor-Lo-Genera-El-Proyecto-Del-Front.md:34
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:426
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:1962
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:1969
+SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md:300
+changelog.md:1132
+evidencia/2026-09-12-estructura-solucion/README.md:16
+visor/geometriafactory-visor.csproj:15

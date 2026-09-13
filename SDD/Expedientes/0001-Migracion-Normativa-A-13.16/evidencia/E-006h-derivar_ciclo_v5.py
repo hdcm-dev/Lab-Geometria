@@ -6,8 +6,9 @@
 #  3. git log b9675d8 --reverse -S"<fragmento>" --name-only: el primer commit que toca un archivo del linaje.
 #  4. Preexistencia: si en el padre de ese commit, EN ESE MISMO ARCHIVO, ya había una fila de tabla de ítems
 #     diferidos (cabecera con «Quién lo cierra») con el mismo Id → el texto se reescribió: no derivable.
-#  5. Si ningún fragmento resuelve → no derivable. Terna: fase = asunto literal del commit; unidad = la unidad
-#     de entrega que compone el proyecto (manifiesto §2.C); base = hash corto.
+#  5. Si ningún fragmento resuelve → no derivable. Terna (Master-Prompt.md §8.2): fase = asunto literal del commit;
+#     unidad de trabajo = el PROYECTO DE CÓDIGO en curso en ese ciclo (todos los ciclos derivados son anteriores a la 8.0,
+#     cuando la unidad de trabajo era el proyecto); base = hash corto. La unidad de entrega que hoy lo compone se anota aparte.
 import re,subprocess,json,sys
 B="b9675d8"
 LIN={"Arquitectura-Unidad-Entrega.md":["Arquitectura-Unidad-Entrega.md","Arquitectura-Proyecto-Codigo.md"],"Product-Backlog.md":["Product-Backlog.md"],"Pipeline-CI-CD.md":["Pipeline-CI-CD.md"],"Supply-Chain-Seguridad.md":["Supply-Chain-Seguridad.md"],"Estrategia-Versionado.md":["Estrategia-Versionado.md"]}
