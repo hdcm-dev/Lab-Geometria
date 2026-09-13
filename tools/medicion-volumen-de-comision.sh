@@ -114,10 +114,10 @@ done
 # Siembra
 # ---------------------------------------------------------------------------
 clave_admin="$(clave)"
-pedir POST /cuentas/administrador \
+pedir POST /v1/cuentas/administrador \
   "{\"email\":\"medicion.admin@ejemplo.test\",\"firstName\":\"Medicion\",\"lastName\":\"Admin\",\"password\":\"$clave_admin\"}"
 [ "$estado" = "201" ] || morir "no se pudo configurar el administrador (HTTP $estado)."
-pedir POST /auth/token "{\"email\":\"medicion.admin@ejemplo.test\",\"password\":\"$clave_admin\"}"
+pedir POST /v1/auth/token "{\"email\":\"medicion.admin@ejemplo.test\",\"password\":\"$clave_admin\"}"
 acceso_admin="$(campo accessToken "$cuerpo_recibido")"
 [ -n "$acceso_admin" ] || morir "el administrador no obtuvo acceso."
 
@@ -135,19 +135,19 @@ alta_y_envios() {
   # de modo que `${n}` en la misma línea sale sin definir y `set -u` detiene el guion.
   local correo="alumno${n}@ejemplo.test"
   local suya; suya="$(clave)"
-  pedir POST /cuentas "{\"email\":\"$correo\",\"firstName\":\"Alumno\",\"lastName\":\"Numero$n\"}"
+  pedir POST /v1/cuentas "{\"email\":\"$correo\",\"firstName\":\"Alumno\",\"lastName\":\"Numero$n\"}"
   local id; id="$(campo accountId "$cuerpo_recibido")"
   [ -n "$id" ] || return 1
-  pedir POST "/cuentas/$id/situacion" "{\"accountId\":\"$id\",\"intendedStatus\":\"Enabled\"}" "$acceso_admin"
+  pedir POST "/v1/cuentas/$id/situacion" "{\"accountId\":\"$id\",\"intendedStatus\":\"Enabled\"}" "$acceso_admin"
   local provisoria; provisoria="$(campo provisionalPassword "$cuerpo_recibido")"
-  pedir POST /cuenta/contrasena \
+  pedir POST /v1/cuenta/contrasena \
     "{\"email\":\"$correo\",\"currentPassword\":\"$provisoria\",\"newPassword\":\"$suya\"}"
-  pedir POST /auth/token "{\"email\":\"$correo\",\"password\":\"$suya\"}"
+  pedir POST /v1/auth/token "{\"email\":\"$correo\",\"password\":\"$suya\"}"
   local acceso; acceso="$(campo accessToken "$cuerpo_recibido")"
   [ -n "$acceso" ] || return 1
   local i
   for i in $(seq 1 "$por_alumno"); do
-    pedir POST /trabajos \
+    pedir POST /v1/trabajos \
       "{\"name\":\"Trabajo $n-$i\",\"declaredDate\":\"2026-08-30\",\"description\":null,\"originalJson\":$texto}" \
       "$acceso"
     [ "$estado" = "201" ] && creados=$((creados + 1))
@@ -177,9 +177,9 @@ medir() {   # $1 = token, $2 = etiqueta ; deja en `res_*`
   local tiempos="$trabajo/tiempos.txt"; : > "$tiempos"
   # Dos llamadas de calentamiento que NO se cuentan: la primera pide el plan de
   # consulta y el primer viaje mide el arranque, no el listado.
-  for i in 1 2; do curl -s -o /dev/null -H "Authorization: Bearer $acceso" "$base/trabajos"; done
+  for i in 1 2; do curl -s -o /dev/null -H "Authorization: Bearer $acceso" "$base/v1/trabajos"; done
   for i in $(seq 1 "$repeticiones"); do
-    t="$(curl -s -o "$trabajo/cuerpo.json" -w '%{time_total}' -H "Authorization: Bearer $acceso" "$base/trabajos")"
+    t="$(curl -s -o "$trabajo/cuerpo.json" -w '%{time_total}' -H "Authorization: Bearer $acceso" "$base/v1/trabajos")"
     awk -v t="$t" 'BEGIN{printf "%.3f\n", t*1000}' >> "$tiempos"
   done
   read -r res_p50 res_p99 res_max <<<"$(percentiles < "$tiempos")"

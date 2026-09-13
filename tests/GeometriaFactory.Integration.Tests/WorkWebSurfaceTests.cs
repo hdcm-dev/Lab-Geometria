@@ -300,7 +300,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         // 3 · LA PROTECCIÓN DE VERDAD, FORZANDO LA PETICIÓN. Acceso firmado legítimo de la misma
         //     alumna, dueña del trabajo, contra el servicio de datos y sin pasar por la pantalla.
         using var data = _dataService.CreateClient();
-        using var forced = new HttpRequestMessage(HttpMethod.Delete, $"/trabajos/{submittedId}");
+        using var forced = new HttpRequestMessage(HttpMethod.Delete, $"/v1/trabajos/{submittedId}");
         forced.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await StudentTokenAsync());
 
         using var rejection = await data.SendAsync(forced);
@@ -661,7 +661,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         using var data = _dataService.CreateClient();
 
         using var setup = await data.PostAsJsonAsync(
-            "/cuentas/administrador",
+            "/v1/cuentas/administrador",
             new AdministratorSetupRequest(AdministratorEmail, "Ana", "Rossi", AdministratorPassword));
 
         Assert.Equal(HttpStatusCode.Created, setup.StatusCode);
@@ -681,13 +681,13 @@ public sealed class WorkWebSurfaceTests : IDisposable
         using var data = _dataService.CreateClient();
 
         using var registration = await data.PostAsJsonAsync(
-            "/cuentas", new AccountRegistrationRequest(email, firstName, lastName));
+            "/v1/cuentas", new AccountRegistrationRequest(email, firstName, lastName));
 
         Assert.Equal(HttpStatusCode.Created, registration.StatusCode);
 
         var accountId = (await registration.Content.ReadFromJsonAsync<AccountRegistrationResponse>())!.AccountId;
 
-        using var enabling = new HttpRequestMessage(HttpMethod.Post, $"/cuentas/{accountId}/situacion")
+        using var enabling = new HttpRequestMessage(HttpMethod.Post, $"/v1/cuentas/{accountId}/situacion")
         {
             Content = JsonContent.Create(new AccountStatusChangeRequest(accountId, nameof(AccountStatus.Enabled))),
         };
@@ -700,7 +700,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
             .ProvisionalPassword!;
 
         using var change = await data.PostAsJsonAsync(
-            "/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, ChosenPassword, email));
+            "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(provisional, ChosenPassword, email));
 
         Assert.Equal(HttpStatusCode.OK, change.StatusCode);
     }
@@ -713,7 +713,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
     {
         using var data = _dataService.CreateClient();
         using var exchange = await data.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(email, password));
+            "/v1/auth/token", new CredentialExchangeRequest(email, password));
 
         Assert.Equal(HttpStatusCode.OK, exchange.StatusCode);
 
@@ -1220,7 +1220,7 @@ public sealed class WorkWebSurfaceTests : IDisposable
         var token = await AdministratorTokenAsync();
 
         using var request = new HttpRequestMessage(
-            HttpMethod.Post, $"/trabajos/{workId}/desenlace")
+            HttpMethod.Post, $"/v1/trabajos/{workId}/desenlace")
         {
             Content = JsonContent.Create(new WorkOutcomeRequest(workId, outcome, comment)),
         };

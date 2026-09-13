@@ -114,7 +114,7 @@ code_of() { # método ruta cuerpo [acceso]
 }
 
 token_for() { # contraseña
-  curl -s -X POST "$API/auth/token" -H 'Content-Type: application/json' \
+  curl -s -X POST "$API/v1/auth/token" -H 'Content-Type: application/json' \
     -d "{\"email\":\"$EMAIL\",\"password\":\"$1\"}" \
     | sed -n 's/.*"accessToken":"\([^"]*\)".*/\1/p'
 }
@@ -137,10 +137,10 @@ grep -qa '__EFMigrationsHistory' "$STORE"* && ok 'la transformación quedó asen
 # ---------------------------------------------------------------- C-1 ------
 printf '\n== C-1 · el administrador se configura, y sólo mientras no exista ninguno ==\n'
 SETUP="{\"email\":\"$EMAIL\",\"firstName\":\"Ana\",\"lastName\":\"Rossi\",\"password\":\"$PASS_1\"}"
-same "$(code_of POST /cuentas/administrador "$SETUP")" 201 "primera configuración"
+same "$(code_of POST /v1/cuentas/administrador "$SETUP")" 201 "primera configuración"
 echo "        cuerpo: $(cat /tmp/body.json)"
 OTRO="{\"email\":\"otro@frre.utn.edu.ar\",\"firstName\":\"Otro\",\"lastName\":\"Docente\",\"password\":\"$PASS_1\"}"
-same "$(code_of POST /cuentas/administrador "$OTRO")" 409 "segunda configuración, con otro correo"
+same "$(code_of POST /v1/cuentas/administrador "$OTRO")" 409 "segunda configuración, con otro correo"
 echo "        cuerpo: $(cat /tmp/body.json)"
 
 # ---------------------------------------------------------------- C-2 ------
@@ -149,9 +149,9 @@ TOKEN=$(token_for "$PASS_1")
 [ -n "$TOKEN" ] && ok "el canje devolvió credencial de sesión" || bad "el canje no devolvió credencial"
 CAMBIO="{\"currentPassword\":\"$PASS_1\",\"newPassword\":\"$PASS_2\"}"
 MAL="{\"currentPassword\":\"no-es-la-mia\",\"newPassword\":\"$PASS_2\"}"
-same "$(code_of POST /cuenta/contrasena "$CAMBIO")"          401 "cambio SIN credencial de sesión"
-same "$(code_of POST /cuenta/contrasena "$MAL" "$TOKEN")"    401 "cambio con la actual equivocada"
-same "$(code_of POST /cuenta/contrasena "$CAMBIO" "$TOKEN")" 200 "cambio con la actual correcta"
+same "$(code_of POST /v1/cuenta/contrasena "$CAMBIO")"          401 "cambio SIN credencial de sesión"
+same "$(code_of POST /v1/cuenta/contrasena "$MAL" "$TOKEN")"    401 "cambio con la actual equivocada"
+same "$(code_of POST /v1/cuenta/contrasena "$CAMBIO" "$TOKEN")" 200 "cambio con la actual correcta"
 [ -z "$(token_for "$PASS_1")" ] && ok "la contraseña anterior dejó de servir" || bad "la anterior sigue sirviendo"
 [ -n "$(token_for "$PASS_2")" ] && ok "la contraseña nueva sirve" || bad "la nueva no sirve"
 
@@ -160,7 +160,7 @@ stop_api
 start_api || { bad "el servicio no volvió a arrancar"; exit 1; }
 [ -z "$(token_for "$PASS_1")" ] && ok "tras el reinicio, la anterior sigue sin servir" || bad "tras el reinicio la anterior sirve"
 [ -n "$(token_for "$PASS_2")" ] && ok "tras el reinicio, la nueva sigue sirviendo" || bad "tras el reinicio la nueva no sirve"
-same "$(code_of POST /cuentas/administrador "$OTRO")" 409 "tras el reinicio sigue habiendo administrador"
+same "$(code_of POST /v1/cuentas/administrador "$OTRO")" 409 "tras el reinicio sigue habiendo administrador"
 
 # ---------------------------------------------------------------- C-4 ------
 printf '\n== C-4 · la credencial de sesión no es observable desde el navegador ==\n'

@@ -191,22 +191,22 @@ campo() { printf '%s' "$2" | sed -n "s/.*\"$1\":\"\([^\"]*\)\".*/\1/p"; }
 clave() { printf 'Vf-%s-2026' "$(head -c 12 /dev/urandom | base64 | tr -d '/+=')"; }
 
 correo_admin="verif.admin@ejemplo.test"; clave_admin="$(clave)"
-pedir POST /cuentas/administrador \
+pedir POST /v1/cuentas/administrador \
   "{\"email\":\"$correo_admin\",\"firstName\":\"Verif\",\"lastName\":\"Admin\",\"password\":\"$clave_admin\"}"
 [ "$estado" = "201" ] || morir "no se pudo configurar el administrador (HTTP $estado)."
-pedir POST /auth/token "{\"email\":\"$correo_admin\",\"password\":\"$clave_admin\"}"
+pedir POST /v1/auth/token "{\"email\":\"$correo_admin\",\"password\":\"$clave_admin\"}"
 acceso_admin="$(campo accessToken "$cuerpo")"
 
 correo_alumno="verif.alumno@ejemplo.test"; clave_alumno="$(clave)"
-pedir POST /cuentas "{\"email\":\"$correo_alumno\",\"firstName\":\"Ana\",\"lastName\":\"Diaz\"}"
+pedir POST /v1/cuentas "{\"email\":\"$correo_alumno\",\"firstName\":\"Ana\",\"lastName\":\"Diaz\"}"
 id_alumno="$(campo accountId "$cuerpo")"
 [ -n "$id_alumno" ] || morir "no se pudo dar de alta al alumno (HTTP $estado)."
-pedir POST "/cuentas/$id_alumno/situacion" \
+pedir POST "/v1/cuentas/$id_alumno/situacion" \
   "{\"accountId\":\"$id_alumno\",\"intendedStatus\":\"Enabled\"}" "$acceso_admin"
 provisional="$(campo provisionalPassword "$cuerpo")"
-pedir POST /cuenta/contrasena \
+pedir POST /v1/cuenta/contrasena \
   "{\"email\":\"$correo_alumno\",\"currentPassword\":\"$provisional\",\"newPassword\":\"$clave_alumno\"}"
-pedir POST /auth/token "{\"email\":\"$correo_alumno\",\"password\":\"$clave_alumno\"}"
+pedir POST /v1/auth/token "{\"email\":\"$correo_alumno\",\"password\":\"$clave_alumno\"}"
 acceso_alumno="$(campo accessToken "$cuerpo")"
 [ -n "$acceso_alumno" ] || morir "el alumno no pudo entrar."
 
@@ -219,7 +219,7 @@ datos="${GF_VERIF_DATOS:-$raiz/samples/web/01-datos-seed/datos/E1.txt}"
 echo "Datos del trabajo: $datos"
 texto="$(awk -f "$raiz/samples/web/01-datos-seed/datos/escapar.awk" "$datos")"
 nombre_trabajo="Cubo y ortoedro"
-pedir POST /trabajos \
+pedir POST /v1/trabajos \
   "{\"name\":\"$nombre_trabajo\",\"declaredDate\":\"2026-08-30\",\"description\":null,\"originalJson\":$texto}" \
   "$acceso_alumno"
 id_trabajo="$(campo workId "$cuerpo")"
@@ -260,7 +260,7 @@ docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp --network host \
 # ---- EL PASO 6 LO CONTESTA EL SERVICIO DE DATOS, NO LA PANTALLA ------------
 # Que la pieza pública haya navegado bien no prueba que el desenlace se aplicó.
 # Lo único que lo prueba es preguntárselo a quien guarda el dato.
-pedir GET "/trabajos/$id_trabajo" "" "$acceso_admin"
+pedir GET "/v1/trabajos/$id_trabajo" "" "$acceso_admin"
 final="$(campo status "$cuerpo")"
 echo "---------------------------------------------------------------------------"
 if [ "$final" = "Approved" ]; then

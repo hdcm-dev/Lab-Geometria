@@ -122,7 +122,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Post, "/trabajos", world.StudentToken,
+            HttpMethod.Post, "/v1/trabajos", world.StudentToken,
             new WorkSubmissionRequest(null, "Entrega 1", "2026-08-09", "un ortoedro", ScenarioE2)));
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -168,7 +168,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         using var response = await SendAsync(Authorized(
             HttpMethod.Post,
-            "/interpretaciones",
+            "/v1/interpretaciones",
             world.StudentToken,
             new WorkInterpretationRequest(Scenarios.E1)));
 
@@ -203,7 +203,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         using var response = await SendAsync(Authorized(
             HttpMethod.Post,
-            "/interpretaciones",
+            "/v1/interpretaciones",
             world.StudentToken,
             new WorkInterpretationRequest(Scenarios.E5)));
 
@@ -233,7 +233,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         using var response = await SendAsync(Authorized(
             HttpMethod.Post,
-            "/interpretaciones",
+            "/v1/interpretaciones",
             world.StudentToken,
             new WorkInterpretationRequest("   ")));
 
@@ -254,7 +254,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         using var response = await SendAsync(Authorized(
             HttpMethod.Post,
-            "/trabajos",
+            "/v1/trabajos",
             world.StudentToken,
             new WorkSubmissionRequest(null, "Entrega 1", "2026-08-09", "el semilla", Scenarios.E1)));
 
@@ -293,7 +293,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         using var response = await SendAsync(Authorized(
             HttpMethod.Post,
-            "/trabajos",
+            "/v1/trabajos",
             world.StudentToken,
             new WorkSubmissionRequest(null, "Entrega 2", "2026-08-09", "con una pirámide", Scenarios.E5)));
 
@@ -322,7 +322,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Post, "/trabajos", world.StudentToken,
+            HttpMethod.Post, "/v1/trabajos", world.StudentToken,
             new WorkSubmissionRequest(null, "", "2026-08-09", null, ScenarioE2)));
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -343,7 +343,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Post, "/trabajos", world.AdministratorToken,
+            HttpMethod.Post, "/v1/trabajos", world.AdministratorToken,
             new WorkSubmissionRequest(null, "Entrega 1", "2026-08-09", null, ScenarioE2)));
 
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -374,7 +374,7 @@ public sealed class WorkSurfaceTests : IDisposable
         // que la persona vive: envía, ve qué falló, corrige y entrega. Hasta la etapa `e` esta
         // prueba terminaba en `Borrador` porque nadie interpretaba. **[relevo declarado.]**
         using var edited = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{created.WorkId}", world.StudentToken,
+            HttpMethod.Post, $"/v1/trabajos/{created.WorkId}", world.StudentToken,
             new WorkSubmissionRequest(created.WorkId, "Entrega 1 corregida", "2026-08-10", "ya va", ScenarioE2)));
 
         Assert.Equal(HttpStatusCode.OK, edited.StatusCode);
@@ -399,7 +399,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var workId = await SeedWorkAsync(world.StudentId, "Entrega enviada", ScenarioE2, WorkStatus.Submitted);
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{workId}", world.StudentToken,
+            HttpMethod.Post, $"/v1/trabajos/{workId}", world.StudentToken,
             new WorkSubmissionRequest(workId, "otro nombre", "2026-08-11", null, "{ \"reemplazo\": true }")));
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
@@ -423,7 +423,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var response = await SendAsync(
-            Authorized(HttpMethod.Delete, $"/trabajos/{created.WorkId}", world.StudentToken));
+            Authorized(HttpMethod.Delete, $"/v1/trabajos/{created.WorkId}", world.StudentToken));
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         Assert.Equal(0, await CountWorksAsync());
@@ -446,7 +446,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var workId = await SeedWorkAsync(world.StudentId, "Entrega", TextThatDoesNotVerify, status);
 
         using var response = await SendAsync(
-            Authorized(HttpMethod.Delete, $"/trabajos/{workId}", world.StudentToken));
+            Authorized(HttpMethod.Delete, $"/v1/trabajos/{workId}", world.StudentToken));
 
         Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
 
@@ -475,9 +475,9 @@ public sealed class WorkSurfaceTests : IDisposable
         var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var foreign = await SendAsync(
-            Authorized(HttpMethod.Delete, $"/trabajos/{created.WorkId}", other.Token));
+            Authorized(HttpMethod.Delete, $"/v1/trabajos/{created.WorkId}", other.Token));
         using var missing = await SendAsync(
-            Authorized(HttpMethod.Delete, $"/trabajos/{Guid.NewGuid()}", other.Token));
+            Authorized(HttpMethod.Delete, $"/v1/trabajos/{Guid.NewGuid()}", other.Token));
 
         Assert.Equal(HttpStatusCode.NotFound, foreign.StatusCode);
         Assert.Equal(HttpStatusCode.NotFound, missing.StatusCode);
@@ -511,7 +511,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var workId = await SeedWorkAsync(world.StudentId, "Entrega", TextThatDoesNotVerify, status);
 
         using var response = await SendAsync(
-            Authorized(HttpMethod.Delete, $"/trabajos/{workId}", world.AdministratorToken));
+            Authorized(HttpMethod.Delete, $"/v1/trabajos/{workId}", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         Assert.Equal(0, await CountWorksAsync());
@@ -528,7 +528,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var response = await SendAsync(
-            Authorized(HttpMethod.Delete, $"/trabajos/{created.WorkId}", world.AdministratorToken));
+            Authorized(HttpMethod.Delete, $"/v1/trabajos/{created.WorkId}", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         Assert.Equal(1, await CountWorksAsync());
@@ -550,9 +550,9 @@ public sealed class WorkSurfaceTests : IDisposable
         var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var foreign = await SendAsync(
-            Authorized(HttpMethod.Get, $"/trabajos/{created.WorkId}", other.Token));
+            Authorized(HttpMethod.Get, $"/v1/trabajos/{created.WorkId}", other.Token));
         using var missing = await SendAsync(
-            Authorized(HttpMethod.Get, $"/trabajos/{Guid.NewGuid()}", other.Token));
+            Authorized(HttpMethod.Get, $"/v1/trabajos/{Guid.NewGuid()}", other.Token));
 
         Assert.Equal(HttpStatusCode.NotFound, foreign.StatusCode);
         Assert.Equal(HttpStatusCode.NotFound, missing.StatusCode);
@@ -578,7 +578,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var response = await SendAsync(
-            Authorized(HttpMethod.Get, $"/trabajos/{created.WorkId}", world.StudentToken));
+            Authorized(HttpMethod.Get, $"/v1/trabajos/{created.WorkId}", world.StudentToken));
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -602,9 +602,9 @@ public sealed class WorkSurfaceTests : IDisposable
         var created = await LoadAsync(world.StudentToken, "Entrega 1", TextThatDoesNotVerify);
 
         using var draft = await SendAsync(
-            Authorized(HttpMethod.Get, $"/trabajos/{created.WorkId}", world.AdministratorToken));
+            Authorized(HttpMethod.Get, $"/v1/trabajos/{created.WorkId}", world.AdministratorToken));
         using var missing = await SendAsync(
-            Authorized(HttpMethod.Get, $"/trabajos/{Guid.NewGuid()}", world.AdministratorToken));
+            Authorized(HttpMethod.Get, $"/v1/trabajos/{Guid.NewGuid()}", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.NotFound, draft.StatusCode);
 
@@ -640,7 +640,7 @@ public sealed class WorkSurfaceTests : IDisposable
         Assert.Equal(nameof(WorkStatus.Draft), await StoredStatusAsync(draftOfZ.WorkId));
 
         using var response = await SendAsync(
-            Authorized(HttpMethod.Get, "/trabajos", world.AdministratorToken));
+            Authorized(HttpMethod.Get, "/v1/trabajos", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -671,7 +671,7 @@ public sealed class WorkSurfaceTests : IDisposable
         await SeedWorkAsync(second.Id, "Enviado de Z", ScenarioE2, WorkStatus.Submitted);
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Get, $"/trabajos?alumno={world.StudentId}", world.AdministratorToken));
+            HttpMethod.Get, $"/v1/trabajos?alumno={world.StudentId}", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -689,7 +689,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Get, $"/trabajos?alumno={Guid.NewGuid()}", world.AdministratorToken));
+            HttpMethod.Get, $"/v1/trabajos?alumno={Guid.NewGuid()}", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
@@ -714,7 +714,7 @@ public sealed class WorkSurfaceTests : IDisposable
         await SeedWorkAsync(second.Id, "De la otra", ScenarioE2, WorkStatus.Submitted);
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Get, $"/trabajos?alumno={second.Id}", world.StudentToken));
+            HttpMethod.Get, $"/v1/trabajos?alumno={second.Id}", world.StudentToken));
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -746,7 +746,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         // Y sobre el cuerpo: el texto del alumno no aparece.
         using var response = await SendAsync(
-            Authorized(HttpMethod.Get, "/trabajos", world.AdministratorToken));
+            Authorized(HttpMethod.Get, "/v1/trabajos", world.AdministratorToken));
 
         var raw = await response.Content.ReadAsStringAsync();
         Assert.DoesNotContain("Ortoedro", raw, StringComparison.Ordinal);
@@ -759,7 +759,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var world = await WorldAsync();
 
         using var response = await SendAsync(
-            Authorized(HttpMethod.Get, "/trabajos", world.AdministratorToken));
+            Authorized(HttpMethod.Get, "/v1/trabajos", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Empty((await response.Content.ReadFromJsonAsync<WorkListItem[]>())!);
@@ -776,11 +776,11 @@ public sealed class WorkSurfaceTests : IDisposable
     {
         (HttpMethod Method, string Route)[] points =
         [
-            (HttpMethod.Post, "/trabajos"),
-            (HttpMethod.Get, "/trabajos"),
-            (HttpMethod.Post, $"/trabajos/{Guid.NewGuid()}"),
-            (HttpMethod.Get, $"/trabajos/{Guid.NewGuid()}"),
-            (HttpMethod.Delete, $"/trabajos/{Guid.NewGuid()}"),
+            (HttpMethod.Post, "/v1/trabajos"),
+            (HttpMethod.Get, "/v1/trabajos"),
+            (HttpMethod.Post, $"/v1/trabajos/{Guid.NewGuid()}"),
+            (HttpMethod.Get, $"/v1/trabajos/{Guid.NewGuid()}"),
+            (HttpMethod.Delete, $"/v1/trabajos/{Guid.NewGuid()}"),
         ];
 
         foreach (var (method, route) in points)
@@ -814,12 +814,12 @@ public sealed class WorkSurfaceTests : IDisposable
 
         // El acceso se emite con la cuenta sana y sigue siendo válido después del reseteo.
         using var reset = await SendAsync(Authorized(
-            HttpMethod.Post, $"/cuentas/{world.StudentId}/reseteo-de-contrasena", world.AdministratorToken));
+            HttpMethod.Post, $"/v1/cuentas/{world.StudentId}/reseteo-de-contrasena", world.AdministratorToken));
 
         Assert.Equal(HttpStatusCode.OK, reset.StatusCode);
 
         using var response = await SendAsync(Authorized(
-            HttpMethod.Post, "/trabajos", world.StudentToken,
+            HttpMethod.Post, "/v1/trabajos", world.StudentToken,
             new WorkSubmissionRequest(null, "Entrega 1", "2026-08-09", null, ScenarioE2)));
 
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -857,7 +857,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var rejected = await SeedWorkAsync(world.StudentId, "El que se rechaza", ScenarioE2, WorkStatus.Submitted);
 
         using var first = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{approved}/desenlace", world.AdministratorToken,
+            HttpMethod.Post, $"/v1/trabajos/{approved}/desenlace", world.AdministratorToken,
             new WorkOutcomeRequest(approved, WorkOutcomeName.Approve, null)));
 
         Assert.Equal(HttpStatusCode.OK, first.StatusCode);
@@ -865,7 +865,7 @@ public sealed class WorkSurfaceTests : IDisposable
         Assert.Equal("Approved", firstBody!.Status);
 
         using var second = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{rejected}/desenlace", world.AdministratorToken,
+            HttpMethod.Post, $"/v1/trabajos/{rejected}/desenlace", world.AdministratorToken,
             new WorkOutcomeRequest(rejected, WorkOutcomeName.Reject, null)));
 
         Assert.Equal(HttpStatusCode.OK, second.StatusCode);
@@ -902,19 +902,19 @@ public sealed class WorkSurfaceTests : IDisposable
         const string Written = "Revisá el área del cubo: la fórmula que usaste no es la del área total.";
 
         using var commented = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{withComment}/desenlace", world.AdministratorToken,
+            HttpMethod.Post, $"/v1/trabajos/{withComment}/desenlace", world.AdministratorToken,
             new WorkOutcomeRequest(withComment, WorkOutcomeName.Reject, Written)));
         Assert.Equal(HttpStatusCode.OK, commented.StatusCode);
         Assert.Equal(Written, await StoredCommentAsync(withComment));
 
         // LOS DOS DESENLACES, SIN COMENTARIO: el contrato no lo impone ni siquiera al rechazar.
         using var bareApproval = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{approvedBare}/desenlace", world.AdministratorToken,
+            HttpMethod.Post, $"/v1/trabajos/{approvedBare}/desenlace", world.AdministratorToken,
             new WorkOutcomeRequest(approvedBare, WorkOutcomeName.Approve, null)));
         Assert.Equal(HttpStatusCode.OK, bareApproval.StatusCode);
 
         using var bareRejection = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{rejectedBare}/desenlace", world.AdministratorToken,
+            HttpMethod.Post, $"/v1/trabajos/{rejectedBare}/desenlace", world.AdministratorToken,
             new WorkOutcomeRequest(rejectedBare, WorkOutcomeName.Reject, "   ")));
         Assert.Equal(HttpStatusCode.OK, bareRejection.StatusCode);
 
@@ -947,7 +947,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var own = await SeedWorkAsync(world.StudentId, "El propio", ScenarioE2, WorkStatus.Submitted);
 
         using var forced = await SendAsync(Authorized(
-            HttpMethod.Post, $"/trabajos/{own}/desenlace", world.StudentToken,
+            HttpMethod.Post, $"/v1/trabajos/{own}/desenlace", world.StudentToken,
             new WorkOutcomeRequest(own, WorkOutcomeName.Approve, "me lo apruebo yo")));
 
         Assert.Equal(HttpStatusCode.Forbidden, forced.StatusCode);
@@ -986,7 +986,7 @@ public sealed class WorkSurfaceTests : IDisposable
             foreach (var outcome in new[] { WorkOutcomeName.Approve, WorkOutcomeName.Reject })
             {
                 using var attempt = await SendAsync(Authorized(
-                    HttpMethod.Post, $"/trabajos/{workId}/desenlace", world.AdministratorToken,
+                    HttpMethod.Post, $"/v1/trabajos/{workId}/desenlace", world.AdministratorToken,
                     new WorkOutcomeRequest(workId, outcome, "esto no tiene que entrar")));
 
                 Assert.Equal(HttpStatusCode.Conflict, attempt.StatusCode);
@@ -1021,12 +1021,12 @@ public sealed class WorkSurfaceTests : IDisposable
 
         // EL ALUMNO NO PUEDE, aunque el trabajo sea suyo: su alcance termina en `Borrador`.
         using var byStudent = await SendAsync(Authorized(
-            HttpMethod.Delete, $"/trabajos/{submitted}", world.StudentToken));
+            HttpMethod.Delete, $"/v1/trabajos/{submitted}", world.StudentToken));
         Assert.Equal(HttpStatusCode.Conflict, byStudent.StatusCode);
         Assert.Equal(1, await CountWorksAsync());
 
         using var byAdministrator = await SendAsync(Authorized(
-            HttpMethod.Delete, $"/trabajos/{submitted}", world.AdministratorToken));
+            HttpMethod.Delete, $"/v1/trabajos/{submitted}", world.AdministratorToken));
         Assert.Equal(HttpStatusCode.NoContent, byAdministrator.StatusCode);
 
         // DESAPARECIÓ, leído del almacén y no de la respuesta.
@@ -1055,7 +1055,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
     private async Task<string> ConfigureAdministratorAsync()
     {
-        using var setup = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/cuentas/administrador")
+        using var setup = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v1/cuentas/administrador")
         {
             Content = JsonContent.Create(new AdministratorSetupRequest(
                 AdministratorEmail, "Fernando", "Filipuzzi", AdministratorPassword)),
@@ -1076,7 +1076,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
         const string Chosen = "la-que-eligio-la-alumna";
 
-        using var change = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/cuenta/contrasena")
+        using var change = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v1/cuenta/contrasena")
         {
             Content = JsonContent.Create(
                 new OwnPasswordChangeRequest(registered.ProvisionalPassword, Chosen, email)),
@@ -1089,7 +1089,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
     private async Task<Student> RegisterAndEnableAsync(string administratorToken, string email)
     {
-        using var registration = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/cuentas")
+        using var registration = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v1/cuentas")
         {
             Content = JsonContent.Create(new AccountRegistrationRequest(email, "Ana", "Diaz")),
         });
@@ -1099,7 +1099,7 @@ public sealed class WorkSurfaceTests : IDisposable
         var id = (await registration.Content.ReadFromJsonAsync<AccountRegistrationResponse>())!.AccountId;
 
         using var enabled = await SendAsync(Authorized(
-            HttpMethod.Post, $"/cuentas/{id}/situacion", administratorToken,
+            HttpMethod.Post, $"/v1/cuentas/{id}/situacion", administratorToken,
             new AccountStatusChangeRequest(id, nameof(AccountStatus.Enabled))));
 
         Assert.Equal(HttpStatusCode.OK, enabled.StatusCode);
@@ -1112,7 +1112,7 @@ public sealed class WorkSurfaceTests : IDisposable
 
     private async Task<string> TokenAsync(string email, string password)
     {
-        using var response = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/auth/token")
+        using var response = await SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v1/auth/token")
         {
             Content = JsonContent.Create(new CredentialExchangeRequest(email, password)),
         });
@@ -1125,7 +1125,7 @@ public sealed class WorkSurfaceTests : IDisposable
     private async Task<WorkSubmissionResponse> LoadAsync(string token, string name, string text)
     {
         using var response = await SendAsync(Authorized(
-            HttpMethod.Post, "/trabajos", token,
+            HttpMethod.Post, "/v1/trabajos", token,
             new WorkSubmissionRequest(null, name, "2026-08-09", null, text)));
 
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);

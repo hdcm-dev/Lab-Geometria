@@ -1280,6 +1280,60 @@ Owner en `SDD/Docs/Audit/Mesa-2026-09-12-ciclo-2.md` §8.
 `0.8.1-alpha.0.135`; imagen del servicio construida sobre `cfb11f7` desde un clon superficial sin
 etiquetas responde `/salud` con `0.8.1-alpha.0.133+cfb11f75…`; `git tag -l` sin cambios. Detalle en la ficha, §8 fila 1.2.
 
+## BREAKING · El contrato REST se publica bajo `/v1/` — 2026-09-12
+
+**Rama:** `fase-k/bt-00032-rutas-v1` (`BT-00032`, fase `k`, sobre `ce1c68f`). Implementa `ADR-00010`.
+**Toda aplicación propia que consuma el contrato REST debe anteponer `/v1/` a sus rutas**: la ruta sin
+prefijo —`/cuentas`, `/trabajos`, la que valió hasta hoy— responde `404`, sin redirección. Es la primera
+fusión con `/v1/` y, por decisión del Product Owner de hoy, la que recibe la etiqueta `v1.0.0` (la crea
+el evento de etiqueta de `BT-00033`; esta rama no etiqueta).
+
+### Cambiado
+
+- **`GeometriaFactory.Api`: los dieciséis puntos del contrato cuelgan de un único `MapGroup("/v1")`** en
+  `Program.cs`, y la cifra vive en `Endpoints/ContractRoutePrefix.cs` (`Major = 1`, `Value = "/v1"`).
+  Los contratos de punto siguen declarando su ruta relativa: agregar un punto no exige acordarse del
+  prefijo. Ningún verbo, cuerpo, papel ni código de respuesta cambia.
+- **Tres rutas quedan fuera del prefijo, enumeradas como exentas** (`ContractRoutePrefix.ExemptRoutes`):
+  `/salud` (`A-16`) es del arranque y la salud y no del contrato —lo piden los `healthcheck` de las
+  composiciones y la página de estado del front, `ADR-00007` §2 punto 3; y es donde se informa la versión
+  contra la que `ADR-00010` §8 compara el prefijo—; `/openapi/v1.json` y `/documentacion` describen la
+  superficie y no son parte de ella (`ADR-08008`). `ADR-00010` §7 había remitido esta decisión a
+  `BT-00032`; queda escrita en `Contratos-REST.md` **1.8** §3.1.
+- **`GeometriaFactory.Web`: `DataServiceClient` antepone `v1/` a todas las rutas del contrato** con la
+  constante `ContractPrefix`, y a `salud` no. `ApiBaseUrl` **sigue siendo el anfitrión**: la versión la
+  conoce el cliente —que compila contra el ensamblado y se despliega junto con el servicio— y no la
+  configuración de quien despliega. **El despliegue no necesita cambiar `API_BASE_URL` ni el túnel**, que
+  enruta por nombre de host y no por prefijo.
+- **Consumidores propios actualizados en la misma intervención**: la batería de integración (todas las
+  rutas literales del contrato llevan `/v1/`; las de las páginas del front no, porque no son del
+  contrato), los E2E (`ElLaboratorio` y `BancoLocal` se paran sobre `<api>/v1/`), los samples
+  `api/01-basico`, `api/02-intermedio` y `web/01-datos-seed` (rutas explícitas con `/v1/` en `run.sh`,
+  `peticiones/` y `coleccion/`; **ningún snapshot esperado cambia**, porque ninguno imprime rutas), y
+  los guiones `scripts/verify-stage-c.sh`, `tools/medicion-*.sh` y `tools/verificar-resolucion-del-trabajo.sh`.
+- **`Contratos-REST.md` 1.8** (§3.1: la tabla de rutas públicas, las tres exentas, el `404` sin prefijo,
+  la prueba en las dos direcciones) y **`Definicion-Superficie-HTTP.md` 1.11** (las dieciséis rutas con
+  el prefijo; `A-16` sin él).
+
+### Agregado
+
+- **`ContractRoutePrefixTests`** (integración): transcribe a mano la tabla de `Contratos-REST.md` §3
+  —diecisiete puntos, verbo y ruta pública— y la contrasta con lo que el host enruta de verdad
+  (`EndpointDataSource`), **en las dos direcciones**: toda ruta publicada está en la tabla o entre las
+  tres exentas; todo punto de la tabla está publicado; toda ruta publicada lleva `/v1/` salvo las tres
+  exentas, que son exactamente tres. Más el `404` sin redirección de cinco rutas sin prefijo y la
+  exención de `/salud` en una sola dirección (`/v1/salud` → `404`). **Probada fallando**: una ruta sin
+  prefijo y una ruta ajena bajo `/v1/` agregadas a mano rompen tres de las diez pruebas, con la salida
+  diciendo cuál agregar dónde.
+
+### Verificado
+
+`dotnet build` Release 0 advertencias; `dotnet test` **532/532** (Domain 94, Application 56, Integración
+382; `main` tenía 522, los diez nuevos son `ContractRoutePrefixTests`); samples `api/01` **CONFORME
+13/13**, `api/02` **CONFORME** con su única divergencia ya declarada (`D-1`), `api/03` **CONFORME** con
+su única divergencia ya declarada (`D-3`) y **17 operaciones** en el documento OpenAPI, `web/01-datos-seed`
+**CONFORME 13/13**, todos contra el servicio de esta rama en un puerto propio; `git tag -l` sin cambios.
+Los E2E de Playwright no se corrieron localmente (corren en CI). Detalle en la ficha `BT-00032`, §8.
 ## Producción reconstruida desde `main`: la versión es la de MinVer y OpenAPI/Scalar están publicados — 2026-09-13
 
 **Rama:** `fase-k/cierre-bt-00031-00033` (`BT-00031` y `BT-00033`, fase `k`). Sin cambio de código: lo

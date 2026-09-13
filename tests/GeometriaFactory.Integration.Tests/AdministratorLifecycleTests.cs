@@ -87,7 +87,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
         using var service = new DataServiceHarness(_storePath);
         using var client = service.CreateClient();
 
-        var first = await client.PostAsJsonAsync("/cuentas/administrador", Setup());
+        var first = await client.PostAsJsonAsync("/v1/cuentas/administrador", Setup());
         Assert.Equal(HttpStatusCode.Created, first.StatusCode);
 
         var created = await first.Content.ReadFromJsonAsync<AccountSetupResponse>();
@@ -99,7 +99,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
         // Segundo intento, con OTRO correo para que lo que rechace sea la existencia del
         // administrador y no la unicidad del correo.
         var second = await client.PostAsJsonAsync(
-            "/cuentas/administrador", Setup(email: "otro@frre.utn.edu.ar"));
+            "/v1/cuentas/administrador", Setup(email: "otro@frre.utn.edu.ar"));
 
         Assert.Equal(HttpStatusCode.Conflict, second.StatusCode);
         var error = await second.Content.ReadFromJsonAsync<ErrorResponse>();
@@ -118,11 +118,11 @@ public sealed class AdministratorLifecycleTests : IDisposable
         using var service = new DataServiceHarness(_storePath);
         using var client = service.CreateClient();
 
-        var setup = await client.PostAsJsonAsync("/cuentas/administrador", Setup());
+        var setup = await client.PostAsJsonAsync("/v1/cuentas/administrador", Setup());
         var setupBody = await setup.Content.ReadAsStringAsync();
 
         var session = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(Email, FirstPassword));
+            "/v1/auth/token", new CredentialExchangeRequest(Email, FirstPassword));
         var sessionBody = await session.Content.ReadAsStringAsync();
 
         Assert.DoesNotContain(FirstPassword, setupBody, StringComparison.Ordinal);
@@ -158,7 +158,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
 
             Assert.Equal(
                 HttpStatusCode.Created,
-                (await client.PostAsJsonAsync("/cuentas/administrador", Setup())).StatusCode);
+                (await client.PostAsJsonAsync("/v1/cuentas/administrador", Setup())).StatusCode);
 
             var accessToken = await SignInAsync(client, FirstPassword);
             Assert.NotNull(accessToken);
@@ -169,7 +169,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
 
             // Sin credencial de sesión tampoco: el punto está bajo la guardia.
             var anonymous = await client.PostAsJsonAsync(
-                "/cuenta/contrasena", new OwnPasswordChangeRequest(FirstPassword, SecondPassword));
+                "/v1/cuenta/contrasena", new OwnPasswordChangeRequest(FirstPassword, SecondPassword));
             Assert.Equal(HttpStatusCode.Unauthorized, anonymous.StatusCode);
 
             // Con la actual correcta, sí.
@@ -192,7 +192,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
             // Y el reinicio no vuelve a abrir la configuración: sigue habiendo administrador.
             Assert.Equal(
                 HttpStatusCode.Conflict,
-                (await client.PostAsJsonAsync("/cuentas/administrador", Setup(email: "otro@frre.utn.edu.ar"))).StatusCode);
+                (await client.PostAsJsonAsync("/v1/cuentas/administrador", Setup(email: "otro@frre.utn.edu.ar"))).StatusCode);
         }
     }
 
@@ -204,7 +204,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
 
         Assert.Equal(
             HttpStatusCode.Created,
-            (await client.PostAsJsonAsync("/cuentas/administrador", Setup())).StatusCode);
+            (await client.PostAsJsonAsync("/v1/cuentas/administrador", Setup())).StatusCode);
 
         var request = new OwnPasswordChangeRequest(FirstPassword, SecondPassword);
 
@@ -244,9 +244,9 @@ public sealed class AdministratorLifecycleTests : IDisposable
 
         var bodies = new List<string>();
         bodies.Add(await (await client.PostAsJsonAsync(
-            "/cuentas/administrador", new AdministratorSetupRequest(null, null, null, null))).Content.ReadAsStringAsync());
+            "/v1/cuentas/administrador", new AdministratorSetupRequest(null, null, null, null))).Content.ReadAsStringAsync());
         bodies.Add(await (await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(Email, "cualquiera"))).Content.ReadAsStringAsync());
+            "/v1/auth/token", new CredentialExchangeRequest(Email, "cualquiera"))).Content.ReadAsStringAsync());
 
         foreach (var body in bodies)
         {
@@ -262,7 +262,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
     private static async Task<string?> SignInAsync(HttpClient client, string password)
     {
         var response = await client.PostAsJsonAsync(
-            "/auth/token", new CredentialExchangeRequest(Email, password));
+            "/v1/auth/token", new CredentialExchangeRequest(Email, password));
 
         if (!response.IsSuccessStatusCode)
         {
@@ -280,7 +280,7 @@ public sealed class AdministratorLifecycleTests : IDisposable
     private static async Task<HttpResponseMessage> ChangePasswordRawAsync(
         HttpClient client, string? accessToken, OwnPasswordChangeRequest request)
     {
-        using var message = new HttpRequestMessage(HttpMethod.Post, "/cuenta/contrasena")
+        using var message = new HttpRequestMessage(HttpMethod.Post, "/v1/cuenta/contrasena")
         {
             Content = JsonContent.Create(request),
         };

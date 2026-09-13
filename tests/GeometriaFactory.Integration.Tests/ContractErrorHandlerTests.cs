@@ -40,7 +40,7 @@ public sealed class ContractErrorHandlerTests
     {
         var contexto = new DefaultHttpContext();
         contexto.Request.Method = "POST";
-        contexto.Request.Path = "/auth/token";
+        contexto.Request.Path = "/v1/auth/token";
         contexto.Response.Body = new MemoryStream();
         return contexto;
     }

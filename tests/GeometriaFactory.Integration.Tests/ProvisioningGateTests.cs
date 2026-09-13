@@ -63,7 +63,7 @@ public sealed class ProvisioningGateTests : IDisposable
     {
         using var data = _dataService.CreateClient();
 
-        using var before = await data.GetAsync("/aprovisionamiento");
+        using var before = await data.GetAsync("/v1/aprovisionamiento");
         Assert.Equal(HttpStatusCode.OK, before.StatusCode);
         Assert.False((await before.Content.ReadFromJsonAsync<LaboratoryProvisioning>())!.AdministratorConfigured);
 
@@ -71,7 +71,7 @@ public sealed class ProvisioningGateTests : IDisposable
         // mide sobre el cuerpo crudo y no sobre el tipo, que es donde se notaría un campo de más.
         await ConfigureAdministratorAsync();
 
-        using var after = await data.GetAsync("/aprovisionamiento");
+        using var after = await data.GetAsync("/v1/aprovisionamiento");
         var body = await after.Content.ReadAsStringAsync();
 
         Assert.Equal(HttpStatusCode.OK, after.StatusCode);
@@ -225,7 +225,7 @@ public sealed class ProvisioningGateTests : IDisposable
 
         // SIN PASAR POR LA PANTALLA, que es la única forma de comprobar que el guardián no se
         // estaba usando como si fuera una defensa. La negativa la produce el servicio de datos.
-        using var second = await data.PostAsJsonAsync("/cuentas/administrador", new
+        using var second = await data.PostAsJsonAsync("/v1/cuentas/administrador", new
         {
             email = "otro@frre.utn.edu.ar",
             firstName = "Otro",
@@ -324,7 +324,7 @@ public sealed class ProvisioningGateTests : IDisposable
     {
         using var data = _dataService.CreateClient();
 
-        using var setup = await data.PostAsJsonAsync("/cuentas/administrador", new
+        using var setup = await data.PostAsJsonAsync("/v1/cuentas/administrador", new
         {
             email = Email,
             firstName = "Ana",

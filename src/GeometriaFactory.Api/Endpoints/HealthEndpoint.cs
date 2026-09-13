@@ -20,6 +20,12 @@ namespace GeometriaFactory.Api.Endpoints;
 /// la ruta definitiva es la decisión `A-4` / `Api BT-07`, del punto de control de la etapa `a`
 /// (riesgo `R-04` de `Plan-Etapa-A.md` §7). El `healthcheck` de `deploy/compose.yaml`, la página
 /// de estado del front y la comprobación de la publicación usan las tres esta misma ruta.
+///
+/// NO LLEVA EL PREFIJO DE VERSIÓN, y es la única ruta del producto que no lo lleva. Es del
+/// arranque y no del contrato: la consumen dos `healthcheck` y una página de estado que no
+/// tienen por qué moverse cuando el contrato estrene otro `MAJOR`, y es donde se informa la
+/// versión contra la que `ADR-00010` §8 compara el prefijo. El fundamento completo está en
+/// <see cref="ContractRoutePrefix"/>; la decisión la tomó `BT-00032`.
 /// </remarks>
 public static class HealthEndpoint
 {

@@ -87,43 +87,43 @@ correo_admin="admin@ejemplo.edu"
 correo_alumna="alumna@ejemplo.edu"
 correo_pendiente="pendiente@ejemplo.edu"
 
-pedir POST /cuentas/administrador \
+pedir POST /v1/cuentas/administrador \
   "$(cuerpo_de 01-configurar-admin CORREO_ADMIN "$correo_admin" CLAVE_ADMIN "$clave_admin")"
-pedir POST /cuentas "$(cuerpo_de 02-registrar-alumno CORREO_ALUMNA "$correo_alumna")"
+pedir POST /v1/cuentas "$(cuerpo_de 02-registrar-alumno CORREO_ALUMNA "$correo_alumna")"
 id_alumna="$(campo accountId "$cuerpo_recibido")"
 
-pedir POST /auth/token "$(cuerpo_de 05-canjear CORREO "$correo_admin" CLAVE "$clave_admin")"
+pedir POST /v1/auth/token "$(cuerpo_de 05-canjear CORREO "$correo_admin" CLAVE "$clave_admin")"
 acceso_admin="$(campo accessToken "$cuerpo_recibido")"
 
-pedir POST "/cuentas/$id_alumna/situacion" \
+pedir POST "/v1/cuentas/$id_alumna/situacion" \
   "$(cuerpo_de 03-habilitar-alumno ID_ALUMNA "$id_alumna")" "$acceso_admin"
 provisoria="$(campo provisionalPassword "$cuerpo_recibido")"
 
-pedir POST /cuenta/contrasena "$(cuerpo_de 04-cambiar-contrasena \
+pedir POST /v1/cuenta/contrasena "$(cuerpo_de 04-cambiar-contrasena \
   CORREO_ALUMNA "$correo_alumna" PROVISORIA "$provisoria" CLAVE_ALUMNA "$clave_alumna")"
 
 # --------------------------------------------------------------------------
 # [canje] — A-01 en sus tres desenlaces
 # --------------------------------------------------------------------------
-pedir POST /auth/token "$(cuerpo_de 05-canjear CORREO "$correo_alumna" CLAVE "$clave_alumna")"
+pedir POST /v1/auth/token "$(cuerpo_de 05-canjear CORREO "$correo_alumna" CLAVE "$clave_alumna")"
 acceso_alumna="$(campo accessToken "$cuerpo_recibido")"
 decir "[canje] Credenciales validas: $estado | acceso firmado recibido: $([ -n "$acceso_alumna" ] && echo si || echo no)"
 
-pedir POST /auth/token "$(cuerpo_de 05-canjear CORREO "$correo_alumna" CLAVE "no-es-la-que-va")"
+pedir POST /v1/auth/token "$(cuerpo_de 05-canjear CORREO "$correo_alumna" CLAVE "no-es-la-que-va")"
 # QUE EL CAMPO QUE FALLÓ **NO** SE DECLARE ES LA REGLA Y NO UNA OMISIÓN: decir
 # cuál de los dos datos estuvo mal le dice a quien prueba si el correo existe.
 declara_campo=$(printf '%s' "$cuerpo_recibido" | grep -o '"field":"[^"]*"' | head -1)
 decir "[canje] Credenciales invalidas: $estado $(campo code "$cuerpo_recibido") | campo que fallo declarado: $([ -n "$declara_campo" ] && echo si || echo no)"
 
-pedir POST /cuentas "$(cuerpo_de 02-registrar-alumno CORREO_ALUMNA "$correo_pendiente")"
-pedir POST /auth/token "$(cuerpo_de 05-canjear CORREO "$correo_pendiente" CLAVE "cualquiera")"
+pedir POST /v1/cuentas "$(cuerpo_de 02-registrar-alumno CORREO_ALUMNA "$correo_pendiente")"
+pedir POST /v1/auth/token "$(cuerpo_de 05-canjear CORREO "$correo_pendiente" CLAVE "cualquiera")"
 mensaje=$(campo message "$cuerpo_recibido")
 decir "[canje] Cuenta pendiente: $estado $(campo code "$cuerpo_recibido") | motivo presente: $([ -n "$mensaje" ] && echo si || echo no)"
 
 # --------------------------------------------------------------------------
 # [guardia] — las tres formas de no tener acceso, el papel, y la marca
 # --------------------------------------------------------------------------
-pedir GET /trabajos ""; sin_acceso="$estado"
+pedir GET /v1/trabajos ""; sin_acceso="$estado"
 
 # EL ACCESO VENCIDO SE FABRICA FIRMÁNDOLO CON LA CLAVE DE VERDAD Y UN `exp` DEL
 # PASADO. Es la única forma honesta: un acceso mal firmado ya está cubierto por
@@ -137,16 +137,16 @@ if [ -n "${AccessToken__SigningKey:-}" ]; then
     "$ayer" "$((ayer - 60))" "$((ayer - 60))" "$id_alumna" "$correo_alumna" | b64u)
   firma=$(printf '%s' "$cabecera.$carga" \
     | openssl dgst -sha256 -hmac "$AccessToken__SigningKey" -binary | b64u)
-  pedir GET /trabajos "" "$cabecera.$carga.$firma"; vencido="$estado"
+  pedir GET /v1/trabajos "" "$cabecera.$carga.$firma"; vencido="$estado"
 else
   vencido="sin-clave"
 fi
 
-pedir GET /trabajos "" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhamVubyJ9.firma-que-no-corresponde"
+pedir GET /v1/trabajos "" "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhamVubyJ9.firma-que-no-corresponde"
 ajena="$estado"
 decir "[guardia] Peticion sin acceso: $sin_acceso | Peticion con acceso vencido: $vencido | Firma ajena: $ajena"
 
-pedir GET /cuentas "" "$acceso_alumna"
+pedir GET /v1/cuentas "" "$acceso_alumna"
 decir "[guardia] Papel insuficiente sobre un punto de administracion: $estado"
 
 # --------------------------------------------------------------------------
@@ -161,7 +161,7 @@ decir "[guardia] Papel insuficiente sobre un punto de administracion: $estado"
 enviar() {
   local etiqueta="$1" archivo="$2"
   local texto; texto="$(awk -f "$aqui/cuerpos/escapar.awk" "$aqui/cuerpos/$archivo")"
-  pedir POST /trabajos "$(cuerpo_de 06-enviar-trabajo ETIQUETA "$etiqueta" TEXTO "$texto")" "$acceso_alumna"
+  pedir POST /v1/trabajos "$(cuerpo_de 06-enviar-trabajo ETIQUETA "$etiqueta" TEXTO "$texto")" "$acceso_alumna"
 
   # EL ESTADO VIAJA EN INGLÉS Y ACÁ SE MUESTRA EN CASTELLANO: es presentación
   # del sample y no una traducción del servicio. El valor del cable es `Draft`.
@@ -192,8 +192,8 @@ fi
 # ANTES del reseteo, usado DESPUÉS. La marca se lee del almacén y no del acceso
 # presentado, así que un acceso vigente deja de servir sin haber vencido. Pedir
 # uno nuevo no llega hasta acá: el canje ya lo rechaza antes.
-pedir POST "/cuentas/$id_alumna/reseteo-de-contrasena" "{\"accountId\":\"$id_alumna\"}" "$acceso_admin"
-pedir GET /trabajos "" "$acceso_alumna"
+pedir POST "/v1/cuentas/$id_alumna/reseteo-de-contrasena" "{\"accountId\":\"$id_alumna\"}" "$acceso_admin"
+pedir GET /v1/trabajos "" "$acceso_alumna"
 linea_marca="[guardia] Cuenta con cambio pendiente sobre cualquier punto salvo uno: $estado $(campo code "$cuerpo_recibido")"
 
 # Las cinco líneas de arriba, en el orden en que §6 las lee.

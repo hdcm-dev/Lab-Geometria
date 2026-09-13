@@ -3,9 +3,9 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Contratos-REST.md
-**Versión:** 1.7
+**Versión:** 1.8
 **Estado:** Aprobado
-**Fecha:** 2026-08-31
+**Fecha:** 2026-09-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 
 ---
@@ -17,6 +17,7 @@
   - [2.1 Por qué no hay descripción formal de servicio](#21-por-qué-no-hay-descripción-formal-de-servicio)
   - [2.2 El formato de intercambio y su configuración](#22-el-formato-de-intercambio-y-su-configuración)
 - [3. Operaciones: los diecisiete puntos de acceso](#3-operaciones-los-diecisiete-puntos-de-acceso)
+  - [3.1 Las rutas públicas: dieciséis bajo `/v1/` y una exenta](#31-las-rutas-públicas-dieciséis-bajo-v1-y-una-exenta)
 - [4. Los diez códigos de respuesta](#4-los-diez-códigos-de-respuesta)
 - [5. Manejo de errores: la tabla de traducción de los diecisiete códigos](#5-manejo-de-errores-la-tabla-de-traducción-de-los-diecisiete-códigos)
   - [5.1 Las dos respuestas sin código del contrato](#51-las-dos-respuestas-sin-código-del-contrato)
@@ -99,6 +100,33 @@ Los diecisiete son los de [`../02-Especificacion-Funcional/Definicion-Superficie
 **A-17 entra porque el guardián 1 de `Web ADR-00003` §2 no se podía construir sin él**, y esa constancia va acá y no sólo en 02 porque es una propiedad de **esta** tabla: **ninguno de los quince puntos anteriores servía para que un anónimo preguntara si el laboratorio ya tiene administrador**. `A-03` configura —es escritura—, `A-16` responde por la salud del servicio y `A-06` exige el papel. El fundamento entero, lo que el punto revela y **por qué el dato no se le agregó a `A-16`** —la salud la consume el chequeo del contenedor de `deploy/compose.yaml`, y mezclarle un hecho del producto acopla dos cosas que cambian por motivos distintos— están en [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3, que es donde se decide. **La decisión la tomó el orquestador, con el Product Owner avisado, y queda a ratificación.**
 
 **El identificador `A-04` está retirado y no se recicla.** Establecía la contraseña del primer ingreso **sin credencial**, y `RN-00016` suprimió la operación en lugar de resolverla: habilitar produce la provisoria y el alumno cambia la suya ya autenticado, por `A-05`. **De los cinco puntos que no exigen credencial, ninguno fija una contraseña sobre una cuenta existente** —`A-16` y `A-17` son de sólo lectura—, y ésa es la propiedad que hay que poder comprobar sobre esta tabla.
+
+### 3.1 Las rutas públicas: dieciséis bajo `/v1/` y una exenta
+
+**Desde `BT-00032` (2026-09-12), todo punto del contrato se publica bajo el prefijo `/v{MAJOR}/`** ([`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) §2.1 punto 1), y el primer prefijo publicado es **`/v1/`**: el `MAJOR` es el del producto, que sale de `0.x` con esta misma fusión. La ruta pública de cada punto es la que [`../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md`](../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md) §3 deriva, con el prefijo antepuesto y **nada más cambiado**: ni verbo, ni cuerpo, ni papel exigido, ni lado de la guardia.
+
+| Punto | Ruta pública | Punto | Ruta pública |
+| --- | --- | --- | --- |
+| A-01 | `POST /v1/auth/token` | A-11 | `POST /v1/trabajos/{id}` |
+| A-02 | `POST /v1/cuentas` | A-12 | `DELETE /v1/trabajos/{id}` |
+| A-03 | `POST /v1/cuentas/administrador` | A-13 | `GET /v1/trabajos` |
+| A-05 | `POST /v1/cuenta/contrasena` | A-14 | `GET /v1/trabajos/{id}` |
+| A-06 | `GET /v1/cuentas` | A-15 | `POST /v1/trabajos/{id}/desenlace` |
+| A-07 | `POST /v1/cuentas/{id}/situacion` | A-16 | `GET /salud` — **exento**, ver abajo |
+| A-08 | `DELETE /v1/cuentas/{id}` | A-17 | `GET /v1/aprovisionamiento` |
+| A-09 | `POST /v1/cuentas/{id}/reseteo-de-contrasena` | A-18 | `POST /v1/interpretaciones` |
+| A-10 | `POST /v1/trabajos` | | |
+
+**Diecisiete puntos: dieciséis bajo `/v1/` y uno exento. Dieciséis más uno son diecisiete.**
+
+**Tres rutas quedan fuera del prefijo, enumeradas y no toleradas por forma.** `ADR-00010` §7 remitió a `BT-00032` decidir «si el punto de salud y la descripción generada quedan bajo el prefijo», y la decisión es que **no**:
+
+- **`/salud` (`A-16`) es del arranque y la salud, no del contrato.** [`ADR-00007`](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) §2 punto 3 lo declara consumido por la comprobación del despliegue y por la página de estado del front, y obligado a responder cuando nadie puede autenticarse; [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §3.4 lo aloja en el componente **«Arranque y salud»** y no en ninguna de las cuatro superficies. Atarlo al `MAJOR` del contrato haría que estrenar `/v2/` moviera lo que decide si el contenedor está vivo —los `healthcheck` de `deploy/compose.yaml` y de la composición de despliegue piden `/salud`—, que es el mismo acoplamiento que la categoría 02 rechazó cuando no le agregó a `A-16` el dato del aprovisionamiento. Y es donde se informa la versión del producto: `ADR-00010` §8 compara el prefijo **contra** lo que `/salud` informa, de modo que no puede vivir adentro de él.
+- **`/openapi/v1.json` y `/documentacion` describen la superficie y no son parte de ella** ([`ADR-08008`](../../../Producto/Adrs/ADR-08008-La-Superficie-HTTP-Se-Describe-Y-El-Explorador-No-Se-Publica-Solo.md)): cuando convivan dos `MAJOR`, un solo explorador tiene que poder describir a los dos, y no puede hacerlo desde adentro de uno. El `v1` del nombre del documento es el del documento generado.
+
+**Sin prefijo no hay contrato.** Una petición a la ruta sin versión —`/cuentas`, `/trabajos`, las que valieron hasta el 2026-09-12— responde **`404`** como cualquier ruta inexistente: **sin redirección** y sin cuerpo del contrato. Redirigir mantendría viva la forma sin versión bajo otro nombre, que es lo que `ADR-00010` §2.1 punto 5 excluye. Tampoco responde `401`: la guardia no reconoce esas rutas porque no existen.
+
+**La comparación en las dos direcciones es una prueba y no una lectura.** `ContractRoutePrefixTests` (batería de integración) transcribe esta tabla —verbo y ruta pública, a mano— y la contrasta con lo que el host enruta de verdad: toda ruta publicada está en la tabla o entre las tres exentas, todo punto de la tabla está publicado con esa ruta, y toda ruta publicada lleva `/v1/` salvo las tres exentas. Un punto agregado al código sin entrar acá falla; un punto declarado acá sin mapear falla; una cuarta ruta sin prefijo falla aunque tenga motivo, hasta que el motivo se escriba en `ContractRoutePrefix`.
 
 ## 4. Los diez códigos de respuesta
 
@@ -203,7 +231,7 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 
 ## 6. Versionado del contrato
 
-**La superficie pública se versiona en la ruta, sólo el `MAJOR`, con la forma `/v{MAJOR}/`, y ese `MAJOR` es el del producto** ([`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md), que supera parcialmente a [`ADR-00008`](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md)). Hasta el 2026-09-12 este contrato decía «no se versionan las rutas» porque no había clientes de terceros; la premisa quedó superada: hay **aplicaciones propias además del front** (`ADR-00009`) que **no compilan contra el ensamblado**, y para ellas la red es el prefijo y su plazo de deprecación. **Las rutas de §3 se publican bajo el prefijo desde `BT-00032`; este documento no las cambia todavía.** Lo que subsiste de `ADR-00008`: entre las dos piezas que compilan contra el mismo ensamblado, **un cambio incompatible rompe la compilación antes de romper el tiempo de ejecución**, y lo que las protege es el despliegue conjunto.
+**La superficie pública se versiona en la ruta, sólo el `MAJOR`, con la forma `/v{MAJOR}/`, y ese `MAJOR` es el del producto** ([`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md), que supera parcialmente a [`ADR-00008`](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md)). Hasta el 2026-09-12 este contrato decía «no se versionan las rutas» porque no había clientes de terceros; la premisa quedó superada: hay **aplicaciones propias además del front** (`ADR-00009`) que **no compilan contra el ensamblado**, y para ellas la red es el prefijo y su plazo de deprecación. **Las rutas de §3 se publican bajo `/v1/` desde `BT-00032`, y §3.1 las enumera con el prefijo puesto, junto con las tres rutas exentas y lo que responde una petición sin prefijo.** Lo que subsiste de `ADR-00008`: entre las dos piezas que compilan contra el mismo ensamblado, **un cambio incompatible rompe la compilación antes de romper el tiempo de ejecución**, y lo que las protege es el despliegue conjunto.
 
 | Cambio sobre este contrato | Clase | Qué obliga |
 | --- | --- | --- |
@@ -232,7 +260,7 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | RN que cubre | RN-00001 a RN-00016, las **dieciséis**, con el reparto de [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.2. **Trece** tienen tramo acá; RN-00005, RN-00014 y RN-00016 no. **Dos** se rompen desde acá: RN-00003 y RN-00013 |
 | Invariantes | INV-01 a INV-09, los **nueve**, con el aporte declarado en [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) §10.3 |
 | Reglas de arquitectura | **Las tres.** `RA-01` la sostiene y es el único que puede romperla; `RA-02` no tiene tramo acá y se declara; `RA-03` se ejerce en §5.4 |
-| ADR que lo gobiernan | ADR-00002, ADR-00003, ADR-00004, ADR-00005, ADR-00008 |
+| ADR que lo gobiernan | ADR-00002, ADR-00003, ADR-00004, ADR-00005, ADR-00008 (reglas 2 a 5), ADR-00010 |
 | Consumidor | **Uno solo**: `GeometriaFactory-Web`, servidor a servidor, por HTTP en tiempo de ejecución |
 | Tests previstos en 08 | **Una prueba por código del conjunto cerrado**, no una por punto de acceso; la inspección de la tabla de §5 en las dos direcciones; las tres comparaciones de respuestas indistinguibles; la prueba de texto original byte a byte y la de rechazo sin truncamiento; la de eliminación forzada en sus dos alcances; y la colección de peticiones reproducible como ejercicio de punta a punta |
 
@@ -248,3 +276,4 @@ Es `RA-03`, regla de nivel producto, y **acá es donde se puede violar hacia afu
 | 1.5 | 2026-08-31 | **Adopta el punto de acceso `A-18`**, que `../02-Especificacion-Funcional/Definicion-Superficie-HTTP.md` declara y este contrato no había recogido: `POST /interpretaciones`, interpretar un texto **sin guardar nada**, para la previsualización. **Lo creó [`ADR-08006`](../../../Producto/Adrs/ADR-08006-El-Visor-Recibe-Piezas-Reconstruidas-Y-No-El-Texto.md) como su contrapartida declarada**: si el visor recibe piezas reconstruidas en lugar del texto, previsualizar necesita que alguien las reconstruya. **El barrido de alcance de esa decisión llegó a la categoría 02 y no a ésta**, de modo que el servicio exponía diecisiete operaciones contra dieciséis declaradas acá — lo encontró el sample `api/03-avanzado` contando sobre el documento OpenAPI que el propio servicio publica. Es el mismo hueco que dejó los §6 de la categoría 10 describiendo la fachada anterior, reportado al framework como `Reporte 21`. Se actualizan los cuatro recuentos: encabezado, prosa de §3, cierre de §3 —cinco sin credencial y **doce** bajo la guardia— y la fila de §7. **§5.2 suma una constancia que debía**: afirmaba que el genérico «bajó de cuatro destinos a dos» y **tiene cuatro** —`503`, `500`, `409` y `403`—, los dos últimos por apartamientos declarados en un comentario de código y no como ADR; queda elevado. Sube minor: adopta lo que otra categoría ya declaró y no cambia ninguna decisión. |
 | 1.6 | 2026-08-31 | **§5.2 cita el apartamiento en lugar de constatar el desvío.** Los dos destinos de más del código genérico están declarados desde hoy con la forma de `Root-Rules.md` §11 en `ADR-00004` **2.0** §2.1 —seis campos, con sus tres alternativas descartadas y sus tres disparadores—, de modo que este párrafo deja de elevar un hueco y pasa a apuntar a su decisión. Sube minor. |
 | 1.7 | 2026-09-12 | **§6 deja de afirmar «no se versionan las rutas» y «no hay clientes de terceros»** (tarea `BT-00027`). Adopta la convención de [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) —`/v{MAJOR}/`, `MAJOR` del producto— y relee la compatibilidad hacia atrás: una forma por punto dentro de un `MAJOR`, convivencia entre `MAJOR` con plazo (`BT-00035`), etiqueta por fusión que cambia código de producción (`BT-00033`). **Ninguna ruta de §3 cambia**: el prefijo lo implementa `BT-00032`. La tabla de clases de cambio de §6 no cambia. Sube minor. |
+| 1.8 | 2026-09-12 | **§3.1 publica las rutas bajo `/v1/`** (tarea `BT-00032`, implementa [`ADR-00010`](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). Tabla de los diecisiete puntos con su ruta pública: **dieciséis bajo `/v1/` y `A-16` exento**. Decide lo que `ADR-00010` §7 remitió a esta tarea: `/salud` no se versiona —es del arranque y la salud, `ADR-00007` §2 punto 3 y `05` §3.4, y lo piden los `healthcheck`— y `/openapi/v1.json` y `/documentacion` tampoco —describen la superficie, `ADR-08008`—. Declara el `404` sin redirección de la petición sin prefijo y la prueba `ContractRoutePrefixTests` que compara la tabla contra lo publicado en las dos direcciones. §6 deja de decir «este documento no las cambia todavía»; §7 suma `ADR-00010` a las ADR que lo gobiernan. **Ningún verbo, cuerpo, papel ni código cambia.** Sube minor. |

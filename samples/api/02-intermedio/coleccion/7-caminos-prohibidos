@@ -14,18 +14,18 @@ forzar() {
 # permite—; eliminar uno ajeno responde 404, porque `RN-00003` hace que el
 # ajeno sea INDISTINGUIBLE del inexistente. Colapsarlas en un 403 revelaría que
 # ese trabajo existe, que es justamente lo que la regla evita.
-pedir DELETE "/trabajos/${trabajo_de[E3]}" "" "$acceso_alumno" A-12
+pedir DELETE "/v1/trabajos/${trabajo_de[E3]}" "" "$acceso_alumno" A-12
 propio_fuera="$estado"; forzar "$estado"
 
-pedir DELETE "/trabajos/${trabajo_de[E3]}" "" "$acceso_otro" A-12
+pedir DELETE "/v1/trabajos/${trabajo_de[E3]}" "" "$acceso_otro" A-12
 ajeno="$estado"; forzar "$estado"
 decir "[7] Eliminar un trabajo propio fuera de Borrador: $propio_fuera | Eliminar un trabajo ajeno: $ajeno"
 
-pedir POST "/trabajos/${trabajo_de[E4]}/desenlace" \
+pedir POST "/v1/trabajos/${trabajo_de[E4]}/desenlace" \
   "{\"workId\":\"${trabajo_de[E4]}\",\"outcome\":\"Approve\",\"comment\":null}" "$acceso_alumno" A-15
 por_alumno="$estado"; forzar "$estado"
 
-pedir POST "/trabajos/${trabajo_de[E4]}" \
+pedir POST "/v1/trabajos/${trabajo_de[E4]}" \
   "{\"workId\":\"${trabajo_de[E4]}\",\"name\":\"Reenvio\",\"declaredDate\":\"2026-08-30\",\"description\":null,\"originalJson\":\"[]\"}" \
   "$acceso_alumno" A-11
 reenvio="$estado"; forzar "$estado"

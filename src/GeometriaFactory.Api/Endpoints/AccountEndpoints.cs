@@ -52,6 +52,10 @@ namespace GeometriaFactory.Api.Endpoints;
 /// ningún acceso**. Después del cambio la persona vuelve a canjear, y recién ahí obtiene sesión.
 ///
 /// LA CONTRASEÑA EN CLARO MUERE ACÁ: se deriva y lo que sigue hacia adentro es el valor derivado.
+///
+/// LAS RUTAS DE ABAJO SON RELATIVAS AL PREFIJO DE VERSIÓN. La pública es `/v1` más la constante:
+/// quien las antepone es el grupo de `Program.cs`, y el motivo de que ningún contrato de punto sepa
+/// qué versión es está en <see cref="ContractRoutePrefix"/> (`ADR-00010`).
 /// </remarks>
 public static class AccountEndpoints
 {

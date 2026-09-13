@@ -1,4 +1,4 @@
-# A-03 · POST /cuentas/administrador
+# A-03 · POST /v1/cuentas/administrador
 # Preparación, no objeto del sample: sin administrador no hay quien habilite.
-POST /cuentas/administrador
+POST /v1/cuentas/administrador
 {"email":"{{CORREO_ADMIN}}","firstName":"Carla","lastName":"Vega","password":"{{CLAVE_ADMIN}}"}
