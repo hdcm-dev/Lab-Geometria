@@ -1,0 +1,6 @@
+[1 contrato] GET /openapi/v1.json: 200 | operaciones: 17 | bajo /v1/: 16 | exentas del prefijo: /salud
+[2 canje] POST /v1/auth/token: 200 | acceso firmado recibido: si | papel: Student
+[3 listado] GET /v1/trabajos: 200 | es una lista: si
+[4 envio] POST /v1/trabajos con E-1: 201 | estado del trabajo: Pendiente | advertencias: 2 | errores: 0
+[5 cuota] GET /v1/trabajos hasta el limite: 429 recibido: si | Retry-After presente: si | entre 1 y 60: si | sin cuerpo: si
+Pasos ejecutados: 5 | Respuestas comparadas: 6 | Diferencias: 0

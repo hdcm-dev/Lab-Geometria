@@ -1,0 +1,6 @@
+# A-01 · POST /v1/auth/token
+# La única vía de acceso de toda aplicación propia (ADR-00009): las credenciales
+# de UNA PERSONA, que llegan por `API_EMAIL` y `API_PASSWORD` y no se escriben acá.
+# Tiene cuota propia por origen: 30 canjes por minuto (Contratos-REST.md §4.1).
+POST /v1/auth/token
+{"email":"{{CORREO}}","password":"{{CLAVE}}"}

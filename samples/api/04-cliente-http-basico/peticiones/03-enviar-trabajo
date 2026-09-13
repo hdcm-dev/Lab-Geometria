@@ -1,0 +1,6 @@
+# A-10 · POST /v1/trabajos, con E1.txt como cuerpo
+# El texto del alumno viaja SIN NORMALIZAR (`US-00019`): `{{TEXTO}}` se sustituye
+# por `cuerpos/E1.txt` escapado como literal JSON y nada más. La fecha declarada
+# es la misma que usa `api/01-basico`.
+POST /v1/trabajos
+{"name":"Trabajo E-1","declaredDate":"2026-08-30","description":null,"originalJson":{{TEXTO}}}
