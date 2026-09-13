@@ -461,32 +461,37 @@ sección **queda separada** de la de §3.1 en lugar de fusionarse con sus seis e
 | `k` | BT-00027 | Tarea técnica | Reescribir `ADR-00008` adoptando `/v{MAJOR}/` para la superficie pública | Alta | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00029 | Tarea técnica | Rate limiting por clave o por IP | Alta | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00030 | Tarea técnica | Declarar CORS, condicional al cliente que aparezca (`D-01`) | Media | No aplica | Equipo (1) | Pendiente |
+| `k` | BT-00031 | Tarea técnica | Publicar OpenAPI/Scalar en el ambiente de producción | Media | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00032 | Tarea técnica | Versionar las rutas públicas bajo `/v1/` | Alta | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00033 | Tarea técnica | Adoptar MinVer y etiquetar los commits de producción | Media | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00034 | Tarea técnica | Sample de onboarding para un cliente externo contra `/v1/` | Media | No aplica | Equipo (1) | Pendiente |
 | `k` | BT-00035 | Tarea técnica | Política de deprecación en `Estrategia-Versionado.md` | Media | No aplica | Equipo (1) | Pendiente |
 
-**Total comprometido: 0 historias y 7 tareas técnicas**, repartidas en una sola etapa (`k`). Ninguna
+**Total comprometido: 0 historias y 8 tareas técnicas**, repartidas en una sola etapa (`k`). Ninguna
 historia de usuario acompaña a esta épica: `Backlog-Tecnico.md` §3.1 declara que las nueve tareas de
 EP-T06 se justifican como **infraestructura compartida**, porque ninguna US existente ni nueva las
 consume — son la exposición del contrato hacia un cliente externo, no una capacidad que un alumno o un
 administrador ejerzan.
 
-**No comprometidas (quedan en `Borrador` tras la evaluación de DoR):**
+**No comprometida (queda en `Borrador` tras la evaluación de DoR):**
 
 | ID | Qué le falta | Qué la destraba |
 | --- | --- | --- |
 | BT-00028 — Autenticación por cliente para terceros (API key o `client_credentials`) | Criterio 1 de la DoR: sin fuente admitida en `05` (componente, ADR, NFR, riesgo o punto abierto) ni en la superficie de `02`. La decisión de diseño ya está en `PRODUCT-INTAKE` §17.1.P.5, pero no tiene ADR propia | Que la categoría 05 (arquitectura) emita una ADR de autenticación de clientes externos, análoga a `ADR-00003` para el ROPC de alumnos, y esta ficha la cite |
-| BT-00031 — Publicar OpenAPI/Scalar en el ambiente de producción | Criterio 1 de la DoR: sin fuente admitida en `05` ni en la superficie de `02` ni en las reglas de delivery del intake §15 | Que la categoría 05 registre esta decisión (un NFR nuevo en §8 o un punto abierto en §11), o que el Product Owner la eleve como punto abierto explícito |
 
 **Consecuencia sobre lo comprometido.** `BT-00028` es dependencia directa de `BT-00029` y de `BT-00030`,
 y transitiva de `BT-00032`, `BT-00034` y `BT-00035` (ver §4.1 y la verificación de ciclo en
-[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §5). Las seis BT
-que dependen de ella, directa o transitivamente, están individualmente `Ready` por DoR, pero **no
-pueden ejecutarse** hasta que `BT-00028` se destrabe: se comprometen igual, porque el criterio 5 de la
-DoR no exige que la dependencia esté `Ready`, y el orden de construcción de §4.1 refleja la espera.
-`BT-00031` no bloquea a ninguna otra (`Dependencias: Ninguna`, y ninguna BT depende de ella), de modo
-que su ausencia no frena al resto del tramo.
+[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §5). Las **cinco**
+BT que dependen de ella, directa o transitivamente (`BT-00029`, `BT-00030`, `BT-00032`, `BT-00034`,
+`BT-00035`), están individualmente `Ready` por DoR, pero **no pueden ejecutarse** hasta que `BT-00028`
+se destrabe: se comprometen igual, porque el criterio 5 de la DoR no exige que la dependencia esté
+`Ready`, y el orden de construcción de §4.1 refleja la espera. Las otras tres comprometidas —`BT-00027`,
+`BT-00031` y `BT-00033`— no dependen de `BT-00028` (`BT-00027` es su antecesora; las otras dos declaran
+`Dependencias: Ninguna` y ninguna BT depende de ellas), de modo que pueden ejecutarse sin esperar el
+destrabe. `BT-00031` entra como comprometida en esta corrida: la ausencia de fuente que la dejaba
+afuera era falsa (`ADR-08008` §2 punto 2, nivel Producto, `Aceptado`; ver
+[`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.1, sección
+BT-00031).
 
 ## 4. Alcance técnico y orden de construcción
 
@@ -848,4 +853,4 @@ La bitácora se completa **al cerrar cada etapa**, junto con el informe de cierr
 | --- | --- | --- |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa a ser el documento de la **unidad de entrega**, con una subsección por proyecto y su texto transpuesto sin reescritura. Sube **major**. |
 | 2.1 | 2026-08-25 | **Migración normativa 10.0 → 13.3, fase M4, corte de la categoría 06.** La fila **«Unidad de estimación»** decía «Sin fijar, por `Product-Backlog.md` §4.1», y ese punto —`PA-01`— **quedó cerrado por lectura el 2026-08-25**: el producto no estima, planifica por etapas con punto de control bloqueante. **Se toca este documento aunque no esté en la superficie declarada del plan**, y es deliberado: dejarlo habría producido exactamente lo que el audit del corte del README raíz levantó como **P1** —reescribir una parte y dejar las cifras viejas en otra, que es peor que un documento viejo con su fecha declarada—. §1.2 **no cambia**: ya decía que no se declara capacidad numérica y que es deliberado, y es una de las citas con las que `PA-01` se cerró. Estado previo archivado en [`_legacy/2026-08-25/Mini-Plan-v2.0.md`](_legacy/2026-08-25/Mini-Plan-v2.0.md). Sube **minor**: corrige una fila y no cambia ninguna decisión. |
-| 3.0 | 2026-09-12 | **Agrega el tramo `k`** (exposición pública y versionado del contrato, `Roadmap-Producto.md` §2.1 fila `k`, `Backlog-Tecnico.md` §2.6 EP-T06), abierto por decisión del Product Owner posterior al handoff (`PRODUCT-INTAKE` **4.3**, `E-02` y `E-04`). §2.1 suma el objetivo del tramo y declara que **no forma parte del alcance original de ocho etapas comprometidas** (`Roadmap-Producto.md` §3 lo marca «sin release comprometido: pendiente»). §3.1 abre una subsección `3.5` con las **siete** BT que la evaluación de DoR de [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) deja en `Ready` (`BT-00027`, `BT-00029`, `BT-00030`, `BT-00032` a `BT-00035`) como comprometidas, y las **dos** que quedan en `Borrador` (`BT-00028`, `BT-00031`) como no comprometidas, con qué les falta y qué las destraba. §4.1 suma el orden de construcción del tramo (punto 7) con la verificación de ausencia de ciclo por `tsort`. `GeometriaFactory-Domain`, `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure` declaran en una línea, en sus respectivas §3.2 a §3.4, que **no tienen tramo `k`**: las nueve BT de `EP-T06` son íntegramente de `GeometriaFactory-Api`. Estado previo archivado en [`_legacy/2026-09-12/Mini-Plan-v2.1.md`](_legacy/2026-09-12/Mini-Plan-v2.1.md). Sube **major**: agrega una etapa nueva con ítems comprometidos, que es el mismo evento que `Rules-Backlog-Tecnico.md` §3.6 usa para pasar el backlog técnico a `v2.0` — modifica el contenido de la matriz de `Roadmap-Producto.md` §3 (fila `k`, nueva). |
+| 3.0 | 2026-09-12 | **Agrega el tramo `k`** (exposición pública y versionado del contrato, `Roadmap-Producto.md` §2.1 fila `k`, `Backlog-Tecnico.md` §2.6 EP-T06), abierto por decisión del Product Owner posterior al handoff (`PRODUCT-INTAKE` **4.3**, `E-02` y `E-04`). §2.1 suma el objetivo del tramo y declara que **no forma parte del alcance original de ocho etapas comprometidas** (`Roadmap-Producto.md` §3 lo marca «sin release comprometido: pendiente»). §3.1 abre una subsección `3.5` con las **siete** BT que la evaluación de DoR de [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) deja en `Ready` (`BT-00027`, `BT-00029`, `BT-00030`, `BT-00032` a `BT-00035`) como comprometidas, y las **dos** que quedan en `Borrador` (`BT-00028`, `BT-00031`) como no comprometidas, con qué les falta y qué las destraba. §4.1 suma el orden de construcción del tramo (punto 7) con la verificación de ausencia de ciclo por `tsort`. `GeometriaFactory-Domain`, `GeometriaFactory-Application` y `GeometriaFactory-Infrastructure` declaran en una línea, en sus respectivas §3.2 a §3.4, que **no tienen tramo `k`**: las nueve BT de `EP-T06` son íntegramente de `GeometriaFactory-Api`. Estado previo archivado en [`_legacy/2026-09-12/Mini-Plan-v2.1.md`](_legacy/2026-09-12/Mini-Plan-v2.1.md). Sube **major**: agrega una etapa nueva con ítems comprometidos, que es el mismo evento que `Rules-Backlog-Tecnico.md` §3.6 usa para pasar el backlog técnico a `v2.0` — modifica el contenido de la matriz de `Roadmap-Producto.md` §3 (fila `k`, nueva). **Nota de la misma corrida, antes de publicar (no sube versión):** la evaluación de DoR corrigió cuatro fichas contra el árbol (`BT-00027`, `BT-00030`, `BT-00031`, `BT-00035` en v1.2; [`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) 1.1). `BT-00031` pasa a **comprometida** en §3.5: la ausencia de fuente admitida que la dejaba en `Borrador` era falsa, porque la búsqueda no había mirado `SDD/Docs/Producto/Adrs/` y existe `ADR-08008` §2 punto 2 (`Aceptado`). El total del tramo pasa de **siete a ocho** tareas comprometidas y la tabla de no comprometidas queda con **sólo `BT-00028`**. El párrafo «Consecuencia sobre lo comprometido» reescribe la frase sobre `BT-00031` (ya no habla de su ausencia sino de que se ejecuta sin esperar el destrabe) y corrige un recuento propio: decía «las seis BT que dependen de `BT-00028`» y son **cinco** (`BT-00029`, `BT-00030`, `BT-00032`, `BT-00034`, `BT-00035`; medido sobre el grafo de dependencias leído de las nueve fichas). §4.1 punto 7 **no cambia**: `BT-00031` ya figuraba sin dependencias y en paralelo, y `tsort` sobre las aristas leídas de las fichas devuelve el mismo orden con salida `0` ([`../../../Audit/DoR-Tramo-k-2026-09-12.md`](../../../Audit/DoR-Tramo-k-2026-09-12.md) §6, verificación 6). Medido con `git grep -h "^\*\*Estado:\*\*" -- */tareas-tecnicas/BT-000{27..35}*` → 8 `Ready`, 1 `Borrador`. |
