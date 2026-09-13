@@ -1,0 +1,318 @@
+# PRODUCT-MANIFEST — Fábrica de Geometría
+
+**Plantilla de referencia:** `PRODUCT-MANIFEST-template.md` versión **6.1** (Framework SDD), que es la que declara la procedencia de §1.1
+
+Artefacto **derivado** por el orquestador SDD desde `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13, según `Intake-Rules.md` §4 y `Master-Prompt.md` §3. No se completa a mano.
+
+---
+
+## §1 Bloque de producto
+
+| Campo | Plano | Valor |
+|---|---|---|
+| `Nombre-Producto` | negocio | Fábrica de Geometría |
+| `Slug-Producto` | documentación | `Fabrica-De-Geometria` |
+| `Raiz-Codigo` | código | `GeometriaFactory` |
+| `Artefacto-Agrupacion` | código | `GeometriaFactory.sln` |
+| Unidad de entrega principal | — | `GeometriaFactory-Api` |
+| Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **5.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
+| Documento | — | `PRODUCT-MANIFEST-Fabrica-De-Geometria.md` |
+| Versión | — | 7.0 |
+| Fecha | — | 2026-09-13 |
+| Estado | — | **Aprobado** (confirmado por el Product Owner el 2026-08-16). Migraciones 6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y **10.0 → 13.3** cerradas, y **procedencia actualizada a 13.7 sin migrar** el 2026-08-27, por la salida `C` de la quinta reanudación |
+
+`Slug-Producto` es el único campo derivado: se obtiene de `Nombre-Producto` con el algoritmo de `Master-Prompt.md` §3.2 (`Fábrica de Geometría` → `Fabrica-De-Geometria`). `Raiz-Codigo` y `Artefacto-Agrupacion` se leen declarados del intake (cabecera y perfil de convención de §13), no se derivan.
+
+**Independencia de planos verificada** (`Master-Prompt.md` §3.2): `Fabrica-De-Geometria` y `GeometriaFactory` no son la misma cadena salvo puntuación, y `Nombre-Producto` no contiene el separador de segmentos del perfil. La derivación procede.
+
+### §1.1 Procedencia del framework
+
+**Actualizada el 2026-08-27 por la salida `C` del orquestador de reanudación, y NO por una migración.**
+Es el caso que `Master-Prompt-Reanudacion.md` §4 llama *«actualizar la procedencia sin migrar»*, y que
+**sólo procede cuando se verificó artefacto por artefacto que el salto no alcanza al destino**. Esa
+verificación no se afirma acá: está escrita, artefacto por artefacto y con el motivo por el que cada
+uno queda afuera, en
+[`../Docs/Audit/Estado-Del-Destino-2026-08-27.md`](../Docs/Audit/Estado-Del-Destino-2026-08-27.md) §6.
+
+**El salto 13.3 → 13.7 movió ocho artefactos y no tocó ninguno del destino.** Los cuatro incrementos
+son **minor** y los cuatro declaran su bloque «Impacto sobre destinos existentes» **vacío**: la **13.4**
+y la **13.5** con la palabra «Ninguno», y la **13.6** y la **13.7** con la fórmula *«Ninguno forzado por
+la publicación, y no es una migración»*. La **13.7** lo dice además con el caso de este destino escrito
+por su nombre: *«un destino cuya reanudación anterior corrió sin mesa **no queda no conforme**: la fase
+no existía»*.
+
+| Artefacto que se movió | 13.3 | **13.7** | Por qué no alcanza al destino |
+|---|---|---|---|
+| `Master-Prompt` | 8.12 | **8.14** | Gobierna cómo se genera y se audita, no la forma de ningún documento |
+| `Master-Prompt-Migracion` | 2.8 | **2.9** | M1 pasa a convocar la mesa. No hay migración en curso |
+| `Master-Prompt-Reanudacion` | 1.9 | **1.10** | Entra la fase `R1.5`. Es el prompt que produjo esta actualización |
+| `Root-Rules` | 8.4 | **8.6** | La 8.5 fija cómo se acuña un identificador de rol **del catálogo del framework** y la 8.6 agrega `AG-00970`. Ninguna toca la forma de un artefacto del destino |
+| `Catalogo-De-Criterios` | 1.13 | **1.14** | Índice: no define criterios |
+| `Maqueta-Rules` | 4.4 | **4.5** | Rotula sus ítems como sustituibles. La Fase B2 de `GeometriaFactory-Web` está confirmada y cerrada |
+| `Rules-Base-Conocimiento` | 2.0 | **2.2** | Las **dos** unidades de entrega declaran `usa_llm == false` |
+| **`Mesa-Rules`** | — | **1.0** | Regla nueva. **Gobierna la fase `R1.5` y no un artefacto del corpus**, y su registro entra al destino como artefacto propio: [`../Docs/Audit/Mesa-2026-08-27.md`](../Docs/Audit/Mesa-2026-08-27.md) |
+
+**Los otros 16 artefactos de la tabla de abajo no se movieron**, ni las dos plantillas.
+
+**Cómo se llegó a la 13.3, que es de dónde parte este salto.** La procedencia la reescribió la fase
+**M5** de la **séptima** migración normativa de este destino, **10.0 → 13.3**, el 2026-08-25 — la
+primera que atravesó **tres saltos major**, con `Root-Rules` **7.0 → 8.4**, `Rules-Backlog-Tecnico`
+**4.4 → 5.1** y `Rules-Devops` **5.0 → 6.1**, y con sus tres superficies medidas sobre el árbol: las
+**144** `US-*.md` partidas en `## 5. Prioridad` y `## 5.b Estimación`, las **10** subsecciones `.b` de
+la 09 y las **5** filas del mapa de documentación con la forma nueva de `AG`. Su informe es
+[`../Docs/Audit/Informe-Migracion-10.0-a-13.3.md`](../Docs/Audit/Informe-Migracion-10.0-a-13.3.md), y
+el detalle de aquella reescritura vive en la entrada **5.0** y **5.1** del control de cambios de este
+documento, no acá: **una procedencia que arrastra la historia de todas las anteriores deja de decir
+contra qué rige el destino hoy**.
+
+**Y una constancia sobre la 11.0 que no es de forma y por eso sobrevive a este resumen.** La partición
+del ítem de estimación destapó que **`PA-01` estaba vencido desde el 2026-08-14** y que **las 144
+historias lo citaban**. Se cerró contrastando contra el hecho y no eligiendo un valor: `equipo_n = 1`,
+ninguna capacidad numérica declarada, y **ocho etapas planificadas, construidas, demostradas y cerradas
+sin una sola estimación**. La decisión de retirar el punto es del Product Owner, del 2026-08-25, y está
+registrada como `D11` en
+[`../Docs/Audit/A3-Decisiones-Del-Product-Owner.md`](../Docs/Audit/A3-Decisiones-Del-Product-Owner.md) §4.
+
+| Artefacto del framework | Versión |
+|---|---|
+| Framework SDD (conjunto) | **13.7** |
+| `Master-Prompt` | **8.14** |
+| `Master-Prompt-Migracion` | **2.9** |
+| `Master-Prompt-Reanudacion` | **1.10** |
+| `Root-Rules` | **8.6** |
+| `Rules-Contexto` | 4.5 |
+| `Rules-Necesidades-Negocio` | 4.4 |
+| `Rules-Especificacion-Funcional` | 5.5 |
+| `Rules-UX-UI-DX` | 5.5 |
+| `Rules-Arquitectura-Tecnica` | 4.5 |
+| `Rules-Backlog-Tecnico` | 5.1 |
+| `Rules-Plan-Sprint` | 5.5 |
+| `Rules-Calidad-Y-Pruebas` | 4.6 |
+| `Rules-Devops` | 6.1 |
+| `Rules-Examples` | 6.5 |
+| `Rules-Documentacion` | 5.5 |
+| **`Mesa-Rules`** | **1.0** — **entra por primera vez a esta tabla y sí alcanza al destino**, aunque no a su corpus: gobierna la fase `R1.5` de la reanudación, que corrió el 2026-08-27 y dejó su registro en `SDD/Docs/Audit/` |
+| Reglas transversales aplicadas | `Intake-Rules` 4.2, `Vocabulario-Rules` 3.2, `Maqueta-Rules` **4.5** y `Deriva-Rules` 5.4 (Fase B2 confirmada para la unidad de entrega `GeometriaFactory-Web`). **`Migracion-Rules` 2.9 no aplica hoy**: no hay migración en curso, y este árbol atravesó **siete** —6.0 → 8.6, 8.6 → 8.11, 8.11 → 9.9, 9.9 → 9.10, 9.10 → 9.12, 9.12 → 10.0 y 10.0 → 13.3—, con sus informes en `SDD/Docs/Audit/` |
+| `Catalogo-De-Criterios` | **1.14** — **índice, no regla**: no define criterios y no gobierna ningún artefacto de este destino |
+| `Rules-Base-Conocimiento` | **2.2** — **no alcanza al destino**: no hay orquestador que lea la regla y las **dos** unidades de entrega declaran `usa_llm == false`. Se lista para que su ausencia no se lea como omisión |
+| `PRODUCT-INTAKE-template` | 3.5 |
+| `PRODUCT-MANIFEST-template` | 6.0 |
+
+`Rules-Prompts-AI` no lleva fila: la categoría 04 queda omitida por gating (`usa_llm` == false en las **dos** unidades de entrega, ver §5).
+
+**Qué cambió respecto de la procedencia anterior.** **Se movieron siete de los veinticuatro artefactos
+listados**, y `Mesa-Rules` entra nuevo. **Ninguno de los siete alcanza un artefacto del corpus**, que es
+la condición sin la cual esta tabla no se podía tocar.
+
+**Y una constancia sobre el intake, para que no se lea como una cita desactualizada.** El campo «Intake
+(origen)» de §1 y la §2 de este documento citan `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **3.0**, y el
+intake está en **3.1** desde el 2026-08-27. **La cita es correcta y no se toca**: registra **de qué
+versión se derivó** este manifiesto, que es un hecho histórico. La 3.1 fue un parche de **cabecera**
+—la línea de plantilla de referencia— que **no movió ninguna sección del intake**.
+
+
+#### Decisiones de reconciliación
+
+Sin filas. `SDD/Docs/` estaba vacía al arrancar, de modo que la reconciliación normativa de `Master-Prompt.md` §2.1 no se disparó.
+
+### §1.2 Perfil de convención de nombres
+
+**Un perfil por ecosistema** (plantilla 6.1 §1.2): el producto tiene proyectos de código .NET y un paquete npm, y la `Identidad-Codigo` de cada proyecto se compone con el perfil de su ecosistema (intake §13.3).
+
+| Parámetro | Ecosistema .NET | Ecosistema npm | Notas |
+|---|---|---|---|
+| `Raiz-Codigo` | `GeometriaFactory` | `geometriafactory` | Declarado por el Product Owner (intake §13, cabecera); la misma raíz, con la forma que cada ecosistema exige |
+| Separador de segmentos | `.` | `-` | .NET: convención de espacios de nombres; npm: convención de `package.json` |
+| Capitalización | PascalCase | minúscula | La que cada ecosistema exige a sus nombres de proyecto o de paquete |
+| Prefijo de paquetes redistribuibles | `Aplicada` | — | Sin uso: ningún proyecto de código es `redistribuible` |
+| Extensión del agrupador | `.sln` | Ninguna | .NET compone `GeometriaFactory.sln`; el paquete npm pertenece a esa solución por el insumo de construcción |
+
+---
+
+## §2 Los dos ejes del producto
+
+El producto tiene dos ejes que no coinciden: el de **entrega**, que dice qué se despliega, y el de
+**construcción**, que dice qué se compila. Se derivan de §13.1, §13.2 y §13.3 del intake que §1 declara como origen.
+
+### §2.A Tabla de unidades de entrega
+
+| `Nombre-Unidad-Entrega` | `tipo_unidad_entrega` (D8) | Rol en el producto | `redistribuible` | Integra con (runtime) | Estado | Path de documentación |
+|---|---|---|---|---|---|---|
+| `GeometriaFactory-Api` (principal) | `rest-api` | Host REST desplegado en el servidor propio: endpoints, autenticación JWT y aplicación de migraciones al arrancar. Sostiene el dato, las reglas y la única base de datos | false | — | vigente | `SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/` |
+| `GeometriaFactory-Web` | `web-monolith` | Front Blazor Interactive Server con MudBlazor, en el hosting público. Único punto de contacto del navegador | false | `GeometriaFactory-Api`, por HTTP con `Bearer` JWT, servidor a servidor | vigente | `SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/` |
+
+**Dos unidades de entrega, y la partición responde a la topología y no a una preferencia de estilo**
+(intake §14): el front vive donde no lo bloquean y los datos viven donde persisten.
+
+### §2.B Tabla de proyectos de código
+
+**Solución de código `GeometriaFactory.sln`** — seis proyectos .NET y el proyecto Node.js del visor, que pertenece a esta solución porque `GeometriaFactory-Web` toma su artefacto como insumo de construcción (`Intake-Rules.md` 4.3 §4). El agrupador lleva además los tres proyectos de prueba, `E2ETests` y los **veinte samples** —nueve `Sample.*.csproj` construidos con la solución y once nodos sin construcción—, que no son proyectos de código del producto y por eso no entran en esta tabla (intake §16):
+
+| `Nombre-Proyecto-Codigo` | `Identidad-Codigo` | Solución de código | Stack | Rol en la arquitectura | Dependencias de compilación | Path `/src` |
+|---|---|---|---|---|---|---|
+| `GeometriaFactory-Api` | `GeometriaFactory.Api` | `GeometriaFactory.sln` | ASP.NET Core sobre .NET 10 | Host REST: endpoints, autenticación y composición de raíz | `GeometriaFactory-Application`, `GeometriaFactory-Infrastructure`, `GeometriaFactory-Contracts` | `src/GeometriaFactory.Api/` |
+| `GeometriaFactory-Web` | `GeometriaFactory.Web` | `GeometriaFactory.sln` | Blazor Interactive Server sobre .NET 10, con MudBlazor | Front: páginas y componentes. Hoja del grafo | `GeometriaFactory-Contracts`, `GeometriaFactory-Visor` (insumo de construcción) | `src/GeometriaFactory.Web/` |
+| `GeometriaFactory-Domain` | `GeometriaFactory.Domain` | `GeometriaFactory.sln` | C# sobre .NET 10 | Entidades e invariantes. Centro de la regla de dependencias | — | `src/GeometriaFactory.Domain/` |
+| `GeometriaFactory-Application` | `GeometriaFactory.Application` | `GeometriaFactory.sln` | C# sobre .NET 10 | Casos de uso y puertos | `GeometriaFactory-Domain` | `src/GeometriaFactory.Application/` |
+| `GeometriaFactory-Infrastructure` | `GeometriaFactory.Infrastructure` | `GeometriaFactory.sln` | C# sobre .NET 10, EF Core con proveedor SQLite | Persistencia, seguridad y validador de figuras | `GeometriaFactory-Application`, `GeometriaFactory-Domain` | `src/GeometriaFactory.Infrastructure/` |
+| `GeometriaFactory-Contracts` | `GeometriaFactory.Contracts` | `GeometriaFactory.sln` | C# sobre .NET 10 | DTOs de la API. **Proyecto compartido** | — | `src/GeometriaFactory.Contracts/` |
+| `GeometriaFactory-Visor` | `geometriafactory-visor` | `GeometriaFactory.sln` | Node.js con TypeScript y webpack | Produce el bundle del visor 3D. Visualizador puro (RA-02) | — | `visor/` (en el agrupador, nodo sin construcción `visor/geometriafactory-visor.csproj`: forma del repositorio, intake §13.3) |
+
+**Ningún proyecto de código lleva valor D8**: el tipo es atributo de la entrega, no de la compilación.
+Los cinco que la emisión 1.4 declaraba `library` no perdieron rol: perdieron un atributo que el modelo
+de dos ejes le asigna a la unidad que los contiene.
+
+**El visor pertenece a `GeometriaFactory.sln` por la arista de insumo, y su nodo sin construcción es forma del repositorio.** Su artefacto llega a `GeometriaFactory-Web` como **bundle copiado a `wwwroot/js/`** por el target `BuildVisor` de `GeometriaFactory.Web.csproj`, su **único generador** (`Web ADR-10008`): es una arista del grafo de compilación de la solución, de clase `insumo de construcción`, y no una referencia de proyecto. [CORREGIDO 2026-09-13: hasta la 6.1 este párrafo decía que el grafo del visor «sigue siendo propio» y que su artefacto era «un consumo de artefacto […], no una arista del grafo de referencias», que es la forma que la plantilla 6.1 §3 reserva para dependencias entre soluciones distintas.]
+
+### §2.C Matriz de composición
+
+Derivada de la columna «Compone» de §13.2 del intake:
+
+| | Api | Web | Domain | Application | Infrastructure | **Contracts** | Visor |
+|---|---|---|---|---|---|---|---|
+| **GeometriaFactory-Api** | X | | X | X | X | **X** | |
+| **GeometriaFactory-Web** | | X | | | | **X** | X |
+
+**`GeometriaFactory-Contracts` es el único proyecto compartido.** Un cambio sobre él **alcanza a las
+dos entregas**, y por eso viaja marcado en el despacho de las dos.
+
+### §2.1 Regla de nombres de código
+
+Cada proyecto de código se nombra `<Raiz-Codigo><separador><Sufijo>` con el perfil de su ecosistema (§1.2). Ningún proyecto es `redistribuible`, de
+modo que el prefijo de organización del perfil no se usa. `GeometriaFactory-Visor` sigue el **perfil del ecosistema npm** (§1.2): `geometriafactory-visor`, minúscula con guion. [CORREGIDO 2026-09-13: hasta la 6.1 se lo declaraba «excepción declarada» del intake §13.3.]
+
+---
+
+## §3 Los dos grafos
+
+**Grafo de integración**, derivado de la columna «Integra con» de §2.A. Ordena la **generación de la
+documentación**:
+
+```text
+[GeometriaFactory-Api]  ->  [GeometriaFactory-Web]
+```
+
+Orden topológico de generación: nivel 0 `GeometriaFactory-Api`; nivel 1 `GeometriaFactory-Web`. La
+arista es de **runtime**: el front habla con la API por HTTP.
+
+**Grafo de compilación de `GeometriaFactory.sln`**, derivado de la columna de dependencias de §2.B.
+Acíclico. Ordena el **build**. **Ocho aristas, de dos clases**, y la distinción de clase es la que
+hacía que el recuento no cerrara —se explica debajo del bloque—:
+
+```text
+referencias de proyecto (7), las que un `.csproj` materializa
+    Domain         ->  Application
+    Domain         ->  Infrastructure
+    Application    ->  Infrastructure
+    Application    ->  Api            <- directa; §2.B la declara y el árbol la tiene
+    Infrastructure ->  Api
+    Contracts      ->  Api
+    Contracts      ->  Web
+
+insumo de construcción (1), generador: GeometriaFactory-Web
+    Visor          ->  Web            <- el bundle, generado por el target BuildVisor de `GeometriaFactory.Web.csproj`
+```
+
+Orden topológico de compilación: nivel 0 `GeometriaFactory-Domain`, `GeometriaFactory-Contracts` y `GeometriaFactory-Visor`;
+nivel 1 `GeometriaFactory-Application` y `GeometriaFactory-Web`; nivel 2
+`GeometriaFactory-Infrastructure`; nivel 3 `GeometriaFactory-Api`.
+
+**El visor no forma un grafo aparte**: no tiene dependencias internas de su ecosistema, de modo que su única arista es el insumo de construcción de arriba (plantilla 6.1 §3). [CORREGIDO 2026-09-13: hasta la 6.1 este documento declaraba un «grafo de compilación del proyecto Node.js» de un solo nodo, cuya salida «se consume como artefacto».]
+
+**Por qué el grafo tiene dos clases de arista, y por qué esto se corrige recién hoy.** `Visor → Web` es
+una dependencia de compilación real —sin el bundle el front no funciona— pero **no es una referencia de
+proyecto**: la materializa el target `BuildVisor` de `GeometriaFactory.Web.csproj`, que ejecuta
+`scripts/build-visor.sh` —la salida de webpack copiada a `src/GeometriaFactory.Web/wwwroot/js/`— y
+declara el archivo como recurso estático. Un proyecto Node y uno .NET no se referencian entre sí. Contar
+las ocho juntas obliga a decir de qué clase es cada una; **no decirlo es lo que produjo tres recuentos
+distintos en este mismo documento**, y la clase estaba implícita en §2.B desde la emisión 1.0.
+
+**Los dos grafos no coinciden, y es lo que hay que no confundir.** La arista `Web → Api` está en el de
+integración y **no** en el de compilación; las **seis** aristas internas del backend —las de §2.B que no
+tocan a `Contracts` ni al `Visor`— están en el de compilación y **no** en el de integración, porque esas
+capas no se despliegan.
+
+---
+
+## §4 Resultado de las validaciones bloqueantes
+
+| Validación | Resultado |
+|---|---|
+| Cada `tipo_unidad_entrega` pertenece al conjunto cerrado D8 | Cumple: `rest-api` (1) y `web-monolith` (1), sobre las **dos** unidades de entrega |
+| Exactamente una unidad de entrega principal | Cumple: `GeometriaFactory-Api` |
+| Sin colisión de `Nombre-Proyecto-Codigo` ni de `Identidad-Codigo` | Cumple: siete nombres y siete identidades distintas |
+| Cada dependencia de compilación referencia un proyecto de código existente | Cumple: **las ocho aristas resuelven** — siete referencias de proyecto y un insumo de construcción, contadas sobre la columna de dependencias de §2.B y **verificadas contra los seis `.csproj` y `scripts/build-visor.sh` el 2026-08-31** |
+| Grafo de compilación acíclico, por solución de código | Cumple: cuatro niveles en `GeometriaFactory.sln`, con las **dos clases** de arista contadas igual y `GeometriaFactory-Visor` en el nivel 0 |
+| Todo insumo de construcción tiene exactamente un generador, y ningún `generado por` nombra a otro consumidor | Cumple: `GeometriaFactory-Visor` es insumo de un solo consumidor, `GeometriaFactory-Web`, que es su generador; no hay ningún `generado por` |
+| Ninguna referencia de proyecto une proyectos de código de ecosistemas distintos | Cumple: las siete referencias unen proyectos .NET y ningún `.csproj` referencia a `visor/geometriafactory-visor.csproj` |
+| Todo proyecto de código compone al menos una unidad de entrega | Cumple: los siete tienen marca en §2.C |
+| `Nombre-Producto` en prosa de negocio, independiente de `Raiz-Codigo` | Cumple |
+| `Raiz-Codigo` declarado en el intake | Cumple: declarado, no asumido |
+| §13 del intake recorrible, con sus tres subsecciones y su perfil de convención | Cumple |
+
+---
+
+## §5 Flags derivados (`Master-Prompt.md` §4)
+
+**Los flags se calculan por unidad de entrega, no por proyecto de código.** Es el cambio de fondo
+respecto de la emisión 1.4: un proyecto de código **no emite categorías**, de modo que no tiene flags
+de gating. Su stack y sus dependencias son datos del inventario de §2.B.
+
+Flags del producto:
+
+| Flag | Valor | Origen |
+|---|---|---|
+| `equipo_n` | 1 | Intake §2: «1 docente + agente IA»; el agente no es persona del equipo. Efecto: la categoría 07 emite únicamente `Mini-Plan.md` |
+| `requiere_compliance` | false | Intake §10 declara que no aplica ninguna normativa |
+
+Flags por unidad de entrega:
+
+| Unidad de entrega | `tipo_unidad_entrega` | `redistribuible` | `entrega_diferida` | `usa_llm` | `tiene_ui_final` | `multi_tenant` | `tiene_auth` | `tiene_portal_developers` | `tiene_extensibilidad` | `tiene_persistencia` | `tiene_observabilidad_critica` | `requiere_maqueta` |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `GeometriaFactory-Api` | `rest-api` | false | false | false | false (DX) | false | **true** | false | false | **true** | **true** | false |
+| `GeometriaFactory-Web` | `web-monolith` | false | false | false | **true** (UX/UI) | false | **true** | false | **true** | false | false | **true** |
+
+Fundamento de los valores que no son el trivial, y **qué cambió al pasar de siete filas a dos**:
+
+- **`tiene_persistencia` true en `Api`, y es el caso que la evaluación por proyecto de código rompía.** La persistencia del producto vive en `GeometriaFactory-Infrastructure`, que **no se despliega**. Evaluado por proyecto de código, la entrega `Api` habría quedado en false y se habría omitido su modelo de datos. La regla vigente lo evalúa sobre la unidad —«true si **alguno de los proyectos de código que la componen** declara un motor de persistencia distinto a *No aplica*»— y el resultado es el correcto. `Web` queda en false: el intake §14 declara que «el front no tiene base de datos».
+- **`tiene_auth` true en las dos.** En `Api` por la derivación de clave y la emisión de JWT de `Infrastructure`, la guardia y el canje del host, las reglas de `Domain` (INV-06) y la autorización por pertenencia de `Application` (INV-02, INV-03) —los cuatro proyectos que la componen la declaran—. En `Web` por el canje de credenciales, el acceso en el circuito y la cookie de sesión. La emisión 1.4 lo tenía true en cinco de sus siete filas; acá **no se pierde nada**: las dos entregas emiten su ADR de autenticación.
+- **`tiene_extensibilidad` pasa de `Visor` a `Web`.** El punto de extensión del producto es la fachada del visor, con sus **seis** funciones (intake §17.2.P.3 · `GeometriaFactory-Visor`), y `GeometriaFactory-Visor` compone `GeometriaFactory-Web`. El flag viaja con la entrega que lo publica: `Extensibilidad.md` en 05 y la guía de testing en 08 se emiten en `Web`, que es donde el contrato es observable.
+- **`requiere_maqueta` pasa de dos proyectos de código a una unidad de entrega, y refleja lo que efectivamente pasó.** La emisión 1.4 lo tenía true en `Web` y en `Visor`, y su propio fundamento declaraba que **hubo una sola maqueta**, la de `Web`, porque «la fachada no dibuja superficie propia y lo único observable de ella es la escena embebida en su anfitrión». El modelo de unidad de entrega hace que eso deje de ser una excepción declarada y pase a ser la derivación: **una entrega, una maqueta**. Los tres artefactos de línea de base ya viven en la categoría 03 de `Web`, y no se mueven.
+- **`tiene_observabilidad_critica` true en `Api`**: sus NFR declaran latencia p99 con métrica numérica (500 ms). Ninguna otra entrega declara p99 ni SLO de disponibilidad.
+- **`usa_llm` false en las dos**: ninguna subsección P.10 ni P.11 de ninguna de las dos declara uso de LLM. El agente IA interviene en la construcción, no en el sistema construido. **La categoría 04 se omite para las dos.**
+- **`multi_tenant` false**: intake §17.1.P.4 · `GeometriaFactory-Infrastructure` lo declara explícitamente —«una instancia, un curso, un administrador», INV-05—.
+- **`tiene_ui_final`**: se deriva de `tipo_unidad_entrega`. `web-monolith` → true, variante UX/UI. `rest-api` sin portal → false, variante DX.
+- **`redistribuible` false en las dos**: no hay publicación en ningún feed. Los dos artefactos entregables son una imagen Docker y una publicación por FTP.
+- **`entrega_diferida` false en las dos**: ninguna fuente declara una entrega planificada para otra etapa, y las dos tienen sus once categorías emitidas (decisión de la batería M2, B-1).
+
+**Los flags quedan inmutables desde la confirmación de esta emisión** (`Master-Prompt.md` §4). Un
+cambio posterior obliga a retroceder a la fase más temprana afectada de la unidad de entrega
+correspondiente.
+
+---
+
+## §6 Control de cambios
+
+| Versión | Fecha | Cambios | Autor |
+|---|---|---|---|
+| 7.0 | 2026-09-13 | **Migración normativa 13.7 → 13.16, fase M3** (`Master-Prompt-Migracion.md` 2.10 §7): **re-derivado del intake 5.0** sobre la plantilla **6.1**. **§1.2**: perfil de convención **por ecosistema**, .NET y npm, con capitalización. **§2.B**: una sola tabla para `GeometriaFactory.sln`, con la columna «Solución de código» de la plantilla; el visor entra a ella por el insumo de construcción, y la dependencia `GeometriaFactory-Visor` de `GeometriaFactory-Web` lleva su marca. **§2.1**: la identidad del visor sigue el perfil npm, sin excepción. **§3**: un solo grafo con dos clases —siete referencias de proyecto y un insumo de construcción, generador `GeometriaFactory-Web`—, `GeometriaFactory-Visor` en el nivel 0, y sin «grafo del proyecto Node.js» aparte. **§4**: la aciclicidad cuenta las dos clases y entran las dos validaciones nuevas, que se cumplen. **§2 deja de repetir la nota sobre la cita «2.0» del intake**, que es registro de la fila 5.1 de este control de cambios. **La procedencia de §1.1 no se toca**: es de M5. Estado anterior en `_legacy/2026-09-13/PRODUCT-MANIFEST-Fabrica-De-Geometria-v6.1.md`. Sube **major** con el intake. | Orquestador de migración normativa SDD |
+| 6.1 | 2026-09-13 | **Re-derivado del intake 4.6**: §2.B declara qué más agrupa `GeometriaFactory.sln` además de los siete proyectos de código —pruebas, `E2ETests` y los veinte samples, nueve construidos y once nodos sin construcción— y por qué no son filas de la tabla. La 6.0 no lo decía, y la aplicación del 2026-09-12 había dejado once carpetas de `samples/` fuera del agrupador. **Las siete filas, las ocho aristas, sus clases y el orden topológico no cambian.** Estado anterior en `_legacy/2026-09-13/`. Sube **minor** con el intake. | Orquestador, sobre decisión del Product Owner del 2026-09-11 |
+| 6.0 | 2026-09-12 | **Re-derivado del intake 4.0** (`Master-Prompt.md` §13, caso (a)): el visor pasa a `GeometriaFactory.sln` como **nodo sin construcción** por decisión del Product Owner del 2026-09-11; §2.B reordena su bloque, §3 reexpresa la clase «activo de construcción» —sigue siendo una, pero ahora la expresa un `.csproj` con un target y ya no un guion invocado a mano— y §4 ajusta la validación de aciclicidad. **Las ocho aristas, sus clases y el orden topológico no cambian.** Estado anterior en `_legacy/2026-09-12/`. Sube **major** con el intake. | Orquestador, sobre decisión del Product Owner |
+| 5.4 | 2026-08-31 | **El recuento de aristas de compilación queda resuelto contra el árbol: son OCHO, y §2.B tenía razón desde la emisión 1.0.** Cierra el punto abierto que `../Docs/Producto/Vista-Producto.md` §3.1 sostenía desde el **2026-08-10** y que el §8 del README del producto listaba como el primero de sus cuatro. **No hubo que decidir nada: hubo que abrir los `.csproj`.** Los seis proyectos .NET declaran **siete referencias de proyecto** y `scripts/build-visor.sh` materializa la octava, `Visor → Web`, copiando el bundle a `wwwroot/js/`. La columna de dependencias de §2.B enumera **exactamente esas ocho**, arista por arista, incluida `Application → Api` **directa**, que `GeometriaFactory.Api.csproj` tiene escrita. **Los otros dos recuentos estaban mal, y de maneras distintas.** El bloque de §3 dibujaba **cinco** aristas, una de ellas —`Contracts → Application`— **inexistente en el árbol y ausente de §2.B**, y omitía cuatro; se reescribe enumerando las ocho y **rotulando su clase**. El §4 declaraba «las siete aristas resuelven»: **el número coincidía por casualidad** con la cantidad de referencias de proyecto, pero contando un conjunto distinto —el de §3, que incluye `Visor → Web` y excluye `Application → Api`—. **Un recuento correcto por la razón equivocada es peor que uno incorrecto**: quien hubiera escrito el `.csproj` de la Api leyendo el diagrama habría omitido una referencia y el error habría aparecido recién al compilar. Se corrige además la prosa que hablaba de «cuatro aristas internas del backend», que son **seis**. **Ninguna decisión de arquitectura cambia** —el grafo es acíclico y el orden topológico de cuatro niveles es el mismo bajo las tres lecturas—, y por eso esto nunca frenó nada, que es exactamente por lo que sobrevivió veintiún días. Emitido como **parche a mano sobre un artefacto derivado**, con el precedente de la 5.2: corregir un defecto de derivación no exige re-derivar el documento entero. | Orquestador SDD |
+| 5.3 | 2026-08-27 | **Procedencia actualizada a SDD 13.7 sin migrar**, por la **salida `C`** del orquestador de reanudación, decidida por el Product Owner el 2026-08-27 en la **segunda vuelta** de [`../Docs/Audit/Estado-Del-Destino-2026-08-27.md`](../Docs/Audit/Estado-Del-Destino-2026-08-27.md) §8.1. **No es una migración y §1.1 lo dice en su primera línea**: es el caso que `Master-Prompt-Reanudacion.md` §4 llama «actualizar la procedencia sin migrar», y que **sólo procede con la verificación artefacto por artefacto hecha** — la lista de los **ocho artefactos que se movieron**, con el motivo por el que cada uno **no** toca al destino, está en §6 de ese informe y resumida en la tabla nueva de §1.1. **Cero major**, y los cuatro saltos con bloque de impacto vacío. **Ningún documento del corpus cambia**: es la única diferencia con las siete migraciones anteriores, y es la que hace que esta actualización sea una tabla y no un trabajo. Entra **`Mesa-Rules` 1.0** a la tabla de artefactos, que **sí alcanza al destino aunque no a su corpus**: gobierna la fase `R1.5`, que corrió ese día. **§1.1 deja de arrastrar el relato completo de la migración 10.0 → 13.3** —vive en las entradas 5.0 y 5.1 de este control de cambios— y conserva de ella lo que no es de forma: el cierre de `PA-01` y el retiro de `D2`. Se agrega la constancia de por qué las citas del intake **3.0** siguen siendo correctas con el intake en **3.1**. | Orquestador de reanudación SDD |
+| 5.2 | 2026-08-27 | **Parche `P-04` de la mesa de evaluación del 2026-08-27** ([`../Docs/Audit/Mesa-2026-08-27.md`](../Docs/Audit/Mesa-2026-08-27.md), hallazgo **H-04**, ancla **E2**, nivel **P2**). La línea 3 declaraba «plantilla de referencia **5.0**» mientras **§1.1 de este mismo documento** declara la **6.0**: dos lecturas del mismo dato dentro del mismo archivo, y la de arriba es la que un lector ve primero. Se corrige la línea 3 y se la remite a §1.1, que es la fuente. **La procedencia de §1.1 no se toca** y sigue en SDD **13.3**. | Orquestador de reanudación SDD |
+| 5.1 | 2026-08-25 | **Cierra los tres `P0` del audit de M6, que había RECHAZADO la migración.** La emisión 5.0 declaró la cadena completa cuando no lo estaba: **la revisión de apartamientos de §4.7 nunca se ejecutó sobre el árbol** —los tres ADR seguían con sus contadores en 1, 1 y 0, del 17 y 18 de agosto— y **dos `README.md` de la 09 habían subido de versión sin archivar su estado previo**. §1.1 deja de afirmar que ninguna fila del plan quedó sin resolver y **declara el orden real**: qué faltaba, cuándo se completó y con qué. **Y se corrige la cita del intake de §2**, que decía **2.0** con el vigente en **3.0** (**P2** del mismo audit), en el artefacto que declara la conformidad de todo lo demás. Sube **minor**: no cambia ninguna versión de la tabla de procedencia, corrige lo que el documento afirmaba sobre sí mismo. |
+| 5.0 | 2026-08-25 | **Fase M5 de la séptima migración normativa, 10.0 → 13.3, y la primera que atraviesa tres saltos major.** §1.1 se reescribe con los **23 artefactos** en su versión viva, más `Rules-Base-Conocimiento` **2.0**, que entra por primera vez a la tabla **declarando que no alcanza** —no hay orquestador que lea la regla y las dos unidades tienen `usa_llm == false`—, para que su ausencia no se lea como omisión. **Las tres superficies del salto, medidas sobre el árbol**: **144** historias de usuario con su §5.b, **10** subsecciones `.b` en los seis documentos de la 09, y **5** filas del mapa de documentación con la forma nueva de `AG`. Se declara que **el destino no renumera las 550 ocurrencias del corpus**, por `Migracion-Rules.md` §4.3.1. **Y la consecuencia que no es de forma**: la partición del ítem de estimación destapó que `PA-01` estaba **vencido desde el 2026-08-14** y que **las 144 historias lo citaban** —habrían sido 144 hallazgos `P1`—; se cerró **contrastando contra el hecho**, con ocho etapas cerradas sin una sola estimación, y el retiro quedó registrado como `D11`. **La procedencia se escribe porque la cadena está completa**: tres cortes de M4, cada uno con su audit independiente, y **ninguna fila del plan sin resolver**; reescribirla con migración parcial es **P0** de M6. Estado previo archivado en `_legacy/2026-08-25/`. Sube **major**. |
+| 4.0 | 2026-08-19 | **Migración normativa 9.12 → 10.0, fase M5**: cierre de procedencia. **Sexta** migración del destino y **la primera desde la 8.11 → 9.9 que alcanza artefactos**, después de dos saltos consecutivos de alcance cero. §1.1 se reescribe entera: el conjunto pasa de **9.12** a **10.0**, con `Root-Rules` **6.2 → 7.0** y `Rules-Devops` **4.6 → 5.0** como los **dos únicos** artefactos que alcanzan al árbol; los siete saltos minor 9.13 a 9.19 tienen **alcance documental cero**, verificado antes en la reanudación del 2026-08-18 y de nuevo en el plan. **Las tres superficies se midieron y no se supusieron**: las citas a §12 dan **cero**, el prefijo de tag es **un documento** —`Estrategia-Versionado.md` **3.0** §3.b— y los ítems diferidos son **116 filas** en seis documentos. **Se escribe recién después de verificar que M4 quedó completa**: ninguna tabla conserva la columna «Cuándo» y las 116 filas llevan su evento como artefacto y sección. §1.1 declara además el resultado que la migración destapó y que no es un detalle de forma: **76 puntos abiertos vencidos** —32 desde el 2026-08-13— y **14 sin evento declarado, elevados al Product Owner**; ninguno se cerró y ninguno se inventó. **M2 y M3 quedaron sin filas**: el intake no declara puntos abiertos con esta forma ni cita §12, de modo que el manifiesto no se re-deriva. Estado anterior archivado en `_legacy/2026-08-19/`. Sube **major**: el bloque de procedencia se reescribe entero. | Orquestador de migración normativa SDD |
+| 3.2 | 2026-08-17 | **Migración normativa 9.10 → 9.12, fase M5**: cierre de procedencia. Quinta migración del destino y **segunda consecutiva de alcance documental cero**. **Dieciocho artefactos del framework se movieron y ninguno alcanza al árbol**: la 9.11 agregó a cada tabla de anti-patrones una columna **`Detección`**, y la verificación **mecánica** —`diff` del snapshot `_legacy/9.10/` contra los archivos vivos— da **cero líneas cambiadas fuera de esa tabla en las quince reglas**. Entra `Catalogo-De-Criterios` **1.1**, artefacto nuevo del framework, **con su naturaleza de índice declarada**: no define ningún criterio y no gobierna ningún artefacto del destino; se lista para que la próxima migración no redescubra la pregunta. **Corrección propia:** la fila de reglas transversales de la emisión **3.1** decía «este árbol atravesó **tres** migraciones normativas» y enumeraba **cuatro** —el recuento no se actualizó al agregar el cuarto salto, error escrito por este mismo orquestador—; pasa a **cinco**, enumeradas, y queda declarado en `Audit/Plan-Migracion-9.10-a-9.12.md` §6 en lugar de corregirse en silencio. **Ningún documento del árbol se tocó**: M2, M3 y M4 quedaron sin filas. Sube **minor**. |
+| 3.1 | 2026-08-17 | **Migración normativa 9.9 → 9.10, fase M5**: cierre de procedencia. Es la **cuarta** migración de este destino y la primera con **alcance documental cero**. **Veintiuno de los veintidós artefactos del framework no cambiaron de versión**; el único que se movió es `Migracion-Rules` **3.7 → 3.8**, cuyas cinco reglas nuevas gobiernan **la consolidación al fundir árboles**: cambian cómo se migra, no la forma de ningún documento migrado. **Verificado sobre el árbol y no supuesto**: cero carpetas `_fusion/`, ninguna fila del salto anterior clasificada «regenerar», y la única consolidación del producto cerrada y auditada bajo su propia normativa. **Cero renombres**, comprobados por lectura de la entrada completa del `CHANGELOG`. La verificación artefacto por artefacto quedó escrita en `Audit/Plan-Migracion-9.9-a-9.10.md` §2 y §3 **antes** de tocar esta tabla, que es lo que `Master-Prompt-Reanudacion.md` §4 exige para actualizar la procedencia sin migrar documentos, y lo que la fase M5 existe para hacer cumplir. **Ningún documento del árbol se tocó**: las fases M2, M3 y M4 quedaron sin filas. Sube **minor**: cambia una fila de la tabla de procedencia y su nota, no el bloque entero. |
+| 3.0 | 2026-08-17 | **Migración normativa 8.11 → 9.9, fase M5** (`Master-Prompt-Migracion.md` 2.7 §9): **cierre de procedencia**. §1.1 pasa del conjunto **8.11** al **9.9**, con las versiones leídas del snapshot **`_legacy/9.9/`** del repositorio del framework y no de sus archivos vivos — el framework publicó **9.10** durante la corrida y el plan había congelado el objetivo en 9.9 declarando que no se reabre. **Se escribió recién después de verificar que las siete filas del plan quedaron resueltas**: intake 3.0 (M2), este manifiesto re-derivado 2.3 (M3), los dos apartamientos con su estado y su contador, y las once rutas del layout anterior en cuatro documentos de nivel producto (M4). Ninguna sección quedó pendiente por falta de fuente y ninguna fila sin resolver: reescribir la procedencia con migración parcial es **P0** por `Migracion-Rules.md` §4.6. **A diferencia del salto anterior, éste sí alcanzó artefactos**: cambiaron los veintidós artefactos del framework, aunque la mayor parte de su superficie —la cabecera de nivel de los 313 documentos generados y el renombre del artefacto de `05`— ya estaba reparada por la salida A del orquestador de reanudación, el mismo día y antes de que la migración empezara. §1.1 declara las tres superficies que sí abrió el salto y cómo se cerró cada una. Sube **major**: el bloque de procedencia se reescribe entero. |
+| 2.3 | 2026-08-17 | **Migración normativa 8.11 → 9.9, fase M3** (`Master-Prompt-Migracion.md` 2.7 §7): el manifiesto **se re-deriva** del intake migrado **3.0**, no se migra. **La re-derivación no produjo ningún cambio de contenido**, y eso es el resultado y no la ausencia de uno: la M2 corrigió metadatos del intake —el árbol de §16, el encabezado de la Parte C y el checklist de §19— y **no tocó §13**, que es lo único de lo que este documento se deriva. Se verificó campo por campo contra §13.1, §13.2 y §13.3: las **dos** unidades de entrega con su D8 y su `redistribuible`, los **siete** proyectos de código con su solución, su stack y sus dependencias, la matriz con `GeometriaFactory-Contracts` como único compartido, los dos grafos y las **nueve** validaciones bloqueantes, todas **Cumple**. Lo único que cambia es la **referencia al intake de origen**, que citaba la emisión **2.0** —desactualizada ya antes de esta migración, porque el intake iba por 2.2— y ahora cita **3.0**. **La procedencia de §1.1 NO se toca y sigue declarando el conjunto 8.11**: reescribirla es trabajo de la fase **M5**, y adelantarlo produciría una afirmación falsa mientras `SDD/Docs/` sigue sin migrar. El estado anterior queda archivado en `_legacy/2026-08-17/`. Sube **minor**: el artefacto derivado no cambia de forma ni de contenido. |
+| 2.2 | 2026-08-16 | **Cierre de procedencia por la fase M5 de la migración 8.6 → 8.11** (`Master-Prompt-Migracion.md` **2.3** §9), invocada desde la salida **B** del orquestador de reanudación con la decisión del Product Owner del 2026-08-16. **§1.1 se reescribe**: el conjunto pasa de **8.6 a 8.11**. **Ninguna de las catorce reglas de categoría ni de las cuatro transversales cambió de versión**, de modo que **ningún documento del árbol requirió migración**: las 450 filas del plan se clasificaron `no tocar` y las 450 quedaron resueltas. Cambian cinco filas de instrumento de proceso —`Master-Prompt` 7.4 → 7.7, `Master-Prompt-Migracion` 2.0 → 2.3, `Migracion-Rules` 3.2 → 3.4, `PRODUCT-INTAKE-template` 3.0 → 3.1— y entra **una fila nueva**, `Master-Prompt-Reanudacion` 1.1, que en la 8.6 no existía. **La verificación es artefacto por artefacto y no por número de conjunto**, escrita antes de tocar la tabla en `SDD/Docs/Audit/Plan-Migracion-8.6-a-8.11.md` §2, §3 y §5; el único cambio con superficie sobre un artefacto —la plantilla de intake 3.1— encuentra al intake **ya conforme**, porque el defecto que corrige se descubrió migrando este mismo destino. **M2 sin cambios, M3 sin corresponder, M4 sin trabajo.** El intake **no se tocó** y sigue en **2.0**, de modo que ninguna tabla de §2 a §5 de este manifiesto cambia: M5 sólo toca la procedencia. Sin archivado previo, por la misma razón y con el mismo criterio que la fila 2.1. Sube minor. | Orquestador de migración normativa SDD |
+| 2.1 | 2026-08-16 | **Cierre de procedencia por la fase M5 de la migración** (`Master-Prompt-Migracion.md` 2.0 §9), después de que el Product Owner confirmara la re-derivación de M3. La verificación de M5 encontró **la cadena completa**: intake **2.0** sobre plantilla 3.0, manifiesto **2.0** sobre plantilla 5.0, `SDD/Docs/` migrado, **0 filas del plan sin resolver**, **0 secciones pendientes sin respuesta del humano**, **0 enlaces rotos** y **1145 de 1145 referencias ancladas**. **Con dos conformidades de forma abiertas y declaradas**, que el informe de M6 levanta como P1 y que **no son documentos sin migrar**: dos documentos de referencia cruzada no se reconectaron en M4, y las familias de identificadores del propio intake conservan su ancho de origen. **§1.1 se reescribe**: el conjunto pasa de **6.0 a 8.6**, con las catorce reglas de categoría y las cuatro transversales en su versión vigente, y **dos filas nuevas** —`Master-Prompt-Migracion` 2.0, que en la 6.0 no existía, y `Migracion-Rules` 3.2, que **pasa de «no aplica» a aplicar**, porque este destino ya no es un árbol generado desde cero sino uno migrado—. El estado pasa a **Aprobado**. Ninguna tabla de §2 a §5 cambia: M5 sólo toca la procedencia. Sube minor. | Orquestador SDD |
+| 2.0 | 2026-08-16 | **Re-derivación por la fase M3 de la migración 6.0 → 8.6** (`Master-Prompt-Migracion.md` 2.0 §7), desde el intake **2.0** y sobre la plantilla **5.0**. El manifiesto pasa de una tabla de siete proyectos de código a **los dos ejes**: **§2.A** las dos unidades de entrega con su D8, su integración en runtime y su estado; **§2.B** los siete proyectos de código **agrupados por solución de código** —seis en `GeometriaFactory.sln` y `GeometriaFactory-Visor` sin solución, como proyecto Node independiente—, **sin valor D8**; y **§2.C** la matriz, que declara a `GeometriaFactory-Contracts` como **único proyecto compartido**. **§3** declara **dos grafos** en lugar de uno: el de integración, que ordena la generación, y el de compilación **por solución**, que ordena el build; la arista `Web → Api` vive en el primero y no en el segundo. **§4** valida sobre las unidades de entrega y suma la validación de que todo proyecto de código componga al menos una. **§5** pasa de **siete filas de flags a dos**, porque un proyecto de código no emite categorías y no tiene gating: con eso `tiene_persistencia` de `Api` pasa a **true** —evaluado por proyecto de código habría quedado en false y se habría omitido su modelo de datos—, `tiene_extensibilidad` viaja de `Visor` a `Web`, y `requiere_maqueta` deja de ser una excepción declarada y pasa a ser la derivación. **El bloque de procedencia de §1.1 no se toca y sigue declarando 6.0**: es trabajo de M5 y sólo procede con la cadena completa. **Estado `Propuesto`**: espera confirmación explícita del Product Owner. Sube **major**. | Orquestador SDD |
+| 1.4 | 2026-08-13 | **Tramo `R-2` del plan de renombre de [`Norma-De-Nomenclatura.md`](../Docs/Producto/Norma-De-Nomenclatura.md) 1.4 §8, ejecutado contra el glosario de su §6 y no por criterio propio.** **Acto 1 · el renombre** de los **tres puertos declarados** de su §6.3 —`IRepositorioTrabajos` ⟶ `IWorkRepository`, `IValidadorFiguras` ⟶ `IFigureValidator` e `IRelojDelSistema` ⟶ `ISystemClock`—. Acá son **3 ocurrencias**, las de la columna «qué expone» de `GeometriaFactory-Application` en §2, **derivadas del intake §13**, que se renombró en la misma edición: si la derivación no se moviera con su fuente quedaría reportando algo que §13 ya no dice. **Ningún flag, ningún tipo, ninguna arista del grafo y ningún orden topológico cambian.** **Cuadre `V-4` en las dos direcciones, contra la lista escrita antes de editar:** 64 ocurrencias candidatas medidas en 13 documentos con el instrumento de la norma §2.1, **63 renombradas y 1 no renombrada** —la cita textual de la línea de trazabilidad upstream de `RC-04001-Texto-Original-Escrito-Una-Sola-Vez.md`, que atribuye al `PRODUCT-INTAKE` **1.12** las palabras «`JsonOriginal` conservado íntegro y nunca reescrito» y que **renombrar falsificaría**—. `V-6` cuadró los tres nombres de archivo de `Ports/`. **Esta fila queda fuera del cuadre**, por el punto 4 de `V-4`: al describir lo que hizo reintroduce los identificadores viejos. | Orquestador SDD |
+| 1.3 | 2026-08-11 | **Cierra el hallazgo `P1-2`** del informe de auditoría `SDD/Docs/Audit/G-10-Examples-Siete-Proyectos-r1.md` 1.0. La línea de §5 sobre el punto de extensión afirmaba que «la enumeración de §18 del intake sigue nombrando cinco» funciones de la fachada y la trataba como residuo pendiente de corrección por el Product Owner. **La afirmación era falsa**: §18 del `PRODUCT-INTAKE` **1.25**, abierto y leído, enumera las **seis** por nombre y las rotula «las seis que §17.7 P.3 declara desde 1.6»; la corrección venía de la versión 1.11 del intake y este manifiesto no la registró. El defecto no quedó acá: **cuatro documentos de la Fase G tomaron la afirmación de esta línea en vez de abrir §18** y la repitieron como viva. Se reescribe la línea con el texto de §18 citado desde la fuente y se deja constancia expresa de la corrección, para que la próxima fase no la vuelva a copiar. **Ningún flag, ningún tipo D8 y ningún proyecto de código del manifiesto cambia**: la corrección es de una afirmación sobre otra sección del intake. | Product Owner |
+| 1.2 | 2026-08-10 | **Cierra los hallazgos `F26-21` y `N-2`** del informe de auditoría `SDD/Docs/Audit/F26-Propagacion-r2.md` 1.0, que registró que este documento fue el único del corpus al que la propagación de F-26 no llegó. Revisado entero contra el `PRODUCT-INTAKE` **1.10** y contra los documentos vivos de los cinco proyectos de código con documentación emitida. **(a) El punto de extensión declara seis funciones y no cinco.** El fundamento de `tiene_extensibilidad` en `GeometriaFactory-Visor` enumeraba `inicializar`, `cargarJson`, `seleccionarPieza`, `redimensionar` y `destruir`, la enumeración de §18 del intake, que es anterior a que su §17.7 P.3 sumara **`establecerMovimiento(id, opciones)`** en la versión **1.6**. Se pasa a citar §17.7 P.3, que es la sección que lleva el contrato, se declara que la enumeración de §18 quedó como residuo de la fuente, y se ancla en `Visor` `CU-12006` —CA-01 y CA-06— que el sample S-1 ejerce las seis. Se deja escrito que la sexta función confirma **RA-02** en lugar de aflojarla: el anfitrión pasa dos valores de verdad y el bundle no consulta la preferencia de movimiento reducido ni conserva la elección. **(b) El fundamento de `requiere_maqueta` describía una Fase B2 que no ocurrió así.** Decía que los dos proyectos de código la ejecutan «cada uno con su maqueta propia», contra `GeometriaFactory-Visor/03-UX-UI-DX/README.md` §4, que declara desde el 2026-08-09 que **no tuvo maqueta propia por decisión del Product Owner** y que su validación se integró en la maqueta de `GeometriaFactory-Web`. **Ningún flag cambia de valor**: `requiere_maqueta` sigue true en los dos y la inmutabilidad de `Master-Prompt.md` §4 no se toca; lo que se corrige es la descripción de cómo se ejerció y dónde quedaron los tres artefactos de línea de base. **Nada más quedó desactualizado**: se recontaron los siete proyectos de código de §2, las siete aristas de §3, las ocho validaciones bloqueantes de §4 y los flags de §5 contra el intake 1.10, y F-26 —que es lo que la tanda propagaba— no altera composición, jerarquía ni ningún flag, porque entra como capacidad dentro de proyectos de código ya declarados. Sube minor: corrige dos fundamentos derivados sin cambiar composición, jerarquía ni valores de flag. | Orquestador SDD |
+| 1.1 | 2026-08-09 | Corrección de `tiene_auth` en `GeometriaFactory-Domain` y `GeometriaFactory-Application`, de false a **true**, alineando el manifiesto a la sección de trazabilidad del `PRODUCT-INTAKE`, que es la fuente y declara true en los dos. La derivación original de §5 leía sólo el P.5 de cada bloque técnico. Detectada al emitir la categoría 03 de `GeometriaFactory-Domain`, que documentó la frontera de autenticación y encontró la divergencia contra el manifiesto. **No dispara el retroceso de fase de `Master-Prompt.md` §4**: el efecto del flag es habilitar casos de uso de autenticación en 02 y un ADR en 05; `Domain` ya había emitido esos casos de uso por otra vía y `Application` todavía no arrancó, de modo que ninguna fase generada queda inválida. Sube minor: corrige un valor derivado sin cambiar la composición ni la jerarquía. | Orquestador SDD |
+| 1.0 | 2026-08-08 | Confirmado por el Product Owner en la misma fecha de emisión: manifiesto aprobado como canónico y flags fijados, con `requiere_maqueta` == true en `GeometriaFactory-Web` y en `GeometriaFactory-Visor`, y `tiene_observabilidad_critica` == true en `GeometriaFactory-Api` sin invertir. La confirmación no sube versión: el documento cierra su emisión inicial. Derivación inicial desde `PRODUCT-INTAKE-Fabrica-De-Geometria.md` §13 y su perfil de convención, según `Intake-Rules.md` §4. Incluye bloque de procedencia del framework 6.0, tabla de siete proyectos de código, grafo y orden topológico, resultado de las ocho validaciones bloqueantes y flags derivados de `Master-Prompt.md` §4. | Orquestador SDD |

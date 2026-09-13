@@ -1,0 +1,22 @@
+# E-015b · Clasificación §4.8 (Migracion-Rules.md 3.20), versión 4: extiende E-015 v3 a los ocho ítems diferidos verticales de CU-08001 a CU-08008 (M6-22 del audit de cierre). Las 20 filas de E-015 v3 no cambian.
+# Paso 1: el ítem que falta es la correspondencia de las historias pronosticadas (US-080NN) con las vigentes, en la celda «Historias de usuario a generar en 06» de la tabla de trazabilidad de cada CU. Paso 2: la exigencia de esa celda es de Rules-Especificacion-Funcional; se busca en la versión vigente al ciclo. Paso 3: los ocho bloques llevan ciclo de origen aa3abd3 (2026-08-29); en ese commit el manifiesto declara:
+$ git show aa3abd3:SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md | grep 'Framework SDD (conjunto)'
+| Framework SDD (conjunto) | **13.7** |
+$ grep -n 'Versión de las reglas' _legacy/13.7/.../Rules-Especificacion-Funcional.md  (IA.SDD)
+6:**Versión de las reglas:** 5.5
+$ grep -n -i 'US a generar en 06\|Historias de usuario a generar' _legacy/13.7/.../Rules-Especificacion-Funcional.md
+186:9. Trazabilidad. Tabla con NB upstream, RN aplicables, US a generar en 06, componentes en 05, tests en 08.
+277:| Historias de usuario a generar | US-XXXXX (en 06) |
+502:Trazabilidad: cada CU debe enlazar a una NB y enumerar US a generar en 06.
+# Paso 4: la exigencia (Rules-Especificacion-Funcional 5.5, sección 9 de la estructura del CU y su tabla de trazabilidad con «US a generar en 06», l.186, 277 y 502) es anterior o igual al conjunto del ciclo (13.7): las ocho son hueco del ciclo.
+| Documento | Línea (HEAD) | Ciclo | Conjunto en el ciclo | Tema del hueco | Regla en el ciclo y ocurrencias | Clasificación |
+|---|---|---|---|---|---|---|
+| Producto/Contratos-Inter-Unidad/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion.md | 108 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+| Producto/Contratos-Inter-Unidad/CU-08002-Contrato-De-Administracion-De-Cuentas.md | 119 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+| Producto/Contratos-Inter-Unidad/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo.md | 123 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+| Producto/Contratos-Inter-Unidad/CU-08004-Contrato-De-Listado-De-Trabajos.md | 111 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+| Producto/Contratos-Inter-Unidad/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado.md | 116 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+| Producto/Contratos-Inter-Unidad/CU-08006-Contrato-De-Respuesta-De-Error.md | 113 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+| Producto/Contratos-Inter-Unidad/CU-08007-Contrato-De-Desenlace-De-La-Revision.md | 106 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+| Producto/Contratos-Inter-Unidad/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena.md | 125 | aa3abd3 | 13.7 | correspondencia de las historias pronosticadas con las vigentes | Rules-Especificacion-Funcional.md 5.5: 3 ocurrencias de /US a generar en 06|Historias de usuario a generar/ | hueco del ciclo (exigencia ≤ 13.7) |
+# Totales sobre las 28 filas abiertas del universo 126 (20 de E-015 v3 + 8 de este archivo): hueco del ciclo 23; norma posterior 0; sin ciclo de origen 3; ELEVADAS 2 (sin cambio: PA-09 de Api/06 :749 y PD-04 de Api/09 :597). Criterio §6: elevadas (2) < total con las dos clases mezcladas (28).

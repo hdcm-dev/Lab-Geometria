@@ -4,11 +4,11 @@
 |---|---|
 | Número | **EXP-0001** |
 | Título | Migración normativa del destino `Lab-Geometria` (producto Fábrica de Geometría) de SDD **13.7** a SDD **13.16** |
-| Estado | **en trámite** — resuelta en forma provisoria (actuación 010); espera la aprobación del Product Owner de los puntos A y B del lote |
+| Estado | **resuelto** — migración **completa**, procedencia en SDD **13.16** (actuación 013). Queda un lote de cierre de dos puntos (F, G) con su default declarado; ninguno reabre el trámite |
 | Apertura | 2026-09-13 |
-| Cierre | — |
-| Rama | `migracion/a-13.16`, worktree `Lab-Geometria-mig1316`, base `b9675d8` (`main` = `origin/main`). **Sin push, sin pull request, sin merge, sin etiqueta** (actuación 007) |
-| Partes | **Product Owner** (presenta y decide); **Orquestador de migración normativa SDD** (`Master-Prompt-Migracion.md` 2.10, instruye); **comisiones de mesa** que se convoquen (`Mesa-Rules.md` 1.3); **auditor independiente de M6** |
+| Cierre | 2026-09-13 |
+| Rama | `migracion/a-13.16` (base `b9675d8`; fusionada en `main` = `1d4afc4` por PR #205, con la migración parcial declarada) y después `migracion/a-13.16-aplicacion` (worktree `Lab-Geometria-mig1316b`, sobre `1d4afc4`) para la aprobación, la aplicación, el audit de cierre y M5. **Sin push, sin pull request, sin merge, sin etiqueta** (actuación 007): la fusión es del Product Owner |
+| Partes | **Product Owner** (presenta y decide); **Orquestador de migración normativa SDD** (`Master-Prompt-Migracion.md` 2.10, instruye); **comisiones de mesa** que se convoquen (`Mesa-Rules.md` 1.3); **auditor independiente de M6** y **auditor independiente de cierre** |
 | Objeto | Llevar `SDD/Intake/` y `SDD/Docs/` de la procedencia declarada a la versión vigente del framework, preservando contenido (`Migracion-Rules.md` 3.20), y asentar en la misma rama el OK de la fase `k` |
 | Origen | [Actuación 001](actuaciones/001-presentacion-pedido-del-product-owner.md), presentación del Product Owner del 2026-09-13 |
 
@@ -37,6 +37,9 @@ informe de M6 viven **donde `Migracion-Rules.md` §2.1 y `Mesa-Rules.md` §2.1 l
 | 008 | 2026-09-13 | testimonio | Coordinador de la serie (agente) | Instrucción de tratar una delegación anterior del PO como aprobación del plan y del intake: **no se asienta como aprobación** (origen del hecho calculado; `Master-Prompt.md` §13, no delegable) | [008](actuaciones/008-testimonio-instruccion-del-coordinador-sobre-la-aprobacion.md) |
 | 009 | 2026-09-13 | auditoria | Auditor independiente de M6 | Rondas 1 y 2 aprobadas con observaciones (5 P1 en total, cerrados en la corrida); ronda 3 acotada del orquestador | [009](actuaciones/009-auditoria-m6.md) |
 | 010 | 2026-09-13 | resolucion | Orquestador de migración | Migración parcial declarada; lote de cuatro puntos al Product Owner con su «si no respondés» | [010](actuaciones/010-resolucion-lote-al-product-owner.md) |
+| 011 | 2026-09-13 | testimonio | Product Owner | «A - está aprobado / B - está aprobado»: plan 1.3 y diff del intake aprobados; C, D y E sin respuesta, rigen sus defaults | [011](actuaciones/011-testimonio-aprobacion-plan-e-intake.md) |
+| 012 | 2026-09-13 | auditoria | Auditor independiente de cierre | Asienta la aplicación `c14bf3b` (E-022) y audita lo escrito: APROBADO CON OBSERVACIONES, 0 P0, 2 P1, 3 P2, 8 P3 (`M6-19` a `M6-31`), cerrados en la corrida; dos apartamientos de proceso declarados | [012](actuaciones/012-auditoria-cierre-m4.md) |
+| 013 | 2026-09-13 | resolucion | Orquestador de migración | **Migración completa**; M5 con la procedencia en 13.16 (manifiesto 7.1); lote de cierre F y G; C, D y E por default | [013](actuaciones/013-resolucion-final.md) |
 
 ## 2. Índice de evidencia
 
@@ -69,6 +72,10 @@ informe de M6 viven **donde `Migracion-Rules.md` §2.1 y `Mesa-Rules.md` §2.1 l
 | E-019 | Los 42 hallazgos del panel ciego, consolidados | agente (panel) | 2026-09-13 | `48598859dd3867c321979ec9b6580b66aba5f766cbb14e89fbfcedd6a769a642` | [E-019-panel-consolidado.txt](evidencia/E-019-panel-consolidado.txt) |
 | E-020 | Las 32 filas derivadas elegidas por la regla de linaje entre más de un candidato | comando git | 2026-09-13 | `666195aa04e9a637f89f924c0e35c4d9b39e4093b3c429a07ab63e27195eb68b` | [E-020-filas-elegidas-por-linaje.txt](evidencia/E-020-filas-elegidas-por-linaje.txt) |
 | E-021 | Aportes del presidente al jurado (sin voto) | agente (orquestador) | 2026-09-13 | `a82f80fc3caf19f3f7c1f6f0bdf40723046b1a23d20b3a950a702bb3fa007ced` | [E-021-aportes-del-presidente.txt](evidencia/E-021-aportes-del-presidente.txt) |
+| E-015b | Clasificación §4.8, v4: los ocho ítems verticales de `CU-08001` a `CU-08008` son hueco del ciclo (`Rules-Especificacion-Funcional` 5.5 en el conjunto 13.7 del ciclo `aa3abd3`); 28 abiertas: 23 del ciclo, 0 de norma posterior, 3 sin ciclo, 2 elevadas | comando git y grep sobre IA.SDD `_legacy/13.7` | 2026-09-13 | `6ce2171bfcf1f2ee01b238c0f97eccc24f0c8a9d6e6cf469477ff6c70c15171c` | [E-015b-clasificacion-4.8-v4.txt](evidencia/E-015b-clasificacion-4.8-v4.txt) |
+| E-022 | Verificación de la aplicación `c14bf3b`: reproducción sobre worktree descartable con hashes de árbol iguales, siete diffs en reversa, 0 marcadores del guion, 24 snapshots idénticos al blob previo, versión de cabecera = máximo en 24 de 24 (E7 literal en `DD-7`), 984 enlaces y 0 rotos, residuos del término viejo, y los recortes de la compuerta | comandos git, bash y python3 | 2026-09-13 | `a0caba085811e3ce82babd73aa2baf0528dc4183b266a158262b66c9b516fe19` | [E-022-verificacion-de-lo-aplicado.txt](evidencia/E-022-verificacion-de-lo-aplicado.txt) |
+| E-023 | `dotnet build` de `GeometriaFactory.Web` en `sdk:10.0` sin `SkipVisorBuild` y sin Node: `MSB3073`, código 127, 1 error (`M6-27`) | comando docker | 2026-09-13 | `55b789e81b4e0639a3b42589922118aff5a5670179e62d2569f384e22280ec04` | [E-023-build-sin-modo-y-sin-node.txt](evidencia/E-023-build-sin-modo-y-sin-node.txt) |
+| E-024 | Audit de cierre de M4, informe íntegro del auditor independiente: 13 hallazgos con cita, dictamen sobre PM-11 y sobre M5 | agente (auditor de cierre) | 2026-09-13 | `817b24f3d8e343f2daf7c557d31d6b61c29c0db87a9b7cc1821b8f8e9d784107` | [E-024-audit-de-cierre-integro.md](evidencia/E-024-audit-de-cierre-integro.md) |
 | P-06b | Propuesta: campo 5 en los ocho ítems diferidos de `CU-08001` a `CU-08008` | agente (orquestador) | 2026-09-13 | `51344e4bdff0557660d4479da6a18e594407e6bb4085c44d76d2825fc8a593db` | [P-06b-ciclo-de-origen-8-cu.diff](propuestas/P-06b-ciclo-de-origen-8-cu.diff) |
 
 ## 3. Artefactos de especificación tocados
@@ -84,16 +91,24 @@ informe de M6 viven **donde `Migracion-Rules.md` §2.1 y `Mesa-Rules.md` §2.1 l
 | _(cierre)_ | `SDD/Docs/Audit/Mesa-2026-09-13.md` | 1.0 → 1.2 | 009 |
 | _(cierre)_ | `SDD/Docs/Audit/Informe-Migracion-13.7-a-13.16.md` | nuevo, 1.0 | 009 |
 | _(cierre)_ | `SDD/Docs/00-Contexto/Roadmap-Producto.md` | 1.13 → 1.14 | 009 (`M6-11`) |
+| `c14bf3b` | `SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md` | 4.6 → **5.0** | 011, 012 |
+| `c14bf3b` | `SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md` | 6.1 → **7.0** | 011, 012 |
+| `c14bf3b` | `Vista-Producto.md`, `Pipeline-Producto.md`, ocho documentos de 05/06/09, `CU-08001` a `08008`, `ADR-14001` a `14004`, con 24 snapshots `_legacy/2026-09-13/` | +1 minor cada uno (detalle en la actuación 013 §2) | 012 |
+| `c6d754e` | `SDD/Docs/Audit/Mesa-2026-09-13.md` | 1.2 → 1.3 | 012 |
+| `c6d754e` | `SDD/Docs/Audit/Plan-Migracion-13.7-a-13.16.md` | 1.3 → 1.4 | 012 |
+| `c6d754e` | `SDD/Docs/Audit/Informe-Migracion-13.7-a-13.16.md` | 1.0 → 1.1 | 012 |
+| `add9f01` | `SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md` | 7.0 → **7.1**, procedencia **13.16** | 013 |
+| `add9f01` | `SDD/Docs/README.md` | 2.7 → 2.8 | 013 |
+| `add9f01` | `changelog.md` | entrada nueva | 013 |
 
-**Propuestos y no escritos** (actuación 005): intake 4.6 → 5.0, manifiesto 6.1 → 7.0, `Vista-Producto.md` 1.10 → 1.11, `Pipeline-Producto.md` 1.8 → 1.9, ocho documentos de ítems diferidos, ocho `CU-0800N` y cuatro ADR, en [`propuestas/`](propuestas/).
+**Propuestos en la actuación 005 y escritos en `c14bf3b` con la aprobación de la 011**: intake 4.6 → 5.0, manifiesto 6.1 → 7.0, `Vista-Producto.md` 1.10 → 1.11, `Pipeline-Producto.md` 1.8 → 1.9, ocho documentos de ítems diferidos, ocho `CU-0800N` y cuatro ADR; los diffs siguen en [`propuestas/`](propuestas/) como registro de lo que se aprobó.
 
 ## 4. Resolución
 
-Pendiente.
+**Migración completa** (actuación [013](actuaciones/013-resolucion-final.md)): la cadena D6 migrada, ninguna fila del plan 1.4 sin resolver, audit de cierre sin P0 y la procedencia del manifiesto en **SDD 13.16** (7.1, 2026-09-13). Lo que queda abierto son ítems diferidos con su forma —`DD-1` a `DD-9` de `Mesa-2026-09-13.md` §8— y el lote de cierre de dos puntos (F: las 116 cabeceras con versión citada; G: confirmación de la procedencia escrita antes de la detención de §9), con su «si no respondés» declarado. C, D y E del lote anterior rigen por default.
 
 ## 5. Punto de continuación
 
-**Dónde estoy:** corrida terminada. M0 y M1 cerradas (actuaciones 003 a 007); M2 a M4 hechas como siete propuestas verificadas y **no escritas** (dictamen D-1, actuaciones 005 y 006); M5 no corresponde; M6 con dos rondas (actuación 009, informe en `SDD/Docs/Audit/`); resolución provisoria y lote (actuación 010). Rama `migracion/a-13.16`, sin push ni pull request; la fusión es del Product Owner.
-**Qué sigue:** que el Product Owner conteste el lote de la actuación 010 —puntos A y B como mínimo— con una actuación `NNN-testimonio-aprobacion-<slug>.md` fechada y afirmativa. Después, en este orden: `propuestas/aplicar-propuestas.sh --aprobacion NNN --fase intake` (agregá `--fecha AAAA-MM-DD` si no es el día de la aplicación), `--fase manifiesto`, `--fase docs`; commit por fase; audit de cierre (M6, tercera ronda sobre lo escrito); M5 (procedencia a 13.16 en el manifiesto, con su fila de control de cambios); cierre de este expediente con la resolución final.
-**Qué bloquea:** sólo esa aprobación. Ninguna pregunta técnica quedó abierta.
-**Fuera de este expediente:** migrar `RPI.VideoControl` (actuación 001, P-2).
+**Dónde estoy:** expediente **resuelto**. Rama `migracion/a-13.16-aplicacion` sobre `main` = `1d4afc4`, cinco commits (`255b55c`, `c14bf3b`, `c6d754e`, `add9f01` y el de esta resolución); sin push ni pull request; la fusión es del Product Owner (actuación 007).
+**Qué sigue en este expediente:** nada obligatorio. Si el Product Owner contesta el lote de la 013: F aprobado → fila nueva del plan con propuesta, aplicación y audit, como actuación nueva; G «revertí» → el manifiesto vuelve al snapshot `_legacy/2026-09-13/…-v7.0.md` y la migración se declara parcial, como actuación nueva. Los folios existentes no se reescriben.
+**Fuera de este expediente:** migrar `RPI.VideoControl` a 13.16 (actuación 001, P-2), con expediente propio; y la lectura de `M6-31` (fase `k` cerrada sobre la `i` abierta) por la próxima reanudación.

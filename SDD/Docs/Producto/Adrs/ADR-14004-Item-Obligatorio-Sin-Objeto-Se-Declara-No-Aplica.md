@@ -2,7 +2,7 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica.md
-**Versión:** 1.2
+**Versión:** 1.3
 **Estado:** **Aceptado** — aprobado por el Product Owner el 2026-08-26
 **Fecha:** 2026-08-24
 **Autor:** Orquestador de migración normativa SDD
@@ -116,7 +116,8 @@ audit lo levanta como tal.
 | **3 · Fundamento** | §3 de este documento |
 | **4 · Disparadores que superarían la decisión** | Cualquiera de los dos: que **el framework incorpore la figura del ítem sin objeto** —con lo cual esto deja de ser un apartamiento y pasa a ser la regla—, o que **este producto adopte una herramienta declarativa de infraestructura**, con lo cual el ítem recupera sujeto y se contesta |
 | **5 · Estado** | **`vigente`** desde el **2026-08-26**, cuando el Product Owner aceptó el ADR. Hasta entonces el documento estuvo `Propuesto` y este campo lo declaraba así, porque **un apartamiento no rige antes de ser aceptado** |
-| **6 · Saltos de versión que sobrevivió** | **0** — se emite en el conjunto **13.3** |
+| **6 · Saltos de versión que sobrevivió** | **1** — se emitió en el conjunto **13.3** y sobrevivió **13.7 → 13.16**. **Revisado por la fase M1 de la migración 13.7 → 13.16, el 2026-09-13** (`../../Audit/Plan-Migracion-13.7-a-13.16.md` §5, `../../Audit/Mesa-2026-09-13.md`), con resultado **no contemplado**: el campo 4 se contrastó contra las entradas **13.8 a 13.16** del `CHANGELOG.md` del framework y ninguna cumple el disparador. El salto **13.3 → 13.7** no cuenta: actualizó la procedencia sin alcanzar artefactos (`../../Audit/Plan-Migracion-10.0-a-13.3.md` §5.1.1). Ninguna entrada incorpora la figura del ítem sin objeto, y el producto sigue sin herramienta declarativa de infraestructura. Hasta el 2026-09-13 este campo decía: **0** — se emite en el conjunto **13.3** |
+| **7 · Ciclo de origen** | Derivado (`Migracion-Rules.md` 3.20 §4.9) del alta de este archivo: «docs(sdd): ronda 2 del corte 09 — el audit rechazó, y tenía razón en los cinco» (2026-08-24) · producto · base `407240a`. El campo no existía cuando el ADR se emitió (`Root-Rules.md` 8.7 §11 punto 7) |
 
 **Qué pasa si el contador llega a 2.** `Migracion-Rules.md` §4.7 declara que un apartamiento que
 sobrevive dos o más saltos sin ser contemplado ya demostró que **no es de un producto**, y se declara
@@ -133,3 +134,4 @@ incorpore, lo que el número va a estar diciendo es que al método le falta una 
 | 1.1 | 2026-08-24 | **Ronda 3 del corte 09.** El **campo 5** declaraba el apartamiento **`vigente`** mientras la cabecera del ADR decía **`Propuesto`**: un apartamiento **no rige antes de ser aceptado**, y el audit lo levantó como **P3**. Queda declarado que rige **desde que el ADR se acepte**, y los dos `Entornos-Deploy.md` suman la fila que dice que hoy se apoyan en un instrumento todavía no aprobado. **La decisión no cambia**: cambia lo que el documento afirma sobre su propia vigencia. |
 | 1.0 | 2026-08-24 | Emisión inicial, **en la ronda 2 del corte 09** de la migración 10.0 → 13.3. Nace de un hallazgo **P2** del audit independiente de la ronda 1: el corte había introducido la figura «**no aplica, y no está diferida**» en los dos `Entornos-Deploy.md` **sin declarar el apartamiento** que `Root-Rules.md` §11 exige, y `Rules-Devops.md` §4.4 punto 2.b sólo ofrece dos salidas. Declara la figura **como criterio y no como excepción de una fila**, con sus tres partes obligatorias —que no aplica, por qué no tiene objeto con cita al propio documento, y qué lo reabriría—. Declara también el riesgo que ninguna comprobación mecánica cubre: **«no aplica» y «no lo contesté» se ven iguales para un guion**, y lo único que los separa es la cita del campo 2. |
 | 1.2 | 2026-08-26 | **Aprobado por el Product Owner.** Pasa de `Propuesto` a `Aceptado` **sin ninguna modificación de su contenido**: la decisión, sus tres partes obligatorias, las alternativas descartadas, el disparador y el contador quedan como se emitieron. El campo 5 pasa a **`vigente`** con su fecha. Con la aprobación, **la figura «no aplica» deja de apoyarse en un instrumento sin aceptar** y los dos `Entornos-Deploy.md` dejan de declararlo — que es la diferencia que este ADR existe para producir (`Root-Rules.md` §11). |
+| 1.3 | 2026-09-13 | **Revisión de apartamientos de la migración 13.7 → 13.16, fase M1** (`Migracion-Rules.md` 3.20 §4.7). **Resultado: no contemplado.** El campo 6 pasa de 0 a 1, con el salto 13.3 → 13.7 sin contar; entra el **campo 7, ciclo de origen**, derivado del alta del archivo. **La decisión, el fundamento y el disparador no cambian.** Estado anterior en `_legacy/2026-09-13/ADR-14004-v1.2.md` |

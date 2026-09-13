@@ -1704,3 +1704,43 @@ transición y que la 1.12 había dejado pendiente sin afirmarlo por él.
 - `Roadmap-Producto.md` §2.1, fila `k`: la celda de release seguía diciendo «Pendiente. Ninguno de los diez
   ítems está construido» después de que la 1.12 declarara el entregable realizado en §3. Las entradas
   anteriores de este registro no se reescriben.
+
+## Migración normativa SDD 13.7 → 13.16, cerrada — 2026-09-13
+
+**Rama:** `migracion/a-13.16` (fusionada en `1d4afc4`, PR #205: expediente, plan, mesa e informe de M6 con la
+migración **parcial declarada**) y `migracion/a-13.16-aplicacion` (aprobación del Product Owner, aplicación,
+audit de cierre y M5). Sin cambio de código. Expediente completo en
+`SDD/Expedientes/0001-Migracion-Normativa-A-13.16/`; el instrumento es `Master-Prompt-Migracion.md` 2.10.
+
+### Cambiado
+
+- **`SDD/Intake/`**: `PRODUCT-INTAKE` **5.0** (plantilla 3.6: marca y pertenencia del insumo de construcción,
+  perfil por ecosistema, §16.1 por sample; major por el caso (b) de `Master-Prompt.md` §13, con la aprobación
+  explícita del Product Owner en la actuación 011); `PRODUCT-MANIFEST` **7.0** re-derivado (plantilla 6.1) y
+  **7.1** con la **procedencia en SDD 13.16** (fase M5, con la cadena completa).
+- **`SDD/Docs/`**: `Vista-Producto.md` **1.11**, `Pipeline-Producto.md` **1.9**; columna «Ciclo de origen» en
+  las 118 filas de ítems diferidos de ocho documentos de 05, 06 y 09 (95 derivadas, 23 no derivables) y campo 5
+  en los ocho bloques de `CU-08001` a `CU-08008`; `ADR-14001` a `ADR-14004` revisados (`Migracion-Rules.md` §4.7,
+  no contemplado × 4, contadores 4/4/3/1). Veinticuatro documentos, cada uno con su estado previo en
+  `_legacy/2026-09-13/`.
+- **`SDD/Docs/Audit/`**: `Plan-Migracion-13.7-a-13.16.md` **1.4** (aprobado, aplicado, cerrado; §4.1 estado por
+  fila), `Mesa-2026-09-13.md` **1.3** (`DD-8`, `DD-9`), `Informe-Migracion-13.7-a-13.16.md` **1.1** (audit de
+  cierre, migración **completa**).
+
+### Verificado
+
+- La aplicación se reprodujo byte a byte sobre un worktree descartable (E-022): mismos hashes de árbol de
+  `SDD/Intake` y `SDD/Docs`, los siete diffs aplican en reversa, 24 de 24 snapshots idénticos al estado previo,
+  0 enlaces rotos en 984, `verify-solution-tree.sh` conforme.
+- Audit de cierre de M4 por auditor independiente: **APROBADO CON OBSERVACIONES**, 0 P0, 2 P1, 3 P2, 8 P3,
+  todos los P1 y P2 cerrados en la corrida (informe 1.1 §9).
+- `dotnet build` de `GeometriaFactory.Web` en `sdk:10.0` sin `SkipVisorBuild` y sin Node: `MSB3073`, código 127
+  (E-023), la conducta que `Pipeline-Producto.md` §4 declara.
+
+### No hecho, y declarado
+
+- **116 cabeceras «Trazabilidad upstream»** siguen citando el intake o el manifiesto con número de versión: el
+  plan aprobado no las incluía (`DD-8` de `Mesa-2026-09-13.md` §8; ofrecidas al Product Owner en el lote de
+  cierre). `visor.bundle.js` en el intake (`DD-5`), los residuos del modelo por proyecto de código (`DD-6`),
+  los registros de cambios desordenados (`DD-7`) y nueve eventos de cierre que nombran un momento (`DD-9`).
+- Los puntos C, D y E del lote de la actuación 010 no tuvieron respuesta: rigen sus defaults.
