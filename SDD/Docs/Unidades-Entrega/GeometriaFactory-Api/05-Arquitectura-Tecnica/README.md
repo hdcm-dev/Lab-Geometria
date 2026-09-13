@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** README.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-16
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
@@ -49,9 +49,9 @@ Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los
 | Documento | Propósito |
 | --- | --- |
 | [`Arquitectura-Unidad-Entrega.md`](Arquitectura-Unidad-Entrega.md) | Documento maestro: estilo, las cuatro vistas mínimas, cross-cutting, diecisiete NFR, nueve riesgos, trazabilidad de las dieciséis reglas, de los nueve invariantes y de las tres reglas de arquitectura, y diez puntos abiertos |
-| [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) | Índice de las ocho ADR, con la correspondencia contra los cinco temas que el tipo exige y la tabla de consulta rápida por preocupación |
+| [`Decisiones-Arquitectura.md`](Decisiones-Arquitectura.md) | Índice de las diez ADR, con la correspondencia contra los cinco temas que el tipo exige y la tabla de consulta rápida por preocupación |
 | [`Contratos-REST.md`](Contratos-REST.md) | Contrato de la superficie: quince puntos, diez códigos de respuesta, **la tabla de traducción de los diecisiete códigos del contrato**, el formato de intercambio y el versionado |
-| [`Adrs/`](Adrs/) | Las ocho decisiones, una por archivo |
+| [`Adrs/`](Adrs/) | Las diez decisiones, una por archivo |
 
 ## 3. ADR vigentes
 
@@ -64,10 +64,11 @@ Lo que hay que haber entendido antes de tocar esta sección, y que atraviesa los
 | [ADR-00005](Adrs/ADR-00005-Sin-Paginacion-Con-Condicion-De-Reingreso-Declarada.md) | Sin paginación, con su condición de reingreso declarada | Comunicación | Propuesto |
 | [ADR-00006](Adrs/ADR-00006-Composicion-De-Raiz-Ciclos-De-Vida-Y-Configuracion.md) | Composición de raíz única: ciclos de vida y configuración en un solo lugar | Persistencia | Propuesto |
 | [ADR-00007](Adrs/ADR-00007-Arranque-En-Dos-Fases-Y-Punto-De-Salud-Sin-Acceso.md) | Arranque en dos fases, y un punto de salud que no exige acceso | Despliegue | Propuesto |
-| [ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) | Sin versionado de rutas, con despliegue conjunto como regla operativa | Despliegue | Propuesto |
+| [ADR-00008](Adrs/ADR-00008-Sin-Versionado-De-Rutas-Y-Despliegue-Conjunto.md) | Sin versionado de rutas, con despliegue conjunto como regla operativa | Despliegue | **Superado parcialmente** por ADR-00010 (regla 1 derogada; reglas 2 a 5 subsisten) |
 | [ADR-00009](Adrs/ADR-00009-La-Api-Autentica-Personas-No-Aplicaciones.md) | La API autentica personas, no aplicaciones | Seguridad | **Aceptado** |
+| [ADR-00010](Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) | Versión en la ruta, sólo el MAJOR, para la superficie pública | Comunicación | **Aceptado** |
 
-Ninguna superada, ninguna rechazada. La novena entra el 2026-09-12 por decisión del Product Owner y nace `Aceptado`.
+Una superada parcialmente, ninguna rechazada. La novena y la décima entran el 2026-09-12 por decisión del Product Owner y nacen `Aceptado`; la décima supera parcialmente a `ADR-00008`.
 
 ## 4. NFR vigentes
 
@@ -113,3 +114,4 @@ Cinco puntos abiertos llegaron a esta categoría desde otras Fases C, y conviene
 | 1.2 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **3**. Sube minor. |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión.** Pasa de indexar la categoría de un proyecto de código a indexar la de la **unidad de entrega**. Entra §0 con el inventario real —tres documentos maestros consolidados, 27 ADR de las cuatro capas y 14 operaciones internas— y con la constancia de que las ADR **ya no colisionaban** por la renumeración previa. La carpeta `_fusion/` de esta categoría **se retira**. Sube major. |
 | 2.1 | 2026-09-12 | **Entra `ADR-00009`** (La API autentica personas, no aplicaciones; `Aceptado` por decisión del Product Owner del 2026-09-12) a la tabla de §3. Las ocho anteriores no cambian. Sube minor. |
+| 2.2 | 2026-09-12 | **Entra `ADR-00010`** (Versión en la ruta, sólo el MAJOR, para la superficie pública; `Aceptado`, `E-04`) a la tabla de §3, y **`ADR-00008` pasa a `Superado parcialmente`**; §1 pasa de «ocho» a «diez» ADR. Tarea `BT-00027`. Sube minor. |
