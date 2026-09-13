@@ -1207,3 +1207,34 @@ deuda cerrada), `DoR-Tramo-k-2026-09-12.md` **1.2** (§4 vacío, §6.9 con las v
 `Decisiones-Arquitectura.md` **2.1** y `README.md` de 05 **2.1** (la ADR entra a los índices).
 **No se tocan** `ADR-00008`, `Estrategia-Versionado.md` ni los dieciséis lugares con «no hay clientes
 de terceros»: son `BT-00027`.
+
+## La superficie pública se versiona en la ruta: `ADR-00010` supera parcialmente a `ADR-00008` — 2026-09-12
+
+**Sin código.** Tarea `BT-00027` (tipo `docs`, fase `k`, rama `fase-k/bt-00027-adr-versionado-rutas`
+sobre `cfb11f7`). Ninguna ruta cambia: el prefijo `/v1/` lo implementa `BT-00032`.
+
+- **`ADR-00010`** (`SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/`,
+  **Aceptado** por decisión del Product Owner del 2026-09-12, `E-04`): la superficie pública lleva la
+  versión en la ruta, **sólo el `MAJOR`**, `/v{MAJOR}/`, y ese `MAJOR` es el del producto. Declara el
+  cambio de premisa —«no hay clientes de terceros» dejó de ser cierto: hay **aplicaciones propias
+  además del front** (`ADR-00009`) que **no compilan contra el ensamblado de contratos**—, descarta con
+  fuente la cabecera, el media type y la fecha estilo Stripe (mesa ciclo 2 §3.2), y **remite** el evento
+  de etiqueta a `BT-00033` y la deprecación a `BT-00035`.
+- **`ADR-00008`** pasa a **`Superado parcialmente`**: la regla 1 («una sola versión de la superficie
+  vive a la vez», sin prefijo ni deprecación) y sus dos primeras métricas quedan **derogadas**; las
+  reglas 2 a 5 —despliegue conjunto entre `Api` y `Web`, las tres clases de cambio que la compilación
+  no detecta, la etiqueta por fusión, la colección de peticiones— y la ausencia de la pasarela
+  **subsisten**. Texto conservado íntegro.
+- **El conjunto medido** por `git grep -n -i "no hay clientes de terceros" -- SDD ':!*/_legacy/*'
+  ':!SDD/Docs/Audit/*'`: dieciséis documentos. En cada uno la premisa se reescribe con la fecha desde la
+  que rige, se declara superada o remite a `ADR-00010`, con el mínimo cambio y control de cambios
+  propio. `ADR-08003` (nivel Producto) recibe **aviso de lectura** y no se reescribe: su reescritura es
+  consecuencia obligada de la categoría de Producto. `Estrategia-Versionado.md` sólo tacha la regla 1 como
+  derogada: el evento de etiqueta es `BT-00033` y la deprecación `BT-00035`. `Contratos-REST.md` §6 deja
+  de decir «no se versionan las rutas». El intake sube a **4.5** por la última transcripción viva
+  (§17.2.P.3 · Contracts), por delegación expresa de su entrada 4.4.
+- Índices: `Decisiones-Arquitectura.md` **2.2**, `README.md` de 05 **2.2**,
+  `Arquitectura-Unidad-Entrega.md` **3.10** (§10.1: «las diez»).
+
+**Evidencia:** `SDD/Docs/Audit/BT-00027-Cierre-2026-09-12.md` (las cinco verificaciones con comando y
+salida) y la ficha `BT-00027` **2.0**, `Done`.
