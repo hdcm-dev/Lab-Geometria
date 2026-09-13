@@ -3,7 +3,7 @@
 **Producto:** Fábrica de Geometría
 **Unidad de entrega:** GeometriaFactory-Api
 **Documento:** Estrategia-Calidad.md
-**Versión:** 2.1
+**Versión:** 2.2
 **Estado:** Propuesto
 **Fecha:** 2026-08-16
 **Autor:** Ingeniero QA / SDET Senior (AG-08)
@@ -74,7 +74,7 @@ Clasificación ISO/IEC 25010, con la métrica de origen cuando existe. Los valor
 | Fiabilidad | **Crítica** | **0** peticiones atendidas con la preparación del almacén incompleta; **4 de 4** puertos conectados a su adaptador, con fallo en construcción si falta alguno; **0** caracteres de diferencia entre el texto enviado y el guardado, y **0** truncamientos silenciosos |
 | Eficiencia de desempeño | **Alta** | Percentil 99 del listado por debajo de **500 ms**, medido **en el servidor** [ASUNCIÓN del intake §17.1.P.10 · GeometriaFactory-Api]; caudal sostenido de **20 peticiones por minuto** [ASUNCIÓN]; arranque en frío en menos de **30 segundos** [ASUNCIÓN] |
 | Mantenibilidad | **Alta** | **75 %** de líneas y **70 %** de ramas [ASUNCIÓN del intake §17.1.P.6 · GeometriaFactory-Api]; pirámide de **60 %** integración y **40 %** unitarias [ASUNCIÓN], **invertida a propósito**; **1** sola configuración de intercambio declarada en el producto; **0** advertencias de construcción |
-| Compatibilidad | **Media** | Los tipos que cruzan la frontera son los del ensamblado de contratos y **esta capa no agrega ni recorta campos**; sin versionado de rutas, porque no hay clientes de terceros |
+| Compatibilidad | **Media** | Los tipos que cruzan la frontera son los del ensamblado de contratos y **esta capa no agrega ni recorta campos**; la superficie pública se versiona en la ruta por `/v{MAJOR}/` ([`ADR-00010`](../05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md), 2026-09-12; antes decía «sin versionado de rutas, porque no hay clientes de terceros», premisa superada) |
 | Usabilidad | **No aplica como atributo de interfaz** | `tiene_ui_final` es false. Su equivalente es la experiencia del desarrollador que consume la superficie, y la **colección de peticiones reproducible** de `CU-00012` es su instrumento |
 | Portabilidad | **Baja** | Plataforma única sobre el sistema operativo del contenedor, con la imagen final llevando **sólo el entorno de ejecución** y sin linaje con la imagen de desarrollo (intake §17.1.P.9 · GeometriaFactory-Api) |
 
@@ -375,5 +375,6 @@ Condicionado no quiere decir opcional. La medición se hace igual y el resultado
 
 | Versión | Fecha | Cambios |
 | --- | --- | --- |
+| 2.2 | 2026-09-12 | **§2, fila «Compatibilidad», deja de afirmar «sin versionado de rutas, porque no hay clientes de terceros»** (tarea `BT-00027`). Remite a [`ADR-00010`](../05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) (`/v{MAJOR}/`). Una celda; el atributo, su prioridad y las demás filas no cambian. Sube minor. |
 | 2.1 | 2026-08-29 | **Tramo `R-4` · renumerado de `QG` y `CV` al mapa de bloques del destino**, decidido por el Product Owner el 2026-08-29 al **retirar el `ADR-14005`** en lugar de aceptarlo. **3 línea(s)** pasan de `QG-NN` a `QG-<bloque>NNN`, con el bloque **deducido de la línea o de la sección y nunca inventado** — `00` Api, `02` Domain, `04` Application, `06` Infrastructure, `08` Contracts, `10` Web, `12` Visor. Con esto las dos familias **dejan de necesitar apartamiento**: cumplen [`../../../Producto/Norma-De-Nomenclatura.md`](../../../Producto/Norma-De-Nomenclatura.md) y `Root-Rules.md` §9.1 y §9.2. Las referencias cuyo bloque no estaba en el texto **conservan la forma vieja a propósito** y quedan inventariadas en [`../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md`](../../../Audit/Inventario-Renumerado-R-4-2026-08-29.md). Se respeta §4.1: no se tocan las filas de control de cambios ni lo que está entre «…». |
 | 2.0 | 2026-08-16 | **Consolidación de la fusión** (`Audit/Migracion-M10-Consolidacion-Fusion.md` 1.1 §4). Pasa de ser el documento del proyecto de código `GeometriaFactory-Api` a ser el de la **unidad de entrega**, absorbiendo los homónimos de `GeometriaFactory-Domain`, `-Application` e `-Infrastructure`. Cada sección lleva **una subsección por proyecto de código**, con su texto transpuesto **sin reescritura**. Entra **§0** con lo que sólo se ve con los cuatro juntos. Los tres documentos absorbidos quedan archivados en `_legacy/2026-08-16-consolidacion-m10/`. Sube **major**. |

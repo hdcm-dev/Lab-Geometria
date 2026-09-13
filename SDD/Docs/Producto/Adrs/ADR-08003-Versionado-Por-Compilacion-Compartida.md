@@ -2,11 +2,13 @@
 
 **Producto:** Fábrica de Geometría
 **Documento:** ADR-08003-Versionado-Por-Compilacion-Compartida.md
-**Versión:** 1.1
+**Versión:** 1.2
 **Estado:** Aprobado
 **Fecha:** 2026-08-12
 **Autor:** Arquitecto de Software Senior + API Designer (AG-05)
 **Categoría:** Despliegue
+
+> **Aviso de lectura (2026-09-12).** La premisa «no hay clientes de terceros» que §1 transcribe del intake y que la regla 1 de §2 aplica **dejó de ser cierta** con `PRODUCT-INTAKE` **4.3**/**4.4** §17.1.P.3 · GeometriaFactory-Contracts («cierta hasta la versión 4.2, deja de serlo»): hay aplicaciones propias además del front que **no compilan contra este ensamblado** (`ADR-00009`), y la superficie pública de `GeometriaFactory-Api` se versiona en la ruta por `/v{MAJOR}/` ([`ADR-00010`](../../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md)). **Para el tramo `Web`↔`Api`, que sí compila contra el ensamblado, la política de esta ADR sigue rigiendo.** Esta ADR es de nivel Producto y obliga también a `GeometriaFactory-Contracts`: su reescritura es **consecuencia obligada** declarada por `BT-00027` §2 (criterio 6 de la DoR), y la ejecuta la categoría de Producto, no esa tarea. El texto de abajo se conserva como registro.
 
 ---
 
@@ -95,3 +97,4 @@ Qué constituye cada clase de cambio sobre este contrato:
 | --- | --- | --- |
 | 1.0 | 2026-08-10 | Emisión inicial. Registra la compilación compartida como mecanismo de compatibilidad, la ausencia deliberada de versionado de rutas, la obligación de despliegue conjunto como entrada para 09, el criterio de cambio mayor con la columna que declara **cuáles no detecta la compilación**, cuatro alternativas evaluadas y cinco métricas. |
 | 1.1 | 2026-08-12 | **Absorbe la decisión (a) del Product Owner** (`PRODUCT-INTAKE` **1.29** §17.4 P.3): entran al conjunto cerrado del contrato `CONTRATO_OPERACION_EXCLUSIVA_DEL_ADMINISTRADOR` —el papel no alcanza **fuera del desenlace**: gobernar cuentas (F-03), resetear la contraseña de una cuenta de alumno (F-26) y ver el listado de la comisión (F-12)— y `CONTRATO_ESTADO_NO_PERMITE_MODIFICAR` —enviar o reeditar un trabajo en `Pendiente`, `Finalizado` o `Rechazado`—. El conjunto pasa de **quince a diecisiete vivos** sobre **veinte** identificadores emitidos, con los **tres retirados intactos y ninguno reciclado**; `GeometriaFactory-Contracts` los emite formalmente en su `Contratos-Abstractions.md` §5.1. `CONTRATO_DESENLACE_EXCLUSIVO_DEL_ADMINISTRADOR` y `CONTRATO_ESTADO_NO_PERMITE_ELIMINAR` **no cambian de enunciado**. Acá se actualizan los recuentos que citaban el conjunto, y **ninguna otra decisión, contrato o caso de prueba cambia**. **Alcance de la búsqueda de propagación**: `grep` sobre todo el árbol vivo de `SDD/Docs/` —excluidos `Audit/` y `_legacy/`— por «quince», «dieciocho», «catorce», «15», «18» y «14» en contexto de código del contrato, más `CONJUNTO_DE_PIEZAS_NO_RECONSTRUIDO`, `PA-XX` y «E-2 y E-5». Alcanzó **167 documentos** y **420 lugares**; en este documento, **1**. Sube minor. |
+| 1.2 | 2026-09-12 | **Aviso de lectura: la premisa «no hay clientes de terceros» queda superada** (tarea `BT-00027`). `PRODUCT-INTAKE` **4.3**/**4.4** §17.1.P.3 · GeometriaFactory-Contracts la declara cierta sólo hasta la 4.2; `ADR-00009` dice quiénes son los clientes (aplicaciones propias que no compilan contra este ensamblado) y [`ADR-00010`](../../Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/Adrs/ADR-00010-Version-En-La-Ruta-Solo-Major-Para-La-Superficie-Publica.md) adopta `/v{MAJOR}/` para la superficie pública de `GeometriaFactory-Api`. **La regla 1 de §2 deja de valer para esa superficie; la política de compilación compartida sigue rigiendo para `Web`↔`Api`.** No se reescribe ningún texto: la reescritura es de nivel Producto y queda declarada como consecuencia obligada. Sube minor. |
