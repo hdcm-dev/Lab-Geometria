@@ -1,0 +1,8 @@
+$ docker run --rm -v <padre>:<padre> -w <worktree> mcr.microsoft.com/dotnet/sdk:10.0 bash -c "which node npm; dotnet build src/GeometriaFactory.Web/GeometriaFactory.Web.csproj -c Release"   (HEAD c14bf3b, 2026-09-13; sin -p:SkipVisorBuild y sin Node en la imagen; M6-27 del audit de cierre: la conducta que Pipeline-Producto.md 1.9 §4 afirma para la fila Visor → Web)
+which node npm → (vacío: ni node ni npm en la imagen)
+  .../src/GeometriaFactory.Web/../../scripts/build-visor.sh: line 17: npm: command not found
+  .../src/GeometriaFactory.Web/GeometriaFactory.Web.csproj(80,5): error MSB3073: The command "bash ".../scripts/build-visor.sh"" exited with code 127.
+    0 Warning(s)
+    1 Error(s)
+exit=1
+# Lectura: sin el modo y sin Node la construcción falla con MSB3073 y código 127, como afirma Pipeline-Producto.md §4. El error del csproj no nombra la cadena que falta; la línea anterior, del guion, sí («npm: command not found»). La primera conducta (con el modo, sin bundle: termina bien) es E-012.

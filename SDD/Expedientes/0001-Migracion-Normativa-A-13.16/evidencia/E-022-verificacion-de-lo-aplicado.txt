@@ -1,0 +1,86 @@
+$ Verificación de lo aplicado en c14bf3b (M2 a M4) contra las propuestas de la actuación 006. Base de comparación: 255b55c (main 1d4afc4 + actuación 011).
+HEAD c14bf3b0d105fb1da3a131bdb3e4c4d050bdb80f
+
+# (1) Reproducción íntegra: aplicar-propuestas.sh --aprobacion 011 --fecha 2026-09-13, fases intake, manifiesto y docs, sobre un worktree descartable en 255b55c; hash de árbol de SDD/Intake y SDD/Docs contra HEAD
+reproducido SDD/Intake ec3982ee527ed96dd537519ed9a4433a2d9a60ad · HEAD ec3982ee527ed96dd537519ed9a4433a2d9a60ad
+reproducido SDD/Docs   7920b0dca90d59f85728c929169748e056db7807 · HEAD 7920b0dca90d59f85728c929169748e056db7807
+iguales: SÍ
+
+# (2) Cada diff, fechado como lo fecha el guion, aplica en reversa sobre HEAD (= quedó aplicado íntegro)
+P-01-intake-5.0  archivos=1  aplica en reversa: íntegro
+P-02-manifiesto-7.0  archivos=1  aplica en reversa: íntegro
+P-03-vista-producto-1.11  archivos=1  aplica en reversa: íntegro
+P-04-pipeline-producto-1.9  archivos=1  aplica en reversa: íntegro
+P-06-ciclo-de-origen-118-filas  archivos=8  aplica en reversa: íntegro
+P-06b-ciclo-de-origen-8-cu  archivos=8  aplica en reversa: íntegro
+P-08-apartamientos  archivos=4  aplica en reversa: íntegro
+
+# (3) Marcadores {{…}} en SDD/Intake y SDD/Docs fuera de _legacy
+ocurrencias: 1 · es Audit/Estado-Del-Destino-2026-08-17.md:65, cita literal de la cabecera de plantilla «{{Nombre-Unidad-Entrega}}» en un registro fechado, presente en 255b55c (1 ocurrencia también) y ajena a la aplicación. Marcadores dejados por el guion: 0
+
+# (4) Snapshots _legacy/2026-09-13: uno por archivo tocado, en la carpeta del documento, nombre <Documento>-v<versión previa>.md, contenido idéntico al blob de 255b55c
+OK  SDD/Docs/Producto/Adrs/_legacy/2026-09-13/ADR-14001-Archivado-Central-De-La-Migracion-v1.2.md
+OK  SDD/Docs/Producto/Adrs/_legacy/2026-09-13/ADR-14002-Familias-Propias-Del-Intake-Con-Ancho-De-Origen-v1.2.md
+OK  SDD/Docs/Producto/Adrs/_legacy/2026-09-13/ADR-14003-Direccion-Del-Backend-Por-IP-Dinamica-v1.3.md
+OK  SDD/Docs/Producto/Adrs/_legacy/2026-09-13/ADR-14004-Item-Obligatorio-Sin-Objeto-Se-Declara-No-Aplica-v1.2.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08001-Contrato-De-Canje-De-Credenciales-Y-Sesion-v1.8.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08002-Contrato-De-Administracion-De-Cuentas-v1.9.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08003-Contrato-De-Carga-Y-Edicion-Del-Trabajo-v1.5.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08004-Contrato-De-Listado-De-Trabajos-v1.6.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08005-Contrato-De-Detalle-Del-Trabajo-Interpretado-v1.5.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08006-Contrato-De-Respuesta-De-Error-v1.9.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08007-Contrato-De-Desenlace-De-La-Revision-v1.3.md
+OK  SDD/Docs/Producto/Contratos-Inter-Unidad/_legacy/2026-09-13/CU-08008-Contrato-De-Reseteo-Y-Cambio-Obligatorio-De-Contrasena-v1.9.md
+OK  SDD/Docs/Producto/_legacy/2026-09-13/Pipeline-Producto-v1.8.md
+OK  SDD/Docs/Producto/_legacy/2026-09-13/Vista-Producto-v1.10.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/05-Arquitectura-Tecnica/_legacy/2026-09-13/Arquitectura-Unidad-Entrega-v3.14.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/06-Backlog-Tecnico/_legacy/2026-09-13/Product-Backlog-v4.5.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/_legacy/2026-09-13/Pipeline-CI-CD-v3.9.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Api/09-Devops/_legacy/2026-09-13/Supply-Chain-Seguridad-v3.2.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/05-Arquitectura-Tecnica/_legacy/2026-09-13/Arquitectura-Unidad-Entrega-v3.8.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/06-Backlog-Tecnico/_legacy/2026-09-13/Product-Backlog-v4.5.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/_legacy/2026-09-13/Pipeline-CI-CD-v3.8.md
+OK  SDD/Docs/Unidades-Entrega/GeometriaFactory-Web/09-Devops/_legacy/2026-09-13/Supply-Chain-Seguridad-v3.3.md
+OK  SDD/Intake/_legacy/2026-09-13/PRODUCT-INTAKE-Fabrica-De-Geometria-v4.6.md
+OK  SDD/Intake/_legacy/2026-09-13/PRODUCT-MANIFEST-Fabrica-De-Geometria-v6.1.md
+archivos tocados: 24 · snapshots idénticos al estado previo: 24
+snapshots nuevos en HEAD: 24
+precedente del destino (carpetas _legacy/<fecha>/ previas, muestra): SDD/Docs/Producto/_legacy/2026-08-17 
+
+# (5) Versión de cabecera = versión MÁXIMA del control de cambios, en los 24 documentos tocados. No es la comprobación E7 literal de Migracion-Rules §6 (última fila y filas ordenadas): tres registros (Vista-Producto.md, Api/05/Arquitectura-Unidad-Entrega.md, Web/09/Pipeline-CI-CD.md) tienen filas fuera de orden desde antes de esta corrida, declaradas en DD-7 de Mesa-2026-09-13.md §8 (M6-30 del audit de cierre)
+coherentes con el máximo: 24 de 24
+
+# (6) El manifiesto 7.0 es la re-derivación del intake 5.0
+18:| Intake (origen) | — | `PRODUCT-INTAKE-Fabrica-De-Geometria.md` **5.0** (de su §13.1, §13.2 y §13.3 se deriva este manifiesto) |
+SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md:20:| Versión | — | 7.0 |
+SDD/Intake/PRODUCT-MANIFEST-Fabrica-De-Geometria.md:296:| Versión | Fecha | Cambios | Autor |
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:17:| Versión | 5.0 |
+SDD/Intake/PRODUCT-INTAKE-Fabrica-De-Geometria.md:1960:| Versión | Fecha | Cambios | Autor |
+3:**Plantilla de referencia:** `PRODUCT-MANIFEST-template.md` versión **6.1** (Framework SDD), que es la que declara la procedencia de §1.
+validaciones de §4 del manifiesto:
+| Validación | Resultado |
+| Cada `tipo_unidad_entrega` pertenece al conjunto cerrado D8 | Cumple: `rest-api` (1) y `web-monolith` (1), sobre las **dos** unidades de e
+| Exactamente una unidad de entrega principal | Cumple: `GeometriaFactory-Api` |
+| Sin colisión de `Nombre-Proyecto-Codigo` ni de `Identidad-Codigo` | Cumple: siete nombres y siete identidades distintas |
+| Cada dependencia de compilación referencia un proyecto de código existente | Cumple: **las ocho aristas resuelven** — siete referencia
+| Grafo de compilación acíclico, por solución de código | Cumple: cuatro niveles en `GeometriaFactory.sln`, con las **dos clases** de ar
+| Todo insumo de construcción tiene exactamente un generador, y ningún `generado por` nombra a otro consumidor | Cumple: `GeometriaFactory
+| Ninguna referencia de proyecto une proyectos de código de ecosistemas distintos | Cumple: las siete referencias unen proyectos .NET y nin
+| Todo proyecto de código compone al menos una unidad de entrega | Cumple: los siete tienen marca en §2.C |
+| `Nombre-Producto` en prosa de negocio, independiente de `Raiz-Codigo` | Cumple |
+| `Raiz-Codigo` declarado en el intake | Cumple: declarado, no asumido |
+| §13 del intake recorrible, con sus tres subsecciones y su perfil de convención | Cumple |
+fila 5.0 del intake cita la actuación: 1 ocurrencias
+
+# (7) verify-solution-tree.sh
+
+El árbol de solución está completo.
+
+# (8) Compuerta mecánica previa al audit de cierre (Master-Prompt.md §10.0, comprobación 1): enlaces relativos de los 24 documentos tocados
+archivos 24 | enlaces relativos 984 | rotos 0
+
+# (9) Residuos de «activo de construcción» fuera de _legacy, Expedientes y Audit, sobre HEAD: los mismos 15 de E-016 (registro, salvo las tres vivas de D-3: Vista :65 con el nombre vigente al lado; 11-Documentacion :196 → DD-6; csproj :15 → DD-2)
+SDD/Docs/Handoff-Checkout.md:606 :775 · SDD/Docs/Producto/11-Documentacion/README.md:196 :213 · SDD/Docs/Producto/Vista-Producto.md:65 :263 · Web/05/Adrs/ADR-10008…md:21 :34 · Intake :426 :1962 :1969 · Manifiesto :300 · changelog.md:1132 · evidencia/2026-09-12-estructura-solucion/README.md:16 · visor/geometriafactory-visor.csproj:15
+«insumo de construcción» en documentos vivos de SDD/Intake y SDD/Docs (sin Audit): 23 ocurrencias
+
+# (10) Lo que la compuerta no miró: recuentos anclados (comprobación 2), identificadores (4), anclaje de referencias (5), ítems diferidos con evento ya ocurrido (6) y ciclo de origen (8) quedan para el auditor de cierre; los cinco puntos anteriores (1 a 7 de este archivo) cubren lo enumerable de la aplicación.
