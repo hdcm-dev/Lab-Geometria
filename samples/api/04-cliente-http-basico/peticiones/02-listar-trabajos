@@ -1,0 +1,4 @@
+# A-13 · GET /v1/trabajos
+# Sin cuerpo. El acceso firmado del paso 2 viaja en `Authorization: Bearer`.
+# Un alumno ve los suyos; el administrador, los de la comisión.
+GET /v1/trabajos
